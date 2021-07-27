@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>demo| 2021.03.31</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_2357817_73yjugwbqjc.css">
+  <style>
+    .cont {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+
+    .cont .item {
+      padding: 1rem;
+      background-color: #fff;
+      min-height: 260px;
+      transition: .4s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cont>a:hover {
+      box-shadow: 0 0 10px #ccc;
+    }
+
+    .price-box {
+      display: flex;
+      justify-content: space-around;
+      border: 1px solid #e1251b;
+      line-height: 2rem;
+      background-image: linear-gradient(135deg, #e1231b 50%, transparent 0);
+    }
+
+    .cont .new {
+      font-weight: 400;
+      color: #fff;
+      font-size: 120%;
+    }
+
+    .cont .old {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    .ad {
+      min-height: 260px;
+      background-color: #fff;
+      background-image:
+        radial-gradient(23rem circle at 10% 10%, transparent 60%, #f405 0),
+        radial-gradient(23rem circle at 20% 10%, transparent 60%, #f409 0),
+        radial-gradient(23rem circle at 30% 10%, transparent 60%, #f40 0);
+    }
+
+    .center {
+      overflow: hidden;
+      position: relative;
+      min-height: 260px;
+      padding: 1rem 1rem 0;
+      background-color: #fff;
+      background-image: radial-gradient(17rem circle at 50% 100%, #e1251b 70%, #fff 0);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .center::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(18rem circle at 50% 6%, transparent 80%, #e1251b 0);
+      filter: drop-shadow(0 0 1rem #666);
+    }
+
+    .center h3 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .center .center-cont {
+      position: relative;
+      flex-grow: 1;
+      border-bottom: 2px dotted #e1251b;
+      background-color: #f6f6f6;
+    }
+
+    .center .center-cont::before,
+    .center .center-cont::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background-color: #e1251b;
+      z-index: 1;
+    }
+
+    .center .center-cont::before {
+      left: -0.5rem;
+    }
+
+    .center .center-cont::after {
+      right: -0.5rem;
+    }
+
+    .card {
+      min-height: 260px;
+      background-color: #fff;
+      background-image:
+        radial-gradient(23rem circle at 20% 10%, transparent 60%, #f405 0),
+        radial-gradient(23rem circle at 40% 10%, transparent 60%, #f40 0);
+    }
+
+    .test {
+      margin: 100px auto;
+      width: 500px;
+      height: 250px;
+      background-color: #f40;
+      background-image: radial-gradient(circle at 0% 0%, #fff 50%, transparent 0);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="w">
+    <div class="title">JD</div>
+    <ul>
+      <li>
+        <a class="item" href="#">您好，请登录</a><a class="item red reg" href="#">免费注册</a>
+      </li>
+      <li class="spacer">|</li>
+      <li><a class="item" href="#">我的订单</a></li>
+      <li class="spacer">|</li>
+      <li class="mine">
+        <a class="item link" href="#">我的京东 <span class="iconfont iconIcon-KeyboardArrow-Down-Rounded-copy"></span></a>
+        <ul class="inner-nav">
+          <li><a href="javascript:;">inner nav</a></li>
+          <li><a href="javascript:;">inner nav</a></li>
+          <li><a href="javascript:;">inner nav</a></li>
+          <li><a href="javascript:;">inner nav</a></li>
+        </ul>
+      </li>
+      <li class="spacer">|</li>
+      <li><a class="item" href="#">京东会员</a></li>
+      <li class="spacer">|</li>
+      <li class="mine">
+        <a class="item red link" href="#">企业采购 <span
+            class="iconfont iconIcon-KeyboardArrow-Down-Rounded-copy"></span></a>
+        <ul class="inner-nav">
+          <li><a href="javascript:;">inner nav</a></li>
+          <li><a href="javascript:;">inner nav</a></li>
+          <li><a href="javascript:;">inner nav</a></li>
+          <li><a href="javascript:;">inner nav</a></li>
+        </ul>
+      </li>
+      <li class="spacer">|</li>
+      <li class="mine">
+        <a class="item link" href="#">客服服务 <span class="iconfont iconIcon-KeyboardArrow-Down-Rounded-copy"></span></a>
+        <ul class="inner-nav">
+          <li><a href="javascript:;">inner nav</a></li>
+          <li><a href="javascript:;">inner nav</a></li>
+          <li><a href="javascript:;">inner nav</a></li>
+          <li><a href="javascript:;">inner nav</a></li>
+        </ul>
+      </li>
+      <li class="spacer">|</li>
+      <li class="mine">
+        <a class="item link" href="#">网站导航 <span class="iconfont iconIcon-KeyboardArrow-Down-Rounded-copy"></span></a>
+        <ul class="inner-nav">
+          <li><a href="javascript:;">inner nav</a></li>
+          <li><a href="javascript:;">inner nav</a></li>
+          <li><a href="javascript:;">inner nav</a></li>
+          <li><a href="javascript:;">inner nav</a></li>
+        </ul>
+      </li>
+      <li class="spacer">|</li>
+      <li><a class="item" href="#">手机京东</a></li>
+    </ul>
+  </header>
+  <nav class="w">
+    <div class="logo-box">
+      <img src="imgs/logo.jpg" alt="">
+    </div>
+    <div class="sql">
+      <input class="ipt" type="text" placeholder="your keywords here">
+      <button class="btn">
+        <span class="iconfont iconsearch1"></span>
+      </button>
+    </div>
+    <button class="cart">
+      <span class="iconfont iconCart"></span>购物车
+      <em>1</em>
+    </button>
+  </nav>
+  <div class="cont w">
+    <a class="ad"></a>
+    <a class="item">
+      <img src="imgs/blog0.jpg" alt="">
+      <p>Lorem ipsum dolor</p>
+      <div class="price-box">
+        <div class="new">&yen;666</div>
+        <div class="old">&yen;888</div>
+      </div>
+    </a>
+    <a class="center">
+      <h3>领券中心</h3>
+      <div class="center-cont"></div>
+      <div class="center-cont"></div>
+      <div class="center-cont"></div>
+    </a>
+    <a class="item">
+      <img src="imgs/blog3.jpg" alt="">
+      <p>Lorem ipsum dolor</p>
+      <div class="price-box">
+        <div class="new">&yen;666</div>
+        <div class="old">&yen;888</div>
+      </div>
+    </a>
+    <a class="card"></a>
+  </div>
+  <div class="test"></div>
+</body>
+
+</html>

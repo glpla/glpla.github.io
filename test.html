@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login|2021-04-08</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <style>
+    body {
+      background: #2c3e50;
+    }
+
+    .wrap {
+      position: relative;
+      width: 600px;
+      padding: 40px;
+      background: #2c3e50;
+      border-radius: 10px;
+      margin: 60px auto 0;
+      color: #fff;
+    }
+
+    .wrap::before,
+    .wrap::after {
+      content: '';
+      position: absolute;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      top: -2px;
+      border-radius: 10px;
+      background-color: #ff0;
+      z-index: -2;
+    }
+
+    .wrap::after {
+      z-index: -1;
+      background-image: linear-gradient(0deg, #f40, #f506c1, #54fd06, #0066ff);
+      filter: blur(30px);
+      animation: flash 10s ease-in-out infinite;
+    }
+
+    @keyframes flash {
+      0% {
+        background-image: linear-gradient(0deg, #f40, #f506c1, #54fd06, #0066ff);
+      }
+
+      20% {
+        background-image: linear-gradient(60deg, #f40, #f506c1, #54fd06, #0066ff);
+      }
+
+      40% {
+        background-image: linear-gradient(120deg, #f40, #f506c1, #54fd06, #0066ff);
+      }
+
+      60% {
+        background-image: linear-gradient(180deg, #f40, #f506c1, #54fd06, #0066ff);
+      }
+
+      80% {
+        background-image: linear-gradient(240deg, #f40, #f506c1, #54fd06, #0066ff);
+      }
+
+      100% {
+        background-image: linear-gradient(300deg, #f40, #f506c1, #54fd06, #0066ff);
+      }
+    }
+
+    h1 {
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .box {
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .box input {
+      width: 100%;
+      height: 30px;
+      color: #fff;
+      background-color: transparent;
+      border-bottom: 1px solid #078;
+    }
+
+    .box p {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      transition: .4s;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .user:focus+p,
+    .user:valid+p,
+    .pw:valid+p,
+    .pw:focus+p {
+      top: -20px;
+      color: #079;
+    }
+
+    .cb {
+      position: relative;
+      appearance: none;
+      width: 60px;
+      height: 30px;
+      margin-right: 10px;
+      border-radius: 15px;
+      background-color: transparent;
+      border: 1px solid #666;
+    }
+
+    .cb::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #888;
+      transition: .4s;
+    }
+
+    .cb:checked {
+      border: 1px solid #fff;
+    }
+
+    .cb:checked::before {
+      left: 32px;
+      background: #fff;
+    }
+
+    .rem-box {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .btn {
+      border: 1px solid #078;
+      padding: 10px 20px;
+      border-radius: 6px;
+      color: #078;
+      text-transform: uppercase;
+    }
+
+    .btn:hover {
+      background-color: #078;
+      border-color: #fff;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <form class="wrap">
+    <h1>login</h1>
+    <div class="box">
+      <input class="user" type="text" required>
+      <p>username</p>
+    </div>
+    <div class="box">
+      <input class="pw" type="password" required>
+      <p>password</p>
+    </div>
+    <div class="rem-box">
+      <input class="cb" type="checkbox" name="" id="">
+      <span>记住名字</span>
+    </div>
+    <button class="btn">submit</button>
+  </form>
+
+</body>
+
+</html>

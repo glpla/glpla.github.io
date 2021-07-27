@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>animation slider</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <style>
+    section {
+      position: relative;
+      width: 800px;
+      height: 450px;
+      margin: 40px auto 0;
+      overflow: hidden;
+      background-color: #f40;
+      cursor: pointer;
+    }
+
+    .slider-box {
+      width: 500%;
+      height: 100%;
+      display: flex;
+      animation: slider 10s steps(5, end) infinite;
+    }
+
+    section:hover .slider-box {
+      animation-play-state: paused;
+    }
+
+    @keyframes slider {
+      to {
+        transform: translateX(-4000px);
+      }
+    }
+
+    .slider {
+      width: 20%;
+      height: 100%;
+      background-size: cover;
+    }
+
+    .slider:nth-child(1) {
+      background-image: url(imgs/slider1.jpg);
+    }
+
+    .slider:nth-child(2) {
+      background-image: url(imgs/slider2.jpg);
+    }
+
+    .slider:nth-child(3) {
+      background-image: url(imgs/slider3.jpg);
+    }
+
+    .slider:nth-child(4) {
+      background-image: url(imgs/slider4.jpg);
+    }
+
+    .slider:nth-child(5) {
+      background-image: url(imgs/slider5.jpg);
+    }
+
+    .dot-box {
+      position: absolute;
+      left: 50%;
+      width: 190px;
+      bottom: 4px;
+      height: 30px;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+    }
+
+    .dot-box::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #f40;
+      animation: dot 10s steps(5, end) infinite;
+      z-index: -1;
+    }
+
+    section:hover .dot-box::before {
+      animation-play-state: paused;
+    }
+
+    @keyframes dot {
+      to {
+        transform: translateX(190px);
+      }
+    }
+
+    .dot {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border-radius: 50%;
+      color: #fff;
+      margin: 0 4px;
+      background-color: rgba(255, 255, 255, .3);
+    }
+
+    @media (max-width:1100px) {
+      section {
+        width: 480px;
+        height: 300px;
+      }
+
+      @keyframes slider {
+        to {
+          transform: translateX(-2400px);
+        }
+      }
+    }
+
+    @media (max-width:375px) {
+      section {
+        width: 100vw;
+        height: 200px;
+        margin: 0;
+      }
+
+      @keyframes slider {
+        to {
+          transform: translateX(-500vw);
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div class="slider-box">
+      <div class="slider"></div>
+      <div class="slider"></div>
+      <div class="slider"></div>
+      <div class="slider"></div>
+      <div class="slider"></div>
+    </div>
+    <div class="dot-box">
+      <div class="dot">1</div>
+      <div class="dot">2</div>
+      <div class="dot">3</div>
+      <div class="dot">4</div>
+      <div class="dot">5</div>
+    </div>
+  </section>
+</body>
+
+</html>

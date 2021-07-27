@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cart</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="css/reset.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    body {
+      height: 100vh;
+      background-color: #70a1ff;
+      transition: 0.4s linear;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      width: 600px;
+      background-color: #fff;
+      box-shadow: 1px 1px 6px 6px #8888;
+      padding: 20px;
+    }
+
+    .title,
+    .sub-title {
+      text-transform: uppercase;
+    }
+
+    .sub-title {
+      font-size: 80%;
+      color: #999;
+    }
+
+    .pic {
+      height: 400px;
+      margin: 20px 0;
+      background-image: url(imgs/blue.jpg);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .colors {
+      display: flex;
+      justify-content: center;
+    }
+
+    .colors span {
+      position: relative;
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin: 4px 8px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .colors span:nth-child(1) {
+      background-color: #70a1ff;
+    }
+
+    .colors span:nth-child(2) {
+      background-color: #C4E538;
+    }
+
+    .colors span:nth-child(3) {
+      background-color: #f1c40f;
+    }
+
+    .colors span:nth-child(4) {
+      background-color: #ffb8b8;
+    }
+
+    span.active::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 50%;
+      border: 1px solid #6666;
+    }
+
+    .info {
+      margin: 20px 0 0px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .price {
+      font-size: 28px;
+      color: #70a1ff;
+    }
+
+    .btn {
+      color: #70a1ff;
+      text-transform: uppercase;
+      padding: 10px 40px;
+      border-radius: 40px;
+      border: 2px solid;
+      transition: .4s;
+    }
+
+    .btn:hover {
+      transform: scale(1.04);
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="card">
+    <h1 class="title">Lorem ipsum dolor</h1>
+    <p class="sub-title">Lorem ipsum dolor, sit amet consectetur</p>
+    <div class="pic"></div>
+    <div class="colors">
+      <span class="blue active" data-color="#70a1ff" data-pic="url(imgs/blue.jpg)"></span>
+      <span class="green" data-color="#C4E538" data-pic="url(imgs/green.jpg)"></span>
+      <span class="yellow" data-color="#f1c40f" data-pic="url(imgs/yellow.jpg)"></span>
+      <span class="rose" data-color="#ffb8b8" data-pic="url(imgs/rose.jpg)"></span>
+    </div>
+    <div class="info">
+      <div class="price">￥90</div>
+      <a href="javascript:;" class="btn">add to cart</a>
+    </div>
+  </div>
+  <script>
+    $('.colors span').click(function () {
+      $('.colors span').removeClass('active');
+      $(this).addClass('active');
+      $('body').css('background', $(this).attr('data-color'));
+      $('.pic').css('background-image', $(this).attr('data-pic'));
+      $('.price').css('color', $(this).attr('data-color'));
+      $('.btn').css('color', $(this).attr('data-color'));
+    })
+  </script>
+</body>
+
+</html>

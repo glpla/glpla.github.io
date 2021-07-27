@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>border effect</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/reset.css">
+  <style>
+    .old-wrap {
+      position: relative;
+      width: 100%;
+      height: 40px;
+      background-color: #ddd;
+      top: 28px;
+      z-index: 1;
+      margin: 20px auto;
+    }
+
+    .old-shadow {
+      width: 100%;
+      height: 30px;
+      background-color: rgb(213, 247, 23);
+      box-shadow: 0px 2px 30px #666;
+      margin: 20px auto;
+    }
+
+    .section {
+      box-sizing: border-box;
+      padding: 10px;
+      width: 40%;
+      height: 300px;
+      margin: 40px auto;
+      background: #fff;
+      object-fit: cover;
+      overflow: hidden;
+    }
+
+    .shadow {
+      position: relative;
+      border: 1px solid #ddd;
+    }
+
+    .shadow::after,
+    .shadow::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      right: 20px;
+      bottom: 0px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      border-radius: 100px/10px;
+      z-index: -1;
+    }
+
+    .rotate-shadow {
+      position: relative;
+      border: 1px solid #ddd;
+    }
+
+    .rotate-shadow::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      right: 50%;
+      bottom: 10px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 1);
+      transform: skew(-8deg, -8deg);
+      z-index: -1;
+    }
+
+    .rotate-shadow::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      right: 10px;
+      bottom: 10px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 1);
+      transform: skew(8deg, 8deg);
+      z-index: -1;
+    }
+
+    .flex {
+      width: 80%;
+      margin: 40px auto;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .seg {
+      box-sizing: border-box;
+      flex: 1;
+      padding: 10px;
+      width: 50%;
+      height: 300px;
+      margin: 20px;
+      background: #fff;
+    }
+
+    .border-img>div:nth-child(1) {
+      width: 600px;
+      height: 100px;
+      margin: 10px auto;
+      border: 10px solid;
+      border-image: linear-gradient(#097, #f40) 30 100;
+    }
+
+    .border-img>div:nth-child(2) {
+      width: 600px;
+      height: 100px;
+      margin: 10px auto;
+      border: 10px solid;
+      border-image: url(imgs/demo.jpg) 20;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="border-img">
+    <div></div>
+    <div></div>
+  </div>
+  <div class='section shadow'>
+    <img src="imgs/demo.jpg" alt="">
+  </div>
+  <div class="flex">
+    <div class='seg rotate-shadow'>
+      <img src="imgs/demo.jpg" alt="">
+    </div>
+    <div class='seg rotate-shadow'>
+      <img src="imgs/demo.jpg" alt="">
+    </div>
+    <div class='seg rotate-shadow'>
+      <img src="imgs/demo.jpg" alt="">
+    </div>
+  </div>
+</body>
+
+</html>

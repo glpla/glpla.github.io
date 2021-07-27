@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>loading circle</title>
+  <style>
+    .wrap {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border-top: 10px solid #228b22;
+      box-shadow: 0 0 10px #000;
+      animation: r1 1.2s linear infinite;
+    }
+
+    .loading::before,
+    .loading::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: -10px;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .loading::before {
+      border-top: 10px solid #1e90ff;
+      transform: rotate(120deg);
+    }
+
+    .loading::after {
+      border-top: 10px solid #ff8c00;
+      transform: rotate(240deg);
+    }
+
+    .text {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      line-height: 200px;
+      animation: r2 1.2s linear infinite;
+    }
+
+    @keyframes r1 {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes r2 {
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class='loading'>
+      <div class='text'>点击进入</div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>transition</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <style>
+    h1 {
+      text-align: center;
+    }
+
+    .wrap {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .tips {
+      width: 200px;
+      height: 200px;
+      margin: auto;
+      border: 1px solid #f40;
+      background-color: #078;
+      border-radius: 0;
+      transition-property: width, height, border-radius, background-color;
+      transition-duration: 10ms, 1s, 2s, 3s;
+      transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+      transition-delay: 1s;
+    }
+
+    .tips:hover {
+      width: 300px;
+      height: 220px;
+      border-radius: 50%;
+      background-color: #970;
+      transition-duration: 100ms, 2s, 4s, 8s;
+    }
+
+    .box {
+      position: relative;
+      height: 380px;
+      padding: 10px;
+      overflow: hidden;
+      background: #2980b9;
+      cursor: pointer;
+    }
+
+    .box>div {
+      position: absolute;
+      background-color: #f2f3f4;
+    }
+
+    .box div:nth-child(2) {
+      width: 68%;
+      height: 100px;
+      text-align: center;
+      line-height: 100px;
+      left: 10px;
+      bottom: -100px;
+      font-family: yuwei;
+      font-size: 28px;
+      transition: .4s;
+    }
+
+    .box div:nth-child(3) {
+      width: 28%;
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      right: 10px;
+      bottom: -100px;
+      transition: .4s .1s;
+    }
+
+    .box div:nth-child(4) {
+      width: 28%;
+      height: 250px;
+      padding: 10px;
+      text-indent: 2em;
+      text-align: justify;
+      top: 10px;
+      right: -200px;
+      transition: .4s .05s;
+    }
+
+    .box img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .4s;
+    }
+
+    .box:hover img {
+      width: 68%;
+      height: 70%;
+    }
+
+    .box:hover div:nth-child(2) {
+      bottom: 10px;
+    }
+
+    .box:hover div:nth-child(3) {
+      bottom: 10px;
+    }
+
+    .box:hover div:nth-child(4) {
+      right: 10px;
+    }
+
+    /* example2 */
+    .pos {
+      position: relative;
+      height: 380px;
+      background-color: #eeece1;
+      overflow: hidden;
+    }
+
+    .pos div {
+      position: absolute;
+      left: -400px;
+      top: -400px;
+      width: 360px;
+      height: 360px;
+      border: 10px solid #f40;
+      transform-origin: left top;
+      transition: 1s;
+    }
+
+    .pos:hover div {
+      left: 20px;
+      top: 20px;
+      transform: rotate(360deg);
+    }
+
+    /* example3 */
+    .tran {
+      position: relative;
+      height: 380px;
+      border: 10px solid #b22222;
+      overflow: hidden;
+    }
+
+    .tran div {
+      position: absolute;
+      left: 0;
+      bottom: -300px;
+      width: 600px;
+      height: 300px;
+      background-color: #ffd700;
+      transform-origin: left top;
+      transition: .8s;
+    }
+
+    .tran:hover div {
+      transform: rotate(-20deg);
+    }
+
+    /* example4 */
+    .border {
+      position: relative;
+      height: 380px;
+      background-color: #eeece1;
+    }
+
+    .h {
+      width: 200px;
+      height: 160px;
+      border: solid #b22222;
+      border-width: 2px 0;
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: 1s;
+    }
+
+    .v {
+      width: 160px;
+      height: 200px;
+      border: solid #b22222;
+      border-width: 0px 2px;
+      transform: scaleY(0);
+      transition: .6s;
+    }
+
+    .border:hover .h {
+      transform: scaleX(1);
+    }
+
+    .border:hover .v {
+      transform: scaleY(1);
+    }
+
+    /* example5 */
+    .rect {
+      position: relative;
+      height: 380px;
+      background-color: #eeece1;
+    }
+
+    .rect div {
+      position: absolute;
+      left: 0;
+      bottom: 10px;
+      width: 100%;
+      height: 100%;
+      border: 6px solid #ffd700;
+      background-color: #f40;
+      transform-origin: center bottom;
+      transform: scale(.4);
+      transition: .4s;
+    }
+
+    .rect:hover div {
+      bottom: 0;
+      transform: scale(1);
+      transition: .2s;
+    }
+
+    /* example6 */
+
+
+    .circle {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      margin: auto;
+      border-radius: 50%;
+      background-image: url(imgs/flag.jpg);
+      background-size: cover;
+    }
+
+    .circle::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      top: -10px;
+      background-image: linear-gradient(#eeece1 50%, #d40 0);
+      border-radius: 50%;
+      transition: 1s;
+      z-index: -1;
+    }
+
+
+    .circle:hover::before {
+      transform: rotate(-180deg);
+    }
+
+    .step {
+      height: 380px;
+    }
+
+    .step div {
+      width: 0;
+      height: 30px;
+      background-color: #f40;
+      margin: auto;
+      transition: all 4s;
+      transition-timing-function: steps(4);
+    }
+
+    .step:hover div {
+      width: 100%;
+    }
+
+    .clock {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background-color: #eeece1;
+      margin: auto;
+    }
+
+    .clock::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #333;
+      transform: translate(-50%, -50%);
+    }
+
+    .clock::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 2px;
+      height: 50%;
+      background-color: #333;
+      transform-origin: 50% bottom;
+      transform: translate(-50%, 0);
+      transition: all 10s steps(60, start);
+    }
+
+    .clock:hover::after {
+      transform: translate(-50%, 0) rotate(360deg);
+    }
+
+    .switch {
+      width: 200px;
+      height: 150px;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .switch:hover .img-box {
+      transform: translateX(-200px);
+    }
+
+    .img-box {
+      display: flex;
+      width: 200%;
+      height: 100%;
+      background-color: #f40;
+      transition: 1s steps(1, start);
+    }
+
+    .img-box>div {
+      width: 50%;
+      height: 100%;
+    }
+
+    .img-box div:first-child {
+      background-image: url(imgs/slider1.jpg);
+      background-size: cover;
+    }
+
+    .img-box div:last-child {
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>transition: property duration timing-function delay;</h1>
+  <div class="wrap">
+    <div class="tips"></div>
+    <div class="box">
+      <img src="imgs/Mars.jfif" alt="">
+      <div>祝融号火星车</div>
+      <div>2021-05-15 20:20</div>
+      <div>祝融号，为天问一号任务火星车。高度有1米85，重量达到240公斤左右。设计寿命为3个火星月，相当于约92个地球日。驱散黑暗，带来温暖。“祝融”号寓意点燃中国星际探测的火种，指引航天人不断超越自我，逐梦星辰。
+      </div>
+    </div>
+    <div class="pos">
+      <div></div>
+    </div>
+    <div class="tran">
+      <div></div>
+    </div>
+    <div class="border">
+      <div class="h dom-center"></div>
+      <div class="v dom-center"></div>
+    </div>
+    <div class="rect">
+      <div></div>
+    </div>
+    <div class="circle"></div>
+    <div class="step">
+      <div></div>
+    </div>
+    <div class="clock"></div>
+    <div class="switch">
+      <div class="img-box">
+        <div></div>
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, eligendi!</div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

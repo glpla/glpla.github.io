@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>radio slider</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      height: 100vh;
+      background-color: #c0392b;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .sliders {
+      width: 800px;
+      overflow: hidden;
+    }
+
+    .slider-box {
+      width: 500%;
+      display: flex;
+      transition: .4s;
+    }
+
+    .slider {
+      width: 20%;
+    }
+
+    .radio-box {
+      margin: 20px 0 0;
+      display: flex;
+    }
+
+    .bar {
+      width: 60px;
+      height: 12px;
+      margin: 10px;
+      border: 2px solid #fff;
+      transition: .4s;
+      cursor: pointer;
+    }
+
+    .bar:hover {
+      background-color: #fff;
+    }
+
+    #r1:checked~.radio-box>.b1 {
+      background-color: #fff;
+    }
+
+    #r2:checked~.radio-box>.b2 {
+      background-color: #fff;
+    }
+
+    #r3:checked~.radio-box>.b3 {
+      background-color: #fff;
+    }
+
+    #r4:checked~.radio-box>.b4 {
+      background-color: #fff;
+    }
+
+    #r5:checked~.radio-box>.b5 {
+      background-color: #fff;
+    }
+
+    #r1:checked~.sliders>.slider-box {
+      margin-left: 0%;
+    }
+
+    #r2:checked~.sliders>.slider-box {
+      margin-left: -100%;
+    }
+
+    #r3:checked~.sliders>.slider-box {
+      margin-left: -200%;
+    }
+
+    #r4:checked~.sliders>.slider-box {
+      margin-left: -300%;
+    }
+
+    #r5:checked~.sliders>.slider-box {
+      margin-left: -400%;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="radio" name="r" id="r1" checked hidden>
+  <input type="radio" name="r" id="r2" hidden>
+  <input type="radio" name="r" id="r3" hidden>
+  <input type="radio" name="r" id="r4" hidden>
+  <input type="radio" name="r" id="r5" hidden>
+  <div class="sliders">
+    <div class="slider-box">
+      <img class="slider" src="imgs/slider1.jpg" alt="">
+      <img class="slider" src="imgs/slider2.jpg" alt="">
+      <img class="slider" src="imgs/slider3.jpg" alt="">
+      <img class="slider" src="imgs/slider4.jpg" alt="">
+      <img class="slider" src="imgs/slider5.jpg" alt="">
+    </div>
+  </div>
+  <div class="radio-box">
+    <label for="r1" class="bar b1"></label>
+    <label for="r2" class="bar b2"></label>
+    <label for="r3" class="bar b3"></label>
+    <label for="r4" class="bar b4"></label>
+    <label for="r5" class="bar b5"></label>
+  </div>
+</body>
+
+</html>

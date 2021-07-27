@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>animation</title>
+  <style>
+    h1 {
+      text-align: center;
+    }
+
+    /* example1 */
+    .rect {
+      width: 400px;
+      height: 300px;
+      margin: 40px auto;
+      background-color: #eeece1;
+    }
+
+    .rect div {
+      width: 40px;
+      height: 40px;
+      background-color: #f40;
+      animation: move 2s linear 0s infinite;
+      animation-name: move;
+      animation-duration: 2s;
+      animation-timing-function: linear;
+      animation-delay: 0s;
+      animation-iteration-count: 2;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes move {
+
+      25% {
+        transform: translateX(360px);
+      }
+
+      50% {
+        transform: translate(360px, 260px);
+      }
+
+      75% {
+        transform: translateY(260px);
+      }
+    }
+
+    .rect:hover div {
+      animation-play-state: paused;
+    }
+
+    /* example2 */
+    .tx-box {
+      position: relative;
+      width: 600px;
+      height: 300px;
+      margin: 40px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tx {
+      width: 100%;
+      height: 100%;
+      background-color: #eeece1;
+      transform-style: preserve-3d;
+      transform: perspective(800px) rotateX(60deg);
+    }
+
+    .tx::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 100%;
+      height: 20px;
+      background-image: linear-gradient(90deg, #fff 70%, #333 0);
+      background-size: 120px;
+      transform: translateY(-50%);
+      animation: tx 2s linear infinite;
+    }
+
+    @keyframes tx {
+      0% {
+        background-position: 0;
+      }
+
+      100% {
+        background-position: -120px;
+      }
+    }
+
+    .tx::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      background-color: #666;
+      transform-origin: top;
+      transform: rotateX(-70deg);
+    }
+
+
+
+    .tx-shadow {
+      position: absolute;
+      left: 50%;
+      bottom: -62px;
+      width: 95%;
+      height: 30px;
+      transform: translateX(-50%);
+      background-image: linear-gradient(rgba(0, 0, 0, .4), transparent);
+    }
+
+    .cube-box {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: xpos 1s linear infinite;
+    }
+
+    @keyframes xpos {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-100px);
+      }
+
+    }
+
+    .cube {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      transform-origin: bottom right;
+      animation: roll-cube 1s linear infinite;
+    }
+
+    @keyframes roll-cube {
+      0% {
+        transform: rotateZ(0deg);
+      }
+
+      100% {
+        transform: rotateZ(90deg);
+      }
+
+    }
+
+    /* example3 */
+    .loading-box {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 100px auto;
+      animation: hue 2s linear infinite;
+    }
+
+    @keyframes hue {
+      0% {
+        filter: hue-rotate(0deg);
+      }
+
+      100% {
+        filter: hue-rotate(360deg);
+      }
+    }
+
+    .loading-box span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      /* border: 1px solid #f40; */
+      transform: rotate(calc(var(--i)*18deg));
+    }
+
+    .loading-box span::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background-color: #f40;
+      border-radius: 50%;
+      box-shadow:
+        0 0 4px #f40,
+        0 0 8px #f40,
+        0 0 12px #f40;
+      transform: scale(0);
+      animation: scale-box 1.8s linear infinite;
+      animation-delay: calc(var(--i)*0.1s);
+    }
+
+    @keyframes scale-box {
+      100% {
+        transform: scale(1);
+      }
+
+    }
+
+    /* example4 */
+    .wrapper {
+      width: 100%;
+      height: 450px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .box::after {
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: #6B8E23;
+      border-radius: 40px;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      transform: translateY(0px);
+      animation: hop 1.5s infinite linear;
+    }
+
+    @keyframes hop {
+      0% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(100px) rotate(45deg);
+        border-bottom-right-radius: 100px;
+      }
+
+      100% {
+        transform: translateY(0px) rotate(90deg);
+      }
+    }
+
+    .box::before {
+      content: "";
+      width: 100%;
+      height: 60px;
+      background: #888;
+      border-radius: 50%;
+      position: absolute;
+      left: 0px;
+      bottom: -120px;
+      opacity: 0.4;
+      animation: zoom 1.5s infinite linear;
+    }
+
+    @keyframes zoom {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    /* example5 */
+    .ring {
+      width: 100px;
+      height: 100px;
+      background: #079;
+      margin: 20px auto;
+      border-radius: 50%;
+    }
+
+    .out {
+      width: 55px;
+      height: 55px;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      border-top: 2px solid #fff;
+      border-left: 2px solid #fff;
+      animation: roll 5s linear infinite;
+    }
+
+    .mid {
+      width: 40px;
+      height: 40px;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      border-top: 2px solid #fff;
+      border-right: 2px solid #fff;
+      animation: roll 4s linear infinite;
+    }
+
+    .in {
+      width: 25px;
+      height: 25px;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      animation: roll 3s linear infinite;
+    }
+
+    .center {
+      width: 10px;
+      height: 10px;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      animation: roll 2s linear infinite;
+    }
+
+    .flex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes roll {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .heart {
+      position: relative;
+      width: 150px;
+      height: 120px;
+      background-color: #f40;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: #078;
+    }
+
+    .heart::before {
+      transform: translate(-100px);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>animation: name duration timing-function delay iteration-count direction fill-mode;</h1>
+  <div class="heart"></div>
+  <div class="rect">
+    <div></div>
+  </div>
+  <div class="tx-box">
+    <div class="tx">
+      <div class="tx-shadow"></div>
+    </div>
+    <div class="cube-box">
+      <div class="cube"></div>
+    </div>
+  </div>
+  <div class="loading-box">
+    <span style="--i:0"></span>
+    <span style="--i:1"></span>
+    <span style='--i:2'></span>
+    <span style='--i:3'></span>
+    <span style='--i:4'></span>
+    <span style='--i:5'></span>
+    <span style='--i:6'></span>
+    <span style='--i:7'></span>
+    <span style='--i:8'></span>
+    <span style='--i:9'></span>
+    <span style='--i:10'></span>
+    <span style='--i:11'></span>
+    <span style='--i:12'></span>
+    <span style='--i:13'></span>
+    <span style='--i:14'></span>
+    <span style='--i:15'></span>
+    <span style='--i:16'></span>
+    <span style='--i:17'></span>
+    <span style='--i:18'></span>
+    <span style='--i:19'></span>
+  </div>
+  <div id="wrapper" class="wrapper">
+    <div class="box"></div>
+  </div>
+  <div class="ring flex">
+    <div class="out flex">
+      <div class="mid flex">
+        <div class="in flex">
+          <div class="center"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

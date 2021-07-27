@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>background image</title>
+  <style>
+    h1 {
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    h3 {
+      width: 1100px;
+      margin: 0 auto;
+    }
+
+    .rect {
+      width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .basic>div,
+    .advanced>div {
+      height: 40px;
+    }
+
+    .basic div:nth-child(1) {
+      background-image: linear-gradient(#f40, #ff0);
+    }
+
+    .basic div:nth-child(2) {
+      background-image: linear-gradient(0deg, #f40, #ff0);
+    }
+
+    .basic div:nth-child(3) {
+      background-image: linear-gradient(45deg, #f40, #ff0);
+    }
+
+    .basic div:nth-child(4) {
+      background-image: linear-gradient(45deg, #f40 50%, #ff0 0);
+    }
+
+    .advanced div:nth-child(1) {
+      background-image: linear-gradient(45deg, #fff 15px, #f40 0);
+    }
+
+    .advanced div:nth-child(2) {
+      background-image: linear-gradient(-45deg, #fff 15px, #f40 0);
+    }
+
+    .advanced div:nth-child(3) {
+      background-image: linear-gradient(135deg, #fff 15px, #f40 0);
+    }
+
+    .advanced div:nth-child(4) {
+      background-image: linear-gradient(-135deg, #fff 15px, #f40 0);
+    }
+
+    .advanced div:nth-child(5) {
+      background:
+        linear-gradient(-135deg, transparent 15px, #f40 0) top,
+        linear-gradient(-45deg, transparent 15px, #f40 0) bottom;
+      background-size: 100% 50%;
+      background-repeat: no-repeat;
+    }
+
+    .advanced div:nth-child(6) {
+      background:
+        linear-gradient(135deg, transparent 15px, #f40 0) top,
+        linear-gradient(45deg, transparent 15px, #f40 0) bottom;
+      background-size: 100% 50%;
+      background-repeat: no-repeat;
+    }
+
+    .advanced div:nth-child(7) {
+      background:
+        linear-gradient(-135deg, transparent 15px, #f40 0) bottom,
+        linear-gradient(-45deg, transparent 15px, #f40 0) top;
+      background-size: 100% 50%;
+      background-repeat: no-repeat;
+    }
+
+    .advanced div:nth-child(8) {
+      background:
+        linear-gradient(135deg, transparent 15px, #f40 0) bottom,
+        linear-gradient(45deg, transparent 15px, #f40 0) top;
+      background-size: 100% 50%;
+      background-repeat: no-repeat;
+    }
+
+    .advanced div:nth-child(9) {
+      background:
+        linear-gradient(-135deg, transparent 15px, #f40 0) right top,
+        linear-gradient(-45deg, transparent 15px, #f40 0) right bottom,
+        linear-gradient(135deg, transparent 15px, #f40 0) left top,
+        linear-gradient(45deg, transparent 15px, #f40 0) left bottom;
+      background-size: 50% 50%;
+      background-repeat: no-repeat;
+    }
+
+    .advanced div:nth-child(10) {
+      background:
+        linear-gradient(-135deg, transparent 15px, #f40 0) right bottom,
+        linear-gradient(-45deg, transparent 15px, #f40 0) right top,
+        linear-gradient(135deg, transparent 15px, #f40 0) left bottom,
+        linear-gradient(45deg, transparent 15px, #f40 0) left top;
+      background-size: 50% 50%;
+      background-repeat: no-repeat;
+    }
+
+    /* radial */
+    .radial>div,
+    .radial-rem>div {
+      width: 200px;
+      height: 200px;
+    }
+
+    .radial div:nth-child(1) {
+      background-image: radial-gradient(#f40, #ff0);
+    }
+
+    .radial div:nth-child(2) {
+      background-image: radial-gradient(at left top, #f40, #ff0);
+    }
+
+    .radial div:nth-child(3) {
+      /* 元素对角线的长度 */
+      background-image: radial-gradient(at left top, #f40 50%, #ff0 0);
+    }
+
+    .radial div:nth-child(4) {
+      background-image: radial-gradient(at left top, #f40 141.4px, #ff0 0);
+    }
+
+    .radial div:nth-child(5) {
+      background-image: radial-gradient(at left top, #f40 200px, #ff0 0);
+    }
+
+    .radial div:nth-child(6) {
+      height: 100px;
+      background-image: radial-gradient(at left top, #f40 50%, #ff0 0);
+    }
+
+    .radial div:nth-child(7) {
+      height: 100px;
+      background-image: radial-gradient(at left top, #f40 200px, #ff0 0);
+    }
+
+    .radial-rem div:nth-child(1) {
+      background-image: radial-gradient(100px, #f40, #ff0);
+    }
+
+    .radial-rem div:nth-child(2) {
+      background-image: radial-gradient(100px, #f40 50%, #ff0 0);
+    }
+
+    .radial-rem div:nth-child(3) {
+      background-image: radial-gradient(closest-side at 100px 50px, #f40 50%, #ff0 0);
+    }
+
+    .radial-rem div:nth-child(4) {
+      background-image: radial-gradient(closest-corner at 100px 50px, #f40 50%, #ff0 0);
+    }
+
+    .radial-rem div:nth-child(5) {
+      background-image: radial-gradient(farthest-side at 100px 50px, #f40 50%, #ff0 0);
+    }
+
+    .radial-rem div:nth-child(6) {
+      background-image: radial-gradient(farthest-corner at 100px 50px, #f40 50%, #ff0 0);
+    }
+
+    .rect-bg {
+      width: 1100px;
+      height: 120px;
+      margin: 20px auto;
+      background: #f40;
+      background-image:
+        linear-gradient(90deg, #fff 50%, transparent 0),
+        linear-gradient(0deg, #fff 50%, transparent 0);
+      background-size: 20px 20px;
+    }
+
+    .dot-bg {
+      width: 1100px;
+      height: 120px;
+      margin: 20px auto;
+      background: #fff;
+      background-image:
+        radial-gradient(2px, #f40 50%, transparent 0);
+      background-size: 20px 20px;
+    }
+
+    .test {
+      width: 1100px;
+      height: 120px;
+      margin: 0 auto;
+      background-image:
+        linear-gradient(90deg, #ff0 50%, transparent 0),
+        linear-gradient(0deg, #078 50%, #ff4 0);
+      background-size: 20px 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>linear-gradient</h1>
+  <h3>基本用法</h3>
+  <div class="rect basic">
+    <div>默认</div>
+    <div>0deg</div>
+    <div>45deg</div>
+    <div>45deg 切分</div>
+  </div>
+  <h3>高级用法</h3>
+  <div class="rect advanced">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <h1>radia-gradient</h1>
+  <p>background-image: radial-gradient(shape size at position, start-color, ..., last-color);</p>
+  <h3>基本用法</h3>
+  <div class="rect radial">
+    <div>默认</div>
+    <div>left top</div>
+    <div>left top 50%切分</div>
+    <div>left top 141.4px绝对单位切分</div>
+    <div>left top 200px绝对单位切分</div>
+    <div>长方形 left top 50%绝对单位切分</div>
+    <div>长方形 left top 200px绝对单位切分</div>
+  </div>
+  <h3>高级用法</h3>
+  <div class="rect radial-rem">
+    <div></div>
+    <div></div>
+    <div>closest-side at 100px 50px</div>
+    <div>closest-corner at 100px 50px,</div>
+    <div>farthest-side at 100px 50px,</div>
+    <div>farthest-corner at 100px 50px,</div>
+  </div>
+  <div class="rect-bg">rect background</div>
+  <div class="dot-bg">dot background</div>
+  <div class="test"></div>
+</body>
+
+</html>

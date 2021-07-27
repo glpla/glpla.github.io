@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name='keywords' content="web glpla">
+  <meta name='description' content="only for test">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/reset.css">
+  <title>login</title>
+  <style>
+    body {
+      background-color: #2c3e50;
+    }
+
+    .wrap {
+      position: relative;
+      width: 800px;
+      padding: 100px;
+      margin: 100px auto;
+      background: #2c3e50;
+      border-radius: 10px;
+    }
+
+    .wrap::after,
+    .wrap::before {
+      content: '';
+      position: absolute;
+      left: -2px;
+      top: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 10px;
+      background-image: linear-gradient(235deg, #f40, #c56cf0, #fff200);
+    }
+
+    .wrap::before {
+      filter: blur(40px);
+      z-index: -2;
+    }
+
+    .wrap::after {
+      z-index: -1;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      text-align: center;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 20px;
+      color: #079;
+    }
+
+    .user,
+    .pw {
+      width: 100%;
+      padding: 10px 0px;
+      letter-spacing: 2px;
+      border-bottom: 1px solid #079;
+      background: transparent;
+      color: #079;
+      font-size: 1rem;
+    }
+
+    .input-box span {
+      position: absolute;
+      padding: 10px 0;
+      left: 0px;
+      top: 0px;
+      color: #079;
+      font-size: 1rem;
+      pointer-events: none;
+      transition: 0.4s;
+    }
+
+    .input-box input:focus+span,
+    .input-box input:valid+span {
+      font-size: 0.6rem;
+      color: #fff;
+      top: -20px;
+    }
+
+    /* border的颜色默认和color的颜色保持一致 */
+    .btn {
+      color: #079;
+      background: transparent;
+      border: 1px solid;
+      border-radius: 4px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      color: #fff;
+      background: #079;
+    }
+
+    .rem-cb {
+      appearance: none;
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      width: 40px;
+      height: 26px;
+      border: 1px solid #f3f4f5;
+      border-radius: 15px;
+    }
+
+    .rem-cb::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #f3f4f5;
+      transition: .4s;
+    }
+
+    .rem-cb:checked {
+      border-color: #079;
+    }
+
+    .rem-cb:checked::before {
+      left: 16px;
+      background-color: #079;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h2>login</h2>
+    <div class="input-box">
+      <input class="user" type="text" required>
+      <span>username</span>
+    </div>
+    <div class="input-box">
+      <input class="pw" type="password" required>
+      <span>password</span>
+    </div>
+    <div class="input-box">
+      <input class="rem-cb" type="checkbox" name="" id="cb">
+      <label for="cb">记住用户名</label>
+    </div>
+    <button class="btn">submit</button>
+  </div>
+  <script>
+    let rem = document.querySelector('.rem-cb')
+    let user = document.querySelector('.user')
+    user.value = localStorage.getItem('login-name') || ''
+    rem.checked = user.value
+    rem.addEventListener('click', () => {
+      if (!user.value) {
+        alert('user-name NULL')
+        rem.checked = false
+      } else {
+        rem.checked ? localStorage.setItem('login-name', user.value) : localStorage.removeItem('login-name')
+      }
+    })
+  </script>
+</body>
+
+</html>

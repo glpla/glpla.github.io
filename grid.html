@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>grid</title>
+  <style>
+    .w {
+      min-width: 600px;
+      width: 80%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .sudoku {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .item {
+      min-height: 100px;
+      background-color: #f08080;
+    }
+
+    .random {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .random>div:nth-child(1) {
+      grid-column: span 2;
+    }
+
+    .random>div:nth-child(2) {
+      grid-row: span 2;
+    }
+
+    .random>div:nth-child(3) {
+      grid-row: span 2;
+    }
+
+    .random>div:nth-child(5) {
+      grid-column: span 2;
+    }
+
+    .ale {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+    }
+
+    .page {
+      display: grid;
+      grid-template-areas:
+        'header header header'
+        'nav nav nav'
+        'aside article article'
+        'footer footer footer';
+      gap: 10px;
+    }
+
+    .page>* {
+      text-align: center;
+      background-color: #f08080;
+    }
+
+    .page header {
+      grid-area: header;
+      height: 100px;
+    }
+
+    .page nav {
+      grid-area: nav;
+      height: 30px;
+    }
+
+    .page aside {
+      grid-area: aside;
+      min-height: 400px;
+    }
+
+    .page article {
+      grid-area: article;
+    }
+
+    .page footer {
+      grid-area: footer;
+      height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="w">
+    <h1>九宫格</h1>
+    <div class="sudoku">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+      <div class="item">7</div>
+      <div class="item">8</div>
+      <div class="item">9</div>
+    </div>
+    <h1>任意布局</h1>
+    <div class="random">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+    </div>
+    <h1>自适应布局</h1>
+    <div class="ale">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+      <div class="item">7</div>
+      <div class="item">8</div>
+      <div class="item">9</div>
+    </div>
+    <h1>全站布局</h1>
+    <section class="page">
+      <header>header</header>
+      <nav>nav</nav>
+      <aside>aside</aside>
+      <article>article</article>
+      <footer>footer</footer>
+    </section>
+  </div>
+</body>
+
+</html>
