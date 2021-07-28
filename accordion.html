@@ -32,6 +32,7 @@
     img,
     .wrap {
       width: calc(50% - 20px);
+      background-color: rgba(255, 255, 255, .4);
     }
 
     a {
@@ -48,10 +49,6 @@
       text-transform: uppercase;
     }
 
-    .last {
-      margin-bottom: 0;
-    }
-
     a::before,
     a::after {
       content: '';
@@ -59,12 +56,13 @@
       width: 10px;
       height: 2px;
       background-color: #fff;
-      right: 20px;
+      right: 1em;
       top: 50%;
     }
 
     a::before {
       transform: translateY(-50%);
+      z-index: 2;
     }
 
     a::after {
@@ -72,10 +70,10 @@
     }
 
     .cont {
+      position: relative;
       height: 0;
       opacity: 0;
       padding: 0 1rem;
-      background-color: rgba(0, 0, 0, .1);
       transition-property: height, opacity;
       transition-duration: .4s, .4s;
       transition-delay: 0, .4s;
@@ -83,7 +81,18 @@
 
     .cont:target {
       opacity: 1;
-      height: 264px;
+      height: 230px;
+    }
+
+    .cont:target::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 2px;
+      background-color: #f40;
+      right: 1em;
+      top: -26px;
+      transform: rotate(90deg);
     }
 
     .cont:target~.cont {
