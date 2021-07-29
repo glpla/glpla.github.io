@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>target</title>
+  <title>a target</title>
+  <base target="_blank">
   <link rel="stylesheet" href="css/reset.css">
   <style>
     body {
-      width: 100vw;
       height: 100vh;
       background-color: #f3f4f5;
     }
@@ -23,9 +23,16 @@
 
     .nav {
       width: 200px;
-      padding-top: 40px;
       height: 100vh;
       background-color: #fff;
+    }
+
+    .title {
+      text-align: center;
+      line-height: 3;
+      font-size: 18px;
+      background-color: #f40;
+      color: #fff;
     }
 
     .btn {
@@ -37,16 +44,15 @@
     }
 
     .btn:hover {
-      background-color: #f40;
+      background-color: #f408;
       color: #fff;
     }
 
     .cont {
-      width: 800px;
+      flex: 1;
       padding: 0 40px;
       overflow: auto;
     }
-
 
     p {
       margin: 20px 0;
@@ -55,43 +61,44 @@
     }
 
     h2 {
+      display: flex;
+      align-items: center;
       position: relative;
-      padding-left: 20px;
+      height: 30px;
+      line-height: 30px;
+      color: #333;
     }
 
     h2::before {
       content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 10px;
-      height: 100%;
-      background: #888;
+      width: 15px;
+      height: 30px;
+      margin-right: 15px;
+      background-color: #333;
+    }
+
+    h2::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      margin-left: 15px;
+      background-color: #333;
     }
 
     h2:target {
       color: #f40;
     }
 
+    h2:target::before,
     h2:target::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 2px;
-      height: 100%;
-      background-color: #f40;
-    }
-
-    h2:target::before {
       background-color: #f40;
     }
 
     .img {
-      width: 300px;
+      float: left;
+      width: 200px;
       margin-right: 10px;
       margin-bottom: 10px;
-      float: left;
     }
   </style>
 </head>
@@ -99,14 +106,16 @@
 <body>
   <div class="w">
     <ul class="nav">
-      <li><a class='btn' href="#p0" target="_blank">nav1</a></li>
-      <li><a class='btn' href="#p1">nav2</a></li>
-      <li><a class='btn' href="#p2">nav3</a></li>
-      <li><a class='btn' href="#p3">nav4</a></li>
-      <li><a class='btn' href="#p4">nav4</a></li>
+      <li class="title">常用功能</li>
+      <li><a class='btn' href="#p0">浏览标题1</a></li>
+      <li><a class='btn' href="#p1">浏览标题2</a></li>
+      <li><a class='btn' href="#p2">浏览标题3</a></li>
+      <li><a class='btn' href="#p3">浏览标题4</a></li>
+      <li><a class='btn' href="//www.baidu.com">打开度娘娘</a></li>
+      <li><a class='btn' href="index.html">返回主页</a></li>
     </ul>
     <div class="cont">
-      <h2 id="p0">Lorem ipsum dolor sit.</h2>
+      <h2 id="p0">标题1</h2>
       <p><img class="img" src="imgs/blog0.jpg" alt=""> Lorem ipsum dolor sit amet consectetur adipisicing
         elit. Possimus
         cupiditate deleniti ipsum adipisci
@@ -125,7 +134,7 @@
         voluptate reprehenderit alias expedita saepe tempore odit. Delectus consequuntur beatae commodi
         sequi
         consectetur. Repellendus assumenda id in dolores, veniam consequatur saepe asperiores.</p>
-      <h2 id="p1">Lorem ipsum dolor sit.</h2>
+      <h2 id="p1">标题2</h2>
       <p><img class="img" src="imgs/blog1.jpg" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit.
         Neque facere atque accusamus ut beatae enim.
         Labore, maxime! Incidunt quia aut voluptates eveniet aperiam, sequi ex similique esse error
@@ -144,7 +153,7 @@
         illo ad a obcaecati? Obcaecati minus asperiores, laborum magni rem quia vero tenetur. Eligendi
         distinctio,
         reprehenderit fugit assumenda id consequuntur.</p>
-      <h2 id="p2">Lorem ipsum dolor sit.</h2>
+      <h2 id="p2">标题3</h2>
       <p><img class="img" src="imgs/blog2.jpg" alt="">Lorem ipsum dolor sit amet consectetur adipisicing elit.
         Est aliquid saepe cum placeat ad qui earum
         quam
@@ -166,7 +175,7 @@
         nisi, nesciunt officia aut eligendi tempore! Obcaecati optio suscipit nisi provident voluptatibus,
         voluptas
         error minus quidem consequuntur nemo repudiandae magni ratione? Optio, nisi nam?</p>
-      <h2 id="p3">Lorem ipsum dolor sit.</h2>
+      <h2 id="p3">标题4</h2>
       <p><img class="img" src="imgs/blog3.jpg" alt="">Lorem ipsum, dolor sit amet consectetur adipisicing
         elit. Assumenda at quasi expedita amet
         repellendus
@@ -185,41 +194,6 @@
         Laborum quis reprehenderit laudantium deleniti iusto dolorem ducimus. Est reiciendis doloremque
         voluptates.
         Tenetur laboriosam alias ab perspiciatis velit. Vero, eum expedita! Assumenda.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, voluptatem. Adipisci
-        mollitia
-        incidunt,
-        laborum delectus fugiat voluptatum molestiae repudiandae unde reprehenderit eveniet non repellendus!
-        Ea
-        harum beatae libero eos ab illo delectus, similique odit labore? Molestias, neque dolores. Odio,
-        magnam.
-      </p>
-      <h2 id="p4">Lorem ipsum dolor sit.</h2>
-      <p><img class="img" src="imgs/blog4.jpg" alt="">Lorem ipsum, dolor sit amet consectetur adipisicing
-        elit. Assumenda at quasi expedita amet
-        repellendus
-        dolore
-        impedit corrupti iure consequatur exercitationem maxime fugit ut, cupiditate est accusantium. Quos
-        at
-        porro
-        nostrum amet debitis beatae corporis dolore tempore doloribus, aspernatur sed hic vitae aliquid sit
-        quo
-        quae
-        est alias totam! Officia, est?</p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione ut repellendus deleniti, aperiam
-        vero
-        vitae, consequuntur hic excepturi sequi officiis odio, neque tenetur. Iure, alias. Molestias, animi
-        magni.
-        Laborum quis reprehenderit laudantium deleniti iusto dolorem ducimus. Est reiciendis doloremque
-        voluptates.
-        Tenetur laboriosam alias ab perspiciatis velit. Vero, eum expedita! Assumenda.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum, voluptatem. Adipisci
-        mollitia
-        incidunt,
-        laborum delectus fugiat voluptatum molestiae repudiandae unde reprehenderit eveniet non repellendus!
-        Ea
-        harum beatae libero eos ab illo delectus, similique odit labore? Molestias, neque dolores. Odio,
-        magnam.
-      </p>
     </div>
   </div>
 </body>
