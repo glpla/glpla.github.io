@@ -5,107 +5,160 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_2666679_7k0jvv91lwu.css">
-  <title>breath light</title>
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+  <title>考核说明</title>
   <style>
-    body {
-      background-color: #f3f4f5;
+    .w {
+      width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1,
+    h4 {
+      text-align: center;
+    }
+
+    h4 {
+      color: #666;
     }
 
     .title {
-      text-align: center;
+      font-size: 20px;
+      box-shadow: 0 2px #f40, 0 6px #f406;
     }
 
-    .breath {
-      margin: 60px auto 0;
-      display: flex;
-      justify-content: center;
+    .cont {
+      color: #333;
+      text-indent: 2em;
     }
 
-    .item {
-      position: relative;
+    .cont:last-child {
+      text-indent: unset;
+    }
+
+    video {
+      width: 100%;
+    }
+
+    .img-box {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .img-box img {
+      width: 100%;
+    }
+
+    .score {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      cursor: pointer;
     }
 
-    .desc {
-      position: absolute;
-      bottom: 50%;
-      text-align: center;
-      font-size: 24px;
-      z-index: -1;
-      margin-top: 1rem;
-      opacity: 0;
-      transition: .4s;
-    }
-
-    .icon {
-      font-size: 24px;
-      color: #f40;
-    }
-
-    .item img {
-      width: 180px;
-      height: 320px;
-      object-fit: cover;
-      margin: 20px;
-      border: 5px solid #fff;
-      overflow: hidden;
-      transition: all ease 0.4s;
-    }
-
-    .item:hover img {
-      transform: scale(1.06);
-      border-radius: 20px;
-      box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.4);
-    }
-
-    .item:hover .desc {
-      opacity: 1;
-      bottom: -40px;
+    .score .img {
+      flex: 1;
+      height: 8px;
+      background-image: url(imgs/dot.png);
+      background-repeat: repeat-x;
     }
   </style>
 </head>
 
 <body>
-  <h1 class="title">一方有难、八方支援</h1>
-  <div class="breath">
-    <div class="item">
+  <h1 class="w">WEB考核须知</h1>
+  <h4 class="w">2021-07-27</h4>
+  <article class="w">
+    <p class="title">总要求</p>
+    <p class="cont">参照下面的效果视频，根据提供的文字信息和图片完成本项目。</p>
+    <video src="./video/effect.mp4" loop muted controls preload poster="imgs/quiz.png"></video>
+    <p class="title">考核要求</p>
+    <p class="cont">整个项目以学号+姓名的方式打包压缩提交，压缩包格式不限，如：202013000000张树彬.rar，其它认定为无效作业，成绩记0分。</p>
+    <p class="title">效果说明</p>
+    <p class="cont">静态效果：水平居中展示所有图片；</p>
+    <p class="cont">动态效果：鼠标hover到某个图片后，图片从矩形放大为圆角矩形，并带有阴影，说明文字出现并移出到底端；鼠标移开后，图片恢复原样；说明文字移入并消失。</p>
+    <p class="title">文字素材</p>
+    <p class="cont">
+    <ul>
+      <li>一方有难、八方支援</li>
+      <li>郑州加油</li>
+      <li>河南加油</li>
+      <li>郑州挺住</li>
+      <li>河南挺住</li>
+    </ul>
+    </p>
+    <p class="title">图片素材</p>
+    <p class="cont">右键另存为，保存到本地</p>
+    <div class="img-box">
       <img src="imgs/blog0.jpg" alt="">
-      <div class="desc">
-        <i class="iconfont icon-like_fill icon"></i>
-        <i>郑州加油</i>
-        <i class="iconfont icon-like_fill icon"></i>
-      </div>
-    </div>
-    <div class="item">
       <img src="imgs/blog1.jpg" alt="">
-      <div class="desc">
-        <i class="iconfont icon-like_fill icon"></i>
-        <i>河南加油</i>
-        <i class="iconfont icon-like_fill icon"></i>
-      </div>
-    </div>
-    <div class="item">
       <img src="imgs/blog2.jpg" alt="">
-      <div class="desc">
-        <i class="iconfont icon-like_fill icon"></i>
-        <i>郑州挺住</i>
-        <i class="iconfont icon-like_fill icon"></i>
-      </div>
-    </div>
-    <div class="item">
       <img src="imgs/blog3.jpg" alt="">
-      <div class="desc">
-        <i class="iconfont icon-like_fill icon"></i>
-        <i>河南挺住</i>
-        <i class="iconfont icon-like_fill icon"></i>
-      </div>
     </div>
-  </div>
+    <p class="title">评分标准</p>
+    <p class="cont">
+    <ol>
+      <li class="score">
+        <div>文件命名规范</div>
+        <div class="img"></div>
+        <div>5分</div>
+      </li>
+      <li class="score">
+        <div>H5结构合理</div>
+        <div class="img"></div>
+        <div>5分</div>
+      </li>
+      <li class="score">
+        <div>采用外部CSS样式</div>
+        <div class="img"></div>
+        <div>5分</div>
+      </li>
+      <li class="score">
+        <div>有初始化CSS样式或者单独的CSS文件</div>
+        <div class="img"></div>
+        <div>5分</div>
+      </li>
+      <li class="score">
+        <div>弹性盒子布局</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>图片显示无变形</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>元素水平居中</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>过渡动画</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>字体图标</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>阴影效果</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>圆角矩形</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>整体效果</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+    </ol>
+    </p>
+  </article>
 
 </body>
 
