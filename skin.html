@@ -5,35 +5,39 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>target skin</title>
+  <title>skin</title>
   <link rel="stylesheet" href="css/reset.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <style>
     body {
       height: 100vh;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    ul {
-      position: fixed;
-      left: 0;
-      bottom: 20px;
-      width: 100vw;
-      height: 40px;
+    .target-box {
+      position: relative;
       display: flex;
       justify-content: center;
-      z-index: 99;
-    }
-
-    ul li {
-      margin: 0 10px;
+      align-content: center;
+      flex-wrap: wrap;
     }
 
     a {
-      display: block;
-      width: 120px;
-      height: 40px;
+      position: relative;
+      width: 100px;
+      height: 60px;
       text-align: center;
       line-height: 40px;
+      margin: .2rem;
+      border: 4px solid #fff;
       color: #fff;
+      transition: .4s;
+      z-index: 1;
+    }
+
+    a:hover {
+      transform: scale(1.2);
     }
 
     .yellow {
@@ -76,20 +80,66 @@
     #blue:target {
       background-color: #079;
     }
+
+    /* js-box */
+    .js-box {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      flex-wrap: wrap;
+      background-repeat: no-repeat;
+      background-size: cover;
+      transition: .4s;
+    }
+
+    .js-box img {
+      width: 100px;
+      height: 60px;
+      object-fit: cover;
+      margin: .2rem;
+      border: 4px solid #fff;
+      transition: .4s;
+      cursor: pointer;
+    }
+
+    .js-box img:hover {
+      transform: scale(1.2);
+    }
   </style>
 </head>
 
 <body>
-  <ul>
-    <li><a class="yellow" href="#yellow">yellow</a></li>
-    <li><a class="red" href="#red">red</a></li>
-    <li><a class="green" href="#green">green</a></li>
-    <li><a class="blue" href="#blue">blue</a></li>
-  </ul>
-  <div class="box" id="yellow"></div>
-  <div class="box" id="red"></div>
-  <div class="box" id="green"></div>
-  <div class="box" id="blue"></div>
+  <div class="target-box">
+    <a class="yellow" href="#yellow">yellow</a>
+    <a class="red" href="#red">red</a>
+    <a class="green" href="#green">green</a>
+    <a class="blue" href="#blue">blue</a>
+    <div class="box" id="yellow"></div>
+    <div class="box" id="red"></div>
+    <div class="box" id="green"></div>
+    <div class="box" id="blue"></div>
+  </div>
+  <div class="js-box">
+    <img src="imgs/1.jpg" alt="">
+    <img src="imgs/2.jpg" alt="">
+    <img src="imgs/3.jpg" alt="">
+    <img src="imgs/4.jpg" alt="">
+    <img src="imgs/5.jpg" alt="">
+    <img src="imgs/6.jpg" alt="">
+    <img src="imgs/7.jpg" alt="">
+    <img src="imgs/8.jpg" alt="">
+    <img src="imgs/9.jpg" alt="">
+  </div>
+  <script>
+    let js_box = document.querySelector('.js-box')
+    let imgs = js_box.querySelectorAll('img')
+    js_box.style.backgroundImage = `url(${imgs[0].src})`
+    for (let i = 0; i < imgs.length; i++) {
+      imgs[i].onclick = function () {
+        js_box.style.backgroundImage = `url(${this.src})`
+      }
+    }
+  </script>
 </body>
 
 </html>

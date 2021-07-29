@@ -8,6 +8,9 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="//at.alicdn.com/t/font_2357817_unf71j5yu1q.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
   <style>
     body {
       background: #111;
@@ -94,18 +97,31 @@
 
     .grid .grid-item:nth-child(1) {
       grid-column: span 2;
+      background-image: url(imgs/swiper0.jpg);
+      background-size: cover;
     }
 
     .grid .grid-item:nth-child(2) {
       grid-row: span 2;
+      background-image: url(imgs/swiper1.jpg);
+      background-size: cover;
     }
 
     .grid .grid-item:nth-child(3) {
       grid-row: span 2;
+      background-image: url(imgs/swiper2.jpg);
+      background-size: cover;
+    }
+
+    .grid .grid-item:nth-child(4) {
+      background-image: url(imgs/swiper3.jpg);
+      background-size: cover;
     }
 
     .grid .grid-item:nth-child(5) {
       grid-column: span 2;
+      background-image: url(imgs/swiper4.jpg);
+      background-size: cover;
     }
 
     div.cont {
@@ -302,23 +318,12 @@
     <div class="gallery-item" style="--i:4"></div>
   </div>
   <div class="w grid">
-    <div class="grid-item">
-      <img src="imgs/swiper0.jpg" alt="">
-    </div>
-    <div class="grid-item">
-      <img src="imgs/swiper1.jpg" alt="">
-    </div>
-    <div class="grid-item">
-      <img src="imgs/swiper2.jpg" alt="">
-    </div>
-    <div class="grid-item">
-      <img src="imgs/swiper3.jpg" alt="">
-    </div>
-    <div class="grid-item">
-      <img src="imgs/swiper4.jpg" alt="">
-    </div>
+    <a class="grid-item" href='imgs/swiper0.jpg'></a>
+    <a class="grid-item" href='imgs/swiper1.jpg'></a>
+    <a class="grid-item" href='imgs/swiper2.jpg'></a>
+    <a class="grid-item" href='imgs/swiper3.jpg'></a>
+    <a class="grid-item" href='imgs/swiper4.jpg'></a>
   </div>
-
   <div class="w cont">
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint ad sit voluptates sed magnam quis iusto vel
       odit repellat quidem ducimus tempora quibusdam dolorem nemo recusandae necessitatibus ab dolorum similique
@@ -430,6 +435,15 @@
     window.addEventListener("scroll", function () {
       let hd = document.querySelector("header");
       hd.classList.toggle("hover", window.scrollY > 0);
+    })
+  </script>
+  <script>
+    $('.grid').magnificPopup({
+      delegate: 'a',
+      type: 'image',
+      gallery: {
+        enabled: true
+      }
     })
   </script>
 </body>
