@@ -19,6 +19,7 @@
     }
 
     h4 {
+      font-weight: normal;
       color: #666;
     }
 
@@ -60,12 +61,29 @@
       background-image: url(imgs/dot.png);
       background-repeat: repeat-x;
     }
+
+    .countdown-box {
+      font-size: 18px;
+      text-align: center;
+      color: #f40;
+      line-height: 40px;
+    }
   </style>
 </head>
 
 <body>
   <h1 class="w">WEB考核须知</h1>
-  <h4 class="w">2021-07-27</h4>
+  <div class="countdown-box">
+    <span>距离2021-09-10 14:00还有</span>
+    <span class="day-box"></span>
+    <span>天</span>
+    <span class="hour-box"></span>
+    <span>小时</span>
+    <span class="min-box"></span>
+    <span>分</span>
+    <span class="sec-box"></span>
+    <span>秒</span>
+  </div>
   <article class="w">
     <p class="title">总要求</p>
     <p class="cont">参照下面的效果视频，根据提供的文字信息和图片完成本项目。</p>
@@ -159,7 +177,31 @@
     </ol>
     </p>
   </article>
-
+  <h4 class="w">cnplaman &copy; 2021-07-27</h4>
+  <script>
+    let flag = false
+    let d = document.querySelector('.day-box')
+    let h = document.querySelector('.hour-box')
+    let m = document.querySelector('.min-box')
+    let s = document.querySelector('.sec-box')
+    let end = new Date('2021-09-10 14:00:00:')
+    countdown()
+    let inter = setInterval(countdown, 1000)
+    function countdown() {
+      let seconds = (end - new Date()) / 1000
+      let day = parseInt(seconds / 60 / 60 / 24)
+      d.innerHTML = day > 9 ? day : '0' + day
+      let hh = parseInt(seconds / 60 / 60 % 24)
+      h.innerHTML = hh > 9 ? hh : '0' + hh
+      let min = parseInt(seconds / 60 % 60)
+      m.innerHTML = min > 9 ? min : '0' + min
+      let sec = parseInt(seconds % 60)
+      s.innerHTML = sec > 9 ? sec : '0' + sec
+      if (seconds <= 0) {
+        clearInterval(inter)
+      }
+    }
+  </script>
 </body>
 
 </html>
