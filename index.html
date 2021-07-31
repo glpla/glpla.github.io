@@ -84,6 +84,9 @@
 
       .sub-title {
         width: 96vw;
+        line-height: 3;
+        background-color: #fa8072;
+        color: #fff;
       }
 
 
@@ -171,32 +174,36 @@
 <body>
   <div id='app'>
     <h1 class="title"><span>{{title.college}}{{title.grade}}{{title.major}}</span><span>{{title.event}}</span></h1>
-    <div class="sub-title">
-      <span>{{admin.name}}，{{admin.cell}}</span>
-      <span>{{title.date}}</span>
+    <div v-for='(item,sn) in len'>
+      <div class="sub-title">
+        <span>{{admin.name}}，{{admin.cell}}</span>
+        <span>{{sn+1}}/{{len}}</span>
+        <span>{{students[sn].intern[len-sn-1].date}}</span>
+      </div>
+      <table class="table" cellspacing='0'>
+        <thead>
+          <tr class="row head">
+            <th v-for='item in list'>{{item}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row" v-for='(item,index) in students'>
+            <td>{{item._id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.cell}}</td>
+            <td>{{item.intern[len-sn-1].sta}}</td>
+            <td>{{item.grad}}</td>
+            <td class="img-cell"><a class="avatar" :href="item.intern[len-sn-1].post"><img
+                  :src="item.intern[len-sn-1].post" alt=""></a></td>
+            <td>{{item.unit.title}}</td>
+            <td>{{item.unit.location}}</td>
+            <td>{{item.unit.contact}}</td>
+            <td>{{item.unit.cell}}</td>
+            <td>{{item.intern[len-sn-1].comments}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table class="table pc" cellspacing='0'>
-      <thead>
-        <tr class="row head">
-          <th v-for='item in list'>{{item}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="row" v-for='(item,index) in students'>
-          <td>{{index+1}}</td>
-          <td>{{item.name}}</td>
-          <td>{{item.cell}}</td>
-          <td>{{item.internSta}}</td>
-          <td>{{item.gradSta}}</td>
-          <td class="img-cell"><a class="avatar" :href="item.avatar"><img :src="item.avatar" alt=""></a></td>
-          <td>{{item.unit}}</td>
-          <td>{{item.location}}</td>
-          <td>{{item.contact}}</td>
-          <td>{{item.contactCell}}</td>
-          <td>{{item.comments}}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
   <script type="module">
     import intern from './data2021/intern.js'
@@ -213,10 +220,11 @@
         list: ['序号', '姓名', '电话', '实习状态', '毕设状态', '实习打卡', '实习公司', '实习地址', '负责人', '联系电话', '点评'],
         title: intern.title,
         admin: intern.admin,
-        students: intern.students
+        students: intern.students,
+        len: intern.students[0].intern.length
       },
       created() {
-        console.log(intern);
+        console.log(intern.students[0].intern.length);
       }
     })
   </script>
