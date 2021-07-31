@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
   <title>考核说明</title>
+  <link rel="stylesheet" href="css/reset.css">
   <style>
     .w {
       width: 1000px;
@@ -21,16 +22,21 @@
     h4 {
       font-weight: normal;
       color: #666;
+      line-height: 4;
     }
 
     .title {
-      font-size: 20px;
+      font-size: 1.2rem;
+      line-height: 1.5;
       box-shadow: 0 2px #f40, 0 6px #f406;
+      border-bottom: 2px solid #f40;
+      margin-bottom: .4rem;
     }
 
     .cont {
       color: #333;
       text-indent: 2em;
+      text-align: justify;
     }
 
     .cont:last-child {
@@ -46,10 +52,6 @@
       grid-template-columns: repeat(4, 1fr);
     }
 
-    .img-box img {
-      width: 100%;
-    }
-
     .score {
       display: flex;
       align-items: center;
@@ -63,10 +65,26 @@
     }
 
     .countdown-box {
-      font-size: 18px;
+      font-size: 1rem;
       text-align: center;
       color: #f40;
-      line-height: 40px;
+      line-height: 1.5;
+    }
+
+    @media screen and (max-width:768px) {
+      html {
+        font-size: 14px;
+      }
+
+      .w {
+        width: 96vw;
+      }
+
+      .countdown-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -75,45 +93,43 @@
   <h1 class="w">WEB考核须知</h1>
   <div class="countdown-box">
     <span>距离2021-09-10 14:00还有</span>
-    <span class="day-box"></span>
-    <span>天</span>
-    <span class="hour-box"></span>
-    <span>小时</span>
-    <span class="min-box"></span>
-    <span>分</span>
-    <span class="sec-box"></span>
-    <span>秒</span>
+    <span>
+      <span class="day-box"></span>
+      <span>天</span>
+      <span class="hour-box"></span>
+      <span>小时</span>
+      <span class="min-box"></span>
+      <span>分</span>
+      <span class="sec-box"></span>
+      <span>秒</span>
+    </span>
   </div>
   <article class="w">
-    <p class="title">总要求</p>
+    <h2 class="title">总要求</h2>
     <p class="cont">参照下面的效果视频，根据提供的文字信息和图片完成本项目。</p>
     <video src="./video/effect.mp4" loop muted controls preload poster="imgs/quiz.png"></video>
-    <p class="title">考核要求</p>
+    <h2 class="title">考核要求</h2>
     <p class="cont">整个项目以学号+姓名的方式打包压缩提交，压缩包格式不限，如：202013000000张树彬.rar，其它认定为无效作业，成绩记0分。</p>
-    <p class="title">效果说明</p>
+    <h2 class="title">效果说明</h2>
     <p class="cont">静态效果：水平居中展示所有图片；</p>
     <p class="cont">动态效果：鼠标hover到某个图片后，图片从矩形放大为圆角矩形，并带有阴影，说明文字出现并移出到底端；鼠标移开后，图片恢复原样；说明文字移入并消失。</p>
-    <p class="title">文字素材</p>
-    <p class="cont">
-    <ul>
-      <li>一方有难、八方支援</li>
-      <li>郑州加油</li>
-      <li>河南加油</li>
-      <li>郑州挺住</li>
-      <li>河南挺住</li>
-    </ul>
-    </p>
-    <p class="title">图片素材</p>
+    <h2 class="title">文字素材</h2>
+    <p class="cont">一方有难、八方支援</p>
+    <p class="cont">郑州加油</p>
+    <p class="cont">河南加油</p>
+    <p class="cont">郑州挺住</p>
+    <p class="cont">河南挺住</p>
+    <h2 class="title">图片素材</h2>
     <p class="cont">右键另存为，保存到本地</p>
     <div class="img-box">
-      <img src="imgs/blog0.jpg" alt="">
-      <img src="imgs/blog1.jpg" alt="">
-      <img src="imgs/blog2.jpg" alt="">
-      <img src="imgs/blog3.jpg" alt="">
+      <img src="imgs/blog0.jpg" alt="blog">
+      <img src="imgs/blog1.jpg" alt="blog">
+      <img src="imgs/blog2.jpg" alt="blog">
+      <img src="imgs/blog3.jpg" alt="blog">
     </div>
-    <p class="title">评分标准</p>
+    <h2 class="title">评分标准</h2>
     <p class="cont">
-    <ol>
+    <ul>
       <li class="score">
         <div>文件命名规范</div>
         <div class="img"></div>
@@ -174,7 +190,7 @@
         <div class="img"></div>
         <div>10分</div>
       </li>
-    </ol>
+    </ul>
     </p>
   </article>
   <h4 class="w">cnplaman &copy; 2021-07-27</h4>

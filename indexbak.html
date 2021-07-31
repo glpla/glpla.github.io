@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <title>WEB练习</title>
+  <link rel="stylesheet" href="css/reset.css">
   <style>
     body {
       margin: 0;
@@ -14,25 +15,32 @@
       background-color: #f2f3f4;
     }
 
+    h4 {
+      font-weight: normal;
+      text-align: center;
+      line-height: 4;
+    }
+
     .nav-box {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
+      gap: 1rem;
       list-style: none;
       width: 1000px;
-      margin: 40px auto;
+      margin: 2rem auto;
     }
 
     .nav-item {
-      display: block;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-decoration: none;
       color: inherit;
       height: 150px;
-      line-height: 150px;
-      text-align: center;
       text-transform: capitalize;
       color: #fff;
-      font-size: 18px;
+      font-size: 1.2rem;
       background-color: #40739e;
       border-radius: 1rem;
       border: 4px solid #fff;
@@ -44,106 +52,247 @@
       transform: scale(1.06);
       background-color: #ff9f43;
     }
+
+    .desc {
+      opacity: 1;
+      transition: .4s;
+    }
+
+    .tips {
+      position: absolute;
+      opacity: 0;
+      transition: .4s;
+      z-index: 1;
+    }
+
+    .nav-item:hover .desc {
+      opacity: 0;
+      transform: scale(2);
+    }
+
+    .nav-item:hover .tips {
+      opacity: 1;
+      transform: scale(2);
+    }
+
+    @media screen and (max-width:768px) {
+      html {
+        font-size: 12px;
+      }
+
+      .nav-box {
+        grid-template-columns: repeat(3, 1fr);
+        gap: .6rem;
+        width: 96vw;
+        margin: 0rem auto;
+      }
+
+      .nav-item {
+        height: 4rem;
+      }
+
+      .desc {
+        display: none;
+      }
+
+      .tips {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 
 <body>
   <ul class="nav-box">
     <li class="nav">
-      <a class="nav-item" href="intern.html">intern</a>
+      <a class="nav-item" href="intern.html">
+        <div class="desc">intern</div>
+        <div class="tips">实习</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="quiz.html">quiz</a>
+      <a class="nav-item" href="quiz.html">
+        <div class='desc'>quiz</div>
+        <div class='tips'>考核</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="box.html">box model</a>
+      <a class="nav-item" href="box.html">
+        <div class='desc'>box model</div>
+        <div class='tips'>盒模型</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="a.html">&lt;a&gt;</a>
+      <a class="nav-item" href="a.html">
+        <div class='desc'>&lt;a&gt;</div>
+        <div class='tips'>超链接</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="img.html">&lt;img&gt;</a>
+      <a class="nav-item" href="img.html">
+        <div class='desc'>&lt;img&gt;</div>
+        <div class='tips'>图片</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="background.html">background</a>
+      <a class="nav-item" href="background.html">
+        <div class='desc'>background</div>
+        <div class='tips'>背景</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="border.html">border</a>
+      <a class="nav-item" href="border.html">
+        <div class='desc'>border</div>
+        <div class='tips'>边框</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="font.html">font</a>
+      <a class="nav-item" href="text.html">
+        <div class='desc'>text</div>
+        <div class='tips'>文字</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="text.html">text</a>
+      <a class="nav-item" href="font.html">
+        <div class='desc'>font</div>
+        <di class='tips'>字体图标</di>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="sprite.html">sprite</a>
+      <a class="nav-item" href="sprite.html">
+        <div class='desc'>sprite</div>
+        <div class='tips'>精灵图</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="form.html">form</a>
+      <a class="nav-item" href="form.html">
+        <div class='desc'>form</div>
+        <div class='tips'>表单</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="flex.html">flex</a>
+      <a class="nav-item" href="flex.html">
+        <div class='desc'>flex</div>
+        <di class='tips'>弹性布局</di>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="grid.html">grid</a>
+      <a class="nav-item" href="grid.html">
+        <div class='desc'>grid</div>
+        <di class='tips'>网格布局</di>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="sidebar.html">sidebar</a>
+      <a class="nav-item" href="sidebar.html">
+        <div class='desc'>position</div>
+        <div class='tips'>定位</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="slider.html">slider</a>
+      <a class="nav-item" href="slider.html">
+        <div class='desc'>swiper</div>
+        <div class='tips'>轮播</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="gallery.html">swiper</a>
+      <a class="nav-item" href="transform rotate.html">
+        <div class='desc'>js swiper</div>
+        <div class='tips'>3D轮播</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="transform rotate.html">js swiper</a>
+      <a class="nav-item" href="transition.html">
+        <div class='desc'>transition</div>
+        <di class='tips'>过渡动画</di>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="transition.html">transition</a>
+      <a class="nav-item" href="animation.html">
+        <div class='desc'>animation</div>
+        <div class='tips'>帧动画</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="animation.html">animation</a>
+      <a class="nav-item" href="transform.html">
+        <div class='desc'>transform</div>
+        <div class='tips'>变形</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="transform.html">transform</a>
+      <a class="nav-item" href="gallery.html">
+        <div class='desc'>gallery</div>
+        <div class='tips'>照片墙</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="cube.html">cube</a>
+      <a class="nav-item" href="cube.html">
+        <div class='desc'>cube</div>
+        <div class='tips'>3D魔方</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="fixed.html">website</a>
+      <a class="nav-item" href="cover.html">
+        <div class='desc'>cover</div>
+        <div class='tips'>封面</div>
+      </a>
+    </li>
+
+    <li class="nav">
+      <a class="nav-item" href="cart.html">
+        <div class='desc'>cart</div>
+        <div class='tips'>购物车</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="cover.html">cover</a>
+      <a class="nav-item" href="accordion.html">
+        <div class='desc'>accordion</div>
+        <div class='tips'>手风琴</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="cheerup.html">cheerup</a>
+      <a class="nav-item" href="dogears.html">
+        <div class='desc'>dog ears</div>
+        <div class='tips'>折角</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="cart.html">cart</a>
+      <a class="nav-item" href="multimedia.html">
+        <div class='desc'>multimedia</div>
+        <div class='tips'>多媒体</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="accordion.html">accordion</a>
+      <a class="nav-item" href="skin.html">
+        <div class='desc'>skin</div>
+        <div class='tips'>换肤</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="dogears.html">dog ears</a>
+      <a class="nav-item" href="ripple.html">
+        <div class='desc'>ripple</div>
+        <div class='tips'>涟漪</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="multimedia.html">multimedia</a>
+      <a class="nav-item" href="echart.html">
+        <div class='desc'>eChart</div>
+        <div class='tips'>图表</div>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="skin.html">skin</a>
+      <a class="nav-item" href="cheerup.html">
+        <div class='desc'>cheerup</div>
+        <di class='tips'>河南加油</di>
+      </a>
     </li>
     <li class="nav">
-      <a class="nav-item" href="ripple.html">ripple</a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="echart.html">eChart</a>
+      <a class="nav-item" href="fixed.html">
+        <div class='desc'>website</div>
+        <di class='tips'>个人网站</di>
+      </a>
     </li>
   </ul>
-
+  <h4 class="w">cnplaman &copy; 2021-07-27</h4>
 </body>
 
 </html>
