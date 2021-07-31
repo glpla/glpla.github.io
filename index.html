@@ -114,7 +114,7 @@
 
       td {
         position: relative;
-        padding-left: 20%;
+        padding-left: 22%;
         border-bottom: 1px solid rgba(0, 0, 0, .2);
       }
 
@@ -181,7 +181,7 @@
       <div class="sub-title">
         <span>{{admin.name}}，{{admin.cell}}</span>
         <span>{{sn+1}}/{{len}}</span>
-        <span>{{students[sn].intern[len-sn-1].date}}</span>
+        <span>{{students[sn].intern[sn].date}}</span>
       </div>
       <table class="table" cellspacing="0" cellpadding="10">
         <thead>
@@ -194,15 +194,15 @@
             <td>{{item._id}}</td>
             <td>{{item.name}}</td>
             <td>{{item.cell}}</td>
-            <td>{{item.intern[len-sn-1].sta}}</td>
+            <td>{{item.intern[sn].sta}}</td>
             <td>{{item.grad}}</td>
-            <td class="img-cell"><a class="avatar" :href="item.intern[len-sn-1].post"><img
-                  :src="item.intern[len-sn-1].post" alt=""></a></td>
+            <td class="img-cell"><a class="avatar" :href="item.intern[sn].post"><img :src="item.intern[sn].post"
+                  alt=""></a></td>
             <td>{{item.unit.title}}</td>
             <td>{{item.unit.location}}</td>
             <td>{{item.unit.contact}}</td>
             <td>{{item.unit.cell}}</td>
-            <td>{{item.intern[len-sn-1].comments}}</td>
+            <td>{{item.intern[sn].comments}}</td>
           </tr>
         </tbody>
       </table>
