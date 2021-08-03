@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>media</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/reset.css">
+  <style>
+    body {
+      height: 100vh;
+      background-color: #f3f4f5;
+    }
+
+    header {
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 2px solid #16a085;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .4);
+    }
+
+    .w {
+      width: 90vw;
+      margin: 0 auto;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      margin-right: auto;
+    }
+
+    .menu {
+      display: flex;
+    }
+
+    .menu-item {
+      display: block;
+      height: 40px;
+      padding: 0 10px;
+      text-transform: uppercase;
+    }
+
+    .menu-item:hover {
+      color: #16a085;
+    }
+
+    .burgur {
+      display: none;
+      position: relative;
+      width: 30px;
+      height: 4px;
+      background-color: #16a085;
+    }
+
+    .burgur::after,
+    .burgur::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -8px;
+      width: 100%;
+      height: 100%;
+      background-color: inherit;
+    }
+
+    .burgur::after {
+      top: unset;
+      bottom: -8px;
+    }
+
+    .cont {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 100px;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .cont-item {
+      background-color: #f40;
+    }
+
+    @media screen and (max-width:1024px) {
+      .cont {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+    }
+
+    @media screen and (max-width:768px) {
+      .cont {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .burgur {
+        display: block;
+      }
+
+      .menu {
+        display: none;
+      }
+    }
+
+    /* not 375 */
+    @media screen and (max-width:376px) {
+      .cont {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="navbar w">
+      <a href="#" class="logo">LOGO</a>
+      <ul class="menu">
+        <li><a class="menu-item" href="#">home</a></li>
+        <li><a class="menu-item" href="#">product</a></li>
+        <li><a class="menu-item" href="#">download</a></li>
+        <li><a class="menu-item" href="#">document</a></li>
+        <li><a class="menu-item" href="#">contact</a></li>
+      </ul>
+      <div class="burgur"></div>
+    </div>
+  </header>
+  <section class="cont w">
+    <div class="cont-item"></div>
+    <div class="cont-item"></div>
+    <div class="cont-item"></div>
+    <div class="cont-item"></div>
+    <div class="cont-item"></div>
+    <div class="cont-item"></div>
+    <div class="cont-item"></div>
+    <div class="cont-item"></div>
+    <div class="cont-item"></div>
+    <div class="cont-item"></div>
+    <div class="cont-item"></div>
+    <div class="cont-item"></div>
+  </section>
+</body>
+
+</html>
