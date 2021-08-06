@@ -20,12 +20,8 @@
     }
 
     .sub-title {
-      display: flex;
-      justify-content: space-between;
-      width: 96vw;
-      margin: 0 auto;
-      font-size: 1rem;
-      line-height: 1.5;
+      text-align: center;
+      line-height: 2;
     }
 
     .gallery {
@@ -40,14 +36,17 @@
       padding: 1rem;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
       border-radius: 1rem;
       box-shadow: 0 0 1rem rgba(0, 0, 0, .4);
     }
 
     .gallery-item img {
       height: 240px;
+    }
+
+    .gallery-item .time {
+      display: flex;
+      justify-content: space-between;
     }
 
     .table {
@@ -68,7 +67,7 @@
     }
 
     td {
-      padding-left: 10px;
+      text-align: center;
       border-bottom: 1px solid rgba(0, 0, 0, .2);
     }
 
@@ -102,14 +101,6 @@
         justify-content: center;
       }
 
-      .sub-title {
-        width: 96vw;
-        line-height: 3;
-        padding: 0 1vw;
-        background-color: #fa8072;
-        color: #fff;
-      }
-
       .gallery {
         grid-template-columns: repeat(1, 1fr);
       }
@@ -137,6 +128,7 @@
       td {
         position: relative;
         padding-left: 22%;
+        text-align: unset;
         border-bottom: 1px solid rgba(0, 0, 0, .2);
       }
 
@@ -188,10 +180,6 @@
       td:nth-of-type(10)::before {
         content: '联系电话';
       }
-
-      td:nth-of-type(11)::before {
-        content: '点评';
-      }
     }
   </style>
 </head>
@@ -199,35 +187,40 @@
 <body>
   <div id='app'>
     <h1 class="title"><span>{{title.college}}{{title.grade}}{{title.major}}</span><span>{{title.event}}</span></h1>
+    <div class="sub-title">指导老师：{{admin.name}}-{{admin.cell}}</div>
     <div class="gallery">
       <div class="gallery-item">
         <a href="imgs/intern/intern20210806.jpg">
           <img src="imgs/intern/intern20210806.jpg" alt="">
         </a>
-        <p>杨广昭 卢俊铭</p>
-        <p>2021-08-06</p>
+        <p>点评：注意疫情防护</p>
+        <div class="time">
+          <span>杨广昭 卢俊铭</span>
+          <span>2021-08-06</span>
+        </div>
       </div>
       <div class="gallery-item">
         <a href="imgs/intern/l0.jpg">
           <img src="imgs/intern/l0.jpg" alt="">
         </a>
-        <p>卢俊铭</p>
-        <p>2021-07-27</p>
+        <p>点评：注意签到</p>
+        <div class="time">
+          <span>卢俊铭</span>
+          <span>2021-07-27</span>
+        </div>
       </div>
       <div class="gallery-item">
         <a href="imgs/intern/y0.jpg">
           <img src="imgs/intern/y0.jpg" alt="">
         </a>
-        <p>杨广昭</p>
-        <p>2021-07-27</p>
+        <p>点评：注意签到</p>
+        <div class="time">
+          <span>杨广昭</span>
+          <span>2021-07-27</span>
+        </div>
       </div>
     </div>
     <div v-for='(item,sn) in len'>
-      <div class="sub-title">
-        <span>{{admin.name}}，{{admin.cell}}</span>
-        <span>{{sn+1}}/{{len}}</span>
-        <span>{{students[sn].intern[sn].date}}</span>
-      </div>
       <table class="table" cellspacing="0" cellpadding="10">
         <thead>
           <tr class="row head">
@@ -247,7 +240,6 @@
             <td>{{item.unit.location}}</td>
             <td>{{item.unit.contact}}</td>
             <td>{{item.unit.cell}}</td>
-            <td>{{item.intern[sn].comments}}</td>
           </tr>
         </tbody>
       </table>
@@ -261,7 +253,7 @@
     let app = new Vue({
       el: '#app',
       data: {
-        list: ['序号', '姓名', '电话', '实习状态', '毕设状态', '实习打卡', '实习公司', '实习地址', '负责人', '联系电话', '点评'],
+        list: ['序号', '姓名', '电话', '实习状态', '毕设状态', '实习打卡', '实习公司', '实习地址', '负责人', '联系电话'],
         title: intern.title,
         admin: intern.admin,
         students: intern.students,

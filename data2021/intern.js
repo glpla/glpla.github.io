@@ -21,8 +21,7 @@ const intern = {
     intern: [{
       date: '2021-07-27',
       sta: '已实习',
-      post: 'imgs/intern/y1.jpg',
-      comments: '请按时签到'
+      post: 'imgs/intern/y1.jpg'
     }],
     unit: {
       title: '东软睿道教育信息技术有限公司',
@@ -39,8 +38,7 @@ const intern = {
     intern: [{
       date: '2021-07-27',
       sta: '已实习',
-      post: 'imgs/intern/l1.jpg',
-      comments: '请按时签到'
+      post: 'imgs/intern/l1.jpg'
     }],
     unit: {
       title: '东软睿道教育信息技术有限公司',
