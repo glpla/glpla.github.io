@@ -3,7 +3,7 @@ const intern = {
     college: '桂林学院理工学院',
     grade: '2018级',
     major: '软件工程',
-    event: '实习情况'
+    event: '自主实习情况'
   },
   admin: {
     name: '张树彬',
