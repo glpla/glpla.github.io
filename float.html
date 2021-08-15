@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Float</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    h1 {
+      text-align: center;
+    }
+
+    .w {
+      width: 96vw;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    dt {
+      font-weight: 700;
+    }
+
+    .cont .red {
+      width: 50px;
+      height: 100px;
+      background-color: #f40;
+      float: left;
+    }
+
+    .cont .yellow {
+      background-color: #ff0;
+      height: 100px;
+    }
+
+    .cont .blue {
+      width: 50px;
+      height: 100px;
+      background-color: #040;
+      float: right;
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+
+    .float {
+      float: left;
+    }
+
+    .icon {
+      width: 2em;
+      height: 2em;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
+      margin-right: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Float Layout</h1>
+  <dl class="w">
+    <dt>特性说明</dt>
+    <dd><svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconbomb"></use>
+      </svg>浮动元素会脱离文档流document flow；</dd>
+    <dd><svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconbomb"></use>
+      </svg>布局时，元素的先后顺序不一样，最后呈现的布局也不一样；</dd>
+    <dd><svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconbomb"></use>
+      </svg>布局时，必须要清除浮动。你不清试试！</dd>
+    <dd><svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconbomb"></use>
+      </svg>现在：仅仅需要图文混排时，才会使用float；</dd>
+    <dd><svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconbomb"></use>
+      </svg>其它布局请采用弹性盒子flex或网格grid；<span>只推荐这俩种</span></dd>
+  </dl>
+  <h2 class="w">示例</h2>
+  <p class="w">以下两个demo的元素用到的css完全相同(怎么看样式？<svg class="icon" aria-hidden="true">
+      <use xlink:href="#iconbomb"></use>
+    </svg>)，只是元素在文档流中顺序发生了变化，但是呈现的结果完全不一样。</p>
+  <p class="w">本例中没有清除浮动</p>
+  <div class="w code">
+    <xmp>
+      <div class="red"></div>
+      <div class="yellow"></div>
+      <div class="blue"></div>
+    </xmp>
+  </div>
+  <div class="w cont">
+    <div class="red"></div>
+    <div class="yellow"></div>
+    <div class="blue"></div>
+  </div>
+  <div class="w code">
+    <xmp>
+      <div class="red"></div>
+      <div class="blue"></div>
+      <div class="yellow"></div>
+    </xmp>
+  </div>
+  <div class="w cont">
+    <div class="red"></div>
+    <div class="blue"></div>
+    <div class="yellow"></div>
+  </div>
+  <h2 class="w">正确打开方式</h2>
+  <h3 class="w">图文未混排</h3>
+  <div class="w cont">
+    <img src="imgs/bg-book.jpg" alt="">
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente quos recusandae ducimus cupiditate obcaecati
+    molestiae fugit praesentium nostrum ratione vel. Nihil sequi blanditiis tempora doloremque reprehenderit illum
+    distinctio amet exercitationem, asperiores praesentium. Praesentium quaerat impedit a recusandae id dicta dolores,
+    illo quibusdam earum quam! Distinctio facilis corporis libero aperiam molestias, nemo quasi tempora atque?
+    Temporibus, suscipit assumenda! Cumque laborum beatae exercitationem. Alias nobis enim exercitationem, quas,
+    veritatis eaque, nam aperiam cumque eius esse blanditiis! Quos veritatis sunt hic explicabo ullam quas nam
+    architecto corrupti? Optio, sit quam rem autem veniam magni fugit unde, cumque doloribus vel sapiente excepturi
+    adipisci id.
+  </div>
+  <h3 class="w">图文混排</h3>
+  <div class="w cont">
+    <img class="float" src="imgs/bg-book.jpg" alt="">
+    &lt;img&gt;左浮动。Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente quos recusandae ducimus
+    cupiditate obcaecati
+    molestiae fugit praesentium nostrum ratione vel. Nihil sequi blanditiis tempora doloremque reprehenderit illum
+    distinctio amet exercitationem, asperiores praesentium. Praesentium quaerat impedit a recusandae id dicta dolores,
+    illo quibusdam earum quam! Distinctio facilis corporis libero aperiam molestias, nemo quasi tempora atque?
+    Temporibus, suscipit assumenda! Cumque laborum beatae exercitationem. Alias nobis enim exercitationem, quas,
+    veritatis eaque, nam aperiam cumque eius esse blanditiis! Quos veritatis sunt hic explicabo ullam quas nam
+    architecto corrupti? Optio, sit quam rem autem veniam magni fugit unde, cumque doloribus vel sapiente excepturi
+    adipisci id.
+  </div>
+  <h1>再用float来布局</h1>
+  <h1><svg class="icon" aria-hidden="true">
+      <use xlink:href="#iconbomb"></use>
+    </svg><svg class="icon" aria-hidden="true">
+      <use xlink:href="#iconbomb"></use>
+    </svg><svg class="icon" aria-hidden="true">
+      <use xlink:href="#iconbomb"></use>
+    </svg></h1>
+  <h1>你</h1>
+  <script src="//at.alicdn.com/t/font_2357817_iy7q9b5om4.js"></script>
+</body>
+
+</html>
