@@ -13,14 +13,25 @@
   <style>
     .cont {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
     }
 
-    .cont .item {
+    .cont a {
+      width: 300px;
+      height: 400px;
       padding: 1rem;
       background-color: #fff;
-      min-height: 260px;
+    }
+
+    .ad {
+      background-image:
+        radial-gradient(35rem circle at -10% 15%, transparent 60%, #f405 0),
+        radial-gradient(30rem circle at 10% 25%, transparent 60%, #f409 0),
+        radial-gradient(30rem circle at 20% 25%, transparent 60%, #f40 0);
+    }
+
+    .cont .item {
       transition: .4s;
       display: flex;
       flex-direction: column;
@@ -39,33 +50,21 @@
       background-image: linear-gradient(135deg, #e1231b 50%, transparent 0);
     }
 
-    .cont .new {
+    .new {
       font-weight: 400;
       color: #fff;
       font-size: 120%;
     }
 
-    .cont .old {
+    .old {
       text-decoration: line-through;
       color: #888;
-    }
-
-    .ad {
-      min-height: 260px;
-      background-color: #fff;
-      background-image:
-        radial-gradient(23rem circle at 10% 10%, transparent 60%, #f405 0),
-        radial-gradient(23rem circle at 20% 10%, transparent 60%, #f409 0),
-        radial-gradient(23rem circle at 30% 10%, transparent 60%, #f40 0);
     }
 
     .center {
       overflow: hidden;
       position: relative;
-      min-height: 260px;
-      padding: 1rem 1rem 0;
-      background-color: #fff;
-      background-image: radial-gradient(17rem circle at 50% 100%, #e1251b 70%, #fff 0);
+      background-image: radial-gradient(35rem circle at 50% 90%, #e1251b 50%, #fff 0);
       display: flex;
       flex-direction: column;
     }
@@ -77,7 +76,7 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-image: radial-gradient(18rem circle at 50% 6%, transparent 80%, #e1251b 0);
+      background-image: radial-gradient(35rem circle at 50% 25%, transparent 50%, #e1251b 0);
       filter: drop-shadow(0 0 1rem #666);
     }
 
@@ -88,7 +87,7 @@
 
     .center .center-cont {
       position: relative;
-      flex-grow: 1;
+      flex: 1;
       border-bottom: 2px dotted #e1251b;
       background-color: #f6f6f6;
     }
@@ -113,103 +112,28 @@
       right: -0.5rem;
     }
 
-    .card {
-      min-height: 260px;
-      background-color: #fff;
-      background-image:
-        radial-gradient(23rem circle at 20% 10%, transparent 60%, #f405 0),
-        radial-gradient(23rem circle at 40% 10%, transparent 60%, #f40 0);
-    }
+    @media screen and (max-width:768px) {
+      .w {
+        width: 90vw;
+      }
 
-    .test {
-      margin: 100px auto;
-      width: 500px;
-      height: 250px;
-      background-color: #f40;
-      background-image: radial-gradient(circle at 0% 0%, #fff 50%, transparent 0);
+      .cont {
+        grid-template-columns: repeat(1, 1fr);
+      }
     }
   </style>
 </head>
 
 <body>
-  <header class="w">
-    <div class="title">JD</div>
-    <ul>
-      <li>
-        <a class="item" href="#">您好，请登录</a><a class="item red reg" href="#">免费注册</a>
-      </li>
-      <li class="spacer">|</li>
-      <li><a class="item" href="#">我的订单</a></li>
-      <li class="spacer">|</li>
-      <li class="mine">
-        <a class="item link" href="#">我的京东 <span class="iconfont iconIcon-KeyboardArrow-Down-Rounded-copy"></span></a>
-        <ul class="inner-nav">
-          <li><a href="javascript:;">inner nav</a></li>
-          <li><a href="javascript:;">inner nav</a></li>
-          <li><a href="javascript:;">inner nav</a></li>
-          <li><a href="javascript:;">inner nav</a></li>
-        </ul>
-      </li>
-      <li class="spacer">|</li>
-      <li><a class="item" href="#">京东会员</a></li>
-      <li class="spacer">|</li>
-      <li class="mine">
-        <a class="item red link" href="#">企业采购 <span
-            class="iconfont iconIcon-KeyboardArrow-Down-Rounded-copy"></span></a>
-        <ul class="inner-nav">
-          <li><a href="javascript:;">inner nav</a></li>
-          <li><a href="javascript:;">inner nav</a></li>
-          <li><a href="javascript:;">inner nav</a></li>
-          <li><a href="javascript:;">inner nav</a></li>
-        </ul>
-      </li>
-      <li class="spacer">|</li>
-      <li class="mine">
-        <a class="item link" href="#">客服服务 <span class="iconfont iconIcon-KeyboardArrow-Down-Rounded-copy"></span></a>
-        <ul class="inner-nav">
-          <li><a href="javascript:;">inner nav</a></li>
-          <li><a href="javascript:;">inner nav</a></li>
-          <li><a href="javascript:;">inner nav</a></li>
-          <li><a href="javascript:;">inner nav</a></li>
-        </ul>
-      </li>
-      <li class="spacer">|</li>
-      <li class="mine">
-        <a class="item link" href="#">网站导航 <span class="iconfont iconIcon-KeyboardArrow-Down-Rounded-copy"></span></a>
-        <ul class="inner-nav">
-          <li><a href="javascript:;">inner nav</a></li>
-          <li><a href="javascript:;">inner nav</a></li>
-          <li><a href="javascript:;">inner nav</a></li>
-          <li><a href="javascript:;">inner nav</a></li>
-        </ul>
-      </li>
-      <li class="spacer">|</li>
-      <li><a class="item" href="#">手机京东</a></li>
-    </ul>
-  </header>
-  <nav class="w">
-    <div class="logo-box">
-      <img src="imgs/logo.jpg" alt="">
-    </div>
-    <div class="sql">
-      <input class="ipt" type="text" placeholder="your keywords here">
-      <button class="btn">
-        <span class="iconfont iconsearch1"></span>
-      </button>
-    </div>
-    <button class="cart">
-      <span class="iconfont iconCart"></span>购物车
-      <em>1</em>
-    </button>
-  </nav>
   <div class="cont w">
     <a class="ad"></a>
     <a class="item">
-      <img src="imgs/blog0.jpg" alt="">
-      <p>Lorem ipsum dolor</p>
+      <img src="imgs/blue.jpg" alt="">
+      <p>这款低帮运动鞋采用经典GG帆布材质，搭配标志性配色组合。设计中融合了多种品牌经典元素，让人联想到品牌与运动和休闲世界的紧密联系。
+      </p>
       <div class="price-box">
-        <div class="new">&yen;666</div>
-        <div class="old">&yen;888</div>
+        <div class="new">&yen;640</div>
+        <div class="old">&yen;988</div>
       </div>
     </a>
     <a class="center">
@@ -218,17 +142,7 @@
       <div class="center-cont"></div>
       <div class="center-cont"></div>
     </a>
-    <a class="item">
-      <img src="imgs/blog3.jpg" alt="">
-      <p>Lorem ipsum dolor</p>
-      <div class="price-box">
-        <div class="new">&yen;666</div>
-        <div class="old">&yen;888</div>
-      </div>
-    </a>
-    <a class="card"></a>
   </div>
-  <div class="test"></div>
 </body>
 
 </html>
