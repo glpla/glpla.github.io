@@ -5,46 +5,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>border effect</title>
+  <title>border</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
   <style>
-    .old-wrap {
-      position: relative;
-      width: 100%;
-      height: 40px;
-      background-color: #ddd;
-      top: 28px;
-      z-index: 1;
-      margin: 20px auto;
+    .wrap {
+      max-width: 1100px;
+      width: 96vw;
+      margin: 1rem auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      justify-items: center;
     }
 
-    .old-shadow {
-      width: 100%;
-      height: 30px;
-      background-color: rgb(213, 247, 23);
-      box-shadow: 0px 2px 30px #666;
-      margin: 20px auto;
+    .item {
+      width: 250px;
+      height: 150px;
     }
 
-    .section {
-      box-sizing: border-box;
-      padding: 10px;
-      width: 40%;
-      height: 300px;
-      margin: 40px auto;
+    .up {
+      background-color: #f06;
+      border-radius: 50%/100% 100% 0% 0%;
+    }
+
+    .down {
+      background-color: #f06;
+      border-radius: 50%/0 0 100% 100%;
+    }
+
+    .left {
+      background-color: #f06;
+      border-radius: 100% 0% 0% 100%/50%;
+    }
+
+    .right {
+      background-color: #f06;
+      border-radius: 0% 100% 100% 0%/50%;
+    }
+
+    /* 由于这四个角的半径在水平和垂直方向上都是相同的，我们甚至都不需要使用斜杠语法了  */
+    .leftup {
+      background-color: #f06;
+      border-radius: 100% 0% 0% 0%;
+    }
+
+    .rightup {
+      background-color: #f06;
+      border-radius: 0% 100% 0% 0%;
+    }
+
+    .leftdown {
+      background-color: #f06;
+      border-radius: 0% 0% 0% 100%;
+    }
+
+    .rightdown {
+      background-color: #f06;
+      border-radius: 0% 0% 100% 0%;
+    }
+
+    .border-color {
+      border: 10px solid;
+      border-image: linear-gradient(#097, #f40) 30 100;
+    }
+
+    .border-img {
+      border: 10px solid;
+      border-image: url(imgs/demo.jpg) 20 120;
+    }
+
+    .border-shadow {
       background: #fff;
-      object-fit: cover;
-      overflow: hidden;
-    }
-
-    .shadow {
+      padding: 10px;
       position: relative;
       border: 1px solid #ddd;
     }
 
-    .shadow::after,
-    .shadow::before {
+    .border-shadow::after,
+    .border-shadow::before {
       content: '';
       position: absolute;
       top: 50%;
@@ -56,88 +95,76 @@
       z-index: -1;
     }
 
-    .rotate-shadow {
+    .border-rotate {
+      padding: 10px;
+      background: #fff;
       position: relative;
       border: 1px solid #ddd;
     }
 
-    .rotate-shadow::after {
+    .border-rotate::after,
+    .border-rotate::before {
       content: '';
       position: absolute;
       top: 50%;
+      bottom: 10px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 1);
+      z-index: -1;
+    }
+
+    .border-rotate::before {
       left: 10px;
       right: 50%;
-      bottom: 10px;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 1);
       transform: skew(-8deg, -8deg);
-      z-index: -1;
     }
 
-    .rotate-shadow::before {
-      content: '';
-      position: absolute;
-      top: 50%;
+    .border-rotate::after {
       left: 50%;
       right: 10px;
-      bottom: 10px;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 1);
       transform: skew(8deg, 8deg);
-      z-index: -1;
     }
 
-    .flex {
-      width: 80%;
-      margin: 40px auto;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .seg {
-      box-sizing: border-box;
-      flex: 1;
+    /* outline会拓展元素空间 */
+    .inner {
       padding: 10px;
-      width: 50%;
-      height: 300px;
-      margin: 20px;
-      background: #fff;
+      background: #f06;
+      border-radius: .8em;
+      border: 1px solid #655;
+      box-shadow: 0 0 0 10px #655;
+      outline: 10px solid #655;
     }
 
-    .border-img>div:nth-child(1) {
-      width: 600px;
-      height: 100px;
-      margin: 10px auto;
-      border: 10px solid;
-      border-image: linear-gradient(#097, #f40) 30 100;
-    }
+    @media (max-width:768px) {
+      html {
+        font-size: 14px;
+      }
 
-    .border-img>div:nth-child(2) {
-      width: 600px;
-      height: 100px;
-      margin: 10px auto;
-      border: 10px solid;
-      border-image: url(imgs/demo.jpg) 20;
+      .wrap {
+        grid-template-columns: repeat(1, 1fr);
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="border-img">
-    <div></div>
-    <div></div>
-  </div>
-  <div class='section shadow'>
-    <img src="imgs/demo.jpg" alt="">
-  </div>
-  <div class="flex">
-    <div class='seg rotate-shadow'>
+  <div class="wrap">
+    <div class="item up">border-radius</div>
+    <div class="item down">border-radius</div>
+    <div class="item left">border-radius</div>
+    <div class="item right">border-radius</div>
+    <div class="item leftup">border-radius</div>
+    <div class="item rightup">border-radius</div>
+    <div class="item leftdown">border-radius</div>
+    <div class="item rightdown">border-radius</div>
+    <div class="item border-color">border-image</div>
+    <div class="item border-img">border-image</div>
+    <div class="item border-shadow">
       <img src="imgs/demo.jpg" alt="">
     </div>
-    <div class='seg rotate-shadow'>
+    <div class="item border-rotate">
       <img src="imgs/demo.jpg" alt="">
     </div>
-    <div class='seg rotate-shadow'>
-      <img src="imgs/demo.jpg" alt="">
-    </div>
+    <div class="item inner"></div>
   </div>
 </body>
 

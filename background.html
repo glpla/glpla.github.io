@@ -5,15 +5,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>demo| 2021.03.31</title>
+  <title>background</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="//at.alicdn.com/t/font_2357817_73yjugwbqjc.css">
   <style>
+    h1 {
+      text-align: center;
+    }
+
     .cont {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
       justify-items: center;
     }
@@ -113,6 +117,37 @@
       right: -0.5rem;
     }
 
+    .border {
+      border: 1rem #089 dashed;
+      padding: 1rem;
+      background-image: linear-gradient(to top right, #f40 25%, #eee 0, #eee 50%, #f40 0, #f40 75%, #eee 0);
+      background-size: 1rem 1rem;
+    }
+
+    .padding-clip {
+      background-clip: padding-box;
+    }
+
+    .content-clip {
+      background-clip: content-box;
+    }
+
+    .trans {
+      border-color: #0896;
+    }
+
+    .inner-border {
+      background-image: linear-gradient(to top right, #f40 25%, #eee 0, #eee 50%, #f40 0, #f40 75%, #eee 0);
+      background-size: 1rem 1rem;
+    }
+
+    .inner-border .inner {
+      height: 100%;
+      background-color: #fff;
+      border: 1rem solid rgba(255, 255, 0, 0.6);
+      background-clip: padding-box;
+    }
+
     @media screen and (max-width:768px) {
       .w {
         width: 90vw;
@@ -126,6 +161,7 @@
 </head>
 
 <body>
+  <h1>背景图片background-image</h1>
   <div class="cont w">
     <a class="ad"></a>
     <a class="item">
@@ -142,6 +178,19 @@
       <div class="center-cont"></div>
       <div class="center-cont"></div>
       <div class="center-cont"></div>
+    </a>
+  </div>
+  <h1>背景裁剪background-clip</h1>
+  <div class="cont w">
+    <a href="" class="border">border-clip；default</a>
+    <a href="" class="border padding-clip">padding-clip</a>
+    <a href="" class="border content-clip">content-clip</a>
+  </div>
+  <h1>背景特效</h1>
+  <div class="cont w">
+    <a href="" class="border trans">透明边框</a>
+    <a href="" class="inner-border">
+      <div class="inner">12</div>
     </a>
   </div>
 </body>
