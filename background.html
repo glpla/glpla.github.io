@@ -13,6 +13,7 @@
   <style>
     h1 {
       text-align: center;
+      font-size: 1.5rem;
     }
 
     .cont {
@@ -26,50 +27,62 @@
       width: 300px;
       height: 400px;
       padding: 1rem;
-      background-color: #fff;
+      background-color: rgb(255, 255, 255);
     }
 
     .ad {
       background-image:
-        radial-gradient(35rem circle at -10% 15%, transparent 60%, #f405 0),
-        radial-gradient(30rem circle at 10% 25%, transparent 60%, #f409 0),
-        radial-gradient(30rem circle at 20% 25%, transparent 60%, #f40 0);
+        radial-gradient(35rem circle at -10% 15%, transparent 60%, rgba(255, 68, 0, 0.333) 0),
+        radial-gradient(30rem circle at 10% 25%, transparent 60%, rgba(255, 68, 0, 0.6) 0),
+        radial-gradient(30rem circle at 20% 25%, transparent 60%, rgb(255, 68, 0) 0);
     }
 
-    .cont .item {
+    .item {
       transition: .4s;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      /* justify-content: space-between; */
+    }
+
+    .img {
+      display: block;
+      height: 50%;
+    }
+
+    .intro {
+      text-indent: 2em;
+      margin-top: 1rem;
+      flex: 1;
+      /* flex-grow: 1; */
     }
 
     .cont>a:hover {
-      box-shadow: 0 0 10px #ccc;
+      box-shadow: 0 0 10px rgb(204, 204, 204);
     }
 
     .price-box {
       display: flex;
       justify-content: space-around;
-      border: 1px solid #e1251b;
+      border: 1px solid rgb(225, 37, 27);
       line-height: 2rem;
-      background-image: linear-gradient(135deg, #e1231b 50%, transparent 0);
+      background-image: linear-gradient(135deg, rgb(225, 35, 27) 50%, transparent 0);
     }
 
     .new {
       font-weight: 400;
-      color: #fff;
+      color: rgb(255, 255, 255);
       font-size: 120%;
     }
 
     .old {
       text-decoration: line-through;
-      color: #888;
+      color: rgb(136, 136, 136);
     }
 
     .center {
       overflow: hidden;
       position: relative;
-      background-image: radial-gradient(35rem circle at 50% 90%, #e1251b 50%, #fff 0);
+      background-image: radial-gradient(35rem circle at 50% 90%, rgb(225, 37, 27) 50%, #fff 0);
       display: flex;
       flex-direction: column;
     }
@@ -81,8 +94,8 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-image: radial-gradient(35rem circle at 50% 25%, transparent 50%, #e1251b 0);
-      filter: drop-shadow(0 0 1rem #666);
+      background-image: radial-gradient(35rem circle at 50% 25%, transparent 50%, rgb(225, 37, 27) 0);
+      filter: drop-shadow(0 0 1rem rgb(102, 102, 102));
     }
 
     .center h3 {
@@ -93,8 +106,8 @@
     .center .center-cont {
       position: relative;
       flex: 1;
-      border-bottom: 2px dotted #e1251b;
-      background-color: #f6f6f6;
+      border-bottom: 2px dotted rgb(225, 37, 27);
+      background-color: rgb(246, 246, 246);
     }
 
     .center .center-cont::before,
@@ -105,7 +118,7 @@
       width: 1rem;
       height: 1rem;
       border-radius: 50%;
-      background-color: #e1251b;
+      background-color: rgb(225, 37, 27);
       z-index: 1;
     }
 
@@ -118,9 +131,9 @@
     }
 
     .border {
-      border: 1rem #089 dashed;
+      border: 1rem rgb(0, 136, 153) dashed;
       padding: 1rem;
-      background-image: linear-gradient(to top right, #f40 25%, #eee 0, #eee 50%, #f40 0, #f40 75%, #eee 0);
+      background-image: linear-gradient(to top right, rgb(255, 68, 0) 25%, rgb(238, 238, 238) 0, rgb(238, 238, 238) 50%, rgb(255, 68, 0) 0, rgb(255, 68, 0) 75%, rgb(238, 238, 238) 0);
       background-size: 1rem 1rem;
     }
 
@@ -133,7 +146,7 @@
     }
 
     .trans {
-      border-color: #0896;
+      border-color: rgba(0, 136, 153, 0.4);
     }
 
     .inner-border {
@@ -149,6 +162,10 @@
     }
 
     @media screen and (max-width:768px) {
+      html {
+        font-size: 14px;
+      }
+
       .w {
         width: 90vw;
       }
@@ -163,10 +180,10 @@
 <body>
   <h1>背景图片background-image</h1>
   <div class="cont w">
-    <a class="ad"></a>
+    <a class="ad">not for QQ browser</a>
     <a class="item">
-      <img src="imgs/blue.jpg" alt="">
-      <p>这款低帮运动鞋采用经典GG帆布材质，搭配标志性配色组合。设计中融合了多种品牌经典元素，让人联想到品牌与运动和休闲世界的紧密联系。
+      <img class="img" src="imgs/blue.jpg" alt="">
+      <p class="intro">这款低帮运动鞋采用经典GG帆布材质，搭配标志性配色组合。设计中融合了多种品牌经典元素，让人联想到品牌与运动和休闲世界的紧密联系。
       </p>
       <div class="price-box">
         <div class="new">&yen;640</div>

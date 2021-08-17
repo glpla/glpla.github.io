@@ -9,39 +9,31 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="//at.alicdn.com/t/font_2357817_7mp7ai5x53p.css">
   <style>
-    body {
-      font-family: "montserrat", 'Microsoft YaHei', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: #fff;
-    }
-
     .wrap {
       position: relative;
       width: 100vw;
       height: 100vh;
-    }
-
-    .greeting,
-    .tool,
-    .score {
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: #fff;
     }
 
-    .greeting-cont {
+    .greeting {
+      width: 21rem;
+      height: 21rem;
       display: grid;
-      grid-template-columns: repeat(3, 160px);
-      grid-template-rows: repeat(3, 160px);
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
       gap: 1rem;
     }
+
 
     .item {
       width: 100%;
       height: 100%;
       perspective: 1000px;
+      cursor: pointer;
     }
 
     .box {
@@ -49,14 +41,15 @@
       width: 100%;
       height: 100%;
       border-radius: 1rem;
-      box-shadow: 0 0 .8rem #666;
+      box-shadow: 0 0 .8rem rgb(102, 102, 102);
       transform-style: preserve-3d;
       transition: 1s;
     }
 
     .img {
-      width: 454px;
-      height: 199px;
+      width: 40vw;
+      height: 20vw;
+      object-fit: cover;
     }
 
     .icon,
@@ -67,26 +60,20 @@
       width: 100%;
       height: 100%;
       text-align: center;
-      line-height: 160px;
-      background-color: #ff7f50;
+      line-height: 7rem;
+      background-color: rgb(255, 127, 80);
       color: #fff;
       border-radius: 1rem;
     }
 
     .icon {
-      font-size: 60px;
+      font-size: 2.5rem;
     }
 
     .tips {
-      text-transform: capitalize;
       transform: rotateY(180deg);
-      font-size: 20px;
+      font-size: 1.4rem;
       user-select: none;
-    }
-
-    .tips::first-letter {
-      color: #ff0;
-      font-size: 1.2em;
     }
 
     .item:hover .box {
@@ -97,8 +84,9 @@
       position: absolute;
       bottom: 4rem;
       right: 4rem;
-      width: 60px;
-      height: 60px;
+      width: 4rem;
+      height: 4rem;
+      line-height: 4rem;
       transition: 2s;
     }
 
@@ -118,139 +106,167 @@
     .cont {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
     }
 
     .cont p {
-      font-size: 2rem;
+      font-size: 1.4rem;
     }
 
     /* page3 */
-    .tool-cont {
-      display: grid;
-      grid-template-columns: repeat(3, 160px);
-      grid-template-rows: repeat(3, 160px);
-      gap: 1rem;
-    }
 
-    .tool-cont img:nth-child(4) {
+    .greeting img:nth-child(4) {
       grid-column: span 3;
     }
 
-    .tool-cont img {
+    .greeting img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
     /* page4 */
-    .score-cont {
+    .score {
+      width: 60%;
+      font-size: 1.2rem;
+    }
+
+    .score-item {
       display: flex;
-      font-size: 20px;
-    }
-
-    .score-cont div {
-      height: 60px;
-      line-height: 60px;
+      /* justify-content: space-between; */
+      align-items: center;
+      height: 2rem;
+      line-height: 2rem;
       color: #fff;
-      padding-left: 1rem;
-      box-shadow: 0 0 1rem #6666, 0 0 2rem #0008;
+      margin: 1rem 0;
     }
 
-    .score-cont div:nth-child(1) {
-      width: 100px;
+    .effect {
+      height: 100%;
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      margin-right: 1rem;
+      box-shadow: 0 0.1rem 0.1rem rgba(102, 102, 102, 0.4), 0 0.2rem 0.2rem rgba(0, 0, 0, 0.533);
+    }
+
+    .item1 div:first-child {
+      width: 10%;
       background-color: #05c46b;
-      border-top-left-radius: 30px;
-      border-bottom-left-radius: 30px;
     }
 
-    .score-cont div:nth-child(2) {
-      width: 100px;
+    .item1 div:last-child {
+      color: #05c46b;
+    }
+
+    .item2 div:first-child {
+      width: 10%;
       background-color: #ffa801;
     }
 
-    .score-cont div:nth-child(3) {
-      width: 800px;
-      background-color: #c0392b;
-      border-top-right-radius: 30px;
-      border-bottom-right-radius: 30px;
+    .item2 div:last-child {
+      color: #ffa801;
     }
+
+    .item3 div:first-child {
+      width: 80%;
+      background-color: #c0392b;
+    }
+
+    .item3 div:last-child {
+      color: #c0392b;
+    }
+
+
+    @media (max-width:768px) {
+      html {
+        font-size: 14px;
+      }
+
+      .score {
+        width: 90%;
+        font-size: 1rem;
+      }
+
+      .effect {
+        margin-right: .4rem;
+      }
   </style>
 </head>
 
 <body>
-  <div class="wrap greeting" id='greeting'>
-    <div class="greeting-cont">
+  <div class="wrap" id='greeting'>
+    <div class="greeting">
       <div class="item">
         <div class="box">
-          <p class="tips">laptop</p>
+          <p class="tips">笔记本</p>
           <span class="iconfont iconlaptop icon"></span>
         </div>
       </div>
       <div class="item">
         <div class="box">
-          <p class="tips">patience</p>
+          <p class="tips">耐心</p>
           <span class="iconfont iconicon-test icon"></span>
         </div>
       </div>
       <div class="item">
         <div class="box">
-          <p class="tips">reading</p>
+          <p class="tips">博览</p>
           <span class="iconfont iconbook icon"></span>
         </div>
       </div>
       <div class="item">
         <div class="box">
-          <p class="tips">coding</p>
+          <p class="tips">撸码</p>
           <span class="iconfont iconcode icon"></span>
         </div>
       </div>
       <div class="item">
         <div class="box">
-          <p class="tips">collecting</p>
+          <p class="tips">收藏</p>
           <span class="iconfont iconheart icon"></span>
         </div>
       </div>
       <div class="item">
         <div class="box">
-          <p class="tips">communicating</p>
+          <p class="tips">交流</p>
           <span class="iconfont iconmessage-square icon"></span>
         </div>
       </div>
       <div class="item">
         <div class="box">
-          <p class="tips">searching</p>
+          <p class="tips">检索</p>
           <span class="iconfont iconsearch2 icon"></span>
         </div>
       </div>
       <div class="item">
         <div class="box">
-          <p class="tips">third-party</p>
+          <p class="tips">第三方</p>
           <span class="iconfont icondisanfang icon"></span>
         </div>
       </div>
       <div class="item">
         <div class="box">
-          <p class="tips">framework</p>
+          <p class="tips">框架</p>
           <span class="iconfont iconkuangjiaguanli2 icon"></span>
         </div>
       </div>
     </div>
     <a class="link" href="#content"><i class="iconfont iconArrowdown arrow"></i></a>
   </div>
-  <div class="wrap cont" id='content'>
-    <p>HTML5</p>
-    <p>CSS3</p>
-    <p>JavaScript</p>
-    <img class="img" src="./imgs/HTML.jpg" alt="">
-    <p>基本概念</p>
-    <p>基本理论</p>
-    <p>基本应用</p>
+  <div class="wrap" id='content'>
+    <div class="cont">
+      <p>HTML5</p>
+      <p>CSS3</p>
+      <p>JavaScript</p>
+      <img class="img" src="./imgs/HTML.jpg" alt="">
+      <p>基本概念</p>
+      <p>基本理论</p>
+      <p>基本应用</p>
+    </div>
     <a class="link" href="#tool"><i class="iconfont iconArrowdown arrow"></i></a>
   </div>
-  <div class="wrap tool" id='tool'>
-    <div class="tool-cont">
+  <div class="wrap" id='tool'>
+    <div class="greeting">
       <img class="item" src="./imgs/chrome.jpg" alt="">
       <img class="item" src="./imgs/git.jpg" alt="">
       <img class="item" src="./imgs/GitHub.jpg" alt="">
@@ -261,43 +277,52 @@
     </div>
     <a class="link" href="#score"><i class="iconfont iconArrowdown arrow"></i></a>
   </div>
-  <div class="wrap score" id="score">
-    <div class="score-cont">
-      <div>考勤10</div>
-      <div>作业10</div>
-      <div>大作业80</div>
+  <div class="wrap" id="score">
+    <div class="score">
+      <div class="score-item item1">
+        <div class="effect"></div>
+        <div>考勤10分</div>
+      </div>
+      <div class="score-item item2">
+        <div class="effect"></div>
+        <div>作业10分</div>
+      </div>
+      <div class="score-item item3">
+        <div class="effect"></div>
+        <div>考核80分</div>
+      </div>
     </div>
     <a class="link" href="#greeting"><i class="iconfont iconArrowup arrow"></i></a>
   </div>
   <script src="//unpkg.com/scrollreveal"></script>
   <script>
-    window.onload = function () {
-      ScrollReveal().reveal('.item', {
-        delay: 0,
-        distance: "50px",
-        duration: 500,
-        easing: "ease-in-out",
-        reset: true,
-        interval: 250,
-        opacity: 0,
-        origin: 'bottom',
-        rotate: {
-          x: 10,
-          y: 20,
-          z: 30,
-        },
-      });
-      ScrollReveal().reveal('.score-cont div', {
-        delay: 0,
-        distance: "50px",
-        duration: 500,
-        easing: "ease-in-out",
-        reset: true,
-        interval: 250,
-        opacity: 0,
-        origin: 'left'
-      });
-    }
+    // window.onload = function () {
+    //   ScrollReveal().reveal('.item', {
+    //     delay: 0,
+    //     distance: "50px",
+    //     duration: 500,
+    //     easing: "ease-in-out",
+    //     reset: true,
+    //     interval: 250,
+    //     opacity: 0,
+    //     origin: 'bottom',
+    //     rotate: {
+    //       x: 10,
+    //       y: 20,
+    //       z: 30,
+    //     },
+    //   });
+    //   ScrollReveal().reveal('.score-cont div', {
+    //     delay: 0,
+    //     distance: "50px",
+    //     duration: 500,
+    //     easing: "ease-in-out",
+    //     reset: true,
+    //     interval: 250,
+    //     opacity: 0,
+    //     origin: 'left'
+    //   });
+    // }
   </script>
 </body>
 
