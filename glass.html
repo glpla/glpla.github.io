@@ -11,20 +11,29 @@
   <style>
     body {
       min-height: 100vh;
+      height: 100vh;
       background-image: linear-gradient(to top right, #42b9a7, #46acb9);
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    .box {
-      width: 60vw;
-      height: 60vh;
+    .wrap {
+      position: relative;
+      width: 60%;
+      min-width: 300px;
+      max-width: 800px;
+      height: 60%;
       text-align: center;
+    }
+
+    .box {
+      width: 100%;
+      height: 100%;
       background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
       border-radius: 2rem;
       backdrop-filter: blur(1rem);
-      font-size: 2rem;
+      font-size: 1.2rem;
     }
 
     .circle {
@@ -37,33 +46,37 @@
     }
 
     .c1 {
-      right: 17vw;
-      top: 17vh;
+      right: -8%;
+      top: -8%;
     }
 
     .c2 {
-      left: 16vw;
-      bottom: 18vh;
+      left: -6%;
+      bottom: -6%;
     }
 
     .c3 {
-      right: 14vw;
-      top: 30vh;
+      right: -10%;
+      top: 25%;
     }
 
     @media (max-width:768px) {
       html {
-        font-size: 12px;
+        font-size: 14px;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="box">backdrop-filter: blur(1rem);</div>
-  <div class="circle c1"></div>
-  <div class="circle c2"></div>
-  <img src="./imgs/book.jpg" class="circle c3" alt="">
+  <div class="wrap">
+    <div class="box">
+      <span>backdrop-filter: blur(1rem);</span>
+    </div>
+    <div class="circle c1"></div>
+    <div class="circle c2"></div>
+    <img src="./imgs/chrome.jpg" class="circle c3" alt="">
+  </div>
 </body>
 
 </html>
