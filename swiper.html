@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>swiper</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    h1 {
+      text-align: center;
+      font-size: 1.2rem;
+      line-height: 2;
+      color: #fff;
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      background-color: #c0392b;
+    }
+
+    .sliders {
+      width: 640px;
+      height: 359px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+
+    .slider-box {
+      width: 500%;
+      height: 100%;
+      display: flex;
+      animation: slider 5s steps(5, end) infinite;
+      animation-play-state: paused;
+    }
+
+    .slider {
+      width: 20%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .sliders:hover .slider-box {
+      animation-play-state: running;
+    }
+
+    @keyframes slider {
+      to {
+        transform: translateX(calc(-640px*5));
+      }
+    }
+
+    .dot-box {
+      position: relative;
+      width: 190px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      margin: 1rem auto;
+    }
+
+    .dot-box::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #fff;
+      animation: dot 5s steps(5, end) infinite;
+      animation-play-state: paused;
+    }
+
+    .dot {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border-radius: 50%;
+      color: #fff;
+      margin: 0 4px;
+      background-color: rgba(255, 255, 255, .3);
+    }
+
+    .sliders:hover+.dot-box::before {
+      animation-play-state: running;
+    }
+
+    @keyframes dot {
+      to {
+        transform: translateX(190px);
+      }
+    }
+
+    /* manu */
+
+    .sliders-box {
+      width: 500%;
+      display: flex;
+      transition: .4s;
+    }
+
+    .sliders-item {
+      width: 20%;
+    }
+
+    .radio-box {
+      margin: 1rem auto;
+      display: flex;
+    }
+
+    .bar {
+      width: 30px;
+      height: 12px;
+      margin: 10px;
+      border: 2px solid #fff;
+      transition: .4s;
+      cursor: pointer;
+    }
+
+    .bar:hover {
+      background-color: #fff;
+    }
+
+    #r1:checked~.radio-box>.b1 {
+      background-color: #fff;
+    }
+
+    #r2:checked~.radio-box>.b2 {
+      background-color: #fff;
+    }
+
+    #r3:checked~.radio-box>.b3 {
+      background-color: #fff;
+    }
+
+    #r4:checked~.radio-box>.b4 {
+      background-color: #fff;
+    }
+
+    #r5:checked~.radio-box>.b5 {
+      background-color: #fff;
+    }
+
+    #r1:checked~.sliders>.sliders-box {
+      margin-left: 0%;
+    }
+
+    #r2:checked~.sliders>.sliders-box {
+      margin-left: -100%;
+    }
+
+    #r3:checked~.sliders>.sliders-box {
+      margin-left: -200%;
+    }
+
+    #r4:checked~.sliders>.sliders-box {
+      margin-left: -300%;
+    }
+
+    #r5:checked~.sliders>.sliders-box {
+      margin-left: -400%;
+    }
+
+    @media (max-width:768px) {
+      .sliders {
+        width: 320px;
+        height: 180px;
+      }
+
+      @keyframes slider {
+        to {
+          transform: translateX(calc(-320px*5));
+        }
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <h1>基本自动轮播</h1>
+    <div class="sliders">
+      <div class="slider-box basic">
+        <img class="slider" src="imgs/slider1.jpg" alt="">
+        <img class="slider" src="imgs/slider2.jpg" alt="">
+        <img class="slider" src="imgs/slider3.jpg" alt="">
+        <img class="slider" src="imgs/slider4.jpg" alt="">
+        <img class="slider" src="imgs/slider5.jpg" alt="">
+      </div>
+    </div>
+  </section>
+  <section>
+    <h1>同步自动轮播</h1>
+    <div class="sliders">
+      <div class="slider-box auto">
+        <img class="slider" src="imgs/slider1.jpg" alt="">
+        <img class="slider" src="imgs/slider2.jpg" alt="">
+        <img class="slider" src="imgs/slider3.jpg" alt="">
+        <img class="slider" src="imgs/slider4.jpg" alt="">
+        <img class="slider" src="imgs/slider5.jpg" alt="">
+      </div>
+    </div>
+    <div class="dot-box">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </section>
+  <section class="manu">
+    <h1>手动轮播</h1>
+    <input type="radio" name="r" id="r1" checked hidden>
+    <input type="radio" name="r" id="r2" hidden>
+    <input type="radio" name="r" id="r3" hidden>
+    <input type="radio" name="r" id="r4" hidden>
+    <input type="radio" name="r" id="r5" hidden>
+    <div class="sliders">
+      <div class="sliders-box">
+        <img class="sliders-item" src="imgs/slider1.jpg" alt="">
+        <img class="sliders-item" src="imgs/slider2.jpg" alt="">
+        <img class="sliders-item" src="imgs/slider3.jpg" alt="">
+        <img class="sliders-item" src="imgs/slider4.jpg" alt="">
+        <img class="sliders-item" src="imgs/slider5.jpg" alt="">
+      </div>
+    </div>
+    <div class="radio-box">
+      <label for="r1" class="bar b1"></label>
+      <label for="r2" class="bar b2"></label>
+      <label for="r3" class="bar b3"></label>
+      <label for="r4" class="bar b4"></label>
+      <label for="r5" class="bar b5"></label>
+    </div>
+  </section>
+</body>
+
+</html>

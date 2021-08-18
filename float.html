@@ -61,6 +61,12 @@
       margin-right: 1rem;
     }
 
+    .clear::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
     @media (max-width:768px) {
       html {
         font-size: 14px;
@@ -71,29 +77,35 @@
 
 <body>
   <h1>Float Layout</h1>
-  <dl class="w">
-    <dt>特性说明</dt>
-    <dd><svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconbomb"></use>
-      </svg>浮动元素会脱离文档流document flow；</dd>
-    <dd><svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconbomb"></use>
-      </svg>布局时，元素的先后顺序不一样，最后呈现的布局也不一样；</dd>
-    <dd><svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconbomb"></use>
-      </svg>布局时，必须要清除浮动。你不清试试！</dd>
-    <dd><svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconbomb"></use>
-      </svg>现在：仅仅需要图文混排时，才会使用float；</dd>
-    <dd><svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconbomb"></use>
-      </svg>其它布局请采用弹性盒子flex或网格grid；<span>只推荐这俩种</span></dd>
-  </dl>
+  <h2 class="w">特性说明</h2>
+  <p class="w"><svg class="icon" aria-hidden="true">
+      <use xlink:href="#iconbomb"></use>
+    </svg>浮动元素会脱离文档流document flow；</p>
+  <p class="w"><svg class="icon" aria-hidden="true">
+      <use xlink:href="#iconbomb"></use>
+    </svg>布局时，元素的先后顺序不一样，最后呈现的布局也不一样；</p>
+  <p class="w"><svg class="icon" aria-hidden="true">
+      <use xlink:href="#iconbomb"></use>
+    </svg>布局时，必须要清除浮动。你不清试试！</p>
+  <p class="w"><svg class="icon" aria-hidden="true">
+      <use xlink:href="#iconbomb"></use>
+    </svg>现在：仅仅需要图文混排时，才会使用float；</p>
+  <p class="w"><svg class="icon" aria-hidden="true">
+      <use xlink:href="#iconbomb"></use>
+    </svg>其它布局请采用弹性盒子flex或网格grid；<span>只推荐这俩种</span></p>
+
+  <h2 class="w">清除浮动</h2>
+  <p class="w">以伪元素的形式为浮动元素的父元素指定清除类</p>
+  <pre class="w code">
+    .clear::after {
+      content: '';
+      display: block;
+      clear: both;
+    }  </pre>
   <h2 class="w">示例</h2>
   <p class="w">以下两个demo的元素用到的css完全相同(怎么看样式？<svg class="icon" aria-hidden="true">
       <use xlink:href="#iconbomb"></use>
-    </svg>)，只是元素在文档流中顺序发生了变化，但是呈现的结果完全不一样。</p>
-  <p class="w">本例中没有清除浮动</p>
+    </svg>)，只是元素在文档流中出现的顺序不一致，但是呈现的结果完全不一样。</p>
   <div class="w code">
     <xmp>
       <div class="red"></div>
@@ -101,12 +113,12 @@
       <div class="blue"></div>
     </xmp>
   </div>
-  <div class="w cont">
+  <div class="w cont clear">
     <div class="red"></div>
     <div class="yellow"></div>
     <div class="blue"></div>
   </div>
-  <div class="w code">
+  <div class="w code clear">
     <xmp>
       <div class="red"></div>
       <div class="blue"></div>
