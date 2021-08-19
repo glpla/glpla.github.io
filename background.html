@@ -161,6 +161,33 @@
       background-clip: padding-box;
     }
 
+    .glass-box {
+      position: relative;
+      height: 100%;
+      background-image: linear-gradient(to top right, rgb(66, 185, 167), rgb(70, 172, 185));
+      /* 确保堆叠层级 */
+      z-index: 0;
+    }
+
+    .glass {
+      width: 60%;
+      height: 100%;
+      background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+      border-radius: 2rem;
+      backdrop-filter: blur(1rem);
+    }
+
+    .glass-box .img {
+      position: absolute;
+      left: 40%;
+      top: 40%;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      /* 必须 */
+      z-index: -1;
+    }
+
     @media screen and (max-width:768px) {
       html {
         font-size: 14px;
@@ -208,6 +235,10 @@
     <a href="" class="border trans">透明边框</a>
     <a href="" class="inner-border">
       <div class="inner">12</div>
+    </a>
+    <a href="" class="glass-box">
+      <div class="glass">毛玻璃</div>
+      <img class="img" src="./imgs/lg.jpg" alt="">
     </a>
   </div>
 </body>
