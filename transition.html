@@ -9,7 +9,8 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
   <style>
-    h1 {
+    h1,
+    h2 {
       text-align: center;
       font-size: 1.2rem;
       line-height: 2;
@@ -21,75 +22,57 @@
       gap: 10px;
     }
 
-    .tips {
-      width: 200px;
-      height: 200px;
-      margin: auto;
-      border: 1px solid #f40;
-      background-color: #078;
+    .wrap>div {
+      min-height: 40vh;
+    }
+
+    /* exam 0 */
+    .tips div {
+      margin: 0 auto;
+      width: 60%;
+      height: 60%;
+      background-color: #b22222;
       border-radius: 0;
       transition-property: width, height, border-radius, background-color;
-      transition-duration: 10ms, 1s, 2s, 3s;
-      transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+      transition-duration: 200ms, 400ms, 600ms, 800ms;
+      transition-timing-function: ease-in-out;
       transition-delay: 1s;
     }
 
-    .tips:hover {
-      width: 300px;
-      height: 220px;
+    .tips>div:hover {
+      width: 80%;
+      height: 80%;
       border-radius: 50%;
       background-color: #970;
-      transition-duration: 100ms, 2s, 4s, 8s;
+      /* transition-duration: 100ms, 200ms, 300ms, 400ms; */
     }
 
-    .box {
+    /* exam 1 */
+
+    .mars {
       position: relative;
-      height: 380px;
-      padding: 10px;
+      height: 100%;
+      /* padding: 10px; */
       overflow: hidden;
-      background: #2980b9;
+      background: #fff;
       cursor: pointer;
     }
 
-    .box>div {
+    .mars .info {
+      text-indent: 2em;
+      text-align: justify;
+      padding: 0 1rem;
       position: absolute;
-      background-color: #f2f3f4;
-    }
-
-    .box div:nth-child(2) {
-      width: 68%;
-      height: 100px;
-      text-align: center;
-      line-height: 100px;
-      left: 10px;
-      bottom: -100px;
-      font-family: yuwei;
-      font-size: 28px;
+      width: 100%;
+      background-color: #b22222;
+      color: #fff;
+      left: 0px;
+      bottom: -240px;
+      font-size: .9rem;
       transition: .4s;
     }
 
-    .box div:nth-child(3) {
-      width: 28%;
-      height: 100px;
-      line-height: 100px;
-      text-align: center;
-      right: 10px;
-      bottom: -100px;
-      transition: .4s .1s;
-    }
-
-    .box div:nth-child(4) {
-      width: 28%;
-      height: 250px;
-      padding: 10px;
-      text-indent: 2em;
-      text-align: justify;
-      top: 10px;
-      right: -200px;
-      transition: .4s .05s;
-    }
-
-    .box img {
+    .mars .img {
       display: block;
       width: 100%;
       height: 100%;
@@ -97,27 +80,20 @@
       transition: .4s;
     }
 
-    .box:hover img {
-      width: 68%;
-      height: 70%;
+    .mars:hover .img {
+      height: 40%;
     }
 
-    .box:hover div:nth-child(2) {
-      bottom: 10px;
+    .mars:hover .info {
+      height: 60%;
+      bottom: 0px;
     }
 
-    .box:hover div:nth-child(3) {
-      bottom: 10px;
-    }
-
-    .box:hover div:nth-child(4) {
-      right: 10px;
-    }
 
     /* example2 */
     .pos {
       position: relative;
-      height: 380px;
+      height: 100%;
       background-color: #eeece1;
       overflow: hidden;
     }
@@ -126,66 +102,76 @@
       position: absolute;
       left: -400px;
       top: -400px;
-      width: 360px;
-      height: 360px;
-      border: 10px solid #f40;
+      width: 80%;
+      height: 80%;
+      border: 10px solid #b22222;
       transform-origin: left top;
-      transition: 1s;
+      transition: .4s;
     }
 
     .pos:hover div {
-      left: 20px;
-      top: 20px;
+      left: 10%;
+      top: 10%;
       transform: rotate(360deg);
     }
 
     /* example3 */
     .tran {
       position: relative;
-      height: 380px;
-      border: 10px solid #b22222;
-      overflow: hidden;
+      height: 100%;
+      background-color: #eeece1;
     }
 
     .tran div {
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      border: 10px solid #b22222;
+      left: 10%;
+      top: 10%;
+      overflow: hidden;
+    }
+
+    .tran div::after {
+      content: '';
       position: absolute;
       left: 0;
       bottom: -300px;
       width: 600px;
       height: 300px;
-      background-color: #ffd700;
+      background-color: #fff;
       transform-origin: left top;
-      transition: .8s;
+      transition: .4s;
     }
 
-    .tran:hover div {
+    .tran div:hover::after {
       transform: rotate(-20deg);
     }
 
     /* example4 */
     .border {
       position: relative;
-      height: 380px;
+      height: 100%;
       background-color: #eeece1;
     }
 
     .h {
-      width: 200px;
-      height: 160px;
+      width: 60%;
+      height: 50%;
       border: solid #b22222;
-      border-width: 2px 0;
+      border-width: 4px 0;
       transform-origin: left center;
       transform: scaleX(0);
-      transition: 1s;
+      transition: .4s;
     }
 
     .v {
-      width: 160px;
-      height: 200px;
+      width: 50%;
+      height: 60%;
       border: solid #b22222;
-      border-width: 0px 2px;
+      border-width: 0px 4px;
       transform: scaleY(0);
-      transition: .6s;
+      transition: .4s;
     }
 
     .border:hover .h {
@@ -199,86 +185,124 @@
     /* example5 */
     .rect {
       position: relative;
-      height: 380px;
+      height: 100%;
       background-color: #eeece1;
+      overflow: hidden;
     }
 
-    .rect div {
+    .rect div:first-child {
       position: absolute;
-      left: 0;
-      bottom: 10px;
-      width: 100%;
-      height: 100%;
-      border: 6px solid #ffd700;
-      background-color: #f40;
-      transform-origin: center bottom;
-      transform: scale(.4);
+      left: 50%;
+      top: 90%;
+      width: 80%;
+      height: 2rem;
+      line-height: 2rem;
+      text-align: center;
+      background-color: #b22222;
+      color: #fff;
+      transform: translateX(-50%);
+      transition: .4s;
+    }
+
+    .rect:hover div:first-child {
+      top: 5%;
+    }
+
+    .rect div:last-child {
+      position: absolute;
+      left: 50%;
+      bottom: -100%;
+      width: 80%;
+      height: 80%;
+      background-color: #b22222;
+      color: #fff;
+      transform: translateX(-50%);
       transition: .4s;
     }
 
     .rect:hover div {
-      bottom: 0;
-      transform: scale(1);
-      transition: .2s;
+      bottom: 5%;
+      transition: .4s;
     }
 
     /* example6 */
 
-
     .circle {
       position: relative;
-      width: 280px;
-      height: 280px;
-      margin: auto;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 0;
+      background-color: #eeece1;
+    }
+
+    .circle div {
+      position: relative;
+      width: 12rem;
+      height: 12rem;
       border-radius: 50%;
       background-image: url(imgs/flag.jpg);
       background-size: cover;
     }
 
-    .circle::before {
+    .circle div::before {
       content: '';
       position: absolute;
       left: -10px;
       right: -10px;
       bottom: -10px;
       top: -10px;
-      background-image: linear-gradient(#eeece1 50%, #d40 0);
+      background-image: linear-gradient(#fff 50%, #b22222 0);
       border-radius: 50%;
       transition: 1s;
       z-index: -1;
     }
 
-    .circle:hover::before {
+    .circle div:hover::before {
       transform: rotate(-180deg);
     }
 
+    /*  */
     .step {
-      height: 380px;
+      height: 100%;
+      background-color: #eeece1;
     }
 
     .step div {
-      width: 0;
-      height: 30px;
-      background-color: #f40;
+      width: 4rem;
+      height: 2rem;
+      line-height: 2rem;
+      text-align: center;
+      background-color: #b22222;
+      color: #fff;
       margin: auto;
       transition: all 4s;
       transition-timing-function: steps(4);
     }
 
     .step:hover div {
-      width: 100%;
+      width: 80%;
     }
 
+    /*  */
     .clock {
-      position: relative;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
+      height: 100%;
       background-color: #eeece1;
-      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .clock::before {
+    .clock>div {
+      position: relative;
+      width: 12rem;
+      height: 12rem;
+      border-radius: 50%;
+      background-color: #fff;
+    }
+
+    .clock>div::before {
       content: '';
       position: absolute;
       left: 50%;
@@ -290,7 +314,7 @@
       transform: translate(-50%, -50%);
     }
 
-    .clock::after {
+    .clock>div::after {
       content: '';
       position: absolute;
       left: 50%;
@@ -303,11 +327,15 @@
       transition: all 10s steps(60, start);
     }
 
-    .clock:hover::after {
+    .clock>div:hover::after {
       transform: translate(-50%, 0) rotate(360deg);
     }
 
     @media (max-width:768px) {
+      html {
+        font-size: 14px;
+      }
+
       .wrap {
         grid-template-columns: repeat(1, 1fr);
       }
@@ -316,18 +344,23 @@
 </head>
 
 <body>
-  <h1>transition: property duration timing-function delay;</h1>
+  <h1>transition</h1>
+  <h2>property duration timing-function delay;</h2>
   <div class="wrap">
-    <div class="tips"></div>
-    <div class="box">
-      <img src="imgs/Mars.jfif" alt="">
-      <div>祝融号火星车</div>
-      <div>2021-05-15 20:20</div>
-      <div>祝融号，为天问一号任务火星车。高度有1米85，重量达到240公斤左右。设计寿命为3个火星月，相当于约92个地球日。驱散黑暗，带来温暖。“祝融”号寓意点燃中国星际探测的火种，指引航天人不断超越自我，逐梦星辰。
+    <div class="tips">
+      <div></div>
+    </div>
+    <div class="mars">
+      <img class="img" src="imgs/Mars.jfif" alt="">
+      <div class="info">
+        <h1>祝融号火星车</h1>
+        <p>2021-05-15
+          20:20，祝融号，天问一号任务火星车成功着陆火星。该车高度有1米85，重量达到240公斤左右。设计寿命为3个火星月，相当于约92个地球日。驱散黑暗，带来温暖。“祝融”号寓意点燃中国星际探测的火种，指引航天人不断超越自我，逐梦星辰。
+        </p>
       </div>
     </div>
     <div class="pos">
-      <div></div>
+      <div>size:80%;position:10%</div>
     </div>
     <div class="tran">
       <div></div>
@@ -337,13 +370,20 @@
       <div class="v dom-center"></div>
     </div>
     <div class="rect">
+      <div>简介</div>
+      <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, quos ad asperiores nobis reiciendis corrupti
+        ducimus ipsum doloremque voluptate natus nemo, dicta ratione alias rem fugit, distinctio quisquam nam facere.
+      </div>
+    </div>
+    <div class="circle">
       <div></div>
     </div>
-    <div class="circle"></div>
     <div class="step">
+      <div>步进动画</div>
+    </div>
+    <div class="clock">
       <div></div>
     </div>
-    <div class="clock"></div>
   </div>
 </body>
 
