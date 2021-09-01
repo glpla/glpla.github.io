@@ -139,6 +139,7 @@
       line-height: 2rem;
       color: #fff;
       margin: 1rem 0;
+      background-color: #f3f3f3;
     }
 
     .effect {
@@ -147,6 +148,10 @@
       border-bottom-right-radius: 1rem;
       margin-right: 1rem;
       box-shadow: 0 0.1rem 0.1rem rgba(102, 102, 102, 0.4), 0 0.2rem 0.2rem rgba(0, 0, 0, 0.533);
+      /* animation-name: scale;
+      animation-delay: calc(var(--per)*2s);
+      animation-duration: calc(var(--per)*4s);
+      animation-fill-mode: forwards; */
     }
 
     .item1 div:first-child {
@@ -168,12 +173,27 @@
     }
 
     .item3 div:first-child {
-      width: 80%;
-      background-color: #c0392b;
+      width: 20%;
+      background-color: #079;
     }
 
     .item3 div:last-child {
+      color: #079;
+    }
+
+    .item4 div:first-child {
+      width: 60%;
+      background-color: #c0392b;
+    }
+
+    .item4 div:last-child {
       color: #c0392b;
+    }
+
+    @keyframes scale {
+      to {
+        width: calc(var(--per)*100%);
+      }
     }
 
     @media (max-width:768px) {
@@ -280,16 +300,20 @@
   <div class="wrap" id="score">
     <div class="score">
       <div class="score-item item1">
-        <div class="effect"></div>
+        <div class="effect" style="--per:0.1"></div>
         <div>考勤10分</div>
       </div>
       <div class="score-item item2">
-        <div class="effect"></div>
+        <div class="effect" style="--per:0.1"></div>
         <div>作业10分</div>
       </div>
       <div class="score-item item3">
-        <div class="effect"></div>
-        <div>考核80分</div>
+        <div class="effect" style="--per:0.2"></div>
+        <div>大作业20分</div>
+      </div>
+      <div class="score-item item4">
+        <div class="effect" style="--per:0.6"></div>
+        <div>考核60分</div>
       </div>
     </div>
     <a class="link" href="#greeting"><i class="iconfont iconArrowup arrow"></i></a>
@@ -312,15 +336,16 @@
           z: 30,
         },
       });
-      ScrollReveal().reveal('.score', {
+      ScrollReveal().reveal('.effect', {
+        origin: 'left',
         delay: 0,
-        distance: "50px",
+        distance: "1px",
         duration: 500,
         easing: "ease-in-out",
         reset: true,
         interval: 250,
         opacity: 0,
-        origin: 'left'
+        scale: .5
       });
     }
   </script>

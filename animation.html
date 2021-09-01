@@ -7,40 +7,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>animation</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/reset.css">
   <style>
+    .wrap {
+      width: 100vw;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      justify-items: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .title {
+      position: relative;
+      text-align: center;
+      line-height: 3;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .title::before,
+    .title::after {
+      content: '';
+      width: 40%;
+      height: 2px;
+      background-color: rgba(255, 68, 0, .4);
+    }
+
     h1 {
       text-align: center;
+      font-size: 1.2rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+    }
+
+    .grid>* {
+      position: relative;
+      width: 100%;
+      min-height: 300px;
+      background-color: #fff;
     }
 
     /* example1 */
-    .rect {
-      width: 400px;
-      height: 300px;
-      margin: 40px auto;
-      background-color: #eeece1;
-    }
-
-    .rect div {
+    .rect .inner-rect {
       width: 40px;
       height: 40px;
       background-color: #f40;
       animation: move 2s linear 0s infinite;
       animation-name: move;
-      animation-duration: 2s;
+      animation-duration: 4s;
       animation-timing-function: linear;
       animation-delay: 0s;
-      animation-iteration-count: 2;
+      /* 和播放状态的控制会冲突 */
+      /* animation-iteration-count: 1; */
       animation-fill-mode: forwards;
+      animation-play-state: paused;
+    }
+
+    .rect:hover .inner-rect {
+      animation-play-state: running;
     }
 
     @keyframes move {
 
       25% {
-        transform: translateX(360px);
+        transform: translateX(260px);
       }
 
       50% {
-        transform: translate(360px, 260px);
+        transform: translate(260px, 260px);
       }
 
       75% {
@@ -55,20 +98,15 @@
     /* example2 */
     .tx-box {
       position: relative;
-      width: 600px;
-      height: 300px;
-      margin: 40px auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      perspective: 800px;
     }
 
     .tx {
       width: 100%;
-      height: 100%;
+      min-height: 300px;
       background-color: rgb(238, 236, 225);
       transform-style: preserve-3d;
-      transform: perspective(800px) rotateX(60deg);
+      transform: translateZ(-10rem) rotateX(70deg);
     }
 
     .tx::before {
@@ -77,9 +115,9 @@
       left: 0;
       top: 50%;
       width: 100%;
-      height: 20px;
+      height: 2rem;
       background-image: linear-gradient(90deg, #fff 70%, #333 0);
-      background-size: 120px;
+      background-size: 10rem;
       transform: translateY(-50%);
       animation: tx 2s linear infinite;
     }
@@ -90,95 +128,87 @@
       }
 
       100% {
-        background-position: -120px;
+        background-position: -10rem;
       }
     }
 
     .tx::after {
       content: '';
       position: absolute;
-      bottom: -20px;
+      bottom: -1rem;
       left: 0;
       width: 100%;
-      height: 20px;
+      height: 1rem;
       background-color: #666;
       transform-origin: top;
       transform: rotateX(-70deg);
     }
 
-
-
     .tx-shadow {
       position: absolute;
       left: 50%;
-      bottom: -62px;
+      bottom: -4rem;
       width: 95%;
-      height: 30px;
+      height: 2rem;
       transform: translateX(-50%);
       background-image: linear-gradient(rgba(0, 0, 0, .4), transparent);
     }
 
     .cube-box {
       position: absolute;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      left: 50%;
+      top: 35%;
+      width: 100px;
+      height: 100px;
+      transform: translate(-50%, -50%);
       animation: xpos 1s linear infinite;
     }
 
     @keyframes xpos {
-      0% {
-        transform: translateX(0);
-      }
-
       100% {
-        transform: translateX(-100px);
+        transform: translateX(calc(-50% - 100px)) translateY(-50%);
       }
-
     }
 
-    .cube {
-      position: relative;
-      width: 100px;
-      height: 100px;
-      background-color: #fff;
+    .cube-box::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #f40;
       transform-origin: bottom right;
       animation: roll-cube 1s linear infinite;
     }
 
     @keyframes roll-cube {
-      0% {
-        transform: rotateZ(0deg);
-      }
-
       100% {
         transform: rotateZ(90deg);
       }
-
     }
 
     /* example3 */
-    .loading-box {
+    .flex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading {
       position: relative;
-      width: 200px;
-      height: 200px;
-      margin: 100px auto;
+      width: 10rem;
+      height: 10rem;
       animation: hue 2s linear infinite;
     }
 
     @keyframes hue {
-      0% {
-        filter: hue-rotate(0deg);
-      }
-
       100% {
         filter: hue-rotate(360deg);
       }
     }
 
-    .loading-box span {
+    .loading span {
       position: absolute;
       left: 0;
       top: 0;
@@ -188,18 +218,18 @@
       transform: rotate(calc(var(--i)*18deg));
     }
 
-    .loading-box span::after {
+    .loading span::after {
       content: '';
       position: absolute;
       left: 0;
       top: 0;
-      width: 20px;
-      height: 20px;
+      width: 1rem;
+      height: 1rem;
       background-color: #f40;
       border-radius: 50%;
       box-shadow:
-        0 0 4px #f40,
-        0 0 8px #f40,
+        0 0 4px #078,
+        0 0 8px #ff0,
         0 0 12px #f40;
       transform: scale(0);
       animation: scale-box 1.8s linear infinite;
@@ -213,43 +243,52 @@
 
     }
 
+    /* example */
+    .step {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 0;
+      height: 2rem;
+      background-color: #F40;
+      animation: step 5s steps(5, start) infinite;
+    }
+
+    @keyframes step {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 100%;
+      }
+    }
+
     /* example4 */
-    .wrapper {
-      width: 100%;
-      height: 450px;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .box {
+    .rolling {
       position: relative;
-      width: 200px;
-      height: 200px;
+      width: 10rem;
+      height: 10rem;
     }
 
-    .box::after {
+    .rolling::after {
       content: "";
       width: 100%;
       height: 100%;
       background: rgb(107, 142, 35);
-      border-radius: 40px;
+      border-radius: 2rem;
       position: absolute;
       left: 0px;
       top: 0px;
-      transform: translateY(0px);
-      animation: hop 1.5s infinite linear;
+      animation: hop 1s infinite linear;
+      animation-play-state: paused;
     }
 
     @keyframes hop {
-      0% {
-        transform: translateY(0px) rotate(0deg);
-      }
-
       50% {
-        transform: translateY(100px) rotate(45deg);
-        border-bottom-right-radius: 100px;
+        transform: translateY(60px) rotate(45deg);
+        border-bottom-right-radius: 6rem;
       }
 
       100% {
@@ -257,26 +296,23 @@
       }
     }
 
-    .box::before {
+    .rolling::before {
       content: "";
       width: 100%;
-      height: 60px;
+      height: 2rem;
       background: #888;
       border-radius: 50%;
       position: absolute;
       left: 0px;
-      bottom: -120px;
+      bottom: -4rem;
       opacity: 0.4;
-      animation: zoom 1.5s infinite linear;
+      animation: zoom 1s infinite linear;
+      animation-play-state: paused;
     }
 
     @keyframes zoom {
-      0% {
-        transform: scale(1);
-      }
-
       50% {
-        transform: scale(1.2);
+        transform: scale(1.6);
       }
 
       100% {
@@ -284,12 +320,16 @@
       }
     }
 
+    .rolling-box:hover .rolling::after,
+    .rolling-box:hover .rolling::before {
+      animation-play-state: running;
+    }
+
     /* example5 */
     .ring {
-      width: 100px;
-      height: 100px;
+      width: 6rem;
+      height: 6rem;
       background: #079;
-      margin: 20px auto;
       border-radius: 50%;
     }
 
@@ -333,89 +373,110 @@
       animation: roll 2s linear infinite;
     }
 
-    .flex {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
     @keyframes roll {
-      0% {
-        transform: rotate(0deg);
-      }
-
       100% {
         transform: rotate(360deg);
       }
     }
 
-    .heart {
-      position: relative;
-      width: 150px;
-      height: 120px;
-      background-color: #f40;
+    .info {
+      min-height: 100px;
+      background-color: #fff;
+      padding: 1rem;
     }
 
-    .heart::before,
-    .heart::after {
-      content: '';
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background-color: #078;
+    .info p {
+      text-indent: 2em;
     }
 
-    .heart::before {
-      transform: translate(-100px);
+    @media (max-width:768px) {
+      .grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
     }
   </style>
 </head>
 
 <body>
-  <h1>animation: name duration timing-function delay iteration-count direction fill-mode;</h1>
-  <div class="heart"></div>
-  <div class="rect">
-    <div></div>
-  </div>
-  <div class="tx-box">
-    <div class="tx">
-      <div class="tx-shadow"></div>
+  <div class="wrap">
+    <h1>动画Animation</h1>
+    <div class="title">动画使用</div>
+    <div class="info">
+      <h2>复合写法</h2>
+      <p>animation: name duration timing-function delay iteration-count direction fill-mode;</p>
+      <h2>独立写法</h2>
+      <p>animation-name: 名称;</p>
+      <p>animation-duration: 持续时间;</p>
+      <p>animation-timing-function: 效果;</p>
+      <p>animation-delay: 延迟时间;</p>
+      <p>animation-iteration-count: 次数;</p>
+      <p>animation-direction: 方向;</p>
+      <p>animation-fill-mode: 结束模式;</p>
     </div>
-    <div class="cube-box">
-      <div class="cube"></div>
+    <div class="title">动画定义</div>
+    <div class="usage">
+      <pre class="code">
+@keyframes tx {
+  0% {
+    background-position: 0;
+  }
+
+  100% {
+    background-position: -120px;
+  }
+}</pre>
     </div>
-  </div>
-  <div class="loading-box">
-    <span style="--i:0"></span>
-    <span style="--i:1"></span>
-    <span style='--i:2'></span>
-    <span style='--i:3'></span>
-    <span style='--i:4'></span>
-    <span style='--i:5'></span>
-    <span style='--i:6'></span>
-    <span style='--i:7'></span>
-    <span style='--i:8'></span>
-    <span style='--i:9'></span>
-    <span style='--i:10'></span>
-    <span style='--i:11'></span>
-    <span style='--i:12'></span>
-    <span style='--i:13'></span>
-    <span style='--i:14'></span>
-    <span style='--i:15'></span>
-    <span style='--i:16'></span>
-    <span style='--i:17'></span>
-    <span style='--i:18'></span>
-    <span style='--i:19'></span>
-  </div>
-  <div id="wrapper" class="wrapper">
-    <div class="box"></div>
-  </div>
-  <div class="ring flex">
-    <div class="out flex">
-      <div class="mid flex">
-        <div class="in flex">
-          <div class="center"></div>
+    <div class="title">案例分析</div>
+    <div class="grid">
+      <div class="rect">
+        <div class="inner-rect"></div>
+      </div>
+      <div class="loading-box flex">
+        <div class="loading">
+          <span style="--i:0"></span>
+          <span style="--i:1"></span>
+          <span style='--i:2'></span>
+          <span style='--i:3'></span>
+          <span style='--i:4'></span>
+          <span style='--i:5'></span>
+          <span style='--i:6'></span>
+          <span style='--i:7'></span>
+          <span style='--i:8'></span>
+          <span style='--i:9'></span>
+          <span style='--i:10'></span>
+          <span style='--i:11'></span>
+          <span style='--i:12'></span>
+          <span style='--i:13'></span>
+          <span style='--i:14'></span>
+          <span style='--i:15'></span>
+          <span style='--i:16'></span>
+          <span style='--i:17'></span>
+          <span style='--i:18'></span>
+          <span style='--i:19'></span>
+        </div>
+      </div>
+      <div class="step-box">
+        <div class="step"></div>
+      </div>
+      <div class="tx-box">
+        <div class="tx">
+          <div class="tx-shadow"></div>
+        </div>
+        <div class="cube-box"></div>
+      </div>
+
+      <div class="rolling-box flex">
+        <div class="rolling"></div>
+      </div>
+      <div class="ring-box flex">
+        <div class="ring flex">
+          <div class="out flex">
+            <div class="mid flex">
+              <div class="in flex">
+                <div class="center"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
