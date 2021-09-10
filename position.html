@@ -10,8 +10,12 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="//at.alicdn.com/t/font_2357817_edjlnghbgnk.css">
   <style>
+    :root {
+      --w: 70vw;
+    }
+
     .w {
-      width: 70vw;
+      width: var(--w);
       margin: 0 auto;
       min-height: 100vh;
       padding: 1rem;
@@ -67,16 +71,36 @@
       margin-left: -8px;
     }
 
-    .sidebar {
+    .right {
       position: fixed;
       top: 50%;
       left: 50%;
-      margin-left: 35vw;
+      margin-left: calc(var(--w)/2);
       transform: translateY(-50%);
       width: 4rem;
       padding: 1rem;
       background-color: #c81623;
       color: #fff;
+    }
+
+    .left {
+      position: fixed;
+      top: 50%;
+      right: 50%;
+      margin-right: calc(var(--w)/2);
+      transform: translateY(-50%);
+      width: 4rem;
+      min-height: 10rem;
+      background-color: #c81623;
+    }
+
+    .bottom {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      width: var(--w);
+      transform: translateX(-50%);
+      background-color: #c81623;
     }
 
     .spacer {
@@ -143,11 +167,12 @@
     </div>
     <h1>二、固定定位Fixed</h1>
     <p>固定定位以视口viewport为参考。元素会固定在屏幕上，不会随页面的滚动而移动。如侧边导航栏。</p>
-    <p>贴近页面右侧版心：left偏移浏览器的一半（50%），再增加半个版心的左margin(400px)；贴近左侧同理</p>
+    <p>贴近页面右侧版心：left偏移浏览器的一半（50%），再增加半个版心的左margin；贴近左侧同理</p>
     <p>通常的解决方案是：当前页面位于顶端时，暂时隐藏侧边导航条；当页面向下滚动到一定位置时，再显式侧边导航栏；需要借助JS。</p>
-    <h1>三、粘性定位Sticky</h1>
+    <p>定位元素如果没有显式的指定left、top、right、bottom，则会待在原来的位置，但并不占据该位置</p>
+    <p>请比较版心有无padding时的定位情况</p>
 
-    <ul class="sidebar">
+    <ul class="right">
       <li class="item">
         <div>京东</div>
         <div>秒杀</div>
@@ -178,6 +203,10 @@
         <div>反馈</div>
       </li>
     </ul>
+    <aside class="left">left</aside>
+    <aside class="bottom">bottom</aside>
+
+    <h1>三、粘性定位Sticky</h1>
 
     <ul class="nav">
       <li>sticky</li>

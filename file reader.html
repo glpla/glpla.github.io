@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Reader</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    .img {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>readAsText(): .txt/.HTML/.js file</h1>
+  <input type="file" name="txt" id="txt" accept="text/*">
+  <h1>readAsDataURL()</h1>
+  <h2>single image</h2>
+  <input type="file" name="img" id="img" accept="image/*">
+  <img class="img" id='preview' src="" alt="暂无图片">
+  <h2>multiple images</h2>
+  <input type="file" name="imgs" id="imgs" accept="image/*" multiple>
+  <div id="previews"></div>
+  <h1>readAsArrayBuffer(): office files</h1>
+  <script>
+    window.onload = function () {
+      // read text
+      let txt = document.querySelector('#txt')
+      txt.addEventListener('change', function () {
+        let file = this.files[0]
+        let fr = new FileReader()
+        fr.readAsText(file)
+        fr.onload = function (e) {
+          console.log(e.target.result);
+        }
+      })
+      // read img
+      let img = document.querySelector('#img')
+      let preview = document.querySelector('#preview')
+      img.addEventListener('change', function () {
+        let file = this.files[0]
+        let fr = new FileReader()
+        fr.readAsDataURL(file)
+        fr.addEventListener('load', function () {
+          console.log(this);
+          preview.src = this.result
+
+        })
+      })
+      // read multiple images
+      let imgs = document.querySelector('#imgs')
+      let previews = document.querySelector('#previews')
+      imgs.addEventListener('change', function () {
+        let files = this.files
+        for (let i = 0; i < files.length; i++) {
+          console.log(files[i]);
+          let fr = new FileReader()
+          fr.readAsDataURL(files[i])
+          fr.addEventListener('load', function () {
+            let img = new Image()
+            img.src = this.result
+            img.classList = 'img'
+            previews.appendChild(img)
+          })
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>

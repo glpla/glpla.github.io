@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>file</title>
+  <style>
+    #file {
+      display: none;
+    }
+
+    #btn {
+      border: none;
+      outline: none;
+      height: 30px;
+      border-radius: .4rem;
+      font-size: 1.2rem;
+      background-image: linear-gradient(45deg, #f40, #f4f);
+      color: #fff;
+    }
+
+    #zone {
+      width: 400px;
+      height: 300px;
+      background-color: #f3f4f5;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>文件操作</h1>
+  <ul>
+    <li>input的type为file</li>
+    <li>默认是单个文件选择（选择结果仍然以数组返回）</li>
+    <li>如何知道单个文件的信息：name、size和type</li>
+    <li>如何选择多个文件：multiple属性</li>
+    <li>如何知道选择文件的个数：length；单个文件时，length为1</li>
+    <li>文件类型都有哪些</li>
+    <li>如何指定文件类型：accept属性</li>
+    <li>如何自定义UI而不使用系统默认的丑陋的样式：none掉input，利用额外元素如button的click来触发input的click（change）</li>
+    <li>如何拖拉获取文件信息：定义拖拉区，并指定drop事件。注意：系统默认会打开拖入的文件，应取消dragenter和dragover的默认动作</li>
+    <li>如果查看文件内容：FileReader</li>
+  </ul>
+  <input type="file" name="file" id="file" multiple accept="*">
+  <button id='btn'>choose files</button>
+  <span>or</span>
+  <div id="zone">drag files here</div>
+  <script>
+    window.onload = function () {
+      let file = document.querySelector('#file')
+      let btn = document.querySelector('#btn')
+      let drag = document.querySelector('#zone')
+      btn.addEventListener('click', function () {
+        if (file) {
+          file.click();
+        }
+      })
+      file.addEventListener('change', function () {
+        console.log(this.files);
+      })
+      // drag
+      drag.addEventListener('dragenter', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      })
+      drag.addEventListener('dragover', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+      })
+      drag.addEventListener('drop', function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+        console.log(e.dataTransfer.files);
+      })
+    }
+  </script>
+</body>
+
+</html>
