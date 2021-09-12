@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>File Reader</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <script type="text/javascript" src="./js/xlsx.core.min.js"></script>
   <style>
     .img {
       width: 200px;
@@ -17,16 +18,42 @@
 </head>
 
 <body>
-  <h1>readAsText(): .txt/.HTML/.js file</h1>
+  <h1>普通文本：readAsText()</h1>
+  <h2>.txt/.HTML/.js file</h2>
   <input type="file" name="txt" id="txt" accept="text/*">
-  <h1>readAsDataURL()</h1>
+  <h1>图片：readAsDataURL()</h1>
   <h2>single image</h2>
   <input type="file" name="img" id="img" accept="image/*">
   <img class="img" id='preview' src="" alt="暂无图片">
   <h2>multiple images</h2>
   <input type="file" name="imgs" id="imgs" accept="image/*" multiple>
   <div id="previews"></div>
-  <h1>readAsArrayBuffer(): office files</h1>
+  <h1>OA：readAsArrayBuffer()</h1>
+  <h2>workbook reading from local excel</h2>
+  <input type="file" name="excel" id="excel">
+  <p>手动生成表格：需要对数据进行再加工</p>
+  <div id="excel-box">content is empty</div>
+  <p>自动生成表格：仅适用于展示数据，对数据不做处理</p>
+  <p>The sheet_to_html utility function generates HTML code that can be added to any DOM element.</p>
+  <table id="tmp"></table>
+  <h2>workbook reading from table</h2>
+  <button id="btn2excel">click to save as excel</button>
+  <table id='tbl'>
+    <tr>
+      <th>name</th>
+      <th>gender</th>
+      <th>unit</th>
+      <th>cell</th>
+      <th>email</th>
+    </tr>
+    <tr>
+      <td>glpla</td>
+      <td>male</td>
+      <td>54414</td>
+      <td>13707735481</td>
+      <td>1942194789@qq.com</td>
+    </tr>
+  </table>
   <script>
     window.onload = function () {
       // read text
@@ -68,6 +95,63 @@
             previews.appendChild(img)
           })
         }
+      })
+      // workbook reading from local excel
+      let excel = document.querySelector('#excel')
+      function handleFile(e) {
+        let files = e.target.files, f = files[0];
+        let reader = new FileReader();
+        reader.onload = function (e) {
+          let data = new Uint8Array(e.target.result);
+          let workbook = XLSX.read(data, { type: 'array' });
+          console.log(workbook);
+          // 工作表名称集合
+          let sheetNames = workbook.SheetNames;
+          // 这里我们只读取第一张sheet        
+          let worksheet = workbook.Sheets[sheetNames[0]];
+
+          // 自动生成表格
+          let tmp = document.querySelector('#tmp')
+          tmp.innerHTML = XLSX.utils.sheet_to_html(worksheet);
+
+          // 手动生成表格
+          let json = XLSX.utils.sheet_to_json(worksheet)
+          console.log(sheetNames, worksheet, json);
+          // 创建table
+          // 获取表头
+          let thead = [worksheet['A1'].v, worksheet['B1'].v, worksheet['C1'].v, worksheet['D1'].v, worksheet['E1'].v, worksheet['F1'].v, worksheet['G1'].v, worksheet['H1'].v, worksheet['I1'].v, worksheet['J1'].v, worksheet['K1'].v, worksheet['L1'].v]
+
+          let html = '<table>'
+          // generate thead
+          html += '<tr>'
+          thead.forEach(item => {
+            html += '<th>' + item + '</th>';
+          })
+          html += '<th>操作</th>';
+          // generate tbody
+          html += '</tr>'
+          json.forEach(item => {
+            html += '<tr>'
+            thead.forEach(val => {
+              html += '<td>' + item[val] + '</td>'
+            })
+            html += '<td><a href="del">删除</a> <a href="mod">修改</a></td>'
+            html += '</tr>'
+          });
+          html += '</table>'
+          document.getElementById('excel-box').innerHTML = html;
+
+        };
+        reader.readAsArrayBuffer(f);
+      }
+      excel.addEventListener('change', handleFile, false);
+
+      // workboot reading from table
+      let btn2excel = document.querySelector('#btn2excel')
+      btn2excel.addEventListener('click', function () {
+        let tbl = XLSX.utils.table_to_book(document.querySelector('#tbl'));
+        console.log(tbl);
+        XLSX.writeFile(tbl, 'out.xlsx');
       })
     }
   </script>
