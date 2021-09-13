@@ -9,22 +9,84 @@
   <meta name='description' content="only for test">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
-  <title>form login</title>
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_2357817_edjlnghbgnk.css">
+  <title>Form</title>
   <style>
-    body {
-      height: 100vh;
-      background-color: #2c3e50;
+    .w {
+      width: 90vw;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .spacer {
+      display: flex;
+      align-items: center;
+    }
+
+    .spacer::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      margin-right: 1rem;
+      background-color: #a52a2a;
+    }
+
+    .spacer::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      margin-left: 1rem;
+      background-color: rgba(136, 136, 136, 0.533);
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search {
       display: flex;
       justify-content: center;
-      align-items: center;
+      background-color: #333;
+      border-radius: 3rem;
+      padding: .4rem;
+    }
+
+    .search-ipt {
+      width: 0;
+      height: 3rem;
+      background: none;
+      transition: .4s;
+      color: #a52a2a;
+      font-size: 1.4rem;
+    }
+
+    .search-btn {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: none;
+      color: #a52a2a;
+      cursor: pointer;
+    }
+
+    .search-btn span {
+      font-size: 1.5rem;
+    }
+
+    .search-ipt:focus,
+    .search:hover .search-ipt {
+      width: 12rem;
+      padding-left: .4rem;
     }
 
     .wrap {
       position: relative;
-      width: 90vw;
-      max-width: 800px;
-      padding: 3rem;
-      background: #2c3e50;
+      max-width: 400px;
+      margin: 1rem auto;
+      padding: 2rem;
+      background-color: #2c3e50;
       border-radius: 1rem;
     }
 
@@ -37,11 +99,11 @@
       right: -2px;
       bottom: -2px;
       border-radius: 1rem;
-      background-image: linear-gradient(235deg, #f40, #c56cf0, #fff200);
+      background-image: linear-gradient(235deg, #a52a2a, #c56cf0, #fff200);
     }
 
     .wrap::before {
-      filter: blur(3rem);
+      filter: blur(1rem);
       z-index: -2;
     }
 
@@ -65,7 +127,6 @@
     .user,
     .pw {
       width: 100%;
-      padding: .8rem 0px;
       letter-spacing: 2px;
       border-bottom: 1px solid #079;
       background: transparent;
@@ -75,7 +136,6 @@
 
     .input-box span {
       position: absolute;
-      padding: .8rem 0;
       left: 0px;
       top: 0px;
       color: #079;
@@ -86,20 +146,21 @@
 
     .input-box input:focus+span,
     .input-box input:valid+span {
-      font-size: 0.6rem;
+      /* font-size: 0.6rem; */
       color: #fff;
-      top: -20px;
+      top: -1.4rem;
     }
 
     /* border的颜色默认和color的颜色保持一致 */
     .btn {
       color: #079;
       background: transparent;
-      border: 1px solid;
+      border: 1px solid #079;
       border-radius: 4px;
       text-transform: uppercase;
       padding: 10px 20px;
       cursor: pointer;
+      transition: .4s;
     }
 
     .btn:hover {
@@ -152,35 +213,48 @@
 </head>
 
 <body>
-  <div class="wrap">
-    <h2>用户登陆</h2>
-    <div class="input-box">
-      <input class="user" type="text" required>
-      <span>用户</span>
+  <div class="w">
+    <div class="spacer">基本理论</div>
+    <div class="spacer">案例一</div>
+    <div class="search-box">
+      <div class="search">
+        <input class="search-ipt" type="text" maxlength="12" placeholder="keywords here">
+        <button class="search-btn"><span class="iconfont iconsearch1"></span></button>
+      </div>
     </div>
-    <div class="input-box">
-      <input class="pw" type="password" required>
-      <span>密码</span>
+    <div class="spacer">案例二</div>
+    <div class="wrap">
+      <h2>用户登陆</h2>
+      <div class="input-box">
+        <input class="user" type="text" required>
+        <span>用户</span>
+      </div>
+      <div class="input-box">
+        <input class="pw" type="password" required>
+        <span>密码</span>
+      </div>
+      <div class="input-box">
+        <input class="rem-cb" type="checkbox" name="" id="cb">
+        <label for="cb">记住用户名(QQ无效)</label>
+      </div>
+      <button class="btn">提交</button>
     </div>
-    <div class="input-box">
-      <input class="rem-cb" type="checkbox" name="" id="cb">
-      <label for="cb">记住用户名(QQ无效)</label>
-    </div>
-    <button class="btn">提交</button>
   </div>
   <script>
-    let rem = document.querySelector('.rem-cb')
-    let user = document.querySelector('.user')
-    user.value = localStorage.getItem('login-name') || ''
-    rem.checked = user.value
-    // rem.addEventListener('click', () => {
-    //   if (!user.value) {
-    //     alert('user-name NULL')
-    //     rem.checked = false
-    //   } else {
-    //     rem.checked ? localStorage.setItem('login-name', user.value) : localStorage.removeItem('login-name')
-    //   }
-    // })
+    window.onload = function () {
+      let rem = document.querySelector('.rem-cb')
+      let user = document.querySelector('.user')
+      user.value = localStorage.getItem('login-name') || ''
+      rem.checked = user.value
+      // rem.addEventListener('click', () => {
+      //   if (!user.value) {
+      //     alert('user-name NULL')
+      //     rem.checked = false
+      //   } else {
+      //     rem.checked ? localStorage.setItem('login-name', user.value) : localStorage.removeItem('login-name')
+      //   }
+      // })
+    }
   </script>
 </body>
 

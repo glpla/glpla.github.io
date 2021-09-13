@@ -5,324 +5,262 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WEB练习</title>
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+  <title>考核说明</title>
   <link rel="stylesheet" href="css/reset.css">
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      background-color: #f2f3f4;
+      min-height: 100vh;
+    }
+
+    .flex-v {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .w {
+      width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1,
+    h4 {
+      text-align: center;
     }
 
     h4 {
       font-weight: normal;
-      text-align: center;
-      line-height: 4;
+      color: #666;
     }
 
-    .nav-box {
+    .countdown-box {
+      font-size: 1rem;
+      flex: 1;
+    }
+
+    #cont {
+      display: none;
+    }
+
+    .title {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      box-shadow: 0 2px #f40, 0 6px #f406;
+      border-bottom: 2px solid #f40;
+      margin-bottom: .4rem;
+    }
+
+    .cont {
+      color: #333;
+      text-indent: 2em;
+      text-align: justify;
+    }
+
+    .cont:last-child {
+      text-indent: unset;
+    }
+
+    video {
+      width: 100%;
+    }
+
+    .img-box {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 1rem;
-      list-style: none;
-      width: 1000px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .score {
+      display: flex;
+      align-items: center;
+    }
+
+    .score .img {
+      flex: 1;
+      height: 8px;
+      background-image: url(imgs/dot.png);
+      background-repeat: repeat-x;
+    }
+
+    .bg {
+      padding: 0 .4rem;
+      background-color: rgb(255, 99, 71);
+      color: #fff;
+      font-size: 2rem;
+    }
+
+    footer.w {
       margin: 2rem auto;
     }
 
-    .nav-item {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-      color: inherit;
-      height: 150px;
-      text-transform: capitalize;
-      color: #fff;
-      font-size: 1.2rem;
-      background-color: #40739e;
-      border-radius: 1rem;
-      border: 4px solid #fff;
-      transition: .4s;
-    }
-
-    .nav-item:hover {
-      box-shadow: 0 0 1rem rgba(0, 0, 0, .6);
-      transform: scale(1.06);
-      background-color: #ff9f43;
-    }
-
-    .desc {
-      opacity: 1;
-      transition: .4s;
-    }
-
-    .tips {
-      position: absolute;
-      opacity: 0;
-      transition: .4s;
-      z-index: 1;
-    }
-
-    .nav-item:hover .desc {
-      opacity: 0;
-      transform: scale(2);
-    }
-
-    .nav-item:hover .tips {
-      opacity: 1;
-      transform: scale(2);
+    .logo-box img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
     }
 
     @media screen and (max-width:768px) {
       html {
-        font-size: 12px;
+        font-size: 14px;
       }
 
-      .nav-box {
-        grid-template-columns: repeat(3, 1fr);
-        gap: .6rem;
+      .w {
         width: 96vw;
-        margin: 1rem auto;
-      }
-
-      .nav-item {
-        height: 6rem;
-      }
-
-      .desc {
-        display: none;
-      }
-
-      .tips {
-        opacity: 1;
       }
     }
   </style>
 </head>
 
-<body>
-  <ul class="nav-box">
-    <li class="nav">
-      <a class="nav-item" href="intern.html">
-        <div class="desc">intern</div>
-        <div class="tips">实习</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="quiz.html">
-        <div class='desc'>quiz</div>
-        <div class='tips'>考核</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="opening.html">
-        <div class='desc'>opening</div>
-        <div class='tips'>开学</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="box.html">
-        <div class='desc'>box model</div>
-        <div class='tips'>盒模型</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="a.html">
-        <div class='desc'>&lt;a&gt;</div>
-        <div class='tips'>超链接</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="img.html">
-        <div class='desc'>&lt;img&gt;</div>
-        <div class='tips'>图片</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="background.html">
-        <div class='desc'>background</div>
-        <div class='tips'>初级背景</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="background adv.html">
-        <div class='desc'>background+</div>
-        <div class='tips'>高级背景</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="border.html">
-        <div class='desc'>border</div>
-        <div class='tips'>边框</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="text.html">
-        <div class='desc'>text</div>
-        <div class='tips'>文字</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="font.html">
-        <div class='desc'>iconfont</div>
-        <di class='tips'>字体图标</di>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="form.html">
-        <div class='desc'>form</div>
-        <div class='tips'>表单</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="file.html">
-        <div class='desc'>file</div>
-        <div class='tips'>文件</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="position.html">
-        <div class='desc'>position</div>
-        <div class='tips'>定位</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="float.html">
-        <div class='desc'>float</div>
-        <di class='tips'>浮动布局</di>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="flex.html">
-        <div class='desc'>flex</div>
-        <di class='tips'>弹性布局</di>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="grid.html">
-        <div class='desc'>grid</div>
-        <di class='tips'>网格布局</di>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="transition.html">
-        <div class='desc'>transition</div>
-        <di class='tips'>过渡动画</di>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="cheerup.html">
-        <div class='desc'>cheerup</div>
-        <di class='tips'>河南加油</di>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="animation.html">
-        <div class='desc'>animation</div>
-        <div class='tips'>帧动画</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="swiper.html">
-        <div class='desc'>swiper</div>
-        <div class='tips'>轮播</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="transform rotate.html">
-        <div class='desc'>js swiper</div>
-        <div class='tips'>3D轮播</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="loading.html">
-        <div class='desc'>loading</div>
-        <div class='tips'>加载</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="dice.html">
-        <div class='desc'>dice</div>
-        <di class='tips'>掷色子</di>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="transform.html">
-        <div class='desc'>transform</div>
-        <div class='tips'>变形</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="gallery.html">
-        <div class='desc'>gallery</div>
-        <div class='tips'>照片墙</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="cube.html">
-        <div class='desc'>cube</div>
-        <div class='tips'>3D魔方</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="cover.html">
-        <div class='desc'>cover</div>
-        <div class='tips'>封面</div>
-      </a>
-    </li>
+<body class="flex-v">
+  <h1 class="w">WEB考核须知</h1>
+  <div class="countdown-box flex-v" id='timer'>
+    <span>距离2021-09-15 19:00 还有</span>
+    <span>
+      <span class="day-box bg"></span>
+      <span>天</span>
+      <span class="hour-box bg"></span>
+      <span>小时</span>
+      <span class="min-box bg"></span>
+      <span>分</span>
+      <span class="sec-box bg"></span>
+      <span>秒</span>
+    </span>
+  </div>
+  <article class="w" id='cont'>
+    <h2 class="title">总要求</h2>
+    <p class="cont">参照下面的效果视频，根据提供的文字信息和图片完成本项目。</p>
+    <video src="./video/effect.mp4" loop muted controls preload poster="imgs/quiz.png"></video>
+    <h2 class="title">考核要求</h2>
+    <p class="cont">整个项目以学号+姓名的方式打包压缩提交到课堂派，压缩包格式不限，如：202013000000张树彬.rar，其它认定为无效作业，成绩记0分。</p>
+    <h2 class="title">效果说明</h2>
+    <p class="cont">静态效果：水平居中展示所有图片；</p>
+    <p class="cont">动态效果：鼠标hover到某个图片后，图片从矩形放大为圆角矩形，并带有阴影，说明文字出现并移出到底端；鼠标移开后，恢复原样。</p>
+    <h2 class="title">文字素材</h2>
+    <p class="cont">一方有难、八方支援</p>
+    <p class="cont">仅以此文，向为2021年7月遭受特大洪水侵袭的河南人民提供帮助和关注的各级同胞表示感谢！</p>
+    <p class="cont">郑州加油</p>
+    <p class="cont">河南加油</p>
+    <p class="cont">郑州挺住</p>
+    <p class="cont">河南挺住</p>
+    <h2 class="title">图片素材</h2>
+    <p class="cont">右键另存为，保存到本地使用</p>
+    <div class="img-box">
+      <img src="imgs/blog0.jpg" alt="blog">
+      <img src="imgs/blog1.jpg" alt="blog">
+      <img src="imgs/blog2.jpg" alt="blog">
+      <img src="imgs/blog3.jpg" alt="blog">
+    </div>
+    <h2 class="title">评分标准</h2>
+    <p class="cont">
+    <ul>
+      <li class="score">
+        <div>文件命名规范</div>
+        <div class="img"></div>
+        <div>5分</div>
+      </li>
+      <li class="score">
+        <div>H5结构合理</div>
+        <div class="img"></div>
+        <div>5分</div>
+      </li>
+      <li class="score">
+        <div>采用外部CSS样式</div>
+        <div class="img"></div>
+        <div>5分</div>
+      </li>
+      <li class="score">
+        <div>有初始化CSS样式或者单独的CSS文件</div>
+        <div class="img"></div>
+        <div>5分</div>
+      </li>
+      <li class="score">
+        <div>弹性盒子布局</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>图片显示无变形</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>元素水平居中</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>过渡动画</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>字体图标</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>阴影效果</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>圆角矩形</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="score">
+        <div>整体效果</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+    </ul>
+    </p>
+  </article>
+  <footer class="w flex-v">
+    <div class="logo-box">
+      <img src="./imgs/lg.png" alt="">
+      <img src="./imgs/glc.png" alt="">
+    </div>
+    <h4>Copyright Reserved &copy; By Cnplaman, 2021-07-27</h4>
+  </footer>
+  <script>
+    window.onload = function () {
+      let timer = document.querySelector('#timer')
+      let cont = document.querySelector('#cont')
+      let flag = false
+      let d = document.querySelector('.day-box')
+      let h = document.querySelector('.hour-box')
+      let m = document.querySelector('.min-box')
+      let s = document.querySelector('.sec-box')
+      let end = new Date('2021-09-15 19:00:00:')
+      let [inter, seconds, day, hh, min, sec] = [0, 0, 0, 0, 0, 0]
+      countdown()
+      inter = setInterval(countdown, 1000)
+      function countdown() {
+        seconds = (end - new Date()) / 1000
+        if (seconds <= 0) {
+          d.innerHTML = '00'
+          h.innerHTML = '00'
+          m.innerHTML = '00'
+          s.innerHTML = '00'
+          clearInterval(inter)
+          timer.style.display = 'none'
+          cont.style.display = 'block'
+        } else {
+          day = parseInt(seconds / 60 / 60 / 24)
+          d.innerHTML = day > 9 ? day : '0' + day
+          hh = parseInt(seconds / 60 / 60 % 24)
+          h.innerHTML = hh > 9 ? hh : '0' + hh
+          min = parseInt(seconds / 60 % 60)
+          m.innerHTML = min > 9 ? min : '0' + min
+          sec = parseInt(seconds % 60)
+          s.innerHTML = sec > 9 ? sec : '0' + sec
+        }
 
-    <li class="nav">
-      <a class="nav-item" href="cart.html">
-        <div class='desc'>cart</div>
-        <div class='tips'>购物车</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="accordion.html">
-        <div class='desc'>accordion</div>
-        <div class='tips'>手风琴</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="multimedia.html">
-        <div class='desc'>multimedia</div>
-        <div class='tips'>多媒体</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="skin.html">
-        <div class='desc'>skin</div>
-        <div class='tips'>换肤</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="file reader.html">
-        <div class='desc'>OA</div>
-        <div class='tips'>办公文档</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="ripple.html">
-        <div class='desc'>ripple</div>
-        <div class='tips'>涟漪</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="echart.html">
-        <div class='desc'>eChart</div>
-        <div class='tips'>图表</div>
-      </a>
-    </li>
-    <li class="nav">
-      <a class="nav-item" href="site.html">
-        <div class='desc'>website</div>
-        <di class='tips'>个人网站</di>
-      </a>
-    </li>
-  </ul>
-  <h4 class="w">cnplaman &copy; 2021-07-27</h4>
+      }
+    }
+  </script>
 </body>
 
 </html>
