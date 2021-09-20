@@ -5,50 +5,82 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>file</title>
-  <style>
-    #file {
-      display: none;
-    }
-
-    #btn {
-      border: none;
-      outline: none;
-      height: 30px;
-      border-radius: .4rem;
-      font-size: 1.2rem;
-      background-image: linear-gradient(45deg, #f40, #f4f);
-      color: #fff;
-    }
-
-    #zone {
-      width: 400px;
-      height: 300px;
-      background-color: #f3f4f5;
-    }
-  </style>
+  <title>File Reader</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/file.css">
+  <script type="text/javascript" src="./js/xlsx.core.min.js"></script>
 </head>
 
 <body>
-  <h1>文件操作</h1>
-  <ul>
-    <li>input的type为file</li>
-    <li>默认是单个文件选择（选择结果仍然以数组返回）</li>
-    <li>如何知道单个文件的信息：name、size和type</li>
-    <li>如何选择多个文件：multiple属性</li>
-    <li>如何知道选择文件的个数：length；单个文件时，length为1</li>
-    <li>文件类型都有哪些</li>
-    <li>如何指定文件类型：accept属性</li>
-    <li>如何自定义UI而不使用系统默认的丑陋的样式：none掉input，利用额外元素如button的click来触发input的click（change）</li>
-    <li>如何拖拉获取文件信息：定义拖拉区，并指定drop事件。注意：系统默认会打开拖入的文件，应取消dragenter和dragover的默认动作</li>
-    <li>如果查看文件内容：FileReader</li>
-  </ul>
-  <input type="file" name="file" id="file" multiple accept="*">
-  <button id='btn'>choose files</button>
-  <span>or</span>
-  <div id="zone">drag files here</div>
+  <div class="w">
+    <h1>文件选择</h1>
+    <ul>
+      <li>input的type为file</li>
+      <li>默认是单个文件选择（选择结果仍然以数组返回）</li>
+      <li>如何知道单个文件的信息：name、size和type</li>
+      <li>如何选择多个文件：multiple属性</li>
+      <li>如何知道选择文件的个数：length；单个文件时，length为1</li>
+      <li>文件类型都有哪些</li>
+      <li>如何指定文件类型：accept属性</li>
+      <li>如何自定义UI而不使用系统默认的丑陋的样式：none掉input，利用额外元素如button的click来触发input的click（change）</li>
+      <li>如何拖拉获取文件信息：定义拖拉区，并指定drop事件。注意：系统默认会打开拖入的文件，应取消dragenter和dragover的默认动作</li>
+      <li>如果查看文件内容：FileReader</li>
+    </ul>
+    <hr>
+    <input type="file" name="" id="file">
+    <button id="btn">select file</button>
+    <span>或拖动文件进入</span>
+    <div id="zone">drag files here</div>
+    <hr>
+    <h1>文件解析 FileReader</h1>
+    <h2>1.普通文本：readAsText()</h2>
+    <h3>.txt/.HTML/.js</h3>
+    <input type="file" name="txt" id="txt" accept="text/*">
+    <h2>2.图片：readAsDataURL()</h2>
+    <h3>2.1single image</h3>
+    <input type="file" name="img" id="img" accept="image/*">
+    <img class="img" id='preview' src="" alt="暂无图片">
+    <h3>2.2multiple images</h3>
+    <input type="file" name="imgs" id="imgs" accept="image/*" multiple>
+    <div id="previews"></div>
+    <h2>3.OA：readAsArrayBuffer()</h2>
+    <h3>3.1workbook reading from local excel</h3>
+    <input type="file" name="excel" id="excel">
+    <p>3.1.1手动生成表格：需要对数据进行再加工（以邮件合并为例）</p>
+    <div id="excel-box">content is empty</div>
+    <p>3.1.2自动生成表格：仅适用于展示数据，对数据不做处理</p>
+    <p>The sheet_to_html utility function generates HTML code that can be added to any DOM element.</p>
+    <table id="tmp"></table>
+    <h3>3.2workbook reading from table</h3>
+    <button id="btn2excel">read table and save as excel</button>
+    <table id='tbl'>
+      <tr>
+        <th>name</th>
+        <th>gender</th>
+        <th>unit</th>
+        <th>cell</th>
+        <th>email</th>
+      </tr>
+      <tr>
+        <td>glpla</td>
+        <td>male</td>
+        <td>54414</td>
+        <td>13707735481</td>
+        <td>1942194789@qq.com</td>
+      </tr>
+      <tr>
+        <td>cnplaman</td>
+        <td>male</td>
+        <td>75716</td>
+        <td>13707735481</td>
+        <td>1942194789@qq.com</td>
+      </tr>
+    </table>
+  </div>
   <script>
     window.onload = function () {
+      // select file
       let file = document.querySelector('#file')
       let btn = document.querySelector('#btn')
       let drag = document.querySelector('#zone')
@@ -73,6 +105,103 @@
         e.stopPropagation();
         e.preventDefault();
         console.log(e.dataTransfer.files);
+      })
+      // read text
+      let txt = document.querySelector('#txt')
+      txt.addEventListener('change', function () {
+        let file = this.files[0]
+        let fr = new FileReader()
+        fr.readAsText(file)
+        fr.onload = function (e) {
+          console.log(e.target.result);
+        }
+      })
+      // read img
+      let img = document.querySelector('#img')
+      let preview = document.querySelector('#preview')
+      img.addEventListener('change', function () {
+        let file = this.files[0]
+        let fr = new FileReader()
+        fr.readAsDataURL(file)
+        fr.addEventListener('load', function () {
+          console.log(this);
+          preview.src = this.result
+
+        })
+      })
+      // read multiple images
+      let imgs = document.querySelector('#imgs')
+      let previews = document.querySelector('#previews')
+      imgs.addEventListener('change', function () {
+        let files = this.files
+        for (let i = 0; i < files.length; i++) {
+          console.log(files[i]);
+          let fr = new FileReader()
+          fr.readAsDataURL(files[i])
+          fr.addEventListener('load', function () {
+            let img = new Image()
+            img.src = this.result
+            img.classList = 'img'
+            previews.appendChild(img)
+          })
+        }
+      })
+      // workbook reading from local excel
+      let excel = document.querySelector('#excel')
+      function handleFile(e) {
+        let files = e.target.files, f = files[0];
+        let reader = new FileReader();
+        reader.onload = function (e) {
+          let data = new Uint8Array(e.target.result);
+          let workbook = XLSX.read(data, { type: 'array' });
+          console.log(workbook);
+          // 工作表名称集合
+          let sheetNames = workbook.SheetNames;
+          // 这里我们只读取第一张sheet        
+          let worksheet = workbook.Sheets[sheetNames[0]];
+
+          // 自动生成表格
+          let tmp = document.querySelector('#tmp')
+          tmp.innerHTML = XLSX.utils.sheet_to_html(worksheet);
+
+          // 手动生成表格
+          let json = XLSX.utils.sheet_to_json(worksheet)
+          console.log(sheetNames, worksheet, json);
+          // 创建table
+          // 获取表头
+          let thead = [worksheet['A1'].v, worksheet['B1'].v, worksheet['C1'].v, worksheet['D1'].v, worksheet['E1'].v, worksheet['F1'].v, worksheet['G1'].v, worksheet['H1'].v, worksheet['I1'].v, worksheet['J1'].v, worksheet['K1'].v, worksheet['L1'].v]
+
+          let html = '<table>'
+          // generate thead
+          html += '<tr>'
+          thead.forEach(item => {
+            html += '<th>' + item + '</th>';
+          })
+          html += '<th>操作</th>';
+          // generate tbody
+          html += '</tr>'
+          json.forEach(item => {
+            html += '<tr>'
+            thead.forEach(val => {
+              html += '<td>' + item[val] + '</td>'
+            })
+            html += '<td><a href="del">删除</a> <a href="mod">修改</a></td>'
+            html += '</tr>'
+          });
+          html += '</table>'
+          document.getElementById('excel-box').innerHTML = html;
+
+        };
+        reader.readAsArrayBuffer(f);
+      }
+      excel.addEventListener('change', handleFile, false);
+
+      // workboot reading from table
+      let btn2excel = document.querySelector('#btn2excel')
+      btn2excel.addEventListener('click', function () {
+        let tbl = XLSX.utils.table_to_book(document.querySelector('#tbl'));
+        console.log(tbl);
+        XLSX.writeFile(tbl, 'out.xlsx');
       })
     }
   </script>

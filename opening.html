@@ -8,214 +8,11 @@
   <title>opening | 2021-2022</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="//at.alicdn.com/t/font_2357817_7mp7ai5x53p.css">
-  <style>
-    .wrap {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #fff;
-    }
-
-    .greeting {
-      width: 21rem;
-      height: 21rem;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
-
-    .item {
-      width: 100%;
-      height: 100%;
-      perspective: 1000px;
-      cursor: pointer;
-      border-radius: 50%;
-    }
-
-    .box {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 1rem;
-      box-shadow: 0 0 .8rem rgb(102, 102, 102);
-      transform-style: preserve-3d;
-      transition: 1s;
-    }
-
-    .img {
-      width: 40vw;
-      height: 20vw;
-      object-fit: cover;
-    }
-
-    .icon,
-    .tips {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      line-height: 7rem;
-      background-color: rgb(255, 127, 80);
-      color: #fff;
-      border-radius: 1rem;
-    }
-
-    .icon {
-      font-size: 2.5rem;
-    }
-
-    .tips {
-      transform: rotateY(180deg);
-      font-size: 1.4rem;
-      user-select: none;
-    }
-
-    .item:hover .box {
-      transform: rotateY(180deg);
-    }
-
-    .link {
-      position: absolute;
-      bottom: 6rem;
-      right: 4rem;
-      width: 4rem;
-      height: 4rem;
-      line-height: 4rem;
-      transition: 2s;
-    }
-
-    .arrow {
-      width: 100%;
-      height: 100%;
-      font-size: 60px;
-      color: #ff7f50;
-      text-shadow: 0 0 1rem #ff7f50;
-    }
-
-    .link:hover {
-      transform: rotate(360deg);
-    }
-
-    /* page2 */
-    .cont {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .cont p {
-      font-size: 1.4rem;
-    }
-
-    /* page3 */
-
-    .greeting img:nth-child(4) {
-      grid-column: span 3;
-    }
-
-    .greeting img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* page4 */
-    .score {
-      width: 60%;
-      font-size: 1.2rem;
-    }
-
-    .score-item {
-      display: flex;
-      /* justify-content: space-between; */
-      align-items: center;
-      height: 2rem;
-      line-height: 2rem;
-      color: #fff;
-      margin: 1rem 0;
-      background-color: #f3f3f3;
-    }
-
-    .effect {
-      height: 100%;
-      border-top-right-radius: 1rem;
-      border-bottom-right-radius: 1rem;
-      margin-right: 1rem;
-      box-shadow: 0 0.1rem 0.1rem rgba(102, 102, 102, 0.4), 0 0.2rem 0.2rem rgba(0, 0, 0, 0.533);
-      /* animation-name: scale;
-      animation-delay: calc(var(--per)*2s);
-      animation-duration: calc(var(--per)*4s);
-      animation-fill-mode: forwards; */
-    }
-
-    .item1 div:first-child {
-      width: 10%;
-      background-color: #05c46b;
-    }
-
-    .item1 div:last-child {
-      color: #05c46b;
-    }
-
-    .item2 div:first-child {
-      width: 10%;
-      background-color: #ffa801;
-    }
-
-    .item2 div:last-child {
-      color: #ffa801;
-    }
-
-    .item3 div:first-child {
-      width: 20%;
-      background-color: #079;
-    }
-
-    .item3 div:last-child {
-      color: #079;
-    }
-
-    .item4 div:first-child {
-      width: 60%;
-      background-color: #c0392b;
-    }
-
-    .item4 div:last-child {
-      color: #c0392b;
-    }
-
-    @keyframes scale {
-      to {
-        width: calc(var(--per)*100%);
-      }
-    }
-
-    @media (max-width:768px) {
-      html {
-        font-size: 14px;
-      }
-
-      .score {
-        width: 90%;
-        font-size: 1rem;
-      }
-
-      .effect {
-        margin-right: .4rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/opening.css">
 </head>
 
 <body>
-  <div class="wrap" id='greeting'>
+  <div class="flex-h wrap" id='greeting'>
     <div class="greeting">
       <div class="item">
         <div class="box">
@@ -274,8 +71,8 @@
     </div>
     <a class="link" href="#content"><i class="iconfont iconArrowdown arrow"></i></a>
   </div>
-  <div class="wrap" id='content'>
-    <div class="cont">
+  <div class="flex-h wrap" id='content'>
+    <div class="flex-v">
       <p>HTML5</p>
       <p>CSS3</p>
       <p>JavaScript</p>
@@ -286,7 +83,7 @@
     </div>
     <a class="link" href="#tool"><i class="iconfont iconArrowdown arrow"></i></a>
   </div>
-  <div class="wrap" id='tool'>
+  <div class="flex-h wrap" id='tool'>
     <div class="greeting">
       <img class="item" src="./imgs/chrome.jpg" alt="">
       <img class="item" src="./imgs/git.jpg" alt="">
@@ -298,21 +95,21 @@
     </div>
     <a class="link" href="#score"><i class="iconfont iconArrowdown arrow"></i></a>
   </div>
-  <div class="wrap" id="score">
+  <div class="flex-h wrap" id="score">
     <div class="score">
-      <div class="score-item item1">
+      <div class="flex-h score-item item1">
         <div class="effect" style="--per:0.1"></div>
         <div>考勤10分</div>
       </div>
-      <div class="score-item item2">
+      <div class="flex-h score-item item2">
         <div class="effect" style="--per:0.1"></div>
         <div>作业10分</div>
       </div>
-      <div class="score-item item3">
+      <div class="flex-h score-item item3">
         <div class="effect" style="--per:0.2"></div>
         <div>大作业20分</div>
       </div>
-      <div class="score-item item4">
+      <div class="flex-h score-item item4">
         <div class="effect" style="--per:0.6"></div>
         <div>考核60分</div>
       </div>

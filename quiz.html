@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+  <title>考核说明</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/quiz.css">
+</head>
+
+<body class="flex-v">
+  <h1 class="w">WEB考核须知</h1>
+  <div class="countdown-box flex-v" id='timer'>
+    <span>距离2021-09-15 19:00 还有</span>
+    <span>
+      <span class="day-box bg">00</span>
+      <span>天</span>
+      <span class="hour-box bg">00</span>
+      <span>小时</span>
+      <span class="min-box bg">00</span>
+      <span>分</span>
+      <span class="sec-box bg">00</span>
+      <span>秒</span>
+    </span>
+  </div>
+  <article class="w" id='cont'>
+    <h2 class="title">总要求</h2>
+    <p class="cont">参照下面的效果视频，根据提供的文字信息和图片完成本项目。</p>
+    <video src="./video/effect.mp4" loop muted controls preload poster="imgs/quiz.png"></video>
+    <h2 class="title">考核要求</h2>
+    <p class="cont">整个项目以学号+姓名的方式打包压缩提交到课堂派，压缩包格式不限，如：202013000000张树彬.rar，其它认定为无效作业，成绩记0分。</p>
+    <h2 class="title">效果说明</h2>
+    <p class="cont">静态效果：水平居中展示所有图片；</p>
+    <p class="cont">动态效果：鼠标hover到某个图片后，图片从矩形放大为圆角矩形，并带有阴影，说明文字出现并移出到底端；鼠标移开后，恢复原样。</p>
+    <h2 class="title">文字素材</h2>
+    <p class="cont">一方有难、八方支援</p>
+    <p class="cont">仅以此文，向为2021年7月遭受特大洪水侵袭的河南人民提供帮助和关注的各级同胞表示感谢！</p>
+    <p class="cont">郑州加油</p>
+    <p class="cont">河南加油</p>
+    <p class="cont">郑州挺住</p>
+    <p class="cont">河南挺住</p>
+    <h2 class="title">图片素材</h2>
+    <p class="cont">右键另存为，保存到本地使用</p>
+    <div class="img-box">
+      <img src="imgs/blog0.jpg" alt="blog">
+      <img src="imgs/blog1.jpg" alt="blog">
+      <img src="imgs/blog2.jpg" alt="blog">
+      <img src="imgs/blog3.jpg" alt="blog">
+    </div>
+    <h2 class="title">评分标准</h2>
+    <p class="cont">
+    <ul>
+      <li class="flex-h">
+        <div>文件命名规范</div>
+        <div class="img"></div>
+        <div>5分</div>
+      </li>
+      <li class="flex-h">
+        <div>H5结构合理</div>
+        <div class="img"></div>
+        <div>5分</div>
+      </li>
+      <li class="flex-h">
+        <div>采用外部CSS样式</div>
+        <div class="img"></div>
+        <div>5分</div>
+      </li>
+      <li class="flex-h">
+        <div>有初始化CSS样式或者单独的CSS文件</div>
+        <div class="img"></div>
+        <div>5分</div>
+      </li>
+      <li class="flex-h">
+        <div>弹性盒子布局</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="flex-h">
+        <div>图片显示无变形</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="flex-h">
+        <div>元素水平居中</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="flex-h">
+        <div>过渡动画</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="flex-h">
+        <div>字体图标</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="flex-h">
+        <div>阴影效果</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="flex-h">
+        <div>圆角矩形</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+      <li class="flex-h">
+        <div>整体效果</div>
+        <div class="img"></div>
+        <div>10分</div>
+      </li>
+    </ul>
+    </p>
+  </article>
+  <footer class="w flex-v">
+    <div class="logo-box">
+      <img src="./imgs/lg.png" alt="">
+      <img src="./imgs/glc.png" alt="">
+    </div>
+    <h4>Copyright Reserved &copy; By Cnplaman, 2021-07-27</h4>
+  </footer>
+  <script>
+    window.onload = function () {
+      let timer = document.querySelector('#timer')
+      let cont = document.querySelector('#cont')
+      let flag = false
+      let d = document.querySelector('.day-box')
+      let h = document.querySelector('.hour-box')
+      let m = document.querySelector('.min-box')
+      let s = document.querySelector('.sec-box')
+      let end = new Date('2021-09-15 19:00:00:')
+      let [inter, seconds, day, hh, min, sec] = [0, 0, 0, 0, 0, 0]
+      countdown()
+      inter = setInterval(countdown, 1000)
+      function countdown() {
+        seconds = (end - new Date()) / 1000
+        if (seconds <= 0) {
+          d.innerHTML = '00'
+          h.innerHTML = '00'
+          m.innerHTML = '00'
+          s.innerHTML = '00'
+          clearInterval(inter)
+          timer.style.display = 'none'
+          cont.style.display = 'block'
+        } else {
+          day = parseInt(seconds / 60 / 60 / 24)
+          d.innerHTML = day > 9 ? day : '0' + day
+          hh = parseInt(seconds / 60 / 60 % 24)
+          h.innerHTML = hh > 9 ? hh : '0' + hh
+          min = parseInt(seconds / 60 % 60)
+          m.innerHTML = min > 9 ? min : '0' + min
+          sec = parseInt(seconds % 60)
+          s.innerHTML = sec > 9 ? sec : '0' + sec
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

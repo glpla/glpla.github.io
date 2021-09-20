@@ -8,67 +8,13 @@
   <title>text</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <style>
-    article {
-      max-width: 1100px;
-      width: 96vw;
-      margin: 0 auto;
-      column-count: 3;
-      text-align: justify;
-    }
-
-    .title,
-    .sub-title,
-    .footer {
-      column-span: all;
-      text-align: center;
-    }
-
-    h2 {
-      line-height: 3rem;
-    }
-
-    h3 {
-      line-height: 3rem;
-    }
-
-    p {
-      line-height: 1.5rem;
-      text-indent: 2em;
-      color: #3b4348;
-    }
-
-    .cap {
-      text-indent: unset;
-    }
-
-    .cap::first-letter {
-      float: left;
-      font-size: 3em;
-      color: #f40;
-      margin: 1rem 1rem 1rem 0;
-    }
-
-    .code {
-      background-color: #ddd;
-    }
-
-    @media screen and (max-width:768px) {
-      html {
-        font-size: 14px;
-      }
-
-      article {
-        column-count: 2;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/text.css">
 </head>
 
 <body>
-  <article>
+  <article class="w">
     <h1 class="title">文章排版</h1>
-    <h4 class="sub-title">(必须显式的指定行高)</h4>
+    <h4 class="sub-title">必须显式的指定行高</h4>
     <p>俗话说人靠衣装，美靠靓装，一篇文章要想将其完美呈现还是需要有好的排版才行。一个优秀的排版可以使别人在阅读的时候，更加的赏心悦目，以此来吸引更多的人群去阅览。</p>
     <h2>一、内容选择</h2>
     <h3>1.字体</h3>
@@ -93,7 +39,7 @@
     <p>这是因为元素占据的高度不一致导致的。最简单的方法就是指定各个标签的行高line-height，同时保证行高是最小元素的整数倍即可。</p>
     <p>也可以通过指定每个元素的padding和margin，以保证所占空间是最小元素空间的整数倍。</p>
     <h2>三、特殊效果</h2>
-    <h3>1首字下沉</h3>
+    <h3>1.首字下沉</h3>
     <p class="cap">首字下沉需要通过伪元素::first-letter来实现。其实现原理非常简单，就是把首字font-size值设置较大，设置合适的边距，最后使用float来实现。</p>
     <pre class="code">
 .cap::first-letter {
@@ -107,8 +53,8 @@
     <h3>2.自动滚动</h3>
     <p>受布局尺寸的影响，应当根据内容的多少，自动出现水平方向或垂直方向的滚动条。可以使用的属性有：overflow: auto; overflow-x: auto; overflow-y: auto;</p>
     <p>还有很多其它样式和特效的设置，请同学们自行查阅相关文档。</p>
-    <p>最后，要保证文章当中无错别字，当我们排版完成后，还要再去检查一下，看看整篇文章中是否有错别字，给用户一个严谨严肃的形象。</p>
-    <h4 class="footer">2021 &copy; cnplaman</h4>
+    <p>最后，要保证文章当中无错别字，当我们排版完成后，还要再去检查一下，看看整篇文章中是否有错别字，给用户一个严谨的形象。</p>
+    <h4 class="footer">copyrights reserved &copy; by cnplaman, 2021-2022</h4>
   </article>
 </body>
 
