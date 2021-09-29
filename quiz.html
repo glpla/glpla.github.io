@@ -13,7 +13,7 @@
 
 <body class="flex-v">
   <h1 class="w">WEB考核须知</h1>
-  <div class="countdown-box flex-v" id='timer'>
+  <!-- <div class="countdown-box flex-v" id='timer'>
     <span>距离2021-09-15 19:00 还有</span>
     <span>
       <span class="day-box bg">00</span>
@@ -25,7 +25,7 @@
       <span class="sec-box bg">00</span>
       <span>秒</span>
     </span>
-  </div>
+  </div> -->
   <article class="w" id='cont'>
     <h2 class="title">总要求</h2>
     <p class="cont">参照下面的效果视频，根据提供的文字信息和图片完成本项目。</p>
@@ -124,40 +124,40 @@
     <h4>Copyright Reserved &copy; By Cnplaman, 2021-07-27</h4>
   </footer>
   <script>
-    window.onload = function () {
-      let timer = document.querySelector('#timer')
-      let cont = document.querySelector('#cont')
-      let flag = false
-      let d = document.querySelector('.day-box')
-      let h = document.querySelector('.hour-box')
-      let m = document.querySelector('.min-box')
-      let s = document.querySelector('.sec-box')
-      let end = new Date('2021-09-15 19:00:00:')
-      let [inter, seconds, day, hh, min, sec] = [0, 0, 0, 0, 0, 0]
-      countdown()
-      inter = setInterval(countdown, 1000)
-      function countdown() {
-        seconds = (end - new Date()) / 1000
-        if (seconds <= 0) {
-          d.innerHTML = '00'
-          h.innerHTML = '00'
-          m.innerHTML = '00'
-          s.innerHTML = '00'
-          clearInterval(inter)
-          timer.style.display = 'none'
-          cont.style.display = 'block'
-        } else {
-          day = parseInt(seconds / 60 / 60 / 24)
-          d.innerHTML = day > 9 ? day : '0' + day
-          hh = parseInt(seconds / 60 / 60 % 24)
-          h.innerHTML = hh > 9 ? hh : '0' + hh
-          min = parseInt(seconds / 60 % 60)
-          m.innerHTML = min > 9 ? min : '0' + min
-          sec = parseInt(seconds % 60)
-          s.innerHTML = sec > 9 ? sec : '0' + sec
-        }
-      }
-    }
+    // window.onload = function () {
+    //   let timer = document.querySelector('#timer')
+    //   let cont = document.querySelector('#cont')
+    //   let flag = false
+    //   let d = document.querySelector('.day-box')
+    //   let h = document.querySelector('.hour-box')
+    //   let m = document.querySelector('.min-box')
+    //   let s = document.querySelector('.sec-box')
+    //   let end = new Date('2021-09-15 19:00:00:')
+    //   let [inter, seconds, day, hh, min, sec] = [0, 0, 0, 0, 0, 0]
+    //   countdown()
+    //   inter = setInterval(countdown, 1000)
+    //   function countdown() {
+    //     seconds = (end - new Date()) / 1000
+    //     if (seconds <= 0) {
+    //       d.innerHTML = '00'
+    //       h.innerHTML = '00'
+    //       m.innerHTML = '00'
+    //       s.innerHTML = '00'
+    //       clearInterval(inter)
+    //       timer.style.display = 'none'
+    //       cont.style.display = 'block'
+    //     } else {
+    //       day = parseInt(seconds / 60 / 60 / 24)
+    //       d.innerHTML = day > 9 ? day : '0' + day
+    //       hh = parseInt(seconds / 60 / 60 % 24)
+    //       h.innerHTML = hh > 9 ? hh : '0' + hh
+    //       min = parseInt(seconds / 60 % 60)
+    //       m.innerHTML = min > 9 ? min : '0' + min
+    //       sec = parseInt(seconds % 60)
+    //       s.innerHTML = sec > 9 ? sec : '0' + sec
+    //     }
+    //   }
+    // }
   </script>
 </body>
 
