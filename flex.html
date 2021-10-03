@@ -8,151 +8,52 @@
   <title>flex</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
-  <style>
-    .cont {
-      width: 100vw;
-      position: relative;
-      height: 7rem;
-      margin-top: 1rem;
-    }
-
-    .pos-left {
-      position: absolute;
-      left: 0px;
-      min-width: 5rem;
-      height: 100%;
-      background-color: #f40;
-    }
-
-    .pos-right {
-      position: absolute;
-      left: 5rem;
-      width: calc(100% - 5rem);
-      height: 100%;
-      background-color: #f80;
-    }
-
-    .float-left {
-      float: left;
-      width: 5rem;
-      height: 100%;
-      background-color: #f40;
-    }
-
-    .float-right {
-      height: 100%;
-      margin-left: 5rem;
-      background-color: #f80;
-      overflow: hidden;
-    }
-
-    .flex {
-      display: flex;
-      width: 100vw;
-      height: 12rem;
-      margin-top: 1rem;
-    }
-
-    .flex .left {
-      flex-basis: 5rem;
-      height: 100%;
-      background-color: #f40;
-    }
-
-    .flex .right {
-      flex: 1;
-      height: 100%;
-      background-color: #f80;
-    }
-
-    .flex .col-left,
-    .flex .col-right {
-      flex-basis: 5rem;
-      height: 100%;
-      background-color: #f80
-    }
-
-    .flex .col-middle {
-      flex: 1;
-      height: 100%;
-      background-color: #f40
-    }
-
-    .flex .eq {
-      flex: 1;
-    }
-
-    .flex .eq:nth-child(1) {
-      background-color: #f80;
-    }
-
-    .flex .eq:nth-child(2) {
-      background-color: #f40;
-    }
-
-    .flex .eq:nth-child(3) {
-      background-color: #f80;
-    }
-
-    .flex .eq-1 {
-      flex: 1;
-      background-color: #f80;
-    }
-
-    .flex .eq-2 {
-      flex: 2;
-      background-color: #f40;
-    }
-
-    .clear::after {
-      content: '';
-      display: block;
-      clear: both;
-    }
-  </style>
+  <link rel="stylesheet" href="css/flex.css">
 </head>
 
 <body>
-  <div class="cont">
-    <div class="pos-left">左侧固定</div>
-    <div class="pos-right">
-      <p>左侧固定大小;右侧需指定和左侧宽度相同的margin-left;</p>
-      <p>优点是不用考虑塌陷的问题和清除浮动的问题;</p>
+  <div class="w">
+    <h1>知识点</h1>
+    <dl class="keypoint">
+      <dt>flex盒子属性</dt>
+      <dd>flex-direction</dd>
+      <dd>justify-content</dd>
+      <dd>align-items</dd>
+      <dd>flex-wrap</dd>
+    </dl>
+    <dl class="keypoint">
+      <dt>flex项属性</dt>
+      <dd>flex-grow</dd>
+      <dd>flex-shrink</dd>
+      <dd>flex-basis</dd>
+      <dd>复合属性flex:flex-grow flex-shrink flex-basis</dd>
+      <dd>简写属性flex</dd>
+    </dl>
+    <div class="exam-title">水平垂直居中</div>
+    <div class="flex center">点击进入</div>
+    <div class="exam-title">左右导航布局</div>
+    <div class="flex">
+      <div class="left">固定大小</div>
+      <div class="right">自适应大小</div>
     </div>
-  </div>
-  <div class="cont clear">
-    <div class="float-left">左侧固定</div>
-    <div class="float-right">
-      <p>采用float:只需左侧浮动->脱离文档流.右侧顶上来->补左侧的位置,只需指定和左侧宽度相同的margin-left即可.</p>
-      <p>须清除浮动</p>
+    <div class="exam-title">圣杯布局</div>
+    <div class="flex">
+      <div class="cup-left">固定大小</div>
+      <div class="cup-middle">自适应大小</div>
+      <div class="cup-right">固定大小</div>
     </div>
-  </div>
-  <div class="flex">
-    <div class="left"></div>
-    <div class="right">
-      <p>利用flex:父级指定flex布局.子级:左右分别指定flex属性.</p>
-      <p>flex(复合属性):flex-grow(默认0:有剩余空间也不扩展) flex-shrink(默认1:空间不够时将缩小) flex-basis(auto:自动分配大小)</p>
-      <p>左侧不扩不缩固定大小flex-basis: 5rem;右侧要扩要缩自动分配flex: 1;</p>
+    <div class="exam-title">等分布局</div>
+    <div class="flex">
+      <div class="eq">三等分flex:1;</div>
+      <div class="eq">三等分flex:1;</div>
+      <div class="eq">三等分flex:1;</div>
     </div>
-  </div>
-  <div class="flex">
-    <div class="col-left">flex-basis</div>
-    <div class="col-middle">
-      <p>左侧不扩不缩固定大小flex-basis/width:5rem;</p>
-      <p>中间要扩要缩自动分配flex;</p>
-      <p>右侧不扩不缩固定大小flex-basis/width:5rem;</p>
+    <div class="exam-title">不等分布局</div>
+    <div class="flex">
+      <div class="eq-1">1/4份flex:1;</div>
+      <div class="eq-2">2/4份flex:2;</div>
+      <div class="eq-1">1/4份flex:1;</div>
     </div>
-    <div class="col-right">width</div>
-  </div>
-  <div class="flex">
-    <div class="eq">三等分flex:1;</div>
-    <div class="eq">三等分flex:1;</div>
-    <div class="eq">三等分flex:1;</div>
-  </div>
-  <div class="flex">
-    <div class="eq-1">1/4份flex:1;</div>
-    <div class="eq-2">2/4份flex:2;</div>
-    <div class="eq-1">1/4份flex:1;</div>
   </div>
 </body>
 <script>
