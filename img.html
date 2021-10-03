@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>image effect</title>
+  <title>Image effect</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/img.css">
@@ -13,20 +13,31 @@
 
 <body>
   <div class="w">
-    <h2 class="flex-h">&nbsp; 基本使用&nbsp; </h2>
-    <div class="flex-h">
-      <div class="img-box">
-        <img class="img0" src="./imgs/bg.jpg" alt="">
-      </div>
+    <dl class="keypoint">
+      <dt>知识点</dt>
+      <dd>object-fit</dd>
+      <dd>background-image</dd>
+      <dd>background-size</dd>
+      <dd>background-blend-mode</dd>
+    </dl>
+    <div class="exam-title">&nbsp; 使用模式1：直接使用图片&nbsp; </div>
+    <div class="mode">
+      <img class="img0" src="./imgs/bg.jpg" alt="">
+      <div class="tips">图片指定宽度，其高度自适应。图片高度太大，布局被撑开；图片高度太小，布局被压缩</div>
+    </div>
+    <div class="exam-title">&nbsp; 使用模式2：使用容器包裹图片&nbsp; </div>
+    <div class="mode">
       <div class="img-box">
         <img class="img1" src="./imgs/bg.jpg" alt="">
       </div>
-      <div class="img-box">
-        <img class="img2" src="./imgs/bg.jpg" alt="">
-      </div>
+      <div class="tips">容器指定宽高并溢出隐藏；图片指定宽度100%，其高度自适应。容器高度太大，留有空白；容器高度太小，图片展示不完全</div>
     </div>
-    <h2 class="flex-h">&nbsp; 精灵图&nbsp; </h2>
-    <p>(background-position)</p>
+    <div class="exam-title">&nbsp; 使用模式3：直接使用图片&nbsp; </div>
+    <div class="mode">
+      <img class="img2" src="./imgs/bg.jpg" alt="">
+      <div class="tips">图片指定宽度、高度。同时指定object-fit: cover;</div>
+    </div>
+    <div class="exam-title">&nbsp; 精灵图之基本使用&nbsp; </div>
     <div class="flex-h">
       <div class="flex-h item">
         <p class="icon more">多</p>
@@ -45,8 +56,13 @@
         <p>客户服务</p>
       </div>
     </div>
-    <h2 class="flex-h">&nbsp; 高级使用&nbsp; </h2>
-    <p>(background-blend-mode)</p>
+    <div class="exam-title">&nbsp; 精灵图之拼图&nbsp; </div>
+    <div class="tile-box">
+      <div class="tile t0"></div>
+      <div class="tile t1"></div>
+      <div class="tile t2"></div>
+    </div>
+    <div class="exam-title">&nbsp; 混合模式&nbsp; </div>
     <div class="blend-img"></div>
   </div>
 </body>
