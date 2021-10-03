@@ -50,105 +50,91 @@
       overflow: hidden;
       margin-right: 1rem;
     }
-
-    .clear::after {
-      content: '';
-      display: block;
-      clear: both;
-    }
   </style>
 </head>
 
 <body>
-  <h1>Float Layout</h1>
-  <h2 class="w">特性说明</h2>
-  <p class="w"><svg class="icon" aria-hidden="true">
-      <use xlink:href="#iconbomb"></use>
-    </svg>浮动元素会脱离文档流document flow；</p>
-  <p class="w"><svg class="icon" aria-hidden="true">
-      <use xlink:href="#iconbomb"></use>
-    </svg>布局时，元素的先后顺序不一样，最后呈现的布局也不一样；</p>
-  <p class="w"><svg class="icon" aria-hidden="true">
-      <use xlink:href="#iconbomb"></use>
-    </svg>布局时，必须要清除浮动。你不清试试！</p>
-  <p class="w"><svg class="icon" aria-hidden="true">
-      <use xlink:href="#iconbomb"></use>
-    </svg>现在：仅仅需要图文混排时，才会使用float；</p>
-  <p class="w"><svg class="icon" aria-hidden="true">
-      <use xlink:href="#iconbomb"></use>
-    </svg>其它布局请采用弹性盒子flex或网格grid；<span>只推荐这俩种</span></p>
-
-  <h2 class="w">清除浮动</h2>
-  <p class="w">以伪元素的形式为浮动元素的父元素指定清除类</p>
-  <pre class="w code">
+  <div class="w">
+    <h1>知识点</h1>
+    <dl class="keypoint">
+      <dt>特性说明</dt>
+      <dd>浮动元素会脱离文档流document flow；</dd>
+      <dd>布局时，元素的先后顺序不一样，最后呈现的布局也不一样；</dd>
+      <dd>布局时，必须要清除浮动。你不清试试！</dd>
+      <dd>现在：仅仅需要图文混排时，才会使用float；</dd>
+      <dd>其它布局请采用弹性盒子flex或网格grid；<span>只推荐这俩种</span></dd>
+    </dl>
+    <dl class="keypoint">
+      <dt>清除浮动</dt>
+      <dd>以伪元素的形式为浮动元素的父元素指定清除类</dd>
+    </dl>
+    <pre class="code">
     .clear::after {
       content: '';
       display: block;
       clear: both;
     }  </pre>
-  <h2 class="w">示例</h2>
-  <p class="w">以下两个demo的元素用到的css完全相同(怎么看样式？<svg class="icon" aria-hidden="true">
-      <use xlink:href="#iconbomb"></use>
-    </svg>)，只是元素在文档流中出现的顺序不一致，但是呈现的结果完全不一样。</p>
-  <div class="w code">
-    <xmp>
+    <div class="exam-title">元素顺序的影响</div>
+    <div class="code">
+      <xmp>
+        <div class="red"></div>
+        <div class="yellow"></div>
+        <div class="blue"></div>
+      </xmp>
+    </div>
+    <div class="cont clear">
       <div class="red"></div>
       <div class="yellow"></div>
       <div class="blue"></div>
-    </xmp>
-  </div>
-  <div class="w cont clear">
-    <div class="red"></div>
-    <div class="yellow"></div>
-    <div class="blue"></div>
-  </div>
-  <div class="w code clear">
-    <xmp>
+    </div>
+    <div class="exam-title">元素顺序影响</div>
+    <div class="code clear">
+      <xmp>
+        <div class="red"></div>
+        <div class="blue"></div>
+        <div class="yellow"></div>
+      </xmp>
+    </div>
+    <div class="cont">
       <div class="red"></div>
       <div class="blue"></div>
       <div class="yellow"></div>
-    </xmp>
+    </div>
+    <div class="exam-title">图文未混排</div>
+    <div class="cont">
+      <img src="imgs/bg-book.jpg" alt="">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente quos recusandae ducimus cupiditate obcaecati
+      molestiae fugit praesentium nostrum ratione vel. Nihil sequi blanditiis tempora doloremque reprehenderit illum
+      distinctio amet exercitationem, asperiores praesentium. Praesentium quaerat impedit a recusandae id dicta dolores,
+      illo quibusdam earum quam! Distinctio facilis corporis libero aperiam molestias, nemo quasi tempora atque?
+      Temporibus, suscipit assumenda! Cumque laborum beatae exercitationem. Alias nobis enim exercitationem, quas,
+      veritatis eaque, nam aperiam cumque eius esse blanditiis! Quos veritatis sunt hic explicabo ullam quas nam
+      architecto corrupti? Optio, sit quam rem autem veniam magni fugit unde, cumque doloribus vel sapiente excepturi
+      adipisci id.
+    </div>
+    <div class="exam-title">图文混排</div>
+    <div class="cont">
+      <img class="float" src="imgs/bg-book.jpg" alt="">
+      &lt;img&gt;左浮动。Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente quos recusandae ducimus
+      cupiditate obcaecati
+      molestiae fugit praesentium nostrum ratione vel. Nihil sequi blanditiis tempora doloremque reprehenderit illum
+      distinctio amet exercitationem, asperiores praesentium. Praesentium quaerat impedit a recusandae id dicta dolores,
+      illo quibusdam earum quam! Distinctio facilis corporis libero aperiam molestias, nemo quasi tempora atque?
+      Temporibus, suscipit assumenda! Cumque laborum beatae exercitationem. Alias nobis enim exercitationem, quas,
+      veritatis eaque, nam aperiam cumque eius esse blanditiis! Quos veritatis sunt hic explicabo ullam quas nam
+      architecto corrupti? Optio, sit quam rem autem veniam magni fugit unde, cumque doloribus vel sapiente excepturi
+      adipisci id.
+    </div>
+    <h1>再用float布局</h1>
+    <h1><svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconbomb"></use>
+      </svg><svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconbomb"></use>
+      </svg><svg class="icon" aria-hidden="true">
+        <use xlink:href="#iconbomb"></use>
+      </svg></h1>
+    <h1>你</h1>
   </div>
-  <div class="w cont">
-    <div class="red"></div>
-    <div class="blue"></div>
-    <div class="yellow"></div>
-  </div>
-  <h2 class="w">正确打开方式</h2>
-  <h3 class="w">图文未混排</h3>
-  <div class="w cont">
-    <img src="imgs/bg-book.jpg" alt="">
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente quos recusandae ducimus cupiditate obcaecati
-    molestiae fugit praesentium nostrum ratione vel. Nihil sequi blanditiis tempora doloremque reprehenderit illum
-    distinctio amet exercitationem, asperiores praesentium. Praesentium quaerat impedit a recusandae id dicta dolores,
-    illo quibusdam earum quam! Distinctio facilis corporis libero aperiam molestias, nemo quasi tempora atque?
-    Temporibus, suscipit assumenda! Cumque laborum beatae exercitationem. Alias nobis enim exercitationem, quas,
-    veritatis eaque, nam aperiam cumque eius esse blanditiis! Quos veritatis sunt hic explicabo ullam quas nam
-    architecto corrupti? Optio, sit quam rem autem veniam magni fugit unde, cumque doloribus vel sapiente excepturi
-    adipisci id.
-  </div>
-  <h3 class="w">图文混排</h3>
-  <div class="w cont">
-    <img class="float" src="imgs/bg-book.jpg" alt="">
-    &lt;img&gt;左浮动。Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente quos recusandae ducimus
-    cupiditate obcaecati
-    molestiae fugit praesentium nostrum ratione vel. Nihil sequi blanditiis tempora doloremque reprehenderit illum
-    distinctio amet exercitationem, asperiores praesentium. Praesentium quaerat impedit a recusandae id dicta dolores,
-    illo quibusdam earum quam! Distinctio facilis corporis libero aperiam molestias, nemo quasi tempora atque?
-    Temporibus, suscipit assumenda! Cumque laborum beatae exercitationem. Alias nobis enim exercitationem, quas,
-    veritatis eaque, nam aperiam cumque eius esse blanditiis! Quos veritatis sunt hic explicabo ullam quas nam
-    architecto corrupti? Optio, sit quam rem autem veniam magni fugit unde, cumque doloribus vel sapiente excepturi
-    adipisci id.
-  </div>
-  <h1>再用float布局</h1>
-  <h1><svg class="icon" aria-hidden="true">
-      <use xlink:href="#iconbomb"></use>
-    </svg><svg class="icon" aria-hidden="true">
-      <use xlink:href="#iconbomb"></use>
-    </svg><svg class="icon" aria-hidden="true">
-      <use xlink:href="#iconbomb"></use>
-    </svg></h1>
-  <h1>你</h1>
   <script src="//at.alicdn.com/t/font_2357817_iy7q9b5om4.js"></script>
 </body>
 
