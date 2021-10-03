@@ -1,0 +1,326 @@
+.wrap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.wrap>div {
+  min-height: 40vh;
+}
+
+/* exam 0 */
+
+.tips div {
+  margin: 0 auto;
+  width: 60%;
+  height: 60%;
+  background-color: #b22222;
+  border-radius: 0;
+  transition-property: width, height, border-radius, background-color;
+  transition-duration: 200ms, 400ms, 600ms, 800ms;
+  transition-timing-function: ease-in-out;
+  transition-delay: 1s;
+}
+
+.tips>div:hover {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background-color: #970;
+  /* transition-duration: 100ms, 200ms, 300ms, 400ms; */
+}
+
+/* exam 1 */
+
+.mars {
+  position: relative;
+  height: 100%;
+  /* padding: 10px; */
+  overflow: hidden;
+  background: #fff;
+  cursor: pointer;
+}
+
+.mars .info {
+  text-indent: 2em;
+  text-align: justify;
+  padding: 0 1rem;
+  position: absolute;
+  width: 100%;
+  background-color: #b22222;
+  color: #fff;
+  left: 0px;
+  bottom: -240px;
+  font-size: .9rem;
+  transition: .4s;
+}
+
+.mars .img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .4s;
+}
+
+.mars:hover .img {
+  height: 40%;
+}
+
+.mars:hover .info {
+  height: 60%;
+  bottom: 0px;
+}
+
+/* example2 */
+
+.pos {
+  position: relative;
+  height: 100%;
+  background-color: #eeece1;
+  overflow: hidden;
+}
+
+.pos div {
+  position: absolute;
+  left: -400px;
+  top: -400px;
+  width: 80%;
+  height: 80%;
+  border: 10px solid #b22222;
+  transform-origin: left top;
+  transition: .4s;
+}
+
+.pos:hover div {
+  left: 10%;
+  top: 10%;
+  transform: rotate(360deg);
+}
+
+/* example3 */
+
+.tran {
+  position: relative;
+  height: 100%;
+  background-color: #eeece1;
+}
+
+.tran div {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  border: 10px solid #b22222;
+  left: 10%;
+  top: 10%;
+  overflow: hidden;
+}
+
+.tran div::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -300px;
+  width: 600px;
+  height: 300px;
+  background-color: #fff;
+  transform-origin: left top;
+  transition: .4s;
+}
+
+.tran div:hover::after {
+  transform: rotate(-20deg);
+}
+
+/* example4 */
+
+.border {
+  position: relative;
+  height: 100%;
+  background-color: #eeece1;
+}
+
+.h {
+  width: 60%;
+  height: 50%;
+  border: solid #b22222;
+  border-width: 4px 0;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: .4s;
+}
+
+.v {
+  width: 50%;
+  height: 60%;
+  border: solid #b22222;
+  border-width: 0px 4px;
+  transform: scaleY(0);
+  transition: .4s;
+}
+
+.border:hover .h {
+  transform: scaleX(1);
+}
+
+.border:hover .v {
+  transform: scaleY(1);
+}
+
+/* example5 */
+
+.rect {
+  position: relative;
+  height: 100%;
+  background-color: #eeece1;
+  overflow: hidden;
+}
+
+.rect div:first-child {
+  position: absolute;
+  left: 50%;
+  top: 90%;
+  width: 80%;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  background-color: #b22222;
+  color: #fff;
+  transform: translateX(-50%);
+  transition: .4s;
+}
+
+.rect:hover div:first-child {
+  top: 5%;
+}
+
+.rect div:last-child {
+  position: absolute;
+  left: 50%;
+  bottom: -100%;
+  width: 80%;
+  height: 80%;
+  background-color: #b22222;
+  color: #fff;
+  transform: translateX(-50%);
+  transition: .4s;
+}
+
+.rect:hover div {
+  bottom: 5%;
+  transition: .4s;
+}
+
+/* example6 */
+
+.circle {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+  background-color: #eeece1;
+}
+
+.circle div {
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  background-image: url(../imgs/flag.jpg);
+  background-size: cover;
+}
+
+.circle div::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  top: -10px;
+  background-image: linear-gradient(#fff 50%, #b22222 0);
+  border-radius: 50%;
+  transition: 1s;
+  z-index: -1;
+}
+
+.circle div:hover::before {
+  transform: rotate(-180deg);
+}
+
+/*  */
+
+.step {
+  height: 100%;
+  background-color: #eeece1;
+}
+
+.step div {
+  width: 4rem;
+  height: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  background-color: #b22222;
+  color: #fff;
+  margin: auto;
+  transition: all 4s;
+  transition-timing-function: steps(4);
+}
+
+.step:hover div {
+  width: 80%;
+}
+
+/*  */
+
+.clock {
+  height: 100%;
+  background-color: #eeece1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clock>div {
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.clock>div::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #333;
+  transform: translate(-50%, -50%);
+}
+
+.clock>div::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 50%;
+  background-color: #333;
+  transform-origin: 50% bottom;
+  transform: translate(-50%, 0);
+  transition: all 10s steps(60, start);
+}
+
+.clock>div:hover::after {
+  transform: translate(-50%, 0) rotate(360deg);
+}
+
+@media (max-width:768px) {
+  .wrap {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

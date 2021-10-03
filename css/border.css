@@ -1,0 +1,146 @@
+.wrap {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  justify-items: center;
+}
+
+.item {
+  width: 150px;
+  height: 150px;
+}
+
+.up {
+  background-color: #f06;
+  border-radius: 50%/100% 100% 0% 0%;
+}
+
+.down {
+  background-color: #f06;
+  border-radius: 50%/0 0 100% 100%;
+}
+
+.left {
+  background-color: #f06;
+  border-radius: 100% 0% 0% 100%/50%;
+}
+
+.right {
+  background-color: #f06;
+  border-radius: 0% 100% 100% 0%/50%;
+}
+
+/* 由于这四个角的半径在水平和垂直方向上都是相同的，我们甚至都不需要使用斜杠语法了  */
+
+.leftup {
+  background-color: #f06;
+  border-radius: 100% 0% 0% 0%;
+}
+
+.rightup {
+  background-color: #f06;
+  border-radius: 0% 100% 0% 0%;
+}
+
+.leftdown {
+  background-color: #f06;
+  border-radius: 0% 0% 0% 100%;
+}
+
+.rightdown {
+  background-color: #f06;
+  border-radius: 0% 0% 100% 0%;
+}
+
+.border-color {
+  border: 10px solid;
+  border-image: linear-gradient(#097, #f40) 30 100;
+}
+
+.border-img {
+  border: 10px solid;
+  border-image: url(../imgs/demo.jpg) 20 120;
+}
+
+.border-shadow {
+  background: #fff;
+  padding: 10px;
+  position: relative;
+  border: 1px solid #ddd;
+}
+
+.border-shadow::after, .border-shadow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  right: 20px;
+  bottom: 0px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  border-radius: 100px/10px;
+  z-index: -1;
+}
+
+.border-rotate {
+  padding: 10px;
+  background: #fff;
+  position: relative;
+  border: 1px solid #ddd;
+}
+
+.border-rotate::after, .border-rotate::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  bottom: 10px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 1);
+  z-index: -1;
+}
+
+.border-rotate::before {
+  left: 10px;
+  right: 50%;
+  transform: skew(-8deg, -8deg);
+}
+
+.border-rotate::after {
+  left: 50%;
+  right: 10px;
+  transform: skew(8deg, 8deg);
+}
+
+/* dog */
+
+.dog {
+  position: relative;
+  background-image: linear-gradient(210deg, transparent 3em, #ddd 0);
+  border-radius: 1em;
+}
+
+.dog::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(-120deg, #888 3em, transparent 0);
+  border-radius: 1em;
+  transform-origin: top right;
+  transform: rotate(150deg) translate(5em, -3em);
+}
+
+/* outline会拓展元素空间 */
+
+.inner {
+  padding: 10px;
+  background: #f06;
+  border-radius: .8em;
+  border: 1px solid #655;
+  box-shadow: 0 0 0 10px #655;
+  outline: 10px solid #655;
+}
+
+@media (max-width:768px) {
+  .wrap {
+    grid-template-columns: 1fr;
+  }
+}

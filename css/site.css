@@ -75,34 +75,34 @@ ul {
   overflow: hidden;
 }
 
-.grid .grid-item:nth-child(1) {
+.i0 {
   grid-column: span 2;
   background-image: url(../imgs/swiper0.jpg);
   background-size: cover;
   background-position: center;
 }
 
-.grid .grid-item:nth-child(2) {
+.i1 {
   grid-row: span 2;
   background-image: url(../imgs/swiper1.jpg);
   background-size: cover;
   background-position: center;
 }
 
-.grid .grid-item:nth-child(3) {
+.i2 {
   grid-row: span 2;
   background-image: url(../imgs/swiper2.jpg);
   background-size: cover;
   background-position: center;
 }
 
-.grid .grid-item:nth-child(4) {
+.i3 {
   background-image: url(../imgs/swiper3.jpg);
   background-size: cover;
   background-position: center;
 }
 
-.grid .grid-item:nth-child(5) {
+.i4 {
   grid-column: span 2;
   background-image: url(../imgs/swiper4.jpg);
   background-size: cover;
@@ -281,11 +281,19 @@ div.cont p {
 }
 
 @media screen and (max-width:768px) {
+  header {
+    flex-direction: column;
+    height: auto;
+  }
+  ul {
+    flex-direction: column;
+    margin: 0;
+  }
   .grid {
     grid-template-columns: 1fr;
   }
-  .grid .grid-item {
-    grid-column: span 1;
-    grid-row: span 1;
+  .grid-item {
+    grid-column: unset;
+    grid-row: unset;
   }
 }
