@@ -82,6 +82,41 @@
       </ul>
     </div>
   </section>
+  <section class="d3">
+    <h2>3D轮播</h2>
+    <ul id='page' class="sliders">
+      <li>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </li>
+      <li>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </li>
+      <li>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </li>
+      <li>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </li>
+    </ul>
+    <ul id='dot'>
+      <li class='on'>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+    </ul>
+  </section>
   <script>
     window.onload = function () {
       banner()
@@ -115,6 +150,22 @@
             }
           }, 500)
         }, 2000)
+      }
+      // 3D
+      let oDot = document.getElementById('dot'),
+        oPage = document.getElementById('page'),
+        oSide = oPage.getElementsByTagName('li'),
+        oList = oDot.getElementsByTagName('li');
+      for (let i = 0; i < oList.length; i++) {
+        oList[i].onclick = function () {
+          for (let j = 0; j < oSide.length; j++) {
+            oSide[j].style.transform = 'rotateX(-' + (i * 90) + 'deg)';
+          }
+          for (let j = 0; j < oList.length; j++) {
+            oList[j].className = '';
+          }
+          this.className = 'on';
+        }
       }
     }
   </script>
