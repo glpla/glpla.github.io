@@ -5,57 +5,186 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>text</title>
-  <link rel="stylesheet" href="css/reset.css">
+  <title>Font</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/text.css">
 </head>
 
 <body>
-  <article class="w">
-    <h1 class="title">文章排版</h1>
-    <h4 class="sub-title">必须显式的指定行高</h4>
-    <p>俗话说人靠衣装，美靠靓装，一篇文章要想将其完美呈现还是需要有好的排版才行。一个优秀的排版可以使别人在阅读的时候，更加的赏心悦目，以此来吸引更多的人群去阅览。</p>
-    <h2>一、内容选择</h2>
-    <h3>1.字体</h3>
-    <p>微软的雅黑字体是我们最常使用的字体，但要注意的是同样大小的微软雅黑字体看上去的显示会比其他字体大一点，因此，当我们在设置字体大小的时候，12 px-16 px大小的文本是最合适的，一般使用14 px大小的为多。</p>
-    <p>把握好字体之间的行间距，一般1.5到1.75的行间距最适合。对于字数较多的文章，通常可以选择使用左对齐，字数较少的就可以选择居中对齐。</p>
-    <h3>2.标点符号</h3>
-    <p>标点符号不要乱用；中文输入法与英文输入法的标点符号表示是不同的，我们要将其分清开来。中文与英文之间要用空格。中文数字得到序号要使用顿号，比如一、二、三。</p>
-    <h3>3.图片</h3>
-    <p>配图要有调性；首先要确定你所写文章的定位调性，然后去配上与文章整体风格比较相符的图片。</p>
-    <p>配图尺寸大小：配图的尺寸要协调一致，横图竖图的尺寸大小一样，这样可以提升整体的视觉效果。</p>
-    <p>图片不加水印：你从网站下载的那么有水印的图片当然是不能使用的，它会降低你文章的整体美感。</p>
-    <p>图片太小太模糊：图片像素太小太过模糊的图片就不要放上去了，配图上连内容都看不清，那么逼格一下就会没有。</p>
-    <p>
-      图片过大：我们所放入的每一张图片都不要超过100KB,PNG格式的一般都比JPEG格式的容量要小，为了保持清晰度而又不增加图片的容量，我们可以选择使用PNG格式。如果超过200KB的图片就会太大，读者在阅读时就会加载慢，这样就会严重的影响到用户的体验感。
-    </p>
-    <h2>二、样式选择</h2>
-    <h3>1.水平对齐</h3>
-    <p>中文的行文习惯是首行缩进2个字符：text-indent:2em;</p>
-    <p>为了减少行末的锯齿，应采用两端对齐：text-align: justify;</p>
-    <h3>2.垂直对齐</h3>
-    <p>如果内容由多种标签提供，如&lt;p&gt;、&lt;h1&gt;、&lt;h2&gt;等，则会出现垂直方向上移位的情况</p>
-    <p>这是因为元素占据的高度不一致导致的。最简单的方法就是指定各个标签的行高line-height，同时保证行高是最小元素的整数倍即可。</p>
-    <p>也可以通过指定每个元素的padding和margin，以保证所占空间是最小元素空间的整数倍。</p>
-    <h2>三、特殊效果</h2>
-    <h3>1.首字下沉</h3>
-    <p class="cap">首字下沉需要通过伪元素::first-letter来实现。其实现原理非常简单，就是把首字font-size值设置较大，设置合适的边距，最后使用float来实现。</p>
-    <pre class="code">
-.cap::first-letter {
-  float: left;
-  font-size: 3em;
-  color: #f40;
-  margin: 1rem 1rem 1rem 0;
+  <div class="w">
+    <h1>知识点</h1>
+    <dl class="keypoint">
+      <dt>字体基本属性</dt>
+      <dd>font-family：字体类型</dd>
+      <dd>font-size：字体大小</dd>
+      <dd>font-weight：字体重量</dd>
+      <dd>color：字体颜色</dd>
+      <dd>text-shadow：字体阴影</dd>
+    </dl>
+    <dl class="keypoint">
+      <dt>字体应用</dt>
+      <dd>字体特效</dd>
+      <dd>自定义字体@font-face</dd>
+      <dd>阿里字体图标iconfont</dd>
+      <dd>文字排版-分栏Colums</dd>
+    </dl>
+    <div class="exam-title">首字下沉</div>
+    <div class="down">首字下沉: 使用结构伪类选择器::first-letter，使其左浮动，并指定稍大的字号，同时调整右侧和下侧的margin。Lorem ipsum dolor sit amet
+      consectetur, adipisicing elit. Eaque officia aperiam provident
+      voluptate
+      repudiandae iusto veniam, commodi dolorum velit ex unde, tempora exercitationem, quasi impedit. Quas, incidunt?
+      Nostrum, molestias veritatis explicabo, error repellat quisquam hic earum amet possimus, temporibus voluptas!
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, aliquid harum officiis hic rerum corporis
+      consectetur sequi iste culpa. At et laborum quibusdam tempore, incidunt ut vero cum cupiditate rerum.
+    </div>
+    <div class="exam-title">文字阴影-凹版印刷</div>
+    <div class="txt-cont">
+      <p class="inner">凹版印刷</p>
+    </div>
+    <div class="exam-title">文字阴影-凸版印刷</div>
+    <div class="txt-cont">
+      <p class="outer">凸版印刷</p>
+    </div>
+    <div class="exam-title">自定义字体-禹卫行书</div>
+    <div class="core">社会主义核心价值观</div>
+    <div class="exam-title">阿里字体图标的使用</div>
+    <div class="wrap">
+      <div class="box">
+        <div class="sub-title"><span class="iconfont icon">&#xe747;</span>字体准备</div>
+        <ul class="step">
+          <li><span class="iconfont">&#xe60f;</span>打开阿里字体<a href="https://www.iconfont.cn/" target="_blank">
+              https://www.iconfont.cn</a></li>
+          <li><span class="iconfont">&#xe610;</span>注册账号</li>
+          <li><span class="iconfont">&#xe611;</span>创建项目</li>
+          <li><span class="iconfont">&#xe612;</span>查找图标</li>
+          <li><span class="iconfont">&#xe613;</span>添加到购物车或者直接下载为图片格式</li>
+          <li><span class="iconfont">&#xe614;</span>在购物车添加到相应的项目</li>
+          <li><span class="iconfont">&#xe616;</span>字体类型：unicode、font class、symbol</li>
+          <li><span class="iconfont">&#xe617;</span>使用方式：在线使用、本地使用</li>
+          <li><span class="iconfont">&#xe619;</span>字体容器可以使用&lt;i&gt;或者&lt;span&gt;</li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="sub-title"><span class="iconfont icon">&#xe72d;</span>在线使用 Unicode</div>
+        <ul class="step">
+          <li>第一步：拷贝项目下面生成的font-face字体代码到CSS中</li>
+          <li>
+            <pre class="code">
+@font-face {
+    font-family: 'iconfont';
+    src: url('iconfont.eot');
+    src: url('iconfont.eot?#iefix') format('embedded-opentype'),
+    url('iconfont.woff') format('woff'),
+    url('iconfont.ttf') format('truetype'),
+    url('iconfont.svg#iconfont') format('svg');
 }
-</pre>
-    <p>因为用到了浮动，所以必须要清除浮动。新的属性initial-letter还未广泛普及，可以使用浏览器前缀尝试一下。</p>
-    <h3>2.自动滚动</h3>
-    <p>受布局尺寸的影响，应当根据内容的多少，自动出现水平方向或垂直方向的滚动条。可以使用的属性有：overflow: auto; overflow-x: auto; overflow-y: auto;</p>
-    <p>还有很多其它样式和特效的设置，请同学们自行查阅相关文档。</p>
-    <p>最后，要保证文章当中无错别字，当我们排版完成后，还要再去检查一下，看看整篇文章中是否有错别字，给用户一个严谨的形象。</p>
-    <h4 class="footer">copyrights reserved &copy; by cnplaman, 2021-2022</h4>
-  </article>
+                    </pre>
+          </li>
+          <li>第二步：定义使用 iconfont的样式</li>
+          <li>
+            <pre class="code">
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+                    </pre>
+          </li>
+          <li>第三步：挑选相应图标并获取字体编码，应用于页面</li>
+          <li>
+            <pre class="code">
+&lt;i class="iconfont"&gt;<span>&</span>#x33;&lt;/i&gt;
+                    </pre>
+          </li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="sub-title"><span class="iconfont icon">&#xe72d;</span>在线使用Font Class(推荐)</div>
+        <ul class="step">
+          <li>第一步：复制项目下面生成的在线fontclass链接到H5项目的&lt;link&gt;中</li>
+          <li>
+            <pre class="code">
+//at.alicdn.com/t/font_8d5l8fzk5b87iudi.css
+                    </pre>
+          </li>
+          <li>第二步：在&lt;i&gt;使用相应的字体类名</li>
+          <li>
+            <pre class="code">
+&lt;i class="iconfont icon-xxx"&gt;&lt;/i&gt;
+            </pre>
+          </li>
+        </ul>
+      </div>
+      <div class="box">
+        <div class="sub-title"><span class="iconfont icon">&#xe728;</span>本地使用(推荐)</div>
+        <ul class="step">
+          <li>第一步：在阿里字体图标项目处，选择：下载至本地</li>
+          <li>第二步：在H5项目&lt;link&gt;中引入其中的CSS文件。注意文件路径</li>
+          <li>
+            <pre class="code">
+./font_2357817_yw2cn9gbib/iconfont.css
+            </pre>
+          </li>
+          <li>第三步：在&lt;i&gt;使用相应的字体类名</li>
+          <li>
+            <pre class="code">
+&lt;i class="iconfont icon12"&gt;&lt;/i&gt;
+            </pre>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="exam-title">分栏排版1</div>
+    <article class="unformat">
+      <h1>Lorem ipsum dolor sit amet.</h1>
+      <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
+      <h2>Lorem, ipsum dolor.</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident atque quasi accusamus aspernatur laboriosam
+        quidem voluptas quae magnam quam dolor at officia doloribus eius optio ab maxime sapiente corporis autem,
+        assumenda mollitia cupiditate. Quisquam, sapiente tempora soluta vel debitis recusandae facilis eveniet ipsam
+        exercitationem. Voluptate cumque esse necessitatibus eligendi distinctio.</p>
+      <h2>Lorem ipsum dolor sit amet consectetur.</h2>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque qui voluptatem earum soluta totam libero
+        numquam dolores pariatur ipsa veritatis, delectus, aperiam maiores iusto magnam impedit veniam officia alias?
+        Ipsum, id praesentium commodi natus excepturi, quos rerum sit minus soluta molestias aperiam ipsam quidem
+        inventore est quia magni dolorum. Mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quas fugiat recusandae neque fuga, beatae ad
+        adipisci quasi modi cumque!</p>
+      <h2>Lorem ipsum dolor sit.</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt commodi quis totam quaerat. Veniam quaerat
+        iusto alias impedit aperiam ut natus nam illum repellat eos, ad officiis, quidem exercitationem dicta?</p>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id corrupti aut quasi deserunt architecto consequatur
+        totam necessitatibus distinctio cum voluptates quae aliquid voluptatem quisquam animi at, dolorem harum!
+        Architecto ipsa dolorem quae quaerat corrupti porro beatae aliquam id commodi omnis.</p>
+    </article>
+    <div class="exam-title">分栏排版2</div>
+    <article class="format">
+      <h1>Lorem ipsum dolor sit amet.</h1>
+      <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h4>
+      <h2>Lorem, ipsum dolor.</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident atque quasi accusamus aspernatur laboriosam
+        quidem voluptas quae magnam quam dolor at officia doloribus eius optio ab maxime sapiente corporis autem,
+        assumenda mollitia cupiditate. Quisquam, sapiente tempora soluta vel debitis recusandae facilis eveniet ipsam
+        exercitationem. Voluptate cumque esse necessitatibus eligendi distinctio.</p>
+      <h2>Lorem ipsum dolor sit amet consectetur.</h2>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque qui voluptatem earum soluta totam libero
+        numquam dolores pariatur ipsa veritatis, delectus, aperiam maiores iusto magnam impedit veniam officia alias?
+        Ipsum, id praesentium commodi natus excepturi, quos rerum sit minus soluta molestias aperiam ipsam quidem
+        inventore est quia magni dolorum. Mollitia?</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam quas fugiat recusandae neque fuga, beatae ad
+        adipisci quasi modi cumque!</p>
+      <h2>Lorem ipsum dolor sit.</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt commodi quis totam quaerat. Veniam quaerat
+        iusto alias impedit aperiam ut natus nam illum repellat eos, ad officiis, quidem exercitationem dicta?</p>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id corrupti aut quasi deserunt architecto consequatur
+        totam necessitatibus distinctio cum voluptates quae aliquid voluptatem quisquam animi at, dolorem harum!
+        Architecto ipsa dolorem quae quaerat corrupti porro beatae aliquam id commodi omnis.</p>
+    </article>
+    <h4>Copyright Reserved &copy; By Cnplaman, 2021-10-06</h4>
+  </div>
 </body>
 
 </html>
