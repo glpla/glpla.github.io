@@ -38,11 +38,11 @@
     </section>
     <section class="quiz" v-if='quiz'>
       <div class="quiz-item" v-for='(item,ind) in quiz'>
-        <div class="ref" v-if='doneBool'>参考答案：{{res(item.options,item.answer)}}</div>
+        <!-- <div class="ref" v-if='doneBool'>参考答案：{{res(item.options,item.answer)}}</div> -->
         <p class="desc">{{ind+1}}-{{quiz.length}}. {{item.desc}}</p>
         <label v-for='(option,sn) in item.options' class="option">
           <input type="radio" :name="'r'+ind" :disabled='!startBool'>
-          <span>{{label[sn]}}:{{option}}</span>
+          <span :class='(doneBool && option==item.answer)?"flag":""'>{{label[sn]}}:{{option}}</span>
         </label>
       </div>
     </section>
@@ -86,7 +86,7 @@
           // setTimeout(function () { })
           setTimeout(() => {
             this.submitBool = false
-          }, 5 * 1 * 1000)
+          }, 5 * 60 * 1000)
         },
         start() {
           this.startBool = true
