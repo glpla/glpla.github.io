@@ -29,12 +29,18 @@
         <li>题目和选项均随机打乱，请勿死记硬背</li>
         <li>测试开始5分钟后方可提交</li>
         <li>测试不限时</li>
-        <li>目前只开放第一章和第二章题库，其它题库陆续更新中</li>
+        <li>目前只开放第一章至第五章题库，其它题库陆续更新中</li>
       </ol>
     </section>
     <section class="timer" v-if='len'>
       <button class="btn" v-if='!startBool' @click='startBtn'>开始</button>
-      <button class="btn" v-else @click='submitBtn' :disabled="submitBool">提交</button>
+      <button class="btn" v-else @click='submitBtn' :disabled="submitBool">
+        <span v-if='timeBool'>提交</span>
+        <span v-else>
+          <span ref='h0'>0</span><span ref='h1'>0</span>:<span ref='m0'>0</span><span ref='m1'>0</span>:<span
+            ref='s0'>0</span><span ref='s1'>0</span>
+        </span>
+      </button>
     </section>
     <section class="quiz" v-if='len'>
       <div class="quiz-item" v-for='(item,ind) in quiz' :hidden='!startBool && !doneBool'>
@@ -64,6 +70,7 @@
           startBool: false,
           submitBool: true,
           doneBool: false,
+          timeBool: false,
           quiz: [],
           label: ['A', 'B', 'C', 'D']
         }
@@ -89,10 +96,12 @@
           this.startBool = true
           this.submitBool = true
           this.doneBool = false
+          this.timeBool = false
           // setTimeout(function () { })
-          setTimeout(() => {
-            this.submitBool = false
-          }, 5 * 60 * 1000)
+          // setTimeout(() => {
+          //   this.submitBool = false
+          // }, 5 * 60 * 1000)
+          this.counting()
         },
         submitBtn() {
           this.doneBool = true
@@ -106,8 +115,32 @@
             arr.splice(ind, 1)
           }
           return temp
-        }
+        },
+        counting() {
+          let secs = 5 * 60
+          let inter = setInterval(() => {
 
+            if (secs < 0) {
+              clearInterval(inter)
+              this.timeBool = true
+              this.submitBool = false
+              console.log('stop');
+              return
+            }
+            let hour = Math.floor(secs / 3600)
+            let min = Math.floor(secs % 3600 / 60)
+            let sec = secs % 60
+            this.$refs.h0.innerHTML = Math.floor(hour / 10)
+            this.$refs.h1.innerHTML = hour % 10
+
+            this.$refs.m0.innerHTML = Math.floor(min / 10)
+            this.$refs.m1.innerHTML = min % 10
+
+            this.$refs.s0.innerHTML = Math.floor(sec / 10)
+            this.$refs.s1.innerHTML = sec % 10
+            secs--;
+          }, 1000)
+        }
       },
       computed: {
         res() {
