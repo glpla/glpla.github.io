@@ -32,19 +32,24 @@
         <li>目前只开放第一章和第二章题库，其它题库陆续更新中</li>
       </ol>
     </section>
-    <section class="timer" v-if='quiz'>
-      <button class="btn" v-if='!startBool' @click='start'>开始</button>
-      <button class="btn" v-else :disabled="submitBool" @click='done'>提交</button>
+    <section class="timer" v-if='len'>
+      <button class="btn" v-if='!startBool' @click='startBtn'>开始</button>
+      <button class="btn" v-else @click='submitBtn' :disabled="submitBool">提交</button>
     </section>
-    <section class="quiz" v-if='quiz'>
-      <div class="quiz-item" v-for='(item,ind) in quiz'>
+    <section class="quiz" v-if='len'>
+      <div class="quiz-item" v-for='(item,ind) in quiz' :hidden='!startBool && !doneBool'>
         <!-- <div class="ref" v-if='doneBool'>参考答案：{{res(item.options,item.answer)}}</div> -->
         <p class="desc">{{ind+1}}-{{quiz.length}}. {{item.desc}}</p>
         <label v-for='(option,sn) in item.options' class="option">
-          <input type="radio" :name="'r'+ind" :disabled='!startBool'>
-          <span :class='(doneBool && option==item.answer)?"flag":""'>{{label[sn]}}:{{option}}</span>
+          <div class="sn">
+            <input type="radio" :name="'r'+ind" :disabled='!startBool' :key="option">
+          </div>
+          <div :class='(doneBool && option==item.answer)?"flag":""'>{{label[sn]}}:{{option}}</div>
         </label>
       </div>
+    </section>
+    <section v-else :hidden='!chapInd'>
+      <h4>题库更新中。。。</h4>
     </section>
     <h4>Copyright Reserved &copy; By Cnplaman, 2021-10-09</h4>
   </div>
@@ -59,16 +64,12 @@
           startBool: false,
           submitBool: true,
           doneBool: false,
-          quiz: null,
+          quiz: [],
           label: ['A', 'B', 'C', 'D']
         }
       },
       methods: {
         sel(e) {
-          if (this.startBool) {
-            alert('请完成当前测试')
-            return
-          }
           let chapInd = Number(e.target.dataset.ind)
           if (chapInd == this.chapInd) {
             return
@@ -83,16 +84,17 @@
             temp[i].options = [...this.rand(temp[i].options)]
           }
           this.quiz = [...temp]
+        },
+        startBtn() {
+          this.startBool = true
+          this.submitBool = true
+          this.doneBool = false
           // setTimeout(function () { })
           setTimeout(() => {
             this.submitBool = false
           }, 5 * 60 * 1000)
         },
-        start() {
-          this.startBool = true
-          this.doneBool = false
-        },
-        done() {
+        submitBtn() {
           this.doneBool = true
           this.startBool = false
         },
@@ -112,6 +114,9 @@
           return (options, option) => {
             return this.label[options.indexOf(option)]
           }
+        },
+        len() {
+          return this.quiz.length
         }
       },
       watch: {
