@@ -1,0 +1,113 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin: 1rem auto;
+}
+
+.chap {
+  padding: .4rem;
+  border: 4px solid #fff;
+  box-shadow: 0 0 .2rem #888;
+  border-radius: .5rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1rem;
+}
+
+.chap:disabled {
+  cursor: not-allowed;
+}
+
+/* 禁止子元素事件触发，避免和父元素事件冲突 */
+
+.chap-tips {
+  pointer-events: none;
+}
+
+.tips {
+  font-size: .85rem;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0 .4rem #ddd;
+  color: #666;
+}
+
+.tips h3 {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  line-height: 2;
+}
+
+.tips ol {
+  margin-top: 1rem;
+}
+
+.timer {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  margin: 1rem auto;
+  z-index: 99;
+}
+
+.btn, .countdown {
+  width: 100%;
+  height: 2.2rem;
+  border: none;
+  background-color: tomato;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+}
+
+.countdown {
+  line-height: 2.2rem;
+  user-select: none;
+}
+
+.active {
+  box-shadow: 0 0 .4rem #f00;
+}
+
+.quiz {
+  line-height: 2;
+}
+
+.quiz-item {
+  position: relative;
+}
+
+.desc {
+  user-select: none;
+}
+
+.option {
+  display: block;
+  text-indent: 1em;
+  cursor: pointer;
+}
+
+.option:hover {
+  color: #f40;
+}
+
+.ref {
+  position: absolute;
+  right: 0rem;
+  color: #f40;
+}
+
+@media screen and (max-width:768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

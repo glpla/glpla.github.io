@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OA Quiz</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/oa.css">
+  <script src="./js/vue.global.prod.min.js"></script>
+</head>
+
+<body>
+  <div class="w" id="app">
+    <h1>请选择</h1>
+    <div class="grid">
+      <button class="chap flex-v" v-for='(item,ind) in title' :key='item' @click='sel' :data-ind='ind'
+        :disabled='startBool' :class='chapInd==ind? "active":""'>
+        <p class="chap-tips">第{{ind+1}}章</p>
+        <p class="chap-tips">{{item}}</p>
+      </button>
+    </div>
+    <section class="tips">
+      <h3>温馨提示</h3>
+      <ol>
+        <li>操作内容为计算机应用基础的理论部分</li>
+        <li>所有操作仅供测试练习，操作结果不保存</li>
+        <li>题目和选项均随机打乱，请勿死记硬背</li>
+        <li>测试开始5分钟后方可提交</li>
+        <li>测试不限时</li>
+        <li>目前只开放第一章和第二章题库，其它题库陆续更新中</li>
+      </ol>
+    </section>
+    <section class="timer" v-if='quiz'>
+      <button class="btn" v-if='!startBool' @click='start'>开始</button>
+      <button class="btn" v-else :disabled="submitBool" @click='done'>提交</button>
+    </section>
+    <section class="quiz" v-if='quiz'>
+      <div class="quiz-item" v-for='(item,ind) in quiz'>
+        <div class="ref" v-if='doneBool'>参考答案：{{res(item.options,item.answer)}}</div>
+        <p class="desc">{{ind+1}}-{{quiz.length}}. {{item.desc}}</p>
+        <label v-for='(option,sn) in item.options' class="option">
+          <input type="radio" :name="'r'+ind" :disabled='!startBool'>
+          <span>{{label[sn]}}:{{option}}</span>
+        </label>
+      </div>
+    </section>
+    <h4>Copyright Reserved &copy; By Cnplaman, 2021-10-09</h4>
+  </div>
+  <script type="module">
+    import oa from './data2021/oa.js'
+    const app = Vue.createApp({
+      data() {
+        return {
+          title: oa.title,
+          oa: oa.quiz,
+          chapInd: null,
+          startBool: false,
+          submitBool: true,
+          doneBool: false,
+          quiz: null,
+          label: ['A', 'B', 'C', 'D']
+        }
+      },
+      methods: {
+        sel(e) {
+          if (this.startBool) {
+            alert('请完成当前测试')
+            return
+          }
+          let chapInd = Number(e.target.dataset.ind)
+          if (chapInd == this.chapInd) {
+            return
+          }
+          let keys = 'chap' + (chapInd + 1)
+          this.chapInd = chapInd
+          this.doneBool = false
+          // do not arr1=arr2;
+          let quizbak = [...this.oa[keys]]
+          let temp = [...this.rand(quizbak)]
+          for (let i = 0; i < temp.length; i++) {
+            temp[i].options = [...this.rand(temp[i].options)]
+          }
+          this.quiz = [...temp]
+          // setTimeout(function () { })
+          setTimeout(() => {
+            this.submitBool = false
+          }, 5 * 1 * 1000)
+        },
+        start() {
+          this.startBool = true
+          this.doneBool = false
+        },
+        done() {
+          this.doneBool = true
+          this.startBool = false
+        },
+        rand(arr) {
+          let temp = []
+          while (arr.length > 0) {
+            let ind = Math.floor(Math.random() * arr.length)
+            temp.push(arr[ind])
+            arr.splice(ind, 1)
+          }
+          return temp
+        }
+
+      },
+      computed: {
+        res() {
+          return (options, option) => {
+            return this.label[options.indexOf(option)]
+          }
+        }
+      },
+      watch: {
+        bool(oldval, newval) {
+          console.log(oldval, newval);
+        }
+      },
+      created() { }
+    })
+    const vm = app.mount('#app')
+  </script>
+</body>
+
+</html>
