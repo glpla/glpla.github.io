@@ -26,7 +26,7 @@
       <ol>
         <li>操作内容为计算机应用基础的理论部分</li>
         <li>所有操作仅供测试练习，操作结果不保存</li>
-        <li>题目和选项均随机打乱，请勿死记硬背</li>
+        <li>题目和选项均随机打乱，切勿死记硬背</li>
         <li>测试开始5分钟后方可提交</li>
         <li>测试不限时</li>
       </ol>
@@ -53,13 +53,14 @@
         </label>
       </div>
     </section>
-    <section v-else :hidden='!chapInd'>
-      <h4>题库更新中。。。</h4>
-    </section>
     <h4>Copyright Reserved &copy; By Cnplaman, 2021-10-09</h4>
+    <a class="back flex-v" ref='back' href="#app" :class='{"show":showBool}'>
+      <span class="iconfont">&#xe6c0;</span>
+    </a>
   </div>
   <script type="module">
     import oa from './data2021/oa.js'
+    import './js/smooth-scroll.polyfills.min.js'
     const app = Vue.createApp({
       data() {
         return {
@@ -70,6 +71,7 @@
           submitBool: true,
           doneBool: false,
           timeBool: false,
+          showBool: false,
           quiz: [],
           label: ['A', 'B', 'C', 'D']
         }
@@ -116,7 +118,7 @@
           return temp
         },
         counting() {
-          let secs = 5 * 60
+          let secs = 3 * 1
           let inter = setInterval(() => {
 
             if (secs < 0) {
@@ -139,7 +141,8 @@
             this.$refs.s1.innerHTML = sec % 10
             secs--;
           }, 1000)
-        }
+        },
+        back2top() { }
       },
       computed: {
         res() {
@@ -156,7 +159,30 @@
           console.log(oldval, newval);
         }
       },
-      created() { }
+      created() { },
+      mounted() {
+        window.addEventListener('scroll', (e) => {
+          // console.log(e);
+          // console.log('e.target.scrollingElement.scrollTop', e.target.scrollingElement.scrollTop);
+          // console.log('e.srcElement.scrollingElement.scrollTop', e.srcElement.scrollingElement.scrollTop);
+          // console.log('document', document.documentElement.scrollTop || document.body.scrollTop);
+          // IE8-请使用上述方法；其它浏览器推荐使用如下属性。注意是只读属性
+          // console.log('window.pageYOffset', window.pageYOffset);
+          // console.log('window', window.innerHeight);
+          if (window.pageYOffset > window.innerHeight) {
+            // console.log(this.$refs.back);
+            // this.$refs.back.classList.add('show')
+            this.showBool = true
+          } else {
+            this.showBool = false
+          }
+          console.log(this.$refs.back.classList);
+        })
+        new SmoothScroll('a[href*="#"]', {
+          speed: 300,
+          easing: 'easeInCubic'
+        })
+      },
     })
     const vm = app.mount('#app')
   </script>
