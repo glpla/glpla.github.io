@@ -24,13 +24,13 @@
       <span>我的购物车</span>
     </div>
     <div class="exam-title">利用负边距定位</div>
-    <div class="cart">
+    <section class="cart">
       <span class="iconfont">&#xe832;</span>
       <span class="badge neg">8</span>
       <span>我的购物车</span>
-    </div>
+    </section>
     <div class="exam-title">bubble利用负边距定位</div>
-    <article>
+    <section>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit sunt sequi nobis aspernatur! Exercitationem
         ipsam,
         adipisci, unde ex placeat reprehenderit consequatur aliquam similique esse molestias distinctio alias incidunt
@@ -41,55 +41,59 @@
         pariatur corrupti magni nostrum velit a explicabo tempore iure porro, expedita quo amet veniam.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut accusantium inventore optio nihil eos. Sed cum a
         quod minus explicabo.</p>
-    </article>
+    </section>
     <h2>二、固定定位Fixed</h2>
     <p>固定定位以视口viewport为参考。元素会固定在屏幕上，不会随页面的滚动而移动。如侧边导航栏。</p>
-    <p>贴近页面右侧版心：left偏移浏览器的一半（50%），再增加半个版心的左margin；贴近左侧同理</p>
+    <p>贴近页面右侧版心：left偏移浏览器的一半（50%），再增加半个版心的margin-left；贴近左侧同理</p>
     <p>通常的解决方案是：当前页面位于顶端时，暂时隐藏侧边导航条；当页面向下滚动到一定位置时，再显式侧边导航栏；需要借助JS。</p>
     <p>定位元素如果没有显式的指定left、top、right、bottom，则会待在原来的位置，但并不占据该位置</p>
     <p>请比较版心有无padding时的定位情况</p>
-    <ul class="right">
-      <li class="item">
-        <div>京东</div>
-        <div>秒杀</div>
-      </li>
-      <li class="spacer"></li>
-      <li class="item">
-        <div>特色</div>
-        <div>优选</div>
-      </li>
-      <li class="spacer"></li>
-      <li class="item">
-        <div>频道</div>
-        <div>广场</div>
-      </li>
-      <li class="spacer"></li>
-      <li class="item">
-        <div>为你</div>
-        <div>推荐</div>
-      </li>
-      <li class="spacer"></li>
-      <li class="item">
-        <div class="iconfont">&#xe80f;</div>
-        <div>客服</div>
-      </li>
-      <li class="spacer"></li>
-      <li class="item">
-        <div class="iconfont">&#xe7fb;</div>
-        <div>反馈</div>
-      </li>
-    </ul>
+    <aside class="right">
+      <ul>
+        <li class="item">
+          <div>京东</div>
+          <div>秒杀</div>
+        </li>
+        <li class="spacer"></li>
+        <li class="item">
+          <div>特色</div>
+          <div>优选</div>
+        </li>
+        <li class="spacer"></li>
+        <li class="item">
+          <div>频道</div>
+          <div>广场</div>
+        </li>
+        <li class="spacer"></li>
+        <li class="item">
+          <div>为你</div>
+          <div>推荐</div>
+        </li>
+        <li class="spacer"></li>
+        <li class="item">
+          <div class="iconfont">&#xe80f;</div>
+          <div>客服</div>
+        </li>
+        <li class="spacer"></li>
+        <li class="item">
+          <div class="iconfont">&#xe7fb;</div>
+          <div>反馈</div>
+        </li>
+      </ul>
+    </aside>
     <aside class="left">left</aside>
     <aside class="bottom">bottom</aside>
     <h2>三、粘性定位Sticky</h2>
-    <ul class="nav">
-      <li>sticky</li>
-      <li>热点</li>
-      <li>|</li>
-      <li>博客</li>
-      <li>|</li>
-      <li>留言</li>
-    </ul>
+    <nav class="sticky">
+      <ul class="nav">
+        <li>sticky</li>
+        <li>热点</li>
+        <li>|</li>
+        <li>博客</li>
+        <li>|</li>
+        <li>留言</li>
+      </ul>
+    </nav>
     <p>兼有相对定位和绝对定位的特性；以浏览器可视区为参考（具有固定定位特性）；占有原来位置（具有相对定位特性）；必须指定left、top、right、bottom某一个；</p>
     <p>应用：适合banner/swiper+主导航+内容的网页。网页滚动时候，banner移出，导航保留/黏贴在顶端，内容也逐步移出；还可以使用JS实现。</p>
     <h2>四、z-index</h2>
@@ -99,7 +103,7 @@
     <p>z-index为负的元素，出现在没有指定z-index的元素的下面；</p>
     <p>数值大的在前面（近）；数值小的在后面（远）；</p>
     <p>如果没有显式指定z-index，则按照文档流出现的顺序，后来居上；</p>
-    <div class="cont"></div>
+    <div class="cont">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos ratione animi voluptates incidunt voluptate sit voluptas ipsam maxime error vitae accusamus pariatur debitis, quae dolorum blanditiis commodi harum, perspiciatis explicabo, illum enim modi. Consectetur consequuntur quas, pariatur accusantium eligendi perferendis, cum aut soluta ullam esse nam molestiae cupiditate id necessitatibus impedit rem neque qui! Illum, corrupti nam id iste molestiae, aspernatur libero est earum adipisci a excepturi culpa consequuntur modi. Quibusdam debitis, quis excepturi hic repudiandae cum delectus blanditiis, nostrum, eligendi doloremque quaerat dolorem cupiditate voluptatum iure est corrupti quos nisi reprehenderit possimus praesentium numquam! Quo, veniam quasi! Aut dolor, quasi unde impedit voluptatibus animi dolorem repudiandae suscipit, dolorum velit, consequuntur ab rerum qui ducimus asperiores molestias? Autem aspernatur hic dolor incidunt dolorem, earum impedit quaerat corrupti sed voluptatum magni pariatur repudiandae nemo, exercitationem blanditiis atque. Velit, quae nulla culpa recusandae, repellat at consequatur ratione laboriosam dolorum neque laborum autem modi sapiente tempora magni sunt consectetur quod natus repellendus veritatis officia temporibus. Rem illum saepe commodi unde iste fuga aperiam doloribus tempora ex? Quasi alias distinctio consectetur accusamus explicabo enim quis saepe tempora cupiditate rem cum architecto esse aperiam magnam pariatur fugit iure accusantium, doloremque eum a, eligendi nam mollitia!</div>
   </div>
 </body>
 
