@@ -11,19 +11,18 @@
   <title>Form</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/form.css">
+  <script type="text/javascript" src="./js/xlsx.core.min.js"></script>
 </head>
 
 <body>
   <div class="w">
-    <h4 class="tips">新增元素</h4>
+    <h4 class="cont-title">form</h4>
     <dl class="keypoint">
+      <dt>新增类型</dt>
       <dd>datalist：以下拉列表的形式，为input等文本输入元素提供一个输入可选项；使用list属性和对应文本元素的id绑定在一起</dd>
       <dd>fieldset、legend：分组表单元素，并指定分组的标题；分组的好处是操作整个分组，如：使用disabled属性禁止整个分组</dd>
-    </dl>
-    <h4 class="tips">新增属性</h4>
-    <dl class="keypoint">
       <dt>input新类型</dt>
-      <dd>email、tel、url：验证型，请配合pattern完善验证需求</dd>
+      <dd>email、tel、url：验证型，请配合pattern和JS完善验证需求</dd>
       <dd>rang、number、color、date、time、month、week：取值型</dd>
       <dt>input新属性</dt>
       <dd>autocomplete：提示历史输入，方便自动完成，一般配合datalist</dd>
@@ -36,7 +35,7 @@
       <dd>name/value：值对，以区分不同的数据</dd>
       <dd>id：配合&lt;label&gt;使用，增强用户体验</dd>
     </dl>
-    <h4 class="tips">input</h4>
+    <h4 class="cont-title">input使用</h4>
     <p>作用：收集信息给后端服务器server；通常配合&lt;label&gt;和各种属性增强用户体验</p>
     <p>1 单行文本输入框 type=text；默认类型</p>
     <div class="code">
@@ -90,14 +89,61 @@
       </fieldset>
       <button>submit</button>
     </form>
-    <h4 class="tips">文件操作file</h4>
-    <p>文件是&lt;input&gt;的一种，类型为file；默认选择单个文件，可以指定multiple为多选；accept是文件类型，类型之间使用,分割，也可以使用通配符*</p>
-    <div class="code">&lt;input type="file" name="avatar" id="" multiple accept="*"&gt;</div>
-    <input type="file" name="avatar">
-    <h4 class="tips">多行文本输入框</h4>
+    <h4 class="cont-title">多行文本输入框textarea</h4>
     <div class="code">&lt;textarea name="msg" id="" cols="30" rows="10"&gt;&lt;/textarea&gt;</div>
     <textarea name="msg" id="" cols="30" rows="10"></textarea>
-    <h4 class="tips">常用CSS</h4>
+    <h4 class="cont-title">文件选择file</h4>
+    <p>文件是&lt;input&gt;的一种，类型为file；默认选择单个文件，可以指定multiple为多选；accept是文件类型，类型之间使用,分割，也可以使用通配符*</p>
+    <div class="code">&lt;input type="file" name="avatar" id="" multiple accept="*"&gt;</div>
+    <h4 class="cont-title">文件操作fileReader</h4>
+    <p>处理选中的文件。根据内容，有3个方法：</p>
+    <p>1 readAsText()：处理.txt/.HTML/.js等文本文件</p>
+    <p>2 readAsDataURL()：处理图片</p>
+    <p>3 readAsArrayBuffer()：处理字节流</p>
+    <div class="exam-title">读取本地文本文件</div>
+    <div class="txt-box">
+      <div class="txt-cont" id='txt-cont'></div>
+      <input type="file" name="txt" id="txt" accept="text/*">
+    </div>
+    <div class="code">
+      <pre>
+    txt.addEventListener('change', function () {
+      let file = this.files[0]
+      let fr = new FileReader()
+      fr.readAsText(file)
+      fr.onload = function (e) {
+        console.log(e.target.result);
+        txtCont.innerHTML = e.target.result
+      }
+    })</pre>
+    </div>
+    <div class="exam-title">单选文件-定制头像</div>
+    <div class="flex-h avatar-box">
+      <img src="" alt="图片不可用" id='img'>
+      <input type="file" name="avatar" accept="image/*" id='avatar'>
+    </div>
+    <div class="code">
+      <pre>
+    avatar.addEventListener('change', function () {
+      let fr = new FileReader()
+      fr.readAsDataURL(this.files[0])
+      fr.addEventListener('load', function () {
+        img.src = this.result
+      })
+    })</pre>
+    </div>
+    <div class="exam-title">处理OA文档-excel</div>
+    <p>借助第三方库<a href="" class="link">sheetJS</a>实现</p>
+    <div class="exam-title">自定义文件按钮样式</div>
+    <div class="flex-h">
+      <input type="file" id="file-custom" multiple>
+      <button id='file-btn'>choose files</button>
+    </div>
+    <div class="exam-title">拖拉选择文件</div>
+    <div class="flex-h">
+      <div id="zone">drag files here</div>
+    </div>
+    <h4 class="cont-title">常用CSS</h4>
     <ul class="">
       <li>font</li>
       <li>outline</li>
@@ -134,30 +180,45 @@
       </div>
       <button class="btn">提交</button>
     </div>
-    <div class="exam-title">自定义文件按钮样式</div>
-    <div class="flex-h">
-      <input type="file" name="file" id="file-ipt" multiple accept="*">
-      <button id='file-btn'>choose files</button>
-    </div>
-    <div class="exam-title">拖拉选择文件</div>
-    <div class="flex-h">
-      <div id="zone">drag files here</div>
-    </div>
-    <h4 class="tips">思考练习</h4>
+    <h4 class="cont-title">思考</h4>
     <ul>
       <li>如何知道单个文件的信息：name、size和type</li>
       <li>如何选择多个文件：multiple属性</li>
       <li>如何知道选择文件的个数：length；单个文件时，length为1</li>
       <li>文件类型都有哪些</li>
-      <li>如何指定文件类型：accept属性</li>
+      <li>如何指定选择文件的类型：accept属性</li>
       <li>如何自定义UI而不使用系统默认的丑陋的样式：none掉input，利用额外元素如button的click来触发input的click（change）</li>
       <li>如何拖拉获取文件信息：定义拖拉区，并指定drop事件。注意：系统默认会打开拖入的文件，应取消dragenter和dragover的默认动作</li>
       <li>如果查看文件内容：FileReader</li>
     </ul>
+    <h4 class="cont-title">作业</h4>
+    <p>多个图片的选择和展示</p>
     <small>Copyright Reserved &copy; By Cnplaman 2021-10-13</small>
   </div>
   <script>
     window.onload = function () {
+      // read txt
+      let txt = document.querySelector('#txt')
+      let txtCont = document.querySelector('#txt-cont')
+      txt.addEventListener('change', function () {
+        let file = this.files[0]
+        let fr = new FileReader()
+        fr.readAsText(file)
+        fr.onload = function (e) {
+          console.log(e.target.result);
+          txtCont.innerHTML = e.target.result
+        }
+      })
+      // single file
+      let img = document.querySelector('#img')
+      let avatar = document.querySelector('#avatar')
+      avatar.addEventListener('change', function () {
+        let fr = new FileReader()
+        fr.readAsDataURL(this.files[0])
+        fr.addEventListener('load', function () {
+          img.src = this.result
+        })
+      })
       let rem = document.querySelector('.rem-cb')
       let user = document.querySelector('.user')
       user.value = localStorage.getItem('login-name') || ''
@@ -170,8 +231,8 @@
       //     rem.checked ? localStorage.setItem('login-name', user.value) : localStorage.removeItem('login-name')
       //   }
       // })
-      // case 3
-      let fileIpt = document.querySelector('#file-ipt')
+      // case 3: file custom
+      let fileIpt = document.querySelector('#file-custom')
       let fileBtn = document.querySelector('#file-btn')
       fileBtn.addEventListener('click', function () {
         fileIpt.click()
@@ -179,8 +240,7 @@
       fileIpt.addEventListener('change', function () {
         console.log(this.files);
       })
-      // case4
-      // drag
+      // case4: drag
       let drag = document.querySelector('#zone')
       drag.addEventListener('dragenter', function (e) {
         e.stopPropagation();

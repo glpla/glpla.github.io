@@ -160,11 +160,11 @@
           // 这里我们只读取第一张sheet        
           let worksheet = workbook.Sheets[sheetNames[0]];
 
-          // 自动生成表格
+          // 1. 自动生成表格
           let tmp = document.querySelector('#tmp')
           tmp.innerHTML = XLSX.utils.sheet_to_html(worksheet);
 
-          // 手动生成表格
+          // 2. 手动生成表格
           let json = XLSX.utils.sheet_to_json(worksheet)
           console.log(sheetNames, worksheet, json);
           // 创建table
