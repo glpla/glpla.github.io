@@ -15,61 +15,89 @@
 
 <body>
   <div class="w">
-    <h1>知识点</h1>
-    <div>1 作用</div>
-    <p>收集信息给后端服务器server</p>
-    <div>2 &lt;input&gt;标签及属性</div>
-    <p>2.1 单行文本输入框 type=text</p>
-    <div class="code">&lt;input type="text" name="glc" id="" required maxlength="8" placeholder="your name"&gt;</div>
-    <input type="text" name="glc" required maxlength="8" placeholder="your name">
-    <p>2.2 密码输入框 type=password</p>
+    <h4 class="tips">新增元素</h4>
+    <dl class="keypoint">
+      <dd>datalist：以下拉列表的形式，为input等文本输入元素提供一个输入可选项；使用list属性和对应文本元素的id绑定在一起</dd>
+      <dd>fieldset、legend：分组表单元素，并指定分组的标题；分组的好处是操作整个分组，如：使用disabled属性禁止整个分组</dd>
+    </dl>
+    <h4 class="tips">新增属性</h4>
+    <dl class="keypoint">
+      <dt>input新类型</dt>
+      <dd>email、tel、url：验证型，请配合pattern完善验证需求</dd>
+      <dd>rang、number、color、date、time、month、week：取值型</dd>
+      <dt>input新属性</dt>
+      <dd>autocomplete：提示历史输入，方便自动完成，一般配合datalist</dd>
+      <dd>autofocus：自动获取焦点</dd>
+      <dd>placeholder：内容占位符，用以展示提示信息</dd>
+      <dd>required：必填</dd>
+      <dd>pattern：利用正则表达式提供验证功能，如：pattern="^[a-zA-Z]\w{4,9}$"</dd>
+      <dt>其他属性</dt>
+      <dd>maxlength：最大字符数</dd>
+      <dd>name/value：值对，以区分不同的数据</dd>
+      <dd>id：配合&lt;label&gt;使用，增强用户体验</dd>
+    </dl>
+    <h4 class="tips">input</h4>
+    <p>作用：收集信息给后端服务器server；通常配合&lt;label&gt;和各种属性增强用户体验</p>
+    <p>1 单行文本输入框 type=text；默认类型</p>
+    <div class="code">
+      <div>&lt;label for="user"&gt;user&lt;/label&gt;</div>
+      <div>&lt;input type="text" name="user" id="user" required maxlength="8" placeholder="your name"&gt;</div>
+    </div>
+    <p>2 密码输入框 type=password</p>
     <div class="code">&lt;input type="password" name="pw" id="" required maxlength="8" placeholder="your
       password"&gt;</div>
-    <input type="password" name="pw" placeholder="your password" required maxlength="8">
-    <p>2.3 单选按钮 type=radio</p>
+    <p>3 单选按钮 type=radio</p>
     <div class="code">
-      <p>&lt;input type="radio" name="gender" id="" value="male" checked&gt;male</p>
-      <p>&lt;input type="radio" name="gender" id="" value="female"&gt;female</p>
+      <p>&lt;input type="radio" name="gender" value="male" id="" checked&gt;male</p>
+      <p>&lt;input type="radio" name="gender" value="female" id=""&gt;female</p>
     </div>
-    <input type="radio" name="gender" checked>male
-    <input type="radio" name="gender">female
-    <p>2.4 多选框 type=checkbox</p>
+    <p>4 多选框 type=checkbox</p>
     <div class="code">
-      <p>&lt;input type="checkbox" name="hobby" id="" value="reading" checked&gt;reading</p>
-      <p>&lt;input type="checkbox" name="hobby" id="" value="coding"&gt;coding</p>
-      <p>&lt;input type="checkbox" name="hobby" id="" value="game"&gt;game</p>
-      <p>&lt;input type="checkbox" name="hobby" id="" value="movie"&gt;movie</p>
+      <p>&lt;input type="checkbox" name="hobby" value="reading" id="" checked&gt;reading</p>
+      <p>&lt;input type="checkbox" name="hobby" value="coding" id=""&gt;coding</p>
+      <p>&lt;input type="checkbox" name="hobby" value="game" id=""&gt;game</p>
+      <p>&lt;input type="checkbox" name="hobby" value="movie" id=""&gt;movie</p>
     </div>
-    <input type="checkbox" name="hobby" value="reading" checked>reading
-    <input type="checkbox" name="hobby" value="coding">coding
-    <input type="checkbox" name="hobby" value="game">game
-    <input type="checkbox" name="hobby" value="movie">movie
-    <p>2.5 按钮 type=submit</p>
+    <p>5 按钮 type=submit</p>
     <div class="code">
       <p>&lt;input type="submit" value="submit"&gt;</p>
       <p>&lt;button&gt;submit&lt;/button&gt;</p>
     </div>
-    <input type="submit" value="submit">
-    <button>submit</button>
-    <p>2.6 文件按钮 type=file</p>
-    <div class="code">&lt;input type="file" name="avatar" id=""&gt;</div>
+    <div class="exam-title">用户信息采集</div>
+    <form action="" class="info">
+      <label for="user">user</label>
+      <input type="text" id="user" name="user" placeholder="your name" maxlength="8" required>
+      <br>
+      <label for="pw">pass</label>
+      <input type="password" id="pw" name="pass" placeholder="your password" maxlength="8" required>
+      <fieldset>
+        <legend>gender</legend>
+        <input type="radio" name="gender" value="male" id='male' required checked>
+        <label for="male">male</label>
+        <input type="radio" name="gender" value='female' id='female' required>
+        <label for="female">female</label>
+      </fieldset>
+      <fieldset>
+        <legend>hobby</legend>
+        <input type="checkbox" name="hobby" value="reading" id="reading" checked>
+        <label for="reading">reading</label>
+        <input type="checkbox" name="hobby" value="coding" id="coding">
+        <label for="coding">coding</label>
+        <input type="checkbox" name="hobby" value="game" id="game">
+        <label for="game">game</label>
+        <input type="checkbox" name="hobby" value="movie" id="movie">
+        <label for="movie">movie</label>
+      </fieldset>
+      <button>submit</button>
+    </form>
+    <h4 class="tips">文件操作file</h4>
+    <p>文件是&lt;input&gt;的一种，类型为file；默认选择单个文件，可以指定multiple为多选；accept是文件类型，类型之间使用,分割，也可以使用通配符*</p>
+    <div class="code">&lt;input type="file" name="avatar" id="" multiple accept="*"&gt;</div>
     <input type="file" name="avatar">
-    <ul>
-      <li>默认是单个文件选择（选择结果仍然以数组返回）</li>
-      <li>如何知道单个文件的信息：name、size和type</li>
-      <li>如何选择多个文件：multiple属性</li>
-      <li>如何知道选择文件的个数：length；单个文件时，length为1</li>
-      <li>文件类型都有哪些</li>
-      <li>如何指定文件类型：accept属性</li>
-      <li>如何自定义UI而不使用系统默认的丑陋的样式：none掉input，利用额外元素如button的click来触发input的click（change）</li>
-      <li>如何拖拉获取文件信息：定义拖拉区，并指定drop事件。注意：系统默认会打开拖入的文件，应取消dragenter和dragover的默认动作</li>
-      <li>如果查看文件内容：FileReader</li>
-    </ul>
-    <p>3 多行文本输入框&lt;textarea&gt;</p>
+    <h4 class="tips">多行文本输入框</h4>
     <div class="code">&lt;textarea name="msg" id="" cols="30" rows="10"&gt;&lt;/textarea&gt;</div>
     <textarea name="msg" id="" cols="30" rows="10"></textarea>
-    <p>4 标签 &lt;label&gt;</p>
-    <div>5 常用CSS</div>
+    <h4 class="tips">常用CSS</h4>
     <ul class="">
       <li>font</li>
       <li>outline</li>
@@ -79,7 +107,13 @@
     <div class="exam-title">搜索框</div>
     <div class="flex-h">
       <div class="search">
-        <input class="search-ipt" type="text" maxlength="12" placeholder="keywords here">
+        <input class="search-ipt" type="text" maxlength="12" placeholder="keywords here" autocomplete list='list'>
+        <datalist id='list'>
+          <option value="html"></option>
+          <option value="css"></option>
+          <option value="javascript"></option>
+          <option value="js"></option>
+        </datalist>
         <button class="search-btn flex-v"><span class="iconfont">&#xe747;</span></button>
       </div>
     </div>
@@ -100,7 +134,7 @@
       </div>
       <button class="btn">提交</button>
     </div>
-    <div class="exam-title">自定义文件选择样式</div>
+    <div class="exam-title">自定义文件按钮样式</div>
     <div class="flex-h">
       <input type="file" name="file" id="file-ipt" multiple accept="*">
       <button id='file-btn'>choose files</button>
@@ -109,6 +143,18 @@
     <div class="flex-h">
       <div id="zone">drag files here</div>
     </div>
+    <h4 class="tips">思考练习</h4>
+    <ul>
+      <li>如何知道单个文件的信息：name、size和type</li>
+      <li>如何选择多个文件：multiple属性</li>
+      <li>如何知道选择文件的个数：length；单个文件时，length为1</li>
+      <li>文件类型都有哪些</li>
+      <li>如何指定文件类型：accept属性</li>
+      <li>如何自定义UI而不使用系统默认的丑陋的样式：none掉input，利用额外元素如button的click来触发input的click（change）</li>
+      <li>如何拖拉获取文件信息：定义拖拉区，并指定drop事件。注意：系统默认会打开拖入的文件，应取消dragenter和dragover的默认动作</li>
+      <li>如果查看文件内容：FileReader</li>
+    </ul>
+    <small>Copyright Reserved &copy; By Cnplaman 2021-10-13</small>
   </div>
   <script>
     window.onload = function () {
