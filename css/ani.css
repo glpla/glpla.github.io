@@ -1,0 +1,363 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title {
+  position: relative;
+  text-align: center;
+  line-height: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title::before, .title::after {
+  content: '';
+  width: 40%;
+  height: 2px;
+  background-color: rgba(255, 68, 0, .4);
+}
+
+.grid>* {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  background-color: #fff;
+}
+
+/* example1 */
+
+.rect .inner-rect {
+  width: 40px;
+  height: 40px;
+  background-color: #f40;
+  animation: move 2s linear 0s infinite;
+  animation-name: move;
+  animation-duration: 4s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  /* 和播放状态的控制会冲突 */
+  /* animation-iteration-count: 1; */
+  animation-fill-mode: forwards;
+  animation-play-state: paused;
+}
+
+.rect:hover .inner-rect {
+  animation-play-state: running;
+}
+
+@keyframes move {
+  25% {
+    transform: translateX(260px);
+  }
+  50% {
+    transform: translate(260px, 260px);
+  }
+  75% {
+    transform: translateY(260px);
+  }
+}
+
+.rect:hover div {
+  animation-play-state: paused;
+}
+
+/* example2 */
+
+.tx-box {
+  position: relative;
+  perspective: 800px;
+}
+
+.tx {
+  width: 100%;
+  min-height: 300px;
+  background-color: rgb(238, 236, 225);
+  transform-style: preserve-3d;
+  transform: translateZ(-10rem) rotateX(70deg);
+}
+
+.tx::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 2rem;
+  background-image: linear-gradient(90deg, #fff 70%, #333 0);
+  background-size: 10rem;
+  transform: translateY(-50%);
+  animation: tx 2s linear infinite;
+}
+
+@keyframes tx {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: -10rem;
+  }
+}
+
+.tx::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  width: 100%;
+  height: 1rem;
+  background-color: #666;
+  transform-origin: top;
+  transform: rotateX(-70deg);
+}
+
+.tx-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -4rem;
+  width: 95%;
+  height: 2rem;
+  transform: translateX(-50%);
+  background-image: linear-gradient(rgba(0, 0, 0, .4), transparent);
+}
+
+.cube-box {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%, -50%);
+  animation: xpos 1s linear infinite;
+}
+
+@keyframes xpos {
+  100% {
+    transform: translateX(calc(-50% - 100px)) translateY(-50%);
+  }
+}
+
+.cube-box::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f40;
+  transform-origin: bottom right;
+  animation: roll-cube 1s linear infinite;
+}
+
+@keyframes roll-cube {
+  100% {
+    transform: rotateZ(90deg);
+  }
+}
+
+/* example3 */
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  animation: hue 2s linear infinite;
+}
+
+@keyframes hue {
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.loading span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* border: 1px solid #f40; */
+  transform: rotate(calc(var(--i)*18deg));
+}
+
+.loading span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1rem;
+  height: 1rem;
+  background-color: #f40;
+  border-radius: 50%;
+  box-shadow: 0 0 4px #078, 0 0 8px #ff0, 0 0 12px #f40;
+  transform: scale(0);
+  animation: scale-box 1.8s linear infinite;
+  animation-delay: calc(var(--i)*0.1s);
+}
+
+@keyframes scale-box {
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* example */
+
+.step {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 0;
+  height: 2rem;
+  background-color: #F40;
+  animation: step 5s steps(5, start) infinite;
+}
+
+@keyframes step {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* example4 */
+
+.rolling {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+}
+
+.rolling::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: rgb(107, 142, 35);
+  border-radius: 2rem;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  animation: hop 1s infinite linear;
+  animation-play-state: paused;
+}
+
+@keyframes hop {
+  50% {
+    transform: translateY(60px) rotate(45deg);
+    border-bottom-right-radius: 6rem;
+  }
+  100% {
+    transform: translateY(0px) rotate(90deg);
+  }
+}
+
+.rolling::before {
+  content: "";
+  width: 100%;
+  height: 2rem;
+  background: #888;
+  border-radius: 50%;
+  position: absolute;
+  left: 0px;
+  bottom: -4rem;
+  opacity: 0.4;
+  animation: zoom 1s infinite linear;
+  animation-play-state: paused;
+}
+
+@keyframes zoom {
+  50% {
+    transform: scale(1.6);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.rolling-box:hover .rolling::after, .rolling-box:hover .rolling::before {
+  animation-play-state: running;
+}
+
+/* example5 */
+
+.ring {
+  width: 6rem;
+  height: 6rem;
+  background: #079;
+  border-radius: 50%;
+}
+
+.out {
+  width: 55px;
+  height: 55px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  border-top: 2px solid #fff;
+  border-left: 2px solid #fff;
+  animation: roll 5s linear infinite;
+}
+
+.mid {
+  width: 40px;
+  height: 40px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  animation: roll 4s linear infinite;
+}
+
+.in {
+  width: 25px;
+  height: 25px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  animation: roll 3s linear infinite;
+}
+
+.center {
+  width: 10px;
+  height: 10px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  animation: roll 2s linear infinite;
+}
+
+@keyframes roll {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.info {
+  min-height: 100px;
+  background-color: #fff;
+  padding: 1rem;
+}
+
+.info p {
+  text-indent: 2em;
+}
+
+@media (max-width:768px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

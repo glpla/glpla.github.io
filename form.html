@@ -115,8 +115,7 @@
     <div>
       <input type="file" name="txt" id="txt" accept="text/*">
     </div>
-    <div class="code">
-      <pre>
+    <pre class="code">
     txt.addEventListener('change', function () {
       let file = this.files[0]
       let fr = new FileReader()
@@ -126,14 +125,12 @@
         txtCont.innerHTML = e.target.result
       }
     })</pre>
-    </div>
     <div class="exam-title">单选文件-定制头像</div>
     <div class="flex-h avatar-box">
       <img src="" alt="图片不可用" id='img'>
       <input type="file" name="avatar" accept="image/*" id='avatar'>
     </div>
-    <div class="code">
-      <pre>
+    <pre class="code">
     avatar.addEventListener('change', function () {
       let fr = new FileReader()
       fr.readAsDataURL(this.files[0])
@@ -141,15 +138,13 @@
         img.src = this.result
       })
     })</pre>
-    </div>
     <div class="exam-title">读取OA文档-excel</div>
     <div class="cont-box" id='excel-cont'>提示：请选择excel文档</div>
     <form action="" class="">
       <span>借助第三方库<a href="//gitee.com/mirrors/sheetjs-js-xlsx/" class="link" target="_blank">sheetJS</a>实现</span>
       <input type="file" name="excel" id="excel" accept="*">
     </form>
-    <div class="code">
-      <pre>
+    <pre class="code">
   let excelCont = document.querySelector('#excel-cont')
   let excel = document.querySelector('#excel')
   excel.addEventListener('change', function () {
@@ -165,7 +160,6 @@
     })
   })
   //请查看sheet内容，定制excel文档</pre>
-    </div>
     <div class="exam-title">表格table转换为OA文档-excel</div>
     <span>借助第三方库<a href="//gitee.com/mirrors/sheetjs-js-xlsx/" class="link" target="_blank">sheetJS</a>实现</span>
     <table id='tbl'>
@@ -199,23 +193,20 @@
       </tr>
     </table>
     <button id='tblBtn'>table to book</button>
-    <div class="code">
-      <pre>
+    <pre class="code">
   let tblBtn = document.querySelector('#tblBtn')
   let tbl = document.querySelector('#tbl')
   tblBtn.addEventListener('click', () => {
     let tblBook = XLSX.utils.table_to_book(tbl);
     XLSX.writeFile(tblBook, 'out.xlsx');
   })</pre>
-    </div>
     <div class="exam-title">自定义文件按钮样式</div>
     <p>思路：隐藏file元素，定制新元素，并把新元素的click事件转接到原来的file元素</p>
     <div class="flex-h">
       <input type="file" id="file-custom" multiple>
       <button id='file-btn'>choose files</button>
     </div>
-    <div class="code">
-      <pre>
+    <pre class="code">
   let fileCoustom = document.querySelector('#file-custom')//file
   let fileBtn = document.querySelector('#file-btn')//new file element
   fileBtn.addEventListener('click', function () {
@@ -224,7 +215,6 @@
   fileCoustom.addEventListener('change', function () {
     console.log(this.files);
   })</pre>
-    </div>
     <div class="exam-title">拖拉选择文件</div>
     <div class="flex-h">
       <div id="zone">drag files here</div>
