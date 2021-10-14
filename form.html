@@ -35,7 +35,7 @@
       <dd>name/value：值对，以区分不同的数据</dd>
       <dd>id：配合&lt;label&gt;使用，增强用户体验</dd>
     </dl>
-    <h4 class="cont-title">input使用</h4>
+    <h4 class="cont-title">input</h4>
     <p>作用：收集信息给后端服务器server；通常配合&lt;label&gt;和各种属性增强用户体验</p>
     <p>1 单行文本输入框 type=text；默认类型</p>
     <div class="code">
@@ -60,7 +60,16 @@
     <p>5 按钮 type=submit</p>
     <div class="code">
       <p>&lt;input type="submit" value="submit"&gt;</p>
+      <p>//也可以直接使用&lt;button&gt;</p>
       <p>&lt;button&gt;submit&lt;/button&gt;</p>
+    </div>
+    <h4 class="cont-title">多行文本输入框textarea</h4>
+    <div class="code">
+      <p>&lt;textarea name="msg" id="" cols="30" rows="10"&gt;&lt;/textarea&gt;</p>
+      <p>//默认情况下，可以自由缩放；为避免影响布局，通常指定其样式为不缩放</p>
+      <p>textarea {</p>
+      <p>&nbsp;&nbsp;resize: none;</p>
+      <p>}</p>
     </div>
     <div class="exam-title">用户信息采集</div>
     <form action="" class="info">
@@ -87,11 +96,12 @@
         <input type="checkbox" name="hobby" value="movie" id="movie">
         <label for="movie">movie</label>
       </fieldset>
+      <fieldset>
+        <legend>introduction</legend>
+        <textarea name="intro" id="" cols="30" rows="10" required></textarea>
+      </fieldset>
       <button>submit</button>
     </form>
-    <h4 class="cont-title">多行文本输入框textarea</h4>
-    <div class="code">&lt;textarea name="msg" id="" cols="30" rows="10"&gt;&lt;/textarea&gt;</div>
-    <textarea name="msg" id="" cols="30" rows="10"></textarea>
     <h4 class="cont-title">文件选择file</h4>
     <p>文件是&lt;input&gt;的一种，类型为file；默认选择单个文件，可以指定multiple为多选；accept是文件类型，类型之间使用,分割，也可以使用通配符*</p>
     <div class="code">&lt;input type="file" name="avatar" id="" multiple accept="*"&gt;</div>
@@ -102,7 +112,7 @@
     <p>3 readAsArrayBuffer()：处理字节流</p>
     <div class="exam-title">读取本地文本文件</div>
     <div class="txt-box">
-      <div class="txt-cont" id='txt-cont'></div>
+      <div class="txt-cont" id='txt-cont'>当前内容为空，请选择文本文件。格式应为为UTF-8</div>
       <input type="file" name="txt" id="txt" accept="text/*">
     </div>
     <div class="code">
@@ -132,24 +142,93 @@
       })
     })</pre>
     </div>
-    <div class="exam-title">处理OA文档-excel</div>
-    <p>借助第三方库<a href="" class="link">sheetJS</a>实现</p>
+    <div class="exam-title">读取OA文档-excel</div>
+    <div id='excel-cont'>excel内容为空</div>
+    <form action="" class="">
+      <span>借助第三方库<a href="//gitee.com/mirrors/sheetjs-js-xlsx/" class="link" target="_blank">sheetJS</a>实现</span>
+      <input type="file" name="excel" id="excel" accept="*">
+    </form>
+    <div class="code">
+      <pre>
+  let excelCont = document.querySelector('#excel-cont')
+  let excel = document.querySelector('#excel')
+  excel.addEventListener('change', function () {
+    let fr = new FileReader()
+    fr.readAsArrayBuffer(this.files[0])
+    fr.addEventListener('load', function () {
+      let res = this.result;
+      let workbook = XLSX.read(res, { type: 'array' });
+      let sheetName = workbook.SheetNames[0];
+      let sheet = workbook.Sheets[sheetName];
+      console.log(sheet);
+      excelCont.innerHTML = XLSX.utils.sheet_to_html(sheet);
+    })
+  })
+  //请查看sheet内容，定制excel文档</pre>
+    </div>
+    <div class="exam-title">表格table转换为OA文档-excel</div>
+    <span>借助第三方库<a href="//gitee.com/mirrors/sheetjs-js-xlsx/" class="link" target="_blank">sheetJS</a>实现</span>
+    <table id='tbl'>
+      <tr>
+        <th>name</th>
+        <th>age</th>
+        <th>unit</th>
+        <th>cell</th>
+        <th>email</th>
+      </tr>
+      <tr>
+        <td>gl</td>
+        <td>gz</td>
+        <td>nj</td>
+        <td>sz</td>
+        <td>cq</td>
+      </tr>
+      <tr>
+        <td>hz</td>
+        <td>bj</td>
+        <td>xm</td>
+        <td>lz</td>
+        <td>sz</td>
+      </tr>
+      <tr>
+        <td>sh</td>
+        <td>sy</td>
+        <td>nn</td>
+        <td>zz</td>
+        <td>wh</td>
+      </tr>
+    </table>
+    <button id='tblBtn'>table to book</button>
+    <div class="code">
+      <pre>
+  let tblBtn = document.querySelector('#tblBtn')
+  let tbl = document.querySelector('#tbl')
+  tblBtn.addEventListener('click', () => {
+    let tblBook = XLSX.utils.table_to_book(tbl);
+    XLSX.writeFile(tblBook, 'out.xlsx');
+  })</pre>
+    </div>
     <div class="exam-title">自定义文件按钮样式</div>
+    <p>思路：隐藏file元素，定制新元素，并把新元素的click事件转接到原来的file元素</p>
     <div class="flex-h">
       <input type="file" id="file-custom" multiple>
       <button id='file-btn'>choose files</button>
+    </div>
+    <div class="code">
+      <pre>
+  let fileCoustom = document.querySelector('#file-custom')//file
+  let fileBtn = document.querySelector('#file-btn')//new file element
+  fileBtn.addEventListener('click', function () {
+    fileCoustom.click()
+  })
+  fileCoustom.addEventListener('change', function () {
+    console.log(this.files);
+  })</pre>
     </div>
     <div class="exam-title">拖拉选择文件</div>
     <div class="flex-h">
       <div id="zone">drag files here</div>
     </div>
-    <h4 class="cont-title">常用CSS</h4>
-    <ul class="">
-      <li>font</li>
-      <li>outline</li>
-      <li>resize</li>
-      <li>cursor</li>
-    </ul>
     <div class="exam-title">搜索框</div>
     <div class="flex-h">
       <div class="search">
@@ -192,7 +271,8 @@
       <li>如果查看文件内容：FileReader</li>
     </ul>
     <h4 class="cont-title">作业</h4>
-    <p>多个图片的选择和展示</p>
+    <p>1.多个图片的选择和展示</p>
+    <p>2.根据提供的excel文档定制内容并展示</p>
     <small>Copyright Reserved &copy; By Cnplaman 2021-10-13</small>
   </div>
   <script>
@@ -204,21 +284,25 @@
         let file = this.files[0]
         let fr = new FileReader()
         fr.readAsText(file)
+        // onload
         fr.onload = function (e) {
           console.log(e.target.result);
           txtCont.innerHTML = e.target.result
         }
       })
-      // single file
+
+      // single image file
       let img = document.querySelector('#img')
       let avatar = document.querySelector('#avatar')
       avatar.addEventListener('change', function () {
         let fr = new FileReader()
         fr.readAsDataURL(this.files[0])
+        // addEventListener
         fr.addEventListener('load', function () {
           img.src = this.result
         })
       })
+
       let rem = document.querySelector('.rem-cb')
       let user = document.querySelector('.user')
       user.value = localStorage.getItem('login-name') || ''
@@ -231,16 +315,40 @@
       //     rem.checked ? localStorage.setItem('login-name', user.value) : localStorage.removeItem('login-name')
       //   }
       // })
-      // case 3: file custom
-      let fileIpt = document.querySelector('#file-custom')
+
+      // read oa-excel
+      let excelCont = document.querySelector('#excel-cont')
+      let excel = document.querySelector('#excel')
+      excel.addEventListener('change', function () {
+        let fr = new FileReader()
+        fr.readAsArrayBuffer(this.files[0])
+        fr.addEventListener('load', function () {
+          let res = this.result;
+          let workbook = XLSX.read(res, { type: 'array' });
+          let sheetName = workbook.SheetNames[0];
+          let sheet = workbook.Sheets[sheetName];
+          console.log(sheet);
+          excelCont.innerHTML = XLSX.utils.sheet_to_html(sheet);
+        })
+      })
+
+      // table to oa-excel
+      let tblBtn = document.querySelector('#tblBtn')
+      let tbl = document.querySelector('#tbl')
+      tblBtn.addEventListener('click', () => {
+        let tblBook = XLSX.utils.table_to_book(tbl);
+        XLSX.writeFile(tblBook, 'out.xlsx');
+      })
+      // file custom avatar
+      let fileCoustom = document.querySelector('#file-custom')
       let fileBtn = document.querySelector('#file-btn')
       fileBtn.addEventListener('click', function () {
-        fileIpt.click()
+        fileCoustom.click()
       })
-      fileIpt.addEventListener('change', function () {
+      fileCoustom.addEventListener('change', function () {
         console.log(this.files);
       })
-      // case4: drag
+      // drag
       let drag = document.querySelector('#zone')
       drag.addEventListener('dragenter', function (e) {
         e.stopPropagation();

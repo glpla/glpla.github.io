@@ -151,13 +151,14 @@
       function handleFile(e) {
         let files = e.target.files, f = files[0];
         let reader = new FileReader();
-        reader.onload = function (e) {
-          let data = new Uint8Array(e.target.result);
+        reader.onload = function () {
+          console.log(this);
+          let data = new Uint8Array(this.result);
           let workbook = XLSX.read(data, { type: 'array' });
           console.log(workbook);
           // 工作表名称集合
           let sheetNames = workbook.SheetNames;
-          // 这里我们只读取第一张sheet        
+          // 这里我们只读取第一张sheet
           let worksheet = workbook.Sheets[sheetNames[0]];
 
           // 1. 自动生成表格
