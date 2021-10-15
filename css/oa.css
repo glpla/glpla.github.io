@@ -1,9 +1,11 @@
 header {
+  position: relative;
   display: flex;
   align-items: center;
   margin: .5rem auto 2rem;
   height: 8rem;
   padding: 1rem 2rem;
+  border-radius: .5rem;
   background-color: #fff;
   background-image: url(../imgs/lg.jpg);
   background-repeat: no-repeat;
@@ -38,6 +40,20 @@ header {
   user-select: none;
   font-weight: 700;
   color: #fff;
+}
+
+.tips-icon {
+  position: absolute;
+  right: 1rem;
+  bottom: .5rem;
+  font-size: 1.6rem;
+  color: #f3f4f5;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.tips-icon:hover {
+  transform: scale(1.2);
 }
 
 .grid {
@@ -116,28 +132,9 @@ header {
   pointer-events: none;
 }
 
-.tips {
-  font-size: .85rem;
-  padding: 1rem;
-  background-color: #fff;
-  box-shadow: 0 0 .4rem #ddd;
-  color: #666;
-}
-
-.tips h3 {
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-  line-height: 2;
-}
-
-.tips ol {
-  margin-top: 1rem;
-  padding-left: 1rem;
-}
-
 .timer {
   position: sticky;
-  top: 0;
+  top: 0px;
   width: 100%;
   text-align: center;
   margin: 1rem auto;
@@ -169,7 +166,6 @@ header {
 .active {
   background-image: linear-gradient(135deg, #45aaf2, #3867d6);
   color: #fff;
-  transform: scale(1.05);
 }
 
 .chap.active::before {
@@ -225,10 +221,21 @@ header {
   transition: all 0.4s ease-in-out;
   z-index: 98;
   user-select: none;
+  overflow: hidden;
 }
 
 .show {
   opacity: 1;
+}
+
+.show:hover span {
+  animation: slide 1s infinite;
+}
+
+@keyframes slide {
+  to {
+    transform: translateY(-100%);
+  }
 }
 
 @media screen and (max-width:768px) {

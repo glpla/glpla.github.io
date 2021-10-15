@@ -18,6 +18,7 @@
         <a class="logo" href="./oa.html" title="理工学院软件工程">理工学院软件工程</a>
       </h1>
       <span class="logo-txt">大学计算机</span>
+      <span class="iconfont tips-icon" @click='tips'>&#xe64a;</span>
     </header>
     <div class="grid">
       <button class="chap flex-v" v-for='(item,ind) in title' :key='item' @click='sel' :data-ind='ind'
@@ -26,18 +27,8 @@
         <p class="chap-tips">{{item}}</p>
       </button>
     </div>
-    <section class="tips">
-      <h3>温馨提示</h3>
-      <ol>
-        <li>操作内容为计算机应用基础的理论部分</li>
-        <li>所有操作仅供测试练习，操作结果不保存</li>
-        <li>题目和选项均随机打乱，切勿死记硬背</li>
-        <li>测试开始5分钟后方可提交</li>
-        <li>测试不限时</li>
-      </ol>
-    </section>
-    <section class="timer" v-if='len'>
-      <button class="btn" v-if='!startBool' @click='startBtn'>开始</button>
+    <section class="timer">
+      <button class="btn" v-if='!startBool' @click='startBtn' :disabled='chapInd<0'>开始</button>
       <button class="btn" v-else @click='submitBtn' :disabled="submitBool">
         <span v-if='timeBool'>提交</span>
         <span v-else>
@@ -71,7 +62,7 @@
         return {
           title: oa.title,
           oa: oa.quiz,
-          chapInd: null,
+          chapInd: -1,
           startBool: false,
           submitBool: true,
           doneBool: false,
@@ -98,6 +89,9 @@
           }
           this.quiz = [...temp]
         },
+        tips() {
+          alert('仅供测试练习；不存档不保存')
+        },
         startBtn() {
           this.startBool = true
           this.submitBool = true
@@ -123,7 +117,7 @@
           return temp
         },
         counting() {
-          let secs = 5 * 60
+          let secs = 5 * 1
           let inter = setInterval(() => {
 
             if (secs < 0) {
@@ -164,7 +158,9 @@
           console.log(oldval, newval);
         }
       },
-      created() { },
+      created() {
+        console.log(this.chapInd);
+      },
       mounted() {
         window.addEventListener('scroll', (e) => {
           // console.log(e);
@@ -181,7 +177,7 @@
           } else {
             this.showBool = false
           }
-          console.log(this.$refs.back.classList);
+          // console.log(this.$refs.back.classList);
         })
         new SmoothScroll('a[href*="#"]', {
           speed: 300,
