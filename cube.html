@@ -8,173 +8,24 @@
   <title>cube</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
-  <style>
-    .wrap {
-      width: 100vw;
-      height: 100vh;
-      background: #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      perspective: 1000px;
-    }
-
-    .cube {
-      width: 6rem;
-      height: 6rem;
-      position: relative;
-      transform-style: preserve-3d;
-      transform-origin: center;
-      animation: roll 20s infinite linear;
-      transform: rotateX(-30deg) rotateY(-70deg);
-    }
-
-    @keyframes roll {
-      0% {
-        transform: rotateX(0deg) rotateY(0deg);
-      }
-
-      100% {
-        transform: rotateX(360deg) rotateY(360deg);
-      }
-    }
-
-    .cube>div {
-      transition: 0.4s ease-in;
-    }
-
-    .cube .out-front,
-    .cube .out-back,
-    .cube .out-left,
-    .cube .out-right,
-    .cube .out-top,
-    .cube .out-bottom {
-      width: 100%;
-      height: 100%;
-      background: #f40;
-      color: #fff;
-      opacity: 0.6;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      text-align: center;
-      font-size: 1.2rem;
-      line-height: 6rem;
-      transform-style: preserve-3d;
-      transform-origin: center;
-      border: 1px solid #fff;
-    }
-
-    .cube .out-front {
-      transform: translateZ(3rem);
-    }
-
-    .cube .out-back {
-      transform: translateZ(-3rem) rotateY(180deg);
-    }
-
-    .cube .out-left {
-      transform: translateX(-3rem) rotateY(-90deg);
-    }
-
-    .cube .out-right {
-      transform: translateX(3rem) rotateY(90deg);
-    }
-
-    .cube .out-top {
-      transform: translateY(-3rem) rotateX(90deg);
-    }
-
-    .cube .out-bottom {
-      transform: translateY(3rem) rotateX(-90deg);
-    }
-
-    .cube:hover .out-front {
-      transform: translateZ(6rem);
-    }
-
-    .cube:hover .out-back {
-      transform: translateZ(-6rem) rotateY(180deg);
-    }
-
-    .cube:hover .out-left {
-      transform: translateX(-6rem) rotateY(-90deg);
-    }
-
-    .cube:hover .out-right {
-      transform: translateX(6rem) rotateY(90deg);
-    }
-
-    .cube:hover .out-top {
-      transform: translateY(-6rem) rotateX(90deg);
-    }
-
-    .cube:hover .out-bottom {
-      transform: translateY(6rem) rotateX(-90deg);
-    }
-
-    .cube .inner-front,
-    .cube .inner-back,
-    .cube .inner-left,
-    .cube .inner-right,
-    .cube .inner-top,
-    .cube .inner-bottom {
-      width: 3rem;
-      height: 3rem;
-      object-fit: cover;
-      position: absolute;
-      top: 1.5rem;
-      left: 1.5rem;
-      transform-style: preserve-3d;
-      transform-origin: center;
-      /* border: 1px solid #f40; */
-    }
-
-    .cube .inner-front {
-      transform: translateZ(1.5rem);
-    }
-
-    .cube .inner-back {
-      transform: translateZ(-1.5rem) rotateY(180deg);
-    }
-
-    .cube .inner-left {
-      transform: translateX(-1.5rem) rotateY(-90deg);
-    }
-
-    .cube .inner-right {
-      transform: translateX(1.5rem) rotateY(90deg);
-    }
-
-    .cube .inner-top {
-      transform: translateY(-1.5rem) rotateX(90deg);
-    }
-
-    .cube .inner-bottom {
-      transform: translateY(1.5rem) rotateX(-90deg);
-    }
-
-    img {
-      pointer-events: none;
-    }
-  </style>
+  <link rel="stylesheet" href="css/cube.css">
 </head>
 
 <body>
-  <div class="wrap">
+  <div class="w wrap flex-h">
     <div class="cube">
-      <div class="out-front">front</div>
-      <div class="out-back">back</div>
-      <div class="out-left">left</div>
-      <div class="out-right">right</div>
-      <div class="out-top">top</div>
-      <div class="out-bottom">bottom</div>
-      <img src='imgs/lg.jpg' class='inner-front'></img>
-      <img src='imgs/lg.jpg' class='inner-back'></img>
-      <img src='imgs/lg.jpg' class='inner-left'></img>
-      <img src='imgs/lg.jpg' class='inner-right'></img>
-      <img src='imgs/lg.jpg' class='inner-top'></img>
-      <img src='imgs/lg.jpg' class='inner-bottom'></img>
+      <div class="out-front"></div>
+      <div class="out-back"></div>
+      <div class="out-left"></div>
+      <div class="out-right"></div>
+      <div class="out-top"></div>
+      <div class="out-bottom"></div>
+      <img src='imgs/lg.png' class='inner-front'></img>
+      <img src='imgs/lg.png' class='inner-back'></img>
+      <img src='imgs/lg.png' class='inner-left'></img>
+      <img src='imgs/lg.png' class='inner-right'></img>
+      <img src='imgs/lg.png' class='inner-top'></img>
+      <img src='imgs/lg.png' class='inner-bottom'></img>
     </div>
   </div>
 </body>
