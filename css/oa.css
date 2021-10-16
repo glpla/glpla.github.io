@@ -77,6 +77,10 @@ header {
   transition: .6s;
 }
 
+/* .chap:hover::before {
+  transform: rotateY(180deg);
+} */
+
 .grid .chap::before {
   content: '';
   position: absolute;
@@ -88,6 +92,7 @@ header {
   background-repeat: no-repeat;
   background-position: 0;
   transition: .6s;
+  filter: drop-shadow(.1rem .1rem .2rem #333);
 }
 
 .grid .chap:nth-child(1)::before {
@@ -145,13 +150,27 @@ header {
   width: 100%;
   height: 2.2rem;
   border: none;
-  background-image: linear-gradient(135deg, #45aaf2, #3867d6);
+  background-image: linear-gradient(135deg, #45aaf2, #55aae2, #1b74af, #45aaf2);
+  background-size: 400%;
+  background-position: 0;
   color: #fff;
   font-size: 1.2rem;
 }
 
 .btn {
+  position: relative;
   cursor: pointer;
+  border-radius: .5rem;
+}
+
+/* .btn:hover {
+  animation: wave 10s infinite;
+} */
+
+@keyframes wave {
+  to {
+    background-position: -400%;
+  }
 }
 
 .btn:disabled {

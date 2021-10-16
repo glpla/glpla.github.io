@@ -23,7 +23,7 @@
     <div class="grid">
       <button class="chap flex-v" v-for='(item,ind) in title' :key='item' @click='sel' :data-ind='ind'
         :disabled='startBool' :class='chapInd==ind? "active":""'>
-        <p class="chap-tips">第{{ind+1}}章</p>
+        <p class="chap-tips">- 第{{ind+1}}章 -</p>
         <p class="chap-tips">{{item}}</p>
       </button>
     </div>
@@ -90,7 +90,7 @@
           this.quiz = [...temp]
         },
         tips() {
-          alert('仅供测试练习；不存档不保存')
+          alert('仅供测试练习；不存档；不保存')
         },
         startBtn() {
           this.startBool = true
