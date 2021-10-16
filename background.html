@@ -25,12 +25,12 @@
       <dt>单独属性</dt>
       <dd>background-color：背景颜色</dd>
       <dd>background-image：可以使用url或者线性渐变、径向渐变</dd>
-      <dd>background-position：背景图的位置；默认从左上角开始</dd>
-      <dd>background-size：背景图的大小</dd>
-      <dd>background-repeat：背景是否重复贴铺</dd>
-      <dd>background-origin：背景的起点位置</dd>
-      <dd>background-attachment：背景和内容的附着方式</dd>
-      <dd>background-blend-mode</dd>
+      <dd>background-position：背景图片的位置；默认从左上角开始</dd>
+      <dd>background-size：背景图片的大小</dd>
+      <dd>background-repeat：背景图片是否重复贴铺</dd>
+      <dd>background-origin：背景图片的起点位置</dd>
+      <dd>background-attachment：背景图片和内容的附着方式</dd>
+      <dd>background-blend-mode：背景图片的混和模式</dd>
       <dd>其它属性</dd>
       <dt>复合属性（不建议使用）</dt>
       <dd>background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;</dd>
@@ -38,20 +38,21 @@
     </dl>
     <div class="exam-title">background-color vs background-image </div>
     <pre class="code">
-  background-color: #fff;
-  background-image:  url(../imgs/bg.jpg);
-  //或复合属性
-  background: #fff url(../imgs/bg.jpg);</pre>
+    background-color: #fff;
+    background-image:  url(../imgs/bg.jpg);
+    //或复合属性
+    background: #fff url(../imgs/bg.jpg);</pre>
     <section class="color-img">
       <p>1.最基本的使用：指定图片为背景；早起为了后向兼容，同时也指定颜色</p>
-      <p>2.元素的尺寸&gt;背景图片的尺寸，则默认情况下，背景图片会在水平和垂直方向上重复贴铺</p>
-      <p>3.元素的尺寸&lt;背景图片的尺寸，则显示部分背景图片，实际上背景图片还是会在水平和垂直方向上重复贴铺，只不过受元素尺寸大小限制，没有呈现出来</p>
+      <p>2.容器的尺寸&gt;背景图片的尺寸，则默认情况下，背景图片会在水平和垂直方向上重复贴铺</p>
+      <p>3.容器的尺寸&lt;背景图片的尺寸，则显示部分背景图片，实际上背景图片还是会在水平和垂直方向上重复贴铺，只不过受容器尺寸大小限制，没有呈现出来</p>
     </section>
     <div class="exam-title">background-repeat</div>
+    <p>默认情况下，图片会水平和垂直方向上铺满整个容器；如果图片尺寸大于容器尺寸，看不出效果。实例分析：</p>
     <section class="rpt">
       <ul>
         <li>
-          <span>1.背景图片&lt;元素尺寸</span>
+          <span>1.背景图片&lt;容器尺寸</span>
           <div class="dot"></div>
           <span>1</span>
         </li>
@@ -67,10 +68,28 @@
       </ul>
     </section>
     <pre class="code">
-  background-image: url(../imgs/dot.png);
-  background-repeat: repeat-x;</pre>
+    background-image: url(../imgs/dot.png);
+    background-repeat: repeat-x;</pre>
     <div class="exam-title">background-position</div>
     <section class="pos">
+      <div>1. 精灵图</div>
+      <p>根据图片坐标/位置显示指定的内容</p>
+      <pre class="code">
+    .sprite .more {
+      background-position: 0 -191px;
+    }
+    
+    .sprite .fast {
+      background-position: -41px -191px;
+    }
+    
+    .sprite .good {
+      background-position: -82px -191px;
+    }
+    
+    .sprite .save {
+      background-position: -123px -191px;
+    }      </pre>
       <div class="sprite flex-h">
         <div class="flex-h item">
           <p class="icon more">多</p>
@@ -89,25 +108,105 @@
           <p>天天低价，畅选无忧</p>
         </div>
       </div>
-      <h4>-应用1：精灵图-</h4>
+      <div>2. 图片分割</div>
+      <p>根据图片比例，显示指定的内容。</p>
+      <p>情况1：容器尺寸和图片尺寸一致:大图：750*500；小图：350*250</p>
+      <pre class="code">
+    .tile-pair {
+      width: 750px;
+      height: 500px;
+      margin: 0 auto;
+      display: flex;
+    }
+    
+    .tile-pair>div {
+      flex: 1;
+      background-image: url(../imgs/bg.jpg);
+    }
+    
+    .tile-pair>div:nth-child(1) {
+      background-position: 0;
+    }
+    
+    .tile-pair>div:nth-child(2) {
+      background-position: 33.3%;
+    }
+    
+    .tile-pair>div:nth-child(3) {
+      background-position: 66.7%;
+    }
+    
+    .tile-pair>div:nth-child(4) {
+      background-position: 100%;
+    }      </pre>
+      <div class="tile-pair">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <p>情况2：容器尺寸和图片尺寸不一致时（块元素默认为100%的父级尺寸，所以不用单独指定width），单个部分的background-size应指定为总份数的倍数</p>
+      <pre class="code">
+    .tile {
+      min-height: 18rem;
+      margin: 0 auto;
+      display: flex;
+    }
+
+    .tile>div {
+      flex: 1;
+      background-image: url(../imgs/bg.jpg);
+      background-size: 400%;//WARNING
+    }
+
+    .tile>div:nth-child(1) {
+      background-position: 0;
+    }
+    
+    .tile>div:nth-child(2) {
+      background-position: 33.3%;
+    }
+    
+    .tile>div:nth-child(3) {
+      background-position: 66.7%;
+    }
+    
+    .tile>div:nth-child(4) {
+      background-position: 100%;
+    }      </pre>
       <div class="tile">
         <div class="tile-item"></div>
         <div class="tile-item"></div>
         <div class="tile-item"></div>
         <div class="tile-item"></div>
       </div>
-      <h4>-应用2：图片分割-</h4>
     </section>
     <div class="exam-title">background-size</div>
     <section>
+      <p>1. 默认情况：100%的显示图片；容器大，则平铺；容器小，则显示部分图片</p>
       <div class="size"></div>
-      <h4>默认情况</h4>
+      <p>2. 关键字cover：在容器的尺寸内最大程度的展示图片；容器被占满；图片可能被裁剪</p>
+      <pre class="code">
+    background-size:cover;</pre>
       <div class="size cover"></div>
-      <h4>background-size:cover;</h4>
+      <p>3. 关键字contain：在容器的尺寸内展示完整的图片（包含图片）；如果允许重复，则会显示多个图片背景；如果不允许，容器将呈现部分空白</p>
+      <pre class="code">
+    background-size:contain;</pre>
       <div class="size contain"></div>
-      <h4>background-size:contain;</h4>
+      <p>4. 通常指定为cover，并调整其位置position居中center显示</p>
+      <pre class="code">
+    background-size:cover;
+    background-position:center;
+    background-repeat: no-repeat;</pre>
       <div class="size cover-center"></div>
-      <h4>background-size:cover;background-position:center;</h4>
+      <p>5. 固定大小px：根据指定的尺寸展示图片。图片会被压缩；如果只提供一个值，系统会按照图片比例，自动铺满容器</p>
+      <pre class="code">
+    background-size: 100px 100px;</pre>
+      <div class="size px"></div>
+      <p>6. 百分比：参照容器大小，根据一定的比例展示图片；图片会被压缩；如果只提供一个值，系统会按照图片比例，自动铺满容器</p>
+      <pre class="code">
+    background-size: 10% 10%;</pre>
+      <div class="size per"></div>
     </section>
     <div class="exam-title">linear-gradient vs radial-gradient</div>
     <div class="cont">

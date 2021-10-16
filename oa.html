@@ -33,7 +33,7 @@
         <span v-if='timeBool'>提交</span>
         <span v-else>
           <span ref='h0'>0</span><span ref='h1'>0</span>:<span ref='m0'>0</span><span ref='m1'>0</span>:<span
-            ref='s0'>0</span><span ref='s1'>0</span>
+            ref='s0'>0</span><span ref='s1'>5</span>
         </span>
       </button>
     </section>
@@ -119,12 +119,11 @@
         counting() {
           let secs = 5 * 1
           let inter = setInterval(() => {
-
+            secs--;
             if (secs < 0) {
               clearInterval(inter)
               this.timeBool = true
               this.submitBool = false
-              console.log('stop');
               return
             }
             let hour = Math.floor(secs / 3600)
@@ -138,7 +137,6 @@
 
             this.$refs.s0.innerHTML = Math.floor(sec / 10)
             this.$refs.s1.innerHTML = sec % 10
-            secs--;
           }, 1000)
         },
         back2top() { }
