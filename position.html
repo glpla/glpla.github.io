@@ -14,33 +14,34 @@
 <body>
   <div class="w">
     <h4 class="cont-title">相对定位Relative/绝对定位Absolute</h4>
-    <p>父相子绝：</p>
-    <p>父级元素：相对定位，position: relative;为子级元素提供定位依据。如果本级父元素没有显式的指定为相对定位，则一直往上一级元素寻找，直至body。relative元素仍然在文档流中。</p>
-    <p>子级元素：绝对定位，position: absolute;absolute元素会脱离文档流。默认会在原来的位置，可以利用负边距定位元素。</p>
-    <div class="exam-title">利用top等关键字定位</div>
+    <p>相对定位：不脱离文档流；参考对象是自己；</p>
+    <p>绝对定位：脱离文档流；参考对象是显示的设置了定位属性(相对或绝对都可以)的最近的父元素；如果父元素没有指定定位属性，则一级一级往上寻找，直至body；</p>
+    <p>绝对定位元素默认会待在原来的位置，可以利用关键字top right bottom left和负边距定位元素。</p>
+    <p>相对定位很少单独使用，通常为子元素提供定位依据，即：<strong>父相子绝</strong></p>
+    <div class="exam-title">利用关键字</div>
     <div class="cart">
       <span class="iconfont">&#xe832;</span>
       <span class="badge keyword">8</span>
       <span>我的购物车</span>
     </div>
     <pre class="code">
-  .keyword {
-    position: absolute;
-    right: 6rem;
-    top: -.5rem;
-  }</pre>
-    <div class="exam-title">利用负边距定位</div>
+    .keyword {
+      position: absolute;
+      right: 6rem;
+      top: -.5rem;
+    }</pre>
+    <div class="exam-title">利用负边距</div>
     <div class="cart">
       <span class="iconfont">&#xe832;</span>
       <span class="badge neg">8</span>
       <span>我的购物车</span>
     </div>
     <pre class="code">
-  .neg {
-    position: absolute;
-    margin-top: -.5rem;
-    margin-left: -.5rem;
-  }</pre>
+    .neg {
+      position: absolute;
+      margin-top: -.5rem;
+      margin-left: -.5rem;
+    }</pre>
     <div class="exam-title">bubble利用负边距定位</div>
     <div>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit sunt sequi nobis aspernatur! Exercitationem
@@ -54,18 +55,17 @@
         quod minus explicabo.</p>
     </div>
     <pre class="code">
-  .icon {
-    position: absolute;
-    margin-top: -1.2rem;
-    margin-left: -1rem;
-    color: #c81623;
-  }</pre>
+    .icon {
+      position: absolute;
+      margin-top: -1.2rem;
+      margin-left: -1rem;
+      color: #c81623;
+    }</pre>
     <h4 class="cont-title">固定定位Fixed</h4>
-    <p>固定定位以视口viewport为参考。元素会固定在屏幕上，不会随页面的滚动而移动。如侧边导航栏。</p>
-    <p>贴近页面右侧版心：left偏移浏览器的一半（50%），再增加半个版心的margin-left；贴近左侧同理</p>
-    <p>通常的解决方案是：当前页面位于顶端时，暂时隐藏侧边导航条；当页面向下滚动到一定位置时，再显式侧边导航栏；需要借助JS。</p>
-    <p>定位元素如果没有显式的指定left、top、right、bottom，则会待在原来的位置，但并不占据该位置</p>
-    <p>请比较版心有无padding时的定位情况</p>
+    <p>固定定位以视口viewport为参考。元素会固定在屏幕上，不会随页面的滚动而移动。通常用来定制导航，如顶部导航、侧边导航和底部导航等。</p>
+    <p>使用小技巧：贴近页面右侧版心？</p>
+    <p>方案：left偏移浏览器的一半（50%），再增加半个版心的margin-left；贴近左侧同理</p>
+    <p>导航通常的解决方案是：当前页面位于顶端时，暂时隐藏侧边导航条；当页面向下滚动到一定位置时，再显式侧边导航栏；一般需要借助JS实现。</p>
     <aside class="right">
       <ul>
         <li class="item">
@@ -112,15 +112,28 @@
         <li>留言</li>
       </ul>
     </nav>
-    <p>兼有相对定位和绝对定位的特性；以浏览器可视区为参考（具有固定定位特性）；占有原来位置（具有相对定位特性）；必须指定left、top、right、bottom某一个；</p>
-    <p>应用：适合banner/swiper+主导航+内容的网页。网页滚动时候，banner移出，导航保留/黏贴在顶端，内容也逐步移出；还可以使用JS实现。</p>
+    <p>兼有相对定位和绝对定位的特性；以视口viewport为参考(具有固定定位特性)，占有原来位置(具有相对定位特性)；必须指定left、top、right、bottom某一个；</p>
+    <p>应用：适合banner/swiper+主导航+内容的网页。网页滚动时候，banner移出，导航保留/黏贴在顶端，内容也逐步移出；还可以使用JS实现黏性效果。</p>
     <h4 class="cont-title">z-index</h4>
     <p>控制Z轴方向上盒子堆叠时的前后次序；</p>
-    <p>只有定位的元素有，标准文档流没有；</p>
+    <p>只有定位的元素有，标准文档流没有；但是后面的元素默认比前面的元素具有更高的层级；</p>
     <p>z-index为正的元素，出现在没有指定z-index的元素的上面；</p>
     <p>z-index为负的元素，出现在没有指定z-index的元素的下面；</p>
     <p>数值大的在前面（近）；数值小的在后面（远）；</p>
-    <p>如果没有显式指定z-index，则按照文档流出现的顺序，后来居上；</p>
+    <p>如果没有显式指定z-index，则为auto，按照文档流出现的顺序，后来居上；</p>
+    <div class="exam-title">层级提升</div>
+    <p>因为relative没有脱离文档流，故可以指定为相对定位，以获得较高的层级展示；并根据需要设置z-index实现特定的效果</p>
+    <div class="nav zindex">这是导航内容</div>
+    <div class="cont">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem, nostrum tenetur cumque esse nisi
+      animi dolores deleniti perferendis, hic error iusto amet ipsam quae rem nobis, reiciendis illum est. Commodi iusto
+      maxime repellat asperiores. Optio, maxime qui praesentium suscipit doloremque voluptatum! Molestias accusamus
+      voluptatibus, aspernatur porro eveniet exercitationem architecto at?</div>
+    <pre class="code">
+    .zindex {
+      position: relative;
+      padding: 1rem;
+      box-shadow: 0 .4rem 1rem .1rem rgba(0, 0, 0, .4);
+    }      </pre>
     <h4 class="cont-title">异常情况分析</h4>
     <div class="qa">
       <p>Q:关于侧边导航未能贴近版心</p>
