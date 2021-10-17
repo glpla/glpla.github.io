@@ -61,6 +61,92 @@
       margin-left: -1rem;
       color: #c81623;
     }</pre>
+    <div class="exam-title">水平垂直居中方案1</div>
+    <p>必须知道子元素的大小；子元素尺寸甚至可以大于父元素</p>
+    <div class="demo-box">
+      <pre class="code">
+    .demo-inner0 {
+      position: absolute;
+      width: 110px;
+      height: 50px;
+      background-color: #fff;
+      top: 50%;
+      left: 50%;
+      margin-left: -55px;
+      margin-top: -25px;
+    }      </pre>
+      <div class="demo">
+        <div class="demo-inner0">demo-inner0</div>
+      </div>
+    </div>
+    <div class="exam-title">水平垂直居中方案2</div>
+    <p>无需知道子元素的大小；子元素尺寸必须小于于父元素</p>
+    <div class="demo-box">
+      <pre class="code">
+    .demo-inner1 {
+      position: absolute;
+      width: 110px;
+      height: 50px;
+      background-color: #fff;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+    }      </pre>
+      <div class="demo">
+        <div class="demo-inner1">demo-inner1</div>
+      </div>
+    </div>
+    <div class="exam-title">水平垂直居中方案3</div>
+    <p>无需知道子元素的尺寸</p>
+    <div class="demo-box">
+      <pre class="code">
+    .demo-inner3 {
+      position: absolute;
+      width: 110px;
+      height: 50px;
+      background-color: #fff;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }      </pre>
+      <div class="demo">
+        <div class="demo-inner3">demo-inner3</div>
+      </div>
+    </div>
+    <div class="exam-title">水平垂直居中方案4</div>
+    <p>利用flex：简直不要太爽</p>
+    <div class="demo-box">
+      <pre class="code">
+    .flex-box {
+      display: flex;
+    }
+    .demo-inner4 {
+      width: 110px;
+      height: 50px;
+      background-color: #fff;
+      margin: auto;
+    }      </pre>
+      <div class="demo flex-box">
+        <div class="demo-inner4">demo-inner4</div>
+      </div>
+    </div>
+    <div class="exam-title">水平垂直居中方案5</div>
+    <p>多个子元素，利用flex：爽到爆</p>
+    <div class="demo-box">
+      <pre class="code">
+    .flex-box-adv {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    //子元素样式同上</pre>
+      <div class="demo flex-box-adv">
+        <div class="demo-inner5">demo-inner5</div>
+        <div class="demo-inner5">demo-inner5</div>
+      </div>
+    </div>
     <h4 class="cont-title">固定定位Fixed</h4>
     <p>固定定位以视口viewport为参考。元素会固定在屏幕上，不会随页面的滚动而移动。通常用来定制导航，如顶部导航、侧边导航和底部导航等。</p>
     <p>使用小技巧：贴近页面右侧版心？</p>
