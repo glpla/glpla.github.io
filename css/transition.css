@@ -251,71 +251,47 @@
 
 /*  */
 
-.step {
-  height: 100%;
-  background-color: #eeece1;
-}
-
-.step div {
-  width: 4rem;
-  height: 2rem;
-  line-height: 2rem;
-  text-align: center;
-  background-color: #b22222;
-  color: #fff;
-  margin: auto;
-  transition: all 4s steps(4);
-}
-
-.step:hover div {
-  width: 80%;
-}
-
-/*  */
-
-.clock {
-  height: 100%;
-  background-color: #eeece1;
+.flex-box {
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.clock>div {
-  position: relative;
-  width: 12rem;
-  height: 12rem;
-  border-radius: 50%;
-  background-color: #fff;
+.step-title {
+  flex-basis: 100px;
 }
 
-.clock>div::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #333;
-  transform: translate(-50%, -50%);
+.step-ref {
+  width: 300px;
+  height: 50px;
+  background-color: #ddd;
+  margin-bottom: 1rem;
 }
 
-.clock>div::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 2px;
-  height: 50%;
-  background-color: #333;
-  transform-origin: 50% bottom;
-  transform: translate(-50%, 0);
-  transition: all 10s steps(60, start);
+.step-ref>div {
+  width: 50px;
+  height: 50px;
+  float: left;
 }
 
-.clock>div:hover::after {
-  transform: translate(-50%, 0) rotate(360deg);
+.step-demo-end {
+  width: 50px;
+  height: 50px;
+  background-color: #f40;
+  transition: 5s steps(5);
+}
+
+.step-demo-end:hover {
+  width: 300px;
+}
+
+.step-demo-start {
+  width: 50px;
+  height: 50px;
+  background-color: #f40;
+  transition: 5s steps(5, start);
+}
+
+.step-demo-start:hover {
+  width: 300px;
 }
 
 @media (max-width:768px) {

@@ -16,14 +16,23 @@
     <h4 class="cont-title">过渡动画</h4>
     <dl class="keypoint">
       <dt>说明</dt>
+      <dd>元素从一个状态过渡到另外一个状态</dd>
       <dd>通常配合元素的hover实现</dd>
-      <dt>语法</dt>
+      <dd>过渡自动双向执行。只要状态翻转，过渡就会执行</dd>
+      <dt>复合属性语法</dt>
       <dd>transition: property duration timing-function delay;</dd>
+      <dt>单独属性语法</dt>
+      <dd>transition-property</dd>
+      <dd>transition-duration</dd>
+      <dd>transition-timing-function</dd>
+      <dd>transition-delay</dd>
       <dt>说明</dt>
       <dd>property：哪个属性参与过渡，通常指定为all</dd>
-      <dd>duration：过渡持续时间，单位是秒</dd>
-      <dd>timing-function：过渡效果，默认是匀速线性linear</dd>
-      <dd>delay：延迟多少时间开始过渡；默认是0秒</dd>
+      <dd>duration：过渡持续时间，单位是秒；过渡时间必须指定(其它参数可选)，且必须是第一个时间参数；第二个时间参数是延迟时间；UI界面的过渡通常不超过0.4s，以免拖沓</dd>
+      <dd>timing-function：时间函数，指过渡的效果，默认是匀速线性linear</dd>
+      <dd>delay：延迟多少时间开始过渡，单位是秒，默认0秒；延迟必须为第二个时间参数；第一个时间参数是过渡时间</dd>
+      <dd>使用单独属性语法可以指定多个过渡属性，必须是一一对应</dd>
+      <dd>一般参与过渡的属性都是数值型的；不是每个属性都可以参与过渡</dd>
     </dl>
     <div class="exam-title">示例</div>
     <div class="wrap">
@@ -59,15 +68,47 @@
         <div></div>
       </div>
     </div>
-    <div class="exam-title">步进过渡动画</div>
-    <div class="wrap">
-      <div class="step">
-        <div>步进动画</div>
-      </div>
-      <div class="clock">
-        <div></div>
+    <h4 class="cont-title">步进过渡动画</h4>
+    <p>由时间函数 steps(number_of_steps，direction)指定的一种特殊过渡效果</p>
+    <p>number_of_steps：数字，过渡分几个阶段完成</p>
+    <p>direction：start和end，默认是end，过渡从状态的什么时候开始</p>
+    <div class="exam-title">示例</div>
+    <p>矩形的宽度从50px，经过5个阶段，过渡到300px</p>
+    <div class="flex-box">
+      <div class="step-title">参考对象</div>
+      <div class="step-ref">
+        <div>0</div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
       </div>
     </div>
+    <div class="flex-box">
+      <div class="step-title">steps(5,end)</div>
+      <div class="step-demo-end"></div>
+    </div>
+    <div class="flex-box">
+      <div class="step-title">steps(5,start)</div>
+      <div class="step-demo-start"></div>
+    </div>
+    <p>为了避免状态翻转的自动反向过渡，可以分别指定过渡的时间。如下</p>
+    <pre class="code">
+    .step-demo-end {
+      width: 50px;
+      height: 50px;
+      background-color: #f40;
+      transition: 0s;
+    }
+    
+    .step-demo-end:hover {
+      width: 300px;
+      transition: 5s steps(5);
+    }    </pre>
+    <h4 class="cont-title">作业</h4>
+    <p>1. 完成上述案例</p>
+    <p>2. 模拟钟表的秒针走动</p>
   </div>
 </body>
 
