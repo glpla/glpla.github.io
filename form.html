@@ -128,7 +128,10 @@
     <div class="exam-title">单选文件-定制头像</div>
     <div class="flex-h avatar-box">
       <img src="" alt="图片不可用" id='img'>
-      <input type="file" name="avatar" accept="image/*" id='avatar'>
+      <div>
+        <div class="per" id='per'>0%</div>
+        <input type="file" name="avatar" accept="image/*" id='avatar'>
+      </div>
     </div>
     <pre class="code">
     avatar.addEventListener('change', function () {
@@ -284,6 +287,7 @@
       // single image file
       let img = document.querySelector('#img')
       let avatar = document.querySelector('#avatar')
+      let per = document.querySelector('#per')
       avatar.addEventListener('change', function () {
         let fr = new FileReader()
         fr.readAsDataURL(this.files[0])
@@ -291,6 +295,11 @@
         fr.addEventListener('load', function () {
           img.src = this.result
         })
+        // loading time > 50ms
+        fr.onprogress = function (e) {
+          console.log(e.loaded);
+          per.innerHTML = Number(e.loaded / e.total * 100).toFixed(2) + '%'
+        }
       })
 
       let rem = document.querySelector('.rem-cb')
@@ -354,6 +363,12 @@
         console.log(e.dataTransfer.files);
       })
     }
+    window.addEventListener('online', function () {
+      console.log('online');
+    })
+    window.addEventListener('offline', function () {
+      console.log('offline');
+    })
   </script>
 </body>
 
