@@ -1,54 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="css/reset.css">
-  <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.0.0/css/font-awesome.min.css" rel="stylesheet">
-  <style>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Baidu Map </title>
+  <style type="text/css">
+    html {
+      height: 100%
+    }
 
+    body {
+      height: 100%;
+      margin: 0px;
+      padding: 0px
+    }
 
+    #container {
+      width: 50vw;
+      height: 50vh;
+      margin: 0 auto;
+    }
   </style>
 </head>
 
 <body>
-  <div class="box">
-    <img src="" alt="">
-    <input type="file">
-    <div class="info">0%</div>
-  </div>
+  <div id="container"></div>
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=5errU4jPPqKuC4LmMhinjlDYFrvz3mvn"></script>
   <script>
-    window.onload = function () {
-      let img = document.querySelector('img')
-      let input = document.querySelector('input')
-      let info = document.querySelector('.info')
-      input.addEventListener('change', function (e) {
-        // console.log(this.files[0]);
-        let size = this.files[0].size
-        let fr = new FileReader()
-        fr.readAsDataURL(this.files[0])
-        // fr.onload = function () {
-        //   img.src = this.result
-        // }
-        fr.onload = function () {
-          console.log(this.result);
-          img.src = this.result
-        }
-        fr.onprogress = function (e) {
-          console.log(this, e);
-          info.innerHTML = Number(e.loaded / e.total * 100).toFixed(2) + '%'
-        }
-      })
-    }
-    window.addEventListener('online', function () {
-      console.log('online');
-    })
-    window.addEventListener('offline', function () {
-      console.log('offline');
-    })
+    let map = new BMap.Map("container", {
+      coordsType: 5
+    });
+    let point = new BMap.Point(110.284788, 25.101197);
+    map.centerAndZoom(point, 15);
+    map.enableScrollWheelZoom(true);
   </script>
 </body>
 

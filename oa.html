@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/oa.css">
   <script src="./js/vue.global.prod.min.js"></script>
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=5errU4jPPqKuC4LmMhinjlDYFrvz3mvn"></script>
 </head>
 
 <body>
@@ -48,12 +49,14 @@
           <div :class='(doneBool && option==item.answer)?"flag":""'>{{label[sn]}}&nbsp;&nbsp;{{option}}</div>
         </label>
       </div>
+      <h4>到底啦</h4>
     </section>
-    <small>Copyright Reserved &copy; By Cnplaman 2021-10-06</small>
     <a class="back flex-v" ref='back' href="#app" :class='{"show":showBool}'>
       <span class="iconfont">&#xe6c0;</span>
     </a>
   </div>
+  <div id="container"></div>
+  <small>Copyright Reserved &copy; By Cnplaman 2021-10-06</small>
   <script type="module">
     import oa from './data2021/oa.js'
     import './js/smooth-scroll.polyfills.min.js'
@@ -184,6 +187,13 @@
       },
     })
     const vm = app.mount('#app')
+    // map
+    let map = new BMap.Map("container", {
+      coordsType: 5
+    });
+    let point = new BMap.Point(110.284788, 25.101197);
+    map.centerAndZoom(point, 15);
+    map.enableScrollWheelZoom(true);
   </script>
 </body>
 
