@@ -5,37 +5,74 @@
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Baidu Map </title>
+  <link rel="stylesheet" href="./js/magnific-popup.min.css">
   <style type="text/css">
-    html {
-      height: 100%
+    .white-popup {
+      position: relative;
+      background: #f40;
+      padding: 20px;
+      width: auto;
+      max-width: 500px;
+      margin: 20px auto;
     }
 
-    body {
-      height: 100%;
-      margin: 0px;
-      padding: 0px
-    }
-
-    #container {
-      width: 50vw;
-      height: 50vh;
-      margin: 0 auto;
+    .test {
+      height: 200vh;
     }
   </style>
 </head>
 
 <body>
-  <iframe width="354" height="712" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-    src="http://j.map.baidu.com/s/eYsHFb"></iframe>
-  <div id="container"></div>
-  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=5errU4jPPqKuC4LmMhinjlDYFrvz3mvn"></script>
+  <h4>image type:single</h4>
+  <a class="single-img" href="./imgs/bg.jpg">Open popup</a>
+  <h4>image type:multiple</h4>
+  <div class="box">
+    <a class="test-popup-link" href="./imgs/blog0.jpg">Open popup</a>
+    <a class="test-popup-link" href="./imgs/blog1.jpg">Open popup</a>
+    <a class="test-popup-link" href="./imgs/blog2.jpg">Open popup</a>
+    <a class="test-popup-link" href="./imgs/blog3.jpg">Open popup</a>
+  </div>
+  <h4>inline type</h4>
+  <a href="#inline-popup" class="inline-link">Show inline popup</a>
+  <div id="inline-popup" class="white-popup mfp-hide">
+    <div>Popup content</div>
+    <a href="javascript:;" id='close-link'>close</a>
+  </div>
+  <div class="test"></div>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/jquery.magnific-popup.min.js"></script>
   <script>
-    let map = new BMap.Map("container", {
-      coordsType: 5
+    $(document).ready(function () {
+      // demo1
+      $('.single-img').magnificPopup({
+        type: 'image',
+      });
+      // demo2
+      $('.box').magnificPopup({
+        delegate: 'a',
+        type: 'image'
+      });
+      // demo3
+      let magnificPopup = $.magnificPopup.instance;
+      $('.inline-link').magnificPopup({
+        type: 'inline',
+        // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+        midClick: true,
+        modal: true,
+        callbacks: {
+          open: function () {
+            console.log('open');
+          },
+          close: function () {
+            console.log('close');
+          }
+        }
+      });
+      $('#close-link').click(function () {
+        console.log('close');
+        magnificPopup.close()
+      })
     });
-    let point = new BMap.Point(110.284788, 25.101197);
-    map.centerAndZoom(point, 15);
-    map.enableScrollWheelZoom(true);
   </script>
 </body>
 

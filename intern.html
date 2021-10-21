@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/intern.css">
-  <link href="https://cdn.bootcdn.net/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet">
+  <link href="./js/magnific-popup.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -79,22 +79,22 @@
       </table>
     </div>
   </div>
-  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="//cdn.bootcdn.net/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/jquery.magnific-popup.min.js"></script>
+  <script src="./js/vue.global.prod.min.js"></script>
   <script type="module">
     import intern from './data2021/intern.js'
-    let app = new Vue({
-      el: '#app',
-      data: {
-        list: ['序号', '姓名', '电话', '实习状态', '毕设状态', '实习打卡', '实习公司', '实习地址', '负责人', '联系电话'],
-        title: intern.title,
-        admin: intern.admin,
-        students: intern.students,
-        len: intern.students[0].intern.length
+    let app = Vue.createApp({
+      data() {
+        return {
+          list: ['序号', '姓名', '电话', '实习状态', '毕设状态', '实习打卡', '实习公司', '实习地址', '负责人', '联系电话'],
+          title: intern.title,
+          admin: intern.admin,
+          students: intern.students,
+          len: intern.students[0].intern.length
+        }
       },
       created() {
-        console.log(intern.students[0].intern.length);
         $(document).ready(function () {
           $('#app').magnificPopup({
             delegate: 'a',
@@ -105,7 +105,7 @@
           })
         })
       }
-    })
+    }).mount('#app')
   </script>
 </body>
 

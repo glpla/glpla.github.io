@@ -8,6 +8,7 @@
   <title>OA Quiz</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/oa.css">
+  <link rel="stylesheet" href="./js/magnific-popup.min.css">
   <script src="./js/vue.global.prod.min.js"></script>
 </head>
 
@@ -18,7 +19,14 @@
         <a class="logo" href="./oa.html" title="理工学院软件工程">理工学院软件工程</a>
       </h1>
       <span class="logo-txt">大学计算机</span>
-      <span class="iconfont tips-icon" @click='tips'>&#xe64a;</span>
+      <a href="#tips-popup" id='tips-link'>
+        <span class="iconfont tips-icon">&#xe64a;</span>
+      </a>
+      <div id="tips-popup" class="tips-popup mfp-hide">
+        <p class="tips-title">提示</p>
+        <div class="tips-cont">仅供测试练习；不存档；不保存；</div>
+        <a href="javascript:;" id='close-link'>关闭</a>
+      </div>
     </header>
     <div class="grid">
       <button class="chap flex-v" v-for='(item,ind) in title' :key='item' @click='sel' :data-ind='ind'
@@ -54,6 +62,8 @@
     </a>
   </div>
   <small>Copyright Reserved &copy; By Cnplaman 2021-10-06</small>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/jquery.magnific-popup.min.js"></script>
   <script type="module">
     import oa from './data2021/oa.js'
     import './js/smooth-scroll.polyfills.min.js'
@@ -89,9 +99,9 @@
           }
           this.quiz = [...temp]
         },
-        tips() {
-          alert('仅供测试练习；不存档；不保存')
-        },
+        // tips() {
+        //   alert('仅供测试练习；不存档；不保存')
+        // },
         startBtn() {
           this.startBool = true
           this.submitBool = true
@@ -158,6 +168,19 @@
       },
       created() {
         console.log(this.chapInd);
+        $(document).ready(function () {
+          let magnificPopup = $.magnificPopup.instance;
+          $('#tips-link').magnificPopup({
+            type: 'inline',
+            // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+            midClick: true,
+            modal: true
+          });
+          $('#close-link').click(function () {
+            magnificPopup.close()
+          })
+        })
+
       },
       mounted() {
         window.addEventListener('scroll', (e) => {
