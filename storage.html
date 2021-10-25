@@ -19,22 +19,66 @@
       <dd>持久化保存，除非用户主动清除</dd>
       <dd>读取方便</dd>
       <dd>存储容量大，约20MB</dd>
-      <dd>只能存字符串String：使用JSON.stringify()将String转化成JSON；使用JSON.parse()将JSON转换成String</dd>
+      <dd>只能存字符串String！！！</dd>
+      <dd>类型转换：使用Number()将数值类字符串转换为数字；使用JSON.stringify()将String转化成JSON；使用JSON.parse()将JSON转换成String</dd>
       <dd>不会出现在请求头中，可以节省带宽</dd>
       <dd>不会被网络爬虫抓取</dd>
-      <dt>常用方法和属性</dt>
-      <dd>设置: window.localStorage.setItem(key,value)</dd>
-      <dd>获取: window.localStorage.(key)</dd>
-      <dd>删除: window.localStorage.removeItem(key)</dd>
-      <dd>清空: window.localStorage.clear()</dd>
+      <dd>不同浏览器保存的数据不能共享</dd>
+      <dt>常用方法</dt>
+      <dd class="line-dot">设置值对<span class="dot"></span>window.localStorage.setItem(key,value)</dd>
+      <dd class="line-dot">根据key获取值对<span class="dot"></span>window.localStorage.getItem(key)</dd>
+      <dd class="line-dot">删除值对<span class="dot"></span>window.localStorage.removeItem(key)</dd>
+      <dd class="line-dot">清空数据<span class="dot"></span>window.localStorage.clear()</dd>
+      <dd class="line-dot">根据索引获取值对<span class="dot"></span>window.localStorage.key(n)</dd>
+      <dt>常用属性</dt>
+      <dd class="line-dot">保存数据的个数<span class="dot"></span>window.localStorage.length</dd>
       <dt>查看保存的数据</dt>
       <dd>F12 -&gt; Application -&gt; Storage -&gt; Loacal Storage</dd>
     </dl>
     <div class="exam-title">保存单独的值对</div>
+    <p>操作：分别设置数字型和字符串型数据，并根据数据的有无，体会localStorage的基本操作；</p>
+    <p>提示：通过浏览器log的结果文字的颜色判断其类型：黑色为字符串；蓝色为数字</p>
+    <pre class="code">
+    window.localStorage.setItem('num',2114)
+    window.localStorage.setItem('str','male')
+    console.log(num,Number(window.localStorage.getItem('num')));
+    console.log(str,String(window.localStorage.getItem('str')));    </pre>
     <div class="exam-title">保存数组[]</div>
+    <p>操作：尝试设置数据为数组，并查看log结果；配合JSON.stringify()和JSON.parse()完成</p>
+    <pre class="code">
+    // window.localStorage.setItem('arr',['123','234'])
+    window.localStorage.setItem('arr',JSON.stringify(['123','234']))
+    console.log(arr,JSON.parse(window.localStorage.getItem('arr')));    </pre>
     <div class="exam-title">保存对象{}</div>
-    <div class="exam-title">保存数组对象[{}]</div>
+    <p>操作：尝试设置数据为对象，并查看log结果；配合JSON.stringify()和JSON.parse()完成</p>
+    <pre class="code">
+    // window.localStorage.setItem('obj',{name:'glc'})
+    window.localStorage.setItem('obj',JSON.stringify({name:'glc'}))
+    console.log(obj,JSON.parse(window.localStorage.getItem('obj')));    </pre>
+    <h4 class="cont-title">作业和练习</h4>
+    <p>1.体会保存数组对象[{}]的基本操作</p>
+    <p>2.完成页面本地计数器的功能</p>
   </div>
+  <script>
+    window.onload=function(){
+      // window.localStorage.clear()
+      let num=window.localStorage.getItem('num')
+      let str=window.localStorage.getItem('str')
+      let arr=window.localStorage.getItem('arr')
+      let obj=window.localStorage.getItem('obj')
+      let len=window.localStorage.length
+      window.localStorage.setItem('num',2114)
+      window.localStorage.setItem('str','male')
+      // window.localStorage.setItem('arr',['123','234'])
+      window.localStorage.setItem('arr',JSON.stringify(['123','234']))
+      // window.localStorage.setItem('obj',{name:'glc'})
+      window.localStorage.setItem('obj',JSON.stringify({name:'glc'}))
+      console.log(num,Number(window.localStorage.getItem('num')));
+      console.log(str,String(window.localStorage.getItem('str')));
+      console.log(arr,JSON.parse(window.localStorage.getItem('arr')));
+      console.log(obj,JSON.parse(window.localStorage.getItem('obj')));
+    }
+  </script>
 </body>
 
 </html>
