@@ -1,54 +1,68 @@
-.wrap {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
+.grid4 {
   justify-items: center;
 }
 
-.item {
-  width: 150px;
-  height: 150px;
+.base>div, .item {
+  width: 12rem;
+  height: 12rem;
+  background-color: #f06;
+}
+
+.base div:nth-child(1) {
+  border-radius: 50%;
+}
+
+.base div:nth-child(2) {
+  border-top-left-radius: 50%;
+}
+
+.base div:nth-child(3) {
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.base div:nth-child(4) {
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+}
+
+.demo {
+  /* border-radius: 100% 100% 80% 80%/60%; */
+  border-radius: 18rem 18rem 16rem 16rem/23rem 23rem 10rem 10rem;
 }
 
 .up {
-  background-color: #f06;
   border-radius: 50%/100% 100% 0% 0%;
 }
 
 .down {
-  background-color: #f06;
   border-radius: 50%/0 0 100% 100%;
 }
 
 .left {
-  background-color: #f06;
   border-radius: 100% 0% 0% 100%/50%;
 }
 
 .right {
-  background-color: #f06;
   border-radius: 0% 100% 100% 0%/50%;
 }
 
 /* 由于这四个角的半径在水平和垂直方向上都是相同的，我们甚至都不需要使用斜杠语法了  */
 
 .leftup {
-  background-color: #f06;
   border-radius: 100% 0% 0% 0%;
 }
 
 .rightup {
-  background-color: #f06;
   border-radius: 0% 100% 0% 0%;
 }
 
 .leftdown {
-  background-color: #f06;
   border-radius: 0% 0% 0% 100%;
 }
 
 .rightdown {
-  background-color: #f06;
   border-radius: 0% 0% 100% 0%;
 }
 
@@ -140,7 +154,8 @@
 }
 
 @media (max-width:768px) {
-  .wrap {
-    grid-template-columns: 1fr;
+  .grid4 {
+    grid-template-columns: 1fr 1fr;
+    gap: .4rem;
   }
 }
