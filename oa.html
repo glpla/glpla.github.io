@@ -26,6 +26,11 @@
         <a href="#tips-popup" id='tips-link'>
           <span class="iconfont tips-icon">&#xe64a;</span>
         </a>
+        <audio id='music' ref='bgm' src="./music/Bandari-New Morning.mp3" preload></audio>
+        <span id='bgm' @click='onBgm'>
+          <span v-if='bgmBool' class="iconfont tips-icon">&#xe674;</span>
+          <span v-else class="iconfont tips-icon">&#xe627;</span>
+        </span>
       </div>
       <div id="tips-popup" class="tips-popup mfp-hide">
         <p class="tips-title">提示</p>
@@ -98,6 +103,7 @@
           oa: oa.quiz,
           chapInd: -1,
           startBool: false,
+          bgmBool: false,
           submitBool: true,
           doneBool: false,
           timeBool: false,
@@ -109,6 +115,15 @@
         }
       },
       methods: {
+        onBgm() {
+          if (this.bgmBool) {
+            this.bgmBool = false
+            this.$refs.bgm.pause()
+          } else {
+            this.bgmBool = true
+            this.$refs.bgm.play()
+          }
+        },
         sel(e) {
           let chapInd = Number(e.target.dataset.ind)
           if (chapInd == this.chapInd) {
