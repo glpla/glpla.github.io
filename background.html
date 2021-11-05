@@ -36,18 +36,40 @@
       <dd>background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;</dd>
       <dd><a href="./background_adv.html" class="link">更多背景应用，点击访问</a></dd>
     </dl>
-    <div class="exam-title">background-color vs background-image </div>
+    <h4 class="cont-title">background-color VS background-image </h4>
+    <p>背景颜色background-color和背景图片background-image互不冲突；通常结合在一起使用</p>
+    <section class="bgcolor-img"></section>
     <pre class="code">
-    background-color: #fff;
-    background-image:  url(../imgs/bg.jpg);
-    //或复合属性
-    background: #fff url(../imgs/bg.jpg);</pre>
+    .bgcolor-img {
+      height: 200px;
+      background-color: rgba(255, 68, 0, 0.4);
+      background-image: url(../imgs/lg.png);
+      background-position: right bottom;
+      background-size: 50px 50px;
+      background-repeat: no-repeat;
+    }</pre>
+    <section class="img-img"></section>
+    <p>多个背景图使用,分隔</p>
+    <pre class="code">
+    .img-img {
+      height: 200px;
+      background-color: rgba(255, 68, 0, 0.4);
+      background-image: url(../imgs/lg.png), url(../imgs/glc.png);
+      background-position: right bottom, top left;
+      background-size: 50px 50px;
+      background-repeat: no-repeat;
+    }</pre>
     <section class="color-img">
       <p>1.最基本的使用：指定图片为背景；早起为了后向兼容，同时也指定颜色</p>
       <p>2.容器的尺寸&gt;背景图片的尺寸，则默认情况下，背景图片会在水平和垂直方向上重复贴铺</p>
       <p>3.容器的尺寸&lt;背景图片的尺寸，则显示部分背景图片，实际上背景图片还是会在水平和垂直方向上重复贴铺，只不过受容器尺寸大小限制，没有呈现出来</p>
     </section>
-    <div class="exam-title">background-repeat</div>
+    <pre class="code">
+    background-color: #fff;
+    background-image:  url(../imgs/bg.jpg);
+    //或复合属性
+    background: #fff url(../imgs/bg.jpg);</pre>
+    <h4 class="cont-title">background-repeat</h4>
     <p>默认情况下，图片会水平和垂直方向上铺满整个容器；如果图片尺寸大于容器尺寸，看不出效果。实例分析：</p>
     <section class="rpt">
       <ul>
@@ -70,10 +92,10 @@
     <pre class="code">
     background-image: url(../imgs/dot.png);
     background-repeat: repeat-x;</pre>
-    <div class="exam-title">background-position</div>
+    <h4 class="cont-title">background-position</h4>
     <section class="pos">
-      <div>1. 精灵图</div>
       <p>根据图片坐标/位置显示指定的内容</p>
+      <p>1.精灵图</p>
       <pre class="code">
     .sprite .more {
       background-position: 0 -191px;
@@ -108,8 +130,7 @@
           <p>天天低价，畅选无忧</p>
         </div>
       </div>
-      <div>2. 图片分割</div>
-      <p>根据图片比例，显示指定的内容。</p>
+      <p>2.图片分割</p>
       <p>情况1：容器尺寸和图片尺寸一致:大图：750*500；小图：350*250</p>
       <pre class="code">
     .tile-pair {
@@ -181,7 +202,7 @@
         <div class="tile-item"></div>
       </div>
     </section>
-    <div class="exam-title">background-size</div>
+    <h4 class="cont-title">background-size</h4>
     <section>
       <p>1. 默认情况：100%的显示图片；容器大，则平铺；容器小，则显示部分图片</p>
       <div class="size"></div>
