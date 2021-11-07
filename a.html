@@ -18,9 +18,9 @@
       <li class="title">&lt;A&gt;tag</li>
       <li><a class='btn' href="#p0">简介</a></li>
       <li><a class='btn' href="#p1">语法</a></li>
-      <li><a class='btn' href="#p2">属性</a></li>
-      <li><a class='btn' href="#p3">锚点跳转</a></li>
-      <li><a class='btn' href="#p4">页面跳转</a></li>
+      <li><a class='btn' href="#p2">锚点跳转</a></li>
+      <li><a class='btn' href="#p3">页面跳转</a></li>
+      <li><a class='btn' href="#p4">内容预览</a></li>
       <li><a class='btn' href="#p5">练习</a></li>
       <li><a class='btn' href="#p6">作业</a></li>
       <!-- <li><a class='btn' href="//www.baidu.com">有事找百度</a></li> -->
@@ -28,48 +28,75 @@
     </ul>
     <div class="cont">
       <h2 class="flex-h" id="p0">简介</h2>
-      <div>
+      <div class="item">
         <p>行内元素inline</p>
         <p>可以实现页面内部、页面之间之前的跳转</p>
         <p>可以包含其它tag，但不可以嵌套&lt;a&gt;</p>
         <p>在head区加上&lt;base target=""&gt;指定默认打开方式。</p>
       </div>
       <h2 class="flex-h" id="p1">语法</h2>
-      <div>
+      <div class="item">
         <pre class="code">
-
-    &lt;a href="" target=""&gt;&lt;/a&gt;
-  </pre>
+    &lt;a href="" target=""&gt;&lt;/a&gt;</pre>
+        <dl class="keypoint">
+          <dt>属性</dt>
+          <dd class="line-dot">href<span class="dot"></span>链接的目标URL；可以是HTML页面、图片、视频、文件等</dd>
+          <dd class="line-dot">target<span class="dot"></span>打开目标URL的位置；默认是_self，当前页面打开</dd>
+        </dl>
       </div>
-      <h2 class="flex-h" id="p2">属性</h2>
-      <div class="line-dot">href<span class="dot"></span>链接的目标URL；可以是HTML页面、图片、视频、文件等</div>
-      <div class="line-dot">target<span class="dot"></span>打开目标URL的位置；默认是_self，当前页面打开</div>
-      <h2 class="flex-h" id="p3">锚点跳转</h2>
-      <p>同一个页面内部，不同部分之间的跳转；便于查看和阅读</p>
-      <pre class="code">
+      <h2 class="flex-h" id="p2">锚点跳转</h2>
+      <div class="item">
+        <p>同一个页面内部，不同部分之间的跳转；便于查看和阅读</p>
+        <pre class="code">
     //目标元素：指定id
     &lt;div id="p3"&gt;锚点跳转内容区&lt;/div&gt;
     //&lt;a&gt;：指定href为目标元素的id名；注意应带上id符号#
     &lt;a href="#p3"&gt;锚点跳转&lt;/a&gt;      </pre>
-      <h2 class="flex-h" id="p4">页面跳转</h2>
-      <p>页面之间的跳转；根据页面是否属于同一个网站，又可以分开站内跳转和站外跳转</p>
-      <pre class="code">
+      </div>
+      <h2 class="flex-h" id="p3">页面跳转</h2>
+      <div class="item">
+        <p>页面之间的跳转；根据页面是否属于同一个网站，又可以分开站内跳转和站外跳转</p>
+        <pre class="code">
     //站内跳转：同一个网站内部页面之间的跳转
     &lt;a href="greeting.html"&gt;greeting&lt;/a&gt;
     //站外跳转：跳转到其它网站的页面；可以不指定网络协议，由系统自行判断
     &lt;a href="https://www.baidu.com"&gt;baidu&lt;/a&gt;
     &lt;a href="//www.baidu.com"&gt;baidu&lt;/a&gt;
       </pre>
+      </div>
+      <h2 class="flex-h" id="p4">内容预览</h2>
+      <div class="item">
+        <div>1.图片</div>
+        <a class="pre-img" href="./imgs/1.jpg" title="点击查看大图"></a>
+        <pre class="code">
+    &lt;a href="./imgs/1.jpg" title="点击查看大图"&gt;&lt;/a&gt;</pre>
+        <div>2.视频</div>
+        <a class="pre-video" href="./video/xiaomi.mp4" title="点击查看完整视频">
+          <video poster='./imgs/xiaomi.jpg'></video>
+        </a>
+        <pre class="code">
+    &lt;a href="./video/effect.mp4" title="点击查看完整视频"&gt;
+      &lt;video poster='./imgs/1.jpg'&gt;&lt;/video&gt;
+    &lt;/a&gt;</pre>
+        <div>3.音乐</div>
+        <a class="pre-music" href="./music/Alizee-La Isla Bonita.mp3" title="点击播放完整音频"></a>
+      </div>
+      <pre class="code">
+    &lt;a href="./music/Alizee-La Isla Bonita.mp3" title="点击播放完整音频"&gt;&lt;/a&gt;</pre>
       <h2 class="flex-h" id="p5">练习</h2>
-      <p>1.返回顶部</p>
-      <p>2.单击页面LOGO打开主页</p>
-      <p>3.打开百度首页</p>
-      <p>4.预览图片</p>
-      <p>5.预览视频</p>
-      <p>6.预览音频</p>
-      <p>7.预览文件，如word、css、js等等</p>
+      <div class="item">
+        <p>1.返回顶部</p>
+        <p>2.单击页面LOGO打开主页</p>
+        <p>3.打开百度首页</p>
+        <p>4.预览图片</p>
+        <p>5.预览视频</p>
+        <p>6.预览音频</p>
+        <p>7.预览文件，如word、css、js等等</p>
+      </div>
       <h2 class="flex-h" id="p6">作业</h2>
-      <p>合理使用&lt;a&gt;实现个人网站。要求：应体现&lt;a&gt;的不同用法</p>
+      <div class="item">
+        <p>合理使用&lt;a&gt;实现个人网站。要求：应体现&lt;a&gt;的不同用法</p>
+      </div>
     </div>
   </div>
 </body>
