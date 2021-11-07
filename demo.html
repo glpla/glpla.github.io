@@ -5,74 +5,50 @@
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Baidu Map </title>
-  <link rel="stylesheet" href="./js/magnific-popup.min.css">
   <style type="text/css">
-    .white-popup {
-      position: relative;
-      background: #f40;
-      padding: 20px;
-      width: auto;
-      max-width: 500px;
-      margin: 20px auto;
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      height: 100vh;
+      overflow: scroll;
+      scroll-snap-type: mandatory;
+    }
+
+    section {
+      height: 100vh;
+      scroll-snap-type: y mandatory;
+    }
+
+    .container section:nth-child(odd) {
+      background-color: #f40;
     }
 
     .test {
-      height: 200vh;
+      width: 50vw;
+      margin: 0 auto;
+      height: 10vh;
+      border: 100px solid;
+      border-image-source: url(./imgs/bg.jpg);
+      border-image-slice: 1;
     }
   </style>
 </head>
 
 <body>
-  <h4>image type:single</h4>
-  <a class="single-img" href="./imgs/bg.jpg">Open popup</a>
-  <h4>image type:multiple</h4>
-  <div class="box">
-    <a class="test-popup-link" href="./imgs/blog0.jpg">Open popup</a>
-    <a class="test-popup-link" href="./imgs/blog1.jpg">Open popup</a>
-    <a class="test-popup-link" href="./imgs/blog2.jpg">Open popup</a>
-    <a class="test-popup-link" href="./imgs/blog3.jpg">Open popup</a>
-  </div>
-  <h4>inline type</h4>
-  <a href="#inline-popup" class="inline-link">Show inline popup</a>
-  <div id="inline-popup" class="white-popup mfp-hide">
-    <div>Popup content</div>
-    <a href="javascript:;" id='close-link'>close</a>
-  </div>
   <div class="test"></div>
-  <script src="./js/jquery-3.6.0.min.js"></script>
-  <script src="./js/jquery.magnific-popup.min.js"></script>
+
+  <div class="container">
+    <section>1</section>
+    <section>2</section>
+    <section>3</section>
+    <section>4</section>
+  </div>
+
   <script>
-    $(document).ready(function () {
-      // demo1
-      $('.single-img').magnificPopup({
-        type: 'image',
-      });
-      // demo2
-      $('.box').magnificPopup({
-        delegate: 'a',
-        type: 'image'
-      });
-      // demo3
-      let magnificPopup = $.magnificPopup.instance;
-      $('.inline-link').magnificPopup({
-        type: 'inline',
-        // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
-        midClick: true,
-        modal: true,
-        callbacks: {
-          open: function () {
-            console.log('open');
-          },
-          close: function () {
-            console.log('close');
-          }
-        }
-      });
-      $('#close-link').click(function () {
-        console.log('close');
-        magnificPopup.close()
-      })
-    });
+
   </script>
 </body>
 
