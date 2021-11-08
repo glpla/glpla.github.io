@@ -11,45 +11,90 @@
       padding: 0;
     }
 
-    .container {
-      height: 100vh;
-      overflow: scroll;
-      scroll-snap-type: mandatory;
-    }
-
-    section {
-      height: 100vh;
-      scroll-snap-type: y mandatory;
-    }
-
-    .container section:nth-child(odd) {
-      background-color: #f40;
-    }
-
-    .test {
-      width: 50vw;
+    table {
+      width: 90%;
       margin: 0 auto;
-      height: 10vh;
-      border: 100px solid;
-      border-image-source: url(./imgs/bg.jpg);
-      border-image-slice: 1;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid #666;
+      text-align: center;
+    }
+
+    @media screen and (max-width:768px) {
+      thead tr {
+        display: none;
+      }
+
+      tr {
+        display: block;
+        border-bottom: 2px solid #f40;
+      }
+
+      td {
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding-left: 50%;
+      }
+
+      tr td:last-child {
+        border-bottom: none;
+      }
+
+      td::before {
+        position: absolute;
+        left: 0;
+        font-weight: 700;
+      }
+
+      td:nth-child(1)::before {
+        content: 'sn';
+      }
+
+      td:nth-child(2)::before {
+        content: 'name';
+      }
+
+      td:nth-child(3)::before {
+        content: 'unit';
+      }
+
+      td:nth-child(4)::before {
+        content: 'gender';
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="test"></div>
 
-  <div class="container">
-    <section>1</section>
-    <section>2</section>
-    <section>3</section>
-    <section>4</section>
-  </div>
-
-  <script>
-
-  </script>
+  <table>
+    <thead>
+      <tr>
+        <th>sn</th>
+        <th>name</th>
+        <th>unit</th>
+        <th>gender</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>21</td>
+        <td>31</td>
+        <td>41</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 
 </html>
