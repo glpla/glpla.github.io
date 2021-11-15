@@ -5,12 +5,8 @@
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Baidu Map </title>
+  <link rel="stylesheet" href="css/reset.css">
   <style type="text/css">
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
     table {
       width: 90%;
       margin: 0 auto;
@@ -23,78 +19,70 @@
       text-align: center;
     }
 
-    @media screen and (max-width:768px) {
-      thead tr {
-        display: none;
-      }
+    header {
+      text-align: center;
+    }
 
-      tr {
-        display: block;
-        border-bottom: 2px solid #f40;
-      }
-
-      td {
-        display: flex;
-        align-items: center;
-        position: relative;
-        padding-left: 50%;
-      }
-
-      tr td:last-child {
-        border-bottom: none;
-      }
-
-      td::before {
-        position: absolute;
-        left: 0;
-        font-weight: 700;
-      }
-
-      td:nth-child(1)::before {
-        content: 'sn';
-      }
-
-      td:nth-child(2)::before {
-        content: 'name';
-      }
-
-      td:nth-child(3)::before {
-        content: 'unit';
-      }
-
-      td:nth-child(4)::before {
-        content: 'gender';
-      }
+    .week {
+      margin: 0 1rem;
     }
   </style>
 </head>
 
 <body>
+  <section id="app" class="w">
+    <h1>教学日历</h1>
+    <header>
+      <span class="week" v-for='item in weeks' :key='item'>{{item}}</span>
+      <div>
+        <span v-for='item in days'>{{item.yy}}-{{item.mm}}-{{item.i}}&nbsp;</span>
+      </div>
+    </header>
+  </section>
+  <script src="./js/vue.global.prod.min.js"></script>
+  <script src="./js/moment.js"></script>
+  <script type="module">
+    const app = Vue.createApp({
+      data() {
+        return {
+          weeks: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
+          ind: 0,
+          days: []
+        }
+      },
+      methods: {
 
-  <table>
-    <thead>
-      <tr>
-        <th>sn</th>
-        <th>name</th>
-        <th>unit</th>
-        <th>gender</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-      </tr>
-      <tr>
-        <td>11</td>
-        <td>21</td>
-        <td>31</td>
-        <td>41</td>
-      </tr>
-    </tbody>
-  </table>
+      },
+      computed: {},
+      watch: {},
+      created() {
+        let date = new Date('2021-09-06')
+        let year = date.getFullYear()
+        let mon = date.getMonth() + 1
+        moment.locale();
+        for (let i = mon; i < mon + 5; i++) {
+          let nDate = new Date(year, i, 0)
+          let yy = nDate.getFullYear()
+          let mm = nDate.getMonth() + 1
+          let dd = nDate.getDate()
+          for (let i = 1; i <= dd; i++) {
+            console.log(yy, mm, i);
+            this.days.push({ yy, mm, i })
+          }
+        }
+      },
+      mounted() {
+        window.addEventListener('scroll', (e) => {
+          if (window.pageYOffset > window.innerHeight) {
+            this.showBool = true
+          } else {
+            this.showBool = false
+          }
+        })
+      },
+    })
+    const vm = app.mount('#app')
+  </script>
 </body>
 
 </html>
