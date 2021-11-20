@@ -13,8 +13,52 @@
 <body>
   <div class="w">
     <h4 class="cont-title">window事件</h4>
-    <h4 class="cont-title">其它事件</h4>
+    <h4 class="cont-title">click点击事件</h4>
+    <h4 class="cont-title">drag拖拽事件</h4>
+    <dl>
+      <dt>3个事件：分别对应三个阶段</dt>
+      <dd class="line-dot">dragenter<span class="dot"></span>拖拽进去</dd>
+      <dd class="line-dot">dragover<span class="dot"></span>拖拽悬停</dd>
+      <dd class="line-dot">drop<span class="dot"></span>拖拽释放</dd>
+    </dl>
+    <pre class="code">
+    let drag = document.querySelector('#drag')
+    drag.addEventListener('dragenter', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    })
+    drag.addEventListener('dragover', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    })
+    drag.addEventListener('drop', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      console.log(e.dataTransfer.files);
+    })
+    </pre>
+    <h4 class="cont-title">网络事件</h4>
+    <dl>
+      <dt>2个事件：状态变化时才会触发</dt>
+      <dd class="line-dot">online<span class="dot"></span>网络链接</dd>
+      <dd class="line-dot">offline<span class="dot"></span>网络断开</dd>
+    </dl>
+    <pre class="code">
+    window.addEventListener('online', () => {
+      console.log('online');
+    })
+    window.addEventListener('offline', () => {
+      console.log('offline');
+    })    </pre>
   </div>
+  <script>
+    window.addEventListener('online', () => {
+      console.log('online');
+    })
+    window.addEventListener('offline', () => {
+      console.log('offline');
+    })
+  </script>
 </body>
 
 </html>
