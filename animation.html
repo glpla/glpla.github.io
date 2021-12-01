@@ -19,59 +19,120 @@
       <dt>复合写法</dt>
       <dd>animation: name duration timing-function delay iteration-count direction fill-mode;</dd>
       <dt>独立写法</dt>
-      <dd>animation-name: 名称;</dd>
-      <dd>animation-duration: 持续时间;</dd>
-      <dd>animation-timing-function: 效果;</dd>
-      <dd>animation-delay: 延迟时间;</dd>
-      <dd>animation-iteration-count: 次数;</dd>
-      <dd>animation-direction: 方向;</dd>
-      <dd>animation-fill-mode: 结束模式;</dd>
+      <dd class="line-dot">animation-name<span class="dot"></span>动画名称</dd>
+      <dd class="line-dot">animation-duration<span class="dot"></span>持续时间</dd>
+      <dd class="line-dot">animation-timing-function<span class="dot"></span>变化效果</dd>
+      <dd class="line-dot">animation-delay<span class="dot"></span>延迟时间，必须是第2个时间参数</dd>
+      <dd class="line-dot">animation-iteration-count<span class="dot"></span>执行次数</dd>
+      <dd class="line-dot">animation-direction<span class="dot"></span>方向</dd>
+      <dd class="line-dot">animation-fill-mode<span class="dot"></span>结束模式</dd>
+      <dd class="line-dot">animation-play-state<span class="dot"></span>动画状态</dd>
     </dl>
     <div class="title">动画定义</div>
+    <p>1.利用关键字：通常省略from，表示从当前状态开始</p>
     <div class="usage">
       <pre class="code">
-  @keyframes tx {
-    0% {
-      background-position: 0;
+  @keyframes ani_name {
+    from {      
     }
 
-    100% {
-      background-position: -120px;
+    to {      
     }
   }</pre>
     </div>
-    <div class="title">案例分析</div>
+    <p>2.利用百分比：可以定义多个百分比节点</p>
+    <div class="usage">
+      <pre class="code">
+  @keyframes ani_name {
+    0% {      
+    }
+
+    100% {      
+    }
+  }</pre>
+    </div>
+    <div class="title">伸展</div>
+    <div class="step-box scale">
+      <div class="step"></div>
+    </div>
+    <pre class="code">
+    .scale{
+      animation: step 10s linear alternate infinite;
+    }    </pre>
+    <div class="title">步进</div>
+    <div class="step-box">
+      <div class="step"></div>
+    </div>
+    <pre class="code">
+    //steps(n,end/start)；n：次数；默认是end，从状态结束位置开始
+    .step {     
+      animation: step 10s steps(10, start) infinite;
+    }
+    
+    @keyframes step {
+      to {
+        width: 100%;
+      }
+    }    </pre>
+    <div class="title">hover</div>
+    <div class="step-box hover">
+      <div class="step"></div>
+    </div>
+    <pre class="code">
+    .hover {
+      animation-play-state: paused;
+    }
+    
+    .hover:hover {
+      animation-play-state: running;
+    }    </pre>
+    <div class="title">轮播</div>
+    <div class="swiper-box">
+      <div class="swiper">
+        <div class="swiper-item"></div>
+        <div class="swiper-item"></div>
+        <div class="swiper-item"></div>
+        <div class="swiper-item"></div>
+        <div class="swiper-item"></div>
+      </div>
+    </div>
+    <div class="title">加载</div>
+    <div class="loading">
+      <span style="--i:0"></span>
+      <span style="--i:1"></span>
+      <span style='--i:2'></span>
+      <span style='--i:3'></span>
+      <span style='--i:4'></span>
+      <span style='--i:5'></span>
+      <span style='--i:6'></span>
+      <span style='--i:7'></span>
+      <span style='--i:8'></span>
+      <span style='--i:9'></span>
+      <span style='--i:10'></span>
+      <span style='--i:11'></span>
+      <span style='--i:12'></span>
+      <span style='--i:13'></span>
+      <span style='--i:14'></span>
+      <span style='--i:15'></span>
+      <span style='--i:16'></span>
+      <span style='--i:17'></span>
+      <span style='--i:18'></span>
+      <span style='--i:19'></span>
+    </div>
+    <pre class="code">
+    transform: scale(0);
+    animation: scale-box 1.8s linear infinite;
+    animation-delay: calc(var(--i)*0.1s);
+
+    //
+    @keyframes scale-box {
+      100% {
+        transform: scale(1);
+        filter: hue-rotate(360deg);
+      }
+    }   </pre>
+    <div class="title">其它动画</div>
     <div class="grid">
-      <div class="rect">
-        <div class="inner-rect"></div>
-      </div>
-      <div class="loading-box flex">
-        <div class="loading">
-          <span style="--i:0"></span>
-          <span style="--i:1"></span>
-          <span style='--i:2'></span>
-          <span style='--i:3'></span>
-          <span style='--i:4'></span>
-          <span style='--i:5'></span>
-          <span style='--i:6'></span>
-          <span style='--i:7'></span>
-          <span style='--i:8'></span>
-          <span style='--i:9'></span>
-          <span style='--i:10'></span>
-          <span style='--i:11'></span>
-          <span style='--i:12'></span>
-          <span style='--i:13'></span>
-          <span style='--i:14'></span>
-          <span style='--i:15'></span>
-          <span style='--i:16'></span>
-          <span style='--i:17'></span>
-          <span style='--i:18'></span>
-          <span style='--i:19'></span>
-        </div>
-      </div>
-      <div class="step-box">
-        <div class="step"></div>
-      </div>
       <div class="tx-box">
         <div class="tx">
           <div class="tx-shadow"></div>
