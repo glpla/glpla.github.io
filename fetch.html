@@ -76,7 +76,7 @@
 
 <body>
   <div class="w">
-    <h1>Fetch data</h1>
+    <h1>Fetch</h1>
     <h4 class="cont-title">简介</h4>
     <article>
       <p>fetch是w3c的一种请求标准，不是第三方库，与vue、jquery无关，且多数浏览器已内置</p>
@@ -123,36 +123,46 @@
       <h4 class="cont-title">环境部署</h4>
       <p>1.node.js</p>
       <p>2.H5项目</p>
-      <p>3.1json-server：本地json数据</p>
-      <p>3.2在线json数据源，如：https://api.apiopen.top/getJoke?page=1&count=10&type=text；只能读取，不能操作</p>
+      <p>3.1本地json数据：借助json-server；优点：可以增删改查</p>
+      <p>3.2在线json数据：各种第三方，如：https://api.apiopen.top/getJoke?page=1&count=10&type=text；缺点：只能读取，不能操作</p>
     </article>
     <div class="exam-title">综合案例</div>
     <table class="tbl" id="tbl" cellpadding='6'>
       <caption>职员花名册</caption>
       <tr>
         <th>序号</th>
-        <th>姓名</th>
-        <th>单位</th>
-        <th>性别</th>
-        <th>操作</th>
+        <th><span class="iconfont">&#xe841;</span>姓名</th>
+        <th><span class="iconfont">&#xe80e;</span>单位</th>
+        <th><span class="iconfont">&#xe814;</span>性别</th>
+        <th><span class="iconfont">&#xe821;</span>操作</th>
       </tr>
     </table>
     <form class="add-box" action="">
       <table cellspacing='10'>
         <caption>职员添加</caption>
         <tr>
-          <td><label for="uName">姓名</label></td>
-          <td><input type="text" required maxlength="8" name="uName" id="uName"></td>
+          <td>
+            <label for="uName"><strong><span class="iconfont">&#xe841;</span> 姓名</strong></label>
+          </td>
+          <td>
+            <input type="text" required maxlength="8" name="uName" id="uName" placeholder="8个字符以内">
+          </td>
           <td rowspan="3">
             <button id='sub'>提交</button>
           </td>
         </tr>
         <tr>
-          <td><label for="uUnit">单位</label></td>
-          <td><input type="text" required maxlength="8" name="uUnit" id="uUnit"></td>
+          <td>
+            <label for="uUnit"><strong><span class="iconfont">&#xe80e;</span> 单位</strong></label>
+          </td>
+          <td>
+            <input type="text" required maxlength="6" name="uUnit" id="uUnit" placeholder="6个字符以内">
+          </td>
         </tr>
         <tr>
-          <td>性别</td>
+          <td>
+            <strong><span class="iconfont">&#xe814;</span> 性别</strong>
+          </td>
           <td>
             <input type="radio" value="男" name="gender" id="male" required>
             <label for="male">男</label>
@@ -163,7 +173,7 @@
       </table>
     </form>
   </div>
-  <small>Copyright Reserved &copy; By Cnplaman 2021-10-06</small>
+  <small>Copyright Reserved &copy; By Cnplaman 2021-12-02</small>
   <script>
     window.onload = function () {
       let tbl = document.querySelector('#tbl');
@@ -197,19 +207,24 @@
             del[ind].addEventListener('click', function (e) {
               e.preventDefault();
               console.log(e.target.dataset);
-              fetch('http://localhost:3000/clerk/' + e.target.dataset.ind, {
-                method: 'delete'
-              })
-                .then(res => {
-                  if (res.status === 200) {
-                    console.log('del ok');
-                    alert('del ok')
-                    window.location.href = 'fetch.html'
-                  } else {
-                    console.log('del fail');
-                    alert('del fail')
-                  }
+              let pro = confirm('确定要删除吗？')
+              if (pro) {
+                fetch('http://localhost:3000/clerk/' + e.target.dataset.ind, {
+                  method: 'delete'
                 })
+                  .then(res => {
+                    if (res.status === 200) {
+                      console.log('del ok');
+                      alert('del ok')
+                      window.location.href = 'fetch.html'
+                    } else {
+                      console.log('del fail');
+                      alert('del fail')
+                    }
+                  })
+              } else {
+                return;
+              }
             })
             mod[ind].addEventListener('click', function (e) {
               e.preventDefault();

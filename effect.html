@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Effect</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/effect.css">
+</head>
+
+<body>
+  <div class="w">
+    <h4 class="cont-title">box-shadow</h4>
+    <strong>说明</strong>
+    <p>为元素添加一个或多个阴影。该属性是由逗号分隔的阴影列表，每个阴影由 2-4 个长度值、可选的颜色值以及可选的 inset 关键词来规定。省略长度的值是 0</p>
+    <strong>语法</strong>
+    <pre class="code">
+  box-shadow: h-shadow v-shadow blur spread color inset;  </pre>
+    <h4 class="cont-title">filter</h4>
+    <p>为元素添加滤镜效果；多个滤镜，请用空格分隔；原图如下；效果以动画形式呈现</p>
+    <div class="cont">
+      <img class="blur0" src="./imgs/1.jpg" alt="">
+    </div>
+    <strong>1. blur()</strong>
+    <p>模糊滤镜；模糊导致元素的发散会影响到周边其他元素；但是实际尺寸没有变化</p>
+    <pre class="code">
+    filter:blur(px)</pre>
+    <div class="cont">
+      <img class="blur1" src="./imgs/1.jpg" alt="">
+    </div>
+    <strong>2. drop-shadow()</strong>
+    <p>投影滤镜：部分浏览器不支持第4个长度；如果添加，则不会呈现</p>
+    <pre class="code">
+    filter:drop-shadow(h-shadow v-shadow blur [spread] color)    </pre>
+    <div class="cont">
+      <img class="shadow1" src="./imgs/1.jpg" alt="">
+    </div>
+    <strong>3. grayscale()</strong>
+    <p>将图像转换为灰阶</p>
+    <pre class="code">
+    filter:grayscale(%)</pre>
+    <div class="cont">
+      <img class="gray1" src="./imgs/1.jpg" alt="">
+    </div>
+    <strong>4. hue-rotate()</strong>
+    <p>在图像上应用色相旋转。该值定义色环的度数。默认值为0deg，代表原始图像</p>
+    <pre class="code">
+    filter:hue-rotate(deg)</pre>
+    <div class="cont">
+      <img class="hue1" src="./imgs/1.jpg" alt="">
+    </div>
+    <h4 class="exam-title">查看原图</h4>
+    <div class="cont">
+      <div class="slider">
+        <input id='slider' class="range" type="range">
+        <img class="slider-img" src="./imgs/1.jpg" alt="">
+        <img id="tar" class="gray2" src="./imgs/1.jpg" style="--slider:50" alt="">
+      </div>
+    </div>
+  </div>
+  <small>Copyright Reserved &copy; By Cnplaman 2021-12-03</small>
+  <script>
+    window.onload = function () {
+      let slider = document.querySelector('#slider')
+      let tar = document.querySelector('#tar')
+      slider.addEventListener('input', function () {
+        tar.style.setProperty('--slider', this.value)
+      })
+    }
+  </script>
+</body>
+
+</html>
