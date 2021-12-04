@@ -75,7 +75,7 @@
 </head>
 
 <body>
-  <div class="w">
+  <section class="w">
     <h1>Fetch</h1>
     <h4 class="cont-title">简介</h4>
     <article>
@@ -172,94 +172,94 @@
         </tr>
       </table>
     </form>
-  </div>
-  <small>Copyright Reserved &copy; By Cnplaman 2021-12-02</small>
-  <script>
-    window.onload = function () {
-      let tbl = document.querySelector('#tbl');
-      fetch('http://localhost:3000/clerk', {})
-        .then(res => res.json())
-        .then(res => {
-          for (let i = 0; i < res.length; i++) {
-            // console.log(res[i]);
-            let tr = document.createElement('tr')
-            let sn = document.createElement('td')
-            sn.innerHTML = i + 1
-            tr.appendChild(sn)
-            for (item in res[i]) {
-              let td = document.createElement('td')
-              if (item === 'id') {
-                continue;
-              } else {
-                td.innerHTML = res[i][item]
-              }
-              tr.appendChild(td)
-            }
-            let oper = document.createElement('td')
-            oper.innerHTML = `<a href='' class='del' style='margin-right:10px' data-ind=${res[i]['id']}>删除</a><a href='' class='mod' data-ind=${res[i]['id']}>修改</a>`
-            tr.appendChild(oper)
-            tbl.appendChild(tr)
-          }
-
-          let del = document.querySelectorAll('.del')
-          let mod = document.querySelectorAll('.mod')
-          for (let ind = 0; ind < res.length; ind++) {
-            del[ind].addEventListener('click', function (e) {
-              e.preventDefault();
-              console.log(e.target.dataset);
-              let pro = confirm('确定要删除吗？')
-              if (pro) {
-                fetch('http://localhost:3000/clerk/' + e.target.dataset.ind, {
-                  method: 'delete'
-                })
-                  .then(res => {
-                    if (res.status === 200) {
-                      console.log('del ok');
-                      alert('del ok')
-                      window.location.href = 'fetch.html'
-                    } else {
-                      console.log('del fail');
-                      alert('del fail')
-                    }
-                  })
-              } else {
-                return;
-              }
-            })
-            mod[ind].addEventListener('click', function (e) {
-              e.preventDefault();
-              console.log(e.target.dataset);
-            })
-          }
-
-        })
-
-      // data adding
-      let add = document.querySelector('.add-box')
-      add.addEventListener('submit', function (e) {
-        e.preventDefault()
-        var formData = new FormData(this);
-        console.log(formData.get('uName'), formData.get('uUnit'), formData.get('gender'));
-        fetch('http://localhost:3000/clerk', {
-          method: 'post',
-          body: `name=${formData.get('uName')}&unit=${formData.get('uUnit')}&gender=${formData.get('gender')}`,
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        })
+    </div>
+    <small>Copyright Reserved &copy; By Cnplaman 2021-12-02</small>
+    <script>
+      window.onload = function () {
+        let tbl = document.querySelector('#tbl');
+        fetch('http://localhost:3000/clerk', {})
+          .then(res => res.json())
           .then(res => {
-            console.log(res);
-            if (res.status === 201) {
-              alert('add ok')
-              window.location.href = 'fetch.html'
-            } else {
-              console.log('add fail');
-              alert('add fail')
+            for (let i = 0; i < res.length; i++) {
+              // console.log(res[i]);
+              let tr = document.createElement('tr')
+              let sn = document.createElement('td')
+              sn.innerHTML = i + 1
+              tr.appendChild(sn)
+              for (item in res[i]) {
+                let td = document.createElement('td')
+                if (item === 'id') {
+                  continue;
+                } else {
+                  td.innerHTML = res[i][item]
+                }
+                tr.appendChild(td)
+              }
+              let oper = document.createElement('td')
+              oper.innerHTML = `<a href='' class='del' style='margin-right:10px' data-ind=${res[i]['id']}>删除</a><a href='' class='mod' data-ind=${res[i]['id']}>修改</a>`
+              tr.appendChild(oper)
+              tbl.appendChild(tr)
+            }
+
+            let del = document.querySelectorAll('.del')
+            let mod = document.querySelectorAll('.mod')
+            for (let ind = 0; ind < res.length; ind++) {
+              del[ind].addEventListener('click', function (e) {
+                e.preventDefault();
+                console.log(e.target.dataset);
+                let pro = confirm('确定要删除吗？')
+                if (pro) {
+                  fetch('http://localhost:3000/clerk/' + e.target.dataset.ind, {
+                    method: 'delete'
+                  })
+                    .then(res => {
+                      if (res.status === 200) {
+                        console.log('del ok');
+                        alert('del ok')
+                        window.location.href = 'fetch.html'
+                      } else {
+                        console.log('del fail');
+                        alert('del fail')
+                      }
+                    })
+                } else {
+                  return;
+                }
+              })
+              mod[ind].addEventListener('click', function (e) {
+                e.preventDefault();
+                console.log(e.target.dataset);
+              })
+            }
+
+          })
+
+        // data adding
+        let add = document.querySelector('.add-box')
+        add.addEventListener('submit', function (e) {
+          e.preventDefault()
+          var formData = new FormData(this);
+          console.log(formData.get('uName'), formData.get('uUnit'), formData.get('gender'));
+          fetch('http://localhost:3000/clerk', {
+            method: 'post',
+            body: `name=${formData.get('uName')}&unit=${formData.get('uUnit')}&gender=${formData.get('gender')}`,
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
             }
           })
-      })
-    }
-  </script>
+            .then(res => {
+              console.log(res);
+              if (res.status === 201) {
+                alert('add ok')
+                window.location.href = 'fetch.html'
+              } else {
+                console.log('add fail');
+                alert('add fail')
+              }
+            })
+        })
+      }
+    </script>
 </body>
 
 </html>

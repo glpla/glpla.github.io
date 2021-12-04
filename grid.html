@@ -12,39 +12,47 @@
 </head>
 
 <body>
-  <div class="w">
+  <section class="w">
     <h4 class="cont-title">知识点</h4>
-    <dl class="keypoint">
-      <dt>grid盒子属性</dt>
-      <dd>grid-template-columns</dd>
-      <dd>grid-template-rows</dd>
-      <dd>gap</dd>
-      <dd>grid-template-areas</dd>
-    </dl>
-    <dl class="keypoint">
-      <dt>grid项属性</dt>
-      <dd>grid-column(span number)</dd>
-      <dd>grid-row(span number)</dd>
-      <dd>grid-area</dd>
-    </dl>
-    <dl class="keypoint">
-      <dt>grid常见写法</dt>
-      <dd>grid-template-columns:8rem 1fr 4rem</dd>
-      <dd>grid-template-columns:repeat(3,1fr)</dd>
-      <dd>grid-template-columns:repeat(3,minmax(80px,1fr))</dd>
-      <dd>grid-template-columns:repeat(auto-fill,minmax(80px,1fr))</dd>
-    </dl>
+    <strong>grid盒子属性</strong>
+    <p class="line-dot">grid-template-columns<span class="dot"></span>列数</p>
+    <p class="line-dot">grid-template-rows<span class="dot"></span>行数</p>
+    <p class="line-dot">gap<span class="dot"></span>单元格间距</p>
+    <p class="line-dot">grid-template-areas<span class="dot"></span>区域划分</p>
+    <strong>grid项属性</strong>
+    <p class="line-dot">grid-column(span number)<span class="dot"></span></p>
+    <p class="line-dot">grid-row(span number)<span class="dot"></span></p>
+    <p class="line-dot">grid-area<span class="dot"></span>指定区域</p>
+    <strong>grid常见写法</strong>
+    <p class="line-dot">grid-template-columns:8rem 1fr 4rem<span class="dot"></span>俩端固定，中间自适应</p>
+    <p class="line-dot">grid-template-columns:repeat(3,1fr)<span class="dot"></span>等分3列</p>
+    <p class="line-dot">grid-template-columns:repeat(3,minmax(80px,1fr))<span class="dot"></span>自适应</p>
+    <p class="line-dot">grid-template-columns:repeat(auto-fill,minmax(80px,1fr))<span class="dot"></span>万能自适应</p>
     <div class="exam-title">左右导航布局</div>
     <div class="nav">
       <div>8rem</div>
       <div>1fr</div>
     </div>
+    <pre class="code">
+    .nav {
+      display: grid;
+      grid-template-columns: 8rem 1fr;
+      gap: 1rem;
+      height: 4rem;
+    }    </pre>
     <div class="exam-title">圣杯布局</div>
     <div class="cup">
       <div>8rem</div>
       <div>1fr</div>
       <div>4rem</div>
     </div>
+    <pre class="code">
+    .cup {
+      display: grid;
+      grid-template-columns: 8rem 1fr 4rem;
+      gap: 1rem;
+      height: 4rem;
+    }    </pre>
     <div class="exam-title">九宫格</div>
     <div class="sudoku">
       <div class="item"></div>
@@ -57,6 +65,12 @@
       <div class="item"></div>
       <div class="item"></div>
     </div>
+    <pre class="code">
+    .sudoku {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }    </pre>
     <div class="exam-title">任意布局</div>
     <div class="random">
       <div class="item">grid-column: span 2;</div>
@@ -65,6 +79,15 @@
       <div class="item">4</div>
       <div class="item">grid-column: span 2;</div>
     </div>
+    <pre class="code">
+    .random>div:nth-child(1) {
+      grid-column: span 2;
+    }
+    
+    .random>div:nth-child(2) {
+      grid-row: span 2;
+    }
+    //...  </pre>
     <div class="exam-title">响应式布局</div>
     <div class="ale">
       <div class="item"></div>
@@ -77,16 +100,37 @@
       <div class="item"></div>
       <div class="item"></div>
     </div>
+    <pre class="code">
+    .ale {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+      gap: 1rem;
+    }    </pre>
     <div class="exam-title">全站布局</div>
-    <section class="page">
+    <article class="page">
       <header>header</header>
       <nav>nav</nav>
       <aside>aside</aside>
       <article>article</article>
       <footer>footer</footer>
-    </section>
+    </article>
+    <pre class="code">
+    .page {
+      display: grid;
+      grid-template-areas:
+        'header header header'
+        'nav nav nav'
+        'aside article article'
+        'footer footer footer';
+      gap: 1rem;
+    } 
+    .page header {
+      grid-area: header;
+      height: 8rem;
+    } 
+    //...</pre>
     <small>Copyright Reserved &copy; By Cnplaman 2021-10-06</small>
-  </div>
+  </section>
 </body>
 
 </html>
