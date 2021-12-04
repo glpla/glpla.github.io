@@ -15,23 +15,24 @@
   <div class="w">
     <h1>动画Animation</h1>
     <div class="title">动画使用</div>
-    <dl class="keypoint">
-      <dt>复合写法</dt>
-      <dd>animation: name duration timing-function delay iteration-count direction fill-mode;</dd>
+    <section class="keypoint">
+      <strong>复合写法</strong>
+      <p>animation: name duration timing-function delay iteration-count direction fill-mode;</p>
       <dt>独立写法</dt>
-      <dd class="line-dot">animation-name<span class="dot"></span>动画名称</dd>
-      <dd class="line-dot">animation-duration<span class="dot"></span>持续时间</dd>
-      <dd class="line-dot">animation-timing-function<span class="dot"></span>变化效果</dd>
-      <dd class="line-dot">animation-delay<span class="dot"></span>延迟时间，必须是第2个时间参数</dd>
-      <dd class="line-dot">animation-iteration-count<span class="dot"></span>执行次数</dd>
-      <dd class="line-dot">animation-direction<span class="dot"></span>方向</dd>
-      <dd class="line-dot">animation-fill-mode<span class="dot"></span>结束模式</dd>
-      <dd class="line-dot">animation-play-state<span class="dot"></span>动画状态</dd>
-    </dl>
+      <p class="line-dot">animation-name<span class="dot"></span>动画名称</p>
+      <p class="line-dot">animation-duration<span class="dot"></span>持续时间</p>
+      <p class="line-dot">animation-timing-function<span class="dot"></span>变化效果</p>
+      <p class="line-dot">animation-delay<span class="dot"></span>延迟时间，必须是第2个时间参数</p>
+      <p class="line-dot">animation-iteration-count<span class="dot"></span>执行次数</p>
+      <p class="line-dot">animation-direction<span class="dot"></span>方向</p>
+      <p class="line-dot">animation-fill-mode<span class="dot"></span>结束模式</p>
+      <p class="line-dot">animation-play-state<span class="dot"></span>动画状态</p>
+    </section>
     <div class="title">动画定义</div>
-    <p>1.利用关键字：通常省略from，表示从当前状态开始</p>
-    <div class="usage">
-      <pre class="code">
+    <section>
+      <p>1.利用关键字：通常省略from，表示从当前状态开始</p>
+      <div class="usage">
+        <pre class="code">
   @keyframes ani_name {
     from {      
     }
@@ -39,9 +40,10 @@
     to {      
     }
   }</pre>
-    </div>
-    <p>2.利用百分比：可以定义多个百分比节点</p>
-    <div class="usage">
+      </div>
+    </section>
+    <section>
+      <p>2.利用百分比：可以定义多个百分比节点</p>
       <pre class="code">
   @keyframes ani_name {
     0% {      
@@ -50,44 +52,52 @@
     100% {      
     }
   }</pre>
-    </div>
+    </section>
     <div class="title">伸展</div>
-    <div class="step-box scale">
-      <div class="step"></div>
-    </div>
-    <pre class="code">
-    .scale{
-      animation: step 10s linear alternate infinite;
-    }    </pre>
+    <section>
+      <div class="step-box scale">
+        <div class="step"></div>
+      </div>
+      <pre class="code">
+  .scale{
+    animation: step 10s linear alternate infinite;
+  }    </pre>
+    </section>
     <div class="title">步进</div>
-    <div class="step-box">
-      <div class="step"></div>
-    </div>
-    <pre class="code">
-    //steps(n,end/start)；n：次数；默认是end，从状态结束位置开始
-    .step {     
-      animation: step 10s steps(10, start) infinite;
+    <section>
+      <div class="step-box">
+        <div class="step"></div>
+      </div>
+      <pre class="code">
+  //steps(n,end/start)；n：次数；默认是end，从状态结束位置开始
+  .step {     
+    animation: step 10s steps(10, start) infinite;
+  }
+  
+  @keyframes step {
+    to {
+      width: 100%;
     }
-    
-    @keyframes step {
-      to {
-        width: 100%;
-      }
-    }    </pre>
+  }    </pre>
+    </section>
     <div class="title">hover</div>
-    <div class="step-box hover">
-      <div class="step"></div>
-    </div>
-    <pre class="code">
-    .hover {
-      animation-play-state: paused;
-    }
-    
-    .hover:hover {
-      animation-play-state: running;
-    }    </pre>
+    <section>
+      <div class="step-box hover">
+        <div class="step"></div>
+      </div>
+      <pre class="code">
+  .hover {
+    animation-play-state: paused;
+  }
+  
+  .hover:hover {
+    animation-play-state: running;
+  }    </pre>
+    </section>
     <div class="title">focus</div>
-    <input class="ipt" type="text" placeholder="请点击激活边框动画特效">
+    <section>
+      <input class="ipt" type="text" placeholder="请点击激活边框动画特效">
+    </section>
     <div class="title">swiper</div>
     <div class="swiper-box">
       <div class="swiper">

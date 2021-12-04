@@ -60,16 +60,52 @@
       </ul>
     </nav>
     <section id="home">
-      <p>CSS转换（transform）允许您移动、旋转、缩放和倾斜元素</p>
+      <p>CSS转换（transform）允许您移动、旋转、缩放和倾斜元素；综合使用，可以呈现3D效果</p>
       <p>针对inline-block和block元素有效</p>
+      <p>分为2D变换和3D变换，分别有相应的CSS</p>
     </section>
-    <section id="trans"></section>
-    <section id="scale"></section>
+    <section id="trans">
+      <strong>位移属性说明</strong>
+      <p class="line-dot">translate(x,y)<span class="dot"></span>2D转换</p>
+      <p class="line-dot">translate3d(x,y,z)<span class="dot"></span>3D转换</p>
+      <p class="line-dot">translateX(x)<span class="dot"></span>X轴位移</p>
+      <p class="line-dot">translateY(y)<span class="dot"></span>Y轴位移</p>
+      <p class="line-dot">translateZ(z)<span class="dot"></span>Z轴位移</p>
+    </section>
+    <section id="scale">
+      <strong>缩放属性说明</strong>
+      <p class="line-dot">scale(x,y)<span class="dot"></span>2D转换</p>
+      <p class="line-dot">scale3d(x,y,z)<span class="dot"></span>3D转换</p>
+      <p class="line-dot">scaleX(x)<span class="dot"></span>X轴缩放</p>
+      <p class="line-dot">scaleY(y)<span class="dot"></span>Y轴缩放</p>
+      <p class="line-dot">scaleZ(z)<span class="dot"></span>Z轴缩放</p>
+    </section>
     <section id="rotate">
-      <p>旋转rotate会改变默认的方向,后续的位移translate都会受影响,所以:先位移再旋转</p>
+      <strong>旋转属性说明</strong>
+      <p class="line-dot">rotate(x,y)<span class="dot"></span>2D转换</p>
+      <p class="line-dot">rotate3d(x,y,z)<span class="dot"></span>3D转换</p>
+      <p class="line-dot">rotateX(x)<span class="dot"></span>X轴旋转</p>
+      <p class="line-dot">rotateY(y)<span class="dot"></span>Y轴旋转</p>
+      <p class="line-dot">rotateZ(z)<span class="dot"></span>Z轴旋转</p>
+      <p>旋转通常以deg为单位</p>
+      <p>旋转rotate会改变默认的方向,后续的位移translate都会受影响</p>
     </section>
-    <section id="skew"></section>
-    <section id="pers"></section>
+    <section id="skew">
+      <strong>倾斜属性说明</strong>
+      <p class="line-dot">rotate(x,y)<span class="dot"></span>2D转换</p>
+      <p class="line-dot">rotateX(x)<span class="dot"></span>X轴倾斜</p>
+      <p class="line-dot">rotateY(y)<span class="dot"></span>Y轴倾斜</p>
+      <p>倾斜通常以deg为单位</p>
+    </section>
+    <section id="pers">
+      <p>transform默认是2D变换；要呈现3D效果，必须为元素设置透视/景深及指定为3D变换模式；具体步骤为：</p>
+      <p>1. 为父元素或更高级的父元素指定景深perspective，通常取800px-1200px</p>
+      <p>2. 为自己设置3D变换transform-style:preserve-3d</p>
+      <h4 class="exam-title">card flip</h4>
+      <div class="card-box">
+        <div class="card"></div>
+      </div>
+    </section>
     <small>Copyright Reserved &copy; By Cnplaman 2021-12-03</small>
   </div>
 </body>

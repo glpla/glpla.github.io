@@ -133,8 +133,8 @@ fieldset {
 
 .w {
   position: relative;
-  width: 1000px;
-  padding: 0 1rem;
+  width: 100vw;
+  max-width: 1000px;
   margin: 0 auto;
   background-color: #fff;
 }
@@ -249,10 +249,16 @@ fieldset {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+  padding: 1rem;
 }
 
 strong~p {
   text-indent: 2em;
+}
+
+section {
+  position: relative;
+  padding: 1rem;
 }
 
 @media screen and (max-width:768px) {
@@ -260,7 +266,7 @@ strong~p {
     font-size: 14px;
   }
 
-  .w {
-    width: 96vw;
+  .w::before, .w::after {
+    display: none;
   }
 }
