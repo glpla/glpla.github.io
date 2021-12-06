@@ -131,24 +131,77 @@ section {
   border: 1px solid #333;
 }
 
-.grid-box img {
+.translate img {
   display: block;
   transform-style: preserve-3d;
 }
 
-.grid-box div:nth-child(1) img {
+.translate div:nth-child(1) img {
+  transform: translateZ(-80px);
+}
+
+.translate div:nth-child(2) img {
+  transform: translateZ(0);
+}
+
+.translate div:nth-child(3) img {
+  transform: translateZ(80px);
+}
+
+.translate div:nth-child(1)::before {
+  content: 'transform: translateZ(-80px);';
+  position: absolute;
+  width: 100%;
+  background-color: #f20;
+  color: #fff;
+  text-align: center;
+  left: 0;
+  bottom: -2rem;
+  z-index: 99;
+}
+
+.translate div:nth-child(2)::before {
+  content: 'transform: translateY(0);';
+  position: absolute;
+  width: 100%;
+  background-color: #f20;
+  color: #fff;
+  text-align: center;
+  left: 0;
+  bottom: -2rem;
+  z-index: 99;
+}
+
+.translate div:nth-child(3)::before {
+  content: 'transform: translateZ(80px);';
+  position: absolute;
+  width: 100%;
+  background-color: #f20;
+  color: #fff;
+  text-align: center;
+  left: 0;
+  bottom: -2rem;
+  z-index: 99;
+}
+
+.rotate img {
+  display: block;
+  transform-style: preserve-3d;
+}
+
+.rotate div:nth-child(1) img {
   transform: rotateX(30deg);
 }
 
-.grid-box div:nth-child(2) img {
+.rotate div:nth-child(2) img {
   transform: rotateY(30deg);
 }
 
-.grid-box div:nth-child(3) img {
+.rotate div:nth-child(3) img {
   transform: rotateZ(30deg);
 }
 
-.grid-box div:nth-child(1)::before {
+.rotate div:nth-child(1)::before {
   content: 'transform: rotateX(30deg);';
   position: absolute;
   width: 100%;
@@ -160,7 +213,7 @@ section {
   z-index: 99;
 }
 
-.grid-box div:nth-child(2)::before {
+.rotate div:nth-child(2)::before {
   content: 'transform: rotateY(30deg);';
   position: absolute;
   width: 100%;
@@ -172,7 +225,7 @@ section {
   z-index: 99;
 }
 
-.grid-box div:nth-child(3)::before {
+.rotate div:nth-child(3)::before {
   content: 'transform: rotateZ(30deg);';
   position: absolute;
   width: 100%;
