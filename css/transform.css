@@ -117,6 +117,73 @@ section {
   margin-right: 4rem;
 }
 
+.grid-box {
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  justify-content: center;
+  gap: 2rem;
+  margin: 4rem auto;
+}
+
+.grid-box>div {
+  position: relative;
+  perspective: 1000px;
+  border: 1px solid #333;
+}
+
+.grid-box img {
+  display: block;
+  transform-style: preserve-3d;
+}
+
+.grid-box div:nth-child(1) img {
+  transform: rotateX(30deg);
+}
+
+.grid-box div:nth-child(2) img {
+  transform: rotateY(30deg);
+}
+
+.grid-box div:nth-child(3) img {
+  transform: rotateZ(30deg);
+}
+
+.grid-box div:nth-child(1)::before {
+  content: 'transform: rotateX(30deg);';
+  position: absolute;
+  width: 100%;
+  background-color: #f20;
+  color: #fff;
+  text-align: center;
+  left: 0;
+  bottom: -2rem;
+  z-index: 99;
+}
+
+.grid-box div:nth-child(2)::before {
+  content: 'transform: rotateY(30deg);';
+  position: absolute;
+  width: 100%;
+  background-color: #f20;
+  color: #fff;
+  text-align: center;
+  left: 0;
+  bottom: -2rem;
+  z-index: 99;
+}
+
+.grid-box div:nth-child(3)::before {
+  content: 'transform: rotateZ(30deg);';
+  position: absolute;
+  width: 100%;
+  background-color: #f20;
+  color: #fff;
+  text-align: center;
+  left: 0;
+  bottom: -2rem;
+  z-index: 99;
+}
+
 /* 3D */
 .card-box {
   width: 92vw;
@@ -358,6 +425,11 @@ section {
 
   .nav:hover {
     transform: unset;
+  }
+
+  .grid-box {
+    grid-template-columns: repeat(1, 300px);
+    gap: 4rem;
   }
 
   .en, .cn {

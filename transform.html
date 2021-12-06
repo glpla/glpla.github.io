@@ -70,7 +70,7 @@
       <p class="line-dot">translate3d(x,y,z)<span class="dot"></span>3D转换</p>
       <p class="line-dot">translateX(x)<span class="dot"></span>X轴位移</p>
       <p class="line-dot">translateY(y)<span class="dot"></span>Y轴位移</p>
-      <p class="line-dot">translateZ(z)<span class="dot"></span>Z轴位移</p>
+      <p class="line-dot">translateZ(z)<span class="dot"></span>Z轴位移；单位只能是px</p>
     </section>
     <section id="scale">
       <strong>缩放属性说明</strong>
@@ -109,8 +109,16 @@
     </section>
     <section id="pers">
       <p>transform默认是2D变换；要呈现3D效果，必须为元素设置透视/景深及指定为3D变换模式；具体步骤为：</p>
-      <p>1. 为父元素或更高级的父元素指定景深perspective，通常取800px-1200px</p>
-      <p>2. 为自己设置3D变换transform-style:preserve-3d</p>
+      <p>1. 为父元素指定景深perspective(创建一个天空盒sky-box)，单位是px，通常取800px-1200px</p>
+      <p>2. 为自己设置3D变换transform-style:preserve-3d(flat表示2D)</p>
+      <strong>注意</strong>
+      <p>1.父元素不能指定overflow:hidden;否则就还原位2D</p>
+      <p>2.如果为更高级的父元素指定景深perspective，则其下面的子元素都应指定3D变换模式，即：这些元素共享一个景深/天空盒(sky-box)</p>
+      <div class="grid-box">
+        <div><img src="./imgs/1.jpg" alt=""></img></div>
+        <div><img src="./imgs/2.jpg" alt=""></img></div>
+        <div><img src="./imgs/3.jpg" alt=""></img></div>
+      </div>
       <h4 class="exam-title">card flip</h4>
       <p><span class="iconfont info-icon">&#xe810;</span> 请移动鼠标到图像上查看效果</p>
       <div class="card-box">
