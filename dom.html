@@ -25,43 +25,88 @@
       border: 4px solid #fff;
       vertical-align: middle;
     }
+
+    /* nav */
+    .flex-h li {
+      margin: 0 1rem;
+      cursor: pointer;
+    }
+    .base{
+      border-bottom: 1px solid transparent;
+    }
+
+    .active {
+      border-bottom: 1px solid #f40;
+    }
   </style>
 </head>
 
 <body>
-  <div class="w">
-    <h4 class="cont-title">选择元素</h4>
-    <section>
-      <pre class="code">
+  <section class="w">
+    <h4 class="cont-title">元素element操作</h4>
+    <strong>选择元素</strong>
+    <pre class="code">
       document.querySelector(el)
       document.querySelectorAll(el)</pre>
-    </section>
-    <h4 class="cont-title">设置类</h4>
-    <section>
-      <pre class="code">
+    <strong>获取元素属性</strong>
+    <pre class="code">
+      dom.getAttribute(att)
+      dom.src</pre>
+    <strong>修改元素属性</strong>
+    <pre class="code">
+      dom.setAttribute(att, value)</pre>
+    <h4 class="cont-title">类class操作</h4>
+    <strong>设置类</strong>
+    <pre class="code">
       dom.style.className=name</pre>
-    </section>
-    <h4 class="cont-title">设置样式</h4>
-    <section>
-      <pre class="code">
+    <strong>增加类</strong>
+    <pre class="code">
+      dom.classList.add()</pre>
+    <strong>删除类</strong>
+    <pre class="code">
+      dom.classList.remove()</pre>
+    <strong>切换类</strong>
+    <pre class="code">
+      dom.classList.toggle()</pre>
+    <h4 class="cont-title">样式style操作</h4>
+    <strong>设置样式</strong>
+    <pre class="code">
       dom.style.name=value</pre>
-    </section>
-    <h4 class="cont-title">修改属性</h4>
-    <section>
-      <pre class="code">
+    <strong>修改样式属性</strong>
+    <pre class="code">
       dom.style.setProperty(name, value)</pre>
-    </section>
-    <h4 class="exam-title">换肤</h4>
-    <section>
-      <div class="img-box">
-        <img src="imgs/1.jpg" alt="">
-        <img src="imgs/2.jpg" alt="">
-        <img src="imgs/3.jpg" alt="">
-        <img src="imgs/4.jpg" alt="">
-      </div>
-    </section>
+    <h4 class="cont-title">表单form操作</h4>
+    <strong>获取表单元素的值</strong>
+    <pre class="code">
+      dom.addEventListener('change', function () {
+        console.log(this.checked);                
+        console.log(this.value);                  
+      })    </pre>
+    <h4 class="exam-title">背景换肤</h4>
+    <div class="img-box">
+      <img src="imgs/1.jpg" alt="">
+      <img src="imgs/2.jpg" alt="">
+      <img src="imgs/3.jpg" alt="">
+      <img src="imgs/4.jpg" alt="">
+    </div>
+    <pre class="code">
+    imgBox.style.backgroundImage = `url(${this.src})`    </pre>
+    <h4 class="exam-title">确认书</h4>
+    <div class="info-box">
+      <input type="checkbox" id='info'>
+      <label for="info">注册须知</label>
+    </div>
+    <h4 class="exam-title">导航</h4>
+    <nav>
+      <ul class="flex-h" id='nav'>
+        <li class="base">主页</li>
+        <li class="base">产品信息</li>
+        <li class="base">帮助文档</li>
+        <li class="base">关于我们</li>
+      </ul>
+    </nav>
     <small>Copyright Reserved &copy; By Cnplaman 2021-12-03</small>
-  </div>
+  </section>
   <script>
     window.onload = function () {
       let imgBox = document.querySelector('.img-box')
@@ -69,6 +114,23 @@
       for (let i = 0; i < imgs.length; i++) {
         imgs[i].addEventListener('click', function () {
           imgBox.style.backgroundImage = `url(${this.src})`
+        })
+      }
+      // info
+      let info = document.querySelector('#info')
+      info.addEventListener('change', function () {
+        console.log(this.checked);
+        this.checked ? alert('同意') : alert('不同意')
+      })
+      // nav
+      let lis = document.querySelectorAll('#nav li')
+      console.log(lis);
+      for (let i = 0; i < lis.length; i++) {
+        lis[i].addEventListener('click', function () {
+          for (let j = 0; j < lis.length; j++) {
+            lis[j].classList.remove('active')
+          }
+          this.classList.add('active')
         })
       }
     }
