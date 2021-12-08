@@ -107,26 +107,61 @@
         </ul>
       </div>
     </section>
-    <section id="pers">
+    <section id="pers">      
+      <h4 class="cont-title section-title px-box">
+        <span><span class="section-inner-title">&lt;section1&gt;</span> 3D空间</span>
+        <span>3D space</span>
+      </h4>
+      <strong>-translate-</strong>
+      <div class="grid-box translate">
+        <div>
+          <p>近大远小</p>
+        </div>
+        <div class="border">
+          <img id='trans-img' src="./imgs/1.jpg" alt=""></img>
+        </div>
+        <div>
+          <p class="trans-title">拖动滑块查看Z轴位移</p>
+          <input id="ranger" class="ranger" type="range" min=-1000 max=1000 value="0">
+          <div class="px-box">
+            <span>-1000px</span>
+            <span>0</span>
+            <span>+1000px</span>
+          </div>
+          <p>transform: translateZ(<span id='trans-px'>0</span>px);</p>
+        </div>
+      </div>
+      <strong>-rotate-</strong>
+      <div class="grid-box rotate">
+        <div class="flex-v">
+          <span>顺时针为正</span>
+          <span>逆时针为负</span>
+        </div>
+        <div class="border">
+          <img id='rot-img' src="./imgs/1.jpg" alt=""></img>
+        </div> 
+        <div>
+          <p class="trans-title">拖动滑块查看Y轴选择</p>
+          <input id="rot" class="ranger" type="range" min=-360 max=360 value="0">
+          <div class="px-box">
+            <span>-360deg</span>
+            <span>0</span>
+            <span>+360deg</span>
+          </div>
+          <p>transform: rotateY(<span id='trans-deg'>0</span>deg);</p>
+        </div>      
+      </div>
+      <h4 class="cont-title section-title px-box">
+        <span><span class="section-inner-title">&lt;section2&gt;</span> 核心属性</span>
+        <span>core attribute</span>
+      </h4>
       <p>transform默认是2D变换；要呈现3D效果，必须为元素设置透视/景深及指定为3D变换模式；具体步骤为：</p>
       <p>1. 为父元素指定景深perspective(创建一个天空盒sky-box)，单位是px，通常取800px-1200px</p>
-      <p>2. 为自己设置3D变换transform-style:preserve-3d(flat表示2D)</p>
-      <strong>注意</strong>
-      <p>1.父元素不能指定overflow:hidden;否则就还原位2D</p>
-      <p>2.如果为更高级的父元素指定景深perspective，则其下面的子元素都应指定3D变换模式，即：这些元素共享一个景深/天空盒(sky-box)</p>
-      <h4 class="exam-title">translate</h4>
-      <p>近大远小</p>
-      <div class="grid-box translate">
-        <div><img src="./imgs/1.jpg" alt=""></img></div>
-        <div><img src="./imgs/2.jpg" alt=""></img></div>
-        <div><img src="./imgs/3.jpg" alt=""></img></div>
-      </div>
-      <h4 class="exam-title">rotate</h4>
-      <div class="grid-box rotate">
-        <div><img src="./imgs/1.jpg" alt=""></img></div>
-        <div><img src="./imgs/2.jpg" alt=""></img></div>
-        <div><img src="./imgs/3.jpg" alt=""></img></div>
-      </div>
+      <p>2. 为自己设置3D变换transform-style:preserve-3d(flat表示2D)</p>      
+      <h4 class="cont-title section-title px-box">
+        <span><span class="section-inner-title">&lt;section3&gt;</span> 实操</span>
+        <span>coding</span>
+      </h4>
       <h4 class="exam-title">card flip</h4>
       <p><span class="iconfont info-icon">&#xe810;</span> 请移动鼠标到图像上查看效果</p>
       <div class="card-box">
@@ -169,12 +204,39 @@
           <div class="gal gal-img" style="--deg:11"></div>
         </div>
       </div>
+      <h4 class="cont-title section-title px-box">
+        <span><span class="section-inner-title">&lt;section4&gt;</span> 注意事项</span>
+        <span>tips</span>
+      </h4>
+      <strong>注意</strong>
+      <p>1.父元素不能指定overflow:hidden;否则就还原位2D</p>
+      <p>2.如果为更高级的父元素指定景深perspective，则其下面的子元素都应指定3D变换模式，即：这些元素共享一个景深/天空盒(sky-box)</p>
     </section>
     <small>Copyright Reserved &copy; By Cnplaman 2021-12-03</small>
   </div>
   <script>
     window.onload = function () {
       document.body.addEventListener('touchstart', function () { });
+      // translate
+      let transImg = document.querySelector('#trans-img')
+      let ranger = document.querySelector('#ranger')
+      let px = document.querySelector('#trans-px')
+      console.log(transImg, ranger);
+      ranger.addEventListener('change', function () {
+        console.log(this.value);
+        transImg.style.transform = `translateZ(${this.value}px)`
+        px.innerHTML=this.value
+      })
+      // rotate
+      let rotImg = document.querySelector('#rot-img')
+      let rot = document.querySelector('#rot')
+      let deg = document.querySelector('#trans-deg')
+      console.log(transImg, ranger);
+      rot.addEventListener('change', function () {
+        console.log(this.value);
+        rotImg.style.transform = `rotateY(${this.value}deg)`
+        deg.innerHTML=this.value
+      })
     }
   </script>
 </body>
