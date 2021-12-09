@@ -132,28 +132,29 @@ section {
 }
 /* axis */
 .axis-box {
-  display: flex;
-  justify-content: center;
+  /* display: flex; */
+  /* justify-content: center; */
   /* align-items: center; */
-  width: 300px;
-  height: 300px;
-  margin: 2rem auto;
-  perspective: 1000px;
+  /* width: 300px; */
+  /* height: 300px; */
+  /* margin: 2rem auto; */
+  /* perspective: 1000px; */
 }
 .axis {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   transform-style: preserve-3d;
   transform: rotateX(15deg) rotateY(20deg) rotateZ(0deg);
   animation: roll 10s infinite;
   animation-play-state: paused;
+  align-self: flex-start;
 }
-.axis:hover{
+.axis:hover {
   animation-play-state: running;
 }
 @keyframes roll {
-  to{
+  to {
     transform: rotateX(15deg) rotateY(380deg) rotateZ(0deg);
   }
 }
@@ -166,22 +167,22 @@ section {
   border: 1px dotted #666;
 }
 .axis .front {
-  transform: translateZ(50px);
+  transform: translateZ(40px);
 }
 .axis .back {
-  transform: rotateX(180deg) translateZ(50px);
+  transform: rotateX(180deg) translateZ(40px);
 }
 .axis .left {
-  transform: rotateY(90deg) translateZ(50px);
+  transform: rotateY(90deg) translateZ(40px);
 }
 .axis .right {
-  transform: rotateY(-90deg) translateZ(50px);
+  transform: rotateY(-90deg) translateZ(40px);
 }
 .axis .top {
-  transform: rotateX(90deg) translateZ(50px);
+  transform: rotateX(90deg) translateZ(40px);
 }
 .axis .bottom {
-  transform: rotateX(-90deg) translateZ(50px);
+  transform: rotateX(-90deg) translateZ(40px);
 }
 .x-axis,
 .y-axis,
@@ -189,7 +190,7 @@ section {
   position: absolute;
   left: 50px;
   top: 50px;
-  width: 200px;
+  width: 100px;
   height: 2px;
   background-color: #333;
   transform-origin: left;
@@ -201,32 +202,26 @@ section {
 .z-axis {
   transform: rotateY(90deg);
 }
-.x-axis::after{
-  content: '+X';
+.x-axis::after {
+  content: "+X";
   margin-left: 100%;
 }
-.y-axis::after{
-  content: '+Y';
+.y-axis::after {
+  content: "+Y";
   display: inline-block;
   margin-left: 100%;
   transform: rotateZ(-90deg);
 }
-.z-axis::after{
-  content: '+Z';
+.z-axis::after {
+  content: "+Z";
   margin-left: 100%;
 }
 
-.grid-box {
-  display: grid;
-  grid-template-columns: repeat(3, 300px);
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  gap: 2rem;
+.grid3 {
   margin: 4rem auto;
 }
 
-.grid-box > div {
+.grid3 > div {
   position: relative;
   perspective: 1000px;
 }
@@ -234,15 +229,22 @@ section {
   text-transform: uppercase;
 }
 #pers strong {
+  position: relative;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
 }
-.grid-box .border {
+#pers strong::before {
+  content: attr(data-ind);
+}
+
+.grid3 .border {
   border: 1px solid #888;
 }
-.grid-box > div:first-child {
+.grid3 > div:first-child {
   position: relative;
 }
-.grid-box > div:first-child::before {
+.grid3 > div:first-child::before {
   content: "[";
   position: absolute;
   left: 2rem;
@@ -251,7 +253,7 @@ section {
   font-size: 2rem;
   color: #f40;
 }
-.grid-box > div:first-child::after {
+.grid3 > div:first-child::after {
   content: "]";
   position: absolute;
   right: 2rem;
@@ -260,14 +262,14 @@ section {
   font-size: 2rem;
   color: #f40;
 }
-.grid-box p {
+.grid3 p {
   text-align: center;
 }
-.grid-box .trans-title {
+.grid3 .trans-title {
   font-weight: 600;
 }
 
-.grid-box img {
+.grid3 img {
   display: block;
   transform-style: preserve-3d;
 }
@@ -282,12 +284,12 @@ section {
   font-weight: 700;
 }
 
-.trans-img {
+#trans-img {
   transform: translateZ(0px);
 }
 
-.rot-img {
-  transform: rotateX(0deg);
+#rot-img {
+  transform: rotateY(0deg);
 }
 
 /* 3D */
@@ -456,8 +458,8 @@ section {
 
 /* gallery */
 .gallery-box {
-  width: 120px;
-  height: 160px;
+  width: 100px;
+  height: 100px;
   margin: 6rem auto;
   perspective: 1200px;
 }
@@ -468,7 +470,7 @@ section {
   height: 100%;
   transform-style: preserve-3d;
   transform: rotateX(-12deg);
-  animation: rotate360 20s linear infinite;
+  animation: rotate360 20s linear infinite;  
 }
 
 .gallery:hover {
@@ -487,15 +489,17 @@ section {
   top: 0;
   width: 100%;
   height: 100%;
-  line-height: 160px;
+  line-height: 100px;
   text-align: center;
   font-size: 3rem;
   background-color: rgba(255, 68, 0, 0.8);
   border-radius: 1rem;
   color: #fff;
-  transform: rotateY(calc(var(--deg) * 30deg)) translateZ(300px);
+  transform: rotateY(calc(var(--deg) * 30deg)) translateZ(200px);
+  backface-visibility:visible;
   /* text-shadow: 2px 0px 0px #fff, 0px 2px 0px #fff, -2px 0px 0px #fff, 0px -2px 0px #fff, 4px 4px 8px #333; */
   text-shadow: 0 0 10px #fff, 0 0 20px #ff0;
+  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.2)
 }
 
 .gal-img {
@@ -504,7 +508,16 @@ section {
   background-position: center;
   background-repeat: no-repeat;
 }
-
+.left-box {
+  width: 350px;
+  height: 350px;
+  margin: 2rem auto;
+}
+.grid2{
+  justify-items: center;
+  align-items: center;
+  margin-top: 2rem;
+}
 @media screen and (max-width: 768px) {
   nav,
   ul {
@@ -528,11 +541,6 @@ section {
 
   .nav:hover {
     transform: unset;
-  }
-
-  .grid-box {
-    grid-template-columns: repeat(1, 300px);
-    gap: 4rem;
   }
 
   .en,
@@ -567,5 +575,8 @@ section {
   .nav-box ul li span {
     margin: 0 !important;
     transform: unset;
+  }
+  .axis{
+    margin-bottom: 6rem;
   }
 }
