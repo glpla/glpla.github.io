@@ -109,8 +109,8 @@
     </section>
     <section id="pers">
       <h4 class="cont-title section-title px-box">
-        <span><span class="section-inner-title">&lt;section1&gt;</span> 3D空间</span>
-        <span>3D space</span>
+        <span><span class="section-inner-title">&lt;section1&gt;</span> 天空盒</span>
+        <span>sky box</span>
       </h4>
       <strong data-ind="1.">axis-坐标轴</strong>
       <div class="grid2">
@@ -173,33 +173,38 @@
         <span>core attribute</span>
       </h4>
       <p>transform默认是2D变换；要呈现3D效果，必须为元素设置透视/景深及指定为3D变换模式；具体步骤为：</p>
-      <p>1. 为父元素指定景深perspective(创建一个天空盒sky-box)，单位是px，通常取800px-1200px</p>
+      <p>1. 为父元素指定景深perspective(创建一个天空盒sky box)，单位是px，通常取800px-1200px</p>
       <pre class="code">
       .super {          
         perspective: 1000px;
       }</pre>
       <p>2. 为自己设置3D变换transform-style: preserve-3d(flat表示2D)</p>
       <pre class="code">
-      .self {          
+      .self {
         transform-style: preserve-3d;
-      }      </pre>
+      }</pre>
       <h4 class="cont-title section-title px-box">
         <span><span class="section-inner-title">&lt;section3&gt;</span> 实操</span>
         <span>coding</span>
       </h4>
       <h4 class="exam-title">1.card flip</h4>
       <div class="grid2">
-        <div><span class="iconfont info-icon">&#xe810;</span> 请移动鼠标到图像上查看效果</div>
+        <div class="txt-cont">
+          <p>
+            <span class="iconfont info-icon">&#xe810;</span> 请移动鼠标到图像上查看效果
+          </p>
+          <p><span class="iconfont info-icon">&#xe82e;</span> 请使用z-index属性交换前后图片</p>
+        </div>
         <div class="card-box">
           <div class="card"></div>
         </div>
       </div>
       <h4 class="exam-title">2.cube</h4>
       <div class="grid2">
-        <div>
+        <div class="txt-cont">
           <p><span class="iconfont info-icon">&#xe810;</span> 请移动鼠标到图像上查看效果</p>
-          <p><span class="iconfont info-icon">&#xe82e;</span>请使用&lt;img&gt;代替&lt;div&gt;实现</p>
-          <p><span class="iconfont info-icon">&#xe82e;</span>请使用animation代替transition实现</p>
+          <p><span class="iconfont info-icon">&#xe82e;</span> 请使用&lt;img&gt;代替&lt;div&gt;实现</p>
+          <p><span class="iconfont info-icon">&#xe82e;</span> 请使用animation代替transition实现</p>
         </div>
         <div class="cube-box">
           <div class="cube">
@@ -220,9 +225,10 @@
       </div>
       <h4 class="exam-title">3.gallery</h4>
       <div class="grid2">
-        <div>
-          <label for="bface">背面隐藏</label>
+        <div class="txt-cont">
+          <label for="bface">背面隐藏切换</label>
           <input type="checkbox" id="bface">
+          <p id='bfBool'>backface-visibility: visible</p>
         </div>
         <div class="gallery-box">
           <div class="gallery" id="trans-gal">
@@ -248,9 +254,8 @@
       <div class="grid2">
         <div>
           <strong></strong>
-          <p>1.父元素不能指定overflow:hidden；否则就还原位2D</p>
-          <p>2.如果为更高级的父元素指定景深perspective，则其下面的子元素都应指定3D变换模式，即：这些元素共享一个景深/天空盒(sky-box)</p>
-          <p>3.方向的判断可利用左手：假象握住某根轴，大拇指为轴的正方向，四指弯曲方向为顺时针方向(正角度)，如下图</p>
+          <p>1.父元素不能指定overflow:hidden；否则就还原位2D模式</p>
+          <p>2.如果为更高级的父元素指定景深perspective，则其下面的子元素都应指定3D变换模式，即：这些元素共享一个景深/天空盒(sky box)</p>
         </div>
       </div>
       <h4 class="cont-title section-title px-box">
@@ -258,7 +263,8 @@
         <span>homework</span>
       </h4>
       <strong></strong>
-      <p>1.完成实例1和实例2</p>
+      <p>1.实例操作：完成实例1和实例2</p>
+      <p>2.拓展阅读：查阅CSS3有关transform的其他属性和应用</p>
     </section>
     <small>Copyright Reserved &copy; By Cnplaman 2021-12-03</small>
   </div>
@@ -288,15 +294,18 @@
       // trans gallery
       let transGal = document.querySelectorAll('#trans-gal .gal')
       let bface = document.querySelector('#bface')
+      let bfBool = document.querySelector('#bfBool')
       bface.addEventListener('change', function () {
-        console.log(this.checked,transGal);
+        console.log(this.checked, transGal);
         if (this.checked) {
-          transGal.forEach(item=>{
+          transGal.forEach(item => {
             item.style.backfaceVisibility = 'hidden'
+            bfBool.innerHTML = 'backface-visibility: hidden;'
           })
         } else {
-          transGal.forEach(item=>{
+          transGal.forEach(item => {
             item.style.backfaceVisibility = 'visible'
+            bfBool.innerHTML = 'backface-visibility: visible;'
           })
         }
       })

@@ -117,19 +117,29 @@ section {
 .nav-box ul li:last-child span {
   margin-right: 4rem;
 }
+
 .px-box {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
 }
+
 .section-title {
   font-size: 1.2rem;
   font-weight: 500;
 }
+
 .section-inner-title {
   color: #f40;
   text-transform: uppercase;
 }
+
+
+h4>span:last-child {
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
 /* axis */
 .axis-box {
   /* display: flex; */
@@ -140,24 +150,29 @@ section {
   /* margin: 2rem auto; */
   /* perspective: 1000px; */
 }
+
 .axis {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
   transform-style: preserve-3d;
   transform: rotateX(-5deg) rotateY(0deg) rotateZ(0deg);
-  animation: roll 5s forwards;
+  animation: roll 2s forwards;
   animation-play-state: paused;
   align-self: flex-start;
+  cursor: pointer;
 }
+
 .axis:hover {
   animation-play-state: running;
 }
+
 @keyframes roll {
   to {
     transform: rotateX(-5deg) rotateY(-30deg) rotateZ(0deg);
   }
 }
+
 .axis-item {
   position: absolute;
   left: 0;
@@ -166,77 +181,139 @@ section {
   height: 100%;
   border: 1px dotted #666;
 }
+
 .axis .front {
-  transform: translateZ(40px);
+  transform: translateZ(20px);
 }
+
 .axis .back {
-  transform: rotateX(180deg) translateZ(40px);
+  transform: rotateX(180deg) translateZ(20px);
 }
+
 .axis .left {
-  transform: rotateY(90deg) translateZ(40px);
+  transform: rotateY(90deg) translateZ(20px);
 }
+
 .axis .right {
-  transform: rotateY(-90deg) translateZ(40px);
+  transform: rotateY(-90deg) translateZ(20px);
 }
+
 .axis .top {
-  transform: rotateX(90deg) translateZ(40px);
+  transform: rotateX(90deg) translateZ(20px);
 }
+
 .axis .bottom {
-  transform: rotateX(-90deg) translateZ(40px);
+  transform: rotateX(-90deg) translateZ(20px);
 }
+
 .x-axis,
 .y-axis,
 .z-axis {
   position: absolute;
-  left: 50px;
-  top: 50px;
+  left: 20px;
+  top: 20px;
   width: 100px;
   height: 2px;
   background-color: #333;
   transform-origin: left;
   transform-style: preserve-3d;
 }
+
 .y-axis {
+  position: relative;
   transform: rotateZ(90deg);
 }
+
 .z-axis {
+  position: relative;
   transform: rotateY(-90deg);
 }
+
+.x-axis::before {
+  content: ">";
+  position: absolute;
+  left: 100%;
+  top: -.7rem;
+}
+
 .x-axis::after {
   content: "+X";
-  margin-left: 100%;
+  margin-left: 120%;
 }
+
+.y-axis::before {
+  content: ">";
+  position: absolute;
+  left: 100%;
+  top: -.7rem;
+}
+
 .y-axis::after {
   content: "+Y";
   display: inline-block;
-  margin-left: 100%;
+  margin-left: 120%;
   transform: rotateZ(-90deg);
 }
+
+.z-axis::before {
+  content: ">";
+  position: absolute;
+  left: 100%;
+  top: -.7rem;
+}
+
 .z-axis::after {
   content: "+Z";
-  margin-left: 100%;
+  margin-left: 120%;
+}
+
+.img-box {
+  position: relative;
+}
+
+.img-box::before {
+  content: '左手定则：大拇指指向轴的正方向';
+  position: absolute;
+  left: 0.4rem;
+  top: 0.4rem;
+  font-size: 14px;
+  width: 100%;
+  text-align: center;
+}
+
+.img-box::after {
+  content: '四指弯曲方向即为顺时针方向';
+  position: absolute;
+  left: 0.4rem;
+  bottom: 0.4rem;
+  font-size: 14px;
+  width: 100%;
+  text-align: center;
 }
 
 .grid3 {
   margin: 4rem auto;
 }
 
-.grid3 > div {
+.grid3>div {
   position: relative;
   min-height: 10rem;
   padding: 1rem;
   perspective: 1000px;
   box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.2);
 }
+
 #pers p::first-letter {
   text-transform: uppercase;
 }
+
 #pers strong {
   position: relative;
-  text-transform: uppercase;
+  text-transform: capitalize;
   display: flex;
   align-items: center;
 }
+
 #pers strong::before {
   content: attr(data-ind);
 }
@@ -245,10 +322,12 @@ section {
   /* border: 1px solid #888; */
   padding: unset;
 }
-.grid3 > div:first-child {
+
+.grid3>div:first-child {
   position: relative;
 }
-.grid3 > div:first-child::before {
+
+.grid3>div:first-child::before {
   content: "[";
   position: absolute;
   left: 2rem;
@@ -257,7 +336,8 @@ section {
   font-size: 2rem;
   color: #f40;
 }
-.grid3 > div:first-child::after {
+
+.grid3>div:first-child::after {
   content: "]";
   position: absolute;
   right: 2rem;
@@ -266,9 +346,11 @@ section {
   font-size: 2rem;
   color: #f40;
 }
+
 .grid3 p {
   text-align: center;
 }
+
 .grid3 .trans-title {
   font-weight: 600;
 }
@@ -277,6 +359,7 @@ section {
   display: block;
   transform-style: preserve-3d;
 }
+
 .ranger {
   width: 100%;
   margin: 1rem auto 0;
@@ -304,6 +387,7 @@ section {
   margin: 2rem auto;
   perspective: 900px;
   border: 4px solid #ddd;
+  cursor: pointer;
 }
 
 .card {
@@ -353,6 +437,7 @@ section {
   transform-style: preserve-3d;
   transform: rotateX(10deg) rotateY(20deg) rotateZ(30deg);
   transition: 6s;
+  cursor: pointer;
 }
 
 .cube-box:hover .cube {
@@ -362,7 +447,7 @@ section {
   transform: rotateX(80deg) rotateY(170deg) rotateZ(330deg);
 }
 
-.cube > .side {
+.cube>.side {
   position: absolute;
   left: 0;
   top: 0;
@@ -426,7 +511,7 @@ section {
   transform: rotateX(-90deg) translateZ(120px);
 }
 
-.cube > .inner {
+.cube>.inner {
   position: absolute;
   left: 30px;
   top: 30px;
@@ -474,7 +559,8 @@ section {
   height: 100%;
   transform-style: preserve-3d;
   transform: rotateX(-12deg);
-  animation: rotate360 20s linear infinite;  
+  animation: rotate360 20s linear infinite;
+  cursor: pointer;
 }
 
 .gallery:hover {
@@ -487,7 +573,7 @@ section {
   }
 }
 
-.gallery > div {
+.gallery>div {
   position: absolute;
   left: 0;
   top: 0;
@@ -500,7 +586,7 @@ section {
   border-radius: 1rem;
   color: #fff;
   transform: rotateY(calc(var(--deg) * 30deg)) translateZ(200px);
-  backface-visibility:visible;
+  backface-visibility: visible;
   /* text-shadow: 2px 0px 0px #fff, 0px 2px 0px #fff, -2px 0px 0px #fff, 0px -2px 0px #fff, 4px 4px 8px #333; */
   text-shadow: 0 0 10px #fff, 0 0 20px #ff0;
   box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.2)
@@ -512,17 +598,26 @@ section {
   background-position: center;
   background-repeat: no-repeat;
 }
+
 .left-box {
   width: 350px;
   height: 350px;
   margin: 2rem auto;
 }
-.grid2{
+
+.grid2 {
   justify-items: center;
   align-items: center;
   margin-top: 2rem;
 }
+
+.grid2>.txt-cont {
+  align-self: flex-start;
+  justify-self: flex-start;
+}
+
 @media screen and (max-width: 768px) {
+
   nav,
   ul {
     width: 2.2rem;
@@ -557,7 +652,7 @@ section {
     height: 100px;
   }
 
-  .gallery > div {
+  .gallery>div {
     line-height: 100px;
     transform: rotateY(calc(var(--deg) * 30deg)) translateZ(160px);
   }
@@ -580,7 +675,8 @@ section {
     margin: 0 !important;
     transform: unset;
   }
-  .axis{
+
+  .axis {
     margin-bottom: 6rem;
   }
 }
