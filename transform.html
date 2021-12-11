@@ -9,6 +9,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/transform.css">
+  <script src="js/fastclick.js"></script>
 </head>
 
 <body>
@@ -16,42 +17,42 @@
     <nav>
       <ul>
         <li>
-          <a class="nav" href="#home">
+          <a class="nav" href="#home" id='toHome'>
             <span class="iconfont icon">&#xe80e;</span>
             <span class="en">home</span>
             <span class="cn">简介</span>
           </a>
         </li>
         <li>
-          <a class="nav" href="#trans">
+          <a class="nav" href="#trans" id='toTrans'>
             <span class="iconfont icon">&#xe822;</span>
             <span class="en">translate</span>
             <span class="cn">位移</span>
           </a>
         </li>
         <li>
-          <a class="nav" href="#scale">
+          <a class="nav" href="#scale" id='toScale'>
             <span class="iconfont icon">&#xe82d;</span>
             <span class="en">scale</span>
             <span class="cn">缩放</span>
           </a>
         </li>
         <li>
-          <a class="nav" href="#rotate">
+          <a class="nav" href="#rotate" id='toRotate'>
             <span class="iconfont icon">&#xe7f9;</span>
             <span class="en">rotate</span>
             <span class="cn">旋转</span>
           </a>
         </li>
         <li>
-          <a class="nav" href="#skew">
+          <a class="nav" href="#skew" id='toSkew'>
             <span class="iconfont icon">&#xe823;</span>
             <span class="en">skew</span>
             <span class="cn">倾斜</span>
           </a>
         </li>
         <li>
-          <a class="nav" href="#pers">
+          <a class="nav" href="#pers" id='toPers'>
             <span class="iconfont icon">&#xe80d;</span>
             <span class="en">3d</span>
             <span class="cn">三维</span>
@@ -270,6 +271,54 @@
   </div>
   <script>
     window.onload = function () {
+      if ('addEventListener' in document) {
+        document.addEventListener('DOMContentLoaded', function () {
+          FastClick.attach(document.body);
+        }, false);
+      }
+      let home = document.querySelector('#toHome')
+      let trans = document.querySelector('#toTrans')
+      let scale = document.querySelector('#toScale')
+      let rotate = document.querySelector('#toRotate')
+      let skew = document.querySelector('#toSkew')
+      let pers = document.querySelector('#toPers')
+      home.addEventListener('click', function (e) {
+        e.preventDefault()
+        setTimeout(function () {
+          document.querySelector('#home').scrollIntoView()
+        }, 100)
+      })
+      trans.addEventListener('click', function (e) {
+        e.preventDefault()
+        setTimeout(function () {
+          document.querySelector('#trans').scrollIntoView()
+        }, 100)
+      })
+      scale.addEventListener('click', function (e) {
+        e.preventDefault()
+        setTimeout(function () {
+          document.querySelector('#scale').scrollIntoView()
+        }, 100)
+      })
+      rotate.addEventListener('click', function (e) {
+        e.preventDefault()
+        setTimeout(function () {
+          document.querySelector('#rotate').scrollIntoView()
+        }, 100)
+      })
+      skew.addEventListener('click', function (e) {
+        e.preventDefault()
+        setTimeout(function () {
+          document.querySelector('#skew').scrollIntoView()
+        }, 100)
+      })
+      pers.addEventListener('click', function (e) {
+        e.preventDefault()
+        setTimeout(function () {
+          document.querySelector('#pers').scrollIntoView()
+        }, 100)
+      })
+
       document.body.addEventListener('touchstart', function () { });
       // translate
       let transImg = document.querySelector('#trans-img')

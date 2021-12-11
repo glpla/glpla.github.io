@@ -6,6 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Baidu Map </title>
   <link rel="stylesheet" href="css/reset.css">
+  <script src="js/fastclick.js"></script>
   <style type="text/css">
     table {
       width: 90%;
@@ -26,11 +27,20 @@
     .week {
       margin: 0 1rem;
     }
+
+    a {
+      padding: 1rem 2rem;
+    }
   </style>
 </head>
 
 <body>
+  <a href="#id0" id='c0'>id0</a>
+  <a href="#id1" id="c1">id1</a>
+  <a href="#id2" id="c2">id2</a>
+  <h2>000000000000000000000</h2>
   <section id="app" class="w">
+
     <h1>教学日历</h1>
     <header>
       <span class="week" v-for='item in weeks' :key='item'>{{item}}</span>
@@ -39,6 +49,30 @@
       </div>
     </header>
   </section>
+  <h2>111111111111111111111</h2>
+  <section id="id0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus corrupti eius officia veritatis
+    ad eaque
+    quaerat! Provident quasi, facere nisi sit voluptates necessitatibus! Amet temporibus eaque fugit id dicta sed, quae
+    sunt, provident asperiores, odio rerum iste possimus dolorem! Labore modi voluptates laudantium porro necessitatibus
+    cumque possimus odit minus facere, molestias provident quidem, natus ex nesciunt ab. Aperiam itaque officia
+    temporibus nisi cum ut, voluptate quae aliquid quo tenetur facilis, esse illo repellat culpa labore ad ullam
+    consequatur incidunt quis quod in. Praesentium, aliquam inventore debitis eaque modi voluptatem expedita, beatae
+    nostrum, temporibus eveniet quibusdam consectetur nemo nesciunt numquam nihil!</section>
+  <section id="id1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut a sunt pariatur sequi maxime tempore
+    quos aperiam vitae! Non, mollitia odio beatae velit doloribus alias dolor reprehenderit esse quo fugiat aliquid
+    consectetur vitae dolores in excepturi possimus officia asperiores at? Excepturi, sit! Quibusdam atque error ut
+    magni est qui veniam consequuntur dolores reiciendis quasi explicabo odio, ea voluptatem. Officia ex dolor amet, ab
+    deleniti sit harum non, dolore temporibus cum veniam delectus iste, dolorem enim odit. Eius repellendus eveniet
+    distinctio tempora temporibus ad, blanditiis pariatur perferendis, sunt error molestias, ea culpa alias consequatur
+    quo voluptas aspernatur ipsa! Error, neque molestiae?</section>
+  <h2>222222222222222222</h2>
+  <section id='id2'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero quis laboriosam dolor repellat
+    incidunt dolorum illo perferendis molestiae. Inventore blanditiis est sint exercitationem eligendi, dignissimos
+    amet, unde quod similique ab laudantium quo, quasi facilis error adipisci? Fugiat aliquam commodi et temporibus
+    quidem quis incidunt modi veritatis officia iusto quisquam, maiores reiciendis dolores quaerat facere, animi dolorum
+    unde nemo. Aliquam, tempora, dolorum quam quibusdam assumenda quas rerum enim dolore beatae sit sed commodi.
+    Inventore illo deserunt natus soluta itaque omnis quisquam nobis cupiditate facere error dolore quasi, commodi a
+    eveniet expedita repudiandae nesciunt nisi. Repellendus odio culpa, tempora nulla earum est.</section>
   <script src="./js/vue.global.prod.min.js"></script>
   <script src="./js/moment.js"></script>
   <script type="module">
@@ -82,6 +116,37 @@
       },
     })
     const vm = app.mount('#app')
+  </script>
+  <script>
+    window.onload = function () {
+      if ('addEventListener' in document) {
+        document.addEventListener('DOMContentLoaded', function () {
+          FastClick.attach(document.body);
+        }, false);
+      }
+      let c0 = document.querySelector('#c0')
+      let c1 = document.querySelector('#c1')
+      let c2 = document.querySelector('#c2')
+
+      c0.addEventListener('click', function (e) {
+        e.preventDefault()
+        setTimeout(function () {
+          document.querySelector('#id0').scrollIntoView()
+        }, 100)
+      })
+      c1.addEventListener('click', function (e) {
+        e.preventDefault()
+        setTimeout(function () {
+          document.querySelector('#id1').scrollIntoView()
+        }, 100)
+      })
+      c2.addEventListener('click', function (e) {
+        e.preventDefault()
+        setTimeout(function () {
+          document.querySelector('#id2').scrollIntoView()
+        }, 100)
+      })
+    }
   </script>
 </body>
 
