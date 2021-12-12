@@ -61,9 +61,9 @@
       </ul>
     </nav>
     <section id="home">
-      <p><span class="iconfont info-icon">&#xe810;</span> CSS转换（transform）允许您移动、旋转、缩放和倾斜元素；综合使用，可以呈现3D效果</p>
+      <p><span class="iconfont info-icon">&#xe810;</span> CSS变形transform允许您移动、旋转、缩放和倾斜元素；综合使用，可以呈现3D效果</p>
       <p><span class="iconfont info-icon">&#xe810;</span> 针对inline-block和block元素有效</p>
-      <p><span class="iconfont info-icon">&#xe810;</span> 分为2D变换和3D变换，分别有相应的CSS</p>
+      <p><span class="iconfont info-icon">&#xe810;</span> 分为2D变形和3D变形，分别有相应的CSS</p>
     </section>
     <section id="trans">
       <strong>位移属性说明</strong>
@@ -96,6 +96,8 @@
       <p class="line-dot">skewY(deg)<span class="dot"></span>Y轴倾斜</p>
       <p class="line-dot">skew(deg,deg)<span class="dot"></span>X、Y倾斜</p>
       <h4 class="exam-title">navigation</h4>
+      <p><span class="iconfont info-icon">&#xe810;</span> 导航指定宽度且水平居中、溢出隐藏</p>
+      <p><span class="iconfont info-icon">&#xe810;</span> 导航项目倾斜；文字内容反向倾斜且首末文字分别外移以保持导航两端垂直</p>
       <div class="nav-box">
         <ul>
           <li><span>首页</span></li>
@@ -104,6 +106,34 @@
           <li><span>售后服务</span></li>
           <li><span>关于我们</span></li>
         </ul>
+      </div>
+      <div class="grid2">
+        <pre class="code">
+      &lt;div class="nav-box"&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;span&gt;首页&lt;/span&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;span&gt;在线文档&lt;/span&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;span&gt;产品信息&lt;/span&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;span&gt;售后服务&lt;/span&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;span&gt;关于我们&lt;/span&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;      </pre>
+        <pre class="code">
+      .nav-box ul li:first-child {
+        margin-left: -4rem;
+      }
+      
+      .nav-box ul li:first-child span {
+        margin-left: 4rem;
+      }
+      
+      .nav-box ul li:last-child {
+        margin-right: -4rem;
+      }
+      
+      .nav-box ul li:last-child span {
+        margin-right: 4rem;
+      }      </pre>
       </div>
     </section>
     <section id="pers">
@@ -160,12 +190,12 @@
           <img id='rot-img' src="./imgs/1.jpg" alt=""></img>
         </div>
         <div>
-          <p class="trans-title">拖动滑块查看Y轴选择</p>
-          <input id="rot" class="ranger" type="range" min=-360 max=360 value="0">
+          <p class="trans-title">拖动滑块查看Y轴旋转</p>
+          <input id="rot" class="ranger" type="range" min=-90 max=90 value="0">
           <div class="px-box">
-            <span>-360deg</span>
+            <span>-90deg</span>
             <span>0</span>
-            <span>+360deg</span>
+            <span>+90deg</span>
           </div>
           <p>transform: rotateY(<span id='trans-deg'>0</span>deg);</p>
         </div>
@@ -174,17 +204,17 @@
         <span><span class="section-inner-title">&lt;section2&gt;</span> 核心属性</span>
         <span>core attribute</span>
       </h4>
-      <p>transform默认是2D变换；要呈现3D效果，必须为元素设置透视/景深及指定为3D变换模式；具体步骤为：</p>
+      <p>transform默认是2D变形；要呈现3D效果，必须为元素设置透视/景深及指定为3D变形模式；具体步骤为：</p>
       <p>1. 为父元素指定景深perspective(创建一个天空盒sky box)，单位是px，通常取800px-1200px</p>
       <pre class="code">
-      .super {          
-        perspective: 1000px;
-      }</pre>
-      <p>2. 为自己设置3D变换transform-style: preserve-3d(flat表示2D)</p>
+    .super {
+      perspective: 1000px;
+    }</pre>
+      <p>2. 为自己设置3D变形transform-style: preserve-3d(flat表示2D)</p>
       <pre class="code">
-      .self {
-        transform-style: preserve-3d;
-      }</pre>
+    .self {
+      transform-style: preserve-3d;
+    }</pre>
       <h4 class="cont-title section-title px-box">
         <span><span class="section-inner-title">&lt;section3&gt;</span> 实操</span>
         <span>coding</span>
@@ -192,7 +222,7 @@
       <h4 class="exam-title">1.card flip</h4>
       <div class="grid2">
         <div class="txt-cont">
-          <p><span class="iconfont info-icon">&#xe810;</span> 移动鼠标到图像上（桌面端）或单击图像（移动端）查看效果</p>
+          <p><span class="iconfont info-icon">&#xe810;</span> 移动鼠标到图像上(桌面端)或单击图像(移动端)查看效果</p>
           <p><span class="iconfont info-icon">&#xe82e;</span> 请使用::before ::after展示图片</p>
           <p><span class="iconfont info-icon">&#xe82e;</span> 请使用z-index属性交换前后图片</p>
         </div>
@@ -203,7 +233,7 @@
       <h4 class="exam-title">2.cube</h4>
       <div class="grid2">
         <div class="txt-cont">
-          <p><span class="iconfont info-icon">&#xe810;</span> 移动鼠标到图像上（桌面端）或单击图像（移动端）查看效果</p>
+          <p><span class="iconfont info-icon">&#xe810;</span> 移动鼠标到图像上(桌面端)或单击图像(移动端)查看效果</p>
           <p><span class="iconfont info-icon">&#xe82e;</span> 请使用&lt;img&gt;代替&lt;div&gt;实现</p>
           <p><span class="iconfont info-icon">&#xe82e;</span> 请使用animation代替transition实现</p>
         </div>
@@ -227,13 +257,12 @@
       <h4 class="exam-title">3.gallery</h4>
       <div class="grid2">
         <div class="txt-cont">
-          <p><span class="iconfont info-icon">&#xe810;</span> 移动鼠标到图像上（桌面端）或单击图像（移动端）查看效果</p>
+          <p><span class="iconfont info-icon">&#xe810;</span> 移动鼠标到图像上(桌面端)或单击图像(移动端)查看效果</p>
           <p>
             <span class="iconfont info-icon">&#xe810;</span>
-            <label for="bface">背面隐藏切换</label>
             <input type="checkbox" id="bface">
+            <label for="bface" id='bfBool'>背面隐藏切换 backface-visibility: visible</label>
           </p>
-          <p id='bfBool'>backface-visibility: visible</p>
         </div>
         <div class="gallery-box">
           <div class="gallery" id="trans-gal">
@@ -260,7 +289,7 @@
         <div>
           <strong></strong>
           <p>1.父元素不能指定overflow:hidden；否则就还原位2D模式</p>
-          <p>2.如果为更高级的父元素指定景深perspective，则其下面的子元素都应指定3D变换模式，即：这些元素共享一个景深/天空盒(sky box)</p>
+          <p>2.如果为更高级的父元素指定景深perspective，则其下面的子元素都应指定3D变形模式，即：这些元素共享一个景深/天空盒(sky box)</p>
         </div>
       </div>
       <h4 class="cont-title section-title px-box">
@@ -372,12 +401,12 @@
         if (this.checked) {
           transGal.forEach(item => {
             item.style.backfaceVisibility = 'hidden'
-            bfBool.innerHTML = 'backface-visibility: hidden;'
+            bfBool.innerHTML = '背面隐藏切换 backface-visibility: hidden;'
           })
         } else {
           transGal.forEach(item => {
             item.style.backfaceVisibility = 'visible'
-            bfBool.innerHTML = 'backface-visibility: visible;'
+            bfBool.innerHTML = '背面隐藏切换 backface-visibility: visible;'
           })
         }
       })
