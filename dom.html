@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dom</title>
+  <title>Document Object Model</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
   <style>
@@ -14,15 +14,16 @@
       height: 270px;
       line-height: 270px;
       background-size: cover;
+      background-color: #f3f3f3;
     }
 
     .img-box img {
       margin: 0.2rem;
-      width: 80px;
-      height: 45px;
+      width: 60px;
+      height: 40px;
       object-fit: cover;
       cursor: pointer;
-      border: 4px solid #fff;
+      border: 2px solid #fff;
       vertical-align: middle;
     }
 
@@ -31,71 +32,87 @@
       margin: 0 1rem;
       cursor: pointer;
     }
-    .base{
+
+    .base {
       border-bottom: 1px solid transparent;
     }
 
     .active {
       border-bottom: 1px solid #f40;
     }
+
+    .cont {
+      min-height: 10rem;
+    }
+
+    .count-box {
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .show-box {
+      width: 100%;
+      margin: 2rem auto;
+    }
   </style>
 </head>
 
 <body>
   <section class="w">
-    <h4 class="cont-title">元素element操作</h4>
+    <h4 class="cont-title">元素element</h4>
     <strong>选择元素</strong>
-    <pre class="code">
-      document.querySelector(el)
-      document.querySelectorAll(el)</pre>
-    <strong>获取元素属性</strong>
-    <pre class="code">
-      dom.getAttribute(att)
-      dom.src</pre>
-    <strong>修改元素属性</strong>
-    <pre class="code">
-      dom.setAttribute(att, value)</pre>
-    <h4 class="cont-title">类class操作</h4>
+    <p class="line-dot">document.querySelector(selector)<span class="dot"></span>选中第一个/单个</p>
+    <p class="line-dot">document.querySelectorAll(selector)<span class="dot"></span>选中一组</p>
+    <p class="line-dot">document.body<span class="dot"></span>获取body</p>
+    <p class="line-dot">document.documentElement<span class="dot"></span>获取HTML</p>
+    <p>其它方法：getElementsByTagName()/getElementById()/getElementsByClassName()不建议使用</p>
+    <strong>元素属性</strong>
+    <p class="line-dot">el.attrName<span class="dot"></span>获取内置属性</p>
+    <p class="line-dot">el.getAttribute(att)<span class="dot"></span>获取自定义属性</p>
+    <p class="line-dot">el.setAttribute(att,value)<span class="dot"></span>设置自定义属性</p>
+    <p class="line-dot">el.removeAttribute(att,value)<span class="dot"></span>删除自定义属性</p>
+    <strong>自定义属性data-</strong>
+    <p>data-写在元素标签上</p>
+    <p>获取时使用：el.dataset，不需要加上data；getAttribute可以获取所有属性；dataset只能获取data-属性</p>
+    <p>长属性应采用连字符法，如：data-ind、data-good-name</p>
+    <p>为了保存和使用数据</p>
+    <strong>元素内容</strong>
+    <p class="line-dot">el.innerText<span class="dot"></span>元素文本内容</p>
+    <p class="line-dot">el.innerHTML<span class="dot"></span>元素HTML内容</p>
+    <h4 class="exam-title">数字时钟</h4>
+    <div class="cont">
+      <div class="count-box">
+        <span id='yy'></span>-<span id='mon'></span>-<span id='day'></span>
+        <span id='week'></span>
+        <span id='hh'></span>:<span id='min'></span>:<span id='sec'></span>
+      </div>
+      <p><span class="iconfont info-icon">&#xe82e;</span> 请使用<a href="http://momentjs.cn/" target="_blank"
+          class="link">momentjs</a>实现</p>
+
+    </div>
+    <h4 class="exam-title">日期倒计时</h4>
+    <div class="cont">
+      <div class="count-box">
+        <span id="cd"></span>天<span id="ch"></span>小时<span id="cm"></span>分钟<span id="cs"></span>秒
+      </div>
+      <p style="text-align: center;">距离2022-01-01 00:00:00还有</p>
+    </div>
+    <h4 class="exam-title">秒表倒计时</h4>
+    <div class="cont">
+      <div class="count-box">
+        <span id="cds">10</span>
+      </div>
+      <p style="text-align: center;">10秒倒计时</p>
+    </div>
+    <h4 class="cont-title">类class</h4>
     <strong>设置类</strong>
-    <pre class="code">
-      dom.style.className=name</pre>
-    <strong>增加类</strong>
-    <pre class="code">
-      dom.classList.add()</pre>
-    <strong>删除类</strong>
-    <pre class="code">
-      dom.classList.remove()</pre>
-    <strong>切换类</strong>
-    <pre class="code">
-      dom.classList.toggle()</pre>
-    <h4 class="cont-title">样式style操作</h4>
-    <strong>设置样式</strong>
-    <pre class="code">
-      dom.style.name=value</pre>
-    <strong>修改样式属性</strong>
-    <pre class="code">
-      dom.style.setProperty(name, value)</pre>
-    <h4 class="cont-title">表单form操作</h4>
-    <strong>获取表单元素的值</strong>
-    <pre class="code">
-      dom.addEventListener('change', function () {
-        console.log(this.checked);                
-        console.log(this.value);                  
-      })    </pre>
-    <h4 class="exam-title">背景换肤</h4>
-    <div class="img-box">
-      <img src="imgs/1.jpg" alt="">
-      <img src="imgs/2.jpg" alt="">
-      <img src="imgs/3.jpg" alt="">
-      <img src="imgs/4.jpg" alt="">
-    </div>
-    <pre class="code">
-    imgBox.style.backgroundImage = `url(${this.src})`    </pre>
-    <h4 class="exam-title">确认书</h4>
-    <div class="info-box">
-      <input type="checkbox" id='info'>
-      <label for="info">注册须知</label>
-    </div>
+    <p class="line-dot">el.className=name<span class="dot"></span>设置类</p>
+    <p class="line-dot">el.classList.add()<span class="dot"></span>增加类</p>
+    <p class="line-dot">el.classList.remove()<span class="dot"></span>删除类</p>
+    <p class="line-dot">el.classList.toggle()<span class="dot"></span>切换类</p>
+    <h4 class="cont-title">样式style</h4>
+    <p class="line-dot">el.style.attrName=attrValue<span class="dot"></span>设置样式</p>
+    <p class="line-dot">el.style.setProperty(name, value)<span class="dot"></span>修改样式</p>
     <h4 class="exam-title">导航</h4>
     <nav>
       <ul class="flex-h" id='nav'>
@@ -105,17 +122,116 @@
         <li class="base">关于我们</li>
       </ul>
     </nav>
+    <h4 class="exam-title">换肤</h4>
+    <div class="img-box">
+      <img src="imgs/1.jpg" alt="">
+      <img src="imgs/2.jpg" alt="">
+      <img src="imgs/3.jpg" alt="">
+      <img src="imgs/4.jpg" alt="">
+    </div>
+    <pre class="code">
+    imgBox.style.backgroundImage = `url(${this.src})`    </pre>
+    <h4 class="cont-title">表单form</h4>
+    <strong>可操作的属性</strong>
+    <p class="line-dot">type<span class="dot"></span>类型</p>
+    <p class="line-dot">value<span class="dot"></span>值</p>
+    <p class="line-dot">disabled<span class="dot"></span>是否可用</p>
+    <p class="line-dot">checked<span class="dot"></span>是否选中</p>
+    <h4 class="exam-title">确认书</h4>
+    <div style="text-align: center;">
+      <input type="checkbox" id='info'>
+      <label for="info">注册须知</label>
+    </div>
+    <pre class="code">
+      dom.addEventListener('change', function () {
+        console.log(this.checked);                
+        console.log(this.value);                  
+      })    </pre>
+    <h4 class="exam-title">显示密码</h4>
+    <div class="show-box">
+      <div>
+        <label for="sName">name</label>
+        <input type="text" value="" id="sName" placeholder="your name">
+      </div>
+      <div>
+        <label for="sPass">pass</label>
+        <input type="password" value="" id="sPass" placeholder="your password">
+        <input type="button" value="显示密码">
+      </div>
+    </div>
+
+    <h4 class="exam-title">数据管理</h4>
+    <h4 class="cont-title">节点Node</h4>
+    <p>一个HTML文档是由各种各样的节点组成</p>
+    <p>相比而言，传统获取元素的方法比较繁琐：每个节点都需要使用ID/CLASS/TAG等方法获取；而利用节点的父子关系则比较方便操作元素：只需获取一个节点，其他节点可以根据父子关系简介获取</p>
+    <strong>节点类型</strong>
+    <p class="line-dot">文档节点<span class="dot"></span>HTML</p>
+    <p class="line-dot">元素节点<span class="dot"></span></p>
+    <p class="line-dot">属性节点<span class="dot"></span></p>
+    <p class="line-dot">文本节点<span class="dot"></span>除普通文本外，标签之间由于格式化自动产生的的回车，空白和空格都是文本节点</p>
+    <strong>每个节点包括：</strong>
+    <p class="line-dot">nodeName<span class="dot"></span>节点名称</p>
+    <p class="line-dot">nodeType<span class="dot"></span>节点类型；元素节点为1；属性节点为2；文本节点为3</p>
+    <p class="line-dot">nodeValue<span class="dot"></span>节点值</p>
+    <p>一般我们处理的是元素节点，所以通常根据节点类型是否为1来判断节点是否是元素节点</p>
+    <p>更推荐使用children直接获取子元素节点</p>
+    <strong>获取节点</strong>
+    <strong>创建节点</strong>
+    <strong>复制节点</strong>
     <small>Copyright Reserved &copy; By Cnplaman 2021-12-03</small>
   </section>
   <script>
     window.onload = function () {
-      let imgBox = document.querySelector('.img-box')
-      let imgs = imgBox.querySelectorAll('img')
-      for (let i = 0; i < imgs.length; i++) {
-        imgs[i].addEventListener('click', function () {
-          imgBox.style.backgroundImage = `url(${this.src})`
-        })
-      }
+      // count
+      let week_arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+      let year = document.querySelector('#yy')
+      let mon = document.querySelector('#mon')
+      let day = document.querySelector('#day')
+      let week = document.querySelector('#week')
+      let hh = document.querySelector('#hh')
+      let min = document.querySelector('#min')
+      let sec = document.querySelector('#sec')
+      let inter = setInterval(() => {
+        let date = new Date()
+        year.innerHTML = date.getFullYear()
+        mon.innerHTML = date.getMonth() + 1
+        day.innerHTML = date.getDate()
+        week.innerHTML = week_arr[date.getDay()]
+        hh.innerHTML = date.getHours() > 9 ? date.getHours() : '0' + date.getHours()
+        min.innerHTML = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes()
+        sec.innerHTML = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds()
+      }, 1000)
+
+      // count down
+      let cd = document.querySelector('#cd')
+      let ch = document.querySelector('#ch')
+      let cm = document.querySelector('#cm')
+      let cs = document.querySelector('#cs')
+      let oldday = new Date('2021-12-31 23:59:59').getTime()
+      let cinter = setInterval(() => {
+        let newday = new Date().getTime()
+        let secs = Math.round((oldday - newday) / 1000)
+        if (secs < 0) {
+          clearInterval(cinter)
+          return
+        }
+        cd.innerHTML = Math.floor(secs / 60 / 60 / 24)
+        ch.innerHTML = Math.floor(secs / 60 / 60 % 24)
+        cm.innerHTML = Math.floor(secs / 60 % 60)
+        cs.innerHTML = secs % 60 > 9 ? secs % 60 : '0' + secs % 60
+      }, 1000)
+      // cds
+      let cds = document.querySelector('#cds')
+      let time = 10
+      let cdsinter = setInterval(() => {
+        time--
+        if (time < 0) {
+          clearInterval(cdsinter)
+          return
+        }
+        cds.innerHTML = time
+      }, 1000)
+
       // info
       let info = document.querySelector('#info')
       info.addEventListener('change', function () {
@@ -133,6 +249,22 @@
           this.classList.add('active')
         })
       }
+      // show passw
+      let btn = document.querySelector('button');
+      let input = document.querySelector('input[type="password"]');
+      let showPass = document.querySelector('input[type="button"]');
+      showPass.onclick = function () {
+        input.type = input.type == 'text' ? 'password' : 'text'
+      }
+      // skin
+      let imgBox = document.querySelector('.img-box')
+      let imgs = imgBox.querySelectorAll('img')
+      for (let i = 0; i < imgs.length; i++) {
+        imgs[i].addEventListener('click', function () {
+          imgBox.style.backgroundImage = `url(${this.src})`
+        })
+      }
+
     }
   </script>
 </body>
