@@ -84,6 +84,33 @@ section {
   padding: 6rem 1rem;
 }
 
+/* loading */
+.loading {
+  margin: 4rem auto 0;
+  display: flex;
+  justify-content: center;
+}
+
+.loading>div {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #f40;
+  margin: 0 .6rem;
+  box-shadow: 0 0 4px #f39c12;
+  transform: scale(0);
+  animation: scale 1s ease-in-out alternate infinite;
+  animation-delay: calc(var(--del)*0.2s);
+}
+
+@keyframes scale {
+
+  to {
+    transform: scale(3);
+    filter: hue-rotate(360deg);
+  }
+}
+
 /* navigation */
 .nav-box {
   margin: 2rem auto;
