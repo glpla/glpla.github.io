@@ -8,58 +8,12 @@
   <title>Document Object Model</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
-  <style>
-    .img-box {
-      text-align: center;
-      height: 270px;
-      line-height: 270px;
-      background-size: cover;
-      background-color: #f3f3f3;
-    }
-
-    .img-box img {
-      margin: 0.2rem;
-      width: 60px;
-      height: 40px;
-      object-fit: cover;
-      cursor: pointer;
-      border: 2px solid #fff;
-      vertical-align: middle;
-    }
-
-    /* nav */
-    .flex-h li {
-      margin: 0 1rem;
-      cursor: pointer;
-    }
-
-    .base {
-      border-bottom: 1px solid transparent;
-    }
-
-    .active {
-      border-bottom: 1px solid #f40;
-    }
-
-    .cont {
-      min-height: 10rem;
-    }
-
-    .count-box {
-      text-align: center;
-      font-size: 2rem;
-    }
-
-    .show-box {
-      width: 100%;
-      margin: 2rem auto;
-    }
-  </style>
+  <link rel="stylesheet" href="css/dom.css">
 </head>
 
 <body>
   <section class="w">
-    <h4 class="cont-title">元素element</h4>
+    <h4 class="cont-title" id="el">元素element</h4>
     <strong>选择元素</strong>
     <p class="line-dot">document.querySelector(selector)<span class="dot"></span>选中第一个/单个</p>
     <p class="line-dot">document.querySelectorAll(selector)<span class="dot"></span>选中一组</p>
@@ -104,24 +58,44 @@
       </div>
       <p style="text-align: center;">10秒倒计时</p>
     </div>
-    <h4 class="cont-title">类class</h4>
+    <h4 class="cont-title" id="cl">类class</h4>
     <strong>设置类</strong>
     <p class="line-dot">el.className=name<span class="dot"></span>设置类</p>
     <p class="line-dot">el.classList.add()<span class="dot"></span>增加类</p>
     <p class="line-dot">el.classList.remove()<span class="dot"></span>删除类</p>
     <p class="line-dot">el.classList.toggle()<span class="dot"></span>切换类</p>
-    <h4 class="cont-title">样式style</h4>
+    <h4 class="cont-title" id="st">样式style</h4>
     <p class="line-dot">el.style.attrName=attrValue<span class="dot"></span>设置样式</p>
     <p class="line-dot">el.style.setProperty(name, value)<span class="dot"></span>修改样式</p>
     <h4 class="exam-title">导航</h4>
     <nav>
       <ul class="flex-h" id='nav'>
-        <li class="base">主页</li>
-        <li class="base">产品信息</li>
-        <li class="base">帮助文档</li>
-        <li class="base">关于我们</li>
+        <li class="base"><a href="#el" data-link="#el">元素</a></li>
+        <li class="base"><a href="#cl" data-link="#cl">类</a></li>
+        <li class="base"><a href="#st" data-link="#st">样式</a></li>
+        <li class="base"><a href="#fo" data-link="#fo">表单</a></li>
+        <li class="base"><a href="#no" data-link="#no">节点</a></li>
       </ul>
     </nav>
+    <pre class="code">
+    //h5
+    &lt;li&gt;&lt;a href="#el" data-link="#el"&gt;元素&lt;/a&gt;&lt;/li&gt;
+    
+    //js
+    let as = document.querySelectorAll('#nav a')
+    for (let i = 0; i < as.length; i++) {
+      as[i].addEventListener('click', function (e) {
+        e.preventDefault();
+        for (let j = 0; j < as.length; j++) {
+          as[j].classList.remove('active')
+        }
+        this.classList.add('active')
+        //this.classList.toggle('active')
+        setTimeout(function () {
+          document.querySelector(e.target.dataset.link).scrollIntoView()
+        }, 100)
+      })
+    }    </pre>
     <h4 class="exam-title">换肤</h4>
     <div class="img-box">
       <img src="imgs/1.jpg" alt="">
@@ -131,12 +105,12 @@
     </div>
     <pre class="code">
     imgBox.style.backgroundImage = `url(${this.src})`    </pre>
-    <h4 class="cont-title">表单form</h4>
+    <h4 class="cont-title" id="fo">表单form</h4>
     <strong>可操作的属性</strong>
+    <p class="line-dot">checked<span class="dot"></span>是否选中</p>
+    <p class="line-dot">disabled<span class="dot"></span>是否可用</p>
     <p class="line-dot">type<span class="dot"></span>类型</p>
     <p class="line-dot">value<span class="dot"></span>值</p>
-    <p class="line-dot">disabled<span class="dot"></span>是否可用</p>
-    <p class="line-dot">checked<span class="dot"></span>是否选中</p>
     <h4 class="exam-title">确认书</h4>
     <div style="text-align: center;">
       <input type="checkbox" id='info'>
@@ -148,36 +122,93 @@
         console.log(this.value);                  
       })    </pre>
     <h4 class="exam-title">显示密码</h4>
+    <p><span class="iconfont info-icon">&#xe82e;</span> 请使用字体图标完善项目</p>
     <div class="show-box">
-      <div>
-        <label for="sName">name</label>
-        <input type="text" value="" id="sName" placeholder="your name">
-      </div>
-      <div>
-        <label for="sPass">pass</label>
-        <input type="password" value="" id="sPass" placeholder="your password">
-        <input type="button" value="显示密码">
+      <label for="sPass">密码</label>
+      <input type="password" value="" id="sPass" placeholder="your password">
+      <input type="button" value="显示密码">
+    </div>
+    <pre class="code">
+    showPass.addEventListener('click', () => {
+      if (input.type == 'text') {
+        input.type = 'password'
+        btn.value = '显示密码'
+      } else {
+        input.type = 'text'
+        btn.value = '隐藏密码'
+      }
+    })</pre>
+    <h4 class="exam-title">全选</h4>
+    <div class="count-box">
+      <span>您感兴趣的WEB前端有：</span>
+      <div class="flex-h">
+        <label><input type="checkbox" name="web" value="HTML" id="h5">HTML</label>
+        <label><input type="checkbox" name="web" value="CSS" id="c3">CSS</label>
+        <label><input type="checkbox" name="web" value="JAVASCRIPT" id="js">JAVASCRIPT</label>
+        <label><input type="checkbox" name="sel" id="all"><span>全选</span></label>
       </div>
     </div>
-
-    <h4 class="exam-title">数据管理</h4>
-    <h4 class="cont-title">节点Node</h4>
+    <p><span class="iconfont info-icon">&#xe82e;</span> 请优化全选逻辑</p>
+    <p><span class="iconfont info-icon">&#xe82e;</span> 增加全不选逻辑</p>
+    <pre class="code">
+    //全选逻辑
+    all.addEventListener('change', function (e) {
+      if (this.checked==true) {
+        for (let i = 0; i < cbs.length; i++) {
+          cbs[i].checked = true
+        }
+      } else {
+        for (let i = 0; i < cbs.length; i++) {
+          cbs[i].checked = false
+        }
+      }
+    })    </pre>
+    <h4 class="cont-title" id="no">节点Node</h4>
     <p>一个HTML文档是由各种各样的节点组成</p>
-    <p>相比而言，传统获取元素的方法比较繁琐：每个节点都需要使用ID/CLASS/TAG等方法获取；而利用节点的父子关系则比较方便操作元素：只需获取一个节点，其他节点可以根据父子关系简介获取</p>
     <strong>节点类型</strong>
     <p class="line-dot">文档节点<span class="dot"></span>HTML</p>
     <p class="line-dot">元素节点<span class="dot"></span></p>
     <p class="line-dot">属性节点<span class="dot"></span></p>
     <p class="line-dot">文本节点<span class="dot"></span>除普通文本外，标签之间由于格式化自动产生的的回车，空白和空格都是文本节点</p>
-    <strong>每个节点包括：</strong>
+    <strong>每个节点包括</strong>
     <p class="line-dot">nodeName<span class="dot"></span>节点名称</p>
     <p class="line-dot">nodeType<span class="dot"></span>节点类型；元素节点为1；属性节点为2；文本节点为3</p>
     <p class="line-dot">nodeValue<span class="dot"></span>节点值</p>
     <p>一般我们处理的是元素节点，所以通常根据节点类型是否为1来判断节点是否是元素节点</p>
-    <p>更推荐使用children直接获取子元素节点</p>
+    <p>相比而言，传统获取元素的方法比较繁琐：每个节点都需要使用ID/CLASS/TAG等方法获取；而利用节点的父子关系则比较方便操作元素：只需获取一个节点，其他节点可以根据父子关系简介获取</p>
     <strong>获取节点</strong>
+    <p class="line-dot">el.parentNode：父节点；无则返回null；只能有一个亲爸爸</p>
+    <p class="line-dot">el.childNodes：子节点；包括元素节点和文本节点；通常是多个</p>
+    <p class="line-dot">el.children：子元素节点；实际开发常用；可通过索引获取某个子元素节点</p>
+    <p class="line-dot">el.firstChild：第一个子元素节点</p>
+    <p class="line-dot">el.lastChild：最后一个子元素节点</p>
+    <p class="line-dot">el.nextSibling：下一个兄弟节点，包括文本节点，元素节点</p>
+    <p class="line-dot">el.previousSibling：上一个兄弟节点，包括文本节点，元素节点</p>
     <strong>创建节点</strong>
-    <strong>复制节点</strong>
+    <p>document.createElement(tagName)：创建节点</p>
+    <p>el.appendChild(child)：将创建的节点作为子节点添加到父节点的末尾哦</p>
+    <p>el.insertBefore(child,node)：在父节点某个子节点前面插入新的子节点</p>
+    <p>removeChild(child)：从父节点中删除某个子节点</p>
+    <h4 class="exam-title">留言板</h4>
+    <div class="msg-box">
+      <input type="text" placeholder="说点啥吧" maxlength="20" id='msg'>
+      <input type="button" value="提交" id='btn'>
+    </div>
+    <ul class="msg-list" id='list'>
+    </ul>
+    <p><span class="iconfont info-icon">&#xe82e;</span> 使用正则表达式规范输入</p>
+    <p><span class="iconfont info-icon">&#xe82e;</span> 每条留言增加删除功能</p>
+    <pre class="code">
+    msgbtn.addEventListener('click', function () {
+      if (!msg.value) {
+        return
+      }
+      let li = document.createElement('li')
+      li.innerHTML = msg.value
+      // list.appendChild(li)
+      list.insertBefore(li, list.children[0])
+      msg.value = ''
+    })    </pre>
     <small>Copyright Reserved &copy; By Cnplaman 2021-12-03</small>
   </section>
   <script>
@@ -239,23 +270,34 @@
         this.checked ? alert('同意') : alert('不同意')
       })
       // nav
-      let lis = document.querySelectorAll('#nav li')
-      console.log(lis);
-      for (let i = 0; i < lis.length; i++) {
-        lis[i].addEventListener('click', function () {
-          for (let j = 0; j < lis.length; j++) {
-            lis[j].classList.remove('active')
+      let as = document.querySelectorAll('#nav a')
+      console.log(as);
+      for (let i = 0; i < as.length; i++) {
+        as[i].addEventListener('click', function (e) {
+          e.preventDefault();
+          for (let j = 0; j < as.length; j++) {
+            as[j].classList.remove('active')
           }
           this.classList.add('active')
+          console.log(e.target.dataset.link);
+          setTimeout(function () {
+            document.querySelector(e.target.dataset.link).scrollIntoView()
+          }, 100)
         })
       }
       // show passw
-      let btn = document.querySelector('button');
+      let btn = document.querySelector('input[type="button"]');
       let input = document.querySelector('input[type="password"]');
       let showPass = document.querySelector('input[type="button"]');
-      showPass.onclick = function () {
-        input.type = input.type == 'text' ? 'password' : 'text'
-      }
+      showPass.addEventListener('click', () => {
+        if (input.type == 'text') {
+          input.type = 'password'
+          btn.value = '显示密码'
+        } else {
+          input.type = 'text'
+          btn.value = '隐藏密码'
+        }
+      })
       // skin
       let imgBox = document.querySelector('.img-box')
       let imgs = imgBox.querySelectorAll('img')
@@ -264,7 +306,48 @@
           imgBox.style.backgroundImage = `url(${this.src})`
         })
       }
+      // data
+      let cbs = document.querySelectorAll('.flex-h input[name="web"]')
+      let all = document.querySelector('#all')
+      all.addEventListener('change', function (e) {
+        if (this.checked) {
+          for (let i = 0; i < cbs.length; i++) {
+            cbs[i].checked = true
+          }
+        } else {
+          for (let i = 0; i < cbs.length; i++) {
+            cbs[i].checked = false
+          }
+        }
+      })
+      for (let i = 0; i < cbs.length; i++) {
+        cbs[i].addEventListener('change', function () {
+          let flag = true
+          for (let j = 0; j < cbs.length; j++) {
+            console.log(j, cbs[j].checked);
+            if (!cbs[j].checked) {
+              flag = false
+              break
+            }
+          }
+          all.checked = flag
+        })
+      }
 
+      // msg
+      let msg = document.querySelector('#msg')
+      let msgbtn = document.querySelector('#btn')
+      let list = document.querySelector('#list')
+      msgbtn.addEventListener('click', function () {
+        if (!msg.value) {
+          return
+        }
+        let li = document.createElement('li')
+        li.innerHTML = msg.value
+        // list.appendChild(li)
+        list.insertBefore(li, list.children[0])
+        msg.value = ''
+      })
     }
   </script>
 </body>
