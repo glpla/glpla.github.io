@@ -208,7 +208,24 @@
       // list.appendChild(li)
       list.insertBefore(li, list.children[0])
       msg.value = ''
+    })</pre>
+    <h4 class="exam-title">加载数据并展示到表格</h4>
+    <button id='load'>加载</button>
+    <pre class="code">
+    let load = document.querySelector('#load')
+    load.addEventListener('click', () => {
+      fetch('./data2021/stu.json')
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+        })
     })    </pre>
+    <table class="tbl">
+      <tr>
+        <td>ID</td>
+        <td>unit</td>
+      </tr>
+    </table>
     <small>Copyright Reserved &copy; By Cnplaman 2021-12-03</small>
   </section>
   <script>
@@ -238,17 +255,17 @@
       let ch = document.querySelector('#ch')
       let cm = document.querySelector('#cm')
       let cs = document.querySelector('#cs')
-      let oldday = new Date('2021-12-31 23:59:59').getTime()
+      let oldday = new Date('2022-01-01 00:00:00')
       let cinter = setInterval(() => {
-        let newday = new Date().getTime()
-        let secs = Math.round((oldday - newday) / 1000)
+        let newday = new Date()
+        let secs = parseInt((oldday - newday) / 1000)
         if (secs < 0) {
           clearInterval(cinter)
           return
         }
-        cd.innerHTML = Math.floor(secs / 60 / 60 / 24)
-        ch.innerHTML = Math.floor(secs / 60 / 60 % 24)
-        cm.innerHTML = Math.floor(secs / 60 % 60)
+        cd.innerHTML = parseInt(secs / 60 / 60 / 24)
+        ch.innerHTML = parseInt(secs / 60 / 60 % 24)
+        cm.innerHTML = parseInt(secs / 60 % 60)
         cs.innerHTML = secs % 60 > 9 ? secs % 60 : '0' + secs % 60
       }, 1000)
       // cds
@@ -348,6 +365,60 @@
         list.insertBefore(li, list.children[0])
         msg.value = ''
       })
+      // 创建表格
+      let load = document.querySelector('#load')
+      let tbl = document.querySelector('.tbl')
+      load.addEventListener('click', () => {
+        fetch('./data2021/stu.json')
+          .then(res => res.json())
+          .then(res => {
+            display0(res)
+          })
+      })
+      function display0(data) {
+        let startTime = new Date().getTime()
+        data.forEach(item => {
+          let tr = document.createElement('tr')
+          let val = Object.values(item)
+          val.forEach(el => {
+            let td = document.createElement('td')
+            td.innerHTML = el
+            tr.appendChild(td)
+          })
+          tbl.appendChild(tr)
+        });
+        let endTime = new Date().getTime()
+        console.log('took', endTime - startTime);
+      }
+      function display1(data) {
+        let startTime = new Date().getTime()
+        for (let i = 0; i < data.length; i++) {
+          let tr = document.createElement('tr')
+          let item = Object.values(data[i])
+          for (let j = 0; j < item.length; j++) {
+            let td = document.createElement('td')
+            td.innerHTML = item[j]
+            tr.appendChild(td)
+          }
+          tbl.appendChild(tr)
+        }
+        let endTime = new Date().getTime()
+        console.log('took', endTime - startTime);
+      }
+      function display2(data) {
+        let startTime = new Date().getTime()
+        for (let i = 0; i < data.length; i++) {
+          let tr = '<tr>'
+          let item = Object.values(data[i])
+          for (let j = 0; j < item.length; j++) {
+            let td = document.createElement('td')
+            tr += '<td>' + item[j] + '</td>'
+          }
+          tbl.innerHTML += tr
+        }
+        let endTime = new Date().getTime()
+        console.log('took', endTime - startTime);
+      }
     }
   </script>
 </body>
