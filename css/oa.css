@@ -42,13 +42,6 @@ header {
   color: #fff;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin: 1rem auto;
-}
-
 .chap {
   position: relative;
   height: 6rem;
@@ -67,7 +60,7 @@ header {
   transform: rotateY(180deg);
 } */
 
-.grid .chap::before {
+.grid4 .chap::before {
   content: '';
   position: absolute;
   width: 2rem;
@@ -81,35 +74,35 @@ header {
   filter: drop-shadow(.1rem .1rem .2rem #333);
 }
 
-.grid .chap:nth-child(1)::before {
+.grid4 .chap:nth-child(1)::before {
   background-position: 0;
 }
 
-.grid .chap:nth-child(2)::before {
+.grid4 .chap:nth-child(2)::before {
   background-position: calc(100%/7);
 }
 
-.grid .chap:nth-child(3)::before {
+.grid4 .chap:nth-child(3)::before {
   background-position: calc(200%/7);
 }
 
-.grid .chap:nth-child(4)::before {
+.grid4 .chap:nth-child(4)::before {
   background-position: calc(300%/7);
 }
 
-.grid .chap:nth-child(5)::before {
+.grid4 .chap:nth-child(5)::before {
   background-position: calc(400%/7);
 }
 
-.grid .chap:nth-child(6)::before {
+.grid4 .chap:nth-child(6)::before {
   background-position: calc(500%/7);
 }
 
-.grid .chap:nth-child(7)::before {
+.grid4 .chap:nth-child(7)::before {
   background-position: calc(600%/7);
 }
 
-.grid .chap:nth-child(8)::before {
+.grid4 .chap:nth-child(8)::before {
   background-position: 100%;
 }
 
@@ -127,6 +120,7 @@ header {
   position: sticky;
   top: 0px;
   width: 100%;
+  background-color: #fff;
   text-align: center;
   margin: 1rem auto;
   z-index: 99;
@@ -179,6 +173,7 @@ header {
 
 .quiz {
   line-height: 2;
+  padding: 0 1rem;
 }
 
 .quiz-item {
@@ -310,12 +305,11 @@ header {
 }
 
 @media screen and (max-width:768px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-  }
+
   .logo {
     margin-right: 1rem;
   }
+
   .back {
     margin-left: calc(48vw - 2rem);
   }
