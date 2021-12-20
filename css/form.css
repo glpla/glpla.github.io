@@ -1,3 +1,27 @@
+.dice-box {
+  background-color: #000;
+  height: 12rem;
+}
+
+.dice-box .dice {
+  width: 125px;
+  height: 125px;
+  background-image: url(../imgs/dice.jpg);
+  background-position: -20%;
+  animation: roll .6s steps(6, start) infinite;
+  cursor: pointer;
+}
+
+.dice-box input:checked+.dice {
+  animation-play-state: paused;
+}
+
+@keyframes roll {
+  to {
+    background-position: 100%;
+  }
+}
+
 .info {
   width: 80%;
   margin: 0 auto;

@@ -190,7 +190,7 @@ section {
 #page li {
   float: left;
   position: relative;
-  width: 25%;
+  width: 20%;
   height: 100%;
   transform-style: preserve-3d;
 }
@@ -210,6 +210,11 @@ section {
 #page li:nth-child(4) {
   z-index: -1;
   transition: all 1.9s ease;
+}
+
+#page li:nth-child(5) {
+  z-index: -2;
+  transition: all 2.1s ease;
 }
 
 #page li div {
@@ -240,19 +245,27 @@ section {
   background-image: url(../imgs/slider4.jpg);
 }
 
+#page li div:nth-child(5) {
+  background-image: url(../imgs/slider5.jpg);
+}
+
 #page li:nth-child(1) div {
   background-position: 0 center;
 }
 
 #page li:nth-child(2) div {
-  background-position: 33.3% center;
+  background-position: 25% center;
 }
 
 #page li:nth-child(3) div {
-  background-position: 66.7% center;
+  background-position: 50% center;
 }
 
 #page li:nth-child(4) div {
+  background-position: 75% center;
+}
+
+#page li:nth-child(5) div {
   background-position: 100% center;
 }
 
@@ -300,24 +313,30 @@ section {
     width: 320px;
     height: 180px;
   }
+
   @keyframes slider {
     to {
       transform: translateX(calc(-320px*5));
     }
   }
+
   /* 改变图片大小以适应当前屏幕 */
   #page li div {
     background-size: 320px;
   }
+
   #page li div:nth-child(1) {
     transform: translateZ(-80px) rotateX(180deg);
   }
+
   #page li div:nth-child(2) {
     transform: translateY(80px) rotateX(-90deg);
   }
+
   #page li div:nth-child(3) {
     transform: translateY(-80px) rotateX(90deg);
   }
+
   #page li div:nth-child(4) {
     transform: translateZ(80px);
   }
