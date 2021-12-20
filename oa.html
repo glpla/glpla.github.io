@@ -95,7 +95,6 @@
   <script src="./js/jquery.magnific-popup.min.js"></script>
   <script type="module">
     import oa from './data2021/oa.js'
-    import './js/smooth-scroll.polyfills.min.js'
     const app = Vue.createApp({
       data() {
         return {
@@ -208,7 +207,6 @@
             this.$refs.s1.innerHTML = sec % 10
           }, 1000)
         },
-        back2top() { }
       },
       computed: {
         res() {
@@ -255,31 +253,14 @@
             magnificPopup.close();
           })
         })
-
-      },
-      mounted() {
         window.addEventListener('scroll', (e) => {
-          // console.log(e);
-          // console.log('e.target.scrollingElement.scrollTop', e.target.scrollingElement.scrollTop);
-          // console.log('e.srcElement.scrollingElement.scrollTop', e.srcElement.scrollingElement.scrollTop);
-          // console.log('document', document.documentElement.scrollTop || document.body.scrollTop);
-          // IE8-请使用上述方法；其它浏览器推荐使用如下属性。注意是只读属性
-          // console.log('window.pageYOffset', window.pageYOffset);
-          // console.log('window', window.innerHeight);
           if (window.pageYOffset > window.innerHeight) {
-            // console.log(this.$refs.back);
-            // this.$refs.back.classList.add('show')
             this.showBool = true
           } else {
             this.showBool = false
           }
-          // console.log(this.$refs.back.classList);
         })
-        new SmoothScroll('a[href*="#"]', {
-          speed: 300,
-          easing: 'easeInCubic'
-        })
-      },
+      }
     })
     const vm = app.mount('#app')
   </script>
