@@ -63,7 +63,7 @@
     <pre class="code">
     &lt;input type="submit" value="submit"&gt;
     //也可以直接使用&lt;button&gt;
-    &lt;button&gt;submit&lt;/button&gt;    </pre>
+    &lt;button&gt;submit&lt;/button&gt;</pre>
     <h4 class="exam-title">dice</h4>
     <strong>知识点</strong>
     <p>1.精灵图：background-position</p>
@@ -78,7 +78,43 @@
     .dice-box input:checked+.dice {
       animation-play-state: paused;
     }</pre>
-    <a href="./swiper.html" target="_blank" class="link">点击访问更多表单元素使用</a>
+    <h4 class="exam-title">swiper</h4>
+    <strong>知识点</strong>
+    <p>1.过渡动画</p>
+    <p>2.表单元素选中选择器:checked</p>
+    <p>3.兄弟选择器~</p>
+    <p>4.结构伪类选择器:nth-child()</p>
+    <p>5.弹性盒子flex</p>
+    <div class="swiper-box">
+      <input type="radio" name="img" id="img0" hidden checked>
+      <input type="radio" name="img" id="img1" hidden>
+      <input type="radio" name="img" id="img2" hidden>
+      <div class="img-box">
+        <div class="imgs">
+          <img src="./imgs/1.jpg" alt="">
+          <img src="./imgs/2.jpg" alt="">
+          <img src="./imgs/3.jpg" alt="">
+        </div>
+      </div>
+      <div class="label-box">
+        <label for="img0"></label>
+        <label for="img1"></label>
+        <label for="img2"></label>
+      </div>
+    </div>
+    <pre class="code">
+    .swiper-box input:nth-child(1):checked~.img-box .imgs {
+      margin-left: 0px;
+    }
+    
+    .swiper-box input:nth-child(2):checked~.img-box .imgs {
+      margin-left: -320px;
+    }
+    
+    .swiper-box input:nth-child(3):checked~.img-box .imgs {
+      margin-left: -640px;
+    }    </pre>
+    <a href="./swiper.html" target="_blank" class="link">点击访问更多轮播实现</a>
     <h4 class="cont-title">下拉列表select</h4>
     <p>size：指定显示几个option；通常不指定，以免影响页面布局</p>
     <pre class="code">
