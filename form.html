@@ -64,7 +64,7 @@
     &lt;input type="submit" value="submit"&gt;
     //也可以直接使用&lt;button&gt;
     &lt;button&gt;submit&lt;/button&gt;</pre>
-    <h4 class="exam-title">label</h4>
+    <h4 class="exam-title">有用的&lt;label&gt;</h4>
     <strong>简介</strong>
     <p>增加交互热区，提升用户体验：在&lt;label&gt;上做文章</p>
     <pre class="code">
@@ -75,7 +75,7 @@
     &lt;label&gt;
         &lt;input type='text'&gt;&lt;/input&gt;
     &lt;/label&gt;</pre>
-    <h4 class="exam-title">dice</h4>
+    <h4 class="exam-title">骰子Dice</h4>
     <strong>知识点</strong>
     <p>1.精灵图：background-position</p>
     <p>2.帧动画：步进、动画状态控制</p>
@@ -89,7 +89,7 @@
     .dice-box input:checked+.dice {
       animation-play-state: paused;
     }</pre>
-    <h4 class="exam-title">swiper</h4>
+    <h4 class="exam-title">轮播图Swiper</h4>
     <strong>知识点</strong>
     <p>1.过渡动画</p>
     <p>2.表单元素选中选择器:checked</p>
@@ -126,6 +126,65 @@
       margin-left: -640px;
     }    </pre>
     <a href="./swiper.html" target="_blank" class="link">点击访问更多轮播实现</a>
+    <h4 class="exam-title">详情页Details</h4>
+    <div class="grid2">
+      <div>
+        <strong>知识点</strong>
+        <p>1.父相子绝</p>
+        <p>2.表单元素选中选择器:checked</p>
+        <p>3.兄弟选择器~</p>
+        <p>4.结构伪类选择器:nth-child()</p>
+        <p>5.弹性盒子flex</p>
+        <p>6.过渡动画</p>
+        <p>层级堆叠顺序z-index</p>
+      </div>
+      <div>
+        <strong>关键点</strong>
+        <p>改变背景颜色</p>
+        <p>改变图片前后重叠顺序</p>
+        <p>改变当前图片对应的按钮样式</p>
+      </div>
+    </div>
+
+    <div class="product-box">
+      <input type="radio" name="pro" id="p0" hidden checked>
+      <input type="radio" name="pro" id="p1" hidden>
+      <input type="radio" name="pro" id="p2" hidden>
+      <input type="radio" name="pro" id="p3" hidden>
+      <div class="products-box">
+        <div class="inner-box">
+          <div class="products">
+            <img src="./imgs/rose.jpg" alt="">
+            <img src="./imgs/yellow.jpg" alt="">
+            <img src="./imgs/blue.jpg" alt="">
+            <img src="./imgs/green.jpg" alt="">
+          </div>
+          <div class="products-lbl">
+            <label for="p0" class="red"></label>
+            <label for="p1" class="yel"></label>
+            <label for="p2" class="blu"></label>
+            <label for="p3" class="gre"></label>
+          </div>
+          <div class="products-info">
+            <span class="price">&yen;90</span>
+            <span class="cart">添加到购物车<span class="iconfont">&#xe832;</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pre class="code">
+    .product-box input:nth-child(1):checked ~ .products-box .products img:nth-child(1) {
+      z-index: 99;
+    }
+    .product-box input:nth-child(2):checked ~ .products-box .products img:nth-child(2) {
+      z-index: 99;
+    }
+    .product-box input:nth-child(3):checked ~ .products-box .products img:nth-child(3) {
+      z-index: 99;
+    }
+    .product-box input:nth-child(4):checked ~ .products-box .products img:nth-child(4) {
+      z-index: 99;
+    }</pre>
     <h4 class="cont-title">下拉列表select</h4>
     <p>size：指定显示几个option；通常不指定，以免影响页面布局</p>
     <pre class="code">
