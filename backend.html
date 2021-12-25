@@ -72,13 +72,24 @@
       }
     }
 
-    #axios {
+    #axios,
+    #axios-re {
       width: 100%;
       height: 30px;
       background-color: #f40;
       color: #fff;
       margin: 1rem auto;
       border: none;
+    }
+
+    #axios-remote p {
+      text-align: justify;
+      margin-top: 1rem;
+      padding: .4rem 1rem;
+    }
+
+    #axios-remote p:nth-child(odd) {
+      background-color: rgba(255, 68, 0, 0.1);
     }
   </style>
 </head>
@@ -135,17 +146,53 @@
     <article>
       <div class="cont-title">简介</div>
       <p>通用、主流的第三方库；用于获取本地和远程json数据</p>
-      <div class="cont-title">案例</div>
-      <button id='axios'>点击获取本地数据</button>
       <pre class="code">
       //cdn方式引入库
-      &lt;script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"&gt;&lt;/script&gt;
-      </pre>
+      &lt;script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"&gt;&lt;/script&gt;</pre>
       <pre class="code">
       //get数据
       axios
-        .get('./oa.json')
-        .then(res => { console.log(res); })</pre>
+      .get('./oa.json')
+      .then(res => { console.log(res); })</pre>
+      <h4 class="exam-title">案例：获取本地数据</h4>
+      <strong>知识点</strong>
+      <p>1.如何渲染获取到的数据？使用新节点？使用innerHtml？</p>
+      <p>2.表格&lt;table&gt;的使用：使用默认表格还是特别指定表头&lt;thead&gt;和表体&lt;tbody&gt;？</p>
+      <button id='axios'>点击获取WEB知识体系</button>
+      <table class="tbl" cellpadding='6'>
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>内容</th>
+            <th>难度</th>
+          </tr>
+        </thead>
+        <tbody id="axios-local"></tbody>
+      </table>
+      <pre class="code">
+      //使用节点
+      for (let i = 0; i &lt; res.data.length; i++) {
+        let tr = document.createElement('tr')
+        for (let item in res.data[i]) {
+          let td = document.createElement('td')
+          td.innerHTML = res.data[i][item]
+          tr.appendChild(td)
+        }
+        axiosLocal.appendChild(tr)
+      }</pre>
+      <pre class="code">
+      //使用innerHtml
+      for (let i = 0; i &lt; res.data.length; i++) {
+        let tr = '<tr>'
+        for (let item in res.data[i]) {
+          tr += '<td>' + res.data[i][item] + '</td>'
+        }
+        tr += '</tr>'
+        axiosLocal.innerHTML += tr
+      }</pre>
+      <h4 class="exam-title">案例：获取远程数据</h4>
+      <button id='axios-re'>点击获取每日一笑</button>
+      <div id="axios-remote"></div>
       <a href="https://www.axios-http.cn/" class="link">更多信息，点击访问axios中文网</a>
     </article>
     <h1>综合案例</h1>
@@ -288,11 +335,46 @@
               }
             })
         })
-        document.querySelector('#axios').addEventListener('click', () => {
+        // axios
+        let axios0 = document.querySelector('#axios')
+        let axiosLocal = document.querySelector('#axios-local')
+        axios0.addEventListener('click', () => {
+          axiosLocal.innerHTML = ''
           axios
             .get('./data2021/stu.json')
             .then(res => {
-              console.log(res.data);
+              for (let i = 0; i < res.data.length; i++) {
+                let tr = document.createElement('tr')
+                for (let item in res.data[i]) {
+                  let td = document.createElement('td')
+                  td.innerHTML = res.data[i][item]
+                  tr.appendChild(td)
+                }
+                axiosLocal.appendChild(tr)
+              }
+              // for (let i = 0; i < res.data.length; i++) {
+              //   let tr = '<tr>'
+              //   for (let item in res.data[i]) {
+              //     tr += '<td>' + res.data[i][item] + '</td>'
+              //   }
+              //   tr += '</tr>'
+              //   axiosLocal.innerHTML += tr
+              // }
+            })
+        })
+        let axios1 = document.querySelector('#axios-re')
+        let axiosRe = document.querySelector('#axios-remote')
+        axios1.addEventListener('click', () => {
+          axiosRe.innerHTML = ''
+          axios
+            .get('https://api.apiopen.top/getJoke?page=1&count=10&type=text')
+            .then(res => {
+              console.log(res.data.result);
+              for (let index = 0; index < res.data.result.length; index++) {
+                let p = document.createElement('p')
+                p.innerHTML = (index + 1) + '. ' + res.data.result[index].text;
+                axiosRe.appendChild(p)
+              }
             })
         })
       }
