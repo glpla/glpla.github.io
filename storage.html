@@ -8,6 +8,11 @@
   <title>LocalStorage</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/reset.css">
+  <style>
+    .w {
+      overflow: hidden;
+    }
+  </style>
 </head>
 
 <body>
@@ -16,76 +21,138 @@
     <section>
       <strong>特点</strong>
       <p>以值对的形式存储在本地</p>
+      <p>是window的全局对象</p>
       <p>持久化保存，除非用户主动清除</p>
       <p>读取方便</p>
       <p>存储容量大，约20MB</p>
       <p>只能存字符串String！！！</p>
-      <p>类型转换：使用Number()将数值类字符串转换为数字；使用JSON.stringify()将String转化成JSON；使用JSON.parse()将JSON转换成String</p>
       <p>不会出现在请求头中，可以节省带宽</p>
       <p>不会被网络爬虫抓取</p>
       <p>不同浏览器保存的数据不能共享</p>
       <strong>常用方法</strong>
-      <p class="line-dot">设置值对<span class="dot"></span>window.localStorage.setItem(key,value)</p>
-      <p class="line-dot">根据key获取值对<span class="dot"></span>window.localStorage.getItem(key)</p>
-      <p class="line-dot">删除值对<span class="dot"></span>window.localStorage.removeItem(key)</p>
-      <p class="line-dot">清空数据<span class="dot"></span>window.localStorage.clear()</p>
-      <p class="line-dot">根据索引获取值对<span class="dot"></span>window.localStorage.key(n)</p>
+      <p class="line-dot">设置值对<span class="dot"></span>localStorage.setItem(key,value)</p>
+      <p class="line-dot">根据key获取值对<span class="dot"></span>localStorage.getItem(key)</p>
+      <p class="line-dot">删除值对<span class="dot"></span>localStorage.removeItem(key)</p>
+      <p class="line-dot">清空数据<span class="dot"></span>localStorage.clear()</p>
+      <p class="line-dot">根据索引获取值对<span class="dot"></span>localStorage.key(n)</p>
       <strong>常用属性</strong>
-      <p class="line-dot">保存数据的个数<span class="dot"></span>window.localStorage.length</p>
+      <p class="line-dot">保存数据的个数<span class="dot"></span>localStorage.length</p>
       <strong>查看保存的数据</strong>
       <p>F12 -&gt; Application -&gt; Storage -&gt; Loacal Storage</p>
+      <p>提示：通过浏览器log的结果文字的颜色判断其类型：<span style="color: #000;font-weight :700;">黑色</span>为字符串；<span
+          style="color: #369;font-weight:700;">蓝色</span>为数字</p>
     </section>
-    <div class="exam-title">保存单独的值对</div>
+    <div class="exam-title">数值Number</div>
     <section>
-      <p>操作：分别设置数字型和字符串型数据，并根据数据的有无，体会localStorage的基本操作；</p>
-      <p>提示：通过浏览器log的结果文字的颜色判断其类型：黑色为字符串；蓝色为数字</p>
       <pre class="code">
-    window.localStorage.setItem('num',2114)
-    window.localStorage.setItem('str','male')
-    console.log(num,Number(window.localStorage.getItem('num')));
-    console.log(str,String(window.localStorage.getItem('str')));    </pre>
+      //设置
+      localStorage.setItem('num', 2114)
+      //获取
+      let num = localStorage.getItem('num')
+      console.log(num, Number(num));</pre>
     </section>
-    <div class="exam-title">保存数组[]</div>
+    <div class="exam-title">字符串String</div>
     <section>
-      <p>操作：尝试设置数据为数组，并查看log结果；配合JSON.stringify()和JSON.parse()完成</p>
       <pre class="code">
-    // window.localStorage.setItem('arr',['123','234'])
-    window.localStorage.setItem('arr',JSON.stringify(['123','234']))
-    console.log(arr,JSON.parse(window.localStorage.getItem('arr')));    </pre>
+      //设置
+      localStorage.setItem('str', 'male')
+      //获取
+      let str = localStorage.getItem('str')
+      console.log(str);</pre>
     </section>
-    <div class="exam-title">保存对象{}</div>
+    <div class="exam-title">布尔Boolean</div>
     <section>
-      <p>操作：尝试设置数据为对象，并查看log结果；配合JSON.stringify()和JSON.parse()完成</p>
       <pre class="code">
-    // window.localStorage.setItem('obj',{name:'glc'})
-    window.localStorage.setItem('obj',JSON.stringify({name:'glc'}))
-    console.log(obj,JSON.parse(window.localStorage.getItem('obj')));    </pre>
+      //设置
+      localStorage.setItem('bool', true)
+      //获取
+      let bool = localStorage.getItem('bool')
+      console.log(bool, Boolean(bool));</pre>
     </section>
-    <h4 class="cont-title">作业和练习</h4>
+    <div class="exam-title">数组Array</div>
     <section>
-      <p>1.体会保存数组对象[{}]的基本操作</p>
-      <p>2.完成页面本地计数器的功能</p>
+      <pre class="code">
+      let arr = [1, 2, 3, 4, 5]
+      localStorage.setItem('arr', arr)
+      let tmpArr0 = localStorage.getItem('arr')
+      console.log(tmpArr0);
+
+      // 使用JSON.stringify转换为字符串
+      localStorage.setItem('arr', JSON.stringify(arr))
+      let tmpArr1 = localStorage.getItem('arr')
+      console.log(tmpArr1);
+
+      // 使用JSON.parse解析字符串
+      let tmpArr2 = JSON.parse(localStorage.getItem('arr'))
+      console.log(tmpArr2);</pre>
+    </section>
+    <div class="exam-title">对象Object</div>
+    <section>
+      <pre class="code">
+      let obj = { name: 'glc' }
+      localStorage.setItem('obj', obj)
+      let obj0 = localStorage.getItem('obj')
+      console.log(obj0);
+
+      //使用JSON.stringify转换
+      localStorage.setItem('obj', JSON.stringify(obj))
+      // 使用JSON.parse解析
+      let obj1 = JSON.parse(localStorage.getItem('obj'))
+      console.log(obj1);</pre>
+    </section>
+    <h4 class="cont-title">总结Summary</h4>
+    <section>
+      <p>1.数据的设置和获取默认都是为字符串</p>
+      <p>2.如果存储的是数值型数据，获取时应使用Number()转换为数字</p>
+      <p>3.复合数据类型如数组和对象，保存时应使用 JSON.stringify() 转换；获取时应使用 JSON.parse() 解析；两者要配合使用</p>
+      <p>4.如果数据不存在，返回为null</p>
+    </section>
+    <h4 class="cont-title">练习Coding</h4>
+    <section>
+      <p>1.完成以上操作，体会本地存储的特点</p>
+      <p>2.体会保存数组对象[{}]的基本操作，并思考和其它数据类型的异同</p>
+      <p>3.创建一个登陆表单，实现保存用户名和密码的操作，以便于下次直接登陆</p>
     </section>
     <small>Copyright Reserved &copy; By Cnplaman 2021-10-06</small>
   </div>
   <script>
     window.onload = function () {
-      // window.localStorage.clear()
-      let num = window.localStorage.getItem('num')
-      let str = window.localStorage.getItem('str')
-      let arr = window.localStorage.getItem('arr')
-      let obj = window.localStorage.getItem('obj')
-      let len = window.localStorage.length
-      window.localStorage.setItem('num', 2114)
-      window.localStorage.setItem('str', 'male')
-      // window.localStorage.setItem('arr',['123','234'])
-      window.localStorage.setItem('arr', JSON.stringify(['123', '234']))
-      // window.localStorage.setItem('obj',{name:'glc'})
-      window.localStorage.setItem('obj', JSON.stringify({ name: 'glc' }))
-      console.log(num, Number(window.localStorage.getItem('num')));
-      console.log(str, String(window.localStorage.getItem('str')));
-      console.log(arr, JSON.parse(window.localStorage.getItem('arr')));
-      console.log(obj, JSON.parse(window.localStorage.getItem('obj')));
+      localStorage.clear()
+
+      localStorage.setItem('num', 2114)
+      let num = localStorage.getItem('num')
+      console.log(num, Number(num));
+
+      localStorage.setItem('str', 'male')
+      let str = localStorage.getItem('str')
+      console.log(str);
+
+      localStorage.setItem('bool', true)
+      let bool = localStorage.getItem('bool')
+      console.log(bool, Boolean(bool));
+
+      let arr = [1, 2, 3, 4, 5]
+      localStorage.setItem('arr', arr)
+      let tmpArr0 = localStorage.getItem('arr')
+      console.log(tmpArr0);
+      // 使用JSON.stringify转换为字符串
+      localStorage.setItem('arr', JSON.stringify(arr))
+      let tmpArr1 = localStorage.getItem('arr')
+      console.log(tmpArr1);
+      // 使用JSON.parse解析字符串
+      let tmpArr2 = JSON.parse(localStorage.getItem('arr'))
+      console.log(tmpArr2);
+
+      let obj = { name: 'glc' }
+      localStorage.setItem('obj', obj)
+      let obj0 = localStorage.getItem('obj')
+      console.log(obj0);
+
+      //使用JSON.stringify转换
+      localStorage.setItem('obj', JSON.stringify(obj))
+      // 使用JSON.parse解析
+      let obj1 = JSON.parse(localStorage.getItem('obj'))
+      console.log(obj1);
     }
   </script>
 </body>
