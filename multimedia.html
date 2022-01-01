@@ -50,6 +50,54 @@
       <p class="line-dot">muted<span class="dot"></span>静音播放</p>
       <p class="line-dot">preload<span class="dot"></span>预加载；如果使用autoplay，则忽略该属性</p>
       <p class="line-dot">poster<span class="dot"></span>视频封面图像；可以使用gif；大小应该和视频保持一致</p>
+      <strong>&lt;video&gt;事件</strong>
+      <pre class="code">
+      video.addEventListener('loadstart', () => {
+        console.log('1.loadstart');
+        console.log('duration', video.duration);
+      })
+      video.addEventListener('durationchange', () => {
+        console.log('2.durationchange');
+        console.log('duration', video.duration);
+      })
+      video.addEventListener('loadedmetadata', () => {
+        console.log('3.loadedmetadata');
+        console.log('duration', video.duration);
+      })
+      video.addEventListener('loadeddata', () => {
+        console.log('4.loadeddata');
+      })
+      video.addEventListener('canplay', () => {
+        console.log('5.canplay');
+      })
+      video.addEventListener('play', () => {
+        console.log('play');
+      })
+      video.addEventListener('playing', () => {
+        console.log('playing');
+      })
+      video.addEventListener('pause', () => {
+        console.log('pause');
+      })
+      video.addEventListener('seeking', () => {
+        console.log('seeking');
+      })
+      video.addEventListener('seeked', () => {
+        console.log('seeked');
+      })
+      video.addEventListener('progress', () => {
+        console.log('progress');
+      })
+      video.addEventListener('ended', () => {
+        console.log('ended');
+      })
+      video.addEventListener('error', () => {
+        console.log('error');
+      })
+      video.addEventListener('timeupdate', () => {
+        let current = video.currentTime;
+        console.log('timeupdate', current);
+      })</pre>
     </section>
     <div class="exam-title">音频使用</div>
     <section>
@@ -68,7 +116,7 @@
     </section>
     <div class="exam-title">视频使用</div>
     <section>
-      <video id='my-video' src="video/effect.mp4" loop controls preload poster="imgs/quiz.png">您的浏览器不支持video标签</video>
+      <video id='my-video' src="video/effect.mp4" controls preload poster="imgs/quiz.png">您的浏览器不支持video标签</video>
       <pre class="code">
     video {
       width: 100%;
@@ -116,15 +164,57 @@
 
     let video = document.getElementById("my-video");
     let last = 0;
-    video.ontimeupdate = function () {
+    video.addEventListener('loadstart', () => {
+      console.log('1.loadstart');
+      console.log('duration', video.duration);
+    })
+    video.addEventListener('durationchange', () => {
+      console.log('2.durationchange');
+      console.log('duration', video.duration);
+    })
+    video.addEventListener('loadedmetadata', () => {
+      console.log('3.loadedmetadata');
+      console.log('duration', video.duration);
+    })
+    video.addEventListener('loadeddata', () => {
+      console.log('4.loadeddata');
+    })
+    video.addEventListener('canplay', () => {
+      console.log('5.canplay');
+    })
+    video.addEventListener('play', () => {
+      console.log('play');
+    })
+    video.addEventListener('playing', () => {
+      console.log('playing');
+    })
+    video.addEventListener('pause', () => {
+      console.log('pause');
+    })
+    video.addEventListener('seeking', () => {
+      console.log('seeking');
+    })
+    video.addEventListener('seeked', () => {
+      console.log('seeked');
+    })
+    video.addEventListener('progress', () => {
+      console.log('progress');
+    })
+    video.addEventListener('ended', () => {
+      console.log('ended');
+    })
+    video.addEventListener('error', () => {
+      console.log('error');
+    })
+    video.addEventListener('timeupdate', () => {
       let current = video.currentTime;
-      console.log(current);
-      if (current - last > 2) {
-        video.currentTime = last;
-      } else {
-        last = current;
-      }
-    };
+      console.log('timeupdate', current);
+      // if (current - last > 2) {
+      //   video.currentTime = last;
+      // } else {
+      //   last = current;
+      // }
+    })    
   </script>
 </body>
 
