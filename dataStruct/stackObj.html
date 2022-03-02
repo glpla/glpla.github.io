@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stack with Object</title>
+  <link rel="stylesheet" href="../css/reset.css">
+</head>
+
+<body>
+  <section class="w">
+    <h1>Stack With Object</h1>
+    <pre class="code">
+  class Stack {
+    constructor() {
+      this.count = 0
+      this.items = {}
+    }
+    push(el) {
+      this.items[this.count] = el
+      this.count++
+    }
+    pop() {
+      if (!this.count) {
+        return undefined
+      }
+      this.count--
+      let res = this.items[this.count]
+      delete this.items[this.count]
+      return res
+    }
+    peek() {
+      return this.items[this.count - 1]
+    }
+    isEmpty() {
+      return this.count == 0
+    }
+    size() {
+      return this.count
+    }
+    toString() {
+      return this.items.join('-')
+    }
+    clear() {
+      this.items = []
+      this.count = 0
+    }
+  }
+ </pre>
+    <small>Copyright Reserved &copy; By Cnplaman 2022-03-02</small>
+  </section>
+</body>
+
+</html>
