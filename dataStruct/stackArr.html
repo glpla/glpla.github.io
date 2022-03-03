@@ -12,72 +12,60 @@
 <body>
   <section class="w">
     <h1>Stack With Array</h1>
-    <pre class="code">
-  function Stack() {
-    this.items = []
-    Stack.prototype.push = function (el) {
-      return this.items.push(el)
-    }
-    Stack.prototype.pop = function () {
-      return this.items.pop()
-    }
-    Stack.prototype.peek = function () {
-      return this.items[this.items.length - 1]
-    }
-    Stack.prototype.isEmpty = function () {
-      return this.items.length == 0
-    }
-    Stack.prototype.size = function () {
-      return this.items.length
-    }
-    Stack.prototype.toString = function () {
-      return this.items.join('-')
-    }
-    Stack.prototype.clear = function () {
-      return this.items = []
-    }
-  }
-    </pre>
     <small>Copyright Reserved &copy; By Cnplaman 2022-03-02</small>
   </section>
   <script>
-    // solution 1
-    class Stack {
+    class StackArr {
       constructor() {
-        this.count = 0;
         this.items = [];
       }
       push(el) {
         this.items.push(el)
-        this.count++
       }
       pop() {
         this.items.pop()
-        this.count--
       }
       peek() {
-        return this.items[this.count - 1]
+        return this.items[this.items.length - 1]
       }
       isEmpty() {
-        return this.count == 0
+        return this.items.length == 0
       }
       size() {
-        return this.count
+        return this.items.length
       }
       toString() {
         return this.items.join('-')
       }
       clear() {
         this.items = []
-        this.count = 0
       }
     }
-    // usage
-    const stack = new Stack();
-    stack.push(2)
-    stack.push(21)
-    stack.push(22)
-    console.log(stack.toString());
+    // old solution
+    function Stack() {
+      this.items = []
+      Stack.prototype.push = function (el) {
+        return this.items.push(el)
+      }
+      Stack.prototype.pop = function () {
+        return this.items.pop()
+      }
+      Stack.prototype.peek = function () {
+        return this.items[this.items.length - 1]
+      }
+      Stack.prototype.isEmpty = function () {
+        return this.items.length == 0
+      }
+      Stack.prototype.size = function () {
+        return this.items.length
+      }
+      Stack.prototype.toString = function () {
+        return this.items.join('-')
+      }
+      Stack.prototype.clear = function () {
+        return this.items = []
+      }
+    }    
   </script>
 </body>
 

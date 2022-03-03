@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Queue</title>
+  <link rel="stylesheet" href="../css/reset.css">
+</head>
+
+<body>
+  <section class="w">
+    <h1>Queue</h1>
+    <small>Copyright Reserved &copy; By Cnplaman 2022-03-02</small>
+  </section>
+  <script>
+    class Queue {
+      constructor() {
+        this.count = 0;
+        this.lowestCount = 0;
+        this.items = {};
+      }
+      enqueue(element) {
+        this.items[this.count] = element;
+        this.count++;
+      }
+      dequeue() {
+        if (this.isEmpty()) {
+          return undefined;
+        }
+        const result = this.items[this.lowestCount];
+        delete this.items[this.lowestCount];
+        this.lowestCount++;
+        return result;
+      }
+      size() {
+        return this.count - this.lowestCount;
+      }
+      peek() {
+        if (this.isEmpty()) {
+          return undefined;
+        }
+        return this.items[this.lowestCount];
+      }
+
+      isEmpty() {
+        return this.size() === 0;
+      }
+      clear() {
+        this.items = {};
+        this.count = 0;
+        this.lowestCount = 0;
+      }
+      toString() {
+        if (this.isEmpty()) {
+          return '';
+        }
+        let objString = `${this.items[this.lowestCount]}`;
+        for (let i = this.lowestCount + 1; i < this.count; i++) {
+          objString = `${objString},${this.items[i]}`;
+        }
+        return objString;
+      }
+    }
+    // old solution
+    function QueueOld() {
+      this.items = []
+      QueueOld.prototype.enQueue = function (data) {
+        this.items.push(data)
+      }
+      QueueOld.prototype.deQueue = function () {
+        return this.items.shift()
+      }
+      QueueOld.prototype.front = function () {
+        console.log(this.items[0]);
+        return this.items[0]
+      }
+      QueueOld.prototype.isEmpty = function () {
+        return this.items.length == 0
+      }
+      QueueOld.prototype.size = function () {
+        return this.items.length
+      }
+      QueueOld.prototype.toString = function () {
+        let str = ''
+        for (let i = 0; i < this.items.length; i++) {
+          str += this.items[i] + ' '
+        }
+        console.log('tostring:', str);
+        return str
+        // return this.items.join('')
+      }
+    }
+    // testing
+    // let q = new Queue()
+    // q.enQueue(1)
+    // q.enQueue(2)
+    // q.enQueue(3)
+    // q.enQueue(4)
+    // q.front()
+    // q.toString()
+    // q.deQueue()
+    // q.front()
+    // q.toString()
+
+    // application
+    function circle(total, step) {
+      let q = new QueueOld()
+      //Q&A: create real queue with name, such as lily, mike, tom, and so on
+      for (let i = 0; i < total; i++) {
+        q.enQueue(i + 1)
+      }
+      q.toString()
+      let sn = 0
+      //Q&A: what if isEmpty()?
+      while (q.size() > 1) {
+        //Q&A: what if for
+        while (step > 1) {
+          q.enQueue(q.deQueue())
+          step -= 1
+        }
+        // for (let i = 1; i < step; i++) {
+        //   q.enQueue(q.deQueue())
+        // }
+        let res = q.deQueue()
+        step = 3
+        sn++
+        console.log(`round ${sn}:${res}`);
+        q.toString()
+      }
+    }
+    circle(10, 3)
+  </script>
+</body>
+
+</html>
