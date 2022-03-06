@@ -15,7 +15,8 @@
     <pre class="code">
       #include &lt;stdio.h&gt;
       #include &lt;stdlib.h&gt;
-      #define maxSize 20
+      
+      #define maxSize 5
       
       typedef struct
       {
@@ -36,49 +37,129 @@
         list->size = maxSize;
         printf("list length=%d\n", list->len);
       }
-
+      
+      void clear(List *list)
+      {
+        free(list);
+      }
+      
+      int isEmpty(List *list)
+      {
+        return list->len == 0;
+      }
+      
       void toString(List *list)
       {
-        printf("list start\n");
         for (int i = 0; i < list->len; i++)
         {
           printf("%d\n", list->data[i]);
         }
-        printf("list end\n");
       }
       
-      void sizeOfList(List *list)
+      int length(List *list)
       {
         printf("size=%d\n", list->len);
+        return list->len;
       }
-
+      
       void insert(List *list, int el)
       {
-        printf("before size=%d\n", list->len);
         if (list->len == maxSize)
         {
           return;
         }
         list->data[list->len] = el;
         list->len++;
-        printf("after size=%d\n", list->len);
+      }
+      
+      int insertAt(List *list, int loc, int el)
+      {
+        if (loc < 0 || loc > list->len || loc > maxSize)
+        {
+          printf("index overfolw\n");
+          return -1;
+        }
+        for (int i = list->len; i > loc; i--)
+        {
+          list->data[i] = list->data[i - 1];
+        }
+        list->data[loc] = el;
+        list->len++;
+        return 0;
+      }
+      
+      int delAt(List *list, int loc)
+      {
+        if (loc < 0 || loc >= list->len || loc == maxSize)
+        {
+          printf("delete overflow\n");
+          return -1;
+        }
+        for (int i = loc; i < list->len; i++)
+        {
+          list->data[i] = list->data[i + 1];
+        }
+        list->len--;
+        printf("item  at %d deleted\n", loc);
+        return 0;
+      }
+      
+      int update(List *list, int loc, int el)
+      {
+        if (loc < 0 || loc >= list->len || loc == maxSize)
+        {
+          printf("index overflow, update fail\n");
+          return -1;
+        }
+        list->data[loc] = el;
+        printf("item  at %d updated\n", loc);
+        return 0;
+      }
+      
+      int find(List *list, int el)
+      {
+        for (int i = 0; i < list->len; i++)
+        {
+          if (list->data[i] == el)
+          {
+            printf("item %d found at %d\n", el, i);
+            return i;
+          }
+        }
+        printf("item not found\n");
+        return -1;
+      }
+      
+      int findAt(List *list, int loc)
+      {
+        if (loc < 0 || loc >= list->len || loc == maxSize)
+        {
+          printf("index overflow\n");
+          return -1;
+        }
+        printf("item %d at %d found\n", list->data[loc], loc);
+        return list->data[loc];
       }
       
       int main(void)
       {
-        List list;
-        init(&list);
-        toString(&list);
-        sizeOfList(&list);
-        insert(&list, 1);
-        insert(&list, 2);
-        insert(&list, 3);
-        insert(&list, 4);
-        insert(&list, 5);
-        toString(&list);
+        List *list;
+        init(list);
+        insert(list, 1);
+        insert(list, 2);
+        insert(list, 3);
+        insert(list, 4);
+        insert(list, 5);
+        insertAt(list, 1, 111);
+        toString(list);
+        delAt(list, 3);
+        toString(list);
+        findAt(list, 1);
+        find(list, 2);
+        update(list, 4, 101);
+        toString(list);
         return 0;
       }
-        
     </pre>
     <small>Copyright Reserved &copy; By Cnplaman 2022-03-06</small>
   </section>
