@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>linked list</title>
+  <link rel="stylesheet" href="../css/reset.css">
+</head>
+
+<body>
+  <section class="w">
+    <h1>链式表</h1>
+    <pre class="code">
+      #include &lt;stdio.h&gt;
+      #include &lt;stdlib.h&gt;            
+      
+      // node的数据结构
+      typedef struct node
+      {
+        int data;
+        struct node *next;
+      } Node;
+      
+      // head是指向node类型的指针
+      typedef struct
+      {
+        Node *head;
+        int n;
+      } SingleList;
+      
+      int init(SingleList *list)
+      {
+        list->head = (Node *)malloc(sizeof(Node));
+        if (!list->head)
+        {
+          return -1;
+        }
+        list->head->next = NULL;
+        list->n = 0;
+        return 0;
+      }
+      
+      int isEmpty(SingleList *list)
+      {
+        return list->n ? 0 : 1;
+      }
+      
+      int lengthOfList(SingleList *list)
+      {
+        return list->n;
+      }
+      
+      bool insertAtLoc(SingleList *list, int loc, int data)
+      {
+        if (loc < -1 || loc > list->n - 1)
+        {
+          printf("location invaild\n");
+          return false;
+        }
+        Node *p = (Node *)malloc(sizeof(Node));
+        p->data = data;
+        p->next = NULL;
+        if (isEmpty(list))
+          list->head = p;
+        else
+        {
+          Node *tmp = list->head;
+          for (int i = 0; i < loc; i++)
+          {
+            tmp = tmp->next;
+          }
+          p->next = tmp->next;
+          tmp->next = p;
+        }
+        list->n += 1;
+        return true;
+      }
+      
+      int insertInc(SingleList *list, int data)
+      {
+        Node *node, *pre, *p;
+        int ind = 0;
+        node = (Node *)malloc(sizeof(Node));
+        node->data = data;
+        node->next = NULL;
+        pre = list->head;
+        p = list->head->next;
+        while (p && p->data < node->data)
+        {
+          pre = p;
+          p = p->next;
+          ind++;
+        }
+        node->next = p;
+        pre->next = node;
+        list->n++;
+        printf("item %d inserted in %d: ok\n", data, ind);
+        return ind;
+      }
+      
+      int insertDec(SingleList *list, int data)
+      {
+        Node *node, *pre, *p;
+        int ind = 0;
+        node = (Node *)malloc(sizeof(Node));
+        node->data = data;
+        node->next = NULL;
+        pre = list->head;
+        p = list->head->next;
+        while (p && p->data > node->data)
+        {
+          pre = p;
+          p = p->next;
+          ind++;
+        }
+        node->next = p;
+        pre->next = node;
+        list->n++;
+        printf("item %d inserted in %d: ok\n", data, ind);
+        return ind;
+      }      
+      
+      int traversal(SingleList *list)
+      {
+        Node *p;
+        if (!list->head->next)
+        {
+          return -1;
+        }
+        p = list->head->next;
+        while (p)
+        {
+          printf("%d\n", p->data);
+          // why not p++?
+          p = p->next;
+        }
+        printf("len=%d\n", list->n);
+        return 0;
+      }
+      
+      int findAtLoc(SingleList *list, int loc)
+      {
+        if (loc < 0 || loc > list->n - 1)
+        {
+          return -1;
+        }
+        Node *p = list->head->next;
+        for (int i = 0; i < loc; i++)
+        {
+          p = p->next;
+        }
+        return p->data;
+      }
+      
+      int indexOf(SingleList *list, int data)
+      {
+        Node *p = list->head->next;
+        int loc = 0;
+        while (p)
+        {
+          if (p->data != data)
+          {
+            p = p->next;
+          }
+          else
+          {
+            printf("item %d found\n", p->data);
+            return loc;
+          }
+          loc++;
+        }
+        printf("item %d not found\n", data);
+        return -1;
+      }
+      
+      int delAtLoc(SingleList *list, int loc)
+      {
+        if (loc < 0 || loc > list->n - 1)
+        {
+          return -1;
+        }
+        Node *p, *q;
+        q = list->head;
+        p = list->head->next;
+        for (int i = 0; i < loc; i++)
+        {
+          q = p;
+          p = p->next;
+        }
+        q->next = p->next;
+        free(p);
+        list->n--;
+        printf("item in location %d deleted\n", loc);
+        return 0;
+      }
+      
+      int delByData(SingleList *list, int data)
+      {
+        Node *p, *q;
+        p = list->head->next;
+        q = list->head;
+        while (p)
+        {
+          if (p->data != data)
+          {
+            q = p;
+            p = p->next;
+          }
+          else
+          {
+            printf("item %d deleted\n", p->data);
+            q->next = p->next;
+            free(p);
+            list->n--;
+            return 0;
+          }
+        }
+        printf("item %d not found\n", data);
+        return -1;
+      }
+      
+      int updateAtLoc(SingleList *list, int loc, int data)
+      {
+        if (loc < 0 || loc > list->n - 1)
+        {
+          return -1;
+        }
+        Node *p = list->head->next;
+        for (int i = 0; i < loc; i++)
+        {
+          p = p->next;
+        }
+        p->data = data;
+        printf("item in %d updated\n", loc);
+        return 0;
+      }
+      
+      int clear(SingleList *list)
+      {
+        if (!list->head->next)
+        {
+          printf("list is empty\n");
+          return -1;
+        }
+        Node *p, *q;
+        q = list->head;
+        p = q->next;
+        while (q->next)
+        {
+          p = q->next->next;
+          free(q->next);
+          q->next = p;
+        }
+        list->n = 0;
+        printf("list is clear\n");
+        return 0;
+      }
+      int main()
+      {
+        SingleList *list;
+        init(list);
+        insertInc(list, 12);
+        insertInc(list, 3);
+        insertInc(list, 4);
+        insertInc(list, 5);
+        traversal(list);
+        insertDec(list, 112);
+        insertDec(list, 13);
+        insertDec(list, 14);
+        insertDec(list, 15);
+        traversal(list);
+        return 0;
+      }    </pre>
+    <small>Copyright Reserved &copy; By Cnplaman 2022-03-09</small>
+  </section>
+</body>
+
+</html>

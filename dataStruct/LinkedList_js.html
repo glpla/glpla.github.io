@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linked List</title>
+  <link rel="stylesheet" href="../css/reset.css">
+</head>
+
+<body>
+  <section class="w">
+    <h1>链式表(js)</h1>
+    <pre class="code">
+    function LinkedList() {
+      function Node(data) {
+        this.data = data;
+        this.next = null;
+      }
+      this.head = null;
+      this.len = 0;
+
+      LinkedList.prototype.append = function (data) {
+        let node = new Node(data)
+        if (this.len) {
+          let cur = this.head;
+          while (cur.next) {
+            cur = cur.next;
+          }
+          cur.next = node
+        } else {
+          this.head = node;
+        }
+        this.len += 1;
+      }
+      LinkedList.prototype.insert = function (ind, data) {
+        if (ind < 0 || ind > this.len) {
+          console.log('ind overflow, insert fail');
+          return false;
+        } else {
+          let node = new Node(data)
+          if (!ind) {
+            node.next = this.head
+            this.head = node
+          } else {
+            let cur = this.head
+            for (let i = 0; i < ind - 1; i++) {
+              cur = cur.next
+            }
+            node.next = cur.next
+            cur.next = node
+          }
+          this.len += 1
+          return true
+        }
+      }
+
+      LinkedList.prototype.indexOf = function (data) {
+        let ind = 0
+        let cur = this.head
+        while (cur) {
+          if (cur.data == data) {
+            console.log(`item ${data} found at ${ind}`);
+            return ind
+          }
+          ind++
+          cur = cur.next
+        }
+        console.log(`item ${data} not found`);
+        return false
+      }
+
+      LinkedList.prototype.getItemAt = function (ind) {
+        if (ind < 0 || ind > this.len - 1) {
+          console.log('ind overflow, item get fail');
+          return false;
+        } else {
+          let cur = this.head
+          for (let i = 0; i < ind; i++) {
+            cur = cur.next
+          }
+          console.log('data at ', ind, 'found:', cur.data);
+          return cur.data
+        }
+      }
+
+      LinkedList.prototype.delItemAt = function (ind) {
+        if (ind < 0 || ind > this.len) {
+          console.log('ind overflow, delete fail');
+          return false;
+        } else {
+          if (!ind) {
+            this.head = this.head.next
+          } else {
+            let cur = this.head
+            for (let i = 0; i < ind - 1; i++) {
+              cur = cur.next
+            }
+            cur.next = cur.next.next
+          }
+          this.len -= 1
+          console.log(`item at index ${ind} deleted`);
+          return true
+        }
+      }
+
+      LinkedList.prototype.del = function (data) {
+        let ind = this.indexOf(data)
+        if (ind) {
+          this.delItemAt(ind)
+        } else {
+          console.log(`item ${data} not found`);
+          return false
+        }
+      }
+
+      LinkedList.prototype.toString = function () {
+        let cur = this.head
+        let str = ''
+        while (cur) {
+          str += cur.data + ' ';
+          cur = cur.next
+        }
+        console.log(this.len + ' item(s):', str);
+        return str
+      }
+    }</pre>
+    <small>Copyright Reserved &copy; By Cnplaman 2022-03-09</small>
+  </section>
+  <script>
+    function LinkedList() {
+      function Node(data) {
+        this.data = data;
+        this.next = null;
+      }
+      this.head = null;
+      this.len = 0;
+
+      LinkedList.prototype.append = function (data) {
+        let node = new Node(data)
+        if (this.len) {
+          let cur = this.head;
+          while (cur.next) {
+            cur = cur.next;
+          }
+          cur.next = node
+        } else {
+          this.head = node;
+        }
+        this.len += 1;
+      }
+      LinkedList.prototype.insert = function (ind, data) {
+        if (ind < 0 || ind > this.len) {
+          console.log('ind overflow, insert fail');
+          return false;
+        } else {
+          let node = new Node(data)
+          if (!ind) {
+            node.next = this.head
+            this.head = node
+          } else {
+            let cur = this.head
+            for (let i = 0; i < ind - 1; i++) {
+              cur = cur.next
+            }
+            node.next = cur.next
+            cur.next = node
+          }
+          this.len += 1
+          return true
+        }
+      }
+
+      LinkedList.prototype.indexOf = function (data) {
+        let ind = 0
+        let cur = this.head
+        while (cur) {
+          if (cur.data == data) {
+            console.log(`item ${data} found at ${ind}`);
+            return ind
+          }
+          ind++
+          cur = cur.next
+        }
+        console.log(`item ${data} not found`);
+        return false
+      }
+
+      LinkedList.prototype.getItemAt = function (ind) {
+        if (ind < 0 || ind > this.len - 1) {
+          console.log('ind overflow, item get fail');
+          return false;
+        } else {
+          let cur = this.head
+          for (let i = 0; i < ind; i++) {
+            cur = cur.next
+          }
+          console.log('data at ', ind, 'found:', cur.data);
+          return cur.data
+        }
+      }
+
+      LinkedList.prototype.delItemAt = function (ind) {
+        if (ind < 0 || ind > this.len) {
+          console.log('ind overflow, delete fail');
+          return false;
+        } else {
+          if (!ind) {
+            this.head = this.head.next
+          } else {
+            let cur = this.head
+            for (let i = 0; i < ind - 1; i++) {
+              cur = cur.next
+            }
+            cur.next = cur.next.next
+          }
+          this.len -= 1
+          console.log(`item at index ${ind} deleted`);
+          return true
+        }
+      }
+
+      LinkedList.prototype.del = function (data) {
+        let ind = this.indexOf(data)
+        if (ind) {
+          this.delItemAt(ind)
+        } else {
+          console.log(`item ${data} not found`);
+          return false
+        }
+      }
+
+      LinkedList.prototype.toString = function () {
+        let cur = this.head
+        let str = ''
+        while (cur) {
+          str += cur.data + ' ';
+          cur = cur.next
+        }
+        console.log(this.len + ' item(s):', str);
+        return str
+      }
+    }
+
+    // testing
+    let list = new LinkedList()
+    list.append('123')
+    list.append('234')
+    list.append('345')
+    list.append('22')
+    list.toString()
+    list.getItemAt(2)
+    list.insert(3, '212')
+    list.toString()
+    let res = list.indexOf('123123')
+    console.log('res', res);
+    list.delItemAt(2)
+    list.toString()
+    list.del('22')
+    list.toString()
+    list.append('555')
+    list.toString()
+  </script>
+</body>
+
+</html>
