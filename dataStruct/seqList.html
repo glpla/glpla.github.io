@@ -25,17 +25,16 @@
         int size;
       } List;
 
-      void init(List *list)
+      int init(List *list)
       {
         list->data = (int *)malloc(maxSize * sizeof(int));
         if (!list->data)
         {
-          printf("init fail\n");
-          exit(0);
+          return -1;
         }
         list->len = 0;
         list->size = maxSize;
-        printf("list length=%d\n", list->len);
+        return 0;
       }
       
       void clear(List *list)
@@ -58,25 +57,24 @@
       
       int length(List *list)
       {
-        printf("size=%d\n", list->len);
         return list->len;
       }
       
-      void insert(List *list, int el)
+      int insert(List *list, int el)
       {
         if (list->len == maxSize)
         {
-          return;
+          return -1;
         }
         list->data[list->len] = el;
         list->len++;
+        return 0;
       }
       
       int insertAt(List *list, int loc, int el)
       {
         if (loc < 0 || loc > list->len || loc > maxSize)
         {
-          printf("index overfolw\n");
           return -1;
         }
         for (int i = list->len; i > loc; i--)
@@ -92,7 +90,6 @@
       {
         if (loc < 0 || loc >= list->len || loc == maxSize)
         {
-          printf("delete overflow\n");
           return -1;
         }
         for (int i = loc; i < list->len; i++)
@@ -100,7 +97,6 @@
           list->data[i] = list->data[i + 1];
         }
         list->len--;
-        printf("item  at %d deleted\n", loc);
         return 0;
       }
       
@@ -108,11 +104,9 @@
       {
         if (loc < 0 || loc >= list->len || loc == maxSize)
         {
-          printf("index overflow, update fail\n");
           return -1;
         }
         list->data[loc] = el;
-        printf("item  at %d updated\n", loc);
         return 0;
       }
       
@@ -122,11 +116,9 @@
         {
           if (list->data[i] == el)
           {
-            printf("item %d found at %d\n", el, i);
             return i;
           }
         }
-        printf("item not found\n");
         return -1;
       }
       
@@ -134,10 +126,8 @@
       {
         if (loc < 0 || loc >= list->len || loc == maxSize)
         {
-          printf("index overflow\n");
           return -1;
         }
-        printf("item %d at %d found\n", list->data[loc], loc);
         return list->data[loc];
       }
       
