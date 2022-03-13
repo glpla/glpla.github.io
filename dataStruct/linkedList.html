@@ -52,6 +52,31 @@
         return list->n;
       }
       
+      void insertHead(List *list, int el)
+      {
+        Node *node = (Node *)malloc(sizeof(Node));
+        node->data = el;
+        node->next = list->head->next;
+        list->head->next = node;
+        list->len++;
+      }
+      void insertTail(List *list, int el)
+      {
+        Node *node = (Node *)malloc(sizeof(Node)), *p, *cur;
+        node->data = el;
+        node->next = NULL;
+        cur = list->head;
+        p = cur->next;
+        while (p)
+        {
+          printf("data=%d\n", p->data);
+          cur = cur->next;
+          p = p->next;
+        }
+        cur->next = node;
+        list->len++;
+      }
+
       bool insertAtLoc(SingleList *list, int loc, int data)
       {
         if (loc < -1 || loc > list->n - 1)
