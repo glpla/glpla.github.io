@@ -5,13 +5,23 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pointer</title>
+  <title>Const</title>
   <link rel="stylesheet" href="../css/reset.css">
 </head>
 
 <body>
   <section class="w">
-    <h1>Pointer</h1>
+    <h1>Const</h1>
+    <h2>常量的分类</h2>
+    <div>常量是指程序执行过程中，值不发生改变；分为：直接常量和符号常量；</div>
+    <div>1. 直接常量也称为字面量，可以直接拿来使用，如12、-1.414、'a'，"hello world"；
+      字符常量：以ASCII码来表示，本质上还是一个int数字，如符号常量'a'实际上是整型97，其它：</div>
+    <div>A-Z：65-</div>
+    <div>a-z：97-</div>
+    <div>0-9：48</div>
+    <div>2. 符号常量：宏，原样替换，注意使用()来区分运算的优先级；符号常量必须先定义define再使用，如#define unit 54414</div>
+    <h2>常量的使用</h2>
+    <div>修饰哪个就限制哪个；后面跟什么就限制什么</div>
     <p>case 1：修饰的是int，不允许修改int的值</p>
     <pre class="code">
     const int a = 10;
@@ -23,7 +33,7 @@
     *p = 10;
     //error: assignment of read-only location '*p'：
     //case1和case2实际上是一种情况    </pre>
-    <p>case 3：修饰的是p，指针指向的地址不能变，只能在声明的时候给指针赋值，后面就不可乱指</p>
+    <p>case 3：修饰的是p，指针指向的地址不能变，只能在声明的时候给指针赋值，后面就不可乱指，指向NULL也不可以</p>
     <pre class="code">
     int a = 10;
     int *const p;
