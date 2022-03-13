@@ -12,7 +12,28 @@
 <body>
   <section class="w">
     <h1>String</h1>
-    <p>Q1：逆序输出给定的字符串</p>
+    <p>Q1：什么是字符串？</p>
+    <p>. C中没有字符串类型</p>
+    <p>. 以'\0'为结束标记的连续字符的集合，以""括起来</p>
+    <p>. 结束标记按照char打印不出来；按照int打印为0</p>
+    <p>. 输出串时，应该判断是否是结束标记，而不是判断长度</p>
+    <p>Q1：如何表示一个串？</p>
+    <pre class="code">
+      char *str = "hello, cnplaman.";//指针形式：容易输出；但长度需要使用第三方函数strlen获取
+      char str[] = "hello, cnplaman.";//数组形式：容易获取空间大小(包括结束标记'\0')
+      char str[100] = "hello, cnplaman.";//数组形式
+      char str[100] = {'1', '2', '3'};//字符数组；不建议。如果没有指定大小，则没有结束标记；输出会异常，甚至直到找到一个其它数据的结束标记才会停止</pre>
+    <p>Q2：如何输出一个指针串？</p>
+    <pre class="code">
+      //方案1：
+      printf("%s\n",str);
+      //方案2：遍历
+      while (*str0)
+      {
+        printf("%c", *str0);
+        str0++;
+      }    </pre>
+    <p>demo1：逆序输出给定的字符串</p>
     <pre class="code">
       #include &lt;stdio.h&gt;
       #include &lt;string.h&gt;
@@ -29,7 +50,7 @@
         }
         return 0;
       }    </pre>
-    <p>Q2：逆序输出输入的字符串</p>
+    <p>demo2：逆序输出输入的字符串</p>
     <pre class="code">
       #include &lt;stdio.h&gt;
       #include &lt;string.h&gt;
@@ -48,7 +69,7 @@
         }
         return 0;
       }    </pre>
-    <p>Q3：串的链接</p>
+    <p>demo3：串的链接</p>
     <pre class="code">
       int main(void)
       {

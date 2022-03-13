@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Function</title>
+  <link rel="stylesheet" href="../css/reset.css">
+</head>
+
+<body>
+  <section class="w">
+    <h1>Function</h1>
+    <div>方案1：声明并定义-&gt;使用</div>
+    <p>Q1：数据交换：传地址</p>
+    <pre class="code">
+      #include &lt;stdio.h&gt;
+      void swap(int *a, int *b)//1.声明并定义
+      {
+        int t = *a;
+        *a = *b;
+        *b = t;
+      }
+      int main(void)
+      {
+        int a = 2;
+        int b = 3;
+        printf("%d,%d\n", a, b);
+        swap(&a, &b);//2.使用
+        printf("%d,%d\n", a, b);
+        return 0;
+      }</pre>
+    <div>方案2：声明-&gt;使用-&gt;定义</div>
+    <p>Q2：统计小写字母：传地址</p>
+    <pre class="code">
+      #include &lt;stdio.h&gt;
+      int lowerNum(const char *p);//1.声明
+      int main(void)
+      {
+        char str[] = "helloMOTO.";
+        int len;
+        len = lowerNum(str);//2.使用
+        printf("num=%d\n", len);
+        return 0;
+      }
+      int lowerNum(const char *p)//3.定义
+      {
+        int n = 0;
+        while (*p != '\0')
+        {
+          if (*p >= 'a' && *p <= 'z')
+          {
+            n++;
+          }
+          p++;//注意位置
+        }
+        return n;
+      }    </pre>
+    <p>Q3：一维数组求和：传数组</p>
+    <pre class="code">
+      #include &lt;stdio.h&gt;
+      int total(const int *arr, int len);
+      int main(void)
+      {
+        int str[] = {1, 2};
+        int sum;
+        sum = total(str, sizeof(str) / sizeof(int));
+        printf("sum=%d\n", sum);
+        return 0;
+      }
+      int total(const int *arr, int len)
+      {
+        int sum = 0;
+        for (int i = 0; i < len; i++)
+          sum += *(arr + i);
+        return sum;
+      }</pre>
+    <p>Q4：删除字符串中的空格</p>
+    <pre class="code">
+      #include &lt;stdio.h&gt;
+      void spaceDel(char *str);
+      int main(void)
+      {
+        char str[] = "he llo, cn pla man";//如果使用*str又如何？
+        printf("str=%s\n", str);
+        spaceDel(str);
+        printf("str=%s\n", str);
+        return 0;
+      }
+      void spaceDel(char *str)
+      {
+        char *p = str;
+        while (*str)
+        {
+          if (*str == ' ')
+          {
+            str++;
+          }
+          else
+          {
+            *p = *str;
+            p++;
+            str++;
+          }
+        }
+        *p = '\0';//如果没有，结果会是如何？
+      }      </pre>
+    <small>Copyright Reserved &copy; By Cnplaman 2022-03-13</small>
+  </section>
+</body>
+
+</html>
