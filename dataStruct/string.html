@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>String</title>
+  <link rel="stylesheet" href="../css/reset.css">
+</head>
+
+<body>
+  <section class="w">
+    <h1>String</h1>
+    <p>Q1：逆序输出给定的字符串</p>
+    <pre class="code">
+      #include &lt;stdio.h&gt;
+      #include &lt;string.h&gt;
+      int main(void)
+      {
+        char str[] = "welcome";
+        int i = 0;
+        // int len = sizeof(str) / sizeof(char);8
+        int len = strlen(str);//7
+        for (int i = len - 1; i >= 0; i--)
+        {
+          //putchar(str[i]);忽略结束标记
+          printf("%c\n", str[i]);//输出结束标记
+        }
+        return 0;
+      }    </pre>
+    <p>Q2：逆序输出输入的字符串</p>
+    <pre class="code">
+      #include &lt;stdio.h&gt;
+      #include &lt;string.h&gt;
+      #define N 20
+      int main(void)
+      {
+        char str[N];
+        int i = 0;
+        printf(">");
+        gets(str);
+        // int len = sizeof(str) / sizeof(char);
+        int len = strlen(str);
+        for (int i = len - 1; i >= 0; i--)
+        {
+          putchar(str[i]);
+        }
+        return 0;
+      }    </pre>
+    <p>Q3：串的链接</p>
+    <pre class="code">
+      int main(void)
+      {
+        char str[20] = "welcome";
+        char *p = "pla";
+        int len = 0;
+        while (str[len])
+        {
+          len++;
+        }
+        while (*p)
+        {
+          printf("%c\n", *p);
+          *(str + len) = *p;
+          len++;
+          p++;
+        }
+        printf("%s\n", str);
+        return 0;
+      }</pre>
+    <p><span class="iconfont" style="color: #f40; font-weight: 700;">&#xe64a;</span> 需要拷贝结束标记吗？</p>
+    <small>Copyright Reserved &copy; By Cnplaman 2022-03-12</small>
+  </section>
+</body>
+
+</html>
