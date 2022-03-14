@@ -2,17 +2,17 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>linked list</title>
-  <link rel="stylesheet" href="../css/reset.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>linked list</title>
+    <link rel="stylesheet" href="../css/reset.css">
 </head>
 
 <body>
-  <section class="w">
-    <h1>链式表</h1>
-    <pre class="code">
+    <section class="w">
+        <h1>链式表</h1>
+        <pre class="code">
       #include &lt;stdio.h&gt;
       #include &lt;stdlib.h&gt;            
       
@@ -103,6 +103,37 @@
         return true;
       }
       
+      int insertAt(List *list, int loc, int el)
+        {
+            if (loc < 0 || loc > list->len)
+            {
+                return -1;
+            }
+            if (!loc)
+            {
+                insertHead(list, el);
+                return 0;
+            }
+            if (loc == list->len)
+            {
+                insertTail(list, el);
+                return 0;
+            }
+            Node *node = (Node *)malloc(sizeof(Node));
+            node->data = el;
+            node->next = NULL;
+            Node *p = list->head->next;
+            int ind = 0;
+            while (ind < loc - 1)
+            {
+                p = p->next;
+                ind++;
+            }
+            node->next = p->next;
+            p->next = node;
+            return 0;
+        }
+
       int insertInc(SingleList *list, int data)
       {
         Node *node, *pre, *p;
@@ -298,8 +329,8 @@
         traversal(list);
         return 0;
       }    </pre>
-    <small>Copyright Reserved &copy; By Cnplaman 2022-03-09</small>
-  </section>
+        <small>Copyright Reserved &copy; By Cnplaman 2022-03-09</small>
+    </section>
 </body>
 
 </html>
