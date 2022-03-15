@@ -13,55 +13,49 @@
     <section class="w">
         <h1>链式表</h1>
         <pre class="code">
-      #include &lt;stdio.h&gt;
-      #include &lt;stdlib.h&gt;            
-      
-      // node的数据结构
-      typedef struct node
-      {
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;          
+        
+    typedef struct Node
+    {
         int data;
-        struct node *next;
-      } Node;
-      
-      // head是指向node类型的指针
-      typedef struct
-      {
+        struct Node *next;
+    } Node;
+    
+    typedef struct
+    {
         Node *head;
-        int n;
-      } SingleList;
-      
-      int init(SingleList *list)
-      {
+        int len;
+    } List;
+    
+    void init(List *list)
+    {
         list->head = (Node *)malloc(sizeof(Node));
-        if (!list->head)
-        {
-          return -1;
-        }
         list->head->next = NULL;
-        list->n = 0;
-        return 0;
-      }
-      
-      int isEmpty(SingleList *list)
-      {
-        return list->n ? 0 : 1;
-      }
-      
-      int lengthOfList(SingleList *list)
-      {
-        return list->n;
-      }
-      
-      void insertHead(List *list, int el)
-      {
+        list->head->data = -1;
+        list->len = 0;
+    }
+    
+    int isEmpty(List *list)
+    {
+        return list->len == 0;
+    }
+    
+    int len(List *list)
+    {
+        printf("length=%d\n", list->len);
+        return list->len;
+    }
+    void insertHead(List *list, int el)
+    {
         Node *node = (Node *)malloc(sizeof(Node));
         node->data = el;
         node->next = list->head->next;
         list->head->next = node;
         list->len++;
-      }
-      void insertTail(List *list, int el)
-      {
+    }
+    void insertTail(List *list, int el)
+    {
         Node *node = (Node *)malloc(sizeof(Node)), *p, *cur;
         node->data = el;
         node->next = NULL;
@@ -69,266 +63,220 @@
         p = cur->next;
         while (p)
         {
-          printf("data=%d\n", p->data);
-          cur = cur->next;
-          p = p->next;
+            cur = cur->next;
+            p = p->next;
         }
         cur->next = node;
         list->len++;
-      }
-
-      bool insertAtLoc(SingleList *list, int loc, int data)
-      {
-        if (loc < -1 || loc > list->n - 1)
+    }
+    int destroy(List *list)
+    {
+        if (!list->len)
         {
-          printf("location invaild\n");
-          return false;
+            return -1;
         }
-        Node *p = (Node *)malloc(sizeof(Node));
-        p->data = data;
-        p->next = NULL;
-        if (isEmpty(list))
-          list->head = p;
-        else
+        Node *p = list->head->next;
+        while (p)
         {
-          Node *tmp = list->head;
-          for (int i = 0; i < loc; i++)
-          {
-            tmp = tmp->next;
-          }
-          p->next = tmp->next;
-          tmp->next = p;
+            list->head->next = p->next;
+            free(p);
+            p = list->head->next;
         }
-        list->n += 1;
-        return true;
-      }
-      
-      int insertAt(List *list, int loc, int el)
+        list->len = 0;
+        return 0;
+    }
+    
+    int getAt(List *List, int loc)
+    {
+        printf("len=%d\n", List->len);
+        if (loc > -1 && loc < List->len)
         {
-            if (loc < 0 || loc > list->len)
-            {
-                return -1;
-            }
-            if (!loc)
-            {
-                insertHead(list, el);
-                return 0;
-            }
-            if (loc == list->len)
-            {
-                insertTail(list, el);
-                return 0;
-            }
-            Node *node = (Node *)malloc(sizeof(Node));
-            node->data = el;
-            node->next = NULL;
-            Node *p = list->head->next;
+            Node *p = List->head->next;
             int ind = 0;
-            while (ind < loc - 1)
+            while (ind < loc)
             {
                 p = p->next;
                 ind++;
             }
-            node->next = p->next;
-            p->next = node;
-            return 0;
+            printf("res=%d\n", p->data);
+            return p->data;
         }
-
-      int insertInc(SingleList *list, int data)
-      {
-        Node *node, *pre, *p;
-        int ind = 0;
-        node = (Node *)malloc(sizeof(Node));
-        node->data = data;
-        node->next = NULL;
-        pre = list->head;
-        p = list->head->next;
-        while (p && p->data < node->data)
-        {
-          pre = p;
-          p = p->next;
-          ind++;
-        }
-        node->next = p;
-        pre->next = node;
-        list->n++;
-        printf("item %d inserted in %d: ok\n", data, ind);
-        return ind;
-      }
-      
-      int insertDec(SingleList *list, int data)
-      {
-        Node *node, *pre, *p;
-        int ind = 0;
-        node = (Node *)malloc(sizeof(Node));
-        node->data = data;
-        node->next = NULL;
-        pre = list->head;
-        p = list->head->next;
-        while (p && p->data > node->data)
-        {
-          pre = p;
-          p = p->next;
-          ind++;
-        }
-        node->next = p;
-        pre->next = node;
-        list->n++;
-        printf("item %d inserted in %d: ok\n", data, ind);
-        return ind;
-      }      
-      
-      int traversal(SingleList *list)
-      {
-        Node *p;
-        if (!list->head->next)
-        {
-          return -1;
-        }
-        p = list->head->next;
-        while (p)
-        {
-          printf("%d\n", p->data);
-          // why not p++?
-          p = p->next;
-        }
-        printf("len=%d\n", list->n);
-        return 0;
-      }
-      
-      int findAtLoc(SingleList *list, int loc)
-      {
-        if (loc < 0 || loc > list->n - 1)
-        {
-          return -1;
-        }
-        Node *p = list->head->next;
-        for (int i = 0; i < loc; i++)
-        {
-          p = p->next;
-        }
-        return p->data;
-      }
-      
-      int indexOf(SingleList *list, int data)
-      {
+        printf("index overfolw\n");
+        return -1;
+    }
+    int indexOf(List *list, int data)
+    {
         Node *p = list->head->next;
         int loc = 0;
         while (p)
         {
-          if (p->data != data)
-          {
+            if (p->data == data)
+            {
+                printf("item %d found at %d \n", p->data, loc);
+                return loc;
+            }
             p = p->next;
-          }
-          else
-          {
-            printf("item %d found\n", p->data);
-            return loc;
-          }
-          loc++;
+            loc++;
         }
         printf("item %d not found\n", data);
         return -1;
-      }
-      
-      int delAtLoc(SingleList *list, int loc)
-      {
-        if (loc < 0 || loc > list->n - 1)
+    }
+    
+    int delAt(List *list, int loc)
+    {
+        if (loc > -1 && loc < list->len)
         {
-          return -1;
+            Node *p, *cur;
+            cur = list->head;
+            p = cur->next;
+            for (int i = 0; i < loc; i++)
+            {
+                cur = cur->next;
+                p = p->next;
+            }
+            cur->next = p->next;
+            free(p);
+            list->len--;
+            return 0;
         }
-        Node *p, *q;
-        q = list->head;
-        p = list->head->next;
-        for (int i = 0; i < loc; i++)
-        {
-          q = p;
-          p = p->next;
-        }
-        q->next = p->next;
-        free(p);
-        list->n--;
-        printf("item in location %d deleted\n", loc);
-        return 0;
-      }
-      
-      int delByData(SingleList *list, int data)
-      {
-        Node *p, *q;
-        p = list->head->next;
-        q = list->head;
+        return -1;
+    }
+    // indexOf() and delAt()
+    int delBy(List *list, int el)
+    {
+        Node *p = list->head->next;
+        int loc = 0;
         while (p)
         {
-          if (p->data != data)
-          {
-            q = p;
+            if (p->data == el)
+            {
+                delAt(list, loc);
+                return loc;
+            }
             p = p->next;
-          }
-          else
-          {
-            printf("item %d deleted\n", p->data);
-            q->next = p->next;
-            free(p);
-            list->n--;
-            return 0;
-          }
+            loc++;
         }
-        printf("item %d not found\n", data);
         return -1;
-      }
-      
-      int updateAtLoc(SingleList *list, int loc, int data)
-      {
-        if (loc < 0 || loc > list->n - 1)
+    }
+    
+    int insertAt(List *list, int loc, int el)
+    {
+        if (loc < 0 || loc > list->len - 1)
         {
-          return -1;
+            printf("insert index overfollow\n");
+            return -1;
         }
+        if (!loc)
+        {
+            insertHead(list, el);
+            return 0;
+        }
+        if (loc == list->len)
+        {
+            insertTail(list, el);
+            return 0;
+        }
+        Node *node = (Node *)malloc(sizeof(Node));
+        node->data = el;
+        node->next = NULL;
         Node *p = list->head->next;
-        for (int i = 0; i < loc; i++)
+        int ind = 0;
+        while (ind < loc - 1)
         {
-          p = p->next;
+            p = p->next;
+            ind++;
         }
-        p->data = data;
-        printf("item in %d updated\n", loc);
+        node->next = p->next;
+        p->next = node;
+        list->len++;
         return 0;
-      }
-      
-      int clear(SingleList *list)
-      {
-        if (!list->head->next)
+    }
+    
+    // assumed head->data=-1
+    int delMax(List *list)
+    {
+        if (!list->len)
         {
-          printf("list is empty\n");
-          return -1;
+            printf("list is empty\n");
+            return -1;
         }
-        Node *p, *q;
-        q = list->head;
-        p = q->next;
-        while (q->next)
+        if (list->len == 1)
         {
-          p = q->next->next;
-          free(q->next);
-          q->next = p;
+            printf("maxItem %d deleted\n", list->head->next->data);
+            free(list->head->next);
+            list->head->next = NULL;
+            list->len = 0;
+            return 0;
         }
-        list->n = 0;
-        printf("list is clear\n");
+        Node *pre, *p, *max, *maxPre;
+        pre = list->head->next;
+        maxPre = pre;
+        p = pre->next;
+        max = p;
+        while (p)
+        {
+            if (p->data > max->data)
+            {
+                max = p;
+                maxPre = pre;
+            }
+            pre = pre->next;
+            p = p->next;
+        }
+        maxPre->next = max->next;
+        printf("maxItem %d deleted\n", max->data);
+        free(max);
+        list->len--;
         return 0;
-      }
-      int main()
-      {
-        SingleList *list;
+    }
+    
+    int updateAt(List *list, int loc, int data)
+    {
+        if (loc > -1 && loc < list->len)
+        {
+            Node *p = list->head->next;
+            for (int i = 0; i < loc; i++)
+            {
+                p = p->next;
+            }
+            p->data = data;
+            printf("item at %d updated\n", loc);
+            return 0;
+        }
+        printf("update index overfollow\n");
+        return -1;
+    }
+    
+    void display(List *list)
+    {
+        printf("start\n");
+        Node *p = list->head->next;
+        while (p)
+        {
+            printf("%d\n", p->data);
+            p = p->next;
+        }
+        printf("end\n");
+    }
+    int main(void)
+    {
+        List *list;
         init(list);
-        insertInc(list, 12);
-        insertInc(list, 3);
-        insertInc(list, 4);
-        insertInc(list, 5);
-        traversal(list);
-        insertDec(list, 112);
-        insertDec(list, 13);
-        insertDec(list, 14);
-        insertDec(list, 15);
-        traversal(list);
+        insertHead(list, 1);
+        insertHead(list, 2);
+        insertHead(list, 3);
+        insertTail(list, 1);
+        insertTail(list, 2);
+        insertTail(list, 3);
+        insertAt(list, 0, 11);
+        insertAt(list, 4, 77);
+        display(list);
+        delMax(list);
+        delMax(list);
+        updateAt(list, 1, 80);
+        display(list);
         return 0;
-      }    </pre>
+    }</pre>
         <small>Copyright Reserved &copy; By Cnplaman 2022-03-09</small>
     </section>
 </body>
