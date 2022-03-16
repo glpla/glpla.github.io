@@ -19,6 +19,7 @@ void init(List *list)
     list->head->next = NULL;
     list->head->data = -1;
     list->len = 0;
+    printf("list initialized\n");
 }
 
 int isEmpty(List *list)
@@ -38,6 +39,7 @@ void insertHead(List *list, int el)
     node->next = list->head->next;
     list->head->next = node;
     list->len++;
+    printf("head inserted ok\n");
 }
 void insertTail(List *list, int el)
 {
@@ -51,97 +53,9 @@ void insertTail(List *list, int el)
         cur = cur->next;
         p = p->next;
     }
+    printf("tail inserted ok\n");
     cur->next = node;
     list->len++;
-}
-int destroy(List *list)
-{
-    if (!list->len)
-    {
-        return -1;
-    }
-    Node *p = list->head->next;
-    while (p)
-    {
-        list->head->next = p->next;
-        free(p);
-        p = list->head->next;
-    }
-    list->len = 0;
-    return 0;
-}
-
-int getAt(List *List, int loc)
-{
-    printf("len=%d\n", List->len);
-    if (loc > -1 && loc < List->len)
-    {
-        Node *p = List->head->next;
-        int ind = 0;
-        while (ind < loc)
-        {
-            p = p->next;
-            ind++;
-        }
-        printf("res=%d\n", p->data);
-        return p->data;
-    }
-    printf("index overfolw\n");
-    return -1;
-}
-int indexOf(List *list, int data)
-{
-    Node *p = list->head->next;
-    int loc = 0;
-    while (p)
-    {
-        if (p->data == data)
-        {
-            printf("item %d found at %d \n", p->data, loc);
-            return loc;
-        }
-        p = p->next;
-        loc++;
-    }
-    printf("item %d not found\n", data);
-    return -1;
-}
-
-int delAt(List *list, int loc)
-{
-    if (loc > -1 && loc < list->len)
-    {
-        Node *p, *cur;
-        cur = list->head;
-        p = cur->next;
-        for (int i = 0; i < loc; i++)
-        {
-            cur = cur->next;
-            p = p->next;
-        }
-        cur->next = p->next;
-        free(p);
-        list->len--;
-        return 0;
-    }
-    return -1;
-}
-// indexOf() and delAt()
-int delBy(List *list, int el)
-{
-    Node *p = list->head->next;
-    int loc = 0;
-    while (p)
-    {
-        if (p->data == el)
-        {
-            delAt(list, loc);
-            return loc;
-        }
-        p = p->next;
-        loc++;
-    }
-    return -1;
 }
 
 int insertAt(List *list, int loc, int el)
@@ -175,6 +89,44 @@ int insertAt(List *list, int loc, int el)
     p->next = node;
     list->len++;
     return 0;
+}
+int delAt(List *list, int loc)
+{
+    if (loc > -1 && loc < list->len)
+    {
+        Node *p, *cur;
+        cur = list->head;
+        p = cur->next;
+        for (int i = 0; i < loc; i++)
+        {
+            cur = cur->next;
+            p = p->next;
+        }
+        cur->next = p->next;
+        free(p);
+        list->len--;
+        printf("delete ok\n");
+        return 0;
+    }
+    printf("delete fail\n");
+    return -1;
+}
+// indexOf() and delAt()
+int delBy(List *list, int el)
+{
+    Node *p = list->head->next;
+    int loc = 0;
+    while (p)
+    {
+        if (p->data == el)
+        {
+            delAt(list, loc);
+            return loc;
+        }
+        p = p->next;
+        loc++;
+    }
+    return -1;
 }
 
 // assumed head->data=-1
@@ -232,6 +184,63 @@ int updateAt(List *list, int loc, int data)
     return -1;
 }
 
+int getAt(List *List, int loc)
+{
+    printf("len=%d\n", List->len);
+    if (loc > -1 && loc < List->len)
+    {
+        Node *p = List->head->next;
+        int ind = 0;
+        while (ind < loc)
+        {
+            p = p->next;
+            ind++;
+        }
+        printf("res=%d\n", p->data);
+        return p->data;
+    }
+    printf("index overfolw\n");
+    return -1;
+}
+
+int getBy(List *list, int el) {}
+
+int indexOf(List *list, int data)
+{
+    Node *p = list->head->next;
+    int loc = 0;
+    while (p)
+    {
+        if (p->data == data)
+        {
+            printf("item %d found at %d \n", p->data, loc);
+            return loc;
+        }
+        p = p->next;
+        loc++;
+    }
+    printf("item %d not found\n", data);
+    return -1;
+}
+
+int destroy(List *list)
+{
+    if (!list->len)
+    {
+        printf("list is empty\n");
+        return -1;
+    }
+    Node *p = list->head->next;
+    while (p)
+    {
+        list->head->next = p->next;
+        free(p);
+        p = list->head->next;
+    }
+    printf("list destroyed\n");
+    list->len = 0;
+    return 0;
+}
 void display(List *list)
 {
     printf("start\n");
@@ -256,9 +265,9 @@ int main(void)
     insertAt(list, 0, 11);
     insertAt(list, 4, 77);
     display(list);
-    delMax(list);
-    delMax(list);
-    updateAt(list, 1, 80);
+    len(list);
+    delAt(list, 4);
+    updateAt(list, 7, 80);
     display(list);
     return 0;
 }
