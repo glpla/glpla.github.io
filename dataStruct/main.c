@@ -1,27 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct pNode
+typedef struct Node
 {
     int coef;
     int exp;
-    struct pNode *next;
-} pNode;
+    struct Node *next;
+} Node;
 
 typedef struct
 {
-    struct pNode *head;
+    struct Node *head;
 } PolyExp;
 
-void createPlyExp(PolyExp *pe)
+void create(PolyExp *pe)
 {
-    pe->head = (pNode *)malloc(sizeof(pNode));
+    pe->head = (Node *)malloc(sizeof(Node));
+    pe->head->coef = -1;
     pe->head->exp = -1;
     pe->head->next = NULL;
-    pNode *pn, *pre, *p;
+    Node *pn, *pre, *p;
     while (1)
     {
-        pn = (pNode *)malloc(sizeof(pNode));
+        pn = (Node *)malloc(sizeof(Node));
         printf("conf:\n");
         scanf("%d", &pn->coef);
         printf("exp:\n");
@@ -42,27 +43,86 @@ void createPlyExp(PolyExp *pe)
         pre->next = pn;
     }
 }
-
-void displayPolyExp(PolyExp *pe)
+// 功能性实现
+void display0(PolyExp *pe)
 {
-    pNode *pn;
+    Node *pn;
     pn = pe->head->next;
-    printf("pe=\t");
+    printf("pe= ");
     while (pn)
     {
-        printf("%+dx^%d\t", pn->coef, pn->exp);
+        printf("%dx^%d ", pn->coef, pn->exp);
+        pn = pn->next;
+    }
+    printf("\n");
+}
+// 基本改善性实现
+void display1(PolyExp *pe)
+{
+    Node *pn;
+    pn = pe->head->next;
+    printf("pe= ");
+    while (pn)
+    {
+        printf("%+dx^%d ", pn->coef, pn->exp);
+        pn = pn->next;
+    }
+    printf("\n");
+}
+// 改善性实现
+void display2(PolyExp *pe)
+{
+    Node *pn;
+    pn = pe->head->next;
+    printf("pe= ");
+    while (pn)
+    {
+        switch (pn->exp)
+        {
+        case 1:
+            switch (pn->coef)
+            {
+            case 1:
+                printf("+x ");
+                break;
+            case -1:
+                printf("-x ");
+                break;
+            default:
+                printf("%+dx ", pn->coef);
+                break;
+            }
+            break;
+        case 0:
+            switch (pn->coef)
+            {
+            case 1:
+                printf("1 ");
+                break;
+            case -1:
+                printf("-1 ");
+                break;
+            default:
+                printf("%+d ", pn->coef);
+                break;
+            }
+            break;
+        default:
+            printf("%+dx^%d ", pn->coef, pn->exp);
+            break;
+        }
         pn = pn->next;
     }
     printf("\n");
 }
 
-void addPolyExp(PolyExp *pe0, PolyExp *pe1)
+void add(PolyExp *pe0, PolyExp *pe1)
 {
-    pNode *pre0 = pe0->head;
-    pNode *p0 = pe0->head->next;
-    pNode *pre1 = pe1->head;
-    pNode *p1 = pe1->head->next;
-    pNode *tmp;
+    Node *pre0 = pe0->head;
+    Node *p0 = pe0->head->next;
+    Node *pre1 = pe1->head;
+    Node *p1 = pe1->head->next;
+    Node *tmp;
     while (p0 && p1)
     {
         while (p1)
@@ -97,11 +157,17 @@ int main()
     PolyExp *pe0, *pe1;
     pe0 = (PolyExp *)malloc(sizeof(PolyExp));
     pe1 = (PolyExp *)malloc(sizeof(PolyExp));
-    createPlyExp(pe0);
-    createPlyExp(pe1);
-    displayPolyExp(pe0);
-    displayPolyExp(pe1);
-    addPolyExp(pe0, pe1);
-    displayPolyExp(pe0);
+    create(pe0);
+    // display0(pe0);
+    display1(pe0);
+    display2(pe0);
+    create(pe1);
+    // display0(pe1);
+    display1(pe1);
+    display2(pe1);
+    add(pe0, pe1);
+    // display0(pe0);
+    display1(pe0);
+    display2(pe0);
     return 0;
 }
