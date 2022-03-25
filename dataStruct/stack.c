@@ -36,11 +36,11 @@ int isEmpty(Stack *s)
     // 请使用（!ptr）或（ptr）
     if (!s->top->next)
     {
-        printf("Stack empty\n");
-        return 0;
+        // printf("Stack empty\n");
+        return 1;
     }
-    printf("Stack not empty\n");
-    return 1;
+    // printf("Stack not empty\n");
+    return 0;
 }
 void push(Stack *s, int data)
 {
@@ -48,57 +48,93 @@ void push(Stack *s, int data)
     node->data = data;
     node->next = s->top->next;
     s->top->next = node;
-    printf("Stack push done: %d\n", data);
+    // printf("Stack push done: %d\n", data);
 }
 int pop(Stack *s)
 {
     if (!s->top->next)
     {
-        printf("Stack empty\n");
+        // printf("Stack empty, pop fail\n");
         return -1;
     }
     Node *node = s->top->next;
     s->top->next = node->next;
-    printf("Stack pop done: %d\n", node->data);
+    int res = node->data;
+    // printf("Stack pop done: %d\n", node->data);
     free(node);
-    return 0;
+    return res;
 }
 int top(Stack *s)
 {
     if (!s->top->next)
     {
-        printf("Stack empty\n");
+        printf("Stack empty, top fail\n");
         return -1;
     }
     printf("Stack top done: %d\n", s->top->next->data);
     return s->top->next->data;
+}
+void traversal(Stack *s)
+{
+    Node *p = s->top->next;
+    int res;
+    while (!isEmpty(s))
+    {
+        res = pop(s);
+        printf("traversal res=%d\n", res);
+    }
+}
+// 10 -> 2
+void dec2bin(Stack *s, int num)
+{
+    int rem;
+    while (num > 0)
+    {
+        rem = num % 2;
+        push(s, rem);
+        num = (int)num / 2;
+    }
+    traversal(s);
+}
+void symStr(Stack *s, char *str)
+{
+    while (*str != '\0')
+    {
+        push(s, *str);
+        str++;
+    }
+    traversal(s);
 }
 
 int main(void)
 {
     Stack *s;
     init(s);
-    isEmpty(s);
+    symStr(s, "hellolleh");
+    dec2bin(s, 12);
     push(s, 1);
-    top(s);
     push(s, 11);
-    top(s);
     push(s, 2);
-    top(s);
     push(s, 3);
-    top(s);
     push(s, 10);
-    top(s);
-    printf("pop-------------------\n");
-    pop(s);
-    top(s);
-    pop(s);
-    top(s);
-    pop(s);
-    top(s);
-    pop(s);
-    top(s);
-    pop(s);
-    top(s);
+    traversal(s);
+    // pop(s);
+    // pop(s);
+    // pop(s);
+    // pop(s);
+    // pop(s);
+    // isEmpty(s);
+    // pop(s);
+    // top(s);
+    // pop(s);
+    // top(s);
+    // pop(s);
+    // top(s);
+    // pop(s);
+    // top(s);
+    // pop(s);
+    // top(s);
+    // printf("1\n");
+    dec2bin(s, 11);
     return 0;
 }
