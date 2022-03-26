@@ -9,14 +9,13 @@
     flex: 1;
     display: grid;
     grid-template-columns: 1fr 2fr 2fr 2fr;
-    grid-template-rows: 180px;
     align-items: flex-start;
     gap: 1rem;
 }
 
 .week {
+    height: 100%;
     padding: 1rem;
-    height: 180px;
     border-radius: 1rem;
     box-shadow: 0 0 .6rem rgba(0, 0, 0, 0.2);
 }
@@ -24,6 +23,9 @@
 .week-title {
     text-align: center;
     line-height: calc(180px - 2rem);
+    color: #fff;
+    background-position: center;
+    background-size: cover;
 }
 
 .week-title span:nth-child(2) {
@@ -121,15 +123,10 @@ small a {
 
 @media screen and (max-width:768px) {
     .week-box {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
     }
 
     .week-box>div:nth-child(4n+1) {
-        grid-row: span 3;
-        height: 100%;
-    }
-
-    .week {
-        height: 150px;
+        grid-row: span 2;
     }
 }
