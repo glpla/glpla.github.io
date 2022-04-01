@@ -6,10 +6,12 @@ typedef struct Node
     int data;
     struct Node *next;
 } Node;
+
 typedef struct Stack
 {
     Node *top;
 } Stack;
+
 void init(Stack *s)
 {
     s->top = (Node *)malloc(sizeof(Node));
@@ -28,7 +30,7 @@ void destroy(Stack *s)
         p = pre->next;
     }
     free(pre);
-    printf("destroy done\n");
+    printf("Stack destroy done\n");
 }
 int isEmpty(Stack *s)
 {
