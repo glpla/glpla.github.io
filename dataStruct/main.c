@@ -1,11 +1,18 @@
 #include <stdio.h>
 #include <string.h>
-
+char *get(void)
+{
+    static char c[] = "hi";
+    return c;
+}
+void test(void)
+{
+    char *str = NULL;
+    str = get();
+    printf(str);
+}
 int main()
 {
-    char num = '1';
-    // char *str = "123";
-    // *(str + 0) = (char)num;
-    printf("%d\n", num);
+    test();
     return 0;
 }

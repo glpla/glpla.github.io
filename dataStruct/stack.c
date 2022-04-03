@@ -27,23 +27,6 @@ int main(void)
     char *str = "";
     sprintf(str, "%d", num);
     printf("%s\n", str);
-    // int test[] = {1, 2, 3, 4};
-    // int res;
-    // Stack *s = (Stack *)malloc(sizeof(Stack));
-    // init(s);
-    // for (int i = 0; i < 4; i++)
-    // {
-    //     push(s, test[i]);
-    // }
-    // top(s, &res);
-    // printf("top res=%d\n", res);
-    // pop(s, &res);
-    // printf("pop res=%d\n", res);
-    // top(s, &res);
-    // printf("top res=%d\n", res);
-    // clear(s);
-    // dec2bin(s, 15);
-    // free(s);
     return 0;
 }
 void init(Stack *s)
