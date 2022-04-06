@@ -12,7 +12,7 @@ int main(void)
     do
     {
         menu();
-        printf("pease make a choice>");
+        printf("please make a choice>");
         scanf("%d", &option);
         switch (option)
         {

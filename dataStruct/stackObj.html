@@ -2,18 +2,18 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stack with Object</title>
-  <link rel="stylesheet" href="../css/reset.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack with Object</title>
+    <link rel="stylesheet" href="../css/reset.css">
 </head>
 
 <body>
-  <section class="w">
-    <h1>Stack With Object</h1>
-    <p>对象是键值对的集合，如{ unit: "xit" }，其中unit是key，xit是value</p>
-    <pre class="code">
+    <section class="w">
+        <h1>Stack With Object</h1>
+        <p>对象是键值对的集合，如{ unit: "xit" }，其中unit是key，xit是value</p>
+        <pre class="code">
     class Stack {
       constructor() {
         this.count = 0
@@ -64,65 +64,65 @@
         this.count = 0
       }
     }    </pre>
-    <small>Copyright Reserved &copy; By Cnplaman 2022-03-02</small>
-  </section>
-  <script>
-    class Stack {
-      constructor() {
-        this.count = 0
-        this.items = {}
-      }
-      push(el) {
-        // 以count为key
-        this.items[this.count] = el
-        this.count++
-      }
-      pop() {
-        if (!this.count) {
-          return undefined
+        <small>Copyright Reserved &copy; By Cnplaman 2022-03-02</small>
+    </section>
+    <script>
+        class Stack {
+            constructor() {
+                this.count = 0
+                this.items = {}
+            }
+            push(el) {
+                // 以count为key
+                this.items[this.count] = el
+                this.count++
+            }
+            pop() {
+                if (!this.count) {
+                    return undefined
+                }
+                this.count--
+                let res = this.items[this.count]
+                delete this.items[this.count]
+                return res
+            }
+            peek() {
+                if (!this.count) {
+                    return undefined
+                }
+                return this.items[this.count - 1]
+            }
+            isEmpty() {
+                return this.count == 0
+            }
+            size() {
+                return this.count
+            }
+            toString() {
+                if (!this.count) {
+                    return ''
+                }
+                // let str = `${this.items[0]}`;
+                // for (let i = 1; i < this.count; i++) {
+                //   str = `${str},${this.items[i]}`;
+                // }
+                let str = this.items[0]
+                for (let index = 1; index < this.count; index++) {
+                    str += ',' + this.items[index]
+                }
+                return str;
+            }
+            clear() {
+                this.items = {}
+                this.count = 0
+            }
         }
-        this.count--
-        let res = this.items[this.count]
-        delete this.items[this.count]
-        return res
-      }
-      peek() {
-        if (!this.count) {
-          return undefined
-        }
-        return this.items[this.count - 1]
-      }
-      isEmpty() {
-        return this.count == 0
-      }
-      size() {
-        return this.count
-      }
-      toString() {
-        if (!this.count) {
-          return ''
-        }
-        // let str = `${this.items[0]}`;
-        // for (let i = 1; i < this.count; i++) {
-        //   str = `${str},${this.items[i]}`;
-        // }
-        let str = this.items[0]
-        for (let index = 1; index < this.count; index++) {
-          str += ',' + this.items[index]
-        }
-        return str;
-      }
-      clear() {
-        this.items = {}
-        this.count = 0
-      }
-    }
-    let s = new Stack()
-    s.push(1)
-    s.push(11)
-    s.push(111)
-    console.log(s.toString());
-  </script>
+        let s = new Stack()
+        s.push(1)
+        s.push(11)
+        s.push(111)
+        console.log(s.toString());
+    </script>
 </body>
 
 </html>
