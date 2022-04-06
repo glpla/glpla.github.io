@@ -56,4 +56,6 @@ void menu(void)
     printf("*** 5.display       6.sort   ***\n");
     printf("*** 7.output        0.exit   ***\n");
     printf("********************************\n\n");
+    // 基础太弱
+    // 思路没有清楚
 }

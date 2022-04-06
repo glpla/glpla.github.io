@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sequence list</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <style>
+        .flex-h {
+            padding: 1rem 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #c00000;
+        }
+
+        .flex-h li {
+            margin: 0 1rem;
+        }
+
+        .flex-h li:hover a {
+            color: #c00000;
+        }
+
+        h1 a {
+            font-size: .6em;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="w">
+        <ul class="flex-h" id="top">
+            <li><a href="#seq">顺序表</a></li>
+            <li><a href="#link">链式表</a></li>
+            <li><a href="./seqList_js.html" target="_blank">顺序表js</a></li>
+            <li><a href="./LinkedList_js.html" target="_blank">链式表js</a></li>
+        </ul>
+        <h1 id='seq'>顺序表 <a href="#top">返回顶部</a></h1>
+        <pre class="code">
+      #include &lt;stdio.h&gt;
+      #include &lt;stdlib.h&gt;
+      
+      #define maxSize 5
+      
+      typedef struct
+      {
+        int *data;
+        int len;
+        int size;
+      } List;
+
+      int init(List *list)
+      {
+        list->data = (int *)malloc(maxSize * sizeof(int));
+        if (!list->data)
+        {
+          return -1;
+        }
+        list->len = 0;
+        list->size = maxSize;
+        return 0;
+      }
+      
+      void clear(List *list)
+      {
+        free(list);
+      }
+      
+      int isEmpty(List *list)
+      {
+        return list->len == 0;
+      }
+      
+      void toString(List *list)
+      {
+        for (int i = 0; i < list->len; i++)
+        {
+          printf("%d\n", list->data[i]);
+        }
+      }
+      
+      int length(List *list)
+      {
+        return list->len;
+      }
+      
+      int insert(List *list, int el)
+      {
+        if (list->len == maxSize)
+        {
+          return -1;
+        }
+        list->data[list->len] = el;
+        list->len++;
+        return 0;
+      }
+      
+      int insertAt(List *list, int loc, int el)
+      {
+        if (loc < 0 || loc > list->len || loc > maxSize)
+        {
+          return -1;
+        }
+        for (int i = list->len; i > loc; i--)
+        {
+          list->data[i] = list->data[i - 1];
+        }
+        list->data[loc] = el;
+        list->len++;
+        return 0;
+      }
+      
+      int delAt(List *list, int loc)
+      {
+        if (loc < 0 || loc >= list->len || loc == maxSize)
+        {
+          return -1;
+        }
+        for (int i = loc; i < list->len; i++)
+        {
+          list->data[i] = list->data[i + 1];
+        }
+        list->len--;
+        return 0;
+      }
+      
+      int update(List *list, int loc, int el)
+      {
+        if (loc < 0 || loc >= list->len || loc == maxSize)
+        {
+          return -1;
+        }
+        list->data[loc] = el;
+        return 0;
+      }
+      
+      int find(List *list, int el)
+      {
+        for (int i = 0; i < list->len; i++)
+        {
+          if (list->data[i] == el)
+          {
+            return i;
+          }
+        }
+        return -1;
+      }
+      
+      int findAt(List *list, int loc)
+      {
+        if (loc < 0 || loc >= list->len || loc == maxSize)
+        {
+          return -1;
+        }
+        return list->data[loc];
+      }
+      
+      int main(void)
+      {
+        List *list;
+        init(list);
+        insert(list, 1);
+        insert(list, 2);
+        insert(list, 3);
+        insert(list, 4);
+        insert(list, 5);
+        insertAt(list, 1, 111);
+        toString(list);
+        delAt(list, 3);
+        toString(list);
+        findAt(list, 1);
+        find(list, 2);
+        update(list, 4, 101);
+        toString(list);
+        return 0;
+      }
+    </pre>
+        <h1 id="link">链式表 <a href="#top">返回顶部</a></h1>
+        <pre class="code">
+        #include &lt;stdio.h&gt;
+        #include &lt;stdlib.h&gt;
+        
+        typedef struct Node
+        {
+            int data;
+            struct Node *next;
+        } Node;
+        
+        typedef struct
+        {
+            Node *head;
+            int len;
+        } List;
+        
+        void init(List *list)
+        {
+            list->head = (Node *)malloc(sizeof(Node));
+            list->head->next = NULL;
+            list->head->data = -1;
+            list->len = 0;
+            printf("list initialized\n");
+        }
+        
+        int isEmpty(List *list)
+        {
+            return list->len == 0;
+        }
+        
+        int len(List *list)
+        {
+            printf("length=%d\n", list->len);
+            return list->len;
+        }
+        void insertHead(List *list, int el)
+        {
+            Node *node = (Node *)malloc(sizeof(Node));
+            node->data = el;
+            node->next = list->head->next;
+            list->head->next = node;
+            list->len++;
+            printf("head inserted ok\n");
+        }
+        void insertTail(List *list, int el)
+        {
+            Node *node = (Node *)malloc(sizeof(Node)), *p, *cur;
+            node->data = el;
+            node->next = NULL;
+            cur = list->head;
+            p = cur->next;
+            while (p)
+            {
+                cur = cur->next;
+                p = p->next;
+            }
+            printf("tail inserted ok\n");
+            cur->next = node;
+            list->len++;
+        }
+        
+        int insertAt(List *list, int loc, int el)
+        {
+            if (loc < 0 || loc > list->len - 1)
+            {
+                printf("insert index overfollow\n");
+                return -1;
+            }
+            if (!loc)
+            {
+                insertHead(list, el);
+                return 0;
+            }
+            if (loc == list->len)
+            {
+                insertTail(list, el);
+                return 0;
+            }
+            Node *node = (Node *)malloc(sizeof(Node));
+            node->data = el;
+            node->next = NULL;
+            Node *p = list->head->next;
+            int ind = 0;
+            while (ind < loc - 1)
+            {
+                p = p->next;
+                ind++;
+            }
+            node->next = p->next;
+            p->next = node;
+            list->len++;
+            return 0;
+        }
+        int delAt(List *list, int loc)
+        {
+            if (loc > -1 && loc < list->len)
+            {
+                Node *p, *cur;
+                cur = list->head;
+                p = cur->next;
+                for (int i = 0; i < loc; i++)
+                {
+                    cur = cur->next;
+                    p = p->next;
+                }
+                cur->next = p->next;
+                free(p);
+                list->len--;
+                printf("delete ok\n");
+                return 0;
+            }
+            printf("delete fail\n");
+            return -1;
+        }
+        // indexOf() and delAt()
+        int delBy(List *list, int el)
+        {
+            Node *p = list->head->next;
+            int loc = 0;
+            while (p)
+            {
+                if (p->data == el)
+                {
+                    delAt(list, loc);
+                    return loc;
+                }
+                p = p->next;
+                loc++;
+            }
+            return -1;
+        }
+        
+        // assumed head->data=-1
+        int delMax(List *list)
+        {
+            if (!list->len)
+            {
+                printf("list is empty\n");
+                return -1;
+            }
+            if (list->len == 1)
+            {
+                printf("maxItem %d deleted\n", list->head->next->data);
+                free(list->head->next);
+                list->head->next = NULL;
+                list->len = 0;
+                return 0;
+            }
+            Node *pre, *p, *max, *maxPre;
+            pre = list->head->next;
+            maxPre = pre;
+            p = pre->next;
+            max = p;
+            while (p)
+            {
+                if (p->data > max->data)
+                {
+                    max = p;
+                    maxPre = pre;
+                }
+                pre = pre->next;
+                p = p->next;
+            }
+            maxPre->next = max->next;
+            printf("maxItem %d deleted\n", max->data);
+            free(max);
+            list->len--;
+            return 0;
+        }
+        
+        int updateAt(List *list, int loc, int data)
+        {
+            if (loc > -1 && loc < list->len)
+            {
+                Node *p = list->head->next;
+                for (int i = 0; i < loc; i++)
+                {
+                    p = p->next;
+                }
+                p->data = data;
+                printf("item at %d updated\n", loc);
+                return 0;
+            }
+            printf("update index overfollow\n");
+            return -1;
+        }
+        
+        int getAt(List *List, int loc)
+        {
+            printf("len=%d\n", List->len);
+            if (loc > -1 && loc < List->len)
+            {
+                Node *p = List->head->next;
+                int ind = 0;
+                while (ind < loc)
+                {
+                    p = p->next;
+                    ind++;
+                }
+                printf("res=%d\n", p->data);
+                return p->data;
+            }
+            printf("index overfolw\n");
+            return -1;
+        }
+        
+        int getBy(List *list, int el) {}
+        
+        int indexOf(List *list, int data)
+        {
+            Node *p = list->head->next;
+            int loc = 0;
+            while (p)
+            {
+                if (p->data == data)
+                {
+                    printf("item %d found at %d \n", p->data, loc);
+                    return loc;
+                }
+                p = p->next;
+                loc++;
+            }
+            printf("item %d not found\n", data);
+            return -1;
+        }
+        
+        int destroy(List *list)
+        {
+            if (!list->len)
+            {
+                printf("list is empty\n");
+                return -1;
+            }
+            Node *p = list->head->next;
+            while (p)
+            {
+                list->head->next = p->next;
+                free(p);
+                p = list->head->next;
+            }
+            printf("list destroyed\n");
+            list->len = 0;
+            return 0;
+        }
+        void display(List *list)
+        {
+            printf("start\n");
+            Node *p = list->head->next;
+            while (p)
+            {
+                printf("%d\n", p->data);
+                p = p->next;
+            }
+            printf("end\n");
+        }
+        int main(void)
+        {
+            List *list;
+            init(list);
+            insertHead(list, 1);
+            insertHead(list, 2);
+            insertHead(list, 3);
+            insertTail(list, 1);
+            insertTail(list, 2);
+            insertTail(list, 3);
+            insertAt(list, 0, 11);
+            insertAt(list, 4, 77);
+            display(list);
+            len(list);
+            delAt(list, 4);
+            updateAt(list, 7, 80);
+            display(list);
+            return 0;
+        }</pre>
+        <small>Copyright Reserved &copy; By Cnplaman 2022-03-06</small>
+    </section>
+</body>
+
+</html>

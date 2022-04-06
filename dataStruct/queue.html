@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <style>
+        .flex-h {
+            padding: 1rem 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #c00000;
+        }
+
+        .flex-h li {
+            margin: 0 1rem;
+        }
+
+        .flex-h li:hover a {
+            color: #c00000;
+        }
+
+        h1 a {
+            font-size: .6em;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="w">
+        <ul class="flex-h" id="top">
+            <li><a href="#seq">顺序队列</a></li>
+            <li><a href="#link">链式队列</a></li>
+            <!-- <li><a href="./stackArr.html" target="_blank">数组队列js</a></li> -->
+            <!-- <li><a href="./stackObj.html" target="_blank">对象队列js</a></li> -->
+        </ul>
+        <h1 id="seq">顺序队列 <a href="#top">返回顶部</h1>
+        <hr>
+        <h1 id="link">链式队列 <a href="#top">返回顶部</h1>
+        <pre class="code">
+            #include &lt;stdio.h&gt;
+            #include &lt;stdlib.h&gt;
+    
+            #define TRUE 1
+            #define FALSE 0
+            typedef struct Node
+            {
+                int data;
+                struct Node *next;
+            } Node;
+            typedef struct
+            {
+                Node *front;
+                Node *rear;
+                int len;
+            } Queue;
+            void init(Queue **q)
+            {
+                *q = (Queue *)malloc(sizeof(Queue));
+                (*q)->front = NULL;
+                (*q)->rear = NULL;
+                (*q)->len = 0;
+            }
+            void destroy(Queue **q)
+            {
+                free(*q);
+            }
+            int isEmpty(Queue *q)
+            {
+                return q->len == 0;
+            }
+            void enqueue(Queue *q, int el)
+            {
+                Node *node = (Node *)malloc(sizeof(Node));
+                node->data = el;
+                node->next = NULL;
+                // 判断是否为空
+                if (!q->len)
+                {
+                    q->front = node;
+                    q->rear = node;
+                }
+                else
+                {
+                    q->rear->next = node;
+                    q->rear = node;
+                }
+                q->len++;
+            }
+            int dequeue(Queue *q)
+            {
+                if (!q->len)
+                {
+                    return FALSE;
+                }
+                int res = q->front->data;
+                q->front = q->front->next;
+                q->len--;
+                return res;
+            }
+            int main(void)
+            {
+                Queue *q;
+                int len = 8;
+                int res;
+                int i;
+                init(&q);
+                for (i = 1; i <= len; i++)
+                {
+                    enqueue(q, i);
+                }
+                //P108:3.2.4
+                while (q->len > 0)
+                {
+                    // MUST
+                    len = q->len;
+                    for (i = 0; i < len; i++)
+                    {
+                        res = dequeue(q);
+                        if ((i % 2) != 0)
+                        {
+                            enqueue(q, res);
+                        }
+                        else
+                        {
+                            printf("%d\t", res);
+                        }
+                    }
+                }
+                free(&q);
+                return 0;
+            }        </pre>
+        <small>All rights Reserved &copy; By Cnplaman 2022-04-06</small>
+    </section>
+    <script>
+        class Queue {
+            constructor() {
+                this.count = 0;
+                this.lowestCount = 0;
+                this.items = {};
+            }
+            enqueue(element) {
+                this.items[this.count] = element;
+                this.count++;
+            }
+            dequeue() {
+                if (this.isEmpty()) {
+                    return undefined;
+                }
+                const result = this.items[this.lowestCount];
+                delete this.items[this.lowestCount];
+                this.lowestCount++;
+                return result;
+            }
+            size() {
+                return this.count - this.lowestCount;
+            }
+            peek() {
+                if (this.isEmpty()) {
+                    return undefined;
+                }
+                return this.items[this.lowestCount];
+            }
+
+            isEmpty() {
+                return this.size() === 0;
+            }
+            clear() {
+                this.items = {};
+                this.count = 0;
+                this.lowestCount = 0;
+            }
+            toString() {
+                if (this.isEmpty()) {
+                    return '';
+                }
+                let objString = `${this.items[this.lowestCount]}`;
+                for (let i = this.lowestCount + 1; i < this.count; i++) {
+                    objString = `${objString},${this.items[i]}`;
+                }
+                return objString;
+            }
+        }
+        // old solution
+        function QueueOld() {
+            this.items = []
+            QueueOld.prototype.enQueue = function (data) {
+                this.items.push(data)
+            }
+            QueueOld.prototype.deQueue = function () {
+                return this.items.shift()
+            }
+            QueueOld.prototype.front = function () {
+                console.log(this.items[0]);
+                return this.items[0]
+            }
+            QueueOld.prototype.isEmpty = function () {
+                return this.items.length == 0
+            }
+            QueueOld.prototype.size = function () {
+                return this.items.length
+            }
+            QueueOld.prototype.toString = function () {
+                let str = ''
+                for (let i = 0; i < this.items.length; i++) {
+                    str += this.items[i] + ' '
+                }
+                console.log('tostring:', str);
+                return str
+                // return this.items.join('')
+            }
+        }
+
+        // 击鼓传花
+        function circle(total, step) {
+            let q = new QueueOld()
+            //Q&A: create real queue with name, such as lily, mike, tom, and so on
+            for (let i = 0; i < total; i++) {
+                q.enQueue(i + 1)
+            }
+            q.toString()
+            let sn = 0
+            //Q&A: what if isEmpty()?
+            while (q.size() > 1) {
+                //Q&A: what if for
+                while (step > 1) {
+                    q.enQueue(q.deQueue())
+                    step -= 1
+                }
+                // for (let i = 1; i < step; i++) {
+                //   q.enQueue(q.deQueue())
+                // }
+                let res = q.deQueue()
+                step = 3
+                sn++
+                console.log(`round ${sn}:${res}`);
+                q.toString()
+            }
+        }
+        circle(10, 3)
+    </script>
+</body>
+
+</html>
