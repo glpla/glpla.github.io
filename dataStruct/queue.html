@@ -9,17 +9,31 @@
     <link rel="stylesheet" href="../css/reset.css">
     <style>
         .flex-h {
-            padding: 1rem 0;
+            height: 4rem;
+            line-height: 4rem;
             margin-bottom: 1rem;
-            border-bottom: 1px solid #c00000;
+            background-image: url(../imgs/xit.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
         }
 
         .flex-h li {
             margin: 0 1rem;
         }
 
+        .flex-h li a {
+            font-size: 1.2rem;
+        }
+
+
         .flex-h li:hover a {
-            color: #c00000;
+            color: #ff0;
+        }
+
+        h1 {
+            border-bottom: 2px solid rgba(0, 0, 0, .1);
         }
 
         h1 a {
@@ -32,12 +46,12 @@
 <body>
     <section class="w">
         <ul class="flex-h" id="top">
-            <li><a href="#seq">顺序队列</a></li>
-            <li><a href="#link">链式队列</a></li>
+            <li><a href="#seq" id="topseq">顺序队列</a></li>
+            <li><a href="#link" id="toplink">链式队列</a></li>
             <!-- <li><a href="./stackArr.html" target="_blank">数组队列js</a></li> -->
             <!-- <li><a href="./stackObj.html" target="_blank">对象队列js</a></li> -->
         </ul>
-        <h1 id="seq">顺序队列 <a href="#top">返回顶部</a></h1>
+        <h1 id="seq">顺序队列 <a href="#top" id="back2top0">返回顶部</a></h1>
         <pre class="code">
             #include &lt;stdio.h&gt;
             #include &lt;stdlib.h&gt;
@@ -99,7 +113,7 @@
                 free(&q);
                 return 0;
             }        </pre>
-        <h1 id="link">链式队列<a href="#top">返回顶部</a></h1>
+        <h1 id="link">链式队列 <a href="#top" id="back2top1">返回顶部</a></h1>
         <pre class="code">
             #include &lt;stdio.h&gt;
             #include &lt;stdlib.h&gt;
@@ -195,6 +209,19 @@
             }        </pre>
         <small>All rights Reserved &copy; By Cnplaman 2022-04-06</small>
     </section>
+    <script src="../js/s2view_cnplaman.js"></script>
+    <script>
+        window.onload = function () {
+            let top0 = document.querySelector('#back2top0');
+            let top1 = document.querySelector('#back2top1');
+            let seq = document.querySelector('#topseq');
+            let link = document.querySelector('#toplink');
+            s2view(top0, "#top")
+            s2view(top1, "#top")
+            s2view(seq, "#seq")
+            s2view(link, "#link")
+        }
+    </script>
     <script>
         class Queue {
             constructor() {

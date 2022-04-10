@@ -9,17 +9,30 @@
     <link rel="stylesheet" href="../css/reset.css">
     <style>
         .flex-h {
-            padding: 1rem 0;
+            height: 4rem;
+            line-height: 4rem;
             margin-bottom: 1rem;
-            border-bottom: 1px solid #c00000;
+            background-image: url(../imgs/xit.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
         }
 
         .flex-h li {
             margin: 0 1rem;
         }
 
+        .flex-h li a {
+            font-size: 1.2rem;
+        }
+
         .flex-h li:hover a {
-            color: #c00000;
+            color: #ff0;
+        }
+
+        h1 {
+            border-bottom: 2px solid rgba(0, 0, 0, .1);
         }
 
         h1 a {
@@ -32,11 +45,11 @@
 <body>
     <section class="w">
         <ul class="flex-h" id="top">
-            <li><a href="#str">串的基本使用</a></li>
-            <li><a href="#seq">顺序串</a></li>
-            <li><a href="#link">链式串</a></li>
+            <li><a href="#basic" id="topbasic">串的基本使用</a></li>
+            <li><a href="#seq" id="topseq">顺序串</a></li>
+            <li><a href="#link" id="toplink">链式串</a></li>
         </ul>
-        <h1 id="str">串的基本使用 <a href="#top"></a>返回顶部</h1>
+        <h1 id="basic">串的基本使用 <a href="#top" id="back2top0">返回顶部</a></h1>
         <p>Q1：什么是字符串？</p>
         <p>. C中没有字符串类型</p>
         <p>. 以'\0'为结束标记的连续字符的集合，以""括起来</p>
@@ -117,7 +130,7 @@
       }</pre>
         <p><span class="iconfont" style="color: #f40; font-weight: 700;">&#xe64a;</span> 需要拷贝结束标记吗？</p>
         <p><span class="iconfont" style="color: #f40; font-weight: 700;">&#xe64a;</span> p指针是否丢失？</p>
-        <h1 id="seq">顺序串 <a href="#top">返回顶部</a></h1>
+        <h1 id="seq">顺序串 <a href="#top" id="back2top1">返回顶部</a></h1>
         <pre class="code">
         #include &lt;stdio.h&gt;
         #include &lt;stdlib.h&gt;
@@ -189,7 +202,7 @@
             free(s);
             return 0;
         }        </pre>
-        <h1 id="link">链式串 <a href="#top">返回顶部</a></h1>
+        <h1 id="link">链式串 <a href="#top" id="back2top2">返回顶部</a></h1>
         <pre class="code">
         typedef struct Node
         {
@@ -201,9 +214,67 @@
         {
             Node *head;
             int len;
-        } String;        </pre>
+        } String;
+
+        void assign(String *s, char *str)
+        {
+            Node *p, *pre = s->head;
+            int i;
+            for (i = 0; *(str + i) != '\0'; i++)
+            {
+                p = (Node *)malloc(sizeof(Node));
+                p->data = *(str + i);
+                p->next = pre->next;
+                pre->next = p;
+                // MUST
+                pre = p;
+            }
+            s->len = i;
+        }
+
+        void display(String *s)
+        {
+            Node *p = s->head->next;
+            while (p)
+            {
+                printf("%c", p->data);
+                p = p->next;
+            }
+            printf("\n");
+        }  
+
+        int main(void)
+        {
+            String *s = (String *)malloc(sizeof(String));
+            s->head = (Node *)malloc(sizeof(Node));
+            s->head->data = '#';
+            s->head->next = NULL;
+            s->len = 0;
+            assign(s, "hi, there.");
+            printf("%d\n", s->len);
+            display(s);
+            free(s);
+            return 0;
+        }      </pre>
         <small>Copyright Reserved &copy; By Cnplaman 2022-03-12</small>
     </section>
+    <script src="../js/s2view_cnplaman.js"></script>
+    <script>
+        window.onload = function () {
+            let top0 = document.querySelector('#back2top0');
+            let top1 = document.querySelector('#back2top1');
+            let top2 = document.querySelector('#back2top2');
+            let basic = document.querySelector('#topbasic');
+            let seq = document.querySelector('#topseq');
+            let link = document.querySelector('#toplink');
+            s2view(top0, "#top")
+            s2view(top1, "#top")
+            s2view(top2, "#top")
+            s2view(basic, "#basic")
+            s2view(seq, "#seq")
+            s2view(link, "#link")
+        }
+    </script>
 </body>
 
 </html>
