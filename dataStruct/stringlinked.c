@@ -31,8 +31,8 @@ void assign(String *s, char *str)
 }
 void insertStr(String *s, int i, String *str)
 {
-    Node *src = s->head, *des = str->head;
-    int i, j;
+    // Node *src = s->head, *des = str->head;
+    // int i, j;
 }
 void display(String *s)
 {

@@ -3,11 +3,13 @@
 #define maxSize 20
 #define TRUE 1
 #define FALSE 0
+#define ERROR -1
 typedef struct
 {
     char data[maxSize];
     int len;
 } String;
+
 int assign(String *s, char *str)
 {
     int i;
@@ -18,7 +20,7 @@ int assign(String *s, char *str)
     printf("len=%d\n", i);
     if (i > maxSize)
     {
-        return FALSE;
+        return ERROR;
     }
     i = 0;
     while (*(str + i) != '\0')
@@ -26,9 +28,17 @@ int assign(String *s, char *str)
         s->data[i] = *(str + i);
         i++;
     }
+    // MUST
+    s->data[i] = '\0';
     s->len = i;
     return TRUE;
 }
+
+void display(String *s)
+{
+    puts(s->data);
+}
+
 String *substr(String *s, int i, int len)
 {
     String *str = (String *)malloc(sizeof(String));
@@ -49,21 +59,67 @@ String *substr(String *s, int i, int len)
     str->len = j;
     return str;
 }
+int indexOfCh(String *s, char ch)
+{
+    if (!s->len)
+    {
+        return ERROR;
+    }
+    int ind;
+    for (int i = 0; i < s->len; i++)
+    {
+        if (s->data[i] == ch)
+        {
+            return i;
+        }
+    }
+    return ERROR;
+}
+int match(String *s, String *p, int s_start, int p_start, int *s_fail, int *p_fail)
+{
+    int i = s_start, j = p_start;
+    // 从p串的第一位开始比较
+    for (; j < p->len; i++, j++)
+    {
+        if (s->data[i] != p->data[j])
+        {
+            *s_fail = i;
+            *p_fail = j;
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+int indexOfStr(String *s, String *p, int pos)
+{
+    int s_start = 0, p_start = 0, s_fail, p_fail;
+    for (s_start = pos; s_start <= s->len - p->len; s_start++)
+    {
+        if (match(s, p, s_start, p_start, &s_fail, &p_fail))
+        {
+            return s_start;
+        }
+    }
+    return FALSE;
+}
 
 int main(void)
 {
-    char *str = "hi, there. boy";
+    char *str0 = "hi, there. boy";
+    char *str1 = "h";
     int res;
     String *s = (String *)malloc(sizeof(String));
-    res = assign(s, str);
-    if (res)
-    {
-        puts(s->data);
-        printf("%d\n", s->len);
-    }
-    String *newstr = substr(s, 2, 4);
-    puts(newstr->data);
-    printf("%d\n", newstr->len);
+    String *p = (String *)malloc(sizeof(String));
+    assign(s, str0);
+    assign(p, str1);
+    // assign(p, "there");
+    display(s);
+    display(p);
+    res = indexOfStr(s, p, 0);
+    printf("res=%d\n", res);
+    res = indexOfCh(s, 'I');
+    printf("res=%d\n", res);
     free(s);
     return 0;
 }
