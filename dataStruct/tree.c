@@ -15,14 +15,15 @@ typedef struct Node
     struct Node *children[maxSize];
 } cTree;
 
-typedef struct Node
+typedef struct Node2
 {
     int data;
-    struct Node *leftChild;
-    struct Node *nextBrother;
+    struct Node2 *leftChild;
+    struct Node2 *nextBrother;
 } cbTree;
 
 int main(void)
 {
+
     return 0;
 }

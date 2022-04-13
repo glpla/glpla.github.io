@@ -65,19 +65,20 @@
                 int rear;
                 int front;
             } Queue;
-            
+
             void init(Queue **q)
             {
                 *q = (Queue *)malloc(sizeof(Queue));
                 (*q)->front = 0;
                 (*q)->rear = 0;
+                printf("init inside\t%p\n", *q);
             }
-            
+
             int isEmpty(Queue *q)
             {
                 return q->rear == q->front;
             }
-            
+
             int enQueue(Queue *q, int data)
             {
                 if ((q->rear + 1) % maxSize == q->front)
@@ -88,7 +89,7 @@
                 q->data[q->rear] = data;
                 return TRUE;
             }
-            
+
             int deQueue(Queue *q)
             {
                 if (q->rear == q->front)
@@ -96,23 +97,30 @@
                     return FALSE;
                 }
                 q->front = (q->front + 1) % maxSize;
-            
+
                 return q->data[q->front];
             }
-            
-            void destroy(Queue **q)
+
+            void destroy(Queue *q)
             {
-                free(*q);
+                free(q);
             }
-            
+
             int main(void)
             {
                 Queue *q;
+                printf("declare\t\t%p\n", q);
                 init(&q);
+                printf("init oustside\t%p\n", q);
                 //… …
-                free(&q);
+                free(q);
+                printf("free\t\t%p\n", q);
                 return 0;
-            }        </pre>
+            }
+            // declare         00000000
+            // init inside     00C31378
+            // init oustside   00C31378
+            // free            00C31378</pre>
         <h1 id="link">链式队列 <a href="#top" id="back2top1">返回顶部</a></h1>
         <pre class="code">
             #include &lt;stdio.h&gt;

@@ -15,6 +15,7 @@ void init(Queue **q)
     *q = (Queue *)malloc(sizeof(Queue));
     (*q)->front = 0;
     (*q)->rear = 0;
+    printf("init inside\t%p\n", *q);
 }
 
 int isEmpty(Queue *q)
@@ -44,16 +45,23 @@ int deQueue(Queue *q)
     return q->data[q->front];
 }
 
-void destroy(Queue **q)
+void destroy(Queue *q)
 {
-    free(*q);
+    free(q);
 }
 
 int main(void)
 {
     Queue *q;
+    printf("declare\t\t%p\n", q);
     init(&q);
+    printf("init oustside\t%p\n", q);
     //… …
-    free(&q);
+    free(q);
+    printf("free\t\t%p\n", q);
     return 0;
 }
+// declare         00000000
+// init inside     00C31378
+// init oustside   00C31378
+// free            00C31378
