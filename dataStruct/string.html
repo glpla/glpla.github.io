@@ -100,187 +100,187 @@
         <p><span class="iconfont" style="color: #f40; font-weight: 700;">&#xe64a;</span> p指针是否丢失？</p>
         <h2 id="seq">顺序串 <a href="#top" id="back2top1"><i class="iconfont icon">&#xe604;</i></a></h2>
         <pre class="code">
-    #include &lt;stdio.h&gt;
-    #include &lt;stdlib.h&gt;
-    
-    #define maxSize 20
-    #define TRUE 1
-    #define FALSE 0
-    #define ERROR -1
-    typedef struct
-    {
-        char data[maxSize];
-        int len;
-    } String;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
 
-    int assign(String *s, char *str)
-    {
-        int i;
-        for (i = 0; *(str + i) != '\0'; i++)
-        {
-            i++;
-        }
-        printf("len=%d\n", i);
-        if (i > maxSize)
-        {
-            return ERROR;
-        }
-        i = 0;
-        while (*(str + i) != '\0')
-        {
-            s->data[i] = *(str + i);
-            i++;
-        }
-        // MUST
-        s->data[i] = '\0';
-        s->len = i;
-        return TRUE;
-    }
+#define maxSize 20
+#define TRUE 1
+#define FALSE 0
+#define ERROR -1
+typedef struct
+{
+    char data[maxSize];
+    int len;
+} String;
 
-    void display(String *s)
+int assign(String *s, char *str)
+{
+    int i;
+    for (i = 0; *(str + i) != '\0'; i++)
     {
-        puts(s->data);
+        i++;
     }
-
-    String *substr(String *s, int i, int len)
+    printf("len=%d\n", i);
+    if (i > maxSize)
     {
-        String *str = (String *)malloc(sizeof(String));
-        str->len = 0;
-        if (i < 0 || i > s->len || len < 0)
-        {
-            return str;
-        }
-        // 这个变量可以省略
-        int j = 0;
-        for (int ind = i; ind < i + len; ind++)
-        {
-            str->data[j] = s->data[ind];
-            j++;
-        }
-        // MUST
-        str->data[j] = '\0';
-        str->len = j;
-        return str;
-    }
-    int indexOfCh(String *s, char ch)
-    {
-        if (!s->len)
-        {
-            return ERROR;
-        }
-        int ind;
-        for (int i = 0; i < s->len; i++)
-        {
-            if (s->data[i] == ch)
-            {
-                return i;
-            }
-        }
         return ERROR;
     }
-    int match(String *s, String *p, int s_start, int p_start, int *s_fail, int *p_fail)
+    i = 0;
+    while (*(str + i) != '\0')
     {
-        int i = s_start, j = p_start;
-        // 从p串的第一位开始比较
-        for (; j < p->len; i++, j++)
-        {
-            if (s->data[i] != p->data[j])
-            {
-                *s_fail = i;
-                *p_fail = j;
-                return FALSE;
-            }
-        }
-        return TRUE;
+        s->data[i] = *(str + i);
+        i++;
     }
+    // MUST
+    s->data[i] = '\0';
+    s->len = i;
+    return TRUE;
+}
 
-    int indexOfStr(String *s, String *p, int pos)
+void display(String *s)
+{
+    puts(s->data);
+}
+
+String *substr(String *s, int i, int len)
+{
+    String *str = (String *)malloc(sizeof(String));
+    str->len = 0;
+    if (i < 0 || i > s->len || len < 0)
     {
-        int s_start = 0, p_start = 0, s_fail, p_fail;
-        for (s_start = pos; s_start <= s->len - p->len; s_start++)
-        {
-            if (match(s, p, s_start, p_start, &s_fail, &p_fail))
-            {
-                return s_start;
-            }
-        }
-        return FALSE;
+        return str;
     }
-
-    int main(void)
+    // 这个变量可以省略
+    int j = 0;
+    for (int ind = i; ind < i + len; ind++)
     {
-        char *str0 = "hi, there. boy";
-        char *str1 = "here";
-        int res;
-        String *s = (String *)malloc(sizeof(String));
-        String *p = (String *)malloc(sizeof(String));
-        assign(s, str0);
-        // assign(p, str1);
-        assign(p, "there");
-        display(s);
-        display(p);
-        res = indexOfStr(s, p, 0);
-        printf("res=%d\n", res);
-        res = indexOfCh(s, 'I');
-        printf("res=%d\n", res);
-        free(s);
-        return 0;
-    }</pre>
+        str->data[j] = s->data[ind];
+        j++;
+    }
+    // MUST
+    str->data[j] = '\0';
+    str->len = j;
+    return str;
+}
+int indexOfCh(String *s, char ch)
+{
+    if (!s->len)
+    {
+        return ERROR;
+    }
+    int ind;
+    for (int i = 0; i < s->len; i++)
+    {
+        if (s->data[i] == ch)
+        {
+            return i;
+        }
+    }
+    return ERROR;
+}
+int match(String *s, String *p, int s_start, int p_start, int *s_fail, int *p_fail)
+{
+    int i = s_start, j = p_start;
+    // 从p串的第一位开始比较
+    for (; j < p->len; i++, j++)
+    {
+        if (s->data[i] != p->data[j])
+        {
+            *s_fail = i;
+            *p_fail = j;
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+int indexOfStr(String *s, String *p, int pos)
+{
+    int s_start = 0, p_start = 0, s_fail, p_fail;
+    for (s_start = pos; s_start <= s->len - p->len; s_start++)
+    {
+        if (match(s, p, s_start, p_start, &s_fail, &p_fail))
+        {
+            return s_start;
+        }
+    }
+    return FALSE;
+}
+
+int main(void)
+{
+    char *str0 = "hi, there. boy";
+    char *str1 = "here";
+    int res;
+    String *s = (String *)malloc(sizeof(String));
+    String *p = (String *)malloc(sizeof(String));
+    assign(s, str0);
+    // assign(p, str1);
+    assign(p, "there");
+    display(s);
+    display(p);
+    res = indexOfStr(s, p, 0);
+    printf("res=%d\n", res);
+    res = indexOfCh(s, 'I');
+    printf("res=%d\n", res);
+    free(s);
+    return 0;
+}</pre>
         <h2 id="link">链式串 <a href="#top" id="back2top2"><i class="iconfont icon">&#xe604;</i></a></h2>
         <pre class="code">
-    typedef struct Node
-    {
-        char data;
-        struct Node *next;
-    } Node;
+typedef struct Node
+{
+    char data;
+    struct Node *next;
+} Node;
 
-    typedef struct
-    {
-        Node *head;
-        int len;
-    } String;
+typedef struct
+{
+    Node *head;
+    int len;
+} String;
 
-    void assign(String *s, char *str)
+void assign(String *s, char *str)
+{
+    Node *p, *pre = s->head;
+    int i;
+    for (i = 0; *(str + i) != '\0'; i++)
     {
-        Node *p, *pre = s->head;
-        int i;
-        for (i = 0; *(str + i) != '\0'; i++)
-        {
-            p = (Node *)malloc(sizeof(Node));
-            p->data = *(str + i);
-            p->next = pre->next;
-            pre->next = p;
-            // MUST
-            pre = p;
-        }
-        s->data[i] = '\0';
-        s->len = i;
+        p = (Node *)malloc(sizeof(Node));
+        p->data = *(str + i);
+        p->next = pre->next;
+        pre->next = p;
+        // MUST
+        pre = p;
     }
+    s->data[i] = '\0';
+    s->len = i;
+}
 
-    void display(String *s)
+void display(String *s)
+{
+    Node *p = s->head->next;
+    while (p)
     {
-        Node *p = s->head->next;
-        while (p)
-        {
-            printf("%c", p->data);
-            p = p->next;
-        }
-        printf("\n");
-    }  
+        printf("%c", p->data);
+        p = p->next;
+    }
+    printf("\n");
+}  
 
-    int main(void)
-    {
-        String *s = (String *)malloc(sizeof(String));
-        s->head = (Node *)malloc(sizeof(Node));
-        s->head->data = '#';
-        s->head->next = NULL;
-        s->len = 0;
-        assign(s, "hi, there.");
-        printf("%d\n", s->len);
-        display(s);
-        free(s);
-        return 0;
-    }      </pre>
+int main(void)
+{
+    String *s = (String *)malloc(sizeof(String));
+    s->head = (Node *)malloc(sizeof(Node));
+    s->head->data = '#';
+    s->head->next = NULL;
+    s->len = 0;
+    assign(s, "hi, there.");
+    printf("%d\n", s->len);
+    display(s);
+    free(s);
+    return 0;
+}      </pre>
         <small>Copyright Reserved &copy; By Cnplaman 2022-03-12</small>
     </section>
     <script src="../js/s2view_cnplaman.js"></script>
