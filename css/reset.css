@@ -43,6 +43,7 @@ html, body, ul, ol, dl, dd, a, img, p, h1, h2, h3, h4, div, input, button, aside
     padding: 0;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
+    font-weight: normal;
 }
 
 html {
@@ -132,6 +133,7 @@ fieldset {
 
 .w {
     position: relative;
+    padding: 1rem;
     width: 100vw;
     max-width: 1000px;
     margin: 0 auto;
@@ -177,6 +179,10 @@ fieldset {
     right: 0;
     bottom: 0;
     margin: auto;
+}
+
+.flex {
+    display: flex;
 }
 
 .flex-h {
@@ -245,26 +251,32 @@ fieldset {
     background-repeat: repeat-x;
 }
 
-.grid4 {
+.grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     padding: 1rem;
 }
 
-.grid3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-}
-
 .grid2 {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+    padding: 1rem;
+    grid-template-columns: repeat(2, 1fr);
 }
 
+.grid3 {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+}
 
+.grid4 {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+}
 
 section {
     position: relative;
@@ -291,5 +303,6 @@ section {
 
     .grid2, .grid3, .grid4 {
         grid-template-columns: repeat(1, 1fr);
+        gap: unset;
     }
 }
