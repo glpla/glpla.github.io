@@ -7,42 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Queue</title>
     <link rel="stylesheet" href="../css/reset.css">
-    <style>
-        .flex-h {
-            height: 4rem;
-            line-height: 4rem;
-            margin-bottom: 1rem;
-            background-color: #2980b9;
-            background-image: url(../imgs/xit.jpg);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: #fff;
-        }
-
-        .flex-h li {
-            margin: 0 1rem;
-        }
-
-        .flex-h li a {
-            font-size: 1.2rem;
-        }
-
-
-        .flex-h li:hover a {
-            color: #ff0;
-        }
-
-        h1 {
-            border-bottom: 2px solid rgba(0, 0, 0, .1);
-            font-weight: normal;
-        }
-
-        h1 a .icon {
-            font-size: 1.2em;
-            color: #c00;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/ds.css">
 </head>
 
 <body>
@@ -53,170 +18,170 @@
             <!-- <li><a href="./stackArr.html" target="_blank">数组队列js</a></li> -->
             <!-- <li><a href="./stackObj.html" target="_blank">对象队列js</a></li> -->
         </ul>
-        <h1 id="seq">顺序队列 <a href="#top" id="back2top0"><i class="iconfont icon">&#xe604;</i></a></h1>
+        <h2 id="seq">顺序队列 <a href="#top" id="back2top0"><i class="iconfont icon">&#xe604;</i></a></h2>
         <pre class="code">
-            #include &lt;stdio.h&gt;
-            #include &lt;stdlib.h&gt;
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;
 
-            #define maxSize 20
-            #define TRUE 1
-            #define FALSE 0
-            typedef struct
-            {
-                int data[20];
-                int rear;
-                int front;
-            } Queue;
+    #define maxSize 20
+    #define TRUE 1
+    #define FALSE 0
+    typedef struct
+    {
+        int data[20];
+        int rear;
+        int front;
+    } Queue;
 
-            void init(Queue **q)
-            {
-                *q = (Queue *)malloc(sizeof(Queue));
-                (*q)->front = 0;
-                (*q)->rear = 0;
-                printf("init inside\t%p\n", *q);
-            }
+    void init(Queue **q)
+    {
+        *q = (Queue *)malloc(sizeof(Queue));
+        (*q)->front = 0;
+        (*q)->rear = 0;
+        printf("init inside\t%p\n", *q);
+    }
 
-            int isEmpty(Queue *q)
-            {
-                return q->rear == q->front;
-            }
+    int isEmpty(Queue *q)
+    {
+        return q->rear == q->front;
+    }
 
-            int enQueue(Queue *q, int data)
-            {
-                if ((q->rear + 1) % maxSize == q->front)
-                {
-                    return FALSE;
-                }
-                q->rear = (q->rear + 1) % maxSize;
-                q->data[q->rear] = data;
-                return TRUE;
-            }
+    int enQueue(Queue *q, int data)
+    {
+        if ((q->rear + 1) % maxSize == q->front)
+        {
+            return FALSE;
+        }
+        q->rear = (q->rear + 1) % maxSize;
+        q->data[q->rear] = data;
+        return TRUE;
+    }
 
-            int deQueue(Queue *q)
-            {
-                if (q->rear == q->front)
-                {
-                    return FALSE;
-                }
-                q->front = (q->front + 1) % maxSize;
+    int deQueue(Queue *q)
+    {
+        if (q->rear == q->front)
+        {
+            return FALSE;
+        }
+        q->front = (q->front + 1) % maxSize;
 
-                return q->data[q->front];
-            }
+        return q->data[q->front];
+    }
 
-            void destroy(Queue *q)
-            {
-                free(q);
-            }
+    void destroy(Queue *q)
+    {
+        free(q);
+    }
 
-            int main(void)
-            {
-                Queue *q;
-                printf("declare\t\t%p\n", q);
-                init(&q);
-                printf("init oustside\t%p\n", q);
-                //… …
-                free(q);
-                printf("free\t\t%p\n", q);
-                return 0;
-            }
-            // declare         00000000
-            // init inside     00C31378
-            // init oustside   00C31378
-            // free            00C31378</pre>
-        <h1 id="link">链式队列 <a href="#top" id="back2top1"><i class="iconfont icon">&#xe604;</i></a></h1>
+    int main(void)
+    {
+        Queue *q;
+        printf("declare\t\t%p\n", q);
+        init(&q);
+        printf("init oustside\t%p\n", q);
+        //… …
+        free(q);
+        printf("free\t\t%p\n", q);
+        return 0;
+    }
+    // declare         00000000
+    // init inside     00C31378
+    // init oustside   00C31378
+    // free            00C31378</pre>
+        <h2 id="link">链式队列 <a href="#top" id="back2top1"><i class="iconfont icon">&#xe604;</i></a></h2>
         <pre class="code">
-            #include &lt;stdio.h&gt;
-            #include &lt;stdlib.h&gt;
-    
-            #define TRUE 1
-            #define FALSE 0
-            typedef struct Node
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;
+
+    #define TRUE 1
+    #define FALSE 0
+    typedef struct Node
+    {
+        int data;
+        struct Node *next;
+    } Node;
+    typedef struct
+    {
+        Node *front;
+        Node *rear;
+        int len;
+    } Queue;
+    void init(Queue **q)
+    {
+        *q = (Queue *)malloc(sizeof(Queue));
+        (*q)->front = NULL;
+        (*q)->rear = NULL;
+        (*q)->len = 0;
+    }
+    void destroy(Queue **q)
+    {
+        free(*q);
+    }
+    int isEmpty(Queue *q)
+    {
+        return q->len == 0;
+    }
+    void enqueue(Queue *q, int el)
+    {
+        Node *node = (Node *)malloc(sizeof(Node));
+        node->data = el;
+        node->next = NULL;
+        // 判断是否为空
+        if (!q->len)
+        {
+            q->front = node;
+            q->rear = node;
+        }
+        else
+        {
+            q->rear->next = node;
+            q->rear = node;
+        }
+        q->len++;
+    }
+    int dequeue(Queue *q)
+    {
+        if (!q->len)
+        {
+            return FALSE;
+        }
+        int res = q->front->data;
+        q->front = q->front->next;
+        q->len--;
+        return res;
+    }
+    int main(void)
+    {
+        Queue *q;
+        int len = 8;
+        int res;
+        int i;
+        init(&q);
+        for (i = 1; i <= len; i++)
+        {
+            enqueue(q, i);
+        }
+        //P108:3.2.4
+        while (q->len > 0)
+        {
+            // MUST
+            len = q->len;
+            for (i = 0; i < len; i++)
             {
-                int data;
-                struct Node *next;
-            } Node;
-            typedef struct
-            {
-                Node *front;
-                Node *rear;
-                int len;
-            } Queue;
-            void init(Queue **q)
-            {
-                *q = (Queue *)malloc(sizeof(Queue));
-                (*q)->front = NULL;
-                (*q)->rear = NULL;
-                (*q)->len = 0;
-            }
-            void destroy(Queue **q)
-            {
-                free(*q);
-            }
-            int isEmpty(Queue *q)
-            {
-                return q->len == 0;
-            }
-            void enqueue(Queue *q, int el)
-            {
-                Node *node = (Node *)malloc(sizeof(Node));
-                node->data = el;
-                node->next = NULL;
-                // 判断是否为空
-                if (!q->len)
+                res = dequeue(q);
+                if ((i % 2) != 0)
                 {
-                    q->front = node;
-                    q->rear = node;
+                    enqueue(q, res);
                 }
                 else
                 {
-                    q->rear->next = node;
-                    q->rear = node;
+                    printf("%d\t", res);
                 }
-                q->len++;
             }
-            int dequeue(Queue *q)
-            {
-                if (!q->len)
-                {
-                    return FALSE;
-                }
-                int res = q->front->data;
-                q->front = q->front->next;
-                q->len--;
-                return res;
-            }
-            int main(void)
-            {
-                Queue *q;
-                int len = 8;
-                int res;
-                int i;
-                init(&q);
-                for (i = 1; i <= len; i++)
-                {
-                    enqueue(q, i);
-                }
-                //P108:3.2.4
-                while (q->len > 0)
-                {
-                    // MUST
-                    len = q->len;
-                    for (i = 0; i < len; i++)
-                    {
-                        res = dequeue(q);
-                        if ((i % 2) != 0)
-                        {
-                            enqueue(q, res);
-                        }
-                        else
-                        {
-                            printf("%d\t", res);
-                        }
-                    }
-                }
-                free(&q);
-                return 0;
-            }        </pre>
+        }
+        free(&q);
+        return 0;
+    }        </pre>
         <small>All rights Reserved &copy; By Cnplaman 2022-04-06</small>
     </section>
     <script src="../js/s2view_cnplaman.js"></script>

@@ -7,41 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>seq stack with C</title>
     <link rel="stylesheet" href="../css/reset.css">
-    <style>
-        .flex-h {
-            height: 4rem;
-            line-height: 4rem;
-            margin-bottom: 1rem;
-            background-color: #2980b9;
-            background-image: url(../imgs/xit.jpg);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: #fff;
-        }
-
-        .flex-h li {
-            margin: 0 1rem;
-        }
-
-        .flex-h li a {
-            font-size: 1.2rem;
-        }
-
-        .flex-h li:hover a {
-            color: #ff0;
-        }
-
-        h1 {
-            border-bottom: 2px solid rgba(0, 0, 0, .1);
-            font-weight: normal;
-        }
-
-        h1 a .icon {
-            font-size: 1.2em;
-            color: #c00;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/ds.css">
 </head>
 
 <body>
@@ -52,246 +18,246 @@
             <li><a href="./stackArr.html" target="_blank">数组栈js</a></li>
             <li><a href="./stackObj.html" target="_blank">对象栈js</a></li>
         </ul>
-        <h1 id="seq">顺序栈 <a href="#top" id="back2top0"><i class="iconfont icon">&#xe604;</i></a></h1>
+        <h2 id="seq">顺序栈 <a href="#top" id="back2top0"><i class="iconfont icon">&#xe604;</i></a></h2>
         <pre class="code">
-        #include &lt;stdio.h&gt;
-        #include &lt;stdlib.h&gt;
-        
-        #define maxSize 10
-        #define TRUE 1
-        #define FALSE 0
-        
-        typedef struct Stack
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;
+
+    #define maxSize 10
+    #define TRUE 1
+    #define FALSE 0
+
+    typedef struct Stack
+    {
+        int data[maxSize];
+        int top;
+    } Stack;
+
+    void init(Stack *s);
+    int isEmpty(Stack *s);
+    int push(Stack *s, int data);
+    int pop(Stack *s, int *el);
+    int top(Stack *s, int *el);
+    void clear(Stack *s);
+    void destroy(Stack *s);
+    void show(Stack *s);
+    void dec2bin(Stack *s, int num);
+
+    int main(void)
+    {
+        int num = 11231323;
+        char *str = "";
+        sprintf(str, "%d", num);
+        printf("%s\n", str);
+        return 0;
+    }
+    void init(Stack *s)
+    {
+        printf("inside=%p\n", s);
+        s->top = -1;
+        printf("init done\n");
+    }
+
+    int isEmpty(Stack *s)
+    {
+        if (s->top == -1)
         {
-            int data[maxSize];
-            int top;
-        } Stack;
-        
-        void init(Stack *s);
-        int isEmpty(Stack *s);
-        int push(Stack *s, int data);
-        int pop(Stack *s, int *el);
-        int top(Stack *s, int *el);
-        void clear(Stack *s);
-        void destroy(Stack *s);
-        void show(Stack *s);
-        void dec2bin(Stack *s, int num);
-        
-        int main(void)
-        {
-            int num = 11231323;
-            char *str = "";
-            sprintf(str, "%d", num);
-            printf("%s\n", str);
-            return 0;
+            printf("stack empty\n");
+            return TRUE;
         }
-        void init(Stack *s)
+        printf("stack NOT empty\n");
+        return FALSE;
+    }
+
+    int push(Stack *s, int data)
+    {
+        if (s->top == maxSize - 1)
         {
-            printf("inside=%p\n", s);
-            s->top = -1;
-            printf("init done\n");
-        }
-        
-        int isEmpty(Stack *s)
-        {
-            if (s->top == -1)
-            {
-                printf("stack empty\n");
-                return TRUE;
-            }
-            printf("stack NOT empty\n");
+            printf("stack FULL\n");
             return FALSE;
         }
-        
-        int push(Stack *s, int data)
+        s->top++;
+        s->data[s->top] = data;
+        printf("stack push done\n");
+        return TRUE;
+    }
+
+    int pop(Stack *s, int *el)
+    {
+        if (s->top == -1)
         {
-            if (s->top == maxSize - 1)
-            {
-                printf("stack FULL\n");
-                return FALSE;
-            }
-            s->top++;
-            s->data[s->top] = data;
-            printf("stack push done\n");
-            return TRUE;
+            printf("stack EMPTy\n");
+            return FALSE;
         }
-        
-        int pop(Stack *s, int *el)
+        *el = s->data[s->top];
+        s->top--;
+        printf("stack pop done\n");
+        return TRUE;
+    }
+
+    int top(Stack *s, int *el)
+    {
+        if (s->top == -1)
         {
-            if (s->top == -1)
-            {
-                printf("stack EMPTy\n");
-                return FALSE;
-            }
-            *el = s->data[s->top];
-            s->top--;
-            printf("stack pop done\n");
-            return TRUE;
+            printf("stack EMPTy\n");
+            return FALSE;
         }
-        
-        int top(Stack *s, int *el)
+        *el = s->data[s->top];
+        printf("stack top done\n");
+        return TRUE;
+    }
+
+    void clear(Stack *s)
+    {
+        printf("stack clear done\n");
+        s->top = -1;
+    }
+
+    void destroy(Stack *s)
+    {
+        printf("stack released\n");
+        free(s);
+    }
+    void show(Stack *s)
+    {
+        int res;
+        while (s->top > -1)
         {
-            if (s->top == -1)
-            {
-                printf("stack EMPTy\n");
-                return FALSE;
-            }
-            *el = s->data[s->top];
-            printf("stack top done\n");
-            return TRUE;
+            pop(s, &res);
+            printf("%d\n", res);
         }
-        
-        void clear(Stack *s)
+    }
+
+    void dec2bin(Stack *s, int num)
+    {
+        int rem;
+        char *str;
+        while (num > 0)
         {
-            printf("stack clear done\n");
-            s->top = -1;
+            rem = num % 2;
+            num = (int)num / 2;
+            push(s, rem);
         }
-        
-        void destroy(Stack *s)
-        {
-            printf("stack released\n");
-            free(s);
-        }
-        void show(Stack *s)
-        {
-            int res;
-            while (s->top > -1)
-            {
-                pop(s, &res);
-                printf("%d\n", res);
-            }
-        }
-        
-        void dec2bin(Stack *s, int num)
-        {
-            int rem;
-            char *str;
-            while (num > 0)
-            {
-                rem = num % 2;
-                num = (int)num / 2;
-                push(s, rem);
-            }
-            show(s);
-            // while (s->top > -1)
-            // {
-            //     pop(s, &rem);
-            //     printf("%d\n", rem);
-            // }
-        }        </pre>
-        <h1 id="link">链栈 <a href="#top" id="back2top1"><i class="iconfont icon">&#xe604;</i></a></h1>
+        show(s);
+        // while (s->top > -1)
+        // {
+        //     pop(s, &rem);
+        //     printf("%d\n", rem);
+        // }
+    }        </pre>
+        <h2 id="link">链栈 <a href="#top" id="back2top1"><i class="iconfont icon">&#xe604;</i></a></h2>
         <pre class="code">
-        #include &lt;stdio.h&gt;
-        #include &lt;stdlib.h&gt;
-        
-        typedef struct Node
-        {
-            int data;
-            struct Node *next;
-        } Node;
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;
+    
+    typedef struct Node
+    {
+        int data;
+        struct Node *next;
+    } Node;
 
-        typedef struct Stack
-        {
-            Node *top;
-        } Stack;
+    typedef struct Stack
+    {
+        Node *top;
+    } Stack;
 
-        void init(Stack *s)
-        {
-            s->top = (Node *)malloc(sizeof(Node));
-            s->top->next = NULL;
-            printf("Stack init done\n");
-        }
+    void init(Stack *s)
+    {
+        s->top = (Node *)malloc(sizeof(Node));
+        s->top->next = NULL;
+        printf("Stack init done\n");
+    }
 
-        void destroy(Stack *s)
+    void destroy(Stack *s)
+    {
+        Node *p, *pre;
+        pre = s->top;
+        p = pre->next;
+        while (p)
         {
-            Node *p, *pre;
-            pre = s->top;
+            pre = p->next;
+            free(p);
             p = pre->next;
-            while (p)
-            {
-                pre = p->next;
-                free(p);
-                p = pre->next;
-            }
-            free(pre);
-            printf("destroy done\n");
         }
+        free(pre);
+        printf("destroy done\n");
+    }
 
-        int isEmpty(Stack *s)
+    int isEmpty(Stack *s)
+    {
+        // NOT (NULL == ptr )or (nullptr== ptr )
+        // BUT(!ptr)或(ptr)
+        if (!s->top->next)
         {
-            // NOT (NULL == ptr )or (nullptr== ptr )
-            // BUT(!ptr)或(ptr)
-            if (!s->top->next)
-            {
-                printf("Stack empty\n");
-                return 0;
-            }
-            printf("Stack not empty\n");
-            return 1;
-        }
-
-        void push(Stack *s, int data)
-        {
-            Node *node = (Node *)malloc(sizeof(Node));
-            node->data = data;
-            node->next = s->top->next;
-            s->top->next = node;
-            printf("Stack push done: %d\n", data);
-        }
-
-        int pop(Stack *s)
-        {
-            if (!s->top->next)
-            {
-                printf("Stack empty\n");
-                return -1;
-            }
-            Node *node = s->top->next;
-            s->top->next = node->next;
-            printf("Stack pop done: %d\n", node->data);
-            free(node);
+            printf("Stack empty\n");
             return 0;
         }
+        printf("Stack not empty\n");
+        return 1;
+    }
 
-        int top(Stack *s)
+    void push(Stack *s, int data)
+    {
+        Node *node = (Node *)malloc(sizeof(Node));
+        node->data = data;
+        node->next = s->top->next;
+        s->top->next = node;
+        printf("Stack push done: %d\n", data);
+    }
+
+    int pop(Stack *s)
+    {
+        if (!s->top->next)
         {
-            if (!s->top->next)
-            {
-                printf("Stack empty\n");
-                return -1;
-            }
-            printf("Stack top done: %d\n", s->top->next->data);
-            return s->top->next->data;
+            printf("Stack empty\n");
+            return -1;
         }
-        
-        int main(void)
+        Node *node = s->top->next;
+        s->top->next = node->next;
+        printf("Stack pop done: %d\n", node->data);
+        free(node);
+        return 0;
+    }
+
+    int top(Stack *s)
+    {
+        if (!s->top->next)
         {
-            Stack *s;
-            init(s);
-            isEmpty(s);
-            push(s, 1);
-            top(s);
-            push(s, 11);
-            top(s);
-            push(s, 2);
-            top(s);
-            push(s, 3);
-            top(s);
-            push(s, 10);
-            top(s);
-            printf("pop-------------------\n");
-            pop(s);
-            top(s);
-            pop(s);
-            top(s);
-            pop(s);
-            top(s);
-            pop(s);
-            top(s);
-            pop(s);
-            top(s);
-            return 0;
-        }        </pre>
+            printf("Stack empty\n");
+            return -1;
+        }
+        printf("Stack top done: %d\n", s->top->next->data);
+        return s->top->next->data;
+    }
+    
+    int main(void)
+    {
+        Stack *s;
+        init(s);
+        isEmpty(s);
+        push(s, 1);
+        top(s);
+        push(s, 11);
+        top(s);
+        push(s, 2);
+        top(s);
+        push(s, 3);
+        top(s);
+        push(s, 10);
+        top(s);
+        printf("pop-------------------\n");
+        pop(s);
+        top(s);
+        pop(s);
+        top(s);
+        pop(s);
+        top(s);
+        pop(s);
+        top(s);
+        pop(s);
+        top(s);
+        return 0;
+    }        </pre>
         <small>All rights Reserved &copy; By Cnplaman 2022-04-03</small>
     </section>
     <script src="../js/s2view_cnplaman.js"></script>
