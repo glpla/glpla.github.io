@@ -8,38 +8,83 @@
     <title>String</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/ds.css">
+    <style>
+        .title {
+            line-height: 1.2rem;
+            text-decoration: underline;
+        }
+
+        h3 {
+            line-height: 2rem;
+            background-color: rgba(0, 128, 128, .2);
+            padding-left: 1rem;
+        }
+    </style>
 </head>
 
 <body>
     <section class="w">
         <ul class="flex-h" id="top">
             <li><a href="#basic" id="topbasic">串的基本使用</a></li>
+            <li><a href="#fn" id="topfn">串函数</a></li>
             <li><a href="#seq" id="topseq">顺序串</a></li>
             <li><a href="#link" id="toplink">链式串</a></li>
         </ul>
         <h2 id="basic">串的基本使用 <a href="#top" id="back2top0"><i class="iconfont icon">&#xe604;</i></a></h2>
-        <p>Q1：什么是字符串？</p>
+        <h3>Q: 基本概念</h3>
+        <p>串：0个或多个字符组成的有限序列；以双引号包裹，如”hi, there.”</p>
+        <p>串长：字符的个数（标记符号’\0’呢？） </p>
+        <p>空串：长度为0</p>
+        <p>串相等：当且仅当两个串的长度相等，且对应的字符也相等</p>
+        <p>子串：串中任意个连续的字符组成的序列；空串是任何串的子串</p>
+        <p class="warn">注意：</p>
         <p>. C中没有字符串类型</p>
-        <p>. 以'\0'为结束标记的连续字符的集合，以""括起来</p>
-        <p>. 结束标记按照char打印不出来；按照int打印为0</p>
         <p>. 输出串时，应该判断是否是结束标记，而不是判断长度</p>
-        <p>Q1：如何表示一个串？</p>
+        <h3>Q: 如何声明一个串？</h3>
         <pre class="code">
       char *str = "hello, cnplaman.";//指针形式：容易输出；但长度需要使用第三方函数strlen获取
       char str[] = "hello, cnplaman.";//数组形式：容易获取空间大小(包括结束标记'\0')
-      char str[100] = "hello, cnplaman.";//数组形式
-      char str[100] = {'1', '2', '3'};//字符数组；不建议。如果没有指定大小，则没有结束标记；输出会异常，甚至直到找到一个其它数据的结束标记才会停止</pre>
-        <p>Q2：如何输出一个指针串？</p>
+      char str[100] = "hello, cnplaman.";//数组形式</pre>
+        <h3>Q: 如何输出一个指针串？</h3>
         <pre class="code">
-      //方案1：
+      //方案1: 格式化函数
       printf("%s\n",str);
-      //方案2：遍历
+      //方案2: 格式化函数
+      puts(str);
+      //方案3: 遍历
       while (*str0)
       {
         printf("%c", *str0);
         str0++;
       }    </pre>
-        <p>demo1：逆序输出给定的字符串</p>
+        <p class="warn">注意：</p>
+        <p>. 防止串丢失。。。</p>
+        <p>. 防止结束标记丢失</p>
+        <p>. 输出串时，应该判断是否是结束标记，而不是判断长度</p>
+        <h3>demo: 拷贝串</h3>
+        <pre class="code">
+        char *str = "hi, there.";
+        char str0[] = "hi, there.";
+        puts(str);
+        while (*str != '\0')
+        {
+            printf("%c\n", *str);
+            str++;
+        }
+        puts(str0);
+        int i = 0; //MUST
+        while (str0[i] != '\0')
+        {
+            printf("%c\n", str0[i]);
+            i++;
+        }
+        while (*(str0 + i) != '\0')
+        {
+            printf("%c\n", *(str0 + i));
+            i++;
+        }
+                </pre>
+        <h3>demo: 逆序输出给定的字符串</h3>
         <pre class="code">
       #include &lt;stdio.h&gt;
       #include &lt;string.h&gt;
@@ -56,7 +101,7 @@
         }
         return 0;
       }    </pre>
-        <p>demo2：逆序输出输入的字符串</p>
+        <h3>demo: 逆序输出输入的字符串</h3>
         <pre class="code">
       #include &lt;stdio.h&gt;
       #include &lt;string.h&gt;
@@ -75,7 +120,7 @@
         }
         return 0;
       }    </pre>
-        <p>demo3：串的链接</p>
+        <h3>demo: 串的链接</h3>
         <pre class="code">
       int main(void)
       {
@@ -98,189 +143,203 @@
       }</pre>
         <p><span class="iconfont" style="color: #f40; font-weight: 700;">&#xe64a;</span> 需要拷贝结束标记吗？</p>
         <p><span class="iconfont" style="color: #f40; font-weight: 700;">&#xe64a;</span> p指针是否丢失？</p>
+        <h2 id="fn">串函数 <a href="#top" id="back2top3"><i class="iconfont icon">&#xe604;</i></a></h2>
+        <h3>头文件</h3>
+        <p>&lt;string.&gt;</p>
+        <h3>1. 串长</h3>
+        <p>strlen(str)：返回指针指向串的长度</p>
+        <h3>2. 比较串</h3>
+        <p> strcmp(str1, str2)：先转换成ASCII码再比较，直到遇到不同的或者结束符；返回0，表示相等；返回负数，表示s1小于s2；返回正数，表示s1大于s2；类似的还有指定位数的比较strncmp(str0,
+            str1, n)</p>
+        <h3>3. 拷贝串</h3>
+        <p>strcpy(des, src)</p>
+        <p>strncpy(des, src, n)：只拷贝n个字符过去，不包括结束标记</p>
+        <h3>4. 拼接串</h3>
+        <p>strcat(des, src)：des应有足够的长度来容纳拼接后的总长度；返回拼接后des的地址</p>
+        <p>strncat(str0, str1, n)，表示拼接时取后面串的多少位 </p>
         <h2 id="seq">顺序串 <a href="#top" id="back2top1"><i class="iconfont icon">&#xe604;</i></a></h2>
         <pre class="code">
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+        #include &lt;stdio.h&gt;
+        #include &lt;stdlib.h&gt;
 
-#define maxSize 20
-#define TRUE 1
-#define FALSE 0
-#define ERROR -1
-typedef struct
-{
-    char data[maxSize];
-    int len;
-} String;
-
-int assign(String *s, char *str)
-{
-    int i;
-    for (i = 0; *(str + i) != '\0'; i++)
-    {
-        i++;
-    }
-    printf("len=%d\n", i);
-    if (i > maxSize)
-    {
-        return ERROR;
-    }
-    i = 0;
-    while (*(str + i) != '\0')
-    {
-        s->data[i] = *(str + i);
-        i++;
-    }
-    // MUST
-    s->data[i] = '\0';
-    s->len = i;
-    return TRUE;
-}
-
-void display(String *s)
-{
-    puts(s->data);
-}
-
-String *substr(String *s, int i, int len)
-{
-    String *str = (String *)malloc(sizeof(String));
-    str->len = 0;
-    if (i < 0 || i > s->len || len < 0)
-    {
-        return str;
-    }
-    // 这个变量可以省略
-    int j = 0;
-    for (int ind = i; ind < i + len; ind++)
-    {
-        str->data[j] = s->data[ind];
-        j++;
-    }
-    // MUST
-    str->data[j] = '\0';
-    str->len = j;
-    return str;
-}
-int indexOfCh(String *s, char ch)
-{
-    if (!s->len)
-    {
-        return ERROR;
-    }
-    int ind;
-    for (int i = 0; i < s->len; i++)
-    {
-        if (s->data[i] == ch)
+        #define maxSize 20
+        #define TRUE 1
+        #define FALSE 0
+        #define ERROR -1
+        typedef struct
         {
-            return i;
+            char data[maxSize];
+            int len;
+        } String;
+
+        int assign(String *s, char *str)
+        {
+            int i;
+            for (i = 0; *(str + i) != '\0'; i++)
+            {
+                i++;
+            }
+            printf("len=%d\n", i);
+            if (i > maxSize)
+            {
+                return ERROR;
+            }
+            i = 0;
+            while (*(str + i) != '\0')
+            {
+                s->data[i] = *(str + i);
+                i++;
+            }
+            // MUST
+            s->data[i] = '\0';
+            s->len = i;
+            return TRUE;
         }
-    }
-    return ERROR;
-}
-int match(String *s, String *p, int s_start, int p_start, int *s_fail, int *p_fail)
-{
-    int i = s_start, j = p_start;
-    // 从p串的第一位开始比较
-    for (; j < p->len; i++, j++)
-    {
-        if (s->data[i] != p->data[j])
+
+        void display(String *s)
         {
-            *s_fail = i;
-            *p_fail = j;
+            puts(s->data);
+        }
+
+        String *substr(String *s, int i, int len)
+        {
+            String *str = (String *)malloc(sizeof(String));
+            str->len = 0;
+            if (i < 0 || i > s->len || len < 0)
+            {
+                return str;
+            }
+            // 这个变量可以省略
+            int j = 0;
+            for (int ind = i; ind < i + len; ind++)
+            {
+                str->data[j] = s->data[ind];
+                j++;
+            }
+            // MUST
+            str->data[j] = '\0';
+            str->len = j;
+            return str;
+        }
+        int indexOfCh(String *s, char ch)
+        {
+            if (!s->len)
+            {
+                return ERROR;
+            }
+            int ind;
+            for (int i = 0; i < s->len; i++)
+            {
+                if (s->data[i] == ch)
+                {
+                    return i;
+                }
+            }
+            return ERROR;
+        }
+        int match(String *s, String *p, int s_start, int p_start, int *s_fail, int *p_fail)
+        {
+            int i = s_start, j = p_start;
+            // 从p串的第一位开始比较
+            for (; j < p->len; i++, j++)
+            {
+                if (s->data[i] != p->data[j])
+                {
+                    *s_fail = i;
+                    *p_fail = j;
+                    return FALSE;
+                }
+            }
+            return TRUE;
+        }
+
+        int indexOfStr(String *s, String *p, int pos)
+        {
+            int s_start = 0, p_start = 0, s_fail, p_fail;
+            for (s_start = pos; s_start <= s->len - p->len; s_start++)
+            {
+                if (match(s, p, s_start, p_start, &s_fail, &p_fail))
+                {
+                    return s_start;
+                }
+            }
             return FALSE;
         }
-    }
-    return TRUE;
-}
 
-int indexOfStr(String *s, String *p, int pos)
-{
-    int s_start = 0, p_start = 0, s_fail, p_fail;
-    for (s_start = pos; s_start <= s->len - p->len; s_start++)
-    {
-        if (match(s, p, s_start, p_start, &s_fail, &p_fail))
+        int main(void)
         {
-            return s_start;
-        }
-    }
-    return FALSE;
-}
-
-int main(void)
-{
-    char *str0 = "hi, there. boy";
-    char *str1 = "here";
-    int res;
-    String *s = (String *)malloc(sizeof(String));
-    String *p = (String *)malloc(sizeof(String));
-    assign(s, str0);
-    // assign(p, str1);
-    assign(p, "there");
-    display(s);
-    display(p);
-    res = indexOfStr(s, p, 0);
-    printf("res=%d\n", res);
-    res = indexOfCh(s, 'I');
-    printf("res=%d\n", res);
-    free(s);
-    return 0;
-}</pre>
+            char *str0 = "hi, there. boy";
+            char *str1 = "here";
+            int res;
+            String *s = (String *)malloc(sizeof(String));
+            String *p = (String *)malloc(sizeof(String));
+            assign(s, str0);
+            // assign(p, str1);
+            assign(p, "there");
+            display(s);
+            display(p);
+            res = indexOfStr(s, p, 0);
+            printf("res=%d\n", res);
+            res = indexOfCh(s, 'I');
+            printf("res=%d\n", res);
+            free(s);
+            return 0;
+        }</pre>
         <h2 id="link">链式串 <a href="#top" id="back2top2"><i class="iconfont icon">&#xe604;</i></a></h2>
         <pre class="code">
-typedef struct Node
-{
-    char data;
-    struct Node *next;
-} Node;
+        typedef struct Node
+        {
+            char data;
+            struct Node *next;
+        } Node;
 
-typedef struct
-{
-    Node *head;
-    int len;
-} String;
+        typedef struct
+        {
+            Node *head;
+            int len;
+        } String;
 
-void assign(String *s, char *str)
-{
-    Node *p, *pre = s->head;
-    int i;
-    for (i = 0; *(str + i) != '\0'; i++)
-    {
-        p = (Node *)malloc(sizeof(Node));
-        p->data = *(str + i);
-        p->next = pre->next;
-        pre->next = p;
-        // MUST
-        pre = p;
-    }
-    s->data[i] = '\0';
-    s->len = i;
-}
+        void assign(String *s, char *str)
+        {
+            Node *p, *pre = s->head;
+            int i;
+            for (i = 0; *(str + i) != '\0'; i++)
+            {
+                p = (Node *)malloc(sizeof(Node));
+                p->data = *(str + i);
+                p->next = pre->next;
+                pre->next = p;
+                // MUST
+                pre = p;
+            }
+            s->data[i] = '\0';
+            s->len = i;
+        }
 
-void display(String *s)
-{
-    Node *p = s->head->next;
-    while (p)
-    {
-        printf("%c", p->data);
-        p = p->next;
-    }
-    printf("\n");
-}  
+        void display(String *s)
+        {
+            Node *p = s->head->next;
+            while (p)
+            {
+                printf("%c", p->data);
+                p = p->next;
+            }
+            printf("\n");
+        }  
 
-int main(void)
-{
-    String *s = (String *)malloc(sizeof(String));
-    s->head = (Node *)malloc(sizeof(Node));
-    s->head->data = '#';
-    s->head->next = NULL;
-    s->len = 0;
-    assign(s, "hi, there.");
-    printf("%d\n", s->len);
-    display(s);
-    free(s);
-    return 0;
-}      </pre>
+        int main(void)
+        {
+            String *s = (String *)malloc(sizeof(String));
+            s->head = (Node *)malloc(sizeof(Node));
+            s->head->data = '#';
+            s->head->next = NULL;
+            s->len = 0;
+            assign(s, "hi, there.");
+            printf("%d\n", s->len);
+            display(s);
+            free(s);
+            return 0;
+        }      </pre>
         <small>Copyright Reserved &copy; By Cnplaman 2022-03-12</small>
     </section>
     <script src="../js/s2view_cnplaman.js"></script>
@@ -289,13 +348,17 @@ int main(void)
             let top0 = document.querySelector('#back2top0');
             let top1 = document.querySelector('#back2top1');
             let top2 = document.querySelector('#back2top2');
+            let top3 = document.querySelector('#back2top3');
             let basic = document.querySelector('#topbasic');
+            let fn = document.querySelector('#topfn');
             let seq = document.querySelector('#topseq');
             let link = document.querySelector('#toplink');
             s2view(top0, "#top")
             s2view(top1, "#top")
             s2view(top2, "#top")
+            s2view(top3, "#top")
             s2view(basic, "#basic")
+            s2view(fn, "#fn")
             s2view(seq, "#seq")
             s2view(link, "#link")
         }
