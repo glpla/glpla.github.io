@@ -2,87 +2,87 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grid</title>
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/grid.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/grid.css">
 </head>
 
 <body>
-  <section class="w">
-    <h4 class="cont-title">知识点</h4>
-    <strong>grid盒子属性</strong>
-    <p class="line-dot">grid-template-columns<span class="dot"></span>列数</p>
-    <p class="line-dot">grid-template-rows<span class="dot"></span>行数</p>
-    <p class="line-dot">gap<span class="dot"></span>单元格间距</p>
-    <p class="line-dot">grid-template-areas<span class="dot"></span>区域划分</p>
-    <strong>grid项属性</strong>
-    <p class="line-dot">grid-column(span number)<span class="dot"></span></p>
-    <p class="line-dot">grid-row(span number)<span class="dot"></span></p>
-    <p class="line-dot">grid-area<span class="dot"></span>指定区域</p>
-    <p class="line-dot">align-self<span class="dot"></span>自己对齐方式</p>
-    <strong>grid常见写法</strong>
-    <pre class="code">
+    <section class="w">
+        <h4 class="cont-title">知识点</h4>
+        <strong>grid盒子属性</strong>
+        <p class="flex-h">grid-template-columns<span class="dot"></span>列数</p>
+        <p class="flex-h">grid-template-rows<span class="dot"></span>行数</p>
+        <p class="flex-h">gap<span class="dot"></span>单元格间距</p>
+        <p class="flex-h">grid-template-areas<span class="dot"></span>区域划分</p>
+        <strong>grid项属性</strong>
+        <p class="flex-h">grid-column(span number)<span class="dot"></span></p>
+        <p class="flex-h">grid-row(span number)<span class="dot"></span></p>
+        <p class="flex-h">grid-area<span class="dot"></span>指定区域</p>
+        <p class="flex-h">align-self<span class="dot"></span>自己对齐方式</p>
+        <strong>grid常见写法</strong>
+        <pre class="code">
     grid-template-columns:8rem 1fr 4rem//俩端固定，中间自适应
     grid-template-columns:repeat(3,1fr)//等分3列
     grid-template-columns:repeat(3,minmax(80px,1fr))//自适应
     grid-template-columns:repeat(auto-fill,minmax(80px,1fr))//万能自适应    </pre>
-    <a href="https://www.yuque.com/cnplaman/gk8kfd/kbyzr8" class="link" target="_blank">更多属性，点击查看</a>
-    <div class="exam-title">左右导航布局</div>
-    <div class="nav">
-      <div>8rem</div>
-      <div>1fr</div>
-    </div>
-    <pre class="code">
+        <a href="https://www.yuque.com/cnplaman/gk8kfd/kbyzr8" class="link" target="_blank">更多属性，点击查看</a>
+        <div class="exam-title">左右导航布局</div>
+        <div class="nav">
+            <div>8rem</div>
+            <div>1fr</div>
+        </div>
+        <pre class="code">
     .nav {
       display: grid;
       grid-template-columns: 8rem 1fr;
       gap: 1rem;
       height: 4rem;
     }    </pre>
-    <div class="exam-title">圣杯布局</div>
-    <div class="cup">
-      <div>8rem</div>
-      <div>1fr</div>
-      <div>4rem</div>
-    </div>
-    <pre class="code">
+        <div class="exam-title">圣杯布局</div>
+        <div class="cup">
+            <div>8rem</div>
+            <div>1fr</div>
+            <div>4rem</div>
+        </div>
+        <pre class="code">
     .cup {
       display: grid;
       grid-template-columns: 8rem 1fr 4rem;
       gap: 1rem;
       height: 4rem;
     }    </pre>
-    <div class="exam-title">九宫格</div>
-    <div class="sudoku">
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-    </div>
-    <pre class="code">
+        <div class="exam-title">九宫格</div>
+        <div class="grid grid3">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+        <pre class="code">
     .sudoku {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
     }    </pre>
-    <div class="exam-title">任意布局</div>
-    <div class="random">
-      <div class="item">grid-column: span 2;</div>
-      <div class="item">grid-row: span 2;</div>
-      <div class="item">grid-row: span 2;</div>
-      <div class="item">4</div>
-      <div class="item">grid-column: span 2;</div>
-    </div>
-    <pre class="code">
+        <div class="exam-title">任意布局</div>
+        <div class="random">
+            <div class="item">grid-column: span 2;</div>
+            <div class="item">grid-row: span 2;</div>
+            <div class="item">grid-row: span 2;</div>
+            <div class="item">4</div>
+            <div class="item">grid-column: span 2;</div>
+        </div>
+        <pre class="code">
     .random>div:nth-child(1) {
       grid-column: span 2;
     }
@@ -91,33 +91,33 @@
       grid-row: span 2;
     }
     //...  </pre>
-    <div class="exam-title">响应式布局</div>
-    <div class="ale">
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-      <div class="item"></div>
-    </div>
-    <pre class="code">
+        <div class="exam-title">响应式布局</div>
+        <div class="ale">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+        </div>
+        <pre class="code">
     .ale {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
       gap: 1rem;
     }    </pre>
-    <div class="exam-title">全站布局</div>
-    <article class="page">
-      <header>header</header>
-      <nav>nav</nav>
-      <aside>aside</aside>
-      <article>article</article>
-      <footer>footer</footer>
-    </article>
-    <pre class="code">
+        <div class="exam-title">全站布局</div>
+        <article class="page">
+            <header>header</header>
+            <nav>nav</nav>
+            <aside>aside</aside>
+            <article>article</article>
+            <footer>footer</footer>
+        </article>
+        <pre class="code">
     .page {
       display: grid;
       grid-template-areas:
@@ -132,8 +132,8 @@
       height: 8rem;
     } 
     //...</pre>
-    <small>Copyright Reserved &copy; By Cnplaman 2021-10-06</small>
-  </section>
+        <small>Copyright Reserved &copy; By Cnplaman 2021-10-06</small>
+    </section>
 </body>
 
 </html>

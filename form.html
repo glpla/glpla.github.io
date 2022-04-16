@@ -2,72 +2,72 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name='keywords' content="web glpla">
-  <meta name='description' content="only for test">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <title>Form</title>
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/form.css">
-  <script type="text/javascript" src="./js/xlsx.core.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name='keywords' content="web glpla">
+    <meta name='description' content="only for test">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Form</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/form.css">
+    <script type="text/javascript" src="./js/xlsx.core.min.js"></script>
 </head>
 
 <body>
-  <section class="w">
-    <h4 class="cont-title">form</h4>
-    <dl class="keypoint">
-      <dt>表单属性</dt>
-      <dd class="line-dot">action <span class="dot"></span> 表单提交后端时的操作</dd>
-      <dd class="line-dot">method <span class="dot"></span>表单提交的方式；默认是GET</dd>
-      <dt>新增类型</dt>
-      <dd>datalist：以下拉列表的形式，为input等文本输入元素提供一个输入可选项；使用list属性和对应文本元素的id绑定在一起</dd>
-      <dd>fieldset、legend：分组表单元素，并指定分组的标题；分组的好处是操作整个分组，如：使用disabled属性禁止整个分组</dd>
-      <dt>input新类型</dt>
-      <dd>email、tel、url：验证型，请配合pattern和JS完善验证需求</dd>
-      <dd>rang、number、color、date、time、month、week：取值型</dd>
-      <dt>input新属性</dt>
-      <dd>autocomplete：提示历史输入，方便自动完成，一般配合datalist</dd>
-      <dd>autofocus：自动获取焦点</dd>
-      <dd>placeholder：内容占位符，用以展示提示信息</dd>
-      <dd>required：必填</dd>
-      <dd>pattern：利用正则表达式提供验证功能，如：pattern="^[a-zA-Z]\w{4,9}$"</dd>
-      <dt>其他属性</dt>
-      <dd>checked：input的默认选中</dd>
-      <dd>selected：select的默认选中</dd>
-      <dd>maxlength：最大字符数</dd>
-      <dd>name/value：值对，以区分不同的数据</dd>
-      <dd>id：多用于js控制；或配合&lt;label&gt;使用，增强用户体验</dd>
-    </dl>
-    <h4 class="cont-title">input</h4>
-    <p>作用：收集信息给后端服务器server；通常配合&lt;label&gt;和各种属性增强用户体验</p>
-    <p>1. 单行文本输入框 type=text；默认类型</p>
-    <pre class="code">
+    <section class="w">
+        <h4 class="cont-title">form</h4>
+        <dl class="keypoint">
+            <dt>表单属性</dt>
+            <dd class="flex-h">action <span class="dot"></span> 表单提交后端时的操作</dd>
+            <dd class="flex-h">method <span class="dot"></span>表单提交的方式；默认是GET</dd>
+            <dt>新增类型</dt>
+            <dd>datalist：以下拉列表的形式，为input等文本输入元素提供一个输入可选项；使用list属性和对应文本元素的id绑定在一起</dd>
+            <dd>fieldset、legend：分组表单元素，并指定分组的标题；分组的好处是操作整个分组，如：使用disabled属性禁止整个分组</dd>
+            <dt>input新类型</dt>
+            <dd>email、tel、url：验证型，请配合pattern和JS完善验证需求</dd>
+            <dd>rang、number、color、date、time、month、week：取值型</dd>
+            <dt>input新属性</dt>
+            <dd>autocomplete：提示历史输入，方便自动完成，一般配合datalist</dd>
+            <dd>autofocus：自动获取焦点</dd>
+            <dd>placeholder：内容占位符，用以展示提示信息</dd>
+            <dd>required：必填</dd>
+            <dd>pattern：利用正则表达式提供验证功能，如：pattern="^[a-zA-Z]\w{4,9}$"</dd>
+            <dt>其他属性</dt>
+            <dd>checked：input的默认选中</dd>
+            <dd>selected：select的默认选中</dd>
+            <dd>maxlength：最大字符数</dd>
+            <dd>name/value：值对，以区分不同的数据</dd>
+            <dd>id：多用于js控制；或配合&lt;label&gt;使用，增强用户体验</dd>
+        </dl>
+        <h4 class="cont-title">input</h4>
+        <p>作用：收集信息给后端服务器server；通常配合&lt;label&gt;和各种属性增强用户体验</p>
+        <p>1. 单行文本输入框 type=text；默认类型</p>
+        <pre class="code">
     &lt;label for="user"&gt;user&lt;/label&gt;
     &lt;input type="text" name="user" id="user" required maxlength="8" placeholder="your name"&gt;    </pre>
-    <p>2. 密码输入框 type=password</p>
-    <pre class="code">
+        <p>2. 密码输入框 type=password</p>
+        <pre class="code">
     &lt;input type="password" name="pw" id="" required maxlength="8" placeholder="your password"&gt;</pre>
-    <p>3. 单选按钮 type=radio</p>
-    <pre class="code">
+        <p>3. 单选按钮 type=radio</p>
+        <pre class="code">
     &lt;input type="radio" name="gender" value="male" id="" checked&gt;male
     &lt;input type="radio" name="gender" value="female" id=""&gt;female    </pre>
-    <p>4. 多选框 type=checkbox</p>
-    <pre class="code">
+        <p>4. 多选框 type=checkbox</p>
+        <pre class="code">
     &lt;input type="checkbox" name="hobby" value="reading" id="" checked&gt;reading
     &lt;input type="checkbox" name="hobby" value="coding" id=""&gt;coding
     &lt;input type="checkbox" name="hobby" value="game" id=""&gt;game
     &lt;input type="checkbox" name="hobby" value="movie" id=""&gt;movie    </pre>
-    <p>5. 按钮 type=submit</p>
-    <pre class="code">
+        <p>5. 按钮 type=submit</p>
+        <pre class="code">
     &lt;input type="submit" value="submit"&gt;
     //也可以直接使用&lt;button&gt;
     &lt;button&gt;submit&lt;/button&gt;</pre>
-    <h4 class="exam-title">有用的&lt;label&gt;</h4>
-    <strong>简介</strong>
-    <p>增加交互热区，提升用户体验：在&lt;label&gt;上做文章</p>
-    <pre class="code">
+        <h4 class="exam-title">有用的&lt;label&gt;</h4>
+        <strong>简介</strong>
+        <p>增加交互热区，提升用户体验：在&lt;label&gt;上做文章</p>
+        <pre class="code">
     //方法一
     &lt;label for=''&gt;&lt;/label&gt;
     &lt;input type='text' id=''&gt;&lt;/input&gt;
@@ -75,45 +75,45 @@
     &lt;label&gt;
         &lt;input type='text'&gt;&lt;/input&gt;
     &lt;/label&gt;</pre>
-    <h4 class="exam-title">骰子Dice</h4>
-    <strong>知识点</strong>
-    <p>1.精灵图：background-position</p>
-    <p>2.帧动画：步进、动画状态控制</p>
-    <p>3.表单元素选中选择器:checked</p>
-    <p>4.相邻兄弟选择器+</p>
-    <div class="dice-box flex-v">
-      <input type="checkbox" id="dice" hidden>
-      <label for="dice" class="dice"></label>
-    </div>
-    <pre class="code">
+        <h4 class="exam-title">骰子Dice</h4>
+        <strong>知识点</strong>
+        <p>1.精灵图：background-position</p>
+        <p>2.帧动画：步进、动画状态控制</p>
+        <p>3.表单元素选中选择器:checked</p>
+        <p>4.相邻兄弟选择器+</p>
+        <div class="dice-box flex-v">
+            <input type="checkbox" id="dice" hidden>
+            <label for="dice" class="dice"></label>
+        </div>
+        <pre class="code">
     .dice-box input:checked+.dice {
       animation-play-state: paused;
     }</pre>
-    <h4 class="exam-title">轮播图Swiper</h4>
-    <strong>知识点</strong>
-    <p>1.过渡动画</p>
-    <p>2.表单元素选中选择器:checked</p>
-    <p>3.兄弟选择器~</p>
-    <p>4.结构伪类选择器:nth-child()</p>
-    <p>5.弹性盒子flex</p>
-    <div class="swiper-box">
-      <input type="radio" name="img" id="img0" hidden checked>
-      <input type="radio" name="img" id="img1" hidden>
-      <input type="radio" name="img" id="img2" hidden>
-      <div class="img-box">
-        <div class="imgs">
-          <img src="./imgs/1.jpg" alt="">
-          <img src="./imgs/2.jpg" alt="">
-          <img src="./imgs/3.jpg" alt="">
+        <h4 class="exam-title">轮播图Swiper</h4>
+        <strong>知识点</strong>
+        <p>1.过渡动画</p>
+        <p>2.表单元素选中选择器:checked</p>
+        <p>3.兄弟选择器~</p>
+        <p>4.结构伪类选择器:nth-child()</p>
+        <p>5.弹性盒子flex</p>
+        <div class="swiper-box">
+            <input type="radio" name="img" id="img0" hidden checked>
+            <input type="radio" name="img" id="img1" hidden>
+            <input type="radio" name="img" id="img2" hidden>
+            <div class="img-box">
+                <div class="imgs">
+                    <img src="./imgs/1.jpg" alt="">
+                    <img src="./imgs/2.jpg" alt="">
+                    <img src="./imgs/3.jpg" alt="">
+                </div>
+            </div>
+            <div class="label-box">
+                <label for="img0"></label>
+                <label for="img1"></label>
+                <label for="img2"></label>
+            </div>
         </div>
-      </div>
-      <div class="label-box">
-        <label for="img0"></label>
-        <label for="img1"></label>
-        <label for="img2"></label>
-      </div>
-    </div>
-    <pre class="code">
+        <pre class="code">
     .swiper-box input:nth-child(1):checked~.img-box .imgs {
       margin-left: 0px;
     }
@@ -125,54 +125,54 @@
     .swiper-box input:nth-child(3):checked~.img-box .imgs {
       margin-left: -640px;
     }    </pre>
-    <a href="./swiper.html" target="_blank" class="link">点击访问更多轮播实现</a>
-    <h4 class="exam-title">详情页Details</h4>
-    <div class="grid2">
-      <div>
-        <strong>知识点</strong>
-        <p>1.父相子绝</p>
-        <p>2.表单元素选中选择器:checked</p>
-        <p>3.兄弟选择器~</p>
-        <p>4.结构伪类选择器:nth-child()</p>
-        <p>5.弹性盒子flex</p>
-        <p>6.过渡动画</p>
-        <p>7.层级堆叠顺序z-index</p>
-      </div>
-      <div>
-        <strong>关键点</strong>
-        <p>1.改变背景颜色</p>
-        <p>2.改变图片前后重叠顺序</p>
-        <p>3.改变当前图片对应的按钮样式</p>
-      </div>
-    </div>
-
-    <div class="product-box">
-      <input type="radio" name="pro" id="p0" hidden checked>
-      <input type="radio" name="pro" id="p1" hidden>
-      <input type="radio" name="pro" id="p2" hidden>
-      <input type="radio" name="pro" id="p3" hidden>
-      <div class="products-box">
-        <div class="inner-box flex-v">
-          <div class="products">
-            <img src="./imgs/rose.jpg" alt="">
-            <img src="./imgs/yellow.jpg" alt="">
-            <img src="./imgs/blue.jpg" alt="">
-            <img src="./imgs/green.jpg" alt="">
-          </div>
-          <div class="products-lbl">
-            <label for="p0" class="red"></label>
-            <label for="p1" class="yel"></label>
-            <label for="p2" class="blu"></label>
-            <label for="p3" class="gre"></label>
-          </div>
-          <div class="products-info">
-            <span class="price">&yen;90</span>
-            <span class="cart">添加到购物车<span class="iconfont">&#xe832;</span></span>
-          </div>
+        <a href="./swiper.html" target="_blank" class="link">点击访问更多轮播实现</a>
+        <h4 class="exam-title">详情页Details</h4>
+        <div class="grid2">
+            <div>
+                <strong>知识点</strong>
+                <p>1.父相子绝</p>
+                <p>2.表单元素选中选择器:checked</p>
+                <p>3.兄弟选择器~</p>
+                <p>4.结构伪类选择器:nth-child()</p>
+                <p>5.弹性盒子flex</p>
+                <p>6.过渡动画</p>
+                <p>7.层级堆叠顺序z-index</p>
+            </div>
+            <div>
+                <strong>关键点</strong>
+                <p>1.改变背景颜色</p>
+                <p>2.改变图片前后重叠顺序</p>
+                <p>3.改变当前图片对应的按钮样式</p>
+            </div>
         </div>
-      </div>
-    </div>
-    <pre class="code">
+
+        <div class="product-box">
+            <input type="radio" name="pro" id="p0" hidden checked>
+            <input type="radio" name="pro" id="p1" hidden>
+            <input type="radio" name="pro" id="p2" hidden>
+            <input type="radio" name="pro" id="p3" hidden>
+            <div class="products-box">
+                <div class="inner-box flex-v">
+                    <div class="products">
+                        <img src="./imgs/rose.jpg" alt="">
+                        <img src="./imgs/yellow.jpg" alt="">
+                        <img src="./imgs/blue.jpg" alt="">
+                        <img src="./imgs/green.jpg" alt="">
+                    </div>
+                    <div class="products-lbl">
+                        <label for="p0" class="red"></label>
+                        <label for="p1" class="yel"></label>
+                        <label for="p2" class="blu"></label>
+                        <label for="p3" class="gre"></label>
+                    </div>
+                    <div class="products-info">
+                        <span class="price">&yen;90</span>
+                        <span class="cart">添加到购物车<span class="iconfont">&#xe832;</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <pre class="code">
     .product-box input:nth-child(1):checked ~ .products-box .products img:nth-child(1) {
       z-index: 99;
     }
@@ -185,10 +185,10 @@
     .product-box input:nth-child(4):checked ~ .products-box .products img:nth-child(4) {
       z-index: 99;
     }</pre>
-    <a href="./cart.html" target="_blank" class="link">点击访问jQuery实现</a>
-    <h4 class="cont-title">下拉列表select</h4>
-    <p>size：指定显示几个option；通常不指定，以免影响页面布局</p>
-    <pre class="code">
+        <a href="./cart.html" target="_blank" class="link">点击访问jQuery实现</a>
+        <h4 class="cont-title">下拉列表select</h4>
+        <p>size：指定显示几个option；通常不指定，以免影响页面布局</p>
+        <pre class="code">
       &lt;select name="home" id="home" size="3"&gt;
         &lt;option value="gl"&gt;gl&lt;/option&gt;
         &lt;option value="bj"&gt;bj&lt;/option&gt;
@@ -196,77 +196,77 @@
         &lt;option value="gz"&gt;gz&lt;/option&gt;
         &lt;option value="sz"&gt;sz&lt;/option&gt;
       &lt;/select&gt;    </pre>
-    <h4 class="cont-title">多行文本输入框textarea</h4>
-    <pre class="code">
+        <h4 class="cont-title">多行文本输入框textarea</h4>
+        <pre class="code">
     &lt;textarea name="msg" id="" cols="30" rows="10"&gt;&lt;/textarea&gt;
     //默认情况下，可以自由缩放；为避免影响布局，通常指定其样式为不缩放
     textarea {
     &nbsp;&nbsp;resize: none;
     }    </pre>
-    <div class="exam-title">修改默认的占位符样式</div>
-    <pre class="code">
+        <div class="exam-title">修改默认的占位符样式</div>
+        <pre class="code">
     input::placeholder {
       color: pink;
     }
     input::selection {
       color: red;
     }</pre>
-    <div class="exam-title">用户信息采集</div>
-    <form action="" class="info">
-      <label for="user">user</label>
-      <input type="text" id="user" name="user" placeholder="your name" maxlength="8" required>
-      <br>
-      <label for="pw">pass</label>
-      <input type="password" id="pw" name="pass" placeholder="your password" maxlength="8" required>
-      <fieldset>
-        <legend>gender</legend>
-        <input type="radio" name="gender" value="male" id='male' required checked>
-        <label for="male">male</label>
-        <input type="radio" name="gender" value='female' id='female' required>
-        <label for="female">female</label>
-      </fieldset>
-      <fieldset>
-        <legend>hometown</legend>
-        <select name="home" id="home" size="3">
-          <option value="gl">gl</option>
-          <option value="bj">bj</option>
-          <option value="sh">sh</option>
-          <option value="gz">gz</option>
-          <option value="sz">sz</option>
-        </select>
-      </fieldset>
-      <fieldset>
-        <legend>hobby</legend>
-        <input type="checkbox" name="hobby" value="reading" id="reading" checked>
-        <label for="reading">reading</label>
-        <input type="checkbox" name="hobby" value="coding" id="coding">
-        <label for="coding">coding</label>
-        <input type="checkbox" name="hobby" value="game" id="game">
-        <label for="game">game</label>
-        <input type="checkbox" name="hobby" value="movie" id="movie">
-        <label for="movie">movie</label>
-      </fieldset>
-      <fieldset>
-        <legend>introduction</legend>
-        <textarea name="intro" id="" cols="30" rows="10" required></textarea>
-      </fieldset>
-      <button>submit</button>
-    </form>
-    <h4 class="cont-title">文件选择file</h4>
-    <p>文件是&lt;input&gt;的一种，类型为file；默认选择单个文件，可以指定multiple为多选；accept是文件类型，类型之间使用,分割，也可以使用通配符*</p>
-    <pre class="code">
+        <div class="exam-title">用户信息采集</div>
+        <form action="" class="info">
+            <label for="user">user</label>
+            <input type="text" id="user" name="user" placeholder="your name" maxlength="8" required>
+            <br>
+            <label for="pw">pass</label>
+            <input type="password" id="pw" name="pass" placeholder="your password" maxlength="8" required>
+            <fieldset>
+                <legend>gender</legend>
+                <input type="radio" name="gender" value="male" id='male' required checked>
+                <label for="male">male</label>
+                <input type="radio" name="gender" value='female' id='female' required>
+                <label for="female">female</label>
+            </fieldset>
+            <fieldset>
+                <legend>hometown</legend>
+                <select name="home" id="home" size="3">
+                    <option value="gl">gl</option>
+                    <option value="bj">bj</option>
+                    <option value="sh">sh</option>
+                    <option value="gz">gz</option>
+                    <option value="sz">sz</option>
+                </select>
+            </fieldset>
+            <fieldset>
+                <legend>hobby</legend>
+                <input type="checkbox" name="hobby" value="reading" id="reading" checked>
+                <label for="reading">reading</label>
+                <input type="checkbox" name="hobby" value="coding" id="coding">
+                <label for="coding">coding</label>
+                <input type="checkbox" name="hobby" value="game" id="game">
+                <label for="game">game</label>
+                <input type="checkbox" name="hobby" value="movie" id="movie">
+                <label for="movie">movie</label>
+            </fieldset>
+            <fieldset>
+                <legend>introduction</legend>
+                <textarea name="intro" id="" cols="30" rows="10" required></textarea>
+            </fieldset>
+            <button>submit</button>
+        </form>
+        <h4 class="cont-title">文件选择file</h4>
+        <p>文件是&lt;input&gt;的一种，类型为file；默认选择单个文件，可以指定multiple为多选；accept是文件类型，类型之间使用,分割，也可以使用通配符*</p>
+        <pre class="code">
     &lt;input type="file" name="avatar" id="" multiple accept="*"&gt;</pre>
-    <h4 class="cont-title">文件操作fileReader</h4>
-    <p>处理选中的文件。根据内容，有3个方法：</p>
-    <p>1 readAsText()：处理.txt/.HTML/.js等文本文件</p>
-    <p>2 readAsDataURL()：处理图片</p>
-    <p>3 readAsArrayBuffer()：处理字节流</p>
-    <div class="exam-title">读取本地文本文件</div>
-    <div class="cont-box" id='txt-cont'>提示：请选择文本文件。格式应为为UTF-8</div>
-    <div>
-      <input type="file" name="txt" id="txt" accept="text/*">
-    </div>
-    <pre class="code">
+        <h4 class="cont-title">文件操作fileReader</h4>
+        <p>处理选中的文件。根据内容，有3个方法：</p>
+        <p>1 readAsText()：处理.txt/.HTML/.js等文本文件</p>
+        <p>2 readAsDataURL()：处理图片</p>
+        <p>3 readAsArrayBuffer()：处理字节流</p>
+        <div class="exam-title">读取本地文本文件</div>
+        <div class="cont-box" id='txt-cont'>提示：请选择文本文件。格式应为为UTF-8</div>
+        <div>
+            <input type="file" name="txt" id="txt" accept="text/*">
+        </div>
+        <pre class="code">
     txt.addEventListener('change', function () {
       let file = this.files[0]
       let fr = new FileReader()
@@ -276,15 +276,15 @@
         txtCont.innerHTML = e.target.result
       }
     })</pre>
-    <div class="exam-title">单选文件-定制头像</div>
-    <div class="flex-h avatar-box">
-      <img src="" alt="图片不可用" id='img'>
-      <div>
-        <div class="per" id='per'>0%</div>
-        <input type="file" name="avatar" accept="image/*" id='avatar'>
-      </div>
-    </div>
-    <pre class="code">
+        <div class="exam-title">单选文件-定制头像</div>
+        <div class="flex-h avatar-box">
+            <img src="" alt="图片不可用" id='img'>
+            <div>
+                <div class="per" id='per'>0%</div>
+                <input type="file" name="avatar" accept="image/*" id='avatar'>
+            </div>
+        </div>
+        <pre class="code">
     avatar.addEventListener('change', function () {
       let fr = new FileReader()
       fr.readAsDataURL(this.files[0])
@@ -292,13 +292,13 @@
         img.src = this.result
       })
     })</pre>
-    <div class="exam-title">读取OA文档-excel</div>
-    <div class="cont-box" id='excel-cont'>提示：请选择excel文档</div>
-    <form action="" class="">
-      <span>借助第三方库<a href="//gitee.com/mirrors/sheetjs-js-xlsx/" class="link" target="_blank">sheetJS</a>实现</span>
-      <input type="file" name="excel" id="excel" accept="*">
-    </form>
-    <pre class="code">
+        <div class="exam-title">读取OA文档-excel</div>
+        <div class="cont-box" id='excel-cont'>提示：请选择excel文档</div>
+        <form action="" class="">
+            <span>借助第三方库<a href="//gitee.com/mirrors/sheetjs-js-xlsx/" class="link" target="_blank">sheetJS</a>实现</span>
+            <input type="file" name="excel" id="excel" accept="*">
+        </form>
+        <pre class="code">
   let excelCont = document.querySelector('#excel-cont')
   let excel = document.querySelector('#excel')
   excel.addEventListener('change', function () {
@@ -314,53 +314,53 @@
     })
   })
   //请查看sheet内容，定制excel文档</pre>
-    <div class="exam-title">表格table转换为OA文档-excel</div>
-    <span>借助第三方库<a href="//gitee.com/mirrors/sheetjs-js-xlsx/" class="link" target="_blank">sheetJS</a>实现</span>
-    <table id='tbl'>
-      <tr>
-        <th>name</th>
-        <th>age</th>
-        <th>unit</th>
-        <th>cell</th>
-        <th>email</th>
-      </tr>
-      <tr>
-        <td>gl</td>
-        <td>gz</td>
-        <td>nj</td>
-        <td>sz</td>
-        <td>cq</td>
-      </tr>
-      <tr>
-        <td>hz</td>
-        <td>bj</td>
-        <td>xm</td>
-        <td>lz</td>
-        <td>sz</td>
-      </tr>
-      <tr>
-        <td>sh</td>
-        <td>sy</td>
-        <td>nn</td>
-        <td>zz</td>
-        <td>wh</td>
-      </tr>
-    </table>
-    <button id='tblBtn'>table to book</button>
-    <pre class="code">
+        <div class="exam-title">表格table转换为OA文档-excel</div>
+        <span>借助第三方库<a href="//gitee.com/mirrors/sheetjs-js-xlsx/" class="link" target="_blank">sheetJS</a>实现</span>
+        <table id='tbl'>
+            <tr>
+                <th>name</th>
+                <th>age</th>
+                <th>unit</th>
+                <th>cell</th>
+                <th>email</th>
+            </tr>
+            <tr>
+                <td>gl</td>
+                <td>gz</td>
+                <td>nj</td>
+                <td>sz</td>
+                <td>cq</td>
+            </tr>
+            <tr>
+                <td>hz</td>
+                <td>bj</td>
+                <td>xm</td>
+                <td>lz</td>
+                <td>sz</td>
+            </tr>
+            <tr>
+                <td>sh</td>
+                <td>sy</td>
+                <td>nn</td>
+                <td>zz</td>
+                <td>wh</td>
+            </tr>
+        </table>
+        <button id='tblBtn'>table to book</button>
+        <pre class="code">
   let tblBtn = document.querySelector('#tblBtn')
   let tbl = document.querySelector('#tbl')
   tblBtn.addEventListener('click', () => {
     let tblBook = XLSX.utils.table_to_book(tbl);
     XLSX.writeFile(tblBook, 'out.xlsx');
   })</pre>
-    <div class="exam-title">自定义文件按钮样式</div>
-    <p>思路：隐藏file元素，定制新元素，并把新元素的click事件转接到原来的file元素</p>
-    <div class="flex-h">
-      <input type="file" id="file-custom" multiple>
-      <button id='file-btn'>choose files</button>
-    </div>
-    <pre class="code">
+        <div class="exam-title">自定义文件按钮样式</div>
+        <p>思路：隐藏file元素，定制新元素，并把新元素的click事件转接到原来的file元素</p>
+        <div class="flex-h">
+            <input type="file" id="file-custom" multiple>
+            <button id='file-btn'>choose files</button>
+        </div>
+        <pre class="code">
   let fileCoustom = document.querySelector('#file-custom')//file
   let fileBtn = document.querySelector('#file-btn')//new file element
   fileBtn.addEventListener('click', function () {
@@ -369,158 +369,159 @@
   fileCoustom.addEventListener('change', function () {
     console.log(this.files);
   })</pre>
-    <div class="exam-title">拖拉选择文件</div>
-    <div class="flex-h">
-      <div id="zone">drag files here</div>
-    </div>
-    <div class="exam-title">搜索框</div>
-    <div class="flex-h">
-      <div class="search">
-        <input class="search-ipt" type="text" maxlength="12" placeholder="keywords here" autocomplete list='list'>
-        <datalist id='list'>
-          <option value="html"></option>
-          <option value="css"></option>
-          <option value="javascript"></option>
-          <option value="js"></option>
-        </datalist>
-        <button class="search-btn flex-v"><span class="iconfont">&#xe831;</span></button>
-      </div>
-    </div>
-    <div class="exam-title">用户登陆</div>
-    <div class="wrap">
-      <h2>用户登陆</h2>
-      <div class="input-box">
-        <input class="user" type="text" required>
-        <span>用户</span>
-      </div>
-      <div class="input-box">
-        <input class="pw" type="password" required>
-        <span>密码</span>
-      </div>
-      <div class="input-box">
-        <input class="rem-cb" type="checkbox" name="" id="cb">
-        <label for="cb">记住用户名</label>
-      </div>
-      <button class="btn">提交</button>
-    </div>
-    <h4 class="cont-title">思考</h4>
-    <ul>
-      <li>如何知道单个文件的信息：name、size和type</li>
-      <li>如何选择多个文件：multiple属性</li>
-      <li>如何知道选择文件的个数：length；单个文件时，length为1</li>
-      <li>文件类型都有哪些</li>
-      <li>如何指定选择文件的类型：accept属性</li>
-      <li>如何自定义UI而不使用系统默认的丑陋的样式：none掉input，利用额外元素如button的click来触发input的click（change）</li>
-      <li>如何拖拉获取文件信息：定义拖拉区，并指定drop事件。注意：系统默认会打开拖入的文件，应取消dragenter和dragover的默认动作</li>
-      <li>如果查看文件内容：FileReader</li>
-    </ul>
-    <h4 class="cont-title">作业</h4>
-    <p>1.多个图片的选择和展示</p>
-    <p>2.根据提供的excel文档定制内容并展示</p>
-    <small>Copyright Reserved &copy; By Cnplaman 2021-10-13</small>
-  </section>
-  <script>
-    window.onload = function () {
-      // read txt
-      let txt = document.querySelector('#txt')
-      let txtCont = document.querySelector('#txt-cont')
-      txt.addEventListener('change', function () {
-        let file = this.files[0]
-        let fr = new FileReader()
-        fr.readAsText(file)
-        // onload
-        fr.onload = function (e) {
-          console.log(e.target.result);
-          txtCont.innerHTML = e.target.result
+        <div class="exam-title">拖拉选择文件</div>
+        <div class="flex-h">
+            <div id="zone">drag files here</div>
+        </div>
+        <div class="exam-title">搜索框</div>
+        <div class="flex-h">
+            <div class="search">
+                <input class="search-ipt" type="text" maxlength="12" placeholder="keywords here" autocomplete
+                    list='list'>
+                <datalist id='list'>
+                    <option value="html"></option>
+                    <option value="css"></option>
+                    <option value="javascript"></option>
+                    <option value="js"></option>
+                </datalist>
+                <button class="search-btn flex-v"><span class="iconfont">&#xe831;</span></button>
+            </div>
+        </div>
+        <div class="exam-title">用户登陆</div>
+        <div class="wrap">
+            <h2>用户登陆</h2>
+            <div class="input-box">
+                <input class="user" type="text" required>
+                <span>用户</span>
+            </div>
+            <div class="input-box">
+                <input class="pw" type="password" required>
+                <span>密码</span>
+            </div>
+            <div class="input-box">
+                <input class="rem-cb" type="checkbox" name="" id="cb">
+                <label for="cb">记住用户名</label>
+            </div>
+            <button class="btn">提交</button>
+        </div>
+        <h4 class="cont-title">思考</h4>
+        <ul>
+            <li>如何知道单个文件的信息：name、size和type</li>
+            <li>如何选择多个文件：multiple属性</li>
+            <li>如何知道选择文件的个数：length；单个文件时，length为1</li>
+            <li>文件类型都有哪些</li>
+            <li>如何指定选择文件的类型：accept属性</li>
+            <li>如何自定义UI而不使用系统默认的丑陋的样式：none掉input，利用额外元素如button的click来触发input的click（change）</li>
+            <li>如何拖拉获取文件信息：定义拖拉区，并指定drop事件。注意：系统默认会打开拖入的文件，应取消dragenter和dragover的默认动作</li>
+            <li>如果查看文件内容：FileReader</li>
+        </ul>
+        <h4 class="cont-title">作业</h4>
+        <p>1.多个图片的选择和展示</p>
+        <p>2.根据提供的excel文档定制内容并展示</p>
+        <small>Copyright Reserved &copy; By Cnplaman 2021-10-13</small>
+    </section>
+    <script>
+        window.onload = function () {
+            // read txt
+            let txt = document.querySelector('#txt')
+            let txtCont = document.querySelector('#txt-cont')
+            txt.addEventListener('change', function () {
+                let file = this.files[0]
+                let fr = new FileReader()
+                fr.readAsText(file)
+                // onload
+                fr.onload = function (e) {
+                    console.log(e.target.result);
+                    txtCont.innerHTML = e.target.result
+                }
+            })
+
+            // single image file
+            let img = document.querySelector('#img')
+            let avatar = document.querySelector('#avatar')
+            let per = document.querySelector('#per')
+            avatar.addEventListener('change', function () {
+                let fr = new FileReader()
+                fr.readAsDataURL(this.files[0])
+                // addEventListener
+                fr.addEventListener('load', function () {
+                    img.src = this.result
+                })
+                // loading time > 50ms
+                fr.onprogress = function (e) {
+                    console.log(e.loaded);
+                    per.innerHTML = Number(e.loaded / e.total * 100).toFixed(2) + '%'
+                }
+            })
+
+            let rem = document.querySelector('.rem-cb')
+            let user = document.querySelector('.user')
+            user.value = localStorage.getItem('login-name') || ''
+            rem.checked = user.value
+            // rem.addEventListener('click', () => {
+            //   if (!user.value) {
+            //     alert('user-name NULL')
+            //     rem.checked = false
+            //   } else {
+            //     rem.checked ? localStorage.setItem('login-name', user.value) : localStorage.removeItem('login-name')
+            //   }
+            // })
+
+            // read oa-excel
+            let excelCont = document.querySelector('#excel-cont')
+            let excel = document.querySelector('#excel')
+            excel.addEventListener('change', function () {
+                let fr = new FileReader()
+                fr.readAsArrayBuffer(this.files[0])
+                fr.addEventListener('load', function () {
+                    let res = this.result;
+                    let workbook = XLSX.read(res, { type: 'array' });
+                    let sheetName = workbook.SheetNames[0];
+                    let sheet = workbook.Sheets[sheetName];
+                    console.log(sheet);
+                    excelCont.innerHTML = XLSX.utils.sheet_to_html(sheet);
+                })
+            })
+
+            // table to oa-excel
+            let tblBtn = document.querySelector('#tblBtn')
+            let tbl = document.querySelector('#tbl')
+            tblBtn.addEventListener('click', () => {
+                let tblBook = XLSX.utils.table_to_book(tbl);
+                XLSX.writeFile(tblBook, 'out.xlsx');
+            })
+            // file custom avatar
+            let fileCoustom = document.querySelector('#file-custom')
+            let fileBtn = document.querySelector('#file-btn')
+            fileBtn.addEventListener('click', function () {
+                fileCoustom.click()
+            })
+            fileCoustom.addEventListener('change', function () {
+                console.log(this.files);
+            })
+            // drag
+            let drag = document.querySelector('#zone')
+            drag.addEventListener('dragenter', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            })
+            drag.addEventListener('dragover', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+            })
+            drag.addEventListener('drop', function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                console.log(e.dataTransfer.files);
+            })
         }
-      })
-
-      // single image file
-      let img = document.querySelector('#img')
-      let avatar = document.querySelector('#avatar')
-      let per = document.querySelector('#per')
-      avatar.addEventListener('change', function () {
-        let fr = new FileReader()
-        fr.readAsDataURL(this.files[0])
-        // addEventListener
-        fr.addEventListener('load', function () {
-          img.src = this.result
+        window.addEventListener('online', function () {
+            console.log('online');
         })
-        // loading time > 50ms
-        fr.onprogress = function (e) {
-          console.log(e.loaded);
-          per.innerHTML = Number(e.loaded / e.total * 100).toFixed(2) + '%'
-        }
-      })
-
-      let rem = document.querySelector('.rem-cb')
-      let user = document.querySelector('.user')
-      user.value = localStorage.getItem('login-name') || ''
-      rem.checked = user.value
-      // rem.addEventListener('click', () => {
-      //   if (!user.value) {
-      //     alert('user-name NULL')
-      //     rem.checked = false
-      //   } else {
-      //     rem.checked ? localStorage.setItem('login-name', user.value) : localStorage.removeItem('login-name')
-      //   }
-      // })
-
-      // read oa-excel
-      let excelCont = document.querySelector('#excel-cont')
-      let excel = document.querySelector('#excel')
-      excel.addEventListener('change', function () {
-        let fr = new FileReader()
-        fr.readAsArrayBuffer(this.files[0])
-        fr.addEventListener('load', function () {
-          let res = this.result;
-          let workbook = XLSX.read(res, { type: 'array' });
-          let sheetName = workbook.SheetNames[0];
-          let sheet = workbook.Sheets[sheetName];
-          console.log(sheet);
-          excelCont.innerHTML = XLSX.utils.sheet_to_html(sheet);
+        window.addEventListener('offline', function () {
+            console.log('offline');
         })
-      })
-
-      // table to oa-excel
-      let tblBtn = document.querySelector('#tblBtn')
-      let tbl = document.querySelector('#tbl')
-      tblBtn.addEventListener('click', () => {
-        let tblBook = XLSX.utils.table_to_book(tbl);
-        XLSX.writeFile(tblBook, 'out.xlsx');
-      })
-      // file custom avatar
-      let fileCoustom = document.querySelector('#file-custom')
-      let fileBtn = document.querySelector('#file-btn')
-      fileBtn.addEventListener('click', function () {
-        fileCoustom.click()
-      })
-      fileCoustom.addEventListener('change', function () {
-        console.log(this.files);
-      })
-      // drag
-      let drag = document.querySelector('#zone')
-      drag.addEventListener('dragenter', function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      })
-      drag.addEventListener('dragover', function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      })
-      drag.addEventListener('drop', function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-        console.log(e.dataTransfer.files);
-      })
-    }
-    window.addEventListener('online', function () {
-      console.log('online');
-    })
-    window.addEventListener('offline', function () {
-      console.log('offline');
-    })
-  </script>
+    </script>
 </body>
 
 </html>

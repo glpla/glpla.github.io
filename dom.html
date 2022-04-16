@@ -2,82 +2,82 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document Object Model</title>
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/dom.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Object Model</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/dom.css">
 </head>
 
 <body>
-  <section class="w">
-    <h4 class="cont-title" id="el">元素element</h4>
-    <strong>选择元素</strong>
-    <p class="line-dot">document.querySelector(selector)<span class="dot"></span>选中第一个/单个</p>
-    <p class="line-dot">document.querySelectorAll(selector)<span class="dot"></span>选中一组</p>
-    <p class="line-dot">document.body<span class="dot"></span>获取body</p>
-    <p class="line-dot">document.documentElement<span class="dot"></span>获取HTML</p>
-    <p>其它方法：getElementsByTagName()/getElementById()/getElementsByClassName()不建议使用</p>
-    <strong>元素属性</strong>
-    <p class="line-dot">el.attrName<span class="dot"></span>获取内置属性</p>
-    <p class="line-dot">el.getAttribute(att)<span class="dot"></span>获取自定义属性</p>
-    <p class="line-dot">el.setAttribute(att,value)<span class="dot"></span>设置自定义属性</p>
-    <p class="line-dot">el.removeAttribute(att,value)<span class="dot"></span>删除自定义属性</p>
-    <strong>自定义属性data-</strong>
-    <p>data-写在元素标签上</p>
-    <p>获取时使用：el.dataset，不需要加上data；getAttribute可以获取所有属性；dataset只能获取data-属性</p>
-    <p>长属性应采用连字符法，如：data-ind、data-good-name</p>
-    <p>为了保存和使用数据</p>
-    <strong>元素内容</strong>
-    <p class="line-dot">el.innerText<span class="dot"></span>元素文本内容</p>
-    <p class="line-dot">el.innerHTML<span class="dot"></span>元素HTML内容</p>
-    <h4 class="exam-title">数字时钟</h4>
-    <div class="cont">
-      <div class="count-box">
-        <span id='yy'></span>-<span id='mon'></span>-<span id='day'></span>
-        <span id='week'></span>
-        <span id='hh'></span>:<span id='min'></span>:<span id='sec'></span>
-      </div>
-      <p><span class="iconfont info-icon">&#xe82e;</span> 请使用<a href="http://momentjs.cn/" target="_blank"
-          class="link">momentjs</a>实现</p>
+    <section class="w">
+        <h4 class="cont-title" id="el">元素element</h4>
+        <strong>选择元素</strong>
+        <p class="flex-h">document.querySelector(selector)<span class="dot"></span>选中第一个/单个</p>
+        <p class="flex-h">document.querySelectorAll(selector)<span class="dot"></span>选中一组</p>
+        <p class="flex-h">document.body<span class="dot"></span>获取body</p>
+        <p class="flex-h">document.documentElement<span class="dot"></span>获取HTML</p>
+        <p>其它方法：getElementsByTagName()/getElementById()/getElementsByClassName()不建议使用</p>
+        <strong>元素属性</strong>
+        <p class="flex-h">el.attrName<span class="dot"></span>获取内置属性</p>
+        <p class="flex-h">el.getAttribute(att)<span class="dot"></span>获取自定义属性</p>
+        <p class="flex-h">el.setAttribute(att,value)<span class="dot"></span>设置自定义属性</p>
+        <p class="flex-h">el.removeAttribute(att,value)<span class="dot"></span>删除自定义属性</p>
+        <strong>自定义属性data-</strong>
+        <p>data-写在元素标签上</p>
+        <p>获取时使用：el.dataset，不需要加上data；getAttribute可以获取所有属性；dataset只能获取data-属性</p>
+        <p>长属性应采用连字符法，如：data-ind、data-good-name</p>
+        <p>为了保存和使用数据</p>
+        <strong>元素内容</strong>
+        <p class="flex-h">el.innerText<span class="dot"></span>元素文本内容</p>
+        <p class="flex-h">el.innerHTML<span class="dot"></span>元素HTML内容</p>
+        <h4 class="exam-title">数字时钟</h4>
+        <div class="cont">
+            <div class="count-box">
+                <span id='yy'></span>-<span id='mon'></span>-<span id='day'></span>
+                <span id='week'></span>
+                <span id='hh'></span>:<span id='min'></span>:<span id='sec'></span>
+            </div>
+            <p><span class="iconfont info-icon">&#xe82e;</span> 请使用<a href="http://momentjs.cn/" target="_blank"
+                    class="link">momentjs</a>实现</p>
 
-    </div>
-    <h4 class="exam-title">日期倒计时</h4>
-    <div class="cont">
-      <div class="count-box">
-        <span id="cd"></span>天<span id="ch"></span>小时<span id="cm"></span>分钟<span id="cs"></span>秒
-      </div>
-      <p style="text-align: center;">距离2022-01-01 00:00:00还有</p>
-    </div>
-    <h4 class="exam-title">秒表倒计时</h4>
-    <div class="cont">
-      <div class="count-box">
-        <span id="cds">10</span>
-      </div>
-      <p style="text-align: center;">10秒倒计时</p>
-    </div>
-    <h4 class="cont-title" id="cl">类class</h4>
-    <strong>设置类</strong>
-    <p class="line-dot">el.className=name<span class="dot"></span>设置类</p>
-    <p class="line-dot">el.classList.add()<span class="dot"></span>增加类</p>
-    <p class="line-dot">el.classList.remove()<span class="dot"></span>删除类</p>
-    <p class="line-dot">el.classList.toggle()<span class="dot"></span>切换类</p>
-    <h4 class="cont-title" id="st">样式style</h4>
-    <p class="line-dot">el.style.attrName=attrValue<span class="dot"></span>设置样式</p>
-    <p class="line-dot">el.style.setProperty(name, value)<span class="dot"></span>修改样式</p>
-    <h4 class="exam-title">导航</h4>
-    <nav>
-      <ul class="flex-h" id='nav'>
-        <li class="base"><a href="#el" data-link="#el">元素</a></li>
-        <li class="base"><a href="#cl" data-link="#cl">类</a></li>
-        <li class="base"><a href="#st" data-link="#st">样式</a></li>
-        <li class="base"><a href="#fo" data-link="#fo">表单</a></li>
-        <li class="base"><a href="#no" data-link="#no">节点</a></li>
-      </ul>
-    </nav>
-    <pre class="code">
+        </div>
+        <h4 class="exam-title">日期倒计时</h4>
+        <div class="cont">
+            <div class="count-box">
+                <span id="cd"></span>天<span id="ch"></span>小时<span id="cm"></span>分钟<span id="cs"></span>秒
+            </div>
+            <p style="text-align: center;">距离2022-01-01 00:00:00还有</p>
+        </div>
+        <h4 class="exam-title">秒表倒计时</h4>
+        <div class="cont">
+            <div class="count-box">
+                <span id="cds">10</span>
+            </div>
+            <p style="text-align: center;">10秒倒计时</p>
+        </div>
+        <h4 class="cont-title" id="cl">类class</h4>
+        <strong>设置类</strong>
+        <p class="flex-h">el.className=name<span class="dot"></span>设置类</p>
+        <p class="flex-h">el.classList.add()<span class="dot"></span>增加类</p>
+        <p class="flex-h">el.classList.remove()<span class="dot"></span>删除类</p>
+        <p class="flex-h">el.classList.toggle()<span class="dot"></span>切换类</p>
+        <h4 class="cont-title" id="st">样式style</h4>
+        <p class="flex-h">el.style.attrName=attrValue<span class="dot"></span>设置样式</p>
+        <p class="flex-h">el.style.setProperty(name, value)<span class="dot"></span>修改样式</p>
+        <h4 class="exam-title">导航</h4>
+        <nav>
+            <ul class="flex-h" id='nav'>
+                <li class="base"><a href="#el" data-link="#el">元素</a></li>
+                <li class="base"><a href="#cl" data-link="#cl">类</a></li>
+                <li class="base"><a href="#st" data-link="#st">样式</a></li>
+                <li class="base"><a href="#fo" data-link="#fo">表单</a></li>
+                <li class="base"><a href="#no" data-link="#no">节点</a></li>
+            </ul>
+        </nav>
+        <pre class="code">
     //h5
     &lt;li&gt;&lt;a href="#el" data-link="#el"&gt;元素&lt;/a&gt;&lt;/li&gt;
     
@@ -96,39 +96,39 @@
         }, 100)
       })
     }    </pre>
-    <h4 class="exam-title">背景换肤</h4>
-    <div class="img-box">
-      <img src="imgs/1.jpg" alt="">
-      <img src="imgs/2.jpg" alt="">
-      <img src="imgs/3.jpg" alt="">
-      <img src="imgs/4.jpg" alt="">
-    </div>
-    <pre class="code">
+        <h4 class="exam-title">背景换肤</h4>
+        <div class="img-box">
+            <img src="imgs/1.jpg" alt="">
+            <img src="imgs/2.jpg" alt="">
+            <img src="imgs/3.jpg" alt="">
+            <img src="imgs/4.jpg" alt="">
+        </div>
+        <pre class="code">
     imgBox.style.backgroundImage = `url(${this.src})`    </pre>
-    <h4 class="cont-title" id="fo">表单form</h4>
-    <strong>可操作的属性</strong>
-    <p class="line-dot">checked<span class="dot"></span>是否选中</p>
-    <p class="line-dot">disabled<span class="dot"></span>是否可用</p>
-    <p class="line-dot">type<span class="dot"></span>类型</p>
-    <p class="line-dot">value<span class="dot"></span>值</p>
-    <h4 class="exam-title">确认书</h4>
-    <div style="text-align: center;">
-      <input type="checkbox" id='info'>
-      <label for="info">注册须知</label>
-    </div>
-    <pre class="code">
+        <h4 class="cont-title" id="fo">表单form</h4>
+        <strong>可操作的属性</strong>
+        <p class="flex-h">checked<span class="dot"></span>是否选中</p>
+        <p class="flex-h">disabled<span class="dot"></span>是否可用</p>
+        <p class="flex-h">type<span class="dot"></span>类型</p>
+        <p class="flex-h">value<span class="dot"></span>值</p>
+        <h4 class="exam-title">确认书</h4>
+        <div style="text-align: center;">
+            <input type="checkbox" id='info'>
+            <label for="info">注册须知</label>
+        </div>
+        <pre class="code">
       dom.addEventListener('change', function () {
         console.log(this.checked);                
         console.log(this.value);                  
       })    </pre>
-    <h4 class="exam-title">显示密码</h4>
-    <p><span class="iconfont info-icon">&#xe82e;</span> 请使用字体图标完善项目</p>
-    <div class="show-box">
-      <label for="sPass">密码</label>
-      <input type="password" value="" id="sPass" placeholder="your password">
-      <input type="button" value="显示密码">
-    </div>
-    <pre class="code">
+        <h4 class="exam-title">显示密码</h4>
+        <p><span class="iconfont info-icon">&#xe82e;</span> 请使用字体图标完善项目</p>
+        <div class="show-box">
+            <label for="sPass">密码</label>
+            <input type="password" value="" id="sPass" placeholder="your password">
+            <input type="button" value="显示密码">
+        </div>
+        <pre class="code">
     showPass.addEventListener('click', () => {
       if (input.type == 'text') {
         input.type = 'password'
@@ -138,19 +138,19 @@
         btn.value = '隐藏密码'
       }
     })</pre>
-    <h4 class="exam-title">全选</h4>
-    <div class="count-box">
-      <span>您感兴趣的WEB前端有：</span>
-      <div class="flex-h">
-        <label><input type="checkbox" name="web" value="HTML" id="h5">HTML</label>
-        <label><input type="checkbox" name="web" value="CSS" id="c3">CSS</label>
-        <label><input type="checkbox" name="web" value="JAVASCRIPT" id="js">JAVASCRIPT</label>
-        <label><input type="checkbox" name="sel" id="all"><span>全选</span></label>
-      </div>
-    </div>
-    <p><span class="iconfont info-icon">&#xe82e;</span> 请优化全选逻辑</p>
-    <p><span class="iconfont info-icon">&#xe82e;</span> 增加全不选逻辑</p>
-    <pre class="code">
+        <h4 class="exam-title">全选</h4>
+        <div class="count-box">
+            <span>您感兴趣的WEB前端有：</span>
+            <div class="flex-h">
+                <label><input type="checkbox" name="web" value="HTML" id="h5">HTML</label>
+                <label><input type="checkbox" name="web" value="CSS" id="c3">CSS</label>
+                <label><input type="checkbox" name="web" value="JAVASCRIPT" id="js">JAVASCRIPT</label>
+                <label><input type="checkbox" name="sel" id="all"><span>全选</span></label>
+            </div>
+        </div>
+        <p><span class="iconfont info-icon">&#xe82e;</span> 请优化全选逻辑</p>
+        <p><span class="iconfont info-icon">&#xe82e;</span> 增加全不选逻辑</p>
+        <pre class="code">
     //全选逻辑
     all.addEventListener('change', function (e) {
       if (this.checked==true) {
@@ -163,42 +163,42 @@
         }
       }
     })    </pre>
-    <h4 class="cont-title" id="no">节点Node</h4>
-    <p>一个HTML文档是由各种各样的节点组成</p>
-    <strong>节点类型</strong>
-    <p class="line-dot">文档节点<span class="dot"></span>HTML</p>
-    <p class="line-dot">元素节点<span class="dot"></span></p>
-    <p class="line-dot">属性节点<span class="dot"></span></p>
-    <p class="line-dot">文本节点<span class="dot"></span>除普通文本外，标签之间由于格式化自动产生的的回车，空白和空格都是文本节点</p>
-    <strong>每个节点包括</strong>
-    <p class="line-dot">nodeName<span class="dot"></span>节点名称</p>
-    <p class="line-dot">nodeType<span class="dot"></span>节点类型；元素节点为1；属性节点为2；文本节点为3</p>
-    <p class="line-dot">nodeValue<span class="dot"></span>节点值</p>
-    <p>一般我们处理的是元素节点，所以通常根据节点类型是否为1来判断节点是否是元素节点</p>
-    <p>相比而言，传统获取元素的方法比较繁琐：每个节点都需要使用ID/CLASS/TAG等方法获取；而利用节点的父子关系则比较方便操作元素：只需获取一个节点，其他节点可以根据父子关系简介获取</p>
-    <strong>获取节点</strong>
-    <p class="line-dot">el.parentNode：父节点；无则返回null；只能有一个亲爸爸</p>
-    <p class="line-dot">el.childNodes：子节点；包括元素节点和文本节点；通常是多个</p>
-    <p class="line-dot">el.children：子元素节点；实际开发常用；可通过索引获取某个子元素节点</p>
-    <p class="line-dot">el.firstChild：第一个子元素节点</p>
-    <p class="line-dot">el.lastChild：最后一个子元素节点</p>
-    <p class="line-dot">el.nextSibling：下一个兄弟节点，包括文本节点，元素节点</p>
-    <p class="line-dot">el.previousSibling：上一个兄弟节点，包括文本节点，元素节点</p>
-    <strong>创建节点</strong>
-    <p>document.createElement(tagName)：创建节点</p>
-    <p>el.appendChild(child)：将创建的节点作为子节点添加到父节点的末尾哦</p>
-    <p>el.insertBefore(child,node)：在父节点某个子节点前面插入新的子节点</p>
-    <p>removeChild(child)：从父节点中删除某个子节点</p>
-    <h4 class="exam-title">留言板</h4>
-    <div class="msg-box">
-      <input type="text" placeholder="说点啥吧" maxlength="20" id='msg'>
-      <input type="button" value="提交" id='btn'>
-    </div>
-    <ul class="msg-list" id='list'>
-    </ul>
-    <p><span class="iconfont info-icon">&#xe82e;</span> 使用正则表达式规范输入</p>
-    <p><span class="iconfont info-icon">&#xe82e;</span> 每条留言增加删除功能</p>
-    <pre class="code">
+        <h4 class="cont-title" id="no">节点Node</h4>
+        <p>一个HTML文档是由各种各样的节点组成</p>
+        <strong>节点类型</strong>
+        <p class="flex-h">文档节点<span class="dot"></span>HTML</p>
+        <p class="flex-h">元素节点<span class="dot"></span></p>
+        <p class="flex-h">属性节点<span class="dot"></span></p>
+        <p class="flex-h">文本节点<span class="dot"></span>除普通文本外，标签之间由于格式化自动产生的的回车，空白和空格都是文本节点</p>
+        <strong>每个节点包括</strong>
+        <p class="flex-h">nodeName<span class="dot"></span>节点名称</p>
+        <p class="flex-h">nodeType<span class="dot"></span>节点类型；元素节点为1；属性节点为2；文本节点为3</p>
+        <p class="flex-h">nodeValue<span class="dot"></span>节点值</p>
+        <p>一般我们处理的是元素节点，所以通常根据节点类型是否为1来判断节点是否是元素节点</p>
+        <p>相比而言，传统获取元素的方法比较繁琐：每个节点都需要使用ID/CLASS/TAG等方法获取；而利用节点的父子关系则比较方便操作元素：只需获取一个节点，其他节点可以根据父子关系简介获取</p>
+        <strong>获取节点</strong>
+        <p class="flex-h">el.parentNode<span class="dot"></span>父节点；无则返回null；只能有一个亲爸爸</p>
+        <p class="flex-h">el.childNodes<span class="dot"></span>子节点；包括元素节点和文本节点；通常是多个</p>
+        <p class="flex-h">el.children<span class="dot"></span>子元素节点；实际开发常用；可通过索引获取某个子元素节点</p>
+        <p class="flex-h">el.firstChild：<span class="dot"></span>第一个子元素节点</p>
+        <p class="flex-h">el.lastChild：<span class="dot"></span>最后一个子元素节点</p>
+        <p class="flex-h">el.nextSibling：<span class="dot"></span>下一个兄弟节点，包括文本节点，元素节点</p>
+        <p class="flex-h">el.previousSibling：<span class="dot"></span>上一个兄弟节点，包括文本节点，元素节点</p>
+        <strong>创建节点</strong>
+        <p>document.createElement(tagName)：创建节点</p>
+        <p>el.appendChild(child)：将创建的节点作为子节点添加到父节点的末尾哦</p>
+        <p>el.insertBefore(child,node)：在父节点某个子节点前面插入新的子节点</p>
+        <p>removeChild(child)：从父节点中删除某个子节点</p>
+        <h4 class="exam-title">留言板</h4>
+        <div class="msg-box">
+            <input type="text" placeholder="说点啥吧" maxlength="20" id='msg'>
+            <input type="button" value="提交" id='btn'>
+        </div>
+        <ul class="msg-list" id='list'>
+        </ul>
+        <p><span class="iconfont info-icon">&#xe82e;</span> 使用正则表达式规范输入</p>
+        <p><span class="iconfont info-icon">&#xe82e;</span> 每条留言增加删除功能</p>
+        <pre class="code">
     msgbtn.addEventListener('click', function () {
       if (!msg.value) {
         return
@@ -209,9 +209,9 @@
       list.insertBefore(li, list.children[0])
       msg.value = ''
     })</pre>
-    <h4 class="exam-title">加载数据并展示到表格</h4>
-    <button id='load'>加载</button>
-    <pre class="code">
+        <h4 class="exam-title">加载数据并展示到表格</h4>
+        <button id='load'>加载</button>
+        <pre class="code">
     let load = document.querySelector('#load')
     load.addEventListener('click', () => {
       fetch('./data2021/stu.json')
@@ -220,207 +220,207 @@
           console.log(res);
         })
     })    </pre>
-    <table class="tbl">
-      <tr>
-        <td>ID</td>
-        <td>unit</td>
-      </tr>
-    </table>
-    <small>Copyright Reserved &copy; By Cnplaman 2021-12-03</small>
-  </section>
-  <script>
-    window.onload = function () {
-      // count
-      let week_arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
-      let year = document.querySelector('#yy')
-      let mon = document.querySelector('#mon')
-      let day = document.querySelector('#day')
-      let week = document.querySelector('#week')
-      let hh = document.querySelector('#hh')
-      let min = document.querySelector('#min')
-      let sec = document.querySelector('#sec')
-      let inter = setInterval(() => {
-        let date = new Date()
-        year.innerHTML = date.getFullYear()
-        mon.innerHTML = date.getMonth() + 1
-        day.innerHTML = date.getDate()
-        week.innerHTML = week_arr[date.getDay()]
-        hh.innerHTML = date.getHours() > 9 ? date.getHours() : '0' + date.getHours()
-        min.innerHTML = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes()
-        sec.innerHTML = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds()
-      }, 1000)
+        <table class="tbl">
+            <tr>
+                <td>ID</td>
+                <td>unit</td>
+            </tr>
+        </table>
+        <small>Copyright Reserved &copy; By Cnplaman 2021-12-03</small>
+    </section>
+    <script>
+        window.onload = function () {
+            // count
+            let week_arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+            let year = document.querySelector('#yy')
+            let mon = document.querySelector('#mon')
+            let day = document.querySelector('#day')
+            let week = document.querySelector('#week')
+            let hh = document.querySelector('#hh')
+            let min = document.querySelector('#min')
+            let sec = document.querySelector('#sec')
+            let inter = setInterval(() => {
+                let date = new Date()
+                year.innerHTML = date.getFullYear()
+                mon.innerHTML = date.getMonth() + 1
+                day.innerHTML = date.getDate()
+                week.innerHTML = week_arr[date.getDay()]
+                hh.innerHTML = date.getHours() > 9 ? date.getHours() : '0' + date.getHours()
+                min.innerHTML = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes()
+                sec.innerHTML = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds()
+            }, 1000)
 
-      // count down
-      let cd = document.querySelector('#cd')
-      let ch = document.querySelector('#ch')
-      let cm = document.querySelector('#cm')
-      let cs = document.querySelector('#cs')
-      let oldday = new Date('2022-01-01 00:00:00')
-      let cinter = setInterval(() => {
-        let newday = new Date()
-        let secs = parseInt((oldday - newday) / 1000)
-        if (secs < 0) {
-          clearInterval(cinter)
-          return
-        }
-        cd.innerHTML = parseInt(secs / 60 / 60 / 24)
-        ch.innerHTML = parseInt(secs / 60 / 60 % 24)
-        cm.innerHTML = parseInt(secs / 60 % 60)
-        cs.innerHTML = secs % 60 > 9 ? secs % 60 : '0' + secs % 60
-      }, 1000)
-      // cds
-      let cds = document.querySelector('#cds')
-      let time = 10
-      let cdsinter = setInterval(() => {
-        time--
-        if (time < 0) {
-          clearInterval(cdsinter)
-          return
-        }
-        cds.innerHTML = time
-      }, 1000)
+            // count down
+            let cd = document.querySelector('#cd')
+            let ch = document.querySelector('#ch')
+            let cm = document.querySelector('#cm')
+            let cs = document.querySelector('#cs')
+            let oldday = new Date('2022-01-01 00:00:00')
+            let cinter = setInterval(() => {
+                let newday = new Date()
+                let secs = parseInt((oldday - newday) / 1000)
+                if (secs < 0) {
+                    clearInterval(cinter)
+                    return
+                }
+                cd.innerHTML = parseInt(secs / 60 / 60 / 24)
+                ch.innerHTML = parseInt(secs / 60 / 60 % 24)
+                cm.innerHTML = parseInt(secs / 60 % 60)
+                cs.innerHTML = secs % 60 > 9 ? secs % 60 : '0' + secs % 60
+            }, 1000)
+            // cds
+            let cds = document.querySelector('#cds')
+            let time = 10
+            let cdsinter = setInterval(() => {
+                time--
+                if (time < 0) {
+                    clearInterval(cdsinter)
+                    return
+                }
+                cds.innerHTML = time
+            }, 1000)
 
-      // info
-      let info = document.querySelector('#info')
-      info.addEventListener('change', function () {
-        console.log(this.checked);
-        this.checked ? alert('同意') : alert('不同意')
-      })
-      // nav
-      let as = document.querySelectorAll('#nav a')
-      console.log(as);
-      for (let i = 0; i < as.length; i++) {
-        as[i].addEventListener('click', function (e) {
-          e.preventDefault();
-          for (let j = 0; j < as.length; j++) {
-            as[j].classList.remove('active')
-          }
-          this.classList.add('active')
-          console.log(e.target.dataset.link);
-          setTimeout(function () {
-            document.querySelector(e.target.dataset.link).scrollIntoView()
-          }, 100)
-        })
-      }
-      // show passw
-      let btn = document.querySelector('input[type="button"]');
-      let input = document.querySelector('input[type="password"]');
-      let showPass = document.querySelector('input[type="button"]');
-      showPass.addEventListener('click', () => {
-        if (input.type == 'text') {
-          input.type = 'password'
-          btn.value = '显示密码'
-        } else {
-          input.type = 'text'
-          btn.value = '隐藏密码'
-        }
-      })
-      // skin
-      let imgBox = document.querySelector('.img-box')
-      let imgs = imgBox.querySelectorAll('img')
-      for (let i = 0; i < imgs.length; i++) {
-        imgs[i].addEventListener('click', function () {
-          imgBox.style.backgroundImage = `url(${this.src})`
-        })
-      }
-      // data
-      let cbs = document.querySelectorAll('.flex-h input[name="web"]')
-      let all = document.querySelector('#all')
-      all.addEventListener('change', function (e) {
-        if (this.checked) {
-          for (let i = 0; i < cbs.length; i++) {
-            cbs[i].checked = true
-          }
-        } else {
-          for (let i = 0; i < cbs.length; i++) {
-            cbs[i].checked = false
-          }
-        }
-      })
-      for (let i = 0; i < cbs.length; i++) {
-        cbs[i].addEventListener('change', function () {
-          let flag = true
-          for (let j = 0; j < cbs.length; j++) {
-            console.log(j, cbs[j].checked);
-            if (!cbs[j].checked) {
-              flag = false
-              break
+            // info
+            let info = document.querySelector('#info')
+            info.addEventListener('change', function () {
+                console.log(this.checked);
+                this.checked ? alert('同意') : alert('不同意')
+            })
+            // nav
+            let as = document.querySelectorAll('#nav a')
+            console.log(as);
+            for (let i = 0; i < as.length; i++) {
+                as[i].addEventListener('click', function (e) {
+                    e.preventDefault();
+                    for (let j = 0; j < as.length; j++) {
+                        as[j].classList.remove('active')
+                    }
+                    this.classList.add('active')
+                    console.log(e.target.dataset.link);
+                    setTimeout(function () {
+                        document.querySelector(e.target.dataset.link).scrollIntoView()
+                    }, 100)
+                })
             }
-          }
-          all.checked = flag
-        })
-      }
+            // show passw
+            let btn = document.querySelector('input[type="button"]');
+            let input = document.querySelector('input[type="password"]');
+            let showPass = document.querySelector('input[type="button"]');
+            showPass.addEventListener('click', () => {
+                if (input.type == 'text') {
+                    input.type = 'password'
+                    btn.value = '显示密码'
+                } else {
+                    input.type = 'text'
+                    btn.value = '隐藏密码'
+                }
+            })
+            // skin
+            let imgBox = document.querySelector('.img-box')
+            let imgs = imgBox.querySelectorAll('img')
+            for (let i = 0; i < imgs.length; i++) {
+                imgs[i].addEventListener('click', function () {
+                    imgBox.style.backgroundImage = `url(${this.src})`
+                })
+            }
+            // data
+            let cbs = document.querySelectorAll('.flex-h input[name="web"]')
+            let all = document.querySelector('#all')
+            all.addEventListener('change', function (e) {
+                if (this.checked) {
+                    for (let i = 0; i < cbs.length; i++) {
+                        cbs[i].checked = true
+                    }
+                } else {
+                    for (let i = 0; i < cbs.length; i++) {
+                        cbs[i].checked = false
+                    }
+                }
+            })
+            for (let i = 0; i < cbs.length; i++) {
+                cbs[i].addEventListener('change', function () {
+                    let flag = true
+                    for (let j = 0; j < cbs.length; j++) {
+                        console.log(j, cbs[j].checked);
+                        if (!cbs[j].checked) {
+                            flag = false
+                            break
+                        }
+                    }
+                    all.checked = flag
+                })
+            }
 
-      // msg
-      let msg = document.querySelector('#msg')
-      let msgbtn = document.querySelector('#btn')
-      let list = document.querySelector('#list')
-      msgbtn.addEventListener('click', function () {
-        if (!msg.value) {
-          return
+            // msg
+            let msg = document.querySelector('#msg')
+            let msgbtn = document.querySelector('#btn')
+            let list = document.querySelector('#list')
+            msgbtn.addEventListener('click', function () {
+                if (!msg.value) {
+                    return
+                }
+                let li = document.createElement('li')
+                li.innerHTML = msg.value
+                // list.appendChild(li)
+                list.insertBefore(li, list.children[0])
+                msg.value = ''
+            })
+            // 创建表格
+            let load = document.querySelector('#load')
+            let tbl = document.querySelector('.tbl')
+            load.addEventListener('click', () => {
+                fetch('./data2021/stu.json')
+                    .then(res => res.json())
+                    .then(res => {
+                        display0(res)
+                    })
+            })
+            function display0(data) {
+                let startTime = new Date().getTime()
+                data.forEach(item => {
+                    let tr = document.createElement('tr')
+                    let val = Object.values(item)
+                    val.forEach(el => {
+                        let td = document.createElement('td')
+                        td.innerHTML = el
+                        tr.appendChild(td)
+                    })
+                    tbl.appendChild(tr)
+                });
+                let endTime = new Date().getTime()
+                console.log('took', endTime - startTime);
+            }
+            function display1(data) {
+                let startTime = new Date().getTime()
+                for (let i = 0; i < data.length; i++) {
+                    let tr = document.createElement('tr')
+                    let item = Object.values(data[i])
+                    for (let j = 0; j < item.length; j++) {
+                        let td = document.createElement('td')
+                        td.innerHTML = item[j]
+                        tr.appendChild(td)
+                    }
+                    tbl.appendChild(tr)
+                }
+                let endTime = new Date().getTime()
+                console.log('took', endTime - startTime);
+            }
+            function display2(data) {
+                let startTime = new Date().getTime()
+                for (let i = 0; i < data.length; i++) {
+                    let tr = '<tr>'
+                    let item = Object.values(data[i])
+                    for (let j = 0; j < item.length; j++) {
+                        let td = document.createElement('td')
+                        tr += '<td>' + item[j] + '</td>'
+                    }
+                    tbl.innerHTML += tr
+                }
+                let endTime = new Date().getTime()
+                console.log('took', endTime - startTime);
+            }
         }
-        let li = document.createElement('li')
-        li.innerHTML = msg.value
-        // list.appendChild(li)
-        list.insertBefore(li, list.children[0])
-        msg.value = ''
-      })
-      // 创建表格
-      let load = document.querySelector('#load')
-      let tbl = document.querySelector('.tbl')
-      load.addEventListener('click', () => {
-        fetch('./data2021/stu.json')
-          .then(res => res.json())
-          .then(res => {
-            display0(res)
-          })
-      })
-      function display0(data) {
-        let startTime = new Date().getTime()
-        data.forEach(item => {
-          let tr = document.createElement('tr')
-          let val = Object.values(item)
-          val.forEach(el => {
-            let td = document.createElement('td')
-            td.innerHTML = el
-            tr.appendChild(td)
-          })
-          tbl.appendChild(tr)
-        });
-        let endTime = new Date().getTime()
-        console.log('took', endTime - startTime);
-      }
-      function display1(data) {
-        let startTime = new Date().getTime()
-        for (let i = 0; i < data.length; i++) {
-          let tr = document.createElement('tr')
-          let item = Object.values(data[i])
-          for (let j = 0; j < item.length; j++) {
-            let td = document.createElement('td')
-            td.innerHTML = item[j]
-            tr.appendChild(td)
-          }
-          tbl.appendChild(tr)
-        }
-        let endTime = new Date().getTime()
-        console.log('took', endTime - startTime);
-      }
-      function display2(data) {
-        let startTime = new Date().getTime()
-        for (let i = 0; i < data.length; i++) {
-          let tr = '<tr>'
-          let item = Object.values(data[i])
-          for (let j = 0; j < item.length; j++) {
-            let td = document.createElement('td')
-            tr += '<td>' + item[j] + '</td>'
-          }
-          tbl.innerHTML += tr
-        }
-        let endTime = new Date().getTime()
-        console.log('took', endTime - startTime);
-      }
-    }
-  </script>
+    </script>
 </body>
 
 </html>

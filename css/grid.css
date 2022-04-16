@@ -1,102 +1,108 @@
 .nav {
-  display: grid;
-  grid-template-columns: 8rem 1fr;
-  gap: 1rem;
-  height: 4rem;
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 1rem;
+    height: 4rem;
 }
 
 .item {
-  min-height: 4rem;
-  background-color: #ccc;
+    min-height: 4rem;
+    background-color: #ccc;
 }
 
 .nav>*, .cup>*, .random>*, .sudoku>*, .ale>*, article>* {
-  background-color: #a8e073;
+    background-color: #a8e073;
 }
 
 .cup {
-  display: grid;
-  grid-template-columns: 8rem 1fr 4rem;
-  gap: 1rem;
-  height: 4rem;
+    display: grid;
+    grid-template-columns: 8rem 1fr 4rem;
+    gap: 1rem;
+    height: 4rem;
 }
 
-.sudoku {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+.grid3 {
+    padding: 0;
 }
 
-.sudoku .item {
-  height: 4rem;
+.grid3 .item {
+    height: 4rem;
 }
 
 .random {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
 }
 
 .random .item {
-  min-height: 4rem;
+    min-height: 4rem;
 }
 
 .random>div:nth-child(1) {
-  grid-column: span 2;
+    grid-column: span 2;
 }
 
 .random>div:nth-child(2) {
-  grid-row: span 2;
+    grid-row: span 2;
 }
 
 .random>div:nth-child(3) {
-  grid-row: span 2;
+    grid-row: span 2;
 }
 
 .random>div:nth-child(5) {
-  grid-column: span 2;
+    grid-column: span 2;
 }
 
 .ale {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-  gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: 1rem;
 }
 
 .page {
-  display: grid;
-  grid-template-areas:
-    'header header header'
-    'nav nav nav'
-    'aside article article'
-    'footer footer footer';
-  gap: 1rem;
+    display: grid;
+    grid-template-areas:
+        'header header header'
+        'nav nav nav'
+        'aside article article'
+        'footer footer footer';
+    gap: 1rem;
 }
 
 .page>* {
-  text-align: center;
+    text-align: center;
 }
 
 .page header {
-  grid-area: header;
-  height: 8rem;
+    grid-area: header;
+    height: 8rem;
 }
 
 .page nav {
-  grid-area: nav;
-  height: 2rem;
+    grid-area: nav;
+    height: 2rem;
 }
 
 .page aside {
-  grid-area: aside;
-  min-height: 20rem;
+    grid-area: aside;
+    min-height: 20rem;
 }
 
 .page article {
-  grid-area: article;
+    grid-area: article;
 }
 
 .page footer {
-  grid-area: footer;
-  height: 30px;
+    grid-area: footer;
+    height: 30px;
+}
+
+@media screen and (max-width:768px) {
+
+    .grid3 {
+        grid-template-columns: repeat(3, 1fr);
+        gap: .5rem;
+    }
 }
