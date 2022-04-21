@@ -2,69 +2,76 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Position</title>
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/position.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/position.css">
 </head>
 
 <body>
-  <section class="w">
-    <h4 class="cont-title">相对定位Relative/绝对定位Absolute</h4>
-    <p>相对定位：不脱离文档流；参考对象是自己；</p>
-    <p>绝对定位：脱离文档流；参考对象是显示的设置了定位属性(相对或绝对都可以)的最近的父元素；如果父元素没有指定定位属性，则一级一级往上寻找，直至body；</p>
-    <p>绝对定位元素默认会待在原来的位置，可以利用关键字top right bottom left和负边距定位元素。</p>
-    <p>相对定位很少单独使用，通常为子元素提供定位依据，即：<strong>父相子绝</strong></p>
-    <div class="exam-title">利用关键字</div>
-    <div class="cart">
-      <span class="iconfont">&#xe832;</span>
-      <span class="badge keyword">8</span>
-      <span>我的购物车</span>
-    </div>
-    <pre class="code">
+    <section class="w">
+        <header>
+            <h1>定位 Position</h1>
+        </header>
+        <h4 class="cont-title">相对定位Relative/绝对定位Absolute</h4>
+        <p>相对定位：不脱离文档流；参考对象是自己；</p>
+        <p>绝对定位：脱离文档流；参考对象是显示的设置了定位属性(相对或绝对都可以)的最近的父元素；如果父元素没有指定定位属性，则一级一级往上寻找，直至body；</p>
+        <p>绝对定位元素默认会待在原来的位置，可以利用关键字top right bottom left和负边距定位元素。</p>
+        <p>相对定位很少单独使用，通常为子元素提供定位依据，即：<strong>父相子绝</strong></p>
+        <div class="exam-title">利用关键字</div>
+        <div class="cart">
+            <span class="iconfont">&#xe832;</span>
+            <span class="badge keyword">8</span>
+            <span>我的购物车</span>
+        </div>
+        <pre class="code">
     .keyword {
       position: absolute;
       right: 6rem;
       top: -.5rem;
     }</pre>
-    <div class="exam-title">利用负边距</div>
-    <div class="cart">
-      <span class="iconfont">&#xe832;</span>
-      <span class="badge neg">8</span>
-      <span>我的购物车</span>
-    </div>
-    <pre class="code">
+        <div class="exam-title">利用负边距</div>
+        <div class="cart">
+            <span class="iconfont">&#xe832;</span>
+            <span class="badge neg">8</span>
+            <span>我的购物车</span>
+        </div>
+        <pre class="code">
     .neg {
       position: absolute;
       margin-top: -.5rem;
       margin-left: -.5rem;
     }</pre>
-    <div class="exam-title">bubble利用负边距定位</div>
-    <div>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit sunt sequi nobis aspernatur! Exercitationem
-        ipsam,
-        adipisci, unde ex placeat reprehenderit consequatur aliquam similique esse molestias distinctio alias incidunt
-        delectus cumque excepturi iure quod, id perspiciatis velit modi! Cumque, blanditiis expedita!</p>
-      <span class="iconfont icon">&#xe7f7;</span>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora ipsum quae natus obcaecati officia culpa minus
-        pariatur corrupti magni nostrum velit a explicabo tempore iure porro, expedita quo amet veniam.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut accusantium inventore optio nihil eos. Sed cum a
-        quod minus explicabo.</p>
-    </div>
-    <pre class="code">
+        <div class="exam-title">bubble利用负边距定位</div>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit sunt sequi nobis aspernatur!
+                Exercitationem
+                ipsam,
+                adipisci, unde ex placeat reprehenderit consequatur aliquam similique esse molestias distinctio alias
+                incidunt
+                delectus cumque excepturi iure quod, id perspiciatis velit modi! Cumque, blanditiis expedita!</p>
+            <span class="iconfont icon">&#xe7f7;</span>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora ipsum quae natus obcaecati officia culpa
+                minus
+                pariatur corrupti magni nostrum velit a explicabo tempore iure porro, expedita quo amet veniam.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut accusantium inventore optio nihil eos. Sed
+                cum a
+                quod minus explicabo.</p>
+        </div>
+        <pre class="code">
     .icon {
       position: absolute;
       margin-top: -1.2rem;
       margin-left: -1rem;
       color: #c81623;
     }</pre>
-    <div class="exam-title">水平垂直居中方案1</div>
-    <p>必须知道子元素的大小；子元素尺寸甚至可以大于父元素</p>
-    <div class="demo-box">
-      <pre class="code">
+        <div class="exam-title">水平垂直居中方案1</div>
+        <p>必须知道子元素的大小；子元素尺寸甚至可以大于父元素</p>
+        <div class="demo-box">
+            <pre class="code">
     .demo-inner0 {
       position: absolute;
       width: 110px;
@@ -75,14 +82,14 @@
       margin-left: -55px;
       margin-top: -25px;
     }      </pre>
-      <div class="demo">
-        <div class="demo-inner0">demo-inner0</div>
-      </div>
-    </div>
-    <div class="exam-title">水平垂直居中方案2</div>
-    <p>无需知道子元素的大小；子元素尺寸必须小于于父元素</p>
-    <div class="demo-box">
-      <pre class="code">
+            <div class="demo">
+                <div class="demo-inner0">demo-inner0</div>
+            </div>
+        </div>
+        <div class="exam-title">水平垂直居中方案2</div>
+        <p>无需知道子元素的大小；子元素尺寸必须小于于父元素</p>
+        <div class="demo-box">
+            <pre class="code">
     .demo-inner1 {
       position: absolute;
       width: 110px;
@@ -94,14 +101,14 @@
       left: 0;
       margin: auto;
     }      </pre>
-      <div class="demo">
-        <div class="demo-inner1">demo-inner1</div>
-      </div>
-    </div>
-    <div class="exam-title">水平垂直居中方案3</div>
-    <p>无需知道子元素的尺寸</p>
-    <div class="demo-box">
-      <pre class="code">
+            <div class="demo">
+                <div class="demo-inner1">demo-inner1</div>
+            </div>
+        </div>
+        <div class="exam-title">水平垂直居中方案3</div>
+        <p>无需知道子元素的尺寸</p>
+        <div class="demo-box">
+            <pre class="code">
     .demo-inner3 {
       position: absolute;
       width: 110px;
@@ -111,14 +118,14 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }      </pre>
-      <div class="demo">
-        <div class="demo-inner3">demo-inner3</div>
-      </div>
-    </div>
-    <div class="exam-title">水平垂直居中方案4</div>
-    <p>单个元素：利用flex，简直不要太爽</p>
-    <div class="demo-box">
-      <pre class="code">
+            <div class="demo">
+                <div class="demo-inner3">demo-inner3</div>
+            </div>
+        </div>
+        <div class="exam-title">水平垂直居中方案4</div>
+        <p>单个元素：利用flex，简直不要太爽</p>
+        <div class="demo-box">
+            <pre class="code">
     .flex-box {
       display: flex;
     }
@@ -128,119 +135,129 @@
       background-color: #fff;
       margin: auto;
     }      </pre>
-      <div class="demo flex-box">
-        <div class="demo-inner4">demo-inner4</div>
-      </div>
-    </div>
-    <div class="exam-title">水平垂直居中方案5</div>
-    <p>多个子元素：利用flex，爽到爆</p>
-    <div class="demo-box">
-      <pre class="code">
+            <div class="demo flex-box">
+                <div class="demo-inner4">demo-inner4</div>
+            </div>
+        </div>
+        <div class="exam-title">水平垂直居中方案5</div>
+        <p>多个子元素：利用flex，爽到爆</p>
+        <div class="demo-box">
+            <pre class="code">
     .flex-box-adv {
       display: flex;
       justify-content: center;
       align-items: center;
     }
     //子元素样式同上</pre>
-      <div class="demo flex-box-adv">
-        <div class="demo-inner5">demo-inner5</div>
-        <div class="demo-inner5">demo-inner5</div>
-      </div>
-    </div>
-    <h4 class="cont-title">固定定位Fixed</h4>
-    <p>固定定位以视口viewport为参考。元素会固定在屏幕上，不会随页面的滚动而移动。通常用来定制导航，如顶部导航、侧边导航和底部导航等。</p>
-    <p>使用小技巧：贴近页面右侧版心？</p>
-    <p>方案：left偏移浏览器的一半（50%），再增加半个版心的margin-left；贴近左侧同理</p>
-    <p>导航通常的解决方案是：当前页面位于顶端时，暂时隐藏侧边导航条；当页面向下滚动到一定位置时，再显式侧边导航栏；一般需要借助JS实现。</p>
-    <aside class="right">
-      <ul>
-        <li class="item">
-          <div>京东</div>
-          <div>秒杀</div>
-        </li>
-        <li class="spacer"></li>
-        <li class="item">
-          <div>特色</div>
-          <div>优选</div>
-        </li>
-        <li class="spacer"></li>
-        <li class="item">
-          <div>频道</div>
-          <div>广场</div>
-        </li>
-        <li class="spacer"></li>
-        <li class="item">
-          <div>为你</div>
-          <div>推荐</div>
-        </li>
-        <li class="spacer"></li>
-        <li class="item">
-          <div class="iconfont">&#xe80f;</div>
-          <div>客服</div>
-        </li>
-        <li class="spacer"></li>
-        <li class="item">
-          <div class="iconfont">&#xe7fb;</div>
-          <div>反馈</div>
-        </li>
-      </ul>
-    </aside>
-    <aside class="left">left</aside>
-    <aside class="bottom">bottom</aside>
-    <h4 class="cont-title">粘性定位Sticky</h4>
-    <nav class="sticky">
-      <ul class="nav">
-        <li>sticky</li>
-        <li>热点</li>
-        <li>|</li>
-        <li>博客</li>
-        <li>|</li>
-        <li>留言</li>
-      </ul>
-    </nav>
-    <strong>简介</strong>
-    <p>兼有相对定位和绝对定位的特性；以视口viewport为参考(具有固定定位特性)，占有原来位置(具有相对定位特性)；必须指定left、top、right、bottom某一个；</p>
-    <strong>应用</strong>
-    <p>适合banner/swiper+主导航+内容的网页。网页滚动时候，banner移出，导航保留/黏贴在顶端，内容也逐步移出；还可以使用JS实现黏性效果。</p>
-    <strong>注意</strong>
-    <p>1.其父元素不能设置overflow:hidden</p>
-    <p>2.浏览器支持不是很广泛；注意调试；更多信息请查看<a href="https://caniuse.com/" class="link" target="_blank">https://caniuse.com/</a></p>
-    <h4 class="cont-title">z-index</h4>
-    <p>控制Z轴方向上盒子堆叠时的前后次序；</p>
-    <p>只有定位的元素有，标准文档流没有；但是后面的元素默认比前面的元素具有更高的层级；</p>
-    <p>z-index为正的元素，出现在没有指定z-index的元素的上面；</p>
-    <p>z-index为负的元素，出现在没有指定z-index的元素的下面；</p>
-    <p>数值大的在前面（近）；数值小的在后面（远）；</p>
-    <p>如果没有显式指定z-index，则为auto，按照文档流出现的顺序，后来居上；</p>
-    <div class="exam-title">层级提升</div>
-    <p>因为relative没有脱离文档流，故可以指定为相对定位，以获得较高的层级展示；并根据需要设置z-index实现特定的效果</p>
-    <div class="nav zindex">这是导航内容</div>
-    <div class="cont">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem, nostrum tenetur cumque esse nisi
-      animi dolores deleniti perferendis, hic error iusto amet ipsam quae rem nobis, reiciendis illum est. Commodi iusto
-      maxime repellat asperiores. Optio, maxime qui praesentium suscipit doloremque voluptatum! Molestias accusamus
-      voluptatibus, aspernatur porro eveniet exercitationem architecto at?</div>
-    <pre class="code">
+            <div class="demo flex-box-adv">
+                <div class="demo-inner5">demo-inner5</div>
+                <div class="demo-inner5">demo-inner5</div>
+            </div>
+        </div>
+        <h4 class="cont-title">固定定位Fixed</h4>
+        <p>固定定位以视口viewport为参考。元素会固定在屏幕上，不会随页面的滚动而移动。通常用来定制导航，如顶部导航、侧边导航和底部导航等。</p>
+        <p>使用小技巧：贴近页面右侧版心？</p>
+        <p>方案：left偏移浏览器的一半（50%），再增加半个版心的margin-left；贴近左侧同理</p>
+        <p>导航通常的解决方案是：当前页面位于顶端时，暂时隐藏侧边导航条；当页面向下滚动到一定位置时，再显式侧边导航栏；一般需要借助JS实现。</p>
+        <aside class="right">
+            <ul>
+                <li class="item">
+                    <div>京东</div>
+                    <div>秒杀</div>
+                </li>
+                <li class="spacer"></li>
+                <li class="item">
+                    <div>特色</div>
+                    <div>优选</div>
+                </li>
+                <li class="spacer"></li>
+                <li class="item">
+                    <div>频道</div>
+                    <div>广场</div>
+                </li>
+                <li class="spacer"></li>
+                <li class="item">
+                    <div>为你</div>
+                    <div>推荐</div>
+                </li>
+                <li class="spacer"></li>
+                <li class="item">
+                    <div class="iconfont">&#xe80f;</div>
+                    <div>客服</div>
+                </li>
+                <li class="spacer"></li>
+                <li class="item">
+                    <div class="iconfont">&#xe7fb;</div>
+                    <div>反馈</div>
+                </li>
+            </ul>
+        </aside>
+        <aside class="left">left</aside>
+        <aside class="bottom">bottom</aside>
+        <h4 class="cont-title">粘性定位Sticky</h4>
+        <nav class="sticky">
+            <ul class="nav">
+                <li>sticky</li>
+                <li>热点</li>
+                <li>|</li>
+                <li>博客</li>
+                <li>|</li>
+                <li>留言</li>
+            </ul>
+        </nav>
+        <strong>简介</strong>
+        <p>兼有相对定位和绝对定位的特性；以视口viewport为参考(具有固定定位特性)，占有原来位置(具有相对定位特性)；必须指定left、top、right、bottom某一个；</p>
+        <strong>应用</strong>
+        <p>适合banner/swiper+主导航+内容的网页。网页滚动时候，banner移出，导航保留/黏贴在顶端，内容也逐步移出；还可以使用JS实现黏性效果。</p>
+        <strong>注意</strong>
+        <p>1.其父元素不能设置overflow:hidden</p>
+        <p>2.浏览器支持不是很广泛；注意调试；更多信息请查看<a href="https://caniuse.com/" class="link" target="_blank">https://caniuse.com/</a>
+        </p>
+        <h4 class="cont-title">z-index</h4>
+        <p>控制Z轴方向上盒子堆叠时的前后次序；</p>
+        <p>只有定位的元素有，标准文档流没有；但是后面的元素默认比前面的元素具有更高的层级；</p>
+        <p>z-index为正的元素，出现在没有指定z-index的元素的上面；</p>
+        <p>z-index为负的元素，出现在没有指定z-index的元素的下面；</p>
+        <p>数值大的在前面（近）；数值小的在后面（远）；</p>
+        <p>如果没有显式指定z-index，则为auto，按照文档流出现的顺序，后来居上；</p>
+        <div class="exam-title">层级提升</div>
+        <p>因为relative没有脱离文档流，故可以指定为相对定位，以获得较高的层级展示；并根据需要设置z-index实现特定的效果</p>
+        <div class="nav zindex">这是导航内容</div>
+        <div class="cont">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Autem, nostrum tenetur cumque esse
+            nisi
+            animi dolores deleniti perferendis, hic error iusto amet ipsam quae rem nobis, reiciendis illum est. Commodi
+            iusto
+            maxime repellat asperiores. Optio, maxime qui praesentium suscipit doloremque voluptatum! Molestias
+            accusamus
+            voluptatibus, aspernatur porro eveniet exercitationem architecto at?</div>
+        <pre class="code">
     .zindex {
       position: relative;
       padding: 1rem;
       box-shadow: 0 .4rem 1rem .1rem rgba(0, 0, 0, .4);
       z-index: 80;
     }      </pre>
-    <h4 class="cont-title">异常情况分析</h4>
-    <div class="qa">
-      <p>Q:关于侧边导航未能贴近版心</p>
-      <p>A：请检查&lt;html&gt;或&lt;body&gt;是否指定了width:100vw。</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque modi mollitia aliquid omnis corporis est, dolore
-        excepturi amet culpa? Iste nulla nostrum et provident ratione doloremque harum porro corrupti sunt?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil doloribus, modi cum laborum maiores molestias
-        earum ut perferendis consequatur qui sed error cupiditate, quod esse voluptas soluta ratione harum aspernatur
-        quam reprehenderit amet alias minus sit. Modi ullam atque fugit!</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi incidunt suscipit aut laborum aperiam neque
-        asperiores, culpa quas recusandae illo consequatur placeat rem necessitatibus ipsam. Ea itaque facilis ut
-        maiores fugit recusandae ullam, ratione in similique inventore omnis! Voluptate facere quos excepturi impedit!
-        Aliquam dignissimos placeat corporis recusandae tenetur nesciunt!</p>
-    </div>
-  </section>
+        <h4 class="cont-title">异常情况分析</h4>
+        <div class="qa">
+            <p>Q:关于侧边导航未能贴近版心</p>
+            <p>A：请检查&lt;html&gt;或&lt;body&gt;是否指定了width:100vw。</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque modi mollitia aliquid omnis corporis est,
+                dolore
+                excepturi amet culpa? Iste nulla nostrum et provident ratione doloremque harum porro corrupti sunt?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil doloribus, modi cum laborum maiores
+                molestias
+                earum ut perferendis consequatur qui sed error cupiditate, quod esse voluptas soluta ratione harum
+                aspernatur
+                quam reprehenderit amet alias minus sit. Modi ullam atque fugit!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi incidunt suscipit aut laborum aperiam
+                neque
+                asperiores, culpa quas recusandae illo consequatur placeat rem necessitatibus ipsam. Ea itaque facilis
+                ut
+                maiores fugit recusandae ullam, ratione in similique inventore omnis! Voluptate facere quos excepturi
+                impedit!
+                Aliquam dignissimos placeat corporis recusandae tenetur nesciunt!</p>
+        </div>
+    </section>
 </body>
 
 </html>

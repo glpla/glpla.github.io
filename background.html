@@ -2,43 +2,45 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>background</title>
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/bg.css">
-  <style>
-    .test {
-      background-color: aliceblue;
-      background-repeat: no-repeat;
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>background</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/bg.css">
+    <style>
+        .test {
+            background-color: aliceblue;
+            background-repeat: no-repeat;
 
-    }
-  </style>
+        }
+    </style>
 </head>
 
 <body>
-  <section class="w">
-    <h4 class="cont-title">background</h4>
-    <strong>单独属性</strong>
-    <p>background-color：背景颜色</p>
-    <p>background-image：可以使用url或者线性渐变、径向渐变</p>
-    <p>background-position：背景图片的位置；默认从左上角开始</p>
-    <p>background-size：背景图片的大小</p>
-    <p>background-repeat：背景图片是否重复贴铺</p>
-    <p>background-origin：背景图片的起点位置</p>
-    <p>background-attachment：背景图片和内容的附着方式</p>
-    <p>background-blend-mode：背景图片的混和模式</p>
-    <p>其它属性</p>
-    <dt>复合属性（不建议使用）</dt>
-    <p>background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;</p>
-    <p><a href="./background_adv.html" class="link">更多背景应用，点击访问</a></p>
+    <section class="w">
+        <header>
+            <h1>背景 Background</h1>
+        </header>
+        <strong>单独属性</strong>
+        <p>background-color：背景颜色</p>
+        <p>background-image：可以使用url或者线性渐变、径向渐变</p>
+        <p>background-position：背景图片的位置；默认从左上角开始</p>
+        <p>background-size：背景图片的大小</p>
+        <p>background-repeat：背景图片是否重复贴铺</p>
+        <p>background-origin：背景图片的起点位置</p>
+        <p>background-attachment：背景图片和内容的附着方式</p>
+        <p>background-blend-mode：背景图片的混和模式</p>
+        <p>其它属性</p>
+        <dt>复合属性（不建议使用）</dt>
+        <p>background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;</p>
+        <p><a href="./background_adv.html" class="link">更多背景应用，点击访问</a></p>
 
-    <h4 class="cont-title">background-color VS background-image </h4>
-    <p>背景颜色background-color和背景图片background-image互不冲突；通常结合在一起使用</p>
-    <section class="bgcolor-img"></section>
-    <pre class="code">
+        <h4 class="cont-title">background-color VS background-image </h4>
+        <p>背景颜色background-color和背景图片background-image互不冲突；通常结合在一起使用</p>
+        <section class="bgcolor-img"></section>
+        <pre class="code">
     .bgcolor-img {
       height: 200px;
       background-color: rgba(255, 68, 0, 0.4);
@@ -47,9 +49,9 @@
       background-size: 50px 50px;
       background-repeat: no-repeat;
     }</pre>
-    <section class="img-img"></section>
-    <p>多个背景图使用,分隔</p>
-    <pre class="code">
+        <section class="img-img"></section>
+        <p>多个背景图使用,分隔</p>
+        <pre class="code">
     .img-img {
       height: 200px;
       background-color: rgba(255, 68, 0, 0.4);
@@ -58,44 +60,44 @@
       background-size: 50px 50px;
       background-repeat: no-repeat;
     }</pre>
-    <section class="color-img">
-      <p>1.最基本的使用：指定图片为背景；早起为了后向兼容，同时也指定颜色</p>
-      <p>2.容器的尺寸&gt;背景图片的尺寸，则默认情况下，背景图片会在水平和垂直方向上重复贴铺</p>
-      <p>3.容器的尺寸&lt;背景图片的尺寸，则显示部分背景图片，实际上背景图片还是会在水平和垂直方向上重复贴铺，只不过受容器尺寸大小限制，没有呈现出来</p>
-    </section>
-    <pre class="code">
+        <section class="color-img">
+            <p>1.最基本的使用：指定图片为背景；早起为了后向兼容，同时也指定颜色</p>
+            <p>2.容器的尺寸&gt;背景图片的尺寸，则默认情况下，背景图片会在水平和垂直方向上重复贴铺</p>
+            <p>3.容器的尺寸&lt;背景图片的尺寸，则显示部分背景图片，实际上背景图片还是会在水平和垂直方向上重复贴铺，只不过受容器尺寸大小限制，没有呈现出来</p>
+        </section>
+        <pre class="code">
     background-color: #fff;
     background-image:  url(../imgs/bg.jpg);
     //或复合属性
     background: #fff url(../imgs/bg.jpg);</pre>
-    <h4 class="cont-title">background-repeat</h4>
-    <p>默认情况下，图片会水平和垂直方向上铺满整个容器；如果图片尺寸大于容器尺寸，看不出效果。实例分析：</p>
-    <section class="rpt">
-      <ul>
-        <li>
-          <span>1.背景图片&lt;容器尺寸</span>
-          <div class="dot"></div>
-          <span>1</span>
-        </li>
-        <li>
-          <span>2.背景图片采用水平重复</span>
-          <div class="dot"></div>
-          <span>6</span>
-        </li>
-        <li><span>3.采用flex布局</span>
-          <div class="dot"></div>
-          <span>9</span>
-        </li>
-      </ul>
-    </section>
-    <pre class="code">
+        <h4 class="cont-title">background-repeat</h4>
+        <p>默认情况下，图片会水平和垂直方向上铺满整个容器；如果图片尺寸大于容器尺寸，看不出效果。实例分析：</p>
+        <section class="rpt">
+            <ul>
+                <li>
+                    <span>1.背景图片&lt;容器尺寸</span>
+                    <div class="dot"></div>
+                    <span>1</span>
+                </li>
+                <li>
+                    <span>2.背景图片采用水平重复</span>
+                    <div class="dot"></div>
+                    <span>6</span>
+                </li>
+                <li><span>3.采用flex布局</span>
+                    <div class="dot"></div>
+                    <span>9</span>
+                </li>
+            </ul>
+        </section>
+        <pre class="code">
     background-image: url(../imgs/dot.png);
     background-repeat: repeat-x;</pre>
-    <h4 class="cont-title">background-position</h4>
-    <section class="pos">
-      <p>根据图片坐标/位置显示指定的内容</p>
-      <p>1.精灵图</p>
-      <pre class="code">
+        <h4 class="cont-title">background-position</h4>
+        <section class="pos">
+            <p>根据图片坐标/位置显示指定的内容</p>
+            <p>1.精灵图</p>
+            <pre class="code">
     .sprite .more {
       background-position: 0 -191px;
     }
@@ -111,27 +113,27 @@
     .sprite .save {
       background-position: -123px -191px;
     }      </pre>
-      <div class="sprite flex-h">
-        <div class="flex-h item">
-          <p class="icon more">多</p>
-          <p>品类齐全，轻松购物</p>
-        </div>
-        <div class="flex-h item">
-          <p class="icon fast">块</p>
-          <p>多仓直发，极速配送</p>
-        </div>
-        <div class="flex-h item">
-          <p class="icon good">好</p>
-          <p>正品行货，精致服务</p>
-        </div>
-        <div class="flex-h item">
-          <p class="icon save">省</p>
-          <p>天天低价，畅选无忧</p>
-        </div>
-      </div>
-      <p>2.图片分割</p>
-      <p>情况1：容器尺寸和图片尺寸一致:大图：750*500；小图：350*250</p>
-      <pre class="code">
+            <div class="sprite flex-h">
+                <div class="flex-h item">
+                    <p class="icon more">多</p>
+                    <p>品类齐全，轻松购物</p>
+                </div>
+                <div class="flex-h item">
+                    <p class="icon fast">块</p>
+                    <p>多仓直发，极速配送</p>
+                </div>
+                <div class="flex-h item">
+                    <p class="icon good">好</p>
+                    <p>正品行货，精致服务</p>
+                </div>
+                <div class="flex-h item">
+                    <p class="icon save">省</p>
+                    <p>天天低价，畅选无忧</p>
+                </div>
+            </div>
+            <p>2.图片分割</p>
+            <p>情况1：容器尺寸和图片尺寸一致:大图：750*500；小图：350*250</p>
+            <pre class="code">
     .tile-pair {
       width: 750px;
       height: 500px;
@@ -159,14 +161,14 @@
     .tile-pair>div:nth-child(4) {
       background-position: 100%;
     }      </pre>
-      <div class="tile-pair">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <p>情况2：容器尺寸和图片尺寸不一致时（块元素默认为100%的父级尺寸，所以不用单独指定width），单个部分的background-size应指定为总份数的倍数</p>
-      <pre class="code">
+            <div class="tile-pair">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <p>情况2：容器尺寸和图片尺寸不一致时（块元素默认为100%的父级尺寸，所以不用单独指定width），单个部分的background-size应指定为总份数的倍数</p>
+            <pre class="code">
     .tile {
       min-height: 18rem;
       margin: 0 auto;
@@ -194,83 +196,83 @@
     .tile>div:nth-child(4) {
       background-position: 100%;
     }      </pre>
-      <div class="tile">
-        <div class="tile-item"></div>
-        <div class="tile-item"></div>
-        <div class="tile-item"></div>
-        <div class="tile-item"></div>
-      </div>
-    </section>
-    <h4 class="cont-title">background-size</h4>
-    <section>
-      <p>1. 默认情况：100%的显示图片；容器大，则平铺；容器小，则显示部分图片</p>
-      <div class="size"></div>
-      <p>2. 关键字cover：在容器的尺寸内最大程度的展示图片；容器被占满；图片可能被裁剪</p>
-      <pre class="code">
+            <div class="tile">
+                <div class="tile-item"></div>
+                <div class="tile-item"></div>
+                <div class="tile-item"></div>
+                <div class="tile-item"></div>
+            </div>
+        </section>
+        <h4 class="cont-title">background-size</h4>
+        <section>
+            <p>1. 默认情况：100%的显示图片；容器大，则平铺；容器小，则显示部分图片</p>
+            <div class="size"></div>
+            <p>2. 关键字cover：在容器的尺寸内最大程度的展示图片；容器被占满；图片可能被裁剪</p>
+            <pre class="code">
     background-size:cover;</pre>
-      <div class="size cover"></div>
-      <p>3. 关键字contain：在容器的尺寸内展示完整的图片（包含图片）；如果允许重复，则会显示多个图片背景；如果不允许，容器将呈现部分空白</p>
-      <pre class="code">
+            <div class="size cover"></div>
+            <p>3. 关键字contain：在容器的尺寸内展示完整的图片（包含图片）；如果允许重复，则会显示多个图片背景；如果不允许，容器将呈现部分空白</p>
+            <pre class="code">
     background-size:contain;</pre>
-      <div class="size contain"></div>
-      <p>4. 通常指定为cover，并调整其位置position居中center显示</p>
-      <pre class="code">
+            <div class="size contain"></div>
+            <p>4. 通常指定为cover，并调整其位置position居中center显示</p>
+            <pre class="code">
     background-size:cover;
     background-position:center;
     background-repeat: no-repeat;</pre>
-      <div class="size cover-center"></div>
-      <p>5. 固定大小px：根据指定的尺寸展示图片。图片会被压缩；如果只提供一个值，系统会按照图片比例，自动铺满容器</p>
-      <pre class="code">
+            <div class="size cover-center"></div>
+            <p>5. 固定大小px：根据指定的尺寸展示图片。图片会被压缩；如果只提供一个值，系统会按照图片比例，自动铺满容器</p>
+            <pre class="code">
     background-size: 100px 100px;</pre>
-      <div class="size px"></div>
-      <p>6. 百分比：参照容器大小，根据一定的比例展示图片；图片会被压缩；如果只提供一个值，系统会按照图片比例，自动铺满容器</p>
-      <pre class="code">
+            <div class="size px"></div>
+            <p>6. 百分比：参照容器大小，根据一定的比例展示图片；图片会被压缩；如果只提供一个值，系统会按照图片比例，自动铺满容器</p>
+            <pre class="code">
     background-size: 10% 10%;</pre>
-      <div class="size per"></div>
-    </section>
-    <div class="exam-title">linear-gradient vs radial-gradient</div>
-    <div class="cont">
-      <a class="ad"></a>
-      <a class="item">
-        <img class="img" src="imgs/blue.jpg" alt="">
-        <p class="intro">这款低帮运动鞋采用经典GG帆布材质，搭配标志性配色组合。设计中融合了多种品牌经典元素，让人联想到品牌与运动和休闲世界的紧密联系。
-        </p>
-        <div class="price-box">
-          <div class="new">&yen;640</div>
-          <div class="old">&yen;988</div>
+            <div class="size per"></div>
+        </section>
+        <div class="exam-title">linear-gradient vs radial-gradient</div>
+        <div class="cont">
+            <a class="ad"></a>
+            <a class="item">
+                <img class="img" src="imgs/blue.jpg" alt="">
+                <p class="intro">这款低帮运动鞋采用经典GG帆布材质，搭配标志性配色组合。设计中融合了多种品牌经典元素，让人联想到品牌与运动和休闲世界的紧密联系。
+                </p>
+                <div class="price-box">
+                    <div class="new">&yen;640</div>
+                    <div class="old">&yen;988</div>
+                </div>
+            </a>
+            <a class="center">
+                <h3>领券中心</h3>
+                <div class="center-cont"></div>
+                <div class="center-cont"></div>
+                <div class="center-cont"></div>
+            </a>
         </div>
-      </a>
-      <a class="center">
-        <h3>领券中心</h3>
-        <div class="center-cont"></div>
-        <div class="center-cont"></div>
-        <div class="center-cont"></div>
-      </a>
-    </div>
-    <div class="exam-title">background-clip</div>
-    <div class="cont">
-      <a href="javascript:;" class="border">border-clip；default</a>
-      <a href="javascript:;" class="border padding-clip">padding-clip</a>
-      <a href="javascript:;" class="border content-clip">content-clip</a>
-    </div>
-    <div class="exam-title">背景特效</div>
-    <div class="cont">
-      <a href="javascript:;" class="border trans">透明边框</a>
-      <a href="javascript:;" class="inner-border">
-        <div class="inner">12</div>
-      </a>
-      <a href="javascript:;" class="glass-box">
-        <div class="glass">毛玻璃</div>
-        <img class="img" src="./imgs/lg.png" alt="">
-      </a>
-    </div>
-    <div class="exam-title">background-blend-mode</div>
-    <div class="blend-img"></div>
-    <h4 class="cont-title">作业和练习</h4>
-    <div>1.完成精灵图</div>
-    <div>1.分别完成2张、3张、4张、5张图片的分割，并总结其规律</div>
-    <h4>Copyright Reserved &copy; By Cnplaman 2021-10-12</h4>
-  </section>
+        <div class="exam-title">background-clip</div>
+        <div class="cont">
+            <a href="javascript:;" class="border">border-clip；default</a>
+            <a href="javascript:;" class="border padding-clip">padding-clip</a>
+            <a href="javascript:;" class="border content-clip">content-clip</a>
+        </div>
+        <div class="exam-title">背景特效</div>
+        <div class="cont">
+            <a href="javascript:;" class="border trans">透明边框</a>
+            <a href="javascript:;" class="inner-border">
+                <div class="inner">12</div>
+            </a>
+            <a href="javascript:;" class="glass-box">
+                <div class="glass">毛玻璃</div>
+                <img class="img" src="./imgs/lg.png" alt="">
+            </a>
+        </div>
+        <div class="exam-title">background-blend-mode</div>
+        <div class="blend-img"></div>
+        <h4 class="cont-title">作业和练习</h4>
+        <div>1.完成精灵图</div>
+        <div>1.分别完成2张、3张、4张、5张图片的分割，并总结其规律</div>
+        <h4>Copyright Reserved &copy; By Cnplaman 2021-10-12</h4>
+    </section>
 
 </body>
 
