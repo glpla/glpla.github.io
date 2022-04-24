@@ -1,145 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Baidu Map </title>
-  <link rel="stylesheet" href="css/reset.css">
-  <script src="js/fastclick.js"></script>
-  <style type="text/css">
-    table {
-      width: 90%;
-      margin: 0 auto;
-      border-collapse: collapse;
-    }
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <style>
+        .box {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #f40;
+        }
 
-    th,
-    td {
-      border: 1px solid #666;
-      text-align: center;
-    }
-
-    header {
-      text-align: center;
-    }
-
-    .week {
-      margin: 0 1rem;
-    }
-
-    a {
-      padding: 1rem 2rem;
-    }
-
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 99;
-      background-color: #fff;
-    }
-  </style>
+        .box a {
+            margin-left: auto;
+        }
+    </style>
 </head>
 
 <body>
-  <section id="app" class="w">
-
-    <h1>教学日历</h1>
-    <header>
-      <span class="week" v-for='item in weeks' :key='item'>{{item}}</span>
-      <div>
-        <span v-for='item in days'>{{item.yy}}-{{item.mm}}-{{item.i}}&nbsp;</span>
-      </div>
-    </header>
-  </section>
-  <nav>
-    <ul>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-    </ul>
-  </nav>
-  <section class="w">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloribus quisquam animi porro sunt
-    perferendis rem culpa illum consequatur molestiae adipisci, quas consequuntur vitae iure deleniti voluptatem alias
-    molestias harum, unde praesentium dolor facilis id tempore at vel. Commodi ad aliquam quibusdam neque, voluptate
-    sunt quas fuga alias accusamus dolorum porro amet totam tempore itaque nulla ut! Magnam minima facere aliquid
-    repudiandae magni similique, recusandae minus labore, perspiciatis nam dolorum perferendis error dolores veniam sit
-    necessitatibus amet voluptates optio eum tempore aspernatur quibusdam blanditiis placeat? Earum nisi tempora, velit,
-    impedit itaque quos explicabo pariatur culpa, vitae dolores vel? Rerum doloribus facere dicta fuga aspernatur vel
-    fugiat adipisci minus explicabo nemo, veniam quia accusantium, nihil officia atque! Ducimus nam repellendus
-    officiis, dolores voluptatum voluptates ut officia ex et fuga laboriosam velit sunt minima vitae laudantium pariatur
-    non veritatis totam, quidem porro quibusdam similique! Necessitatibus vel culpa suscipit hic! Officia reprehenderit
-    soluta ex voluptatibus vitae, harum nihil, ipsam nulla ducimus dolor, accusamus tempora nemo quas rerum. Dolore
-    repellendus aspernatur mollitia dicta, sequi eligendi facere consequuntur, corrupti doloremque, corporis modi culpa
-    voluptate? Esse, magnam. Necessitatibus ex provident temporibus eligendi, cupiditate dolor deserunt modi dignissimos
-    veritatis facilis debitis minus id culpa aliquid vitae distinctio nostrum sit aut dolore. Iste, perspiciatis quidem.
-    Praesentium optio illum molestiae ea est ducimus similique officia, hic qui distinctio! Neque laboriosam voluptatum
-    facere at saepe, error ducimus eum eos nam dolores vel quod assumenda possimus, maiores quibusdam optio atque rem
-    quisquam ut odio necessitatibus ipsa eaque? Laborum neque optio possimus saepe mollitia libero doloremque ducimus
-    commodi unde soluta quis hic maiores quos repellat recusandae, aliquam corrupti dolorem, ipsa ipsam? Vero
-    necessitatibus maiores officia aspernatur ea consequuntur magnam culpa, blanditiis error explicabo facere possimus
-    tenetur nesciunt nobis. Aut ipsam ex, corporis omnis nulla doloremque optio ipsum tempora id nobis ullam eveniet
-    soluta explicabo officia? Pariatur maiores quaerat cumque vero eligendi hic incidunt sed beatae velit illo
-    voluptatibus consequatur eum eaque quo odio accusamus molestias, eos et soluta sit ratione repellendus voluptas
-    fugiat? Dolor magni nam perferendis magnam, officiis impedit quasi molestias obcaecati incidunt voluptate minima,
-    maiores neque, non ut quibusdam eum? Repellat quos voluptate ea at itaque quia, animi, accusamus aliquid odio ab
-    perferendis. Perspiciatis, blanditiis perferendis. Odit eveniet commodi inventore, molestias expedita corrupti
-    architecto ea, totam consequatur dolores quia est autem a rem vel? Magni nulla distinctio, qui tempore harum
-    officiis aliquam ea. Esse dolor mollitia libero a temporibus. Quis, saepe.</section>
-  <script src="./js/vue.global.prod.min.js"></script>
-  <script src="./js/moment.js"></script>
-  <script type="module">
-    const app = Vue.createApp({
-      data() {
-        return {
-          weeks: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
-          ind: 0,
-          days: []
-        }
-      },
-      methods: {
-
-      },
-      computed: {},
-      watch: {},
-      created() {
-        let date = new Date('2021-09-06')
-        let year = date.getFullYear()
-        let mon = date.getMonth() + 1
-        moment.locale();
-        for (let i = mon; i < mon + 5; i++) {
-          let nDate = new Date(year, i, 0)
-          let yy = nDate.getFullYear()
-          let mm = nDate.getMonth() + 1
-          let dd = nDate.getDate()
-          for (let i = 1; i <= dd; i++) {
-            console.log(yy, mm, i);
-            this.days.push({ yy, mm, i })
-          }
-        }
-      },
-      mounted() {
-        window.addEventListener('scroll', (e) => {
-          if (window.pageYOffset > window.innerHeight) {
-            this.showBool = true
-          } else {
-            this.showBool = false
-          }
-        })
-      },
-    })
-    const vm = app.mount('#app')
-  </script>
-  <script>
-    window.onload = function () {
-      if ('addEventListener' in document) {
-        document.addEventListener('DOMContentLoaded', function () {
-          FastClick.attach(document.body);
-        }, false);
-      }
-    }
-  </script>
+    <h2 class="box flex-h">
+        <span>123</span>
+        <span>好</span>
+        <a href="">...more</a>
+    </h2>
 </body>
 
 </html>
