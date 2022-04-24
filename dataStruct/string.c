@@ -107,7 +107,7 @@ int indexOfStr(String *s, String *p, int pos)
 int main(void)
 {
     char *str0 = "hi, there. boy";
-    char *str1 = "h";
+    char *str1 = "th";
     int res;
     String *s = (String *)malloc(sizeof(String));
     String *p = (String *)malloc(sizeof(String));
@@ -117,9 +117,8 @@ int main(void)
     display(s);
     display(p);
     res = indexOfStr(s, p, 0);
-    printf("res=%d\n", res);
-    res = indexOfCh(s, 'I');
-    printf("res=%d\n", res);
+    printf("res=%d\n", res); // res=4
     free(s);
+    free(p);
     return 0;
 }

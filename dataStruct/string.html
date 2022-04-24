@@ -164,7 +164,9 @@
         <p>strcat(des, src)：des应有足够的长度来容纳拼接后的总长度；返回拼接后des的地址</p>
         <p>strncat(str0, str1, n)，表示拼接时取后面串的多少位 </p>
         <h2 id="seq">顺序串 <a href="#top" id="back2top2"><i class="iconfont icon">&#xe604;</i></a></h2>
-        <pre class="code">
+        <div class="code">
+            <button class="copy" id="copy-btn" data-clipboard-target="#copy-cont">点击复制</button>
+            <pre id="copy-cont">
         #include &lt;stdio.h&gt;
         #include &lt;stdlib.h&gt;
 
@@ -269,28 +271,28 @@
                     return s_start;
                 }
             }
-            return FALSE;
+            return ERROR;
         }
 
         int main(void)
         {
             char *str0 = "hi, there. boy";
-            char *str1 = "here";
+            char *str1 = "th";
             int res;
             String *s = (String *)malloc(sizeof(String));
             String *p = (String *)malloc(sizeof(String));
             assign(s, str0);
-            // assign(p, str1);
-            assign(p, "there");
+            assign(p, str1);
+            // assign(p, "there");
             display(s);
             display(p);
             res = indexOfStr(s, p, 0);
-            printf("res=%d\n", res);
-            res = indexOfCh(s, 'I');
-            printf("res=%d\n", res);
+            printf("res=%d\n", res); // res=4
             free(s);
+            free(p);
             return 0;
-        }</pre>
+        }    </pre>
+        </div>
         <h2 id="link">链式串 <a href="#top" id="back2top3"><i class="iconfont icon">&#xe604;</i></a></h2>
         <pre class="code">
         typedef struct Node
@@ -350,12 +352,22 @@
         <ul class="cont">
             <li><img src="../imgs/chap4 string/幻灯片19.JPG" alt=""></li>
             <li><img src="../imgs/chap4 string/幻灯片20.JPG" alt=""></li>
+            <li>
+                <div class="iframe-box">
+                    <iframe class="iframe"
+                        src="//player.bilibili.com/player.html?aid=670394789&bvid=BV1da4y1p7iZ&cid=260601529&page=1"
+                        scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+                </div>
+            </li>
             <li><img src="../imgs/chap4 string/幻灯片21.JPG" alt=""></li>
             <li><img src="../imgs/chap4 string/幻灯片22.JPG" alt=""></li>
             <li><img src="../imgs/chap4 string/幻灯片23.JPG" alt=""></li>
             <li><img src="../imgs/chap4 string/幻灯片24.JPG" alt=""></li>
             <li><img src="../imgs/chap4 string/幻灯片25.JPG" alt=""></li>
             <li><img src="../imgs/chap4 string/幻灯片26.JPG" alt=""></li>
+            <li>
+                <h2><a href="http://www.bccn.net/run/" target="_blank">在线调试一下吧</a></h2>
+            </li>
         </ul>
         <footer>
             <div class="copyright">
@@ -367,6 +379,7 @@
         </footer>
     </section>
     <script src="../js/s2view_cnplaman.js"></script>
+    <script src="../js/clipboard.min.js"></script>
     <script>
         window.onload = function () {
             let top0 = document.querySelector('#back2top0');
@@ -389,6 +402,13 @@
             s2view(seq, "#seq")
             s2view(link, "#link")
             s2view(app, "#app")
+            let cb = new ClipboardJS("#copy-btn")
+            cb.on("success", e => {
+                console.log("复制成功");
+            })
+            cb.on("error", e => {
+                console.log("复制失败");
+            })
         }
     </script>
 </body>
