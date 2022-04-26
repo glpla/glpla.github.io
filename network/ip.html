@@ -357,7 +357,7 @@
             <dd>CIDR - Classless Inter-Domain Routing</dd>
             <dd>RFC 4632、RFC 1517-1519、RFC 1520<a href="https://www.rfc-editor.org/"><span
                         class="iconfont">&#xe664;</span></a></dd>
-            <dd>重新归于2级结构：使用网络前缀取代网络号，且位数n不固定<sup>[pic7]</sup></dd>
+            <dd>消除了地址分类和子网划分的概念，IP地址重新归于2级结构：使用网络前缀取代网络号，且位数n不固定<sup>[pic7]</sup></dd>
             <dd>使用斜线/记法：表示网络前缀的长度，如128.14.35.7/20<sup>[pic8]</sup></dd>
         </dl>
         <div class="img-box">
@@ -515,9 +515,9 @@
             <table>
                 <tr>
                     <td>地址掩码</td>
-                    <td>1111 1111</td>
-                    <td>1111 1111</td>
-                    <td>1111 0000</td>
+                    <td><span class="warn">1111 1111</span></td>
+                    <td><span class="warn">1111 1111</span></td>
+                    <td><span class="warn">1111</span> 0000</td>
                     <td>0000 0000</td>
                     <td>255.255.240.0</td>
                 </tr>
@@ -525,7 +525,7 @@
                     <td>IP地址</td>
                     <td>128</td>
                     <td>14</td>
-                    <td>0010 0011</td>
+                    <td><span class="warn">0010</span> 0011</td>
                     <td>0000 0111</td>
                     <td>128.14.35.7</td>
                 </tr>
@@ -533,7 +533,7 @@
                     <td>网络地址</td>
                     <td>128</td>
                     <td>14</td>
-                    <td>0010 0000</td>
+                    <td><span class="warn">0010</span> 0000</td>
                     <td>0000 0000</td>
                     <td>128.14.32.0</td>
                 </tr>
@@ -541,7 +541,7 @@
                     <td>最小主机地址</td>
                     <td>128</td>
                     <td>14</td>
-                    <td>0010 0000</td>
+                    <td><span class="warn">0010</span> 0000</td>
                     <td>0000 0001</td>
                     <td>128.14.32.1</td>
                 </tr>
@@ -549,7 +549,7 @@
                     <td>最大主机地址</td>
                     <td>128</td>
                     <td>14</td>
-                    <td>0010 1111</td>
+                    <td><span class="warn">0010</span> 1111</td>
                     <td>1111 1110</td>
                     <td>128.14.47.254</td>
                 </tr>
@@ -557,7 +557,7 @@
                     <td>广播地址</td>
                     <td>128</td>
                     <td>14</td>
-                    <td>0010 1111</td>
+                    <td><span class="warn">0010</span> 1111</td>
                     <td>1111 1111</td>
                     <td>128.14.47.255</td>
                 </tr>
@@ -572,7 +572,16 @@
             <dt>特殊的CIDR地址块</dt>
             <dd>网络前缀位数n=32，全部是前缀，没有主机，称为主机路由</dd>
             <dd>网络前缀位数n=31，主机号只有1位，所以只有2个IP地址，用于点对点链路(无编号网络)</dd>
+            <dd>网络前缀位数n=30，主机号只有2位，所以只有4个IP地址</dd>
             <dd>网络前缀位数n=0，IP地址也为0，即：0.0.0.0/0，称默认路由</dd>
+        </dl>
+        <dl>
+            <dt class="warn">[案例分析<span class="iconfont">&#xe821;</span>]</dt>
+            <dd>子网192.168.4.0/30中，能接收目的地址为192.168.4.3的IP分组的最大主机数是（）</dd>
+            <dd>A：0</dd>
+            <dd>B：1</dd>
+            <dd>C：2</dd>
+            <dd>D：4</dd>
         </dl>
         <dl>
             <dt class="warn">[课后作业<span class="iconfont">&#xe7f7;</span>]</dt>
