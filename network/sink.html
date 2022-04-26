@@ -47,7 +47,143 @@
         <header class="nav">
             <h1>路由聚合</h1>
         </header>
-
+        <h2>概述</h2>
+        <dl>
+            <dt>含义</dt>
+            <dd>也称构造超网；
+                将多个连续的网络地址聚合起来，映射到一个物理上的网络，以这个聚合起来的共同网络地址作为其网络前缀，可有效解决路由表内容冗余的问题；用较大的地址块代替较小的地址块</dd>
+            <dt>方法</dt>
+            <dd>找出各地址的共同前缀，设置为1；其余部分，全部置0；</dd>
+            <dt>特点</dt>
+            <dd>网络前缀越长、地址块越小、路由越具体</dd>
+        </dl>
+        <dl>
+            <dt class="warn">[案例分析]<span class="iconfont">&#xe821;</span></dt>
+            <dd>已知5个CIDR地址块分别如下：172.1.4.128/25、172.1.4.0/25、172.1.5.0/24、172.1.6.0/24、172.1.7.0/24，求聚合网络。</dd>
+            <dt>[提示]</dt>
+            <dd>根据地址掩码判断可能相同的长度</dd>
+        </dl>
+        <div class="img-box">
+            <table>
+                <tr>
+                    <td>IP1</td>
+                    <td>172</td>
+                    <td>1</td>
+                    <td><span class="warn">0000 0100</span></td>
+                    <td><span class="warn">1</span>000 0000</td>
+                </tr>
+                <tr>
+                    <td>IP2</td>
+                    <td>172</td>
+                    <td>1</td>
+                    <td><span class="warn">0000 0100</span></td>
+                    <td><span class="warn">0</span>000 0000</td>
+                </tr>
+                <tr>
+                    <td>IP3</td>
+                    <td>172</td>
+                    <td>1</td>
+                    <td><span class="warn">0000 0101</span></td>
+                    <td>0000 0000</td>
+                </tr>
+                <tr>
+                    <td>IP4</td>
+                    <td>172</td>
+                    <td>1</td>
+                    <td><span class="warn">0000 0110</span></td>
+                    <td>0000 0000</td>
+                </tr>
+                <tr>
+                    <td>IP5</td>
+                    <td>172</td>
+                    <td>1</td>
+                    <td><span class="warn">0000 0111</span></td>
+                    <td>0000 0000</td>
+                </tr>
+                <tr>
+                    <td>相同前缀为</td>
+                    <td>172</td>
+                    <td>1</td>
+                    <td>0000 01xx</td>
+                    <td>xxxx xxxx</td>
+                </tr>
+                <tr>
+                    <td>聚合路由为</td>
+                    <td>172</td>
+                    <td>1</td>
+                    <td>4</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>CIDR记法为</td>
+                    <td colspan="4">172.1.4.0/22</td>
+                </tr>
+            </table>
+        </div>
+        <dl>
+            <dt class="warn">[案例分析]<span class="iconfont">&#xe821;</span></dt>
+            <dd>已知5个CIDR地址块分别如下：206.0.68.0/23、206.0.70.0/24、206.0.71.0/25、206.0.71.128/25，求聚合网络。</dd>
+            <dt>[提示]</dt>
+            <dd>根据地址掩码判断可能相同的长度</dd>
+        </dl>
+        <div class="img-box">
+            <table>
+                <tr>
+                    <td>IP1</td>
+                    <td>206</td>
+                    <td>0</td>
+                    <td><span class="warn">0100 010</span> 0</td>
+                    <td>0000 0000</td>
+                </tr>
+                <tr>
+                    <td>IP2</td>
+                    <td>206</td>
+                    <td>0</td>
+                    <td><span class="warn">0100 0110</span></td>
+                    <td>0000 0000</td>
+                </tr>
+                <tr>
+                    <td>IP3</td>
+                    <td>206</td>
+                    <td>0</td>
+                    <td><span class="warn">0100 0111</span></td>
+                    <td><span class="warn">0</span>000 0000</td>
+                </tr>
+                <tr>
+                    <td>IP4</td>
+                    <td>206</td>
+                    <td>0</td>
+                    <td><span class="warn">0100 0111</span></td>
+                    <td><span class="warn">1</span>000 0000</td>
+                </tr>
+                <tr>
+                    <td>相同前缀为</td>
+                    <td>206</td>
+                    <td>0</td>
+                    <td>0100 01xx</td>
+                    <td>xxxx xxxx</td>
+                </tr>
+                <tr>
+                    <td>聚合路由为</td>
+                    <td>206</td>
+                    <td>0</td>
+                    <td>68</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>CIDR记法为</td>
+                    <td colspan="4">206.0.68.0/22</td>
+                </tr>
+            </table>
+        </div>
+        <dl>
+            <dt class="warn">[真题]</dt>
+            <dd>某路由表中有，其目的网络地址分别为：35.230.32.0/21、35.230.40.0/21、35.230.48.0/21和35.230.56.0/21，将这4条路由聚合后的目的网络地址是（）。</dd>
+            <dd>A:35.230.0.0/19</dd>
+            <dd>B:35.230.0.0/20</dd>
+            <dd>C:35.230.32.0/19</dd>
+            <dd>D:35.230.32.0/20</dd>
+        </dl>
         <footer>
             <div class="copyright">
                 <span>&copy; All Copyrights Reserved, 2022-2024</span>
