@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WSN集成开发环境搭建</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/ds.css">
+    <base target="_blank">
+    <style>
+        header {
+            background-image: url(../imgs/wsn/wsn.jpg);
+            color: #333;
+        }
+
+        header h1 {
+            padding-left: 1rem;
+            text-align: left;
+        }
+
+        .title {
+            line-height: 1.2rem;
+            text-decoration: underline;
+        }
+
+        .cont li {
+            margin-bottom: 1rem;
+            box-shadow: 0 0 1rem #ddd;
+        }
+
+        .cont li img {
+            object-fit: cover;
+        }
+
+        .img-box {
+            text-align: center;
+        }
+
+        .img-box .img {
+            width: 50%;
+        }
+
+        .sub-title {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            text-transform: capitalize;
+            margin-bottom: 1rem;
+        }
+
+        img {
+            width: unset;
+        }
+
+        .ps-box {
+            text-indent: unset;
+            text-align: center;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 1rem #ddd;
+        }
+
+        .ps-box img {
+            width: 600px;
+        }
+
+        @media screen and (max-width:768px) {
+            .ps-box {
+                padding: 0;
+            }
+
+            .ps-box img {
+                width: 100%;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="w">
+        <header class="nav">
+            <h1>WSN集成开发环境搭建</h1>
+        </header>
+        <h2>环境需求</h2>
+        <dl>
+            <dt>硬件Hardware</dt>
+            <dd>个人PC</dd>
+            <dd>CC Debugger仿真器</dd>
+            <dd>mini USB线</dd>
+            <dd>开发板或集成开发套件</dd>
+            <dt>软件Software</dt>
+            <dd>IAR<a href="https://www.iar.com/" title="https://www.iar.com/"><span
+                        class="iconfont">&#xe664;</span></a></dd>
+            <dd>Zigbee协议栈：请使用最新版Z-Stack 3.0.2；<a class="warn" href="https://www.ti.com/"
+                    title="https://www.ti.com/">打开TI官网</a>，搜索"Z-Stack"并下载</dd>
+            <dd>SmartRF Flash Programmer烧写驱动：将程序烧写到芯片中；<a class="warn" href="https://www.ti.com/"
+                    title="https://www.ti.com/">打开TI官网</a>，搜索"smartrf flash
+                programmer"并下载；注意：SmartRF Flash Programmer 2是针对ARM系列的；</dd>
+            <dd>串口驱动：根据项目需求而定；</dd>
+            <dd>串口监视工具：查看串口通信的过程，根据项目需求而定；</dd>
+            <dd>其它工具：抓包工具、拓扑显示工具等；</dd>
+            <dt>说明</dt>
+            <dd>IAR提供有：限制使用时间和限制项目大小两种免费方案；推荐使用后者；有钱的可以任性，花美刀买个无限制的版本；</dd>
+            <dd>TI的提供的资源很多都是免费的，但是要注册才能下载，有。。用户信息的嫌疑；</dd>
+        </dl>
+        <h2>第一个项目：点灯</h2>
+        <dl>
+            <dt>创建项目</dt>
+            <dd>1.打开IAR</dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code00.jpg" alt="">
+            </dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code01.jpg" alt="">
+            </dd>
+            <dd>2.创建项目：项目project-&gt;创建新项目create new project</dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code02.jpg" alt="">
+            </dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code03.jpg" alt="">
+            </dd>
+            <dd>3.创建文件，如main.c，并添加到项目；或者编辑完代码再添加到项目；系统会自动识别未添加的文件，并显示出来供你选择；</dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code04.jpg" alt="">
+            </dd>
+            <dt>配置项目</dt>
+            <dd>IAR支持的芯片很多，编译前，必须配置项目为相应的芯片。基本的配置主要有以下三项，可一次完成配置；</dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code10.jpg" alt="">
+            </dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code11.jpg" alt="">
+            </dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code12.jpg" alt="">
+            </dd>
+            <dt>编写代码</dt>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code3.jpg" alt="">
+            </dd>
+            <dt>调试代码</dt>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code4.jpg" alt="">
+            </dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code5.jpg" alt="">
+            </dd>
+            <dt>烧写</dt>
+            <dd>使用mini USB线分别连接PC和CC Debugger仿真器，并将CC Debugger仿真器的另外一端和节点板的JTAG相连，按下CC
+                Debugger仿真器的复位键，绿灯表示连接成功，可以烧写程序；连接时注意排线和插口的方向</dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code6.jpg" alt="">
+            </dd>
+            <dt>执行</dt>
+            <dd>观察节点板上的LED灯开始间断闪烁；</dd>
+            <dd>调整源码参数，重新调试，检测实验结果；</dd>
+        </dl>
+        <footer>
+            <div class="copyright">
+                <span>&copy; All Copyrights Reserved, 2022-2024</span>
+                <img src="../imgs/avatar.jpg" alt="">
+                <span>Cnplaman from No 54414, PLA</span>
+            </div>
+            <span>2022-04-28</span>
+        </footer>
+    </section>
+</body>
+
+</html>
