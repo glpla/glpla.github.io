@@ -84,27 +84,38 @@
         <header class="nav">
             <h1>WSN集成开发环境搭建</h1>
         </header>
-        <h2>环境需求</h2>
+        <h2>硬件Hardware</h2>
         <dl>
-            <dt>硬件Hardware</dt>
+            <dt>包括</dt>
             <dd>个人PC</dd>
             <dd>CC Debugger仿真器</dd>
             <dd>mini USB线</dd>
             <dd>开发板或集成开发套件</dd>
-            <dt>软件Software</dt>
+        </dl>
+        <h2>软件Software</h2>
+        <dl>
+            <dt>IAR</dt>
             <dd>IAR<a href="https://www.iar.com/" title="https://www.iar.com/"><span
-                        class="iconfont">&#xe664;</span></a></dd>
-            <dd>Zigbee协议栈：请使用最新版Z-Stack 3.0.2；<a class="warn" href="https://www.ti.com/"
-                    title="https://www.ti.com/">打开TI官网</a>，搜索"Z-Stack"并下载</dd>
-            <dd>SmartRF Flash Programmer烧写驱动：将程序烧写到芯片中；<a class="warn" href="https://www.ti.com/"
-                    title="https://www.ti.com/">打开TI官网</a>，搜索"smartrf flash
-                programmer"并下载；注意：SmartRF Flash Programmer 2是针对ARM系列的；</dd>
-            <dd>串口驱动：根据项目需求而定；</dd>
-            <dd>串口监视工具：查看串口通信的过程，根据项目需求而定；</dd>
-            <dd>其它工具：抓包工具、拓扑显示工具等；</dd>
-            <dt>说明</dt>
+                        class="iconfont">&#xe664;</span></a>
+            </dd>
             <dd>IAR提供有：限制使用时间和限制项目大小两种免费方案；推荐使用后者；有钱的可以任性，花美刀买个无限制的版本；</dd>
-            <dd>TI的提供的资源很多都是免费的，但是要注册才能下载，有。。用户信息的嫌疑；</dd>
+            <dd>IAR不支持QQ邮箱；PS：QQ邮箱现在支持英文邮箱了，快去申请一个foxmail邮箱吧。一个账号两个邮箱哦！</dd>
+            <dd>注册成功后，会给你发送一个邮件，包括：序列号和下载链接；下载按照并输入序列号即可使用；</dd>
+            <dd>注意不要删除该邮件，请妥善保存；</dd>
+            <dt>Zigbee协议栈</dt>
+            <dd>请使用最新版Z-Stack 3.0.2；<a class="warn" href="https://www.ti.com/"
+                    title="https://www.ti.com/">打开TI官网</a>，搜索"Z-Stack"并下载</dd>
+            <dt>SmartRF Flash Programmer烧写驱动</dt>
+            <dd>将程序烧写到芯片中；<a class="warn" href="https://www.ti.com/" title="https://www.ti.com/">打开TI官网</a>，搜索"smartrf
+                flash programmer"并下载；</dd>
+            <dd>注意：SmartRF Flash Programmer 2是针对ARM系列的；</dd>
+            <dd>TI的提供的资源很多都是免费的，但是要注册才能下载，有。。。用户信息的嫌疑；</dd>
+            <dt>串口驱动</dt>
+            <dd>根据项目需求而定；</dd>
+            <dt>串口监视工具</dt>
+            <dd>查看串口通信的细节，根据项目需求而定；</dd>
+            <dt>其它工具</dt>
+            <dd>抓包工具、拓扑显示工具等；</dd>
         </dl>
         <h2>第一个项目：点灯</h2>
         <dl>
@@ -139,19 +150,26 @@
                 <img src="../imgs/wsn/code12.jpg" alt="">
             </dd>
             <dt>编写代码</dt>
+            <dd>没有自动缩进和代码提示、自动补全真的很无语啊！</dd>
             <dd class="ps-box">
                 <img src="../imgs/wsn/code3.jpg" alt="">
             </dd>
             <dt>调试代码</dt>
+            <dd>编译compile：单文件编译；快捷键CTRL+F7；</dd>
+            <dd>生成make：项目编译；快捷键F7；</dd>
+            <dd>第一次编译时会提示再次保存；</dd>
             <dd class="ps-box">
                 <img src="../imgs/wsn/code4.jpg" alt="">
             </dd>
+            <dd>尽量完善代码到：0告警、0错误；</dd>
             <dd class="ps-box">
                 <img src="../imgs/wsn/code5.jpg" alt="">
             </dd>
             <dt>烧写</dt>
             <dd>使用mini USB线分别连接PC和CC Debugger仿真器，并将CC Debugger仿真器的另外一端和节点板的JTAG相连，按下CC
-                Debugger仿真器的复位键，绿灯表示连接成功，可以烧写程序；连接时注意排线和插口的方向；</dd>
+                Debugger仿真器的复位键，绿灯表示连接成功，可以烧写程序；</dd>
+            <dd>连接时注意排线和插口的方向；</dd>
+            <dd>每次烧写时，最好按一次复位键，确保是就绪状态-绿灯；</dd>
             <dd class="ps-box">
                 <img src="../imgs/wsn/code6.jpg" alt="">
             </dd>
