@@ -1,29 +1,198 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define maxSize 20
-#define TRUE 1
-#define FALSE 0
-typedef struct
-{
-    int data;
-    int parent;
-} pTree;
 
 typedef struct Node
 {
-    int data;
-    struct Node *children[maxSize];
-} cTree;
+    char data;
+    struct Node *leftChild;
+    struct Node *rightChild;
+} Tree;
 
-typedef struct Node2
+Tree *createNode(char data)
 {
-    int data;
-    struct Node2 *leftChild;
-    struct Node2 *nextBrother;
-} cbTree;
+    Tree *node = (Tree *)malloc(sizeof(Tree));
+    node->data = data;
+    node->leftChild = NULL;
+    node->rightChild = NULL;
+    return node;
+}
+void insertNode(Tree *tree, Tree *l, Tree *r)
+{
+    tree->leftChild = l;
+    tree->rightChild = r;
+}
+void preOrder(Tree *tree)
+{
+    if (tree)
+    {
+        printf("%c", tree->data);
+        preOrder(tree->leftChild);
+        preOrder(tree->rightChild);
+    }
+}
+void inOrder(Tree *tree)
+{
+    if (tree)
+    {
+        inOrder(tree->leftChild);
+        printf("%c", tree->data);
+        inOrder(tree->rightChild);
+    }
+}
+void postOrder(Tree *tree)
+{
+    if (tree)
+    {
+        postOrder(tree->leftChild);
+        postOrder(tree->rightChild);
+        printf("%c", tree->data);
+    }
+}
+void preOrderStack(Tree *tree)
+{
+    if (tree)
+    {
+        Tree *nodes[20];
+        int top = -1;
+        Tree *p = tree;
+        while (top != -1 || p)
+        {
+            while (p)
+            {
+                printf("%c", p->data);
+                top++;
+                nodes[top] = p;
+                p = p->leftChild;
+            }
+            if (top != -1)
+            {
+                p = nodes[top];
+                top--;
+                p = p->rightChild;
+            }
+        }
+    }
+}
+void inOrderStack(Tree *tree)
+{
+    if (tree)
+    {
+        Tree *nodes[20];
+        int top = -1;
+        Tree *p = tree;
+        while (top != -1 || p)
+        {
+            while (p)
+            {
+                top++;
+                nodes[top] = p;
+                p = p->leftChild;
+            }
+            if (top != -1)
+            {
+                p = nodes[top];
+                top--;
+                printf("%c", p->data);
+                p = p->rightChild;
+            }
+        }
+    }
+}
+void postOrderStack(Tree *tree)
+{
+    if (tree)
+    {
+        Tree *nodes[20];
+        int top = -1;
+        Tree *p = tree;
+        Tree *visited = NULL;
+        while (p)
+        {
+            nodes[++top] = p;
+            p = p->leftChild;
+        }
+        while (top != -1)
+        {
+            p = nodes[top--];
+            if (p->rightChild == NULL || p->rightChild == visited)
+            {
+                printf("%c", p->data);
+                visited = p;
+            }
+            else
+            {
+                nodes[++top] = p;
+                p = p->rightChild;
+                while (p)
+                {
+                    nodes[++top] = p;
+                    p = p->leftChild;
+                }
+            }
+        }
+    }
+}
+void tree1()
+{
+    Tree *A = createNode('A');
+    Tree *B = createNode('B');
+    Tree *C = createNode('C');
+    Tree *D = createNode('D');
+    Tree *E = createNode('E');
+    Tree *F = createNode('F');
+    Tree *G = createNode('G');
+    insertNode(A, B, C);
+    insertNode(B, D, NULL);
+    insertNode(C, E, F);
+    insertNode(D, NULL, G);
+    preOrder(A);
+    printf("\n");
+    preOrderStack(A);
+    printf("\n");
+    inOrder(A);
+    printf("\n");
+    inOrderStack(A);
+    printf("\n");
+    postOrder(A);
+    printf("\n");
+    postOrderStack(A);
+    printf("\n");
+}
+void tree2()
+{
+    Tree *A = createNode('A');
+    Tree *B = createNode('B');
+    Tree *C = createNode('C');
+    Tree *D = createNode('D');
+    Tree *E = createNode('E');
+    Tree *F = createNode('F');
+    Tree *G = createNode('G');
+    Tree *H = createNode('H');
+    Tree *I = createNode('I');
+    Tree *J = createNode('J');
+    insertNode(A, B, C);
+    insertNode(B, D, NULL);
+    insertNode(C, NULL, E);
+    insertNode(D, F, G);
+    insertNode(E, H, NULL);
+    insertNode(G, I, J);
+    preOrder(A);
+    printf("\n");
+    preOrderStack(A);
+    printf("\n");
+    inOrder(A);
+    printf("\n");
+    inOrderStack(A);
+    printf("\n");
+    postOrder(A);
+    printf("\n");
+    postOrderStack(A);
+    printf("\n");
+}
 
 int main(void)
 {
-
+    tree1();
+    tree2();
     return 0;
 }
