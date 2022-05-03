@@ -37,7 +37,7 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: 14px;
             text-transform: capitalize;
-            margin-bottom: 1rem;
+            margin: 1rem auto;
         }
 
         img {
@@ -51,7 +51,7 @@
         <header class="nav">
             <h1>WSN协议技术</h1>
         </header>
-        <h2>网络划分</h2>
+        <h2>物联网中的通信技术</h2>
         <dl>
             <dt>广域网</dt>
             <dd>WAN-Wide Area Network</dd>
@@ -61,6 +61,12 @@
             <dd>LAN-Local Area Network</dd>
             <dt>个域网</dt>
             <dd>PAN-Personal Area Network-&gt;无线个域网WPAN-Wireless PAN-&gt;低速无线个域网LR-WPAN-&gt;WSN</dd>
+            <dt>其它</dt>
+            <dd>蓝牙、WIFI、红外等等</dd>
+            <dd>授权使用或免费使用</dd>
+            <dt>特点</dt>
+            <dd>大部分通信技术都需要<span class="warn">[基础设施]</span>的支持；网络拓扑结构相对集中，容易出现<span class="warn">[单点故障]</span>导致网络瘫痪；
+            </dd>
         </dl>
         <h2>IEEE 802.15.4</h2>
         <dl>
@@ -84,7 +90,7 @@
             <dt>介绍</dt>
             <dd style="float: right;"><a href="https://csa-iot.org/" title="https://csa-iot.org/"><img
                         src="../imgs/wsn/csa-logo-300x76.png" alt=""></a></dd>
-            <dd>成立于2002年8月，由英国Invensys公司、日本三菱电气公司、美国Motorola公司、荷兰飞利浦半导体公司发起，现成员已达四百余家；</dd>
+            <dd>成立于<span class="warn">[2002年8月]</span>，由英国Invensys公司、日本三菱电气公司、美国Motorola公司、荷兰飞利浦半导体公司发起，现成员已达四百余家；</dd>
             <dd>成员最多的在美国；其次是中国；</dd>
             <dd>2021年5月11日——由数百家公司组成，共同创建、维护和提供物联网(IoT)全球开放标准的Zigbee联盟宣布更名为 "CSA连接标准联盟"(CSA联盟)；</dd>
             <dd>主要工作：完善标准、修订漏洞或缺陷，同时补充新的特性；促进行业发展，比如开展各种学术交流；会议；培训等；产品认证和平台认证；</dd>
@@ -94,7 +100,7 @@
                     title="https://csa-iot.org/all-solutions/zigbee/"><img src="../imgs/wsn/zb_logo-a_color_rgb-1.jpg"
                         alt=""></a></dd>
             <dd>CSA连接标准联盟下的一个技术分支；</dd>
-            <dd>最新版本是3.0，是一个强制标准；</dd>
+            <dd>最新版本是<span class="warn">[3.0]</span>，是一个强制标准；</dd>
             <dt>目标</dt>
             <dd>低功耗的前提下，开发易于部署、低复杂度、低成本、低速率、短距离、自组网的无线网络；</dd>
             <dt>技术标准</dt>
@@ -114,24 +120,28 @@
             <dd>成本低：协议免专利费；模块成本价钱已经跌破1美元；</dd>
             <dd>时延短：适合时延苛刻的控制系统；设备搜索时延30ms；休眠激活时延15ms；接入信道时延15ms；</dd>
             <dd>容量大： 1个星型网络：1个主设备；254个从设备；1个区域：100个zigbee网络；理论上，MESH网络中节点数目可达65536个；</dd>
-            <dd>可靠：碰撞避免；完全确认传输模式；</dd>
+            <dd>可靠：<span class="warn">CSMA/CA碰撞避免</span>；完全确认传输模式；</dd>
             <dd>安全：CRC；AED-128；</dd>
         </dl>
         <h2>Zigbee体系结构</h2>
         <div class="img-box">
             <table>
                 <tr>
+                    <td>应用子层、安全、zigbee设备对象等</td>
                     <td>应用层</td>
                     <td rowspan="2">Zigbee联盟</td>
                 </tr>
                 <tr>
+                    <td>路由、路由维护、子节点管理</td>
                     <td>网络层</td>
                 </tr>
                 <tr>
+                    <td>CSMA/CA、ACK、Retry、Scan</td>
                     <td>链路层</td>
                     <td rowspan="2">IEEE 802.15.4</td>
                 </tr>
                 <tr>
+                    <td>射频管理、调制、解调</td>
                     <td>物理层</td>
                 </tr>
             </table>
@@ -199,7 +209,8 @@
             <dt>信道</dt>
             <dd>868Mhz：1个信道，ch0，868.3Mhz；</dd>
             <dd>915Mhz：10个信道，ch1-ch10；频率间隔2Mhz；906Mhz + 2Mhz *（ k-1 ）， k=1,…,10；</dd>
-            <dd>2.4Ghz：16个信道，ch11-ch26；频率间隔5Mhz，2405Mhz + 5Mhz *（ k-11 ），k=11,…,26</dd>
+            <dd>2.4Ghz：16个信道，ch11-ch26；频率间隔5Mhz，2405Mhz + 5Mhz *（ k-11 ），k=11,…,26 <span class="warn">[同WIFI的冲突]</span>
+            </dd>
         </dl>
         <div class="img-box">
             <table>
@@ -273,12 +284,16 @@
             <dd>目标地址/源地址：接收/发送设备的地址；不同的寻找模式对应不同类型的地址</dd>
             <dd>MHR：帧头</dd>
             <dd>MFR：帧尾[帧的结构一般都由头、尾和数据构成；</dd>
-            <dt>帧类型</dt>
+            <dt>帧类型：由帧控制决定</dt>
             <dd>信标帧beacon</dd>
             <dd>数据帧data</dd>
-            <dd>确认帧ACK</dd>
+            <dd>确认帧<span class="warn">ACK</span></dd>
             <dd>MAC命令帧command</dd>
         </dl>
+        <div class="img-box">
+            <img style="width: 100%; box-shadow: 0 0 1rem #ddd;" src="../imgs/wsn/zigbee0.jpg" alt="">
+        </div>
+        <div class="sub-title">图1 帧的确认</div>
         <div class="img-box">
             <table>
                 <tr>
