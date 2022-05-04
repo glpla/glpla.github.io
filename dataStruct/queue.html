@@ -8,6 +8,12 @@
     <title>Queue</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/ds.css">
+    <style>
+        ul li {
+            margin-bottom: 1rem;
+            box-shadow: 0 0 1rem #ddd;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,6 +22,7 @@
             <ul class="flex-h" id="top">
                 <li><a href="#seq" id="topseq">顺序队列</a></li>
                 <li><a href="#link" id="toplink">链式队列</a></li>
+                <li><a href="#core" id="topcore">重点解读</a></li>
                 <!-- <li><a href="./stackArr.html" target="_blank">数组队列js</a></li> -->
                 <!-- <li><a href="./stackObj.html" target="_blank">对象队列js</a></li> -->
             </ul>
@@ -159,7 +166,7 @@
         int res;
         int i;
         init(&q);
-        for (i = 1; i <= len; i++)
+        for (i = 1; i &lt;= len; i++)
         {
             enqueue(q, i);
         }
@@ -168,7 +175,7 @@
         {
             // MUST
             len = q->len;
-            for (i = 0; i < len; i++)
+            for (i = 0; i &lt; len; i++)
             {
                 res = dequeue(q);
                 if ((i % 2) != 0)
@@ -184,6 +191,13 @@
         free(&q);
         return 0;
     }        </pre>
+        <h2 id="core">重点解读 <a href="#top" id="back2top2"><i class="iconfont icon">&#xe604;</i></a></h2>
+        <ul>
+            <li><img src="../imgs/chap3 queue/幻灯片6.JPG" alt=""></li>
+            <li><img src="../imgs/chap3 queue/幻灯片7.JPG" alt=""></li>
+            <li><img src="../imgs/chap3 queue/幻灯片8.JPG" alt=""></li>
+            <li><img src="../imgs/chap3 queue/幻灯片9.JPG" alt=""></li>
+        </ul>
         <footer>
             <div class="copyright">
                 <span>&copy; All Copyrights Reserved, 2022-2024</span>
@@ -198,12 +212,16 @@
         window.onload = function () {
             let top0 = document.querySelector('#back2top0');
             let top1 = document.querySelector('#back2top1');
+            let top2 = document.querySelector('#back2top2');
             let seq = document.querySelector('#topseq');
             let link = document.querySelector('#toplink');
+            let core = document.querySelector('#topcore');
             s2view(top0, "#top")
             s2view(top1, "#top")
+            s2view(top2, "#top")
             s2view(seq, "#seq")
             s2view(link, "#link")
+            s2view(core, "#core")
         }
     </script>
     <script>
