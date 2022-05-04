@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zigbee</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/ds.css">
+    <base target="_blank">
+    <style>
+        .title {
+            line-height: 1.2rem;
+            text-decoration: underline;
+        }
+
+        .cont li {
+            margin-bottom: 1rem;
+            box-shadow: 0 0 1rem #ddd;
+        }
+
+        .cont li img {
+            object-fit: cover;
+        }
+
+        .img-box {
+            text-align: center;
+        }
+
+        .img-box .img {
+            width: 50%;
+        }
+
+        .sub-title {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            text-transform: capitalize;
+            margin: 1rem auto;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="w">
+        <header class="nav">
+            <h1>Zigbee解读</h1>
+        </header>
+        <h2>寻址Addressing</h2>
+        <dl>
+            <dt>[英]</dt>
+            <dd>ZigBee devices have two types of addresses. A 64-bit IEEE address (also called MAC address or Extended
+                address)
+                and a 16-bit network address (also called logical address or short address).</dd>
+            <dt>[中]</dt>
+            <dd>ZigBee设备有两种类型的地址：一个64bit的MAC地址，也称扩展地址；一个16bit的网络地址，也称逻辑地址或短地址；</dd>
+            <dt>[英]</dt>
+            <dd>The 64-bit address is a globally unique address and is assigned to the device for its lifetime. It is
+                usually set by the manufacturer or during installation. These addresses are maintained and allocated by
+                the IEEE. The 16-bit address is assigned to a device when it joins a network and is intended for use
+                while it is on the network. It is only unique within that network. It is used for identifying devices
+                and sending data within the network.
+            </dd>
+            <dt>[中]</dt>
+            <dd>64bit地址全球唯一，且终身使用；地址的设置通常由制造商生产时或安装时完成；而地址的维护和分配则由IEEE负责；16bit地址是在设备加入网络时获得，且只能用于该网络；地址在这个网络中应保持唯一；用来在网络中标识设备和发送数据；
+            </dd>
+        </dl>
+        <h2>地址分配 Network address assignment</h2>
+        <dl>
+            <dt>[英]</dt>
+            <dd>ZigBee PRO uses a stochastic (random) addressing scheme for assigning the network addresses. This
+                addressing scheme randomly assigns short addresses to new devices, and then uses the rest of the devices
+                in the network to ensure that there are no duplicate addresses.</dd>
+            <dt>[中]</dt>
+            <dd>ZigBee使用随机地址方案分配地址。该方案随机为新设备分配一个短地址，以确保网络中没有重复的地址；</dd>
+            <dt>[英]</dt>
+            <dd>When a device joins, it receives its randomly generated address from its parent. The new network node
+                then generates a “Device Announce” (which contains its new short address and its extended address) to
+                the rest of the network. </dd>
+            <dt>[中]</dt>
+            <dd>当一个设备加入网络成为一个新的网络节点时，收到父级节点随机产生的一个地址；同时向网络其它节点发布一个包含自己短地址和长地址的"设备声明"。</dd>
+            <dt>[英]</dt>
+            <dd>If there is another device with the same short address, a node (router) in the network will send out a
+                broadcast “Network Status – Address Conflict” to the entire network and all devices with the conflicting
+                short address will change its short address. When the conflicted devices change their address, they
+                issue their own “Device Announce” to check their new address for conflicts within the network.</dd>
+            <dt>[中]</dt>
+            <dd>如果另外一个设备的短地址和它相同，网络中的路由器节点将向全网广播一个"地址冲突"的网络状态报文；所有地址冲突的设备必须更改他的短地址；当地址更改完毕后，这些冲突节点也会发布一个他们自己的"设备声明"以检验新地址是否产生冲突；
+            </dd>
+            <dt>[英]</dt>
+            <dd>End devices do not participate in the “Address Conflict”. Their parents do that for them. If an “Address
+                Conflict” occurs for an end device, its parent will issue the end device a “Rejoin Response” message to
+                change the end device’s short address and the end device issues a “Device Announce” to check their new
+                address for conflicts within the network</dd>
+            <dt>[中]</dt>
+            <dd>端设备并不参与地址冲突的检测，而是由父级节点完成。如果一个端设备发生了地址，他的父级节点会发布一个"重新加入"的响应报文并改变它的新短地址；端设备在网络内发布"设备声明"以检验是否地址冲突；</dd>
+            <dt>[英]</dt>
+            <dd>When a “Device Announce” is received, the association and binding tables are updated with the new short
+                address, routing table information is not updated (new routes must be established). If a parent
+                determines that the “Device Announce” pertains to one of its end device children, but it didn't come
+                directly from the child, the parent will assume that the child moved to another parent</dd>
+            <dt>[中]</dt>
+            <dd>节点收到"设备声明"报文时，对应的关联绑定表进行更新，而路由信息表不更新，但是必须建立新的路由；如果一个父级节点发现这个"设备声明"属于他子级的端设备，但并不是由它直接发出，就假定这个子节点已经移动归属到了另外一个父级节点；
+            </dd>
+        </dl>
+        <ul class="cont">
+            <li><img src="../imgs/chap6 ZigBee/幻灯片1.JPG" alt=""></li>
+            <li><img src="../imgs/chap6 ZigBee/幻灯片2.JPG" alt=""></li>
+            <li><img src="../imgs/chap6 ZigBee/幻灯片3.JPG" alt=""></li>
+            <li><img src="../imgs/chap6 ZigBee/幻灯片4.JPG" alt=""></li>
+            <li><img src="../imgs/chap6 ZigBee/幻灯片5.JPG" alt=""></li>
+            <li><img src="../imgs/chap6 ZigBee/幻灯片6.JPG" alt=""></li>
+            <li><img src="../imgs/chap6 ZigBee/幻灯片7.JPG" alt=""></li>
+        </ul>
+        <footer>
+            <div class="copyright">
+                <span>&copy; All Copyrights Reserved, 2022-2024</span>
+                <img src="../imgs/avatar.jpg" alt="">
+                <span>Cnplaman from No 54414, PLA</span>
+            </div>
+            <span>2022-05-04</span>
+        </footer>
+    </section>
+</body>
+
+</html>
