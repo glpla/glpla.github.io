@@ -47,7 +47,9 @@
         <header class="nav">
             <h1>Zigbee解读</h1>
         </header>
-        <h2>寻址Addressing</h2>
+        <ul class="cont">
+            <li><img src="../imgs/chap6 ZigBee/幻灯片1.JPG" alt=""></li>
+        </ul>
         <dl>
             <dt>[英]</dt>
             <dd>ZigBee devices have two types of addresses. A 64-bit IEEE address (also called MAC address or Extended
@@ -66,7 +68,9 @@
             <dd>64bit地址全球唯一，且终身使用；地址的设置通常由制造商生产时或安装时完成；而地址的维护和分配则由IEEE负责；16bit地址是在设备加入网络时获得，且只能用于该网络；地址在这个网络中应保持唯一；用来在网络中标识设备和发送数据；
             </dd>
         </dl>
-        <h2>地址分配 Network address assignment</h2>
+        <ul class="cont">
+            <li><img src="../imgs/chap6 ZigBee/幻灯片2.JPG" alt=""></li>
+        </ul>
         <dl>
             <dt>[英]</dt>
             <dd>ZigBee PRO uses a stochastic (random) addressing scheme for assigning the network addresses. This
@@ -105,21 +109,110 @@
             </dd>
         </dl>
         <ul class="cont">
-            <li><img src="../imgs/chap6 ZigBee/幻灯片1.JPG" alt=""></li>
-            <li><img src="../imgs/chap6 ZigBee/幻灯片2.JPG" alt=""></li>
             <li><img src="../imgs/chap6 ZigBee/幻灯片3.JPG" alt=""></li>
-            <li><img src="../imgs/chap6 ZigBee/幻灯片4.JPG" alt=""></li>
-            <li><img src="../imgs/chap6 ZigBee/幻灯片5.JPG" alt=""></li>
-            <li><img src="../imgs/chap6 ZigBee/幻灯片6.JPG" alt=""></li>
-            <li><img src="../imgs/chap6 ZigBee/幻灯片7.JPG" alt=""></li>
         </ul>
+        <dl>
+            <dt>概述</dt>
+            <dd>ZigBee应用程序通常使用AF_DataRequest( )函数向网络中的设备发送数据；接收数据报的目标设备应符合如下定义的数据类型</dd>
+            <dd>
+                <pre class="code">
+
+    typedef struct
+    {
+        union
+        {
+            uint16 shortAddr;
+            ZLongAddr_t extAddr;
+        } addr;
+        byte addrMode;
+    } zAddrType_t;       
+</pre>
+            </dd>
+            <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Components\osal\include\ZComDef.h</dd>
+            <dd>
+                <pre class="code">
+
+    typedef enum
+    {
+        afAddrNotPresent = AddrNotPresent,
+        afAddr16Bit      = Addr16Bit,
+        afAddr64Bit      = Addr64Bit,
+        afAddrGroup      = AddrGroup,
+        afAddrBroadcast  = AddrBroadcast
+    } afAddrMode_t;                
+</pre>
+            </dd>
+            <dd>更多细节，请参看文档：...\Z-Stack 3.0.2\Components\stack\af\AF.h</dd>
+            <dt>单播地址 unicast</dt>
+            <dd>报文送给一个网络地址已知的设备；数据包中要携带目的网络地址；</dd>
+            <dd>最常见的寻址模式：地址模式addrMode设置为 Addr16Bit；</dd>
+            <dt>多播 multicast</dt>
+            <dd>报文送给一组设备；</dd>
+            <dd>地址模式addrMode设置为afAddrGroup；同时节点的短地址addr.shortAddr应设置为对应的组ID-group identifier；</dd>
+            <dd><span class="warn"> 注意</span>要使用组播，必须先在网络中定义；</dd>
+            <dt>声明</dt>
+            <dd>
+                <pre class="code">
+
+    [Prototype]
+    ZStatus_t aps_AddGroup( uint8 endpoint, aps_Group_t *group );
+
+    [Parameter Details]
+    endpoint – the endpoint that will receive messages sent to the group in the group field. 
+    group - group ID and group name to add into the group table.
+
+    [Return]
+    ZSuccess if add was successful. Errors are ZApsDuplicateEntry, ZApsTableFull, or ZMemError (all defined in ZComDef.h).</pre>
+            </dd>
+            <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Documents\API\Z-Stack API.pdf</dd>
+            <dt>使用</dt>
+            <dd>
+                <pre class="code">
+
+    aps_Group_t group;
+    group.ID = 0x0001;
+    group.name[0] = 6;
+    osal_memcpy( &(group.name[1]), “Group1”, 6);
+    aps_AddGroup( SAMPLEAPP_ENDPOINT, &group );</pre>
+            </dd>
+            <dt>广播 broadcast</dt>
+            <dd>如果ZigBee应用程序想向网络中所有的设备发送报文时，可以采用广播模式；</dd>
+            <dd>地址模式addrMode 设置为AddrBroadcast；</dd>
+            <dd>目标地址可以设置为下面广播地址中的一种</dd>
+            <dd>1. NWK_BROADCAST_SHORTADDR_DEVALL (0xFFFF)：数据报会被发给所有节点，包括睡眠设备；对于睡眠设备，数据报由父级保留，直到睡眠设备轮询时或者数据报超时丢弃；</dd>
+            <dd>2. NWK_BROADCAST_SHORTADDR_DEVRXON (0xFFFD)：数据报发送给所有空闲时等待接收的设备，不包括睡眠设备；</dd>
+            <dd>3. NWK_BROADCAST_SHORTADDR_DEVZCZR (0xFFFC)：数据报发送给所有的路由器，包括协调器；</dd>
+            <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Projects\zstack\Tools\CC2530DB\f8wConfig.cfg</dd>
+            <dt>间接交付 Indirect</dt>
+            <dd>ZigBee应用程序不清楚最终的目的设备在哪里时，可以使用这个模式；</dd>
+            <dd>地址模式addrMode设置为AddrNotPresent，目标设备地址不指定，而是在发送设备栈中的绑定表binding table中寻找目标设备（因为设备绑定发生在源端，所以称源绑定Source
+                binding ）；</dd>
+            <dd>找到目标地址和对应的端设备后，就按照单播的形式发送数据报；</dd>
+            <dd>如果找到不只一个目标设备，就向每个目标设备都发送一份数据报拷贝；</dd>
+            <dd>如果找不到对应的绑定记录，数据报就不会发送；</dd>
+        </dl>
+        <ul class="cont">
+            <li><img src="../imgs/chap6 ZigBee/幻灯片4.JPG" alt=""></li>
+        </ul>
+        <dl>
+            <dt>获取设备地址</dt>
+            <dd>如果一个ZigBee应用想要获取一个设备以及它的父级设备的地址，可以使用下面的函数；</dd>
+            <dt>获取设备地址</dt>
+            <dd>NLME_GetShortAddr() – 返回设备16bit网络地址；</dd>
+            <dd>NLME_GetExtAddr() – 返回设备64bit扩展地址；</dd>
+            <dt>获取父级设备地址</dt>
+            <dd>NLME_GetCoordShortAddr() –返回父级设备16bit的短地址；</dd>
+            <dd>NLME_GetCoordExtAddr() –返回父级设备64bit的扩展地址；</dd>
+            <dd><span class="warn">注意</span> 这里的coord不是协调器，而是父节设备；</dd>
+            <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Documents\API\Z-Stack API.pdf</dd>
+        </dl>
         <footer>
             <div class="copyright">
                 <span>&copy; All Copyrights Reserved, 2022-2024</span>
                 <img src="../imgs/avatar.jpg" alt="">
                 <span>Cnplaman from No 54414, PLA</span>
             </div>
-            <span>2022-05-04</span>
+            <span>2022-05-05</span>
         </footer>
     </section>
 </body>
