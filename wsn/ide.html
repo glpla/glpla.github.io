@@ -120,6 +120,9 @@
         </dl>
         <h2>第一个项目：点灯</h2>
         <dl>
+            <dt>基本流程</dt>
+            <dd>创建工作空间(.eww)-&gt;创建项目(.ewp，如基于C的项目)-&gt;配置项目-&gt;创建其它文件-&gt;添加文件到项目-&gt;调式-&gt;下载/烧写-&gt;执行/调试</dd>
+            <dd>注意：工作空间.eww和工作项目.ewp都需要保存；</dd>
             <dt>创建项目</dt>
             <dd>1.打开IAR</dd>
             <dd class="ps-box">
@@ -131,6 +134,10 @@
             <dd>2.创建项目：项目project-&gt;创建新项目create new project</dd>
             <dd class="ps-box">
                 <img src="../imgs/wsn/code02.jpg" alt="">
+            </dd>
+            <dd>或直接创建C项目</dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code020.jpg" alt="">
             </dd>
             <dd class="ps-box">
                 <img src="../imgs/wsn/code03.jpg" alt="">
@@ -155,7 +162,7 @@
             <dd class="ps-box">
                 <img src="../imgs/wsn/code3.jpg" alt="">
             </dd>
-            <dt>调试代码</dt>
+            <dt>调试</dt>
             <dd>编译compile：单文件编译；快捷键CTRL+F7；</dd>
             <dd>生成make：项目编译；快捷键F7；</dd>
             <dd>第一次编译时会提示再次保存；</dd>
@@ -166,7 +173,7 @@
             <dd class="ps-box">
                 <img src="../imgs/wsn/code5.jpg" alt="">
             </dd>
-            <dt>烧写</dt>
+            <dt>下载/烧写</dt>
             <dd>使用mini USB线分别连接PC和CC Debugger仿真器，并将CC Debugger仿真器的另外一端和节点板的JTAG相连，按下CC
                 Debugger仿真器的复位键，绿灯表示连接成功，可以烧写程序；</dd>
             <dd>连接时注意排线和插口的方向；</dd>
@@ -174,9 +181,43 @@
             <dd class="ps-box">
                 <img src="../imgs/wsn/code6.jpg" alt="">
             </dd>
-            <dt>执行</dt>
+            <dt>执行/调试</dt>
             <dd>观察节点板上的LED灯开始间断闪烁；</dd>
             <dd>调整源码参数，重新调试，检测实验结果；</dd>
+        </dl>
+        <h2>基本配置</h2>
+        <dl>
+            <dt>字体</dt>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code030.jpg" alt="">
+            </dd>
+            <dt>行号</dt>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code031.jpg" alt="">
+            </dd>
+        </dl>
+        <h2>创建模板</h2>
+        <dl>
+            <dt>说明</dt>
+            <dd>模板是IAR的强大功能；灵活利用模板可以提高开发效率</dd>
+            <dd>可以创建注释、函数等模板</dd>
+            <dt>创建注释模板</dt>
+            <dd>编辑Edit-&gt;代码模板Code template-&gt;编辑模板Edit Template，打开CodeTemplates.ENU.txt文件，在最后面添加如下模板</dd>
+            <dd>模板以#开头，后面是模板的名字和参数；使用&gt;创建多级模板；</dd>
+            <dd>模板用到的参数以,区分；如果参数带有默认值，以值对的形式呈现；</dd>
+            <dd>模板实现中，使用数值和参数一一对应；如果需要对齐，不要使用tab，使用空格；</dd>
+            <dd>下面示例声明了一个2级注释代码，共4个参数，其中：第2个和第3个带有默认参数；</dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code40.jpg" alt="">
+            </dd>
+            <dt>使用注释模板</dt>
+            <dd>在源文件中，编辑Edit-&gt;代码模板Code template-&gt;插入模板Insert Template，选择创建的注释模板；填写对应的内容并确定，注释模板即可添加到源文件中；</dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code41.jpg" alt="">
+            </dd>
+            <dd class="ps-box">
+                <img src="../imgs/wsn/code42.jpg" alt="">
+            </dd>
         </dl>
         <footer>
             <div class="copyright">
