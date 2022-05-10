@@ -89,7 +89,7 @@
             <dt>[英文]</dt>
             <dd>When a device joins, it receives its randomly generated address from its parent. The new network node
                 then generates a “Device Announce” (which contains its new short address and its extended address) to
-                the rest of the network. </dd>
+                the rest of the network.</dd>
             <dt>[中文]</dt>
             <dd>当一个节点设备加入网络成为一个新的网络节点时，收到<span class="warn">[父级节点]</span>随机产生的一个地址；同时向网络其它节点发布一个包含自己短地址和长地址的"节点设备声明"。
             </dd>
@@ -106,7 +106,7 @@
             <dd>End devices do not participate in the “Address Conflict”. Their parents do that for them. If an “Address
                 Conflict” occurs for an end device, its parent will issue the end device a “Rejoin Response” message to
                 change the end device’s short address and the end device issues a “Device Announce” to check their new
-                address for conflicts within the network</dd>
+                address for conflicts within the network.</dd>
             <dt>[中文]</dt>
             <dd>端节点设备并不参与地址冲突的检测，而是由父级节点完成。如果一个端节点设备发生了地址冲突，他的父级节点会发布一个"重新加入"的响应报文并改变它的新短地址；端节点设备在网络内发布"节点设备声明"以检验是否地址冲突；
             </dd>
@@ -114,7 +114,7 @@
             <dd>When a “Device Announce” is received, the association and binding tables are updated with the new short
                 address, routing table information is not updated (new routes must be established). If a parent
                 determines that the “Device Announce” pertains to one of its end device children, but it didn't come
-                directly from the child, the parent will assume that the child moved to another parent</dd>
+                directly from the child, the parent will assume that the child moved to another parent.</dd>
             <dt>[中文]</dt>
             <dd>节点收到"节点设备声明"报文时，对应的关联绑定表进行更新，而路由信息表不更新，但是必须建立新的路由；如果一个父级节点发现这个"节点设备声明"属于他子级的端节点设备，但并不是由它直接发出，就假定这个子节点已经移动归属到了另外一个父级节点；
             </dd>
@@ -124,7 +124,7 @@
         </ul>
         <dl>
             <dt>概述</dt>
-            <dd>ZigBee应用程序通常使用AF_DataRequest( )函数向网络中的节点设备发送数据；接收数据报的目标节点设备应符合如下定义的数据类型</dd>
+            <dd>ZigBee应用程序通常使用AF_DataRequest( )函数向网络中的节点设备发送数据；接收数据报的目标节点设备应符合如下定义的数据类型；</dd>
             <dd>
                 <pre class="code">
 
@@ -144,9 +144,9 @@
     } zAddrType_t;       
 </pre>
             </dd>
-            <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Components\osal\include\ZComDef.h</dd>
+            <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Components\osal\include\ZComDef.h；</dd>
             <dd></dd>
-            <dd>除了网络地址外，还必须指定地址模式以区分数据的通信的方式：单播通信、组播通信、广播通信或未知地址通信。
+            <dd>除了网络地址外，还必须指定地址模式以区分数据的通信的方式：单播通信、组播通信、广播通信或未知地址通信；
                 <pre class="code">
 
     typedef enum
@@ -159,7 +159,7 @@
     } afAddrMode_t;                
 </pre>
             </dd>
-            <dd>更多细节，请参看文档：...\Z-Stack 3.0.2\Components\stack\af\AF.h</dd>
+            <dd>更多细节，请参看文档：...\Z-Stack 3.0.2\Components\stack\af\AF.h；</dd>
             <dt>单播地址 unicast</dt>
             <dd>报文送给一个网络地址已知的节点设备；数据包中要携带目的网络地址；</dd>
             <dd>最常见的寻址模式：地址模式addrMode设置为 Addr16Bit；</dd>
@@ -181,7 +181,7 @@
     [Return]
     ZSuccess if add was successful. Errors are ZApsDuplicateEntry, ZApsTableFull, or ZMemError (all defined in ZComDef.h).</pre>
             </dd>
-            <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Documents\API\Z-Stack API.pdf</dd>
+            <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Documents\API\Z-Stack API.pdf；</dd>
             <dt>使用</dt>
             <dd>
                 <pre class="code">
@@ -195,12 +195,12 @@
             <dt>广播 broadcast</dt>
             <dd>如果ZigBee应用程序想向网络中所有的节点设备发送报文时，可以采用广播模式；</dd>
             <dd>地址模式addrMode 设置为AddrBroadcast；</dd>
-            <dd>目标地址可以设置为下面广播地址中的一种</dd>
+            <dd>目标地址可以设置为下面广播地址中的一种：</dd>
             <dd>1. NWK_BROADCAST_SHORTADDR_DEVALL (0xFFFF)：数据报会被发给所有节点，包括睡眠节点设备；对于睡眠节点设备，数据报由父级保留，直到睡眠节点设备轮询时或者数据报超时丢弃；
             </dd>
             <dd>2. NWK_BROADCAST_SHORTADDR_DEVRXON (0xFFFD)：数据报发送给所有空闲时等待接收的节点设备，不包括睡眠节点设备；</dd>
             <dd>3. NWK_BROADCAST_SHORTADDR_DEVZCZR (0xFFFC)：数据报发送给所有的路由器，包括协调器；</dd>
-            <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Projects\zstack\Tools\CC2530DB\f8wConfig.cfg</dd>
+            <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Projects\zstack\Tools\CC2530DB\f8wConfig.cfg；</dd>
             <dt>间接交付 Indirect</dt>
             <dd>ZigBee应用程序不清楚最终的目的节点设备在哪里时，可以使用这个模式；</dd>
             <dd>地址模式addrMode设置为AddrNotPresent，目标节点设备地址不指定，而是在发送节点设备栈中的绑定表binding
@@ -223,7 +223,7 @@
             <dd>NLME_GetCoordShortAddr() –返回父级节点设备16bit的短地址；</dd>
             <dd>NLME_GetCoordExtAddr() –返回父级节点设备64bit的扩展地址；</dd>
             <dd><span class="warn">注意</span> 这里的coord不是协调器，而是父级节点设备；</dd>
-            <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Documents\API\Z-Stack API.pdf</dd>
+            <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Documents\API\Z-Stack API.pdf；</dd>
         </dl>
         <ul class="cont">
             <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片5.JPG" alt=""></li>
@@ -243,8 +243,8 @@
             <dd>委托绑定应用以绑定记录所需的地址和端点以及簇头ID为参数，调用ZDP_BindReq()即可启动绑定的申请；</dd>
             <dd>第一个参数目标地址dstAddr是绑定源节点的短地址（即保存绑定记录的节点设备地址)；使用相同的参数，调用ZDP_UnBindReq()，可以解除相应的绑定记录；</dd>
             <dd>目标节点设备收到请求后，会发回一个ZDO绑定响应或解除响应；协调器解析后，返回以下状态信息：</dd>
-            <dd>对于绑定响应，协调器返回的状态将是ZDP_SUCCESS,ZDP_TABLE_FULL或者ZDP_NOT_SUPPORTED。</dd>
-            <dd>对于解除绑定响应，协调器返回的状态将是ZDP_SUCCESS,ZDP_NO_ENTRY或者ZDP_NOT_SUPPORTED。</dd>
+            <dd>对于绑定响应，协调器返回的状态将是ZDP_SUCCESS,ZDP_TABLE_FULL或者ZDP_NOT_SUPPORTED；</dd>
+            <dd>对于解除绑定响应，协调器返回的状态将是ZDP_SUCCESS,ZDP_NO_ENTRY或者ZDP_NOT_SUPPORTED；</dd>
             <dd class="dd-img-box"><img src="../imgs/wsn/chap6 ZigBee/幻灯片6.JPG" alt=""></dd>
             <dt>ZDO端节点设备绑定请求</dt>
             <dd>这种绑定机制在指定的时间内，通过单击被选节点设备上的按钮或者其它类似的动作触发绑定。协调器在指定的时间内收集端节点设备的绑定请求，进而创建一个基于配置ID和簇头ID的绑定记录；端节点设备缺省的绑定时间(APS_DEFAULT_MAXBINDING_TIME，由nwk_globals.h定义)是16秒，也可以通过配置文件修改。
@@ -326,7 +326,7 @@
             <dd>基本节点设备行为中定义了一个称之为发现和绑定的代理方法；对应的进程依赖于簇头和ZDO消息的使用，允许代理节点设备利用匹配的簇头去找寻节点设备。这种机制通常由用户指定的需要发现和绑定彼此的节点设备来触发；所以绑定后，这些节点设备可以更加有效的通信；
             </dd>
             <dt>源绑定配置</dt>
-            <dd>两个配置项：NWK_MAX_BINDING_ENTRIES和MAX_BINDING_CLUSTER_IDS</dd>
+            <dd>两个配置项：NWK_MAX_BINDING_ENTRIES和MAX_BINDING_CLUSTER_IDS；</dd>
             <dd>NWK_MAX_BINDING_ENTRIES表示绑定表中允许的最大记录数；</dd>
             <dd>MAX_BINDING_CLUSTER_IDS表示每一个绑定记录中允许的最大簇头ID数；</dd>
             <dd>绑定表在系统的RAM中进行维护。因为绑定表的记录和每一个记录的簇头ID数确实会影响到RAM可使用的大小；</dd>
