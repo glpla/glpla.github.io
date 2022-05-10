@@ -121,6 +121,7 @@
         </dl>
         <ul class="cont">
             <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片3.JPG" alt=""></li>
+            <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片4.JPG" alt=""></li>
         </ul>
         <dl>
             <dt>概述</dt>
@@ -211,7 +212,7 @@
             <dd>如果找不到对应的绑定记录，数据报就不会发送；</dd>
         </dl>
         <ul class="cont">
-            <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片4.JPG" alt=""></li>
+            <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片5.JPG" alt=""></li>
         </ul>
         <dl>
             <dt>获取节点设备地址</dt>
@@ -226,7 +227,7 @@
             <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Documents\API\Z-Stack API.pdf；</dd>
         </dl>
         <ul class="cont">
-            <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片5.JPG" alt=""></li>
+            <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片6.JPG" alt=""></li>
         </ul>
         <dl>
             <dd>绑定是控制一个应用和另外一个应用之间或多个应用之间消息流的机制。这种绑定机制部署于所有的节点设备，也称为源绑定。</dd>
@@ -245,13 +246,13 @@
             <dd>目标节点设备收到请求后，会发回一个ZDO绑定响应或解除响应；协调器解析后，返回以下状态信息：</dd>
             <dd>对于绑定响应，协调器返回的状态将是ZDP_SUCCESS,ZDP_TABLE_FULL或者ZDP_NOT_SUPPORTED；</dd>
             <dd>对于解除绑定响应，协调器返回的状态将是ZDP_SUCCESS,ZDP_NO_ENTRY或者ZDP_NOT_SUPPORTED；</dd>
-            <dd class="dd-img-box"><img src="../imgs/wsn/chap6 ZigBee/幻灯片6.JPG" alt=""></dd>
+            <dd class="dd-img-box"><img src="../imgs/wsn/chap6 ZigBee/幻灯片7.JPG" alt=""></dd>
             <dt>ZDO端节点设备绑定请求</dt>
-            <dd>这种绑定机制在指定的时间内，通过单击被选节点设备上的按钮或者其它类似的动作触发绑定。协调器在指定的时间内收集端节点设备的绑定请求，进而创建一个基于配置ID和簇头ID的绑定记录；端节点设备缺省的绑定时间(APS_DEFAULT_MAXBINDING_TIME，由nwk_globals.h定义)是16秒，也可以通过配置文件修改。
+            <dd>这种绑定机制是指在一定时间内，通过按键或者其它类似的动作触发绑定。协调器在指定的时间内收集端节点设备的绑定请求，进而创建一个基于配置ID和簇头ID的绑定记录；端节点设备缺省的绑定时间(APS_DEFAULT_MAXBINDING_TIME，由nwk_globals.h定义)是16秒，也可以通过配置文件修改。
             </dd>
             <dd>绑定请求、绑定响应和绑定解除（在ZDApp.c的ZDApp_RegisterCBs()给出）先被协调器的ZD_RegisterForZDOMsg( )接收，进一步由ZDApp_ProcessMsgCBs(
                 )处理；</dd>
-            <dd class="dd-img-box"><img src="../imgs/wsn/chap6 ZigBee/幻灯片7.JPG" alt=""></dd>
+            <dd class="dd-img-box"><img src="../imgs/wsn/chap6 ZigBee/幻灯片8.JPG" alt=""></dd>
             <dd>这种处理是一个可以来回切换的过程；意味着，第一次执行，会在请求的节点设备中创建一个绑定记录；第二次再次执行时，就会清除节点设备中的绑定记录。这也是为什么在下面的处理中，会首先发送一个解除绑定，然后等待解除是否成功；如果解除绑定成功，则绑定记录必须是存在的且被清除了的，否则就发送一个绑定请求来创建一个记录。
             </dd>
             <dd>协调器收到2个匹配的端节点设备的绑定请求后，将按照以下步骤启动在请求节点设备中创建源地址绑定记录的进程：</dd>
@@ -339,7 +340,7 @@
                 <img src="../imgs/avatar.jpg" alt="">
                 <span>Cnplaman from No 54414, PLA</span>
             </div>
-            <span>2022-05-09</span>
+            <span>2022-05-10</span>
         </footer>
     </section>
 </body>
