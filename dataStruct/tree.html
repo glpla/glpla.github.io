@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Course - binary tree</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/ds.css">
+    <style>
+        header {
+            background-image: url(../imgs/online/banner.jpg);
+        }
+
+        ul li {
+            margin-bottom: 1rem;
+            box-shadow: 0 0 1rem #ddd;
+        }
+
+        ul li img {
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="w">
+        <header></header>
+        <ul>
+            <li><img src="../imgs/tree/幻灯片1.JPG" alt=""></li>
+            <li><img src="../imgs/tree/幻灯片2.JPG" alt=""></li>
+            <li><img src="../imgs/tree/幻灯片3.JPG" alt=""></li>
+            <li><img src="../imgs/tree/幻灯片4.JPG" alt=""></li>
+            <li><img src="../imgs/tree/幻灯片5.JPG" alt=""></li>
+            <li><img src="../imgs/tree/幻灯片6.JPG" alt=""></li>
+            <li><img src="../imgs/tree/幻灯片7.JPG" alt=""></li>
+            <li><img src="../imgs/tree/幻灯片8.JPG" alt=""></li>
+            <li><img src="../imgs/tree/幻灯片9.JPG" alt=""></li>
+            <li><img src="../imgs/tree/幻灯片10.JPG" alt=""></li>
+            <li><img src="../imgs/tree/幻灯片11.JPG" alt=""></li>
+            <li><img src="../imgs/tree/幻灯片12.JPG" alt=""></li>
+            <li><img src="../imgs/tree/幻灯片13.JPG" alt=""></li>
+        </ul>
+        <h2>示例代码</h2>
+        <p style="text-align: center;"><a class="warn"
+                href="https://www.bccn.net/run/">在线编程https://www.bccn.net/run/</a></p>
+        <pre class="code">
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;
+    
+    typedef struct Node
+    {
+        char data;
+        struct Node *leftChild;
+        struct Node *rightChild;
+    } Tree;
+    
+    Tree *createNode(char data)
+    {
+        Tree *node = (Tree *)malloc(sizeof(Tree));
+        node->data = data;
+        node->leftChild = NULL;
+        node->rightChild = NULL;
+        return node;
+    }
+    void insertNode(Tree *tree, Tree *l, Tree *r)
+    {
+        tree->leftChild = l;
+        tree->rightChild = r;
+    }
+    void preOrder(Tree *tree)
+    {
+        if (tree)
+        {
+            printf("%c", tree->data);
+            preOrder(tree->leftChild);
+            preOrder(tree->rightChild);
+        }
+    }
+    void inOrder(Tree *tree)
+    {
+        if (tree)
+        {
+            inOrder(tree->leftChild);
+            printf("%c", tree->data);
+            inOrder(tree->rightChild);
+        }
+    }
+    void postOrder(Tree *tree)
+    {
+        if (tree)
+        {
+            postOrder(tree->leftChild);
+            postOrder(tree->rightChild);
+            printf("%c", tree->data);
+        }
+    }
+    void preOrderStack(Tree *tree)
+    {
+        if (tree)
+        {
+            Tree *nodes[20];
+            int top = -1;
+            Tree *p = tree;
+            while (top != -1 || p)
+            {
+                while (p)
+                {
+                    printf("%c", p->data);
+                    top++;
+                    nodes[top] = p;
+                    p = p->leftChild;
+                }
+                if (top != -1)
+                {
+                    p = nodes[top];
+                    top--;
+                    p = p->rightChild;
+                }
+            }
+        }
+    }
+    void inOrderStack(Tree *tree)
+    {
+        if (tree)
+        {
+            Tree *nodes[20];
+            int top = -1;
+            Tree *p = tree;
+            while (top != -1 || p)
+            {
+                while (p)
+                {
+                    top++;
+                    nodes[top] = p;
+                    p = p->leftChild;
+                }
+                if (top != -1)
+                {
+                    p = nodes[top];
+                    top--;
+                    printf("%c", p->data);
+                    p = p->rightChild;
+                }
+            }
+        }
+    }
+    void postOrderStack(Tree *tree)
+    {
+        if (tree)
+        {
+            Tree *nodes[20];
+            int top = -1;
+            Tree *p = tree;
+            Tree *visited = NULL;
+            while (p)
+            {
+                nodes[++top] = p;
+                p = p->leftChild;
+            }
+            while (top != -1)
+            {
+                p = nodes[top--];
+                if (p->rightChild == NULL || p->rightChild == visited)
+                {
+                    printf("%c", p->data);
+                    visited = p;
+                }
+                else
+                {
+                    nodes[++top] = p;
+                    p = p->rightChild;
+                    while (p)
+                    {
+                        nodes[++top] = p;
+                        p = p->leftChild;
+                    }
+                }
+            }
+        }
+    }
+    void tree1()
+    {
+        Tree *A = createNode('A');
+        Tree *B = createNode('B');
+        Tree *C = createNode('C');
+        Tree *D = createNode('D');
+        Tree *E = createNode('E');
+        Tree *F = createNode('F');
+        Tree *G = createNode('G');
+        insertNode(A, B, C);
+        insertNode(B, D, NULL);
+        insertNode(C, E, F);
+        insertNode(D, NULL, G);
+        preOrder(A);
+        printf("\n");
+        preOrderStack(A);
+        printf("\n");
+        inOrder(A);
+        printf("\n");
+        inOrderStack(A);
+        printf("\n");
+        postOrder(A);
+        printf("\n");
+        postOrderStack(A);
+        printf("\n");
+    }
+    void tree2()
+    {
+        Tree *A = createNode('A');
+        Tree *B = createNode('B');
+        Tree *C = createNode('C');
+        Tree *D = createNode('D');
+        Tree *E = createNode('E');
+        Tree *F = createNode('F');
+        Tree *G = createNode('G');
+        Tree *H = createNode('H');
+        Tree *I = createNode('I');
+        Tree *J = createNode('J');
+        insertNode(A, B, C);
+        insertNode(B, D, NULL);
+        insertNode(C, NULL, E);
+        insertNode(D, F, G);
+        insertNode(E, H, NULL);
+        insertNode(G, I, J);
+        preOrder(A);
+        printf("\n");
+        preOrderStack(A);
+        printf("\n");
+        inOrder(A);
+        printf("\n");
+        inOrderStack(A);
+        printf("\n");
+        postOrder(A);
+        printf("\n");
+        postOrderStack(A);
+        printf("\n");
+    }
+    
+    int main(void)
+    {
+        tree1();
+        tree2();
+        return 0;
+    }        </pre>
+        <footer>
+            <div class="copyright">
+                <span>&copy; All Copyrights Reserved, 2022-2024</span>
+                <img src="../imgs/avatar.jpg" alt="">
+                <span>Cnplaman from No 54414, PLA</span>
+            </div>
+            <span>2022-05-11</span>
+        </footer>
+    </section>
+
+</body>
+
+</html>
