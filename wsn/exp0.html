@@ -8,6 +8,7 @@
     <title>WSN集成开发环境搭建</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/ds.css">
+    <base target="_blank">
     <style>
         header {
             background-image: url(../imgs/wsn/wsn.jpg);
@@ -44,62 +45,62 @@
                 <li><a href="#temp" id="totemp">模板使用</a></li>
             </ul>
         </nav>
-        <h2 id="ide">硬件Hardware <a href="#top" id="top0"><i class="iconfont icon">&#xe604;</i></a></h2>
+        <h2 id="ide">硬件 Hardware <a href="#top" id="top0"><i class="iconfont icon">&#xe604;</i></a></h2>
         <dl>
-            <dt>包括</dt>
+            <dt>包括但不限于：</dt>
             <dd>个人PC</dd>
             <dd>CC Debugger仿真器</dd>
             <dd>mini USB线</dd>
             <dd>开发板或集成开发套件</dd>
         </dl>
-        <h2>软件Software</h2>
+        <h2>软件 Software</h2>
         <dl>
-            <dt>IAR</dt>
-            <dd>IAR<a href="https://www.iar.com/" title="https://www.iar.com/"><span
+            <dt>IAR <a href="https://www.iar.com/" title="https://www.iar.com/"><span
                         class="iconfont">&#xe664;</span></a>
-            </dd>
-            <dd>IAR提供有：限制使用时间和限制项目大小两种免费方案；推荐使用后者；有钱的可以任性，花美刀买个无限制的版本；</dd>
-            <dd>IAR不支持QQ邮箱；PS：QQ邮箱现在支持英文邮箱了，快去申请一个foxmail邮箱吧。一个账号两个邮箱哦！</dd>
+            </dt>
+            <dd>IAR提供有：限制使用时间和限制项目大小两种免费方案；推荐使用后者；有钱的可以任性，花点美刀买个无限制的版本；</dd>
+            <dd>IAR<span class="warn">不支持</span>QQ邮箱；PS：QQ邮箱现在支持英文邮箱了，快去申请一个foxmail邮箱吧。一个账号两个邮箱哦！</dd>
             <dd>注册成功后，会给你发送一个邮件，包括：序列号和下载链接；下载安装并输入序列号即可使用；</dd>
             <dd>注意请妥善保存该邮件，不要删除；</dd>
             <dt>Zigbee协议栈</dt>
             <dd>请使用最新版Z-Stack 3.0.2；<a class="warn" href="https://www.ti.com/"
-                    title="https://www.ti.com/">打开TI官网</a>，搜索"Z-Stack"并下载</dd>
+                    title="https://www.ti.com/">打开TI官网</a>，搜索"Z-Stack"并下载；</dd>
             <dt>SmartRF Flash Programmer烧写驱动</dt>
             <dd>将程序烧写到芯片中；<a class="warn" href="https://www.ti.com/" title="https://www.ti.com/">打开TI官网</a>，搜索"smartrf
                 flash programmer"并下载；</dd>
             <dd>注意：SmartRF Flash Programmer 2是针对ARM系列的；</dd>
-            <dt>其它工具</dt>
+            <dt>其它工具[根据项目需求而定]</dt>
+            <dd>串口驱动</dd>
+            <dd>串口监视工具</dd>
+            <dd>拓扑显示工具</dd>
             <dd>抓包工具：PACKET-SNIFFER，<a class="warn" href="https://www.ti.com/"
                     title="https://www.ti.com/">打开TI官网</a>，搜索"packet sniffer"并下载</dd>
-            <dd>串口驱动：根据项目需求而定；</dd>
-            <dd>串口监视工具：根据项目需求而定；</dd>
-            <dd>拓扑显示工具：根据项目需求而定；</dd>
             <dt>说明</dt>
             <dd>TI的提供的资源很多都是免费的，但是要注册才能下载，有。。。用户信息的嫌疑；</dd>
         </dl>
         <h2 id="pro">第一个项目：点灯 <a href="#top" id="top1"><i class="iconfont icon">&#xe604;</i></a></h2>
         <dl>
             <dt>基本流程</dt>
-            <dd>创建工作空间(.eww)-&gt;创建项目(.ewp，如基于C的项目)-&gt;配置项目-&gt;创建其它文件-&gt;添加文件到项目-&gt;调式-&gt;下载/烧写-&gt;执行/调试</dd>
+            <dd>创建工作空间(.eww)-&gt;创建项目(.ewp，可以指定环境，如基于C的项目)-&gt;配置项目-&gt;创建并编辑文件-&gt;添加文件到项目-&gt;调式-&gt;下载/烧写-&gt;执行/调试；
+            </dd>
             <dd>注意：工作空间.eww和工作项目.ewp都需要保存；</dd>
-            <dt>创建项目</dt>
-            <dd>1.打开IAR</dd>
+            <dt>一、创建项目</dt>
+            <dd>1.打开IAR。默认情况下会创建一个新的工作空间；也可以显式的创建一个新空间<span class="warn">[推荐]</span></dd>
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片2.JPG" alt="">
             </dd>
-            <dd>2.创建项目：项目project-&gt;创建新项目create new project；或直接创建C项目；并保存；</dd>
+            <dd>2.创建项目：项目project-&gt;创建新项目create new project；或选择基于C的项目<span class="warn">[推荐]</span>；并保存；</dd>
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片3.JPG" alt="">
             </dd>
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片4.JPG" alt="">
             </dd>
-            <dd>3.创建文件，如main.c，并添加到项目；或者编辑完代码再添加到项目；系统会自动识别未添加的文件，并显示出来供你选择；</dd>
+            <dd>3.创建文件，如main.c，并添加到项目；或者编辑完代码再添加到项目；系统会自动识别未添加的文件，并显示出来供你选择；如果创建项目时，选择的是基于C的项目，会自动生成main()主函数；</dd>
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片5.JPG" alt="">
             </dd>
-            <dt>配置项目</dt>
+            <dt>二、配置项目</dt>
             <dd>IAR支持的芯片很多。编译前，必须配置项目为相应的芯片。基本的配置主要有以下三项，可一次完成配置；</dd>
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片6.JPG" alt="">
@@ -110,17 +111,18 @@
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片8.JPG" alt="">
             </dd>
-            <dt>编写代码</dt>
+            <dt>三、编辑代码</dt>
             <dd>没有自动缩进和代码提示、自动补全真的很无语啊！</dd>
+            <dd>可以添加插件实现，参考后面的"基本配置"一节</dd>
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片9.JPG" alt="">
             </dd>
-            <dt>调试</dt>
-            <dd>编译compile：单文件编译；快捷键CTRL+F7；</dd>
-            <dd>生成make：项目编译；快捷键F7；</dd>
-            <dd>第一次编译时会提示再次保存；</dd>
+            <dt>四、调试</dt>
+            <dd>编译compile：单个文件的编译；快捷键CTRL+F7；</dd>
+            <dd>生成make：整个项目的编译；快捷键F7；</dd>
+            <dd>第一次编译时会提示再次保存空间和项目；输入并确认空间名字.eww和项目名字.ewp保存即可；</dd>
             <dd>尽量完善代码到：0告警、0错误；</dd>
-            <dt>下载/烧写</dt>
+            <dt>五、下载/烧写</dt>
             <dd>使用mini USB线分别连接PC和CC Debugger仿真器，并将CC Debugger仿真器的另外一端和节点板的JTAG相连，按下CC
                 Debugger仿真器的复位键，绿灯表示连接成功，可以烧写程序；</dd>
             <dd>连接时注意排线和插口的方向；</dd>
@@ -128,25 +130,29 @@
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片10.JPG" alt="">
             </dd>
-            <dt>执行/调试</dt>
+            <dt>六、执行/调试</dt>
             <dd>观察节点板上的LED灯开始间断闪烁；</dd>
             <dd>调整源码参数，重新调试，检测实验结果；</dd>
+            <dt>附：测试源码</dt>
+            <dd class="dd-code-item">//请参照"编辑代码"部分中的代码，完成整个项目；</dd>
         </dl>
         <h2 id="conf">基本配置 <a href="#top" id="top2"><i class="iconfont icon">&#xe604;</i></a></h2>
         <dl>
-            <dt>字体</dt>
+            <dt>字体设置</dt>
+            <dd>一般字体common Fonts；</dd>
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片11.JPG" alt="">
             </dd>
-            <dt>行号</dt>
+            <dt>编辑器设置Editor</dt>
+            <dd>编辑器Editor中可以修改tab大小、行号等；</dd>
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片12.JPG" alt="">
             </dd>
             <dt>格式化代码</dt>
-            <dd>1. <a class="warn" href="../tool/AStyle_3.1_windows.zip">下载插件Artistic Style</a>或访问获取<a class="warn"
-                    href="https://sourceforge.net/projects/astyle/">https://sourceforge.net/projects/astyle/</a>；</dd>
+            <dd>1. 点击<a class="warn" href="../tool/AStyle_3.1_windows.zip">下载插件Artistic Style</a>或访问<a class="warn"
+                    href="https://sourceforge.net/projects/astyle/">https://sourceforge.net/projects/astyle/</a>获取；</dd>
             <dd>2. 解压到IAR安装目录；</dd>
-            <dd>3. 配置工具：根据下图完成配置；</dd>
+            <dd>3. 配置工具：根据下图完成插件的添加New和配置；</dd>
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片13.JPG" alt="">
             </dd>
@@ -169,22 +175,21 @@
             <dd>模板用到的参数以,区分；如果参数带有默认值，以值对的形式呈现；</dd>
             <dd>模板实现中，使用数值和参数一一对应；如果需要对齐，不要使用tab，使用空格；</dd>
             <dd>同类模板<span class="warn">应</span>放在一起；</dd>
-            <dd>模板使用%c，可以在插入模板后，定义光标的位置；</dd>
+            <dd>模板使用%c，可以在插入模板后，指定光标的位置；如果没有指定光标位置，则出现在插入模板的后面；</dd>
             <dt>使用模板</dt>
-            <dd>在源文件中，编辑Edit-&gt;代码模板Code template-&gt;插入模板Insert Template，选择创建的注释模板；填写对应的内容并确定，注释模板即可添加到源文件中；</dd>
+            <dd>在源文件中，编辑Edit-&gt;代码模板Code template-&gt;插入模板Insert Template，选择某个模板；填写对应的参数内容并确定，模板即可添加到源文件中；</dd>
             <dt><span class="warn">[示例1 注释模板]</span></dt>
             <dd>下面示例声明了一个2级注释代码，共4个参数，其中：第2个和第3个带有默认参数；</dd>
-            <dd>创建模板</dd>
-            <dd>使用模板</dd>
-            <dd>插入模板后效果</dd>
+            <dd>1. 创建模板</dd>
+            <dd>2. 使用模板</dd>
+            <dd>3. 插入模板后效果</dd>
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片15.JPG" alt="">
             </dd>
             <dt><span class="warn">[示例2 主函数模板]</span></dt>
-            <dd>下面示例声明了一个main主函数模板，没有参数，返回为0；</dd>
-            <dd>该函数模板放在了声明类模板Statement的最上面；插入光标后在mai函数的第一行；</dd>
-            <dd>创建模板</dd>
-            <dd>使用模板：因为没有函数，直接在源文件中插入</dd>
+            <dd>下面示例声明了一个main主函数模板，没有参数，返回为0；IAR嵌入式开发中，main的类型为void；该函数模板放在了声明类模板Statement的最上面；插入光标后在mai函数的第一行；</dd>
+            <dd>1. 创建模板</dd>
+            <dd>2. 使用模板：因为没有函数，直接在源文件中插入</dd>
             <dd class="dd-img-item">
                 <img src="../imgs/wsn/WSN exp0/幻灯片16.JPG" alt="">
             </dd>
