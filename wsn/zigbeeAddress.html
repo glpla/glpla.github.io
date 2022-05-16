@@ -7,56 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zigbee address</title>
     <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/ds.css">
-    <base target="_blank">
-    <style>
-        .title {
-            line-height: 1.2rem;
-            text-decoration: underline;
-        }
-
-        .cont li {
-            margin-bottom: 1rem;
-            box-shadow: 0 0 1rem #ddd;
-        }
-
-        .cont li img {
-            object-fit: cover;
-        }
-
-        .img-box {
-            text-align: center;
-        }
-
-        .img-box .img {
-            width: 50%;
-        }
-
-        .sub-title {
-            text-align: center;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 14px;
-            text-transform: capitalize;
-            margin: 1rem auto;
-        }
-
-        .dd-img-box {
-            text-indent: unset;
-            margin: 1rem auto;
-            box-shadow: 0 0 1rem #ddd;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/wsn.css">
 </head>
 
 <body>
     <section class="w">
-        <header class="nav">
-            <h1>Zigbee之地址</h1>
+        <nav class="main-nav sticky">
+            <ul class="flex-h">
+                <li class="logo">
+                    <h1><a href="./wpan.html">WSN协议</a></h1>
+                </li>
+                <li class="ham-menu" id="menu"><span class="iconfont">&#xe816;</span></li>
+                <li class="main-nav-item"><a href="./wpan.html">ZigBee</a></li>
+                <li class="main-nav-item main-nav-active"><a href="./zigbeeAddress.html">ZigBee地址</a></li>
+                <li class="main-nav-item"><a href="./zigbeeRoute.html">ZigBee路由</a></li>
+                <li class="main-nav-item"><a href="./Bluetooth.html">蓝牙</a></li>
+                <li class="main-nav-item"><a href="./UWB.html">超宽带</a></li>
+            </ul>
+        </nav>
+        <header>
+            <h1>Zigbee地址</h1>
         </header>
-        <ul class="cont">
-            <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片1.JPG" alt=""></li>
-        </ul>
         <dl>
+            <dd class="dd-img-item"><img src="../imgs/wsn/chap6 ZigBee/幻灯片1.JPG" alt=""></dd>
             <dt>[英文]</dt>
             <dd>ZigBee devices have two types of addresses. A 64-bit IEEE address (also called MAC address or Extended
                 address)
@@ -75,11 +48,7 @@
             <dd>64bit地址全球唯一，且终身使用；地址的设置通常由制造商生产时或安装时完成；而地址的维护和分配则由<span
                     class="warn">[IEEE]</span>负责；16bit地址是在节点设备加入网络时获得，且只能用于该网络；地址在这个网络中应保持唯一；用来在网络中标识节点设备和发送数据；
             </dd>
-        </dl>
-        <ul class="cont">
-            <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片2.JPG" alt=""></li>
-        </ul>
-        <dl>
+            <dd class="dd-img-item"><img src="../imgs/wsn/chap6 ZigBee/幻灯片2.JPG" alt=""></dd>
             <dt>[英文]</dt>
             <dd>ZigBee PRO uses a stochastic (random) addressing scheme for assigning the network addresses. This
                 addressing scheme randomly assigns short addresses to new devices, and then uses the rest of the devices
@@ -118,12 +87,8 @@
             <dt>[中文]</dt>
             <dd>节点收到"节点设备声明"报文时，对应的关联绑定表进行更新，而路由信息表不更新，但是必须建立新的路由；如果一个父级节点发现这个"节点设备声明"属于他子级的端节点设备，但并不是由它直接发出，就假定这个子节点已经移动归属到了另外一个父级节点；
             </dd>
-        </dl>
-        <ul class="cont">
-            <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片3.JPG" alt=""></li>
-            <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片4.JPG" alt=""></li>
-        </ul>
-        <dl>
+            <dd class="dd-img-item"><img src="../imgs/wsn/chap6 ZigBee/幻灯片3.JPG" alt=""></dd>
+            <dd class="dd-img-item"><img src="../imgs/wsn/chap6 ZigBee/幻灯片4.JPG" alt=""></dd>
             <dt>概述</dt>
             <dd>ZigBee应用程序通常使用AF_DataRequest( )函数向网络中的节点设备发送数据；接收数据报的目标节点设备应符合如下定义的数据类型；</dd>
             <dd>
@@ -210,11 +175,7 @@
             <dd>找到目标地址和对应的端节点设备后，就按照单播的形式发送数据报；</dd>
             <dd>如果找到不只一个目标节点设备，就向每个目标节点设备都发送一份数据报拷贝；</dd>
             <dd>如果找不到对应的绑定记录，数据报就不会发送；</dd>
-        </dl>
-        <ul class="cont">
-            <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片5.JPG" alt=""></li>
-        </ul>
-        <dl>
+            <dd class="dd-img-item"><img src="../imgs/wsn/chap6 ZigBee/幻灯片5.JPG" alt=""></dd>
             <dt>获取节点设备地址</dt>
             <dd>如果一个ZigBee应用想要获取一个节点设备以及它的父级节点设备的地址，可以使用下面的函数；</dd>
             <dt>获取节点设备地址</dt>
@@ -225,11 +186,7 @@
             <dd>NLME_GetCoordExtAddr() –返回父级节点设备64bit的扩展地址；</dd>
             <dd><span class="warn">注意</span> 这里的coord不是协调器，而是父级节点设备；</dd>
             <dd>更多细节，请参看文档：…\Z-Stack 3.0.2\Documents\API\Z-Stack API.pdf；</dd>
-        </dl>
-        <ul class="cont">
-            <li><img src="../imgs/wsn/chap6 ZigBee/幻灯片6.JPG" alt=""></li>
-        </ul>
-        <dl>
+            <dd class="dd-img-item"><img src="../imgs/wsn/chap6 ZigBee/幻灯片6.JPG" alt=""></dd>
             <dd>绑定是控制一个应用和另外一个应用之间或多个应用之间消息流的机制。这种绑定机制部署于所有的节点设备，也称为源绑定。</dd>
             <dd>绑定允许一个应用在不知道目标地址的情况发送数据报。节点设备的应用子层通过查询它的绑定表来决定目标地址，进而转发消息给相应的目标应用，可以是组播也可以是广播。</dd>
             <dt>创建绑定表</dt>
@@ -343,6 +300,26 @@
             <span>2022-05-10</span>
         </footer>
     </section>
+    <script>
+        window.onload = function () {
+            let show_bool = false
+            let menu = document.querySelector('#menu')
+            let navs = document.querySelectorAll('.main-nav-item')
+            menu.addEventListener('touchstart', function (e) {
+                console.log(show_bool);
+                if (show_bool) {
+                    navs.forEach((item) => {
+                        item.style.display = 'none'
+                    })
+                } else {
+                    navs.forEach((item) => {
+                        item.style.display = 'block'
+                    })
+                }
+                show_bool = !show_bool
+            })
+        }
+    </script>
 </body>
 
 </html>

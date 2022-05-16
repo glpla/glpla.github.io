@@ -7,13 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zigbee route</title>
     <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/ds.css">
-    <base target="_blank">
+    <link rel="stylesheet" href="../css/wsn.css">
 </head>
 
 <body>
     <section class="w">
-        <header class="nav">
+        <nav class="main-nav sticky">
+            <ul class="flex-h">
+                <li class="logo">
+                    <h1><a href="./wpan.html">WSN协议</a></h1>
+                </li>
+                <li class="ham-menu" id="menu"><span class="iconfont">&#xe816;</span></li>
+                <li class="main-nav-item"><a href="./wpan.html">ZigBee</a></li>
+                <li class="main-nav-item"><a href="./zigbeeAddress.html">ZigBee地址</a></li>
+                <li class="main-nav-item main-nav-active"><a href="./zigbeeRoute.html">ZigBee路由</a></li>
+                <li class="main-nav-item"><a href="./Bluetooth.html">蓝牙</a></li>
+                <li class="main-nav-item"><a href="./UWB.html">超宽带</a></li>
+            </ul>
+        </nav>
+        <header>
             <h1>Zigbee之路由</h1>
         </header>
         <dl>
@@ -214,6 +226,26 @@
             <span>2022-05-12</span>
         </footer>
     </section>
+    <script>
+        window.onload = function () {
+            let show_bool = false
+            let menu = document.querySelector('#menu')
+            let navs = document.querySelectorAll('.main-nav-item')
+            menu.addEventListener('touchstart', function (e) {
+                console.log(show_bool);
+                if (show_bool) {
+                    navs.forEach((item) => {
+                        item.style.display = 'none'
+                    })
+                } else {
+                    navs.forEach((item) => {
+                        item.style.display = 'block'
+                    })
+                }
+                show_bool = !show_bool
+            })
+        }
+    </script>
 </body>
 
 </html>
