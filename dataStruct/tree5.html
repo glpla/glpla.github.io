@@ -17,12 +17,12 @@
                 <li class="logo">
                     <h1><a class="img" href="./tree1.html">Tree</a></h1>
                 </li>
+                <li class="ham-menu" id="menu"><span class="iconfont">&#xe816;</span></li>
                 <li class="main-nav-item"><a href="./tree1.html">树</a></li>
                 <li class="main-nav-item"><a href="./tree2.html">二叉树</a></li>
                 <li class="main-nav-item"><a href="./tree3.html">二叉树的遍历</a></li>
                 <li class="main-nav-item"><a href="./tree4.html">霍夫曼树</a></li>
                 <li class="main-nav-item main-nav-active"><a href="./tree5.html">霍夫曼编码</a></li>
-                <li class="ham-menu" id="menu"><span class="iconfont">&#xe816;</span></li>
             </ul>
         </nav>
         <header>
@@ -53,13 +53,21 @@
     </section>
     <script>
         window.onload = function () {
+            let show_bool = false
             let menu = document.querySelector('#menu')
             let navs = document.querySelectorAll('.main-nav-item')
             menu.addEventListener('touchstart', function (e) {
-                this.style.display = 'none'
-                navs.forEach((item) => {
-                    item.style.display = 'block'
-                })
+                console.log(show_bool);
+                if (show_bool) {
+                    navs.forEach((item) => {
+                        item.style.display = 'none'
+                    })
+                } else {
+                    navs.forEach((item) => {
+                        item.style.display = 'block'
+                    })
+                }
+                show_bool = !show_bool
             })
         }
     </script>
