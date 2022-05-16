@@ -7,44 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IP Packet</title>
     <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/ds.css">
-    <base target="_blank">
-    <style>
-        .title {
-            line-height: 1.2rem;
-            text-decoration: underline;
-        }
-
-        .cont li {
-            margin-bottom: 1rem;
-            box-shadow: 0 0 1rem #ddd;
-        }
-
-        .cont li img {
-            object-fit: cover;
-        }
-
-        .img-box {
-            text-align: center;
-        }
-
-        .img-box .img {
-            width: 50%;
-        }
-
-        .sub-title {
-            text-align: center;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 14px;
-            text-transform: capitalize;
-            margin-bottom: 1rem;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/networklayer.css">
 </head>
 
 <body>
     <section class="w">
-        <header class="nav">
+        <nav class="main-nav sticky">
+            <ul class="flex-h">
+                <li class="logo">
+                    <h1><a href="./mac2ip.html">网络层</a></h1>
+                </li>
+                <li class="ham-menu" id="menu"><span class="iconfont">&#xe816;</span></li>
+                <li class="main-nav-item"><a href="./mac2ip.html">MAC vs IP</a></li>
+                <li class="main-nav-item"><a href="./arp.html">ARP</a></li>
+                <li class="main-nav-item"><a href="./ip.html">IP</a></li>
+                <li class="main-nav-item"><a href="./router.html">路由器和路由</a></li>
+                <li class="main-nav-item"><a href="./aggregation.html">聚合路由</a></li>
+                <li class="main-nav-item"><a href="./protocol.html">路由协议</a></li>
+                <li class="main-nav-item main-nav-active"><a href="./packet.html">数据报</a></li>
+            </ul>
+        </nav>
+        <header>
             <h1>IP Packet</h1>
         </header>
         <dl>
@@ -71,127 +54,123 @@
             <dt>首部校验和</dt>
             <dd>每经过一个路由器，都要重新计算</dd>
             <dd>为加快转发速度，IPv6中不再计算</dd>
-        </dl>
-        <div class="img-box">
-            <table>
-                <tr>
-                    <td>4</td>
-                    <td>4</td>
-                    <td>8</td>
-                    <td colspan="2">16</td>
-                </tr>
-                <tr>
-                    <td>版本VER</td>
-                    <td>首部长度THL</td>
-                    <td>区分服务DSCP</td>
-                    <td colspan="2">总长度TL</td>
-                </tr>
-                <tr>
-                    <td colspan="3">标识ID</td>
-                    <td>标志FLAG</td>
-                    <td>片偏移FRAG OFFSET</td>
-                </tr>
-                <tr>
-                    <td colspan="2">生存时间TTL</td>
-                    <td>协议PRO</td>
-                    <td colspan="2">首部校验和CHKSUM</td>
-                </tr>
-                <tr>
-                    <td colspan="6">源地址SRC</td>
-                </tr>
-                <tr>
-                    <td colspan="6">目标地址DST</td>
-                </tr>
-                <tr>
-                    <td colspan="6">数据DATA</td>
-                </tr>
-            </table>
-            <div class="sub-title">表1 IP数据报格式</div>
-        </div>
-        <div class="img-box">
-            <img src="../imgs/network/ip3.jpg" alt="">
-            <div class="sub-title">图1 TTL的重要性</div>
-        </div>
-        <div class="img-box">
-            <table>
-                <tr>
-                    <td>协议名称</td>
-                    <td>ICMP</td>
-                    <td>IGMP</td>
-                    <td>TCP</td>
-                    <td>UDP</td>
-                    <td>IPv6</td>
-                    <td>OSPF</td>
-                </tr>
-                <tr>
-                    <td>值</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>6</td>
-                    <td>17</td>
-                    <td>41</td>
-                    <td>89</td>
-                </tr>
-            </table>
-            <div class="sub-title">表2 常用协议字段</div>
-        </div>
-        <dl>
+            <dd class="dd-img-item">
+                <table>
+                    <tr>
+                        <td>4</td>
+                        <td>4</td>
+                        <td>8</td>
+                        <td colspan="2">16</td>
+                    </tr>
+                    <tr>
+                        <td>版本VER</td>
+                        <td>首部长度THL</td>
+                        <td>区分服务DSCP</td>
+                        <td colspan="2">总长度TL</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">标识ID</td>
+                        <td>标志FLAG</td>
+                        <td>片偏移FRAG OFFSET</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">生存时间TTL</td>
+                        <td>协议PRO</td>
+                        <td colspan="2">首部校验和CHKSUM</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">源地址SRC</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">目标地址DST</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">数据DATA</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd class="dd-diag-item">表1 IP数据报格式</dd>
+            <dd class="dd-img-item">
+                <img src="../imgs/network/ip3.jpg" alt="">
+            </dd>
+            <dd class="dd-diag-item">图1 TTL的重要性</dd>
+            <dd class="dd-img-item">
+                <table>
+                    <tr>
+                        <td>协议名称</td>
+                        <td>ICMP</td>
+                        <td>IGMP</td>
+                        <td>TCP</td>
+                        <td>UDP</td>
+                        <td>IPv6</td>
+                        <td>OSPF</td>
+                    </tr>
+                    <tr>
+                        <td>值</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>6</td>
+                        <td>17</td>
+                        <td>41</td>
+                        <td>89</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd class="dd-diag-item">表2 常用协议字段</dd>
             <dt class="warn">[案例分析]</dt>
             <dd>已经某IP报首部字段THL为0101，总长度字段TL为0000 0011 1111 1100，求数据部分字段DATA的长度。</dd>
             <dt>解</dt>
             <dd>首部长度为(0101)<sub>2</sub>*4 = 5*4 = 20 字节</dd>
             <dd>总长度为(0000 0011 1111 1100)<sub>2</sub> = 1020 字节</dd>
             <dd>故：数据部分长度为：总长度-首部长度 = 1020-20 = 1000 字节</dd>
-        </dl>
-        <dl>
             <dt class="warn">[案例分析]</dt>
             <dd>已知采用固定长度首部的数据报，数据部分位3800字节，如何分片？（分片不超过1420字节）</dd>
+            <dd class="dd-img-item">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>总长度TL</td>
+                        <td>标识ID</td>
+                        <td>更多分片MF</td>
+                        <td>不要分片DF</td>
+                        <td>FRAG OFFSET</td>
+                    </tr>
+                    <tr>
+                        <td>原始数据报</td>
+                        <td>20+3800</td>
+                        <td>12345</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>分片1</td>
+                        <td>20+1400</td>
+                        <td>1234</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>分片2</td>
+                        <td>20+1400</td>
+                        <td>1234</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1400/8</td>
+                    </tr>
+                    <tr>
+                        <td>分片3</td>
+                        <td>20+1000</td>
+                        <td>1234</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>2800/8</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd class="dd-diag-item">表3 IP数据报的分片</dd>
         </dl>
-        <div class="img-box">
-            <table>
-                <tr>
-                    <td></td>
-                    <td>总长度TL</td>
-                    <td>标识ID</td>
-                    <td>更多分片MF</td>
-                    <td>不要分片DF</td>
-                    <td>FRAG OFFSET</td>
-                </tr>
-                <tr>
-                    <td>原始数据报</td>
-                    <td>20+3800</td>
-                    <td>12345</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>分片1</td>
-                    <td>20+1400</td>
-                    <td>1234</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>分片2</td>
-                    <td>20+1400</td>
-                    <td>1234</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>1400/8</td>
-                </tr>
-                <tr>
-                    <td>分片3</td>
-                    <td>20+1000</td>
-                    <td>1234</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>2800/8</td>
-                </tr>
-            </table>
-            <div class="sub-title">表2 IP数据报的分片</div>
-        </div>
         <footer>
             <div class="copyright">
                 <span>&copy; All Copyrights Reserved, 2022-2024</span>
@@ -201,6 +180,7 @@
             <span>2022-04-27</span>
         </footer>
     </section>
+    <script src="../js/nav.js"></script>
 </body>
 
 </html>
