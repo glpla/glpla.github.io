@@ -4,6 +4,8 @@
 typedef struct Node
 {
     char data;
+    int w;
+    struct Node *parent;
     struct Node *leftChild;
     struct Node *rightChild;
 } Tree;
@@ -132,64 +134,12 @@ void postOrderStack(Tree *tree)
         }
     }
 }
-void tree1()
+void initTree(Tree *tree, int nodes[], int len)
 {
-    Tree *A = createNode('A');
-    Tree *B = createNode('B');
-    Tree *C = createNode('C');
-    Tree *D = createNode('D');
-    Tree *E = createNode('E');
-    Tree *F = createNode('F');
-    Tree *G = createNode('G');
-    insertNode(A, B, C);
-    insertNode(B, D, NULL);
-    insertNode(C, E, F);
-    insertNode(D, NULL, G);
-    preOrder(A);
-    printf("\n");
-    preOrderStack(A);
-    printf("\n");
-    inOrder(A);
-    printf("\n");
-    inOrderStack(A);
-    printf("\n");
-    postOrder(A);
-    printf("\n");
-    postOrderStack(A);
-    printf("\n");
+    for (int i = 0; i < 2 * len - 1; i++)
+    {
+    }
 }
-void tree2()
-{
-    Tree *A = createNode('A');
-    Tree *B = createNode('B');
-    Tree *C = createNode('C');
-    Tree *D = createNode('D');
-    Tree *E = createNode('E');
-    Tree *F = createNode('F');
-    Tree *G = createNode('G');
-    Tree *H = createNode('H');
-    Tree *I = createNode('I');
-    Tree *J = createNode('J');
-    insertNode(A, B, C);
-    insertNode(B, D, NULL);
-    insertNode(C, NULL, E);
-    insertNode(D, F, G);
-    insertNode(E, H, NULL);
-    insertNode(G, I, J);
-    preOrder(A);
-    printf("\n");
-    preOrderStack(A);
-    printf("\n");
-    inOrder(A);
-    printf("\n");
-    inOrderStack(A);
-    printf("\n");
-    postOrder(A);
-    printf("\n");
-    postOrderStack(A);
-    printf("\n");
-}
-
 int main(void)
 {
     tree1();
