@@ -14,7 +14,7 @@
     <section class="w">
         <nav class="main-nav sticky">
             <ul class="flex-h">
-                <li class="main-nav-item logo">
+                <li class="logo">
                     <h1><a class="img" href="./tree1.html">Tree</a></h1>
                 </li>
                 <li class="main-nav-item"><a href="./tree1.html">树</a></li>
@@ -22,6 +22,7 @@
                 <li class="main-nav-item"><a href="./tree3.html">二叉树的遍历</a></li>
                 <li class="main-nav-item main-nav-active"><a href="./tree4.html">霍夫曼树</a></li>
                 <li class="main-nav-item"><a href="./tree5.html">霍夫曼编码</a></li>
+                <li class="ham-menu" id="menu"><span class="iconfont">&#xe816;</span></li>
             </ul>
         </nav>
         <header>
@@ -46,7 +47,18 @@
             <span>2022-05-15</span>
         </footer>
     </section>
-
+    <script>
+        window.onload = function () {
+            let menu = document.querySelector('#menu')
+            let navs = document.querySelectorAll('.main-nav-item')
+            menu.addEventListener('touchstart', function (e) {
+                this.style.display = 'none'
+                navs.forEach((item) => {
+                    item.style.display = 'block'
+                })
+            })
+        }
+    </script>
 </body>
 
 </html>
