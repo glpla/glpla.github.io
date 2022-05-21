@@ -47,6 +47,70 @@ void destroy(Graph *g)
     }
     free(g->arr);
 }
+// find edge in vertex n
+// where you find the vertex, you find the edge
+int edgeFind(Graph *g, int ind, int vertex)
+{
+    // the validation of n and vertex
+    // by yourself
+
+    ENode *p = g->arr[ind];
+    while (p && p->adjV != vertex)
+    {
+        p = p->nextAdjV;
+    }
+    if (!p)
+    {
+        return -1;
+    }
+    else
+    {
+        return 0;
+    };
+}
+int edgeInsert(Graph *g, int ind, int vertex, int w)
+{
+    // the validation of n and vertex
+    // by yourself
+
+    if (!edgeFind(g, ind, vertex))
+    {
+        return -1;
+    }
+
+    ENode *p = (ENode *)malloc(sizeof(ENode));
+    p->adjV = ind;
+    p->w = w;
+    p->nextAdjV = g->arr[ind];
+    g->arr[ind] = p;
+    g->eSize++;
+    return 0;
+}
+
+int edgeDel(Graph *g, int ind, int vertex)
+{
+    // the validation of n and vertex
+    // by yourself
+    ENode *p, *q;
+    p = g->arr[ind];
+    q = NULL;
+    while (p && p->nextAdjV != vertex)
+    {
+        q = p;
+        p = p->nextAdjV;
+    }
+    if (!p)
+    {
+        return -1;
+    }
+    else
+    {
+        q->nextAdjV = p->nextAdjV;
+        free(p);
+        g->eSize--;
+        return 0;
+    }
+}
 
 int main(void)
 {
