@@ -37,7 +37,7 @@
 
 <body>
     <section class="w">
-        <header>
+        <header id="top">
             <h1>图 Graph</h1>
             <img class="logo" src="../imgs/ds/img1653145185335.png" alt="">
         </header>
@@ -229,6 +229,7 @@
             <dd id="dis" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片23.JPG" alt=""></dd>
             <dd id="app" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片24.JPG" alt=""></dd>
         </dl>
+        <a href="#top" id="back2top"></a>
         <footer>
             <div class="copyright">
                 <span>&copy; All Copyrights Reserved, 2022-2024</span>
@@ -239,8 +240,10 @@
         </footer>
     </section>
     <script src="../js/s2view_cnplaman.js"></script>
+    <script src="../js/back2top_js.js"></script>
     <script>
         window.onload = function () {
+            let back2top = document.querySelector('#back2top')
             let con = document.querySelector('#tocon');
             let sto = document.querySelector('#tosto');
             let alg = document.querySelector('#toalg');
@@ -251,6 +254,8 @@
             s2view(alg, "#alg")
             s2view(dis, "#dis")
             s2view(app, "#app")
+            s2view(back2top, "#top")
+            backToTop(this, back2top)
         }
     </script>
 </body>

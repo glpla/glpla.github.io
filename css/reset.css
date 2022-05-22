@@ -2,6 +2,7 @@
 
 :root {
     --txt-wran-color: #c81623;
+    --w-width: 1000px;
 }
 
 /* unicode icon FROM web：dynamic switch with JS */
@@ -211,7 +212,7 @@ th, td {
     position: relative;
     padding: 0 1rem;
     width: 100vw;
-    max-width: 1000px;
+    max-width: var(--w-width);
     margin: 0 auto;
     background-color: #fff;
 }
@@ -236,6 +237,24 @@ th, td {
     top: 0;
     z-index: -1;
     box-shadow: 1px 0 2rem 1rem rgba(0, 0, 0, .1);
+}
+
+#back2top {
+    position: fixed;
+    width: 45px;
+    height: 46px;
+    background-image: url(../imgs/back2top.png);
+    background-size: cover;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: calc(var(--w-width)/2 + 10px);
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0.2));
+    opacity: 0;
+    pointer-events: none;
+    /* display: none; */
+    transition: all .5s ease-in-out;
+    z-index: 99;
 }
 
 .code {
@@ -366,11 +385,12 @@ section {
 }
 
 header {
+    position: relative;
     height: 6rem;
     line-height: 6rem;
     color: #fff;
     background-image: url(../imgs/xit.jpg);
-    background-position: bottom;
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     margin-bottom: 1rem;
@@ -455,6 +475,12 @@ footer {
 
     .grid2, .grid3, .grid4 {
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    #back2top {
+        right: .5rem;
+        left: unset;
+        margin-left: unset;
     }
 
     .copyright {
