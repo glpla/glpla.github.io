@@ -1,5 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+typedef struct vNode
+{
+    int data;
+    int w;
+    ENode *first;
+} VNode;
+
 typedef struct eNode
 {
     int adjV;
