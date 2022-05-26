@@ -70,16 +70,145 @@
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片30.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片31.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片32.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片33.JPG" alt=""></dd>
+            <dd class="dd-title-item">实操部分</dd>
+            <dt>实验目的</dt>
+            <dd>1. 掌握CC 2530 UART串口寄存器设置；</dd>
+            <dd>2. 掌握UART串口中断函数程序的编程方法；</dd>
+            <dt>实验内容</dt>
+            <dd>在IAR集成开发环境中编写定时器中断程序；通过按键以串行方式发送指定数据；</dd>
+            <dt>预备知识</dt>
+            <dd>1. 串口通信；</dd>
+            <dd>2. 了解C语言的基本知识；</dd>
+            <dd>3. 了解IAR中编写和调试程序的方法；</dd>
+            <dt>实验需求</dt>
+            <dd class="dd-dot-item"><span>安装IAR和相关驱动的个人PC</span><span class="dot"></span><span>1台</span></dd>
+            <dd class="dd-dot-item"><span>mini USB线</span><span class="dot"></span><span>1根</span></dd>
+            <dd class="dd-dot-item"><span>仿真器CC Debugger</span><span class="dot"></span><span>1根</span></dd>
+            <dd class="dd-dot-item"><span>ZigBee通用节点板</span><span class="dot"></span><span>1块</span></dd>
+            <dt>参考源码</dt>
+            <dd class="code">
+                <pre>
+
+#include "ioCC2530.h"
+#include "../lib/delay.h"
+
+char uart_buffer;
+
+//串口从IO接收要发送的数据
+void UartTX_Send_String( unsigned char *Data, int len )
+{
+    for( int j = 0; j < len; j++ )
+    {
+        //USART x收发数据缓冲区寄存器
+        U0DBUF = *Data++;
+        //如果发送完毕
+        while( UTX0IF == 0 );
+        UTX0IF = 0;
+    }
+}
+
+//串口发送寄存器U0DBUF的数据
+void UartTX_Send_Data( unsigned char Data, int len )
+{
+    for( int j = 0; j < len; j++ )
+    {
+        U0DBUF = Data;
+        while( UTX0IF == 0 );
+        UTX0IF = 0;
+    }
+}
+
+//UART 0中断函数
+#pragma vector=URX0_VECTOR
+__interrupt void uart0( void )
+{
+    URX0IF = 0;                 //清中断标志
+    P0_0 = ~P0_0;
+    uart_buffer = U0DBUF;
+    //UartTX_Send_String("welcome",10);
+    UartTX_Send_Data( uart_buffer, 1 );
+}
+
+//[cnplaman：封装]
+void initUART( void )
+{
+    PERCFG = 0x00;              //外设控制寄存器UART0：P0口位置1
+    P0SEL = 0x3c;               //0011 1100：P0_2，P0_3 用作串口(外设功能)
+
+    U0CSR |= 0x80;              //UART方式
+
+    U0GCR |= 10;                //baud_e = 10;
+    U0BAUD |= 216;              //波特率设为57600
+
+    UTX0IF = 1;                 //UART0 TX中断标志初始置1[cnplaman]
+    U0CSR |= 0x40;              //允许接收
+    IEN0 |= 0x84;               //开总中断，允许接收中断
+}
+
+void initIO( void )
+{
+    P0DIR |= 0x01;  //设置P0.0为输出方式[P0.4和P0.5为输入方式???]
+    P2DIR |= 0x01;  //设置P2.0为输出方式
+    P0_0 = 1;
+    P2_0 = 1;
+}
+
+void main( void )
+{
+    unsigned char buf[4];
+
+    initIO();
+
+    CLKCONCMD &= ~0x40;                 //选择32M晶振
+    while( !( SLEEPSTA & 0x40 ) );      //等待XSOC稳定
+    CLKCONCMD = 0xb8;                   //TICHSPD 128分频，CLKSPD 不分频
+    SLEEPCMD |= 0x04;                   //关闭不用的RC 振荡器[cnplaman:not MUST]
+
+    initUART();
+
+    buf[0] = '\t';
+    while( 1 )
+    {
+        P2_0 = ~P2_0;                           //P2_0状态翻转
+        delay( 1500 );
+        if( uart_buffer == 0x01 )               //按照16进制输入[cnplaman]
+        {
+            UartTX_Send_String( "welc", 4 ); //串口接收要发送的数据
+            UartTX_Send_String( &buf[0], 1 );   //串口发送接收的数据
+        }
+    }
+}
+                </pre>
+            </dd>
+            <dt>源码解读</dt>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片34.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片35.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片36.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片37.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片38.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片39.JPG" alt=""></dd>
+            <dt>实验步骤</dt>
+            <dd>1.创建IAR工作空间；</dd>
+            <dd>2.创建基于C的IAR工程；</dd>
+            <dd>3.编辑代码并调试；可参考提供的源码，调试应无差错、无告警；</dd>
+            <dd>4.试验箱上电；使用mini USB分别连接CC Debugger和PC；并将仿真器CC Debugger的另外一端和ZigBee通用节点板上的JTAG插座相连；</dd>
+            <dd>5.按下仿真器CC Debugger的复位按钮RESET，绿灯常亮表示模块连接成功，可以往芯片中烧写程序；每次烧写程序都需要复位，确保仿真器是绿灯状态；</dd>
+            <dd>6.在IAR中点击下载并调试按钮download and debug(CTRL+D)烧写程序；</dd>
+            <dd>7.在IAR的调试窗口中，点击[全速]运行；</dd>
+            <dd>8.用mini USB线连接节点板mini USB和PC机，在PC设备管理器中确认串口端口；</dd>
+            <dd>9.打开PC机上的串口工具，选择对应的串口，波特率为57600bps，8位数据、1位停止、无校验、无流控；</dd>
+            <dd>10.在超级终端上每发送一次十六进制0x1，CC 2530就会将”Welcome”通过串口传到超级终端；</dd>
+            <dd class="warn">开发过程中，请注意CTRL+S保存项目！</dd>
             <dt class="warn">项目提升</dt>
-            <dd>1. 按键发送消息</dd>
-            <dd>2. 控制LED灯</dd>
+            <dd>1.修改波特率</dd>
+            <dd>2.修改控制字符</dd>
+            <dd>3.修改发送内容</dd>
+            <dd>4.修改时钟</dd>
+            <dd>5.按键发送消息</dd>
+            <dd>6.控制LED灯</dd>
+            <dd>7.完善项目</dd>
+            <dd class="dd-title-item">实验报告</dd>
+            <dd>1. 根据实操部分的内容，完成点灯项目；</dd>
+            <dd>2. 以纸质的形式提交实验报告；</dd>
+            <dd>3. 论文格式请参照范文<a class="warn" href="../imgs/ds/format.docx">[点击下载]</a>。</dd>
         </dl>
         <footer>
             <div class="copyright">

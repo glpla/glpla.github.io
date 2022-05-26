@@ -54,11 +54,22 @@
             <dt>预备知识</dt>
             <dd>1. 了解C语言的基本知识；</dd>
             <dd>2. 了解IAR中编写和调试程序的方法；</dd>
-            <dt>设备需求</dt>
-            <dd>硬件：PC机、CC Debugger仿真器、通用调试母板、mini USB线；</dd>
-            <dd>软件：IAR开发环境；以及相应的驱动；</dd>
+            <dt>实验需求</dt>
+            <dd class="dd-dot-item"><span>安装IAR和相关驱动的个人PC</span><span class="dot"></span><span>1台</span></dd>
+            <dd class="dd-dot-item"><span>mini USB线</span><span class="dot"></span><span>1根</span></dd>
+            <dd class="dd-dot-item"><span>仿真器CC Debugger</span><span class="dot"></span><span>1根</span></dd>
+            <dd class="dd-dot-item"><span>ZigBee通用节点板</span><span class="dot"></span><span>1块</span></dd>
             <dt>实验现象</dt>
             <dd>节点板右下角两个绿色LED灯循环闪烁</dd>
+            <dt>实验步骤</dt>
+            <dd>1.创建IAR工作空间；</dd>
+            <dd>2.创建基于C的IAR工程；</dd>
+            <dd>3.编辑代码并调试；可参考提供的源码，调试应无差错、无告警；</dd>
+            <dd>4.试验箱上电；使用mini USB分别连接CC Debugger和PC；并将仿真器CC Debugger的另外一端和ZigBee通用节点板上的JTAG插座相连；</dd>
+            <dd>5.按下仿真器CC Debugger的复位按钮RESET，绿灯常亮表示模块连接成功，可以往芯片中烧写程序；每次烧写程序都需要复位，确保仿真器是绿灯状态；</dd>
+            <dd>6.在IAR中点击下载并调试按钮download and debug(CTRL+D)烧写程序；</dd>
+            <dd>7.在IAR的调试窗口中，点击[全速]运行：观察LED的亮、灭变化；</dd>
+            <dd class="warn">开发过程中，请注意CTRL+S保存项目！</dd>
             <dt>参考源码</dt>
             <dd class="code">
                 <pre>
