@@ -1,38 +1,19 @@
 #include <stdio.h>
-typedef struct
+#include <string.h>
+// typedef char **HTable;
+void code(char **hc, int n)
 {
-    int vertex[20];
-    int edge[20][20];
-    int vertexNum;
-    int edgeNum;
-} Graph;
-
-typedef struct vNode
-{
-    int data;
-    int *first;
-} VNode;
-
-typedef struct eNode
-{
-    int adjVertex;
-    int w;
-    struct eNode *next;
-} ENode;
-typedef struct
-{
-    VNode vertex[20];
-    int vertexNum;
-    int edgeNums;
-} Graph;
-
+    char *hcode[n + 1];
+    hc = hcode;
+    int start = 5;
+    char res[n - start];
+    hc[0] = res;
+    strcpy(hc[0], "hillo");
+}
 int main(void)
 {
-    char *str = "1234";
-    for (int i = 0; i < 4; i++)
-    {
-        printf("%c\n", *str++);
-    }
-
+    char **hc;
+    code(&hc, 10);
+    printf("%s\n", *hc[0]);
     return 0;
 }

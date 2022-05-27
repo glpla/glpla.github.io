@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>huffman tree</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/ds.css">
+    <style>
+        header {
+            background-image: url(../imgs/ds/tree.jpg);
+        }
+    </style>
+</head>
+
+<body>
+    <section class="w">
+        <header class="flex-v">
+            <h1>霍夫曼树的构建</h1>
+        </header>
+        <dl>
+            <dt>一、实验目的</dt>
+            <dd>掌握霍夫曼树的构造；</dd>
+            <dt>二、实验要求</dt>
+            <dd>1. 编写程序构造霍夫曼树</dd>
+            <dd>2. 分别以表格的形式构造"霍夫曼树"一节中的实例，验证霍夫曼树的正确性；</dd>
+            <dt>三、实验过程与结果</dt>
+            <dd>1. 编写程序构造霍夫曼树；</dd>
+            <dd>2. 采用节点{2，4，5，3}验证霍夫曼树；</dd>
+            <dd class="dd-img-item"><img src="../imgs/ds/tree/huffman.jpg" alt=""></dd>
+            <dd class="dd-diag-item">图1 编码结果</dd>
+            <dd>3. 采用节点{2，3，6，7}验证霍夫曼树；</dd>
+            <dd>请补充实验结果；</dd>
+            <dt>四、实验分析</dt>
+            <dd>写出实验的具体流程和实验的结果，相应的地方需要截图说明。</span></dd>
+            <dd>程序调试运行中出现的错误信息原因分析。</dd>
+            <dt>五、心得体会</dt>
+            <dd>不少于200字。</dd>
+            <dt>六、示例</dt>
+            <dd class="code">
+                <pre>
+
+    #include &lt;stdio.h&gt;
+    #include &lt;stdlib.h&gt;
+    
+    typedef struct Node
+    {
+        int w;
+        int left;
+        int right;
+        int parent;
+    } Node, HTree;
+    
+    void sel(HTree ht[], int curInd, int *min1, int *min2)
+    {
+        *min1 = *min2 = 0;
+        for (int i = 1; i < curInd; i++)
+        {
+            // ignore those nodes with parents
+            if (ht[i].parent != 0)
+            {
+                continue;
+            }
+            // init min1 and min2
+            if (*min1 == 0)
+            {
+                *min1 = *min2 = i;
+            }
+            else
+            {
+                if (ht[i].w <= ht[*min1].w)
+                {
+                    *min2 = *min1;
+                    *min1 = i;
+                }
+                else if (ht[i].w < ht[*min2].w)
+                {
+                    *min2 = i;
+                }
+                else if (ht[i].w > ht[*min2].w)
+                {
+                    if (*min1 == *min2)
+                    {
+                        *min2 = i;
+                    }
+                }
+            }
+        }
+    }
+    void display(HTree ht[], int n)
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            printf("i=%d\tw=%d\tparent=%d\tleft=%d\tright=%d\t\n", i, ht[i].w, ht[i].parent, ht[i].left, ht[i].right);
+        }
+    }
+    
+    void main(void)
+    {
+        // int arr[] = {2, 3, 6, 7};
+        // int n = 8;
+        int arr[] = {2, 4, 5, 3};
+        int n = 4;
+        int size = 2 * n - 1;
+        int i;
+        // start from 1
+        HTree ht[size + 1];
+    
+        // init
+        for (i = 1; i <= size; ++i)
+        {
+            ht[i].parent = 0;
+            ht[i].left = 0;
+            ht[i].right = 0;
+        }
+        for (i = 1; i <= n; i++)
+        {
+            ht[i].w = arr[i - 1];
+        }
+        // display
+        display(ht, size);
+    
+        // create
+        for (i = n + 1; i <= size; ++i)
+        {
+            int min1, min2;
+            sel(ht, i, &min1, &min2);
+            ht[i].w = ht[min1].w + ht[min2].w;
+            ht[i].left = min1;
+            ht[i].right = min2;
+            ht[min1].parent = ht[min2].parent = i;
+        }
+        // display
+        display(ht, size);
+    }
+                        
+                </pre>
+            </dd>
+            <dd class="dd-title-item">实验报告</dd>
+            <dd>1. 根据实操内容，完成实验报告；</dd>
+            <dd>2. 以纸质的形式提交实验报告；</dd>
+            <dd>3. 论文格式请参照范文<a class="warn" href="../imgs/ds/format.docx">[点击下载]</a>。</dd>
+        </dl>
+        <footer>
+            <div class="copyright">
+                <span>&copy; All Copyrights Reserved, 2022-2024</span>
+                <img src="../imgs/avatar.jpg" alt="">
+                <span>Cnplaman from No 54414, PLA</span>
+            </div>
+            <span>2022-06-01</span>
+        </footer>
+    </section>
+</body>
+
+</html>
