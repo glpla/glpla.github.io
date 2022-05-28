@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>运输层之TCP</title>
     <link rel="stylesheet" href="../css/reset.css">
+    <style>
+        .dd-title-item {
+            background-color: #25aef3;
+            border-radius: 6px;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,11 +21,70 @@
             <h1>传输控制协议 TCP</h1>
         </header>
         <dl>
-            <dt>三次握手</dt>
-            <dt>三次挥手</dt>
+            <dt>TCP特点</dt>
+            <dd>1.面向连接</dd>
+            <dd>2.点对点</dd>
+            <dd>3.全双工通信</dd>
+            <dd>4.可靠交付</dd>
+            <dd>5.面向字节流</dd>
+            <dd>更多信息，请参考<a class="warn" href="https://www.rfc-editor.org/rfc/rfc793" target="_blank">RFC 793</a></dd>
+            <dt>TCP报文</dt>
+            <dd>序号：32bit；TCP报文数据部分第一个字节的序号；增加到最大值后，重新回到0；</dd>
+            <dd>确认号：32bit；对待发TCP报文数据部分的第一个字节序号的确认；增加到最大值后，重新回到0；控制字段ACK为1时才有效；如果确认号为n，则表示序号n-1之前的数据已经收到，现在希望接收序号为n的数据；
+            </dd>
+            <dd>数据偏移：4bit，以4B为单位；指的是TCP报文首部的长度；首部固定长度是20字节，所以该字段最小值为0101；相应的，最大值为1111，对应首部最大的长度为60字节；</dd>
+            <dd>窗口：16bit，指定数据发送方的发送能力，同时也表示了自己的接收能力；这种根据接收方的接收能力来控制发送方的发送能力，称为流量控制；</dd>
+            <dd class="dd-img-item"><img src="../imgs/network/tcp/幻灯片4.JPG" alt=""></dd>
+            <dd class="dd-diag-item">表1 TCP报文格式</dd>
+            <dd class="dd-img-item"><img src="../imgs/network/tcp/幻灯片5.jpg" alt=""></dd>
+            <dd class="dd-diag-item">表2 端口应用</dd>
+            <dd class="dd-img-item"><img src="../imgs/network/tcp/幻灯片6.jpg" alt=""></dd>
+            <dd class="dd-diag-item">表3 序号和确认号应用</dd>
+            <dt><span class="warn">[案例分析]</span></dt>
+            <dd>1.主机A收到主机B发过来的TCP报文，序号为501，数据长度为200B，则主机A给主机B的响应报文中，序号为[701]。</dd>
+            <dd>2.已知发送窗口大小为500，某主机收到的确认号为201。如果已经发送了300B的数据，则还可以发送[400B]的数据。</dd>
+            <dt class="dd-title-item">可靠传输</dt>
+            <dd>可靠的本质是确认和超时重传；</dd>
+            <dd>以滑动窗口机制做保障；窗口大小以字节为单位；</dd>
+            <dd class="dd-img-item"><img src="../imgs/network/tcp/幻灯片7.jpg" alt=""></dd>
+            <dd class="dd-diag-item">表4 可靠传输</dd>
+            <dt class="dd-title-item">流量控制</dt>
+            <dd>Follow control，接收方控制发送方的发送窗口大小，让发送方不要发太快，以便接收方能来得及接收；</dd>
+            <dd>利用滑动窗口机制实现；</dd>
+            <dd>发送方可以多次发送；直到把发送窗口已满；</dd>
+            <dd>接收方可以累计确认；</dd>
+            <dd class="dd-img-item"><img src="../imgs/network/tcp/幻灯片8.jpg" alt=""></dd>
+            <dd class="dd-diag-item">表5 流量控制</dd>
+            <dd><span
+                    class="warn">[注意]</span>为避免0窗口导致双方无限等待下去，TCP为每个连接都创建了一个持续计时器。只要某一方收到0窗口，就启动计时器。计时到，就主动发送一个窗口探测报文，以便恢复正常数据通信；
+            </dd>
+            <dt class="dd-title-item">拥塞控制</dt>
+            <dd>慢开始slow start </dd>
+            <dd>拥塞避免congestion avoidance </dd>
+            <dd>快重传fast retransmit </dd>
+            <dd>快恢复fast recovery</dd>
             <dd class="dd-iframe-item">
                 <iframe class="iframe"
-                    src="//player.bilibili.com/player.html?aid=456279499&bvid=BV1C5411Y7dG&cid=211590381&page=1"
+                    src="//player.bilibili.com/player.html?aid=254238570&bvid=BV1GY41157Ze&cid=514094366&page=1"
+                    scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+            </dd>
+            <dd class="dd-diag-item">视频解读：拥塞控制</dd>
+            <dt class="dd-title-item">连接管理</dt>
+            <dd>1.连接建立-三次握手</dd>
+            <dd>2.数据通信</dd>
+            <dd>3.连接释放-四次挥手</dd>
+            <dt>三次握手</dt>
+            <dd class="dd-img-item"><img src="../imgs/network/tcp/幻灯片9.JPG" alt=""></dd>
+            <dd class="dd-diag-item">表7 三次握手</dd>
+            <dd class="dd-img-item"><img src="../imgs/network/tcp/幻灯片10.jpg" alt=""></dd>
+            <dd class="dd-diag-item">表8 四次挥手</dd>
+            <dd>关键点：</dd>
+            <dd>1.发送方没有数据要发送，发送释放连接请求；接收方确认后，可以继续发送自己还未发送完的数据；当前连接是半连接状态：发送方到接收方的连接是关闭的；</dd>
+            <dd>2.接收方发完数据了，也向发送方发送释放连接请求；等链路上所有的数据报都达到目标主机后，连接被彻底释放；</dd>
+            <dd class="dd-diag-item">视频解读：三次挥手 vs 四次挥手</dd>
+            <dd class="dd-iframe-item">
+                <iframe class="iframe"
+                    src="//player.bilibili.com/player.html?aid=287197696&bvid=BV1ef4y1D7eB&cid=237998565&page=3"
                     scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
             </dd>
         </dl>
@@ -29,7 +94,7 @@
                 <img src="../imgs/avatar.jpg" alt="">
                 <span>Cnplaman from No 54414, PLA</span>
             </div>
-            <span>2022-05-17</span>
+            <span>2022-05-28</span>
         </footer>
     </section>
 </body>
