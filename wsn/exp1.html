@@ -189,17 +189,25 @@ void delay(void)   //延时时间约400ms
             <dd class="code">
                 <pre>
 
+    #ifndef _config_h
+    #define _config_h
+
     #define BV(n) (1<<(n))
     #define LED1 P0_0
     #define LED2 P2_0
     #define ON 0
     #define OFF 1
+
+    #endif
                 </pre>
             </dd>
             <dt>头文件delay.h[注意文件路径]</dt>
             <dd class="code">
                 <pre>
 
+    #ifndef _delay_h
+    #define _delay_h
+    
     void delay( unsigned int duration )
     {
         unsigned int i, j;
@@ -207,12 +215,17 @@ void delay(void)   //延时时间约400ms
         {
             for( j = 0; j < 200; j++ );
         }
-    }                    
+    }
+    
+    #endif
                 </pre>
             </dd>
             <dt>头文件led.h[注意文件路径]</dt>
             <dd class="code">
                 <pre>
+
+    #ifndef _led_h
+    #define _led_h
 
     void initLED( void )
     {
@@ -235,6 +248,8 @@ void delay(void)   //延时时间约400ms
             delay( 2000 );
         }
     }
+
+    #endif
                 </pre>
             </dd>
         </dl>
