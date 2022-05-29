@@ -26,12 +26,12 @@ void init(Graph *g, int size)
     int i;
     g->vSize = size;
     g->eSize = 0;
-    g->arr = (ENode *)malloc(g->eSize * sizeof(ENode));
+    g->arr = (ENode **)malloc(g->vSize * sizeof(ENode *));
     if (g->arr)
     {
         for (i = 0; i < g->vSize; i++)
         {
-            g->arr[i]->nextAdjV = NULL;
+            g->arr[i] = NULL;
         }
     }
 }
@@ -86,7 +86,7 @@ int edgeInsert(Graph *g, int ind, int vertex, int w)
     }
 
     ENode *p = (ENode *)malloc(sizeof(ENode));
-    p->adjV = ind;
+    p->adjV = vertex;
     p->w = w;
     p->nextAdjV = g->arr[ind];
     g->arr[ind] = p;
@@ -107,16 +107,14 @@ int edgeDel(Graph *g, int ind, int vertex)
         p = p->nextAdjV;
     }
     if (!p)
-    {
         return -1;
-    }
-    else
-    {
+    if (q)
         q->nextAdjV = p->nextAdjV;
-        free(p);
-        g->eSize--;
-        return 0;
-    }
+    else
+        g->arr[ind] = p->nextAdjV;
+    free(p);
+    g->eSize--;
+    return 0;
 }
 
 int main(void)

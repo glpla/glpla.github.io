@@ -95,9 +95,9 @@
 
     typedef struct eNode
     {
-        int adjV;
-        int w;
-        struct eNode *nextAdjV;
+        int adjV;               //邻接顶点
+        int w;                  //权值
+        struct eNode *nextAdjV; //下一个边节点
     } ENode;
                 </pre>
             </dd>
@@ -107,14 +107,14 @@
 
     typedef struct
     {
-        int vSize;
-        int eSize;
-        ENode **arr;
+        int vSize;      //图的顶点的个数
+        int eSize;      //图的边的个数
+        ENode **arr;    //指向一维顶点数组的指针
     } Graph;
                 </pre>
             </dd>
             <dt>图的初始化</dt>
-            <dd>根据顶点数创建一维数组，并把每个元素的边节点指向设为空；</dd>
+            <dd>根据顶点数vSize创建一维数组，并把每个元素的边节点指向设为空；</dd>
             <dd class="code">
                 <pre>
 
@@ -123,12 +123,12 @@
         int i;
         g->vSize = size;
         g->eSize = 0;
-        g->arr = (ENode *)malloc(g->eSize * sizeof(ENode));
+        g->arr = (ENode **)malloc(g->vSize * sizeof(ENode *));
         if (g->arr)
         {
             for (i = 0; i < g->vSize; i++)
             {
-                g->arr[i]->nextAdjV = NULL;
+                g->arr[i] = NULL;
             }
         }
     }
@@ -201,7 +201,7 @@
             return -1;
         }
         ENode *p = (ENode *)malloc(sizeof(ENode));
-        p->adjV = ind;
+        p->adjV = vertex;
         p->w = w;
         p->nextAdjV = g->arr[ind];
         g->arr[ind] = p;
@@ -229,21 +229,21 @@
             p = p->nextAdjV;
         }
         if (!p)
-        {
             return -1;
-        }
-        else
-        {
+        if (q)
             q->nextAdjV = p->nextAdjV;
-            free(p);
-            g->eSize--;
-            return 0;
-        }
+        else
+            g->arr[ind] = p->nextAdjV;
+        free(p);
+        g->eSize--;
+        return 0;
     }
                 </pre>
             </dd>
             <dd id="dis" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片31.JPG" alt=""></dd>
-            <dd id="app" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片32.JPG" alt=""></dd>
+            <dd id="dis" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片32.JPG" alt=""></dd>
+            <dd id="dis" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片33.JPG" alt=""></dd>
+            <dd id="app" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片34.JPG" alt=""></dd>
         </dl>
         <a href="#top" id="back2top"></a>
         <footer>
@@ -252,7 +252,7 @@
                 <img src="../imgs/avatar.jpg" alt="">
                 <span>Cnplaman from No 54414, PLA</span>
             </div>
-            <span>2022-05-25</span>
+            <span>2022-05-30</span>
         </footer>
     </section>
     <script src="../js/s2view_cnplaman.js"></script>
