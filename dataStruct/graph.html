@@ -243,7 +243,45 @@
             <dd id="dis" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片31.JPG" alt=""></dd>
             <dd id="dis" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片32.JPG" alt=""></dd>
             <dd id="dis" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片33.JPG" alt=""></dd>
-            <dd id="app" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片34.JPG" alt=""></dd>
+            <dt>DFS参考代码</dt>
+            <dd class="code">
+                <pre>
+
+    void DFS(int vertex, int visted[], Graph *g)
+    {
+        ENode *w;
+        printf("%d ", vertex);
+        visted[vertex] = 1;
+        for (w = g->arr[vertex]; w; w = w->nextAdjV)
+        {
+            if (!visted[w->adjV])
+            {
+                DFS(w->adjV, visted, g);
+            }
+        }
+    }
+    void DFSGraph(Graph *g)
+    {
+        int i;
+        int *visted = (int *)malloc(g->vSize * sizeof(int));
+        for (i = 0; i < g->vSize; i++)
+        {
+            visted[i] = 0;
+            // printf("i=%d\n", i);
+        }
+        for (i = 0; i < g->vSize; i++)
+        {
+            if (!visted[i])
+            {
+                DFS(i, visted, g);
+            }
+        }
+        free(visted);
+    }
+                </pre>
+            </dd>
+
+            <!-- <dd id="app" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片34.JPG" alt=""></dd> -->
         </dl>
         <a href="#top" id="back2top"></a>
         <footer>
