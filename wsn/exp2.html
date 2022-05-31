@@ -8,6 +8,11 @@
     <title>UART</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/wsn exp.css">
+    <style>
+        table tr td:last-child {
+            text-align: left;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,27 +37,50 @@
         <header>
             <h1>UART</h1>
         </header>
-        <div class="iframe-box">
+        <!-- <div class="iframe-box">
             <iframe class="iframe"
                 src="//player.bilibili.com/player.html?aid=810203505&bvid=BV1y34y147s5&cid=563336945&page=1"
                 scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-        </div>
+        </div> -->
         <dl>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片1.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片2.JPG" alt=""></dd>
+            <dt class="dd-title-item">预备知识</dt>
+            <dt>含义 </dt>
+            <dd>Universal Asynchronous Receiver/Transmitter </dd>
+            <dd>通用异步收发器，是一种通用的[串行]、[异步]通信总线 </dd>
+            <dd>实现[全双工]的发送和接收 </dd>
+            <dd>广泛应用于嵌入式系统中主机和外设之间的通信</dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片3.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片4.JPG" alt=""></dd>
+            <dt>特点 </dt>
+            <dd>信号线少：分时使用同一传输通道，最少用一对线即可[收发]；全双工通信 </dd>
+            <dd>实现较容易：允许双方使用各自的时钟信号，且时钟频率可以有一定误差 </dd>
+            <dd>效率较低：每个字符都要独立确定起始位和结束位； </dd>
+            <dd>起始位为低电平；结束位为高电平；数据线空闲时默认是高电平 </dd>
+            <dd>串口异步：不需要同步时钟信号 </dd>
+            <dd>串口同步：需要同步时钟信号</dd>
+            <dt>要求</dt>
+            <dd>接收方对于同一根线上一连串的数字信号，首先要分割成位，再按位组成字符 </dd>
+            <dd>为了恢复发送的信息，双方必须协调工作[使用时钟] </dd>
+            <dd>逐位发送，消除累计误差</dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片5.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片6.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片7.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片8.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片9.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片10.JPG" alt=""></dd>
+            <dt>常见串口通信协议 </dt>
+            <dd>JTAG </dd>
+            <dd> UART </dd>
+            <dd> Morse Code </dd>
+            <dd> SPI </dd>
+            <dd>MIDI </dd>
+            <dd>USB </dd>
+            <dd>RS232</dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片11.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片12.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片13.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片14.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片15.JPG" alt=""></dd>
+            <dt>几点考虑 </dt>
+            <dd>根据通信速率确定采用的接口标准，如通信距离、通信速率 </dd>
+            <dd>确定通信的波特率：通信双方一定要一致 </dd>
+            <dd>确定通信协议：是否需要校验</dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片16.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片17.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片18.JPG" alt=""></dd>
@@ -63,13 +91,346 @@
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片23.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片24.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片25.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片26.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片27.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片28.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片29.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片30.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片31.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片32.JPG" alt=""></dd>
+            <dt>UxCSR串口控制状态寄存器</dt>
+            <dd>
+                <table>
+                    <tr>
+                        <td>位号</td>
+                        <td>位名</td>
+                        <td>复位值</td>
+                        <td>操作性</td>
+                        <td>说明</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>MODE</td>
+                        <td>0</td>
+                        <td>R</td>
+                        <td>串口模式选择：0 SPI；1 UART</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>RE</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>接收使能：0 关闭；1 允许接收</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>SLAVE</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>SPI主从选择：0 SPI主；1 SPI从</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>FE</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>串口帧错误状态：0 没有错误；1 出现错误</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>ERR</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>串口校验结果：0 没有校验错误；1 字节校验出错</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>RX_BYTE</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>接收状态：0 没有收到数据；1 收到1字节数据</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>TX_BYTE</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>发送状态：0 没有发送；1 最后一次写入U0BUF的数据已经发</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>ACTIVE</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>串口忙标记：0 闲；1 忙</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd>[设置示例]使用串口0并准备接收</dd>
+            <dd>方法1</dd>
+            <dd>U0CSR |= 0x80;//打开串口 </dd>
+            <dd>U0CSR |= 0x40;//接收</dd>
+            <dd>方法2</dd>
+            <dd>U0CSR |= (1&lt;&lt;7);</dd>
+            <dd>U0CSR |= (1&lt;&lt;6);</dd>
+            <dd>方法3</dd>
+            <dd>U0CSR |= (0x80 | 0x40);</dd>
+            <dd>方法4</dd>
+            <dd>U0CSR |= (0x3&lt;&lt;6);</dd>
+            <dd>方法5</dd>
+            <dd>U0CSR |= 0xC0;</dd>
+            <dt>UxGCR通用控制寄存器</dt>
+            <dd>
+                <table>
+                    <tr>
+                        <td>位号</td>
+                        <td>位名</td>
+                        <td>复位值</td>
+                        <td>操作性</td>
+                        <td>说明</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>CPOL </td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>SPI 时钟极性：0：低电平空闲；1：高电平空闲 </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>CPHA </td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>SPI 时钟相位<br>
+                            0：由 CPOL 跳向非 CPOL 时采样，由非 CPOL跳向 CPOL 时输出<br>
+                            1：由非 CPOL 跳向 CPOL 时采样，由 CPOL跳向非 CPOL 时输出
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>ORDER</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>传输位序：0：低位在先；1： 高位在先</td>
+                    </tr>
+                    <tr>
+                        <td>4-0</td>
+                        <td>BAUD_E[4:0] </td>
+                        <td>0x00 </td>
+                        <td>R/W</td>
+                        <td>波特率指数值，BAUD_M 决定波特率</td>
+                    </tr>
+                </table>
+            </dd>
+            <dt>UxBAUD波特率控制寄存器</dt>
+            <dd>
+                <table>
+                    <tr>
+                        <td>位号</td>
+                        <td>位名</td>
+                        <td>复位值</td>
+                        <td>操作性</td>
+                        <td>说明</td>
+                    </tr>
+                    <tr>
+                        <td>7-0</td>
+                        <td>BAUD_M[7:0]</td>
+                        <td>0x00</td>
+                        <td>R/W</td>
+                        <td>波特率尾数，与 BAUD_E 决定波特率</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd><span class="warn">注意</span>：设置波特率，需要同时操作UxGCR和UxBAUD；</dd>
+            <dd>[设置示例]波特率设为57600</dd>
+            <dd>U0GCR |= 10 </dd>
+            <dd>U0BAUD |= 216</dd>
+            <dd>[设置示例]波特率设为115200 </dd>
+            <dd> U0GCR |= 11 </dd>
+            <dd>U0BAUD |= 216</dd>
+            <dt>CLKCONCMD时钟控制命令寄存器</dt>
+            <dd>
+                <table>
+                    <tr>
+                        <td>位号</td>
+                        <td>位名</td>
+                        <td>复位值</td>
+                        <td>操作性</td>
+                        <td>说明</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>OSC32K </td>
+                        <td>1</td>
+                        <td>R/W</td>
+                        <td>32Khz时钟源选择：<br>
+                            0 32Khz的晶体振荡器； <br>
+                            1 32Khz的RC振荡器 </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>OSC </td>
+                        <td>1</td>
+                        <td>R/W</td>
+                        <td>系统主时钟源选择：<br>
+                            0 32Mhz的晶体振荡器；<br>
+                            1 16Mhz的RC振荡器</td>
+                    </tr>
+                    <tr>
+                        <td>5-3</td>
+                        <td>TICKSPD[2:0]
+                        </td>
+                        <td>001</td>
+                        <td>R/W</td>
+                        <td>计数时钟：不能超过系统时钟<br>
+                            000 32Mhz； 100 2Mhz <br>
+                            001 16Mhz； 101 1Mhz <br>
+                            010 8Mhz； 110 500Khz <br>
+                            011 4Mhz； 111 250Khz</td>
+                    </tr>
+                    <tr>
+                        <td>2-0</td>
+                        <td>CLKSPD</td>
+                        <td>001</td>
+                        <td>R/W</td>
+                        <td>时钟速度：不能超过系统时钟；取值同TICKSPD</td>
+                    </tr>
+                </table>
+            </dd>
+            <dt>SLEEPSTA睡眠模式控制状态寄存器</dt>
+            <dd>
+                <table>
+                    <tr>
+                        <td>位号</td>
+                        <td>位名</td>
+                        <td>复位值</td>
+                        <td>操作性</td>
+                        <td>说明</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>OSC32K_CALDIS </td>
+                        <td>0</td>
+                        <td>R</td>
+                        <td>32Khz RC振荡器校准状态 </td>
+                    </tr>
+                    <tr>
+                        <td>6:5 </td>
+                        <td>- </td>
+                        <td>00</td>
+                        <td>R</td>
+                        <td>保留</td>
+                    </tr>
+                    <tr>
+                        <td>4-3</td>
+                        <td>RST[1:0] </td>
+                        <td>XX</td>
+                        <td>R</td>
+                        <td>状态位，表示上一次复位的原因；只保留最新的复位事件 <br>
+                            00 上电复位和掉电探测；01 外部复位 <br>
+                            10 看门狗定时器复位；11 时钟丢失复位</td>
+                    </tr>
+                    <tr>
+                        <td>2-1</td>
+                        <td>-</td>
+                        <td>00</td>
+                        <td>R</td>
+                        <td>保留</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>CLK32K</td>
+                        <td>0</td>
+                        <td>R</td>
+                        <td>32Khz时钟信号（与系统时钟同步） </td>
+                    </tr>
+                </table>
+            </dd>
+            <dd><span class="warn">注意</span>：时钟切换必须等待稳定；</dd>
+            <dd>[设置示例]选择32Mhz</dd>
+            <dd>CLKCONCMD &= ~0x40; //或CLKCONCMD &= ~(1&lt;&lt;6)</dd>
+            <dd>while(!(SLEEPSTA & 0x40)); //等待 XSOC稳定 </dd>
+            <dd>CLKCONCMD = 0xb8; //1 0 111 000;TICHSPD[128分频]，CLKSPD[不分频]</dd>
+            <dt>UxDBUF收发缓冲寄存器</dt>
+            <dd>
+                <table>
+                    <tr>
+                        <td>位号</td>
+                        <td>位名</td>
+                        <td>复位值</td>
+                        <td>操作性</td>
+                        <td>说明</td>
+                    </tr>
+                    <tr>
+                        <td>7-0</td>
+                        <td>DATA[7:0]</td>
+                        <td>0x00</td>
+                        <td>R/W</td>
+                        <td>UARTx收发缓存寄存器</td>
+                    </tr>
+                </table>
+            </dd>
+            <dt>IENx中断使能寄存器</dt>
+            <dd>
+                <table>
+                    <tr>
+                        <td>位号</td>
+                        <td>位名</td>
+                        <td>复位值</td>
+                        <td>操作性</td>
+                        <td>说明</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>EA</td>
+                        <td>0</td>
+                        <td>R</td>
+                        <td>中断系统使能控制，即：总中断；0 禁止所有中断；1 允许所有中断</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>-</td>
+                        <td>0</td>
+                        <td>R</td>
+                        <td>保留</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>STIE</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>睡眠定时器中断使能：0 中断禁止；1 中断使能</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>ENCIE</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>AES加密/解密中断使能：0 中断禁止；1 中断使能</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>URX1IE</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>USART1接收中断使能：0 中断禁止；1 中断使能</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>URX0IE</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>USART0接收中断使能：0 中断禁止；1 中断使能</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>ADCIE</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>ADC中断使能：0 中断禁止；1 中断使能</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>RFERRIE</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>RF收发中断使能：0 中断禁止；1 中断使能</td>
+                    </tr>
+                </table>
+            </dd>
             <dd class="dd-title-item">实操部分</dd>
             <dt>实验目的</dt>
             <dd>1. 掌握CC 2530 UART串口寄存器设置；</dd>
@@ -182,10 +543,11 @@ void main( void )
                 </pre>
             </dd>
             <dt>源码解读</dt>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片34.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片35.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片36.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片37.JPG" alt=""></dd>
+            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片38.JPG" alt=""></dd>
+            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片39.JPG" alt=""></dd>
+            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片40.JPG" alt=""></dd>
             <dt>实验步骤</dt>
             <dd>1.创建IAR工作空间；</dd>
             <dd>2.创建基于C的IAR工程；</dd>
