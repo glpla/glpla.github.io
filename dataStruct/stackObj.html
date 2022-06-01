@@ -13,57 +13,60 @@
     <section class="w">
         <h1>Stack With Object</h1>
         <p>对象是键值对的集合，如{ unit: "xit" }，其中unit是key，xit是value</p>
-        <pre class="code">
+        <div class="code">
+            <pre>
     class Stack {
-      constructor() {
-        this.count = 0
-        this.items = {}
-      }
-      push(el) {
-        // 以count为key
-        this.items[this.count] = el
-        this.count++
-      }
-      pop() {
-        if (!this.count) {
-          return undefined
+        constructor() {
+            this.count = 0
+            this.items = {}
         }
-        this.count--
-        let res = this.items[this.count]
-        delete this.items[this.count]
-        return res
-      }
-      peek() {
-        if (!this.count) {
-          return undefined
+        push(el) {
+            // 以count为key
+            this.items[this.count] = el
+            this.count++
         }
-        return this.items[this.count - 1]
-      }
-      isEmpty() {
-        return this.count == 0
-      }
-      size() {
-        return this.count
-      }
-      toString() {
-        if (!this.count) {
-          return ''
+        pop() {
+            if (!this.count) {
+            return undefined
+            }
+            this.count--
+            let res = this.items[this.count]
+            delete this.items[this.count]
+            return res
         }
-        // let str = `${this.items[0]}`;
-        // for (let i = 1; i < this.count; i++) {
-        //   str = `${str},${this.items[i]}`;
-        // }
-        let str = this.items[0]
-        for (let index = 1; index < this.count; index++) {
-          str += ',' + this.items[index]
+        peek() {
+            if (!this.count) {
+            return undefined
+            }
+            return this.items[this.count - 1]
         }
-        return str;
-      }
-      clear() {
-        this.items = {}
-        this.count = 0
-      }
-    }    </pre>
+        isEmpty() {
+            return this.count == 0
+        }
+        size() {
+            return this.count
+        }
+        toString() {
+            if (!this.count) {
+            return ''
+            }
+            // let str = `${this.items[0]}`;
+            // for (let i = 1; i < this.count; i++) {
+            //   str = `${str},${this.items[i]}`;
+            // }
+            let str = this.items[0]
+            for (let index = 1; index < this.count; index++) {
+            str += ',' + this.items[index]
+            }
+            return str;
+        }
+        clear() {
+            this.items = {}
+            this.count = 0
+        }
+        }
+            </pre>
+        </div>
         <small>Copyright Reserved &copy; By Cnplaman 2022-03-02</small>
     </section>
     <script>

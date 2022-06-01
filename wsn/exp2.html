@@ -44,28 +44,50 @@
         </div> -->
         <dl>
             <dt class="dd-title-item">预备知识</dt>
-            <dt>含义 </dt>
-            <dd>Universal Asynchronous Receiver/Transmitter </dd>
-            <dd>通用异步收发器，是一种通用的[串行]、[异步]通信总线 </dd>
-            <dd>实现[全双工]的发送和接收 </dd>
-            <dd>广泛应用于嵌入式系统中主机和外设之间的通信</dd>
+            <dt>含义</dt>
+            <dd>Universal Asynchronous Receiver/Transmitter；</dd>
+            <dd>通用异步收发器，是一种通用的[串行]、[异步]通信总线；</dd>
+            <dd>实现[全双工]的发送和接收； </dd>
+            <dd>广泛应用于嵌入式系统中主机和外设之间的通信；</dd>
+            <dt>通信模式 </dt>
+            <dd>并行通信：一次传输多个bit； </dd>
+            <dd>串行通信：是将传输数据的每个字符一位接一位(例如先低位、后高位)地传送</dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片3.JPG" alt=""></dd>
             <dt>特点 </dt>
-            <dd>信号线少：分时使用同一传输通道，最少用一对线即可[收发]；全双工通信 </dd>
-            <dd>实现较容易：允许双方使用各自的时钟信号，且时钟频率可以有一定误差 </dd>
+            <dd>信号线少：分时使用同一传输通道，最少用一对线即可[收发]；全双工通信； </dd>
+            <dd>实现较容易：允许双方使用各自的时钟信号，且时钟频率可以有一定误差； </dd>
             <dd>效率较低：每个字符都要独立确定起始位和结束位； </dd>
-            <dd>起始位为低电平；结束位为高电平；数据线空闲时默认是高电平 </dd>
-            <dd>串口异步：不需要同步时钟信号 </dd>
-            <dd>串口同步：需要同步时钟信号</dd>
+            <dd>起始位为低电平；结束位为高电平；数据线空闲时默认是高电平； </dd>
+            <dd>串口异步：不需要同步时钟信号； </dd>
+            <dd>串口同步：需要同步时钟信号；</dd>
             <dt>要求</dt>
-            <dd>接收方对于同一根线上一连串的数字信号，首先要分割成位，再按位组成字符 </dd>
-            <dd>为了恢复发送的信息，双方必须协调工作[使用时钟] </dd>
-            <dd>逐位发送，消除累计误差</dd>
+            <dd>接收方对于同一根线上一连串的数字信号，首先要分割成位，再按位组成字符； </dd>
+            <dd>为了恢复发送的信息，双方必须协调工作[使用时钟]； </dd>
+            <dd>逐位发送，消除累计误差；</dd>
+            <dt>帧格式 Frame </dt>
+            <dd>起始位 start bit </dd>
+            <dd>数据位 data bit：可以是5bit、6bit、7bit、8bit </dd>
+            <dd>可选的奇偶校验位 optional parity bit </dd>
+            <dd>终止位 stop bit </dd>
+            <dd>[帧格式由专门的寄存器实现]</dd>
+            <dt>波特率 Baud </dt>
+            <dd>串口通信的速率，单位是每秒传输符号的个数 </dd>
+            <dd>用来正确区分/截断字符 </dd>
+            <dd>双方提前约定；不能随便指定，而应从规定的数字当中选择-programmable baud rates </dd>
+            <dd> 常用波特率：1200、2400、4800、9600、19200、38400、57600、115200 </dd>
+            <dd>由专门的寄存器通过设置不同的分频实现波特率的选择</dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片5.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片6.JPG" alt=""></dd>
+            <dt>奇偶校验 parity check </dt>
+            <dd>通过增加冗余位使得代码中”1”的个数恒为奇数或偶数的编码方法，以确定代码传输的正确性，是一种检错码，不能纠错；现在网络环境比较好，一般不需要校验 </dd>
+            <dd>若1的个数是奇数，称为奇校验odd parity ；反之，称为偶校验even parity 需专门设置一个奇偶校验位；采用何种校验应事先约定好</dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片7.JPG" alt=""></dd>
+            <dt>通信过程</dt>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片8.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片9.JPG" alt=""></dd>
+            <dt>中断通信方式 </dt>
+            <dd>1.轮询模式 Polling mode：CPU不断查询接收队列，直到发现有数据存在； </dd>
+            <dd>2.中断模式 Interrupt mode：当接收到数据时，串口控制器以中断的方式通知CPU； </dd>
+            <dd>3.直接存储访问模式 DMA：不需要CPU参与，直接把数据送到内存中；多适合于频繁大量的数据交互； </dd>
+            <dd>由专门的寄存器负责[以收发快递为例]</dd>
             <dt>常见串口通信协议 </dt>
             <dd>JTAG </dd>
             <dd> UART </dd>
@@ -81,14 +103,53 @@
             <dd>根据通信速率确定采用的接口标准，如通信距离、通信速率 </dd>
             <dd>确定通信的波特率：通信双方一定要一致 </dd>
             <dd>确定通信协议：是否需要校验</dd>
+            <dt>信息传输方式 </dt>
+            <dd>
+                <table>
+                    <tr>
+                        <td>单工通信</td>
+                        <td>半双工通信</td>
+                        <td>全双工通信</td>
+                    </tr>
+                    <tr>
+                        <td>单向通信 </td>
+                        <td>双向通信，但是不能同时通信 </td>
+                        <td>双向同时通信 </td>
+                    </tr>
+                    <tr>
+                        <td>一根线 </td>
+                        <td>二根线 </td>
+                        <td>二根线</td>
+                    </tr>
+                </table>
+            </dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片16.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片17.JPG" alt=""></dd>
+            <dt>中断interrupt </dt>
+            <dd>程序运行时，如果系统内部、系统外部或现行程序出现了需要特殊处理的”事件”，CPU立即终止当前程序的运行-中断，然后从一个新的存储器区域启动相应的程序来处理”事件”；处理完后，回到原来的程序继续运行；
+            </dd>
+            <dd>将不同的”事件”和相应的处理程序在内存中的地址对应起来，就构成中断向量表； </dd>
+            <dd>通常将存储器最低的1KB作为中断向量表区，即地址范围是：0x00000-0x003FF，假设是20根地址线；则最大寻址空间是1MB； </dd>
+            <dd>每个中断向量占4个字节，最大只能存储256个中断向量；</dd>
+            <dt>中断向量表interrupt vector table </dt>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片18.JPG" alt=""></dd>
+            <dt>中断向量interrupt vector </dt>
+            <dd>以中断类型码或中断类型号区分；按大小顺序存放分：系统专用中断、保留中断、用户自定义中断 </dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片19.JPG" alt=""></dd>
+            <dt>中断寄存器 </dt>
+            <dd>以段+偏移的形式指定中断处理程序入口地址</dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片20.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片21.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片22.JPG" alt=""></dd>
+            <dt>中断处理过程 </dt>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片23.JPG" alt=""></dd>
+            <dt>中断实例</dt>
+            <dd>[实例1]若中断类型码为20H，则中断向量存放的地址是多少？如果对应的4个字节内容分别是10H、20H、30H、40H，则中断处理程序的入口地址是多少？</dd>
+            <dd>[解]： </dd>
+            <dd>中断向量从小到大存放，每个占4个字节，所以20H的中断类型码的地址为0000:0080H </dd>
+            <dd>对应的基地址CS和偏移地址IP分别是：2010H和4030H，中断处理程序的地址为4030:2010H</dd>
+            <dd>[实例2] 若中断类型码为17H，则中断向量存放的地址是多少？ 如果对应中断处理程序的入口地址是2340H:7890H，则中断向量各个字节的内容是多少？ </dd>
+            <dd>[解]</dd>
+            <dd>中断向量从小到大存放，每个占4个字节，所以17H的中断类型码的地址为0000:005CH开始的4个字节 </dd>
+            <dd> 对应的基地址CS和偏移地址IP分别对应中断处理程序地址的高地址和低地址</dd>
+            <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片21.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片24.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片25.JPG" alt=""></dd>
             <dt>UxCSR串口控制状态寄存器</dt>
