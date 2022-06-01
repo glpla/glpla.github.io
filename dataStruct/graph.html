@@ -55,8 +55,11 @@
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片7.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片8.JPG" alt=""></dd>
             <dd id="sto" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片9.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片10.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片11.JPG" alt=""></dd>
+            <dt>数据和关系</dt>
+            <dd>不仅要存储顶点本身的信息；还有存储和顶点关联的所有边的信息，包括权 </dd>
+            <dt>分类</dt>
+            <dd>邻接矩阵存储adjacent matrix：采用邻接矩阵数组表示顶点之间相邻关系的存储结构 </dd>
+            <dd>邻接表存储adjacent list：利用顺序和链式结合的方式的存储</dd>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片12.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片13.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片14.JPG" alt=""></dd>
@@ -66,222 +69,223 @@
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片18.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片19.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片20.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片21.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片22.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片23.JPG" alt=""></dd>
+            <dt>邻接矩阵特点 </dt>
+            <dd>图G的邻接矩阵表示是唯一的； </dd>
+            <dd>存储空间复杂度为o(n2)，适合存储边较多的图； </dd>
+            <dd>无向图G的邻接矩阵A是一个对称矩阵；</dd>
+            <dt>邻接表仓储</dt>
+            <dd>顺序和链式结合的方式的存储； </dd>
+            <dd>为图G的每个顶点创建一个单链表；链表的每个节点是关联于顶点的所有边[出边]；使用[一维]数组存放每个单链表的第一个边节点[头节点]的地址[挂帘子]；</dd>
+            <dd>不唯一</dd>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片24.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片25.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片26.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片27.JPG" alt=""></dd>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片28.JPG" alt=""></dd>
-            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片29.JPG" alt=""></dd>
             <dd id="alg" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片30.JPG" alt=""></dd>
-            <dt>顶点数据结构</dt>
-            <dd>[可以不用特别设计]</dd>
-            <dd class="code">
-                <pre>
-
-    typedef struct vNode
-    {
-        int data;
-        int w;
-        ENode *first;
-    } VNode;
-                </pre>
-            </dd>
-            <dt>边节点数据结构</dt>
-            <dd class="code">
-                <pre>
-
-    typedef struct eNode
-    {
-        int adjV;               //邻接顶点
-        int w;                  //权值
-        struct eNode *nextAdjV; //下一个边节点
-    } ENode;
-                </pre>
-            </dd>
-            <dt>图数据结构</dt>
+            <dt>邻接矩阵</dt>
             <dd class="code">
                 <pre>
 
     typedef struct
     {
-        int vSize;      //图的顶点的个数
-        int eSize;      //图的边的个数
-        ENode **arr;    //指向一维顶点数组的指针
-    } Graph;
+        int no;        //顶点编号
+        InfoType info; //顶点其他信息
+    } VertexType;      //顶点类型
+
+    typedef struct
+    {
+        int edges[MAXV][MAXV]; //邻接矩阵数组
+        int n, e;              //顶点数，边数
+        VertexType vexs[MAXV]; //存放顶点信息
+    } MatGraph;                //完整的图邻接矩阵类型
+
+    void CreateMat(MatGraph g, int A[MAXV][MAXV], int n, int e)
+    {
+        int i, j;
+        g.n = n;
+        g.e = e;
+        for (i = 0; i < g.n; i++)
+            for (j = 0; j < g.n; j++)
+                g.edges[i][j] = A[i][j];
+    }
+
+    void DispMat(MatGraph g)
+    {
+        int i, j;
+        for (i = 0; i < g.n; i++)
+        {
+            for (j = 0; j < g.n; j++)
+                if (g.edges[i][j] != INF)
+                    printf("%4d", g.edges[i][j]);
+                else
+                    printf("%4s", "∞");
+            printf("\n");
+        }
+    } 
+
                 </pre>
             </dd>
-            <dt>图的初始化</dt>
-            <dd>根据顶点数vSize创建一维数组，并把每个元素的边节点指向设为空；</dd>
+            <dt>邻接表</dt>
             <dd class="code">
                 <pre>
 
-    void init(Graph *g, int size)
+    typedef struct ANode
+    {
+        int adjvex;            //该边的邻接点编号
+        int weight;            //该边的相关信息，如权值（用整型表示）
+        struct ANode *nextarc; //指向下一条边的指针
+    } ArcNode;       
+              //边结点类型
+    typedef struct Vnode
+    {
+        InfoType info;     //顶点其他信息
+        int count;         //存放顶点入度,仅仅用于拓扑排序
+        ArcNode *firstarc; //指向第一条边
+    } VNode;               //邻接表头结点类型
+    typedef struct
+
+    {
+        VNode adjlist[MAXV]; //邻接表头结点数组
+        int n, e;            //图中顶点数n和边数e
+    } AdjGraph;              //完整的图邻接表类型
+
+    AdjGraph *CreateAdj(AdjGraph *G, int A[MAXV][MAXV], int n, int e)
+    {
+        int i, j;
+        ArcNode *p;
+        G = (AdjGraph *)malloc(sizeof(AdjGraph));
+        printf("%p\n", G);
+        for (i = 0; i < n; i++)
+            G->adjlist[i].firstarc = NULL;
+        for (i = 0; i < n; i++)
+            for (j = n - 1; j >= 0; j--)
+                if (A[i][j] != 0 && A[i][j] != INF)
+                {
+                    //创建一个结点p
+                    p = (ArcNode *)malloc(sizeof(ArcNode));
+                    p->adjvex = j;
+                    p->weight = A[i][j];
+                    //采用头插法插入结点p
+                    p->nextarc = G->adjlist[i].firstarc;
+                    G->adjlist[i].firstarc = p;
+                }
+        G->n = n;
+        G->e = n;
+        return G;
+    }
+
+    void DispAdj(AdjGraph *G)
     {
         int i;
-        g->vSize = size;
-        g->eSize = 0;
-        g->arr = (ENode **)malloc(g->vSize * sizeof(ENode *));
-        if (g->arr)
+        ArcNode *p;
+        for (i = 0; i < G->n; i++)
         {
-            for (i = 0; i < g->vSize; i++)
+            p = G->adjlist[i].firstarc;
+            printf("%3d: ", i);
+            while (p != NULL)
             {
-                g->arr[i] = NULL;
+                printf("%3d[%d]→", p->adjvex, p->weight);
+                p = p->nextarc;
             }
+            printf("∧\n");
         }
     }
-                </pre>
-            </dd>
-            <dt>图的销毁</dt>
-            <dd>销毁一维数组；</dd>
-            <dd>销毁所有边节点；</dd>
-            <dd class="code">
-                <pre>
-
-    void destroy(Graph *g)
+    void DestroyAdj(AdjGraph *G)
     {
         int i;
-        ENode *p, *q;
-        for (i = 0; i < g->vSize; i++)
+        ArcNode *pre, *p;
+        for (i = 0; i < G->n; i++)
         {
-            p = g->arr[i];
-            q = p;
-            while (q)
+            // p指向第i个单链表的首结点
+            pre = G->adjlist[i].firstarc;
+            if (pre != NULL)
             {
-                p = p->nextAdjV;
-                free(q);
-                q = p;
+                p = pre->nextarc;
+                //释放第i个单链表的所有边结点
+                while (p != NULL)
+                {
+                    free(pre);
+                    pre = p;
+                    p = p->nextarc;
+                }
+                free(pre);
             }
         }
-        free(g->arr);
-    }
-                </pre>
-            </dd>
-            <dt>在某个顶点vertex中查找边edge</dt>
-            <dd>实际上查找的是和顶点邻接的顶点；找到顶点了，就找到边了；</dd>
-            <dd>请自行补充参数的有效性验证；</dd>
-            <dd class="code">
-                <pre>
-
-    int edgeFind(Graph *g, int ind, int vertex)
-    {
-        // the validation of ind and vertex
-        // by yourself
-    
-        ENode *p = g->arr[ind];
-        while (p && p->adjV != vertex)
-        {
-            p = p->nextAdjV;
-        }
-        if (!p)
-        {
-            return -1;
-        }
-        else
-        {
-            return 0;
-        };
-    }
-                           </pre>
-            </dd>
-            <dt>在某个顶点vertex中插入边edge</dt>
-            <dd>请自行补充参数的有效性验证；</dd>
-            <dd class="code">
-                <pre>
-
-    int edgeInsert(Graph *g, int ind, int vertex, int w)
-    {
-        // the validation of n and vertex
-        // by yourself
-    
-        if (!edgeFind(g, ind, vertex))
-        {
-            return -1;
-        }
-        ENode *p = (ENode *)malloc(sizeof(ENode));
-        p->adjV = vertex;
-        p->w = w;
-        p->nextAdjV = g->arr[ind];
-        g->arr[ind] = p;
-        g->eSize++;
-        return 0;
-    }
-                </pre>
-            </dd>
-            <dt>删除某个顶点vertex中的边edge</dt>
-            <dd>[思考]为什么不重用查找边的函数？</dd>
-            <dd>请自行补充参数的有效性验证；</dd>
-            <dd class="code">
-                <pre>
-
-    int edgeDel(Graph *g, int ind, int vertex)
-    {
-        // the validation of n and vertex
-        // by yourself
-        ENode *p, *q;
-        p = g->arr[ind];
-        q = NULL;
-        while (p && p->nextAdjV != vertex)
-        {
-            q = p;
-            p = p->nextAdjV;
-        }
-        if (!p)
-            return -1;
-        if (q)
-            q->nextAdjV = p->nextAdjV;
-        else
-            g->arr[ind] = p->nextAdjV;
-        free(p);
-        g->eSize--;
-        return 0;
+        free(G);
     }
                 </pre>
             </dd>
             <dd id="dis" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片31.JPG" alt=""></dd>
             <dd id="dis" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片32.JPG" alt=""></dd>
             <dd id="dis" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片33.JPG" alt=""></dd>
-            <dt>DFS参考代码</dt>
+            <dt>说明</dt>
+            <dd>不管是DFS还是BFS，都需要指定第一个访问的顶点；</dd>
+            <dd>DFS一查到底；</dd>
+            <dt>邻接表的DFS参考代码</dt>
             <dd class="code">
                 <pre>
 
-    void DFS(int vertex, int visted[], Graph *g)
+    void DFS(AdjGraph *G, int v)
     {
-        ENode *w;
-        printf("%d ", vertex);
-        visted[vertex] = 1;
-        for (w = g->arr[vertex]; w; w = w->nextAdjV)
+        ArcNode *p;
+        visited[v] = 1;             //置已访问标记
+        printf("%d  ", v);          //输出被访问顶点的编号
+        p = G->adjlist[v].firstarc; // p指向顶点v的第一条弧的弧头结点
+        while (p != NULL)
         {
-            if (!visted[w->adjV])
-            {
-                DFS(w->adjV, visted, g);
-            }
+            if (visited[p->adjvex] == 0) //若p->adjvex顶点未访问,递归访问它
+                DFS(G, p->adjvex);
+            p = p->nextarc; // p指向顶点v的下一条弧的弧头结点
         }
-    }
-    void DFSGraph(Graph *g)
-    {
-        int i;
-        int *visted = (int *)malloc(g->vSize * sizeof(int));
-        for (i = 0; i < g->vSize; i++)
-        {
-            visted[i] = 0;
-            // printf("i=%d\n", i);
-        }
-        for (i = 0; i < g->vSize; i++)
-        {
-            if (!visted[i])
-            {
-                DFS(i, visted, g);
-            }
-        }
-        free(visted);
     }
                 </pre>
             </dd>
+            <dt class="dd-title-item">完整DFS项目</dt>
+            <dt class="warn"><a href="../dataStruct/graph/graph.rar">点击下载完整项目graph.rar</a></dt>
+            <dd class="code">
+                <pre>
 
-            <!-- <dd id="app" class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片34.JPG" alt=""></dd> -->
+    #include "graph.c"
+    int visited[MAXV] = {0};
+    void DFS(AdjGraph *G, int v)
+    {
+        ArcNode *p;
+        visited[v] = 1;             //置已访问标记
+        printf("%d  ", v);          //输出被访问顶点的编号
+        p = G->adjlist[v].firstarc; // p指向顶点v的第一条弧的弧头结点
+        while (p != NULL)
+        {
+            if (visited[p->adjvex] == 0) //若p->adjvex顶点未访问,递归访问它
+                DFS(G, p->adjvex);
+            p = p->nextarc; // p指向顶点v的下一条弧的弧头结点
+        }
+    }
+    int main()
+    {
+        AdjGraph *G;
+        int A[MAXV][MAXV] = {{0, 1, 0, 1, 1}, {1, 0, 1, 1, 0}, {0, 1, 0, 1, 1}, {1, 1, 1, 0, 1}, {1, 0, 1, 1, 0}};
+        int n = 5, e = 8;
+        G = CreateAdj(G, A, n, e); // 8.1(a)的邻接表
+        printf("%p\n", G);
+        printf("图G的邻接表:\n");
+        DispAdj(G); //输出邻接表G
+        printf("深度优先序列(递归):");
+        DFS(G, 2);
+        printf("\n");
+        DestroyAdj(G); //销毁邻接表
+        return 0;
+    }
+                </pre>
+            </dd>
+            <dt>执行结果</dt>
+            <dd> 图G的邻接表: </dd>
+            <dd>0: 1[1]→ 3[1]→ 4[1]→∧ </dd>
+            <dd>1: 0[1]→ 2[1]→ 3[1]→∧ </dd>
+            <dd>2: 1[1]→ 3[1]→ 4[1]→∧ </dd>
+            <dd>3: 0[1]→ 1[1]→ 2[1]→ 4[1]→∧ </dd>
+            <dd>4: 0[1]→ 2[1]→ 3[1]→∧ </dd>
+            <dd>深度优先序列(递归):2 1 0 3 4</dd>
         </dl>
         <a href="#top" id="back2top"></a>
         <footer>
@@ -290,7 +294,7 @@
                 <img src="../imgs/avatar.jpg" alt="">
                 <span>Cnplaman from No 54414, PLA</span>
             </div>
-            <span>2022-05-30</span>
+            <span>2022-06-01</span>
         </footer>
     </section>
     <script src="../js/s2view_cnplaman.js"></script>
