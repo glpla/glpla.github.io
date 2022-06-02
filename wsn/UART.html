@@ -7,39 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UART</title>
     <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/wsn exp.css">
+    <link rel="stylesheet" href="../css/ds.css">
+    <style>
+        header {
+            background-image: url(../imgs/wsn/wsn1.jpg);
+            margin-bottom: 0;
+        }
+
+        nav {
+            background-color: #9f103a;
+            color: #fff;
+            line-height: 40px;
+        }
+    </style>
 </head>
 
 <body>
     <section class="w">
-        <nav class="main-nav sticky">
-            <ul class="flex-h">
-                <li class="logo">
-                    <h1><a href="./exp1.html">WSN <span>实验</span></a></h1>
-                </li>
-                <li class="ham-menu" id="menu"><span class="iconfont">&#xe816;</span></li>
-                <li class="main-nav-item"><a href="./exp1.html">点灯</a></li>
-                <li class="main-nav-item main-nav-active"><a href="./exp2.html">串口通信</a></li>
-                <li class="main-nav-item"><a href="./exp3.html">蜂鸣器</a></li>
-                <li class="main-nav-item"><a href="./exp4.html">数码管</a></li>
-                <li class="main-nav-item"><a href="./exp5.html">温湿度</a></li>
-                <li class="main-nav-item"><a href="./exp6.html">压力</a></li>
-                <li class="main-nav-item"><a href="./exp7.html">光照</a></li>
-                <li class="main-nav-item"><a href="./exp8.html">人体感应</a></li>
-                <li class="main-nav-item"><a href="./exp9.html">超声波</a></li>
-            </ul>
-        </nav>
-        <header>
+        <header id="top">
             <h1>UART</h1>
         </header>
-        <!-- <div class="iframe-box">
-            <iframe class="iframe"
-                src="//player.bilibili.com/player.html?aid=810203505&bvid=BV1y34y147s5&cid=563336945&page=1"
-                scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-        </div> -->
+        <nav>
+            <ul class="flex-h">
+                <li><a href="#cont0" id="tocont0">串口通信</a></li>
+                <li><a href="#cont1" id="tocont1">寄存器</a></li>
+                <li><a href="#cont2" id="tocont2">实操</a></li>
+            </ul>
+        </nav>
         <dl>
-            <dt class="dd-title-item">预备知识</dt>
-            <dt>通信模式 </dt>
+            <dt id="cont0">通信模式</dt>
+            <dd>CPU与外设之间的通信模式；</dd>
             <dd>并行通信：一次传输多个比特； </dd>
             <dd>串行通信：是将传输数据的每个字符一位接一位(例如先低位、后高位)地传送；</dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片3.JPG" alt=""></dd>
@@ -88,8 +85,9 @@
             <dd>效率较低：每个字符都要独立确定起始位和结束位； </dd>
             <dd>起始位为低电平；结束位为高电平；数据线空闲时默认是高电平； </dd>
             <dt>[2]异步通信</dt>
-            <dd>异步：不需要同步时钟信号； </dd>
-            <dd>同步：需要同步时钟信号；</dd>
+            <dd>同步：所有设备使用同一个时钟信号；以数据块为单位传送数据，包括同步字符、数据块和校验字符。同步字符位于数据块的开头，用于确认数据字符的开始；接收时，接收设备连续不断地对传输线采样，并把接收到的字符与双方约定的同步字符进行比较，只有比较成功后才会把后面接收到的字符加以存储；同步通信的优点是数据传输速率高，缺点是要求发送时钟和接收时钟保持严格同步。对硬件结构要求较高；
+            </dd>
+            <dd>异步：每个设备使用自己的时钟信号；以字符为单位进行数据传送，每一个字符均按照固定的格式传送，又被称为帧，即异步串行通信一次传送一个帧；</dd>
             <dt>[3]全双工通信</dt>
             <dd>
                 <table>
@@ -206,7 +204,14 @@
             <dd>确定通信的波特率：通信双方一定要一致；</dd>
             <dd>确定通信协议：是否需要校验；</dd>
             <dd class="dd-img-item"><img src="../imgs/wsn/WSN exp2/幻灯片24.JPG" alt=""></dd>
-            <dt>UxCSR 控制状态寄存器</dt>
+            <dt id="cont1" class="dd-title-item">寄存器 </dt>
+            <dt>CC2530的USART串口通信，涉及到的寄存器有：</dt>
+            <dd>UxCSR：USARTx控制和状态寄存器 </dd>
+            <dd>UxUCR：USARTx UART控制寄存器 </dd>
+            <dd>UxGCR：USARTx 通用控制寄存器 </dd>
+            <dd>UxBAUD：USARTx 波特率控制寄存器</dd>
+            <dd>UxBUF：USARTx 接收/发送数据缓冲寄存器 </dd>
+            <dt>[1]UxCSR 控制状态寄存器</dt>
             <dd>
                 <table>
                     <tr>
@@ -276,10 +281,10 @@
             </dd>
             <dd>接收数据时，U0CSR |= 0X40，允许接收；</dd>
             <dd>发送数据时，U0CSR &= 0X40，禁止接收；</dd>
-            <dd>[设置示例]使用串口0并准备接收</dd>
+            <dd>[配置示例]使用串口0并准备接收</dd>
             <dd>方法1</dd>
-            <dd>U0CSR |= 0x80;//打开串口 </dd>
-            <dd>U0CSR |= 0x40;//接收</dd>
+            <dd>U0CSR |= 0x80;//1000 0000；打开串口 </dd>
+            <dd>U0CSR |= 0x40;//0000 0100；接收</dd>
             <dd>方法2</dd>
             <dd>U0CSR |= (1&lt;&lt;7);</dd>
             <dd>U0CSR |= (1&lt;&lt;6);</dd>
@@ -289,9 +294,9 @@
             <dd>U0CSR |= (0x3&lt;&lt;6);</dd>
             <dd>方法5</dd>
             <dd>U0CSR |= 0xC0;</dd>
-            <dt>UxUCR UART控制寄存器</dt>
+            <dt>[2]UxUCR UART控制寄存器</dt>
             <dd>通常无需设置该寄存器，采用默认值即可；</dd>
-            <dd>U0UCR |= 0x80；//无流控、8位数据位；清空缓冲区</dd>
+            <dd>U0UCR |= 0x80；//1000 0000；无流控、8位数据位；清空缓冲区</dd>
             <dd>
                 <table>
                     <tr>
@@ -359,7 +364,7 @@
                     </tr>
                 </table>
             </dd>
-            <dt>UxGCR 通用控制寄存器</dt>
+            <dt>[3]UxGCR 通用控制寄存器</dt>
             <dd>
                 <table>
                     <tr>
@@ -402,7 +407,7 @@
                     </tr>
                 </table>
             </dd>
-            <dt>UxBAUD 波特率控制寄存器</dt>
+            <dt>[4]UxBAUD 波特率控制寄存器</dt>
             <dd>
                 <table>
                     <tr>
@@ -422,12 +427,82 @@
                 </table>
             </dd>
             <dd><span class="warn">注意</span>：设置波特率，需要同时操作UxGCR和UxBAUD；</dd>
-            <dd>[设置示例]波特率设为57600</dd>
+            <dd>[配置示例]波特率设为57600</dd>
             <dd>U0GCR |= 10 </dd>
             <dd>U0BAUD |= 216</dd>
-            <dd>[设置示例]波特率设为115200 </dd>
+            <dd>[配置示例]波特率设为115200 </dd>
             <dd> U0GCR |= 11 </dd>
             <dd>U0BAUD |= 216</dd>
+            <dt>[5]UxDBUF 收发缓冲寄存器</dt>
+            <dd>通过UxDBUF来发送和接收数据</dd>
+            <dd>
+                <table>
+                    <tr>
+                        <td>位号</td>
+                        <td>位名</td>
+                        <td>复位值</td>
+                        <td>操作性</td>
+                        <td>说明</td>
+                    </tr>
+                    <tr>
+                        <td>7-0</td>
+                        <td>DATA[7:0]</td>
+                        <td>0x00</td>
+                        <td>R/W</td>
+                        <td>UARTx收发缓存寄存器</td>
+                    </tr>
+                </table>
+            </dd>
+            <dt>PERCFG 外设配置寄存器</dt>
+            <dd>两个USART接口具有相同的功能，通过PERCFG寄存器可以设置两个USART接口对应外部I/O引脚的映射关系；0为默认位置1,1为默认位置2；</dd>
+            <dd>
+                <table>
+                    <tr>
+                        <td>位号</td>
+                        <td>位名</td>
+                        <td>复位值</td>
+                        <td>操作性</td>
+                        <td>说明</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>U1CFG</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>UART1的映射位置：0-&gt;alt 1；1-&gt;alt 2</td>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>U0CFG</td>
+                        <td>0</td>
+                        <td>R/W</td>
+                        <td>UART0的映射位置：0-&gt;alt 1；1-&gt;alt 2</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd>位置映射</dd>
+            <dd>
+                <table>
+                    <tr>
+                        <td colspan="2">UART0</td>
+                        <td colspan="2">UART1</td>
+                    </tr>
+                    <tr>
+                        <td>alt 1</td>
+                        <td>TX：P0_3 RX：P0_2</td>
+                        <td>alt 1</td>
+                        <td>TX：P0_5 RX：P0_4</td>
+                    </tr>
+                    <tr>
+                        <td>alt 2</td>
+                        <td>TX：P1_5 RX：P1_4</td>
+                        <td>alt 2</td>
+                        <td>TX：P1_6 RX：P1_7</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd>[配置实例]PERCFG = 0x00;//使用UART0的备用位置1(即P0_2,P0_3)</dd>
+            <dd>[配置实例]PERCFG |= 1;//使用UART0的备用位置2(即P1_4,P1_5)</dd>
             <dt>CLKCONCMD 时钟控制命令寄存器</dt>
             <dd>
                 <table>
@@ -527,30 +602,10 @@
                 </table>
             </dd>
             <dd><span class="warn">注意</span>：时钟切换必须等待稳定；</dd>
-            <dd>[设置示例]选择32Mhz</dd>
+            <dd>[配置示例]选择32Mhz</dd>
             <dd>CLKCONCMD &= ~0x40; //或CLKCONCMD &= ~(1&lt;&lt;6)</dd>
             <dd>while(!(SLEEPSTA & 0x40)); //等待 XSOC稳定 </dd>
             <dd>CLKCONCMD = 0xb8; //1 0 111 000;TICHSPD[128分频]，CLKSPD[不分频]</dd>
-            <dt>UxDBUF 收发缓冲寄存器</dt>
-            <dd>通过UxDBUF来发送和接收数据</dd>
-            <dd>
-                <table>
-                    <tr>
-                        <td>位号</td>
-                        <td>位名</td>
-                        <td>复位值</td>
-                        <td>操作性</td>
-                        <td>说明</td>
-                    </tr>
-                    <tr>
-                        <td>7-0</td>
-                        <td>DATA[7:0]</td>
-                        <td>0x00</td>
-                        <td>R/W</td>
-                        <td>UARTx收发缓存寄存器</td>
-                    </tr>
-                </table>
-            </dd>
             <dt>IENx 中断使能寄存器</dt>
             <dd>
                 <table>
@@ -624,7 +679,7 @@
             <dd>URX0IF来判断是否接受完成，为1则接收成功；</dd>
             <dd>更多中断请点击访问 <a href="./interrupt.html" target="_blank" class="warn">Interrupt <span
                         class="iconfont">&#xf007;</span></a></dd>
-            <dd class="dd-title-item">实操部分</dd>
+            <dd id="cont2" class="dd-title-item">实操部分</dd>
             <dt>实验目的</dt>
             <dd>1. 掌握CC 2530 UART串口寄存器设置；</dd>
             <dd>2. 掌握UART串口中断函数程序的编程方法；</dd>
@@ -687,8 +742,8 @@ __interrupt void uart0( void )
 //[cnplaman：封装]
 void initUART( void )
 {
-    PERCFG = 0x00;              //外设控制寄存器UART0：P0口位置1
-    P0SEL = 0x3c;               //0011 1100：P0_2，P0_3 用作串口(外设功能)
+    PERCFG = 0x00;              //外设控制寄存器，选择哪个外设功能；这里使用串口0[UART0]位置1：RX0 -- P0_2；TX0 -- P0_3  
+    P0SEL = 0x3c;               //0011 1100：P0_2，P0_3，P0_4，P_5用作串口[外设功能]；0为IO；1为外设；
 
     U0CSR |= 0x80;              //1000 0000；UART方式
 
@@ -763,16 +818,31 @@ void main( void )
             <dd>2. 以纸质的形式提交实验报告；</dd>
             <dd>3. 论文格式请参照范文<a class="warn" href="../imgs/ds/format.docx">[点击下载]</a>。</dd>
         </dl>
+        <a href="#top" id="back2top"></a>
         <footer>
             <div class="copyright">
                 <span>&copy; All Copyrights Reserved, 2022-2024</span>
                 <img src="../imgs/avatar.jpg" alt="">
                 <span>Cnplaman from No 54414, PLA</span>
             </div>
-            <span>2022-05-16</span>
+            <span>2022-06-02</span>
         </footer>
     </section>
-    <script src="../js/nav.js"></script>
+    <script src="../js/s2view_cnplaman.js"></script>
+    <script src="../js/back2top_js.js"></script>
+    <script>
+        window.onload = function () {
+            let back2top = document.querySelector('#back2top')
+            let cont0 = document.querySelector('#tocont0');
+            let cont1 = document.querySelector('#tocont1');
+            let cont2 = document.querySelector('#tocont2');
+            s2view(cont0, "#cont0")
+            s2view(cont1, "#cont1")
+            s2view(cont2, "#cont2")
+            s2view(back2top, "#top")
+            backToTop(this, back2top)
+        }
+    </script>
 </body>
 
 </html>
