@@ -1,6 +1,6 @@
 function backToTop(win, el) {
     win.addEventListener('scroll', function () {
-        if (win.pageYOffset > 2 * win.innerHeight) {
+        if (win.pageYOffset > win.innerHeight) {
             el.style.opacity = 1;
             el.style.pointerEvents = 'all';
         } else {
