@@ -98,6 +98,8 @@
             <dd>.存储空间复杂度为o(n2)，适合存储边较多的图；</dd>
             <dd>.无向图G的邻接矩阵A是一个对称矩阵；</dd>
             <dd>.注意图的方向性；</dd>
+            <dd>.对无向图，第i行（i列）非零/非∞的个数是顶点i的度；</dd>
+            <dd>.对有向图，第i行（i列）非零/非∞的个数是顶点i的出度（入度）；</dd>
             <dt>邻接矩阵数据结构</dt>
             <dd class="code">
                 <pre>
@@ -107,6 +109,7 @@
         int no;        //顶点编号
         InfoType info; //顶点其他信息
     } VertexType;      //顶点类型
+
     typedef struct
     {
         int edges[MAXV][MAXV]; //邻接矩阵数组
@@ -139,12 +142,14 @@
         int weight;            //该边的相关信息，如权值（用整型表示）
         struct ANode *nextarc; //指向下一条边的指针
     } ArcNode;                 //边结点类型
+
     typedef struct Vnode
     {
         InfoType info;     //顶点其他信息
         int count;         //存放顶点入度,仅仅用于拓扑排序
         ArcNode *firstarc; //指向第一条边
     } VNode;               //邻接表头结点类型
+
     typedef struct
     {
         VNode adjlist[MAXV]; //邻接表头结点数组
