@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图 Graph</title>
+    <link href="https://fonts.googlefonts.cn/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/linux.css">
+</head>
+
+<body class="container">
+    <header id="top" class="w">
+        <div>Welcome</div>
+        <div>2022-06-05</div>
+    </header>
+    <nav class="top-nav">
+        <ul class="w top-nav-wrap">
+            <li class="logo"><a href="./index.html" class="logo-icon">图的存储</span><span class="reg">&reg;</span></a>
+            </li>
+            <li class="top-nav-ham" id="ham-menu"><span class="iconfont">&#xe816;</li>
+            <li class="top-nav-item"><a href="#cont0" class="top-nav-link"><span>概述</span><span
+                        class="top-sub-menu">overview</span></a></li>
+            <li class="top-nav-item"><a href="#cont1" class="top-nav-link"><span>邻接矩阵</span><span
+                        class="top-sub-menu">Matrix</span></a></li>
+            <li class="top-nav-item"><a href="#cont2" class="top-nav-link"><span>邻接表</span><span
+                        class="top-sub-menu">List</span></a></li>
+            <li class="top-nav-item"><a href="#cont3" class="top-nav-link"><span>小结</span><span
+                        class="top-sub-menu">Summary</span></a></li>
+            <li class="top-nav-item"><a href="#cont4" class="top-nav-link"><span>作业</span><span
+                        class="top-sub-menu">Homework</span></a></li>
+        </ul>
+    </nav>
+    <div class="w cont">
+        <dl>
+            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片10.JPG" alt=""></dd>
+            <dt id="cont0">概述 Overview</dt>
+            <dt>数据和关系</dt>
+            <dd class="dd-item">不仅要存储顶点本身的信息；还有存储和顶点关联的所有顶点的信息，包括对应边的权weigh[如果图带权]；</dd>
+            <dt>分类</dt>
+            <dd class="dd-item"></dd>
+            <dd class="dd-item"></dd>
+            <dd class="grid grid2">
+                <div class="grid-item grid-item-hide">
+                    <span class="iconfont grid-icon">&#xe647;</span>
+                </div>
+                <div class="flex-v">
+                    <div class="flex-h">
+                        <span class="iconfont grid-icon">&#xe69c;</span>
+                        <div class="grid-desc">
+                            <div>邻接矩阵存储</div>
+                            <div>Adjacent matrix</div>
+                            <div>采用[邻接]矩阵数组表示顶点之间相邻关系的存储结构</div>
+                        </div>
+                    </div>
+                    <div class="flex-h">
+                        <span class="iconfont grid-icon">&#xe6b6;</span>
+                        <div class="grid-desc">
+                            <div>邻接表存储</div>
+                            <div>Adjacent list</div>
+                            <div>利用[顺序]存储和[链式]存储相结合的方式的存储</div>
+                        </div>
+                    </div>
+                </div>
+            </dd>
+            <dt id="cont1">邻接矩阵 Matrix</dt>
+            <dd class="dd-item">若图G=(V,E)是含义n(n>0)个顶点的图，各顶点编号为0到n-1，则G的邻接矩阵A是[n阶方阵]；</dd>
+            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片11.JPG" alt=""></dd>
+            <dd class="dd-diag-item">图1 不带权无向图</dd>
+            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片12.JPG" alt=""></dd>
+            <dd class="dd-diag-item">图2 不带权有向图</dd>
+            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片13.JPG" alt=""></dd>
+            <dd class="dd-diag-item">图3 带权无向图</dd>
+            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片14.JPG" alt=""></dd>
+            <dd class="dd-diag-item">图4 带权有向图</dd>
+            <dt>邻接矩阵特点 Features</dt>
+            <dd class="dd-item">.图的邻接矩阵是唯一的；</dd>
+            <dd class="dd-item">.存储空间复杂度为O(n2)，适合存储边较多的图；</dd>
+            <dd class="dd-item">.无向图G的邻接矩阵A是一个对称矩阵；</dd>
+            <dd class="dd-item">.注意图的方向性；</dd>
+            <dd class="dd-item">.对无向图，第i行（i列）非零/非∞的个数是顶点i的度；</dd>
+            <dd class="dd-item">.对有向图，第i行（i列）非零/非∞的个数是顶点i的出度（入度）；</dd>
+            <dt>邻接矩阵数据结构 Structure</dt>
+            <dd>
+                <pre class="code">
+
+    typedef struct
+    {
+        int no;        //顶点编号
+        InfoType info; //顶点其他信息
+    } VertexType;      //顶点类型
+
+    typedef struct
+    {
+        int edges[MAXV][MAXV]; //邻接矩阵数组
+        int n, e;              //顶点数，边数
+        VertexType vexs[MAXV]; //存放顶点信息
+    } MatGraph;                //完整的图邻接矩阵类型
+                </pre>
+            </dd>
+            <dt id="cont2">邻接表 List</dt>
+            <dd class="dd-item">顺序和链式结合的方式的存储； </dd>
+            <dd class="dd-item">为图G的每个顶点创建一个单链表；链表的每个节点是关联于顶点的所有[出边]；使用[一维]数组存放每个单链表的第一个边节点；</dd>
+            <dd class="dd-item">[举例说明]挂帘子；</dd>
+            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片24.JPG" alt=""></dd>
+            <dd class="dd-diag-item">图5 不带权无向图</dd>
+            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片25.JPG" alt=""></dd>
+            <dd class="dd-diag-item">图6 不带权有向图</dd>
+            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片26.JPG" alt=""></dd>
+            <dd class="dd-diag-item">图7 带权无向图</dd>
+            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片27.JPG" alt=""></dd>
+            <dd class="dd-diag-item">图8 带权有向图</dd>
+            <dt>邻接表的特点 Features</dt>
+            <dd class="dd-item">.不唯一；</dd>
+            <dt>邻接表的数据结构 Structure</dt>
+            <dd>
+                <pre class="code">
+
+    typedef struct ANode
+    {
+        int adjvex;            //该边的邻接点编号
+        int weight;            //该边的相关信息，如权值（用整型表示）
+        struct ANode *nextarc; //指向下一条边的指针
+    } ArcNode;                 //边结点类型
+
+    typedef struct Vnode
+    {
+        InfoType info;     //顶点其他信息
+        int count;         //存放顶点入度,仅仅用于拓扑排序
+        ArcNode *firstarc; //指向第一条边
+    } VNode;               //邻接表头结点类型
+
+    typedef struct
+    {
+        VNode adjlist[MAXV]; //邻接表头结点数组
+        int n, e;            //图中顶点数n和边数e
+    } AdjGraph;              //完整的图邻接表类型
+                </pre>
+            </dd>
+            <dt id="cont3">小结 Summary</dt>
+            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片23.JPG" alt=""></dd>
+            <dt id="cont4">作业 Homework</dt>
+            <dd class="dd-item">1.判断图的类型，并给出对应的邻接矩阵。</dd>
+            <dd class="grid grid2">
+                <div class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片15.JPG" alt=""></div>
+                <div class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片16.JPG" alt=""></div>
+            </dd>
+            <dd class="dd-item">2.判断图的类型，并给出对应的邻接表。</dd>
+            <dd class="grid grid2">
+                <div class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片17.JPG" alt=""></div>
+                <div class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片18.JPG" alt=""></div>
+            </dd>
+            <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片29.JPG" alt=""></dd>
+        </dl>
+    </div>
+    <footer class="w copyright">
+        <div class="copyright-item">All Copyrights Reserved, &copy; 2022-2024</div>
+        <img class="copyright-item" src=" ../imgs/avatar.jpg" alt="">
+        <div class="copyright-item">Cnplaman from No 54414, PLA</div>
+    </footer>
+    <script>
+        window.onload = function () {
+            let ham = document.querySelector("#ham-menu")
+            let menuItems = document.querySelectorAll('.top-nav-item')
+            ham.addEventListener('click', () => {
+                menuItems.forEach(item => {
+                    item.style.display = 'block'
+                })
+            })
+            menuItems.forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    menuItems.forEach(item => {
+                        item.style.color = "#ffffff"
+                    })
+                    menuItems[index].style.color = "#e95420"
+                })
+            })
+        }
+    </script>
+</body>
+
+</html>
