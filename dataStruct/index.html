@@ -21,15 +21,15 @@
             <li class="logo"><a href="./index.html" class="logo-icon">图的存储</span><span class="reg">&reg;</span></a>
             </li>
             <li class="top-nav-ham" id="ham-menu"><span class="iconfont">&#xe816;</li>
-            <li class="top-nav-item"><a href="#cont0" class="top-nav-link"><span>概述</span><span
+            <li class="top-nav-item is-hide"><a href="#cont0" class="top-nav-link"><span>概述</span><span
                         class="top-sub-menu">overview</span></a></li>
-            <li class="top-nav-item"><a href="#cont1" class="top-nav-link"><span>邻接矩阵</span><span
+            <li class="top-nav-item is-hide"><a href="#cont1" class="top-nav-link"><span>邻接矩阵</span><span
                         class="top-sub-menu">Matrix</span></a></li>
-            <li class="top-nav-item"><a href="#cont2" class="top-nav-link"><span>邻接表</span><span
+            <li class="top-nav-item is-hide"><a href="#cont2" class="top-nav-link"><span>邻接表</span><span
                         class="top-sub-menu">List</span></a></li>
-            <li class="top-nav-item"><a href="#cont3" class="top-nav-link"><span>小结</span><span
+            <li class="top-nav-item is-hide"><a href="#cont3" class="top-nav-link"><span>小结</span><span
                         class="top-sub-menu">Summary</span></a></li>
-            <li class="top-nav-item"><a href="#cont4" class="top-nav-link"><span>作业</span><span
+            <li class="top-nav-item is-hide"><a href="#cont4" class="top-nav-link"><span>作业</span><span
                         class="top-sub-menu">Homework</span></a></li>
         </ul>
     </nav>
@@ -121,7 +121,7 @@
     typedef struct ANode
     {
         int adjvex;            //该边的邻接点编号
-        int weight;            //该边的相关信息，如权值（用整型表示）
+        int weight;            //该边的相关信息，如权值
         struct ANode *nextarc; //指向下一条边的指针
     } ArcNode;                 //边结点类型
 
@@ -162,19 +162,36 @@
     </footer>
     <script>
         window.onload = function () {
+            const clickEvent = (function () {
+                if ('ontouchstart' in document.documentElement === true)
+                    return 'touchstart';
+                else
+                    return 'click';
+            })();
+
             let ham = document.querySelector("#ham-menu")
             let menuItems = document.querySelectorAll('.top-nav-item')
-            ham.addEventListener('click', () => {
+
+            ham.addEventListener(clickEvent, () => {
                 menuItems.forEach(item => {
                     item.style.display = 'block'
+                    item.style.heigth = 'auto'
+                    item.classList.toggle('is-hide')
                 })
             })
+
             menuItems.forEach((item, index) => {
-                item.addEventListener('click', () => {
-                    menuItems.forEach(item => {
-                        item.style.color = "#ffffff"
-                    })
-                    menuItems[index].style.color = "#e95420"
+                item.addEventListener(clickEvent, () => {
+                    if (clickEvent == "touchstart") {
+                        menuItems.forEach(item => {
+                            item.classList.toggle('is-hide')
+                        })
+                    } else {
+                        menuItems.forEach(item => {
+                            item.style.color = "#ffffff"
+                        })
+                        menuItems[index].style.color = "#e95420"
+                    }
                 })
             })
         }
