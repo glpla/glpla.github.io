@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <malloc.h>
 #include "graph.h"
-//----邻接矩阵的基本运算算法----------------------------------
 MatGraph *CreateMat(MatGraph *G, int A[MAXV][MAXV], int n, int e)
 {
     int i, j;
@@ -26,8 +25,6 @@ void DispMat(MatGraph g)
     }
 }
 
-//----邻接表的基本运算算法------------------------------------
-// 根据邻接矩阵创建邻接表
 AdjGraph *CreateAdj(AdjGraph *G, int A[MAXV][MAXV], int n, int e)
 {
     int i, j;
@@ -40,11 +37,9 @@ AdjGraph *CreateAdj(AdjGraph *G, int A[MAXV][MAXV], int n, int e)
         for (j = n - 1; j >= 0; j--)
             if (A[i][j] != 0 && A[i][j] != INF)
             {
-                //创建一个结点p
                 p = (ArcNode *)malloc(sizeof(ArcNode));
                 p->adjvex = j;
                 p->weight = A[i][j];
-                //采用头插法插入结点p
                 p->nextarc = G->adjlist[i].firstarc;
                 G->adjlist[i].firstarc = p;
             }
@@ -62,10 +57,10 @@ void DispAdj(AdjGraph *G)
         printf("%3d: ", i);
         while (p != NULL)
         {
-            printf("%3d[%d]→", p->adjvex, p->weight);
+            printf("%3d[%d]->", p->adjvex, p->weight);
             p = p->nextarc;
         }
-        printf("∧\n");
+        printf("^\n");
     }
 }
 void DestroyAdj(AdjGraph *G)
@@ -74,12 +69,10 @@ void DestroyAdj(AdjGraph *G)
     ArcNode *pre, *p;
     for (i = 0; i < G->n; i++)
     {
-        // p指向第i个单链表的首结点
         pre = G->adjlist[i].firstarc;
         if (pre != NULL)
         {
             p = pre->nextarc;
-            //释放第i个单链表的所有边结点
             while (p != NULL)
             {
                 free(pre);
