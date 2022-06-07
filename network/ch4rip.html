@@ -6,44 +6,83 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RIP 路由协议</title>
-    <link rel="stylesheet" href="../css/reset.css">
+    <link href="https://fonts.googlefonts.cn/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/linux.css">
+    <style>
+        header {
+            background-image: url(../imgs/zh/banner.jpg);
+            height: 300px;
+        }
+
+        .mb4rem {
+            margin-bottom: 4rem;
+        }
+    </style>
 </head>
 
-<body>
-    <section class="w">
-        <header class="nav">
-            <h1>RIP 路由协议</h1>
-        </header>
-        <dl>
-            <dt>一、基本原理</dt>
-            <dd>. RIP-Routing Information Protocol，路由信息协议，属于内部网关路由协议；RFC 1058；当前版本为RIP2；</dd>
-            <dd>. 基于距离矢量DV-distance vector的路由选择协议，使用跳数Hop count作为度量到目标网络的距离；</dd>
-            <dd>. 每个路由器都要维护一组自己到其它网络的距离；适合小型网络；</dd>
-            <dd>. 到直连网络的跳数是0，所以距离为0；到其它网络的跳数是经过的路由器个数+1；</dd>
-            <dd>. 最大距离：15；16表示不可达；</dd>
-            <dd>. 在直连路由的基础上，为网络生成动态路由；</dd>
+<body class="container">
+    <header id="top" class="w">
+        <div>Welcome</div>
+        <div>2022-06-05</div>
+    </header>
+    <nav class="top-nav">
+        <ul class="w top-nav-wrap">
+            <li class="logo"><a href="./index.html" class="logo-icon">RIP</span><span class="reg">&reg;</span></a>
+            </li>
+            <li class="top-nav-ham" id="ham-menu"><span class="iconfont">&#xe816;</li>
+            <li class="top-nav-item is-hide"><a href="#cont0" class="top-nav-link"><span>概述</span><span
+                        class="top-sub-menu">Overview</span></a></li>
+            <li class="top-nav-item is-hide"><a href="#cont1" class="top-nav-link"><span>特点</span><span
+                        class="top-sub-menu">Features</span></a></li>
+            <li class="top-nav-item is-hide"><a href="#cont2" class="top-nav-link"><span>规则</span><span
+                        class="top-sub-menu">Rules</span></a></li>
+            <li class="top-nav-item is-hide"><a href="#cont3" class="top-nav-link"><span>实例</span><span
+                        class="top-sub-menu">Demo</span></a></li>
+            <li class="top-nav-item is-hide"><a href="#cont4" class="top-nav-link"><span>命令</span><span
+                        class="top-sub-menu">Command</span></a></li>
+            <li class="top-nav-item is-hide"><a href="#cont5" class="top-nav-link"><span>实操</span><span
+                        class="top-sub-menu">Operation</span></a></li>
+        </ul>
+    </nav>
+    <div class="w cont">
+        <dl id="cont0">
+            <dt class="chap">概述 Overview</dt>
+            <dd>. RIP-Routing Information Protocol，路由信息协议，属于内部网关路由协议；当前版本为RIP2；</dd>
+            <dd>. 基于距离矢量DV-distance vector的路由选择协议，使用跳数Hop count作为度量Metric到目标网络的距离，即：路由器到目标网络所经过的路由器个数；</dd>
+            <dd>. 特别的：路由器到直连网络不需要经过其它路由器，所以跳数是0，即：距离为0；</dd>
+            <dd>. 最大距离15；16表示不可达；</dd>
+            <dd>. 在直连路由的基础上，为网络生成动态路由：使用DUP协议，按照固定时间间隔，以广播RIP报文的方式，和[相邻]路由器交换[全部]路由信息；</dd>
+            <dd>. 更多信息，请访问<a class="link" href="https://www.rfc-editor.org/rfc/rfc1058" target="_blank">RFC 1058</a>；
+            </dd>
             <dd class="dd-img-item"><img src="../imgs/network/rip/幻灯片14.jpg" alt=""></dd>
-            <dd class="dd-diag-item">图1 RIP的跳数</dd>
-            <dt>二、路由特点</dt>
-            <dd>. 使用DUP协议，按照固定时间间隔，和相邻路由器交换[全部]路由信息广播RIP报文；</dd>
+            <dd class="dd-diag-item">图1 RIP的跳数count</dd>
+        </dl>
+        <dl id="cont1">
+            <dt class="chap">特点 Features</dt>
+            <dd>[简单] RIP简单的认为：距离越短，路由质量越高；</dd>
+            <dd>[小型] RIP最大支持15跳，适合小型网络；</dd>
+            <dd>[均衡] RIP具备负载均衡：当路由等价时，轮流使用路由；</dd>
+            <dd>[动态] RIP通过3个定时器动态维护路由：</dd>
             <dd>. 更新定时器：每30s更新一次；通常会有一个[-5，+5]的随机偏移量；</dd>
-            <dd>. 失效定时器：180s；每个条目被添加或被更新时，都会重新开始计时；超时，该条目被标记为无效路由，并不会被删除，只是不会被RIP广播；</dd>
+            <dd>. 失效定时器：180s；每个条目被添加或被更新时，都会重新开始计时；超时，该条目被标记为无效路由，但不会删除，只是不会被RIP广播出去；</dd>
             <dd>. 清除定时器：240s；超过180s会被标记为无效条目；再经过60s，就会被彻底删除；</dd>
-            <dt>三、路由更新规则</dt>
-            <dd>1. 如果收到的路由条目在当前路由表中不存在，则添加-发现新网络；</dd>
+        </dl>
+        <dl id="cont2">
+            <dt class="chap">规则 Rules</dt>
+            <dd>1. 如果收到的路由条目对应的目标网络不在当前路由表中，则添加-发现新网络；</dd>
             <dd>2. 如果路由表已有达到相同目标网络的路由条目，则：</dd>
             <dd>.若来自相同的下一跳路由器，则更新-最新的路由信息；</dd>
             <dd>.若来自不同的下一跳路由器，则比较距离：</dd>
             <dd>情况1：新条目小于当前条目，则更新-新条目更具优势；</dd>
             <dd>情况2：新条目等于当前条目，则添加新条目-负载均衡；</dd>
             <dd>情况2：新条目大于当前条目，不做更新处理-新条目劣势；</dd>
-            <dt>四、RIP路由示例</dt>
-            <dd>已知当前路由器A的路由表为表1；收到的经RIP报文广播的路由器C的路由表为表2[在原有的距离上加+1]；更新后的路由器A的路由表为表3；</dd>
-            <dd class="grid grid3 dd-tbl-item">
+        </dl>
+        <dl id="cont3">
+            <dt class="chap">实例 Demo</dt>
+            <dd>已知路由器D的路由表为表1；路由器C的路由表为表2；分析：经过C的路由交换后，D的路由表信息。</dd>
+            <dd class="grid grid3">
                 <table>
-                    <tr>
-                        <td colspan="3">路由器A的路由表</td>
-                    </tr>
                     <tr>
                         <td>目标网络</td>
                         <td>距离</td>
@@ -74,14 +113,11 @@
                         <td>4</td>
                         <td>F</td>
                     </tr>
-                    <tr>
-                        <td colspan="3">表1</td>
-                    </tr>
                 </table>
+            </dd>
+            <dd class="dd-diag-item">表1 路由器D的路由表信息</dd>
+            <dd>
                 <table>
-                    <tr>
-                        <td colspan="3">路由器C的路由表</td>
-                    </tr>
                     <tr>
                         <td>目标网络</td>
                         <td>距离</td>
@@ -89,48 +125,248 @@
                     </tr>
                     <tr>
                         <td>N2</td>
-                        <td>4+1</td>
-                        <td>C</td>
+                        <td>4</td>
+                        <td>??</td>
                     </tr>
                     <tr>
                         <td>N3</td>
-                        <td>8+1</td>
-                        <td>C</td>
+                        <td>8</td>
+                        <td>??</td>
                     </tr>
                     <tr>
                         <td>N6</td>
-                        <td>4+1</td>
-                        <td>C</td>
+                        <td>4</td>
+                        <td>??</td>
                     </tr>
                     <tr>
                         <td>N8</td>
-                        <td>3+1</td>
-                        <td>C</td>
+                        <td>3</td>
+                        <td>??</td>
                     </tr>
                     <tr>
                         <td>N9</td>
-                        <td>5+1</td>
-                        <td>C</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">表2</td>
+                        <td>5</td>
+                        <td>??</td>
                     </tr>
                 </table>
+            </dd>
+            <dd class="dd-diag-item">表2 路由器C的路由表信息</dd>
+            <dd>[分析]路由器D收到C发送的RIP广播报文，并进行改造：所有的距离+1；且下一跳路由都是C；</dd>
+            <dd>
                 <table>
                     <tr>
-                        <td colspan="4">路由器A的路由表</td>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                    </tr>
+                    <tr>
+                        <td>N2</td>
+                        <td>4+<span class="warn">1</span></td>
+                        <td><span class="warn">C</span></td>
+                    </tr>
+                    <tr>
+                        <td>N3</td>
+                        <td>8+<span class="warn">1</span></td>
+                        <td><span class="warn">C</span></td>
+                    </tr>
+                    <tr>
+                        <td>N6</td>
+                        <td>4+<span class="warn">1</span></td>
+                        <td><span class="warn">C</span></td>
+                    </tr>
+                    <tr>
+                        <td>N8</td>
+                        <td>3+<span class="warn">1</span></td>
+                        <td><span class="warn">C</span></td>
+                    </tr>
+                    <tr>
+                        <td>N9</td>
+                        <td>5+<span class="warn">1</span></td>
+                        <td><span class="warn">C</span></td>
+                    </tr>
+                </table>
+            </dd>
+            <dd class="dd-diag-item">表3 路由器D改造收到的路由器C的路由表信息</dd>
+            <dd>[分析]路由器D根据规则更新路由表信息；</dd>
+            <dd class="dd-item">N2路由条目：都是经过C转发；之前经过C到N2需要2跳；现在经过C到N2需要5跳，所以5跳是最新的路由：2-&gt;5；</dd>
+            <dd class="mb4rem">
+                <table>
+                    <tr>
+                        <td colspan="3">旧路由</td>
+                        <td colspan="3">新路由</td>
+                        <td colspan="3">最终路由</td>
                     </tr>
                     <tr>
                         <td>目标网络</td>
                         <td>距离</td>
                         <td>下一跳</td>
-                        <td>操作说明</td>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                    </tr>
+                    <tr>
+                        <td>N2</td>
+                        <td>2</td>
+                        <td>C</td>
+                        <td>N2</td>
+                        <td>5</td>
+                        <td>C</td>
+                        <td>N2</td>
+                        <td>5</td>
+                        <td>C</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd class="dd-item">N3路由条目：没有该路由，说明发现了新网络，添加新路由；</dd>
+            <dd class="mb4rem">
+                <table>
+                    <tr>
+                        <td colspan="3">旧路由</td>
+                        <td colspan="3">新路由</td>
+                        <td colspan="3">最终路由</td>
+                    </tr>
+                    <tr>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>N3</td>
+                        <td>9</td>
+                        <td>C</td>
+                        <td>N3</td>
+                        <td>9</td>
+                        <td>C</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd class="dd-item">N6路由条目：之前经过F到N6需要8跳；现在经过C到N6只需要5跳，说明新路由更短，应更新旧路由；8-&gt;5，F-&gt;C；</dd>
+            <dd class="mb4rem">
+                <table>
+                    <tr>
+                        <td colspan="3">旧路由</td>
+                        <td colspan="3">新路由</td>
+                        <td colspan="3">最终路由</td>
+                    </tr>
+                    <tr>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                    </tr>
+                    <tr>
+                        <td>N6</td>
+                        <td>8</td>
+                        <td>F</td>
+                        <td>N6</td>
+                        <td>5</td>
+                        <td>C</td>
+                        <td>N6</td>
+                        <td>5</td>
+                        <td>C</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd class="dd-item">N8路由条目：之前经过E到N8需要4跳；现在经过C到N8也需要4跳，所以是等价路由，应添加新路由以便均衡负载；</dd>
+            <dd class="mb4rem">
+                <table>
+                    <tr>
+                        <td colspan="3">旧路由</td>
+                        <td colspan="3">新路由</td>
+                        <td colspan="3">最终路由</td>
+                    </tr>
+                    <tr>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">N8</td>
+                        <td rowspan="2">4</td>
+                        <td rowspan="2">E</td>
+                        <td rowspan="2">N8</td>
+                        <td rowspan="2">4</td>
+                        <td rowspan="2">C</td>
+                        <td>N8</td>
+                        <td>4</td>
+                        <td>E</td>
+                    </tr>
+                    <tr>
+                        <td>N8</td>
+                        <td>4</td>
+                        <td>C</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd class="dd-item">N9路由条目：之前经过F到N9需要4跳；现在经过C到N9却需要6跳，所以新路由不好，保留旧路由；</dd>
+            <dd class="mb4rem">
+                <table>
+                    <tr>
+                        <td colspan="3">旧路由</td>
+                        <td colspan="3">新路由</td>
+                        <td colspan="3">最终路由</td>
+                    </tr>
+                    <tr>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                    </tr>
+                    <tr>
+                        <td>N9</td>
+                        <td>4</td>
+                        <td>F</td>
+                        <td>N9</td>
+                        <td>6</td>
+                        <td>C</td>
+                        <td>N9</td>
+                        <td>4</td>
+                        <td>F</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd class="dd-item">路由器D的路由表最终结果为：</dd>
+            <dd>
+                <table>
+                    <tr>
+                        <td>目标网络</td>
+                        <td>距离</td>
+                        <td>下一跳</td>
+                        <td>说明</td>
                     </tr>
                     <tr>
                         <td>N1</td>
                         <td>7</td>
                         <td>A</td>
-                        <td></td>
+                        <td>原有路由</td>
                     </tr>
                     <tr>
                         <td>N2</td>
@@ -142,7 +378,7 @@
                         <td>N3</td>
                         <td>9</td>
                         <td>C</td>
-                        <td>增加路由</td>
+                        <td>添加路由</td>
                     </tr>
                     <tr>
                         <td>N6</td>
@@ -154,12 +390,13 @@
                         <td>N8</td>
                         <td>4</td>
                         <td>E</td>
+                        <td>最新路由</td>
                     </tr>
                     <tr>
                         <td>N8</td>
                         <td>4</td>
                         <td>C</td>
-                        <td>增加路由</td>
+                        <td>添加路由</td>
                     </tr>
                     <tr>
                         <td>N9</td>
@@ -167,12 +404,12 @@
                         <td>F</td>
                         <td>保留路由</td>
                     </tr>
-                    <tr>
-                        <td colspan="4">表3</td>
-                    </tr>
                 </table>
             </dd>
-            <dt>五、路由器配置RIP的基本命令</dt>
+            <dd class="dd-diag-item">表3 更新后路由器D的路由表信息</dd>
+        </dl>
+        <dl id="cont4">
+            <dt class="chap">命令 Commands</dt>
             <dd class="code">
                 <pre>
 
@@ -183,7 +420,9 @@
     Router(config-router)#network y.y.y.y       设置与相邻网络的动态路由；
                 </pre>
             </dd>
-            <dd class="dd-title-item">实操部分</dd>
+        </dl>
+        <dl id="cont5">
+            <dt class="chap">实操 Operation</dt>
             <dt>一、实验目的</dt>
             <dd>1. 了解RIP协议的基本原理；</dd>
             <dd>2. 掌握RIP协议的配置方法；</dd>
@@ -202,7 +441,7 @@
             <dd class="dd-img-item"><img src="../imgs/network/rip/幻灯片15.JPG" alt=""></dd>
             <dd class="dd-diag-item">图2 RIP拓扑</dd>
             <dd>2. 路由器0的配置</dd>
-            <dd>2.1 配置路由器端口，生成直连路由；主要配置命令如下；</dd>
+            <dd>2.1 配置路由器端口，生成直连路由；主要配置命令参考如下：</dd>
             <dd class="code">
                 <pre>
 
@@ -241,20 +480,53 @@
             <dd>2. 再次ping对方，结果又如何？</dd>
             <dd>3. 请发送简单PDU测试网络连通性；</dd>
             <dd>4. 每个实验阶段的分析和异常处理。</dd>
-            <dd class="dd-title-item">作业</dd>
+            <dt>六、作业</dt>
             <dd>1. 根据实操部分的内容，完成RIP协议的配置和测试；</dd>
             <dd>2. 以纸质的形式提交实验报告；</dd>
             <dd>3. 论文格式请参照范文<a class="warn" href="../imgs/ds/format.docx">[点击下载]</a>。</dd>
         </dl>
-        <footer>
-            <div class="copyright">
-                <span>&copy; All Copyrights Reserved, 2022-2024</span>
-                <img src="../imgs/avatar.jpg" alt="">
-                <span>Cnplaman from No 54414, PLA</span>
-            </div>
-            <span>2022-05-27</span>
-        </footer>
-    </section>
+    </div>
+    <footer class="w copyright">
+        <div class="copyright-item">All Copyrights Reserved, &copy; 2022-2024</div>
+        <img class="copyright-item" src=" ../imgs/avatar.jpg" alt="">
+        <div class="copyright-item">Cnplaman from No 54414, PLA</div>
+    </footer>
+    <script>
+        window.onload = function () {
+            const clickEvent = (function () {
+                if ('ontouchstart' in document.documentElement === true)
+                    return 'touchstart';
+                else
+                    return 'click';
+            })();
+
+            let ham = document.querySelector("#ham-menu")
+            let menuItems = document.querySelectorAll('.top-nav-item')
+
+            ham.addEventListener(clickEvent, () => {
+                menuItems.forEach(item => {
+                    item.style.display = 'block'
+                    item.style.heigth = 'auto'
+                    item.classList.toggle('is-hide')
+                })
+            })
+
+            menuItems.forEach((item, index) => {
+                item.addEventListener(clickEvent, () => {
+                    if (clickEvent == "touchstart") {
+                        menuItems.forEach(item => {
+                            item.classList.toggle('is-hide')
+                        })
+                    } else {
+                        menuItems.forEach(item => {
+                            item.style.color = "#ffffff"
+                        })
+                        menuItems[index].style.color = "#e95420"
+                    }
+                })
+            })
+        }
+    </script>
 </body>
 
 </html>
