@@ -676,7 +676,64 @@
             <dd>更多中断请点击访问 <a href="./interrupt.html" target="_blank" class="warn">Interrupt <span
                         class="iconfont">&#xf007;</span></a></dd>
             <dd id="cont2" class="dd-title-item">实操1</dd>
-            <dt>利用串口发送字符串</dt>
+            <dt>发送字符串</dt>
+            <dd class="code">
+                <pre>
+
+    #include "ioCC2530.h"
+    #include "string.h"
+    #include "../lib/delay.h"
+    typedef unsigned char uchar;
+    typedef unsigned int  uint;
+    #define TX_SIZE    20
+    #define TX_STRING  "Hello Zigbee... "
+    
+    void Init32M( void )
+    {
+        CLKCONCMD &= ~0x40;               //设置系统时钟源为32MHZ晶振
+        while( CLKCONSTA & 0x40 );        //等待晶振稳定为32M
+        CLKCONCMD &= ~0x47;               //设置系统主时钟频率为32MHZ
+        SLEEPCMD |= 0x04;                   //关闭不用的RC振荡器
+    }
+    void InitUart( void )
+    {
+        PERCFG = 0x00;           //外设控制寄存器 USART 0的IO位置:0为P0口位置1
+        P0SEL = 0x0c;            //P0_2,P0_3用作串口（外设功能）
+        P2DIR &= ~0XC0;          //P0优先作为UART0
+    
+        U0CSR |= 0x80;           //设置为UART方式
+        U0GCR |= 11;
+        U0BAUD |= 216;           //波特率设为115200
+        UTX0IF = 0;              //UART0 TX中断标志初始置位0
+    }
+    void UartSendString( char *Data, int len )
+    {
+        uint i;
+        for( i = 0; i < len; i++ )
+        {
+            U0DBUF = *Data++;
+            while( UTX0IF == 0 );
+            UTX0IF = 0;
+        }
+    }
+    void main( void )
+    {
+        char TxData[TX_SIZE];
+        Init32M();
+        InitUart();                       //调置串口相关寄存器
+        memset( TxData, 0, TX_SIZE );     //数据清0
+        memcpy( TxData, TX_STRING, sizeof( TX_STRING ) ); //复制发送字符串到TxData
+    
+        while( 1 )
+        {
+            UartSendString( TxData, sizeof( TX_STRING ) ); //串口发送数据
+            delay( 1000 );
+        }
+    }
+                </pre>
+            </dd>
+            <dd id="cont3" class="dd-title-item">实操2</dd>
+            <dt>利用IO发送字符串</dt>
             <dd class="code">
                 <pre>
 
@@ -769,100 +826,8 @@
     }
                 </pre>
             </dd>
-            <dd id="cont3" class="dd-title-item">实操2</dd>
-            <dt>通过键盘控制串口发送字符串</dt>
-            <dd class="code">
-                <pre>
-
-#include "ioCC2530.h"
-#include "../lib/delay.h"
-char uart_buffer;
-
-//串口从IO接收要发送的数据
-void UartTX_Send_String( unsigned char *Data, int len )
-{
-    for( int j = 0; j < len; j++ )
-    {
-        U0DBUF = *Data++;       //USART x收发数据缓冲区寄存器
-        while( UTX0IF == 0 );   //等待发送完毕
-        UTX0IF = 0;             //清发送中断标志
-    }
-}
-//串口发送寄存器U0DBUF的数据
-void UartTX_Send_Data( unsigned char Data, int len )
-{
-    for( int j = 0; j < len; j++ )
-    {
-        U0DBUF = Data;
-        while( UTX0IF == 0 );   //死等，直到发送中断标记为1；轮询方式
-        UTX0IF = 0;             //清发送中断标志
-    }
-}
-//UART 0中断函数
-#pragma vector=URX0_VECTOR
-__interrupt void uart0( void )
-{
-    URX0IF = 0;                 //清接收中断标志
-    P0_0 = ~P0_0;
-    
-    uart_buffer = U0DBUF;       //串口接收一个字符；一旦有数据从串口传至CC2530，则进入中断，将接收到的数据赋值给变量uart_buffer
-    //UartTX_Send_String("welcome",10);
-    UartTX_Send_Data( uart_buffer, 1 );
-}
-
-//[cnplaman：封装]
-void initUART( void )
-{
-    PERCFG = 0x00;              //外设控制寄存器，选择哪个外设功能；这里使用串口0[UART0]位置1：RX0 -- P0_2；TX0 -- P0_3  
-    P0SEL = 0x3c;               //0011 1100：P0_2，P0_3，P0_4，P_5用作串口[外设功能]；0为IO；1为外设；
-
-    U0CSR |= 0x80;              //1000 0000；UART方式
-
-    U0GCR |= 10;                //baud_e = 10;
-    U0BAUD |= 216;              //波特率设为57600
-
-    UTX0IF = 1;                 //UART0 TX发送中断标志置1
-    U0CSR |= 0x40;              //0000 0100；允许接收；
-    IEN0 |= 0x84;               //1000 0100；开总中断，允许接收中断
-}
-
-void initIO( void )
-{
-    P0DIR |= 0x01;  //设置P0.0为输出方式[P0.4和P0.5为输入方式???]
-    P2DIR |= 0x01;  //设置P2.0为输出方式
-    P0_0 = 1;
-    P2_0 = 1;
-}
-
-void main( void )
-{
-    unsigned char buf[4];
-
-    initIO();
-
-    CLKCONCMD &= ~0x40;                 //1011 1111；选择32M晶振
-    while( !( SLEEPSTA & 0x40 ) );      //等待XSOC稳定；死等
-    CLKCONCMD = 0xb8;                   //1 0 111 000；TICHSPD 128分频，CLKSPD 不分频
-    SLEEPCMD |= 0x04;                   //关闭不用的RC 振荡器[cnplaman:not MUST]
-
-    initUART();
-
-    buf[0] = '\t';
-    while( 1 )
-    {
-        P2_0 = ~P2_0;                           //P2_0状态翻转
-        delay( 1500 );
-        if( uart_buffer == 0x01 )               //按照16进制输入，如果为0x01
-        {
-            UartTX_Send_String( "welcome", 7 ); //串口接收要发送的数据
-            UartTX_Send_String( &buf[0], 1 );   //串口发送接收的数据
-        }
-    }
-}
-                </pre>
-            </dd>
             <dt id="cont4" class="dd-title-item">实操3</dt>
-            <dt>利用串口控制LED</dt>
+            <dt>利用IO控制LED</dt>
             <dd class="code">
                 <pre>
 
