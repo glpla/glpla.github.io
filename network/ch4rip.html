@@ -496,11 +496,16 @@
         <img class="copyright-item" src=" ../imgs/avatar.jpg" alt="">
         <div class="copyright-item">Cnplaman from No 54414, PLA</div>
     </footer>
-    <script src="../js/fastclick.js"></script>
+    <!-- <script src="../js/fastclick.js"></script> -->
     <script src="../js/s2view_cnplaman.js"></script>
     <script src="../js/back2top_js.js"></script>
     <script>
         window.onload = function () {
+            if ('addEventListener' in document) {
+                document.addEventListener('DOMContentLoaded', function () {
+                    FastClick.attach(document.body);
+                }, false);
+            }
             let navItems = document.querySelectorAll(".nav-item")
             let contItems = document.querySelectorAll(".target-cont")
             let ham = document.querySelector("#ham")

@@ -28,7 +28,7 @@
             <!-- <li><a class='btn' href="index.html">返回主页</a></li> -->
         </ul>
         <div class="cont">
-            <h2 class="flex-h" id="p0">简介</h2>
+            <h2 class="flex-h btn-tar" id="p0">简介</h2>
             <div class="item">
                 <p>行内元素inline</p>
                 <p>可以实现页面内部、页面之间之前的跳转</p>
@@ -36,7 +36,7 @@
                 <p>在head区加上&lt;base target=""&gt;指定默认打开方式。</p>
                 <p>必须有可识别的link文字，否则会警告；link MUST have discernible text。使用背景图片自定义超链接的时候请注意。可以通过文本缩进把必须的文本挪出去；</p>
             </div>
-            <h2 class="flex-h" id="p1">语法</h2>
+            <h2 class="flex-h btn-tar" id="p1">语法</h2>
             <div class="item">
                 <pre class="code">
     &lt;a href="" target=""&gt;&lt;/a&gt;</pre>
@@ -46,7 +46,7 @@
                     <dd class="flex-h">target<span class="dot"></span>打开目标URL的位置；默认是_self，当前页面打开</dd>
                 </dl>
             </div>
-            <h2 class="flex-h" id="p2">锚点跳转</h2>
+            <h2 class="flex-h btn-tar" id="p2">锚点跳转</h2>
             <div class="item">
                 <p>同一个页面内部，不同部分之间的跳转；便于查看和阅读</p>
                 <pre class="code">
@@ -55,7 +55,7 @@
     //&lt;a&gt;：指定href为目标元素的id名；注意应带上id符号#
     &lt;a href="#p3"&gt;锚点跳转&lt;/a&gt;      </pre>
             </div>
-            <h2 class="flex-h" id="p3">页面跳转</h2>
+            <h2 class="flex-h btn-tar" id="p3">页面跳转</h2>
             <div class="item">
                 <p>页面之间的跳转；根据页面是否属于同一个网站，又可以分开站内跳转和站外跳转</p>
                 <pre class="code">
@@ -66,7 +66,7 @@
     &lt;a href="//www.baidu.com"&gt;baidu&lt;/a&gt;
       </pre>
             </div>
-            <h2 class="flex-h" id="p4">内容预览</h2>
+            <h2 class="flex-h btn-tar" id="p4">内容预览</h2>
             <div class="item">
                 <div>1.图片</div>
                 <a class="pre-img" href="./imgs/1.jpg" title="点击查看大图"></a>
@@ -85,7 +85,7 @@
             </div>
             <pre class="code">
     &lt;a href="./music/Alizee-La Isla Bonita.mp3" title="点击播放完整音频"&gt;&lt;/a&gt;</pre>
-            <h2 class="flex-h" id="p5">练习</h2>
+            <h2 class="flex-h btn-tar" id="p5">练习</h2>
             <div class="item">
                 <p>1.返回顶部</p>
                 <p>2.单击页面LOGO打开主页</p>
@@ -95,7 +95,7 @@
                 <p>6.预览音频</p>
                 <p>7.预览文件，如word、css、js等等</p>
             </div>
-            <h2 class="flex-h" id="p6">作业</h2>
+            <h2 class="flex-h btn-tar" id="p6">作业</h2>
             <div class="item">
                 <p>合理使用&lt;a&gt;实现个人网站。要求：应体现&lt;a&gt;的不同用法</p>
             </div>
@@ -109,55 +109,18 @@
                 }, false);
             }
 
-            let p0 = document.querySelector('#top0')
-            let p1 = document.querySelector('#top1')
-            let p2 = document.querySelector('#top2')
-            let p3 = document.querySelector('#top3')
-            let p4 = document.querySelector('#top4')
-            let p5 = document.querySelector('#top5')
-            let p6 = document.querySelector('#top6')
-            p0.addEventListener('click', function (e) {
-                e.preventDefault()
-                setTimeout(function () {
-                    document.querySelector('#p0').scrollIntoView()
-                }, 100)
+            let btns = document.querySelectorAll('.btn')
+            let tars = document.querySelectorAll('.btn-tar')
+
+            btns.forEach((item, index) => {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault()
+                    setTimeout(function () {
+                        tars[index].scrollIntoView()
+                    }, 100)
+                })
             })
-            p1.addEventListener('click', function (e) {
-                e.preventDefault()
-                setTimeout(function () {
-                    document.querySelector('#p1').scrollIntoView()
-                }, 100)
-            })
-            p2.addEventListener('click', function (e) {
-                e.preventDefault()
-                setTimeout(function () {
-                    document.querySelector('#p2').scrollIntoView()
-                }, 100)
-            })
-            p3.addEventListener('click', function (e) {
-                e.preventDefault()
-                setTimeout(function () {
-                    document.querySelector('#p3').scrollIntoView()
-                }, 100)
-            })
-            p4.addEventListener('click', function (e) {
-                e.preventDefault()
-                setTimeout(function () {
-                    document.querySelector('#p4').scrollIntoView()
-                }, 100)
-            })
-            p5.addEventListener('click', function (e) {
-                e.preventDefault()
-                setTimeout(function () {
-                    document.querySelector('#p5').scrollIntoView()
-                }, 100)
-            })
-            p6.addEventListener('click', function (e) {
-                e.preventDefault()
-                setTimeout(function () {
-                    document.querySelector('#p6').scrollIntoView()
-                }, 100)
-            })
+
         }
     </script>
 </body>
