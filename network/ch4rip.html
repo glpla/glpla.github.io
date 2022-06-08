@@ -471,12 +471,12 @@
             </dd>
             <dd>3. 路由器1、路由器2的配置同路由器0；</dd>
             <dd>4. 查看各路由器的动态路由信息；</dd>
-            <dd class="dd-img-item"><img src="../imgs/network/rip/slider16.jpg" alt=""></dd>
-            <dd class="dd-diag-item">图3 使用PT的监视工具查看</dd>
-            <dd class="dd-img-item"><img src="../imgs/network/rip/slider17.jpg" alt=""></dd>
-            <dd class="dd-diag-item">图4 使用路由器的CLI命令：Router#show ip route查看路由</dd>
-            <dd class="dd-img-item"><img src="../imgs/network/rip/slider18.jpg" alt=""></dd>
-            <dd class="dd-diag-item">图5 使用路由器的CLI命令：Router#show ip protocols查看路由协议</dd>
+            <dd class="dd-img-item"><img src="../imgs/network/rip/slider16.JPG" alt=""></dd>
+            <dd class="dd-diag-item">图3 PT的监视工具</dd>
+            <dd class="dd-img-item"><img src="../imgs/network/rip/slider17.JPG" alt=""></dd>
+            <dd class="dd-diag-item">图4 Router#show ip route</dd>
+            <dd class="dd-img-item"><img src="../imgs/network/rip/slider18.JPG" alt=""></dd>
+            <dd class="dd-diag-item">图5 Router#show ip protocols</dd>
             <dd>5. 测试网络的连通性；</dd>
             <dd class="dd-img-item"><img src="../imgs/network/rip/slider19.jpg" alt=""></dd>
             <dd class="dd-diag-item">图6 ping对方主机</dd>
@@ -509,19 +509,20 @@
 
             navItems.forEach((item, index) => {
                 item.addEventListener('click', (e) => {
+                    e.preventDefault()
                     setTimeout(function () {
                         contItems[index].scrollIntoView();
                         navItems.forEach(item => {
                             item.style.color = "#ffffff";
                         })
                         navItems[index].style.color = "#e95420"
-                        menu.classList.toggle('is-hide')
                     }, 100)
-
+                    menu.classList.toggle('is-hide')
                 })
             })
 
             ham.addEventListener('click', (e) => {
+                e.preventDefault()
                 menu.classList.toggle('is-hide')
             })
         }
