@@ -58,6 +58,10 @@
             <strong>语法</strong>
             <pre class="code">
   box-shadow: h-shadow v-shadow blur spread color inset;  </pre>
+            <strong>[实例]汉堡菜单</strong>
+            <div>可以直接使用编码字符&# 9776[去掉空格]来代替&#9776，也可以利用伪元素和阴影实现
+            </div>
+            <div id="ham"></div>
         </section>
         <h4 class="cont-title">filter</h4>
         <section>
@@ -108,6 +112,10 @@
     </div>
     <script>
         window.onload = function () {
+            let ham = document.querySelector('#ham')
+            ham.addEventListener('click', () => {
+                ham.classList.toggle('ham-active')
+            })
             let slider = document.querySelector('#slider')
             let tar = document.querySelector('#tar')
             slider.addEventListener('input', function () {

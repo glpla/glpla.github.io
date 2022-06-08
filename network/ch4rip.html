@@ -26,22 +26,21 @@
         <div>Welcome</div>
         <div>2022-06-05</div>
     </header>
-    <nav class="top-nav">
-        <ul class="w top-nav-wrap">
-            <li class="logo"><a href="./index.html" class="logo-icon">RIP</span><span class="reg">&reg;</span></a>
-            </li>
-            <li class="top-nav-ham" id="ham-menu"><span class="iconfont">&#xe816;</li>
-            <li class="top-nav-item is-hide"><a href="#cont0" class="top-nav-link"><span>概述</span><span
+    <nav id='nav' class="w">
+        <a class="logo" href="./ch4rip.html">RIP</span><span class="reg">&reg;</span></a>
+        <div id="ham"><span class="iconfont">&#xe816;</span></div>
+        <ul id="menu" class="menu">
+            <li class="nav-item"><a id="tocont0" href="#cont0" class="nav-link"><span>概述</span><span
                         class="top-sub-menu">Overview</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont1" class="top-nav-link"><span>特点</span><span
+            <li class="nav-item"><a id="tocont1" href="#cont1" class="nav-link"><span>特点</span><span
                         class="top-sub-menu">Features</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont2" class="top-nav-link"><span>规则</span><span
+            <li class="nav-item"><a id="tocont2" href="#cont2" class="nav-link"><span>规则</span><span
                         class="top-sub-menu">Rules</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont3" class="top-nav-link"><span>实例</span><span
+            <li class="nav-item"><a id="tocont3" href="#cont3" class="nav-link"><span>实例</span><span
                         class="top-sub-menu">Demo</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont4" class="top-nav-link"><span>命令</span><span
+            <li class="nav-item"><a id="tocont4" href="#cont4" class="nav-link"><span>命令</span><span
                         class="top-sub-menu">Command</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont5" class="top-nav-link"><span>实操</span><span
+            <li class="nav-item"><a id="tocont5" href="#cont5" class="nav-link"><span>实操</span><span
                         class="top-sub-menu">Operation</span></a></li>
         </ul>
     </nav>
@@ -491,38 +490,42 @@
         <img class="copyright-item" src=" ../imgs/avatar.jpg" alt="">
         <div class="copyright-item">Cnplaman from No 54414, PLA</div>
     </footer>
+    <script src="../js/fastclick.js"></script>
+    <script src="../js/s2view_cnplaman.js"></script>
+    <script src="../js/back2top_js.js"></script>
     <script>
         window.onload = function () {
-            const clickEvent = (function () {
-                if ('ontouchstart' in document.documentElement === true)
-                    return 'touchstart';
-                else
-                    return 'click';
-            })();
+            // let cont0 = document.querySelector('#tocont0');
+            // let cont1 = document.querySelector('#tocont1');
+            // let cont2 = document.querySelector('#tocont2');
+            // let cont3 = document.querySelector('#tocont3');
+            // let cont4 = document.querySelector('#tocont4');
+            // let cont5 = document.querySelector('#tocont5');
 
-            let ham = document.querySelector("#ham-menu")
-            let menuItems = document.querySelectorAll('.top-nav-item')
+            // s2view(cont0, "#cont0")
+            // s2view(cont1, "#cont1")
+            // s2view(cont2, "#cont2")
+            // s2view(cont3, "#cont3")
+            // s2view(cont4, "#cont4")
+            // s2view(cont5, "#cont5")
 
-            ham.addEventListener(clickEvent, () => {
-                menuItems.forEach(item => {
-                    item.style.display = 'block'
-                    item.style.heigth = 'auto'
-                    item.classList.toggle('is-hide')
-                })
+            let ham = document.querySelector("#ham")
+            let menu = document.querySelector("#menu")
+            let menuItems = document.querySelectorAll('.nav-item')
+
+            ham.addEventListener('click', (e) => {
+                e.preventDefault()
+                menu.classList.toggle('is-hide')
             })
 
             menuItems.forEach((item, index) => {
-                item.addEventListener(clickEvent, () => {
-                    if (clickEvent == "touchstart") {
-                        menuItems.forEach(item => {
-                            item.classList.toggle('is-hide')
-                        })
-                    } else {
-                        menuItems.forEach(item => {
-                            item.style.color = "#ffffff"
-                        })
-                        menuItems[index].style.color = "#e95420"
-                    }
+                item.addEventListener('click', () => {
+                    menu.classList.toggle('is-hide')
+                    menuItems.forEach(item => {
+                        item.style.color = "#ffffff"
+                    })
+                    menuItems[index].style.color = "#e95420"
+
                 })
             })
         }

@@ -18,28 +18,43 @@ header {
 }
 
 
-.top-nav {
+#nav {
     position: sticky;
     top: 0;
-    width: 100vw;
+    background-color: #333333;
     color: #fff;
+    display: flex;
+    flex-wrap: wrap;
     z-index: 1;
 }
 
-.top-nav-wrap {
+.logo {
+    position: relative;
+    height: 60px;
+    line-height: 60px;
+    background-color: #e95420;
+    font-size: 30px;
+    padding-left: 1rem;
+    padding-right: 2rem;
+}
+
+#ham {
+    display: none;
+}
+
+.menu {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    background-color: #333333;
-    margin: 0 auto;
+
 }
 
-.top-nav-item {
+.nav-item {
     height: 60px;
     font-size: 16px;
 }
 
-.top-nav-link {
+.nav-link {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -54,36 +69,19 @@ header {
     text-transform: capitalize;
 }
 
-.logo {
-    height: 60px;
-    background-color: #e95420;
-    font-size: 30px;
-    padding-left: 1rem;
-    padding-right: 2rem;
-}
-
-.logo-icon {
-    position: relative;
-    line-height: 60px;
-}
-
 .reg {
     font-size: 14px;
     position: absolute;
     top: -1.2rem;
-    right: -1.2rem;
+    right: 1rem;
 }
 
-.top-nav-item:hover {
+.nav-item:hover {
     background-color: #2b2b2b;
 }
 
-.top-nav-item:hover a {
+.nav-item:hover a {
     color: #e95420;
-}
-
-.top-nav-ham {
-    display: none;
 }
 
 .cont {
@@ -152,43 +150,36 @@ header {
 }
 
 @media screen and (max-width:768px) {
-    .top-nav-item {
-        height: 40px;
-    }
 
     .logo {
-        height: 40px;
-        flex: 1;
-        font-size: 16px;
+        margin-right: auto;
     }
 
-    .logo-icon {
-        line-height: 40px;
+    #ham {
+        display: block;
+        line-height: 60px;
+        margin-right: 1rem;
     }
 
-    .top-nav-item {
+    #ham span {
+        display: block;
+        font-size: 2rem;
+    }
+
+    .menu {
         display: none;
         width: 100%;
-        text-align: center;
+        height: 100vh;
     }
 
-    .top-nav-link {
+
+    .nav-link {
         font-size: 14px;
         margin: 0 .5rem;
     }
 
     .top-sub-menu {
         display: none;
-    }
-
-    .top-nav-ham {
-        display: block;
-        height: 40px;
-        line-height: 40px;
-        font-size: 2rem;
-        background-color: #e95420;
-        padding-left: 1rem;
-        padding-right: 1rem;
     }
 
     .grid {
@@ -199,15 +190,19 @@ header {
         display: none;
     }
 
+    /* high pri */
     .is-hide {
-        animation: isHide .5s ease-in-out forwards;
+        display: block;
+        transition: .2s;
     }
 
-    @keyframes isHide {
-        to {
+    @keyframes fold {
+        from {
             height: 0;
-            opacity: 0;
+        }
+
+        to {
+            height: auto;
         }
     }
-
 }
