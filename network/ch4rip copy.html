@@ -36,17 +36,17 @@
         <a class="logo" href="./ch4rip.html">RIP</span><span class="reg">&reg;</span></a>
         <div id="ham"><span class="iconfont">&#xe816;</span></div>
         <ul id="menu" class="menu">
-            <li class="nav-item"><a id="tocont0" class="nav-link"><span>概述</span><span
+            <li class="nav-item"><a id="tocont0" href="#cont0" class="nav-link"><span>概述</span><span
                         class="top-sub-menu">Overview</span></a></li>
-            <li class="nav-item"><a id="tocont1" class="nav-link"><span>特点</span><span
+            <li class="nav-item"><a id="tocont1" href="#cont1" class="nav-link"><span>特点</span><span
                         class="top-sub-menu">Features</span></a></li>
-            <li class="nav-item"><a id="tocont2" class="nav-link"><span>规则</span><span
+            <li class="nav-item"><a id="tocont2" href="#cont2" class="nav-link"><span>规则</span><span
                         class="top-sub-menu">Rules</span></a></li>
-            <li class="nav-item"><a id="tocont3" class="nav-link"><span>实例</span><span
+            <li class="nav-item"><a id="tocont3" href="#cont3" class="nav-link"><span>实例</span><span
                         class="top-sub-menu">Demo</span></a></li>
-            <li class="nav-item"><a id="tocont4" class="nav-link"><span>命令</span><span
+            <li class="nav-item"><a id="tocont4" href="#cont4" class="nav-link"><span>命令</span><span
                         class="top-sub-menu">Command</span></a></li>
-            <li class="nav-item"><a id="tocont5" class="nav-link"><span>实操</span><span
+            <li class="nav-item"><a id="tocont5" href="#cont5" class="nav-link"><span>实操</span><span
                         class="top-sub-menu">Operation</span></a></li>
         </ul>
     </nav>
@@ -508,58 +508,7 @@
             let cont4 = document.querySelector("#tocont4")
             let cont5 = document.querySelector("#tocont5")
 
-            let tar0 = document.querySelector("#cont0")
-            let tar1 = document.querySelector("#cont1")
-            let tar2 = document.querySelector("#cont2")
-            let tar3 = document.querySelector("#cont3")
-            let tar4 = document.querySelector("#cont4")
-            let tar5 = document.querySelector("#cont5")
-
-
-            cont0.addEventListener('click', (e) => {
-                console.log('cont0');
-                e.preventDefault()
-                setTimeout(function () {
-                    tar0.scrollIntoView()
-                }, 100)
-                menu.classList.toggle('is-hide')
-            })
-            cont1.addEventListener('click', (e) => {
-                console.log('cont1');
-                e.preventDefault()
-                setTimeout(function () {
-                    tar1.scrollIntoView()
-                }, 100)
-                menu.classList.toggle('is-hide')
-            })
-            cont2.addEventListener('click', (e) => {
-                e.preventDefault()
-                setTimeout(function () {
-                    tar2.scrollIntoView()
-                }, 100)
-                menu.classList.toggle('is-hide')
-            })
-            cont3.addEventListener('click', (e) => {
-                e.preventDefault()
-                setTimeout(function () {
-                    tar3.scrollIntoView()
-                }, 100)
-                menu.classList.toggle('is-hide')
-            })
-            cont4.addEventListener('click', (e) => {
-                e.preventDefault()
-                setTimeout(function () {
-                    tar4.scrollIntoView()
-                }, 100)
-                menu.classList.toggle('is-hide')
-            })
-            cont5.addEventListener('click', (e) => {
-                e.preventDefault()
-                setTimeout(function () {
-                    tar5.scrollIntoView()
-                }, 100)
-                menu.classList.toggle('is-hide')
-            })
+            // s2view(cont2, "#cont2")
 
             let ham = document.querySelector("#ham")
             let menu = document.querySelector("#menu")
@@ -569,15 +518,15 @@
                 menu.classList.toggle('is-hide')
             })
 
-            // menuItems.forEach((item, index) => {
-            //     item.addEventListener('touchstart', () => {
-            //         menuItems.forEach(item => {
-            //             item.style.color = "#ffffff";
-            //         })
-            //         menuItems[index].style.color = "#e95420"
-            //         menu.classList.toggle('is-hide')
-            //     })
-            // })
+            menuItems.forEach((item, index) => {
+                item.addEventListener('touchstart', () => {
+                    menuItems.forEach(item => {
+                        item.style.color = "#ffffff";
+                    })
+                    menuItems[index].style.color = "#e95420"
+                    menu.classList.toggle('is-hide')
+                })
+            })
         }
     </script>
 </body>
