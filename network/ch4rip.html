@@ -51,7 +51,7 @@
         </ul>
     </nav>
     <div class="w cont">
-        <dl id="cont0">
+        <dl id="cont0" class="target-cont">
             <dt class="chap">概述 Overview</dt>
             <dd>. RIP-Routing Information Protocol，路由信息协议，属于内部网关路由协议；当前版本为RIP2；</dd>
             <dd>. 基于距离矢量DV-distance vector的路由选择协议，使用跳数Hop count作为度量Metric到目标网络的距离，即：路由器到目标网络所经过的路由器个数；</dd>
@@ -63,7 +63,7 @@
             <dd class="dd-img-item"><img src="../imgs/network/rip/幻灯片14.jpg" alt=""></dd>
             <dd class="dd-diag-item">图1 RIP的跳数count</dd>
         </dl>
-        <dl id="cont1">
+        <dl id="cont1" class="target-cont">
             <dt class="chap">特点 Features</dt>
             <dd>[简单] RIP简单的认为：距离越短，路由质量越高；</dd>
             <dd>[小型] RIP最大支持15跳，适合小型网络；</dd>
@@ -73,7 +73,7 @@
             <dd>. 失效定时器：180s；每个条目被添加或被更新时，都会重新开始计时；超时，该条目被标记为无效路由，但不会删除，只是不会被RIP广播出去；</dd>
             <dd>. 清除定时器：240s；超过180s会被标记为无效条目；再经过60s，就会被彻底删除；</dd>
         </dl>
-        <dl id="cont2">
+        <dl id="cont2" class="target-cont">
             <dt class="chap">规则 Rules</dt>
             <dd>1. 如果收到的路由条目对应的目标网络不在当前路由表中，则添加-发现新网络；</dd>
             <dd>2. 如果路由表已有达到相同目标网络的路由条目，则：</dd>
@@ -83,7 +83,7 @@
             <dd>情况2：新条目等于当前条目，则添加新条目-负载均衡；</dd>
             <dd>情况3：新条目大于当前条目，不做更新处理-新条目劣势；</dd>
         </dl>
-        <dl id="cont3">
+        <dl id="cont3" class="target-cont">
             <dt class="chap">实例 Demo</dt>
             <dd>已知路由器D的路由表为表1；路由器C的路由表为表2；分析：经过C的路由交换后，D的路由表信息。</dd>
             <dd class="grid grid3">
@@ -413,7 +413,7 @@
             </dd>
             <dd class="dd-diag-item">表3 更新后路由器D的路由表信息</dd>
         </dl>
-        <dl id="cont4">
+        <dl id="cont4" class="target-cont">
             <dt class="chap">命令 Commands</dt>
             <dd class="code">
                 <pre>
@@ -426,7 +426,7 @@
                 </pre>
             </dd>
         </dl>
-        <dl id="cont5">
+        <dl id="cont5" class="target-cont">
             <dt class="chap">实操 Operation</dt>
             <dt>一、实验目的</dt>
             <dd>1. 了解RIP协议的基本原理；</dd>
@@ -501,83 +501,29 @@
     <script src="../js/back2top_js.js"></script>
     <script>
         window.onload = function () {
-            let cont0 = document.querySelector("#tocont0")
-            let cont1 = document.querySelector("#tocont1")
-            let cont2 = document.querySelector("#tocont2")
-            let cont3 = document.querySelector("#tocont3")
-            let cont4 = document.querySelector("#tocont4")
-            let cont5 = document.querySelector("#tocont5")
-
-            let tar0 = document.querySelector("#cont0")
-            let tar1 = document.querySelector("#cont1")
-            let tar2 = document.querySelector("#cont2")
-            let tar3 = document.querySelector("#cont3")
-            let tar4 = document.querySelector("#cont4")
-            let tar5 = document.querySelector("#cont5")
-
-
-            cont0.addEventListener('click', (e) => {
-                console.log('cont0');
-                e.preventDefault()
-                setTimeout(function () {
-                    tar0.scrollIntoView()
-                }, 100)
-                menu.classList.toggle('is-hide')
-            })
-            cont1.addEventListener('click', (e) => {
-                console.log('cont1');
-                e.preventDefault()
-                setTimeout(function () {
-                    tar1.scrollIntoView()
-                }, 100)
-                menu.classList.toggle('is-hide')
-            })
-            cont2.addEventListener('click', (e) => {
-                e.preventDefault()
-                setTimeout(function () {
-                    tar2.scrollIntoView()
-                }, 100)
-                menu.classList.toggle('is-hide')
-            })
-            cont3.addEventListener('click', (e) => {
-                e.preventDefault()
-                setTimeout(function () {
-                    tar3.scrollIntoView()
-                }, 100)
-                menu.classList.toggle('is-hide')
-            })
-            cont4.addEventListener('click', (e) => {
-                e.preventDefault()
-                setTimeout(function () {
-                    tar4.scrollIntoView()
-                }, 100)
-                menu.classList.toggle('is-hide')
-            })
-            cont5.addEventListener('click', (e) => {
-                e.preventDefault()
-                setTimeout(function () {
-                    tar5.scrollIntoView()
-                }, 100)
-                menu.classList.toggle('is-hide')
-            })
-
+            let navItems = document.querySelectorAll(".nav-item")
+            let contItems = document.querySelectorAll(".target-cont")
             let ham = document.querySelector("#ham")
             let menu = document.querySelector("#menu")
-            let menuItems = document.querySelectorAll('.nav-item')
+
+
+            navItems.forEach((item, index) => {
+                item.addEventListener('click', (e) => {
+                    setTimeout(function () {
+                        contItems[index].scrollIntoView();
+                        navItems.forEach(item => {
+                            item.style.color = "#ffffff";
+                        })
+                        navItems[index].style.color = "#e95420"
+                        menu.classList.toggle('is-hide')
+                    }, 100)
+
+                })
+            })
 
             ham.addEventListener('click', (e) => {
                 menu.classList.toggle('is-hide')
             })
-
-            // menuItems.forEach((item, index) => {
-            //     item.addEventListener('touchstart', () => {
-            //         menuItems.forEach(item => {
-            //             item.style.color = "#ffffff";
-            //         })
-            //         menuItems[index].style.color = "#e95420"
-            //         menu.classList.toggle('is-hide')
-            //     })
-            // })
         }
     </script>
 </body>
