@@ -81,7 +81,7 @@
             <dd>.若来自不同的下一跳路由器，则比较距离：</dd>
             <dd>情况1：新条目小于当前条目，则更新-新条目更具优势；</dd>
             <dd>情况2：新条目等于当前条目，则添加新条目-负载均衡；</dd>
-            <dd>情况2：新条目大于当前条目，不做更新处理-新条目劣势；</dd>
+            <dd>情况3：新条目大于当前条目，不做更新处理-新条目劣势；</dd>
         </dl>
         <dl id="cont3">
             <dt class="chap">实例 Demo</dt>
@@ -505,12 +505,12 @@
             let menu = document.querySelector("#menu")
             let menuItems = document.querySelectorAll('.nav-item')
 
-            ham.addEventListener('click', (e) => {
+            ham.addEventListener('touchstart', (e) => {
                 menu.classList.toggle('is-hide')
             })
 
             menuItems.forEach((item, index) => {
-                item.addEventListener('click', () => {
+                item.addEventListener('touchstart', () => {
                     menuItems.forEach(item => {
                         item.style.color = "#ffffff"
                     })
