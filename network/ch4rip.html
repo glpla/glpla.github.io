@@ -528,7 +528,11 @@
             ham.addEventListener('click', (e) => {
                 e.preventDefault()
                 menu.classList.toggle('is-hide')
-                document.documentElement.style.overflowY = "hidden"
+                if (document.documentElement.style.overflowY == 'auto') {
+                    document.documentElement.style.overflowY = "hidden"
+                } else {
+                    document.documentElement.style.overflowY = "auto"
+                }
             })
         }
     </script>
