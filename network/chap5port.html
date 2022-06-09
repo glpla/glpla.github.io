@@ -5,60 +5,159 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>运输层之端口Port</title>
-    <link rel="stylesheet" href="../css/reset.css">
+    <title>运输层 Transport Layer</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/linux.css">
+    <style>
+        header {
+            background-image: url(../imgs/network/banner.jpg);
+        }
+
+        .item-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f7f7f7;
+            border-radius: 1rem;
+            padding: 1rem;
+        }
+
+        .item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .item-title {
+            font-size: 1.2rem;
+        }
+
+        .item-sub-title {
+            font-size: .8rem;
+        }
+
+        .item-title::before {
+            content: '[';
+            color: #c81623;
+        }
+
+        .item-title::after {
+            content: ']';
+            color: #c81623;
+        }
+    </style>
 </head>
 
-<body>
+<body class="container">
     <section class="w">
-        <header>
-            <h1>端口 Port</h1>
+        <header class="w">
+            <h1>运输层 Transport Layer</h1>
+            <span>2022-06-10</span>
         </header>
-        <dl>
-            <dt>运输层概述</dt>
-            <dd>运输层以下各层的任务：解决主机到主机的通信； </dd>
-            <dd>运输层的任务：为应用进程提供端到端的服务； </dd>
-            <dd>计算机通信实际上应用进程之间的通信； </dd>
-            <dd>运输层使用[端口]来区别不同的应用进程； </dd>
-            <dd>根据业务需要，主要提供有：面向连接的TCP和无连接的UDP两种服务；</dd>
-            <dd class="dd-img-item"><img src="../imgs/network/port/幻灯片1.JPG" alt=""></dd>
-            <dd class="dd-diag-item">图1 运输层架构</dd>
-            <dd class="dd-img-item"><img src="../imgs/network/port/幻灯片2.JPG" alt=""></dd>
-            <dd class="dd-diag-item">图2 运输层主要协议和服务</dd>
-            <dd class="dd-img-item"><img src="../imgs/network/port/幻灯片3.JPG" alt=""></dd>
-            <dd class="dd-diag-item">图3 运输层端口</dd>
-            <dd class="dd-title-item">实操部分</dd>
-            <dt>网络拓扑</dt>
-            <dd class="dd-img-item"><img src="../imgs/network/port/port0.jpg" alt=""></dd>
-            <dt>配置网络设备</dt>
-            <dd>1.配置WEB服务器：配置IP地址192.168.0.3；</dd>
-            <dd>2.配置DNS服务器：配置IP地址192.168.0.2；添加WEB服务器对应的域名信息；</dd>
-            <dd class="dd-img-item"><img src="../imgs/network/port/port1.jpg" alt=""></dd>
-            <dd>3.配置主机：配置IP地址192.168.0.1；添加DNS服务器地址；</dd>
-            <dd class="dd-img-item"><img src="../imgs/network/port/port2.jpg" alt=""></dd>
-            <dt>测试网络连通性</dt>
-            <dd>1.主机到WEB服务器的PING；[请补充测试结果]</dd>
-            <dd>2.主机到DNS服务器的PING；[请补充测试结果]</dd>
-            <dt>实时测试</dt>
-            <dd>打开主机的WEB浏览器；输入www.cnplaman.com，可以看到返回的WEB页面；</dd>
-            <dd class="dd-img-item"><img src="../imgs/network/port/port3.jpg" alt=""></dd>
-            <dt>模拟测试</dt>
-            <dd>1.筛选协议</dd>
-            <dd class="dd-img-item"><img src="../imgs/network/port/port4.jpg" alt=""></dd>
-            <dd>2.打开主机的WEB浏览器；输入www.cnplaman.com，单步测试数据报的发送过程；主要查看端口；</dd>
-            <dd class="dd-title-item">作业</dd>
-            <dd>1. 熟知端口分别有哪些？</dd>
-            <dd>2. 根据实操部分的内容，完成端口的测试；</dd>
-            <dd>3. 以纸质的形式提交实验报告；</dd>
-            <dd>4. 论文格式请参照范文<a class="warn" href="../imgs/ds/format.docx">[点击下载]</a>。</dd>
-        </dl>
+        <div class="w cont">
+            <dl>
+                <dt>运输层概述</dt>
+                <dd>运输层以下各层的任务：解决主机到主机的通信；运输层的任务：为应用进程提供端到端的服务； </dd>
+                <dd>计算机通信实际上应用进程之间的通信；</dd>
+                <dd>运输层使用[端口]来区别不同的应用进程；</dd>
+                <dd>根据业务需要，主要提供有：面向连接的TCP和无连接的UDP两种服务；</dd>
+                <dd class="dd-img-item"><img src="../imgs/network/port/幻灯片1.JPG" alt=""></dd>
+                <dd class="dd-diag-item">图1 运输层架构</dd>
+                <dt>主要协议</dt>
+                <dd class="grid grid2">
+                    <div class="item-wrap">
+                        <div class="item-img"><img src="../imgs/network/port/p0.png" alt=""></div>
+                        <div class="item-title">UDP</div>
+                        <div class="item-sub-title">User Datagram Protocol</div>
+                    </div>
+                    <div class="item-wrap">
+                        <div class="item-img"><img src="../imgs/network/port/p1.png" alt=""></div>
+                        <div class="item-title">TCP</div>
+                        <div class="item-sub-title">Transmission Control Protocol</div>
+                    </div>
+                </dd>
+                <dt>端口</dt>
+                <dd>软件地址；只具有本地意义；</dd>
+                <dd>长度16bit：0-65535；</dd>
+                <dd>
+                    <table>
+                        <tr>
+                            <td>熟知端口</td>
+                            <td>登记端口</td>
+                            <td>客户端使用端口</td>
+                        </tr>
+                        <tr>
+                            <td>0-1023</td>
+                            <td>1024-49151</td>
+                            <td>49152-65535</td>
+                        </tr>
+                    </table>
+                </dd>
+                <dt>熟知端口</dt>
+                <dd>
+                    <table>
+                        <tr>
+                            <td>FTP</td>
+                            <td>Telnet</td>
+                            <td>SMTP</td>
+                            <td>DNS</td>
+                        </tr>
+                        <tr>
+                            <td>20 / 21</td>
+                            <td>23</td>
+                            <td>25</td>
+                            <td>53</td>
+                        </tr>
+                        <tr>
+                            <td>DHCP</td>
+                            <td>HTTP</td>
+                            <td>HTTPS</td>
+                            <td>RIP</td>
+                        </tr>
+                        <tr>
+                            <td>67 / 68</td>
+                            <td>80</td>
+                            <td>443</td>
+                            <td>520</td>
+                        </tr>
+                    </table>
+                </dd>
+            </dl>
+            <dl>
+                <dd class="dd-title-item">实操部分</dd>
+                <dt>网络拓扑</dt>
+                <dd class="dd-img-item"><img src="../imgs/network/port/port0.jpg" alt=""></dd>
+                <dt>配置网络设备</dt>
+                <dd>1.配置WEB服务器：配置IP地址192.168.0.3；</dd>
+                <dd>2.配置DNS服务器：配置IP地址192.168.0.2；添加WEB服务器对应的域名信息；</dd>
+                <dd class="dd-img-item"><img src="../imgs/network/port/port1.jpg" alt=""></dd>
+                <dd>3.配置主机：配置IP地址192.168.0.1；添加DNS服务器地址；</dd>
+                <dd class="dd-img-item"><img src="../imgs/network/port/port2.jpg" alt=""></dd>
+                <dt>测试网络连通性</dt>
+                <dd>1.主机到WEB服务器的PING；[请补充测试结果]</dd>
+                <dd>2.主机到DNS服务器的PING；[请补充测试结果]</dd>
+                <dt>实时测试</dt>
+                <dd>打开主机的WEB浏览器；输入www.cnplaman.com，可以看到返回的WEB页面；</dd>
+                <dd class="dd-img-item"><img src="../imgs/network/port/port3.jpg" alt=""></dd>
+                <dt>模拟测试</dt>
+                <dd>1.筛选协议</dd>
+                <dd class="dd-img-item"><img src="../imgs/network/port/port4.jpg" alt=""></dd>
+                <dd>2.打开主机的WEB浏览器；输入www.cnplaman.com，单步测试数据报的发送过程；主要查看端口；</dd>
+                <dd class="dd-title-item">作业</dd>
+                <dd>1. 熟知端口分别有哪些？</dd>
+                <dd>2. 根据实操部分的内容，完成端口的测试；</dd>
+                <dd>3. 以纸质的形式提交实验报告；</dd>
+                <dd>4. 论文格式请参照范文<a class="warn" href="../imgs/ds/format.docx">[点击下载]</a>。</dd>
+            </dl>
+        </div>
         <footer>
             <div class="copyright">
                 <span>&copy; All Copyrights Reserved, 2022-2024</span>
                 <img src="../imgs/avatar.jpg" alt="">
                 <span>Cnplaman from No 54414, PLA</span>
             </div>
-            <span>2022-05-27</span>
         </footer>
     </section>
 </body>
