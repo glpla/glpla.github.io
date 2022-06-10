@@ -154,10 +154,40 @@ th, td {
     text-decoration: underline;
 }
 
+.cont {
+    position: relative;
+    padding: 0 1rem;
+    flex: 1;
+    /* margin: 0 auto; */
+    background-color: #fff;
+}
+
+.cont::before {
+    content: '';
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    box-shadow: -1px 0 2rem 1rem rgba(0, 0, 0, .1);
+}
+
+.cont::after {
+    content: '';
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    box-shadow: 1px 0 2rem 1rem rgba(0, 0, 0, .1);
+}
+
 .chap {
     display: flex;
     align-items: flex-end;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: normal;
     height: 120px;
     padding: 1rem;
