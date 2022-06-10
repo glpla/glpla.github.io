@@ -16,27 +16,26 @@
         <div>Welcome</div>
         <div>2022-06-05</div>
     </header>
-    <nav class="top-nav">
-        <ul class="w top-nav-wrap">
-            <li class="logo"><a href="./index.html" class="logo-icon">图的存储</span><span class="reg">&reg;</span></a>
-            </li>
-            <li class="top-nav-ham" id="ham-menu"><span class="iconfont">&#xe816;</li>
-            <li class="top-nav-item is-hide"><a href="#cont0" class="top-nav-link"><span>概述</span><span
-                        class="top-sub-menu">overview</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont1" class="top-nav-link"><span>邻接矩阵</span><span
+    <nav id='nav' class="w">
+        <a class="logo" href="./ch4rip.html">图的存储</span><span class="reg">&reg;</span></a>
+        <div id="ham"><span class="iconfont">&#xe816;</span></div>
+        <ul id="menu" class="menu">
+            <li class="nav-item"><a id="tocont0" class="nav-link"><span>概述</span><span
+                        class="top-sub-menu">Overview</span></a></li>
+            <li class="nav-item"><a id="tocont1" class="nav-link"><span>邻接矩阵</span><span
                         class="top-sub-menu">Matrix</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont2" class="top-nav-link"><span>邻接表</span><span
+            <li class="nav-item"><a id="tocont2" class="nav-link"><span>邻接表</span><span
                         class="top-sub-menu">List</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont3" class="top-nav-link"><span>小结</span><span
+            <li class="nav-item"><a id="tocont3" class="nav-link"><span>小结</span><span
                         class="top-sub-menu">Summary</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont4" class="top-nav-link"><span>作业</span><span
+            <li class="nav-item"><a id="tocont4" class="nav-link"><span>作业</span><span
                         class="top-sub-menu">Homework</span></a></li>
         </ul>
     </nav>
     <div class="w cont">
         <dl>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片10.JPG" alt=""></dd>
-            <dt id="cont0">概述 Overview</dt>
+            <dt class="target-cont">概述 Overview</dt>
             <dt>数据和关系</dt>
             <dd class="dd-item">不仅要存储顶点本身的信息；还有存储和顶点关联的所有顶点的信息，包括对应边的权weigh[如果图带权]；</dd>
             <dt>分类</dt>
@@ -65,7 +64,7 @@
                     </div>
                 </div>
             </dd>
-            <dt id="cont1">邻接矩阵 Matrix</dt>
+            <dt class="target-cont">邻接矩阵 Matrix</dt>
             <dd class="dd-item">若图G=(V,E)是含义n(n>0)个顶点的图，各顶点编号为0到n-1，则G的邻接矩阵A是[n阶方阵]；</dd>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片11.JPG" alt=""></dd>
             <dd class="dd-diag-item">图1 不带权无向图</dd>
@@ -100,7 +99,7 @@
     } MatGraph;                //完整的图邻接矩阵类型
                 </pre>
             </dd>
-            <dt id="cont2">邻接表 List</dt>
+            <dt class="target-cont">邻接表 List</dt>
             <dd class="dd-item">顺序和链式结合的方式的存储； </dd>
             <dd class="dd-item">为图G的每个顶点创建一个单链表；链表的每个节点是关联于顶点的所有[出边]；使用[一维]数组存放每个单链表的第一个边节点；</dd>
             <dd class="dd-item">[举例说明]挂帘子；</dd>
@@ -139,9 +138,9 @@
     } AdjGraph;              //完整的图邻接表类型
                 </pre>
             </dd>
-            <dt id="cont3">小结 Summary</dt>
+            <dt class="target-cont">小结 Summary</dt>
             <dd class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片23.JPG" alt=""></dd>
-            <dt id="cont4">作业 Homework</dt>
+            <dt class="target-cont">作业 Homework</dt>
             <dd class="dd-item">1.判断图的类型，并给出对应的邻接矩阵。</dd>
             <dd class="grid grid2">
                 <div class="dd-img-item"><img src="../imgs/ds/chap8 graph1/幻灯片15.JPG" alt=""></div>
@@ -169,30 +168,35 @@
                     return 'click';
             })();
 
-            let ham = document.querySelector("#ham-menu")
-            let menuItems = document.querySelectorAll('.top-nav-item')
+            let navItems = document.querySelectorAll(".nav-item")
+            let contItems = document.querySelectorAll(".target-cont")
+            let ham = document.querySelector("#ham")
+            let menu = document.querySelector("#menu")
 
-            ham.addEventListener(clickEvent, () => {
-                menuItems.forEach(item => {
-                    item.style.display = 'block'
-                    item.style.heigth = 'auto'
-                    item.classList.toggle('is-hide')
+
+            navItems.forEach((item, index) => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault()
+                    setTimeout(function () {
+                        contItems[index].scrollIntoView();
+                        navItems.forEach(item => {
+                            item.style.color = "#ffffff";
+                        })
+                        navItems[index].style.color = "#e95420"
+                    }, 100)
+                    menu.classList.toggle('is-hide')
+                    document.documentElement.style.overflowY = "auto"
                 })
             })
 
-            menuItems.forEach((item, index) => {
-                item.addEventListener(clickEvent, () => {
-                    if (clickEvent == "touchstart") {
-                        menuItems.forEach(item => {
-                            item.classList.toggle('is-hide')
-                        })
-                    } else {
-                        menuItems.forEach(item => {
-                            item.style.color = "#ffffff"
-                        })
-                        menuItems[index].style.color = "#e95420"
-                    }
-                })
+            ham.addEventListener('click', (e) => {
+                e.preventDefault()
+                menu.classList.toggle('is-hide')
+                if (document.documentElement.style.overflowY == 'auto') {
+                    document.documentElement.style.overflowY = "hidden"
+                } else {
+                    document.documentElement.style.overflowY = "auto"
+                }
             })
         }
     </script>
