@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/linux.css">
+    <!-- <link rel="stylesheet" href="css/base.css"> -->
+    <style>
+        header {
+            background-image: url(./imgs/paper.jpg);
+        }
+
+        .chap {
+            background-image: unset;
+            background-color: #bf8036;
+        }
+
+        .layout {
+            overflow: hidden;
+            color: #666;
+        }
+
+        .first-letter::first-letter {
+            float: left;
+            color: #f40;
+            font-size: 2em;
+            font-weight: 600;
+            margin-right: .6rem;
+        }
+
+        img {
+            width: 80px;
+        }
+
+        .img0 {
+            float: right;
+        }
+
+        .img1 {
+            float: left;
+            shape-outside: circle();
+        }
+
+        img+p {
+            margin-bottom: 1rem;
+        }
+
+        .float-l {
+            float: left;
+            width: 80px;
+            height: 60px;
+            background-color: #f4f4f4;
+        }
+
+        .float-r {
+            float: right;
+            width: 80px;
+            height: 60px;
+            background-color: #f4f4f4;
+        }
+
+        .float-main {
+            overflow: hidden;
+            height: 60px;
+            background-color: #f8c959;
+        }
+
+        .cart {
+            position: relative;
+            width: 120px;
+            height: 30px;
+            margin: 2rem auto;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 30px;
+            font-size: 16px;
+            color: #f40;
+            border: 1px solid #f40;
+        }
+
+        .cart-icon {
+            font-size: 16px;
+        }
+
+        .cart-badge {
+            position: absolute;
+            left: 30px;
+            top: -12px;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            color: #f4f4f4;
+            background-color: #f40;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .cart-desc {
+            font-size: 12px;
+        }
+
+        .pos-box {
+            position: relative;
+        }
+
+        .pos-main {
+            margin: 1rem 80px;
+            background-color: #f8c959;
+            height: 60px;
+        }
+
+        .pos-l {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 70px;
+            height: 60px;
+            background-color: #f4f4f4;
+        }
+
+        .pos-r {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 70px;
+            height: 60px;
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+
+<body class="container">
+    <header class="w">
+        <h1>布局 Layout</h1>
+        <span class="timestamp">2022-06-11</span>
+    </header>
+    <nav class="w" id="nav">
+        <ul class="menu">
+            <li class="nav-item"><a class='nav-link' href="#cont0">浮动</a></li>
+            <li class="nav-item"><a class='nav-link' href="#cont1">定位</a></li>
+            <li class="nav-item"><a class='nav-link' href="#cont2">弹性布局</a></li>
+            <li class="nav-item"><a class='nav-link' href="#cont3">网格布局</a></li>
+        </ul>
+    </nav>
+    <div class="w cont">
+        <dl id="cont0">
+            <dt class="chap">浮动 Float</dt>
+            <dd>浮动元素会脱离文档流document flow；</dd>
+            <dd>元素在文档中出现的顺序不一样，最后渲染的布局结果也不一样；</dd>
+            <dd>必须要清除浮动[你不清试试]；</dd>
+            <dd>现在：仅仅在一些特殊应用如：图文混排或首字下沉、根据形状浮动填充时，才会使用；</dd>
+            <dd>其它布局请采用弹性盒子flex或网格grid；</dd>
+            <dt>清除浮动</dt>
+            <dd>清除的方法很多。如：为父元素指定高度；父元素溢出隐藏；</dd>
+            <dd>为了不增加额外的标签，通常以伪元素::after的形式为浮动元素的父元素指定清除类；</dd>
+            <dd class="code">
+                <pre>
+    .clear::after {
+        content: '';
+        display: block;
+        clear: both;
+    }</pre>
+            </dd>
+            <dt>经典布局</dt>
+            <dd>[案例] 两栏布局[左侧固定]</dd>
+            <dd class="layout">
+                <div class="layout-box">
+                    <div class="float-l ">固定宽度</div>
+                    <div class="float-main">自动宽度：overflow: hidden;</div>
+                </div>
+            </dd>
+            <dd>[案例] 两栏布局[右侧固定]</dd>
+            <dd class="layout">
+                <div class="layout-box">
+                    <div class="float-r">固定宽度</div>
+                    <div class="float-main">自动宽度：overflow: hidden;</div>
+                </div>
+            </dd>
+            <dd>[案例] 三栏布局</dd>
+            <dd class="layout">
+                <div class="layout-box">
+                    <div class="float-l ">固定宽度</div>
+                    <div class="float-r ">固定宽度</div>
+                    <div class="float-main">自动宽度：overflow: hidden;</div>
+                </div>
+            </dd>
+            <dd>[说明]</dd>
+            <dd>1.以上布局，中间区域也可以使用padding或margin实现；但是使用溢出隐藏构造BFC更便捷；</dd>
+            <dd>2.以上布局，不适合前端页面，适合后端页面；</dd>
+            <dd><span class="warn">[思考]</span>如何使得各部分之间保留一定的间隙？</dd>
+            <dd class="layout">
+                <div class="layout-box">
+                    <div class="float-l " style="margin-right: 1rem;">固定宽度</div>
+                    <div class="float-r " style="margin-left: 1rem;">固定宽度</div>
+                    <div class="float-main">自动宽度：overflow: hidden;</div>
+                </div>
+            </dd>
+            <dd>[案例] 图文混排</dd>
+            <dd class="layout">
+                <img class="img0" src="./imgs/ty.png" alt="">
+                <p class="first-letter">
+                    中国人民解放军陆军特种作战学院是一所特种作战、情报侦察领域的高等教育院校，是全军侦察特战人才培养基地、全军高中级狙击手培训中心、全军军事体育人才培训中心、特种作战理论和战法训法研创中心。学院溯源于解放战争初期创建的冀热辽军政干部学校、解放战争末期创建的第二野战军军政大学第三分校和1978年开办的国际关系学院侦察与特种作战指挥专业，2017年7月，原特种作战学院和桂林综合训练基地合并组建成为陆军特种作战学院。截至2021年5月，学院横跨广西、广东和湖南，在桂林、广州、衡阳、株洲共设8个营区，有11个本科专业；有2个专业学位硕士授权点，2个重点学科建设方向；有教员500余人，其中高职教员143人，具有研究生以上学历的256人。
+                </p>
+                <img class="img1" src="./imgs/ty.png" alt="">
+                <p>
+                    学院院徽全部要素包含3个模块、9个部分：通用元素和基本属性：五角红星与八一字样，是中国人民解放军军徽核心，代表性质和方向；长城，寓意守护国土安全的基本功能；陆军特种作战学院，是最基本的文字标识。特色元素和专业属性：红色闪电，寓意特战官兵“铁血忠诚”、“一招制胜”的信仰底色和职能使命；三支羽翼组成的翅膀，既指海陆空三栖作战的基本样式，也呈现学院转型重塑、换羽腾飞之势；双色利刃，紧扣《孙子兵法》中“以正合，以奇胜”的特种作战战术起源。辅助元素和精神属性：虚拟的网络地球，强调特战人才要立足国际视野、抢占科技前沿；两条折线，勾勒出狼眼睛的轮廓，使院徽整体神似战狼，彰显特战尖兵的战斗精神；书本底座，寓意学院人才培养托起特战力量发展的支撑作用。点击访问更多<a
+                        class="warn"
+                        href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/shape-outside">shape-outside</a>使用；
+                </p>
+            </dd>
+        </dl>
+        <dl id="cont1">
+            <dt class="chap">定位 Position</dt>
+            <dt>相对定位Relative/绝对定位Absolute</dt>
+            <dd>相对定位：不脱离文档流；参考对象是自己；很少单独使用，通常为子元素提供定位依据，即：<strong>父相子绝</strong></dd>
+            <dd>绝对定位：脱离文档流；参考对象是显示的设置了定位属性(相对或绝对都可以)的最近的父元素；如果父元素没有指定定位属性，则一级一级往上寻找，直至&lt;body&gt;；绝对定位元素默认会待在原来的位置，可以利用关键字top
+                right bottom left和负边距定位元素。</dd>
+            <dd>[案例] JD购物车</dd>
+            <dd class="layout">
+                <div class="cart">
+                    <span class="iconfont cart-icon">&#xe832;</span>
+                    <span class="cart-badge">8</span>
+                    <span class="cart-desc">我的购物车</span>
+                </div>
+            </dd>
+            <dd>[案例] 三栏布局</dd>
+            <dd>[分析] 利用float虽然可以实现，但是不符合页面SEO：最重要中间是主体部分，应该先显示，而侧边栏的应该稍后；所以文档流中main在前，侧边栏在后；抛弃float，使用定位实现；</dd>
+            <dd class="code">
+                <pre>
+    .pos-box {//父相
+        position: relative;
+    }
+    .pos-main {
+        margin: 1rem 80px 80px;
+        //...
+    }
+    .pos-l {//子绝
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 70px;
+        //...
+    }
+
+    .pos-r {//子绝
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 70px;
+        //...
+    }                </pre>
+            </dd>
+            <dd class="layout">
+                <div class="pos-box">
+                    <div class="pos-main">pos-main</div>
+                    <div class="pos-l ">pos-l</div>
+                    <div class="pos-r ">pos-r</div>
+                </div>
+            </dd>
+            <dt>固定定位Fixed</dt>
+            <dd>固定定位元素以视口viewport为参考，固定在屏幕上，不会随页面的滚动而移动。通常用来定制导航，如顶部导航、侧边导航和底部导航等。</dd>
+            <dd>[案例] 固定在版心两侧的导航</dd>
+            <dd>[思路]
+                贴近右侧：左偏移浏览器的一半（50%），再增加半个版心的margin-left；贴近左侧同理；导航通常的解决方案是：当前页面位于顶端时，暂时隐藏侧边导航条；当页面向下滚动到一定位置时，再显式侧边导航栏；一般需要借助JS实现。
+            </dd>
+            <dd>[案例] 后端管理页面</dd>
+            <dd>[思路] 利用固定定位属性top、right、bottom、left分别为0，进而占满整个视口；</dd>
+            <dt>粘性定位</dt>
+            <dd>兼有相对定位和绝对定位的特性；以视口viewport为参考(具有固定定位特性)，占有原来位置(具有相对定位特性)；必须指定left、top、right、bottom某一个；适合banner/swiper+主导航+内容的网页。网页滚动时候，banner移出，导航保留/黏贴在顶端，内容也逐步移出；还可以使用JS实现黏性效果。
+            </dd>
+            <dd class="warn">注意</dd>
+            <dd>1.其父元素不能设置overflow:hidden </dd>
+            <dd>2.浏览器支持不是很广泛；更多信息请查看<a class="warn" href="https://caniuse.com/">https://caniuse.com/</a></dd>
+            <dd>3.以上案例，可以参考<a class="warn" href="./position.html" target="_blank">示例</a>；</dd>
+        </dl>
+        <dl id="cont2">
+            <dt class="chap">弹性布局 Flex</dt>
+        </dl>
+        <dl id="cont3">
+            <dt class="chap">网格 Grid</dt>
+        </dl>
+    </div>
+    <footer class="w copyright">
+        <div class="copyright-item">All Copyrights Reserved, &copy; 2022-2024</div>
+        <img class="copyright-item" src=" ../imgs/avatar.jpg" alt="">
+        <div class="copyright-item">Cnplaman from No 54414, PLA</div>
+    </footer>
+</body>
+
+</html>

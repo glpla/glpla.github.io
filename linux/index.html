@@ -9,47 +9,55 @@
     <link href="https://fonts.googlefonts.cn/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" href="../css/normalize.css">
     <link rel="stylesheet" href="../css/linux.css">
+    <style>
+        header {
+            background-image: url(../imgs/jiageng/jiageng5.jpg);
+        }
+
+        .chap {
+            background-image: url(../imgs/jiageng/jiageng1.jpg);
+        }
+    </style>
 </head>
 
 <body class="container">
     <header id="top" class="w">
         <div>Welcome</div>
-        <div>2022-06-05</div>
+        <div class="timestamp">2022-06-05</div>
     </header>
-    <nav class="top-nav">
-        <ul class="w top-nav-wrap">
-            <li class="logo"><a href="./index.html" class="logo-icon">Ubuntu</span><span class="reg">&reg;</span></a>
-            </li>
-            <li class="top-nav-ham" id="ham-menu"><span class="iconfont">&#xe816;</li>
-            <li class="top-nav-item is-hide"><a href="#cont0" class="top-nav-link"><span>概述</span><span
+    <nav id='nav' class="w">
+        <a class="logo" href="./index.html">Ubuntu</span><span class="reg">&reg;</span></a>
+        <div id="ham"><span class="iconfont">&#xe816;</span></div>
+        <ul id="menu" class="menu">
+            <li class="nav-item"><a id="tocont0" class="nav-link"><span>概述</span><span
                         class="top-sub-menu">Overview</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont1" class="top-nav-link"><span>安装</span><span
+            <li class="nav-item"><a id="tocont1" class="nav-link"><span>安装</span><span
                         class="top-sub-menu">Install</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont2" class="top-nav-link"><span>基本操作</span><span
+            <li class="nav-item"><a id="tocont2" class="nav-link"><span>基本操作</span><span
                         class="top-sub-menu">Usage</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont3" class="top-nav-link"><span>命令</span><span
+            <li class="nav-item"><a id="tocont3" class="nav-link"><span>命令</span><span
                         class="top-sub-menu">Command</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont4" class="top-nav-link"><span>文件</span><span
+            <li class="nav-item"><a id="tocont4" class="nav-link"><span>文件</span><span
                         class="top-sub-menu">File</span></a></li>
-            <li class="top-nav-item is-hide"><a href="#cont5" class="top-nav-link"><span>高级操作</span><span
+            <li class="nav-item"><a id="tocont5" class="nav-link"><span>高级操作</span><span
                         class="top-sub-menu">Advance</span></a></li>
         </ul>
     </nav>
     <div class="w cont">
-        <dl id="cont0">
+        <dl class="target-cont" id="cont0">
             <dt class="chap">概述 Overview</dt>
         </dl>
-        <dl id="cont1">
+        <dl class="target-cont" id="cont1">
             <dt class="chap">安装 Install</dt>
-            <dd>vmware<a class="link"
-                    href="https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html">点击下载</a>
-            </dd>
-            <dd>ubuntu<a class="link" href="https://ubuntu.com/download/desktop">点击下载</a>
-            </dd>
+            <dd>vmware</dd>
+            <dd class="dd-item"><a class="link"
+                    href="https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html">点击下载</a></dd>
+            <dd>ubuntu</dd>
+            <dd class="dd-item"><a class="link" href="https://ubuntu.com/download/desktop">点击下载</a></dd>
             <dd class="dd-item">帮助-&gt;关于-&gt;永不过期</dd>
             <dd class="dd-item">网络链接属性：2个虚拟网卡VMware Network Adapter VMnet1</dd>
         </dl>
-        <dl id="cont2">
+        <dl class="target-cont" id="cont2">
             <dt class="chap">操作 Usage</dt>
             <dt>1.任务栏/启动器 Launcher</dt>
             <dd class="dd-item">调整位置：拖动</dd>
@@ -88,7 +96,7 @@
             <dd>[示例]从现在开始5分钟后关机：shutdown +5</dd>
             <dd>[示例]20:30关机：shutdown 20:30</dd>
         </dl>
-        <dl id="cont3">
+        <dl class="target-cont" id="cont3">
             <dt class="chap">命令 Command</dt>
             <dt>1.命令格式</dt>
             <dd>格式：command [-options] [parameter]</dd>
@@ -174,7 +182,7 @@
             <dd class="dd-item">CTRL+c返回命令状态</dd>
             <dd class="dd-item">选项可以组合使用，如-l -h可以更改为-lh；注意先后顺序；</dd>
         </dl>
-        <dl id="cont4">
+        <dl class="target-cont" id="cont4">
             <dt class="chap">文件 File</dt>
             <dt>1.文件类型</dt>
             <dd class="dd-item">文件：白色</dd>
@@ -232,7 +240,7 @@
             <dd class="dd-item">[示例] 在显示主目录的结果中查找包含cc的行：ls -lha ~ | grep cc </dd>
             <dd class="dd-item">[示例] 分屏显示主目录结果：ls -lha ~ | more </dd>
         </dl>
-        <dl id="cont5">
+        <dl class="target-cont" id="cont5">
             <dt class="chap">高级操作</dt>
             <dt>1.SSH</dt>
             <dd class="dd-item">Secure
@@ -240,6 +248,7 @@
             <dd>格式：ssh [-p port] user@remote</dd>
         </dl>
     </div>
+    <a href="tel:13707735481">13707735481</a>
     <footer class="w copyright">
         <div class="copyright-item">All Copyrights Reserved, &copy; 2022-2024</div>
         <img class="copyright-item" src=" ../imgs/avatar.jpg" alt="">
@@ -247,37 +256,40 @@
     </footer>
     <script>
         window.onload = function () {
-            const clickEvent = (function () {
-                if ('ontouchstart' in document.documentElement === true)
-                    return 'touchstart';
-                else
-                    return 'click';
-            })();
+            if ('addEventListener' in document) {
+                document.addEventListener('DOMContentLoaded', function () {
+                    FastClick.attach(document.body);
+                }, false);
+            }
+            let navItems = document.querySelectorAll(".nav-item")
+            let contItems = document.querySelectorAll(".target-cont")
+            let ham = document.querySelector("#ham")
+            let menu = document.querySelector("#menu")
 
-            let ham = document.querySelector("#ham-menu")
-            let menuItems = document.querySelectorAll('.top-nav-item')
 
-            ham.addEventListener(clickEvent, () => {
-                menuItems.forEach(item => {
-                    item.style.display = 'block'
-                    item.style.heigth = 'auto'
-                    item.classList.toggle('is-hide')
+            navItems.forEach((item, index) => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault()
+                    setTimeout(function () {
+                        contItems[index].scrollIntoView();
+                        navItems.forEach(item => {
+                            item.style.color = "#ffffff";
+                        })
+                        navItems[index].style.color = "#e95420"
+                    }, 100)
+                    menu.classList.toggle('is-hide')
+                    document.documentElement.style.overflowY = "auto"
                 })
             })
 
-            menuItems.forEach((item, index) => {
-                item.addEventListener(clickEvent, () => {
-                    if (clickEvent == "touchstart") {
-                        menuItems.forEach(item => {
-                            item.classList.toggle('is-hide')
-                        })
-                    } else {
-                        menuItems.forEach(item => {
-                            item.style.color = "#ffffff"
-                        })
-                        menuItems[index].style.color = "#e95420"
-                    }
-                })
+            ham.addEventListener('click', (e) => {
+                e.preventDefault()
+                menu.classList.toggle('is-hide')
+                if (document.documentElement.style.overflowY == 'auto') {
+                    document.documentElement.style.overflowY = "hidden"
+                } else {
+                    document.documentElement.style.overflowY = "auto"
+                }
             })
         }
     </script>
