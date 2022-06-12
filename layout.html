@@ -132,6 +132,71 @@
             height: 60px;
             background-color: #f4f4f4;
         }
+
+        .poem {
+            width: 100%;
+            writing-mode: vertical-rl;
+            background-color: #f7f7f7;
+            padding: 1rem;
+            background-image: url(./imgs/h5/poem.jpeg);
+            background-size: cover;
+            border-radius: 10px;
+            color: #fff;
+            text-shadow: 1px 1px 2px #000;
+        }
+
+        .poem div {
+            font-size: 1rem;
+            margin-left: 1rem;
+        }
+
+        .poem div:first-child {
+            font-size: 1.2rem;
+            margin-left: 2rem;
+        }
+
+        .ar {
+            background-color: #f7f7f7;
+            padding: 10px;
+            columns: 2;
+            column-gap: 2rem;
+        }
+
+        .ar-title {
+            text-align: center;
+            column-span: all;
+        }
+
+        .ar-sub-title,
+        .ar-foot {
+            text-align: center;
+            font-size: 14px;
+            column-span: all;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        h3 {
+            font-size: 18px;
+        }
+
+        .ar-foot {
+            margin-bottom: 1rem;
+        }
+
+        .ar .h2 {
+            line-height: 60px;
+        }
+
+        .ar .h3 {
+            line-height: 40px;
+        }
+
+        .ar-cont {
+            line-height: 20px;
+        }
     </style>
 </head>
 
@@ -146,6 +211,8 @@
             <li class="nav-item"><a class='nav-link' href="#cont1">定位</a></li>
             <li class="nav-item"><a class='nav-link' href="#cont2">弹性布局</a></li>
             <li class="nav-item"><a class='nav-link' href="#cont3">网格布局</a></li>
+            <li class="nav-item"><a class='nav-link' href="#cont4">堆叠上下文</a></li>
+            <li class="nav-item"><a class='nav-link' href="#cont5">文本</a></li>
         </ul>
     </nav>
     <div class="w cont">
@@ -284,6 +351,76 @@
         </dl>
         <dl id="cont3">
             <dt class="chap">网格 Grid</dt>
+        </dl>
+        <dl id="cont4">
+            <dt class="chap">堆叠上下文 z-index</dt>
+            <dd>由某个元素创建的一个区域，规定了其中内容在Z轴上的排列次序</dd>
+            <dd>可以创建堆叠上下文的元素：&lt;html&gt;和显示设置了z-index的元素</dd>
+            <dd>z-index为正的元素，出现在没有指定z-index的元素的上面；</dd>
+            <dd>z-index为负的元素，出现在没有指定z-index的元素的下面；</dd>
+            <dd>数值大的在前面（近）；数值小的在后面（远）；</dd>
+            <dd>如果没有显式指定z-index，则为auto，按照文档流出现的顺序，后来居上；</dd>
+        </dl>
+        <dl id="cont5">
+            <dt class="chap">文本 Text</dt>
+            <dt>方向 Direction</dt>
+            <dd>常见属性</dd>
+            <dd>writing-mode: vertical-rl;文字方向</dd>
+            <dd>[案例] 诗词鉴赏</dd>
+            <dd class="poem">
+                <div>雨霖铃·柳永</div>
+                <div>寒蝉凄切，对长亭晚，骤雨初歇。 </div>
+                <div>都门帐饮无绪，留恋处，兰舟催发。 </div>
+                <div>执手相看泪眼，竟无语凝噎。 </div>
+                <div>念去去，千里烟波，暮霭沉沉楚天阔。 </div>
+                <div>多情自古伤离别，更那堪，冷落清秋节！ </div>
+                <div>今宵酒醒何处？杨柳岸，晓风残月。 </div>
+                <div>此去经年，应是良辰好景虚设。 </div>
+                <div>便纵有千种风情，更与何人说？</div>
+            </dd>
+            <dt>分栏 Column</dt>
+            <dd>常见属性</dd>
+            <dd>columns: 3;根据列数分栏</dd>
+            <dd>columns: 300px;根据宽度分栏</dd>
+            <dd>column-span: all;分栏元素的跨度；通常选择all，即占满分栏区</dd>
+            <dd>column-gap: 1rem;分栏间隔</dd>
+            <dd>[案例] 文章排版</dd>
+            <dd>
+                <article class="ar">
+                    <div class="ar-title">Basic IAR uasage</div>
+                    <div class="ar-sub-title">cnplaman from pla 54414</div>
+                    <div class="ar-foot">2022-06-11</div>
+                    <div class="ar-cont"><strong>Abstrct</strong>: Lorem ipsum dolor sit amet consectetur, adipisicing
+                        elit. Optio illum
+                        doloribus laudantium numquam voluptas non qui delectus veniam accusamus natus?</div>
+                    <div class="ar-cont"><strong>Keyword</strong>: IAR, ZigBee, UART</div>
+                    <h2 class="h2">1 IAR</h2>
+                    <h3 class="h3">1.1 introduction</h3>
+                    <div class="ar-cont">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam enim, iusto
+                        voluptatem omnis error beatae. Voluptatum doloremque maiores suscipit molestiae ullam laudantium
+                        iste excepturi porro, id enim error laboriosam obcaecati minus eum provident quia tenetur
+                        tempore voluptatem necessitatibus velit quae! Consequuntur temporibus deleniti in aliquam eum
+                        animi molestias quos illum.</div>
+                    <h3 class="h3">1.2 install</h3>
+                    <div class="ar-cont">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi amet ipsa
+                        eius repellendus commodi! Ipsum iure et aspernatur expedita delectus commodi consectetur rem
+                        deleniti? Maiores delectus blanditiis dolorem sapiente in?</div>
+                    <div class="ar-cont">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet fugit maiores
+                        beatae harum aspernatur ipsum excepturi, laboriosam nam vitae veniam numquam atque, sapiente ex
+                        modi asperiores saepe, autem aperiam natus.</div>
+                    <h2 class="h2">2 Project</h2>
+                    <h3 class="h3">2.1 workspace</h3>
+                    <div class="ar-cont">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus officiis dolorem
+                        cum vel cupiditate sit expedita dolorum aut vero magni, quibusdam illum sint ut modi obcaecati?
+                        Exercitationem laboriosam magni, quaerat velit accusamus culpa voluptatibus blanditiis explicabo
+                        dignissimos molestiae hic itaque porro incidunt natus repellendus. Adipisci tenetur ipsam
+                        commodi aliquid ipsa?</div>
+                    <h3 class="h3">chap 2.2 debugger</h3>
+                    <div class="ar-cont">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio veniam alias
+                        soluta et accusantium veritatis nulla atque, temporibus laboriosam est maiores, ducimus nostrum
+                        vero, odit molestias impedit accusamus qui quam?</div>
+                </article>
+            </dd>
         </dl>
     </div>
     <footer class="w copyright">
