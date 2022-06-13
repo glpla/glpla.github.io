@@ -82,10 +82,13 @@
             <dd>设备名</dd>
             <dd class="dd-item">设置-&gt;关于-&gt;设备名device name。修改的名字会在终端窗口中体现出来；</dd>
             <dt>4.目录</dt>
-            <dd class="dd-item">/：根目录</dd>
-            <dd class="dd-item">/home：用户目录；自己的东西，放在自己的家目录中</dd>
-            <dd class="dd-item">/bin：二进制/可执行文件目录</dd>
-            <dd class="dd-item">/etc：配置文件目录</dd>
+            <dd>/：根目录</dd>
+            <dd>/home：用户目录；自己的东西，放在自己的家目录中</dd>
+            <dd>/bin：二进制/可执行文件目录</dd>
+            <dd>/sbin：系统管理员专用的二进制/可执行文件目录；s：system</dd>
+            <dd>/usr/bin：用户安装的软件/可执行文件目录；usr：user</dd>
+            <dd>/usr/sbin：超级用户安装的软件/可执行文件目录；s：super</dd>
+            <dd>/etc：配置文件目录</dd>
             <dt>5.关机 Shutdown</dt>
             <dd>shutdown [-c][-r] time</dd>
             <dd>说明</dd>
@@ -176,11 +179,76 @@
             <dd>[案例] 为避免同名覆盖，可以带上-i参数，给出提示信息：mv -i 112.txt 114.txt</dd>
             <dd class="dd-item">用法3：更改目录</dd>
             <dd>[案例] 更改b目录为bb目录：mv b bb</dd>
-            <dt>6.操作小贴士</dt>
+            <dt>6.系统命令</dt>
+            <dd class="cmd">date</dd>
+            <dd>日期；[案例]2022年 06月 13日 星期一 19:38:25 CST；</dd>
+            <dd class="cmd">cal -y</dd>
+            <dd>日历[年]；首次需要安装：sudo apt install ncal；</dd>
+            <dd class="cmd">df -h</dd>
+            <dd>磁盘剩余空间，disk free；-h：以更可读的方式显示；重点关注/的使用情况；</dd>
+            <dd class="cmd">du -h 目录</dd>
+            <dd>目录使用空间，disk usage-h：以更可读的方式显示；</dd>
+            <dd class="cmd">ps aux</dd>
+            <dd>默认只显示当前用户通过终端启动的应用程序；a：all，所有；u：user，哪个用户启动的，更为详细；x：没有控制终端；退出只使用au；</dd>
+            <dd class="cmd">top</dd>
+            <dd>持续显示进程排序；按q或ctrl+c退出；</dd>
+            <dd class="cmd">kill -9 pid</dd>
+            <dd>杀死进程；-9：强行杀死；不要杀死root开启的进程；</dd>
+            <dd class="cmd">find 目录 -name ""</dd>
+            <dd>查找文件：在指定目录下查找符合条件的文件；如果不指定目录，就在当前目录下查找；可以使用通配符；</dd>
+            <dd class="cmd">ln -s</dd>
+            <dd>软链接；快捷方式；s：shortcut；todo</dd>
+            <dd class="cmd">tar -cvf 包名.tar 目录|文件<br>
+                tar -xvf 包名.tar</dd>
+            <dd>分别是打包和解包；打包过程不负责压缩；-cvf和-xvf固定搭配使用；打包多个文件，请使用空格分隔；</dd>
+            <dd class="cmd">tar -zcvf 包名.tar.gz 目录|文件<br>
+                tar -zxvf 包名.tar 目录</dd>
+            <dd>指定-z选项可以实现压缩或解压缩；执行过程：先压缩再打包；先解压缩再解包；</dd>
+            <dd class="cmd">gzip</dd>
+            <dd>压缩；压缩后的文件名字通常是xxx.tar.gz，表示先打包再压缩；</dd>
+            <dd>压缩前后对比如下：</dd>
+            <dd class="code">
+                <pre>
+
+    cnplaman@cnplaman:~/Desktop$ tar -cvf c.tar 01.c 02.c 03.c 
+    01.c
+    02.c
+    03.c
+    cnplaman@cnplaman:~/Desktop$ ls -lh
+    total 12K
+    -rw-rw-r-- 1 cnplaman cnplaman   0  6月 13 20:32 01.c
+    -rw-rw-r-- 1 cnplaman cnplaman   0  6月 13 20:32 02.c
+    -rw-rw-r-- 1 cnplaman cnplaman   0  6月 13 20:32 03.c
+    -rw-rw-r-- 1 cnplaman cnplaman 10K  6月 13 20:32 c.tar
+    cnplaman@cnplaman:~/Desktop$ tar -zcvf c.tar.gz 01.c 02.c 03.c 
+    01.c
+    02.c
+    03.c
+    cnplaman@cnplaman:~/Desktop$ ls -lh
+    total 16K
+    -rw-rw-r-- 1 cnplaman cnplaman   0  6月 13 20:32 01.c
+    -rw-rw-r-- 1 cnplaman cnplaman   0  6月 13 20:32 02.c
+    -rw-rw-r-- 1 cnplaman cnplaman   0  6月 13 20:32 03.c
+    -rw-rw-r-- 1 cnplaman cnplaman 10K  6月 13 20:32 c.tar
+    -rw-rw-r-- 1 cnplaman cnplaman 134  6月 13 20:33 c.tar.gz
+                </pre>
+            </dd>
+            <dd class="cmd">apt install package<br>
+                apt remove package<br>
+                apt upgrade package</dd>
+            <dd>软件安装、卸载和更新；apt：advanced package tool高级包工具；需要sudo权限；</dd>
+            <dd>[案例]跑个小火车吧</dd>
+            <dd class="code">
+                <pre>
+    sudo apt install sl
+    sl                </pre>
+            </dd>
+            <dt>7.操作小贴士</dt>
             <dd class="dd-item">命令补全：输入开头部分字母，按tab自动补全</dd>
             <dd class="dd-item">历史命令：利用↑、↓方向键选择历史命令</dd>
             <dd class="dd-item">CTRL+c返回命令状态</dd>
             <dd class="dd-item">选项可以组合使用，如-l -h可以更改为-lh；注意先后顺序；</dd>
+            <dd class="dd-item">以上是某个命令的基本使用；更多使用，请查看帮助；</dd>
         </dl>
         <dl class="target-cont" id="cont4">
             <dt class="chap">文件 File</dt>
@@ -192,7 +260,7 @@
             <dd>.其它用户权限</dd>
             <dd>
                 <table>
-                    <tr>
+
                     <tr>
                         <td>目录</td>
                         <td colspan="3">拥有者权限</td>
@@ -211,42 +279,39 @@
                         <td>w</td>
                         <td>x</td>
                     </tr>
+                    <tr>
+                        <td></td>
+                        <td>4</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>4</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>4</td>
+                        <td>2</td>
+                        <td>1</td>
                     </tr>
                 </table>
             </dd>
-            <dd>各权限如下表所示。</dd>
-            <dd>
-                <table>
-                    <tr>
-                        <td>r</td>
-                        <td>w</td>
-                        <td>x</td>
-                    </tr>
-                    <tr>
-                        <td>read</td>
-                        <td>write</td>
-                        <td>excute</td>
-                    </tr>
-                    <tr>
-                        <td>可读</td>
-                        <td>可写</td>
-                        <td>可执行[访问，如cd]</td>
-                    </tr>
-                </table>
-            </dd>
+            <dd>说明：r：read，可读；w：write，可写；x：excute，可执行[访问，如cd]修改权限，请使用chmod命令；</dd>
             <dd>.硬链接数：访问的方式有多少中</dd>
-            <dd>.拥有者名称</dd>
-            <dd>.组名称</dd>
+            <dd>.拥有者名称：修改所有者，请使用chown命令；</dd>
+            <dd>.组名称：修改组，请使用chgrp命令；</dd>
             <dd>.大小</dd>
             <dd>.时间</dd>
             <dd>.名称：普通文件：白色；<span style="color: #060;font-weight: 600;">可执行文件</span>：绿色；<span
                     style="color: #2d99e0;font-weight: 600;">文件夹</span>：蓝色</dd>
-            <dt>2.修改权限</dt>
-            <dd>使用chmod修改文件或目录权限：chmod +/-rwx 文件名|文件目录；-表示减少权限；+表示增加权限；权限变更时，文件图标有相应的变化；</dd>
+            <dt>2.权限</dt>
+            <dd>修改文件权限；-表示减少权限；+表示增加权限；权限变更时，文件图标有相应的变化；</dd>
+            <dd>chmod -R +/-rwx 文件名|文件目录</dd>
+            <dd>也可以使用权限对应的权进行修改[推荐]</dd>
+            <dd>chmod -R num|num|num 文件名|文件目录</dd>
             <dd>[案例] 修改文件权限：chmod -rw 01.py</dd>
             <dd>[案例] 修改文件权限：chmod +r 01.py</dd>
             <dd>[案例] 修改目录权限：chmod -x demo</dd>
             <dd>[案例] 修改目录权限：chmod -rw demo</dd>
+            <dd>修改文件所有者</dd>
+            <dd>chown 用户名 文件名|文件目录</dd>
             <dt>3.文件</dt>
             <dd>[案例] 创建隐藏文件：touch .123.txt并显示；</dd>
             <dd class="p">cat：concatenate，查看文件内容、创建文件、追加内容等；</dd>
@@ -302,13 +367,28 @@
         </dl>
         <dl class="target-cont" id="cont5">
             <dt class="chap">用户 User</dt>
-            <dt>1.超级用户</dt>
+            <dd>
+                <table>
+                    <tr>
+                        <td colspan="5">cnplaman@cnplaman:~$</td>
+                    </tr>
+                    <tr>
+                        <td>username</td>
+                        <td>@</td>
+                        <td>hostname</td>
+                        <td>:</td>
+                        <td>workdirectory</td>
+                    </tr>
+                </table>
+            </dd>
+            <dt>1.用户类型</dt>
+            <dd>1.1 超级用户</dd>
             <dd>root；权限最大，用于管理和维护系统；安全起见，不推荐使用该用户登陆系统；</dd>
-            <dt>2.标准用户</dt>
+            <dd>1.2 标准用户</dd>
             <dd>home家里的用户，由系统自动创建；</dd>
-            <dt>3.sudo用户</dt>
+            <dd>1.3 sudo用户</dd>
             <dd>su是substitute user，替代用户，允许普通用户替代超级用户root执行某些操作；使用时必须先输入密码；只有5分钟的有效期，过期则需要重新输入密码；</dd>
-            <dt>4.组的管理</dt>
+            <dt>2.组的管理</dt>
             <dd>系统的组信息存放于etc/group目录下</dd>
             <dd>
                 <table>
@@ -335,7 +415,49 @@
                 </table>
             </dd>
             <dd>[案例] 在当前用户桌面创建一个demo文件夹；新增一个组dev；将demo文件夹的组修改为dev；</dd>
-            <dt>5.用户管理</dt>
+            <dt>3.用户管理</dt>
+            <dd>3.1 用户查看</dd>
+            <dd>
+                <table>
+                    <tr>
+                        <td>id [username]</td>
+                        <td>查看用户UID和GID；如果不指定用户，则查看当前用户</td>
+                    </tr>
+                    <tr>
+                        <td>who</td>
+                        <td>查看当前登陆的所有用户[0表示本机用户，其它为用户对应IP地址]</td>
+                    </tr>
+                    <tr>
+                        <td>whoami</td>
+                        <td>查看当前登陆的用户</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd class="code">
+                <pre>
+    cnplaman@cnplaman:~$ who
+    cnplaman tty2         2022-06-13 15:27 (tty2)
+    cnplaman@cnplaman:~$ whoami
+    cnplaman
+    cnplaman@cnplaman:~$ id
+    uid=1000(cnplaman) gid=1000(cnplaman) groups=1000(cnplaman),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),122(lpadmin),134(lxd),135(sambashare)
+    cnplaman@cnplaman:~$
+                </pre>
+            </dd>
+            <dd>3.2 用户切换</dd>
+            <dd>su - username：su表示switch user；参数-表示同时切换至用户家目录；切换时需要提供密码；不带用户名，则切换到root[不推荐]</dd>
+            <dd>exit：返回原先用户</dd>
+            <dd class="code">
+                <pre>
+
+    cnplaman@cnplaman:~$ su - root
+    Password: 
+    root@cnplaman:~# exit
+    logout
+                </pre>
+            </dd>
+            <dd>3.3 设置root用户密码</dd>
+            <dd>sudo passwd root：需俩次确认</dd>
         </dl>
         <dl class="target-cont" id="cont6">
             <dt class="chap">高级操作</dt>
