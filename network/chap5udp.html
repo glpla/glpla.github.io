@@ -19,7 +19,7 @@
             <dd>1.无连接；最大努力交付best effort delivery；无需确认；</dd>
             <dd>2.面向报文，不拆分；不重装；</dd>
             <dd>3.没有流量控制、没有拥塞控制；</dd>
-            <dd>4.首部开销小，8个字节</dd>
+            <dd>4.首部开销小，最少8个字节，仅包括首部；</dd>
             <dd>5.支持组播、多播；用用于实时通信；</dd>
             <dd>6.更多信息，请参考<a class="warn" href="https://www.rfc-editor.org/rfc/rfc768" target="_blank">RFC 768</a></dd>
             <dt>UDP报文</dt>
@@ -27,6 +27,9 @@
             <dt>UDP校验和</dt>
             <dd class="dd-img-item"><img src="../imgs/network/udp/幻灯片12.JPG" alt=""></dd>
             <dt>UDP TCP对比1</dt>
+            <dd>1.UDP只管发；TCP会控制整个通信过程；</dd>
+            <dd>2.UDP不会拆分报文；一个报文就是一个完整的消息；TCP会拆分成诺干字节，形成字节流；</dd>
+            <dd>3.UDP发送时无需缓存；TCP必须缓存才能发送，发多少取决于对方的接收窗口；只有被对方接收且确认过的报文才能移除缓存；</dd>
             <dd class="dd-img-item"><img src="../imgs/network/udp/幻灯片13.JPG" alt=""></dd>
             <dt>UDP TCP 对比2</dt>
             <dd class="dd-img-item"><img src="../imgs/network/udp/幻灯片14.JPG" alt=""></dd>
