@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/reset.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            height: 100vh;
+            background-color: rgb(112, 161, 255);
+            transition: 0.4s linear;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background-color: rgb(255, 255, 255);
+            box-shadow: 1px 1px 6px 6px rgba(136, 136, 136, 0.533);
+            padding: 1rem;
+        }
+
+        .sub-title {
+            color: rgb(153, 153, 153);
+        }
+
+        .pic {
+            width: 800px;
+            height: 450px;
+            margin: 1rem 0;
+            background-image: url(../imgs/blue.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .colors {
+            display: flex;
+            justify-content: center;
+        }
+
+        .colors span {
+            position: relative;
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            margin: .4rem .5rem;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .colors span:nth-child(1) {
+            background-color: rgb(112, 161, 255);
+        }
+
+        .colors span:nth-child(2) {
+            background-color: rgb(196, 229, 56);
+        }
+
+        .colors span:nth-child(3) {
+            background-color: rgb(241, 196, 15);
+        }
+
+        .colors span:nth-child(4) {
+            background-color: rgb(255, 184, 184);
+        }
+
+        span.active::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            border: 1px solid rgb(102, 102, 102);
+        }
+
+        .info {
+            margin: 1rem 0 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            color: rgb(112, 162, 255);
+        }
+
+        .btn {
+            color: rgb(112, 161, 255);
+            text-transform: uppercase;
+            padding: .4rem 2rem;
+            border-radius: 2rem;
+            border: 2px solid;
+            transition: .4s;
+        }
+
+        .btn:hover {
+            transform: scale(1.04);
+        }
+
+        @media (max-width:768px) {
+            .pic {
+                width: 320px;
+                height: 180px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="card">
+        <h1 class="title">潮牌爆款新板鞋</h1>
+        <p class="sub-title">立即入手，吸引TA的注意。。。</p>
+        <div class="pic"></div>
+        <div class="colors">
+            <span class="blue active" data-color="#70a1ff" data-pic="url(../imgs/blue.jpg)"></span>
+            <span class="green" data-color="#C4E538" data-pic="url(../imgs/green.jpg)"></span>
+            <span class="yellow" data-color="#f1c40f" data-pic="url(../imgs/yellow.jpg)"></span>
+            <span class="rose" data-color="#ffb8b8" data-pic="url(../imgs/rose.jpg)"></span>
+        </div>
+        <div class="info">
+            <div class="price">￥90</div>
+            <a href="javascript:;" class="btn">add to cart</a>
+        </div>
+    </div>
+    <script>
+        $('.colors span').click(function () {
+            $('.colors span').removeClass('active');
+            $(this).addClass('active');
+            $('body').css('background', $(this).attr('data-color'));
+            $('.pic').css('background-image', $(this).attr('data-pic'));
+            $('.price').css('color', $(this).attr('data-color'));
+            $('.btn').css('color', $(this).attr('data-color'));
+        })
+    </script>
+</body>
+
+</html>
