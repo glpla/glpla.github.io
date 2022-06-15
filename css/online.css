@@ -1,0 +1,255 @@
+:root {
+    --cube-width: 150px
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-family: 'poppins', "Microsoft YaHei";
+}
+
+ul {
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+}
+
+li {
+    width: 100%;
+    height: 100vh;
+    color: #fff;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-color: #ea4c89;
+}
+
+ul li:nth-child(1) {
+    background-image: url(../imgs/jiageng/jg0.jpg);
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    box-shadow: 0 0 2rem #f4c;
+}
+
+.qrcode {
+    margin: 2rem;
+}
+
+.info-box {
+    display: flex;
+    align-items: center;
+}
+
+.info-box>* {
+    margin: 2rem;
+}
+
+.info-box .img {
+    width: 150px;
+    height: 200px;
+    border-radius: 75px/100px;
+}
+
+.info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.info .info-item:first-child {
+    grid-column: span 2;
+}
+
+.info-item {
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.big, .title {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.sub-title {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+/* cube */
+.cube-box {
+    perspective: 1000px;
+}
+
+.cube {
+    position: relative;
+    width: var(--cube-width);
+    height: var(--cube-width);
+    transform-style: preserve-3d;
+    animation: roll 10s linear infinite;
+}
+
+@keyframes roll {
+    to {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+.cube>div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #fff;
+    transform-style: preserve-3d;
+}
+
+.front {
+    transform: translateZ(calc(var(--cube-width)/2));
+}
+
+.back {
+    transform: rotateX(180deg) translateZ(calc(var(--cube-width)/2));
+}
+
+.left {
+    transform: rotateY(90deg) translateZ(calc(var(--cube-width)/2));
+}
+
+.right {
+    transform: rotateY(-90deg) translateZ(calc(var(--cube-width)/2));
+}
+
+.top {
+    transform: rotatex(90deg) translateZ(calc(var(--cube-width)/2));
+}
+
+.bottom {
+    transform: rotatex(-90deg) translateZ(calc(var(--cube-width)/2));
+}
+
+.title {
+    margin-top: 10rem;
+}
+
+.mb4 {
+    margin-bottom: 4rem;
+}
+
+/* gal */
+.gal-box {
+    width: 120px;
+    height: 160px;
+    perspective: 1000px;
+}
+
+.gal {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateX(-10deg);
+    animation: rolling 20s linear infinite;
+}
+
+@keyframes rolling {
+    to {
+        transform: rotateX(-10deg) rotateY(-360deg);
+    }
+}
+
+.gal-box img {
+    width: 90px;
+    height: 90px;
+}
+
+.gal-item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    line-height: 80px;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    background-color: rgba(250, 255, 255, 0.6);
+    color: #f4c;
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 1rem #fff;
+    transform: rotateY(calc(var(--deg)*30deg)) translateZ(300px);
+    overflow: hidden;
+}
+
+.gal .gal-item:nth-child(12) {
+    background-color: #fff;
+}
+
+@media screen and (max-width:768px) {
+    html {
+        font-size: 14px;
+    }
+
+    .info-box {
+        flex-direction: column;
+    }
+
+    .info-box>* {
+        margin: 0rem;
+    }
+
+    .info {
+        gap: 1rem;
+    }
+
+    .info-item {
+        text-align: center;
+    }
+
+    span.sub-title {
+        display: none;
+    }
+
+    .gal-box {
+        width: 60px;
+        height: 80px;
+    }
+
+    .gal-item {
+        border-radius: 10px;
+        font-size: 2rem;
+        transform: rotateY(calc(var(--deg)*30deg)) translateZ(160px);
+    }
+
+    .gal-box img {
+        width: 60px;
+        height: 60px;
+    }
+}
