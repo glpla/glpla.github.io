@@ -160,8 +160,57 @@ ul li:nth-child(1) {
     margin-bottom: 4rem;
 }
 
+.mb8 {
+    margin-bottom: 8rem;
+}
+
 .mt4 {
     margin-top: 4rem;
+}
+
+.bar {
+    width: 300px;
+}
+
+.bar-item {
+    position: relative;
+    padding: 0 1rem;
+    margin: 1rem auto;
+    border: 1px solid #fff;
+    text-align: right;
+}
+
+.bar .item1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5%;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 1rem #fff;
+}
+
+.bar .item2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 10%;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 1rem #fff;
+}
+
+.bar .item3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30%;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 1rem #fff;
 }
 
 /* card */
@@ -222,6 +271,10 @@ ul li:nth-child(1) {
     perspective: 1000px;
 }
 
+.gal-box:hover .gal {
+    animation-play-state: paused;
+}
+
 .gal {
     position: relative;
     width: 100%;
@@ -229,6 +282,122 @@ ul li:nth-child(1) {
     transform-style: preserve-3d;
     transform: rotateX(-10deg);
     animation: rolling 20s linear infinite;
+    cursor: pointer;
+}
+
+/* cube3d */
+.cube3d-box {
+    perspective: 1000px;
+}
+
+.cube3d-box:hover .cube3d {
+    animation-play-state: paused;
+}
+
+.cube3d {
+    position: relative;
+    width: var(--cube-width);
+    height: var(--cube-width);
+    transform-style: preserve-3d;
+    transform: rotateX(10deg) rotateY(25deg) rotateZ(10deg);
+    animation: roll 10s linear infinite;
+}
+
+.cube3d .item-b {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    transition: .5s;
+}
+
+.front3d-b {
+    transform: translateZ(calc(var(--cube-width)/2));
+    background-image: url(../imgs/jiageng/jiageng6.jpg);
+}
+
+.back3d-b {
+    transform: rotateX(180deg) translateZ(calc(var(--cube-width)/2));
+    background-image: url(../imgs/jiageng/jiageng1.jpg);
+}
+
+.left3d-b {
+    transform: rotateY(90deg) translateZ(calc(var(--cube-width)/2));
+    background-image: url(../imgs/jiageng/jiageng2.jpg);
+}
+
+.right3d-b {
+    transform: rotateY(-90deg) translateZ(calc(var(--cube-width)/2));
+    background-image: url(../imgs/jiageng/jiageng3.jpg);
+}
+
+.top3d-b {
+    transform: rotateX(90deg) translateZ(calc(var(--cube-width)/2));
+    background-image: url(../imgs/jiageng/jiageng4.jpg);
+}
+
+.bottom3d-b {
+    transform: rotateX(-90deg) translateZ(calc(var(--cube-width)/2));
+    background-image: url(../imgs/jiageng/jiageng5.jpg);
+}
+
+.cube3d .item-s {
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #fff;
+}
+
+.front3d-s {
+    transform: translateZ(50px);
+}
+
+.back3d-s {
+    transform: rotateX(180deg) translateZ(50px);
+}
+
+.left3d-s {
+    transform: rotateY(90deg) translateZ(50px);
+}
+
+.right3d-s {
+    transform: rotateY(-90deg) translateZ(50px);
+}
+
+.top3d-s {
+    transform: rotateX(90deg) translateZ(50px);
+}
+
+.bottom3d-s {
+    transform: rotateX(-90deg) translateZ(50px);
+}
+
+.cube3d-box:hover .front3d-b {
+    transform: translateZ(var(--cube-width));
+}
+
+.cube3d-box:hover .back3d-b {
+    transform: rotateX(180deg) translateZ(var(--cube-width));
+}
+
+.cube3d-box:hover .left3d-b {
+    transform: rotateY(90deg) translateZ(var(--cube-width));
+}
+
+.cube3d-box:hover .right3d-b {
+    transform: rotateY(-90deg) translateZ(var(--cube-width));
+}
+
+.cube3d-box:hover .top3d-b {
+    transform: rotateX(90deg) translateZ(var(--cube-width));
+}
+
+.cube3d-box:hover .bottom3d-b {
+    transform: rotateX(-90deg) translateZ(var(--cube-width));
 }
 
 /* step */
@@ -291,6 +460,20 @@ pre {
 }
 
 .gal .gal-item:nth-child(12) {
+    background-color: #fff;
+}
+
+.ack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.ack::before, .ack::after {
+    content: '';
+    width: 60px;
+    height: 2px;
     background-color: #fff;
 }
 

@@ -73,24 +73,28 @@
                 <div>CSS 3D实现的基本原理</div>
                 <div>CSS 3D实现的方法</div>
             </li>
-            <li>
+            <li class="time">
                 <span class="iconfont icon-alarm-clock mb4"></span>
-                <div>45分钟</div>
+                <div class="bar">
+                    <div class="bar-item item1">5分钟</div>
+                    <div class="bar-item item2">10分钟</div>
+                    <div class="bar-item item3">30分钟</div>
+                </div>
             </li>
             <li>
                 <span class="iconfont icon-alarm mb4"></span>
                 <div>[听][记][看][思][练]</div>
             </li>
-            <li>
+            <li class="2d">
+                <span class="big mb4">CSS 2D</span>
                 <div>
-                    <div class="big mb4">CSS 2D</div>
                     <div>位置的移动 translate</div>
                     <div>大小的缩放 scale</div>
                     <div>方向的旋转 rotate</div>
                 </div>
             </li>
-            <li>
-                <div class="big mb4">[3D案例]-1</div>
+            <li class="case">
+                <div class="big mb8">[3D案例]-1</div>
                 <div class="card-box">
                     <div class="card">
                         <div class="card-f"></div>
@@ -98,8 +102,8 @@
                     </div>
                 </div>
             </li>
-            <li>
-                <div class="big mb4">[3D案例]-2</div>
+            <li class="case">
+                <div class="big mb8">[3D案例]-2</div>
                 <div class="gal-box">
                     <div class="gal">
                         <div class="gal-item" style="--deg:0">厦</div>
@@ -117,9 +121,28 @@
                     </div>
                 </div>
             </li>
-            <li>
+            <li class="case">
+                <div class="big mb8">[3D案例]-3</div>
+                <div class="cube3d-box">
+                    <div class="cube3d">
+                        <div class="item-b front3d-b"></div>
+                        <div class="item-b back3d-b"></div>
+                        <div class="item-b left3d-b"></div>
+                        <div class="item-b right3d-b"></div>
+                        <div class="item-b top3d-b"></div>
+                        <div class="item-b bottom3d-b"></div>
+                        <div class="item-s front3d-s"></div>
+                        <div class="item-s back3d-s"></div>
+                        <div class="item-s left3d-s"></div>
+                        <div class="item-s right3d-s"></div>
+                        <div class="item-s top3d-s"></div>
+                        <div class="item-s bottom3d-s"></div>
+                    </div>
+                </div>
+            </li>
+            <li class="3d">
+                <div class="big mb4">CSS 3D应用</div>
                 <div>
-                    <div class="big mb4">CSS 3D应用</div>
                     <div>• 个人网站</div>
                     <div>• 商务网站</div>
                     <div>• 产品推介</div>
@@ -128,8 +151,8 @@
                 </div>
             </li>
             <li>
+                <div class="big mb4">关键点 keypoint</div>
                 <div class="quote">
-                    <div class="big mb4">关键点 keypoint</div>
                     <div class="step">
                         <div>1 指定景深[构造天空盒]</div>
                         <div>perspective: 1000px;</div>
@@ -157,15 +180,15 @@
             </li>
             <li>
                 <div class="pro">
-                    <div class="big mb4"><span class="iconfont">&lt;html&gt;</span> 参考源码</div>
+                    <div class="big mb4"><span class="iconfont">&lt;HTML&gt;</span> 参考源码</div>
                     <div class="code">
                         <pre>
-    &lt;div class="card-box"&gt;
-        &lt;div class="card"&gt;
-            &lt;div class="card-f"&gt;欢迎&lt;/div&gt;
-            &lt;div class="card-b"&gt;止于至善&lt;/div&gt;
-        &lt;/div&gt;
+&lt;div class="card-box"&gt;
+    &lt;div class="card"&gt;
+        &lt;div class="card-f"&gt;欢迎&lt;/div&gt;
+        &lt;div class="card-b"&gt;止于至善&lt;/div&gt;
     &lt;/div&gt;
+&lt;/div&gt;
                         </pre>
                     </div>
                 </div>
@@ -175,15 +198,15 @@
                     <div class="big mb4"><span class="iconfont">&lt;CSS&gt;</span> 参考源码 1/3</div>
                     <div class="code">
                         <pre>
-    .card-box {
-        width: 180px;
-        height: 240px;
-        perspective: 1000px;
-    }
-    
-    .card-box:hover .card {
-        transform: rotateY(180deg);
-    }    
+.card-box {
+    width: 180px;
+    height: 240px;
+    perspective: 1000px;
+}
+
+.card-box:hover .card {
+    transform: rotateY(180deg);
+}    
                         </pre>
                     </div>
                 </div>
@@ -193,13 +216,13 @@
                     <div class="big mb4"><span class="iconfont">&lt;CSS&gt;</span> 参考源码 2/3</div>
                     <div class="code">
                         <pre>
-    .card {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        transform-style: preserve-3d;
-        transition: 1s;
-    }    
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: 1s;
+}    
                         </pre>
                     </div>
                 </div>
@@ -209,39 +232,47 @@
                     <div class="big mb4"><span class="iconfont">&lt;CSS&gt;</span> 参考源码 3/3</div>
                     <div class="code">
                         <pre>
-    .card-f, .card-b {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        backface-visibility: hidden;
-    }
-    
-    .card-f {}
-    
-    .card-b {
-        transform: rotateY(180deg);
-    }
+.card-f, .card-b {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.card-f {}
+
+.card-b {
+    transform: rotateY(180deg);
+}
                         </pre>
                     </div>
                 </div>
             </li>
             <li>
-                <div>
-                    <div class="big mb4"><span class="iconfont icon-warning"></span> 常见问题</div>
-                    <div class="step">不要指定溢出隐藏；</div>
-                </div>
+                <div class="big mb4"><span class="iconfont icon-warning"></span> 常见问题</div>
+                <div class="step">- 溢出隐藏 overflow -</div>
+                <div class="step">- 定位 position -</div>
+                <div class="step">- 选择器 selector-</div>
             </li>
-            <li>
+            <li class="summary">
+                <div class="big mb4"><span class="iconfont icon-folder-6"></span>课程小结</div>
                 <div>
-                    <div class="big mb4"><span class="iconfont icon-folder-6"></span> CSS 3D 总结</div>
                     <div class="step">1. 景深perspective的使用；</div>
                     <div class="step">2. transform的rotate属性；</div>
                     <div class="step">3. 定位：相对定位和绝对定位的使用[父相子绝]；</div>
                     <div class="step">4. 选择器：后代选择器、并列选择器、伪类选择器；</div>
                     <div class="step">5. 动画：过渡动画transition；</div>
                 </div>
+            </li>
+            <li class="homework">
+                <div class="big mb4"><span class="iconfont icon-keyboard"></span>课后作业</div>
+                <div>独立完成案例1</div>
+            </li>
+            <li>
+                <span class="big ack">敬请批评指正</span>
+                <small>Thanks For Your Time</small>
             </li>
         </ul>
     </div>
