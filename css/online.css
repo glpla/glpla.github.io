@@ -32,7 +32,6 @@ li {
     height: 100vh;
     color: #fff;
     letter-spacing: 4px;
-    text-transform: uppercase;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -41,6 +40,7 @@ li {
     background-blend-mode: multiply;
     background-size: cover;
     background-color: #ea4c89;
+    padding: 1rem;
 }
 
 ul li:nth-child(1) {
@@ -160,6 +160,61 @@ ul li:nth-child(1) {
     margin-bottom: 4rem;
 }
 
+.mt4 {
+    margin-top: 4rem;
+}
+
+/* card */
+.card-box {
+    width: 180px;
+    height: 240px;
+    perspective: 1000px;
+    border-radius: 10px;
+    border: 2px solid #fff;
+}
+
+.card-box:hover .card {
+    transform: rotateY(180deg);
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    box-shadow: 0 0 1rem #fff;
+    transition: 1s;
+    background-color: #fff;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.card-f, .card-b {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #ea4c89;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    border-radius: 10px;
+    backface-visibility: hidden;
+}
+
+.card-f {
+    background-image: url(../imgs/jiageng/jiageng.jpg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card-b {
+    transform: rotateY(180deg);
+}
+
 /* gal */
 .gal-box {
     width: 120px;
@@ -174,6 +229,29 @@ ul li:nth-child(1) {
     transform-style: preserve-3d;
     transform: rotateX(-10deg);
     animation: rolling 20s linear infinite;
+}
+
+/* step */
+.quote {
+    position: relative;
+}
+
+.quote::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    left: -20px;
+    top: 0;
+    background-color: #fff;
+}
+
+.step {
+    margin: 2rem auto;
+}
+
+.pro>div:first-child {
+    border-bottom: 2px solid #fff;
 }
 
 @keyframes rolling {
