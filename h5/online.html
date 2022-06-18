@@ -18,29 +18,64 @@
                 <span class="big">珠海科技学院</span>
                 <span>2022-06-15</span>
             </li>
-            <li>
+            <li class="introduction">
                 <div class="info-box">
                     <img class="img" src="../imgs/jiageng/avatar.jpg" alt="">
+                    <!-- info:height -->
                     <div class="info">
-                        <div class="info-item">
-                            <div class="big">自我介绍</div>
-                            <div class="sub-title">Self-introduction</div>
+                        <div class="info-nav">
+                            <!-- nav-active -->
+                            <div class="info-nav-item big nav-active" data-rel="info-cont-basic">基本情况</div>
+                            <div class="info-nav-item big" data-rel="info-cont-stu">教育背景</div>
+                            <div class="info-nav-item big" data-rel="info-cont-work">工作经历</div>
+                            <div class="info-nav-ind"></div>
                         </div>
-                        <div class="info-item">
-                            <div>姓名 <span class="sub-title">Name</span></div>
-                            <div>张树彬</div>
+                        <!-- info-cont-active -->
+                        <div class="info-cont info-cont-basic info-cont-active">
+                            <div class="info-item">
+                                <div>姓名 <span class="sub-title">Name</span></div>
+                                <div>张树彬</div>
+                            </div>
+                            <div class="info-item">
+                                <div>出生日期 <span class="sub-title">Birthday</span></div>
+                                <div>197x-08-xx</div>
+                            </div>
+                            <div class="info-item">
+                                <div>专业 <span class="sub-title">Major</span></div>
+                                <div>通信与信息系统</div>
+                            </div>
+                            <div class="info-item">
+                                <div>求职意向 <span class="sub-title">Intention</span></div>
+                                <div>软件工程</div>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <div>出生日期 <span class="sub-title">Birthday</span></div>
-                            <div>197x-08-xx</div>
+                        <div class="info-cont info-cont-stu">
+                            <div class="info-item">
+                                <div>1995.08-1999.06</div>
+                                <div>桂林电子科技大学</div>
+                            </div>
+                            <div class="info-item">
+                                <div>2005.08-2008.03</div>
+                                <div>上海交通大学</div>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <div>专业 <span class="sub-title">Major</span></div>
-                            <div>通信与信息系统</div>
-                        </div>
-                        <div class="info-item">
-                            <div>求职意向 <span class="sub-title">Intention</span></div>
-                            <div>软件工程</div>
+                        <div class="info-cont info-cont-work">
+                            <div class="info-item">
+                                <div>1999.07-2004.12</div>
+                                <div>广州军区通信训练大队</div>
+                            </div>
+                            <div class="info-item">
+                                <div>2005.01-2017.12</div>
+                                <div>广州军区综合训练基地</div>
+                            </div>
+                            <div class="info-item">
+                                <div>2018.01-2018.12</div>
+                                <div>陆军特种作战学院</div>
+                            </div>
+                            <div class="info-item">
+                                <div>2020.07-2022.01</div>
+                                <div>桂林学院</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,13 +110,11 @@
             </li>
             <li class="time">
                 <span class="iconfont icon-alarm-clock mb4"></span>
-                <div class="bar">
-                    <small>讲解</small>
-                    <div class="bar-item item1">5分钟</div>
-                    <small>示范</small>
-                    <div class="bar-item item2">10分钟</div>
-                    <small>实操</small>
-                    <div class="bar-item item3">30分钟</div>
+                <div class="pie"></div>
+                <div class="pie-info mt4">
+                    <div class="pie1">理论5分钟</div>
+                    <div class="pie2">示符10分钟</div>
+                    <div class="pie3">实操30分钟</div>
                 </div>
             </li>
             <li class="req">
@@ -293,6 +326,32 @@
             </li>
         </ul>
     </div>
+    <script>
+        window.onload = function () {
+            let navItems = document.querySelectorAll('.info-nav-item')
+            let ind = document.querySelector('.info-nav-ind')
+            function moveInd(tar) {
+                navItems.forEach(item => {
+                    item.classList.remove('nav-active')
+                    item.style = ''
+                })
+                tar.classList.add('nav-active')
+                ind.style.width = `${tar.offsetWidth}px`
+                ind.style.left = `${tar.offsetLeft}px`
+
+                let curCont = document.querySelector('.info-cont-active')
+                curCont.classList.remove('info-cont-active')
+
+                let newCont = document.querySelector(`.${tar.getAttribute('data-rel')}`)
+                newCont.classList.add('info-cont-active')
+            }
+
+            navItems.forEach(item => {
+                item.addEventListener('click', e => moveInd(e.target))
+                item.classList.contains('nav-active') && moveInd(item)
+            })
+        }
+    </script>
 </body>
 
 </html>

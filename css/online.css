@@ -15,7 +15,6 @@ ul {
 .container {
     width: 100vw;
     height: 100vh;
-    font-size: 1.2rem;
     font-weight: 300;
     font-family: 'poppins', "Microsoft YaHei";
 }
@@ -61,42 +60,78 @@ ul li:nth-child(1) {
 .info-box {
     display: flex;
     align-items: center;
+    font-size: 1rem;
 }
 
-.info-box>* {
-    margin: 2rem;
-}
 
 .info-box .img {
     width: 150px;
     height: 200px;
+    margin: 2rem;
     border-radius: 75px/100px;
 }
 
 .info {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-}
-
-.info .info-item:first-child {
-    grid-column: span 2;
-}
-
-.info-item {
-    margin-bottom: 2rem;
-    font-size: 1.2rem;
+    position: relative;
     font-weight: 300;
+    height: 320px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 1rem;
+}
+
+.info-nav {
+    line-height: 40px;
+    display: flex;
+    border-bottom: 1px solid #fff;
+    margin-bottom: 1rem;
+}
+
+.info-nav-item {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.info-nav .info-nav-item:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.info-nav-ind {
+    position: absolute;
+    width: 100px;
+    height: 4px;
+    top: 38px;
+    background-color: #fff;
+    transition: .5s;
+}
+
+.info-cont {
+    position: absolute;
+    opacity: 0;
+    transition: .3s ease-in-out;
+}
+
+.info-cont .info-item:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.nav-active {
+    color: rgba(255, 255, 255, 1);
+}
+
+.info-cont-active {
+    opacity: 1;
 }
 
 .big, .title {
     font-size: 1.5rem;
-    font-weight: 300;
 }
 
 .sub-title {
+    font-size: 0.8rem;
+}
+
+pre {
     font-size: 1rem;
-    font-weight: 300;
 }
 
 /* cube */
@@ -169,49 +204,47 @@ ul li:nth-child(1) {
     margin-top: 4rem;
 }
 
-.bar {
+.pie {
     width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-image: conic-gradient(#7f8c8d 0deg, #7f8c8d 40deg, #bdc3c7 40deg, #bdc3c7 120deg, #ecf0f1 120deg, #ecf0f1 360deg);
+    box-shadow: 0 0 2rem #fff;
 }
 
-.bar-item {
+.pie-info {
+    font-size: 16px;
+}
+
+.pie-info>div {
     position: relative;
-    padding: 0 1rem;
-    margin: 1rem auto;
-    border: 1px solid #fff;
-    text-align: right;
+    display: flex;
+    align-items: center;
 }
 
-.bar .item1::after {
+.pie1::before {
     content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 5%;
-    height: 100%;
-    background-color: #fff;
-    box-shadow: 0 0 1rem #fff;
+    width: 20px;
+    height: 20px;
+    margin-right: 1rem;
+    background-color: #7f8c8d;
 }
 
-.bar .item2::after {
+.pie2::before {
     content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 10%;
-    height: 100%;
-    background-color: #fff;
-    box-shadow: 0 0 1rem #fff;
+    width: 20px;
+    height: 20px;
+    margin-right: 1rem;
+    background-color: #bdc3c7;
 }
 
-.bar .item3::after {
+.pie3::before {
     content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 30%;
-    height: 100%;
-    background-color: #fff;
-    box-shadow: 0 0 1rem #fff;
+    width: 20px;
+    height: 20px;
+    margin-right: 1rem;
+    background-color: #ecf0f1;
 }
 
 /* person */
@@ -540,22 +573,24 @@ pre {
 
     .info-box {
         flex-direction: column;
+        align-items: center;
     }
 
-    .info-box>* {
-        margin: 0rem;
+    .info-nav {
+        justify-content: center;
     }
 
     .info {
-        gap: 1rem;
+        height: 280px;
     }
 
-    .info-item {
-        text-align: center;
+    .pie {
+        width: 240px;
+        height: 240px;
     }
 
-    span.sub-title {
-        display: none;
+    .pie-info {
+        font-size: 14px;
     }
 
     .gal-box {

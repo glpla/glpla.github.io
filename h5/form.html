@@ -41,6 +41,9 @@
             <dd>maxlength：最大字符数</dd>
             <dd>name/value：值对，以区分不同的数据</dd>
             <dd>id：多用于js控制；或配合&lt;label&gt;使用，增强用户体验</dd>
+            <dt>表单时间</dt>
+            <dd>change改变后</dd>
+            <dd>input改变时</dd>
         </dl>
         <h4 class="cont-title">input</h4>
         <p>作用：收集信息给后端服务器server；通常配合&lt;label&gt;和各种属性增强用户体验</p>
@@ -77,6 +80,33 @@
     &lt;label&gt;
         &lt;input type='text'&gt;&lt;/input&gt;
     &lt;/label&gt;</pre>
+        <h4 class="exam-title">自定义range</h4>
+        <div class="range-box">
+            <span class="range-val">50</span>
+            <input class="range-bar" type="range" min="0" max="100" value="50">
+        </div>
+        <pre class="code">
+    .range-bar {
+        appearance: none;
+        background-image: linear-gradient(74deg, #16a085, #1abc9c);
+        border-radius: 6px;
+        height: 14px;
+        box-shadow: 0 0 10px #fff;
+    }
+    
+    .range-bar::-webkit-slider-thumb {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background-color: #f1c40f;
+        border-radius: 50%;
+        transition: 0.5s;
+    }
+    
+    .range-bar:active::-webkit-slider-thumb {
+        box-shadow: 0 0 10px 4px #f39c12;
+    }
+        </pre>
         <h4 class="exam-title">骰子Dice</h4>
         <strong>知识点</strong>
         <p>1.精灵图：background-position</p>
@@ -147,7 +177,6 @@
                 <p>3.改变当前图片对应的按钮样式</p>
             </div>
         </div>
-
         <div class="product-box">
             <input type="radio" name="pro" id="p0" hidden checked>
             <input type="radio" name="pro" id="p1" hidden>
@@ -424,6 +453,13 @@
     </section>
     <script>
         window.onload = function () {
+            // range
+            let sliderVal = document.querySelector('.range-val')
+            let sliderBar = document.querySelector('.range-bar')
+            console.log(sliderVal);
+            sliderBar.addEventListener('input', () => {
+                sliderVal.innerHTML = sliderBar.value
+            })
             // read txt
             let txt = document.querySelector('#txt')
             let txtCont = document.querySelector('#txt-cont')
