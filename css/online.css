@@ -46,6 +46,28 @@ ul li:nth-child(1) {
     background-image: url(../imgs/zh/cover.jpg);
 }
 
+.svg {
+    margin: 2rem auto;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1;
+    stroke-dasharray: 10 1000;
+    stroke-dashoffset: 10;
+    animation: draw 3s ease-in-out infinite;
+}
+
+@keyframes draw {
+    to {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 0;
+    }
+}
+
 .logo {
     width: 150px;
     height: 150px;
@@ -122,7 +144,7 @@ ul li:nth-child(1) {
     opacity: 1;
 }
 
-.big, .title {
+.big {
     font-size: 1.5rem;
 }
 
@@ -132,6 +154,8 @@ ul li:nth-child(1) {
 
 pre {
     font-size: 1rem;
+    overflow-y: auto;
+    font-family: 'poppins', "Microsoft YaHei";
 }
 
 /* cube */
@@ -186,10 +210,6 @@ pre {
 
 .bottom {
     transform: rotatex(-90deg) translateZ(calc(var(--cube-width)/2));
-}
-
-.title {
-    margin-top: 10rem;
 }
 
 .mb4 {
@@ -531,15 +551,11 @@ pre {
 }
 
 .step {
-    margin: 2rem auto;
+    margin-bottom: 1rem;
 }
 
 .pro>div:first-child {
     border-bottom: 2px solid #fff;
-}
-
-pre {
-    overflow-y: auto;
 }
 
 @keyframes rolling {
@@ -569,6 +585,10 @@ pre {
 
     li .pro {
         width: 100%;
+    }
+
+    .title {
+        font-size: 3.5rem;
     }
 
     .info-box {
