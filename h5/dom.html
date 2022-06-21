@@ -6,69 +6,268 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document Object Model</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/dom.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/linux.css">
+    <style>
+        header {
+            background-image: url(../imgs/xit.jpg);
+        }
+
+        .dd-title-item {
+            background-color: #9fcff9;
+            color: #333;
+        }
+
+
+        .case-img-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            background-size: cover;
+            background-color: #f3f3f3;
+            border-radius: 10px;
+        }
+
+        .case-img-box img {
+            margin: 0.2rem;
+            width: 60px;
+            height: 40px;
+            cursor: pointer;
+            border: 2px solid #fff;
+        }
+
+        /* nav */
+        .base a {
+            display: inline-block;
+            height: 2rem;
+            line-height: 2rem;
+            padding: 0 1rem;
+            border-radius: 1rem;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: #ddd;
+        }
+
+        .show-box {
+            width: 400px;
+            max-width: 100%;
+            margin: 2rem auto;
+        }
+
+        .show-box input,
+        .msg-box input {
+            font-family: inherit;
+            font-size: inherit;
+            padding: 0 1rem;
+            height: 30px;
+        }
+
+        .count-box .flex-h {
+            font-size: 1rem;
+        }
+
+        .flex-h label:nth-child(3) {
+            margin-right: auto;
+        }
+
+        .msg-box {
+            display: flex;
+        }
+
+        .msg-box input[type='text'] {
+            flex-grow: 1;
+            border: none;
+            border-bottom: 1px solid #27ae60;
+        }
+
+        .msg-box input[type='button'] {
+            flex-basis: 120px;
+            background-color: #27ae60;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .msg-list {
+            height: 100px;
+            margin-top: 1rem;
+            overflow-y: auto;
+        }
+
+        .msg-list li {
+            padding-left: 1rem;
+            color: #333;
+        }
+
+        .msg-list li:nth-child(odd) {
+            background-color: rgba(39, 174, 96, 0.1);
+        }
+
+        #load {
+            width: 100%;
+            background-color: #27ae60;
+            color: #fff;
+            height: 2rem;
+            font-family: inherit;
+        }
+
+        .tbl {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid #ddd;
+        }
+    </style>
 </head>
 
-<body>
-    <section class="w">
-        <header>
-            <h1 id="el">元素 Element</h1>
-        </header>
-        <strong>选择元素</strong>
-        <p class="flex-h">document.querySelector(selector)<span class="dot"></span>选中第一个/单个</p>
-        <p class="flex-h">document.querySelectorAll(selector)<span class="dot"></span>选中一组</p>
-        <p class="flex-h">document.body<span class="dot"></span>获取body</p>
-        <p class="flex-h">document.documentElement<span class="dot"></span>获取HTML</p>
-        <p>其它方法：getElementsByTagName()/getElementById()/getElementsByClassName()不建议使用</p>
-        <strong>元素属性</strong>
-        <p class="flex-h">el.attrName<span class="dot"></span>获取内置属性</p>
-        <p class="flex-h">el.getAttribute(att)<span class="dot"></span>获取自定义属性</p>
-        <p class="flex-h">el.setAttribute(att,value)<span class="dot"></span>设置自定义属性</p>
-        <p class="flex-h">el.removeAttribute(att,value)<span class="dot"></span>删除自定义属性</p>
-        <strong>自定义属性data-</strong>
-        <p>data-写在元素标签上</p>
-        <p>获取时使用：el.dataset，不需要加上data；getAttribute可以获取所有属性；dataset只能获取data-属性</p>
-        <p>长属性应采用连字符法，如：data-ind、data-good-name</p>
-        <p>为了保存和使用数据</p>
-        <strong>元素内容</strong>
-        <p class="flex-h">el.innerText<span class="dot"></span>元素文本内容</p>
-        <p class="flex-h">el.innerHTML<span class="dot"></span>元素HTML内容</p>
-        <h4 class="exam-title">数字时钟</h4>
-        <div class="cont">
-            <div class="count-box">
+<body class="container">
+    <header class="w">
+        <h1 id="el">元素 Element</h1>
+        <span class="timestamp">2022-06-21</span>
+    </header>
+    <div class="w cont">
+        <dl>
+            <dt>JS的操作对象分两种：</dt>
+            <dd>DOM：操作HTML/document</dd>
+            <dd>BOM：操作浏览器/window</dd>
+        </dl>
+        <dl>
+            <dt class="dd-title-item" id="no">节点 Node</dt>
+            <dd>一个HTML文档是由各种各样的节点组成</dd>
+            <dt>节点类型</dt>
+            <dd>文档节点：HTML</dd>
+            <dd>元素节点：</dd>
+            <dd>属性节点：</dd>
+            <dd>文本节点：除普通文本外，标签之间由于格式化自动产生的的回车，空白和空格都是文本节点；</dd>
+            <dd>每个节点包括:</dd>
+            <dd>1. nodeName：节点名称；</dd>
+            <dd>2. nodeType：节点类型；元素节点为1；属性节点为2；文本节点为3；</dd>
+            <dd>3. nodeValue：节点值；</dd>
+            <dd>一般我们处理的是[元素]节点，所以通常根据节点类型是否为1来判断节点是否是元素节点；</dd>
+        </dl>
+        <dl>
+            <dt class="dd-title-item" id="no">元素 Element</dt>
+            <dt>元素获取</dt>
+            <dd>document.querySelector(selector)：选中第一个/单个元素</dd>
+            <dd>document.querySelectorAll(selector)：选中一组元素</dd>
+            <dd>document.body：获取body</dd>
+            <dd>document.documentElement：获取HTML</dd>
+            <dd>其它方法：getElementsByTagName()/getElementById()/getElementsByClassName()；不建议使用</dd>
+            <dd>相比而言，根据ID/CLASS/TAG等方法获取获取元素的方法比较繁琐，而利用节点的父子关系则比较方便：只需获取[一个节点]，根据父子关系[元素属性]获取其他节点，如：</dd>
+            <dd>el.parentNode：父节点；无则返回null；只能有一个亲爸爸；</dd>
+            <dd>el.childNodes：子节点；包括元素节点和文本节点；通常是多个；</dd>
+            <dd>el.nextSibling：下一个兄弟节点，包括文本节点，元素节点；</dd>
+            <dd>el.previousSibling：上一个兄弟节点，包括文本节点，元素节点；</dd>
+            <dt>元素属性</dt>
+            <dd>el.innerText：元素文本内容；</dd>
+            <dd>el.innerHTML：元素HTML内容；</dd>
+            <dd>el.attrName：获取[内置]属性；</dd>
+            <dd>el.children：子元素；实际开发常用；可通过索引获取某个子元素；</dd>
+            <dd>el.firstChild：第一个子元素；</dd>
+            <dd>el.lastChild：最后一个子元素；</dd>
+            <dd>el.className：元素应用的类；</dd>
+            <dd>el.style.attrName：元素应用的样式；</dd>
+            <dt>元素自定义属性data-</dt>
+            <dd>data-写在元素标签上，为了保存和使用数据；</dd>
+            <dd>获取时使用：el.dataset，不需要加上data；getAttribute可以获取所有属性；dataset只能获取data-属性；</dd>
+            <dd>长属性应采用连字符法，如：data-ind、data-good-name；</dd>
+            <dt>元素方法</dt>
+            <dd>el.getAttribute(att)：获取自定义属性；</dd>
+            <dd>el.setAttribute(att,value)：设置自定义属性；</dd>
+            <dd>el.removeAttribute(att,value)：删除自定义属性；</dd>
+            <dd>节点相关的：</dd>
+            <dd>el.appendChild(child)：将child节点作为子节点添加到父节点[末尾]；</dd>
+            <dd>el.insertBefore(child,node)：在父节点某个子节点[前面]插入新的子节点；</dd>
+            <dd>removeChild(child)：从父节点中删除某个子节点</dd>
+            <dd>说明：调整HTML结构时，通常需要先创建新节点document.createElement(tagName)，设置为相应的内容后再添加到某个节点中；</dd>
+            <dd>类class相关的：</dd>
+            <dd>el.classList.add()：增加类</dd>
+            <dd>el.classList.remove()：删除类</dd>
+            <dd>el.classList.toggle()：切换类</dd>
+            <dd>样式style相关的：</dd>
+            <dd>el.style.setProperty(name, value)：修改样式</dd>
+        </dl>
+        <dl>
+            <dt class="dd-title-item">实操</dt>
+            <dt>[案例] 数字时钟</dt>
+            <dd>1. 原生实现</dd>
+            <dd>2. <a href="http://momentjs.cn/" target="_blank" class="link">momentjs</a>实现</dd>
+            <dd class="dd-diag-item dd-case-item">
                 <span id='yy'></span>-<span id='mon'></span>-<span id='day'></span>
                 <span id='week'></span>
                 <span id='hh'></span>:<span id='min'></span>:<span id='sec'></span>
-            </div>
-            <p><span class="iconfont info-icon">&#xe82e;</span> 请使用<a href="http://momentjs.cn/" target="_blank"
-                    class="link">momentjs</a>实现</p>
-
-        </div>
-        <h4 class="exam-title">日期倒计时</h4>
-        <div class="cont">
-            <div class="count-box">
-                <span id="cd"></span>天<span id="ch"></span>小时<span id="cm"></span>分钟<span id="cs"></span>秒
-            </div>
-            <p style="text-align: center;">距离2022-01-01 00:00:00还有</p>
-        </div>
-        <h4 class="exam-title">秒表倒计时</h4>
-        <div class="cont">
-            <div class="count-box">
-                <span id="cds">10</span>
-            </div>
-            <p style="text-align: center;">10秒倒计时</p>
-        </div>
-        <h4 class="cont-title" id="cl">类class</h4>
-        <strong>设置类</strong>
-        <p class="flex-h">el.className=name<span class="dot"></span>设置类</p>
-        <p class="flex-h">el.classList.add()<span class="dot"></span>增加类</p>
-        <p class="flex-h">el.classList.remove()<span class="dot"></span>删除类</p>
-        <p class="flex-h">el.classList.toggle()<span class="dot"></span>切换类</p>
-        <h4 class="cont-title" id="st">样式style</h4>
-        <p class="flex-h">el.style.attrName=attrValue<span class="dot"></span>设置样式</p>
-        <p class="flex-h">el.style.setProperty(name, value)<span class="dot"></span>修改样式</p>
+            </dd>
+            <dt>[案例] 日期倒计时</dt>
+            <dd class="dd-diag-item dd-case-item">
+                <span id="ref-time" data-time="2022-09-10">距离2022-09-10 00:00:00还有</span><br>
+                <span><span id="cd"></span>天<span id="ch"></span>小时<span id="cm"></span>分钟<span id="cs"></span>秒</span>
+            </dd>
+            <dt>[案例] 秒表倒计时</dt>
+            <dd class="dd-diag-item dd-case-item">
+                <span id="cds">10</span><br>
+                <span>10秒倒计时</span>
+            </dd>
+            <dt>[案例] 换肤</dt>
+            <dd>使用src属性实现</dd>
+            <dd>使用data-属性实现</dd>
+            <dd class="case-img-box">
+                <img src="../imgs/1.jpg" alt="">
+                <img src="../imgs/2.jpg" alt="">
+                <img src="../imgs/3.jpg" alt="">
+                <img src="../imgs/4.jpg" alt="">
+            </dd>
+            <pre class="code">
+    el.style.backgroundImage = `url(${this.src})`
+            </pre>
+            <dt>[案例] 留言板</dt>
+            <dd class="msg-box">
+                <input type="text" placeholder="说点啥吧" maxlength="20" id='msg'>
+                <input type="button" value="提交" id='btn'>
+            </dd>
+            <dd>
+                <ul class="msg-list" id='list'></ul>
+            </dd>
+            <p><span class="iconfont info-icon">&#xe82e;</span> 使用正则表达式规范输入</p>
+            <p><span class="iconfont info-icon">&#xe82e;</span> 每条留言增加删除功能</p>
+            <pre class="code">
+    msgbtn.addEventListener('click', function () {
+      if (!msg.value) {
+        return
+      }
+      let li = document.createElement('li')
+      li.innerHTML = msg.value
+      // list.appendChild(li)
+      list.insertBefore(li, list.children[0])
+      msg.value = ''
+    })</pre>
+            <dt>加载数据并展示到表格</dt>
+            <button id='load'>加载</button>
+            <pre class="code">
+    let load = document.querySelector('#load')
+    load.addEventListener('click', () => {
+      fetch('./data2021/stu.json')
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+        })
+    })    </pre>
+            <table class="tbl">
+                <tr>
+                    <td>ID</td>
+                    <td>unit</td>
+                </tr>
+            </table>
+        </dl>
         <h4 class="exam-title">导航</h4>
         <nav>
             <ul class="flex-h" id='nav'>
@@ -86,27 +285,20 @@
     //js
     let as = document.querySelectorAll('#nav a')
     for (let i = 0; i < as.length; i++) {
-      as[i].addEventListener('click', function (e) {
+        as[i].addEventListener('click', function (e) {
         e.preventDefault();
         for (let j = 0; j < as.length; j++) {
-          as[j].classList.remove('active')
+            as[j].classList.remove('active')
         }
         this.classList.add('active')
         //this.classList.toggle('active')
         setTimeout(function () {
-          document.querySelector(e.target.dataset.link).scrollIntoView()
+            document.querySelector(e.target.dataset.link).scrollIntoView()
         }, 100)
-      })
-    }    </pre>
-        <h4 class="exam-title">背景换肤</h4>
-        <div class="img-box">
-            <img src="../imgs/1.jpg" alt="">
-            <img src="../imgs/2.jpg" alt="">
-            <img src="../imgs/3.jpg" alt="">
-            <img src="../imgs/4.jpg" alt="">
-        </div>
-        <pre class="code">
-    imgBox.style.backgroundImage = `url(${this.src})`    </pre>
+        })
+    }       
+ </pre>
+
         <h4 class="cont-title" id="fo">表单form</h4>
         <strong>可操作的属性</strong>
         <p class="flex-h">checked<span class="dot"></span>是否选中</p>
@@ -165,264 +357,205 @@
         }
       }
     })    </pre>
-        <h4 class="cont-title" id="no">节点Node</h4>
-        <p>一个HTML文档是由各种各样的节点组成</p>
-        <strong>节点类型</strong>
-        <p class="flex-h">文档节点<span class="dot"></span>HTML</p>
-        <p class="flex-h">元素节点<span class="dot"></span></p>
-        <p class="flex-h">属性节点<span class="dot"></span></p>
-        <p class="flex-h">文本节点<span class="dot"></span>除普通文本外，标签之间由于格式化自动产生的的回车，空白和空格都是文本节点</p>
-        <strong>每个节点包括</strong>
-        <p class="flex-h">nodeName<span class="dot"></span>节点名称</p>
-        <p class="flex-h">nodeType<span class="dot"></span>节点类型；元素节点为1；属性节点为2；文本节点为3</p>
-        <p class="flex-h">nodeValue<span class="dot"></span>节点值</p>
-        <p>一般我们处理的是元素节点，所以通常根据节点类型是否为1来判断节点是否是元素节点</p>
-        <p>相比而言，传统获取元素的方法比较繁琐：每个节点都需要使用ID/CLASS/TAG等方法获取；而利用节点的父子关系则比较方便操作元素：只需获取一个节点，其他节点可以根据父子关系简介获取</p>
-        <strong>获取节点</strong>
-        <p class="flex-h">el.parentNode<span class="dot"></span>父节点；无则返回null；只能有一个亲爸爸</p>
-        <p class="flex-h">el.childNodes<span class="dot"></span>子节点；包括元素节点和文本节点；通常是多个</p>
-        <p class="flex-h">el.children<span class="dot"></span>子元素节点；实际开发常用；可通过索引获取某个子元素节点</p>
-        <p class="flex-h">el.firstChild：<span class="dot"></span>第一个子元素节点</p>
-        <p class="flex-h">el.lastChild：<span class="dot"></span>最后一个子元素节点</p>
-        <p class="flex-h">el.nextSibling：<span class="dot"></span>下一个兄弟节点，包括文本节点，元素节点</p>
-        <p class="flex-h">el.previousSibling：<span class="dot"></span>上一个兄弟节点，包括文本节点，元素节点</p>
-        <strong>创建节点</strong>
-        <p>document.createElement(tagName)：创建节点</p>
-        <p>el.appendChild(child)：将创建的节点作为子节点添加到父节点的末尾哦</p>
-        <p>el.insertBefore(child,node)：在父节点某个子节点前面插入新的子节点</p>
-        <p>removeChild(child)：从父节点中删除某个子节点</p>
-        <h4 class="exam-title">留言板</h4>
-        <div class="msg-box">
-            <input type="text" placeholder="说点啥吧" maxlength="20" id='msg'>
-            <input type="button" value="提交" id='btn'>
-        </div>
-        <ul class="msg-list" id='list'>
-        </ul>
-        <p><span class="iconfont info-icon">&#xe82e;</span> 使用正则表达式规范输入</p>
-        <p><span class="iconfont info-icon">&#xe82e;</span> 每条留言增加删除功能</p>
-        <pre class="code">
-    msgbtn.addEventListener('click', function () {
-      if (!msg.value) {
-        return
-      }
-      let li = document.createElement('li')
-      li.innerHTML = msg.value
-      // list.appendChild(li)
-      list.insertBefore(li, list.children[0])
-      msg.value = ''
-    })</pre>
-        <h4 class="exam-title">加载数据并展示到表格</h4>
-        <button id='load'>加载</button>
-        <pre class="code">
-    let load = document.querySelector('#load')
-    load.addEventListener('click', () => {
-      fetch('./data2021/stu.json')
-        .then(res => res.json())
-        .then(res => {
-          console.log(res);
-        })
-    })    </pre>
-        <table class="tbl">
-            <tr>
-                <td>ID</td>
-                <td>unit</td>
-            </tr>
-        </table>
-        <footer>Copyright Reserved &copy; By Cnplaman 2021-12-03</footer>
-    </section>
-    <script>
-        window.onload = function () {
-            // count
-            let week_arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
-            let year = document.querySelector('#yy')
-            let mon = document.querySelector('#mon')
-            let day = document.querySelector('#day')
-            let week = document.querySelector('#week')
-            let hh = document.querySelector('#hh')
-            let min = document.querySelector('#min')
-            let sec = document.querySelector('#sec')
-            let inter = setInterval(() => {
-                let date = new Date()
-                year.innerHTML = date.getFullYear()
-                mon.innerHTML = date.getMonth() + 1
-                day.innerHTML = date.getDate()
-                week.innerHTML = week_arr[date.getDay()]
-                hh.innerHTML = date.getHours() > 9 ? date.getHours() : '0' + date.getHours()
-                min.innerHTML = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes()
-                sec.innerHTML = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds()
-            }, 1000)
+        <footer class="w copyright">
+            <div class="copyright-item">All Copyrights Reserved, &copy; 2022-2024</div>
+            <img class="copyright-item" src=" ../imgs/avatar.jpg" alt="">
+            <div class="copyright-item">Cnplaman from No 54414, PLA</div>
+        </footer>
+        </section>
+        <script>
+            window.onload = function () {
+                // count
+                let week_arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+                let year = document.querySelector('#yy')
+                let mon = document.querySelector('#mon')
+                let day = document.querySelector('#day')
+                let week = document.querySelector('#week')
+                let hh = document.querySelector('#hh')
+                let min = document.querySelector('#min')
+                let sec = document.querySelector('#sec')
+                let inter = setInterval(() => {
+                    let date = new Date()
+                    year.innerHTML = date.getFullYear()
+                    mon.innerHTML = date.getMonth() + 1
+                    day.innerHTML = date.getDate()
+                    week.innerHTML = week_arr[date.getDay()]
+                    hh.innerHTML = date.getHours() > 9 ? date.getHours() : '0' + date.getHours()
+                    min.innerHTML = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes()
+                    sec.innerHTML = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds()
+                }, 1000)
 
-            // count down
-            let cd = document.querySelector('#cd')
-            let ch = document.querySelector('#ch')
-            let cm = document.querySelector('#cm')
-            let cs = document.querySelector('#cs')
-            let oldday = new Date('2022-01-01 00:00:00')
-            let cinter = setInterval(() => {
-                let newday = new Date()
-                let secs = parseInt((oldday - newday) / 1000)
-                if (secs < 0) {
-                    clearInterval(cinter)
-                    return
-                }
-                cd.innerHTML = parseInt(secs / 60 / 60 / 24)
-                ch.innerHTML = parseInt(secs / 60 / 60 % 24)
-                cm.innerHTML = parseInt(secs / 60 % 60)
-                cs.innerHTML = secs % 60 > 9 ? secs % 60 : '0' + secs % 60
-            }, 1000)
-            // cds
-            let cds = document.querySelector('#cds')
-            let time = 10
-            let cdsinter = setInterval(() => {
-                time--
-                if (time < 0) {
-                    clearInterval(cdsinter)
-                    return
-                }
-                cds.innerHTML = time
-            }, 1000)
+                // count down
+                let cd = document.querySelector('#cd')
+                let ch = document.querySelector('#ch')
+                let cm = document.querySelector('#cm')
+                let cs = document.querySelector('#cs')
+                let oldday = new Date('2022-09-10 00:00:00')
+                let cinter = setInterval(() => {
+                    let newday = new Date()
+                    let secs = parseInt((oldday - newday) / 1000)
+                    if (secs < 0) {
+                        clearInterval(cinter)
+                        return
+                    }
+                    cd.innerHTML = parseInt(secs / 60 / 60 / 24)
+                    ch.innerHTML = parseInt(secs / 60 / 60 % 24)
+                    cm.innerHTML = parseInt(secs / 60 % 60)
+                    cs.innerHTML = secs % 60 > 9 ? secs % 60 : '0' + secs % 60
+                }, 1000)
+                // cds
+                let cds = document.querySelector('#cds')
+                let time = 10
+                let cdsinter = setInterval(() => {
+                    time--
+                    if (time < 0) {
+                        clearInterval(cdsinter)
+                        return
+                    }
+                    cds.innerHTML = time
+                }, 1000)
 
-            // info
-            let info = document.querySelector('#info')
-            info.addEventListener('change', function () {
-                console.log(this.checked);
-                this.checked ? alert('同意') : alert('不同意')
-            })
-            // nav
-            let as = document.querySelectorAll('#nav a')
-            console.log(as);
-            for (let i = 0; i < as.length; i++) {
-                as[i].addEventListener('click', function (e) {
-                    e.preventDefault();
-                    for (let j = 0; j < as.length; j++) {
-                        as[j].classList.remove('active')
-                    }
-                    this.classList.add('active')
-                    console.log(e.target.dataset.link);
-                    setTimeout(function () {
-                        document.querySelector(e.target.dataset.link).scrollIntoView()
-                    }, 100)
+                // info
+                let info = document.querySelector('#info')
+                info.addEventListener('change', function () {
+                    console.log(this.checked);
+                    this.checked ? alert('同意') : alert('不同意')
                 })
-            }
-            // show passw
-            let btn = document.querySelector('input[type="button"]');
-            let input = document.querySelector('input[type="password"]');
-            let showPass = document.querySelector('input[type="button"]');
-            showPass.addEventListener('click', () => {
-                if (input.type == 'text') {
-                    input.type = 'password'
-                    btn.value = '显示密码'
-                } else {
-                    input.type = 'text'
-                    btn.value = '隐藏密码'
+                // nav
+                let as = document.querySelectorAll('#nav a')
+                console.log(as);
+                for (let i = 0; i < as.length; i++) {
+                    as[i].addEventListener('click', function (e) {
+                        e.preventDefault();
+                        for (let j = 0; j < as.length; j++) {
+                            as[j].classList.remove('active')
+                        }
+                        this.classList.add('active')
+                        console.log(e.target.dataset.link);
+                        setTimeout(function () {
+                            document.querySelector(e.target.dataset.link).scrollIntoView()
+                        }, 100)
+                    })
                 }
-            })
-            // skin
-            let imgBox = document.querySelector('.img-box')
-            let imgs = imgBox.querySelectorAll('img')
-            for (let i = 0; i < imgs.length; i++) {
-                imgs[i].addEventListener('click', function () {
-                    imgBox.style.backgroundImage = `url(${this.src})`
+                // show passw
+                let btn = document.querySelector('input[type="button"]');
+                let input = document.querySelector('input[type="password"]');
+                let showPass = document.querySelector('input[type="button"]');
+                showPass.addEventListener('click', () => {
+                    if (input.type == 'text') {
+                        input.type = 'password'
+                        btn.value = '显示密码'
+                    } else {
+                        input.type = 'text'
+                        btn.value = '隐藏密码'
+                    }
                 })
-            }
-            // data
-            let cbs = document.querySelectorAll('.flex-h input[name="web"]')
-            let all = document.querySelector('#all')
-            all.addEventListener('change', function (e) {
-                if (this.checked) {
-                    for (let i = 0; i < cbs.length; i++) {
-                        cbs[i].checked = true
-                    }
-                } else {
-                    for (let i = 0; i < cbs.length; i++) {
-                        cbs[i].checked = false
-                    }
+                // skin
+                let imgBox = document.querySelector('.case-img-box')
+                let imgs = imgBox.querySelectorAll('img')
+                for (let i = 0; i < imgs.length; i++) {
+                    imgs[i].addEventListener('click', function () {
+                        imgBox.style.backgroundImage = `url(${this.src})`
+                    })
                 }
-            })
-            for (let i = 0; i < cbs.length; i++) {
-                cbs[i].addEventListener('change', function () {
-                    let flag = true
-                    for (let j = 0; j < cbs.length; j++) {
-                        console.log(j, cbs[j].checked);
-                        if (!cbs[j].checked) {
-                            flag = false
-                            break
+                // data
+                let cbs = document.querySelectorAll('.flex-h input[name="web"]')
+                let all = document.querySelector('#all')
+                all.addEventListener('change', function (e) {
+                    if (this.checked) {
+                        for (let i = 0; i < cbs.length; i++) {
+                            cbs[i].checked = true
+                        }
+                    } else {
+                        for (let i = 0; i < cbs.length; i++) {
+                            cbs[i].checked = false
                         }
                     }
-                    all.checked = flag
                 })
-            }
+                for (let i = 0; i < cbs.length; i++) {
+                    cbs[i].addEventListener('change', function () {
+                        let flag = true
+                        for (let j = 0; j < cbs.length; j++) {
+                            console.log(j, cbs[j].checked);
+                            if (!cbs[j].checked) {
+                                flag = false
+                                break
+                            }
+                        }
+                        all.checked = flag
+                    })
+                }
 
-            // msg
-            let msg = document.querySelector('#msg')
-            let msgbtn = document.querySelector('#btn')
-            let list = document.querySelector('#list')
-            msgbtn.addEventListener('click', function () {
-                if (!msg.value) {
-                    return
-                }
-                let li = document.createElement('li')
-                li.innerHTML = msg.value
-                // list.appendChild(li)
-                list.insertBefore(li, list.children[0])
-                msg.value = ''
-            })
-            // 创建表格
-            let load = document.querySelector('#load')
-            let tbl = document.querySelector('.tbl')
-            load.addEventListener('click', () => {
-                fetch('./data2021/stu.json')
-                    .then(res => res.json())
-                    .then(res => {
-                        display0(res)
-                    })
-            })
-            function display0(data) {
-                let startTime = new Date().getTime()
-                data.forEach(item => {
-                    let tr = document.createElement('tr')
-                    let val = Object.values(item)
-                    val.forEach(el => {
-                        let td = document.createElement('td')
-                        td.innerHTML = el
-                        tr.appendChild(td)
-                    })
-                    tbl.appendChild(tr)
-                });
-                let endTime = new Date().getTime()
-                console.log('took', endTime - startTime);
-            }
-            function display1(data) {
-                let startTime = new Date().getTime()
-                for (let i = 0; i < data.length; i++) {
-                    let tr = document.createElement('tr')
-                    let item = Object.values(data[i])
-                    for (let j = 0; j < item.length; j++) {
-                        let td = document.createElement('td')
-                        td.innerHTML = item[j]
-                        tr.appendChild(td)
+                // msg
+                let msg = document.querySelector('#msg')
+                let msgbtn = document.querySelector('#btn')
+                let list = document.querySelector('#list')
+                msgbtn.addEventListener('click', function () {
+                    if (!msg.value) {
+                        return
                     }
-                    tbl.appendChild(tr)
+                    let li = document.createElement('li')
+                    li.innerHTML = msg.value
+                    // list.appendChild(li)
+                    list.insertBefore(li, list.children[0])
+                    msg.value = ''
+                })
+                // 创建表格
+                let load = document.querySelector('#load')
+                let tbl = document.querySelector('.tbl')
+                load.addEventListener('click', () => {
+                    fetch('../data2021/stu.json')
+                        .then(res => res.json())
+                        .then(res => {
+                            display0(res)
+                        })
+                })
+                function display0(data) {
+                    let startTime = new Date().getTime()
+                    data.forEach(item => {
+                        let tr = document.createElement('tr')
+                        let val = Object.values(item)
+                        val.forEach(el => {
+                            let td = document.createElement('td')
+                            td.innerHTML = el
+                            tr.appendChild(td)
+                        })
+                        tbl.appendChild(tr)
+                    });
+                    let endTime = new Date().getTime()
+                    console.log('took', endTime - startTime);
                 }
-                let endTime = new Date().getTime()
-                console.log('took', endTime - startTime);
-            }
-            function display2(data) {
-                let startTime = new Date().getTime()
-                for (let i = 0; i < data.length; i++) {
-                    let tr = '<tr>'
-                    let item = Object.values(data[i])
-                    for (let j = 0; j < item.length; j++) {
-                        let td = document.createElement('td')
-                        tr += '<td>' + item[j] + '</td>'
+                function display1(data) {
+                    let startTime = new Date().getTime()
+                    for (let i = 0; i < data.length; i++) {
+                        let tr = document.createElement('tr')
+                        let item = Object.values(data[i])
+                        for (let j = 0; j < item.length; j++) {
+                            let td = document.createElement('td')
+                            td.innerHTML = item[j]
+                            tr.appendChild(td)
+                        }
+                        tbl.appendChild(tr)
                     }
-                    tbl.innerHTML += tr
+                    let endTime = new Date().getTime()
+                    console.log('took', endTime - startTime);
                 }
-                let endTime = new Date().getTime()
-                console.log('took', endTime - startTime);
+                function display2(data) {
+                    let startTime = new Date().getTime()
+                    for (let i = 0; i < data.length; i++) {
+                        let tr = '<tr>'
+                        let item = Object.values(data[i])
+                        for (let j = 0; j < item.length; j++) {
+                            let td = document.createElement('td')
+                            tr += '<td>' + item[j] + '</td>'
+                        }
+                        tbl.innerHTML += tr
+                    }
+                    let endTime = new Date().getTime()
+                    console.log('took', endTime - startTime);
+                }
             }
-        }
-    </script>
+        </script>
 </body>
 
 </html>
