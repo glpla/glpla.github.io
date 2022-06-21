@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Bubble</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box1 {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #f40;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1" data-id="123"></div>
+    <script>
+        window.onload = function () {
+            let box1 = document.querySelector('.box1')
+            document.addEventListener('mousemove', (e) => {
+                let ev = e || event
+                ev.cancelBubble = true
+                let x = ev.clientX
+                let y = ev.clientY
+                if (x <= 0) { x = 0 }
+                if (y <= 0) { y = 0 }
+                if (x > document.documentElement.clientWidth - box1.offsetWidth) { x = document.documentElement.clientWidth - box1.offsetWidth }
+                if (y > document.documentElement.clientHeight - box1.offsetHeight) { y = document.documentElement.clientHeight - box1.offsetHeight }
+                box1.style.left = x + 'px'
+                box1.style.top = y + 'px'
+            })
+        }
+    </script>
+</body>
+
+</html>

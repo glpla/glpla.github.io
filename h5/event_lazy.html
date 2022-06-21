@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event-Lazy Loading</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/linux.css">
+    <style>
+        header {
+            background-image: url(../imgs/lg.jpg);
+        }
+
+        .dd-title-item {
+            background-color: #9fcff9;
+            color: #333;
+        }
+
+        .test {
+            height: 200vh;
+        }
+    </style>
+</head>
+
+<body class="container">
+    <header class="w">
+        <h1>懒加载 Lazy Loading</h1>
+        <span class="timestamp">2022-06-20</span>
+    </header>
+    <div class="w cont">
+        <dl>
+            <dd>[案例] JD首页懒加载；F12-&gt;检查network懒加载情况；</dd>
+            <dt>原理</dt>
+            <dd>当内容进入到可视区时，触发加载，即：图片/视频的src属性一开始为空[不渲染]；当页面滚动到一定位置时[通常是3倍视口高度]，指定其src属性，开始渲染；也称懒加载；</dd>
+            <dd>.节省带宽</dd>
+            <dd>.不会吃流量</dd>
+            <dd>.改善用户体验更流畅</dd>
+            <dt>关键点</dt>
+            <dd>两个高度：</dd>
+            <dd>1.可视区高度：documentElement.clientWidth和documentElement.clientHeight</dd>
+            <dd>2.元素到视口上边的高度/距离：el.getBoundingClientRect().top</dd>
+            <dd>[案例] 利用window的resize事件查看可视区变化；分析懒加载性能；</dd>
+            <pre class="code">
+    window.addEventListener('resize', (e) => {
+        console.log(document.documentElement.clientWidth, document.documentElement.clientHeight);
+    })
+            </pre>
+            <dd>[案例] 懒加载实现</dd>
+            <pre class="code">
+    function lazy() {
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        imgs.forEach(item => {
+            if (ch + scrollTop >= item.getBoundingClientRect().top + scrollTop) {
+                item.src = item.getAttribute('data-src')
+            }
+        })
+    }               </pre>
+        </dl>
+        <dl>
+            <dt>图片预览</dt>
+            <dd>滚动窗口；检查network懒加载情况；</dd>
+            <dd><img src="" alt=""
+                    data-src="https://images.unsplash.com/photo-1511300636408-a63a89df3482?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60">
+            </dd>
+            <dd><img src="" alt=""
+                    data-src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8d2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60">
+            </dd>
+            <dd><img src="" alt=""
+                    data-src="https://images.unsplash.com/photo-1501696461415-6bd6660c6742?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHdhbGxwYXBlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60">
+            </dd>
+            <dd><img src="" alt=""
+                    data-src="https://images.unsplash.com/photo-1580137189272-c9379f8864fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fHdhbGxwYXBlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60">
+            </dd>
+            <dd><img src="" alt=""
+                    data-src="https://images.unsplash.com/photo-1620503374956-c942862f0372?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHdhbGxwYXBlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60">
+            </dd>
+            <dd><img src="" alt=""
+                    data-src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fHdhbGxwYXBlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60">
+            </dd>
+            <dd><img src="" alt=""
+                    data-src="https://images.unsplash.com/photo-1498429089284-41f8cf3ffd39?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fHdhbGxwYXBlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60">
+            </dd>
+            <dd><img src="" alt=""
+                    data-src="https://images.unsplash.com/photo-1461301214746-1e109215d6d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHdhbGxwYXBlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60">
+            </dd>
+            </dd>
+            <dd><img src="" alt=""
+                    data-src="https://images.unsplash.com/photo-1575761344173-aa186491c120?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fHdhbGxwYXBlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60">
+            </dd>
+            </dd>
+            <dd><img src="" alt=""
+                    data-src="https://images.unsplash.com/photo-1499678329028-101435549a4e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDZ8fHdhbGxwYXBlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60">
+            </dd>
+        </dl>
+        <dl>
+            <dt>IntersectionObserver</dt>
+            <dd>触发条件：</dd>
+            <dd>看见元素，触发一次；</dd>
+            <dd>看不见元素，触发一次；</dd>
+        </dl>
+        <dl>
+            <dt>第三方js库</dt>
+        </dl>
+        <footer class="w copyright">
+            <div class="copyright-item">All Copyrights Reserved, &copy; 2022-2024</div>
+            <img class="copyright-item" src="" data-src="../imgs/avatar.jpg" alt="">
+            <div class="copyright-item">Cnplaman from No 54414, PLA</div>
+        </footer>
+    </div>
+    <script>
+        let imgs = document.querySelectorAll('img')
+        let ch = document.documentElement.clientHeight
+        // 加载完毕后，第一次进入视口的图片开始渲染；
+        window.addEventListener('load', () => {
+            lazy()
+        })
+        window.addEventListener('resize', (e) => {
+            lazy()
+        })
+        window.addEventListener('scroll', () => {
+            lazy()
+        })
+        function lazyBak() {
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+            imgs.forEach(item => {
+                if (item.getBoundingClientRect().top + scrollTop < ch + scrollTop) {
+                    if (item.src.slice(-5) == '.html') {
+                        item.src = item.getAttribute('data-src')
+                    }
+                }
+            })
+        }
+        function lazy() {
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+            imgs.forEach(item => {
+                if (item.getBoundingClientRect().top < window.innerHeight) {
+                    item.src = item.getAttribute('data-src')
+                }
+            })
+        }
+        let cb = () => {
+            console.log('see or unsee');
+        }
+        let observer = new IntersectionObserver(cb)
+    </script>
+</body>
+
+</html>
