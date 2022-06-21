@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Document Object Model</title>
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/normalize.css">
@@ -132,7 +132,7 @@
 
 <body class="container">
     <header class="w">
-        <h1 id="el">元素 Element</h1>
+        <h1 id="el">DOM</h1>
         <span class="timestamp">2022-06-21</span>
     </header>
     <div class="w cont">
@@ -179,16 +179,17 @@
             <dd>el.style.attrName：元素应用的样式；</dd>
             <dt>元素自定义属性data-</dt>
             <dd>data-写在元素标签上，为了保存和使用数据；</dd>
-            <dd>获取时使用：el.dataset，不需要加上data；getAttribute可以获取所有属性；dataset只能获取data-属性；</dd>
+            <dd>获取时[只能]使用：el.dataset，不需要加上data；</dd>
             <dd>长属性应采用连字符法，如：data-ind、data-good-name；</dd>
             <dt>元素方法</dt>
-            <dd>el.getAttribute(att)：获取自定义属性；</dd>
+            <dd>el.getAttribute(att)：可以获取所有属性，包括自定义属性，特别是带连字符-的属性；</dd>
             <dd>el.setAttribute(att,value)：设置自定义属性；</dd>
             <dd>el.removeAttribute(att,value)：删除自定义属性；</dd>
             <dd>节点相关的：</dd>
             <dd>el.appendChild(child)：将child节点作为子节点添加到父节点[末尾]；</dd>
             <dd>el.insertBefore(child,node)：在父节点某个子节点[前面]插入新的子节点；</dd>
-            <dd>removeChild(child)：从父节点中删除某个子节点</dd>
+            <dd>removeChild(child)：从父节点中删除某个子节点；</dd>
+            <dd>cloneNode(bool)：从父节点中删除某个子节点；</dd>
             <dd>说明：调整HTML结构时，通常需要先创建新节点document.createElement(tagName)，设置为相应的内容后再添加到某个节点中；</dd>
             <dd>类class相关的：</dd>
             <dd>el.classList.add()：增加类</dd>
@@ -198,25 +199,6 @@
             <dd>el.style.setProperty(name, value)：修改样式</dd>
         </dl>
         <dl>
-            <dt class="dd-title-item">实操</dt>
-            <dt>[案例] 数字时钟</dt>
-            <dd>1. 原生实现</dd>
-            <dd>2. <a href="http://momentjs.cn/" target="_blank" class="link">momentjs</a>实现</dd>
-            <dd class="dd-diag-item dd-case-item">
-                <span id='yy'></span>-<span id='mon'></span>-<span id='day'></span>
-                <span id='week'></span>
-                <span id='hh'></span>:<span id='min'></span>:<span id='sec'></span>
-            </dd>
-            <dt>[案例] 日期倒计时</dt>
-            <dd class="dd-diag-item dd-case-item">
-                <span id="ref-time" data-time="2022-09-10">距离2022-09-10 00:00:00还有</span><br>
-                <span><span id="cd"></span>天<span id="ch"></span>小时<span id="cm"></span>分钟<span id="cs"></span>秒</span>
-            </dd>
-            <dt>[案例] 秒表倒计时</dt>
-            <dd class="dd-diag-item dd-case-item">
-                <span id="cds">10</span><br>
-                <span>10秒倒计时</span>
-            </dd>
             <dt>[案例] 换肤</dt>
             <dd>使用src属性实现</dd>
             <dd>使用data-属性实现</dd>
@@ -228,7 +210,7 @@
             </dd>
             <pre class="code">
     el.style.backgroundImage = `url(${this.src})`
-            </pre>
+</pre>
             <dt>[案例] 留言板</dt>
             <dd class="msg-box">
                 <input type="text" placeholder="说点啥吧" maxlength="20" id='msg'>
@@ -249,8 +231,9 @@
       // list.appendChild(li)
       list.insertBefore(li, list.children[0])
       msg.value = ''
-    })</pre>
-            <dt>加载数据并展示到表格</dt>
+    })
+</pre>
+            <dt>[案例] 加载数据并展示到表格</dt>
             <button id='load'>加载</button>
             <pre class="code">
     let load = document.querySelector('#load')
@@ -261,6 +244,13 @@
           console.log(res);
         })
     })    </pre>
+            <dt>[案例] 轮播图</dt>
+            <dd>轮播图[无缝]滚动时需要额外克隆第一个节点补到后面；区分深克隆clone(true)和浅克隆clone()。深克隆会连同其中的子节点一起复制；浅克隆只复制节点本身。先克隆后添加；
+            </dd>
+            <pre class="code">
+    let newNode = box.children[0].cloneNode(true)
+    box.appendChild(newNode)
+</pre>
             <table class="tbl">
                 <tr>
                     <td>ID</td>
@@ -284,10 +274,10 @@
     
     //js
     let as = document.querySelectorAll('#nav a')
-    for (let i = 0; i < as.length; i++) {
+    for (let i = 0; i &lt; as.length; i++) {
         as[i].addEventListener('click', function (e) {
         e.preventDefault();
-        for (let j = 0; j < as.length; j++) {
+        for (let j = 0; j &lt; as.length; j++) {
             as[j].classList.remove('active')
         }
         this.classList.add('active')
@@ -296,9 +286,8 @@
             document.querySelector(e.target.dataset.link).scrollIntoView()
         }, 100)
         })
-    }       
- </pre>
-
+    }
+</pre>
         <h4 class="cont-title" id="fo">表单form</h4>
         <strong>可操作的属性</strong>
         <p class="flex-h">checked<span class="dot"></span>是否选中</p>
@@ -314,7 +303,8 @@
       dom.addEventListener('change', function () {
         console.log(this.checked);                
         console.log(this.value);                  
-      })    </pre>
+      })
+</pre>
         <h4 class="exam-title">显示密码</h4>
         <p><span class="iconfont info-icon">&#xe82e;</span> 请使用字体图标完善项目</p>
         <div class="show-box">
@@ -331,7 +321,8 @@
         input.type = 'text'
         btn.value = '隐藏密码'
       }
-    })</pre>
+    })
+</pre>
         <h4 class="exam-title">全选</h4>
         <div class="count-box">
             <span>您感兴趣的WEB前端有：</span>
@@ -348,214 +339,166 @@
     //全选逻辑
     all.addEventListener('change', function (e) {
       if (this.checked==true) {
-        for (let i = 0; i < cbs.length; i++) {
+        for (let i = 0; i &lt; cbs.length; i++) {
           cbs[i].checked = true
         }
       } else {
-        for (let i = 0; i < cbs.length; i++) {
+        for (let i = 0; i &lt; cbs.length; i++) {
           cbs[i].checked = false
         }
       }
-    })    </pre>
+    })
+</pre>
         <footer class="w copyright">
             <div class="copyright-item">All Copyrights Reserved, &copy; 2022-2024</div>
             <img class="copyright-item" src=" ../imgs/avatar.jpg" alt="">
             <div class="copyright-item">Cnplaman from No 54414, PLA</div>
         </footer>
-        </section>
-        <script>
-            window.onload = function () {
-                // count
-                let week_arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
-                let year = document.querySelector('#yy')
-                let mon = document.querySelector('#mon')
-                let day = document.querySelector('#day')
-                let week = document.querySelector('#week')
-                let hh = document.querySelector('#hh')
-                let min = document.querySelector('#min')
-                let sec = document.querySelector('#sec')
-                let inter = setInterval(() => {
-                    let date = new Date()
-                    year.innerHTML = date.getFullYear()
-                    mon.innerHTML = date.getMonth() + 1
-                    day.innerHTML = date.getDate()
-                    week.innerHTML = week_arr[date.getDay()]
-                    hh.innerHTML = date.getHours() > 9 ? date.getHours() : '0' + date.getHours()
-                    min.innerHTML = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes()
-                    sec.innerHTML = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds()
-                }, 1000)
+    </div>
+    <script>
+        window.onload = function () {
 
-                // count down
-                let cd = document.querySelector('#cd')
-                let ch = document.querySelector('#ch')
-                let cm = document.querySelector('#cm')
-                let cs = document.querySelector('#cs')
-                let oldday = new Date('2022-09-10 00:00:00')
-                let cinter = setInterval(() => {
-                    let newday = new Date()
-                    let secs = parseInt((oldday - newday) / 1000)
-                    if (secs < 0) {
-                        clearInterval(cinter)
-                        return
+            // info
+            let info = document.querySelector('#info')
+            info.addEventListener('change', function () {
+                console.log(this.checked);
+                this.checked ? alert('同意') : alert('不同意')
+            })
+            // nav
+            let as = document.querySelectorAll('#nav a')
+            console.log(as);
+            for (let i = 0; i < as.length; i++) {
+                as[i].addEventListener('click', function (e) {
+                    e.preventDefault();
+                    for (let j = 0; j < as.length; j++) {
+                        as[j].classList.remove('active')
                     }
-                    cd.innerHTML = parseInt(secs / 60 / 60 / 24)
-                    ch.innerHTML = parseInt(secs / 60 / 60 % 24)
-                    cm.innerHTML = parseInt(secs / 60 % 60)
-                    cs.innerHTML = secs % 60 > 9 ? secs % 60 : '0' + secs % 60
-                }, 1000)
-                // cds
-                let cds = document.querySelector('#cds')
-                let time = 10
-                let cdsinter = setInterval(() => {
-                    time--
-                    if (time < 0) {
-                        clearInterval(cdsinter)
-                        return
-                    }
-                    cds.innerHTML = time
-                }, 1000)
-
-                // info
-                let info = document.querySelector('#info')
-                info.addEventListener('change', function () {
-                    console.log(this.checked);
-                    this.checked ? alert('同意') : alert('不同意')
+                    this.classList.add('active')
+                    console.log(e.target.dataset.link);
+                    setTimeout(function () {
+                        document.querySelector(e.target.dataset.link).scrollIntoView()
+                    }, 100)
                 })
-                // nav
-                let as = document.querySelectorAll('#nav a')
-                console.log(as);
-                for (let i = 0; i < as.length; i++) {
-                    as[i].addEventListener('click', function (e) {
-                        e.preventDefault();
-                        for (let j = 0; j < as.length; j++) {
-                            as[j].classList.remove('active')
-                        }
-                        this.classList.add('active')
-                        console.log(e.target.dataset.link);
-                        setTimeout(function () {
-                            document.querySelector(e.target.dataset.link).scrollIntoView()
-                        }, 100)
-                    })
-                }
-                // show passw
-                let btn = document.querySelector('input[type="button"]');
-                let input = document.querySelector('input[type="password"]');
-                let showPass = document.querySelector('input[type="button"]');
-                showPass.addEventListener('click', () => {
-                    if (input.type == 'text') {
-                        input.type = 'password'
-                        btn.value = '显示密码'
-                    } else {
-                        input.type = 'text'
-                        btn.value = '隐藏密码'
-                    }
-                })
-                // skin
-                let imgBox = document.querySelector('.case-img-box')
-                let imgs = imgBox.querySelectorAll('img')
-                for (let i = 0; i < imgs.length; i++) {
-                    imgs[i].addEventListener('click', function () {
-                        imgBox.style.backgroundImage = `url(${this.src})`
-                    })
-                }
-                // data
-                let cbs = document.querySelectorAll('.flex-h input[name="web"]')
-                let all = document.querySelector('#all')
-                all.addEventListener('change', function (e) {
-                    if (this.checked) {
-                        for (let i = 0; i < cbs.length; i++) {
-                            cbs[i].checked = true
-                        }
-                    } else {
-                        for (let i = 0; i < cbs.length; i++) {
-                            cbs[i].checked = false
-                        }
-                    }
-                })
-                for (let i = 0; i < cbs.length; i++) {
-                    cbs[i].addEventListener('change', function () {
-                        let flag = true
-                        for (let j = 0; j < cbs.length; j++) {
-                            console.log(j, cbs[j].checked);
-                            if (!cbs[j].checked) {
-                                flag = false
-                                break
-                            }
-                        }
-                        all.checked = flag
-                    })
-                }
-
-                // msg
-                let msg = document.querySelector('#msg')
-                let msgbtn = document.querySelector('#btn')
-                let list = document.querySelector('#list')
-                msgbtn.addEventListener('click', function () {
-                    if (!msg.value) {
-                        return
-                    }
-                    let li = document.createElement('li')
-                    li.innerHTML = msg.value
-                    // list.appendChild(li)
-                    list.insertBefore(li, list.children[0])
-                    msg.value = ''
-                })
-                // 创建表格
-                let load = document.querySelector('#load')
-                let tbl = document.querySelector('.tbl')
-                load.addEventListener('click', () => {
-                    fetch('../data2021/stu.json')
-                        .then(res => res.json())
-                        .then(res => {
-                            display0(res)
-                        })
-                })
-                function display0(data) {
-                    let startTime = new Date().getTime()
-                    data.forEach(item => {
-                        let tr = document.createElement('tr')
-                        let val = Object.values(item)
-                        val.forEach(el => {
-                            let td = document.createElement('td')
-                            td.innerHTML = el
-                            tr.appendChild(td)
-                        })
-                        tbl.appendChild(tr)
-                    });
-                    let endTime = new Date().getTime()
-                    console.log('took', endTime - startTime);
-                }
-                function display1(data) {
-                    let startTime = new Date().getTime()
-                    for (let i = 0; i < data.length; i++) {
-                        let tr = document.createElement('tr')
-                        let item = Object.values(data[i])
-                        for (let j = 0; j < item.length; j++) {
-                            let td = document.createElement('td')
-                            td.innerHTML = item[j]
-                            tr.appendChild(td)
-                        }
-                        tbl.appendChild(tr)
-                    }
-                    let endTime = new Date().getTime()
-                    console.log('took', endTime - startTime);
-                }
-                function display2(data) {
-                    let startTime = new Date().getTime()
-                    for (let i = 0; i < data.length; i++) {
-                        let tr = '<tr>'
-                        let item = Object.values(data[i])
-                        for (let j = 0; j < item.length; j++) {
-                            let td = document.createElement('td')
-                            tr += '<td>' + item[j] + '</td>'
-                        }
-                        tbl.innerHTML += tr
-                    }
-                    let endTime = new Date().getTime()
-                    console.log('took', endTime - startTime);
-                }
             }
-        </script>
+            // show passw
+            let btn = document.querySelector('input[type="button"]');
+            let input = document.querySelector('input[type="password"]');
+            let showPass = document.querySelector('input[type="button"]');
+            showPass.addEventListener('click', () => {
+                if (input.type == 'text') {
+                    input.type = 'password'
+                    btn.value = '显示密码'
+                } else {
+                    input.type = 'text'
+                    btn.value = '隐藏密码'
+                }
+            })
+            // skin
+            let imgBox = document.querySelector('.case-img-box')
+            let imgs = imgBox.querySelectorAll('img')
+            for (let i = 0; i < imgs.length; i++) {
+                imgs[i].addEventListener('click', function () {
+                    imgBox.style.backgroundImage = `url(${this.src})`
+                })
+            }
+            // data
+            let cbs = document.querySelectorAll('.flex-h input[name="web"]')
+            let all = document.querySelector('#all')
+            all.addEventListener('change', function (e) {
+                if (this.checked) {
+                    for (let i = 0; i < cbs.length; i++) {
+                        cbs[i].checked = true
+                    }
+                } else {
+                    for (let i = 0; i < cbs.length; i++) {
+                        cbs[i].checked = false
+                    }
+                }
+            })
+            for (let i = 0; i < cbs.length; i++) {
+                cbs[i].addEventListener('change', function () {
+                    let flag = true
+                    for (let j = 0; j < cbs.length; j++) {
+                        console.log(j, cbs[j].checked);
+                        if (!cbs[j].checked) {
+                            flag = false
+                            break
+                        }
+                    }
+                    all.checked = flag
+                })
+            }
+
+            // msg
+            let msg = document.querySelector('#msg')
+            let msgbtn = document.querySelector('#btn')
+            let list = document.querySelector('#list')
+            msgbtn.addEventListener('click', function () {
+                if (!msg.value) {
+                    return
+                }
+                let li = document.createElement('li')
+                li.innerHTML = msg.value
+                // list.appendChild(li)
+                list.insertBefore(li, list.children[0])
+                msg.value = ''
+            })
+            // 创建表格
+            let load = document.querySelector('#load')
+            let tbl = document.querySelector('.tbl')
+            load.addEventListener('click', () => {
+                fetch('../data2021/stu.json')
+                    .then(res => res.json())
+                    .then(res => {
+                        display0(res)
+                    })
+            })
+            function display0(data) {
+                let startTime = new Date().getTime()
+                data.forEach(item => {
+                    let tr = document.createElement('tr')
+                    let val = Object.values(item)
+                    val.forEach(el => {
+                        let td = document.createElement('td')
+                        td.innerHTML = el
+                        tr.appendChild(td)
+                    })
+                    tbl.appendChild(tr)
+                });
+                let endTime = new Date().getTime()
+                console.log('took', endTime - startTime);
+            }
+            function display1(data) {
+                let startTime = new Date().getTime()
+                for (let i = 0; i < data.length; i++) {
+                    let tr = document.createElement('tr')
+                    let item = Object.values(data[i])
+                    for (let j = 0; j < item.length; j++) {
+                        let td = document.createElement('td')
+                        td.innerHTML = item[j]
+                        tr.appendChild(td)
+                    }
+                    tbl.appendChild(tr)
+                }
+                let endTime = new Date().getTime()
+                console.log('took', endTime - startTime);
+            }
+            function display2(data) {
+                let startTime = new Date().getTime()
+                for (let i = 0; i < data.length; i++) {
+                    let tr = '<tr>'
+                    let item = Object.values(data[i])
+                    for (let j = 0; j < item.length; j++) {
+                        let td = document.createElement('td')
+                        tr += '<td>' + item[j] + '</td>'
+                    }
+                    tbl.innerHTML += tr
+                }
+                let endTime = new Date().getTime()
+                console.log('took', endTime - startTime);
+            }
+        }
+    </script>
 </body>
 
 </html>

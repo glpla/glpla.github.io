@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Browser Object Model</title>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/linux.css">
+    <style>
+        header {
+            background-image: url(../imgs/xit.jpg);
+        }
+
+        .dd-title-item {
+            background-color: #9fcff9;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body class="container">
+    <header class="w">
+        <h1 id="el">BOM</h1>
+        <span class="timestamp">2022-06-21</span>
+    </header>
+    <div class="w cont">
+        <dl>
+            <dt>JS的操作对象分两种：</dt>
+            <dd>DOM：操作HTML/document</dd>
+            <dd>BOM：操作浏览器/window</dd>
+        </dl>
+        <dl>
+            <dt>BOM</dt>
+            <dd>浏览器对象模型；浏览器对象模型提供了独立于内容的、可以与浏览器窗口进行互动的对象结构。</dd>
+            <dd>BOM由多个对象组成，其中代表浏览器窗口的Window对象是BOM的顶层对象，其他对象都是该对象的子对象。</dd>
+            <dd>BOM缺乏标准。JS有标准化组织ECMA；DOM有标准化组织W3C；</dd>
+            <dd>BOM包含DOM；</dd>
+            <dt>window</dt>
+            <dd>Window是顶级对象。所有定义在全局作用域的变量和方法，都是window的属性和方法。使用时可以略去window关键字。如alert、prompt、setTimeout、setInterval等方法，实际上是window.alert()
+            </dd>
+            <dt>window事件</dt>
+            <dd>1. 加载完毕 onload</dd>
+            <dd>为了保证JS执行时，相关的元素已经准备完毕，JS代码通常写在BODY最后面。如果使用onload就可以把代码放在任何地方； </dd>
+            <dd>如果加载内容过多，onload会占用更多时间，影响用户体验。可以采用DOMContentLoaded方法。只要DOM框架出来即可，不需要渲染CSS/FLASH/图片，且不影响交互。如果两个事件都定义了，则先执行DOMContentLoaded再执行onload。
+            </dd>
+            <pre class="code">
+    window.onload = function () { }
+    window.addEventListener('DOMContentLoaded', () => { })
+</pre>
+            <dd>2. 窗口缩放 onresize</dd>
+            <dd>窗口尺寸/大小发生变化触发事件；响应式布局；</dd>
+            <dd>3. 窗口滚动 onscroll</dd>
+            <dd>
+            </dd>
+            <dt>其它全局事件</dt>
+            <dd>定时器：可以定时触发，也可以延迟触发；时间单位是毫秒；需要执行的业务以回调函数cd的形式给出；</dd>
+            <dd>1. 固定时间间隔触发函数：setInterval；</dd>
+            <pre class="code">
+    let timeId = setInterval(cb, [time])
+    clearInterval(timeId)
+</pre>
+            <dd>2. 定时/延迟触发函数：setTimeout</dd>
+            <pre class="code">
+    let timeId = setTimeout(cb, [time])
+    clearTimeout(timeId)
+</pre>
+            <dd>注意：为节省系统开销，事件处理完毕应清除定时器；需指定id</dd>
+            <dt>[案例] 数字时钟</dt>
+            <dd>1. 原生实现</dd>
+            <dd>2. <a href="http://momentjs.cn/" target="_blank" class="link">momentjs</a>实现</dd>
+            <dd>[思考] 如何避免首次打开或页面刷新时产生的数据获取空白？</dd>
+            <dd class="dd-diag-item dd-case-item">
+                <span id='yy'></span>-<span id='mon'></span>-<span id='day'></span>
+                <span id='week'></span>
+                <span id='hh'></span>:<span id='min'></span>:<span id='sec'></span>
+            </dd>
+            <dt>[案例] 日期倒计时</dt>
+            <dd class="dd-diag-item dd-case-item">
+                <span id="ref-time" data-time="2022-09-10">距离2022-09-10 00:00:00还有</span><br>
+                <span><span id="cd"></span>天<span id="ch"></span>小时<span id="cm"></span>分钟<span id="cs"></span>秒</span>
+            </dd>
+            <dt>[案例] 秒表倒计时</dt>
+            <dd class="dd-diag-item dd-case-item">
+                <span id="cds">10</span><br>
+                <span>10秒倒计时</span>
+            </dd>
+        </dl>
+        <footer class="w copyright">
+            <div class="copyright-item">All Copyrights Reserved, &copy; 2022-2024</div>
+            <img class="copyright-item" src=" ../imgs/avatar.jpg" alt="">
+            <div class="copyright-item">Cnplaman from No 54414, PLA</div>
+        </footer>
+    </div>
+    <script>
+        // clock
+        let week_arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+        let year = document.querySelector('#yy')
+        let mon = document.querySelector('#mon')
+        let day = document.querySelector('#day')
+        let week = document.querySelector('#week')
+        let hh = document.querySelector('#hh')
+        let min = document.querySelector('#min')
+        let sec = document.querySelector('#sec')
+        let inter = setInterval(clock, 1000)
+        function clock() {
+            let date = new Date()
+            year.innerHTML = date.getFullYear()
+            mon.innerHTML = date.getMonth() + 1
+            day.innerHTML = date.getDate()
+            week.innerHTML = week_arr[date.getDay()]
+            hh.innerHTML = date.getHours() > 9 ? date.getHours() : '0' + date.getHours()
+            min.innerHTML = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes()
+            sec.innerHTML = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds()
+        }
+        clock()
+
+        // count down
+        let cd = document.querySelector('#cd')
+        let ch = document.querySelector('#ch')
+        let cm = document.querySelector('#cm')
+        let cs = document.querySelector('#cs')
+        let oldday = new Date('2022-09-10 00:00:00')
+        let cinter = setInterval(cdown, 1000)
+        function cdown() {
+            let newday = new Date()
+            let secs = parseInt((oldday - newday) / 1000)
+            if (secs < 0) {
+                clearInterval(cinter)
+                return
+            }
+            cd.innerHTML = parseInt(secs / 60 / 60 / 24)
+            ch.innerHTML = parseInt(secs / 60 / 60 % 24)
+            cm.innerHTML = parseInt(secs / 60 % 60)
+            cs.innerHTML = secs % 60 > 9 ? secs % 60 : '0' + secs % 60
+        }
+        cdown()
+        // cds
+        let cds = document.querySelector('#cds')
+        let time = 10
+        let cdsinter = setInterval(() => {
+            time--
+            if (time < 0) {
+                clearInterval(cdsinter)
+                return
+            }
+            cds.innerHTML = time
+        }, 1000)
+    </script>
+</body>
+
+</html>
