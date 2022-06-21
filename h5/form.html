@@ -12,6 +12,28 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/form.css">
     <script type="text/javascript" src="../js/xlsx.core.min.js"></script>
+    <style>
+        .show-box {
+            width: 400px;
+            max-width: 100%;
+            margin: 2rem auto;
+        }
+
+        .show-box input {
+            font-family: inherit;
+            font-size: inherit;
+            padding: 0 1rem;
+            height: 30px;
+        }
+
+        .btn {
+            padding: 0.2rem 1rem;
+            background-color: #27ae60;
+            color: #fff;
+            font-size: 1rem;
+            border: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,14 +58,16 @@
             <dd>required：必填</dd>
             <dd>pattern：利用正则表达式提供验证功能，如：pattern="^[a-zA-Z]\w{4,9}$"</dd>
             <dt>其他属性</dt>
-            <dd>checked：input的默认选中</dd>
-            <dd>selected：select的默认选中</dd>
+            <dd>checked：是否选中</dd>
+            <dd>disabled：是否可用；selected表示select的默认选中</dd>
+            <dd>type：类型</dd>
+            <dd>value：值</dd>
             <dd>maxlength：最大字符数</dd>
             <dd>name/value：值对，以区分不同的数据</dd>
             <dd>id：多用于js控制；或配合&lt;label&gt;使用，增强用户体验</dd>
-            <dt>表单时间</dt>
-            <dd>change改变后</dd>
-            <dd>input改变时</dd>
+            <dt>表单事件</dt>
+            <dd>change：改变后</dd>
+            <dd>input：改变时</dd>
         </dl>
         <h4 class="cont-title">input</h4>
         <p>作用：收集信息给后端服务器server；通常配合&lt;label&gt;和各种属性增强用户体验</p>
@@ -69,6 +93,61 @@
     &lt;input type="submit" value="submit"&gt;
     //也可以直接使用&lt;button&gt;
     &lt;button&gt;submit&lt;/button&gt;</pre>
+        <h4 class="exam-title">确认书</h4>
+        <div style="text-align: center;">
+            <input type="checkbox" id='info'>
+            <label for="info">注册须知</label>
+        </div>
+        <pre class="code">
+      dom.addEventListener('change', function () {
+        console.log(this.checked);                
+        console.log(this.value);                  
+      })
+</pre>
+        <h4 class="exam-title">显示密码</h4>
+        <p><span class="iconfont info-icon">&#xe82e;</span> 请使用字体图标完善项目</p>
+        <div class="show-box">
+            <label for="sPass">密码</label>
+            <input type="password" value="" id="pw-ipt" placeholder="your password">
+            <input type="button" value="显示密码" id="pw-btn" class="btn">
+        </div>
+        <pre class="code">
+    showPass.addEventListener('click', () => {
+      if (input.type == 'text') {
+        input.type = 'password'
+        btn.value = '显示密码'
+      } else {
+        input.type = 'text'
+        btn.value = '隐藏密码'
+      }
+    })
+</pre>
+        <h4 class="exam-title">全选</h4>
+        <div class="count-box">
+            <span>您感兴趣的WEB前端有：</span>
+            <div class="flex-h">
+                <label><input type="checkbox" name="web" value="HTML" id="h5">HTML</label>
+                <label><input type="checkbox" name="web" value="CSS" id="c3">CSS</label>
+                <label><input type="checkbox" name="web" value="JAVASCRIPT" id="js">JAVASCRIPT</label>
+                <label><input type="checkbox" name="sel" id="all"><span>全选</span></label>
+            </div>
+        </div>
+        <p><span class="iconfont info-icon">&#xe82e;</span> 请优化全选逻辑</p>
+        <p><span class="iconfont info-icon">&#xe82e;</span> 增加全不选逻辑</p>
+        <pre class="code">
+    //全选逻辑
+    all.addEventListener('change', function (e) {
+      if (this.checked==true) {
+        for (let i = 0; i &lt; cbs.length; i++) {
+          cbs[i].checked = true
+        }
+      } else {
+        for (let i = 0; i &lt; cbs.length; i++) {
+          cbs[i].checked = false
+        }
+      }
+    })
+</pre>
         <h4 class="exam-title">有用的&lt;label&gt;</h4>
         <strong>简介</strong>
         <p>增加交互热区，提升用户体验：在&lt;label&gt;上做文章</p>
@@ -453,6 +532,52 @@
     </section>
     <script>
         window.onload = function () {
+            // info
+            let info = document.querySelector('#info')
+            info.addEventListener('change', function () {
+                console.log(this.checked);
+                this.checked ? alert('同意') : alert('不同意')
+            })
+            // show passw
+            let pwbtn = document.querySelector('#pw-btn');
+            let pwinput = document.querySelector('#pw-ipt');
+            let showPass = document.querySelector('input[type="button"]');
+            pwbtn.addEventListener('click', () => {
+                if (pwinput.type == 'text') {
+                    pwinput.type = 'password'
+                    pwbtn.value = '显示密码'
+                } else {
+                    pwinput.type = 'text'
+                    pwbtn.value = '隐藏密码'
+                }
+            })
+            // all
+            let cbs = document.querySelectorAll('.flex-h input[name="web"]')
+            let all = document.querySelector('#all')
+            all.addEventListener('change', function (e) {
+                if (this.checked) {
+                    for (let i = 0; i < cbs.length; i++) {
+                        cbs[i].checked = true
+                    }
+                } else {
+                    for (let i = 0; i < cbs.length; i++) {
+                        cbs[i].checked = false
+                    }
+                }
+            })
+            for (let i = 0; i < cbs.length; i++) {
+                cbs[i].addEventListener('change', function () {
+                    let flag = true
+                    for (let j = 0; j < cbs.length; j++) {
+                        console.log(j, cbs[j].checked);
+                        if (!cbs[j].checked) {
+                            flag = false
+                            break
+                        }
+                    }
+                    all.checked = flag
+                })
+            }
             // range
             let sliderVal = document.querySelector('.range-val')
             let sliderBar = document.querySelector('.range-bar')

@@ -52,20 +52,6 @@
             background-color: #ddd;
         }
 
-        .show-box {
-            width: 400px;
-            max-width: 100%;
-            margin: 2rem auto;
-        }
-
-        .show-box input,
-        .msg-box input {
-            font-family: inherit;
-            font-size: inherit;
-            padding: 0 1rem;
-            height: 30px;
-        }
-
         .count-box .flex-h {
             font-size: 1rem;
         }
@@ -82,13 +68,15 @@
             flex-grow: 1;
             border: none;
             border-bottom: 1px solid #27ae60;
+            outline: none;
         }
 
-        .msg-box input[type='button'] {
-            flex-basis: 120px;
+        .btn {
+            padding: 0.2rem 1rem;
             background-color: #27ae60;
             color: #fff;
-            cursor: pointer;
+            font-size: 1rem;
+            border: none;
         }
 
         .msg-list {
@@ -104,28 +92,6 @@
 
         .msg-list li:nth-child(odd) {
             background-color: rgba(39, 174, 96, 0.1);
-        }
-
-        #load {
-            width: 100%;
-            background-color: #27ae60;
-            color: #fff;
-            height: 2rem;
-            font-family: inherit;
-        }
-
-        .tbl {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            text-align: center;
-        }
-
-        td {
-            border: 1px solid #ddd;
         }
     </style>
 </head>
@@ -214,7 +180,7 @@
             <dt>[案例] 留言板</dt>
             <dd class="msg-box">
                 <input type="text" placeholder="说点啥吧" maxlength="20" id='msg'>
-                <input type="button" value="提交" id='btn'>
+                <input type="button" value="提交" id='btn' class="btn">
             </dd>
             <dd>
                 <ul class="msg-list" id='list'></ul>
@@ -234,7 +200,6 @@
     })
 </pre>
             <dt>[案例] 加载数据并展示到表格</dt>
-            <button id='load'>加载</button>
             <pre class="code">
     let load = document.querySelector('#load')
     load.addEventListener('click', () => {
@@ -244,6 +209,18 @@
           console.log(res);
         })
     })    </pre>
+            <dd>
+                <table class="tbl">
+                    <tr>
+                        <td colspan="3"><input type="button" value="加载" id="load" class="btn"></td>
+                    </tr>
+                    <tr>
+                        <td>ID</td>
+                        <td>unit</td>
+                        <td>Rate</td>
+                    </tr>
+                </table>
+            </dd>
             <dt>[案例] 轮播图</dt>
             <dd>轮播图[无缝]滚动时需要额外克隆第一个节点补到后面；区分深克隆clone(true)和浅克隆clone()。深克隆会连同其中的子节点一起复制；浅克隆只复制节点本身。先克隆后添加；
             </dd>
@@ -251,12 +228,6 @@
     let newNode = box.children[0].cloneNode(true)
     box.appendChild(newNode)
 </pre>
-            <table class="tbl">
-                <tr>
-                    <td>ID</td>
-                    <td>unit</td>
-                </tr>
-            </table>
         </dl>
         <h4 class="exam-title">导航</h4>
         <nav>
@@ -288,67 +259,6 @@
         })
     }
 </pre>
-        <h4 class="cont-title" id="fo">表单form</h4>
-        <strong>可操作的属性</strong>
-        <p class="flex-h">checked<span class="dot"></span>是否选中</p>
-        <p class="flex-h">disabled<span class="dot"></span>是否可用</p>
-        <p class="flex-h">type<span class="dot"></span>类型</p>
-        <p class="flex-h">value<span class="dot"></span>值</p>
-        <h4 class="exam-title">确认书</h4>
-        <div style="text-align: center;">
-            <input type="checkbox" id='info'>
-            <label for="info">注册须知</label>
-        </div>
-        <pre class="code">
-      dom.addEventListener('change', function () {
-        console.log(this.checked);                
-        console.log(this.value);                  
-      })
-</pre>
-        <h4 class="exam-title">显示密码</h4>
-        <p><span class="iconfont info-icon">&#xe82e;</span> 请使用字体图标完善项目</p>
-        <div class="show-box">
-            <label for="sPass">密码</label>
-            <input type="password" value="" id="sPass" placeholder="your password">
-            <input type="button" value="显示密码">
-        </div>
-        <pre class="code">
-    showPass.addEventListener('click', () => {
-      if (input.type == 'text') {
-        input.type = 'password'
-        btn.value = '显示密码'
-      } else {
-        input.type = 'text'
-        btn.value = '隐藏密码'
-      }
-    })
-</pre>
-        <h4 class="exam-title">全选</h4>
-        <div class="count-box">
-            <span>您感兴趣的WEB前端有：</span>
-            <div class="flex-h">
-                <label><input type="checkbox" name="web" value="HTML" id="h5">HTML</label>
-                <label><input type="checkbox" name="web" value="CSS" id="c3">CSS</label>
-                <label><input type="checkbox" name="web" value="JAVASCRIPT" id="js">JAVASCRIPT</label>
-                <label><input type="checkbox" name="sel" id="all"><span>全选</span></label>
-            </div>
-        </div>
-        <p><span class="iconfont info-icon">&#xe82e;</span> 请优化全选逻辑</p>
-        <p><span class="iconfont info-icon">&#xe82e;</span> 增加全不选逻辑</p>
-        <pre class="code">
-    //全选逻辑
-    all.addEventListener('change', function (e) {
-      if (this.checked==true) {
-        for (let i = 0; i &lt; cbs.length; i++) {
-          cbs[i].checked = true
-        }
-      } else {
-        for (let i = 0; i &lt; cbs.length; i++) {
-          cbs[i].checked = false
-        }
-      }
-    })
-</pre>
         <footer class="w copyright">
             <div class="copyright-item">All Copyrights Reserved, &copy; 2022-2024</div>
             <img class="copyright-item" src=" ../imgs/avatar.jpg" alt="">
@@ -357,13 +267,6 @@
     </div>
     <script>
         window.onload = function () {
-
-            // info
-            let info = document.querySelector('#info')
-            info.addEventListener('change', function () {
-                console.log(this.checked);
-                this.checked ? alert('同意') : alert('不同意')
-            })
             // nav
             let as = document.querySelectorAll('#nav a')
             console.log(as);
@@ -380,52 +283,13 @@
                     }, 100)
                 })
             }
-            // show passw
-            let btn = document.querySelector('input[type="button"]');
-            let input = document.querySelector('input[type="password"]');
-            let showPass = document.querySelector('input[type="button"]');
-            showPass.addEventListener('click', () => {
-                if (input.type == 'text') {
-                    input.type = 'password'
-                    btn.value = '显示密码'
-                } else {
-                    input.type = 'text'
-                    btn.value = '隐藏密码'
-                }
-            })
+
             // skin
             let imgBox = document.querySelector('.case-img-box')
             let imgs = imgBox.querySelectorAll('img')
             for (let i = 0; i < imgs.length; i++) {
                 imgs[i].addEventListener('click', function () {
                     imgBox.style.backgroundImage = `url(${this.src})`
-                })
-            }
-            // data
-            let cbs = document.querySelectorAll('.flex-h input[name="web"]')
-            let all = document.querySelector('#all')
-            all.addEventListener('change', function (e) {
-                if (this.checked) {
-                    for (let i = 0; i < cbs.length; i++) {
-                        cbs[i].checked = true
-                    }
-                } else {
-                    for (let i = 0; i < cbs.length; i++) {
-                        cbs[i].checked = false
-                    }
-                }
-            })
-            for (let i = 0; i < cbs.length; i++) {
-                cbs[i].addEventListener('change', function () {
-                    let flag = true
-                    for (let j = 0; j < cbs.length; j++) {
-                        console.log(j, cbs[j].checked);
-                        if (!cbs[j].checked) {
-                            flag = false
-                            break
-                        }
-                    }
-                    all.checked = flag
                 })
             }
 
@@ -435,6 +299,7 @@
             let list = document.querySelector('#list')
             msgbtn.addEventListener('click', function () {
                 if (!msg.value) {
+                    console.log('null');
                     return
                 }
                 let li = document.createElement('li')
