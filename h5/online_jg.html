@@ -9,6 +9,33 @@
     <link rel="stylesheet" href="../css/online.css">
     <link rel="stylesheet" href="../css/font_3468246_tjd5qsvz30r/iconfont.css">
     <style>
+        body {
+            background-color: #eb2c58;
+            background-blend-mode: multiply;
+        }
+
+        .color-box {
+            position: fixed;
+            top: 1rem;
+            right: 2rem;
+            display: flex;
+        }
+
+        .color {
+            width: 32px;
+            height: 18px;
+            border: 1px solid #fff;
+            cursor: pointer;
+        }
+
+        .red {
+            background-color: #eb2c58;
+        }
+
+        .blue {
+            background-color: #0c2461;
+        }
+
         ul li:nth-child(1) {
             background-image: url(../imgs/jiageng/jg0.jpg);
         }
@@ -25,11 +52,21 @@
         .ack svg {
             filter: drop-shadow(0 0 2rem #fff);
         }
+
+        @media screen and (max-width:768px) {
+            .color-box {
+                right: 1rem;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
+        <div class="color-box">
+            <div class="color red" data-color="#eb2c58"></div>
+            <div class="color blue" data-color="#0c2461"></div>
+        </div>
         <ul>
             <li>
                 <img class="logo shadow" src="../imgs/jiageng/jiageng.jpg" alt="">
@@ -353,6 +390,15 @@
     </div>
     <script>
         window.onload = function () {
+            // color
+            let colors = document.querySelectorAll('.color')
+            colors.forEach(color => {
+                color.addEventListener('click', (e) => {
+                    console.log(e.target.dataset);
+                    document.body.style.backgroundColor = e.target.dataset.color
+                })
+            })
+            // nav
             let navItems = document.querySelectorAll('.info-nav-item')
             let ind = document.querySelector('.info-nav-ind')
             function moveInd(tar) {
