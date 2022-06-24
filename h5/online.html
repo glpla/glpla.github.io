@@ -9,18 +9,63 @@
     <link rel="stylesheet" href="../css/online.css">
     <link rel="stylesheet" href="../css/font_3468246_tjd5qsvz30r/iconfont.css">
     <style>
+        body {
+            background-color: #eb2c58;
+            background-blend-mode: multiply;
+        }
+
+        .color-box {
+            position: fixed;
+            top: 1rem;
+            right: 2rem;
+            display: flex;
+        }
+
+        .color {
+            width: 32px;
+            height: 18px;
+            border: 1px solid #fff;
+            cursor: pointer;
+        }
+
+        .red {
+            background-color: #eb2c58;
+        }
+
+        .blue {
+            background-color: #0c2461;
+        }
+
         ul li:nth-child(1) {
-            background-image: url(../imgs/zh/cover.jpg);
+            background-image: url(../imgs/jiageng/jg0.jpg);
+        }
+
+        .card-f {
+            background-image: url(../imgs/zh/logo.png);
+        }
+
+        .ack svg {
+            filter: drop-shadow(0 0 2rem #fff);
+        }
+
+        @media screen and (max-width:768px) {
+            .color-box {
+                right: 1rem;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="container">
+        <div class="color-box">
+            <div class="color red" data-color="#eb2c58"></div>
+            <div class="color blue" data-color="#0c2461"></div>
+        </div>
         <ul>
             <li>
-                <img class="logo" src="../imgs/zh/logo.png" alt="">
-                <svg class="svg" width="315" height="80"><text class="title" x="0" y="50">珠海科技学院</text></svg>
+                <img class="logo shadow" src="../imgs/zh/logo.png" alt="">
+                <svg class="svg" width="310" height="80"><text class="title" x="0" y="60">珠海科技学院</text></svg>
                 <span>2022-06-15</span>
             </li>
             <li class="introduction">
@@ -115,7 +160,7 @@
             </li>
             <li class="time">
                 <span class="iconfont icon-alarm-clock mb4"></span>
-                <div class="pie"></div>
+                <div class="pie shadow"></div>
                 <div class="pie-info mt4">
                     <div class="pie1">理论5分钟</div>
                     <div class="pie2">示范10分钟</div>
@@ -129,15 +174,15 @@
             <li class="d2">
                 <span class="big mb4">CSS 2D</span>
                 <div class="person-box">
-                    <div class="person">
+                    <div class="person shadow">
                         <div class="iconfont icon-shouyetianchong per-b"></div>
                         <div class="per-s">桂林•广西•中国</div>
                     </div>
-                    <div class="person">
+                    <div class="person shadow">
                         <div class="iconfont icon-yonghutianchong per-b"></div>
                         <div class="per-s">张树彬•哥哥</div>
                     </div>
-                    <div class="person">
+                    <div class="person shadow">
                         <div class="iconfont icon-shoujitianchong per-b"></div>
                         <div class="per-s">137xxxx5481</div>
                     </div>
@@ -153,7 +198,7 @@
                 <div class="card-box">
                     <div class="card">
                         <div class="card-f"></div>
-                        <div class="card-b">爱国勤奋<br>和谐创新</div>
+                        <div class="card-b">至于至善</div>
                     </div>
                 </div>
             </li>
@@ -240,8 +285,8 @@
                         <pre>
 &lt;div class="card-box"&gt;
     &lt;div class="card"&gt;
-        &lt;div class="card-f"&gt;和谐创新&lt;/div&gt;
-        &lt;div class="card-b"&gt;爱国勤奋&lt;/div&gt;
+        &lt;div class="card-f"&gt;&lt;/div&gt;
+        &lt;div class="card-b"&gt;至于至善&lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;
                         </pre>
@@ -307,9 +352,11 @@
             </li>
             <li>
                 <div class="big mb4"><span class="iconfont icon-warning"></span> 常见问题</div>
-                <div class="step">- 溢出隐藏 overflow -</div>
-                <div class="step">- 定位 position -</div>
-                <div class="step">- 选择器 selector-</div>
+                <div>
+                    <div class="step">1. 溢出隐藏 overflow</div>
+                    <div class="step">2. 定位 position</div>
+                    <div class="step">3. 选择器 selector</div>
+                </div>
             </li>
             <li class="summary">
                 <div class="big mb4"><span class="iconfont icon-folder-6"></span>课程小结</div>
@@ -323,11 +370,14 @@
             </li>
             <li class="homework">
                 <div class="big mb4"><span class="iconfont icon-keyboard"></span>课后作业</div>
-                <div>独立完成案例1</div>
+                <div>
+                    <div>1. 独立完成3D案例1；</div>
+                    <div>2. 尝试实现3D案例2和3D案例3；</div>
+                </div>
             </li>
             <li>
                 <div class="ack">
-                    <svg class="svg" width="315" height="80"><text class="title" x="0" y="50">敬请批评指正</text></svg>
+                    <svg class="svg" width="320" height="80"><text class="title" x="5" y="60">敬请批评指正</text></svg>
                 </div>
                 <small>Thanks For Your Time</small>
             </li>
@@ -335,6 +385,15 @@
     </div>
     <script>
         window.onload = function () {
+            // color
+            let colors = document.querySelectorAll('.color')
+            colors.forEach(color => {
+                color.addEventListener('click', (e) => {
+                    console.log(e.target.dataset);
+                    document.body.style.backgroundColor = e.target.dataset.color
+                })
+            })
+            // nav
             let navItems = document.querySelectorAll('.info-nav-item')
             let ind = document.querySelector('.info-nav-ind')
             function moveInd(tar) {
