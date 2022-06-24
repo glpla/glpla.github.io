@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <style>
+        body {
+            height: 100vh;
+            background-color: #eb2c58;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .clock {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 20px solid #fff;
+            box-shadow: 0 0 20px #666 inset;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .clock::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            background-color: #f40;
+            border-radius: 50%;
+            z-index: 99;
+        }
+
+        .num {
+            position: absolute;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            transform: rotateZ(calc(var(--num) * -6deg));
+        }
+
+        .num::after {
+            content: '';
+            position: absolute;
+            width: 1px;
+            height: 10px;
+            background-color: #666;
+        }
+
+        .num:nth-child(5n+1)::after {
+            width: 2px;
+            height: 20px;
+        }
+
+        .num:nth-child(15n+1)::after {
+            width: 6px;
+            height: 20px;
+        }
+
+        .hour,
+        .min,
+        .sec {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hour {
+            width: 50%;
+            height: 50%;
+        }
+
+        .min {
+            width: 70%;
+            height: 70%;
+        }
+
+        .sec {
+            width: 90%;
+            height: 90%;
+        }
+
+        .hour::before {
+            content: '';
+            width: 4px;
+            height: 60%;
+            background-color: #333;
+        }
+
+        .min::before {
+            content: '';
+            width: 2px;
+            height: 60%;
+            background: #666;
+        }
+
+        .sec::before {
+            content: '';
+            width: 1px;
+            height: 60%;
+            background: #f40;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock">
+        <div class="num" style="--num:0"></div>
+        <div class="num" style="--num:1"></div>
+        <div class="num" style="--num:2"></div>
+        <div class="num" style="--num:3"></div>
+        <div class="num" style="--num:4"></div>
+        <div class="num" style="--num:5"></div>
+        <div class="num" style="--num:6"></div>
+        <div class="num" style="--num:7"></div>
+        <div class="num" style="--num:8"></div>
+        <div class="num" style="--num:9"></div>
+        <div class="num" style="--num:10"></div>
+        <div class="num" style="--num:11"></div>
+        <div class="num" style="--num:12"></div>
+        <div class="num" style="--num:13"></div>
+        <div class="num" style="--num:14"></div>
+        <div class="num" style="--num:15"></div>
+        <div class="num" style="--num:16"></div>
+        <div class="num" style="--num:17"></div>
+        <div class="num" style="--num:18"></div>
+        <div class="num" style="--num:19"></div>
+        <div class="num" style="--num:20"></div>
+        <div class="num" style="--num:21"></div>
+        <div class="num" style="--num:22"></div>
+        <div class="num" style="--num:23"></div>
+        <div class="num" style="--num:24"></div>
+        <div class="num" style="--num:25"></div>
+        <div class="num" style="--num:26"></div>
+        <div class="num" style="--num:27"></div>
+        <div class="num" style="--num:28"></div>
+        <div class="num" style="--num:29"></div>
+        <div class="num" style="--num:30"></div>
+        <div class="num" style="--num:31"></div>
+        <div class="num" style="--num:32"></div>
+        <div class="num" style="--num:33"></div>
+        <div class="num" style="--num:34"></div>
+        <div class="num" style="--num:35"></div>
+        <div class="num" style="--num:36"></div>
+        <div class="num" style="--num:37"></div>
+        <div class="num" style="--num:38"></div>
+        <div class="num" style="--num:39"></div>
+        <div class="num" style="--num:40"></div>
+        <div class="num" style="--num:41"></div>
+        <div class="num" style="--num:42"></div>
+        <div class="num" style="--num:43"></div>
+        <div class="num" style="--num:44"></div>
+        <div class="num" style="--num:45"></div>
+        <div class="num" style="--num:46"></div>
+        <div class="num" style="--num:47"></div>
+        <div class="num" style="--num:48"></div>
+        <div class="num" style="--num:49"></div>
+        <div class="num" style="--num:50"></div>
+        <div class="num" style="--num:51"></div>
+        <div class="num" style="--num:52"></div>
+        <div class="num" style="--num:53"></div>
+        <div class="num" style="--num:54"></div>
+        <div class="num" style="--num:55"></div>
+        <div class="num" style="--num:56"></div>
+        <div class="num" style="--num:57"></div>
+        <div class="num" style="--num:58"></div>
+        <div class="num" style="--num:59"></div>
+        <div class="hour"></div>
+        <div class="min"></div>
+        <div class="sec"></div>
+    </div>
+    <script>
+        window.onload = function () {
+            let date, h, m, s;
+            let oHour = document.querySelector('.hour')
+            let oMin = document.querySelector('.min')
+            let oSec = document.querySelector('.sec')
+            function getTime() {
+                date = new Date()
+                h = date.getHours()
+                m = date.getMinutes()
+                s = date.getSeconds()
+                oHour.style.transform = `rotateZ(${(h % 12) * 360 / 12}deg)`
+                oMin.style.transform = `rotateZ(${(m % 60) * 360 / 60}deg)`
+                oSec.style.transform = `rotateZ(${s * 6}deg)`
+
+            }
+            getTime()
+            let tId = setInterval(getTime, 1000)
+        }
+    </script>
+</body>
+
+</html>

@@ -143,6 +143,19 @@
             <dd>el.lastChild：最后一个子元素；</dd>
             <dd>el.className：元素应用的类；</dd>
             <dd>el.style.attrName：元素应用的样式；</dd>
+            <dd>元素的offset系列：offsetWidth、offsetHeight、offsetTop、offsetLeft、offsetParent</dd>
+            <dd>元素的Client系列：ClientWidth、ClientHeight、ClientTop、ClientLeft、ClientParent</dd>
+            <dd>元素的Scroll系列：ScrollWidth、ScrollHeight、ScrollTop、ScrollLeft、ScrollParent</dd>
+            <dd>说明：</dd>
+            <dd>1. offset系列，元素的实际尺寸，包括：width+border+padding；</dd>
+            <dd>2. Client系列,元素尺寸不包括border，即：width+padding；</dd>
+            <dd>3. Scroll系列，元素尺寸不包括border，即：height+padding；</dd>
+            <dd>4. 三个系列返回值均不带单位；</dd>
+            <dd>5. offset系列是只读属性；</dd>
+            <dd>6. 建议所有元素的box-sizing修改为border-box，这样获取三个系列的数字都相等；</dd>
+            <dd>[案例]指定某个元素的宽高、边框和填充，查看不同系列的属性；注意从log输出语句的颜色可以推断各系列是否是只读属性。</dd>
+            <dd>获取元素到视口边界的各个属性</dd>
+            <dd>box.getBoundingClientRect()</dd>
             <dt>元素自定义属性data-</dt>
             <dd>data-写在元素标签上，为了保存和使用数据；</dd>
             <dd>获取时[只能]使用：el.dataset，不需要加上data；</dd>

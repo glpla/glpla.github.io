@@ -53,6 +53,11 @@
             <dd>2. 窗口缩放 onresize</dd>
             <dd>窗口尺寸/大小发生变化触发事件；响应式布局；</dd>
             <dd>3. 窗口滚动 onscroll</dd>
+            <dd>只有当出现滚动条时，scroll才会触发；</dd>
+            <dd>查看body的滚动</dd>
+            <pre class="code">
+    let stop = document.documentElement.scrollTop || document.body.scrollTop
+</pre>
             <dd>
             </dd>
             <dt>其它全局事件</dt>
@@ -95,6 +100,11 @@
         </footer>
     </div>
     <script>
+        // scroll
+        window.onscroll = function () {
+            let stop = document.documentElement.scrollTop || document.body.scrollTop
+            console.log(stop);
+        }
         // clock
         let week_arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
         let year = document.querySelector('#yy')
