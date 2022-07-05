@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="../css/font_3468246_tjd5qsvz30r/iconfont.css">
     <style>
         body {
-            background-color: #eb2c58;
-            background-blend-mode: multiply;
+            background-color: #0c2461;
         }
 
         .color-box {
@@ -36,16 +35,21 @@
             background-color: #0c2461;
         }
 
-        ul li:nth-child(1) {
-            background-image: url(../imgs/hs/banner.jpg);
-        }
-
-        .card-f {
-            background-color: #fff;
-            background-image: url(../imgs/hs/logo.jpg);
+        .gal {
+            color: #0c2461;
         }
 
         .gal .gal-item:nth-child(12) {
+            background-color: #fff;
+        }
+
+        .banner {
+            background-color: #0c2461;
+            background-image: url(../imgs/gs/banner.jpg);
+            background-blend-mode: multiply;
+        }
+
+        .card-f {
             background-color: #fff;
         }
 
@@ -53,9 +57,29 @@
             filter: drop-shadow(0 0 2rem #fff);
         }
 
+        .svg-header {
+            width: 312px;
+        }
+
+        .svg-footer {
+            width: 320px;
+        }
+
         @media screen and (max-width:768px) {
             .color-box {
                 right: 1rem;
+            }
+
+            .svg-header {
+                width: 234px;
+            }
+
+            .svg-footer {
+                width: 234px;
+            }
+
+            svg .title {
+                font-size: 2.5rem;
             }
         }
     </style>
@@ -68,9 +92,9 @@
             <div class="color blue" data-color="#0c2461"></div>
         </div>
         <ul>
-            <li>
-                <img class="logo shadow" src="../imgs/hs/logo.jpg" alt="">
-                <svg class="svg" width="210" height="80"><text class="title" x="0" y="60">华商学院</text></svg>
+            <li class="banner">
+                <img class="logo shadow" src="../imgs/gs/logo.jpg" alt="">
+                <svg class="svg-header" height="80"><text class="title" x="0" y="60">广州工商学院</text></svg>
                 <span>2022-06-15</span>
             </li>
             <li class="introduction">
@@ -137,7 +161,7 @@
             </li>
             <li>
                 <div class="big">精彩内容，扫码开启</div>
-                <img class="qrcode" src="../imgs/hs/qrcode.png" alt="">
+                <img class="qrcode" src="../imgs/qrcode.png" alt="">
                 <div style="text-align: center;">更多信息，请访问www.cnplaman.xyz</div>
             </li>
             <li>
@@ -202,8 +226,8 @@
                 <div class="big mb8">[3D案例]-1</div>
                 <div class="card-box">
                     <div class="card">
-                        <div class="card-f"></div>
-                        <div class="card-b">厚德 励志 <br> 博学 创新</div>
+                        <div class="card-f"><img src="../imgs/gs/logo.jpg" alt=""></div>
+                        <div class="card-b">正德厚生<br>励志修能</div>
                     </div>
                 </div>
             </li>
@@ -211,18 +235,18 @@
                 <div class="big mb8">[3D案例]-2</div>
                 <div class="gal-box">
                     <div class="gal">
-                        <div class="gal-item" style="--deg:0">厚</div>
-                        <div class="gal-item" style="--deg:1">德</div>
-                        <div class="gal-item" style="--deg:2">励</div>
-                        <div class="gal-item" style="--deg:3">志</div>
-                        <div class="gal-item" style="--deg:4">博</div>
-                        <div class="gal-item" style="--deg:5">学</div>
-                        <div class="gal-item" style="--deg:6">创</div>
-                        <div class="gal-item" style="--deg:7">新</div>
+                        <div class="gal-item" style="--deg:0">中</div>
+                        <div class="gal-item" style="--deg:1">国</div>
+                        <div class="gal-item" style="--deg:2">广</div>
+                        <div class="gal-item" style="--deg:3">州</div>
+                        <div class="gal-item" style="--deg:4">工</div>
+                        <div class="gal-item" style="--deg:5">商</div>
+                        <div class="gal-item" style="--deg:6">学</div>
+                        <div class="gal-item" style="--deg:7">院</div>
                         <div class="gal-item" style="--deg:8">欢</div>
                         <div class="gal-item" style="--deg:9">迎</div>
                         <div class="gal-item" style="--deg:10">您</div>
-                        <div class="gal-item" style="--deg:11"><img src="../imgs/hs/logo.jpg" alt=""></div>
+                        <div class="gal-item" style="--deg:11"><img src="../imgs/gs/logo.jpg" alt=""></div>
                     </div>
                 </div>
             </li>
@@ -291,7 +315,7 @@
 &lt;div class="card-box"&gt;
     &lt;div class="card"&gt;
         &lt;div class="card-f"&gt;&lt;/div&gt;
-        &lt;div class="card-b"&gt;至于至善&lt;/div&gt;
+        &lt;div class="card-b"&gt;正德厚生 励志修能&lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;
                         </pre>
@@ -382,7 +406,7 @@
             </li>
             <li>
                 <div class="ack">
-                    <svg class="svg" width="320" height="80"><text class="title" x="5" y="60">敬请批评指正</text></svg>
+                    <svg class="svg-footer" height="80"><text class="title" x="5" y="60">敬请批评指正</text></svg>
                 </div>
                 <small>Thanks For Your Time</small>
             </li>
@@ -392,10 +416,14 @@
         window.onload = function () {
             // color
             let colors = document.querySelectorAll('.color')
+            let banner = document.querySelector('.banner')
+            let gal = document.querySelector('.gal')
             colors.forEach(color => {
                 color.addEventListener('click', (e) => {
                     console.log(e.target.dataset);
                     document.body.style.backgroundColor = e.target.dataset.color
+                    banner.style.backgroundColor = e.target.dataset.color
+                    gal.style.color = e.target.dataset.color
                 })
             })
             // nav

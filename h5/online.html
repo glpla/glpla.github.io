@@ -11,7 +11,6 @@
     <style>
         body {
             background-color: #eb2c58;
-            background-blend-mode: multiply;
         }
 
         .color-box {
@@ -36,17 +35,18 @@
             background-color: #0c2461;
         }
 
+        .gal {
+            color: #eb2c58;
+        }
+
         .gal .gal-item:nth-child(12) {
             background-color: #fff;
         }
 
-        ul li:nth-child(1) {
+        .banner {
+            background-color: #eb2c58;
             background-image: url(../imgs/banner.jpg);
-        }
-
-        .card-f {
-            background-color: #fff;
-            background-image: url(../imgs/ty.png);
+            background-blend-mode: multiply;
         }
 
         .ack svg {
@@ -88,7 +88,7 @@
             <div class="color blue" data-color="#0c2461"></div>
         </div>
         <ul>
-            <li>
+            <li class="banner">
                 <img class="logo shadow" src="../imgs/ty.png" alt="">
                 <svg class="svg-header" height="80"><text class="title" x="0" y="60">陆军特种作战学院</text></svg>
                 <span>2022-06-15</span>
@@ -222,7 +222,7 @@
                 <div class="big mb8">[3D案例]-1</div>
                 <div class="card-box">
                     <div class="card">
-                        <div class="card-f"></div>
+                        <div class="card-f"><img src="../imgs/ty.png" alt=""></div>
                         <div class="card-b">铁血长城</div>
                     </div>
                 </div>
@@ -396,8 +396,8 @@
             <li class="homework">
                 <div class="big mb4"><span class="iconfont icon-keyboard"></span>课后作业</div>
                 <div>
-                    <div>1. 独立完成3D案例1；</div>
-                    <div>2. 尝试实现3D案例2和3D案例3；</div>
+                    <div class="step">1. 独立完成3D案例1；</div>
+                    <div class="step">2. 尝试实现3D案例2和3D案例3；</div>
                 </div>
             </li>
             <li>
@@ -412,10 +412,14 @@
         window.onload = function () {
             // color
             let colors = document.querySelectorAll('.color')
+            let banner = document.querySelector('.banner')
+            let gal = document.querySelector('.gal')
             colors.forEach(color => {
                 color.addEventListener('click', (e) => {
                     console.log(e.target.dataset);
                     document.body.style.backgroundColor = e.target.dataset.color
+                    banner.style.backgroundColor = e.target.dataset.color
+                    gal.style.color = e.target.dataset.color
                 })
             })
             // nav
