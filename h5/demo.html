@@ -6,40 +6,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="../js/jquery-3.6.0.min.js"></script>
-    <script src="../js/jquery.magnific-popup.min.js"></script>
-    <link href="../js/magnific-popup.min.css" rel="stylesheet">
     <style>
-        .parent-container {
-            width: 400px;
-            height: 300px;
+        .sky-box {
+            width: 200px;
+            height: 200px;
             margin: 100px auto;
-            border: 1px solid #f40;
+            perspective: 1000px;
+            border: 1px solid #666;
+            padding: 10px;
         }
 
-        a {
-            display: block;
-            width: 400px;
-            height: 300px;
+        .sky-box:hover .box {
+            transform: rotateY(180deg);
+        }
+
+        .box {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: .5s;
+        }
+
+        .box::before,
+        .box::after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box::before {
+            background-color: #f40;
+        }
+
+        .box::after {
+            background-color: #078;
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
         }
     </style>
 </head>
 
 <body>
-    <div class="parent-container">
-        <a href="../imgs/course/week1.jpg">Open popup 1</a>
-        <a href="../imgs/course/week2.jpg">Open popup 2</a>
-        <a href="../imgs/course/week3.jpg">Open popup 3</a>
+    <div class="sky-box">
+        <div class="box"></div>
     </div>
-    <script>
-        $(document).ready(function () {
-            $('.parent-container').magnificPopup({
-                delegate: 'a',
-                type: 'image'
-            });
-        });
-
-    </script>
 </body>
 
 </html>
