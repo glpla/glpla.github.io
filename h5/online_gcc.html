@@ -15,6 +15,7 @@
 
         .pro {
             min-width: 580px;
+            border-bottom: 1px solid #fff;
         }
 
         .color-box {
@@ -43,18 +44,15 @@
             color: #eb2c58;
         }
 
-        .gal .gal-item:nth-child(12) {
-            background-color: #fff;
+        .case0-img,
+        .case1-img {
+            background-color: #eb2c58;
         }
 
         .banner {
             background-color: #eb2c58;
             background-image: url(../imgs/gcc/banner.jpg);
             /* background-blend-mode: multiply; */
-        }
-
-        .card-f {
-            background-color: #fff;
         }
 
         .ack svg {
@@ -169,7 +167,7 @@
             </li>
             <li>
                 <div class="big">精彩内容，扫码开启</div>
-                <img class="qrcode" src="../imgs/gcc/logo.png" alt="">
+                <img class="qrcode" src="../imgs/gcc/qrcode.png" alt="">
                 <div style="text-align: center;">更多信息，请访问www.cnplaman.xyz</div>
             </li>
             <li>
@@ -228,13 +226,14 @@
                     <span>•[移动translate]•</span>
                     <span>•[缩放scale]•</span>
                     <span>•[旋转rotate]•</span>
+                    <span>•[倾斜skew]•</span>
                 </div>
             </li>
             <li class="case">
                 <div class="big mb8">[3D案例]-1</div>
                 <div class="card-box">
                     <div class="card">
-                        <div class="card-f"><img src="../imgs/gs/logo.jpg" alt=""></div>
+                        <div class="card-f case0-img"><img src="../imgs/gcc/logo.png" alt=""></div>
                         <div class="card-b">求真<br>立信<br>笃行</div>
                     </div>
                 </div>
@@ -254,7 +253,7 @@
                         <div class="gal-item" style="--deg:8">商</div>
                         <div class="gal-item" style="--deg:9">学</div>
                         <div class="gal-item" style="--deg:10">院</div>
-                        <div class="gal-item" style="--deg:11"><img src="../imgs/gcc/logo.png" alt=""></div>
+                        <div class="gal-item case1-img" style="--deg:11"><img src="../imgs/gcc/logo.png" alt=""></div>
                     </div>
                 </div>
             </li>
@@ -299,8 +298,8 @@
                         <div>transform-style: preserve-3d;</div>
                     </div>
                     <div class="step">
-                        <div>3. 综合运用3D属性</div>
-                        <div>transform的translate、rotate、scale等</div>
+                        <div>3. 综合运用transform属性</div>
+                        <div>translate、rotate、scale、skew</div>
                     </div>
                 </div>
             </li>
@@ -317,6 +316,7 @@
                         <div class="step">6. 翻转卡片：过渡动画？帧动画</div>
                     </div>
                 </div>
+                <small>- 3D案例1的实现 -</small>
             </li>
             <li>
                 <div class="pro">
@@ -342,6 +342,7 @@
                         </pre>
                     </div>
                 </div>
+                <small>- 3D案例1的实现 -</small>
             </li>
             <li>
                 <div class="pro">
@@ -360,6 +361,7 @@
                         </pre>
                     </div>
                 </div>
+                <small>- 3D案例1的实现 -</small>
             </li>
             <li>
                 <div class="pro">
@@ -376,6 +378,7 @@
                         </pre>
                     </div>
                 </div>
+                <small>- 3D案例1的实现 -</small>
             </li>
             <li>
                 <div class="pro">
@@ -391,14 +394,13 @@
     backface-visibility: hidden;
 }
 
-.card-f {}
-
 .card-b {
     transform: rotateY(180deg);
 }
                         </pre>
                     </div>
                 </div>
+                <small>- 3D案例1的实现 -</small>
             </li>
             <li class="qa">
                 <div class="pro">
@@ -409,6 +411,7 @@
                         <div class="step">3. 选择器 selector</div>
                     </div>
                 </div>
+                <small>- 3D案例1的实现 -</small>
             </li>
             <li class="summary">
                 <div class="pro">
@@ -421,6 +424,7 @@
                         <div class="step">5. 过渡动画transition；</div>
                     </div>
                 </div>
+                <small>- 3D案例1的实现 -</small>
             </li>
             <li class="homework">
                 <div class="pro">
@@ -430,6 +434,7 @@
                         <div class="step">2. 尝试实现3D案例2和3D案例3；</div>
                     </div>
                 </div>
+                <small>- 3D案例1的实现 -</small>
             </li>
             <li>
                 <div class="ack">
@@ -445,11 +450,15 @@
             let colors = document.querySelectorAll('.color')
             let banner = document.querySelector('.banner')
             let gal = document.querySelector('.gal')
+            let case0img = document.querySelector('.case0-img')
+            let case1img = document.querySelector('.case1-img')
             colors.forEach(color => {
                 color.addEventListener('click', (e) => {
                     console.log(e.target.dataset);
                     document.body.style.backgroundColor = e.target.dataset.color
                     banner.style.backgroundColor = e.target.dataset.color
+                    case0img.style.backgroundColor = e.target.dataset.color
+                    case1img.style.backgroundColor = e.target.dataset.color
                     gal.style.color = e.target.dataset.color
                 })
             })
