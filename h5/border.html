@@ -6,133 +6,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>border</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/linux.css">
     <link rel="stylesheet" href="../css/border.css">
+    <style>
+        header {
+            background-image: url(../imgs/xit.jpg);
+        }
+    </style>
 </head>
 
-<body>
-    <section class="w">
-        <header>
-            <h1>边框 Border</h1>
-        </header>
-        <strong>单独属性</strong>
-        <p class="line-dot">border-width <span class="dot"></span>线条宽度</p>
-        <p class="line-dot">border-style <span class="dot"></span>线条样式</p>
-        <p class="line-dot">border-color <span class="dot"></span>线条颜色</p>
-        <strong>复合属性</strong>
-        <p>border: border-width border-style border-color</p>
-        <div class="exam-title">三角形</div>
-        <p>利用大边框和零尺寸生成三角形</p>
-        <div class="tran"></div>
-        <pre class="code">
-    .tran {
-      width: 0;
-      margin: 0 auto;
-      border: 1rem solid transparent;
-      border-bottom-color: #f40;
-    }    </pre>
-        <div class="exam-title">阶梯</div>
-        <p>利用不同的宽度生成阶梯</p>
-        <div class="ladder">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <pre class="code">
-    .ladder>div {
-      border-style: solid;
-      border-color: transparent;
-      margin: -.6rem auto;
-    }
-    
-    .ladder>div:nth-child(1) {
-      width: 60%;
-      border-width: .6rem;
-      border-bottom-color: rgba(0, 0, 0, .2);
-    }   
-    //...
-    .ladder>div:nth-child(5) {
-      width: 100%;
-      border-width: 1rem;
-      border-bottom-color: rgba(0, 0, 0, .2);
-    }      </pre>
-        <h4 class="cont-title">border-radius</h4>
-        <p>1.圆角边框；50%为正圆</p>
-        <p>2.可单独设置每个角的变化</p>
-        <p>3.也可以在x和y方向上设置角的半径变化；/前面是4个角水平方向的半径；/后面是4个角垂直方向的班级</p>
-        <pre class="code">
+<body class="container">
+    <header class="w">
+        <h1>边框 Border</h1>
+    </header>
+    <div class="w cont">
+        <dl>
+            <dt>基本属性</dt>
+            <dd>border-width：线条宽度</dd>
+            <dd>border-style：线条样式</dd>
+            <dd>border-color：线条颜色；如果不指定颜色，则和文字颜色保持一致；</dd>
+            <dd>复合属性border: border-width border-style border-color</dd>
+            <dt>实例</dt>
+            <dd>三角形：利用大边框和零尺寸生成三角形</dd>
+            <dd class="tran"></dd>
+            <dd class="code">
+                <pre>
+        .tran {
+          width: 0;
+          margin: 0 auto;
+          border: 1rem solid transparent;
+          border-bottom-color: #f40;
+        }    </pre>
+            </dd>
+            <dd>阶梯：利用不同的宽度生成阶梯</dd>
+            <dd class="ladder">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </dd>
+            <dd class="code">
+                <pre>
+        .ladder>div {
+          border-style: solid;
+          border-color: transparent;
+          margin: -.6rem auto;
+        }
+        
+        .ladder>div:nth-child(1) {
+          width: 60%;
+          border-width: .6rem;
+          border-bottom-color: rgba(0, 0, 0, .2);
+        }   
+        //...
+        .ladder>div:nth-child(5) {
+          width: 100%;
+          border-width: 1rem;
+          border-bottom-color: rgba(0, 0, 0, .2);
+        }      </pre>
+            </dd>
+            <dt>border-radius</dt>
+            <dd>1.圆角边框；50%为正圆</dd>
+            <dd>2.可单独设置每个角的变化</dd>
+            <dd>3.也可以在x和y方向上设置角的半径变化；/前面是4个角水平方向的半径；/后面是4个角垂直方向的班级</dd>
+            <pre class="code">
     border-radius:x x x x/y y y y</pre>
-        <div class="exam-title"></div>
-        <div class="grid4 base">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <pre class="code">
-    //case1
-    border-radius: 50%;
-    //case2
-    border-top-left-radius: 50%;
-    //case3
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
-    //case4
-    border-top-left-radius: 50%;
-    border-top-right-radius: 50%;
-    </pre>
-        <div class="exam-title">示例</div>
-        <div class="grid4">
-            <div class="item demo"></div>
-            <div class="item up"></div>
-            <div class="item down"></div>
-            <div class="item left"></div>
-            <div class="item right"></div>
-            <div class="item leftup"></div>
-            <div class="item rightup"></div>
-            <div class="item leftdown"></div>
-            <div class="item rightdown"></div>
-        </div>
-        <h4 class="cont-title">border-image</h4>
-        <strong>单独属性</strong>
-        <p class="line-dot">border-image-source：背景图片；可以是线性渐变或径向渐变</p>
-        <p class="line-dot">border-image-slice：图像边界向内的偏移，默认100%；4个方向：top right bottom
-            left；不带单位；当border-image-slice小于图像的一半50%时，border-image-repeat的特性才会体现出来</p>
-        <p class="line-dot">border-image-width：图像宽度，默认是100%；可以使用px</p>
-        <p class="line-dot">border-image-outset：图像向外扩展的区域，默认0；不可以是负数</p>
-        <dd class="line-dot">border-image-repeat：图像重复的方式stretch repeat round；默认stretch；使用round时，平铺的衔接更顺滑</dd>
-        <div class="exam-title">图片填充边框</div>
-        <div class="grid4">
-            <div><img src="../imgs/border-img.png" alt="" title="原图"></div>
-            <div class="item border-img" title="使用图片填充为border"></div>
-        </div>
-        <pre class="code">
-    .border-img {
-      border: 27px solid;
-      border-image-source: url(../imgs/border-img.png);
-      border-image-slice: 27;
-      border-image-repeat: round;
-    }    </pre>
-        <div class="exam-title">其它特效</div>
-        <div class="grid4">
-            <div class="item border-shadow">
-                <img src="../imgs/demo.jpg" alt="">
-            </div>
-            <div class="item border-rotate">
-                <img src="../imgs/demo.jpg" alt="">
-            </div>
-            <div class="item dog"></div>
-            <div class="item inner"></div>
-        </div>
-        <h4 class="cont-title">作业和练习</h4>
-        <p>1.体验上述内容</p>
-        <p>2.绘制一个鸡蛋</p>
-        <footer>Copyright Reserved &copy; By Cnplaman 2021-10-06</footer>
-    </section>
+            <dd class="grid grid4 base">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </dd>
+            <dd class="code">
+                <pre>
+        //case1
+        border-radius: 50%;
+        //case2
+        border-top-left-radius: 50%;
+        //case3
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+        //case4
+        border-top-left-radius: 50%;
+        border-top-right-radius: 50%;</pre>
+            </dd>
+            <dt>示例</dt>
+            <dd class="grid grid4">
+                <div class="item demo"></div>
+                <div class="item up"></div>
+                <div class="item down"></div>
+                <div class="item left"></div>
+                <div class="item right"></div>
+                <div class="item leftup"></div>
+                <div class="item rightup"></div>
+                <div class="item leftdown"></div>
+                <div class="item rightdown"></div>
+            </dd>
+            <dt>border-image</dt>
+            <dd>border-image-source：背景图片；可以是线性渐变或径向渐变</dd>
+            <dd>border-image-slice：图像边界向内的偏移，默认100%；4个方向：top right bottom
+                left；不带单位；当border-image-slice小于图像的一半50%时，border-image-repeat的特性才会体现出来</dd>
+            <dd>border-image-width：图像宽度，默认是100%；可以使用px</dd>
+            <dd>border-image-outset：图像向外扩展的区域，默认0；不可以是负数</dd>
+            <dd>border-image-repeat：图像重复的方式stretch repeat round；默认stretch；使用round时，平铺的衔接更顺滑</dd>
+            <dt>实例：图片填充边框</dt>
+            <dd class="grid grid4">
+                <div><img src="../imgs/border-img.png" alt="" title="原图"></div>
+                <div class="item border-img" title="使用图片填充为border"></div>
+            </dd>
+            <dd class="code">
+                <pre class="code">
+            .border-img {
+              border: 27px solid;
+              border-image-source: url(../imgs/border-img.png);
+              border-image-slice: 27;
+              border-image-repeat: round;
+            }    </pre>
+            </dd>
+            <dt>其它特效</dt>
+            <dd class="grid grid4">
+                <div class="border-shadow">
+                    <img src="../imgs/demo.jpg" alt="">
+                </div>
+                <div class="border-rotate">
+                    <img src="../imgs/demo.jpg" alt="">
+                </div>
+                <div class="dog"></div>
+                <div class="inner"></div>
+            </dd>
+            <dt>作业和练习</dt>
+            <dd>1.体验上述内容</dd>
+            <dd>2.绘制一个鸡蛋</dd>
+        </dl>
+    </div>
+    <footer class="w copyright">
+        <div class="copyright-item">All Copyrights Reserved, &copy; 2022-2024</div>
+        <img class="copyright-item" src=" ../imgs/avatar.jpg" alt="">
+        <div class="copyright-item">Cnplaman from No 54414, PLA</div>
+    </footer>
 </body>
 
 </html>

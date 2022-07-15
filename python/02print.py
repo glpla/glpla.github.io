@@ -3,6 +3,8 @@ print(520)
 print('520')
 print("520")
 print(3+2)
+# 指定输出结束end为\t
+print('hi,there,', end='\t')
 
 
 # 输出到文件：应该指定file属性，否则输出为空

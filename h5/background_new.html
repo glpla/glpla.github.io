@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>background</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/linux.css">
+    <link rel="stylesheet" href="../css/bg.css">
+    <style>
+        header {
+            background-image: url(../imgs/xit.jpg);
+        }
+
+        .test {
+            background-color: aliceblue;
+            background-repeat: no-repeat;
+
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        .cont0,
+        .cont1,
+        .cont2,
+        .cont3,
+        .cont4 {
+            width: 100%;
+            min-height: 100vh;
+            display: none;
+            padding: 1rem;
+        }
+
+        input[id='cont0']:checked~dl[class='cont0'] {
+            display: block;
+        }
+
+        input[id='cont0']:checked~nav li:nth-child(1) {
+            background-color: #f40;
+            color: #fff;
+        }
+
+        input[id='cont1']:checked~dl[class='cont1'] {
+            display: block;
+        }
+
+        input[id='cont1']:checked~nav li:nth-child(2) {
+            background-color: #f40;
+            color: #fff;
+        }
+
+        input[id='cont2']:checked~dl[class='cont2'] {
+            display: block;
+        }
+
+        input[id='cont2']:checked~nav li:nth-child(3) {
+            background-color: #f40;
+            color: #fff;
+        }
+
+        input[id='cont3']:checked~dl[class='cont3'] {
+            display: block;
+        }
+
+        input[id='cont3']:checked~nav li:nth-child(4) {
+            background-color: #f40;
+            color: #fff;
+        }
+
+        input[id='cont4']:checked~dl[class='cont4'] {
+            display: block;
+        }
+
+        input[id='cont4']:checked~nav li:nth-child(5) {
+            background-color: #f40;
+            color: #fff;
+        }
+
+        .tab-box {
+            justify-content: center;
+            margin: 1rem auto;
+        }
+
+        .tab-item {
+            margin: 0 2px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 10px;
+            padding: 0 8px;
+        }
+
+        /* part5 */
+        .pie {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 1rem auto;
+        }
+
+        .pie0 {
+            background-image: conic-gradient(#f3f3f3, #078);
+        }
+
+        .pie1 {
+            background-image: conic-gradient(hsl(188, 100%, 40%) 0deg, hsl(188, 100%, 40%) 40deg, hsl(188, 100%, 27%) 40deg, hsl(188, 100%, 27%) 120deg, hsl(188, 100%, 20%) 120deg, hsl(188, 100%, 20%) 360deg);
+        }
+    </style>
+</head>
+
+<body class="container">
+    <header class="w">
+        <h1>背景 Background</h1>
+        <span class="timestamp">2022-06-18</span>
+    </header>
+    <main class="w">
+        <input type="radio" name="cont" id="cont0" checked>
+        <input type="radio" name="cont" id="cont1">
+        <input type="radio" name="cont" id="cont2">
+        <input type="radio" name="cont" id="cont3">
+        <input type="radio" name="cont" id="cont4">
+        <nav class="nav">
+            <ul class="flex-h tab-box">
+                <li class="tab-item"><label for="cont0">基本属性</label></li>
+                <li class="tab-item"><label for="cont1">精灵图</label></li>
+                <li class="tab-item"><label for="cont2">线性渐变</label></li>
+                <li class="tab-item"><label for="cont3">径向渐变</label></li>
+                <li class="tab-item"><label for="cont4">角度渐变</label></li>
+            </ul>
+        </nav>
+        <dl class="cont0">cont0</dl>
+        <dl class="cont1">cont1</dl>
+        <dl class="cont2">cont2</dl>
+        <dl class="cont3">cont3</dl>
+        <dl class="cont4">
+            <dt>语法</dt>
+            <dd>conic-gradient([from angle] [at position,] color degree, color degree, ...);</dd>
+            <dt>示例：饼图</dt>
+            <dd>
+                <div class="pie pie0"></div>
+            </dd>
+            <dd>
+                <div class="pie pie1"></div>
+            </dd>
+        </dl>
+    </main>
+
+</body>
+
+</html>
