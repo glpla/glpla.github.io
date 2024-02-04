@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 100vh;
+      color: #fff;
+      background: #000;
+      /* fallback for old browsers */
+      background: -webkit-linear-gradient(to bottom, #4286f4, #043556);
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to bottom, #4286f4, #043556);
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 350px;
+      height: 10px;
+      background-color: #000;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .item {
+      width: 0;
+      height: 100%;
+      background-color: #fff;
+      animation: loading 5s steps(10) forwards;
+    }
+
+    @keyframes loading {
+      100% {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <span>Loading...</span>
+  <dd class="wrap">
+    <div class="item"></div>
+  </dd>
+  <script src="/lib/snow.js"></script>
+  <script>
+    let item = document.querySelector('.item')
+    item.addEventListener('animationend', () => {
+      location.href = './notice.html'
+    })
+  </script>
+</body>
+
+</html>

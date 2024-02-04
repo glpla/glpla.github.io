@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Node.js</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>资源服务器</h1>
+    <span>&commat;Node.js</span>
+  </header>
+  <dl>
+    <dt>说明</dt>
+    <dd>基于JavaScript的开源、跨平台开发环境</dd>
+    <dt>下载</dt>
+    <dd>. 点击<a href="https://nodejs.org/en/" class="link">Node.js</a>下载并安装 ，高版本会同时安装包管理工具NPM和yarn</dd>
+    <dt>查看版本</dt>
+    <dd>.Win + R，使用CMD查看</dd>
+    <dd class="code">
+      <pre>
+C:\Users\cnplaman>node -v
+v18.13.0
+
+C:\Users\cnplaman>npm -v
+8.15.1
+
+C:\Users\cnplaman>yarn -v
+1.22.17</pre>
+    </dd>
+    <dt>安装依赖</dt>
+    <dd>install可以简写为i</dd>
+    <dd class="code">
+      <pre>npm install package_name</pre>
+    </dd>
+    <dt>查看依赖</dt>
+    <dd>.我的电脑 → c → 用户user → 当前用户 → 应用数据appdata → roaming → npm</dd>
+    <dd class="code">
+      <pre>C:\Users\cnplaman\AppData\Roaming\npm\node_modules</pre>
+    </dd>
+    <dt>移除依赖</dt>
+    <dd class="code">
+      <pre>npm uninstall package_name</pre>
+    </dd>
+    <dt>cnpm</dt>
+    <dd>. 为了加快包的下载和使用，通常使用淘宝镜像源</dd>
+    <dd>. 相应的，命令关键字由npm改为cnpm即可</dd>
+    <dd class="code">
+      <pre>npm install -g cnpm --registry=https://registry.npm.taobao.org</pre>
+    </dd>
+    <dt>创建服务器</dt>
+    <dd>没有原生创建，而是依托express框架创建；更多信息，请访问 <a href="https://www.expressjs.com.cn/" class="link">Expressjs</a></dd>
+    <dd>基本过程</dd>
+    <dd class="number">
+      <div>准备数据</div>
+      <div>创建服务</div>
+      <div>处理请求</div>
+      <div>开启服务 - 监听</div>
+    </dd>
+    <dd class="example-sn">访问资源文件</dd>
+    <dd class="number">
+      <div>创建一个文件夹作为服务器目录</div>
+      <div>相关的资源文件，如图片、视频存放在某个目录下，如www</div>
+      <div>在服务器目录打开CMD，初始化，用来创建package.json文件；使用-y，按照默认项目创建，如入口文件默认是index.js</div>
+      <pre class="code">npm init</pre>
+      <pre class="code">npm init -y</pre>
+      <div>安装express依赖</div>
+      <pre class="code">npm i express --save</pre>
+      <div>创建服务器脚本index.js</div>
+      <pre class="code">
+const express = require('express');
+const app = express();
+const port = 3000
+app.use(express.static('./www'));
+app.listen(port, res => {
+  console.log('服务器启动成功，访问地址：http://127.0.0.1:3000/资源名');
+});  </pre>
+      <div>开启服务</div>
+      <p>- 默认命令</p>
+      <pre class="code">node index.js</pre>
+      <p>- 自定义命令启动服务</p>
+      <pre>
+"scripts": {
+  "start":"node index.js"	//修改package.json里script
+}</pre>
+      <pre class="code">node start</pre>
+      <div>用户使用浏览器访问资源</div>
+    </dd>
+    <dd class="example-sn">监听对JSON数据的GET请求</dd>
+    <dd>创建过程，同上</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>参考代码</figcaption>
+        <pre>
+let fs = require('fs');
+let express = require('express')
+
+// 读取JSON数据
+let jsonStr = fs.readFileSync('./data.json', {
+  encoding: 'utf8'
+});
+
+let data = JSON.parse(jsonStr);
+
+// 创建Web服务器对象
+let app = express();
+
+// 静态资源处理
+app.use(express.static('public'));
+
+//请求格式 url/data?page=1&pageSize=10
+app.get('/data', (req, res) => {
+  let [ ...arr ] = data
+  let start = (req.query.page - 1) * req.query.pageSize;
+  res.setHeader('X-Total-Count', data.length);
+  res.send(arr.splice(start, req.query.pageSize));
+});
+
+app.listen(3000, () => {
+  console.log('服务器启动成功，地址为：http://127.0.0.1:3000');
+});</pre>
+      </figure>
+    </dd>
+  </dl>
+  </dl>
+  <div class="chap">yarn</div>
+  <dl>
+    <dt>说明</dt>
+    <dd>. 也可以在NPM下安装 <a href="https://yarn.bootcss.com/">中文yarn</a> 或 <a href="https://yarnpkg.com/">英文yarn</a>
+      作为包管理工具</dd>
+    <dd class="code">
+      <pre>
+C:\Users\cnplaman>npm i yarn -g
+... ...
+C:\Users\cnplaman>yarn -v
+1.22.17</pre>
+    </dd>
+    <dt>安装依赖</dt>
+    <dd class="code">
+      <pre>yarn add package_name</pre>
+    </dd>
+    <dt>移除依赖</dt>
+    <dd class="code">
+      <pre>yarn remove package_name</pre>
+    </dd>
+    <dt>升级依赖</dt>
+    <dd class="code">
+      <pre>yarn upgrade package_name</pre>
+    </dd>
+  </dl>
+  <div class="chap">常见依赖</div>
+  <dl>
+    <dt>nodemon</dt>
+    <dd class="code">
+      <pre>cnpm i nodemon -g</pre>
+    </dd>
+    <dd>自动检测js文件变化</dd>
+    <dd>nodemon xx.js</dd>
+    <dt>Formidable</dt>
+    <dd>Formidable是一个Node.js模块，用于解析表单数据，特别是文件上传</dd>
+    <dd class="code">
+      <pre>cnpm i formidable --save</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

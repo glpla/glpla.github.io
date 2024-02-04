@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面 Page</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>页面</h1>
+        <span>Page</span>
+    </header>
+    <dl>
+        <dd>每个page都由结构wxml、样式wxss、逻辑js|ts和配置json组成</dd>
+        <dd>其中，结构wxml和逻辑js是必须的</dd>
+    </dl>
+    <details class="outer" open>
+        <summary>pages</summary>
+        <details class="inner">
+            <summary>wxml</summary>
+            <dl class="nav-cont">
+                <dd>当前页面的结构</dd>
+                <dd>由各种组件构成：系统组件和自定义组件</dd>
+                <dd>避免使用HTML标签</dd>
+                <dd>更多组件，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/"
+                        class="link">component</a>
+                </dd>
+                <dd>
+                    <table class="tbl-sn">
+                        <caption>微信小程序常用组件</caption>
+                        <tr>
+                            <th>分类</th>
+                            <th>作用</th>
+                        </tr>
+                        <tr>
+                            <td>&lt;view&gt;</td>
+                            <td>视图；块标签</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;text&gt;</td>
+                            <td>文本；行标签；只能嵌套文本标签</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;navigator&gt;</td>
+                            <td>导航；同&lt;a&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;image&gt;</td>
+                            <td>图像；默认300px*240px</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;video&gt;</td>
+                            <td>视频；默认300px*225px</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;audio&gt;</td>
+                            <td>音频</td>
+                        </tr>
+                    </table>
+                </dd>
+                <dd class="tips">
+                    <div>1. 由于小程序大小的限制，多媒体资源如图像、视频、音频应通过在线方式获取</div>
+                    <div>2. 通过<a href="https://shipin520.com/" class="link">潮点视频</a>获取在线链接</div>
+                </dd>
+                <dt>数据绑定</dt>
+                <dd>在wxml中使用{{}}和js中的数据绑定起来</dd>
+                <dd>也叫插值表达式</dd>
+                <dd>可以绑定属性；注意：Vue使用v-bind</dd>
+                <dd>可以进行基本的逻辑运算，如三元表达式、算术运算</dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>数据绑定</figcaption>
+                        <pre>
+&lt;view&gt; {{msg}} &lt;/view&gt;
+&lt;image src="{{src}}" mode=""/&gt;
+&lt;view&gt; {{age&gt;=18 ? 'Welcome' : 'Bye'}} &lt;/view&gt;</pre>
+                    </figure>
+                    <figure class="code">
+                        <figcaption>数据</figcaption>
+                        <pre>
+Page({
+    data: {
+        msg: 'hi, there.'
+        src:'../../imgs/demo.jpg',
+        //src:'/imgs/demo.jpg',
+        age: 18
+    }
+})</pre>
+                    </figure>
+                </dd>
+                <dt>条件渲染</dt>
+                <dd>以绑定属性的方式使用wx:if判断条件是否成立，成立则渲染，否则不渲染或不处理</dd>
+                <dd>语法1：wx:if</dd>
+                <dd>语法2：wx:if wx:else</dd>
+                <dd>语法3：wx:if wx:elif wx:else</dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>单分支判断</figcaption>
+                        <pre>&lt;view wx:if = '{{ age >= 18 }}'&gt; Welcome &lt;/view&gt;</pre>
+                    </figure>
+                    <figure class="code">
+                        <figcaption>js</figcaption>
+                        <pre>
+Page({
+    data: {
+        age: 18
+    }
+})</pre>
+                    </figure>
+                </dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>多分支判断</figcaption>
+                        <pre>
+&lt;view wx:if = '{{ age >= 18 }}'&gt; Welcome &lt;/view&gt;
+&lt;view wx:else'&gt; Bye &lt;/view&gt;
+</pre>
+                    </figure>
+                    <figure class="code">
+                        <figcaption>js</figcaption>
+                        <pre>
+Page({
+    data: {
+        age: 16
+    }
+})</pre>
+                    </figure>
+                </dd>
+                <dd>也可以使用组件的hidden属性实现条件渲染</dd>
+                <dd>为true时，隐藏</dd>
+                <dd>为false时，显示</dd>
+                <dd class="code">
+                    <pre>&lt;button hidden="{{isShow}}"&gt;submit&lt;/button&gt;</pre>
+                </dd>
+                <dd class="tips">
+                    <div>wx:if是通过移除组件的方式实现条件渲染；组件有时，显示在页面上；组件无时，从页面移除</div>
+                    <div>hidden是通过display是否为none来条件渲染；组件始终显示在页面上</div>
+                    <div>复杂的逻辑切换，使用wx:if</div>
+                    <div>频繁切换状态，使用hidden</div>
+                </dd>
+                <dt>列表渲染</dt>
+                <dd>以绑定属性的方式使用wx:for循环数组</dd>
+                <dd>默认情况下，使用item表示迭代的当前数据项，使用index表示当前数据项的索引</dd>
+                <dd>多重循环下，系统可以自动识别index和item的作用域</dd>
+                <dd>也可以使用wx:for-index和wx:for-item指定索引和当前项，但是不建议</dd>
+                <dd>为保证渲染效率和数据的唯一性，应总是使用wx:key</dd>
+                <dd>对象列表通常需要提供唯一标识id字段，可以作为key；直接使用id即可，不需要插值，不需要item.id引用</dd>
+                <dd>普通列表没有id，可以使用index作为key；或者为数据创建时间戳作为id - now()</dd>
+                <dd class="example-sn">遍历数组</dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>普通数组</figcaption>
+                        <pre>&lt;view wx:for="{{arr}}" wx:key="item"&gt; {{item}} &lt;/view&gt;</pre>
+                    </figure>
+                    <figure class="code">
+                        <figcaption>js</figcaption>
+                        <pre>
+Page({
+    data: {
+        arr: [1, 2, 3, 4, 5]
+    }
+})</pre>
+                    </figure>
+                </dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>对象数组</figcaption>
+                        <pre>&lt;view wx:for="{{obj}}" wx:key="id"&gt; {{item.name}}- {{item.year}} &lt;/view&gt;</pre>
+                    </figure>
+                    <figure class="code">
+                        <figcaption>js</figcaption>
+                        <pre>
+Page({
+    data: {
+        obj:[
+            {id:0, name:'gl', year:1995},
+            {id:1, name:'sh', year:2005},
+            {id:2, name:'nj', year:2008}
+        ]
+    }
+})</pre>
+                    </figure>
+                </dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>多重循环</figcaption>
+                        <pre>
+&lt;view wx:for="{{arr}}"&gt;
+    &lt;text&gt;{{index}}&lt;/text&gt;:
+    &lt;text wx:for="{{item}}"&gt;{{index}}-{{item}};&lt;/text&gt;
+&lt;/view&gt;</pre>
+                    </figure>
+                    <figure class="code">
+                        <figcaption>js</figcaption>
+                        <pre>
+Page({
+    data: {
+        arr:[[1,2,3],[3,2,1],[2,2,2]]
+    }
+})</pre>
+                    </figure>
+                </dd>
+                <dt>模板</dt>
+                <dt>&lt;block&gt;</dt>
+                <dd>无语义化</dd>
+                <dd>作为容器分隔多层逻辑或控制一组组件</dd>
+                <dd class="example-sn">遍历对象</dd>
+                <dd>index相当于key；item相当于value</dd>
+                <dd>也可以自定义为key-value形式</dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>wxml</figcaption>
+                        <pre>
+&lt;block wx:for="{{obj}}" wx:key="index"&gt;
+    &lt;view&gt;{{index}}&lt;/view&gt;
+    &lt;view&gt;{{item}}&lt;/view&gt;
+&lt;/block&gt;</pre>
+                    </figure>
+                    <figure class="code">
+                        <figcaption>js|ts</figcaption>
+                        <pre>obj:{id:100,name:'glpla',gender:'male'}</pre>
+                    </figure>
+                </dd>
+            </dl>
+        </details>
+        <details class="inner">
+            <summary>js</summary>
+            <dl class="nav-cont">
+                <dd>当前页面的逻辑</dd>
+                <dd>包含：数据、事件处理函数、生命周期函数和其他函数</dd>
+                <dt>数据 Data</dt>
+                <dd>数据在data中定义</dd>
+                <dd>数据类型同JavaScript数据类型</dd>
+                <dd>事件处理等函数和data同级</dd>
+                <dd>data中的数据使用插值表达式在wxml中渲染</dd>
+                <dd>js中使用数据：this.data.varible_name</dd>
+                <dd>js中修改数据：this.setData()</dd>
+                <dd>js中使用函数类似</dd>
+                <dd class="example-sn">单击数值加10</dd>
+                <dd class="code">
+                    <pre>
+data: {
+    sum: 0
+},
+add() {
+    this.setData({
+        sum: this.data.sum+10
+    })
+},
+onLoad() {
+    this.add()
+}</pre>
+                    </figure>
+                </dd>
+                <dt>事件和事件处理函数</dt>
+                <dd>事件是视图层到逻辑层的通讯方式</dd>
+                <dd>事件可以将用户的行为反馈到逻辑层进行处理</dd>
+                <dd>事件绑定在组件上；当达到触发事件，就会执行逻辑层中对应的事件处理函数</dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>tap：事件类型；eventHandle：事件处理函数</figcaption>
+                        <pre>&lt;view bind:tap = 'eventHandle'&gt;tap me&lt;/view&gt;</pre>
+                    </figure>
+                </dd>
+                <dd>1. 事件分类</dd>
+                <dd>单击事件tap和触摸事件touch</dd>
+                <dd>此外，每个组件还有自己的独有的事件，如表单的提交事件submit和重置事件reset、滑动组件的scroll等等，详情请查阅开发文档</dd>
+                <dd>
+                    <table class="tbl-sn">
+                        <caption>常用事件</caption>
+                        <tr>
+                            <th>分类</th>
+                            <th>说明</th>
+                        </tr>
+                        <tr>
+                            <td>bindtap</td>
+                            <td>单击屏幕时触发；类似HTML的click</td>
+                        </tr>
+                        <tr>
+                            <td>touchstart</td>
+                            <td>触摸屏幕开始</td>
+                        </tr>
+                        <tr>
+                            <td>touchmove</td>
+                            <td>触摸屏幕移动</td>
+                        </tr>
+                        <tr>
+                            <td>touchend</td>
+                            <td>触摸屏幕结束</td>
+                        </tr>
+                    </table>
+                </dd>
+                <dd>2. 事件对象</dd>
+                <dd>事件发生时，会触发一个事件对象event：包含事件发生时的很多额外信息，常见的有：</dd>
+                <dd>type：事件类型</dd>
+                <dd>dataset：自定义数据</dd>
+                <dd>detail：表单元素的值</dd>
+                <dd>target：触发事件的源组件</dd>
+                <dd>currentTarget：事件绑定的当前组件或者说当前响应事件的组件</dd>
+                <dd>touches：一个数组，每个元素为一个 Touch 对象，表示当前停留在屏幕上的触摸点</dd>
+                <dd class="tips">
+                    <div>bind:tap和bindtap写法都可以</div>
+                    <div>单个事件时，target和currentTarget一样</div>
+                    <div>父子组件多个事件并存时，注意区分target和currentTarget</div>
+                </dd>
+                <dd class="example-sn">无参、单个事件的使用</dd>
+                <dd>如果是ts环境，加强了数据类型的限制，需要指定参数的数据类型</dd>
+                <dd>在console标签页中查看事件对象的详细信息</dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>wxml - 自定义数据并绑定tap事件</figcaption>
+                        <pre>&lt;view bind:tap="greeting" data-ind="xh"&gt;tap here&lt;/view&gt;</pre>
+                    </figure>
+                    <figure class="code">
+                        <figcaption>js - 在page({})中自定义事件处理函数greeting并使用事件对象event获取事件对象目标target</figcaption>
+                        <pre>
+greeting(event:any){
+    console.log('event',event.target.dataset);
+}</pre>
+                    </figure>
+                </dd>
+                <dd class="example-sn">无参、多个事件的使用</dd>
+                <dd>单击父组件，target和currentTarget一样</dd>
+                <dd>单击子组件，由于是冒泡事件，先响应子组件的事件inner，再响应父组件的outer；对子组件来说，target和currentTarget一样；对父组件来说，事件的源对象target是inner，当前响应事件的对象currentTarget是父组件outer
+                </dd>
+                <dd>在console标签页中查看事件对象的详细信息</dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>wxml - 父子绑定tap事件</figcaption>
+                        <pre>
+&lt;view bind:tap="outer" data-outer="outer"&gt;outer tap
+    &lt;view bind:tap="inner" data-inner="inner"&gt;inner tap&lt;/view&gt;
+&lt;/view&gt;</pre>
+                    </figure>
+                    <figure class="code">
+                        <figcaption>js - 在page({})中自定义事件处理函数</figcaption>
+                        <pre>
+outer(event:any){
+    console.log('outer',event.target,event.currentTarget);
+},
+inner(event:any){
+    console.log('inner',event.target,event.currentTarget);
+}</pre>
+                    </figure>
+                </dd>
+                <dd>3. 事件传参</dd>
+                <dd>通过自定义数据 data- 的方式指定参数</dd>
+                <dd>利用数据对象target.dataset获取并使用</dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>定义数值参数</figcaption>
+                        <pre>&lt;view bind:tap="add" data-num="{{2}}"&gt;...&lt;/view&gt;</pre>
+                    </figure>
+                    <figure class="code">
+                        <figcaption>定义字符串参数</figcaption>
+                        <pre>&lt;view bind:tap="add" data-num="2"&gt;...&lt;/view&gt;</pre>
+                    </figure>
+                </dd>
+                <dd class="example-sn">带参事件的使用 - 每次单击加5</dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>wxml - 自定义数据</figcaption>
+                        <pre>&lt;view bind:tap="add" data-num="{{2}}"&gt;{{sum}}&lt;/view&gt;</pre>
+                    </figure>
+                    <figure class="code">
+                        <figcaption>js - 获取并使用</figcaption>
+                        <pre>
+data: {
+    sum: 0
+},
+add(e:any) {
+    this.setData({
+        sum:this.data.sum+e.target.dataset.num
+    })
+}</pre>
+                    </figure>
+                </dd>
+                <dd>多数据可以使用解构赋值 - 要求使用同名变量</dd>
+                <dd class="code">
+                    <pre>
+getPara(e){
+    let {id,name}=e.currentTarget.dataset
+    console.log(id,name);
+}</pre>
+                </dd>
+                <dd class="example-sn">点击随机更改背景颜色</dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>wxml - 使用内联样式绑定数据color</figcaption>
+                        <pre>&lt;view style="background-color: {{color}};" bind:tap="randColor"&gt;random color&lt;/view&gt;</pre>
+                    </figure>
+                    <figure class="code">
+                        <figcaption>js - 获取3个随机数并使用模板语法更新颜色</figcaption>
+                        <pre>
+data: {
+    color: '#f40'
+},
+randColor(){
+    let rand0=parseInt(Math.random()*255)
+    let rand1=parseInt(Math.random()*255)
+    let rand2=parseInt(Math.random()*255)
+    this.setData({
+      color:`rgb(${rand0},${rand1},${rand2})`
+    })
+}</pre>
+                    </figure>
+                </dd>
+                <dt>生命周期函数</dt>
+                <dd>详情，请访问 <a href="./lifetime.html" class="link">lifetime</a></dd>
+                <dt>其他函数</dt>
+                <dd>也叫页面事件，详情，请访问 <a href="./page_event.html" class="link">page event</a></dd>
+                <dd>1. 下拉刷新</dd>
+                <dd>2. 触底加载</dd>
+            </dl>
+        </details>
+        <details class="inner">
+            <summary>wxss</summary>
+            <dl class="nav-cont">
+                <dd>当前页面的样式</dd>
+                <dd>同CSS样式使用基本相同，但是功能没有CSS那么丰富；如不支持*通配符...强烈吐槽</dd>
+                <dd>支持内联样式 style</dd>
+                <dd>支持外部样式导入 @import</dd>
+                <dd>可以使用计算函数calc()</dd>
+                <dd>区分全局样式和局部|页面样式</dd>
+                <dd>- app.wxss定义的样式是全局样式，作用于所有页面</dd>
+                <dd>- 每个页面的.wxss定义的样式是局部|页面样式，只作用于当前页面</dd>
+                <dd>微信小程序默认使用弹性盒子flex布局，也可以使用网格grid布局；更多布局请访问 <a href="../web/flex.html" class="link">Flex</a>、<a
+                        href="../web/grid.html" class="link">Grid</a>
+                </dd>
+                <dd>
+                    <table class="tbl-sn">
+                        <caption>选择器</caption>
+                        <tr>
+                            <th>分类</th>
+                            <th>说明</th>
+                        </tr>
+                        <tr>
+                            <td>.</td>
+                            <td>类选择器</td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>ID选择器</td>
+                        </tr>
+                        <tr>
+                            <td>element</td>
+                            <td>元素选择器</td>
+                        </tr>
+                        <tr>
+                            <td>element, element</td>
+                            <td>并列选择器</td>
+                        </tr>
+                        <tr>
+                            <td>::before</td>
+                            <td>伪元素选择器</td>
+                        </tr>
+                        <tr>
+                            <td>::after</td>
+                            <td>伪元素选择器</td>
+                        </tr>
+                    </table>
+                </dd>
+                <dd class="tips">
+                    <div>Some selectors are not allowed in component wxss, including tag name selectors, ID
+                        selectors, and attribute selectors.</div>
+                    <div>小程序提供了很多UI的样式，背离了结构 - 样式 - 逻辑分离的原则，不建议使用，主要是巨丑。。。</div>
+                </dd>
+                <dt>单位</dt>
+                <dd>1. rpx</dd>
+                <dd>responsive px - 响应式像素</dd>
+                <dd>物理像素 - 实际的像素点</dd>
+                <dd>逻辑像素 - CSS的像素单位</dd>
+                <dd>1个逻辑像素需要多少个物理像素来显示：iphone6的物理像素是750px*1334px，逻辑像素是375px*667px，所以1个逻辑像素需要2个物理像素来显示</dd>
+                <dd>方便起见，rpx规定了任何手机屏幕的宽度都是750份，即750rpx - 逻辑像素</dd>
+                <dd>在不同设备上运行时，小程序会自动把rpx换算成对应的物理像素，实现适配</dd>
+                <dd>建议： 开发微信小程序时设计师可以用 iPhone6 作为设计稿的标准：</dd>
+                <dd class="txt-center">750rpx = 375px = 750物理像素</dd>
+                <dd class="txt-center">1rpx = 0.5px = 1物理像素</dd>
+                <dd class="tips">如果有设计稿，只需要将设计稿的宽度调整为750px，量取尺寸，使用rpx单位即可</dd>
+                <dd>2. vw vh</dd>
+                <dd>将屏幕宽高分为100份</dd>
+                <dt>样式导入 @import</dt>
+                <dd>相对路径</dd>
+                <dd>以;结束</dd>
+                <dd class="example-sn" id="iconfont">导入阿里字体图标</dd>
+                <dd class="number">
+                    <div>选择字体；添加到购物车；添加到项目</div>
+                    <div>设置字体项目，选择base64</div>
+                    <figure class="img-sn">
+                        <img src="./imgs/pro3.png" alt="">
+                        <figcaption>字体项目设置</figcaption>
+                    </figure>
+                    <div>下载类格式的字体</div>
+                    <div>解压；复制iconfont.css到小程序项目；改后缀名为.wxss</div>
+                    <div>在页面的.wxss中导入；如果全局使用，请在app.wxss中导入</div>
+                    <div>修改其样式的字体大小为rpx单位</div>
+                    <pre class="code">
+@import '../../utils/css/iconfont.wxss';
+.iconfont{
+    font-size: 32rpx;
+}</pre>
+                    <div>在页面的wxml中使用</div>
+                    <pre class="code">&lt;text class="iconfont icon-home"&gt;&lt;/text&gt;</pre>
+                </dd>
+                <dd class="tips">为避免频繁使用基类，后续可封装为全局组件；详情请参考 <a href="./components.html" class="link">自定义组件</a></dd>
+                <dt>动态样式</dt>
+                <dd>1. 三元表达式</dd>
+                <dd>标签页的动态样式 - 基类动态叠加活动类</dd>
+                <dd class="code">
+                    <pre>&lt;view class="item {{index==curIndex?'active':''}}" wx:for="{{nav}}" wx:key="index"&gt;{{item}}&lt;/view&gt;</pre>
+                </dd>
+                <dd>2. 对象</dd>
+            </dl>
+        </details>
+        <details class="inner">
+            <summary>json</summary>
+            <dl class="nav-cont">
+                <dd>当前页面的配置；很多配置项同app.json</dd>
+                <dd>导航标题、背景；多页面时通常设置为不同的样式；如果未设置，则和全局设置的保持一致</dd>
+                <dd>是否使用组件</dd>
+                <dd>也可以使用API，根据传递的参数完成导航标题设置</dd>
+                <dd>应严格按照JSON语法使用双引号"，不能使用单引号'</dd>
+                <dd>
+                    <figure class="code">
+                        <figcaption>目标页 - js|ts</figcaption>
+                        <pre>
+onLoad(option: any) {
+    wx.setNavigationBarTitle({
+        title:option.name
+    })
+}</pre>
+                    </figure>
+                </dd>
+            </dl>
+        </details>
+    </details>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>轮播图 Swiper</title>
+  <base target="_blank">
+  <link rel="stylesheet" href="../css/styleNew.css">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Swiper</h1>
+  </header>
+  <dl>
+    <dt>简介 Overview</dt>
+    <dd>.目前最新版为10</dd>
+    <dd>.更多细节，请访问 <a href="https://www.swiper.com.cn">https://www.swiper.com.cn</a> 或 <a
+        href="https://swiperjs.com/">https://swiperjs.com/[推荐]</a></dd>
+    <dd>. 其它工具：<a href="https://glidejs.com/">https://glidejs.com</a></dd>
+    <dd>.swiperjs.com中，请首先阅读Get Started和Demos两部分内容</dd>
+    <dt>核心文件 Core</dt>
+    <dd>.swiper-bundle.min.css</dd>
+    <dd>.swiper-bundle.min.js</dd>
+    <dd>.可以下载后本地使用，也可以使用在线CDN <a href="https://cdnjs.com/">https://cdnjs.com/</a></dd>
+    <dt>基本结构 HTML</dt>
+    <dd>.主体Swiper</dd>
+    <dd>.分页器pagination[可选]</dd>
+    <dd>.导航按钮navigation buttons[可选]</dd>
+    <dd>.滚动条scrollbar[可选]</dd>
+    <dd>[<span class="iconfont icon-bell"></span>]可以使用任何标签实现结构，保持类名相同即可</dd>
+    <dd>
+      <pre>
+&lt;div class="swiper"&gt;
+  &lt;div class="swiper-wrapper"&gt;
+    &lt;div class="swiper-slide"&gt;Slide 1&lt;/div&gt;
+    &lt;div class="swiper-slide"&gt;Slide 2&lt;/div&gt;
+    &lt;div class="swiper-slide"&gt;Slide 3&lt;/div&gt;
+    ...
+  &lt;/div&gt;
+
+  &lt;div class="swiper-pagination"&gt;&lt;/div&gt;
+
+  &lt;div class="swiper-button-prev"&gt;&lt;/div&gt;
+  &lt;div class="swiper-button-next"&gt;&lt;/div&gt;
+
+  &lt;div class="swiper-scrollbar"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+    </dd>
+    <dt>样式 CSS</dt>
+    <dd>.指定容器.swiper大小</dd>
+    <dd>.指定内容大小[可选]；如图片的显示，可以指定宽高或宽高比</dd>
+    <dd>.不建议使用背景图片 - 渲染可能有异常</dd>
+    <dd>
+      <pre>
+.swiper {
+  width: 800px;
+  margin: 100px auto;
+}
+
+.swiper-slide img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}</pre>
+    </dd>
+    <dt>脚本 JavaScript</dt>
+    <dd>.swiper的初始化和各种选项</dd>
+    <dd>
+      <pre>
+const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  direction: 'vertical',
+  loop: true,
+
+  // If we need pagination
+  pagination: {
+    el: '.swiper-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    el: '.swiper-scrollbar',
+  },
+});</pre>
+    </dd>
+    <dt>常用选项 Option</dt>
+    <dd>.每个参数选项列表的第一项是默认设置</dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>选项</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>direction</td>
+          <td>轮播方向：水平 | vertical垂直</td>
+        </tr>
+        <tr>
+          <td>speed</td>
+          <td>切换速度</td>
+        </tr>
+        <tr>
+          <td>autoplay</td>
+          <td>自动播放：false | true</td>
+        </tr>
+        <tr>
+          <td>grabCursor</td>
+          <td>抓取|拖拽鼠标样式：false | true</td>
+        </tr>
+        <tr>
+          <td>loop</td>
+          <td>是否循环：true | false</td>
+        </tr>
+        <tr>
+          <td>spaceBetween</td>
+          <td>幻灯片间隔px；不要为幻灯片指定margin</td>
+        </tr>
+        <tr>
+          <td>mousewheel</td>
+          <td>鼠标滚轮触发：false | true</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>属性</dt>
+    <dd>
+      <table class="tbl-sn">
+        <caption>属性</caption>
+        <tr>
+          <th>分类</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>activeIndex</td>
+          <td>当前活动幻灯片</td>
+        </tr>
+        <tr>
+          <td>realIndex</td>
+          <td>幻灯片实际索引</td>
+        </tr>
+        <tr>
+          <td>autoplay</td>
+          <td>自动播放；鼠标点击修改该属性，仍然会播放一次才停止</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>定制样式</dt>
+    <dd>
+      <figure class="code">
+        <figcaption>分页器pagination - F12检查并修改对应的类</figcaption>
+        <pre>
+.swiper-pagination-bullet {
+  background-color: #fff;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #f40;
+}        </pre>
+      </figure>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>

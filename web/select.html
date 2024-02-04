@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>下拉列表 select</title>
+  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="./css/form.css">
+  <link rel="stylesheet" href="../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;&lt;select&gt;</h1>
+  </header>
+  <dl>
+    <dd>. 配合&lt;option&gt;使用，其子元素只能是&lt;option&gt;</dd>
+    <dd>. 使用&lt;optgroup&gt;分组；分组标题不能选择，仅仅作为提示</dd>
+    <dd>. name-value比较特别。name写在&lt;select&gt;；value写在&lt;option&gt;，也可以省略value，系统会把&lt;option&gt;的值自动作为value</dd>
+    <dd>. &lt;select&gt;的宽度决定了&lt;option&gt;的宽度</dd>
+    <dd>. 可以单独设置&lt;select&gt;和&lt;option&gt;的字体颜色、大小，其它可以设置的属性比较少</dd>
+    <dd>. &lt;option&gt;很难动态增加或减少</dd>
+    <dd>. 默认样式极其丑陋；指定appearance: none;可以去掉默认的小箭头以便重新设计样式</dd>
+    <dd>. 如果需要动态增加或减少选项，需要从头定制。如利用无序列表实现选项；更多设计技巧，请访问 <a href="https://www.filamentgroup.com/lab/select-css.html">making
+        a better one</a>
+    </dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>属性</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>size</td>
+          <td>显示几个option；通常不指定，以免影响页面布局</td>
+        </tr>
+        <tr>
+          <td>selected</td>
+          <td>默认选中当前&lt;option&gt;</td>
+        </tr>
+        <tr>
+          <td>multiple</td>
+          <td>多选；使用较少</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>事件</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>change</td>
+          <td>选择改变时</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 单选并获取数据</dd>
+    <dd>
+      <table class="input-tbl">
+        <tr>
+          <td>城市</td>
+          <td><select name="school" id="school-single">
+              <option value="guilin">桂林</option>
+              <option value="xiamen">厦门</option>
+              <option value="foshan">佛山</option>
+              <option value="haikou" selected>海口</option>
+              <option value="foshan">东莞</option>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>HTML</figcaption>
+        <pre>
+&lt;select name="school" id="school-single"&gt;
+    &lt;option value="guilin"&gt;guilin&lt;/option&gt;
+    &lt;option value="xiamen"&gt;xiamen&lt;/option&gt;
+    &lt;option value="foshan"&gt;foshan&lt;/option&gt;
+    &lt;option value="haikou" selected&gt;haikou&lt;/option&gt;
+&lt;/select&gt;</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+let single = document.querySelector("#school-single")
+single.addEventListener('change', function () {
+    console.log(this.value);
+})</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 元素遮罩法</dd>
+    <dd>. 只显示长的备选信息中的关键信息</dd>
+    <dd>
+      <table>
+        <tr>
+          <td>城市</td>
+          <td class="custom-wrap">
+            <select name="schoolC" id="school-custom">
+              <option value="桂林">广西壮族自治区桂林市</option>
+              <option value="厦门">福建省厦门市</option>
+              <option value="佛山">广东省佛山市</option>
+              <option value="海口" selected>海南省海口市</option>
+              <option value="佛山">广东省东莞市</option>
+            </select>
+            <div class="mask"></div>
+            <span class="iconfont icon-unfoldmore"></span>
+          </td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>HTML</figcaption>
+        <pre>
+&lt;div class="custom-wrap"&gt;
+    &lt;select name="schoolC" id="school-custom"&gt;
+        &lt;option value="桂林"&gt;广西壮族自治区桂林市&lt;/option&gt;
+        &lt;option value="厦门"&gt;福建省厦门市&lt;/option&gt;
+        &lt;option value="佛山"&gt;广东省佛山市&lt;/option&gt;
+        &lt;option value="海口" selected&gt;海南省海口市&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;div class="mask"&gt;&lt;/div&gt;
+    &lt;span class="iconfont icon-unfoldmore"&gt;&lt;/span&gt;
+&lt;/div&gt;</pre>
+      </figure>
+    </dd>
+    <dd class="number">
+      <div>增加一个父级容器包裹表单元素&lt;select&gt;；相对定位</div>
+      <div>增加一个遮罩元素mask，显示选中的值/城市名；绝对定位到容器前部；取消事件响应</div>
+      <div>增加一个修饰元素，显示上下箭头，提示用户可以操作；绝对定位到容器后部；取消事件响应</div>
+      <div>设置&lt;select&gt;字体颜色透明/不显示</div>
+      <div>设置&lt;option&gt;颜色为黑色</div>
+      <div>增加JS；一开始获取&lt;select&gt;的值给遮罩元素mask</div>
+      <div>为&lt;select&gt;增加change事件，每次改变时修改遮罩mask的文本</div>
+      <div>增加其它设计，如:hover</div>
+      <div>更多设计细节，请参考<a href="https://login.taobao.com/">天猫登录页面</a>、<a href="./demo/login.html">淘宝高仿</a></div>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 分组-&lt;optgroup&gt;</dd>
+    <dd>
+      <table>
+        <tr>
+          <td>城市</td>
+          <td><select name="school" id="school-mul">
+              <optgroup label="college">
+                <option value="guilin">guilin</option>
+                <option value="xiamen">xiamen</option>
+                <option value="foshan">foshan</option>
+                <option value="haikou" selected>haikou</option>
+              </optgroup>
+              <optgroup label="unit">
+                <option value="gl">gl</option>
+                <option value="sh">sh</option>
+              </optgroup>
+            </select>
+          </td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>HTML</figcaption>
+        <pre>
+&lt;select name="school" id="school-mul"&gt;
+    &lt;optgroup label="college"&gt;
+        &lt;option value="guilin"&gt;guilin&lt;/option&gt;
+        &lt;option value="xiamen"&gt;xiamen&lt;/option&gt;
+        &lt;option value="foshan"&gt;foshan&lt;/option&gt;
+        &lt;option value="haikou" selected&gt;haikou&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label="unit"&gt;
+        &lt;option value="gl"&gt;gl&lt;/option&gt;
+        &lt;option value="sh"&gt;sh&lt;/option&gt;
+    &lt;/optgroup&gt;
+&lt;/select&gt;</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+let mul = document.querySelector("#school-mul")
+mul.addEventListener('change', function () {
+    console.log(this.value);
+})</pre>
+      </figure>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer"
+    onload="this.height=this.contentDocument.body.scrollHeight"></iframe>
+  <script>
+    window.onload = function () {
+      let single = document.querySelector("#school-single")
+      single.addEventListener('change', function () {
+        console.log(this.value);
+      })
+      let mul = document.querySelector("#school-mul")
+      mul.addEventListener('change', function () {
+        console.log(this.value);
+      })
+      let custom = document.querySelector('#school-custom')
+      let mask = document.querySelector('.mask')
+      mask.innerHTML = custom.value;
+      custom.addEventListener('change', () => {
+        console.log(custom.value);
+        mask.innerHTML = custom.value;
+      })
+
+    }
+  </script>
+</body>
+
+</html>

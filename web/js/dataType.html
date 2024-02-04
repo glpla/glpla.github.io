@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据类型 DataType</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../css/navHam.css">
+  <link rel="stylesheet" href="../css//datatype.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+  </header>
+  <nav>
+    <h1>&commat;DataType</h1>
+    <div id="ham">
+      <span class="iconfont icon-menu"></span>
+      <span class="iconfont icon-close"></span>
+    </div>
+    <ul class="nav-container">
+      <li class="nav-item">基本数据类型</li>
+      <li class="nav-item">引用数据类型</li>
+      <li class="nav-item">类型操作符</li>
+    </ul>
+  </nav>
+  <dl>
+    <dt>说明</dt>
+    <dd>.JS是弱类型高级语言；运行时才能最终确定数据类型</dd>
+    <dd>.不同类型的数据占用的存储空间不同。为了充分利用空间，需要指定相应的数据类型</dd>
+    <dd>.基本数据类型：number / string / boolean / undefined / null；基本数据存放于栈stack</dd>
+    <dd>.复杂数据类型：object；引用数据存放于堆heap</dd>
+    <dd>.使用typeof检测数据类型。可根据字面量或控制台颜色判断数据类型</dd>
+  </dl>
+  <div class="chap">基本数据类型 Basic</div>
+  <dl class="nav-cont">
+    <dt>1. Undefined</dt>
+    <dd>.未声明或声明了变量但未初始化；因为JS的弱类型特点，系统不知道你会保存什么类型的数据，且每个类型的数据默认值是不一样的，所以干脆给个未定义</dd>
+    <dd>.只有1个值undefined</dd>
+    <dd>.一般而言，不需要显式地把一个变量设置为 undefined</dd>
+    <dd>.为方便使用，应显式地初始化变量为某个特定的值</dd>
+    <dd class="code">
+      <pre>
+var a;
+console.log(typeof a);//undefined
+console.log(typeof b);//undefined</pre>
+    </dd>
+    <dt>2. Null</dt>
+    <dd>.这个数据类型只有1个值：null</dd>
+    <dd>.表示1个空对象指针；所以它是一个对象</dd>
+    <dd>.如果定义的变量准备在将来用于保存对象，那么最好将该变量初始化为 null 而不是其他值</dd>
+    <dd>.将变量的值设置为 null 可以清空变量</dd>
+    <dd>.可以看作是占了一个位置</dd>
+    <dd>.null 和 undefined 的相等操作符（==）总是返回 true,但它们的用途完全不同</dd>
+    <dd class="code">
+      <pre>
+var obj = null;
+console.log(typeof obj);//object
+console.log(null == undefined);//true</pre>
+    </dd>
+    <dt>3. Boolean</dt>
+    <dd>.只有两个字面值：true 和 false</dd>
+    <dd>.任何非空对象、非零数值、非空字符串都可以转换为true；其他转换为false；应确切地知道在流控制语句中使用的是什么变量</dd>
+    <dt>4. Number</dt>
+    <dd>4.1. 简介</dd>
+    <dd>.JavaScript 只有一种数字类型。不带小数点的是整型；带小数点的是浮点类型，浮点数值在某些语言中也被称为双精度类型</dd>
+    <dd>.默认是十进制；前缀0表示八进制[0-7]；前缀0x表示十六进制[0-9,A-F]</dd>
+    <dd>.永远不要比较两个浮点数的相等</dd>
+    <dd>4.2. NaN</dd>
+    <dd>.为捕获异常，系统还有一个特别的值：非数值 NaN - Not a Number；这个数值用于表示一个本来要返回数值的操作数却未返回数值的情况，这样就不会抛出错误了</dd>
+    <dd>.NaN 与任何值都不相等，包括 NaN 本身</dd>
+    <dd>.isNaN()：在接收到一个值之后，会尝试将这个值转换为数值。某些不是数值的值会直接转换为数值，例如字符串"10"或 Boolean 值。而任何
+      不能被转换为数值的值都会导致这个函数返回 true</dd>
+    <dd class="code">
+      <pre>
+console.log(NaN == NaN);//false</pre>
+    </dd>
+    <dd>4.3. 数值转换</dd>
+    <dd>Number()：用于任何数据类型</dd>
+    <dd>parseInt()：专门用于把字符串转换成数值，更准确来说，是从以数字开头的字符串中<span
+        class="warn">提取</span>数字；处理整数时常用；不具有解析八进制值的能力，因此前导的零会被认为无效，需额外指定基数；建议无论在什么情况下都明确指定基数</dd>
+    <dd>parseFloat()：专门用于把字符串转换成数值；处理浮点数时常用</dd>
+    <dd class="code">
+      <pre>
+console.log(parseInt('070'));//70
+console.log(parseInt('hi70'));//NaN
+console.log(parseInt('12.4px'));//12
+console.log(parseInt('070', 8));
+console.log(parseInt('70', 16));
+console.log(parseInt('0x70', 16));//0x甚至可以省略</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 计算器</dd>
+    <dd id="calc">
+      <div class="ipt-box">
+        <input type="text" name="" id="num0" required maxlength="3" title="num0">
+      </div>
+      <div class="ipt-box">
+        <input type="text" name="" id="num1" required maxlength="3" title="num1">
+      </div>
+      <div class="ipt-box">
+        <button id="btn">+</button>
+      </div>
+    </dd>
+    <dd>[JS]</dd>
+    <dd class="code">
+      <pre>
+let num0 = document.querySelector('#num0');
+let num1 = document.querySelector('#num1');
+let btn = document.querySelector('#btn');
+btn.addEventListener('click', () => {
+  let res = parseInt(num0.value) + parseInt(num1.value);
+  if (isNaN(res)) {
+    alert('输入错误，请重试！');
+  } else {
+    alert(res);
+  }
+})</pre>
+    </dd>
+    <dt>5. String</dt>
+    <dd>.字符串可以由双引号（"）或单引号（'）表示，但是不能混用</dd>
+    <dd>.可以使用转义字符，如\t</dd>
+    <dd>.可以使用十六进制表示1个字符，如\xnn</dd>
+    <dd>.可以使用十六进制表示1个Unicode字符，如\unnnn</dd>
+    <dd>.把一个值转换为一个字符串，可以使用toString()或简单和1个空串拼接；toString()也可以指定基数</dd>
+    <dd>.表单和prompt输入框获取到的数据默认都是字符串类型</dd>
+    <dd>.字符串可以看作是一个特殊的数组，可以使用数组的相关函数，如数组解构</dd>
+    <dd>.加号 <span class="warn">+</span> 可以将字符串数字转换为数字</dd>
+    <dd>.字符串数字 <span class="warn">-</span> 可以转换为数字</dd>
+    <dd class="code">
+      <pre>console.log([...'hello']);//输出5个字符的数组</pre>
+    </dd>
+    <dd class="code">
+      <pre>
+console.log('123');//黑色123
+console.log('123' - 0);//蓝色123
+console.log(+'123');//蓝色123      </pre>
+    </dd>
+  </dl>
+  <div class="chap">引用数据类型 Reference</div>
+  <dl class="nav-cont">
+    <dd>.基本数据类型是按值访问，操作的是保存在变量中的实际的值</dd>
+    <dd>.
+      引用类型的值是保存在内存中的对象。与其他语言不同，JavaScript不允许直接访问内存中的位置，也就是说不能直接操作对象的内存空间。在操作对象时，实际上是在操作对象的引用而不是实际的对象。为此，引用类型的值是按引用访问的
+    </dd>
+    <dd>.不存在定义某个变量必须要保存何种数据类型值的规则，变量的值及其数据类型可以在脚本的生命周期内改变</dd>
+    <dd>.在将一个值赋给变量时，解析器必须确定这个值是基本类型值还是引用类型值</dd>
+    <dd>.可以为引用类型的值其添加属性和方法，也可以改变和删除其属性和方法</dd>
+    <dd>.不能给基本类型的值添加属性</dd>
+    <dd>.除了保存的方式不同之外，在从一个变量向另一个变量复制基本类型值和引用类型值时，也存在不同：基本类型是值拷贝；而引用类型是同一个指向存储在堆中的同一个对象</dd>
+    <dt>1. Object</dt>
+    <dd>.在{}中以值对key-value的形式定义</dd>
+    <dd>.对象其实就是一组数据和功能的集合</dd>
+    <dd>.使用点语法或数组语法访问值对</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 声明对象并添加属性</dd>
+    <dd class="code">
+      <pre>
+let obj = { name: 'cnplaman', age: 18 }
+obj.gender = 'male';
+obj.marriage = true;
+console.log(obj.name);
+console.log(obj['name']);
+console.log(obj);</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 遍历对象</dd>
+    <dd class="code">
+      <pre>
+for (const key in obj) {
+  console.log(key, obj[key]);
+}</pre>
+    </dd>
+    <dd>.函数的参数传递是传值；但是函数内部对对象的访问是引用</dd>
+    <dd class="code">
+      <pre>
+function setObj(obj) {
+    obj.name = 'glpla';
+}
+var stu = new Object();
+setObj(stu);
+console.log(stu.name);</pre>
+    </dd>
+    <dt>2. Array</dt>
+    <dd>.以[]定义，每个数据可以是相同的数据类型，也可以是不同的数据类型</dd>
+    <dd class="code">
+      <pre>let arr = [1, { name: 'gx' }, false, 'hi']</pre>
+    </dd>
+    <dd>.更多信息，请访问 <a href="./array.html">Array</a></dd>
+    <dt>3. function</dt>
+    <dd>.函数，请访问 <a href="./function.html">function</a></dd>
+    <dt>4. RegExp</dt>
+    <dd>.正则表达式请访问 <a href="./regExp.html">RegExp</a></dd>
+    <dt>5. date</dt>
+    <dt>6...</dt>
+  </dl>
+  <div class="chap">类型操作符 Operator</div>
+  <dl class="nav-cont">
+    <dt>typeof</dt>
+    <dd>.检测一个变量是基本数据类型还是引用数据类型</dd>
+    <dd>.是一个操作符，不是函数</dd>
+    <dd>.数组、对象和null都是object类型；object泛指所有的引用数据类型；如果想知道确切的数据类型，请使用instanceof</dd>
+    <dd class="code">
+      <pre>
+let fn = num => num * 2;
+console.log(typeof 12);//number
+console.log(typeof 'hi');//string
+console.log(typeof true);//boolean
+console.log(typeof null);//object；空对象指针
+console.log(typeof undefined);//undefined
+console.log(typeof fn);//function
+console.log(typeof { name: 'hkc' });//object
+console.log(typeof [1, 2]);//object</pre>
+    </dd>
+    <dt>instanceof</dt>
+    <dd>.是一个操作符</dd>
+    <dd>.检查某个变量是否是对象的一个实例</dd>
+    <dd>.所有引用类型的值都是 Object 的实例</dd>
+    <dd>.不仅可以知道某个变量是不是对象，还可以知道它是什么类型的对象：Object、Array、RegExp</dd>
+    <dd>.如果检测基本类型的变量，返回 false；因为基本类型不是对象</dd>
+    <dd class="code">
+      <pre>
+console.log(12 instanceof Number);//false
+console.log('hi' instanceof String);//false
+console.log(true instanceof Boolean);//false
+// console.log(null instanceof Null);//warning
+// console.log(undefined instanceof Undefined);//warning
+console.log(fn instanceof Function);//true
+console.log({ name: 'hkc' } instanceof Object);//true
+console.log([1, 2] instanceof Array);//true</pre>
+    </dd>
+    <dd class="quote">
+      <div>. JavaScript 拥有动态类型。这意味着相同的变量可用作不同的类型</div>
+      <div>. JavaScript具有隐含的全局概念，意味着你不声明的任何变量都会成为一个全局对象属性</div>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="../lib/hamSticky.js"></script>
+  <script>
+    let num0 = document.querySelector('#num0');
+    let num1 = document.querySelector('#num1');
+    let btn = document.querySelector('#btn');
+    btn.addEventListener('click', () => {
+      let res = parseInt(num0.value) + parseInt(num1.value);
+      if (isNaN(res)) {
+        alert('输入错误，请重试！');
+      } else {
+        alert(res);
+      }
+    })
+  </script>
+</body>
+
+</html>

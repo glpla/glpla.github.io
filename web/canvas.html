@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>画布 Canvas</title>
+  <link rel="stylesheet" href="./css/styleNew.css">
+  <style>
+    .canvas {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 2rem auto;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Canvas</h1>
+  </header>
+  <dl>
+    <dt>overview</dt>
+    <dd>.Canvas默认宽高为宽300px,高150px</dd>
+    <dd>.更改画布大小，请设置标签的 width，height 属性</dd>
+    <dd>.CSS样式设置画布大小，更改的是画布元素的大小，并没有更改画布的大小</dd>
+    <dd>.实际渲染时，会按照画布的实际大小，缩放到画布元素的大小</dd>
+    <dd>.后面绘制的图形会覆盖前面的图形</dd>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>moveTo()</td>
+          <td>移动画笔</td>
+        </tr>
+        <tr>
+          <td>lineTo()</td>
+          <td>画线</td>
+        </tr>
+        <tr>
+          <td>strokeStyle()</td>
+          <td>边线样式，同border</td>
+        </tr>
+        <tr>
+          <td>stroke()</td>
+          <td>描边|渲染</td>
+        </tr>
+        <tr>
+          <td>fillStyle()</td>
+          <td>填充样式，同border</td>
+        </tr>
+        <tr>
+          <td>fill()</td>
+          <td>填充|渲染</td>
+        </tr>
+        <tr>
+          <td>beginPath()</td>
+          <td>开始新路径绘制；每次开始绘制，都会自动闭合上条路径</td>
+        </tr>
+        <tr>
+          <td>closePath()</td>
+          <td>结束路径绘制；最后一条路径应显式闭合</td>
+        </tr>
+        <tr>
+          <td>strokeRect(x,y,w,h)</td>
+          <td>在(x,y)处绘制w*h的边框矩形；无需再使用stroke()函数描边</td>
+        </tr>
+        <tr>
+          <td>fillRect(x,y,w,h)</td>
+          <td>在(x,y)处绘制w*h的实心矩形；无需再使用fill()函数填充</td>
+        </tr>
+        <tr>
+          <td>arc(x,y,r,radStart,radEnd,clockwise)</td>
+          <td>绘制弧线；在原点(x,y)处，从起始弧度到结束弧度，按照半径r绘制弧线；默认顺时针方向绘制</td>
+        </tr>
+        <tr>
+          <td>drawImage()</td>
+          <td>画图</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 绘制三角形</dd>
+    <dd>
+      <pre>
+let canvas = document.querySelector('canvas')
+let ctx = canvas.getContext('2d');
+ctx.strokeStyle = '#f40';
+ctx.fillStyle = '#ddd';
+ctx.moveTo(0, 0);
+ctx.lineTo(100, 100);
+ctx.lineTo(100, 0);
+ctx.closePath();
+ctx.stroke();
+ctx.beginPath();
+ctx.moveTo(200, 200);
+ctx.lineTo(300, 300);
+ctx.lineTo(300, 0);
+ctx.fill();
+ctx.closePath();
+ctx.stroke();</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 绘制圆</dd>
+    <dd>
+      <pre>ctx.arc(100, 100, 50, 0, 2 * Math.PI);</pre>
+    </dd>
+    <dd>绘制在第四象限内的90deg的弧</dd>
+    <dd>
+      <pre>ctx.arc(100, 100, 50, 0, Math.PI / 2);</pre>
+    </dd>
+    <dd>绘制在第一、第二、三象限内的弧</dd>
+    <dd>
+      <pre>ctx.arc(100, 100, 50, 0, Math.PI / 2, true);</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 验证码</dd>
+    <dt class="nav-cont">drawImage()</dt>
+    <dd>.除了使用&lt;img&gt;显示图片，还可以使用canvas时绘制图片</dd>
+    <dd>.通常使用new Image()创建一个图像源，在其load后处理绘画业务</dd>
+    <dd>3个参数：指定画布位置原样输出</dd>
+    <dd>
+      <pre>
+drawImage(image, dx, dy)</pre>
+    </dd>
+    <dd>5个参数：指定画布位置指定宽高输出</dd>
+    <dd>
+      <pre>
+drawImage(image, dx, dy, dWidth, dHeight)</pre>
+    </dd>
+    <dd>9个参数：指定图片源中图像的位置、指定画布位置、指定大小输出；同背景图片的background-posting</dd>
+    <dd>
+      <pre>
+drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 绘制图片</dd>
+    <dd>.示例图片800*</dd>
+    <dd>
+      <pre>
+&lt;canvas&gt;&lt;/canvas&gt;
+&lt;script&gt;
+  const img = new Image();
+  const canvas = document.querySelector('canvas');
+  img.src = './imgs/avatar.jpg';
+  img.onload = function () {
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(this, 0, 0);
+  }
+&lt;/script&gt;</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 走路</dd>
+    <dd>.素材图片大小为1000*600，由上下各5个图片组成</dd>
+    <dd>.静态绘制|显示第一个帧</dd>
+    <dd>.单击开始，角色行走|逐步绘制其它帧；单击停止，角色停止行走|清除定时器</dd>
+    <dd>.每个图片在画布上绘制为200*300大小</dd>
+    <dd>.定时器应该显式置空null便于判断</dd>
+    <dd>.每次绘制前，先清除画布</dd>
+    <dd class="canvas">
+      <button id="play">start</button>
+      <button id="stop">stop</button>
+      <canvas width="200" height="300"></canvas>
+    </dd>
+    <dd>[H5]</dd>
+    <dd>
+      <pre>
+&lt;div class="canvas"&gt;
+  &lt;button id="play"&gt;start&lt;/button&gt;
+  &lt;button id="stop"&gt;stop&lt;/button&gt;
+  &lt;canvas width="200" height="300"&gt;&lt;/canvas&gt;
+&lt;/div&gt;</pre>
+    </dd>
+    <dd>[JS]</dd>
+    <dd>
+      <pre>
+let play = document.querySelector('#play');
+let stop = document.querySelector('#stop');
+let inter, ind = 0;
+const img = new Image();
+const canvas = document.querySelector('canvas');
+const ctx = canvas.getContext('2d');
+img.src = '../imgs/walk1.png';
+img.onload = function () {
+  ctx.drawImage(this, 0, 0, 200, 300, 0, 0, 200, 300);
+}
+play.addEventListener('click', () => {
+  if (inter) {
+    return;
+  }
+  inter = setInterval(() => {
+    ctx.clearRect(0, 0, 1000, 300);
+    ctx.drawImage(img, ind * 200, 0, 200, 300, 0, 0, 200, 300);
+    ind++;
+    ind = ind % 5;
+  }, 200);
+})
+stop.addEventListener('click', () => {
+  clearInterval(inter);
+  inter = null;
+})</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 走马灯</dd>
+    <dd>.角色从左走到右</dd>
+    <dd>.每次绘制前，先清除画布，再按照一定的时间间隔绘制图片片段</dd>
+    <dd>
+      <pre>
+setInterval(() => {
+  ctx.clearRect(0, 0, 1000, 300);
+  ctx.drawImage(this, ind * 200, 0, 200, 300, ind * 200, 0, 200, 300);
+  ind++;
+  ind = ind % 5;
+}, 300);</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+    let play = document.querySelector('#play');
+    let stop = document.querySelector('#stop');
+    let inter, ind = 0;
+    const img = new Image();
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    img.src = '../imgs/walk1.png';
+    img.onload = function () {
+      ctx.drawImage(this, 0, 0, 200, 300, 0, 0, 200, 300);
+    }
+    play.addEventListener('click', () => {
+      if (inter) {
+        return;
+      }
+      inter = setInterval(() => {
+        ctx.clearRect(0, 0, 1000, 300);
+        ctx.drawImage(img, ind * 200, 0, 200, 300, 0, 0, 200, 300);
+        ind++;
+        ind = ind % 5;
+      }, 200);
+    })
+    stop.addEventListener('click', () => {
+      clearInterval(inter);
+      inter = null;
+    })
+  </script>
+</body>
+
+</html>

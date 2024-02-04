@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>运算符 Operator</title>
+  <link rel="stylesheet" href="../css/styleNew.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Operator</h1>
+  </header>
+  <div class="chap">算术运算符</div>
+  <dl>
+    <dd>.运算符两侧使用空格分隔</dd>
+    <dd>.赋值：自右向左；把=右边的值赋给左边的变量</dd>
+    <dd>.算术：自左向右；从左向右开始计算</dd>
+    <dt>+</dt>
+    <dd>.数字的加法</dd>
+    <dd>.字符串的连接</dd>
+    <dd>
+      <pre>
+console.log(12 + 30);//32
+console.log(12 + 'HK');//12HK
+console.log("CN" + 'HK');//CNHK</pre>
+    </dd>
+    <dt>-</dt>
+    <dd>.数字的减法</dd>
+    <dd>
+      <pre>
+console.log(12 - 30);//-18</pre>
+    </dd>
+    <dt>*</dt>
+    <dd>.数字的乘法</dd>
+    <dd>
+      <pre>
+console.log(12 * 30);//360</pre>
+    </dd>
+    <dt>/</dt>
+    <dd>.数字的除法</dd>
+    <dd>
+      <pre>
+console.log(12 / 30);//0.4
+console.log(0 / 0);//NaN
+console.log(12 / 0);//Infinity
+console.log(-12 / 0);//-Infinity</pre>
+    </dd>
+    <dt>&percnt;</dt>
+    <dd>.数字取余/模</dd>
+    <dd>.运算符后面的数字是模</dd>
+    <dd>
+      <pre>
+console.log(12 % 30);//12
+console.log(-12 % 30);//-12</pre>
+    </dd>
+    <dt>++</dt>
+    <dt>--</dt>
+    <dt>+=</dt>
+    <dt>-=</dt>
+    <dt>*=</dt>
+    <dt>/=</dt>
+    <dt>%=</dt>
+  </dl>
+  <div class="chap">比较运算符</div>
+  <dl>
+    <dd>.数字可以比较</dd>
+    <dd>.字符串也可以比较：依次比较对应的ASCII</dd>
+    <dd>.不同的数据类型之间也可以比较</dd>
+    <dt>&lt;小于 &le;小于等于</dt>
+    <dt>&gt;大于 &ge;大于等于</dt>
+    <dt>==等于</dt>
+    <dt>!=不等于</dt>
+    <dd>
+      <pre>
+NaN == NaN//false
+null == null//true</pre>
+    </dd>
+  </dl>
+  <div class="chap">逻辑运算符</div>
+  <dl>
+    <dt>&amp;&amp;与</dt>
+    <dd>.两个值的情况：先将运算符 左边的表达式 转化为Boolean，如果为真，就返回右边的值；如果为假就返回左边的值，又称短路，碰到假就停止</dd>
+    <dd>.多个值的情况：如果左边为真，就继续往后看；如果还为真，就再继续；如果为假，就停止</dd>
+    <dd>.undefined、null、NaN、""、''、0、false转化为Boolean后，都为false</dd>
+    <dd>.运算符两侧的表达式可以是任何类型，如：根据某个条件，指向相应的动作</dd>
+    <dd>
+      <pre>
+res = 1 && 2;//2
+res = 0 && 2;//0
+      </pre>
+    </dd>
+    <dd>
+      <pre>
+res = 1 && 2 && 0 && 12 && 3;//0
+res = 0 && 2 && 12 && 23;//0
+      </pre>
+    </dd>
+    <dd>
+      <pre>1 && console.log('hi');//打印输出</pre>
+    </dd>
+    <dd>
+      <pre>0 && fn();//不执行函数</pre>
+    </dd>
+    <dt>||或</dt>
+    <dd>.执行过程和逻辑与相反。碰到真就返回；因为任何类型和真或都为真，也称断路</dd>
+    <dd>.事件对象的兼容处理。如果有e直接使用；否则使用后面的window.e[IE浏览器的事件对象。随着IE的停服，已经不需要做兼容处理了]</dd>
+    <dd>
+      <pre>
+div.addEventListener('click', (e) => {
+  let ev = e || window.e;
+})</pre>
+    </dd>
+    <dt>!非</dt>
+    <dd>.取反</dd>
+    <dd>.结果是Boolean</dd>
+    <dd>
+      <pre>
+!123//false
+!!123//true
+!!NaN//false
+      </pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

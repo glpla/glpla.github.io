@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面导航 Navigator</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>页面导航</h1>
+        <span>Navigator</span>
+    </header>
+    <dl>
+        <dt>概述</dt>
+        <dd>跳转到普通页面</dd>
+        <dd>跳转到标签页</dd>
+        <dd>跳转到外部小程序</dd>
+        <dd>还可以指定返回的层级</dd>
+        <dd>可以使用文字；也可以使用图片等其他元素</dd>
+    </dl>
+    <div class="chap">声明式导航</div>
+    <dl>
+        <dd>使用导航组件&lt;navigator&gt;导航</dd>
+        <dd>导航组件的使用都有对应的API</dd>
+        <dd>更多属性，请访问官方文档 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html"
+                class="link">navigator</a></dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>导航组件</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>target</td>
+                    <td>打开位置 <br> self：当前小程序；默认 <br>miniProgram：外部小程序</td>
+                </tr>
+                <tr>
+                    <td>url</td>
+                    <td>跳转链接|地址</td>
+                </tr>
+                <tr>
+                    <td>open-type</td>
+                    <td>跳转类型 <br> navigate：默认，也可以是外部小程序 <br>switchTab：到标签页</td>
+                </tr>
+                <tr>
+                    <td>delta</td>
+                    <td>数字，后退的层级；默认是1，可以省略</td>
+                </tr>
+                <tr>
+                    <td>app-id</td>
+                    <td>外部小程序的AppID；在更多资料中获取</td>
+                </tr>
+                <tr>
+                    <td>path</td>
+                    <td>外部小程序的页面</td>
+                </tr>
+                <tr>
+                    <td>extra-data</td>
+                    <td>传递给外部小程序的数据</td>
+                </tr>
+            </table>
+        </dd>
+        <dt>无参导航</dt>
+        <dd>
+            <figure class="code">
+                <figcaption>跳转到普通页面 - 全部默认</figcaption>
+                <pre>
+&lt;navigator url="../test/test"&gt;To Page Test&lt;/navigator&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>跳转到外部小程序 - 指定app-id和target</figcaption>
+                <pre>
+&lt;navigator app-id="wx91d27dbf599dff74" target="miniProgram"&gt;To JD&lt;/navigator&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>跳转到标签页 - 指定open-type</figcaption>
+                <pre>
+&lt;navigator url="../photo/photo" open-type="switchTab"&gt;To Tab Photo &lt;/navigator&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>后退1页 - 省略delta</figcaption>
+                <pre>
+&lt;navigator open-type="navigate"&gt;Back&lt;/navigator&gt;</pre>
+            </figure>
+        </dd>
+        <dt>带参导航</dt>
+        <dd>在路径url后面以值对的形式拼接参数</dd>
+        <dd>参数和url之间使用?连接</dd>
+        <dd>多个参数以&分隔</dd>
+        <dd>传递的参数在目标页的生命周期函数onLoad中通过形参option获取</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>拼接参数 - url?name=value&...</figcaption>
+                <pre>
+&lt;navigator url="../test/test?name=gl"&gt;To Page Test&lt;/navigator&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>目标页获取参数</figcaption>
+                <pre>
+onLoad(option: any) {
+    console.log(option);
+}</pre>
+            </figure>
+        </dd>
+        <dd class="tips">模拟器底部状态栏，默认显示"页面路径"，也可以切换到"页面参数"观察页面之间的参数传递情况</dd>
+
+    </dl>
+    <div class="chap">编程式导航</div>
+    <dl>
+        <dd>使用小程序的API导航</dd>
+        <dd>采用自定义事件实现</dd>
+        <dd>需指定url属性</dd>
+        <dd>不需要指定后缀名</dd>
+        <dd>还可以指定跳转结果的回调函数</dd>
+        <dd>- 成功 success</dd>
+        <dd>- 失败 fail</dd>
+        <dd>- 完成 complete：无论是成功还是失败都会执行这个回调函数</dd>
+        <dt>wx.switchTab(Object object)</dt>
+        <dd>跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>跳转到标签页 - 路径支持不是很好</figcaption>
+                <pre>
+gotoCart(){
+    wx.switchTab({
+        url:'/pages/photo/photo'
+        //url:'../photo/photo'
+    })
+}</pre>
+            </figure>
+        </dd>
+        <dt>wx.navigateTo(Object object)</dt>
+        <dd>保留当前页面，跳转到应用内的某个普通页面。不能跳到 tabbar 页面</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>跳转到普通页 - 路径支持不是很好</figcaption>
+                <pre>
+gotoTest(){
+    wx.navigateTo({
+        url:'../test/test',
+        success:()=>{
+            console.log('success');
+        },
+        fail:()=>{
+            console.log('fail');
+        },
+        complete:()=>{
+            console.log('complete');
+        }
+    })
+}</pre>
+            </figure>
+        </dd>
+        <dt>wx.navigateBack(Object object)</dt>
+        <dd>关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages 获取当前的页面栈，决定需要返回几层</dd>
+        <dd>需要指定返回的页面数delta；如果 delta 大于现有页面数，则返回到首页</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>返回上一页</figcaption>
+                <pre>
+backToHome(){
+    wx.navigateBack({
+        delta:1
+    })
+}</pre>
+            </figure>
+        </dd>
+        <dt>带参导航</dt>
+        <dd>同声明式导航一样，在url后面拼接参数传递，并在目标页的onLoad中获取</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>拼接参数</figcaption>
+                <pre>
+gotoTest(){
+    wx.navigateTo({
+        url:'../test/test?name=gl&age=18'
+    })
+}</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>目标页获取参数</figcaption>
+                <pre>
+onLoad(option: any) {
+    console.log(option);
+}</pre>
+            </figure>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>弹性布局 Flex</title>
+  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="./css/flex.css">
+  <link rel="stylesheet" href="../css/code.css">
+  <link rel="stylesheet" href="../css//sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Flex</h1>
+    <span class="ham iconfont icon-menu"></span>
+    <nav class="nav">
+      <a href="" class="nav-item">容器</a>
+      <a href="" class="nav-item">子项</a>
+      <a href="" class="nav-item">布局</a>
+      <a href="" class="nav-item">案例</a>
+    </nav>
+  </header>
+  <dl>
+    <dt>概述</dt>
+    <dd>.控制其直接子元素的排列方式 - 横排、竖排</dd>
+    <dd>.控制其直接子元素的对齐方式 - 左、中、右还是上、中、下或者分散</dd>
+    <dd>.控制其直接子元素渲染的先后顺序</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>开启弹性盒子</figcaption>
+        <pre>display: flex;</pre>
+      </figure>
+    </dd>
+    <dd>.容器container：开启弹性盒子的元素</dd>
+    <dd>.项目item：内部直接子元素，且会变为块元素block</dd>
+    <dd>
+      <figure class="img-sn">
+        <img class="ob-img"
+          data-src="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox/flex_terms.png" alt="">
+        <figcaption>图例</figcaption>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">容器 container</div>
+  <dl class="nav-cont">
+    <dd>.弹性盒子/容器的属性</dd>
+    <dt>flex-direction</dt>
+    <dd>.<span class="warn">主轴main axis</span>方向：默认是行row</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>容器的属性</figcaption>
+        <pre>flex-direction: row | row-reverse | column | column-reverse;</pre>
+      </figure>
+    </dd>
+    <dt>justify-content</dt>
+    <dd>.<span class="warn">主轴main axis</span>方向元素的分布，默认是flex-start</dd>
+    <dd>.有时候通过指定子项的margin为auto，也可以实现两端分布</dd>
+    <dd>.通常是<span class="warn">有剩余空间</span>才会涉及到分布</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>容器的属性 - 主轴排列</figcaption>
+        <pre>justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;</pre>
+      </figure>
+    </dd>
+    <dt>align-items</dt>
+    <dd>.<span class="warn">交叉轴cross
+        axis</span>方向元素的对齐，默认是stretch：所有元素的高度拉伸至和容器元素/最高的元素一致[为子项item添加背景可以直观的看出来]；其它选项则是根据自身的高度开始或结束对齐</dd>
+    <dd>.如果指定了或者继承了行高和高度一致，则已经是垂直方向居中</dd>
+    <dd>.通常是<span class="warn">有剩余空间</span>才会涉及到分布</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>容器的属性 - 交叉轴排列</figcaption>
+        <pre>align-items: stretch | center | flex-start | flex-end;</pre>
+      </figure>
+    </dd>
+    <dt>flex-wrap</dt>
+    <dd>.容器容纳不下元素时，是否换行</dd>
+    <dd>.默认不换行nowrap</dd>
+    <dd>.可以向下换行；也可以向上换行</dd>
+    <dd>.响应式布局中，使用自动换行wrap往往比网格grid布局更灵活；见后续布局一节</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>容器的属性</figcaption>
+        <pre>flex-wrap: nowrap | wrap | wrap-reverse;</pre>
+      </figure>
+    </dd>
+    <dt>gap</dt>
+    <dd>.各子项的间隔</dd>
+    <dd>.网格布局中也可以使用；非常爽</dd>
+  </dl>
+  <div class="chap">子项 item</div>
+  <dl class="nav-cont">
+    <dd>.弹性盒子/容器内部的各个元素</dd>
+    <dt>flex-basis</dt>
+    <dd>.flex item在主轴上分配/预留的空间，相当于指定了width。默认为auto，根据元素内容分配</dd>
+    <dd>.指定了该属性后，原有的宽度或高度就无效了</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>子项属性</figcaption>
+        <pre>flex-basis: number | auto;</pre>
+      </figure>
+    </dd>
+    <dt>flex-grow</dt>
+    <dd>.容器有剩余空间时，是否放大子项。默认为0，不放大</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>子项属性</figcaption>
+        <pre>flex-grow: number;</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 多余空间分配</dd>
+    <dd>容器为500；各项目原始大小各为50；剩余500-50-50=400；去除100的间隔，可分配的空间为300；第一项放大因子为1，分到100；第2项放大因子为2，分到200；最后大小分别为150、250</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>子项属性</figcaption>
+        <pre>
+.box {
+  display: flex;
+  width: 500px;
+  gap: 100px;
+}
+
+.box div:nth-child(1) {
+  width: 50px;
+  height: 50px;
+  flex-grow: 1;
+  background-color: #f40;
+}
+
+.box div:nth-child(2) {
+  width: 50px;
+  height: 50px;
+  flex-grow: 2;
+  background-color: #f40;
+}</pre>
+      </figure>
+    </dd>
+    <dt>flex-shrink</dt>
+    <dd>.容器空间不足时，是否压缩子项。默认为1，压缩[不压缩我放不下啊]</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>子项属性</figcaption>
+        <pre>flex-shrink: number;</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 空间不足的压缩分配</dd>
+    <dd>1.容器300，子项各为200</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>子项属性</figcaption>
+        <pre>200+200=400=300+100->200-50，200-50</pre>
+      </figure>
+    </dd>
+    <dd>2.容器300，子项分别为400、200</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>子项属性</figcaption>
+        <pre>400+200=600=300+300->400-200，200-100</pre>
+      </figure>
+    </dd>
+    <dt>复合属性</dt>
+    <dd>flex: flex-grow flex-shrink flex-basis</dd>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>flex: none;</td>
+          <td>0 0 auto；默认</td>
+        </tr>
+        <tr>
+          <td>flex: auto;</td>
+          <td>1 1 auto；自动分配；如果有，则放大；否则压缩；根据内容大小来分，不是平分</td>
+        </tr>
+        <tr>
+          <td>flex: 1;</td>
+          <td>1 1 0%；用来平分空间</td>
+        </tr>
+        <tr>
+          <td>flex: 0;</td>
+          <td>0 1 0；不知道这个有什么用</td>
+        </tr>
+        <tr>
+          <td>flex: 1 1 num;</td>
+          <td>预留一定空间，多了则放大，不够则压缩<br>可以简写为flex: num;</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>align-self</dt>
+    <dd>.单独设置子项在辅轴上的对齐方式</dd>
+    <dd>.容器需要有多余的空间</dd>
+  </dl>
+  <div class="chap">布局 Layout</div>
+  <dl class="nav-cont">
+    <dd id="layout">[<span class="iconfont icon-keyboard"></span>] 单个元素在容器内的水平垂直居中；<a
+        href="./grid.html#layout">网格布局</a>实现；更多案例请访问<a href="./demo/login1.html">一路有你</a></dd>
+    <dd>
+      <figure class="code">
+        <figcaption>方案1 - 只操作容器</figcaption>
+        <pre>
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}</pre>
+      </figure>
+      <figure class="code">
+        <figcaption>方案2 - 需要同时操作容器和子项</figcaption>
+        <pre>
+body {
+  display: flex;
+  height: 100vh;
+}
+
+.wrap {
+  margin: auto;
+}</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a
+        href="https://codepen.io/glpla/full/xxMBqzV">两列/左右导航布局 - CodePen</a></dd>
+    <dd>
+      <figure class="code">
+        <figcaption>flex布局</figcaption>
+        <pre>
+.flex {
+    display: flex;
+}
+
+.flex .left {
+    flex-basis: 80px;
+}
+
+.flex .right {
+    flex: 1;
+}</pre>
+      </figure>
+    </dd>
+    <dd>.flex需要单独设置每个子项属性，使用 <a href="./grid.html">grid</a> 布局更加简单</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>grid布局</figcaption>
+        <pre>
+body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a
+        href="https://codepen.io/glpla/full/abXMJjN">三列/圣杯布局/双飞燕 - CodePen</a></dd>
+    <dd>.左右固定；中间自适应</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>三列/圣杯布局/双飞燕</figcaption>
+        <pre>
+.wrap {
+    display: flex;
+}
+
+.wrap .left, .wrap .right {
+    flex-basis: 80px;
+}
+
+.wrap .main {
+    flex: 1;
+}</pre>
+      </figure>
+    </dd>
+    <dd>.flex需要单独设置每个子项属性，使用 <a href="./grid.html">grid</a> 布局更加简单</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>gird布局</figcaption>
+        <pre>
+body {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a
+        href="https://codepen.io/glpla/full/oNmVZMZ">栈布局/煎饼布局 - CodePen</a></dd>
+    <dd>.上下高度固定；中间自适应</dd>
+    <dd>.为了容纳更多内容，中间指定overflow-y: auto</dd>
+    <dd>.多见于移动端</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>栈布局/煎饼布局</figcaption>
+        <pre>
+.wrap {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+}
+
+.wrap .cup-top,
+.wrap .cup-bottom {
+    height: 80px;
+}
+
+.wrap .cup-middle {
+    flex: 1;
+    overflow-y: auto;
+}</pre>
+      </figure>
+    </dd>
+    <dd>.flex需要单独设置每个子项属性，使用 <a href="./grid.html">grid</a> 布局更加简单</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>grid布局</figcaption>
+        <pre>
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/JjxzWaR">等分布局
+        - CodePen</a></dd>
+    <dd>.分别占1份、1份、1份</dd>
+    <dd>.很容易调整成不等分布局，如分别占1份、2份、3份、1份</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>等分布局</figcaption>
+        <pre>
+.wrap {
+    display: flex;
+}
+
+.wrap .item {
+    flex: 1;
+}</pre>
+      </figure>
+    </dd>
+    <dd>.flex需要单独设置每个子项属性，使用 <a href="./grid.html">grid</a> 布局更加简单</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>grid布局</figcaption>
+        <pre>
+.wrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}</pre>
+      </figure>
+
+      <figure class="code">
+        <figcaption>grid布局</figcaption>
+        <pre>
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr 2fr 3fr 1fr;
+}</pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">案例 Cases</div>
+  <dl class="nav-cont">
+    <dd>[<span class="iconfont icon-keyboard"></span>] 主导航，更多案例参考<a href="./demo/up2u.html">个人网站导航</a></dd>
+    <dd>. 使用2个felx盒子：两端分布</dd>
+    <dd>. 使用1个felx盒子：第一项右侧空白自动分配</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/miltary.html">强军梦强国梦</a></dd>
+    <dd>采用粘性定位</dd>
+    <dd>使用&lt;figure&gt;布局展示图片和标题</dd>
+    <dd>使用&lt;footer&gt;展示版权信息；使用媒体查询为移动端指定垂直方向的弹性盒子，并指定图片order为-1</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/LYqaWMW">手风琴 - CodePen</a>
+    </dd>
+    <dd>. 开始平分空间；:hover时，使用flex-basis重新分配</dd>
+    <dd>. 如何实现竖版的手风琴效果？</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>核心CSS</figcaption>
+        <pre>
+.cor-wrap div {
+  flex: 1;
+}
+
+.cor-wrap div:hover {
+  flex-basis: 200px;
+}</pre>
+      </figure>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/RwvdpdQ">九宫格 - CodePen</a>
+    </dd>
+    <dd>每个项目的宽度和gap相加不能超过100%</dd>
+    <dd>通常取项目的宽度为25%-30%，剩下的空间由auto自动分配，故而可以撑满到3个子项，实现9宫格</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>九宫格</figcaption>
+        <pre>
+.sudoku {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 800px;
+  width: 100%;
+}
+
+.sudoku .item {
+  width: 30%;
+  flex: auto;
+  aspect-ratio: 16/9;
+}</pre>
+      </figure>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/masonry.html">瀑布流</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 面包屑导航 - 传统方式</dd>
+    <dd>
+      <ul class="bread1">
+        <li>item1</li>
+        <li>item2</li>
+        <li>item3</li>
+        <li>item4</li>
+        <li>item5</li>
+      </ul>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>传统方式 - 列表、伪元素、直接兄弟选择器、CSS实体</figcaption>
+        <pre>
+.bread1 {
+    background-color: #eee;
+    line-height: 40px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.bread1 li {
+    display: inline;
+}
+
+.bread1 li+li::before {
+    content: '/\00A0';
+}</pre>
+      </figure>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 面包屑导航 - flex方式</dd>
+    <dd>. 使用flex；子项不做任何处理：边缘不齐[剩余空间没有利用起来]</dd>
+    <dd>
+      <ul class="bread2">
+        <li>html</li>
+        <li>css</li>
+        <li>js</li>
+        <li>javascript</li>
+        <li>node.js</li>
+        <li>npm</li>
+        <li>iconfont</li>
+        <li>express</li>
+        <li>vue3</li>
+        <li>vue-cli</li>
+        <li>less</li>
+        <li>swiper</li>
+        <li>position</li>
+        <li>relative</li>
+        <li>absolute</li>
+        <li>fixed</li>
+        <li>sticky</li>
+        <li>flex</li>
+        <li>grid</li>
+        <li>media</li>
+        <li>max-width</li>
+        <li>min-width</li>
+      </ul>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>flex方式</figcaption>
+        <pre>
+.bread {
+    display: flex;
+    flex-wrap: wrap;
+}</pre>
+      </figure>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 面包屑导航 - flex改进方式</dd>
+    <dd>. 子项显式指定flex:auto；利用剩余空间</dd>
+    <dd>. 子项指定最大宽度max-width，避免最后一项铺满[是否需要铺满，看设计需求]</dd>
+    <dd>
+      <ul class="bread3">
+        <li>html</li>
+        <li>css</li>
+        <li>js</li>
+        <li>javascript</li>
+        <li>node.js</li>
+        <li>npm</li>
+        <li>iconfont</li>
+        <li>express</li>
+        <li>vue3</li>
+        <li>vue-cli</li>
+        <li>less</li>
+        <li>swiper</li>
+        <li>position</li>
+        <li>relative</li>
+        <li>absolute</li>
+        <li>fixed</li>
+        <li>sticky</li>
+        <li>flex</li>
+        <li>grid</li>
+        <li>media</li>
+        <li>max-width</li>
+        <li>min-width</li>
+      </ul>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>flex改进方式</figcaption>
+        <pre>
+.bread3 li {
+    flex: auto;
+    max-width: 100px;
+    //
+}</pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">总结与作业 Summary & Homework</div>
+  <dl>
+    <dt>总结</dt>
+    <dd>.弹性盒子布局的特性和使用</dd>
+    <dd class="quote">
+      <div>1.同grid不同的是，flex的子项不能单独指定主轴上的对齐方式，即justify-self是无效的；可以使用margin实现</div>
+      <div>2.布局容器做布局的事</div>
+      <div>3.flex对使用绝对定位的子项仍然具有布局的能力</div>
+    </dd>
+    <dt>作业</dt>
+    <dd>1.利用弹性盒子布局，优化个人网站导航</dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+<script src="./lib/lazyload.js"></script>
+<script src="./lib/ham.js"></script>
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>语句 Statement</title>
+  <link rel="stylesheet" href="../css/styleNew.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Statement</h1>
+  </header>
+  <div class="chap">分支语句</div>
+  <dl>
+    <dt>if、if-else、if-else if-else</dt>
+    <dd>.如果条件condition为真，执行语句statement1；否则执行语句statement2</dd>
+    <dd>.多分支语句请使用switch-case</dd>
+    <dd>
+      <pre>
+if (condition) {
+  statement 1;
+} else {
+  statement 2;
+}</pre>
+    </dd>
+    <dd>
+      <pre>
+if (condition1) {
+  statement1;
+} else if (condition2){
+  statement2;
+}</pre>
+    </dd>
+    <dt>switch-case</dt>
+    <dd>.多分支匹配或 <span class="warn">相等</span> 判定：如果给定的值value匹配到某个分支的条件值，就执行该分支</dd>
+    <dd>.适合特定值，不适合范围值</dd>
+    <dd>.case是完全匹配：数值和类型都相同才能匹配；不会隐式数据类型转换</dd>
+    <dd>.大概率条件分支应放在前面</dd>
+    <dd>.指定default分支，可以提高代码健壮性</dd>
+    <dd>
+      <pre>
+switch (value) {
+  case 条件1:
+    break;
+  case 条件2:
+    break;
+  case 条件3:
+    break;
+  //...
+  default:
+    break;
+}</pre>
+    </dd>
+    <dt>?:</dt>
+    <dd>.三目运算符</dd>
+    <dd>.如果条件满足，就执行语句1；否则执行语句2</dd>
+    <dd>.是if-else的另外一个实现</dd>
+    <dd>
+      <pre>条件?语句1:语句2;</pre>
+    </dd>
+  </dl>
+  <div class="chap">循环语句</div>
+  <dl>
+    <dt>for</dt>
+    <dd>.先初始化条件[只执行一次]；也可以在for外面进行</dd>
+    <dd>.再判定条件是否满足；如果满足就执行语句statement；如果不满足，就结束</dd>
+    <dd>.条件变化，重复判断并决定继续还是结束</dd>
+    <dd>.省略判定条件后，变为无限循环</dd>
+    <dd>.如果要退出某次循环，继续下一次循环，请使用continue</dd>
+    <dd>.如果要退出循环，请使用break，同switch语句</dd>
+    <dd>
+      <pre>
+for (初始化;判定条件;条件变化) {
+  statement; 
+}</pre>
+    </dd>
+    <dd>.基本使用；变量i只能作用于for循环</dd>
+    <dd>
+      <pre>
+for (let i = 0; i < 10; i++;) {
+  console.log(i);
+}</pre>
+    </dd>
+    <dd>.初始化放在for外面，变量i可以被其它访问；条件变化放在循环体内</dd>
+    <dd>
+      <pre>
+let i = 0;
+for (; i < 10;) {
+  console.log(i);
+  i++;
+}</pre>
+    </dd>
+    <dt>while-do</dt>
+    <dd>.先判定再执行</dd>
+    <dd>.可以和for相互转化</dd>
+    <dd>.特殊领域的死循环-WSN</dd>
+    <dd>
+      <pre>
+while(1){
+  //
+}</pre>
+    </dd>
+    <dt>do-while</dt>
+    <dd>.先执行1次再判定</dd>
+    <dd>.使用较少</dd>
+    <dt>forEach</dt>
+    <dd>.语法更简介，但是 <span class="warn">无法</span> 中断或停止</dd>
+    <dt>for-in</dt>
+    <dd>.for-in 语句是一种精准的迭代语句，可以用来枚举对象的属性</dd>
+    <dd>.建议在使用 for-in 循环之前，先检测确认该对象的值不是 null 或 undefined</dd>
+    <dd>.控制语句中的 var/let 操作符不是必需的。但是，为了保证使用局部变量，推荐使用</dd>
+    <dd>.主要应用场合：Object、JSON</dd>
+    <dd>
+      <pre>
+let obj = { "name": "guilin", "age": 18, "marriage": true };
+for (let item in obj) {
+  console.log(item, obj[item]);
+}</pre>
+    </dd>
+    <dd>
+      <pre>
+for (var propName in window) { 
+    document.write(propName); 
+}</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

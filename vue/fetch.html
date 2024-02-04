@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch Backend</title>
+  <link rel="stylesheet" href="../css/reset2024.css">
+  <link rel="stylesheet" href="../css/common2024.css">
+  <link rel="stylesheet" href="../css/code.css">
+  <link rel="stylesheet" href="../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>Fetch</h1>
+    <span>Backend</span>
+  </header>
+  <dl>
+    <dt>简介</dt>
+    <dd>.fetch是w3c的一种请求标准，不是第三方库，与vue、jquery无关</dd>
+    <dd>.下一代Ajax技术，采用 <span class="warn">Promise</span> 方式处理数据</dd>
+    <dd>.语法简介明了</dd>
+    <dd>.既可以访问远程数据，也可以访问本地数据</dd>
+    <dd>.除了IE，多数浏览器都兼容</dd>
+    <dd>.需要拼接参数，通常需要二次封装</dd>
+    <dd class="code">
+      <pre>
+fetch(url, {
+    method: '',
+    body: '',
+    headers: ''
+    })
+    .then(res=>res.json())
+    .then(res)
+    .catch(err)</pre>
+    </dd>
+    <dt>配置项</dt>
+    <dd>method（String）：HTTP请求方法，Get获取数据 | Post提交数据 | Delete删除数据 | Put更新数据；默认为GET</dd>
+    <dd>body（String）：HTTP请求请求参数</dd>
+    <dd>headers（Object）：HTTP请求头，默认为0</dd>
+    <dt>响应结果</dt>
+    <dd>.在响应的原型[[Prototype]] Response中，可以看到相关的事件</dd>
+    <dd>res.json()：得到JSON对象，同JSON.parse(responseText)一样；应用最广泛</dd>
+    <dd>res.text()：得到文字|字符串</dd>
+    <dd>res.formData()：得到FormData表单对象</dd>
+    <dd>res.blob()：得到多媒体对象，如图片</dd>
+    <dt>get基本过程</dt>
+    <dd>只需要指定url和对应的查询参数即可</dd>
+    <dd>1.fetch执行后，返回一个Promis；要拿到结果，必须在then中进一步处理</dd>
+    <dd>2.then中获取的是Promise对象，是对HTTP服务的响应，需要使用json()处理；json()是一个异步操作，将内容转换为JSON对象</dd>
+    <dd>3.json()返回的仍然是一个Promise，仍然需要在then()中处理</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>传统方式</figcaption>
+        <pre>
+fetch('./data2021/stu.json')
+  .then(response => response.json())
+  .then(res => {
+    console.log(res);
+  })</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>async-await方式</figcaption>
+        <pre>
+async function getData() {
+  let res = await fetch('./data2021/stu.json');
+  console.log(res);
+  let json = await res.json();
+  console.log(json);
+}
+getData();</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>异常捕获处理</figcaption>
+        <pre>
+async function getData() {
+  try {
+    let res = await fetch('./data2021/stu.json');
+    console.log(res);
+    let json = await res.json();
+    console.log(json);
+  } catch (err) {
+    console.log(err);
+  }
+}</pre>
+      </figure>
+    </dd>
+    <dd>4.fetch抓取数据时不会抛出错误,即使是404或500错误；可根据响应状态ok或状态码status判断结果</dd>
+    <dd class="code">
+      <pre>
+ok: true
+redirected: false
+status: 200
+statusText: "OK"
+type: "cors"
+url: "http://localhost:3000/clerk/2002"</pre>
+    </dd>
+    <dd class="code">
+      <pre>
+ok: false
+redirected: false
+status: 404
+statusText: "Not Found"
+type: "cors"
+url: "http://localhost:3000/clerk/2002"</pre>
+    </dd>
+    <dd>5.可以使用查询参数query parameters，直接在url后面使用?拼接查询值对，使用&拼接多个查询参数</dd>
+    <dd class="code">
+      <pre>http://ajax-base-api-t.itheima.net/api/getbooks?id=2</pre>
+    </dd>
+    <dd class="example-sn">text()-请求本地文本</dd>
+    <dd class="code">
+      <pre>
+fetch('./tmp.txt')
+  .then(res => res.text())
+  .then(res => console.log(res))</pre>
+    </dd>
+    <dd class="example-sn">json()-请求本地JSON</dd>
+    <dd class="example-sn">json()-请求网络接口</dd>
+    <dd class="example-sn">formData()-请求表单</dd>
+    <dd class="example-sn">blob()-请求图片</dd>
+    <dd class="code">
+      <pre>
+fetch('./imgs/avatar0.jpg')
+  .then(res => res.blob())
+  .then(res => img.src = URL.createObjectURL(res))</pre>
+    </dd>
+    <dt>post基本过程</dt>
+    <dd>.除了url还需要指定配置选项：</dd>
+    <dd>method：请求方法，POST</dd>
+    <dd>headers：指定数据格式：content-type，如application/json | application/x-www-form-urlencoded</dd>
+    <dd>body：请求数据</dd>
+    <dd class="code">
+      <pre>
+async function addData() {
+  try {
+    let obj = {
+      author: 'cnplaman',
+      bookname: 'web',
+      publisher: 'cn',
+    }
+    let res = await fetch('http://ajax-base-api-t.itheima.net/api/addbook', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj)
+    });
+    console.log(res);
+    let json = await res.json();
+    console.log(json);
+  } catch (err) {
+    console.log(err);
+  }
+}</pre>
+    </dd>
+    <dt>推荐资源</dt>
+    <dd>1. 随机小狗 <a href="https://dog.ceo/api/breed/pembroke/images/random">dog ceo</a></dd>
+    <dd>2. 随机图片 <a href="https://picsum.photos/" class="link">picsum photos</a></dd>
+    <dd>3. 土味情话 <a href="https://api.uomg.com/api/rand.qinghua?format=json"></a></dd>
+    <dd>4. http://ajax-base-api-t.itheima.net/api</dd>
+    <dd>/getbooks</dd>
+    <dd>/addbook</dd>
+  </dl>
+  <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面事件 PageEvent</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>页面事件</h1>
+        <span>PageEvent</span>
+    </header>
+    <dl>
+        <dt>onPullDownRefresh</dt>
+        <dd>下拉刷新</dd>
+        <dd>页面重新初始化</dd>
+        <dd>部分逻辑初始化</dd>
+        <dd>真机下不能自动返回，需要显式的调用wx.stopPullDownRefresh(Object object)</dd>
+        <dt>onReachBottom</dt>
+        <dd>触底加载</dd>
+        <dd>加载更多数据，如拉取下一分页数据</dd>
+        <dd>每次触底都会触发；在下一次加载没有完成之前，不应该再次触发 - 节流</dd>
+        <dt>onShareAppMessage</dt>
+        <dd>分享|转发</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>page</figcaption>
+                <pre>
+Page({
+    data: {
+    },
+    init() { 
+    },
+    onPullDownRefresh() {
+        this.init()
+        wx.stopPullDownRefresh()
+    },
+    onReachBottom() {
+    },
+    onShareAppMessage() {
+    }
+})</pre>
+            </figure>
+        </dd>
+        <dt>节流</dt>
+        <dd>首先设置节流阀为false</dd>
+        <dd>触底加载时设置节流阀为true</dd>
+        <dd>加载完毕时设置节流阀为false</dd>
+        <dd>每次加载时，先判断节流阀是否为false；为false则加载；否则返回</dd>
+        <dd>同时还要判断当前数据是否已经全加载完毕：已加载数据项数量=总数据量</dd>
+        <dt>按需加载</dt>
+        <dd>触底加载和下拉刷新都涉及到同样的业务逻辑</dd>
+        <dd>但是：下拉刷新需要手动停止刷新，而触底加载不需要</dd>
+        <dd>调整业务逻辑：使用参数决定是否要显式停止刷新</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>函数声明 - 根据cb的有无决定是否执行特定操作</figcaption>
+                <pre>
+init(cb) {
+    //其他逻辑
+    cb&cb()
+}</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>函数执行 - 无形参cb，正常执行</figcaption>
+                <pre>this.init()</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>函数执行 - 有形参cb，执行特定操作</figcaption>
+                <pre>
+this.init(()=>{
+    wx.stopPullDownRefresh()  
+})</pre>
+            </figure>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

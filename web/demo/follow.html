@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouse Follow</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    span {
+      position: absolute;
+      pointer-events: none;
+      animation: fade 1.1s linear;
+    }
+
+    span::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image: url(../imgs/nav4.png);
+      background-size: cover;
+      animation: move 1s linear;
+    }
+
+    @keyframes move {
+
+      100% {
+        transform: translate(100px) rotate(360deg);
+      }
+    }
+
+    @keyframes fade {
+
+      0%,
+      100% {
+        opacity: 0;
+      }
+
+      20%,
+      60% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script src="./js/follow.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义组件 Components</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>自定义组件</h1>
+        <span>Components</span>
+    </header>
+    <dl>
+        <dt>说明</dt>
+        <dd>.组件也有对应的4个文件：wxml、wxss、js|ts、json</dd>
+        <dd>.每个组件js|ts都可以有自己的：</dd>
+        <dd>- 属性 properties：接收参数，实现组件传参</dd>
+        <dd>- 数据 data：数据</dd>
+        <dd>- 函数 methods：方法</dd>
+        <dd>- 选项 options：配置项，如样式的使用等等</dd>
+        <dd>.单独创建一个目录存放组件，如components</dd>
+        <dd>.不同作用的组件再存放到单独的文件夹中</dd>
+        <dd>.组件的使用分为：全局使用和页面使用</dd>
+        <dt>基本步骤</dt>
+        <dd class="txt-center">创建 → 设计 → 引入 → 使用</dd>
+        <dd class="example-sn">以封装版权信息组件copyright为例</dd>
+        <dd>.静态组件，不需要参数传递</dd>
+        <dd>.全局使用，各页面都可以引入使用</dd>
+        <dd class="number">
+            <div>创建组件</div>
+            <p>.右键单击组件根目录components → 新建组件目录copyright</p>
+            <p>.再右键组件目录，新建 Component为copyright；组件名和组件目录通常保持一致</p>
+            <figure class="img-sn">
+                <img src="./imgs/pro7.png" alt="">
+                <figcaption>创建组件</figcaption>
+            </figure>
+            <div>设计组件</div>
+            <p>.因为是静态组件，仅仅展示信息，不需要参数传递，所以只编辑.wxml即可</p>
+            <p>.wxss样式略</p>
+            <p>.js无需编辑</p>
+            <p>.json无需编辑</p>
+            <pre class="code">&lt;text&gt;copyright 2023-2024&lt;/text&gt;</pre>
+            <div>引入组件</div>
+            <p>.在使用组件的页面.json中配置：指定使用的组件路径和使用时的组件名</p>
+            <p>.可以修改使用时的名字，如my-copyright。这里和组件名保持一致</p>
+            <pre class="code">
+{
+    "usingComponents": {
+        "copyright":"../../components/copyright/copyright"
+    }
+}</pre>
+            <div>使用组件 </div>
+            <p>.在使用组件的页面.wxml中使用</p>
+            <pre class="code">&lt;copyright&gt;&lt;/copyright&gt;</pre>
+        </dd>
+    </dl>
+    <div class="chap">组件传参</div>
+    <dl>
+        <dt>父组件 → 子组件</dt>
+        <dd>.采用属性绑定的方式</dd>
+        <dd>.只能传递普通参数</dd>
+        <dd>.子组件使用属性properties定义参数接口</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>组件完整声明 - 类型type和值value</figcaption>
+                <pre>
+properties: {
+    icon:{
+        type:String,
+        value:''
+    }
+}</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>组件简化声明 - 类型type；不需要默认值</figcaption>
+                <pre>
+properties: {
+    icon:String
+}</pre>
+            </figure>
+        </dd>
+        <dd class="example-sn">封装图片轮播组件my-swiper</dd>
+        <dd>不同的轮播组件在不同的页面显示的高度不一样；通过传递高度参数h，采用内联样式设置轮播组件高度</dd>
+        <dd>以下示例为核心代码</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>组件my-swiper.wxml</figcaption>
+                <pre>
+&lt;swiper style="height: {{h}}rpx;"&gt;
+    &lt;swiper-item wx:for='{{imgs}}' wx:key='index'&gt;
+        &lt;image src="{{item}}" mode="aspectFill"&gt;&lt;/image&gt;
+    &lt;/swiper-item&gt;
+&lt;/swiper&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>组件my-swiper.js - 默认高度400</figcaption>
+                <pre>
+Component({
+    properties: {
+        h:{
+        type:Number,
+        value:400
+        },
+        imgs: {
+        type: Array,
+        value: []
+        }
+    }
+})</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>引入页面json</figcaption>
+                <pre>
+{
+    "usingComponents": {
+        "my-swiper": "../../components/my-swiper/my-swiper"
+    }
+}</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>引入页面wxml - 传递高度参数；绑定图片参数</figcaption>
+                <pre>&lt;my-swiper h='{{200}}' imgs='{{imgs}}'&gt;&lt;/m-swiper&gt;</pre>
+            </figure>
+        </dd>
+        <dd class="example-sn">封装阿里字体图标组件my-iconfont</dd>
+        <dd>.父组件仅仅传递图标类，控制组件显示相应的字体图标</dd>
+        <dd class="number">
+            <div>创建组件</div>
+            <p>.右键单击组件根目录components → 新建组件目录my-iconfont</p>
+            <p>.再右键组件目录，新建 Component为my-iconfont；组件名和组件目录通常保持一致</p>
+            <div>设计组件</div>
+            <p>.wxml：基类iconfont保留，不同的图标类icon通过父组件传递获取</p>
+            <pre class="code">&lt;text class="iconfont {{icon}}"&gt;&lt;/text&gt;</pre>
+            <p>.js|ts：在属性properties中设置将图标类icon的类型和默认值；并允许添加全局类</p>
+            <pre class="code">
+Component({
+    options: {
+        addGlobalClass: true,
+    },
+    properties: {
+        icon:{
+            type:String
+        }
+        //简化形式icon:String
+    }
+})</pre>
+            <div>引入组件</div>
+            <p>.在使用组件的页面.json中配置</p>
+            <pre class="code">
+{
+    "usingComponents": {
+        "my-iconfont":"../../components/my-iconfont/my-iconfont"
+    }
+}</pre>
+            <div>使用组件</div>
+            <p>.在使用组件的.wxml中，将图标类作为属性指定给参数接口即可</p>
+            <pre class="code">&lt;my-iconfont icon='icon-home'&gt;&lt;/my-iconfont&gt;</pre>
+        </dd>
+        <dt>子组件 → 父组件</dt>
+        <dd>.采用事件绑定</dd>
+        <dd class="number">
+            <div>子组件绑定传统事件并在事件处理函数中发送自定义事件给父组件，可以指定传递的参数</div>
+            <div>父组件绑定自定义事件并声明事件处理函数</div>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>组件wxml - 声明普通事件tap并指定事件处理函数toCalendar</figcaption>
+                <pre>&lt;view class='nav-item' bindtap="toCalendar"&gt;navigation&lt;/view&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>组件js - 在methods中事件处理函数toCalendar中发送自定义事件toCal</figcaption>
+                <pre>
+toCalendar() {
+    this.triggerEvent('toCal');
+}</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>使用组件xml - 绑定组件发送的事件toCal并指定事件处理函数dealCal</figcaption>
+                <pre>&lt;nav bindtoCal="dealCal"&gt;&lt;/nav&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>使用组件js - 实现事件处理函数dealCal</figcaption>
+                <pre>
+dealCal() {
+    wx.navigateTo({
+        url: '../calendar/calendar',
+    })
+}</pre>
+            </figure>
+        </dd>
+    </dl>
+    <div class="chap">组件样式</div>
+    <dl>
+        <dt>说明</dt>
+        <dd>.默认情况下，组件的样式仅仅作用于当前组件 - 样式隔离</dd>
+        <dd>.请尽量使用类选择器，不要使用标签选择器、id选择器、属性选择器</dd>
+        <dd>.app.wxss的全局样式的类选择器对组件无效；标签选择器、id选择器、属性选择器仍然有效[带验证]</dd>
+        <dd>
+            <figure class="img-sn">
+                <img src="./imgs/pro9.png" alt="">
+                <figcaption>组件样式配置</figcaption>
+            </figure>
+        </dd>
+    </dl>
+    <div class="chap">组件行为*</div>
+    <dl>
+        <dt>behavior</dt>
+        <dd>组件之间共享代码</dd>
+        <dd class="exanple-sn">自定义tabBar - <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/framework/ability/custom-tabbar.html"
+                class="link">官方文档</a></dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

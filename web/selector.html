@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>选择器 Selector</title>
+  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="./css/selector.css">
+  <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/tbl.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>选择器&commat;Selector</h1>
+    <span class="ham iconfont icon-menu"></span>
+    <nav class="nav">
+      <a href="" class="nav-item">基本</a>
+      <a href="" class="nav-item">伪元素</a>
+      <a href="" class="nav-item">伪类</a>
+      <a href="" class="nav-item">组合</a>
+      <a href="" class="nav-item">其它</a>
+      <a href="" class="nav-item">优先级</a>
+    </nav>
+  </header>
+  <dl>
+    <dt>选择器作用</dt>
+    <dd>. 选择某个或某些元素以应用其定义的样式|规则</dd>
+  </dl>
+  <div class="chap">基本选择器 Basic</div>
+  <dl class="nav-cont">
+    <dt>标签选择器 Type selectors</dt>
+    <dd>. 也称元素选择器、类型选择器</dd>
+    <dd>. 使用元素标签名，如使用div表示选择&lt;div&gt;</dd>
+    <dd>. 可以选择多个元素</dd>
+    <dd>. 通常用来 <span class="warn">初始化</span> 标签属性</dd>
+    <dt>类选择器 Class selectors</dt>
+    <dd>. HTML中，使用 <span class="warn">class</span> 为元素添加类属性</dd>
+    <dd>. CSS中，使用点 <span class="warn">.</span> 表示，如 .box</dd>
+    <dd>. 元素可以同时使用多个类/层叠，最后的样式由多个类共同作用</dd>
+    <dd>. 应用最为广泛</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>HTML5：类class属性</figcaption>
+        <pre>&lt;div class = "box"&gt;&lt;/div&gt;</pre>
+      </figure>
+      <figure class="code">
+        <figcaption>CSS3：类class样式</figcaption>
+        <pre>.box{}</pre>
+      </figure>
+    </dd>
+    <dt>ID选择器 ID selectors</dt>
+    <dd>. HTML中，使用 <span class="warn">id</span> 为元素添加ID属性</dd>
+    <dd>. CSS中，使用点 <span class="warn">#</span> 表示，如 #box</dd>
+    <dd>. ID属性用来唯一标识一个元素</dd>
+    <dd>. 使用不多；一般供JavaScript操作元素使用</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>HTML5：id属性</figcaption>
+        <pre>&lt;div id = "box"&gt;&lt;/div&gt;</pre>
+      </figure>
+      <figure class="code">
+        <figcaption>CSS3：id样式</figcaption>
+        <pre>#box{}</pre>
+      </figure>
+    </dd>
+    <dt>属性选择器 Attribute selectors</dt>
+    <dd>. 选择带有特定属性的元素</dd>
+    <dd>. 可以选择多个元素</dd>
+    <dd>. 使用正则语法可以更加精准的选择元素</dd>
+    <dd>
+      <table class="tbl-sn tbl-ale">
+        <caption>属性选择器</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>[attribute]</td>
+          <td>选择带有指定属性的元素</td>
+        </tr>
+        <tr>
+          <td>[attribute="value"]</td>
+          <td>选择带有指定属性和值的元素</td>
+        </tr>
+        <tr>
+          <td>[attribute^="value"]</td>
+          <td>选择指定属性以指定值开头的元素</td>
+        </tr>
+        <tr>
+          <td>[attribute$="value"]</td>
+          <td>选择指定属性以指定值结尾的元素</td>
+        </tr>
+        <tr>
+          <td>[attribute*="value"]</td>
+          <td>选择属性包含指定值的元素</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>示例</figcaption>
+        <pre>
+a[title]{}
+
+input[type='radio']{}
+
+img[src^='http://']{}
+
+img[src$='.jpg']{}        </pre>
+      </figure>
+    </dd>
+    <dt>*通配符选择器 Universal selectors</dt>
+    <dd>. 以 <span class="warn">*</span> 表示，代表所有元素</dd>
+    <dd>. 多用于样式初始化</dd>
+    <dd>. 渲染性能上略有不足；生产环境中不建议使用，尽量初始化具体的元素</dd>
+    <dd>. 优先级最低</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>示例</figcaption>
+        <pre>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}        </pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">伪元素选择器 Pseudo-elements</div>
+  <dl class="nav-cont">
+    <dd>. 并不是由传统的HTML标签创建出来，而是依附于已有的标签，所以叫伪元素</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>基本用法</figcaption>
+        <pre>
+selector::pseudo-element {
+    property: value;
+}</pre>
+      </figure>
+    </dd>
+    <dt>::before ::after</dt>
+    <dd>. 创建一个inline元素作为第一个first子元素、最后一个last子元素</dd>
+    <dd>. 必须指定伪元素 content 属性，哪怕为空；可以使用普通字符、<a
+        href="https://developer.mozilla.org/en-US/docs/Glossary/Entity">CSS实体</a>；也可利用attr()获取元素属性；content拼接字符串不能使用+，直接在后面添加即可
+    </dd>
+    <dd>. content属性不支持变量使用var()，可以通过<a href="./counter.html">计数器</a> 迂回实现</dd>
+    <dd>. 可按照普通元素对其进行定位、布局、旋转等等操作；注意：旋转会撑开/破坏布局，请为父元素设置overflow溢出隐藏；同样需要注意的是：他们的box-sizing也要初始化为border-box</dd>
+    <dd>. 伪元素的样式受父级元素的影响；但是伪元素不是元素的直接孩子，无法使用直接后代选择器>选择</dd>
+    <dd>. 应用非常非常非常广泛</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>样式初始化</figcaption>
+        <pre>
+*, 
+*::before, 
+*::after {
+    display: block;
+    box-sizing: border-box;
+}</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>示例</figcaption>
+        <pre>
+//普通文本
+li::before {
+  content: '+';
+}
+//CSS实体
+li::before {
+  content: '\21E6';
+}
+
+//图片；大图片调整大小应转为行块盒并指定溢出隐藏
+//建议使用留空的方式，采用背景图片处理
+li::before {
+  content: url(./imgs/avatar.jpg);
+  display: inline-block;/* MUST */
+  overflow: hidden;/* MUST */
+}
+
+//获取标签属性；可以是自定义属性data-
+li::before {
+content: attr(data-ind);
+}
+
+//留空，做其他装饰性设计
+li::before {
+  content: '';
+}
+
+//使用计数器；可以拼接普通字符或CSS实体
+li::before {
+content: counter(sn) '\21e8 ';
+}        </pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/RwvOPvE">环环相扣
+        - CodePen</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./position.html#cart">JD购物车</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./list.html">模拟列表</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./web.html#browser">浏览器市场占有率</a>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./opening.html#evaluation">教学评价</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html#home">技能条</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="../os/sql/quiz.html">定制答题模板</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/ring.html">环环相扣</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/clock.html">时钟</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./opening.html">标题设计</a></dd>
+    <dt>::first-letter ::first-line</dt>
+    <dd>. <span class="warn">block块元素</span> 的首字母、首行</dd>
+    <dd>. 设置的样式有限；常用于首字下沉</dd>
+    <dd>. 是内联元素inline，无法转化为块元素block</dd>
+    <dd>. ::first-letter优先级高于::first-line</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html#txt">个人网站 - 首字高亮</a></dd>
+    <dd>
+      <figure class="code">
+        <figcaption>参考代码</figcaption>
+        <pre>
+p::first-letter {
+  color: #fff;
+  background-color: #f40;
+  padding: 2px 4px;
+}</pre>
+      </figure>
+    </dd>
+    <dt>::selection</dt>
+    <dd>. 元素被选择的部分；默认是蓝底白字</dd>
+    <dt>::placeholder</dt>
+    <dd>. 占位符样式；多用于表单元素input</dd>
+    <dd>. 设置的样式有限</dd>
+    <dt>::marker</dt>
+    <dd>. 定义标记类型</dd>
+    <dd>. 适用于display为list-item的元素，如&lt;li&gt;、&lt;summary&gt;</dd>
+    <dd>. 使用content属性指定内容</dd>
+    <dd>. 设置的样式有限</dd>
+    <dd>. 因为标记会破坏布局，基本很少使用</dd>
+    <dd>. 更多案例，请参考<a href="./list.html">列表 List</a> - 自定义编号示例</dd>
+  </dl>
+  <div class="chap">伪类选择器 Pseudo-classes</div>
+  <dl class="nav-cont">
+    <dd>. 和普通类的可以应用在多个元素不同，伪类<span class="warn">仅仅限定当前元素使用</span>，所以叫伪类</dd>
+    <dd>. 伪元素会增加元素，伪类不增加元素</dd>
+    <dd>. 伪元素使用::，伪类使用:</dd>
+    <dt>超链接伪类选择器</dt>
+    <dd>. 常见于超链接&lt;a&gt;桌面端应用</dd>
+    <dd>. &lt;a&gt;使用时，需按下述顺序定义：a:link→a:visted→a:hover→a:active</dd>
+    <dd>. 除了超链接&lt;a&gt;，还可以作用于其它元素，如表单元素</dd>
+    <dd>
+      <table class="tbl-sn tbl-ale">
+        <caption>超链接伪类选择器</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>:link</td>
+          <td>&lt;a&gt;初始状态/为访问过</td>
+        </tr>
+        <tr>
+          <td>:visited</td>
+          <td>&lt;a&gt;访问过/点击后状态</td>
+        </tr>
+        <tr>
+          <td>:hover</td>
+          <td>鼠标置于&lt;a&gt;上时的状态；使用最广泛；移动端无效</td>
+        </tr>
+        <tr>
+          <td>:focus</td>
+          <td>&lt;a&gt;获取焦点时的状态</td>
+        </tr>
+        <tr>
+          <td>:active</td>
+          <td>&lt;a&gt;为活动状态时</td>
+        </tr>
+        <tr>
+          <td>:target</td>
+          <td>当前元素为锚点目标时选中；目标元素需要指定ID</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] :hover使用，请参考 <a href="./demo/acc_flex.html">抽屉相册</a>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] :target使用，请参考 <a href="./demo/acc_target.html#item1">古诗鉴赏</a>
+    </dd>
+    <dt id="checked">表单伪类</dt>
+    <dd>. 多用于表单元素</dd>
+    <dd>. 功能非常强大，很多纯CSS效果甚至可以媲美JavaScript</dd>
+    <dd>. 凡是鼠标点击的联动响应，都可以使用:checked，如标签页、轮播、导航；见后续案例</dd>
+    <dd>
+      <table class="tbl-sn tbl-ale">
+        <caption>表单伪类</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>:checked</td>
+          <td>元素选中</td>
+        </tr>
+        <tr>
+          <td>:valid</td>
+          <td>有效时</td>
+        </tr>
+        <tr>
+          <td>:invalid</td>
+          <td>无效时</td>
+        </tr>
+        <tr>
+          <td>:in-range</td>
+          <td>在指定范围</td>
+        </tr>
+        <tr>
+          <td>:out-of-range</td>
+          <td>超出指定范围</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>参考代码</figcaption>
+        <pre>
+input[type='text']:focus+label {
+  color: #f40;
+}
+
+input[type='radio']:checked+label {
+  color: #f40;
+}        </pre>
+      </figure>
+    </dd>
+    <dt id="nth">结构伪类选择器</dt>
+    <dd>
+      <table class="tbl-sn tbl-ale">
+        <caption>根据序号选择元素</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>:first-child</td>
+          <td>第一个孩子</td>
+        </tr>
+        <tr>
+          <td>:last-child</td>
+          <td>最后一个孩子</td>
+        </tr>
+        <tr>
+          <td>:nth-child(n)</td>
+          <td>第几个孩子；孩子从1开始</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>. 根据文档结构来选择，通常配合父级元素一起使用</dd>
+    <dd>. nth-child可以使用关键字；odd选中序号为奇数的孩子；even选中序号为偶数的孩子</dd>
+    <dd>. nth-child可以使用表达式；n只能是数字，不能是字母；n必须是表达式的第一项</dd>
+    <dd>. 以上选择器不区分元素类型</dd>
+    <dd>. 实例应用，请参考 <a href="./table.html#nth">table斑马纹</a></dd>
+    <dd>
+      <figure class="code">
+        <figcaption>结构伪类选择器</figcaption>
+        <pre>
+:nth-child(even)//选择序号为偶数的元素
+:nth-child(odd)//选择序号为奇数的元素
+:nth-child(2n)//选择序号为偶数的元素
+:nth-child(2n+1)//选择序号为奇数的元素
+:nth-child(3n)//选择序号为3、6、9等元素
+:nth-child(3n+1)//选择序号为1、4、7、10等元素
+:nth-child(-n+3)//选择序号为3、2、1的元素，前3个；:nth-child(3-n)错误
+:nth-last-child(-n+3)//后3</pre>
+      </figure>
+    </dd>
+    <dd>
+      <table class="tbl-sn tbl-ale">
+        <caption>根据类型选择元素</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>first-of-type()</td>
+          <td>选择指定类型第一个</td>
+        </tr>
+        <tr>
+          <td>last-of-type()</td>
+          <td>选择指定类型最后一个</td>
+        </tr>
+        <tr>
+          <td>nth-of-type()</td>
+          <td>选择指定类型第几个</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>. 根据类型选择符合条件的元素；适合多种元素类型并存的情况</dd>
+    <dd>. 同样可以使用关键字或表达式</dd>
+    <dt>:root选择器</dt>
+    <dd>. 定义 <span class="warn">全局CSS变量</span>，供当前CSS文件所有元素使用</dd>
+    <dd>. 借助函数var()使用/获取定义的变量</dd>
+    <dd>. 方便统一调整</dd>
+    <dd>. 还可以在元素上使用style定义 <span class="warn">内联CSS变量</span>，供当前元素使用，详情请查看<a href="./variable.html">CSS变量</a>一节</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>:root选择器</figcaption>
+        <pre>
+//定义
+:root {
+  --title-h: 100px;
+  --main-color-white: #f3f3f3;
+  --main-color-red: #ff0f5b;
+  --main-color-purple: #be01fe;
+  --main-color-blue: #01b4ff;
+  --main-color-green: #2dfc52;
+  --main-color-orange: #ff7f50;
+  --main-color-gray: #333849;
+}
+//使用
+.warn {
+  font-weight: 600;
+  color: var(--main-color-red);
+}</pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">组合选择器 Combinators</div>
+  <dl class="nav-cont">
+    <dd>. 使用多个选择器选择匹配的元素</dd>
+    <dt>叠加选择器 ( . )</dt>
+    <dd>. 以 <span class="warn">.</span> 分隔，表示在当前样式的基础上，再叠加一个新样式；通常用于JS控制切换状态</dd>
+    <dd>. CCS文件中，新样式必须出现在当前样式的<span class="warn">后面</span></dd>
+    <dd>. 叠加会增加优先级</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>动态类</figcaption>
+        <pre>
+//HTML5
+&lt;div class="box active"&gt;&lt;/div&gt;
+//CSS3
+.box {
+    opacity: 0.5;
+}
+.box.active {
+    opacity: 1;
+}</pre>
+      </figure>
+    </dd>
+    <dt>列表选择器 Selector list( , )</dt>
+    <dd>. 以 <span class="warn">,</span> 分隔，表示样式同时适用于这些元素</dd>
+    <dd>. 一旦列表包含有一个无效选择器，则整个声明都无效[ <span class="warn">经验证，限制已解除</span> ]</dd>
+    <dd>. Multiple selectors share the same declarations</dd>
+    <dd>. The CSS selector list (,) selects all the matching nodes. A selector list is a comma-separated list of
+      selectors</dd>
+    <dd>. Selector lists can also be passed as parameters to some functional CSS pseudo-classes</dd>
+    <dd>. Can improve consistency while reducing the size of style sheets</dd>
+    <dd>. When a selector list contains an invalid selector, the entire style block is ignored, except for the :is()
+      and :where()</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>以下俩个声明等价</figcaption>
+        <pre>
+ul,ol {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:is(ul,ol) {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}</pre>
+      </figure>
+    </dd>
+    <dt>后代选择器 Descendant combinator( &nbsp; )</dt>
+    <dd>. 以 <span class="warn">空格</span> 分隔，从所有后代[子辈、孙辈、...]中选择符合条件的元素</dd>
+    <dd>. The descendant combinator — typically represented by <span class="warn">a single space (" ")</span>
+      character
+      —
+      combines two selectors such that elements matched by the second selector are selected if they have an ancestor
+      (parent, parent's parent, parent's parent's parent, etc.) element matching the first selector.</dd>
+    <dt>直接后代选择器 Child combinator( &gt; )</dt>
+    <dd>. The child combinator (>) is placed between two CSS selectors. It matches only those elements matched by the
+      second selector that are <span class="warn">the direct children</span> of elements matched by the first.</dd>
+    <dd>. 以 <span class="warn">&gt;</span> 分隔，从儿子中选择符合条件的元素</dd>
+    <dd>. 元素的伪元素::before、::after不是其直接后代</dd>
+    <dt id="bro0">兄弟/弟弟选择器 General sibling combinator( ~ )</dt>
+    <dd>. The general sibling combinator (~) separates two selectors and matches all iterations of the second element,
+      that are following the first element (though not necessarily immediately), and are children of the same parent
+      element.</dd>
+    <dd>. 以 <span class="warn">~</span> 分隔，向后选择，从所有弟弟|little brothers中选择符合条件的元素</dd>
+    <dt id="bro1">相邻兄弟/小弟选择器 Adjacent sibling combinator( + )</dt>
+    <dd>. The adjacent sibling combinator (+) separates two selectors and matches the second element only if it
+      <span class="warn">immediately follows</span> the first element, and both are children of the same parent
+    </dd>
+    <dd>. 以 <span class="warn">+</span> 分隔，选择相邻immediately followed的弟弟|little brother；应用非常广泛</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 表单元素<a href="./input.html">input进阶使用</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 详情页Details <a href="./demo/detail.html">Detail</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 手动轮播<a href="./demo/swiper.html">Swiper</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 一路有你<a href="./demo/login1.html">Login</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 手风琴<a href="./demo/accordion.html">Accordion</a></dd>
+  </dl>
+  <div class="chap">其它选择器</div>
+  <dl class="nav-cont">
+    <dd>. 如非必要，建议使用特殊类的方法实现:not()、:is()、:has()、:where()</dd>
+    <dt>:not() 选择器</dt>
+    <dd>. 选中不符合条件的元素</dd>
+    <dd class="tips">
+      <div>Tips</div>
+      <div>The :not() CSS pseudo-class represents elements that do not match a list of selectors. Since it prevents
+        specific items from being selected, it is known as the negation pseudo-class.</div>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>元素彼此之间等间隔排列 - 最后一个&lt;li&gt;不指定margin-right</figcaption>
+        <pre>
+//传统方案
+ul li:not(:last-child) {
+  margin-right: 10px;
+}
+
+//优化方案：使用相邻兄弟选择器实现
+ul li + li {
+  margin-left: 10px;
+}
+
+//优化方案：使用flex的gap实现
+ul {
+  display: flex;
+  gap: 10px;
+}</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>选中不属于&lt;header&gt;或&lt;section&gt;的&lt;h2&gt;；范围中的h2不能省略</figcaption>
+        <pre>
+h2:not(header h2, section h2) {
+  color: #f40;
+}</pre>
+      </figure>
+    </dd>
+    <dt>:is() 选择器</dt>
+    <dd>. 为选择器列表中指定的元素分配样式；共享样式</dd>
+    <dd>. 后代选择器的高级用法；简化代码；而且可以容错；独立写法中，如果有一个语法错误，则所有样式都不生效；:is则可以大胆使用</dd>
+    <dd class="tips">
+      <div>Tips</div>
+      <div>. The :is() CSS pseudo-class function takes a selector list as its argument, and selects any element that can
+        be
+        selected by one of the selectors in that list. This is useful for writing large selectors in a more compact
+        form.
+    </dd>
+    </div>
+    <dd>
+      <figure class="code">
+        <figcaption>:is() 选择器</figcaption>
+        <pre>
+.box h1,
+.box h2,
+.box h3 {
+  color: #f40;
+}
+
+.box :is(h1, h2, h3) {
+  color: #f40;
+}
+
+//或者当前元素是哪些状态，如表单的伪类选择器
+input:is(:hover, :focus) {
+  border: 1px solid #f40;
+  outline: none;
+}</pre>
+      </figure>
+    </dd>
+    <dt>:has() 选择器</dt>
+    <dd>. 选中具备某种关系的元素</dd>
+    <dd>. 如果某个选择器 <span class="warn">有</span> 哪些选择器，则选中当前选择器</dd>
+    <dd>. 可以根据子元素的状态设置父元素的样式，经常被认为是 <span class="warn">父级选择器</span> -referred to as the parent
+      selector；也有看作是家庭选择器，还可以匹配兄弟关系</dd>
+    <dd>. 本质上是一个函数，参数就是和当前元素存在父子关系或兄弟关系的选择器列表，以逗号分隔- a comma-separated list</dd>
+    <dd>. 属于关系型伪类选择器的范畴-The Relational Pseudo-class</dd>
+    <dd class="tips">
+      <div>Tips</div>
+      <div>. This pseudo-class presents a way of selecting a parent element or a previous sibling element with respect
+        to a
+        reference element by taking a relative selector list as an argument.</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="../python/overview.html">试题分割</a> - 相邻的题目以实线分割</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>常见应用</figcaption>
+        <pre>
+//如果包含有一个图形img和一个紧跟着图形的段落p，则选中
+.card:has(img + p) {
+}
+   
+//匹配到包含有&lt;ol&gt;或&lt;ul&gt;的文章
+article:has(ol, ul) {
+}
+    
+//选中直接兄弟是dt的dt
+dt:has(+ dt){
+}
+   
+//选中&lt;h2&gt;，其相邻兄弟是：&lt;p&gt;或类为red的&lt;ul&gt;
+h2:has(+ p, + ul.red) {
+}
+
+//某个ID被选中时
+body:has(#p0:checked) {
+}
+
+//自适应布局-没有--left-width就使用48px；当元素left处于hover状态时，定义--left-width变量为30%
+.grid {
+  display: grid;
+  transition: 300ms;
+  grid-template-columns: var(--left-width, 48px) auto;
+}
+
+.grid:has(.left:hover) {
+  --left-width: 30%;
+}</pre>
+      </figure>
+    </dd>
+    <dt>:where() 选择器</dt>
+    <dd>. 参数是选择器的列表|集合，当某个选择器符合条件时设置对应的样式</dd>
+    <dd>. 对于缩短一个较长的选择器列表非常有用</dd>
+    <dd>. 如果样式使用比较频繁，建议定义为公共类</dd>
+    <dd class="tips">
+      <div>Tips</div>
+      <div>. The :where() CSS pseudo-class function takes a selector list as its argument, and selects any element that
+        can
+        be selected by one of the selectors in that list.</div>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>常见应用</figcaption>
+        <pre>
+//为多个元素指定样式
+:where(.left, .center, .right):hover {
+  background: crimson;
+}
+
+//为&lt;body&gt;和&lt;main&gt;指定水平垂直居中
+:where(body, main) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+//使用公共类更加直观
+.center-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}</pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">优先级</div>
+  <dl class="nav-cont">
+    <dt>说明</dt>
+    <dd>. 不同的选择器，对应的优先级也不尽相同</dd>
+    <dd>. 选择器的优先级会决定样式是否应用到元素：优先级高，选中元素，将应用/覆盖元素样式；优先级低，选不中元素，样式不应用/不覆盖，保持原来样式</dd>
+    <dd>. 样式不生效，一定要检查选择器的优先级，特别是选择器组合使用的时候</dd>
+    <dd>. 单个选择器比较容易；组合选择器最终的优先级要综合计算不同选择器的权值对应的十进制</dd>
+    <dd>. 可以使用!important提升优先级为最高，谨慎使用；某些框架开发中，为了覆盖样式，会使用样式穿刺技术提示优先级</dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>权值分配</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>∞</td>
+          <td>重要选择器 !</td>
+        </tr>
+        <tr>
+          <td>1000</td>
+          <td>行内样式 style</td>
+        </tr>
+        <tr>
+          <td>0100</td>
+          <td>ID选择器 #</td>
+        </tr>
+        <tr>
+          <td>0010</td>
+          <td>类选择器 . | 伪类选择器 : | 属性选择器 []</td>
+        </tr>
+        <tr>
+          <td>0001</td>
+          <td>标签选择器 tag | 伪元素选择器 ::</td>
+        </tr>
+        <tr>
+          <td>0000</td>
+          <td>通配符选择器*</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>样式提升</figcaption>
+        <pre>
+div {
+    color: #f40 !important;
+}</pre>
+      </figure>
+    </dd>
+    <dd class="tips">
+      <div>Tips</div>
+      <div>如非必要，尽量使用更加直观的方式应用类；避免炫技</div>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="./lib/ham.js"></script>
+</body>
+
+</html>

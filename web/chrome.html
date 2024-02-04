@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>浏览器 Chrome</title>
+  <link rel="stylesheet" href="../css/reset2024.css">
+  <link rel="stylesheet" href="../css/common2024.css">
+  <link rel="stylesheet" href="../css/code.css">
+  <link rel="stylesheet" href="../css/sn.css">
+  <!-- <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3870259_d7rdl2c57h.css"> -->
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>浏览器</h1>
+    <span>&commat;Chrome</span>
+  </header>
+  <dl>
+    <dt>下载 Download</dt>
+    <dd>. <a href="https://www.google.cn/intl/zh-cn/chrome/" title="单击下载" class="link">www.google.cn</a></dd>
+    <dt>安装 Install</dt>
+    <dd>. 略</dd>
+    <dt>快捷键 Shortcut</dt>
+    <dd>. 缩放窗口：CTRL+/-</dd>
+    <dd>. 还原窗口：CTRL+0</dd>
+    <dt>开发者视图 Inspect</dt>
+    <dd>. 要学会 <span class="warn">偷</span></dd>
+    <dd>. 在浏览器中，按 F12 打开浏览器的检查功能页，或鼠标右键单击 → 检查，用于调试 Debug页面</dd>
+    <dd>. 默认是上下布局：上面是元素结构和页面功能，下面是元素样式；也可以调整为左右布局</dd>
+    <dt>基本菜单 Menu</dt>
+    <dd class="number">
+      <div>选择元素：如果开发中预期的样式效果没有出现，可以拾取某个元素，在 <span class="warn">样式</span>
+        选项卡中查看样式的具体信息，包括继承的样式、被覆盖的样式和计算|渲染出来的最终样式信息；在
+        <span class="warn">已计算</span> 选项卡中可以查看完整的样式；根据检查情况修改并完善项目
+      </div>
+      <div>切换设备：移动端和桌面端</div>
+    </dd>
+    <dt>标签页 Tabcard</dt>
+    <dd class="number">
+      <div>Element：检查文档/元素结构</div>
+      <div>Console：查看控制台输出：业务开发请多使用log调试</div>
+      <div>Network：网络情况，各种资源图片、样式文件等加载情况</div>
+      <div>Local Storage：本地存储</div>
+      <div>Security：安全等信息</div>
+    </dd>
+    <dd>
+      <figure class="img-sn">
+        <img src="./imgs/F12.png" alt="">
+        <figcaption>上下布局的检查功能页</figcaption>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>无须拼接</figcaption>
+        <pre>
+console.log('a', a, 'b', b, 'c', c );
+console.log({ a, b, c });</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>测试代码运行时间</figcaption>
+        <pre>
+console.time('timer')
+for (let i = 0; i &lt; 1000; i++) {
+  //不要嵌套使用console，会导致计时增加
+}
+console.timeEnd('timer')</pre>
+      </figure>
+    </dd>
+    <dt>真机调试 Debug</dt>
+    <dd>. 本着移动优先的原则，通常要查看项目在真机上的效果，所以真机调试的步骤必不可少[除非明确项目的定位就是桌面端]</dd>
+    <dd class="mt2">1. 环境需求</dd>
+    <dd>. 插件需求：Live Server</dd>
+    <dd>. 网络需求：开发电脑和手机链接同一个WiFi|同一个域</dd>
+    <dd class="mt2">2. 环境配置</dd>
+    <dd>2.1. 查看本机IP地址；按Win+R，打开命令运行窗口，输入cmd，打开控制台/小黑屋，输入ipconfig，查看本机IPv4地址；或者按Win+I，打开系统设置，在网络的本地连接中查看网络信息</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>ipconfig</figcaption>
+        <pre>
+C:\Users\cnplaman>ipconfig
+
+Windows IP 配置
+
+以太网适配器 VMware Network Adapter VMnet1:
+
+   //VMware
+
+以太网适配器 VMware Network Adapter VMnet8:
+
+   //VMware
+
+无线局域网适配器 WLAN:
+
+   连接特定的 DNS 后缀 . . . . . . . :
+   IPv6 地址 . . . . . . . . . . . . : 2408:8220:3434:3330::2
+   IPv6 地址 . . . . . . . . . . . . : 2408:8220:3434:3330:f2c:629f:80e4:3bee
+   临时 IPv6 地址. . . . . . . . . . : 2408:8220:3434:3330:dc54:f31f:ae4f:643e
+   本地链接 IPv6 地址. . . . . . . . : fe80::62d7:b476:7de2:1bef%8
+   IPv4 地址 . . . . . . . . . . . . : 192.168.1.3
+   子网掩码  . . . . . . . . . . . . : 255.255.255.0//here
+   默认网关. . . . . . . . . . . . . : fe80::1%8
+                                       192.168.1.1
+
+以太网适配器 蓝牙网络连接:
+
+   //Bluetooth
+
+C:\Users\cnplaman></pre>
+      </figure>
+    </dd>
+    <dd>2.2. 打开Vs code，点击右下角管理按钮<span class="iconfont icon-sun"></span>，选择设置setting，或者直接按CTRL+,</dd>
+    <dd>2.3. 选择扩展Extension里的Live Server Config，修改主机host为查询到的IPv4地址</dd>
+    <dd><img src="./imgs/host.png" alt=""></dd>
+    <dd>2.4. 重新启动Vs code</dd>
+    <dd class="mt2">3. 真机调试</dd>
+    <dd>. 使用 Open With Live Server打开浏览器</dd>
+    <dd>. 在浏览器的页面中，右键单击 → 为此页面创建QR代码，打开一个二维码，使用手机扫码，即可在手机端预览页面效果</dd>
+    <dd>. 调整并真机预览</dd>
+    <dd class="tips">
+      <div>真机查看效果时，不需要每次扫码，手机端页面不要关闭即可保持实时更新</div>
+      <div>按 win+i 打开系统设置，在网络属性中查看IPv4地址</div>
+    </dd>
+    <dt>测试 Lighthouse</dt>
+    <dd>. Lighthouse 是一个开源的自动化工具，用于改进网络应用的质量</dd>
+    <dd>. 是 Chrome 扩展程序： 检查 → Lighthouse</dd>
+    <dd>. 对HTML页面运行一连串的测试，生成一个有关页面性能的报告</dd>
+    <dd>. 参考失败的测试，采取措施改进应用</dd>
+    <dd><img src="./imgs/lighthouse.png" alt=""></dd>
+    <dd class="example-sn"> 结合浏览器的调试功能，指出下列代码片段的问题</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>调试bug</figcaption>
+        <pre>
+&lt;nav id="main" id='nav'&gt;
+    &lt;ul class="nav-wrap'&gt;
+        &lt;li class="logo main"&gt;
+            &lt;img src="./imgs/1.jpg"&gt;
+        &lt;/li&gt;
+        &lt;li style="color:#f40"&gt;item1&lt;/li&gt;
+        &lt;li&gt;item2&lt;/li&gt;
+        &lt;li&gt;item3&lt;/li&gt;
+        &lt;li&gt;item4&lt;/li&gt;
+        &lt;li&gt;item5&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</pre>
+      </figure>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

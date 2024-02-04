@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单 Form</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>表单</h1>
+        <span>&lt;form&gt;</span>
+    </header>
+    <dl>
+        <dd>&lt;form&gt;和其中的大多数表单元素，基本同HTML5保持一致；具体效果视系统而定</dd>
+        <dd>表单数据提交时，必须指定name；value可以由事件获取</dd>
+        <dd>表单组件繁多，常见的分类如下表</dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>表单常用组件</caption>
+                <tr>
+                    <th>分类</th>
+                    <th>作用</th>
+                </tr>
+                <tr>
+                    <td>&lt;form&gt;</td>
+                    <td>表单；默认使用bindsubmit事件</td>
+                </tr>
+                <tr>
+                    <td>label</td>
+                    <td>用for来改进指定了id的表单组件的可用性</td>
+                </tr>
+                <tr>
+                    <td>&lt;input&gt;</td>
+                    <td>单行输入；原生组件，使用系统字体，无法设置 font-family
+                        <br>
+                        <details>
+                            <summary>type</summary>
+                            <div>text：文本键盘；默认</div>
+                            <div>number：数字键盘</div>
+                            <div>digit：带小数点的数字键盘</div>
+                            <div>idcard：身份证键盘</div>
+                            <div>safe-password：身份证键盘；仅 Webview 支持</div>
+                            <div>password：密码键盘</div>
+                        </details>
+                        <br>
+                        <details>
+                            <summary>confirm-type - 仅适用type='text'；具体效果视系统而定</summary>
+                            <div>send：发送</div>
+                            <div>search：搜索</div>
+                            <div>next：下一个</div>
+                            <div>go：前往</div>
+                            <div>done：完成；默认</div>
+                        </details>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&lt;textarea&gt;</td>
+                    <td>多行输入；默认大小300*150<br>block</td>
+                </tr>
+                <tr>
+                    <td>&lt;button&gt;*</td>
+                    <td>功能强大的按钮<br>建议只设置背景和字体颜色<br>
+                        <details>
+                            <summary>form-type</summary>
+                            <div>submit：提交表单</div>
+                            <div>reset：重置表单</div>
+                        </details>
+                        <br>
+                        <details>
+                            <summary>open-type</summary>
+                            <div>contact：客服；需要绑定客服事件bindcontact</div>
+                            <div>getPhoneNumber：获取用户手机；个人号不可使用</div>
+                            <div>getUserInfo：获取用户信息；从事件bindgetuserinfo回调函数获取用户部分信息</div>
+                            <div>chooseAvatar：获取用户头像；从bindchooseavatar回调函数的detail中返回头像临时地址</div>
+                        </details>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&lt;radio&gt; <br> &lt;radio-group&gt;</td>
+                    <td>单选；需要指定name、value<br>单选组；默认使用bindchange事件；使用事件对象e.detail获取选中的值</td>
+                </tr>
+                <tr>
+                    <td>&lt;checkbox&gt; <br> &lt;checkbox-group&gt;</td>
+                    <td>多选；需要指定name、value<br>多选组；默认使用bindchange事件；在事件对象e.detail中以<span class="warn">数组</span>形式获取选中的值
+                    </td>
+                </tr>
+                <tr>
+                    <td>&lt;picker&gt;*</td>
+                    <td>从底部弹起的滚动选择器</td>
+                </tr>
+                <tr>
+                    <td>&lt;slide&gt;*</td>
+                    <td>滑动选择器</td>
+                </tr>
+                <tr>
+                    <td>&lt;switch&gt;*</td>
+                    <td>开关选择器</td>
+                </tr>
+            </table>
+        </dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>input事件 - 利用事件对象的detail属性获取相应信息</caption>
+                <tr>
+                    <td>bindinput</td>
+                    <td>键盘输入时触发 - 响应文本框的输入</td>
+                </tr>
+                <tr>
+                    <td>bindfocus</td>
+                    <td>输入框聚焦时触发</td>
+                </tr>
+                <tr>
+                    <td>bindblur</td>
+                    <td>输入框失去焦点时触发</td>
+                </tr>
+                <tr>
+                    <td>bindconfirm</td>
+                    <td>点击完成按钮时触发</td>
+                </tr>
+            </table>
+        </dd>
+        <dd class="example-sn">查看常见表单的值</dd>
+        <dd>以注册表单为例：为各元素指定name便于提交数据</dd>
+        <dd>各元素和整个表单的值都在事件对象中e.detail.value</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>wxml</figcaption>
+                <pre>
+&lt;form bindsubmit="formSub"&gt;
+    &lt;input type="text" name='uname' value='' bindinput="getIpt" /&gt;
+    &lt;input type="safe-password" name='upass' value='' bindinput="getPass" /&gt;
+    &lt;radio-group bindchange="getRadio" name='gender'&gt;
+        &lt;radio value="0" id="male" /&gt;&lt;label for="male"&gt;male&lt;/label&gt;
+        &lt;radio value="1" id="female" /&gt;&lt;label for="female"&gt;female&lt;/label&gt;
+    &lt;/radio-group&gt;
+    &lt;checkbox-group bindchange="getCb" name='like'&gt;
+        &lt;checkbox value="eat" id="c0" /&gt;&lt;label for="c0"&gt;c0&lt;/label&gt;
+        &lt;checkbox value="sleep" id="c1" /&gt;&lt;label for="c1"&gt;c1&lt;/label&gt;
+        &lt;checkbox value="play" id="c2" /&gt;&lt;label for="c2"&gt;c2&lt;/label&gt;
+        &lt;checkbox value="sing" id="c3" /&gt;&lt;label for="c3"&gt;c3&lt;/label&gt;
+    &lt;/checkbox-group&gt;
+    &lt;button form-type="submit"&gt;submit&lt;/button&gt;
+&lt;/form&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>js</figcaption>
+                <pre>
+getIpt(e){
+    console.log(e.detail.value);
+},
+getPass(e){
+    console.log(e.detail.value);
+},
+getRadio(e){
+    console.log(e.detail.value);
+},
+getCb(e){
+    console.log(e.detail.value);
+},
+formSub(e){
+    console.log(e.detail.value);
+}</pre>
+            </figure>
+        </dd>
+        <dd class="example-sn">获取用户信息</dd>
+        <dd>用户点击后获取用户信息</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>wxml</figcaption>
+                <pre>&lt;button open-type="getUserInfo" bindgetuserinfo='getInfo'&gt;getInfo&lt;/button&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>js|ts</figcaption>
+                <pre>
+getInfo(e){
+    console.log(e);
+}</pre>
+            </figure>
+        </dd>
+        <dd class="example-sn">打开客服对话框</dd>
+        <dd>用户点击后会打开客服对话框</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>wxml</figcaption>
+                <pre>&lt;button open-type="contact" bindcontact='getContact'&gt;getContact&lt;/button&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>js</figcaption>
+                <pre>
+getContact(e){
+    console.log(e);
+}</pre>
+            </figure>
+        </dd>
+        <dd class="example-sn">选择用户头像</dd>
+        <dd>用户点击后会打开头像选择对话框</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>wxml</figcaption>
+                <pre>&lt;button open-type="chooseAvatar" bindchooseavatar='getAvatar'&gt;getAvatar&lt;/button&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>js</figcaption>
+                <pre>
+getAvatar(e){
+    console.log(e.detail);//http://tmp/bi86Wd1sI41s8ea8eb984c16d03bff787972d38e3ce6.jpg
+}</pre>
+            </figure>
+        </dd>
+        <dt>&lt;picker&gt;</dt>
+        <dd>从底部弹起的滚动选择器</dd>
+        <dt>&lt;slide&gt;</dt>
+        <dd>滑动选择器</dd>
+        <dt>&lt;switch&gt;</dt>
+        <dd>开关选择器</dd>
+    </dl>
+    <div class="chap">数据双向绑定 </div>
+    <dl>
+        <dt>model</dt>
+        <dd>为value添加model修饰符即可实现双向数据绑定</dd>
+        <dd class="code">
+            <pre>&lt;input type="text" model:value='{{val}}' /&gt;</pre>
+        </dd>
+    </dl>
+    <div class="chap">表单数据处理</div>
+    <dl>
+        <dt>普通数据</dt>
+        <dd>原生解析 - 不需要额外中间件；express内置中间件解析，body-parser已废弃</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>数据 - 以json方式提交</figcaption>
+                <pre>
+wx.request({
+    url: 'http://127.0.0.1:3000/form',
+    method:'post',
+    data:{
+        uname:this.data.uname,
+        upass:this.data.upass
+    },
+    success:res=>{
+        console.log(res);
+    },
+    fail:err=>{
+        console.log(err);
+    }
+})</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>中间件 - 解析json数据</figcaption>
+                <pre>
+app.use(express.json())
+app.post('/form', (req, res) => {
+    console.log(req.body);
+})</pre>
+            </figure>
+        </dd>
+        <dd>详细信息，请访问 <a href="./case4.html#reg" class="link">用户注册</a>、<a href="./case4.html#quiz" class="link">问卷调查</a>
+        </dd>
+        <dt>文件</dt>
+        <dd>借助中间件，如multer、formidable，配合API实现</dd>
+        <dt>wx.uploadFile(Object object)</dt>
+        <dd>文件上传</dd>
+        <dd>将本地资源上传到服务器</dd>
+        <dd>客户端发起一个 POST 请求，其中 content-type 为 multipart/form-data</dd>
+        <dt>wx.downloadFile(Object object)</dt>
+        <dd>文件下载</dd>
+        <dd>详细信息，请访问 <a href="./case5.html" class="link">文件上传和下载</a></dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

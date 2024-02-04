@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Browser Object Model</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body {
+      height: auto;
+    }
+
+    .dd-title-item {
+      background-color: #9fcff9;
+      color: #333;
+    }
+
+    .back2top {
+      position: fixed;
+      right: calc((100% - 1000px)/2);
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 4px;
+      width: 50px;
+      height: 50px;
+      border-radius: 4px;
+      background-color: #f40;
+      color: #fff;
+      opacity: 0;
+      text-align: center;
+      text-decoration: none;
+      pointer-events: none;
+    }
+
+    .active {
+      animation: show 0.5s linear forwards;
+      pointer-events: initial;
+    }
+
+    @keyframes show {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media screen and (max-width:768px) {
+      .back2top {
+        right: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header id="el" class="w">
+    <h1>&commat;BOM</h1>
+    <span class="ham iconfont icon-menu"></span>
+    <ul class="nav">
+      <li class="nav-item">概述</li>
+      <li class="nav-item">页面事件</li>
+      <li class="nav-item">元素事件</li>
+      <li class="nav-item">定时事件</li>
+      <li class="nav-item">网络事件</li>
+    </ul>
+  </header>
+  <a class="back2top" href="#el">返回顶部</a>
+  <div class="chap">BOM 概述</div>
+  <dl class="nav-cont">
+    <dt>JS的操作对象分两种：</dt>
+    <dd>DOM：操作HTML/document</dd>
+    <dd>BOM：操作浏览器/window</dd>
+    <dd>注意区分：属性或事件是DOM范畴还是BOM范畴</dd>
+    <dt>BOM</dt>
+    <dd>浏览器对象模型；浏览器对象模型提供了独立于内容的、可以与浏览器窗口进行互动的对象结构</dd>
+    <dd>BOM由多个对象组成，其中代表浏览器窗口的Window对象是BOM的顶层对象，其他对象都是该对象的子对象</dd>
+    <dd>BOM缺乏标准。JS有标准化组织ECMA；DOM有标准化组织W3C</dd>
+    <dd>BOM包含DOM</dd>
+    <dt>window</dt>
+    <dd>.Window是顶级对象</dd>
+    <dd>.属性和事件在使用时，可以略去window关键字。如属性scrollY；方法：alert、prompt、setTimeout、setInterval等</dd>
+    <dd>.部分属性、方法和DOM的属性功能相同，可以根据需求选择</dd>
+    <dt>window常用属性</dt>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>scrollY</td>
+          <td>页面到window的顶部偏移；同DOM的scrollTop</td>
+        </tr>
+        <tr>
+          <td>pageYOffset</td>
+          <td>window的页面顶部偏移</td>
+        </tr>
+        <tr>
+          <td>innerHeight</td>
+          <td>window内部页面高度；和DOM的document.documentElement.clientHeight;相同</td>
+        </tr>
+        <tr>
+          <td>location</td>
+          <td>包括当前页面host、hostname、href、pathname、port、protocol等一系列属性<br>可读、可写；利用href属性可以实现页面跳转<br>&lt;a&gt;标签跳转 | 脚本跳转
+          </td>
+        </tr>
+        <tr>
+          <td>history</td>
+          <td>访问历史<br>
+            history.back() - 等同于在浏览器点击后退按钮<br>
+            history.forward() - 等同于在浏览器中点击前进按钮</td>
+        </tr>
+        <tr>
+          <td>Navigator</td>
+          <td>客户端/浏览器的相关属性<br>
+            "Netscape" 是 IE11、Chrome、Firefox 以及 Safari 的应用程序名称的统称。</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>]
+      在开发者视图中查看当前页面location、history、Navigator信息，并使用history前进forward()和后退back()浏览页面</dd>
+    <dd>
+      <pre>
+console.log(window.location);
+console.log(window.history);
+console.log(window.navigator);
+console.log(window.navigator.userAgent);</pre>
+    </dd>
+    <dd>
+      <pre>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.42</pre>
+    </dd>
+    <dt>window传统事件</dt>
+    <dd>.较少使用</dd>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>open()</td>
+          <td>打开窗口；默认是_blank</td>
+        </tr>
+        <tr>
+          <td>close()</td>
+          <td>关闭窗口；只能关闭使用open()打开的窗口；兼容性差，基本不用</td>
+        </tr>
+        <tr>
+          <td>write()</td>
+          <td>输出；[Violation] Avoid using document.write().</td>
+        </tr>
+        <tr>
+          <td>alert()</td>
+          <td>警告对话框</td>
+        </tr>
+        <tr>
+          <td>prompt()</td>
+          <td>信息输入对话框；获得的都是字符串</td>
+        </tr>
+        <tr>
+          <td>confirm()</td>
+          <td>确认对话框</td>
+        </tr>
+        <tr>
+          <td>print()</td>
+          <td>打印</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 单击按钮打开baidu</dd>
+    <dd>
+      <pre>
+let btn = document.querySelector('button');
+btn.addEventListener('click', () => {
+  open('http://www.baidu.com', '_blank');
+})</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 查看提示信息类型</dd>
+    <dd>
+      <pre>
+let age = window.prompt('your age');
+console.log(typeof (age));</pre>
+    </dd>
+    <dd>.转化数据类型</dd>
+    <dd>
+      <pre>
+let age = parseInt(window.prompt('your age'));
+console.log(typeof (age));</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 输入一个小于10的数字，求其阶层n!</dd>
+    <dd>
+      <pre>
+function fn(n) {
+  // if (n == 0) {
+  //   return 1;
+  // } else {
+  //   return n * fn(n - 1);
+  // }
+  return n == 0 ? 1 : n * fn(n - 1);
+}
+let n = parseInt(window.prompt('请输入1个小于10的数字'))
+window.alert(fn(n));</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 支付确认-点击支付并确认后跳转到支付成功页面</dd>
+    <dd>[拓展]支付成功页面3秒后返回主页，也可以单击立即按钮返回主页</dd>
+    <dd>
+      <pre>
+btn.onclick = function () {
+  let res = window.confirm('确认要支付吗？');
+  console.log(res);
+  if (res) {
+    // window.alert('zhifu success');
+    //立即返回
+    //window.location.href = './result.html'
+    //延时返回
+    setTimeout(() => {
+      window.location.href = 'http://www.baidu.com';
+    }, 3000);
+  }
+}</pre>
+    </dd>
+  </dl>
+  <div class="chap">页面事件</div>
+  <dl class="nav-cont">
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>onload/load</td>
+          <td>页面加载完毕，可以获取元素</td>
+        </tr>
+        <tr>
+          <td>onscroll/scroll</td>
+          <td>页面滚动</td>
+        </tr>
+        <tr>
+          <td>onresize/resize</td>
+          <td>页面缩放</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>1. 加载完毕 onload</dd>
+    <dd>.为了保证JS执行时，相关的元素已经准备完毕，JS代码通常写在&lt;body&gt;最后面。如果使用onload就可以把代码放在任何地方</dd>
+    <dd>.如果加载内容过多，onload会占用更多时间，影响用户体验。可以采用DOMContentLoaded方法。只要DOM框架出来即可，不需要渲染CSS/FLASH/图片，且不影响交互</dd>
+    <dd>.如果两个事件都定义了，则先执行DOMContentLoaded再执行onload</dd>
+    <dd>
+      <pre>
+window.onload = function () { 
+    //... ...
+}</pre>
+    </dd>
+    <dd>
+      <pre>
+window.addEventListener('DOMContentLoaded', () => { 
+    //... ...
+})</pre>
+    </dd>
+    <dd class="mt2">2. 窗口缩放 onresize</dd>
+    <dd>.窗口尺寸/大小发生变化触发事件</dd>
+    <dd>.响应式布局经常用到</dd>
+    <dd>
+      <pre>
+window.addEventListener('resize', () => {
+    //... ...
+})</pre>
+    </dd>
+    <dd class="mt2">3. 窗口滚动 onscroll</dd>
+    <dd>.只有当出现滚动条时，scroll事件才会触发</dd>
+    <dd>.利用DOM的scrollTop或window的scrollY进行特别的设计，如调整字体大小、延时出现返回顶部按钮、调整导航条样式等等</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 动态调整字体大小</dd>
+    <dd>.20是选定的参考字体大小；通常选择16px，可以根据需要调整</dd>
+    <dd>.320是选定的设备宽度，通常参照苹果某个型号，如iPhone6/7/8是375px</dd>
+    <dd>.40是最大字号</dd>
+    <dd>.如果使用16px、375px，检查元素并使用iPhone6/7/8，发现HTML字体大小被动态设置为16px</dd>
+    <dd>.以下代码要放到&lt;head&gt;，优先执行</dd>
+    <dd>
+      <pre>
+&lt;script&gt;
+  let setFontSize = () => {
+    let w = document.documentElement.clientWidth;
+    let size = (20 * (w / 320) > 40 ? 40 + 'px' : (20 * (w / 320) + 'px'))
+    document.documentElement.style.fontSize = size;
+  }
+  window.addEventListener('load', setFontSize)
+  window.addEventListener('resize', setFontSize)
+&lt;/script&gt;</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 返回顶部按钮</dd>
+    <dd>.分别利用DOM的scrollTop和window的scrollY查看页面滚动</dd>
+    <dd>.页面位于顶端时，返回按钮不出现，且取消事件响应</dd>
+    <dd>.当页面滚动到一定位置，如一个窗口内部高度时，返回按钮出现，可以响应事件，点击可以返回顶部</dd>
+    <dd>.添加帧动画，使返回按钮的出现更顺滑</dd>
+    <dd>.还可以使用window的pageYOffset、innerHeight属性判断</dd>
+    <dd>
+      <pre>
+window.addEventListener('scroll', () => {
+    let stop = document.documentElement.scrollTop || document.body.scrollTop;
+    console.log('scrollTop', stop.toFixed(0));
+    console.log('scrollY', window.scrollY.toFixed(0));
+    console.log('pageYOffset', window.pageYOffset.toFixed(0));
+    back2top.classList.toggle('active', scrollY > innerHeight)
+})</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 页面滚动禁止</dd>
+    <dd>.移动端弹出菜单时，通常应禁止页面继续滚动；如汉堡菜单#ham点击时，出现顶层菜单，下方的页面不应该再响应事件和滚动；再次单击，顶层菜单消失，下方页面恢复正常；通过汉堡菜单的单击，切换页面的隐藏类</dd>
+    <dd>[ CSS ]</dd>
+    <dd>
+      <pre>
+.hidden {
+    overflow: hidden;
+}</pre>
+    </dd>
+    <dd>[ JavaScript ]</dd>
+    <dd>
+      <pre>
+ham.addEventListener('click', function () {
+    //... ...
+    document.body.classList.toggle('hidden')
+})</pre>
+    </dd>
+  </dl>
+  <div class="chap">元素事件</div>
+  <dl class="nav-cont">
+    <dt>说明</dt>
+    <dd>.获取DOM元素；参考浏览器：检查F12->计算属性标签页</dd>
+    <table>
+      <tr>
+        <th>类别</th>
+        <th>说明</th>
+      </tr>
+      <tr>
+        <td>获取样式</td>
+        <td>getComputedStyle(el)</td>
+      </tr>
+    </table>
+  </dl>
+  <div class="chap">定时事件</div>
+  <dl class="nav-cont">
+    <dt>说明</dt>
+    <dd>.高频事件</dd>
+    <dd>.定时器：可以定时触发，也可以延迟触发；时间单位是毫秒；需要执行的业务以回调函数callback的形式给出；</dd>
+    <dd>.为节省系统开销，事件处理完毕应清除定时器；需指定id</dd>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>setInterval()</td>
+          <td>按照时间间隔定时执行</td>
+        </tr>
+        <tr>
+          <td>clearInterval()</td>
+          <td>清除定时器</td>
+        </tr>
+        <tr>
+          <td>setTimeout()</td>
+          <td>延迟执行；仅执行1次</td>
+        </tr>
+        <tr>
+          <td>clearTimeout()</td>
+          <td>清除延迟</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <pre>
+//固定时间间隔触发函数：setInterval
+let timeId = setInterval(cb, [time]);
+clearInterval(timeId)</pre>
+    </dd>
+    <dd>
+      <pre>
+//定时/延迟触发函数：setTimeout
+let timeId = setTimeout(cb, [time]);
+clearTimeout(timeId)</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 数字时钟</dd>
+    <dd>1. 原生实现</dd>
+    <dd>2. <a href="http://momentjs.cn/" target="_blank" class="link">momentjs</a>实现</dd>
+    <dd class="dd-diag-item dd-case-item">
+      <span id='yy'></span>-<span id='mon'></span>-<span id='day'></span>
+      <span id='week'></span>
+      <span class="timer-txt"></span>
+    </dd>
+    <dd>[JS]</dd>
+    <dd>
+      <pre>
+let week_arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+let year = document.querySelector('#yy');
+let mon = document.querySelector('#mon');
+let day = document.querySelector('#day');
+let week = document.querySelector('#week');
+let timerTxt = document.querySelector('.timer-txt');
+let inter = setInterval(clock, 1000)
+function clock() {
+  let date = new Date();
+  year.innerHTML = date.getFullYear();
+  mon.innerHTML = date.getMonth() + 1;
+  day.innerHTML = date.getDate();
+  week.innerHTML = week_arr[date.getDay()];
+  timerTxt.innerHTML = double2(date.getHours()) + ':' + double2(date.getMinutes()) + ':' + double2(date.getSeconds());
+}
+function double2(num) {
+  return num > 9 ? num : '0' + num;
+}
+clock();</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 图片时钟</dd>
+    <dd>. 通过更改&lt;img&gt;的src切换图片</dd>
+    <dd>. 不断向服务器请求图片</dd>
+    <dd>
+      <pre>
+time.split('').forEach((num, ind) => {
+  imgs[ind].style.backgroundImage = `url(../imgs/number/number-${num}.png)`;
+})</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 数字时钟 <a href="../demo/clock.html">Clock</a>、<a
+        href="../demo/clock_adv.html">Clock</a>、<a href="https://codepen.io/glpla/full/poYjBZY">Clock -
+        CodePen</a></dd>
+    <dd>[CSS]</dd>
+    <dd>
+      <pre>
+.clock div::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+
+.hour::before {
+  width: 4px;
+  margin-top: 30%;
+  height: 25%;
+  background-color: #000;
+}
+
+.min::before {
+  width: 2px;
+  margin-top: 20%;
+  height: 35%;
+  background-color: #ff0;
+}
+
+.sec::before {
+  width: 1px;
+  margin-top: 10%;
+  height: 45%;
+  background-color: #fff;
+}</pre>
+    </dd>
+    <dd>[JS]</dd>
+    <dd>
+      <pre>
+let date, h, m, s;
+let oHour = document.querySelector('.hour');
+let oMin = document.querySelector('.min');
+let oSec = document.querySelector('.sec');
+function getTime() {
+  date = new Date();
+  h = date.getHours() * 30;
+  m = date.getMinutes() * 6;
+  s = date.getSeconds() * 6;
+  oHour.style.transform = `rotateZ(${h + m / 12}deg)`;
+  oMin.style.transform = `rotateZ(${m}deg)`;
+  oSec.style.transform = `rotateZ(${s}deg)`;
+
+}
+getTime();
+let tId = setInterval(getTime, 1000);</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 日期倒计时</dd>
+    <dd class="dd-diag-item dd-case-item">
+      <span id="ref-time" data-time="2022-09-10">距离2023-07-01 00:00:00还有</span><br>
+      <span><span id="cd"></span>天<span id="ch"></span>小时<span id="cm"></span>分钟<span id="cs"></span>秒</span>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 秒表倒计时</dd>
+    <dd class="dd-diag-item dd-case-item">
+      <span id="cds">10</span><br>
+      <span>10秒倒计时</span>
+    </dd>
+  </dl>
+  <div class="chap">网络事件</div>
+  <dl class="nav-cont">
+    <dt>说明</dt>
+    <dd>.网络链接状态检测</dd>
+    <dd>.状态变化时才会触发</dd>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>online</td>
+          <td>网络链接</td>
+        </tr>
+        <tr>
+          <td>offline</td>
+          <td>网络断开</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 网络事件</dd>
+    <dd>
+      <pre>
+window.addEventListener('online', () => {
+    console.log('online');
+})
+window.addEventListener('offline', () => {
+    console.log('offline');
+})</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="../lib/ham.js"></script>
+  <script>
+    // scroll
+    let back2top = document.querySelector('.back2top')
+    window.addEventListener('scroll', () => {
+      let stop = document.documentElement.scrollTop || document.body.scrollTop;
+      back2top.classList.toggle('active', scrollY > innerHeight)
+    })
+    // clock
+    let week_arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+    let year = document.querySelector('#yy');
+    let mon = document.querySelector('#mon');
+    let day = document.querySelector('#day');
+    let week = document.querySelector('#week');
+    let timerTxt = document.querySelector('.timer-txt');
+    let inter = setInterval(clock, 1000)
+    function clock() {
+      let date = new Date();
+      year.innerHTML = date.getFullYear();
+      mon.innerHTML = date.getMonth() + 1;
+      day.innerHTML = date.getDate();
+      week.innerHTML = week_arr[date.getDay()];
+      timerTxt.innerHTML = double2(date.getHours()) + ':' + double2(date.getMinutes()) + ':' + double2(date.getSeconds());
+    }
+    function double2(num) {
+      return num > 9 ? num : '0' + num;
+    }
+    clock();
+
+    // count down
+    let cd = document.querySelector('#cd');
+    let ch = document.querySelector('#ch');
+    let cm = document.querySelector('#cm');
+    let cs = document.querySelector('#cs');
+    let oldday = new Date('2023-07-01 00:00:00');
+    // let cinter = setInterval(cdown, 1000);
+    function cdown() {
+      let newday = new Date()
+      let secs = parseInt((oldday - newday) / 1000)
+      if (secs < 0) {
+        clearInterval(cinter)
+        return
+      }
+      cd.innerHTML = parseInt(secs / 60 / 60 / 24)
+      ch.innerHTML = parseInt(secs / 60 / 60 % 24)
+      cm.innerHTML = parseInt(secs / 60 % 60)
+      cs.innerHTML = secs % 60 > 9 ? secs % 60 : '0' + secs % 60
+    }
+    cdown()
+    // cds
+    let cds = document.querySelector('#cds')
+    let time = 10
+    let cdsinter = setInterval(() => {
+      time--
+      if (time < 0) {
+        clearInterval(cdsinter)
+        return
+      }
+      cds.innerHTML = time
+    }, 1000)
+  </script>
+</body>
+
+</html>

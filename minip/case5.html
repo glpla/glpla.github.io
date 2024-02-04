@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>头像上传下载 upload/download</title>
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="./css/case.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>Upload VS Download</h1>
+    </header>
+    <dl>
+        <dt>内容</dt>
+        <dd>文件上传和下载</dd>
+        <dt>目的</dt>
+        <dd>进一步熟悉资源服务器的搭建</dd>
+        <dd>进一步熟悉网络请求的基本过程</dd>
+        <dd>掌握利用中间件实现文件的上传和下载</dd>
+        <dt>原理</dt>
+        <dd>文件上传的数据类型是multipart/form-data</dd>
+        <dt>要求</dt>
+        <dd class="number">
+            <div>按照以下步骤分别完成文件的上传和下载</div>
+            <div>独立完成</div>
+        </dd>
+        <dt>中间件</dt>
+        <dd>1. <a href="https://www.npmjs.com/package/formidable#readme" class="link">formidable</a></dd>
+        <dd>A Node.js module for parsing form data, especially <span class="warn">file uploads</span>.</dd>
+        <dd>2. <a href="https://www.npmjs.com/package/multer#readme" class="link">multer</a>*</dd>
+        <dd>Multer is a node.js middleware for handling <span class="warn">multipart/form-data</span>, which is
+            primarily used for uploading files. It is written on top of busboy for maximum efficiency.</dd>
+        <dd>Multer adds a body object and a file or files object to the request object:</dd>
+        <dd>The <span class="warn">body</span> object contains the values of the <span class="warn">text</span> fields
+            of the form.</dd>
+        <dd>the <span class="warn">file</span> or files object contains the <span class="warn">files</span> uploaded via
+            the form.</dd>
+        <dd>. upload.none()：only text field</dd>
+        <dd>. upload.single(file)：single file</dd>
+        <dd>. upload.array()：multiple files</dd>
+    </dl>
+    <div class="chap">uploadFile</div>
+    <dl>
+        <dd class="number">
+            <div>安装依赖 - 推荐使用cnpm</div>
+            <pre class="code">npm install multer --save</pre>
+            <div>在服务脚本中引入并指定上传目录；上传目录要提前创建好</div>
+            <p>Multer accepts an options object, the most basic of which is the dest property, which tells Multer where
+                to upload the files. In case you omit the options object, the files will be kept in memory and never
+                written to disk</p>
+            <pre class="code">
+const multer = require('multer')
+const upload = multer({ dest: 'upload/' })</pre>
+            <div>响应路由 - 以单文件为例</div>
+            <p>单文件上传single(name)；name是请求中指定的name属性，即：只接收请求中name属性指定的文件</p>
+            <p>req.file可以获取到具体的文件信息</p>
+            <p>默认情况下，只是简单的讲文件上传到指定目录；不会解析文件信息，如文件名或文件后缀</p>
+            <pre class="code">
+app.post('/upload', upload.single('image'), (req, res) => {
+    console.log(req.file)
+})</pre>
+            <pre class="code">
+{
+    fieldname: 'image',
+    originalname: 'XG7mQxuM7nYJ787bce43d31211e2a9fb482c28888418.png',
+    encoding: '7bit',
+    mimetype: 'image/png',
+    destination: 'upload',
+    filename: '7d9d07bdadd775e054e0e0e00fe2d444',
+    path: 'upload\\7d9d07bdadd775e054e0e0e00fe2d444',
+    size: 91117
+}</pre>
+            <div>wxml - 先选择图片预览再上传</div>
+            <pre class="code">
+&lt;image class="img" src="{{img}}" mode="aspectFill" /&gt;
+&lt;button class="btn r210" bind:tap='chooseFile'&gt;chooseFile&lt;/button&gt;
+&lt;button class="btn r70" bind:tap='upFile'&gt;upFile&lt;/button&gt;</pre>
+            <div>js - 上传事件处理函数</div>
+            <p>指定上传文件路径：从图像预览中获取，是一个临时路径</p>
+            <p>指定路由；不是文件上传的路径位置</p>
+            <p>指定name属性，便于服务器分辨</p>
+            <p>指定header的内容类型为multipart/form-data</p>
+            <pre class="code">
+upFile() {
+    wx.uploadFile({
+        filePath: this.data.fileTempPath,
+        name: 'image',
+        url: 'http://127.0.0.1:3000/upload',
+        header:{
+            'content-type':'multipart/form-data'
+        },
+        success: res => {
+            console.log(res);
+        },
+        fail: err => {
+            console.log(err);
+        }
+    })
+}</pre>
+            <div>启动服务；运行小程序；选择图片并上传，在服务器上传目录中可以看到上传的文件：没有文件名和后缀</div>
+            <div>使用DiskStorage配置可以更好控制上传细节，如改名；有了DiskStorage，可以放弃dest配置</div>
+            <p>需要解析获取文件扩展名，引入path包</p>
+            <p>使用时间戳为上传图片拼接名字</p>
+            <div>完整服务端代码server.js如下</div>
+            <pre class="code">
+const express = require('express')
+const multer = require('multer')
+const path = require('path')
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, __dirname + '/upload')
+    },
+    filename: (req, file, cb) => {
+        let ext = path.extname(file.originalname)
+        cb(null, file.fieldname+Date.now()+ ext)
+    }
+})
+
+const upload = multer({
+    storage: storage
+})
+
+const port = 3000
+const app = express()
+
+app.post('/upload', upload.single('image'), (req, res) => {
+    console.log(req.file)
+    res.send(req.file)
+})
+
+app.listen(port, () => {
+    console.log('server now is at 127.0.0.1:3000');
+})</pre>
+            <div>启动服务器，运行小程序，选择图片并上传；在服务器目录下看到使用了时间戳的完整文件名字</div>
+            <pre class="code">
+{
+    fieldname: 'image',
+    originalname: 'bYmNOVO35pLd787bce43d31211e2a9fb482c28888418.png',
+    encoding: '7bit',
+    mimetype: 'image/png',
+    destination: 'E:\\nodeServer/upload',
+    filename: 'image1706875478704.png',
+    path: 'E:\\nodeServer\\upload\\image1706875478704.png',
+    size: 91117
+}</pre>
+        </dd>
+    </dl>
+    <div class="chap">downloadFile</div>
+    <dl>
+        <dt>说明</dt>
+        <dd>从服务器下载资源，需要指定静态资源static</dd>
+        <dd>上传成功后，返回当前文件的服务器地址</dd>
+        <dd>完整的上传下载代码如下</dd>
+        <dd>
+            <pre class="code">
+const express = require('express')
+const multer = require('multer')
+const path = require('path')
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, __dirname + '/upload')
+    },
+    filename: (req, file, cb) => {
+        let ext = path.extname(file.originalname)
+        cb(null, file.fieldname+Date.now()+ ext)
+    }
+})
+
+const upload = multer({
+    storage: storage
+})
+
+const port = 3000
+const app = express()
+
+app.use(express.static('upload/'))
+
+app.post('/upload', upload.single('image'), (req, res) => {
+    console.log(req.file)
+    res.send({
+        err: 0,
+        url: 'http://127.0.0.1:3000/upload/' + req.file.filename
+    })
+})
+
+app.listen(port, () => {
+    console.log('server now is at 127.0.0.1:3000');
+})</pre>
+        </dd>
+    </dl>
+    <footer>
+        <img src="../imgs/avatar.jpg" alt="">
+        <span>Best Wishes &copy; glpla 2024</span>
+    </footer>
+</body>
+
+</html>

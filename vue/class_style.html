@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>样式 class vs style</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>样式</h1>
+        <span>class vs style</span>
+    </header>
+    <dl>
+        <dt>Overview</dt>
+        <dd>CSS class 列表和内联样式 style 都是 attribute，使用 v-bind 将它们和动态的 <span class="warn">字符串</span> 绑定</dd>
+        <dd>v-bind:可以简写为:</dd>
+        <dd>除了字符串外，表达式的值也可以是 <span class="warn">对象</span> 或 <span class="warn">数组</span></dd>
+        <dd>绑定类和静态添加的类不会冲突，最终会叠加在一起进行渲染</dd>
+        <dd>注意双引号和单引号的配套使用</dd>
+    </dl>
+    <div class="chap">:style</div>
+    <dl>
+        <dt>说明</dt>
+        <dd class="example-sn"></dd>
+    </dl>
+    <div class="chap">:class</div>
+    <dl>
+        <dt>说明</dt>
+        <dd>. 根据条件决定是否使用某个类</dd>
+        <dd>. 开关以布尔数据表示；为真时，使用开关类；为假时，不使用开关类</dd>
+        <dd>. 开关以对象的形式使用</dd>
+        <dd>. 可以是一个开关，如{ active: isActive }或多个开关{ active: isActive, done: isDone}</dd>
+        <dd>. 多个开关通常以数据对象的形式表示</dd>
+        <dd>. 还可以采用更为灵活的计算属性</dd>
+        <dd>. 可以使用三元表达式有条件地渲染某个 class</dd>
+        <dd class="example-sn">内联字面量开关类</dd>
+        <dd>script</dd>
+        <dd class="code">
+            <pre>const isActive = ref(true)</pre>
+        </dd>
+        <dd>template</dd>
+        <dd>
+            <pre>&lt;div :class="{ active: isActive }"&gt;hi,there.&lt;/div&gt;</pre>
+        </dd>
+        <dd>style</dd>
+        <dd class="code">
+            <pre>
+.active {
+    color: #f40;
+}</pre>
+        </dd>
+        <dd>因为数据isActive为真true，所以渲染结果为红色[使用active类]；data-v-e17ea971是vue系统自动添加以便区分的</dd>
+        <dd class="code">
+            <pre>&lt;div class="active" data-v-e17ea971=""&gt;hi,there.&lt;/div&gt;</pre>
+        </dd>
+        <dd class="example-sn">对象开关类</dd>
+        <dd>script</dd>
+        <dd class="code">
+            <pre>
+const isOn = reactive({
+    active: false,
+    done: true
+})</pre>
+        </dd>
+        <dd>template</dd>
+        <dd class="code">
+            <pre>&lt;div :class="isOn"&gt;hi,there.&lt;/div&gt;</pre>
+        </dd>
+        <dd>style</dd>
+        <dd class="code">
+            <pre>
+.active {
+    color: #f40;
+}
+
+.done {
+    font-weight: 600;
+}</pre>
+        </dd>
+        <dd>因为active为假，done为真，所以最后渲染结果为加粗</dd>
+        <dd class="code">
+            <pre>&lt;div class="done" data-v-e17ea971=""&gt;hi,there.&lt;/div&gt;</pre>
+        </dd>
+        <dd class="example-sn">计算属性开关类</dd>
+        <dd>script；执行结果同上</dd>
+        <dd class="code">
+            <pre>
+const isActive = ref(false)
+const isDone = ref(true)
+const isOn = computed(() => ({
+    active: isActive.value,
+    done: isDone.value
+}))</pre>
+        </dd>
+        <dd class="example-sn">三元表达式开关类</dd>
+        <dd>script</dd>
+        <dd class="code">
+            <pre>const isActive = ref(true)</pre>
+        </dd>
+        <dd>template</dd>
+        <dd class="code">
+            <pre>&lt;div :class="isActive ? 'bold' : 'normal'"&gt;hi,there.&lt;/div&gt;</pre>
+        </dd>
+        <dd>style</dd>
+        <dd class="code">
+            <pre>
+.bold {
+    font-weight: 600;
+}
+
+.normal {
+    font-weight: normal;
+}</pre>
+        </dd>
+        <dd>因为isActive为true，所以渲染结果为加粗</dd>
+        <dd class="code">
+            <pre>&lt;div class="bold" data-v-e17ea971=""&gt;hi,there.&lt;/div&gt;</pre>
+        </dd>
+        <dd class="example-sn">综合案例 - 单击菜单列表，对应的菜单项高亮</dd>
+        <dd>script</dd>
+        <dd class="code">
+            <pre>
+const list = ref(['home', 'product', 'about'])
+const curIndex = ref(0)
+const sel = (ind) => {
+    console.log(ind);
+    curIndex.value = ind
+}</pre>
+        </dd>
+        <dd>template</dd>
+        <dd class="code">
+            <pre>
+&lt;ul&gt;
+    &lt;li v-for="item, ind in list" :class="{ active: curIndex == ind }" @click="sel(ind)"&gt;{{ item }}&lt;/li&gt;
+&lt;/ul&gt;</pre>
+        </dd>
+        <dd>style</dd>
+        <dd class="code">
+            <pre>
+.active {
+    color: #f40;
+}</pre>
+        </dd>
+    </dl>
+    <div class="chap">作用域 scope</div>
+    <dl>
+        <dt>说明</dt>
+        <dd>通常可以使用scoped指定样式仅仅作用于当前组件。但是会增加额外的开销。检查元素可以发现，每个样式是通过属性的方式进行选择</dd>
+        <dd>解决的方法：为组件的根节点指定一个特有的类。如.nav。推荐以组件名字命名这个类；因为组件的功能各不相同，所以很容易保证组件类的唯一性</dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片裁剪 Clip-path</title>
+  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="./css/effect.css">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Clip-path</h1>
+    <span class="ham iconfont icon-menu"></span>
+    <nav class="nav">
+      <a href="" class="nav-item">inset</a>
+      <a href="" class="nav-item">circle</a>
+      <a href="" class="nav-item">eclipse</a>
+      <a href="" class="nav-item">polygon</a>
+      <a href="" class="nav-item">Cases</a>
+    </nav>
+  </header>
+  <dl>
+    <dt>说明</dt>
+    <dd>. 按照指定方式裁剪图像</dd>
+    <dd>. 阴影、边框等会被切掉</dd>
+    <dd>. 裁剪方式：圆circle、椭圆eclipse、多边形polygon等等</dd>
+    <dt>属性</dt>
+    <dd>. clip-source = url</dd>
+    <dd>. basic-shape = inset | circle | ellipse | polygon</dd>
+    <dd>. geometry-box = shape-box | fill-box | stroke-box | view-box</dd>
+    <dt class="nav-cont">矩形 inset 裁剪</dt>
+    <dd>. 5个参数：上右下左和圆角大小</dd>
+    <dd class="basic"><img class="cp-img0" src="./imgs/1.jpg" alt=""></dd>
+    <dd>
+      <pre>
+.cp-img0 {
+    clip-path: inset(20px round 10px);
+}</pre>
+    </dd>
+    <dt class="nav-cont">圆形 circle 裁剪</dt>
+    <dd>. 2个参数：圆的半径；圆的位置，默认是图像中心</dd>
+    <dd class="basic"><img class="cp-img10" src="./imgs/1.jpg" alt=""></dd>
+    <dd>
+      <pre>
+.cp-img10 {
+    clip-path: circle(50%);
+}</pre>
+    </dd>
+    <dd class="basic"><img class="cp-img11" src="./imgs/1.jpg" alt=""></dd>
+    <dd>
+      <pre>
+.cp-img10 {
+    clip-path: circle(50% at 0 50%);
+}</pre>
+    </dd>
+    <dt class="nav-cont">椭圆 eclipse 裁剪</dt>
+    <dd>. 3个参数：椭圆的x轴、椭圆的y轴和椭圆中心，默认是图形中心</dd>
+    <dd class="basic"><img class="cp-img20" src="./imgs/1.jpg" alt=""></dd>
+    <dd>
+      <pre>
+.cp-img20 {
+    clip-path: ellipse(50% 50%);
+}</pre>
+    </dd>
+    <dd class="basic"><img class="cp-img21" src="./imgs/1.jpg" alt=""></dd>
+    <dd>
+      <pre>
+.cp-img21 {
+    clip-path: ellipse(50% 50% at 0 50%);
+}</pre>
+    </dd>
+    <dt class="nav-cont">多边形 polygon 裁剪</dt>
+    <dd>. 裁剪的顶点顺序不做要求，按照一定的方向即可</dd>
+    <dd>1. 菱形</dd>
+    <dd class="basic"><img class="cp-img3" src="./imgs/1.jpg" alt=""></dd>
+    <dd>
+      <pre>
+.cp-img3 {
+    clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}</pre>
+    </dd>
+    <dd>2. 三角形</dd>
+    <dd>. 还可以使用0大小粗边框元素创建三角形，见 <a href="./border.html"> 边框</a>一节</dd>
+    <dd class="basic"><img class="cp-img4" src="./imgs/1.jpg" alt=""></dd>
+    <dd>
+      <pre>
+.cp-img4 {
+    clip-path: polygon(50% 0, 0 100%, 100% 100%);
+}</pre>
+    </dd>
+    <dd>或</dd>
+    <dd>
+      <pre>
+.cp-img4 {
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}</pre>
+    </dd>
+    <dd>或</dd>
+    <dd>
+      <pre>
+.cp-img4 {
+    clip-path: polygon(0 100%, 50% 0%, 100% 100%);
+}</pre>
+    </dd>
+  </dl>
+  <div class="chap">案例 Cases</div>
+  <dl class="nav-cont">
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 图文混排</dd>
+    <dd>[ 知识点 ]</dd>
+    <dd>. clip-path</dd>
+    <dd>. float</dd>
+    <dd>. shape-outside</dd>
+    <dd class="mt2">
+      <img class="cp-img5" src="./imgs/1.jpg" alt="">
+      <img class="cp-img6" src="./imgs/1.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi unde laudantium dicta ullam ab minus
+        numquam qui totam deleniti eligendi a molestiae, voluptas aliquid exercitationem necessitatibus
+        consectetur omnis natus debitis maiores dignissimos velit quibusdam! Velit labore eligendi error et
+        eaque dolorem illum doloremque similique sequi est, voluptatum nemo officiis, sit atque quisquam itaque.
+        Odit magnam nesciunt nostrum error perspiciatis. Atque harum earum velit tenetur ut ipsa repudiandae
+        neque cupiditate reprehenderit magnam, aliquam eius ea dolor aliquid necessitatibus cum aperiam odit
+        unde esse ex illo? Eveniet.</p>
+    </dd>
+    <dd>
+      <pre>
+.cp-img5 {
+    float: left;
+    width: 30%;
+    width: 48%;
+    clip-path: polygon(0 0, 50% 50%, 0 100%);
+    shape-outside: polygon(0 0, 50% 50%, 0 100%);
+}
+
+.cp-img6 {
+    float: right;
+    width: 30%;
+    width: 48%;
+    clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+    shape-outside: polygon(100% 0, 100% 100%, 50% 50%);
+}</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 聚光灯</dd>
+    <dd>. 裁剪圆或椭圆剪切，并改变剪切位置</dd>
+    <dd class="spot-light">
+      <h2>you are the world.</h2>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 扫光按钮</dd>
+    <dd>. 静态效果</dd>
+    <dd>. 伪元素：分别切俩个对角出来</dd>
+    <dd>
+      <div class="cp-btn">Hover Me</div>
+    </dd>
+    <dd>
+      <pre>
+.cp-btn::before {
+    clip-path: inset(0 98px 10px 0);
+}
+
+.cp-btn::after {
+    clip-path: inset(10px 0 0 98px);
+}</pre>
+    </dd>
+    <dd>. 动态效果</dd>
+    <dd>. 伪元素：分别切4个边出来；box-sizing</dd>
+    <dd>. 增加帧动画</dd>
+    <dd>
+      <div class="cp-btn-adv">Hover Me</div>
+    </dd>
+    <dd>
+      <pre>
+@keyframes cp {
+
+    /* top */
+    0%, 100% {
+        clip-path: inset(0 0 34px 0);
+    }
+
+    /* right */
+    25% {
+        clip-path: inset(0 126px 0 0);
+    }
+
+    /* bottom */
+    50% {
+        clip-path: inset(34px 0 0 0);
+    }
+
+    /* left */
+    75% {
+        clip-path: inset(0 0 0 126px);
+    }
+}</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 扫光按钮</dd>
+    <dd>.适合正方形</dd>
+    <dd>.检查元素，取消溢出隐藏，体会其原理</dd>
+    <dd>
+      <div class="border">
+        <div style="--deg:0"></div>
+        <div style="--deg:1"></div>
+        <div style="--deg:2"></div>
+        <div style="--deg:3"></div>
+      </div>
+    </dd>
+    <dd>[HTML]</dd>
+    <dd>
+      <pre>
+&lt;div class="border"&gt;
+  &lt;div style="--deg:0"&gt;&lt;/div&gt;
+  &lt;div style="--deg:1"&gt;&lt;/div&gt;
+  &lt;div style="--deg:2"&gt;&lt;/div&gt;
+  &lt;div style="--deg:3"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+    </dd>
+    <dd>[CSS]</dd>
+    <dd>
+      <pre>
+.border {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 100px auto;
+}
+
+.border::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #890;
+  box-shadow: 0 0 0 8px #8903, 0 0 0 16px #8901;
+  border-radius: 50%;
+  animation: move 4s linear infinite;
+}
+
+@keyframes move {
+  25% {
+    transform: translate(174px, -2px);
+  }
+
+  50% {
+    transform: translate(174px, 174px);
+  }
+
+  75% {
+    transform: translate(-2px, 174px);
+  }
+
+  0%,
+  100% {
+    transform: translate(-2px, -2px);
+  }
+}
+
+.border div {
+  position: absolute;
+  inset: 0px;
+  background-color: rgba(0, 0, 0, 0.01);
+  transform: rotate(calc(90deg*var(--deg)));
+  overflow: hidden;
+}
+
+.border div::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #890;
+  transform: translateX(-100%);
+  animation: slide 4s linear infinite;
+  animation-delay: calc(var(--deg)*1s);
+  z-index: 1;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  50%,
+  100% {
+    transform: translateX(100%);
+  }
+}</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="./lib/ham.js"></script>
+</body>
+
+</html>

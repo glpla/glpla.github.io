@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模块化开发 Module</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+  <style>
+    header {
+      background-image: url(https://cdn.pixabay.com/photo/2012/12/07/15/04/module-68955_640.jpg);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>模块化开发</h1>
+    <span>&commat;Module</span>
+  </header>
+  <!-- <nav>
+    <span class="ham iconfont icon-menu"></span>
+    <ul class="nav">
+      <li class="nav-item">Fetch</li>
+      <li class="nav-item">Axios</li>
+      <li class="nav-item">Ajax</li>
+      <li class="nav-item">Cases</li>
+    </ul>
+  </nav> -->
+  <dl>
+    <dt>目标</dt>
+    <dd>高内聚低耦合</dd>
+    <dd class="example-sn">求和、求乘</dd>
+    <dd><button id="add">10</button></dd>
+    <dd><button id="time">10</button></dd>
+    <dd>
+      <figure class="code">
+        <figcaption>传统方式：不同的数据和逻辑都混在一起</figcaption>
+        <pre>
+let x = 10
+function add() {
+  return x + 10
+}
+let y = 20
+function time() {
+  return y * 10
+}
+add()
+time()</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>模块化方式：利用模块化分离；组合式开发</figcaption>
+        <pre>
+//modAdd.js
+export default function () {
+  const dom = document.querySelector('#add')
+  const x = 10
+  function add() {
+    dom.innerHTML = Number(dom.textContent) + x
+  }
+  return { x, add }
+}
+
+//modTime.js
+export default function () {
+  const dom = document.querySelector('#time')
+  const y = 10
+  function time() {
+    dom.innerHTML = Number(dom.textContent) * y
+  }
+  return { y, time }
+}
+
+//app.js
+import modAdd from './modAdd.js'
+import modTime from './modTime.js'
+let addBtn = document.querySelector('#add')
+let timeBtn = document.querySelector('#time')
+const { x, add } = modAdd()
+const { y, time } = modTime()
+addBtn.addEventListener('click', add)
+timeBtn.addEventListener('click', time)</pre>
+      </figure>
+    </dd>
+    <dd class="tips">如果使用参数，如何修改代码<i class="ri-question-fill"></i></dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script type="module">
+    import modAdd from './modAdd.js'
+    import modTime from './modTime.js'
+    let addBtn = document.querySelector('#add')
+    let timeBtn = document.querySelector('#time')
+    const { x, add } = modAdd(addBtn)
+    const { y, time } = modTime(timeBtn)
+    addBtn.addEventListener('click', add)
+    timeBtn.addEventListener('click', time)
+  </script>
+</body>
+
+</html>

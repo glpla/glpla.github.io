@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频组件 video</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>视频组件</h1>
+        <span>&lt;video&gt;</span>
+    </header>
+    <dl>
+        <dt>说明</dt>
+        <dd>展示视频的容器</dd>
+        <dd>支持的格式：mp4、mov、m4v、avi、webm等</dd>
+        <dd>除了常规属性外，还可以指定画中画、广告等特有属性</dd>
+        <dd>请使用在线资源或自建服务器资源；不要使用本地资源</dd>
+        <dd>视频现在多是16/9的比例；可惜小程序不支持aspect-ratio属性；不过可以根据宽度推算高度</dd>
+        <dd>更多信息，请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/component/video.html"
+                class="link">官方文档</a>
+        </dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>一般属性</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>object-fit</td>
+                    <td>
+                        <details>
+                            <summary>当视频大小与 video 容器大小不一致时，视频的表现形式</summary>
+                            <div>contain：包含；默认；容器有留白</div>
+                            <div>fill：填充；视频被拉伸</div>
+                            <div>cover：覆盖；视频被裁剪</div>
+                        </details>
+                    </td>
+                </tr>
+                <tr>
+                    <td>poster</td>
+                    <td>视频封面</td>
+                </tr>
+            </table>
+        </dd>
+        <dd>推荐：指定宽高，并应用cover模式</dd>
+        <dd class="code">
+            <pre>&lt;video src="" object-fit="cover"/&gt;</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+video{
+    width: 100%;
+    height: 300rpx;
+    //aspect-ratio： 16/9
+}</pre>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性 Computed</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>计算属性</h1>
+        <span>Computed</span>
+    </header>
+    <dl>
+        <dt>说明</dt>
+        <dd>计算属性是响应式</dd>
+        <dd>数据响应时，不会刷新页面</dd>
+        <dd>需要引入包 computed</dd>
+        <dd>计算属性仅会在其响应式依赖更新时才重新计算</dd>
+        <dd>相比之下，方法调用总是会在重渲染发生时再次执行函数</dd>
+        <dd>计算属性有返回值</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>script</figcaption>
+                <pre>
+import { ref, computed } from 'vue'
+
+const count = ref(0)
+const res = computed(() => {
+    return count.value * 2
+})</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>template</figcaption>
+                <pre>
+&lt;div&gt; {{ res }} &lt;/div&gt;
+&lt;button type="button" @click="count++"&gt; count is {{ count }} &lt;/button&gt;</pre>
+            </figure>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

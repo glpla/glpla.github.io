@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期函数 Lifetime</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>生命周期函数</h1>
+        <span>Lifetime</span>
+    </header>
+    <dl>
+        <dt>说明</dt>
+        <dd>组件的一生：创建 → 挂载 → 更新 → 销毁；又细分为前、后两个阶段</dd>
+        <dd>开发者根据组件的状态在特定阶段执行特定的操作</dd>
+        <dd>需引入对应的包</dd>
+        <dd>
+            <figure class="img-sn">
+                <img src="https://cn.vuejs.org/assets/lifecycle.DLmSwRQE.png" alt="">
+                <figcaption>Vue的生命周期函数</figcaption>
+            </figure>
+        </dd>
+        <dt>onBeforeMount()</dt>
+        <dd>注册一个钩子，在组件被挂载之前被调用</dd>
+        <dd>初始化；拉取/操作数据；但是DOM还未就绪</dd>
+        <dd class="code">
+            <pre>
+import { onBeforeMount } from 'vue'
+
+onBeforeMount(() => {
+    console.log("onBeforeMount");
+})</pre>
+        </dd>
+        <dt>onMounted()</dt>
+        <dt>挂载完毕</dt>
+        <dd>注册一个回调函数，在组件挂载完成后执行</dd>
+        <dd>初始化；DOM已就绪</dd>
+        <dd class="code">
+            <pre>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+    console.log("onMounted:Initialization");
+})</pre>
+        </dd>
+        <dt>onBeforeUpdated()</dt>
+        <dd>注册一个回调函数，在组件因为响应式状态变更而更新其 DOM 树之前调用</dd>
+        <dt>onUpdated()</dt>
+        <dd>更新完毕</dd>
+        <dd>注册一个回调函数，在组件因为响应式状态变更而更新其 DOM 树之后调用</dd>
+        <dt>onBeforeUnmounted()</dt>
+        <dd>卸载之前</dd>
+        <dd>注册一个回调函数，在组件实例被卸载之前调用</dd>
+        <dt>onUnmounted</dt>
+        <dd>注册一个回调函数，在组件实例被卸载之后调用</dd>
+        <dt>onActivated()</dt>
+        <dd>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件被插入到 DOM 中时调用</dd>
+        <dt>onDeactivated()</dt>
+        <dd>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件从 DOM 中被移除时调用</dd>
+        <dd class="tips">
+            <div>常用生命周期函数：onMounted()、onUpdated()、onBeforeUnmounted()</div>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>滚动显示 ScrollReveal</title>
+  <base target="_blank">
+  <link rel="stylesheet" href="../css/styleNew.css">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;ScrollReveal</h1>
+  </header>
+  <div class="chap">简介 Overview</div>
+  <dl>
+    <dt>说明</dt>
+    <dd>. 随着屏幕的滚动，逐渐显示指定内容</dd>
+    <dd>. 可以指定类型丰富的显示效果</dd>
+    <dt>步骤</dt>
+    <dd>1. 打开 <a href="https://cdnjs.com/">cdnjs</a>
+      ，查找ScrollReveal，使用提供的在线资源</dd>
+    <dd>2. 选择版本，复制js对应的标签链接到项目中；如果本地展示，请复制其中的链接，在浏览器中打开，右键选择"另存为"，保存js文件</dd>
+    <dd>3. 进入 <a href="https://scrollrevealjs.org/">scrollrevealjs</a> 官网，参照引导Guide和API，创建自己的效果</dd>
+    <dd>4. 实例化ScrollReveal，并指定要显示的元素，通常使用类名；多个类以逗号,区分</dd>
+    <dd>
+      <pre>
+const sr = ScrollReveal();
+sr.reveal('.class1, .class2');</pre>
+    </dd>
+    <dd>5. 以JSON值对的形式，为实例和元素指定选项，设置丰富的显示效果；涉及到的时间单位是毫秒ms</dd>
+    <dd>实例选项</dd>
+    <dd>
+      <table>
+        <tr>
+          <td>distance</td>
+          <td>距离</td>
+        </tr>
+        <tr>
+          <td>delay</td>
+          <td>延迟显示时间</td>
+        </tr>
+        <tr>
+          <td>duration</td>
+          <td>持续时间</td>
+        </tr>
+        <tr>
+          <td>origin</td>
+          <td>统一指定显示来向：top | right | bottom | left</td>
+        </tr>
+        <tr>
+          <td>reset</td>
+          <td>每次触发都显示效果</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>元素选项</dd>
+    <dd>
+      <table>
+        <tr>
+          <td>interval</td>
+          <td>作用于多个元素时，显示的间隔</td>
+        </tr>
+        <tr>
+          <td>origin</td>
+          <td>单独指定显示来向：top | right | bottom | left</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <pre>
+const sr = ScrollReveal({
+    distance: '40px',
+    duration: 2000,
+    delay: 400,
+    reset: true
+})
+sr.reveal('.banner-item', {
+    interval: 100
+})
+sr.reveal('.i0', {
+    origin: 'top'
+})
+sr.reveal('.i4, .breath-item, .info-item', {
+    origin: 'bottom',
+    interval: 100
+})</pre>
+    </dd>
+    <dd>6. 更多使用信息，请参考官网文档</dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="../lib/scrollreveal.min.js"></script>
+</body>

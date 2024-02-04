@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数 Function</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>函数</h1>
+    <span>&commat;Function</span>
+  </header>
+  <div class="chap">概述 Overview</div>
+  <dl>
+    <dt>说明</dt>
+    <dd>.封装需要重复执行的代码，有助于模块化开发-黑盒子</dd>
+    <dd>.可以在任何地方、任何时候调用执行</dd>
+    <dd>.函数也是对象，且是一等公民First-class Function：可以存储在变量中；可以作为参数；可以作为返回值</dd>
+    <dt>函数声明</dt>
+    <dd>方案1.命名函数</dd>
+    <dd>.使用关键字function配合函数名声明</dd>
+    <dd>.可以放在任何地方</dd>
+    <dd class="code">
+      <pre>
+function 函数名 (形参列表) { 
+  //函数逻辑实现
+  return 返回值; 
+}</pre>
+    </dd>
+    <dd>方案2.函数表达式</dd>
+    <dd>.以匿名函数的形式定义，将函数保存|赋值到某个变量中；因为是赋值语句，所以最好末尾加上;</dd>
+    <dd>.<span class="warn">必须在使用前声明</span></dd>
+    <dd class="code">
+      <pre>
+let sum = function (形参列表) { 
+  //函数逻辑实现
+  return 返回值; 
+};</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>]函数表达式使用</dd>
+    <dd class="code">
+      <pre>
+fn();
+let fn = () => {
+  console.log('hi,111');
+}
+//告警：Cannot access 'fn' before initialization</pre>
+    </dd>
+    <dd>方案2. 成组定义|封装</dd>
+    <dd class="code">
+      <pre>
+let user = {
+  'name': null,
+  setName: function (str) {//形式1
+    this.name = str;
+  },
+  getName() {//形式2
+    return this.name;
+  }
+}
+user.setName('cnplaman');
+console.log(user.getName());</pre>
+    </dd>
+    <dt>函数组成</dt>
+    <dd>1. 函数名</dd>
+    <dd>.能体现函数功能的语义化标识符</dd>
+    <dd>.通常使用动词形式</dd>
+    <dd>2. 形式参数</dd>
+    <dd>.函数复用时的定制/个性化特点；通过不同的参数实现类似的业务；此时的参数是形式参数-形参[占位符]</dd>
+    <dd>.个数：根据函数功能，可以使用参数也可以不使用参数；也可以使用任意多的参数：以逗号,分隔</dd>
+    <dd>.使用：函数逻辑实现过程中，通常直接使用形参，也可以使用 <span class="warn">arguments</span> 数组接受不定个数的形参，见后续内容</dd>
+    <dd>.传值：所有参数传递的都是值，不可能通过引用传递参数；有不少开发人员在这一点上可能会感到困惑，因为访问变量有按值和按引用两种方式，而参数只能按值传递</dd>
+    <dd class="mt2">3. 函数逻辑/函数体</dd>
+    <dd>.函数功能的具体实现</dd>
+    <dd>.通常需要借助局部变量完成</dd>
+    <dd>.建议使用 let 声明变量，将其作用域限制在当前函数快内</dd>
+    <dd>.使用 var 声明的变量也是局部变量，只能在函数内部访问它</dd>
+    <dd>.可以在不同的函数中使用名称相同的局部变量</dd>
+    <dd>.局部变量比同名全局变量的优先级高，所以局部变量会隐藏同名的全局变量</dd>
+    <dd>.函数运行完毕，局部变量会被删除</dd>
+    <dd class="mt2">4. 返回值</dd>
+    <dd>.函数的执行结果</dd>
+    <dd>.可以有返回值；也可以没有返回值</dd>
+    <dd>.没有显示的指定返回值，函数的返回都是undefined</dd>
+    <dd>.使用return退出函数或返回结果</dd>
+    <dd>.位于 return 语句之后的任何代码不会执行</dd>
+    <dd>.如果没有返回值，也可以省略return：所有逻辑执行完毕后，自动退出函数</dd>
+    <dd>.逻辑处理过程中，可以随时使用return退出函数，如数组遍历中，已经拿到了需要的数据，不需要继续执行后面的代码</dd>
+    <dd>.推荐：让函数始终都返回一个值，便于调试</dd>
+    <dd class="code">
+      <pre>
+function dis() {
+  console.log('hi');
+  return;
+}
+console.log(dis());//undefined</pre>
+    </dd>
+    <dd class="code">
+      <pre>
+function dis(num1, num2) {
+  return num1 + num2;
+}
+console.log(dis(1, 2));//3</pre>
+    </dd>
+    <dt>函数调用</dt>
+    <dd>.函数要调用才能执行：函数名加上一对圆括号</dd>
+    <dd>.调用函数时，根据函数声明，传递个数对应的参数[实际参数-实参]；多余的参数会被忽略</dd>
+    <dd>.函数体可以调用其它函数</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>]函数实例-命名函数</dd>
+    <dd class="code">
+      <pre>
+function sum(num0, num1) {
+  console.log(num0, num1);
+  console.log(arguments[0], arguments[1]);
+  return num0 + num1;
+}
+
+sum(1, 3);</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>]函数实例-函数表达式</dd>
+    <dd class="code">
+      <pre>
+let sum = function(num0, num1) {
+  return num0 + num1;
+}
+
+sum(1, 3);</pre>
+    </dd>
+    <dt>函数特点[<span class="iconfont icon-bell"></span>]</dt>
+    <dd>.函数的形参也可以是函数</dd>
+    <dd>.返回值可以是函数；返回的函数仍然需要执行才能拿到最后的结果</dd>
+    <dd>.没有重载；后定义的同名函数会覆盖先定义的函数</dd>
+    <dd>.每个函数都是 Function 类型的实例，而且都与其他引用类型一样具有属性和方法</dd>
+    <dd>.由于函数是对象，因此函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定</dd>
+    <dd>.将函数名想象为指针，也有助于理解为什么 ECMAScript 中没有函数重载的概念</dd>
+    <dd>解析器会率先读取函数声明，并使其在执行任何代码之前可用（可以访问）；而函数表达式，则必须等到解析器执行到它所在的代码行，才会真正被解释执行</dd>
+  </dl>
+  <div class="chap">函数类型 Classification</div>
+  <dl>
+    <dt>立即函数</dt>
+    <dd>.声明并执行</dd>
+    <dd>.多用于初始化</dd>
+    <dt>箭头函数</dt>
+    <dd>.使用=>表示</dd>
+    <dd>.也是匿名函数，需要保存到变量中</dd>
+    <dd class="code">
+      <pre>
+let sum = (num1, num2) => {
+  return num1 + num2;
+};</pre>
+    </dd>
+    <dd>.如果只有一个参数，可以省略形参列表的圆括号()</dd>
+    <dd class="code">
+      <pre>
+let sum = num1 => {
+  return num1 * 2;
+};</pre>
+    </dd>
+    <dd>.如果没有参数，不可以省略()</dd>
+    <dd class="code">
+      <pre>
+let sum = () => {
+  console.log('hello, world');
+};</pre>
+    </dd>
+    <dd>.如果只有返回语句，没有更多逻辑，可以省略花括号和return</dd>
+    <dd class="code">
+      <pre>
+//自增函数
+let inc = num => num + 10;
+
+inc(12);</pre>
+    </dd>
+    <dd>.事件侦听中，如果使用箭头函数，则this指的是的window，不再是事件对象</dd>
+    <dd class="code">
+      <pre>
+btn.addEventListener('click', () => {
+  console.log(this);//window
+})
+btn.addEventListener('click', function () {
+  console.log(this);//具体的事件对象，如按钮button
+})</pre>
+    </dd>
+  </dl>
+  <div class="chap">递归函数 Recursion</div>
+  <dl>
+    <dd>.找规律</dd>
+    <dd>.找出口</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 输入一个小于10的数字，求其阶层n!</dd>
+    <dd class="code">
+      <pre>
+function fn(n) {
+  // if (n == 0) {
+  //   return 1;
+  // } else {
+  //   return n * fn(n - 1);
+  // }
+  return n == 0 ? 1 : n * fn(n - 1);
+}</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 输入一个小于10的数字，求其斐波那契数列Fibonacci
+      sequence：f(n)=f(n-1)+f(n-2); n&ge;2; f(0)=1; f(1)=1;
+    </dd>
+    <dd class="code">
+      <pre>
+function fn(n) {
+  if (n == 0 || n == 1) {
+    return 1;
+  } else {
+    return fn(n - 1) + fn(n - 2);
+  }
+}</pre>
+    </dd>
+  </dl>
+  <div class="chap">函数的函数</div>
+  <dl>
+    <dd>.函数名本身就是变量，所以函数也可以作为值来使用。也就是说，不仅可以像传递参数一样把一个函数传递给另一个函数，而且可以将一个函数作为另一个函数的结果返回</dd>
+    <dd>.返回的函数必须执行才能拿到最后的结果</dd>
+    <dd>.更多信息，请参考 <a href="./closure.html">闭包</a></dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 声明一个函数，使其执行另外一个函数</dd>
+    <dd class="code">
+      <pre>
+function cb(fn, para) {
+    return fn(para);
+}
+function add(num) {
+    return num + 10;
+}
+let res = cb(add, 10);
+console.log(res);</pre>
+    </dd>
+  </dl>
+  <div class="chap">内部属性和方法</div>
+  <dl>
+    <dt>arguments</dt>
+    <dd>它是一个类数组对象，包含着传入函数中的所有参数</dd>
+    <dt>length</dt>
+    <dd>函数希望接收的命名参数的个数</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>]使用arguments后，甚至不需要声明形参</dd>
+    <dd class="code">
+      <pre>
+function sum(num0, num1) {
+  return num0 + num1;
+}</pre>
+    </dd>
+    <dd class="code">
+      <pre>
+function sum() {
+  let res = 0;
+  for (let i = 0; i &lt; arguments.length; i++) {
+    res += arguments[i];
+  }
+  return res;
+}
+sum(1, 2);
+sum(1, 2, 3);</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>]查看形参和实参</dd>
+    <dd class="code">
+      <pre>
+function fn(a, b) {
+  console.log(fn.length);//2
+  console.log(arguments.length)//4
+}
+fn(1, 2, 3, 4)</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>]在控制台查看函数声明和属性</dd>
+    <dd class="code">
+      <pre>
+&gt;fn
+&lt;ƒ fn(a, b) {
+  console.log(fn.length);
+  console.log(arguments.length)
+}
+&gt;fn.name
+&lt;'fn'</pre>
+    </dd>
+    <dt>this</dt>
+    <dd>this引用的是函数据以执行的环境对象——或者也可以说是 this 值（当在网页的全局作用域中调用函数时，
+      this 对象引用的就是 window）。</dd>
+    <dt>prototype</dt>
+    <dd>在 ECMAScript 核心所定义的全部属性中，最耐人寻味的就要数 prototype 属性了。对于
+      ECMAScript 中的引用类型而言，prototype 是保存它们所有实例方法的真正所在</dd>
+    <dd>prototype 属性是不可枚举的，因此使用 for-in 无法发现</dd>
+    <dt>apply()</dt>
+    <dt>call()</dt>
+    <dt>bind()</dt>
+  </dl>
+  <div class="chap">纯函数</div>
+  <dl>
+    <dt>含义</dt>
+    <dd>.相同的输入始终得到相同的输出</dd>
+    <dd>.大多数的操作都是以数组为对象，所以后续各例都以数组为例</dd>
+    <dd>.如果一个函数的执行会修改到数组，则这个函数不是纯函数</dd>
+    <dd>.如果一个函数没有参数，那它就不是纯函数，如Array.revers()；同时它也会修改原数组</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] slice() splice()</dd>
+    <dd>slice(start, end)：返回一个拷贝，从start开始到end结束，不包括end</dd>
+    <dd>splice(start, count)：移除元素，从start开始的count个。它的执行会修改原数组，它不是纯函数</dd>
+    <dd class="code">
+      <pre>
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+console.log(arr.slice(1, 3));
+console.log(arr.slice(1, 3));
+console.log(arr.slice(1, 3));
+console.log(arr.splice(1, 3));
+console.log(arr.splice(1, 3));
+console.log(arr.splice(1, 3));</pre>
+    </dd>
+    <dt>优点</dt>
+    <dd>.可缓存：执行过一次后，就可以把结果留用；下次再使用的时候，直接使用结果，不需要每次都执行</dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

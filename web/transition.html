@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>过渡动画 Transition</title>
+  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="./css/transition.css">
+  <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/tbl.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Transition</h1>
+    <span class="iconfont icon-menu ham"></span>
+    <nav class="nav">
+      <a href="" class="nav-item">Overview</a>
+      <a href="" class="nav-item">Cases</a>
+      <a href="" class="nav-item">Steps</a>
+      <a href="" class="nav-item">Events</a>
+    </nav>
+  </header>
+  <dl class="nav-cont">
+    <dt>简介 Overview</dt>
+    <dd>. 元素从一个状态过渡到另外一个状态，包括过渡的2个状态、过渡的时间、过渡的方式、是否延迟等属性</dd>
+    <dd>. 状态过渡需要一个触发条件，通常是鼠标悬停hover；也可以通过添加类的方式实现</dd>
+    <dd>. 只能定义2个状态：开始状态、结束状态；如果需要多个状态呈现变化过程，请使用帧动画</dd>
+    <dd>. 只能作用于当前元素；如果多个元素使用，请使用帧动画</dd>
+    <dd>. 桌面端使用较多；移动端使用少</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>复合属性 shorthand</figcaption>
+        <pre>transition: property duration timing-function delay;</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>单独属性 longhand</figcaption>
+        <pre>
+transition-property:
+transition-duration:
+transition-timing-function:
+transition-delay:        </pre>
+      </figure>
+    </dd>
+    <dd>
+      <table class="tbl-sn tbl-ale">
+        <caption>过渡属性</caption>
+        <tr>
+          <th style="width: 30%;">类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>property</td>
+          <td>元素参与过渡的属性，一般都是 <span class="warn">数值型</span> 属性<br>通常指定为all</td>
+        </tr>
+        <tr>
+          <td>duration</td>
+          <td>过渡持续时间，单位秒s或毫秒ms，必选参数，且必须是第一个时间参数；第二个时间参数是延迟时间<br>UI界面的过渡通常不超过0.4s</td>
+        </tr>
+        <tr>
+          <td>timing-function</td>
+          <td>时间函数，过渡的效果/方式<br>默认是ease</td>
+        </tr>
+        <tr>
+          <td>delay</td>
+          <td>过渡延迟时间，必须是第二个时间参数；第一个时间参数是过渡时间</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <table class="tbl-sn tbl-ale">
+        <caption>时间函数 timing-function</caption>
+        <tr>
+          <th style="width: 30%;">类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>linear</td>
+          <td>以相同速度开始到结束（ cubic-bezier(0, 0, 1, 1) ）</td>
+        </tr>
+        <tr>
+          <td class="warn">ease</td>
+          <td>默认；开始慢，然后快，慢下来，结束时非常慢（ cubic-bezier(0.25, 0.1, 0.25, 1)）</td>
+        </tr>
+        <tr>
+          <td>ease-in</td>
+          <td>开始慢，结束快（ cubic-bezier(0.42,0,1,1)</td>
+        </tr>
+        <tr>
+          <td>ease-out</td>
+          <td>开始快，结束慢（ cubic-bezier(0,0,0.58,1)</td>
+        </tr>
+        <tr>
+          <td>ease-in-out</td>
+          <td>中间快，两边慢（ cubic-bezier(0.42,0,0.58,1)</td>
+        </tr>
+        <tr>
+          <td>cubic-bezier(n,n,n,n)</td>
+          <td>在cubic-bezier函数中定义自己的值</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="tips">
+      <div>过渡大多数情况下写在开始状态，也可以写在结束状态，还可以在两个状态中分别指定过渡：配合不同的时间，实现特定的效果，如快进慢退</div>
+      <div>过渡自动双向执行：只要状态翻转，过渡就会执行；为了避免这种情况，在结束态指定过渡</div>
+      <div>使用单独属性语法可以指定多个过渡属性，必须是一一对应</div>
+      <div>display:none和display:block之间不涉及到数字属性，所以过渡无效；可以使用透明度opacity从0到1的过渡</div>
+    </dd>
+  </dl>
+  <div class="chap">案例 Cases</div>
+  <dl class="nav-cont">
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/QWYowWx">导航条 -
+        CodePen</a></dd>
+    <dd>. 导航元素等宽</dd>
+    <dd>. 导航容器宽度由导航元素撑开</dd>
+    <dd>. 背景条父相子绝</dd>
+    <dd>. 导航元素hover时，移动背景条一定数量的距离</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/WNPmNpj">导航条 -
+        CodePen</a></dd>
+    <dd>.鼠标悬停 :hover</dd>
+    <dd>.过渡动画 transition</dd>
+    <dd>.变换 transform</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html#msg"><a
+          href="https://codepen.io/glpla/full/QWYoLPK">获取焦点focus时重复播放动画 - CodePen</a>；更多案例，请访问<a
+          href="./demo/login1.html">登陆Login</a>
+    </dd>
+    <dd>.帧动画 keyframe</dd>
+    <dd>.过渡动画 transition</dd>
+    <dd>.定位</dd>
+    <dd>.获取焦点选择器 :focus</dd>
+    <dd>.数据有效选择器 :valid</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a
+        href="https://codepen.io/glpla/full/JjwBLdg">表单元素自定义 - CodePen</a>更多案例，请访问<a
+        href="./position.html#ipt">Form-checkbox</a></dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/KKJEwQE">侧边栏导航
+        - CodePen</a></dd>
+    <dd>.适合桌面端</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html">个人网站 - banner滑动</a></dd>
+    <dd>背景图片尺寸比容器大</dd>
+    <dd>初始态背景图片位于左上</dd>
+    <dd>鼠标悬停hover时，背景图标位于右上</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 主导航 - 见当前页面顶部</dd>
+    <dd>利用导航项的伪元素实现底部渐变</dd>
+    <dd>初始态宽度为0</dd>
+    <dd>鼠标悬停hover时，宽度为100%</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 圆角导航<a
+        href="./border.html#border-radius">border-radius</a></dd>
+
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 个人信息卡 - 慢进1s快退0.5s</dd>
+    <dd class="basic info-card">
+      <img src="./imgs/bg.jpg" alt="">
+      <div class="icons">
+        <span class="iconfont icon-shouye_o"></span>
+        <span class="iconfont icon-gerentouxiang_o"></span>
+        <span class="iconfont icon-youjian_o"></span>
+        <span class="iconfont icon-fenxiang_o"></span>
+      </div>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption></figcaption>
+        <pre>
+.info-card img {
+  position: relative;
+  z-index: 1;
+  transform-origin: left top;
+  transition: .5s;
+}
+
+.info-card:hover img {
+  transform: scale(0.8);
+  transition: 1s;
+}</pre>
+      </figure>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 图片大小变化</dd>
+    <dd>. 标题位置变化：开始定位在元素外部，hover时定位在元素底部</dd>
+    <dd class="basic mars">
+      <img class="img" src="./imgs/Mars.jfif" alt="">
+      <div class="info">祝融号火星车</div>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption></figcaption>
+        <pre>
+.mars .img {
+    transform-origin: top;
+    transition: .4s;
+}
+
+.mars:hover .img {
+    transform: scale(.5);
+}
+
+.mars .info {
+    position: absolute;
+    left: 0px;
+    bottom: -60px;
+    //......
+    transition: .4s;
+}
+
+.mars:hover .info {
+    bottom: 0px;
+}</pre>
+      </figure>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 旋转过渡：把元素的旋转点调整到左上角</dd>
+    <dd class="basic rot">hover查看
+      <div></div>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption></figcaption>
+        <pre>
+.rot div {
+    position: absolute;
+    left: -230px;
+    top: -230px;
+    width: 80%;
+    height: 80%;
+    border: 10px solid #b22222;
+    transform-origin: left top;
+    transition: 1s;
+}
+
+.rot:hover div {
+    left: 10%;
+    top: 10%;
+    transform: rotate(360deg);
+}</pre>
+      </figure>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 伪元素旋转位移</dd>
+    <dd class="basic tran">
+      <div>hover查看</div>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption></figcaption>
+        <pre>
+.tran div::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -180px;
+    width: 320px;
+    height: 180px;
+    background-color: #fff;
+    transform-origin: left top;
+    transition: 1s;
+}
+
+.tran div:hover::after {
+    transform: rotate(-20deg);
+}</pre>
+      </figure>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 伪元素缩放</dd>
+    <dd>. 伪元素分别设置上下边框</dd>
+    <dd>. 需要显式的设置初始状态为0</dd>
+    <dd class="basic border">hover查看</dd>
+    <dd>
+      <figure class="code">
+        <figcaption></figcaption>
+        <pre>
+.border::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 60%;
+    height: 50%;
+    border: solid #b22222;
+    border-width: 4px 0;
+    transform: translate(-50%, -50%) scaleX(0);
+    transition: .4s;
+}
+
+.border::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 50%;
+    height: 60%;
+    border: solid #b22222;
+    border-width: 0px 4px;
+    transform: translate(-50%, -50%) scaleY(0);
+    transition: .4s;
+}
+
+.border:hover::before {
+    transform: translate(-50%, -50%) scaleX(1);
+}
+
+.border:hover::after {
+    transform: translate(-50%, -50%) scaleY(1);
+}</pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">步进动画 Steps</div>
+  <dl class="nav-cont">
+    <dt>说明</dt>
+    <dd>. 由时间函数 steps()指定的一种特殊的分段过渡效果</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>steps()语法</figcaption>
+        <pre>steps(number_of_steps，direction)</pre>
+      </figure>
+    </dd>
+    <dd>. number_of_steps：数字，过渡分几个阶段完成</dd>
+    <dd>. direction：start和end，默认是<span class="warn">end</span>，指每个阶段过渡结束后才渲染；start则是过渡开始前就渲染</dd>
+    <dd>. 矩形的宽度从0px，经过5个阶段，过渡到200px：0-40、40-80、80-120、120-160、160-200</dd>
+    <dd class="flex-box">
+      <div class="step-title">steps(5,end)</div>
+      <div class="step-demo-end"></div>
+    </dd>
+    <dd class="flex-box">
+      <div class="step-title">steps(5,start)</div>
+      <div class="step-demo-start"></div>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] loading进度条 - 从0到100%</dd>
+    <dd>. 先加载再更新，所以应使用默认的end方向</dd>
+    <dd>. 为了避免状态翻转，在结束态中指定过渡</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>loading进度条</figcaption>
+        <pre>
+.step-demo-loading {
+    width: 0px;
+    height: 50px;
+    background-color: #f40;
+}
+
+.step-demo-loading:hover {
+    width: 100%;
+    transition: 10s steps(10);
+}</pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">事件 Events</div>
+  <dl class="nav-cont">
+    <dd>. 侦听过渡动画的执行过程</dd>
+    <dt>动画结束</dt>
+    <dd>
+      <figure class="code">
+        <figcaption>动画结束</figcaption>
+        <pre>el.addEventListener("transitionend", (event) => {});</pre>
+      </figure>
+    </dd>
+    <dt>动画开始</dt>
+    <dd>
+      <figure class="code">
+        <figcaption>动画开始</figcaption>
+        <pre>el.addEventListener("transitionstart", (event) => {});</pre>
+      </figure>
+    </dd>
+    <dt>动画运行</dt>
+    <dd>
+      <figure class="code">
+        <figcaption>动画运行</figcaption>
+        <pre>el.addEventListener("transitionrun", (event) => {});</pre>
+      </figure>
+    </dd>
+    <dt>动画取消</dt>
+    <dd>
+      <figure class="code">
+        <figcaption>动画取消</figcaption>
+        <pre>el.addEventListener("transitioncancel", (event) => {});</pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">总结与作业 Summary & Homework</div>
+  <dl>
+    <dt>总结</dt>
+    <dd>1. 过渡动画的基本使用</dd>
+    <dt>作业</dt>
+    <dd class="number">
+      <div>独立完成上述案例</div>
+      <div>利用过渡动画，完善个人网站，如导航过渡效果；个人信息过渡效果等等</div>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="./lib/ham.js"></script>
+</body>
+
+</html>

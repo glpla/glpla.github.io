@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组 Array</title>
+  <link rel="stylesheet" href="../css/styleNew.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Array</h1>
+    <span class="ham iconfont icon-menu"></span>
+    <nav class="nav">
+      <a href="" class="nav-item">基本函数</a>
+      <a href="" class="nav-item">排序函数</a>
+      <a href="" class="nav-item">迭代函数</a>
+      <a href="" class="nav-item">归并函数</a>
+      <a href="" class="nav-item">其它函数</a>
+      <a href="" class="nav-item">运算符</a>
+    </nav>
+  </header>
+  <dl>
+    <dt>声明</dt>
+    <dd>
+      <pre>
+let arr = [1, 2, 3];
+console.log(arr);
+      </pre>
+    </dd>
+    <dd>
+      <pre>
+let arr = new Array(1, 2, 3);
+console.log(arr);
+      </pre>
+    </dd>
+    <dt>length属性</dt>
+    <dd>.数组长度</dd>
+    <dd>.可以任意赋值：少于实际个数，数据会丢失，但是数据仍然在内存中；多于实际个数，值为undefined</dd>
+    <dt>赋值</dt>
+    <dd>.将变量指向新的引用/地址空间</dd>
+    <dd>
+      <pre>
+let arr0 = [1, 2];
+let arr1 = arr0;
+arr0 = [1, 3];
+console.log(arr1);</pre>
+    </dd>
+  </dl>
+  <div class="chap">基本函数</div>
+  <dl class="nav-cont">
+    <dd>.数组既有栈的行为函数也有队列的行为函数</dd>
+    <dd>.栈行为：FILO；尾端操作；push() pop()</dd>
+    <dd>.队列行为：FIFO；头出尾进：push() shift()；使用 unshift()和 pop()方法，可以从相反的方向来模拟队列，即在数组的前端添加项，从数组末端移除项</dd>
+    <dt>push()</dt>
+    <dd>.添加元素到数组末尾</dd>
+    <dt>unshift()</dt>
+    <dd>.添加元素到头部</dd>
+    <dt>pop()</dt>
+    <dd>.移除数组末尾元素并返回</dd>
+    <dt>shift()</dt>
+    <dd>.移除数组头部元素并返回</dd>
+    <dt>concat()</dt>
+    <dd>.数组连接</dd>
+    <dd>.返回一个新数组</dd>
+    <dd>.不会修改原数组；不会去重</dd>
+    <dt>join()</dt>
+    <dd>.数组元素按照指定的分隔符连接为字符串</dd>
+    <dd>
+      <pre>
+let arr0 = [1, 2, 3];
+let arr1 = [3, 4, 5];
+console.log(arr0.concat(arr1));//1, 2, 3, 3, 4, 5
+console.log(arr0);//1, 2, 3
+console.log(arr0.join('-'));//1-2-3</pre>
+    </dd>
+    <dt>slice(start,end)</dt>
+    <dd>.截取指定长度的部分；字符串中应用比较广泛</dd>
+    <dd>.结果是一个新的数组/字符串</dd>
+    <dd>.原数组不变</dd>
+    <dd>.start不指定，从0开始；end不指定，截取到末尾</dd>
+    <dd>.目标位置为负数时，反向截取；最后一位是-1；倒数第二位是-2，依次类推；可以用于获取后缀名；</dd>
+    <dd>
+      <pre>
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let res = arr.slice(2, 4);
+console.log(res);//3,4
+console.log(arr);//不变</pre>
+    </dd>
+    <dt>splice(start,count[,el...])</dt>
+    <dd>.从原来数组中截取|删除指定长度的字符串</dd>
+    <dd>.原数组被修改</dd>
+    <dd>.在删除的基础上，还可以插入新的元素el；如果count为0，则不删除</dd>
+    <dd>
+      <pre>
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let res = arr.splice(2, 2);
+console.log(res);//3,4
+console.log(arr);//1,2,5,6,7,8,9
+arr.splice(2, 1, 8, 8);
+console.log(arr);//1,2,8,8,6,7,8,9；5被删除，插入|增加了2个8</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 洗牌 Shuffle</dd>
+    <dd>
+      <pre>
+function shuffle(arr) {
+  let tmp = [];
+  while (arr.length > 0) {
+    let rad = Math.floor(Math.random() * arr.length)
+    tmp.push(arr[rad])
+    arr.splice(rad, 1)
+  }
+  return tmp;
+}</pre>
+    </dd>
+  </dl>
+  <div class="chap">排序函数</div>
+  <dl class="nav-cont">
+    <dt>sort</dt>
+    <dd>
+      <figure class="code">
+        <figcaption>普通数组arr</figcaption>
+        <pre>
+//升序
+arr.sort((a, b) => a - b);
+//降序
+arr.sort((a, b) => b - a);</pre>
+      </figure>
+      <figure class="code">
+        <figcaption>对象数组obj - 比较数字字段seg大小</figcaption>
+        <pre>
+//升序
+obj.sort((a, b) => a.seg - b.seg);
+//降序
+obj.sort((a, b) => b.seg - a.seg);</pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">迭代函数</div>
+  <dl class="nav-cont">
+    <dt>forEach()</dt>
+    <dd>.对数组中的每一项运行给定函数。这个方法没有返回值，本质上与使用 for 循环迭代数组一样</dd>
+    <dd>.函数声明式</dd>
+    <dd>
+      <pre>
+function foreach(arr, fn) {
+  for (let i = 0; i &lt; arr.length; i++) {
+    fn(arr[i]);
+  }
+}
+
+foreach(arr, (item) => {
+  console.log(item);
+})</pre>
+    </dd>
+    <dt>filter()</dt>
+    <dd>.对数组中的每一项运行给定函数，返回该函数会返回函数执行结果为 true 的项组成的数组</dd>
+    <dd>.calls the predicate function one time for each element in the array</dd>
+    <dd>.函数声明式</dd>
+    <dd>
+      <pre>
+function filter(arr, fn) {
+  let res = []
+  for (let i = 0; i &lt; arr.length; i++) {
+    if (fn(arr[i])) {
+      res.push(arr[i])
+    }
+  }
+  return res;
+}
+
+res = filter(arr, (item) => {
+  return item % 2 === 0;
+})
+console.log(res);</pre>
+    </dd>
+    <dt>map()</dt>
+    <dd>.对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组</dd>
+    <dd>.适合创建包含的项与另一个数组一一对应的数组</dd>
+    <dd>.对结果数组进行连接join可以转化为对字符串的使用，如作为HTML字符串更新或创建DOM</dd>
+    <dd>.函数表达式</dd>
+    <dd>.声明为const更安全，避免被修改</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>结果数组拼接字符串</figcaption>
+        <pre>let res = map((item, ind) => item.xx).join('');</pre>
+      </figure>
+    </dd>
+    <dt>every()</dt>
+    <dd>.对数组中的每一项运行给定函数；如果该函数对 <span class="warn">每一项</span> 都返回 true，则返回 true</dd>
+    <dd>
+      <pre>
+const every = (arr, fn) => {
+  let res = true
+  for (let v of arr) {
+    res = fn(v);
+    if (!res) {
+      break
+    }
+  }
+  return res;
+}
+
+res = every(arr, v => v > 10);
+console.log(res);</pre>
+    </dd>
+    <dt>some()</dt>
+    <dd>.对数组中的每一项运行给定函数；如果该函数 <span class="warn">有一项</span> 返回 true，则返回 true</dd>
+    <dd>
+      <pre>
+const some = (arr, fn) => {
+  let res = false
+  for (let v of arr) {
+    res = fn(v)
+    if (res) {
+      break
+    }
+  }
+  return res;
+}
+res = some(arr, v => v > 8);
+console.log(res);</pre>
+    </dd>
+    <dd class="quote">
+      <div>1. 以上方法都不会修改数组中的包含的值</div>
+      <div>2. 在这些方法中，最相似的是 every()和 some()，它们都用于查询数组中的项是否满足某个条件。
+        对 every()来说，传入的函数必须对每一项都返回 true，这个方法才返回 true；否则，它就返回
+        false。而 some()方法则是只要传入的函数对数组中的某一项返回 true，就会返回 true</div>
+    </dd>
+  </dl>
+  <div class="chap">归并函数</div>
+  <dl class="nav-cont">
+    <dt>reduce() reduceRight()</dt>
+    <dd>.这两个方法都会迭代数组的所有项，然后构建一个最终返回的值。其中，reduce()方法从数组的第一项开始，逐个遍历到最后。而
+      reduceRight()则从数组的最后一项开始，向前遍历到第一项；可以执行求数组中所有值之和的操作</dd>
+    <dd>.这两个方法都接收两个参数：一个在每一项上调用的函数fn和（可选的）作为归并基础的初始值</dd>
+    <dd>.fn接收 4 个参数：前一个值pre|累加器acc、当前值cur、项的索引index和数组对象array</dd>
+    <dd>.可以是普通数组，也可以是数组对象</dd>
+    <dd>.map filter是reduce的特例</dd>
+    <dd>1.求和</dd>
+    <dd>2.计数</dd>
+    <dd>3.分类</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 数组求和</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>普通数组</figcaption>
+        <pre>
+let sum = arr.reduce((pre, cur, index, array) => {
+    return pre + cur;
+})</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>对象数组 - 具有数值属性price</figcaption>
+        <pre>
+let sum = goods.reduce((acc, cur) => {
+  return acc + cur.price;
+}, 0)</pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">其它函数</div>
+  <dl class="nav-cont">
+    <dt>from()</dt>
+    <dd>.将一个类数组对象或者可遍历对象转换成一个真正的数组</dd>
+    <dd>1. 类数组</dd>
+    <dd>.使用获取多个元素方法，如querySelectorAll()，得到的元素集合都是类数组对象，最基本的特点就是具有length属性的对象；如果没有长度属性，会被转化为一个空数组</dd>
+    <dd>2. set集合</dd>
+    <dd>.无重复数据的集合</dd>
+    <dd>3. 字符串</dd>
+    <dd>.将字符串拆分成单个字符的数组</dd>
+  </dl>
+  <div class="chap">运算符</div>
+  <dl class="nav-cont">
+    <dt>[]解构运算符</dt>
+    <dd>.一次性把数组元素赋值给多个变量</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 赋值</dd>
+    <dd>
+      <pre>let [a, b] = [1, 3];</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 交换赋值</dd>
+    <dd>
+      <pre>[a, b] = [b, a];</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 保存解构剩余数据</dd>
+    <dd>
+      <pre>let [a, ...rest] = [1, 2, 3, 4, 5, 6, 7, 8, 9]</pre>
+    </dd>
+    <dt>...扩展运算符</dt>
+    <dd>.复制数组</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 数组复制</dd>
+    <dd>
+      <pre>
+let a = [1, 2, 3];
+let b = [...a];</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="../lib/ham.js"></script>
+</body>
+
+</html>

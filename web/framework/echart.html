@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图表 Chart</title>
+  <base target="_blank">
+  <link rel="stylesheet" href="../css/styleNew.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.37.0/apexcharts.min.css" />
+  <style>
+    .chart-box {
+      height: 320px;
+      margin: 1rem auto;
+    }
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Chart</h1>
+  </header>
+  <div class="chap">ApxChart</div>
+  <dl>
+    <dt>说明</dt>
+    <dd>. 不需要指定图表容器高度</dd>
+    <dt>步骤</dt>
+    <dd>1. 打开 <a href="https://cdnjs.com/">cdnjs</a> ，查找ApexCharts，使用提供的在线资源</dd>
+    <dd>2. 选择版本，分别复制js和CSS对应的标签链接到项目中</dd>
+    <dd>3. 进入 <a href="https://apexcharts.com/">ApexCharts</a> 官网，在文档DOC中，参照图表类型和对应的示例，创建自己的图表</dd>
+    <dd>4. 更多使用信息，请参考文档</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 水平条图表-Horizontal Bar Chart</dd>
+    <dd id="apxchart" class="chart-box"></dd>
+  </dl>
+  <div class="chap">eChart</div>
+  <dl>
+    <dt>说明</dt>
+    <dd>. 官网<a href="https://echarts.apache.org/zh/index.html"> Echarts</a></dd>
+    <dd>. 需要指定图表容器高度</dd>
+    <dd id="echarts" class="chart-box"></dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <!-- apxchart -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.37.0/apexcharts.min.js"></script>
+  <script>
+    var options = {
+      series: [{
+        data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+      }],
+      chart: {
+        type: 'bar',
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 4,
+          horizontal: true,
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
+          'United States', 'China', 'Germany'
+        ],
+      }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#apxchart"), options);
+    chart.render();
+  </script>
+  <!-- eCharts -->
+  <script src="../../js/echarts.min.js"></script>
+  <script>
+    let myChart = echarts.init(document.getElementById('echarts'));
+    let option = {
+      title: {
+        text: 'ECharts 入门示例',
+        subtext: 'just for demo',
+        textAlign: 'center'
+      },
+      tooltip: {
+        show: true,// default
+        backgroundColor: '#fff',
+        textStyle: {
+          color: '#f40'
+        }
+      },
+      legend: {
+        data: ['销量']
+      },
+      xAxis: {
+        show: true,
+        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+      },
+      yAxis: {},
+      series: [{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20],
+        showBackground: true,
+        backgroundStyle: {
+          color: '#8888',
+          borderColor: '#888',
+          borderWidth: '1'
+        },
+        itemStyle: {
+          color: '#098'
+        },
+        emphasis: {
+          focus: 'self'
+        }
+      }],
+      backgroundColor: '#8888',
+      textStyle: {
+        color: '#888',
+        fontSize: '24'
+      }
+    };
+    myChart.setOption(option);
+  </script>
+</body>

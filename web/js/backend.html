@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>后端数据获取 Backend</title>
+  <link rel="stylesheet" href="../css/styleNew.css">
+  <link rel="stylesheet" href="../css/backend.css">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Backend</h1>
+    <span class="ham iconfont icon-menu"></span>
+    <ul class="nav">
+      <li class="nav-item">Fetch</li>
+      <li class="nav-item">Axios</li>
+      <li class="nav-item">Ajax</li>
+      <li class="nav-item">Cases</li>
+    </ul>
+  </header>
+  <dl>
+    <dt>推荐资源</dt>
+    <dd>1. 随机小狗 <a href="https://dog.ceo/api/breed/pembroke/images/random">dog ceo</a></dd>
+    <dd>2. 随机图片 <a href="https://picsum.photos/" class="link">picsum photos</a></dd>
+    <dd>3. 土味情话 <a href="https://api.uomg.com/api/rand.qinghua?format=json"></a></dd>
+    <dd>4. http://ajax-base-api-t.itheima.net/api</dd>
+    <dd>/getbooks</dd>
+    <dd>/addbook</dd>
+  </dl>
+  <div class="chap">Fetch</div>
+  <dl class="nav-cont">
+    <dt>简介</dt>
+    <dd>.fetch是w3c的一种请求标准，不是第三方库，与vue、jquery无关</dd>
+    <dd>.下一代Ajax技术，采用 <span class="warn">Promise</span> 方式处理数据</dd>
+    <dd>.语法简介明了</dd>
+    <dd>.既可以访问远程数据，也可以访问本地数据</dd>
+    <dd>.除了IE，多数浏览器都兼容</dd>
+    <dd>.需要拼接参数，通常需要二次封装</dd>
+    <dd class="code">
+      <pre>
+fetch(url, {
+    method: '',
+    body: '',
+    headers: ''
+    })
+    .then(res=>res.json())
+    .then(res)
+    .catch(err)</pre>
+    </dd>
+    <dt>配置项</dt>
+    <dd>method（String）：HTTP请求方法，Get获取数据 | Post提交数据 | Delete删除数据 | Put更新数据；默认为GET</dd>
+    <dd>body（String）：HTTP请求请求参数</dd>
+    <dd>headers（Object）：HTTP请求头，默认为0</dd>
+    <dt>响应结果</dt>
+    <dd>.在响应的原型[[Prototype]] Response中，可以看到相关的事件</dd>
+    <dd>res.json()：得到JSON对象，同JSON.parse(responseText)一样；应用最广泛</dd>
+    <dd>res.text()：得到文字|字符串</dd>
+    <dd>res.formData()：得到FormData表单对象</dd>
+    <dd>res.blob()：得到多媒体对象，如图片</dd>
+    <dt>get基本过程</dt>
+    <dd>只需要指定url和对应的查询参数即可</dd>
+    <dd>1.fetch执行后，返回一个Promis；要拿到结果，必须在then中进一步处理</dd>
+    <dd>2.then中获取的是Promise对象，是对HTTP服务的响应，需要使用json()处理；json()是一个异步操作，将内容转换为JSON对象</dd>
+    <dd>3.json()返回的仍然是一个Promise，仍然需要在then()中处理</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>传统方式</figcaption>
+        <pre>
+fetch('./data2021/stu.json')
+  .then(response => response.json())
+  .then(res => {
+    console.log(res);
+  })</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>async-await方式</figcaption>
+        <pre>
+async function getData() {
+  let res = await fetch('./data2021/stu.json');
+  console.log(res);
+  let json = await res.json();
+  console.log(json);
+}
+getData();</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>异常捕获处理</figcaption>
+        <pre>
+async function getData() {
+  try {
+    let res = await fetch('./data2021/stu.json');
+    console.log(res);
+    let json = await res.json();
+    console.log(json);
+  } catch (err) {
+    console.log(err);
+  }
+}</pre>
+      </figure>
+    </dd>
+    <dd>4.fetch抓取数据时不会抛出错误,即使是404或500错误；可根据响应状态ok或状态码status判断结果</dd>
+    <dd class="code">
+      <pre>
+ok: true
+redirected: false
+status: 200
+statusText: "OK"
+type: "cors"
+url: "http://localhost:3000/clerk/2002"</pre>
+    </dd>
+    <dd class="code">
+      <pre>
+ok: false
+redirected: false
+status: 404
+statusText: "Not Found"
+type: "cors"
+url: "http://localhost:3000/clerk/2002"</pre>
+    </dd>
+    <dd>5.可以使用查询参数query parameters，直接在url后面使用?拼接查询值对，使用&拼接多个查询参数</dd>
+    <dd>
+      <pre>http://ajax-base-api-t.itheima.net/api/getbooks?id=2</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] text()-请求本地文本</dd>
+    <dd class="code">
+      <pre>
+fetch('./tmp.txt')
+  .then(res => res.text())
+  .then(res => console.log(res))</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] json()-请求本地JSON</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] json()-请求网络接口</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] formData()-请求表单</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] blob()-请求图片</dd>
+    <dd class="code">
+      <pre>
+fetch('./imgs/avatar0.jpg')
+  .then(res => res.blob())
+  .then(res => img.src = URL.createObjectURL(res))</pre>
+    </dd>
+    <dt>post基本过程</dt>
+    <dd>.除了url还需要指定配置选项：</dd>
+    <dd>method：请求方法，POST</dd>
+    <dd>headers：指定数据格式：content-type，如application/json | application/x-www-form-urlencoded</dd>
+    <dd>body：请求数据</dd>
+    <dd class="code">
+      <pre>
+async function addData() {
+  try {
+    let obj = {
+      author: 'cnplaman',
+      bookname: 'web',
+      publisher: 'cn',
+    }
+    let res = await fetch('http://ajax-base-api-t.itheima.net/api/addbook', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj)
+    });
+    console.log(res);
+    let json = await res.json();
+    console.log(json);
+  } catch (err) {
+    console.log(err);
+  }
+}</pre>
+    </dd>
+  </dl>
+  <div class="chap">Axios</div>
+  <dl class="nav-cont">
+    <dt>简介 overview</dt>
+    <dd>基于XML HTTPRequest</dd>
+    <dd>通用、主流的第三方库；用于获取本地和远程json数据</dd>
+    <dd>更多信息，点击访问<a href="https://www.axios-http.cn/" class="link">axios中文网</a> </dd>
+    <dt>CDN方式引入库</dt>
+    <dd class="code">
+      <pre>
+&lt;script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"&gt;&lt;/script&gt;</pre>
+    </dd>
+    <dd class="code">
+      <pre>
+//get数据
+axios
+.get('./oa.json')
+.then(res => { console.log(res); })</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 获取远程数据 - 小狗</dd>
+    <dd><button id="getDog">点击获取小狗</button></dd>
+    <dd id="dog">
+      <img src="" alt="">
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 获取远程数据 - 土味情话</dd>
+    <dd><button id='axios-re'>点击获取土味情话</button></dd>
+    <div id="axios-remote"></div>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 获取本地数据</dd>
+    <dd>1. 如何渲染获取到的数据？使用新节点？使用innerHtml？</dd>
+    <dd>2. 表格&lt;table&gt;的使用：使用默认表格还是特别指定表头&lt;thead&gt;和表体&lt;tbody&gt;？</dd>
+    <dd><button id='axios'>点击获取WEB知识体系</button></dd>
+    <dd class="tbl-box">
+      <table class="tbl" cellpadding='6'>
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>内容</th>
+            <th>难度</th>
+          </tr>
+        </thead>
+        <tbody id="axios-local"></tbody>
+      </table>
+    </dd>
+    <dd class="code">
+      <pre>
+//使用节点
+for (let i = 0; i &lt; res.data.length; i++) {
+let tr = document.createElement('tr')
+for (let item in res.data[i]) {
+    let td = document.createElement('td')
+    td.innerHTML = res.data[i][item]
+    tr.appendChild(td)
+}
+axiosLocal.appendChild(tr)
+}</pre>
+    </dd>
+    <dd class="code">
+      <pre>
+//使用innerHtml
+for (let i = 0; i &lt; res.data.length; i++) {
+let tr = '<tr>'
+for (let item in res.data[i]) {
+    tr += '<td>' + res.data[i][item] + '</td>'
+}
+tr += '</tr>'
+axiosLocal.innerHTML += tr
+}</pre>
+    </dd>
+    <dt>Vue框架</dt>
+    <dd>使用npm安装并引入</dd>
+    <dd>通常全局安装并引入</dd>
+    <dd class="code">
+      <pre>npm i axios</pre>
+    </dd>
+    <dd class="code">
+      <pre>import axios from 'axios'</pre>
+    </dd>
+  </dl>
+  <div class="chap">Ajax</div>
+  <dl class="nav-cont">
+    <dt>简介 overview</dt>
+    <dd>基于XML HTTPRequest</dd>
+  </dl>
+  <div class="chap">Cases</div>
+  <dl class="nav-cont">
+    <dt>环境部署</dt>
+    <dd>1.node.js</dd>
+    <dd>2.H5项目</dd>
+    <dd>3.1本地json数据：借助json-server；优点：可以增删改查</dd>
+    <dd>3.2在线json数据：各种第三方，如：https://api.apiopen.top/getJoke?page=1&count=10&type=text；缺点：只能读取，不能操作</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 案例</dd>
+    <table class="tbl" id="tbl" cellpadding='6'>
+      <caption>职员花名册</caption>
+      <tr>
+        <th>序号</th>
+        <th><span class="iconfont">&#xe841;</span>姓名</th>
+        <th><span class="iconfont">&#xe80e;</span>单位</th>
+        <th><span class="iconfont">&#xe814;</span>性别</th>
+        <th><span class="iconfont">&#xe821;</span>操作</th>
+      </tr>
+    </table>
+    <form class="add-box" action="">
+      <table cellspacing='10'>
+        <caption>职员添加</caption>
+        <tr>
+          <td>
+            <label for="uName"><strong><span class="iconfont">&#xe841;</span> 姓名</strong></label>
+          </td>
+          <td>
+            <input type="text" required maxlength="8" name="uName" id="uName" placeholder="8个字符以内">
+          </td>
+          <td rowspan="3">
+            <button id='sub'>提交</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="uUnit"><strong><span class="iconfont">&#xe80e;</span> 单位</strong></label>
+          </td>
+          <td>
+            <input type="text" required maxlength="6" name="uUnit" id="uUnit" placeholder="6个字符以内">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong><span class="iconfont">&#xe814;</span> 性别</strong>
+          </td>
+          <td>
+            <input type="radio" value="男" name="gender" id="male" required>
+            <label for="male">男</label>
+            <input type="radio" value="女" name="gender" id="female" required>
+            <label for="female">女</label>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="../lib/ham.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    // data adding
+    let add = document.querySelector('.add-box')
+    add.addEventListener('submit', function (e) {
+      e.preventDefault()
+      var formData = new FormData(this);
+      console.log(formData.get('uName'), formData.get('uUnit'), formData.get('gender'));
+      fetch('http://localhost:3000/clerk', {
+        method: 'post',
+        body: `name=${formData.get('uName')}&unit=${formData.get('uUnit')}&gender=${formData.get('gender')}`,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(res => {
+          console.log(res);
+          if (res.status === 201) {
+            alert('add ok')
+            window.location.href = 'fetch.html'
+          } else {
+            console.log('add fail');
+            alert('add fail')
+          }
+        })
+    })
+
+    // axios
+    // remote - dog
+    let getDog = document.querySelector('#getDog')
+    let dog = document.querySelector('#dog img')
+    getDog.addEventListener('click', getDogFn)
+    async function getDogFn() {
+      let res = await axios('https://dog.ceo/api/breed/pembroke/images/random')
+      dog.src = res.data.message
+    }
+    getDogFn()
+    // remote - 土味情话
+    let axiosR = document.querySelector('#axios-re')
+    let axiosRe = document.querySelector('#axios-remote')
+    axiosR.addEventListener('click', getQinghua)
+    function getQinghua() {
+      axiosRe.innerHTML = ''
+      axios
+        // .get('https://api.apiopen.top/getJoke?page=1&count=10&type=text')
+        .get('https://api.uomg.com/api/rand.qinghua?format=json')
+        .then(res => {
+          axiosRe.innerHTML = res.data.content
+        })
+    }
+    getQinghua()
+    // local
+    let axiosL = document.querySelector('#axios')
+    let axiosLocal = document.querySelector('#axios-local')
+    axiosL.addEventListener('click', () => {
+      axiosLocal.innerHTML = ''
+      axios
+        .get('../../data/data2021/stu.json')
+        .then(res => {
+          for (let i = 0; i < res.data.length; i++) {
+            let tr = document.createElement('tr')
+            for (let item in res.data[i]) {
+              let td = document.createElement('td')
+              td.innerHTML = res.data[i][item]
+              tr.appendChild(td)
+            }
+            axiosLocal.appendChild(tr)
+          }
+          // for (let i = 0; i < res.data.length; i++) {
+          //   let tr = '<tr>'
+          //   for (let item in res.data[i]) {
+          //     tr += '<td>' + res.data[i][item] + '</td>'
+          //   }
+          //   tr += '</tr>'
+          //   axiosLocal.innerHTML += tr
+          // }
+        })
+    })
+  </script>
+</body>
+
+</html>

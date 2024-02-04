@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多行文本输入 textarea</title>
+  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="./css/form.css">
+  <link rel="stylesheet" href="../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;&lt;textarea&gt;</h1>
+  </header>
+  <dl>
+    <dd>. 文本域；多行文本输入</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>默认结构；建议使用CSS设置宽高来代替cols、rows</figcaption>
+        <pre>&lt;textarea name="" id="" cols="30" rows="10"&gt;&lt;/textarea&gt;</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>默认情况下，可以自由缩放，会影响布局；初始化设置指定不缩放</figcaption>
+        <pre>
+textarea {
+    resize: none;
+}</pre>
+      </figure>
+    </dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>属性</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>cols</td>
+          <td>列数；建议使用CSS宽高指定</td>
+        </tr>
+        <tr>
+          <td>rows</td>
+          <td>行数；建议使用CSS宽高指定</td>
+        </tr>
+        <tr>
+          <td>wrap</td>
+          <td>是否换行；默认on|换行。off|不换行。谁会不换行呢</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>事件</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>change</td>
+          <td>选择改变时</td>
+        </tr>
+        <tr>
+          <td>focus</td>
+          <td>获取焦点时</td>
+        </tr>
+        <tr>
+          <td>blur</td>
+          <td>失去焦点时</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 动态改变背景</dd>
+    <dd>. 注意封装函数时，需要额外使用匿名函数或箭头函数，详情请查看 <a href="./js/event.html">事件 event</a>一节</dd>
+    <dd>
+      <textarea name="" id="ta-bg" title="msg"></textarea>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+let ta = document.querySelector('#ta-bg');
+function setBg(color) {
+  ta.style.background = color;
+}
+ta.addEventListener('focus', (e) => {
+  setBg('#f3f4f5')
+});
+ta.addEventListener('blur', (e) => {
+  setBg('#fff')
+});</pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap nav-cont">按钮 &lt;button&gt;</div>
+  <dl>
+    <dd>. 将表单收集的数据提交给后端服务器处理</dd>
+    <dd>. 也可以使用&lt;input&gt;并指定类型为button</dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>属性</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>button</td>
+          <td>普通按钮；没有特定行为；默认</td>
+        </tr>
+        <tr>
+          <td>submit</td>
+          <td>提交按钮</td>
+        </tr>
+        <tr>
+          <td>reset</td>
+          <td>还原/清除按钮；清除表单元素所有数据</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 数据采集完毕后，点击提交，查看浏览器地址栏信息</dd>
+    <dd>
+      <form action="http://www.baidu.com" target="_blank" class="form">
+        <fieldset>
+          <legend>基本信息</legend>
+          <div class="form-item">
+            <label for="name">姓名</label>
+            <input type="text" id="name" name="name" value="" placeholder="name" class="border">
+          </div>
+          <div class="form-item">
+            <label for="pass">密码</label>
+            <input type="password" id="pass" name="pw" value="" placeholder="password" autocomplete class="border">
+          </div>
+          <div class="form-item">
+            <label>性别</label>
+            <div>
+              <input type="radio" name='gender' id="male" value="male" checked>
+              <label for="male">男</label>
+              <input type="radio" name='gender' id="female" value="female">
+              <label for="female">女</label>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>学历经历</legend>
+          <div class="form-item">
+            <label>开始时间</label>
+            <input type="date" name="date-start" id="ds" class="border">
+          </div>
+          <div class="form-item">
+            <label>结束时间</label>
+            <input type="date" name="date-end" id="de" class="border">
+          </div>
+          <div class="form-item">
+            <label>学校</label>
+            <input type="text" name="school" id="school" placeholder="school" class="border">
+          </div>
+          <div class="form-item">
+            <label>专业</label>
+            <input type="text" name="major" id="major" placeholder="major" class="border">
+          </div>
+          <div class="form-item">
+            <label>类型</label>
+            <div>
+              <input type="radio" name="unit-radio" id="unit0" value="full" checked>
+              <label for="unit0">全日制</label>
+              <input type="radio" name="unit-radio" id="unit1" value="part">
+              <label for="unit1">在职</label>
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-item">
+          <button class="btn" type="submit">submit</button>
+          <button class="btn" type="reset">reset</button>
+        </div>
+      </form>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer"
+    onload="this.height=this.contentDocument.body.scrollHeight"></iframe>
+  <script>
+    window.onload = function () {
+      let ta = document.querySelector('#ta-bg');
+      // ta.style.backgroundColor = '#f40';
+      function setBg(color) {
+        ta.style.background = color;
+      }
+      ta.addEventListener('focus', (e) => {
+        setBg('#f3f4f5')
+      });
+      ta.addEventListener('blur', (e) => {
+        setBg('#fff')
+      });
+      // ta.addEventListener('focus', function () {
+      //   setBg('#f40')
+      // });
+      // ta.addEventListener('blur', function () {
+      //   setBg('#ccc')
+      // });
+
+    }
+  </script>
+</body>
+
+</html>

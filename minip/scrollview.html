@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滚动视图组件 scroll-view</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>滚动视图组件</h1>
+        <span>&lt;scroll-view&gt;</span>
+    </header>
+    <dl>
+        <dt>说明</dt>
+        <dd>超过容器后，子项可以按照一定方向滚动的区域</dd>
+        <dd>不支持嵌套textarea、map、canvas、video 组件</dd>
+        <dd>更多信息，请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html"
+                class="link">官方文档</a></dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>通用属性</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>scroll-x</td>
+                    <td>允许横向滚动</td>
+                </tr>
+                <tr>
+                    <td>scroll-y</td>
+                    <td>允许纵向滚动；需要指定高度</td>
+                </tr>
+                <tr>
+                    <td>scroll-into-view</td>
+                    <td>滚动到值为id的某子元素；id不能以数字开头</td>
+                </tr>
+                <tr>
+                    <td>scroll-with-animation</td>
+                    <td>使用动画过渡</td>
+                </tr>
+                <tr>
+                    <td>bindscroll</td>
+                    <td>滚动时触发</td>
+                </tr>
+            </table>
+            <table class="tbl-sn">
+                <caption>Skyline 特有属性</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>
+                        <details>
+                            <summary>渲染模式</summary>
+                            <div>list：列表模式；默认</div>
+                            <div>custom：自定义模式； 子组件是sticky-section、list-view或grid-view </div>
+                            <div>nested：嵌套模式</div>
+                        </details>
+                    </td>
+                </tr>
+                <tr>
+                    <td>using-sticky</td>
+                    <td>布尔；默认false；启用 position: sticky 特性</td>
+                </tr>
+            </table>
+            <table class="tbl-sn">
+                <caption>WebView 特有属性</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>enable-flex</td>
+                    <td>布尔；默认false；启用 flexbox 布局</td>
+                </tr>
+                <tr>
+                    <td>using-sticky</td>
+                    <td>布尔；默认false；启用 position: sticky 特性</td>
+                </tr>
+            </table>
+        </dd>
+        <dd class="example-sn">垂直滚动 - 查看城市信息</dd>
+        <dd>页面结构</dd>
+        <dd>- 滑动视图：内部是若干标题城市首字母和城市图像或名称列表</dd>
+        <dd>- 版权信息</dd>
+        <dd class="code">
+            <pre>&lt;scroll-view scroll-y using-sticky class="sc"&gt;&lt;/scroll-view&gt;</pre>
+        </dd>
+        <dd>样式</dd>
+        <div>- 版权信息高度100rpx</div>
+        <div>- 滑动视图高度由 calc 计算得出；且标题粘性定位在滑动视图顶端</div>
+        <dd class="tips">如果不限高，不使用 scroll-view 也可以</dd>
+        <dd class="example-sn">水平滚动 - 导航</dd>
+        <dd>方案1：容器不换行；导航项调整为inline-block</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>wxml</figcaption>
+                <pre>
+&lt;scroll-view scroll-x class="wrap"&gt;
+    &lt;view class="item"&gt;item1&lt;/view&gt;
+    ...
+    &lt;view class="item"&gt;item10&lt;/view&gt;
+&lt;/scroll-view&gt;</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>wxss - 最后一个需要特别处理消除margin</figcaption>
+                <pre>
+.wrap{
+    white-space: nowrap;
+}
+.item{
+    display: inline-block;
+    margin: 0 20rpx;
+}</pre>
+            </figure>
+        </dd>
+        <dd>方案2：在容器和子项之间增加一个view作为间接容器，view使用弹性盒子flex布局</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>wxml - 增加一级容器</figcaption>
+                <pre>
+&lt;scroll-view scroll-x class="wrap"&gt;
+    &lt;view class="inner-wrap"&gt;
+        &lt;view class="item"&gt;item1&lt;/view&gt;
+        ...
+        &lt;view class="item"&gt;item10&lt;/view&gt;
+    &lt;/view&gt;
+&lt;/scroll-view&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>wxss - 更简洁</figcaption>
+                <pre>
+.inner-wrap{
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 40rpx;
+}</pre>
+            </figure>
+        </dd>
+        <dd>方案3：为容器增加enable-flex属性启用并使用弹性盒子flex布局；仍然需要单独设置各项的间隔；样式过于分散，不推荐</dd>
+        <dd class="example-sn">联动导航</dd>
+        <dd>滚动视图scroll-view和轮播swiper配合使用</dd>
+        <dd>单击滚动导航项，轮播跳转到指定项</dd>
+        <dd>拖动改变轮播时，滚动导航项也相应改变；且当前导航项样式高亮</dd>
+        <dd>滚动导航项使用自定义属性data-获取各项的索引</dd>
+        <dd>轮播使用改变时间获取当前current</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>wxml</figcaption>
+                <pre>
+&lt;scroll-view scroll-x scroll-into-view="{{curIndex}}"&gt;
+    &lt;view class="nav"&gt;
+        &lt;view class="item {{index==curIndex?'active':''}}" wx:for="{{nav}}" wx:key="index" data-ind="{{item}}" bind:tap="selectItem"&gt;
+        {{item}}
+        &lt;/view&gt;
+    &lt;/view&gt;
+&lt;/scroll-view&gt;
+&lt;swiper current="{{curIndex}}" bindchange="changeItem" circular&gt;
+    &lt;swiper-item class="swiper-item" wx:for="{{10}}" wx:key="index"&gt;
+    {{item}}
+    &lt;/swiper-item&gt;
+&lt;/swiper&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>js|ts</figcaption>
+                <pre>
+selectItem(e:any) {
+    this.setData({
+        curIndex: e.target.dataset.ind
+    })
+    },
+changeItem(e:any){
+    this.setData({
+        curIndex: e.detail.current
+    })
+}</pre>
+            </figure>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

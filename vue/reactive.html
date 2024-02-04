@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>响应式 reactive</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>响应式</h1>
+        <span>Reactive</span>
+    </header>
+    <dl>
+        <dt>ref</dt>
+        <dd>创建<span class="warn">基本数据类型、复合数据类型</span>的响应式数据</dd>
+        <dd>需引入包 ref</dd>
+        <dd>ref() 将传入参数的值包装为一个带 .value 属性的 ref 对象</dd>
+        <dd>ref 的 .value 属性是响应式</dd>
+        <dd>模板中直接使用，vue会自动获取其value</dd>
+        <dd>js中使用需要额外指定value才可以</dd>
+        <dd class="code">
+            <pre>
+import { ref } from 'vue'
+const count = ref(0)
+console.log(count) //{value:0}
+console.log(count.value) //0</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+&lt;div>{{name}}&lt;/div>
+
+let name=ref("cnplaman")
+console.log(name.value)</pre>
+        </dd>
+        <dt>reactive</dt>
+        <dd>只能创建<span class="warn">复合数据类型</span>的响应式数据，如对象、数组</dd>
+        <dd>需引入包 reactive</dd>
+        <dd>只能修改复合数据类型的数据项，不能重新赋值，否则就失去响应式</dd>
+        <dd class="code">
+            <pre>
+import { reactive } from 'vue'
+const count = ref(0)
+const num = reactive(10) //value cannot be made reactive: 10
+</pre>
+        </dd>
+        <dd>但是其他响应式数据触发时，该值仍然会响应</dd>
+        <dd class="code">
+            <pre>
+&lt;button type="button" @click="count++"> count is {{ count }} &lt;/button&gt;
+&lt;button type="button" @click="num++"> num is {{ num }} &lt;/button&gt;</pre>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

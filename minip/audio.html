@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音频组件 audio</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>音频组件</h1>
+        <span>&lt;audio&gt;</span>
+    </header>
+    <dl>
+        <dt>说明</dt>
+        <dd>展示音频的容器</dd>
+        <dd>从基础库 1.6.0 开始，本接口停止维护，请使用 wx.createInnerAudioContext</dd>
+        <dd>请使用在线资源或自建服务器资源；不要使用本地资源</dd>
+        <dd>更多信息，请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/component/audio.html"
+                class="link">微信官方文档</a>
+        </dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>一般属性</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+            </table>
+            <table class="tbl-sn">
+                <caption>事件属性</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+            </table>
+        </dd>
+    </dl>
+    <div class="chap">API</div>
+    <dl>
+        <dt>wx.getBackgroundAudioManager()</dt>
+        <dd>获取全局唯一的背景音频管理器；创建背景音乐管理器</dd>
+        <dd>传统音频相关接口已停止维护</dd>
+        <dd>若需要在小程序切后台后继续播放音频，需要在 app.json 中配置 requiredBackgroundModes 属性；正式版还需通过审核</dd>
+        <dd>返回BackgroundAudioManager示例</dd>
+        <dd>更多信息，请查看 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/media/background-audio/BackgroundAudioManager.html"
+                class="link">官方文档</a>
+        </dd>
+        <dt>BackgroundAudioManager</dt>
+        <dd>
+            <details>
+                <summary>属性</summary>
+                <div>src：音频的数据源；当设置了新的 src 时，会自动开始播放；支持的格式有 m4a、aac、mp3、wav</div>
+                <div>title：音频标题，用于原生音频播放器音频标题；必填；分享出去的卡片标题将使用该值</div>
+                <div>epname：专辑名；分享出去的卡片简介将使用该值</div>
+                <div>singer：歌手名；分享出去的卡片简介将使用该值</div>
+                <div>coverImgUrl：封面图 URL，用于做原生音频播放器背景图；分享出去的卡片配图及背景将使用该图</div>
+                <div>webUrl：页面链接；分享出去的卡片简介将使用该值</div>
+                <div>duration：当前音频的长度；单位s；只有在有合法 src 时返回；只读</div>
+                <div>currentTime：当前音频的播放位置；单位s；只有在有合法 src 时返回；只读</div>
+                <div>paused：当前是否暂停或停止；只读</div>
+                <div>buffered：音频已缓冲的时间，仅保证当前播放时间点到此时间点内容已缓冲；只读</div>
+            </details>
+            <details>
+                <summary>方法</summary>
+                <div>play()：播放音乐</div>
+                <div>pause()：暂停音乐</div>
+                <div>seek(number currentTime)：跳转到指定位置</div>
+                <div>onEnded(function listener)：监听背景音频自然播放结束事件</div>
+                <div>onTimeUpdate(function listener)：监听背景音频播放进度更新事件，只有小程序在前台时会回调</div>
+            </details>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

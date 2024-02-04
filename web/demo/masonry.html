@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>瀑布流Masonry</title>
+  <link rel="stylesheet" href="../css/styleNew.css">
+  <link rel="stylesheet" href="./css/masonry.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Masonry</h1>
+  </header>
+  <dl>
+    <dd>.本意是交错排列的砖石结构，强大的前端开发者形象的称之为瀑布流</dd>
+    <dd>.特点：宽度相同，高度不同</dd>
+    <dd>.早期多使用js+float实现；现在可以使用flex、column快速实现</dd>
+    <dd>.占位图片请使用 <a href="https://picsum.photos/">Lorem Picsum</a></dd>
+    <dd>
+      <figure class="code">
+        <figcaption>Lorem Picsum</figcaption>
+        <pre>&lt;img src="https://picsum.photos/200/300?random=1"&gt;</pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">弹性盒子flex实现</div>
+  <dl>
+    <dd>实现：列方向、换行、固定列宽</dd>
+    <dd>优点：方便采用结构伪类编号</dd>
+    <dd>不足：高度做不到任性，需调试找到最佳高度 - 刚好放满指定的列，且不能出现水平滚动条，且要考虑响应式高度</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>弹性盒子flex实现</figcaption>
+        <pre>
+.masonry-flex {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 1635px;
+}
+@media screen and (max-width:768px) {
+  .masonry-flex {
+    height: 600px;
+  }
+}</pre>
+      </figure>
+    </dd>
+    <dd class="masonry-flex">
+      <div class="item"><img src="../imgs/1.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/girl.png" alt=""></div>
+      <div class="item"><img src="../imgs/7.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/alizee.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/bg.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/boy.png" alt=""></div>
+      <div class="item"><img src="../imgs/2.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/slider0.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/slider1.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/h0.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/3.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/s_green.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/6.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/IE.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/logo0.png" alt=""></div>
+      <div class="item"><img src="../imgs/logo1.png" alt=""></div>
+      <div class="item"><img src="../imgs/4.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/poem.jpeg" alt=""></div>
+      <div class="item"><img src="../imgs/s_blue.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/h1.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/5.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/h2.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/s_rose.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/tree3.png" alt=""></div>
+      <div class="item"><img src="../imgs/tree4.png" alt=""></div>
+      <div class="item"><img src="../imgs/slider2.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/slider3.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/tree0.png" alt=""></div>
+      <div class="item"><img src="../imgs/tree1.png" alt=""></div>
+      <div class="item"><img src="../imgs/s_yellow.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/tree2.png" alt=""></div>
+      <div class="item"><img src="../imgs/slider4.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/slider5.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/hj.png" alt=""></div>
+      <div class="item"><img src="../imgs/egg.jpg" alt=""></div>
+    </dd>
+  </dl>
+  <div class="chap">分栏Columns实现</div>
+  <dl>
+    <dd>实现：无需指定高度，只需指定列数即可；指定gap为0可以紧凑排列</dd>
+    <dd>不足：不太方便编号</dd>
+    <dd>
+      <figure clcode>
+        <figcaption>分栏Columns实现</figcaption>
+        <pre>
+.masonry {
+  column-count: 4;
+  gap: 0;
+}</pre>
+      </figure>
+    </dd>
+    <dd class="masonry-grid">
+      <div class="item"><img src="../imgs/1.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/girl.png" alt=""></div>
+      <div class="item"><img src="../imgs/7.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/alizee.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/bg.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/boy.png" alt=""></div>
+      <div class="item"><img src="../imgs/2.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/slider0.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/slider1.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/h0.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/3.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/s_green.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/6.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/IE.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/logo0.png" alt=""></div>
+      <div class="item"><img src="../imgs/logo1.png" alt=""></div>
+      <div class="item"><img src="../imgs/4.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/poem.jpeg" alt=""></div>
+      <div class="item"><img src="../imgs/s_blue.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/h1.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/5.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/h2.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/s_rose.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/tree3.png" alt=""></div>
+      <div class="item"><img src="../imgs/tree4.png" alt=""></div>
+      <div class="item"><img src="../imgs/slider2.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/slider3.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/tree0.png" alt=""></div>
+      <div class="item"><img src="../imgs/tree1.png" alt=""></div>
+      <div class="item"><img src="../imgs/s_yellow.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/tree2.png" alt=""></div>
+      <div class="item"><img src="../imgs/slider4.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/slider5.jpg" alt=""></div>
+      <div class="item"><img src="../imgs/hj.png" alt=""></div>
+      <div class="item"><img src="../imgs/egg.jpg" alt=""></div>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no"></iframe>
+</body>
+
+</html>

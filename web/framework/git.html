@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git</title>
+    <link rel="stylesheet" href="../../css/reset2024.css">
+    <link rel="stylesheet" href="../../css/common2024.css">
+    <link rel="stylesheet" href="../../css/code.css">
+    <link rel="stylesheet" href="../../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>版本管理</h1>
+        <span>&commat;Git</span>
+    </header>
+    <nav>
+        <a href="" class="logo">Git</a>
+        <div class="ham">
+            <i class="ri-menu-line menu"></i>
+            <i class="ri-close-line close"></i>
+        </div>
+        <div class="nav-wrap">
+            <a href="" class="nav-item">概述</a>
+            <a href="" class="nav-item">工作流</a>
+            <a href="" class="nav-item">基本使用</a>
+            <a href="" class="nav-item">分支</a>
+        </div>
+    </nav>
+    <dl class="nav-cont">
+        <dt>说明</dt>
+        <dd>. 代码仓库管理工具</dd>
+        <dd>. 分布式版本控制系统</dd>
+        <dt>下载</dt>
+        <dd>. 打开git官网<a href="https://git-scm.com/" class="link">https://git-scm.com/</a>，选择对应的操作系统和版本，点击下载并安装</dd>
+        <dt>查看Git版本</dt>
+        <dd>. 右键点击桌面空白处，选择Git Bash Here，打开终端窗口，输入以下命令</dd>
+        <dd>
+            <figure class="code">
+                <pre>
+$ git --version
+git version 2.34.1.windows.1</pre>
+            </figure>
+        </dd>
+        <dt>配置Git</dt>
+        <dd>. 使用户名和邮箱将Git和用户[自己的代码仓库Github]关联起来</dd>
+        <dd>. 用户名和邮箱仅仅作为签名，以区分提交的用户，和仓库账号没有关系</dd>
+        <dd>. 没有关联，无法提交commit</dd>
+        <dd>
+            <figure class="code">
+                <pre>
+$ git config --global user.email 1942194789@qq.com
+$ git config --global user.name glpla</pre>
+            </figure>
+        </dd>
+        <dt>查看Git配置</dt>
+        <dd>
+            <figure class="code">
+                <pre>
+cnplaman@LAPTOP-QL08LD1S MINGW64 ~/Desktop
+$ git config  user.name
+cnplaman
+
+cnplaman@LAPTOP-QL08LD1S MINGW64 ~/Desktop
+$ git config  user.email
+1942194789@qq.com</pre>
+            </figure>
+        </dd>
+    </dl>
+    <div class="chap">工作流 workflow</div>
+    <dl class="nav-cont">
+        <dd>
+            <figure class="img-sn">
+                <img src="../imgs/git.jpg" alt="">
+                <figcaption>Git工作流</figcaption>
+            </figure>
+        </dd>
+        <dt>1. 工作区 workspace</dt>
+        <dd>存放项目文件的地方，通常就是你的项目工作目录</dd>
+        <dd>利用add可以将文件从工作区放到暂存区</dd>
+        <dt>2. 暂存区 stage</dt>
+        <dd>临时存放文件便于调整</dd>
+        <dd>利用commit可以将文件从暂存区放到本地仓库区/版本区</dd>
+        <dt>3. 本地仓库区 local repository</dt>
+        <dd>版本区</dd>
+        <dd>文件只有放到了版本区才可以进行真正意义上的管理</dd>
+        <dd>从版本区也可以切换回去工作区，使用git reset --hard命令</dd>
+        <dt>4. 远程仓库区 remote repository</dt>
+        <dd>线上仓库，如GitHub、Gitee</dd>
+    </dl>
+    <div class="chap">常见使用 usage</div>
+    <dl class="nav-cont">
+        <dt>初始化仓库 init</dt>
+        <dd>为当前工作目录生成一个隐藏文件夹.git，里面是git配置信息</dd>
+        <dd>具体的配置文件.gitconfig位于系统盘用户目录下：C:\Users\cnplaman</dd>
+        <dd>文件内容就是Git配置的用户邮箱等基本信息</dd>
+        <dd class="code">
+            <pre>git init</pre>
+        </dd>
+        <dt>提交文件到暂存区 add</dt>
+        <dd>.表示所有文件；也可以指定需要提交的具体的文件</dd>
+        <dd>单个文件体积大小不要超过50MB</dd>
+        <dd class="code">
+            <pre>git add .</pre>
+        </dd>
+        <dt>提交到本地仓库 commit</dt>
+        <dd>每次提交都有一个commitId记录</dd>
+        <dd class="code">
+            <pre>
+git commit -m ""</pre>
+        </dd>
+        <dt>查看文件状态 status</dt>
+        <dd class="code">
+            <pre>git status</pre>
+        </dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>Git文件状态</caption>
+                <tr>
+                    <td>untracked</td>
+                    <td>未记录的；VS code中使用标记U</td>
+                </tr>
+                <tr>
+                    <td>modified</td>
+                    <td>修改过的；VS code中使用标记M</td>
+                </tr>
+                <tr>
+                    <td>staged</td>
+                    <td>已暂存的</td>
+                </tr>
+                <tr>
+                    <td>committed</td>
+                    <td>已提交的</td>
+                </tr>
+            </table>
+        </dd>
+        <dt>撤销本地修改 checkout</dt>
+        <dd>丢弃工作区的修改</dd>
+        <dd>修改了文件，但是没有add到暂存区，使用该命令可以撤销对文件的修改，相当于在编辑环境中使用了CTRL + Z操作</dd>
+        <dd>修改了文件，已经add到暂存区，使用该命令，可以拉取暂存区的文件到工作区，覆盖当前文件，相当于放弃了对文件的修改，即和暂存区保持一致</dd>
+        <dd class="code">
+            <pre>git checkout -- file</pre>
+        </dd>
+        <dt>查看本地仓库提交记录 log</dt>
+        <dd>按q退出</dd>
+        <dd class="code">
+            <pre>
+$ git log
+commit cc355cbd2a03d61f0ef440706fee7c6257f9fee3 (HEAD -> main, origin/main, origin/HEAD)
+Author: glpla &lt;1942194789@qq.com>
+Date:   Wed Jan 3 12:34:20 2024 +0800
+
+    web
+
+commit 32eefc91550a970775689f1f2a7b239bd2b22753
+Author: glpla &lt;1942194789@qq.com>
+Date:   Wed Jan 3 10:48:20 2024 +0800
+
+    web</pre>
+        </dd>
+        <dt>查看远程仓库提交记录 reflog</dt>
+        <dd>按q退出</dd>
+        <dd>main总是指向最新的提交；而HEAD指向当前的活动分支；如果没有分支，就指向主分支main</dd>
+        <dd>HEAD前面的字符串序列是提交的版本号；利用这个可以实现版本穿梭</dd>
+        <dd>示例中没有分支，所以HEAD指向主分支main</dd>
+        <dd class="code">
+            <pre>
+$ git reflog
+cc355cb (HEAD -> main, origin/main, origin/HEAD) HEAD@{0}: commit: web
+32eefc9 HEAD@{1}: commit: web
+aae5d51 HEAD@{2}: commit: web
+065c08e HEAD@{3}: commit: fn</pre>
+        </dd>
+        <dt>撤销本地/远程提交 reset</dt>
+        <dd>
+            <figure class="code">
+                <figcaption>撤销远程提交 - 版本穿梭</figcaption>
+                <pre>
+git reset --hard 版本号
+
+Head is now at xxxxx</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>撤销本地提交</figcaption>
+                <pre>git reset commitId</pre>
+            </figure>
+        </dd>
+        <dd class="example-sn">新项目第一次推送</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>完整流程</figcaption>
+                <pre>
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin url
+git push -u origin main</pre>
+            </figure>
+        </dd>
+        <dt>查看关联的远程仓库</dt>
+        <dd class="code">
+            <pre>
+$ git remote -v
+origin  https://github.com/glpla/glpla.github.io.git (fetch)
+origin  https://github.com/glpla/glpla.github.io.git (push)</pre>
+        </dd>
+        <dt>删除关联的远程仓库</dt>
+        <dd>以便重新关联新仓库</dd>
+        <dd class="code">
+            <pre>
+$ git remote remove origin</pre>
+        </dd>
+    </dl>
+    <div class="chap">分支 Branch</div>
+    <dl class="nav-cont">
+        <dt>说明</dt>
+        <dd>通过分支实现项目的分工协作</dd>
+        <dd>各分支的操作并不影响主分支；且分支的进度通常要领先于主分支</dd>
+        <dd>当分支合并到主分支后，主分支的整个时间线才往前推进，进度才能和分支保持一致</dd>
+        <dd>main总是指向最新的提交；而HEAD指向当前的活动分支；如果没有分支，就指向主分支main</dd>
+        <dd>只有提交commit过1次后才能查看分支</dd>
+        <dd>
+            <figure class="img-sn">
+                <img src="../imgs/branch2.jpg" alt="">
+                <figcaption>无分支时，HEAD指向主分支</figcaption>
+            </figure>
+            <figure class="img-sn">
+                <img src="../imgs/branch0.jpg" alt="">
+                <figcaption>分支单独工作，HEAD指向活动分支</figcaption>
+            </figure>
+            <figure class="img-sn">
+                <img src="../imgs/branch1.jpg" alt="">
+                <figcaption>分支合并到主分支</figcaption>
+            </figure>
+        </dd>
+        <dt>查看分支</dt>
+        <dd>当前分支以*号表示，且颜色为绿色</dd>
+        <dd class="code">
+            <pre>
+//不带参数：查看本地分支
+$ git branch
+  dev
+* master
+
+//查看所有分支
+$ git branch -a
+dev
+* master
+
+//查看分支最近提交信息
+$ git branch -v
+  dev    29aee33 1st commit
+* master 29aee33 1st commit
+
+//查看远程分支
+$ git branch -r</pre>
+        </dd>
+        <dt>创建分支</dt>
+        <dd class="code">
+            <pre>$ git branch branch_name</pre>
+        </dd>
+        <dt>切换分支 checkout</dt>
+        <dd>指定要切换的分支名</dd>
+        <dd class="code">
+            <pre>
+$ git checkout dev
+Switched to branch 'dev'</pre>
+        </dd>
+        <dt>合并分支 merge</dt>
+        <dd>通常在主分支合并其它分支</dd>
+        <dd>将其它分支合并到主分支；主分支会前进一次forwards</dd>
+        <dd>原有分支仍然存在</dd>
+        <dd class="code">
+            <pre>
+$ git merge dev
+Updating 29aee33..c9f8938
+Fast-forward
+ demo.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 demo.txt</pre>
+        </dd>
+        <dt>删除分支</dt>
+        <dd>指定删除的分支名</dd>
+        <dd>只能在当前分支删除其它分支</dd>
+        <dd class="code">
+            <pre>
+$ git branch -d dev
+Deleted branch dev (was c9f8938).            </pre>
+        </dd>
+        <dd class="example-sn">分支操作</dd>
+        <dd>请使用shell完成以下操作</dd>
+        <dd class="number">
+            <div>创建新文件夹Demo作为工作目录</div>
+            <div>初始化工作目录</div>
+            <div>查看分支</div>
+            <div>创建测试文件test.txt并add、commit提交到本地仓库</div>
+            <div>查看分支</div>
+            <div>创建分支dev</div>
+            <div>切换至分支dev</div>
+            <div>查看分支</div>
+            <div>创建测试文件demo.txt并add、commit提交到本地仓库</div>
+            <div>切换回master分支，查看工作目录中文件的变换情况</div>
+            <div>合并分支dev到主分支</div>
+            <div>查看分支</div>
+            <div>删除分支dev</div>
+            <div>查看分支</div>
+        </dd>
+        <dd class="tips">
+            <div>冲突</div>
+            <div>.主分支提交前进的同时，某一分支也提交。当主分支合并分支时，就会出现冲突</div>
+            <div>.尽量避免同时操作同一个文件</div>
+            <div>.主分支面向生成环境，应只做阶段性的合并</div>
+            <div>.日常工作应使用开发分支和团队分支、个人分支：个人分支合并到团队分支；团队分支合并到开发分支</div>
+        </dd>
+    </dl>
+    <script src="../lib/ham2024.js"></script>
+    <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

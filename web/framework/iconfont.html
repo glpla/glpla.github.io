@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iconfont</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Iconfont</h1>
+  </header>
+  <dl>
+    <dd>.以字体图标|文字的形式呈现图像，多用于图标，可以取代精灵图的部分应用</dd>
+    <dd>.在线使用、本地使用</dd>
+    <dd>.可以按照Unicode、Class和Symbol三种方式使用图标</dd>
+    <dd>.可以使用&lt;i&gt;或者&lt;span&gt;作为字体容器；甚至可以使用&lt;div&gt;</dd>
+    <dd>.可以使用彩色图标</dd>
+    <dd>.每次往项目中添加、删除字体图标时，都需要重新更新一下CSS资源</dd>
+    <dd>.图标类名字区分大小写</dd>
+    <dd>.更多使用细节，请参考帮助文档</dd>
+    <dd>. 其它字体库<a href="./fontawesome.html">fontawesome</a>、<a href="https://github.com/Remix-Design/RemixIcon">
+        remixicon</a>、<a href="https://www.iconfinder.com/"> iconfinder</a></dd>
+    <dt>准备字体图标文件</dt>
+    <dd>1.注册|登陆：打开阿里字体<a href="https://www.iconfont.cn/" target="_blank">
+        https://www.iconfont.cn</a>，创建 <a href="https://www.iconfont.cn">Iconfont</a> 账户</dd>
+    <dd>2.创建项目</dd>
+    <dd>3.查找图标：搜索并选择字体图标；添加到购物车[免费free]；如果需要使用图片，直接下载为图片格式</dd>
+    <dd>4.将购物车中的字体图标添加到项目中</dd>
+    <dd>5.更新并生成链接；可以下载到本地使用[推荐]；也可以在线使用</dd>
+    <dd>
+      <img src="./imgs/vscode.png" alt="">
+    </dd>
+    <dt>在线使用Font Class(推荐)</dt>
+    <dd>1.复制项目下面生成的在线fontclass链接到H5项目的&lt;link&gt;中；通常忽略网络协议https或http，由系统决定</dd>
+    <dd>
+      <pre>&lt;link rel="stylesheet" href="//at.alicdn.com/t/c/font_3859342_55f4w9rdzau.css"&gt;</pre>
+    </dd>
+    <dd>2.在&lt;i&gt;使用基类iconfont和相应的字体图标类名</dd>
+    <dd>
+      <pre>
+&lt;i class="iconfont icon-xxx"&gt;&lt;/i&gt;</pre>
+    </dd>
+    <dt>本地使用Font Class(推荐)</dt>
+    <dd>1.在阿里字体图标项目处，选择：下载至本地，建议创建单独的文件夹保存</dd>
+    <dd>2.在H5项目&lt;link&gt;中引入其中的CSS文件。注意文件路径</dd>
+    <dd>
+      <pre>
+./font_2357817_yw2cn9gbib/iconfont.css</pre>
+    </dd>
+    <dd>3.在&lt;i&gt;使用基类iconfont和相应的字体图标类名</dd>
+    <dd>
+      <pre>
+&lt;i class="iconfont icon12"&gt;&lt;/i&gt;</pre>
+    </dd>
+    <dt>在线使用symbol</dt>
+    <dd>.可以使用多色图标</dd>
+    <dd>1.拷贝项目下面生成的symbol代码：</dd>
+    <dd>
+      <pre>
+//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js</pre>
+    </dd>
+    <dd>2.加入通用CSS代码（引入一次就行），并根据需要调整大小</dd>
+    <dd>
+      <pre>
+&lt;style type="text/css"&gt;
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+&lt;/style&gt;</pre>
+    </dd>
+    <dd>3.挑选相应图标并获取类名，应用于页面</dd>
+    <dd>
+      <pre>
+&lt;svg class="icon" aria-hidden="true"&gt;
+    &lt;use xlink:href="#icon-xxx"&gt;&lt;/use&gt;
+&lt;/svg&gt;</pre>
+    </dd>
+    <dt>在线使用 Unicode</dt>
+    <dd>.可以动态使用图标</dd>
+    <dd>1.拷贝项目下面生成的font-face字体代码到CSS中</dd>
+    <dd>
+      <pre>
+@font-face {
+font-family: 'iconfont';  /* Project id 2357817 */
+src: url('//at.alicdn.com/t/font_2357817_dhel13phics.woff2?t=1632974998048') format('woff2'),
+        url('//at.alicdn.com/t/font_2357817_dhel13phics.woff?t=1632974998048') format('woff'),
+        url('//at.alicdn.com/t/font_2357817_dhel13phics.ttf?t=1632974998048') format('truetype');
+}</pre>
+    </dd>
+    <dd>2.定义使用 iconfont的样式</dd>
+    <dd>
+      <pre>
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}</pre>
+    </dd>
+    <dd>3.挑选相应图标并获取字体编码，应用于页面</dd>
+    <dd>
+      <pre>
+&lt;i class="iconfont"&gt;&amp;#x33;&lt;/i&gt;</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表渲染 v-for</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>列表渲染</h1>
+        <span>v-for</span>
+    </header>
+    <dl>
+        <dt>v-for</dt>
+        <dd>基于一个 <span class="warn">数组/对象</span> 渲染一个列表</dd>
+        <dd>使用for - in</dd>
+        <dd>需显式的指定:key属性以区分并跟踪每个节点，这就要求数据项是唯一的，或具有id属性</dd>
+        <dd>不推荐同时使用 v-if 和 v-for：二者优先级不明显</dd>
+        <dd class="example-sn">数组使用</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>1个参数：item是对数组元素的迭代变量，名字任意</figcaption>
+                <pre>
+&lt;ul&gt;
+    &lt;li v-for = "item in list" :key = "item.id" &gt; {{ item }} &lt;/li&gt;
+&lt;/ul&gt;</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>2个参数：除了item外，还可以使用数据元素对应的索引index，名字任意</figcaption>
+                <pre>
+&lt;ul&gt;
+    &lt;li v-for = "(item, index) in list" :key = "item.id" &gt; {{ item }} &lt;/li&gt;
+&lt;/ul&gt;</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>嵌套使用；每个迭代都使用独立的迭代变量</figcaption>
+                <pre>
+&lt;ul&gt;
+    &lt;li v-for = "(item, ind) in list" :key = "item.id" &gt;
+        &lt;p v-for = "innerItem in item" :key = "innerItem.id" &gt; {{ innerItem }} &lt;/p&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;</pre>
+            </figure>
+        </dd>
+        <dd class="example-sn">对象使用</dd>
+        <dd>遍历一个对象的所有属性</dd>
+        <dd>遍历的顺序会基于对该对象调用 Object.keys() 的返回值来决定</dd>
+        <dd class="code">
+            <pre>const obj = reactive({ id: 101, name: 'glpla', age: 18 })</pre>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>1个参数：值 value</figcaption>
+                <pre>&lt;div v-for = "value in obj" &gt; {{ value }} &lt;/div&gt;</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>2个参数：值 value，键 key</figcaption>
+                <pre>&lt;div v-for = "(value, key) in obj" &gt; {{ key }}:{{ value }} &lt;/div&gt;</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>3个参数：值 value，键 key，索引 index</figcaption>
+                <pre>&lt;div v-for = "(value, key, index) in obj" &gt; {{ index }}:{{ key }}:{{ value }} &lt;/div&gt;</pre>
+            </figure>
+        </dd>
+        <dd class="example-sn">综合案例</dd>
+        <dd>为区分结构，合理使用逻辑，特别是组合使用v-for和v-if时，可以使用&lt;template&gt; ；这只是一个不可见的包装器元素，最后渲染的结果并不会包含这个 &lt;template&gt; 元素</dd>
+        <dd>
+            <figure class="code">
+                <pre>
+const list = ref(['home', 'product', 'about'])
+const isOn = ref(true)</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <pre>
+&lt;template v-if = "isOn" &gt;
+    &lt;div v-for = "item in list" &gt; {{ item }} &lt;/div&gt;
+&lt;/template&gt;</pre>
+            </figure>
+        </dd>
+        <dd class="tips">
+            <div>可以在 &lt;template&gt; 标签上使用 v-for 来渲染一个包含多个元素的块</div>
+            <div>可以直接在组件上使用 v-for，和在一般的元素上使用没有区别</div>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

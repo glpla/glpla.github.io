@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件 Components</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>组件</h1>
+        <span>Components</span>
+    </header>
+    <dl>
+        <dt>概述 Overview</dt>
+    </dl>
+    <div class="chap">传参 Props</div>
+    <dl class="nav-cont">
+        <dt>父 → 子</dt>
+        <dd>1. 父组件</dd>
+        <dd>在父组件引入子组件</dd>
+        <dd>定义数据</dd>
+        <dd>以数据绑定的方式传递给子组件</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>父组件 - &lt;script&gt;</figcaption>
+                <pre>
+import Child from '@/components/Child.vue'
+import {ref} from 'vue'
+let para = ref('hi, there.')</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>父组件 - &lt;template&gt;</figcaption>
+                <pre>&lt;Child :para='para'/&gt;</pre>
+            </figure>
+        </dd>
+        <dd>2. 子组件</dd>
+        <dd>在子组件定义props接收参数</dd>
+        <dd>渲染数据</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>子组件 - &lt;script&gt;</figcaption>
+                <pre>defineProps(['para'])</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>子组件 - &lt;template&gt;</figcaption>
+                <pre>&lt;div&gt;{{para}}&lt;/div&gt;</pre>
+            </figure>
+        </dd>
+        <dt>子 → 父</dt>
+        <dd>互相定义函数实现</dd>
+        <dd>1. 父组件</dd>
+        <dd>定义接收函数来接收子组件传递的参数并以属性的形式绑定在子组件上</dd>
+        <dd>sendPara是自定义事件</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>父组件 - &lt;script&gt;</figcaption>
+                <pre>
+import Child from '@/components/Child.vue'
+import {msg} from 'vue'
+let msg = ref('')
+function getPara(val){
+    msg.value = val.value
+}</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>父组件 - &lt;template&gt;</figcaption>
+                <pre>
+&lt;div&gt;{{msg}}&lt;/div&gt;
+&lt;Child :sendPara='getPara'/&gt;</pre>
+            </figure>
+        </dd>
+        <dd>2. 子组件</dd>
+        <dd>定义要发送的数据</dd>
+        <dd>在props定义发送数据的函数名</dd>
+        <dd>在事件中定义函数发送数据 - 这里采用点击按钮触发，也可以在生命周期函数中触发</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>子组件 - &lt;script&gt;</figcaption>
+                <pre>
+import {ref} from 'vue'
+let para = ref('hi, there.')
+defineProps(['sendPara'])</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>子组件 - &lt;template&gt;</figcaption>
+                <pre>&lt;button @click='sendPara(para)'&gt;send para&lt;/button&gt;</pre>
+            </figure>
+        </dd>
+    </dl>
+    <div class="chap">自定义事件 $emit</div>
+    <dl class="nav-cont">
+        <dt>说明</dt>
+        <dd>使用自定义事件更加方便子组件向父组件传递参数</dd>
+        <dd>官方推荐自定义事件使用kebab-case形式命名</dd>
+        <dd>触发的事件则以camelCase形式命名</dd>
+        <dd>本质上并没有区别</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>子组件单击触发自定义事件 - camelCase</figcaption>
+                <pre>&lt;button @click="$emit('someEvent')"&gt;click me&lt;/button&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>父组件监听事件 - kebab-case</figcaption>
+                <pre>&lt;MyComponent @some-event="callback" /&gt;</pre>
+            </figure>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

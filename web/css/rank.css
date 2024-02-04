@@ -1,0 +1,153 @@
+@import url(//at.alicdn.com/t/c/font_4240947_1yqeamcumt2.css);
+@import url(../../css/fonts_yuwei.css);
+
+:root {
+  --item-mb: 10px;
+  --item-gap: 20px;
+  --item-bg: #f40;
+  --scroll-bar-bg: rgb(241, 139, 95);
+  --border-color: #FDC830;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  height: 100vh;
+  color: #efefef;
+  background-color: #000;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 .4rem;
+
+}
+
+nav {
+  width: 100%;
+  align-self: start;
+  display: flex;
+  align-items: end;
+  gap: var(--item-gap);
+  line-height: 20px;
+}
+
+.logo {
+  margin-left: auto;
+  color: var(--border-color);
+}
+
+.tab-item {
+  font-size: 18px;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-item.active {
+  border-color: var(--border-color);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 410px;
+  padding-left: 40%;
+  background-color: #eee;
+  background-image: url(../../imgs/cheer.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#main {
+  height: 325px;
+  overflow-y: auto;
+}
+
+#main::-webkit-scrollbar {
+  width: 8px;
+}
+
+#main::-webkit-scrollbar-track {
+  background-color: #efefef;
+  border-radius: 8px;
+}
+
+#main::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 8px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: auto auto 70px 1fr;
+  align-items: center;
+  gap: var(--item-gap);
+  padding: 0 var(--item-gap);
+  margin-right: 1rem;
+  color: #fff;
+  border-bottom: 1px solid var(--border-color);
+  line-height: 40px;
+}
+
+.item img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.item .iconfont {
+  color: var(--border-color);
+}
+
+footer {
+  color: #eee;
+}
+
+@media screen and (max-width:768px) {
+  :root {
+    --item-gap: 10px;
+  }
+
+  .logo .iconfont {
+    font-size: 60px;
+  }
+
+  .logo-title {
+    display: none;
+  }
+
+  main {
+    height: 460px;
+    padding-left: 0;
+    background-position: unset;
+  }
+
+  #main {
+    height: 400px;
+  }
+
+  .item .icons {
+    grid-column: span 5;
+    text-align: center;
+  }
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期函数 Lifetime</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>生命周期函数</h1>
+        <span>Lifetime</span>
+    </header>
+    <dl>
+        <dt>生命周期函数</dt>
+        <dd>也叫life circle</dd>
+        <dd>指的是一个对象从创建 → 运行 → 销毁的整个过程</dd>
+        <dd>每个过程对应一个阶段；每个阶段都可以使用特定的函数来处理 - 生命周期函数</dd>
+        <dd>反映了小程序和页面的不同阶段</dd>
+        <dd>- 小程序app的启动 → 运行 → 关闭</dd>
+        <dd>- 页面page的加载 → 渲染 → 卸载</dd>
+        <dd>小程序提供的生命周期函数按次序自动执行</dd>
+        <dt>app.js中的生命周期函数</dt>
+        <dd>
+            <figure class="code">
+                <figcaption>app生命周期函数</figcaption>
+                <pre>
+App({
+    globalData: {
+        //全局数据
+        //其他页面使用 const app = getApp()可以获取app所有的数据
+    },
+    onLaunch(){
+        //启动；只触发1次
+        //本地数据获取和更新
+    },
+    onShow(option){
+        //显示、恢复；可以多次触发
+        //进入前台运行
+    },
+    onHide(){
+        //隐藏、最小化；可以多次触发
+        //进入后台运行
+    },
+    onError(msg) {
+        console.error(msg)
+    }
+})</pre>
+            </figure>
+        </dd>
+        <dt>page中的生命周期函数</dt>
+        <dd>
+            <figure class="code">
+                <figcaption>page生命周期函数</figcaption>
+                <pre>
+//在Page外面获取app实例
+const app = getApp()
+Page({
+    data: {
+    },
+    onLoad(option) {
+        //页面加载时触发
+        //初始化页面数据
+        //获取页面传参
+        //1个页面只调用1次
+    },
+    onReady() {
+        //页面初次渲染完毕后触发
+        //可以与视图层交互，如修改导航栏标题
+    },
+    onShow() {
+        //可以多次触发
+    },
+    onHide() {
+        //可以多次触发
+    },
+    onUnload() {
+        //触发1次
+    }
+})</pre>
+            </figure>
+        </dd>
+        <dd class="tips">老版本的微信开发工具中的工具栏有个"切后台"，用于调试前台和后台业务逻辑</dd>
+    </dl>
+    <div class="chap">综合案例</div>
+    <dl>
+        <dt>九宫格带参导航</dt>
+        <dd>根据不同的导航项，动态设置目标页的导航标题</dd>
+        <dd>使用一个页面展示不同的内容</dd>
+        <dd>该案例也适合客户、产品详情页</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>导航页 - wxml</figcaption>
+                <pre>
+&lt;navigator 
+    class="grid"
+    wx:for="{{nav}}" wx:key="id"
+    url="../list/list?id={{item.id}}&name={{item.name}}"&gt;
+    {{item.name}}
+&lt;/navigator&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>导航页 - js|ts</figcaption>
+                <pre>
+nav:[{id:1,name:'tea'}]</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>导航页 - wxss</figcaption>
+                <pre>
+.grid{
+    display: flex;
+    gap: 20rpx;
+    flex-wrap: wrap;
+    padding: 10rpx;
+}
+.grid navigator{
+    width: 26%;
+    flex: auto;
+    aspect-ratio: 16/9;
+    background-color: #f40;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>目标页 - js|ts</figcaption>
+                <pre>
+data: {
+    title:''
+},
+onLoad(option: any) {
+    this.setData({
+        title:option.name
+    })
+},
+onReady() {
+    wx.setNavigationBarTitle({
+        title:this.data.title
+    })
+}</pre>
+            </figure>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

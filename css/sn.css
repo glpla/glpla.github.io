@@ -1,0 +1,67 @@
+body {
+  counter-reset: tbl-sn img-sn example-sn;
+}
+
+.example-sn {
+  counter-increment: example-sn;
+  margin-top: 2rem;
+}
+
+.example-sn::before {
+  content: '[例' counter(example-sn)']';
+  padding-right: 10px;
+}
+
+.number>div {
+  counter-increment: num;
+}
+
+.number>div::before {
+  content: counter(num)'. ';
+}
+
+.alpha>div {
+  counter-increment: alpha;
+}
+
+.alpha>div::before {
+  content: counter(alpha, upper-alpha)': ';
+}
+
+.tbl-sn caption {
+  counter-increment: tbl-sn;
+  font-size: 14px;
+}
+
+.tbl-sn caption::before {
+  content: '表' counter(tbl-sn)' ';
+}
+
+.img-sn {
+  text-align: center;
+}
+
+.img-sn figcaption {
+  counter-increment: img-sn;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 2rem;
+}
+
+.img-sn figcaption::before {
+  content: '图' counter(img-sn)' ';
+}
+
+.qa {
+  margin-top: 2rem;
+}
+
+.qa:has(+.example-sn) {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.qa::before {
+  content: '[参考答案] ';
+  color: var(--warn-color);
+}

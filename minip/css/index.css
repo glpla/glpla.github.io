@@ -1,0 +1,74 @@
+@import url('https://fonts.font.im/css?family=Great+Vibes');
+
+:root {
+  --warn-color: #ff5d73;
+  --w-aside: 22px;
+}
+
+aside {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  width: var(--w-aside);
+  margin-left: calc(-1*var(--w-width)/2 - var(--w-aside));
+}
+
+aside span {
+  width: var(--w-aside);
+  height: var(--w-aside);
+  text-align: center;
+  line-height: var(--w-aside);
+  border-radius: 50%;
+  padding: 0.1rem;
+  border: 1px solid #f40;
+}
+
+.container {
+  padding: 10rem 1rem 0;
+  width: 100%;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto;
+}
+
+.container img {
+  justify-content: center;
+}
+
+.cont-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.title span {
+  font-family: 'Great Vibes', cursive;
+  font-size: 120%;
+}
+
+.item::before {
+  content: '.';
+}
+
+.item:hover {
+  color: var(--warn-color);
+}
+
+@media screen and (max-width:768px) {
+  aside {
+    display: none;
+  }
+}

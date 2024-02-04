@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网络请求 Request</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>网络请求</h1>
+        <span>Request</span>
+    </header>
+    <dl>
+        <dt>wx.request</dt>
+        <dd>微信小程序使用wx.request发起网络请求；还可以使用 <a href="https://www.axios-http.cn/docs/intro" class="link">Axios</a>
+        </dd>
+        <dd>搭建本地资源服务器，请访问 <a href="../web/framework/node.html" class="link">Node.js</a>；简化起见，可以使用 <a
+                href="https://www.expressjs.com.cn/" class="link">Express</a> 或 <a href="https://koajs.com/#"
+                class="link">koa</a>；还可以使用 <a href="https://github.com/typicode/json-server" class="link">JSON
+                Server</a> 搭建数据服务器</dd>
+        <dd>微信小程序支持回调函数和<a
+                href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+                class="link">Promise</a>
+            两种方式</dd>
+        <dd>wx.request必须满足：</dd>
+        <dd>- 仅支持https请求</dd>
+        <dd>- 必须将接口域名（不是IP地址）添加到信任列表|白名单</dd>
+        <dd>wx.request接口配置：</dd>
+        <dd>- 微信开发平台 → 开发</dd>
+        <dd>wx.request接口查看：</dd>
+        <dd>- 开发时可以在微信开发工具 → 详情 → 项目配置</dd>
+        <dd>
+            <figure class="img-sn">
+                <img src="./imgs/pro5.png" alt="">
+                <figcaption>配置合法域名</figcaption>
+            </figure>
+            <figure class="img-sn">
+                <img src="./imgs/pro4.png" alt="">
+                <figcaption>查看合法域名</figcaption>
+            </figure>
+        </dd>
+        <dt>wx.request</dt>
+        <dd>请求方式很多，一般是GET和POST；默认是GET；更多信息，请查看官方文档 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html"
+                class="link">wx.request</a></dd>
+        <dd>如果提示：对应的服务器证书无效。。。需要服务器重新下载并配置SSL证书</dd>
+        <dd>临时调试可以选择取消校验</dd>
+        <dd>生产环境，必须要配置新的SSL证书</dd>
+        <dd>
+            <figure class="img-sn">
+                <img src="./imgs/pro6.png" alt="">
+                <figcaption>取消校验域名合法性</figcaption>
+            </figure>
+        </dd>
+        <dd class="example-sn">GET - 使用猫眼API获取信息并渲染到页面</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>拉取猫眼热映电影</figcaption>
+                <pre>
+wx.request({
+    url:'https://m.maoyan.com/ajax/movieOnInfoList',
+    success:(res:any)=>{
+        console.log(res.data);
+        this.setData({
+        list:res.data.movieList
+        })
+    }
+})</pre>
+            </figure>
+        </dd>
+        <dd class="example-sn">POST - 使用猫眼API获取信息并渲染到页面</dd>
+        <dd class="tips">
+            <div>跨域问题只存在于利于浏览器的WEB开发中。小程序的宿主环境是微信客户端，不是浏览器，不存在跨域的问题</div>
+            <div>Ajax的核心是依赖于浏览器的XMLHttpRequest对象；发起Ajax请求只针对于浏览器；小程序中叫发起网络请求</div>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

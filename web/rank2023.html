@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>积分榜 Rank</title>
+  <link rel="stylesheet" href="./css/rank.css">
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <span class="tab-item active">软工</span>
+      <span class="tab-item">经济和语言</span>
+      <span class="tab-item">服装</span>
+      <span class="tab-item">播音和网络</span>
+      <div class="logo">
+        <span class='iconfont icon-line-medalxunzhang-02 logo-icon'></span>
+        <span class="logo-title">积分榜 <span class='iconfont icon-line-medalxunzhang-02'></span></span>
+      </div>
+    </nav>
+    <main>
+      <div id="main"></div>
+    </main>
+    <footer>
+      <h5>All Rights Reserved &copy; By Cnplaman 2022-2024</h5>
+    </footer>
+  </div>
+  <script>
+    let main = document.querySelector('#main');
+    let tab = document.querySelectorAll('.tab-item')
+    tab.forEach((item, ind) => {
+      item.addEventListener('click', () => {
+        loadData(`../data/data2023/rank20230${ind + 1}.json`);
+        tab.forEach(item => {
+          item.classList.remove('active');
+        })
+        item.classList.toggle('active');
+      })
+    })
+    loadData('../data/data2023/rank202301.json')
+    function loadData(url) {
+      console.log('hi');
+      let stu = [];
+      let str = '';
+      let iconStr = "<span class='iconfont icon-star'></span>"
+      fetch(url)
+        .then(res => res.json())
+        .then(res => {
+          stu = [...res];
+          stu.sort((a, b) => { return b.stars - a.stars; })
+          let str = stu.map((item, ind) => {
+            return `<div class='item' style='--star:${item.stars}'>
+          <span class='sn'>${item.sn}</span>
+          <img class='img' src="${item.avatar}" alt="avatar">
+          <span class='name'>${item.name}</span>
+          <div>${iconStr.repeat(item.stars)}</div>          
+         </div>
+          `
+          }).join('')
+          main.innerHTML = str;
+        })
+    }
+    console.log('hi'.repeat(2));
+  </script>
+</body>
+
+</html>

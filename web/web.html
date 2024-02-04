@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEB</title>
+  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="./css/font_3870259_fog2voarz7/iconfont.css">
+  <link rel="stylesheet" href="./css/web.css">
+  <link rel="stylesheet" href="../css/sn.css">
+  <base target="_blank">
+  <style>
+    .ring-wrap {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin: 2rem auto;
+    }
+
+    .ring-item {
+      width: 120px;
+      height: 120px;
+      line-height: 120px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: 1.6rem;
+    }
+
+    .item1 {
+      grid-column: span 2;
+      justify-self: center;
+    }
+
+    .item2 {
+      justify-self: right;
+    }
+
+    .item3 {
+      justify-self: left;
+    }
+
+    .ring {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
+
+    .ring>div {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .one {
+      border-bottom: 4px solid #f40;
+      transform: rotateX(60deg) rotateY(160deg) rotateZ(0deg);
+      animation: oneRoll 1s linear infinite;
+    }
+
+    .two {
+      transform: rotateX(60deg) rotateY(30deg) rotateZ(0deg);
+      border-left: 4px solid #089;
+      animation: twoRoll 1s linear infinite;
+    }
+
+    .three {
+      border-right: 4px solid #890;
+      transform: rotatex(30deg) rotateY(60deg) rotateZ(0deg);
+      animation: threeRoll 1s linear infinite;
+    }
+
+    @keyframes oneRoll {
+      to {
+        transform: rotateX(60deg) rotateY(160deg) rotateZ(360deg);
+      }
+    }
+
+    @keyframes twoRoll {
+      to {
+        transform: rotateX(60deg) rotateY(30deg) rotateZ(360deg);
+      }
+    }
+
+    @keyframes threeRoll {
+      to {
+        transform: rotatex(30deg) rotateY(60deg) rotateZ(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>网页&commat;Web</h1>
+  </header>
+  <dl>
+    <dt>主要内容</dt>
+    <dd>1. Web概述</dd>
+    <dd>2. HTML标签</dd>
+  </dl>
+  <div class="chap nav-cont">概述 Web</div>
+  <dl>
+    <dt>案例欣赏 Cases</dt>
+    <dd class="grid3 center">
+      <a class="grid-a jd" href="https://www.jd.com/">jd</a>
+      <a class="grid-a tb" href="https://www.taobao.com/">tb</a>
+      <a class="grid-a mi" href="https://www.mi.com/">mi</a>
+    </dd>
+    <dt>WEB</dt>
+    <dd>. World Wide Web - 万维网</dd>
+    <dd>. 以文档的形式存储；每个文档称为Web页，也叫网页 Page</dd>
+    <dd>. 除了网页外，还有很多与之关联的资源文件，如图像、多媒体、数据库以及脚本，这些共同组成网站 Site</dd>
+    <dd>. 网页文件的后缀名是.htm、.html</dd>
+    <dd>. 引导浏览者访问网站的网页文件称为主页，命名文件名是index</dd>
+    <dt>C/S</dt>
+    <dd>. Client/Server：客户端/服务器端</dd>
+    <dd>. 用户需要下载并更新客户端 - 胖客户机</dd>
+    <dt>B/S</dt>
+    <DD>. Browser/Server：浏览器的/服务器端</DD>
+    <dd>. 用户有浏览器或少量的辅助插件|软件即可 - 廋客户机</dd>
+    <dt>URL</dt>
+    <dd>. Uniform Resource Locator：统一资源定位，用于标识网络资源的地址，俗称网址</dd>
+    <dd>
+      <figure class="code">
+        <pre>how://who/where/what</pre>
+      </figure>
+    </dd>
+    <dd>
+      <table class="tbl-sn tbl-ale">
+        <caption>常见协议类型</caption>
+        <tr>
+          <th>类型</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>http</td>
+          <td>超文本传输协议<br>Hypertext Transfer Protocol</td>
+        </tr>
+        <tr>
+          <td>https</td>
+          <td>具有安全通道的超文本传输协议<br>Hypertext Transfer Protocol Secure</td>
+        </tr>
+        <tr>
+          <td>ftp</td>
+          <td>文件传输协议<br>File Transfer Protocol</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>示例</figcaption>
+        <pre>https://glpla.github.io/office/index.html</pre>
+      </figure>
+    </dd>
+    <dt>工作过程</dt>
+    <dd class="number">
+      <div>用户在浏览器地址栏输入URL地址，发起一个请求</div>
+      <div>DNS服务器解析域名，根据对应的IP地址，找到网站的服务器地址</div>
+      <div>服务器处理收到的请求</div>
+      <div>如果是请求网页，则把对应的htm或html发送给浏览器</div>
+      <div>浏览器解析网页并渲染</div>
+      <div>用户看到最终生成的网页</div>
+    </dd>
+    <dt id="browser">浏览器 Browser</dt>
+    <dd>[<span class="iconfont icon-bell"></span>]浏览器的关键因素是什么？- 内核（Rendering Engine）</dd>
+    <dd>[<span class="iconfont icon-bell"></span>]用什么浏览器？- Chrome</dd>
+    <dd>. 浏览网页的工具；渲染和呈现Web页面的平台</dd>
+    <dd>. 无论是桌面端还是移动端，谷歌浏览器Chrome都遥遥领先</dd>
+    <dd>. 至于<span class="iconfont icon-internet-explorer"></span>IE|Trident，<a href="./imgs/IE.jpg">已停服</a></dd>
+    <dd class="item-head txt-center">
+      <span>浏览器</span>
+      <span>市场占有率</span>
+      <span>内核</span>
+    </dd>
+    <dd class="item-per" style="--per:65.44%;--color:#f40;" title="65.44%">
+      <div class="item-title">
+        <span>Chrome</span>
+        <span class="iconfont icon-chrome item-icon"></span>
+      </div>
+      <div class="item-bar"></div>
+      <span>Blink</span>
+    </dd>
+    <dd class="item-per" style="--per:11.18%;--color:#e67e22;" title="11.18%">
+      <div class="item-title">
+        <span>Safari</span>
+        <span class="iconfont icon-safari item-icon"></span>
+      </div>
+      <div class="item-bar"></div>
+      <span>Webkit</span>
+    </dd>
+    <dd class="item-per" style="--per:10.88%;--color:#908;" title="10.88%">
+      <div class="item-title">
+        <span>Edge</span>
+        <span class="iconfont icon-edge item-icon"></span>
+      </div>
+      <div class="item-bar"></div>
+      <span>Chromium</span>
+    </dd>
+    <dd class="item-per" style="--per:6.39%;--color:#089;" title="6.39%">
+      <div class="item-title">
+        <span>Firefox</span>
+        <span class="iconfont icon-firefox item-icon"></span>
+      </div>
+      <div class="item-bar"></div>
+      <span>Gecko</span>
+    </dd>
+    <dd class="item-per" style="--per:3.58%;--color:#2ecc71;" title="3.58%">
+      <div class="item-title">
+        <span>Opera</span>
+        <span class="iconfont icon-opera item-icon"></span>
+      </div>
+      <div class="item-bar"></div>
+      <span>Presto</span>
+    </dd>
+    <dd class="tips">
+      <div>地址栏 vs 搜索栏</div>
+    </dd>
+    <dt>Web页面结构 Architect</dt>
+    <dd>. Web页面由文档类型声明DOCTYPE和&lt;html&gt;组成</dd>
+    <dd>. &lt;html&gt;标签：Web页面的根，主要说明使用语言类型 lang：方便搜索引擎查找翻译；默认是en；如果不想触发浏览器的自动翻译提醒，可以不设置该属性</dd>
+    <dd>. 查看&lt;html&gt;结构，右键单击选择"检查"或按<span class="warn">F12</span>打开浏览器的调试窗口；再次按F12，关闭调试窗口</dd>
+    <dd class="mt2">1. &lt;heade&gt;区 - 文档信息区</dd>
+    <dd>1.1 &lt;title&gt;标签：网站名</dd>
+    <dd>1.2 &lt;meta&gt;元标签：对网站的功能描述，多以name、content的形式给出，提供给搜索引擎优化 SEO - search engine
+      optimization使用；内容通常由SEO专业人员撰写，前端人员只需要把标签准备好即可</dd>
+    <dd class="txt-indent">. 字符编码 charset：默认使用万国码 UTF-8</dd>
+    <dd class="txt-indent">. 网站说明 name为description；content：基本描述</dd>
+    <dd class="txt-indent">. 关键字 name为keywords，content：体现网站特色的若干关键字</dd>
+    <dd>1.3 &lt;link&gt;标签：引入普通资源</dd>
+    <dd class="txt-indent">. 网站图标 favicon.ico：网站标识；制作icon的工具很多，如：<a href="https://www.bitbug.net/">比特虫</a></dd>
+    <dd class="txt-indent">. 引入CSS样式表文件</dd>
+    <dd>1.4 &lt;script&gt;标签：引入JavaScript脚本资源</dd>
+    <dd>[<span class="iconfont icon-bell"></span>] OA文档的信息区在哪里？</dd>
+    <dd class="mt2">2. &lt;body&gt;区 - 文档内容区</dd>
+    <dd>. 展示给用户的内容，由各种标签tag组成，负责Web的<span class="warn">结构</span>部分</dd>
+    <dd>. 部分JavaScript代码也放在此处；为了解析正确，通常位于该区域的底部</dd>
+    <dd>[<span class="iconfont icon-bell"></span>] Web页面的内容需要一个字符一个字符完成编辑吗？</dd>
+    <dt>开发原则 Rules</dt>
+    <dd>. 专业的事交给专业的人去做</dd>
+    <dd>. 结构HTML5|H5、样式CSS3|C3和逻辑JavaScript|JS三分离</dd>
+    <dd>. <span class="warn">结构</span>部分：各种标签组成，负责盖房子</dd>
+    <dd>. <span class="warn">样式</span>部分：使用CSS选择某个或某些标签/元素进行修饰，负责装修房子</dd>
+    <dd>. <span class="warn">逻辑</span>部分：使用&lt;script&gt;分配业务逻辑，和用户动态交互，负责让房子动起来</dd>
+    <dd class="ring-wrap">
+      <div class="ring-item item1 ring">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="three"></div>
+        <div>H5</div>
+      </div>
+      <div class="ring-item item2 ring">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="three"></div>
+        <div>C3</div>
+      </div>
+      <div class="ring-item item3 ring">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="three"></div>
+        <div>JS</div>
+      </div>
+    </dd>
+  </dl>
+  <div class="chap nav-cont">标签 Tag</div>
+  <dl>
+    <dt>说明</dt>
+    <dd>. HTML - 超文本标记语言 HyperText Mark Language；这里的标记就是标签 tag</dd>
+    <dd>. 标签是组成HTML页面的基本元素；一般情况下，标签和元素不做严格区分，二者可以互用</dd>
+    <dd>. 标签由 &lt;&gt; 包裹关键字组成，分开始标签 <span class="warn">&lt;&gt;</span> 和结束标签 <span class="warn">&lt;/&gt;</span>
+    </dd>
+    <dd>. 大部分标签有开始标签和结束标签；少量标签是单标签，如&lt;img&gt;、&lt;input&gt;；[<span class="iconfont icon-bell"></span>]
+      无需背记标签的形式，基本的开发环境都会自动检测并完成，除非你使用记事本</dd>
+    <dd>. 不同的标签具有不同的语义，不能随便使用，应按照实际用途和需求<span class="warn">按需</span>选择|添加标签使用</dd>
+    <dd>. 标签对大小写不敏感；万维网联盟W3C推荐使用小写</dd>
+    <dt>1. 常见标签 Tags</dt>
+    <dd>1.1. 页面结构标签-<span class="warn">必需</span></dd>
+    <dd>. 有了这些标签，文件才能称之为HTML页面</dd>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>&lt;html&gt;</td>
+          <td>HTML页面根元素；定义了整个 HTML 文档</td>
+        </tr>
+        <tr>
+          <td>&lt;head&gt;</td>
+          <td>HTML页面头部元素</td>
+        </tr>
+        <tr>
+          <td>&lt;body&gt;</td>
+          <td>HTML页面主体元素；包括脚本标签&lt;script&gt;</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">1.2. 页面结构化元素标签</dd>
+    <dd>. 划分页面各区域时对应的标签，构建页面框架，更好的体现对应的功能，方便搜索引擎使用</dd>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>&lt;article&gt;</td>
+          <td>完整的文章结构；通常包括以下结构化标签</td>
+        </tr>
+        <tr>
+          <td>&lt;header&gt;</td>
+          <td>页眉/头部信息，通常用在&lt;body&gt;；&lt;article&gt;和&lt;section&gt;头部</td>
+        </tr>
+        <tr>
+          <td>&lt;nav&gt;</td>
+          <td>navigation；导航，使用&lt;ul&gt;实现；顶部、侧边、分页导航</td>
+        </tr>
+        <tr>
+          <td>&lt;aside&gt;</td>
+          <td>侧边栏</td>
+        </tr>
+        <tr>
+          <td>&lt;section&gt;</td>
+          <td>节元素，类似于&lt;div&gt;，但是HTML5建议应带上标题&lt;header&gt;；如果不需要标题，使用&lt;div&gt;即可</td>
+        </tr>
+        <tr>
+          <td>&lt;footer&gt;</td>
+          <td>页脚/底部信息，通常位于&lt;body&gt;、&lt;article&gt;底部，包括：版权声明、友情链接、备案信息等</td>
+        </tr>
+        <tr>
+          <td><span class="warn">&lt;div&gt;</span></td>
+          <td>division；块，用于分隔区域/布局；对搜索引擎来说，无语义，不利于网站的推广和使用</td>
+        </tr>
+        <tr>
+          <td><span class="warn">&lt;span&gt;</span></td>
+          <td>行内块；对搜索引擎来说，无语义</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">1.3. 页面普通元素标签</dd>
+    <dd>. 页面的内容|细节呈现</dd>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>&lt;h1&gt;-&lt;h6&gt;</td>
+          <td>headline；标题，h1只能出现一次；便于搜索引擎为网页编制索引</td>
+        </tr>
+        <tr>
+          <td>&lt;a&gt;</td>
+          <td>anchor；超链接/导航；单级导航可直接使用；多级导航应配合列表</td>
+        </tr>
+        <tr>
+          <td>&lt;img&gt;</td>
+          <td>image；图像</td>
+        </tr>
+        <tr>
+          <td>&lt;p&gt;</td>
+          <td>paragraph；段落</td>
+        </tr>
+        <tr>
+          <td>&lt;ul&gt;&lt;ol&gt;&lt;li&gt;</td>
+          <td>unordered list有序/ordered list无序列表；其子标签只能是列表项&lt;li&gt;</td>
+        </tr>
+        <tr>
+          <td>&lt;dl&gt;&lt;dt&gt;&lt;dd&gt;</td>
+          <td>defined list自定义列表；其子标签只能是：&lt;dt&gt;、t:title；&lt;dd&gt;、d:description</td>
+        </tr>
+        <tr>
+          <td>&lt;table&gt;</td>
+          <td>表格，包括：行&lt;tr&gt;；标题行单元格&lt;th&gt;、普通单元格&lt;td&gt;</td>
+        </tr>
+        <tr>
+          <td>&lt;form&gt;</td>
+          <td>表单，包括：&lt;input&gt;单行文本输入框、单选、多选；&lt;textarea&gt;多行文输入本框；&lt;button&gt;按钮等</td>
+        </tr>
+        <tr>
+          <td>&lt;iframe&gt;</td>
+          <td>inner-frame；内联框架；在当前页面嵌入/显示另外一个页面；早期使用较多</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">1.4. 其他标签</dd>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>&lt;pre&gt;</td>
+          <td>定义预格式文本/按照原始代码的排列方式进行显示</td>
+        </tr>
+        <tr>
+          <td>&lt;code&gt;</td>
+          <td>定义计算机代码</td>
+        </tr>
+        <tr>
+          <td>&lt;details&gt;</td>
+          <td>细节|更多标签，用于区域的折叠和展开</td>
+        </tr>
+        <tr>
+          <td>&lt;summary&gt;</td>
+          <td>配合&lt;details&gt;使用，定义标题</td>
+        </tr>
+        <tr>
+          <td>&lt;figure&gt;</td>
+          <td>图形标签，配合&lt;figcaption&gt;一起使用，可以取代&lt;img&gt;</td>
+        </tr>
+        <tr>
+          <td>&lt;sup&gt;</td>
+          <td>定义上标字</td>
+        </tr>
+        <tr>
+          <td>&lt;sub&gt;</td>
+          <td>定义下标字</td>
+        </tr>
+        <tr>
+          <td>&lt;small&gt;</td>
+          <td>小字体标签</td>
+        </tr>
+        <tr>
+          <td>&lt;progress&gt;</td>
+          <td>动态进度条标签</td>
+        </tr>
+        <tr>
+          <td>&lt;meter&gt;</td>
+          <td>静态进度条</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>2. 标签属性 Attribute</dt>
+    <dd>. HTML 标签可以拥有属性。属性提供的更多的元素信息，如类、ID、名称、值、数据等等</dd>
+    <dd>. 不同的标签所拥有的属性不完全相同，如&lt;a&gt;有专有的href属性；&lt;img&gt;有专有的alt属性；两者都有通用的title属性</dd>
+    <dd>. 属性总是以名称name/值value的形式出现，通常称为<span class="warn">值对</span>，如：class="warn"，其中class是名称，warn是值</dd>
+    <dd>. 请始终为属性值添加引号：双引号或单引号，并保持引号类型一致，不能混用</dd>
+    <dd>. 属性总是在开始标签中指定</dd>
+    <dd>. 部分元素的属性可以省略属性值，多见于布尔类型，如disabled，有该属性，元素被禁止；没有则正常使用</dd>
+    <dd>. 部分元素建议必须使用某些属性，如&lt;img&gt;，请始终使用 alt 属性，当图像无法显示时给出提示</dd>
+    <dd>. 以上提及的都是元素的<span class="warn">原生</span>属性；实际开发过程中，多使用框架，如Vue，这些框架具有自己特定的属性，如@click、:class等等</dd>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>class</td>
+          <td>类样式属性；一个元素可以指定多个类，以空格分隔</td>
+        </tr>
+        <tr>
+          <td>id</td>
+          <td>ID属性，唯一标识元素</td>
+        </tr>
+        <tr>
+          <td>style</td>
+          <td>内联样式属性</td>
+        </tr>
+        <tr>
+          <td>data-</td>
+          <td>数据属性[自定义属性]</td>
+        </tr>
+        <tr>
+          <td>title</td>
+          <td>额外提示信息</td>
+        </tr>
+        <tr>
+          <td>alt</td>
+          <td>替换属性</td>
+        </tr>
+        <tr>
+          <td>contenteditable</td>
+          <td>是否可编辑</td>
+        </tr>
+        <tr>
+          <td>src</td>
+          <td>资源路径属性</td>
+        </tr>
+        <tr>
+          <td>href</td>
+          <td>超链接地址属性</td>
+        </tr>
+        <tr>
+          <td>hidden</td>
+          <td>隐藏属性</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>3. 标签分类 Classification</dt>
+    <dd>. 使用显示模式display区分标签种类</dd>
+    <dd>. 每个元素有自己默认的显示模式，不需要指定</dd>
+    <dd>. 根据设计需要，元素的显示模式可以相互转换；如&lt;a&gt;转换为块元素，通常转换成块级元素更方便、安全</dd>
+    <dt>3.1. 按占位/宽度</dt>
+    <dd class="grid3 attr">
+      <div>
+        <div>内联元素 inline</div>
+        <div>. 也称行内元素，<span class="warn">行盒</span></div>
+        <div>. 根据本身宽度占有空间，在文档流中从左到右依次显示；满行时候切换到下一行重新开始</div>
+        <div>. 不能设置宽度，不会独占一行</div>
+        <div>. 内联元素和文字一样，并不是紧紧挨着，而是有一定的间隙</div>
+        <div>. &lt;a&gt; &lt;img&gt; &lt;i&gt; &lt;span&gt; &lt;label&gt; &lt;small&gt; &lt;iframe&gt;</div>
+        <div>
+          <figure class="code">
+            <pre>display: inline;</pre>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <div>行内块元素 inline-block</div>
+        <div>. 可以设置宽度的内联元素；在文档流中的排列方式同inline</div>
+        <div>. 数量很少</div>
+        <div>. &lt;input&gt; &lt;button&gt;</div>
+        <div>
+          <figure class="code">
+            <pre>display: inline-block;</pre>
+          </figure>
+        </div>
+      </div>
+      <div>
+        <div>块级元素 block</div>
+        <div>. 独占一行，也称<span class="warn">块盒</span></div>
+        <div>. 可以设置宽度</div>
+        <div>. 在文档流中从上到下依次排列</div>
+        <div>. 大部分标签都是块级元素；很多结构化的标签，如&lt;header&gt;本质上都是块元素</div>
+        <div>
+          <figure class="code">
+            <pre>display: block;</pre>
+          </figure>
+        </div>
+      </div>
+    </dd>
+    <dd class="mt2">表格类元素</dd>
+    <dd>. 特指table系列的元素，特性类似inline-block；特意区分的目的之一是为了更高效的渲染页面</dd>
+    <dd>. &lt;tabel&gt;的显示类型为table</dd>
+    <dd>. &lt;tr&gt;的显示类型为table-row</dd>
+    <dd>. &lt;td&gt; &lt;th&gt; 的显示类型为table-cell</dd>
+    <dd>. 修改表格元素的模式，可以实现特定的应用，如 <a href="https://css-tricks.com/responsive-data-tables/">自适应表格</a>的设计</dd>
+    <dd class="mt2">弹性盒子flex：倾向于布局，详情请查看后续内容</dd>
+    <dd class="mt2">网格grid：倾向于布局，详情请查看后续内容</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 使用浏览器的检查功能，查看常见元素的默认display</dd>
+    <dt>3.2. 按语义</dt>
+    <dd>. 语义化标签：semantic，清晰地定义其内容，大部分标签都是，如&lt;form&gt;、&lt;table&gt;</dd>
+    <dd>.
+      非语义化标签：无法提供关于其内容的信息，仅仅作为容器/载体使用，如&lt;div&gt;、&lt;span&gt;、&lt;i&gt;；多用于布局和功能型拓展，如大部分字体图标都是依托&lt;span&gt;、&lt;i&gt;实现，已经失去了其标签本意
+    </dd>
+    <dd class="quote">
+      <div>. 页面不单单是给人看的，更是给计算机看的；在给人看之前，首先要给计算机看</div>
+      <div>. 规范的Web页面，可以让计算机和人更加高效的理解和处理文档</div>
+      <div>. 在正确的地方使用正确的元素，创建有意义的Web页面</div>
+      <div>1. 结构化：见文知结构</div>
+      <div>2. 语义化：见文知用途</div>
+    </dd>
+  </dl>
+  <div class="chap">作业与练习</div>
+  <dl>
+    <dt>思考</dt>
+    <dd>1.如何合理使用标签创建个人网站？</dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

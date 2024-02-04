@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>定位 Position</title>
+  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="./css/position.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Position</h1>
+    <span class="ham iconfont icon-menu"></span>
+    <nav class="nav">
+      <a href="" class="nav-item">relative</a>
+      <a href="" class="nav-item">absolute</a>
+      <a href="" class="nav-item">z-index</a>
+      <a href="" class="nav-item">cases</a>
+    </nav>
+  </header>
+  <dl>
+    <dt>定位 position</dt>
+    <dd>.把元素定位在盒子任一位置，甚至盒子外面</dd>
+    <dd>.最后定位在哪里，需要一个参考对象</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>定位</figcaption>
+        <pre>
+position: static | relative | absolute | fixed | sticky;</pre>
+      </figure>
+    </dd>
+    <dt class="nav-cont">相对定位 relative</dt>
+    <dd>.不脱离文档流，仍然占据原来位置</dd>
+    <dd>.参考对象：自己[自恋型] - 灵魂出窍</dd>
+    <dd>.发生偏移时，如top、left，可能会遮挡住后面标准流的元素</dd>
+    <dd>.层级提高，会遮挡其他元素</dd>
+    <dt class="nav-cont">绝对定位 absolute</dt>
+    <dd>.脱离文档流 - 原地起飞</dd>
+    <dd>.变为块元素block</dd>
+    <dd>.参考对象：显式的设置了 <span class="warn">定位</span> 属性(相对或绝对都可以)的元素，一般是父元素。如果父元素没有指定定位属性，则一级一级往上寻找，直至body</dd>
+    <dd>.通常显式的设置定位元素的偏移，可以使用数值或关键字top、right、bottom、left或负边距</dd>
+    <dd>.层级提高，会遮挡其他元素</dd>
+    <dd class="tips">
+      <div>相对定位很少单独使用，通常为子元素提供定位依据：<span class="warn">父相子绝</span></div>
+      <div>绝对定位元素默认会待在<span class="warn">原来的位置</span>；实际开发中，有时候不用设置偏移也可以实现特定需求</div>
+      <div>可以使用<span class="warn">inset</span>定位元素；是top、right、bottom、left的简写，和 margin 和 padding 一样，依照"上右下左"的顺序指定
+      </div>
+    </dd>
+    <dt class="nav-cont">堆叠上下文 z-index</dt>
+    <dd>.控制Z轴方向上盒子堆叠时的前后次序/渲染排序，通常也称层级</dd>
+    <dd>.只有显式使用 <span class="warn">定位</span> 属性的元素才有z-index，标准文档流没有；但是后面的元素默认比前面的元素具有更高的层级</dd>
+    <dd>.如果没有显式指定z-index，则为auto，按照文档流中元素出现的顺序，后来居上</dd>
+    <dd>.z-index大的元素，位于上层/近；z-index小的元素位于下层/远；上层的元素会遮盖下层的元素</dd>
+    <dd>.z-index为正的元素，出现在没有指定z-index的元素的上面</dd>
+    <dd>.z-index为负的元素，出现在没有指定z-index的元素的下面</dd>
+    <dd>.导航等需要始终引导用户的元素一般采用较大的层级，保证始终位于页面顶部</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 利用不同的z-index营造3D氛围，更多细节，请参看<a
+        href="./demo/parallax.html">parallax</a></dd>
+    <dd class="environment">
+      <img class="ob-img tree0" data-src="./imgs/tree0.png" alt="">
+      <img class="ob-img tree2" data-src="./imgs/tree2.png" alt="">
+      <img class="ob-img tree1" data-src="./imgs/tree1.png" alt="">
+      <img class="ob-img tree5" data-src="./imgs/tree1.png" alt="">
+      <img class="ob-img girl" data-src="./imgs/girl.png" alt="">
+      <img class="ob-img tree3" data-src="./imgs/tree3.png" alt="">
+      <img class="ob-img tree4" data-src="./imgs/tree4.png" alt="">
+      <img class="ob-img boy" data-src="./imgs/boy.png" alt="">
+    </dd>
+  </dl>
+  <div class="chap">常见应用 Cases</div>
+  <dl class="nav-cont">
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 伪元素 - 绘制米琪</dd>
+    <dd>.前后伪元素分别作为米琪的左右耳朵，利用定位放置于米琪头部两侧</dd>
+    <dd class="mickey"></dd>
+    <dd>
+      <figure class="code">
+        <figcaption>绘制米琪</figcaption>
+        <pre>
+.mickey {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 1rem auto;
+    background-color: #a8e073;
+}
+
+.mickey::after {
+    content: '';
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    width: 40px;
+    height: 40px;
+    background-color: inherit;
+    border-radius: 50%;
+}
+
+.mickey::before {
+    content: '';
+    position: absolute;
+    top: -1rem;
+    left: -1rem;
+    width: 40px;
+    height: 40px;
+    background-color: inherit;
+    border-radius: 50%;
+}</pre>
+      </figure>
+    </dd>
+    <dd class="mt2" id="cart">[<span class="iconfont icon-keyboard"></span>] 普通元素 - 购物车</dd>
+    <dd>. 伪元素：使用::before显示商品数量[从后台获取数据]</dd>
+    <dd>. 初始化：button取消边框、轮廓、背景</dd>
+    <dd>. 定位：父相子绝，使伪元素右上定位</dd>
+    <dd>.还可以使用负边距实现</dd>
+    <dd class="cart">
+      <span class="iconfont icon-gouwuche_o"></span>
+      <span class="badge keyword">8</span>
+      <span>我的购物车</span>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JD购物车</figcaption>
+        <pre>
+.cart::before {
+  content: '8';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+}</pre>
+      </figure>
+    </dd>
+    <dd class="mt2" id="ipt">[<span class="iconfont icon-keyboard"></span>] 表单元素input-checkbox</dd>
+    <dd>.checkbox和label关联，并隐藏checkbox</dd>
+    <dd>.label使用伪元素设计滑块</dd>
+    <dd>.没有使用 border更加方便计算</dd>
+    <dd>.过渡动画 transition</dd>
+    <dd>
+      <input type="checkbox" id="input-cb" hidden>
+      <label for="input-cb" class="input-cb"></label>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>input-checkbox</figcaption>
+        <pre>
+.input-cb {
+  display: block;
+  position: relative;
+  width: 58px;
+  height: 38px;
+  margin: 100px auto;
+  border-radius: 30px;
+  padding: 4px;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.input-cb::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #000;
+  transition: 0.5s;
+}
+
+#input-cb:checked+.input-cb::before {
+  left: calc(4px + 50px - 30px);
+}</pre>
+      </figure>
+    </dd>
+    <!-- <dd>方案2：父相子绝-伪元素如果使用%位移，参考对象是relative对象[F12]</dd>
+    <dd>
+      <pre>
+.input-cb {
+  display: block;
+  position: relative;//1
+  width: 40px;
+  height: 20px;
+  margin: 2rem auto;
+  outline: 1px solid #ccc;
+  outline-offset: 4px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.input-cb::before {
+  content: '';
+  position: absolute;//2
+  left: 0px;
+  top: 0px;
+  width: 20px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+#input-cb:checked+.input-cb {
+  outline-color: #f40;
+}
+
+#input-cb:checked+.input-cb::before {
+  background-color: #f40;
+  left: 20px;
+  left: 100%;//是40px不是20px
+}</pre>
+    </dd>
+    <dd>方案3：transform-伪元素如果使用%位移，参考对象是它的父级</dd>
+    <dd>
+      <pre>
+.input-cb {
+  display: block;
+  width: 40px;
+  height: 20px;
+  margin: 2rem auto;
+  outline: 1px solid #ccc;
+  outline-offset: 4px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.input-cb::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+#input-cb:checked+.input-cb {
+  outline-color: #f40;
+}
+
+#input-cb:checked+.input-cb::before {
+  transform: translateX(100%);
+}</pre>
+    </dd>
+    <dd>方案4：<a href="./form.html">form</a>样式一节</dd> -->
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 表单元素input-text</dd>
+    <dd>.relative absolute</dd>
+    <dd>.em：单独定位需要调整每个字符的位置</dd>
+    <dd>.transition-dalay</dd>
+    <dd>[<span class="iconfont icon-bell"></span>]尝试用transform和定位实现，体会不同方案的差异</dd>
+    <dd class="input-box">
+      <input type="text" name="" id="" required>
+      <div>
+        <span style="--delay:0">u</span>
+        <span style="--delay:1">s</span>
+        <span style="--delay:2">e</span>
+        <span style="--delay:3">r</span>
+        <span style="--delay:4">n</span>
+        <span style="--delay:5">a</span>
+        <span style="--delay:6">m</span>
+        <span style="--delay:7">e</span>
+      </div>
+    </dd>
+    <dd class="mt2" id="align">[<span class="iconfont icon-keyboard"></span>] 居中单个元素</dd>
+    <dd>.无需知道子元素的尺寸</dd>
+    <dd>.更多高效对齐，请参看<a href="./demo/align.html">对齐Align</a></dd>
+    <dd class="align">
+      <div class="demo0">demo</div>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>居中单个元素</figcaption>
+        <pre>
+.demo {
+    position: absolute;
+    width: 160px;
+    height: 90px;
+    background-color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>使用inset和margin</figcaption>
+        <pre>
+.demo {
+    position: absolute;
+    width: 160px;
+    height: 90px;
+    background-color: #fff;
+    inset: 0；
+    margin: auto;
+}</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 元素重叠-通过定位将多个伪元素重叠在一起</dd>
+    <dd class="align mul-el"></dd>
+    <dd class="mt2" id="mul-menu">[<span class="iconfont icon-keyboard"></span>]二级导航</dd>
+    <dd>.嵌套&lt;ul&gt;使用</dd>
+    <dd>.开始隐藏2级菜单，:hover时显示</dd>
+    <dd>.适合桌面端；移动端通常使用汉堡菜单</dd>
+    <dd>
+      <ul class="menu">
+        <li class="menu-item">
+          <div>home</div>
+          <ul class="sub-menu">
+            <li>Lorem</li>
+            <li>Hic!</li>
+            <li>Reae?</li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <div>team</div>
+          <ul class="sub-menu">
+            <li>Lorem.</li>
+            <li>Culpa!</li>
+            <li>Culpa!</li>
+            <li>Eaque.</li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <div>blog</div>
+          <ul class="sub-menu">
+            <li>Lorem.</li>
+            <li>Maiors.</li>
+            <li>Cuate!</li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <div>info</div>
+          <ul class="sub-menu">
+            <li>Lorem.</li>
+            <li>Corpos?</li>
+            <li>Cor?</li>
+            <li>Corpo</li>
+            <li>Votes.</li>
+          </ul>
+        </li>
+        <li class="nav-flag"></li>
+      </ul>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>二级导航</figcaption>
+        <pre>
+.menu {
+  height: 40px;
+  line-height: 40px;
+  background-color: #000;
+  color: #ff0f5b;
+  margin: 2rem auto;
+}
+
+.menu-item {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  text-align: center;
+}
+
+.sub-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: #333;
+}</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 层级提升-对前后元素的影响</dd>
+    <dd class="el-undone">层级未提升</dd>
+    <dd>
+      <div>.默认情况下，后续元素的层级比前面的高；如果后续元素设置了背景颜色[当前设置为白色]，目标元素的部分CSS属性[阴影]会被后续元素覆盖</div>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>层级提升</figcaption>
+        <pre>
+.el-undone {
+    height: 40px;
+    line-height: 40px;
+    background-color: #f40;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
+}</pre>
+      </figure>
+    </dd>
+    <dd class="el-done">层级提升</dd>
+    <dd>
+      <div>.通过指定目标元素为相对定位，并提升层级，使其位于后续元素的上层</div>
+      <div>.可以指定目标元素的margin-bottom改善效果</div>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>层级提升</figcaption>
+        <pre>
+.el-done {
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    background-color: #f40;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}</pre>
+      </figure>
+    </dd>
+  </dl>
+  <div class="chap">总结与作业 Summary & Homework</div>
+  <dl>
+    <dt>总结</dt>
+    <dd>.父相子绝</dd>
+    <dt>作业</dt>
+    <dd>1.利用定位属性，优化个人网站</dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="./lib/lazyload.js"></script>
+  <script src="./lib/ham.js"></script>
+</body>
+
+</html>

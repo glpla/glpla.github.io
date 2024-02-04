@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github</title>
+    <link rel="stylesheet" href="../../css/reset2024.css">
+    <link rel="stylesheet" href="../../css/common2024.css">
+    <link rel="stylesheet" href="../../css/code.css">
+    <link rel="stylesheet" href="../../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>代码仓库</h1>
+        <span>&commat;Github</span>
+    </header>
+    <dl>
+        <dt>说明</dt>
+        <dd>. 代码仓库 - 托管代码的地方</dd>
+        <dd>. 打开<a href="https://github.com/" class="link">Github官网</a>，注册并创建仓库</dd>
+        <dd>. 服务器在境外，访问速度受限，经常连不上；可以使用国内平台 <a href="https://gitee.com/" class="link">Gitee</a>，不过管控审查比较严</dd>
+        <dt>完整流程</dt>
+        <dd class="number">
+            <div>创建远程仓库：获取到仓库地址</div>
+            <div>创建本地项目|项目文件夹并初始化</div>
+            <div>关联远程仓库</div>
+            <div>推送项目到本地仓库</div>
+            <div>推送项目到远程仓库</div>
+            <div>从远程仓库拉取项目</div>
+        </dd>
+    </dl>
+    <div class="chap">HTTPS</div>
+    <dl>
+        <dd>使用用户名和密码才可以使用仓库</dd>
+    </dl>
+    <div class="chap">SSH</div>
+    <dl>
+        <dd>官话：使用SSH公钥可以让你在你的电脑和 Gitee 通讯的时候使用安全连接（Git的Remote要使用SSH地址）</dd>
+        <dd>人话：设置本机绑定SSH密钥，实现免密登陆，建议安排</dd>
+        <dt>1. 生成SSH</dt>
+        <dt>2. 使用SSH</dt>
+    </dl>
+    <div class="chap">仓库操作</div>
+    <dl>
+        <dt>克隆仓库 clone</dt>
+        <dd>将远程仓库复制到本地</dd>
+        <dd>通常是第一次使用别人的仓库；后续直接拉取pull就可以和仓库保持一致</dd>
+        <dd class="code">
+            <pre>git clone url</pre>
+        </dd>
+        <dt>Git关联到仓库</dt>
+        <dd>使用add为远程仓库指定一个别名；因为仓库url太长</dd>
+        <dd>可以关联多个远程仓库，使用别名区分</dd>
+        <dd>示例中使用origin代替远程仓库的url</dd>
+        <dd class="code">
+            <pre>$git remote add origin url</pre>
+        </dd>
+        <dt>查看关联的远程仓库 remote</dt>
+        <dd class="code">
+            <pre>
+$ git remote -v
+origin  https://github.com/glpla/glpla.github.io.git (fetch)
+origin  https://github.com/glpla/glpla.github.io.git (push)            </pre>
+        </dd>
+        <dd class="code">
+            <pre>
+$ git remote
+origin</pre>
+        </dd>
+        <dt>删除远程仓库和别名的关联 remove</dt>
+        <dd class="code">
+            <pre>
+$ git remote remove 别名</pre>
+        </dd>
+        <dt>重命名远程仓库别名 rename</dt>
+        <dd class="code">
+            <pre>
+$ git remote rename 旧别名 新别名</pre>
+        </dd>
+        <dt>Git推送到仓库 push</dt>
+        <dd>不仅要指定推送的仓库/别名，还要指定推送到哪个分支</dd>
+        <dd>使用-u可以自动关联，后续只需要使用git push即可推送</dd>
+        <dd>示例中推送到远程仓库别名是origin的master分支</dd>
+        <dd class="code">
+            <pre>$git push -u 别名 分支</pre>
+        </dd>
+        <dd class="code">
+            <pre>$git push</pre>
+        </dd>
+        <dt>拉取远程仓库 pull</dt>
+        <dd>在第一次克隆clone的基础上，通过拉取和原来仓库保持一致</dd>
+        <dd>如果之前提交使用-u，可以直接拉取</dd>
+        <dd class="code">
+            <pre>git pull 别名 分支</pre>
+        </dd>
+        <dd class="code">
+            <pre>git pull</pre>
+        </dd>
+    </dl>
+    <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

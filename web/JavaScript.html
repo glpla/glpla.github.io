@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>脚本 JavaScript</title>
+  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="./css/font_3870259_fog2voarz7/iconfont.css">
+  <link rel="stylesheet" href="./css/web.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>脚本&commat;JavaScript</h1>
+  </header>
+  <dl>
+    <dd class="txt-indent mt2">任何能够使用JavaScript实现的应用系统，最终都必将用JavaScript实现</dd>
+    <dd class="mt2 txt-right">-Jeff Atwood 定律</dd>
+    <dt>概述</dt>
+    <dd>. 布兰登艾奇Brandon Eich于1995年5月，利用10天开发出JS语言</dd>
+    <dd>. 客户端脚本语言</dd>
+    <dd>. 解释性语言，由浏览器解释执行；浏览器本身不会执行JS，而是通过内置的JS引擎/解释器逐行解释并执行JS</dd>
+    <dd>. 单线程</dd>
+    <dd>. 符合ECMA Script，简称ES；现在已发展到ES14</dd>
+    <dd>. 区分大小写</dd>
+    <dd>. 三大部分：由ECMAScript- <span class="warn">JavaScript</span> 、<span class="warn">DOM</span>-文档对象模型Document Object
+      Model和<span class="warn">BOM</span>-浏览器对象模型Browser Object Model</dd>
+    <dd>. 每条语句以分号;结束</dd>
+    <dt>应用</dt>
+    <dd>. 表单校验</dd>
+    <dd>. 网页特效</dd>
+    <dd>. 服务端开发（Node.js）</dd>
+    <dd>. 桌面程序（Electron）</dd>
+    <dd>. App（Cordova）</dd>
+    <dd>. 物流网（Ruff）</dd>
+    <dd>. 游戏开发（cocos2d.js）</dd>
+    <dt>代码位置</dt>
+    <dd>1.行内JS</dd>
+    <dd>. 写在元素上</dd>
+    <dd>. 不符合结构-样式-行为分离原则，现在很少使用</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+&lt;div onclick="alert('hi')"&gt;click me&lt;/div&gt;</pre>
+      </figure>
+    </dd>
+    <dd>2.内部JS</dd>
+    <dd>. 写在页面的&lt;script&gt;内</dd>
+    <dd>. 不便于逻辑共享</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+&lt;div onclick="fn()"&gt;click me&lt;/div&gt;</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+&lt;script&gt;
+  function fn() {
+    alert('hi');
+  }
+&lt;/script&gt;</pre>
+      </figure>
+    </dd>
+    <dd>3.外部JS</dd>
+    <dd>. 将业务逻辑放在单独的.js文件中，使用&lt;script&gt;的src属性引入[<span class="warn">推荐</span>]</dd>
+    <dd>. 便于共享逻辑</dd>
+    <dd>. 库文件都是以外部js的形式引入，服务于多个模块</dd>
+    <dd>. 为保证js操作的元素已经就绪，通常将脚本放在&lt;body&gt;的最后面</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+&lt;body&gt;
+  //H5
+  &lt;script src="./tmp.js"&gt;&lt;/script&gt;
+&lt;/body&gt;      </pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript：tmp.js</figcaption>
+        <pre>
+function fn() {
+  alert('hi');
+}</pre>
+      </figure>
+    </dd>
+    <dt>脚本的作用</dt>
+    <dd>. 操作对象使其具有某种行为，实现人机交互</dd>
+    <dd class="txt-indent">. 对象可以是DOM、也可以是BOM，还可以是js本身</dd>
+    <dd class="txt-indent">. 行为，大多以事件Event形式体现出来</dd>
+    <dt>事件处理一般步骤</dt>
+    <dd>1. 获取对象，如H5元素；更多信息，请参考 <a href="./js/dom.html" target="_blank">DOM</a></dd>
+    <dd>2. 添加事件；更多信息，请参考 <a href="./js/event.html" target="_blank">Event</a></dd>
+    <dt>传统事件</dt>
+    <dd>. 以onXXX属性的形式为元素指定事件</dd>
+    <dd>. 一个对象只能分配一个事件</dd>
+    <dd>. 事件处理逻辑不能共享</dd>
+    <dd>. 因为不符合开发原则：结构、样式、事件分离，很少使用；现在多使用事件侦听器addEventListener</dd>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>全局事件</td>
+          <td>onclick</td>
+        </tr>
+        <tr>
+          <td>窗口事件</td>
+          <td>onresize | onload</td>
+        </tr>
+        <tr>
+          <td>表单事件</td>
+          <td>oninput | onsubmit | onchange</td>
+        </tr>
+        <tr>
+          <td>键盘事件</td>
+          <td>onkeyup | onkeydown</td>
+        </tr>
+        <tr>
+          <td>鼠标事件</td>
+          <td>onmouseup | onmousedown | onmouseover | onmouseout | onmouseenter</td>
+        </tr>
+        <tr>
+          <td>多媒体事件</td>
+          <td>onplay</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] onXXX事件使用 - 完全耦合</dd>
+    <dd>. 适合简单逻辑</dd>
+    <dd>. 所有处理都在H5中实现；结构、行为没有分离，后期维护成本高</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>HTML</figcaption>
+        <pre>&lt;div onclick="alert('hi,you clicked me')"&gt;&lt;/div&gt;</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] onXXX事件使用 - 基本分离</dd>
+    <dd>. 在HTML中，给元素中分配事件并指定对应的处理函数；在script中使用关键字function定义事件</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>HTML</figcaption>
+        <pre>&lt;button onclick="fn()"&gt;Click me&lt;/button&gt;</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+&lt;script&gt;
+    function fn() {
+      alert('hi,you clicked me');
+    }
+&lt;/script&gt;</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] onXXX事件使用 - 完全分离</dd>
+    <dd>. 结构是结构；行为是行为，便于开发和维护</dd>
+    <dd>. 添加多个同类型的事件处理，后面的事件处理会覆盖前面的事件处理</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>HTML</figcaption>
+        <pre>&lt;button class='btn'&gt;Click me&lt;/button&gt;</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+&lt;script&gt;
+    let btn = document.querySelector('.btn')
+    btn.onclick=function() {
+      alert('hi,you clicked me');
+    }
+    btn.onclick=function() {
+      alert('hi,you clicked me, again');
+    }
+&lt;/script&gt;</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] onXXX事件使用 - 完全分离提升版</dd>
+    <dd>. 事件处理以函数的形式给出，便于多元素共享</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>HTML</figcaption>
+        <pre>
+&lt;button class='btn1'&gt;Click me&lt;/button&gt;
+&lt;button class='btn2'&gt;Click me&lt;/button&gt;</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+&lt;script&gt;
+    let btn1 = document.querySelector('.btn1')
+    let btn2 = document.querySelector('.btn2')
+    btn1.onclick=fn;
+    btn2.onclick=fn;
+    function fn() {
+      alert('hi,you clicked me');
+    }
+&lt;/script&gt;</pre>
+      </figure>
+    </dd>
+    <dt>事件侦听器addEventListener</dt>
+    <dd>. 事件类型不需要带on，上述表格中的事件类型去掉on就是事件侦听对应的事件类型</dd>
+    <dd>. 一个元素可以添加多个相同事件</dd>
+    <dd>. 符合开发分离的原则</dd>
+    <dt>侦听事件类型</dt>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>全局事件</td>
+          <td>click</td>
+        </tr>
+        <tr>
+          <td>窗口事件</td>
+          <td>resize | load</td>
+        </tr>
+        <tr>
+          <td>表单事件</td>
+          <td>input | submit | change</td>
+        </tr>
+        <tr>
+          <td>键盘事件</td>
+          <td>keyup | keydown</td>
+        </tr>
+        <tr>
+          <td>鼠标事件</td>
+          <td>mouseup | mousedown | mouseover | mouseout | mouseenter</td>
+        </tr>
+        <tr>
+          <td>多媒体事件</td>
+          <td>play</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 事件侦听器使用</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>HTML</figcaption>
+        <pre>&lt;button class="btn"&gt;Click me&lt;/button&gt;</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+&lt;script&gt;
+  window.onload = function () {
+    let btn = document.querySelector('.btn')
+    btn.addEventListener('click', function () {
+      alert('hi,you clicked me');
+    })
+  }
+&lt;/script&gt;</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 事件侦听器使用 - 提升版</dd>
+    <dd>. 封装函数</dd>
+    <dd>. 分配多个相同事件</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+&lt;script&gt;
+  let btn = document.querySelector('.btn')
+  btn.addEventListener('click', fn1)
+  btn.addEventListener('click', fn2)
+  function fn1() {
+    alert('hi,you clicked me');
+  }
+  function fn2() {
+    alert('hi,you clicked me, again');
+  }
+&lt;/script&gt;      </pre>
+      </figure>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

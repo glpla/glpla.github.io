@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>开发热点 Focus</title>
+  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="./css/focus.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;Focus</h1>
+  </header>
+  <dl>
+    <dt>Margin合并</dt>
+    <dd>.相邻元素同时存在某个方向上的margin时，会触发margin合并的情况，如兄弟元素一个设置了margin-bottom，一个设置了margin-top；合并结果取两者之中的<span
+        class="warn">大者</span>
+    </dd>
+    <dd>.实际体现：文章中，上下相邻段落的段间距是一样的</dd>
+    <dd>.只有标准流存在；浮动/固定/绝对定位的元素不存在塌陷</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 兄弟关系</dd>
+    <dd>.兄元素margin-bottom</dd>
+    <dd>.弟元素margin-top</dd>
+    <dt>Margin塌陷</dt>
+    <dd>.相邻元素同时存在某个方向上的margin时，会触发margin塌陷，如父子元素都设置margin-top；塌陷结果取两者之中的
+      <span class="warn">大者</span>
+    </dd>
+    <dd>.只有标准流存在；浮动/固定/绝对定位的元素不存在塌陷</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 父子塌陷</dd>
+    <dd>.父元素margin-top</dd>
+    <dd>.子元素margin-top</dd>
+    <dd>解决方案</dd>
+    <dd>.破除相邻的关系即可</dd>
+    <dd>.创建BFC - Block Formatting Context</dd>
+    <dd>.[独立][渲染]的一块区域；不同的BFC互不干扰：即里面的元素不会影响外面的元素；创建BFC可以解决高度坍塌和清除浮动；</dd>
+    <dd>具体措施</dd>
+    <dd>.为父元素增加：border-top/padding-top/overfollow：hidden</dd>
+    <dd>.为子元素添加：浮动、定位</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 塌陷</dd>
+    <dd>.使用Snipaste测量：父级顶部实际margin不是10px，而是20px，同时子级margin塌陷为0</dd>
+    <dd>.点击不同选项，查看塌陷解决方案</dd>
+    <dd>
+      <input type="radio" name="margin" id="none" checked>
+      <label for="none">none</label>
+      <input type="radio" name="margin" id="border">
+      <label for="border">border-top</label>
+      <input type="radio" name="margin" id="padding">
+      <label for="padding">padding-top</label>
+      <input type="radio" name="margin" id="overflow">
+      <label for="overflow">overflow: hidden;</label>
+      <input type="radio" name="margin" id="float">
+      <label for="float">float: left;</label>
+      <input type="radio" name="margin" id="pos">
+      <label for="pos">position: absolute;</label>
+      <input type="radio" name="margin" id="dis">
+      <label for="dis">display: flow-root;</label>
+    </dd>
+    <dd class="ref"></dd>
+    <dd>
+      <div class="basic father" id="fa">
+        <div class="son" id="son"></div>
+      </div>
+    </dd>
+    <dd>[CSS]尺寸、背景颜色略</dd>
+    <dd>
+      <pre>
+.fa {
+    margin-top: 10px;
+}
+
+.son {
+    margin-top: 20px;
+}</pre>
+    </dd>
+    <dt>垂直方向对齐vertical-align</dt>
+    <dd>.适用于 inline 和 inline-block </dd>
+    <dd>.一个容器中，有多个子元素要分别设置，如统一垂直居中middle</dd>
+    <dd>.对中文影响不大</dd>
+    <dd>.相邻行文字的基线与基线之间的距离就是行高 line-height</dd>
+    <dd>.行间距 = 行高 - 字体大小</dd>
+    <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>baseline</td>
+          <td>默认。元素放置在父元素的基线上</td>
+        </tr>
+        <tr>
+          <td>top</td>
+          <td>把元素的顶端与行中最高元素的顶端对齐</td>
+        </tr>
+        <tr>
+          <td>text-top</td>
+          <td>把元素的顶端与父元素字体的顶端对齐</td>
+        </tr>
+        <tr>
+          <td>middle</td>
+          <td>把此元素放置在父元素的中部</td>
+        </tr>
+        <tr>
+          <td>text-bottom</td>
+          <td>把元素的底端与父元素字体的底端对齐</td>
+        </tr>
+        <tr>
+          <td>bottom</td>
+          <td>把元素的顶端与行中最低的元素的顶端对齐</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="dd-img-box"><img src="./imgs/vl.gif" alt=""></dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 对齐</dd>
+    <dd class="ref-box">
+      line-height: 64px;
+      <span style="vertical-align: top">top</span>
+      <span style="vertical-align: text-top">text-top</span>
+      <span style="vertical-align: middle">middle</span>
+      <span style="vertical-align: baseline">baseline</span>
+      <span style="vertical-align: text-bottom">text-bottom</span>
+      <span style="vertical-align: bottom">bottom</span>
+    </dd>
+    <dd>[HTML]</dd>
+    <dd>
+      <pre>
+&lt;div class="ref-box"&gt;
+    line-height: 64px;
+    &lt;span style="vertical-align: top"&gt;top&lt;/span&gt;
+    &lt;span style="vertical-align: text-top"&gt;text-top&lt;/span&gt;
+    &lt;span style="vertical-align: middle"&gt;middle&lt;/span&gt;
+    &lt;span style="vertical-align: baseline"&gt;baseline&lt;/span&gt;
+    &lt;span style="vertical-align: text-bottom"&gt;text-bottom&lt;/span&gt;
+    &lt;span style="vertical-align: bottom"&gt;bottom&lt;/span&gt;
+&lt;/div&gt;</pre>
+    </dd>
+    <dd>[辅助CSS]</dd>
+    <dd>
+      <pre>
+.ref-box {
+    font-size: 32px;
+    line-height: 64px;
+    height: 100px;
+    background: #000;
+    color: #fff;
+}
+
+.ref-box span {
+    display: inline-block;
+    border: 1px solid #fff;
+    font-size: 16px;
+    line-height: 16px;
+    height: 20px;
+}</pre>
+    </dd>
+    <dt>滚动html</dt>
+    <dd>.设置字体1rem=10px，便于运算</dd>
+    <dd>.指定平滑滚动</dd>
+    <dd>.指定滚动目标到顶部距离，特别适合锚点跳转，可以避免锚点目标被顶部的导航遮盖</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>平滑滚动</figcaption>
+        <pre>
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}</pre>
+      </figure>
+    </dd>
+    <dt>定制滚动条</dt>
+    <dd>.通常指定&lt;body&gt;，也可以应用到其它容器元素</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>定制滚动条</figcaption>
+        <pre>
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--blue-light-color);
+}</pre>
+      </figure>
+    </dd>
+    <dt>&amp;nbsp vs space</dt>
+    <dd>.&amp;nbsp：non-breaking space，不换行的空格，多用于组织英文的关键字，避免被换行打散</dd>
+    <dd>.&amp;copy;-&copy;</dd>
+    <dd>.&amp;commat;-&commat;</dd>
+    <dt>用户选择user-select:none;</dt>
+    <dd>.禁止用户选择</dd>
+    <dt>事件触发pointer-events: none;</dt>
+    <dd>.阻止元素触发事件，如可以只让父元素响应，所有子元素禁止，可以简化事件处理</dd>
+    <dd>.可以实现节流功能</dd>
+    <dt>溢出隐藏Overflow：hidden;</dt>
+    <dd>.消除塌陷</dd>
+    <dd>.清除浮动</dd>
+    <dd>.消除grid布局时为grid-item指定padding时引起的尺寸扩展</dd>
+    <dd>.消除flex布局时，子项分配的空间被实际内容撑开，如&lt;img&gt;，详情见 <a href="./text.html#flex">text-入党誓词</a>一节</dd>
+    <dt>继承inherit</dt>
+    <dd>.继承父级属性，避免重复定义样式</dd>
+    <dd>.适用：input、select、button、a</dd>
+    <dd>
+      <pre>
+a, input {
+    font: inherit;
+    color: inherit;
+}</pre>
+    </dd>
+    <dt>自定义鼠标cursor</dt>
+    <dd>.支持静态图片</dd>
+    <dd>.图片大小不能太大，一般是32*32</dd>
+    <dd>.使用的容器如&lt;body&gt;要有高度，否则显示不出来</dd>
+    <dd>
+      <pre>
+body {
+  cursor: url(./favicon.ico), auto;
+  min-height: 100vh;
+}</pre>
+    </dd>
+    <dt>移动端热区响应背景</dt>
+    <dd>更多细节，请访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-tap-highlight-color">CAN I USE</a>
+    </dd>
+    <dd>
+      <pre>-webkit-tap-highlight-color: transparent;</pre>
+    </dd>
+    <dt>取消/禁止页面翻译</dt>
+    <dd>.移除&lt;html lang="en"&gt;的lang属性</dd>
+    <dt>-inline</dt>
+    <dd>在水平方向指定属性，如左右填充padding、左右margin、左右border</dd>
+    <dd>简化代码</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>传统代码</figcaption>
+        <pre>
+margin-left: 1rem;
+margin-right: 1rem;</pre>
+      </figure>
+      <figure class="code">
+        <figcaption>简化代码</figcaption>
+        <pre>
+margin-inline: 1rem;</pre>
+      </figure>
+    </dd>
+    <dt>max-content</dt>
+    <dd>子项最大和容器保持一致</dd>
+    <dd>
+      <figure class="code">
+        <pre>
+.item {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: max-content;
+  height: max-content;
+}</pre>
+      </figure>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+    window.onload = function () {
+      let fa = document.querySelector('#fa')
+      let son = document.querySelector('#son')
+      let none = document.querySelector('#none')
+      let border = document.querySelector('#border')
+      let padding = document.querySelector('#padding')
+      let overflow = document.querySelector('#overflow')
+      let float = document.querySelector('#float')
+      let pos = document.querySelector('#pos')
+      let dis = document.querySelector('#dis')
+      border.addEventListener('focus', (e) => {
+        fa.style.borderTop = '1px solid #000'
+      })
+      border.addEventListener('blur', (e) => {
+        fa.style.borderTop = 'unset'
+      })
+
+      padding.addEventListener('focus', (e) => {
+        fa.style.paddingTop = '10px'
+      })
+      padding.addEventListener('blur', (e) => {
+        fa.style.paddingTop = 'unset'
+      })
+
+      overflow.addEventListener('focus', (e) => {
+        fa.style.overflow = 'hidden'
+      })
+      overflow.addEventListener('blur', (e) => {
+        fa.style.overflow = 'unset'
+      })
+
+      float.addEventListener('focus', (e) => {
+        son.style.float = 'left'
+      })
+      float.addEventListener('blur', (e) => {
+        son.style.float = 'unset'
+      })
+
+      pos.addEventListener('focus', (e) => {
+        son.style.position = 'absolute'
+      })
+      pos.addEventListener('blur', (e) => {
+        son.style.position = 'unset'
+      })
+
+      dis.addEventListener('focus', (e) => {
+        son.style.display = 'flow-root'
+      })
+      dis.addEventListener('blur', (e) => {
+        son.style.display = 'unset'
+      })
+    }
+  </script>
+</body>
+
+</html>

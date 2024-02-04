@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计数器 Counter</title>
+  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="../css/sn.css">
+  <style>
+    .article {
+      counter-reset: chap;
+    }
+
+    .article h2 {
+      counter-reset: sec;
+      counter-increment: chap;
+    }
+
+    .article h2::before {
+      content: '第' counter(chap)'章 ';
+    }
+
+    .article h3 {
+      counter-increment: sec;
+    }
+
+    .article h3::before {
+      content: counter(chap)'.' counter(sec)'节 ';
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>计数器&commat;Counter</h1>
+  </header>
+  <dl>
+    <dt>说明</dt>
+    <dd>. 根据元素个数自动计数</dd>
+    <dd>. 可以嵌套使用实现多级列表</dd>
+    <dd>. 理工科最爱：为代码编号</dd>
+    <dd>. 计数标识符可以使用连字符-，不需要使用引号包裹</dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>CSS样式</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>创建</td>
+          <td>counter-reset；默认从0开始；初始化计数器，多个计数器使用空格分割；可以使用变量</td>
+        </tr>
+        <tr>
+          <td>使用</td>
+          <td>counter-increment</td>
+        </tr>
+        <tr>
+          <td>定制样式</td>
+          <td>counter</td>
+        </tr>
+        <tr>
+          <td>显示</td>
+          <td>在伪元素的content属性中获取并显示</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>]初始化</dd>
+    <dd>. 默认从0开始</dd>
+    <dd>
+      <pre>counter-reset: percent;</pre>
+    </dd>
+    <dd>. 从10开始</dd>
+    <dd>
+      <pre>counter-reset: percent 10;</pre>
+    </dd>
+    <dd>. 根据变量定义开始编号</dd>
+    <dd>
+      <pre>counter-reset: percent var(--per);</pre>
+    </dd>
+    <dd>. 使用连字符-定义复制标识符</dd>
+    <dd>
+      <pre>counter-reset: chapter-sn;</pre>
+    </dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>list-style-type常见类型</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>disc</td>
+          <td>默认实心圆</td>
+        </tr>
+        <tr>
+          <td>circle</td>
+          <td>标记是空心圆</td>
+        </tr>
+        <tr>
+          <td>square</td>
+          <td>标记是实心方块</td>
+        </tr>
+        <tr>
+          <td>decimal</td>
+          <td>普通数字</td>
+        </tr>
+        <tr>
+          <td>decimal-leading-zero</td>
+          <td>0开头的数字标记：01, 02, 03</td>
+        </tr>
+        <tr>
+          <td>lower-roman</td>
+          <td>小写罗马数字：i, ii, iii, iv, v</td>
+        </tr>
+        <tr>
+          <td>upper-roman</td>
+          <td>大写罗马数字：I, II, III, IV, V</td>
+        </tr>
+        <tr>
+          <td>lower-alpha</td>
+          <td>小写英文字母：a, b, c, d, e</td>
+        </tr>
+        <tr>
+          <td>upper-alpha</td>
+          <td>大写英文字母：A, B, C, D, E</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>步骤</dt>
+    <dd class="ol">
+      <div>为父元素创建/设置/初始化计数器</div>
+      <div>子元素使用/计数，其伪元素使用content显示计数</div>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 为代码添加行号</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>为代码添加行号</figcaption>
+        <pre>
+<span>&lt;!DOCTYPE html&gt;</span>
+<span>&lt;html lang="en"&gt;</span>
+<span></span>
+<span>&lt;head&gt;</span>
+<span>    &lt;meta charset="UTF-8"&gt;</span>
+<span>    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;</span>
+<span>    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span>
+<span>    &lt;title&gt;Document&lt;/title&gt;</span>
+<span>&lt;/head&gt;</span>
+<span></span>
+<span>&lt;body&gt;</span>
+<span>    hello, world.</span>
+<span>&lt;/body&gt;</span>
+<span></span>
+<span>&lt;/html&gt;</span></pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>[HTML]</figcaption>
+        <pre>&lt;span&gt;hello, world.&lt;/span&gt;</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>[CSS]</figcaption>
+        <pre>
+pre {
+  counter-reset: sn;
+}
+
+pre span {
+  counter-increment: sn;
+}
+
+pre span::before {
+  content: counter(sn, decimal-leading-zero)' ';
+}</pre>
+      </figure>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 为文章添加章节序号</dd>
+    <dd class="article">
+      <h2>title1</h2>
+      <h3>sub-title1</h3>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae, inventore.</p>
+      <p>Explicabo voluptatibus quaerat nesciunt, voluptas sequi saepe ea qui repudiandae!</p>
+      <p>Eum, molestiae repudiandae corrupti eos sit fugit expedita in mollitia. Lorem ipsum dolor, sit amet
+        consectetur adipisicing elit. Ratione nesciunt qui nostrum. Sint corrupti eveniet laboriosam quibusdam
+        consequuntur dolores placeat.</p>
+      <h3>sub-title2</h3>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, saepe?</p>
+      <p>Obcaecati dolores adipisci amet ullam explicabo minima aut officia voluptates! Lorem ipsum dolor sit, amet
+        consectetur adipisicing elit. Eum eligendi adipisci voluptatibus cumque! Doloribus delectus ad quia temporibus
+        libero. Doloribus atque repudiandae aliquid quasi dignissimos magni omnis deleniti sapiente nihil!</p>
+      <p>Assumenda sequi sed animi, totam alias similique aspernatur saepe blanditiis.</p>
+      <h3>sub-title3</h3>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore, ex.</p>
+      <p>Necessitatibus ipsam, excepturi animi ea tempore ut minus. Amet, repellendus!</p>
+      <p>Odit fugit animi rerum, nulla error vitae illum. Voluptates, maxime. Lorem ipsum dolor, sit amet consectetur
+        adipisicing elit. Recusandae esse, aliquid voluptatibus pariatur illo quae voluptatum vitae nobis vero. Sit
+        quo culpa error perspiciatis, consectetur magnam molestias nemo totam assumenda?</p>
+      <h2>title2</h2>
+      <h3>sub-title1</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, optio.</p>
+      <p>Error quia laborum voluptatibus eos perferendis nemo assumenda sapiente eum.</p>
+      <p>Doloremque atque voluptate earum omnis reiciendis dignissimos quae, perferendis quia?</p>
+      <h3>sub-title2</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, sunt! Lorem ipsum dolor sit amet
+        consectetur adipisicing elit. Quos esse voluptatem facilis inventore quod a sint labore, maiores alias
+        explicabo incidunt aut illo tempora vel vero nisi rerum minima reprehenderit eligendi modi, repellat
+        voluptates dolore architecto. Voluptas enim error soluta.</p>
+      <p>Molestias, mollitia perspiciatis maiores illo cupiditate porro quibusdam modi saepe.</p>
+      <p>Doloribus iste ea inventore accusantium aliquam adipisci nulla esse ratione!</p>
+      <h3>sub-title3</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, saepe?</p>
+      <p>Quidem, ea libero! Numquam delectus, iusto dignissimos atque quidem repellendus.</p>
+      <p>Doloribus neque ad unde optio vero reiciendis dolore, voluptatibus doloremque.</p>
+      <h2>title3</h2>
+      <h3>sub-title1</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, repellendus?</p>
+      <p>Autem culpa deserunt reprehenderit explicabo possimus natus rem, ea est. Lorem ipsum, dolor sit amet
+        consectetur adipisicing elit. Totam atque debitis obcaecati, incidunt esse exercitationem qui sint non libero
+        natus?</p>
+      <p>Veniam qui hic temporibus magnam enim corrupti sed laborum excepturi?</p>
+      <h3>sub-title2</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, labore!</p>
+      <p>Explicabo fugit hic perspiciatis et non quibusdam modi assumenda sed.</p>
+      <p>Iste non culpa, possimus cupiditate quis quos consequatur illum. Aspernatur? Lorem ipsum dolor, sit amet
+        consectetur adipisicing elit. Earum nam veniam ullam quaerat, voluptatem fugit ipsam animi ipsa ratione
+        cumque.</p>
+      <h3>sub-title3</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, ut.</p>
+      <p>Quo, ut vero. Consectetur suscipit dicta atque asperiores, vel sunt?</p>
+      <p>Eveniet, eos blanditiis error provident facere veritatis dicta aliquid a.</p>
+      <h2>title4</h2>
+      <h3>sub-title1</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, hic. Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Ipsam ipsa commodi repellat explicabo? Eius at atque reiciendis ratione ut, dolore
+        voluptatibus, repellendus similique voluptas unde a fugit. Laboriosam similique quasi enim, sit est impedit ab
+        quos nemo consequuntur accusantium eos.</p>
+      <p>Doloremque iusto nobis at et soluta earum dignissimos rem facilis.</p>
+      <p>Eligendi nisi quia possimus itaque dicta! Commodi suscipit libero ipsa.</p>
+      <h3>sub-title2</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, assumenda!</p>
+      <p>Nisi consequuntur at, qui est unde quos harum labore veritatis.</p>
+      <p>Nobis quisquam labore quia id doloribus placeat harum dicta tempore.</p>
+      <h3>sub-title3</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, aperiam!</p>
+      <p>Voluptatum reiciendis nam voluptate, quae consectetur consequatur doloremque corporis deserunt.</p>
+      <p>Eligendi modi, adipisci quae numquam expedita deserunt accusantium! Voluptas, fuga.</p>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>为文章添加章节序号</figcaption>
+        <pre>
+.article {
+  counter-reset: chap;
+}
+
+.article h2 {
+  counter-reset: sec;//每章的分节都重新编号
+  counter-increment: chap;
+}
+
+.article h2::before {
+  content: '第' counter(chap)'章 ';
+}
+
+.article h3 {
+  counter-increment: sec;
+}
+
+.article h3::before {
+  content: counter(chap)'.' counter(sec)'节 ';
+}</pre>
+      </figure>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

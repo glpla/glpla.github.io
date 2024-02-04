@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图像组件 image</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>图像组件</h1>
+        <span>&lt;image&gt;</span>
+    </header>
+    <dl>
+        <dt>说明</dt>
+        <dd>展示图片的容器</dd>
+        <dd>默认宽度320px、高度240px</dd>
+        <dd>指定src的同时，还要指定显式模式mode</dd>
+        <dd>支持 JPG、PNG、SVG、WEBP、GIF等格式</dd>
+        <dd>通常需要一个容器包裹图像组件；图像比例尽量和容器保持一致</dd>
+        <dd>更多信息，请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/component/image.html"
+                class="link">微信官方文档</a>
+        <dd>
+            <table class="tbl-sn">
+                <caption>通用属性</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>src</td>
+                    <td>图片资源地址<br>请使用在线资源或自建服务器资源；不要使用本地资源</td>
+                </tr>
+                <tr>
+                    <td>mode</td>
+                    <td>
+                        <details>
+                            <summary>图片裁剪、缩放的模式</summary>
+                            <div>saleToFill：不保持纵横比；缩放至填满；图片会变形；默认模式</div>
+                            <div>apectFit：保持纵横比；缩放至完全显示；同contain；可能有留白</div>
+                            <div>apectFill：保持纵横比；缩放至完全填充；同cover；图片会被裁剪*</div>
+                            <div>wdthFix：宽度不变，高度自动变化</div>
+                            <div>hightFix：高度不变，宽度自动变化</div>
+                        </details>
+                    </td>
+                </tr>
+                <tr>
+                    <td>show-menu-by-longpress</td>
+                    <td>布尔；默认false；长按图片操作：转发、保存、收藏、识别等</td>
+                </tr>
+                <tr>
+                    <td>bindload</td>
+                    <td>图片载入完毕时触发</td>
+                </tr>
+                <tr>
+                    <td>binderror</td>
+                    <td>图片载入错误发生时触发</td>
+                </tr>
+            </table>
+            <table class="tbl-sn">
+                <caption>Skyline 特有属性</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>fade-in</td>
+                    <td>布尔；默认false；是否渐显</td>
+                </tr>
+            </table>
+            <table class="tbl-sn">
+                <caption>WebView 特有属性</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>lazy-load</td>
+                    <td>布尔；默认false；图片懒加载，在即将进入一定范围（上下三屏）时才开始加载</td>
+                </tr>
+            </table>
+        </dd>
+        <dd class="example-sn">长按图片转发</dd>
+        <dd class="code">
+            <pre>&lt;image src="xxx.jpg"  show-menu-by-longpress mode="widthFix"/&gt;</pre>
+        </dd>
+        <dd class="example-sn">使用背景图片</dd>
+        <dd>使用背景图片可以省掉部分组件元素</dd>
+        <dd>但是：默认情况下不支持background-image</dd>
+        <dd>解决方案1. 使用定位</dd>
+        <dd>容器采用相对定位，提供参考</dd>
+        <dd>图片正常文档流使用作为背景</dd>
+        <dd>内容采用绝对定位，脱离文档流后覆盖在图片上面</dd>
+        <dd class="code">
+            <pre>
+&lt;view class="wrap"&gt;
+    &lt;image class="img"  src="" mode="" /&gt;
+    &lt;view class="cont"/&gt;&lt;/view&gt;
+&lt;/view&gt;            </pre>
+        </dd>
+        <dd>解决方案2. 把图片转换为base64格式</dd>
+        <dd>转换工具：<a href="https://www.jyshare.com/front-end/59/" class="link">图片转 BASE64 编码</a></dd>
+        <dd>方法：将本地图片转换为base64格式后再应用于背景图片属性</dd>
+        <dd>更多方法，请访问 <a href="https://blog.csdn.net/robin_sky/article/details/93734695" class="link">背景图片的使用</a></dd>
+        <dd class="code">
+            <pre>
+background-size: cover;
+background-image: url(data:image/jpeg;base64....)</pre>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>
