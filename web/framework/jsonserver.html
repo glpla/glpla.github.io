@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>json-server</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>资源服务器</h1>
+    <span>&commat;json-server</span>
+  </header>
+  <dl>
+    <dd>需要node.js环境支持</dd>
+    <dd>仅仅是针对json文件的解析和应用</dd>
+    <dd>更多信息，请访问 <a href="https://www.npmjs.com/package/json-server" class="link">NPM - json-server</a></dd>
+    <dt>基本步骤</dt>
+    <dd class="number">
+      <div>创建项目文件夹server</div>
+      <div>项目初始化 - 完成后创建package.json包管理配置文件；参数-y表述默认创建</div>
+      <pre class="code">npm init -y</pre>
+      <div>安装json-server依赖 - 如需全局安装，请使用参数 -g</div>
+      <pre class="code">npm install json-server</pre>
+      <div>准备数据文件 form.json - 设计2个接口，一个是问卷内容；一个是提交用户，以uid和uname区分，系统会自定增加id字段</div>
+      <pre class="code">
+{
+"cont": {
+    "id": 1,
+    "title": "quiz",
+    "__webviewId__": 9,
+    "name": "李四",
+    "opinion": "微信小程序"
+    "gender": [
+        {
+          "name": "男",
+          "value": "0",
+          "checked": false
+        },
+        {
+          "name": "女",
+          "value": "1",
+          "checked": true
+        }
+    ],
+    "skills": [
+        {
+          "name": "HTML",
+          "value": "html",
+          "checked": true
+        },
+        {
+          "name": "CSS",
+          "value": "css",
+          "checked": false
+        },
+        {
+          "name": "JavaScript",
+          "value": "js",
+          "checked": true
+        },
+        {
+          "name": "Photoshop",
+          "value": "ps",
+          "checked": false
+        }
+    ]
+},
+  "user": [
+      {
+        "id": "d641",
+        "uid": 1,
+        "uname": "nj"
+      }
+  ]
+}</pre>
+      <div>启动服务 - 在控制台执行，系统自动检测并给出两个接口的地址：/cont、/user；注意文件位置</div>
+      <pre class="code">json-server ./lib/server/form.json</pre>
+      <div>应用中获取数据 - get</div>
+      <pre class="code">
+wx.request({
+url: 'http://127.0.0.1:3000/cont',
+success:res=>{
+console.log(res);
+}
+})</pre>
+      <div>应用中提交数据 - post</div>
+      <pre class="code">
+wx.request({
+url: 'http://127.0.0.1:3000/user',
+method:'POST',
+data:{
+id:2,
+uname:'nj'
+},
+success:res=>{
+console.log(res);
+}
+})</pre>
+      <div>根据用户id查询 - 用户提交前可以根据结果决定是不是已经提交；如果查询结果不为0，则已经提交，不允许再次提交</div>
+      <pre class="code">url: 'http://127.0.0.1:3000/user?id='+this.data.id</pre>
+      <div>其他 - 根据查询或提交结果，给出不同的提示toast</div>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

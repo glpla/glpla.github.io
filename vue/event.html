@@ -19,7 +19,113 @@
         <span>Event</span>
     </header>
     <dl>
-        <dt>说明</dt>
+        <dt>事件绑定 v-on</dt>
+        <dd>监听 DOM 事件；可以简写为 <span class="warn">@</span></dd>
+        <dd class="code">
+            <pre>
+&lt;a v-on:click="doSomething"&gt; ... &lt;/a&gt;
+
+&lt;a @click="doSomething"&gt; ... &lt;/a&gt;</pre>
+        </dd>
+        <dt>事件类型</dt>
+        <dd>包括：鼠标事件、键盘事件</dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>常见事件类型</caption>
+                <tr>
+                    <th>类型</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>鼠标单击</td>
+                </tr>
+                <tr>
+                    <td>dbclick</td>
+                    <td>鼠标双击</td>
+                </tr>
+                <tr>
+                    <td>keyup</td>
+                    <td>某键松开</td>
+                </tr>
+                <tr>
+                    <td>keydown</td>
+                    <td>某键按下</td>
+                </tr>
+                <tr>
+                    <td>keyenter</td>
+                    <td>回车按下</td>
+                </tr>
+                <tr>
+                    <td>mouseup</td>
+                    <td>鼠标松开</td>
+                </tr>
+                <tr>
+                    <td>mousedown</td>
+                    <td>鼠标按下</td>
+                </tr>
+                <tr>
+                    <td>mousemove</td>
+                    <td>鼠标移动</td>
+                </tr>
+                <tr>
+                    <td>mouseover</td>
+                    <td>鼠标悬停</td>
+                </tr>
+            </table>
+        </dd>
+        <dt>事件修饰符</dt>
+        <dd>限制事件特性</dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>常见事件修饰符</caption>
+                <tr>
+                    <th>类型</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>.stop</td>
+                    <td>停止父级事件的传播/冒泡</td>
+                </tr>
+                <tr>
+                    <td>.once</td>
+                    <td>只触发一次</td>
+                </tr>
+                <tr>
+                    <td>.prevent</td>
+                    <td>阻止默认事件</td>
+                </tr>
+                <tr>
+                    <td>.native</td>
+                    <td>使用原生事件；多用于组件<br>定义在组件上的事件默认都是自定义事件，即：系统认为是子组件$emit出来的事件；如需使用原生时间，应指定事件修饰符</td>
+                </tr>
+            </table>
+        </dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>按键事件修饰符</caption>
+                <tr>
+                    <th>类型</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>.enter</td>
+                    <td>配合enter键</td>
+                </tr>
+                <tr>
+                    <td>.alt</td>
+                    <td>配合alt键</td>
+                </tr>
+                <tr>
+                    <td>.alt.enter</td>
+                    <td>配合alt键enter键</td>
+                </tr>
+                <tr>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+            </table>
+        </dd>
         <dt>事件对象 $event</dt>
         <dd>使用普通形参的时候，可以使用关键字$event获取事件对象</dd>
     </dl>

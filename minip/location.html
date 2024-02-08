@@ -41,25 +41,104 @@
                     <td>显示带有方向的当前定位点</td>
                 </tr>
                 <tr>
-                    <td>marker</td>
+                    <td>show-scale</td>
+                    <td>显示缩放标尺</td>
+                </tr>
+                <tr>
+                    <td>show-compass</td>
+                    <td>显示罗盘</td>
+                </tr>
+                <tr>
+                    <td>markers</td>
                     <td>在地图上显示标记的位置；结合地图服务API - 地点搜索实现
                         <details>
                             <summary>属性</summary>
                             <div>latitude：标记经度；必填</div>
                             <div>longitude：标记维度；必填</div>
                             <div>iconPath：标记图片路径；必填</div>
-                            <div>id：标记id；number；注意是数字类型；每个标记的id应该不同</div>
-                            <div>width：标记宽度</div>
-                            <div>height：标记高度</div>
-                            <div>label：标签；在标记底部显示信息；对象类型</div>
-                            <div>callout：冒泡；默认情况下，单击标记，在上面显示信息；对象类型；手机端才能看到效果</div>
+                            <div>id：标记id；number；注意是数字类型；每个标记的id应该不同；必填</div>
+                            <div>width：标记宽度；实际开发必填</div>
+                            <div>height：标记高度；实际开发必填</div>
+                            <div>label：标签；在标记下方显示信息；对象类型</div>
+                            <div>callout：单击标记，在上方显示content信息，单击地图其它地方，信息消失；对象类型</div>
                         </details>
                     </td>
                 </tr>
             </table>
         </dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>气泡callout vs 标签label</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>callout</th>
+                    <th>label</th>
+                </tr>
+                <tr>
+                    <td>display</td>
+                    <td>√：BYCLICK ALWAYS</td>
+                    <td>×</td>
+                </tr>
+                <tr>
+                    <td>content</td>
+                    <td>√</td>
+                    <td>√</td>
+                </tr>
+                <tr>
+                    <td>color</td>
+                    <td>√</td>
+                    <td>√</td>
+                </tr>
+                <tr>
+                    <td>fontSize</td>
+                    <td>√</td>
+                    <td>√</td>
+                </tr>
+                <tr>
+                    <td>anchorX</td>
+                    <td>√：marker 对应的经纬度</td>
+                    <td>√</td>
+                </tr>
+                <tr>
+                    <td>anchorY</td>
+                    <td>√：marker 对应的经纬度</td>
+                    <td>√</td>
+                </tr>
+                <tr>
+                    <td>borderWidth</td>
+                    <td>√</td>
+                    <td>√</td>
+                </tr>
+                <tr>
+                    <td>borderColor</td>
+                    <td>√</td>
+                    <td>√</td>
+                </tr>
+                <tr>
+                    <td>borderRadius</td>
+                    <td>√</td>
+                    <td>√</td>
+                </tr>
+                <tr>
+                    <td>bgColor</td>
+                    <td>√</td>
+                    <td>√</td>
+                </tr>
+                <tr>
+                    <td>padding</td>
+                    <td>√</td>
+                    <td>√</td>
+                </tr>
+                <tr>
+                    <td>textAlign</td>
+                    <td>√：left, right, center</td>
+                    <td>√</td>
+                </tr>
+            </table>
+        </dd>
         <dt>wx.getLocation(Object object)</dt>
         <dd>获取当前的地理位置、速度</dd>
+        <dd>默认type是GPS，推荐使用gcj02</dd>
         <dd>只针对部分限定类目的小程序开放</dd>
         <dd>需要开通权限：[开发] → [开发管理] → [接口设置]中自助开通</dd>
         <dd>需要在 app.json 中进行声明</dd>
@@ -72,7 +151,7 @@
         <dd>将地图中心移置当前定位点；地图组件需设置 show-location 为true</dd>
         <dd>2. getCenterLocation(Object object)</dd>
         <dd>获取当前地图中心的经纬度；返回 gcj02 坐标系</dd>
-        <dt>基本渲染</dt>
+        <dd class="example-sn">map基本使用</dd>
         <dd class="number">
             <div>配置app.json</div>
             <pre class="code">
@@ -82,13 +161,37 @@
     "choosePoi",
     "chooseAddress"
 ]</pre>
-            <div>页面.js - 获取位置信息</div>
+            <div>页面.wxml - 使用位置信息渲染地图组件&lt;map&gt;</div>
+            <pre class="code">
+&lt;map longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" show-location show-scale show-compass bindregionchange="changeRegion"/&gt;</pre>
+            <div>页面.wxss - 设置样式宽高同屏幕</div>
+            <pre class="code">
+map{
+    width: 100vw;
+    height: 100vh;
+}</pre>
+            <div>页面.js - 获取位置信息，配置中心的标记</div>
+            <p>利用获取到的经纬度，设置标记的经纬度</p>
             <pre class="code">
 data: {
     longitude: 0,
     latitude: 0,
+    markers: [{
+        id: 0,
+        longitude: 114.23182,
+        latitude: 36.21256,
+        iconPath: '/utils/imgs/marker.png',
+        callout: {
+          content:'bubble',
+          display:'ALWAYS'
+        },
+        label: {
+          content:'label',
+        },
+        width: 32,
+        height: 32
+    }]
 },
-
 onLoad: function (options) {
     wx.getLocation({
       type: 'gcj02',
@@ -99,17 +202,15 @@ onLoad: function (options) {
         })
       }
     })
-}</pre>
-            <div>页面.wxml - 使用位置信息渲染地图组件&lt;map&gt;</div>
-            <pre class="code">
-&lt;map longitude="{{longitude}}" latitude="{{latitude}}" show-location/&gt;</pre>
-            <div>页面.wxss - 设置样式宽高同屏幕</div>
-            <pre class="code">
-map{
-    width: 100vw;
-    height: 100vh;
+},
+//视野改变时更新搜索
+changeRegion(e){
+    console.log(e);
 }</pre>
             <div>预览</div>
+            <p>看到当前的中心点和标记以及label和callout</p>
+            <p>移动地图，控制台看到事件对象的输出：视野开始begin和视野结束end</p>
+            <p>开发工具和预览、真机调试有差别</p>
         </dd>
     </dl>
     <div class="chap">腾讯地图LBS API</div>
@@ -129,7 +230,9 @@ map{
             <img src="./imgs/lbs2.png" alt="">
             <img src="./imgs/lbs3.png" alt="">
             <div>下载腾讯地图SDK </div>
-            <p>选择 微信小程序JavaScriptSDK v1.1 版本</p>
+            <p>选择 微信小程序 → <a href="./lib/qqmap-wx-jssdk1.1.zip" download title="点击下载" class="link">JavaScriptSDK
+                    v1.1版本</a>
+            </p>
             <p>解压后复制到小程序项目中；通常放在Utils目录</p>
             <div>安全域名设置</div>
             <p>小程序管理后台 → 开发 → 开发管理 → 开发设置 → “服务器域名” 中设置request合法域名，添加https://apis.map.qq.com</p>
@@ -154,56 +257,80 @@ Page({
             fail: function (res) {
                 console.log(res);
             },
-        complete: function (res) {
-            console.log(res);
-        }
-     });
-  }
+            complete: function (res) {
+                console.log(res);
+            }
+        });
+    }
 })            </pre>
             <div>完善地图酒店搜索功能；更多信息，请访问<a href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodSearch"
                     class="link">官方文档</a></div>
-            <p>封装酒店搜索函数getHotel(lat, lng)：借助系统函数区域改变regionChange()获取的结束点end位置来更新当前区域的酒店信息</p>
-            <p>移动地图时，更新函数</p>
-            <p>注意：this的使用</p>
+            <div>添加标记事件bindmarkertap</div>
             <pre class="code">
-getHotel( latitude,longitude) {
-    let _this = this;
+&lt;map longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" show-location show-scale show-compass bindregionchange="changeRegion" bindmarkertap="doMarker"/&gt;</pre>
+            <div>封装酒店搜索函数getHotel(long, lati)：借助系统函数区域改变regionChange()获取的结束点end位置来更新当前区域的酒店信息</div>
+            <pre class="code">
+getHotel(long, lati) {
     qqmapsdk.search({
-        keyword: '酒店',
+        keyword: '学校',
         location: {
-        latitude: latitude,
-        longitude: longitude
+            longitude: long,
+            latitude: lati
         },
-        success: (res) => {
-        let markers = [];
-        for (let index = 0; index &lt; res.data.length; index++) {
+        success: res => {
+            console.log(res);
+            let markers = []
+            res.data.forEach((marker, ind) => {
+                markers.push({
+                    id: ind,
+                    longitude: marker.location.lng,
+                    latitude: marker.location.lat,
+                    iconPath: '/utils/imgs/marker.png',
+                    callout: {
+                        content: marker.title,
+                        display: 'ALWAYS'
+                    },
+                    label: {
+                        content: marker.category
+                    },
+                    width: 32,
+                    height: 32
+                })
+            })
             markers.push({
-            id: res.data.length,
-            longitude: res.data[index].location.lng,
-            latitude: res.data[index].location.lat,
-            iconPath: '../../utils/imgs/marker.png',
-            title: res.data[index].title,
-            address: res.data[index].address,
-            width: 20,
-            height: 20
+                id: 0,
+                longitude: long,
+                latitude: lati,
+                iconPath: '/utils/imgs/marker.png',
+                callout: {
+                    content: 'bubble',
+                    display: 'ALWAYS'
+                },
+                label: {
+                    content: 'label',
+                },
+                width: 32,
+                height: 32
+            })
+            this.setData({
+                markers
             })
         }
-        _this.setData({
-            markers
-        })
-        },
-        fail: (res) => {
-        console.log(res);
-        },
-        complete: (res) => {}
     })
 }</pre>
+            <div>移动地图时，更新函数</div>
             <pre class="code">
 regionChange(e) {
     if (e.type == 'end') {
-        this.getHotel(e.detail.centerLocation.latitude, e.detail.centerLocation.longitude)
+        this.getHotel(e.detail.centerLocation.longitude, e.detail.centerLocation.latitude)
     }
 }</pre>
+            <div>通过标记id获取标记点信息</div>
+            <pre class="code">
+doMarker(e){
+    console.log(e);
+}</pre>
+            <div>预览或在真机中查看效果</div>
         </dd>
         <dd class="tips">开发文档的HelloWorld示例中提供有上述链接</dd>
     </dl>

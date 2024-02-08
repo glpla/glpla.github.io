@@ -23,27 +23,39 @@
         <dd>进一步熟悉资源服务器的搭建</dd>
         <dd>进一步熟悉网络请求的基本过程</dd>
         <dd>掌握利用中间件实现文件的上传和下载</dd>
-        <dt>原理</dt>
-        <dd>文件上传的数据类型是multipart/form-data</dd>
+        <dt>过程</dt>
+        <dd>从资源服务器拉取用户信息，如果为空，则头像显示默认图片；如果不为空，则显示用户头像</dd>
+        <dd>单击修改头像可以重新选择头像，并同步更新到资源服务器</dd>
+        <dd>
+            <figure class="img-sn">
+                <img src="./imgs/file0.png" alt="">
+                <figcaption>用户默认头像</figcaption>
+            </figure>
+        </dd>
+        <dt>知识点</dt>
+        <dd>wxml：&lt;view&gt;、&lt;image&gt;、&lt;form&gt;、&lt;radio-group&gt;、&lt;radio&gt;、&lt;picker&gt;、&lt;button&gt;
+        <dd>js：bindblur、bindchange、bindsubmit、bindchooseavatar、wx.request</dd>
+        <dd>wxss：flex、border-radius、border、fixed、absolute</dd>
+        <dd>其它：文件上传默认是POST，请求头类型是multipart/form-data</dd>
+        <dt>接口</dt>
+        <dd>用户信息：/userInfo</dd>
+        <dd>图片上传：/uploadAvatar</dd>
+        <dt>说明</dt>
+        <dd>在<a href="./case1.html">个人中心</a>页面的基础上，为头像增加导航，点击后跳转到设置页面setup继续开发</dd>
         <dt>要求</dt>
-        <dd class="number">
-            <div>按照以下步骤分别完成文件的上传和下载</div>
-            <div>独立完成</div>
+        <dd>按照以下步骤分别完成头像文件的上传和下载</dd>
+        <dd>独立完成</dd>
+        <dd>
+            <figure class="img-sn">
+                <img src="./imgs/file1.png" alt="">
+                <figcaption>效果图</figcaption>
+            </figure>
         </dd>
         <dt>中间件</dt>
-        <dd>1. <a href="https://www.npmjs.com/package/formidable#readme" class="link">formidable</a></dd>
-        <dd>A Node.js module for parsing form data, especially <span class="warn">file uploads</span>.</dd>
-        <dd>2. <a href="https://www.npmjs.com/package/multer#readme" class="link">multer</a>*</dd>
-        <dd>Multer is a node.js middleware for handling <span class="warn">multipart/form-data</span>, which is
-            primarily used for uploading files. It is written on top of busboy for maximum efficiency.</dd>
-        <dd>Multer adds a body object and a file or files object to the request object:</dd>
-        <dd>The <span class="warn">body</span> object contains the values of the <span class="warn">text</span> fields
-            of the form.</dd>
-        <dd>the <span class="warn">file</span> or files object contains the <span class="warn">files</span> uploaded via
-            the form.</dd>
-        <dd>. upload.none()：only text field</dd>
-        <dd>. upload.single(file)：single file</dd>
-        <dd>. upload.array()：multiple files</dd>
+        <dd>1. <a href="https://www.npmjs.com/package/formidable#readme">formidable</a></dd>
+        
+        <dd>2. <a href="https://www.npmjs.com/package/multer#readme">multer</a>*</dd>
+        
     </dl>
     <div class="chap">uploadFile</div>
     <dl>
@@ -91,7 +103,7 @@ upFile() {
     wx.uploadFile({
         filePath: this.data.fileTempPath,
         name: 'image',
-        url: 'http://127.0.0.1:3000/upload',
+        url: 'http://127.0.0.1:3000/uploadAvatar',
         header:{
             'content-type':'multipart/form-data'
         },
