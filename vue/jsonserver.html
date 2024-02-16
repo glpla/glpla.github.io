@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JSONServer</title>
+  <title>json-server</title>
   <link rel="stylesheet" href="../css/reset2024.css">
   <link rel="stylesheet" href="../css/common2024.css">
   <link rel="stylesheet" href="../css/code.css">
@@ -15,14 +15,120 @@
 
 <body>
   <header>
-    <h1>JSON服务器</h1>
+    <h1>json-server</h1>
     <span>JSONServer</span>
   </header>
   <dl>
     <dt>说明</dt>
-    <dd>GitHub仓库地址：<a href="https://github.com/typicode/json-server" class="link">JSONServer</a></dd>
+    <dd>GitHub仓库地址：<a href="https://www.npmjs.com/package/json-server" class="link">json-server</a></dd>
     <dd>快速搭建HTTP服务</dd>
     <dd>跟随文档操作即可</dd>
+    <dt>约定</dt>
+    <dd class="number">
+      <div>数据查询要使用 GET</div>
+      <div>新增数据要使用 POST - 会自动增加id</div>
+      <div>修改数据使用 PUT|覆盖 和 PATCH|更新</div>
+      <div>删除数据要使用 DELETE</div>
+    </dd>
+    <dt>基本使用</dt>
+    <dd class="number">
+      <div>安装 - json-server</div>
+      <pre class="code">npm install json-server</pre>
+      <div>创建数据文件 - students.json；包括用户id，姓名和星数；初始应为空，通过添加和修改逐步增加</div>
+      <pre class="code">
+{
+  "digital": [
+    {
+      "uid": 20220110,
+      "uname": "gl",
+      "rank": 0
+    }
+  ],
+  "software": [
+    {
+      "uid": 20220210,
+      "uname": "gl",
+      "rank": 0
+    }
+  ]
+}</pre>
+      <div>监听数据文件 - students.json</div>
+      <p>默认端口3000</p>
+      <pre class="code">json-server students.json</pre>
+      <p>指定端口 - 和Vue项目端口保持一致，避免浏览器跨域</p>
+      <pre class="code">json-server students.json --port=5173</pre>
+      <div>请求数据 get - 挂载完毕</div>
+      <pre class="code">
+onMounted(() => {
+  axios.get('http://127.0.0.1:5173/software')
+    .then(res => {
+      //赋值
+    })
+})</pre>
+      <p>可以封装函数</p>
+      <pre class="code">
+onMounted(() => {
+  loadData()
+})
+func loadData(){
+  axios.get('http://127.0.0.1:5173/software')
+    .then(res => {
+      //赋值
+  })
+}</pre>
+      <div>数据渲染 - 判断数据是否为空</div>
+      <pre class="code">
+&lt;div class="wrap"&gt;
+  &lt;template v-if="students.length"&gt;
+    &lt;div class="item" v-for="(item, ind) in students" :key="item.id"&gt;
+      &lt;div&gt;{{ ind + 1 }}&lt;/div&gt;
+      &lt;div&gt;{{ item.uid }}&lt;/div&gt;
+      &lt;div&gt;{{ item.uname }}&lt;/div&gt;
+      &lt;div&gt;
+        &lt;span class="iconfont icon-iconfontshoucang" v-for="star in item.rank"&gt;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;button @click="mod(item.id, item.rank)"&gt;增加&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+  &lt;template v-else&gt;数据为空&lt;/template&gt;
+&lt;/div&gt;</pre>
+      <div>增加数据 post - 提交用户id，姓名和星数；完毕后重新拉取数据</div>
+      <pre class="code">
+function add() {
+  axios.post('http://127.0.0.1:5173/software', {
+    uid: uid.value,
+    uname: uname.value,
+    rank: rank.value
+  })
+    .then(res => {
+      loadData()
+    })
+}</pre>
+      <div>修改数据 patch - 根据id或uid</div>
+      <p>由事件对象获取结构中绑定的数据</p>
+      <pre class="code">
+function mod(id, rank) {
+  axios.patch('http://127.0.0.1:5173/software/' + id, {
+    rank: rank + 1
+  })
+    .then(res => {
+      //更新完毕后，创新加载数据
+      loadData()
+    })
+}</pre>
+      <div>删除数据 delete - 根据id或uid</div>
+      <pre class="code">
+function del(id) {
+  axios.delete('http://127.0.0.1:5173/software/' + id)
+    .then(res => {
+      loadData()
+    })
+}</pre>
+    </dd>
+    <dd class="tips">
+      <div>加入数据验证，如:提交数据是否符合要求，是否为空</div>
+      <div>加入分页设计</div>
+    </dd>
   </dl>
   <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

@@ -20,31 +20,36 @@
     </header>
     <dl>
         <dt>说明</dt>
+        <dd>数据绑定时，可以使用简单的表达式实现数据的2次处理</dd>
+        <dd>根据age判断DOM的渲染</dd>
+        <dd class="code">
+            <pre>&lt;div&gt;{{ age &gt;= 18 ? 'adault' : 'teenage' }} &lt;/div&gt;</pre>
+        </dd>
+        <dd>逻辑复杂时，可以使用计算属性实现</dd>
+        <dt>优点</dt>
         <dd>计算属性是响应式</dd>
         <dd>数据响应时，不会刷新页面</dd>
-        <dd>需要引入包 computed</dd>
+        <dd>需要引入 computed 包</dd>
         <dd>计算属性仅会在其响应式依赖更新时才重新计算</dd>
-        <dd>相比之下，方法调用总是会在重渲染发生时再次执行函数</dd>
         <dd>计算属性有返回值</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>script</figcaption>
-                <pre>
-import { ref, computed } from 'vue'
-
-const count = ref(0)
-const res = computed(() => {
-    return count.value * 2
+        <dd>相比之下，方法调用总是会在重渲染发生时再次执行函数</dd>
+        <dd>使用value指定属性值</dd>
+        <dd class="code">
+            <pre>
+import { ref, computed } from 'vue';
+let age = ref(18)
+const ageRes = computed(() => {
+    return age.value >= 18 ? 'adault' : 'teenage'
 })</pre>
-            </figure>
         </dd>
-        <dd>
-            <figure class="code">
-                <figcaption>template</figcaption>
-                <pre>
-&lt;div&gt; {{ res }} &lt;/div&gt;
-&lt;button type="button" @click="count++"&gt; count is {{ count }} &lt;/button&gt;</pre>
-            </figure>
+        <dd class="code">
+            <pre>
+&lt;div&gt; {{ res }} &lt;/div&gt;</pre>
+        </dd>
+        <dd class="example-sn">参照B站规则处理关注、粉丝、点赞和播放数量</dd>
+        <dd class="tips">
+            <div>除了数据计算外，不应该有其它操作，如数据请求，DOM修改等副作用，即：只做一件事情</div>
+            <div>如果还需要执行其它操作，可以使用侦听函数 <a href="./watch.html" class="link">watch</a></div>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

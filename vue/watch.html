@@ -18,43 +18,130 @@
         <h1>侦听器</h1>
         <span>Watch vs WatchEffect</span>
     </header>
-    <div class="chap">watch</div>
     <dl>
+        <dt>watch</dt>
         <dd>使用 watch 函数在每次响应式状态发生变化时触发回调函数</dd>
+        <dd>侦听对象，不能直接侦听响应式对象的属性值</dd>
         <dd>需引入包 watch</dd>
-        <dd>三个参数：数据源、回调函数、配置项</dd>
-        <dt>数据源</dt>
-        <dd>可以侦听数据类型 - 4种</dd>
-        <dd>. ref 对象 (包括计算属性)：侦听对象的变化，不是值的变化</dd>
-        <dd>. reactive 对象</dd>
-        <dd>. getter 函数：一个有返回的函数</dd>
+        <dd>三个参数：数据源source、回调函数cb、配置项options</dd>
+        <dt>数据源 source</dt>
+        <dd>侦听数据类型 - 4种</dd>
+        <dd>. 一个 ref 对象 (包括计算属性)</dd>
+        <dd>. 一个 reactive 对象</dd>
+        <dd>. 一个 getter 函数：一个有返回的函数</dd>
         <dd>. 多个响应式数据源组成的数组</dd>
-        <dd class="example-sn">侦听 ref - 仅当ref变化时才会侦听，不是ref的值</dd>
+        <dt>回调函数 cb</dt>
+        <dd>侦听时，回调函数会使用2个参数来区分新值newValue和旧值oldValue</dd>
+        <dd>通常我们只关心新值newValue，即：一个参数就够了</dd>
+        <dd>若侦听的是ref对象的属性，则新值旧值一样，是同一个对象</dd>
+        <dd>若侦听的是ref对象，则新值是新对象，旧值是老对象，不是同一个对象</dd>
+        <dt>配置项 options</dt>
+        <dd>1. 立即侦听 immediate</dd>
+        <dd>watch默认是懒执行的：仅当数据源变化时，才会执行回调</dd>
+        <dd>有时，需要在源变化之前就开始执行回调，如同定时器的先执行1次一样</dd>
+        <dd>这个时新值是当前值，而旧值未定义；同初恋一样，无前任</dd>
+        <dd>设置配置项immediate为true</dd>
+        <dd>2. 深度侦听 deep</dd>
+        <dd>默认情况下，只侦听响应式对象，不能侦听对象的属性</dd>
+        <dd>侦听复合对象内部属性时，需要开启深度侦听：设置deep为true</dd>
+        <dd>侦听reactive对象时，默认开启deep，且无法关闭</dd>
+        <dd>深度侦听需要遍历被侦听对象中的所有嵌套的属性，当用于大型数据结构时，开销很大。因此请只在必要时才使用它，并且要留意性能</dd>
+        <dd class="example-sn">侦听一个简单 ref</dd>
+        <dd class="code">
+            <pre>
+let num = ref(0)
+function doNum() {
+    num.value++
+}
+watch(num, (newv, oldv) => {
+    console.log('num old vs new', oldv, newv);
+})</pre>
+        </dd>
+        <dd class="example-sn">侦听多个简单ref</dd>
+        <dd>任何一个对象发生变化都会被监听到</dd>
+        <dd>以数组的形式表示多个数据源：1个数据源变成多个数据源</dd>
+        <dd>以数组的形式分别显示新值和旧值：1个新值变成多个新值；一个旧值变成多个旧值</dd>
         <dd>
             <figure class="code">
-                <figcaption>侦听简单 ref</figcaption>
+                <figcaption>ref对象 - 侦听age和name</figcaption>
                 <pre>
-let num = ref(0)
-watch(num, (newv, oldv) => {
-    console.log('num is watched', newv, oldv);
-})
-function numCh() {
-    num.value++
-}</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>侦听复合 ref</figcaption>
-                <pre>
-let num = ref({num: 0})
-watch(num, (newv, oldv) => {
-    console.log('num is watched', newv, oldv);
-})
-function numCh() {
-    num.value = { count: 10 }   //侦听有效
+let age = ref(18)
+let name = ref('gl')
+function doAge() {
+    age.value++
 }
-function numChCount() {
-    num.value.count++   //侦听无效
+function doName() {
+    name.value += 's'
+}
+watch([age, name], ([new1, new2], [old1, old2]) => {
+    console.log('name or age is watched', old1, new1, old2, new2);
+})</pre>
+            </figure>
+        </dd>
+        <dd class="example-sn">立即侦听</dd>
+        <dd>设置配置项immediate为true</dd>
+        <dd class="code">
+            <pre>
+watch(
+    num,
+    (newv, oldv) => {
+        console.log('num old vs new', oldv, newv);
+    },
+    { immediate: true }
+)</pre>
+        </dd>
+        <dd class="example-sn">深度侦听- 侦听复合 ref属性</dd>
+        <dd>当任何一个属性变化时，开启深度侦听就可以触发回调</dd>
+        <dd class="code">
+            <pre>
+let state = ref({
+    count: 0
+})
+function doState() {
+    state.value.count++
+}
+watch(state, (newv, oldv) => {
+    console.log('state old vs new', oldv, newv);
+}, { deep: true })
+            </pre>
+        </dd>
+        <dd class="example-sn">深度侦听- 侦听复合 ref某个指定属性</dd>
+        <dd>仅仅当该属性变化时才触发回调</dd>
+        <dd>需要使用getter函数返回该属性info.value.age - 注意官文没有使用value！！！</dd>
+        <dd>无需开启deep</dd>
+        <dd class="code">
+            <pre>
+let info = ref({
+    name: 'gl',
+    age: 18
+})
+watch(() => info.value.age, (n, o) => {
+    console.log('new value is ', n, o);
+})
+function doInfoAge() {
+    info.value.age++
+}
+function doInfoName() {
+    info.value.name += 's'
 }</pre>
+        </dd>
+        <dd class="example-sn"></dd>
+        <dd class="example-sn">侦听reactive - 侦听的是对象属性的变化，默认开启deep</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>reactive对象 - 侦听age和addr</figcaption>
+                <pre>
+let person = reactive({
+    name: 'glpla',
+    age: 18,
+    addr: {
+        city: 'cq',
+        code: '541000'
+    }
+})
+watch([ () => { return person.age }, () => { return person.addr } ], (newv, oldv) => {
+    console.log('person.age or person.addr is watched', newv, oldv);
+})</pre>
             </figure>
         </dd>
         <dd class="example-sn">侦听reactive - 侦听的是对象属性的变化，默认开启deep</dd>
@@ -105,44 +192,6 @@ watch(() => { return person.addr }, (newv, oldv) => {
 })</pre>
             </figure>
         </dd>
-        <dd class="example-sn">侦听多个数据</dd>
-        <dd>以数组的形式，分别使用对象或函数</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>ref对象 - 侦听name和age</figcaption>
-                <pre>
-let name = ref('gl')
-let age = ref(0)
-watch([ name, age ], (newv, oldv) => {
-    console.log('name or age is watched', newv, oldv);
-})</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>reactive对象 - 侦听age和addr</figcaption>
-                <pre>
-let person = reactive({
-    name: 'glpla',
-    age: 18,
-    addr: {
-        city: 'cq',
-        code: '541000'
-    }
-})
-watch([ () => { return person.age }, () => { return person.addr } ], (newv, oldv) => {
-    console.log('person.age or person.addr is watched', newv, oldv);
-})</pre>
-            </figure>
-        </dd>
-        <dd class="tips">如果侦听的数据非常多呢？？？</dd>
-        <dt>回调函数</dt>
-        <dd>侦听时，回调函数会使用2个参数来区分新值newValue和旧值oldValue</dd>
-        <dd>通常我们只关心新值newValue，即：一个参数就够了</dd>
-        <dd>若侦听的是ref对象的属性，则新值旧值一样，是同一个对象</dd>
-        <dd>若侦听的是ref对象，则新值是新对象，旧值是老对象，不是同一个对象</dd>
-        <dt>配置项</dt>
-        <dd>1. 深度侦听 deep</dd>
-        <dd>侦听复合对象内部属性时，需要开启深度侦听</dd>
-        <dd>侦听reactive对象时，默认开启deep，且无法关闭</dd>
         <dd>
             <figure class="code">
                 <figcaption>侦听复合 ref 的属性</figcaption>
@@ -153,19 +202,6 @@ watch(num, (newv, oldv) => {
   console.log('num is watched', newv, oldv);
 }, { deep: true })</pre>
             </figure>
-        </dd>
-        <dd>2. 立即侦听 immediate</dd>
-        <dd>watch默认是懒执行的：仅当数据源变化时，才会执行回调</dd>
-        <dd>有时，需要在源变化之前就开始执行回调，如同定时器的先执行1次一样</dd>
-        <dd>这个时新值是当前值，而旧值未定义；同初恋一样，无前任</dd>
-        <dd class="code">
-            <pre>
-watch(
-  source,
-  (newValue, oldValue) => {
-    // 立即执行，且当 `source` 改变时再次执行
-  }, { immediate: true }
-)</pre>
         </dd>
         <dd>3. 其它</dd>
     </dl>

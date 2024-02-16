@@ -21,24 +21,26 @@
     <dl>
         <dt>ref</dt>
         <dd>创建<span class="warn">基本数据类型、复合数据类型</span>的响应式数据</dd>
-        <dd>需引入包 ref</dd>
         <dd>ref() 将传入参数的值包装为一个带 .value 属性的 ref 对象</dd>
         <dd>ref 的 .value 属性是响应式</dd>
-        <dd>模板中直接使用，vue会自动获取其value</dd>
-        <dd>js中使用需要额外指定value才可以</dd>
+        <dd></dd>
+        <dd>1. 引入包 ref</dd>
+        <dd class="code">
+            <pre>import { ref } from 'vue'</pre>
+        </dd>
+        <dd>2. 执行函数、传入参数、变量接收</dd>
+        <dd class="code">
+            <pre>const count = ref(0)</pre>
+        </dd>
+        <dd>3.1 结构使用 - 直接使用，vue会自动获取其value</dd>
+        <dd class="code">
+            <pre>&lt;div>{{count}}&lt;/div></pre>
+        </dd>
+        <dd>3.2 逻辑使用 - 赋值时需额外指定value属性，其它情况直接使用，如监听</dd>
         <dd class="code">
             <pre>
-import { ref } from 'vue'
-const count = ref(0)
 console.log(count) //{value:0}
 console.log(count.value) //0</pre>
-        </dd>
-        <dd class="code">
-            <pre>
-&lt;div>{{name}}&lt;/div>
-
-let name=ref("cnplaman")
-console.log(name.value)</pre>
         </dd>
         <dt>reactive</dt>
         <dd>只能创建<span class="warn">复合数据类型</span>的响应式数据，如对象、数组</dd>
@@ -56,6 +58,10 @@ const num = reactive(10) //value cannot be made reactive: 10
             <pre>
 &lt;button type="button" @click="count++"> count is {{ count }} &lt;/button&gt;
 &lt;button type="button" @click="num++"> num is {{ num }} &lt;/button&gt;</pre>
+        </dd>
+        <dd class="tips">
+            <div>经过函数ref、reactive处理后，普通的数据或对象就变成了响应式</div>
+            <div>实际开发中，更多使用ref</div>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

@@ -186,12 +186,10 @@ main {
     <dd>.使用关系运算符：&lt;=、&gt;=等等；可读性更好；请在Can I Use查看media query中范围range的支持情况</dd>
 
     <dt>桌面端优先</dt>
-    <dd>.使用max-width时，应从大尺寸开始往小尺寸过渡</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>桌面端优先</figcaption>
-        <pre>
-//large... ...
+    <dd>.使用max-width时，应从默认的大尺寸往小尺寸过渡</dd>
+    <dd class="code">
+      <pre>
+//默认是大尺寸 large... ...
 
 //normal... ...
 @media screen and (max-width: 1200px) {
@@ -204,17 +202,12 @@ main {
 //small... ...
 @media screen and (max-width: 768px) {
 }</pre>
-      </figure>
     </dd>
     <dt>移动端优先</dt>
-    <dd>.使用min-width时，应从小尺寸开始往大尺寸过渡</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>移动端优先</figcaption>
-        <pre>
-//small... ...
-@media screen and (max-width:320px) {
-}
+    <dd>.使用min-width时，应从默认的小尺寸往大尺寸过渡</dd>
+    <dd class="code">
+      <pre>
+//默认是小尺寸 small... ...
 
 //normal... ...
 @media screen and (min-width:768px) {
@@ -229,33 +222,13 @@ main {
 }
 
 //2K - 2048x1152 2048x1536
-</pre>
-      </figure>
-      <figure class="code">
-        <figcaption>移动端优先</figcaption>
-        <pre>
-//small... ...
-@media screen and (max-width:320px) {
-}
-
-//medium... ...
-@media screen and (min-width:576px) {
-}
-
-//large... ...
-@media screen and (min-width:1150px) {
-}
-
-//2K - 2048x1152 2048x1536
 @media screen and (min-width:2048px) {
-}</pre>
-      </figure>
+}
+</pre>
     </dd>
     <dt>其他使用</dt>
-    <dd>
-      <figure class="code">
-        <figcaption>其他使用</figcaption>
-        <pre>
+    <dd class="code">
+      <pre>
 //使用关键字
 @media screen AND (min-width:768px) AND (max-width:992px) {
 
@@ -280,7 +253,6 @@ main {
     background-color: #890;
   }
 }</pre>
-      </figure>
     </dd>
     <dd class="quote">
       <div>.xxx-device-width和xxx-width不一样；对桌面端而言[不开启toggl device选项]，设备宽度是固定的，并不会响应媒体查询</div>

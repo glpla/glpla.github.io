@@ -19,12 +19,11 @@
         <span>v-for</span>
     </header>
     <dl>
-        <dt>v-for</dt>
         <dd>基于一个 <span class="warn">数组/对象</span> 渲染一个列表</dd>
         <dd>使用for - in</dd>
         <dd>需显式的指定:key属性以区分并跟踪每个节点，这就要求数据项是唯一的，或具有id属性</dd>
-        <dd>不推荐同时使用 v-if 和 v-for：二者优先级不明显</dd>
-        <dd class="example-sn">数组使用</dd>
+        <dt>渲染数组</dt>
+        <dd>普通数组或对象数组</dd>
         <dd>
             <figure class="code">
                 <figcaption>1个参数：item是对数组元素的迭代变量，名字任意</figcaption>
@@ -54,8 +53,8 @@
 &lt;/ul&gt;</pre>
             </figure>
         </dd>
-        <dd class="example-sn">对象使用</dd>
-        <dd>遍历一个对象的所有属性</dd>
+        <dt>渲染对象</dt>
+        <dd>遍历一个对象的所有属性；默认显示对象的属性值</dd>
         <dd>遍历的顺序会基于对该对象调用 Object.keys() 的返回值来决定</dd>
         <dd class="code">
             <pre>const obj = reactive({ id: 101, name: 'glpla', age: 18 })</pre>
@@ -78,7 +77,8 @@
                 <pre>&lt;div v-for = "(value, key, index) in obj" &gt; {{ index }}:{{ key }}:{{ value }} &lt;/div&gt;</pre>
             </figure>
         </dd>
-        <dd class="example-sn">综合案例</dd>
+        <dt>&lt;template&gt;</dt>
+        <dd>不推荐同时使用 v-if 和 v-for：二者优先级不明显</dd>
         <dd>为区分结构，合理使用逻辑，特别是组合使用v-for和v-if时，可以使用&lt;template&gt; ；这只是一个不可见的包装器元素，最后渲染的结果并不会包含这个 &lt;template&gt; 元素</dd>
         <dd>
             <figure class="code">

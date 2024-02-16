@@ -5,20 +5,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fetch Backend</title>
-  <link rel="stylesheet" href="../css/reset2024.css">
-  <link rel="stylesheet" href="../css/common2024.css">
-  <link rel="stylesheet" href="../css/code.css">
-  <link rel="stylesheet" href="../css/sn.css">
-  <base target="_blank">
+  <title>后端数据获取 Fetch</title>
+  <link rel="stylesheet" href="../css/styleNew.css">
+  <link rel="stylesheet" href="../css/fetch.css">
 </head>
 
 <body>
   <header>
-    <h1>Fetch</h1>
-    <span>Backend</span>
+    <h1>&commat;Fetch</h1>
   </header>
-  <dl>
+  <dl class="nav-cont">
     <dt>简介</dt>
     <dd>.fetch是w3c的一种请求标准，不是第三方库，与vue、jquery无关</dd>
     <dd>.下一代Ajax技术，采用 <span class="warn">Promise</span> 方式处理数据</dd>
@@ -112,20 +108,20 @@ type: "cors"
 url: "http://localhost:3000/clerk/2002"</pre>
     </dd>
     <dd>5.可以使用查询参数query parameters，直接在url后面使用?拼接查询值对，使用&拼接多个查询参数</dd>
-    <dd class="code">
+    <dd>
       <pre>http://ajax-base-api-t.itheima.net/api/getbooks?id=2</pre>
     </dd>
-    <dd class="example-sn">text()-请求本地文本</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] text()-请求本地文本</dd>
     <dd class="code">
       <pre>
 fetch('./tmp.txt')
   .then(res => res.text())
   .then(res => console.log(res))</pre>
     </dd>
-    <dd class="example-sn">json()-请求本地JSON</dd>
-    <dd class="example-sn">json()-请求网络接口</dd>
-    <dd class="example-sn">formData()-请求表单</dd>
-    <dd class="example-sn">blob()-请求图片</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] json()-请求本地JSON</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] json()-请求网络接口</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] formData()-请求表单</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] blob()-请求图片</dd>
     <dd class="code">
       <pre>
 fetch('./imgs/avatar0.jpg')
@@ -169,7 +165,86 @@ async function addData() {
     <dd>/getbooks</dd>
     <dd>/addbook</dd>
   </dl>
-  <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div class="chap">Cases</div>
+  <dl class="nav-cont">
+    <dt>环境部署</dt>
+    <dd>1.node.js</dd>
+    <dd>2.H5项目</dd>
+    <dd>3.1本地json数据：借助json-server；优点：可以增删改查</dd>
+    <dd>3.2在线json数据：各种第三方，如：https://api.apiopen.top/getJoke?page=1&count=10&type=text；缺点：只能读取，不能操作</dd>
+    <table class="tbl" id="tbl" cellpadding='6'>
+      <caption>职员花名册</caption>
+      <tr>
+        <th>序号</th>
+        <th><span class="iconfont">&#xe841;</span>姓名</th>
+        <th><span class="iconfont">&#xe80e;</span>单位</th>
+        <th><span class="iconfont">&#xe814;</span>性别</th>
+        <th><span class="iconfont">&#xe821;</span>操作</th>
+      </tr>
+    </table>
+    <form class="add-box" action="">
+      <table cellspacing='10'>
+        <caption>职员添加</caption>
+        <tr>
+          <td>
+            <label for="uName"><strong><span class="iconfont">&#xe841;</span> 姓名</strong></label>
+          </td>
+          <td>
+            <input type="text" required maxlength="8" name="uName" id="uName" placeholder="8个字符以内">
+          </td>
+          <td rowspan="3">
+            <button id='sub'>提交</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="uUnit"><strong><span class="iconfont">&#xe80e;</span> 单位</strong></label>
+          </td>
+          <td>
+            <input type="text" required maxlength="6" name="uUnit" id="uUnit" placeholder="6个字符以内">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong><span class="iconfont">&#xe814;</span> 性别</strong>
+          </td>
+          <td>
+            <input type="radio" value="男" name="gender" id="male" required>
+            <label for="male">男</label>
+            <input type="radio" value="女" name="gender" id="female" required>
+            <label for="female">女</label>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+    // data adding
+    let add = document.querySelector('.add-box')
+    add.addEventListener('submit', function (e) {
+      e.preventDefault()
+      var formData = new FormData(this);
+      console.log(formData.get('uName'), formData.get('uUnit'), formData.get('gender'));
+      fetch('http://localhost:3000/clerk', {
+        method: 'post',
+        body: `name=${formData.get('uName')}&unit=${formData.get('uUnit')}&gender=${formData.get('gender')}`,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(res => {
+          console.log(res);
+          if (res.status === 201) {
+            alert('add ok')
+            window.location.href = 'fetch.html'
+          } else {
+            console.log('add fail');
+            alert('add fail')
+          }
+        })
+    })
+  </script>
 </body>
 
 </html>

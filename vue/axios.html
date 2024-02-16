@@ -29,10 +29,24 @@
   </header>
   <dl>
     <dt>简介 overview</dt>
+    <dd>异步请求；基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中</dd>
     <dd>通用、主流的第三方库；用于获取本地和远程json数据</dd>
-    <dd>默认是Promise</dd>
-    <dd>支持async/await用法</dd>
+    <dd>默认是Promise用法；支持async/await用法</dd>
     <dd>更多信息，点击访问<a href="https://www.axios-http.cn/" class="link">axios中文网</a></dd>
+    <dt>安装 installation</dt>
+    <dd>1. NPM方式 - 使用npm安装并引入；通常全局安装并引入；适合框架开发，如Vue</dd>
+    <dd class="code">
+      <pre>npm i axios -g</pre>
+    </dd>
+    <dd class="code">
+      <pre>import axios from 'axios'</pre>
+    </dd>
+    <dd>2. CDN方式 - 适合浏览器环境</dd>
+    <dd class="code">
+      <pre>
+&lt;script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"&gt;&lt;/script&gt;</pre>
+    </dd>
+    <dt>基本使用 usage</dt>
     <dd>
       <figure class="code">
         <figcaption>Promise - get</figcaption>
@@ -92,11 +106,6 @@ axios({
 });</pre>
       </figure>
     </dd>
-    <dt>CDN方式</dt>
-    <dd class="code">
-      <pre>
-&lt;script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"&gt;&lt;/script&gt;</pre>
-    </dd>
     <dd class="code">
       <pre>
 //get数据
@@ -104,6 +113,7 @@ axios
 .get('./oa.json')
 .then(res => { console.log(res); })</pre>
     </dd>
+    <dt>趣味应用 application</dt>
     <dd class="example-sn">获取远程数据 - 小狗</dd>
     <dd><button id="getDog">点击获取小狗</button></dd>
     <dd id="dog">
@@ -153,19 +163,10 @@ tr += '</tr>'
 axiosLocal.innerHTML += tr
 }</pre>
     </dd>
-    <dt>Vue框架</dt>
-    <dd>使用npm安装并引入</dd>
-    <dd>通常全局安装并引入</dd>
-    <dd class="code">
-      <pre>npm i axios</pre>
-    </dd>
-    <dd class="code">
-      <pre>import axios from 'axios'</pre>
-    </dd>
-    <dt>推荐资源</dt>
-    <dd>1. 随机小狗 <a href="https://dog.ceo/api/breed/pembroke/images/random">dog ceo</a></dd>
-    <dd>2. 随机图片 <a href="https://picsum.photos/" class="link">picsum photos</a></dd>
-    <dd>3. 土味情话 <a href="https://api.uomg.com/api/rand.qinghua?format=json"></a></dd>
+    <dt>推荐资源 links</dt>
+    <dd>1. <a href="https://dog.ceo/api/breed/pembroke/images/random" class="link">随机小狗</a></dd>
+    <dd>2. <a href="https://picsum.photos/" class="link">随机图片</a></dd>
+    <dd>3. <a href="https://api.uomg.com/api/rand.qinghua?format=json" class="link">土味情话</a></dd>
     <dd>4. http://ajax-base-api-t.itheima.net/api</dd>
     <dd>/getbooks</dd>
     <dd>/addbook</dd>

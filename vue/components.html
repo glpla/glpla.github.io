@@ -18,48 +18,109 @@
         <h1>组件</h1>
         <span>Components</span>
     </header>
-    <dl>
-        <dt>概述 Overview</dt>
-    </dl>
-    <div class="chap">传参 Props</div>
+    <div class="chap">参数传递</div>
     <dl class="nav-cont">
-        <dt>父 → 子</dt>
-        <dd>1. 父组件</dd>
-        <dd>在父组件引入子组件</dd>
-        <dd>定义数据</dd>
-        <dd>以数据绑定的方式传递给子组件</dd>
+        <dd class="tips">
+            <div>逻辑中推荐使用 camelCase，如：greetingMessage</div>
+            <div>结构中推荐使用 kebab-case，如：greeting-message</div>
+            <div>通过编译宏defineXXX的形式实现通信|参数传递</div>
+            <div>无论是参数列表还是事件列表，都推荐使用变量接收</div>
+        </dd>
+        <dt>父 → 子：defineProps()</dt>
+        <dd>1. 子组件</dd>
+        <dd>在子组件定义props接收父组件传递的参数</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>子组件 - &lt;script&gt;</figcaption>
+                <pre>defineProps(['greetingMessage'])</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>子组件 - 如果在&lt;script&gt;需要使用父组件传递的参数</figcaption>
+                <pre>
+const props = defineProps(['greetingMessage'])
+console.log(props)</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>子组件 - &lt;template&gt;</figcaption>
+                <pre>&lt;div&gt;{{greeting-message}}&lt;/div&gt;</pre>
+            </figure>
+        </dd>
+        <dd>2. 父组件</dd>
+        <dd>在父组件引入子组件；定义数据；以属性绑定的方式传递给子组件</dd>
         <dd>
             <figure class="code">
                 <figcaption>父组件 - &lt;script&gt;</figcaption>
                 <pre>
 import Child from '@/components/Child.vue'
 import {ref} from 'vue'
-let para = ref('hi, there.')</pre>
+let greetingMessage = ref('hi, there.')</pre>
             </figure>
         </dd>
         <dd>
             <figure class="code">
                 <figcaption>父组件 - &lt;template&gt;</figcaption>
-                <pre>&lt;Child :para='para'/&gt;</pre>
+                <pre>&lt;Child :greeting-message='para'/&gt;</pre>
             </figure>
         </dd>
-        <dd>2. 子组件</dd>
-        <dd>在子组件定义props接收参数</dd>
-        <dd>渲染数据</dd>
+        <dt>子 → 父 defineEmits()</dt>
+        <dd>使用自定义事件更加方便子组件向父组件传递事件：显式地通过 defineEmits() 宏来声明它要触发的事件</dd>
+        <dd>参数是数组，表示触发的事件可以是多个</dd>
+        <dd>defineEmits()必须直接放置在 &lt;script setup&gt; 的顶级作用域下</dd>
+        <dd>可以直接在子组件结构中，使用专有变量$emit发送事件</dd>
+        <dd>也可以在传统事件中发送事件</dd>
+        <dd>1. 子组件仅仅传递事件 - 使用专有变量$emit</dd>
         <dd>
             <figure class="code">
-                <figcaption>子组件 - &lt;script&gt;</figcaption>
-                <pre>defineProps(['para'])</pre>
+                <figcaption>子组件逻辑 - 定义触发的事件；无需变量接收</figcaption>
+                <pre>defineEmits(['someEvent'])</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>子组件结构 - 单击触发自定义事件someEvent；无参</figcaption>
+                <pre>&lt;button @click="$emit('someEvent')"&gt;click me&lt;/button&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>父组件结构 - 监听自定义事件some-event</figcaption>
+                <pre>&lt;MyComponent @some-event="callback" /&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>父组件逻辑 - 实现事件处理函数</figcaption>
+                <pre>
+function callback() {
+    console.log('hihihi');
+}</pre>
             </figure>
         </dd>
+        <dd>2. 子组件传递参数 - 使用传统方式</dd>
+        <dd>触发事件的同时，携带参数</dd>
         <dd>
             <figure class="code">
-                <figcaption>子组件 - &lt;template&gt;</figcaption>
-                <pre>&lt;div&gt;{{para}}&lt;/div&gt;</pre>
+                <figcaption>子组件逻辑 - 定义事件列表并使用变量接收，在传统事件处理函数中发送事件sendToSuper</figcaption>
+                <pre>
+const emits = defineEmits(['sendE', 'sendPara'])
+let sendToSuper = () => {
+    emits('sendPara', 'data from child')
+}</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>子组件结构 - 单击触发自定义事件 - 有参</figcaption>
+                <pre>&lt;button @click="sendToSuper"&gt;click me&lt;/button&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>父组件结构 - 监听事件sendToSuper</figcaption>
+                <pre>&lt;MyComponent @some-event="callback" /&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>父组件逻辑 - 在回调函数中接收并处理参数</figcaption>
+                <pre>
+function callback(e) {
+    console.log('hihihi', e);
+}</pre>
             </figure>
         </dd>
-        <dt>子 → 父</dt>
-        <dd>互相定义函数实现</dd>
+        <dd>其它方法</dd>
+        <dd>互相定义函数实现 - todo</dd>
         <dd>1. 父组件</dd>
         <dd>定义接收函数来接收子组件传递的参数并以属性的形式绑定在子组件上</dd>
         <dd>sendPara是自定义事件</dd>
@@ -103,23 +164,52 @@ defineProps(['sendPara'])</pre>
             </figure>
         </dd>
     </dl>
-    <div class="chap">自定义事件 $emit</div>
-    <dl class="nav-cont">
-        <dt>说明</dt>
-        <dd>使用自定义事件更加方便子组件向父组件传递参数</dd>
-        <dd>官方推荐自定义事件使用kebab-case形式命名</dd>
-        <dd>触发的事件则以camelCase形式命名</dd>
-        <dd>本质上并没有区别</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>子组件单击触发自定义事件 - camelCase</figcaption>
-                <pre>&lt;button @click="$emit('someEvent')"&gt;click me&lt;/button&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>父组件监听事件 - kebab-case</figcaption>
-                <pre>&lt;MyComponent @some-event="callback" /&gt;</pre>
-            </figure>
+    <div class="chap">跨级传递</div>
+    <dl>
+        <dt>顶级组件 → 底层组件</dt>
+        <dd>采用发布-订阅|提供-插入的模式</dd>
+        <dd>双方组件需要引入对应的包 provide、inject</dd>
+        <dd>可以传递数据；还可以传递方法</dd>
+        <dd>不可以在某个事件处理函数中使用：provide() can only be used inside setup()</dd>
+        <dd>1. 传递数据</dd>
+        <dd>可以使用多个provide和inject；可以传递普通数据，也可以传递响应数据；这也太容易了吧</dd>
+        <dd>使用延时查看响应数据的变化</dd>
+        <dd>顶级组件使用provide提供数据</dd>
+        <dd class="code">
+            <pre>
+provide('key0', data)
+provide('key1', dataRef.value)</pre>
         </dd>
+        <dd>底层组件使用inject接收数据</dd>
+        <dd class="code">
+            <pre>
+let para = inject('key0')
+let para = inject('key1')</pre>
+        </dd>
+        <dd>2. 传递方法</dd>
+        <dd>底层组件可以使用顶层组件的方法修改顶层组件的数据；虽然有悖于数据流的单向原则，但是仍然遵循了谁的数据谁修改的原则</dd>
+        <dd>顶级组件使用provide提供已经定义好的方法doGreeting</dd>
+        <dd class="code">
+            <pre>
+function doGreeting() {
+    refDate.value++
+  }
+provide('doGreetingFn', doGreeting)</pre>
+        </dd>
+        <dd>底层组件使用inject接收传递的方法，并在事件处理函数fn中实现；fn是普通点击事件</dd>
+        <dd>doGreet接收传递来的方法，要执行，必须使用()</dd>
+        <dd class="code">
+            <pre>
+let doGreet = inject('doGreetingFn')
+function fn() {
+  doGreet()
+}</pre>
+        </dd>
+        <dd>或直接在结构中使用传递的方法</dd>
+        <dd class="code">
+            <pre>&lt;div @click="doGreet"&gt;直接使用 fn&lt;/div&gt;</pre>
+        </dd>
+        <dd>兄弟组件之间的通信</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

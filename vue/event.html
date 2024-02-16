@@ -23,9 +23,10 @@
         <dd>监听 DOM 事件；可以简写为 <span class="warn">@</span></dd>
         <dd class="code">
             <pre>
-&lt;a v-on:click="doSomething"&gt; ... &lt;/a&gt;
-
-&lt;a @click="doSomething"&gt; ... &lt;/a&gt;</pre>
+&lt;div v-on:click="doSomething"&gt; ... &lt;/div&gt;</pre>
+        </dd>
+        <dd class="code">
+            <pre>&lt;div @click="doSomething"&gt; ... &lt;/div&gt;</pre>
         </dd>
         <dt>事件类型</dt>
         <dd>包括：鼠标事件、键盘事件</dd>
@@ -126,8 +127,66 @@
                 </tr>
             </table>
         </dd>
-        <dt>事件对象 $event</dt>
-        <dd>使用普通形参的时候，可以使用关键字$event获取事件对象</dd>
+        <dt>事件应用</dt>
+        <dd>0. 内联事件</dd>
+        <dd>适合简单逻辑</dd>
+        <dd class="code">
+            <pre>
+&lt;div @click="console.log('hi')"&gt;console log&lt;/div&gt;</pre>
+        </dd>
+        <dd>单击，count加1；count要使用才可以响应；否则仅仅利用vue devTool数据无法响应</dd>
+        <dd class="code">
+            <pre>
+&lt;div @click="count++"&gt;do something&lt;/div&gt;
+&lt;div&gt;使用数据{{count}}&lt;/div&gt;</pre>
+        </dd>
+        <dd>1. 普通事件 - 无参</dd>
+        <dd class="code">
+            <pre>&lt;div @click="doClick"&gt;do something&lt;/div&gt;</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+function doClick() {
+    console.log('hello,world');
+}</pre>
+        </dd>
+        <dd>2. 携带参数</dd>
+        <dd class="code">
+            <pre>&lt;div @click="doClickPara('18')"&gt;do something with para&lt;/div&gt;</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+function doClickPara(para) {
+    console.log(para);
+}</pre>
+        </dd>
+        <dd>3. 使用事件对象对应的target获取自定义属性data-</dd>
+        <dd class="code">
+            <pre>&lt;div @click="doClickData" data-id="101"&gt;do something with data-&lt;/div&gt;</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+function doClickData(e) {
+    console.log(e.target.dataset);
+}</pre>
+        </dd>
+        <dd>4. 使用参数且使用自定义属性</dd>
+        <dd>结构中需要使用特殊变量$event以便和普通参数区分开来</dd>
+        <dd>js中使用任意形参代替特殊变量$event</dd>
+        <dd class="code">
+            <pre>&lt;div @click="doClickParaData('18', $event)" data-id="101"&gt;do something with para and data-&lt;/div&gt;</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+function doClickData(para,e) {
+    console.logpara(para, e.target.dataset);
+}</pre>
+        </dd>
+        <dd class="example-sn">标签页切换</dd>
+        <dd>使用&lt;nav&gt;和&lt;a&gt;实现</dd>
+        <dd>单击标签，对应的标签高亮显示</dd>
+        <dd>阻止&lt;a&gt;的默认事件</dd>
+        <dd>分别使用事件代理、不使用事件代理实现，并体会2者的区别</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

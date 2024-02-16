@@ -19,10 +19,10 @@
         <span>Pinia</span>
     </header>
     <dl>
-        <dt>说明</dt>
         <dd>集中式状态管理</dd>
-        <dd>Vue2采用vuex</dd>
-        <dd>Vue3采用<a href="https://pinia.vuejs.org/zh/">Pinia</a>，使用大菠萝作为logo</dd>
+        <dd>Vue3采用<a href="https://pinia.vuejs.org/zh/" class="link">Pinia</a>；Pinia 是 Vue
+            的专属状态管理库，使用大菠萝作为logo；Vue2采用vuex</dd>
+        <dd>可以在创建项目的时，选择状态管理；也可以单独安装</dd>
         <dt>安装</dt>
         <dd class="code">
             <pre>npm i pinia</pre>
@@ -30,14 +30,71 @@
         <dt>引入</dt>
         <dd>在入口文件main.js引入并创建使用</dd>
         <dd>完成后，在开发者工具中可以看到大菠萝</dd>
+        <dd>在main.js中引入并使用</dd>
         <dd class="code">
             <pre>
-import {createPinia} from 'pinia'
+import './assets/main.css'
 
+import { createApp } from 'vue'
+import App from './App.vue'
+//1. 导入
+import { createPinia } from 'pinia'
+//2. 创建
 const pinia = createPinia()
-
-app.use(pinia)</pre>
+const app = createApp(App)
+//3. 使用
+app.use(pinia)
+app.mount('#app')</pre>
         </dd>
+        <dt>Store</dt>
+        <dd>也叫仓库，是一个保存状态和业务逻辑的实体</dd>
+        <dd>不与组件树绑定，而承载着全局状态</dd>
+        <dd>三个概念：state、getter 和 action，相当于组件中的：data、computed 和 methods</dd>
+        <dd>仓库保存全局状态，即：可以在整个应用中访问的数据</dd>
+        <dd>仓库通常集中保存在项目的stores目录（应提前创建好），并按照功能创建单独的仓库文件</dd>
+        <dd>仓库在onMounted之前就已经准备好</dd>
+        <dt>基本步骤</dt>
+        <dd class="number">
+            <div>定义 Store</div>
+            <p>以 use 开头且以 Store 结尾命名仓库</p>
+            <p>引入defineStore创建仓库</p>
+            <p>第一个参数是你的应用中 Store 的唯一 ID，Pinia 将用它来连接 store 和 devtools</p>
+            <p>第二个参数接收option对象或setup函数；setup函数和组合式API类似，且功能更灵活</p>
+            <p>直接复制代码不会自动导入包，需要手动导入，如ref、computed，请确认是否缺失包</p>
+            <pre class="code">
+import { defineStore } from 'pinia'
+import { ref, computed } from 'vue'
+export const useCounterStore  = defineStore('counter', ()=>{
+  // 其他配置...
+  //data
+  const count = ref(0)
+  //computed
+  const doubleCount = computed(() => count.value * 2)
+  //action
+  function increment() {
+    count.value++
+  }
+
+  return { count, doubleCount, increment }
+})</pre>
+            <div>使用 Store</div>
+            <p>在逻辑中引入仓库</p>
+            <p>在结构中使用仓库数据</p>
+            <pre class="code">
+&lt;script setup&gt;
+    import { useCounterStore } from '@/stores/counter'
+    const store = useCounterStore()
+    console.log('store', store);//在目标对象target object中可以看到定义的3个方法
+&lt;/script&gt;</pre>
+            <pre class="code">
+&lt;div @click="store.increment"&gt;仓库数据 - {{ store.count }} - {{ store.doubleCount }}&lt;/div&gt;</pre>
+        </dd>
+        <dd class="tips">
+            <div>store中包含数据和方法；可以直接解构出方法；要解构出数据需要使用storeToRefs包</div>
+        </dd>
+        <dt>state</dt>
+        <dt>getter</dt>
+        <dt>action</dt>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

@@ -100,9 +100,6 @@
         <dd class="code">
             <pre>&lt;span&gt;Message: {{ msg }}&lt;/span&gt;</pre>
         </dd>
-        <dd class="code">
-            <pre>&lt;span data-v-e17ea971=""&gt;Message: hi&lt;/span&gt;</pre>
-        </dd>
         <dd>特别的，使用 <span class="warn">v-html</span> 指令可以渲染HTML元素；但是不建议：在网站上动态渲染任意HTML非常危险</dd>
         <dd class="code">
             <pre>let html = '&lt;p&gt;warning&lt;/p&gt;'</pre>
@@ -110,25 +107,20 @@
         <dd class="code">
             <pre>&lt;div v-html='html'&gt;&lt;/div&gt;</pre>
         </dd>
-        <dd class="code">
-            <pre>
-&lt;div data-v-e17ea971=""&gt;
-    &lt;p&gt;warning&lt;/p&gt;
-&lt;/div&gt;</pre>
-        </dd>
         <dt>属性绑定 v-bind</dt>
         <dd></dd>
         <dd>使用 <span class="warn">v-bind</span> 指令绑定HTML的属性Attribute，解决数据和元素 <span class="warn">属性</span> 的关联</dd>
         <dd>可以简写为冒号 <span class="warn">:</span></dd>
         <dd>class和style也是元素的属性，同样可以使用v-bind指令</dd>
         <dd class="code">
-            <pre>let url = 'https://glpla.github.io'</pre>
+            <pre>
+let src = 'http://www.baidu.com'
+let imgUrl = ''</pre>
         </dd>
         <dd class="code">
-            <pre>&lt;a :href="url" target="_blank"&gt;link&lt;/a&gt;</pre>
-        </dd>
-        <dd class="code">
-            <pre>&lt;a href="https://glpla.github.io" target="_blank" data-v-e17ea971=""&gt;link&lt;/a&gt;</pre>
+            <pre>
+&lt;a :href="url" target="_blank"&gt;link&lt;/a&gt;
+&lt;img :src="imgUrl" alt=""&gt;</pre>
         </dd>
         <dd>特别的，当属性为布尔型，如disable，只要数据不为假false，其他任何数据包括空串，都会渲染为真</dd>
         <dd class="code">
@@ -136,9 +128,6 @@
         </dd>
         <dd class="code">
             <pre>&lt;button :disabled="isEnable"&gt;submit&lt;/button&gt;</pre>
-        </dd>
-        <dd class="code">
-            <pre>&lt;button data-v-e17ea971=""&gt;submit&lt;/button&gt;</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
