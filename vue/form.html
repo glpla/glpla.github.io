@@ -19,18 +19,56 @@
         <span>Form</span>
     </header>
     <dl>
+        <dd>表单基础知识，请访问<a href="../web/form.html" class="link">web - form</a></dd>
         <dt>v-modal</dt>
-        <dd>数据双向绑定</dd>
-        <dd>修饰符类型</dd>
+        <dd>数据双向绑定；数据可以是数值类型number，也可以是字符串类型string，还可以是布尔类型true/false</dd>
+        <dt>修饰符</dt>
         <dd class="number">
-            <div>number：数值型</div>
+            <div>.number</div>
+            <p>把 v-model 的值转换成数值类型</p>
+            <p>如果输入的第一个字是字符串，那number这个修饰符就不会生效</p>
+            <p>输入的第一个只能是数字或者小数点或者是正负号</p>
+            <p>既然需要转换为数字，那么就请输入数字吧</p>
+            <div>.lazy</div>
+            <p>在默认情况下，v-model 在input事件中同步输入框的值与数据；在添加了lazy之后，会把 oninput 事件改成 onchange 事件</p>
+            <div>.trim</div>
+            <p>过滤用户输入时首尾的空格字符</p>
         </dd>
-        <dd>
-            <figure class="code">
-                <figcaption>&lt;select&gt;</figcaption>
-                <pre>
+        <dt>表单元素</dt>
+        <dd class="number">
+            <div>&lt;input&gt; - text</div>
+            <pre class="code">
+&lt;label for="uname"&gt;Title &lt;/label&gt;
+&lt;input type="text" v-model="uname" required&gt;</pre>
+            <pre class="code">let uname = ref('')</pre>
+            <div>&lt;input&gt; - radio</div>
+            <pre class="code">
+&lt;input type="radio" id="male" v-model="ugender" value="male"&gt;
+&lt;label for="male"&gt;male&lt;/label&gt;
+&lt;input type="radio" id="female" v-model="ugender" value="female"&gt;
+&lt;label for="female"&gt;female&lt;/label&gt;</pre>
+            <div>&lt;input&gt; - checkbox</div>
+            <pre class="code">
+&lt;input type="checkbox" id="code" v-model="ulike" value="code"&gt;
+&lt;label for="code"&gt;code&lt;/label&gt;
+&lt;input type="checkbox" id="sing" v-model="ulike" value="sing"&gt;
+&lt;label for="sing"&gt;sing&lt;/label&gt;
+&lt;input type="checkbox" id="game" v-model="ulike" value="game"&gt;
+&lt;label for="game"&gt;game&lt;/label&gt;
+&lt;input type="checkbox" id="read" v-model="ulike" value="read"&gt;
+&lt;label for="read"&gt;read&lt;/label&gt;</pre>
+            <pre class="code">let ulike = ref([])</pre>
+            <div>&lt;textarea&gt;</div>
+            <p>不可以使用插值表达式{{}}</p>
+            <pre class="code">&lt;textarea v-model="ubody" required&gt;{{msg}}&lt;/textarea&gt;</pre>
+            <pre class="code">
+&lt;label for="ubody"&gt;Contents&lt;/label&gt;
+&lt;textarea v-model="ubody" required&gt;&lt;/textarea&gt;</pre>
+            <pre class="code">let ubody = ref('')</pre>
+            <div>&lt;select&gt;</div>
+            <pre class="code">
 &lt;div&gt;{{sum}}&lt;/div&gt;
-&lt;select v-modal.number = 'n'&gt;
+&lt;select v-model.number = 'sel'&gt;
     &lt;option value='1'&gt;1&lt;/option&gt;
     &lt;option value='2'&gt;2&lt;/option&gt;
     &lt;option value='3'&gt;3&lt;/option&gt;
@@ -38,19 +76,15 @@
 &lt;button @click = 'add'&gt;add&lt;/button&gt;
 &lt;button @click = 'minus'&gt;minus&lt;/button&gt;
 </pre>
-            </figure>
-            <figure class="code">
-                <figcaption>脚本中定义响应式数据</figcaption>
-                <pre>
-let n = ref(1)
+            <pre class="code">
+let sel = ref(1)
 let sum = ref(0)
 function add(){
-    sum.value += n.value
+    sum.value += sel.value
 }
 function minus(){
-    sum.value -= n.value
+    sum.value -= sel.value
 }</pre>
-            </figure>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
