@@ -18,12 +18,24 @@
         <h1>内置组件</h1>
         <span>Built-in</span>
     </header>
+    <nav>
+        <a href="" class="logo">Components</a>
+        <div class="ham">
+            <i class="ri-menu-line menu"></i>
+            <i class="ri-close-line close"></i>
+        </div>
+        <div class="nav-wrap">
+            <a href="" class="nav-item">&lt;Transition&gt;</a>
+            <a href="" class="nav-item">&lt;TransitionGroup&gt;</a>
+            <a href="" class="nav-item">&lt;KeepAlive&gt;</a>
+        </div>
+    </nav>
     <dl>
         <dd>内置组件 - 无需注册即可在任意别的组件中使用</dd>
         <dd>除了类class，内联样式style和状态state实现元素或组件的过渡和动画外，还可以使用过渡组件制作基于状态变化的过渡和动画</dd>
     </dl>
     <div class="chap">&lt;Transition&gt;</div>
-    <dl>
+    <dl class="nav-cont">
         <dd>过渡组件 - 一个元素或组件进入和离开 DOM 时应用动画</dd>
         <dd>弥补了传统CSS的过渡动画transition不能响应display的显示和隐藏状态[???]</dd>
         <dd>适用以下场景</dd>
@@ -91,6 +103,8 @@
         </dd>
         <dt>过渡事件</dt>
         <dd>监听 &lt;Transition&gt; 组件事件的方式在过渡过程中挂上钩子函数</dd>
+        <dd>每个钩子函数都可以指定el获取事件对象，如获取对象的自定义数据data-；后续的列表渲染中，经常会用到</dd>
+        <dd>enter和leave需要额外指定结束函数done</dd>
         <dd class="code">
             <pre>
 &lt;Transition
@@ -104,6 +118,45 @@
   @leave-cancelled="onLeaveCancelled"
 &gt;
 &lt;/Transition&gt;</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+// 在元素被插入到 DOM 之前被调用
+// 用这个来设置元素的 "enter-from" 状态
+function onBeforeEnter(el) {}
+
+// 在元素被插入到 DOM 之后的下一帧被调用
+// 用这个来开始进入动画
+function onEnter(el, done) {
+  // 调用回调函数 done 表示过渡结束
+  // 如果与 CSS 结合使用，则这个回调是可选参数
+  done()
+}
+
+// 当进入过渡完成时调用。
+function onAfterEnter(el) {}
+
+// 当进入过渡在完成之前被取消时调用
+function onEnterCancelled(el) {}
+
+// 在 leave 钩子之前调用
+// 大多数时候，你应该只会用到 leave 钩子
+function onBeforeLeave(el) {}
+
+// 在离开过渡开始时调用
+// 用这个来开始离开动画
+function onLeave(el, done) {
+  // 调用回调函数 done 表示过渡结束
+  // 如果与 CSS 结合使用，则这个回调是可选参数
+  done()
+}
+
+// 在离开过渡完成、
+// 且元素已从 DOM 中移除时调用
+function onAfterLeave(el) {}
+
+// 仅在 v-show 过渡中可用
+function onLeaveCancelled(el) {}</pre>
         </dd>
         <dd class="example-sn">单击按钮，提示文字缩小消失后，进入百度主页 - 基于CSS的animation</dd>
         <dd>拓展1：请根据实例中的核心代码完成过渡类的设计</dd>
@@ -182,15 +235,79 @@ const onAfterLeave = () => {
         </dd>
     </dl>
     <div class="chap">&lt;TransitionGroup&gt;</div>
-    <dl>
+    <dl class="nav-cont">
         <dd>过渡组件</dd>
-        <dd>一个 v-for 列表中的元素或组件被插入，移动，或移除时应用动画</dd>
+        <dd>一个 v-for 列表中的元素或组件被插入，移动|顺序改变，或移除时应用动画</dd>
+        <dd>不需要使用条件来决定渲染过渡</dd>
+        <dd>和 &lt;Transition&gt; 的使用 - 基本一致；部分应用需要特别注意</dd>
+        <dd>.mode</dd>
+        <dd>.key</dd>
+        <dd>多用于应用管理场景：用户管理、留言管理、商品管理、代办事项等等</dd>
+        <dd class="example-sn">代办事项</dd>
+        <dd>列表渲染事项数据</dd>
+        <dd>每条数据可以在完成时删除</dd>
+        <dd>单击可以增加一条新的事项数据</dd>
+        <dd class="grid2">
+            <img src="./imgs/transition1.png" alt="">
+            <img src="./imgs/transition2.png" alt="">
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>参考结构</figcaption>
+                <pre>
+&lt;template&gt;
+    &lt;div&gt;
+        &lt;h3&gt;待办事项&lt;/h3&gt;
+        &lt;div class="ipt-box"&gt;
+            &lt;input type="text" required v-model="todo" @keydown.enter="insertItem"&gt;
+            &lt;button @click="insertItem"&gt;增加&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;template v-if="arr.length"&gt;
+            &lt;div class="item"&gt;
+                &lt;p&gt;序号&lt;/p&gt;
+                &lt;p&gt;待办事项&lt;/p&gt;
+                &lt;p&gt;操作&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;TransitionGroup name="list"&gt;
+                &lt;div class="item" v-for="(item, ind) in arr" :key="item" :data-ind="ind"&gt;
+                &lt;p&gt;{{ ind }}&lt;/p&gt;
+                &lt;p&gt;{{ item }}&lt;/p&gt;
+                &lt;button class="del-btn" @click="deleteItem(ind)"&gt;删除&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/TransitionGroup&gt;
+        &lt;/template&gt;
+        &lt;template v-else&gt;暂无记录&lt;/template&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</pre>
+            </figure>
+        </dd>
     </dl>
     <div class="chap">&lt;KeepAlive&gt;</div>
-    <dl>
+    <dl class="nav-cont">
         <dd>缓存组件</dd>
+        <dd>多个组件间动态切换时，默认情况下，组件被替换掉，再次回来时，状态被初始化</dd>
+        <dd>特定情况下，当组件恢复时，为了继续使用其状态-恢复现场，需要缓存被移除的组件实例；基本考虑同：函数的执行、调试断点</dd>
+        <dd>缓存组件时，默认会缓存内部的所有组件实例；可以使用 include 和 exclude 属性 定制缓存行为</dd>
+        <dd>使用：用 &lt;KeepAlive&gt; 内置组件将这些动态组件包装起来</dd>
+        <dd>应用：各管理平台的标签页应用</dd>
+        <dd class="code">
+            <pre>
+&lt;template&gt;
+    &lt;KeepAlive&gt;
+        &lt;component :is="tabs[currentTab]"&gt;&lt;/component&gt;
+    &lt;/KeepAlive&gt;
+&lt;/template&gt;</pre>
+        </dd>
+        <dt>钩子函数</dt>
+        <dd>组件缓存后而仍作为组件树的一部分时，它将变为不活跃状态而不是被卸载</dd>
+        <dd>onActivated()</dd>
+        <dd>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件被插入到 DOM 中时调用</dd>
+        <dd>onDeactivated()</dd>
+        <dd>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件从 DOM 中被移除时调用</dd>
+        <dd class="example-sn">模拟用户个人中心的标签页</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <script src="../web/lib/ham2024.js"></script>
 </body>
 
 </html>
