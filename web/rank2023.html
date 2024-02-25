@@ -41,14 +41,13 @@
     })
     loadData('../data/data2023/rank202301.json')
     function loadData(url) {
-      console.log('hi');
       let stu = [];
       let str = '';
       let iconStr = "<span class='iconfont icon-star'></span>"
       fetch(url)
         .then(res => res.json())
         .then(res => {
-          stu = [...res];
+          stu = [...res.cont];
           stu.sort((a, b) => { return b.stars - a.stars; })
           let str = stu.map((item, ind) => {
             return `<div class='item' style='--star:${item.stars}'>

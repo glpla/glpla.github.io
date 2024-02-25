@@ -18,22 +18,6 @@
         <h1>路由</h1>
         <span>Router</span>
     </header>
-    <nav>
-        <a href="" class="logo">Router</a>
-        <div class="ham">
-            <i class="ri-menu-line menu"></i>
-            <i class="ri-close-line close"></i>
-        </div>
-        <div class="nav-wrap">
-            <a href="" class="nav-item">概述</a>
-            <a href="" class="nav-item">命名路由</a>
-            <a href="" class="nav-item">嵌套路由</a>
-            <a href="" class="nav-item">动态路由</a>
-            <a href="" class="nav-item">查询路由</a>
-            <a href="" class="nav-item">路由组件传参</a>
-            <a href="" class="nav-item">编程路由</a>
-        </div>
-    </nav>
     <dl class="nav-cont">
         <dt>概述</dt>
         <dd>按照路径path和组件component的值对形式name-value定义路由</dd>
@@ -51,8 +35,51 @@
                 <pre>npm i vue-router</pre>
             </figure>
         </dd>
+        <dt>声明路由</dt>
+        <dd>
+            <figure class="code">
+                <figcaption>在入口js中引入并声明路由</figcaption>
+                <pre>
+//引入
+import router from './router'
+
+//使用 - 链式
+app.use(router).mount('#app')</pre>
+            </figure>
+        </dd>
         <dt>定义路由</dt>
-        <dd>路由必须指定path和component；命名路由中需要指定name</dd>
+        <dd>路由必须指定path和component</dd>
+        <dd>还可以使用属性定义其它类型路由，见下表</dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>常见路由分类</caption>
+                <tr>
+                    <th>路由</th>
+                    <th>说明</th>
+                    <th>属性</th>
+                </tr>
+                <tr>
+                    <td>命名路由</td>
+                    <td>通过名字来使用路由；更直观、灵活；如多级路由</td>
+                    <td>name</td>
+                </tr>
+                <tr>
+                    <td>重定向路由</td>
+                    <td>让指定的路由重新定位到另外一个路由</td>
+                    <td>redirect</td>
+                </tr>
+                <tr>
+                    <td>嵌套路由</td>
+                    <td>子路由；<br>path可以省略父级路由；或使用携带父级路由的完整路由</td>
+                    <td>children</td>
+                </tr>
+                <tr>
+                    <td>404路由</td>
+                    <td>使用自定义的 路径参数 正则表达式匹配其它任意路径，如404路由；<br> 通常是最后一个路由配置项</td>
+                    <td></td>
+                </tr>
+            </table>
+        </dd>
         <dd>
             <figure class="code">
                 <figcaption>路由文件index.js配置详情</figcaption>
@@ -68,12 +95,33 @@ const router = createRouter({
     history: createWebHistory(),
     routes : [
         {
-            path: '/home',
+            path: '/',
             component: Home
         },
         {
-            path: '/info',
-            component: () => import('../components/sub_view/Info.vue')
+            path: '/home',
+            redirect: '/'
+        },
+        {
+            path: '/work',
+            component: () => import('../components/sub_view/Work.vue'),
+            children:[
+                {
+                    path: ' ',//省略父级路由
+                    name: "html5",
+                    component: Html5
+                },
+                {
+                    path: 'css3',//省略父级路由
+                    name: "css3",
+                    component: CSS3
+                },
+                {
+                    path: '/work/js',//使用完整路由
+                    name: "js",
+                    component: JavaScript
+                }
+            ]
         },
         {
             path: '/team',
@@ -82,6 +130,11 @@ const router = createRouter({
         {
             path: '/about',
             component: () => import('../components/sub_view/About.vue')
+        },
+        {
+            path: '/:pathMatch(.*)*',
+            name: 'not-found',
+            component: () => import('../views/NotFound.vue')
         }
     ]
 })
@@ -91,22 +144,13 @@ export default router
 </pre>
             </figure>
         </dd>
-        <dt>声明路由</dt>
-        <dd>
-            <figure class="code">
-                <figcaption>在入口js中引入并声明路由</figcaption>
-                <pre>
-//引入
-import router from './router'
-
-//使用 - 链式
-app.use(router).mount('#app')</pre>
-            </figure>
-        </dd>
         <dt>使用路由</dt>
         <dd>借助自定义组件&lt;router-link&gt;来创建链接|路由；相当于&lt;a&gt;；使用属性to代替了属性href</dd>
         <dd>借助自定义组件&lt;router-view&gt;显示与 URL 对应的组件|路由出口</dd>
         <dd>有&lt;router-link&gt;路由，则必须有&lt;router-view&gt;路由出口</dd>
+        <dd>可以有多个&lt;router-view&gt;，使用name属性区分；相应的路由配置也要变化，见后例</dd>
+        <dd>还可以像缓存组件那样，缓存&lt;router-view&gt;，见后例</dd>
+        <dd>使用内置active-class属性高亮当前路由项</dd>
         <dd>
             <figure class="code">
                 <figcaption>在入口组件中使用路由</figcaption>
@@ -118,28 +162,51 @@ app.use(router).mount('#app')</pre>
 &lt;router-link to = "/team" active-class = "active"&gt;team&lt;/router-link&gt;
 &lt;router-link replace to = "/about" active-class = "active"&gt;about&lt;/router-link&gt;
 
+//使用命名路由 - 向 router-link 组件的 to 属性传递一个对象：属性绑定
+&lt;router-link :to = "{name: 'zhuye'}" active-class = "active"&gt;home&lt;/router-link&gt;
+
+//使用嵌套路由 - 第一个默认显示路由和和父级路由保持一致，如html5
+&lt;router-link to = "/work" active-class = "active"&gt;html5&lt;/router-link&gt;
+&lt;router-link to = "/work/css3" active-class = "active"&gt;css3&lt;/router-link&gt;
+&lt;router-link to = "/work/js" active-class = "active"&gt;js&lt;/router-link&gt;
+
 //&lt;router-view&gt;
 &lt;router-view&gt;&lt;/router-view&gt;</pre>
             </figure>
         </dd>
-        <dt>重定向路由 - redirect</dt>
-        <dd>让指定的路由重新定位到另外一个路由</dd>
-        <dd>重定向通过路由配置完成</dd>
-        <dd>重定向的目标可以是一个命名路由</dd>
-        <dd>通常是最后一个路由配置项</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>配置重定向路由</figcaption>
-                <pre>
-{
-    path: '/',
-    redirect: '/home'
-},
-{
-    path: '/',
-    redirect: {name: "zhuye"}
-}</pre>
-            </figure>
+        <dd class="example-sn">多&lt;router-view&gt;的使用</dd>
+        <dd>路由配置由component该为components</dd>
+        <dd class="code">
+            <pre>
+components:{
+    //Cont.vue在cont渲染在cont视图
+    cont: () => import('../views/Cont.vue')
+}             </pre>
+        </dd>
+        <dd class="code">
+            <pre>
+components:{
+    //Ad.vue在cont渲染在ad视图
+    ad: () => import('../views/Ad.vue')
+}             </pre>
+        </dd>
+        <dd>cont为内容视图；ad为广告视图</dd>
+        <dd class="code">
+            <pre>
+&lt;router-view name="cont"&gt;&lt;/router-view&gt;
+&lt;router-view name="ad"&gt;&lt;/router-view&gt;</pre>
+        </dd>
+        <dd class="example-sn">路由缓存</dd>
+        <dd>不是简单的使用缓存组件包裹，而应该使用动态组件实现</dd>
+        <dd class="code">
+            <pre>
+&lt;RouterView v-slot="{ Component }"&gt;
+    &lt;transition&gt;
+        &lt;keep-alive&gt;
+        &lt;component :is="Component" /&gt;
+        &lt;/keep-alive&gt;
+    &lt;/transition&gt;
+&lt;/RouterView&gt;</pre>
         </dd>
         <dt>路由器模式 - history</dt>
         <dd>1. history模式</dd>
@@ -162,97 +229,13 @@ app.use(router).mount('#app')</pre>
             <div>默认是push模式，浏览器可以回退；使用replace属性可以防止浏览器回退</div>
         </dd>
     </dl>
-    <div class="chap">命名路由 - name</div>
+    <div class="chap">带参路由</div>
     <dl class="nav-cont">
-        <dd>一般情况下，使用path定义的路由即可</dd>
-        <dd>除了 path 之外，你还可以为任何路由提供 name</dd>
-        <dd>某些情况下，如多级路由，希望路由更直观、灵活，可以给路由起个名字，通过名字来使用路由</dd>
-        <dd>注意区分名字和组件</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>定义命名路由</figcaption>
-                <pre>
-{
-    path: '/home',
-    name: "zhuye",
-    component: Home
-}</pre>
-            </figure>
-        </dd>
-        <dd>向 router-link 组件的 to 属性传递一个对象：属性绑定</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>使用命名路由 - 对象方式</figcaption>
-                <pre>
-&lt;router-link :to = "{name: 'zhuye'}" active-class = "active"&gt;home&lt;/router-link&gt;</pre>
-            </figure>
-        </dd>
-        <dd>更多案例 - 混合使用普通路由path和命名路由name</dd>
-        <dd class="code">
-            <pre>
-&lt;router-link to="/"&gt;home&lt;/router-link&gt;
-&lt;router-link to="/team"&gt;team&lt;/router-link&gt;
-&lt;router-link to="/work"&gt;work&lt;/router-link&gt;
-&lt;router-link :to="{ name: 'about' }"&gt;about&lt;/router-link&gt;</pre>
-        </dd>
-    </dl>
-    <div class="chap">嵌套路由 - children</div>
-    <dl class="nav-cont">
-        <dt>说明</dt>
-        <dd>路由展示区&lt;router-view&gt;嵌套了第2层路由逻辑</dd>
-        <dd>利用children属性为路由增加并配置子级路由</dd>
-        <dd>子级路由path不需要使用/</dd>
-        <dd>第一个默认显示的路由，path置空''，如html5</dd>
-        <dd></dd>
-        <dd>
-            <figure class="code">
-                <figcaption>配置子级路由</figcaption>
-                <pre>
-{
-    path: '/work',
-    name: "work",
-    component: Work,
-    children:[
-        {
-            path: '',
-            name: "html5",
-            component: Html5
-        },
-        {
-            path: 'css3',
-            name: "css3",
-            component: CSS3
-        },
-        {
-            path: 'js',
-            name: "js",
-            component: JavaScript
-        }
-    ]
-}</pre>
-            </figure>
-        </dd>
-        <dd>第一个默认显示路由和和父级路由保持一致，如html5</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>&lt;router-link&gt;要写完整路由</figcaption>
-                <pre>
-&lt;router-link to = "/work" active-class = "active"&gt;html5&lt;/router-link&gt;
-&lt;router-link to = "/work/css3" active-class = "active"&gt;css3&lt;/router-link&gt;
-&lt;router-link to = "/work/js" active-class = "active"&gt;js&lt;/router-link&gt;</pre>
-            </figure>
-        </dd>
-        <dd class="tips">
-            <div>使用生命周期函数查看子组件和父组件的挂载和卸载情况</div>
-        </dd>
-    </dl>
-    <div class="chap">动态路由 - params</div>
-    <dl class="nav-cont">
-        <dd>在URL后面采用路径的方式来传递参数，将给定匹配模式的路由映射到同一个组件，如/users/johnny 和 /users/jolyne 这样的 URL 都会映射到同一个路由；如在同一个页面根据id显示不同的商品
-        </dd>
-        <dd>在路径中使用一个动态字段来实现：路径参数|路由参数</dd>
-        <dd>可以声明多个路径参数；?表示该参数是可选的</dd>
-        <dt>配置路由参数</dt>
+        <dt>动态路由 - params</dt>
+        <dd>在URL后面采用<span class="warn">路径</span>的方式来传递参数，将给定匹配模式的路由映射到<span class="warn">同一个</span>组件，如/goods/1 和
+            /goods/2 这样的 URL 都会映射到同一个路由：在同一个页面根据id显示不同的商品 </dd>
+        <dd>使用一个或多个动态字段来实现；?表示该参数可选</dd>
+        <dd>1. 配置路由参数 - 在work的2级路由css和js中，根据id展示对应的内容</dd>
         <dd class="code">
             <pre>
 {
@@ -278,19 +261,18 @@ app.use(router).mount('#app')</pre>
     ]
 }</pre>
         </dd>
-        <dt>传递路由参数</dt>
-        <dd>分别使用普通路由path和命名路由name传递2级路由参数</dd>
+        <dd>2. 传递路由参数 - 可以使用普通路由path和命名路由name传递2级路由参数</dd>
         <dd class="code">
             <pre>
 &lt;router-link to="/work/css/webcss3"&gt;css&lt;/router-link&gt;
 &lt;router-link :to="{ name: 'js', params: { id: 'webjs' } }"&gt;js&lt;/router-link&gt;</pre>
         </dd>
-        <dt>接收路由参数</dt>
-        <dd>在路由目标组件-结构-中使用$route.params接收路由参数</dd>
+        <dd>3. 接收路由参数</dd>
+        <dd>在路由目标组件 - 结构 - 中使用全局变量$route接收路由参数</dd>
         <dd class="code">
             <pre>&lt;div&gt;{{ $route.params.id }}&lt;/div&gt;</pre>
         </dd>
-        <dd>在路由目标组件-逻辑-中使用useRoute接收路由参数</dd>
+        <dd>在路由目标组件 - 逻辑 - 中使用useRoute接收路由参数</dd>
         <dd class="code">
             <pre>
 import { useRoute } from 'vue-router'
@@ -321,30 +303,27 @@ console.log(route.params.id);</pre>
     home
 &lt;/router-link&gt;</pre>
         </dd>
-    </dl>
-    <div class="chap">查询路由 - query</div>
-    <dl class="nav-cont">
-        <dd></dd>
-        <dd>在URL后面采用拼接值对|查询字符串的形式来传递参数</dd>
+        <dt>查询路由 - query</dt>
+        <dd>在URL后面使用?连接值对形式的查询字符串来传递参数</dd>
         <dd>基本使用同动态路由</dd>
         <dd class="code">
             <pre>http://127.0.0.1:5500/vue/router.html?name=gl&age=18</pre>
         </dd>
-        <dt>配置路由参数</dt>
+        <dd>1. 配置路由参数</dd>
         <dd>不需要特别配置</dd>
-        <dt>传递路由参数</dt>
+        <dd>2. 传递路由参数</dd>
         <dd>分别使用普通路由path和命名路由name传递路由参数</dd>
         <dd class="code">
             <pre>
 &lt;router-link :to="{ path: 'team', query: { id: 100 } }"&gt;team&lt;/router-link&gt;
 &lt;router-link :to="{ name: 'info', query: { id: 200 } }"&gt;info&lt;/router-link&gt;</pre>
         </dd>
-        <dt>接收路由参数</dt>
-        <dd>在路由目标组件-结构-中使用$route.query接收路由参数</dd>
+        <dd>3. 接收路由参数</dd>
+        <dd>在路由目标组件 - 结构 - 中使用$route.query接收路由参数</dd>
         <dd class="code">
             <pre>&lt;div&gt;{{ $route.query.id }}&lt;/div&gt;</pre>
         </dd>
-        <dd>在路由目标组件-逻辑-中使用useRoute接收路由参数</dd>
+        <dd>在路由目标组件 - 逻辑 - 中使用useRoute接收路由参数</dd>
         <dd>多个路由参数可以使用解构路由以简化语法</dd>
         <dd class="code">
             <pre>
@@ -381,14 +360,12 @@ let {query} = toRefs(route)</pre>
 &lt;/ul&gt;</pre>
             </figure>
         </dd>
-    </dl>
-    <div class="chap">路由组件传参 - props</div>
-    <dl class="nav-cont">
+        <dt>路由组件传参 - props</dt>
         <dd>按照组件传参的形式传递路由参数</dd>
         <dd>使用更方便</dd>
         <dd>默认是针对动态路由|params类型的路由参数</dd>
         <dd>查询路由|query需要特别处理</dd>
-        <dt>动态路由|params</dt>
+        <dd class="example-sn">动态路由|params</dd>
         <dd>1. 配置路由参数 - 指定props属性为true，传递的路由参数将被当作属性传递给组件</dd>
         <dd class="code">
             <pre>
@@ -413,7 +390,7 @@ defineProps(['id', 'title', 'cont'])</pre>
     &lt;li&gt;{{cont}}&lt;/li&gt;
 &lt;/ul&gt;</pre>
         </dd>
-        <dt>查询路由|query</dt>
+        <dd class="example-sn">查询路由|query</dd>
         <dd>1. 定制props属性 - 将路由参数的query作为返回值传递出去 - route是形参</dd>
         <dd class="code">
             <pre>
@@ -435,8 +412,7 @@ defineProps(['id', 'title', 'cont'])</pre>
     </dl>
     <div class="chap">编程路由 - router</div>
     <dl class="nav-cont">
-        <dt>说明</dt>
-        <dd>除了使用 &lt;router-link&gt; 创建 &lt;a&gt; 标签来定义导航链接，还可以借助 router 的实例方法，编写代码来实现</dd>
+        <dd>除了使用 &lt;router-link&gt; 创建 &lt;a&gt; 标签来定义声明式路由外，还可以借助 router 的实例方法，编写代码来实现编程式路由</dd>
         <dd>需引入路由包 useRouter并创建路由实例router</dd>
         <dd class="code">
             <pre>
@@ -468,8 +444,11 @@ onMounted(()=>{
             <div>使用更为直观的倒计时实现</div>
         </dd>
     </dl>
+    <div class="chap">小结</div>
+    <dl>
+        <dd>在结构中使用路由参数时，使用全局变量$route解构：动态路由$route.params；查询路由$route.query</dd>
+    </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-    <script src="../web/lib/ham2024.js"></script>
 </body>
 
 </html>

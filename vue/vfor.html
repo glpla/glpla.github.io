@@ -22,6 +22,7 @@
         <dd>基于一个 <span class="warn">数组/对象</span> 渲染一个列表</dd>
         <dd>使用for - in</dd>
         <dd>需显式的指定:key属性以区分并跟踪每个节点，这就要求数据项是唯一的，或具有id属性</dd>
+        <dd>指定:key有助于提高渲染性能；<span class="warn">据说</span>数据变化时只会渲染更新的数据项，不会全部重新渲染</dd>
         <dt>渲染数组</dt>
         <dd>普通数组或对象数组</dd>
         <dd>
@@ -51,6 +52,34 @@
         &lt;p v-for = "innerItem in item" :key = "innerItem.id" &gt; {{ innerItem }} &lt;/p&gt;
     &lt;/li&gt;
 &lt;/ul&gt;</pre>
+            </figure>
+        </dd>
+        <dd class="example-sn">渲染包含图片路径的列表</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>逻辑 - 注意静态资源处理</figcaption>
+                <pre>
+const arr = [{
+    id: 0,
+    name: 'gl',
+    age: 20,
+    src: '10.jpg'
+}]
+const getImageUrl = (src) => {
+    return new URL(`../imgs/${src}`, import.meta.url).href
+}</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>结构</figcaption>
+                <pre>
+&lt;div class="item" v-for="item in arr" :key="item.id"&gt;
+    &lt;img :src="getImageUrl(item.src)" alt="picture"&gt;
+    &lt;p&gt;{{ item.id }}&lt;/p&gt;
+    &lt;p&gt;{{ item.name }}&lt;/p&gt;
+    &lt;p&gt;{{ item.age }}&lt;/p&gt;
+&lt;/div&gt;</pre>
             </figure>
         </dd>
         <dt>渲染对象</dt>

@@ -19,13 +19,12 @@
         <span>Overview</span>
     </header>
     <dl>
-        <dt>单文件组件：SFC - Single File Component</dt>
-        <dd>文件后缀名为.vue；文件名通常首字母大写，如Home.vue</dd>
-        <dd>将一个 Vue 组件的模板、逻辑与样式封装在单个文件；遵循：结构-样式-逻辑"三分离"原则</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>SFC</figcaption>
-                <pre>
+        <dt>SFC</dt>
+        <dd>单文件组件 - Single File Component，每个文件都是一个组件</dd>
+        <dd>文件名采用大驼峰，后缀名为.vue；如HomeView.vue</dd>
+        <dd>将一个 Vue 组件的模板、逻辑与样式封装在单个文件；遵循：结构 - 样式 - 逻辑"三分离"原则</dd>
+        <dd class="code">
+            <pre>
 &lt;script&gt;
     //逻辑
 &lt;/script&gt;
@@ -37,9 +36,8 @@
 &lt;style&gt;
     //样式
 &lt;/style&gt;</pre>
-            </figure>
         </dd>
-        <dt>选项式 Options API</dt>
+        <dd>结构和样式同vue2相比，没有什么变化；逻辑除了选项式API，还提供了组合式API</dd>
         <dd>
             <figure class="code">
                 <figcaption>选项式 Options API</figcaption>
@@ -58,17 +56,9 @@
 &lt;/script&gt;</pre>
             </figure>
         </dd>
-        <dt>组合式 Composition API</dt>
-        <dd>按需导入</dd>
-        <dd>import { reactive } from 'vue'</dd>
-        <dd>import { ref } from 'vue'</dd>
-        <dd>import { computed } from 'vue'</dd>
-        <dd>import { watch } from 'vue'</dd>
-        <dd>import { onMounted } from 'vue'</dd>
-        <dd>... ...</dd>
         <dd>
             <figure class="code">
-                <figcaption>组合式 Composition API - setup</figcaption>
+                <figcaption>组合式 Composition API - 按需导入，并采用setup语法糖</figcaption>
                 <pre>
 &lt;script setup&gt;
     import { ref, onMounted } from 'vue'
@@ -80,8 +70,14 @@
 &lt;/script&gt;</pre>
             </figure>
         </dd>
+        <dd>经常用到的包还有：</dd>
+        <dd>import { reactive } from 'vue'</dd>
+        <dd>import { ref } from 'vue'</dd>
+        <dd>import { computed } from 'vue'</dd>
+        <dd>import { watch } from 'vue'</dd>
+        <dd>import { onMounted } from 'vue'</dd>
         <dt>单页面应用：SPA-Single Page Application</dt>
-        <dd>基于此开发的应用程序</dd>
+        <dd>基于此开发的应用程序 - 所有的业务都在一个页面内完成，如各种管理平台</dd>
     </dl>
     <div class="chap">模板语法</div>
     <dl>
@@ -89,11 +85,14 @@
         <dd>将组件实例的数据绑定到呈现的 DOM；减少 DOM 操作；也称数据绑定</dd>
         <dd>可以使用简单的js表达式实现数据的组合使用；复杂的逻辑请使用计算属性或方法获取</dd>
         <dd>每个数据绑定仅支持单一的表达式</dd>
+        <dd>根据数据是否是响应式，数据绑定分：静态绑定和 <a href="./reactive.html" class="warn">响应式</a> 绑定</dd>
         <dd class="tips">
             <div>目的：解决数据和元素节点的内容和属性的关联</div>
+            <div>可以使用模板字符串``，便于直接使用变量</div>
         </dd>
-        <dt>文本插值 - 内容绑定</dt>
-        <dd>使用双大括号 <span class="warn">{{}}</span>，会将数据解释为纯文本，解决数据和元素 <span class="warn">内容</span> 的关联</dd>
+        <dt>{{}}</dt>
+        <dd>内容绑定 - 文本插值表达式</dd>
+        <dd>使用双大括号 <span class="warn">{{}}</span>，会将数据解释为纯文本，解决 <span class="warn">数据和元素内容</span> 的关联</dd>
         <dd class="code">
             <pre>let msg = 'hi'</pre>
         </dd>
@@ -107,20 +106,18 @@
         <dd class="code">
             <pre>&lt;div v-html='html'&gt;&lt;/div&gt;</pre>
         </dd>
-        <dt>属性绑定 v-bind</dt>
-        <dd></dd>
-        <dd>使用 <span class="warn">v-bind</span> 指令绑定HTML的属性Attribute，解决数据和元素 <span class="warn">属性</span> 的关联</dd>
+        <dt>v-bind</dt>
+        <dd>属性绑定</dd>
+        <dd>使用 <span class="warn">v-bind</span> 指令绑定HTML的属性Attribute，解决 <span class="warn">数据和元素属性</span> 的关联</dd>
         <dd>可以简写为冒号 <span class="warn">:</span></dd>
         <dd>class和style也是元素的属性，同样可以使用v-bind指令</dd>
         <dd class="code">
             <pre>
-let src = 'http://www.baidu.com'
-let imgUrl = ''</pre>
+let url = ref('http://www.baidu.com')</pre>
         </dd>
         <dd class="code">
             <pre>
-&lt;a :href="url" target="_blank"&gt;link&lt;/a&gt;
-&lt;img :src="imgUrl" alt=""&gt;</pre>
+&lt;a :href="url" target="_blank"&gt;link&lt;/a&gt;</pre>
         </dd>
         <dd>特别的，当属性为布尔型，如disable，只要数据不为假false，其他任何数据包括空串，都会渲染为真</dd>
         <dd class="code">
@@ -128,6 +125,39 @@ let imgUrl = ''</pre>
         </dd>
         <dd class="code">
             <pre>&lt;button :disabled="isEnable"&gt;submit&lt;/button&gt;</pre>
+        </dd>
+        <dt>图片的使用</dt>
+        <dd>不可以直接绑定图片url地址，vue会将其解析为一个字符串，而非地址</dd>
+        <dd>解决方案1：将图片放到项目的public目录并直接引用；可以创建相应的文件夹imgs存放图片；vue-cli3默认路径为public，所以无需添加public；public即代表/</dd>
+        <dd class="code">
+            <pre>
+{
+    "id": 1001,
+    "name": "gl",
+    "age": "20",
+    "src": "/imgs/0.jpg"
+}</pre>
+        </dd>
+        <dd>解决方案2：采用vite的<a href="https://cn.vitejs.dev/guide/assets.html" class="link">静态资源处理</a>：import.meta.url
+            是一个ESM的原生功能，会暴露当前模块的 URL。将它与原生的 URL 构造器 组合使用，在一个 JavaScript 模块中，通过 <span
+                class="warn">相对路径</span>我们就能得到一个被完整解析的静态资源 URL</dd>
+        <dd class="example-sn">将图片作为资源引入再使用 - 适合单个静态资源</dd>
+        <dd class="code">
+            <pre>import imgUrl from '../imgs/10.jpg'</pre>
+        </dd>
+        <dd class="code">
+            <pre>&lt;img :src="imgUrl" alt=""&gt;</pre>
+        </dd>
+        <dd class="example-sn">为静态资源创建新的URL - 适合多个静态资源，如 <a href="./vfor.html" class="link">列表渲染</a></dd>
+        <dd class="code">
+            <pre>
+const getImageUrl = (src) => {
+    return new URL(`../imgs/${src}`, import.meta.url).href
+}</pre>
+        </dd>
+        <dd class="example-sn">直接使用图片；仅限静态使用 - 不推荐</dd>
+        <dd class="code">
+            <pre>&lt;img src="../img" alt=""&gt;</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

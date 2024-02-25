@@ -37,18 +37,26 @@
     <div class="chap">&lt;Transition&gt;</div>
     <dl class="nav-cont">
         <dd>过渡组件 - 一个元素或组件进入和离开 DOM 时应用动画</dd>
-        <dd>弥补了传统CSS的过渡动画transition不能响应display的显示和隐藏状态[???]</dd>
-        <dd>适用以下场景</dd>
+        <dd>将进入和离开动画应用到通过默认插槽传递给它的元素或组件 - 将动画应用到它包裹的元素</dd>
+        <dt>适用场景</dt>
         <dd>.由 v-if 所触发的切换</dd>
         <dd>.由 v-show 所触发的切换</dd>
         <dd>.由特殊元素 &lt;component&gt; 切换的动态组件</dd>
         <dd>.改变特殊的 key 属性</dd>
+        <dd>弥补了传统CSS的过渡动画transition不能响应display的显示和隐藏状态[???]</dd>
+        <dd class="code">
+            <pre>
+&lt;Transition&gt;
+    &lt;div v-if="flag"&gt;true&lt;/div&gt;
+    &lt;div v-else&gt;false&lt;/div&gt;
+&lt;/Transition&gt;</pre>
+        </dd>
         <dt>过渡阶段</dt>
-        <dd>过渡效果包括开始状态|进入enter和结束状态|离开leave两个阶段；每次过渡，只能触发一个阶段的效果：显示或消失</dd>
+        <dd>区分：进入阶段enter还是离开阶段leave两个阶段；每次过渡，只能触发一个阶段的效果</dd>
         <dd>每个阶段又可细分为3个子阶段；如下图</dd>
-        <dd>enter：包括：开始的进入和结束，中间则是开始的过渡；如不区分指定，则认为三者是一样的状态，即元素渲染完毕的状态</dd>
-        <dd>leave：包括：离开的进入和结束，中间则是离开的过渡</dd>
-        <dd>每个阶段都对应一个内置类，默认是v开头；具体的类实现需要自己定义；一般都会搭配原生 CSS 过渡transition或帧动画animation一起使用</dd>
+        <dd>enter：从无到有，包括：开始的进入from和结束to，中间则是开始的过渡active</dd>
+        <dd>leave：从有到无，包括：离开的进入from和结束to，中间则是离开的过渡active</dd>
+        <dd>每个阶段都对应一个内置类，默认是v开头；具体的类实现需要自己定义</dd>
         <dd>
             <figure class="img-sn">
                 <img src="./imgs/transition0.png" alt="">
@@ -56,10 +64,12 @@
             </figure>
         </dd>
         <dd>v-enter-from：进入动画的起始状态。在元素插入之前添加，在元素插入完成后的下一帧移除</dd>
-        <dd>v-enter-active：进入动画的生效状态。应用于整个进入动画阶段。在元素被插入之前添加，在过渡或动画完成之后移除。这个 class 可以被用来定义进入动画的持续时间、延迟与速度曲线类型</dd>
+        <dd>v-enter-active：进入动画的生效状态。应用于整个进入动画阶段。在元素被插入之前添加，在过渡或动画完成之后移除。这个 class 可以被用来定义进入动画的持续时间、延迟与速度曲线类型；一般都会搭配原生
+            CSS 过渡transition或帧动画animation一起使用</dd>
         <dd>v-enter-to：进入动画的结束状态。在元素插入完成后的下一帧被添加 (也就是 v-enter-from 被移除的同时)，在过渡或动画完成之后移除</dd>
         <dd>v-leave-from：离开动画的起始状态。在离开过渡效果被触发时立即添加，在一帧后被移除</dd>
-        <dd>v-leave-active：离开动画的生效状态。应用于整个离开动画阶段。在离开过渡效果被触发时立即添加，在过渡或动画完成之后移除。这个 class 可以被用来定义离开动画的持续时间、延迟与速度曲线类型
+        <dd>v-leave-active：离开动画的生效状态。应用于整个离开动画阶段。在离开过渡效果被触发时立即添加，在过渡或动画完成之后移除。这个 class
+            可以被用来定义离开动画的持续时间、延迟与速度曲线类型；一般都会搭配原生 CSS 过渡transition或帧动画animation一起使用
         </dd>
         <dd>v-leave-to：离开动画的结束状态。在一个离开动画被触发后的下一帧被添加 (也就是 v-leave-from 被移除的同时)，在过渡或动画完成之后移除</dd>
         <dd class="tips">
@@ -67,6 +77,7 @@
             <div>元素的CSS效果会叠加到过渡上，如设置了背景颜色，则过渡的进入和退出都将应用该背景属性</div>
         </dd>
         <dd class="example-sn">单击查看元素的淡入淡出 - 基于CSS的transition</dd>
+        <dd>可应用于弹出对话框</dd>
         <dd>注意：事件元素应放在过渡组件前面，否则。。。</dd>
         <dd>
             <figure class="code">
@@ -246,7 +257,8 @@ const onAfterLeave = () => {
         <dd class="example-sn">代办事项</dd>
         <dd>列表渲染事项数据</dd>
         <dd>每条数据可以在完成时删除</dd>
-        <dd>单击可以增加一条新的事项数据</dd>
+        <dd>删除时，要显示确认对话框 - 应用过渡</dd>
+        <dd>单击可以增加一条新的事项数据 - 应用过渡</dd>
         <dd class="grid2">
             <img src="./imgs/transition1.png" alt="">
             <img src="./imgs/transition2.png" alt="">

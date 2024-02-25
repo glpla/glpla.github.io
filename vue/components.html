@@ -107,6 +107,7 @@ let greetingMessage = ref('hi, there.')</pre>
                 <pre>&lt;Child :greeting-message='para'/&gt;</pre>
             </figure>
         </dd>
+        <dd class="question">可以给子组件指定样式或类吗?</dd>
         <dt>事件传递 defineEmits()</dt>
         <dd class="nav-cont">指的是：子组件通过自定义事件defineEmits()向父组件传递事件</dd>
         <dd>使用自定义事件更加方便子组件向父组件传递事件：显式地通过 defineEmits() 宏来声明它要触发的事件</dd>
@@ -171,29 +172,38 @@ function callback(e) {
         </dd>
         <dt>插槽 slot</dt>
         <dd class="nav-cont">使用插槽slot可以向使用HTML 元素一样向组件中传递内容；如封装过渡组件</dd>
-        <dd>1. 子组件声明slot，将其作为一个占位符，父组件传递进来的内容就会渲染在这里；可以指定插槽默认内容-默认插槽；可以使用name属性指定多个插槽-具名插槽</dd>
-        <dd class="code">
-            <pre>
+        <dd>1. 子组件声明slot，将其作为一个占位符，父组件传递进来的内容就会渲染在这里</dd>
+        <dd>可以指定插槽默认内容-默认插槽</dd>
+        <dd>多个插槽应该使用name属性区分-具名插槽</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>仅预留位置</figcaption>
+                <pre>
 &lt;template&gt;
     &lt;div class="alert-box"&gt;
         //内容
         &lt;slot /&gt;
     &lt;/div&gt;
 &lt;/template&gt;</pre>
+            </figure>
         </dd>
-        <dd>默认插槽</dd>
-        <dd class="code">
-            <pre>
+        <dd></dd>
+        <dd>
+            <figure class="code">
+                <figcaption>默认插槽 - 指定默认内容</figcaption>
+                <pre>
 &lt;template&gt;
     &lt;div class="alert-box"&gt;
         //内容
         &lt;slot&gt;插槽默认内容&lt;/slot&gt;
     &lt;/div&gt;
 &lt;/template&gt;</pre>
+            </figure>
         </dd>
-        <dd>具名插槽</dd>
-        <dd class="code">
-            <pre>
+        <dd>
+            <figure class="code">
+                <figcaption>具名插槽 - 多个插槽</figcaption>
+                <pre>
 &lt;template&gt;
     &lt;div class="alert-box"&gt;
         //内容
@@ -201,6 +211,7 @@ function callback(e) {
         &lt;slot name='footer'&gt;&lt;/slot&gt;
     &lt;/div&gt;
 &lt;/template&gt;</pre>
+            </figure>
         </dd>
         <dd>2. 父组件使用默认插槽</dd>
         <dd class="code">
@@ -255,7 +266,7 @@ function callback(e) {
 &lt;/script&gt;</pre>
         </dd>
         <dt>跨级传递</dt>
-        <dd class="nav-cont">指的是：顶级组件 → 底层组件</dd>
+        <dd class="nav-cont">指的是：顶级组件 → 底层组件；不允许底层组件向顶级组件传递：反向流转</dd>
         <dd>采用发布-订阅|提供-插入的模式</dd>
         <dd>双方组件需要引入对应的包 provide、inject</dd>
         <dd>可以传递数据；还可以传递方法</dd>
@@ -266,12 +277,16 @@ function callback(e) {
         <dd>顶级组件使用provide提供数据</dd>
         <dd class="code">
             <pre>
+import {provide} from 'vue'
+
 provide('key0', data)
 provide('key1', dataRef.value)</pre>
         </dd>
         <dd>底层组件使用inject接收数据</dd>
         <dd class="code">
             <pre>
+import {inject} from 'vue'
+
 let para = inject('key0')
 let para = inject('key1')</pre>
         </dd>
@@ -343,6 +358,8 @@ defineProps(['sendPara'])</pre>
                 <pre>&lt;button @click='sendPara(para)'&gt;send para&lt;/button&gt;</pre>
             </figure>
         </dd>
+        <dt>组件样式</dt>
+        <dd>为组件的根节点指定一个特有的类，如.nav。推荐以组件名字命名这个类；因为组件的功能各不相同，所以很容易保证组件类的唯一性</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
     <script src="../web/lib/ham2024.js"></script>

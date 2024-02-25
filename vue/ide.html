@@ -21,7 +21,7 @@
     <dl>
         <dt>环境</dt>
         <dd class="number">
-            <div><a href="https://nodejs.org/en" class="link">node.js</a>：下载并安装</div>
+            <div><a href="https://nodejs.org/en" class="link">node.js</a>：下载并安装并查看版本</div>
             <pre class="code">
 node -v
 npm -v</pre>
@@ -29,36 +29,37 @@ npm -v</pre>
             <p>. live server</p>
             <p>. volar Vue Language Features (Volar)</p>
             <p>. Vue VSCode Snippets</p>
+            <p>. AutoScssStruct4Vue</p>
             <div><a href="https://www.google.cn/intl/en_uk/chrome/" class="link">Google Chrome</a></div>
             <div><a href="https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home?hl=zh-CN"
                     class="link">Edge扩展</a></div>
-            <p>. 开发者工具dev tools</p>
+            <p>. 开发者工具vue.js devtools</p>
             <p>. 前端助手FeHelper</p>
         </dd>
         <dt>npm依赖</dt>
         <dd class="number">
             <div><a href="https://www.axios-http.cn/" class="link">axios</a></div>
             <div><a href="https://www.npmjs.com/package/json-server" class="link">json-server</a></div>
-            <div><a href="https://element-plus.gitee.io/zh-CN/" class="link">element-plus</a></div>
+            <div><a href="https://element-plus.gitee.io/zh-CN/" class="link">element-plus*</a></div>
         </dd>
         <dt>工具</dt>
         <dd class="number">
             <div><a href="https://cn.vuejs.org/guide/introduction.html" class="link">Vue.js</a></div>
             <div><a href="https://cn.vitejs.dev/guide" class="link">Vite</a></div>
-            <div><a href="https://git-scm.com" class="link">Git</a></div>
-            <div><a href="https://github.com" class="link">GitHub</a></div>
-            <div><a href="https://play.vuejs.org/" class="link"> Vue SFC Playground</a></div>
+            <div><a href="https://git-scm.com" class="link">Git*</a></div>
+            <div><a href="https://github.com" class="link">GitHub*</a></div>
+            <div><a href="https://play.vuejs.org/" class="link"> Vue SFC Playground*</a></div>
         </dd>
     </dl>
-    <div class="chap">项目构建</div>
+    <div class="chap">项目开发</div>
     <dl>
         <dd>使用Vue 官方的项目脚手架工具Vite创建项目，根据提示操作即可；详细情况，看查看<a href="https://cn.vuejs.org/guide/quick-start.html"
                 class="link">官方文档</a>
         </dd>
-        <dt>详细步骤</dt>
+        <dt>项目创建</dt>
         <dd class="number">
-            <div>创建空文件夹作为项目空文件夹</div>
-            <div>进入项目文件夹，打开命令行窗口CMD，输入以下指令，创建项目并指定项目名</div>
+            <div>创建空白文件夹或选择你的项目开发总文件夹</div>
+            <div>进入文件夹，打开命令行窗口CMD，输入以下指令，创建项目并指定项目名</div>
             <figure class="img-sn">
                 <img src="./imgs/pro1.jpg" alt="">
             </figure>
@@ -74,21 +75,66 @@ npm -v</pre>
                 <img src="./imgs/pro4.jpg" alt="">
             </figure>
             <div>根据提示进入项目目录、安装依赖并运行项目</div>
+            <p>注意：项目创建完毕后，后续操作请使用Vs Code完成</p>
             <div>按住CTRL + 单击项目链接，即可打开Vue + Vite的欢迎界面</div>
             <figure class="img-sn">
                 <img src="./imgs/pro5.jpg" alt="">
             </figure>
             <div>恭喜，您已经打开了Vue开发的大门</div>
         </dd>
+        <dt>项目解读</dt>
+        <dd class="number">
+            <div>node_modules</div>
+            <p>依赖包</p>
+            <p>生产环境依赖 dependencies：项目上线后，必须的依赖，如网络请求axios</p>
+            <pre class="code">npm install package_name --save</pre>
+            <pre class="code">npm install package_name --S</pre>
+            <p>开发环境依赖 devDependencies：开发过程中需要的依赖，发布上线后，不再需要，如CSS预处理</p>
+            <pre class="code">npm install package_name --save-dev</pre>
+            <pre class="code">npm install package_name --D</pre>
+            <div>dist</div>
+            <p>项目发布后才有</p>
+            <p>将其推送到服务器上，项目就进入生产环境的测试环节；经过一系列的调试、重新发布、再上线，项目进入运维环节</p>
+            <div>public</div>
+            <p>公共资源，可以直接被项目使用，如图片，不需要解析</p>
+            <p>项目发布后，这里的资源会原封不动的拷贝到发布文件夹dist</p>
+            <div>src</div>
+            <p>开发过程操作最多的目录</p>
+            <div>index.html</div>
+            <p>项目的入口文件</p>
+            <div>package.json</div>
+            <p>依赖包文件</p>
+            <div>vite.config.js</div>
+            <p>vite的配置，如server的配置：项目打开、端口、代理等等；默认没有，需手动添加</p>
+            <pre class="code">
+server: {
+    open: true,//启动项目自动弹出浏览器
+    port: '5173',//默认端口5173
+    proxy: {
+        '/food': {
+        target: 'http://127.0.0.1:3000',
+        changeOrigin: true,
+        // rewrite: (path) => path.replace(/^\/api/, '') // 不可以省略rewrite
+        }
+    }
+}</pre>
+            <p>网络请求出现跨域时，必须要做代理</p>
+        </dd>
         <dd class="tips">
-            <div>项目创建完毕后，后续开发使用Vs Code完成依赖安装和项目预览</div>
             <div>知识点：模板语法{{}}、单文件组件 SFC、组合式 Composition API、组件传参 prop、插槽 slot、样式域 scope、媒体查询 @media、可缩放矢量图形SVG</div>
         </dd>
+        <dt>项目发布</dt>
+        <p>发布后会生产目标文件夹dist；使用vs code打开发布目录dist，预览效果</p>
+        <dd class="code">
+            <pre>npm run build</pre>
+        </dd>
+        <p class="question">发布后都发生了什么???</p>
     </dl>
     <div class="chap">Vs Code快捷编辑</div>
     <dl>
         <dd>v3/vbase：选择setup组件模板</dd>
         <dd>imp：导入包|组件</dd>
+        <dd>...</dd>
     </dl>
     <div class="chap">node.js 其它库</div>
     <dl>
