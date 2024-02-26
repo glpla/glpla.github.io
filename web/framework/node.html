@@ -39,12 +39,13 @@ C:\Users\cnplaman>yarn -v
     <dt>安装依赖</dt>
     <dd>install可以简写为i</dd>
     <dd>默认是生产环境</dd>
-    <dd>--S/--save：生产环境依赖</dd>
-    <dd>--D/--save-dev：开发环境依赖；项目发布后用不到它，只在开发时才用到它</dd>
-    <dd class="code">
-      <pre>npm install package_name</pre>
-    </dd>
-    <dt>查看依赖</dt>
+    <p>生产环境依赖 dependencies：使用--S/--save；项目上线后，所必须的依赖，如网络请求axios</p>
+    <pre class="code">npm install package_name --save</pre>
+    <pre class="code">npm install package_name --S</pre>
+    <p>开发环境依赖 devDependencies：使用--D/--save-dev；开发过程中需要的依赖，发布上线后，不再需要，如CSS预处理</p>
+    <pre class="code">npm install package_name --save-dev</pre>
+    <pre class="code">npm install package_name --D</pre>
+    <dt>查看本地全局依赖</dt>
     <dd>.我的电脑 → c → 用户user → 当前用户 → 应用数据appdata → roaming → npm</dd>
     <dd class="code">
       <pre>C:\Users\cnplaman\AppData\Roaming\npm\node_modules</pre>
@@ -53,11 +54,23 @@ C:\Users\cnplaman>yarn -v
     <dd class="code">
       <pre>npm uninstall package_name</pre>
     </dd>
-    <dt>cnpm</dt>
-    <dd>. 为了加快包的下载和使用，通常使用淘宝镜像源</dd>
-    <dd>. 相应的，命令关键字由npm改为cnpm即可</dd>
+    <dt>淘宝镜像源 cnpm</dt>
+    <dd>查看安装镜像源，默认是</dd>
     <dd class="code">
-      <pre>npm install -g cnpm --registry=https://registry.npm.taobao.org</pre>
+      <pre>
+>npm config get registry
+https://registry.npmjs.org</pre>
+    </dd>
+    <dd>. 为了加快包的下载和使用，通常设置为淘宝镜像源；相应的，命令关键字由npm改为cnpm即可</dd>
+    <dd class="code">
+      <pre>
+>npm config set registry https://registry.npmmirror.com</pre>
+    </dd>
+    <dd>再次查看安装镜像源</dd>
+    <dd class="code">
+      <pre>
+>npm config get registry
+https://registry.npmmirror.com</pre>
     </dd>
   </dl>
   <div class="chap">创建服务器</div>
