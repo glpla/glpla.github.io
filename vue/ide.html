@@ -40,25 +40,26 @@ npm -v</pre>
         <dd class="number">
             <div><a href="https://www.axios-http.cn/" class="link">axios</a></div>
             <div><a href="https://www.npmjs.com/package/json-server" class="link">json-server</a></div>
-            <div><a href="https://element-plus.gitee.io/zh-CN/" class="link">element-plus*</a></div>
+            <div><a href="https://www.expressjs.com.cn/" class="link">express.js</a></div>
+            <div><a href="https://element-plus.gitee.io/zh-CN/" class="link">element-plus</a></div>
         </dd>
         <dt>工具</dt>
         <dd class="number">
             <div><a href="https://cn.vuejs.org/guide/introduction.html" class="link">Vue.js</a></div>
             <div><a href="https://cn.vitejs.dev/guide" class="link">Vite</a></div>
-            <div><a href="https://git-scm.com" class="link">Git*</a></div>
-            <div><a href="https://github.com" class="link">GitHub*</a></div>
-            <div><a href="https://play.vuejs.org/" class="link"> Vue SFC Playground*</a></div>
+            <div><a href="https://git-scm.com" class="link">Git</a></div>
+            <div><a href="https://github.com" class="link">GitHub</a></div>
+            <div><a href="https://play.vuejs.org/" class="link"> Vue SFC Playground</a></div>
         </dd>
     </dl>
     <div class="chap">项目开发</div>
     <dl>
         <dd>使用Vue 官方的项目脚手架工具Vite创建项目，根据提示操作即可；详细情况，看查看<a href="https://cn.vuejs.org/guide/quick-start.html"
-                class="link">官方文档</a>
+                class="link">Vite 官方文档</a>
         </dd>
         <dt>项目创建</dt>
         <dd class="number">
-            <div>创建空白文件夹或选择你的项目开发总文件夹</div>
+            <div>创建空白文件夹或选择你的项目开发<span class="warn">总</span>文件夹</div>
             <div>进入文件夹，打开命令行窗口CMD，输入以下指令，创建项目并指定项目名</div>
             <figure class="img-sn">
                 <img src="./imgs/pro1.jpg" alt="">
@@ -75,7 +76,7 @@ npm -v</pre>
                 <img src="./imgs/pro4.jpg" alt="">
             </figure>
             <div>根据提示进入项目目录、安装依赖并运行项目</div>
-            <p>注意：项目创建完毕后，后续操作请使用Vs Code完成</p>
+            <p class="question">注意：项目创建完毕后，后续操作请使用Vs Code完成</p>
             <div>按住CTRL + 单击项目链接，即可打开Vue + Vite的欢迎界面</div>
             <figure class="img-sn">
                 <img src="./imgs/pro5.jpg" alt="">
@@ -86,7 +87,7 @@ npm -v</pre>
         <dd class="number">
             <div>node_modules</div>
             <p>依赖包</p>
-            <p>生产环境依赖 dependencies：项目上线后，必须的依赖，如网络请求axios</p>
+            <p>生产环境依赖 dependencies：项目上线后，所必须的依赖，如网络请求axios</p>
             <pre class="code">npm install package_name --save</pre>
             <pre class="code">npm install package_name --S</pre>
             <p>开发环境依赖 devDependencies：开发过程中需要的依赖，发布上线后，不再需要，如CSS预处理</p>
@@ -99,11 +100,17 @@ npm -v</pre>
             <p>公共资源，可以直接被项目使用，如图片，不需要解析</p>
             <p>项目发布后，这里的资源会原封不动的拷贝到发布文件夹dist</p>
             <div>src</div>
-            <p>开发过程操作最多的目录</p>
+            <p>开发过程操作最多的目录，您大展身手的舞台</p>
+            <p>包括重要的两个文件：</p>
+            <p>main.js：逻辑入口文件；引用并挂载App.vue</p>
+            <p>App.vue：主入口组件</p>
             <div>index.html</div>
-            <p>项目的入口文件</p>
+            <p>项目的主页文件</p>
             <div>package.json</div>
             <p>依赖包文件</p>
+            <p>区分生产环节依赖 dependencies和开发环境依赖 devDependencies</p>
+            <p>由于包的更新和大小等因素，项目分享或提交到代码仓库时，这部分会被忽略。用户拿到代码，第一件事情是安装依赖；否则项目部不能运行</p>
+            <pre class="code">npm i</pre>
             <div>vite.config.js</div>
             <p>vite的配置，如server的配置：项目打开、端口、代理等等；默认没有，需手动添加</p>
             <pre class="code">
@@ -124,20 +131,21 @@ server: {
             <div>知识点：模板语法{{}}、单文件组件 SFC、组合式 Composition API、组件传参 prop、插槽 slot、样式域 scope、媒体查询 @media、可缩放矢量图形SVG</div>
         </dd>
         <dt>项目发布</dt>
-        <p>发布后会生产目标文件夹dist；使用vs code打开发布目录dist，预览效果</p>
+        <dd>发布后会生产目标文件夹dist；使用vs code打开发布目录dist，预览效果</dd>
         <dd class="code">
             <pre>npm run build</pre>
         </dd>
-        <p class="question">发布后都发生了什么???</p>
+        <dd class="question">
+            <div>发布后都发生了什么???</div>
+            <div>跨域是什么???</div>
+        </dd>
     </dl>
-    <div class="chap">Vs Code快捷编辑</div>
+    <div class="chap">其它</div>
     <dl>
+        <dt>Vs Code快捷编辑</dt>
         <dd>v3/vbase：选择setup组件模板</dd>
         <dd>imp：导入包|组件</dd>
         <dd>...</dd>
-    </dl>
-    <div class="chap">node.js 其它库</div>
-    <dl>
         <dt>uuid</dt>
         <dd>随机生成id</dd>
         <dt>nanoid</dt>
