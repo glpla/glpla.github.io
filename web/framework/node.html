@@ -15,67 +15,72 @@
 
 <body>
   <header>
-    <h1>资源服务器</h1>
+    <h1>Node服务器</h1>
     <span>&commat;Node.js</span>
   </header>
   <dl>
-    <dt>概述</dt>
     <dd>基于JavaScript的开源、跨平台开发环境</dd>
-    <dt>下载</dt>
-    <dd>. 点击<a href="https://nodejs.org/en/" class="link">Node.js</a>下载并安装；高版本会同时安装包管理工具NPM和yarn</dd>
-    <dt>查看版本</dt>
-    <dd>.Win + R，使用CMD查看</dd>
+    <dt>下载 Download</dt>
+    <dd>. 点击<a href="https://nodejs.org/en/" class="link">Node.js</a>下载</dd>
+    <dt>安装 Installation</dt>
+    <dd>安装的同时，会安装包管理工具NPM - Node Package Management</dd>
+    <dd>也可以在NPM下安装 <a href="https://yarn.bootcss.com/" class="link">中文yarn</a> 或 <a href="https://yarnpkg.com/"
+        class="link">英文yarn</a>
+      作为包管理工具</dd>
+    <dt>查看版本 Version</dt>
+    <dd>.Win + R，输入CMD，打开控制台查看 - 小黑屋</dd>
     <dd class="code">
       <pre>
 C:\Users\cnplaman>node -v
 v18.13.0
 
 C:\Users\cnplaman>npm -v
-8.15.1
-
-C:\Users\cnplaman>yarn -v
-1.22.17</pre>
+8.15.1</pre>
     </dd>
-    <dt>安装依赖</dt>
-    <dd>install可以简写为i</dd>
-    <dd>默认是生产环境</dd>
-    <p>生产环境依赖 dependencies：使用--S/--save；项目上线后，所必须的依赖，如网络请求axios</p>
-    <pre class="code">npm install package_name --save</pre>
-    <pre class="code">npm install package_name --S</pre>
-    <p>开发环境依赖 devDependencies：使用--D/--save-dev；开发过程中需要的依赖，发布上线后，不再需要，如CSS预处理</p>
-    <pre class="code">npm install package_name --save-dev</pre>
-    <pre class="code">npm install package_name --D</pre>
-    <dt>查看本地全局依赖</dt>
-    <dd>.我的电脑 → c → 用户user → 当前用户 → 应用数据appdata → roaming → npm</dd>
-    <dd class="code">
-      <pre>C:\Users\cnplaman\AppData\Roaming\npm\node_modules</pre>
-    </dd>
-    <dt>移除依赖</dt>
-    <dd class="code">
-      <pre>npm uninstall package_name</pre>
-    </dd>
-    <dt>淘宝镜像源 cnpm</dt>
-    <dd>查看安装镜像源，默认是</dd>
+    <dt>切换镜像源 Registry</dt>
+    <dd>为了改善使用体验，为了加快包的下载和使用，通常需要切换镜像源</dd>
+    <dd>1. 查看 get 安装镜像源，默认是</dd>
     <dd class="code">
       <pre>
 >npm config get registry
 https://registry.npmjs.org</pre>
     </dd>
-    <dd>. 为了加快包的下载和使用，通常设置为淘宝镜像源；相应的，命令关键字由npm改为cnpm即可</dd>
+    <dd>2. 设置 set 为淘宝镜像源</dd>
     <dd class="code">
       <pre>
 >npm config set registry https://registry.npmmirror.com</pre>
     </dd>
-    <dd>再次查看安装镜像源</dd>
+    <dd>3. 再次查看安装镜像源</dd>
     <dd class="code">
       <pre>
 >npm config get registry
 https://registry.npmmirror.com</pre>
     </dd>
+    <dt>安装依赖 Install</dt>
+    <dd>install可以简写为i</dd>
+    <dd>默认是生产环境</dd>
+    <p>生产环境依赖 dependencies：项目上线后，所必须的依赖，如网络请求axios；使用--S/--save命令行参数</p>
+    <pre class="code">npm install package_name --save</pre>
+    <pre class="code">npm install package_name --S</pre>
+    <p>开发环境依赖 devDependencies：开发过程中需要的依赖，发布上线后，不再需要，如CSS预处理；使用--D/--save-dev命令行参数</p>
+    <pre class="code">npm install package_name --save-dev</pre>
+    <pre class="code">npm install package_name --D</pre>
+    <dt>移除依赖</dt>
+    <dd class="code">
+      <pre>npm uninstall package_name</pre>
+    </dd>
+    <dt>查看本地全局依赖</dt>
+    <dd>.我的电脑 → c → 用户user → 当前用户 → 应用数据appdata → roaming → npm</dd>
+    <dd class="code">
+      <pre>C:\Users\cnplaman\AppData\Roaming\npm\node_modules</pre>
+    </dd>
+    <dd>
+      <img src="../../vue/imgs/server1.png" alt="">
+    </dd>
   </dl>
   <div class="chap">创建服务器</div>
   <dl>
-    <dd>没有原生创建，而是依托express框架创建；更多信息，请访问 <a href="https://www.expressjs.com.cn/" class="link">Express.js</a></dd>
+    <dd>依托express框架创建；更多信息，请访问 <a href="https://www.expressjs.com.cn/" class="link">Express.js</a></dd>
     <dt>基本过程</dt>
     <dd class="number">
       <div>准备数据</div>
@@ -85,30 +90,36 @@ https://registry.npmmirror.com</pre>
     </dd>
     <dd class="example-sn">访问资源文件</dd>
     <dd class="number">
-      <div>创建一个文件夹作为服务器目录</div>
+      <div>创建一个空白文件夹作为服务器目录，如server</div>
       <div>相关的资源文件，如图片、视频存放在某个目录下，如www</div>
-      <div>在服务器目录打开CMD，初始化，用来创建package.json文件；使用-y，按照默认项目创建，如入口文件默认是index.js</div>
+      <div>在服务器目录打开CMD，初始化，用来创建package.json文件；也可以使用-y命令行参数，将按照默认配置创建，如入口文件默认是index.js</div>
+      <p>定制创建</p>
       <pre class="code">npm init</pre>
+      <p>默认配置创建 - 推荐</p>
       <pre class="code">npm init -y</pre>
-      <div>安装express依赖</div>
+      <div>安装express框架</div>
       <pre class="code">npm i express --save</pre>
-      <div>创建服务器脚本index.js</div>
-      <p>引入express；创建服务器；指定静态文件位置；指定端口并监听</p>
+      <div>在服务器目录创建服务器脚本index.js</div>
       <pre class="code">
+//引入express
 const express = require('express');
+//创建服务器实例
 const app = express();
+//指定服务器端口
 const port = 3000
+//指定静态文件位置
 app.use(express.static('./www'));
+//监听
 app.listen(port, res => {
   console.log('服务器启动成功，访问地址：http://127.0.0.1:3000/资源名');
 });  </pre>
-      <div>开启服务</div>
-      <p>- 默认命令</p>
+      <div>在CMD开启服务</div>
+      <p>默认命令</p>
       <pre class="code">node index.js</pre>
-      <p>- 自定义命令启动服务</p>
+      <p>自定义命令启动服务 - 修改package.json里script</p>
       <pre>
 "scripts": {
-  "start":"node index.js"	//修改package.json里script
+  "start":"node index.js"
 }</pre>
       <pre class="code">node start</pre>
       <div>用户使用浏览器访问http://127.0.0.1:3000/资源名获取资源</div>
@@ -149,32 +160,6 @@ app.listen(3000, () => {
       </figure>
     </dd>
   </dl>
-  </dl>
-  <div class="chap">yarn</div>
-  <dl>
-    <dt>说明</dt>
-    <dd>. 也可以在NPM下安装 <a href="https://yarn.bootcss.com/" class="link">中文yarn</a> 或 <a href="https://yarnpkg.com/"
-        class="link">英文yarn</a>
-      作为包管理工具</dd>
-    <dd class="code">
-      <pre>
-C:\Users\cnplaman>npm i yarn -g
-... ...
-C:\Users\cnplaman>yarn -v
-1.22.17</pre>
-    </dd>
-    <dt>安装依赖</dt>
-    <dd class="code">
-      <pre>yarn add package_name</pre>
-    </dd>
-    <dt>移除依赖</dt>
-    <dd class="code">
-      <pre>yarn remove package_name</pre>
-    </dd>
-    <dt>升级依赖</dt>
-    <dd class="code">
-      <pre>yarn upgrade package_name</pre>
-    </dd>
   </dl>
   <div class="chap">常见依赖</div>
   <dl>

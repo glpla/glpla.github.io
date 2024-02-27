@@ -2,11 +2,11 @@
 @import url(../../css/fonts_yuwei.css);
 
 :root {
+  --main-color: #FDC830;
   --item-mb: 10px;
-  --item-gap: 20px;
-  --item-bg: #f40;
+  --item-gap: 10px;
+  --item-bg: hsla(44, 98%, 59%, 5%);
   --scroll-bar-bg: rgb(241, 139, 95);
-  --border-color: #FDC830;
 }
 
 * {
@@ -31,6 +31,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: var(--item-gap);
   align-items: center;
   width: 100%;
   max-width: 1000px;
@@ -49,7 +50,7 @@ nav {
 
 .logo {
   margin-left: auto;
-  color: var(--border-color);
+  color: var(--main-color);
 }
 
 .tab-item {
@@ -61,10 +62,10 @@ nav {
 }
 
 .tab-item.active {
-  border-color: var(--border-color);
+  border-color: var(--main-color);
 }
 
-main {
+.main {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,7 +80,11 @@ main {
 }
 
 #main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--item-gap);
   height: 325px;
+  padding: var(--item-gap) 0;
   overflow-y: auto;
 }
 
@@ -93,7 +98,7 @@ main {
 }
 
 #main::-webkit-scrollbar-thumb {
-  background-color: var(--border-color);
+  background-color: var(--main-color);
   border-radius: 8px;
 }
 
@@ -103,9 +108,9 @@ main {
   align-items: center;
   gap: var(--item-gap);
   padding: 0 var(--item-gap);
-  margin-right: 1rem;
+  margin-right: var(--item-gap);
   color: #fff;
-  border-bottom: 1px solid var(--border-color);
+  background-color: var(--item-bg);
   line-height: 40px;
 }
 
@@ -116,7 +121,7 @@ main {
 }
 
 .item .iconfont {
-  color: var(--border-color);
+  color: var(--main-color);
 }
 
 footer {
@@ -124,10 +129,6 @@ footer {
 }
 
 @media screen and (max-width:768px) {
-  :root {
-    --item-gap: 10px;
-  }
-
   .logo .iconfont {
     font-size: 60px;
   }
@@ -136,7 +137,7 @@ footer {
     display: none;
   }
 
-  main {
+  .main {
     height: 460px;
     padding-left: 0;
     background-position: unset;

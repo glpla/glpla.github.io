@@ -20,11 +20,11 @@
       <dd class="number">
         <div>了解服务器的基本工作原理</div>
         <div>熟悉数据接口API的定制和使用</div>
-        <div>掌握node.js服务的基本搭建</div>
-        <div>掌握express.js框架的基本使用</div>
         <div>掌握json-server的基本使用</div>
         <div>掌握axios的基本使用</div>
         <div>掌握浏览器扩展postman的基本使用</div>
+        <div>掌握node.js服务的基本搭建</div>
+        <div>掌握express.js框架的基本使用</div>
       </dd>
       <dt>二、开发环境</dt>
       <dd class="number">
@@ -35,16 +35,121 @@
       </dd>
       <dt>三、实验内容</dt>
       <dd class="number">
-        <div>资源准备</div>
-        <div>express.js安装和基本使用</div>
-        <div>json-server安装和基本使用</div>
-        <div>axios安装和基本使用</div>
-        <div>postman的安装和基本使用</div>
+        <div>资源准备：图片和数据</div>
+        <div>json数据服务器</div>
+        <p>. json-server安装和基本使用</p>
+        <div>网络请求模拟：postman的安装和基本使用</div>
+        <div>axios数据请求</div>
+        <div>综合资源服务器</div>
+        <p>. express.js安装和基本使用</p>
+        <p>. axios安装和基本使用</p>
       </dd>
       <dt>四、实验步骤</dt>
       <dd class="number">
-        <div>服务器初始化</div>
-        <p>创建空白文件夹server作为服务器目录；使用vs code打开，CTRL + `打开控制台，初始化服务器，生成配置文件package.json；-y表示采用默认信息</p>
+        <div>准备数据</div>
+        <p>选择或创建一个文件夹如www作为各种资源的主目录；利用各种子文件夹存放不同的资源数据，如data存放json、imgs存放图片、music存放音乐等等</p>
+        <p>1.1 json数据：创建json数据文件rank.json；这里以暴露2个接口为例；一个是info；一个是cont；这里包括了图片的src，可以给出完整路径，也可以仅仅给出文件名；数据加载后再2次处理</p>
+        <p>注意：id为字符串类型</p>
+        <pre class="code">
+{
+  "info":{},
+  "cont":[
+    {
+      "id":"1001",
+      "name":"gl",
+      "age":18,
+      "rank":1,
+      "src":"1.jpg"
+    },
+    {
+      "id":"1002",
+      "name":"cq",
+      "age":20,
+      "rank":2,
+      "src":"2.jpg"
+    }
+  ]
+}</pre>
+        <p>1.2 图片数据：创建空白文件夹imgs，将对应的图片拷贝进去；作为在线资源提供给项目使用</p>
+        <p>1.3 其它资源，如视频、音频等</p>
+        <div>json-server 服务器</div>
+        <p>json-server服务器通常独立全局-g安装，可以监听对于任何位置的json数据的请求 - <span class="warn">指哪打哪</span></p>
+        <p>仅仅满足对json数据的使用；其它资源需要强大的node.js完成</p>
+        <p>为了集中管理数据，也可以作为一个本地依赖，和node.js服务器放在一起</p>
+        <p>2.1 <span class="warn">任意位置</span>打开CMD，全局安装json-server</p>
+        <pre class="code">npm install json-server -g</pre>
+        <p>2.2 在<span class="warn">WWW</span>打开CMD，监听数据文件 rank.json；注意当前打开的CMD位置和监听数据文件的路径关系</p>
+        <pre class="code">json-server ./data/rank.json</pre>
+        <p>暴露出本地2个接口；默认端口3000；按住CTRL单击对应的地址，可以在浏览器中访问其中的内容；或直接在浏览器输入对应的地址；这个地址就是提供给其它项目使用的API接口地址</p>
+        <pre class="code">
+Watching .\rank.json...
+
+♡( ◡‿◡ )
+
+Index:
+http://localhost:3000/
+
+Static files:
+Serving ./public directory if it exists
+
+Endpoints:
+http://localhost:3000/info
+http://localhost:3000/cont</pre>
+        <p>指定端口，和Vue项目端口保持一致，避免浏览器跨域</p>
+        <pre class="code">json-server rank.json --port=5173</pre>
+        <div>postman的基本使用</div>
+        <p>用来模拟数据的请求</p>
+        <p>安装浏览器插件FeHelper前端助手或下载更加专业的postman（最近官网一直打不开）</p>
+        <img src="./imgs/server0.png" alt="">
+        <p>3.1 获取数据 - GET</p>
+        <p>获取所有数据</p>
+        <pre class="code">http://127.0.0.1:3000/cont</pre>
+        <p>根据id获取接口某个数据</p>
+        <pre class="code">http://127.0.0.1:3000/cont/1001</pre>
+        <p>3.2 增加数据 - POST</p>
+        <p>3.3 修改数据 - PUT</p>
+        <p>3.4 根据id删除某个数据 - DELETE</p>
+        <pre class="code">http://127.0.0.1:3000/cont/1001</pre>
+        <div>axios 数据请求</div>
+        <p>4.1 安装 - 在你的项目中安装依赖</p>
+        <pre class="code">npm i axios --save</pre>
+        <p>4.2 引入 - 在某个组件的逻辑中引入；建议指定默认参数，如baseURL、params、method、header、timeout；baseURL应和数据服务器的地址保持一致</p>
+        <pre class="code">
+import axios from 'axios'
+axios.defaults.baseURL = 'http://localhost:3000'</pre>
+        <p>4.3 在组件的逻辑中请求数据，并应用到组件的结构中；具体操作，请参考 <a href="./axios.html" class="link">axios</a></p>
+        <pre class="code">
+//GET
+axios.get('/cont')
+  .then(res => {
+    console.log(res);
+})
+
+//POST
+axios.post('/cont', {
+  name: 'gg',
+  rank: 10
+})
+.then(res => {
+  console.log(res);
+})
+
+//DELETE
+axios.delete('/cont/1001')
+.then(res => {
+  console.log(res);
+})
+
+//PATCH
+axios.patch('/cont/1002', {
+  age: 999
+})
+  .then(res => {
+    console.log(res);
+})</pre>
+        <div>node.js 服务器</div>
+        <p>5.1 服务器初始化</p>
+        <p>创建空白文件夹server作为服务器目录；使用vs code打开，CTRL + `打开控制台，输入以下命令初始化服务器，生成配置文件package.json；-y表示采用默认配置</p>
         <pre class="code">npm init -y</pre>
         <p>package.json如下；入口文件是index.js</p>
         <pre class="code">
@@ -60,72 +165,9 @@
   "author": "",
   "license": "ISC"
 }        </pre>
-        <div>准备数据</div>
-        <p>通常创建一个www文件夹作为各种资源的主目录</p>
-        <p>. json数据：创建json数据文件students.json；这里以暴露2个接口为例；一个是info；一个是cont；这里包括了图片的src，可以给出完整路径，也可以仅仅给出文件名；数据加载后再2次处理</p>
-        <pre class="code">
-{
-  "info":{},
-  "cont":[
-    {
-      "id":1001,
-      "name":"gl",
-      "age":18,
-      "src":"1.jpg"
-    },
-    {
-      "id":1002,
-      "name":"cq",
-      "age":20,
-      "src":"2.jpg"
-    }
-  ]
-}</pre>
-        <p>. 图片数据：创建空白文件夹imgs，将对应的图片拷贝进去；可以作为node.js的在线资源使用</p>
-        <p>. 其它资源，如视频、音频等</p>
-        <div>json-server 服务器</div>
-        <p>仅仅满足对json数据的使用；其它资源需要强大的node.js完成</p>
-        <p>json-server通常全局安装；为了集中管理数据，采用项目安装，和node.js服务器放在一起</p>
-        <pre class="code">npm install json-server --save</pre>
-        <p>完毕后，在配置文件package.json中多了一项 dependencies生产依赖</p>
-        <pre class="code">
-"dependencies": {
-  "json-server": "^1.0.0-alpha.23"
-}</pre>
-        <p>监听数据文件 students.json；</p>
-        <pre class="code">json-server students.json</pre>
-        <p>暴露出本地2个接口；默认端口3000；按住CTRL单击对应的地址，可以在浏览器中访问其中的内容；或直接在浏览器输入对应的地址；这个地址就是提供给其它项目使用的API接口地址</p>
-        <pre class="code">
-Watching .\students.json...
-
-♡( ◡‿◡ )
-
-Index:
-http://localhost:3000/
-
-Static files:
-Serving ./public directory if it exists
-
-Endpoints:
-http://localhost:3000/info
-http://localhost:3000/cont</pre>
-        <p>指定端口，和Vue项目端口保持一致，避免浏览器跨域</p>
-        <pre class="code">json-server students.json --port=5173</pre>
-        <div>postman的基本使用</div>
-        <p>模拟数据的请求</p>
-        <p>安装浏览器插件FeHelper前端助手或下载更加专业的postman（最近官网一直打不开）</p>
-        <p>使用postman的验证数据接口的基本使用</p>
-        <img src="./imgs/server0.png" alt="">
-        <p>获取接口所有数据 - GET</p>
-        <pre class="code">http://127.0.0.1:3000/cont</pre>
-        <p>根据id获取接口某个数据 - GET</p>
-        <pre class="code">http://127.0.0.1:3000/cont/1001</pre>
-        <p>根据id删除某个数据 - DELETE</p>
-        <pre class="code">http://127.0.0.1:3000/cont/1001</pre>
-        <div>node.js 服务器</div>
-        <p>借助express.js快速搭建 - 安装express；安装完毕后，可以在配置文件的依赖中，看到对应的信息</p>
+        <p>5.2 安装express - 借助express.js快速搭建服务器；安装完毕后，可以在配置文件的依赖中，看到对应的信息</p>
         <pre class="code">npm i express --save</pre>
-        <p>创建服务器脚本index.js - 引入express；创建服务器；指定静态文件位置；指定端口并监听</p>
+        <p>5.3 创建服务器脚本index.js - 引入express；创建服务器；指定静态文件位置；指定端口并监听</p>
         <pre class="code">
 const express = require('express');
 const app = express();
@@ -134,7 +176,7 @@ app.use(express.static('./www'));
 app.listen(port, res => {
   console.log('服务器启动成功，访问地址：http://127.0.0.1:3000/资源名');
 });  </pre>
-        <p>开启服务 - 默认命令</p>
+        <p>5.4 开启服务 - 默认命令</p>
         <pre class="code">node index.js</pre>
         <p>用户使用浏览器访问http://127.0.0.1:3000/资源名获取资源</p>
         <p>其它资源的获取和路由在后续环节逐步完成</p>

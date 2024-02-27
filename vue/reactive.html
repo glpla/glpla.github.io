@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>响应式 reactive</title>
+    <title>响应式 Responsive</title>
     <link rel="stylesheet" href="../css/reset2024.css">
     <link rel="stylesheet" href="../css/common2024.css">
     <link rel="stylesheet" href="../css/code.css">
@@ -16,7 +16,7 @@
 <body>
     <header>
         <h1>响应式</h1>
-        <span>Reactive</span>
+        <span>Responsive</span>
     </header>
     <dl>
         <dt>ref</dt>
@@ -24,11 +24,11 @@
         <dd>ref() 将传入参数的值包装为一个带 .value 属性的 ref 对象</dd>
         <dd>ref 的 .value 属性是响应式</dd>
         <dd></dd>
-        <dd>1. 引入包 ref</dd>
+        <dd>1. 引入包 ref - 下述各例略</dd>
         <dd class="code">
             <pre>import { ref } from 'vue'</pre>
         </dd>
-        <dd>2. 执行函数、传入参数、变量接收</dd>
+        <dd>2. 声明响应式变量 - 执行函数、传入参数、变量接收</dd>
         <dd class="code">
             <pre>const count = ref(0)</pre>
         </dd>
@@ -44,20 +44,36 @@ console.log(count.value) //0</pre>
         </dd>
         <dt>reactive</dt>
         <dd>只能创建<span class="warn">复合数据类型</span>的响应式数据，如对象、数组</dd>
-        <dd>需引入包 reactive</dd>
-        <dd>只能修改复合数据类型的数据项，不能重新赋值，否则就失去响应式</dd>
+        <dd>需引入包 reactive - 下述各例略</dd>
         <dd class="code">
-            <pre>
-import { reactive } from 'vue'
-const count = ref(0)
-const num = reactive(10) //value cannot be made reactive: 10
-</pre>
+            <pre>import { reactive } from 'vue'</pre>
         </dd>
-        <dd>但是其他响应式数据触发时，该值仍然会响应</dd>
+        <dd>不能声明简单数据类型</dd>
+        <dd class="code">
+            <pre>const count = reactive(10) //value cannot be made reactive: 10</pre>
+        </dd>
+        <dd>不能重新赋值，否则就失去响应式</dd>
         <dd class="code">
             <pre>
-&lt;button type="button" @click="count++"> count is {{ count }} &lt;/button&gt;
-&lt;button type="button" @click="num++"> num is {{ num }} &lt;/button&gt;</pre>
+const obj = reactive({
+    id: 10,
+    name: 'gz'
+})
+
+//在某个事件函数中重新赋值，则objRe就会丢失响应式，结构中使用的变量不再响应数据变化
+const doRea = () => {
+    objRe = {
+      id: 20,
+      name: 'gz'
+    }
+}</pre>
+        </dd>
+        <dd>只能单个属性赋值；且不用指定value属性</dd>
+        <dd class="code">
+            <pre>
+const doRea = () => {
+    objRe.id = 20
+}</pre>
         </dd>
         <dd class="tips">
             <div>经过函数ref、reactive处理后，普通的数据或对象就变成了响应式</div>
