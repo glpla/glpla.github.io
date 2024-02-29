@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Express框架</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>Express框架</h1>
+    <span>&commat;Express</span>
+  </header>
+  <dl>
+    <dt>req</dt>
+    <dd>请求</dd>
+    <dd class="number">
+      <div>路由参数 - url/:id</div>
+      <pre class="code">
+server.get('/:id', (req, res) => {
+  res.send(req.params.id)
+})      </pre>
+    </dd>
+    <dt>res</dt>
+    <dd>响应</dd>
+    <dd class="number">
+      <div>write - 写回流时，需要显式指定结束 end</div>
+      <pre class="code">
+res.write(data)
+res.end()</pre>
+      <div>Send - 发送普通字符</div>
+      <pre class="code">res.send('hi,there.') </pre>
+      <pre class="code">res.send('&lt;h1&gt;hi,there.&lt;/h1&gt;') </pre>
+      <pre class="code">res.send({ id: 10, name: 'gl' }) </pre>
+      <div>SendFile() - 需要指定参考路径</div>
+      <pre class="code">res.sendFile('./www/index.html', { root: __dirname })</pre>
+      <div>res.json() - 返回json数据</div>
+      <pre class="code">res.json({ id: 10, name: 'gl' })</pre>
+      <div>其它</div>
+      <pre class="code">res.status(200).json({ msg: 'cnplaman', success: true })</pre>
+    </dd>
+    <dt>404</dt>
+    <dd>以中间件use()的形式实现</dd>
+    <dd>所有路由都匹配失败，则匹配404；所以404中间件应该放在所有路由的 <span class="warn">后面</span></dd>
+    <dd class="code">
+      <pre>
+//其它路由
+
+server.use((req, res) => {
+  res.status(404).sendFile('./www//lost.html', { root: __dirname })
+})</pre>
+    </dd>
+    <dd class="tips">中间件在req和res之间执行；拿到res后就没有必要了</dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文件系统 FileSystem</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>文件系统</h1>
+    <span>&commat;FileSystem </span>
+  </header>
+  <dl>
+    <dd>文件的读写操作</dd>
+    <dd>需要引入文件系统fs；通常全部引入，也可以解构引入某个具体业务，如仅仅需要读文件操作</dd>
+    <dd class="code">
+      <pre>const fs = require('fs')</pre>
+    </dd>
+    <dd class="code">
+      <pre>const { readFile } = require('fs')</pre>
+    </dd>
+    <dd>相关的API分为三类；我们主要采用回调风格的异步API；部分需要立刻拿到结果的场景，使用同步API</dd>
+    <dd class="number">
+      <div>Promises API：Promises风格的API</div>
+      <div>callback API：异步API</div>
+      <div>Synchronous API：同步API</div>
+    </dd>
+    <dt>常用函数</dt>
+    <dd class="number">
+      <div>读：fs.readFile(path[, options], callback)</div>
+      <div>写：fs.writeFile(file, data[, options], callback)</div>
+      <p>. 第2个参数是要写入的数据</p>
+      <p>. 选项options中，默认编码encoding是'utf8'，写入标记flag是覆盖w</p>
+      <div>文件/路径是否存在：fs.existsSync(path)</div>
+      <div>创建文件夹：fs.mkdir(path[, options], callback)</div>
+      <div>删除文件夹：fs.rmdir(path[, options], callback)</div>
+      <div>删除文件：fs.unlink(path, callback)</div>
+    </dd>
+    <dt>普通文件 txt</dt>
+    <dd>1. 读 - 如果正常，读出文件内容；否则抛出错误信息</dd>
+    <dd>使用toString()可以将二进制代码转化为可读信息</dd>
+    <dd>使用选项指定编码为utf-8可以直接解析为可读信息</dd>
+    <dd class="code">
+      <pre>
+const fs = require('fs')
+fs.readFile('./data/demo.txt', (err, date) => {
+  if (err) throw err;
+  console.log(date);
+  console.log(date.toString());
+})</pre>
+    </dd>
+    <dd>路径异常时抛出错误信息</dd>
+    <dd class="code">
+      <pre>
+read file [Error: ENOENT: no such file or directory, open 'C:\Users\cnplaman\Desktop\server\data1\demo.txt'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\cnplaman\\Desktop\\server\\data1\\demo.txt'
+}</pre>
+    </dd>
+    <dd>2. 写 - 以追加 a 的方式，在文件最后写文件；写入的数据中包含一个换行符\n；如果文件不存在，就创建</dd>
+    <dd class="code">
+      <pre>
+const fs = require('fs')
+fs.writeFile('./data/demo.txt', '\n888', { flag: 'a' }, (err) => {
+if (err) throw err
+  console.log('write ok');
+})</pre>
+    </dd>
+    <dt>JSON文件</dt>
+    <dd>读的操作比较多，且需要解析为json格式</dd>
+    <dd>以同步方式读取json文件，可以马上拿到结果，再根据后续的业务进行操作，如分页返回</dd>
+    <dd class="code">
+      <pre>
+const fs = require('fs');
+let data = fs.readFileSync('./data/rank2024.json')
+console.log(data);
+let json = JSON.parse(data)
+console.log(json);</pre>
+    </dd>
+    <dd>如果有数据请求，可以定制路由返回解析的数据</dd>
+    <dd class="code">
+      <pre>
+server.get('/data', (req, res) => {
+  res.send(data)
+})</pre>
+    </dd>
+    <dt>文件夹</dt>
+    <dd>创建文件夹 - 如果存在，抛出异常，否则创建</dd>
+    <dd class="code">
+      <pre>
+const fs = require('fs')
+if (fs.existsSync('./wwww')) throw err
+fs.mkdirSync('./www')      </pre>
+    </dd>
+    <dt>文件删除</dt>
+    <dd>删除前，先判断文件是否存在</dd>
+    <dd>删除成功，callback返回null；可以根据这个进行业务再判断</dd>
+    <dd class="code">
+      <pre>
+const fs = require('fs')
+if (fs.existsSync('./wwww/demo.txt')) throw err
+fs.unlink('./www/demo.txt', (err) => {
+  console.log(err);
+})      </pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

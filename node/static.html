@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>静态资源服务器</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>静态资源服务器</h1>
+    <span>&commat;StaticServer</span>
+  </header>
+  <dl>
+    <dd>创建静态资源服务器，供应用程序使用，如在线图片</dd>
+    <dd>没有使用原生http模块，而是依托express框架创建；更多信息，请访问 <a href="https://www.expressjs.com.cn/" class="link">Express.js</a></dd>
+    <dt>基本步骤</dt>
+    <dd class="number">
+      <div>创建服务器目录</div>
+      <div>准备数据</div>
+      <div>创建服务器脚本</div>
+      <div>开启服务</div>
+    </dd>
+    <dt>具体过程</dt>
+    <dd class="number">
+      <div>创建一个空白文件夹作为服务器目录，如server</div>
+      <div>在服务器目录创建资源文件夹，如www，存放数据data、图片imgs、视频video等资源；建议不同类型的资源存放在不同的子目录</div>
+      <div>在服务器目录打开CMD命令行窗口</div>
+      <p>初始化，用来创建package.json文件</p>
+      <pre class="code">npm init</pre>
+      <p>也可以使用-y命令行参数，按照默认配置创建package.json，如入口文件默认是index.js - 推荐</p>
+      <pre class="code">npm init -y</pre>
+      <div>安装express框架</div>
+      <pre class="code">npm i express --save</pre>
+      <div>创建服务器脚本index.js</div>
+      <pre class="code">
+//引入express
+const express = require('express');
+//创建服务器实例
+const app = express();
+//指定服务器端口
+const port = 3000
+//指定静态文件位置
+app.use(express.static('./www'));
+//监听
+app.listen(port, res => {
+  console.log('服务器启动成功，访问地址：http://127.0.0.1:3000/资源名');
+});  </pre>
+      <div>开启服务</div>
+      <p>默认命令</p>
+      <pre class="code">node index.js</pre>
+      <p>自定义命令启动服务 - 修改package.json里script</p>
+      <pre>
+"scripts": {
+  "start":"node index.js"
+}</pre>
+      <pre class="code">node start</pre>
+      <div>使用资源</div>
+      <p>用户使用浏览器访问 http://127.0.0.1:3000/资源路径和名字获取资源</p>
+      <p>用户在项目中使用，如HTML的图片</p>
+      <pre class="code">&lt;img src="http://127.0.0.1:3000/资源路径和名字" alt=""&gt;</pre>
+    </dd>
+    <dd class="tips">日常开发使用Vs Code完成</dd>
+    <dt>进阶</dt>
+    <dd>访问服务器根目录，渲染服务器主页，给出操作提示</dd>
+    <dd>思路：创建html页面，指定路由；读取并返回主页；需要fs的支持</dd>
+    <dd>修改服务器文件，增加核心代码如下</dd>
+    <dd class="code">
+      <pre>
+server.get('/', (req, res) => {
+  fs.readFile('www/index.html', (err, data) => {
+    if (err) throw err
+    res.write(data)
+    res.end()
+  })
+})</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>
