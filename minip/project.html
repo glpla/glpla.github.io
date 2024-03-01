@@ -42,9 +42,9 @@
         <dt>界面介绍</dt>
         <dd>1.菜单栏</dd>
         <dd>2.工具栏</dd>
-        <dd>.模拟器 - 小程序效果预览</dd>
+        <dd>.模拟器 - 小程序效果预览；高版本可以分离出去，通过置顶，改善开发体验</dd>
         <dd>.编辑器 - 开发区域</dd>
-        <dd>.调试器 - Wxml、Console、Network、AppData、Storage</dd>
+        <dd>.调试器 - Wxml、Console、Network、AppData、Storage；调试项目的利器，多多利用</dd>
         <dd>
             <figure class="img-sn">
                 <img src="./imgs/pro2.png" alt="">
@@ -59,9 +59,6 @@
         <dd>.上传 - 版本发布到微信公众平台供审核并等待发布</dd>
         <dd>.版本管理 - Git/GitHub</dd>
         <dd>.详情 - 小程序的各种信息；操作比较多的是：选择 → 不校验服务器</dd>
-        <dd class="tips">
-            <div>高版本有个窗口分离，可以把模拟器分离出去，通过置顶，改善开发体验</div>
-        </dd>
         <dt>项目结构</dt>
         <dd>主要包括：项目级别app和页面级别pages的应用</dd>
         <dd>
@@ -238,8 +235,12 @@ App({
                 <details class="inner">
                     <summary>app.wxss - 初始化样式；全局样式</summary>
                     <pre class="code">
+@import '/utils/css/reset.wxss';
+@import '../../utils/transfonter.org-20240229-142749/stylesheet.wxss';
+
 page{
     --themeColor:#eb4450;
+    --tips-color:rgb(13, 206, 7);
     font-size: 28rpx;
 }
 
