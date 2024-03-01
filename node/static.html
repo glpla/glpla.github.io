@@ -64,13 +64,15 @@ app.listen(port, res => {
       <pre class="code">node start</pre>
       <div>使用资源</div>
       <p>用户使用浏览器访问 http://127.0.0.1:3000/资源路径和名字获取资源</p>
-      <p>用户在项目中使用，如HTML的图片</p>
+      <p>用户在H5项目中使用，如&lt;img&gt;元素</p>
       <pre class="code">&lt;img src="http://127.0.0.1:3000/资源路径和名字" alt=""&gt;</pre>
+      <p>用户在微信小程序项目中使用，如&lt;image&gt;组件</p>
+      <pre class="code">&lt;image src="http://127.0.0.1:3000/资源路径和名字" alt=""&gt;</pre>
     </dd>
     <dd class="tips">日常开发使用Vs Code完成</dd>
     <dt>进阶</dt>
     <dd>访问服务器根目录，渲染服务器主页，给出操作提示</dd>
-    <dd>思路：创建html页面，指定路由；读取并返回主页；需要fs的支持</dd>
+    <dd>思路：创建html页面，指定路由；读取并返回主页；需要fs的支持；或直接使用res的sendFile()</dd>
     <dd>修改服务器文件，增加核心代码如下</dd>
     <dd class="code">
       <pre>

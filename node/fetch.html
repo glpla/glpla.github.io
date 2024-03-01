@@ -135,7 +135,7 @@ fetch('./imgs/avatar0.jpg')
     <dd>.除了url还需要指定配置选项：</dd>
     <dd>method：请求方法，POST</dd>
     <dd>headers：指定数据格式：content-type，如application/json | application/x-www-form-urlencoded</dd>
-    <dd>body：请求数据</dd>
+    <dd>body：请求数据；一般使用json格式</dd>
     <dd class="code">
       <pre>
 async function addData() {
@@ -169,32 +169,6 @@ async function addData() {
     <dd>/addbook</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script>
-    // data adding
-    let add = document.querySelector('.add-box')
-    add.addEventListener('submit', function (e) {
-      e.preventDefault()
-      var formData = new FormData(this);
-      console.log(formData.get('uName'), formData.get('uUnit'), formData.get('gender'));
-      fetch('http://localhost:3000/clerk', {
-        method: 'post',
-        body: `name=${formData.get('uName')}&unit=${formData.get('uUnit')}&gender=${formData.get('gender')}`,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-        .then(res => {
-          console.log(res);
-          if (res.status === 201) {
-            alert('add ok')
-            window.location.href = 'fetch.html'
-          } else {
-            console.log('add fail');
-            alert('add fail')
-          }
-        })
-    })
-  </script>
 </body>
 
 </html>

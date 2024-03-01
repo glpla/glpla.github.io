@@ -31,12 +31,13 @@
       <div>PUT|覆盖 和 PATCH|更新 - 修改数据</div>
       <div>DELETE - 删除数据</div>
     </dd>
+    <dd class="tips">
+      <div>严格按照文档接口使用</div>
+    </dd>
     <dt>创建服务器</dt>
+    <dd>通常全局安装json-server依赖；可以在任何位置监听json数据请求 - <span class="warn">指哪打哪</span></dd>
     <dd class="number">
-      <div>创建空白项目文件夹作为服务器，如server</div>
-      <div>项目初始化 - 完成后创建package.json包管理配置文件；参数-y表述默认创建</div>
-      <pre class="code">npm init -y</pre>
-      <div>安装json-server依赖 - 通常独立全局-g安装，可以监听对于任何位置的json数据的请求 - <span class="warn">指哪打哪</span></div>
+      <div>任意位置打开CMD命令行窗口</div>
       <pre class="code">npm install json-server -g</pre>
       <div>创建数据文件 - students.json；包括用户id，姓名和星数；初始应为空，通过添加和修改逐步增加</div>
       <pre class="code">
@@ -56,11 +57,75 @@
     }
   ]
 }</pre>
-      <div>在CMD控制台启动服务 -监听数据文件 students.json；系统自动检测并给出接口的地址；注意当前打开的CMD位置和监听数据文件的路径关系</div>
+      <div>在CMD控制台启动服务 -监听数据文件 students.json；系统自动检测并给出接口的地址</div>
+      <p>注意当前打开的CMD位置和监听数据文件的路径关系</p>
       <p>默认端口3000</p>
       <pre class="code">json-server students.json</pre>
       <p>指定端口 - 和项目端口保持一致，避免浏览器跨域</p>
       <pre class="code">json-server students.json --port=5173</pre>
+    </dd>
+    <dt>数据请求 - fetch</dt>
+    <dd class="number">
+      <div>GET</div>
+      <pre class="code">
+fetch(url + '/cont')
+  .then(res => res.json())
+  .then(res=>{
+    console.log(res)
+  })
+  .catch(err => {
+    console.log(err);
+  })</pre>
+      <div>POST</div>
+      <p>指定body和headers</p>
+      <pre class="code">
+fetch(url + '/cont', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    sn: usn.value,
+    name: uname.value,
+    stars: 1
+  })
+})
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => {
+    console.log(err);
+  })</pre>
+      <div>PATCH</div>
+      <p>根据id更新数据</p>
+      <pre class="code">
+fetch(url + `/cont/${e.target.dataset.id}`, {
+  method: 'PATCH',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    stars: num
+  })
+})
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => {
+    console.log(err);
+  })      </pre>
+      <div>DELETE</div>
+      <p>根据id删除数据</p>
+      <pre class="code">
+fetch(url + `/cont/${id}`, {
+  method: 'delete',
+})
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => {
+    console.log(err);
+  })      </pre>
     </dd>
     <dt>数据请求 - Vue/axios</dt>
     <dd class="number">
