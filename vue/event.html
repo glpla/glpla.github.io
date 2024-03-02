@@ -23,10 +23,8 @@
         <dd>监听 DOM 事件；可以简写为 <span class="warn">@</span></dd>
         <dd class="code">
             <pre>
-&lt;div v-on:click="doSomething"&gt; ... &lt;/div&gt;</pre>
-        </dd>
-        <dd class="code">
-            <pre>&lt;div @click="doSomething"&gt; ... &lt;/div&gt;</pre>
+&lt;div v-on:click="doSomething"&gt; ... &lt;/div&gt;
+&lt;div @click="doSomething"&gt; ... &lt;/div&gt;</pre>
         </dd>
         <dt>事件类型</dt>
         <dd>包括：鼠标事件、键盘事件</dd>
@@ -47,15 +45,11 @@
                 </tr>
                 <tr>
                     <td>keyup</td>
-                    <td>某键松开</td>
+                    <td>按下某键并松开</td>
                 </tr>
                 <tr>
                     <td>keydown</td>
                     <td>某键按下</td>
-                </tr>
-                <tr>
-                    <td>keyenter</td>
-                    <td>回车按下</td>
                 </tr>
                 <tr>
                     <td>mouseup</td>
@@ -76,7 +70,7 @@
             </table>
         </dd>
         <dt>事件修饰符</dt>
-        <dd>限制事件特性</dd>
+        <dd>1. 点击事件修饰符 - 限制事件特性</dd>
         <dd>
             <table class="tbl-sn">
                 <caption>常见事件修饰符</caption>
@@ -94,7 +88,7 @@
                 </tr>
                 <tr>
                     <td>.prevent</td>
-                    <td>阻止默认事件</td>
+                    <td>阻止默认事件<br>&lt;form&gt;表单的默认提交；&lt;a&gt;的默认跳转和刷新</td>
                 </tr>
                 <tr>
                     <td>.native</td>
@@ -102,6 +96,7 @@
                 </tr>
             </table>
         </dd>
+        <dd>2. 按键事件修饰符 - 指定哪个键触发的事件</dd>
         <dd>
             <table class="tbl-sn">
                 <caption>按键事件修饰符</caption>
@@ -110,20 +105,20 @@
                     <th>说明</th>
                 </tr>
                 <tr>
-                    <td>.enter</td>
+                    <td>keyup.enter</td>
                     <td>配合enter键</td>
                 </tr>
                 <tr>
-                    <td>.alt</td>
-                    <td>配合alt键</td>
+                    <td>keyup.alt.enter</td>
+                    <td>配合alt键回车</td>
                 </tr>
                 <tr>
-                    <td>.alt.enter</td>
-                    <td>配合alt键enter键</td>
+                    <td>.ctrl.enter</td>
+                    <td>配合ctrl键回车</td>
                 </tr>
                 <tr>
-                    <td>...</td>
-                    <td>...</td>
+                    <td>keydown.tab</td>
+                    <td>按下tab未释放</td>
                 </tr>
             </table>
         </dd>
@@ -182,11 +177,38 @@ function doClickData(para,e) {
     console.logpara(para, e.target.dataset);
 }</pre>
         </dd>
+        <dd class="example-sn">手动轮播</dd>
+        <dd>单击时，切换图片</dd>
+        <dd>额外增加一个元素，显示当前图片</dd>
+        <dd>图片采用静态资源处理；放在assets目录下的imgs中</dd>
+        <dd class="code">
+            <pre>
+import { ref } from 'vue';
+let ind = ref(0)
+const chg = () => {
+  ind.value++
+  ind.value = ind.value % 5
+}
+const getPic = (ind) => {
+  return new URL(`./assets/imgs/${ind}.jpg`, import.meta.url).href
+}</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+&lt;div&gt;{{ ind }}&lt;/div&gt;
+&lt;img :src='getPic(ind)' alt=""&gt;
+&lt;button @click="chg"&gt;change pic&lt;/button&gt;</pre>
+        </dd>
         <dd class="example-sn">标签页切换</dd>
         <dd>使用&lt;nav&gt;和&lt;a&gt;实现</dd>
         <dd>单击标签，对应的标签高亮显示</dd>
         <dd>阻止&lt;a&gt;的默认事件</dd>
         <dd>分别使用事件代理、不使用事件代理实现，并体会2者的区别</dd>
+        <dd class="example-sn">购物车</dd>
+        <dd>商品数量的增加inc与减少dec</dd>
+        <dd>商品的删除del</dd>
+        <dd>商品的全选selAll</dd>
+        <dd>商品的结算totalPrice</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

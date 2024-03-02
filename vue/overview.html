@@ -92,80 +92,53 @@
         </dd>
         <dt>{{}}</dt>
         <dd>内容绑定 - 文本插值表达式</dd>
-        <dd>使用双大括号 <span class="warn">{{}}</span>，会将数据解释为纯文本，解决 <span class="warn">数据和元素内容</span> 的关联</dd>
+        <dd>使用双大括号 <span class="warn">{{}}</span>，会将数据解释为 <span class="warn">纯文本</span> ，解决 <span
+                class="warn">数据和元素内容</span> 的关联</dd>
         <dd>支持简单的数据处理；建议使用计算属性完成</dd>
-        <dd>1. 简单数据绑定</dd>
-        <dd class="code">
-            <pre>let msg = 'hi,there'</pre>
-        </dd>
+        <dd>简单数据类型绑定和复杂数据类型绑定</dd>
         <dd class="code">
             <pre>
-&lt;div&gt;{{ msg }}&lt;/div&gt;
-&lt;div&gt;{{ msg.substring(3) }}&lt;/div&gt;</pre>
-        </dd>
-        <dd>2. 对象数据类型</dd>
-        <dd class="code">
-            <pre>
+let msg = 'hi,there'
+let age = 18
 let obj = {
     id: 100,
     name: 'gl'
-}            </pre>
+}
+let url = 'http://www.baidu.com'</pre>
         </dd>
         <dd class="code">
             <pre>
-&lt;div&gt;
-    &lt;div&gt;id:{{ obj.id }}&lt;/div&gt;
-    &lt;div&gt;name:{{ obj.name }}&lt;/div&gt;
-&lt;/div&gt;</pre>
+&lt;div&gt;msg: {{ msg }}&lt;/div&gt;
+&lt;div&gt;handle with msg: {{ msg.substring(3) }}&lt;/div&gt;
+&lt;div&gt;age: {{ age }}&lt;/div&gt;
+&lt;div&gt;handle with age: {{ age + 2 }}&lt;/div&gt;
+&lt;div&gt;id: {{ obj.id }} - name: {{ obj.name }}&lt;/div&gt;</pre>
         </dd>
-        <dd>特别的，使用 <span class="warn">v-html</span> 指令可以渲染HTML元素；但是不建议：在网站上动态渲染任意HTML非常危险</dd>
+        <dd>v-text：渲染普通文本</dd>
+        <dd>v-html：渲染HTML元素；但是不建议：在网站上动态渲染任意HTML非常危险</dd>
         <dd class="code">
-            <pre>let html = '&lt;p&gt;warning&lt;/p&gt;'</pre>
+            <pre>
+let txt = 'hi, there.'
+let html = '&lt;p&gt;warning&lt;/p&gt;'</pre>
         </dd>
         <dd class="code">
-            <pre>&lt;div v-html='html'&gt;&lt;/div&gt;</pre>
+            <pre>
+&lt;div v-text='txt'&gt;&lt;/div&gt;
+&lt;div v-html='html'&gt;&lt;/div&gt;</pre>
         </dd>
         <dt>v-bind</dt>
         <dd>属性绑定</dd>
         <dd>使用 <span class="warn">v-bind</span> 指令绑定HTML的属性Attribute，解决 <span class="warn">数据和元素属性</span> 的关联</dd>
         <dd>可以简写为冒号 <span class="warn">:</span></dd>
+        <dd>常见的元素属性有：href、id、title、src、class、style以及布尔属性如hidden、disabled、autoplay、loop、controls、checked、selected等</dd>
+        <dd>类和样式的使用请参考 <a href="./class_style.html" class="link">类和样式</a></dd>
         <dd class="number">
-            <div>类class绑定</div>
-            <p>用哪个类？ - tips为bold，使用bold类；tips为underline，使用underline类；<span class="warn">还</span>可以使用数组指定多个类</p>
-            <pre class="code">&lt;div :class="tips"&gt;hi,there&lt;/div&gt;</pre>
-            <pre class="code">let tips = 'bold'</pre>
+            <div>一般属性</div>
             <pre class="code">
-.bold {
-    font-weight: 600;
-}
-.underline{
-    text-decoration: underline;
-}</pre>
-            <p>用不用这个类？ - isActive为真，使用bold类；为假，不使用；<span class="warn">还</span>可以指定一个对象，对象中对多个类的使用进行约束</p>
-            <pre class="code">&lt;div :class="{ 'bold': isActive }"&gt;hi,there&lt;/div&gt;</pre>
-            <pre class="code">let isActive = false</pre>
-            <p>三元表达式 - isActive为真，使用bold类；否则使用underline类</p>
-            <pre class="code">&lt;div :class="isActive ? 'bold' : 'underline'"&gt;hi,there&lt;/div&gt;</pre>
-            <p class="question">类名需要使用引号包裹，否则会被当作变量；注意单引号和双引号的匹配</p>
-            <div>内联样式style绑定</div>
-            <p>可以使用小驼峰camelCase，也支持短划线 kebab-cased；推荐使用小驼峰camelCase，因为静态使用和动态绑定写法一致</p>
-            <p>静态使用样式 - 简单属性和复合属性</p>
-            <pre class="code">
-&lt;div style="color: #f40;"&gt;hi,there&lt;/div&gt;
-&lt;div style="fontSize: 20px"&gt;hi,there&lt;/div&gt;
-&lt;div style="background-color: #f40;"&gt;hi,there&lt;/div&gt;</pre>
-            <p>绑定属性值 - 属性使用什么值，采用 <span class="warn">值对key-value</span> 的形式；值key只能是小驼峰camelCase</p>
-            <pre class="code">
-&lt;div :style="{ color: txtColor }"&gt;hi,there&lt;/div&gt;
-&lt;div :style="{ fontSize: small + 'px' }"&gt;hi,there&lt;/div&gt;
-&lt;div :style="{ backgroundColor: bgColor }"&gt;hi,there&lt;/div&gt;</pre>
-            <pre class="code">
-let txtColor = '#f40'
-let small = 20
-let bgColor = '#089'</pre>
-            <div>布尔类型属性绑定</div>
-            <p>静态使用时，指定的任何数据包括空串，都会渲染为真；可用简单的指定属性，不做任何赋值，实现假的操作；类似的属性还有多媒体标签的loop、autoplay、controls；表单的checked、selected等
-            </p>
+&lt;a :href="url" target="_blank"&gt;link&lt;/a&gt;
+&lt;div :id='uid'&gt;my id&lt;/div&gt;</pre>
+            <div>布尔属性</div>
+            <p>静态使用时，指定的任何数据包括空串，都会渲染为真；可用简单的指定属性，不做任何赋值，实现假的操作</p>
             <pre class="code">
 &lt;button disabled="true"&gt;submit&lt;/button&gt;
 &lt;button disabled="false"&gt;submit&lt;/button&gt;
@@ -178,39 +151,8 @@ let bgColor = '#089'</pre>
 &lt;button :disabled="false"&gt;submit&lt;/button&gt;</pre>
             <p>绑定布尔变量或结果为布尔值的表达式</p>
             <pre class="code">
-let isEnable = false
-let age = 18</pre>
-            <pre class="code">
 &lt;button :disabled="isEnable"&gt;submit&lt;/button&gt;
 &lt;button :disabled="age > 20"&gt;submit&lt;/button&gt;</pre>
-            <div>图片的使用</div>
-            <p>静态使用 - 可以使用本地图片或在线图片</p>
-            <pre class="code">&lt;img src="../imgs/10.jpg" alt=""&gt;</pre>
-            <p>不可以直接绑定图片url地址，vue会将其解析为一个字符串，而非地址</p>
-            <pre class="code">&lt;img :src="src" alt=""&gt;</pre>
-            <pre class="code">let src = '../imgs/10.jpg'</pre>
-            <p>解决方案1：将图片放到项目的public目录并直接引用；可以创建相应的文件夹imgs存放图片；vue-cli3默认路径为public，所以无需添加public；public即代表/</p>
-            <pre class="code">&lt;img :src="src" alt=""&gt;</pre>
-            <pre class="code">let src = '/imgs/10.jpg'</pre>
-            <p>解决方案2：采用vite的<a href="https://cn.vitejs.dev/guide/assets.html" class="link">静态资源处理</a>：import.meta.url
-                是一个ESM的原生功能，会暴露当前模块的 URL。将它与原生的 URL 构造器 组合使用，在一个 JavaScript 模块中，通过 <span
-                    class="warn">相对路径</span>我们就能得到一个被完整解析的静态资源 URL</p>
-            <p>将图片作为资源引入再使用 - 适合单个静态资源</p>
-            <pre class="code">&lt;img :src="src" alt=""&gt;</pre>
-            <pre class="code">import src from '../imgs/10.jpg'</pre>
-            <p>为静态资源创建新的URL - 尤其适合处理多个静态资源，如 <a href="./vfor.html" class="link">列表渲染</a></p>
-            <pre class="code">&lt;img :src="getImageUrl(src)" alt=""&gt;</pre>
-            <pre class="code">
-let src = '../imgs/10.jpg'
-const getImageUrl = (img) => {
-    return new URL(img, import.meta.url).href
-}</pre>
-            <p>拼接路径</p>
-            <pre class="code">
-let src = '../imgs/10.jpg'
-const getImageUrl = (img) => {
-    return new URL(`../imgs/${img}`, import.meta.url).href
-}</pre>
             <div>CSS函数属性绑定</div>
             <p>background-image等使用了url()、linear-gradient()等等CSS函数的属性</p>
             <p>静态使用时，仅可以引用public中的资源</p>
@@ -218,11 +160,44 @@ const getImageUrl = (img) => {
             <p>动态绑定时，需要导入为资源，还可以使用计算机属性 - 同图片的使用</p>
             <pre class="code">import src from '../imgs/10.jpg'</pre>
             <pre class="code">&lt;div :style="{ backgroundImage: 'url(' + src + ')' }"&gt;hi,there&lt;/div&gt;</pre>
-            <div>其它一般属性绑定</div>
-            <pre class="code">let url = ref('http://www.baidu.com')</pre>
-            <pre class="code">&lt;a :href="url" target="_blank"&gt;link&lt;/a&gt;</pre>
         </dd>
-        <dd class="tips">类的绑定使用较多，不要纠结于内联样式的使用</dd>
+        <dt>图片的使用</dt>
+        <dd>静态使用 - 可以使用本地图片或在线图片</dd>
+        <dd class="example-sn">分别在public、assets和assets同级目录常见imgs文件夹，并放入一张图片，在项目中引用，最后发布，查看框架对静态资源图片的处理情况</dd>
+        <dd class="code">
+            <pre>
+&lt;div&gt;public&lt;/div&gt;
+&lt;img src="/imgs/banner.png" alt=""&gt;
+&lt;div&gt;assets&lt;/div&gt;
+&lt;img src="./assets/imgs/banner.png" alt=""&gt;
+&lt;div&gt;src -&gt; imgs&lt;/div&gt;
+&lt;img src="./imgs/banner.png" alt=""&gt;</pre>
+        </dd>
+        <pre class="code">&lt;img src="../imgs/10.jpg" alt=""&gt;</pre>
+        <dd>不可以直接绑定图片url地址，vue会将其解析为一个字符串，而非地址</dd>
+        <pre class="code">&lt;img :src="src" alt=""&gt;</pre>
+        <dd>解决方案1：将图片放到项目的public目录并直接引用；可以创建相应的文件夹imgs存放图片；vue-cli3默认路径为public，所以无需添加public；public即代表/</dd>
+        <pre class="code">&lt;img :src="src" alt=""&gt;</pre>
+        <pre class="code">let src = '/imgs/10.jpg'</pre>
+        <dd>解决方案2：采用vite的<a href="https://cn.vitejs.dev/guide/assets.html" class="link">静态资源处理</a>：import.meta.url
+            是一个ESM的原生功能，会暴露当前模块的 URL。将它与原生的 URL 构造器 组合使用，在一个 JavaScript 模块中，通过 <span
+                class="warn">相对路径</span>我们就能得到一个被完整解析的静态资源 URL</dd>
+        <dd>将图片作为资源引入再使用 - 适合单个静态资源</dd>
+        <pre class="code">&lt;img :src="src" alt=""&gt;</pre>
+        <pre class="code">import src from '../imgs/10.jpg'</pre>
+        <dd>为静态资源创建新的URL - 尤其适合处理多个静态资源，如 <a href="./vfor.html" class="link">列表渲染</a></dd>
+        <pre class="code">&lt;img :src="getImageUrl(src)" alt=""&gt;</pre>
+        <pre class="code">
+let src = '../imgs/10.jpg'
+const getImageUrl = (img) => {
+    return new URL(img, import.meta.url).href
+}</pre>
+        <dd>拼接路径；案例应用请查看 <a href="./event.html" class="link">事件 - 手动轮播</a></dd>
+        <pre class="code">
+let src = '../imgs/10.jpg'
+const getImageUrl = (img) => {
+    return new URL(`../imgs/${img}`, import.meta.url).href
+}</pre>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

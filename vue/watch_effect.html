@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动侦听器 WatchEffect</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>自动侦听器</h1>
+        <span>WatchEffect</span>
+    </header>
+    <dl>
+        <dt>概述</dt>
+        <dd>watch 仅在数据源确实改变时才会触发回调；执行0-N次</dd>
+        <dd>watchEffect 会立即执行回调函数，也称自动侦听器，等同于使用了立即配置项immediate；执行1-N次</dd>
+        <dd>需引入包 watchEffect</dd>
+        <dd>应用：页面加载时，立即加载当前对应的数据</dd>
+        <dd class="example-sn">使用watchEffect自动侦听多个数据</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>ref对象 - 自动侦听name和age</figcaption>
+                <pre>
+let temp = ref(0)
+let hei = ref(0)
+watchEffect(() => {
+    //侦听1
+    if (temp.value > 10 || hei.value > 20) {
+    console.log('data is meet');
+    }
+    //侦听2
+    //侦听3
+    //侦听...
+})
+function tempCh() {
+    temp.value += 2
+}
+function heiCh() {
+    hei.value += 2
+}</pre>
+            </figure>
+        </dd>
+        <dt>停止侦听</dt>
+        <dd>要手动停止一个侦听器，请调用 watch 或 watchEffect 返回的函数</dd>
+        <dd class="example-sn">停止侦听</dd>
+        <dd class="code">
+            <pre>
+const stopWatch = watch(num, (newv, oldv) => {
+    console.log('num is watched', newv, oldv);
+    if(newv > 5){
+        stopWatch()
+    }
+})</pre>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

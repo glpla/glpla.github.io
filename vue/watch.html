@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>侦听器 Watch vs WatchEffect</title>
+    <title>侦听器 Watch</title>
     <link rel="stylesheet" href="../css/reset2024.css">
     <link rel="stylesheet" href="../css/common2024.css">
     <link rel="stylesheet" href="../css/code.css">
@@ -16,39 +16,34 @@
 <body>
     <header>
         <h1>侦听器</h1>
-        <span>Watch vs WatchEffect</span>
+        <span>Watch</span>
     </header>
     <dl>
-        <dt>概述</dt>
-        <dd>监听响应式数据源；当数据源发送变化时，在回调函数中处理</dd>
-        <dd>Watch</dd>
-        <dd>WatchEffect</dd>
-    </dl>
-    <div class="chap">Watch</div>
-    <dl>
-        <dt>watch</dt>
+        <dd>监听响应式数据源；当数据源发送变化时，在回调函数中处理响应的逻辑</dd>
         <dd>使用 watch 函数在每次响应式状态发生变化时触发回调函数</dd>
         <dd>侦听对象，不能直接侦听响应式对象的属性值</dd>
         <dd>需引入包 watch</dd>
-        <dd>三个参数：数据源source、回调函数cb、配置项options</dd>
-        <dt>数据源 source</dt>
+        <dd>应用：下拉列表变化时，加载不同的数据</dd>
+        <dt>参数</dt>
+        <dd>三个：数据源source、回调函数cb、配置项options</dd>
+        <dd class="bg">1. 数据源 source</dd>
         <dd>侦听数据类型 - 4种</dd>
         <dd>. 一个 ref 对象 (包括计算属性)</dd>
         <dd>. 一个 reactive 对象</dd>
         <dd>. 一个 getter 函数：一个有返回的函数</dd>
         <dd>. 多个响应式数据源组成的数组</dd>
-        <dt>回调函数 cb</dt>
+        <dd class="bg">2. 回调函数 cb</dd>
         <dd>侦听时，回调函数会使用2个参数来区分新值newValue和旧值oldValue</dd>
         <dd>通常我们只关心新值newValue，即：一个参数就够了</dd>
         <dd>若侦听的是ref对象的属性，则新值旧值一样，是同一个对象</dd>
         <dd>若侦听的是ref对象，则新值是新对象，旧值是老对象，不是同一个对象</dd>
-        <dt>配置项 options</dt>
-        <dd>1. 立即侦听 immediate</dd>
+        <dd class="bg">3. 配置项 options</dd>
+        <dd>. 立即侦听 immediate</dd>
         <dd>watch默认是懒执行的：仅当数据源变化时，才会执行回调</dd>
         <dd>有时，需要在源变化之前就开始执行回调，如同定时器的先执行1次一样</dd>
         <dd>这个时新值是当前值，而旧值未定义；同初恋一样，无前任</dd>
         <dd>设置配置项immediate为true</dd>
-        <dd>2. 深度侦听 deep</dd>
+        <dd>. 深度侦听 deep</dd>
         <dd>默认情况下，只侦听响应式对象，不能侦听对象的属性</dd>
         <dd>侦听复合对象内部属性时，需要开启深度侦听：设置deep为true</dd>
         <dd>侦听reactive对象时，默认开启deep，且无法关闭</dd>
@@ -209,55 +204,8 @@ watch(num, (newv, oldv) => {
 }, { deep: true })</pre>
             </figure>
         </dd>
-        <dd>3. 其它</dd>
-    </dl>
-    <div class="chap">WatchEffect</div>
-    <dl>
-        <dd>需引入包 watchEffect</dd>
-        <dd>watch 只追踪明确侦听的数据源。它不会追踪任何在回调中访问到的东西。另外，仅在数据源确实改变时才会触发回调。watch 会避免在发生副作用时追踪依赖，因此，我们能更加精确地控制回调函数的触发时机
-        </dd>
-        <dd>watchEffect，则会在副作用发生期间追踪依赖。它会在同步执行过程中，自动追踪所有能访问到的响应式属性。这更方便，而且代码往往更简洁，但有时其响应性依赖关系会不那么明确</dd>
-        <dd>watchEffect会立即执行回调函数，等同于使用了立即配置项immediate</dd>
-        <dd class="tips">
-            <div>Watch：执行0-N次；数据源变化才侦听</div>
-            <div>WatchEffect：执行1-N次；除了侦听还可以执行其它操作；也有人称自动侦听器</div>
-        </dd>
-        <dd class="example-sn">使用watchEffect自动侦听多个数据</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>ref对象 - 自动侦听name和age</figcaption>
-                <pre>
-let temp = ref(0)
-let hei = ref(0)
-watchEffect(() => {
-    //侦听1
-    if (temp.value > 10 || hei.value > 20) {
-    console.log('data is meet');
-    }
-    //侦听2
-    //侦听3
-    //侦听...
-})
-function tempCh() {
-    temp.value += 2
-}
-function heiCh() {
-    hei.value += 2
-}</pre>
-            </figure>
-        </dd>
-        <dt>停止侦听</dt>
-        <dd>要手动停止一个侦听器，请调用 watch 或 watchEffect 返回的函数</dd>
-        <dd class="example-sn">停止侦听</dd>
-        <dd class="code">
-            <pre>
-const stopWatch = watch(num, (newv, oldv) => {
-    console.log('num is watched', newv, oldv);
-    if(newv > 5){
-        stopWatch()
-    }
-})</pre>
-        </dd>
+        <dd class="example-sn">购物车</dd>
+        <dd>侦听购物车商品的全选</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

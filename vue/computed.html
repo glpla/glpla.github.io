@@ -19,20 +19,49 @@
         <span>Computed</span>
     </header>
     <dl>
-        <dt>说明</dt>
-        <dd>数据绑定时，可以使用简单的表达式实现数据的2次处理</dd>
-        <dd>根据age判断DOM的渲染</dd>
-        <dd class="code">
-            <pre>&lt;div&gt;{{ age &gt;= 18 ? 'adault' : 'teenage' }} &lt;/div&gt;</pre>
-        </dd>
-        <dd>逻辑复杂时，可以使用计算属性实现</dd>
+        <dt>引入</dt>
+        <dd>数据绑定时，可以使用简单的表达式实现数据的2次处理；如根据age判断DOM的渲染</dd>
+        <dd>逻辑复杂时，应该使用计算属性实现</dd>
         <dt>优点</dt>
-        <dd>计算属性是响应式</dd>
-        <dd>数据响应时，不会刷新页面</dd>
         <dd>需要引入 computed 包</dd>
-        <dd>计算属性仅会在其响应式依赖更新时才重新计算</dd>
-        <dd>计算属性有返回值</dd>
-        <dd>相比之下，方法调用总是会在重渲染发生时再次执行函数</dd>
+        <dd>计算属性是响应式；数据响应时，不会刷新页面</dd>
+        <dd>计算属性有返回值，且仅在其响应式依赖更新时才重新计算</dd>
+        <dd>而，方法可以没有返回，且每次执行方法都会导致页面渲染</dd>
+        <dd class="tips">计算属性是一个属性，不是方法，使用时不需要()</dd>
+        <dd class="example-sn">执行2次方法inc和执行2次计算属性dec</dd>
+        <dd>创建方法inc和计算属性dec</dd>
+        <dd class="code">
+            <pre>
+import { ref, computed } from 'vue';
+let a = ref(10)
+let b = ref(20)
+const inc = () => {
+  console.log('do function inc');
+  return a.value + b.value
+}
+const dec = computed(() => {
+  console.log('do computed dec');
+  return a.value + b.value
+})</pre>
+        </dd>
+        <dd>使用2次方法；2次计算属性；并通过双向绑定修改其中一个</dd>
+        <dd class="code">
+            <pre>
+&lt;div&gt;第1次 inc - {{ inc() }}&lt;/div&gt;
+&lt;div&gt;第2次 inc - {{ inc() }}&lt;/div&gt;
+&lt;div&gt;第1次 dec - {{ dec }}&lt;/div&gt;
+&lt;div&gt;第2次 dec - {{ dec }}&lt;/div&gt;
+&lt;input type="text" v-model.number="a"&gt;</pre>
+        </dd>
+        <dd class="bg">分析</dd>
+        <dd>数据变化时，2次方法都会执行</dd>
+        <dd>数据变化时，计算属性仅第1次执行；第2次没有检测到数据变化，就不会执行</dd>
+        <dd class="code">
+            <pre>
+do function inc
+do function inc
+do function dec</pre>
+        </dd>
         <dd>使用value指定属性值</dd>
         <dd class="code">
             <pre>

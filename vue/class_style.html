@@ -57,6 +57,43 @@
                 <pre>:class='{类名:布尔变量}'</pre>
             </figure>
         </dd>
+        <dd class="number">
+            <div>绑定类</div>
+            <p>用不用这个类？ - isActive为真，使用bold类；为假，不使用；<span class="warn">还</span>可以指定一个对象，对象中对多个类的使用进行约束</p>
+            <pre class="code">&lt;div :class="{ 'bold': isActive }"&gt;hi,there&lt;/div&gt;</pre>
+            <pre class="code">let isActive = false</pre>
+            <p>用哪个类？ - 用三元表达式实现2选1；isActive为真，使用bold类；否则使用underline类</p>
+            <pre class="code">&lt;div :class="isActive ? 'bold' : 'underline'"&gt;hi,there&lt;/div&gt;</pre>
+            <p>用哪个类？ - 通过更改类名实现更多类的选择；tips为bold，使用bold类；tips为underline，使用underline类；<span
+                    class="warn">还</span>可以使用数组指定多个类</p>
+            <pre class="code">&lt;div :class="tips"&gt;hi,there&lt;/div&gt;</pre>
+            <pre class="code">let tips = 'bold'</pre>
+            <pre class="code">
+.bold {
+    font-weight: 600;
+}
+.underline{
+    text-decoration: underline;
+}</pre>
+            <p class="tips">类名需要使用引号包裹，否则会被当作变量；注意单引号和双引号的匹配</p>
+            <div>绑定内联样式style</div>
+            <p>可以使用小驼峰camelCase，也支持短划线 kebab-cased；推荐使用小驼峰camelCase，因为静态使用和动态绑定写法一致</p>
+            <p>静态使用样式 - 简单属性和复合属性</p>
+            <pre class="code">
+&lt;div style="color: #f40;"&gt;hi,there&lt;/div&gt;
+&lt;div style="fontSize: 20px"&gt;hi,there&lt;/div&gt;
+&lt;div style="background-color: #f40;"&gt;hi,there&lt;/div&gt;</pre>
+            <p>绑定属性值 - 属性使用什么值，采用 <span class="warn">值对key-value</span> 的形式；值key只能是小驼峰camelCase</p>
+            <pre class="code">
+&lt;div :style="{ color: txtColor }"&gt;hi,there&lt;/div&gt;
+&lt;div :style="{ fontSize: small + 'px' }"&gt;hi,there&lt;/div&gt;
+&lt;div :style="{ backgroundColor: bgColor }"&gt;hi,there&lt;/div&gt;</pre>
+            <pre class="code">
+let txtColor = '#f40'
+let small = 20
+let bgColor = '#089'</pre>
+            <p class="tips">类的绑定使用较多，不要纠结于内联样式的使用</p>
+        </dd>
         <dd class="tips">
             <div>样式和类是元素的属性绑定，属性由属性名和属性值组成；属性值需要用引号括起来，所以 :class=""</div>
             <div>开关变量控制开关类：用还是不用，是值对形式，是一个对象，JSON规范中，key要使用引号，所以 :class="{'active':isActive}"</div>

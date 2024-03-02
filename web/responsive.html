@@ -26,7 +26,7 @@
   <dl>
     <dt>预备知识</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>]获取视口大小-缩放浏览器、最大化、最小化，结果相应变化</dd>
-    <dd>
+    <dd class="code">
       <pre>
 let w = document.documentElement.clientWidth;
 let h = document.documentElement.clientHeight;
@@ -38,13 +38,13 @@ console.log(w, h);</pre>
     <dd>
       .查看屏幕大小：真机上，微信扫码为400*867[宽度一致，高度不一致，是因为视口高度+上方的标题栏+下方的状态栏=屏幕宽度]；浏览器输入地址查看360*780[原理相同]；之所以微信扫码结果比浏览器宽度大，是因为浏览器有40px的滚动条；所以移动端开发，通常会指定最小宽度为320px
     </dd>
-    <dd>
+    <dd class="code">
       <pre>
 let sw = window.screen.width;
 let sh = window.screen.height;</pre>
     </dd>
     <dd>移动端容器最小尺寸</dd>
-    <dd>
+    <dd class="code">
       <pre>min-width: 320px;</pre>
     </dd>
   </dl>
@@ -90,11 +90,11 @@ let sh = window.screen.height;</pre>
     <dd>[<span class="iconfont icon-bell"></span>]
       device-width指设备屏幕的宽度，对于特定的设备，宽度是固定的
     </dd>
-    <dd>
+    <dd class="code">
       <pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</pre>
     </dd>
     <dd>.如果修改视口大小为300，则真机调试的结果也为300，所以默认情况下，设置浏览器的宽度等于设备屏幕的宽度</dd>
-    <dd>
+    <dd class="code">
       <pre>&lt;meta name="viewport" content="width=300, initial-scale=1.0"&gt;</pre>
     </dd>
   </dl>
@@ -139,7 +139,7 @@ main {
     <dd>.应用场合不同：all所有设备、screen屏幕、print打印、speech屏幕阅读器/发声设备等；默认是屏幕screen</dd>
     <dd>.移动端和桌面端屏幕的尺寸不同</dd>
     <dd>.在&lt;head&gt;引入视口viewport；VS Code默认已经提供；其它开发环境注意确认是否有</dd>
-    <dd>
+    <dd class="code">
       <pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</pre>
     </dd>
     <dt>断点 breakpoint</dt>
@@ -263,7 +263,7 @@ main {
   <dl class="nav-cont">
     <dt>.HTML管理</dt>
     <dd>1.根据媒体尺寸动态引入link对应的外部CSS文件</dd>
-    <dd>
+    <dd class="code">
       <pre>
 &lt;link rel="stylesheet" media="screen and (min-width:1201px)" href="./media_large.css"&gt;
 &lt;link rel="stylesheet" media="screen and (max-width:1200px)" href="./media_medium.css"&gt;
@@ -271,7 +271,7 @@ main {
 &lt;link rel="stylesheet" media="screen and (max-width:768px)" href="./media_small.css"&gt;</pre>
     </dd>
     <dd>2.根据媒体尺寸在&lt;style&gt;直接编辑内部样式；多见于练习</dd>
-    <dd>
+    <dd class="code">
       <pre>
 &lt;style&gt;
   body {
@@ -298,7 +298,7 @@ main {
 &lt;/style&gt;</pre>
     </dd>
     <dd>3.根据媒体尺寸在不同的&lt;style&gt;编辑内部样式；使用不多</dd>
-    <dd>
+    <dd class="code">
       <pre>
 &lt;style&gt;
   body {
@@ -326,7 +326,7 @@ main {
     </dd>
     <dt>CSS文件管理</dt>
     <dd>.在主样式文件app.css引入响应的CSS文件</dd>
-    <dd>
+    <dd class="code">
       <pre>
 @import url(./css/media_large.css);
 @import url(./css/media_medium.css) only screen and (max-width:1200px);
@@ -342,7 +342,7 @@ main {
     <dd>.&le;1200px，显式3列</dd>
     <dd>.&le;992px，显式2列</dd>
     <dd>.&le;768px，显式1列</dd>
-    <dd>
+    <dd class="code">
       <pre>
 .wrap {
   display: grid;
@@ -370,7 +370,7 @@ main {
     </dd>
     <dd>.使用min-width，借助%实现</dd>
     <dd>[HTML]</dd>
-    <dd>
+    <dd class="code">
       <pre>
 &lt;div class="box"&gt;
   &lt;img src="./imgs/1.jpg" alt=""&gt;
@@ -382,7 +382,7 @@ main {
 &lt;/div&gt;</pre>
     </dd>
     <dd>[CSS]</dd>
-    <dd>
+    <dd class="code">
       <pre>
 .box img {
   float: left;
@@ -420,7 +420,7 @@ main {
     <dt>设置字体大小</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>]静态设置</dd>
     <dd>. 为方便计算，通常设置html字体大小为62.5%：1rem=10px</dd>
-    <dd>
+    <dd class="code">
       <pre>
 html {
     //font-size: 10px;
