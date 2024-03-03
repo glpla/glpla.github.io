@@ -27,7 +27,9 @@
         <dd>可以传递数据；还可以传递方法</dd>
         <dd>不可以在某个事件处理函数中使用：provide() can only be used inside setup()</dd>
         <dt>传递数据</dt>
-        <dd>可以使用多个provide和inject；可以传递普通数据，也可以传递响应数据；这也太容易了吧</dd>
+        <dd>可以使用多个provide和inject</dd>
+        <dd>可以传递普通静态数据，也可以传递响应式数据</dd>
+        <dd>可以传递简单数据，也可以传递对象</dd>
         <dd>使用延时查看响应数据的变化</dd>
         <dd>顶级组件使用provide提供数据</dd>
         <dd class="code">
@@ -48,6 +50,7 @@ let para = inject('key1')</pre>
         <dt>传递方法</dt>
         <dd>底层组件可以使用顶层组件的方法修改顶层组件的数据；虽然有悖于数据流的单向原则，但是仍然遵循了谁的数据谁修改的原则</dd>
         <dd>顶级组件使用provide提供已经定义好的方法doGreeting</dd>
+        <dd>用你提供的方法修改你的数据</dd>
         <dd class="code">
             <pre>
 function doGreeting() {
@@ -60,6 +63,9 @@ provide('doGreetingFn', doGreeting)</pre>
         <dd class="code">
             <pre>
 let doGreet = inject('doGreetingFn')
+//直接执行
+doGreet()
+//在方法中执行
 function fn() {
   doGreet()
 }</pre>
@@ -68,8 +74,7 @@ function fn() {
         <dd class="code">
             <pre>&lt;div @click="doGreet"&gt;直接使用 fn&lt;/div&gt;</pre>
         </dd>
-        <dt>兄弟组件之间的通信</dt>
-        <dd>其它方法***</dd>
+        <dt>兄弟组件之间的通信 - todo</dt>
         <dd>互相定义函数实现 - todo</dd>
         <dd>1. 父组件</dd>
         <dd>定义接收函数来接收子组件传递的参数并以属性的形式绑定在子组件上</dd>
