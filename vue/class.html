@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>样式 class vs style</title>
+    <title>类 class</title>
     <link rel="stylesheet" href="../css/reset2024.css">
     <link rel="stylesheet" href="../css/common2024.css">
     <link rel="stylesheet" href="../css/code.css">
@@ -15,12 +15,11 @@
 
 <body>
     <header>
-        <h1>样式</h1>
-        <span>class vs style</span>
+        <h1>类</h1>
+        <span>class</span>
     </header>
     <dl>
-        <dt>Overview</dt>
-        <dd>CSS class 列表和内联样式 style 都是 attribute，使用 v-bind 将它们和动态的 <span class="warn">字符串</span> 绑定</dd>
+        <dd>类 class 和内联样式 style 都是元素的属性 attribute，使用 v-bind 将它们和动态的 <span class="warn">字符串</span> 绑定</dd>
         <dd>v-bind:可以简写为冒号:</dd>
         <dd>除了字符串外，表达式的值也可以是 <span class="warn">对象</span> 或 <span class="warn">数组</span></dd>
         <dd>绑定类和静态添加的类不会冲突，最终会叠加在一起进行渲染</dd>
@@ -28,23 +27,6 @@
             <div>复合属性使用小驼峰方式</div>
             <div>注意双引号和单引号的配套使用</div>
             <div>使用vue devtool调试</div>
-        </dd>
-        <dt>内联样式 :style</dt>
-        <dd>指定样式值 - color</dd>
-        <dd class="code">
-            <pre>&lt;div :style="{ backgroundColor: color }"&gt;content&lt;/div&gt;</pre>
-        </dd>
-        <dd>拼接样式值 - 数值和单位</dd>
-        <dd class="code">
-            <pre>&lt;div :style="{ lineHeight: h + 'px' }"&gt;content&lt;/div&gt;</pre>
-        </dd>
-        <dd>拼接样式值 - url和地址</dd>
-        <dd class="code">
-            <pre>&lt;div :style="{ backgroundImage: 'url(' + imgUrl + ')' }"&gt;content&lt;/div&gt;</pre>
-        </dd>
-        <dd>多样式使用逗号,分隔，渲染时变为分号;</dd>
-        <dd class="code">
-            <pre>&lt;div :style="{ backgroundColor: color, lineHeight: h + 'px' }"&gt;content&lt;/div&gt;</pre>
         </dd>
         <dt>类 :class</dt>
         <dd>. 除了直接在结构中指定类-静态类外，还可以根据条件决定使用动态类</dd>

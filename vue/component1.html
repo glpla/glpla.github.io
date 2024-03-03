@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父传子 prop</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>父传子</h1>
+        <span>prop</span>
+    </header>
+    <dl>
+        <dt>参数传递 defineProps()</dt>
+        <dd>子组件通过定义属性defineProps()来接收传递的参数</dd>
+        <dd>. 可以使用字符串数组声明，也使用对象的形式声明</dd>
+        <dd>. 可以声明一个，也可以声明多个</dd>
+        <dd>. 可以是简单类型，也可以是对象</dd>
+        <dd>. 为了和普通变量区分，传递的参数以props开始，如propsName</dd>
+        <dd>父组件以属性的方式向子组件传递参数</dd>
+        <dd>. 传递的参数可以是静态的，也可以动态绑定的</dd>
+        <dt>传递简单数据类型</dt>
+        <dd>1. 子组件 - 在子组件定义props接收父组件传递的参数；如果在&lt;script&gt;需要使用父组件传递的参数，则声明一个变量接收</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>子组件&lt;script&gt; - 定义接收的参数</figcaption>
+                <pre>
+//使用字符串数组声明 props - 指定参数
+defineProps(['propsMsg', 'propsId'])
+
+//使用对象的形式声明 props - 指定参数的类型type
+defineProps({
+    propsMsg: String,
+    propsId: Number
+})
+
+//使用对象的形式声明 props - 指定参数的类型type、默认值default和是否必须required
+defineProps({
+    propsMsg: String,
+    propsId: {
+      type: Number,
+      required: false,
+      default: 18
+    }
+})
+
+//如果需要处理，定义一个变量接收
+const props = defineProps(['propsMsg'])</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>子组件&lt;template&gt; - 使用传递来的数据</figcaption>
+                <pre>&lt;div&gt;{{ propsMsg }} - {{ propsId }}&lt;/div&gt;</pre>
+            </figure>
+        </dd>
+        <dd>2. 父组件 - 引入子组件；传递给子组件1个静态数据、1个响应式数据</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>父组件&lt;script&gt; - 引入子组件</figcaption>
+                <pre>
+import { ref } from 'vue';
+import Test from './components/Test.vue';
+let msg = ref('hi,there')</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>父组件&lt;template&gt; - 使用子组件</figcaption>
+                <pre>&lt;Test :propsMsg="msg" propsId="18"&gt;&lt;/Test&gt;</pre>
+            </figure>
+        </dd>
+        <dd class="question">
+            <div>如何传递一个数值类型的数据?</div>
+            <div>可以给子组件指定样式或类吗?</div>
+        </dd>
+        <dt>传递对象</dt>
+        <dd>多个参数，父组件可以考虑使用对象传参</dd>
+        <dd>接上例。修改父组件参数</dd>
+        <dd class="code">
+            <pre>
+let para = ref({
+    propsMsg: 'hi,thtere',
+    propsId: 18
+}) </pre>
+        </dd>
+        <dd>绑定数据传参 - 可以略去v-bind使用:</dd>
+        <dd class="code">
+            <pre>&lt;Test v-bind="para"&gt;&lt;/Test&gt;</pre>
+        </dd>
+        <dd class="code">
+            <pre>&lt;Test :="para"&gt;&lt;/Test&gt;</pre>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

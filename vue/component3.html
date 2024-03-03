@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨级传 provide</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>跨级传</h1>
+        <span>provide</span>
+    </header>
+    <dl>
+        <dt>跨级传递 provide vs inject</dt>
+        <dd>顶级组件 → 底层组件；中间可以经过多层组件</dd>
+        <dd>仅允许上向下传递|流转，不允许底层组件向顶级组件传递|反向流转</dd>
+        <dd>采用发布-订阅|提供-插入的模式</dd>
+        <dd>顶层组件引入 provide包、底层组件引入 inject包</dd>
+        <dd>可以传递数据；还可以传递方法</dd>
+        <dd>不可以在某个事件处理函数中使用：provide() can only be used inside setup()</dd>
+        <dt>传递数据</dt>
+        <dd>可以使用多个provide和inject；可以传递普通数据，也可以传递响应数据；这也太容易了吧</dd>
+        <dd>使用延时查看响应数据的变化</dd>
+        <dd>顶级组件使用provide提供数据</dd>
+        <dd class="code">
+            <pre>
+import {provide} from 'vue'
+
+provide('key0', data)
+provide('key1', dataRef.value)</pre>
+        </dd>
+        <dd>底层组件使用inject接收数据</dd>
+        <dd class="code">
+            <pre>
+import {inject} from 'vue'
+
+let para = inject('key0')
+let para = inject('key1')</pre>
+        </dd>
+        <dt>传递方法</dt>
+        <dd>底层组件可以使用顶层组件的方法修改顶层组件的数据；虽然有悖于数据流的单向原则，但是仍然遵循了谁的数据谁修改的原则</dd>
+        <dd>顶级组件使用provide提供已经定义好的方法doGreeting</dd>
+        <dd class="code">
+            <pre>
+function doGreeting() {
+    refDate.value++
+  }
+provide('doGreetingFn', doGreeting)</pre>
+        </dd>
+        <dd>底层组件使用inject接收传递的方法，并在事件处理函数fn中实现；fn是普通点击事件</dd>
+        <dd>doGreet接收传递来的方法，要执行，必须使用()</dd>
+        <dd class="code">
+            <pre>
+let doGreet = inject('doGreetingFn')
+function fn() {
+  doGreet()
+}</pre>
+        </dd>
+        <dd>或直接在结构中使用传递的方法</dd>
+        <dd class="code">
+            <pre>&lt;div @click="doGreet"&gt;直接使用 fn&lt;/div&gt;</pre>
+        </dd>
+        <dt>兄弟组件之间的通信</dt>
+        <dd>其它方法***</dd>
+        <dd>互相定义函数实现 - todo</dd>
+        <dd>1. 父组件</dd>
+        <dd>定义接收函数来接收子组件传递的参数并以属性的形式绑定在子组件上</dd>
+        <dd>sendPara是自定义事件</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>父组件 - &lt;script&gt;</figcaption>
+                <pre>
+import Child from '@/components/Child.vue'
+import {msg} from 'vue'
+let msg = ref('')
+function getPara(val){
+    msg.value = val.value
+}</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>父组件 - &lt;template&gt;</figcaption>
+                <pre>
+&lt;div&gt;{{msg}}&lt;/div&gt;
+&lt;Child :sendPara='getPara'/&gt;</pre>
+            </figure>
+        </dd>
+        <dd>2. 子组件</dd>
+        <dd>定义要发送的数据</dd>
+        <dd>在props定义发送数据的函数名</dd>
+        <dd>在事件中定义函数发送数据 - 这里采用点击按钮触发，也可以在生命周期函数中触发</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>子组件 - &lt;script&gt;</figcaption>
+                <pre>
+import {ref} from 'vue'
+let para = ref('hi, there.')
+defineProps(['sendPara'])</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>子组件 - &lt;template&gt;</figcaption>
+                <pre>&lt;button @click='sendPara(para)'&gt;send para&lt;/button&gt;</pre>
+            </figure>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

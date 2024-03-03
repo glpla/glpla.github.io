@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片 image</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>图片</h1>
+        <span>image</span>
+    </header>
+    <dl>
+        <dt>动态引用图片</dt>
+        <dd>解决方案1：将图片放到项目的public目录并直接引用；可以创建相应的文件夹imgs存放图片；vue-cli3默认路径为public，所以无需添加public；public即代表/</dd>
+        <pre class="code">&lt;img :src="src" alt=""&gt;</pre>
+        <pre class="code">let src = '/imgs/10.jpg'</pre>
+        <dd>解决方案2：采用vite的<a href="https://cn.vitejs.dev/guide/assets.html" class="link">静态资源处理</a>：import.meta.url
+            是一个ESM的原生功能，会暴露当前模块的 URL。将它与原生的 URL 构造器 组合使用，在一个 JavaScript 模块中，通过 <span
+                class="warn">相对路径</span>我们就能得到一个被完整解析的静态资源 URL</dd>
+        <dd>将图片作为资源引入再使用 - 适合单个静态资源</dd>
+        <pre class="code">&lt;img :src="src" alt=""&gt;</pre>
+        <pre class="code">import src from '../imgs/10.jpg'</pre>
+        <dd>为静态资源创建新的URL - 尤其适合处理多个静态资源，如 <a href="./vfor.html" class="link">列表渲染</a></dd>
+        <pre class="code">&lt;img :src="getImageUrl(src)" alt=""&gt;</pre>
+        <pre class="code">
+let src = '../imgs/10.jpg'
+const getImageUrl = (img) => {
+    return new URL(img, import.meta.url).href
+}</pre>
+        <dd>拼接路径；案例应用请查看 <a href="./event.html" class="link">事件 - 手动轮播</a></dd>
+        <pre class="code">
+let src = '../imgs/10.jpg'
+const getImageUrl = (img) => {
+    return new URL(`../imgs/${img}`, import.meta.url).href
+}</pre>
+        <dt>背景图片的使用</dt>
+        <dd>静态使用 - 仅可以引用public中的资源</dd>
+        <pre class="code">&lt;div style="background-image: url('/imgs/lg.jpg');"&gt;hi,there&lt;/div&gt;</pre>
+        <dd>动态绑定 - 引入为资源；图片可以放任意地方</dd>
+        <dd class="code">
+            <pre>
+let src = '/imgs/banner.png'
+import url from '../assets/imgs/0.jpg'</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+&lt;div class="box" style="background-image: url('/imgs/banner.png');"&gt;hi,there&lt;/div&gt;
+&lt;div class="box" :style="{ backgroundImage: 'url(' + src + ')' }"&gt;hi,there&lt;/div&gt;
+&lt;div class="box" :style="{ backgroundImage: 'url(' + url + ')' }"&gt;hi,there&lt;/div&gt;</pre>
+        </dd>
+        <dt>vite框架对图片的处理</dt>
+        <dd>分别在public、assets和assets同级目录常见imgs文件夹，并放入一张图片，在项目中引用，最后发布，查看框架对静态资源图片的处理情况</dd>
+        <dd class="code">
+            <pre>
+&lt;div&gt;public&lt;/div&gt;
+&lt;img src="/imgs/banner.png" alt=""&gt;
+&lt;div&gt;assets&lt;/div&gt;
+&lt;img src="./assets/imgs/banner.png" alt=""&gt;
+&lt;div&gt;src -&gt; imgs&lt;/div&gt;
+&lt;img src="./imgs/banner.png" alt=""&gt;</pre>
+        </dd>
+        <pre class="code">&lt;img src="../imgs/10.jpg" alt=""&gt;</pre>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

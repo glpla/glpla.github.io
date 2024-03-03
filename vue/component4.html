@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>插槽 slot</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>插槽</h1>
+        <span>slot</span>
+    </header>
+    <dl>
+        <dt>插槽 slot</dt>
+        <dd>使用插槽slot可以向使用HTML 元素一样向组件中传递内容；如封装过渡组件</dd>
+        <dd>1. 子组件声明slot，将其作为一个占位符，父组件传递进来的内容就会渲染在这里</dd>
+        <dd>可以指定插槽默认内容-默认插槽</dd>
+        <dd>多个插槽应该使用name属性区分-具名插槽</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>仅预留位置</figcaption>
+                <pre>
+&lt;template&gt;
+    &lt;div class="alert-box"&gt;
+        //内容
+        &lt;slot /&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</pre>
+            </figure>
+        </dd>
+        <dd></dd>
+        <dd>
+            <figure class="code">
+                <figcaption>默认插槽 - 指定默认内容</figcaption>
+                <pre>
+&lt;template&gt;
+    &lt;div class="alert-box"&gt;
+        //内容
+        &lt;slot&gt;插槽默认内容&lt;/slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</pre>
+            </figure>
+        </dd>
+        <dd>
+            <figure class="code">
+                <figcaption>具名插槽 - 多个插槽</figcaption>
+                <pre>
+&lt;template&gt;
+    &lt;div class="alert-box"&gt;
+        //内容
+        &lt;slot name='header'&gt;&lt;/slot&gt;
+        &lt;slot name='footer'&gt;&lt;/slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</pre>
+            </figure>
+        </dd>
+        <dd>2. 父组件使用默认插槽</dd>
+        <dd class="code">
+            <pre>
+&lt;template&gt;
+    &lt;AlertBox&gt;
+        Something bad happened.
+    &lt;/AlertBox&gt;
+&lt;/template&gt;</pre>
+        </dd>
+        <dd>使用具名插槽 - 使用一个含 v-slot 指令的 &lt;template&gt; 元素；v-slot可以简写为#</dd>
+        <dd class="code">
+            <pre>
+&lt;template&gt;
+    &lt;AlertBox&gt;  
+        &lt;template #header&gt;
+            &lt;h1&gt;Here might be a page title&lt;/h1&gt;
+        &lt;/template&gt;
+        &lt;template #footer&gt;
+            &lt;h1&gt;Here might be a page title&lt;/h1&gt;
+        &lt;/template&gt;
+    &lt;/AlertBox&gt;
+&lt;/template&gt;</pre>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件 Component</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>组件</h1>
+        <span>Component</span>
+    </header>
+    <dl>
+        <dt>基本过程</dt>
+        <dd>2. 引用：</dd>
+        <dd>3. 使用：</dd>
+        <dd class="number nav-cont">
+            <div>创建：vue中每个组件都是以SFC的形式存在，后缀名是.vue；SFC - Single File
+                Component，单文件组件，包括结构&lt;template&gt;、逻辑&lt;script&gt;和样式&lt;style&gt;
+            </div>
+            <figure class="code">
+                <figcaption>组件文件 - ButtonCounter.vue</figcaption>
+                <pre>
+&lt;script setup&gt;
+    //逻辑
+&lt;/script&gt;
+    
+&lt;template&gt;
+    //结构
+&lt;/template&gt;
+
+&lt;style&gt;
+    //样式
+&lt;/style&gt;</pre>
+            </figure>
+            <div>引入：要使用一个组件，需要先在&lt;script&gt;导入；被引入的是子组件；使用子组件的是父组件</div>
+            <figure class="code">
+                <figcaption>父组件文件 - .vue</figcaption>
+                <pre>
+&lt;script setup&gt;
+    import ButtonCounter from './ButtonCounter.vue'
+&lt;/script&gt;</pre>
+            </figure>
+            <div>使用：父组件在结构&lt;template&gt;中使用子组件</div>
+            <figure class="code">
+                <figcaption>父组件文件 - .vue</figcaption>
+                <pre>
+&lt;template&gt;
+    &lt;h1&gt;Here is a child component!&lt;/h1&gt;
+    &lt;ButtonCounter /&gt;
+&lt;/template&gt;</pre>
+            </figure>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

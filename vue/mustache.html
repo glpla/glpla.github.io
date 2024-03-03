@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板语法 Mustache</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>模板语法</h1>
+        <span>Mustache</span>
+    </header>
+    <dl>
+        <dd>也称数据绑定</dd>
+        <dd>Vue 使用一种基于 HTML 的模板语法，使能够声明式地将其组件实例的数据绑定到呈现的 DOM 上，减少 DOM 操作</dd>
+        <dd>可以使用简单的js表达式实现数据的组合使用；复杂的逻辑请使用计算属性或方法获取</dd>
+        <dd>根据数据是否是响应式，数据绑定分：静态数据绑定和 <a href="./reactive.html" class="link">响应式数据</a> 绑定；本节使用静态数据绑定</dd>
+        <dd class="tips">
+            <div>目的：解决数据和元素节点的内容和属性的关联</div>
+            <div>可以使用模板字符串``，便于直接使用变量</div>
+        </dd>
+        <dt>内容绑定 {{}}</dt>
+        <dd>文本插值表达式</dd>
+        <dd>使用双大括号 <span class="warn">{{}}</span>，会将数据解释为 <span class="warn">纯文本</span> ，解决 <span
+                class="warn">数据和元素内容</span> 的关联</dd>
+        <dd>支持简单的数据处理；建议使用计算属性完成</dd>
+        <dd>简单数据类型绑定和复杂数据类型绑定</dd>
+        <dd class="code">
+            <pre>
+let msg = 'hi,there'
+let age = 18
+let obj = {
+    id: 100,
+    name: 'gl'
+}
+let url = 'http://www.baidu.com'</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+&lt;div&gt;msg: {{ msg }}&lt;/div&gt;
+&lt;div&gt;handle with msg: {{ msg.substring(3) }}&lt;/div&gt;
+&lt;div&gt;age: {{ age }}&lt;/div&gt;
+&lt;div&gt;handle with age: {{ age + 2 }}&lt;/div&gt;
+&lt;div&gt;id: {{ obj.id }} - name: {{ obj.name }}&lt;/div&gt;</pre>
+        </dd>
+        <dt>属性绑定 v-bind</dt>
+        <dd></dd>
+        <dd>使用 <span class="warn">v-bind</span> 指令绑定HTML的属性Attribute，解决 <span class="warn">数据和元素属性</span> 的关联</dd>
+        <dd>可以简写为冒号 <span class="warn">:</span></dd>
+        <dd>常见的元素属性有：href、id、title、src、class、style以及布尔属性如hidden、disabled、autoplay、loop、controls、checked、selected等</dd>
+        <dd>类和样式的使用请参考 <a href="./class_style.html" class="link">类和样式</a></dd>
+        <dd class="number">
+            <div>一般属性</div>
+            <pre class="code">
+&lt;a :href="url" target="_blank"&gt;link&lt;/a&gt;
+&lt;div :id='uid'&gt;my id&lt;/div&gt;</pre>
+            <div>布尔属性</div>
+            <p>静态使用 - 指定的任何数据包括空串，都会渲染为真；可用简单的指定属性，不做任何赋值，实现假的操作</p>
+            <pre class="code">
+&lt;button disabled="true"&gt;submit&lt;/button&gt;
+&lt;button disabled="false"&gt;submit&lt;/button&gt;
+&lt;button disabled=" "&gt;submit&lt;/button&gt;
+&lt;button disabled="123"&gt;submit&lt;/button&gt;
+&lt;button disabled&gt;submit&lt;/button&gt;</pre>
+            <p>动态绑定使用 - 可用指定关键字true或false、布尔变量或结果为布尔值的表达式</p>
+            <pre class="code">
+&lt;button :disabled="true"&gt;submit&lt;/button&gt;
+&lt;button :disabled="false"&gt;submit&lt;/button&gt;
+           
+&lt;button :disabled="isEnable"&gt;submit&lt;/button&gt;
+
+&lt;button :disabled="age > 20"&gt;submit&lt;/button&gt;</pre>
+            <div>图片的使用</div>
+            <p>静态使用 - 可以使用本地图片或在线图片，如<a href="https://pixabay.com/" class="link">pixabay</a>、<a
+                    href="https://unsplash.com/" class="link">unsplash</a></p>
+            <pre class="code">&lt;img src="../assets/imgs/0.jpg" alt=""&gt;</pre>
+            <p>不可以直接绑定图片url地址，vue会将其解析为一个字符串，而非地址；解决方案和更多使用，请访问<a href="./img.html" class="link">图片</a></p>
+            <pre class="code">let src = '../assets/imgs/0.jpg'</pre>
+            <pre class="code">&lt;img :src="src" alt=""&gt;</pre>
+            <div>CSS函数属性绑定</div>
+            <p>background-image等使用了url()、linear-gradient()等等CSS函数的属性</p>
+            <p>静态使用 - 仅可以引用public中的资源</p>
+            <pre class="code">&lt;div style="background-image: url('/imgs/lg.jpg');"&gt;hi,there&lt;/div&gt;</pre>
+            <p>动态绑定使用 - 同<a href="./img.html" class="link">图片</a>的使用</p>
+        </dd>
+        <dt>其它内容绑定</dt>
+        <dd>v-text：渲染普通文本</dd>
+        <dd>v-html：渲染HTML元素；但是不建议：在网站上动态渲染任意HTML非常危险</dd>
+        <dd class="code">
+            <pre>
+let txt = 'hi, there.'
+let html = '&lt;p&gt;warning&lt;/p&gt;'</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+&lt;div v-text='txt'&gt;&lt;/div&gt;
+&lt;div v-html='html'&gt;&lt;/div&gt;</pre>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

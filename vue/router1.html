@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态路由 params</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>动态路由</h1>
+        <span>params</span>
+    </header>
+    <dl>
+        <dt>动态路由 - params</dt>
+        <dd>在URL后面采用<span class="warn">路径</span>的方式来传递参数，将给定匹配模式的路由映射到<span class="warn">同一个</span>组件，如/goods/1 和
+            /goods/2 这样的 URL 都会映射到同一个路由：在同一个页面根据id显示不同的商品 </dd>
+        <dd>使用一个或多个动态字段来实现；?表示该参数可选</dd>
+        <dd>1. 配置路由参数 - 在work的2级路由css和js中，根据id展示对应的内容</dd>
+        <dd class="code">
+            <pre>
+{
+    path: '/work',
+    name: 'work',
+    component: () => import('../components/sub_view/Work.vue'),
+    children: [
+        {
+        path: '',
+        name: 'html',
+        component: () => import('../components/sub_view/Html5.vue'),
+        },
+        {
+        path: 'css/:id',
+        name: 'css',
+        component: () => import('../components/sub_view/Css3.vue'),
+        },
+        {
+        path: 'js/:id',
+        name: 'js',
+        component: () => import('../components/sub_view/JavaScript.vue'),
+        }
+    ]
+}</pre>
+        </dd>
+        <dd>2. 传递路由参数 - 可以使用普通路由path和命名路由name传递2级路由参数</dd>
+        <dd class="code">
+            <pre>
+&lt;router-link to="/work/css/webcss3"&gt;css&lt;/router-link&gt;
+&lt;router-link :to="{ name: 'js', params: { id: 'webjs' } }"&gt;js&lt;/router-link&gt;</pre>
+        </dd>
+        <dd>3. 接收路由参数</dd>
+        <dd>在路由目标组件 - 结构 - 中使用全局变量$route接收路由参数</dd>
+        <dd class="code">
+            <pre>&lt;div&gt;{{ $route.params.id }}&lt;/div&gt;</pre>
+        </dd>
+        <dd>在路由目标组件 - 逻辑 - 中使用useRoute接收路由参数</dd>
+        <dd class="code">
+            <pre>
+import { useRoute } from 'vue-router'
+let route = useRoute()
+console.log(route.params.id);</pre>
+        </dd>
+        <dd>另：多个路由参数的使用</dd>
+        <dd class="code">
+            <pre>
+{
+    name: "zhuye",
+    path: '/home/:id/:title/:cont/:other?',
+    component: Home
+}</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+&lt;router-link to = "{
+    name: 'zhuye',
+    params: {
+        id: val0,
+        title: val1,
+        cont: val2
+    }
+    }" 
+    active-class = "active"
+&gt;
+    home
+&lt;/router-link&gt;</pre>
+        </dd>
+        <dd>在结构中使用路由参数时，使用全局变量$route解构：动态路由$route.params；查询路由$route.query</dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>传参路由 props</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>传参路由</h1>
+        <span>props</span>
+    </header>
+    <dl>
+        <dt>路由组件传参 - props</dt>
+        <dd>按照组件传参的形式传递路由参数</dd>
+        <dd>使用更方便</dd>
+        <dd>默认是针对动态路由|params类型的路由参数</dd>
+        <dd>查询路由|query需要特别处理</dd>
+        <dd class="example-sn">动态路由|params</dd>
+        <dd>1. 配置路由参数 - 指定props属性为true，传递的路由参数将被当作属性传递给组件</dd>
+        <dd class="code">
+            <pre>
+{
+    path: '/home/:id/:title/:cont/:other?',
+    name: "zhuye",
+    component: Home,
+    props: true
+}</pre>
+        </dd>
+        <dd>2. 接收路由参数 - &lt;script&gt;中定义属性来接收路由参数</dd>
+        <dd class="code">
+            <pre>
+defineProps(['id', 'title', 'cont'])</pre>
+        </dd>
+        <dd>3. &lt;template&gt;渲染路由参数 - 直接使用</dd>
+        <dd class="code">
+            <pre>
+&lt;ul&gt;
+    &lt;li&gt;{{id}}&lt;/li&gt;
+    &lt;li&gt;{{title}}&lt;/li&gt;
+    &lt;li&gt;{{cont}}&lt;/li&gt;
+&lt;/ul&gt;</pre>
+        </dd>
+        <dd class="example-sn">查询路由|query</dd>
+        <dd>1. 定制props属性 - 将路由参数的query作为返回值传递出去 - route是形参</dd>
+        <dd class="code">
+            <pre>
+{
+    name: "zhuye",
+    path: '/home/:id/:title/:cont/:other?',
+    component: Home,
+    props:(route)=>{
+        console.log(route) //包含路由的各种信息：name、params、path、query
+        return route.query
+    }
+}</pre>
+        </dd>
+        <dd>2. 脚本中接收路由参数 - 定义属性</dd>
+        <dd class="code">
+            <pre>
+defineProps(['id', 'title', 'cont'])</pre>
+        </dd>
+        <dd>在结构中使用路由参数时，使用全局变量$route解构：动态路由$route.params；查询路由$route.query</dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>
