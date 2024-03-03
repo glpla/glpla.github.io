@@ -33,16 +33,48 @@
     <dd>通用、主流的第三方库；用于获取本地和远程json数据</dd>
     <dd>默认是Promise用法；支持async/await用法</dd>
     <dd>更多信息，点击访问<a href="https://www.axios-http.cn/" class="link">axios中文网</a></dd>
-    <dt>安装 installation</dt>
-    <dd>1. NPM方式 - 使用npm安装并引入</dd>
+    <dt>基本过程</dt>
+    <dd>1. 安装 - 在项目目录安装</dd>
     <dd class="code">
-      <pre>npm i axios</pre>
+      <pre>npm i axios --save</pre>
     </dd>
-    <dd>指定默认参数，如baseURL、params、method、header、timeout</dd>
+    <dd>2. 引入 - 在项目中引入，并根据需要指定默认参数，如baseURL、params、method、header、timeout；baseURL应和数据服务器的地址保持一致</dd>
     <dd class="code">
       <pre>
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000'</pre>
+    </dd>
+    <dd>3. 使用 - 在组件的逻辑中请求数据，并应用到组件的结构中；<span class="warn">资源服务器应提前开启，并严格按照接口使用</span></dd>
+    <dd class="code">
+      <pre>
+//GET
+axios.get('/cont')
+  .then(res => {
+    console.log(res);
+})
+
+//POST
+axios.post('/cont', {
+  name: 'gg',
+  rank: 10
+})
+.then(res => {
+  console.log(res);
+})
+
+//DELETE
+axios.delete('/cont/1001')
+.then(res => {
+  console.log(res);
+})
+
+//PATCH
+axios.patch('/cont/1002', {
+  age: 999
+})
+  .then(res => {
+    console.log(res);
+})</pre>
     </dd>
     <dd>2. CDN方式 - 适合浏览器环境；建议将库下载到本地使用。。。CDN网络经常。。。</dd>
     <dd><a href="https://cdnjs.com/" class="link">cdnjs</a></dd>
@@ -51,7 +83,8 @@ axios.defaults.baseURL = 'http://localhost:3000'</pre>
       <pre>
 &lt;script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"&gt;&lt;/script&gt;</pre>
     </dd>
-    <dt>基本使用 usage</dt>
+    <dt>请求方式</dt>
+    <dd>分：promise和async/await两种风格</dd>
     <dd>
       <figure class="code">
         <figcaption>Promise - get</figcaption>
@@ -81,14 +114,17 @@ async function getUser() {
   }
 }        </pre>
       </figure>
-      <figure class="code">
-        <figcaption>向 axios 传递相关配置来创建请求 - 默认get</figcaption>
-        <pre>
+    </dd>
+    <dt>请求封装</dt>
+    <dd>
+    <dd>直接使用 - 默认get</dd>
+    <dd class="code">
+      <pre>
 axios('/user/12345');</pre>
-      </figure>
-      <figure class="code">
-        <figcaption>向 axios 传递相关配置来创建请求 - get</figcaption>
-        <pre>
+    </dd>
+    <dd>向 axios 传递配置参数创建请求 - get</dd>
+    <dd class="code">
+      <pre>
 axios({
   method: 'get',
   url: 'http://bit.ly/2mTM3nY',
@@ -97,10 +133,10 @@ axios({
   .then( (response) =>{
     console.log(response)
   });</pre>
-      </figure>
-      <figure class="code">
-        <figcaption>向 axios 传递相关配置来创建请求 - post</figcaption>
-        <pre>
+    </dd>
+    <dd>向 axios 传递配置参数创建请求 - post</dd>
+    <dd class="code">
+      <pre>
 axios({
   method: 'post',
   url: '/user/12345',
@@ -109,14 +145,14 @@ axios({
     lastName: 'Flintstone'
   }
 });</pre>
-      </figure>
     </dd>
-    <dd class="code">
-      <pre>
-//get数据
+    <dd>使用封装的方法请求</dd>
+    <dd>
+      <pre class="code">
 axios
 .get('./oa.json')
 .then(res => { console.log(res); })</pre>
+    </dd>
     </dd>
     <dt>趣味应用 application</dt>
     <dd class="example-sn">获取远程数据 - 小狗</dd>

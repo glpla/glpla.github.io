@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>实操1 JSON服务器</title>
+  <title>实操2 综合服务器</title>
   <link rel="stylesheet" href="../css/exp.css">
 </head>
 
@@ -13,16 +13,16 @@
   <header>
   </header>
   <div class="container">
-    <h1>JSON服务器</h1>
+    <h1>综合服务器</h1>
     <h4>Server</h4>
     <dl>
       <dt>一、实验目的</dt>
       <dd class="number">
         <div>了解服务器的基本工作原理</div>
         <div>熟悉数据接口API的定制和使用</div>
-        <div>掌握json-server的基本使用</div>
+        <div>掌握express.js框架的基本使用</div>
+        <div>掌握node.js服务的基本搭建</div>
         <div>掌握axios的基本使用</div>
-        <div>掌握浏览器扩展postman的基本使用</div>
       </dd>
       <dt>二、开发环境</dt>
       <dd class="number">
@@ -34,41 +34,20 @@
       <dt>三、实验内容</dt>
       <dd class="number">
         <div>资源准备：图片和数据</div>
-        <div>json-server安装和基本使用</div>
-        <div>postman的安装和基本使用</div>
+        <div>express.js安装和基本使用</div>
+        <div>node.js服务的搭建</div>
+        <div>网络请求模拟：postman的安装和基本使用</div>
         <div>axios安装和基本使用</div>
       </dd>
       <dt>四、实验步骤</dt>
       <dd class="number">
         <div>准备数据</div>
-        <p>选择或创建一个文件夹如www作为各种资源的主目录；利用各种子文件夹存放不同的资源数据，如data存放json、imgs存放图片、music存放音乐等等</p>
-        <p>1.1 json数据：创建json数据文件rank.json；这里以暴露2个接口为例；一个是info；一个是cont；这里包括了图片的src，可以给出完整路径，也可以仅仅给出文件名；数据加载后再2次处理</p>
-        <p>注意：id为字符串类型</p>
-        <pre class="code">
-{
-  "info":{},
-  "cont":[
-    {
-      "id":"1001",
-      "name":"gl",
-      "age":18,
-      "rank":1,
-      "src":"1.jpg"
-    },
-    {
-      "id":"1002",
-      "name":"cq",
-      "age":20,
-      "rank":2,
-      "src":"2.jpg"
-    }
-  ]
-}</pre>
-        <p>1.2 图片数据：创建空白文件夹imgs，将对应的图片拷贝进去；作为在线资源提供给项目使用</p>
-        <p>1.3 其它资源，如视频、音频等</p>
-        <div>json-server 服务器 - 详细操作，请查看 <a href="../node/jsonserver.html" class="link">jsonserver</a></div>
-        <div>postman的基本使用</div>
-        <p>用来模拟数据的请求</p>
+        <p>选择或创建一个文件夹如www作为各种资源的主目录；利用各种子文件夹存放不同的资源数据</p>
+        <p>. json数据</p>
+        <p>. 图片数据</p>
+        <p>. 其它资源，如视频、音频等</p>
+        <div>node.js 服务器 - 详细操作，请查看 <a href="../node/static.html" class="link">资源服务器</a></div>
+        <div>使用postman模拟数据请求</div>
         <p>安装浏览器插件FeHelper前端助手或下载更加专业的postman（最近官网一直打不开）</p>
         <img src="./imgs/server0.png" alt="">
         <p>3.1 获取数据 - GET</p>
@@ -82,13 +61,41 @@
         <pre class="code">http://127.0.0.1:3000/cont/1001</pre>
         <div>axios 数据请求 - 根据项目需求发起网络请求，详细使用，请查看 <a href="../node/axios.html" class="link">axios</a></div>
       </dd>
-      <dt>五、实验结果分析与体会</dt>
+      <dt>五、服务器参考代码</dt>
+      <dd class="code">
+        <pre>
+//引入包
+const express = require('express')
+const fs = require('fs')
+
+//处理数据文件
+const file = fs.readFileSync('./public/data/food.json')
+const jsonFile = JSON.parse(file)
+
+// 创建Web服务器
+const app = express();
+
+// 静态资源
+app.use(express.static('public'))
+
+//定制路由
+app.get('/food', (req, res) => {
+  // res.send(jsonFile)
+  res.json(jsonFile)
+})
+
+//监听
+app.listen(3000, () => {
+  console.log('server is on at: http://127.0.0.1:3000');
+});</pre>
+      </dd>
+      <dt>六、实验结果分析与体会</dt>
       <dd class="number">
         <div>掌握的知识点、开发技能</div>
         <div>碰到的问题、解决的思路和方法以及未解决的问题</div>
         <div>其它思考</div>
       </dd>
-      <dt>六、实验要求</dt>
+      <dt>七、实验要求</dt>
       <dd class="number">
         <div>规范开发；独立完成；突出个人设计特点和风格</div>
         <div>实验报告：采用学院统一下发的格式文件，以图片或代码形式展示并说明实施过程、各部分功能、具体内容和实现细节，并按照要求命名，最后导出为PDF，提交个人学习通作业</div>

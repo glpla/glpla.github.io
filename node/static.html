@@ -37,9 +37,22 @@
       <pre class="code">npm init</pre>
       <p>也可以使用-y命令行参数，按照默认配置创建package.json，如入口文件默认是index.js - 推荐</p>
       <pre class="code">npm init -y</pre>
+      <pre class="code">
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}        </pre>
       <div>安装express框架</div>
       <pre class="code">npm i express --save</pre>
-      <div>创建服务器脚本index.js</div>
+      <div>创建服务器脚本index.js - 引入express；创建服务器；指定静态文件位置；指定端口并监听</div>
       <pre class="code">
 //引入express
 const express = require('express');
@@ -53,11 +66,13 @@ app.use(express.static('./www'));
 app.listen(port, res => {
   console.log('服务器启动成功，访问地址：http://127.0.0.1:3000/资源名');
 });  </pre>
+      <div>定制路由</div>
+      <p>根据业务场景和需求定制；如读取文件并返回JSON数据</p>
       <div>开启服务</div>
       <p>默认命令</p>
       <pre class="code">node index.js</pre>
       <p>自定义命令启动服务 - 修改package.json里script</p>
-      <pre>
+      <pre class="code">
 "scripts": {
   "start":"node index.js"
 }</pre>
