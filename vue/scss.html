@@ -16,18 +16,26 @@
 <body>
     <header>
         <h1>SCSS</h1>
+        <span>CSS预处理器</span>
     </header>
     <dl>
-        <dd>Sassy Cascaded Style Sheets</dd>
-        <dd>CSS 预处理器</dd>
-        <dd>是 CSS 的一种超集，其中 CSS 的所有功能都将在 SCSS 中</dd>
-        <dd>SCSS 与 CSS 相似，无需任何额外安装或配置即可轻松使用</dd>
+        <dt>SASS</dt>
+        <dd>Syntactically Awesome StyleSheets</dd>
+        <dd>CSS 预处理器，是 CSS 的一种超集；预处理器很多，还有<a href="" class="link">less</a>、<a href="" class="link">Stylus</a>等</dd>
+        <dd>SASS扩展了CSS3，增加了规则嵌套、变量、混合、选择器继承等等</dd>
+        <dd>扩展名.sass</dd>
+        <dd>缩进代替花括号</dd>
+        <dt>SCSS</dt>
+        <dd>Sassy CSS - Sassy Cascaded Style Sheets</dd>
+        <dd>SCSS就是SASS的升级版，其语法完全兼容 CSS3，并且继承了 Sass 的强大功能</dd>
+        <dd>扩展名.scss</dd>
         <dd>更容易学习开发代码</dd>
         <dd>通过采样添加新代码而不是重写现有代码库更容易与现有代码库集成</dd>
         <dd>在实现代码方面更具逻辑性和复杂性</dd>
         <dd>具有模块化功能，可以通过使用某种注释以更加模块化的方式组织代码</dd>
         <dd>具有不同的变量</dd>
         <dd>可以处理多个类和不同的嵌套样式</dd>
+        <dd>更多信息，请访问<a href="https://www.sass.hk/" class="link">SASS</a></dd>
         <dt>安装</dt>
         <dd>仅仅开发依赖，打包发布后，已经编译为对应的CSS，不再需要这个依赖</dd>
         <dd>-D等同于--save-d</dd>
@@ -35,7 +43,47 @@
             <pre>npm i sass -D</pre>
         </dd>
         <dt>语法</dt>
-        <dd>通过缩进和嵌套来表示元素的关系</dd>
+        <dd>通过缩进和嵌套来表示元素的关系；基本使用如下</dd>
+        <dd>结构如下</dd>
+        <dd class="code">
+            <pre>
+&lt;ul&gt;
+    &lt;li&gt;Lorem.&lt;/li&gt;
+    &lt;li&gt;Similique?&lt;/li&gt;
+    &lt;li&gt;Sit?&lt;/li&gt;
+    &lt;li&gt;Omnis.&lt;/li&gt;
+    &lt;li&gt;Distinctio?&lt;/li&gt;
+&lt;/ul&gt;</pre>
+        </dd>
+        <dd>对应的SCSS如下</dd>
+        <dd class="code">
+            <pre>
+&lt;style lang="scss" scoped&gt;
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        line-height: 2;
+        
+        li {
+            border-bottom: 1px solid #f40;
+            cursor: pointer;
+        
+            &:hover {
+            color: #f40;
+            }
+        
+            &::before {
+            content: '. ';
+            }
+        
+            &::after {
+            content: '-';
+            }
+        }
+    } 
+&lt;/style&gt;</pre>
+        </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
