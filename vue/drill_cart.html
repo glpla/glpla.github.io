@@ -33,7 +33,7 @@
       </dd>
       <dt>三、实验内容</dt>
       <dd>视图端：在购物车中，操作商品 - 全选、增加和减少，完成结算</dd>
-      <dd>逻辑端：根据商品列表和选中商品列表的变化，完成各种逻辑</dd>
+      <dd>逻辑端：根据商品列表lists和选中商品列表selectedLists的变化，完成各种逻辑</dd>
       <dt>四、实验步骤</dt>
       <dd class="number">
         <div>静态页面</div>
@@ -79,7 +79,7 @@ const data = reactive({
   }]
 })</pre>
         <div>全选</div>
-        <p>为全选按钮绑定改变change事件allSel；状态改变后，为真，则为全选；为假，则取消全选</p>
+        <p>为全选按钮双向绑定选中数据selectedAll，并增加改变change事件allSel；状态改变后，为真，则为全选；为假，则取消全选</p>
         <pre>
 const allSel = () => {
   if (data.selectedAll) {
@@ -89,10 +89,9 @@ const allSel = () => {
   }
 }        </pre>
         <div>单个商品选择与取消</div>
-        <div>优化全选</div>
+        <p>为单个商品对应的checkbox双向绑定每一项数据，并增加改变change事件singleSel</p>
         <p>单个商品取消选择时，全选为假</p>
-        <p>为单个商品增加数据绑定，并为对应的checkbox绑定改变change事件singleSel</p>
-        <p>商品列表和商品选择列表数量相等，为全选；否则取消全选；额外判断条件，如果商品列表为空，则也应该取消全选</p>
+        <p>商品列表和选中商品列表数量相等，为全选；否则取消全选；额外判断条件，如果商品列表为空，则也应该取消全选</p>
         <pre>&lt;input type="checkbox" :value="item" v-model="data.selectedLists" @change="singleSel"&gt;</pre>
         <pre>
 const singleSel = () => {
@@ -124,9 +123,9 @@ const dec = (item) => {
         <pre>
 const getTotal = computed(() => {
   let sum = 0
-  data.selectedLists.forEach(item => {
-    sum += item.number * item.price
-  })
+  for(let i=0; i &lt;data.selectedLists.length; i++){
+    sum += data.selectedLists[i].number * data.selectedLists[i].price
+  }
   return sum
 })</pre>
         <div>更多效果</div>
@@ -152,6 +151,9 @@ const getTotal = computed(() => {
         <div>实验报告：采用学院统一下发的格式文件，以图片或代码形式展示并说明实施过程、各部分功能、具体内容和实现细节，并按照要求命名，最后导出为PDF，提交个人学习通作业</div>
         <div>未按要求在规定时间内提交视为无效，不得分</div>
       </dd>
+      <dt>七、拓展</dt>
+      <dd>为项目增加删除功能</dd>
+      <dd>提示：删除时，不仅要删除商品列表lists的数据；还要删除选中商品列表selectedLists的数据；另外，如果商品列表为空，还要注意全选标记是否正常</dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   </div>
