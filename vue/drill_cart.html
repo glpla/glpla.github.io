@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实操 购物车</title>
+  <link rel="stylesheet" href="../css/exp.css">
+</head>
+
+<body>
+  <header>
+  </header>
+  <div class="container">
+    <h1>购物车</h1>
+    <h4>Cart</h4>
+    <dl>
+      <dt>一、实验目的</dt>
+      <dd class="number">
+        <div>掌握事件的基本使用</div>
+        <div>掌握表单元素的基本使用</div>
+        <div>掌握数据双向绑定的运用</div>
+        <div>进一步熟悉掌握服务器的搭建和使用</div>
+        <div>理解Vue的数据驱动</div>
+      </dd>
+      <dt>二、开发环境</dt>
+      <dd class="number">
+        <div>操作系统 Window 10+</div>
+        <div>文本编辑器 Vs Code</div>
+        <div>谷歌浏览器 Chrome</div>
+        <div>node.js</div>
+      </dd>
+      <dt>三、实验内容</dt>
+      <dd>视图端：在购物车中，操作商品 - 全选、增加和减少，完成结算</dd>
+      <dd>逻辑端：根据商品列表和选中商品列表的变化，完成各种逻辑</dd>
+      <dt>四、实验步骤</dt>
+      <dd class="number">
+        <div>静态页面</div>
+        <p>基本结构，无数据绑定、无事件事件</p>
+        <pre>
+&lt;div class="wrap"&gt;
+  &lt;div class="item"&gt;
+    &lt;input type="checkbox"&gt;
+    &lt;div&gt;商品&lt;/div&gt;
+    &lt;div&gt;单价&lt;/div&gt;
+    &lt;div&gt;库存&lt;/div&gt;
+    &lt;div&gt;操作&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="item"&gt;
+    &lt;input type="checkbox"&gt;
+    &lt;div&gt;name&lt;/div&gt;
+    &lt;div&gt;price&lt;/div&gt;
+    &lt;div&gt;stock&lt;/div&gt;
+    &lt;div class="btns"&gt;
+      &lt;button class="btn"&gt;-&lt;/button&gt;
+      &lt;div class="number"&gt;1&lt;/div&gt;
+      &lt;button class="btn"&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="total"&gt;总价100&lt;/div&gt;
+&lt;/div&gt;</pre>
+        <figure class="img-sn">
+          <img src="./imgs/cart0.png" alt="">
+          <figcaption>静态页面</figcaption>
+        </figure>
+        <div>实验数据</div>
+        <p>在挂载生命周期函数中从资源服务器拉取并赋值；这里给出一个应用示例；其它方法后续逐步增加</p>
+        <pre>
+const data = reactive({
+  selectedAll: false,
+  selectedLists: [],
+  lists: [{
+    "id": 77,
+    "name": "红烧牛肉面",
+    "price": 15,
+    "number": 1,
+    "stock": 6
+  }]
+})</pre>
+        <div>全选</div>
+        <p>为全选按钮绑定改变change事件allSel；状态改变后，为真，则为全选；为假，则取消全选</p>
+        <pre>
+const allSel = () => {
+  if (data.selectedAll) {
+    data.selectedLists = data.lists
+  } else {
+    data.selectedLists = []
+  }
+}        </pre>
+        <div>单个商品选择与取消</div>
+        <div>优化全选</div>
+        <p>单个商品取消选择时，全选为假</p>
+        <p>为单个商品增加数据绑定，并为对应的checkbox绑定改变change事件singleSel</p>
+        <p>商品列表和商品选择列表数量相等，为全选；否则取消全选；额外判断条件，如果商品列表为空，则也应该取消全选</p>
+        <pre>&lt;input type="checkbox" :value="item" v-model="data.selectedLists" @change="singleSel"&gt;</pre>
+        <pre>
+const singleSel = () => {
+  if (data.selectedLists.length == data.lists.length && data.lists.length) {
+    data.selectedAll = true
+  } else {
+    data.selectedAll = false
+  }
+}        </pre>
+        <div>单个商品的增加和减少</div>
+        <p>分别为增、减按钮绑定事件：增加数量inc(item)和减少数量dec(item)，并使用当前商品为形参，修改其数量number</p>
+        <p>注意越界检测</p>
+        <pre>&lt;button class="btn" @click="dec(item)"&gt;-&lt;/button&gt;</pre>
+        <pre>
+const inc = (item) => {
+  if (item.number &lt; item.stock) {
+    item.number++
+  }
+}
+const dec = (item) => {
+  if (item.number > 1) {
+    item.number--
+  }
+}</pre>
+        <div>结算逻辑</div>
+        <p>为总价绑定计算属性getTotal</p>
+        <pre>&lt;div class="total"&gt;总价{{ getTotal }}&lt;/div&gt;</pre>
+        <p>遍历选中列表，依次将商品单价和商品数量相乘，并累加，得到总价</p>
+        <pre>
+const getTotal = computed(() => {
+  let sum = 0
+  data.selectedLists.forEach(item => {
+    sum += item.number * item.price
+  })
+  return sum
+})</pre>
+        <div>更多效果</div>
+        <p>其它设计自行完成</p>
+        <figure class="img-sn">
+          <img src="./imgs/cart1.png" alt="">
+          <figcaption>全选</figcaption>
+        </figure>
+        <figure class="img-sn">
+          <img src="./imgs/cart2.png" alt="">
+          <figcaption>部分选中</figcaption>
+        </figure>
+      </dd>
+      <dt>五、实验结果分析与体会</dt>
+      <dd class="number">
+        <div>掌握的知识点、开发技能</div>
+        <div>碰到的问题、解决的思路和方法以及未解决的问题</div>
+        <div>其它思考</div>
+      </dd>
+      <dt>六、实验要求</dt>
+      <dd class="number">
+        <div>规范开发；独立完成；突出个人设计特点和风格</div>
+        <div>实验报告：采用学院统一下发的格式文件，以图片或代码形式展示并说明实施过程、各部分功能、具体内容和实现细节，并按照要求命名，最后导出为PDF，提交个人学习通作业</div>
+        <div>未按要求在规定时间内提交视为无效，不得分</div>
+      </dd>
+    </dl>
+    <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  </div>
+</body>
+
+</html>

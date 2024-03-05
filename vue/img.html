@@ -19,11 +19,19 @@
         <span>image</span>
     </header>
     <dl>
-        <dt>动态引用图片</dt>
-        <dd>解决方案1：将图片放到项目的public目录并直接引用；可以创建相应的文件夹imgs存放图片；vue-cli3默认路径为public，所以无需添加public；public即代表/</dd>
+        <dt>静态使用</dt>
+        <dd>可以使用本地图片或在线图片，如<a href="https://pixabay.com/" class="link">pixabay</a>、<a href="https://unsplash.com/"
+                class="link">unsplash</a></dd>
+        <dd class="code">
+            <pre>&lt;img src="../assets/imgs/0.jpg" alt=""&gt;</pre>
+        </dd>
+        <dt>动态使用</dt>
+        <dd class="bg">解决方案1</dd>
+        <dd>将图片放到项目的public目录并直接引用；可以创建相应的文件夹imgs存放图片；vue-cli3默认路径为public，所以无需添加public；public即代表/</dd>
         <pre class="code">&lt;img :src="src" alt=""&gt;</pre>
         <pre class="code">let src = '/imgs/10.jpg'</pre>
-        <dd>解决方案2：采用vite的<a href="https://cn.vitejs.dev/guide/assets.html" class="link">静态资源处理</a>：import.meta.url
+        <dd class="bg">解决方案2</dd>
+        <dd>采用vite的<a href="https://cn.vitejs.dev/guide/assets.html" class="link">静态资源处理</a>：import.meta.url
             是一个ESM的原生功能，会暴露当前模块的 URL。将它与原生的 URL 构造器 组合使用，在一个 JavaScript 模块中，通过 <span
                 class="warn">相对路径</span>我们就能得到一个被完整解析的静态资源 URL</dd>
         <dd>将图片作为资源引入再使用 - 适合单个静态资源</dd>
@@ -42,6 +50,8 @@ let src = '../imgs/10.jpg'
 const getImageUrl = (img) => {
     return new URL(`../imgs/${img}`, import.meta.url).href
 }</pre>
+        <dd class="bg">解决方案3</dd>
+        <dd>创建静态资源服务器或综合服务器</dd>
         <dt>背景图片的使用</dt>
         <dd>静态使用 - 仅可以引用public中的资源</dd>
         <pre class="code">&lt;div style="background-image: url('/imgs/lg.jpg');"&gt;hi,there&lt;/div&gt;</pre>
@@ -58,7 +68,7 @@ import url from '../assets/imgs/0.jpg'</pre>
 &lt;div class="box" :style="{ backgroundImage: 'url(' + url + ')' }"&gt;hi,there&lt;/div&gt;</pre>
         </dd>
         <dt>vite框架对图片的处理</dt>
-        <dd>分别在public、assets和assets同级目录常见imgs文件夹，并放入一张图片，在项目中引用，最后发布，查看框架对静态资源图片的处理情况</dd>
+        <dd>分别在public、assets和assets同级目录创建imgs文件夹，并放入一张大图和一张小图，在项目中引用，最后发布，查看框架对静态资源图片的处理情况</dd>
         <dd class="code">
             <pre>
 &lt;div&gt;public&lt;/div&gt;
