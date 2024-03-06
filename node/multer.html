@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上传 multer</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>上传</h1>
+    <span>&commat;multer</span>
+  </header>
+  <dl>
+    <dd>Multer 是一个 node.js 中间件，用于处理 multipart/form-data 类型的表单数据，它主要用于上传文件</dd>
+    <dd>请仅在有需要处理上传文件的路由中使用，以防恶意操作 - Only use this function on routes where you are handling the uploaded files</dd>
+    <dd>更多信息，请访问 <a href="https://www.npmjs.com/package/multer" class="link">NPM - multer</a></dd>
+    <dt>上传类型</dt>
+    <dd class="number">
+      <div>single(fieldname)</div>
+      <p>Accept a single file with the name fieldname. The single file will be stored in req.file.</p>
+      <div>array(fieldname[, maxCount])</div>
+      <p>Accept an array of files</p>
+      <div>fields(fields)</div>
+      <p>Accept a mix of files</p>
+      <div>none() </div>
+      <p>Accept only text fields</p>
+      <div>any()</div>
+      <p>Accepts all files</p>
+    </dd>
+    <dt>基本步骤</dt>
+    <dd class="number">
+      <div>创建服务器目录</div>
+      <div>初始化</div>
+      <div>安装multer依赖</div>
+      <div>在服务器创建上传目录</div>
+      <div>创建服务器脚本</div>
+      <div>引入依赖</div>
+      <div>配置上传存储：推荐使用storage而不是dest</div>
+      <div>创建上传实例</div>
+      <div>响应路由</div>
+      <div>开启服务</div>
+    </dd>
+    <dt>具体过程</dt>
+    <dd class="number">
+      <div>创建服务器目录 server</div>
+      <div>初始化</div>
+      <pre class="code">npm init -y</pre>
+      <div>安装依赖</div>
+      <pre class="code">npm install multer --save</pre>
+      <div>创建服务脚本index.js并引入multer</div>
+      <pre class="code">const multer = require('multer')</pre>
+      <div>配置存储 storage：指定上传目录，如upload；上传目录要提前创建好；如果不指定，上传的内容将保留在内存中</div>
+      <p>Multer accepts an options <span class="warn">object</span>, the most basic of which is the <span
+          class="warn">dest</span> property, which
+        tells Multer where
+        to upload the files. In case you omit the options object, the files will be kept in memory and never
+        written to disk.</p>
+      <p>In an average web app, <span class="warn">only</span> dest might be required.</p>
+      <p><span class="warn">more</span> control over your uploads, use the <span class="warn">storage</span> option
+        instead of dest.</p>
+      <p>使用DiskStorage配置可以更好控制上传细节，如改名；有了DiskStorage，可以放弃dest配置</p>
+      <p>需要解析获取文件扩展名，引入path包</p>
+      <p>使用时间戳为上传图片拼接名字</p>
+      <pre class="code">
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, __dirname + '/upload')
+  },
+  filename: (req, file, cb) => {
+    let ext = path.extname(file.originalname)
+    cb(null, file.fieldname + Date.now() + ext)
+  }
+})</pre>
+      <div>创建 multer示例 - 可以看出，只需要指定一个存储即可</div>
+      <pre class="code">
+const upload = multer({
+  storage: storage
+})        </pre>
+      <div>响应路由 -
+        以上传单文件single(name)为例；name是网络请求中指定的name属性，即：只接收请求中name属性指定的文件；可以根据不同的name上传不同用途的图片，如name为img代表普通图片，为avatar代表头像图片等等
+      </div>
+      <p>req.file可以获取到具体的文件信息</p>
+      <pre class="code">
+app.post('/upload', upload.single('image'), (req, res) => {
+  console.log(req.file)
+  //res.send(req.file)
+  res.send({
+    err: 0,
+    url: 'http://127.0.0.1:3000/upload/' + req.file.filename
+  })
+})</pre>
+      <p>默认情况下，只是简单的将文件上传到指定目录；不会解析文件信息，如文件名或文件后缀</p>
+      <pre class="code">
+{
+  fieldname: 'image',
+  originalname: 'XG7mQxuM7nYJ787bce43d31211e2a9fb482c28888418.png',
+  encoding: '7bit',
+  mimetype: 'image/png',
+  destination: 'upload',
+  filename: '7d9d07bdadd775e054e0e0e00fe2d444',
+  path: 'upload\\7d9d07bdadd775e054e0e0e00fe2d444',
+  size: 91117
+}</pre>
+      <div>完整服务端代码index.js如下</div>
+      <pre class="code">
+const express = require('express')
+const multer = require('multer')
+const path = require('path')
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, __dirname + '/upload')
+  },
+  filename: (req, file, cb) => {
+    let ext = path.extname(file.originalname)
+    cb(null, file.fieldname + Date.now() + ext)
+  }
+})
+
+const upload = multer({
+  storage: storage
+})
+
+const port = 3000
+const app = express()
+
+app.post('/upload', upload.single('image'), (req, res) => {
+  console.log(req.file)
+  //res.send(req.file)
+  res.send({
+    err: 0,
+    url: 'http://127.0.0.1:3000/upload/' + req.file.filename
+  })
+})
+
+app.listen(port, () => {
+  console.log('server now is at 127.0.0.1:3000');
+})</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

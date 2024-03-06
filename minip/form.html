@@ -21,99 +21,85 @@
     <dl>
         <dd>&lt;form&gt;和其中的大多数表单元素，基本同HTML5保持一致；具体效果视系统而定</dd>
         <dd>表单数据提交时，必须指定name；value可以由事件获取</dd>
+        <dt>常用组件</dt>
         <dd>表单组件繁多，常见的分类如下表</dd>
-        <dd>
-            <table class="tbl-sn">
-                <caption>表单常用组件</caption>
+        <dd class="number">
+            <div>&lt;form&gt;</div>
+            <p>表单容器</p>
+            <p>提交时，可以在事件对象e.detail中获取表格各元素的值；要求每个表单指定name属性</p>
+            <table>
                 <tr>
-                    <th>分类</th>
-                    <th>作用</th>
+                    <td>bindsubmit</td>
+                    <td>携带数据提交；默认</td>
                 </tr>
                 <tr>
-                    <td>&lt;form&gt;</td>
-                    <td>表单；默认使用bindsubmit事件</td>
+                    <td>bindreset</td>
+                    <td>表单重置时会触发 reset 事件</td>
+                </tr>
+            </table>
+            <div>label</div>
+            <p>用for来改进指定了id的表单组件的可用性</p>
+            <pre class="code">&lt;checkbox value="撸码" id="code" /&gt;&lt;label for="code"&gt;撸码&lt;/label&gt;</pre>
+            <p>使用lable包裹表单元素时，应略去for属性</p>
+            <pre class="code">
+&lt;label&gt;
+    &lt;checkbox color="#3498db" value="撸码" /&gt;撸码
+&lt;/label&gt;            </pre>
+            <div>&lt;input&gt;</div>
+            <p>输入框</p>
+            <table>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
                 </tr>
                 <tr>
-                    <td>label</td>
-                    <td>用for来改进指定了id的表单组件的可用性</td>
+                    <td>value</td>
+                    <td>输入框初始内容；字符串；必填</td>
                 </tr>
                 <tr>
-                    <td>&lt;input&gt;</td>
-                    <td>单行输入；原生组件，使用系统字体，无法设置 font-family
-                        <br>
+                    <td>type</td>
+                    <td>
                         <details>
-                            <summary>type</summary>
+                            <summary>输入框类型</summary>
                             <div>text：文本键盘；默认</div>
                             <div>number：数字键盘</div>
                             <div>digit：带小数点的数字键盘</div>
                             <div>idcard：身份证键盘</div>
-                            <div>safe-password：身份证键盘；仅 Webview 支持</div>
-                            <div>nickname：昵称输入键盘；完善用户信息</div>
                         </details>
-                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>password</td>
+                    <td>是否是密码类型；布尔；默认假</td>
+                </tr>
+                <tr>
+                    <td>placeholder</td>
+                    <td>输入框为空时占位符；字符串</td>
+                </tr>
+                <tr>
+                    <td>maxlength</td>
+                    <td>最大输入长度；数字</td>
+                </tr>
+                <tr>
+                    <td>focus</td>
+                    <td>获取焦点</td>
+                </tr>
+                <tr>
+                    <td>confirm-type</td>
+                    <td>
                         <details>
-                            <summary>confirm-type - 仅适用type='text'；具体效果视系统而定</summary>
+                            <summary>设置键盘右下角按钮的文字，仅适用text类型</summary>
                             <div>send：发送</div>
                             <div>search：搜索</div>
                             <div>next：下一个</div>
                             <div>go：前往</div>
                             <div>done：完成；默认</div>
                         </details>
-                        <br>
-                        其他：password、placeholder、maxlength等常规属性
                     </td>
                 </tr>
-                <tr>
-                    <td>&lt;textarea&gt;</td>
-                    <td>多行输入；默认大小300*150；block</td>
-                </tr>
-                <tr>
-                    <td>&lt;button&gt;*</td>
-                    <td>功能强大的按钮<br>建议只设置背景和字体颜色<br>
-                        <details>
-                            <summary>form-type</summary>
-                            <div>submit：提交表单</div>
-                            <div>reset：重置表单</div>
-                        </details>
-                        <br>
-                        <details>
-                            <summary>open-type</summary>
-                            <div>contact：客服；需要绑定客服事件bindcontact</div>
-                            <div>getPhoneNumber：获取用户手机；个人号不可使用</div>
-                            <div>getUserInfo：获取用户信息；从事件bindgetuserinfo回调函数获取用户部分信息</div>
-                            <div>chooseAvatar：获取用户头像；从bindchooseavatar回调函数的detail中返回头像临时地址</div>
-                        </details>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&lt;radio&gt; <br> &lt;radio-group&gt;</td>
-                    <td>单选；需要指定name、value<br>单选组；默认使用bindchange事件；使用事件对象e.detail获取选中的值</td>
-                </tr>
-                <tr>
-                    <td>&lt;checkbox&gt; <br> &lt;checkbox-group&gt;</td>
-                    <td>多选；需要指定name、value<br>多选组；默认使用bindchange事件；在事件对象e.detail中以<span class="warn">数组</span>形式获取选中的值
-                    </td>
-                </tr>
-                <tr>
-                    <td>&lt;picker&gt;*</td>
-                    <td>从底部弹起的滚动选择器</td>
-                </tr>
-                <tr>
-                    <td>&lt;slide&gt;*</td>
-                    <td>滑动选择器</td>
-                </tr>
-                <tr>
-                    <td>&lt;switch&gt;*</td>
-                    <td>开关选择器</td>
-                </tr>
-            </table>
-        </dd>
-        <dd>
-            <table class="tbl-sn">
-                <caption>input事件 - 利用事件对象的detail属性获取相应信息</caption>
                 <tr>
                     <td>bindinput</td>
-                    <td>键盘输入时触发 - 响应文本框的输入；输入过程中</td>
+                    <td>键盘输入时触发</td>
                 </tr>
                 <tr>
                     <td>bindfocus</td>
@@ -121,53 +107,366 @@
                 </tr>
                 <tr>
                     <td>bindblur</td>
-                    <td>输入框失去焦点时触发；相当于输入完成</td>
+                    <td>输入框失去焦点时触发</td>
                 </tr>
                 <tr>
                     <td>bindconfirm</td>
                     <td>点击完成按钮时触发</td>
                 </tr>
             </table>
+            <div>&lt;radio&gt; &lt;radio-group&gt;</div>
+            <p>单选按钮；单选按钮组</p>
+            <table>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>value</td>
+                    <td>单选按钮的值</td>
+                </tr>
+                <tr>
+                    <td>checked</td>
+                    <td>当前是否选中</td>
+                </tr>
+                <tr>
+                    <td>color</td>
+                    <td>单选按钮的颜色；同accent-color</td>
+                </tr>
+                <tr>
+                    <td>bindchange</td>
+                    <td>选中项发生改变时触发；从事件对象e.detail获取当前选中的值</td>
+                </tr>
+            </table>
+            <p>实际应用中，利用给定的数据和当前值是否相等来决定哪个是选中状态</p>
+            <pre class="code">
+&lt;radio-group bindchange="getGender" name="ugender"&gt;
+    &lt;radio value="男" checked="{{userInfo.ugender=='男'}}" color="#3498db" /&gt;男
+    &lt;radio value="女" checked="{{userInfo.ugender=='女'}}" color="#3498db" /&gt;女
+&lt;/radio-group&gt;</pre>
+            <div>&lt;checkbox&gt; &lt;checkbox-group&gt;</div>
+            <p>多选按钮；多选按钮组</p>
+            <table>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>value</td>
+                    <td>多选按钮的值</td>
+                </tr>
+                <tr>
+                    <td>checked</td>
+                    <td>当前是否选中</td>
+                </tr>
+                <tr>
+                    <td>color</td>
+                    <td>多选按钮的颜色；同accent-color</td>
+                </tr>
+                <tr>
+                    <td>bindchange</td>
+                    <td>选中项发生改变时触发；从事件对象e.detail获取当前选中的值</td>
+                </tr>
+            </table>
+            <div>&lt;textarea&gt;</div>
+            <p>多行输入；默认大小300*150；block</p>
+            <table>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>value</td>
+                    <td>输入框初始内容；字符串；必填</td>
+                </tr>
+                <tr>
+                    <td>placeholder</td>
+                    <td>输入框为空时占位符；字符串</td>
+                </tr>
+                <tr>
+                    <td>maxlength</td>
+                    <td>最大输入长度；数字</td>
+                </tr>
+                <tr>
+                    <td>focus</td>
+                    <td>获取焦点</td>
+                </tr>
+                <tr>
+                    <td>confirm-type</td>
+                    <td>
+                        <details>
+                            <summary>设置键盘右下角按钮的文字，仅适用text类型</summary>
+                            <div>send：发送</div>
+                            <div>search：搜索</div>
+                            <div>next：下一个</div>
+                            <div>go：前往</div>
+                            <div>done：完成；默认</div>
+                        </details>
+                    </td>
+                </tr>
+                <tr>
+                    <td>bindinput</td>
+                    <td>键盘输入时触发</td>
+                </tr>
+                <tr>
+                    <td>bindfocus</td>
+                    <td>输入框聚焦时触发</td>
+                </tr>
+                <tr>
+                    <td>bindblur</td>
+                    <td>输入框失去焦点时触发</td>
+                </tr>
+                <tr>
+                    <td>bindconfirm</td>
+                    <td>点击完成按钮时触发</td>
+                </tr>
+                <tr>
+                    <td>bindlinechange</td>
+                    <td>输入框行数变化时调用</td>
+                </tr>
+            </table>
+            <div>&lt;button&gt;</div>
+            <p>功能强大的按钮；建议只设置背景和字体颜色</p>
+            <p>除了默认的tap事件外，按钮其它事件大多和相应的开发能力关联</p>
+            <table>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>loading</td>
+                    <td>是否带 loading 图标</td>
+                </tr>
+                <tr>
+                    <td>form-type</td>
+                    <td>
+                        <details>
+                            <summary>按钮类型；点击触发 form 的submit/reset 事件</summary>
+                            <div>submit：提交表单</div>
+                            <div>reset：重置表单</div>
+                        </details>
+                    </td>
+                </tr>
+                <tr>
+                    <td>open-type</td>
+                    <td>
+                        <details>
+                            <summary>微信开放能力</summary>
+                            <div>contact：客服；需要绑定客服事件bindcontact</div>
+                            <div>getPhoneNumber：获取用户手机；个人号不可使用</div>
+                            <div>getUserInfo：获取用户信息；从事件bindgetuserinfo回调函数获取用户部分信息</div>
+                            <div>chooseAvatar：获取用户头像；从bindchooseavatar回调函数的detail中返回头像临时地址</div>
+                        </details>
+                    </td>
+                </tr>
+            </table>
+            <div>&lt;picker&gt;</div>
+            <p>从底部弹起的滚动选择器，如：时间选择器、日期选择器、地区选择器</p>
+            <p>除了下述通用的属性外，不同的mode，picker拥有不同的属性；如时间类的都有开始start、结束end等，详情请查看 <a
+                    href="https://developers.weixin.qq.com/miniprogram/dev/component/picker.html" class="link">官方文档</a>
+            </p>
+            <table>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>mode</td>
+                    <td>
+                        <details>
+                            <summary>模式</summary>
+                            <div>selector：普通选择器</div>
+                            <div>multiSelector：多列选择器</div>
+                            <div>time：时间选择器</div>
+                            <div>date：日期选择器</div>
+                            <div>region：省市区选择器</div>
+                        </details>
+                    </td>
+                </tr>
+                <tr>
+                    <td>bindcancel</td>
+                    <td>取消选择时触发</td>
+                </tr>
+            </table>
+            <div>&lt;slide&gt;</div>
+            <p>滑动选择器</p>
+            <table>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>min</td>
+                    <td>最小值</td>
+                </tr>
+                <tr>
+                    <td>max</td>
+                    <td>最大值</td>
+                </tr>
+                <tr>
+                    <td>step</td>
+                    <td>步长</td>
+                </tr>
+                <tr>
+                    <td>show-value</td>
+                    <td>是否显示值；默认不显示</td>
+                </tr>
+                <tr>
+                    <td>backgroundColor</td>
+                    <td>背景条的颜色</td>
+                </tr>
+                <tr>
+                    <td>activeColor</td>
+                    <td>已选择的颜色</td>
+                </tr>
+                <tr>
+                    <td>block-size</td>
+                    <td>滑块的大小，取值范围为 12 - 28</td>
+                </tr>
+                <tr>
+                    <td>block-color</td>
+                    <td>滑块颜色</td>
+                </tr>
+                <tr>
+                    <td>bindchange</td>
+                    <td>拖动后触发</td>
+                </tr>
+                <tr>
+                    <td>bindchanging</td>
+                    <td>拖动过程中触发</td>
+                </tr>
+            </table>
+            <div>&lt;switch&gt;</div>
+            <p>开关选择器</p>
+            <table>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>checked</td>
+                    <td>是否选中</td>
+                </tr>
+                <tr>
+                    <td>color</td>
+                    <td>已选择的颜色</td>
+                </tr>
+                <tr>
+                    <td>bindchange</td>
+                    <td>拖动后触发</td>
+                </tr>
+            </table>
+        </dd>
+        <dd class="tips">
+            <div>组件还有一个共同属性：disabled</div>
+            <div>各元素和整个表单的值都在事件对象中e.detail中获取</div>
         </dd>
         <dd class="example-sn">查看常见表单的值</dd>
         <dd>以注册表单为例：为各元素指定name便于提交数据</dd>
-        <dd>各元素和整个表单的值都在事件对象中e.detail.value</dd>
+        <dd>
+            <figure>
+                <figcaption>js - 数据</figcaption>
+                <pre></pre>
+            </figure>
+        </dd>
         <dd>
             <figure class="code">
                 <figcaption>wxml</figcaption>
                 <pre>
-&lt;form bindsubmit="formSub"&gt;
-    &lt;input type="text" name='uname' value='' bindinput="getIpt" /&gt;
-    &lt;input type="safe-password" name='upass' value='' bindinput="getPass" /&gt;
-    &lt;radio-group bindchange="getRadio" name='gender'&gt;
-        &lt;radio value="0" id="male" /&gt;&lt;label for="male"&gt;male&lt;/label&gt;
-        &lt;radio value="1" id="female" /&gt;&lt;label for="female"&gt;female&lt;/label&gt;
-    &lt;/radio-group&gt;
-    &lt;checkbox-group bindchange="getCb" name='like'&gt;
-        &lt;checkbox value="eat" id="c0" /&gt;&lt;label for="c0"&gt;c0&lt;/label&gt;
-        &lt;checkbox value="sleep" id="c1" /&gt;&lt;label for="c1"&gt;c1&lt;/label&gt;
-        &lt;checkbox value="play" id="c2" /&gt;&lt;label for="c2"&gt;c2&lt;/label&gt;
-        &lt;checkbox value="sing" id="c3" /&gt;&lt;label for="c3"&gt;c3&lt;/label&gt;
-    &lt;/checkbox-group&gt;
-    &lt;button form-type="submit"&gt;submit&lt;/button&gt;
+&lt;form class="form" bindsubmit="submit"&gt;
+    &lt;view class="item border-btm"&gt;
+        &lt;text&gt;学号&lt;/text&gt;
+        &lt;input class="ipt" type="digit" name="usn" placeholder="您的学号" maxlength="8" model:value="{{userInfo.usn}}" /&gt;
+    &lt;/view&gt;
+    &lt;view class="item border-btm"&gt;
+        &lt;text&gt;昵称&lt;/text&gt;
+        &lt;input class="ipt" type="text" name="uname" placeholder="您的昵称" maxlength="8" model:value="{{userInfo.uname}}" /&gt;
+    &lt;/view&gt;
+    &lt;view class="item border-btm"&gt;
+        &lt;text&gt;生日&lt;/text&gt;
+        &lt;picker mode="date" start="1975-08-01" end="2024-03-06" name="ubirth" value="{{userInfo.birth}}" bindchange="changeBirth"&gt;{{userInfo.ubirth}}&lt;/picker&gt;
+    &lt;/view&gt;
+    &lt;view class="item age"&gt;
+        &lt;text&gt;年龄&lt;/text&gt;
+        &lt;slider class="slider" activeColor="#3498db" backgroundColor="#ccc" block-size="24" block-color="#3498db" bindchange="" min="15" max="28" name="uage" value="{{userInfo.uage}}" show-value /&gt;
+    &lt;/view&gt;
+    &lt;view class="item"&gt;
+        &lt;text&gt;性别&lt;/text&gt;
+        &lt;radio-group bindchange="getGender" name="ugender"&gt;
+        &lt;radio value="男" checked="{{userInfo.ugender=='男'}}" color="#3498db" /&gt;男
+        &lt;radio value="女" checked="{{userInfo.ugender=='女'}}" color="#3498db" /&gt;女
+        &lt;/radio-group&gt;
+    &lt;/view&gt;
+    
+    &lt;view class="item"&gt;
+        &lt;text&gt;爱好&lt;/text&gt;
+        &lt;checkbox-group class="cb" bindchange="getLike" name='ulike'&gt;
+        &lt;label&gt;
+            &lt;checkbox color="#3498db" value="撸码" /&gt;撸码
+        &lt;/label&gt;
+        &lt;label&gt;
+            &lt;checkbox color="#3498db" value="睡觉" /&gt;睡觉
+        &lt;/label&gt;
+        &lt;label&gt;
+            &lt;checkbox color="#3498db" value="电玩" /&gt;电玩
+        &lt;/label&gt;
+        &lt;label&gt;
+            &lt;checkbox color="#3498db" value="唱歌" /&gt;唱歌
+        &lt;/label&gt;
+        &lt;label&gt;
+            &lt;checkbox color="#3498db" value="跳舞" /&gt;跳舞
+        &lt;/label&gt;
+        &lt;label&gt;
+            &lt;checkbox color="#3498db" value="美食" /&gt;美食
+        &lt;/label&gt;
+        &lt;label&gt;
+            &lt;checkbox color="#3498db" value="机车" /&gt;机车
+        &lt;/label&gt;
+        &lt;label&gt;
+            &lt;checkbox color="#3498db" value="旅游" /&gt;旅游
+        &lt;/label&gt;
+        &lt;/checkbox-group&gt;
+    &lt;/view&gt;
+    &lt;view class="item"&gt;
+        &lt;text&gt;简介&lt;/text&gt;
+        &lt;textarea class="ta" name="udesc" model:value="{{userInfo.udesc}}" /&gt;
+    &lt;/view&gt;
+    &lt;button form-type="submit" class="sub-btn"&gt;保存&lt;/button&gt;
 &lt;/form&gt;</pre>
             </figure>
             <figure class="code">
                 <figcaption>js</figcaption>
                 <pre>
-getIpt(e){
+data: {
+    userInfo:{
+        ubirth:'2020-08-01',
+        udesc:'hi,there.',
+        ulike:[],
+        uage:18,
+        ugender:'女',
+        uname:'glpla',
+        usn:20221001
+    }
+},
+getSn(e) {
     console.log(e.detail.value);
 },
-getPass(e){
+getName(e) {
+console.log(e.detail.value);
+},
+getGender(e){
     console.log(e.detail.value);
 },
-getRadio(e){
+getLike(e){
     console.log(e.detail.value);
 },
-getCb(e){
-    console.log(e.detail.value);
-},
-formSub(e){
+changeBirth(e){
+    console.log(e.detail);
+    this.setData({
+      "userInfo.ubirth":e.detail.value
+    })
+}
+submit(e){
     console.log(e.detail.value);
 }</pre>
             </figure>
@@ -217,20 +516,6 @@ getAvatar(e){
 }</pre>
             </figure>
         </dd>
-        <dt>&lt;picker&gt;</dt>
-        <dd>从底部弹起的滚动选择器</dd>
-        <dt>&lt;slide&gt;</dt>
-        <dd>滑动选择器</dd>
-        <dt>&lt;switch&gt;</dt>
-        <dd>开关选择器</dd>
-    </dl>
-    <div class="chap">数据双向绑定 </div>
-    <dl>
-        <dt>model</dt>
-        <dd>为value添加model修饰符即可实现双向数据绑定</dd>
-        <dd class="code">
-            <pre>&lt;input type="text" model:value='{{val}}' /&gt;</pre>
-        </dd>
     </dl>
     <div class="chap">表单数据处理</div>
     <dl>
@@ -266,15 +551,6 @@ app.post('/form', (req, res) => {
         </dd>
         <dd>详细信息，请访问 <a href="./case4.html#reg" class="link">用户注册</a>、<a href="./case4.html#quiz" class="link">问卷调查</a>
         </dd>
-        <dt>文件</dt>
-        <dd>借助中间件，如multer、formidable，配合API实现</dd>
-        <dt>wx.uploadFile(Object object)</dt>
-        <dd>文件上传</dd>
-        <dd>将本地资源上传到服务器</dd>
-        <dd>客户端发起一个 POST 请求，其中 content-type 为 multipart/form-data</dd>
-        <dt>wx.downloadFile(Object object)</dt>
-        <dd>文件下载</dd>
-        <dd>详细信息，请访问 <a href="./case5.html" class="link">文件上传和下载</a></dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

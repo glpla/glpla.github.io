@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>逻辑 JS</title>
+  <title>事件 Evetns</title>
   <link rel="stylesheet" href="../css/reset2024.css">
   <link rel="stylesheet" href="../css/common2024.css">
   <link rel="stylesheet" href="../css/code.css">
@@ -15,67 +15,30 @@
 
 <body>
   <header>
-    <h1>逻辑</h1>
-    <span>JS</span>
+    <h1>事件</h1>
+    <span>Evetns</span>
   </header>
   <dl>
-    <dd>微信小程序逻辑文件的后缀名是 <span class="warn">.js</span></dd>
-    <dd>包含：数据、事件处理函数、生命周期函数和其他函数</dd>
-    <dt>数据 Data</dt>
-    <dd>数据类型同JavaScript数据类型：Number、String，Array，Object等等</dd>
-    <dd>按照用途可以分为两种：响应式数据和静态数据；如无特别说明，都是指响应式数据</dd>
-    <dd>响应式数据用于渲染页面，在data中定义</dd>
-    <dd>静态数据在page顶级说明，和data同级，且不需要指定数据类型</dd>
-    <dd class="code">
-      <pre>
-data: {
-  msg: 'hi,there',
-  url: '/images/cal0.png',
-  tempFilePath: null,
-  userInfo:{
-    uage:18,
-    ugender:'女',
-    uname:'glpla',
-    usn:20221001
-  }
-},
-uploadFileUrl: null</pre>
-    </dd>
-    <dt>数据使用</dt>
-    <dd>结构中使用：插值表达式{{}}</dd>
-    <dd>可以绑定内容；也可以绑定属性</dd>
-    <dd class="code">
-      <pre>
-&lt;text&gt;{{msg}}&lt;/text&gt;
-&lt;image class="avatar" src="{{url}}" mode="widthFix" /&gt;      </pre>
-    </dd>
-    <dd>js中使用：this.data.varible_name</dd>
-    <dd>js中修改：this.setData()</dd>
-    <dd>js中使用函数类似</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>修改简单数据</figcaption>
-        <pre>
-this.setData({
-  msg: 'welcome back'
-})</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>修改复杂数据</figcaption>
-        <pre>
-this.setData({
-  "userInfo.uage": 24
-})</pre>
-      </figure>
-    </dd>
     <dt>事件和事件处理函数</dt>
     <dd>事件是视图层|wxml到逻辑层|js的通讯方式：将用户的行为反馈到逻辑层进行处理</dd>
     <dd>事件绑定在组件上；当达到触发事件，就会执行逻辑层中对应的事件处理函数</dd>
     <dd>- 绑定事件使用bind:语法</dd>
-    <dd>- 在页面逻辑顶层声明事件处理函数，和data同级；不需要使用关键字function</dd>
-    <dd>常见事件有：单击事件tap和触摸事件touch；此外，每个组件还有自己的独有的事件，如表单的提交事件submit和重置事件reset、滑动组件的scroll等等，详情请查阅开发文档</dd>
+    <dd>- 在页面逻辑顶层声明事件处理函数，和data同级；可以不使用关键字function；统一风格即可</dd>
+    <dd class="code">
+      <pre>
+submit(e){
+  console.log(e.detail.value);
+},
+submit: function(e){
+  console.log(e.detail.value);
+},
+submit: (e)=>{
+  console.log(e.detail.value);
+}</pre>
+    </dd>
+    <dt>事件类型</dt>
+    <dd>常见事件有：单击事件tap和触摸事件touch</dd>
+    <dd>此外，每个组件还有自己的独有的事件，如表单的提交事件submit和重置事件reset、滑动组件的scroll等等，详情请查阅官方文档</dd>
     <dd>
       <table class="tbl-sn">
         <caption>常用事件</caption>
@@ -101,7 +64,7 @@ this.setData({
         </tr>
       </table>
     </dd>
-    <dd>单击组件后执行tapMe函数</dd>
+    <dd>在结构中为组件绑定点击函数 - 单击组件后执行tapMe函数</dd>
     <dd class="code">
       <pre>&lt;view bind:tap = 'tapMe'&gt;tap me&lt;/view&gt;</pre>
     </dd>
