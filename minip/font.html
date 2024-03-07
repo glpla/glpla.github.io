@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../css/reset2024.css">
+  <link rel="stylesheet" href="../css/common2024.css">
+  <link rel="stylesheet" href="../css/code.css">
+  <link rel="stylesheet" href="../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <dl>
+    <dd>个人学习通资料区下载字体文件压缩包：Great_Vibes和Roboto</dd>
+    <dd>或自行准备喜欢的字体文件，如<a href="https://www.googlefonts.cn" class="link">谷歌字体</a></dd>
+    <dt>本地使用</dt>
+    <dd>将字体文件转换成小程序可以识别的格式，再导入到项目中</dd>
+    <dd>特点：加载快，渲染速度也快；但是会增加项目的体积</dd>
+    <dd class="example-sn">字体转换 - 以Great_Vibes为例</dd>
+    <dd class="number">
+      <div>下载Great_Vibes到本地并解压，得到字体文件GreatVibes-Regular.ttf；默认情况下，字体不支持base64，需要转码</div>
+      <div>打开<a href="https://transfonter.org/" class="link">转码 transfonter</a>，上传字体文件Add
+        fonts，勾选base64编码，单击转换Convert开始转换
+        <img src="./imgs/font1.png" alt="">
+      </div>
+      <div>转换完毕，单击下载downl，得到字体文件压缩包，解压后如下图；拷贝样式文件到小程序，修改文件后缀名为.wxss</div>
+      <img src="./imgs/font0.png" alt="">
+      <div>在小程序中，查看字体样式文件：定制了字体家族：Great Vibes</div>
+      <pre class="code">
+@font-face {
+  font-family: 'Great Vibes';
+  src: url('.....');
+}      </pre>
+      <div>在小程序样式中引入字体样式文件并使用；字体略小，可以指定为20px</div>
+      <pre class="code">
+@import '../../utils/transfonter.org-20240229-142749/stylesheet.wxss';
+text{
+  font-family: 'Great Vibes';
+  font-size: 20px;
+}</pre>
+    </dd>
+    <dt>在线使用</dt>
+    <dd>将字体文件放在资源服务器上，提供给项目在线使用</dd>
+    <dd>在小程序中定制字体，从资源服务器上获取字体文件</dd>
+    <dd>特点：不占用小程序体积；但是速度略慢，特别是中文字体</dd>
+    <dd class="example-sn">只有一个字体文件 - 以GreatVibes为例</dd>
+    <dd class="code">
+      <pre>
+@font-face {
+  font-family: 'GreatVibes';
+  src: url(http://127.0.0.1:3000/font/Great_Vibes/GreatVibes-Regular.ttf);
+}</pre>
+    </dd>
+    <dd class="example-sn">多个类型的字体文件 - 以Roboto字体为例；使用同一个字体名，但是要分别定义具体类型</dd>
+    <dd class="code">
+      <pre>
+@font-face {
+  font-family: 'Roboto';
+  src: url(http://127.0.0.1:3000/font/Roboto/Roboto-Light.ttf);
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url(http://127.0.0.1:3000/font/Roboto/Roboto-Bold.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url(http://127.0.0.1:3000/font/Roboto/Roboto-Italic.ttf);
+  font-style: italic;
+}</pre>
+    </dd>
+    <dd class="tips">
+      <div>在线使用会提示：[渲染层网络层错误] Failed to load font http://127.0.0.1:3000/font/GreatVibes-Regular.ttf
+        net::ERR_CACHE_MISS ；可以忽略</div>
+    </dd>
+  </dl>
+</body>
+
+</html>

@@ -32,14 +32,16 @@
     <dd>- 支持计算函数 calc()</dd>
     <dd>- 支持变量使用 var()</dd>
     <dd>但是：</dd>
-    <dd>- 不支持全局定义 :root</dd>
-    <dd>- 不支持*通配符</dd>
-    <dd>- 组件库部分样式优先级高于类样式，需要使用内联样式</dd>
+    <dd>- 不支持全局定义 :root；只能在顶级标签元素内部定义，如在page中定义</dd>
+    <dd>- 不支持*通配符；只能罗列所有用到的元素</dd>
+    <dd>- 不支持类背景图片；只能通过内联样式活定位曲线救国</dd>
+    <dd>- 组件库部分样式优先级高于类样式；只能使用内联样式</dd>
     <dt>选择器</dt>
-    <dd>常用选择器如下表；更多选择器使用，请查看 <a href="../web/selector.html" class="link">selector</a></dd>
-    <dd>组件样式不能使用标签选择器、ID选择器和属性选择器 - Some selectors are not allowed in component wxss, including tag name selectors,
+    <dd>小程序中的选择器没有传统CSS那样丰富，特别是在组件样式中，很多不能使用，如标签选择器、ID选择器和属性选择器 - Some selectors are not allowed in component wxss,
+      including tag name selectors,
       ID
       selectors, and attribute selectors. <span class="warn">WHY???</span></dd>
+    <dd>常用选择器如下表；更多CSS选择器使用，请查看 <a href="../web/selector.html" class="link">selector</a></dd>
     <dd>
       <table class="tbl-sn">
         <caption>选择器</caption>
@@ -48,28 +50,32 @@
           <th>说明</th>
         </tr>
         <tr>
-          <td>.</td>
-          <td>点；类选择器</td>
+          <td>类选择器</td>
+          <td>.wrap{}</td>
         </tr>
         <tr>
-          <td>#</td>
           <td>ID选择器</td>
+          <td>#id{}</td>
         </tr>
         <tr>
-          <td>element</td>
-          <td>元素|标签选择器</td>
+          <td>标签选择器</td>
+          <td>也叫元素选择器，view{}</td>
         </tr>
         <tr>
-          <td>element, element</td>
           <td>并列选择器</td>
+          <td>,分隔； .wrap, .box{}</td>
         </tr>
         <tr>
-          <td>::before</td>
-          <td>伪元素选择器</td>
+          <td>后代选择器</td>
+          <td>空格分隔; .wrap item{}</td>
         </tr>
         <tr>
-          <td>::after</td>
           <td>伪元素选择器</td>
+          <td>::before ::after ::first-letter ::first-line</td>
+        </tr>
+        <tr>
+          <td>结构伪类选择器</td>
+          <td>:nth-child() :first-child :last-child</td>
         </tr>
       </table>
     </dd>
@@ -79,57 +85,68 @@
       <div>小程序提供了很多UI的样式，背离了结构 - 样式 - 逻辑分离的原则，不建议使用，主要是巨丑。。。</div>
     </dd>
     <dt>内联样式</dt>
+    <dd>除了使用静态内联样式，还可以和数据绑定，采用动态内联样式</dd>
     <dd>样式的属性值和数据绑定 - 想绑哪个属性就绑哪个属性</dd>
     <dd class="code">
       <pre>
-&lt;image src="{{src}}" mode=""/&gt;
-&lt;text style="color: {{color}};"&gt;hi,there.&lt;/text&gt;</pre>
+&lt;text style="color: {{color}};"&gt;hi,there.&lt;/text&gt;
+&lt;text style="background-color: {{color}};"&gt;hi,there.&lt;/text&gt;
+&lt;text style="backgroundColor: {{color}};"&gt;hi,there.&lt;/text&gt;//居然不识别。。。</pre>
     </dd>
     <dd class="code">
       <pre>
 data: {
-  src:'../../imgs/qrcode.png',
   color:'#f40'
 }</pre>
     </dd>
-    <dt>类</dt>
-    <dd>动态类，使用三元表达式选择</dd>
-    <dd>真，使用bold样式；否则不使用或者指定其它样式</dd>
-    <dd class="code">
-      <pre>&lt;view class="{{isActive?'bold':''}}"&gt;hi, there.&lt;/view&gt;</pre>
-    </dd>
-    <dd>基类直接叠加活动类</dd>
-    <dd class="code">
-      <pre>&lt;view class="title {{isActive?'bold':'normal'}}"&gt;hi, there.&lt;/view&gt;</pre>
-    </dd>
-    <dd class="example-sn">类和样式共同使用</dd>
-    <dd>类box指定宽高；内联样式指定背景图片</dd>
-    <dd class="code">
-      <pre>&lt;view class="box" style="background-image: url({{src}});"&gt;&lt;/view&gt;</pre>
-    </dd>
-    <dt>样式导入 @import</dt>
-    <dd>相对路径；以;结束</dd>
+    <dd>编译后，变为静态内联样式 - 使用调试器的拾取工具，单击模拟器中的元素，可以查看其结构</dd>
     <dd>
-      <figure class="code">
-        <figcaption>在app.wxss中引入初始化样式文件和阿里字体图标文件</figcaption>
-        <pre>
-@import './utils/css/reset.wxss';
-@import './utils/css/iconfont.wxss';</pre>
+      <figure class="img-sn">
+        <img src="./imgs/wxss0.png" alt="">
+        <figcaption>编译后查看结构</figcaption>
+      </figure>
+    </dd>
+    <dt>类</dt>
+    <dd>除了使用静态类，还可以和数据绑定，采用动态类</dd>
+    <dd>动态类，使用三元表达式；真，使用bold样式；否则不使用或者指定其它样式</dd>
+    <dd>类和内联样式可以共同使用；bold和normal是说声明好的样式类</dd>
+    <dd class="code">
+      <pre>
+&lt;view class="{{isActive?'bold':''}}"&gt;hi, there.&lt;/view&gt;
+&lt;view class="title {{isActive?'bold':'normal'}}"&gt;hi, there.&lt;/view&gt;
+&lt;view class="box" style="background-image: url({{src}});"&gt;hi, there.&lt;/view&gt;</pre>
+    </dd>
+    <dd class="code">
+      <pre>
+data: {
+  src:'../../images/avatar.png',
+  isActive:false
+}      </pre>
+    </dd>
+    <dt>样式表导入 @import</dt>
+    <dd>便于样式复用；如初始化样式库、模块样式库等等</dd>
+    <dd>相对路径；以;结束</dd>
+    <dd class="example-sn">导入初始化样式表</dd>
+    <dd class="number">
+      <div>在样式目录下新建一个样式文件，命名为reset.wxss</div>
+      <div>初始化常用元素，如边框、轮廓、颜色、字体大小等</div>
+      <div>在app.wxss中引入，全局使用</div>
+      <pre class="code">
+@import './utils/css/reset.wxss';</pre>
       </figure>
     </dd>
     <dd class="example-sn" id="iconfont">导入 <a href="https://www.iconfont.cn/" class="link">阿里字体图标</a></dd>
     <dd class="number">
       <div>注册并登录</div>
-      <div>搜索字体图标 → 选择字体图标 → 添加到购物车 → 添加到项目</div>
-      <div>设置字体项目，<span class="warn">加选</span> base64</div>
+      <div>搜索字体图标 → 选择字体图标 → 添加到购物车 → 添加到项目（如没有项目，先创建再添加）</div>
+      <div>在"设置项目"中，<span class="warn">加选</span> base64</div>
       <figure class="img-sn">
         <img src="./imgs/pro3.png" alt="">
         <figcaption>字体项目设置</figcaption>
       </figure>
-      <div>下载 <span class="warn">类格式</span> 的字体</div>
-      <div>解压 → 复制iconfont.css到小程序项目 → 改后缀名为.wxss</div>
+      <div>选择 <span class="warn">font class </span>字体类格式，下载到本地</div>
+      <div>解压 → 复制iconfont.css到小程序项目某个目录 → 修改后缀名为小程序的样式类后缀名.wxss</div>
       <div>在页面的.wxss中导入；如果全局使用，请在app.wxss中导入</div>
-      <div>修改其样式的字体大小为rpx单位</div>
       <pre class="code">
 @import '../../utils/css/iconfont.wxss';
 .iconfont{
@@ -138,28 +155,9 @@ data: {
       <div>在页面的wxml中使用</div>
       <pre class="code">&lt;text class="iconfont icon-home"&gt;&lt;/text&gt;</pre>
     </dd>
-    <dd class="tips">为避免频繁使用基类，后续可封装为全局组件；详情请参考 <a href="./components.html" class="link">自定义组件</a>
-    </dd>
-    <dt>定制字体</dt>
-    <dd class="number">
-      <div>打开<a href="https://www.googlefonts.cn" class="link">谷歌字体</a>查找字体 Great+Vibes 或自己喜欢的字体或者使用其它平台</div>
-      <div>点击下载到本地并解压，得到字体文件GreatVibes-Regular.ttf；默认情况下，字体不支持base64，需要转码</div>
-      <div>打开<a href="https://transfonter.org/" class="link">转码 transfonter</a>，上传字体文件Add
-        fonts，勾选base64编码，单击转换Convert开始转换
-      </div>
-      <div>转换完毕，单击下载downl，得到字体文件压缩包，解压后如下图；然后拷贝到小程序，将.css样式文件后缀名改为.wxss</div>
-      <div>在小程序中，查看样式文件，其它定制了字体家族为：Great Vibes</div>
-      <img src="./imgs/font0.png" alt="">
-      <div>在样式中引入样式文件并使用；字体略小，可以指定为20px</div>
-      <pre class="code">
-@import '../../utils/transfonter.org-20240229-142749/stylesheet.wxss';
-text{
-  font-family: 'Great Vibes';
-  font-size: 20px;
-}</pre>
-    </dd>
     <dd class="tips">
-      <div>不管是使用阿里字体图标还是定制字体，本质上都是对数据base64的运用</div>
+      <div>可以根据需要修改iconfont.wxss的样式，如字体大小、单位、颜色等等</div>
+      <div>为避免频繁使用基类iconfont，可封装为全局组件；详情请参考 <a href="./components.html" class="link">自定义组件</a></div>
     </dd>
     <dt>单位</dt>
     <dd>1. rpx</dd>

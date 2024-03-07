@@ -41,13 +41,15 @@ data: {
 },
 uploadFileUrl: null</pre>
     </dd>
-    <dt>数据使用</dt>
+    <dt>数据绑定</dt>
     <dd>结构中使用：插值表达式{{}}</dd>
-    <dd>可以绑定内容；也可以绑定属性</dd>
+    <dd>可以绑定内容；也可以绑定属性，如样式class和内联样式</dd>
+    <dd>可以使用三元表达式</dd>
     <dd class="code">
       <pre>
 &lt;text&gt;{{msg}}&lt;/text&gt;
-&lt;image class="avatar" src="{{url}}" mode="widthFix" /&gt;      </pre>
+&lt;image class="avatar" src="{{url}}" mode="widthFix" /&gt;
+&lt;input class="ipt {{iptName?'border-focus':''}}" type="text"/&gt;</pre>
     </dd>
     <dd>js中使用：this.data.varible_name</dd>
     <dd>js中修改：this.setData()</dd>
@@ -69,122 +71,6 @@ this.setData({
   "userInfo.uage": 24
 })</pre>
       </figure>
-    </dd>
-    <dt>事件和事件处理函数</dt>
-    <dd>事件是视图层|wxml到逻辑层|js的通讯方式：将用户的行为反馈到逻辑层进行处理</dd>
-    <dd>事件绑定在组件上；当达到触发事件，就会执行逻辑层中对应的事件处理函数</dd>
-    <dd>- 绑定事件使用bind:语法</dd>
-    <dd>- 在页面逻辑顶层声明事件处理函数，和data同级；不需要使用关键字function</dd>
-    <dd>常见事件有：单击事件tap和触摸事件touch；此外，每个组件还有自己的独有的事件，如表单的提交事件submit和重置事件reset、滑动组件的scroll等等，详情请查阅开发文档</dd>
-    <dd>
-      <table class="tbl-sn">
-        <caption>常用事件</caption>
-        <tr>
-          <th>分类</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>bindtap</td>
-          <td>单击屏幕时触发；类似HTML的click</td>
-        </tr>
-        <tr>
-          <td>touchstart</td>
-          <td>触摸屏幕开始</td>
-        </tr>
-        <tr>
-          <td>touchmove</td>
-          <td>触摸屏幕移动</td>
-        </tr>
-        <tr>
-          <td>touchend</td>
-          <td>触摸屏幕结束</td>
-        </tr>
-      </table>
-    </dd>
-    <dd>单击组件后执行tapMe函数</dd>
-    <dd class="code">
-      <pre>&lt;view bind:tap = 'tapMe'&gt;tap me&lt;/view&gt;</pre>
-    </dd>
-    <dd>在逻辑js中声明事件处理函数tapMe</dd>
-    <dd class="code">
-      <pre>
-tapMe() {
-  console.log('you tapped me');
-}      </pre>
-    </dd>
-    <dt>事件对象</dt>
-    <dd>事件发生时，会触发一个事件对象event：包含事件发生时的很多额外信息，常见的有：</dd>
-    <dd>type：事件类型</dd>
-    <dd>dataset：自定义数据</dd>
-    <dd>detail：具体信息，如表单元素的值</dd>
-    <dd>target：事件对象目标；<span class="warn">绑定</span> 事件|<span class="warn">触发</span>事件的组件</dd>
-    <dd>currentTarget：当前事件对象目标，<span class="warn">响应</span>事件的组件</dd>
-    <dd>touches：一个数组，每个元素为一个 Touch 对象，表示当前停留在屏幕上的触摸点</dd>
-    <dt>事件传参</dt>
-    <dd>通过自定义数据 data- 的方式指定参数</dd>
-    <dd>利用事件对象目标的dataset获取并使用</dd>
-    <dd>多数据可以使用解构赋值 - 要求使用同名变量</dd>
-    <dd class="example-sn">利用自定义数据传参，查看事件对象目标</dd>
-    <dd>结构 - 一个大矩形包含一个小矩形；分别绑定事件、指定事件处理函数并自定义数据；样式略</dd>
-    <dd class="code">
-      <pre>
-&lt;view class="outer" bind:tap="outerTap" data-ind="outer"&gt;
-  &lt;view class="inner" bind:tap="innerTap" data-ind="inner"&gt;&lt;/view&gt;
-&lt;/view&gt;</pre>
-    </dd>
-    <dd>逻辑 - 分别显示事件对象目标和当前事件对象目标</dd>
-    <dd class="code">
-      <pre>
-outerTap(e) {
-  console.log('outer');
-  console.log(e.target.dataset);
-  console.log(e.currentTarget.dataset);
-},
-innerTap(e) {
-  console.log('inner');
-  console.log(e.target.dataset);
-  console.log(e.currentTarget.dataset);
-}</pre>
-    </dd>
-    <dd>分析：</dd>
-    <dd>单击大矩形时，target和currentTarget都是自己：自己触发事件，自己响应事件</dd>
-    <dd>单击小矩形时，由于冒泡的原因，先是小矩形响应事件，然后冒泡到大矩形再响应事件；所以: </dd>
-    <dd>. 对小矩形而言，target和currentTarget都是自己：自己触发事件，自己响应事件</dd>
-    <dd>. 对大矩形而言，它响应的是小矩形触发的事件，所以target是小矩形，而currentTarget是大矩形</dd>
-    <dd>
-      <img src="./imgs/event0.png" alt="">
-    </dd>
-    <dd class="tips">
-      <div>bind:tap和bindtap写法都可以</div>
-      <div>单个事件时，target和currentTarget一样</div>
-      <div>父子组件多个事件并存时，注意区分target和currentTarget</div>
-    </dd>
-    <dd class="example-sn">点击随机更改背景颜色</dd>
-    <dd>思路：使用内联样式绑定数据color；获取3个随机数并使用模板语法更新颜色</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>wxml</figcaption>
-        <pre>&lt;view style="background-color: {{color}};" bind:tap="randColor"&gt;random color&lt;/view&gt;</pre>
-      </figure>
-      <figure class="code">
-        <figcaption>js</figcaption>
-        <pre>
-data: {
-  color: '#f40'
-},
-randColor(){
-  let rand0=parseInt(Math.random()*255)
-  let rand1=parseInt(Math.random()*255)
-  let rand2=parseInt(Math.random()*255)
-  this.setData({
-    color:`rgb(${rand0},${rand1},${rand2})`
-  })
-}</pre>
-      </figure>
-    </dd>
-    <dd class="question">
-      <div>拓展：如何获取随机透明色的颜色</div>
-      <div>方案：额外增加一个0-1的随机数表示透明度</div>
     </dd>
   </dl>
   <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

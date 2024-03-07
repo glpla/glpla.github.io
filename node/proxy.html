@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代理</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>代理</h1>
+    <span>&commat;Proxy</span>
+  </header>
+  <dl>
+    <dd>解决跨域的冲突；注意调整接口的使用</dd>
+    <dd>修改项目vite.config.js中的服务器server配置，增加对访问接口的代理</dd>
+    <dd class="code">
+      <pre>
+server: {
+  open: true,
+  port: '3000',
+  proxy: {
+    '/store': {
+      target: 'http://127.0.0.1:3000',
+      changeOrigin: true,
+      // rewrite: (path) => path.replace(/^\/store/, '') // 不可以省略rewrite
+    }
+  }
+}</pre>
+    </dd>
+    <dd class="example-sn">王者荣耀英雄资料数据抓取代理</dd>
+    <dd>添加一个代理</dd>
+    <dd class="code">
+      <pre>
+'/api': {
+  target: 'https://pvp.qq.com',
+  changeOrigin: true,
+  // rewrite: (path) => path.replace(/^\/api/, '') // 不可以省略rewrite
+}</pre>
+    </dd>
+    <dd>网络请求</dd>
+    <dd class="code">
+      <pre>
+axios.get('/api/web201605/js/herolist.json').then(res => {
+  console.log(res);
+})</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

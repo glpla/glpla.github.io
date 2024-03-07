@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>动态资源服务器 Node.js</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>动态资源服务器</h1>
+    <span>&commat;Node.js</span>
+  </header>
+  <dl>
+    <dd>监听对JSON数据的请求，如：GET、POST、PATCH、DELETE等</dd>
+    <dd>依托express框架创建；更多信息，请访问 <a href="https://www.expressjs.com.cn/" class="link">Express.js</a></dd>
+    <dt>基本步骤</dt>
+    <dd class="number">
+      <div>准备数据</div>
+      <div>创建服务</div>
+      <div>处理请求</div>
+      <div>开启服务 - 监听</div>
+    </dd>
+    <dt>开放接口</dt>
+    <dd class="number">
+      <div>JSON数据 - 脚本中使用</div>
+      <p>数据：url+/data/文件名</p>
+      <div>GET /food?page=x&pageSize=y</div>
+      <p>获取美食列表；指定页数和每页数据大小</p>
+      <div>GET /msg</div>
+      <p>获取留言/调查问卷信息</p>
+      <div>POST /msg</div>
+      <p>保存留言/调查问卷信息</p>
+      <div>POST /uploadAvatar</div>
+      <p>上传头像</p>
+      <div>GET /userInfo</div>
+      <p>获取用户信息</p>
+    </dd>
+    <dt>具体过程</dt>
+    <dd>在静态资源服务器的基础上，增加监听路由</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>参考代码</figcaption>
+        <pre>
+let fs = require('fs');
+let express = require('express')
+
+// 读取JSON数据
+let jsonStr = fs.readFileSync('./data.json', {
+  encoding: 'utf8'
+});
+
+let data = JSON.parse(jsonStr);
+
+// 创建Web服务器对象
+let app = express();
+
+// 静态资源处理
+app.use(express.static('public'));
+
+//请求格式 url/data?page=1&pageSize=10
+app.get('/data', (req, res) => {
+  let [ ...arr ] = data
+  let start = (req.query.page - 1) * req.query.pageSize;
+  res.setHeader('X-Total-Count', data.length);
+  res.send(arr.splice(start, req.query.pageSize));
+});
+
+app.listen(3000, () => {
+  console.log('服务器启动成功，地址为：http://127.0.0.1:3000');
+});</pre>
+      </figure>
+    </dd>
+  </dl>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>
