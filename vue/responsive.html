@@ -61,9 +61,9 @@ const obj = reactive({
     name: 'gz'
 })
 
-//在某个事件函数中重新赋值，则objRe就会丢失响应式，结构中使用的变量不再响应数据变化
-const doRea = () => {
-    objRe = {
+//在某个事件函数中重新赋值，则obj就会丢失响应式，结构中使用的变量不再响应数据变化
+const do = () => {
+    obj = {
       id: 20,
       name: 'gz'
     }
@@ -72,12 +72,13 @@ const doRea = () => {
         <dd>只能单个属性赋值</dd>
         <dd class="code">
             <pre>
-const doRea = () => {
-    objRe.id = 20
+const do = () => {
+    obj.id = 20
 }</pre>
         </dd>
         <dd class="tips">
             <div>经过函数ref、reactive处理后，普通的数据或对象就变成了响应式</div>
+            <div>使用log查看一个变量是否具有响应式数据：如果带有Proxy，是响应式数据；否则就是普通变量</div>
             <div>实际开发中，更多使用ref</div>
         </dd>
     </dl>

@@ -50,7 +50,7 @@ let src = '../imgs/10.jpg'
 const getImageUrl = (img) => {
     return new URL(`../imgs/${img}`, import.meta.url).href
 }</pre>
-        <dd class="bg">解决方案3</dd>
+        <dd class="bg">解决方案3 - 推荐</dd>
         <dd>创建静态资源服务器或综合服务器</dd>
         <dt>背景图片的使用</dt>
         <dd>静态使用 - 仅可以引用public中的资源</dd>
@@ -58,12 +58,10 @@ const getImageUrl = (img) => {
         <dd>动态绑定 - 引入为资源；图片可以放任意地方</dd>
         <dd class="code">
             <pre>
-let src = '/imgs/banner.png'
 import url from '../assets/imgs/0.jpg'</pre>
         </dd>
         <dd class="code">
             <pre>
-&lt;div class="box" style="background-image: url('/imgs/banner.png');"&gt;hi,there&lt;/div&gt;
 &lt;div class="box" :style="{ backgroundImage: 'url(' + src + ')' }"&gt;hi,there&lt;/div&gt;
 &lt;div class="box" :style="{ backgroundImage: 'url(' + url + ')' }"&gt;hi,there&lt;/div&gt;</pre>
         </dd>
