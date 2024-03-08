@@ -6,54 +6,116 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>表单基本使用 Form</title>
+    <link rel="stylesheet" href="../css/exp.css">
     <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
-    <link rel="stylesheet" href="./css/case3.css">
     <base target="_blank">
-    <style>
-        :root {
-            --main-color: #ffe000;
-            --main-dark-color: #799f0c;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="wrap">
-        <header>
-            <h1>Form</h1>
-        </header>
+    <header>
+    </header>
+    <div class="container">
+        <h1>注册</h1>
+        <h4>&commat;register</h4>
         <dl>
-            <dt><span>General</span> 概要</dt>
+            <dt>内容</dt>
             <dd class="number">
-                <div>内容</div>
-                <p>.表单使用</p>
-                <div>目的</div>
-                <p>.掌握常见的表单元素的使用</p>
-                <p>.了解表单提交的基本过程</p>
-                <div>要求</div>
-                <p>.完成用户注册和问卷调查两个案例的设计和开发，并应用到小程序项目中</p>
-                <p>.独立完成</p>
+                <div>表单元素的基本使用</div>
+                <div>表单事件的基本使用</div>
             </dd>
-        </dl>
-        <dl>
-            <dt><span>Contents</span> 具体内容</dt>
-            <dd>1. 用户注册</dd>
-            <dd>用户姓名uname</dd>
-            <dd>用户密码upass</dd>
-            <dd>用户性别ugender</dd>
-            <dd>用户爱好ulike</dd>
-            <dd>其他</dd>
-            <dd>2. 问卷调查</dd>
+            <dt>目的</dt>
+            <dd class="number">
+                <div>掌握常见的表单元素的使用</div>
+                <div>了解表单提交的基本过程</div>
+                <div>熟悉常见表单元素的事件</div>
+            </dd>
+            <dt>要求</dt>
+            <dd class="number">
+                <div>独立完成完成用户注册和问卷调查两个案例的设计和开发，并应用到小程序项目中</div>
+                <div>实验报告：采用学院统一下发的格式文件，以图片或代码形式展示并说明实施过程、各部分功能、具体内容和实现细节，并按照要求命名，最后导出为PDF，提交个人学习通作业</div>
+                <div>未按要求在规定时间内提交视为无效，不得分</div>
+            </dd>
+            <dt>用户注册</dt>
+            <dd>1. 使用组件</dd>
+            <dd>.input - text/nickname</dd>
+            <dd>.slider</dd>
+            <dd>.picker</dd>
+            <dd>.radio radio-group</dd>
+            <dd>.checkbox checkbox-group</dd>
+            <dd>.textarea</dd>
+            <dd>.buttton - submit</dd>
+            <dd>2. 用户信息字段</dd>
+            <dd>
+                <pre class="code">
+userInfo:{
+    ubirth:'2020-08-01',
+    udesc:'hi,there.',
+    ulike:[],
+    uage:18,
+    ugender:'女',
+    uname:'glpla',
+    usn:20221001
+}</pre>
+            </dd>
+            <dd>3. 提交代码</dd>
+            <dd>默认提交json，所以不需要额外指定header</dd>
+            <dd>
+                <pre class="code">
+submit(e){
+    console.log(e.detail.value);
+    wx.request({
+        url: 'http://127.0.0.1:3000/userinfo',
+        method:'POST',
+        data:this.data.userInfo,
+        success:(res)=>{
+            console.log(res);
+        },
+        fail:err=>{
+            console.log(err);
+        }
+    })
+}</pre>
+            </dd>
+            <dd>4. 服务器脚本</dd>
+            <dd>
+                <pre class="code">
+const express = require('express')
+const fs = require('fs');
+
+// 创建Web服务器
+const app = express();
+const port = 3000;
+
+// 静态资源；系统中间件-靠前引用；路由中间件
+app
+  .use(express.static('./public'))
+  .use(express.json())
+
+app.post('/userInfo', (req, res) => {
+    console.log(req.body);
+    fs.writeFile('./public/data/userInfo.json', JSON.stringify(req.body), (error) => {
+        if (error) {
+            console.log('保存文件失败了')
+        }
+    });
+    res.json(req.body)
+})
+
+app.listen(port, () => {
+  console.log('server is on at: http://127.0.0.1:3000');
+});</pre>
+            </dd>
+            <dd>5. 效果图</dd>
+            <dd>
+                <img src="./imgs/setup0.png" alt="">
+            </dd>
+            <dt>问卷调查</dt>
             <dd>用户姓名uname</dd>
             <dd>用户邮箱uemail</dd>
             <dd>用户留言umsg</dd>
         </dl>
-        <footer class="txt-center">
-            <img src="../imgs/avatar.jpg" alt="">
-            <span>Best Wishes &copy; glpla 2024</span>
-        </footer>
     </div>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
 
 </html>

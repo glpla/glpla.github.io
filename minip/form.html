@@ -252,10 +252,10 @@
                     <td>
                         <details>
                             <summary>微信开放能力</summary>
-                            <div>contact：客服；需要绑定客服事件bindcontact</div>
-                            <div>getPhoneNumber：获取用户手机；个人号不可使用</div>
-                            <div>getUserInfo：获取用户信息；从事件bindgetuserinfo回调函数获取用户部分信息</div>
                             <div>chooseAvatar：获取用户头像；从bindchooseavatar回调函数的detail中返回头像临时地址</div>
+                            <div>contact：客服；需要绑定客服事件bindcontact</div>
+                            <div>getPhoneNumber：获取用户手机(企业号)</div>
+                            <div>getUserInfo：获取用户信息(接口被收回)</div>
                         </details>
                     </td>
                 </tr>
@@ -288,7 +288,7 @@
                     <td>取消选择时触发</td>
                 </tr>
             </table>
-            <div>&lt;slide&gt;</div>
+            <div>&lt;slider&gt;</div>
             <p>滑动选择器</p>
             <table>
                 <tr>
@@ -363,12 +363,6 @@
         </dd>
         <dd class="example-sn">查看常见表单的值</dd>
         <dd>以注册表单为例：为各元素指定name便于提交数据</dd>
-        <dd>
-            <figure>
-                <figcaption>js - 数据</figcaption>
-                <pre></pre>
-            </figure>
-        </dd>
         <dd>
             <figure class="code">
                 <figcaption>wxml</figcaption>
@@ -471,21 +465,6 @@ submit(e){
 }</pre>
             </figure>
         </dd>
-        <dd class="example-sn">获取用户信息</dd>
-        <dd>用户点击后获取用户信息</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>wxml</figcaption>
-                <pre>&lt;button open-type="getUserInfo" bindgetuserinfo='getInfo'&gt;getInfo&lt;/button&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>js|ts</figcaption>
-                <pre>
-getInfo(e){
-    console.log(e);
-}</pre>
-            </figure>
-        </dd>
         <dd class="example-sn">打开客服对话框</dd>
         <dd>用户点击后会打开客服对话框</dd>
         <dd>
@@ -515,41 +494,6 @@ getAvatar(e){
     console.log(e.detail);//http://tmp/bi86Wd1sI41s8ea8eb984c16d03bff787972d38e3ce6.jpg
 }</pre>
             </figure>
-        </dd>
-    </dl>
-    <div class="chap">表单数据处理</div>
-    <dl>
-        <dt>普通数据</dt>
-        <dd>原生解析 - 不需要额外中间件；express内置中间件解析，body-parser已废弃</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>数据 - 以json方式提交</figcaption>
-                <pre>
-wx.request({
-    url: 'http://127.0.0.1:3000/form',
-    method:'post',
-    data:{
-        uname:this.data.uname,
-        upass:this.data.upass
-    },
-    success:res=>{
-        console.log(res);
-    },
-    fail:err=>{
-        console.log(err);
-    }
-})</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>中间件 - 解析json数据</figcaption>
-                <pre>
-app.use(express.json())
-app.post('/form', (req, res) => {
-    console.log(req.body);
-})</pre>
-            </figure>
-        </dd>
-        <dd>详细信息，请访问 <a href="./case4.html#reg" class="link">用户注册</a>、<a href="./case4.html#quiz" class="link">问卷调查</a>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
