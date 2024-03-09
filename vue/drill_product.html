@@ -33,7 +33,7 @@
         <div>node.js</div>
       </dd>
       <dt>三、实验内容</dt>
-      <dd>服务器端：在前续静态资源服务器搭建的基础上，准备json数据并处理，相应用户特别路由的请求</dd>
+      <dd>服务器端：在前续静态资源服务器搭建的基础上：准备json数据并处理；相应用户路由请求</dd>
       <dd>客户端：从资源服务器拉取数据并渲染</dd>
       <dt>四、实验步骤</dt>
       <dd class="number">
@@ -49,26 +49,24 @@
   "discount": 0.4,
   "flavour": "清爽"
 }        </pre>
-        <div>在服务器脚本中，增加文件系统fs，解析Jason数据文件</div>
+        <div>在服务器脚本中，引入文件系统fs处理文件</div>
+        <p>这里采用同步阻塞方式解析json数据文件</p>
         <pre>
 const fs = require('fs')
 
 const file = fs.readFileSync('./public/data/food.json')
 const jsonFile = JSON.parse(file)
         </pre>
-        <div>增加路由，响应用户的get请求</div>
+        <div>增加路由，响应用户的GET请求</div>
         <pre>
 app.get('/food', (req, res) => {
   res.json(jsonFile)
 })</pre>
-        <div>启动服务，利用fehelper或postman调试服务器和接口是否正常</div>
+        <div>启动服务，利用FeHelper或Postman调试服务器和接口是否正常；如无安装，可以略</div>
         <div>创建Vue项目，修改项目，仅保留主入口组件App.vue</div>
         <div>逻辑设计：请求资源服务器，拉取数据</div>
-        <div>结构设计：根据拉取的数据综合运用响应式数据、条件渲染和列表渲染完成商品列表页</div>
-        <figure class="img-sn">
-          <img src="./imgs/list0.png" alt="">
-          <figcaption>参考效果图</figcaption>
-        </figure>
+        <div>结构设计：根据拉取的数据综合运用响应式数据、条件渲染和列表渲染完成商品列表页；参考效果如下图</div>
+        <img src="./imgs/list0.png" alt="">
       </dd>
       <dt>五、实验结果分析与体会</dt>
       <dd class="number">
@@ -79,11 +77,14 @@ app.get('/food', (req, res) => {
       <dt>六、实验要求</dt>
       <dd class="number">
         <div>规范开发；独立完成；突出个人设计特点和风格</div>
-        <div>实验报告：采用学院统一下发的格式文件，以图片或代码形式展示并说明实施过程、各部分功能、具体内容和实现细节，并按照要求命名，最后导出为PDF，提交个人学习通作业</div>
+        <div>实验报告：采用学院统一下发的格式文件，以文字说明，配以图片或代码展示并说明实施过程、各部分功能、具体内容和实现细节，导出为PDF，按照要求命名，提交个人学习通作业</div>
         <div>未按要求在规定时间内提交视为无效，不得分</div>
       </dd>
       <dt>七、拓展</dt>
-      <dd>使用阿里字体图标iconfont增加风味标识</dd>
+      <dd class="number">
+        <div>数据分页</div>
+        <div>使用阿里字体图标iconfont增加风味标识</div>
+      </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   </div>

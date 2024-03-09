@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新增数据类型</title>
+  <link rel="stylesheet" href="../css/styleNew.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+</head>
+
+<body>
+  <header>
+    <h1>&commat;DataType</h1>
+  </header>
+  <dl>
+    <dd>ES6 新增数据类型</dd>
+    <dd>数据类型仍然归类于 Object</dd>
+  </dl>
+  <div class="chap">map</div>
+  <dl>
+    <dd>存储键值对集合：有序、不唯一</dd>
+    <dd>显示最后一个age-11</dd>
+    <dd class="code">
+      <pre>
+let map = new Map([['name', 'glpla'], ['gender', 'male'], ['age', 18]])
+console.log(map, typeof map);</pre>
+    </dd>
+    <dt>属性</dt>
+    <dd class="number">
+      <div>大小：size</div>
+    </dd>
+    <dt>方法</dt>
+    <dd class="number">
+      <div>增/改：set(key,value)；没有增加；有则改之</div>
+      <div>删：delete(key)</div>
+      <div>查：has(key)</div>
+      <div>清：clear()</div>
+    </dd>
+    <dt>其它</dt>
+    <dd>遍历：forEach</dd>
+    <dd>遍历：for-of</dd>
+    <dd class="code">
+      <pre>
+for (const item of map) {
+  console.log(item);
+}
+//解构出key和value
+for (const [key, value] of map) {
+  console.log(key, value);
+}
+//输出的是值value
+map.forEach(item => {
+  console.log(item);
+})      </pre>
+    </dd>
+    <dd class="example-sn">map转换成array</dd>
+    <dd>方法1：Array.from(map) - 从一个map转换为array</dd>
+    <dd>方法2：[...map] - 扩展运算符，从一个map展开为array</dd>
+  </dl>
+  <div class="chap">set</div>
+  <dl>
+    <dd>和数组类似</dd>
+    <dd>存储键值对集合：无序、唯一</dd>
+    <dd class="code">
+      <pre>
+let set = new Set([1, 2, 3])
+console.log(set, typeof set);</pre>
+    </dd>
+    <dt>属性</dt>
+    <dd class="number">
+      <div>大小：size</div>
+    </dd>
+    <dt>方法</dt>
+    <dd class="number">
+      <div>增/改：add(data)：没有增加；有则改之</div>
+      <div>删：delete(data)</div>
+      <div>查：has(data)</div>
+      <div>清：clear()</div>
+      <div>keys()*</div>
+      <div>values()*</div>
+    </dd>
+    <dt>其它</dt>
+    <dd>遍历：forEach</dd>
+    <dd>遍历：for-of</dd>
+    <dd class="example-sn">set转换成array</dd>
+    <dd>方法1：Array.from(set) - 从一个set转换为array</dd>
+    <dd class="code">
+      <pre>let arr = Array.from(set)</pre>
+    </dd>
+    <dd>方法2：[...set] - 扩展运算符，从一个set展开为array</dd>
+    <dd class="code">
+      <pre>let arr = [...set]</pre>
+    </dd>
+    <dd class="example-sn">数组去重</dd>
+    <dd>1. array转换为set</dd>
+    <dd>2. set转换为array</dd>
+    <dd class="code">
+      <pre>
+let arr = [1, 2, 3, 4, 5, 3, 2, 5, 6, 7, 8]
+arr = Array.from(new Set(arr))
+console.log(arr);      </pre>
+    </dd>
+  </dl>
+  <div class="chap">class</div>
+  <dl>
+    <dd>是一种蓝图或模板</dd>
+    <dd>用于创建具有相同属性和方法的对象</dd>
+    <dd>使用关键字class定义</dd>
+    <dd class="code">
+      <pre>
+class Stu {
+  constructor(name, age) {
+    this.name = name
+    this.age = age
+  }
+  getAge() {
+    return this.age
+  }
+}
+let stu = new Stu('gl', 18)
+console.log(stu.getAge());      </pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+    let set = new Set(['gl', 'gx'])
+    set.add('gx')
+    console.log(set);
+  </script>
+</body>
+
+</html>

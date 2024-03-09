@@ -101,7 +101,7 @@ console.log(arr0);//1, 2, 3
 console.log(arr0.join('-'));//1-2-3</pre>
     </dd>
     <dt>slice(start,end)</dt>
-    <dd>.取子串 - 截取指定长度的部分</dd>
+    <dd>.取子串 - 选取串中位置从start到end的部分</dd>
     <dd>.返回：一个新的数组/字符串</dd>
     <dd>.原数组：不变</dd>
     <dd>.start不指定，从0开始；end不指定，截取到末尾</dd>
@@ -123,12 +123,14 @@ console.log(arr);//不变</pre>
       <pre>
 let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 let res = arr.splice(2, 2);
-console.log(res);//3,4
-console.log(arr);//1,2,5,6,7,8,9
+console.log(res);//[3,4]
+console.log(arr);//[1,2,5,6,7,8,9]
 arr.splice(2, 1, 8, 8);
-console.log(arr);//1,2,8,8,6,7,8,9；5被删除，插入|增加了2个8</pre>
+console.log(arr);//[1,2,8,8,6,7,8,9]；5被删除，插入|增加了2个8</pre>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 洗牌 Shuffle</dd>
+    <dd>根据串/数组的长度，随机取一个位置值，然后将该位置的数据删除，形成一个新串/数组；重复执行到串/数组为空</dd>
+    <dd>每次删除的数据放到一个新数组中，保存起来；这个数组就是洗牌的结果</dd>
     <dd class="code">
       <pre>
 function shuffle(arr) {
@@ -186,8 +188,8 @@ foreach(arr, (item) => {
     <dt>filter()</dt>
     <dd>.对数组中的每一项执行给定函数，返回执行结果为 true 的项组成的数组</dd>
     <dd>.calls the predicate function one time for each element in the array</dd>
-    <dd>. 返回：符合条件的新数组</dd>
-    <dd>. 原数组：不会被修改</dd>
+    <dd>.返回：符合条件的新数组</dd>
+    <dd>.原数组：不会被修改</dd>
     <dd>.函数声明式</dd>
     <dd class="code">
       <pre>
@@ -199,8 +201,10 @@ function filter(arr, fn) {
     }
   }
   return res;
-}
-
+}</pre>
+    </dd>
+    <dd class="code">
+      <pre>
 let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 let res = arr.filter(item => item % 2 === 0;)
 console.log(res);</pre>
@@ -308,6 +312,12 @@ let sum = goods.reduce((acc, cur) => {
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="../lib/ham.js"></script>
+  <script>
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let res = arr.slice(2, 4);
+    console.log(res);//3,4
+    console.log(arr);//不变
+  </script>
 </body>
 
 </html>

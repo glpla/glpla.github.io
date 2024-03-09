@@ -31,12 +31,12 @@
         <pre class="code">&lt;img :src="src" alt=""&gt;</pre>
         <pre class="code">let src = '/imgs/10.jpg'</pre>
         <dd class="bg">解决方案2</dd>
-        <dd>采用vite的<a href="https://cn.vitejs.dev/guide/assets.html" class="link">静态资源处理</a>：import.meta.url
-            是一个ESM的原生功能，会暴露当前模块的 URL。将它与原生的 URL 构造器 组合使用，在一个 JavaScript 模块中，通过 <span
-                class="warn">相对路径</span>我们就能得到一个被完整解析的静态资源 URL</dd>
         <dd>将图片作为资源引入再使用 - 适合单个静态资源</dd>
         <pre class="code">&lt;img :src="src" alt=""&gt;</pre>
         <pre class="code">import src from '../imgs/10.jpg'</pre>
+        <dd>采用vite的<a href="https://cn.vitejs.dev/guide/assets.html" class="link">静态资源处理</a>：import.meta.url
+            是一个ESM的原生功能，会暴露当前模块的 URL。将它与原生的 URL 构造器 组合使用，在一个 JavaScript 模块中，通过 <span
+                class="warn">相对路径</span>我们就能得到一个被完整解析的静态资源 URL</dd>
         <dd>为静态资源创建新的URL - 尤其适合处理多个静态资源，如 <a href="./vfor.html" class="link">列表渲染</a></dd>
         <pre class="code">&lt;img :src="getImageUrl(src)" alt=""&gt;</pre>
         <pre class="code">

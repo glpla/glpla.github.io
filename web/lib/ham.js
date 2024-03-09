@@ -2,7 +2,7 @@ let nav = document.querySelector('.nav');
 let navItems = nav.querySelectorAll('.nav-item');
 let navConts = document.querySelectorAll('.nav-cont');
 let ham = document.querySelector('.ham');
-let curInd = 0;
+// let curInd = 0;
 ham.addEventListener('click', () => {
   nav.classList.toggle('active');
   document.body.classList.toggle('lock');
