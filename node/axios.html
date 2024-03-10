@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Axios Backend</title>
+  <title>网络请求 Axios</title>
   <link rel="stylesheet" href="../css/reset2024.css">
   <link rel="stylesheet" href="../css/common2024.css">
   <link rel="stylesheet" href="../css/code.css">
@@ -14,8 +14,7 @@
   <style>
     #dog {
       width: 100%;
-      max-width: 600px;
-      min-width: 300px;
+      max-width: 300px;
       aspect-ratio: 16/9;
       margin: 0 auto;
     }
@@ -25,9 +24,10 @@
 <body>
   <header>
     <h1>Axios</h1>
-    <span>Backend</span>
+    <span>网络请求</span>
   </header>
   <dl>
+    <dd class="tips">以下测试用例基于json-server环境</dd>
     <dt>简介 overview</dt>
     <dd>异步请求；基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中</dd>
     <dd>通用、主流的第三方库；用于获取本地和远程json数据</dd>
@@ -47,34 +47,7 @@ axios.defaults.baseURL = 'http://localhost:3000'</pre>
     <dd>3. 使用 - 在组件的逻辑中请求数据，并应用到组件的结构中；<span class="warn">资源服务器应提前开启，并严格按照接口使用</span></dd>
     <dd class="code">
       <pre>
-//GET
-axios.get('/cont')
-  .then(res => {
-    console.log(res);
-})
-
-//POST
-axios.post('/cont', {
-  name: 'gg',
-  rank: 10
-})
-.then(res => {
-  console.log(res);
-})
-
-//DELETE
-axios.delete('/cont/1001')
-.then(res => {
-  console.log(res);
-})
-
-//PATCH
-axios.patch('/cont/1002', {
-  age: 999
-})
-  .then(res => {
-    console.log(res);
-})</pre>
+</pre>
     </dd>
     <dd>2. CDN方式 - 适合浏览器环境；建议将库下载到本地使用。。。CDN网络经常。。。</dd>
     <dd><a href="https://cdnjs.com/" class="link">cdnjs</a></dd>
@@ -115,58 +88,84 @@ async function getUser() {
 }        </pre>
       </figure>
     </dd>
-    <dt>请求封装</dt>
-    <dd>
-    <dd>直接使用 - 默认get</dd>
+    <dt>GET 基本过程</dt>
     <dd class="code">
       <pre>
-axios('/user/12345');</pre>
+axios.get(baseURL + '/cont')
+  .then(res => {
+    console.log('res', res);
+  })
+  .catch(err => {
+    console.log('err', err);
+  })
+  .finally(() => {
+    console.log('done for log');
+  })</pre>
     </dd>
-    <dd>向 axios 传递配置参数创建请求 - get</dd>
+    <dt>POST 基本过程</dt>
+    <dd>默认是json，所以略去了请求头header</dd>
     <dd class="code">
       <pre>
-axios({
-  method: 'get',
-  url: 'http://bit.ly/2mTM3nY',
-  responseType: 'stream'
+axios.post(baseURL + '/cont', {
+  name: 'dg',
+  age: 49,
+  rank: 1,
+  src: '1.jpg'
 })
-  .then( (response) =>{
-    console.log(response)
-  });</pre>
+  .then(res => {
+    console.log('res', res);
+  })
+  .catch(err => {
+    console.log('err', err);
+  })
+  .finally(() => {
+    console.log('done for log');
+  })      </pre>
     </dd>
-    <dd>向 axios 传递配置参数创建请求 - post</dd>
+    <dt>DELETE 基本过程</dt>
+    <dd>根据id删除</dd>
     <dd class="code">
       <pre>
-axios({
-  method: 'post',
-  url: '/user/12345',
-  data: {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
-  }
-});</pre>
+axios.delete(baseURL + '/cont/a606')
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => {
+    console.log('err', err);
+  })
+  .finally(() => {
+    console.log('done for log');
+  })</pre>
     </dd>
-    <dd>使用封装的方法请求</dd>
-    <dd>
-      <pre class="code">
-axios
-.get('./oa.json')
-.then(res => { console.log(res); })</pre>
+    <dt>PATCH 基本过程</dt>
+    <dd>根据id和数据完成修改</dd>
+    <dd class="code">
+      <pre>
+axios.patch(baseURL + '/cont/2147', {
+  rank: 10
+})
+  .then(res => {
+    console.log(res);
+  })
+  .catch(err => {
+    console.log('err', err);
+  })
+  .finally(() => {
+    console.log('done for log');
+  })      </pre>
     </dd>
-    </dd>
-    <dt>趣味应用 application</dt>
-    <dd class="example-sn">获取远程数据 - 小狗</dd>
-    <dd><button id="getDog">点击获取小狗</button></dd>
+  </dl>
+  <div class="chap">趣味应用 application</div>
+  <dl>
+    <dd class="example-sn">获取远程数据 - <button id="getDog">点击获取小狗</button></dd>
     <dd id="dog">
       <img src="" alt="">
     </dd>
-    <dd class="example-sn">获取远程数据 - 土味情话</dd>
-    <dd><button id='axios-re'>点击获取土味情话</button></dd>
+    <dd class="example-sn">获取远程数据 - <button id='axios-re'>点击获取土味情话</button></dd>
     <div id="axios-remote"></div>
-    <dd class="example-sn">获取本地数据</dd>
+    <dd class="example-sn">获取本地数据 - <button id='axios'>点击获取WEB知识体系</button></dd>
     <dd>1. 如何渲染获取到的数据？使用新节点？使用innerHtml？</dd>
     <dd>2. 表格&lt;table&gt;的使用：使用默认表格还是特别指定表头&lt;thead&gt;和表体&lt;tbody&gt;？</dd>
-    <dd><button id='axios'>点击获取WEB知识体系</button></dd>
     <dd class="tbl-box">
       <table class="tbl" cellpadding='6'>
         <thead>

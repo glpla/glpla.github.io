@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>后端数据获取 Fetch</title>
+  <title>网络请求Fetch</title>
   <link rel="stylesheet" href="../css/reset2024.css">
   <link rel="stylesheet" href="../css/common2024.css">
   <link rel="stylesheet" href="../css/code.css">
@@ -16,9 +16,10 @@
 <body>
   <header>
     <h1>Fetch</h1>
-    <span>&commat;Fetch</span>
+    <span>网络请求</span>
   </header>
   <dl>
+    <dd class="tips">以下测试用例基于json-server环境</dd>
     <dd>.fetch是w3c的一种请求标准，不是第三方库，与vue、jquery无关</dd>
     <dd>.下一代Ajax技术，采用 <span class="warn">Promise</span> 方式处理数据</dd>
     <dd>.语法简介明了</dd>
@@ -26,20 +27,56 @@
     <dd>.除了IE，多数浏览器都兼容</dd>
     <dd>.需要拼接参数，通常需要二次封装</dd>
     <dd class="code">
-      <pre>
-fetch(url, {
-    method: '',
-    body: '',
-    headers: ''
-    })
-    .then(res=>res.json())
-    .then(res)
-    .catch(err)</pre>
+      <pre>fetch(url)</pre>
     </dd>
     <dt>配置项</dt>
-    <dd>method（String）：HTTP请求方法，Get获取数据 | Post提交数据 | Delete删除数据 | Put更新数据；默认为GET</dd>
-    <dd>body（String）：HTTP请求请求参数</dd>
-    <dd>headers（Object）：HTTP请求头，默认为0</dd>
+    <dd>method（String）：HTTP请求方法，Get获取数据 | Post提交数据 | Delete删除数据 | Put/Patch更新数据；默认为GET</dd>
+    <dd>body（String）：HTTP请求的参数</dd>
+    <dd>headers（Object）：HTTP请求头，如content-type的常见值为application/json、application/x-www-form-urlencoded；默认是application/json
+    </dd>
+    <dd class="tips">
+      <div>json格式的数据POST时，可以省略header配置项；具体还要看服务器端的适配情况</div>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>GET</figcaption>
+        <pre>
+fetch(url)
+  .then(res=>res.json())
+  .then(res=>{
+    console.log(res)
+  })
+  .catch(err=>{
+    console.log(err)
+  })
+  .finally(()=>{
+    console.log('done for log')
+  })</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>POST</figcaption>
+        <pre>
+fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: ''
+})
+  .then(res => res.json())
+  .then(res => {
+    console.log('success ', res)
+  })
+  .catch(err => {
+    console.log('fail', err)
+  })
+  .finally(() => {
+    console.log('done')
+  })</pre>
+      </figure>
+    </dd>
     <dt>响应结果</dt>
     <dd>.在响应的原型[[Prototype]] Response中，可以看到相关的事件</dd>
     <dd>res.json()：得到JSON对象，同JSON.parse(responseText)一样；应用最广泛</dd>
@@ -49,14 +86,14 @@ fetch(url, {
     <dt>GET 基本过程</dt>
     <dd>只需要指定url和对应的查询参数即可</dd>
     <dd>1.fetch执行后，返回一个Promis；要拿到结果，必须在then中进一步处理</dd>
-    <dd>2.then中获取的是Promise对象，是对HTTP服务的响应，需要使用json()处理；json()是一个异步操作，将内容转换为JSON对象</dd>
-    <dd>3.json()返回的仍然是一个Promise，仍然需要在then()中处理</dd>
+    <dd>2.第1次then：获取的是Promise对象，是对HTTP服务的响应，需要使用json()处理；json()是一个异步操作，将内容转换为JSON对象</dd>
+    <dd>3.第2次then：json()返回的仍然是一个Promise，仍然需要在then()中处理</dd>
     <dd>
       <figure class="code">
-        <figcaption>传统方式</figcaption>
+        <figcaption>传统方式 - catch/finally略</figcaption>
         <pre>
 fetch('./data2021/stu.json')
-  .then(response => response.json())
+  .then(res => res.json())
   .then(res => {
     console.log(res);
   })</pre>
@@ -132,10 +169,38 @@ fetch('./imgs/avatar0.jpg')
   .then(res => img.src = URL.createObjectURL(res))</pre>
     </dd>
     <dt>POST 基本过程</dt>
-    <dd>.除了url还需要指定配置选项：</dd>
-    <dd>method：请求方法，POST</dd>
-    <dd>headers：指定数据格式：content-type，如application/json | application/x-www-form-urlencoded</dd>
-    <dd>body：请求数据；一般使用json格式</dd>
+    <dd>url</dd>
+    <dd>method：POST</dd>
+    <dd>headers：{'content-type':'application/json'}</dd>
+    <dd>body：json数据序列化后的数据</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>普通方式 - 数据序列化后再发送</figcaption>
+        <pre>
+fetch(url + '/cont', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'dg',
+    age: 49,
+    rank: 1,
+    src: '1.jpg'
+  })
+})
+  .then(res => res.json())
+  .then(res => {
+    console.log('success ', res)
+  })
+  .catch(err => {
+    console.log('fail', err)
+  })
+  .finally(() => {
+    console.log('done')
+  })</pre>
+      </figure>
+    </dd>
     <dd class="code">
       <pre>
 async function addData() {
@@ -160,6 +225,10 @@ async function addData() {
   }
 }</pre>
     </dd>
+    <dt>DELETE 基本过程</dt>
+    <dd>请根据接口完成</dd>
+    <dt>PATCH 基本过程</dt>
+    <dd>请根据接口完成</dd>
     <dt>推荐资源</dt>
     <dd>1. <a href="https://dog.ceo/api/breed/pembroke/images/random" class="link">随机小狗 dog ceo</a></dd>
     <dd>2. <a href="https://picsum.photos/" class="link">随机图片 picsum photos</a></dd>
@@ -167,6 +236,7 @@ async function addData() {
     <dd>4. http://ajax-base-api-t.itheima.net/api</dd>
     <dd>/getbooks</dd>
     <dd>/addbook</dd>
+    <button class="btn-sub">post</button>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

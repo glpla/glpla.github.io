@@ -32,26 +32,21 @@
         <dd>创建方法inc和计算属性dec</dd>
         <dd class="code">
             <pre>
-import { ref, computed } from 'vue';
-let a = ref(10)
-let b = ref(20)
+import { computed } from 'vue';
 const inc = () => {
   console.log('do function inc');
-  return a.value + b.value
 }
 const dec = computed(() => {
   console.log('do computed dec');
-  return a.value - b.value
 })</pre>
         </dd>
-        <dd>使用2次方法；2次计算属性；并通过双向绑定修改其中一个</dd>
+        <dd>使用2次方法；2次计算属性</dd>
         <dd class="code">
             <pre>
 &lt;div&gt;第1次 inc - {{ inc() }}&lt;/div&gt;
 &lt;div&gt;第2次 inc - {{ inc() }}&lt;/div&gt;
 &lt;div&gt;第1次 dec - {{ dec }}&lt;/div&gt;
-&lt;div&gt;第2次 dec - {{ dec }}&lt;/div&gt;
-&lt;input type="text" v-model.number="a"&gt;</pre>
+&lt;div&gt;第2次 dec - {{ dec }}&lt;/div&gt;</pre>
         </dd>
         <dd class="bg">分析</dd>
         <dd>数据变化时，2次方法都会执行</dd>
@@ -67,7 +62,7 @@ do function dec</pre>
             <pre>
 import { ref, computed } from 'vue';
 let age = ref(18)
-const ageRes = computed(() => {
+const res = computed(() => {
     return age.value >= 18 ? 'adault' : 'teenage'
 })</pre>
         </dd>
@@ -87,6 +82,41 @@ const getUrl = computed(() => {
         return 'http://127.0.0.1:3000' + url
     }
 })            </pre>
+        </dd>
+        <dd class="example-sn">根据成绩求绩点</dd>
+        <dd class="code">
+            <pre>
+let score = ref(80)
+const grade = computed(() => {
+  return (score) => {
+    switch (Math.floor(score / 10)) {
+      case 6:
+        return 'D'
+      case 7:
+        return 'C'
+      case 8:
+        return 'B'
+      case 9:
+        return 'A'
+      default:
+        return 'E'
+    }
+  }
+})</pre>
+        </dd>
+        <dd class="question">以上逻辑有什么需要改进的地方</dd>
+        <dd class="code">
+            <pre>&lt;div&gt;grade {{ score }} - {{ grade(score) }}&lt;/div&gt;</pre>
+        </dd>
+        <dd>使用静态数据</dd>
+        <dd class="code">
+            <pre>
+&lt;div&gt;grade 55 - {{ grade(55) }}&lt;/div&gt;
+&lt;div&gt;grade 60 - {{ grade(60) }}&lt;/div&gt;
+&lt;div&gt;grade 71 - {{ grade(71) }}&lt;/div&gt;
+&lt;div&gt;grade 80 - {{ grade(80) }}&lt;/div&gt;
+&lt;div&gt;grade 90 - {{ grade(90) }}&lt;/div&gt;
+&lt;div&gt;grade 100 - {{ grade(100) }}&lt;/div&gt;</pre>
         </dd>
         <dd class="tips">
             <div>除了数据计算外，不应该有其它操作，如数据请求，DOM修改等副作用，即：只做一件事情</div>
