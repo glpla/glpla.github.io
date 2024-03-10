@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../css/navHam.css">
   <link rel="stylesheet" href="../css//datatype.css">
   <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
   <base target="_blank">
 </head>
 
@@ -151,38 +152,7 @@ console.log(+'123');//蓝色123      </pre>
     <dd>.可以为引用类型的值其添加属性和方法，也可以改变和删除其属性和方法</dd>
     <dd>.不能给基本类型的值添加属性</dd>
     <dd>.除了保存的方式不同之外，在从一个变量向另一个变量复制基本类型值和引用类型值时，也存在不同：基本类型是值拷贝；而引用类型是同一个指向存储在堆中的同一个对象</dd>
-    <dt>1. Object</dt>
-    <dd>.在{}中以值对key-value的形式定义</dd>
-    <dd>.对象其实就是一组数据和功能的集合</dd>
-    <dd>.使用点语法或数组语法访问值对</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 声明对象并添加属性</dd>
-    <dd class="code">
-      <pre>
-let obj = { name: 'cnplaman', age: 18 }
-obj.gender = 'male';
-obj.marriage = true;
-console.log(obj.name);
-console.log(obj['name']);
-console.log(obj);</pre>
-    </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 遍历对象</dd>
-    <dd class="code">
-      <pre>
-for (const key in obj) {
-  console.log(key, obj[key]);
-}</pre>
-    </dd>
-    <dd>.函数的参数传递是传值；但是函数内部对对象的访问是引用</dd>
-    <dd class="code">
-      <pre>
-function setObj(obj) {
-    obj.name = 'glpla';
-}
-var stu = new Object();
-setObj(stu);
-console.log(stu.name);</pre>
-    </dd>
-    <dt>2. Array</dt>
+    <dt>1. Array 数组</dt>
     <dd>有序集合</dd>
     <dd>.以[]定义，每个数据可以是相同的数据类型，也可以是不同的数据类型；每个高级语言对数组数据项的要求不尽相同</dd>
     <dd>检查数据类型，归类于 Object</dd>
@@ -190,18 +160,32 @@ console.log(stu.name);</pre>
       <pre>let arr = [1, { name: 'gx' }, false, 'hi']</pre>
     </dd>
     <dd>.更多信息，请访问 <a href="./array.html">Array</a></dd>
-    <dt>3. function</dt>
+    <dt>2. Object 对象</dt>
+    <dd>.在{}中以值对key-value的形式定义</dd>
+    <dd>.对象其实就是一组数据和功能的集合</dd>
+    <dd>.使用点语法或数组语法访问值对</dd>
+    <dd>.更多信息，请访问 <a href="./object.html">Object</a></dd>
+    <dt>3. function 函数</dt>
     <dd>.可重复执行的代码块，可以接收参数；允许有返回值</dd>
     <dd>.检查数据类型：function</dd>
-    <dd>.更多细节函数，请访问 <a href="./function.html">function</a></dd>
-    <dt>4. RegExp</dt>
-    <dd>.正则表达式请访问 <a href="./regExp.html">RegExp</a></dd>
-    <dt>5. date</dt>
-    <dt>6. map</dt>
+    <dd>.更多细节函数，请访问 <a href="./function.html">Function</a></dd>
+    <dt>4. map</dt>
+    <dd>映射</dd>
     <dd>ES6 新增数据类型</dd>
-    <dd>存储键值对的有序集合</dd>
-    <dt>7. set</dt>
-    <dt>8. class</dt>
+    <dd>存储键值对的有序集合、不唯一</dd>
+    <dd>.更多信息，请访问 <a href="./map.html">Map</a></dd>
+    <dt>5. set 集合</dt>
+    <dd>ES6 新增数据类型</dd>
+    <dd>无序、唯一</dd>
+    <dd>.更多信息，请访问 <a href="./set.html">Set</a></dd>
+    <dt>6. class 类</dt>
+    <dd>ES6 新增数据类型</dd>
+    <dd>用于创建具有相同属性和方法的对象</dd>
+    <dd>.更多信息，请访问 <a href="./class.html">Class</a></dd>
+    <dt>7. RegExp 正则表达式</dt>
+    <dd>.更多信息，请访问 <a href="./regExp.html">RegExp</a></dd>
+    <dt>8. date 日期类</dt>
+    <dd>.更多信息，请访问 <a href="./date.html">RegDateExp</a></dd>
   </dl>
   <div class="chap">类型操作符 Operator</div>
   <dl class="nav-cont">
@@ -257,6 +241,13 @@ console.log([1, 2] instanceof Array);//true</pre>
         alert(res);
       }
     })
+    let obj = { name: 'cnplaman', age: 18 }
+    let sql = 'age' in obj
+    console.log(sql);
+    console.log(Object.keys(obj).length);
+    console.log(Object.values(obj).length);
+    console.log(Object.entries(obj).length);
+
   </script>
 </body>
 

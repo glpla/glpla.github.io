@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象 Object</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>对象</h1>
+    <span>&commat;Object</span>
+  </header>
+  <dl>
+    <dd>.在{}中以值对key-value的形式定义</dd>
+    <dd>.对象其实就是一组数据和功能的集合</dd>
+    <dd>.使用点语法或数组语法访问值对</dd>
+    <dt>对象静态方法</dt>
+    <dd class="number">
+      <div>entries()：返回对象入口|键值对组成的数组</div>
+      <div>keys()：返回对象键key组成的数组</div>
+      <div>values()：返回对象值value组成的数组</div>
+    </dd>
+    <dt>对象实例方法</dt>
+    <dd class="number">
+      <div>增/改</div>
+      <pre class="code">
+let obj = { name: 'cnplaman', age: 18 }
+obj.gender = 'male';
+obj.marriage = true;
+obj.age = 24;
+console.log(obj.name);
+console.log(obj['name']);
+console.log(obj);</pre>
+      <div>删</div>
+      <pre class="code">
+delete obj.marriage;
+console.log(obj);</pre>
+      <div>查：定义查询字符串</div>
+      <pre class="code">
+let sql = 'age' in obj
+console.log(sql);      </pre>
+      <div>长度：无法直接获取</div>
+      <p>通过对象Object的静态方法：entries()、keys()或values()间接获取；这三个方法返回入口、键和值的数组</p>
+      <pre class="code">
+console.log(Object.keys(obj).length);
+console.log(Object.values(obj).length);
+console.log(Object.entries(obj).length);      </pre>
+      <div>遍历对象：for-in；枚举</div>
+      <pre class="code">
+// 遍历的是key，要想获取值value，则配合对象使用
+for (item in obj) {
+  console.log(item, obj[item]);
+}
+
+//fail
+// obj.forEach(item => {
+//   console.log(item);
+// })
+
+// fail：TypeError: obj is not iterable
+// for (item of obj) {
+//   console.log(item);
+// }
+
+//也可以先entries()、keys()或values()，再使用数组遍历方法，如for()或forEach()
+Object.keys(obj).forEach(item => {
+  console.log(item);
+})
+Object.values(obj).forEach(item => {
+  console.log(item);
+})
+Object.entries(obj).forEach((item) => {
+  console.log(item);
+})
+//解构再输出
+Object.entries(obj).forEach(([value, key]) => {
+  console.log(key, value);
+})</pre>
+    </dd>
+    <dd>.函数的参数传递是传值；但是函数内部对对象的访问是引用</dd>
+    <dd class="code">
+      <pre>
+function setObj(obj) {
+    obj.name = 'glpla';
+}
+var stu = new Object();
+setObj(stu);
+console.log(stu.name);</pre>
+    </dd>
+    <dt>对象的解构</dt>
+    <dd>将数组中的值或对象的属性取出，赋值给其他变量</dd>
+    <dd>可以嵌套解构</dd>
+    <dd>高频使用</dd>
+    <dd>更多信息，请访问<a
+        href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring
+        Assignment</a></dd>
+    <dd class="code">
+      <pre>
+import { createApp } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue';
+const { add, dec } = require('./module/test')</pre>
+    </dd>
+    <dd>普通解构赋值</dd>
+    <dd class="code">
+      <pre>
+let obj = { name: 'cnplaman', age: 18 }
+let { name, age } = obj
+
+//重命名赋值
+let { name: uname, age: uage } = obj
+console.log(name, age);</pre>
+    </dd>
+    <dd>嵌套解构赋值</dd>
+    <dd class="code">
+      <pre>
+let obj = { name: 'cnplaman', age: 18, address: { city: 'gz', code: 541000 } }
+let { name, age, address: { city } } = obj
+console.log(name, age, city);      </pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+    let obj = { name: 'cnplaman', age: 18 }
+    let { name: uname, age: uage } = obj
+    console.log(uname, uage); 
+  </script>
+</body>
+
+</html>

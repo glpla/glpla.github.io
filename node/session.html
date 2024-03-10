@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会话 Session</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>会话</h1>
+    <span>&commat;Session</span>
+  </header>
+  <dl>
+    <dd>可看到存储数据的一种机制</dd>
+    <dd>确保挂在所有路由定义之前</dd>
+    <dd>会话失效：存的数据不会丢失，只是小票失效了，无法访问</dd>
+    <dd>安装依赖</dd>
+    <dd class="code">
+      <pre>npm i express-session --save</pre>
+    </dd>
+    <dd>声明</dd>
+    <dd class="code">
+      <pre>
+server.use(session({
+  //必填
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+    // cookie: {
+    //   secure: true
+    // }
+}))  </pre>
+    </dd>
+    <dd>查看</dd>
+    <dd class="code">
+      <pre>
+network → response header
+application → cookies</pre>
+    </dd>
+    <dd class="tips">node每次服务重新启动都会导致原来session丢失</dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -52,18 +52,35 @@ arr0 = [1, 3];//指向别的内存
 console.log(arr0, arr1)</pre>
     </dd>
     <dd>2. 解构赋值 [] </dd>
-    <dd>一次性把数组元素赋值给多个变量</dd>
+    <dd>一次性把数组元素或对象赋值给多个变量</dd>
     <dd>赋值</dd>
     <dd class="code">
       <pre>let [a, b] = [1, 3];</pre>
+    </dd>
+    <dd>指定位置赋值 - 获取最后一个</dd>
+    <dd class="code">
+      <pre>
+let [, , , , a] = [1, 2, 3, 4, 5];
+//a=5</pre>
     </dd>
     <dd>交换赋值</dd>
     <dd class="code">
       <pre>[a, b] = [b, a];</pre>
     </dd>
-    <dd>保存解构剩余数据</dd>
+    <dd>...剩余赋值 - 第1个给a，其它给rest；剩余属性必须是模式中的最后一个，并且不能有尾随逗号</dd>
     <dd class="code">
-      <pre>let [a, ...rest] = [1, 2, 3, 4, 5, 6, 7, 8, 9]</pre>
+      <pre>
+let [a, ...rest] = [1, 2, 3, 4, 5]
+//a=1
+//rest=[2,3,4,5]      </pre>
+    </dd>
+    <dd>默认赋值 - 位置要匹配</dd>
+    <dd class="code">
+      <pre>
+let [name, age = 18, gender] = ['gl', , 'male']
+console.log(name, age, gender);
+let [name, age = 18] = ['gl']
+console.log(name, age);      </pre>
     </dd>
     <dd>3. 扩展运算符 ...</dd>
     <dd>将数组各项展开，适合数组复制</dd>
@@ -313,10 +330,7 @@ let sum = goods.reduce((acc, cur) => {
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="../lib/ham.js"></script>
   <script>
-    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let res = arr.slice(2, 4);
-    console.log(res);//3,4
-    console.log(arr);//不变
+
   </script>
 </body>
 

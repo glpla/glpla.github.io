@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>映射 Map</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>映射</h1>
+    <span>&commat;Map</span>
+  </header>
+  <dl>
+    <dd>ES6 新增数据类型</dd>
+    <dd>数据类型仍然归类于 Object</dd>
+    <dt>map 映射</dt>
+    <dd>存储键值对集合：有序、不唯一</dd>
+    <dd>显示最后一个age-11</dd>
+    <dd class="code">
+      <pre>
+let map = new Map([['name', 'glpla'], ['gender', 'male'], ['age', 18]])
+console.log(map, typeof map);</pre>
+    </dd>
+    <dt>属性</dt>
+    <dd class="number">
+      <div>大小：size</div>
+    </dd>
+    <dt>方法</dt>
+    <dd class="number">
+      <div>增/改：set(key,value)；没有增加；有则改之</div>
+      <div>删：delete(key)</div>
+      <div>查：has(key)</div>
+      <div>清：clear()</div>
+    </dd>
+    <dt>其它</dt>
+    <dd>遍历：forEach</dd>
+    <dd>遍历：for-of</dd>
+    <dd class="code">
+      <pre>
+for (const item of map) {
+  console.log(item);
+}
+//解构出key和value
+for (const [key, value] of map) {
+  console.log(key, value);
+}
+//输出的是值value
+map.forEach(item => {
+  console.log(item);
+})      </pre>
+    </dd>
+    <dd class="example-sn">map转换成array</dd>
+    <dd>方法1：Array.from(map) - 从一个map转换为array</dd>
+    <dd>方法2：[...map] - 扩展运算符，从一个map展开为array</dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

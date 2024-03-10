@@ -6,24 +6,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>正则表达式 RegExp</title>
-  <link rel="stylesheet" href="../css/styleNew.css">
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
 </head>
 
 <body>
   <header>
-    <h1>&commat;RegExp</h1>
+    <h1>正则表达式</h1>
+    <span>&commat;RegExp</span>
   </header>
-  <div class="chap">Overview</div>
   <dl>
-    <dt>说明</dt>
+    <dt>说明 Overview</dt>
     <dd>. 功能强大</dd>
-  </dl>
-  <div class="chap">案例 Cases</div>
-  <dl>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 隐藏手机中间4位</dd>
     <dd>隐藏前：52188881314</dd>
     <dd>隐藏后：<span class="cell0">52188881314</span></dd>
-    <dd>
+    <dd class="code">
       <pre>
 let cell0 = document.querySelector('.cell0');
 let reg0 = /^(\d{3})\d{4}(\d{4})$/
@@ -32,7 +32,7 @@ cell0.innerHTML = cell0.innerHTML.replace(reg0, '$1****$2')</pre>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 弟弟打车只显式手机后4位</dd>
     <dd>隐藏前：52188881314</dd>
     <dd>隐藏后：<span class="cell1">52188881314</span></dd>
-    <dd>
+    <dd class="code">
       <pre>
 let cell1 = document.querySelector('.cell1');
 let reg1 = /^\d{7}(\d{4})$/
@@ -40,7 +40,7 @@ cell1.innerHTML = cell1.innerHTML.replace(reg1, '*******$1')</pre>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 编辑结构-将每个字符都套上1个&lt;span&gt;</dd>
     <dd>. $&表示匹配到的字符</dd>
-    <dd>
+    <dd class="code">
       <pre>
 let h1 = document.querySelector('h1')
 h1.innerHTML = h1.innerHTML.replace(/\S/g, '&lt;span&gt;$&&lt;/span&gt;')</pre>

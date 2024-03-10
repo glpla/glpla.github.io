@@ -31,18 +31,23 @@ server.get('/:id', (req, res) => {
     <dt>res</dt>
     <dd>响应</dd>
     <dd class="number">
-      <div>write - 写回流时，需要显式指定结束 end</div>
+      <div>write() - 写回流时，需要显式指定结束 end</div>
       <pre class="code">
 res.write(data)
 res.end()</pre>
-      <div>Send - 发送普通字符</div>
+      <div>send() - 发送普通字符</div>
       <pre class="code">res.send('hi,there.') </pre>
       <pre class="code">res.send('&lt;h1&gt;hi,there.&lt;/h1&gt;') </pre>
       <pre class="code">res.send({ id: 10, name: 'gl' }) </pre>
-      <div>SendFile() - 需要指定参考路径</div>
+      <div>sendFile() - 需要指定参考路径</div>
       <pre class="code">res.sendFile('./www/index.html', { root: __dirname })</pre>
-      <div>res.json() - 返回json数据</div>
+      <div>json() - 返回json数据</div>
       <pre class="code">res.json({ id: 10, name: 'gl' })</pre>
+      <div>render() - 页面路径依据配置的静态资源路径</div>
+      <pre class="code">
+res.render('home/index', {
+  navIndex: 0
+})</pre>
       <div>其它</div>
       <pre class="code">res.status(200).json({ msg: 'cnplaman', success: true })</pre>
     </dd>

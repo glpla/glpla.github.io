@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类 Class</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>类</h1>
+    <span>&commat;Class</span>
+  </header>
+  <dl>
+    <dd>ES6 新增数据类型</dd>
+    <dd>数据类型仍然归类于 Object</dd>
+    <dt>class 类</dt>
+    <dd>是一种蓝图或模板</dd>
+    <dd>用于创建具有相同属性和方法的对象</dd>
+    <dd>使用关键字class定义；类名采用大驼峰</dd>
+    <dd class="code">
+      <pre>
+class Stu {
+  constructor(name, age) {
+    this.name = name
+    this.age = age
+  }
+  getAge() {
+    return this.age
+  }
+}
+let stu = new Stu('gl', 18)
+console.log(stu.getAge());      </pre>
+    </dd>
+    <dt>extends 继承</dt>
+    <dd>继承父类的非私有属性和方法</dd>
+    <dd>可以增加自己专有的属性和方法</dd>
+    <dd class="code">
+      <pre>
+class Clert extends Stu {
+  constructor(name, age, position) {
+    super(name, age)
+    this.position = position
+    console.log('clert init');
+  }
+  doPosition() {
+    console.log('my position');
+  }
+}      </pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+    class Stu {
+      constructor(name, age) {
+        this.name = name
+        this.age = age
+        console.log('stu init');
+      }
+      getAge() {
+        console.log(this.age);
+        return this.age
+      }
+    }
+    class Clert extends Stu {
+      constructor(name, age, position) {
+        super(name, age)
+        this.position = position
+        console.log('clert init');
+      }
+      doPosition() {
+        console.log('my position');
+      }
+    }
+    let clert = new Clert('gl', 18, 'full stack')
+    clert.getAge()
+    clert.doPosition()
+  </script>
+</body>
+
+</html>

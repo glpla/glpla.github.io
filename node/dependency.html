@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>依赖 Dependency</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>依赖</h1>
+    <span>&commat;Dependency</span>
+  </header>
+  <dl>
+    <dl>
+      <dt>nodemon</dt>
+      <dd>自动检测js文件变化，适合开发时使用</dd>
+      <dd>1. 安装</dd>
+      <dd class="code">
+        <pre>cnpm i nodemon -g</pre>
+      </dd>
+      <dd>2. 监听文件</dd>
+      <dd>监听指定文件 - 注意当前工作目录和目标文件的路径关系</dd>
+      <dd class="code">
+        <pre>nodemon xx.js</pre>
+      </dd>
+      <dd>监听默认文件 - 自动监听配置文件package.json里main字段指定的文件；默认是index.js</dd>
+      <dd class="code">
+        <pre>nodemon</pre>
+      </dd>
+      <dt>mock</dt>
+      <dd>数据制造机</dd>
+      <dt>multer</dt>
+      <dd>Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
+      </dd>
+      <dd>Multer is a node.js middleware for handling <span class="warn">multipart/form-data</span>, which is
+        primarily used for uploading files. It is written on top of busboy for maximum efficiency.</dd>
+      <dd>Multer adds a body object and a file or files object to the request object:</dd>
+      <dd>The <span class="warn">body</span> object contains the values of the <span class="warn">text</span> fields
+        of the form.</dd>
+      <dd>the <span class="warn">file</span> or files object contains the <span class="warn">files</span> uploaded via
+        the form.</dd>
+      <dd>. upload.none()：only text field</dd>
+      <dd>. upload.single(file)：single file</dd>
+      <dd>. upload.array()：multiple files</dd>
+      <dd>安装依赖 - 推荐使用cnpm；更多信息，请查看 <a href="https://www.npmjs.com/package/multer#readme" class="link">NPM - multer</a>
+      </dd>
+      <pre class="code">npm install multer --save</pre>
+      <dt>Formidable</dt>
+      <dd>A Node.js module for parsing form data, especially <span class="warn">file uploads</span>.</dd>
+      <dd>Formidable是一个Node.js模块，用于解析表单数据，特别是文件上传；更多信息，请查看<a href="https://www.npmjs.com/package/formidable#readme"
+          class="link">NPM - formidable</a></dd>
+      <dd class="code">
+        <pre>cnpm i formidable --save</pre>
+      </dd>
+      <dt>md5</dt>
+      <dd>信息摘要</dd>
+      <dd>md5加密后长度32bit</dd>
+      <dt>moment</dt>
+      <dd>时间格式处理</dd>
+      <dt>mysql</dt>
+      <dd>数据库</dd>
+      <dt>xlsx</dt>
+      <dd>电子表格处理</dd>
+      <dd>表格导出为excel</dd>
+      <dd>step1：安装依赖</dd>
+      <dd class="code">
+        <pre>npm i xlsx</pre>
+      </dd>
+      <dd>step2：引入dist中的xlsx.full.min.js</dd>
+      <dd class="code">
+        <pre>
+&lt;script src="js/xlsx.full.min.js">&lt;/script&gt;
+&lt;script src="js/export.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  function btn_export() {
+    var table1 = document.querySelector("#table1");
+    var sheet = XLSX.utils.table_to_sheet(table1);//将一个table对象转换成一个sheet对象
+    openDownloadDialog(sheet2blob(sheet), '下载.xlsx');
+  }
+&lt;/script&gt;</pre>
+      </dd>
+    </dl>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

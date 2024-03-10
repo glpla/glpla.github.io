@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>Promise</h1>
+  </header>
+  <dl>
+    <dd>承诺在未来某个时刻可能完成并返回结果</dd>
+    <dd>异步操作</dd>
+    <dt>状态</dt>
+    <dd class="number">
+      <div>pending</div>
+      <p>待处理 - 调用Promise时，初始状态为 pending，表示还没有开始</p>
+      <pre class="code">
+let promise = new Promise((resolve, reject) => {
+})
+
+console.log(promise);</pre>
+      <div>fulfilled</div>
+      <p>执行成功 - 调用resolve，将Promise的状态改为fulfilled，通过then获取结果；履行承诺</p>
+      <pre class="code">
+let promise = new Promise((resolve, reject) => {
+  resolve('fulfilled')
+})
+
+console.log(promise);
+
+promise.then(res => {
+  console.log(res);
+})</pre>
+      <div>rejected</div>
+      <p>执行异常 - 调用reject，将Promise的状态改为rejected，通过catch出来错误；拒绝承诺|被驳回</p>
+      <pre class="code">
+let promise = new Promise((resolve, reject) => {
+  reject('rejected')
+})
+
+console.log(promise);
+
+promise.catch(err => {
+  console.log(err);
+})</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+    let promise = new Promise((resolve, reject) => {
+      resolve('fulfilled')
+      reject('rejected')
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      .finally(log => {
+        console.log('ending for log');
+      })
+  </script>
+</body>
+
+</html>
