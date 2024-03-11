@@ -109,7 +109,7 @@ let sh = window.screen.height;</pre>
     <dd>[<span class="iconfont icon-bell"></span>]通常综合运用不同的布局方式进行开发</dd>
     <dd>[<span class="iconfont icon-bell"></span>]代码有冗余，影响性能</dd>
     <dd class="example-sn">响应式版心</dd>
-    <dd>使用max-width</dd>
+    <dd>方案1：使用max-width</dd>
     <dd>
       <pre class="code">
 main {
@@ -118,7 +118,7 @@ main {
   margin: 0 auto;
 }</pre>
     </dd>
-    <dd>使用min()函数</dd>
+    <dd>方案2：使用min()函数</dd>
     <dd>
       <pre class="code">
 main {
@@ -126,9 +126,19 @@ main {
   margin: 0 auto;
 }</pre>
     </dd>
-    <dd class="example-sn">动态设置字体大小</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>]设置字体大小</dd>
+    <dd>方案1：静态设置 - 为方便计算，通常设置html字体大小为62.5%：1rem=10px</dd>
+    <dd class="code">
+      <pre>
+html {
+    //font-size: 10px;
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}</pre>
+    </dd>
+    <dd>方案2：动态设置 - 根据视口宽度设置字体大小</dd>
     <dd>超过750，按750计算；小于320，按320计算</dd>
-    <dd>放在脚本放在&lt;header&gt;</dd>
+    <dd>放在脚本放在&lt;header&gt;，优先处理</dd>
     <dd class="code">
       <pre>
 function rem() {
@@ -148,18 +158,19 @@ window.onresize = function () {
   rem()
 }</pre>
     </dd>
+    <dd>方案3：详情查看 <a href="./js/bom.html">BOM</a></dd>
   </dl>
   <div class="chap">媒体查询 Media Query</div>
   <dl class="nav-cont">
     <dt>需求背景</dt>
     <dd>.应用场合不同：all所有设备、screen屏幕、print打印、speech屏幕阅读器/发声设备等；默认是屏幕screen</dd>
     <dd>.移动端和桌面端屏幕的尺寸不同</dd>
-    <dd>.在&lt;head&gt;引入视口viewport；VS Code默认已经提供；其它开发环境注意确认是否有</dd>
+    <dd>.在&lt;head&gt;引入视口viewport；VS Code默认html页面已提供；其它开发环境注意确认是否有</dd>
     <dd class="code">
       <pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</pre>
     </dd>
     <dt>断点 breakpoint</dt>
-    <dd>.利用断点breakpoint划分尺寸</dd>
+    <dd>.利用断点 breakpoint划分尺寸</dd>
     <dd>.尺寸断点 breakpoint 应以实际内容为主，如根据导航条灵活指定</dd>
     <dd>.通常以Ipnone6（375*667）为标准进行设计图的设计</dd>
     <dd>
@@ -200,9 +211,8 @@ window.onresize = function () {
     <dd>.min-width：尺寸大于或等于当前值时，应用样式</dd>
     <dd>.使用关键字确定区间range：AND、NOT、ONLY等；关键字两端需要空格同其它分隔开来</dd>
     <dd>.使用关系运算符：&lt;=、&gt;=等等；可读性更好；请在Can I Use查看media query中范围range的支持情况</dd>
-
     <dt>桌面端优先</dt>
-    <dd>.使用max-width时，应从默认的大尺寸往小尺寸过渡</dd>
+    <dd>.使用max-width时，从默认的大尺寸向小尺寸过渡</dd>
     <dd class="code">
       <pre>
 //默认是大尺寸 large... ...
@@ -220,7 +230,7 @@ window.onresize = function () {
 }</pre>
     </dd>
     <dt>移动端优先</dt>
-    <dd>.使用min-width时，应从默认的小尺寸往大尺寸过渡</dd>
+    <dd>.使用min-width时，从默认的小尺寸向大尺寸过渡</dd>
     <dd class="code">
       <pre>
 //默认是小尺寸 small... ...
@@ -277,8 +287,8 @@ window.onresize = function () {
   </dl>
   <div class="chap">实现 Implementation</div>
   <dl class="nav-cont">
-    <dt>.HTML管理</dt>
-    <dd>1.根据媒体尺寸动态引入link对应的外部CSS文件</dd>
+    <dt>外部样式</dt>
+    <dd>. 在HTML中根据媒体尺寸动态引入link对应的外部CSS文件</dd>
     <dd class="code">
       <pre>
 &lt;link rel="stylesheet" media="screen and (min-width:1201px)" href="./media_large.css"&gt;
@@ -286,7 +296,16 @@ window.onresize = function () {
 &lt;link rel="stylesheet" media="screen and (max-width:992px)" href="./media_normal.css"&gt;
 &lt;link rel="stylesheet" media="screen and (max-width:768px)" href="./media_small.css"&gt;</pre>
     </dd>
-    <dd>2.根据媒体尺寸在&lt;style&gt;直接编辑内部样式；多见于练习</dd>
+    <dd>. 在主样式文件app.css引入响应的CSS文件</dd>
+    <dd class="code">
+      <pre>
+@import url(./css/media_large.css);
+@import url(./css/media_medium.css) only screen and (max-width:1200px);
+@import url(./css/media_normal.css) only screen and (max-width:992px);
+@import url(./css/media_small.css) only screen and (max-width:768px);</pre>
+    </dd>
+    <dt>内部样式</dt>
+    <dd>. 根据媒体尺寸在&lt;style&gt;直接编辑内部样式；多见于练习</dd>
     <dd class="code">
       <pre>
 &lt;style&gt;
@@ -313,7 +332,7 @@ window.onresize = function () {
   }
 &lt;/style&gt;</pre>
     </dd>
-    <dd>3.根据媒体尺寸在不同的&lt;style&gt;编辑内部样式；使用不多</dd>
+    <dd>. 根据媒体尺寸在不同的&lt;style&gt;编辑内部样式；使用不多</dd>
     <dd class="code">
       <pre>
 &lt;style&gt;
@@ -340,15 +359,6 @@ window.onresize = function () {
   }
 &lt;/style&gt;</pre>
     </dd>
-    <dt>CSS文件管理</dt>
-    <dd>.在主样式文件app.css引入响应的CSS文件</dd>
-    <dd class="code">
-      <pre>
-@import url(./css/media_large.css);
-@import url(./css/media_medium.css) only screen and (max-width:1200px);
-@import url(./css/media_normal.css) only screen and (max-width:992px);
-@import url(./css/media_small.css) only screen and (max-width:768px);</pre>
-    </dd>
   </dl>
   <div class="chap">案例 Cases</div>
   <dl class="nav-cont">
@@ -358,6 +368,21 @@ window.onresize = function () {
     <dd>.&le;1200px，显式3列</dd>
     <dd>.&le;992px，显式2列</dd>
     <dd>.&le;768px，显式1列</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>HTML</figcaption>
+        <pre>
+&lt;div class="wrap"&gt;
+  &lt;img src="./imgs/1.jpg" alt=""&gt;
+  &lt;img src="./imgs/2.jpg" alt=""&gt;
+  &lt;img src="./imgs/3.jpg" alt=""&gt;
+  &lt;img src="./imgs/4.jpg" alt=""&gt;
+  &lt;img src="./imgs/5.jpg" alt=""&gt;
+  &lt;img src="./imgs/6.jpg" alt=""&gt;
+&lt;/div&gt;</pre>
+      </figure>
+    </dd>
+    <dd>方案1：使用grid实现 - 桌面优先</dd>
     <dd class="code">
       <pre>
 .wrap {
@@ -384,67 +409,40 @@ window.onresize = function () {
   }
 }</pre>
     </dd>
-    <dd>.使用min-width，借助%实现</dd>
-    <dd>[HTML]</dd>
+    <dd>方案 2：使用%实现 - 移动优先；采用了float，记得清楚浮动</dd>
     <dd class="code">
       <pre>
-&lt;div class="box"&gt;
-  &lt;img src="./imgs/1.jpg" alt=""&gt;
-  &lt;img src="./imgs/2.jpg" alt=""&gt;
-  &lt;img src="./imgs/3.jpg" alt=""&gt;
-  &lt;img src="./imgs/4.jpg" alt=""&gt;
-  &lt;img src="./imgs/5.jpg" alt=""&gt;
-  &lt;img src="./imgs/6.jpg" alt=""&gt;
-&lt;/div&gt;</pre>
-    </dd>
-    <dd>[CSS]</dd>
-    <dd class="code">
-      <pre>
-.box img {
+.wrap img {
   float: left;
   width: 100%;
   aspect-ratio: 16/9;
 }
 
 @media (min-width:768px) {
-  .box img {
+  .wrap img {
     width: 50%;
   }
 }
 
 @media (min-width:992px) {
-  .box img {
+  .wrap img {
     width: 33.3%;
   }
 }
 
 @media (min-width:1200px) {
-  .box img {
+  .wrap img {
     width: 25%;
   }
 }      </pre>
     </dd>
+    <dd>其它方案：请参考grid万能的自适应布局<a href="./grid.html#grid">gird布局</a></dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 汉堡菜单</dd>
     <dd>. 主导航nav、logo、和ham</dd>
     <dd>. 传统方式下：大尺寸下，只显示nav和logo，隐藏掉ham；小尺寸时，再显示ham</dd>
     <dd>.
       改进：大尺寸下，ham的h5指定结构但是内容为空，小尺寸下才设计ham的具体内容，这样就不需要先隐藏再显示。适合开始弹性布局的flex-start和结束flex-end；如果使用space-between则0元素也会被分隔
       [好大的坑！！！]</dd>
-  </dl>
-  <div class="chap">主要方式</div>
-  <dl>
-    <dt>设置字体大小</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>]静态设置</dd>
-    <dd>. 为方便计算，通常设置html字体大小为62.5%：1rem=10px</dd>
-    <dd class="code">
-      <pre>
-html {
-    //font-size: 10px;
-    font-size: 62.5%;
-    scroll-behavior: smooth;
-}</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>]动态设置-详情查看 <a href="./js/bom.html">BOM</a></dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="./lib/ham.js"></script>
