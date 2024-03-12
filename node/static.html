@@ -88,9 +88,9 @@ app.listen(port, res => {
     </dd>
     <dd class="tips">日常开发使用Vs Code完成</dd>
     <dt>进阶</dt>
-    <dd>访问服务器根目录，渲染服务器主页，给出操作提示</dd>
-    <dd>思路：创建html页面，指定路由；读取并返回主页；需要fs的支持；或直接使用res的sendFile()</dd>
-    <dd>修改服务器文件，增加核心代码如下</dd>
+    <dd>访问服务器根目录，渲染服务器特定页面，如主页，给出操作提示</dd>
+    <dd>思路：创建html页面，指定路由；读取并返回主页；需要fs的支持</dd>
+    <dd>方案1：修改服务器文件，增加核心代码如下</dd>
     <dd class="code">
       <pre>
 server.get('/', (req, res) => {
@@ -101,6 +101,15 @@ server.get('/', (req, res) => {
   })
 })</pre>
     </dd>
+    <dd>方案2：直接使用res的sendFile()</dd>
+    <dd class="code">
+      <pre>
+app.get('/', (req, res) => {
+  res.sendFile('./www/index.html')
+})</pre>
+    </dd>
+    <dd>方案3：终极必杀技</dd>
+    <dd>指定静态资源，且有主页文件，且名字为index.html，即使没有定义路由也可以访问。。。</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

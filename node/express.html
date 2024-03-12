@@ -19,31 +19,37 @@
     <span>&commat;Express</span>
   </header>
   <dl>
-    <dt>req</dt>
-    <dd>请求</dd>
+    <dt>请求 req</dt>
     <dd class="number">
-      <div>路由参数 - url/:id</div>
+      <div>查询路由 query - 使用?拼接字符串；/detail?key=value&key=value&...</div>
       <pre class="code">
-server.get('/:id', (req, res) => {
-  res.send(req.params.id)
+server.get('/detail', (req, res) => {
+  res.send(req.query)
+})      </pre>
+      <div>动态路由 params - 拼接路径；/detail/:id</div>
+      <pre class="code">
+server.get('/detail/:id', (req, res) => {
+  res.send(req.params)
 })      </pre>
     </dd>
-    <dt>res</dt>
-    <dd>响应</dd>
+    <dt>响应 res</dt>
     <dd class="number">
-      <div>write() - 写回流时，需要显式指定结束 end</div>
+      <div>write() - 写回流时，需要显式指定结束 end()</div>
       <pre class="code">
 res.write(data)
 res.end()</pre>
-      <div>send() - 发送普通字符</div>
+      <div>send() - 发送HTTP响应；支持多种格式</div>
       <pre class="code">res.send('hi,there.') </pre>
       <pre class="code">res.send('&lt;h1&gt;hi,there.&lt;/h1&gt;') </pre>
       <pre class="code">res.send({ id: 10, name: 'gl' }) </pre>
-      <div>sendFile() - 需要指定参考路径</div>
+      <div>sendFile() - 发送文件；需要指定参考路径</div>
+      <p>直接传输文件，不需要将文件从用户空间拷贝到内核空间，文件传输效率提高；减少内存拷贝，减少CPU消耗，提高系统性能</p>
+      <p>只能用于发送静态文件，不能传输其他类型的数据</p>
+      <p>只能传输2GB以下的文件</p>
       <pre class="code">res.sendFile('./www/index.html', { root: __dirname })</pre>
       <div>json() - 返回json数据</div>
       <pre class="code">res.json({ id: 10, name: 'gl' })</pre>
-      <div>render() - 页面路径依据配置的静态资源路径</div>
+      <div>render() - 渲染页面；页面路径依据配置的静态资源路径</div>
       <pre class="code">
 res.render('home/index', {
   navIndex: 0
@@ -54,12 +60,21 @@ res.render('home/index', {
     <dt>404</dt>
     <dd>以中间件use()的形式实现</dd>
     <dd>所有路由都匹配失败，则匹配404；所以404中间件应该放在所有路由的 <span class="warn">后面</span></dd>
+    <dd>注意路径的拼接</dd>
     <dd class="code">
       <pre>
 //其它路由
 
 server.use((req, res) => {
   res.status(404).sendFile('./www//lost.html', { root: __dirname })
+})</pre>
+    </dd>
+    <dd class="code">
+      <pre>
+//其它路由
+
+server.use((req, res) => {
+  res.status(404).sendFile('lost.html', { root: __dirname + '/www/' })
 })</pre>
     </dd>
     <dd class="tips">中间件在req和res之间执行；拿到res后就没有必要了</dd>

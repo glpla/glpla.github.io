@@ -43,12 +43,38 @@
       <div>在服务器创建上传目录</div>
       <div>创建服务器脚本</div>
       <div>引入依赖</div>
-      <div>配置上传存储：推荐使用storage而不是dest</div>
+      <div>配置上传存储：推荐使用storage而不是dest；如果仅仅处理文本数据，可以不指定存储</div>
       <div>创建上传实例</div>
       <div>响应路由</div>
       <div>开启服务</div>
     </dd>
-    <dt>具体过程</dt>
+    <dt>上传单张图片 single()</dt>
+    <dd>需指定存储</dd>
+    <dd>
+      <table class="tbl-sn">
+        <tr>
+          <th>API</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>/upload</td>
+          <td>单张图片</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>name属性</caption>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>image</td>
+          <td>图片</td>
+        </tr>
+      </table>
+    </dd>
     <dd class="number">
       <div>创建服务器目录 server</div>
       <div>初始化</div>
@@ -145,6 +171,162 @@ app.listen(port, () => {
   console.log('server now is at 127.0.0.1:3000');
 })</pre>
     </dd>
+    <dt>提交表单数据 none()</dt>
+    <dd>说明：无须配置存储，仅需创建multer实例</dd>
+    <dd>
+      <table class="tbl-sn">
+        <tr>
+          <th>API</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>/upload/text</td>
+          <td>纯文本</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>name属性</caption>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>uname</td>
+          <td>名字</td>
+        </tr>
+        <tr>
+          <td>upass</td>
+          <td>密码</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>client - HTML</figcaption>
+        <pre>
+&lt;form action="http://127.0.0.1:3000/upload/text" enctype="multipart/form-data" method="post"&gt;
+  &lt;input type="text" placeholder="your name" name="uname"&gt;
+  &lt;input type="password" placeholder="your pass" name="upass"&gt;
+  &lt;button&gt;submit&lt;/button&gt;
+&lt;/form&gt;</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>server</figcaption>
+        <pre>
+router.post('/text', upload.none(), (req, res) => {
+  console.log(req.body);
+  //其它处理
+  res.send({ msg: 'ok' })
+})</pre>
+      </figure>
+    </dd>
+    <dt>上传单张图片和表单数据 single()</dt>
+    <dd>需指定存储</dd>
+    <dd>
+      <table class="tbl-sn">
+        <tr>
+          <th>API</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>/upload/mix</td>
+          <td>单张图片和纯文本</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>name属性</caption>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>uimg</td>
+          <td>图片</td>
+        </tr>
+        <tr>
+          <td>udesc</td>
+          <td>图片描述</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>client - HTML</figcaption>
+        <pre>
+&lt;form action="http://127.0.0.1:3000/upload/mix" enctype="multipart/form-data" method="post"&gt;
+  &lt;input type="file" name="uimg"&gt;
+  &lt;input type="text" placeholder="your name" name="udesc"&gt;
+  &lt;button&gt;submit&lt;/button&gt;
+&lt;/form&gt;</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure class="code">
+        <figcaption>server</figcaption>
+        <pre>
+router.post('/mix', upload.single('uimg'), (req, res) => {
+  console.log(req.file, req.body);
+  res.send({ msg: 'ok' })
+})</pre>
+      </figure>
+    </dd>
+    <dd class="example-sn">封装multer为upload.js</dd>
+    <dd>提示：把upload暴露出去</dd>
+    <dd>说明：引入时间格式依赖；增加了创建目录功能</dd>
+    <dd class="code">
+      <pre>
+const multer = require('multer')
+const fs = require('fs');
+const path = require('path')
+const sd = require('silly-datetime');
+
+// Set up storage for uploaded files
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    let date = sd.format(new Date(), 'YYYYMMDD');
+    let dir = path.join('public/upload', date)
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir)
+    }
+    callback(null, dir);
+  },
+  filename: (req, file, callback) => {
+    let ext = path.extname(file.originalname)
+    callback(null, file.fieldname + Date.now() + ext);
+  }
+});
+
+// Create the multer instance
+const upload = multer({
+  storage: storage
+});
+
+module.exports = upload</pre>
+    </dd>
+    <dd class="example-sn">上传多个图片 array()</dd>
+    <dd>利用&lt;input&gt;的multiple属性选择多个图片</dd>
+    <dd class="code">
+      <pre>&lt;input type="file" name="img" multiple&gt;</pre>
+    </dd>
+    <dd class="code">
+      <pre>
+router.post('/array', upload.array('img', 9), (req, res) => {
+  console.log(req.files, req.body);
+  res.send({
+    err: 0,
+    msg: 'ok',
+    data: req.body,
+    file: req.files
+  })
+})</pre>
+    </dd>
+    <dd class="example-sn">上传多个图片 fields()</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
