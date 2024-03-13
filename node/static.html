@@ -19,8 +19,9 @@
     <span>&commat;StaticServer</span>
   </header>
   <dl>
-    <dd>创建静态资源服务器，供应用程序使用，如在线图片</dd>
-    <dd>没有使用原生http模块，而是依托express框架创建；更多信息，请访问 <a href="https://www.expressjs.com.cn/" class="link">Express.js</a></dd>
+    <dd>创建静态资源服务器，供应用程序使用，如在线图片、在线视频、在线音乐</dd>
+    <dd>没有使用原生http模块，而是依托express框架创建</dd>
+    <dd>更多信息，请访问 <a href="https://www.expressjs.com.cn/" class="link">Express.js</a></dd>
     <dt>基本步骤</dt>
     <dd class="number">
       <div>创建服务器目录</div>
@@ -31,8 +32,8 @@
     <dt>具体过程</dt>
     <dd class="number">
       <div>创建一个空白文件夹作为服务器目录，如server</div>
-      <div>在服务器目录创建资源文件夹，如www，存放数据data、图片imgs、视频video等资源；建议不同类型的资源存放在不同的子目录</div>
-      <div>在服务器目录打开CMD命令行窗口</div>
+      <div>在服务器目录创建资源文件夹，如www，存放图片imgs、视频video、数据data等资源；建议不同类型的资源存放在不同的子目录</div>
+      <div>在服务器目录打开CMD命令行窗口 - 右键选择"在终端中打开"或在资源管理器顶部地址栏输入cmd并回车</div>
       <p>初始化，用来创建package.json文件</p>
       <pre class="code">npm init</pre>
       <p><span class="warn">推荐</span>使用-y命令行参数，按照默认配置创建package.json，如入口文件默认是index.js</p>
@@ -51,9 +52,9 @@
   "author": "",
   "license": "ISC"
 }        </pre>
-      <div>安装express框架</div>
+      <div>在终端中安装express框架</div>
       <pre class="code">npm i express --save</pre>
-      <div>创建服务器脚本index.js</div>
+      <div>创建服务器脚本 - 在服务器目录下，新建一个js文件，命名为index.js，编辑如下</div>
       <pre class="code">
 //引入express
 const express = require('express');
@@ -70,7 +71,7 @@ app.listen(port, res => {
       <div>定制路由[可选]</div>
       <p>根据业务场景和需求定制；如读取文件并返回JSON数据；如果如下提示，需要使用代理。见后续内容</p>
       <pre class="code">...has been blocked by CORS policy...</pre>
-      <div>开启服务</div>
+      <div>在终端中开启服务</div>
       <p>默认命令</p>
       <pre class="code">node index.js</pre>
       <p>自定义命令启动服务 - 修改package.json里script</p>
