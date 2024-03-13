@@ -285,6 +285,7 @@
     <dd>.使用@font-face定义字体</dd>
     <dd>.避免用户本地没有页面使用的特定字体</dd>
     <dd>.字体文件应提前准备好，并推送到服务器/网站</dd>
+    <dd>.多个字体效果应该分别定义，字体名字保持一致</dd>
     <dd>.仅在用户端浏览页面时临时下载使用；关闭浏览器后，字体被移除</dd>
     <dd>
       <figure class="code">
@@ -295,6 +296,20 @@
     src: url(font_url) format("TrueType")
 }</pre>
       </figure>
+    </dd>
+    <dd class="example-sn">Poppins - 分普通字体和加粗字体</dd>
+    <dd class="code">
+      <pre>
+@font-face {
+  font-family: 'Poppins';
+  src: url(../fonts/Poppins/Poppins-Regular.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url(../fonts/Poppins/Poppins-Bold.ttf) format('ttf');
+  font-weight: 600;
+}</pre>
     </dd>
     <dd>.中文字体通常比较大，字体下载时，需要时间，所以页面渲染不会立即完成，影响客户体验；请谨慎使用</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 4.8M的字体文件，下载到本地花费了1.9分钟</dd>

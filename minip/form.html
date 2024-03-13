@@ -21,12 +21,26 @@
     <dl>
         <dd>&lt;form&gt;和其中的大多数表单元素，基本同HTML5保持一致；具体效果视系统而定</dd>
         <dd>表单数据提交时，必须指定name；value可以由事件获取</dd>
+        <dd class="tips">
+            <div>全局初始化样式，如主题颜色和其它属性；部分需要单独设置</div>
+            <div>设置页面变量，便于同时控制元素的属性，如margin、padding、background-color和border等</div>
+            <div>设置样式时，请为每个表单元素都指定样式class</div>
+            <div>数据提交服务器时，请确保每个表单元素都指定属性name</div>
+            <div>学会使用调试器检查样式样式</div>
+            <div>一定要预览。。。一定要预览。。。一定要预览。。。</div>
+        </dd>
         <dt>常用组件</dt>
         <dd>表单组件繁多，常见的分类如下表</dd>
         <dd class="number">
             <div>&lt;form&gt;</div>
             <p>表单容器</p>
-            <p>提交时，可以在事件对象e.detail中获取表格各元素的值；要求每个表单指定name属性</p>
+            <p>通常显式的设置宽度，其中表单元素会自动充满，无须单独设置每个宽度</p>
+            <pre class="code">
+.form {
+    width: 90%;
+    background-color: #f3f4f5;
+}</pre>
+            <p>提交时，可以在事件对象e.detail中获取表格各元素的值</p>
             <table>
                 <tr>
                     <td>bindsubmit</td>
@@ -38,7 +52,7 @@
                 </tr>
             </table>
             <div>label</div>
-            <p>用for来改进指定了id的表单组件的可用性</p>
+            <p>用for改进指定了id的表单组件的可用性；扩展了用户的点击，提升用户体验</p>
             <pre class="code">&lt;checkbox value="撸码" id="code" /&gt;&lt;label for="code"&gt;撸码&lt;/label&gt;</pre>
             <p>使用lable包裹表单元素时，应略去for属性</p>
             <pre class="code">
@@ -47,7 +61,7 @@
 &lt;/label&gt;            </pre>
             <div>&lt;input&gt;</div>
             <p>输入框</p>
-            <p>input 组件是一个原生组件，字体是系统字体，所以无法设置 font-family</p>
+            <p>input 组件是一个原生组件，字体是系统字体，所以<span class="warn">无法设置</span> font-family</p>
             <table>
                 <tr>
                     <th>属性</th>
@@ -78,12 +92,20 @@
                     <td>输入框为空时占位符；字符串</td>
                 </tr>
                 <tr>
+                    <td>placeholder-style</td>
+                    <td>指定样式；仅支持设置颜色、大小和字重；需预览查看效果</td>
+                </tr>
+                <tr>
+                    <td>placeholder-class</td>
+                    <td>指定样式类；仅支持设置颜色、大小和字重；推荐</td>
+                </tr>
+                <tr>
                     <td>maxlength</td>
                     <td>最大输入长度；数字</td>
                 </tr>
                 <tr>
                     <td>focus</td>
-                    <td>获取焦点</td>
+                    <td>获取焦点；直接拉起键盘便于输入；但是用户欣赏不到你的设计</td>
                 </tr>
                 <tr>
                     <td>confirm-type</td>
@@ -171,6 +193,12 @@
             </table>
             <div>&lt;textarea&gt;</div>
             <p>多行输入；默认大小300*150；block</p>
+            <p>建议：显式的设置宽度和容器保持一样大小；同时设置内边距padding以使得文字内收一定距离</p>
+            <pre>
+textarea{
+    width: 100%;
+    padding: 20rpx;
+}</pre>
             <table>
                 <tr>
                     <th>属性</th>
@@ -228,6 +256,7 @@
             </table>
             <div>&lt;button&gt;</div>
             <p>功能强大的按钮；建议只设置背景和字体颜色</p>
+            <p>如果设置了高度后，记得设置同样大小的行高，以确保文字垂直方向居中</p>
             <p>除了默认的tap事件外，按钮其它事件大多和相应的开发能力关联</p>
             <table>
                 <tr>
@@ -236,7 +265,7 @@
                 </tr>
                 <tr>
                     <td>loading</td>
-                    <td>是否带 loading 图标</td>
+                    <td>是否带 loading 图标；然并卵</td>
                 </tr>
                 <tr>
                     <td>form-type</td>
@@ -261,6 +290,21 @@
                     </td>
                 </tr>
             </table>
+            <p class="example-sn">在调试器中，查看按钮的代理样式，体会样式初始化的重要性</p>
+            <pre class="code">
+button{
+    width: 100%!important;
+    background-color: var(--themeColor);
+    color: #fff;    
+}            </pre>
+            <p>部分样式需要在特定页面的类中设置</p>
+            <pre class="code">
+.btn{
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+    border-radius: 0;
+}</pre>
             <div>&lt;picker&gt;</div>
             <p>从底部弹起的滚动选择器，如：时间选择器、日期选择器、地区选择器</p>
             <p>除了下述通用的属性外，不同的mode，picker拥有不同的属性；如时间类的都有开始start、结束end等，详情请查看 <a

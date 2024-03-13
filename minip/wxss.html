@@ -130,7 +130,7 @@ data: {
     <dd class="example-sn">导入初始化样式表</dd>
     <dd class="number">
       <div>在样式目录下新建一个样式文件，命名为reset.wxss</div>
-      <div>初始化常用元素，如边框、轮廓、颜色、字体大小等</div>
+      <div>初始化常用元素，如边框、轮廓、颜色、字体大小等；可以通过变量定制主题色--themeColor；使用主题颜色：var(--themeColor)</div>
       <div>在app.wxss中引入，全局使用</div>
       <pre class="code">
 @import './utils/css/reset.wxss';</pre>
@@ -139,11 +139,20 @@ data: {
     <dd class="tips">有些元素的初始化样式仍然会被用户代理覆盖，请使用类的方式初始化，甚至使用!important提权</dd>
     <dd class="code">
       <pre>
-.btn{
+page{
+  --themeColor:#eb4450;
+  min-height: 100vh;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+button{
   width: 100%!important;
   padding: 0;
+  margin: 0;
   font-weight: normal;
-}      </pre>
+  border-radius: 0;
+}</pre>
     </dd>
     <dd class="example-sn" id="iconfont">导入 <a href="https://www.iconfont.cn/" class="link">阿里字体图标</a></dd>
     <dd class="number">
@@ -187,17 +196,6 @@ data: {
     <dd>百分比</dd>
     <dt>颜色</dt>
     <dd>使用16进制颜色，如#ff4400；支持简写，如#f40；支持透明色，如#f406；建议使用rgba()</dd>
-    <dd>可以通过变量定制主题色--themeColor；使用主题颜色：var(--themeColor)</dd>
-    <dd class="code">
-      <pre>
-page{
-  --themeColor:#eb4450;
-  font-size: 28rpx;
-}
-.item{
-  background-color: var(--themeColor);
-}</pre>
-    </dd>
   </dl>
   <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

@@ -9,6 +9,13 @@
   <link rel="stylesheet" href="../css/common2024.css">
   <link rel="stylesheet" href="../css/code.css">
   <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/fonts_Great_Vibes.css">
+  <link rel="stylesheet" href="../css/fonts_Michroma.css">
+  <link rel="stylesheet" href="../css/fonts_Monospace.css">
+  <link rel="stylesheet" href="../css/fonts_Popins.css">
+  <link rel="stylesheet" href="../css/fonts_Quicksand.css">
+  <link rel="stylesheet" href="../css/fonts_Roboto.css">
+  <link rel="stylesheet" href="../css/fonts_yuwei.css">
   <base target="_blank">
 </head>
 
@@ -20,7 +27,7 @@
   <dl>
     <dd>个人学习通资料区下载字体文件压缩包：Great_Vibes和Roboto</dd>
     <dd>或自行准备喜欢的字体文件，如<a href="https://www.googlefonts.cn" class="link">谷歌字体</a></dd>
-    <dt>本地使用</dt>
+    <dt>本地使用 -不推荐</dt>
     <dd>将字体文件转换成小程序可以识别的格式，再导入到项目中</dd>
     <dd>特点：加载快，渲染速度也快；但是会增加项目的体积</dd>
     <dd class="example-sn">字体转换 - 以Great_Vibes为例</dd>
@@ -46,10 +53,13 @@ text{
   font-size: 20px;
 }</pre>
     </dd>
-    <dt>在线使用</dt>
+    <dt>在线使用 - 推荐</dt>
     <dd>将字体文件放在资源服务器上，提供给项目在线使用</dd>
     <dd>在小程序中定制字体，从资源服务器上获取字体文件</dd>
     <dd>特点：不占用小程序体积；但是速度略慢，特别是中文字体</dd>
+    <dd>注意：同HTML不同的是</dd>
+    <dd>1. 不要指定格式 format('ttf')</dd>
+    <dd>2. 字体大小和字重等其它属性在使用时指定</dd>
     <dd class="example-sn">只有一个字体文件 - 以GreatVibes为例</dd>
     <dd class="code">
       <pre>
@@ -58,31 +68,45 @@ text{
   src: url(http://127.0.0.1:3000/font/Great_Vibes/GreatVibes-Regular.ttf);
 }</pre>
     </dd>
-    <dd class="example-sn">多个类型的字体文件 - 以Roboto字体为例；使用同一个字体名，但是要分别定义具体类型</dd>
+    <dd class="example-sn">多个类型的字体文件 - 以Roboto字体为例</dd>
     <dd class="code">
       <pre>
 @font-face {
   font-family: 'Roboto';
-  src: url(http://127.0.0.1:3000/font/Roboto/Roboto-Light.ttf);
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url(http://127.0.0.1:3000/font/Roboto/Roboto-Bold.ttf);
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url(http://127.0.0.1:3000/font/Roboto/Roboto-Italic.ttf);
-  font-style: italic;
+  src: 
+    url(http://127.0.0.1:3000/font/Roboto/Roboto-Light.ttf),
+    url(http://127.0.0.1:3000/font/Roboto/Roboto-Bold.ttf),
+    url(http://127.0.0.1:3000/font/Roboto/Roboto-Italic.ttf);
 }</pre>
     </dd>
     <dd class="tips">
+      <div>使用在线字体，需要将其域名加入到request合法域名中</div>
       <div>在线使用会提示：[渲染层网络层错误] Failed to load font http://127.0.0.1:3000/font/GreatVibes-Regular.ttf
         net::ERR_CACHE_MISS ；可以忽略</div>
     </dd>
+    <dt>拓展</dt>
+    <dd class="number">
+      <div>从 <a href="//glpla.github.io" class="link">大树小站</a> 拉取字体文件，自己定制字体</div>
+      <div>从 <a href="//glpla.github.io" class="link">大树小站</a> 拉取定义好的字体样式文件wxss</div>
+    </dd>
+    <dd class="example-sn">利用 - 大树小站在线字体 - 提供的字体，完成字体定制和使用</dd>
+    <dd class="number">
+      <div>Great Vibes - https://glpla.github.io/fonts/GreatVibes-Regular.ttf </div>
+      <div>Michroma - https://glpla.github.io/fonts/Michroma/Michroma.ttf </div>
+      <div>Monospace - https://glpla.github.io/fonts/Monospace/Elronmonospace.ttf </div>
+      <div>Popins - https://glpla.github.io/fonts/Poppins/Poppins-Regular.ttf </div>
+      <div>Quicksand - https://glpla.github.io/fonts/Quicksand/Quicksand-Regular.ttf </div>
+      <div>Roboto - https://glpla.github.io/fonts/Roboto/Roboto-Regular.ttf </div>
+      <div>yuwei - https://glpla.github.io/fonts/YuWei/YuWeiShuFaXingShuJianTi.ttf </div>
+      <div>Cruiser Fortress Bevel - https://glpla.github.io/fonts/Cruiser Fortress Bevel.ttf </div>
+      <div>flappybird - https://glpla.github.io/fonts/flappybird.ttf </div>
+    </dd>
+    <dd class="example-sn">引入 - 大树小站定义好的字体样式文件并使用 </dd>
+    <dd class="code">
+      <pre></pre>
+    </dd>
   </dl>
+  <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
 
 </html>
