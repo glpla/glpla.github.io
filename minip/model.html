@@ -18,12 +18,80 @@
         <h1>双向绑定</h1>
         <span>model</span>
     </header>
-    <div class="chap">数据双向绑定 </div>
     <dl>
-        <dt>model</dt>
+        <dt class="txt-center">视图层 <i class="ri-arrow-left-right-line"></i> 逻辑层</dt>
+        <dd>多用于表单元素</dd>
         <dd>为value添加model修饰符即可实现双向数据绑定</dd>
+        <dd>省略了触发事件，如bindchange或bindinput</dd>
+        <dd>只能简单属性绑定 - 单一字段</dd>
+        <dd>借助调试器的AppData查看绑定情况</dd>
+        <dd class="example-sn">&lt;input&gt; - text</dd>
         <dd class="code">
-            <pre>&lt;input type="text" model:value='{{val}}' /&gt;</pre>
+            <pre>msg:'hi',</pre>
+        </dd>
+        <dd class="code">
+            <pre>&lt;input type="text" model:value='{{msg}}' /&gt;</pre>
+        </dd>
+        <dd>复合数据双向绑定失败：仅实现逻辑层到视图层的绑定</dd>
+        <dd class="code">
+            <pre>
+obj:{
+    msg:'hi'
+}</pre>
+        </dd>
+        <dd class="code">
+            <pre>&lt;input type="text" model:value='{{obj.msg}}' /&gt;</pre>
+        </dd>
+        <dd>改进：实现双向绑定需要借助表单事件，如bindchange等</dd>
+        <dd>此时不再需要mode。还原为普通事件流</dd>
+        <dd class="code">
+            <pre>
+obj:{
+    msg:'hi'
+}</pre>
+        </dd>
+        <dd class="code">
+            <pre>&lt;input type="text" value='{{obj.msg}}' bindinput="getMsg"/&gt;</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+getMsg(e) {
+    this.setData({
+        'obj.msg':e.detail.value
+    })
+}</pre>
+        </dd>
+        <dd class="example-sn">&lt;swiper&gt; - 当前swiper-item - current</dd>
+        <dd>拖动或设置为自动播放，查看绑定情况</dd>
+        <dd class="code">
+            <pre>cur:1</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+&lt;view>{{cur}}&lt;/view&gt;
+&lt;swiper model:current="{{cur}}"&gt;
+  &lt;swiper-item&gt; 11 &lt;/swiper-item&gt;
+  &lt;swiper-item&gt; 22 &lt;/swiper-item&gt;
+  &lt;swiper-item&gt; 33 &lt;/swiper-item&gt;
+  &lt;swiper-item&gt; 44 &lt;/swiper-item&gt;
+&lt;/swiper&gt;</pre>
+        </dd>
+        <dd class="example-sn">联动导航 - 改进方案</dd>
+        <dd>滚动视图scroll-view和轮播swiper配合使用</dd>
+        <dd class="code">
+            <pre>cur: 1</pre>
+        </dd>
+        <dd class="code">
+            <pre>
+&lt;scroll-view class="wrap" scroll-x scroll-with-animation model:scroll-into-view="id{{cur}}"&gt;
+    &lt;view class="item" wx:for="{{10}}" wx:key="index" id="id{{index}}"&gt;{{item}}&lt;/view&gt;
+&lt;/scroll-view&gt;
+
+&lt;swiper class="swiper-wrap" model:current="{{cur}}"&gt;
+    &lt;swiper-item  class="swiper-item" wx:for="{{10}}" wx:key="index"&gt;
+        {{item}}
+    &lt;/swiper-item&gt;
+&lt;/swiper&gt;</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

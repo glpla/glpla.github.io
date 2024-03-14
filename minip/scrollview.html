@@ -20,8 +20,11 @@
     </header>
     <dl>
         <dt>说明</dt>
-        <dd>超过容器后，子项可以按照一定方向滚动的区域</dd>
+        <dd>容器组件</dd>
+        <dd>实现拖拽滚动</dd>
+        <dd>子项尺寸超过容器后，可以按照一定方向滚动以显式被隐藏的子项</dd>
         <dd>不支持嵌套textarea、map、canvas、video 组件</dd>
+        <dd>滚动条的长度是预估的；若直接子节点的高度差别较大，则滚动条长度可能会不准确</dd>
         <dd>更多信息，请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html"
                 class="link">官方文档</a></dd>
         <dd>
@@ -48,8 +51,27 @@
                     <td>使用动画过渡</td>
                 </tr>
                 <tr>
+                    <td>scroll-top</td>
+                    <td>设置竖向滚动条位置</td>
+                </tr>
+                <tr>
                     <td>bindscroll</td>
                     <td>滚动时触发</td>
+                </tr>
+            </table>
+            <table class="tbl-sn">
+                <caption>WebView 特有属性</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>enable-flex</td>
+                    <td>布尔；默认false；启用 flexbox 布局，使之成为 flex 容器！！！</td>
+                </tr>
+                <tr>
+                    <td>using-sticky</td>
+                    <td>布尔；默认false；启用 position: sticky 特性</td>
                 </tr>
             </table>
             <table class="tbl-sn">
@@ -74,35 +96,9 @@
                     <td>布尔；默认false；启用 position: sticky 特性</td>
                 </tr>
             </table>
-            <table class="tbl-sn">
-                <caption>WebView 特有属性</caption>
-                <tr>
-                    <th>属性</th>
-                    <th>说明</th>
-                </tr>
-                <tr>
-                    <td>enable-flex</td>
-                    <td>布尔；默认false；启用 flexbox 布局</td>
-                </tr>
-                <tr>
-                    <td>using-sticky</td>
-                    <td>布尔；默认false；启用 position: sticky 特性</td>
-                </tr>
-            </table>
         </dd>
-        <dd class="example-sn">垂直滚动 - 查看城市信息</dd>
-        <dd>页面结构</dd>
-        <dd>- 滑动视图：内部是若干标题城市首字母和城市图像或名称列表</dd>
-        <dd>- 版权信息</dd>
-        <dd class="code">
-            <pre>&lt;scroll-view scroll-y using-sticky class="sc"&gt;&lt;/scroll-view&gt;</pre>
-        </dd>
-        <dd>样式</dd>
-        <div>- 版权信息高度100rpx</div>
-        <div>- 滑动视图高度由 calc 计算得出；且标题粘性定位在滑动视图顶端</div>
-        <dd class="tips">如果不限高，不使用 scroll-view 也可以</dd>
-        <dd class="example-sn">水平滚动 - 导航</dd>
-        <dd>方案1：容器不换行；导航项调整为inline-block</dd>
+        <dd class="example-sn">水平滚动 - 导航/推荐/活动</dd>
+        <dd>方案1：容器不换行；子项项调整为inline-block</dd>
         <dd>
             <figure class="code">
                 <figcaption>wxml</figcaption>
@@ -128,6 +124,9 @@
             </figure>
         </dd>
         <dd>方案2：在容器和子项之间增加一个view作为间接容器，view使用弹性盒子flex布局</dd>
+        <dd>默认情况下，flex会压缩子项；为了撑开：</dd>
+        <dd>方案1：容器设置不换行：flex-wrap: nowrap;</dd>
+        <dd>方案2：子项设置不缩放：flex-shrink: 0;</dd>
         <dd>
             <figure class="code">
                 <figcaption>wxml - 增加一级容器</figcaption>
@@ -150,7 +149,20 @@
 }</pre>
             </figure>
         </dd>
-        <dd>方案3：为容器增加enable-flex属性启用并使用弹性盒子flex布局；仍然需要单独设置各项的间隔；样式过于分散，不推荐</dd>
+        <dd>方案3：小程序默认方案：为容器增加enable-flex属性启用并使用弹性盒子flex布局</dd>
+        <dd>仍然需要单独设置各项的间隔；样式过于分散，不推荐</dd>
+        <dd class="question">能否使用浮动float实现?</dd>
+        <dd class="example-sn">垂直滚动 - 查看城市信息/商品列表</dd>
+        <dd>页面结构</dd>
+        <dd>- 滑动视图：内部是若干标题城市首字母和城市图像或名称列表</dd>
+        <dd>- 版权信息</dd>
+        <dd class="code">
+            <pre>&lt;scroll-view scroll-y using-sticky class="sc"&gt;&lt;/scroll-view&gt;</pre>
+        </dd>
+        <dd>样式</dd>
+        <div>- 版权信息高度100rpx</div>
+        <div>- 滑动视图高度由 calc 计算得出；且标题粘性定位在滑动视图顶端</div>
+        <dd class="tips">如果不限高，不使用 scroll-view 也可以</dd>
         <dd class="example-sn">联动导航</dd>
         <dd>滚动视图scroll-view和轮播swiper配合使用</dd>
         <dd>单击滚动导航项，轮播跳转到指定项</dd>
@@ -175,7 +187,7 @@
 &lt;/swiper&gt;</pre>
             </figure>
             <figure class="code">
-                <figcaption>js|ts</figcaption>
+                <figcaption>js</figcaption>
                 <pre>
 selectItem(e:any) {
     this.setData({
@@ -189,6 +201,7 @@ changeItem(e:any){
 }</pre>
             </figure>
         </dd>
+        <dd>改进方案：使用双向绑定实现 - 简直不要太爽，详情请参考 <a href="./model.html" class="link">双向绑定</a></dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
