@@ -11,6 +11,21 @@
     <link rel="stylesheet" href="../css/code.css">
     <link rel="stylesheet" href="../css/sn.css">
     <base target="_blank">
+    <style>
+        video {
+            width: 300px;
+            height: 225px;
+            background-color: #000;
+        }
+
+        .contain {
+            object-fit: contain;
+        }
+
+        .cover {
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,11 +35,27 @@
     </header>
     <dl>
         <dt>说明</dt>
-        <dd>展示视频的容器</dd>
+        <dd>展示视频的容器；默认宽度 300px、高度 225px，可通过 wxss 设置宽高</dd>
         <dd>支持的格式：mp4、mov、m4v、avi、webm等</dd>
         <dd>除了常规属性外，还可以指定画中画、广告等特有属性</dd>
         <dd>请使用在线资源或自建服务器资源；不要使用本地资源</dd>
         <dd>视频现在多是16/9的比例；可惜小程序不支持aspect-ratio属性；不过可以根据宽度推算高度</dd>
+        <dd>
+            <table class="tbl-sn">
+                <tr>
+                    <th>分辨率</th>
+                    <th>示例</th>
+                </tr>
+                <tr>
+                    <td>16/9</td>
+                    <td>1280*720 <br>1920*1080</td>
+                </tr>
+                <tr>
+                    <td>4/3</td>
+                    <td>1280*960 <br>960*720 <br>300*225</td>
+                </tr>
+            </table>
+        </dd>
         <dd>更多信息，请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/component/video.html"
                 class="link">官方文档</a>
         </dd>
@@ -60,9 +91,9 @@
                     <td>
                         <details>
                             <summary>当视频大小与 video 容器大小不一致时，视频的表现形式</summary>
-                            <div>contain：包含；默认；容器有留白</div>
-                            <div>fill：填充；视频被拉伸</div>
-                            <div>cover：覆盖；视频被裁剪</div>
+                            <div>contain：容器完全包含视频；视频按照比例缩放；默认；容器有留白</div>
+                            <div>fill：填充；视频拉伸至填满容器</div>
+                            <div>cover：覆盖；视频按比例裁剪至填满容器</div>
                         </details>
                     </td>
                 </tr>
@@ -72,24 +103,66 @@
                 </tr>
             </table>
         </dd>
-        <dd>推荐：指定宽高，并应用cover模式</dd>
+        <dd class="example-sn">视频大小1280*720；默认视频标签大小300*225，即4/3的比例；因此：</dd>
+        <dd>高度匹配：可以显示960*720的视频，但是视频容器宽度不够，原视频宽度1280；完整显示视频的高度，但是容器宽度不够</dd>
+        <dd>宽度匹配：可以显示1280*960的视频，但是源视频高度不够，原视频高度为720；完整显示视频的宽度，但是容器高度剩余</dd>
+        <dd class="example-sn">通过资源服务器获取在线链接</dd>
+        <dd class="code">
+            <pre>
+video {
+    width: 300px;
+    height: 225px;
+    background-color: #000;
+}
+
+.contain {
+    object-fit: contain;
+}
+
+.cover {
+    object-fit: cover;
+}</pre>
+        </dd>
+        <dd>object-fit: contain;</dd>
+        <dd>
+            <video class="contain" src="//video.shipin520.com/videos/40/94/96/b_UYkhsNEPI9Bv1584409496.mp4" autoplay
+                loop muted></video>
+        </dd>
+        <dd>object-fit: contain;</dd>
+        <dd>
+            <video class="cover" src="//video.shipin520.com/videos/40/94/96/b_UYkhsNEPI9Bv1584409496.mp4" autoplay loop
+                muted></video>
+        </dd>
+        <dd class="tips">
+            <div>素材经过处理一定是标准比例；很少直接使用原图</div>
+            <div>一般都是默认使用即可，无须特别处理：看到的视频都是包含contain模式，存在黑边</div>
+            <div>建议指定宽高，并应用cover模式；去除黑边 - 自带高级感</div>
+        </dd>
         <dd class="code">
             <pre>&lt;video src="" object-fit="cover"/&gt;</pre>
         </dd>
         <dd class="code">
             <pre>
 video{
-    width: 100%;
-    height: 300rpx;
+    width: xxx;
+    height: yyy;
     //aspect-ratio： 16/9
 }</pre>
+        </dd>
+        <dd class="example-sn">在线视频的使用</dd>
+        <dd>受小程序大小2M的限制，大多数多媒体资源，如图片、视频、音频等不能本地使用，只能在线获取</dd>
+        <dd>方案1：外网在线资源；容易死链；如：<a href="https://shipin520.com/" class="link">潮点视频</a>，见下例</dd>
+        <dd>方案2：自建资源服务器，详情请参考 <a href="../node/static.html" class="link">静态资源服务器</a></dd>
+        <dd>方案3：使用大树小站视频资源：<span class="warn">https://glpla.github.io/web/video/wedding/图片名字</span>；更多视频持续更新中。。。</dd>
+        <dd>
+            <img src="../minip/imgs/videos.png" alt="">
         </dd>
         <dd class="example-sn">通过资源服务器获取在线链接</dd>
         <dd>搭建资源服务器，将本地视频放在指定目录，开启服务，具体操作请参考 <a href="./case0.html" class="link">资源服务器</a></dd>
         <dd class="code">
             <pre>src="http://127.0.0.1:3000/video/sea.mp4"</pre>
         </dd>
-        <dd class="example-sn">通过<a href="https://shipin520.com/" class="link">潮点视频</a>获取在线链接</dd>
+        <dd class="example-sn">获取潮点视频</dd>
         <dd class="number">
             <div>点击上方链接打开网站，或使用谷歌浏览器，在上方地址栏输入地址https://shipin520.com，打开网站</div>
             <div>在视频库中预览喜欢的视频</div>
