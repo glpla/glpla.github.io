@@ -31,7 +31,7 @@
                 <p>.声明周期函数</p>
                 <div>目的</div>
                 <p>.进一步熟悉资源服务器的搭建和网络请求的过程</p>
-                <p>掌握事件的基本使用以及</p>
+                <p>.掌握事件的基本使用以及</p>
                 <p>.掌握导航的基本使用</p>
                 <p>.掌握页面的生命周期函数的使用</p>
                 <div>原理</div>
@@ -69,7 +69,7 @@
             <dd class="number">
                 <div>数据文件 JSON</div>
                 <p>数据节点信息要素；准备若干条</p>
-                <p>为调试方便，没有给出完整的图片路径，仅给出图片部分路径，后期再拼接上资源服务器的地址</p>
+                <p>为调试方便，没有给出完整的图片路径，仅给出图片部分路径，后期再<span class="warn">拼接</span>上资源服务器的地址</p>
                 <pre>
 {
     "id": 1,
@@ -161,22 +161,27 @@ loadLists(flag) {
         url: baseURL + '/food',
         method: 'GET',
         data: {
-        page: this.data.page,
-        pageSize: this.data.pageSize
+            page: this.data.page,
+            pageSize: this.data.pageSize
         },
         success: (res) => {
-        console.log(res.data);
-        this.setData({
-            lists: [...this.data.lists, ...res.data],
-            total: res.header['X-Total-Count']
-        })
+            this.setData({
+                lists: [...this.data.lists, ...res.data],
+                total: res.header['X-Total-Count']
+            })
+        },
+        fail:err=>{
+            console.log(err);
+            wx.showToast({
+              title: 'server done',
+            })
         },
         complete: () => {
-        wx.hideLoading()
-        this.isLoading = false
-        if (flag) {
-            wx.stopPullDownRefresh()
-        }
+            wx.hideLoading()
+            this.isLoading = false
+            if (flag) {
+                wx.stopPullDownRefresh()
+            }
         }
     })
 }</pre>
