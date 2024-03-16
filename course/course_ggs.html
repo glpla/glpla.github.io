@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Gzgs Course</title>
-  <link rel="stylesheet" href="./ggs.css">
+  <link rel="stylesheet" href="./css/ggs.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.2.4/swiper-bundle.min.css">
   <style>
     .my-bullet-active {
@@ -62,7 +62,7 @@
       onload="this.height=this.contentDocument.body.scrollHeight"></iframe>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.2.4/swiper-bundle.min.js"></script>
-  <script src="../js/vue.global.prod.min.js"></script>
+  <script src="../utils/lib/vue.global.prod.min.js"></script>
   <script>
     const app = Vue.createApp({
       data() {
@@ -81,7 +81,7 @@
         console.log(this.cur);
         if (this.cur > 15)
           this.cur = 0;
-        fetch('../data/data2022/course.json')
+        fetch('../utils/data/data2022/course.json')
           .then(res => res.json())
           .then(res => {
             this.location = res.locationCN;
