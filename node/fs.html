@@ -21,6 +21,7 @@
   <dl>
     <dd>文件的读写操作</dd>
     <dd>需要引入文件系统fs；通常全部引入，也可以解构引入某个具体业务，如仅仅需要读文件操作</dd>
+    <dd>更多信息，请访问 <a href="https://nodejs.org/docs/latest/api/fs.html" class="link">FS</a></dd>
     <dd class="code">
       <pre>const fs = require('fs')</pre>
     </dd>
@@ -28,10 +29,46 @@
       <pre>const { readFile } = require('fs')</pre>
     </dd>
     <dd>相关的API分为三类；我们主要采用回调风格的异步API；部分需要立刻拿到结果的场景，使用同步API</dd>
-    <dd class="number">
-      <div>Promises API：Promises风格的API</div>
-      <div>callback API：异步API</div>
-      <div>Synchronous API：同步API</div>
+    <dd>1. Promises API - Promises风格的API</dd>
+    <dd>The fs/promises API provides asynchronous file system methods that return promises.</dd>
+    <dd class="code">
+      <pre>
+const { unlink } = require('node:fs/promises');
+
+(async function(path) {
+  try {
+    await unlink(path);
+    console.log(`successfully deleted ${path}`);
+  } catch (error) {
+    console.error('there was an error:', error.message);
+  }
+})('/tmp/hello');      </pre>
+    </dd>
+    <dd>2. Callback API - 回调API</dd>
+    <dd>The callback APIs perform all operations asynchronously, without blocking the event loop, then invoke a callback
+      function upon completion or error.</dd>
+    <dd class="code">
+      <pre>
+const { unlink } = require('node:fs');
+
+unlink('/tmp/hello', (err) => {
+  if (err) throw err;
+  console.log('successfully deleted /tmp/hello');
+});        </pre>
+    </dd>
+    <dd>3. Synchronous API - 同步API</dd>
+    <dd>The synchronous APIs perform all operations synchronously, blocking the event loop until the operation completes
+      or fails.</dd>
+    <dd class="code">
+      <pre>
+const { unlinkSync } = require('node:fs');
+
+try {
+  unlinkSync('/tmp/hello');
+  console.log('successfully deleted /tmp/hello');
+} catch (err) {
+  // handle the error
+}        </pre>
     </dd>
     <dt>常用函数</dt>
     <dd class="number">

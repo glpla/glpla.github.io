@@ -21,9 +21,7 @@
         <div>掌握条件渲染的使用</div>
         <div>掌握列表渲染的使用</div>
         <div>掌握响应式数据的基本使用</div>
-        <div>掌握node文件系统fs的基本方法</div>
         <div>进一步熟悉掌握服务器的搭建和使用</div>
-        <div>理解Vue的数据驱动</div>
       </dd>
       <dt>二、开发环境</dt>
       <dd class="number">
@@ -32,10 +30,32 @@
         <div>谷歌浏览器 Chrome</div>
         <div>node.js</div>
       </dd>
-      <dt>三、实验内容</dt>
-      <dd>服务器端：在前续静态资源服务器搭建的基础上：准备json数据并处理；相应用户路由请求</dd>
-      <dd>客户端：从资源服务器拉取数据并渲染</dd>
-      <dt>四、实验步骤</dt>
+      <dt>三、实验接口</dt>
+      <dd>
+        <table class="tbl-sn">
+          <caption>参考接口</caption>
+          <tr>
+            <th>接口</th>
+            <th>说明</th>
+          </tr>
+          <tr>
+            <td>/</td>
+            <td>全部拉取</td>
+          </tr>
+          <tr>
+            <td>/page?page=xx&pageSize=yy</td>
+            <td>分页拉取</td>
+          </tr>
+          <tr>
+            <td>http://127.0.0.1:3000</td>
+            <td>局域网环境下，使用对应的IP地址</td>
+          </tr>
+        </table>
+      </dd>
+      <dt>四、实验内容</dt>
+      <dd>1. 服务器端：在前续静态资源服务器搭建的基础上：准备json数据并处理；相应用户路由请求</dd>
+      <dd>2. 客户端：从资源服务器拉取数据并渲染</dd>
+      <dt>五、实验步骤</dt>
       <dd class="number">
         <div>准备json数据文件；位置、格式和内容自定；节点数据参考如下</div>
         <pre>
@@ -49,8 +69,7 @@
   "discount": 0.4,
   "flavour": "清爽"
 }        </pre>
-        <div>在服务器脚本中，引入文件系统fs处理文件</div>
-        <p>这里采用同步阻塞方式解析json数据文件</p>
+        <div>在服务器脚本中，引入文件系统fs处理文件 - 注意路径；这里采用同步阻塞方式解析json数据文件</div>
         <pre>
 const fs = require('fs')
 
@@ -68,19 +87,19 @@ app.get('/food', (req, res) => {
         <div>结构设计：根据拉取的数据综合运用响应式数据、条件渲染和列表渲染完成商品列表页；参考效果如下图</div>
         <img src="./imgs/list0.png" alt="">
       </dd>
-      <dt>五、实验结果分析与体会</dt>
+      <dt>六、实验结果分析与体会</dt>
       <dd class="number">
         <div>掌握的知识点、开发技能</div>
         <div>碰到的问题、解决的思路和方法以及未解决的问题</div>
         <div>其它思考</div>
       </dd>
-      <dt>六、实验要求</dt>
+      <dt>七、实验要求</dt>
       <dd class="number">
         <div>规范开发；独立完成；突出个人设计特点和风格</div>
         <div>实验报告：采用学院统一下发的格式文件，以文字说明，配以图片或代码展示并说明实施过程、各部分功能、具体内容和实现细节，导出为PDF，按照要求命名，提交个人学习通作业</div>
         <div>未按要求在规定时间内提交视为无效，不得分</div>
       </dd>
-      <dt>七、拓展</dt>
+      <dt>八、拓展</dt>
       <dd class="number">
         <div>数据分页</div>
         <div>使用阿里字体图标iconfont增加风味标识</div>
