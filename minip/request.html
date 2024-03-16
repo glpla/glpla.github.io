@@ -24,7 +24,7 @@
         </dd>
         <dd>搭建本地资源服务器，请访问 <a href="../web/framework/node.html" class="link">Node.js</a>；简化起见，可以使用 <a
                 href="https://www.expressjs.com.cn/" class="link">Express</a> 或 <a href="https://koajs.com/#"
-                class="link">koa</a>；还可以使用 <a href="https://github.com/typicode/json-server" class="link">JSON
+                class="link">koa</a>；还可以使用 <a href="../node/jsonserver.html" class="link">JSON
                 Server</a> 搭建数据服务器</dd>
         <dd>微信小程序支持回调函数和<a
                 href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise"
@@ -59,6 +59,76 @@
                 <img src="./imgs/pro6.png" alt="">
                 <figcaption>取消校验域名合法性</figcaption>
             </figure>
+        </dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>常见配置项</caption>
+                <tr>
+                    <th>选项</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>url</td>
+                    <td>请求接口地址或数据</td>
+                </tr>
+                <tr>
+                    <td>data</td>
+                    <td>请求的参数；<br> 多用于POST，指的是提交数据<br>也可以是GET，用到query参数；不过通常直接使用?拼接在url后面</td>
+                </tr>
+                <tr>
+                    <td>header</td>
+                    <td>请求头；默认content-type 为 application/json</td>
+                </tr>
+                <tr>
+                    <td>method</td>
+                    <td>请求方式：默认是GET；POST、DELETE、</td>
+                </tr>
+                <tr>
+                    <td>success</td>
+                    <td>请求成功</td>
+                </tr>
+                <tr>
+                    <td>fail</td>
+                    <td>请求失败</td>
+                </tr>
+                <tr>
+                    <td>complete</td>
+                    <td>请求完成；无论成功失败都会执行<br>通常用于日志</td>
+                </tr>
+            </table>
+        </dd>
+        <dd class="tips">注意请求URL/接口地址</dd>
+        <dd class="example-sn">GET - 获取 大树小站 积分榜数据</dd>
+        <dd class="code">
+            <pre>
+wx.request({
+    url: 'https://glpla.github.io/utils/data/data2024/rank202402.json',
+    success: res => {
+        console.log(res.data.cont);
+    },
+    fail: err => {
+        console.log(err);
+    },
+    complete: () => {
+        console.log('log done');
+    }
+})</pre>
+        </dd>
+        <dd class="example-sn">GET - 获取 大树小站 美食列表数据完善美食列表并使用真机预览</dd>
+        <dd class="code">
+            <pre>
+wx.request({
+    url: 'https://glpla.github.io/utils/data/food.json',
+    success: res => {
+        console.log(res.data.cont);
+    },
+    fail: err => {
+        console.log(err);
+    },
+    complete: () => {
+        console.log('log done');
+    }
+})</pre>
         </dd>
         <dd class="example-sn">GET - 使用猫眼API获取信息并渲染到页面</dd>
         <dd>
