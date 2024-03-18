@@ -52,6 +52,7 @@
     <dd>需指定存储</dd>
     <dd>
       <table class="tbl-sn">
+        <caption>接口说明</caption>
         <tr>
           <th>API</th>
           <th>Description</th>
@@ -173,8 +174,11 @@ app.listen(port, () => {
     </dd>
     <dt>提交表单数据 none()</dt>
     <dd>说明：无须配置存储，仅需创建multer实例</dd>
+    <dd>不借助multer也可以使用原生formData提交，详情请参考<a href="./formdata.html" class="link">formData</a>、<a
+        href="../web/js/event.html#form" class="link">form</a></dd>
     <dd>
       <table class="tbl-sn">
+        <caption>接口说明</caption>
         <tr>
           <th>API</th>
           <th>Description</th>
@@ -309,7 +313,7 @@ const upload = multer({
 
 module.exports = upload</pre>
     </dd>
-    <dd class="example-sn">上传多个图片 array()</dd>
+    <dt>上传多个图片 array()</dt>
     <dd>利用&lt;input&gt;的multiple属性选择多个图片</dd>
     <dd class="code">
       <pre>&lt;input type="file" name="img" multiple&gt;</pre>
@@ -326,7 +330,7 @@ router.post('/array', upload.array('img', 9), (req, res) => {
   })
 })</pre>
     </dd>
-    <dd class="example-sn">上传多个图片 fields()</dd>
+    <dt>上传多个图片 fields()</dt>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

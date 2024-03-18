@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>事件 Event</title>
+    <title>事件 Events</title>
     <link rel="stylesheet" href="../css/reset2024.css">
     <link rel="stylesheet" href="../css/common2024.css">
     <link rel="stylesheet" href="../css/code.css">
@@ -16,11 +16,14 @@
 <body>
     <header>
         <h1>事件</h1>
-        <span>Event</span>
+        <span>Events</span>
     </header>
     <dl>
-        <dt>事件绑定 v-on</dt>
-        <dd>监听 DOM 事件；可以简写为 <span class="warn">@</span></dd>
+        <dd>更多信息，请访问<a href="https://cn.vuejs.org/guide/essentials/event-handling.html" class="link">官方文档</a>、<a
+                href="../web/js/event.html" class="link">HTML5事件</a>、<a href="../web/js/event_agent.html"
+                class="link">HTML5事件代理</a>、<a href="../minip/events.html" class="link">微信小程序事件</a></dd>
+        <dt>事件监听 v-on</dt>
+        <dd>使用 v-on 指令 (简写为<span class="warn">@</span>) 来监听 DOM 事件，并在事件触发时执行对应的 JavaScript|事件处理函数</dd>
         <dd class="code">
             <pre>
 &lt;div v-on:click="doSomething"&gt; ... &lt;/div&gt;
@@ -70,7 +73,7 @@
             </table>
         </dd>
         <dt>事件修饰符</dt>
-        <dd>1. 点击事件修饰符 - 限制事件特性</dd>
+        <dd>点击事件修饰符 - 限制事件特性</dd>
         <dd>
             <table class="tbl-sn">
                 <caption>常见事件修饰符</caption>
@@ -79,24 +82,87 @@
                     <th>说明</th>
                 </tr>
                 <tr>
+                    <td>.prevent</td>
+                    <td>阻止默认事件<br>&lt;form&gt;表单的默认提交刷新；&lt;a&gt;的默认跳转和刷新</td>
+                </tr>
+                <tr>
                     <td>.stop</td>
-                    <td>停止父级事件的传播/冒泡</td>
+                    <td>停止事件的传播/冒泡 <br>多用于子元素</td>
+                </tr>
+                <tr>
+                    <td>.self</td>
+                    <td>e.target是自己才触发 <br>多用于父元素</td>
                 </tr>
                 <tr>
                     <td>.once</td>
                     <td>只触发一次</td>
                 </tr>
                 <tr>
-                    <td>.prevent</td>
-                    <td>阻止默认事件<br>&lt;form&gt;表单的默认提交；&lt;a&gt;的默认跳转和刷新</td>
+                    <td>.capture</td>
+                    <td><span class="warn">默认</span> 是冒泡事件；绑定一个事件捕获 <br>从文档的根节点开始，向下传播，直到到达目标元素<br>多用于父元素</td>
                 </tr>
                 <tr>
                     <td>.native</td>
-                    <td>使用原生事件；多用于组件<br>定义在组件上的事件默认都是自定义事件，即：系统认为是子组件$emit出来的事件；如需使用原生时间，应指定事件修饰符</td>
+                    <td>使用原生事件；多用于组件<br>定义在组件上的事件默认都是自定义事件<br>系统认为是子组件$emit出来的事件；如需使用原生事件，应指定事件修饰符</td>
                 </tr>
             </table>
         </dd>
-        <dd>2. 按键事件修饰符 - 指定哪个键触发的事件</dd>
+        <dd class="example-sn">冒泡和捕获 - 决定事件执行的顺序</dd>
+        <dd>事件冒泡 - <span class="warn">默认</span>行为；单击inner，目标inner先执行，然后冒泡到outer执行</dd>
+        <dd class="code">
+            <pre>
+&lt;div class="outer" @click="doOut"&gt;
+    &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </dd>
+        <dd>事件捕获 - 单击inner，先被outer捕获执行，再传播到目标inner执行</dd>
+        <dd class="code">
+            <pre>
+&lt;div class="outer" @click.capture="doOut"&gt;
+    &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </dd>
+        <dd class="example-sn">target 和 currentTarget</dd>
+        <dd>target：触发事件的对象 - 点的谁</dd>
+        <dd>currentTarget：当前响应事件的对象；随着事件流的变化，当前对象也在变化</dd>
+        <dd>单击outer：点的是outer；向上没有父级或者说没有冒泡，响应事件的也是outer，所以target和currentTarget都是outer</dd>
+        <div>
+            单击inner：首先inner响应事件，所以target和currentTarget都是inner；然后事件冒泡到outer，outer响应的是inner绑定的事件，所以target是inner，currentTarget是outer
+        </div>
+        <dd class="code">
+            <pre>
+&lt;div class="outer" @click="doOut"&gt;
+    &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </dd>
+        <dd>如果inner指定stop，事件不会冒泡到outer</dd>
+        <dd class="code">
+            <pre>
+&lt;div class="outer" @click="doOut"&gt;
+    &lt;div class="inner" @click.stop="doInner"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </dd>
+        <dd>如果outer指定self，仅仅响应我自己绑定的事件 - 自嗨模式，不会响应inner冒泡的事件：target是我，事件处理器不来自子元素</dd>
+        <dd class="code">
+            <pre>
+&lt;div class="outer" @click.self="doOut"&gt;
+    &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </dd>
+        <dd class="example-sn">表单提交时不刷新页面</dd>
+        <dd class="code">
+            <pre>
+&lt;form @submit.prevent="submit"&gt;
+    &lt;input type="text" placeholder="your name"&gt;
+    &lt;button&gt;submit&lt;/button&gt;
+&lt;/form&gt;</pre>
+        </dd>
+        <dt>按键修饰符</dt>
+        <dd>指定哪个键或哪些触发；多个按键根据先后顺序指定</dd>
+        <dd>如果不指定具体的键，任何一个键都可以触发</dd>
+        <dd>使用 <span class="warn">别名</span> 代替键，如enter代表回车键、space代表空格键、left代表左方向键</dd>
+        <dd>还可以使用 <span class="warn">系统按键</span> ，如ctrl、alt、shift等</dd>
+        <dd>多用于表单</dd>
         <dd>
             <table class="tbl-sn">
                 <caption>按键事件修饰符</caption>
@@ -106,19 +172,19 @@
                 </tr>
                 <tr>
                     <td>keyup.enter</td>
-                    <td>配合enter键</td>
+                    <td>按下enter键</td>
                 </tr>
                 <tr>
                     <td>keyup.alt.enter</td>
-                    <td>配合alt键回车</td>
+                    <td>按下alt键+回车键</td>
                 </tr>
                 <tr>
-                    <td>.ctrl.enter</td>
-                    <td>配合ctrl键回车</td>
+                    <td>keyup.ctrl.enter</td>
+                    <td>配合ctrl键+回车键</td>
                 </tr>
                 <tr>
                     <td>keydown.tab</td>
-                    <td>按下tab未释放</td>
+                    <td>按下tab键未释放</td>
                 </tr>
             </table>
         </dd>
@@ -199,16 +265,16 @@ const getPic = (ind) => {
 &lt;img :src='getPic(ind)' alt=""&gt;
 &lt;button @click="chg"&gt;change pic&lt;/button&gt;</pre>
         </dd>
-        <dd class="example-sn">购物车</dd>
-        <dd>商品数量的增加inc与减少dec</dd>
-        <dd>商品的删除del</dd>
-        <dd>商品的全选selAll</dd>
-        <dd>商品的结算totalPrice</dd>
         <dd class="example-sn">标签页切换</dd>
         <dd>使用&lt;nav&gt;和&lt;a&gt;实现</dd>
         <dd>单击标签，对应的标签高亮显示</dd>
         <dd>阻止&lt;a&gt;的默认事件</dd>
         <dd>分别使用事件代理、不使用事件代理实现，并体会2者的区别</dd>
+        <dd class="example-sn">商品/购物车</dd>
+        <dd>商品数量的增加inc与减少dec</dd>
+        <dd>商品的删除del</dd>
+        <dd>商品的全选selAll</dd>
+        <dd>商品的结算totalPrice</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

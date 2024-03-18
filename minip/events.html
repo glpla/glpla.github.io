@@ -80,7 +80,7 @@ tapMe() {
     <dd>type：事件类型</dd>
     <dd>dataset：自定义数据</dd>
     <dd>detail：具体信息，如表单元素的值</dd>
-    <dd>target：事件对象目标；<span class="warn">绑定</span> 事件|<span class="warn">触发</span>事件的组件</dd>
+    <dd>target：事件对象目标；<span class="warn">绑定</span> 事件的组件</dd>
     <dd>currentTarget：当前事件对象目标，<span class="warn">响应</span>事件的组件</dd>
     <dd>touches：一个数组，每个元素为一个 Touch 对象，表示当前停留在屏幕上的触摸点</dd>
     <dt>事件传参</dt>
@@ -110,10 +110,10 @@ innerTap(e) {
 }</pre>
     </dd>
     <dd>分析：</dd>
-    <dd>单击大矩形时，target和currentTarget都是自己：自己触发事件，自己响应事件</dd>
+    <dd>单击大矩形时，target和currentTarget都是自己：自己绑定事件，自己响应事件</dd>
     <dd>单击小矩形时，由于冒泡的原因，先是小矩形响应事件，然后冒泡到大矩形再响应事件；所以: </dd>
-    <dd>. 对小矩形而言，target和currentTarget都是自己：自己触发事件，自己响应事件</dd>
-    <dd>. 对大矩形而言，它响应的是小矩形触发的事件，所以target是小矩形，而currentTarget是大矩形</dd>
+    <dd>. 对小矩形而言，target和currentTarget都是自己：自己绑定事件，自己响应事件</dd>
+    <dd>. 对大矩形而言，它响应的是小矩形绑定的事件，所以target是小矩形，而currentTarget是大矩形</dd>
     <dd>
       <img src="./imgs/event0.png" alt="">
     </dd>

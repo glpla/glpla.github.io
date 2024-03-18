@@ -23,11 +23,13 @@
         <dd>v-bind:可以简写为冒号:</dd>
         <dd>除了字符串外，表达式的值也可以是 <span class="warn">对象</span> 或 <span class="warn">数组</span></dd>
         <dt>内联样式 :style</dt>
+        <dd>内联样式是值对的集合</dd>
         <dd>复合CSS属性可以使用小驼峰camelCase，也支持短划线 kebab-cased；推荐使用小驼峰camelCase，因为静态使用和动态绑定写法一致</dd>
         <dd>注意双引号和单引号的配套使用</dd>
         <dd>使用vue devtool调试</dd>
         <dd class="tips">类的绑定使用能满足大多场景，不要纠结于内联样式的使用</dd>
-        <dd class="example-sn">静态使用样式示例 - 简单属性和复合属性</dd>
+        <dt>常见静态样式</dt>
+        <dd>简单属性和复合属性</dd>
         <dd>
             <pre class="code">
 &lt;div style="color: #f40;"&gt;hi,there&lt;/div&gt;
@@ -35,19 +37,24 @@
 &lt;div style="background-color: #f40;"&gt;hi,there&lt;/div&gt;
 &lt;div style="backgroundColor: #f40;"&gt;hi,there&lt;/div&gt;</pre>
         </dd>
+        <dt>常见绑定样式</dt>
+        <dd>采用对象方式：值对key-value</dd>
+        <dd>为了和绑定的数据|样式值区分，建议：样式属性key使用引号括起来</dd>
+        <dd class="tips">标准JSON格式，key用引号；各值对使用逗号分隔</dd>
         <dd class="number">
-            <div>指定样式值 - 复合CSS属性只能是小驼峰camelCase</div>
+            <div>直接指定样式值 - 复合CSS属性</div>
             <pre class="code">
-&lt;div :style="{ color: txtColor }"&gt;hi,there&lt;/div&gt;
-&lt;div :style="{ backgroundColor: color }"&gt;content&lt;/div&gt;</pre>
+&lt;div :style="{ 'color': txtColor }"&gt;hi,there&lt;/div&gt;
+&lt;div :style="{ 'background-color': color }"&gt;content&lt;/div&gt;
+&lt;div :style="{ 'backgroundColor': color }"&gt;content&lt;/div&gt;</pre>
             <div>拼接样式值 - 数值和单位</div>
             <pre class="code">
-&lt;div :style="{ fontSize: small + 'px' }"&gt;hi,there&lt;/div&gt;
-&lt;div :style="{ lineHeight: h + 'px' }"&gt;content&lt;/div&gt;
-&lt;div :style="{ backgroundImage: 'url(' + imgUrl + ')' }"&gt;content&lt;/div&gt;</pre>
+&lt;div :style="{ 'fontSize': small + 'px' }"&gt;hi,there&lt;/div&gt;
+&lt;div :style="{ 'lineHeight': h + 'px' }"&gt;content&lt;/div&gt;
+&lt;div :style="{ 'backgroundImage': 'url(' + imgUrl + ')' }"&gt;content&lt;/div&gt;</pre>
             <div>多样式使用逗号,分隔，渲染时变为分号;</div>
             <pre
-                class="code">&lt;div :style="{ backgroundColor: color, lineHeight: h + 'px' }"&gt;content&lt;/div&gt;</pre>
+                class="code">&lt;div :style="{ 'backgroundColor': color, 'lineHeight': h + 'px' }"&gt;content&lt;/div&gt;</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

@@ -175,16 +175,22 @@ window.onload = function () {
     <dd class="mt2">其它：<span class="warn">事件绑定AttachEvent</span> ；IE专有；已停服</dt>
     <dt>冒泡事件和捕获事件</dt>
     <dd>.页面接受事件的顺序，即：事件发生时，在元素节点之间按照特定的顺序传播的过程</dd>
-    <dd>.默认情况下，事件会从内部元素逐步 <span class="warn">冒泡</span> 至父级元素[最外层]</dd>
-    <dd>.三个阶段：捕获阶段→当前目标阶段→冒泡阶段</dd>
-    <dd>.先捕获事件才能处理；事件捕获：网景提出；事件冒泡：IE提出</dd>
+    <dd>.三个阶段：捕获阶段 capture phrase → 当前目标阶段 target phrase → 冒泡阶段 bubbling phrase</dd>
+    <dd>.当点击页面的一个元素的时候，事件会从这个元素的祖先元素逐层传递下来 - 捕获；当事件传递到这个元素之后 - 目标，触发事件本身的程序内容；然后又会把事件逐层传递回去 - 冒泡，直到根元素为止</dd>
+    <dd>.先捕获事件才能处理；事件捕获：网景提出；事件冒泡：微软提出|IE提出</dd>
     <dd>.JS代码只能执行冒泡或捕获中的一个阶段</dd>
+    <dd>.事件冒泡是默认行为。这意味着，如果你在一个子元素|组件上绑定了一个事件，当该事件被触发时，它会沿着DOM|组件树向上冒泡，直到到达根节点|根组件</dd>
+    <dd>.事件捕获是指当一个元素上的事件被触发时，它会从文档的根节点开始，向下传播，直到到达目标元素</dd>
     <dd>.使用e.stopPropagation|e.cancelBubble可以取消冒泡</dd>
     <dd class="quote">
       <div>stopPropagation和cancelBubble都可以阻止浏览器默认的事件冒泡行为</div>
       <div>cancelBubble方法不符合W3C标准，只支持IE浏览</div>
       <div>stopPropagation符合W3C标准，适用于FireFox等浏览器，不支持IE</div>
     </dd>
+    <dt>target currentTarget</dt>
+    <dd>target在事件流的目标阶段</dd>
+    <dd>currentTarget在事件流的捕获，目标及冒泡阶段。只有当事件流处在目标阶段的时候，两个的指向才是一样的，
+      而当处于捕获和冒泡阶段的时候，target指向被单击的对象；currentTarget指向当前事件活动的对象（一般为父级）</dd>
     <dd>.具体细节，请参考后续内容-鼠标事件-实例</dd>
   </dl>
   <div class="chap">事件侦听 addEventListener</div>
@@ -381,40 +387,6 @@ imgs.forEach((img, ind) => {
   })
 })</pre>
     </dd>
-    <dt>事件委托</dt>
-    <dd>.默认方式-遍历所有子元素并绑定事件</dd>
-    <dd>.委托：不给直接给元素指定事件，而是给其共同的祖先元素指定事件，通过冒泡机制，根据事件对象target确定目标元素</dd>
-    <dd>.通常通过标签名tagName来判断事件对象；该属性并没有直接显示在事件对象e中</dd>
-    <dd>.为了唯一标识当前事件对象，可以在渲染的时候通过data-属性和对象绑定</dd>
-    <dd>.适合子元素多，且动态变化的情况</dd>
-    <dd>
-      <pre>
-let ul = document.querySelector('ul');
-let lis = ul.querySelectorAll('li');
-lis.forEach(li => {
-  li.addEventListener('click', () => {
-    console.log(li.innerHTML);
-  })
-})</pre>
-    </dd>
-    <dd>.事件委托方式-仅仅给父级元素指定事件</dd>
-    <dd>
-      <pre>
-let ul = document.querySelector('ul');
-ul.addEventListener('click', (e) => {
-  console.log(e.target.innerHTML);
-})</pre>
-    </dd>
-    <dd>
-      <pre>
-let tbl = document.querySelector('table');
-tbl.addEventListener('click', e => {
-  if (e.target.tagName == 'BUTTON') {
-    console.log('btn clicked');
-    console.log(e.target.dataset.id);
-  }
-})</pre>
-    </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 鼠标跟随/定制鼠标；更多案例，请访问<a
         href="../demo/follow.html">鼠标跟随</a></dd>
     <dd>.元素应脱离文档流 absolute</dd>
@@ -493,41 +465,9 @@ function fn(e) {
     console.log(e.target.dataset.id);
 }</pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 父元素自定义数据data-的获取</dd>
-    <dd>.多个元素存在，data-数据在父级元素</dd>
-    <dd>.事件目标通常是子元素，如果使用dataset，就会导致自定义数据获取失败；只能使用this来获取属性</dd>
-    <dd>[HTML]</dd>
-    <dd>
-      <pre>
-&lt;div class="tmp" data-id="1001"&gt;
-    &lt;div&gt;child&lt;/div&gt;
-    &lt;div&gt;child&lt;/div&gt;
-&lt;/div&gt;</pre>
-    </dd>
-    <dd>.使用同样的js，则第2个log是undefined。因为事件目标是子元素，它没有对应的自定义数据</dd>
-    <dd class="mt2">[ <span class="iconfont icon-bell"></span> ] 破解方案</dd>
-    <dd>方案1. 判断目标是否是当前标签[要采用大写形式]，如果不是，就查找其父元素；直到找到最外层的父级；也可以用根据当前目标是否有某个属性判断</dd>
-    <dd>
-      <pre>
-function fn(e) {
-    console.log(this.getAttribute('data-id'));
-    let tar = e.target
-    while (tar.nodeName != 'DIV') {
-        tar = tar.parentNode
-    }
-    console.log(tar.dataset.id);
-}</pre>
-    </dd>
-    <dd>方案2. 取消父级所有后代的事件响应，只保留父元素的事件行为，所以事件目标一定就是父元素；简单粗暴</dd>
-    <dd>
-      <pre>
-.tmp * {
-    pointer-events: none;
-}</pre>
-    </dd>
   </dl>
   <div class="chap">表单事件 form</div>
-  <dl class="nav-cont" id="form">
+  <dl class="nav-cont" data>
     <dt>表单默认事件</dt>
     <dd>.默认情况下，表单提交时，数据需要提交给后端处理，页面会发生跳转</dd>
     <dd>.前端要拿数据，需要阻止表单的默认行为；类似的还有&lt;a&gt;</dd>
@@ -557,15 +497,32 @@ input.addEventListener('change', () => {
     </dd>
     <dt>FormData</dt>
     <dd>FormData(src)：构造函数；需要一个数据源参数，如表单</dd>
-    <dd>添加append：formdata.append(name, value)</dd>
-    <dd>获取属性第一个值get：formdata.get(name)</dd>
-    <dd>获取所有值getAll：formdata.get(name)；返回的是一个数组</dd>
-    <dd>删除属性delete： formdata.delete(name)</dd>
+    <dd>formdata.append(name, value)：添加</dd>
+    <dd>formdata.get(name)：获取属性第一个值</dd>
+    <dd>formdata.getAll(name)；获取所有值，返回的是一个数组</dd>
+    <dd>formdata.delete(name)：删除属性</dd>
     <dd>[<span class="iconfont icon-bell"></span>]console.log(formdata) 打印出来的结果 始终为FormData {}
       它有一个隐藏域：所有的操作对象的方法全部是在它的原型中</dd>
+    <dd>
+      <img src="../imgs/formData.png" alt="">
+    </dd>
     <dt>获取表单数据</dt>
     <dd>1.提交时构造数据submit</dd>
     <dd>2.数据构造完毕后，提取数据formdata；如果提交后，马上获取，有可能数据还未构造完毕，导致失败</dd>
+    <dd>
+      <form id="formdata">
+        <label>
+          <span>name</span>
+          <input type="text" name="uname" value="123">
+        </label>
+        <label>
+          <span>pass</span>
+          <input type="password" name="upass" value="321">
+        </label>
+        <textarea name="umsg" value="msg hi there"></textarea>
+        <button>submit</button>
+      </form>
+    </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 数据少的时候，直接获取</dd>
     <dd>
       <pre>
@@ -945,6 +902,16 @@ a.addEventListener('click', (e) => {
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="../js/mouse.js"></script>
   <script src="../lib/ham.js"></script>
+  <script>
+    let form = document.querySelector('form')
+    let formData = new FormData(form)
+    console.log(form);
+    console.log(formData);
+    // form.addEventListener('submit', e => {
+    //   e.preventDefault()
+    //   console.log(e);
+    // })
+  </script>
 </body>
 
 </html>

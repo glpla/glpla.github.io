@@ -1,6 +1,5 @@
 let cursor = document.querySelector('#cursor');
 document.addEventListener('mousemove', (ev) => {
-  console.log(ev.offsetX, ev.offsetY);
   cursor.style.left = ev.pageX - 15 + 'px';
   cursor.style.top = ev.pageY - 30 + 'px';
 })
@@ -67,7 +66,6 @@ let box = document.querySelector('.box');
 let img = document.querySelector('.img');
 box.addEventListener('mousemove', fn);
 function fn(e) {
-  console.log(e.offsetX, e.offsetY);
   let x = e.pageX - box.offsetLeft - 15;
   let y = e.pageY - box.offsetTop - 15;
   img.style.left = x + 'px';

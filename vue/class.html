@@ -44,16 +44,17 @@ const isOn = reactive({
     active: false,
     done: true
 })</pre>
+            <div>三元表达式实现2选1；isActive为真，使用bold类；否则使用underline类</div>
+            <p>三元表达式的结果是一个字符串，所以直接写就可以，不需要{}</p>
+            <pre class="code">&lt;div :class="isActive ? 'bold' : 'underline'"&gt;hi,there&lt;/div&gt;</pre>
             <div>同时使用静态类和动态类 - <span class="warn">数组</span>方式</div>
             <p>数组可以存放数字和字符串等多种数据类型；类一定是字符串，所以类应该用括号括起来，而变量不用</p>
             <p>数组中可以使用字符串、对象和三元表达式指定类</p>
             <pre class="coe">
-&lt;div :class="['item', { 'active': isActive }]"&gt;item4&lt;/div&gt;</pre>
-            <p>同时使用静态类和动态类 - 分离形式 - 推荐</p>
+&lt;div :class="['item', { 'active': isActive }]"&gt;item4&lt;/div&gt;
+&lt;div :class="['item', isActive ? 'bold' : 'underline']"&gt;hi,there&lt;/div&gt;</pre>
+            <div>同时使用静态类和动态类 - <span class="warn">分离</span>方式</div>
             <pre class="code">&lt;div class="item" :class="{flag == 0 ? 'active' : 'normal'}"&gt;item1&lt;/div&gt;</pre>
-            <div>三元表达式实现2选1；isActive为真，使用bold类；否则使用underline类</div>
-            <p>三元表达式的结果是一个字符串，所以直接写就可以，不需要{}</p>
-            <pre class="code">&lt;div :class="isActive ? 'bold' : 'underline'"&gt;hi,there&lt;/div&gt;</pre>
         </dd>
         <dd class="tips">
             <div>类名需要使用引号包裹，否则会被当作绑定的变量</div>
@@ -67,21 +68,31 @@ const isOn = reactive({
         <dt>作用域 scope</dt>
         <dd>样式部分中，使用scoped属性指定样式仅仅作用于当前组件。但是会增加额外的开销：渲染时，每个组件分配一个属性</dd>
         <dd>内部样式是通过组件的属性进行选择</dd>
+        <dd>推荐：为组件的根节点指定一个特有的类。如.nav。推荐以组件名字命名这个类；因为组件的功能各不相同，所以很容易保证组件类的唯一性</dd>
         <dd>
             <figure class="img-sn">
                 <img src="./imgs/class0.png" alt="">
-                <figcaption>组件渲染分配属性</figcaption>
+                <figcaption>根组件分配的属性</figcaption>
             </figure>
-        </dd>
-        <dd>
             <figure class="img-sn">
                 <img src="./imgs/class1.png" alt="">
-                <figcaption>携带组件属性的内部样式</figcaption>
+                <figcaption>父组件指定的7a7a和自己指定的0904</figcaption>
+            </figure>
+            <figure class="img-sn">
+                <img src="./imgs/class2.png" alt="">
+                <figcaption>组件内部元素分配的组件属性</figcaption>
             </figure>
         </dd>
-        <dd>推荐：为组件的根节点指定一个特有的类。如.nav。推荐以组件名字命名这个类；因为组件的功能各不相同，所以很容易保证组件类的唯一性</dd>
+        <dt>导入外部样式表</dt>
+        <dd>可以导入本地样式表；也可以导入在线样式表</dd>
+        <dd class="code">
+            <pre>
+@import './base.css';
+@import url(//at.alicdn.com/t/c/font_4235521_vw0a33le7e.css);            </pre>
+        </dd>
         <dt>样式预处理SCSS</dt>
         <dd>原生CSS3也支持嵌套写法</dd>
+        <dd>后续案例演示会使用两种方法</dd>
         <dd>请访问 <a href="./scss.html" class="link">SCSS</a></dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
