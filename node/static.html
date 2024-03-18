@@ -32,7 +32,7 @@
     <dt>具体过程</dt>
     <dd class="number">
       <div>创建一个空白文件夹作为服务器目录，如server</div>
-      <div>在服务器目录创建资源文件夹，如www，存放图片imgs、视频video、数据data等资源；建议不同类型的资源存放在不同的子目录</div>
+      <div>在服务器目录创建资源文件夹，如public，存放图片imgs、视频video、数据data等资源；建议不同类型的资源存放在不同的子目录</div>
       <div>在服务器目录打开CMD命令行窗口 - 右键选择"在终端中打开"或在资源管理器顶部地址栏输入cmd并回车</div>
       <p>初始化，用来创建package.json文件</p>
       <pre class="code">npm init</pre>
@@ -63,7 +63,7 @@ const app = express();
 //指定服务器端口
 const port = 3000
 //指定静态文件位置
-app.use(express.static('./www'));
+app.use(express.static('./public'));
 //监听
 app.listen(port, res => {
   console.log('服务器启动成功，访问地址：http://127.0.0.1:3000/资源名');
