@@ -1,5 +1,5 @@
 body {
-  counter-reset: tbl-sn img-sn example-sn;
+  counter-reset: tbl-sn img-sn example-sn mul-sn;
 }
 
 .example-sn {
@@ -64,4 +64,25 @@ body {
 .qa::before {
   content: '[参考答案] ';
   color: var(--warn-color);
+}
+
+.number-mul-sn {
+  counter-reset: mul-sn;
+}
+
+.number-mul-sn dt {
+  counter-increment: mul-sn;
+  counter-reset: sub-sn;
+}
+
+.number-mul-sn dt::before {
+  content: counter(mul-sn)'. ';
+}
+
+.number-mul-sn dd {
+  counter-increment: sub-sn;
+}
+
+.number-mul-sn dd::before {
+  content: counter(mul-sn)'.' counter(sub-sn)'. ';
 }
