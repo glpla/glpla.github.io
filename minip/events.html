@@ -19,24 +19,29 @@
     <span>Evetns</span>
   </header>
   <dl>
-    <dt>事件和事件处理函数</dt>
+    <dt>事件和事件处理函数 Events vs EventHandle</dt>
     <dd>事件是视图层|wxml到逻辑层|js的通讯方式：将用户的行为反馈到逻辑层进行处理</dd>
     <dd>事件绑定在组件上；当达到触发事件，就会执行逻辑层中对应的事件处理函数</dd>
-    <dd>- 绑定事件使用bind:语法</dd>
-    <dd>- 在页面逻辑顶层声明事件处理函数，和data同级；可以不使用关键字function；统一风格即可</dd>
+    <dd>绑定事件使用 bind: 语法</dd>
+    <dd>- 在结构中为节点元素绑定事件并指定事件处理函数</dd>
+    <dd class="code">
+      <pre>&lt;view class="title" bind:tap="test"&gt;best wishes&lt;/view&gt;</pre>
+    </dd>
+    <dd>- 在页面逻辑顶层|data同级，声明事件处理函数；可以不使用关键字function；统一风格即可；建议和小程序示例代码保持一致</dd>
     <dd class="code">
       <pre>
-submit(e){
-  console.log(e.detail.value);
+test(e){
+  console.log(e);
 },
-submit: function(e){
-  console.log(e.detail.value);
+test: function(e){
+  console.log(e);
 },
-submit: (e)=>{
-  console.log(e.detail.value);
+//箭头函数；HTML中，this指向window；小程序宿主环境是微信，不是浏览器，所以this为undefined
+test: (e)=>{
+  console.log(e);
 }</pre>
     </dd>
-    <dt>事件类型</dt>
+    <dt>事件类型 Type</dt>
     <dd>常见事件有：单击事件tap和触摸事件touch</dd>
     <dd>此外，每个组件还有自己的独有的事件，如表单的提交事件submit和重置事件reset、滑动组件的scroll等等，详情请查阅官方文档</dd>
     <dd>
@@ -64,18 +69,7 @@ submit: (e)=>{
         </tr>
       </table>
     </dd>
-    <dd>在结构中为组件绑定点击函数 - 单击组件后执行tapMe函数</dd>
-    <dd class="code">
-      <pre>&lt;view bind:tap = 'tapMe'&gt;tap me&lt;/view&gt;</pre>
-    </dd>
-    <dd>在逻辑js中声明事件处理函数tapMe</dd>
-    <dd class="code">
-      <pre>
-tapMe() {
-  console.log('you tapped me');
-}      </pre>
-    </dd>
-    <dt>事件对象</dt>
+    <dt>事件对象 Target</dt>
     <dd>事件发生时，会触发一个事件对象event：包含事件发生时的很多额外信息，常见的有：</dd>
     <dd>type：事件类型</dd>
     <dd>dataset：自定义数据</dd>
@@ -83,6 +77,10 @@ tapMe() {
     <dd>target：事件对象目标；<span class="warn">绑定</span> 事件的组件</dd>
     <dd>currentTarget：当前事件对象目标，<span class="warn">响应</span>事件的组件</dd>
     <dd>touches：一个数组，每个元素为一个 Touch 对象，表示当前停留在屏幕上的触摸点</dd>
+    <dd>更多事件对象，请访问<a href="../vue/events.html" class="link">Vue-events</a>、<a href="../web/js/event.html"
+        class="link">html-event</a></dd>
+    <dd class="tips">
+      默认情况下，事件是冒泡机制。当节点元素触发一个事件后，该事件会逐步冒泡至它的父级及父级的父级直至顶级；所以一个事件可以由不同的节点元素响应，这就是currentTarget；而最开始触发事件的是target</dd>
     <dt>事件传参</dt>
     <dd>通过自定义数据 data- 的方式指定参数</dd>
     <dd>利用事件对象目标的dataset获取并使用</dd>
@@ -100,13 +98,13 @@ tapMe() {
       <pre>
 outerTap(e) {
   console.log('outer');
-  console.log(e.target.dataset);
-  console.log(e.currentTarget.dataset);
+  console.log('target', e.target.dataset);
+  console.log('currentTarget', e.currentTarget.dataset);
 },
 innerTap(e) {
   console.log('inner');
-  console.log(e.target.dataset);
-  console.log(e.currentTarget.dataset);
+  console.log('target', e.target.dataset);
+  console.log('currentTarget', e.currentTarget.dataset);
 }</pre>
     </dd>
     <dd>分析：</dd>

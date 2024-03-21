@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>库函数 Lib</title>
+  <link rel="stylesheet" href="../../css/reset2024.css">
+  <link rel="stylesheet" href="../../css/common2024.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>库函数</h1>
+    <span>&commat;Lib </span>
+  </header>
+  <dl>
+    <dt>url</dt>
+    <dd>解析url，获取协议、主机、端口、路径、文件名和query等数据</dd>
+    <dd>选项如果为true，将解析query数据</dd>
+    <dd>引入</dd>
+    <dd class="code">
+      <pre>
+const fs = require('fs');</dd>
+<dd>使用</dd>
+    <dd class="code">
+      <pre>
+console.log(URL.parse('https://glpla.github.io/utils/wedding/p0.jpg?id=100&name=gl'));</pre>
+    </dd>
+    <dd class="code">
+      <pre>
+Url {
+  protocol: 'https:',
+  slashes: true,
+  auth: null,
+  host: 'glpla.github.io',
+  port: null,
+  hostname: 'glpla.github.io',
+  hash: null,
+  search: '?id=100&name=gl',
+  query: 'id=100&name=gl',
+  pathname: '/utils/wedding/p0.jpg',
+  path: '/utils/wedding/p0.jpg?id=100&name=gl',
+  href: 'https://glpla.github.io/utils/wedding/p0.jpg?id=100&name=gl'
+}</pre>
+    </dd>
+    <dd>解析query</dd>
+    <dd class="code">
+      <pre>
+console.log(URL.parse('https://glpla.github.io/utils/wedding/p0.jpg?id=100&name=gl', true));      </pre>
+    </dd>
+    <dd class="code">
+      <pre>
+Url {
+  protocol: 'https:',
+  slashes: true,
+  auth: null,
+  host: 'glpla.github.io',
+  port: null,
+  hostname: 'glpla.github.io',
+  hash: null,
+  search: '?id=100&name=gl',
+  query: [Object: null prototype] { id: '100', name: 'gl' },
+  pathname: '/utils/wedding/p0.jpg',
+  path: '/utils/wedding/p0.jpg?id=100&name=gl',
+  href: 'https://glpla.github.io/utils/wedding/p0.jpg?id=100&name=gl'
+}      </pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

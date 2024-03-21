@@ -72,20 +72,31 @@ try {
     </dd>
     <dt>常用函数</dt>
     <dd class="number">
-      <div>读：fs.readFile(path[, options], callback)</div>
-      <div>写：fs.writeFile(file, data[, options], callback)</div>
-      <p>. 第2个参数是要写入的数据</p>
-      <p>. 选项options中，默认编码encoding是'utf8'，写入标记flag是覆盖w</p>
-      <pre class="code">
-//指定路径(必须存在,系统不会显示/自动创建路径) 文件名 文件内容 callback
-fs.writeFile(dir.filename.extension,'',(err)=>{
-  console.log(err)
-})</pre>
+      <div>读：fs.readFile(path[, options], (err, data)=>{})</div>
+      <p>. callback是异常信息err和督导的数据data</p>
+      <p>. data默认是二进制流；可以使用toString()转换或JSON.parse()解析</p>
+      <div>写：fs.writeFile(file, data[, options], err=>{})</div>
+      <p>. 默认以覆盖的方式写文件</p>
+      <p>. data是要写入的数据</p>
+      <p>. options中，指定写标记flag和编码encoding等选项；默认写标记是w-覆盖，编码'utf8'</p>
+      <p>. callback是异常信息err</p>
+      <p>. 路径必须存在：系统不会显示/自动创建路径；但是如果写入文件不存在，会创建</p>
+      <p>. 可以写入回车\n、制表位\t等转义符号</p>
       <div>文件/路径是否存在：fs.existsSync(path)</div>
       <p>__dirname：获取js文件所在目录</p>
-      <div>创建文件夹：fs.mkdir(path[, options], callback)</div>
-      <div>删除文件夹：fs.rmdir(path[, options], callback)</div>
-      <div>删除文件：fs.unlink(path, callback)</div>
+      <div>创建文件夹：fs.mkdir(path[, options], err=>{})</div>
+      <div>删除文件夹：fs.rmdir(path[, options], err=>{})</div>
+      <div>删除文件：fs.unlink(path, err=>{})</div>
+    </dd>
+    <dt>路径使用</dt>
+    <dd>读写文件的路径，以引用当前文件的文件为准，不是以当前文件为准</dd>
+    <dd>test.js内容如下，读取一个json文件</dd>
+    <dd>index.js主文件引入并使用test.js</dd>
+    <dd>test.js中指定的文件位置以index.js为参考</dd>
+    <dd class="code">
+      <pre>
+fs.readFile('./public/data/form.json', (err, data) => {
+})</pre>
     </dd>
     <dt>普通文件 txt</dt>
     <dd>1. 读 - 如果正常，读出文件内容；否则抛出错误信息</dd>
@@ -95,7 +106,7 @@ fs.writeFile(dir.filename.extension,'',(err)=>{
       <pre>
 const fs = require('fs')
 fs.readFile('./data/demo.txt', (err, date) => {
-  if (err) throw err;
+  if (err) throw err;//res.send({msg:404})
   console.log(date);
   console.log(date.toString());
 })</pre>
@@ -115,7 +126,7 @@ read file [Error: ENOENT: no such file or directory, open 'C:\Users\cnplaman\Des
       <pre>
 const fs = require('fs')
 fs.writeFile('./data/demo.txt', '\n888', { flag: 'a' }, (err) => {
-if (err) throw err
+if (err) throw err//res write('404')
   console.log('write ok');
 })</pre>
     </dd>

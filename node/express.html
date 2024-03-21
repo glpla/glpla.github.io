@@ -19,8 +19,15 @@
     <span>&commat;Express</span>
   </header>
   <dl>
+    <dt>概述 overview</dt>
+    <dd>保留了node的原生功能</dd>
+    <dd>添加|增强了很多功能，如创建服务器</dd>
+  </dl>
+  <dl>
     <dt>请求 req</dt>
     <dd class="number">
+      <div>req.url</div>
+      <p>请求url地址</p>
       <div>查询路由 query - 使用?拼接字符串；/detail?key=value&key=value&...</div>
       <pre class="code">
 server.get('/detail', (req, res) => {
@@ -32,9 +39,12 @@ server.get('/detail/:id', (req, res) => {
   res.send(req.params)
 })      </pre>
     </dd>
+  </dl>
+  <dl>
     <dt>响应 res</dt>
     <dd class="number">
       <div>write() - 写回流时，需要显式指定结束 end()</div>
+      <p>argument: must be of type string or an instance of Buffer or Uint8Array</p>
       <pre class="code">
 res.write(data)
 res.end()</pre>
@@ -57,6 +67,8 @@ res.render('home/index', {
       <div>其它</div>
       <pre class="code">res.status(200).json({ msg: 'cnplaman', success: true })</pre>
     </dd>
+  </dl>
+  <dl>
     <dt>404</dt>
     <dd>以中间件use()的形式实现</dd>
     <dd>所有路由都匹配失败，则匹配404；所以404中间件应该放在所有路由的 <span class="warn">后面</span></dd>

@@ -28,7 +28,7 @@
     </dl>
     <div class="chap">声明式导航</div>
     <dl>
-        <dd>使用导航组件&lt;navigator&gt;导航</dd>
+        <dd>使用导航组件&lt;navigator&gt;导航，类似HTML的 &lt;a&gt;</dd>
         <dd>导航组件的使用都有对应的API</dd>
         <dd>更多属性，请访问官方文档 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html"
                 class="link">navigator</a></dd>
@@ -93,7 +93,7 @@
             </figure>
         </dd>
         <dt>带参导航</dt>
-        <dd>在路径url后面以值对的形式拼接参数</dd>
+        <dd>在路径url后面以值对key-value的形式拼接参数</dd>
         <dd>参数和url之间使用?连接</dd>
         <dd>多个参数以&分隔</dd>
         <dd>传递的参数在目标页的生命周期函数onLoad中通过形参option获取</dd>
@@ -116,8 +116,70 @@ onLoad(option) {
 }</pre>
             </figure>
         </dd>
-        <dd class="tips">模拟器底部状态栏，默认显示"页面路径"，也可以切换到"页面参数"观察页面之间的参数传递情况</dd>
-
+        <dd class="tips">
+            <div>请尽量使用调试器的"预览"体验完整功能</div>
+            <div>模拟器底部状态栏，默认显示"页面路径"，也可以切换到"页面参数"观察页面之间的参数传递情况</div>
+        </dd>
+        <dd class="example-sn">九宫格带参导航</dd>
+        <dd>使用navigator，修改个人中心静态页面，采用列表渲染定制导航；根据不同的导航项，动态设置目标页的导航标题；相关API，请访问 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarTitle.html"
+                class="link">setNavigationBarTitle()</a>
+        </dd>
+        <dd>该案例也适合客户、产品详情页，如：使用一个页面展示不同的商品内容</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>导航页 - wxml</figcaption>
+                <pre>
+&lt;navigator 
+    class="grid"
+    wx:for="{{nav}}" wx:key="id"
+    url="../list/list?id={{item.id}}&name={{item.name}}"&gt;
+    {{item.name}}
+&lt;/navigator&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>导航页 - js</figcaption>
+                <pre>
+nav:[{id:1,name:'tea'}]</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>导航页 - wxss</figcaption>
+                <pre>
+.grid{
+    display: flex;
+    gap: 20rpx;
+    flex-wrap: wrap;
+    padding: 10rpx;
+}
+.grid navigator{
+    width: 26%;
+    flex: auto;
+    aspect-ratio: 16/9;
+    background-color: #f40;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>目标页 - js</figcaption>
+                <pre>
+data: {
+    title:''
+},
+onLoad(option: any) {
+    this.setData({
+        title:option.name
+    })
+},
+onReady() {
+    wx.setNavigationBarTitle({
+        title:this.data.title
+    })
+}</pre>
+            </figure>
+        </dd>
     </dl>
     <div class="chap">编程式导航</div>
     <dl>

@@ -28,6 +28,10 @@
         <dd>- 页面page的加载 → 渲染 → 卸载</dd>
         <dd>小程序提供的生命周期函数按次序自动执行</dd>
         <dt>app.js中的生命周期函数</dt>
+        <dd>onLaunch()</dd>
+        <dd>onShow()</dd>
+        <dd>onHide()</dd>
+        <dd>onError()</dd>
         <dd>
             <figure class="code">
                 <figcaption>app生命周期函数</figcaption>
@@ -56,6 +60,11 @@ App({
             </figure>
         </dd>
         <dt>page中的生命周期函数</dt>
+        <dd>onLoad()</dd>
+        <dd>onReady()</dd>
+        <dd>onShow()</dd>
+        <dd>onHide()</dd>
+        <dd>onUnload()</dd>
         <dd>
             <figure class="code">
                 <figcaption>page生命周期函数</figcaption>
@@ -88,67 +97,6 @@ Page({
             </figure>
         </dd>
         <dd class="tips">老版本的微信开发工具中的工具栏有个"切后台"，用于调试前台和后台业务逻辑</dd>
-    </dl>
-    <div class="chap">综合案例</div>
-    <dl>
-        <dt>九宫格带参导航</dt>
-        <dd>根据不同的导航项，动态设置目标页的导航标题</dd>
-        <dd>使用一个页面展示不同的内容</dd>
-        <dd>该案例也适合客户、产品详情页</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>导航页 - wxml</figcaption>
-                <pre>
-&lt;navigator 
-    class="grid"
-    wx:for="{{nav}}" wx:key="id"
-    url="../list/list?id={{item.id}}&name={{item.name}}"&gt;
-    {{item.name}}
-&lt;/navigator&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>导航页 - js|ts</figcaption>
-                <pre>
-nav:[{id:1,name:'tea'}]</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>导航页 - wxss</figcaption>
-                <pre>
-.grid{
-    display: flex;
-    gap: 20rpx;
-    flex-wrap: wrap;
-    padding: 10rpx;
-}
-.grid navigator{
-    width: 26%;
-    flex: auto;
-    aspect-ratio: 16/9;
-    background-color: #f40;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>目标页 - js|ts</figcaption>
-                <pre>
-data: {
-    title:''
-},
-onLoad(option: any) {
-    this.setData({
-        title:option.name
-    })
-},
-onReady() {
-    wx.setNavigationBarTitle({
-        title:this.data.title
-    })
-}</pre>
-            </figure>
-        </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

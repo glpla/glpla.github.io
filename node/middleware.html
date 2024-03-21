@@ -25,6 +25,16 @@
     <dd>数量不限制，但是按照use挂载的顺序执行，流水线执行，所以上一个中间件定义的数据可以被下一个中间件获取</dd>
     <dd>不是按照定义的顺序</dd>
     <dd>使用next才可以执行下一个中间件</dd>
+    <dd>针对所有路由</dd>
+    <dd class="code">
+      <pre>
+server.user(fn)</pre>
+    </dd>
+    <dd>针对特定路由</dd>
+    <dd class="code">
+      <pre>
+server.user('/xxx',fn)</pre>
+    </dd>
     <dd class="code">
       <pre>
 function mw(req,res,next){
@@ -38,11 +48,11 @@ function foo(req,res,next){
 }
 
 server.use(mw)
-server.user('/',()=>{
-  //针对根路径的访问有效
-})
-server.user(()=>{
-  //针对所有路径的访问有效
+
+server.use('/login', foo)
+
+server.use(()=>{
+  console.log('hi,there.')
 })      </pre>
     </dd>
   </dl>

@@ -23,11 +23,10 @@
     <dd>. os：operate system</dd>
     <dd>. fs：file system</dd>
     <dd>协作、共享、解耦</dd>
-    <dd>每个模块都是一个js文件</dd>
+    <dd>每个js文件中的变量、方法都可以单独导出；也可以使用module集中导出</dd>
     <dd>区分系统模块和自定义模块</dd>
     <dd>需要使用时，require进来；系统模块直接引入；自定义模块使用相对路径指定</dd>
     <dd>建议集中管理自定义模块，如统一存放在module文件夹</dd>
-    <dd class="tips">require()不带路径加载的是系统模块；带了路径则根据路径加载用户自定义模块</dd>
     <dt>基本步骤</dt>
     <dd class="number">
       <div>创建模块文件</div>
@@ -36,33 +35,27 @@
       <div>用户引入模块</div>
       <div>用户使用模块</div>
     </dd>
-    <dt>自定义模块 - 单个逻辑</dt>
-    <dd>以创建admin模块为例；具体过程如下：</dd>
-    <dd class="number">
-      <div>在服务器的模块目录创建 admin.js</div>
-      <div>编辑内容并导出</div>
-      <pre class="code">
-const admin = {
-  name: 'glpla',
-  url: 'https://glpla.github.io',
-  email: '1942194789@qq.com',
-  date: '2024-02-28',
-  version: '1.0.0',
-  desc: 'for drill'
+    <dt>多个逻辑 - 单独导出</dt>
+    <dd>创建 oper.js</dd>
+    <dd class="code">
+      <pre>
+exports.add = () => {
+  console.log('hi, add');
 }
-// 暴露1个
-module.exports = admin</pre>
-      <div>用户在自己的js文件引入并使用</div>
-      <pre class="code">
-const admin = require('./module/admin')
-console.log('admin:\t', admin);</pre>
+exports.dec = () => {
+  console.log('hi, dec');
+}</pre>
     </dd>
-    <dt>自定义模块 - 多个逻辑</dt>
-    <dd>以创建oper模块为例；具体过程如下：</dd>
-    <dd class="number">
-      <div>在服务器的模块目录创建 oper.js</div>
-      <div>编辑内容并导出；包括add和dec两个逻辑</div>
-      <pre class="code">
+    <dd>引入并使用</dd>
+    <dd class="code">
+      <pre>
+const { add, dec } = require('./oper')
+console.log(add(), dec());      </pre>
+    </dd>
+    <dt>多个逻辑 - 集中导出</dt>
+    <dd>创建 oper.js</dd>
+    <dd class="code">
+      <pre>
 const add = () => {
   console.log('hi, add');
 }
@@ -74,20 +67,50 @@ module.exports = {
   add,
   dec
 };</pre>
-      <div>用户在自己的js文件引入并使用</div>
-      <pre class="code">
+    </dd>
+    <dd>引入并使用</dd>
+    <dd class="code">
+      <pre>
 const oper = require('./module/oper')
 oper.add()
 oper.dec()</pre>
-      <div>解构引入并使用 - 更加灵活，需要哪个引入哪个</div>
+    </dd>
+    <dd>多个逻辑通常解构引入并使用 - 更加灵活，需要哪个引入哪个</dd>
+    <dd>
       <pre class="code">
 const { add,dec } = require('./module/oper')
 add()
 dec()</pre>
     </dd>
+    <dt>单个逻辑</dt>
+    <dd>创建admin.js</dd>
+    <dd class="code">
+      <pre>
+const admin = {
+  name: 'glpla',
+  url: 'https://glpla.github.io',
+  email: '1942194789@qq.com',
+  date: '2024-02-28',
+  version: '1.0.0',
+  desc: 'for drill'
+}
+// 暴露1个
+module.exports = admin</pre>
+    </dd>
+    <dd>引入并使用</dd>
+    <dd>
+      <pre class="code">
+const admin = require('./module/admin')
+console.log('admin:\t', admin);</pre>
+    </dd>
     <dd class="tips">
+      <div>require引入</div>
+      <div>exports导出</div>
+      <div>module集中导出</div>
+      <div>exports==module.exports为true，说明是一个方法</div>
       <div>定制多个逻辑，解构化引入</div>
       <div>引入时，可以省略后缀名.js</div>
+      <div>引入时，不带路径加载的是系统模块；带了路径则根据路径加载用户自定义模块</div>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
