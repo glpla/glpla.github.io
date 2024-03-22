@@ -8,6 +8,8 @@
   <title>项目 商品列表</title>
   <link rel="stylesheet" href="../css/course.css">
   <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/code.css">
+  <base target="_blank">
 </head>
 
 <body>
@@ -31,6 +33,35 @@
       <dd>文本编辑器 Vs Code</dd>
       <dd>谷歌浏览器 Chrome</dd>
       <dd>node.js</dd>
+      <dt>参考代码</dt>
+      <dd>触底加载 - 更多细节，请访问 <a href="../web/js/scroll.html" class="link">HTML - scroll</a>
+        <pre class="code">
+import axios from 'axios';
+import { ref, onMounted, onUnmounted } from 'vue';
+let list = ref([])
+const loadList = () => {
+  axios.get('/good.json')
+    .then(res => {
+      list.value = [...list.value, ...res.data.cont]
+    })
+}
+const doScroll = () => {
+  let html = document.documentElement;
+  let per = html.scrollTop / (html.scrollHeight - html.clientHeight);
+  console.log(per);
+  if (per >= 0.7) {
+    console.log('loading');
+    loadList()
+  }
+}
+onMounted(() => {
+  loadList()
+  window.addEventListener('scroll', doScroll)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', doScroll)
+})      </pre>
+      </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   </div>

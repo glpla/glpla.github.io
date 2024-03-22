@@ -73,17 +73,24 @@
             <pre>
 &lt;label for="uname"&gt;Title &lt;/label&gt;
 &lt;input type="text" v-model="uname" required&gt;</pre>
+        </dd>
+        <dd class="code">
             <pre>let uname = ref('')</pre>
         <dd>
         <dt>&lt;textarea&gt;</dt>
         <dd>留言、评论</dd>
-        <dd>不可以使用插值表达式{{}}</dd>
+        <dd>可以使用&lt;label&gt;改善用户体验</dd>
         <dd class="code">
-            <pre>&lt;textarea v-model="ubody" required&gt;{{msg}}&lt;/textarea&gt;</pre>
             <pre>
 &lt;label for="ubody"&gt;Contents&lt;/label&gt;
 &lt;textarea v-model="ubody" required&gt;&lt;/textarea&gt;</pre>
+        </dd>
+        <dd class="code">
             <pre>let ubody = ref('')</pre>
+        </dd>
+        <dd>不可以使用插值表达式{{}}</dd>
+        <dd class="code">
+            <pre>&lt;textarea v-model="ubody" required&gt;{{msg}}&lt;/textarea&gt;</pre>
         </dd>
         <dd class="tips">text类型的&lt;input&gt;和&lt;textarea&gt;绑定的是 value 属性 并侦听 input 事件</dd>
         <dt>&lt;input&gt; - radio</dt>
@@ -113,6 +120,8 @@
 &lt;label for="game"&gt;game&lt;/label&gt;
 &lt;input type="checkbox" id="read" v-model="ulike" value="read"&gt;
 &lt;label for="read"&gt;read&lt;/label&gt;</pre>
+        </dd>
+        <dd class="code">
             <pre>let ulike = ref([])</pre>
         </dd>
         <dd class="tips">&lt;radio类型的input&gt;和checkbox类型的&lt;input&gt;绑定的是 checked 属性 并侦听 change 事件</dd>
@@ -120,6 +129,8 @@
         <dd class="code">
             <pre>
 &lt;label&gt;&lt;input type="checkbox" v-model="isAgree"&gt;已阅读并同意服务条款&lt;/label&gt;</pre>
+        </dd>
+        <dd class="code">
             <pre>let isAgree = ref(false)</pre>
         </dd>
         <dt>&lt;select&gt;</dt>
@@ -135,6 +146,8 @@
 &lt;button @click = 'add'&gt;add&lt;/button&gt;
 &lt;button @click = 'minus'&gt;minus&lt;/button&gt;
 </pre>
+        </dd>
+        <dd class="code">
             <pre>
 let sel = ref(1)
 let sum = ref(0)
@@ -203,11 +216,16 @@ let femaleVal = reactive({
     </dl>
     <div class="chap">综合案例</div>
     <dl>
+        <dd class="example-sn">代办事项 Todo</dd>
+        <dd>详细实现，请参考<a href="../web/demo/todo.html" class="link">留言板</a>、<a href="./drill_todo.html"
+                class="link">代办事项</a></dd>
         <dd class="example-sn">注册和登录</dd>
         <dd>传统方式：用户名和密码、手机</dd>
         <dd>现在方式：第三方</dd>
-        <dd class="example-sn">购物车，详细实现请参考<a href="./drill_cart.html" class="link">购物车 Cart</a></dd>
+        <dd>详细实现，请参考<a href="./pro_reg_log.html" class="link">注册和登录</a></dd>
+        <dd class="example-sn">购物车 - 全选</dd>
         <dd>思路：状态改变时，检查选中数据和原始数据是否一致 - 可通过长度判断</dd>
+        <dd>详细实现，请参考<a href="./drill_cart.html" class="link">购物车 Cart</a></dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

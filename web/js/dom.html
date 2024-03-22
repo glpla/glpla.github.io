@@ -559,68 +559,7 @@ console.log(document.documentElement.clientHeight);//实际上是视口高度；
     <dd>浏览器窗口化或移动时，都会导致数值发生变化</dd>
     <dd>screenY通常取不到0，因为一般的窗口都有状态栏、菜单栏、工具栏等区域</dd>
     <dt>scroll系列</dt>
-    <dd>.元素的内容超过元素的大小，且出现滚动条时，才会有相应的变化</dd>
-    <dd>
-      <pre>overflow-y: auto;</pre>
-    </dd>
-    <dd>el.scrollTop：元素垂直滚动的数值：the number of pixels that an element's content is scrolled vertically.</dd>
-    <dd>el.scrollHeight：可以滚动的高度</dd>
-    <dd>window.scrollY：是window对象的属性，滚动的距离；同scrollTop；可以根据这个动态设置元素样式，如视觉差、返回顶部；IE不支持</dd>
-    <!-- <dd>为了跨浏览器兼容性，请使用 window.pageYOffset 而不是 window.scrollY</dd> -->
-    <dd>
-      <figure class="img-sn">
-        <img src="../imgs/dom.jpg" alt="">
-        <figcaption>滚动区域</figcaption>
-      </figure>
-    </dd>
-    <dd>.没有滚动时，scrollTop为0，滚动比例为0</dd>
-    <dd>.滚动到最下面时，scrollTop为最大，滚动比例为1</dd>
-    <dd>.通常操作的是html或body，即h5页面</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>利用DOM元素：滚动事件添加在元素上</figcaption>
-        <pre>
-let html = document.documentElement;
-document.addEventListener('scroll', () => {
-let per = html.scrollTop / (html.scrollHeight - html.clientHeight);
-console.log(per);})</pre>
-    </dd>
-    </figure>
-    <dd>
-      <figure class="code">
-        <figcaption>利用BOM元素：滚动事件添加在window上</figcaption>
-        <pre>
-window.addEventListener('scroll', fn);
-window.addEventListener('resize', fn);
-window.addEventListener('load', fn);
-function fn() {
-  let top = document.documentElement.scrollTop | document.body.scrollTop;
-  console.log(top);
-  console.log(window.scrollY);
-}</pre>
-      </figure>
-    </dd>
-    <dd class="example-sn"> <a href="https://codepen.io/glpla/full/QWojbYE">使用须知notice - CodePen</a>、<a
-        href="../demo/notice.html">使用须知notice</a></dd>
-    <dd>.阅读完才可以继续下一步</dd>
-    <dd>.垂直方向的应用</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>核心代码</figcaption>
-        <pre>
-let tips = document.querySelector('.tips');
-let btn = document.querySelector('.btn');
-tips.addEventListener('scroll', () => {
-  let per = tips.scrollTop / (tips.scrollHeight - tips.offsetHeight);
-  if (per >= 0.9) {
-    btn.removeAttribute('disabled');
-    btn.classList.add('active');
-  }
-})</pre>
-      </figure>
-    </dd>
-    <dd class="example-sn"> <a href="https://codepen.io/glpla/full/eYXpNqe">水平进度条 - CodePen</a></dd>
-    <dd>.水平方向的应用</dd>
+    <dd>请查看<a href="./scroll.html" class="link">Scroll</a></dd>
     <dt>getBoundingClientRect()方法</dt>
     <dd>.只读属性</dd>
     <dd>.获取元素位置的高频操作；用了都说好</dd>
