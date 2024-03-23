@@ -20,6 +20,9 @@
       <dd>
         <div>掌握数据绑定</div>
         <div>掌握事件绑定和常用按键事件、事件修饰符</div>
+        <div>掌握网络请求的基本过程</div>
+        <div>掌握生命周期函数的使用</div>
+        <div>掌握样式类的基本使用</div>
         <div>进一步熟悉条件渲染、列表渲染的使用</div>
         <div>进一步熟悉响应式数据的使用</div>
         <div>了解本地存储 <a href="../web/js/storage.html">localStorage</a></div>
@@ -33,13 +36,16 @@
       </dd>
       <dt>实验内容</dt>
       <dd>
-        <div>输入内容，按alt+enter提交；提交时，可以选择是否保存在本地</div>
+        <div>自动轮播</div>
+        <div>输入内容，按alt+enter提交</div>
+        <div>提交时，可以选择是否保存在本地</div>
         <div>内容较长时，应打点提示</div>
         <div>可以删除单个列表项目；也可以全部删除</div>
         <div>统计当前列表项总数</div>
-        <div>自动轮播</div>
-        <div>定制滚动条</div>
-        <div>阿里字体图标</div>
+        <div>定制滚动条 scroll-bar</div>
+        <div>定制字体 @font-face</div>
+        <div>阿里字体图标 iconfont</div>
+        <div>响应式开发 - 移动优先</div>
       </dd>
       <dt>实验步骤</dt>
       <dd>
@@ -48,7 +54,29 @@
 let msgs = ref([])
 let msg = ref('')
 let isRem = ref(false)
-let isFocus = ref(false)</pre>
+let isFocus = ref(false)
+let imgInd = ref(0)
+let imgs = []</pre>
+        <div>轮播结构设计</div>
+        <pre>
+&lt;header class="header" :style="{ 'backgroundImage': 'url(' + imgs[imgInd] + ')' }"&gt;
+  &lt;div class="dot-box"&gt;
+    &lt;div :class="['dot', { 'active': ind == imgInd }]" v-for="(item, ind) in imgs.length " :key="item"&gt;{{ ind }}
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;</pre>
+        <div>轮播逻辑 - 加载数据时，利用定时器循环背景图片并相应的调整指示器的样式</div>
+        <pre>
+onMounted(() => {
+  ind = setInterval(() => {
+    updateImg()
+  }, 3000);
+  axios.get('https://glpla.github.io/utils/data/todo.json')
+    .then(res => {
+      console.log(res);
+      msgs.value = res.data.cont
+    })
+})</pre>
         <div>输入框结构设计</div>
         <pre>
 &lt;div class="cont"&gt;
@@ -105,6 +133,12 @@ const loseFocus = () => {
           <figcaption>动态效果</figcaption>
         </figure>
       </dd>
+      <dd>
+        <figure class="img-sn">
+          <img src="./imgs/todo2.png" alt="">
+          <figcaption>动态效果</figcaption>
+        </figure>
+      </dd>
       <dt>实验结果分析与体会</dt>
       <dd>
         <div>掌握的知识点、开发技能</div>
@@ -113,8 +147,9 @@ const loseFocus = () => {
       </dd>
       <dt>实验要求</dt>
       <dd>
-        <div>规范开发；独立完成；突出个人设计特点和风格</div>
-        <div>实验报告：采用学院统一下发的格式文件，以文字说明，配以图片或代码展示并说明实施过程、各部分功能、具体内容和实现细节，导出为PDF，按照要求命名，提交个人学习通作业</div>
+        <div>本案例为期中测试</div>
+        <div>规范开发；独立完成；突出创新、个人设计特点和风格</div>
+        <div>实验报告：采用学院统一下发的格式文件，以文字说明，配以效果图片或核心代码展示并说明数据来源、实施过程、各部分功能、具体内容和实现细节，导出为PDF，按照要求命名，提交个人学习通作业</div>
         <div>未按要求在规定时间内提交视为无效，不得分</div>
       </dd>
     </dl>
