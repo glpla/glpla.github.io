@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鼠标事件 Document</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+  <style>
+    .cursor {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid #f40;
+      pointer-events: none;
+      z-index: 99;
+      pointer-events: none;
+    }
+
+    .cursor::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      background-color: #f40;
+      border-radius: 50%;
+    }
+
+    .rating {
+      display: flex;
+      justify-content: center;
+    }
+
+    .rating .iconfont {
+      font-size: 2rem;
+      color: #999;
+    }
+
+    .rating .active {
+      color: #f40;
+    }
+
+    #txt {
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .move {
+      position: absolute;
+      width: 100px;
+      height: 60px;
+      background-color: #f40;
+      z-index: 100;
+    }
+
+    @media screen and (max-width:768px) {
+
+      .cursor {
+        display: none;
+      }
+    }
+
+    .box {
+      position: relative;
+      height: 400px;
+      background-color: #f40;
+      overflow: hidden;
+    }
+
+    .img {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid #ff0;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>mouse</h1>
+    <span>&commat;Events</span>
+  </header>
+  <dl>
+    <dd>
+      <table class="tbl-sn">
+        <caption>鼠标事件类型</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>click</td>
+          <td>特指鼠标左键单击，包括按下并释放</td>
+        </tr>
+        <tr>
+          <td>mouseover</td>
+          <td>悬停</td>
+        </tr>
+        <tr>
+          <td>mouseenter</td>
+          <td>移入</td>
+        </tr>
+        <tr>
+          <td>mousedown</td>
+          <td>按下</td>
+        </tr>
+        <tr>
+          <td>mousemove</td>
+          <td>移动</td>
+        </tr>
+        <tr>
+          <td>mouseup</td>
+          <td>弹起/释放</td>
+        </tr>
+        <tr>
+          <td>mouseout</td>
+          <td>移出</td>
+        </tr>
+        <tr>
+          <td>mouseleave</td>
+          <td>离开</td>
+        </tr>
+        <tr>
+          <td>contextmenu</td>
+          <td>右键菜单事件</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 冒泡事件</dd>
+    <dd>.三个嵌套盒子的冒泡：利用log分别查看默认冒泡和取消冒泡的情况</dd>
+    <dd>[HTML]</dd>
+    <dd>
+      <pre>
+&lt;div class="box1"&gt;box1
+  &lt;div class="box2"&gt;box2
+    &lt;div class="box3"&gt;box3&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+    </dd>
+    <dd>[Javascript]单击里层的元素，事件会逐步冒泡到外层</dd>
+    <dd>
+      <pre>
+let box1 = document.querySelector('.box1')
+let box2 = document.querySelector('.box2')
+let box3 = document.querySelector('.box3')
+box1.addEventListener('click', () => {
+  console.log('box1 clicked');
+})
+box2.addEventListener('click', () => {
+  console.log('box2 clicked');
+})
+box3.addEventListener('click', () => {
+  console.log('box3 clicked');
+})</pre>
+    </dd>
+    <dd>[Javascript]借助事件对象e，取消事件冒泡，单击哪个元素，触发哪个元素的事件</dd>
+    <dd>
+      <pre>
+box1.addEventListener('click', (e) => {
+  e.stopPropagation();
+  console.log('box1 clicked');
+})
+box2.addEventListener('click', (e) => {
+  e.stopPropagation();
+  console.log('box2 clicked');
+})
+box3.addEventListener('click', (e) => {
+  e.stopPropagation();
+  console.log('box3 clicked');
+})</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 评分 rating</dd>
+    <dd>.iconfont</dd>
+    <dd>.click</dd>
+    <dd>.forEach</dd>
+    <dd>.for</dd>
+    <dd class="rating">
+      <span class="iconfont icon-iconfontshoucang"></span>
+      <span class="iconfont icon-iconfontshoucang"></span>
+      <span class="iconfont icon-iconfontshoucang"></span>
+      <span class="iconfont icon-iconfontshoucang"></span>
+      <span class="iconfont icon-iconfontshoucang"></span>
+    </dd>
+    <dd id="txt">请打分</dd>
+    <dd>
+      <pre>
+let rate = ['很差', '差', '一般', '好', '很好'];
+let wrap = document.querySelector('.rating');
+let imgs = wrap.querySelectorAll('span');
+let txt = document.querySelector('#txt');
+imgs.forEach((img, ind) => {
+  img.addEventListener('click', () => {
+    imgs.forEach(img => {
+      img.classList.remove('active');
+    })
+    for (let i = 0; i <= ind; i++) {
+      imgs[i].classList.add('active');
+    }
+    txt.innerHTML = rate[ind];
+  })
+})</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 鼠标跟随/定制鼠标；更多案例，请访问<a
+        href="../demo/follow.html">鼠标跟随</a></dd>
+    <dd>.元素应脱离文档流 absolute</dd>
+    <dd>.通常跟随鼠标在页面上的位置pageY、pageY</dd>
+    <dd>.局部范围内可以使用offsetX、offsetY</dd>
+    <dd>案例1：全局跟随</dd>
+    <dd class="cursor" id="cursor"></dd>
+    <dd>
+      <pre>
+document.addEventListener('mousemove', (e) => {
+  cursor.style.left = e.pageX + 'px'
+  cursor.style.top = e.pageY + 'px'
+})</pre>
+    </dd>
+    <dd>案例2：局部跟随</dd>
+    <div class="box">
+      <div class="img"></div>
+    </div>
+    <dd>[HTML]</dd>
+    <dd>
+      <pre>
+&lt;div class="box"&gt;
+  &lt;div class="img"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
+    </dd>
+    <dd>[CSS]</dd>
+    <dd>
+      <pre>
+.box {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  margin: 100px auto;
+  background-color: #f40;
+  overflow: hidden;
+}
+
+.img {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #ff0;
+}</pre>
+    </dd>
+    <dd>[JavaScript]</dd>
+    <dd>
+      <pre>
+let box = document.querySelector('.box');
+let img = document.querySelector('.img');
+box.addEventListener('mousemove', fn);
+function fn(e) {
+  console.log(e.offsetX, e.offsetY);
+  let x = e.pageX - box.offsetLeft - 15;
+  let y = e.pageY - box.offsetTop - 15;
+  img.style.left = x + 'px';
+  img.style.top = y + 'px';
+}</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 放大镜</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 单元素自定义数据data-的获取</dd>
+    <dd>.事件对象e和事件目标target是同一个，可以使用属性获取，也可以使用事件目标target获取</dd>
+    <dd>.注意函数fn的封装</dd>
+    <dd>[HTML]</dd>
+    <dd>
+      <pre>&lt;div class="tmp" data-id="1001"&gt;单元素自定义数据的获取&lt;/div></pre>
+    </dd>
+    <dd>[JavaScript]</dd>
+    <dd>
+      <pre>
+let el = document.querySelector('.tmp');
+el.onclick = fn;
+el.addEventListener('click', fn)
+function fn(e) {
+    console.log(this.getAttribute('data-id'));
+    console.log(e.target.dataset.id);
+}</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="../js/mouse.js"></script>
+</body>
+
+</html>

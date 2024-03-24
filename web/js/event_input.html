@@ -16,11 +16,11 @@
     <h1>&commat;Input Event</h1>
   </header>
   <dl>
-    <dt>事件类型</dt>
     <dd>. 事件处理的业务逻辑在&lt;script&gt;中；建议使用外部.js文件</dd>
     <dd>. 没有失去焦点的伪类选择器；只能通过事件onblur检测</dd>
     <dd>
-      <table>
+      <table class="tbl-sn">
+        <caption>事件类型</caption>
         <tr>
           <th>类别</th>
           <th>说明</th>
@@ -79,7 +79,7 @@
     <dd>[C3] appearance</dd>
     <dd>[JS] click | input | loadmetadata | timeupdate | querySelector</dd>
     <dd id="player">
-      <audio src="./music/Alizee-La Isla Bonita.mp3"></audio>
+      <audio src="../../utils/music/Alizee-La Isla Bonita.mp3"></audio>
       <button class="btn">play</button>
       <input type="range" name="" id="dur-slider" min="0" max="100" value="0" class="custom-range">
     </dd>
@@ -379,7 +379,7 @@ cbs.forEach(item => {
       let audioIpt = player.querySelector('audio');
       let btnIpt = player.querySelector('button');
       let sliderIpt = player.querySelector('input');
-      audioIpt.src = '/music/Alizee-La Isla Bonita.mp3';
+      audioIpt.src = '../../utils/music/Alizee-La Isla Bonita.mp3';
       audioIpt.addEventListener('loadedmetadata', () => {
         sliderIpt.max = audioIpt.duration;
       })

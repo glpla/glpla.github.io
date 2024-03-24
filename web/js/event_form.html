@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>表单事件 Form</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>Form</h1>
+    <span>&commat;Events</span>
+  </header>
+  <dl class="nav-cont" data>
+    <dt>表单默认事件</dt>
+    <dd>.默认情况下，表单提交时，数据需要提交给后端处理，页面会发生跳转</dd>
+    <dd>.前端要拿数据，需要阻止表单的默认行为；类似的还有&lt;a&gt;</dd>
+    <dd>.前端拿数据，可以通过元素逐一获取，很不方便；也可以使用form构造的FormData集中获取</dd>
+    <dd>
+      <pre>&lt;form action=""&gt;&lt;/form&gt;</pre>
+    </dd>
+    <dd>
+      <pre>
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+})</pre>
+    </dd>
+    <dd>[或]</dd>
+    <dd>
+      <pre>
+form.addEventListener('submit', () => {
+  return false;
+})</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 通过元素获取</dd>
+    <dd>
+      <pre>
+input.addEventListener('change', () => {
+  console.log(input.value);
+})</pre>
+    </dd>
+    <dt>FormData</dt>
+    <dd>FormData(src)：构造函数；需要一个数据源参数，如表单</dd>
+    <dd>formdata.append(name, value)：添加</dd>
+    <dd>formdata.get(name)：获取属性第一个值</dd>
+    <dd>formdata.getAll(name)；获取所有值，返回的是一个数组</dd>
+    <dd>formdata.delete(name)：删除属性</dd>
+    <dd>[<span class="iconfont icon-bell"></span>]console.log(formdata) 打印出来的结果 始终为FormData {}
+      它有一个隐藏域：所有的操作对象的方法全部是在它的原型中</dd>
+    <dd>
+      <img src="../imgs/formData.png" alt="">
+    </dd>
+    <dt>获取表单数据</dt>
+    <dd>1.提交时构造数据submit</dd>
+    <dd>2.数据构造完毕后，提取数据formdata；如果提交后，马上获取，有可能数据还未构造完毕，导致失败</dd>
+    <dd>
+      <form id="formdata">
+        <label>
+          <span>name</span>
+          <input type="text" name="uname" value="123">
+        </label>
+        <label>
+          <span>pass</span>
+          <input type="password" name="upass" value="321">
+        </label>
+        <textarea name="umsg" value="msg hi there"></textarea>
+        <button>submit</button>
+      </form>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 数据少的时候，直接获取</dd>
+    <dd>
+      <pre>
+let form = document.querySelector('form');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  new FormData(form);
+})
+form.addEventListener('formdata', (e) => {
+  const data = e.formData;
+  console.log(data.get('uname'));
+})</pre>
+    </dd>
+    <dd>甚至可以直接获取</dd>
+    <dd>
+      <pre>
+let form = document.querySelector('form');
+let fd = new FormData(form);
+console.log(fd);
+fd.forEach((val, key) => {
+  console.log(val, key);
+})</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 数据多的时候，通过遍历获取</dd>
+    <dd>
+      <pre>
+let form = document.querySelector('form');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  new FormData(form);
+})
+form.addEventListener('formdata', (e) => {
+  const data = e.formData;
+  for (const value of data.values()) {
+    console.log(value);
+  }
+})</pre>
+    </dd>
+    <dt>FormData转化为JSON[进阶]</dt>
+    <dd>
+      <pre>
+function FormData2JSON(formdata) {
+  var json = {};
+  var entries = formdata.entries();
+  var item = entries.next();
+  console.log(item);
+
+  while (!item.done) {
+    json[item.value[0]] = item.value[1];
+    item = entries.next();
+  }
+  return json;
+}</pre>
+    </dd>
+    <dt>将JSON转化为FormData[进阶]</dt>
+    <dd>
+      <pre>
+function JSON2FormData(json) {
+  var formdata = new FormData();
+  for (let key in json) {
+    formdata.append(key, json[key]);
+  }
+  return formdata;
+}</pre>
+    </dd>
+    <dd>.更多信息，请访问<a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">FormData</a></dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+    let form = document.querySelector('form')
+    let formData = new FormData(form)
+    console.log(form);
+    console.log(formData);
+    // form.addEventListener('submit', e => {
+    //   e.preventDefault()
+    //   console.log(e);
+    // })
+  </script>
+</body>
+
+</html>

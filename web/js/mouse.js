@@ -4,7 +4,7 @@ document.addEventListener('mousemove', (ev) => {
   cursor.style.top = ev.pageY - 30 + 'px';
 })
 
-
+// rating
 let rate = ['很差', '差', '一般', '好', '很好'];
 let wrap = document.querySelector('.rating');
 let imgs = wrap.querySelectorAll('span');
@@ -20,6 +20,7 @@ imgs.forEach((img, ind) => {
     txt.innerHTML = rate[ind];
   })
 })
+
 let move = document.querySelector('.move');
 move.addEventListener('mousedown', fmd);
 move.addEventListener('mouseup', fmu);
@@ -60,7 +61,6 @@ function fmm(e) {
 function fmu() {
   document.removeEventListener('mousemove', fmm);
 }
-
 
 let box = document.querySelector('.box');
 let img = document.querySelector('.img');

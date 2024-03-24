@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>移动端事件 Mobile</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>Mobile</h1>
+    <span>&commat;Events</span>
+  </header>
+  <dl>
+    <dd>
+      <table class="tbl-sn">
+        <caption>事件类型</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>touchstart</td>
+          <td>开始触摸；触发一次</td>
+        </tr>
+        <tr>
+          <td>touchmove</td>
+          <td>触摸并移动；持续触发</td>
+        </tr>
+        <tr>
+          <td>touchend</td>
+          <td>触摸结束；触发一次</td>
+        </tr>
+        <tr>
+          <td>touchcancel</td>
+          <td>触摸中断</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>事件属性</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>targetTouches</td>
+          <td>触摸的手指个数</td>
+        </tr>
+        <tr>
+          <td>changedTouches</td>
+          <td>发生改变的触摸的手指个数；通常使用这个属性作为判断的依据</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>特点</dt>
+    <dd>.优先触发移动端事件[移动优先]，普通单击事件会有延迟：为了判断用户是否要双击，所以第一次单击后，要延迟一定时间[300ms]，等待用户下一次单击。如果有，就是双击，否则判定为单击</dd>
+    <dd>.300ms是早期的一个评估值，和硬件设备和用户操作有关系；目前通常在100ms左右</dd>
+    <dd>[解决方案]</dd>
+    <dd>.使用第三方插件 <a href="https://github.com/ftlabs/fastclick">fastclick</a>；既不影响桌面端使用，也可以在移动端正常使用</dd>
+    <dd>.封装touch函数</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>]事件触发顺序</dd>
+    <dd>
+      <pre>
+let box = document.querySelector('.cont');
+let data0, data1;
+box.addEventListener('click', () => {
+  data1 = new Date();
+  console.log(data1 - data0);
+  console.log('click');
+})
+box.addEventListener('touchstart', () => {
+  data0 = new Date();
+  console.log('touchstart');
+})
+box.addEventListener('touchend', () => {
+  console.log('touchend');
+})</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>
