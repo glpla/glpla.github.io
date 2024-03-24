@@ -39,7 +39,8 @@ tr,
 ul,
 li,
 figure,
-nav {
+nav,
+pre {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -157,18 +158,14 @@ dt {
   margin-top: 3rem;
 }
 
+pre {
+  padding: 1rem;
+  background-color: #fed;
+}
+
 pre span::before {
   content: counter(sn, decimal-leading-zero)'    ';
   counter-increment: sn;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table tr td:first-child {
-  width: 40%;
 }
 
 .txt-center {
@@ -195,10 +192,22 @@ table tr td:first-child {
   content: '[' counter(list-sn)'].';
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid var(--bar-bg-color);
+  border-bottom: 1px solid var(--bar-bg-color);
+}
+
+
+th {
+  text-align: left;
+  border-bottom: 1px solid var(--bar-bg-color);
+}
+
 td {
   padding-left: .5rem;
   padding-right: .5rem;
-  border: 1px solid #eee;
 }
 
 table.orange tr:has(th) {

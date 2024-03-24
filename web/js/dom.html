@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>DOM-Document Object Model</title>
+  <title>DOM - Document Object Model</title>
   <link rel="stylesheet" href="../css/styleNew.css">
   <link rel="stylesheet" href="../../css/sn.css">
   <base target="_blank">
@@ -16,13 +16,9 @@
     <h1 id="el">DOM</h1>
     <span class="ham iconfont icon-menu"></span>
     <ul class="nav">
-      <li class="nav-item">元素</li>
-      <li class="nav-item">元素内容</li>
-      <li class="nav-item">元素属性</li>
-      <li class="nav-item">元素类*</li>
-      <li class="nav-item">元素样式*</li>
-      <li class="nav-item">元素大小</li>
-      <li class="nav-item">元素位置</li>
+      <li class="nav-item">Node</li>
+      <li class="nav-item">Element</li>
+      <li class="nav-item">Cases</li>
     </ul>
   </header>
   <dl>
@@ -32,9 +28,148 @@
     <dd>.BOM：操作浏览器/window</dd>
     <dd>注意区分：属性或事件是DOM范畴还是BOM范畴</dd>
   </dl>
-  <div class="chap">元素 element</div>
+  <div class="chap">节点 Node</div>
   <dl class="nav-cont">
-    <dt>获取元素</dt>
+    <dt>节点属性</dt>
+    <dd>一个节点 Node的属性有：</dd>
+    <dd>1. 节点名称 nodeName：只读属性；如元素节点的名称是大写的标签名，如A</dd>
+    <dd>2. 节点类型 nodeType：以数字区分，如1表示元素节点</dd>
+    <dd>.元素节点/标签节点</dd>
+    <dd>.文本节点：标签之间由于格式化自动产生的的回车，空白和空格都是文本节点</dd>
+    <dd>.注释节点</dd>
+    <dd>3. 节点值 nodeValue</dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>节点属性</caption>
+        <tr>
+          <th>分类</th>
+          <th>nodeName</th>
+          <th>nodeType</th>
+          <th>nodeValue</th>
+        </tr>
+        <tr>
+          <td>元素节点</td>
+          <td>标签名；大写</td>
+          <td>1</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>文本节点 text</td>
+          <td>#text</td>
+          <td>3</td>
+          <td>文本节点的内容</td>
+        </tr>
+        <tr>
+          <td>注释节点 comment</td>
+          <td>#comment</td>
+          <td>8</td>
+          <td>注释的文本内容</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>节点间的关系</dt>
+    <dd>父子、兄弟、后代、祖先等</dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>节点间的关系</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>firstChild</td>
+          <td>第一个节点</td>
+        </tr>
+        <tr>
+          <td>lastChild</td>
+          <td>第一个节点</td>
+        </tr>
+        <tr>
+          <td>parentNode</td>
+          <td>父节点；无则返回null；只能有一个亲爸爸</td>
+        </tr>
+        <tr>
+          <td>offsetParent</td>
+          <td>参考的定位的父节点；如果没有就一直往上找，直到BODY</td>
+        </tr>
+        <tr>
+          <td>childNodes</td>
+          <td>子节点；通常是多个</td>
+        </tr>
+        <tr>
+          <td>nextSibling</td>
+          <td>下一个兄弟节点</td>
+        </tr>
+        <tr>
+          <td>previousSibling</td>
+          <td>上一个兄弟节点</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>节点常用方法</dt>
+    <dd>操作节点的方法，如增加、删除、复制</dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>节点方法</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>appendChild(node)</td>
+          <td>尾插节点</td>
+        </tr>
+        <tr>
+          <td>prepend()</td>
+          <td>头插节点</td>
+        </tr>
+        <tr>
+          <td>insertBefore(node, node)</td>
+          <td>在某个节点前插入节点</td>
+        </tr>
+        <tr>
+          <td>removeChild(node)</td>
+          <td>删除节点</td>
+        </tr>
+        <tr>
+          <td>cloneNode(node,bool)</td>
+          <td>克隆节点</td>
+        </tr>
+      </table>
+    </dd>
+  </dl>
+  <div class="chap">元素 Element</div>
+  <dl class="nav-cont">
+    <dd>元素是节点的一个子集：元素节点</dd>
+    <dt>元素的内容 contents</dt>
+    <dd>用于更新|渲染页面</dd>
+    <dd>innerText：元素文本内容</dd>
+    <dd>innerHTML：元素HTML内容</dd>
+    <dd>textcontent：纯文本内容</dd>
+    <dt>元素的属性 attribute</dt>
+    <dd>.元素的标签属性，如id、class、style、name、value、type、maxLength等；甚至可以是自定义属性data-</dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>元素属性 Attribute</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>setAttribute(att, value)</td>
+          <td>设置属性</td>
+        </tr>
+        <tr>
+          <td>getAttribute(att)</td>
+          <td>获取所有属性</td>
+        </tr>
+        <tr>
+          <td>removeAttribute(att, value)</td>
+          <td>删除属性</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>获取元素 get</dt>
     <dd>.可以获取&lt;HTML&gt;中任何元素；通常获取&lt;body&gt;中的元素</dd>
     <dd>.隐藏元素也可以获取</dd>
     <dd>.指定了id的元素在脚本中可以直接使用！！！</dd>
@@ -88,21 +223,107 @@
     <dd class="mt2">3.其它</dd>
     <dd>document.documentElement：获取HTML</dd>
     <dd>document.body：获取body[也可以使用querySelector]</dd>
+    <dt>元素的类 class</dt>
+    <dd>className：元素应用的类；返回字符串；多个类名以空格分隔；不建议直接对该属性赋值</dd>
+    <dd>classList：元素应用的类；返回类数组</dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>元素的类方法</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>增加类</td>
+          <td>classList.add()</td>
+        </tr>
+        <tr>
+          <td>删除类</td>
+          <td>classList.remove()</td>
+        </tr>
+        <tr>
+          <td>切换类</td>
+          <td>classList.toggle()</td>
+        </tr>
+        <tr>
+          <td>包含类</td>
+          <td>classList.contains()</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>元素的样式 style</dt>
+    <dd>.修改样式时，建议采用小驼峰；也可以使用连字符-，连字符需要使用数组写法</dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>元素样式 style</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>el.style</td>
+          <td>inline样式</td>
+        </tr>
+        <tr>
+          <td>getComputedStyle(el)</td>
+          <td>获取元素定义的所有样式声明 CSSStyleDeclaration ，甚至是复合样式</td>
+        </tr>
+        <tr>
+          <td>currentStyle</td>
+          <td>IE；请忽略</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>样式的属性 Property</dt>
+    <dd>.Property指的是样式的属性，需要借助style操作</dd>
+    <dd>.修改元素样式：可以修改class定义的样式，也可以修改style定义的样式；如果使用到变量属性，请使用setProperty</dd>
+    <dd>.获取样式getPropertyValue，只能获取内联样式定义的属性；class中定义的获取不到</dd>
+    <dd>
+      <table class="tbl-sn">
+        <caption>样式的属性 Property</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>修改样式的属性值</td>
+          <td>style.propertyName= value</td>
+        </tr>
+        <tr>
+          <td>修改样式的属性值</td>
+          <td>style.setProperty(name, value)</td>
+        </tr>
+        <tr>
+          <td>获取样式的属性值</td>
+          <td>style.getPropertyValue(name)</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>元素的自定义属性 data-</dt>
+    <dd>.data-写在元素标签上，为了保存和使用数据</dd>
+    <dd>.获取时推荐使用：el.dataset，不需要加上data</dd>
+    <dd>.事件处理函数写在当前元素上才能获取；事件代理的方式获取不到</dd>
+    <dd>.长属性应采用连字符法，如：data-ind、data-good-name</dd>
+    <dd>.实际使用时，注意单元素和多元素的区别；更多信息，请参考 <a href="../js/event.html" target="_blank">事件对象</a>一节</dd>
     <dd class="example-sn"> 函数封装 - 将元素获取方法封装为一个函数，简化操作</dd>
     <dd>
-      <figure class="code">
-        <figcaption>函数封装</figcaption>
-        <pre>
+      <pre class="code">
 function fn(el) {
     return document.querySelector(el)
 }</pre>
-      </figure>
+    </dd>
+    <dd class="example-sn"> 显示密码 - 修改input的类型type为text</dd>
+    <dd>
+      <pre class="code">
+let pw = document.querySelector('#pw')
+let btn = document.querySelector('#btn')
+btn.addEventListener('click', () => {
+  pw.setAttribute('type', 'text')
+})</pre>
     </dd>
     <dd class="example-sn"> 全选</dd>
     <dd>
-      <figure class="code">
-        <figcaption>[JS]</figcaption>
-        <pre>
+      <pre class="code">
 let allBtn = document.querySelector('#all-btn');
 let ipts = document.querySelectorAll('input');
 allBtn.addEventListener('click', () => {
@@ -113,116 +334,49 @@ allBtn.addEventListener('click', () => {
     ipt.checked = true;
   })
 })</pre>
+    </dd>
+    <dd class="example-sn"> 创建节点并指定data-</dd>
+    <dd>
+      <pre class="code">
+let div = document.createElement('div')
+div.dataset.id = 'hi'
+wrap.appendChild(div)</pre>
+    </dd>
+    <dd class="example-sn">行内样式和最终样式</dd>
+    <dd>
+      <figure class="code">
+        <figcaption>HTML</figcaption>
+        <pre>&lt;div class="box" style="padding: 10px;"&gt;Lorem, ipsum.&lt;/div&gt;</pre>
       </figure>
     </dd>
-    <dt>节点 Nodes</dt>
-    <dd>元素是节点的一个子集</dd>
-    <dd>1. 节点名称 nodeName：只读属性；如元素节点的名称是大写的标签名，如A</dd>
-    <dd>2. 节点类型 nodeType：以数字区分，如1表示元素节点</dd>
-    <dd>.元素节点/标签节点</dd>
-    <dd>.文本节点：标签之间由于格式化自动产生的的回车，空白和空格都是文本节点</dd>
-    <dd>.注释节点</dd>
-    <dd>3. 节点值 nodeValue</dd>
     <dd>
-      <table class="tbl-sn">
-        <caption>节点</caption>
-        <tr>
-          <th>分类</th>
-          <th>nodeName</th>
-          <th>nodeType</th>
-          <th>nodeValue</th>
-        </tr>
-        <tr>
-          <td>元素节点</td>
-          <td>标签名；大写</td>
-          <td>1</td>
-          <td>null</td>
-        </tr>
-        <tr>
-          <td>文本节点 text</td>
-          <td>#text</td>
-          <td>3</td>
-          <td>文本节点的内容</td>
-        </tr>
-        <tr>
-          <td>注释节点 comment</td>
-          <td>#comment</td>
-          <td>8</td>
-          <td>注释的文本内容</td>
-        </tr>
-      </table>
+      <figure class="code">
+        <figcaption>CSS</figcaption>
+        <pre>
+.box {
+  width: 320px;
+  height: 180px;
+  margin: 0 auto;
+  background-color: #f40;
+}</pre>
+      </figure>
     </dd>
     <dd>
-      <table class="tbl-sn">
-        <caption>节点关系</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>firstChild</td>
-          <td>第一个节点</td>
-        </tr>
-        <tr>
-          <td>lastChild</td>
-          <td>第一个节点</td>
-        </tr>
-        <tr>
-          <td>parentNode</td>
-          <td>父节点；无则返回null；只能有一个亲爸爸</td>
-        </tr>
-        <tr>
-          <td>offsetParent</td>
-          <td>参考的定位的父节点；如果没有就一直往上找，直到BODY</td>
-        </tr>
-        <tr>
-          <td>childNodes</td>
-          <td>子节点；通常是多个</td>
-        </tr>
-        <tr>
-          <td>nextSibling</td>
-          <td>下一个兄弟节点</td>
-        </tr>
-        <tr>
-          <td>previousSibling</td>
-          <td>上一个兄弟节点</td>
-        </tr>
-      </table>
+      <figure class="code">
+        <figcaption>JavaScript</figcaption>
+        <pre>
+let box = document.querySelector('.box');
+console.log(box.style.padding);//10px
+console.log(box.style.width);//空，因为没有对应的行内样式
+console.log(getComputedStyle(box));//所有的样式声明
+console.log(getComputedStyle(box).padding);//10px
+console.log(getComputedStyle(box).width);//320px
+console.log(getComputedStyle(box).background);//所有背景相关的样式</pre>
+      </figure>
     </dd>
-    <dd>
-      <table class="tbl-sn">
-        <caption>节点方法</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>appendChild(node)</td>
-          <td>尾插节点</td>
-        </tr>
-        <tr>
-          <td>prepend()</td>
-          <td>头插节点</td>
-        </tr>
-        <tr>
-          <td>insertBefore(node, node)</td>
-          <td>在某个节点前插入节点</td>
-        </tr>
-        <tr>
-          <td>removeChild(node)</td>
-          <td>删除节点</td>
-        </tr>
-        <tr>
-          <td>cloneNode(node,bool)</td>
-          <td>克隆节点</td>
-        </tr>
-      </table>
-    </dd>
-    <dt class="nav-cont">元素内容</dt>
-    <dd>用于更新|渲染页面</dd>
-    <dd>innerText：元素文本内容</dd>
-    <dd>innerHTML：元素HTML内容</dd>
-    <dd>textcontent：纯文本内容</dd>
+  </dl>
+  <div class="chap">综合案例 Cases</div>
+  <dl class="nav-cont">
     <dd class="example-sn"> 代办事项 <a href="../demo/todo.html">to-do list</a> </dd>
     <dd>.动态添加/删除样式类</dd>
     <dd>.元素获取 querySelector</dd>
@@ -233,57 +387,6 @@ allBtn.addEventListener('click', () => {
     <dd>.数组:unshift、splice</dd>
     <dd>.JSON</dd>
     <dd>[ <span class="iconfont icon-bomb"></span> ] 更换状态的类必须出现在当前动态类的后面</dd>
-    <dt class="nav-cont">元素属性 Attribute</dt>
-    <dd>.元素的标签属性，如id、class、style、name、value、type、maxLength等；甚至可以是自定义属性data-</dd>
-    <dd>
-      <table class="tbl-sn">
-        <caption>元素属性 Attribute</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>setAttribute(att, value)</td>
-          <td>设置属性</td>
-        </tr>
-        <tr>
-          <td>getAttribute(att)</td>
-          <td>获取所有属性</td>
-        </tr>
-        <tr>
-          <td>removeAttribute(att, value)</td>
-          <td>删除属性</td>
-        </tr>
-      </table>
-    </dd>
-    <dd class="example-sn"> 显式密码 - 修改input的类型type为text</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>修改input的类型type为text</figcaption>
-        <pre>
-let pw = document.querySelector('#pw')
-let btn = document.querySelector('#btn')
-btn.addEventListener('click', () => {
-  pw.setAttribute('type', 'text')
-})</pre>
-      </figure>
-    </dd>
-    <dt>自定义属性 data-</dt>
-    <dd>.data-写在元素标签上，为了保存和使用数据</dd>
-    <dd>.获取时推荐使用：el.dataset，不需要加上data</dd>
-    <dd>.事件处理函数写在当前元素上才能获取；事件代理的方式获取不到</dd>
-    <dd>.长属性应采用连字符法，如：data-ind、data-good-name</dd>
-    <dd>.实际使用时，注意单元素和多元素的区别；更多信息，请参考 <a href="../js/event.html" target="_blank">事件对象</a>一节</dd>
-    <dd class="example-sn"> 创建节点并指定data-</dd>
-    <dd>
-      <figure class="code">
-        <figcaption></figcaption>
-        <pre>
-let div = document.createElement('div')
-div.dataset.id = 'hi'
-wrap.appendChild(div)</pre>
-      </figure>
-    </dd>
     <dd class="example-sn"> 换肤 - 将换肤数据绑定到data-上</dd>
     <dd>
       <figure class="code">
@@ -319,89 +422,6 @@ btnYellow.addEventListener('click', fn);
 function fn(e) {
   body.style.backgroundColor = e.target.dataset.color;
 }</pre>
-      </figure>
-    </dd>
-    <dt class="nav-cont">元素类 class</dt>
-    <dd>className：元素应用的类；返回字符串；多个类名以空格分隔；不建议直接对该属性赋值</dd>
-    <dd>classList：元素应用的类；返回类数组</dd>
-    <dd>
-      <table class="tbl-sn">
-        <caption>元素的类方法</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>增加类</td>
-          <td>classList.add()</td>
-        </tr>
-        <tr>
-          <td>删除类</td>
-          <td>classList.remove()</td>
-        </tr>
-        <tr>
-          <td>切换类</td>
-          <td>classList.toggle()</td>
-        </tr>
-        <tr>
-          <td>包含类</td>
-          <td>classList.contains()</td>
-        </tr>
-      </table>
-    </dd>
-    <dt class="nav-cont">元素样式 style</dt>
-    <dd>.修改样式时，建议采用小驼峰；也可以使用连字符-，连字符需要使用数组写法</dd>
-    <dd>
-      <table class="tbl-sn">
-        <caption>元素样式 style</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>el.style</td>
-          <td>inline样式</td>
-        </tr>
-        <tr>
-          <td>getComputedStyle(el)</td>
-          <td>获取元素定义的所有样式声明 CSSStyleDeclaration ，甚至是复合样式</td>
-        </tr>
-        <tr>
-          <td>currentStyle</td>
-          <td>IE；请忽略</td>
-        </tr>
-      </table>
-    </dd>
-    <dd class="example-sn">行内样式和最终样式</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>HTML</figcaption>
-        <pre>&lt;div class="box" style="padding: 10px;"&gt;Lorem, ipsum.&lt;/div&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>CSS</figcaption>
-        <pre>
-.box {
-  width: 320px;
-  height: 180px;
-  margin: 0 auto;
-  background-color: #f40;
-}</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>JavaScript</figcaption>
-        <pre>
-let box = document.querySelector('.box');
-console.log(box.style.padding);//10px
-console.log(box.style.width);//空，因为没有对应的行内样式
-console.log(getComputedStyle(box));//所有的样式声明
-console.log(getComputedStyle(box).padding);//10px
-console.log(getComputedStyle(box).width);//320px
-console.log(getComputedStyle(box).background);//所有背景相关的样式</pre>
       </figure>
     </dd>
     <dd class="example-sn"> 换肤 - <a href="https://codepen.io/glpla/full/ZEPbbQv">选项卡 | 导航 - CodePen</a></dd>
@@ -440,31 +460,6 @@ btn1.addEventListener('click', () => {
 })</pre>
       </figure>
     </dd>
-    <dt>样式属性 Property</dt>
-    <dd>.Property指的是样式的属性，需要借助style操作</dd>
-    <dd>.修改元素样式：可以修改class定义的样式，也可以修改style定义的样式；如果使用到变量属性，请使用setProperty</dd>
-    <dd>.获取样式getPropertyValue，只能获取内联样式定义的属性；class中定义的获取不到</dd>
-    <dd>
-      <table class="tbl-sn">
-        <caption>样式的属性 Property</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>修改样式的属性值</td>
-          <td>style.propertyName= value</td>
-        </tr>
-        <tr>
-          <td>修改样式的属性值</td>
-          <td>style.setProperty(name, value)</td>
-        </tr>
-        <tr>
-          <td>获取样式的属性值</td>
-          <td>style.getPropertyValue(name)</td>
-        </tr>
-      </table>
-    </dd>
     <dd class="example-sn"> 换肤 - 更换元素style的Property属性或<a href="https://codepen.io/glpla/full/ZEPbbvR">修改:root全局变量 -
         CodePen</a>
     </dd>
@@ -483,88 +478,6 @@ btnRed.addEventListener('click', () => {
       <div>设置或获取时<span class="warn">只能</span>使用连字符-</div>
       <div>推荐使用style.attrName来设置或获取元素应用的样式</div>
     </dd>
-  </dl>
-  <div class="chap">元素大小</div>
-  <dl class="nav-cont">
-    <dd class="tips">
-      <div>元素本身的大小</div>
-      <div>元素在视口viewpoint的位置</div>
-      <div>元素在页面page的位置</div>
-      <div>元素在父元素中的位置</div>
-    </dd>
-    <dt>Client系列</dt>
-    <dd>.只读属性；单位像素</dd>
-    <dd>clientWidth：元素内部的宽度；clientWidth = width + 左右padding</dd>
-    <dd>clientHeigh：元素内部的高度；clientHeigh = height + 上下padding</dd>
-    <dd>.元素的clientWidth、clientHeight<span class="warn">不包括border</span>；注意box-sizing对盒子大小的影响</dd>
-    <dd>clientTop：一个元素顶部边框的宽度；clientTop = boder.top(上边框的宽度)</dd>
-    <dd>clientLeft：一个元素左边框的宽度；clientLeft = boder.left(左边框的宽度)</dd>
-    <dd class="example-sn">获取页面|文档窗口大小 - 在开发者视图中刷新并查看</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>Client系列</figcaption>
-        <pre>
-console.log(document.body.clientHeight);//body高度；如果在body样式中指定了高度，就是这个值
-console.log(document.documentElement.clientHeight);//实际上是视口高度；不包括滚动条</pre>
-      </figure>
-    </dd>
-    <dt>offset系列</dt>
-    <dd>.只读属性；单位像素[vs code好像没有代码提示]</dd>
-    <dd>.元素尺寸<span class="warn">包括border</span>，即：width + border + padding</dd>
-    <dd>.offset原意是偏移，所以需要一个参考元素来确定自己的大小和位置</dd>
-    <dd>.参考元素：<span class="warn">最近</span> 的一个具有定位属性的元素；如果没有，就往上一直找到body</dd>
-    <dd>.参考对象的position必须是relative、absolute、fixed之一</dd>
-    <dd>offsetTop、offsetLeft：元素到相对元素顶部和左边的位置偏移</dd>
-    <dd>offsetWidth、offsetHeight：元素大小</dd>
-    <dd>offsetParent：当前元素的参考父级；可以在事件对象属性中查看e.target</dd>
-    <dd class="quote">
-      <div>.开发中，如果需要相对的位置关系，一般使用offset系列</div>
-      <div>.因为有参考元素的限制，所以超出1屏后，如果没有显式的指定当前的参考，将会以&lt;body&gt;为目标，最后的位置获取将会异常</div>
-      <div>解决方案</div>
-      <div>1. 为当前元素的父级[如果有]指定定位属性；如果没有，就额外增加1个容器</div>
-      <div>2. 使用getBoundingClientRect()</div>
-    </dd>
-    <dd class="example-sn"> <a href="https://codepen.io/glpla/full/gOEpdLo">波纹按钮</a></dd>
-    <dd>.单击按钮，持续产生波纹，一定时间后消失</dd>
-    <dd>.按钮使用相对定位relative，为后续新增加节点提供定位依据</dd>
-    <dd>.为按钮添加鼠标点击事件</dd>
-    <dd>.利用clientX和clientY获取鼠标事件到视图view的偏移</dd>
-    <dd>.利用getBoundingClientRect()获取鼠标事件对象即元素到视图view的偏移</dd>
-    <dd>.根据两者之差得到鼠标点击点在元素上的位置</dd>
-    <dd>.创建元素节点，并指定样式：绝对定位、帧动画keyframe等等</dd>
-    <dd>.延时删除新增加的元素节点setTimeout；延时时间和动画时间保持一致</dd>
-    <dd>.其它设计： 取消按钮文件的选择；取消新增节点的事件响应</dd>
-    <dd>[ <span class="iconfont icon-bell"></span> ] 频繁创建元素节点对系统资源的消耗</dd>
-    <dd class="example-sn"><a href="https://codepen.io/glpla/full/XWGbKwv">手电筒 - CodePen</a>、<a
-        href="https://codepen.io/glpla/full/bGZdXEM">探照灯 - CodePen</a></dd>
-    <dd>.鼠标移动事件</dd>
-  </dl>
-  <div class="chap">元素位置</div>
-  <dl class="nav-cont">
-    <dt>说明</dt>
-    <dd>鼠标事件MouseEvent相关的位置属性</dd>
-    <dd>页面 page：整个HTML5页面；不包括浏览器的收藏夹栏、地址栏、状态栏</dd>
-    <dd>视图 view：也称视口，页面可见区域；不包括浏览器的收藏夹栏、地址栏、状态栏等</dd>
-    <dd>屏幕 screen：你的显示器；包括浏览器的收藏夹栏、地址栏、状态栏</dd>
-    <dt>Page系列</dt>
-    <dd>只读属性</dd>
-    <dd>鼠标事件MouseEvent相关</dd>
-    <dd>MouseEvent.pageX、MouseEvent.pageY：返回触发事件的位置相对于整个 document 的 X、Y 坐标值</dd>
-    <dd>始终以页面为参考，即使页面出现滚动条</dd>
-    <dt>Screen系列</dt>
-    <dd>只读属性；和浏览器无关；和<span class="warn">硬件</span>有关</dd>
-    <dd>鼠标事件MouseEvent相关</dd>
-    <dd>MouseEvent.screenX、MouseEvent.screenY</dd>
-    <dd>元素在屏幕screen上的位置，以屏幕为参考</dd>
-    <dd>浏览器窗口化或移动时，都会导致数值发生变化</dd>
-    <dd>screenY通常取不到0，因为一般的窗口都有状态栏、菜单栏、工具栏等区域</dd>
-    <dt>scroll系列</dt>
-    <dd>请查看<a href="./scroll.html" class="link">Scroll</a></dd>
-    <dt>getBoundingClientRect()方法</dt>
-    <dd>.只读属性</dd>
-    <dd>.获取元素位置的高频操作；用了都说好</dd>
-    <dd>.返回一个 DOMRect 对象，其提供了元素的大小及其相对于<span class="warn">视口</span> 的位置</dd>
-    <dd>.描述整个矩形的位置和大小：left、top、right、bottom、x、y、width 、height</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="../lib/ham.js"></script>

@@ -32,10 +32,10 @@
     <dd>.Win + R，输入CMD，打开控制台查看 - 小黑屋</dd>
     <dd class="code">
       <pre>
-C:\Users\cnplaman>node -v
+> node -v
 v18.13.0
 
-C:\Users\cnplaman>npm -v
+> npm -v
 8.15.1</pre>
     </dd>
     <dt>切换镜像源 Registry</dt>
@@ -43,18 +43,18 @@ C:\Users\cnplaman>npm -v
     <dd>1. 查看 get 安装镜像源，默认是</dd>
     <dd class="code">
       <pre>
->npm config get registry
+> npm config get registry
 https://registry.npmjs.org</pre>
     </dd>
     <dd>2. 设置 set 为淘宝最新镜像源 - 感谢22软工刘钰钿同学及时反馈</dd>
     <dd class="code">
       <pre>
->npm config set registry https://registry.npmmirror.com</pre>
+> npm config set registry https://registry.npmmirror.com</pre>
     </dd>
     <dd>3. 再次查看安装镜像源</dd>
     <dd class="code">
       <pre>
->npm config get registry
+> npm config get registry
 https://registry.npmmirror.com</pre>
     </dd>
   </dl>
@@ -66,22 +66,52 @@ https://registry.npmmirror.com</pre>
     <dd>install可以简写为i</dd>
     <dd>默认是生产环境</dd>
     <p>生产环境依赖 dependencies：项目上线后，所必须的依赖，如网络请求axios；使用--S/--save命令行参数</p>
-    <pre class="code">npm install package_name --save</pre>
-    <pre class="code">npm install package_name --S</pre>
+    <pre class="code">> npm install package_name --save</pre>
+    <pre class="code">> npm install package_name --S</pre>
     <p>开发环境依赖 devDependencies：开发过程中需要的依赖，发布上线后，不再需要，如CSS预处理；使用--D/--save-dev命令行参数</p>
-    <pre class="code">npm install package_name --save-dev</pre>
-    <pre class="code">npm install package_name --D</pre>
-    <dt>移除依赖</dt>
+    <pre class="code">> npm install package_name --save-dev</pre>
+    <pre class="code">> npm install package_name --D</pre>
+    <dt>移除依赖 uninstall</dt>
     <dd class="code">
-      <pre>npm uninstall package_name</pre>
+      <pre>> npm uninstall package_name</pre>
     </dd>
-    <dt>查看当前项目依赖根目录</dt>
+    <dt>查看依赖 list</dt>
+    <dd>当前项目|目录安装的依赖</dd>
+    <dd class="code">
+      <pre>
+> npm list
+sfc@0.0.0 E:\WEB\sfc
++-- @vitejs/plugin-vue@5.0.4
++-- axios@1.6.8
++-- nanoid@5.0.6
++-- sass@1.72.0
++-- vite@5.1.4
+`-- vue@3.4.19</pre>
+    </dd>
+    <dd>指定命令行参数-g，可以查看安装的全局依赖</dd>
+    <dd class="code">
+      <pre>
+> npm list -g
+C:\Users\cnplaman\AppData\Roaming\npm
++-- cnpm@9.2.0
++-- express@4.18.2
++-- json-server@1.0.0-alpha.23
++-- nodemon@3.0.3
++-- sass@1.69.5
+`-- typescript@5.3.2      </pre>
+    </dd>
+    <dt>查看依赖信息 info</dt>
+    <dd class="code">
+      <pre>> npm info axios</pre>
+    </dd>
+    <dt>查看依赖根目录 root</dt>
+    <dd>当前项目依赖根目录</dd>
     <dd class="code">
       <pre>
 > npm root
 C:\Users\cnplaman\Desktop\server\node_modules</pre>
     </dd>
-    <dt>查看本地全局依赖</dt>
+    <dd>指定命令行参数-g，可以查看全局依赖根目录</dd>
     <dd class="code">
       <pre>
 > npm root -g
@@ -94,15 +124,20 @@ C:\Users\cnplaman\AppData\Roaming\npm\node_modules</pre>
     <dd>
       <img src="../../vue/imgs/server1.png" alt="">
     </dd>
+    <dd class="tips">
+      <div>^表示第一位版本号不变，后面两位取最新的</div>
+      <div>~表示前两位不变，最后一个取最新</div>
+      <div>*表示全部取最新</div>
+    </dd>
     <dt>开放脚本执行权限</dt>
     <dd>以管理员方式打开PowerShell</dd>
     <dd>查看权限 - 默认是禁止：Restricted</dd>
     <dd class="code">
-      <pre>get-executionpolicy</pre>
+      <pre>> get-executionpolicy</pre>
     </dd>
     <dd>修改权限为远程 remotesigned，按Y确认</dd>
     <dd class="code">
-      <pre>set-executionpolicy remotesigned</pre>
+      <pre>> set-executionpolicy remotesigned</pre>
     </dd>
     <dd>再次查看权限，确认修改成功</dd>
   </dl>
