@@ -19,15 +19,14 @@
         <span>Component</span>
     </header>
     <dl>
+        <dd>SFC - Single File Component，单文件组件</dd>
+        <dd>vue中每个组件都是以SFC的形式存在，后缀名是.vue</dd>
+        <dd>包括：结构&lt;template&gt;、逻辑&lt;script&gt;和样式&lt;style&gt;</dd>
         <dt>基本过程</dt>
-        <dd>2. 引用：</dd>
-        <dd>3. 使用：</dd>
         <dd class="number nav-cont">
-            <div>创建：vue中每个组件都是以SFC的形式存在，后缀名是.vue；SFC - Single File
-                Component，单文件组件，包括结构&lt;template&gt;、逻辑&lt;script&gt;和样式&lt;style&gt;
-            </div>
+            <div>创建 - 新建文件，指定后缀名为.vue</div>
             <figure class="code">
-                <figcaption>组件文件 - ButtonCounter.vue</figcaption>
+                <figcaption>子组件 - Demo.vue</figcaption>
                 <pre>
 &lt;script setup&gt;
     //逻辑
@@ -41,21 +40,22 @@
     //样式
 &lt;/style&gt;</pre>
             </figure>
-            <div>引入：要使用一个组件，需要先在&lt;script&gt;导入；被引入的是子组件；使用子组件的是父组件</div>
+            <div>引入：父组件在&lt;script&gt;引入子组件；注意路径关系</div>
             <figure class="code">
-                <figcaption>父组件文件 - .vue</figcaption>
+                <figcaption>父组件 - Super.vue</figcaption>
                 <pre>
 &lt;script setup&gt;
-    import ButtonCounter from './ButtonCounter.vue'
+    import Demo from './Demo.vue'
 &lt;/script&gt;</pre>
             </figure>
-            <div>使用：父组件在结构&lt;template&gt;中使用子组件</div>
+            <div>使用：父组件在结构&lt;template&gt;中使用子组件；可以多次使用</div>
             <figure class="code">
-                <figcaption>父组件文件 - .vue</figcaption>
+                <figcaption>父组件 - Super.vue</figcaption>
                 <pre>
 &lt;template&gt;
     &lt;h1&gt;Here is a child component!&lt;/h1&gt;
-    &lt;ButtonCounter /&gt;
+    &lt;Demo /&gt;
+    &lt;Demo&gt;&lt;/Demo&gt;
 &lt;/template&gt;</pre>
             </figure>
         </dd>
