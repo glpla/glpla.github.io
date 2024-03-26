@@ -31,7 +31,7 @@
         </dd>
         <dd>
             <details open>
-                <summary>Lifetime</summary>
+                <summary style="font-weight: 600;">Lifetime</summary>
                 <details>
                     <summary>setup</summary>
                     <div>组合式API专有</div>
@@ -51,7 +51,7 @@ onBeforeMount(() => {
                 </details>
                 <details>
                     <summary>onMounted()</summary>
-                    <div>注册一个回调函数，在组件挂载完成后执行：DOM已就绪</div>
+                    <div>注册一个回调函数，在组件挂载完成后执行：<span class="warn">DOM已就绪</span></div>
                     <div>多用于项目初始化</div>
                     <div>可以执行多个，但是仅仅执行1次</div>
                     <div>运维通过追加的方式，定义新的逻辑</div>
@@ -86,6 +86,7 @@ onMounted(() => {
                 <details>
                     <summary>onUnmounted</summary>
                     <div>注册一个回调函数，在组件实例被卸载之后调用</div>
+                    <div>vue2中是destroy</div>
                 </details>
                 <details>
                     <summary>other</summary>
@@ -97,9 +98,16 @@ onMounted(() => {
                 </details>
             </details>
         </dd>
-        <dd class="example-sn">
-            使用路由，加载组件，倒计时结束后返回主页；查看：onMounted、onBeforeUpdate、onUpdated、onBeforeUnmount、onUnmounted等函数的执行</dd>
-        <dd class="tips">已安装Vs Code扩展Vue Vscode Snippets的，请注意编辑过程中的代码片段提示，不要一个一个字母编辑</dd>
+        <dd class="example-sn">使用响应式数据、条件渲染、路由，借助getCurrentInstance()，利用事件或延时，查看生命周期函数执行情况</dd>
+        <dd>在父组件Lifetime.vue中使用子组件Text.vue</dd>
+        <dd>每个组件都使用相应的生命周期函数</dd>
+        <dd>使用响应式数据改变条件，触发子组件的条件渲染，查看卸载情况</dd>
+        <dd>
+            <img src="./imgs/lifetime0.png" alt="">
+        </dd>
+        <dd class="tips">
+            <div>已安装Vs Code扩展Vue Vscode Snippets的，请注意编辑过程中的代码片段提示，不要一个一个字母编辑</div>
+        </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
