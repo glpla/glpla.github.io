@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiper</title>
+    <link rel="stylesheet" href="../css/reset2024.css">
+    <link rel="stylesheet" href="../css/common2024.css">
+    <link rel="stylesheet" href="../css/code.css">
+    <link rel="stylesheet" href="../css/sn.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>轮播</h1>
+        <span>&commat;Swiper Element</span>
+    </header>
+    <dl>
+        <dd>以<a href="https://swiperjs.com/element" class="link">Swiper Element </a>为例；更多使用，请访问 <a
+                href="https://swiperjs.com/" class="link">Swiper.js</a>、<a href="../web/framework/swiper.html"
+                class="link">html - swiper</a></dd>
+        <dt>安装 Installation </dt>
+        <dd class="code">
+            <pre>npm i swiper -S</pre>
+        </dd>
+        <dt>注册 Register</dt>
+        <dd class="code">
+            <pre>
+import { register } from 'swiper/element/bundle';
+register();</pre>
+        </dd>
+        <dt>结构 Template</dt>
+        <dd>配置参数：</dd>
+        <dd>1.以属性方式传递 Parameters As Attributes</dd>
+        <dd>.以kebab-case的形式，特别是对象类的参数</dd>
+        <dd>.适合参数少的情况</dd>
+        <dd>2.以原型参数传递 Parameters As Props</dd>
+        <dd>.获取轮播元素 → 创建配置参数 → 将参数分配给轮播元素</dd>
+        <dd>.适合参数多的情况</dd>
+        <dd class="code">
+            <pre>
+&lt;swiper-container slides-per-view="3" loop="true"&gt;
+    &lt;swiper-slide&gt;  1  &lt;/swiper-slide&gt;
+    &lt;swiper-slide&gt;  3  &lt;/swiper-slide&gt;
+    &lt;swiper-slide&gt;
+        &lt;img loading="lazy" src='https://cdn.pixabay.com/photo/2019/10/30/16/22/message-4589929_640.jpg' alt=""&gt;
+    &lt;/swiper-slide&gt;
+&lt;/swiper-container&gt;</pre>
+        </dd>
+        <dt>常用参数</dt>
+        <dd>除了上述参数外，还可以指定如下参数</dd>
+        <dd>
+            <table>
+                <tr>
+                    <th>分类</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>autoplay-delay="1000"</td>
+                    <td>自动播放延迟；单独指定autoplay无效</td>
+                </tr>
+                <tr>
+                    <td>mousewheel-invert="true"</td>
+                    <td>鼠标滚轮控制正向|反向切换；单独指定mousewheel无效</td>
+                </tr>
+                <tr>
+                    <td>keyboard-enabled="true"</td>
+                    <td>水平轮播使用左右方向键控制切换；垂直轮播使用上下方向键控制切换</td>
+                </tr>
+                <tr>
+                    <td>direction</td>
+                    <td>滚动方向水平horizontal还是垂直vertical。默认horizontal</td>
+                </tr>
+                <tr>
+                    <td>thumbs-swiper=".my-thumbs"</td>
+                    <td>为当前轮播指定缩略轮播；如二级导航</td>
+                </tr>
+                <tr>
+                    <td>pagination="true" </td>
+                    <td>分页器</td>
+                </tr>
+                <tr>
+                    <td>navigation="true" </td>
+                    <td>导航按钮</td>
+                </tr>
+                <tr>
+                    <td>scrollbar="true"</td>
+                    <td>滚动条</td>
+                </tr>
+                <tr>
+                    <td>spaceBetween</td>
+                    <td>幻灯片间隔px；不要为幻灯片再额外指定margin</td>
+                </tr>
+                <tr>
+                    <td>effect</td>
+                    <td>滚动效果 slide | fade | cube | flip | ...更多效果细节需要额外配置</td>
+                </tr>
+            </table>
+        </dd>
+        <dd class="tips">为用到的图片指定懒加载 - loading="lazy"</dd>
+        <dt>事件 Events</dt>
+        <dd>切换时 swiperprogress</dd>
+        <dd>改变后 swiperslidechange</dd>
+        <dd class="code">
+            <pre>
+&lt;swiper-container 
+    loop="true"
+    @swiperprogress="onProgress"
+    @swiperslidechange="onSlideChange"&gt;
+    ...
+&lt;/swiper-container&gt;</pre>
+        </dd>
+    </dl>
+    <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>
