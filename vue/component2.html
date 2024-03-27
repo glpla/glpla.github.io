@@ -20,13 +20,10 @@
     </header>
     <dl>
         <dt>事件传递 defineEmits()</dt>
-        <dd>子组件使用defineEmits() 宏向父组件传递自定义事件</dd>
-        <dd>. defineEmits() 接收的参数是数组，表示传递的事件可以是多个</dd>
-        <dd>. defineEmits() 必须直接放置在 &lt;script setup&gt; 的顶级作用域下</dd>
+        <dd>在 &lt;script setup&gt; 的顶级作用域下，子组件使用defineEmits() 宏，以数组的形式，定义向父组件传递的事件，并使用变量接收，以便使用</dd>
         <dd>. 可以直接在子组件结构中，使用专有变量$emit发送事件</dd>
-        <dd>. 也可以在传统事件中发送事件</dd>
         <dt>基本过程</dt>
-        <dd>1. 子组件 - 定义传递事件列表，并在自定义事件中传递事件；可以携带参数</dd>
+        <dd>1. 子组件 - 定义传递事件列表，使用emits接收，并在自定义事件中传递事件；可以携带参数</dd>
         <dd>
             <figure class="code">
                 <figcaption>子组件&lt;script&gt;</figcaption>
@@ -68,6 +65,30 @@ const callback = (e) => {
             <div>结构中推荐使用 kebab-case，如：greeting-message</div>
             <div>通过编译宏defineXXX的形式实现通信|参数传递</div>
             <div>无论是参数列表还是事件列表，都推荐使用变量接收</div>
+        </dd>
+        <dd class="example-sn">改造封装的产品列表组件，单击某个产品，跳转到详情页</dd>
+        <dd>子组件 - 定义事件并传递产品id；结构其它内容略</dd>
+        <dd class="code">
+            <pre>
+const emits = defineEmits(['emitToDetail'])
+
+const toDetail = (id) => {
+  emits('emitToDetail', id)
+}</pre>
+        </dd>
+        <dd class="code">
+            <pre>&lt;button class="btn" @click="toDetail(item.id)"&gt;详情&lt;/button&gt;</pre>
+        </dd>
+        <dd>父组件 - 接收并响应事件；数据略</dd>
+        <dd class="code">
+            <pre>
+let lists = ref([''])
+const doDetail = (e) => {
+    console.log('hi outer', e);
+}</pre>
+        </dd>
+        <dd class="code">
+            <pre>&lt;List :lists="lists" @emit-to-detail="doDetail"&gt;&lt;/List&gt;</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

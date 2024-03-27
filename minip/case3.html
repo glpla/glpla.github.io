@@ -56,7 +56,7 @@
         <dl>
             <dt><span>Keypoints</span> 知识点</dt>
             <dd class="number">
-                <div>搭建服务器 Node.js、json-server</div>
+                <div>搭建服务器 Node.js</div>
                 <div>列表渲染 wx:for</div>
                 <div>生命周期函数 lifetime</div>
                 <div>网络请求 wx.request</div>
@@ -84,7 +84,7 @@
                 <div>阿里字体图标 iconfont</div>
                 <p>店铺、地址、联系电话、营业时间</p>
                 <div>资源服务器</div>
-                <p>node.js、express、json-server</p>
+                <p>node.js、express</p>
             </dd>
         </dl>
         <dl>
@@ -149,23 +149,24 @@
                     <img src="./imgs/food5.png" alt="">
                 </figure>
                 <div>index.js</div>
-                <p>网络请求 - 使用一个flag区分下拉刷新和触底加载</p>
+                <p>网络请求 - 使用一个flag区分下拉刷新和触底加载；page、pageSize、isLoading使用静态数据；baseUrl使用动态数据，因为结构中需要使用</p>
                 <figure class="code">
                     <figcaption>封装网络请求函数</figcaption>
                     <pre>
 loadLists(flag) {
     this.isLoading = true
-    wx.showLoading({
-        title: 'Loading'
-    })
     wx.request({
-        url: baseURL + '/food',
+        //url: this.data.baseUrl + '/good/page?page=' + this.page + '&pageSize=' + this.pageSize,
+        url: this.data.baseUrl + '/good/page',
+        //默认是GET；可以不写
         method: 'GET',
+        //也可以不使用data配置项，直接拼接请求参数
         data: {
-            page: this.data.page,
-            pageSize: this.data.pageSize
+            page: this.page,
+            pageSize: this.pageSize
         },
         success: (res) => {
+            //拉取成功后，新数据叠加到旧数据上
             this.setData({
                 lists: [...this.data.lists, ...res.data],
                 total: res.header['X-Total-Count']
@@ -173,12 +174,8 @@ loadLists(flag) {
         },
         fail:err=>{
             console.log(err);
-            wx.showToast({
-              title: 'server done',
-            })
         },
         complete: () => {
-            wx.hideLoading()
             this.isLoading = false
             if (flag) {
                 wx.stopPullDownRefresh()
@@ -187,62 +184,87 @@ loadLists(flag) {
     })
 }</pre>
                 </figure>
-                <p>每个数据项绑定事件，单击后跳转到详情页</p>
+                <p>每个数据项绑定事件，单击后跳转到详情页；<span class="warn">思考：为什么使用currentTarget？</span></p>
                 <pre class="code">
 toDetail(e) {
     wx.navigateTo({
         url: './detail/detail?id=' + e.currentTarget.dataset.id,
     })
 }</pre>
-                <p>详情页在onLoad中获取id并渲染对应的商品</p>
+                <p>下拉刷新 - 页数初始化；初始化完成后，停止刷新动画；true表示要执行停止刷新行为</p>
                 <pre class="code">
-onLoad(options) {
-    this.setData({
-        id: options.id
-    })
-    //自行完成
-}</pre>
-                <p>下拉刷新 - 页数初始化；初始化完成后，停止刷新动画</p>
-                <figure class="code">
-                    <figcaption>下拉刷新</figcaption>
-                    <pre>
 onPullDownRefresh() {
+    this.page = 1,
     this.setData({
-        page: 1,
         lists: []
     })
     this.loadLists(true)
 }</pre>
-                </figure>
-                <p>触底加载 - 页数和页大小达到总数时，停止加载并给出提示；数据加载中停止再次触发加载</p>
-                <figure class="code">
-                    <figcaption>触底加载</figcaption>
-                    <pre>
+                <p>触底加载 - 页数和页大小达到总数时，停止加载；数据加载中停止再次触发加载</p>
+                <pre class="code">
 onReachBottom() {
-    if (this.data.page * this.data.pageSize >= this.data.total) {
-        return wx.showToast({
-        title: '数据加载完毕'
-        })
+    //也可以直接判断当前列表的长度和总长度是否相等
+    if (this.page * this.pageSize >= this.data.total) {
+        return;
     }
+    //这两个条件可以合并判断
     if (this.isLoading) {
         return;
     }
-    this.setData({
-        page: this.data.page + 1
-    })
-    this.loadLists()
+    this.page ++
+    this.loadLists(false)
 }                </pre>
-                </figure>
                 <div>index.wxss</div>
                 <p>数据项渲染 - flex布局；溢出打点；注意直接父级也要溢出隐藏</p>
                 <img src="./imgs/text0.png" alt="">
-                <p>已加载数据和总数据展示 - 固定定位在页面右下角</p>
             </dd>
         </dl>
         <dl>
             <dt><span>Step 5</span>: detail 页面</dt>
             <dd>根据导航参数显示指定美食的详情</dd>
             <dd>请自行设计开发</dd>
+            <dd>详情页在onLoad中获取id并渲染对应的商品</dd>
+            <dd class="code">
+                <pre>
+onLoad(options) {
+    this.setData({
+        id: options.id
+    })
+    //自行完成
+}</pre>
+            </dd>
+        </dl>
+        <dl>
+            <dt>拓展</dt>
+            <dd>给出已加载数据和总数据展示 - 固定定位在页面右下角</dd>
+            <dd>使用界面API给出相应的提示，如数据加载中、加载完毕等</dd>
+        </dl>
+        <dl>
+            <dt>资源服务器核心参考代码</dt>
+            <dd>读取json数据 → 解析 → 根据参数截取 → 返回结果</dd>
+            <dd>all：全部返回</dd>
+            <dd>page：截取返回</dd>
+            <dd class="code">
+                <pre>
+const jsonStr = fs.readFileSync('./public/data/good.json', {
+    encoding: 'utf8'
+});
+
+const food = JSON.parse(jsonStr);
+
+router.get('/all', (req, res) => {
+    res.send(food.cont)
+})
+
+//请求格式 url?page=1&pageSize=10
+router.get('/page', (req, res) => {
+    let arr = [...food.cont]
+    let start = (req.query.page - 1) * req.query.pageSize;
+    let result = arr.splice(start, req.query.pageSize)
+    res.setHeader('X-Total-Count', food.cont.length);
+    res.send(result);
+});</pre>
+            </dd>
         </dl>
         <footer class="txt-center">
             <img src="../imgs/avatar.jpg" alt="">

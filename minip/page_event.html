@@ -19,67 +19,134 @@
         <span>PageEvent</span>
     </header>
     <dl>
-        <dt>onPullDownRefresh</dt>
-        <dd>下拉刷新</dd>
+        <dt>下拉刷新 onPullDownRefresh</dt>
         <dd>页面重新初始化</dd>
         <dd>部分逻辑初始化</dd>
         <dd>真机下不能自动返回，需要显式的调用wx.stopPullDownRefresh(Object object)</dd>
-        <dt>onReachBottom</dt>
-        <dd>触底加载</dd>
-        <dd>加载更多数据，如拉取下一分页数据</dd>
-        <dd>每次触底都会触发；在下一次加载没有完成之前，不应该再次触发 - 节流</dd>
-        <dt>onShareAppMessage</dt>
-        <dd>分享|转发</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>page</figcaption>
-                <pre>
-Page({
-    data: {
-    },
-    init() { 
-    },
-    onPullDownRefresh() {
-        this.init()
-        wx.stopPullDownRefresh()
-    },
-    onReachBottom() {
-    },
-    onShareAppMessage() {
-    }
-})</pre>
-            </figure>
+        <dd>需要在配置文件中开启</dd>
+        <dd class="code">
+            <pre>"enablePullDownRefresh": true</pre>
         </dd>
-        <dt>节流</dt>
-        <dd>首先设置节流阀为false</dd>
-        <dd>触底加载时设置节流阀为true</dd>
-        <dd>加载完毕时设置节流阀为false</dd>
-        <dd>每次加载时，先判断节流阀是否为false；为false则加载；否则返回</dd>
-        <dd>同时还要判断当前数据是否已经全加载完毕：已加载数据项数量=总数据量</dd>
-        <dt>按需加载</dt>
-        <dd>触底加载和下拉刷新都涉及到同样的业务逻辑</dd>
-        <dd>但是：下拉刷新需要手动停止刷新，而触底加载不需要</dd>
-        <dd>调整业务逻辑：使用参数决定是否要显式停止刷新</dd>
+        <dd>在Page顶级top-level中使用</dd>
+        <dd class="code">
+            <pre>
+onPullDownRefresh() {
+    //
+}</pre>
+        </dd>
+        <dt>触底加载 onReachBottom</dt>
+        <dd>加载更多数据，如拉取下一分页数据</dd>
+        <dd>每次触底都会触发 - 节流、懒加载</dd>
+        <dd>每次拉取的新数据，都叠加到之前的数据上</dd>
+        <dd>拉取完毕后，应停止</dd>
+        <dd>更多信息，请查看 <a href="../web/js/lazyLoad.html" class="link">lazyLoad</a>、<a href="../web/js/scroll.html"
+                class="link">scroll滚动加载</a></dd>
+        <dd>在Page顶级top-level中使用</dd>
+        <dd class="code">
+            <pre>
+onReachBottom() {
+    //
+}</pre>
+        </dd>
+        <dt>分享|转发 onShareAppMessage</dt>
+        <dd>在Page顶级top-level中使用</dd>
+        <dd class="code">
+            <pre>
+onShareAppMessage() {
+    //
+}</pre>
+        </dd>
+    </dl>
+    <div class="chap">节流</div>
+    <dl>
+        <dt>焦点1 Focus</dt>
+        <dd>触底加载和下拉刷新都涉及到数据拉取；但是：下拉刷新需要手动停止刷新，而触底加载不需要</dd>
+        <dt>方案1 Solution</dt>
+        <dd>使用标记flag：true为下拉刷新；false为触底加载；在下拉刷新中，传入true；在触底加载中，传入false；如果是下拉刷新，就执行停止下拉刷新效果</dd>
+        <dd class="code">
+            <pre>
+_load(flag) {
+    wx.request({
+        url: this.data.baseUrl + '/good/page?page=' + this.page + '&pageSize=' + this.pageSize,
+        success: res => {
+            console.log(res);
+            this.setData({
+                goods: [...this.data.goods, ...res.data],
+                total: res.header['X-Total-Count']
+            })
+            //下拉刷新才执行
+            if(flag){
+                wx.stopPullDownRefresh()
+            }
+        },
+        fail: err => {
+            console.log(err);
+        },
+        complete: () => {
+            console.log('log done');
+        }
+    })
+}</pre>
+        </dd>
+        <dt>方案2 Solution</dt>
+        <dd>使用函数作为参数决定是否要显式停止刷新；传入函数，则执行；否则不执行</dd>
+        <dd>本质上，和方案1并没有区别</dd>
         <dd>
             <figure class="code">
                 <figcaption>函数声明 - 根据cb的有无决定是否执行特定操作</figcaption>
                 <pre>
-init(cb) {
+_load(cb) {
     //其他逻辑
     cb&cb()
 }</pre>
             </figure>
             <figure class="code">
                 <figcaption>函数执行 - 无形参cb，正常执行</figcaption>
-                <pre>this.init()</pre>
+                <pre>this._load()</pre>
             </figure>
             <figure class="code">
                 <figcaption>函数执行 - 有形参cb，执行特定操作</figcaption>
                 <pre>
-this.init(()=>{
+this._load(()=>{
     wx.stopPullDownRefresh()  
 })</pre>
             </figure>
+        </dd>
+        <dt>焦点2 Focus</dt>
+        <dd>不管是下拉刷新还是触底加载，在当前加载没有完成之前，不应该再次触发</dd>
+        <dd>节流阀初始为false</dd>
+        <dd>加载时设置节流阀为true</dd>
+        <dd>加载完毕时设置节流阀为false</dd>
+        <dd>每次加载时，先判断节流阀是否为false；为false则加载；否则返回</dd>
+        <dd>修改加载函数 - 增加静态数据isLoading；在下拉刷新和触底加载中，判断是否为真；为真返回；为假才加载</dd>
+        <dd class="code">
+            <pre>
+_load(flag) {
+    //开始加载时，为真
+    this.isLoading = true
+    wx.request({
+        url: this.data.baseUrl + '/good/page?page=' + this.page + '&pageSize=' + this.pageSize,
+        success: res => {
+            console.log(res);
+            this.setData({
+                goods: [...this.data.goods, ...res.data],
+                total: res.header['X-Total-Count']
+            })
+            //下拉刷新才执行
+            if(flag){
+                wx.stopPullDownRefresh()
+            }
+        },
+        fail: err => {
+            console.log(err);
+        },
+        complete: () => {
+            console.log('log done');
+            //加载完毕为假
+            this.isLoading = false
+        }
+    })
+}</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
