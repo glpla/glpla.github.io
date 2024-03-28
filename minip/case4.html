@@ -28,27 +28,50 @@
             <dd>
                 <div>数据绑定</div>
                 <div>表单事件的使用</div>
-                <div>json-server服务器的使用</div>
+                <div><a href="../node/jsonserver.html" class="link">json-server</a>服务器的搭建</div>
+                <div>网络请求</div>
             </dd>
             <dt>要求</dt>
             <dd>
-                <div>独立完成完成用户注册和问卷调查两个案例的设计和开发，并应用到小程序项目中</div>
+                <div>自行设计场景，完成留言、用户注册或问卷调查，并应用到小程序项目中</div>
+                <div>三个应用案例完成一个即可，建议全部完成</div>
                 <div>实验报告：采用学院统一下发的格式文件，以图片或代码形式展示并说明实施过程、各部分功能、具体内容和实现细节，并按照要求命名，最后导出为PDF，提交个人学习通作业</div>
                 <div>未按要求在规定时间内提交视为无效，不得分</div>
             </dd>
-            <dt>用户注册模块</dt>
-            <dd>1. 使用组件</dd>
-            <dd>.input - text/nickname</dd>
-            <dd>.slider</dd>
-            <dd>.picker</dd>
-            <dd>.radio radio-group</dd>
-            <dd>.checkbox checkbox-group</dd>
-            <dd>.textarea</dd>
-            <dd>.buttton - submit</dd>
-            <dd>2. 用户信息字段</dd>
+            <dt>留言模块</dt>
+            <dd>.婚礼邀请函案例</dd>
             <dd>
-                <pre class="code">
-userInfo:{
+                <div>服务器支持 json-server</div>
+                <div>数据文件 msg.json - info开发者信息；msg用户提交数据</div>
+                <pre>
+{
+    "info": {},
+    "msg": []
+}</pre>
+                <div>表单各字段名字name：用户姓名uname、用户性别ugender、用户电话ucell、用户邮箱umail、用户留言umsg</div>
+                <div>效果图</div>
+                <img src="./imgs/wedding3.png" alt="">
+            </dd>
+            <dt>用户注册模块</dt>
+            <dd>
+                <div>服务器支持 json-server</div>
+                <div>数据文件 user.json - info开发者信息；user用户提交数据</div>
+                <pre>
+{
+    "info": {},
+    "user": []
+}</pre>
+                <div>使用组件</div>
+                <p>.input - text/nickname</p>
+                <p>.slider</p>
+                <p>.picker</p>
+                <p>.radio radio-group</p>
+                <p>.checkbox checkbox-group</p>
+                <p>.textarea</p>
+                <p>.buttton - submit</p>
+                <div>用户节点信息字段</div>
+                <pre>
+user:{
     id:20221001
     ubirth:'2020-08-01',
     udesc:'hi,there.',
@@ -57,17 +80,13 @@ userInfo:{
     ugender:'女',
     uname:'glpla',
 }</pre>
-            </dd>
-            <dd>3. 提交代码</dd>
-            <dd>默认提交json，所以不需要额外指定header</dd>
-            <dd>
-                <pre class="code">
+                <div>提交代码 - 默认提交json，所以不需要额外指定header</div>
+                <pre>
 submit(e){
-    console.log(e.detail.value);
     wx.request({
-        url: 'http://127.0.0.1:3000/userinfo',
+        url: 'http://127.0.0.1:3000/user',
         method:'POST',
-        data:this.data.userInfo,
+        data:this.data.user,
         success:(res)=>{
             console.log(res);
         },
@@ -76,13 +95,46 @@ submit(e){
         }
     })
 }</pre>
+                <div>效果图</div>
+                <img src="./imgs/setup0.png" alt="">
             </dd>
-            <dd>4. 服务器脚本</dd>
-            <dd>方案1：使用json-server服务器，用户信息集中保存；创建过程，请访问 <a href="../node/jsonserver.html" class="link">json-server</a>
-            </dd>
-            <dd>方案2：使用node.js服务器，用户信息单独文件保存</dd>
+            <dt>问卷调查模块</dt>
             <dd>
-                <pre class="code">
+                <div>服务器支持 json-server</div>
+                <div>数据文件 survey.json - info开发者信息；survey用户提交数据</div>
+                <pre>
+{
+    "info": {},
+    "survey": []
+}</pre>
+                <div>问卷内容以小组为单位自定</div>
+                <div>表单各字段名字name：用户姓名uname、用户邮箱umail、用户选择urx（x:1-n）、用户留言umsg</div>
+                <div>表单提交事件处理函数 - 具体服务器地址视当时开发环境</div>
+                <pre>
+submitSurvey(e) {
+    wx.request({
+        url: 'http://127.0.0.1:3000/survey',
+        method:'POST',
+        data: e.detail.value,
+        success:res=>{
+        console.log(res);
+        },
+        fail:err=>{
+        console.log(err);
+        },
+        complete:()=>{
+        console.log('log done');
+        }
+    })
+}                </pre>
+                <div>效果图</div>
+                <img src="./imgs/survey0.png" alt="">
+                <img src="./imgs/survey1.png" alt="">
+            </dd>
+            <dt>扩展</dt>
+            <dd>
+                <div>使用node.js服务器，提交数据单独保存为一个文件</div>
+                <pre>
 const express = require('express')
 const fs = require('fs');
 
@@ -108,27 +160,11 @@ app.post('/userInfo', (req, res) => {
 app.listen(port, () => {
   console.log('server is on at: http://127.0.0.1:3000');
 });</pre>
+                <div>如何改善用户体验？如加入各种提示信息</div>
+                <p>. wx.showLoading()</p>
+                <p>. wx.hideLoading()</p>
+                <p>. wx.showToast()</p>
             </dd>
-            <dd>5. 效果图</dd>
-            <dd>
-                <img src="./imgs/setup0.png" alt="">
-            </dd>
-            <dt>婚礼邀请函留言模块</dt>
-            <dd>
-                <div>服务器端：定制数据文件和接口</div>
-                <div>用户端：用户姓名uname、用户邮箱uemail、用户留言umsg</div>
-                <div>效果图</div>
-                <img src="./imgs/wedding3.png" alt="">
-            <dt>问卷调查模块</dt>
-            <dd>
-                <div>服务器端：定制数据文件和接口</div>
-                <div>用户端：用户姓名uname、用户邮箱uemail、用户留言umsg</div>
-            </dd>
-            <dt>扩展</dt>
-            <dd>如何改善用户体验？如加入各种提示信息</dd>
-            <dd>. wx.showLoading()</dd>
-            <dd>. wx.hideLoading()</dd>
-            <dd>. wx.showToast()</dd>
         </dl>
     </div>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
