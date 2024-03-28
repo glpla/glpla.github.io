@@ -120,66 +120,6 @@ onLoad(option) {
             <div>请尽量使用调试器的"预览"体验完整功能</div>
             <div>模拟器底部状态栏，默认显示"页面路径"，也可以切换到"页面参数"观察页面之间的参数传递情况</div>
         </dd>
-        <dd class="example-sn">九宫格带参导航</dd>
-        <dd>使用navigator，修改个人中心静态页面，采用列表渲染定制导航；根据不同的导航项，动态设置目标页的导航标题；相关API，请访问 <a
-                href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarTitle.html"
-                class="link">setNavigationBarTitle()</a>
-        </dd>
-        <dd>该案例也适合客户、产品详情页，如：使用一个页面展示不同的商品内容</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>导航页 - wxml</figcaption>
-                <pre>
-&lt;navigator 
-    class="grid"
-    wx:for="{{nav}}" wx:key="id"
-    url="../list/list?id={{item.id}}&name={{item.name}}"&gt;
-    {{item.name}}
-&lt;/navigator&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>导航页 - js</figcaption>
-                <pre>
-nav:[{id:1,name:'tea'}]</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>导航页 - wxss</figcaption>
-                <pre>
-.grid{
-    display: flex;
-    gap: 20rpx;
-    flex-wrap: wrap;
-    padding: 10rpx;
-}
-.grid navigator{
-    width: 26%;
-    flex: auto;
-    aspect-ratio: 16/9;
-    background-color: #f40;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>目标页 - js</figcaption>
-                <pre>
-data: {
-    title:''
-},
-onLoad(option: any) {
-    this.setData({
-        title:option.name
-    })
-},
-onReady() {
-    wx.setNavigationBarTitle({
-        title:this.data.title
-    })
-}</pre>
-            </figure>
-        </dd>
     </dl>
     <div class="chap">编程式导航</div>
     <dl>
@@ -259,6 +199,70 @@ gotoTest(){
 onLoad(option: any) {
     console.log(option);
 }</pre>
+            </figure>
+        </dd>
+    </dl>
+    <div class="chap">综合案例</div>
+    <dl>
+        <dt>内容</dt>
+        <dd>分别使用声明式导航和编程式导航，完成个人中心页到各个模块的导航</dd>
+        <dd>相关API，请访问 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarTitle.html"
+                class="link">setNavigationBarTitle()</a>、<a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarColor.html"
+                class="link">wx.setNavigationBarColor()</a>
+        </dd>
+        <dd>1. 声明式导航</dd>
+        <dd>使用&lt;navigator&gt;，修改个人中心静态页面，采用列表渲染定制导航；根据不同的导航项，动态设置目标页的导航标题 </dd>
+        <dd>该案例也适合客户、产品详情页，如：使用一个页面展示不同的商品内容</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>个人中心页 wxml - 导航节点示例，其它略</figcaption>
+                <pre>
+&lt;navigator url="../target/target?title=favorite&bgc=#889900" class="item"&gt;
+    &lt;text class="iconfont icon-like icon"&gt;&lt;/text&gt;
+&lt;/navigator&gt;</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>目标页 js - 获取参数，设置标题和背景颜色</figcaption>
+                <pre>
+Page({
+    onLoad(options){
+        wx.setNavigationBarTitle({
+            title:options.title
+        })
+        wx.setNavigationBarColor({            
+            frontColor: '#ffffff',//MUST
+            backgroundColor:options.bgc
+        })
+    }
+})</pre>
+            </figure>
+        </dd>
+        <dd>2. 编程式导航</dd>
+        <dd>使用普通组件，绑定单击事件，在事件处理函数中使用导航API</dd>
+        <dd>
+            <figure class="code">
+                <figcaption>个人中心页 wxml - 绑定事件</figcaption>
+                <pre>
+&lt;view bind:tap="toTarget" data-bgc="#908" data-title="message" class="item"&gt;
+    &lt;text class="iconfont icon-clipboard icon"&gt;&lt;/text&gt;
+&lt;/view&gt;
+                </pre>
+            </figure>
+            <figure class="code">
+                <figcaption>个人中心页 js- 事件处理函数</figcaption>
+                <pre>
+toTarget(e){
+    let para=e.currentTarget.dataset
+    wx.navigateTo({
+        url: '../target/target?title='+para.title+'&bgc='+para.bgc,
+    })
+}</pre>
+            </figure>
+            <figure class="code">
+                <figcaption>目标页 js- 同上</figcaption>
+                <pre>...</pre>
             </figure>
         </dd>
     </dl>
