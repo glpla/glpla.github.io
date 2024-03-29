@@ -32,8 +32,10 @@
     <dd class="number">
       <div>JSON数据 - 脚本中使用</div>
       <p>数据：url+/data/文件名</p>
-      <div>GET /food?page=x&pageSize=y</div>
-      <p>获取美食列表；指定页数和每页数据大小</p>
+      <div>GET /good/all</div>
+      <p>获取美食列表 - 全部数据</p>
+      <div>GET /good/page?page=x&pageSize=y</div>
+      <p>获取美食列表 - 指定页数和每页数据大小</p>
       <div>GET /msg</div>
       <p>获取留言/调查问卷信息</p>
       <div>POST /msg</div>
@@ -44,6 +46,7 @@
       <p>获取用户信息</p>
     </dd>
     <dt>具体过程</dt>
+    <dd>good.json数据为例</dd>
     <dd>在静态资源服务器的基础上，增加监听路由</dd>
     <dd>
       <figure class="code">
@@ -52,21 +55,26 @@
 let fs = require('fs');
 let express = require('express')
 
-// 读取JSON数据
-let jsonStr = fs.readFileSync('./data.json', {
-  encoding: 'utf8'
-});
-
-let data = JSON.parse(jsonStr);
-
 // 创建Web服务器对象
 let app = express();
 
 // 静态资源处理
 app.use(express.static('./public'));
 
+// 读取JSON数据
+let jsonStr = fs.readFileSync('./public/data/good.json', {
+  encoding: 'utf8'
+});
+
+let data = JSON.parse(jsonStr);
+
+//全部拉取
+app.get('good/all', (req, res) => {
+    res.send(data)
+})
+
 //请求格式 url/data?page=1&pageSize=10
-app.get('/data', (req, res) => {
+app.get('/good/page', (req, res) => {
   let [ ...arr ] = data
   let start = (req.query.page - 1) * req.query.pageSize;
   res.setHeader('X-Total-Count', data.length);

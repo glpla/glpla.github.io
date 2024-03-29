@@ -119,7 +119,7 @@
                 <pre class="code">
 "pages": [
     "pages/index/index",
-    "pages/detail/detail"
+    "pages/index/detail/detail"
 ]</pre>
             </dd>
             <dt><span>Step 3</span>: app.wxss</dt>
@@ -240,29 +240,46 @@ onLoad(options) {
             <dd>使用界面API给出相应的提示，如数据加载中、加载完毕等</dd>
         </dl>
         <dl>
-            <dt>资源服务器核心参考代码</dt>
+            <dt>资源服务器参考代码</dt>
+            <dd>完整流程请参考 <a href="../node/dynamic.html" class="link">动态资源服务器</a></dd>
             <dd>读取json数据 → 解析 → 根据参数截取 → 返回结果</dd>
             <dd>all：全部返回</dd>
             <dd>page：截取返回</dd>
             <dd class="code">
                 <pre>
+let fs = require('fs');
+let express = require('express')
+let port = 3000
+
+// 创建Web服务器对象
+let app = express();
+
+// 静态资源处理
+app.use(express.static('./public'));
+
+// 读取JSON数据
 const jsonStr = fs.readFileSync('./public/data/good.json', {
     encoding: 'utf8'
 });
 
 const food = JSON.parse(jsonStr);
 
-router.get('/all', (req, res) => {
+//全部拉取
+app.get('good/all', (req, res) => {
     res.send(food.cont)
 })
 
-//请求格式 url?page=1&pageSize=10
-router.get('/page', (req, res) => {
+//分页拉取 - 请求格式 ?page=1&pageSize=10
+app.get('good/page', (req, res) => {
     let arr = [...food.cont]
     let start = (req.query.page - 1) * req.query.pageSize;
     let result = arr.splice(start, req.query.pageSize)
     res.setHeader('X-Total-Count', food.cont.length);
     res.send(result);
+});
+
+app.listen(port, () => {
+    console.log('服务器启动成功，地址为：http://127.0.0.1:3000');
 });</pre>
             </dd>
         </dl>
