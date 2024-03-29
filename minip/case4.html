@@ -38,28 +38,16 @@
                 <div>实验报告：采用学院统一下发的格式文件，以图片或代码形式展示并说明实施过程、各部分功能、具体内容和实现细节，并按照要求命名，最后导出为PDF，提交个人学习通作业</div>
                 <div>未按要求在规定时间内提交视为无效，不得分</div>
             </dd>
-            <dt>留言模块</dt>
-            <dd>.婚礼邀请函案例</dd>
+            <dt>接口设置</dt>
             <dd>
                 <div>服务器支持 json-server</div>
-                <div>数据文件 msg.json - info开发者信息；msg用户提交数据</div>
+                <div>数据文件 form.json - info开发者信息；msg用户留言数据，user用户注册数据、survey用户问卷数据</div>
                 <pre>
 {
     "info": {},
-    "msg": []
-}</pre>
-                <div>表单各字段名字name：用户姓名uname、用户性别ugender、用户电话ucell、用户邮箱umail、用户留言umsg</div>
-                <div>效果图</div>
-                <img src="./imgs/wedding3.png" alt="">
-            </dd>
-            <dt>用户注册模块</dt>
-            <dd>
-                <div>服务器支持 json-server</div>
-                <div>数据文件 user.json - info开发者信息；user用户提交数据</div>
-                <pre>
-{
-    "info": {},
-    "user": []
+    "msg": [],
+    "user": [],
+    "survey": []
 }</pre>
                 <div>使用组件</div>
                 <p>.input - text/nickname</p>
@@ -69,8 +57,18 @@
                 <p>.checkbox checkbox-group</p>
                 <p>.textarea</p>
                 <p>.buttton - submit</p>
-                <div>用户节点信息字段</div>
-                <pre>
+            </dd>
+            <dt>留言模块</dt>
+            <dd>.婚礼邀请函案例</dd>
+            <dd>
+                <div>表单各字段名字name：用户姓名uname、用户性别ugender、用户电话ucell、用户邮箱umail、用户留言umsg</div>
+                <div>效果图</div>
+                <img src="./imgs/wedding3.png" alt="">
+            </dd>
+            <dt>用户注册模块</dt>
+
+            <div>用户节点信息参考字段，可根据实际需求定制</div>
+            <pre>
 user:{
     id:20221001
     ubirth:'2020-08-01',
@@ -80,8 +78,8 @@ user:{
     ugender:'女',
     uname:'glpla',
 }</pre>
-                <div>提交代码 - 默认提交json，所以不需要额外指定header</div>
-                <pre>
+            <div>提交代码 - 默认提交json，所以不需要额外指定header</div>
+            <pre>
 submit(e){
     wx.request({
         url: 'http://127.0.0.1:3000/user',
@@ -95,18 +93,11 @@ submit(e){
         }
     })
 }</pre>
-                <div>效果图</div>
-                <img src="./imgs/setup0.png" alt="">
+            <div>效果图</div>
+            <img src="./imgs/setup0.png" alt="">
             </dd>
             <dt>问卷调查模块</dt>
             <dd>
-                <div>服务器支持 json-server</div>
-                <div>数据文件 survey.json - info开发者信息；survey用户提交数据</div>
-                <pre>
-{
-    "info": {},
-    "survey": []
-}</pre>
                 <div>问卷内容以小组为单位自定</div>
                 <div>表单各字段名字name：用户姓名uname、用户邮箱umail、用户选择urx（x:1-n）、用户留言umsg</div>
                 <div>表单提交事件处理函数 - 具体服务器地址视当时开发环境</div>
