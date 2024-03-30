@@ -8,6 +8,7 @@
   <title>项目 购物车</title>
   <link rel="stylesheet" href="../css/course.css">
   <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/code.css">
   <base target="_blank">
 </head>
 
@@ -19,6 +20,7 @@
     </header>
     <dl class="number-mul-sn">
       <dt>实验内容</dt>
+      <dd>同时使用普通事件和监听实现</dd>
       <dd>
         <div>单个商品的增加和减少</div>
         <div>全选</div>
@@ -28,8 +30,10 @@
       </dd>
       <dt>前置知识</dt>
       <dd>
-        <div>事件绑定</div>
+        <div>单击事件、改变事件</div>
         <div>网络请求 axios - GET</div>
+        <div>计算属性</div>
+        <div>侦听器</div>
       </dd>
       <dt>开发环境</dt>
       <dd>
@@ -37,6 +41,58 @@
         <div>文本编辑器 Vs Code</div>
         <div>谷歌浏览器 Chrome</div>
         <div>node.js</div>
+      </dd>
+      <dt>参考代码</dt>
+      <dd></dd>
+      <dd>
+        <div>参考数据</div>
+        <p>购物车数据</p>
+        <pre class="code">
+const data = reactive({
+  selectedAll: false,
+  selectedLists: [],
+  lists: [{
+    "id": 77,
+    "name": "红烧牛肉面",
+    "price": 15,
+    "number": 1,
+    "stock": 6
+  }]
+})</pre>
+        <p>标记flag辅助判断全选和单选</p>
+        <pre class="code">flag=true</pre>
+        <div>全选 - 侦听全选标记 selectedAll</div>
+        <pre class="code">
+watch(() => data.selectedAll, (n, o) => {
+  console.log(n);
+  if (n) {
+    data.selectedLists = data.lists
+  } else {
+    if (flag)
+      data.selectedLists = []
+  }
+}, { immediate: true })</pre>
+        <div>单选 - 侦听已选列表 selectedLists</div>
+        <pre class="code">
+watch(() => data.selectedLists, (n, o) => {
+  console.log(n.length);
+  if (n.length == data.lists.length && data.lists.length) {
+    data.selectedAll = true
+    flag = true
+  } else {
+    data.selectedAll = false
+    flag = false
+  }
+}, { immediate: true })</pre>
+        <div>购物车结算</div>
+        <pre class="code">
+const getTotal = computed(() => {
+  let sum = 0
+  data.selectedLists.forEach(item => {
+    sum += item.number * item.price
+  })
+  return sum
+})</pre>
       </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
