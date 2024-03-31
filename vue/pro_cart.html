@@ -27,6 +27,7 @@
         <div>地址选择</div>
         <div>结算</div>
         <div>下单</div>
+        <div>商品删除</div>
       </dd>
       <dt>前置知识</dt>
       <dd>
@@ -43,22 +44,8 @@
         <div>node.js</div>
       </dd>
       <dt>参考代码</dt>
-      <dd></dd>
+      <dd>这里给出购物车优化后的逻辑；其它逻辑请参考<a href="./drill_cart.html" class="link">购物车</a></dd>
       <dd>
-        <div>参考数据</div>
-        <p>购物车数据</p>
-        <pre class="code">
-const data = reactive({
-  selectedAll: false,
-  selectedLists: [],
-  lists: [{
-    "id": 77,
-    "name": "红烧牛肉面",
-    "price": 15,
-    "number": 1,
-    "stock": 6
-  }]
-})</pre>
         <p>标记flag辅助判断全选和单选</p>
         <pre class="code">flag=true</pre>
         <div>全选 - 侦听全选标记 selectedAll</div>
@@ -88,9 +75,15 @@ watch(() => data.selectedLists, (n, o) => {
         <pre class="code">
 const getTotal = computed(() => {
   let sum = 0
+
+  //forEach - 进阶遍历
   data.selectedLists.forEach(item => {
     sum += item.number * item.price
   })
+
+  //reduce - 数组归并函数
+  sum = data.selectedLists.reduce((pre, cur, index, arr) => pre + cur.number * cur.price, 0)
+
   return sum
 })</pre>
       </dd>

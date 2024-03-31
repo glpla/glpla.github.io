@@ -40,7 +40,7 @@
     //样式
 &lt;/style&gt;</pre>
             </figure>
-            <div>引入：父组件在&lt;script&gt;引入子组件；注意路径关系</div>
+            <div>引入：父组件在&lt;script&gt;引入子组件，<span class="warn">注意</span> ：不能省略后缀名.vue；路径关系</div>
             <figure class="code">
                 <figcaption>父组件 - Super.vue</figcaption>
                 <pre>
@@ -59,6 +59,14 @@
 &lt;/template&gt;</pre>
             </figure>
         </dd>
+        <dt>组件样式</dt>
+        <dd>&lt;style&gt;指定 scoped 时：</dd>
+        <dd>它的 CSS 只会影响当前组件的元素</dd>
+        <dd>父组件的样式将不会 <span class="warn">渗透</span>
+            到子组件中。不过，子组件的根节点会同时被父组件的作用域样式和子组件的作用域样式影响。便于：让父组件可以从布局的角度出发，调整其子组件根元素的样式</dd>
+        <dd>更多信息，请访问 <a href="https://cn.vuejs.org/api/sfc-css-features.html" class="link">API - 单文件组件 CSS 功能</a></dd>
+        <dd class="example-sn"><a href="./pro_home.html" class="link">主页</a></dd>
+        <dd>每一个子组件都使用根节点，且使用同组件名的类，便于父组件布局</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

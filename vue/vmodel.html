@@ -64,65 +64,107 @@
             </table>
         </dd>
         <dd>3. submit：表单提交；通常会阻止该行为的默认跳转</dd>
+        <dd class="tips">
+            <div>在事件对象的事件目标中获取值 e.target.value或选择状态 e.target.checked、e.target.selected</div>
+            <div>也可以在结构中使用事件专有变量$event获取 $event.target.selected - 仅限Vue环境</div>
+        </dd>
     </dl>
     <div class="chap">常见表单元素的双向绑定</div>
     <dl>
         <dt>&lt;input&gt; - text</dt>
         <dd>单行文本输入</dd>
         <dd class="code">
-            <pre>
-&lt;label for="uname"&gt;Title &lt;/label&gt;
-&lt;input type="text" v-model="uname" required&gt;</pre>
-        </dd>
-        <dd class="code">
-            <pre>let uname = ref('')</pre>
+            <pre>let msg = ref('')</pre>
         <dd>
+        <dd>传统方式 - 通过事件和属性绑定实现双向绑定；这里采用内联事件|行内事件</dd>
+        <dd class="code">
+            <pre>
+&lt;input type="text" @input="msg = $event.target.value" :value="msg" required&gt;
+&lt;input type="text" @input="(e) => { msg = e.target.value }" :value="msg" required&gt;
+&lt;div&gt;{{ msg }}&lt;/div&gt;</pre>
+        </dd>
+        <dd>双向绑定</dd>
+        <dd class="code">
+            <pre>
+&lt;input type="text" v-model="msg" required&gt;
+&lt;div&gt;{{ msg }}&lt;/div&gt;</pre>
+        </dd>
         <dt>&lt;textarea&gt;</dt>
         <dd>留言、评论</dd>
-        <dd>可以使用&lt;label&gt;改善用户体验</dd>
+        <dd class="code">
+            <pre>let msg = ref('')</pre>
+        </dd>
+        <dd>传统方式 - 通过事件和属性绑定实现双向绑定；这里采用内联事件|行内事件</dd>
         <dd class="code">
             <pre>
-&lt;label for="ubody"&gt;Contents&lt;/label&gt;
-&lt;textarea v-model="ubody" required&gt;&lt;/textarea&gt;</pre>
+&lt;textarea @input="(e) => { msg = e.target.value }" :value="msg" required&gt;&lt;/textarea&gt;
+&lt;div&gt;{{msg}}&lt;/div&gt;
+</pre>
         </dd>
+        <dd>双向绑定</dd>
         <dd class="code">
-            <pre>let ubody = ref('')</pre>
+            <pre>
+&lt;textarea v-model="msg" required&gt;&lt;/textarea&gt;
+&lt;div"&gt;{{msg}}&lt;/div&gt;
+</pre>
         </dd>
         <dd>不可以使用插值表达式{{}}</dd>
         <dd class="code">
-            <pre>&lt;textarea v-model="ubody" required&gt;{{msg}}&lt;/textarea&gt;</pre>
+            <pre>&lt;textarea v-model="msg" required&gt;{{msg}}&lt;/textarea&gt;</pre>
         </dd>
         <dd class="tips">text类型的&lt;input&gt;和&lt;textarea&gt;绑定的是 value 属性 并侦听 input 事件</dd>
         <dt>&lt;input&gt; - radio</dt>
         <dd>单选；多选一</dd>
-        <dd>选项都绑定ugender</dd>
         <dd>不指定value的话，只能获取单选框的选中状态是否为on</dd>
         <dd>值为静态数据male、female</dd>
         <dd class="code">
+            <pre>let gender = ref('')</pre>
+        </dd>
+        <dd>传统方式</dd>
+        <dd class="code">
             <pre>
-&lt;input type="radio" id="male" v-model="ugender" value="male"&gt;
-&lt;label for="male"&gt;male&lt;/label&gt;
-&lt;input type="radio" id="female" v-model="ugender" value="female"&gt;
-&lt;label for="female"&gt;female&lt;/label&gt;</pre>
+&lt;input type="radio" name="gender" value="male" @change="(e) => gender = e.target.value"&gt;male
+&lt;input type="radio" name="gender" value="female" @change="(e) => gender = e.target.value"&gt;female
+&lt;div&gt;{{ gender }}&lt;/div&gt;</pre>
+        </dd>
+        <dd>双向绑定 - 选项都绑定gender</dd>
+        <dd class="code">
+            <pre>
+&lt;input type="radio" name="gender" value="male" v-model="gender"&gt;male
+&lt;input type="radio" name="gender" value="female" v-model="gender"&gt;female
+&lt;div&gt;{{ gender }}&lt;/div&gt;</pre>
         </dd>
         <dt>&lt;input&gt; - checkbox</dt>
         <dd>多选</dd>
         <dd>一般情况下，需要指定value，否则只能获取复选框的选中状态是否为on</dd>
-        <dd>选项都绑定ulike；ulike应该是数组类型，不能是字符串</dd>
         <dd>值为静态数据：code、sing、game、read</dd>
+        <dd>like是数组类型，不能是字符串</dd>
+        <dd class="code">
+            <pre>let like = ref([])</pre>
+        </dd>
+        <dd>传统方式</dd>
         <dd class="code">
             <pre>
-&lt;input type="checkbox" id="code" v-model="ulike" value="code"&gt;
-&lt;label for="code"&gt;code&lt;/label&gt;
-&lt;input type="checkbox" id="sing" v-model="ulike" value="sing"&gt;
-&lt;label for="sing"&gt;sing&lt;/label&gt;
-&lt;input type="checkbox" id="game" v-model="ulike" value="game"&gt;
-&lt;label for="game"&gt;game&lt;/label&gt;
-&lt;input type="checkbox" id="read" v-model="ulike" value="read"&gt;
-&lt;label for="read"&gt;read&lt;/label&gt;</pre>
+&lt;input type="checkbox" name="ulike" @change="sel" value="code"&gt;code
+&lt;input type="checkbox" name="ulike" @change="sel" value="sing"&gt;sing
+&lt;input type="checkbox" name="ulike" @change="sel" value="game"&gt;game
+&lt;input type="checkbox" name="ulike" @change="sel" value="read"&gt;read
+&lt;div&gt;{{ like }}&lt;/div&gt;</pre>
         </dd>
         <dd class="code">
-            <pre>let ulike = ref([])</pre>
+            <pre>
+const sel = (e) => {
+    e.target.checked ? like.value.push(e.target.value) : like.value = like.value.filter(item => item !== e.target.value)
+}</pre>
+        </dd>
+        <dd>双向绑定 - 选项都绑定like</dd>
+        <dd class="code">
+            <pre>
+&lt;input type="checkbox" name="ulike" v-model="like" value="code"&gt;code
+&lt;input type="checkbox" name="ulike" v-model="like" value="sing"&gt;sing
+&lt;input type="checkbox" name="ulike" v-model="like" value="game"&gt;game
+&lt;input type="checkbox" name="ulike" v-model="like" value="read"&gt;read
+&lt;div&gt;{{ like }}&lt;/div&gt;</pre>
         </dd>
         <dd class="tips">&lt;radio类型的input&gt;和checkbox类型的&lt;input&gt;绑定的是 checked 属性 并侦听 change 事件</dd>
         <dd>使用须知、记住密码 - 使用单个复选框实现；不需要指定value，需要的只是是否选中</dd>
@@ -135,31 +177,23 @@
         </dd>
         <dt>&lt;select&gt;</dt>
         <dd>下拉列表；下拉框；值为静态数据123</dd>
+        <dd class="question">请自行完成传统方式的双向绑定</dd>
+        <!-- <select @change="(e) => like = e.target.value">
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+        </select>
+        <div>{{ like }}</div> -->
         <dd class="code">
             <pre>
-&lt;div&gt;{{sum}}&lt;/div&gt;
-&lt;select v-model.number = 'sel'&gt;
+&lt;select v-model = 'sel'&gt;
     &lt;option value='1'&gt;1&lt;/option&gt;
     &lt;option value='2'&gt;2&lt;/option&gt;
     &lt;option value='3'&gt;3&lt;/option&gt;
 &lt;/select&gt;
-&lt;button @click = 'add'&gt;add&lt;/button&gt;
-&lt;button @click = 'minus'&gt;minus&lt;/button&gt;
-</pre>
+&lt;div&gt;{{sel}}&lt;/div&gt;</pre>
         </dd>
-        <dd class="code">
-            <pre>
-let sel = ref(1)
-let sum = ref(0)
-function add(){
-    sum.value += sel.value
-}
-function minus(){
-    sum.value -= sel.value
-}</pre>
-        </dd>
-        <p class="tips">&lt;select&gt;绑定的是 value 属性 并侦听 change 事件</p>
-        </dd>
+        <dd class="tips">&lt;select&gt;绑定的是 value 属性 并侦听 change 事件</dd>
     </dl>
     <div class="chap">值的绑定</div>
     <dl>
