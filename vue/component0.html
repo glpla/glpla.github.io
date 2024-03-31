@@ -59,12 +59,28 @@
 &lt;/template&gt;</pre>
             </figure>
         </dd>
+        <dt>作用域</dt>
+        <dd><a href="./class.html" class="link">类 class</a></dd>
         <dt>组件样式</dt>
         <dd>&lt;style&gt;指定 scoped 时：</dd>
         <dd>它的 CSS 只会影响当前组件的元素</dd>
         <dd>父组件的样式将不会 <span class="warn">渗透</span>
             到子组件中。不过，子组件的根节点会同时被父组件的作用域样式和子组件的作用域样式影响。便于：让父组件可以从布局的角度出发，调整其子组件根元素的样式</dd>
+        <dd>父组件如果想深入调整子组件内部元素的样式|影响到子组件，可以使用伪类:deep()</dd>
         <dd>更多信息，请访问 <a href="https://cn.vuejs.org/api/sfc-css-features.html" class="link">API - 单文件组件 CSS 功能</a></dd>
+        <dt>Vue特有选择器</dt>
+        <dd class="number">
+            <div>插槽选择器 :slotted</div>
+            <p>默认情况下，作用域样式不会影响到 &lt;slot/&gt; 渲染出来的内容，因为它们被认为是父组件所持有并传递进来的。使用 :slotted 伪类以明确地将插槽内容作为选择器的目标</p>
+            <p>更多细节，请查看<a href="./component4.html" class="link">组件 slot</a></p>
+            <div>全局选择器 :global</div>
+            <p>如果想让其中一个样式规则应用到全局，比起另外创建一个 &lt;style&gt;，可以使用 :global 伪类</p>
+            <p>应 <span class="warn">避免</span> 这种情况出现。应该把全局类写到单独的样式文件中并引入</p>
+            <pre class="code">
+:global(.warn) {
+    color: red;
+}</pre>
+        </dd>
         <dd class="example-sn"><a href="./pro_home.html" class="link">主页</a></dd>
         <dd>每一个子组件都使用根节点，且使用同组件名的类，便于父组件布局</dd>
     </dl>
