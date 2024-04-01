@@ -19,14 +19,17 @@
         <span>WatchEffect</span>
     </header>
     <dl>
+        <dd>立即运行一个函数，同时响应式地追踪其依赖，并在依赖更改时重新执行</dd>
         <dt>概述</dt>
         <dd>watch 仅在数据源确实改变时才会触发回调；执行0-N次</dd>
         <dd>watchEffect 会立即执行回调函数，也称自动侦听器，等同于使用了立即配置项immediate；执行1-N次</dd>
+        <dd>更多信息，请访问<a href="https://cn.vuejs.org/api/reactivity-core.html#watcheffect" class="link">watchEffect()</a>
+        </dd>
         <dd>需引入包 watchEffect</dd>
         <dd>应用：页面加载时，立即加载当前对应的数据</dd>
         <dd class="example-sn">使用watchEffect自动侦听多个数据</dd>
         <dd>
-            <figure class="code">
+            <figure>
                 <figcaption>ref对象 - 自动侦听name和age</figcaption>
                 <pre>
 let temp = ref(0)
@@ -51,7 +54,7 @@ function heiCh() {
         <dt>停止侦听</dt>
         <dd>要手动停止一个侦听器，请调用 watch 或 watchEffect 返回的函数</dd>
         <dd class="example-sn">停止侦听</dd>
-        <dd class="code">
+        <dd>
             <pre>
 const stopWatch = watch(num, (newv, oldv) => {
     console.log('num is watched', newv, oldv);

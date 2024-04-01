@@ -2,36 +2,36 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>计算属性 Computed</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
-    <base target="_blank">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计算属性 Computed</title>
+  <link rel="stylesheet" href="../css/reset2024.css">
+  <link rel="stylesheet" href="../css/common2024.css">
+  <link rel="stylesheet" href="../css/code.css">
+  <link rel="stylesheet" href="../css/sn.css">
+  <base target="_blank">
 </head>
 
 <body>
-    <header>
-        <h1>计算属性</h1>
-        <span>Computed</span>
-    </header>
-    <dl>
-        <dt>引入</dt>
-        <dd>数据绑定时，可以使用简单的表达式实现数据的2次处理；如根据age判断DOM的渲染</dd>
-        <dd>逻辑复杂时，应该使用计算属性实现</dd>
-        <dt>优点</dt>
-        <dd>需要引入 computed 包</dd>
-        <dd>计算属性是响应式；数据响应时，不会刷新页面</dd>
-        <dd>计算属性有返回值，且仅在其响应式依赖更新时才重新计算</dd>
-        <dd>而，方法可以没有返回，且每次执行方法都会导致页面渲染</dd>
-        <dd class="tips">计算属性是一个属性，不是方法，使用时不需要()</dd>
-        <dd class="example-sn">执行2次方法inc和执行2次计算属性dec</dd>
-        <dd>创建方法inc和计算属性dec</dd>
-        <dd class="code">
-            <pre>
+  <header>
+    <h1>计算属性</h1>
+    <span>Computed</span>
+  </header>
+  <dl>
+    <dt>引入</dt>
+    <dd>数据绑定时，可以使用简单的表达式实现数据的2次处理；如根据age判断DOM的渲染</dd>
+    <dd>逻辑复杂时，应该使用计算属性实现</dd>
+    <dt>优点</dt>
+    <dd>需要引入 computed 包</dd>
+    <dd>计算属性是响应式；数据响应时，不会刷新页面</dd>
+    <dd>计算属性有返回值，且仅在其响应式依赖更新时才重新计算</dd>
+    <dd>而，方法可以没有返回，且每次执行方法都会导致页面渲染</dd>
+    <dd class="tips">计算属性是一个属性，不是方法，使用时不需要()</dd>
+    <dd class="example-sn">执行2次方法inc和执行2次计算属性dec</dd>
+    <dd>创建方法inc和计算属性dec</dd>
+    <dd>
+      <pre>
 import { computed } from 'vue';
 const inc = () => {
   console.log('do function inc');
@@ -39,53 +39,53 @@ const inc = () => {
 const dec = computed(() => {
   console.log('do computed dec');
 })</pre>
-        </dd>
-        <dd>使用2次方法；2次计算属性</dd>
-        <dd class="code">
-            <pre>
+    </dd>
+    <dd>使用2次方法；2次计算属性</dd>
+    <dd>
+      <pre>
 &lt;div&gt;第1次 inc - {{ inc() }}&lt;/div&gt;
 &lt;div&gt;第2次 inc - {{ inc() }}&lt;/div&gt;
 &lt;div&gt;第1次 dec - {{ dec }}&lt;/div&gt;
 &lt;div&gt;第2次 dec - {{ dec }}&lt;/div&gt;</pre>
-        </dd>
-        <dd class="bg">分析</dd>
-        <dd>数据变化时，2次方法都会执行</dd>
-        <dd>数据变化时，计算属性仅第1次执行；第2次没有检测到数据变化，就不会执行</dd>
-        <dd class="code">
-            <pre>
+    </dd>
+    <dd class="bg">分析</dd>
+    <dd>数据变化时，2次方法都会执行</dd>
+    <dd>数据变化时，计算属性仅第1次执行；第2次没有检测到数据变化，就不会执行</dd>
+    <dd>
+      <pre>
 do function inc
 do function inc
 do function dec</pre>
-        </dd>
-        <dd>使用value指定属性值</dd>
-        <dd class="code">
-            <pre>
+    </dd>
+    <dd>使用value指定属性值</dd>
+    <dd>
+      <pre>
 import { ref, computed } from 'vue';
 let age = ref(18)
 const res = computed(() => {
     return age.value >= 18 ? 'adault' : 'teenage'
 })</pre>
-        </dd>
-        <dd class="code">
-            <pre>
+    </dd>
+    <dd>
+      <pre>
 &lt;div&gt; {{ res }} &lt;/div&gt;</pre>
-        </dd>
-        <dd class="example-sn">参照B站规则处理关注、粉丝、点赞和播放数量</dd>
-        <dt>传递参数</dt>
-        <dd>计算属性是一个属性，不是方法，所以不能直接传递参数</dd>
-        <dd>通过闭包的形式间接传递参数</dd>
-        <dd class="example-sn">将资源服务器地址和图片路径拼接为一个完整的在线地址</dd>
-        <dd class="code">
-            <pre>
+    </dd>
+    <dd class="example-sn">参照B站规则处理关注、粉丝、点赞和播放数量</dd>
+    <dt>传递参数</dt>
+    <dd>计算属性是一个属性，不是方法，所以不能直接传递参数</dd>
+    <dd>通过闭包的形式间接传递参数</dd>
+    <dd class="example-sn">将资源服务器地址和图片路径拼接为一个完整的在线地址</dd>
+    <dd>
+      <pre>
 const getUrl = computed(() => {
     return (url) => {
         return 'http://127.0.0.1:3000' + url
     }
 })            </pre>
-        </dd>
-        <dd class="example-sn">根据成绩求绩点</dd>
-        <dd class="code">
-            <pre>
+    </dd>
+    <dd class="example-sn">根据成绩求绩点</dd>
+    <dd>
+      <pre>
 let score = ref(80)
 const grade = computed(() => {
   return (score) => {
@@ -103,27 +103,27 @@ const grade = computed(() => {
     }
   }
 })</pre>
-        </dd>
-        <dd class="question">以上逻辑有什么需要改进的地方</dd>
-        <dd class="code">
-            <pre>&lt;div&gt;grade {{ score }} - {{ grade(score) }}&lt;/div&gt;</pre>
-        </dd>
-        <dd>使用静态数据</dd>
-        <dd class="code">
-            <pre>
+    </dd>
+    <dd class="question">以上逻辑有什么需要改进的地方</dd>
+    <dd>
+      <pre>&lt;div&gt;grade {{ score }} - {{ grade(score) }}&lt;/div&gt;</pre>
+    </dd>
+    <dd>使用静态数据</dd>
+    <dd>
+      <pre>
 &lt;div&gt;grade 55 - {{ grade(55) }}&lt;/div&gt;
 &lt;div&gt;grade 60 - {{ grade(60) }}&lt;/div&gt;
 &lt;div&gt;grade 71 - {{ grade(71) }}&lt;/div&gt;
 &lt;div&gt;grade 80 - {{ grade(80) }}&lt;/div&gt;
 &lt;div&gt;grade 90 - {{ grade(90) }}&lt;/div&gt;
 &lt;div&gt;grade 100 - {{ grade(100) }}&lt;/div&gt;</pre>
-        </dd>
-        <dd class="tips">
-            <div>除了数据计算外，不应该有其它操作，如数据请求，DOM修改等副作用，即：只做一件事情</div>
-            <div>如果还需要执行其它操作，可以使用侦听函数 <a href="./watch.html" class="link">watch</a></div>
-        </dd>
-    </dl>
-    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    </dd>
+    <dd class="tips">
+      <div>除了数据计算外，不应该有其它操作，如数据请求，DOM修改等副作用，即：只做一件事情</div>
+      <div>如果还需要执行其它操作，可以使用侦听函数 <a href="./watch.html" class="link">watch</a></div>
+    </dd>
+  </dl>
+  <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
 
 </html>

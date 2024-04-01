@@ -30,13 +30,13 @@
         <dt>子组件定义属性</dt>
         <dd>1. 子组件&lt;script&gt; - 定义接收的参数</dd>
         <dd>方案1：使用字符串数组声明 - 仅指定属性名</dd>
-        <dd class="code">
+        <dd>
             <pre>
 defineProps(['propMsg', 'propId'])
 </pre>
         </dd>
         <dd>方案2：使用对象声明 - 仅指定属性名和属性类型</dd>
-        <dd class="code">
+        <dd>
             <pre>
 defineProps({
     propMsg: String,
@@ -45,7 +45,7 @@ defineProps({
 </pre>
         </dd>
         <dd>方案3：使用对象声明 - 指定属性名、属性类型type、默认值default和是否必须required</dd>
-        <dd class="code">
+        <dd>
             <pre>
 defineProps({
     propMsg: String,
@@ -58,24 +58,24 @@ defineProps({
 </pre>
         </dd>
         <dd>方案4：如果在&lt;script&gt;需要使用父组件传递的参数，则声明一个变量接收 - 推荐</dd>
-        <dd class="code">
+        <dd>
             <pre>
 const props = defineProps(['propMsg'])</pre>
         </dd>
         <dd>2. 子组件&lt;template&gt; - 使用传递来的参数|数据</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;div&gt;{{ propMsg }} - {{ propId }}&lt;/div&gt;</pre>
         </dd>
         <dt>父组件传递参数</dt>
         <dd>1. 父组件&lt;script&gt; - 引入子组件，准备数据</dd>
-        <dd class="code">
+        <dd>
             <pre>
 import { ref } from 'vue';
 import Test from './components/Test.vue';
 let msg = ref('hi,there')</pre>
         </dd>
         <dd>2. 父组件&lt;template&gt; - 使用子组件；以数据绑定的形式传递参数：1个静态数据、1个响应式数据</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;Test :propMsg="msg" propId="18"&gt;&lt;/Test&gt;</pre>
         </dd>
     </dl>
@@ -84,7 +84,7 @@ let msg = ref('hi,there')</pre>
         <dd>父组件</dd>
         <dd class="number">
             <div>逻辑中准备数据；引入子组件；其它必要的系统组件引入</div>
-            <pre class="code">
+            <pre>
 import Test from './components/Test.vue'
 let title = ref('hi,there')
 let obj = ref({
@@ -99,13 +99,13 @@ let imgUrls = ref([{
     url: 'imgs/coffee1.jpg'
 }])</pre>
             <div>结构中使用子组件并传递数据</div>
-            <pre class="code">
+            <pre>
 &lt;Test :propTitle="title" :propObj="obj" :propImgUrls="imgUrls" /&gt;</pre>
         </dd>
         <dd>子组件</dd>
         <dd class="number">
             <div>逻辑中定义参数；其它必要的系统组件引入</div>
-            <pre class="code">
+            <pre>
 const props = defineProps(['propTitle', 'propObj', 'propImgUrls'])</pre>
             <div>结构中使用数据</div>
             <pre>
@@ -114,11 +114,11 @@ const props = defineProps(['propTitle', 'propObj', 'propImgUrls'])</pre>
 &lt;img v-for="item in propImgUrls" :key="item.id" :src="item.url" alt=""&gt;</pre>
         </dd>
         <dd class="example-sn">改造产品列表组件，提供不同的产品数据展示不同的列表内容</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;List :lists="propLists"/&gt;</pre>
         </dd>
         <dd class="example-sn">封装第三方库 - 轮播组件，提供不同的图片列表数据和高度展示不同的轮播内容</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;Swiper :imgUrl="propImgUrls" :swiperH="propSwiperH"/&gt;</pre>
         </dd>
         <dd class="question">

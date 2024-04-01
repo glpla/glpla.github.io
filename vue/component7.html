@@ -30,7 +30,7 @@
         <dd>.由特殊元素 &lt;component&gt; 切换的动态组件</dd>
         <dd>.改变特殊的 key 属性</dd>
         <dd>弥补了传统CSS的过渡动画transition不能响应display的显示和隐藏状态[???]</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;Transition&gt;
     &lt;div v-if="flag"&gt;true&lt;/div&gt;
@@ -102,7 +102,7 @@
         <dd>监听 &lt;Transition&gt; 组件事件的方式在过渡过程中挂上钩子函数</dd>
         <dd>每个钩子函数都可以指定el获取事件对象，如获取对象的自定义数据data-；后续的列表渲染中，经常会用到</dd>
         <dd>enter和leave需要额外指定结束函数done</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;Transition
   @before-enter="onBeforeEnter"
@@ -116,7 +116,7 @@
 &gt;
 &lt;/Transition&gt;</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 // 在元素被插入到 DOM 之前被调用
 // 用这个来设置元素的 "enter-from" 状态
@@ -160,14 +160,14 @@ function onLeaveCancelled(el) {}</pre>
         <dd>拓展2：增加其它监听事件，查看过渡效果</dd>
         <dd>思考1：如果不增加按钮button，直接把单击事件加到过渡组件或提示文本上???</dd>
         <dd>思考2：如果监听CSS的animation事件???</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;button @click="toBaidu"&gt;enter&lt;/button&gt;
 &lt;Transition name="zoom" @after-leave="onAfterLeave"&gt;
     &lt;div class="item" v-if="isEnter"&gt;click to enter baidu&lt;/div&gt;
 &lt;/Transition&gt;</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 let isEnter = ref(true)
 
@@ -187,7 +187,7 @@ const onAfterLeave = () => {
         <dd>如果你想在某个节点初次渲染时应用一个过渡效果，你可以添加 appear</dd>
         <dd class="example-sn">使用appear属性，配合组件封装，实现：加载出现、点击消失的过渡效果</dd>
         <dd>1. 封装组件 &lt;Fadein&gt;</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;template&gt;
     &lt;div&gt;
@@ -211,7 +211,7 @@ const onAfterLeave = () => {
 &lt;/style&gt;</pre>
         </dd>
         <dd>2. 使用组件 &lt;Fadein&gt; - 单击时，isShow逻辑取反，略</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;div&gt;
     &lt;button @click="renderDom"&gt;render&lt;/button&gt;
@@ -224,7 +224,7 @@ const onAfterLeave = () => {
         <dt>动态过渡</dt>
         <dd>可以为每个过渡指定name属性加以区分；指定了name属性的过渡，其内置类将不再以v开始，而是以name名开始</dd>
         <dd>可以绑定name属性，当状态变化时，动态地应用不同类型的过渡</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;Transition :name="transition-name" appear&gt;
     &lt;slot&gt;&lt;/slot&gt;

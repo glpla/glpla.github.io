@@ -75,10 +75,10 @@ const callback = (e) => {
             <img src="./imgs/emit0.png" alt="">
         </dd>
         <dd>子组件 - 定义事件并传递产品id；结构其它内容略</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;button class="btn" @click="toDetail(item.id)"&gt;详情&lt;/button&gt;</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 const emits = defineEmits(['emitToDetail'])
 
@@ -87,10 +87,10 @@ const toDetail = (id) => {
 }</pre>
         </dd>
         <dd>父组件 - 接收并响应事件；数据略</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;List :lists="lists" @emit-to-detail="doDetail"&gt;&lt;/List&gt;</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 let lists = ref([''])
 const doDetail = (e) => {
@@ -103,7 +103,7 @@ const doDetail = (e) => {
             <img src="./imgs/emit1.png" alt="">
         </dd>
         <dd>父组件</dd>
-        <dd class="code">
+        <dd>
             <pre>
 //传递给子组件的数据
 let like = ref(0)
@@ -114,11 +114,11 @@ const incLike = (e) => {
   like.value = e
 }</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;Like :propLike="like" @emit-inc="incLike" /&gt;</pre>
         </dd>
         <dd>子组件 - 接收父组件传递的参数，+1后，通过事件回传给父组件</dd>
-        <dd class="code">
+        <dd>
             <pre>
 const props = defineProps({
     propLike: Number
@@ -128,22 +128,22 @@ const incLike = () => {
     emit('emitInc', props.propLike + 1)
 }</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;div @click="incLike"&gt;&lt;span class="fa fa-heart"&gt;&lt;/span&gt; {{ propLike }}&lt;/div&gt;</pre>
         </dd>
         <dd class="example-sn">搜索组件 - 表单</dd>
         <dd>说明：采用内联事件；不推荐，仅作为知识补充</dd>
         <dd>子组件 - Sql.vue</dd>
-        <dd class="code">
+        <dd>
             <pre>const emits = defineEmits(['emitIpt'])</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;input type="text" @input="$emit('emitIpt', $event.target.value)"&gt;
 &lt;input type="text" @input="(e) => $emit('emitIpt', e.target.value)"&gt;</pre>
         </dd>
         <dd>父组件</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;Sql @emit-inc="(e) => console.log(e)" /&gt;
 &lt;Sql @emit-inc="console.log($event)" /&gt;</pre>

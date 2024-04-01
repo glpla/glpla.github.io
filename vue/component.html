@@ -29,7 +29,7 @@
             <div>子组件 - Model.vue</div>
             <p>声明的常量model可以是任意合法标识符</p>
             <p>defineModel()默认绑定的是v-model；可以指定参数，见后续内容</p>
-            <pre class="code">
+            <pre>
 &lt;script setup&gt;
     const model = defineModel()
     
@@ -40,7 +40,7 @@
     &lt;div @click="update"&gt;{{ model }}&lt;/div&gt;
 &lt;/template&gt;</pre>
             <div>父组件 - App.vue</div>
-            <pre class="code">
+            <pre>
 &lt;script setup&gt;
     import { ref } from 'vue';
     import Model from './components/Model.vue';
@@ -53,7 +53,7 @@
 &lt;/template&gt;</pre>
         </dd>
         <dt>表单组件的双向绑定</dt>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;template&gt;
     &lt;input type="text" v-model="msg"&gt;
@@ -63,35 +63,35 @@
         <dd>声明 "modelValue" prop，由父组件通过 v-model 使用</dd>
         <dd>可以指定参数创建双向绑定</dd>
         <dd>1. 子组件 - 声明时传入参数title</dd>
-        <dd class="code">
+        <dd>
             <pre>const model = defineModel('title')</pre>
         </dd>
         <dd>2. 父组件 - 使用参数title</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;Model v-model:title="count" /&gt;</pre>
         </dd>
         <dt>多个 v-model 绑定</dt>
         <dd>声明多个带参数的defineModel实现</dd>
         <dd>1. 子组件</dd>
-        <dd class="code">
+        <dd>
             <pre>
 const first = defineModel('first')
 const last = defineModel('last')</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;input type="text" v-model="first"&gt;
 &lt;input type="text" v-model="last"&gt;</pre>
         </dd>
         <dd>2. 父组件</dd>
-        <dd class="code">
+        <dd>
             <pre>
 let user = ref({
     first: 'gl',
     last: 'cn'
 })</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;Model v-model:first="user.first" v-model:last="user.last" /&gt;</pre>
         </dd>
     </dl>
@@ -103,7 +103,7 @@ let user = ref({
         <dd class="example-sn">点赞组件 - 双向绑定版</dd>
         <dd class="number">
             <div>调整后的子组件 - 逻辑</div>
-            <pre class="code">
+            <pre>
 const props = defineProps({
     modelValue: Number
 })
@@ -112,26 +112,25 @@ const incLike = () => {
     emit('update:modelValue', props.modelValue + 1)
 }</pre>
             <div>调整后的子组件 - 结构</div>
-            <pre
-                class="code">&lt;div @click="incLike"&gt;&lt;span class="fa fa-heart"&gt;&lt;/span&gt; {{ modelValue }}&lt;/div&gt;</pre>
+            <pre>&lt;div @click="incLike"&gt;&lt;span class="fa fa-heart"&gt;&lt;/span&gt; {{ modelValue }}&lt;/div&gt;</pre>
             <div>调整后的父组件 - 逻辑</div>
-            <pre class="code">let msg = ref(0)</pre>
+            <pre>let msg = ref(0)</pre>
             <div>调整后的父组件 - 结构</div>
-            <pre class="code">&lt;List v-model="msg"&gt;&lt;/List&gt;</pre>
+            <pre>&lt;List v-model="msg"&gt;&lt;/List&gt;</pre>
         </dd>
         <dt>多属性双向绑定</dt>
         <dd>使用修饰符区分不同的属性；使用冒号:不是点.</dd>
         <dd>父组件</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;List v-model:msg="msg" v-model:tips="tips"&gt;&lt;/List&gt;</pre>
         </dd>
         <dd>子组件</dd>
-        <dd class="code">
+        <dd>
             <pre>
 const props = defineProps(['msg', 'tips'])
 const emits = defineEmits(['update:msg', 'update:tips'])</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;input type="text" :value="msg" @input="$emit('update:msg', $event.target.value)"&gt;
 &lt;input type="text" :value="tips" @input="$emit('update:tips', $event.target.value)"&gt;</pre>

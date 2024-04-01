@@ -32,7 +32,7 @@
         <dd>可以传递简单数据，也可以传递对象</dd>
         <dd>使用延时查看响应数据的变化</dd>
         <dd>顶级组件使用provide提供数据</dd>
-        <dd class="code">
+        <dd>
             <pre>
 import {provide} from 'vue'
 
@@ -40,7 +40,7 @@ provide('key0', data)
 provide('key1', dataRef.value)</pre>
         </dd>
         <dd>底层组件使用inject接收数据</dd>
-        <dd class="code">
+        <dd>
             <pre>
 import {inject} from 'vue'
 
@@ -51,7 +51,7 @@ let para = inject('key1')</pre>
         <dd>底层组件可以使用顶层组件的方法修改顶层组件的数据；虽然有悖于数据流的单向原则，但是仍然遵循了谁的数据谁修改的原则</dd>
         <dd>顶级组件使用provide提供已经定义好的方法doGreeting</dd>
         <dd>用你提供的方法修改你的数据</dd>
-        <dd class="code">
+        <dd>
             <pre>
 function doGreeting() {
     refDate.value++
@@ -60,7 +60,7 @@ provide('doGreetingFn', doGreeting)</pre>
         </dd>
         <dd>底层组件使用inject接收传递的方法，并在事件处理函数fn中实现；fn是普通点击事件</dd>
         <dd>doGreet接收传递来的方法，要执行，必须使用()</dd>
-        <dd class="code">
+        <dd>
             <pre>
 let doGreet = inject('doGreetingFn')
 //直接执行
@@ -71,19 +71,19 @@ function fn() {
 }</pre>
         </dd>
         <dd>或直接在结构中使用传递的方法</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;div @click="doGreet"&gt;直接使用 fn&lt;/div&gt;</pre>
         </dd>
         <dd class="example-sn">全局使用axios</dd>
         <dd>入口文件引入定义main.js</dd>
-        <dd class="code">
+        <dd>
             <pre>
 import axios from 'axios'
 
 app.provide('axios',axios)</pre>
         </dd>
         <dd>组件中使用</dd>
-        <dd class="code">
+        <dd>
             <pre>let axios = inject('axios')</pre>
         </dd>
         <dt>兄弟组件之间的通信 - todo</dt>

@@ -73,43 +73,43 @@
     <dl>
         <dt>&lt;input&gt; - text</dt>
         <dd>单行文本输入</dd>
-        <dd class="code">
+        <dd>
             <pre>let msg = ref('')</pre>
         <dd>
         <dd>传统方式 - 通过事件和属性绑定实现双向绑定；这里采用内联事件|行内事件</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;input type="text" @input="msg = $event.target.value" :value="msg" required&gt;
 &lt;input type="text" @input="(e) => { msg = e.target.value }" :value="msg" required&gt;
 &lt;div&gt;{{ msg }}&lt;/div&gt;</pre>
         </dd>
         <dd>双向绑定</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;input type="text" v-model="msg" required&gt;
 &lt;div&gt;{{ msg }}&lt;/div&gt;</pre>
         </dd>
         <dt>&lt;textarea&gt;</dt>
         <dd>留言、评论</dd>
-        <dd class="code">
+        <dd>
             <pre>let msg = ref('')</pre>
         </dd>
         <dd>传统方式 - 通过事件和属性绑定实现双向绑定；这里采用内联事件|行内事件</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;textarea @input="(e) => { msg = e.target.value }" :value="msg" required&gt;&lt;/textarea&gt;
 &lt;div&gt;{{msg}}&lt;/div&gt;
 </pre>
         </dd>
         <dd>双向绑定</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;textarea v-model="msg" required&gt;&lt;/textarea&gt;
 &lt;div"&gt;{{msg}}&lt;/div&gt;
 </pre>
         </dd>
         <dd>不可以使用插值表达式{{}}</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;textarea v-model="msg" required&gt;{{msg}}&lt;/textarea&gt;</pre>
         </dd>
         <dd class="tips">text类型的&lt;input&gt;和&lt;textarea&gt;绑定的是 value 属性 并侦听 input 事件</dd>
@@ -117,18 +117,18 @@
         <dd>单选；多选一</dd>
         <dd>不指定value的话，只能获取单选框的选中状态是否为on</dd>
         <dd>值为静态数据male、female</dd>
-        <dd class="code">
+        <dd>
             <pre>let gender = ref('')</pre>
         </dd>
         <dd>传统方式</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;input type="radio" name="gender" value="male" @change="(e) => gender = e.target.value"&gt;male
 &lt;input type="radio" name="gender" value="female" @change="(e) => gender = e.target.value"&gt;female
 &lt;div&gt;{{ gender }}&lt;/div&gt;</pre>
         </dd>
         <dd>双向绑定 - 选项都绑定gender</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;input type="radio" name="gender" value="male" v-model="gender"&gt;male
 &lt;input type="radio" name="gender" value="female" v-model="gender"&gt;female
@@ -139,11 +139,11 @@
         <dd>一般情况下，需要指定value，否则只能获取复选框的选中状态是否为on</dd>
         <dd>值为静态数据：code、sing、game、read</dd>
         <dd>like是数组类型，不能是字符串</dd>
-        <dd class="code">
+        <dd>
             <pre>let like = ref([])</pre>
         </dd>
         <dd>传统方式</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;input type="checkbox" name="ulike" @change="sel" value="code"&gt;code
 &lt;input type="checkbox" name="ulike" @change="sel" value="sing"&gt;sing
@@ -151,14 +151,14 @@
 &lt;input type="checkbox" name="ulike" @change="sel" value="read"&gt;read
 &lt;div&gt;{{ like }}&lt;/div&gt;</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 const sel = (e) => {
     e.target.checked ? like.value.push(e.target.value) : like.value = like.value.filter(item => item !== e.target.value)
 }</pre>
         </dd>
         <dd>双向绑定 - 选项都绑定like</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;input type="checkbox" name="ulike" v-model="like" value="code"&gt;code
 &lt;input type="checkbox" name="ulike" v-model="like" value="sing"&gt;sing
@@ -168,11 +168,11 @@ const sel = (e) => {
         </dd>
         <dd class="tips">&lt;radio类型的input&gt;和checkbox类型的&lt;input&gt;绑定的是 checked 属性 并侦听 change 事件</dd>
         <dd>使用须知、记住密码 - 使用单个复选框实现；不需要指定value，需要的只是是否选中</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;label&gt;&lt;input type="checkbox" v-model="isAgree"&gt;已阅读并同意服务条款&lt;/label&gt;</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>let isAgree = ref(false)</pre>
         </dd>
         <dt>&lt;select&gt;</dt>
@@ -184,7 +184,7 @@ const sel = (e) => {
             <option value='3'>3</option>
         </select>
         <div>{{ like }}</div> -->
-        <dd class="code">
+        <dd>
             <pre>
 &lt;select v-model = 'sel'&gt;
     &lt;option value='1'&gt;1&lt;/option&gt;
@@ -203,7 +203,7 @@ const sel = (e) => {
         <dd>采用值绑定，可以拓展逻辑；如性别单选中，非男即女，是对立的两个状态；绑定后，响应式数据可以任意指定，甚至可以是完全不相关的场合</dd>
         <dd>多用于单选、多选和下拉列表</dd>
         <dt>&lt;input&gt; - radio</dt>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;input type="radio" id="male" v-model="ugender" :value="maleVal"&gt;
 &lt;label for="male"&gt;male&lt;/label&gt;
@@ -211,7 +211,7 @@ const sel = (e) => {
 &lt;label for="female"&gt;female&lt;/label&gt;</pre>
         </dd>
         <dd>为两个状态指定响应式数据，可以是任何值，而不是简单的静态male和female</dd>
-        <dd class="code">
+        <dd>
             <pre>
 let ugender = ref('')
 let maleVal = reactive({

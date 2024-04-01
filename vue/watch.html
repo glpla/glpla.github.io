@@ -22,8 +22,9 @@
         <dd>监听响应式数据源；当数据源发送变化时，在回调函数中处理响应的逻辑</dd>
         <dd>使用 watch 函数在每次响应式状态发生变化时触发回调函数</dd>
         <dd>侦听的是响应式数据，不能直接侦听响应式数据的属性</dd>
+        <dd>更多信息，请访问<a href="https://cn.vuejs.org/api/reactivity-core.html#watch" class="link">watch()</a></dd>
         <dd>需引入包 watch</dd>
-        <dd class="code">
+        <dd>
             <pre>import { watch } from 'vue'</pre>
         </dd>
         <dt>参数</dt>
@@ -55,7 +56,7 @@
     <dl>
         <dt>侦听 ref - 一个简单数据</dt>
         <dd>当单击执行增加函数inc时，Vue可以检测到num的变化，从而做出反应；如商品数量增加或减少时，总价发现变化</dd>
-        <dd class="code">
+        <dd>
             <pre>
 let num = ref(0)
 const inc = () =>{
@@ -66,7 +67,7 @@ watch(num, (newv, oldv) => {
 })</pre>
         </dd>
         <dd>如果侦听num.value，则会提示</dd>
-        <dd class="code">
+        <dd>
             <pre>Invalid watch source:  0 A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.at ... </pre>
         </dd>
         <dt>侦听 ref - 多个简单数据</dt>
@@ -74,7 +75,7 @@ watch(num, (newv, oldv) => {
         <dd>以数组的形式 <span class="warn">分别</span> 表示多个数据源：1个数据源变成多个数据源</dd>
         <dd>以数组的形式 <span class="warn">分别</span> 显示新值和旧值：1个新值变成多个新值；一个旧值变成多个旧值</dd>
         <dd>信用卡年费免除：消费达到一定金额(10000)或消费多少次(6)，免除当年年费</dd>
-        <dd class="code">
+        <dd>
             <pre>
 let times = ref(0)
 let sum = ref(0)
@@ -92,7 +93,7 @@ watch([times, sum], ([new1, new2], [old1, old2]) => {
         <dd>侦听复合数据，需开启深度侦听：设置deep为true</dd>
         <dd>任一属性变化都会被Vue捕获；但是变化前后都是同一个对象；所以newv和oldv是一样的，其内部的属性也是一样的</dd>
         <dd>结论：仅仅知道数据属性发生变化，无法获知前后变化情况</dd>
-        <dd class="code">
+        <dd>
             <pre>
 let user = ref({
     id: 100,
@@ -112,7 +113,7 @@ watch(user, (newv, oldv) => {
         <dd>利用函数获取侦听属性 - <span class="warn">注意</span> 官文没有使用value！！！</dd>
         <dd>无需开启deep</dd>
         <dd>age变化时，触发侦听；code变化时，不触发</dd>
-        <dd class="code">
+        <dd>
             <pre>
 watch(() => user.value.age, (n, o) => {
     console.log(o, n);
@@ -126,7 +127,7 @@ watch(() => user.value.age, (n, o) => {
         <dd>新值旧值是reactive对象，变化前后都是同一个对象；所以newv和oldv是一样的，其内部的属性也是一样的</dd>
         <dd>体会对象的引用特性</dd>
         <dd>结论：可以捕获到数据属性变化，但是无法查看属性前后的变化</dd>
-        <dd class="code">
+        <dd>
             <pre>
 let user = reactive({
     id: 100,
@@ -147,7 +148,7 @@ const incAge = () => {
         </dd>
         <dt>侦听 reactive - 捕获属性前后变化</dt>
         <dd>利用函数获取侦听的属性 - 简单属性</dd>
-        <dd class="code">
+        <dd>
             <pre>
 watch(() => user.age, (newv, oldv) => {
     console.log(oldv, newv);
@@ -155,14 +156,14 @@ watch(() => user.age, (newv, oldv) => {
 </pre>
         </dd>
         <dd>利用函数获取侦听的属性 - 复合属性</dd>
-        <dd class="code">
+        <dd>
             <pre>
 watch(() => user.addr.code, (n, o) => {
     console.log(o, n);
 })</pre>
         </dd>
         <dt>侦听 reactive - 多个属性变化</dt>
-        <dd class="code">
+        <dd>
             <pre>
 watch([() => user.age, () => user.addr.code], ([n0, n1], [o0, o1]) => {
     console.log(o0, n0, o1, n1);
@@ -172,6 +173,16 @@ watch([() => user.age, () => user.addr.code], ([n0, n1], [o0, o1]) => {
     <div class="chap">立即侦听</div>
     <dl>
         <dd>设置配置项immediate为true；其它使用同上</dd>
+    </dl>
+    <div class="chap">停止侦听器</div>
+    <dl>
+        <dd>
+            <pre>
+const stop = watch(source, callback)
+
+// 当已不再需要该侦听器时：
+stop()</pre>
+        </dd>
     </dl>
     <dl>
         <dd class="example-sn">购物车</dd>

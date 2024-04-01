@@ -27,7 +27,7 @@
   <dl>
     <dt>预备知识</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>]获取视口大小-缩放浏览器、最大化、最小化，结果相应变化</dd>
-    <dd class="code">
+    <dd>
       <pre>
 let w = document.documentElement.clientWidth;
 let h = document.documentElement.clientHeight;
@@ -39,13 +39,13 @@ console.log(w, h);</pre>
     <dd>
       .查看屏幕大小：真机上，微信扫码为400*867[宽度一致，高度不一致，是因为视口高度+上方的标题栏+下方的状态栏=屏幕宽度]；浏览器输入地址查看360*780[原理相同]；之所以微信扫码结果比浏览器宽度大，是因为浏览器有40px的滚动条；所以移动端开发，通常会指定最小宽度为320px
     </dd>
-    <dd class="code">
+    <dd>
       <pre>
 let sw = window.screen.width;
 let sh = window.screen.height;</pre>
     </dd>
     <dd>移动端容器最小尺寸</dd>
-    <dd class="code">
+    <dd>
       <pre>min-width: 320px;</pre>
     </dd>
   </dl>
@@ -54,7 +54,7 @@ let sh = window.screen.height;</pre>
     <dd>.视口 viewpoint</dd>
     <dd>.约束&lt;html&gt;的大小</dd>
     <dd>.显示内容，和浏览器窗口大小一致；不包括底部的状态栏和顶部的菜单栏和地址栏</dd>
-    <dd class="code">
+    <dd>
       <pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</pre>
     </dd>
     <dd>
@@ -91,7 +91,7 @@ let sh = window.screen.height;</pre>
     <dd>.width指浏览器的屏幕宽度；通常认为和设备宽度保持一致，不做区分，特别是移动端[你在移动端对浏览器进行过最大最小化操作吗？]</dd>
     <dd>.device-width指设备屏幕的宽度，对于特定的设备，宽度是固定的</dd>
     <dd>.如果修改视口大小为300，则真机调试的结果也为300，所以默认情况下，设置浏览器的宽度等于设备屏幕的宽度</dd>
-    <dd class="code">
+    <dd>
       <pre>&lt;meta name="viewport" content="width=300, initial-scale=1.0"&gt;</pre>
     </dd>
   </dl>
@@ -111,7 +111,7 @@ let sh = window.screen.height;</pre>
     <dd class="example-sn">响应式版心</dd>
     <dd>方案1：使用max-width</dd>
     <dd>
-      <pre class="code">
+      <pre>
 main {
   width: calc(100% - 1rem);
   max-width: 800px;
@@ -120,7 +120,7 @@ main {
     </dd>
     <dd>方案2：使用min()函数</dd>
     <dd>
-      <pre class="code">
+      <pre>
 main {
   width: min(800px, 100% - 1rem);
   margin: 0 auto;
@@ -128,7 +128,7 @@ main {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>]设置字体大小</dd>
     <dd>方案1：静态设置 - 为方便计算，通常设置html字体大小为62.5%：1rem=10px</dd>
-    <dd class="code">
+    <dd>
       <pre>
 html {
     //font-size: 10px;
@@ -139,7 +139,7 @@ html {
     <dd>方案2：动态设置 - 根据视口宽度设置字体大小</dd>
     <dd>超过750，按750计算；小于320，按320计算</dd>
     <dd>放在脚本放在&lt;header&gt;，优先处理</dd>
-    <dd class="code">
+    <dd>
       <pre>
 function rem() {
   let dw = document.documentElement.clientWidth || window.innerWidth
@@ -166,7 +166,7 @@ window.onresize = function () {
     <dd>.应用场合不同：all所有设备、screen屏幕、print打印、speech屏幕阅读器/发声设备等；默认是屏幕screen</dd>
     <dd>.移动端和桌面端屏幕的尺寸不同</dd>
     <dd>.在&lt;head&gt;引入视口viewport；VS Code默认html页面已提供；其它开发环境注意确认是否有</dd>
-    <dd class="code">
+    <dd>
       <pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</pre>
     </dd>
     <dt>断点 breakpoint</dt>
@@ -213,7 +213,7 @@ window.onresize = function () {
     <dd>.使用关系运算符：&lt;=、&gt;=等等；可读性更好；请在Can I Use查看media query中范围range的支持情况</dd>
     <dt>桌面端优先</dt>
     <dd>.使用max-width时，从默认的大尺寸向小尺寸过渡</dd>
-    <dd class="code">
+    <dd>
       <pre>
 //默认是大尺寸 large... ...
 
@@ -231,7 +231,7 @@ window.onresize = function () {
     </dd>
     <dt>移动端优先</dt>
     <dd>.使用min-width时，从默认的小尺寸向大尺寸过渡</dd>
-    <dd class="code">
+    <dd>
       <pre>
 //默认是小尺寸 small... ...
 
@@ -253,7 +253,7 @@ window.onresize = function () {
 </pre>
     </dd>
     <dt>其他使用</dt>
-    <dd class="code">
+    <dd>
       <pre>
 //使用关键字
 @media screen AND (min-width:768px) AND (max-width:992px) {
@@ -289,7 +289,7 @@ window.onresize = function () {
   <dl class="nav-cont">
     <dt>外部样式</dt>
     <dd>. 在HTML中根据媒体尺寸动态引入link对应的外部CSS文件</dd>
-    <dd class="code">
+    <dd>
       <pre>
 &lt;link rel="stylesheet" media="screen and (min-width:1201px)" href="./media_large.css"&gt;
 &lt;link rel="stylesheet" media="screen and (max-width:1200px)" href="./media_medium.css"&gt;
@@ -297,7 +297,7 @@ window.onresize = function () {
 &lt;link rel="stylesheet" media="screen and (max-width:768px)" href="./media_small.css"&gt;</pre>
     </dd>
     <dd>. 在主样式文件app.css引入响应的CSS文件</dd>
-    <dd class="code">
+    <dd>
       <pre>
 @import url(./css/media_large.css);
 @import url(./css/media_medium.css) only screen and (max-width:1200px);
@@ -306,7 +306,7 @@ window.onresize = function () {
     </dd>
     <dt>内部样式</dt>
     <dd>. 根据媒体尺寸在&lt;style&gt;直接编辑内部样式；多见于练习</dd>
-    <dd class="code">
+    <dd>
       <pre>
 &lt;style&gt;
   body {
@@ -333,7 +333,7 @@ window.onresize = function () {
 &lt;/style&gt;</pre>
     </dd>
     <dd>. 根据媒体尺寸在不同的&lt;style&gt;编辑内部样式；使用不多</dd>
-    <dd class="code">
+    <dd>
       <pre>
 &lt;style&gt;
   body {
@@ -369,7 +369,7 @@ window.onresize = function () {
     <dd>.&le;992px，显式2列</dd>
     <dd>.&le;768px，显式1列</dd>
     <dd>
-      <figure class="code">
+      <figure>
         <figcaption>HTML</figcaption>
         <pre>
 &lt;div class="wrap"&gt;
@@ -383,7 +383,7 @@ window.onresize = function () {
       </figure>
     </dd>
     <dd>方案1：使用grid实现 - 桌面优先</dd>
-    <dd class="code">
+    <dd>
       <pre>
 .wrap {
   display: grid;
@@ -410,7 +410,7 @@ window.onresize = function () {
 }</pre>
     </dd>
     <dd>方案 2：使用%实现 - 移动优先；采用了float，记得清楚浮动</dd>
-    <dd class="code">
+    <dd>
       <pre>
 .wrap img {
   float: left;

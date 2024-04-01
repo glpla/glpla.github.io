@@ -24,7 +24,7 @@
                 class="link">HTML5事件代理</a>、<a href="../minip/events.html" class="link">微信小程序事件</a></dd>
         <dt>事件监听 v-on</dt>
         <dd>使用 v-on 指令 (简写为<span class="warn">@</span>) 来监听 DOM 事件，并在事件触发时执行对应的 JavaScript|事件处理函数</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;div v-on:click="doSomething"&gt; ... &lt;/div&gt;
 &lt;div @click="doSomething"&gt; ... &lt;/div&gt;</pre>
@@ -109,14 +109,14 @@
         </dd>
         <dd class="example-sn">冒泡和捕获 - 决定事件执行的顺序</dd>
         <dd>事件冒泡 Bubbling - <span class="warn">默认</span>行为；单击inner，目标inner先执行，然后冒泡到outer执行</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;div class="outer" @click="doOut"&gt;
     &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
         </dd>
         <dd>事件捕获 Capturing - 单击inner，先被outer捕获执行，再传播到目标inner执行</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;div class="outer" @click.capture="doOut"&gt;
     &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
@@ -129,28 +129,28 @@
         <div>
             单击inner：首先inner响应事件，所以target和currentTarget都是inner；然后事件冒泡到outer，outer响应的是inner绑定的事件，所以target是inner，currentTarget是outer
         </div>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;div class="outer" @click="doOut"&gt;
     &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
         </dd>
         <dd>如果inner指定stop，事件不会冒泡到outer</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;div class="outer" @click="doOut"&gt;
     &lt;div class="inner" @click.stop="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
         </dd>
         <dd>如果outer指定self，仅仅响应我自己绑定的事件 - 自嗨模式，不会响应inner冒泡的事件：target是我，事件处理器不来自子元素</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;div class="outer" @click.self="doOut"&gt;
     &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
         </dd>
         <dd class="example-sn">表单提交时不刷新页面</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;form @submit.prevent="submit"&gt;
     &lt;input type="text" placeholder="your name"&gt;
@@ -191,41 +191,41 @@
         <dt>事件应用</dt>
         <dd>0. 内联事件</dd>
         <dd>适合简单逻辑</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;div @click="console.log('hi')"&gt;console log&lt;/div&gt;</pre>
         </dd>
         <dd>单击，count加1；count要使用才可以响应；否则仅仅利用vue devTool数据无法响应</dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;div @click="count++"&gt;do something&lt;/div&gt;
 &lt;div&gt;使用数据{{count}}&lt;/div&gt;</pre>
         </dd>
         <dd>1. 普通事件 - 无参</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;div @click="doClick"&gt;do something&lt;/div&gt;</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 function doClick() {
     console.log('hello,world');
 }</pre>
         </dd>
         <dd>2. 携带参数</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;div @click="doClickPara('18')"&gt;do something with para&lt;/div&gt;</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 function doClickPara(para) {
     console.log(para);
 }</pre>
         </dd>
         <dd>3. 使用事件对象对应的target获取自定义属性data-</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;div @click="doClickData" data-id="101"&gt;do something with data-&lt;/div&gt;</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 function doClickData(e) {
     console.log(e.target.dataset);
@@ -234,10 +234,10 @@ function doClickData(e) {
         <dd>4. 使用参数且使用自定义属性</dd>
         <dd>结构中需要使用特殊变量$event以便和普通参数区分开来</dd>
         <dd>js中使用任意形参代替特殊变量$event</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;div @click="doClickParaData('18', $event)" data-id="101"&gt;do something with para and data-&lt;/div&gt;</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 function doClickData(para,e) {
     console.logpara(para, e.target.dataset);
@@ -247,7 +247,7 @@ function doClickData(para,e) {
         <dd>单击时，切换图片</dd>
         <dd>额外增加一个元素，显示当前图片</dd>
         <dd>图片采用静态资源处理；放在assets目录下的imgs中</dd>
-        <dd class="code">
+        <dd>
             <pre>
 import { ref } from 'vue';
 let ind = ref(0)
@@ -259,7 +259,7 @@ const getPic = (ind) => {
   return new URL(`./assets/imgs/${ind}.jpg`, import.meta.url).href
 }</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 &lt;div&gt;{{ ind }}&lt;/div&gt;
 &lt;img :src='getPic(ind)' alt=""&gt;

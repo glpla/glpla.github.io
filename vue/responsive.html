@@ -38,19 +38,19 @@
         <dd>ref 的 .value 属性是响应式</dd>
         <dd></dd>
         <dd>1. 引入包 ref - 下述各例略</dd>
-        <dd class="code">
+        <dd>
             <pre>import { ref } from 'vue'</pre>
         </dd>
         <dd>2. 声明响应式变量 - 执行函数、传入参数、变量接收</dd>
-        <dd class="code">
+        <dd>
             <pre>const count = ref(0)</pre>
         </dd>
         <dd>3.1 结构中使用 - 直接使用，vue会自动获取其value</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;div>{{count}}&lt;/div></pre>
         </dd>
         <dd>3.2 逻辑中使用 - 赋值时需额外指定value属性，其它情况直接使用，如监听；可以由开发环境的插件自动补齐value属性</dd>
-        <dd class="code">
+        <dd>
             <pre>
 console.log(count)
 console.log(count.value)</pre>
@@ -60,11 +60,11 @@ console.log(count.value)</pre>
         <dd>只能创建<span class="warn">复合数据类型</span>的响应式数据，如对象、数组</dd>
         <dd>不用指定value属性</dd>
         <dd>1. 引入包 reactive - 下述各例略</dd>
-        <dd class="code">
+        <dd>
             <pre>import { reactive } from 'vue'</pre>
         </dd>
         <dd>2. 声明响应式变量 - 执行函数、传入参数、变量接收</dd>
-        <dd class="code">
+        <dd>
             <pre>
 const obj = reactive({
     id: 10,
@@ -72,15 +72,15 @@ const obj = reactive({
 })            </pre>
         </dd>
         <dd><span class="warn">不能</span> 声明简单数据类型 - value cannot be made reactive: 10</dd>
-        <dd class="code">
+        <dd>
             <pre>const count = reactive(10)</pre>
         </dd>
         <dd>3.1. 结构中使用</dd>
-        <dd class="code">
+        <dd>
             <pre>&lt;div>{{obj.id}} - {{obj.name}}&lt;/div></pre>
         </dd>
         <dd>3.2. 逻辑中使用 - 只能单个属性赋值</dd>
-        <dd class="code">
+        <dd>
             <pre>
 const done = () => {
     obj.id = 20
@@ -89,7 +89,7 @@ console.log(obj)</pre>
         </dd>
         <dd class="tips">控制台输出，查看响应式变量的细节</dd>
         <dd><span class="warn">不能</span> 重新赋值|分配对象，否则就失去响应式</dd>
-        <dd class="code">
+        <dd>
             <pre>
 const done = () => {
     obj = {
@@ -99,7 +99,7 @@ const done = () => {
 }</pre>
         </dd>
         <dd>解决方案1：可以使用对象的分配方法，更新数据</dd>
-        <dd class="code">
+        <dd>
             <pre>
 const done = () => {
     Object.assign(obj,{
