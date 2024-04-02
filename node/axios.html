@@ -36,7 +36,7 @@
     <dt>基本过程</dt>
     <dd>1. 安装 - 在项目目录安装</dd>
     <dd class="code">
-      <pre>npm i axios --save</pre>
+      <pre>>npm i axios --save</pre>
     </dd>
     <dd>2. 引入 - 在项目中引入，并根据需要指定默认参数，如baseURL、params、method、header、timeout；baseURL应和数据服务器的地址保持一致</dd>
     <dd class="code">
@@ -56,39 +56,10 @@ axios.defaults.baseURL = 'http://localhost:3000'</pre>
       <pre>
 &lt;script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"&gt;&lt;/script&gt;</pre>
     </dd>
-    <dt>请求方式</dt>
-    <dd>分：promise和async/await两种风格</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>Promise - get</figcaption>
-        <pre>
-axios.get('/user?ID=12345')
-  .then((response) => {
-    // 处理成功情况
-    console.log(response);
-  })
-  .catch((error) => {
-    // 处理错误情况
-    console.log(error);
-  })
-  .finally(() => {
-    // 总是会执行
-})</pre>
-      </figure>
-      <figure class="code">
-        <figcaption>async/await - get</figcaption>
-        <pre>
-async function getUser() {
-  try {
-    const response = await axios.get('/user?ID=12345');
-    console.log(response);
-  } catch (error) {
-    console.error(error);
-  }
-}        </pre>
-      </figure>
-    </dd>
-    <dt>GET 基本过程</dt>
+  </dl>
+  <div class="chap">基本过程</div>
+  <dl>
+    <dt>获取 GET</dt>
     <dd class="code">
       <pre>
 axios.get(baseURL + '/cont')
@@ -102,7 +73,7 @@ axios.get(baseURL + '/cont')
     console.log('done for log');
   })</pre>
     </dd>
-    <dt>POST 基本过程</dt>
+    <dt>增加 POST</dt>
     <dd>默认是json，所以略去了请求头header</dd>
     <dd class="code">
       <pre>
@@ -122,7 +93,7 @@ axios.post(baseURL + '/cont', {
     console.log('done for log');
   })      </pre>
     </dd>
-    <dt>DELETE 基本过程</dt>
+    <dt>删除 DELETE</dt>
     <dd>根据id删除</dd>
     <dd class="code">
       <pre>
@@ -137,7 +108,7 @@ axios.delete(baseURL + '/cont/a606')
     console.log('done for log');
   })</pre>
     </dd>
-    <dt>PATCH 基本过程</dt>
+    <dt>修改 PATCH</dt>
     <dd>根据id和数据完成修改</dd>
     <dd class="code">
       <pre>
@@ -153,6 +124,37 @@ axios.patch(baseURL + '/cont/2147', {
   .finally(() => {
     console.log('done for log');
   })      </pre>
+    </dd>
+  </dl>
+  <div class="chap">请求方式</div>
+  <dl>
+    <dt>承诺 promise</dt>
+    <dd>
+      <pre>
+axios.get('/user?ID=12345')
+  .then((response) => {
+    // 处理成功情况
+    console.log(response);
+  })
+  .catch((error) => {
+    // 处理错误情况
+    console.log(error);
+  })
+  .finally(() => {
+    // 总是会执行
+})</pre>
+    </dd>
+    <dt>异步等待 async/await</dt>
+    <dd>
+      <pre>
+async function getUser() {
+  try {
+    const response = await axios.get('/user?ID=12345');
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  }
+}        </pre>
     </dd>
   </dl>
   <div class="chap">趣味应用 application</div>
