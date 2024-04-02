@@ -21,7 +21,7 @@
   <dl>
     <dd>从一个服务域请求另外一个服务器</dd>
     <dd>为开发服务器配置自定义代理规则。期望接收一个 { key: options } 对象。任何请求路径以 key 值开头的请求将被代理到对应的目标</dd>
-    <dd class="code">
+    <dd>
       <pre>
 proxy: {
   "key": "options"
@@ -42,7 +42,7 @@ proxy: {
   <div class="chap">前端处理</div>
   <dl>
     <dd>修改项目vite.config.js中的服务器server配置，增加对访问接口的代理 - 将所有以/store开头的请求，代理到http://127.0.0.1:3000</dd>
-    <dd class="code">
+    <dd>
       <pre>
 server: {
   // open: false,
@@ -57,42 +57,44 @@ server: {
   }
 }</pre>
     </dd>
-    <dd>开启重写rewrite，请求时要额外指定请求前缀，但是会被替换为空；主要起到分类的作用</dd>
-    <dd>访问跟路由，请求为：</dd>
-    <dd class="code">
+    <dd>开启重写rewrite，请求时要 <span class="warn">额外</span> 指定请求路径前缀串，但是会被替换为空；主要起到 <span class="warn">分类</span> 的作用</dd>
+    <dd class="tips">先拼接再替换；替换请求中的同名串</dd>
+    <dd>请求为：</dd>
+    <dd>
       <pre>/store</pre>
     </dd>
-    <dd>解析为</dd>
-    <dd class="code">
-      <pre>/</pre>
+    <dd>拼接为</dd>
+    <dd>
+      <pre>http://127.0.0.1:3000/store/</pre>
     </dd>
-    <dd>访问根路由下某个路由，请求为：</dd>
-    <dd class="code">
+    <dd>替换掉/store后，解析为</dd>
+    <dd>
+      <pre>http://127.0.0.1:3000/</pre>
+    </dd>
+    <dd>请求为：</dd>
+    <dd>
       <pre>/store/detail</pre>
     </dd>
-    <dd>解析为</dd>
-    <dd class="code">
-      <pre>/detail</pre>
+    <dd>拼接为</dd>
+    <dd>
+      <pre>http://127.0.0.1:3000/store/detail</pre>
     </dd>
-    <dd>如果不开启重写rewrite，直接请求，不用解析</dd>
-    <dd class="code">
-      <pre>/</pre>
-    </dd>
-    <dd class="code">
-      <pre>/detail</pre>
+    <dd>替换掉/store后，解析为</dd>
+    <dd>
+      <pre>http://127.0.0.1:3000/detail</pre>
     </dd>
     <dd class="example-sn">王者荣耀英雄资料数据抓取代理</dd>
     <dd>添加一个代理</dd>
-    <dd class="code">
+    <dd>
       <pre>
 '/api': {
   target: 'https://pvp.qq.com',
   changeOrigin: true,
-  // rewrite: (path) => path.replace(/^\/api/, '')
+  rewrite: (path) => path.replace(/^\/api/, '')
 }</pre>
     </dd>
     <dd>网络请求</dd>
-    <dd class="code">
+    <dd>
       <pre>
 axios.get('/api/web201605/js/herolist.json').then(res => {
   console.log(res);
@@ -109,6 +111,10 @@ router.get('/all', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*')
   res.send(food.cont)
 })</pre>
+    </dd>
+    <dd>或设置指定的地址</dd>
+    <dd>
+      <pre>res.header('Access-Control-Allow-Origin', 'http://localhost:3000')</pre>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
