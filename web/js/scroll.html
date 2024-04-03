@@ -7,14 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>滚动 Scroll</title>
   <link rel="stylesheet" href="../../css/common.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
   <base target="_blank">
 </head>
 
 <body>
   <header>
-    <h1>滚动</h1><span>&commat;Scroll</span>
+    <h1>滚动</h1>
+    <span>&commat;Scroll</span>
   </header>
   <dl>
     <dd>.元素的内容超过元素的大小，且出现滚动条时|不能溢出隐藏，才会有相应的变化</dd>
@@ -30,19 +29,19 @@
     <dd>.滚动到最下面时，scrollTop为最大，滚动比例为1</dd>
     <dd>.利用这个比值，可以做一些特别设计</dd>
     <dd>1. 获取文档对象 - 返回文档document的根元素root element；对HTML文档来说，就是&lt;html&gt;</dd>
-    <dd class="code">
+    <dd>
       <pre>let html = document.documentElement</pre>
     </dd>
     <dd>2. 获取文档视口高度 - 和浏览器有关，如缩放，调试时选择不同的设备等都可以影响视口大小</dd>
-    <dd class="code">
+    <dd>
       <pre>let clientHeight = html.clientHeight</pre>
     </dd>
     <dd>3. 获取文档可滚动高度 - el.scrollHeight：可以滚动的高度；通常获取body的可滚动高度</dd>
-    <dd class="code">
+    <dd>
       <pre>let scrollHeight = html.scrollHeight || document.body.scrollHeight</pre>
     </dd>
     <dd>4. 获取文档滚动高度 - el.scrollTop：元素垂直滚动的数值：the number of pixels that an element's content is scrolled vertically.</dd>
-    <dd class="code">
+    <dd>
       <pre>let scrollTop = html.scrollTop || document.body.scrollTop</pre>
     </dd>
     <dd class="tips">
@@ -53,20 +52,17 @@
       <div>可以根据这个动态设置元素样式，如视觉差、返回顶部；IE不支持</div>
     </dd>
     <!-- <dd>为了跨浏览器兼容性，请使用 window.pageYOffset 而不是 window.scrollY</dd> -->
+    <dd>方案1：利用DOM元素：滚动事件添加在元素上</dd>
     <dd>
-      <figure class="code">
-        <figcaption>利用DOM元素：滚动事件添加在元素上</figcaption>
-        <pre>
+      <pre>
 let html = document.documentElement;
 document.addEventListener('scroll', () => {
 let per = html.scrollTop / (html.scrollHeight - html.clientHeight);
 console.log(per);})</pre>
     </dd>
-    </figure>
+    <dd>方案2：利用BOM元素：滚动事件添加在window上</dd>
     <dd>
-      <figure class="code">
-        <figcaption>利用BOM元素：滚动事件添加在window上</figcaption>
-        <pre>
+      <pre>
 window.addEventListener('scroll', fn);
 window.addEventListener('resize', fn);
 window.addEventListener('load', fn);
@@ -75,11 +71,13 @@ function fn() {
   console.log(top);
   console.log(window.scrollY);
 }</pre>
-      </figure>
     </dd>
-    <dd class="example-sn"><a href="../demo/parallax.html" class="link">视觉差</a></dd>
-    <dd>将滚动值转化为元素的定位属性</dd>
-    <dd class="code">
+  </dl>
+  <div class="chap">应用 Cases</div>
+  <dl>
+    <dd>[<span class="iconfont icon-keyboard"></span>]<a href="../demo/parallax.html" class="link">视觉差</a> -
+      将滚动值转化为元素的定位属性</dd>
+    <dd>
       <pre>
 window.addEventListener('scroll', () => {
   let val = window.scrollY;
@@ -90,9 +88,9 @@ window.addEventListener('scroll', () => {
   h1.style.marginTop = val + 'px';
 })      </pre>
     </dd>
-    <dd class="example-sn"><a href="../demo/scroll.html" class="link">滚动显示</a></dd>
-    <dd>将滚动值转化为元素的透明、缩放、位移等属性</dd>
-    <dd class="code">
+    <dd>[<span class="iconfont icon-keyboard"></span>]<a href="../demo/scroll.html" class="link">滚动显示</a> -
+      将滚动值转化为元素的透明、缩放、位移等属性</dd>
+    <dd>
       <pre>
 let lis = document.querySelectorAll('li');
 let html = document.documentElement;
@@ -110,13 +108,11 @@ document.addEventListener('scroll', () => {
   }
 })      </pre>
     </dd>
-    <dd class="example-sn"> <a href="https://codepen.io/glpla/full/QWojbYE">使用须知notice - CodePen</a>、<a
-        href="../demo/notice.html">使用须知notice</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/QWojbYE">使用须知notice -
+        CodePen</a>、<a href="../demo/notice.html">使用须知notice</a></dd>
     <dd>.阅读完才可以继续下一步</dd>
     <dd>
-      <figure class="code">
-        <figcaption>核心代码</figcaption>
-        <pre>
+      <pre>
 let tips = document.querySelector('.tips');
 let btn = document.querySelector('.btn');
 tips.addEventListener('scroll', () => {
@@ -126,11 +122,11 @@ tips.addEventListener('scroll', () => {
     btn.classList.add('active');
   }
 })</pre>
-      </figure>
     </dd>
-    <dd class="example-sn"> <a href="https://codepen.io/glpla/full/eYXpNqe">水平进度条 - CodePen</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/eYXpNqe">水平进度条 -
+        CodePen</a></dd>
     <dd>.水平方向的应用</dd>
-    <dd class="example-sn">下拉刷新 - 当滚动到一定程度时，如70%，加载更多数据</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>]下拉刷新 - 当滚动到一定程度时，如70%，加载更多数据</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

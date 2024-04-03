@@ -6,20 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>闭包 Closure</title>
-  <link rel="stylesheet" href="../css/styleNew.css">
+  <link rel="stylesheet" href="../../css/common.css">
 </head>
 
 <body>
   <header>
-    <h1>&commat;Closure</h1>
+    <h1>闭包</h1>
+    <span>&commat;Closure</span>
   </header>
   <dl>
     <dt>含义</dt>
     <dd>函数的嵌套</dd>
     <dd>在一个函数内部定义另外一个函数，并返回该内部函数；该内部函数形成闭包，可以访问外部的函数和变量</dd>
     <dt>作用</dt>
-    <dd class="number">
-      <div>.保护变量</div>
+    <dd class="sn">
+      <div>保护变量</div>
       <p>. 利用创建私有变量来保护数据、隐藏数据；外部无法直接访问，只能通过内部函数访问</p>
       <p>. 尽量少使用全局变量；避免全局变量污染环境</p>
       <p>. 通常使用return把内部变量/临时变量，如instance，暴露出去给外部使用</p>
@@ -29,9 +30,7 @@
       <div>异步操作</div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>示例</figcaption>
-        <pre>
+      <pre>
 const singleton = (function () {
   let instance;
   
@@ -41,7 +40,6 @@ const singleton = (function () {
     return instance
   }
 })()</pre>
-      </figure>
     </dd>
   </dl>
   <div class="chap">应用 </div>
@@ -91,7 +89,7 @@ console.log(fn());</pre>
   </dl>
   <div class="chap">案例 Cases</div>
   <dl>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 统计函数调用次数</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 统计函数调用次数</dd>
     <dd>传统方法：使用全局变量</dd>
     <dd>
       <pre>

@@ -5,13 +5,15 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LocalStorage</title>
-  <link rel="stylesheet" href="../css/styleNew.css">
+  <title>本地存储 LocalStorage</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <base target="_blank">
 </head>
 
 <body>
   <header>
-    <h1>&commat;LocalStorage</h1>
+    <h1>本地存储</h1>
+    <span>&commat;LocalStorage</span>
   </header>
   <dl>
     <dt>特点</dt>
@@ -20,13 +22,17 @@
     <dd>.持久化保存，除非用户主动清除</dd>
     <dd>.读取方便</dd>
     <dd>.存储容量大，约20MB</dd>
-    <dd>.存的数据都是<span class="warn">字符串String</span>！！！</dd>
     <dd>.不会出现在请求头中，可以节省带宽</dd>
     <dd>.不会被网络爬虫抓取</dd>
     <dd>.不同浏览器保存的数据不能共享</dd>
-    <dt>常用方法</dt>
+    <dd>.存的数据都是<span class="warn">字符串String</span>！！！</dd>
+    <dt>查看</dt>
+    <dd>F12 → Application → Storage → Loacal Storage</dd>
+    <dd class="tips">浏览器调试时，console.log的文字的颜色：<span style="color: #000;font-weight :700;">黑色</span>为字符串；<span
+        style="color: #369;font-weight:700;">蓝色</span>为数字</dd>
     <dd>
       <table>
+        <caption>常用方法</caption>
         <tr>
           <th>类别</th>
           <th>说明</th>
@@ -49,13 +55,10 @@
         </tr>
       </table>
     </dd>
-    <dd>还可以根据索引获取：localStorage.key(n)</dd>
-    <dt>常用属性</dt>
-    <dd>保存数据的个数：localStorage.length</dd>
-    <dt>查看</dt>
-    <dd>F12 -&gt; Application -&gt; Storage -&gt; Loacal Storage</dd>
-    <dd>提示：通过浏览器log的结果文字的颜色判断其类型：<span style="color: #000;font-weight :700;">黑色</span>为字符串；<span
-        style="color: #369;font-weight:700;">蓝色</span>为数字</dd>
+    <dd class="tips">可以根据索引获取：localStorage.key(n)</dd>
+  </dl>
+  <div class="chap">基本应用 Usage</div>
+  <dl>
     <dt>数值 Number</dt>
     <dd>
       <pre>
@@ -99,7 +102,7 @@ localStorage.setItem('arr', arr)
 res = localStorage.getItem('arr')
 console.log('after get ', res);</pre>
     </dd>
-    <dd>.存储时，使用JSON.stringify将数据处理后再保存</dd>
+    <dd>.存储时，使用JSON.stringify将数据序列化处理后再保存</dd>
     <dd>.获取时，使用JSON.parse转换为原始数据类型；如果不解析仍然是字符串</dd>
     <dd>
       <pre>
@@ -107,12 +110,12 @@ localStorage.setItem('arr1', JSON.stringify(arr));
 res = JSON.parse(localStorage.getItem('arr1'));
 console.log('解析获取：res:', res);</pre>
     </dd>
-    <dd>推荐写法：如果为null则为空数组</dd>
+    <dd>兼容写法：如果为null，则赋值为空数组</dd>
     <dd>
       <pre>res = JSON.parse(localStorage.getItem('arr1')) || [];</pre>
     </dd>
     <dt>对象 Object</dt>
-    <dd>.对象的保存和获取也要处理</dd>
+    <dd>.同数组一样，对象的保存和获取也要处理</dd>
     <dd>.直接存储，查看时，显示为[object Object]</dd>
     <dd>
       <pre>
@@ -124,18 +127,20 @@ let obj1 = JSON.parse(localStorage.getItem('obj'))
 console.log(obj1);</pre>
     </dd>
   </dl>
-  <div class="chap">总结 Summary</div>
   <dl>
-    <dd>1. 数据的设置和获取默认都是为<span class="warn">字符串</span></dd>
-    <dd>2. 如果存储的是数值型数据，获取时应使用Number()转换为数字</dd>
-    <dd>3. 复合数据类型如数组和对象，保存时应使用 JSON.stringify() 转换；获取时应使用 JSON.parse() 解析；两者要配合使用</dd>
-    <dd>4. 不管什么类型的数据，如果不存在，返回为<span class="warn">null</span></dd>
-  </dl>
-  <div class="chap">练习 Homework</div>
-  <dl>
-    <dd>1. 完成以上操作，体会本地存储的特点</dd>
-    <dd>2. 体会保存数组对象[{}]的基本操作，并思考和其它数据类型的异同</dd>
-    <dd>3. 创建一个登陆表单，实现保存用户名和密码的操作，以便于下次直接登陆</dd>
+    <dt><span class="iconfont icon-assignment"></span> 总结 Summary</dt>
+    <dd class="sn">
+      <div>数据的设置和获取默认都是为<span class="warn">字符串</span></div>
+      <div>如果存储的是数值型数据，获取时应类型转换，如使用Number()转换为数字</div>
+      <div>复合数据类型如数组和对象，保存时应使用 JSON.stringify() 序列化处理；获取时应使用 JSON.parse() 解析；两者要配合使用</div>
+      <div>不管什么类型的数据，如果不存在，返回为<span class="warn">null</span></div>
+    </dd>
+    <dt><span class="iconfont icon-mouse"></span> 练习 Homework</dt>
+    <dd class="sn">
+      <div>完成以上操作，体会本地存储的特点</div>
+      <div>体会保存数组对象[{}]的基本操作，并思考和其它数据类型的异同</div>
+      <div>创建一个登陆表单，实现保存用户名和密码的操作，以便于下次直接登陆</div>
+    </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

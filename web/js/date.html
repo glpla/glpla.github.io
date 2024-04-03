@@ -6,14 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>日期 Date</title>
-  <link rel="stylesheet" href="../css/styleNew.css">
+  <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
-  <style>
-    .txt-center {
-      text-align: center;
-      font-size: 2rem;
-    }
-  </style>
 </head>
 
 <body>
@@ -21,34 +15,88 @@
     <h1>&commat;Date</h1>
   </header>
   <dl>
-    <dd>. Date
-      类型使用自 UTC（Coordinated Universal Time，国际协调时间）1970 年 1 月 1 日午夜（零时）开始经过
-      的毫秒数来保存日期。在使用这种数据存储格式的条件下，Date 类型保存的日期能够精确到 1970 年 1
-      月 1 日之前或之后的 285 616 年</dd>
+    <dd>Date 类型使用自 UTC（Coordinated Universal Time，国际协调时间）1970 年 1 月 1 日午夜（零时）开始经过的毫秒数来保存日期</dd>
+    <dd>Date 类型保存的日期能够精确到 1970 年 1 月 1 日之前或之后的 285 616 年</dd>
     <dd>在调用 Date 构造函数而不传递参数的情况下，新创建的对象自动获得当前日期和时间</dd>
     <dd>
       <pre>let now = new Date(); </pre>
     </dd>
-  </dl>
-  <div class="chap">获取日期类</div>
-  <dl>
-    <dt>日期</dt>
-    <dd>getFullYear()<span class="dot"></span>年：完整4位</dd>
-    <dd>getMonth()<span class="dot"></span>月：0-11</dd>
-    <dd>getDate()<span class="dot"></span>日：1-31</dd>
-    <dd>getDay()<span class="dot"></span>星期：0-6；0代表星期天</dd>
-    <dt>时间</dt>
-    <dd>getHours()<span class="dot"></span>小时：0-23</dd>
-    <dd>getMinutes()<span class="dot"></span>分钟：0-59</dd>
-    <dd>getSeconds()<span class="dot"></span>秒：0-59</dd>
-    <dd>getMilliseconds()<span class="dot"></span>毫秒：0-999</dd>
-    <dd>getTime()：返回自1970年1月1日午夜以来与指定日期的毫秒数；多用于取插值以便计算</dd>
-  </dl>
-  <div class="chap">转换日期类</div>
-  <dl>
-    <dd>toLocaleString()<span class="dot"></span>将Date对象转换为字符串</dd>
-    <dd>toLocaleDateString()<span class="dot"></span>将日期部分转换为字符串</dd>
-    <dd>toLocaleTimeString()<span class="dot"></span>将时间部分转换为字符串</dd>
+    <dd>
+      <table>
+        <caption>日期函数</caption>
+        <tr>
+          <th>分类</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>getFullYear()</td>
+          <td>年：完整4位</td>
+        </tr>
+        <tr>
+          <td>getMonth()</td>
+          <td>月：0-11</td>
+        </tr>
+        <tr>
+          <td>getDate()</td>
+          <td>日：1-31</td>
+        </tr>
+        <tr>
+          <td>getDay()</td>
+          <td>星期：0-6；0代表星期天</td>
+        </tr>
+      </table>
+
+    </dd>
+    <dd>
+      <table>
+        <caption>时间函数</caption>
+        <tr>
+          <th>分类</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>getHours()</td>
+          <td>小时：0-23</td>
+        </tr>
+        <tr>
+          <td>getMinutes()</td>
+          <td>分钟：0-59</td>
+        </tr>
+        <tr>
+          <td>getSeconds()</td>
+          <td>秒：0-59</td>
+        </tr>
+        <tr>
+          <td>getMilliseconds()</td>
+          <td>毫秒：0-999</td>
+        </tr>
+        <tr>
+          <td>getTime()</td>
+          <td>返回自1970年1月1日午夜以来与指定日期的毫秒数；多用于取插值以便计算</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <table>
+        <caption>转换函数</caption>
+        <tr>
+          <th>分类</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>toLocaleString()</td>
+          <td>将Date对象转换为字符串</td>
+        </tr>
+        <tr>
+          <td>toLocaleDateString()</td>
+          <td>将日期部分转换为字符串</td>
+        </tr>
+        <tr>
+          <td>toLocaleTimeString()</td>
+          <td>将时间部分转换为字符串</td>
+        </tr>
+      </table>
+    </dd>
     <dd>
       <pre>
 使用区域设置约定
@@ -56,9 +104,6 @@
 2021/12/13
 上午9:59:41  </pre>
     </dd>
-  </dl>
-  <div class="chap">设置日期类</div>
-  <dl>
     <dd>setFullYear(digit)<span class="dot"></span>年：完整4位</dd>
     <dd>setMonth(digit)<span class="dot"></span>月：0-11</dd>
     <dd>setDate(digit)<span class="dot"></span>日：1-31</dd>
@@ -76,9 +121,10 @@ console.log(date.toLocaleString());//1970/1/2 上午8:00:00
 date.setTime(-3600000 * 24)//时间重置：在标准时间的基础上减去1天
 console.log(date.toLocaleString());1969/12/31 上午8:00:00</pre>
     </dd>
-    <dd>注意</dd>
-    <dd>1. 需要指定有效的数值；超过范围的将被取余</dd>
-    <dd>2. 没有设置星期setDay()</dd>
+    <dd class="tips">
+      <div>需要指定有效的数值；超过范围的将被取余</div>
+      <div>没有设置星期setDay()</div>
+    </dd>
   </dl>
   <div class="chap">案例</div>
   <dl>
