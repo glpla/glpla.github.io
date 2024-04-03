@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>归并函数 Array</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>归并函数</h1>
+    <span>&commat;Array</span>
+  </header>
+  <dl>
+    <dt>reduce() reduceRight()</dt>
+    <dd>.这两个方法都会迭代数组的所有项，然后构建一个最终返回的值。其中，reduce()方法从数组的第一项开始，逐个遍历到最后。而
+      reduceRight()则从数组的最后一项开始，向前遍历到第一项；可以执行求数组中所有值之和的操作</dd>
+    <dd>.这两个方法都接收两个参数：一个在每一项上调用的函数fn和（可选的）作为归并基础的初始值</dd>
+    <dd>.fn接收 4 个参数：前一个值pre|累加器acc、当前值cur、项的索引index和数组对象array</dd>
+    <dd>.可以是普通数组，也可以是数组对象</dd>
+    <dd>.map filter是reduce的特例</dd>
+    <dd>1.求和</dd>
+    <dd>2.计数</dd>
+    <dd>3.分类</dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 数组求和</dd>
+    <dd>
+      <figure>
+        <figcaption>普通数组</figcaption>
+        <pre>
+let sum = arr.reduce((pre, cur, index, array) => {
+    return pre + cur;
+})</pre>
+      </figure>
+    </dd>
+    <dd>
+      <figure>
+        <figcaption>对象数组 - 具有数值属性price</figcaption>
+        <pre>
+let sum = goods.reduce((acc, cur) => {
+  return acc + cur.price;
+}, 0)</pre>
+      </figure>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+
+  </script>
+</body>
+
+</html>

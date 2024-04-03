@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>迭代函数 Array</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>迭代函数</h1>
+    <span>&commat;Array</span>
+  </header>
+  <dl>
+    <dt>forEach()</dt>
+    <dd>.对数组中的每一项执行给定函数。本质上与使用 for 循环迭代数组一样</dd>
+    <dd>.返回：没有</dd>
+    <dd>.原数组：不会被修改；仅仅使用数据</dd>
+    <dd>.函数声明式</dd>
+    <dd>
+      <pre>
+function foreach(arr, fn) {
+  for (let i = 0; i &lt; arr.length; i++) {
+    fn(arr[i]);
+  }
+}
+
+foreach(arr, (item) => {
+  console.log(item);
+})</pre>
+    </dd>
+    <dt>filter()</dt>
+    <dd>.对数组中的每一项执行给定函数，返回执行结果为 true 的项组成的数组</dd>
+    <dd>.calls the predicate function one time for each element in the array</dd>
+    <dd>.返回：符合条件的新数组</dd>
+    <dd>.原数组：不会被修改</dd>
+    <dd>.函数声明式</dd>
+    <dd>
+      <pre>
+function filter(arr, fn) {
+  let res = []
+  for (let i = 0; i &lt; arr.length; i++) {
+    if (fn(arr[i])) {
+      res.push(arr[i])
+    }
+  }
+  return res;
+}</pre>
+    </dd>
+    <dd>
+      <pre>
+let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+let res = arr.filter(item => item % 2 === 0;)
+console.log(res);</pre>
+    </dd>
+    <dt>map()</dt>
+    <dd>.创建一个新数组，这个新数组由原数组中的每个元素都调用一次提供的函数后的返回值组成：对数组中的每一项执行给定函数，返回每次函数调用的结果组成的数组</dd>
+    <dd>.需要使用一个变量接收函数的执行结果</dd>
+    <dd>.返回：创建的新数组</dd>
+    <dd>.原数组：不会被修改</dd>
+    <dd>.适合创建包含的项与另一个数组一一对应的数组 - 映射</dd>
+    <dd>.对结果数组进行连接join可以转化为对字符串的使用，如作为HTML字符串更新或创建DOM</dd>
+    <dd>.函数表达式</dd>
+    <dd>.声明为const更安全，避免被修改</dd>
+    <dd>
+      <figure>
+        <figcaption>结果数组拼接字符串</figcaption>
+        <pre>let res = map((item, ind) => item.xx).join('');</pre>
+      </figure>
+    </dd>
+    <dt>every()</dt>
+    <dd>.对数组中的每一项执行给定函数；如果该函数对 <span class="warn">每一项</span> 都返回 true，则返回 true</dd>
+    <dd>
+      <pre>
+const every = (arr, fn) => {
+  let res = true
+  for (let v of arr) {
+    res = fn(v);
+    if (!res) {
+      break
+    }
+  }
+  return res;
+}
+
+res = every(arr, v => v > 10);
+console.log(res);</pre>
+    </dd>
+    <dt>some()</dt>
+    <dd>.对数组中的每一项执行给定函数；如果该函数 <span class="warn">有一项</span> 返回 true，则返回 true</dd>
+    <dd>
+      <pre>
+const some = (arr, fn) => {
+  let res = false
+  for (let v of arr) {
+    res = fn(v)
+    if (res) {
+      break
+    }
+  }
+  return res;
+}
+res = some(arr, v => v > 8);
+console.log(res);</pre>
+    </dd>
+    <dd class="quote">
+      <div>1. 以上方法都不会修改数组中的包含的值</div>
+      <div>2. 在这些方法中，最相似的是 every()和 some()，它们都用于查询数组中的每一项是否满足某个条件。
+        对 every()来说，传入的函数必须对每一项都返回 true，这个方法才返回 true；否则，它就返回
+        false。而 some()方法则是只要传入的函数对数组中的某一项返回 true，就会返回 true</div>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+
+  </script>
+</body>
+
+</html>

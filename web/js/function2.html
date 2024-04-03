@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>箭头函数 Function</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>箭头函数</h1>
+    <span>&commat;Function</span>
+  </header>
+  <dl>
+    <dd>.使用=>表示</dd>
+    <dd>.也是匿名函数，需要保存到变量中</dd>
+    <dd class="code">
+      <pre>
+let sum = (num1, num2) => {
+  return num1 + num2;
+};</pre>
+    </dd>
+    <dd>.如果只有一个参数，可以省略形参列表的圆括号()</dd>
+    <dd class="code">
+      <pre>
+let sum = num1 => {
+  return num1 * 2;
+};</pre>
+    </dd>
+    <dd>.如果没有参数，不可以省略()</dd>
+    <dd class="code">
+      <pre>
+let sum = () => {
+  console.log('hello, world');
+};</pre>
+    </dd>
+    <dd>.如果只有返回语句，没有更多逻辑，可以省略花括号和return</dd>
+    <dd class="code">
+      <pre>
+//自增函数
+let inc = num => num + 10;
+
+inc(12);</pre>
+    </dd>
+    <dd>.事件侦听中，如果使用箭头函数，则this指的是的window，不再是事件对象</dd>
+    <dd class="code">
+      <pre>
+btn.addEventListener('click', () => {
+  console.log(this);//window
+})
+btn.addEventListener('click', function () {
+  console.log(this);//具体的事件对象，如按钮button
+})</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

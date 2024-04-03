@@ -31,7 +31,7 @@
     <dt>对象实例方法</dt>
     <dd class="number">
       <div>增/改</div>
-      <pre class="code">
+      <pre>
 let obj = { name: 'cnplaman', age: 18 }
 obj.gender = 'male';
 obj.marriage = true;
@@ -40,21 +40,21 @@ console.log(obj.name);
 console.log(obj['name']);
 console.log(obj);</pre>
       <div>删</div>
-      <pre class="code">
+      <pre>
 delete obj.marriage;
 console.log(obj);</pre>
       <div>查：定义查询字符串</div>
-      <pre class="code">
+      <pre>
 let sql = 'age' in obj
 console.log(sql);      </pre>
       <div>长度：无法直接获取</div>
       <p>通过对象Object的静态方法：entries()、keys()或values()间接获取；这三个方法返回入口、键和值的数组</p>
-      <pre class="code">
+      <pre>
 console.log(Object.keys(obj).length);
 console.log(Object.values(obj).length);
 console.log(Object.entries(obj).length);      </pre>
       <div>遍历对象：for-in；枚举</div>
-      <pre class="code">
+      <pre>
 // 遍历的是key，要想获取值value，则配合对象使用
 for (item in obj) {
   console.log(item, obj[item]);
@@ -86,7 +86,7 @@ Object.entries(obj).forEach(([value, key]) => {
 })</pre>
     </dd>
     <dd>.函数的参数传递是传值；但是函数内部对对象的访问是引用</dd>
-    <dd class="code">
+    <dd>
       <pre>
 function setObj(obj) {
     obj.name = 'glpla';
@@ -95,42 +95,58 @@ var stu = new Object();
 setObj(stu);
 console.log(stu.name);</pre>
     </dd>
-    <dt>对象的解构</dt>
+  </dl>
+
+  <div class="chap">对象的解构 {}</div>
+  <dl>
     <dd>将数组中的值或对象的属性取出，赋值给其他变量</dd>
-    <dd>可以嵌套解构</dd>
-    <dd>高频使用</dd>
-    <dd>更多信息，请访问<a
+    <dd>对象解构使用花括号{}；<a href="./array.html">数组</a> 解构使用[]；多个变量以逗号,分隔</dd>
+    <dd>解构赋值的时候：</dd>
+    <dd>.可以更改名字</dd>
+    <dd>.可以嵌套解构</dd>
+    <dd>.可以指定默认值</dd>
+    <dd>高频使用；更多信息，请访问<a
         href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring
         Assignment</a></dd>
-    <dd class="code">
+    <dd>框架中</dd>
+    <dd>
       <pre>
 import { createApp } from 'vue'
 import { computed, onMounted, reactive, ref } from 'vue';
 const { add, dec } = require('./module/test')</pre>
     </dd>
-    <dd>普通解构赋值</dd>
-    <dd class="code">
-      <pre>
-let obj = { name: 'cnplaman', age: 18 }
-let { name, age } = obj
-
-//重命名赋值
-let { name: uname, age: uage } = obj
-console.log(name, age);</pre>
+    <dd class="example-sn">示例数据</dd>
+    <dd>
+      <pre>let obj = { name: 'cnplaman', age: 18, address: { city: 'gz', code: 541000 } }</pre>
+    </dd>
+    <dd>普通解构赋值 - 获取obj中的属性赋值给同名变量</dd>
+    <dd>
+      <pre>let { name, age } = obj</pre>
+    </dd>
+    <dd>
+    <dd>重命名赋值 - 使用冒号:指定新变量名</dd>
+    <dd>
+      <pre>let { name: uname, age: uage } = obj</pre>
+    </dd>
+    <dd>默认赋值 - 解构时修改属性值或增加一个新属性</dd>
+    <dd>
+      <pre>let { name: uname, age: uage, gender = 'male' } = obj</pre>
     </dd>
     <dd>嵌套解构赋值</dd>
-    <dd class="code">
-      <pre>
-let obj = { name: 'cnplaman', age: 18, address: { city: 'gz', code: 541000 } }
-let { name, age, address: { city } } = obj
-console.log(name, age, city);      </pre>
+    <dd>
+      <pre>let { name, age, address: { city } } = obj</pre>
+    </dd>
+    <dd>
+      <pre>let { name, age, address: { code: postcode } } = obj</pre>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script>
-    let obj = { name: 'cnplaman', age: 18 }
-    let { name: uname, age: uage } = obj
-    console.log(uname, uage); 
+    let test = 'hi';
+    (function test() {
+      test = '123';
+      console.log(test);
+    })();
   </script>
 </body>
 

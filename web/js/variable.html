@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>变量 Variable</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/code.css">
+  <link rel="stylesheet" href="../../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>变量</h1>
+    <span>&commat;Variable</span>
+  </header>
+  <dl>
+    <dt>变量提升</dt>
+    <dd>代码执行前，变量声明和函数声明提升到当前作用域的顶部，即：先处理变量声明和函数声明，如果有重复声明，则后面的声明覆盖前面的声明；然后再处理其它逻辑，如赋值</dd>
+    <dd>赋值不会触发提升</dd>
+    <dd>更多信息，请访问<a href="./precompile.html">预编译 pre-compiler</a></dd>
+    <dd class="example-sn">变量提升 - msg</dd>
+    <dd>原始代码</dd>
+    <dd>
+      <pre>
+console.log(msg);
+var msg = 'hi,there.'
+console.log(msg);</pre>
+    </dd>
+    <dd>JS编译后，代码逻辑为</dd>
+    <dd>
+      <pre>
+//提升
+var msg;
+//执行
+console.log(msg);
+msg = 'hi,there.'
+console.log(msg);</pre>
+    </dd>
+    <dd>所以俩次log结果依次为：undefined、hi,there</dd>
+    <dd class="example-sn">变量a和函数foo提升</dd>
+    <dd>原始代码</dd>
+    <dd>
+      <pre>
+var a = 1;
+function foo() {
+  console.log('1', a);
+  var a = 3
+  console.log('2', a);
+}
+console.log('3', a);
+foo()      </pre>
+    </dd>
+    <dd>JS编译后，代码逻辑为</dd>
+    <dd>
+      <pre>
+//提升
+var a;
+function foo;
+  var a;
+//执行
+a = 1
+console.log('3', a); //a = 1
+foo()
+  console.log('1', a);//undefined - 当前作用域只声明还没有赋值
+  a = 3
+  console.log('2', a);//3</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+  </script>
+</body>
+
+</html>
