@@ -6,23 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>状态管理 Pinia</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
 <body>
     <header>
         <h1>状态管理</h1>
-        <span>Pinia</span>
+        <span>&commat; Pinia</span>
     </header>
     <dl>
         <dd>状态管理出现之前，使用共享组件完成对共享数据的使用；共享数据的修改通过共享组件发送自定义事件完成。这就意味着：任何一个使用它的组件都可以修改，不太容易维护；注意：共享数据和全局数据不是一回事</dd>
         <dd>利用仓库store集中式状态管理：抽取出组件间的共享状态，放在一个全局单例中来管理</dd>
         <dd>三个概念：Atate、Getter 和 Action</dd>
-        <dd class="number">
+        <dd class="sn">
             <div>State - 驱动整个应用的数据源；是store 的核心。应先定义能代表应用或反映应用状态的 state；相当于组件中的 data</div>
             <div>Getter - 对状态的一种声明式映射；相当于组件中的 computed</div>
             <div>Action - 根据用户的交互对数据源的操作；相当于组件中的 method</div>
@@ -68,7 +65,7 @@ app.mount('#app')</pre>
         <dd>仓库通常集中保存在项目的stores目录（应提前创建好），并按照功能创建单独的仓库文件</dd>
         <dd>仓库在onMounted之前就已经准备好</dd>
         <dt>基本步骤 Steps</dt>
-        <dd class="number">
+        <dd class="sn">
             <div>定义 Store</div>
             <p>以 use 开头且以 Store 结尾命名仓库</p>
             <p>引入defineStore创建仓库</p>
@@ -108,7 +105,7 @@ export const useCounterStore  = defineStore('counter', ()=>{
             <div>store中包含数据和方法；可以直接解构出方法；要解构出数据需要使用storeToRefs包</div>
         </dd>
         <dt>更多状态操作 state</dt>
-        <dd class="number">
+        <dd class="sn">
             <div>访问 state - 默认情况下，通过 store 实例访问 state，直接对其进行读写</div>
             <pre>
 const store = useStore()
@@ -140,7 +137,7 @@ store.$patch({
                 patch 后只触发一次</div>
             <p>可以在 pinia 实例上使用 watch() 函数侦听整个 state</p>
         </dd>
-        <dd class="question">什么时候使用 Store?</dd>
+        <dd class="tips">什么时候使用 Store?</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

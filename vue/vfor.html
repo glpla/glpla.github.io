@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>列表渲染 v-for</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
@@ -25,40 +22,33 @@
         <dd>指定:key有助于提高渲染性能；<span class="warn">据说</span>数据变化时只会渲染更新的数据项，不会全部重新渲染</dd>
         <dt>渲染数组</dt>
         <dd>普通数组或对象数组</dd>
+        <dd>1个参数：item是对数组元素的迭代变量，名字任意</dd>
         <dd>
-            <figure class="code">
-                <figcaption>1个参数：item是对数组元素的迭代变量，名字任意</figcaption>
-                <pre>
+            <pre>
 &lt;ul&gt;
     &lt;li v-for = "item in list" :key = "item.id" &gt; {{ item }} &lt;/li&gt;
 &lt;/ul&gt;</pre>
-            </figure>
         </dd>
+        <dd>2个参数：除了item外，还可以使用数据元素对应的索引index，名字任意</dd>
         <dd>
-            <figure class="code">
-                <figcaption>2个参数：除了item外，还可以使用数据元素对应的索引index，名字任意</figcaption>
-                <pre>
+            <pre>
 &lt;ul&gt;
     &lt;li v-for = "(item, index) in list" :key = "item.id" &gt; {{ item }} &lt;/li&gt;
 &lt;/ul&gt;</pre>
-            </figure>
         </dd>
+        <dd>嵌套使用；每个迭代都使用独立的迭代变量</dd>
         <dd>
-            <figure class="code">
-                <figcaption>嵌套使用；每个迭代都使用独立的迭代变量</figcaption>
-                <pre>
+            <pre>
 &lt;ul&gt;
     &lt;li v-for = "(item, ind) in list" :key = "item.id" &gt;
         &lt;p v-for = "innerItem in item" :key = "innerItem.id" &gt; {{ innerItem }} &lt;/p&gt;
     &lt;/li&gt;
 &lt;/ul&gt;</pre>
-            </figure>
         </dd>
         <dd class="example-sn">渲染包含图片路径的列表</dd>
+        <dd>逻辑 - 注意静态资源处理</dd>
         <dd>
-            <figure class="code">
-                <figcaption>逻辑 - 注意静态资源处理</figcaption>
-                <pre>
+            <pre>
 const arr = [{
     id: 0,
     name: 'gl',
@@ -68,19 +58,16 @@ const arr = [{
 const getImageUrl = (src) => {
     return new URL(`../imgs/${src}`, import.meta.url).href
 }</pre>
-            </figure>
         </dd>
+        <dd>结构</dd>
         <dd>
-            <figure class="code">
-                <figcaption>结构</figcaption>
-                <pre>
+            <pre>
 &lt;div class="item" v-for="item in arr" :key="item.id"&gt;
     &lt;img :src="getImageUrl(item.src)" alt="picture"&gt;
     &lt;p&gt;{{ item.id }}&lt;/p&gt;
     &lt;p&gt;{{ item.name }}&lt;/p&gt;
     &lt;p&gt;{{ item.age }}&lt;/p&gt;
 &lt;/div&gt;</pre>
-            </figure>
         </dd>
         <dt>渲染对象</dt>
         <dd>遍历一个对象的所有属性；默认显示对象的属性值</dd>
@@ -88,41 +75,31 @@ const getImageUrl = (src) => {
         <dd>
             <pre>const obj = reactive({ id: 101, name: 'glpla', age: 18 })</pre>
         </dd>
+        <dd>1个参数：值 value</dd>
         <dd>
-            <figure class="code">
-                <figcaption>1个参数：值 value</figcaption>
-                <pre>&lt;div v-for = "value in obj" &gt; {{ value }} &lt;/div&gt;</pre>
-            </figure>
+            <pre>&lt;div v-for = "value in obj" &gt; {{ value }} &lt;/div&gt;</pre>
         </dd>
+        <dd>2个参数：值 value，键 key</dd>
         <dd>
-            <figure class="code">
-                <figcaption>2个参数：值 value，键 key</figcaption>
-                <pre>&lt;div v-for = "(value, key) in obj" &gt; {{ key }}:{{ value }} &lt;/div&gt;</pre>
-            </figure>
+            <pre>&lt;div v-for = "(value, key) in obj" &gt; {{ key }}:{{ value }} &lt;/div&gt;</pre>
         </dd>
+        <dd>3个参数：值 value，键 key，索引 index</dd>
         <dd>
-            <figure class="code">
-                <figcaption>3个参数：值 value，键 key，索引 index</figcaption>
-                <pre>&lt;div v-for = "(value, key, index) in obj" &gt; {{ index }}:{{ key }}:{{ value }} &lt;/div&gt;</pre>
-            </figure>
+            <pre>&lt;div v-for = "(value, key, index) in obj" &gt; {{ index }}:{{ key }}:{{ value }} &lt;/div&gt;</pre>
         </dd>
         <dt>&lt;template&gt;</dt>
         <dd>不推荐同时使用 v-if 和 v-for：二者优先级不明显</dd>
         <dd>为区分结构，合理使用逻辑，特别是组合使用v-for和v-if时，可以使用&lt;template&gt; ；这只是一个不可见的包装器元素，最后渲染的结果并不会包含这个 &lt;template&gt; 元素</dd>
         <dd>
-            <figure class="code">
-                <pre>
+            <pre>
 const list = ref(['home', 'product', 'about'])
 const isOn = ref(true)</pre>
-            </figure>
         </dd>
         <dd>
-            <figure class="code">
-                <pre>
+            <pre>
 &lt;template v-if = "isOn" &gt;
     &lt;div v-for = "item in list" &gt; {{ item }} &lt;/div&gt;
 &lt;/template&gt;</pre>
-            </figure>
         </dd>
         <dd class="tips">
             <div>可以在 &lt;template&gt; 标签上使用 v-for 来渲染一个包含多个元素的块</div>

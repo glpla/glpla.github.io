@@ -6,28 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>组件 Component</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
 <body>
     <header>
         <h1>组件</h1>
-        <span>Component</span>
+        <span>&commat; Component</span>
     </header>
     <dl>
         <dd>SFC - Single File Component，单文件组件</dd>
         <dd>vue中每个组件都是以SFC的形式存在，后缀名是.vue</dd>
         <dd>包括：结构&lt;template&gt;、逻辑&lt;script&gt;和样式&lt;style&gt;</dd>
         <dt>基本过程</dt>
-        <dd class="number nav-cont">
-            <div>创建 - 新建文件，指定后缀名为.vue</div>
-            <figure class="code">
-                <figcaption>子组件 - Demo.vue</figcaption>
-                <pre>
+        <dd class="sn">
+            <div>创建 - 新建子组件 Demo.vue，指定后缀名为.vue</div>
+            <pre>
 &lt;script setup&gt;
     //逻辑
 &lt;/script&gt;
@@ -39,50 +34,20 @@
 &lt;style&gt;
     //样式
 &lt;/style&gt;</pre>
-            </figure>
-            <div>引入：父组件在&lt;script&gt;引入子组件，<span class="warn">注意</span> ：不能省略后缀名.vue；路径关系</div>
-            <figure class="code">
-                <figcaption>父组件 - Super.vue</figcaption>
-                <pre>
+            <div>引入：父组件 Super.vue在&lt;script&gt;引入子组件，<span class="warn">注意</span> ：不能省略后缀名.vue；路径关系</div>
+            <pre>
 &lt;script setup&gt;
     import Demo from './Demo.vue'
 &lt;/script&gt;</pre>
-            </figure>
-            <div>使用：父组件在结构&lt;template&gt;中使用子组件；可以多次使用</div>
-            <figure class="code">
-                <figcaption>父组件 - Super.vue</figcaption>
-                <pre>
+            <div>使用：父组件 Super.vue在结构&lt;template&gt;中使用子组件；可以多次使用</div>
+            <pre>
 &lt;template&gt;
     &lt;h1&gt;Here is a child component!&lt;/h1&gt;
     &lt;Demo /&gt;
     &lt;Demo&gt;&lt;/Demo&gt;
 &lt;/template&gt;</pre>
-            </figure>
         </dd>
-        <dt>作用域</dt>
-        <dd><a href="./class.html" class="link">类 class</a></dd>
-        <dt>组件样式</dt>
-        <dd>&lt;style&gt;指定 scoped 时：</dd>
-        <dd>它的 CSS 只会影响当前组件的元素</dd>
-        <dd>父组件的样式将不会 <span class="warn">渗透</span>
-            到子组件中。不过，子组件的根节点会同时被父组件的作用域样式和子组件的作用域样式影响。便于：让父组件可以从布局的角度出发，调整其子组件根元素的样式</dd>
-        <dd>父组件如果想深入调整子组件内部元素的样式|影响到子组件，可以使用伪类:deep()</dd>
-        <dd>更多信息，请访问 <a href="https://cn.vuejs.org/api/sfc-css-features.html" class="link">API - 单文件组件 CSS 功能</a></dd>
-        <dt>Vue特有选择器</dt>
-        <dd class="number">
-            <div>插槽选择器 :slotted</div>
-            <p>默认情况下，作用域样式不会影响到 &lt;slot/&gt; 渲染出来的内容，因为它们被认为是父组件所持有并传递进来的。使用 :slotted 伪类以明确地将插槽内容作为选择器的目标</p>
-            <p>更多细节，请查看<a href="./component4.html" class="link">组件 slot</a></p>
-            <div>全局选择器 :global</div>
-            <p>如果想让其中一个样式规则应用到全局，比起另外创建一个 &lt;style&gt;，可以使用 :global 伪类</p>
-            <p>应 <span class="warn">避免</span> 这种情况出现。应该把全局类写到单独的样式文件中并引入</p>
-            <pre>
-:global(.warn) {
-    color: red;
-}</pre>
-        </dd>
-        <dd class="example-sn"><a href="./pro_home.html" class="link">主页</a></dd>
-        <dd>每一个子组件都使用根节点，且使用同组件名的类，便于父组件布局</dd>
+
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

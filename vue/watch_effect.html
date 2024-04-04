@@ -16,27 +16,44 @@
 <body>
     <header>
         <h1>自动侦听器</h1>
-        <span>WatchEffect</span>
+        <span>&commat;WatchEffect</span>
     </header>
     <dl>
-        <dd>立即运行一个函数，同时响应式地追踪其依赖，并在依赖更改时重新执行</dd>
-        <dt>概述</dt>
+        <dd>立即运行一个回调函数|副作用，同时自动感知代码依赖|追踪其中的数据源，并在其变化时重新执行回调函数</dd>
+        <dd>关注的是数据的状态变化，并不关注数据变化前后的值</dd>
+        <dd>需引入包 watchEffect</dd>
+        <dd>
+            <pre>import { watchEffect } from 'vue'</pre>
+        </dd>
+        <dd>
+            <pre>
+function watchEffect(
+  effect: (onCleanup: OnCleanup) => void,
+  options?: WatchEffectOptions
+): StopHandle</pre>
+        </dd>
+        <dd>effect：回调函数，也叫副作用函数 side effect，即某种操作，如对外部可变数据或变量的修改，外部接口的调用等</dd>
+        <dd>onCleanup：回调函数的可选参数，是一个函数，用来注册清理回调；清理回调会在该副作用下一次执行前被调用</dd>
+        <dd>options：可选的选项，可以用来调整副作用的刷新时机或调试副作用的依赖</dd>
+        <dd>StopHandle：自动侦听器函数返回一个停止器函数，详见后续内容</dd>
         <dd>更多信息，请访问<a href="https://cn.vuejs.org/api/reactivity-core.html#watcheffect" class="link">watchEffect()</a>
         </dd>
-        <dd>需引入包 watchEffect</dd>
-        <dd>应用：页面加载时，立即加载当前对应的数据</dd>
         <dd class="tips">
             <div>watch 仅在侦听的数据源确实改变时才会触发回调；执行0-N次</div>
             <div>watchEffect 会立即执行回调函数，也称自动侦听器，等同于使用了立即配置项immediate；执行1-N次</div>
             <div>watch 必须显式的指定某个侦听的数据源|变量</div>
             <div>watchEffect 会自动侦听数据源|变量</div>
-            <div>watch 控制更为精细；deep、immediate</div>
+            <div>watch 控制更为精细；旧值、新值、deep、immediate</div>
+            <div>watchEffect 更有效，只跟踪回调中被使用到的属性，而不是递归地跟踪所有的属性；但是不能获取旧值、</div>
         </dd>
         <dd class="example-sn">分析下面代码的功能</dd>
         <dd>
             <pre>
-watchEffect(() => {
-    str.value = msg.value.split('').reverse().join('')
+watchEffect((onCleanup) => {
+    str.value = msg.value.split('').reverse().join('');
+    onCleanup(()=>{
+        console.log('clean done');
+    })
 })</pre>
         </dd>
         <dd class="example-sn">使用watchEffect自动侦听多个数据</dd>
@@ -64,16 +81,15 @@ function heiCh() {
             </figure>
         </dd>
         <dt>停止侦听</dt>
+        <dd>在大多数情况下，你无需关心怎么停止一个侦听器</dd>
         <dd>要手动停止一个侦听器，请调用 watch 或 watchEffect 返回的函数</dd>
         <dd class="example-sn">停止侦听</dd>
         <dd>
             <pre>
-const stopWatch = watch(num, (newv, oldv) => {
-    console.log('num is watched', newv, oldv);
-    if(newv > 5){
-        stopWatch()
-    }
-})</pre>
+const stopWatch = watchEffect(num, (newv, oldv) => {})
+
+stopWatch()
+</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

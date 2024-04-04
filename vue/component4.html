@@ -6,17 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>插槽 slot</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
 <body>
     <header>
         <h1>插槽</h1>
-        <span>slot</span>
+        <span>&commat; slot</span>
     </header>
     <dl>
         <dd>使用插槽slot可以像使用HTML 元素一样向组件中传递内容；如封装过渡组件</dd>
@@ -24,35 +21,30 @@
         <dd>可以声明多个插槽。为了区分，多个插槽应该指定name属性-具名插槽</dd>
         <dt>基本过程</dt>
         <dd>1. 子组件声明slot，将其作为一个占位符，父组件传递进来的内容就会渲染在这里</dd>
+        <dd>仅预留位置</dd>
         <dd>
-            <figure class="code">
-                <figcaption>仅预留位置</figcaption>
-                <pre>
+            <pre>
 &lt;template&gt;
     &lt;div class="alert-box"&gt;
         //内容
         &lt;slot /&gt;
     &lt;/div&gt;
 &lt;/template&gt;</pre>
-            </figure>
         </dd>
         <dd></dd>
+        <dd>默认插槽 - 指定默认内容</dd>
         <dd>
-            <figure class="code">
-                <figcaption>默认插槽 - 指定默认内容</figcaption>
-                <pre>
+            <pre>
 &lt;template&gt;
     &lt;div class="alert-box"&gt;
         //内容
         &lt;slot&gt;插槽默认内容&lt;/slot&gt;
     &lt;/div&gt;
 &lt;/template&gt;</pre>
-            </figure>
         </dd>
+        <dd>具名插槽 - 多个插槽</dd>
         <dd>
-            <figure class="code">
-                <figcaption>具名插槽 - 多个插槽</figcaption>
-                <pre>
+            <pre>
 &lt;template&gt;
     &lt;div class="alert-box"&gt;
         //内容
@@ -60,7 +52,6 @@
         &lt;slot name='footer'&gt;&lt;/slot&gt;
     &lt;/div&gt;
 &lt;/template&gt;</pre>
-            </figure>
         </dd>
         <dd>2. 父组件</dd>
         <dd>使用内容填充插槽</dd>
@@ -95,7 +86,6 @@
 &lt;/template&gt;</pre>
         </dd>
         <dd class="example-sn">封装版权组件，根据作者展示相应的版权信息</dd>
-
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

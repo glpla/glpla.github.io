@@ -1,4 +1,4 @@
-@import url(//at.alicdn.com/t/c/font_3859342_hf0dyb6ri9j.css);
+@import url(//at.alicdn.com/t/c/font_3859342_66ry1khdbu.css);
 
 :root {
   --main-color: #ff5d73;
@@ -70,7 +70,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(var(--main-color-orange-light), var(--main-color-orange));
+  background-image: linear-gradient(#fff, var(--warn-color));
   border-radius: 4px;
 }
 
@@ -209,6 +209,7 @@ tr:nth-child(even) {
 }
 
 .grid,
+.grid2,
 .grid3 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -234,6 +235,7 @@ tr:nth-child(even) {
 body {
   counter-reset: tbl-sn;
   counter-reset: img-sn;
+  counter-reset: exam-sn;
 }
 
 caption {
@@ -269,6 +271,14 @@ dt+dd {
 
 .sn div::before {
   content: counter(list-sn)'. ';
+}
+
+.example-sn {
+  counter-increment: exam-sn;
+}
+
+.example-sn::before {
+  content: '[例' counter(exam-sn)'] ';
 }
 
 /* sn end */

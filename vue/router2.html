@@ -5,18 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>查询路由 query</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <title>查询路由 Query</title>
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
 <body>
     <header>
         <h1>查询路由</h1>
-        <span>query</span>
+        <span>&commat; Query</span>
     </header>
     <dl>
         <dt>查询路由 - query</dt>
@@ -25,17 +22,14 @@
         <dd>
             <pre>http://127.0.0.1:5500/vue/router.html?name=gl&age=18</pre>
         </dd>
-        <dd>1. 配置路由参数</dd>
-        <dd>不需要特别配置</dd>
-        <dd>2. 传递路由参数</dd>
-        <dd>分别使用普通路由path和命名路由name传递路由参数</dd>
+        <dd>1. 配置路由参数 - 不需要特别配置</dd>
+        <dd>2. 传递路由参数 - 分别使用普通路由path和命名路由name传递路由参数</dd>
         <dd>
             <pre>
 &lt;router-link :to="{ path: 'team', query: { id: 100 } }"&gt;team&lt;/router-link&gt;
 &lt;router-link :to="{ name: 'info', query: { id: 200 } }"&gt;info&lt;/router-link&gt;</pre>
         </dd>
-        <dd>3. 接收路由参数</dd>
-        <dd>在路由目标组件 - 结构 - 中使用$route.query接收路由参数</dd>
+        <dd>3. 接收路由参数 - 在路由目标组件的结构中使用$route.query接收路由参数</dd>
         <dd>
             <pre>&lt;div&gt;{{ $route.query.id }}&lt;/div&gt;</pre>
         </dd>
@@ -48,33 +42,31 @@ let route = useRoute()
 console.log(route.query.id);</pre>
         </dd>
         <dd>为避免失去响应式，应该使用toRefs</dd>
+        <dd>&lt;script&gt;接收路由参数</dd>
         <dd>
-            <figure class="code">
-                <figcaption>&lt;script&gt;接收路由参数</figcaption>
-                <pre>
+            <pre>
 import {toRefs} from 'vue'
 import {useRoute} from 'vue-router'
 let route = useRoute()
 let {query} = toRefs(route)</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>&lt;template&gt;渲染路由参数 - 解构路由</figcaption>
-                <pre>
+        </dd>
+        <dd>&lt;template&gt;渲染路由参数 - 解构路由</dd>
+        <dd>
+            <pre>
 &lt;ul&gt;
     &lt;li&gt;{{query.id}}&lt;/li&gt;
     &lt;li&gt;{{query.title}}&lt;/li&gt;
     &lt;li&gt;{{query.cont}}&lt;/li&gt;
 &lt;/ul&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>&lt;template&gt;渲染路由参数 - 不解构路由</figcaption>
-                <pre>
+        </dd>
+        <dd>&lt;template&gt;渲染路由参数 - 不解构路由</dd>
+        <dd>
+            <pre>
 &lt;ul&gt;
     &lt;li&gt;{{route.query.id}}&lt;/li&gt;
     &lt;li&gt;{{route.query.title}}&lt;/li&gt;
     &lt;li&gt;{{route.query.cont}}&lt;/li&gt;
 &lt;/ul&gt;</pre>
-            </figure>
         </dd>
         <dd>在结构中使用路由参数时，使用全局变量$route解构：动态路由$route.params；查询路由$route.query</dd>
     </dl>

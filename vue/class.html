@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>类 class</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
@@ -24,11 +21,11 @@
         <dd>除了字符串外，表达式的值也可以是 <span class="warn">对象</span> 或 <span class="warn">数组</span></dd>
         <dd>绑定类和静态添加的类不会冲突，最终会叠加在一起进行渲染</dd>
         <dt>类 :class</dt>
-        <dd class="number">
+        <dd class="sn">
             <div>用不用这个类？ - <span class="warn">对象</span> 方式；isActive为真，使用bold类；为假，不使用；<span
                     class="warn">还</span>可以指定一个对象，对象中对多个类的使用进行约束</div>
             <p>值对key-value是一个对象，JSON规范中，key要使用引号</p>
-            <pre >
+            <pre>
 &lt;div :class="{ 'bold': isActive }"&gt;hi,there&lt;/div&gt;
 &lt;div :class="{ 'active': isActive, 'done': isDone }"&gt;hi,there.&lt;/div&gt;
 &lt;div :class="{ 'active': ind==1 }"&gt;hi,there.&lt;/div&gt;</pre>
@@ -36,25 +33,25 @@
             <div>用哪个类？ - <span class="warn">字符串</span>方式；通过更改类名实现更多类的选择；tips为bold，使用bold类；tips为underline，使用underline类
             </div>
             <p>简单字符串 - 字符串即类名</p>
-            <pre >&lt;div :class="tips"&gt;hi,there&lt;/div&gt;</pre>
+            <pre>&lt;div :class="tips"&gt;hi,there&lt;/div&gt;</pre>
             <p>对象 - 由对象的一个开关或多个开关决定动态类</p>
-            <pre >&lt;div :class="isOn"&gt;hi,there.&lt;/div&gt;</pre>
-            <pre >
+            <pre>&lt;div :class="isOn"&gt;hi,there.&lt;/div&gt;</pre>
+            <pre>
 const isOn = reactive({
     active: false,
     done: true
 })</pre>
             <div>三元表达式实现2选1；isActive为真，使用bold类；否则使用underline类</div>
             <p>三元表达式的结果是一个字符串，所以直接写就可以，不需要{}</p>
-            <pre >&lt;div :class="isActive ? 'bold' : 'underline'"&gt;hi,there&lt;/div&gt;</pre>
+            <pre>&lt;div :class="isActive ? 'bold' : 'underline'"&gt;hi,there&lt;/div&gt;</pre>
             <div>同时使用静态类和动态类 - <span class="warn">数组</span>方式</div>
             <p>数组可以存放数字和字符串等多种数据类型；类一定是字符串，所以类应该用括号括起来，而变量不用</p>
             <p>数组中可以使用字符串、对象和三元表达式指定类</p>
-            <pre class="coe">
+            <pre>
 &lt;div :class="['item', { 'active': isActive }]"&gt;item4&lt;/div&gt;
 &lt;div :class="['item', isActive ? 'bold' : 'underline']"&gt;hi,there&lt;/div&gt;</pre>
             <div>同时使用静态类和动态类 - <span class="warn">分离</span>方式</div>
-            <pre >&lt;div class="item" :class="{flag == 0 ? 'active' : 'normal'}"&gt;item1&lt;/div&gt;</pre>
+            <pre>&lt;div class="item" :class="{flag == 0 ? 'active' : 'normal'}"&gt;item1&lt;/div&gt;</pre>
         </dd>
         <dd class="tips">
             <div>类名需要使用引号包裹，否则会被当作绑定的变量</div>
@@ -71,7 +68,7 @@ const isOn = reactive({
         <dd>样式部分中，使用scoped属性指定样式仅仅作用于当前组件的元素。但是会增加额外的开销：渲染时，每个组件分配一个属性</dd>
         <dd>内部样式是通过组件的属性进行选择</dd>
         <dd>推荐：为组件的根节点指定一个特有的类。如.nav。推荐以组件名字命名这个类；因为组件的功能各不相同，所以很容易保证组件类的唯一性</dd>
-        <dd>更多信息，请访问 <a href="https://cn.vuejs.org/api/sfc-css-features.html" class="link">API - 单文件组件 CSS 功能</a></dd>
+        <dd>更多信息，请访问 <a href="https://cn.vuejs.org/api/sfc-css-features.html">API - 单文件组件 CSS 功能</a></dd>
         <dd>
             <figure class="img-sn">
                 <img src="./imgs/class0.png" alt="">
@@ -88,7 +85,7 @@ const isOn = reactive({
         </dd>
         <dt>导入外部样式表</dt>
         <dd>可以导入本地样式表；也可以导入在线样式表</dd>
-        <dd >
+        <dd>
             <pre>
 @import './base.css';
 @import url(//at.alicdn.com/t/c/font_4235521_vw0a33le7e.css);            </pre>
@@ -96,7 +93,7 @@ const isOn = reactive({
         <dt>样式预处理SCSS</dt>
         <dd>原生CSS3也支持嵌套写法</dd>
         <dd>后续案例演示会使用两种方法</dd>
-        <dd>请访问 <a href="./scss.html" class="link">SCSS</a></dd>
+        <dd>请访问 <a href="./scss.html">SCSS</a></dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

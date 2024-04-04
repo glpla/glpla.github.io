@@ -6,19 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>路由 Router</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
 <body>
     <header>
         <h1>路由</h1>
-        <span>Router</span>
+        <span>&commat; Router</span>
     </header>
-    <dl class="nav-cont">
+    <dl>
         <dt>概述</dt>
         <dd>按照路径path和组件component的值对形式name-value定义路由</dd>
         <dd>每一个组件都是一个单组件文件SCF，后缀名是.vue；引入组件时，可以省略后缀名</dd>
@@ -27,25 +24,20 @@
         <dd>路由组件应该集中、分类存放，如pages文件夹、views文件夹等视图类文件夹；其它一般组件则存放于components文件夹</dd>
         <dd>更多信息，请访问<a href="https://router.vuejs.org/zh/" class="link">Vue Router</a></dd>
         <dt>安装路由</dt>
-        <dd>可以创建项目的时候指定使用路由，自动生成路由配置文件，推荐 <i class="ri-thumb-up-fill"></i></dd>
+        <dd>可以创建项目的时候指定使用路由，自动生成路由配置文件，推荐 <i class="iconfont icon-thumbup"></i></dd>
         <dd>也可以单独安装路由依赖；需要单独配置并引入，比较麻烦，不推荐</dd>
         <dd>
-            <figure class="code">
-                <figcaption>安装路由</figcaption>
-                <pre>npm i vue-router</pre>
-            </figure>
+            <pre>npm i vue-router -S</pre>
         </dd>
-        <dt>声明路由</dt>
+        <dt>引入路由</dt>
+        <dd>在入口js中引入路由，作为中间件使用</dd>
         <dd>
-            <figure class="code">
-                <figcaption>在入口js中引入并声明路由</figcaption>
-                <pre>
+            <pre>
 //引入
 import router from './router'
 
 //使用 - 链式
 app.use(router).mount('#app')</pre>
-            </figure>
         </dd>
         <dt>定义路由</dt>
         <dd>路由必须指定path和component</dd>
@@ -80,10 +72,9 @@ app.use(router).mount('#app')</pre>
                 </tr>
             </table>
         </dd>
+        <dd>路由文件index.js配置详情</dd>
         <dd>
-            <figure class="code">
-                <figcaption>路由文件index.js配置详情</figcaption>
-                <pre>
+            <pre>
 //引入路由包
 import {createRouter, createWebHistory} from 'vue-router'
 
@@ -142,7 +133,6 @@ const router = createRouter({
 //导出路由
 export default router
 </pre>
-            </figure>
         </dd>
         <dt>使用路由</dt>
         <dd>借助自定义组件&lt;router-link&gt;来创建链接|路由；相当于&lt;a&gt;；使用属性to代替了属性href</dd>
@@ -151,10 +141,9 @@ export default router
         <dd>可以有多个&lt;router-view&gt;，使用name属性区分；相应的路由配置也要变化，见后例</dd>
         <dd>还可以像缓存组件那样，缓存&lt;router-view&gt;，见后例</dd>
         <dd>使用内置active-class属性高亮当前路由项</dd>
+        <dd>在入口组件中使用路由</dd>
         <dd>
-            <figure class="code">
-                <figcaption>在入口组件中使用路由</figcaption>
-                <pre>
+            <pre>
 //&lt;router-link&gt; - 字符串方法；也可以使用对象方法 :to = "{path: '/about'}"
 //为所有&lt;router-link&gt;指定active-class类即可高亮当前活动项
 &lt;router-link to = "/home" active-class = "active"&gt;home&lt;/router-link&gt;
@@ -172,7 +161,6 @@ export default router
 
 //&lt;router-view&gt;
 &lt;router-view&gt;&lt;/router-view&gt;</pre>
-            </figure>
         </dd>
         <dd class="example-sn">多&lt;router-view&gt;的使用</dd>
         <dd>路由配置由component该为components</dd>

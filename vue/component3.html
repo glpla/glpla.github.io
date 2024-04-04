@@ -6,17 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>跨级传 provide</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
 <body>
     <header>
         <h1>跨级传</h1>
-        <span>provide</span>
+        <span>&commat; provide</span>
     </header>
     <dl>
         <dt>跨级传递 provide vs inject</dt>
@@ -91,44 +88,36 @@ app.provide('axios',axios)</pre>
         <dd>1. 父组件</dd>
         <dd>定义接收函数来接收子组件传递的参数并以属性的形式绑定在子组件上</dd>
         <dd>sendPara是自定义事件</dd>
+        <dd>父组件 - &lt;script&gt;</dd>
         <dd>
-            <figure class="code">
-                <figcaption>父组件 - &lt;script&gt;</figcaption>
-                <pre>
+            <pre>
 import Child from '@/components/Child.vue'
 import {msg} from 'vue'
 let msg = ref('')
 function getPara(val){
     msg.value = val.value
 }</pre>
-            </figure>
         </dd>
+        <dd>父组件 - &lt;template&gt;</dd>
         <dd>
-            <figure class="code">
-                <figcaption>父组件 - &lt;template&gt;</figcaption>
-                <pre>
+            <pre>
 &lt;div&gt;{{msg}}&lt;/div&gt;
 &lt;Child :sendPara='getPara'/&gt;</pre>
-            </figure>
         </dd>
         <dd>2. 子组件</dd>
         <dd>定义要发送的数据</dd>
         <dd>在props定义发送数据的函数名</dd>
         <dd>在事件中定义函数发送数据 - 这里采用点击按钮触发，也可以在生命周期函数中触发</dd>
+        <dd>子组件 - &lt;script&gt;</dd>
         <dd>
-            <figure class="code">
-                <figcaption>子组件 - &lt;script&gt;</figcaption>
-                <pre>
+            <pre>
 import {ref} from 'vue'
 let para = ref('hi, there.')
 defineProps(['sendPara'])</pre>
-            </figure>
         </dd>
+        <dd>子组件 - &lt;template&gt;</dd>
         <dd>
-            <figure class="code">
-                <figcaption>子组件 - &lt;template&gt;</figcaption>
-                <pre>&lt;button @click='sendPara(para)'&gt;send para&lt;/button&gt;</pre>
-            </figure>
+            <pre>&lt;button @click='sendPara(para)'&gt;send para&lt;/button&gt;</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

@@ -6,17 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>子传父 emit</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
 <body>
     <header>
         <h1>子传父</h1>
-        <span>emit</span>
+        <span>&commat; emit</span>
     </header>
     <dl>
         <dd>通过编译宏defineXXX的形式实现通信|参数传递|数据传递</dd>
@@ -32,41 +29,35 @@
         </dd>
         <dt>基本过程</dt>
         <dd>1. 子组件 - 定义传递事件列表，使用变量emit接收，并在自定义事件中传递事件；可以携带参数</dd>
+        <dd>子组件&lt;script&gt;</dd>
         <dd>
-            <figure class="code">
-                <figcaption>子组件&lt;script&gt;</figcaption>
-                <pre>
+            <pre>
 const emits = defineEmits(['emitSuper', 'emitHi'])
 emits('emitHi', 'hi,there.')//上来就传递了一个事件过去
 const emitsHandle = () => {
     emits('emitSuper', 'hi,there.')
 }</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>子组件&lt;template&gt;</figcaption>
-                <pre>&lt;button @click="emitsHandle"&gt;click me&lt;/button&gt;</pre>
-            </figure>
+        </dd>
+        <dd>子组件&lt;template&gt;</dd>
+        <dd>
+            <pre>&lt;button @click="emitsHandle"&gt;click me&lt;/button&gt;</pre>
         </dd>
         <dd>子组件也可以使用 <span class="warn">内联事件</span> 传递事件，使用专有变量$emit</dd>
+        <dd>子组件&lt;template&gt; - 单击触发自定义事件someEvent；无参</dd>
         <dd>
-            <figure class="code">
-                <figcaption>子组件&lt;template&gt; - 单击触发自定义事件someEvent；无参</figcaption>
-                <pre>&lt;button @click="$emit('emitSuper', 'hi,there.')"&gt;click me&lt;/button&gt;</pre>
-            </figure>
+            <pre>&lt;button @click="$emit('emitSuper', 'hi,there.')"&gt;click me&lt;/button&gt;</pre>
         </dd>
         <dd>2. 父组件 - 监听事件emitSuper，并在回调函数中接收并处理参数</dd>
+        <dd>父组件&lt;template&gt;</dd>
         <dd>
-            <figure class="code">
-                <figcaption>父组件&lt;template&gt;</figcaption>
-                <pre>&lt;MyComponent @emit-super="callback" /&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>父组件&lt;script&gt;</figcaption>
-                <pre>
+            <pre>&lt;MyComponent @emit-super="callback" /&gt;</pre>
+        </dd>
+        <dd>父组件&lt;script&gt;</dd>
+        <dd>
+            <pre>
 const callback = (e) => {
     console.log('hihihi', e);
 }</pre>
-            </figure>
         </dd>
     </dl>
     <dl>
