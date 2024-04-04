@@ -7,7 +7,7 @@
   --main-light-blue: #53b3f3;
   --main-red: #d35400;
   --nav-h: 100px;
-  --header-h: 200px;
+  --header-h: 20vh;
 }
 
 * {
@@ -18,7 +18,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--nav-h);
+  scroll-padding-top: var(--header-h);
 }
 
 body {
@@ -29,19 +29,19 @@ body {
 }
 
 body::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 body::-webkit-scrollbar-track {
-  background-color: #afded5;
+  /* background-color: #afded5; */
 }
 
 body::-webkit-scrollbar-thumb {
-  width: 10px;
-  background-color: var(--main-green);
-  border-radius: 10px;
-  box-shadow: 0 0 10px 2px #16a085;
-  border: 1px solid #fff;
+  width: 8px;
+  background-image: linear-gradient(#fff, var(--main-light-blue));
+  border-radius: 8px;
+  /* box-shadow: 0 0 8px 2px #16a085; */
+  /* border: 1px solid #fff; */
 }
 
 ul {
@@ -82,7 +82,6 @@ p {
 
 .warn {
   color: var(--main-red);
-  font-weight: 600;
 }
 
 .em {
@@ -158,7 +157,7 @@ header {
   position: fixed;
   width: 100%;
   top: 0;
-  height: var(--nav-h);
+  height: var(--header-h);
   background-color: rgba(41, 128, 185, var(--alpha));
   z-index: 99;
 }
@@ -219,7 +218,7 @@ header {
   right: -10px;
 }
 
-main {
+.main {
   max-width: 980px;
   margin: 0 auto;
   background-color: #fff;
@@ -227,6 +226,13 @@ main {
 
 section {
   padding: 2rem;
+}
+
+.section-header {
+  height: var(--header-h);
+  background-image: url(../../imgs/btm_sea.png);
+  background-size: cover;
+  background-position: center;
 }
 
 .section-title {
@@ -760,10 +766,6 @@ iframe {
     overflow: hidden;
   }
 
-  header {
-    height: var(--nav-h);
-  }
-
   .nav {
     padding: 0 2rem;
   }
@@ -776,10 +778,10 @@ iframe {
 
   .nav ul {
     position: absolute;
-    top: var(--nav-h);
+    top: var(--header-h);
     right: -100%;
     width: 50%;
-    height: calc(100vh - var(--nav-h));
+    height: calc(100vh - var(--header-h));
     padding-top: 30px;
     flex-direction: column;
     background-color: rgba(0, 0, 0, 1);
