@@ -5,23 +5,16 @@
   --warn-color: #eb2f06;
   --bar-bg-color: #4bc2ce;
   --main-color-purple: #be01fe;
-  --main-color-blue: #3498db;
-  --main-color-dark-blue: #2980b9;
+  --main-color-blue: #4bc2ce;
+  --main-color-dark-blue: #1b9fab;
   --main-color-yellow: #f1c40f;
   --main-color-orange: rgba(242, 94, 68, 0.4);
   --main-color-orange-light: rgba(242, 94, 68, 0.1);
-  --main-color-green: #2dfc52;
-  --main-color-gray: #34495e;
-  --main-color-dark-gray: #2c3e50;
-  --bg-tips-color: #e3f7ef;
   --tips-color: #edf8db;
   --tips-bold-color: #2ed573;
-  --w-width: 1000px;
-  --header-h: 20rem;
+  --w-width: 1024px;
   --chap-h: 12rem;
   --padding: 1rem;
-  --nav-item-bg: #4bc2ce;
-  --nav-item-dark-bg: #005a62;
 }
 
 body,
@@ -75,6 +68,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 header {
+  --color: #ff7b00;
+  --color-dark: #f25e44;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -82,7 +77,7 @@ header {
   height: 20vh;
   color: #fff;
   padding: var(--padding);
-  background: linear-gradient(315deg, #ff7b00 25%, #f25e44);
+  background: linear-gradient(315deg, var(--color) 25%, var(--color-dark));
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -95,7 +90,7 @@ header::after {
   bottom: 0;
   width: 200%;
   height: 6px;
-  background-image: linear-gradient(to right, #ff0 0%, #f00 50%, #ff0 100%);
+  background-image: linear-gradient(to right, #ff0 0%, var(--color) 50%, #ff0 100%);
   animation: roll 4s linear infinite alternate;
 }
 
@@ -153,7 +148,7 @@ pre {
   padding: 1rem;
   font-size: 14px;
   background-color: #333;
-  border-radius: 8px;
+  border-radius: 6px;
   overflow: auto;
   margin: 1rem auto;
 }
@@ -233,31 +228,34 @@ tr:nth-child(even) {
 /* sn start*/
 
 body {
-  counter-reset: tbl-sn;
-  counter-reset: img-sn;
-  counter-reset: exam-sn;
+  counter-reset: tbl-sn img-sn exam-sn;
 }
 
-caption {
+/* table */
+table {
   counter-increment: tbl-sn;
+}
+
+table caption {
   font-size: 1.4rem;
 }
 
-caption::before {
+table caption::before {
   content: '表' counter(tbl-sn)' ';
 }
 
+/* figure */
 figure {
   margin: calc(4*var(--padding)) auto;
+  counter-increment: img-sn;
 }
 
-figcaption {
+figure figcaption {
   text-align: center;
-  counter-increment: img-sn;
   font-size: 1.4rem;
 }
 
-figcaption::before {
+figure figcaption::before {
   content: '图' counter(img-sn)' ';
 }
 

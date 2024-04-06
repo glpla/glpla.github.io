@@ -40,6 +40,18 @@
         <dd>onDeactivated()</dd>
         <dd>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件从 DOM 中被移除时调用</dd>
         <dd class="example-sn">模拟用户个人中心的标签页</dd>
+        <dd class="example-sn">路由缓存</dd>
+        <dd>不是简单的使用缓存组件包裹，而应该使用动态组件实现</dd>
+        <dd>
+            <pre>
+&lt;RouterView v-slot="{ Component }"&gt;
+    &lt;transition&gt;
+        &lt;keep-alive&gt;
+        &lt;component :is="Component" /&gt;
+        &lt;/keep-alive&gt;
+    &lt;/transition&gt;
+&lt;/RouterView&gt;</pre>
+        </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

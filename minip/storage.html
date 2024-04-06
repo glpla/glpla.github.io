@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本地存储 Storage</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>本地存储</h1>
+        <span>&commat; Storage</span>
+    </header>
+    <dl>
+        <dt>案例</dt>
+        <dd>app.js - 启动时 onLaunch 拉取日志</dd>
+        <dd>
+            <pre>
+const logs = wx.getStorageSync('logs') || []
+logs.unshift(Date.now())
+wx.setStorageSync('logs', logs)</pre>
+        </dd>
+        <dd>log.js - 拉取并处理|格式化日志</dd>
+        <dd>
+            <pre>
+this.setData({
+    logs: (wx.getStorageSync('logs') || []).map(log => {
+        return {
+        date: util.formatTime(new Date(log)),
+        timeStamp: log
+        }
+    })
+})</pre>
+        </dd>
+        <dt>概述</dt>
+        <dd></dd>
+        <dd>以值对key-value的形式在客户端永久保存数据</dd>
+        <dd>单个 key 允许存储的最大数据长度为 1MB，所有数据存储上限为 10MB</dd>
+        <dd>保存的数据 data|value：只支持原生类型、Date、及能够通过JSON.stringify序列化的对象</dd>
+        <dd>应：只进行数据的持久化存储，不应：用于运行时的数据传递或全局状态管理。启动过程中过多的同步读写存储，会显著影响启动耗时</dd>
+        <dd>更多本地缓存，可以访问 <a href="../web/js/storage.html" class="link">HTML storage</a></dd>
+    </dl>
+    <div class="chap">API</div>
+    <dl>
+        <dd>所有的API都支持同步调用或异步调用</dd>
+        <dd>异步调用的API以Sync结束</dd>
+        <dd>
+            <table>
+                <caption>本地存储 API</caption>
+                <tr>
+                    <th>同步</th>
+                    <th>异步</th>
+                </tr>
+                <tr>
+                    <td>wx.setStorageSync</td>
+                    <td>wx.setStorage</td>
+                </tr>
+                <tr>
+                    <td>wx.getStorageSync</td>
+                    <td>wx.getStorage</td>
+                </tr>
+                <tr>
+                    <td>wx.removeStorageSync</td>
+                    <td>wx.removeStorage</td>
+                </tr>
+                <tr>
+                    <td>wx.clearStorageSync</td>
+                    <td>wx.clearStorage</td>
+                </tr>
+            </table>
+        </dd>
+        <dt>保存数据 set</dt>
+        <dd class="sn">
+            <div>wx.setStorageSync(string key, any data)</div>
+            <div>wx.setStorage(Object object)</div>
+            <p>保存成功，返回 errMsg: "setStorage:ok"</p>
+            <pre>
+wx.setStorage({
+    key:'slogan',
+    data:'hi',
+    success:res=>{
+        console.log(res);
+    },
+    fail:err=>{
+        console.log(err);
+    },
+    complete:()=>{
+        console.log('set done log');
+    }
+})</pre>
+        </dd>
+        <dt>获取数据 get</dt>
+        <dd class="sn">
+            <div>wx.getStorageSync(string key)</div>
+            <div>wx.getStorage(Object object)</div>
+            <p>如果数据不存在，返回 errMsg: "getStorage:fail data not found"</p>
+            <pre>
+wx.getStorage({
+    key:'slogan',
+    success:res=>{
+        console.log(res);
+    },
+    fail:err=>{
+        console.log(err);
+    },
+    complete:()=>{
+        console.log('get done log');
+    }
+})</pre>
+        </dd>
+        <dt>删除指定数据 - remove</dt>
+        <dd class="sn">
+            <div>wx.removeStorageSync(string key)</div>
+            <div>wx.removeStorage(Object object)</div>
+            <p>删除成功，返回errMsg: "removeStorage:ok"</p>
+            <pre>
+wx.removeStorage({
+    key: 'slogan',
+    success:res=>{
+        console.log(res);
+    },
+    fail:err=>{
+        console.log(err);
+    },
+    complete:()=>{
+        console.log('remove done log');
+    }
+})</pre>
+        </dd>
+        <dt>清除所有数据 clear</dt>
+        <dd class="sn">
+            <div>wx.clearStorageSync()</div>
+            <div>wx.clearStorage(Object object)</div>
+            <p>清除成功，返回 errMsg: "clearStorage:ok"</p>
+            <pre>
+wx.clearStorage({
+    success:res=>{
+        console.log(res);
+    },
+    fail:err=>{
+        console.log(err);
+    },
+    complete:()=>{
+        console.log('clear done log');
+    }
+})</pre>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

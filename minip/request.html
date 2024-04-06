@@ -6,11 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网络请求 Request</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
+    <style>
+        header {
+            --color: #4bc2ce;
+            --color-dark: #1b9fab;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,16 +22,14 @@
         <span>Request</span>
     </header>
     <dl>
-        <dt>wx.request</dt>
-        <dd>微信小程序使用wx.request发起网络请求；还可以使用 <a href="https://www.axios-http.cn/docs/intro" class="link">Axios</a>
+        <dd>微信小程序使用wx.request发起网络请求；还可以使用 <a href="https://www.axios-http.cn/docs/intro">Axios</a>
         </dd>
-        <dd>搭建本地资源服务器，请访问 <a href="../web/framework/node.html" class="link">Node.js</a>；简化起见，可以使用 <a
-                href="https://www.expressjs.com.cn/" class="link">Express</a> 或 <a href="https://koajs.com/#"
-                class="link">koa</a>；还可以使用 <a href="../node/jsonserver.html" class="link">JSON
+        <dd>搭建本地资源服务器，请访问 <a href="../web/framework/node.html">Node.js</a>；简化起见，可以使用 <a
+                href="https://www.expressjs.com.cn/">Express</a> 或 <a href="https://koajs.com/#">koa</a>；还可以使用 <a
+                href="../node/jsonserver.html">JSON
                 Server</a> 搭建数据服务器</dd>
         <dd>微信小程序支持回调函数和<a
-                href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise"
-                class="link">Promise</a>
+                href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>
             两种方式</dd>
         <dd>wx.request必须满足：</dd>
         <dd>- 仅支持https请求</dd>
@@ -49,8 +50,8 @@
         </dd>
         <dt>wx.request</dt>
         <dd>请求方式很多，一般是GET和POST；默认是GET；更多信息，请查看官方文档 <a
-                href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html"
-                class="link">wx.request</a></dd>
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html">官方 -
+                wx.request</a></dd>
         <dd>如果提示：对应的服务器证书无效。。。需要服务器重新下载并配置SSL证书</dd>
         <dd>临时调试可以选择取消校验</dd>
         <dd>生产环境，必须要配置新的SSL证书</dd>
@@ -73,7 +74,7 @@
                 </tr>
                 <tr>
                     <td>data</td>
-                    <td>请求的参数；<br> 多用于POST，指的是提交数据<br>也可以是GET，用到query参数；不过通常直接使用?拼接在url后面</td>
+                    <td>请求的参数；<br> 多用于POST，指的是提交数据<br>也可以是GET，用到query参数；也可以直接使用?拼接在url后面</td>
                 </tr>
                 <tr>
                     <td>header</td>
@@ -98,8 +99,8 @@
             </table>
         </dd>
         <dd class="tips">注意请求URL/接口地址</dd>
-        <dd class="example-sn">GET - 获取 大树小站 积分榜数据</dd>
-        <dd class="code">
+        <dd class="example-sn">GET - 获取 <a href="https://glpla.githb.io">大树小站</a> 积分榜数据</dd>
+        <dd>
             <pre>
 wx.request({
     url: 'https://glpla.github.io/utils/data/data2024/rank202402.json',
@@ -115,7 +116,7 @@ wx.request({
 })</pre>
         </dd>
         <dd class="example-sn">GET - 获取 大树小站 美食列表数据完善美食列表并使用真机预览</dd>
-        <dd class="code">
+        <dd>
             <pre>
 wx.request({
     url: 'https://glpla.github.io/utils/data/food.json',
@@ -132,9 +133,7 @@ wx.request({
         </dd>
         <dd class="example-sn">GET - 使用猫眼API获取信息并渲染到页面</dd>
         <dd>
-            <figure class="code">
-                <figcaption>拉取猫眼热映电影</figcaption>
-                <pre>
+            <pre>
 wx.request({
     url:'https://m.maoyan.com/ajax/movieOnInfoList',
     success:(res:any)=>{
@@ -144,10 +143,9 @@ wx.request({
         })
     }
 })</pre>
-            </figure>
         </dd>
-        <dd class="example-sn">POST - 使用猫眼API获取信息并渲染到页面</dd>
         <dd class="tips">
+            <div>请随时关注并确认网络API的有效问题</div>
             <div>跨域问题只存在于利于浏览器的WEB开发中。小程序的宿主环境是微信客户端，不是浏览器，不存在跨域的问题</div>
             <div>Ajax的核心是依赖于浏览器的XMLHttpRequest对象；发起Ajax请求只针对于浏览器；小程序中叫发起网络请求</div>
         </dd>

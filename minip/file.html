@@ -5,44 +5,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文件 File</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <title>文件上传和下载 UploadFile vs DownloadFile</title>
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
+    <style>
+        header {
+            --color: #4bc2ce;
+            --color-dark: #1b9fab;
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <h1>文件</h1>
-        <span>&lt;File&gt;</span>
+        <h1>文件上传和下载</h1>
+        <span>UploadFile vs DownloadFile</span>
     </header>
     <dl>
-        <dt>文件</dt>
-        <dd>借助中间件，如multer、formidable，配合API实现</dd>
+        <dd>文件的上传和下载需要网络的支持，所以对应的API归类在网络</dd>
+        <dd>通常借助中间件|第三方，如 <a href="../node/multer.html">multer</a>、formidable，配合API实现</dd>
         <dt>wx.uploadFile(Object object)</dt>
-        <dd>文件上传</dd>
-        <dd>将本地资源上传到服务器</dd>
+        <dd>文件上传 - 将本地资源上传到服务器</dd>
         <dd>客户端发起一个 POST 请求，其中 content-type 为 multipart/form-data</dd>
+        <dd>详细信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/network/upload/wx.uploadFile.html"
+                class="link">官方 - uploadFile</a></dd>
         <dt>wx.downloadFile(Object object)</dt>
-        <dd>文件下载</dd>
-        <dd>详细信息，请访问 <a href="./case5.html" class="link">文件上传和下载</a></dd>
-        <dd class="example-sn">选择用户头像</dd>
-        <dd>用户点击后会打开头像选择对话框</dd>
-        <dd>
-            <figure class="code">
-                <figcaption>wxml</figcaption>
-                <pre>&lt;button open-type="chooseAvatar" bindchooseavatar='getAvatar'&gt;getAvatar&lt;/button&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>js</figcaption>
-                <pre>
-getAvatar(e){
-    console.log(e.detail);//http://tmp/bi86Wd1sI41s8ea8eb984c16d03bff787972d38e3ce6.jpg
-}</pre>
-            </figure>
-        </dd>
+        <dd>文件下载 - 下载文件资源到本地</dd>
+        <dd>客户端直接发起一个 HTTPS GET 请求，返回文件的本地临时路径 (本地路径)，单次下载允许的最大文件为 200MB</dd>
+        <dd>详细信息，请访问 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/network/download/wx.downloadFile.html"
+                class="link">官方 - downloadFile</a></dd>
+        <dd class="example-sn"><a href="./case5.html" class="link">文件上传和下载</a></dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

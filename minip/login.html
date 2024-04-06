@@ -6,22 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录 Login</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
-    <style>
-        table {
-            table-layout: fixed;
-        }
-    </style>
 </head>
 
 <body>
     <header>
         <h1>登录</h1>
-        <span>&lt;Login&gt;</span>
+        <span>&commat; Login</span>
     </header>
     <dl>
         <dt>普通登录</dt>
@@ -30,44 +22,63 @@
         <dt>小程序授权登录</dt>
         <dd>借助小程序的宿主环境，通过小程序的授权实现登录</dd>
         <dd>必须要用户主动授权才可以实现；基于用户对产品充分了解并预知可能的风险</dd>
-        <dd> wx.getUserProfile和wx.getUserInfo官方接口回收，<a
-                href="https://developers.weixin.qq.com/community/develop/doc/00022c683e8a80b29bed2142b56c01"
-                class="link">小程序用户头像昵称获取规则调整公告</a>；早期简便的open-data也被限制削弱
+        <dt>早期接口</dt>
+        <dd>均被官方回收或调整，建议使用 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/userProfile.html">头像昵称填写</a>完善用户信息，即新项目示例代码所示
         </dd>
-        <dd>建议使用 <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/userProfile.html"
-                class="link">头像昵称填写</a>完善用户信息，即新项目示例代码所示
+        <dd class="sn">
+            <div><a
+                    href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/user-info/wx.getUserProfile.html">wx.getUserProfile</a>
+            </div>
+
+            <div><a
+                    href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/user-info/wx.getUserInfo.html">wx.getUserInfo</a>
+            </div>
+            <div><a
+                    href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/user-info/UserInfo.html">UserInfo</a>
+            </div>
+            <div><a
+                    href="https://developers.weixin.qq.com/miniprogram/dev/component/button.html">&lt;button&gt;</a>的open-type
+            </div>
+            <div><a
+                    href="https://developers.weixin.qq.com/miniprogram/dev/component/open-data.html">&lt;open-data&gt;</a>
+            </div>
         </dd>
-        <dd>获取用户头像仅仅使用临时链接，必须发送到服务器才可以远程使用，详情请参考<a href="./case5.html" class="link">头像上传和下载</a></dd>
+
+        <dt>最佳实践</dt>
+        <dd>获取用户头像仅仅使用临时链接，保存到本地或发送到服务器；详情请参考<a href="./case5.html">头像上传和下载</a></dd>
+        <dd>核心代码参考</dd>
+        <dd>wxml - bind:chooseavatar</dd>
         <dd>
-            <figure class="code">
-                <figcaption>wxml</figcaption>
-                <pre>
-&lt;button class="avatar" open-type="chooseAvatar" bind:chooseavatar="chooseAvatar"&gt;
+            <pre>
+&lt;button open-type="chooseAvatar" bind:chooseavatar="chooseAvatar"&gt;
     &lt;image src="{{userInfo.avatar}}" mode="aspectFill" /&gt;
 &lt;/button&gt;
 &lt;text&gt;{{userInfo.nickName}}&lt;/text&gt;
-&lt;input class="ipt-nickname" type="nickname" bindinput="iptName" /&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>js</figcaption>
-                <pre>
-data: {
-    userInfo:{
-        avatar: '/imgs/avatar.png',
-        nickName:''
-    }
-},
-chooseAvatar(e) {
-    this.setData({
-        'userInfo.avatar': e.detail.avatarUrl
-    })
+&lt;input type="nickname" bindinput="iptName" /&gt;</pre>
+        </dd>
+        <dd>js</dd>
+        <dd>
+            <pre>
+const defaultAvatarUrl = 'https://glpla.github.io/imgs/qrcode_glpla.github.io.png'
+Page({
+    data: {
+        userInfo:{
+            avatar: defaultAvatarUrl,
+            nickName:''
+        }
     },
-iptName(e){
-    this.setData({
-        'userInfo.nickName':e.detail.value
-    })
-}</pre>
-            </figure>
+    chooseAvatar(e) {
+        this.setData({
+            'userInfo.avatar': e.detail.avatarUrl
+        })
+        },
+    iptName(e){
+        this.setData({
+            'userInfo.nickName':e.detail.value
+        })
+    }
+})</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

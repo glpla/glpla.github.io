@@ -6,8 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>计数器 Counter</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
-  <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/common.css">
   <style>
     .article {
       counter-reset: chap;
@@ -34,7 +33,8 @@
 
 <body>
   <header>
-    <h1>计数器&commat;Counter</h1>
+    <h1>计数器</h1>
+    <span>&commat;Counter</span>
   </header>
   <dl>
     <dt>说明</dt>
@@ -43,8 +43,8 @@
     <dd>. 理工科最爱：为代码编号</dd>
     <dd>. 计数标识符可以使用连字符-，不需要使用引号包裹</dd>
     <dd>
-      <table class="tbl-sn">
-        <caption>CSS样式</caption>
+      <table>
+        <caption>属性</caption>
         <tr>
           <th>类别</th>
           <th>说明</th>
@@ -67,25 +67,8 @@
         </tr>
       </table>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>]初始化</dd>
-    <dd>. 默认从0开始</dd>
     <dd>
-      <pre>counter-reset: percent;</pre>
-    </dd>
-    <dd>. 从10开始</dd>
-    <dd>
-      <pre>counter-reset: percent 10;</pre>
-    </dd>
-    <dd>. 根据变量定义开始编号</dd>
-    <dd>
-      <pre>counter-reset: percent var(--per);</pre>
-    </dd>
-    <dd>. 使用连字符-定义复制标识符</dd>
-    <dd>
-      <pre>counter-reset: chapter-sn;</pre>
-    </dd>
-    <dd>
-      <table class="tbl-sn">
+      <table>
         <caption>list-style-type常见类型</caption>
         <tr>
           <th>类别</th>
@@ -130,15 +113,34 @@
       </table>
     </dd>
     <dt>步骤</dt>
-    <dd class="ol">
+    <dd class="sn">
       <div>为父元素创建/设置/初始化计数器</div>
       <div>子元素使用/计数，其伪元素使用content显示计数</div>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 为代码添加行号</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>]初始化</dd>
+    <dd>. 默认从0开始</dd>
     <dd>
-      <figure class="code">
-        <figcaption>为代码添加行号</figcaption>
-        <pre>
+      <pre>counter-reset: percent;</pre>
+    </dd>
+    <dd>. 从10开始</dd>
+    <dd>
+      <pre>counter-reset: percent 10;</pre>
+    </dd>
+    <dd>. 根据变量定义开始编号</dd>
+    <dd>
+      <pre>counter-reset: percent var(--per);</pre>
+    </dd>
+    <dd>. 使用连字符-定义复制标识符</dd>
+    <dd>
+      <pre>counter-reset: chapter-sn;</pre>
+    </dd>
+    <dd>. 同时声明多个计时器</dd>
+    <dd>
+      <pre>counter-reset: tbl-sn img-sn exam-sn;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 为代码添加行号</dd>
+    <dd>
+      <pre>
 <span>&lt;!DOCTYPE html&gt;</span>
 <span>&lt;html lang="en"&gt;</span>
 <span></span>
@@ -154,18 +156,14 @@
 <span>&lt;/body&gt;</span>
 <span></span>
 <span>&lt;/html&gt;</span></pre>
-      </figure>
     </dd>
+    <dd>[HTML] - 核心</dd>
     <dd>
-      <figure class="code">
-        <figcaption>[HTML]</figcaption>
-        <pre>&lt;span&gt;hello, world.&lt;/span&gt;</pre>
-      </figure>
+      <pre>&lt;span&gt;hello, world.&lt;/span&gt;</pre>
     </dd>
+    <dd>[CSS]</dd>
     <dd>
-      <figure class="code">
-        <figcaption>[CSS]</figcaption>
-        <pre>
+      <pre>
 pre {
   counter-reset: sn;
 }
@@ -177,9 +175,43 @@ pre span {
 pre span::before {
   content: counter(sn, decimal-leading-zero)' ';
 }</pre>
-      </figure>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 为文章添加章节序号</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 为表和图添加序号</dd>
+    <dd>
+      <pre>
+body {
+  counter-reset: tbl-sn img-sn;
+}
+
+/* table */
+table {
+  counter-increment: tbl-sn;
+}
+
+table caption {
+  font-size: 1.4rem;
+}
+
+table caption::before {
+  content: '表' counter(tbl-sn)' ';
+}
+
+/* figure */
+figure {
+  margin: calc(4*var(--padding)) auto;
+  counter-increment: img-sn;
+}
+
+figure figcaption {
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+figure figcaption::before {
+  content: '图' counter(img-sn)' ';
+}      </pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 为文章添加章节序号</dd>
     <dd class="article">
       <h2>title1</h2>
       <h3>sub-title1</h3>
@@ -250,10 +282,9 @@ pre span::before {
       <p>Voluptatum reiciendis nam voluptate, quae consectetur consequatur doloremque corporis deserunt.</p>
       <p>Eligendi modi, adipisci quae numquam expedita deserunt accusantium! Voluptas, fuga.</p>
     </dd>
+    <dd>为文章添加章节序号</dd>
     <dd>
-      <figure class="code">
-        <figcaption>为文章添加章节序号</figcaption>
-        <pre>
+      <pre>
 .article {
   counter-reset: chap;
 }
@@ -274,7 +305,6 @@ pre span::before {
 .article h3::before {
   content: counter(chap)'.' counter(sec)'节 ';
 }</pre>
-      </figure>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

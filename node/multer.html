@@ -6,11 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>上传 multer</title>
-  <link rel="stylesheet" href="../../css/reset2024.css">
-  <link rel="stylesheet" href="../../css/common2024.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
+  <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
+  <style>
+    header {
+      --color: #4bc2ce;
+      --color-dark: #1b9fab;
+    }
+  </style>
 </head>
 
 <body>
@@ -21,9 +24,9 @@
   <dl>
     <dd>Multer 是一个 node.js 中间件，用于处理 multipart/form-data 类型的表单数据，它主要用于上传文件</dd>
     <dd>请仅在有需要处理上传文件的路由中使用，以防恶意操作 - Only use this function on routes where you are handling the uploaded files</dd>
-    <dd>更多信息，请访问 <a href="https://www.npmjs.com/package/multer" class="link">NPM - multer</a></dd>
+    <dd>更多信息，请访问 <a href="https://www.npmjs.com/package/multer">NPM - multer</a></dd>
     <dt>上传类型</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>single(fieldname)</div>
       <p>Accept a single file with the name fieldname. The single file will be stored in req.file.</p>
       <div>array(fieldname[, maxCount])</div>
@@ -36,7 +39,8 @@
       <p>Accepts all files</p>
     </dd>
     <dt>基本步骤</dt>
-    <dd class="number">
+    <dd>可以在之前的资源服务器上进行</dd>
+    <dd class="sn">
       <div>创建服务器目录</div>
       <div>初始化</div>
       <div>安装multer依赖</div>
@@ -48,42 +52,35 @@
       <div>响应路由</div>
       <div>开启服务</div>
     </dd>
-    <dt>上传单张图片 single()</dt>
+  </dl>
+  <dl class="single">
+    <dt>应用一、上传单张图片 single()</dt>
     <dd>需指定存储</dd>
     <dd>
-      <table class="tbl-sn">
-        <caption>接口说明</caption>
+      <table>
+        <caption>API接口和name属性</caption>
         <tr>
-          <th>API</th>
-          <th>Description</th>
+          <th>分类</th>
+          <th>说明</th>
         </tr>
         <tr>
+          <td>API接口</td>
           <td>/upload</td>
-          <td>单张图片</td>
-        </tr>
-      </table>
-    </dd>
-    <dd>
-      <table class="tbl-sn">
-        <caption>name属性</caption>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
         </tr>
         <tr>
+          <td>name属性</td>
           <td>image</td>
-          <td>图片</td>
         </tr>
       </table>
     </dd>
-    <dd class="number">
+    <dd class="sn">
       <div>创建服务器目录 server</div>
       <div>初始化</div>
-      <pre class="code">npm init -y</pre>
+      <pre>npm init -y</pre>
       <div>安装依赖</div>
-      <pre class="code">npm install multer --save</pre>
+      <pre>npm install multer --save</pre>
       <div>创建服务脚本index.js并引入multer</div>
-      <pre class="code">const multer = require('multer')</pre>
+      <pre>const multer = require('multer')</pre>
       <div>配置存储 storage：指定上传目录，如upload；上传目录要提前创建好；如果不指定，上传的内容将保留在内存中</div>
       <p>Multer accepts an options <span class="warn">object</span>, the most basic of which is the <span
           class="warn">dest</span> property, which
@@ -96,7 +93,7 @@
       <p>使用DiskStorage配置可以更好控制上传细节，如改名；有了DiskStorage，可以放弃dest配置</p>
       <p>需要解析获取文件扩展名，引入path包</p>
       <p>使用时间戳为上传图片拼接名字</p>
-      <pre class="code">
+      <pre>
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, __dirname + '/upload')
@@ -107,7 +104,7 @@ const storage = multer.diskStorage({
   }
 })</pre>
       <div>创建 multer示例 - 可以看出，只需要指定一个存储即可</div>
-      <pre class="code">
+      <pre>
 const upload = multer({
   storage: storage
 })        </pre>
@@ -115,17 +112,15 @@ const upload = multer({
         以上传单文件single(name)为例；name是网络请求中指定的name属性，即：只接收请求中name属性指定的文件；可以根据不同的name上传不同用途的图片，如name为img代表普通图片，为avatar代表头像图片等等
       </div>
       <p>req.file可以获取到具体的文件信息</p>
-      <pre class="code">
+      <pre>
 app.post('/upload', upload.single('image'), (req, res) => {
-  console.log(req.file)
-  //res.send(req.file)
   res.send({
     err: 0,
     url: 'http://127.0.0.1:3000/upload/' + req.file.filename
   })
 })</pre>
       <p>默认情况下，只是简单的将文件上传到指定目录；不会解析文件信息，如文件名或文件后缀</p>
-      <pre class="code">
+      <pre>
 {
   fieldname: 'image',
   originalname: 'XG7mQxuM7nYJ787bce43d31211e2a9fb482c28888418.png',
@@ -137,7 +132,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
   size: 91117
 }</pre>
       <div>完整服务端代码index.js如下</div>
-      <pre class="code">
+      <pre>
 const express = require('express')
 const multer = require('multer')
 const path = require('path')
@@ -172,118 +167,50 @@ app.listen(port, () => {
   console.log('server now is at 127.0.0.1:3000');
 })</pre>
     </dd>
-    <dt>提交表单数据 none()</dt>
-    <dd>说明：无须配置存储，仅需创建multer实例</dd>
-    <dd>不借助multer也可以使用原生formData提交，详情请参考<a href="./formdata.html" class="link">formData</a>、<a
-        href="../web/js/event.html#form" class="link">form</a></dd>
+  </dl>
+  <dl class="single">
+    <dt>应用二、上传单张图片和表单数据 single()</dt>
     <dd>
-      <table class="tbl-sn">
-        <caption>接口说明</caption>
+      <table>
+        <caption>API接口和name属性</caption>
         <tr>
-          <th>API</th>
-          <th>Description</th>
+          <th>分类</th>
+          <th>说明</th>
         </tr>
         <tr>
-          <td>/upload/text</td>
-          <td>纯文本</td>
-        </tr>
-      </table>
-    </dd>
-    <dd>
-      <table class="tbl-sn">
-        <caption>name属性</caption>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-        </tr>
-        <tr>
-          <td>uname</td>
-          <td>名字</td>
-        </tr>
-        <tr>
-          <td>upass</td>
-          <td>密码</td>
-        </tr>
-      </table>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>client - HTML</figcaption>
-        <pre>
-&lt;form action="http://127.0.0.1:3000/upload/text" enctype="multipart/form-data" method="post"&gt;
-  &lt;input type="text" placeholder="your name" name="uname"&gt;
-  &lt;input type="password" placeholder="your pass" name="upass"&gt;
-  &lt;button&gt;submit&lt;/button&gt;
-&lt;/form&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>server</figcaption>
-        <pre>
-router.post('/text', upload.none(), (req, res) => {
-  console.log(req.body);
-  //其它处理
-  res.send({ msg: 'ok' })
-})</pre>
-      </figure>
-    </dd>
-    <dt>上传单张图片和表单数据 single()</dt>
-    <dd>需指定存储</dd>
-    <dd>
-      <table class="tbl-sn">
-        <tr>
-          <th>API</th>
-          <th>Description</th>
-        </tr>
-        <tr>
+          <td>API接口</td>
           <td>/upload/mix</td>
-          <td>单张图片和纯文本</td>
-        </tr>
-      </table>
-    </dd>
-    <dd>
-      <table class="tbl-sn">
-        <caption>name属性</caption>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
         </tr>
         <tr>
-          <td>uimg</td>
           <td>图片</td>
+          <td>uimg</td>
         </tr>
         <tr>
-          <td>udesc</td>
           <td>图片描述</td>
+          <td>udesc</td>
         </tr>
       </table>
     </dd>
+    <dd>client - HTML</dd>
     <dd>
-      <figure class="code">
-        <figcaption>client - HTML</figcaption>
-        <pre>
+      <pre>
 &lt;form action="http://127.0.0.1:3000/upload/mix" enctype="multipart/form-data" method="post"&gt;
   &lt;input type="file" name="uimg"&gt;
   &lt;input type="text" placeholder="your name" name="udesc"&gt;
   &lt;button&gt;submit&lt;/button&gt;
 &lt;/form&gt;</pre>
-      </figure>
     </dd>
+    <dd>server</dd>
     <dd>
-      <figure class="code">
-        <figcaption>server</figcaption>
-        <pre>
+      <pre>
 router.post('/mix', upload.single('uimg'), (req, res) => {
-  console.log(req.file, req.body);
   res.send({ msg: 'ok' })
 })</pre>
-      </figure>
     </dd>
     <dd class="example-sn">封装multer为upload.js</dd>
     <dd>提示：把upload暴露出去</dd>
     <dd>说明：引入时间格式依赖；增加了创建目录功能</dd>
-    <dd class="code">
+    <dd>
       <pre>
 const multer = require('multer')
 const fs = require('fs');
@@ -313,15 +240,59 @@ const upload = multer({
 
 module.exports = upload</pre>
     </dd>
-    <dt>上传多个图片 array()</dt>
+  </dl>
+  <dl class="none">
+    <dt>应用三、提交表单数据 none()</dt>
+    <dd>说明：无须配置存储，仅需创建multer实例</dd>
+    <dd>不借助multer也可以使用原生formData提交，详情请参考<a href="./formdata.html">formData</a>、<a
+        href="../web/js/event.html#form">form</a></dd>
+    <dd>
+      <table>
+        <caption>API接口和name属性</caption>
+        <tr>
+          <th>分类</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>API接口</td>
+          <td>/upload/text</td>
+        </tr>
+        <tr>
+          <td>名字</td>
+          <td>uname</td>
+        </tr>
+        <tr>
+          <td>密码</td>
+          <td>upass</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>client - HTML</dd>
+    <dd>
+      <pre>
+&lt;form action="http://127.0.0.1:3000/upload/text" enctype="multipart/form-data" method="post"&gt;
+  &lt;input type="text" placeholder="your name" name="uname"&gt;
+  &lt;input type="password" placeholder="your pass" name="upass"&gt;
+  &lt;button&gt;submit&lt;/button&gt;
+&lt;/form&gt;</pre>
+    </dd>
+    <dd>server</dd>
+    <dd>
+      <pre>
+router.post('/text', upload.none(), (req, res) => {
+  res.send({ msg: 'ok' })
+})</pre>
+    </dd>
+  </dl>
+  <dl class="array">
+    <dt>应用四、上传多个图片 array()</dt>
     <dd>利用&lt;input&gt;的multiple属性选择多个图片</dd>
-    <dd class="code">
+    <dd>
       <pre>&lt;input type="file" name="img" multiple&gt;</pre>
     </dd>
-    <dd class="code">
+    <dd>
       <pre>
 router.post('/array', upload.array('img', 9), (req, res) => {
-  console.log(req.files, req.body);
   res.send({
     err: 0,
     msg: 'ok',
@@ -330,7 +301,9 @@ router.post('/array', upload.array('img', 9), (req, res) => {
   })
 })</pre>
     </dd>
-    <dt>上传多个图片 fields()</dt>
+  </dl>
+  <dl class="fields">
+    <dt>应用五、上传多个图片 fields()</dt>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
