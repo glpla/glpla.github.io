@@ -16,31 +16,54 @@
         <span>&commat; ref</span>
     </header>
     <dl>
-        <dt>说明</dt>
-        <dd>通过普通DOM标签上ref标识获取DOM节点或组件实例；实际开发中，更多是获取组件实例</dd>
-        <dd>需引入包 ref</dd>
-        <dd>多组件情况下，普通的DOM获取容易产生冲突</dd>
+        <dd>HTML原生开发中，经常需要获取元素|节点，并进一步处理；更多信息，请访问<a href="../web/js/dom.html">HTML - DOM</a></dd>
+        <dd>早期流行的JQuery也是通过操作DOM实现</dd>
+        <dd>Vue中更多的是通过数据驱动的方式实现交互，但有时候避免不了仍然需要操作DOM</dd>
+        <dd>通过ref标识获取DOM节点或组件实例</dd>
         <dd>直接获取会失败，应在组件挂载完毕onMounted再获取</dd>
-        <dd>1. 获取普通DOM - 返回DOM节点</dd>
+        <dd>使用时，应判断是否为空</dd>
+        <dd>该属性并不显示在结构中，F12检查元素时，不可见</dd>
+        <dd>更多使用，请访问 <a href="https://cn.vuejs.org/guide/essentials/template-refs.html">官方文档 - 模板引用</a></dd>
+        <dd>需引入包 ref</dd>
+        <!-- <dd>多组件情况下，普通的DOM获取容易产生冲突</dd> -->
+        <dd>
+            <pre>import { ref } from 'vue'</pre>
+        </dd>
+        <dt>获取普通DOM</dt>
+        <dd>返回DOM节点</dd>
         <dd>
             <pre>
+&lt;script setup&gt;
+    import { ref, onMounted } from 'vue'
+    let dom = ref('null')
+    onMounted(() =&gt; {
+        console.log(dom);
+        console.log(dom.value);
+        console.log(dom.value.innerText);
+        console.log('nodes', dom.value.childNodes[0]);
+        console.log('children', dom.value.children[0]);
+        console.log('classList', dom.value.classList);
+        console.log('className', dom.value.className);
+        console.log('style', dom.value.style);
+        console.log('getAttribute', dom.value.getAttribute('data-ind'));
+        console.log('getAttribute', dom.value.getAttribute('style'));
+        console.log('getAttribute', dom.value.getAttribute('class'));
+    })
+&lt;/script&gt;
+
 &lt;template&gt;
-    &lt;div ref="dom"&gt; Dom &lt;/div&gt;
+    &lt;div class="base active" ref="dom" data-ind="100" style="color: #f40;padding: 10px;"&gt;hi,there &lt;span&gt;88&lt;/span&gt;&lt;/div&gt;
 &lt;/template&gt;
     
-&lt;script setup&gt;
-    import { onMounted, ref } from 'vue';
-    let dom = ref(null)
-    onMounted(() =&gt; {
-        console.log('dom', dom.value);
-    })
-&lt;/script&gt;</pre>
+&lt;style scoped&gt;&lt;/style&gt;</pre>
         </dd>
-        <dd>2. 获取组件 - 返回组件实例</dd>
+        <dt>获取组件</dt>
+        <dd>返回组件实例</dd>
         <dd>默认情况下，组件内部的属性和方法对外部不公开，所以获取到的ref仅仅是一个代理对象，看不到组件的内部细节</dd>
         <dd>组件需要显示的暴露属性或方法defineExpose</dd>
         <dd>defineExpose应该写在暴露的对象后面</dd>
         <dd>下面的测试组件暴露了一个属性一个方法</dd>
+        <dd class="tips">尽量避免通过ref引用组件，请组件的通信机制实现 props和emit，详见后续组件内容</dd>
         <dd>
             <pre>
 &lt;template&gt;
@@ -59,9 +82,46 @@
     })
 &lt;/script&gt;</pre>
         </dd>
-        <dd class="example-sn">单击打开弹窗</dd>
+        <!-- <dd class="example-sn">单击打开弹窗</dd>
         <dd>父组件获取子组件|弹窗组件实例，执行弹窗的方法</dd>
-        <dd>子组件|弹窗组件定义方法并暴露；方法利用bool将弹窗组件的隐藏状态变为显示</dd>
+        <dd>子组件|弹窗组件定义方法并暴露；方法利用bool将弹窗组件的隐藏状态变为显示</dd> -->
+        <dd class="example-sn">自定义搜索组件，单击时，显示并自动获取焦点</dd>
+        <dd>搜索组件参考设计如下</dd>
+        <dd>
+            <pre>
+&lt;script setup&gt;
+    import { ref, onMounted } from 'vue';
+    let sql = ref(null)
+    onMounted(() =&gt; {
+        sql.value.focus()
+    })
+&lt;/script&gt;
+
+&lt;template&gt;
+    &lt;input type="text" ref="sql"&gt;
+&lt;/template&gt;</pre>
+        </dd>
+        <dd>父组件设计如下</dd>
+        <dd>
+            <pre>
+&lt;script setup&gt;
+    import { ref } from 'vue';
+    import Search from './components/Search.vue'
+    let isShow = ref(false)
+    const showBox = () =&gt; {
+        isShow.value = true
+    }
+&lt;/script&gt;
+
+&lt;template&gt;
+    &lt;button @click="showBox"&gt;click&lt;/button&gt;
+    &lt;Search v-if="isShow"&gt;&lt;/Search&gt;
+&lt;/template&gt;</pre>
+        </dd>
+        <dd class="example-sn">列表渲染</dd>
+        <dd>不建议每个子节点都标注ref属性</dd>
+        <dd>建议获取父节点，再根据节点关系获取子节点</dd>
+        <dd>思路同事件代理</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
