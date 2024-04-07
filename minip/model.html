@@ -21,12 +21,11 @@
         <dd>逻辑层也可以影响到视图层</dd>
         <dt class="txt-center">视图层 <i class="iconfont icon-moduanzuoyouzhankai_o"></i> 逻辑层</dt>
         <dd>多用于表单元素</dd>
-        <dd>为value添加model修饰符即可实现双向数据绑定</dd>
+        <dd>为 <span class="warn">value</span> 添加model修饰符即可实现双向数据绑定</dd>
         <dd>省略了触发事件，如bindchange或bindinput</dd>
         <dd>只能简单属性绑定 - 单一字段</dd>
         <dd>借助调试器的AppData查看绑定情况</dd>
         <dt>&lt;input&gt; - text</dt>
-        <dd class="tips">绑定的是 值Value</dd>
         <dd>参考数据</dd>
         <dd>
             <pre>
@@ -75,6 +74,12 @@ getName(e) {
     })
 }</pre>
         </dd>
+        <dt>&lt;textarea&gt; - value</dt>
+        <pre>&lt;textarea name="udesc" model:value="{{userInfo.udesc}}" /&gt;</pre>
+        <dt>&lt;slider&gt; - value</dt>
+        <dd>
+            <pre>&lt;slider min="18" max="24" step="1" show-value model:value="{{age}}"/&gt;</pre>
+        </dd>
         <dt>&lt;radio&gt;</dt>
         <dd class="tips">绑定的是选中状态 checked</dd>
         <dd>
@@ -84,7 +89,7 @@ getName(e) {
     &lt;radio value="female" color="#ff4400" model:checked="{{user.ugender=='female'}}"/&gt;female
 &lt;/radio-group&gt;            </pre>
         </dd>
-        <dd class="example-sn">&lt;swiper&gt; - 当前swiper-item - current</dd>
+        <dt>&lt;swiper&gt; - 当前swiper-item - current</dt>
         <dd>拖动或设置为自动播放，查看绑定情况</dd>
         <dd>
             <pre>cur:1</pre>

@@ -330,10 +330,23 @@ button{
                     </td>
                 </tr>
                 <tr>
+                    <td>range</td>
+                    <td>数据列表|范围</td>
+                </tr>
+                <tr>
                     <td>bindcancel</td>
                     <td>取消选择时触发</td>
                 </tr>
             </table>
+            <p class="example-sn">弹出菜单 - ind和list是data中的数据</p>
+            <pre>
+&lt;picker mode="selector" value="{{ind}}" range="{{list}}" bindchange="pick"&gt;{{list[ind]}}&lt;/picker&gt;</pre>
+            <pre>
+pick(e){
+    this.setData({
+        ind:e.detail.value
+    })
+}</pre>
             <div>&lt;slider&gt;</div>
             <p>滑动选择器</p>
             <table>
@@ -382,6 +395,14 @@ button{
                     <td>拖动过程中触发</td>
                 </tr>
             </table>
+            <p class="example-sn">年龄选择</p>
+            <pre>&lt;slider activeColor="#3498db" backgroundColor="#ccc" block-size="24" block-color="#3498db" bindchange="selAge" min="18" max="24" name="uage" value="{{uage}}" show-value /&gt;</pre>
+            <pre>
+selAge(e){
+    this.setData({
+        uage:e.detail.value
+    })
+}</pre>
             <div>&lt;switch&gt;</div>
             <p>开关选择器</p>
             <table>
@@ -416,11 +437,11 @@ button{
 &lt;form class="form" bindsubmit="submit"&gt;
     &lt;view class="item border-btm"&gt;
         &lt;text&gt;学号&lt;/text&gt;
-        &lt;input class="ipt" type="digit" name="usn" placeholder="您的学号" maxlength="8" model:value="{{userInfo.usn}}" /&gt;
+        &lt;input class="ipt" type="digit" name="usn" placeholder="您的学号" maxlength="8" value="{{userInfo.usn}}" /&gt;
     &lt;/view&gt;
     &lt;view class="item border-btm"&gt;
         &lt;text&gt;昵称&lt;/text&gt;
-        &lt;input class="ipt" type="text" name="uname" placeholder="您的昵称" maxlength="8" model:value="{{userInfo.uname}}" /&gt;
+        &lt;input class="ipt" type="text" name="uname" placeholder="您的昵称" maxlength="8" value="{{userInfo.uname}}" /&gt;
     &lt;/view&gt;
     &lt;view class="item border-btm"&gt;
         &lt;text&gt;生日&lt;/text&gt;
@@ -468,7 +489,7 @@ button{
     &lt;/view&gt;
     &lt;view class="item"&gt;
         &lt;text&gt;简介&lt;/text&gt;
-        &lt;textarea class="ta" name="udesc" model:value="{{userInfo.udesc}}" /&gt;
+        &lt;textarea class="ta" name="udesc" value="{{userInfo.udesc}}" /&gt;
     &lt;/view&gt;
     &lt;button form-type="submit" class="sub-btn"&gt;保存&lt;/button&gt;
 &lt;/form&gt;</pre>
