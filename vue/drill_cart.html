@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>实操 购物车</title>
   <link rel="stylesheet" href="../css/exp.css">
+  <base target="_blank">
 </head>
 
 <body>
@@ -79,9 +80,10 @@ const data = reactive({
   }]
 })</pre>
         <div>全选</div>
-        <p>为全选按钮双向绑定选中数据selectedAll，并增加改变change事件allSel；状态改变后，为真，则为全选，选中商品列表和商品列表一致；为假，则取消全选，选中商品列表为空</p>
+        <p>为全选按钮双向绑定选中数据selectedAll，并增加改变change事件selAll；状态改变后，为真，则为全选，选中商品列表和商品列表一致；为假，则取消全选，选中商品列表为空</p>
+        <pre>&lt;input type="checkbox" v-model="data.selectedAll" @change="selAll"gt;</pre>
         <pre>
-const allSel = () => {
+const selAll = () => {
   if (data.selectedAll) {
     data.selectedLists = data.lists
   } else {
@@ -89,12 +91,12 @@ const allSel = () => {
   }
 }        </pre>
         <div>单个商品选择与取消</div>
-        <p>为单个商品对应的checkbox绑定每一项数据，并增加改变change事件singleSel，处理全选的真与假</p>
+        <p>为单个商品对应的checkbox绑定每一项数据，并增加改变change事件selItem，处理全选的真与假</p>
         <p>单个商品取消选择时，全选为假</p>
         <p>商品列表和选中商品列表数量相等，为全选；否则取消全选；额外判断条件，如果商品列表为空，则也应该取消全选</p>
-        <pre>&lt;input type="checkbox" :value="item" v-model="data.selectedLists" @change="singleSel"&gt;</pre>
+        <pre>&lt;input type="checkbox" :value="item" v-model="data.selectedLists" @change="selItem"&gt;</pre>
         <pre>
-const singleSel = () => {
+const selItem = () => {
   if (data.selectedLists.length == data.lists.length && data.lists.length) {
     data.selectedAll = true
   } else {
@@ -104,7 +106,9 @@ const singleSel = () => {
         <div>单个商品的增加和减少</div>
         <p>分别为增、减按钮绑定事件：增加数量inc(item)和减少数量dec(item)，并使用当前商品为形参，修改其数量number</p>
         <p>注意越界检测</p>
-        <pre>&lt;button class="btn" @click="dec(item)"&gt;-&lt;/button&gt;</pre>
+        <pre>
+&lt;button class="btn" @click="dec(item)"&gt;-&lt;/button&gt;
+&lt;button class="btn" @click="inc(item)"&gt;+&lt;/button&gt;</pre>
         <pre>
 const inc = (item) => {
   if (item.number &lt; item.stock) {
@@ -116,10 +120,10 @@ const dec = (item) => {
     item.number--
   }
 }</pre>
-        <div>结算逻辑</div>
+        <div>结算</div>
         <p>为总价绑定计算属性getTotal</p>
-        <pre>&lt;div class="total"&gt;总价{{ getTotal }}&lt;/div&gt;</pre>
         <p>遍历选中列表，依次将商品单价和商品数量相乘，并累加，得到总价</p>
+        <pre>&lt;div class="total"&gt;总价{{ getTotal }}&lt;/div&gt;</pre>
         <pre>
 const getTotal = computed(() => {
   let sum = 0
