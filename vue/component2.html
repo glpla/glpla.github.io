@@ -17,18 +17,19 @@
     </header>
     <dl>
         <dd>通过编译宏defineXXX的形式实现通信|参数传递|数据传递</dd>
-        <dt>事件传递 defineEmits()</dt>
-        <dd>在 &lt;script setup&gt; 的顶级作用域下，子组件使用defineEmits() 宏，以数组的形式，定义向父组件传递的事件</dd>
-        <dd>通常使用变量接收定义的事件列表，以便使用</dd>
+        <dt>基本过程</dt>
+        <dd class="sn">
+            <div>在 &lt;script setup&gt; 的顶级作用域下，子组件使用defineEmits() 宏，以 <span class="warn">数组</span>
+                的形式，定义向父组件传递的事件；通常使用变量接收定义的事件列表，以便进一步处理</div>
+            <div>父组件响应子组件传递的事件并处理</div>
+        </dd>
         <dd class="tips">
             <div>为了和普通事件区分，建议加上emit前缀</div>
-            <div>逻辑中推荐使用 camelCase，如：propsMsg</div>
-            <div>结构中推荐使用 kebab-case，如：greeting-message</div>
-            <div>无论是参数列表还是事件列表，都推荐使用变量接收</div>
+            <div>逻辑中推荐使用 camelCase，如：greetingMessage；结构中推荐使用 kebab-case，如：greeting-message</div>
             <div>可以直接在子组件结构中，使用专有变量$emit发送事件 - 仅限Vue环境</div>
         </dd>
-        <dt>基本过程</dt>
-        <dd>1. 子组件 - 定义传递事件列表，使用变量emit接收，并在自定义事件中传递事件；可以携带参数</dd>
+        <dt>子组件</dt>
+        <dd>定义传递事件列表，使用变量emits接收，并在自定义事件中传递事件；可以携带参数</dd>
         <dd>子组件&lt;script&gt;</dd>
         <dd>
             <pre>
@@ -42,12 +43,13 @@ const emitsHandle = () => {
         <dd>
             <pre>&lt;button @click="emitsHandle"&gt;click me&lt;/button&gt;</pre>
         </dd>
-        <dd>子组件也可以使用 <span class="warn">内联事件</span> 传递事件，使用专有变量$emit</dd>
+        <dd>子组件也可以使用 <span class="warn">内联事件</span> 传递事件，使用专有变量$emit - <span class="warn">不推荐</span></dd>
         <dd>子组件&lt;template&gt; - 单击触发自定义事件someEvent；无参</dd>
         <dd>
             <pre>&lt;button @click="$emit('emitSuper', 'hi,there.')"&gt;click me&lt;/button&gt;</pre>
         </dd>
-        <dd>2. 父组件 - 监听事件emitSuper，并在回调函数中接收并处理参数</dd>
+        <dt>父组件</dt>
+        <dd>监听事件emitSuper，并在回调函数中接收并处理参数</dd>
         <dd>父组件&lt;template&gt;</dd>
         <dd>
             <pre>&lt;MyComponent @emit-super="callback" /&gt;</pre>
@@ -83,7 +85,6 @@ const toDetail = (id) => {
         </dd>
         <dd>
             <pre>
-let lists = ref([''])
 const doDetail = (e) => {
     console.log('hi outer', e);
 }</pre>
@@ -93,7 +94,24 @@ const doDetail = (e) => {
         <dd>
             <img src="./imgs/emit1.png" alt="">
         </dd>
-        <dd>父组件</dd>
+        <dd>子组件 - 定义并接收父组件传递的参数，+1后，通过事件回传给父组件</dd>
+        <dd>
+            <pre>
+const props = defineProps({
+    propLike: Number
+})
+const emits = defineEmits(['emitInc'])
+const incLike = () => {
+    emits('emitInc', props.propLike + 1)
+}</pre>
+        </dd>
+        <dd>
+            <pre>&lt;div @click="incLike"&gt;&lt;span class="fa fa-heart"&gt;&lt;/span&gt; {{ propLike }}&lt;/div&gt;</pre>
+        </dd>
+        <dd>父组件 - 传递参数并响应事件</dd>
+        <dd>
+            <pre>&lt;Like :propLike="like" @emit-inc="incLike" /&gt;</pre>
+        </dd>
         <dd>
             <pre>
 //传递给子组件的数据
@@ -104,23 +122,6 @@ const incLike = (e) => {
   console.log(e);
   like.value = e
 }</pre>
-        </dd>
-        <dd>
-            <pre>&lt;Like :propLike="like" @emit-inc="incLike" /&gt;</pre>
-        </dd>
-        <dd>子组件 - 接收父组件传递的参数，+1后，通过事件回传给父组件</dd>
-        <dd>
-            <pre>
-const props = defineProps({
-    propLike: Number
-})
-const emit = defineEmits(['emitInc'])
-const incLike = () => {
-    emit('emitInc', props.propLike + 1)
-}</pre>
-        </dd>
-        <dd>
-            <pre>&lt;div @click="incLike"&gt;&lt;span class="fa fa-heart"&gt;&lt;/span&gt; {{ propLike }}&lt;/div&gt;</pre>
         </dd>
         <dd class="example-sn">搜索组件 - 表单</dd>
         <dd>说明：采用内联事件；不推荐，仅作为知识补充</dd>

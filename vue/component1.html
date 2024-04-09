@@ -19,32 +19,22 @@
         <dd>通过编译宏defineXXX的形式实现通信|参数传递|数据传递</dd>
         <dt>基本过程</dt>
         <dd class="sn">
-            <div>子组件使用宏defineProps()定义属性来接收传递的参数</div>
-            <div>父组件以属性的方式向子组件传递参数</div>
-            <p>. 传递的参数可以是静态的，也可以动态绑定的</p>
+            <div>子组件在 &lt;script setup&gt; 顶级作用域下，使用宏defineProps()定义属性来接收传递的参数并使用</div>
+            <div>父组件以属性的方式向子组件传递参数：可以是静态数据，也可以是响应式数据；可以是简单数据，也可以是复合数据</div>
         </dd>
         <dd class="tips">为了和普通变量区分，建议：传递的参数以prop开始，如propName</dd>
         <dt>子组件定义属性</dt>
-        <dd>1. 子组件&lt;script&gt; - 定义接收的参数</dd>
-        <dd>方案1：使用字符串数组声明 - 仅指定属性名</dd>
+        <dd>1. 子组件&lt;script&gt; - 使用 defineProps 定义接收的参数，并声明一个变量接收，便于在脚本中进一步处理</dd>
+        <dd>方案1：使用 <span class="warn">数组</span> 声明 - 仅指定属性名</dd>
         <dd>
             <pre>
-defineProps(['propMsg', 'propId'])
+const props = defineProps(['propMsg', 'propId'])
 </pre>
         </dd>
-        <dd>方案2：使用对象声明 - 仅指定属性名和属性类型</dd>
+        <dd>方案2：使用 <span class="warn">对象</span> 声明 - 指定属性名、属性类型type、默认值default和是否必须required</dd>
         <dd>
             <pre>
-defineProps({
-    propMsg: String,
-    propId: Number
-})
-</pre>
-        </dd>
-        <dd>方案3：使用对象声明 - 指定属性名、属性类型type、默认值default和是否必须required</dd>
-        <dd>
-            <pre>
-defineProps({
+const props = defineProps({
     propMsg: String,
     propId: {
       type: Number,
@@ -54,15 +44,26 @@ defineProps({
 })
 </pre>
         </dd>
-        <dd>方案4：如果在&lt;script&gt;需要使用父组件传递的参数，则声明一个变量接收 - 推荐</dd>
+        <dd>2. 子组件&lt;template&gt; - 使用传递来的参数|数据；可以直接使用；也可以使用属性变量获取</dd>
+        <dd>
+            <pre>&lt;div&gt;{{ propMsg }} - {{ props.propId }}&lt;/div&gt;</pre>
+        </dd>
+        <dd>如果要处理接收的参数，必须使用定义的变量获取，否则提示数据未定义 - 下例利用计算属性将接收的参数转换为大写</dd>
         <dd>
             <pre>
-const props = defineProps(['propMsg'])</pre>
+import { computed } from 'vue';
+const props = defineProps({
+  msg: String
+})
+const comp = computed(() => {
+    //return msg.toUpperCase()
+    return props.msg.toUpperCase()
+})</pre>
         </dd>
-        <dd>2. 子组件&lt;template&gt; - 使用传递来的参数|数据</dd>
         <dd>
-            <pre>&lt;div&gt;{{ propMsg }} - {{ propId }}&lt;/div&gt;</pre>
+            <pre>&lt;div&gt;computed {{ comp }}&lt;/div&gt;</pre>
         </dd>
+        <dd class="question">ReferenceError: msg is not defined</dd>
         <dt>父组件传递参数</dt>
         <dd>1. 父组件&lt;script&gt; - 引入子组件，准备数据</dd>
         <dd>
@@ -71,45 +72,18 @@ import { ref } from 'vue';
 import Test from './components/Test.vue';
 let msg = ref('hi,there')</pre>
         </dd>
-        <dd>2. 父组件&lt;template&gt; - 使用子组件；以数据绑定的形式传递参数：1个静态数据、1个响应式数据</dd>
+        <dd>2. 父组件&lt;template&gt; - 使用子组件；以数据绑定的形式传递参数：1个静态数据 propId、1个响应式数据 propMsg</dd>
         <dd>
             <pre>&lt;Test :propMsg="msg" propId="18"&gt;&lt;/Test&gt;</pre>
         </dd>
+        <dd><span class="iconfont icon-biz-help"></span> 如何传递一个数值类型的数据?</dd>
+        <dd class="tips">
+            <div>log时，数字是蓝色；字符串是黑色</div>
+            <!-- <div>&lt;Info :age="{{8}}" /&gt;</div> -->
+            <!-- <div>可以给子组件指定样式或类吗?</div> -->
+        </dd>
     </dl>
     <dl>
-        <dd class="example-sn">分别传递简单数据、复合数据</dd>
-        <dd>父组件</dd>
-        <dd class="sn">
-            <div>逻辑中准备数据；引入子组件；其它必要的系统组件引入</div>
-            <pre>
-import Test from './components/Test.vue'
-let title = ref('hi,there')
-let obj = ref({
-    id: 100,
-    name: 'gl'
-})
-let imgUrls = ref([{
-    id: 100,
-    url: 'imgs/coffee0.jpg'
-}, {
-    id: 101,
-    url: 'imgs/coffee1.jpg'
-}])</pre>
-            <div>结构中使用子组件并传递数据</div>
-            <pre>
-&lt;Test :propTitle="title" :propObj="obj" :propImgUrls="imgUrls" /&gt;</pre>
-        </dd>
-        <dd>子组件</dd>
-        <dd class="sn">
-            <div>逻辑中定义参数；其它必要的系统组件引入</div>
-            <pre>
-const props = defineProps(['propTitle', 'propObj', 'propImgUrls'])</pre>
-            <div>结构中使用数据</div>
-            <pre>
-&lt;div&gt;{{ propTitle }}&lt;/div&gt;
-&lt;div&gt;{{ propObj.id }} - {{ propObj.name }}&lt;/div&gt;
-&lt;img v-for="item in propImgUrls" :key="item.id" :src="item.url" alt=""&gt;</pre>
-        </dd>
         <dd class="example-sn">改造产品列表组件，提供不同的产品数据展示不同的列表内容</dd>
         <dd>
             <pre>&lt;List :lists="propLists"/&gt;</pre>
@@ -117,11 +91,6 @@ const props = defineProps(['propTitle', 'propObj', 'propImgUrls'])</pre>
         <dd class="example-sn">封装第三方库 - 轮播组件，提供不同的图片列表数据和高度展示不同的轮播内容</dd>
         <dd>
             <pre>&lt;Swiper :imgUrl="propImgUrls" :swiperH="propSwiperH"/&gt;</pre>
-        </dd>
-        <dd class="question">
-            <div>如何传递一个数值类型的数据?</div>
-            <!-- <div>&lt;Info :age="{{8}}" /&gt;</div> -->
-            <div>可以给子组件指定样式或类吗?</div>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
