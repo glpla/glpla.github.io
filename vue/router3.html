@@ -5,66 +5,82 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>传参路由 Props</title>
+    <title>编程路由 Router</title>
     <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
 <body>
     <header>
-        <h1>传参路由</h1>
-        <span>&commat; Props</span>
+        <h1>编程路由</h1>
+        <span>&commat; Router</span>
     </header>
     <dl>
-        <dt>路由组件传参 - props</dt>
-        <dd>按照组件传参的形式传递路由参数</dd>
-        <dd>使用更方便</dd>
-        <dd>默认是针对动态路由|params类型的路由参数</dd>
-        <dd>查询路由|query需要特别处理</dd>
-        <dd class="example-sn">动态路由|params</dd>
-        <dd>1. 配置路由参数 - 指定props属性为true，传递的路由参数将被当作属性传递给组件</dd>
+        <dd>除了使用 &lt;router-link&gt; 创建 &lt;a&gt; 标签来定义声明式路由外，还可以借助 router 的实例方法，编写代码来实现路由功能</dd>
+        <dd>可以使用普通路由|路径path；也可以使用命名路由name</dd>
+        <dd>还可以指定路由参数params或query</dd>
+        <dd>需引入路由包 useRouter并创建路由实例router</dd>
         <dd>
             <pre>
-{
-    path: '/home/:id/:title/:cont/:other?',
-    name: "zhuye",
-    component: Home,
-    props: true
-}</pre>
+import { useRouter } from 'vue-router'
+const router = useRouter()</pre>
         </dd>
-        <dd>2. 接收路由参数 - &lt;script&gt;中定义属性来接收路由参数</dd>
+        <dd>
+            <table>
+                <caption>编程式路由常用方法</caption>
+                <tr>
+                    <td>分类</td>
+                    <td>说明</td>
+                </tr>
+                <tr>
+                    <td>push</td>
+                    <td>导航时向 history 添加新记录|压入路由，并跳转到目标；单击&lt;router-link&gt;时触发；可以逐级返回</td>
+                </tr>
+                <tr>
+                    <td>replace</td>
+                    <td>导航时不会向 history 添加新记录，替换|取代了当前的条目；不可返回</td>
+                </tr>
+            </table>
+        </dd>
+        <dd class="tips">
+            <div>由于属性 to 与 router.push 接受的对象种类相同，所以两者的规则完全相同</div>
+        </dd>
         <dd>
             <pre>
-defineProps(['id', 'title', 'cont'])</pre>
+// 查询路由
+router.push('/user?id=100')
+
+// 查询路由，结果是 /register?plan=private
+router.push({ path: '/register', query: { plan: 'private' } })
+
+// 动态路由
+router.push('/user/eduardo')
+
+// 动态路由，并加上参数，让路由建立 url；只能使用命令路由name
+router.push({ name: 'user', params: { username: 'eduardo' } })
+
+//禁止返回路由
+router.push({ path: '/user', query: { bread: 'user' }, replace: true })
+router.replace({ path: '/user', query: { bread: 'user' } })</pre>
         </dd>
-        <dd>3. &lt;template&gt;渲染路由参数 - 直接使用</dd>
+        <dd class="example-sn">3秒后跳转至首页 - 延时实现 setTimeout</dd>
+        <dd>在生命周期函数中实现路由导航</dd>
         <dd>
             <pre>
-&lt;ul&gt;
-    &lt;li&gt;{{id}}&lt;/li&gt;
-    &lt;li&gt;{{title}}&lt;/li&gt;
-    &lt;li&gt;{{cont}}&lt;/li&gt;
-&lt;/ul&gt;</pre>
+//引入
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+//使用 
+const router = useRouter()
+onMounted(()=>{
+    setTimeout(()=>{
+        //router.push('/home')
+        router.replace('/home')//这里通常使用replace模式
+    }, 3000)
+})</pre>
         </dd>
-        <dd class="example-sn">查询路由|query</dd>
-        <dd>1. 定制props属性 - 将路由参数的query作为返回值传递出去 - route是形参</dd>
-        <dd>
-            <pre>
-{
-    name: "zhuye",
-    path: '/home/:id/:title/:cont/:other?',
-    component: Home,
-    props:(route)=>{
-        console.log(route) //包含路由的各种信息：name、params、path、query
-        return route.query
-    }
-}</pre>
-        </dd>
-        <dd>2. 脚本中接收路由参数 - 定义属性</dd>
-        <dd>
-            <pre>
-defineProps(['id', 'title', 'cont'])</pre>
-        </dd>
+        <dd class="example-sn">3秒后跳转至首页 - 使用倒计时实现 setInterval</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

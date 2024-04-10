@@ -33,7 +33,28 @@
         </dd>
         <dt>全局前置守卫</dt>
         <dd>使用 router.beforeEach 注册一个全局前置守卫</dd>
-        <dd>接收3个参数：from、to、next</dd>
+        <dd>接收3个参数：</dd>
+        <dd>1. from：离开的路由</dd>
+        <dd>2. to：进入的路由</dd>
+        <dd>3. next：路由拦截，如：未登录不允许访问，并引导|重定向到指定页面</dd>
+        <dd>正常访问</dd>
+        <dd>
+            <pre>
+router.beforeEach((to, from, next) => {
+    console.log('router from', from.path, 'to ', to.path);
+    next()
+})</pre>
+        </dd>
+        <dd>不允许访问</dd>
+        <dd>
+            <pre>
+router.beforeEach((to, from, next) => {
+    console.log('router from', from.path, 'to ', to.path);
+    if(to.path=='/home')
+        next(false)
+})</pre>
+        </dd>
+        <dd class="tips">更多路由控制，应该由后端服务器实现，前端不可靠</dd>
         <dt>全局解析守卫</dt>
         <dd>使用 router.beforeResolve 注册一个全局守卫</dd>
         <dt>全局后置钩子</dt>

@@ -16,7 +16,6 @@
         <span>&commat; Router</span>
     </header>
     <dl>
-        <dt>概述</dt>
         <dd>按照路径path和组件component的值对形式name-value定义路由</dd>
         <dd>每一个组件都是一个单组件文件SCF，后缀名是.vue；引入组件时，可以省略后缀名</dd>
         <dd>必须指定路由工作模式history</dd>
@@ -52,7 +51,7 @@ app.use(router).mount('#app')</pre>
                 </tr>
                 <tr>
                     <td>命名路由</td>
-                    <td>通过名字来使用路由；更直观、灵活；如多级路由</td>
+                    <td>通过名字来使用路由；更直观、灵活；如动态路由</td>
                     <td>name</td>
                 </tr>
                 <tr>
@@ -98,9 +97,13 @@ const router = createRouter({
             component: () => import('../components/sub_view/Work.vue'),
             children:[
                 {
-                    path: ' ',//省略父级路由
-                    name: "html5",
-                    component: Html5
+                    path: ' ',
+                    redirect: '/work/html'//使用完整路由
+                },
+                {
+                    path: 'html',//省略父级路由
+                    name: "html",
+                    component: Html
                 },
                 {
                     path: 'css3',//省略父级路由
@@ -134,32 +137,39 @@ const router = createRouter({
 export default router
 </pre>
         </dd>
-        <dt>使用路由</dt>
+        <dd>
+            <div>不使用重定向路由，直接指定路由目标也可以；但是路由不直观；如work默认子路由是html</div>
+            <pre>
+{
+    path: '',
+    component: Html
+}</pre>
+        </dd>
+    </dl>
+    <dl>
+        <dt>使用路由 &lt;router-link&gt;</dt>
         <dd>借助自定义组件&lt;router-link&gt;来创建链接|路由；相当于&lt;a&gt;；使用属性to代替了属性href</dd>
-        <dd>借助自定义组件&lt;router-view&gt;显示与 URL 对应的组件|路由出口</dd>
-        <dd>有&lt;router-link&gt;路由，则必须有&lt;router-view&gt;路由出口</dd>
-        <dd>可以有多个&lt;router-view&gt;，使用name属性区分；相应的路由配置也要变化，见后例</dd>
-        <dd>还可以像缓存组件那样，缓存&lt;router-view&gt;，见后例</dd>
-        <dd>使用内置active-class属性高亮当前路由项</dd>
-        <dd>在入口组件中使用路由</dd>
+        <dd>默认是push模式，浏览器可以回退；使用 replace 属性可以防止浏览器回退</dd>
         <dd>
             <pre>
 //&lt;router-link&gt; - 字符串方法；也可以使用对象方法 :to = "{path: '/about'}"
 //为所有&lt;router-link&gt;指定active-class类即可高亮当前活动项
 &lt;router-link to = "/home" active-class = "active"&gt;home&lt;/router-link&gt;
-&lt;router-link to = "/info" active-class = "active"&gt;info&lt;/router-link&gt;
 &lt;router-link to = "/team" active-class = "active"&gt;team&lt;/router-link&gt;
 &lt;router-link replace to = "/about" active-class = "active"&gt;about&lt;/router-link&gt;
 
 //使用命名路由 - 向 router-link 组件的 to 属性传递一个对象：属性绑定
-&lt;router-link :to = "{name: 'zhuye'}" active-class = "active"&gt;home&lt;/router-link&gt;
+&lt;router-link :to = "{name: 'home'}" active-class = "active"&gt;home&lt;/router-link&gt;
+&lt;router-link replace :to = "{name: 'home'}" active-class = "active"&gt;home&lt;/router-link&gt;
+&lt;router-link :replace = {{true}} :to = "{name: 'home'}" active-class = "active"&gt;home&lt;/router-link&gt;
+&lt;router-link :to = "{name: 'home', replace: true}" active-class = "active"&gt;home&lt;/router-link&gt;
 
-//使用嵌套路由 - 第一个默认显示路由和和父级路由保持一致，如html5
-&lt;router-link to = "/work" active-class = "active"&gt;html5&lt;/router-link&gt;
+//使用嵌套路由 - 第一个默认显示路由和和父级路由保持一致，如html
+&lt;router-link to = "/work" active-class = "active"&gt;html&lt;/router-link&gt;
 &lt;router-link to = "/work/css3" active-class = "active"&gt;css3&lt;/router-link&gt;
 &lt;router-link to = "/work/js" active-class = "active"&gt;js&lt;/router-link&gt;
 
-//&lt;router-view&gt;
+//&lt;router-view&gt; - 渲染目标路由
 &lt;router-view&gt;&lt;/router-view&gt;</pre>
         </dd>
         <dd class="tips">
@@ -167,7 +177,16 @@ export default router
             <div>router-link-active</div>
             <div>router-link-exact-active</div>
         </dd>
-        <dd class="example-sn">多&lt;router-view&gt;的使用</dd>
+    </dl>
+    <dl>
+        <dt>渲染路由 &lt;router-view&gt;</dt>
+        <dd>借助自定义组件&lt;router-view&gt;显示与 URL 对应的组件|路由出口</dd>
+        <dd>有&lt;router-link&gt;路由，则必须有&lt;router-view&gt;路由出口</dd>
+        <dd>可以有多个&lt;router-view&gt;，使用name属性区分；相应的路由配置也要变化，见后例</dd>
+        <dd>还可以像缓存组件那样，缓存&lt;router-view&gt;，见后例</dd>
+        <dd>1. 单&lt;router-view&gt;</dd>
+        <dd>应用更为常见</dd>
+        <dd>2. 多&lt;router-view&gt;</dd>
         <dd>路由配置由component该为components</dd>
         <dd>
             <pre>
@@ -207,10 +226,10 @@ components:{
         <dd>
             <pre>history: createWebHashHistory()</pre>
         </dd>
-        <dd class="tips">
-            <div>使用生命周期函数检查各路由组件的挂载和卸载情况</div>
-            <div>默认是push模式，浏览器可以回退；使用replace属性可以防止浏览器回退</div>
-        </dd>
+        <dd class="example-sn">使用生命周期函数检查各路由组件的挂载和卸载情况；<a href="./lifetime.html">生命周期函数 - lifetime</a></dd>
+        <!-- <dd>使用内置active-class属性高亮当前路由项</dd> -->
+        <dd class="example-sn">定制单页路由；更多详情，请访问<a href="./drill_router.html">定制路由</a></dd>
+        <dd class="example-sn">定制全站路由；更多详情，请访问<a href="./drill_router.html">定制路由</a></dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

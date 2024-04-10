@@ -95,10 +95,50 @@ onMounted(() => {
                 </details>
             </details>
         </dd>
-        <dd class="example-sn">使用响应式数据、条件渲染、路由，借助getCurrentInstance()，利用事件或延时，查看生命周期函数执行情况</dd>
-        <dd>在父组件Lifetime.vue中使用子组件Text.vue</dd>
-        <dd>每个组件都使用相应的生命周期函数</dd>
-        <dd>使用响应式数据改变条件，触发子组件的条件渲染，查看卸载情况</dd>
+        <dd class="example-sn">使用响应式数据、条件渲染、路由，利用事件或延时，查看子组件 About.vue 生命周期函数执行情况</dd>
+        <dd>
+            <pre>
+&lt;template&gt;
+    &lt;div class="about"&gt;
+        &lt;div&gt;about&lt;/div&gt;
+        &lt;div&gt;{{ cd }}秒后返回/work&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+    
+&lt;script setup&gt;
+import { onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+    
+const router = useRouter();
+    
+let cd = ref(5)
+    
+setInterval(() =&gt; {
+    cd.value--;
+    if (cd.value == -1) {
+        router.replace('/work')
+    }
+}, 1000)
+    
+onMounted(() =&gt; {
+    console.log('onMounted');
+})
+onBeforeUpdate(() =&gt; {
+    console.log('onBeforeUpdate');
+})
+onUpdated(() =&gt; {
+    console.log('onUpdated');
+})
+onBeforeUnmount(() =&gt; {
+    console.log('onBeforeUnmount');
+})
+onUnmounted(() =&gt; {
+    console.log('onUnmounted');
+})
+&lt;/script&gt;
+
+&lt;style scoped&gt;&lt;/style&gt;</pre>
+        </dd>
         <dd>
             <img src="./imgs/lifetime0.png" alt="">
         </dd>
