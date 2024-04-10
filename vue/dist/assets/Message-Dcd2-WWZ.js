@@ -1,0 +1,1 @@
+import{_ as e,c as s,b as c,d as t}from"./index-C6rOla6Y.js";const a={},o={class:"message"},n=t("h1",null,"This is an message page",-1),_=[n];function r(d,i){return c(),s("div",o,_)}const f=e(a,[["render",r]]);export{f as default};

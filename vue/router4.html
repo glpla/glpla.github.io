@@ -26,6 +26,20 @@ const router = useRouter()</pre>
         </dd>
         <dd>想要导航到不同的 URL，可以使用 router.push 方法</dd>
         <dd>点击 &lt;router-link&gt; 时，相当于调用 router.push(...) </dd>
+        <dd>可以使用普通路由|路径path；也可以使用命名路由name</dd>
+        <dd>还可以指定路由参数params或query</dd>
+        <dd>
+            <pre>
+router.push('/user?id=100')
+
+router.push('/user/eduardo')
+
+// 带查询参数，结果是 /register?plan=private
+router.push({ path: '/register', query: { plan: 'private' } })
+
+// 命名的路由，并加上参数，让路由建立 url
+router.push({ name: 'user', params: { username: 'eduardo' } })</pre>
+        </dd>
         <dd class="example-sn">3秒后跳转至首页</dd>
         <dd>在生命周期函数中实现路由导航</dd>
         <dd>

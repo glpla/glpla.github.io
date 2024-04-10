@@ -26,8 +26,9 @@
         <dd>2. 传递路由参数 - 分别使用普通路由path和命名路由name传递路由参数</dd>
         <dd>
             <pre>
-&lt;router-link :to="{ path: 'team', query: { id: 100 } }"&gt;team&lt;/router-link&gt;
-&lt;router-link :to="{ name: 'info', query: { id: 200 } }"&gt;info&lt;/router-link&gt;</pre>
+&lt;router-link to="/team?id=100"&gt;team&lt;/router-link&gt;
+&lt;router-link :to="{ path: '/team', query: { id: 100 } }"&gt;team&lt;/router-link&gt;
+&lt;router-link :to="{ name: 'team', query: { id: 100 } }"&gt;team&lt;/router-link&gt;</pre>
         </dd>
         <dd>3. 接收路由参数 - 在路由目标组件的结构中使用$route.query接收路由参数</dd>
         <dd>
@@ -68,7 +69,7 @@ let {query} = toRefs(route)</pre>
     &lt;li&gt;{{route.query.cont}}&lt;/li&gt;
 &lt;/ul&gt;</pre>
         </dd>
-        <dd>在结构中使用路由参数时，使用全局变量$route解构：动态路由$route.params；查询路由$route.query</dd>
+        <dd class="tips">在结构中使用路由参数时，使用全局变量$route解构：动态路由$route.params；查询路由$route.query</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

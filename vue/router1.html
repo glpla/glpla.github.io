@@ -20,38 +20,32 @@
             /goods/2 这样的 URL 都会映射到同一个路由：在同一个页面根据id显示不同的商品 </dd>
         <dd>使用一个或多个动态字段来实现；?表示该参数可选</dd>
         <dt>配置路由参数</dt>
-        <dd>在work的2级路由css和js中，根据id展示对应的内容</dd>
+        <dd>根据id展示对应的内容</dd>
         <dd>
             <pre>
 {
-    path: '/work',
-    name: 'work',
-    component: () => import('../components/sub_view/Work.vue'),
-    children: [
-        {
-        path: '',
-        name: 'html',
-        component: () => import('../components/sub_view/Html5.vue'),
-        },
-        {
-        path: 'css/:id',
-        name: 'css',
-        component: () => import('../components/sub_view/Css3.vue'),
-        },
-        {
-        path: 'js/:id',
-        name: 'js',
-        component: () => import('../components/sub_view/JavaScript.vue'),
-        }
-    ]
+    path: '/html:id',
+    name: 'html',
+    component: () => import('../components/sub_view/Html5.vue'),
+},
+{
+    path: 'css/:id',
+    name: 'css',
+    component: () => import('../components/sub_view/Css3.vue'),
+},
+{
+    path: 'js/:id',
+    name: 'js',
+    component: () => import('../components/sub_view/JavaScript.vue'),
 }</pre>
         </dd>
         <dt>传递路由参数</dt>
         <dd>可以使用普通路由path和命名路由name传递2级路由参数</dd>
         <dd>
             <pre>
-&lt;router-link to="/work/css/webcss3"&gt;css&lt;/router-link&gt;
-&lt;router-link :to="{ name: 'js', params: { id: 'webjs' } }"&gt;js&lt;/router-link&gt;</pre>
+&lt;router-link to="/html/webjs"&gt;html - webjs&lt;/router-link&gt;
+&lt;router-link :to="{ path: '/html', params: { id: 'webjs' } }"&gt;html - webjs&lt;/router-link&gt;
+&lt;router-link :to="{ name: 'html', params: { id: 'webjs' } }"&gt;html - webjs&lt;/router-link&gt;</pre>
         </dd>
         <dt>接收路由参数</dt>
         <dd>在路由目标组件 - 结构 - 中使用全局变量$route接收路由参数</dd>
@@ -89,7 +83,7 @@ console.log(route.params.id);</pre>
     home
 &lt;/router-link&gt;</pre>
         </dd>
-        <dd>在结构中使用路由参数时，使用全局变量$route解构：动态路由$route.params；查询路由$route.query</dd>
+        <dd class="tips">在结构中使用路由参数时，使用全局变量$route解构：动态路由$route.params；查询路由$route.query</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

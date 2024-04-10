@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航守卫 Navigation Guards</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>导航守卫</h1>
+        <span>&commat; Navigation Guards</span>
+    </header>
+    <dl>
+        <dt>导航解析流程</dt>
+        <dd class="sn">
+            <div>导航被触发</div>
+            <div>在失活的组件里调用 beforeRouteLeave 守卫</div>
+            <div>调用全局的 beforeEach 守卫</div>
+            <div>在重用的组件里调用 beforeRouteUpdate 守卫(2.2+)</div>
+            <div>在路由配置里调用 beforeEnter</div>
+            <div>解析异步路由组件</div>
+            <div>在被激活的组件里调用 beforeRouteEnter</div>
+            <div>调用全局的 beforeResolve 守卫(2.5+)</div>
+            <div>导航被确认</div>
+            <div>调用全局的 afterEach 钩子</div>
+            <div>触发 DOM 更新</div>
+            <div>调用 beforeRouteEnter 守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入</div>
+        </dd>
+        <dt>全局前置守卫</dt>
+        <dd>使用 router.beforeEach 注册一个全局前置守卫</dd>
+        <dd>接收3个参数：from、to、next</dd>
+        <dt>全局解析守卫</dt>
+        <dd>使用 router.beforeResolve 注册一个全局守卫</dd>
+        <dt>全局后置钩子</dt>
+        <dd>不会接受 next 函数也不会改变导航本身</dd>
+        <dd>接收2个参数：from、to</dd>
+        <dt>路由独享的守卫</dt>
+        <dd>局部路由</dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>
