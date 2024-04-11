@@ -8,12 +8,6 @@
     <title>网络请求 Request</title>
     <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
-    <style>
-        header {
-            --color: #4bc2ce;
-            --color-dark: #1b9fab;
-        }
-    </style>
 </head>
 
 <body>
@@ -22,22 +16,32 @@
         <span>Request</span>
     </header>
     <dl>
-        <dd>微信小程序使用wx.request发起网络请求；还可以使用 <a href="https://www.axios-http.cn/docs/intro">Axios</a>
+        <dd>微信小程序使用 wx.request 发起网络请求；还可以使用 <a href="https://www.axios-http.cn/docs/intro">Axios</a>
         </dd>
-        <dd>搭建本地资源服务器，请访问 <a href="../web/framework/node.html">Node.js</a>；简化起见，可以使用 <a
-                href="https://www.expressjs.com.cn/">Express</a> 或 <a href="https://koajs.com/#">koa</a>；还可以使用 <a
-                href="../node/jsonserver.html">JSON
-                Server</a> 搭建数据服务器</dd>
+        <dd>请求方式很多，默认是GET；使用较多的还有POST；更多信息，请查看官方文档 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html">官方 -
+                wx.request</a></dd>
         <dd>微信小程序支持回调函数和<a
                 href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>
             两种方式</dd>
-        <dd>wx.request必须满足：</dd>
+        <dd>受小程序体量限制，数据需要搭建本地资源服务器保存或使用云存储。本地资源服务器使用，请访问 <a href="../web/framework/node.html">Node.js</a>、<a
+                href="https://www.expressjs.com.cn/">Express</a>、<a href="https://koajs.com/#">Koa</a>、<a
+                href="../node/jsonserver.html">JSON
+                Server</a></dd>
+        <dt>开发要求</dt>
         <dd>- 仅支持https请求</dd>
         <dd>- 必须将接口域名（不是IP地址）添加到信任列表|白名单</dd>
-        <dd>wx.request接口配置：</dd>
+        <dd>- 如果提示：对应的服务器证书无效。。。需要服务器重新下载并配置SSL证书</dd>
+        <dd>- 临时调试，可以选择取消校验；生产环境，必须要配置新的SSL证书</dd>
+        <dd>
+            <figure class="img-sn">
+                <img src="./imgs/pro6.png" alt="">
+                <figcaption>取消校验域名合法性</figcaption>
+            </figure>
+        </dd>
+        <dt>接口配置</dt>
         <dd>- 微信开发平台 → 开发</dd>
-        <dd>wx.request接口查看：</dd>
-        <dd>- 开发时可以在微信开发工具 → 详情 → 项目配置</dd>
+        <dd>- 开发时可以在微信开发工具 → 详情 → 项目配置中查看</dd>
         <dd>
             <figure class="img-sn">
                 <img src="./imgs/pro5.png" alt="">
@@ -48,19 +52,7 @@
                 <figcaption>查看合法域名</figcaption>
             </figure>
         </dd>
-        <dt>wx.request</dt>
-        <dd>请求方式很多，一般是GET和POST；默认是GET；更多信息，请查看官方文档 <a
-                href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html">官方 -
-                wx.request</a></dd>
-        <dd>如果提示：对应的服务器证书无效。。。需要服务器重新下载并配置SSL证书</dd>
-        <dd>临时调试可以选择取消校验</dd>
-        <dd>生产环境，必须要配置新的SSL证书</dd>
-        <dd>
-            <figure class="img-sn">
-                <img src="./imgs/pro6.png" alt="">
-                <figcaption>取消校验域名合法性</figcaption>
-            </figure>
-        </dd>
+        <dt>常见配置项</dt>
         <dd>
             <table class="tbl-sn">
                 <caption>常见配置项</caption>
@@ -74,7 +66,7 @@
                 </tr>
                 <tr>
                     <td>data</td>
-                    <td>请求的参数；<br> 多用于POST，指的是提交数据<br>也可以是GET，用到query参数；也可以直接使用?拼接在url后面</td>
+                    <td>请求的参数<br> 多用于POST，指的是提交数据<br>也可以是GET，用到query参数；也可以直接使用?拼接在url后面</td>
                 </tr>
                 <tr>
                     <td>header</td>
@@ -98,7 +90,6 @@
                 </tr>
             </table>
         </dd>
-        <dd class="tips">注意请求URL/接口地址</dd>
         <dd class="example-sn">GET - 获取 <a href="https://glpla.githb.io">大树小站</a> 积分榜数据</dd>
         <dd>
             <pre>
@@ -131,6 +122,60 @@ wx.request({
     }
 })</pre>
         </dd>
+        <dd class="example-sn">GET - 分页获取数据，数据来自node.js服务器或JSON-Server服务器</dd>
+        <dd>使用?和&直接拼接分页参数</dd>
+        <dd>
+            <pre>
+wx.request({
+    url: this.data.baseUrl + '/good/page?page=' + this.page + '&pageSize=' + this.pageSize,
+    success: (res) => {
+        console.log(err);
+    },
+    fail:err=>{
+        console.log(err);
+    },
+    complete: () => {
+        console.log('get done logging')
+    }
+})</pre>
+        </dd>
+        <dd>使用data配置项指定分页参数</dd>
+        <dd>
+            <pre>
+wx.request({
+    url: this.data.baseUrl + '/good/page',
+    data: {
+        page: this.page,
+        pageSize: this.pageSize
+    },
+    success: (res) => {
+        console.log(err);
+    },
+    fail:err=>{
+        console.log(err);
+    },
+    complete: () => {
+        console.log('get done logging')
+    }
+})</pre>
+        </dd>
+        <dd class="example-sn">POST - 数据提交到JSON-Server服务器</dd>
+        <dd>应显式的指定方式method和数据data</dd>
+        <dd>留言、问卷、注册</dd>
+        <dd>
+            <pre>
+wx.request({
+    url: 'http://127.0.0.1:3000/user',
+    method:'POST',
+    data:this.data.user,
+    success:(res)=>{
+        console.log(res);
+    },
+    fail:err=>{
+        console.log(err);
+    }
+})</pre>
+        </dd>
         <dd class="example-sn">GET - 使用猫眼API获取信息并渲染到页面</dd>
         <dd>
             <pre>
@@ -144,8 +189,10 @@ wx.request({
     }
 })</pre>
         </dd>
+        <dd>更多网络请求，请查看 <a href="../node/jsonserver.html">JSON-Server</a></dd>
         <dd class="tips">
-            <div>请随时关注并确认网络API的有效问题</div>
+            <div>如果不确定数据的结构，可以在调试器控制台使用log输出res，一层一层剥离数据，直到拿到需要的数据</div>
+            <div>请随时关注并确认网络API接口的变化</div>
             <div>跨域问题只存在于利于浏览器的WEB开发中。小程序的宿主环境是微信客户端，不是浏览器，不存在跨域的问题</div>
             <div>Ajax的核心是依赖于浏览器的XMLHttpRequest对象；发起Ajax请求只针对于浏览器；小程序中叫发起网络请求</div>
         </dd>
