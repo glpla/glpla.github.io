@@ -25,7 +25,7 @@
 // }
 // msg
 let msgBox = document.querySelector('.msg-box')
-let msgs = fetch('../../data/data2023/msg.json')
+let msgs = fetch('../../utils/data/data2023/msg.json')
   .then(res => res.json())
   .then(res => {
     console.log(res);

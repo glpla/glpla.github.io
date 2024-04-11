@@ -43,7 +43,7 @@ nextBtn.addEventListener('click', () => {
 })
 
 function init() {
-  fetch('../../data/data2021/stu.json')
+  fetch('../../../utils/data/data2021/stu.json')
     .then(res => {
       return res.json();
     })

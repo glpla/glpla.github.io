@@ -5,24 +5,21 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>json-server</title>
-  <link rel="stylesheet" href="../css/reset2024.css">
-  <link rel="stylesheet" href="../css/common2024.css">
-  <link rel="stylesheet" href="../css/code.css">
-  <link rel="stylesheet" href="../css/sn.css">
+  <title>JSON-Server</title>
+  <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
 </head>
 
 <body>
   <header>
-    <h1>json-server</h1>
-    <span>JSONServer</span>
+    <h1>JSON-Server</h1>
+    <span>JSON Server</span>
   </header>
   <dl>
-    <dd>快速搭建HTTP服务；需要 <a href="./ide.html" class="link">Node.js</a> 环境支持</dd>
+    <dd>快速搭建HTTP服务；需要 <a href="./ide.html">Node.js</a> 环境支持</dd>
     <dd>为应用提供JSON数据服务 - 仅仅是针对json文件的解析和应用</dd>
-    <dd>更多信息，请访问<a href="https://www.npmjs.com/package/json-server" class="link">NPM
-        Json-Server</a>；跟随文档操作即可；更多使用，请访问<a href="https://juejin.cn/post/7043424909472563208" class="link">从入门到膨胀</a>
+    <dd>更多信息，请访问 <a href="https://www.npmjs.com/package/json-server">NPM
+        Json-Server</a>；跟随文档操作即可；更多使用，请访问 <a href="https://juejin.cn/post/7043424909472563208">从入门到膨胀</a>
     </dd>
     <dd>
       <table class="tbl-sn">
@@ -58,21 +55,20 @@
       <div>严格按照文档接口使用</div>
     </dd>
     <dt>安装依赖</dt>
-    <dd>通常使用命令行参数-g全局安装json-server：可以在任何位置监听json数据请求 - <span class="warn">指哪打哪</span></dd>
-    <dd>任意位置打开CMD命令行窗口 - 确保已经安装了Node</dd>
-    <dd class="code">
+    <dd>通常使用命令行参数 -g 全局安装JSON-server：可以在任何位置监听json数据请求 - <span class="warn">指哪打哪</span></dd>
+    <dd>任意位置打开CMD命令行窗口执行以下命令 - 确保已经安装了Node</dd>
+    <dd>
       <pre>npm install json-server -g</pre>
     </dd>
     <dt>创建服务</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>创建数据文件夹 - 集中存放数据文件，如在D盘创建data文件夹</div>
       <div>创建数据文件 - 后缀名为.json；早期数据交换多使用XML</div>
-      <p>应严格按照JSON文件的格式创建值对key-value；key必须用双引号包裹，value使用对应的数据类型即可；不允许有注释</p>
-      <p>在数据文件夹内创建数据文件，如students.json</p>
-      <p>根节点包括2个子节点|值对：digital和software</p>
-      <p>每个子节点使用数组保存信息节点。每个信息节点又是一个值对，包括用户id，姓名和星数</p>
-      <p>初始数据为空，通过添加和修改逐步增加</p>
-      <pre class="code">
+      <p>应严格按照JSON文件的语法格式创建值对key-value；key必须用双引号包裹，value使用对应的数据类型即可；不允许有注释</p>
+      <p>
+        在数据文件夹内创建数据文件，如students.json；根节点包括2个子节点|值对：digital和software；每个子节点使用数组保存信息节点。每个信息节点又是一个值对，包括用户id，姓名和星数；初始数据为空，通过添加和修改逐步增加
+      </p>
+      <pre>
 {
   "digital": [
     {
@@ -91,19 +87,19 @@
 }</pre>
       <div>监听数据文件 - 在数据文件夹内，打开CMD控制台，监听文件，即开启了数据服务</div>
       <p>注意当前打开的CMD位置和监听数据文件的路径关系</p>
-      <p>系统自动检测并给出接口的地址；这个地址就是提供给其它项目使用的API接口地址</p>
+      <p>系统自动检测并给出接口的地址；这个地址就是提供给项目使用的API接口</p>
       <p>按住CTRL单击对应的地址，可以在浏览器中访问其中的内容；或直接在浏览器输入对应的地址</p>
-      <p>默认端口3000</p>
-      <pre class="code">json-server students.json</pre>
-      <p>也可以指定端口 - 通常和项目端口保持一致，避免浏览器跨域</p>
-      <pre class="code">json-server students.json --port=5173</pre>
+      <p>. 默认端口3000</p>
+      <pre>json-server students.json</pre>
+      <p>. 也可以指定端口</p>
+      <pre>json-server students.json --port=5173</pre>
     </dd>
   </dl>
   <div class="chap">fetch</div>
   <dl>
-    <dd class="number">
-      <div>GET</div>
-      <pre class="code">
+    <dt>GET</dt>
+    <dd>
+      <pre>
 fetch(url + '/cont')
   .then(res => res.json())
   .then(res=>{
@@ -112,9 +108,12 @@ fetch(url + '/cont')
   .catch(err => {
     console.log(err);
   })</pre>
-      <div>POST</div>
-      <p>指定body和headers</p>
-      <pre class="code">
+    </dd>
+
+    <dt>POST</dt>
+    <dd>指定body和headers</dd>
+    <dd>
+      <pre>
 fetch(url + '/cont', {
   method: 'POST',
   headers: {
@@ -132,9 +131,11 @@ fetch(url + '/cont', {
   .catch(err => {
     console.log(err);
   })</pre>
-      <div>PATCH</div>
-      <p>根据id更新数据</p>
-      <pre class="code">
+    </dd>
+    <dt>PATCH</dt>
+    <dd>根据id更新数据</dd>
+    <dd>
+      <pre>
 fetch(url + `/cont/${e.target.dataset.id}`, {
   method: 'PATCH',
   headers: {
@@ -150,9 +151,11 @@ fetch(url + `/cont/${e.target.dataset.id}`, {
   .catch(err => {
     console.log(err);
   })      </pre>
-      <div>DELETE</div>
-      <p>根据id删除数据</p>
-      <pre class="code">
+    </dd>
+    <dt>DELETE</dt>
+    <dd>根据id删除数据</dd>
+    <dd>
+      <pre>
 fetch(url + `/cont/${id}`, {
   method: 'delete',
 })
@@ -166,17 +169,20 @@ fetch(url + `/cont/${id}`, {
   </dl>
   <div class="chap">Vue/axios</div>
   <dl>
-    <dd class="number">
-      <div>GET - 请求数据；挂载完毕</div>
-      <pre class="code">
+    <dt>GET</dt>
+    <dd>请求数据；通常在挂载生命周期中触发</dd>
+    <dd>
+      <pre>
 onMounted(() => {
   axios.get('http://127.0.0.1:5173/software')
     .then(res => {
       //赋值
     })
 })</pre>
-      <p>可以封装函数</p>
-      <pre class="code">
+    </dd>
+    <dd>可以封装函数</dd>
+    <dd>
+      <pre>
 onMounted(() => {
   loadData()
 })
@@ -186,8 +192,10 @@ func loadData(){
       //赋值
   })
 }</pre>
-      <p>数据渲染 - 判断数据是否为空</p>
-      <pre class="code">
+    </dd>
+    <dd>数据渲染 - 判断数据是否为空</dd>
+    <dd>
+      <pre>
 &lt;div class="wrap"&gt;
   &lt;template v-if="students.length"&gt;
     &lt;div class="item" v-for="(item, ind) in students" :key="item.id"&gt;
@@ -202,8 +210,11 @@ func loadData(){
   &lt;/template&gt;
   &lt;template v-else&gt;数据为空&lt;/template&gt;
 &lt;/div&gt;</pre>
-      <div>POST - 增加数据；提交用户id，姓名和星数；完毕后重新拉取数据</div>
-      <pre class="code">
+    </dd>
+    <dt>POST</dt>
+    <dd>增加数据；提交用户id，姓名和星数；完毕后重新拉取数据</dd>
+    <dd>
+      <pre>
 function add() {
   axios.post('http://127.0.0.1:5173/software', {
     uid: uid.value,
@@ -214,9 +225,12 @@ function add() {
       loadData()
     })
 }</pre>
-      <div>PATCH - 修改数据；根据id或uid</div>
-      <p>由事件对象获取结构中绑定的数据</p>
-      <pre class="code">
+    </dd>
+    <dt>PATCH</dt>
+    <dd>修改数据；根据id或uid</dd>
+    <dd>由事件对象获取结构中绑定的数据</dd>
+    <dd>
+      <pre>
 function mod(id, rank) {
   axios.patch('http://127.0.0.1:5173/software/' + id, {
     rank: rank + 1
@@ -226,8 +240,11 @@ function mod(id, rank) {
       loadData()
     })
 }</pre>
-      <div>DELETE - 删除数据；根据id或uid</div>
-      <pre class="code">
+    </dd>
+    <dt>DELETE</dt>
+    <dd>删除数据；根据id或uid</dd>
+    <dd>
+      <pre>
 function del(id) {
   axios.delete('http://127.0.0.1:5173/software/' + id)
     .then(res => {
@@ -238,19 +255,25 @@ function del(id) {
   </dl>
   <div class="chap">微信小程序</div>
   <dl>
-    <dd class="number">
-      <div>GET - 获取所有数据</div>
-      <pre class="code">
+    <dt>GET</dt>
+    <dd>获取所有数据</dd>
+    <dd>
+      <pre>
 wx.request({
   url: 'http://127.0.0.1:3000/msg',
   success:res=>{
     console.log(res);
   }
 })</pre>
-      <p>根据用户id获取指定数据 - 用户提交前可以根据结果决定是不是已经提交；如果查询结果不为0，则已经提交，不允许再次提交</p>
-      <pre class="code">url: 'http://127.0.0.1:3000/user?id='+this.data.id</pre>
-      <div>POST - 提交数据；json-server会自动增加id，类型字符串</div>
-      <pre class="code">
+    </dd>
+    <dd>根据用户id获取指定数据 - 用户提交前可以根据结果决定是不是已经提交；如果查询结果不为0，则已经提交，不允许再次提交</dd>
+    <dd>
+      <pre>url: 'http://127.0.0.1:3000/user?id='+this.data.id</pre>
+    </dd>
+    <dt>POST</dt>
+    <dd>提交数据；JSON-Server会自动增加id，类型字符串</dd>
+    <dd>
+      <pre>
 wx.request({
   url: 'http://127.0.0.1:3000/msg',
   method:'POST',
@@ -262,8 +285,11 @@ wx.request({
     console.log(res);
   }
 })</pre>
-      <div>DELETE - 根据id删除数据；注意是直接拼接id</div>
-      <pre class="code">
+    </dd>
+    <dt>DELETE</dt>
+    <dd>根据id删除数据；注意是直接拼接id</dd>
+    <dd>
+      <pre>
 wx.request({
   url: 'http://127.0.0.1:3000/msg/'+e.currentTarget.dataset.id,
   method: 'DELETE',
@@ -277,9 +303,9 @@ wx.request({
     console.log('done log');
   }
 })      </pre>
-      <div>PATCH - 修改部分数据</div>
-      <div>PUT - 覆盖数据</div>
     </dd>
+    <dt>PATCH - 修改部分数据</dt>
+    <dt>PUT - 覆盖数据</dt>
     <dd class="tips">
       <div>加入数据验证，如：提交数据是否符合要求，是否为空，等等</div>
       <div>加入分页设计</div>
