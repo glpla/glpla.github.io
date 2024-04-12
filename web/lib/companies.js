@@ -18,7 +18,6 @@ window.addEventListener("scroll", () => {
 const glide = new Glide(".glide");
 const captionEl = document.querySelectorAll(".glide-caption");
 glide.on(["mount.after", "run.after"], () => {
-  console.log(glide.index);
   const caption = captionEl[glide.index];
   anime({
     targets: caption.children,
@@ -68,12 +67,16 @@ const revealOption = {
 ScrollReveal().reveal(".feature", { ...revealOption, interval: 350 });
 ScrollReveal().reveal(".service-item", { ...revealOption, interval: 350 });
 ScrollReveal().reveal(".data-wrap", {
-  beforeReveal: () => {
+  beforeReveal: (el) => {
     anime: ({
       targets: '.data-item .num',
-      innerHTML: el => {
+      value: el => {
+        console.log(el.innerHTML);
         return [0, el.innerHTML]
       },
+      // innerHTML: el => {
+      //   return [0, el.innerHTML]
+      // },
       duration: 2000,
       round: 1,
       easing: 'easeInExpo'
