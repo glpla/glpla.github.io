@@ -6,13 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>项目 个人中心页</title>
-  <link rel="stylesheet" href="../css/course.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/sn.css">
   <base target="_blank">
 </head>
 
 <body>
-  <div class="container">
+  <div>
     <header>
       <h1>个人中心页</h1>
       <span>Center</span>
@@ -40,6 +40,71 @@
         <div>文本编辑器 Vs Code</div>
         <div>谷歌浏览器 Chrome</div>
         <div>Node.js</div>
+      </dd>
+    </dl>
+    <div class="chap">参考代码 - 头像定制</div>
+    <dl>
+      <dd>按照学号和姓名命名图片</dd>
+      <dd>
+        <table>
+          <caption>API</caption>
+          <tr>
+            <th>分类</th>
+            <th>命名</th>
+          </tr>
+          <tr>
+            <td>图片</td>
+            <td>avatar</td>
+          </tr>
+          <tr>
+            <td>学号</td>
+            <td>usn</td>
+          </tr>
+          <tr>
+            <td>姓名</td>
+            <td>uname</td>
+          </tr>
+        </table>
+      </dd>
+      <dd>
+        <pre>
+import { ref } from 'vue'
+import axios from 'axios';
+let file = ref(null)
+let user = ref({
+  uname: 'glpla',
+  usn: '2024'
+})
+const submit = () => {
+  axios.post('/avatar',
+    {
+      usn: user.value.usn,
+      uname: user.value.uname,
+      avatar: file.value.files[0]
+    }, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+    .then(res => {
+      console.log('ok', res);
+    })
+    .catch(err => {
+      console.log('fail', err);
+    })
+    .finally(() => {
+      console.log('done');
+    })
+}</pre>
+      </dd>
+      <dd>
+        <pre>
+&lt;form @submit.prevent="submit"&gt;
+  &lt;input type="text" name="usn" v-model="user.usn"&gt;
+  &lt;input type="text" name="uname" v-model="user.uname"&gt;
+  &lt;input type="file" name="avatar" ref="file"&gt;
+  &lt;button&gt;submit&lt;/button&gt;
+&lt;/form&gt;</pre>
       </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

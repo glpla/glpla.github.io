@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>网络请求 Axios</title>
-  <link rel="stylesheet" href="../css/reset2024.css">
-  <link rel="stylesheet" href="../css/common2024.css">
-  <link rel="stylesheet" href="../css/code.css">
-  <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
   <style>
     #dog {
@@ -32,35 +29,37 @@
     <dd>异步请求；基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中</dd>
     <dd>通用、主流的第三方库；用于获取本地和远程json数据</dd>
     <dd>默认是Promise用法；支持async/await用法</dd>
-    <dd>更多信息，点击访问<a href="https://www.axios-http.cn/" class="link">axios中文网</a></dd>
+    <dd>更多信息，点击访问<a href="https://www.axios-http.cn/">Axios中文网</a></dd>
     <dt>基本过程</dt>
     <dd>1. 安装 - 在项目目录安装</dd>
-    <dd class="code">
+    <dd>
       <pre>>npm i axios --save</pre>
     </dd>
     <dd>2. 引入 - 在项目中引入，并根据需要指定默认参数，如baseURL、params、method、header、timeout；baseURL应和数据服务器的地址保持一致</dd>
-    <dd class="code">
+    <dd>
       <pre>
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000'</pre>
     </dd>
     <dd>3. 使用 - 在组件的逻辑中请求数据，并应用到组件的结构中；<span class="warn">资源服务器应提前开启，并严格按照接口使用</span></dd>
-    <dd class="code">
+    <dd>
       <pre>
 </pre>
     </dd>
     <dd>2. CDN方式 - 适合浏览器环境；建议将库下载到本地使用。。。CDN网络经常。。。</dd>
-    <dd><a href="https://cdnjs.com/" class="link">cdnjs</a></dd>
-    <dd><a href="https://www.bootcdn.cn/" class="link">bootcdn</a></dd>
-    <dd class="code">
+    <dd><a href="https://cdnjs.com/">cdnjs</a></dd>
+    <dd><a href="https://www.bootcdn.cn/">bootcdn</a></dd>
+    <dd>
       <pre>
 &lt;script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"&gt;&lt;/script&gt;</pre>
     </dd>
   </dl>
-  <div class="chap">基本过程</div>
+  <div class="chap">基本用例</div>
   <dl>
     <dt>获取 GET</dt>
-    <dd class="code">
+    <dd>可以传递参数；传递的参数在req.query中获取</dd>
+    <dd>1.无参</dd>
+    <dd>
       <pre>
 axios.get(baseURL + '/cont')
   .then(res => {
@@ -73,9 +72,24 @@ axios.get(baseURL + '/cont')
     console.log('done for log');
   })</pre>
     </dd>
+    <dd>2.有参 - 使用 params 提交</dd>
+    <dd>
+      <pre>
+axios.get('/user/login', {
+  params: {
+    usn: user.value.usn,
+    upass: user.value.upass
+  }
+})</pre>
+    </dd>
+    <dd>3.有参 - 使用 ?拼接 提交</dd>
+    <dd>
+      <pre>
+axios.get('/user/login?usn='+user.value.usn+'&upass='+user.value.upass)</pre>
+    </dd>
     <dt>增加 POST</dt>
     <dd>默认是json，所以略去了请求头header</dd>
-    <dd class="code">
+    <dd>
       <pre>
 axios.post(baseURL + '/cont', {
   name: 'dg',
@@ -95,7 +109,7 @@ axios.post(baseURL + '/cont', {
     </dd>
     <dt>删除 DELETE</dt>
     <dd>根据id删除</dd>
-    <dd class="code">
+    <dd>
       <pre>
 axios.delete(baseURL + '/cont/a606')
   .then(res => {
@@ -110,7 +124,7 @@ axios.delete(baseURL + '/cont/a606')
     </dd>
     <dt>修改 PATCH</dt>
     <dd>根据id和数据完成修改</dd>
-    <dd class="code">
+    <dd>
       <pre>
 axios.patch(baseURL + '/cont/2147', {
   rank: 10
@@ -180,7 +194,7 @@ async function getUser() {
         <tbody id="axios-local"></tbody>
       </table>
     </dd>
-    <dd class="code">
+    <dd>
       <pre>
 //使用节点
 for (let i = 0; i &lt; res.data.length; i++) {
@@ -193,7 +207,7 @@ for (let item in res.data[i]) {
 axiosLocal.appendChild(tr)
 }</pre>
     </dd>
-    <dd class="code">
+    <dd>
       <pre>
 //使用innerHtml
 for (let i = 0; i &lt; res.data.length; i++) {
@@ -206,9 +220,9 @@ axiosLocal.innerHTML += tr
 }</pre>
     </dd>
     <dt>推荐资源 links</dt>
-    <dd>1. <a href="https://dog.ceo/api/breed/pembroke/images/random" class="link">随机小狗</a></dd>
-    <dd>2. <a href="https://picsum.photos/" class="link">随机图片</a></dd>
-    <dd>3. <a href="https://api.uomg.com/api/rand.qinghua?format=json" class="link">土味情话</a></dd>
+    <dd>1. <a href="https://dog.ceo/api/breed/pembroke/images/random">随机小狗</a></dd>
+    <dd>2. <a href="https://picsum.photos/">随机图片</a></dd>
+    <dd>3. <a href="https://api.uomg.com/api/rand.qinghua?format=json">土味情话</a></dd>
     <dd>4. http://ajax-base-api-t.itheima.net/api</dd>
     <dd>/getbooks</dd>
     <dd>/addbook</dd>

@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>概述 Overview</title>
-  <link rel="stylesheet" href="../../css/reset2024.css">
-  <link rel="stylesheet" href="../../css/common2024.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
+  <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
 </head>
 
@@ -20,33 +17,28 @@
   </header>
   <dl>
     <dt></dt>
-    <dd class="number">
+    <dd class="sn">
       <div>GET</div>
       <div>POST</div>
       <div>PUT</div>
       <div>PATCH</div>
       <div>DELETE</div>
     </dd>
-    <dt>Content-Type</dt>
-    <dd>POST 提交数据时，包含了 Content-Type 和消息主体编码方式两部分。因为服务器端通常会依据Content-Type来决定使用何种方式解析主体部分</dd>
-    <table class="tbl-sn">
-      <tr>
-        <td>application/x-www-form-urlencoded</td>
-        <td>key1=val1&key2=val2</td>
-      </tr>
-      <tr>
-        <td>multipart/form-data</td>
-        <td>上传文件；必须指定 &lt;form&gt; 的 enctype 为 multipart/form-data</td>
-      </tr>
-      <tr>
-        <td>application/json:</td>
-        <td>序列化后的 JSON 字符串</td>
-      </tr>
-      <tr>
-        <td>text/xml</td>
-        <td>XML 作为编码方式的远程调用规范；使用较少</td>
-      </tr>
-    </table>
+    <dt>POST</dt>
+    <dd>提交的数据包含请求类型 Content-Type 和消息主体编码方式两部分。服务器端依据Content-Type来决定使用何种方式解析主体部分</dd>
+    <dd>表单form的属性 enctype 可以指定请求类型；现在通常在请求头header中指定；简单场景下，可以抛弃form这个壳</dd>
+    <dd>常见的Content-Type有：</dd>
+    <dd class="sn">
+      <div>application/x-www-form-urlencoded</div>
+      <p>浏览器默认的编码格式，使用键值对参数</p>
+      <div>multipart/form-data</div>
+      <p>上传文件；必须指定 &lt;form&gt; 的 enctype 为 multipart/form-data</p>
+      <div>application/json:</div>
+      <p>序列化后的 JSON 字符串</p>
+      <div>text/xml</div>
+      <div>text/plain</div>
+      <p>XML 作为编码方式的远程调用规范；使用较少</p>
+    </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

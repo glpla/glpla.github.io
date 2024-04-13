@@ -23,7 +23,7 @@
         <dd>适合模块化开发和团队协作</dd>
         <dt>基本过程</dt>
         <dd class="sn">
-            <div>创建 - 新建子组件 Demo.vue，指定后缀名为.vue</div>
+            <div>创建子组件，后缀名为.vue，如 Demo.vue</div>
             <pre>
 &lt;script setup&gt;
     //逻辑
@@ -36,12 +36,17 @@
 &lt;style&gt;
     //样式
 &lt;/style&gt;</pre>
-            <div>引入：父组件 Super.vue在&lt;script&gt;引入子组件，<span class="warn">注意</span> ：不能省略后缀名.vue；路径关系</div>
+            <div>父组件在&lt;script&gt;引入子组件</div>
+            <p>注意<span class="warn">路径</span>关系；可以使用相对路径；也可以使用路径别名@从src开始引用</p>
+            <p>不能省略后缀名.vue</p>
+            <p class="tips">引入时，输入组件部分或全名，IDE会自动获取组件及补充相对路径；注意看代码提示</p>
             <pre>
 &lt;script setup&gt;
     import Demo from './Demo.vue'
 &lt;/script&gt;</pre>
-            <div>使用：父组件 Super.vue在结构&lt;template&gt;中使用子组件；可以多次使用</div>
+            <div>父组件在结构&lt;template&gt;中使用子组件</div>
+            <p>可以使用单标签或双标签</p>
+            <p>可以多次使用</p>
             <pre>
 &lt;template&gt;
     &lt;h1&gt;Here is a child component!&lt;/h1&gt;
@@ -50,6 +55,7 @@
 &lt;/template&gt;</pre>
         </dd>
         <dd class="example-sn">封装版权组件</dd>
+        <dd class="example-sn">封装轮播组件</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
