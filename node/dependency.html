@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>依赖 Dependency</title>
-  <link rel="stylesheet" href="../../css/reset2024.css">
-  <link rel="stylesheet" href="../../css/common2024.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
+  <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
 </head>
 
@@ -21,21 +18,22 @@
   <div class="chap">nodemon</div>
   <dl>
     <dd>自动检测js文件变化，适合开发时使用</dd>
-    <dd>1. 安装</dd>
-    <dd class="code">
+    <dd>更多信息，请查看 <a href="https://www.npmjs.com/package/nodemon">GitHub - nodemon</a></dd>
+    <dd>安装</dd>
+    <dd>
       <pre>cnpm i nodemon -g</pre>
     </dd>
-    <dd>2. 监听文件</dd>
+    <dd>监听文件</dd>
     <dd>监听指定文件 - 注意当前工作目录和目标文件的路径关系</dd>
-    <dd class="code">
+    <dd>
       <pre>nodemon xx.js</pre>
     </dd>
     <dd>监听默认文件 - 自动监听配置文件package.json里main字段指定的文件；默认是index.js</dd>
-    <dd class="code">
+    <dd>
       <pre>nodemon</pre>
     </dd>
     <dd>也可以修改scripts，执行特定命令</dd>
-    <dd class="code">
+    <dd>
       <pre>
 "scripts": {
   "server": "nodemon app.js"
@@ -44,27 +42,23 @@
   </dl>
   <div class="chap">Nano ID</div>
   <dl>
-    <dd>逐渐取代UUID；更多信息，请访问<a href="https://github.com/ai/nanoid/blob/main/README.zh-CN.md" class="link">Nano ID</a></dd>
+    <dd>逐渐取代UUID；更多信息，请访问<a href="https://github.com/ai/nanoid/blob/main/README.zh-CN.md">GitHub - Nano ID</a></dd>
     <dd>安装</dd>
-    <dd class="code">
+    <dd>
       <pre>npm install nanoid -S</pre>
     </dd>
     <dd>引入</dd>
-    <dd class="code">
+    <dd>
       <pre>import {nanoid} from 'nanoid'</pre>
     </dd>
     <dd>使用</dd>
-    <dd class="code">
+    <dd>
       <pre>
 //默认长度 - 21
 nanoid()
 //指定长度 - 8
 nanoid(8)      </pre>
     </dd>
-  </dl>
-  <div class="chap">mock</div>
-  <dl>
-    <dd>数据制造机</dd>
   </dl>
   <div class="chap">multer</div>
   <dl>
@@ -80,38 +74,45 @@ nanoid(8)      </pre>
     <dd>. upload.none()：only text field</dd>
     <dd>. upload.single(file)：single file</dd>
     <dd>. upload.array()：multiple files</dd>
-    <dd>安装依赖 - 推荐使用cnpm；更多信息，请查看 <a href="https://www.npmjs.com/package/multer#readme" class="link">NPM - multer</a>
+    <dd>安装依赖 - 推荐使用cnpm；更多信息，请查看 <a href="https://www.npmjs.com/package/multer#readme">NPM - multer</a>
     </dd>
-    <pre class="code">npm install multer --save</pre>
-  </dl>
-  <div class="chap">Formidable</div>
-  <dl>
-    <dd>A Node.js module for parsing form data, especially <span class="warn">file uploads</span>.</dd>
-    <dd>Formidable是一个Node.js模块，用于解析表单数据，特别是文件上传；更多信息，请查看<a href="https://www.npmjs.com/package/formidable#readme"
-        class="link">NPM - formidable</a></dd>
-    <dd class="code">
-      <pre>cnpm i formidable --save</pre>
-    </dd>
+    <pre>npm install multer --save</pre>
   </dl>
   <div class="chap">md5</div>
   <dl>
     <dd>信息摘要</dd>
     <dd>md5加密后长度32bit</dd>
-  </dl>
-  <div class="chap">mysql</div>
-  <dl>
-    <dd>数据库</dd>
+    <dd>更多信息，请查看 <a href="https://www.npmjs.com/package/md5js">NPM - md5js</a>；此外还有
+      <a href="https://www.npmjs.com/package/md5">NPM - MD5</a>、<a href="https://www.npmjs.com/package/crypto-js">NPM -
+        crypto-js</a>
+    </dd>
+    <dd>安装</dd>
+    <dd>
+      <pre>npm install md5js</pre>
+    </dd>
+    <dd>引入</dd>
+    <dd>
+      <pre>import { md5 } from 'md5js';</pre>
+    </dd>
+    <dd>使用</dd>
+    <dd>
+      <pre>
+console.log(md5('message'));//16位
+console.log(md5('message',32));//32位</pre>
+    </dd>
   </dl>
   <div class="chap">xlsx</div>
   <dl>
     <dd>电子表格处理</dd>
     <dd>表格导出为excel</dd>
+    <dd>更多信息，请查看 <a href="https://www.npmjs.com/package/xlsx">NPM - SheetJS</a>、<a
+        href="https://github.com/rockboom/SheetJS-docs-zh-CN">GitHub - SheetJS js-xlsx</a></dd>
     <dd>step1：安装依赖</dd>
-    <dd class="code">
+    <dd>
       <pre>npm i xlsx</pre>
     </dd>
     <dd>step2：引入dist中的xlsx.full.min.js</dd>
-    <dd class="code">
+    <dd>
       <pre>
 &lt;script src="js/xlsx.full.min.js">&lt;/script&gt;
 &lt;script src="js/export.js"&gt;&lt;/script&gt;
@@ -126,12 +127,29 @@ nanoid(8)      </pre>
   </dl>
   <div class="chap">silly-datetime</div>
   <dl>
-    <dd><a href="https://www.npmjs.com/package/silly-datetime" class="link">silly-datetime</a></dd>
+    <dd>更多信息，请查看 <a href="https://www.npmjs.com/package/silly-datetime">silly-datetime</a></dd>
   </dl>
   <div class="chap">moment</div>
   <dl>
     <dd>时间格式处理</dd>
-    <dd><a href="https://www.npmjs.com/package/moment" class="link">moment.js</a></dd>
+    <dd>更多信息，请查看 <a href="https://www.npmjs.com/package/moment">moment.js</a></dd>
+  </dl>
+  <div class="chap">Formidable</div>
+  <dl>
+    <dd>A Node.js module for parsing form data, especially <span class="warn">file uploads</span>.</dd>
+    <dd>Formidable是一个Node.js模块，用于解析表单数据，特别是文件上传；更多信息，请查看<a href="https://www.npmjs.com/package/formidable#readme">NPM -
+        formidable</a></dd>
+    <dd>
+      <pre>cnpm i formidable --save</pre>
+    </dd>
+  </dl>
+  <div class="chap">mock</div>
+  <dl>
+    <dd>数据制造机</dd>
+  </dl>
+  <div class="chap">mysql</div>
+  <dl>
+    <dd>数据库</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

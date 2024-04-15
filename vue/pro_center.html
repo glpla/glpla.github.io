@@ -12,62 +12,61 @@
 </head>
 
 <body>
-  <div>
-    <header>
-      <h1>个人中心页</h1>
-      <span>Center</span>
-    </header>
-    <dl class="number-mul-sn">
-      <dt>实验内容</dt>
-      <dd>
-        <div>头像定制</div>
-        <div>信息定制</div>
-        <div>收藏</div>
-        <div>订单</div>
-        <div>评论</div>
-        <div>热门推荐</div>
-      </dd>
-      <dt>前置知识</dt>
-      <dd>
-        <div>文件上传</div>
-        <div>表单提交</div>
-        <div>双向绑定</div>
-        <div>网络请求 Axios - GET、POST</div>
-      </dd>
-      <dt>开发环境</dt>
-      <dd>
-        <div>操作系统 Window 10+</div>
-        <div>文本编辑器 Vs Code</div>
-        <div>谷歌浏览器 Chrome</div>
-        <div>Node.js</div>
-      </dd>
-    </dl>
-    <div class="chap">参考代码 - 头像定制</div>
-    <dl>
-      <dd>按照学号和姓名命名图片</dd>
-      <dd>
-        <table>
-          <caption>API</caption>
-          <tr>
-            <th>分类</th>
-            <th>命名</th>
-          </tr>
-          <tr>
-            <td>图片</td>
-            <td>avatar</td>
-          </tr>
-          <tr>
-            <td>学号</td>
-            <td>usn</td>
-          </tr>
-          <tr>
-            <td>姓名</td>
-            <td>uname</td>
-          </tr>
-        </table>
-      </dd>
-      <dd>
-        <pre>
+  <header>
+    <h1>个人中心页</h1>
+    <span>Center</span>
+  </header>
+  <dl class="number-mul-sn">
+    <dt>实验内容</dt>
+    <dd>
+      <div>头像定制</div>
+      <div>信息定制</div>
+      <div>收藏</div>
+      <div>订单</div>
+      <div>评论</div>
+      <div>热门推荐</div>
+    </dd>
+    <dt>前置知识</dt>
+    <dd>
+      <div>文件上传</div>
+      <div>表单提交</div>
+      <div>双向绑定</div>
+      <div>网络请求 Axios - GET、POST</div>
+    </dd>
+    <dt>开发环境</dt>
+    <dd>
+      <div>操作系统 Window 10+</div>
+      <div>文本编辑器 Vs Code</div>
+      <div>谷歌浏览器 Chrome</div>
+      <div>Node.js</div>
+    </dd>
+  </dl>
+  <div class="chap">参考代码 - 头像定制</div>
+  <dl>
+    <dd>按照学号和姓名命名图片</dd>
+    <dd>
+      <table>
+        <caption>API</caption>
+        <tr>
+          <th>分类</th>
+          <th>命名</th>
+        </tr>
+        <tr>
+          <td>图片</td>
+          <td>avatar</td>
+        </tr>
+        <tr>
+          <td>学号</td>
+          <td>usn</td>
+        </tr>
+        <tr>
+          <td>姓名</td>
+          <td>uname</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <pre>
 import { ref } from 'vue'
 import axios from 'axios';
 let file = ref(null)
@@ -96,19 +95,18 @@ const submit = () => {
       console.log('done');
     })
 }</pre>
-      </dd>
-      <dd>
-        <pre>
+    </dd>
+    <dd>
+      <pre>
 &lt;form @submit.prevent="submit"&gt;
   &lt;input type="text" name="usn" v-model="user.usn"&gt;
   &lt;input type="text" name="uname" v-model="user.uname"&gt;
   &lt;input type="file" name="avatar" ref="file"&gt;
   &lt;button&gt;submit&lt;/button&gt;
 &lt;/form&gt;</pre>
-      </dd>
-    </dl>
-    <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  </div>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
 
 </html>

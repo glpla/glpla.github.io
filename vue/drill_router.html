@@ -52,9 +52,8 @@
         <div>实验报告：采用学院统一下发的格式文件，以文字说明，配以效果图片或核心代码展示并说明数据来源、实施过程、各部分功能、具体内容和实现细节，导出为PDF，按照要求命名，提交个人学习通作业</div>
         <div>未按要求在规定时间内提交视为无效，不得分</div>
       </dd>
-      <dt>参考代码</dt>
+      <dt>参考代码 - 单页路由</dt>
       <dd>
-        <div>单页路由 - 子路由使用完整路由；也可以省略父级路由</div>
         <pre>
 routes: [
   {
@@ -108,8 +107,92 @@ routes: [
     component: () => import('../components/NotFound.vue')
   }
 ]</pre>
-        <div>全站路由</div>
-        <p>略</p>
+      <dt>参考代码 - 全站路由</dt>
+      <dd>
+        <pre>
+routes: [
+  {
+    path: '/',
+    name: 'login',
+    component: Login,
+  },
+  {
+    path: '/login',
+    redirect: '/'
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import('../views/Home.vue'),
+    children: [
+      {
+        path: 'user',
+        name: 'user',
+        component: () => import('../views/User.vue')
+      },
+      {
+        path: 'good',
+        name: 'good',
+        component: () => import('../views/Good.vue')
+      },
+      {
+        path: 'cart',
+        name: 'cart',
+        component: () => import('../views/Cart.vue')
+      },
+      {
+        path: 'order',
+        name: 'order',
+        component: () => import('../views/Order.vue')
+      },
+      {
+        path: 'promotion',
+        name: 'promotion',
+        component: () => import('../views/Promotion.vue')
+      },
+      {
+        path: 'favor',
+        name: 'favor',
+        component: () => import('../views/Favor.vue')
+      },
+      {
+        path: 'notice',
+        name: 'notice',
+        component: () => import('../views/Notice.vue')
+      },
+      {
+        path: 'todo',
+        name: 'todo',
+        component: () => import('../views/Todo.vue')
+      },
+      {
+        path: 'upload',
+        name: 'upload',
+        component: () => import('../views/Upload.vue')
+      },
+      {
+        path: 'message',
+        name: 'message',
+        component: () => import('../views/Message.vue')
+      },
+      {
+        path: 'setup',
+        name: 'setup',
+        component: () => import('../views/Setup.vue')
+      },
+      {
+        path: 'about',
+        name: 'about',
+        component: () => import('../views/About.vue')
+      }
+    ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('../components/NotFound.vue')
+  }
+]</pre>
       </dd>
       <dt>拓展</dt>
       <dd>

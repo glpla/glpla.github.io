@@ -16,7 +16,10 @@
         <span>&commat; Style</span>
     </header>
     <dl>
-        <dd class="tips">为组件的根节点指定一个特有的类，如.nav。推荐以组件名字命名这个类；因为组件的功能各不相同，很容易保证组件类的唯一性</dd>
+        <dd class="tips">
+            <div>为组件的根节点指定一个特有的类，如.nav。推荐以组件名字命名这个类；因为组件的功能各不相同，很容易保证组件类的唯一性</div>
+            <div>便于父组件布局</div>
+        </dd>
         <dt>组件样式</dt>
         <dd>&lt;style&gt;指定 scoped 时：</dd>
         <dd>它的 CSS 只会影响当前组件的元素</dd>
@@ -24,11 +27,15 @@
             到子组件中。不过，子组件的根节点会同时被父组件的作用域样式和子组件的作用域样式影响。便于：让父组件可以从布局的角度出发，调整其子组件根元素的样式</dd>
         <dd>更多作用域详细信息，请参考<a href="./class.html">类 class</a>、<a href="https://cn.vuejs.org/api/sfc-css-features.html">API
                 - 单文件组件 CSS 功能</a></dd>
-        <dt>Vue特有选择器</dt>
+        <dt>特殊选择器</dt>
         <dd class="sn">
             <div>深度选择器 :deep()</div>
             <p>伪类选择器</p>
             <p>父组件如果想深入调整子组件内部元素的样式|影响到子组件，可以使用伪类:deep()</p>
+            <pre>
+:deep(.title) {
+    color: var(--warn-color);
+}</pre>
             <div>插槽选择器 :slotted</div>
             <p>默认情况下，作用域样式不会影响到 &lt;slot/&gt; 渲染出来的内容，因为它们被认为是父组件所持有并传递进来的。使用 :slotted 伪类以明确地将插槽内容作为选择器的目标</p>
             <p>更多细节，请查看<a href="./component4.html">组件 slot</a></p>
@@ -40,6 +47,7 @@
     color: red;
 }</pre>
         </dd>
+        <dd class="tips">还有一个样式穿透 >>>；注意当前框架是否支持</dd>
         <dd class="example-sn"><a href="./pro_home.html">主页</a></dd>
         <dd>每一个子组件都使用根节点，且使用同组件名的类，便于父组件布局</dd>
     </dl>
