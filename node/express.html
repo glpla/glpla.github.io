@@ -22,6 +22,47 @@
     <dt>概述 overview</dt>
     <dd>保留了node的原生功能</dd>
     <dd>添加|增强了很多功能，如创建服务器</dd>
+    <dt>扩展 node-snippets</dt>
+    <dd>安装：在Vs Code扩展中搜索并安装</dd>
+    <dd>使用：</dd>
+    <dd>1. node-express：快速创建基于express的nodejs服务器</dd>
+    <dd>
+      <pre>
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => res.send('Hello World!'))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))</pre>
+    </dd>
+    <dd>2. node-express-get：创建get路由</dd>
+    <dd>
+      <pre>
+app.get('/', (req, res) => {
+  res.send('GET request to the homepage')
+})      </pre>
+    </dd>
+    <dd>3. node-express-get-params：创建动态get路由</dd>
+    <dd>
+      <pre>
+app.get('/books/:bookId', (req, res) => {
+  res.send(req.params.bookId)
+})</pre>
+    </dd>
+    <dd>4. node-express-post：创建post路由</dd>
+    <dd>
+      <pre>
+app.post('/', function (req, res) {
+  res.send('POST request to the homepage')
+})      </pre>
+    </dd>
+    <dd>5. node-express-post-params：创建动态post路由</dd>
+    <dd>
+      <pre>
+app.get('/books/:bookId', (req, res) => {
+  res.send(req.params.bookId)
+})      </pre>
+    </dd>
   </dl>
   <dl>
     <dt>请求 req</dt>

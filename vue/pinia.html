@@ -18,7 +18,7 @@
     <dl>
         <dd>状态管理出现之前，使用共享组件完成对共享数据的使用；共享数据的修改通过共享组件发送自定义事件完成。这就意味着：任何一个使用它的组件都可以修改，不太容易维护；注意：共享数据和全局数据不是一回事</dd>
         <dd>利用仓库store集中式状态管理：抽取出组件间的共享状态，放在一个全局单例中来管理</dd>
-        <dd>三个概念：Atate、Getter 和 Action</dd>
+        <dd>三个概念：State、Getter 和 Action</dd>
         <dd class="sn">
             <div>State - 驱动整个应用的数据源；是store 的核心。应先定义能代表应用或反映应用状态的 state；相当于组件中的 data</div>
             <div>Getter - 对状态的一种声明式映射；相当于组件中的 computed</div>
@@ -34,7 +34,7 @@
             的专属状态管理库，使用大菠萝作为logo</dd>
         <dd>Vue2采用vuex</dd>
         <dt>安装 Installation</dt>
-        <dd>可以在创建项目的时，选择状态管理；项目创建完毕后，可以直接使用；强烈建议</dd>
+        <dd>可以在创建项目的时，选择状态管理；项目创建完毕后，可以直接使用 - 强烈建议</dd>
         <dd>也可以单独安装，需要引入、配置等；不建议新手使用</dd>
         <dd>
             <pre>npm i pinia --save</pre>
@@ -61,17 +61,18 @@ app.mount('#app')</pre>
         <dt>仓库 Store</dt>
         <dd>也叫仓库，是一个保存状态和业务逻辑的实体</dd>
         <dd>不与组件树绑定，而承载着全局状态</dd>
-        <dd>仓库保存全局状态，即：可以在整个应用中访问的数据</dd>
-        <dd>仓库通常集中保存在项目的stores目录（应提前创建好），并按照功能创建单独的仓库文件</dd>
+        <dd>仓库保存全局状态，即：可以在 <span class="warn">整个应用</span> 中访问的数据</dd>
+        <dd>仓库通常集中保存在项目的stores目录（应提前创建好），并按照功能创建 <span class="warn">单独</span> 的仓库文件</dd>
         <dd>仓库在onMounted之前就已经准备好</dd>
         <dt>基本步骤 Steps</dt>
         <dd class="sn">
             <div>定义 Store</div>
-            <p>以 use 开头且以 Store 结尾命名仓库</p>
-            <p>引入defineStore创建仓库</p>
-            <p>第一个参数是你的应用中 Store 的唯一 ID，Pinia 将用它来连接 store 和 devtools</p>
-            <p>第二个参数接收option对象或setup函数；setup函数和组合式API类似，且功能更灵活</p>
-            <p>注意：直接复制核心代码，有时候系统不会自动导入对应的包，需要手动导入，如ref、computed，请确认是否缺失包</p>
+            <p>创建js文件，使用语义化命名，如counter.js</p>
+            <p>引入 defineStore 创建仓库</p>
+            <p>以 use 开头且以 Store 结尾命名仓库，如useCounterStore</p>
+            <p>使用defineStore创建仓库实例，其中：</p>
+            <p>. 第一个参数 counter 是你的应用中 Store 的唯一 ID，Pinia 将用它来连接 store 和 devtools</p>
+            <p>. 第二个参数接收option对象或setup函数；setup函数和组合式API类似，且功能更灵活</p>
             <pre>
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
@@ -79,12 +80,10 @@ import { ref, computed } from 'vue'
 export const useCounterStore  = defineStore('counter', ()=>{
   //data
   const count = ref(0)
-  //computed
-  const doubleCount = computed(() => count.value * 2)
   //action
-  function increment() {
-    count.value++
-  }
+  const increment = () => count.value++
+  //other - computed
+  const doubleCount = computed( () => count.value * 2 )
 
   return { count, doubleCount, increment }
 })</pre>
@@ -97,6 +96,7 @@ export const useCounterStore  = defineStore('counter', ()=>{
     console.log('store', store);//在目标对象target object中可以看到定义的3个方法
 &lt;/script&gt;
 
+//这里采用内联事件
 &lt;template&gt;
     &lt;div @click="store.increment"&gt;仓库数据 - {{ store.count }} - {{ store.doubleCount }}&lt;/div&gt;
 &lt;/template&gt;</pre>
@@ -104,9 +104,29 @@ export const useCounterStore  = defineStore('counter', ()=>{
         <dd class="tips">
             <div>store中包含数据和方法；可以直接解构出方法；要解构出数据需要使用storeToRefs包</div>
         </dd>
-        <dt>更多状态操作 state</dt>
+        <dd class="example-sn">定义导航菜单仓库，详情请查看 <a href="./drill_menu.html">汉堡菜单</a></dd>
+        <dd>项目从桌面端切换到移动端时，菜单折叠，由汉堡按钮控制折叠和展开；单击菜单项时，折叠菜单</dd>
+        <dd>1. 创建仓库 - 仓库参考代码 menu.js</dd>
+        <dd>
+            <pre>
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+
+export const useMenuStore = defineStore('menu', () => {
+  const flag = ref(0)
+  const switchFlag = () => {
+    flag.value ? flag.value = false : flag.value = true
+  }
+
+  return { flag, switchFlag }
+})</pre>
+        </dd>
+        <dd>2. 在使用仓库的组件结构中，引入仓库，通过汉堡按钮的单击，由标记flag控制动态类的应用达到菜单的折叠和展开</dd>
+        <dd>3. 在路由配置中，引入仓库，在导航前置守卫中实例化仓库并切换标记switchFlag</dd>
+        <dd class="tips">改进：单击同一个菜单项，折叠菜单</dd>
+        <dt>更多状态操作* state</dt>
         <dd class="sn">
-            <div>访问 state - 默认情况下，通过 store 实例访问 state，直接对其进行读写</div>
+            <div>访问 state - 默认情况下，通过 仓库实例 访问 state，直接对其进行读写</div>
             <pre>
 const store = useStore()
 store.count++</pre>

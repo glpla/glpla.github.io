@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实操 汉堡菜单</title>
+  <link rel="stylesheet" href="../css/exp.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+  </header>
+  <div class="container">
+    <h1>汉堡菜单</h1>
+    <h4>Menu</h4>
+    <dl class="number-mul-sn">
+      <dt>实验目的</dt>
+      <dd>
+        <div>掌握仓库的创建、使用</div>
+        <div>掌握媒体查询的使用</div>
+        <div>进一步熟悉组件和路由的使用</div>
+      </dd>
+      <dt>开发环境</dt>
+      <dd>
+        <div>操作系统 Window 10+</div>
+        <div>文本编辑器 Vs Code</div>
+        <div>谷歌浏览器 Chrome</div>
+        <div>Node.js</div>
+      </dd>
+      <dt>实验内容</dt>
+      <dd>
+        <div>项目的创建</div>
+        <div>路由的创建</div>
+        <div>组件的创建</div>
+        <div>仓库的创建</div>
+        <div>使用仓库管理导航菜单的折叠和展开</div>
+      </dd>
+      <dt>实验步骤</dt>
+      <dd>
+        <div>创建基于Vite的Vue3的项目，使用路由和状态管理</div>
+        <div>使用Vs Code打开，安装依赖，运行项目</div>
+        <div>创建若干测试组件</div>
+        <div>定制面向各个测试组件的路由</div>
+        <div>在首页中定制导航菜单，使得各组件可以相互跳转</div>
+        <div>定制移动端样式，加入汉堡菜单按钮</div>
+        <pre>
+&lt;div class="iconfont icon-thlist ham" @click="showMenu">&lt;/div&gt;
+&lt;nav :class="['main-nav', { 'active': store.flag }]"&gt;
+  //...
+&lt;/nav&gt;</pre>
+        <div>创建仓库 menu.js</div>
+        <pre>
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+
+export const useMenuStore = defineStore('menu', () => {
+  const flag = ref(0)
+  const switchFlag = () => {
+    flag.value ? flag.value = false : flag.value = true
+  }
+
+  return { flag, switchFlag }
+})</pre>
+        <div>在首页逻辑引入仓库并实例化</div>
+        <pre>
+import { useMenuStore } from '@/stores/menu';
+const store = useMenuStore()</pre>
+        <div>为汉堡菜单添加事件showMenu，应用仓库逻辑，管理导航菜单的折叠和展开</div>
+        <pre>
+const showMenu = () => {
+  store.switchFlag()
+}        </pre>
+        <div>在路由配置中添加导航守卫，使用仓库管理导航菜单的折叠和展开</div>
+        <pre>
+import { useMenuStore } from '@/stores/menu'
+
+//...
+
+router.beforeEach((to, from, next) => {
+  const store = useMenuStore()
+  store.flag = false
+  next()
+})        </pre>
+        <div>导航菜单的静态样式和动态样式</div>
+        <pre>
+.main-nav {
+  position: absolute;
+  left: -150px;
+  width: 150px;
+  height: calc(100vh - 20vh - 5vh);
+  background-color: #000;
+  transition: .4s;
+  padding: 10px;
+}
+
+.main-nav.active {
+  left: 0px;
+}</pre>
+      </dd>
+      <dt>实验结果分析与体会</dt>
+      <dd>
+        <div>掌握的知识点、开发技能</div>
+        <div>碰到的问题、解决的思路和方法以及未解决的问题</div>
+        <div>其它思考</div>
+      </dd>
+      <dt>实验要求</dt>
+      <dd>
+        <div>规范开发；独立完成；突出个人设计特点和风格</div>
+        <div>实验报告：采用学院统一下发的格式文件，以文字说明，配以效果图片或核心代码展示并说明数据来源、实施过程、各部分功能、具体内容和实现细节，导出为PDF，按照要求命名，提交个人学习通作业</div>
+        <div>未按要求在规定时间内提交视为无效，不得分</div>
+        <div>格式规范，请参考 <a href="../course/paper.html">论文规范要点</a></div>
+      </dd>
+    </dl>
+    <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  </div>
+</body>
+
+</html>
