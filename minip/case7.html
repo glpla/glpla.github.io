@@ -5,71 +5,244 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>用户登录 Login</title>
+    <title>用户注册和登录 register & Login</title>
     <link rel="stylesheet" href="../css/exp.css">
     <link rel="stylesheet" href="../css/code.css">
     <base target="_blank">
+    <style>
+        figure img {
+            border: 1px solid #ddd;
+        }
+    </style>
 </head>
 
 <body>
     <header>
     </header>
     <div class="container">
-        <h1>用户登录</h1>
-        <h4>&commat;Login</h4>
+        <h1>用户注册和登录</h1>
+        <h4>register & Login</h4>
         <dl class="number-mul-sn">
             <dt>目的</dt>
             <dd>
-                <div>掌握数据绑定的使用</div>
-                <div>熟悉常见表单元素的事件</div>
-                <div>了解表单提交和网络请求的基本过程</div>
+                <div>掌握本地存储的使用</div>
+                <div>掌握UI常见的API</div>
+                <div>进一步熟悉数据绑定的使用</div>
+                <div>进一步熟悉表单元素的事件</div>
+                <div>进一步熟悉网络请求的基本过程</div>
             </dd>
             <dt>内容</dt>
             <dd>
-                <div>数据绑定</div>
-                <div>表单事件</div>
-                <div><a href="../node/jsonserver.html" class="link">Json-Server</a>数据服务器搭建</div>
-                <div>网络请求</div>
+                <div>用户注册</div>
+                <div>用户登录</div>
+                <div>本地存储</div>
+                <div>UI常见API</div>
             </dd>
-            <dt>使用组件</dt>
+            <dt>业务流程</dt>
             <dd>
-                <div>&lt;view&gt;</div>
-                <div>&lt;image&gt;</div>
-                <div>&lt;text&gt;</div>
-                <div>&lt;input&gt; - text/nickname</div>
-                <div>&lt;checkbox&gt; &lt;checkbox-group&gt;</div>
-                <div>&lt;buttton&gt; - submit</div>
+                <div>用户登录；如果没有注册，则先注册再登录</div>
+                <div>用户登录和注册过程中，使用UI的API给与相应的提示</div>
+                <div>登录成功后，在本地保存用户信息</div>
+            </dd>
+            <dt>接口设置</dt>
+            <dd>
+                <div>服务器</div>
+                <p>基于express的Node.js</p>
+                <div>数据文件</div>
+                <p>每个用户保存为一个json文件，以学号usn命名，如 22054022.json为何芯妍同学的数据文件，节点数据基本字段为</p>
+                <p>可根据设计自行增加或减少</p>
+                <pre>
+{
+    "usn": "2024",
+    "upass": "",
+    "uname": "何芯妍",
+    "udesc":"",
+    "ubirth":"",
+    "ugender":"",
+    "ucell": "",
+    "uaddr":"",
+    "imgUrl":""
+}</pre>
+                <div>用户头像</div>
+                <p>未更新头像时，使用 <a href="https://cdn.pixabay.com/photo/2015/03/03/20/42/man-657869_640.jpg">默认头像</a></p>
+                <p>更新头像时，名字name为avatar</p>
+                <p>用户头像保存在服务器上，用户头像的url保存在用户数据中</p>
+            </dd>
+            <dt>参考效果</dt>
+            <dd>除了必要的登录凭证信息外，其它可自由设计</dd>
+            <dd>
+                <figure class="img-sn">
+                    <img src="./imgs/case0.png" alt="">
+                    <figcaption>登录 login</figcaption>
+                </figure>
+                <figure class="img-sn">
+                    <img src="./imgs/case1.png" alt="">
+                    <figcaption>注册 register</figcaption>
+                </figure>
+                <figure class="img-sn">
+                    <img src="./imgs/case2.png" alt="">
+                    <figcaption>主页 home</figcaption>
+                </figure>
+                <figure class="img-sn">
+                    <img src="./imgs/case3.png" alt="">
+                    <figcaption>个人中心 information</figcaption>
+                </figure>
+            </dd>
+            <dd>更多效果</dd>
+            <dd>
+                <figure class="img-sn">
+                    <img src="../vue/imgs/login.png" alt="">
+                    <figcaption>登录 login</figcaption>
+                </figure>
+            </dd>
+            <dd>
+                <figure class="img-sn">
+                    <img src="../vue/imgs/reg.png" alt="">
+                    <figcaption>注册 register</figcaption>
+                </figure>
             </dd>
             <dt>要求</dt>
             <dd>
-                <div>实验报告：采用学院统一下发的格式文件，并按照要求命名、导出为PDF，提交个人学习通作业</div>
+                <div>按照以上步骤分别完成设计与开发</div>
+                <div>规范开发；独立完成；突出个人设计特点和风格</div>
+                <div>实验报告：采用学院统一下发的格式文件，以图片或代码形式展示并说明实施过程、各部分功能、具体内容和实现细节，并按照要求命名，最后导出为PDF，提交个人学习通作业</div>
                 <div>未按要求在规定时间内提交视为无效，不得分</div>
+                <div>相关格式规范，请参考 <a href="../course/paper.html">论文格式规范 Paper Prettier</a></div>
             </dd>
             <dt>特别提示</dt>
             <dd>实验报告除了各要素齐全外，特别要体现</dd>
             <dd>
                 <div>接口文档和字段说明；其中信息字段info要体现个人信息或小组信息</div>
                 <div>结构WXML - 代码</div>
-                <div>逻辑js -代码</div>
-                <div>效果- 截图，统一宽度，高度随内容、有编号、有说明标题，如：图1 页面布局</div>
+                <div>逻辑js - 代码</div>
+                <div>效果 - 截图，统一宽度，高度随内容、有编号、有说明标题，如：图1 页面布局</div>
             </dd>
-            <dt>接口设置</dt>
+        </dl>
+        <div class="chap">服务参考代码</div>
+        <dl>
+            <dt>用户登录</dt>
+            <dd>学号usn和密码upass匹配，登录成功</dd>
             <dd>
-                <div>服务器支持 json-server</div>
-                <div>数据文件 form.json - info开发者信息；msg用户留言数据，user用户注册数据、survey用户问卷数据</div>
                 <pre>
-{
-    "info": {},
-    "msg": [],
-    "user": [],
-    "survey": []
-}</pre>
+router.get('/login', (req, res) => {
+    console.log('req.query', req.query);
+    // let file = fs.readFileSync('./public/data/' + req.query.usn + '.json', 'utf8');
+    let file = fs.readFile('./public/data/' + req.query.usn + '.json', 'utf8', (err, data) => {
+        if (err) {
+        res.json({
+            "errno": 2,
+            "msg": 'user not exist'
+        })
+        } else {
+        let jsonFile = JSON.parse(data)
+        console.log('jsonFile', jsonFile);
+        if (req.query.upass === jsonFile.upass) {
+            res.json({
+            "errno": 0,
+            "msg": 'login ok'
+            })
+        } else {
+            res.json({
+            "errno": 1,
+            "msg": 'pass not match'
+            })
+        }
+        }
+    })
+})                </pre>
             </dd>
-            <dt>用户注册模块</dt>
-            <dd>效果图</dd>
-            <dd class="grid">
-                <img src="../vue/imgs/login.png" alt="">
-                <img src="../vue/imgs/reg.png" alt="">
+            <dt>用户注册</dt>
+            <dd>数据不能为空且同意条款和约定</dd>
+            <dd>
+                <pre>
+router.post('/register', (req, res) => {
+    console.log('req.body', req.body);
+    if (fs.existsSync('./public/data/' + req.body.usn + '.json')) {
+        res.json({
+        "errno": 3,
+        "msg": 'user exist'
+        })
+    }
+    fs.writeFile('./public/data/' + req.body.usn + '.json', JSON.stringify(req.body), (error) => {
+        if (error) {
+        console.log('保存文件失败')
+        res.json({
+            "errno": 2,
+            "msg": 'try later'
+        })
+        } else {
+        console.log('保存文件成功')
+        res.json({
+            "errno": 0,
+            "msg": 'register ok'
+        })
+        }
+    })
+})</pre>
+            </dd>
+            <dt>用户更新</dt>
+            <dd>可以多个数据公用一个页面</dd>
+            <dd>
+                <pre>
+router.post('/modify', (req, res) => {
+    console.log('modify', req.body);
+    const data = JSON.parse(fs.readFileSync('./public/data/' + req.body.usn + '.json', 'utf8'));
+    data[req.body.ukey] = req.body.uvalue
+    fs.writeFile('./public/data/' + req.body.usn + '.json', JSON.stringify(data, null, 4), (error) => {
+        if (error) {
+        console.log('保存文件失败')
+        res.json({
+            "errno": 2,
+            "msg": 'try later'
+        })
+        } else {
+        console.log('保存文件成功')
+        res.json({
+            "errno": 0,
+            "msg": 'modify ok'
+        })
+        }
+    })
+})                </pre>
+            </dd>
+            <dt>头像上传</dt>
+            <dd>上传的同时，更新用户数据文件</dd>
+            <dd>
+                <pre>
+router.post('/avatar', upload.single('avatar'), (req, res) => {
+    console.log('req.file', req.file);
+    const data = JSON.parse(fs.readFileSync('./public/data/' + req.body.usn + '.json', 'utf8'));
+    data['imgUrl'] = 'http://127.0.0.1:3000/upload/' + req.file.filename
+    fs.writeFile('./public/data/' + req.body.usn + '.json', JSON.stringify(data, null, 4), (error) => {
+        if (error) {
+        console.log('保存文件失败')
+        res.json({
+            "errno": 2,
+            "msg": 'try later'
+        })
+        } else {
+        console.log('保存文件成功')
+        res.json({
+            "errno": 0, // 注意：值是数字，不能是字符串
+            "msg": "update ok",
+            "url": 'http://127.0.0.1:3000/upload/' + req.file.filename, // 图片 src ，必须
+        })
+        }
+    })
+})</pre>
+            </dd>
+            <dd>上传存储配置如下</dd>
+            <dd>
+                <pre>
+const storage = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(null, 'public/upload');
+    },
+    filename: (req, file, callback) => {
+        let ext = path.extname(file.originalname)
+        callback(null, file.fieldname + Date.now() + ext);
+    }
+});</pre>
             </dd>
         </dl>
     </div>

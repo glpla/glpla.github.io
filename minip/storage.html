@@ -30,8 +30,8 @@ wx.setStorageSync('logs', logs)</pre>
 this.setData({
     logs: (wx.getStorageSync('logs') || []).map(log => {
         return {
-        date: util.formatTime(new Date(log)),
-        timeStamp: log
+            date: util.formatTime(new Date(log)),
+            timeStamp: log
         }
     })
 })</pre>
@@ -43,6 +43,11 @@ this.setData({
         <dd>保存的数据 data|value：只支持原生类型、Date、及能够通过JSON.stringify序列化的对象</dd>
         <dd>应：只进行数据的持久化存储，不应：用于运行时的数据传递或全局状态管理。启动过程中过多的同步读写存储，会显著影响启动耗时</dd>
         <dd>更多本地缓存，可以访问 <a href="../web/js/storage.html" class="link">HTML storage</a></dd>
+        <dt>查看</dt>
+        <dd>调试器 → Storage</dd>
+        <dd class="tips">
+            <div>早期版本的API，复合数据的保存和存储需要经过序列化 JSON.stringify和解析 JSON.parse；现在可以直接使用</div>
+        </dd>
     </dl>
     <div class="chap">API</div>
     <dl>
@@ -56,100 +61,107 @@ this.setData({
                     <th>异步</th>
                 </tr>
                 <tr>
-                    <td>wx.setStorageSync</td>
                     <td>wx.setStorage</td>
+                    <td>wx.setStorageSync</td>
                 </tr>
                 <tr>
-                    <td>wx.getStorageSync</td>
                     <td>wx.getStorage</td>
+                    <td>wx.getStorageSync</td>
                 </tr>
                 <tr>
-                    <td>wx.removeStorageSync</td>
                     <td>wx.removeStorage</td>
+                    <td>wx.removeStorageSync</td>
                 </tr>
                 <tr>
-                    <td>wx.clearStorageSync</td>
                     <td>wx.clearStorage</td>
+                    <td>wx.clearStorageSync</td>
                 </tr>
             </table>
         </dd>
         <dt>保存数据 set</dt>
         <dd class="sn">
-            <div>wx.setStorageSync(string key, any data)</div>
             <div>wx.setStorage(Object object)</div>
+            <div>wx.setStorageSync(string key, any data)</div>
+            <p>保存的时候，必须指定key和data</p>
             <p>保存成功，返回 errMsg: "setStorage:ok"</p>
             <pre>
 wx.setStorage({
     key:'slogan',
     data:'hi',
-    success:res=>{
-        console.log(res);
-    },
-    fail:err=>{
-        console.log(err);
-    },
-    complete:()=>{
-        console.log('set done log');
-    }
+    success:res=>console.log(res),
+    fail:err=>console.log(err),
+    complete:()=>console.log('set done log')
 })</pre>
         </dd>
         <dt>获取数据 get</dt>
         <dd class="sn">
-            <div>wx.getStorageSync(string key)</div>
             <div>wx.getStorage(Object object)</div>
+            <div>wx.getStorageSync(string key)</div>
+            <p>获取的时候，必须指定key</p>
+            <p>如果成功，在返回结果的data中解析数据</p>
             <p>如果数据不存在，返回 errMsg: "getStorage:fail data not found"</p>
             <pre>
 wx.getStorage({
     key:'slogan',
-    success:res=>{
-        console.log(res);
-    },
-    fail:err=>{
-        console.log(err);
-    },
-    complete:()=>{
-        console.log('get done log');
-    }
+    success:res=>console.log(res),
+    fail:err=>console.log(err),
+    complete:()=>console.log('get done log')
 })</pre>
         </dd>
         <dt>删除指定数据 - remove</dt>
         <dd class="sn">
-            <div>wx.removeStorageSync(string key)</div>
             <div>wx.removeStorage(Object object)</div>
+            <div>wx.removeStorageSync(string key)</div>
+            <p>删除的时候，必须指定key</p>
             <p>删除成功，返回errMsg: "removeStorage:ok"</p>
             <pre>
 wx.removeStorage({
     key: 'slogan',
-    success:res=>{
-        console.log(res);
-    },
-    fail:err=>{
-        console.log(err);
-    },
-    complete:()=>{
-        console.log('remove done log');
-    }
+    success:res=>console.log(res),
+    fail:err=>console.log(err),
+    complete:()=>console.log('remove done log')
 })</pre>
         </dd>
         <dt>清除所有数据 clear</dt>
         <dd class="sn">
-            <div>wx.clearStorageSync()</div>
             <div>wx.clearStorage(Object object)</div>
+            <div>wx.clearStorageSync()</div>
             <p>清除成功，返回 errMsg: "clearStorage:ok"</p>
             <pre>
 wx.clearStorage({
-    success:res=>{
-        console.log(res);
-    },
-    fail:err=>{
-        console.log(err);
-    },
-    complete:()=>{
-        console.log('clear done log');
-    }
+    success:res=>console.log(res),
+    fail:err=>console.log(err),
+    complete:()=>console.log('clear done log')
 })</pre>
         </dd>
-        <dd class="example-sn">在用户登录页面，记住用户登录信息；详情请查看 <a href="./case7.html">用户登录</a></dd>
+        <dd class="example-sn">json数据的使用</dd>
+        <dd>
+            <pre>
+obj:{
+    id:100,
+    name:'glpla'
+}</pre>
+        </dd>
+        <dd>
+            <pre>
+wx.setStorage({
+    key: 'obj',
+    data: this.data.obj,
+    success: res => console.log('set',res),
+    fail: err => console.log('set',err),
+    complete: () => console.log('set done')
+})</pre>
+        </dd>
+        <dd>
+            <pre>
+wx.getStorage({
+    key: 'obj',
+    success: res => console.log('get',res),
+    fail: err => console.log('get',err),
+    complete: () => console.log('get done')
+})</pre>
+        </dd>
+        <dd class="example-sn">在用户登录页面，记住用户登录信息；详情请查看 <a href="./case7.html">注册与登录</a></dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

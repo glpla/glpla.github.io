@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>文件系统 FileSystem</title>
-  <link rel="stylesheet" href="../../css/reset2024.css">
-  <link rel="stylesheet" href="../../css/common2024.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
+  <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
 </head>
 
@@ -21,17 +18,17 @@
   <dl>
     <dd>文件的读写操作</dd>
     <dd>需要引入文件系统fs；通常全部引入，也可以解构引入某个具体业务，如仅仅需要读文件操作</dd>
-    <dd>更多信息，请访问 <a href="https://nodejs.org/docs/latest/api/fs.html" class="link">FS</a></dd>
-    <dd class="code">
+    <dd>更多信息，请访问 <a href="https://nodejs.org/docs/latest/api/fs.html">FS</a></dd>
+    <dd>
       <pre>const fs = require('fs')</pre>
     </dd>
-    <dd class="code">
+    <dd>
       <pre>const { readFile } = require('fs')</pre>
     </dd>
     <dd>相关的API分为三类；我们主要采用回调风格的异步API；部分需要立刻拿到结果的场景，使用同步API</dd>
-    <dd>1. Promises API - Promises风格的API</dd>
+    <dt>Promises API - Promises风格的API</dt>
     <dd>The fs/promises API provides asynchronous file system methods that return promises.</dd>
-    <dd class="code">
+    <dd>
       <pre>
 const { unlink } = require('node:fs/promises');
 
@@ -44,10 +41,10 @@ const { unlink } = require('node:fs/promises');
   }
 })('/tmp/hello');      </pre>
     </dd>
-    <dd>2. Callback API - 回调API</dd>
+    <dt>Callback API - 回调API</dt>
     <dd>The callback APIs perform all operations asynchronously, without blocking the event loop, then invoke a callback
       function upon completion or error.</dd>
-    <dd class="code">
+    <dd>
       <pre>
 const { unlink } = require('node:fs');
 
@@ -56,10 +53,10 @@ unlink('/tmp/hello', (err) => {
   console.log('successfully deleted /tmp/hello');
 });        </pre>
     </dd>
-    <dd>3. Synchronous API - 同步API</dd>
+    <dt>Synchronous API - 同步API</dt>
     <dd>The synchronous APIs perform all operations synchronously, blocking the event loop until the operation completes
       or fails.</dd>
-    <dd class="code">
+    <dd>
       <pre>
 const { unlinkSync } = require('node:fs');
 
@@ -70,39 +67,41 @@ try {
   // handle the error
 }        </pre>
     </dd>
-    <dt>常用函数</dt>
-    <dd class="number">
-      <div>读：fs.readFile(path[, options], (err, data)=>{})</div>
-      <p>. callback是异常信息err和督导的数据data</p>
-      <p>. data默认是二进制流；可以使用toString()转换或JSON.parse()解析</p>
-      <div>写：fs.writeFile(file, data[, options], err=>{})</div>
-      <p>. 默认以覆盖的方式写文件</p>
-      <p>. data是要写入的数据</p>
-      <p>. options中，指定写标记flag和编码encoding等选项；默认写标记是w-覆盖，编码'utf8'</p>
-      <p>. callback是异常信息err</p>
-      <p>. 路径必须存在：系统不会显示/自动创建路径；但是如果写入文件不存在，会创建</p>
-      <p>. 可以写入回车\n、制表位\t等转义符号</p>
-      <div>文件/路径是否存在：fs.existsSync(path)</div>
-      <p>__dirname：获取js文件所在目录</p>
-      <div>创建文件夹：fs.mkdir(path[, options], err=>{})</div>
-      <div>删除文件夹：fs.rmdir(path[, options], err=>{})</div>
-      <div>删除文件：fs.unlink(path, err=>{})</div>
-    </dd>
-    <dt>路径使用</dt>
-    <dd>读写文件的路径，以引用当前文件的文件为准，不是以当前文件为准</dd>
-    <dd>test.js内容如下，读取一个json文件</dd>
-    <dd>index.js主文件引入并使用test.js</dd>
-    <dd>test.js中指定的文件位置以index.js为参考</dd>
-    <dd class="code">
+  </dl>
+  <div class="chap">常用函数 - 异步方式</div>
+  <dl>
+    <dt>fs.readFile(path[, options], (err, data)=>{})</dt>
+    <dd>读文件；如果正常，读出文件内容；否则抛出错误信息</dd>
+    <dd>callback是异常信息err和督导的数据data</dd>
+    <dd>data默认是二进制流；可以使用toString()转换或JSON.parse()解析为可读或特定格式；使用选项指定编码为utf-8可以直接解析为可读信息</dd>
+    <dd class="example-sn">用户登录时，读取用户数据文件的业务</dd>
+    <dd>
       <pre>
-fs.readFile('./public/data/form.json', (err, data) => {
-})</pre>
+let file = fs.readFile('./public/data/' + req.query.usn + '.json', 'utf8', (err, data) => {
+  if (err) {
+    res.json({
+      "errno": 2,
+      "msg": 'user not exist'
+    })
+  } else {
+    let jsonFile = JSON.parse(data)
+    console.log('jsonFile', jsonFile);
+    if (req.query.upass === jsonFile.upass) {
+      res.json({
+        "errno": 0,
+        "msg": 'login ok'
+      })
+    } else {
+      res.json({
+        "errno": 1,
+        "msg": 'password not match'
+      })
+    }
+  }
+})      </pre>
     </dd>
-    <dt>普通文件 txt</dt>
-    <dd>1. 读 - 如果正常，读出文件内容；否则抛出错误信息</dd>
-    <dd>使用toString()可以将二进制代码转化为可读信息</dd>
-    <dd>使用选项指定编码为utf-8可以直接解析为可读信息</dd>
-    <dd class="code">
+    <dd class="example-sn">普通文件 txt</dd>
+    <dd>
       <pre>
 const fs = require('fs')
 fs.readFile('./data/demo.txt', (err, date) => {
@@ -112,7 +111,7 @@ fs.readFile('./data/demo.txt', (err, date) => {
 })</pre>
     </dd>
     <dd>路径异常时抛出错误信息</dd>
-    <dd class="code">
+    <dd>
       <pre>
 read file [Error: ENOENT: no such file or directory, open 'C:\Users\cnplaman\Desktop\server\data1\demo.txt'] {
   errno: -4058,
@@ -121,8 +120,15 @@ read file [Error: ENOENT: no such file or directory, open 'C:\Users\cnplaman\Des
   path: 'C:\\Users\\cnplaman\\Desktop\\server\\data1\\demo.txt'
 }</pre>
     </dd>
-    <dd>2. 写 - 以追加 a 的方式，在文件最后写文件；写入的数据中包含一个换行符\n；如果文件不存在，就创建</dd>
-    <dd class="code">
+    <dt>fs.writeFile(file, data[, options], err=>{})</dt>
+    <dd>默认以覆盖的方式写文件</dd>
+    <dd>data是要写入的数据</dd>
+    <dd>options中，指定写标记flag和编码encoding等选项；默认写标记是w-覆盖，编码'utf8'</dd>
+    <dd>callback是异常信息err</dd>
+    <dd>路径必须存在：系统不会显示/自动创建路径；但是如果写入文件不存在，会创建</dd>
+    <dd>可以写入回车\n、制表位\t等转义符号</dd>
+    <dd class="example-sn">以追加 a 的方式，在文件最后写文件：先换行\n再输入数据888；如果文件不存在，就创建</dd>
+    <dd>
       <pre>
 const fs = require('fs')
 fs.writeFile('./data/demo.txt', '\n888', { flag: 'a' }, (err) => {
@@ -130,10 +136,34 @@ if (err) throw err//res write('404')
   console.log('write ok');
 })</pre>
     </dd>
-    <dt>JSON文件</dt>
-    <dd>读的操作比较多，且需要解析为json格式</dd>
+    <dt>fs.stat(path[, options], callback)</dt>
+    <dd>文件/路径是否存在</dd>
+    <dd>早期使用fs.existsSync(path)；该接口目前已经废弃</dd>
+    <dt>fs.access(path[, mode], callback)</dt>
+    <dd>用户对文件或目录的访问，可以用来判断目标是否存在</dd>
+    <dd>__dirname：获取js文件所在目录</dd>
+    <dt>fs.mkdir(path[, options], callback)</dt>
+    <dd>创建文件夹：fs.mkdir(path[, options], err=>{})</dd>
+    <dt>fs.rmdir(path[, options], callback)</dt>
+    <dd>删除文件夹：fs.rmdir(path[, options], err=>{})</dd>
+    <dt>fs.unlink(path, callback)</dt>
+    <dd>删除文件：fs.unlink(path, err=>{})</dd>
+    <dt>路径使用</dt>
+    <dd>读写文件的路径，以引用当前文件的文件为准，不是以当前文件为准</dd>
+    <dd>test.js内容如下，读取一个json文件</dd>
+    <dd>index.js主文件引入并使用test.js</dd>
+    <dd>test.js中指定的文件位置以index.js为参考</dd>
+    <dd>
+      <pre>
+fs.readFile('./public/data/form.json', (err, data) => {
+})</pre>
+    </dd>
+  </dl>
+  <div class="chap">其它操作</div>
+  <dl>
+    <dt>同步读取</dt>
     <dd>以同步方式读取json文件，可以马上拿到结果，再根据后续的业务进行操作，如分页返回</dd>
-    <dd class="code">
+    <dd>
       <pre>
 const fs = require('fs');
 let data = fs.readFileSync('./data/rank2024.json')
@@ -142,24 +172,24 @@ let json = JSON.parse(data)
 console.log(json);</pre>
     </dd>
     <dd>如果有数据请求，可以定制路由返回解析的数据</dd>
-    <dd class="code">
+    <dd>
       <pre>
 server.get('/data', (req, res) => {
   res.send(data)
 })</pre>
     </dd>
-    <dt>文件夹</dt>
-    <dd>创建文件夹 - 如果存在，抛出异常，否则创建</dd>
-    <dd class="code">
+    <dt>创建文件夹</dt>
+    <dd>如果存在，抛出异常，否则创建</dd>
+    <dd>
       <pre>
 const fs = require('fs')
 if (fs.existsSync('./wwww')) throw err
 fs.mkdirSync('./www')      </pre>
     </dd>
-    <dt>文件删除</dt>
+    <dt>删除文件</dt>
     <dd>删除前，先判断文件是否存在</dd>
     <dd>删除成功，callback返回null；可以根据这个进行业务再判断</dd>
-    <dd class="code">
+    <dd>
       <pre>
 const fs = require('fs')
 if (fs.existsSync('./wwww/demo.txt')) throw err
