@@ -118,10 +118,53 @@
                 <div>效果 - 截图，统一宽度，高度随内容、有编号、有说明标题，如：图1 页面布局</div>
             </dd>
         </dl>
-        <div class="chap">服务参考代码</div>
+        <div class="chap">参考代码</div>
         <dl>
             <dt>用户登录</dt>
             <dd>学号usn和密码upass匹配，登录成功</dd>
+            <dd>成功后，更新全局数据和本地存储数据</dd>
+            <dd>B端</dd>
+            <dd>
+                <pre>
+wx.request({
+    url: 'http://127.0.0.1:3000/user/login',
+    data: e.detail.value,
+    success: res => {
+        console.log(res);
+        switch (res.data.errno) {
+        case 0:
+            wx.showToast({
+                title: res.data.msg,
+            })
+            // update app global data
+            app.globalData.user = res.data.data
+            // update local storage
+            wx.setStorageSync('user', res.data.data)
+            // to home
+            wx.navigateTo({
+                url: '../home/home',
+            })
+        default:
+            wx.showToast({
+                title: res.data.msg,
+            })
+        }
+    },
+    fail: err => {
+        console.log(err)
+        wx.hideLoading()
+        wx.showToast({
+            title: 'server down'
+        })
+    },
+    complete: () => {
+        console.log('get user done logging')
+        wx.hideLoading()
+    }
+})</pre>
+            </dd>
+            <dd>S端</dd>
+            <dd>成功后，把用户数据返回B端，以便同步</dd>
             <dd>
                 <pre>
 router.get('/login', (req, res) => {
@@ -138,13 +181,14 @@ router.get('/login', (req, res) => {
         console.log('jsonFile', jsonFile);
         if (req.query.upass === jsonFile.upass) {
             res.json({
-            "errno": 0,
-            "msg": 'login ok'
+                "errno": 0,
+                "msg": 'login ok'
+                "data": jsonFile
             })
         } else {
             res.json({
-            "errno": 1,
-            "msg": 'pass not match'
+                "errno": 1,
+                "msg": 'pass not match'
             })
         }
         }
@@ -152,7 +196,48 @@ router.get('/login', (req, res) => {
 })                </pre>
             </dd>
             <dt>用户注册</dt>
-            <dd>数据不能为空且同意条款和约定</dd>
+            <dd>B端</dd>
+            <dd>数据不能为空且同意条款和约定；验证略</dd>
+            <dd>
+                <pre>
+wx.request({
+    url: 'http://127.0.0.1:3000/user/register',
+    method: 'POST',
+    data: e.detail.value,
+    success: res => {
+        console.log(res);
+        switch (res.data.errno) {
+        case 0:
+            //update global data
+            app.globalData.user = {
+                usn: this.data.usn,
+                uname: this.data.uname,
+                upass: this.data.upass
+            }
+            //update local storage
+            wx.setStorageSync('user', JSON.stringify({
+                usn: this.data.usn,
+                uname: this.data.uname,
+                upass: this.data.upass,
+                imgUrl: 'https://cdn.pixabay.com/photo/2015/03/03/20/42/man-657869_640.jpg'
+            }))
+            wx.showToast({
+                title: res.data.msg,
+            })
+            wx.navigateTo({
+                url: '../login/login',
+            })
+        default:
+            wx.showToast({
+                title: res.data.msg,
+            })
+        }
+    },
+    fail: err => console.log(err),
+    complete: () => console.log('get user done logging')
+})</pre>
+            </dd>
+            <dd>S端</dd>
             <dd>
                 <pre>
 router.post('/register', (req, res) => {
@@ -181,7 +266,9 @@ router.post('/register', (req, res) => {
 })</pre>
             </dd>
             <dt>用户更新</dt>
+            <dd>指定更新的字段和值</dd>
             <dd>可以多个数据公用一个页面</dd>
+            <dd>S端</dd>
             <dd>
                 <pre>
 router.post('/modify', (req, res) => {
@@ -207,6 +294,7 @@ router.post('/modify', (req, res) => {
             </dd>
             <dt>头像上传</dt>
             <dd>上传的同时，更新用户数据文件</dd>
+            <dd>S端</dd>
             <dd>
                 <pre>
 router.post('/avatar', upload.single('avatar'), (req, res) => {

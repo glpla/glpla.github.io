@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>位置 Location</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
@@ -142,7 +139,9 @@
         <dd>只针对部分限定类目的小程序开放</dd>
         <dd>需要开通权限：[开发] → [开发管理] → [接口设置]中自助开通</dd>
         <dd>需要在 app.json 中进行声明</dd>
-        <dd>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/map.html" class="link">官方文档</a>
+        <dd>自 2022 年 7 月 14 日后发布的小程序，若使用该接口，需要在 app.json 中进行声明，否则将无法正常使用该接口，2022年7月14日前发布的小程序不受影响；详情请查看 <a
+                href="https://developers.weixin.qq.com/community/develop/doc/000a02f2c5026891650e7f40351c01">具体规则公告</a>
+            、<a href="https://developers.weixin.qq.com/miniprogram/dev/component/map.html">官方文档</a>
         </dd>
         <dt>wx.createMapContext(string mapId, Object this)</dt>
         <dd>根据地图组件map的mapId创建其上下文 MapContext 对象</dd>
@@ -152,9 +151,15 @@
         <dd>2. getCenterLocation(Object object)</dd>
         <dd>获取当前地图中心的经纬度；返回 gcj02 坐标系</dd>
         <dd class="example-sn">map基本使用</dd>
-        <dd class="number">
+        <dd class="sn">
             <div>配置app.json</div>
-            <pre class="code">
+            <pre>
+"permission": {
+    "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示" // 高速公路行驶持续后台定位
+    }
+}</pre>
+            <pre>
 "requiredPrivateInfos":[
     "getLocation",
     "chooseLocation",
@@ -162,17 +167,17 @@
     "chooseAddress"
 ]</pre>
             <div>页面.wxml - 使用位置信息渲染地图组件&lt;map&gt;</div>
-            <pre class="code">
+            <pre>
 &lt;map longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" show-location show-scale show-compass bindregionchange="changeRegion"/&gt;</pre>
             <div>页面.wxss - 设置样式宽高同屏幕</div>
-            <pre class="code">
+            <pre>
 map{
     width: 100vw;
     height: 100vh;
 }</pre>
             <div>页面.js - 获取位置信息，配置中心的标记</div>
             <p>利用获取到的经纬度，设置标记的经纬度</p>
-            <pre class="code">
+            <pre>
 data: {
     longitude: 0,
     latitude: 0,
@@ -215,61 +220,89 @@ changeRegion(e){
     </dl>
     <div class="chap">腾讯地图LBS API</div>
     <dl>
-        <dt>应用级使用</dt>
+        <dt>环境准备</dt>
         <dd>借助腾讯地图API的使用和实现</dd>
         <dd>很多功能需要企业号才能实现；个人号有次数限制；如地点搜索每天只有200次。。。</dd>
-        <dd class="number">
-            <div>登录 <a href="https://lbs.qq.com/" class="link">腾讯位置服务 LBS</a></div>
-            <div>选择开发文档，详细阅读 <a href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/jsSdkOverview"
-                    class="link">使用说明</a>
+        <dd class="sn">
+            <div>登录 <a href="https://lbs.qq.com/">腾讯位置服务 LBS</a></div>
+            <div>选择开发文档，详细阅读 <a href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/jsSdkOverview">使用说明</a>
             </div>
             <img src="./imgs/lbs0.png" alt="">
             <div>申请开发者秘钥 </div>
             <p>创建应用并添加key - 选择webserviceAPI和微信小程序，并填写小程序的appID</p>
+            <!-- <p>key: 'U6QBZ-ROQ3W-PFMRZ-O4VA5-LZOKQ-G7FZA'</p> -->
             <img src="./imgs/lbs1.png" alt="">
             <img src="./imgs/lbs2.png" alt="">
             <img src="./imgs/lbs3.png" alt="">
             <div>下载腾讯地图SDK </div>
-            <p>选择 微信小程序 → <a href="./lib/qqmap-wx-jssdk1.1.zip" download title="点击下载" class="link">JavaScriptSDK
+            <p>选择 微信小程序 → <a href="./lib/qqmap-wx-jssdk1.1.zip" download title="点击下载">JavaScriptSDK
                     v1.1版本</a>
             </p>
             <p>解压后复制到小程序项目中；通常放在Utils目录</p>
             <div>安全域名设置</div>
             <p>小程序管理后台 → 开发 → 开发管理 → 开发设置 → “服务器域名” 中设置request合法域名，添加https://apis.map.qq.com</p>
-            <div>使用腾讯地图SDK </div>
-            <pre class="code">
+            <div>在小程序中引入库并实例化</div>
+            <pre>
 // 引入SDK核心类，js文件根据自己业务，位置可自行放置
-var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
-var qqmapsdk;
-Page({
-    onLoad: function () {
-        qqmapsdk = new QQMapWX({
-            key: '申请的key'
+const QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
+const qqmapsdk = new QQMapWX({
+    key: '申请的key'
+});</pre>
+        </dd>
+        <dd class="example-sn">根据获得的经纬度，逆解析为城市</dd>
+        <dd>
+            <pre>
+wx.getLocation({
+    type: 'gcj02',
+    success: res => {
+        const latitude = res.latitude;
+        const longitude = res.longitude;
+        qqmapsdk.reverseGeocoder({
+            location: {
+                latitude: latitude,
+                longitude: longitude
+            },
+            success: (res) => {
+                console.log(res);
+                const nation = res.result.address_component.nation;
+                const city = res.result.address_component.city;
+                this.setData({
+                    ulocation:nation+' '+city,
+                    isDone:true
+                })
+            },
+            fail: (error) => console.error(error),
+            complete: () => console.log('get done')
         });
     },
-    onShow: function () {
-        // 调用接口
-        qqmapsdk.search({
-            keyword: '酒店',
-            success: function (res) {
-                console.log(res);
-            },
-            fail: function (res) {
-                console.log(res);
-            },
-            complete: function (res) {
-                console.log(res);
-            }
-        });
+    fail: err => console.log(err),
+    complete: () => console.log('get city done')
+})</pre>
+        </dd>
+        <dd class="example-sn">使用腾讯地图SDK查找酒店</dd>
+        <dd>
+            <pre>
+qqmapsdk.search({
+    keyword: '酒店',
+    success: function (res) {
+        console.log(res);
+    },
+    fail: function (res) {
+        console.log(res);
+    },
+    complete: function (res) {
+        console.log(res);
     }
-})            </pre>
-            <div>完善地图酒店搜索功能；更多信息，请访问<a href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodSearch"
-                    class="link">官方文档</a></div>
+});</pre>
+        </dd>
+        <dd class="example-sn">完善地图酒店搜索功能；更多信息，请访问<a
+                href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodSearch">官方文档</a></dd>
+        <dd class="sn">
             <div>添加标记事件bindmarkertap</div>
-            <pre class="code">
+            <pre>
 &lt;map longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" show-location show-scale show-compass bindregionchange="changeRegion" bindmarkertap="doMarker"/&gt;</pre>
             <div>封装酒店搜索函数getHotel(long, lati)：借助系统函数区域改变regionChange()获取的结束点end位置来更新当前区域的酒店信息</div>
-            <pre class="code">
+            <pre>
 getHotel(long, lati) {
     qqmapsdk.search({
         keyword: '学校',
@@ -319,14 +352,14 @@ getHotel(long, lati) {
     })
 }</pre>
             <div>移动地图时，更新函数</div>
-            <pre class="code">
+            <pre>
 regionChange(e) {
     if (e.type == 'end') {
         this.getHotel(e.detail.centerLocation.longitude, e.detail.centerLocation.latitude)
     }
 }</pre>
             <div>通过标记id获取标记点信息</div>
-            <pre class="code">
+            <pre>
 doMarker(e){
     console.log(e);
 }</pre>
@@ -336,7 +369,7 @@ doMarker(e){
     </dl>
     <div class="chap">百度地图</div>
     <dl>
-        <dd>参照 <a href="https://api.map.baidu.com/mapCard/" class="link">百度地图开放平台</a>，完成个人家乡城市名片的设计</dd>
+        <dd>参照 <a href="https://api.map.baidu.com/mapCard/">百度地图开放平台</a>，完成个人家乡城市名片的设计</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

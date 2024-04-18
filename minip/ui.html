@@ -16,7 +16,7 @@
         <span>UI</span>
     </header>
     <dl>
-        <dd>更多API，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/">官方文档</a></dd>
+        <dd>更多API，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/">官方文档 - API</a></dd>
         <dd>
         <dt>wx.showToast(Object object)</dt>
         <dd>显示消息提示框</dd>
@@ -37,8 +37,40 @@
         <dd>- editable</dd>
         <dt>wx.showActionSheet(Object object)</dt>
         <dd>显示操作菜单；在事件对象res获取选中的列表tapIndex</dd>
-        <dd>- alertText</dd>
-        <dd>- itemList</dd>
+        <dd>更多信息，请访问 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showActionSheet.html">官方文档
+                - showActionSheet</a></dd>
+        <dd>alertText - 提示文案</dd>
+        <dd>itemList - 长度最大为6 </dd>
+        <dd class="example-sn">选择性别</dd>
+        <dd>注意this的作用域</dd>
+        <dd>
+            <pre>
+data: {
+    user: {
+        ugender:'',
+    },
+    gender:['Male','Female']
+}</pre>
+        </dd>
+        <dd>
+            <pre>
+setUgender(){
+    let _this=this
+    wx.showActionSheet({
+        alertText:'your gender',
+        itemList: _this.data.gender,
+        success:res=>{
+        console.log(res);
+        _this.setData({
+            'user.ugender':_this.data.gender[res.tapIndex]
+        })
+        },
+        fail:err=>console.log(err),
+        complete:()=>console.log('set gender done')
+    })
+}</pre>
+        </dd>
         <dd class="example-sn">完善个人中心页面的上传和下载案例，增加提示</dd>
         <dd>头像更新成功、失败、完成</dd>
         <dd>头像上传成功、失败、完成</dd>
