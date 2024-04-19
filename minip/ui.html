@@ -16,14 +16,14 @@
         <span>UI</span>
     </header>
     <dl>
-        <dd>更多API，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/">官方文档 - API</a></dd>
+        <dd>更多API，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/">官方文档 - API - 界面</a></dd>
         <dd>
         <dt>wx.showToast(Object object)</dt>
         <dd>显示消息提示框</dd>
-        <dd>- title</dd>
-        <dd>- icon</dd>
-        <dd>- image</dd>
-        <dd>- mask</dd>
+        <dd>title - 提示信息</dd>
+        <dd>icon - 提示图标；系统内置，数量教少</dd>
+        <dd>image - 自定义图片；使用后配置项icon无效</dd>
+        <dd>mask - 默认为false；建议开启，增加透明遮罩层，避免事件穿透</dd>
         <dt>wx.hideToast(Object object)</dt>
         <dd>隐藏消息提示框</dd>
         <dt>wx.showLoading(Object object)</dt>
@@ -32,9 +32,51 @@
         <dd>隐藏 loading 提示框</dd>
         <dt>wx.showModal(Object object)</dt>
         <dd>显示模态对话框；通过判断res.confirm还是res.cancel确定下一步操作</dd>
-        <dd>- title</dd>
-        <dd>- content</dd>
-        <dd>- editable</dd>
+        <dd>title - 提示标题</dd>
+        <dd>content - 提示内容</dd>
+        <dd>editable - 可编辑；确认后在返回结果res的content中获取</dd>
+        <dd>placeholderText - 占位符，显示输入框时的提示文本，此时content相当于值</dd>
+        <dd>更多信息，请访问 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/interaction/wx.showModal.html">官方文档 -
+                showModal</a></dd>
+        <dd>默认结构 - 对操作结果2选1</dd>
+        <dd>
+            <pre>
+wx.showModal({
+    title: '',
+    content: '',
+    complete: (res) => {
+        if (res.cancel) {
+        
+        }
+        if (res.confirm) {
+        
+        }
+    }
+})</pre>
+        </dd>
+        <dd class="example-sn">使用编辑editable和占位placeholderText提供交互 - 修改个人信息</dd>
+        <dd>优点：不用页面跳转；不用专门创建页面</dd>
+        <dd>
+            <pre>
+wx.showModal({
+    title: 'rename',
+    content: this.data.user.uname,
+    editable: true,
+    placeholderText: '8 chars',
+    complete: (res) => {
+        if (res.cancel) {
+        console.log('cancel', res);
+        }
+        if (res.confirm) {
+        console.log('confirm', res);
+        this.setData({
+            'user.uname': res.content
+        })
+        }
+    }
+})</pre>
+        </dd>
         <dt>wx.showActionSheet(Object object)</dt>
         <dd>显示操作菜单；在事件对象res获取选中的列表tapIndex</dd>
         <dd>更多信息，请访问 <a
@@ -78,7 +120,7 @@ setUgender(){
         <dd>头像未更新，不能上传</dd>
         <dd>头像未上传，不能下载</dd>
     </dl>
-    <div class="chap">导航</div>
+    <div class="chap">导航栏</div>
     <dl>
         <dt>wx.setNavigationBarTitle(Object object)</dt>
         <dd>动态设置当前页面的标题</dd>

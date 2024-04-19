@@ -86,8 +86,8 @@ this.setData({
             <p>保存成功，返回 errMsg: "setStorage:ok"</p>
             <pre>
 wx.setStorage({
-    key:'slogan',
-    data:'hi',
+    key:'msg',
+    data:'hi, there.',
     success:res=>console.log(res),
     fail:err=>console.log(err),
     complete:()=>console.log('set done log')
@@ -102,11 +102,45 @@ wx.setStorage({
             <p>如果数据不存在，返回 errMsg: "getStorage:fail data not found"</p>
             <pre>
 wx.getStorage({
-    key:'slogan',
+    key:'msg',
     success:res=>console.log(res),
     fail:err=>console.log(err),
     complete:()=>console.log('get done log')
 })</pre>
+        </dd>
+        <dd class="tips">建议获取数据 get，使用同步调用，减少异步操作带来的性能损耗</dd>
+        <dd>如果数据不存在，返回字符串 hi</dd>
+        <dd>
+            <pre>
+getMsgSync() {
+    let msg = wx.getStorageSync('msg') || 'hi'
+    console.log(msg);
+    this.setData({
+        msg: msg
+    })
+}</pre>
+        </dd>
+        <dd>如果数据不存在，返回对象 {id:100,name:'glpla'}</dd>
+        <dd>
+            <pre>
+getMsgSync() {
+    let msg = wx.getStorageSync('msg') || {id:100,name:'glpla'}
+    console.log(msg);
+    this.setData({
+        msg: msg
+    })
+}</pre>
+        </dd>
+        <dd>如果数据不存在，返回数组 [0, 1, 2, 3, 4]</dd>
+        <dd>
+            <pre>
+getMsgSync() {
+    let msg = wx.getStorageSync('msg') || [0, 1, 2, 3, 4]
+    console.log(msg);
+    this.setData({
+        msg: msg
+    })
+}</pre>
         </dd>
         <dt>删除指定数据 - remove</dt>
         <dd class="sn">
@@ -116,7 +150,7 @@ wx.getStorage({
             <p>删除成功，返回errMsg: "removeStorage:ok"</p>
             <pre>
 wx.removeStorage({
-    key: 'slogan',
+    key: 'msg',
     success:res=>console.log(res),
     fail:err=>console.log(err),
     complete:()=>console.log('remove done log')
@@ -134,32 +168,19 @@ wx.clearStorage({
     complete:()=>console.log('clear done log')
 })</pre>
         </dd>
-        <dd class="example-sn">json数据的使用</dd>
-        <dd>
-            <pre>
-obj:{
-    id:100,
-    name:'glpla'
-}</pre>
-        </dd>
+        <dd class="example-sn">json数据的使用 - 直接存储和获取，无需序列化和解析</dd>
         <dd>
             <pre>
 wx.setStorage({
     key: 'obj',
-    data: this.data.obj,
+    data: {id:100,name:'glpla'},
     success: res => console.log('set',res),
     fail: err => console.log('set',err),
     complete: () => console.log('set done')
 })</pre>
         </dd>
         <dd>
-            <pre>
-wx.getStorage({
-    key: 'obj',
-    success: res => console.log('get',res),
-    fail: err => console.log('get',err),
-    complete: () => console.log('get done')
-})</pre>
+            <pre>let obj = wx.getStorageSync('obj') || {id:100,name:'glpla'}</pre>
         </dd>
         <dd class="example-sn">在用户登录页面，记住用户登录信息；详情请查看 <a href="./case7.html">注册与登录</a></dd>
     </dl>
