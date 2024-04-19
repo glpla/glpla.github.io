@@ -20,15 +20,15 @@
         <dd>顶级组件 → 底层组件；中间可以经过多层组件</dd>
         <dd>仅允许上向下传递|流转，不允许底层组件向顶级组件传递|反向流转</dd>
         <dd>采用发布-订阅|提供-插入的模式</dd>
-        <dd>顶层组件引入 provide包、底层组件引入 inject包</dd>
+        <dd>顶层组件引入 provide 包、底层组件引入 inject 包</dd>
         <dd>可以传递数据；还可以传递方法</dd>
         <dd>不可以在某个事件处理函数中使用：provide() can only be used inside setup()</dd>
         <dt>传递数据</dt>
-        <dd>可以使用多个provide和inject</dd>
+        <dd>可以使用多个 provide 和 inject </dd>
         <dd>可以传递普通静态数据，也可以传递响应式数据</dd>
         <dd>可以传递简单数据，也可以传递对象</dd>
-        <dd>使用延时查看响应数据的变化</dd>
-        <dd>顶级组件使用provide提供数据</dd>
+        <dd>开发调试时，可以使用延时查看响应数据的变化</dd>
+        <dd>1. 顶级组件使用 provide 提供数据</dd>
         <dd>
             <pre>
 import {provide} from 'vue'
@@ -36,7 +36,7 @@ import {provide} from 'vue'
 provide('key0', data)
 provide('key1', dataRef.value)</pre>
         </dd>
-        <dd>底层组件使用inject接收数据</dd>
+        <dd>2. 底层组件使用 inject 接收数据</dd>
         <dd>
             <pre>
 import {inject} from 'vue'
@@ -45,43 +45,46 @@ let para = inject('key0')
 let para = inject('key1')</pre>
         </dd>
         <dt>传递方法</dt>
-        <dd>底层组件可以使用顶层组件的方法修改顶层组件的数据；虽然有悖于数据流的单向原则，但是仍然遵循了谁的数据谁修改的原则</dd>
-        <dd>顶级组件使用provide提供已经定义好的方法doGreeting</dd>
+        <dd>底层组件可以使用顶层组件的方法修改顶层组件的数据；虽然有悖于数据流的单向原则，但是仍然遵循 <span class="warn">谁的数据谁修改</span> 的原则</dd>
+        <dd>1. 顶级组件使用 provide 提供已经定义好的方法doGreeting</dd>
         <dd>用你提供的方法修改你的数据</dd>
         <dd>
             <pre>
-function doGreeting() {
+const doGreeting = () => {
     refDate.value++
-  }
+}
 provide('doGreetingFn', doGreeting)</pre>
         </dd>
-        <dd>底层组件使用inject接收传递的方法，并在事件处理函数fn中实现；fn是普通点击事件</dd>
+        <dd>2. 底层组件使用 inject 接收传递的方法，并在事件处理函数fn中实现；fn是普通点击事件</dd>
         <dd>doGreet接收传递来的方法，要执行，必须使用()</dd>
         <dd>
             <pre>
 let doGreet = inject('doGreetingFn')
 //直接执行
 doGreet()
-//在方法中执行
+//在其它方法中执行
 function fn() {
   doGreet()
 }</pre>
         </dd>
         <dd>或直接在结构中使用传递的方法</dd>
         <dd>
-            <pre>&lt;div @click="doGreet"&gt;直接使用 fn&lt;/div&gt;</pre>
+            <pre>&lt;div @click="doGreet"&gt;直接使用&lt;/div&gt;</pre>
         </dd>
         <dd class="example-sn">全局使用axios</dd>
-        <dd>入口文件引入定义main.js</dd>
+        <dd>入口文件main.js引入并提供；注意这里直接使用 provide 库，不需要引入</dd>
         <dd>
             <pre>
 import axios from 'axios'
 
-app.provide('axios',axios)</pre>
+app.provide('axios', axios)</pre>
         </dd>
-        <dd>组件中使用</dd>
+        <dd>组件中使用；需要引入 inject 库</dd>
         <dd>
-            <pre>let axios = inject('axios')</pre>
+            <pre>
+import { inject } from 'vue';
+
+const axios = inject('axios')</pre>
         </dd>
         <dt>兄弟组件之间的通信 - todo</dt>
         <dd>互相定义函数实现 - todo</dd>

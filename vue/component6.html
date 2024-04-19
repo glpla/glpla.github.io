@@ -16,16 +16,69 @@
         <span>&commat; Style</span>
     </header>
     <dl>
+        <dt>属性透传</dt>
+        <dd>父组件中，为只有一个根节点的子组件指定样式类class时，这个class会直接 <span class="warn">叠加</span> 到子组件的根节点上</dd>
+        <dd>这个样式类，既不是子组件定义的属性props，也不是子组件抛出的emit事件，但是仍然传递给了子组件，所以称为属性透传</dd>
+        <dd>同样特点的属性还有 style、id以及事件v-on等</dd>
+        <dd>更多信息，请访问 <a href="https://cn.vuejs.org/guide/components/attrs.html">透传 Attributes</a></dd>
+        <dd class="example-sn">样式属性透传</dd>
+        <dd>子组件 - 具有唯一根节点，且指定样式类reco</dd>
+        <dd>
+            <pre>
+&lt;template&gt;
+    &lt;div class="reco"&gt;recommend&lt;/div&gt;
+&lt;/template&gt;</pre>
+        </dd>
+        <dd>父组件 - 引入并使用子组件，同时指定样式类 green</dd>
+        <dd>
+            <pre>
+&lt;template&gt;
+    &lt;Reco class="green"&gt;&lt;/Reco&gt;
+&lt;/template&gt;</pre>
+        </dd>
+        <dd>最终渲染 - 同时带有样式类reco和green；且green在reco后面</dd>
+        <dd>
+            <pre>&lt;div class="reco green"&gt;recommend&lt;/div&gt;</pre>
+        </dd>
+        <dd class="example-sn">事件属性透传 - 仍然遵循默认的冒泡机制：先触发子组件的事件处理函数，再触发父组件的事件处理函数</dd>
+        <dd>子组件</dd>
+        <dd>
+            <pre>
+&lt;script setup&gt;
+    const say88 = () =&gt; {
+        console.log('88')
+    }
+&lt;/script&gt;
+
+&lt;template&gt;
+    &lt;div @click="say88" class="reco"&gt;recommend&lt;/div&gt;
+&lt;/template&gt;</pre>
+        </dd>
+        <dd>父组件</dd>
+        <dd>
+            <pre>
+&lt;script setup&gt;
+    import Reco from './components/Reco.vue';
+    const sayHi = () =&gt; {
+        console.log('hi');
+    };
+&lt;/script&gt;
+
+&lt;template&gt;
+    &lt;Reco @click="sayHi"&gt;&lt;/Reco&gt;
+&lt;/template&gt;</pre>
+        </dd>
         <dd class="tips">
-            <div>为组件的根节点指定一个特有的类，如.nav。推荐以组件名字命名这个类；因为组件的功能各不相同，很容易保证组件类的唯一性</div>
-            <div>便于父组件布局</div>
+            <div>最佳体验</div>
+            <div>为组件的根节点指定与组件同名的样式类，很容易保证组件类的唯一性，且便于父组件布局</div>
         </dd>
         <dt>组件样式</dt>
         <dd>&lt;style&gt;指定 scoped 时：</dd>
         <dd>它的 CSS 只会影响当前组件的元素</dd>
         <dd>父组件的样式将不会 <span class="warn">渗透</span>
             到子组件中。不过，子组件的根节点会同时被父组件的作用域样式和子组件的作用域样式影响。便于：让父组件可以从布局的角度出发，调整其子组件根元素的样式</dd>
-        <dd>更多作用域详细信息，请参考<a href="./class.html">类 class</a>、<a href="https://cn.vuejs.org/api/sfc-css-features.html">API
+        <dd>更多作用域详细信息，请参考<a href="./class.html">类 class</a>、、<a
+                href="https://cn.vuejs.org/api/sfc-css-features.html">API
                 - 单文件组件 CSS 功能</a></dd>
         <dt>特殊选择器</dt>
         <dd class="sn">
@@ -47,9 +100,12 @@
     color: red;
 }</pre>
         </dd>
-        <dd class="tips">还有一个样式穿透 >>>；注意当前框架是否支持</dd>
+        <dd class="tips">
+            <div>以上选择器请仅在必要时使用，否则应寻求其它方法</div>
+            <div>还有一个样式穿透 >>>；注意当前框架是否支持</div>
+        </dd>
         <dd class="example-sn"><a href="./pro_home.html">主页</a></dd>
-        <dd>每一个子组件都使用根节点，且使用同组件名的类，便于父组件布局</dd>
+        <dd>提示：每一个子组件都使用根节点，且使用同组件名的类，便于父组件布局</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

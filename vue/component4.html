@@ -16,16 +16,17 @@
         <span>&commat; slot</span>
     </header>
     <dl>
-        <dd>使用插槽slot可以像使用HTML 元素一样向组件中传递内容；如封装过渡组件</dd>
-        <dd>可以指定插槽默认内容-默认插槽</dd>
-        <dd>可以声明多个插槽。为了区分，多个插槽应该指定name属性-具名插槽</dd>
+        <dd>插槽 slot 用以拓展组件的功能：在基本功能的基础上，通过插槽插入内容，从而实现对组件的扩展</dd>
+        <dd>使用插槽 slot 可以像使用 HTML 元素一样向组件中传递内容</dd>
+        <dd>可以指定插槽默认内容 - <span class="warn">默认插槽</span></dd>
+        <dd>可以声明多个插槽。为了区分，多个插槽应该指定 name 属性 - <span class="warn">具名插槽</span></dd>
         <dt>基本过程</dt>
-        <dd>1. 子组件声明slot，将其作为一个占位符，父组件传递进来的内容就会渲染在这里</dd>
+        <dd>1. 子组件创建过程中，预留一个位置，声明slot，将其作为一个占位符，父组件传递进来的内容就会渲染在这里</dd>
         <dd>仅预留位置</dd>
         <dd>
             <pre>
 &lt;template&gt;
-    &lt;div class="alert-box"&gt;
+    &lt;div&gt;
         //内容
         &lt;slot /&gt;
     &lt;/div&gt;
@@ -36,7 +37,7 @@
         <dd>
             <pre>
 &lt;template&gt;
-    &lt;div class="alert-box"&gt;
+    &lt;div&gt;
         //内容
         &lt;slot&gt;插槽默认内容&lt;/slot&gt;
     &lt;/div&gt;
@@ -46,7 +47,7 @@
         <dd>
             <pre>
 &lt;template&gt;
-    &lt;div class="alert-box"&gt;
+    &lt;div&gt;
         //内容
         &lt;slot name='header'&gt;&lt;/slot&gt;
         &lt;slot name='footer'&gt;&lt;/slot&gt;
@@ -58,20 +59,18 @@
         <dd>
             <pre>
 &lt;template&gt;
-    &lt;AlertBox&gt;
-        Something bad happened.
-    &lt;/AlertBox&gt;
+    &lt;AlertBox&gt; Something bad happened. &lt;/AlertBox&gt;
 &lt;/template&gt;</pre>
         </dd>
         <dd>使用默认插槽</dd>
         <dd>
             <pre>
 &lt;template&gt;
-    &lt;AlertBox&gt;
-    &lt;/AlertBox&gt;
+    &lt;AlertBox&gt; &lt;/AlertBox&gt;
 &lt;/template&gt;</pre>
         </dd>
-        <dd>使用具名插槽 - 使用一个含 v-slot 指令的 &lt;template&gt; 元素；v-slot可以简写为#</dd>
+        <dd>使用具名插槽 - 使用一个使用 v-slot 指令标识的 &lt;template&gt; 元素</dd>
+        <dd>v-slot可以简写为 <span class="warn">#</span></dd>
         <dd>
             <pre>
 &lt;template&gt;
@@ -86,6 +85,7 @@
 &lt;/template&gt;</pre>
         </dd>
         <dd class="example-sn">封装版权组件，根据作者展示相应的版权信息</dd>
+        <dd class="example-sn">封装卡片组件，用户可以使用顶部标题和底部说明</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
