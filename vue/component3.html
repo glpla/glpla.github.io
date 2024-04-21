@@ -16,38 +16,60 @@
         <span>&commat; provide</span>
     </header>
     <dl>
+        <dd>
+            <figure>
+                <img src="./imgs/inject.png" alt="">
+                <figcaption>传统跨级通信</figcaption>
+            </figure>
+        </dd>
         <dt>跨级传递 provide vs inject</dt>
         <dd>顶级组件 → 底层组件；中间可以经过多层组件</dd>
+        <dd>采用发布 - 订阅|提供-插入的模式</dd>
         <dd>仅允许上向下传递|流转，不允许底层组件向顶级组件传递|反向流转</dd>
-        <dd>采用发布-订阅|提供-插入的模式</dd>
         <dd>顶层组件引入 provide 包、底层组件引入 inject 包</dd>
-        <dd>可以传递数据；还可以传递方法</dd>
-        <dd>不可以在某个事件处理函数中使用：provide() can only be used inside setup()</dd>
-        <dt>传递数据</dt>
-        <dd>可以使用多个 provide 和 inject </dd>
-        <dd>可以传递普通静态数据，也可以传递响应式数据</dd>
-        <dd>可以传递简单数据，也可以传递对象</dd>
+        <dd>可以传递数据；还可以传递方法；可以使用多个 provide 和 inject；可以传递普通静态数据，也可以传递响应式数据；可以传递简单数据，也可以传递对象</dd>
+        <dd>响应式数据会保持响应式；传递的是响应式数据，不是响应式数据的值，不要加value</dd>
+        <dd>只可以在setup顶级作用域使用，不可以在某个事件处理函数中使用：provide() can only be used inside setup()</dd>
         <dd>开发调试时，可以使用延时查看响应数据的变化</dd>
-        <dd>1. 顶级组件使用 provide 提供数据</dd>
+        <dt>传递数据</dt>
+        <dd>1. 顶级组件使用 provide 提供数据；其中，响应式数据还采用了双向绑定</dd>
         <dd>
             <pre>
-import {provide} from 'vue'
+import {provide, ref} from 'vue'
 
-provide('key0', data)
-provide('key1', dataRef.value)</pre>
+let name = 'glpla'
+let msg = ref('hello')
+
+provide('name', name)
+provide('msg', msg)</pre>
         </dd>
         <dd>2. 底层组件使用 inject 接收数据</dd>
         <dd>
             <pre>
 import {inject} from 'vue'
 
-let para = inject('key0')
-let para = inject('key1')</pre>
+let para = inject('name')
+let para = inject('msg')</pre>
         </dd>
+        <dd>
+            <pre>&lt;input type="text" v-model="msg"&gt;</pre>
+        </dd>
+        <dt>只读 readonly</dt>
+        <dd>父组件可以限制|保护数据，使得子组件只能访问，不能修改</dd>
+        <dd>
+            <pre>provide('msg', readonly(msg))</pre>
+        </dd>
+        <dt>默认值</dt>
+        <dd>子组件注入数据时，如果数据不存在或其它异常，可以指定默认值</dd>
+        <dd>
+            <pre>const msg = inject('msg', 'hi, there.')</pre>
+        </dd>
+        <dt>名称冲突</dt>
+        <dd>顶层组件和底层组件的 provide 方法名称相同，底层组件会覆盖顶层组件的 provide 方法 - 进水楼台先得月</dd>
+        <dd>应优化设计，避免这种情况</dd>
         <dt>传递方法</dt>
-        <dd>底层组件可以使用顶层组件的方法修改顶层组件的数据；虽然有悖于数据流的单向原则，但是仍然遵循 <span class="warn">谁的数据谁修改</span> 的原则</dd>
+        <dd>底层组件可以使用顶层组件的方法修改顶层组件的数据；虽然有悖于数据流的单向原则，但是仍然遵循 <span class="warn">谁的数据谁修改</span> 的原则，即：用你提供的方法修改你的数据</dd>
         <dd>1. 顶级组件使用 provide 提供已经定义好的方法doGreeting</dd>
-        <dd>用你提供的方法修改你的数据</dd>
         <dd>
             <pre>
 const doGreeting = () => {
@@ -71,8 +93,9 @@ function fn() {
         <dd>
             <pre>&lt;div @click="doGreet"&gt;直接使用&lt;/div&gt;</pre>
         </dd>
-        <dd class="example-sn">全局使用axios</dd>
-        <dd>入口文件main.js引入并提供；注意这里直接使用 provide 库，不需要引入</dd>
+        <dt>全局变量和方法</dt>
+        <dd>不在入口组件app.vue中定义</dd>
+        <dd>应在main.js中定义并提供；注意这里直接使用 provide 库，不需要引入</dd>
         <dd>
             <pre>
 import axios from 'axios'

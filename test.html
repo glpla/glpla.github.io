@@ -12,13 +12,11 @@
   <div class="wrap" data-ind="1000">10</div>
   <script src="./utils/lib/anime.min.js"></script>
   <script>
-    anime({
-      targets: '.wrap',
-      value: [0, 1000],
-      round: 1,
-      easing: 'easeInOutExpo',
-      duration: 800
-    });
+    let arr = [{ id: 100, type: 'img' }, { id: 101, type: 'mp3' }, { id: 102, type: 'mp4' }, { id: 103, type: 'txt' }]
+    let tmp = arr.map(item => {
+      return { ...item, type: 'tab-' + item.type }
+    })
+    console.log(tmp);
   </script>
 </body>
 

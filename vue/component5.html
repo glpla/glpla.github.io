@@ -32,17 +32,20 @@
 &lt;/template&gt;
     
 &lt;script setup&gt;
-    import Home from './tabs_view/Home.vue';
-    import Info from './tabs_view/Info.vue';
-    import Team from './tabs_view/Team.vue';
-    import { ref } from 'vue'
-    
-    const currentTab = ref('Home')
-    const tabs = {
-        Home,
-        Info,
-        Team
-    }
+import { defineAsyncComponent, ref } from 'vue'
+
+const AsyncHome = defineAsyncComponent(() => import('./components/Home.vue'))
+const AsyncInfo = defineAsyncComponent(() => import('./components/Info.vue'))
+const AsyncTeam = defineAsyncComponent(() => import('./components/Team.vue'))
+const AsyncWork = defineAsyncComponent(() => import('./components/Work.vue'))
+   
+const currentTab = ref('AsyncHome')
+const tabs = {
+    AsyncHome,
+    AsyncInfo,
+    AsyncTeam,
+    AsyncWork
+}
 &lt;/script&gt;</pre>
         </dd>
         <dd class="example-sn">利用条件 v-if 渲染切换2个组件</dd>
@@ -57,7 +60,9 @@ import Team from './components/Team.vue';</pre>
 &lt;component v-else :is="Team"&gt;&lt;/component&gt;</pre>
         </dd>
         <dd>改进 - 使用一个 &lt;component&gt;</dd>
-        <dd>为了避免性能上的消耗，使用浅响应对象 shallowRef 创建组件数组</dd>
+        <dd>为了避免性能上的消耗，使用浅响应 shallowRef 创建组件数组</dd>
+        <dd>浅响应 shallowRef 并不对其中的数据进行响应，仅仅对对象的名字响应</dd>
+        <dd>或者使用普通方式提供渲染列表</dd>
         <dd>
             <pre>
 let ind = ref(0)
@@ -68,9 +73,8 @@ let com = shallowRef([Reco, Copyright])</pre>
             <pre>
 &lt;component :is="com[ind]">&lt;/component&gt;</pre>
         </dd>
-
-        <dd class="example-sn">利用单选按钮 radio 渲染切换多个组件</dd>
-        <dd>提示：引入多个组件；创建组件列表数组；使用多个radio，并双向绑定一个标识；使用label改进UI并隐藏radio</dd>
+        <dd class="example-sn">标签页 - 切换时查看各组件的生命周期函数</dd>
+        <dd>提示：可以利用单选按钮 radio 实现；引入多个组件；创建组件列表数组；使用多个radio，并双向绑定一个标识；使用label改进UI并隐藏radio</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
