@@ -99,18 +99,33 @@ console.log(md5('message',32));//32位</pre>
   <details>
     <summary>XLSX</summary>
     <dl>
-      <dd>电子表格处理</dd>
-      <dd>表格导出为excel</dd>
+      <dd>电子表格的处理</dd>
+      <dt>基本过程</dt>
+      <dd class="sn">
+        <div>获取数据 Acquire Data</div>
+        <div>解析数据 Extract Data</div>
+        <div>处理数据 Process Data</div>
+        <div>输出数据 Package Data</div>
+        <div>释放数据 Release Data</div>
+      </dd>
+      <dt>高频API</dt>
+      <dd>读取工作簿 - XLSX.read</dd>
+      <dd>表格到工作簿 - XLSX.utils.table_to_book</dd>
+      <dd>表格到表单 - XLSX.utils.table_to_sheet</dd>
+      <dd>表单到JSON - XLSX.utils.sheet_to_json</dd>
+      <dd>工作簿到文件 - XLSX.writeFile</dd>
       <dd>更多信息，请查看 <a href="https://www.npmjs.com/package/xlsx">NPM - SheetJS</a>、<a
           href="https://github.com/rockboom/SheetJS-docs-zh-CN">GitHub - SheetJS js-xlsx</a></dd>
       <dt>Node.js开发</dt>
       <dd class="sn">
         <div>安装依赖</div>
         <pre>npm i xlsx -S</pre>
-        <div>引入包，使用&lt;input&gt;的file类型。读入excel文件并解析，最后渲染</div>
+        <div>引入包</div>
         <pre>
 import { ref } from 'vue';
-import * as XLSX from 'xlsx/xlsx.mjs';
+import * as XLSX from 'xlsx/xlsx.mjs';</pre>
+        <p class="example-sn">使用&lt;input&gt;的file类型。读入excel文件并解析，最后渲染</p>
+        <pre>
 let order = ref([])
 const selExcel = (e) => {
   const fr = new FileReader()
@@ -124,6 +139,17 @@ const selExcel = (e) => {
     order.value = sheetJson
   }
 }</pre>
+        <p class="example-sn">使用ref模板引用获取表格，将其数据并导出为excel</p>
+        <pre>
+let tbl = ref(null)
+const outExcel = () => {
+  if (tbl.value) {
+    let workbook = XLSX.utils.table_to_book(tbl.value);
+    XLSX.writeFile(workbook, "user.xlsx");
+  } else {
+    console.log("tbl is null");
+  }
+}        </pre>
       </dd>
       <dt>HTML 原生开发</dt>
       <dd>引入dist中的xlsx.full.min.js</dd>
