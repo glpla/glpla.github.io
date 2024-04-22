@@ -8,6 +8,18 @@
     <title>组件样式 Style</title>
     <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
+    <style>
+        header {
+            background-image: url(https://p3-sdbk2-media.byteimg.com/tos-cn-i-xv4ileqgde/74f648633cc949118d501e78b72fe301~tplv-xv4ileqgde-resize-w:1440.awebp);
+            height: 60vh;
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                height: 30vh;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -73,28 +85,118 @@
             <div>为组件的根节点指定与组件同名的样式类，很容易保证组件类的唯一性，且便于父组件布局</div>
         </dd>
         <dt>组件样式</dt>
-        <dd>&lt;style&gt;指定 scoped 时：</dd>
-        <dd>它的 CSS 只会影响当前组件的元素</dd>
+        <dd>&lt;style&gt;指定 scoped 时，它的 CSS 只会影响当前组件的元素</dd>
         <dd>父组件的样式将不会 <span class="warn">渗透</span>
             到子组件中。不过，子组件的根节点会同时被父组件的作用域样式和子组件的作用域样式影响。便于：让父组件可以从布局的角度出发，调整其子组件根元素的样式</dd>
         <dd>更多作用域详细信息，请参考<a href="./class.html">类 class</a>、、<a
                 href="https://cn.vuejs.org/api/sfc-css-features.html">API
                 - 单文件组件 CSS 功能</a></dd>
-        <dt>特殊选择器</dt>
-        <dd class="sn">
-            <div>深度选择器 :deep()</div>
-            <p>伪类选择器</p>
-            <p>父组件如果想深入调整子组件内部元素的样式|影响到子组件，可以使用伪类:deep()</p>
+        <dd>版权组件结构</dd>
+        <dd>
             <pre>
-:deep(.title) {
-    color: var(--warn-color);
+&lt;template&gt;
+    &lt;div class="copyright"&gt;
+        &lt;span class="txt"&gt;copyright &commat; 2024-2026&lt;/span&gt;
+        &lt;slot&gt;&lt;/slot&gt;
+        &lt;span class="txt"&gt;glpla.github.io&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</pre>
+        </dd>
+        <dd>父组件指定样式，如标签选择器span或类选择器.txt不会影响子组件内元素的样式 - 组件封装的特性</dd>
+        <dd>
+            <pre>
+span {
+    font-weight: 600;
+}
+
+.txt {
+    color: #f40;
 }</pre>
-            <div>插槽选择器 :slotted</div>
-            <p>默认情况下，作用域样式不会影响到 &lt;slot/&gt; 渲染出来的内容，因为它们被认为是父组件所持有并传递进来的。使用 :slotted 伪类以明确地将插槽内容作为选择器的目标</p>
-            <p>更多细节，请查看<a href="./component4.html">组件 slot</a></p>
-            <div>全局选择器 :global</div>
-            <p>如果想让其中一个样式规则应用到全局，比起另外创建一个 &lt;style&gt;，可以使用 :global 伪类</p>
-            <p>应 <span class="warn">避免</span> 这种情况出现。应该把全局类写到单独的样式文件中并引入</p>
+        </dd>
+        <dd>但是。但是。。但是。。。如果使用子组件根节点的类，则样式会生效</dd>
+        <dd>父组件设置子组件背景色；你可以这样理解：一般情况下，<span class="warn">父组件仅能影响到子组件根节点</span></dd>
+        <dd>
+            <pre>
+.copyright {
+    background-color: #000;
+}</pre>
+        </dd>
+        <dt>插槽样式</dt>
+        <dd class="example-sn">版权组件 - 默认插槽，这里以传递一个&lt;img&gt;为例</dd>
+        <dd>版权组件结构同上。版权组件仅仅是指定|预留了一个插槽。父组件使用这个插槽传递什么不确定。所以这里写&lt;img&gt;的样式无效；按F12在开发者视图中，检查元素页可以确定，没有样式</dd>
+        <dd>版权组件样式 - 无效</dd>
+        <dd>
+            <pre>
+img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}</pre>
+        </dd>
+        <dd>为插槽指定样式，同样无效</dd>
+        <dd>
+            <pre>
+&lt;template&gt;
+    &lt;div class="copyright"&gt;
+        &lt;span&gt;copyright &commat; 2024-2026&lt;/span&gt;
+        &lt;slot class="avatar"&gt;&lt;/slot&gt;
+        &lt;span&gt;glpla.github.io&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</pre>
+        </dd>
+        <dd>解决方案1 - 父组件指定样式，因为这个插槽是父组件提供的，对父组件是可见的；本质上还是父组件的，所以样式有效</dd>
+        <dd>父组件样式 - 有效</dd>
+        <dd>
+            <pre>
+img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}</pre>
+        </dd>
+        <dd>解决方案2 - 父组件使用特殊 <span class="warn">伪类</span> 选择器；更多选择器，请查看 <a href="../web/selector.html">HTML5选择器 -
+                selector</a></dd>
+    </dl>
+    <div class="chap">特殊选择器</div>
+    <dl>
+        <dt>深度选择器 :deep(selector)</dt>
+        <dd>父组件如果想深入调整子组件内部元素的样式|影响到子组件，包括子组件的插槽元素，应使用伪类:deep(selector)</dd>
+        <dd><span class="warn">父组件</span>使用深度选择器设置子组件内元素样式 - 父组件使用插槽，知道传递了什么元素，使用了什么选择器</dd>
+        <dd class="sn">
+            <pre>
+:deep(img) {
+    width: 30px;
+    height: 30px;
+}</pre>
+        </dd>
+        <dt>插槽选择器 :slotted(selector)</dt>
+        <dd>默认情况下，作用域样式不会影响到 &lt;slot/&gt; 渲染出来的内容，因为它们被认为是父组件所持有并传递进来的</dd>
+        <dd>使用 :slotted 伪类以明确地将插槽内容作为选择器的目标</dd>
+        <dd><span class="warn">子组件</span>使用插槽 标签 选择器 - Bad</dd>
+        <dd>
+            <pre>
+:slotted(img) {
+    width: 30px;
+    height: 30px;
+}</pre>
+        </dd>
+        <dd>子组件使用插槽 类 选择器 - Good</dd>
+        <dd>
+            <pre>
+:slotted(.avatar-img) {
+    width: 30px;
+    height: 30px;
+}</pre>
+        </dd>
+        <dd>但是。但是。。但是。。。子组件并不知道父组件到底使用插槽传递什么，你要预判所有的可能，写尽可能多的类样式</dd>
+        <dd class="tips">
+            <div>IDE可能会提示::slotted而不是:slotted。注意修正</div>
+            <div>开发规范的重要性</div>
+        </dd>
+        <dt>全局选择器 :global(selector)</dt>
+        <dd>如果想让其中一个样式规则应用到全局|扩大作用域，可以使用 :global(selector)</dd>
+        <dd>应 <span class="warn">避免</span> 这种情况出现。应该把全局类写到单独的样式文件中并全局引入 - 在哪里引入算是全局？？？</dd>
+        <dd>
             <pre>
 :global(.warn) {
     color: red;
