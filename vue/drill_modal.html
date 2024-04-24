@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实操 模态框</title>
+  <link rel="stylesheet" href="../css/exp.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+  </header>
+  <div class="container">
+    <h1>模态框</h1>
+    <h4>Modal</h4>
+    <dl class="number-mul-sn">
+      <dt>实验目的</dt>
+      <dd>
+        <div>掌握过渡引用的使用</div>
+        <div>掌握模板引用的使用</div>
+        <div>进一步熟悉组件的创建和使用</div>
+        <div>进一步熟悉组件的样式</div>
+      </dd>
+      <dt>开发环境</dt>
+      <dd>
+        <div>操作系统 Window 10+</div>
+        <div>文本编辑器 Vs Code</div>
+        <div>谷歌浏览器 Chrome</div>
+        <div>Node.js</div>
+      </dd>
+      <dt>实验内容</dt>
+      <dd>
+        <div>静态模态框的使用 - 无参</div>
+        <div>动态模态框的使用 - 带参</div>
+        <div>为模态框添加过渡效果</div>
+      </dd>
+      <dt>实验步骤</dt>
+      <dd>第一阶段 静态模态框</dd>
+      <dd>
+        <div>创建模态框组件 TipsStatic.vue - 在视口右上角展示一条静态数据</div>
+        <pre>
+&lt;script setup&gt;
+
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div class="tips-static"&gt;hi, there.&lt;/div&gt;
+&lt;/template&gt;
+
+&lt;style scoped&gt;
+.tips-static {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  color: #fff;
+  padding: 4px 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+&lt;/style&gt;</pre>
+        <div>父组件引入模态框组件，并使用响应式数据isOpen控制其显示和隐藏</div>
+        <div>父组件添加按钮，绑定单击事件控制isOpen的真或假</div>
+        <pre>
+&lt;script setup&gt;
+  import { ref } from 'vue';
+  import TipsStatic from './components/TipsStatic.vue';
+  let isOpen = ref(false)
+  const setOpen = () => {
+    isOpen.value ? isOpen.value = false : isOpen.value = true
+  }
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;TipsStatic v-if="isOpen"&gt;&lt;/TipsStatic&gt;
+  &lt;button @click="setOpen"&gt;click to open modal&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;style scoped&gt;&lt;/style&gt;        </pre>
+        <figure class="img-sn">
+          <img src="./imgs/modal1.png" alt="">
+          <figcaption>默认隐藏模态框</figcaption>
+        </figure>
+        <figure class="img-sn">
+          <img src="./imgs/modal0.png" alt="">
+          <figcaption>单击显示模态框</figcaption>
+        </figure>
+        <figure class="img-sn">
+          <img src="./imgs/modal1.png" alt="">
+          <figcaption>再次单击隐藏模态框</figcaption>
+        </figure>
+      </dd>
+      <dd>第二阶段 动态模态框</dd>
+      <dd>
+        <div>修改模态框组件，增加关闭按钮，单击时，关闭模态框；关闭按钮定位在右上角</div>
+        <p>模态框组件通过触发事件的方式传递动作；同时修改打开的逻辑setOpen为只打开</p>
+        <pre>
+const emits = defineEmits(['emitClose'])
+const closeModal = () => {
+  emits('emitClose')
+}
+const setOpen = () => {
+  isOpen.value = true
+}</pre>
+        <p>父组件响应模态框的自定义事件，关闭模态框</p>
+        <pre>&lt;TipsStatic v-if="isOpen" @emit-close="closeModal"&gt;&lt;/TipsStatic&gt;</pre>
+        <pre>
+const closeModal = () => {
+  isOpen.value = false
+}        </pre>
+        <figure class="img-sn">
+          <img src="./imgs/modal2.png" alt="">
+          <figcaption>带关闭按钮的模态框</figcaption>
+        </figure>
+      </dd>
+      <dd>第三阶段 传递参数</dd>
+      <dd>
+        <div>在模态框组件中，声明数据并绑定，取代之前的静态数据；为了让父组件访问，还需要将数据变量暴露出去</div>
+        <pre>
+import { ref } from 'vue';
+let tips = ref('')
+defineExpose({ tips })</pre>
+        <pre>&lt;span&gt;{{ tips }}&lt;/span&gt;</pre>
+        <div>在父组件中为模态框指定ref，以便获取模态框组件实例，便于传递参数</div>
+        <pre>&lt;TipsStatic ref="modal" v-if="isOpen" @emit-close="closeModal"&gt;&lt;/TipsStatic&gt;</pre>
+        <p>在打开逻辑setOpen中传递参数；使用前，先判断ref是否已经就绪</p>
+        <p>这里的参数数据 'para from parent vue' 可以来自任何地方</p>
+        <pre>
+const setOpen = () => {
+  isOpen.value = true
+  if (modal.value) {
+    modal.value.tips = "para from parent vue"
+  }
+}</pre>
+        <figure class="img-sn">
+          <img src="./imgs/modal3.png" alt="">
+          <figcaption>接收参数的模态框</figcaption>
+        </figure>
+      </dd>
+      <dd>第四阶段 过渡模态框</dd>
+      <dd>
+        <div>为模态框添加过渡效果 - 淡入淡出；使用过渡组件包裹模态框根元素并指定name；也可以在父组件中使用过渡组件</div>
+        <pre>
+&lt;transition name="modal-fade"&gt;
+  //
+&lt;/transition&gt;</pre>
+        <p>指定过渡样式</p>
+        <pre>
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}        </pre>
+        <div>为模态框添加延时关闭功能；如果3秒内没有点击，则自动关闭；在挂载后触发延时功能；记得引入对应的生命周期函数包</div>
+        <p>也可以在父组件中使用延时逻辑；在哪个地方使用，取决于需求</p>
+        <p>如果仅仅是模态框组件需要，应该写在模态框组件；如果父组件其它模块也需要，则在父组件中写</p>
+        <pre>
+onMounted(() => {
+  setTimeout(() => {
+    closeModal()
+  }, 3000)
+})        </pre>
+      </dd>
+      <dd>第五阶段 改进模态框</dd>
+      <dd>包括但不限于：</dd>
+      <dd>
+        <div>增加动态标题 title</div>
+        <div>指定位置 position：水平垂直居中、左上角、右上角、底部居中、顶部居中等</div>
+      </dd>
+      <dt>实验结果分析与体会</dt>
+      <dd>
+        <div>掌握的知识点、开发技能</div>
+        <div>碰到的问题、解决的思路和方法以及未解决的问题</div>
+        <div>其它思考</div>
+      </dd>
+      <dt>实验要求</dt>
+      <dd>
+        <div>规范开发；独立完成；突出个人设计特点和风格</div>
+        <div>实验报告：采用学院统一下发的格式文件，以文字说明，配以必要的效果图片或核心代码，展示并说明数据来源、实施过程、各部分功能、具体内容和实现细节；最后导出为PDF，按照要求命名，提交个人学习通作业</div>
+        <div>未按要求在规定时间内提交视为无效，不得分</div>
+        <div>格式规范，请参考 <a href="../course/paper.html">论文规范要点</a></div>
+      </dd>
+    </dl>
+    <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  </div>
+</body>
+
+</html>

@@ -62,8 +62,6 @@
         <dd>默认情况下，组件内部的属性和方法对外部不公开，所以获取到的ref仅仅是一个代理对象，看不到组件的内部细节</dd>
         <dd>组件需要显示的暴露属性或方法defineExpose</dd>
         <dd>defineExpose应该写在暴露的对象后面</dd>
-        <dd>下面的测试组件暴露了一个属性一个方法</dd>
-        <dd class="tips">尽量避免通过ref引用组件，请组件的通信机制实现 props和emit，详见后续组件内容</dd>
         <dd>
             <pre>
 &lt;template&gt;
@@ -82,9 +80,13 @@
     })
 &lt;/script&gt;</pre>
         </dd>
-        <!-- <dd class="example-sn">单击打开弹窗</dd>
-        <dd>父组件获取子组件|弹窗组件实例，执行弹窗的方法</dd>
-        <dd>子组件|弹窗组件定义方法并暴露；方法利用bool将弹窗组件的隐藏状态变为显示</dd> -->
+        <dd class="tips">
+            <div>refs can be useful in certain situations where direct access to a child component's internal state or
+                methods is necessary.</div>
+            <div>尽量避免通过ref引用组件，请组件的通信机制实现 props和emit，详见后续组件内容</div>
+            <div>Remember that accessing a child component's data directly using refs can make your components tightly
+                coupled. Consider using props and events for communication between components</div>
+        </dd>
         <dd class="example-sn">自定义搜索组件，单击时，显示并自动获取焦点</dd>
         <dd>搜索组件参考设计如下</dd>
         <dd>
@@ -122,6 +124,9 @@
         <dd>不建议每个子节点都标注ref属性</dd>
         <dd>建议获取父节点，再根据节点关系获取子节点</dd>
         <dd>思路同事件代理</dd>
+        <dd class="example-sn">单击打开弹窗；更多信息，请访问 <a href="./drill_modal.html">实操 - Modal</a></dd>
+        <dd>父组件获取子组件|弹窗组件实例，执行弹窗的方法</dd>
+        <dd>子组件|弹窗组件定义方法并暴露；方法利用bool将弹窗组件的隐藏状态变为显示</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
