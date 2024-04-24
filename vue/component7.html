@@ -35,21 +35,23 @@
 &lt;/Transition&gt;</pre>
         </dd>
         <dt>过渡阶段</dt>
-        <dd>区分：进入阶段enter还是离开阶段leave两个阶段；每次过渡，只能触发一个阶段的效果</dd>
+        <dd>区分：进入阶段enter还是离开阶段leave两个阶段；每次过渡，只能触发一个阶段的效果：要么进来 enter，要么离开 leave</dd>
         <dd>每个阶段又可细分为3个子阶段；如下图</dd>
-        <dd>enter：从无到有，包括：开始的进入from和结束to，中间则是开始的过渡active</dd>
-        <dd>leave：从有到无，包括：离开的进入from和结束to，中间则是离开的过渡active</dd>
-        <dd>每个阶段都对应一个内置类，默认是v开头；具体的类实现需要自己定义</dd>
+        <dd>enter：从无到有，包括：开始的进入from和结束to，中间则是进入的过渡过程 active</dd>
+        <dd>leave：从有到无，包括：离开的进入from和结束to，中间则是离开的过渡过程 active</dd>
+        <dd>每个阶段都对应一个内置类，默认是v开头；类的具体实现需要 <span class="warn">自己定义</span></dd>
         <dd>
             <figure class="img-sn">
                 <img src="./imgs/transition0.png" alt="">
                 <figcaption>过渡阶段或过程</figcaption>
             </figure>
         </dd>
+        <dd>1. 进入 enter</dd>
         <dd>v-enter-from：进入动画的起始状态。在元素插入之前添加，在元素插入完成后的下一帧移除</dd>
         <dd>v-enter-active：进入动画的生效状态。应用于整个进入动画阶段。在元素被插入之前添加，在过渡或动画完成之后移除。这个 class 可以被用来定义进入动画的持续时间、延迟与速度曲线类型；一般都会搭配原生
             CSS 过渡transition或帧动画animation一起使用</dd>
         <dd>v-enter-to：进入动画的结束状态。在元素插入完成后的下一帧被添加 (也就是 v-enter-from 被移除的同时)，在过渡或动画完成之后移除</dd>
+        <dd>2. 离开 leave</dd>
         <dd>v-leave-from：离开动画的起始状态。在离开过渡效果被触发时立即添加，在一帧后被移除</dd>
         <dd>v-leave-active：离开动画的生效状态。应用于整个离开动画阶段。在离开过渡效果被触发时立即添加，在过渡或动画完成之后移除。这个 class
             可以被用来定义离开动画的持续时间、延迟与速度曲线类型；一般都会搭配原生 CSS 过渡transition或帧动画animation一起使用
@@ -59,10 +61,8 @@
             <div>仅支持单个元素或组件作为其插槽内容。如果内容是一个组件，这个组件必须仅有一个根元素</div>
             <div>元素的CSS效果会叠加到过渡上，如设置了背景颜色，则过渡的进入和退出都将应用该背景属性</div>
         </dd>
-        <dd class="example-sn">单击查看元素的淡入淡出 - 基于CSS的transition</dd>
-        <dd>可应用于弹出对话框</dd>
+        <dd class="example-sn">单击查看元素的淡入淡出 - 基于CSS的transition；更多细节，请查看 <a href="./drill_modal.html">实操 - 模态框</a></dd>
         <dd>注意：事件元素应放在过渡组件前面，否则。。。</dd>
-        <dd>完整代码</dd>
         <dd>
             <pre>
 &lt;template&gt;
@@ -177,7 +177,7 @@ const onAfterLeave = () => {
         <dt>复用过渡效果</dt>
         <dd>将设计好的过渡效果应该到其它组件</dd>
         <dd>一个项目中，不同元素的过渡效果应该尽量保持一致</dd>
-        <dd>封装 &lt;Transition&gt; 组件预留插槽slot，以便不同内容</dd>
+        <dd>封装 &lt;Transition&gt; 组件预留插槽slot，以便运用到不同内容</dd>
         <dt>出现时过渡</dt>
         <dd>如果你想在某个节点初次渲染时应用一个过渡效果，你可以添加 appear</dd>
         <dd class="example-sn">使用appear属性，配合组件封装，实现：加载出现、点击消失的过渡效果</dd>
