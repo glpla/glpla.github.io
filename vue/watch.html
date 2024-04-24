@@ -192,6 +192,20 @@ stop()</pre>
         </dd>
     </dl>
     <dl>
+        <dd class="example-sn">侦听模态框的变化</dd>
+        <dd>用户信息采集过程中，非法、无效等数据校验，前端可以使用弹出窗口给出提示；一定时间后弹出窗口消失</dd>
+        <dd>需要在每个逻辑的校验中，弹出窗口、消失窗口</dd>
+        <dd>可以侦听弹窗的变化，当出现|条件为真时，开始倒计时，然后停止倒计时，关闭弹窗</dd>
+        <dd>
+            <pre>
+watch(isModalOpen, (newval, oldval) => {
+    if (newval) {
+        setTimeout(() => {
+        isModalOpen.value = false
+        }, 3000);
+    }
+})</pre>
+        </dd>
         <dd class="example-sn">分析下面代码的功能</dd>
         <dd>
             <pre>
