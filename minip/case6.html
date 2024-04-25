@@ -54,20 +54,24 @@
                         <td>播放列表；节点信息参考如下述代码</td>
                     </tr>
                     <tr>
-                        <td>indMusic</td>
+                        <td>ind</td>
                         <td>播放列表索引 </td>
                     </tr>
                     <tr>
                         <td>isPause</td>
-                        <td>播放状态 </td>
+                        <td>播放标记；播放状态</td>
                     </tr>
                     <tr>
-                        <td>valueMusic</td>
-                        <td>播放进度</td>
+                        <td>per</td>
+                        <td>进度条；百分比</td>
                     </tr>
                     <tr>
-                        <td>durationMusic</td>
-                        <td>播放时长</td>
+                        <td>cur</td>
+                        <td>当前时间；00:00</td>
+                    </tr>
+                    <tr>
+                        <td>dur</td>
+                        <td>播放时长；00:00</td>
                     </tr>
                 </table>
             </dd>
@@ -86,7 +90,7 @@
                 <p>. 导入音频素材列表</p>
                 <pre>
 wx.request({
-    url: 'http://127.0.0.1:3000/utils/data/song_list.json',
+    url: 'http://127.0.0.1:3000/data/song_list.json',
     success: (res) => {
         console.log(res.data);
         this.setData({
@@ -98,24 +102,23 @@ wx.request({
                 <p>. 侦听音乐播放器BackgroundAudioManager实例；执行播放、暂停、结束、进度更新等API，调整页面相关数据</p>
                 <pre>
 BGM.onPlay(() => {
-    console.log('play');
+    console.log('play', BGM.duration);
     this.setData({
-        dur: util.minsec(BGM.duration),
-        isPause: true
+        isPause: false
     })
 })
 BGM.onPause(() => {
     console.log('pause');
     this.setData({
-        isPause: false
+        isPause: true
     })
 })
 BGM.onEnded(() => {
     console.log('ended');
     this.setData({
-        isPause: false,
-        dur:'00:00',
-        cur:'00:00'
+        isPause: true,
+        cur:'00:00',
+        dur:'00:00'
     })
 })
 BGM.onError(() => {
@@ -126,69 +129,67 @@ BGM.onError(() => {
 BGM.onTimeUpdate(() => {
     console.log('time updating');
     this.setData({
-        duration: BGM.duration,
-        value: BGM.currentTime
-        dur: util.minsec(BGM.duration),
-        cur: util.minsec(BGM.currentTime),
+        du: BGM.duration,
+        cur: BGM.currentTime
+        per: parseInt(BGM.currentTime / BGM.duration * 100)
     })
 })</pre>
                 <p>. 播放、暂停：播放、暂停通过背景音频API实现</p>
                 <pre>
-playBGM() {
-    this.initSong()
+playBgm() {
+    this.init()
 },
-pauseBGM() {
-    BGM.pause()
-}
-stopBGM() {
-    BGM.stop()
+pauseBgm() {
+    bgm.pause()
 }</pre>
-                <p>. 音频播放函数；为音频实例BGM指定title、src、singer等基本参数；如果自动播放，可以在获取列表后，立即执行</p>
+                <p>. 音频播放函数；为音频实例BGM指定title、src、singer等基本参数；如果自动播放，可以在获取列表后，立即执行；注意 <span class="warn">拼接地址！！！</span>
+                </p>
                 <pre>
-initSong() {
+init() {
     BGM.title = this.data.lists[this.data.ind].title
     BGM.singer = this.data.lists[this.data.ind].singer
     BGM.src = this.data.baseUrl + this.data.lists[this.data.ind].src
 }</pre>
-                <p>. 上一首、下一首：通过播放列表索引 indMusic 增加或减少实现；每次更新，自动播放initSong()</p>
+                <p>. 上一首、下一首：通过播放列表索引 ind 增加或减少实现；每次更新，自动播放init()</p>
                 <pre>
 prevSong() {
-    let indMusic = this.data.indMusic
-    if (indMusic > 0) {
-        indMusic--
+    let ind = this.data.ind
+    if (ind > 0) {
+        ind--
         this.setData({
-        indMusic: indMusic
+        ind
         })
-        this.initSong()
+        this.init()
     }
-    console.log(indMusic);
 },
 nextSong() {
-    let indMusic = this.data.indMusic
-    if (indMusic &lt; this.data.lists.length - 1) {
-        indMusic++
+    let ind = this.data.ind
+    if (ind &lt; this.data.lists.length - 1) {
+        ind++
         this.setData({
-        indMusic: indMusic
+        ind
         })
-        this.initSong()
+        this.init()
     }
-    console.log(indMusic);
 }</pre>
-                <p>. 进度调节：利用滑块组件 slider 实现；拖动后，相应的调整BGM的播放进度seek</p>
+                <p>. 进度调节：利用滑块组件 slider 实现；拖动后，相应的调整BGM的播放进度；将百分比转换为对应的秒数</p>
                 <pre>
 sliderChange(e) {
-    this.setData({
-        value: e.detail.value
-    })
-    BGM.seek(e.detail.value)
+    let per = parseInt(e.detail.value * BGM.duration / 100)
+    BGM.seek(per)
 }</pre>
-                <p>. 播放时长、总时长：获取音频实例的相关属性</p>
-                <p>. 音量调节：略</p>
+                <p>. 播放时长、总时长：在音频的侦听事件中获取音频实例的相关属性；并处理为适合的格式</p>
                 <p>. 封面图片特效：略</p>
                 <p>. 其它设计：略</p>
             </dd>
+            <dt>注意事项</dt>
+            <dd>
+                <div>数据列表获取前的页面渲染异常处理，如可以使用界面API给出提示，使用条件渲染。。。</div>
+                <div>音频数据的初始化，如时长和当前值的格式 00:00:00</div>
+                <div>播放完毕后数据的初始化，如暂停标记、时长和当前值</div>
+            </dd>
             <dt>参考效果</dt>
-            <dd>除了必要的登录凭证信息外，其它可自由设计</dd>
+            <dd>请参考其它同类作品，充分发挥自由的设计创造</dd>
             <dd class="grid">
                 <img src="../minip/imgs/p5.png" alt="">
                 <img src="../minip/imgs/p6.png" alt="">
@@ -223,6 +224,11 @@ sliderChange(e) {
             </dd>
         </dl>
         <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+        <script>
+            let num = -1
+            num = num % 5 + 5
+            console.log(num);
+        </script>
     </div>
 </body>
 

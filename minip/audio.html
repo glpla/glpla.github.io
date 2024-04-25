@@ -127,7 +127,7 @@
                 </tr>
                 <tr>
                     <td>onPlay(function listener)</td>
-                    <td>监听音频播放事件</td>
+                    <td>监听音频播放事件；可以获取 duration</td>
                 </tr>
                 <tr>
                     <td>onPause(function listener)</td>
@@ -163,6 +163,17 @@
                 <div>coverImgUrl：封面图 URL，用于做原生音频播放器背景图；分享出去的卡片配图及背景将使用该图</div>
                 <div>webUrl：页面链接；分享出去的卡片简介将使用该值</div>
             </details>
+        </dd>
+        <dd class="example-sn">极简版音乐播放器</dd>
+        <dd>
+            <pre>
+Page({
+    onLoad() {
+        const bgm = wx.getBackgroundAudioManager()
+        bgm.title = 'wang fei'
+        bgm.src = 'https://glpla.github.io/utils/music/wang.mp3'
+    }
+})</pre>
         </dd>
         <dd class="example-sn"><a href="./case6.html">音乐播放器 - player</a></dd>
     </dl>

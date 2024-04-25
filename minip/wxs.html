@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>微信脚本 WXS</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
@@ -19,16 +16,32 @@
         <span>WXS</span>
     </header>
     <dl>
-        <dt>说明</dt>
-        <dd>weixin script - 微信自己的脚本系统；类似JavaScript</dd>
+        <dd>WeiXin Script - 微信自己的脚本系统；类似JavaScript</dd>
+        <dd>WXS 与 JavaScript 是不同的语言，有自己的语法，并不和 JavaScript 一致</dd>
         <dd>通常作为过滤器使用：对渲染的数据进行额外处理，如格式定制、大小写转换</dd>
-        <dd>和vue的计算属性功能差不多</dd>
-        <dt>基本使用</dt>
-        <dd class="number">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <dd>和Vue的计算属性功能差不多</dd>
+        <dt>模块</dt>
+        <dd>WXS 代码可以编写在 wxml 文件中的 &lt;wxs&gt; 标签内，或以 .wxs 为后缀名的文件内</dd>
+        <dd>每一个 .wxs 文件和 &lt;wxs&gt; 标签都是一个单独的模块</dd>
+        <dd>每个模块都有自己独立的作用域。即在一个模块里面定义的变量与函数，默认为私有的，对其他模块不可见</dd>
+        <dd>一个模块要想对外暴露其内部的私有变量与函数，只能通过 module.exports 实现</dd>
+        <dt>&lt;wxs&gt;</dt>
+        <dd>用于定义一个模块，包括 模块名称、模块内容、模块暴露的接口</dd>
+        <dd>也可以使用 src 引入其它模块</dd>
+        <dd class="tips">
+            <div>一个模块只完成一个逻辑</div>
+            <div>模块名使用语义化，其中的方法可以任性</div>
+        </dd>
+        <dd class="example-sn">将变量 str 转换大写</dd>
+        <dd>
+            <pre>
+&lt;wxs module="toUpperCase"&gt;
+    module.exports.fn = function (str) {
+        return str.toUpperCase()
+    }
+&lt;/wxs&gt;
+&lt;view&gt;{{toUpperCase.fn(msg)}}&lt;/view&gt;
+            </pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
