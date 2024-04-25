@@ -17,16 +17,99 @@
     <div class="container">
         <h1>音乐播放器</h1>
         <h4>Player</h4>
-        <dl>
-            <dt><span>home</span> 主页</dt>
-            <dd class="number">
-                <div>搜索区 search</div>
-                <div>轮播区 swiper</div>
-                <div>导航区 navigation</div>
-                <div>内容区 content</div>
-                <div>标签栏 tabBar</div>
+        <dl class="number-mul-sn">
+            <dt>目的</dt>
+            <dd>
+                <div>了解异步函数执行的过程</div>
+                <div>掌握背景音频API的使用和注意事项</div>
+                <div>进一步熟悉网络请求的基本过程</div>
+            </dd>
+            <dt>内容</dt>
+            <dd>
+                <div>素材准备</div>
+                <div>服务器准备；如无可以使用在线素材，如 <a href="../index.html">大树小站</a> 在线资源</div>
+                <div>音频API使用</div>
+            </dd>
+            <dt>步骤</dt>
+            <dd>第一阶段 初体会</dd>
+            <dd>
+                <div>创建项目或页面</div>
+                <div>在逻辑js中，创建音乐播放器BackgroundAudioManager实例</div>
+                <div>指定title和src</div>
+            </dd>
+            <dd>第二阶段 音乐播放器</dd>
+            <dd>
+                <div>数据支持</div>
+                <p>. 播放列表 lists；节点信息参考如下</p>
+                <pre>
+    {
+        "id": 5,
+        "title": "微风细雨",
+        "singer": "wang",
+        "src": "/music/wang.mp3",
+        "coverImgUrl": "/avatar/avatar5.png"
+    }</pre>
+                <p>. 播放列表索引 indMusic</p>
+                <p>. 播放状态 isPause</p>
+                <p>. 播放进度 valueMusic</p>
+                <p>. 播放时长 durationMusic</p>
+                <div>主要过程</div>
+                <p>. 创建项目或页面，修改基本配置信息</p>
+                <p>. 导入音频素材列表；以大树小站为例</p>
+                <pre>
+wx.request({
+    url: 'http://127.0.0.1:3000/utils/data/song_list.json',
+    success: (res) => {
+        console.log(res.data);
+        this.setData({
+            lists: res.data.cont
+        })
+    }
+});</pre>
+                <p>. 创建音乐播放器BackgroundAudioManager实例</p>
+                <p>. 侦听音乐播放器BackgroundAudioManager实例</p>
+                <p>. 播放、暂停：播放、暂停通过背景音频API实现</p>
+                <p>. 上一首、下一首：通过播放列表索引 indMusic 增加或减少实现</p>
+                <p>. 进度调节：利用滑块组件 slider 实现</p>
+                <p>. 播放时长、总时长：获取音频实例的相关属性</p>
+                <p>. 音量调节：略</p>
+                <p>. 封面图片特效：略</p>
+                <p>. 其它设计：略</p>
+            </dd>
+            <dt>参考效果</dt>
+            <dd>除了必要的登录凭证信息外，其它可自由设计</dd>
+            <dd>
+                <figure class="img-sn">
+                    <img src="./imgs/case0.png" alt="">
+                    <figcaption>登录 login</figcaption>
+                </figure>
+            </dd>
+            <dd>更多效果</dd>
+            <dd>
+                <figure class="img-sn">
+                    <img src="../vue/imgs/login.png" alt="">
+                    <figcaption>登录 login</figcaption>
+                </figure>
+            </dd>
+            <dt>要求</dt>
+            <dd>
+                <div>按照以上步骤分别完成设计与开发</div>
+                <div>规范开发；独立完成；突出个人设计特点和风格</div>
+                <div>实验报告：采用学院统一下发的格式文件，以图片或代码形式展示并说明实施过程、各部分功能、具体内容和实现细节，并按照要求命名，最后导出为PDF，提交个人学习通作业</div>
+                <div>未按要求在规定时间内提交视为无效，不得分</div>
+                <div>相关格式规范，请参考 <a href="../course/paper.html">论文格式规范 Paper Prettier</a></div>
+            </dd>
+            <dt>特别提示</dt>
+            <dd>实验报告除了各要素齐全外，特别要体现</dd>
+            <dd>
+                <div>接口文档和字段说明；其中信息字段info要体现个人信息或小组信息</div>
+                <div>结构WXML - 代码</div>
+                <div>逻辑js - 代码</div>
+                <div>效果 - 截图，统一宽度，高度随内容、有编号、有说明标题，如：图1 页面布局</div>
             </dd>
         </dl>
+        <div class="chap">参考代码</div>
+        <dl></dl>
         <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
     </div>
 </body>
