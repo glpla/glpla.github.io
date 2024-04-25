@@ -39,24 +39,51 @@
             </dd>
             <dd>第二阶段 音乐播放器</dd>
             <dd>
-                <div>数据支持</div>
-                <p>baseUrl：服务器地址，便于切换数据源</p>
-                <p>. 播放列表 lists；节点信息参考如下</p>
+                <table class="tbl-sn">
+                    <caption>数据支持</caption>
+                    <tr>
+                        <th>变量</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>baseUrl</td>
+                        <td>服务器地址，便于切换数据源</td>
+                    </tr>
+                    <tr>
+                        <td>lists</td>
+                        <td>播放列表；节点信息参考如下述代码</td>
+                    </tr>
+                    <tr>
+                        <td>indMusic</td>
+                        <td>播放列表索引 </td>
+                    </tr>
+                    <tr>
+                        <td>isPause</td>
+                        <td>播放状态 </td>
+                    </tr>
+                    <tr>
+                        <td>valueMusic</td>
+                        <td>播放进度</td>
+                    </tr>
+                    <tr>
+                        <td>durationMusic</td>
+                        <td>播放时长</td>
+                    </tr>
+                </table>
+            </dd>
+            <dd>
                 <pre>
     {
         "id": 5,
         "title": "微风细雨",
         "singer": "wang",
         "src": "/music/wang.mp3",
-        "coverImgUrl": "/avatar/avatar5.png"
+        "coverImgUrl": "/music/wangfei.png"
     }</pre>
-                <p>. 播放列表索引 indMusic</p>
-                <p>. 播放状态 isPause</p>
-                <p>. 播放进度 valueMusic</p>
-                <p>. 播放时长 durationMusic</p>
+
                 <div>主要过程</div>
                 <p>. 创建项目或页面，修改基本配置信息</p>
-                <p>. 导入音频素材列表；以大树小站为例</p>
+                <p>. 导入音频素材列表</p>
                 <pre>
 wx.request({
     url: 'http://127.0.0.1:3000/utils/data/song_list.json',
@@ -67,11 +94,94 @@ wx.request({
         })
     }
 });</pre>
-                <p>. 创建音乐播放器BackgroundAudioManager实例</p>
-                <p>. 侦听音乐播放器BackgroundAudioManager实例</p>
+                <p>. 创建音乐播放器BackgroundAudioManager实例；可以在Page外面声明；也可以在生命周期函数函数中声明</p>
+                <p>. 侦听音乐播放器BackgroundAudioManager实例；执行播放、暂停、结束、进度更新等API，调整页面相关数据</p>
+                <pre>
+BGM.onPlay(() => {
+    console.log('play');
+    this.setData({
+        dur: util.minsec(BGM.duration),
+        isPause: true
+    })
+})
+BGM.onPause(() => {
+    console.log('pause');
+    this.setData({
+        isPause: false
+    })
+})
+BGM.onEnded(() => {
+    console.log('ended');
+    this.setData({
+        isPause: false,
+        dur:'00:00',
+        cur:'00:00'
+    })
+})
+BGM.onError(() => {
+    console.log('error');
+})
+
+//后期使用wxs计算
+BGM.onTimeUpdate(() => {
+    console.log('time updating');
+    this.setData({
+        duration: BGM.duration,
+        value: BGM.currentTime
+        dur: util.minsec(BGM.duration),
+        cur: util.minsec(BGM.currentTime),
+    })
+})</pre>
                 <p>. 播放、暂停：播放、暂停通过背景音频API实现</p>
-                <p>. 上一首、下一首：通过播放列表索引 indMusic 增加或减少实现</p>
-                <p>. 进度调节：利用滑块组件 slider 实现</p>
+                <pre>
+playBGM() {
+    this.initSong()
+},
+pauseBGM() {
+    BGM.pause()
+}
+stopBGM() {
+    BGM.stop()
+}</pre>
+                <p>. 音频播放函数；为音频实例BGM指定title、src、singer等基本参数；如果自动播放，可以在获取列表后，立即执行</p>
+                <pre>
+initSong() {
+    BGM.title = this.data.lists[this.data.ind].title
+    BGM.singer = this.data.lists[this.data.ind].singer
+    BGM.src = this.data.baseUrl + this.data.lists[this.data.ind].src
+}</pre>
+                <p>. 上一首、下一首：通过播放列表索引 indMusic 增加或减少实现；每次更新，自动播放initSong()</p>
+                <pre>
+prevSong() {
+    let indMusic = this.data.indMusic
+    if (indMusic > 0) {
+        indMusic--
+        this.setData({
+        indMusic: indMusic
+        })
+        this.initSong()
+    }
+    console.log(indMusic);
+},
+nextSong() {
+    let indMusic = this.data.indMusic
+    if (indMusic &lt; this.data.lists.length - 1) {
+        indMusic++
+        this.setData({
+        indMusic: indMusic
+        })
+        this.initSong()
+    }
+    console.log(indMusic);
+}</pre>
+                <p>. 进度调节：利用滑块组件 slider 实现；拖动后，相应的调整BGM的播放进度seek</p>
+                <pre>
+sliderChange(e) {
+    this.setData({
+        value: e.detail.value
+    })
+    BGM.seek(e.detail.value)
+}</pre>
                 <p>. 播放时长、总时长：获取音频实例的相关属性</p>
                 <p>. 音量调节：略</p>
                 <p>. 封面图片特效：略</p>
@@ -104,17 +214,14 @@ wx.request({
                 <div>未按要求在规定时间内提交视为无效，不得分</div>
                 <div>相关格式规范，请参考 <a href="../course/paper.html">论文格式规范 Paper Prettier</a></div>
             </dd>
-            <dt>特别提示</dt>
-            <dd>实验报告除了各要素齐全外，特别要体现</dd>
+            <dt>拓展</dt>
             <dd>
-                <div>接口文档和字段说明；其中信息字段info要体现个人信息或小组信息</div>
-                <div>结构WXML - 代码</div>
-                <div>逻辑js - 代码</div>
-                <div>效果 - 截图，统一宽度，高度随内容、有编号、有说明标题，如：图1 页面布局</div>
+                <div>自动播放：数据加载完毕后自动播放</div>
+                <div>列表循环：当前播放结束后，自动播放下一首；如果已经在最后一首，则播放第一首</div>
+                <div>播放列表展示</div>
+                <div>UI优化</div>
             </dd>
         </dl>
-        <div class="chap">参考代码</div>
-        <dl></dl>
         <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
     </div>
 </body>
