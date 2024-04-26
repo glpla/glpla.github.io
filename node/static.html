@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>静态资源服务器</title>
-  <link rel="stylesheet" href="../../css/reset2024.css">
-  <link rel="stylesheet" href="../../css/common2024.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
+  <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
 </head>
 
@@ -21,24 +18,24 @@
   <dl>
     <dd>创建静态资源服务器，供应用程序使用，如在线图片、在线视频、在线音乐</dd>
     <dd>没有使用原生http模块，而是依托express框架创建</dd>
-    <dd>更多信息，请访问 <a href="https://www.expressjs.com.cn/" class="link">Express.js</a></dd>
+    <dd>更多信息，请访问 <a href="https://www.expressjs.com.cn/">Express.js</a></dd>
     <dt>基本步骤</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>创建服务器目录</div>
       <div>准备数据</div>
       <div>创建服务器脚本</div>
       <div>开启服务</div>
     </dd>
     <dt>具体过程</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>创建一个空白文件夹作为服务器目录，如server</div>
       <div>在服务器目录创建资源文件夹，如public，存放图片imgs、视频video、数据data等资源；建议不同类型的资源存放在不同的子目录</div>
-      <div>在服务器目录打开CMD命令行窗口 - 右键选择"在终端中打开"或在资源管理器顶部地址栏输入cmd并回车</div>
-      <p>初始化，用来创建package.json文件</p>
+      <div>在服务器目录打开CMD命令行窗口：右键选择"在终端中打开"或在资源管理器顶部地址栏输入 CMD 并回车</div>
+      <p>初始化，用来创建 package.json 文件</p>
       <pre class="code">npm init</pre>
-      <p><span class="warn">推荐</span>使用-y命令行参数，按照默认配置创建package.json，如入口文件默认是index.js</p>
+      <p><span class="warn">推荐</span>使用 -y 命令行参数，按照默认配置创建 package.json，如入口文件默认是index.js</p>
       <pre class="code">npm init -y</pre>
-      <p>创建package.json文件，如下</p>
+      <p>创建的 package.json 文件内容如下</p>
       <pre class="code">
 {
   "name": "server",
@@ -52,9 +49,9 @@
   "author": "",
   "license": "ISC"
 }        </pre>
-      <div>在终端中安装express框架</div>
+      <div>在终端中安装 express 框架</div>
       <pre class="code">npm i express --save</pre>
-      <div>创建服务器脚本 - 在服务器目录下，新建一个js文件，命名为index.js，编辑如下</div>
+      <div>创建服务器脚本：在服务器目录下，新建一个js文件，命名为index.js，编辑如下</div>
       <pre class="code">
 //引入express
 const express = require('express');
@@ -74,7 +71,7 @@ app.listen(port, res => {
       <div>在终端中开启服务</div>
       <p>默认命令</p>
       <pre class="code">node index.js</pre>
-      <p>自定义命令启动服务 - 修改package.json里script</p>
+      <p>自定义命令启动服务：修改package.json里script</p>
       <pre class="code">
 "scripts": {
   "start":"node index.js"
@@ -87,7 +84,7 @@ app.listen(port, res => {
       <p>用户在微信小程序项目中使用，如&lt;image&gt;组件</p>
       <pre class="code">&lt;image src="http://127.0.0.1:3000/资源路径和名字" alt=""&gt;</pre>
     </dd>
-    <dd class="tips">日常开发使用Vs Code完成</dd>
+    <dd class="tips">日常开发建议使用Vs Code完成</dd>
     <dt>进阶</dt>
     <dd>访问服务器根目录，渲染服务器特定页面，如主页，给出操作提示</dd>
     <dd>思路：创建html页面，指定路由；读取并返回主页；需要fs的支持</dd>

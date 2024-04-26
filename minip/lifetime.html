@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生命周期函数 Lifetime</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
@@ -27,15 +24,13 @@
         <dd>- 小程序app的启动 → 运行 → 关闭</dd>
         <dd>- 页面page的加载 → 渲染 → 卸载</dd>
         <dd>小程序提供的生命周期函数按次序自动执行</dd>
-        <dt>app.js中的生命周期函数</dt>
+        <dt>app.js中</dt>
         <dd>onLaunch()</dd>
         <dd>onShow()</dd>
         <dd>onHide()</dd>
         <dd>onError()</dd>
         <dd>
-            <figure class="code">
-                <figcaption>app生命周期函数</figcaption>
-                <pre>
+            <pre>
 App({
     globalData: {
         //全局数据
@@ -57,35 +52,35 @@ App({
         console.error(msg)
     }
 })</pre>
-            </figure>
         </dd>
-        <dt>page中的生命周期函数</dt>
+        <dt>page</dt>
         <dd>onLoad()</dd>
-        <dd>onReady()</dd>
         <dd>onShow()</dd>
+        <dd>onReady()</dd>
         <dd>onHide()</dd>
         <dd>onUnload()</dd>
         <dd>
-            <figure class="code">
-                <figcaption>page生命周期函数</figcaption>
-                <pre>
+            <pre>
 //在Page外面获取app实例
 const app = getApp()
 Page({
     data: {
     },
     onLoad(option) {
+        //1
         //页面加载时触发
         //初始化页面数据
         //获取页面传参
         //1个页面只调用1次
     },
+    onShow() {
+        //2
+        //可以多次触发
+    },
     onReady() {
+        //3
         //页面初次渲染完毕后触发
         //可以与视图层交互，如修改导航栏标题
-    },
-    onShow() {
-        //可以多次触发
     },
     onHide() {
         //可以多次触发
@@ -94,7 +89,6 @@ Page({
         //触发1次
     }
 })</pre>
-            </figure>
         </dd>
         <dd class="tips">老版本的微信开发工具中的工具栏有个"切后台"，用于调试前台和后台业务逻辑</dd>
     </dl>
