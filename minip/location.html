@@ -156,7 +156,7 @@
             <pre>
 "permission": {
     "scope.userLocation": {
-        "desc": "你的位置信息将用于小程序位置接口的效果展示" // 高速公路行驶持续后台定位
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
 }</pre>
             <pre>
@@ -218,7 +218,7 @@ changeRegion(e){
             <p>开发工具和预览、真机调试有差别</p>
         </dd>
     </dl>
-    <div class="chap">腾讯地图LBS API</div>
+    <div class="chap">腾讯地图 LBS API</div>
     <dl>
         <dt>环境准备</dt>
         <dd>借助腾讯地图API的使用和实现</dd>
@@ -249,7 +249,11 @@ const qqmapsdk = new QQMapWX({
     key: '申请的key'
 });</pre>
         </dd>
-        <dd class="example-sn">根据获得的经纬度，逆解析为城市</dd>
+        <dd class="tips">微信小程序JavaScript
+            SDK通过对腾讯位置服务WebServiceAPI接口进行封装而形成，因此和直接调用WebSerivceAPI的限制是等同的；建议使用SDK。因为有具体的案例可以参考</dd>
+        <dt>逆地址解析</dt>
+        <dd>根据获得的经纬度，逆地址解析为城市</dd>
+        <dd><a href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodReverseGeocoder">SDK 逆地址解析</a></dd>
         <dd>
             <pre>
 wx.getLocation({
@@ -279,93 +283,71 @@ wx.getLocation({
     complete: () => console.log('get city done')
 })</pre>
         </dd>
-        <dd class="example-sn">使用腾讯地图SDK查找酒店</dd>
+        <dd><a href="https://lbs.qq.com/service/webService/webServiceGuide/address/Gcoder">WebService API 逆地址解析</a>
+        </dd>
+        <dd>
+            <pre>
+wx.request({
+    url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=23.02067,113.75179&key=U6QBZ-ROQ3W-PFMRZ-O4VA5-LZOKQ-G7FZA&get_poi=1',
+    success: res => {
+        console.log(res);
+    },
+    fail: err => console.log(err)
+})</pre>
+        </dd>
+        <dd>或</dd>
+        <dd>
+            <pre>
+wx.request({
+    url: 'https://apis.map.qq.com/ws/geocoder/v1/',
+    data: {
+        location: '23.02067,113.75179',
+        key: 'U6QBZ-ROQ3W-PFMRZ-O4VA5-LZOKQ-G7FZA',
+        get_poi: 1
+    },
+    success: res => {
+        console.log(res);
+    },
+    fail: err => console.log(err)
+})</pre>
+        </dd>
+        <dt>地点搜索</dt>
+        <dd>使用关键字 keyword 查找酒店</dd>
+        <dd><a href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodSearch">SDK 地点搜索</a></dd>
         <dd>
             <pre>
 qqmapsdk.search({
     keyword: '酒店',
-    success: function (res) {
+    success: (res) => {
         console.log(res);
     },
-    fail: function (res) {
-        console.log(res);
+    fail: (err) => {
+        console.log(err);
     },
-    complete: function (res) {
-        console.log(res);
+    complete: () => {
+        console.log('search done');
     }
 });</pre>
         </dd>
-        <dd class="example-sn">完善地图酒店搜索功能；更多信息，请访问<a
-                href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodSearch">官方文档</a></dd>
-        <dd class="sn">
-            <div>添加标记事件bindmarkertap</div>
+        <dd><a href="https://lbs.qq.com/service/webService/webServiceGuide/search/webServiceSearch">WebService API
+                地点搜索</a>；需要指定搜索范围boundary，包括搜索的经纬度和半径</dd>
+        <dd>
             <pre>
-&lt;map longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" show-location show-scale show-compass bindregionchange="changeRegion" bindmarkertap="doMarker"/&gt;</pre>
-            <div>封装酒店搜索函数getHotel(long, lati)：借助系统函数区域改变regionChange()获取的结束点end位置来更新当前区域的酒店信息</div>
-            <pre>
-getHotel(long, lati) {
-    qqmapsdk.search({
-        keyword: '学校',
-        location: {
-            longitude: long,
-            latitude: lati
-        },
-        success: res => {
-            console.log(res);
-            let markers = []
-            res.data.forEach((marker, ind) => {
-                markers.push({
-                    id: ind,
-                    longitude: marker.location.lng,
-                    latitude: marker.location.lat,
-                    iconPath: '/utils/imgs/marker.png',
-                    callout: {
-                        content: marker.title,
-                        display: 'ALWAYS'
-                    },
-                    label: {
-                        content: marker.category
-                    },
-                    width: 32,
-                    height: 32
-                })
-            })
-            markers.push({
-                id: 0,
-                longitude: long,
-                latitude: lati,
-                iconPath: '/utils/imgs/marker.png',
-                callout: {
-                    content: 'bubble',
-                    display: 'ALWAYS'
-                },
-                label: {
-                    content: 'label',
-                },
-                width: 32,
-                height: 32
-            })
-            this.setData({
-                markers
-            })
-        }
-    })
-}</pre>
-            <div>移动地图时，更新函数</div>
-            <pre>
-regionChange(e) {
-    if (e.type == 'end') {
-        this.getHotel(e.detail.centerLocation.longitude, e.detail.centerLocation.latitude)
-    }
-}</pre>
-            <div>通过标记id获取标记点信息</div>
-            <pre>
-doMarker(e){
-    console.log(e);
-}</pre>
-            <div>预览或在真机中查看效果</div>
+wx.request({
+    url: 'https://apis.map.qq.com/ws/place/v1/search',
+    data: {
+        keyword: '酒店',
+        key: 'U6QBZ-ROQ3W-PFMRZ-O4VA5-LZOKQ-G7FZA',
+        boundary: 'nearby(23.02067,113.75179,1000,1)'
+    },
+    success: res => {
+        console.log(res);
+    },
+    fail: err => console.log(err),
+    complete: () => console.log('search done')
+})</pre>
         </dd>
-        <dd class="tips">开发文档的HelloWorld示例中提供有上述链接</dd>
+        <dd class="example-sn">配合地图 &lt;map&gt; 完善地图餐厅搜索功能；详情请查看 <a href="./case9.html">美食地图</a></dd>
     </dl>
     <div class="chap">百度地图</div>
     <dl>

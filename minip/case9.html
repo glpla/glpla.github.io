@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>综合项目 Project</title>
+    <title>美食地图 Food</title>
     <link rel="stylesheet" href="../css/exp.css">
     <link rel="stylesheet" href="../css/code.css">
     <base target="_blank">
@@ -15,19 +15,159 @@
     <header>
     </header>
     <div class="container">
-        <h1>Shopping</h1>
-        <h4></h4>
-        <dl>
-            <dt><span>home</span> 主页</dt>
-            <dd class="number">
-                <div>搜索区 search</div>
-                <div>轮播区 swiper</div>
-                <div>导航区 navigation</div>
-                <div>内容区 content</div>
-                <div>标签栏 tabBar</div>
+        <h1>美食地图</h1>
+        <h4>Food</h4>
+        <dl class="number-mul-sn">
+            <dt>目的</dt>
+            <dd>
+                <div>掌握地图组件&lt;map&gt;的使用</div>
+                <div>掌握页面滚动API的使用</div>
+                <div>掌握腾讯地图LBS的使用</div>
+                <div>进一步熟悉网络请求的基本过程</div>
             </dd>
-            <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+            <dt>内容</dt>
+            <dd>
+                <div>素材准备</div>
+                <div>项目创建</div>
+                <div>腾讯LBS账号申请</div>
+                <div>腾讯LBS 微信小程序SDK下载</div>
+                <div>综合运用</div>
+            </dd>
+            <dt>步骤</dt>
+            <dd class="sn">
+                <div>素材准备 - 标记图片等；略</div>
+                <div>项目创建 - 略</div>
+                <div>账号申请 - 略</div>
+                <div>SDK下载并引入 - 略</div>
+                <div>打开项目美食列表 <span class="warn">首页</span>，增加2个按钮，可以使用字体图标，固定定位fixed在视口右下角</div>
+                <p>增加一个返回顶部按钮，绑定事件toTop，点击后，返回到美食列表页</p>
+                <p>增加一个跳转地图按钮，绑定事件toMap，点击后，跳转到美食地图页面</p>
+                <pre>
+toTop() {
+    wx.pageScrollTo({
+        scrollTop: 0,
+        duration: 300,
+        success: res => console.log(res),
+        fail: err => console.log(err),
+        complete: () => console.log('scroll done')
+    })
+},
+toMap() {
+    wx.navigateTo({
+        url: '../map/map',
+    })
+}</pre>
+                <figure class="img-sn">
+                    <img src="./imgs/text1.png" alt="">
+                    <figcaption>返回顶部和跳转到地图页</figcaption>
+                </figure>
+                <div><span class="warn">增加</span> 一个页面：地图 map；创建 wxml 结构如下</div>
+                <pre>
+&lt;map 
+    longitude="{{longitude}}" 
+    latitude="{{latitude}}" 
+    markers="{{markers}}" 
+    show-location 
+    show-scale 
+    show-compass 
+    bindregionchange="changeRegion" 
+    bindmarkertap="doMarker"/&gt;</pre>
+                <div>地面页面逻辑 - 页面加载时，获取位置并调用 getHotel搜索餐厅，并展示搜索结果</div>
+                <pre>
+onLoad(options) {
+    wx.getLocation({
+        type: 'gcj02',
+        success: res => {
+            console.log(res);
+            this.setData({
+                latitude: res.latitude,
+                longitude: res.longitude
+            })
+            this.getHotel(res.longitude, res.latitude)
+        },
+        fail: err => console.log('err', err),
+        complete: () => console.log('get food done')
+    })
+}</pre>
+                <div>使用经纬度封装搜索函数getHotel(long, lati)</div>
+                <pre>
+getHotel(long, lati) {
+    qqmapsdk.search({
+        keyword: '餐厅',
+        location: {
+            longitude: long,
+            latitude: lati
+        },
+        success: res => {
+            console.log(res);
+            let markers = []
+            res.data.forEach((marker, ind) => {
+                markers.push({
+                    id: ind,
+                    longitude: marker.location.lng,
+                    latitude: marker.location.lat,
+                    iconPath: '/utils/marker.png',
+                    callout: {
+                        content: marker.title,
+                        display: 'ALWAYS'
+                    },
+                    label: {
+                        content: marker.category
+                    },
+                    width: 32,
+                    height: 32
+                })
+            })
+            markers.push({
+                id: 0,
+                longitude: long,
+                latitude: lati,
+                iconPath: '/utils/marker.png',
+                callout: {
+                    content: 'bubble',
+                    display: 'ALWAYS'
+                },
+                label: {
+                    content: 'label',
+                },
+                width: 32,
+                height: 32
+            })
+            this.setData({
+                markers
+            })
+        }
+    })
+}</pre>
+                <div>移动地图时，数借助系统函数区域改变changeRegion()获取的结束点end位置来更新当前区域的餐厅信息</div>
+                <pre>
+changeRegion(e) {
+    if (e.type == 'end') {
+        this.getHotel(e.detail.centerLocation.longitude, e.detail.centerLocation.latitude)
+    }
+}</pre>
+                <div>通过标记id获取标记点信息</div>
+                <pre>
+doMarker(e){
+    console.log(e);
+}</pre>
+                <div>预览或在真机中查看效果</div>
+                <figure class="img-sn">
+                    <img src="./imgs/text2.png" alt="">
+                    <img src="./imgs/text3.png" alt="">
+                    <figcaption>美食地图</figcaption>
+                </figure>
+            </dd>
+            <dt>要求</dt>
+            <dd>
+                <div>按照以上步骤分别完成设计与开发</div>
+                <div>规范开发；独立完成；突出个人设计特点和风格</div>
+                <div>实验报告：采用学院统一下发的格式文件，以图片或代码形式展示并说明实施过程、各部分功能、具体内容和实现细节，并按照要求命名，最后导出为PDF，提交个人学习通作业</div>
+                <div>未按要求在规定时间内提交视为无效，不得分</div>
+                <div>相关格式规范，请参考 <a href="../course/paper.html">论文格式规范 Paper Prettier</a></div>
+            </dd>
         </dl>
+        <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
     </div>
 </body>
 
