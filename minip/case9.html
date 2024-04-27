@@ -39,9 +39,13 @@
                 <div>项目创建 - 略</div>
                 <div>账号申请 - 略</div>
                 <div>SDK下载并引入 - 略</div>
-                <div>打开项目美食列表 <span class="warn">首页</span>，增加2个按钮，可以使用字体图标，固定定位fixed在视口右下角</div>
+                <div>打开项目美食列表项目</div>
+                <p><span class="warn">增加</span> 一个地图页面 map</p>
+                <p><span class="warn">增加</span> 一个优惠券页面 promotion</p>
+                <div>打开<span class="warn">首页</span>页面</div>
                 <p>增加一个返回顶部按钮，绑定事件toTop，点击后，返回到美食列表页</p>
                 <p>增加一个跳转地图按钮，绑定事件toMap，点击后，跳转到美食地图页面</p>
+                <p>增加优惠券内容，单击跳转到优惠券活动页面 - 包括新到、快过期、满折券、满减券、立减券等；略</p>
                 <pre>
 toTop() {
     wx.pageScrollTo({
@@ -52,16 +56,23 @@ toTop() {
         complete: () => console.log('scroll done')
     })
 },
+
 toMap() {
     wx.navigateTo({
         url: '../map/map',
+    })
+},
+
+toPromotion() {
+    wx.navigateTo({
+        url: '../promotion/promotion',
     })
 }</pre>
                 <figure class="img-sn">
                     <img src="./imgs/text1.png" alt="">
                     <figcaption>返回顶部和跳转到地图页</figcaption>
                 </figure>
-                <div><span class="warn">增加</span> 一个页面：地图 map；创建 wxml 结构如下</div>
+                <div>打开<span class="warn">地图</span>页面，创建 wxml 结构如下</div>
                 <pre>
 &lt;map 
     longitude="{{longitude}}" 
@@ -89,7 +100,7 @@ onLoad(options) {
         complete: () => console.log('get food done')
     })
 }</pre>
-                <div>使用经纬度封装搜索函数getHotel(long, lati)</div>
+                <div>使用经纬度封装搜索函数 getHotel(long, lati)</div>
                 <pre>
 getHotel(long, lati) {
     qqmapsdk.search({
@@ -139,7 +150,7 @@ getHotel(long, lati) {
         }
     })
 }</pre>
-                <div>移动地图时，数借助系统函数区域改变changeRegion()获取的结束点end位置来更新当前区域的餐厅信息</div>
+                <div>移动地图时，数借助系统函数区域改变 changeRegion() 获取的结束点end位置来更新当前区域的餐厅信息</div>
                 <pre>
 changeRegion(e) {
     if (e.type == 'end') {
@@ -165,6 +176,10 @@ doMarker(e){
                 <div>实验报告：采用学院统一下发的格式文件，以图片或代码形式展示并说明实施过程、各部分功能、具体内容和实现细节，并按照要求命名，最后导出为PDF，提交个人学习通作业</div>
                 <div>未按要求在规定时间内提交视为无效，不得分</div>
                 <div>相关格式规范，请参考 <a href="../course/paper.html">论文格式规范 Paper Prettier</a></div>
+            </dd>
+            <dt>拓展</dt>
+            <dd>
+                <div>修改搜索函数为 getHotel(long, lati, keyword)，根据参数 keyword 实现指定内容的搜索</div>
             </dd>
         </dl>
         <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

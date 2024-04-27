@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滚动 Scroll</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>滚动</h1>
+        <span>Scroll</span>
+    </header>
+    <dl>
+        <dd>实现页面或部分内容的滚动</dd>
+        <dt>wx.pageScrollTo(Object object)</dt>
+        <dd>将页面滚动到目标位置，支持 <span class="warn">选择器</span> 和 <span class="warn">滚动距离</span> 两种方式定位</dd>
+        <dd>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/scroll/wx.pageScrollTo.html">官方文档
+                - pageScrollTo</a></dd>
+        <dd>
+            <table class="tbl-sn">
+                <caption>pageScrollTo常用属性</caption>
+                <tr>
+                    <th>参数</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>scrollTop</td>
+                    <td>滚动到页面的目标位置；单位 px</td>
+                </tr>
+                <tr>
+                    <td>duration</td>
+                    <td>滚动动画时长；单位 ms；默认300</td>
+                </tr>
+                <tr>
+                    <td>selector</td>
+                    <td>选择器；仅仅支持ID、类、后代、并列等基本选择器</td>
+                </tr>
+                <tr>
+                    <td>offsetTop</td>
+                    <td>偏移距离，需要和 selector 参数搭配使用，可以滚动到 selector 加偏移距离的位置，单位 px</td>
+                </tr>
+            </table>
+        </dd>
+        <dd class="example-sn">返回顶部 - 将某个元素固定定位在页面底部，绑定事件；API使用如下</dd>
+        <dd>使用距离</dd>
+        <dd>
+            <pre>
+wx.pageScrollTo({
+    scrollTop: 0,
+    duration: 300,
+    success: res => console.log(res),
+    fail: err => console.log(err),
+    complete: () => console.log('scroll done')
+})</pre>
+        </dd>
+        <dd>使用选择器 - 顶部容器类为container</dd>
+        <dd>
+            <pre>
+wx.pageScrollTo({
+    selector:'.container',
+    duration: 300,
+    success: res => console.log(res),
+    fail: err => console.log(err),
+    complete: () => console.log('scroll done')
+})</pre>
+        </dd>
+        <dd class="example-sn">返回到页面某个元素 - 不太适合使用距离，因为需要知道元素的位置</dd>
+        <dd>
+            <pre></pre>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>
