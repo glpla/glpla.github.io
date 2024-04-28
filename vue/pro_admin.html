@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>项目 管理页</title>
-  <link rel="stylesheet" href="../css/course.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/sn.css">
   <base target="_blank">
 </head>
@@ -26,12 +26,73 @@
         <div>订单管理</div>
         <div>评论管理</div>
       </dd>
+      <dt>前置知识</dt>
+      <dd>
+        <div>网络请求 Axios - GET、POST</div>
+        <div>wangeditor</div>
+        <div>XLSX</div>
+      </dd>
       <dt>开发环境</dt>
       <dd>
         <div>操作系统 Window 10+</div>
         <div>文本编辑器 Vs Code</div>
         <div>谷歌浏览器 Chrome</div>
         <div>Node.js</div>
+      </dd>
+      <dt>参考代码</dt>
+      <dd>
+        <div>排序 - 按照大小</div>
+        <pre>
+const sortUp = (key) => {
+  data.lists.sort((a, b) => {
+    return a[key] - b[key]
+  })
+}
+const sortDown = (key) => {
+  data.lists.sort((a, b) => {
+    return b[key] - a[key]
+  })
+}</pre>
+        <div>排序 - 按照字符排名</div>
+        <pre>
+const sortStrUp = (key) => {
+  data.lists.sort((a, b) => {
+    return a[key].localeCompare(b[key])
+  })
+}
+const sortStrDown = (key) => {
+  data.lists.sort((a, b) => {
+    return b[key].localeCompare(a[key])
+  })
+}</pre>
+        <div>订单导入</div>
+        <pre>
+import { ref } from 'vue';
+import * as XLSX from 'xlsx/xlsx.mjs';
+let order = ref([])
+const selExcel = (e) => {
+  const file = e.target.files[0]
+  const fr = new FileReader()
+  fr.readAsArrayBuffer(file)
+  fr.onload = (ev) => {
+    const res = ev.target.result
+    const workbook = XLSX.read(res, { type: "binary" })
+    const wsName = workbook.SheetNames[0]
+    const sheetJson = XLSX.utils.sheet_to_json(workbook.Sheets[wsName])
+    console.log(sheetJson);
+    order.value = sheetJson
+  }
+}</pre>
+        <div>订单导出</div>
+        <pre>
+const outExcel = () => {
+  if (tbl.value) {
+    let workbook = XLSX.utils.table_to_book(tbl.value);
+    XLSX.writeFile(workbook, "order.xlsx");
+  } else {
+    console.log("tbl is null");
+  }
+}</pre>
       </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

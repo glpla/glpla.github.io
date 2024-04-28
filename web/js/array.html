@@ -7,8 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>数组 Array</title>
   <link rel="stylesheet" href="../../css/common.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
   <base target="_blank">
 </head>
 
@@ -17,7 +15,7 @@
     <h1>数组</h1>
     <span>&commat;Array</span>
   </header>
-  <dl class="nav-cont">
+  <dl>
     <dt>声明</dt>
     <dd>直接赋值创建或构造函数创建</dd>
     <dd>
@@ -77,9 +75,12 @@ let [name, age = 18] = ['gl']</pre>
 let a = [1, 2, 3];
 let b = [...a];</pre>
     </dd>
+    <dd class="tips">如何清空数组？</dd>
+    <!-- <dd>设置length为0</dd>
+    <dd>使用splice删除数组元素：splice(0, len)</dd> -->
   </dl>
   <div class="chap">基本函数</div>
-  <dl class="nav-cont">
+  <dl>
     <dd>.数组既有栈的行为函数也有队列的行为函数</dd>
     <dd>.栈行为：先进后出 FILO；尾端操作；push() pop()</dd>
     <dd>.队列行为：先进先出 FIFO；头出尾进：push() shift()；使用 unshift()和 pop()方法，可以从相反的方向来模拟队列，即在数组的前端添加项，从数组末端移除项</dd>
@@ -168,29 +169,6 @@ function shuffle(arr) {
   return tmp;
 }</pre>
     </dd>
-    <dt>sort</dt>
-    <dd>排序函数</dd>
-    <dd>1. 普通数组arr</dd>
-    <dd>
-      <pre>
-//升序
-arr.sort((a, b) => a - b);
-//降序
-arr.sort((a, b) => b - a);</pre>
-    </dd>
-    <dd>2. 对象数组obj - 比较数字字段seg大小</dd>
-    <dd>
-      <pre>
-//升序
-obj.sort((a, b) => a.seg - b.seg);
-//降序
-obj.sort((a, b) => b.seg - a.seg);</pre>
-    </dd>
-  </dl>
-  <dl>
-    <dd class="example-sn">如何清空数组？</dd>
-    <!-- <dd>设置length为0</dd>
-    <dd>使用splice删除数组元素：splice(0, len)</dd> -->
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script>

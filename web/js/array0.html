@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>排序 Sort</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>排序</h1>
+    <span>&commat;Sort</span>
+  </header>
+  <dl>
+    <dd>按照一定规则对数据项排序</dd>
+    <dd>数组排序会修改原数组</dd>
+    <dt>sort()</dt>
+    <dd>数组的sort()默认是根据数据项 <span class="warn">ASCII值</span> 大小比较</dd>
+    <dd>
+      <pre>
+arr = [1,45,6,2,4,5]
+//升序
+arr.sort(); //[1, 2, 4, 45, 5, 6]
+//降序
+arr.sort().reverse(); //[6, 5, 45, 4, 2, 1]</pre>
+    </dd>
+    <dt>sort(a, b)</dt>
+    <dd>带参数的sort()可以按照参数进行排序</dd>
+    <dd>简单数组</dd>
+    <dd>
+      <pre>
+arr = [1,45,6,2,4,5]
+//升序
+arr.sort((a, b) => a - b);  //[1, 2, 4, 5, 6, 45]
+//降序
+arr.sort((a, b) => b - a);  //[45, 6, 5, 4, 2, 1]</pre>
+    </dd>
+    <dd>
+      <pre>
+let arr = ['banana', 'apple', 'cherry'];
+arr.sort();
+console.log(arr); // ['apple', 'banana', 'cherry']</pre>
+    </dd>
+    <dd>对象数组 - 按年纪age排序</dd>
+    <dd>
+      <pre>
+//升序
+obj.sort((a, b) => a['age'] - b['age']);
+//降序
+obj.sort((a, b) => b['age'] - a['age']);</pre>
+    </dd>
+    <dd>封装函数使用 - 根据key排序</dd>
+    <dd>
+      <pre>
+const sortUp = (key) => {
+  arr.sort((a, b) => {
+    return a[key] - b[key]
+  })
+}
+const sortDown = (key) => {
+  arr.sort((a, b) => {
+    return b[key] - a[key]
+  })
+}</pre>
+    </dd>
+    <dd class="tips">为什么连续测试结果相等？</dd>
+    <!-- <dd>数组的引用传值</dd> -->
+    <dt>字符数组排序</dt>
+    <dd>以上都是根据数字字段排序；如果需要根据字符排序，需要使用比较函数 <span class="warn">localeCompare()</span></dd>
+    <dd>按字符升序排序</dd>
+    <dd>
+      <pre>
+obj.sort((a, b) => {
+  return a.name.localeCompare(b.name)
+})    </pre>
+    </dd>
+    <dd>按字符降序排序</dd>
+    <dd>
+      <pre>
+obj.sort((a, b) => {
+  return b.name.localeCompare(a.name)
+})    </pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+    const sortUp = (key) => {
+      obj.sort((a, b) => {
+        return a[key] - b[key]
+      })
+    }
+    const sortDown = (key) => {
+      obj.sort((a, b) => {
+        return b[key] - a[key]
+      })
+    }
+    obj = [
+      { id: 100, name: 'gx', age: 18 },
+      { id: 101, name: 'cq', age: 15 },
+      { id: 102, name: 'gd', age: 20 },
+      { id: 103, name: 'sh', age: 19 }]
+    // sortDown('name')
+    obj.sort((a, b) => {
+      return b.name.localeCompare(a.name)
+    })
+    console.log(obj);
+  </script>
+</body>
+
+</html>

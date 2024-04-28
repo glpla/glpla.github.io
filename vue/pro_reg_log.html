@@ -36,18 +36,32 @@
       <div>谷歌浏览器 Chrome</div>
       <div>Node.js</div>
     </dd>
-  </dl>
-  <div class="chap">参考代码 - 注册</div>
-  <dl>
+    <dt>接口和用户信息</dt>
     <dd>使用用户名uname和学号usn及密码upass完成注册</dd>
     <dd>每个用户维护一个以学号命名的json文件，如20221081.json</dd>
     <dd>其它信息，如头像、性别、电邮、出生日期等在个人中心设置进一步完成</dd>
-    <dd>服务器端 - 代理接口为/user</dd>
     <dd>
       <table>
-        <caption>API</caption>
+        <caption>接口</caption>
         <tr>
-          <th>分类</th>
+          <th>接口</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>/user/register</td>
+          <td>注册</td>
+        </tr>
+        <tr>
+          <td>/user/login</td>
+          <td>登录</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>
+      <table>
+        <caption>用户信息</caption>
+        <tr>
+          <th>字段</th>
           <th>命名</th>
         </tr>
         <tr>
@@ -64,47 +78,65 @@
         </tr>
       </table>
     </dd>
-    <dd>S端 - 响应请求</dd>
+  </dl>
+  <div class="chap">参考代码 - 注册</div>
+  <dl>
+    <dt>S端 - 响应请求</dt>
+    <dd>先判断用户文件是否存在，再保存新的用户文件</dd>
     <dd>
       <pre>
 router.post('/register', (req, res) => {
-  console.log(req.body);
-  fs.writeFile('./public/data/' + req.body.usn + '.json', JSON.stringify(req.body), (error) => {
-    if (error) {
+  if (fs.existsSync('./public/data/' + req.body.usn + '.json')) {
+    res.json({
+      "err": 2,
+      "msg": 'user exist'
+    })
+  }
+  fs.writeFile('./public/data/' + req.body.usn + '.json', JSON.stringify(req.body), (err) => {
+    if (err) {
       console.log('保存文件失败')
       res.json({
-        err: 1,
-        msg: 'fail, server down',
+        "err": 1,
+        "msg": 'try later'
       })
     } else {
       console.log('保存文件成功')
       res.json({
-        err: 0,
-        msg: 'ok',
+        "err": 0,
+        "msg": 'register ok'
       })
     }
-  });
+  })
 })</pre>
     </dd>
-    <dd>B端- 请求函数</dd>
-    <dd>请进一步完善数据有效性的验证</dd>
+    <dt>B端- 请求函数</dt>
+    <dd>先验证数据有效性再提交</dd>
     <dd>
       <pre>
 const register = () => {
-  console.log('register hi');
   if (user.value.upass != passPheck.value) {
     console.log('password not match');
-    return
+    return;
   }
   if (!isAgree.value) {
     console.log('pls check');
-    return
+    return;
   }
   axios.post('/user/register', user.value)
     .then(res => {
-      console.log(res);
-      if (res.data.err == 0) {
-        console.log('ok');
+      switch (res.data.err) {
+        case 0:
+          console.log(res.data.msg);
+          //
+          break;
+        case 1:
+          console.log(res.data.msg);
+          //
+        break;
+        case 2:
+          console.log(res.data.msg);
+          //
+          break;
       }
       // flag.value = false
     })
@@ -126,11 +158,10 @@ const register = () => {
     <dd>
       <pre>
 router.get('/login', (req, res) => {
-  console.log('login', req.query);
   let file = fs.readFile('./public/data/' + req.query.usn + '.json', 'utf8', (err, data) => {
     if (err) {
       res.json({
-        err: 1,
+        err: 2,
         msg: 'fail, user not exsits',
       })
     } else {
@@ -142,7 +173,7 @@ router.get('/login', (req, res) => {
         })
       } else {
         res.json({
-          err: 2,
+          err: 1,
           msg: 'fail, password not match',
         })
       }
@@ -164,14 +195,16 @@ const login = () => {
     .then(res => {
       switch (res.data.err) {
         case 0:
-          console.log('login success');
-          // router.replace({ path: '/user', query: { bread: 'user' } })
+          console.log(res.data.msg);
+          //
           break;
         case 1:
-          console.log('user not exsits');
-          break;
+          console.log(res.data.msg);
+          //
+        break;
         case 2:
-          console.log('fail, password not match');
+          console.log(res.data.msg);
+          //
           break;
       }
     })
