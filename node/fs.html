@@ -26,22 +26,7 @@
       <pre>const { readFile } = require('fs')</pre>
     </dd>
     <dd>相关的API分为三类；我们主要采用回调风格的异步API；部分需要立刻拿到结果的场景，使用同步API</dd>
-    <dt>Promises API - Promises风格的API</dt>
-    <dd>The fs/promises API provides asynchronous file system methods that return promises.</dd>
-    <dd>
-      <pre>
-const { unlink } = require('node:fs/promises');
-
-(async function(path) {
-  try {
-    await unlink(path);
-    console.log(`successfully deleted ${path}`);
-  } catch (error) {
-    console.error('there was an error:', error.message);
-  }
-})('/tmp/hello');      </pre>
-    </dd>
-    <dt>Callback API - 回调API</dt>
+    <dt>Callback API - 回调|异步API</dt>
     <dd>The callback APIs perform all operations asynchronously, without blocking the event loop, then invoke a callback
       function upon completion or error.</dd>
     <dd>
@@ -67,13 +52,114 @@ try {
   // handle the error
 }        </pre>
     </dd>
+    <dt>Promises API - Promises风格的API</dt>
+    <dd>The fs/promises API provides asynchronous file system methods that return promises.</dd>
+    <dd>
+      <pre>
+const { unlink } = require('node:fs/promises');
+
+(async function(path) {
+  try {
+    await unlink(path);
+    console.log(`successfully deleted ${path}`);
+  } catch (error) {
+    console.error('there was an error:', error.message);
+  }
+})('/tmp/hello');</pre>
+    <dd>或使用.then()链式调用</dd>
+    </dd>
   </dl>
-  <div class="chap">常用函数 - 异步方式</div>
+  <div class="chap">常用函数</div>
   <dl>
-    <dt>fs.readFile(path[, options], (err, data)=>{})</dt>
+    <dd>
+      <table>
+        <caption>读文件</caption>
+        <tr>
+          <th>函数</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>fs.readFile(path[, options], callback)</td>
+          <td>读取文件内容</td>
+        </tr>
+        <tr>
+          <td>fs.readFileSync(path[, options])</td>
+          <td>同步读取文件内容</td>
+        </tr>
+        <tr>
+          <td>filehandle.createReadStream([options])</td>
+          <td>以流方式读取文件内容</td>
+      </table>
+    </dd>
+    <dd>1. fs.readFile(path[, options], (err, data)=>{})</dd>
     <dd>读文件；如果正常，读出文件内容；否则抛出错误信息</dd>
     <dd>callback是异常信息err和督导的数据data</dd>
-    <dd>data默认是二进制流；可以使用toString()转换或JSON.parse()解析为可读或特定格式；使用选项指定编码为utf-8可以直接解析为可读信息</dd>
+    <dd>data默认是二进制流；可以使用toString()转换或JSON.parse()解析为可读或特定格式</dd>
+    <dd>使用选项指定编码为utf-8可以直接解析为可读信息；默认就是utf-8</dd>
+    <dd class="example-sn">普通文件 txt</dd>
+    <dd>
+      <pre>
+const fs = require('fs')
+fs.readFile('./data/demo.txt', (err, date) => {
+  if (err) throw err;//res.send({msg:404})
+  console.log(date);
+  console.log(date.toString());
+})</pre>
+    </dd>
+    <dd>2. fs.readFileSync(path[, options])</dd>
+    <dd>同步方式 - 适合小文件；否则会造成阻塞</dd>
+    <dd>以同步方式读取json文件，可以马上拿到结果，再根据后续的业务进行操作，如分页返回</dd>
+    <dd>
+      <pre>
+let file = fs.readFileSync('./public/data/')
+console.log(file)
+console.log(file.toString())</pre>
+    </dd>
+    <dd>
+      <pre>
+const fs = require('fs');
+let data = fs.readFileSync('./data/rank2024.json')
+console.log(data);
+let json = JSON.parse(data)
+console.log(json);</pre>
+    </dd>
+    <dd>如果有数据请求，可以定制路由返回解析的数据</dd>
+    <dd>
+      <pre>
+server.get('/data', (req, res) => {
+  res.send(data)
+})</pre>
+    </dd>
+    <dd>3. filehandle.createReadStream([options])</dd>
+    <dd>还可以使用流的方式访问文件 - createStream()，使用事件监听读取的过程</dd>
+    <dd>
+      <pre>
+const fs = require('fs');
+const file = fs.createReadStream('./public/data/food - 副本.json');
+file.on('data', function (chunk) {
+  console.log(chunk, '12345');
+})
+file.on('end', function () {
+  console.log('end');
+})      </pre>
+    </dd>
+    <dd>Promises方式</dd>
+    <dd>
+      <pre>
+const { readFile, writeFile } = require('fs/promises')
+readFile('./public/data/todo.json')
+  .then(res => console.log(res.toString()))</pre>
+    </dd>
+    <dd>路径异常时抛出错误信息</dd>
+    <dd>
+      <pre>
+read file [Error: ENOENT: no such file or directory, open 'C:\Users\cnplaman\Desktop\server\data1\demo.txt'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'C:\\Users\\cnplaman\\Desktop\\server\\data1\\demo.txt'
+}</pre>
+    </dd>
     <dd class="example-sn">用户登录时，读取用户数据文件的业务</dd>
     <dd>
       <pre>
@@ -100,30 +186,31 @@ let file = fs.readFile('./public/data/' + req.query.usn + '.json', 'utf8', (err,
   }
 })      </pre>
     </dd>
-    <dd class="example-sn">普通文件 txt</dd>
     <dd>
-      <pre>
-const fs = require('fs')
-fs.readFile('./data/demo.txt', (err, date) => {
-  if (err) throw err;//res.send({msg:404})
-  console.log(date);
-  console.log(date.toString());
-})</pre>
+      <table>
+        <caption>写文件</caption>
+        <tr>
+          <th>函数</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>fs.writeFile(path[, options], callback)</td>
+          <td>写文件内容</td>
+        </tr>
+        <tr>
+          <td>fs.writeFileSync(path[, options])</td>
+          <td>同步写文件内容</td>
+        </tr>
+        <tr>
+          <td>filehandle.createWriteStream([options])</td>
+          <td>以流方式写文件内容</td>
+      </table>
     </dd>
-    <dd>路径异常时抛出错误信息</dd>
-    <dd>
-      <pre>
-read file [Error: ENOENT: no such file or directory, open 'C:\Users\cnplaman\Desktop\server\data1\demo.txt'] {
-  errno: -4058,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: 'C:\\Users\\cnplaman\\Desktop\\server\\data1\\demo.txt'
-}</pre>
-    </dd>
-    <dt>fs.writeFile(file, data[, options], err=>{})</dt>
+    <dd>1. fs.writeFile(file, data[, options], err=>{})</dd>
     <dd>默认以覆盖的方式写文件</dd>
     <dd>data是要写入的数据</dd>
-    <dd>options中，指定写标记flag和编码encoding等选项；默认写标记是w-覆盖，编码'utf8'</dd>
+    <dd>options中，指定写标记 <span class="warn">flag</span> 和编码 <span class="warn">encoding</span> 等选项；默认写标记是w - 覆盖，编码'utf8'
+    </dd>
     <dd>callback是异常信息err</dd>
     <dd>路径必须存在：系统不会显示/自动创建路径；但是如果写入文件不存在，会创建</dd>
     <dd>可以写入回车\n、制表位\t等转义符号</dd>
@@ -136,6 +223,8 @@ if (err) throw err//res write('404')
   console.log('write ok');
 })</pre>
     </dd>
+    <dd>2. fs.appendFile(path, data[, options], callback)</dd>
+    <dd>3. fs.appendFileSync(path, data[, options])</dd>
     <dt>fs.stat(path[, options], callback)</dt>
     <dd>文件/路径是否存在</dd>
     <dd>早期使用fs.existsSync(path)；该接口目前已经废弃</dd>
@@ -143,42 +232,7 @@ if (err) throw err//res write('404')
     <dd>用户对文件或目录的访问，可以用来判断目标是否存在</dd>
     <dd>__dirname：获取js文件所在目录</dd>
     <dt>fs.mkdir(path[, options], callback)</dt>
-    <dd>创建文件夹：fs.mkdir(path[, options], err=>{})</dd>
-    <dt>fs.rmdir(path[, options], callback)</dt>
-    <dd>删除文件夹：fs.rmdir(path[, options], err=>{})</dd>
-    <dt>fs.unlink(path, callback)</dt>
-    <dd>删除文件：fs.unlink(path, err=>{})</dd>
-    <dt>路径使用</dt>
-    <dd>读写文件的路径，以引用当前文件的文件为准，不是以当前文件为准</dd>
-    <dd>test.js内容如下，读取一个json文件</dd>
-    <dd>index.js主文件引入并使用test.js</dd>
-    <dd>test.js中指定的文件位置以index.js为参考</dd>
-    <dd>
-      <pre>
-fs.readFile('./public/data/form.json', (err, data) => {
-})</pre>
-    </dd>
-  </dl>
-  <div class="chap">其它操作</div>
-  <dl>
-    <dt>同步读取</dt>
-    <dd>以同步方式读取json文件，可以马上拿到结果，再根据后续的业务进行操作，如分页返回</dd>
-    <dd>
-      <pre>
-const fs = require('fs');
-let data = fs.readFileSync('./data/rank2024.json')
-console.log(data);
-let json = JSON.parse(data)
-console.log(json);</pre>
-    </dd>
-    <dd>如果有数据请求，可以定制路由返回解析的数据</dd>
-    <dd>
-      <pre>
-server.get('/data', (req, res) => {
-  res.send(data)
-})</pre>
-    </dd>
-    <dt>创建文件夹</dt>
+    <dd>创建文件夹</dd>
     <dd>如果存在，抛出异常，否则创建</dd>
     <dd>
       <pre>
@@ -186,7 +240,10 @@ const fs = require('fs')
 if (fs.existsSync('./wwww')) throw err
 fs.mkdirSync('./www')      </pre>
     </dd>
-    <dt>删除文件</dt>
+    <dt>fs.rmdir(path[, options], callback)</dt>
+    <dd>删除文件夹：fs.rmdir(path[, options], err=>{})</dd>
+    <dt>fs.unlink(path, callback)</dt>
+    <dd>删除文件：fs.unlink(path, err=>{})</dd>
     <dd>删除前，先判断文件是否存在</dd>
     <dd>删除成功，callback返回null；可以根据这个进行业务再判断</dd>
     <dd>
@@ -196,6 +253,43 @@ if (fs.existsSync('./wwww/demo.txt')) throw err
 fs.unlink('./www/demo.txt', (err) => {
   console.log(err);
 })      </pre>
+    </dd>
+    <dt>fs.rename(oldPath, newPath, callback)</dt>
+    <dd>改名</dd>
+  </dl>
+  <div class="chap">路径使用</div>
+  <dl>
+    <dt>join()</dt>
+    <dd>路径拼接</dd>
+    <dt>dirname()</dt>
+    <dd>获取路径名</dd>
+    <dt>extname()</dt>
+    <dd>获取扩展名</dd>
+    <dt>parse()</dt>
+    <dd>解析为对象，包括路径、文件扩展名、文件名等</dd>
+    <dd>
+      <pre>
+{
+  root: '',
+  dir: '.',
+  base: 'resource.js',
+  ext: '.js',
+  name: 'resource'
+}</pre>
+    </dd>
+    <dt>__filename</dt>
+    <dd>当前文件绝对路径</dd>
+    <dt>__dirname</dt>
+    <dd>当前目录绝对路径</dd>
+    <dt>注意</dt>
+    <dd>读写文件的路径，以引用当前文件的文件为准，不是以当前文件为准</dd>
+    <dd>test.js内容如下，读取一个json文件</dd>
+    <dd>index.js主文件引入并使用test.js</dd>
+    <dd>test.js中指定的文件位置以index.js为参考</dd>
+    <dd>
+      <pre>
+  fs.readFile('./public/data/form.json', (err, data) => {
+  })</pre>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

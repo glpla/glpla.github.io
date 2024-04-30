@@ -7,8 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>迭代函数 Array</title>
   <link rel="stylesheet" href="../../css/common.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
   <base target="_blank">
 </head>
 
@@ -22,7 +20,6 @@
     <dd>.对数组中的每一项执行给定函数。本质上与使用 for 循环迭代数组一样</dd>
     <dd>.返回：没有</dd>
     <dd>.原数组：不会被修改；仅仅使用数据</dd>
-    <dd>.函数声明式</dd>
     <dd>
       <pre>
 function foreach(arr, fn) {
@@ -40,7 +37,6 @@ foreach(arr, (item) => {
     <dd>.calls the predicate function one time for each element in the array</dd>
     <dd>.返回：符合条件的新数组</dd>
     <dd>.原数组：不会被修改</dd>
-    <dd>.函数声明式</dd>
     <dd>
       <pre>
 function filter(arr, fn) {
@@ -68,11 +64,9 @@ console.log(res);</pre>
     <dd>.对结果数组进行连接join可以转化为对字符串的使用，如作为HTML字符串更新或创建DOM</dd>
     <dd>.函数表达式</dd>
     <dd>.声明为const更安全，避免被修改</dd>
+    <dd>结果数组拼接字符串</dd>
     <dd>
-      <figure>
-        <figcaption>结果数组拼接字符串</figcaption>
-        <pre>let res = map((item, ind) => item.xx).join('');</pre>
-      </figure>
+      <pre>let res = map((item, ind) => item.xx).join('');</pre>
     </dd>
     <dt>every()</dt>
     <dd>.对数组中的每一项执行给定函数；如果该函数对 <span class="warn">每一项</span> 都返回 true，则返回 true</dd>
@@ -109,7 +103,20 @@ const some = (arr, fn) => {
 res = some(arr, v => v > 8);
 console.log(res);</pre>
     </dd>
-    <dd class="quote">
+    <dt>find</dt>
+    <dd>查找符合条件的 <span class="warn">第一个</span> 数据项</dd>
+    <dd>存在则返回；否则为undefined</dd>
+    <dd>
+      <pre>
+let arr = [0, 1, 2, 3, 4, 5]
+let res1 = arr.find(item => item > 3)
+console.log(res1);
+
+let obj = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' }]
+let res2 = obj.find(item => item.id === 11)
+console.log(res2);</pre>
+    </dd>
+    <dd class="tips">
       <div>1. 以上方法都不会修改数组中的包含的值</div>
       <div>2. 在这些方法中，最相似的是 every()和 some()，它们都用于查询数组中的每一项是否满足某个条件。
         对 every()来说，传入的函数必须对每一项都返回 true，这个方法才返回 true；否则，它就返回
@@ -118,7 +125,12 @@ console.log(res);</pre>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script>
-
+    let arr = [0, 1, 2, 3, 4, 5]
+    let res = arr.find(item => item > 3)
+    console.log(res);
+    let obj = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' }]
+    let res2 = obj.find(item => item.id === 11)
+    console.log(res2);
   </script>
 </body>
 
