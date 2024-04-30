@@ -21,27 +21,21 @@
     <dd>. 为元素指定背景颜色，可以同时指定背景图片、大小、位置、铺贴方式等</dd>
     <dd>. 背景background样式包含多个属性</dd>
     <dd>. 通常使用独立属性；也可以使用复合属性，但是可读性不好，不建议</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>复合语法</figcaption>
-        <pre>background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;</pre>
-      </figure>
+    <dd class="code">
+      <pre>background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;</pre>
     </dd>
     <dt>背景颜色 Background-color</dt>
     <dd>. 为了后向兼容/容错，指定背景图片的同时，也指定颜色；俩者互不冲突；通常结合在一起使用</dd>
     <dd>. 指定背景颜色还可以提示用户体验，避免大图片加载时的页面空白</dd>
     <dd>. 更多颜色使用，请查看 <a href="./css.html#color">颜色</a>、<a href="https://flatuicolors.com/">flatuicolors</a>、<a
         href="https://mycolor.space/">colorSpace</a></dd>
-    <dd>
-      <figure class="code">
-        <figcaption>示例</figcaption>
-        <pre>
+    <dd class="code">
+      <pre>
 background-color: tomato;
 background-color: #ff6347;
 background-color: rgb(255, 99, 71);
 background-color: rgb(255, 99, 71, 1);
 background-color: hsl(9, 100%, 64%);</pre>
-      </figure>
     </dd>
     <dt>背景图片 Background-image</dt>
     <dd>. 可以使用传统的图片作为背景，也可以使用渐变背景创建图片[线性渐变、径向渐变、锥向渐变]；更多使用细节，参考后面专题</dd>
@@ -50,33 +44,27 @@ background-color: hsl(9, 100%, 64%);</pre>
     <dd>. 功能更强大、操作更丰富</dd>
     <dd>.装饰型元素多使用Background-image</dd>
     <dd>.功能性元素多使用&lt;img&gt;；或者说如果去掉图片仍能正常表达主题就使用Background-image，否则应使用&lt;img&gt;</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>示例</figcaption>
-        <pre>
+    <dd class="code">
+      <pre>
 background-img: url(./imgs/1.jpg);
 background-img: url(https://images.unsplash.com/...);
 background-img: linear-gradient();
 background-img: Radial-gradient();
 background-img: Conic-gradient();</pre>
-      </figure>
     </dd>
     <dt>图像位置 Background-position</dt>
     <dd>. 根据图片坐标/位置显示指定的内容；默认从左上角开始</dd>
     <dd>. 可以使用关键字，如top、left、right、bottom</dd>
     <dd>. 也可以使用具体数字或百分比</dd>
     <dd>. 还可以关键字和数字、百分比组合使用</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>示例</figcaption>
-        <pre>
+    <dd class="code">
+      <pre>
 background-position: center;
 background-position: 50%;
 background-position: top right;
 background-position: top;
 background-position: top 10px right 10px;
 background-position: 25% 75%;</pre>
-      </figure>
     </dd>
     <dt>图像大小 Background-size</dt>
     <dd>. 默认情况下，背景图像按照图片原始大小显示；当元素尺寸和图片尺寸不一致时，就会出现图片重复铺贴或图片被裁剪的情况</dd>
@@ -89,15 +77,12 @@ background-position: 25% 75%;</pre>
     <dd>. percentage：参考元素大小设置背景大小；200%就是2倍的元素大小；50%就是元素的一半</dd>
     <dd>. contain：包含图片，即<span class="warn">完全</span> 显示图片；元素背景易出现留白</dd>
     <dd>. cover：<span class="warn">等比例最大化</span> 显示图片；元素背景被占满、图片可能被裁剪</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>示例</figcaption>
-        <pre>
+    <dd class="code">
+      <pre>
 background-size: 100px;
 background-size: 25%;
 background-size: contain;
 background-size: cover;</pre>
-      </figure>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] length</dd>
     <dd>. 按照指定像素大小显示背景图片</dd>
@@ -148,14 +133,11 @@ background-size: cover;</pre>
     <dd>. repeat-x：x轴重复</dd>
     <dd>. repeat-y：y轴重复</dd>
     <dd>. 如果图片尺寸大于容器尺寸，看不出重复效果；实际上也是铺贴了的</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>示例</figcaption>
-        <pre>
+    <dd class="code">
+      <pre>
 background-repeat: no-repeat;
 background-repeat: repeat-x;
 background-repeat: repeat-y;</pre>
-      </figure>
     </dd>
   </dl>
   <div class="chap">案例 Cases</div>
@@ -170,15 +152,10 @@ background-repeat: repeat-y;</pre>
     <dd>[<span class="iconfont icon-keyboard"></span>] 多背景使用</dd>
     <dd>. 背景图片分别定位于左上角和右下角</dd>
     <dd>
-      <figure class="img-sn">
-        <div class="multi-img"></div>
-        <figcaption>多背景使用</figcaption>
-      </figure>
+      <div class="multi-img"></div>
     </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>多背景使用</figcaption>
-        <pre>
+    <dd class="code">
+      <pre>
 //[独立属性] 图片属性要一一对应
 .multi-img {
     height: 200px;
@@ -192,7 +169,6 @@ background-repeat: repeat-y;</pre>
 //[复合属性] background-color放在后面；可读性差
 background: url(../imgs/logo0.png) right bottom/50px no-repeat, url(../imgs/logo1.png) top left/50px no-repeat;
 background-color: #a8e073;</pre>
-      </figure>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 折角/狗耳朵[进阶]</dd>
     <dd>

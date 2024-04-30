@@ -93,6 +93,28 @@ let msg = ref('hi,there')</pre>
             <pre>&lt;Swiper :imgUrl="propImgUrls" :swiperH="propSwiperH"/&gt;</pre>
         </dd>
     </dl>
+    <div class="chap">传递函数|方法</div>
+    <dl>
+        <dd>除了传递数据，还可以传递方法 - 子组件执行父组件的方法</dd>
+        <dd class="sn">
+            <div>子组件暴露参数，类型为函数</div>
+            <pre>
+const props = defineProps({
+    closeFn: Function,
+    confirmFn: Function
+})</pre>
+            <div>子组件使用方法</div>
+            <pre>
+&lt;button @click="closeFn"&gt;&times;&lt;/button&gt;
+&lt;button @click="confirmFn"&gt;confirm&lt;/button&gt;</pre>
+            <div>父组件传递方法</div>
+            <pre>&lt;Msg :closeFn="closeFn" :confirmFn="confirmFn"&gt;&lt;/Msg&gt;</pre>
+            <div>父组件定义事件处理函数</div>
+            <pre>
+const closeFn = () => { }
+const confirmFn = () => { }</pre>
+        </dd>
+    </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
 

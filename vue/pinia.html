@@ -8,6 +8,16 @@
     <title>状态管理 Pinia</title>
     <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
+    <style>
+        header {
+            background-image:
+                url(https://pinia.vuejs.org/logo.svg),
+                linear-gradient(315deg, var(--color) 25%, var(--color-dark));
+            background-repeat: no-repeat;
+            background-size: 10vh, 100%;
+            background-position: right 90px bottom -10px, 0 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -59,20 +69,25 @@ app.use(pinia)
 app.mount('#app')</pre>
         </dd>
         <dt>仓库 Store</dt>
-        <dd>也叫仓库，是一个保存状态和业务逻辑的实体</dd>
+        <dd>也叫仓库，是一个保存全局状态 <span class="warn">state</span> 和业务逻辑的实体；可以在 <span class="warn">整个应用</span> 中访问的数据</dd>
         <dd>不与组件树绑定，而承载着全局状态</dd>
-        <dd>仓库保存全局状态，即：可以在 <span class="warn">整个应用</span> 中访问的数据</dd>
         <dd>仓库通常集中保存在项目的stores目录（应提前创建好），并按照功能创建 <span class="warn">单独</span> 的仓库文件</dd>
-        <dd>仓库在onMounted之前就已经准备好</dd>
+        <dd>仓库在onMounted之前就已经准备好 - 兵马未动，粮草先行</dd>
+        <dd class="tips">
+            <div>仓库会自动处理数据的响应式。通常不需要使用 ref 或 reactive 来声明状态；但是调试的时候，数据最初不会更新</div>
+            <div>即使指定了ref()，后期维护的时候，也不能带上.value</div>
+            <div>仅仅在精细化操作的时候，需要指定；如：使用计算属性等</div>
+            <div>为了和开发保持一致和调试方便，建议尽量指定响应式</div>
+        </dd>
         <dt>基本步骤 Steps</dt>
         <dd class="sn">
             <div>定义 Store</div>
-            <p>创建js文件，使用语义化命名，如counter.js</p>
+            <p>创建仓库文件 .js，使用语义化命名，如counter.js</p>
             <p>引入 defineStore 创建仓库</p>
             <p>以 use 开头且以 Store 结尾命名仓库，如useCounterStore</p>
             <p>使用defineStore创建仓库实例，其中：</p>
             <p>. 第一个参数 counter 是你的应用中 Store 的唯一 ID，Pinia 将用它来连接 store 和 devtools</p>
-            <p>. 第二个参数接收option对象或setup函数；setup函数和组合式API类似，且功能更灵活</p>
+            <p>. 第二个参数接收 option 对象或 setup 函数；setup 函数和组合式 API 类似，且功能更灵活</p>
             <pre>
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
@@ -80,29 +95,43 @@ import { ref, computed } from 'vue'
 export const useCounterStore  = defineStore('counter', ()=>{
   //data
   const count = ref(0)
+  const msg = ref('hi,there.')
   //action
   const increment = () => count.value++
   //other - computed
   const doubleCount = computed( () => count.value * 2 )
 
-  return { count, doubleCount, increment }
+  return { count, msg, doubleCount, increment }
 })</pre>
             <div>使用 Store</div>
-            <p>在逻辑中引入仓库、创建仓库实例、使用仓库数据；在结构中渲染仓库数据</p>
+            <p>逻辑 - 引入仓库、创建仓库实例、使用仓库数据</p>
             <pre>
 &lt;script setup&gt;
-    import { useCounterStore } from '@/stores/counter'
-    const store = useCounterStore()
-    console.log('store', store);//在目标对象target object中可以看到定义的3个方法
-&lt;/script&gt;
-
-//这里采用内联事件
+    import { useCounterStore } from '@/stores/counter';
+    const store = useCounterStore();
+    console.log('store', store);
+&lt;/script&gt;</pre>
+            <p>结构 - 渲染仓库数据；这里采用内联事件</p>
+            <pre>
 &lt;template&gt;
-    &lt;div @click="store.increment"&gt;仓库数据 - {{ store.count }} - {{ store.doubleCount }}&lt;/div&gt;
+    &lt;div&gt;{{ store.count }}&lt;/div&gt;
+    &lt;div&gt;{{ store.msg }}&lt;/div&gt;
+    &lt;div&gt;{{ store.doubleCount }}&lt;/div&gt;
+    &lt;div @click="store.increment"&gt;store handle&lt;/div&gt;
 &lt;/template&gt;</pre>
         </dd>
-        <dd class="tips">
-            <div>store中包含数据和方法；可以直接解构出方法；要解构出数据需要使用storeToRefs包</div>
+        <dd>直接解构使用store中的数据(方法)会丢失响应：当仓库状态变化时，count不变，相当于是获取了仓库的一次性数据</dd>
+        <dd>
+            <pre>let { count, increment } = counterStore;</pre>
+        </dd>
+        <dd>
+            <pre>&lt;div&gt;仓库数据 - {{ store.count }} - {{ count }}&lt;/div&gt;</pre>
+        </dd>
+        <dd>使用storeToRefs包保持响应式</dd>
+        <dd>
+            <pre>
+import { storeToRefs } from 'pinia';
+let { count, increment } = storeToRefs(counterStore);</pre>
         </dd>
         <dd class="example-sn">定义导航菜单仓库，详情请查看 <a href="./drill_menu.html">汉堡菜单</a></dd>
         <dd>项目从桌面端切换到移动端时，菜单折叠，由汉堡按钮控制折叠和展开；单击菜单项时，折叠菜单</dd>
@@ -113,7 +142,7 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useMenuStore = defineStore('menu', () => {
-  const flag = ref(0)
+  const flag = ref(false)
   const switchFlag = () => {
     flag.value ? flag.value = false : flag.value = true
   }
@@ -121,17 +150,23 @@ export const useMenuStore = defineStore('menu', () => {
   return { flag, switchFlag }
 })</pre>
         </dd>
-        <dd>2. 在使用仓库的组件结构中，引入仓库，通过汉堡按钮的单击，由标记flag控制动态类的应用达到菜单的折叠和展开</dd>
-        <dd>3. 在路由配置中，引入仓库，在导航前置守卫中实例化仓库并切换标记switchFlag</dd>
-        <dd class="tips">改进：单击同一个菜单项，折叠菜单</dd>
+        <dd>2. 在使用仓库的组件结构中，引入仓库，通过汉堡按钮的单击，由标记 flag 控制动态类的应用，达到菜单的折叠和展开</dd>
+        <dd>改进：单击菜单项，折叠菜单</dd>
+        <dd>提示：在路由配置中，引入仓库，在导航前置守卫中实例化仓库并切换标记switchFlag；请查看 <a href="./router5.html">路由 - 导航守卫</a></dd>
         <dd class="example-sn"><a href="./pro_lists.html">项目 - 商品列表</a></dd>
-        <dt>更多状态操作* state</dt>
-        <dd class="sn">
-            <div>访问 state - 默认情况下，通过 仓库实例 访问 state，直接对其进行读写</div>
+    </dl>
+    <div class="chap">更多仓库操作*</div>
+    <dl>
+        <dt>访问 state</dt>
+        <dd> 默认情况下，通过 仓库实例 访问 state，直接对其进行读写</dd>
+        <dd>
             <pre>
 const store = useStore()
 store.count++</pre>
-            <div>重置 state - 选项式 API，通过调用 store 的 $reset() 方法将 state 重置为初始值；Setup Stores，需创建自己的 $reset()</div>
+        </dd>
+        <dt>重置 state</dt>
+        <dd>选项式 API，通过调用 store 的 $reset() 方法将 state 重置为初始值；Setup Stores，需创建自己的 $reset()</dd>
+        <dd>
             <pre>
 export const useCounterStore = defineStore('counter', () => {
     const count = ref(0)
@@ -142,22 +177,39 @@ export const useCounterStore = defineStore('counter', () => {
     
     return { count, $reset }
 })</pre>
-            <div>变更 state</div>
-            <p>除了单独变更某个state外，还可以使用 patch ；且在同一时间更改多个属性</p>
+        </dd>
+        <dt>变更 state</dt>
+        <dd>除了单独变更某个state外，还可以使用 patch ；且在同一时间更改多个属性</dd>
+        <dd>
             <pre>
 store.$patch({
     count: store.count + 1,
     age: 120,
     name: 'DIO',
 })</pre>
-            <div>替换 state - 直接赋值修改并不能完全替换掉 store 的 state，因为那样会破坏其响应性</div>
-            <pre>store.$state = { count: 24 }</pre>
-            <p>但是，你可以使用 patch ；且在同一时间更改多个属性</p>
-            <pre>store.$patch({ count: 24 })</pre>
-            <div>订阅 state - 通过 store 的 $subscribe() 方法侦听 state 及其变化。比起普通的 watch()，使用 $subscribe() 的好处是 subscriptions 在
-                patch 后只触发一次</div>
-            <p>可以在 pinia 实例上使用 watch() 函数侦听整个 state</p>
         </dd>
+        <dt>替换 state</dt>
+        <dd>直接赋值修改并不能完全替换掉 store 的 state，因为那样会破坏其响应性</dd>
+        <dd>
+            <pre>store.$state = { count: 24 }</pre>
+        </dd>
+        <dd>但是，你可以使用 patch ；且在同一时间更改多个属性</dd>
+        <dd>
+            <pre>store.$patch({ count: 24, msg: 'hi,there.' })</pre>
+        </dd>
+        <dd>或使用参数</dd>
+        <dd>
+            <pre>
+store.$patch((state) => {
+    state.count = 1000;
+    state.msg = 'hi';
+});
+            </pre>
+        </dd>
+        <dt>订阅 state</dt>
+        <dd>通过 store 的 $subscribe() 方法侦听 state 及其变化。比起普通的 watch()，使用 $subscribe() 的好处是 subscriptions 在
+            patch 后只触发一次</dd>
+        <dd>可以在 pinia 实例上使用 watch() 函数侦听整个 state</dd>
         <dd class="tips">什么时候使用 Store?</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
