@@ -72,7 +72,7 @@ toPromotion() {
                     <img src="./imgs/text1.png" alt="">
                     <figcaption>返回顶部和跳转到地图页</figcaption>
                 </figure>
-                <div>打开<span class="warn">地图</span>页面，创建 wxml 结构如下</div>
+                <div>打开<span class="warn">地图</span>页面，创建 wxml 结构如下：使用罗盘、标尺、显示当前位置等属性，并绑定地图移动事件和标记单击事件</div>
                 <pre>
 &lt;map 
     longitude="{{longitude}}" 
@@ -83,7 +83,8 @@ toPromotion() {
     show-compass 
     bindregionchange="changeRegion" 
     bindmarkertap="doMarker"/&gt;</pre>
-                <div>地面页面逻辑 - 页面加载时，获取位置并调用 getHotel搜索餐厅，并展示搜索结果</div>
+                <div>地面页面逻辑 - 页面加载时，获取位置并调用自定义函数 getHotel搜索餐厅，并以标记的形式展示搜索结果；标记样式的设计，通常采用默认样式。一般只需指定上方气泡 callout 和下方标签
+                    label。这里采用红色，序号在下方，分类在上方</div>
                 <pre>
 onLoad(options) {
     wx.getLocation({
@@ -100,7 +101,7 @@ onLoad(options) {
         complete: () => console.log('get food done')
     })
 }</pre>
-                <div>使用经纬度封装搜索函数 getHotel(long, lati)</div>
+                <div>使用经纬度封装搜索函数 getHotel(long, lati)；默认情况下会根据自身定位搜索，建议显示的指定位置</div>
                 <pre>
 getHotel(long, lati) {
     qqmapsdk.search({
@@ -119,18 +120,21 @@ getHotel(long, lati) {
                     latitude: marker.location.lat,
                     iconPath: '/utils/marker.png',
                     callout: {
-                        content: marker.title,
-                        display: 'ALWAYS'
+                        content: marker.category,
+                        display: 'ALWAYS',
+                        color:'#f40'
                     },
                     label: {
-                        content: marker.category
+                        content: ind,
+                        color:'#f40'
                     },
                     width: 32,
                     height: 32
                 })
             })
+            //当前中心点坐标；可以不使用
             markers.push({
-                id: 0,
+                id: res.data.length,
                 longitude: long,
                 latitude: lati,
                 iconPath: '/utils/marker.png',
@@ -166,6 +170,7 @@ doMarker(e){
                 <figure class="img-sn">
                     <img src="./imgs/text2.png" alt="">
                     <img src="./imgs/text3.png" alt="">
+                    <img src="./imgs/text4.png" alt="">
                     <figcaption>美食地图</figcaption>
                 </figure>
             </dd>
