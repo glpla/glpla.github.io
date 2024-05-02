@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>实操 标签页</title>
+  <title>实操 面包屑导航</title>
   <link rel="stylesheet" href="../css/exp.css">
   <base target="_blank">
 </head>
@@ -14,24 +14,17 @@
   <header>
   </header>
   <div class="container">
-    <h1>标签页</h1>
-    <h4>Tabs</h4>
+    <h1>面包屑导航</h1>
+    <h4>Breadcrumb</h4>
     <dl class="number-mul-sn">
       <dt>实验目的</dt>
       <dd>
-        <div>掌握异步组件的使用</div>
-        <div>掌握动态组件的使用</div>
-        <div>掌握缓存组件的作用和使用</div>
-        <div>掌握组件样式使用时的基本原则和考虑</div>
-        <div>进一步熟悉组件生命周期函数的执行</div>
+        <div>掌握 <a href="https://router.vuejs.org/zh/api/#Functions-useRoute">路由 useRoute()</a> 的基本使用</div>
+        <div>掌握面包屑导航中的设计与开发</div>
       </dd>
       <dt>实验内容</dt>
       <dd>
-        <div>创建标签页项目</div>
-        <div>设计标签页样式</div>
-        <div>普通方式引入组件，当标签页切换时，查看各组件的生命周期函数和网络请求情况</div>
-        <div>为组件应用缓存，查看各组件的生命周期函数</div>
-        <div>异步方式引入组件，查看网络请求情况</div>
+        <div>搭配常规路由，创建面包屑导航</div>
       </dd>
       <dt>开发环境</dt>
       <dd>
@@ -41,7 +34,25 @@
         <div>Node.js</div>
       </dd>
       <dt>实验步骤</dt>
-      <dd>请根据实验内容完成。这里略</dd>
+      <dd>
+        <div>创建组件 Breadcrumb.vue</div>
+        <div>引入路由</div>
+        <pre>
+import { useRoute } from 'vue-router';
+const route = useRoute();</pre>
+        <div>使用路由</div>
+        <pre>
+&lt;div class="bread"&gt;
+  &lt;router-link v-for="(item, index) in route.matched" :key="index" :to="item.path"&gt;{{ item.name }}&lt;/router-link&gt;
+&lt;/div&gt;</pre>
+        <div>仅仅使用路由信息渲染面包屑</div>
+        <pre>
+&lt;div class="bread"&gt;
+  &lt;div v-for="(item, index) in route.matched" :key="index"&gt;{{ item.name }}&lt;/div&gt;
+&lt;/div&gt;</pre>
+        <div>样式 - 略</div>
+        <div>使用组件 - 在父组件中使用；略</div>
+      </dd>
       <dt>实验结果分析与体会</dt>
       <dd>
         <div>掌握的知识点、开发技能</div>

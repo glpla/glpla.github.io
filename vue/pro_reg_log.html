@@ -28,6 +28,7 @@
       <div>表单事件 - submit</div>
       <div>双向绑定</div>
       <div>网络请求 Axios - GET、POST</div>
+      <div>MD5加密</div>
     </dd>
     <dt>开发环境</dt>
     <dd>
@@ -38,13 +39,14 @@
     </dd>
     <dt>接口和用户信息</dt>
     <dd>使用用户名uname和学号usn及密码upass完成注册</dd>
+    <dd>注册和登录时，密码使用MD5加密</dd>
     <dd>每个用户维护一个以学号命名的json文件，如20221081.json</dd>
     <dd>其它信息，如头像、性别、电邮、出生日期等在个人中心设置进一步完成</dd>
     <dd>
       <table>
         <caption>接口</caption>
         <tr>
-          <th>接口</th>
+          <th style="width: 50%;">接口</th>
           <th>说明</th>
         </tr>
         <tr>
@@ -61,7 +63,7 @@
       <table>
         <caption>用户信息</caption>
         <tr>
-          <th>字段</th>
+          <th style="width: 50%;">字段</th>
           <th>命名</th>
         </tr>
         <tr>
@@ -91,6 +93,7 @@ router.post('/register', (req, res) => {
       "err": 2,
       "msg": 'user exist'
     })
+    return;
   }
   fs.writeFile('./public/data/' + req.body.usn + '.json', JSON.stringify(req.body), (err) => {
     if (err) {
@@ -236,6 +239,74 @@ const login = () => {
         <img src="./imgs/reg1.png" alt="">
         <figcaption>移动端 register</figcaption>
       </figure>
+    </dd>
+  </dl>
+  <div class="chap">Axios 请求封装</div>
+  <dl>
+    <dt>初步封装 - 封装请求</dt>
+    <dd>创建 request.js 文件，封装Axios的GET、POST请求</dd>
+    <dd>
+      <pre>
+import axios from "axios";
+
+export const $get = async (url, params) => {
+  let { data } = await axios.get(url, { params })
+  return data;
+}
+export const $post = async (url, params) => {
+  let { data } = await axios.post(url, params)
+  return data;
+}      </pre>
+    </dd>
+    <dd>在使用的组件中导入并使用</dd>
+    <dd>
+      <pre>
+import { $get, $post } from '@/assets/utils/request';
+
+//POST
+let data = $post("/user/register", user.value)
+console.log(data);
+
+//GET
+let data = $get('/user/login', {
+  usn: user.value.usn,
+  upass: user.value.upass
+})
+console.log(data);</pre>
+    </dd>
+    <dt>再封装 -封装业务</dt>
+    <dd>还可以根据实际业务，进一步封装，如$login、$register等等</dd>
+    <dd>因为接口是死的，仅仅是数据有变化</dd>
+    <dd>1. 登录</dd>
+    <dd>
+      <pre>
+import { $get } from "../utils/request";
+export const $login = async (params) => {
+  return await $get("/user/login", params);
+}; </pre>
+    </dd>
+    <dd>直接使用</dd>
+    <dd>
+      <pre>
+import { $login } from '@/assets/utils/login.js';
+let data = $login({
+  usn: user.value.usn,
+  upass: user.value.upass
+})</pre>
+    </dd>
+    <dd>2. 注册</dd>
+    <dd>
+      <pre>
+import { $post } from './request'
+export const $register = async (params) => {
+  return await $post('/user/register', params)
+}</pre>
+    </dd>
+    <dd>直接使用</dd>
+    <dd>
+      <pre>
+import { $register } from '@/assets/utils/register.js';
+let data = $register(user.value)</pre>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

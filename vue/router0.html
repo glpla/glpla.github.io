@@ -39,39 +39,46 @@ import router from './router'
 app.use(router).mount('#app')</pre>
         </dd>
         <dt>定义路由</dt>
-        <dd>路由必须指定path和component</dd>
-        <dd>还可以使用属性定义其它类型路由，见下表</dd>
+        <dd>路由必须指定 path 和 component</dd>
         <dd>
             <table>
-                <caption>常见路由分类</caption>
+                <caption>路由配置属性</caption>
                 <tr>
-                    <th>路由</th>
-                    <th>说明</th>
                     <th>属性</th>
+                    <th>说明</th>
                 </tr>
                 <tr>
-                    <td>命名路由</td>
-                    <td>通过名字来使用路由；更直观、灵活；如动态路由</td>
+                    <td>path</td>
+                    <td>路由</td>
+                </tr>
+                <tr>
+                    <td>component</td>
+                    <td>对应路由的组件</td>
+                </tr>
+                <tr>
                     <td>name</td>
+                    <td>命名路由：通过名字来使用路由；更直观、灵活；如动态路由</td>
                 </tr>
                 <tr>
-                    <td>重定向路由</td>
-                    <td>让指定的路由重新定位到另外一个路由</td>
                     <td>redirect</td>
+                    <td>重定向路由：让指定的路由重新定位到另外一个路由</td>
                 </tr>
                 <tr>
-                    <td>嵌套路由</td>
-                    <td>子路由；<br>path可以省略父级路由，不用/</td>
                     <td>children</td>
+                    <td>嵌套路由、子路由</td>
                 </tr>
                 <tr>
-                    <td>404路由</td>
-                    <td>使用自定义的 路径参数 正则表达式匹配其它任意路径，如404路由；<br> 通常是最后一个路由配置项</td>
-                    <td></td>
+                    <td>meta</td>
+                    <td>路由元信息：用于路由组件的额外配置</td>
                 </tr>
             </table>
         </dd>
-        <dd>路由文件index.js配置详情</dd>
+        <dd class="tips">
+            <div>/ 代表根路由</div>
+            <div>子路由的path可以省略父级路由，不用 /</div>
+            <div>404路由：使用自定义的路径参数|正则表达式匹配其它任意路径；通常是最后一个路由配置项</div>
+        </dd>
+        <dd>路由文件 index.js 配置详情</dd>
         <dd>
             <pre>
 //引入路由包
@@ -82,6 +89,7 @@ import Home from '@/pages/Home'
 
 //创建|定义路由
 const router = createRouter({
+    //路由模式：history、hash；默认是history；建议适应hash
     history: createWebHistory(),
     routes : [
         {
@@ -101,17 +109,17 @@ const router = createRouter({
                     redirect: '/work/html'//使用完整路由
                 },
                 {
-                    path: 'html',//省略父级路由
+                    path: 'html',       //省略父级路由
                     name: "html",
                     component: Html
                 },
                 {
-                    path: 'css3',//省略父级路由
+                    path: 'css3',       //省略父级路由
                     name: "css3",
                     component: CSS3
                 },
                 {
-                    path: '/work/js',//使用完整路由
+                    path: '/work/js',   //使用完整路由
                     name: "js",
                     component: JavaScript
                 }
@@ -148,8 +156,8 @@ export default router
     </dl>
     <dl>
         <dt>使用路由 &lt;router-link&gt;</dt>
-        <dd>借助自定义组件&lt;router-link&gt;来创建链接|路由；相当于&lt;a&gt;；使用属性to代替了属性href</dd>
-        <dd>默认是push模式，浏览器可以回退；使用 replace 属性可以防止浏览器回退</dd>
+        <dd>借助自定义组件 &lt;router-link&gt; 来创建链接|路由；相当于 &lt;a&gt;；使用属性to代替了属性href</dd>
+        <dd>默认是 push 模式，浏览器可以回退；使用 replace 属性可以防止浏览器回退</dd>
         <dd>
             <pre>
 //&lt;router-link&gt; - 字符串方法；也可以使用对象方法 :to = "{path: '/about'}"
@@ -172,11 +180,16 @@ export default router
 //&lt;router-view&gt; - 渲染目标路由
 &lt;router-view&gt;&lt;/router-view&gt;</pre>
         </dd>
-        <dd class="tips">
-            <div>active-class = "active"</div>
-            <div>router-link-active</div>
-            <div>router-link-exact-active</div>
+        <dt>路由样式</dt>
+        <dd>修改系统内置路由样式高亮当前路由</dd>
+        <dd>
+            <pre>
+.router-link-active
+.router-link-exact-active {
+    color: var(--warn-color);
+}</pre>
         </dd>
+        <dd>也可以为每个路由添加活动样式指定；见上例</dd>
     </dl>
     <dl>
         <dt>渲染路由 &lt;router-view&gt;</dt>

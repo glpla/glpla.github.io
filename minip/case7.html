@@ -164,31 +164,29 @@ wx.request({
                 <pre>
 router.get('/login', (req, res) => {
     console.log('req.query', req.query);
-    // let file = fs.readFileSync('./public/data/' + req.query.usn + '.json', 'utf8');
     let file = fs.readFile('./public/data/' + req.query.usn + '.json', 'utf8', (err, data) => {
         if (err) {
-        res.json({
-            "errno": 2,
-            "msg": 'user not exist'
-        })
-        } else {
-        let jsonFile = JSON.parse(data)
-        console.log('jsonFile', jsonFile);
-        if (req.query.upass === jsonFile.upass) {
             res.json({
-                "errno": 0,
-                "msg": 'login ok'
-                "data": jsonFile
+                "errno": 2,
+                "msg": 'user not exist'
             })
         } else {
-            res.json({
-                "errno": 1,
-                "msg": 'pass not match'
-            })
-        }
+            let jsonFile = JSON.parse(data)
+            if (req.query.upass === jsonFile.upass) {
+                res.json({
+                    "errno": 0,
+                    "msg": 'login ok',
+                    "data": jsonFile
+                })
+            } else {
+                res.json({
+                    "errno": 1,
+                    "msg": 'pass not match'
+                })
+            }
         }
     })
-})                </pre>
+})</pre>
             </dd>
             <dt>用户注册</dt>
             <dd>B端</dd>
@@ -236,29 +234,29 @@ wx.request({
             <dd>
                 <pre>
 router.post('/register', (req, res) => {
-    console.log('req.body', req.body);
     if (fs.existsSync('./public/data/' + req.body.usn + '.json')) {
         res.json({
-        "errno": 3,
-        "msg": 'user exist'
-        })
-    }
-    fs.writeFile('./public/data/' + req.body.usn + '.json', JSON.stringify(req.body), (error) => {
-        if (error) {
-        console.log('保存文件失败')
-        res.json({
             "errno": 2,
-            "msg": 'try later'
+            "msg": 'user exist'
         })
+        return;
+    }
+    fs.writeFile('./public/data/' + req.body.usn + '.json', JSON.stringify(req.body), (err) => {
+        if (err) {
+            console.log('保存文件失败')
+            res.json({
+                "errno": 1,
+                "msg": 'try later'
+            })
         } else {
-        console.log('保存文件成功')
-        res.json({
-            "errno": 0,
-            "msg": 'register ok'
-        })
+            console.log('保存文件成功')
+            res.json({
+                "errno": 0,
+                "msg": 'register ok'
+            })
         }
     })
-})</pre>
+    })</pre>
             </dd>
             <dt>用户更新</dt>
             <dd>指定更新的字段和值</dd>

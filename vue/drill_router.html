@@ -22,6 +22,11 @@
         <div>掌握普通路由、命名路由、重定向路由和嵌套路由的基本使用</div>
         <div>掌握单页路由、全站路由的设计与开发</div>
       </dd>
+      <dt>实验内容</dt>
+      <dd>
+        <div>单页路由</div>
+        <div>全站路由</div>
+      </dd>
       <dt>开发环境</dt>
       <dd>
         <div>操作系统 Window 10+</div>
@@ -29,87 +34,54 @@
         <div>谷歌浏览器 Chrome</div>
         <div>Node.js</div>
       </dd>
-      <dt>实验内容</dt>
-      <dd>
-        <div>单页路由</div>
-        <div>全站路由</div>
-      </dd>
       <dt>实验步骤</dt>
       <dd>
         <div>创建项目</div>
         <div>创建SFC</div>
         <div>创建路由</div>
       </dd>
-      <dt>实验结果分析与体会</dt>
+      <dt>参考代码</dt>
       <dd>
-        <div>掌握的知识点、开发技能</div>
-        <div>碰到的问题、解决的思路和方法以及未解决的问题</div>
-        <div>其它思考</div>
-      </dd>
-      <dt>实验要求</dt>
-      <dd>
-        <div>规范开发；独立完成；突出个人设计特点和风格</div>
-        <div>实验报告：采用学院统一下发的格式文件，以文字说明，配以必要的效果图片或核心代码，展示并说明数据来源、实施过程、各部分功能、具体内容和实现细节；最后导出为PDF，按照要求命名，提交个人学习通作业</div>
-        <div>未按要求在规定时间内提交视为无效，不得分</div>
-        <div>格式规范，请参考 <a href="../course/paper.html">论文规范要点</a></div>
-      </dd>
-      <dt>参考代码 - 单页路由</dt>
-      <dd>
+        <div>单页路由</div>
         <pre>
 routes: [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: Home,
+    meta: {title: "home"}
   },
   {
     path: '/home',
-    redirect: '/'
+    redirect: '/',
+    meta: {title: "home"}
   },
   {
     path: '/team',
     name: 'team',
-    component: () => import('../components/sub_view/Team.vue')
+    component: () => import('../components/sub_view/Team.vue'),
+    meta: {title: "team"}
   },
   {
     path: '/work',
     name: 'work',
-    component: () => import('../components/sub_view/Work.vue')
-    children: [
-      {
-        path: '/work',
-        redirect: '/work/html'
-      },
-      {
-        path: '/work/html',
-        name: 'html',
-        component: () => import('../components/sub_view/Html5.vue')
-      },
-      {
-        path: '/work/css',
-        name: 'css',
-        component: () => import('../components/sub_view/Css3.vue')
-      },
-      {
-        path: '/work/js',
-        name: 'js',
-        component: () => import('../components/sub_view/JavaScript.vue')
-      }
-    ]
+    component: () => import('../components/sub_view/Work.vue'),
+    meta: {title: "work"}
   },
   {
     path: '/about',
     name: 'about',
-    component: () => import('../components/sub_view/About.vue')
+    component: () => import('../components/sub_view/About.vue'),
+    meta: {title: "about"}
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: () => import('../components/NotFound.vue')
+    component: () => import('../components/NotFound.vue'),
+    meta: {title: "404"}
   }
 ]</pre>
-      <dt>参考代码 - 全站路由</dt>
-      <dd>
+        <div>全站路由</div>
         <pre>
 routes: [
   {
@@ -194,6 +166,19 @@ routes: [
     component: () => import('../components/NotFound.vue')
   }
 ]</pre>
+      </dd>
+      <dt>实验结果分析与体会</dt>
+      <dd>
+        <div>掌握的知识点、开发技能</div>
+        <div>碰到的问题、解决的思路和方法以及未解决的问题</div>
+        <div>其它思考</div>
+      </dd>
+      <dt>实验要求</dt>
+      <dd>
+        <div>规范开发；独立完成；突出个人设计特点和风格</div>
+        <div>实验报告：采用学院统一下发的格式文件，以文字说明，配以必要的效果图片或核心代码，展示并说明数据来源、实施过程、各部分功能、具体内容和实现细节；最后导出为PDF，按照要求命名，提交个人学习通作业</div>
+        <div>未按要求在规定时间内提交视为无效，不得分</div>
+        <div>格式规范，请参考 <a href="../course/paper.html">论文规范要点</a></div>
       </dd>
       <dt>拓展</dt>
       <dd>
