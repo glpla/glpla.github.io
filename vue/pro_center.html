@@ -43,66 +43,77 @@
     </dd>
     <dd>
       <table>
-        <caption>用户信息</caption>
+        <caption>API</caption>
         <tr>
           <th>分类</th>
           <th>命名</th>
         </tr>
         <tr>
-          <td>图片</td>
-          <td>avatar</td>
+          <td>/api/uploadImg</td>
+          <td>图像上传接口</td>
         </tr>
         <tr>
-          <td>学号</td>
-          <td>usn</td>
-        </tr>
-        <tr>
-          <td>姓名</td>
-          <td>uname</td>
+          <td>image</td>
+          <td>图像name</td>
         </tr>
       </table>
     </dd>
     <dt>参考代码</dt>
     <dd>
-      <div>头像定制 - 按照学号和姓名命名图片</div>
+      <div>头像上传</div>
+      <p>头像上传和其它业务分开，单独设计：没有采用 &lt;form&gt; 表单，所以使用自定义表单数据提交</p>
+      <p>定制input/file，采用 - 移花接木 - 单独设计上传按钮</p>
+      <p>封装上传函数</p>
+      <p>可以略去header的配置</p>
+      <p>样式略</p>
       <pre>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from 'axios';
-let file = ref(null)
-let user = ref({
-  uname: 'glpla',
-  usn: '2024'
-})
-const submit = () => {
-  axios.post('/avatar',
-    {
-      usn: user.value.usn,
-      uname: user.value.uname,
-      avatar: file.value.files[0]
-    }, {
+let user = ref({})
+let ipt = ref(null)
+
+const submit = (e) => { }
+
+const selectImg = () => {
+  ipt.value.click();
+}
+
+const uploadIpt = (e) => {
+  let file = e.target.files[0];
+  uploadImg(file);
+}
+
+const uploadImg = (file) => {
+  // 自定义表单数据
+  let formData = new FormData()
+  formData.append('image', file)
+  axios.post('/api/uploadImg', formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
     }
   })
     .then(res => {
-      console.log('ok', res);
+      user.value.imgUrl = res.data.data.url;
     })
     .catch(err => {
-      console.log('fail', err);
+      console.log('err', err);
     })
-    .finally(() => {
-      console.log('done');
+}
+
+onMounted(() => {
+  fetch('https://glpla.github.io/utils/data/user/24090503.json')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      user.value = data
     })
-}</pre>
-    </dd>
-    <dd>
+})</pre>
       <pre>
-&lt;form @submit.prevent="submit"&gt;
-  &lt;input type="text" name="usn" v-model="user.usn"&gt;
-  &lt;input type="text" name="uname" v-model="user.uname"&gt;
-  &lt;input type="file" name="avatar" ref="file"&gt;
-  &lt;button&gt;submit&lt;/button&gt;
-&lt;/form&gt;</pre>
+&lt;div class="avatar"&gt;
+  &lt;img :src="user.imgUrl" alt=""&gt;
+  &lt;input type="file" name="image" ref="ipt" accept="image/*" hidden @change="uploadIpt"&gt;
+  &lt;div class="avatar-btn" @click="selectImg"&gt;上传头像&lt;/div&gt;
+&lt;/div&gt;</pre>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

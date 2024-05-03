@@ -68,6 +68,19 @@ const res = computed(() => {
 &lt;div&gt; {{ res }} &lt;/div&gt;</pre>
     </dd>
     <dd class="example-sn">参照B站规则处理关注、粉丝、点赞和播放数量</dd>
+    <dd class="example-sn">标签页内联样式 - 根据当前导航项动态移动指示器；ind是导航项的索引</dd>
+    <dd>结构中直接使用数据；逻辑应该加带使用.value</dd>
+    <dd>传统方案 - 直接拼接样式</dd>
+    <dd>
+      <pre>&lt;div class="indicator" :style="{ transform: `translateX(${ind * 80}px)` }"&gt;&lt;/div&gt;</pre>
+    </dd>
+    <dd>使用计算属性 - 计算出当前导航项的偏移量 trans</dd>
+    <dd>
+      <pre>&lt;div class="indicator" :style="{ transform: trans }"&gt;&lt;/div&gt;</pre>
+    </dd>
+    <dd>
+      <pre>let trans = computed(() => `translateX(${ind.value * 80}px)`)</pre>
+    </dd>
     <dt>传递参数</dt>
     <dd>计算属性是一个属性，不是方法，所以不能直接传递参数</dd>
     <dd>通过闭包的形式间接传递参数</dd>
