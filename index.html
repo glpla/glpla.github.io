@@ -10,7 +10,7 @@
   <meta name="description"
     content="WEB; HTML5; Vue3; Unity; Network; OA; Java; Linux; Ubuntu; Word; Excel; PPT; Office; only for personal use.">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3834292_ku6ktbzj3ps.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3834292_hul6qge3el5.css">
   <link rel="stylesheet" href="./css/index.css">
   <style>
     #particles-js {
@@ -21,6 +21,60 @@
       bottom: 0;
       background-color: #000;
       z-index: -1;
+    }
+
+    .pop {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 100;
+    }
+
+    .pop .img {
+      position: relative;
+      margin: auto;
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 16/9;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+      background-image: url(./imgs/hndx.jpg);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .pop .title {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      line-height: 3;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      font-size: 24px;
+    }
+
+    .pop .close {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #000;
+      transition: 0.4s;
+    }
+
+    .pop .close:hover {
+      transform: rotate(180deg);
+    }
+
+    .pop.close {
+      display: none;
     }
   </style>
 </head>
@@ -131,12 +185,24 @@
     </a>
   </div>
   <footer>All Rights Reserved &copy; By Cnplaman 2022-2024</footer>
+  <div class="pop">
+    <a class="img" href="https://www.baidu.com/s?wd=河南大学大礼堂" target="_blank">
+      <div class="title">河南大学大礼堂</div>
+      <div class="iconfont icon-times close"></div>
+    </a>
+  </div>
   <div id="particles-js"></div>
   <script src="./utils/lib/particles.js"></script>
   <script>
     particlesJS.load('particles-js', './utils/data/particles.json', function () {
       console.log('callback - particles.js config loaded');
-    });    
+    });
+    let close = document.querySelector('.close');
+    let pop = document.querySelector('.pop');
+    close.addEventListener('click', (e) => {
+      e.preventDefault();
+      pop.classList.add('close');
+    })
   </script>
 
 </body>
