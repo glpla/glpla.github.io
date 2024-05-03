@@ -99,7 +99,16 @@ console.log(md5('message',32)); //32位</pre>
   <details>
     <summary>XLSX</summary>
     <dl>
-      <dd>电子表格的处理</dd>
+      <dd>电子表格的处理 - the Common Spreadsheet Format (CSF)</dd>
+      <dd>更多信息，请查看 <a href="https://www.npmjs.com/package/xlsx">NPM - SheetJS</a>、<a
+          href="https://github.com/rockboom/SheetJS-docs-zh-CN">GitHub - SheetJS js-xlsx</a></dd>
+      <dt>基本概念</dt>
+      <dd><a href="https://www.npmjs.com/package/xlsx#cell-object">单元格 - Cell Object</a></dd>
+      <dd><a href="https://www.npmjs.com/package/xlsx#sheet-objects">工作表 - Sheet Object</a></dd>
+      <dd>sheet[address] returns the cell object for the specified address</dd>
+      <dd><a href="https://www.npmjs.com/package/xlsx#workbook-object">工作簿 - Workbook Object</a></dd>
+      <dd>workbook.SheetNames is an ordered list of the sheets in the workbook</dd>
+      <dd>wb.Sheets[sheetname] returns an object representing the worksheet</dd>
       <dt>基本过程</dt>
       <dd class="sn">
         <div>获取数据 Acquire Data</div>
@@ -109,13 +118,20 @@ console.log(md5('message',32)); //32位</pre>
         <div>释放数据 Release Data</div>
       </dd>
       <dt>高频API</dt>
-      <dd>读取工作簿 - XLSX.read</dd>
-      <dd>表格到工作簿 - XLSX.utils.table_to_book</dd>
-      <dd>表格到表单 - XLSX.utils.table_to_sheet</dd>
-      <dd>表单到JSON - XLSX.utils.sheet_to_json</dd>
-      <dd>工作簿到文件 - XLSX.writeFile</dd>
-      <dd>更多信息，请查看 <a href="https://www.npmjs.com/package/xlsx">NPM - SheetJS</a>、<a
-          href="https://github.com/rockboom/SheetJS-docs-zh-CN">GitHub - SheetJS js-xlsx</a></dd>
+      <dd class="sn">
+        <div><a href="https://www.npmjs.com/package/xlsx#parsing-functions">Parsing functions</a></div>
+        <p>读取文件流 - XLSX.read(data, read_opts) attempts to parse data.</p>
+        <p>读取文件 - XLSX.readFile(filename, read_opts) attempts to read filename and parse.</p>
+        <div><a href="https://www.npmjs.com/package/xlsx#html-table-input">HTML Table Input</a></div>
+        <p>. 表格到表单 - XLSX.utils.table_to_sheet(table) - XLSX.utils.table_to_sheet takes a table DOM element and returns
+          a worksheet resembling the input table. Numbers are parsed. All other data will be stored as strings.</p>
+        <p>. 表格到工作簿 - XLSX.utils.table_to_book(table) - XLSX.utils.table_to_book produces a minimal workbook based on
+          the worksheet.</p>
+        <div><a href="https://www.npmjs.com/package/xlsx#json">JSON</a></div>
+        <p>. 表单到JSON - XLSX.utils.sheet_to_json</p>
+        <div><a href="https://www.npmjs.com/package/xlsx#writing-functions">Writing functions</a></div>
+        <p>. 工作簿到文件 - XLSX.writeFile(wb, filename, write_opts)</p>
+      </dd>
       <dt>Node.js开发</dt>
       <dd class="sn">
         <div>安装依赖</div>
@@ -175,16 +191,61 @@ const outExcel = () => {
       <dd>根据项目，适当调整结构的内联样式高度height</dd>
       <dd>更多信息，请查看 <a href="https://www.wangeditor.com/v5/for-frame.html#vue3">Wangeditor</a></dd>
       <dd class="sn">
-        <div>安装</div>
+        <div>安装 - 两个库一起安装</div>
         <pre>npm install @wangeditor/editor @wangeditor/editor-for-vue@next --save</pre>
-        <div>引入</div>
-        <p>工具栏 Toolbar</p>
-        <p>编辑器 Editor</p>
-        <div>配置</div>
-        <p>模式配置 mode</p>
-        <p>工具栏配置 toolbarConfig</p>
-        <p>编辑器配置 editorConfig - 还可以进一步对菜单配置，如配置图片上传</p>
+        <div>引入 - 工具栏 Toolbar；编辑器 Editor</div>
+        <pre>
+import { onBeforeUnmount, shallowRef } from 'vue'
+import '@wangeditor/editor/dist/css/style.css' // 引入 css
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue'</pre>
+        <div>配置 - 模式配置 mode；工具栏配置 toolbarConfig；编辑器配置 editorConfig</div>
+        <p>还可以进一步对菜单配置，如配置图片上传</p>
+        <pre>
+const editorRef = shallowRef()  //MUST shallowRef
+
+const mode = 'default'  // 或 simple
+const toolbarConfig = {}
+const editorConfig = { 
+  placeholder: '请输入内容...',
+  //图片上传配置 - 指定接口、名称等属性
+  MENU_CONF: {
+    "uploadImage": {
+      server: '/upload/upload/image',
+      fieldName: 'image',
+      onSuccess(file, res) {
+        console.log(`${file.name} 上传成功`, res)
+      },
+      onFailed(file, res) {
+        console.log(`${file.name} 上传失败`, res)
+      }
+    }
+  }
+}
+
+// 记录 editor 实例，重要！
+const handleCreated = (editor) => {
+  editorRef.value = editor
+}
+
+// 组件销毁时，要及时销毁编辑器
+onBeforeUnmount(() => {
+  const editor = editorRef.value
+  if (editor == null) return
+  editor.destroy()
+})</pre>
         <div>使用</div>
+        <pre>
+&lt;Toolbar 
+  :editor="editorRef" 
+  :defaultConfig="toolbarConfig" 
+  :mode="mode" /&gt;
+&lt;Editor 
+  v-model="valueHtml" 
+  :defaultConfig="editorConfig" 
+  :mode="mode"
+  @onCreated="handleCreated" /&gt;
+        </pre>
+        <div>样式 - 可以使用flex垂直布局；部分样式需要使用!important提权；略</div>
         <div>封装为组件 - 建议</div>
       </dd>
     </dl>
