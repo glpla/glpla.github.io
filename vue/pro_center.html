@@ -49,30 +49,32 @@
           <th>命名</th>
         </tr>
         <tr>
-          <td>/api/uploadImg</td>
-          <td>图像上传接口</td>
+          <td>/api/uploadimg</td>
+          <td>图像上传接口；图像name：image</td>
         </tr>
         <tr>
-          <td>image</td>
-          <td>图像name</td>
+          <td>/user/modify</td>
+          <td>用户信息修改接口；请求参数：usn、ukey、uvalue</td>
         </tr>
       </table>
     </dd>
-    <dt>参考代码</dt>
+    <dt>参考代码 - 头像上传</dt>
+    <dd>头像上传和其它业务分开，单独设计：没有采用 &lt;form&gt; 表单，所以使用自定义表单数据提交</dd>
+    <dd>定制input/file，采用 - 移花接木 - 单独设计上传按钮</dd>
+    <dd>封装上传函数</dd>
+    <dd>可以略去header的配置</dd>
     <dd>
-      <div>头像上传</div>
-      <p>头像上传和其它业务分开，单独设计：没有采用 &lt;form&gt; 表单，所以使用自定义表单数据提交</p>
-      <p>定制input/file，采用 - 移花接木 - 单独设计上传按钮</p>
-      <p>封装上传函数</p>
-      <p>可以略去header的配置</p>
-      <p>样式略</p>
+      <div>C端 - 逻辑</div>
       <pre>
-import { ref, onMounted } from 'vue'
-import axios from 'axios';
-let user = ref({})
+import { ref, inject } from 'vue'
+const axios = inject('axios')
+const props = defineProps({
+  user: {
+    type: Object,
+    default: () => ({})
+  }
+})
 let ipt = ref(null)
-
-const submit = (e) => { }
 
 const selectImg = () => {
   ipt.value.click();
@@ -84,7 +86,6 @@ const uploadIpt = (e) => {
 }
 
 const uploadImg = (file) => {
-  // 自定义表单数据
   let formData = new FormData()
   formData.append('image', file)
   axios.post('/api/uploadImg', formData, {
@@ -93,28 +94,145 @@ const uploadImg = (file) => {
     }
   })
     .then(res => {
-      user.value.imgUrl = res.data.data.url;
+      // update user romote
+      updateUser({
+        usn: props.user.usn,
+        ukey: 'imgUrl',
+        uvalue: res.data.data.url
+      })
+      // update user local
+      props.user.imgUrl = res.data.data.url;
     })
     .catch(err => {
       console.log('err', err);
     })
 }
 
-onMounted(() => {
-  fetch('https://glpla.github.io/utils/data/user/24090503.json')
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      user.value = data
+const updateUser = (data) => {
+  axios.post('/user/modify', data)
+    .then(res => {
+      console.log('then', res);
     })
-})</pre>
+    .catch(err => {
+      console.log('err', err);
+    })
+}</pre>
+      <div>C端 - 结构</div>
       <pre>
 &lt;div class="avatar"&gt;
   &lt;img :src="user.imgUrl" alt=""&gt;
   &lt;input type="file" name="image" ref="ipt" accept="image/*" hidden @change="uploadIpt"&gt;
   &lt;div class="avatar-btn" @click="selectImg"&gt;上传头像&lt;/div&gt;
 &lt;/div&gt;</pre>
+      <div>C端 - 样式略</div>
+      <div>S端</div>
+      <pre>
+const express = require('express')
+const multer = require('multer')
+const path = require('path')
+const router = express.Router()
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/upload')
+  },
+  filename: (req, file, cb) => {
+    console.log('file', file);
+    let ext = path.extname(file.originalname)
+    cb(null, file.fieldname + Date.now() + ext)
+  }
+})
+
+const upload = multer({
+  storage: storage
+})
+
+router.post('/', upload.single('image'), (req, res) => {
+  console.log('req.file', req.file)
+  res.json({
+    "errno": 0,
+    "data": {
+      "url": 'http://127.0.0.1:3000/upload/' + req.file.filename,
+    }
+  })
+})
+
+module.exports = router;</pre>
     </dd>
+    <dt>参考代码 - 修改密码</dt>
+    <dd>使用MD5加密</dd>
+    <dd>使用旧密码才允许修改新密码，且新旧密码不能相同</dd>
+    <dd>
+      <div>C端 - 逻辑</div>
+      <pre>
+import { ref } from 'vue'
+import { md5 } from 'md5js';
+import axios from 'axios';
+const props = defineProps({
+  user: {
+    type: Object,
+    default: () => ({})
+  }
+})
+let oldupass = ref('')
+let newpass = ref('')
+let temppass = ref('')
+const submit = () => {
+  if (props.user.upass !== md5(oldupass.value)) {
+    console.log('pass not match');
+    return
+  }
+  if (newpass.value !== temppass.value) {
+    console.log('new pass not consistent');
+    return
+  }
+  if (newpass.value == oldupass.value) {
+    console.log('pass not change');
+    return
+  }
+  console.log(md5(newpass.value));
+  // update user remote
+  updateUser({
+    usn: props.user.usn,
+    ukey: 'upass',
+    uvalue: md5(newpass.value)
+  })
+  // update user local
+  props.user.upass = md5(newpass.value);
+}
+const updateUser = (data) => {
+  axios.post('/user/modify', data)
+    .then(res => {
+      console.log('then', res);
+    })
+    .catch(err => {
+      console.log('err', err);
+    })
+}      </pre>
+      <div>C端 - 结构</div>
+      <pre>
+&lt;div class="pass"&gt;
+  &lt;form @submit.prevent="submit"&gt;
+    &lt;div class="item"&gt;
+      &lt;div&gt;旧密码&lt;/div&gt;
+      &lt;input type="text" name="oldupass" maxlength="16" required v-model.lazy="oldupass" placeholder="16个字符以内"&gt;
+    &lt;/div&gt;
+    &lt;div class="item"&gt;
+      &lt;div&gt;新密码&lt;/div&gt;
+      &lt;input type="text" name="newpass" maxlength="16" required v-model.lazy="newpass" placeholder="16个字符以内"&gt;
+    &lt;/div&gt;
+    &lt;div class="item"&gt;
+      &lt;div&gt;确认新密码&lt;/div&gt;
+      &lt;input type="text" name="temppass" maxlength="16" v-model.lazy="temppass" required placeholder="16个字符以内"&gt;
+    &lt;/div&gt;
+    &lt;div class="btn-group"&gt;
+      &lt;button type="submit"&gt;提交&lt;/button&gt;
+      &lt;button type="reset"&gt;取消&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;</pre>
+    </dd>
+    <dd class="tips">用户信息修改，采用同样的接口，C端可以封装为函数</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
