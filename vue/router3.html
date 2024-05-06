@@ -16,10 +16,16 @@
         <span>&commat; Router</span>
     </header>
     <dl>
-        <dd>除了使用 &lt;router-link&gt; 创建 &lt;a&gt; 标签来定义声明式路由外，还可以借助 router 的实例方法，编写代码来实现路由功能</dd>
+        <dd>除了使用 &lt;router-link&gt; 创建路由|声明式路由，还可以借助 router 相关 API|编程路由实现；类似于 &lt;a&gt; 和 location.href 的关系</dd>
+        <dd>需引入路由包 useRouter 并创建路由实例router</dd>
         <dd>可以使用 普通路由|路径path；也可以使用 命名路由|name</dd>
         <dd>还可以指定路由参数 params 或 query</dd>
-        <dd>需引入路由包 useRouter 并创建路由实例router</dd>
+        <dd class="tips">
+            <div>useRoute() 是一个全局注入的函数，用于在组件中获取当前激活的路由信息。它返回一个 RouteLocationNormalized 对象，包含了当前路由的所有属性，如
+                path、params、query 等</div>
+            <div>useRouter() 同样是全局注入的函数，用于获取路由器实例，从而可以进行导航操作，如 push、replace、go 等</div>
+            <div>仅在 Vue 3 的 Composition API 环境下使用</div>
+        </dd>
         <dd>更多信息，请访问 <a href="https://router.vuejs.org/zh/api/#Functions-useRouter">官方文档 - useRouter</a></dd>
         <dd>
             <pre>
@@ -41,6 +47,10 @@ const router = useRouter()</pre>
                     <td>replace</td>
                     <td>导航时不会向 history 添加新记录，替换|取代了当前的条目；不可返回</td>
                 </tr>
+                <tr>
+                    <td>go(n)</td>
+                    <td>导航到历史记录中的特定位置；可以前进或后退；参数 n 是一个整数，相对于当前位置的偏移量</td>
+                </tr>
             </table>
         </dd>
         <dd class="tips">
@@ -54,8 +64,9 @@ router.push('/user?id=100')
 // 查询路由，结果是 /register?plan=private
 router.push({ path: '/register', query: { plan: 'private' } })
 
-// 动态路由
+// 动态路由 - 静态和动态
 router.push('/user/eduardo')
+router.push({ path: '/detail/' + ind })
 
 // 动态路由，并加上参数，让路由建立 url；只能使用命令路由name
 router.push({ name: 'user', params: { username: 'eduardo' } })

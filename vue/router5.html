@@ -16,6 +16,7 @@
         <span>&commat; Navigation Guards</span>
     </header>
     <dl>
+        <dd>控制路由的访问权限，如：未登录，不可以下单、发帖、留言或领取优惠券，通常会引导用户到特定页面，如登录页面</dd>
         <dt>导航解析流程</dt>
         <dd class="sn">
             <div>导航被触发</div>
@@ -31,13 +32,12 @@
             <div>触发 DOM 更新</div>
             <div>调用 beforeRouteEnter 守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入</div>
         </dd>
-        <dt>全局前置守卫 beforeEach </dt>
-        <dd>使用 router.beforeEach 注册一个全局前置守卫</dd>
-        <dd>接收3个参数：</dd>
-        <dd>1. from：离开的路由</dd>
-        <dd>2. to：进入的路由</dd>
-        <dd>3. next：路由拦截，如：未登录不允许访问，并引导|重定向到指定页面</dd>
-        <dd>正常访问</dd>
+        <dt>全局前置守卫 beforeEach(fn) </dt>
+        <dd>使用 router.beforeEach 注册一个全局前置守卫，执行函数 fn，接收3个参数：</dd>
+        <dd>to：进入的路由</dd>
+        <dd>from：离开的路由</dd>
+        <dd>next()：是一个函数，表示是否允许，实现路由控制，如：未登录不允许访问，并引导|重定向到指定页面</dd>
+        <dd>正常访问；或不使用next形参</dd>
         <dd>
             <pre>
 router.beforeEach((to, from, next) => {
@@ -45,28 +45,48 @@ router.beforeEach((to, from, next) => {
     next()
 })</pre>
         </dd>
-        <dd>不允许访问</dd>
+        <dd>不允许访问 - 简单粗暴；不建议使用</dd>
         <dd>
             <pre>
 router.beforeEach((to, from, next) => {
     console.log('router from', from.path, 'to ', to.path);
-    if(to.path=='/home')
+    if(to.path=='/order')
         next(false)
 })</pre>
         </dd>
-        <dt>全局解析守卫 beforeResolve</dt>
-        <dd>使用 router.beforeResolve 注册一个全局守卫</dd>
-        <dt>全局后置钩子 afterEach</dt>
-        <dd>不会接受 next 函数也不会改变导航本身</dd>
-        <dd>接收2个参数：from、to</dd>
+        <dd>在next()中指定跳转的路由，引导到指定页面 - 建议</dd>
+        <dd>
+            <pre>
+router.beforeEach((to, from, next) => {
+    console.log('hi');
+    if (to.path == '/order') {
+        //next('/home')
+        //next({ path: '/home' })
+        next({ name: 'home' })
+    } else {
+        next()
+    }
+})</pre>
+        </dd>
+        <dd>如果使用了next形参，但是不执行next()，则不会跳转，也就不会执行全局后置钩子 afterEach</dd>
+        <dd>
+            <pre>
+router.beforeEach((to, from, next) => {
+    console.log('hi');    
+})</pre>
+        </dd>
+        <dt>全局后置钩子 afterEach(fn)</dt>
+        <dd>使用 router.afterEach 注册一个全局后置守卫，执行函数 fn，接收2个参数：to、from；不会接受 next 函数也不会改变导航本身，因为导航已结束</dd>
         <dd>
             <pre>
 router.afterEach((to, from) => {
-    //sendToAnalytics(to.fullPath)
+    //
 })</pre>
         </dd>
+        <dt>全局解析守卫 beforeResolve(fn)</dt>
+        <dd>使用 router.beforeResolve 注册一个全局解析守卫</dd>
         <dt>路由独享的守卫</dt>
-        <dd>局部路由</dd>
+        <dd>局部路由使用守卫</dd>
         <dd class="example-sn">折叠导航菜单 - 导航变化时；单击当前导航</dd>
         <dd>在路由文件中，引入仓库</dd>
         <dd>每次进入，创建菜单实例并设置菜单栏样式为隐藏；也可以创建该仓库的全局仓库</dd>
@@ -78,7 +98,6 @@ import { useMenuStore } from '@/stores/menu'
 router.beforeEach((to, from, next) => {
     const store = useMenuStore();
     store.flag = false;
-    NProgress.start();
     next();
 })
 
@@ -89,7 +108,7 @@ router.afterEach((to, from) => {
     }
 })</pre>
         </dd>
-        <dd class="example-sn">设置页面标题 title - 导航结束后</dd>
+        <dd class="example-sn">设置页面标题 title - 导航结束后；需要为路由设置 meta 属性</dd>
         <dd>
             <pre>
 router.afterEach((to, from) => {
@@ -109,7 +128,19 @@ router.afterEach((to, from) => {
 })
             </pre>
         </dd>
-        <dd class="example-sn">登录认证</dd>
+        <dd class="example-sn">登录认证 - 借助登录 token 或本地存储的登录信息实现路由控制</dd>
+        <dd>
+            <pre>
+router.beforeEach((to, from, next) => {
+    console.log('hi');
+    let token = localStorage.getItem('token')
+    if (to.path == '/order' && !token) {
+        next('/login')
+    } else {
+        next()
+    }
+})</pre>
+        </dd>
         <dd class="tips">
             <div>更多路由控制，应该由后端服务器实现，前端不可靠</div>
             <div>前提是路由配置时，为每个路由指定meta属性</div>

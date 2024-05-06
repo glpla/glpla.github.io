@@ -37,16 +37,16 @@
 &lt;router-link :to="{ name: 'team', query: { id: 100 } }"&gt;team&lt;/router-link&gt;</pre>
         </dd>
         <dt>接收路由参数</dt>
-        <dd>在路由目标组件 - 结构 - 使用 $route.query 接收路由参数</dd>
-        <dd>
-            <pre>&lt;div&gt;{{ $route.query.id }}&lt;/div&gt;</pre>
-        </dd>
         <dd>在路由目标组件 - 逻辑 - 使用 useRoute 接收路由参数；多个路由参数可以使用解构路由以简化语法</dd>
         <dd>
             <pre>
 import { useRoute } from 'vue-router'
 let route = useRoute()
 console.log(route.query.id);</pre>
+        </dd>
+        <dd>在路由目标组件 - 结构 - 使用 $route.query 接收路由参数</dd>
+        <dd>
+            <pre>&lt;div&gt;{{ $route.query.id }}&lt;/div&gt;</pre>
         </dd>
         <dt>注意事项</dt>
         <dd>为避免失去响应式，应该使用toRefs</dd>
