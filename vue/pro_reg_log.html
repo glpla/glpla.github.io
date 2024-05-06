@@ -282,31 +282,38 @@ console.log(data);</pre>
       <pre>
 import { $get } from "../utils/request";
 export const $login = async (params) => {
-  await $get("/user/login", params);
+  let res = await $get("/user/login", params);
+  return res;
 }; </pre>
     </dd>
     <dd>直接使用</dd>
     <dd>
       <pre>
 import { $login } from '@/assets/utils/login.js';
-let data = $login({
-  usn: user.value.usn,
-  upass: user.value.upass
-})</pre>
+const login = async () => {
+  let res = await $login({
+    usn: user.value.usn,
+    upass: user.value.upass
+  });
+};</pre>
     </dd>
     <dd>2. 注册</dd>
     <dd>
       <pre>
 import { $post } from './request'
 export const $register = async (params) => {
-  await $post('/user/register', params)
+  let res = await $post('/user/register', params)
+  return res;
 }</pre>
     </dd>
     <dd>直接使用</dd>
     <dd>
       <pre>
 import { $register } from '@/assets/utils/register.js';
-let data = $register(user.value)</pre>
+let data = $register(user.value)
+const login = async () => {
+  let res = await $register(user.value);
+};</pre>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
