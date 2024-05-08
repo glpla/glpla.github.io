@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Promise</title>
-  <link rel="stylesheet" href="../../css/reset2024.css">
-  <link rel="stylesheet" href="../../css/common2024.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
+  <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
 </head>
 
@@ -18,20 +15,77 @@
     <h1>Promise</h1>
   </header>
   <dl>
-    <dd>承诺在未来某个时刻可能完成并返回结果</dd>
-    <dd>异步操作</dd>
+    <dd>函数类型，实际上是一个对象</dd>
+    <dd>承诺在未来某个时刻可能完成并返回结果：成功或失败</dd>
+    <dd>异步操作，用来解决异步调用的问题 - 回调地狱</dd>
+    <dd>
+      <pre>
+console.log(typeof (Promise)); //function
+//或
+console.dir(Promise);</pre>
+      <img src="./imgs/promise.png" alt="">
+    </dd>
+    <dd>1. 参数</dd>
+    <dd>.使用 resolve() 函数表示 Promise 处理成功，给出结果</dd>
+    <dd>.使用 reject() 函数表示 Promise 处理失败，给出结果</dd>
+    <dd>2. 实例方法|原型函数|API</dd>
+    <dd>.使用 then() 函数获取处理的结果，包括：成功和失败；第一个参数是成功的函数，第二个参数是失败的函数</dd>
+    <dd>.使用 catch() 函数捕获异常</dd>
+    <dd>.使用 finally() 函数表示处理结束</dd>
+    <dd>3. 对象方法|静态函数，无须实例化</dd>
+    <dd>.使用 all() 处理多个Promise</dd>
+    <dt>基本使用</dt>
+    <dd class="sn">
+      <div>链式写法</div>
+      <pre>
+let promise = new Promise((resolve, reject) => {
+  resolve('fulfilled')
+  reject('rejected')
+})
+  .then(res => {
+    console.log(res);
+  }, err => {
+    console.log(err);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+  .finally(log => {
+    console.log('ending for log');
+})</pre>
+      <div>独立写法</div>
+      <pre>
+let promise = new Promise((resolve, reject) => {
+  resolve('fulfilled')
+  reject('rejected')
+})
+
+promise.then(res => {
+  console.log(res);
+}, err => {
+  console.log(err);
+})
+
+promise.catch(err => {
+  console.log(err);
+})
+
+promise.finally(log => {
+  console.log('ending for log');
+})</pre>
+    </dd>
     <dt>状态</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>pending</div>
       <p>待处理 - 调用Promise时，初始状态为 pending，表示还没有开始</p>
-      <pre class="code">
+      <pre>
 let promise = new Promise((resolve, reject) => {
 })
 
 console.log(promise);</pre>
       <div>fulfilled</div>
-      <p>执行成功 - 调用resolve，将Promise的状态改为fulfilled，通过then获取结果；履行承诺</p>
-      <pre class="code">
+      <p>执行成功时，调用resolve，将Promise的状态改为fulfilled</p>
+      <pre>
 let promise = new Promise((resolve, reject) => {
   resolve('fulfilled')
 })
@@ -42,8 +96,8 @@ promise.then(res => {
   console.log(res);
 })</pre>
       <div>rejected</div>
-      <p>执行异常 - 调用reject，将Promise的状态改为rejected，通过catch出来错误；拒绝承诺|被驳回</p>
-      <pre class="code">
+      <p>Promise 执行过程中遇到错误或者无法完成预期操作时，Promise的状态改为rejected</p>
+      <pre>
 let promise = new Promise((resolve, reject) => {
   reject('rejected')
 })
@@ -54,22 +108,119 @@ promise.catch(err => {
   console.log(err);
 })</pre>
     </dd>
+    <dt>catch</dt>
+    <dd>处理 Promise 被 rejected 时的错误；常见异常如下表。</dd>
+    <dd>
+      <table>
+        <caption>常见异常捕获类型</caption>
+        <tr>
+          <th>分类</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>运行时错误</td>
+          <td>程序执行过程中发生的错误，例如除以零、数组越界、空指针引用等</td>
+        </tr>
+        <tr>
+          <td>自定义异常</td>
+          <td>自定义异常来表示特定的错误条件或业务规则违反</td>
+        </tr>
+        <tr>
+          <td>系统异常</td>
+          <td>操作系统或编程语言环境可能会抛出一些系统级别的异常，比如文件未找到、权限不足等</td>
+        </tr>
+        <tr>
+          <td>库或框架异常</td>
+          <td>使用第三方库或框架时，如果调用的方法内部出现错误，这些库或框架可能会抛出异常</td>
+        </tr>
+        <tr>
+          <td>类型异常</td>
+          <td>在强类型语言中，类型不匹配或其他类型相关的错误也可能导致异常</td>
+        </tr>
+        <tr>
+          <td>逻辑错误</td>
+          <td>逻辑错误通常不会立即导致程序崩溃；某些情况下，可以选择通过抛出异常的方式来中断程序流程，便于调试和处理 </td>
+        </tr>
+      </table>
+    </dd>
+    <dd>当在 Promise 链上使用 catch 方法时，它会捕获前面的 Promise 链中任何未处理的 rejected 错误：可以不在then()中处理，而在catch()中处理</dd>
+    <dd>通常情况下，使用then()处理成功，使用catch()处理异常，更加符合Promise的语义和人们的思维习惯</dd>
+    <dd>
+      <pre>
+let flag = false
+let promise = new Promise((resolve, reject) => {
+  flag ? resolve('data: fulfilled') : reject('data rejected');
+})
+  .then(res => {
+    console.log(res);
+  }, err => {
+    console.log('then err', err); //拒绝后，如果这里处理过了，catch()就不再处理
+  })
+  .catch(err => {
+    console.log('catch err', err);  //如果then()中没有处理异常，这里就必须处理
+  })
+  .finally(log => {
+    console.log('ending for log');
+  })      </pre>
+    </dd>
+    <dt>多个请求</dt>
+    <dd class="sn">
+      <div>链式调用 - 彼此有制约关系，如先拿到A后才可以继续请求B，然后再请求C</div>
+      <pre>
+pa()
+.then(res => {  // 拿到的是pa的结果
+  console.log(res);
+  return pb()
+})
+.then(res => {  //拿到的是pb的结果
+  console.log(res);
+  return pc()
+})
+.then(res => {  //拿到的是pc的结果
+  console.log(res);
+})</pre>
+      <div>彼此无需依赖关系，如同时请求A、B、C，可以并行请求</div>
+      <p>使用静态方法 Promise.all()，接收一个 Promise 对象的数组作为参数</p>
+      <p>全部成功：只有当所有的 Promise 都 resolve（成功）时，返回的 Promise 实例才会 resolve，并将每个输入 Promise 的 resolve 值组成一个数组 </p>
+      <p>任意失败则整体失败：如果传入的任何一个 Promise 变为 rejected（失败），或者传入的不是一个 Promise，则 Promise.all() 立即 reject，并将第一个错误原因作为其结果</p>
+      <p>处理相互独立的任务时能显著提高效率</p>
+      <pre>
+Promise.all([pa(), pb(), pc()])
+.then(res => {
+  console.log(res);
+})</pre>
+    </dd>
+    <dd class="example-sn">首页加载：轮播图、用户信息、商品列表、活动信息等诸多内容</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script>
+    let flag = false
     let promise = new Promise((resolve, reject) => {
-      resolve('fulfilled')
-      reject('rejected')
+      flag ? resolve('data: fulfilled') : reject('data rejected');
     })
       .then(res => {
         console.log(res);
+      }, err => {
+        console.log('then err', err);
       })
       .catch(err => {
-        console.log(err);
+        console.log('catch err', err);
       })
       .finally(log => {
         console.log('ending for log');
       })
+    // let p = new Promise((resolve, reject) => {
+    //   flag ? resolve('data: fulfilled') : reject('data rejected');
+    // })
+    // p.then(
+    //   res => console.log('res', res),
+    //   err => console.log('err', err))
+    // p.catch(err => {
+    //   console.log(err);
+    // })
+    // p.finally(log => {
+    //   console.log('ending for log');
+    // })
   </script>
 </body>
 

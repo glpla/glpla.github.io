@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>网络请求Fetch</title>
-  <link rel="stylesheet" href="../css/reset2024.css">
-  <link rel="stylesheet" href="../css/common2024.css">
-  <link rel="stylesheet" href="../css/code.css">
-  <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
 </head>
 
@@ -19,47 +16,30 @@
     <span>网络请求</span>
   </header>
   <dl>
-    <dd class="tips">以下测试用例基于json-server环境</dd>
-    <dd>.fetch是w3c的一种请求标准，不是第三方库，与vue、jquery无关</dd>
-    <dd>.下一代Ajax技术，采用 <span class="warn">Promise</span> 方式处理数据</dd>
+    <dd>.Fetch是w3c的一种请求标准，不是第三方库，与 Vue、JQuery无关</dd>
+    <dd>.下一代 Ajax 技术，基于 <a href="./promise.html">Promise</a> 方式处理数据</dd>
+    <dd>
+      <pre>console.dir(fetch);</pre>
+      <img src="" alt="">
+    </dd>
     <dd>.语法简介明了</dd>
     <dd>.既可以访问远程数据，也可以访问本地数据</dd>
     <dd>.除了IE，多数浏览器都兼容</dd>
     <dd>.需要拼接参数，通常需要二次封装</dd>
-    <dd class="code">
+    <dd>
       <pre>fetch(url)</pre>
     </dd>
     <dt>配置项</dt>
-    <dd>method（String）：HTTP请求方法，Get获取数据 | Post提交数据 | Delete删除数据 | Put/Patch更新数据；默认为GET</dd>
-    <dd>body（String）：HTTP请求的参数</dd>
-    <dd>headers（Object）：HTTP请求头，如content-type的常见值为application/json、application/x-www-form-urlencoded；默认是application/json
-    </dd>
+    <dd>method（String）：HTTP请求方法，Get获取数据 | Post提交数据 | Delete删除数据 | Put更新数据；默认为GET</dd>
+    <dd>body（String）：HTTP请求的参数；POST时使用</dd>
+    <dd>headers（Object）：HTTP请求头，如content-type的常见值为application/json、application/x-www-form-urlencoded</dd>
     <dd class="tips">
       <div>json格式的数据POST时，可以省略header配置项；具体还要看服务器端的适配情况</div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>GET</figcaption>
-        <pre>
-fetch(url)
-  .then(res=>res.json())
-  .then(res=>{
-    console.log(res)
-  })
-  .catch(err=>{
-    console.log(err)
-  })
-  .finally(()=>{
-    console.log('done for log')
-  })</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>POST</figcaption>
-        <pre>
+      <pre>
 fetch(url, {
-  method: 'POST',
+  method: '',
   headers: {
     'Content-Type': 'application/json'
   },
@@ -68,41 +48,180 @@ fetch(url, {
   .then(res => res.json())
   .then(res => {
     console.log('success ', res)
-  })
-  .catch(err => {
-    console.log('fail', err)
-  })
-  .finally(() => {
-    console.log('done')
   })</pre>
-      </figure>
     </dd>
     <dt>响应结果</dt>
-    <dd>.在响应的原型[[Prototype]] Response中，可以看到相关的事件</dd>
+    <dd>.在响应的原型[[Prototype]] Response中，可以看到相关的函数，他们仍然是一个Promise对象，所以需要2次返回才能拿到结果</dd>
     <dd>res.json()：得到JSON对象，同JSON.parse(responseText)一样；应用最广泛</dd>
     <dd>res.text()：得到文字|字符串</dd>
     <dd>res.formData()：得到FormData表单对象</dd>
     <dd>res.blob()：得到多媒体对象，如图片</dd>
-    <dt>GET 基本过程</dt>
-    <dd>只需要指定url和对应的查询参数即可</dd>
-    <dd>1.fetch执行后，返回一个Promis；要拿到结果，必须在then中进一步处理</dd>
-    <dd>2.第1次then：获取的是Promise对象，是对HTTP服务的响应，需要使用json()处理；json()是一个异步操作，将内容转换为JSON对象</dd>
-    <dd>3.第2次then：json()返回的仍然是一个Promise，仍然需要在then()中处理</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>传统方式 - catch/finally略</figcaption>
-        <pre>
-fetch('./data2021/stu.json')
+  </dl>
+  <dl>
+    <dt>获取数据 GET</dt>
+    <dd class="sn">
+      <div>C端</div>
+      <p>默认获取数据 - 一般是获取所有数据</p>
+      <pre>
+fetch('https://glpla.github.io/utils/data/data2021/stu.json')
   .then(res => res.json())
-  .then(res => {
-    console.log(res);
-  })</pre>
-      </figure>
+  .then(res => console.log(res))</pre>
+      <p>使用查询参数 query，直接在url后面使用?拼接查询值对，使用&拼接多个查询参数；如获取指定数据或分页获取数据</p>
+      <pre>
+fetch('http://127.0.0.1:3000/test?id=20240507')
+  .then(res => res.json())
+  .then(res => console.log(res))</pre>
+      <p>使用路径参数 params</p>
+      <pre>
+fetch('http://127.0.0.1:3000/test/20240507')
+  .then(res => res.json())
+  .then(res => console.log(res))</pre>
+      <div>S端</div>
+      <pre>
+router.get('/', (req, res) => {
+  console.log(req.query);
+  res.header('Access-Control-Allow-Origin', '*')
+  res.json({
+    code: 'ok',
+    type: 'get',
+    data: req.query.id
+  })
+})
+router.get('/:id', (req, res) => {
+  console.log('params', req.params);
+  res.header('Access-Control-Allow-Origin', '*')
+  res.json({
+    code: 'ok',
+    type: 'get',
+    data: req.params.id
+  })
+})</pre>
     </dd>
+    <dd class="example-sn">text() - 请求本地文本</dd>
     <dd>
-      <figure class="code">
-        <figcaption>async-await方式</figcaption>
-        <pre>
+      <pre>
+fetch('./tmp.txt')
+  .then(res => res.text())
+  .then(res => console.log(res))</pre>
+    </dd>
+    <dd class="example-sn">formData() - 请求表单</dd>
+    <dd class="example-sn">blob() - 请求图片</dd>
+    <dd>
+      <pre>
+fetch('./imgs/avatar0.jpg')
+  .then(res => res.blob())
+  .then(res => img.src = URL.createObjectURL(res))</pre>
+    </dd>
+    <dt>增加数据 POST</dt>
+    <dd>url</dd>
+    <dd>method：POST</dd>
+    <dd>headers：根据数据类型设置，如JSON数据</dd>
+    <dd>body：传递JSON数据，需要使用JSON.stringify(data)序列化数据；部分框架和部分服务器可以自动完成数据的序列化和解析</dd>
+    <dd>服务器使用 request.body 获取数据；Express早期需要使用额外的依赖 body-parser，现在可以直接使用内置中间件</dd>
+    <dd class="sn">
+      <div>C端</div>
+      <p>传递JSON数据</p>
+      <pre>
+fetch(url + '/cont', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    id: 20240508,
+  })
+})
+  .then(res => res.json())
+  .then(res => console.log(res))</pre>
+      <p>传递值对，如表单数据</p>
+      <pre>
+fetch('http://127.0.0.1:3000/test', {
+  method: 'post',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
+  body: 'id=20240507'
+})
+  .then(res => res.json())
+  .then(res => console.log(res))  </pre>
+      <div>S端</div>
+      <pre>
+router
+.use(express.urlencoded({ extended: true }))  // for parsing application/x-www-form-urlencoded
+.use(express.json())  // for parsing application/json when POST
+      </pre>
+      <pre>
+router.post('/', (req, res) => {
+  console.log('req body', req.body);
+  res.json({
+    code: 'ok',
+    type: 'post',
+    data: req.body.id
+  })
+})  </pre>
+    </dd>
+    <dt>删除数据 DELETE</dt>
+    <dd>使用 <span class="warn">路径参数</span>，指定 method 为 DELETE</dd>
+    <dd>DELETE请求通常不需要请求体，但可能需要设置 Content-Type。如果API需要，确保它被正确设置，通常为 'Content-Type': 'application/json' 或 'Content-Type':
+      'text/plain'</dd>
+    <dd>服务器端需要能够处理 DELETE 请求。有些API可能需要特定的路由或者需要在服务器端有相应的处理逻辑</dd>
+    <dd>默认情况下，Node + Express 没有开启 DELETE 请求；需要设置请求头；更多信息，请查看 <a href="./proxy.html">代理 - Proxy</a></dd>
+    <dd>
+      <pre>res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');</pre>
+    </dd>
+    <dd class="sn">
+      <div>C端</div>
+      <pre>
+fetch('http://127.0.0.1:3000/test/20240507', {
+  method: 'DELETE'
+})
+  .then(res => res.json())
+  .then(res => console.log(res))</pre>
+      <div>S端</div>
+      <pre>
+router.delete('/:id', (req, res) => {
+  console.log('params', req.params);
+  res.json({
+    code: 'ok',
+    type: 'delete',
+    data: req.params.id
+  })
+})      </pre>
+    </dd>
+    <dt>更新数据 PUT</dt>
+    <dd>同POST；除了指定要修改的数据外，还要以<span class="warn">路径参数</span>的形式指定修改谁的数据</dd>
+    <dd class="sn">
+      <div>C端</div>
+      <pre>
+fetch('http://127.0.0.1:3000/test/123', {
+  method: 'put',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    id: 20240507
+  })
+})
+  .then(res => res.json())
+  .then(res => console.log(res))</pre>
+      <div>S端</div>
+      <pre>
+router.put('/:id', (req, res) => {
+  console.log('params', req.params);
+  console.log('req body', req.body);
+  res.json({
+    code: 'ok',
+    type: 'delete',
+    data: req.params.id
+  })
+})      </pre>
+    </dd>
+  </dl>
+  <dl>
+    <dt>其它</dt>
+    <dd>async-await方式</dd>
+    <dd>
+      <pre>
 async function getData() {
   let res = await fetch('./data2021/stu.json');
   console.log(res);
@@ -110,98 +229,8 @@ async function getData() {
   console.log(json);
 }
 getData();</pre>
-      </figure>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>异常捕获处理</figcaption>
-        <pre>
-async function getData() {
-  try {
-    let res = await fetch('./data2021/stu.json');
-    console.log(res);
-    let json = await res.json();
-    console.log(json);
-  } catch (err) {
-    console.log(err);
-  }
-}</pre>
-      </figure>
-    </dd>
-    <dd>4.fetch抓取数据时不会抛出错误,即使是404或500错误；可根据响应状态ok或状态码status判断结果</dd>
-    <dd class="code">
-      <pre>
-ok: true
-redirected: false
-status: 200
-statusText: "OK"
-type: "cors"
-url: "http://localhost:3000/clerk/2002"</pre>
-    </dd>
-    <dd class="code">
-      <pre>
-ok: false
-redirected: false
-status: 404
-statusText: "Not Found"
-type: "cors"
-url: "http://localhost:3000/clerk/2002"</pre>
-    </dd>
-    <dd>5.可以使用查询参数query parameters，直接在url后面使用?拼接查询值对，使用&拼接多个查询参数</dd>
-    <dd>
-      <pre>http://ajax-base-api-t.itheima.net/api/getbooks?id=2</pre>
-    </dd>
-    <dd class="example-sn">text()-请求本地文本</dd>
-    <dd class="code">
-      <pre>
-fetch('./tmp.txt')
-  .then(res => res.text())
-  .then(res => console.log(res))</pre>
-    </dd>
-    <dd class="example-sn">json()-请求本地JSON</dd>
-    <dd class="example-sn">json()-请求网络接口</dd>
-    <dd class="example-sn">formData()-请求表单</dd>
-    <dd class="example-sn">blob()-请求图片</dd>
-    <dd class="code">
-      <pre>
-fetch('./imgs/avatar0.jpg')
-  .then(res => res.blob())
-  .then(res => img.src = URL.createObjectURL(res))</pre>
-    </dd>
-    <dt>POST 基本过程</dt>
-    <dd>url</dd>
-    <dd>method：POST</dd>
-    <dd>headers：{'content-type':'application/json'}</dd>
-    <dd>body：json数据序列化后的数据</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>普通方式 - 数据序列化后再发送</figcaption>
-        <pre>
-fetch(url + '/cont', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    name: 'dg',
-    age: 49,
-    rank: 1,
-    src: '1.jpg'
-  })
-})
-  .then(res => res.json())
-  .then(res => {
-    console.log('success ', res)
-  })
-  .catch(err => {
-    console.log('fail', err)
-  })
-  .finally(() => {
-    console.log('done')
-  })</pre>
-      </figure>
-    </dd>
-    <dd class="code">
       <pre>
 async function addData() {
   try {
@@ -225,20 +254,65 @@ async function addData() {
   }
 }</pre>
     </dd>
-    <dt>DELETE 基本过程</dt>
-    <dd>请根据接口完成</dd>
-    <dt>PATCH 基本过程</dt>
-    <dd>请根据接口完成</dd>
+    <dd>异常捕获处理</dd>
+    <dd>
+      <pre>
+async function getData() {
+  try {
+    let res = await fetch('./data2021/stu.json');
+    console.log(res);
+    let json = await res.json();
+    console.log(json);
+  } catch (err) {
+    console.log(err);
+  }
+}</pre>
+    </dd>
+    <dd>fetch抓取数据时不会抛出错误,即使是404或500错误；可根据响应状态ok或状态码status判断结果</dd>
+    <dd>
+      <pre>
+ok: true
+redirected: false
+status: 200
+statusText: "OK"
+type: "cors"
+url: "http://localhost:3000/clerk/2002"</pre>
+    </dd>
+    <dd>
+      <pre>
+ok: false
+redirected: false
+status: 404
+statusText: "Not Found"
+type: "cors"
+url: "http://localhost:3000/clerk/2002"</pre>
+    </dd>
     <dt>推荐资源</dt>
-    <dd>1. <a href="https://dog.ceo/api/breed/pembroke/images/random" class="link">随机小狗 dog ceo</a></dd>
-    <dd>2. <a href="https://picsum.photos/" class="link">随机图片 picsum photos</a></dd>
-    <dd>3. <a href="https://api.uomg.com/api/rand.qinghua?format=json" class="link">土味情话</a></dd>
+    <dd>1. <a href="https://dog.ceo/api/breed/pembroke/images/random">随机小狗 dog ceo</a></dd>
+    <dd>2. <a href="https://picsum.photos/">随机图片 picsum photos</a></dd>
+    <dd>3. <a href="https://api.uomg.com/api/rand.qinghua?format=json">土味情话</a></dd>
     <dd>4. http://ajax-base-api-t.itheima.net/api</dd>
     <dd>/getbooks</dd>
     <dd>/addbook</dd>
     <button class="btn-sub">post</button>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+    // console.dir(fetch);
+    fetch('http://127.0.0.1:3000/test/123', {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      // body: 'id=20240507'
+      body: JSON.stringify({
+        id: 20240507
+      })
+    })
+      .then(res => res.json())
+      .then(res => console.log(res))
+  </script>
 </body>
 
 </html>

@@ -16,14 +16,48 @@
     <span>&commat;Overview</span>
   </header>
   <dl>
-    <dt></dt>
+    <dt>URL</dt>
+    <dd>统一资源定位符，定位资源在服务器上的位置</dd>
+    <dd class="txt-center">schema://host:port/path?query=value#fragment</dd>
+    <dd class="sn">
+      <div>schema：协议；HTTP、HTTPS、FTP</div>
+      <div>host：主机名；以域名活IP地址表示，如glpla.github.io或185.199.109.153</div>
+      <div>port：端口；HTTP 默认 80</div>
+      <div>path：路径；请求资源在服务器上的具体位置；默认为 /，根路由</div>
+      <div>query：查询参数；以 ? 拼接值对键值对参数，多个值对使用 & 连接</div>
+      <div>fragment：片段；锚点；锚链接，以 # 表示，用以定位页面某个位置；也叫哈希值 Hash</div>
+    </dd>
+    <dt>类型</dt>
+    <dd>也称Restful API，指的是是HTTP的请求方式</dd>
     <dd class="sn">
       <div>GET</div>
       <div>POST</div>
       <div>PUT</div>
-      <div>PATCH</div>
       <div>DELETE</div>
+      <div>PATCH</div>
     </dd>
+    <dd>
+      <table>
+        <caption>请求示例</caption>
+        <tr>
+          <td>GET</td>
+          <td>http://www.baidu.com/good</td>
+        </tr>
+        <tr>
+          <td>POST</td>
+          <td>http://www.baidu.com/good</td>
+        </tr>
+        <tr>
+          <td>PUT</td>
+          <td>http://www.baidu.com/good/123</td>
+        </tr>
+        <tr>
+          <td>DELETE</td>
+          <td>http://www.baidu.com/good/123</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>GET</dt>
     <dt>POST</dt>
     <dd>提交的数据包含请求类型 Content-Type 和消息主体编码方式两部分。服务器端依据Content-Type来决定使用何种方式解析主体部分</dd>
     <dd>表单form的属性 enctype 可以指定请求类型；现在通常在请求头header中指定；简单场景下，可以抛弃form这个壳</dd>
@@ -36,8 +70,8 @@
       <div>application/json:</div>
       <p>序列化后的 JSON 字符串</p>
       <div>text/xml</div>
-      <div>text/plain</div>
       <p>XML 作为编码方式的远程调用规范；使用较少</p>
+      <div>text/plain</div>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
