@@ -29,16 +29,8 @@
                 <div>素材准备</div>
                 <div>服务器准备；如无可以使用在线素材，如 <a href="../index.html">大树小站</a> 在线资源</div>
                 <div>音频API使用</div>
-            </dd>
-            <dt>步骤</dt>
-            <dd>第一阶段 初体会 - 极简播放器</dd>
-            <dd>
-                <div>创建项目或页面</div>
-                <div>在逻辑js中，创建音乐播放器BackgroundAudioManager实例</div>
-                <div>指定title和src</div>
-            </dd>
-            <dd>第二阶段 深度开发 - 音乐播放器</dd>
-            <dd>
+                <div>滑块组件 slider</div>
+                <div>主要数据</div>
                 <table class="tbl-sn">
                     <caption>数据支持</caption>
                     <tr>
@@ -74,115 +66,149 @@
                         <td>播放时长；00:00</td>
                     </tr>
                 </table>
+                <div>音频节点信息</div>
+                <pre>
+{
+    "id": 5,
+    "title": "微风细雨",
+    "singer": "wang",
+    "src": "/music/wang.mp3",
+    "coverImgUrl": "/music/wangfei.png"
+}</pre>
             </dd>
+            <dt>步骤</dt>
             <dd>
+                <div>创建项目或页面，修改基本配置信息</div>
+                <div>页面结构设计 - 参考效果图，这里略</div>
+                <div>定义页面全局变量和参考函数，包括：音乐播放器 BGM、时间处理函数 timeFormat 和格式化函数 to2Digit；可以在Page外面声明；也可以在Page内部声明
+                </div>
                 <pre>
-    {
-        "id": 5,
-        "title": "微风细雨",
-        "singer": "wang",
-        "src": "/music/wang.mp3",
-        "coverImgUrl": "/music/wangfei.png"
-    }</pre>
+const BGM = wx.getBackgroundAudioManager();
 
-                <div>主要过程</div>
-                <p>. 创建项目或页面，修改基本配置信息</p>
-                <p>. 导入音频素材列表</p>
+const timeFormat = (num) => {
+  let min = parseInt(num / 60);
+  let sec = parseInt(num) % 60
+  return `${to2Digit(min)}:${to2Digit(sec)}`
+};
+
+const to2Digit = (num) => {
+  return num > 9 ? num : '0' + num;
+};</pre>
+                <div>页面响应式数据定义</div>
                 <pre>
-wx.request({
-    url: 'http://127.0.0.1:3000/data/song_list.json',
-    success: (res) => {
-        console.log(res.data);
-        this.setData({
-            lists: res.data.cont
-        })
-    }
-});</pre>
-                <p>. 创建音乐播放器BackgroundAudioManager实例；可以在Page外面声明；也可以在生命周期函数函数中声明</p>
-                <p>. 侦听音乐播放器BackgroundAudioManager实例；执行播放、暂停、结束、进度更新等API，调整页面相关数据</p>
+data: {
+    lists: [],
+    ind: 0,
+    cur: 0,
+    dur: 0,
+    per: 0,
+    isPause: true.
+    baseUrl: 'https://glpla.github.io/utils'
+}</pre>
+                <div>加载页面时，导入音频素材列表并初始化播放器；使用弹窗UI给出提示</div>
                 <pre>
-BGM.onPlay(() => {
-    console.log('play', BGM.duration);
-    this.setData({
-        isPause: false
+onLoad() {
+    wx.showLoading({
+        title: 'loading',
     })
-})
-
-BGM.onPause(() => {
-    console.log('pause');
-    this.setData({
-        isPause: true
+    wx.request({
+        url: this.data.baseUrl + '/data/song_list.json',
+        success: res => {
+            this.setData({
+                lists: res.data.cont
+            })
+            this.init(this.data.ind)
+        }
     })
-})
-
-BGM.onEnded(() => {
-    console.log('ended');
-    this.setData({
-        isPause: true,
-        cur:'00:00',
-        dur:'00:00'
-    })
-})
-
-BGM.onError(() => {
-    console.log('error');
-})
-
-BGM.onTimeUpdate(() => {
-    console.log('time updating');
-    this.setData({
-        du: BGM.duration,
-        cur: BGM.currentTime
-        per: parseInt(BGM.currentTime / BGM.duration * 100)
-    })
-})</pre>
-                <p>. 播放、暂停：播放、暂停通过背景音频API实现</p>
+}</pre>
+                <div>为按钮绑定播放事件、暂停事件：通过背景音频API实现</div>
                 <pre>
 playBgm() {
-    this.init()
+    BGM.play()
 },
 pauseBgm() {
-    bgm.pause()
+    BGM.pause()
 }</pre>
-                <p>. 音频播放函数；为音频实例BGM指定title、src、singer等基本参数；如果自动播放，可以在获取列表后，立即执行；注意 <span class="warn">拼接地址！！！</span>
-                </p>
+                <div>初始化播放器函数：为音频实例BGM指定title、src、singer等基本参数；并添加侦听函数；注意 <span class="warn">拼接地址！！！</span></div>
                 <pre>
-init() {
-    BGM.title = this.data.lists[this.data.ind].title
-    BGM.singer = this.data.lists[this.data.ind].singer
-    BGM.src = this.data.baseUrl + this.data.lists[this.data.ind].src
+init(ind) {
+    BGM.title = this.data.lists[ind].title
+    BGM.singer = this.data.lists[ind].singer
+    BGM.src = this.data.baseUrl + this.data.lists[ind].src
+
+    BGM.onCanplay(() => {
+        console.log('music is ready')
+        this.setData({
+            isPause: false
+        })
+        wx.hideLoading()
+    })
+    
+    BGM.onPlay(() => {
+        console.log('play', BGM.duration);
+        this.setData({
+            isPause: false
+        })
+    })
+    
+    BGM.onPause(() => {
+        console.log('pause');
+        this.setData({
+            isPause: true
+        })
+    })
+    
+    BGM.onEnded(() => {
+        console.log('ended');
+        this.setData({
+            isPause: true,
+            cur:'00:00',
+            dur:'00:00'
+        })
+    })
+    
+    BGM.onError(() => {
+        console.log('error');
+    })
+    
+    BGM.onTimeUpdate(() => {
+        console.log('time updating');
+        this.setData({
+            cur: BGM.currentTime
+            per: parseInt(BGM.currentTime / BGM.duration * 100)
+        })
+    })
 }</pre>
-                <p>. 上一首、下一首：通过播放列表索引 ind 增加或减少实现；每次更新，自动播放init()</p>
+                <div>上一首、下一首：通过播放列表索引 ind 增加或减少实现；每次更新，自动播放init()</div>
                 <pre>
 prevSong() {
     let ind = this.data.ind
     if (ind > 0) {
         ind--
-        this.setData({
-            ind
-        })
-        this.init()
     }
+    this.setData({
+        ind
+    })
+    this.init(ind)
 },
 nextSong() {
     let ind = this.data.ind
     if (ind &lt; this.data.lists.length - 1) {
         ind++
-        this.setData({
-            ind
-        })
-        this.init()
     }
+    this.setData({
+        ind
+    })
+    this.init(ind)
 }</pre>
-                <p>. 进度调节：利用滑块组件 slider 实现；拖动后，相应的调整BGM的播放进度；将百分比转换为对应的秒数</p>
+                <div>进度调节：利用滑块组件 slider 实现；拖动后，相应的调整BGM的播放进度；将百分比转换为对应的秒数</div>
                 <pre>
 sliderChange(e) {
     let per = parseInt(e.detail.value * BGM.duration / 100)
     BGM.seek(per)
 }</pre>
-                <p>. 播放时长、总时长：在音频的侦听事件中获取音频实例的相关属性；并处理为适合的格式</p>
-                <p>. 封面图片特效：略</p>
-                <p>. 其它设计：略</p>
+                <div>封面图片特效：略</div>
+                <div>其它设计：略</div>
             </dd>
             <dt>注意事项</dt>
             <dd>
@@ -213,6 +239,7 @@ sliderChange(e) {
             <dd>
                 <div>按照以上步骤分别完成设计与开发</div>
                 <div>规范开发；独立完成；突出个人设计特点和风格</div>
+                <div class="warn">使用UI给出提示并处理异常，完善用户体验</div>
                 <div>实验报告：采用学院统一下发的格式文件，以图片或代码形式展示并说明实施过程、各部分功能、具体内容和实现细节，并按照要求命名，最后导出为PDF，提交个人学习通作业</div>
                 <div>未按要求在规定时间内提交视为无效，不得分</div>
                 <div>相关格式规范，请参考 <a href="../course/paper.html">论文格式规范 Paper Prettier</a></div>

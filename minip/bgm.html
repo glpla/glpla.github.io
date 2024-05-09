@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>背景音频 BackgroundAudioManager</title>
+    <title>背景音频管理 BackgroundAudioManager</title>
     <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
 <body>
     <header>
-        <h1>音频组件</h1>
+        <h1>背景音频管理</h1>
         <span>BackgroundAudioManagerudio</span>
     </header>
     <dl>
@@ -30,6 +30,9 @@
         <dt>wx.getBackgroundAudioManager()</dt>
         <dd>获取全局唯一的背景音频管理器；创建背景音乐管理器</dd>
         <dd>若需要在小程序切后台后继续播放音频，需要在 app.json 中配置 requiredBackgroundModes 属性；正式版还需通过审核</dd>
+        <dd>
+            <pre>"requiredBackgroundModes": ["audio"]</pre>
+        </dd>
         <dd>设置后，即使用户离开小程序或锁屏，背景音乐也能继续播放</dd>
         <dd>更多信息，请查看 <a
                 href="https://developers.weixin.qq.com/miniprogram/dev/api/media/background-audio/wx.getBackgroundAudioManager.html">官方文档</a>
@@ -41,7 +44,7 @@
                 href="https://developers.weixin.qq.com/miniprogram/dev/api/media/background-audio/BackgroundAudioManager.html">官方文档</a>
         </dd>
         <dd>
-            <table class="tbl-sn">
+            <table>
                 <caption>一般属性</caption>
                 <tr>
                     <th>属性</th>
@@ -75,20 +78,8 @@
                     <td>paused</td>
                     <td>当前是是否暂停或停止状态；只读</td>
                 </tr>
-                <!-- <tr>
-                    <td>autoplay</td>
-                    <td>是否自动开始播放；默认 false</td>
-                </tr>
-                <tr>
-                    <td>loop</td>
-                    <td>是否循环播放；默认 false</td>
-                </tr>
-                <tr>
-                    <td>volume</td>
-                    <td>音量范围 0~1。默认 1</td>
-                </tr> -->
             </table>
-            <table class="tbl-sn">
+            <table>
                 <caption>一般方法</caption>
                 <tr>
                     <th>属性</th>
@@ -110,12 +101,8 @@
                     <td>stop()</td>
                     <td>停止。停止后的音频再播放会从头开始播放</td>
                 </tr>
-                <!-- <tr>
-                    <td>destroy()</td>
-                    <td>销毁当前实例</td>
-                </tr> -->
             </table>
-            <table class="tbl-sn">
+            <table>
                 <caption>侦听方法</caption>
                 <tr>
                     <th>属性</th>
@@ -123,11 +110,11 @@
                 </tr>
                 <tr>
                     <td>onCanplay(function listener)</td>
-                    <td>监听音频进入可以播放状态的事件。但不保证后面可以流畅播放</td>
+                    <td>监听音频进入可以播放状态的事件。但不保证后面可以流畅播放；可以获取 duration</td>
                 </tr>
                 <tr>
                     <td>onPlay(function listener)</td>
-                    <td>监听音频播放事件；可以获取 duration</td>
+                    <td>监听音频播放事件；建议在此获取 duration</td>
                 </tr>
                 <tr>
                     <td>onPause(function listener)</td>
@@ -155,6 +142,7 @@
                 </tr>
             </table>
         </dd>
+        <dd class="tips">每次更新src时，需要重新添加侦听事件</dd>
         <dd>
             <details>
                 <summary>其它属性</summary>
