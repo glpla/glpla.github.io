@@ -18,9 +18,9 @@
     <dl>
         <dt>&lt;map&gt;</dt>
         <dd>渲染地图</dd>
-        <dd>更多信息，请访问 <a
-                href="https://lbs.qq.com/service/webService/webServiceGuide/miniprogram?ref=miniprogram_component_map">腾讯地图WebService
-                API</a>
+        <dd>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/map.html">官方文档 - map</a> <a
+                href="https://lbs.qq.com/service/webService/webServiceGuide/miniprogram?ref=miniprogram_component_map">地图服务API在小程序中的使用方法
+            </a>
         </dd>
         <dd>
             <table class="tbl-sn">
@@ -31,11 +31,11 @@
                 </tr>
                 <tr>
                     <td>longitude</td>
-                    <td>经度；必填</td>
+                    <td>经度；<span class="warn">必填</span></td>
                 </tr>
                 <tr>
                     <td>latitude</td>
-                    <td>纬度；必填</td>
+                    <td>纬度；<span class="warn">必填</span></td>
                 </tr>
                 <tr>
                     <td>show-location</td>
@@ -51,22 +51,21 @@
                 </tr>
                 <tr>
                     <td>markers</td>
-                    <td>在地图上显示标记的位置；结合地图服务API - 地点搜索实现
-                        <details>
-                            <summary>属性</summary>
-                            <div>latitude：标记经度；必填</div>
-                            <div>longitude：标记维度；必填</div>
-                            <div>iconPath：标记图片路径；必填</div>
-                            <div>id：标记id；number；注意是数字类型；每个标记的id应该不同；必填</div>
-                            <div>width：标记宽度；实际开发必填</div>
-                            <div>height：标记高度；实际开发必填</div>
-                            <div>label：标签；在标记下方显示信息；对象类型</div>
-                            <div>callout：单击标记，在上方显示content信息，单击地图其它地方，信息消失；对象类型</div>
-                        </details>
+                    <td>
+                        <div>在地图上显示标记的位置；结合地图服务API - 地点搜索实现</div>
+                        <div>latitude：标记经度； <span class="warn">必填</span></div>
+                        <div>longitude：标记维度； <span class="warn">必填</span></div>
+                        <div>iconPath：标记图片路径； <span class="warn">必填</span></div>
+                        <div>id：标记id；number；注意是数字类型；每个标记的id应该不同； <span class="warn">必填</span></div>
+                        <div>width：标记宽度；实际开发 <span class="warn">必填</span></div>
+                        <div>height：标记高度；实际开发 <span class="warn">必填</span></div>
+                        <div>label：标签；在标记下方显示信息；对象类型</div>
+                        <div>callout：单击标记，在上方显示content信息，单击地图其它地方，信息消失；对象类型</div>
                     </td>
                 </tr>
             </table>
         </dd>
+        <dd class="tips">[渲染层错误] [Component] &lt;map&gt;:width and heigth of marker id 1 are required</dd>
         <dd>
             <table class="tbl-sn">
                 <caption>气泡callout vs 标签label</caption>
@@ -139,32 +138,31 @@
         </dd>
         <dt>wx.getLocation(Object object)</dt>
         <dd>获取当前的地理位置、速度</dd>
-        <dd>默认type是GPS，推荐使用gcj02</dd>
+        <dd>需要在 app.json 中进行声明；详情请查看 <a
+                href="https://developers.weixin.qq.com/community/develop/doc/000a02f2c5026891650e7f40351c01">具体规则公告</a>
+            、<a href="https://developers.weixin.qq.com/miniprogram/dev/component/map.html">官方文档</a></dd>
+        <dd>默认 type 是 GPS，推荐使用 gcj02</dd>
         <dd>只针对部分限定类目的小程序开放</dd>
         <dd>需要开通权限：[开发] → [开发管理] → [接口设置]中自助开通</dd>
-        <dd>需要在 app.json 中进行声明</dd>
-        <dd>自 2022 年 7 月 14 日后发布的小程序，若使用该接口，需要在 app.json 中进行声明，否则将无法正常使用该接口，2022年7月14日前发布的小程序不受影响；详情请查看 <a
-                href="https://developers.weixin.qq.com/community/develop/doc/000a02f2c5026891650e7f40351c01">具体规则公告</a>
-            、<a href="https://developers.weixin.qq.com/miniprogram/dev/component/map.html">官方文档</a>
-        </dd>
+        <dd>提示：增加调用频率限制</dd>
         <dt>wx.createMapContext(string mapId, Object this)</dt>
-        <dd>根据地图组件map的mapId创建其上下文 MapContext 对象</dd>
-        <dd>MapContext 通过 id 跟一个 map 组件绑定，操作对应的 map 组件；常用方法有：</dd>
-        <dd>1. moveToLocation(Object object)</dd>
-        <dd>将地图中心移置当前定位点；地图组件需设置 show-location 为true</dd>
-        <dd>2. getCenterLocation(Object object)</dd>
-        <dd>获取当前地图中心的经纬度；返回 gcj02 坐标系</dd>
+        <dd>深入控制地图：根据地图组件map的mapId创建其上下文 MapContext 对象，与地图交互</dd>
+        <dd>MapContext 通过 <span class="warn">id</span> 跟一个 map 组件绑定，操作对应的 map 组件；常用方法有：</dd>
+        <dd class="sn">
+            <div>moveToLocation(Object object)</div>
+            <p>将地图中心移置当前定位点；地图组件 <span class="warn">需</span> 设置 show-location 为true</p>
+            <p>经纬度非必须</p>
+            <div>addMarkers(Object object)</div>
+            <p>在地图上添加标记</p>
+            <div>getCenterLocation(Object object)</div>
+            <p>获取当前地图中心的经纬度；返回 gcj02 坐标系，可以用于 wx.openLocation()</p>
+        </dd>
         <dd>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/media/map/MapContext.html">官方文档 -
                 MapContext</a></dd>
         <dd class="example-sn">map基本使用</dd>
         <dd class="sn">
             <div>配置app.json - 只需配置一次，全局生效</div>
-            <pre>
-"permission": {
-    "scope.userLocation": {
-        "desc": "你的位置信息将用于小程序位置接口的效果展示"
-    }
-}</pre>
+            <p>根据需要指定</p>
             <pre>
 "requiredPrivateInfos":[
     "getLocation",
@@ -172,9 +170,18 @@
     "choosePoi",
     "chooseAddress"
 ]</pre>
+            <p>非必须</p>
+            <pre>
+"permission": {
+    "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+}</pre>
             <div>页面.wxml - 使用位置信息渲染地图组件&lt;map&gt;；使用图片返回地图中心</div>
             <pre>
-&lt;map 
+&lt;map
+    class="map" 
+    id="map"
     longitude="{{longitude}}" 
     latitude="{{latitude}}" 
     show-location 
@@ -196,39 +203,67 @@ map{
     width: 30px;
     height: 30px;
 }</pre>
-            <div>页面.js - 获取位置信息，配置中心的标记</div>
-            <p>利用获取到的经纬度，设置标记的经纬度</p>
+            <div>在 Page 外部声明全局地图上下文变量 mapCtx，在页面 onLoad 中初始化</div>
+            <pre>mapCtx = wx.createMapContext('map')</pre>
+            <div>在 data 中声明经纬度变量，和视图绑定</div>
             <pre>
-let mapCtx = ''
-Page({
-    data: {
-        longitude: '',
-        latitude: '',
-    },
-    onLoad(options) {
-        wx.getLocation({
-            type: 'gcj02',
-            success: res => {
-            console.log(res);
-            this.setData({
-                latitude: res.latitude,
-                longitude: res.longitude
-            })
-            }
+data: {
+    longitude: '',
+    latitude: '',
+}</pre>
+            <div>在 onLoad 中同时获取位置信息；设置中心点标记</div>
+            <pre>
+wx.getLocation({
+    type: 'gcj02',
+    success: res => {
+        console.log(res);
+        this.setData({
+            latitude: res.latitude,
+            longitude: res.longitude
         })
-    },
-    onReady: () => {
-        mapCtx = wx.createMapContext('map')
-    },
-    moveToLocation: () => {
-        mapCtx.moveToLocation()
+        this.addCenterMarkers(res.latitude, res.longitude)
     }
-})</pre>
-            <div>预览 - 移动地图，单击返回中心查看地图移动情况；开发工具和预览、真机调试有差别</div>
+})            </pre>
+            <div>添加标记点函数，使用经纬度作为形参</div>
+            <pre>
+addCenterMarkers(lati, long) {
+    mapCtx.addMarkers({
+        markers: [{
+            id: 1,
+            latitude: lati,
+            longitude: long,
+            iconPath: '../../utils/marker.png',
+            width: 32,
+            height: 32
+        }],
+        success: () => {
+            console.log('添加标记成功');
+        },
+        fail: (err) => {
+            console.error('添加标记失败', err);
+        }
+    });
+    }
+            </pre>
+            <div>移动地图，利用结束点 end 中的中心坐标，更新标记</div>
+            <pre>
+changeRegion(e) {
+    if (e.type == 'end')
+        this.addCenterMarkers(e.detail.centerLocation.latitude, e.detail.centerLocation.longitude)
+}</pre>
+            <div>单击返回中心，使地图回到中心点</div>
+            <pre>
+moveToLocation() {
+    mapCtx.moveToLocation({
+        longitude: this.data.longitude,
+        latitude: this.data.latitude
+    })
+}</pre>
             <figure>
                 <img src="./imgs/map0.jpg" alt="">
             </figure>
         </dd>
+        <dd class="tips">开发工具和预览、真机调试有差别</dd>
     </dl>
     <div class="chap">腾讯地图 LBS API</div>
     <dl>
