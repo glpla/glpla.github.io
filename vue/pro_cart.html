@@ -15,18 +15,18 @@
   <div class="container">
     <header>
       <h1>购物车</h1>
-      <span>Center</span>
+      <span>&commat;Cart</span>
     </header>
     <dl class="number-mul-sn">
       <dt>实验内容</dt>
       <dd>同时使用普通事件和监听实现</dd>
       <dd>
-        <div>单个商品的增加和减少</div>
-        <div>全选</div>
-        <div>地址选择</div>
+        <div>商品的增加、减少和删除</div>
+        <div>选择：全选、单选、部分选择</div>
+        <div>排序</div>
         <div>结算</div>
         <div>下单</div>
-        <div>商品删除</div>
+        <div>地址选择</div>
       </dd>
       <dt>前置知识</dt>
       <dd>
@@ -43,7 +43,7 @@
         <div>Node.js</div>
       </dd>
       <dt>参考代码</dt>
-      <dd>这里给出购物车优化后的逻辑；其它逻辑请参考<a href="./drill_cart.html" class="link">购物车</a></dd>
+      <dd>这里给出购物车优化后的逻辑；其它逻辑请参考 <a href="./drill_cart.html" class="link">练习 - 购物车</a></dd>
       <dd>
         <div>购物车数据管理 - 使用状态管理 cart.js；返回购物车数据 cart 和添加到购物车事件 addToCart</div>
         <p>如果商品id存在，则数量+1；否则添加一个新的商品购物记录</p>
@@ -89,6 +89,19 @@ watch(() => data.selectedLists, (n, o) => {
     flag = false
   }
 }, { immediate: true })</pre>
+        <div>商品的增加、减少</div>
+        <pre>
+const inc = (item) => {
+  if (item.quantity &lt; item.stock) {
+    item.quantity++
+  }
+}
+
+const dec = (item) => {
+  if (item.quantity > 1) {
+    item.quantity--
+  }
+}</pre>
         <div>购物车结算</div>
         <pre>
 const getTotal = computed(() => {
@@ -104,6 +117,50 @@ const getTotal = computed(() => {
 
   return sum
 })</pre>
+        <div>按数量排序</div>
+        <pre>
+const sortUp = (key) => {
+  cartData.lists.sort((a, b) => {
+    return a[key] - b[key]
+  })
+}
+const sortDown = (key) => {
+  cartData.lists.sort((a, b) => {
+    return b[key] - a[key]
+  })
+}</pre>
+        <div>按字母排序</div>
+        <pre>
+const sortStrUp = (key) => {
+  cartData.lists.sort((a, b) => {
+    return a[key].localeCompare(b[key])
+  })
+}
+const sortStrDown = (key) => {
+  cartData.lists.sort((a, b) => {
+    return b[key].localeCompare(a[key])
+  })
+}</pre>
+        <figure>
+          <img src="./imgs/cart3.png" alt="">
+          <figcaption>默认显示</figcaption>
+        </figure>
+        <figure>
+          <img src="./imgs/cart4.png" alt="">
+          <figcaption>字母排序 - 降序</figcaption>
+        </figure>
+        <figure>
+          <img src="./imgs/cart5.png" alt="">
+          <figcaption>字母排序 - 升序</figcaption>
+        </figure>
+        <figure>
+          <img src="./imgs/cart6.png" alt="">
+          <figcaption>数字排序 - 降序</figcaption>
+        </figure>
+        <figure>
+          <img src="./imgs/cart7.png" alt="">
+          <figcaption>数字排序 - 升序</figcaption>
+        </figure>
       </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
