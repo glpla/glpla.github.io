@@ -42,7 +42,7 @@
 }</pre>
         </dd>
         <dt>传递路由参数</dt>
-        <dd>可以使用普通路由path和命名路由name传递路由参数</dd>
+        <dd>可以使用普通路由 path 和命名路由 name 传递路由参数</dd>
         <dd>属性绑定时，只能使用命名路由；否则会报错 <span class="warn">Path "/xxx" was passed with params but they will be ignored. Use a
                 named route alongside
                 params instead.</span></dd>
@@ -51,26 +51,35 @@
 //使用1：静态路由
 &lt;router-link to="/html/webjs"&gt;html - webjs&lt;/router-link&gt;
 
-//使用2：拼接
+//使用2：动态路由 - 拼接字符串
 &lt;router-link :to="'/html/' + webjs"&gt;html - webjs&lt;/router-link&gt;
 
-//使用3：name，不能使用path
+//使用3：动态路由 - 对象；使用name，不能使用path
 &lt;router-link :to="{ name: 'html', params: { id: 'webjs' } }"&gt;html - webjs&lt;/router-link&gt;</pre>
         </dd>
         <dt>接收路由参数</dt>
-        <dd>在路由目标组件 - 逻辑 - 使用useRoute接收路由参数，然后根据业务处理，如加载对应的数据</dd>
+        <dd>在路由目标组件 - 逻辑 - 使用 useRoute 接收路由参数，然后根据业务处理，如加载对应的数据</dd>
+        <dd><span class="warn">useRoute()</span> 是一个全局注入的函数，用于在组件中获取当前激活的路由信息。它返回一个 RouteLocationNormalized
+            对象，包含了当前路由的所有属性，如
+            path、params、query 等</dd>
         <dd>
             <pre>
 import { useRoute } from 'vue-router'
 let route = useRoute()
 console.log(route.params.id);</pre>
         </dd>
-        <dd class="tips">useRoute() 是一个全局注入的函数，用于在组件中获取当前激活的路由信息。它返回一个 RouteLocationNormalized 对象，包含了当前路由的所有属性，如
-            path、params、query 等</dd>
-        <dd>在路由目标组件 - 结构 - 使用全局变量$route接收路由参数；通常不这样使用，因为全局变量$route会随着路由变化而变化，导致数据不匹配</dd>
+        <dd>在路由目标组件 - 结构 - 使用路由参数</dd>
+        <dd>
+            <pre>&lt;div&gt;{{ route.params.id }}&lt;/div&gt;</pre>
+        </dd>
+        <dd>也可以在结构中，直接使用默认的全局变量 $route 解析并使用；不建议；因为全局变量 $route 会随着路由变化而变化，导致数据不匹配</dd>
         <dd>
             <pre>&lt;div&gt;{{ $route.params.id }}&lt;/div&gt;</pre>
         </dd>
+        <dt>异常处理</dt>
+        <dd>不确定的用户行为有可能导致路由参数为空或缺失，导致渲染失败</dd>
+        <dd>解决方案1：使用条件渲染判断路由参数是否存在</dd>
+        <dd>解决方案2：配置 404 路由</dd>
         <dt>多个路由参数</dt>
         <dd>尽量精准设计路由，避免使用</dd>
         <dd>必要时，使用命名路由，简化路由操作</dd>
@@ -97,10 +106,6 @@ console.log(route.params.id);</pre>
         cont: 'content'
     }
 }"&gt;home&lt;/router-link&gt;</pre>
-        </dd>
-        <dd class="tips">
-            <div>逻辑：导入路由包 useRoute并使用</div>
-            <div>结构：使用全局变量$route解构：动态路由$route.params；查询路由$route.query</div>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

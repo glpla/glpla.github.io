@@ -23,6 +23,11 @@ html {
   font-size: 62.5%;
   scroll-padding-top: 160px;
   background-color: #f2f3f4;
+  background-image: url(https://desk-fd.zol-img.com.cn/t_s960x600c5/g2/M00/0B/08/Cg-4WlUwdDWIZ7zKAAqGM6NxoXkAABuAQPwTs0ACoZL265.jpg);
+  /* background-image: url(https://cdn.pixabay.com/photo/2022/11/27/13/51/moon-7619831_1280.jpg); */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 body {
@@ -36,6 +41,7 @@ body {
   margin: 0 auto;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   line-height: 2;
+  color: #f7f7f7;
 }
 
 ::-webkit-scrollbar {
@@ -43,7 +49,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #fff;
+  background-color: #f7f7f7;
   border-radius: 8px;
 }
 
@@ -63,15 +69,13 @@ img {
 }
 
 .iconfont {
-  color: #fff;
+  color: #f7f7f7;
   font-size: 4rem;
   place-self: center;
 }
 
 header {
-  position: sticky;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   display: flex;
   align-items: center;
@@ -145,21 +149,22 @@ header {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  padding: 1rem 0;
+  gap: 2rem;
+  padding: 4rem 0;
 }
 
 .update {
   display: flex;
   flex-direction: column;
-  color: #fff;
-  background-image: linear-gradient(0deg, var(--main-dark-color), var(--main-color));
+  color: #f7f7f7;
+  background-color: rgba(0, 0, 0, 0.2);
+  /* background-image: linear-gradient(0deg, var(--main-dark-color), var(--main-color)); */
   padding: 1.6rem;
   border-radius: var(--border-r);
 }
 
 .update a:not(:last-child) {
-  border-bottom: 1px solid rgba(255, 255, 255, 1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .update a:hover {
@@ -178,10 +183,16 @@ header {
 
 .nav-item .iconfont {
   grid-row: 1/3;
+  transition: 0.4s;
 }
 
 .nav-item:hover {
   box-shadow: 0 0 10px #286bb2, 0 0 10px #286bb2, 0 0 10px #286bb2;
+}
+
+.nav-item:hover .iconfont {
+  transform: scale(1.1);
+  color: #ff0;
 }
 
 .nav-item .title {

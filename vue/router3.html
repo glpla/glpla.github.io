@@ -16,10 +16,10 @@
         <span>&commat; Router</span>
     </header>
     <dl>
-        <dd>除了使用 &lt;router-link&gt; 创建路由|声明式路由，还可以借助 router 相关 API|编程路由实现；类似于 &lt;a&gt; 和 location.href 的关系</dd>
-        <dd>需引入路由包 useRouter 并创建路由实例router</dd>
-        <dd>可以使用 普通路由|路径path；也可以使用 命名路由|name</dd>
-        <dd>还可以指定路由参数 params 或 query</dd>
+        <dd>除了使用 &lt;router-link&gt; 创建路由|声明式路由，还可以借助 router 相关 API 实现编程路由；类似于 &lt;a&gt; 和 location.href 的关系</dd>
+        <dd>需引入路由包 useRouter 并创建路由实例 router</dd>
+        <dd>可以使用普通路由 path；也可以使用命名路由 name</dd>
+        <dd>可以指定路由参数 params 或 query</dd>
         <dd class="tips">
             <div>useRoute() 是一个全局注入的函数，用于在组件中获取当前激活的路由信息。它返回一个 RouteLocationNormalized 对象，包含了当前路由的所有属性，如
                 path、params、query 等</div>
@@ -27,14 +27,17 @@
             <div>仅在 Vue 3 的 Composition API 环境下使用</div>
         </dd>
         <dd>更多信息，请访问 <a href="https://router.vuejs.org/zh/api/#Functions-useRouter">官方文档 - useRouter</a></dd>
+        <dt>引入并实例化</dt>
         <dd>
             <pre>
 import { useRouter } from 'vue-router'
 const router = useRouter()</pre>
         </dd>
+        <dt>方法</dt>
+        <dd>由于属性 to 与 router.push 接受的对象种类相同，所以两者的规则完全相同</dd>
         <dd>
             <table>
-                <caption>编程式路由常用方法</caption>
+                <caption>编程路由常用方法</caption>
                 <tr>
                     <td>分类</td>
                     <td>说明</td>
@@ -51,11 +54,18 @@ const router = useRouter()</pre>
                     <td>go(n)</td>
                     <td>导航到历史记录中的特定位置；可以前进或后退；参数 n 是一个整数，相对于当前位置的偏移量</td>
                 </tr>
+                <tr>
+                    <td>back()</td>
+                    <td>后退一级；相当于 go(-1)</td>
+                </tr>
+                <tr>
+                    <td>forward()</td>
+                    <td>前进一级；相当于 go(1)</td>
+                </tr>
             </table>
         </dd>
-        <dd class="tips">
-            <div>由于属性 to 与 router.push 接受的对象种类相同，所以两者的规则完全相同</div>
-        </dd>
+        <dt>使用</dt>
+        <dd>在事件处理函数中使用</dd>
         <dd>
             <pre>
 // 查询路由
@@ -75,8 +85,7 @@ router.push({ name: 'user', params: { username: 'eduardo' } })
 router.push({ path: '/user', query: { bread: 'user' }, replace: true })
 router.replace({ path: '/user', query: { bread: 'user' } })</pre>
         </dd>
-        <dd class="example-sn">3秒后跳转至首页 - 延时实现 setTimeout</dd>
-        <dd>在生命周期函数中实现路由导航</dd>
+        <dd class="example-sn">加载完毕后跳转至首页 - 在生命周期函数中，使用延时 setTimeout 模拟实现</dd>
         <dd>
             <pre>
 //引入
@@ -92,6 +101,22 @@ onMounted(()=>{
     }, 3000)
 })</pre>
         </dd>
+        <dd class="example-sn">分享页面 - 添加商品id作为查询路由参数</dd>
+        <dd class="sn">
+            <div>分享 URL</div>
+            <pre>
+const share = () => {
+    router.push({ query: { id: 100 } })
+}</pre>
+            <div>使用 - 如果没有，就强推 999 号商品</div>
+            <pre>
+onMounted(() => {
+    let id = route.query.id || 999
+    // axios.get(`/api/todo/${id}`).then(res => {})
+})</pre>
+        </dd>
+        <dd class="example-sn">找人代付 - 添加用户订单信息作为查询路由参数</dd>
+        <dd>略</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
