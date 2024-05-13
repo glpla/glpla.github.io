@@ -21,6 +21,8 @@
         <dd>使用一个或多个动态字段来实现；?表示该参数 <span class="warn">可选</span></dd>
         <dd>传递的动态路由参数由路由的 <span class="warn">params</span> 接收</dd>
         <dd>动态属性绑定 to 时，<span class="warn">只能</span> 使用命名路由 name，不可以使用普通路由 path - 因为匹配不到</dd>
+        <dd class="warn">Path "/xxx" was passed with params but they will be ignored. Use a
+            named route alongside params instead.</dd>
         <dt>配置路由参数</dt>
         <dd>根据id展示对应的内容</dd>
         <dd>
@@ -42,19 +44,19 @@
 }</pre>
         </dd>
         <dt>传递路由参数</dt>
-        <dd>可以使用普通路由 path 和命名路由 name 传递路由参数</dd>
-        <dd>属性绑定时，只能使用命名路由；否则会报错 <span class="warn">Path "/xxx" was passed with params but they will be ignored. Use a
-                named route alongside
-                params instead.</span></dd>
+        <dd>静态路由 - 可以使用普通路由 path 和命名路由 name 传递路由参数</dd>
+        <dd>动态路由 - 属性绑定时，只能使用命名路由</dd>
         <dd>
             <pre>
-//使用1：静态路由
-&lt;router-link to="/html/webjs"&gt;html - webjs&lt;/router-link&gt;
+//使用1：静态路由 - 传递的id为100
+&lt;router-link to="/html/100"&gt;html - 100&lt;/router-link&gt;
 
-//使用2：动态路由 - 拼接字符串
-&lt;router-link :to="'/html/' + webjs"&gt;html - webjs&lt;/router-link&gt;
+//使用2：动态路由 - 拼接字符串 - 普通拼接，变量webjs的值为100
+&lt;router-link :to="'/html/' + webjs"&gt;html - webjs/100&lt;/router-link&gt;
+//使用3：动态路由 - 拼接字符串 - 模板字符串，变量webjs的值为100
+&lt;router-link :to="`/html/${webjs}`"&gt;html - webjs/100&lt;/router-link&gt;
 
-//使用3：动态路由 - 对象；使用name，不能使用path
+//使用4：动态路由 - 对象；使用name，不能使用path
 &lt;router-link :to="{ name: 'html', params: { id: 'webjs' } }"&gt;html - webjs&lt;/router-link&gt;</pre>
         </dd>
         <dt>接收路由参数</dt>

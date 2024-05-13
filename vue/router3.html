@@ -16,28 +16,64 @@
         <span>&commat; Router</span>
     </header>
     <dl>
+        <dd>以下两个函数仅在 Vue 3 的 Composition API 环境下使用</dd>
+        <dt>useRoute()</dt>
+        <dd>全局注入的函数，它返回一个 RouteLocationNormalized 对象，包含了当前路由的所有属性，如
+            path、params、query 等</dd>
+        <dd>用于在组件中获取当前激活的路由信息</dd>
+        <dd>更多信息，请访问 <a href="https://router.vuejs.org/api/interfaces/RouteLocationNormalizedLoaded.html">官方文档 -
+                RouteLocationNormalizedLoaded</a></dd>
+        <dd>
+            <pre>
+import { useRoute } from 'vue-router'
+const route = useRoute()</pre>
+        </dd>
+        <dd>
+            <table>
+                <caption>useRoute 常用属性</caption>
+                <tr>
+                    <td>分类</td>
+                    <td>说明</td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td>匹配的路由名称</td>
+                </tr>
+                <tr>
+                    <td>path</td>
+                    <td>经过百分号编码的 URL 中的 pathname 段</td>
+                </tr>
+                <tr>
+                    <td>params</td>
+                    <td>从 path 中提取出来并解码后的参数对象</td>
+                </tr>
+                <tr>
+                    <td>query</td>
+                    <td>代表当前地址的 search 属性的对象</td>
+                </tr>
+                <tr>
+                    <td>matched</td>
+                    <td>数组，只包含直接的组件 (任何已被加载并在 components 对象内被替换掉的懒加载组件)。可以被直接用于展示路由。不包含重定向记录</td>
+                </tr>
+            </table>
+        </dd>
+        <dt>useRouter()</dt>
+        <dd>全局注入的函数</dd>
+        <dd>用于获取路由器实例，从而可以进行导航操作，如 push、replace、go 等</dd>
         <dd>除了使用 &lt;router-link&gt; 创建路由|声明式路由，还可以借助 router 相关 API 实现编程路由；类似于 &lt;a&gt; 和 location.href 的关系</dd>
         <dd>需引入路由包 useRouter 并创建路由实例 router</dd>
         <dd>可以使用普通路由 path；也可以使用命名路由 name</dd>
         <dd>可以指定路由参数 params 或 query</dd>
-        <dd class="tips">
-            <div>useRoute() 是一个全局注入的函数，用于在组件中获取当前激活的路由信息。它返回一个 RouteLocationNormalized 对象，包含了当前路由的所有属性，如
-                path、params、query 等</div>
-            <div>useRouter() 同样是全局注入的函数，用于获取路由器实例，从而可以进行导航操作，如 push、replace、go 等</div>
-            <div>仅在 Vue 3 的 Composition API 环境下使用</div>
-        </dd>
-        <dd>更多信息，请访问 <a href="https://router.vuejs.org/zh/api/#Functions-useRouter">官方文档 - useRouter</a></dd>
-        <dt>引入并实例化</dt>
+        <dd>更多信息，请访问 <a href="https://router.vuejs.org/zh/api/interfaces/Router.html">官方文档 - useRouter</a></dd>
         <dd>
             <pre>
 import { useRouter } from 'vue-router'
 const router = useRouter()</pre>
         </dd>
-        <dt>方法</dt>
-        <dd>由于属性 to 与 router.push 接受的对象种类相同，所以两者的规则完全相同</dd>
+        <!-- <dd>由于属性 to 与 router.push 接受的对象种类相同，所以两者的规则完全相同</dd> -->
         <dd>
             <table>
-                <caption>编程路由常用方法</caption>
+                <caption>useRouter 常用方法</caption>
                 <tr>
                     <td>分类</td>
                     <td>说明</td>
@@ -64,8 +100,7 @@ const router = useRouter()</pre>
                 </tr>
             </table>
         </dd>
-        <dt>使用</dt>
-        <dd>在事件处理函数中使用</dd>
+        <!-- <dd>在事件处理函数中使用</dd> -->
         <dd>
             <pre>
 // 查询路由
