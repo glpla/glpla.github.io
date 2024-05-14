@@ -26,6 +26,7 @@
         <div>进一步熟悉组件的样式</div>
       </dd>
       <dt>实验内容</dt>
+      <dd>人机交互时，如前端校验、数据加载等时，给出相应的弹窗提示</dd>
       <dd>
         <div>静态模态框的使用 - 无参</div>
         <div>动态模态框的使用 - 带参</div>
@@ -39,13 +40,12 @@
         <div>Node.js</div>
       </dd>
       <dt>需求分析</dt>
-      <dd>前端数据校验不通过时，给出弹窗提示</dd>
       <dd>
         <div>视口右上角显示</div>
         <div>出现3秒后消失</div>
-        <div>可以手动关闭</div>
         <div>根据不同的情况，显示不同的提示</div>
         <div>出现和消失使用淡入淡出的过渡效果</div>
+        <div>可以手动关闭</div>
       </dd>
       <dt>实验步骤</dt>
       <dd>第一阶段 静态模态框</dd>
@@ -74,38 +74,35 @@ const props = defineProps({ tips: String })
   z-index: 99;
 }
 &lt;/style&gt;</pre>
-        <div>父组件 - 引入模态框组件，并使用响应式数据 isOpenModal 控制其显示和隐藏</div>
-        <p>isOpenModal 的变化由特定事件触发，如密码不对、数据错误等等。这里使用按钮的单击事件触发</p>
-        <p>延时关闭：也可以使用侦听实现：watch 侦听变量 isModalOpen：如果真|显示，则设置定时器；如果定时器触发，则关闭模态框</p>
-        <!-- <pre>
+        <div>父组件 - 引入模态框组件</div>
+        <pre>import Tips from './components/Tips.vue';</pre>
+        <p>.使用响应式数据 isOpenModal 控制其显示和隐藏：真，则显示，否则关闭</p>
+        <pre>let isOpenModal = ref(false)</pre>
+        <p>.使用侦听</p>
+        <pre>
 watch(isModalOpen, (newval, oldval) => {
     if (newval) {
         setTimeout(() => {
         isModalOpen.value = false
         }, 3000);
     }
-})</pre> -->
+})</pre>
+        <p>.使用延时</p>
         <pre>
-&lt;script setup&gt;
-import { ref } from 'vue';
-import Tips from './components/Tips.vue';
-
-let isOpenModal = ref(false)
-
 const OpenModal = () => {
   isOpenModal.value = true
   setTimeout(() => {
     isOpenModal.value = false;
   }, 3000);
 }
-&lt;/script&gt;
-
+</pre>
+        <p>.使用鼠标单击事件 - 略</p>
+        <p>.结构使用</p>
+        <pre>
 &lt;template&gt;
   &lt;Tips :flag="isOpenModal"&gt;&lt;/Tips&gt;
   &lt;button @click="OpenModal"&gt;click to open modal&lt;/button&gt;
-&lt;/template&gt;
-
-&lt;style scoped&gt;&lt;/style&gt;        </pre>
+&lt;/template&gt;</pre>
         <figure class="img-sn">
           <img src="./imgs/modal1.png" alt="">
           <figcaption>默认隐藏模态框</figcaption>
@@ -122,7 +119,7 @@ const OpenModal = () => {
       <dd>第二阶段 传递参数</dd>
       <dd>根据不同的情况传递不同的提示信息</dd>
       <dd>
-        <div>增加一个属性 tips，取代静态文本；也可以增加一个普通属性，通过暴露接口 defineExpose 暴露出去给父组件使用</div>
+        <div>模态框组件 - 增加一个属性 tips，取代静态文本；也可以增加一个普通属性，通过暴露接口 defineExpose 暴露出去给父组件使用</div>
         <pre>const props = defineProps({ tips: String, flag: Boolean })</pre>
         <!-- <pre>
 import { ref } from 'vue';

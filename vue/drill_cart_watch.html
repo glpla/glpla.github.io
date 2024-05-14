@@ -14,19 +14,19 @@
   <header>
   </header>
   <div class="container">
-    <h1>购物车 -2</h1>
-    <h4>Cart</h4>
+    <h1>购物车 - 2</h1>
+    <h4>Cart Watch</h4>
     <dl class="number-mul-sn">
       <dt>实验目的</dt>
       <dd>
         <div>掌握侦听器 Watch 的基本使用</div>
-        <div>进一步熟悉 Javascript 中数组 Array 的使用</div>
-        <div>进一步理解 Vue 的数据驱动</div>
+        <div>进一步理解 Vue 的响应式数据</div>
       </dd>
       <dt>实验内容</dt>
       <dd>
-        <div>使用 Watch 重写商品的变化逻辑</div>
-        <div>优化其它逻辑</div>
+        <div>侦听全选</div>
+        <div>侦听部分选择</div>
+        <div>调整结算逻辑</div>
       </dd>
       <dt>开发环境</dt>
       <dd>
@@ -57,7 +57,7 @@ watch(() => cartData.selectedAll, (newVal) => {
         <p>如果选中列表长度和商品列表长度相等，则全选为真，同时置 flag 为真；否则全为假</p>
         <pre>
 watch(() => cartData.selectedLists, (newVal) => {
-  if (newVal.length == cartData.lists.length) {
+  if (newVal.length == cartData.lists.length && cartData.lists.length) {
     cartData.selectedAll = true
     flag = true
   } else {
@@ -65,7 +65,26 @@ watch(() => cartData.selectedLists, (newVal) => {
     flag = false
   }
 })</pre>
-        <div>使用<a href="../web/js/array2.html" class="link">数组 Array - 迭代函数</a>优化逻辑</div>
+        <div>侦听选择列表商品的数量的变化，更新总价</div>
+        <p>深度侦听：数量是对象的一个属性</p>
+        <p>立即侦听：页面渲染完毕也应该结算异常</p>
+        <p>重新声明一个 ref 数据 sum 为结算总价，替换结构中的计算属性 getTotal</p>
+        <pre>let sum = ref(0)</pre>
+        <p>改写商品选中列表的侦听如下</p>
+        <pre>
+watch(() => cartData.selectedLists, (newVal) => {
+  if (newVal.length == cartData.lists.length && cartData.lists.length) {
+    cartData.selectedAll = true
+    flag = true
+  } else {
+    cartData.selectedAll = false
+    flag = false
+  }
+  sum.value = cartData.selectedLists.reduce((sum, item) => {
+    return sum + item.quantity * item.price
+  }, 0).toFixed(2)
+}, { deep: true, immediate: true })        </pre>
+        <!-- <div>使用<a href="../web/js/array2.html" class="link">数组 Array - 迭代函数</a>优化逻辑</div>
         <p>使用 Array.reduce - 推荐</p>
         <pre>
 const getTotal = computed(() => {
@@ -82,7 +101,7 @@ const getTotal = computed(() => {
   })
   return sum.toFixed(2)
 })</pre>
-      </dd>
+      </dd> -->
       <dt>实验结果分析与体会</dt>
       <dd>
         <div>掌握的知识点、开发技能</div>
