@@ -14,7 +14,7 @@
   <header>
   </header>
   <div class="container">
-    <h1>购物车</h1>
+    <h1>购物车 - 1</h1>
     <h4>Cart</h4>
     <dl class="number-mul-sn">
       <dt>实验目的</dt>
@@ -23,11 +23,11 @@
         <div>掌握表单元素的基本使用</div>
         <div>掌握数据双向绑定的运用</div>
         <div>进一步熟悉掌握服务器的搭建和使用</div>
-        <div>理解Vue的数据驱动</div>
+        <div>理解 Vue 的数据驱动</div>
       </dd>
       <dt>实验内容</dt>
       <dd>视图端：在购物车中，操作商品 - 全选、增加和减少，完成结算</dd>
-      <dd>逻辑端：根据商品列表lists和选中商品列表selectedLists的变化，完成各种逻辑</dd>
+      <dd>逻辑端：根据商品列表 lists 和选中商品列表 selectedLists 的变化，完成各种逻辑</dd>
       <dt>开发环境</dt>
       <dd>
         <div>操作系统 Window 10+</div>
@@ -68,7 +68,7 @@
         <div>实验数据</div>
         <p>在挂载生命周期函数中从资源服务器拉取并赋值；这里给出一个应用示例；其它方法后续逐步增加</p>
         <pre>
-const data = reactive({
+const cartData = reactive({
   selectedAll: false,
   selectedLists: [],
   lists: [{
@@ -80,31 +80,32 @@ const data = reactive({
   }]
 })</pre>
         <div>全选</div>
-        <p>为全选按钮双向绑定选中数据selectedAll，并增加改变change事件selAll；状态改变后，为真，则为全选，选中商品列表和商品列表一致；为假，则取消全选，选中商品列表为空</p>
-        <pre>&lt;input type="checkbox" v-model="data.selectedAll" @change="selAll"gt;</pre>
+        <p>为全选按钮双向绑定选中数据 selectedAll，并增加改变 change 事件 selAll</p>
+        <p>状态改变后，为真，则为全选，选中商品列表和商品列表一致；为假，则取消全选，选中商品列表为空</p>
+        <pre>&lt;input type="checkbox" v-model="cartData.selectedAll" @change="selAll"gt;</pre>
         <pre>
 const selAll = () => {
-  if (data.selectedAll) {
-    data.selectedLists = data.lists
+  if (cartData.selectedAll) {
+    cartData.selectedLists = cartData.lists
   } else {
-    data.selectedLists = []
+    cartData.selectedLists = []
   }
 }        </pre>
         <div>单个商品选择与取消</div>
-        <p>为单个商品对应的checkbox绑定每一项数据，并增加改变change事件selItem，处理全选的真与假</p>
+        <p>为单个商品对应的 checkbox 绑定每一项数据，并增加改变 change 事件 selItem，处理全选的真与假</p>
         <p>单个商品取消选择时，全选为假</p>
         <p>商品列表和选中商品列表数量相等，为全选；否则取消全选；额外判断条件，如果商品列表为空，则也应该取消全选</p>
-        <pre>&lt;input type="checkbox" :value="item" v-model="data.selectedLists" @change="selItem"&gt;</pre>
+        <pre>&lt;input type="checkbox" :value="item" v-model="cartData.selectedLists" @change="selItem"&gt;</pre>
         <pre>
 const selItem = () => {
-  if (data.selectedLists.length == data.lists.length && data.lists.length) {
-    data.selectedAll = true
+  if (cartData.selectedLists.length == cartData.lists.length && cartData.lists.length) {
+    cartData.selectedAll = true
   } else {
-    data.selectedAll = false
+    cartData.selectedAll = false
   }
 }        </pre>
         <div>单个商品的增加和减少</div>
-        <p>分别为增、减按钮绑定事件：增加数量inc(item)和减少数量dec(item)，并使用当前商品为形参，修改其数量number</p>
+        <p>分别为增、减按钮绑定事件：增加数量 inc(item) 和减少数量 dec(item)，并使用当前商品为形参，修改其数量 number</p>
         <p>注意越界检测</p>
         <pre>
 &lt;button class="btn" @click="dec(item)"&gt;-&lt;/button&gt;
@@ -121,7 +122,7 @@ const dec = (item) => {
   }
 }</pre>
         <div>结算</div>
-        <p>为总价绑定计算属性getTotal</p>
+        <p>为总价绑定计算属性 getTotal</p>
         <p>遍历选中列表，依次将商品单价和商品数量相乘，并累加，得到总价</p>
         <pre>&lt;div class="total"&gt;总价{{ getTotal }}&lt;/div&gt;</pre>
         <pre>
@@ -129,8 +130,8 @@ const getTotal = computed(() => {
   let sum = 0
 
   //for - 传统循环
-  for(let i=0; i &lt;data.selectedLists.length; i++){
-    sum += data.selectedLists[i].number * data.selectedLists[i].price
+  for(let i=0; i &lt;cartData.selectedLists.length; i++){
+    sum += cartData.selectedLists[i].number * cartData.selectedLists[i].price
   }
 
   return sum

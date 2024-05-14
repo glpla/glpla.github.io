@@ -16,7 +16,8 @@
         <span>v-model</span>
     </header>
     <dl>
-        <dd>表单基础知识，请访问<a href="../web/form.html">web - form</a></dd>
+        <dd>表单基础知识，请访问 <a href="../web/form.html">web - form</a>、<a href="../web/js/event_form.html">form event</a>
+        </dd>
         <dt>v-modal</dt>
         <dd>v-bind:是单向数据绑定：逻辑层数据流向渲染层</dd>
         <dd>数据双向绑定 - 多用于表单</dd>
@@ -118,7 +119,7 @@
         <dd class="tips">text类型的&lt;input&gt;和&lt;textarea&gt;绑定的是 value 属性 并侦听 input 事件</dd>
         <dt>&lt;input&gt; - radio</dt>
         <dd>单选；多选一</dd>
-        <dd>不指定value的话，只能获取单选框的选中状态是否为on</dd>
+        <dd>不指定value的话，只能获取单选框的选中状态 checked 是 true 还是 false，并不知道选择了谁</dd>
         <dd>值为静态数据male、female</dd>
         <dd>
             <pre>let gender = ref('')</pre>
@@ -139,7 +140,15 @@
         </dd>
         <dt>&lt;input&gt; - checkbox</dt>
         <dd>多选</dd>
-        <dd>一般情况下，需要指定value，否则只能获取复选框的选中状态是否为on</dd>
+        <dd>通常需要为每个 &lt;input&gt; 指定值 value，并使用同一个名字 name 以确保它们是同一组</dd>
+        <dd>如果不指定数据|value，只能获取复选框的选中状态 checked 是 true 还是 false，并不知道选择了谁</dd>
+        <dd>
+            <pre>&lt;input type="checkbox" @change="selItem"&gt;</pre>
+            <pre>
+const selItem = (e) => {
+    console.log(e.target.checked)
+}</pre>
+        </dd>
         <dd>值为静态数据：code、sing、game、read</dd>
         <dd>like是数组类型，不能是字符串</dd>
         <dd>
@@ -160,7 +169,7 @@ const sel = (e) => {
     e.target.checked ? like.value.push(e.target.value) : like.value = like.value.filter(item => item !== e.target.value)
 }</pre>
         </dd>
-        <dd>双向绑定 - 选项都绑定like</dd>
+        <dd>双向绑定 - 选项都绑定数据like，就可以知道选择了哪些</dd>
         <dd>
             <pre>
 &lt;input type="checkbox" name="ulike" v-model="like" value="code"&gt;code
@@ -169,7 +178,10 @@ const sel = (e) => {
 &lt;input type="checkbox" name="ulike" v-model="like" value="read"&gt;read
 &lt;div&gt;{{ like }}&lt;/div&gt;</pre>
         </dd>
-        <dd class="tips">&lt;radio类型的input&gt;和checkbox类型的&lt;input&gt;绑定的是 checked 属性 并侦听 change 事件</dd>
+        <dd class="tips">
+            <div>&lt;radio类型的input&gt;和checkbox类型的&lt;input&gt;绑定的是 checked 属性 并侦听 change 事件</div>
+            <div>如果不指定value，其默认值是on - The default value for checkboxes and radio buttons is on</div>
+        </dd>
         <dd>使用须知、记住密码 - 使用单个复选框实现；不需要指定value，需要的只是是否选中</dd>
         <dd>
             <pre>

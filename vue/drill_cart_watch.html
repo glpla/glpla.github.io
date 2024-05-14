@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实操 购物车 Watch</title>
+  <link rel="stylesheet" href="../css/exp.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+  </header>
+  <div class="container">
+    <h1>购物车 -2</h1>
+    <h4>Cart</h4>
+    <dl class="number-mul-sn">
+      <dt>实验目的</dt>
+      <dd>
+        <div>掌握侦听器 Watch 的基本使用</div>
+        <div>进一步熟悉 Javascript 中数组 Array 的使用</div>
+        <div>进一步理解 Vue 的数据驱动</div>
+      </dd>
+      <dt>实验内容</dt>
+      <dd>
+        <div>使用 Watch 重写商品的变化逻辑</div>
+        <div>优化其它逻辑</div>
+      </dd>
+      <dt>开发环境</dt>
+      <dd>
+        <div>操作系统 Window 10+</div>
+        <div>文本编辑器 Vs Code</div>
+        <div>谷歌浏览器 Chrome</div>
+        <div>Node.js</div>
+      </dd>
+      <dt>实验步骤</dt>
+      <dd>以下操作在购物车页面</dd>
+      <dd>
+        <div>引入监听包 watch</div>
+        <div>取消结构中的事件绑定</div>
+        <div>注释之前的事件处理函数：全选 selAll 和部分选 selItem</div>
+        <div>引入 flag 辅助判断；默认是真；初值也可以为假，后面的逻辑判断相应调整即可</div>
+        <pre>let flag = true</pre>
+        <div>侦听全选 selectedAll - 使用函数返回购物车数据 cartData 中的全选 selectedAll</div>
+        <p>只有 flag 为真的时候，才真正置空购物车数据；利用 flag 保留选中的部分数据</p>
+        <pre>
+watch(() => cartData.selectedAll, (newVal) => {
+  if (newVal) {
+    cartData.selectedLists = [...cartData.lists]
+  } else {
+    if (flag) cartData.selectedLists = []
+  }
+})</pre>
+        <div>侦听商品选中列表 selectedLists - 使用函数返回</div>
+        <p>如果选中列表长度和商品列表长度相等，则全选为真，同时置 flag 为真；否则全为假</p>
+        <pre>
+watch(() => cartData.selectedLists, (newVal) => {
+  if (newVal.length == cartData.lists.length) {
+    cartData.selectedAll = true
+    flag = true
+  } else {
+    cartData.selectedAll = false
+    flag = false
+  }
+})</pre>
+        <div>使用<a href="../web/js/array2.html" class="link">数组 Array - 迭代函数</a>优化逻辑</div>
+        <p>使用 Array.reduce - 推荐</p>
+        <pre>
+const getTotal = computed(() => {
+  return cartData.selectedLists.reduce((sum, item) => {
+    return sum + item.quantity * item.price
+  }, 0).toFixed(2)
+})</pre>
+        <p>使用 Array.forEach</p>
+        <pre>
+const getTotal = computed(() => {
+  let sum = 0
+  cartData.selectedLists.forEach(item => {
+    sum += item.quantity * item.price
+  })
+  return sum.toFixed(2)
+})</pre>
+      </dd>
+      <dt>实验结果分析与体会</dt>
+      <dd>
+        <div>掌握的知识点、开发技能</div>
+        <div>碰到的问题、解决的思路和方法以及未解决的问题</div>
+        <div>其它思考</div>
+      </dd>
+      <dt>实验要求</dt>
+      <dd>
+        <div>规范开发；独立完成；突出个人设计特点和风格</div>
+        <div>实验报告：采用学院统一下发的格式文件，以文字说明，配以必要的效果图片或核心代码，展示并说明数据来源、实施过程、各部分功能、具体内容和实现细节；最后导出为PDF，按照要求命名，提交个人学习通作业</div>
+        <div>未按要求在规定时间内提交视为无效，不得分</div>
+        <div>格式规范，请参考 <a href="../course/paper.html">论文规范要点</a></div>
+      </dd>
+      <dt>拓展</dt>
+      <dd>增加排序：价格、库存等字段的升序、降序</dd>
+    </dl>
+    <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  </div>
+</body>
+
+</html>
