@@ -37,28 +37,21 @@
         <dd>to：进入的路由</dd>
         <dd>from：离开的路由</dd>
         <dd>next()：是一个函数，表示是否允许，实现路由控制，如：未登录不允许访问，并引导|重定向到指定页面</dd>
-        <dd>正常访问；或不使用next形参</dd>
-        <dd>
+        <dd class="sn">
+            <div>正常访问；或不使用 next 形参</div>
             <pre>
 router.beforeEach((to, from, next) => {
-    console.log('router from', from.path, 'to ', to.path);
     next()
 })</pre>
-        </dd>
-        <dd>不允许访问 - 简单粗暴；不建议使用</dd>
-        <dd>
+            <div>不允许访问 - 简单粗暴；不建议直接使用</div>
             <pre>
 router.beforeEach((to, from, next) => {
-    console.log('router from', from.path, 'to ', to.path);
     if(to.path=='/order')
         next(false)
 })</pre>
-        </dd>
-        <dd>在next()中指定跳转的路由，引导到指定页面 - 建议</dd>
-        <dd>
+            <div>在next()中指定跳转的路由，引导到指定页面 - 建议</div>
             <pre>
 router.beforeEach((to, from, next) => {
-    console.log('hi');
     if (to.path == '/order') {
         //next('/home')
         //next({ path: '/home' })
@@ -67,8 +60,7 @@ router.beforeEach((to, from, next) => {
         next()
     }
 })</pre>
-        </dd>
-        <dd>如果使用了next形参，但是不执行next()，则不会跳转，也就不会执行全局后置钩子 afterEach</dd>
+            <div>如果使用了next形参，但是不执行next()，则不会跳转，也就不会执行全局后置钩子 afterEach()</div>
         <dd>
             <pre>
 router.beforeEach((to, from, next) => {
@@ -76,7 +68,8 @@ router.beforeEach((to, from, next) => {
 })</pre>
         </dd>
         <dt>全局后置钩子 afterEach(fn)</dt>
-        <dd>使用 router.afterEach 注册一个全局后置守卫，执行函数 fn，接收2个参数：to、from；不会接受 next 函数也不会改变导航本身，因为导航已结束</dd>
+        <dd>使用 router.afterEach 注册一个全局后置守卫，执行函数 fn，接收2个参数：to、from</dd>
+        <dd>不接受 next 函数也不会改变导航本身，因为导航已结束</dd>
         <dd>
             <pre>
 router.afterEach((to, from) => {
@@ -87,8 +80,8 @@ router.afterEach((to, from) => {
         <dd>使用 router.beforeResolve 注册一个全局解析守卫</dd>
         <dt>路由独享的守卫</dt>
         <dd>局部路由使用守卫</dd>
-        <dd class="example-sn">折叠导航菜单 - 导航变化时；单击当前导航</dd>
-        <dd>在路由文件中，引入仓库</dd>
+        <dd class="example-sn"><a href="./drill_menu.html">实操 - 汉堡菜单</a></dd>
+        <dd>在路由文件中，引入仓库 menu.js</dd>
         <dd>每次进入，创建菜单实例并设置菜单栏样式为隐藏；也可以创建该仓库的全局仓库</dd>
         <dd>导航守卫运行在 Vue 应用初始化的早期阶段，此时可能还未创建或注入 Pinia store 实例</dd>
         <dd>
@@ -96,19 +89,23 @@ router.afterEach((to, from) => {
 import { useMenuStore } from '@/stores/menu'
 
 router.beforeEach((to, from, next) => {
+    // 其它逻辑
+
     const store = useMenuStore();
     store.flag = false;
     next();
 })
 
 router.afterEach((to, from) => {
+    // 其它逻辑
+
     if (to.path === from.path) {
         const store = useMenuStore()
         store.flag = false
     }
 })</pre>
         </dd>
-        <dd class="example-sn">设置页面标题 title - 导航结束后；需要为路由设置 meta 属性</dd>
+        <dd class="example-sn">导航结束后，设置页面标题 title；需要为路由配置 meta 属性</dd>
         <dd>
             <pre>
 router.afterEach((to, from) => {
@@ -142,9 +139,8 @@ router.beforeEach((to, from, next) => {
 })</pre>
         </dd>
         <dd class="tips">
-            <div>更多路由控制，应该由后端服务器实现，前端不可靠</div>
-            <div>前提是路由配置时，为每个路由指定meta属性</div>
-            <div>如果不是每个路由都指定，应先判断再使用</div>
+            <div>更多路由控制，应由后端服务器实现，前端不可靠</div>
+            <div>路由配置时，如果不是每个路由都指定 meta，使用时应先判断再使用</div>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
