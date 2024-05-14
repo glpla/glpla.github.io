@@ -208,6 +208,88 @@ footer {
   margin-top: auto;
 }
 
+.lotus {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 50px auto 0;
+  cursor: pointer;
+}
+
+.lotus-item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: center 100%;
+  transition: 0.4s;
+  /* filter: hue-rotate(calc(60deg*var(--rad))); */
+  transform: rotate(calc(8deg*var(--rad))) translate(calc(4px*var(--rad)), -10px);
+  opacity: 0.4;
+}
+
+.lotus-item::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 50% 50% 50%;
+  border: 1px solid #fff;
+  background-color: rgba(255, 255, 255, .4);
+  transform: rotate(45deg);
+}
+
+.lotus-item::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: -50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: 0.4s;
+}
+
+.lotus:hover .lotus-item {
+  transform: rotate(calc(12deg*var(--rad))) translate(calc(6px*var(--rad)), -10px);
+}
+
+.lotus:hover .lotus-item::after {
+  width: 10px;
+  height: 10px;
+}
+
+.lotus:active .lotus-item:not(:active) {
+  opacity: 0.2;
+}
+
+.lotus .lotus-item:active {
+  opacity: 1;
+  z-index: 999;
+  translate: calc(10px*var(--rad)) -10px;
+}
+
+.lotus-title {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-transform: uppercase;
+  font-size: 12px;
+  transition: .4s;
+  pointer-events: none;
+  opacity: 0;
+  top: 20%;
+}
+
+.lotus:hover .lotus-title {
+  top: 60%;
+  opacity: 1;
+}
+
 @media screen and (max-width:768px) {
   .nav-item {
     grid-template-columns: 1fr 2fr 2fr;
