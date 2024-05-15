@@ -115,13 +115,12 @@
     </dd>
     <dt>高频CSS样式</dt>
     <dd>width：表格宽度</dd>
-    <dd>border-collapse：边框是否重叠，默认不重叠；只有指定了重叠collapse，才可以设置行&lt;tr&gt;的边框</dd>
-    <dd>border：表格边框/单元格边框；单元格分离collapse时，不能直接给&lt;tr&gt;指定边框，而应该给&lt;td&gt;指定边框</dd>
+    <dd>border-collapse：边框是否重叠，默认不重叠；只有指定了重叠 collapse，才可以设置行&lt;tr&gt;的边框</dd>
+    <dd>border：表格边框/单元格边框；单元格分离 collapse 时，不能直接给&lt;tr&gt;指定边框，而应该给&lt;td&gt;指定边框</dd>
     <dd>border-spacing：单元格间距；边框重叠时，无效</dd>
-    <dd>table-layout: 单元格内容显示方式，默认是auto，自动适应内容；fixed固定宽度;</dd>
+    <dd>table-layout: 单元格内容显示方式，默认是 auto，自动适应内容；fixed 固定宽度;</dd>
     <dd>empty-cells：空单元格显示与否/不在空单元格周围绘制边框。默认显示/绘制；仅仅使用于边框不重叠的情况</dd>
     <dd class="tips">
-      <div>Tips</div>
       <div>除了直接在表格上应用合并单元格属性 colspan 和 rowspan外，其它样式建议由CSS完成</div>
       <div>表格的样式设计应聚焦在&lt;td&gt;</div>
       <div>&lt;th&gt;的样式如背景优先级略高，部分动态样式无法覆盖</div>
@@ -129,6 +128,14 @@
   </dl>
   <div class="chap">基本使用 Usage</div>
   <dl class="nav-cont">
+    <dd>[<span class="iconfont icon-keyboard"></span>] 指定某列宽度 - 同一个页面内，多个表格的列宽应 <span class="warn">尽量</span> 保持一致</dd>
+    <dd>同时指定td无效；默认情况下各列宽度会自动分配，撑开至占满表格</dd>
+    <dd>
+      <pre>
+table td:nth-child(2) {
+  width: 20%;
+}      </pre>
+    </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a
         href="https://codepen.io/glpla/pen/KKJMqyb?editors=1100">三线表格</a>、<a href="./demo/up2u.html">个人网站</a></dd>
     <dd>. 单独指定类实现；也可以使用:has()选择器实现</dd>

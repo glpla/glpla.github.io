@@ -12,29 +12,50 @@
       box-sizing: border-box;
     }
 
-    .btm {
-      background-image: linear-gradient(to right, #f40, #089);
-      background-size: 10px 1px;
-      background-repeat: no-repeat;
-      background-position: right bottom;
-      transition: 1s;
+    pre {
+      position: relative;
+      background-color: #f40;
+      color: #fff;
+      font-size: 14px;
+      pointer-events: none;
     }
 
-    .btm:hover {
-      background-position: left bottom;
-      background-size: 100% 1px;
+    pre::before {
+      content: 'copy';
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
+      pointer-events: all;
     }
   </style>
 </head>
 
 <body>
-  <span class="btm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi necessitatibus fugit accusamus!
-    Ad, obcaecati! Tempora, aliquid ipsam nesciunt dolor esse amet cupiditate saepe quos totam magnam pariatur nam a
-    harum earum! Soluta magnam, obcaecati, doloremque illo eos molestias dignissimos quae odio deserunt voluptatum ipsum
-    libero consectetur ea rem architecto, quos fugit ipsa facere delectus iste quis. Praesentium qui repellat eius
-    molestiae aliquam delectus, architecto odio asperiores suscipit officiis corporis quis illo a blanditiis nobis
-    expedita, tempora quod soluta! Debitis nobis deleniti quibusdam fugit id excepturi praesentium a alias consequuntur
-    dicta quidem similique, hic magnam iste reiciendis, expedita adipisci amet voluptatum!</span>
+  <pre>import { useMenuStore } from '@/stores/menu'
+
+    router.beforeEach((to, from, next) => {
+        // 其它逻辑
+    
+        const store = useMenuStore();
+        store.flag = false;
+        next();
+    })
+    
+    router.afterEach((to, from) => {
+        // 其它逻辑
+    
+        if (to.path === from.path) {
+            const store = useMenuStore()
+            store.flag = false
+        }
+    })</pre>
+  <script>
+    const pre = document.querySelector('pre')
+    pre.addEventListener('click', (e) => {
+      console.log(e.target.textContent);
+    })
+  </script>
 </body>
 
 </html>

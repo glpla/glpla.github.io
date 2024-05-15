@@ -1,4 +1,4 @@
-@import url(//at.alicdn.com/t/c/font_3859342_fwi8u6dqnd.css);
+@import url(//at.alicdn.com/t/c/font_3859342_p81mmr5xq8.css);
 
 :root {
   --main-color: #ff5d73;
@@ -176,6 +176,7 @@ dt:has(.iconfont) {
 }
 
 pre {
+  position: relative;
   color: #f7f7f7;
   padding: 1rem;
   font-size: 14px;
@@ -183,6 +184,7 @@ pre {
   border-radius: 6px;
   overflow: auto;
   margin: 1rem auto;
+  pointer-events: none;
 }
 
 pre span::before {
@@ -190,6 +192,21 @@ pre span::before {
   counter-increment: sn;
 }
 
+pre::before {
+  content: 'Copy';
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 0 10px;
+  background-color: #eee;
+  color: #666;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.4s;
+  line-height: 24px;
+  font-size: 12px;
+  pointer-events: all;
+}
 
 .txt-center {
   text-align: center;

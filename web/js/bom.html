@@ -134,6 +134,27 @@ console.log(window.navigator.userAgent);</pre>
     <dd>
       <pre>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.42</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 复制代码</dd>
+    <dd>结构 - 固定形式，便于共享</dd>
+    <dd>
+      <pre>
+&lt;pre&gt;
+  &lt;span class="copy"&gt;copy&lt;/span&gt;
+  // code here
+&lt;/pre&gt;</pre>
+    </dd>
+    <dd>逻辑 - 获取所有 .copy 元素并分配事件；在事件处理函数中获取当前元素的下一个兄弟节点的文本内容 textContent，最后复制文本内容到剪贴板</dd>
+    <dd>
+      <pre>
+let copy = document.querySelectorAll('.copy')
+copy.forEach(item => {
+  item.addEventListener('click', () => {
+    console.log(item.nextSibling.textContent);
+    navigator.clipboard.writeText(item.nextSibling.textContent)
+  })
+})</pre>
+    </dd>
+    <dd>样式 - 绝对定位在 pre 右上方；略</dd>
     <dt>window传统事件</dt>
     <dd>.较少使用</dd>
     <dd>
