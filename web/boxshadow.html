@@ -6,27 +6,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>盒阴影 box-shadow</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="./css/boxshadow.css">
-  <link rel="stylesheet" href="../css/code.css">
   <base target="_blank">
 </head>
 
 <body>
   <header>
-    <h1>盒阴影&commat;box-shadow</h1>
+    <h1>盒阴影</h1>
+    <span>&commat;box-shadow</span>
   </header>
   <dl>
-    <dt>说明</dt>
     <dd>. 为元素添加阴影</dd>
     <dd>. 阴影由 2-4 个长度值、可选的颜色值以及可选的 inset 关键词来规定。省略长度的值是 0</dd>
     <dd>. 多个阴影使用逗号分隔</dd>
-    <dd>.更多阴影使用，请参考<a href="https://neumorphism.io">neumorphism</a></dd>
+    <dd>.更多阴影使用，请参考 <a href="https://neumorphism.io">neumorphism</a></dd>
     <dd>
-      <figure class="code">
-        <figcaption>语法</figcaption>
-        <pre>box-shadow: h-shadow v-shadow blur spread color inset;</pre>
-      </figure>
+      <pre>box-shadow: h-shadow v-shadow blur spread color inset;</pre>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>]表单元素-checkbox</dd>
     <dd>. 边框 border</dd>
@@ -45,20 +41,16 @@
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>]发光小球 - 叠加多个阴影</dd>
     <dd class="glow"></dd>
     <dd>
-      <figure class="code">
-        <figcaption>发光小球</figcaption>
-        <pre>
+      <pre>
 box-shadow:
   0 0 10px 4px rgba(255, 0, 0, 0.4),
   0 0 20px 8px rgba(255, 0, 0, 0.4),
   0 0 40px 16px rgba(255, 0, 0, 0.4);</pre>
-      </figure>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 光环 - 拓展一个同色透明的阴影实现|双边框</dd>
     <dd id="circle"></dd>
     <dd>
       <figure class="code">
-        <figcaption>光环</figcaption>
         <pre>
 #circle {
     width: 60px;
@@ -68,7 +60,6 @@ box-shadow:
     box-shadow: 0 0 0 1rem rgba(56, 166, 255, .2);
     margin: 1rem auto;
 }</pre>
-      </figure>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 内阴影模拟边框</dd>
     <dd>. 利用z-index叠放在下面；不能设置父级容器背景颜色</dd>
@@ -83,9 +74,7 @@ box-shadow:
       <img class="img-bs" src="./imgs/bg.jpg" alt="">
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>透明边框特效</figcaption>
-        <pre>
+      <pre>
 .img-bs {
   box-shadow:
     0 0 0 10px #890,
@@ -94,7 +83,6 @@ box-shadow:
     -40px -40px #f40;
   margin: 6rem auto;
 }</pre>
-      </figure>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 3D图标 - <input type="radio" id="rect" name="bs"
         checked>
@@ -107,9 +95,7 @@ box-shadow:
     <dd>. 右下角的浅色内阴影</dd>
     <dd>. 右下角的多层深色阴影[外]</dd>
     <dd>
-      <figure class="code">
-        <figcaption>3D图标</figcaption>
-        <pre>
+      <pre>
 .panel {
     display: flex;
     flex-direction: column;
@@ -128,7 +114,6 @@ box-shadow:
         0.4rem 0.4rem 1rem rgba(0, 0, 0, 0.2), 
         0.4rem 0.4rem 1rem rgba(0, 0, 0, 0.2), 
 }</pre>
-      </figure>
     </dd>
 
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 社交分享按钮-使用伪元素、阴影和过渡动画综合实现；鼠标:hover查看效果</dd>
@@ -139,9 +124,7 @@ box-shadow:
       <span class="icon"><span class="iconfont icon-dianhua_o"></span></span>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>社交分享按钮</figcaption>
-        <pre>
+      <pre>
 .share .icon::before {
     content: '';
     position: absolute;
@@ -155,7 +138,6 @@ box-shadow:
     box-shadow: 0 0 1rem 2px #e1251b;
     transform: scale(1.2);
 }</pre>
-      </figure>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 汉堡菜单</dd>
     <dd>. 本例采用利用伪元素和阴影实现</dd>
@@ -166,9 +148,7 @@ box-shadow:
     <dd>. 使用js</dd>
     <dd id="ham"></dd>
     <dd>
-      <figure class="code">
-        <figcaption>[CSS]</figcaption>
-        <pre>
+      <pre>
 #ham {
     position: relative;
     width: 50px;
@@ -213,20 +193,17 @@ box-shadow:
 #ham.ham-active::after {
     transform: translateY(0px) rotateZ(-45deg);
 }</pre>
-      </figure>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>[JavaScript]</figcaption>
-        <pre>
+      <pre>
 let ham = document.querySelector('#ham')
 ham.addEventListener('click', () => {
     ham.classList.toggle('ham-active')
 })</pre>
-      </figure>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="../utils/custom/clipboard.js"></script>
   <script>
     window.onload = function () {
       let ham = document.querySelector('#ham')

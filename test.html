@@ -32,29 +32,10 @@
 </head>
 
 <body>
-  <pre>import { useMenuStore } from '@/stores/menu'
-
-    router.beforeEach((to, from, next) => {
-        // 其它逻辑
-    
-        const store = useMenuStore();
-        store.flag = false;
-        next();
-    })
-    
-    router.afterEach((to, from) => {
-        // 其它逻辑
-    
-        if (to.path === from.path) {
-            const store = useMenuStore()
-            store.flag = false
-        }
-    })</pre>
-  <script>
-    const pre = document.querySelector('pre')
-    pre.addEventListener('click', (e) => {
-      console.log(e.target.textContent);
-    })
+  <script type="module">
+    import * as obj from './test.js'
+    console.log(obj.config);
+    console.log(obj.greeting);
   </script>
 </body>
 
