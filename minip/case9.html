@@ -35,17 +35,61 @@
             </dd>
             <dt>步骤</dt>
             <dd class="sn">
-                <div>素材准备 - 标记图片等；略</div>
-                <div>项目创建 - 略</div>
-                <div>账号申请 - 略</div>
-                <div>SDK下载并引入 - 略</div>
-                <div>打开项目美食列表项目</div>
-                <p><span class="warn">增加</span> 一个地图页面 map</p>
-                <p><span class="warn">增加</span> 一个优惠券页面 promotion</p>
-                <div>打开<span class="warn">首页</span>页面</div>
-                <p>增加一个返回顶部按钮，绑定事件toTop，点击后，返回到美食列表页</p>
-                <p>增加一个跳转地图按钮，绑定事件toMap，点击后，跳转到美食地图页面</p>
-                <p>增加优惠券内容，单击跳转到优惠券活动页面 - 包括新到、快过期、满折券、满减券、立减券等；略</p>
+                <div>准备</div>
+                <p>素材 Iconfont字体图标、标记图片等</p>
+                <p>账号申请 - 略</p>
+                <p>SDK下载并引入 - 略</p>
+                <p>打开项目美食列表项目或新建一个项目 - 略</p>
+                <div>导航栏</div>
+                <figure class="img-sn">
+                    <img src="./imgs/text1.png" alt="">
+                    <figcaption>返回顶部和跳转到地图页</figcaption>
+                </figure>
+                <figure class="img-sn">
+                    <img src="./imgs/text5.png" alt="">
+                    <figcaption>侧边导航栏</figcaption>
+                </figure>
+                <p><span class="warn">增加</span> 侧边导航栏 - 单击时，跳转到指定的商品分类；商品列表渲染时，可以使用 id 指定目标锚点</p>
+                <p>导航栏结构 - 采用列表渲染；列表提供 导航项的图标、标签；可以增加页面 LOGO</p>
+                <pre>
+&lt;view class="menu"&gt;
+    &lt;view class="menu-header"&gt;
+        &lt;image class="menu-img" src="https://glpla.github.io/utils/coffee/coffee0.jpg" mode="aspectFill" /&gt;
+    &lt;/view&gt;
+    &lt;view class="menu-item {{index==ind?'active':''}}" wx:for="{{navs}}" wx:key="item" data-ind="{{index}}" bind:tap="getInd"&gt;
+        &lt;text class="iconfont {{item.icon}}"&gt;&lt;/text&gt;
+        &lt;text&gt;{{item.tag}}&lt;/text&gt;
+    &lt;/view&gt;
+&lt;/view&gt;</pre>
+                <p>导航栏数据 - ind 表示当前导航项，navs是导航项内容数组，根据需要增加</p>
+                <pre>
+ind: 0,
+navs: [{
+    tag: '面包',
+    icon: 'icon-bread'
+}]</pre>
+                <p>侧边导航栏样式 - 固定定位在页面左侧，宽度为页面宽度的25%；之前的要靠右，可以使用 margin-left 或 padding-left 增加相应的大小</p>
+                <pre>
+.menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 25%;
+    height: 100vh;
+}                </pre>
+                <p>导航栏绑定的跳转事件 getInd() - 获取当前项，改变样式，同时跳转到指定位置</p>
+                <pre>
+getInd(e) {
+    let ind = e.currentTarget.dataset.ind
+    this.setData({
+        ind: ind
+    })
+    wx.pageScrollTo({
+        selector: '#nav' + ind*6
+    })
+}</pre>
+                <div>返回顶部</div>
+                <p><span class="warn">增加</span> 一个返回顶部按钮，绑定事件toTop，点击后，返回到美食列表页</p>
                 <pre>
 toTop() {
     wx.pageScrollTo({
@@ -55,24 +99,21 @@ toTop() {
         fail: err => console.log(err),
         complete: () => console.log('scroll done')
     })
-},
-
+}</pre>
+                <div>优惠券</div>
+                <p><span class="warn">增加</span> 优惠券结构；可以使用图片代替；绑定事件，单击跳转到优惠券详情页面</p>
+                <p><span class="warn">增加</span> 优惠券页面 promotion；包括新到、快过期、满折券、满减券、立减券等；略</p>
+                <div>地图</div>
+                <p><span class="warn">增加</span> 一个跳转地图按钮，绑定事件toMap，点击后，跳转到美食地图页面</p>
+                <pre>
 toMap() {
     wx.navigateTo({
         url: '../map/map',
     })
-},
-
-toPromotion() {
-    wx.navigateTo({
-        url: '../promotion/promotion',
-    })
 }</pre>
-                <figure class="img-sn">
-                    <img src="./imgs/text1.png" alt="">
-                    <figcaption>返回顶部和跳转到地图页</figcaption>
-                </figure>
-                <div>打开<span class="warn">地图</span>页面，创建 wxml 结构如下：使用罗盘、标尺、显示当前位置等属性，并绑定地图移动事件和标记单击事件</div>
+                <div>地图详情</div>
+                <p><span class="warn">增加</span> 一个地图页面 map</p>
+                <p>打开<span class="warn">地图</span>页面，创建 wxml 结构如下：使用罗盘、标尺、显示当前位置等属性，并绑定地图移动事件和标记单击事件</p>
                 <pre>
 &lt;map 
     longitude="{{longitude}}" 
@@ -83,8 +124,8 @@ toPromotion() {
     show-compass 
     bindregionchange="changeRegion" 
     bindmarkertap="doMarker"/&gt;</pre>
-                <div>地面页面逻辑 - 页面加载时，获取位置并调用自定义函数 getHotel搜索餐厅，并以标记的形式展示搜索结果；标记样式的设计，通常采用默认样式。一般只需指定上方气泡 callout 和下方标签
-                    label。这里采用红色，序号在下方，分类在上方</div>
+                <p>地面页面逻辑 - 页面加载时，获取位置并调用自定义函数 getHotel搜索餐厅，并以标记的形式展示搜索结果；标记样式的设计，通常采用默认样式。一般只需指定上方气泡 callout 和下方标签
+                    label。这里采用红色，序号在下方，分类在上方</p>
                 <pre>
 onLoad(options) {
     wx.getLocation({
@@ -101,7 +142,7 @@ onLoad(options) {
         complete: () => console.log('get food done')
     })
 }</pre>
-                <div>使用经纬度封装搜索函数 getHotel(long, lati)；默认情况下会根据自身定位搜索，建议显示的指定位置</div>
+                <p>使用经纬度封装搜索函数 getHotel(long, lati)；默认情况下会根据自身定位搜索，建议显示的指定位置</p>
                 <pre>
 getHotel(long, lati) {
     qqmapsdk.search({
@@ -154,14 +195,14 @@ getHotel(long, lati) {
         }
     })
 }</pre>
-                <div>移动地图时，数借助系统函数区域改变 changeRegion() 获取的结束点end位置来更新当前区域的餐厅信息</div>
+                <p>移动地图时，数借助系统函数区域改变 changeRegion() 获取的结束点end位置来更新当前区域的餐厅信息</p>
                 <pre>
 changeRegion(e) {
     if (e.type == 'end') {
         this.getHotel(e.detail.centerLocation.longitude, e.detail.centerLocation.latitude)
     }
 }</pre>
-                <div>通过标记id获取标记点信息</div>
+                <p>通过标记id获取标记点信息- 略</p>
                 <pre>
 doMarker(e){
     console.log(e);
@@ -188,6 +229,7 @@ doMarker(e){
             </dd>
         </dl>
         <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+        <script src="../utils/custom/clipboard.js"></script>
     </div>
 </body>
 

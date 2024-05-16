@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>滚动 Scroll</title>
+    <title>滚动 pageScrollTo</title>
     <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
@@ -13,13 +13,13 @@
 <body>
     <header>
         <h1>滚动</h1>
-        <span>Scroll</span>
+        <span>pageScrollTo</span>
     </header>
     <dl>
         <dd>实现页面或部分内容的滚动</dd>
         <dt>wx.pageScrollTo(Object object)</dt>
         <dd>将页面滚动到目标位置，支持 <span class="warn">选择器</span> 和 <span class="warn">滚动距离</span> 两种方式定位；2选1</dd>
-        <dd>配合 <a
+        <dd>深层嵌套中，配合 <a
                 href="https://developers.weixin.qq.com/miniprogram/dev/api/wxml/wx.createSelectorQuery.html">wx.createSelectorQuery()</a>
             获取节点信息，实现更精确的滚动定位</dd>
         <dd>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/scroll/wx.pageScrollTo.html">官方文档
@@ -62,8 +62,8 @@ wx.pageScrollTo({
 })</pre>
         </dd>
         <dd class="example-sn">页面滚动到某个元素 - 使用选择器</dd>
-        <dd>页面结构为</dd>
-        <dd>
+        <dd class="sn">
+            <div>页面结构 wxml</div>
             <pre>
 &lt;view class="wrap"&gt;
     &lt;view class="header"&gt;&lt;/view&gt;
@@ -72,8 +72,7 @@ wx.pageScrollTo({
     &lt;view class="footer"&gt;&lt;/view&gt;
     &lt;view class="backToNav" bind:tap="toNav"&gt;返回主菜单&lt;/view&gt;
 &lt;/view&gt;</pre>
-        </dd>
-        <dd>
+            <div>页面逻辑 js </div>
             <pre>
 toNav(){
     wx.pageScrollTo({
@@ -86,6 +85,7 @@ toNav(){
     })
 }</pre>
         </dd>
+        <dd class="example-sn">美食列表 - 增加导航菜单，分类美食，单击菜单跳转到对应的分类；详情见 <a href="./case9.html">美食地图</a></dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
