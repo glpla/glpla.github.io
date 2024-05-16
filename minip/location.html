@@ -16,7 +16,7 @@
         <span>Location</span>
     </header>
     <dl>
-        <dd class="tips">调试的时候，应该结合预览和真机调试</dd>
+        <dd class="tips">调试的时候，应结合预览和真机调试共同使用</dd>
         <dt>&lt;map&gt;</dt>
         <dd>渲染地图</dd>
         <dd>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/map.html">官方文档 - map</a> <a
@@ -93,7 +93,7 @@
                 </tr>
                 <tr>
                     <td>display</td>
-                    <td>√：BYCLICK ALWAYS</td>
+                    <td>√：BYCLICK、ALWAYS、NEVER</td>
                     <td>×</td>
                 </tr>
                 <tr>
@@ -179,7 +179,7 @@
         <dd class="example-sn">map基本使用</dd>
         <dd class="sn">
             <div>配置app.json - 只需配置一次，全局生效</div>
-            <p>根据需要指定</p>
+            <p>根据需要的具体业务指定</p>
             <pre>
 "requiredPrivateInfos":[
     "getLocation",
@@ -187,14 +187,14 @@
     "choosePoi",
     "chooseAddress"
 ]</pre>
-            <p>非必须</p>
+            <p>非必须 - 具体视版本而定</p>
             <pre>
 "permission": {
     "scope.userLocation": {
         "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
 }</pre>
-            <div>页面.wxml - 使用位置信息渲染地图组件&lt;map&gt;；使用图片返回地图中心</div>
+            <div>页面.wxml - 使用位置信息渲染地图组件&lt;map&gt;；使用固定定位的图片元素返回地图中心</div>
             <pre>
 &lt;map
     class="map" 
@@ -226,7 +226,7 @@ map{
 }</pre>
             <div>在 Page 外部声明全局地图上下文变量 mapCtx，在页面 onLoad 中初始化</div>
             <pre>mapCtx = wx.createMapContext('map')</pre>
-            <div>在 data 中声明经纬度变量，和视图绑定</div>
+            <div>在 data 中声明经纬度变量、标记点，用作视图绑定</div>
             <pre>
 data: {
     longitude: '',
@@ -274,11 +274,6 @@ addCenterMarkers(lati, long) {
         markers
     })
 }</pre>
-            <div>移动地图</div>
-            <pre>
-changeRegion(e) {
-    console.log('moving', e);
-}</pre>
             <div>单击返回中心，使地图回到中心点</div>
             <pre>
 moveToLocation() {
@@ -287,7 +282,12 @@ moveToLocation() {
         latitude: this.data.latitude
     })
 }</pre>
-            <div>其它事件测试 - 借助UI API</div>
+            <div>移动地图 - 略</div>
+            <pre>
+changeRegion(e) {
+console.log('moving', e);
+}</pre>
+            <div>其它事件 - 借助UI API；略</div>
             <pre>
 getMapInfo(e) {
     console.log(e);
@@ -297,18 +297,21 @@ getMapInfo(e) {
     // 每次单击地图时，增加一个 markers
     this.addCenterMarkers(e.detail.latitude, e.detail.longitude)
 },
+
 getMarker(e) {
     console.log('marker tap', e);
     wx.showToast({
         title: 'marker tapped',
     })
 },
+
 getLabel(e) {
     console.log('label tap', e);
     wx.showToast({
         title: 'label tapped',
     })
 },
+
 getCallout(e) {
     console.log('callout tap', e);
     wx.showToast({
@@ -328,7 +331,7 @@ getCallout(e) {
                 <figcaption>单击 label</figcaption>
             </figure>
         </dd>
-        <dd class="tips">开发工具和预览、真机调试有差别</dd>
+        <dd class="tips">开发工具的模拟器和预览、真机调试有差别</dd>
     </dl>
     <div class="chap">腾讯地图 LBS API</div>
     <dl>
@@ -342,9 +345,8 @@ getCallout(e) {
             <figure>
                 <img src="./imgs/lbs0.png" alt="">
             </figure>
-            <div>申请开发者秘钥 </div>
-            <p>创建应用并添加key - 选择webserviceAPI和微信小程序，并填写小程序的appID</p>
-            <!-- <p>key: 'U6QBZ-ROQ3W-PFMRZ-O4VA5-LZOKQ-G7FZA'</p> -->
+            <div data-key="U6QBZ-ROQ3W-PFMRZ-O4VA5-LZOKQ-G7FZA">申请开发者秘钥 - 创建应用并添加key -
+                选择webserviceAPI和微信小程序，并填写小程序的appID</div>
             <figure>
                 <img src="./imgs/lbs1.png" alt="">
             </figure>
@@ -358,7 +360,7 @@ getCallout(e) {
             <p>选择 微信小程序 → <a href="../utils//lib/qqmap-wx-jssdk1.1.zip" download title="点击下载">JavaScriptSDK
                     v1.1版本</a>
             </p>
-            <p>解压后复制到小程序项目中；通常放在Utils目录</p>
+            <p>解压后复制到小程序项目中；通常放在Utils目录；其中一个是压缩 min 版；使用任意一个都可以</p>
             <div>安全域名设置</div>
             <p>小程序管理后台 → 开发 → 开发管理 → 开发设置 → “服务器域名” 中设置request合法域名，添加https://apis.map.qq.com</p>
             <div>在小程序中引入库并实例化</div>
@@ -474,6 +476,7 @@ wx.request({
         <dd>参照 <a href="https://api.map.baidu.com/mapCard/">百度地图开放平台</a>，完成个人家乡城市名片的设计</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <script src="../utils/custom/clipboard.js"></script>
 </body>
 
 </html>
