@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>表单 Form</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
@@ -31,11 +28,11 @@
         </dd>
         <dt>常用组件</dt>
         <dd>表单组件繁多，常见的分类如下表</dd>
-        <dd class="number">
+        <dd class="sn">
             <div>&lt;form&gt;</div>
             <p>表单容器</p>
             <p>通常显式的设置宽度，其中表单元素会自动充满，无须单独设置每个宽度</p>
-            <pre class="code">
+            <pre>
 .form {
     width: 90%;
     background-color: #f3f4f5;
@@ -53,9 +50,9 @@
             </table>
             <div>&lt;label&gt;</div>
             <p>用for改进指定了id的表单组件的可用性；扩展了用户的点击，提升用户体验</p>
-            <pre class="code">&lt;checkbox value="撸码" id="code" /&gt;&lt;label for="code"&gt;撸码&lt;/label&gt;</pre>
+            <pre>&lt;checkbox value="撸码" id="code" /&gt;&lt;label for="code"&gt;撸码&lt;/label&gt;</pre>
             <p>使用lable包裹表单元素时，应略去for属性</p>
-            <pre class="code">
+            <pre>
 &lt;label&gt;
     &lt;checkbox color="#3498db" value="撸码" /&gt;撸码
 &lt;/label&gt;            </pre>
@@ -162,7 +159,7 @@
                 </tr>
             </table>
             <p>实际应用中，利用给定的数据和当前值是否相等来决定哪个是选中状态</p>
-            <pre class="code">
+            <pre>
 &lt;radio-group bindchange="getGender" name="ugender"&gt;
     &lt;radio value="男" checked="{{userInfo.ugender=='男'}}" color="#3498db" /&gt;男
     &lt;radio value="女" checked="{{userInfo.ugender=='女'}}" color="#3498db" /&gt;女
@@ -194,7 +191,7 @@
             <div>&lt;textarea&gt;</div>
             <p>多行输入；默认大小300*150；block</p>
             <p>建议：显式的设置宽度和容器保持一样大小；同时设置内边距padding以使得文字内收一定距离</p>
-            <pre class="code">
+            <pre>
 textarea{
     width: 100%;
     padding: 20rpx;
@@ -292,14 +289,14 @@ textarea{
                 </tr>
             </table>
             <p class="example-sn">在调试器中，查看按钮的代理样式，体会样式初始化的重要性</p>
-            <pre class="code">
+            <pre>
 button{
     width: 100%!important;
     background-color: var(--themeColor);
     color: #fff;    
 }            </pre>
             <p>部分样式需要在特定页面的类中设置</p>
-            <pre class="code">
+            <pre>
 .btn{
     padding: 0;
     margin: 0;
@@ -308,9 +305,9 @@ button{
 }</pre>
             <div>&lt;picker&gt;</div>
             <p>从底部弹起的滚动选择器，如：时间选择器、日期选择器、地区选择器</p>
-            <p>除了下述通用的属性外，不同的mode，picker拥有不同的属性；如时间类的都有开始start、结束end等，详情请查看 <a
-                    href="https://developers.weixin.qq.com/miniprogram/dev/component/picker.html" class="link">官方文档</a>
-            </p>
+            <p>除了下述通用的属性外，不同的mode，picker拥有不同的属性；如时间类的都有开始start、结束end等</p>
+            <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/picker.html">官方文档 -
+                    picker</a></p>
             <table>
                 <tr>
                     <th>属性</th>
@@ -349,6 +346,8 @@ pick(e){
 }</pre>
             <div>&lt;slider&gt;</div>
             <p>滑动选择器</p>
+            <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/slider.html">官方文档 -
+                    slider</a></p>
             <table>
                 <tr>
                     <th>属性</th>
@@ -396,7 +395,8 @@ pick(e){
                 </tr>
             </table>
             <p class="example-sn">年龄选择</p>
-            <pre>&lt;slider activeColor="#3498db" backgroundColor="#ccc" block-size="24" block-color="#3498db" bindchange="selAge" min="18" max="24" name="uage" value="{{uage}}" show-value /&gt;</pre>
+            <pre>
+&lt;slider activeColor="#3498db" backgroundColor="#ccc" block-size="24" block-color="#3498db" bindchange="selAge" min="18" max="24" name="uage" value="{{uage}}" show-value /&gt;</pre>
             <pre>
 selAge(e){
     this.setData({
@@ -406,6 +406,8 @@ selAge(e){
             <div>&lt;switch&gt;</div>
             <p>开关选择器</p>
             <p>也可以使用checkbox实现功能</p>
+            <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/switch.html">官方文档 -
+                    switch</a></p>
             <table>
                 <tr>
                     <th>属性</th>
@@ -436,9 +438,7 @@ selAge(e){
         <dd class="example-sn">查看常见表单的值</dd>
         <dd>以注册表单为例：为各元素指定name便于提交数据</dd>
         <dd>
-            <figure class="code">
-                <figcaption>wxml</figcaption>
-                <pre>
+            <pre>
 &lt;form class="form" bindsubmit="submit"&gt;
     &lt;view class="item border-btm"&gt;
         &lt;text&gt;学号&lt;/text&gt;
@@ -498,10 +498,7 @@ selAge(e){
     &lt;/view&gt;
     &lt;button form-type="submit" class="sub-btn"&gt;保存&lt;/button&gt;
 &lt;/form&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>js</figcaption>
-                <pre>
+            <pre>
 data: {
     userInfo:{
         ubirth:'2020-08-01',
@@ -534,16 +531,15 @@ changeBirth(e){
 submit(e){
     console.log(e.detail.value);
 }</pre>
-            </figure>
         </dd>
         <dd class="example-sn">打开客服对话框</dd>
         <dd>用户点击后会打开客服对话框</dd>
         <dd>
-            <figure class="code">
+            <figure>
                 <figcaption>wxml</figcaption>
                 <pre>&lt;button open-type="contact" bindcontact='getContact'&gt;getContact&lt;/button&gt;</pre>
             </figure>
-            <figure class="code">
+            <figure>
                 <figcaption>js</figcaption>
                 <pre>
 getContact(e){
@@ -554,11 +550,11 @@ getContact(e){
         <dd class="example-sn">选择用户头像</dd>
         <dd>用户点击后会打开头像选择对话框</dd>
         <dd>
-            <figure class="code">
+            <figure>
                 <figcaption>wxml</figcaption>
                 <pre>&lt;button open-type="chooseAvatar" bindchooseavatar='getAvatar'&gt;getAvatar&lt;/button&gt;</pre>
             </figure>
-            <figure class="code">
+            <figure>
                 <figcaption>js</figcaption>
                 <pre>
 getAvatar(e){
