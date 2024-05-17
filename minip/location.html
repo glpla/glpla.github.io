@@ -19,10 +19,7 @@
         <dd class="tips">调试的时候，应结合预览和真机调试共同使用</dd>
         <dt>&lt;map&gt;</dt>
         <dd>渲染地图</dd>
-        <dd>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/map.html">官方文档 - map</a> <a
-                href="https://lbs.qq.com/service/webService/webServiceGuide/miniprogram?ref=miniprogram_component_map">地图服务API在小程序中的使用方法
-            </a>
-        </dd>
+        <dd>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/map.html">官方文档 - map</a></dd>
         <dd>
             <table class="tbl-sn">
                 <caption>常用属性</caption>
@@ -407,13 +404,14 @@ getCallout(e) {
     </dl>
     <div class="chap">腾讯地图 LBS API</div>
     <dl>
-        <dt>环境准备</dt>
-        <dd>借助腾讯地图API的使用和实现</dd>
+        <dd>借助 <a href="https://lbs.qq.com/">腾讯位置服务 LBS</a> 开发</dd>
         <dd>很多功能需要企业号才能实现；个人号有次数限制；如地点搜索每天只有200次。。。</dd>
+        <dt>腾讯地图 微信小程序JavaScript SDK</dt>
+        <dd>专为小程序开发者提供的LBS数据服务工具包，可以在小程序中调用腾讯位置服务的POI检索、关键词输入提示、地址解析、逆地址解析、行政区划和距离计算等数据服务</dd>
+        <dd>更多信息，请访问 <a href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/jsSdkOverview">微信小程序JavaScript SDK</a>
+        </dd>
         <dd class="sn">
-            <div>登录 <a href="https://lbs.qq.com/">腾讯位置服务 LBS</a></div>
-            <div>选择开发文档，详细阅读 <a href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/jsSdkOverview">使用说明</a>
-            </div>
+            <div>登录 <a href="https://lbs.qq.com/">腾讯位置服务 LBS</a>、选择开发文档，详细阅读</div>
             <figure>
                 <img src="./imgs/lbs0.png" alt="">
             </figure>
@@ -437,18 +435,28 @@ getCallout(e) {
             <p>小程序管理后台 → 开发 → 开发管理 → 开发设置 → “服务器域名” 中设置request合法域名，添加https://apis.map.qq.com</p>
             <div>在小程序中引入库并实例化</div>
             <pre>
-// 引入SDK核心类，js文件根据自己业务，位置可自行放置
-const QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
-const qqmapsdk = new QQMapWX({
-    key: '申请的key'
-});</pre>
+    // 引入SDK核心类，js文件根据自己业务，位置可自行放置
+    const QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
+    const qqmapsdk = new QQMapWX({
+        key: '申请的key'
+    });</pre>
         </dd>
+        <dt>腾讯地图 WebService API</dt>
+        <dd>腾讯地图WebService API是基于HTTPS/HTTP协议的数据接口，可以结合小程序 map 组件实现数据叠加展示、交互等应用需求</dd>
+        <dd>在微信小程序中可通过 <span class="warn">wx.request()</span> 进行调用</dd>
+        <dd>基本要求，同SDK的使用，需要开发者秘钥和域名配置</dd>
+        <dd>更多信息，请访问 <a
+                href="https://lbs.qq.com/service/webService/webServiceGuide/miniprogram?ref=miniprogram_component_map">微信小程序中使用API
+            </a></dd>
         <dd class="tips">微信小程序JavaScript
-            SDK通过对腾讯位置服务WebServiceAPI接口进行封装而形成，因此和直接调用WebSerivceAPI的限制是等同的；建议使用SDK。因为有具体的案例可以参考</dd>
+            SDK通过对腾讯位置服务WebServiceAPI接口进行封装而形成，因此和直接调用WebSerivceAPI的限制是等同的；建议使用SDK</dd>
+    </dl>
+    <div class="chap">主要功能</div>
+    <dl>
         <dt>逆地址解析</dt>
         <dd>根据获得的经纬度，逆地址解析为城市</dd>
-        <dd><a href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodReverseGeocoder">SDK 逆地址解析</a></dd>
-        <dd>
+        <dd class="sn">
+            <div><a href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodReverseGeocoder">SDK 逆地址解析</a></div>
             <pre>
 wx.getLocation({
     type: 'gcj02',
@@ -476,10 +484,8 @@ wx.getLocation({
     fail: err => console.log(err),
     complete: () => console.log('get city done')
 })</pre>
-        </dd>
-        <dd><a href="https://lbs.qq.com/service/webService/webServiceGuide/address/Gcoder">WebService API 逆地址解析</a>
-        </dd>
-        <dd>
+            <div><a href="https://lbs.qq.com/service/webService/webServiceGuide/address/Gcoder">WebService API 逆地址解析</a>
+            </div>
             <pre>
 wx.request({
     url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=23.02067,113.75179&key=U6QBZ-ROQ3W-PFMRZ-O4VA5-LZOKQ-G7FZA&get_poi=1',
@@ -488,9 +494,7 @@ wx.request({
     },
     fail: err => console.log(err)
 })</pre>
-        </dd>
-        <dd>或</dd>
-        <dd>
+            <p>或</p>
             <pre>
 wx.request({
     url: 'https://apis.map.qq.com/ws/geocoder/v1/',
@@ -507,8 +511,8 @@ wx.request({
         </dd>
         <dt>地点搜索</dt>
         <dd>使用关键字 keyword 查找酒店</dd>
-        <dd><a href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodSearch">SDK 地点搜索</a></dd>
-        <dd>
+        <dd class="sn">
+            <div><a href="https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodSearch">SDK 地点搜索</a></div>
             <pre>
 qqmapsdk.search({
     keyword: '酒店',
@@ -522,10 +526,8 @@ qqmapsdk.search({
         console.log('search done');
     }
 });</pre>
-        </dd>
-        <dd><a href="https://lbs.qq.com/service/webService/webServiceGuide/search/webServiceSearch">WebService API
-                地点搜索</a>；需要指定搜索范围boundary，包括搜索的经纬度和半径</dd>
-        <dd>
+            <div><a href="https://lbs.qq.com/service/webService/webServiceGuide/search/webServiceSearch">WebService API
+                    地点搜索</a>；需要指定搜索范围boundary，包括搜索的经纬度和半径</div>
             <pre>
 wx.request({
     url: 'https://apis.map.qq.com/ws/place/v1/search',
