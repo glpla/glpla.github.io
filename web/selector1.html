@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>伪元素选择器 Pseudo element</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="./css/selector.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>伪元素选择器</h1>
+    <span>&commat;Pseudo element</span>
+  </header>
+  <dl>
+    <dd>. 并不是由传统的HTML标签创建出来，而是依附于已有的标签，所以叫伪元素</dd>
+    <dd>
+      <pre>
+selector::pseudo-element {
+    property: value;
+}</pre>
+    </dd>
+    <dt>::before ::after</dt>
+    <dd>. 创建一个inline元素作为第一个first子元素、最后一个last子元素</dd>
+    <dd>. 必须指定伪元素 content 属性，哪怕为空；可以使用普通字符、<a
+        href="https://developer.mozilla.org/en-US/docs/Glossary/Entity">CSS实体</a>；也可利用attr()获取元素属性；content拼接字符串不能使用+，直接在后面添加即可
+    </dd>
+    <dd>. content属性不支持变量使用var()，可以通过<a href="./counter.html">计数器</a> 迂回实现</dd>
+    <dd>. 可按照普通元素对其进行定位、布局、旋转等等操作；注意：旋转会撑开/破坏布局，请为父元素设置overflow溢出隐藏；同样需要注意的是：他们的box-sizing也要初始化为border-box</dd>
+    <dd>. 伪元素的样式受父级元素的影响；但是伪元素不是元素的直接孩子，无法使用直接后代选择器>选择</dd>
+    <dd>. 应用非常非常非常广泛</dd>
+    <dt>::first-letter ::first-line</dt>
+    <dd>. <span class="warn">block块元素</span> 的首字母、首行</dd>
+    <dd>. 设置的样式有限；常用于首字下沉</dd>
+    <dd>. 是内联元素inline，无法转化为块元素block</dd>
+    <dd>. ::first-letter优先级高于::first-line</dd>
+    <dt>::selection</dt>
+    <dd>. 元素被选择的部分；默认是蓝底白字</dd>
+    <dt>::placeholder</dt>
+    <dd>. 占位符样式；多用于表单元素input</dd>
+    <dd>. 设置的样式有限</dd>
+    <dt>::marker</dt>
+    <dd>. 定义标记类型</dd>
+    <dd>. 适用于display为list-item的元素，如&lt;li&gt;、&lt;summary&gt;</dd>
+    <dd>. 使用content属性指定内容</dd>
+    <dd>. 设置的样式有限</dd>
+    <dd>. 因为标记会破坏布局，基本很少使用</dd>
+    <dd>. 更多案例，请参考<a href="./list.html">列表 List</a> - 自定义编号示例</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 样式初始化</dd>
+    <dd>
+      <pre>
+*, 
+*::before, 
+*::after {
+    display: block;
+    box-sizing: border-box;
+}</pre>
+    </dd>
+    <dd>
+      <pre>
+//普通文本
+li::before {
+  content: '+';
+}
+//CSS实体
+li::before {
+  content: '\21E6';
+}
+
+//图片；大图片调整大小应转为行块盒并指定溢出隐藏
+//建议使用留空的方式，采用背景图片处理
+li::before {
+  content: url(./imgs/avatar.jpg);
+  display: inline-block;/* MUST */
+  overflow: hidden;/* MUST */
+}
+
+//获取标签属性；可以是自定义属性data-
+li::before {
+content: attr(data-ind);
+}
+
+//留空，做其他装饰性设计
+li::before {
+  content: '';
+}
+
+//使用计数器；可以拼接普通字符或CSS实体
+li::before {
+content: counter(sn) '\21e8 ';
+}        </pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/RwvOPvE">环环相扣
+        - CodePen</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./position.html#cart">JD购物车</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./list.html">模拟列表</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./web.html#browser">浏览器市场占有率</a>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./opening.html#evaluation">教学评价</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html#home">技能条</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="../os/sql/quiz.html">定制答题模板</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/ring.html">环环相扣</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/clock.html">时钟</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./opening.html">标题设计</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html#txt">个人网站 - 首字高亮</a></dd>
+    <dd>
+      <pre>
+p::first-letter {
+  color: #fff;
+  background-color: #f40;
+  padding: 2px 4px;
+}</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -6,23 +6,25 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>单行输入 input</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="./css/form.css">
-  <link rel="stylesheet" href="../css/sn.css">
-  <link rel="stylesheet" href="../css/code.css">
   <base target="_blank">
 </head>
 
 <body>
   <header>
-    <h1>&commat;&lt;input&gt;</h1>
+    <h1>单行输入</h1>
+    <span>&commat;&lt;input&gt;</span>
   </header>
   <dl>
     <dd>. 应用最广泛的表单元素</dd>
     <dd>. 种类type很多，默认是text，单行文本输入</dd>
     <dd>. 更多input类型和使用，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">MDN input</a></dd>
     <dd>
-      <table class="tbl-sn">
+      <pre>&lt;input type = "text"&gt;</pre>
+    </dd>
+    <dd>
+      <table>
         <caption>常用类型</caption>
         <tr>
           <th>分类</th>
@@ -116,7 +118,7 @@
       </table>
     </dd>
     <dd>
-      <table class="tbl-sn">
+      <table>
         <caption>常用属性</caption>
         <tr>
           <th>类别</th>
@@ -172,20 +174,12 @@
         </tr>
       </table>
     </dd>
-    <dt>基本使用</dt>
-    <dd>
-      <figure class="code">
-        <figcaption>默认使用</figcaption>
-        <pre>&lt;input type = "text"&gt;</pre>
-      </figure>
-    </dd>
+    <dd>. 由于元素比较小，用户交互|点击没有那么方便，尤其是单选或多选</dd>
     <dd>.
-      由于元素比较小，用户交互|点击没有那么方便，尤其是单选或多选；为了扩展交互热区，增强用户体验，input通常使用id属性，配合&lt;label&gt;的for属性，将&lt;label&gt;和&lt;input&gt;绑定|关联起来：点击了&lt;label&gt;就相当于选择了&lt;input&gt;
+      为了扩展交互热区，增强用户体验，input通常使用id属性，配合&lt;label&gt;的for属性，将&lt;label&gt;和&lt;input&gt;绑定|关联起来：点击了&lt;label&gt;就相当于选择了&lt;input&gt;
       ；&lt;label&gt;不能嵌套&lt;div&gt;方便使用相邻选择器操作元素</dd>
     <dd>
-      <figure class="code">
-        <figcaption>改进使用</figcaption>
-        <pre>
+      <pre>
 &lt;input type='text' id=''&gt;
 &lt;label for=''&gt;text here&lt;/label&gt;
 //或：使用&lt;label&gt;包裹&lt;input&gt;，请移除for属性
@@ -197,20 +191,51 @@
     &lt;input type='text'&gt;
     &lt;span&gt;text here&lt;/span&gt;
 &lt;/label&gt;</pre>
-      </figure>
     </dd>
   </dl>
-  <div class="chap">选择器 Selector</div>
   <dl>
-    <dt>说明</dt>
-    <dd>. 表单元素在不同浏览器上的默认样式不尽相同，为了统一，通常需要覆盖默认样式，再重新自定义新的样式；以下各例，如无特殊说明，均进行初始化设计</dd>
-    <dd>. 利用accent-color简单粗暴的统一指定部分元素的强调色，如&lt;input&gt;的radio、checkbox、range和&lt;progress&gt;；抛弃原来丑到爆的样式</dd>
-    <dd>. 部分元素可以设置appearance为none，从头开始设计UI</dd>
-    <dd>. 方便起见，设置各表单元素为border-box</dd>
+    <dt>选择器 Selector</dt>
+    <dd>. 表单元素在不同浏览器上的默认样式不尽相同，为了统一，通常需要覆盖默认样式，再重新自定义新的样式</dd>
+    <dd>. 以下各例，如无特殊说明，均进行初始化设计</dd>
     <dd>. 部分样式需要使用浏览器前缀；请多参考底部的 can i use，避免样式使用异常</dd>
-    <dd>
-      <table class="tbl-sn">
-        <caption>伪元素选择器</caption>
+    <dd class="sn">
+      <div>初始化设置</div>
+      <p>. 各表单元素为 border-box</p>
+      <p>. 字体大小、类型、边框、背景、轮廓、默认的占位符样式和文本选择样式</p>
+      <p>. input初始化：通常根据type修改特定的表单元素</p>
+      <pre>
+  input[type=text] {
+    width: 100%;
+    border: none;
+    outline: none;
+    font: inherit;
+    box-sizing: border-box;
+    background-color: transparent;
+  }
+    
+  input[type=text]::placeholder {
+    color: #089;
+  }
+  
+  input[type=text]::selection {
+    color: #F40;
+  }</pre>
+      <div>accent-color</div>
+      <p>. 利用 accent-color 简单粗暴的统一指定部分元素的强调色，如&lt;input&gt;的radio、checkbox、range和&lt;progress&gt;；抛弃原来丑到爆的样式</p>
+      <p>. 设置特定元素强调色，如 &lt;input&gt; </p>
+      <pre>
+input[type='radio'] {
+accent-color: #f40;
+}</pre>
+      <p>. 为了保持一致，通常全局定义</p>
+      <pre>
+  :root{
+    accent-color: #ff1493;
+}</pre>
+      <div>appearance</div>
+      <p>部分元素可以设置 appearance为none，从头开始设计UI</p>
+      <div>伪元素选择器</div>
+      <table>
         <tr>
           <th>类别</th>
           <th>说明</th>
@@ -224,10 +249,8 @@
           <td>元素选中时的样式</td>
         </tr>
       </table>
-    </dd>
-    <dd>
-      <table class="tbl-sn">
-        <caption>伪类选择器</caption>
+      <div>伪类选择器</div>
+      <table>
         <tr>
           <th>类别</th>
           <th>说明</th>
@@ -262,56 +285,15 @@
         </tr>
       </table>
     </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>设置部分&lt;input&gt;强调色</figcaption>
-        <pre>
-input[type='radio'] {
-  accent-color: #f40;
-}</pre>
-      </figure>
-      <figure class="code">
-        <figcaption>全局设置&lt;input&gt;强调色</figcaption>
-        <pre>
-:root {
-  accent-color: #f40;
-}</pre>
-      </figure>
-    </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] input初始化设置</dd>
-    <dd>. 字体大小、类型、边框、背景、轮廓、默认的占位符样式和文本选择样式</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>input初始化：通常根据type修改特定的表单元素</figcaption>
-        <pre>
-  input[type=text] {
-    width: 100%;
-    border: none;
-    outline: none;
-    font: inherit;
-    box-sizing: border-box;
-    background-color: transparent;
-  }
-    
-  input[type=text]::placeholder {
-    color: #089;
-  }
-  
-  input[type=text]::selection {
-    color: #F40;
-  }</pre>
-      </figure>
-    </dd>
   </dl>
-  <div class="chap nav-cont">基本使用 Usage</div>
+  <div class="chap">案例 Cases</div>
   <dl>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a
-        href="https://codepen.io/glpla/pen/WNLKzMK">自定义text样式</a></dd>
+    <dd class="example-sn"><a href="https://codepen.io/glpla/pen/WNLKzMK">自定义text样式</a></dd>
     <dd>. 初始化设计</dd>
     <dd>. :focus设计</dd>
     <dd>. ::selection设计</dd>
     <dd>. ::placeholder设计</dd>
-    <dd>. 后期利用定位把提示信息和占位符结合起来使用，请参考<a href="./demo/login1.html">一"鹿"有你</a></dd>
+    <dd>. 后期利用定位把提示信息和占位符结合起来使用，请参考<a href="./demo/login_deer.html">一"鹿"有你</a></dd>
     <dd>
       <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="WNLKzMK" data-user="glpla"
         style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
@@ -321,8 +303,8 @@ input[type='radio'] {
       </p>
       <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a
-        href="https://codepen.io/glpla/pen/mdajpYo">自定义radio</a> - 利用accent-color，简单粗暴</dd>
+    <dd class="example-sn"><a href="https://codepen.io/glpla/pen/mdajpYo">自定义radio</a> -
+      利用accent-color，简单粗暴</dd>
     <dd>
       <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="mdajpYo" data-user="glpla"
         style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
@@ -332,22 +314,7 @@ input[type='radio'] {
       </p>
       <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
     </dd>
-    <dd class="mt2" id="cb">[<span class="iconfont icon-keyboard"></span>] <a
-        href="https://codepen.io/glpla/pen/GRPBxKj">自定义checkbox</a> - 利用accent-color，简单粗暴</dd>
-    <dd>
-      <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="GRPBxKj" data-user="glpla"
-        style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-        <span>See the Pen <a href="https://codepen.io/glpla/pen/GRPBxKj">
-            cb-ipt</a> by cnplaman (<a href="https://codepen.io/glpla">@glpla</a>)
-          on <a href="https://codepen.io">CodePen</a>.</span>
-      </p>
-      <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </dd>
-  </dl>
-  <div class="chap nav-cont">进阶使用 Advanced</div>
-  <dl>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a
-        href="https://codepen.io/glpla/pen/abPjqbY">自定义radio</a></dd>
+    <dd class="example-sn"><a href="https://codepen.io/glpla/pen/abPjqbY">自定义radio</a></dd>
     <dd>[前置知识点] <a href="./selector.html#checked">选中伪类选择器:checked</a>、<a href="./selector.html#bro1">相邻兄弟选择器 +</a></dd>
     <dd>. 还可以隐藏&lt;input&gt;，设计关联的&lt;label&gt;，如文字、图片、字体图标；详情请参考 <a href="./demo/personal.html">个人网站</a></dd>
     <dd>
@@ -359,8 +326,18 @@ input[type='radio'] {
       </p>
       <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
     </dd>
-    <dd class="mt2" id="cb">[<span class="iconfont icon-keyboard"></span>] <a
-        href="https://codepen.io/glpla/pen/JjwBLdg">自定义checkbox</a></dd>
+    <dd id="cb" class="example-sn"><a href="https://codepen.io/glpla/pen/GRPBxKj">自定义checkbox</a> - 利用accent-color，简单粗暴
+    </dd>
+    <dd>
+      <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="GRPBxKj" data-user="glpla"
+        style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+        <span>See the Pen <a href="https://codepen.io/glpla/pen/GRPBxKj">
+            cb-ipt</a> by cnplaman (<a href="https://codepen.io/glpla">@glpla</a>)
+          on <a href="https://codepen.io">CodePen</a>.</span>
+      </p>
+      <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+    </dd>
+    <dd id="cb" class="example-sn"><a href="https://codepen.io/glpla/pen/JjwBLdg">自定义checkbox</a></dd>
     <dd>[前置知识点] <a href="./selector.html#checked">选中伪类选择器:checked</a>、<a href="./selector.html#bro0">兄弟选择器 ~</a>、<a
         href="./position.html">定位</a></dd>
     <dd>. 按钮一开始在左边，选中后，移动到右边</dd>
@@ -375,10 +352,8 @@ input[type='radio'] {
       </p>
       <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
     </dd>
-    <dd class="mt2" id="tabcard">[<span class="iconfont icon-keyboard"></span>] <a
-        href="https://codepen.io/glpla/pen/MWZBQev">标签页</a></dd>
-    <dd>
-      dd>[前置知识点] <a href="./selector.html#checked">选中伪类选择器:checked</a>、<a href="./selector.html#bro0">兄弟选择器 ~、<a
+    <dd id="tabcard" class="example-sn"><a href="https://codepen.io/glpla/pen/MWZBQev">标签页</a></dd>
+    <dd>[前置知识点] <a href="./selector.html#checked">选中伪类选择器:checked</a>、<a href="./selector.html#bro0">兄弟选择器 ~、<a
           href="./selector.html#bro1">相邻兄弟选择器 +</a></dd>
     <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="MWZBQev" data-user="glpla"
       style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
@@ -388,22 +363,18 @@ input[type='radio'] {
     </p>
     <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
     </dd>
+    <dd class="tips">
+      <div>. &lt;label&gt;配合表单元素可以实现很多非常棒的设计，如定制表单元素、不使用js却能实现js的效果</div>
+      <div>. 部分系统要求表单元素不能单独使用，必须用在&lt;form&gt;中；还有某些元素如密码，必须指定 autocomplete属性，请注意查看控制台提示信息，如：</div>
+      <p>xxx field is not contained in a form</p>
+      <p>Input elements should have autocomplete attributes</p>
+      </div>
+    </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
     <dt>总结</dt>
     <dd>. input的基本使用</dd>
-    <dd class="quote">
-      <div><span class="iconfont icon-bell"></span></div>
-      <div>. &lt;label&gt;配合表单元素可以实现很多非常棒的设计，如定制表单元素、不使用js却能实现js的效果</div>
-      <div>. 部分系统要求表单元素不能单独使用，必须用在&lt;form&gt;中；还有某些元素如密码，必须指定 autocomplete属性，请注意查看控制台提示信息，如：</div>
-      <div class="txt-indent">
-        <pre>xxx field is not contained in a form</pre>
-      </div>
-      <div class="txt-indent">
-        <pre>Input elements should have autocomplete attributes</pre>
-      </div>
-    </dd>
     <dt>作业</dt>
     <dd>. 使用&lt;input&gt;元素完成个人网站的留言板或信息采集表的设计</dd>
   </dl>
