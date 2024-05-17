@@ -39,17 +39,17 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 8px;
   border-radius: 8px;
 }
 
-::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
   width: 8px;
   background: #ecf0f1;
 }
 
-::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   border-radius: 8px;
   background-image: linear-gradient(#fff, var(--warn-color));
 }
@@ -220,6 +220,14 @@ td {
 @media screen and (max-width:768px) {
   html {
     font-size: 60%;
+  }
+
+  pre {
+    pointer-events: unset;
+  }
+
+  pre::before {
+    content: '';
   }
 
   header {
