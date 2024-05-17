@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>画布 Canvas</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/code.css">
   <style>
     .canvas {
@@ -21,10 +21,10 @@
 
 <body>
   <header>
-    <h1>&commat;Canvas</h1>
+    <h1>画布</h1>
+    <span>&commat;Canvas</span>
   </header>
   <dl>
-    <dt>overview</dt>
     <dd>.Canvas默认宽高为宽300px,高150px</dd>
     <dd>.更改画布大小，请设置标签的 width，height 属性</dd>
     <dd>.CSS样式设置画布大小，更改的是画布元素的大小，并没有更改画布的大小</dd>
@@ -32,6 +32,7 @@
     <dd>.后面绘制的图形会覆盖前面的图形</dd>
     <dd>
       <table>
+        <caption>基本方法</caption>
         <tr>
           <th>类别</th>
           <th>说明</th>
@@ -86,7 +87,7 @@
         </tr>
       </table>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 绘制三角形</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 绘制三角形</dd>
     <dd>
       <pre>
 let canvas = document.querySelector('canvas')
@@ -106,7 +107,7 @@ ctx.fill();
 ctx.closePath();
 ctx.stroke();</pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 绘制圆</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 绘制圆</dd>
     <dd>
       <pre>ctx.arc(100, 100, 50, 0, 2 * Math.PI);</pre>
     </dd>
@@ -118,7 +119,7 @@ ctx.stroke();</pre>
     <dd>
       <pre>ctx.arc(100, 100, 50, 0, Math.PI / 2, true);</pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 验证码</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 验证码</dd>
     <dt class="nav-cont">drawImage()</dt>
     <dd>.除了使用&lt;img&gt;显示图片，还可以使用canvas时绘制图片</dd>
     <dd>.通常使用new Image()创建一个图像源，在其load后处理绘画业务</dd>
@@ -137,7 +138,7 @@ drawImage(image, dx, dy, dWidth, dHeight)</pre>
       <pre>
 drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)</pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 绘制图片</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 绘制图片</dd>
     <dd>.示例图片800*</dd>
     <dd>
       <pre>
@@ -152,7 +153,7 @@ drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)</pre>
   }
 &lt;/script&gt;</pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 走路</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 走路</dd>
     <dd>.素材图片大小为1000*600，由上下各5个图片组成</dd>
     <dd>.静态绘制|显示第一个帧</dd>
     <dd>.单击开始，角色行走|逐步绘制其它帧；单击停止，角色停止行走|清除定时器</dd>
@@ -164,7 +165,6 @@ drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)</pre>
       <button id="stop">stop</button>
       <canvas width="200" height="300"></canvas>
     </dd>
-    <dd>[H5]</dd>
     <dd>
       <pre>
 &lt;div class="canvas"&gt;
@@ -173,7 +173,6 @@ drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)</pre>
   &lt;canvas width="200" height="300"&gt;&lt;/canvas&gt;
 &lt;/div&gt;</pre>
     </dd>
-    <dd>[JS]</dd>
     <dd>
       <pre>
 let play = document.querySelector('#play');
@@ -202,7 +201,7 @@ stop.addEventListener('click', () => {
   inter = null;
 })</pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 走马灯</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 走马灯</dd>
     <dd>.角色从左走到右</dd>
     <dd>.每次绘制前，先清除画布，再按照一定的时间间隔绘制图片片段</dd>
     <dd>

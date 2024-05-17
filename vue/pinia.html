@@ -27,10 +27,10 @@
     </header>
     <dl>
         <dd>状态管理出现之前，使用共享组件完成对共享数据的使用；共享数据的修改通过共享组件发送自定义事件完成。这就意味着：任何一个使用它的组件都可以修改，不太容易维护；注意：共享数据和全局数据不是一回事</dd>
-        <dd>利用仓库store集中式状态管理：抽取出组件间的共享状态，放在一个全局单例中来管理</dd>
+        <dd>利用仓库 store 集中式状态管理：抽取出组件间的共享状态，放在一个全局单例中来管理</dd>
         <dd>三个概念：State、Getter 和 Action</dd>
         <dd class="sn">
-            <div>State - 驱动整个应用的数据源；是store 的核心。应先定义能代表应用或反映应用状态的 state；相当于组件中的 data</div>
+            <div>State - 驱动整个应用的数据源；是 store 的核心。应先定义能代表应用或反映应用状态的 state；相当于组件中的 data</div>
             <div>Getter - 对状态的一种声明式映射；相当于组件中的 computed</div>
             <div>Action - 根据用户的交互对数据源的操作；相当于组件中的 method</div>
         </dd>
@@ -40,9 +40,9 @@
                 <figcaption>关系</figcaption>
             </figure>
         </dd>
-        <dd>Vue3采用<a href="https://pinia.vuejs.org/zh/" class="link">Pinia</a>；Pinia 是 Vue
-            的专属状态管理库，使用大菠萝作为logo</dd>
-        <dd>Vue2采用vuex</dd>
+        <dd>Vue3采用 <a href="https://pinia.vuejs.org/zh/" class="link">Pinia</a>；Pinia 是 Vue
+            的专属状态管理库，使用大菠萝作为 logo</dd>
+        <dd>Vue2采用 vuex</dd>
         <dt>安装 Installation</dt>
         <dd>可以在创建项目的时，选择状态管理；项目创建完毕后，可以直接使用 - 强烈建议</dd>
         <dd>也可以单独安装，需要引入、配置等；不建议新手使用</dd>
@@ -50,9 +50,9 @@
             <pre>npm i pinia --save</pre>
         </dd>
         <dt>引入 Import</dt>
-        <dd>在入口文件main.js引入并创建使用</dd>
+        <dd>在入口文件 main.js 引入并创建使用</dd>
         <dd>完成后，在开发者工具中可以看到大菠萝</dd>
-        <dd>在main.js中引入并使用</dd>
+        <dd>在 main.js 中引入并使用</dd>
         <dd>
             <pre>
 import './assets/main.css'
@@ -71,8 +71,8 @@ app.mount('#app')</pre>
         <dt>仓库 Store</dt>
         <dd>也叫仓库，是一个保存全局状态 <span class="warn">state</span> 和业务逻辑的实体；可以在 <span class="warn">整个应用</span> 中访问的数据</dd>
         <dd>不与组件树绑定，而承载着全局状态</dd>
-        <dd>仓库通常集中保存在项目的stores目录（应提前创建好），并按照功能创建 <span class="warn">单独</span> 的仓库文件</dd>
-        <dd>仓库在onMounted之前就已经准备好 - 兵马未动，粮草先行</dd>
+        <dd>仓库通常集中保存在项目的 stores 目录（应提前创建好），并按照功能创建 <span class="warn">单独</span> 的仓库文件</dd>
+        <dd>仓库在 onMounted 之前就已经准备好 - 兵马未动，粮草先行</dd>
         <dd class="tips">
             <div>仓库会自动处理数据的响应式。通常不需要使用 ref 或 reactive 来声明状态；但是调试的时候，数据最初不会更新</div>
             <div>即使指定了ref()，后期维护的时候，也不能带上.value</div>
@@ -81,11 +81,11 @@ app.mount('#app')</pre>
         </dd>
         <dt>基本步骤 Steps</dt>
         <dd class="sn">
-            <div>定义 Store</div>
+            <div>创建 Store</div>
             <p>创建仓库文件 .js，使用语义化命名，如counter.js</p>
-            <p>引入 defineStore 创建仓库</p>
+            <p>引入 defineStore 库</p>
             <p>以 use 开头且以 Store 结尾命名仓库，如useCounterStore</p>
-            <p>使用defineStore创建仓库实例，其中：</p>
+            <p>使用 defineStore 创建仓库实例，其中：</p>
             <p>. 第一个参数 counter 是你的应用中 Store 的唯一 ID，Pinia 将用它来连接 store 和 devtools</p>
             <p>. 第二个参数接收 option 对象或 setup 函数；setup 函数和组合式 API 类似，且功能更灵活</p>
             <pre>
@@ -103,7 +103,7 @@ export const useCounterStore  = defineStore('counter', ()=>{
 
   return { count, msg, doubleCount, increment }
 })</pre>
-            <div>使用 Store</div>
+            <div>目标组件使用 Store</div>
             <p>逻辑 - 引入仓库、创建仓库实例、使用仓库数据</p>
             <pre>
 &lt;script setup&gt;
