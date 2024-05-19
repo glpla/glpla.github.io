@@ -29,6 +29,7 @@ a,
 p,
 h1,
 table,
+label,
 td,
 tr,
 ul,
@@ -177,7 +178,6 @@ dt:has(.iconfont) {
 }
 
 pre {
-  position: relative;
   color: #f7f7f7;
   padding: 1rem;
   font-size: 14px;
@@ -185,7 +185,6 @@ pre {
   border-radius: 6px;
   overflow: auto;
   margin: 1rem auto;
-  pointer-events: none;
 }
 
 pre span::before {
@@ -193,7 +192,12 @@ pre span::before {
   counter-increment: sn;
 }
 
-pre::before {
+pre.pre {
+  position: relative;
+  pointer-events: none;
+}
+
+pre.pre::before {
   content: 'Copy';
   position: absolute;
   right: 10px;

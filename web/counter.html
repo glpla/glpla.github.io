@@ -28,6 +28,18 @@
     .article h3::before {
       content: counter(chap)'.' counter(sec)'节 ';
     }
+
+    @counter-style my-style {
+      system: cyclic;
+      symbols: '①' '②' '③' '④' '⑤' '⑥' '⑦' '⑧' '⑨' '⑩' '⑪' '⑫' '⑬' '⑭' '⑮' '⑯' '⑰' '⑱' '⑲' '⑳';
+      /* suffix: '、'; */
+      /* fallback: decimal; */
+      /* speak-as: numeric; */
+    }
+
+    ul>li {
+      list-style-type: my-style;
+    }
   </style>
 </head>
 
@@ -37,7 +49,6 @@
     <span>&commat;Counter</span>
   </header>
   <dl>
-    <dt>说明</dt>
     <dd>. 根据元素个数自动计数</dd>
     <dd>. 可以嵌套使用实现多级列表</dd>
     <dd>. 理工科最爱：为代码编号</dd>
@@ -156,14 +167,9 @@
 <span>&lt;/body&gt;</span>
 <span></span>
 <span>&lt;/html&gt;</span></pre>
-    </dd>
-    <dd>[HTML] - 核心</dd>
-    <dd>
       <pre>&lt;span&gt;hello, world.&lt;/span&gt;</pre>
     </dd>
-    <dd>[CSS]</dd>
-    <dd>
-      <pre>
+    <pre>
 pre {
   counter-reset: sn;
 }
@@ -175,7 +181,6 @@ pre span {
 pre span::before {
   content: counter(sn, decimal-leading-zero)' ';
 }</pre>
-    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 为表和图添加序号</dd>
     <dd>
       <pre>
@@ -282,7 +287,6 @@ figure figcaption::before {
       <p>Voluptatum reiciendis nam voluptate, quae consectetur consequatur doloremque corporis deserunt.</p>
       <p>Eligendi modi, adipisci quae numquam expedita deserunt accusantium! Voluptas, fuga.</p>
     </dd>
-    <dd>为文章添加章节序号</dd>
     <dd>
       <pre>
 .article {
@@ -305,6 +309,35 @@ figure figcaption::before {
 .article h3::before {
   content: counter(chap)'.' counter(sec)'节 ';
 }</pre>
+    </dd>
+  </dl>
+  <div class="chap">@counter-style</div>
+  <dl>
+    <dd>自定义计数样式</dd>
+    <dd>
+      <pre>
+@counter-style counter-style-name {
+  system: 类型 decimal | alpha | symbols;
+  symbols: 符号序列;
+  suffix: 后缀；每个计数后面的字符串;
+  range: 有效范围;
+  fallback: 超出范围时使用的备用计数器，counter-style-name;
+  speak-as: 控制语音合成器如何读出计数 speaking-rule;
+}</pre>
+    </dd>
+    <dd>
+      <ul>
+        <li>Lorem ipsum dolor sit amet.</li>
+        <li>Consequuntur aliquam unde quam molestiae.</li>
+        <li>Harum, delectus rerum. Sapiente, eveniet?</li>
+        <li>Voluptatibus earum at saepe nisi!</li>
+        <li>Et atque sint quis reprehenderit.</li>
+        <li>Dicta earum unde sunt corporis.</li>
+        <li>Commodi, dolores minima! Quas, odio?</li>
+        <li>Ipsa unde dignissimos tenetur exercitationem.</li>
+        <li>Quisquam voluptatem enim dicta maiores.</li>
+        <li>Necessitatibus amet nostrum nesciunt quis.</li>
+      </ul>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

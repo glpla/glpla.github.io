@@ -1,10 +1,25 @@
 :root {
   --w: 72vw;
-  --txt-warn-color: #f40;
+  --txt-warn-color: #f46;
 }
 
 p {
   text-indent: 2em;
+}
+
+.inset {
+  position: relative;
+  width: 180px;
+  aspect-ratio: 16/9;
+  border: 1px solid var(--txt-warn-color);
+  margin: 1rem auto;
+}
+
+.inset::before {
+  content: '';
+  position: absolute;
+  inset: 20px 0;
+  background-color: var(--txt-warn-color);
 }
 
 .cart {
@@ -169,7 +184,7 @@ p {
   height: 30px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background-color: #f40;
+  background-color: var(--txt-warn-color);
 }
 
 .mul-el::after {
@@ -181,21 +196,17 @@ p {
   height: 60px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 1px solid #f40;
+  border: 1px solid var(--txt-warn-color);
 }
 
 .el-undone {
-  height: 40px;
-  line-height: 40px;
-  background-color: #f40;
+  background-color: var(--txt-warn-color);
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
 }
 
 .el-done {
   position: relative;
-  height: 40px;
-  line-height: 40px;
-  background-color: #f40;
+  background-color: var(--txt-warn-color);
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
@@ -209,7 +220,7 @@ p {
 .environment {
   position: relative;
   height: 400px;
-  background-color: #f46;
+  background-color: var(--txt-warn-color);
   overflow: hidden;
 }
 
@@ -290,7 +301,7 @@ p {
   height: 40px;
   line-height: 40px;
   background-color: #000;
-  color: #ff0f5b;
+  color: var(--txt-warn-color);
   margin: 2rem auto;
   font-family: "MR";
 }
@@ -322,7 +333,7 @@ p {
 }
 
 .menu-item:hover>div {
-  background-color: #f40;
+  background-color: var(--txt-warn-color);
   color: #fff;
 }
 

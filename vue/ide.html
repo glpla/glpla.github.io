@@ -23,7 +23,7 @@
             <p>. Live Server</p>
             <p>. Vue Official - volar</p>
             <p>. vue3-snippets-for-vscode</p>
-            <p>. Vue VSCode Snippets - 定制vbase-3-setup</p>
+            <p>. Vue VSCode Snippets</p>
             <p>. AutoScssStruct4Vue - scss</p>
             <div><a href="https://www.google.cn/intl/en_uk/chrome/">Google Chrome</a></div>
             <div><a href="https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home?hl=zh-CN">Edge扩展</a>
@@ -46,151 +46,50 @@
             <div><a href="https://github.com">GitHub</a></div>
             <div><a href="https://play.vuejs.org/"> Vue SFC Playground</a></div>
         </dd>
-    </dl>
-    <div class="chap">项目开发</div>
-    <dl>
-        <dd>使用Vue 官方的项目脚手架工具Vite创建项目，根据提示操作即可；详细情况，看查看<a href="https://cn.vuejs.org/guide/quick-start.html">Vite
-                官方文档</a>
+        <dt>定制开发模板</dt>
+        <dd>Vs Code的扩展 Vue VSCode Snippets 提供了很多内置的代码片段</dd>
+        <dd>在新组件中，输入vb或v3后，选择vbase-3-setup可以快速生成模板，默认采用带根节点的结构&lt;template&gt;、逻辑&lt;script&gt;在结构&lt;template&gt;后面；样式&lt;style&gt;使用CSS预处理器scss
         </dd>
-        <dt>基本过程</dt>
-        <dd class="sn">
-            <div>创建空白文件夹或选择你的项目开发<span class="warn">总</span>文件夹；不能出现中文符号；不要在桌面创建项目</div>
-            <div>进入文件夹，打开命令行窗口CMD，输入以下指令，创建项目并指定项目名；字母开头</div>
-            <figure class="img-sn">
-                <img src="./imgs/pro1.jpg" alt="">
-            </figure>
-            <div>选择Vue框架 - 使用方向键选择，回车确认</div>
-            <figure class="img-sn">
-                <img src="./imgs/pro2.jpg" alt="">
-            </figure>
-            <div>定制Vue框架 - 只配置基本的功能，typescript、语法检查等功能暂且不选；后期使用路由管理Vue-router和状态管理Pinia</div>
-            <figure class="img-sn">
-                <img src="./imgs/pro3.jpg" alt="">
-            </figure>
-            <figure class="img-sn">
-                <img src="./imgs/pro4.jpg" alt="">
-            </figure>
-            <div>根据提示逐步执行：进入项目目录、安装依赖并运行项目</div>
-            <p class="question">注意：项目创建完毕后，后续操作请使用Vs Code完成</p>
-            <div>按住CTRL + 单击项目链接，即可打开Vue + Vite的欢迎界面</div>
-            <figure class="img-sn">
-                <img src="./imgs/pro5.jpg" alt="">
-            </figure>
-            <div>恭喜，您已经打开了Vue开发的大门</div>
-            <div>完善开发</div>
-            <div>项目发布</div>
-            <pre>npm run build</pre>
-            <p>发布后会生产目标文件夹dist；使用Vs Code打开发布目录dist，预览效果</p>
-            <p>如果预览失败</p>
-            <p>1.为vite.config.js增加基地址配置，指定为当前路径</p>
-            <pre>base: './'</pre>
-            <p>2. 尝试将路由模式由默认的web模式改为hash模式，需要引入 createWebHashHistory 包</p>
-            <pre>history: createWebHashHistory(import.meta.env.BASE_URL)</pre>
-        </dd>
-    </dl>
-    <div class="chap">项目解读</div>
-    <dl>
-        <dt>node_modules</dt>
-        <dd>依赖包</dd>
-        <dd>生产环境依赖 dependencies：项目上线后，所必须的依赖，如网络请求axios</dd>
-        <dd>开发环境依赖 devDependencies：开发过程中需要的依赖，发布上线后，不再需要，如CSS预处理</dd>
-        <dt>dist</dt>
-        <dd>项目发布后才有</dd>
-        <dd>将其推送到服务器上，项目就进入生产环境的测试环节；经过一系列的调试、重新发布、再上线，项目进入运维环节</dd>
-        <dt>public</dt>
-        <dd>公共资源，可以直接被项目使用，如图片，不需要解析</dd>
-        <dd>项目发布后，这里的资源会 <span class="warn">原封不动</span> 的拷贝到发布文件夹dist</dd>
-        <dt>src</dt>
-        <dd>开发过程操作最多的目录，您大展身手的舞台</dd>
-        <dd>包括重要的两个文件：</dd>
-        <dd>1. main.js</dd>
-        <dd>逻辑入口文件；引用并挂载App.vue；引入样式库和第三方库等</dd>
+        <dd>我们调整为：逻辑在最前面、去掉根节点、不带CSS预处理</dd>
+        <dd>1. 打开用户目录 → .vscode → 扩展extension → vue-vscode-snippets → snippets → vue.json，定位到vbase-3-setup</dd>
+        <dd>2. 删除结构&lt;template&gt;中的根节点&lt;div&gt;</dd>
+        <dd>3. 移动逻辑&lt;script&gt;到最上面</dd>
+        <dd>4. 保存并重启 Vs Code，扩展生效</dd>
         <dd>
             <pre>
-import './assets/main.css'
-import 'font-awesome/css/font-awesome.min.css'</pre>
-        </dd>
-        <dd>2. App.vue</dd>
-        <dd>主入口组件</dd>
-        <dd>特别的 <a href="./sfc.html">单文件组件 SFC</a>，包括逻辑、结构和样式</dd>
-        <dd>.逻辑中可以引入其它组件、库和模块</dd>
-        <dd>
-            <pre>
-import { ref } from 'vue';
-import axios from 'axios';</pre>
-        </dd>
-        <dd>.样式中可以其它样式</dd>
-        <dd>
-            <pre>@import url(//at.alicdn.com/t/c/font_4090429_8xfmdtpelxu.css);</pre>
-        </dd>
-        <dt>index.html</dt>
-        <dd>项目的主页文件</dd>
-        <dd>指定了挂载点和挂载的组件</dd>
-        <dd>
-            <pre>
-&lt;div id="app"&gt;&lt;/div&gt;
-&lt;script type="module" src="/src/main.js"&gt;&lt;/script&gt;</pre>
-        </dd>
-        <dt>package.json</dt>
-        <dd>依赖包管理文件；定制命令</dd>
-        <dd>区分生产环节依赖 dependencies和开发环境依赖 devDependencies；更多信息，请访问<a href="../node/ide.html#dep">Node</a>
-        </dd>
-        <dd>由于包的更新和大小等因素，项目分享或提交到代码仓库时，这部分会被忽略。用户拿到代码，第一件事情是安装依赖；否则项目不能运行</dd>
-        <dd>
-            <pre>
-{
-    "name": "sfc",
-    "version": "0.0.0",
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview"
-    },
-    "dependencies": {
-        "axios": "^1.6.7",
-        "font-awesome": "^4.7.0",
-        "nanoid": "^5.0.6",
-        "swiper": "^11.0.7",
-        "vue": "^3.4.15"
-    },
-    "devDependencies": {
-        "@vitejs/plugin-vue": "^5.0.3",
-        "sass": "^1.71.1",
-        "vite": "^5.0.11"
-    }
+"Vue Single File Component Setup Composition API": {
+    "prefix": "vbase-3-setup",
+    "body": [
+        "&lt;script setup&gt;",
+        "",
+        "&lt;/script&gt;",
+        "",
+        "&lt;template&gt;",
+        "",
+        "&lt;/template&gt;",
+        "",
+        "&lt;style scoped&gt;",
+        "",
+        "&lt;/style&gt;"
+    ],
+    "description": "Base for Vue File Setup Composition API with SCSS"
 }</pre>
         </dd>
-        <dd>可以指定主机地址，如0.0.0.0，表示局域网地址</dd>
-        <dd>
-            <pre>"dev": "vite --host 0.0.0.0",</pre>
-        </dd>
-        <dt>vite.config.js</dt>
-        <dd>vite的配置，如server的配置：项目打开、端口、代理等等；默认没有，需手动添加</dd>
-        <dd>网络请求出现跨域时，必须要做<a href="../node/proxy.html">代理 Proxy</a></dd>
-        <dd>更多配置，请访问<a href="https://cn.vitejs.dev/config/">官方文档 - 配置 Vite</a></dd>
+        <dd>现在模板为：</dd>
         <dd>
             <pre>
-server: {
-    open: true,         //启动项目自动弹出浏览器；默认false，手动启动
-    host: '0.0.0.0',    //指定主机；默认是locahost
-    port: '5173',       //默认端口5173
-    proxy: {
-        '/food': {
-        target: 'http://127.0.0.1:3000',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')   //不可以省略rewrite
-        }
-    }
-}</pre>
+&lt;script setup&gt;
+//逻辑
+&lt;/script&gt;
+                
+&lt;template&gt;
+    //结构
+&lt;/template&gt;
+
+&lt;style scoped&gt;
+    //样式
+&lt;/style&gt;</pre>
         </dd>
-        <dd>[<span class="iconfont icon-mouse"></span>]练习</dd>
-        <dd>发布后都发生了什么???</dd>
-        <dd>跨域是什么???</dd>
-    </dl>
-    <div class="chap">其它</div>
-    <dl>
         <dt>Vs Code快捷编辑</dt>
         <dd>v3/vbase：选择setup组件模板</dd>
         <dd>imp：导入包|组件</dd>
