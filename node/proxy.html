@@ -44,10 +44,10 @@ server: {
   // host: '127.0.0.1',
   // port: '5173',
   proxy: {
-    '/store': {
+    '/api': {
       target: 'http://127.0.0.1:3000',
       changeOrigin: true,
-      rewrite: (path) => path.replace(/^\/store/, '')
+      rewrite: (path) => path.replace(/^\/api/, '')
     }
   }
 }</pre>
@@ -56,25 +56,25 @@ server: {
     <dd class="tips">先拼接再替换；替换请求中的同名串</dd>
     <dd>请求为：</dd>
     <dd>
-      <pre>/store</pre>
+      <pre>/api</pre>
     </dd>
     <dd>拼接为</dd>
     <dd>
-      <pre>http://127.0.0.1:3000/store/</pre>
+      <pre>http://127.0.0.1:3000/api/</pre>
     </dd>
-    <dd>替换掉/store后，解析为</dd>
+    <dd>替换掉/api后，解析为</dd>
     <dd>
       <pre>http://127.0.0.1:3000/</pre>
     </dd>
     <dd>请求为：</dd>
     <dd>
-      <pre>/store/detail</pre>
+      <pre>/api/detail</pre>
     </dd>
     <dd>拼接为</dd>
     <dd>
-      <pre>http://127.0.0.1:3000/store/detail</pre>
+      <pre>http://127.0.0.1:3000/api/detail</pre>
     </dd>
-    <dd>替换掉/store后，解析为</dd>
+    <dd>替换掉/api后，解析为</dd>
     <dd>
       <pre>http://127.0.0.1:3000/detail</pre>
     </dd>

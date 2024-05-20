@@ -221,9 +221,15 @@
       </table>
     </dd>
     <dd class="mt2">3.document</dd>
-    <dd>文档对象；可以获取其中任何一个元素</dd>
-    <dd>document.documentElement：获取HTML</dd>
-    <dd>document.body：获取body[也可以使用querySelector]</dd>
+    <dd>获取文档对象；进而可以获取其中任何一个元素</dd>
+    <dd class="mt2">4.html</dd>
+    <dd>获取html</dd>
+    <dd>document.documentElement</dd>
+    <dd class="mt2">5.body</dd>
+    <dd>获取body</dd>
+    <dd>document.body</dd>
+    <dd>使用querySelector</dd>
+    <dd>使用getElement(s)Byxxxx系列</dd>
     <dt>元素的类 class</dt>
     <dd>className：元素应用的类；返回字符串；多个类名以空格分隔；不建议直接对该属性赋值</dd>
     <dd>classList：元素应用的类；返回类数组</dd>
@@ -390,18 +396,11 @@ console.log(getComputedStyle(box).background);//所有背景相关的样式</pre
     <dd>[ <span class="iconfont icon-bomb"></span> ] 更换状态的类必须出现在当前动态类的后面</dd>
     <dd class="example-sn"> 换肤 - 将换肤数据绑定到data-上</dd>
     <dd>
-      <figure class="code">
-        <figcaption>HTML</figcaption>
-        <pre>
+      <pre>
 &lt;div class="red" data-color="#f40"&gt;red&lt;/div&gt;
 &lt;div class="blue" data-color="#089"&gt;blue&lt;/div&gt;
 &lt;div class="yellow" data-color="#ff0"&gt;yellow&lt;/div&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>JavaScript</figcaption>
-        <pre>
+      <pre>
 btnRed.addEventListener('click', (e) => {
   body.style.backgroundColor = e.target.dataset.color;
 })
@@ -411,19 +410,14 @@ btnBlue.addEventListener('click', (e) => {
 btnYellow.addEventListener('click', (e) => {
   body.style.backgroundColor = e.target.dataset.color;
 })</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>函数封装 - 逻辑优化</figcaption>
-        <pre>
+      <div>函数封装 - 逻辑优化</div>
+      <pre>
 btnRed.addEventListener('click', fn);
 btnBlue.addEventListener('click', fn);
 btnYellow.addEventListener('click', fn);
 function fn(e) {
   body.style.backgroundColor = e.target.dataset.color;
 }</pre>
-      </figure>
     </dd>
     <dd class="example-sn"> 换肤 - <a href="https://codepen.io/glpla/full/ZEPbbQv">选项卡 | 导航 - CodePen</a></dd>
     <dd>.更换元素的class或样式style</dd>
@@ -432,9 +426,8 @@ function fn(e) {
     <dd>.初始：为第一个导航和第一个内容，赋予相应的活动类和样式</dd>
     <dd class="example-sn"> 换肤 - 更换HTML页面的&lt;link&gt;引入的样式表</dd>
     <dd>
-      <figure class="code">
-        <figcaption>[HTML] - 以id标识样式文件</figcaption>
-        <pre>
+      <div>以id标识样式文件</div>
+      <pre>
 &lt;hdead&gt;
   &lt;link rel="stylesheet" href="./tmp.css" id="css"&gt;
 //...
@@ -444,12 +437,7 @@ function fn(e) {
   &lt;button id="btn0"&gt;#fff&lt;/button&gt;
   &lt;button id="btn1"&gt;#089&lt;/button&gt;
 &lt;/body&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>[JS]</figcaption>
-        <pre>
+      <pre>
 let css = document.querySelector('#css');
 let btn0 = document.querySelector('#btn0');
 let btn1 = document.querySelector('#btn1');
@@ -459,21 +447,18 @@ btn0.addEventListener('click', () => {
 btn1.addEventListener('click', () => {
   css.href = './css2.css';
 })</pre>
-      </figure>
     </dd>
     <dd class="example-sn"> 换肤 - 更换元素style的Property属性或<a href="https://codepen.io/glpla/full/ZEPbbvR">修改:root全局变量 -
         CodePen</a>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>更换元素style的Property属性</figcaption>
-        <pre>
+      <div>更换元素style的Property属性</div>
+      <pre>
 btnRed.addEventListener('click', () => {
   body.style.setProperty('background-color', '#f40');
   //无效
   //body.style.setProperty('backgroundColor', '#f40');
 })</pre>
-      </figure>
     </dd>
     <dd class="tips">
       <div>设置或获取时<span class="warn">只能</span>使用连字符-</div>
