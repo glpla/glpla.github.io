@@ -44,12 +44,16 @@
         <div>在仓库目录 stores 创建购物车仓库 cart.js</div>
         <p>.定义并暴露属性：购物车 cart</p>
         <p>.定义并暴露方法：添加到购物车 addToCart()；根据商品 id 判断是追加还是新加</p>
+        <p>.定义并暴露方法：加载仓库方法 fetchCart()</p>
         <pre>
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore('cart', () => {
+
+  const isLoading = ref(false)
   const cart = ref([])
+
   const addToCart = (product) => {
     const existingItem = cart.value.find(item => item.id === product.id)
     if (existingItem) {
@@ -59,12 +63,25 @@ export const useCartStore = defineStore('cart', () => {
     }
   }
 
-  return { cart, addToCart }
+  const fetchCart = async () => {
+    isLoading.value = true
+    let response = await fetch('https://glpla.github.io/utils/data/cart.json')
+    let data = await response.json()
+    cart.value = data
+    isLoading.value = false
+  }
+
+  return { cart, addToCart, fetchCart }
 })</pre>
         <div>商品页 - 引入并使用购物车仓库</div>
         <pre>
 import { useCartStore } from '@/stores/cart';
 const cartStore = useCartStore()</pre>
+        <div>商品页 - 初始化购物车仓库</div>
+        <pre>
+onMounted(() => {
+  cartStore.fetchCart()
+})</pre>
         <div>商品页 - 为添加到购物车按钮绑定事件 addCart() 并声明对应的事件处理函数</div>
         <pre>
 const addCart = (item) => {
@@ -74,10 +91,14 @@ const addCart = (item) => {
         <pre>
 import { useCartStore } from '@/stores/cart';
 const cartStore = useCartStore()</pre>
-        <div>购物车页 - 从仓库获取购物车数据，使用 <span class="warn">计算属性</span> 获取仓库购物车的数据并渲染</div>
+        <div>购物车页 - 从仓库获取购物车数据，使用 <span class="warn">计算属性</span> 获取仓库购物车的数据并渲染；如果直接跳转到购物车页，则调用仓库方法获取远程数据</div>
         <pre>
 onMounted(() => {
-  cartData.lists = computed(() => cartStore.cart)
+  if (cartStore.cart.length > 0) {
+    cartData.lists = computed(() => cartStore.cart)
+  } else {
+    cartStore.fetchCart()
+  }
 })</pre>
       </dd>
       <dt>调试结果</dt>

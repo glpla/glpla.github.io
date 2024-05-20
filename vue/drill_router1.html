@@ -56,13 +56,32 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 export const useGoodStore = defineStore('good', () => {
+
   const goods = ref([])
+  const good = ref([])
   const isLoading = ref(false)
+
   const fetchGoods = async () => {
     isLoading.value = true
     let res = await fetch('http://127.0.0.1:3000/goods')
     let data = await res.json()
     goods.value = data
+    isLoading.value = false
+  }
+  
+  const fetchGoodsByQuery = async (query) => {
+    isLoading.value = true
+    let res = await fetch('https://glpla.github.io/utils/data/coffee.json')
+    let data = await res.json()
+    goods.value = data.cont.filter((item) => item.name.includes(query) || item.flavour.includes(query))
+    isLoading.value = false
+  }
+
+  const getGoodById = async (id) => {
+    isLoading.value = true
+    let res = await fetch('https://glpla.github.io/utils/data/coffee.json')
+    let data = await res.json()
+    good.value = data.cont.find((item) => item.id == id)
     isLoading.value = false
   }
   
