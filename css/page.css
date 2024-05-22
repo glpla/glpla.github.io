@@ -3,6 +3,7 @@
   --blue-bold-color: #1b9fab;
   --tbl-color: #1abc9c;
   --yellow-color: #f1c40f;
+  --warn-color: #ff5d73;
   --w-width: 1024px;
   --header-h: 25vh;
   --padding: 2rem;
@@ -117,11 +118,6 @@ header::after {
   background-color: #fff;
 }
 
-.col3 {
-  columns: 30rem 3;
-  margin: var(--margin) auto;
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -163,18 +159,32 @@ header::after {
 }
 
 .help {
-  position: relative;
+  --color: var(--blue-color);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  gap: 10px;
   margin-top: 4rem;
-  line-height: 1.5;
-  border-top: 1px solid var(--blue-color);
-  border-bottom: 1px solid var(--blue-color);
+  padding: 10px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--color);
+  line-height: 3;
+}
+
+.title::after,
+.title::before {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background-color: var(--color);
 }
 
 .help a::before {
-  content: '\269C';
+  content: '·';
 }
 
 .help a:hover {
@@ -201,6 +211,32 @@ header::after {
   width: 100px;
   height: 5px;
   background-color: var(--blue-color);
+}
+
+.col {
+  --color: var(--warn-color);
+  columns: 160px 3;
+  column-gap: 10px;
+  padding: 10px;
+  margin-top: 4rem;
+}
+
+.col .title {
+  column-span: all;
+}
+
+
+
+.col a {
+  display: block;
+}
+
+.col a::before {
+  content: '·';
+}
+
+.col a:hover {
+  color: var(--warn-color);
 }
 
 iframe {

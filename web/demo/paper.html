@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文章排版 Paper</title>
+  <link rel="stylesheet" href="../../css/common.css">
+  <style>
+    .article {
+      --line-h: 30px;
+      --main-color: #f40;
+      columns: 300px 2;
+      padding: 10px;
+      line-height: var(--line-h);
+
+      counter-reset: chap;
+    }
+
+    .article .header {
+      column-span: all;
+      text-align: center;
+      margin-bottom: var(--line-h);
+    }
+
+    .article h1 {
+      font-size: 2rem;
+    }
+
+    .article h2 {
+      font-size: 1.8rem;
+      text-align: center;
+      font-weight: 600;
+
+      counter-reset: sec;
+      counter-increment: chap;
+    }
+
+    .article h2:not(:first-of-type),
+    .article h3:not(:first-of-type) {
+      margin-top: var(--line-h);
+    }
+
+    .article h2::before {
+      content: '第' counter(chap)'章 ';
+    }
+
+    .article h3 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-top: var(--line-h);
+
+      counter-reset: img;
+      counter-reset: tbl;
+      counter-increment: sec;
+    }
+
+    .article h3::before {
+      content: counter(chap)'.' counter(sec)'  ';
+    }
+
+    .article h3~figure figcaption {
+      counter-increment: img;
+    }
+
+    .article h3~figure figcaption::before {
+      content: '图' counter(chap)'-' counter(sec)'-' counter(img)' ';
+    }
+
+    .article h3~table caption {
+      counter-increment: tbl;
+    }
+
+    .article h3~table caption::before {
+      content: '表' counter(chap)'-' counter(sec)'-' counter(tbl)' ';
+    }
+
+    .article p {
+      text-indent: 2em;
+      text-align: justify;
+      margin-bottom: var(--line-h);
+    }
+
+    .article h3+p {
+      text-indent: 0;
+    }
+
+    .article h3+p::first-letter {
+      float: left;
+      font-size: 3.2rem;
+      font-weight: 600;
+      margin-right: var(--line-h);
+      line-height: calc(2*var(--line-h));
+      color: var(--main-color);
+    }
+
+    figure {
+      margin: var(--line-h) auto;
+    }
+
+    figure img {
+      height: calc(6*var(--line-h));
+      border: none;
+    }
+
+    figure figcaption {
+      margin: 0;
+      text-align: center;
+      line-height: var(--line-h);
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>文章排版</h1>
+    <span>&commat;Paper</span>
+  </header>
+  <dd class="article">
+    <div class="header">
+      <h1>Lorem ipsum dolor sit amet.</h1>
+      <h5>2024-05-21</h5>
+    </div>
+    <h2>title1</h2>
+    <h3>sub-title1</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis facilis impedit error provident quo
+      consequatur maiores harum numquam sunt repellendus.</p>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic consequuntur tempora, deserunt quod reprehenderit
+      amet dolor consequatur facilis quia placeat?</p>
+    <figure>
+      <img src="https://glpla.github.io/utils/view/view0.jpg" alt="">
+      <figcaption>Lorem, ipsum dolor.</figcaption>
+    </figure>
+    <p>Eum, molestiae repudiandae corrupti eos sit fugit expedita in mollitia. Lorem ipsum dolor, sit amet
+      consectetur adipisicing elit. Ratione nesciunt qui nostrum. Sint corrupti eveniet laboriosam quibusdam
+      consequuntur dolores placeat.</p>
+    <h3>sub-title2</h3>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio, molestiae iste nesciunt possimus provident
+      saepe, dolorem tempora delectus totam accusantium nulla quam.</p>
+    <table>
+      <caption>Lorem, ipsum dolor.</caption>
+      <tr>
+        <th>name</th>
+        <th>desc</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+    </table>
+    <p>Obcaecati dolores adipisci amet ullam explicabo minima aut officia voluptates! Lorem ipsum dolor sit, amet
+      consectetur adipisicing elit. Eum eligendi adipisci voluptatibus cumque! Doloribus delectus ad quia temporibus
+      libero. Doloribus atque repudiandae aliquid quasi dignissimos magni omnis deleniti sapiente nihil!</p>
+    <figure>
+      <img src="https://glpla.github.io/utils/view/view1.jpg" alt="">
+      <figcaption>Lorem, ipsum dolor.</figcaption>
+    </figure>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit ducimus nostrum est aspernatur eligendi
+      culpa temporibus reprehenderit aliquam veniam autem. Fugiat iste qui laborum saepe.</p>
+    <h3>sub-title3</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore porro pariatur vel voluptates repellat modi
+      delectus doloremque dignissimos suscipit iure necessitatibus, fuga provident veniam a odit natus ad minus alias?
+    </p>
+    <p>Necessitatibus ipsam, excepturi animi ea tempore ut minus. Amet, repellendus! Lorem ipsum dolor, sit amet
+      consectetur adipisicing elit. Iusto, saepe!</p>
+    <figure>
+      <img src="https://glpla.github.io/utils/view/view2.jpg" alt="">
+      <figcaption>Lorem, ipsum dolor.</figcaption>
+    </figure>
+    <p>Odit fugit animi rerum, nulla error vitae illum. Voluptates, maxime. Lorem ipsum dolor, sit amet consectetur
+      adipisicing elit. Recusandae esse, aliquid voluptatibus pariatur illo quae voluptatum vitae nobis vero. Sit
+      quo culpa error perspiciatis, consectetur magnam molestias nemo totam assumenda?</p>
+    <h2>title2</h2>
+    <h3>sub-title1</h3>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste perspiciatis labore sed necessitatibus tenetur
+      dolor eligendi sapiente minus expedita laboriosam dignissimos, fugit quibusdam?</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, libero! Hic eius, cupiditate asperiores
+      mollitia sint, eos voluptate impedit similique aut dolore autem quod alias incidunt officiis architecto fugit
+      nisi.</p>
+    <figure>
+      <img src="https://glpla.github.io/utils/view/view3.jpg" alt="">
+      <figcaption>Lorem, ipsum dolor.</figcaption>
+    </figure>
+    <p>Optio blanditiis accusamus id cum explicabo tenetur eum ea rem porro voluptas totam distinctio quod, eveniet
+      laboriosam impedit, doloribus labore voluptates non. Consequatur exercitationem ipsa itaque voluptate possimus
+      tempora doloribus.</p>
+    <h3>sub-title2</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, sunt! Lorem ipsum dolor sit amet
+      consectetur adipisicing elit. Quos esse voluptatem facilis inventore quod a sint labore, maiores alias
+      explicabo incidunt aut illo tempora vel vero nisi rerum minima reprehenderit eligendi modi, repellat
+      voluptates dolore architecto. Voluptas enim error soluta.</p>
+    <figure>
+      <img src="https://glpla.github.io/utils/view/view4.jpg" alt="">
+      <figcaption>Lorem, ipsum dolor.</figcaption>
+    </figure>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore ex dolorum doloremque quam cupiditate temporibus
+      aliquam non id repellendus dignissimos! Error saepe officiis, veniam illo suscipit magnam qui modi omnis!</p>
+    <figure>
+      <img src="https://glpla.github.io/utils/view/view0.jpg" alt="">
+      <figcaption>Lorem, ipsum dolor.</figcaption>
+    </figure>
+    <p>Modi, ex? Repellendus, hic nobis quam itaque quidem sequi laboriosam id ipsam, soluta, ducimus natus quo alias
+      sapiente laborum officiis commodi aut eum blanditiis aperiam dolores voluptates eligendi! Accusantium, minima.</p>
+    <table>
+      <caption>Lorem, ipsum dolor.</caption>
+      <tr>
+        <th>name</th>
+        <th>desc</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+    </table>
+    <p>Atque sapiente cum rem repellat quaerat, fugiat commodi distinctio earum veniam. Esse, natus tenetur? Error,
+      deserunt quasi consequuntur excepturi repellat ipsam, doloribus reiciendis porro quae ad impedit consequatur.
+      Corporis, possimus?</p>
+    <figure>
+      <img src="https://glpla.github.io/utils/view/view5.jpg" alt="">
+      <figcaption>Lorem, ipsum dolor.</figcaption>
+    </figure>
+    <h3>sub-title3</h3>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repudiandae sapiente obcaecati similique dolor? Omnis
+      nostrum quae numquam temporibus, ab consectetur!</p>
+    <p>Porro placeat quasi consectetur impedit incidunt voluptates laboriosam consequuntur id? Reprehenderit sapiente,
+      tempora perspiciatis maiores deleniti aliquam quam sed ullam.</p>
+    <h2>title3</h2>
+    <h3>sub-title1</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium sed harum laboriosam magni necessitatibus,
+      beatae odio minima suscipit, corporis amet mollitia!</p>
+    <figure>
+      <img src="https://glpla.github.io/utils/view/view6.jpg" alt="">
+      <figcaption>Lorem, ipsum dolor.</figcaption>
+    </figure>
+    <p>Autem culpa deserunt reprehenderit explicabo possimus natus rem, ea est. Lorem ipsum, dolor sit amet
+      consectetur adipisicing elit. Totam atque debitis obcaecati, incidunt esse exercitationem qui sint non libero
+      natus?</p>
+    <p>Veniam qui hic temporibus magnam enim corrupti sed laborum excepturi?</p>
+    <h3>sub-title2</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores doloribus vel nam numquam eius dolores
+      deleniti facilis odit fuga iusto!</p>
+    <p>Quod tempora architecto cum ad laboriosam explicabo, necessitatibus vel vero saepe, excepturi odit debitis
+      pariatur vitae doloremque quam inventore aspernatur?</p>
+    <figure>
+      <img src="https://glpla.github.io/utils/view/view7.jpg" alt="">
+      <figcaption>Lorem, ipsum dolor.</figcaption>
+    </figure>
+    <p>Quasi totam nam a minima nobis soluta? Fugiat sit fuga unde quidem! Ratione animi a harum minima in iusto eius.
+    </p>
+    <p>Iste non culpa, possimus cupiditate quis quos consequatur illum. Aspernatur? Lorem ipsum dolor, sit amet
+      consectetur adipisicing elit. Earum nam veniam ullam quaerat, voluptatem fugit ipsam animi ipsa ratione
+      cumque.</p>
+    <h3>sub-title3</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere aperiam saepe, provident corrupti ab incidunt
+      voluptas, qui ullam necessitatibus autem alias accusamus ea sint obcaecati quibusdam est, quas cupiditate commodi.
+    </p>
+    <table>
+      <caption>Lorem, ipsum dolor.</caption>
+      <tr>
+        <th>name</th>
+        <th>desc</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+    </table>
+    <p>Veritatis aliquid quas harum dolorum, sunt minus quidem vel blanditiis doloribus porro, saepe voluptates
+      sapiente itaque voluptatibus deleniti eligendi hic nulla?</p>
+    <figure>
+      <img src="https://glpla.github.io/utils/view/view8.jpg" alt="">
+      <figcaption>Lorem, ipsum dolor.</figcaption>
+    </figure>
+    <p>Ex exercitationem itaque officiis ipsum nesciunt blanditiis architecto eveniet ea illum dicta ullam, illo vitae
+      doloremque aperiam non natus odio soluta?</p>
+    <p>Nulla at in dolorum vero consequatur minus totam rem tempora accusamus quasi nesciunt laboriosam labore eaque
+      quis voluptate, nobis itaque tenetur.</p>
+    <h2>title4</h2>
+    <h3>sub-title1</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, hic. Lorem ipsum dolor sit amet, consectetur
+      adipisicing elit. Ipsam ipsa commodi repellat explicabo? Eius at atque reiciendis ratione ut, dolore
+      voluptatibus, repellendus similique voluptas unde a fugit. Laboriosam similique quasi enim, sit est impedit ab
+      quos nemo consequuntur accusantium eos.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea in molestias libero eaque debitis impedit
+      temporibus accusamus quidem vel ducimus?</p>
+    <table>
+      <caption>Lorem, ipsum dolor.</caption>
+      <tr>
+        <th>name</th>
+        <th>desc</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+    </table>
+    <p>Impedit aliquid optio libero aspernatur maxime repellat tempore labore non harum veritatis, tempora nemo
+      repellendus, deserunt animi perspiciatis dolor provident.</p>
+    <p>Accusantium deleniti error eius culpa maiores corrupti facere delectus vero, porro dolor consequatur commodi
+      nesciunt quod? Excepturi harum quo culpa.</p>
+    <p>Iste perferendis qui inventore quos asperiores, deserunt quia ipsam similique repudiandae dolorem dolore
+      beatae, magni magnam non illo, ullam doloribus.</p>
+    <table>
+      <caption>Lorem, ipsum dolor.</caption>
+      <tr>
+        <th>name</th>
+        <th>desc</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+    </table>
+    <h3>sub-title2</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ullam ratione fugiat sed maxime iste voluptatum
+      nesciunt est!</p>
+    <p>Saepe maxime vero ipsa, inventore a placeat repudiandae modi at praesentium necessitatibus quae dolor officiis
+      nihil optio itaque?</p>
+    <figure>
+      <img src="https://glpla.github.io/utils/view/view9.jpg" alt="">
+      <figcaption>Lorem, ipsum dolor.</figcaption>
+    </figure>
+    <p>Ullam natus at corporis iste maxime nobis aspernatur dolores, unde amet possimus totam debitis atque sequi
+      repellendus. Officia.</p>
+    <p>Aspernatur incidunt fuga distinctio cumque, amet ex, praesentium deleniti aliquid officia consectetur nisi
+      reiciendis, optio alias qui consequuntur!</p>
+    <table>
+      <caption>Lorem, ipsum dolor.</caption>
+      <tr>
+        <th>name</th>
+        <th>desc</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+    </table>
+    <p>Harum molestias earum tempore iure rerum explicabo iste vel nam commodi, ratione accusantium dolorem temporibus
+      eum incidunt dolore?</p>
+    <h3>sub-title3</h3>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus ipsam modi quae, ducimus nulla quod culpa
+      fugit facere aliquid! Nesciunt ipsa ut vero sequi!</p>
+    <p>Quo non id odit ad, alias sequi dolorum dolor reprehenderit ea. Dolorem qui, a nobis maxime adipisci facere
+      explicabo sit facilis deserunt non quo.</p>
+    <table>
+      <caption>Lorem, ipsum dolor.</caption>
+      <tr>
+        <th>name</th>
+        <th>desc</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>5</td>
+      </tr>
+    </table>
+    <p>Facere, neque facilis! Quam sint quod consequatur eaque fugiat! Vero vel eligendi doloremque hic, eveniet,
+      cupiditate facilis, ratione quas voluptatem eum mollitia ab ipsum.</p>
+    <p>Architecto quod quas reprehenderit debitis aut culpa repudiandae iure! Praesentium et in, cupiditate placeat
+      delectus tenetur reiciendis dignissimos ducimus sapiente non incidunt, molestiae eum.</p>
+  </dd>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>
