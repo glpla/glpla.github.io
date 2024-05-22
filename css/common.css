@@ -1,17 +1,15 @@
 @import url(//at.alicdn.com/t/c/font_3859342_p81mmr5xq8.css);
 
 :root {
-  --main-color: #ff5d73;
-  --warn-color: #eb2f06;
-  --bar-bg-color: #4bc2ce;
-  --main-color-purple: #be01fe;
-  --main-color-blue: #4bc2ce;
-  --main-color-dark-blue: #1b9fab;
+  --main-color: #ff7b00;
+  --warn-color: #f25e44;
+  --tbl-color: #fabfb4;
+  --tbl-color-light: #feefec;
+  --tips-color: #edf8db;
+  --tips-bold-color: #2ed573;
+  --bar-color: #4bc2ce;
+  --bar-color-light: #1b9fab;
   --main-color-yellow: #f1c40f;
-  --main-color-orange: rgba(242, 94, 68, 0.4);
-  --main-color-orange-light: rgba(242, 94, 68, 0.1);
-  --tips-color: rgba(46, 213, 115, 0.2);
-  --tips-bold-color: rgb(46, 213, 115);
   --tips-warn-color: rgba(255, 93, 115, 0.2);
   --tips-warn-bold-color: rgb(255, 93, 115);
   --w-width: 1024px;
@@ -78,8 +76,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 header {
-  --color: #ff7b00;
-  --color-dark: #f25e44;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -87,7 +83,8 @@ header {
   height: 25vh;
   color: #fff;
   padding: var(--padding);
-  background-image: linear-gradient(315deg, var(--color) 25%, var(--color-dark));
+  background-image: linear-gradient(var(--main-color), var(--warn-color));
+  /* background-image: linear-gradient(315deg, var(--main-color) 25%, var(--warn-color)); */
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -100,7 +97,7 @@ header::after {
   bottom: 0;
   width: 200%;
   height: 6px;
-  background-image: linear-gradient(to right, #ff0 0%, var(--color) 50%, #ff0 100%);
+  background-image: linear-gradient(to right, #ff0 0%, var(--main-color) 50%, #ff0 100%);
   animation: roll 4s linear infinite alternate;
 }
 
@@ -160,7 +157,7 @@ figure img {
   height: var(--chap-h);
   padding: var(--padding);
   color: #fff;
-  background-color: var(--bar-bg-color);
+  background-image: linear-gradient(var(--bar-color), var(--bar-color-light));
   text-transform: capitalize;
 }
 
@@ -235,15 +232,15 @@ pre.pre::before {
 table {
   width: 100%;
   border-collapse: collapse;
-  border-top: 1px solid var(--main-color-orange);
-  border-bottom: 1px solid var(--main-color-orange);
+  border-top: 1px solid var(--main-color);
+  border-bottom: 1px solid var(--main-color);
   margin: calc(4*var(--padding)) auto;
 }
 
 th {
   font-weight: normal;
   text-align: left;
-  /* border-bottom: 1px solid var(--bar-bg-color); */
+  /* border-bottom: 1px solid var(--bar-color); */
 }
 
 th,
@@ -253,11 +250,11 @@ td {
 }
 
 tr:has(th) {
-  background-color: var(--main-color-orange);
+  background-color: var(--tbl-color);
 }
 
 tr:nth-child(even) {
-  background-color: var(--main-color-orange-light)
+  background-color: var(--tbl-color-light)
 }
 
 .grid,
