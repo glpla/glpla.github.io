@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件传参 Parameter</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>组件传参</h1>
+        <span>Parameter</span>
+    </header>
+    <dl>
+        <dt>父组件 → 子组件</dt>
+        <dd>.采用属性绑定的方式</dd>
+        <dd>.只能传递普通参数</dd>
+        <dd>.子组件使用属性 <span class="warn">properties</span> 定义参数接口</dd>
+        <dd>- 完整声明 - 类型type和值value</dd>
+        <dd>
+            <pre>
+properties: {
+    icon:{
+        type:String,
+        value:''
+    }
+}</pre>
+        </dd>
+        <dd>- 简化声明 - 类型type；不需要默认值</dd>
+        <dd>
+            <pre>
+properties: {
+    icon:String
+}</pre>
+        </dd>
+        <dd class="example-sn">封装图片轮播组件my-swiper</dd>
+        <dd>不同的轮播组件在不同的页面显示的图片和高度不一样；通过传递图片了列表参数imgs和高度参数h，采用内联样式设置轮播组件高度</dd>
+        <dd>组件 - 结构wxml；内联样式不需要使用{}</dd>
+        <dd>
+            <pre>
+&lt;swiper style="height: {{h}}rpx;"&gt;
+    &lt;swiper-item wx:for='{{imgs}}' wx:key='index'&gt;
+        &lt;image src="{{item}}" mode="aspectFill"&gt;&lt;/image&gt;
+    &lt;/swiper-item&gt;
+&lt;/swiper&gt;</pre>
+        </dd>
+        <dd>组件 - 逻辑js声明2个参数，高度默认400，图片列表为空</dd>
+        <dd>
+            <pre>
+Component({
+    properties: {
+        h:{
+        type:Number,
+        value:400
+        },
+        imgs: {
+        type: Array,
+        value: []
+        }
+    }
+})</pre>
+        </dd>
+        <dd>父组件 - 配置json引入</dd>
+        <dd>
+            <pre>
+{
+    "usingComponents": {
+        "my-swiper": "../../components/my-swiper/my-swiper"
+    }
+}</pre>
+        </dd>
+        <dd>父组件 - 结构wxml使用 - 传递高度h；绑定图片列表</dd>
+        <dd>
+            <pre>&lt;my-swiper h='{{200}}' imgs='{{imgs}}'&gt;&lt;/m-swiper&gt;</pre>
+        </dd>
+        </dd>
+        <dd class="example-sn">封装阿里字体图标组件my-iconfont</dd>
+        <dd>.父组件仅仅传递图标类，控制组件显示相应的字体图标</dd>
+        <dd class="sn">
+            <div>创建子组件</div>
+            <p>.右键单击组件根目录components → 新建组件目录my-iconfont</p>
+            <p>.再右键组件目录，新建 Component为my-iconfont；组件名和组件目录通常保持一致</p>
+            <div>设计子组件</div>
+            <p>.wxml：基类iconfont保留，不同的图标类icon通过父组件传递获取</p>
+            <pre>&lt;text class="iconfont {{icon}}"&gt;&lt;/text&gt;</pre>
+            <p>.js：在属性properties中设置将图标类icon的类型和默认值；并允许添加全局类</p>
+            <pre>
+Component({
+    options: {
+        addGlobalClass: true,
+    },
+    properties: {
+        icon:{
+            type:String
+        }
+        //简化形式icon:String
+    }
+})</pre>
+            <div>父组件 - 引入组件</div>
+            <p>.在使用组件的页面.json中配置</p>
+            <pre>
+{
+    "usingComponents": {
+        "my-iconfont":"../../components/my-iconfont/my-iconfont"
+    }
+}</pre>
+            <div>父组件 - 使用组件</div>
+            <p>.在使用组件的.wxml中，将图标类作为属性指定给参数接口即可</p>
+            <pre>&lt;my-iconfont icon='icon-home'&gt;&lt;/my-iconfont&gt;</pre>
+        </dd>
+    </dl>
+    <div class="chap">子组件 → 父组件</div>
+    <dl>
+        <dd>.采用事件绑定</dd>
+        <dd class="sn">
+            <div>子组件绑定传统事件并在事件处理函数中 <span class="warn">触发|发送|triggerEvent</span> 自定义事件给父组件，可以指定传递的参数</div>
+            <div>父组件绑定自定义事件并声明事件处理函数</div>
+        </dd>
+        <dd>子组件wxml - 声明普通事件tap并指定事件处理函数toCalendar</dd>
+        <dd>
+            <pre>&lt;view class='nav-item' bindtap="toCalendar"&gt;navigation&lt;/view&gt;</pre>
+        </dd>
+        <dd>子组件js - 在事件处理函数toCalendar中触发自定义事件toCal</dd>
+        <dd>
+            <pre>
+toCalendar() {
+    this.triggerEvent('toCal');
+}</pre>
+        </dd>
+        <dd>父组件 - 使用组件xml - 绑定子组件发送的事件toCal并指定事件处理函数dealCal</dd>
+        <dd>
+            <pre>&lt;nav bindtoCal="dealCal"&gt;&lt;/nav&gt;</pre>
+        </dd>
+        <dd>父组件 - 使用组件js - 实现事件处理函数dealCal</dd>
+        <dd>
+            <pre>
+dealCal() {
+    wx.navigateTo({
+        url: '../calendar/calendar',
+    })
+}</pre>
+        </dd>
+    </dl>
+    <div class="chap">组件行为*</div>
+    <dl>
+        <dt>behavior</dt>
+        <dd>组件之间共享代码</dd>
+        <dd class="exanple-sn">自定义tabBar - <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/framework/ability/custom-tabbar.html"
+                class="link">官方文档</a></dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

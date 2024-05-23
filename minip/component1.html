@@ -5,90 +5,72 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>组件插槽 Slot</title>
+    <title>生命周期函数 Lifetime</title>
     <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
 <body>
     <header>
-        <h1>组件插槽</h1>
-        <span>Slot</span>
+        <h1>生命周期函数</h1>
+        <span>Lifetime</span>
     </header>
     <dl>
-        <dd>在组件的 wxml 中以 slot 节点开启一个占位符，用于承载组件使用者提供的 wxml 结构</dd>
-        <dd>默认情况下，一个组件的 wxml 中只能有一个 slot 。需要使用多 slot 时，可以在组件 js 的选项 options 中声明启用</dd>
-        <dd>多个 slot 必须使用不同的 name 加以区分</dd>
+        <dd>组件自身的一些函数：在特殊的时间点或遇到一些特殊的框架事件时被自动触发</dd>
+        <dd>最重要的生命周期是 created attached detached ，包含一个组件实例生命流程的最主要时间点</dd>
+        <dd>created：组件实例刚刚被创建好时</dd>
+        <dd>attached：在组件完全初始化完毕、进入页面节点树</dd>
+        <dd>detached：在组件离开页面节点树后</dd>
+        <dd>.更多信息，请参考 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/lifetimes.html">官方文档 -
+                生命周期</a></dd>
         <dd>
             <pre>
-Component({
-    properties: {},
-    data: {},
-    methods: {},
-    options: {
-        multipleSlots: true
-    }
-})            </pre>
-        </dd>
-        <dt>单插槽应用</dt>
-        <dd class="example-sn">改进版权信息组件copyright，增加一个 slot 接收使用者提供的 wxml，如使用图像组件</dd>
-        <dd class="sn">
-            <div>在组件中预留/创建插槽，调整结构如下</div>
-            <pre>
-&lt;view class="copy"&gt;
-    &lt;slot&gt;&lt;/slot&gt;
-    &lt;text&gt;copyright 2023-2024&lt;/text&gt;
-&lt;/view&gt;</pre>
-            <div>调整样式为弹性盒子垂直居中对齐；因为不确定使用者传递的是什么结构，所以不能指定插槽的样式</div>
-            <pre>
-.copy {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}</pre>
-            <div>使用组件时，引入并使用组件，传递图像内容</div>
-            <pre>
-&lt;view class="copy"&gt;
-    &lt;copy&gt;
-        &lt;image class="img" src="../../utils/marker.png" mode="aspectFill" /&gt;
-    &lt;/copy&gt;
-&lt;/view&gt;</pre>
-            <div>使用者指定图像样式</div>
-            <pre>
-.img {
-    width: 50px;
-    height: 50px;
+lifetimes: {
+    created: function () {},
+    attached: function () {},
+    detached: function() {}
 }</pre>
         </dd>
-        <dt>多插槽应用</dt>
-        <dd class="example-sn">改进版权信息组件copyright，再增加一个 slot 接收使用者的学号</dd>
+        <dd class="example-sn">封装地图组件 map</dd>
         <dd class="sn">
-            <div>在组件js选项中，启用多插槽</div>
+            <div>创建组件 - 目录、文件</div>
+            <div>地图组件结构 - 指定id和经纬度、中心点；绑定事件；其它略</div>
             <pre>
-Component({
-    properties: {},
-    data: {},
-    methods: {},
-    options: {
-        multipleSlots: true
-    }
-})            </pre>
-            <div>在组件中预留/创建插槽，分配名字，调整结构如下</div>
-            <pre>
-&lt;view class="copy"&gt;
-    &lt;slot name="img"&gt;&lt;/slot&gt;
-    &lt;text&gt;copyright 2023-2024&lt;/text&gt;
-    &lt;slot name="sn"&gt;&lt;/slot&gt;
+&lt;view class="map-wrap"&gt;
+    &lt;map class="map" id="my-map" longitude="{{longitude}}" latitude="{{latitude}}" show-location /&gt;
+    &lt;image class="center-img" src="/utils/center.png" mode="aspectFill" bind:tap="moveToLocation" /&gt;
 &lt;/view&gt;</pre>
-            <div>目标组件引入，使用 slot 指定插槽名称，并传递相应的内容</div>
+            <div>地图组件逻辑 - 创建地图组件上下文变量，这里声明为页面全局变量，避免使用 this 引用</div>
             <pre>
-&lt;view class="copy"&gt;
-    &lt;copy&gt;
-        &lt;image slot='img' class="img" src="../../utils/marker.png" mode="aspectFill" /&gt;
-        &lt;text slot='sn'&gt;20221081&lt;/text&gt;
-    &lt;/copy&gt;
-&lt;/view&gt;            </pre>
+let mapCtx;
+Component({})</pre>
+            <div>地图组件逻辑的生命周期函数 - 获取当前位置、实例化地图组件上下文</div>
+            <pre>
+lifetimes: {
+    attached: function () {
+        mapCtx = wx.createMapContext('my-map', this)
+        wx.getLocation({
+        type: 'gcj02',
+        success: res => {
+            this.setData({
+                longitude: res.longitude,
+                latitude: res.latitude
+            })
+        }
+        })
+    }
+}</pre>
+            <div>地图组件逻辑的数据 - 经纬度</div>
+            <pre>
+longitude: '"",
+latitude: ""</pre>
+            <div>地图组件逻辑的方法 - 返回中心点方法</div>
+            <pre>
+moveToLocation() {
+    mapCtx.moveToLocation({})
+}</pre>
+            <div>样式 - 略</div>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
