@@ -93,7 +93,7 @@
             </table>
         </dd>
         <dd class="example-sn">水平滚动 - 导航/推荐/活动</dd>
-        <dd>方案1：容器不换行；子项项调整为inline-block</dd>
+        <dd>方案1：容器不换行 nowrap；子项项调整为 inline-block</dd>
         <dd>
             <pre>
 &lt;scroll-view scroll-x class="wrap"&gt;
@@ -102,7 +102,7 @@
     &lt;view class="item"&gt;item10&lt;/view&gt;
 &lt;/scroll-view&gt;</pre>
         </dd>
-        <dd>wxss - 最后一个需要特别处理消除margin</dd>
+        <dd>wxss - 如设置了每个子项的左右margin，通常最后和第一个需要特别处理，消除margin</dd>
         <dd>
             <pre>
 .wrap{
@@ -112,11 +112,17 @@
     display: inline-block;
     margin: 0 20rpx;
 }</pre>
+            <p>清除margin</p>
+            <pre>
+.wrap .item:last-child{
+    margin-right: 0;
+    }
+.wrap .item:first-child{
+    margin-left: 0;
+}</pre>
         </dd>
         <dd>方案2：在容器和子项之间增加一个view作为间接容器，view使用弹性盒子flex布局</dd>
-        <dd>默认情况下，flex会压缩子项；为了撑开：</dd>
-        <dd>方案1：容器设置不换行：flex-wrap: nowrap;</dd>
-        <dd>方案2：子项设置不缩放：flex-shrink: 0;</dd>
+        <dd>默认情况下，flex会压缩子项；为了撑开，子项设置不缩放：flex-shrink: 0;</dd>
         <dd>
             <pre>
 &lt;scroll-view scroll-x class="wrap"&gt;
@@ -129,8 +135,11 @@
             <pre>
 .inner-wrap{
     display: flex;
-    flex-wrap: nowrap;
     gap: 40rpx;
+}</pre>
+            <pre>
+.item{
+    flex-shrink: 0;
 }</pre>
         </dd>
         <dd>方案3：小程序默认方案：为容器增加enable-flex属性启用并使用弹性盒子flex布局</dd>
