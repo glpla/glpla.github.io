@@ -82,7 +82,7 @@
 
 <body>
   <header>
-    <a class="avatar" href="">Cnplaman</a>
+    <a class="avatar" href="avatar">Cnplaman</a>
     <h1>
       <svg class="svg-txt">
         <text class="title" x="75" y="30" text-anchor="middle" dominant-baseline="central">大树小站</text>
@@ -216,6 +216,13 @@
     //   e.preventDefault();
     //   pop.classList.add('close');
     // })
+    let avatar = document.querySelector('.avatar');
+    let audio = new Audio('./utils/music/吴奇隆 - 祝你一路顺风 (Single Version).ogg');
+    avatar.addEventListener('click', (e) => {
+      e.preventDefault()
+      audio.paused ? audio.play() : audio.pause();
+      avatar.classList.toggle('play')
+    })
   </script>
 
 </body>

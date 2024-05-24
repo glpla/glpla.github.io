@@ -1,6 +1,8 @@
 :root {
-  --main-color: #63a4e5;
+  --main-color: rgba(255, 255, 255, 0.4);
   --main-dark-color: #2875c7;
+  /* --main-color: #63a4e5; */
+  /* --main-dark-color: #2875c7; */
   --border-r: 1rem;
 }
 
@@ -23,10 +25,11 @@ html {
   font-size: 62.5%;
   scroll-padding-top: 160px;
   background-color: #f2f3f4;
-  background-image: url(https://desk-fd.zol-img.com.cn/t_s960x600c5/g2/M00/0B/08/Cg-4WlUwdDWIZ7zKAAqGM6NxoXkAABuAQPwTs0ACoZL265.jpg);
+  background-image: url(../imgs/xh.jpg);
+  /* background-image: url(https://desk-fd.zol-img.com.cn/t_s960x600c5/g2/M00/0B/08/Cg-4WlUwdDWIZ7zKAAqGM6NxoXkAABuAQPwTs0ACoZL265.jpg); */
   /* background-image: url(https://cdn.pixabay.com/photo/2022/11/27/13/51/moon-7619831_1280.jpg); */
   background-size: cover;
-  background-position: center;
+  background-position: top center;
   background-attachment: fixed;
 }
 
@@ -39,7 +42,7 @@ body {
   font-size: 1.6rem;
   padding: 1rem;
   margin: 0 auto;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); */
   line-height: 2;
   color: #f7f7f7;
 }
@@ -130,6 +133,18 @@ header {
   border-radius: 50%;
   filter: drop-shadow(0rem 0rem .4rem rgb(255, 255, 255));
   overflow: hidden;
+  animation: roll 10s linear infinite;
+  animation-play-state: paused;
+}
+
+.avatar.play {
+  animation-play-state: running;
+}
+
+@keyframes roll {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .stamp {
@@ -155,7 +170,6 @@ header {
 .update {
   color: #f7f7f7;
   background-color: rgba(0, 0, 0, 0.2);
-  /* background-image: linear-gradient(0deg, var(--main-dark-color), var(--main-color)); */
   padding: 1rem;
   border-radius: var(--border-r);
 }
@@ -183,7 +197,7 @@ header {
   display: grid;
   grid-template-columns: 1fr 3fr;
   border-radius: var(--border-r);
-  border: 1px solid #286bb2;
+  border: 1px solid #fff;
   color: #fff;
   transition: .4s;
 }
@@ -194,7 +208,7 @@ header {
 }
 
 .nav-item:hover {
-  box-shadow: 0 0 10px #286bb2, 0 0 10px #286bb2, 0 0 10px #286bb2;
+  box-shadow: 0 0 10px var(--main-color), 0 0 10px var(--main-color), 0 0 10px var(--main-color);
 }
 
 .nav-item:hover .iconfont {
