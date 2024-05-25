@@ -13,70 +13,29 @@
   <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3834292_hul6qge3el5.css">
   <link rel="stylesheet" href="./css/index.css">
   <style>
-    /* #particles-js {
-      position: fixed;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #000;
-      z-index: -1;
-    } */
-
-    /* 
-    .pop {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      display: flex;
-      padding: 10px;
-      background-color: rgba(0, 0, 0, 0.6);
-      z-index: 100;
-    }
-
-    .pop .img {
-      position: relative;
-      margin: auto;
-      width: 100%;
-      max-width: 800px;
-      aspect-ratio: 16/9;
-      border-radius: 20px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-      background-image: url(./imgs/hndx.jpg);
-      background-size: cover;
-      background-position: center;
-    }
-
-    .pop .title {
+    .dot {
       position: absolute;
-      left: 0;
-      bottom: 0;
-      line-height: 3;
-      width: 100%;
-      text-align: center;
-      color: #fff;
-      font-size: 24px;
+      border-radius: 50%;
+      background-color: #fff;
+      pointer-events: none;
     }
 
-    .pop .close {
-      position: absolute;
-      top: 10px;
-      right: 16px;
-      cursor: pointer;
-      font-size: 16px;
-      color: #fff;
-      transition: 0.4s;
+    .dot:nth-child(even) {
+      background-color: transparent;
+      border: 1px solid rgba(255, 255, 255, 1);
     }
 
-    .pop .close:hover {
-      transform: rotate(180deg);
-    }
+    @keyframes dot-move {
+      form {
+        opacity: 1;
+        transform: translate(0, 0);
+      }
 
-    .pop.close {
-      display: none;
-    } */
+      to {
+        opacity: 0;
+        transform: translate(var(--x), var(--y));
+      }
+    }
   </style>
 </head>
 
@@ -219,9 +178,39 @@
     let avatar = document.querySelector('.avatar');
     let audio = new Audio('./utils/music/吴奇隆 - 祝你一路顺风 (Single Version).ogg');
     avatar.addEventListener('click', (e) => {
-      e.preventDefault()
+      e.preventDefault();
       audio.paused ? audio.play() : audio.pause();
       avatar.classList.toggle('play')
+      for (let i = 0; i < 100; i++) {
+        let dot = document.createElement('i');
+        dot.classList.add('dot');
+
+        let size = Math.random() * 8 + 2;
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+
+        let posx = (Math.random() - 0.5) * window.innerWidth;
+        let posy = (Math.random() - 0.5) * window.innerHeight;
+        dot.style.setProperty('--x', posx + 'px')
+        dot.style.setProperty('--y', posy + 'px')
+
+        // let fx = e.clientX - e.target.offsetLeft;
+        // let fy = e.clientY - e.target.offsetTop;
+        // dot.style.left = fx + 'px'
+        // dot.style.top = fy + 'px'
+
+        let duration = Math.random() * 2 + 0.5
+        dot.style.animation = `dot-move ${duration}s linear forwards `
+
+        // let hue = Math.random() * 360;
+        // dot.style.filter = `hue-rotate(${hue}deg)`
+
+        avatar.appendChild(dot);
+
+        setTimeout(() => {
+          dot.remove()
+        }, 2000)
+      }
     })
   </script>
 

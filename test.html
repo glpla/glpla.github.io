@@ -12,37 +12,110 @@
       box-sizing: border-box;
     }
 
-    body {}
-
-    div {
-      width: 300px;
-      margin: 0 auto;
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #1a2b3c;
+      height: 100vh;
+      color: #f1f2f3;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow: hidden;
     }
 
-    li {
-      background-color: #f40;
-      margin-bottom: 10px;
+    button {
+      position: relative;
+      width: 400px;
+      height: 200px;
     }
 
-    li:empty {
-      display: none;
+    .dot {
+      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(8, 193, 17, 0.8);
+      pointer-events: none;
+    }
+
+    .dot:nth-child(even) {
+      background-color: transparent;
+      border: 1px solid rgba(255, 255, 255, 1);
+    }
+
+    @keyframes dot-move {
+      form {
+        opacity: 1;
+        /* transform: translate(var(--fx), var(--fy)); */
+      }
+
+      to {
+        opacity: 0;
+        transform: translate(var(--x), var(--y));
+      }
     }
   </style>
 </head>
 
 <body>
-  <ul>
-    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam quod quia animi?</li>
-    <li>Consequuntur, obcaecati? Dolor voluptate omnis cum quaerat minima exercitationem laborum aut ipsam.</li>
-    <li>Possimus provident quod harum molestias repellendus explicabo eos vero soluta nemo beatae?</li>
-    <li>Nihil neque impedit, soluta laudantium cupiditate quam omnis optio ipsam labore id!</li>
-    <li>Ut, atque fugiat? Sint soluta omnis, illo veniam tempore alias sed odio.</li>
-    <li>Quo perferendis dicta, odit recusandae nisi at odio aliquid ratione repellat incidunt!</li>
-    <li>Commodi corrupti odit nisi obcaecati minima sapiente id delectus non accusamus magnam.</li>
-    <li>Totam laudantium error distinctio in libero harum, nemo quis dicta itaque laboriosam.</li>
-    <li>Tenetur atque veniam exercitationem officiis voluptatum ex rem eaque officia excepturi quidem.</li>
-    <li>Dignissimos est tempore, saepe quia natus cum numquam libero esse omnis repudiandae.</li>
-  </ul>
+  <button>click</button>
+  <script>
+    let btn = document.querySelector('button');
+    btn.addEventListener('click', (e) => {
+      for (let i = 0; i < 50; i++) {
+        let dot = document.createElement('i');
+        dot.classList.add('dot');
+
+        let posx = (Math.random() - 0.5) * window.innerWidth;
+        let posy = (Math.random() - 0.5) * window.innerHeight;
+        dot.style.setProperty('--x', posx + 'px')
+        dot.style.setProperty('--y', posy + 'px')
+
+        let size = Math.random() * 8 + 2;
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+
+
+        let fx = e.clientX - e.target.offsetLeft;
+        let fy = e.clientY - e.target.offsetTop;
+        dot.style.left = fx + 'px'
+        dot.style.top = fy + 'px'
+
+        let duration = Math.random() * 2 + 0.5
+        dot.style.animation = `dot-move ${duration}s linear forwards `
+
+        let hue = Math.random() * 360;
+        dot.style.filter = `hue-rotate(${hue}deg)`
+
+        btn.appendChild(dot);
+
+        setTimeout(() => {
+          dot.remove()
+        }, 2000)
+      }
+      // for (let i = 0; i < 50; i++) {
+      //   let dot = document.createElement('i');
+      //   let size = Math.random() * 8 + 2;
+      //   dot.style.width = size + 'px';
+      //   dot.style.height = size + 'px';
+      //   let randx = (Math.random() - 0.5) * window.innerWidth;
+      //   let randy = (Math.random() - 0.5) * window.innerHeight;
+      //   dot.style.setProperty('--x', randx + 'px')
+      //   dot.style.setProperty('--y', randy + 'px')
+      //   let fx = e.clientX - e.target.offsetLeft;
+      //   let fy = e.clientY - e.target.offsetTop;
+      //   dot.style.left = fx + 'px'
+      //   dot.style.top = fy + 'px'
+      //   let duration = Math.random() * 2 + 0.5
+      //   dot.style.animation = `dot-move ${duration}s linear forwards `
+      //   let hue = Math.random() * 360;
+      //   dot.style.filter = `hue-rotate(${hue}deg)`
+      //   dot.classList.add('dot');
+      //   btn.appendChild(dot);
+      //   setTimeout(() => {
+      //     dot.remove()
+      //   }, 5000)
+      // }
+    })
+  </script>
 </body>
 
 </html>
