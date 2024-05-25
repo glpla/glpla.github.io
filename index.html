@@ -156,61 +156,51 @@
     <div class="lotus-title">Portal</div>
   </div>
   <footer>All Rights Reserved &copy; By Cnplaman 2022-2024</footer>
-  <!-- <div class="pop">
-    <a class="img" href="https://www.baidu.com/s?wd=河南大学大礼堂" target="_blank">
-      <div class="title">河南大学大礼堂</div>
-      <div class="iconfont icon-times close"></div>
-    </a>
-  </div> -->
   <!-- <div id="particles-js"></div> -->
   <!-- <script src="./utils/lib/particles.js"></script> -->
-  <script>
+  <script type="module">
     // particlesJS.load('particles-js', './utils/data/particles.json', function () {
     //   console.log('callback - particles.js config loaded');
     // });
 
-    // let close = document.querySelector('.close');
-    // let pop = document.querySelector('.pop');
-    // close.addEventListener('click', (e) => {
-    //   e.preventDefault();
-    //   pop.classList.add('close');
-    // })
+    import { dot } from '../utils/custom/dot.js'
     let avatar = document.querySelector('.avatar');
     let audio = new Audio('./utils/music/吴奇隆 - 祝你一路顺风 (Single Version).ogg');
     avatar.addEventListener('click', (e) => {
       e.preventDefault();
       audio.paused ? audio.play() : audio.pause();
       avatar.classList.toggle('play')
-      for (let i = 0; i < 100; i++) {
-        let dot = document.createElement('i');
-        dot.classList.add('dot');
+      dot(e)
+      // for (let i = 0; i < 100; i++) {
+      //   let dot = document.createElement('i');
+      //   dot.classList.add('dot');
 
-        let size = Math.random() * 8 + 2;
-        dot.style.width = size + 'px';
-        dot.style.height = size + 'px';
+      //   let size = Math.random() * 8 + 2;
+      //   dot.style.width = size + 'px';
+      //   dot.style.height = size + 'px';
 
-        let posx = (Math.random() - 0.5) * window.innerWidth;
-        let posy = (Math.random() - 0.5) * window.innerHeight;
-        dot.style.setProperty('--x', posx + 'px')
-        dot.style.setProperty('--y', posy + 'px')
+      //   let posx = (Math.random() - 0.5) * window.innerWidth;
+      //   let posy = (Math.random() - 0.5) * window.innerHeight;
+      //   dot.style.setProperty('--x', posx + 'px')
+      //   dot.style.setProperty('--y', posy + 'px')
 
-        // let fx = e.clientX - e.target.offsetLeft;
-        // let fy = e.clientY - e.target.offsetTop;
-        // dot.style.left = fx + 'px'
-        // dot.style.top = fy + 'px'
+      //   let fx = e.clientX - avatar.offsetLeft;
+      //   let fy = e.clientY - avatar.offsetTop;
+      //   dot.style.left = fx + 'px'
+      //   dot.style.top = fy + 'px'
 
-        let duration = Math.random() * 2 + 0.5
-        dot.style.animation = `dot-move ${duration}s linear forwards `
+      //   let duration = Math.random() * 2 + 0.5
+      //   dot.style.animation = `dot-move ${duration}s linear forwards `
 
-        // let hue = Math.random() * 360;
-        // dot.style.filter = `hue-rotate(${hue}deg)`
+      //   // let hue = Math.random() * 360;
+      //   // dot.style.filter = `hue-rotate(${hue}deg)`
 
-        avatar.appendChild(dot);
+      //   avatar.appendChild(dot);
 
-        setTimeout(() => {
-          dot.remove()
-        }, 2000)
-      }
+      //   setTimeout(() => {
+      //     dot.remove()
+      //   }, 2000)
+      // }
     })
   </script>
 
