@@ -268,18 +268,15 @@ pre.pre::before {
   text-indent: 2em;
 }
 
+/* normal table */
 table {
   width: 100%;
   border-collapse: collapse;
-  border-top: 1px solid var(--main-color);
-  border-bottom: 1px solid var(--main-color);
   margin: calc(4*var(--padding)) auto;
 }
 
 th {
-  font-weight: normal;
   text-align: left;
-  /* border-bottom: 1px solid var(--bar-color); */
 }
 
 th,
@@ -294,6 +291,26 @@ tr:has(th) {
 
 tr:nth-child(even) {
   background-color: var(--tbl-color-light)
+}
+
+/* line table */
+table.line tr {
+  background-color: unset;
+  border-bottom: 1px solid var(--main-color);
+}
+
+/* there line table */
+table.line3 {
+  border-top: 1px solid var(--main-color);
+  border-bottom: 1px solid var(--main-color);
+}
+
+table.line3 tr {
+  background-color: unset;
+}
+
+table.line3 tr:has(th) {
+  border-bottom: 1px solid var(--main-color);
 }
 
 .grid,

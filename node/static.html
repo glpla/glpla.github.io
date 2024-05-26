@@ -32,11 +32,11 @@
       <div>在服务器目录创建资源文件夹，如public，存放图片imgs、视频video、数据data等资源；建议不同类型的资源存放在不同的子目录</div>
       <div>在服务器目录打开CMD命令行窗口：右键选择"在终端中打开"或在资源管理器顶部地址栏输入 CMD 并回车</div>
       <p>初始化，用来创建 package.json 文件</p>
-      <pre class="code">npm init</pre>
+      <pre>npm init</pre>
       <p><span class="warn">推荐</span>使用 -y 命令行参数，按照默认配置创建 package.json，如入口文件默认是index.js</p>
-      <pre class="code">npm init -y</pre>
+      <pre>npm init -y</pre>
       <p>创建的 package.json 文件内容如下</p>
-      <pre class="code">
+      <pre>
 {
   "name": "server",
   "version": "1.0.0",
@@ -49,10 +49,10 @@
   "author": "",
   "license": "ISC"
 }        </pre>
-      <div>在终端中安装 express 框架</div>
-      <pre class="code">npm i express --save</pre>
+      <div>在CMD终端中安装 express 框架</div>
+      <pre>npm i express --save</pre>
       <div>创建服务器脚本：在服务器目录下，新建一个js文件，命名为index.js，编辑如下</div>
-      <pre class="code">
+      <pre>
 //引入express
 const express = require('express');
 //创建服务器实例
@@ -67,29 +67,29 @@ app.listen(port, res => {
 });  </pre>
       <div>定制路由[可选]</div>
       <p>根据业务场景和需求定制；如读取文件并返回JSON数据；如果如下提示，需要使用代理。见后续内容</p>
-      <pre class="code">...has been blocked by CORS policy...</pre>
-      <div>在终端中开启服务</div>
+      <pre>...has been blocked by CORS policy...</pre>
+      <div>在CMD终端中开启服务</div>
       <p>默认命令</p>
-      <pre class="code">node index.js</pre>
+      <pre>node index.js</pre>
       <p>自定义命令启动服务：修改package.json里script</p>
-      <pre class="code">
+      <pre>
 "scripts": {
   "start":"node index.js"
 }</pre>
-      <pre class="code">node start</pre>
+      <pre>node start</pre>
       <div>使用资源</div>
       <p>用户使用浏览器访问 http://127.0.0.1:3000/资源路径和名字获取资源；如图片的src属性</p>
       <p>用户在H5项目中使用，如&lt;img&gt;元素</p>
-      <pre class="code">&lt;img src="http://127.0.0.1:3000/资源路径和名字" alt=""&gt;</pre>
+      <pre>&lt;img src="http://127.0.0.1:3000/资源路径和名字" alt=""&gt;</pre>
       <p>用户在微信小程序项目中使用，如&lt;image&gt;组件</p>
-      <pre class="code">&lt;image src="http://127.0.0.1:3000/资源路径和名字" alt=""&gt;</pre>
+      <pre>&lt;image src="http://127.0.0.1:3000/资源路径和名字" alt=""&gt;</pre>
     </dd>
     <dd class="tips">日常开发建议使用Vs Code完成</dd>
     <dt>进阶</dt>
     <dd>访问服务器根目录，渲染服务器特定页面，如主页，给出操作提示</dd>
     <dd>思路：创建html页面，指定路由；读取并返回主页；需要fs的支持</dd>
     <dd>方案1：修改服务器文件，增加核心代码如下</dd>
-    <dd class="code">
+    <dd>
       <pre>
 server.get('/', (req, res) => {
   fs.readFile('www/index.html', (err, data) => {
@@ -100,7 +100,7 @@ server.get('/', (req, res) => {
 })</pre>
     </dd>
     <dd>方案2：直接使用res的sendFile()</dd>
-    <dd class="code">
+    <dd>
       <pre>
 app.get('/', (req, res) => {
   res.sendFile('./www/index.html')

@@ -29,11 +29,8 @@
     <dd>. 文件选择是一种特殊的&lt;input&gt;，类型为file</dd>
     <dd>. 用来选择指定类型的文件</dd>
     <dd>
-      <figure class="code">
-        <figcaption>语法</figcaption>
-        <pre>
+      <pre>
 &lt;input type="file" name="" id="" multiple accept=""&gt;</pre>
-      </figure>
     </dd>
     <dd>file：作为文件选择，input类型应指定为file</dd>
     <dd>multiple：默认选择单个文件；多选时应指定multiple</dd>
@@ -69,10 +66,12 @@
   </dl>
   <div class="chap">事件 FileReader</div>
   <dl class="nav-cont">
-    <dd>处理选中的文件。根据内容，有3个函数：</dd>
+    <dd>本地处理选中的文件，便于 <span class="warn">预览</span> 和调整，不必上到服务器</dd>
+    <dd>更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader">官方文档 - FileReader</a></dd>
+    <dd>根据内容，有3个实例方法 Instance methods：</dd>
     <dd class="number">
       <div>readAsText()：处理.txt/.HTML/.js等文本文件；格式应为UTF-8</div>
-      <div>readAsDataURL()：处理图片，data:image/jpeg;base64格式</div>
+      <div>readAsDataURL()：处理图片，转换成 data:image/jpeg;base64格式</div>
       <div>readAsArrayBuffer()：处理字节流</div>
     </dd>
     <dt>基本步骤</dt>
@@ -80,6 +79,34 @@
       <div>选择文件</div>
       <div>使用合适的文件处理函数</div>
       <div>渲染文件处理结果</div>
+    </dd>
+    <dt>完整事件流</dt>
+    <dd>包括：开始加载 loadstart、加载中 progress、加载成功load、加载结束 loadend、加载出错 error 和加载放弃 abort，分别对应以下几个事件函数</dd>
+    <dd>
+      <pre>
+fr.addEventListener("loadstart", (e) => {
+  console.log('fr start');
+});
+fr.addEventListener("load", (e) => {
+  console.log('fr loaded', e.target.result);
+  //使用数据
+});
+fr.addEventListener("loadend", (e) => {
+  console.log('fr end');
+});
+fr.addEventListener("progress", (e) => {
+  console.log('fr progress', e.loaded);
+  //进度掌控
+});
+fr.addEventListener("error", (e) => {
+  console.log('fr error');
+});
+fr.addEventListener("abort", (e) => {
+  console.log('fr abort');
+});      </pre>
+    </dd>
+    <dd class="tips">
+      FileReader的progress事件的e参数包含一个lengthComputable属性，如果为true，则可以计算出文件的总大小。如果文件太大或者无法获取总大小，lengthComputable可能为false，这时无法准确计算进度。
     </dd>
   </dl>
   <div class="chap">图片的使用 Image</div>
@@ -92,55 +119,63 @@
       <input type="file" accept="image/*" class='avatar-ipt' hidden>
       <button type="button" class='avatar-btn'>Choose File</button>
       <div class='avatar-per'>0%</div>
+      <div class='avatar-bar'></div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>HTML</figcaption>
-        <pre>
+      <pre>
 &lt;div class="avatar-wrap"&gt;
     &lt;img src="./imgs/avatar.png" alt="图片不可用" class='avatar-img'&gt;
     &lt;input type="file" accept="image/*" class='avatar-ipt' hidden&gt;
     &lt;button type="button" class='avatar-btn'&gt;Choose File&lt;/button&gt;
     &lt;div class='avatar-per'&gt;0%&lt;/div&gt;
 &lt;/div&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>JavaScript</figcaption>
-        <pre>
+      <pre>
 let imgIpt = document.querySelector('.avatar-ipt')
 let imgBtn = document.querySelector('.avatar-btn')
 let img = document.querySelector('.avatar-img')
 let imgPer = document.querySelector('.avatar-per')
-imgBtn.addEventListener('click', function () {
-    imgIpt.click()
+imgBtn.addEventListener('click', () => {
+  imgIpt.click()
 })
-// 这里需要使用this获取文件列表，所以不能使用箭头函数
-imgIpt.addEventListener('change', function () {
-    console.log(this.files);
-    let fr = new FileReader()
-    fr.readAsDataURL(this.files[0]);
-    fr.addEventListener('load', function () {
-        img.src = this.result;
-    })
-    fr.onprogress = function (e) {
-        console.log(e.loaded);
-        imgPer.innerHTML = Number(e.loaded / e.total * 100).toFixed(2) + '%';
+
+imgIpt.addEventListener('change', (e) => {
+  let file = e.target.files[0]
+  let fr = new FileReader()
+
+  fr.addEventListener("loadstart", (e) => {
+    console.log('fr start');
+  });
+  fr.addEventListener("load", (e) => {
+    console.log('fr loaded', e.target.result);
+    img.src = e.target.result;
+  });
+  fr.addEventListener("loadend", (e) => {
+    console.log('fr end');
+  });
+  fr.addEventListener("progress", (e) => {
+    console.log('fr progress', e);
+    if (e.lengthComputable) {
+      let per = Math.round(e.loaded / e.total * 100);
+      imgPer.innerHTML = per + '%';
     }
+  });
+  fr.addEventListener("error", (e) => {
+    console.log('fr error');
+  });
+  fr.addEventListener("abort", (e) => {
+    console.log('fr abort');
+  });
+  fr.readAsDataURL(file);
 })</pre>
-      </figure>
     </dd>
+    <dd>或者使用URL库函数直接生成src</dd>
     <dd>
-      <figure class="code">
-        <figcaption>或者使用URL直接生成src</figcaption>
-        <pre>
+      <pre>
 imgIpt.addEventListener('change', function () {
   let file = this.files[0]
   console.log(file);
   imgEl.src = URL.createObjectURL(file);
 })</pre>
-      </figure>
     </dd>
   </dl>
   <div class="chap">办公文档 OA</div>
@@ -342,126 +377,145 @@ function dealFiles(files) {
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="./lib/ham.js"></script>
   <script>
-    window.onload = function () {
-      // single image file
-      let imgIpt = document.querySelector('.avatar-ipt')
-      let imgBtn = document.querySelector('.avatar-btn')
-      let img = document.querySelector('.avatar-img')
-      let imgPer = document.querySelector('.avatar-per')
-      imgBtn.addEventListener('click', function () {
-        imgIpt.click()
-      })
-      imgIpt.addEventListener('change', function () {
-        console.log(this.files);
-        let fr = new FileReader()
-        fr.readAsDataURL(this.files[0]);
-        // addEventListener
-        fr.addEventListener('load', function () {
-          img.src = this.result;
-        })
-        // loading time > 50ms
-        fr.onprogress = function (e) {
-          console.log(e.loaded);
-          imgPer.innerHTML = Number(e.loaded / e.total * 100).toFixed(2) + '%';
-        }
-      })
+    // single image file
+    let imgIpt = document.querySelector('.avatar-ipt')
+    let imgBtn = document.querySelector('.avatar-btn')
+    let img = document.querySelector('.avatar-img')
+    let imgPer = document.querySelector('.avatar-per')
+    let imgBar = document.querySelector('.avatar-bar')
+    imgBtn.addEventListener('click', () => {
+      imgIpt.click()
+    })
+    imgIpt.addEventListener('change', (e) => {
+      console.log(e.target.files[0]);
+      const file = e.target.files[0]
+      const fr = new FileReader()
 
-      // read txt
-      let txtIpt = document.querySelector('#txt-ipt')
-      let txtCont = document.querySelector('#txt-cont')
-      txtIpt.addEventListener('change', function () {
-        let file = this.files[0]
-        let fr = new FileReader()
-        fr.readAsText(file)
-        // onload
-        fr.onload = function (e) {
-          console.log(e.target.result);
-          txtCont.innerHTML = e.target.result
-        }
-      })
-
-      // read oa-excel
-      let excelIpt = document.querySelector('#excel-ipt')
-      let excelCont = document.querySelector('#excel-cont')
-      excelIpt.addEventListener('change', function () {
-        let fr = new FileReader()
-        fr.readAsArrayBuffer(this.files[0])
-        fr.addEventListener('load', function () {
-          let res = this.result;
-          let workbook = XLSX.read(res, { type: 'array' });
-          let sheetName = workbook.SheetNames[0];
-          let sheet = workbook.Sheets[sheetName];
-          console.log(sheet);
-          excelCont.innerHTML = XLSX.utils.sheet_to_html(sheet);
-        })
-      })
-
-      // table to oa-excel
-      let tblBtn = document.querySelector('#tblBtn')
-      let tbl = document.querySelector('#tbl')
-      tblBtn.addEventListener('click', () => {
-        let tblBook = XLSX.utils.table_to_book(tbl);
-        XLSX.writeFile(tblBook, 'out.xlsx');
-      })
-
-      // // file custom avatar
-      // let fileCoustom = document.querySelector('#file-custom')
-      // let fileBtn = document.querySelector('#file-btn')
-      // fileBtn.addEventListener('click', function () {
-      //     fileCoustom.click()
-      // })
-      // fileCoustom.addEventListener('change', function () {
-      //     console.log(this.files);
-      // })
-
-      // drag
-      let drag = document.querySelector('#zone')
-      drag.addEventListener('dragenter', function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      })
-      drag.addEventListener('dragover', function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      })
-      drag.addEventListener('drop', function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-        let fr = new FileReader()
-        fr.readAsDataURL(e.dataTransfer.files[0]);
-        fr.addEventListener('load', function () {
-          drag.style.backgroundImage = `url(${this.result})`
-        })
-      })
-      // drag mul
-      let dragM = document.querySelector('#mul-drag')
-      let mulDis = document.querySelector('.mul-dis')
-      dragM.addEventListener('dragenter', function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      })
-      dragM.addEventListener('dragover', function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-      })
-      dragM.addEventListener('drop', function (e) {
-        e.stopPropagation();
-        e.preventDefault();
-        console.log(e.dataTransfer.files);
-        dealFiles(e.dataTransfer.files)
-
-      })
-      function dealFiles(files) {
-        for (let i = 0; i < files.length; i++) {
-          console.log(files[i]);
-          let img = document.createElement('img')
-          let fr = new FileReader()
-          fr.readAsDataURL(files[i]);
-          fr.addEventListener('load', function () {
-            img.src = this.result;
-            mulDis.appendChild(img);
+      fr.addEventListener("progress", (e) => {
+        console.log('fr progress', e);
+        if (e.lengthComputable) {
+          let per = (e.loaded / e.total) * 100
+          imgPer.innerHTML = Math.round(per) + '%';
+          requestAnimationFrame(() => {
+            imgBar.style.width = per + '%'
           })
         }
+      });
+      fr.addEventListener("loadstart", (e) => {
+        console.log('fr start');
+        imgBar.style.width = '0%'
+      });
+      fr.addEventListener("load", (e) => {
+        console.log('fr loaded', e.target.result);
+        img.src = e.target.result;
+      });
+      fr.addEventListener("loadend", (e) => {
+        console.log('fr end');
+      });
+      fr.addEventListener("error", (e) => {
+        console.log('fr error');
+      });
+      fr.addEventListener("abort", (e) => {
+        console.log('fr abort');
+      });
+      fr.readAsDataURL(file);
+    })
+
+    // read txt
+    let txtIpt = document.querySelector('#txt-ipt')
+    let txtCont = document.querySelector('#txt-cont')
+    txtIpt.addEventListener('change', function () {
+      let file = this.files[0]
+      let fr = new FileReader()
+      fr.readAsText(file)
+      // onload
+      fr.onload = function (e) {
+        console.log(e.target.result);
+        txtCont.innerHTML = e.target.result
+      }
+    })
+
+    // read oa-excel
+    let excelIpt = document.querySelector('#excel-ipt')
+    let excelCont = document.querySelector('#excel-cont')
+    excelIpt.addEventListener('change', function () {
+      let fr = new FileReader()
+      fr.readAsArrayBuffer(this.files[0])
+      fr.addEventListener('load', function () {
+        let res = this.result;
+        let workbook = XLSX.read(res, { type: 'array' });
+        let sheetName = workbook.SheetNames[0];
+        let sheet = workbook.Sheets[sheetName];
+        console.log(sheet);
+        excelCont.innerHTML = XLSX.utils.sheet_to_html(sheet);
+      })
+    })
+
+    // table to oa-excel
+    let tblBtn = document.querySelector('#tblBtn')
+    let tbl = document.querySelector('#tbl')
+    tblBtn.addEventListener('click', () => {
+      let tblBook = XLSX.utils.table_to_book(tbl);
+      XLSX.writeFile(tblBook, 'out.xlsx');
+    })
+
+    // // file custom avatar
+    // let fileCoustom = document.querySelector('#file-custom')
+    // let fileBtn = document.querySelector('#file-btn')
+    // fileBtn.addEventListener('click', function () {
+    //     fileCoustom.click()
+    // })
+    // fileCoustom.addEventListener('change', function () {
+    //     console.log(this.files);
+    // })
+
+    // drag
+    let drag = document.querySelector('#zone')
+    drag.addEventListener('dragenter', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    })
+    drag.addEventListener('dragover', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    })
+    drag.addEventListener('drop', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      let fr = new FileReader()
+      fr.readAsDataURL(e.dataTransfer.files[0]);
+      fr.addEventListener('load', function () {
+        drag.style.backgroundImage = `url(${this.result})`
+      })
+    })
+    // drag mul
+    let dragM = document.querySelector('#mul-drag')
+    let mulDis = document.querySelector('.mul-dis')
+    dragM.addEventListener('dragenter', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    })
+    dragM.addEventListener('dragover', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    })
+    dragM.addEventListener('drop', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      console.log(e.dataTransfer.files);
+      dealFiles(e.dataTransfer.files)
+
+    })
+    function dealFiles(files) {
+      for (let i = 0; i < files.length; i++) {
+        console.log(files[i]);
+        let img = document.createElement('img')
+        let fr = new FileReader()
+        fr.readAsDataURL(files[i]);
+        fr.addEventListener('load', function () {
+          img.src = this.result;
+          mulDis.appendChild(img);
+        })
       }
     }
   </script>
