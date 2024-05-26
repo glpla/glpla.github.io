@@ -79,29 +79,17 @@ const showMenu = () => {
   store.switchFlag()
 }        </pre>
         <div>在路由配置中添加导航守卫，使用仓库管理导航菜单的折叠和展开</div>
-        <p>每次进入时，折叠汉堡菜单</p>
-        <p>如果结束时，当前路由 from 和目标路由 to 相同，也折叠汉堡菜单</p>
-        <p>导航结束后，设置页面标题</p>
+        <p>每次路由响应完毕，都折叠汉堡菜单并设置页面标题</p>
         <pre>
 import { useMenuStore } from '@/stores/menu'
-
-router.beforeEach((to, from, next) => {
-  // 其它逻辑
-
-  const store = useMenuStore();
-  store.flag = false;
-  next();
-})
 
 router.afterEach((to, from) => {
   // 其它逻辑
 
   document.title = to.meta.title
 
-  if (to.path === from.path) {
-      const store = useMenuStore()
-      store.flag = false
-  }
+  const store = useMenuStore()
+  store.flag = false
 })</pre>
         <div>导航菜单的静态样式和动态样式 - 使用固定定位，折叠时，移出；展开时，移入</div>
         <pre>
@@ -150,6 +138,10 @@ router.afterEach((to, from) => {
         </div>
         <div>未按要求在规定时间内提交视为无效，不得分</div>
         <div>格式规范，请参考 <a href="../course/paper.html">论文规范要点</a></div>
+      </dd>
+      <dt>拓展</dt>
+      <dd>
+        <div>优化菜单仓库</div>
       </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
