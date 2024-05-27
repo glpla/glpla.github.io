@@ -1,6 +1,7 @@
+let ind = 0;
 let navItems = document.querySelectorAll('.nav-item')
 let navConts = document.querySelectorAll('.nav-cont')
-let navWrap = document.querySelector('.nav-wrap')
+let nav = document.querySelector('.nav');
 let ham = document.querySelector('.ham')
 navItems.forEach((item, ind) => {
   item.addEventListener('click', (e) => {
@@ -10,13 +11,24 @@ navItems.forEach((item, ind) => {
       item.classList.remove('active')
     })
     item.classList.add('active');
-    ham.classList.toggle('active')
-    navWrap.classList.toggle('active')
+    hamToggle()
+    nav.classList.toggle('active')
     document.body.classList.toggle('lock')
   })
 })
 ham.addEventListener('click', () => {
-  ham.classList.toggle('active')
-  navWrap.classList.toggle('active')
+  hamToggle();
+  nav.classList.toggle('active')
   document.body.classList.toggle('lock')
 })
+const hamToggle = () => {
+  if (ind) {
+    ind = 0;
+    ham.classList.remove('icon-close');
+    ham.classList.add('icon-menu');
+  } else {
+    ind = 1
+    ham.classList.remove('icon-menu');
+    ham.classList.add('icon-close');
+  }
+}

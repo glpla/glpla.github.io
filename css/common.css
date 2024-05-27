@@ -1,4 +1,5 @@
 @import url(//at.alicdn.com/t/c/font_3859342_p81mmr5xq8.css);
+@import url(../css/fonts_Poppins.css);
 
 :root {
   --main-color: #ff7b00;
@@ -13,7 +14,7 @@
   --tips-warn-color: rgba(255, 93, 115, 0.2);
   --tips-warn-bold-color: rgb(255, 93, 115);
   --w-width: 1024px;
-  --chap-h: 10vh;
+  --chap-h: 12vh;
   --padding: 1rem;
   accent-color: var(--main-color);
 }
@@ -40,7 +41,8 @@ figcaption,
 nav,
 pre,
 details,
-summary {
+summary,
+nav {
   margin: 0;
   padding: 0;
   font-weight: normal;
@@ -50,6 +52,7 @@ summary {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 12vh;
   background-color: #eee;
   font-size: 62.5%;
 }
@@ -72,12 +75,13 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(#fff, var(--warn-color));
+  background-image: linear-gradient(#fff, var(--main-color));
   border-radius: 4px;
 }
 
 header {
-  position: relative;
+  position: sticky;
+  top: -13vh;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -89,6 +93,7 @@ header {
   background-size: cover;
   background-position: center;
   overflow: hidden;
+  z-index: 99;
 }
 
 header::after {
@@ -97,7 +102,7 @@ header::after {
   left: 0;
   bottom: 0;
   width: 200%;
-  height: 6px;
+  height: 4px;
   background-image: linear-gradient(to right, #ff0 0%, var(--main-color) 50%, #ff0 100%);
   animation: roll 4s linear infinite alternate;
 }
@@ -106,6 +111,25 @@ header::after {
   to {
     transform: translateX(-50%);
   }
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.nav-item {
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  color: #ff0;
+}
+
+.ham {
+  display: none;
 }
 
 details {
@@ -192,6 +216,7 @@ figure img {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  font-family: 'Poppins';
   font-size: 1.8rem;
   height: var(--chap-h);
   padding: var(--padding);
@@ -454,6 +479,15 @@ iframe {
 }
 
 @media screen and (max-width:768px) {
+  body.lock {
+    overflow: hidden;
+  }
+
+  header {
+    top: 0;
+    height: 10vh;
+  }
+
   th {
     display: none;
   }
@@ -469,6 +503,40 @@ iframe {
 
   pre::before {
     content: '';
+  }
+
+  .ham {
+    display: block;
+    color: #fff;
+    font-size: 2rem;
+    margin-left: auto;
+  }
+
+  .nav {
+    position: fixed;
+    top: 10vh;
+    right: -40vw;
+    flex-direction: column;
+    width: 40vw;
+    height: 90vh;
+    padding: 10px;
+    background-color: #f1f1f1;
+    transition: .5s;
+  }
+
+  .nav-item {
+    color: var(--main-color);
+    border-bottom: 1px solid #ccc;
+    transform: translateX(20vh);
+    transition: transform 0.4s ease-in-out calc(var(--delay)*100ms);
+  }
+
+  .nav.active {
+    right: 0;
+  }
+
+  .nav.active .nav-item {
+    transform: translateX(0);
   }
 
 }

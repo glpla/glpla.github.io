@@ -6,12 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>浏览器 Chrome</title>
-  <link rel="stylesheet" href="../css/reset2024.css">
-  <link rel="stylesheet" href="../css/common2024.css">
-  <link rel="stylesheet" href="../css/code.css">
-  <link rel="stylesheet" href="../css/sn.css">
-  <!-- <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3870259_d7rdl2c57h.css"> -->
+  <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
+  <style>
+    :root {
+      --main-color: #4bc2ce;
+      --warn-color: #1b9fab;
+      --tbl-color-light: #edf9fa;
+    }
+  </style>
 </head>
 
 <body>
@@ -21,7 +24,7 @@
   </header>
   <dl>
     <dt>下载 Download</dt>
-    <dd>. <a href="https://www.google.cn/intl/zh-cn/chrome/" title="单击下载" class="link">www.google.cn</a></dd>
+    <dd>. <a href="https://www.google.cn/intl/zh-cn/chrome/" title="单击下载">www.google.cn</a></dd>
     <dt>安装 Install</dt>
     <dd>. 略</dd>
     <dt>快捷键 Shortcut</dt>
@@ -32,7 +35,7 @@
     <dd>. 在浏览器中，按 F12 打开浏览器的检查功能页，或鼠标右键单击 → 检查，用于调试 Debug页面</dd>
     <dd>. 默认是上下布局：上面是元素结构和页面功能，下面是元素样式；也可以调整为左右布局</dd>
     <dt>基本菜单 Menu</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>选择元素：如果开发中预期的样式效果没有出现，可以拾取某个元素，在 <span class="warn">样式</span>
         选项卡中查看样式的具体信息，包括继承的样式、被覆盖的样式和计算|渲染出来的最终样式信息；在
         <span class="warn">已计算</span> 选项卡中可以查看完整的样式；根据检查情况修改并完善项目
@@ -40,7 +43,7 @@
       <div>切换设备：移动端和桌面端</div>
     </dd>
     <dt>标签页 Tabcard</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>Element：检查文档/元素结构</div>
       <div>Console：查看控制台输出：业务开发请多使用log调试</div>
       <div>Network：网络情况，各种资源图片、样式文件等加载情况</div>
@@ -54,23 +57,17 @@
       </figure>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>无须拼接</figcaption>
-        <pre>
+      <p>无须拼接</p>
+      <pre>
 console.log('a', a, 'b', b, 'c', c );
 console.log({ a, b, c });</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>测试代码运行时间</figcaption>
-        <pre>
+      <p>测试代码运行时间</p>
+      <pre>
 console.time('timer')
 for (let i = 0; i &lt; 1000; i++) {
   //不要嵌套使用console，会导致计时增加
 }
 console.timeEnd('timer')</pre>
-      </figure>
     </dd>
     <dt>真机调试 Debug</dt>
     <dd>. 本着移动优先的原则，通常要查看项目在真机上的效果，所以真机调试的步骤必不可少[除非明确项目的定位就是桌面端]</dd>
@@ -80,9 +77,8 @@ console.timeEnd('timer')</pre>
     <dd class="mt2">2. 环境配置</dd>
     <dd>2.1. 查看本机IP地址；按Win+R，打开命令运行窗口，输入cmd，打开控制台/小黑屋，输入ipconfig，查看本机IPv4地址；或者按Win+I，打开系统设置，在网络的本地连接中查看网络信息</dd>
     <dd>
-      <figure class="code">
-        <figcaption>ipconfig</figcaption>
-        <pre>
+      <p>ipconfig</p>
+      <pre>
 C:\Users\cnplaman>ipconfig
 
 Windows IP 配置
@@ -112,7 +108,6 @@ Windows IP 配置
    //Bluetooth
 
 C:\Users\cnplaman></pre>
-      </figure>
     </dd>
     <dd>2.2. 打开Vs code，点击右下角管理按钮<span class="iconfont icon-sun"></span>，选择设置setting，或者直接按CTRL+,</dd>
     <dd>2.3. 选择扩展Extension里的Live Server Config，修改主机host为查询到的IPv4地址</dd>
@@ -134,9 +129,7 @@ C:\Users\cnplaman></pre>
     <dd><img src="./imgs/lighthouse.png" alt=""></dd>
     <dd class="example-sn"> 结合浏览器的调试功能，指出下列代码片段的问题</dd>
     <dd>
-      <figure class="code">
-        <figcaption>调试bug</figcaption>
-        <pre>
+      <pre>
 &lt;nav id="main" id='nav'&gt;
     &lt;ul class="nav-wrap'&gt;
         &lt;li class="logo main"&gt;
@@ -149,7 +142,6 @@ C:\Users\cnplaman></pre>
         &lt;li&gt;item5&lt;/li&gt;
     &lt;/ul&gt;
 &lt;/nav&gt;</pre>
-      </figure>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

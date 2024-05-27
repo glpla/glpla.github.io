@@ -6,11 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Github</title>
-    <link rel="stylesheet" href="../../css/reset2024.css">
-    <link rel="stylesheet" href="../../css/common2024.css">
-    <link rel="stylesheet" href="../../css/code.css">
-    <link rel="stylesheet" href="../../css/sn.css">
+    <link rel="stylesheet" href="../../css/common.css">
     <base target="_blank">
+    <style>
+        :root {
+            --main-color: #4bc2ce;
+            --warn-color: #1b9fab;
+            --tbl-color-light: #edf9fa;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,12 +23,11 @@
         <span>&commat;Github</span>
     </header>
     <dl>
-        <dt>说明</dt>
         <dd>. 代码仓库 - 托管代码的地方</dd>
-        <dd>. 打开<a href="https://github.com/" class="link">Github官网</a>，注册并创建仓库</dd>
-        <dd>. 服务器在境外，访问速度受限，经常连不上；可以使用国内平台 <a href="https://gitee.com/" class="link">Gitee</a>，不过管控审查比较严</dd>
+        <dd>. 打开 <a href="https://github.com/">Github官网</a>，注册并创建仓库</dd>
+        <dd>. 服务器在境外，访问速度受限，经常连不上；可以使用国内平台 <a href="https://gitee.com/">Gitee</a>，不过管控审查比较严</dd>
         <dt>完整流程</dt>
-        <dd class="number">
+        <dd class="sn">
             <div>创建远程仓库：获取到仓库地址</div>
             <div>创建本地项目|项目文件夹并初始化</div>
             <div>关联远程仓库</div>
@@ -49,55 +52,55 @@
         <dt>克隆仓库 clone</dt>
         <dd>将远程仓库复制到本地</dd>
         <dd>通常是第一次使用别人的仓库；后续直接拉取pull就可以和仓库保持一致</dd>
-        <dd class="code">
+        <dd>
             <pre>git clone url</pre>
         </dd>
         <dt>Git关联到仓库</dt>
         <dd>使用add为远程仓库指定一个别名；因为仓库url太长</dd>
         <dd>可以关联多个远程仓库，使用别名区分</dd>
         <dd>示例中使用origin代替远程仓库的url</dd>
-        <dd class="code">
+        <dd>
             <pre>$git remote add origin url</pre>
         </dd>
         <dt>查看关联的远程仓库 remote</dt>
-        <dd class="code">
+        <dd>
             <pre>
 $ git remote -v
 origin  https://github.com/glpla/glpla.github.io.git (fetch)
 origin  https://github.com/glpla/glpla.github.io.git (push)            </pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>
 $ git remote
 origin</pre>
         </dd>
         <dt>删除远程仓库和别名的关联 remove</dt>
-        <dd class="code">
+        <dd>
             <pre>
 $ git remote remove 别名</pre>
         </dd>
         <dt>重命名远程仓库别名 rename</dt>
-        <dd class="code">
+        <dd>
             <pre>
 $ git remote rename 旧别名 新别名</pre>
         </dd>
         <dt>Git推送到仓库 push</dt>
         <dd>不仅要指定推送的仓库/别名，还要指定推送到哪个分支</dd>
-        <dd>使用-u可以自动关联，后续只需要使用git push即可推送</dd>
-        <dd>示例中推送到远程仓库别名是origin的master分支</dd>
-        <dd class="code">
+        <dd>使用-u可以自动关联，后续只需要使用 git push 即可推送</dd>
+        <dd>示例中推送到远程仓库别名是 origin 的 master 分支</dd>
+        <dd>
             <pre>$git push -u 别名 分支</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>$git push</pre>
         </dd>
         <dt>拉取远程仓库 pull</dt>
-        <dd>在第一次克隆clone的基础上，通过拉取和原来仓库保持一致</dd>
-        <dd>如果之前提交使用-u，可以直接拉取</dd>
-        <dd class="code">
+        <dd>在第一次克隆 clone 的基础上，通过拉取和原来仓库保持一致</dd>
+        <dd>如果之前提交使用 -u，可以直接拉取</dd>
+        <dd>
             <pre>git pull 别名 分支</pre>
         </dd>
-        <dd class="code">
+        <dd>
             <pre>git pull</pre>
         </dd>
     </dl>
