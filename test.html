@@ -4,179 +4,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test</title>
+  <title>Document</title>
   <style>
-:root {
-  --main-w: 200px;
-  --w: calc(var(--main-w) / 2);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #000;
-  perspective: 1000px;
-}
-
-.wrap {
-  position: relative;
-  width: var(--main-w);
-  height: var(--main-w);
-  transform-style: preserve-3d;
-  transform: rotatex(-30deg) rotatey(20deg);
-  transition: 5s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: cube-roll 5s linear infinite alternate;
-}
-
-.wrap div {
-  position: absolute;
-}
-
-.item {
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-position: center;
-  background-size: cover;
-  opacity: 0.6;
-  transition: 0.5s;
-  box-shadow: 0 0 40px 20px rgba(255, 255, 255, 0.2);
-}
-
-.front {
-  border: 1px solid #ff0;
-  transform: translatez(var(--w));
-  background-image: url(https://picsum.photos/800/600);
-}
-
-.back {
-  border: 1px solid #ff0;
-  transform: rotatey(180deg) translatez(var(--w));
-  background-image: url(https://picsum.photos/600/800);
-}
-
-.left {
-  border: 1px solid #fff;
-  transform: rotatey(90deg) translatez(var(--w));
-  background-image: url(https://picsum.photos/1600/900);
-}
-
-.right {
-  border: 1px solid #fff;
-  transform: rotatey(-90deg) translatez(var(--w));
-  background-image: url(https://picsum.photos/900/1600);
-}
-
-.top {
-  border: 1px solid #f40;
-  transform: rotatex(90deg) translatez(var(--w));
-  background-image: url(https://picsum.photos/800/450);
-}
-
-.btm {
-  border: 1px solid #f40;
-  transform: rotatex(-90deg) translatez(var(--w));
-  background-image: url(https://picsum.photos/450/800);
-}
-
-.inner {
-  width: 50%;
-  height: 50%;
-  background-image: url(https://picsum.photos/400/300);
-  background-position: center;
-  background-size: cover;
-  border-radius: 20px;
-}
-
-.inner-front {
-  transform: translatez(calc(var(--w) / 2));
-}
-
-.inner-back {
-  transform: rotatex(180deg) translatez(calc(var(--w) / 2));
-}
-
-.inner-left {
-  transform: rotatey(90deg) translatez(calc(var(--w) / 2));
-}
-
-.inner-right {
-  transform: rotatey(-90deg) translatez(calc(var(--w) / 2));
-}
-
-.inner-top {
-  transform: rotatex(90deg) translatez(calc(var(--w) / 2));
-}
-
-.inner-btm {
-  transform: rotatex(-90deg) translatez(calc(var(--w) / 2));
-}
-
-.wrap:hover .front {
-  transform: translatez(calc(var(--w) * 2));
-  opacity: 1;
-}
-
-.wrap:hover .back {
-  transform: rotatey(180deg) translatez(calc(var(--w) * 2));
-  opacity: 1;
-}
-
-.wrap:hover .left {
-  transform: rotatey(90deg) translatez(calc(var(--w) * 2));
-  opacity: 1;
-}
-
-.wrap:hover .right {
-  transform: rotatey(-90deg) translatez(calc(var(--w) * 2));
-  opacity: 1;
-}
-
-.wrap:hover .top {
-  transform: rotatex(90deg) translatez(calc(var(--w) * 2));
-  opacity: 1;
-}
-
-.wrap:hover .btm {
-  transform: rotatex(-90deg) translatez(calc(var(--w) * 2));
-  opacity: 1;
-}
-
-@keyframes cube-roll {
-  to {
-    transform: rotatex(180deg) rotatey(260deg) rotatez(240deg);
-  }
-}
+    input {
+      border: none;
+      outline: none;
+      font-size: 20px;
+    }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="item front"></div>
-    <div class="item back"></div>
-    <div class="item left"></div>
-    <div class="item right"></div>
-    <div class="item top"></div>
-    <div class="item btm"></div>
-    <div class="inner inner-front"></div>
-    <div class="inner inner-back"></div>
-    <div class="inner inner-left"></div>
-    <div class="inner inner-right"></div>
-    <div class="inner inner-top"></div>
-    <div class="inner inner-btm"></div>
+  <div class="data-item">
+    <input type="text" class="num" name="" id="" value="0">
   </div>
+  <script src="./utils/lib/scrollreveal.min.js"></script>
+  <script src="./utils/lib/anime.min.js"></script>
+  <script>
+    const revealOption = {
+      delay: 300,
+      distance: "50px",
+      duration: 500,
+      easing: "ease-in-out",
+      origin: "bottom",
+    };
+    // ScrollReveal().reveal(".data-item", {
+    //   afterReveal: (el) => {
+    //     let ipt = el.querySelector('.num');
+    //     console.log('ipt', ipt);
+    //     anime: ({
+    //       targets: ipt,
+    //       value: [0, 234],
+    //       opacity: [0, 1],
+    //       duration: 2000,
+    //       // round: 1,
+    //       easing: 'easeInExpo',
+    //       complete: () => console.log('done'),
+    //       loop: true
+    //     })
+    //   }
+    // });
+
+    anime({
+      targets: '.num',
+      value: [0, 1000],
+      // duration: 2000,
+      round: 1,
+      easing: 'easeInOutExpo',
+      // complete: () => console.log('done'),
+      // loop: true
+    })
+
+    // anime({
+    //   targets: '.num',
+    //   value: [0, 1000],
+    //   round: 1,
+    //   easing: 'easeInOutExpo'
+    // });
+  </script>
 </body>
 
 </html>

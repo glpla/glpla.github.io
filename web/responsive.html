@@ -6,9 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>响应式开发 Responsive</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
-  <link rel="stylesheet" href="../css/code.css">
-  <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
 </head>
 
@@ -280,7 +278,7 @@ window.onresize = function () {
   }
 }</pre>
     </dd>
-    <dd class="quote">
+    <dd class="tips">
       <div>.xxx-device-width和xxx-width不一样；对桌面端而言[不开启toggl device选项]，设备宽度是固定的，并不会响应媒体查询</div>
       <div>.开发者视图中，切换设备时，改变的就是对应设备的设备宽度；不切换设备，改变的是浏览器的宽度</div>
     </dd>
@@ -369,9 +367,7 @@ window.onresize = function () {
     <dd>.&le;992px，显式2列</dd>
     <dd>.&le;768px，显式1列</dd>
     <dd>
-      <figure>
-        <figcaption>HTML</figcaption>
-        <pre>
+      <pre>
 &lt;div class="wrap"&gt;
   &lt;img src="./imgs/1.jpg" alt=""&gt;
   &lt;img src="./imgs/2.jpg" alt=""&gt;
@@ -380,10 +376,9 @@ window.onresize = function () {
   &lt;img src="./imgs/5.jpg" alt=""&gt;
   &lt;img src="./imgs/6.jpg" alt=""&gt;
 &lt;/div&gt;</pre>
-      </figure>
     </dd>
-    <dd>方案1：使用grid实现 - 桌面优先</dd>
     <dd>
+      <p>方案1：使用grid实现 - 桌面优先</p>
       <pre>
 .wrap {
   display: grid;
@@ -408,9 +403,7 @@ window.onresize = function () {
     grid-template-columns: repeat(1, 1fr);
   }
 }</pre>
-    </dd>
-    <dd>方案 2：使用%实现 - 移动优先；采用了float，记得清楚浮动</dd>
-    <dd>
+      <p>方案 2：使用%实现 - 移动优先；采用了float，记得清楚浮动</p>
       <pre>
 .wrap img {
   float: left;

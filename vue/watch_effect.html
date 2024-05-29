@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>自动侦听器 WatchEffect</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
@@ -36,7 +33,7 @@ function watchEffect(
         <dd>onCleanup：回调函数的可选参数，是一个函数，用来注册清理回调；清理回调会在该副作用下一次执行前被调用</dd>
         <dd>options：可选的选项，可以用来调整副作用的刷新时机或调试副作用的依赖</dd>
         <dd>StopHandle：自动侦听器函数返回一个停止器函数，详见后续内容</dd>
-        <dd>更多信息，请访问<a href="https://cn.vuejs.org/api/reactivity-core.html#watcheffect" class="link">watchEffect()</a>
+        <dd>更多信息，请访问<a href="https://cn.vuejs.org/api/reactivity-core.html#watcheffect">watchEffect()</a>
         </dd>
         <dd class="tips">
             <div>watch 仅在侦听的数据源确实改变时才会触发回调；执行0-N次</div>
@@ -57,10 +54,9 @@ watchEffect((onCleanup) => {
 })</pre>
         </dd>
         <dd class="example-sn">使用watchEffect自动侦听多个数据</dd>
+        <dd>ref对象 - 自动侦听name和age</dd>
         <dd>
-            <figure>
-                <figcaption>ref对象 - 自动侦听name和age</figcaption>
-                <pre>
+            <pre>
 let temp = ref(0)
 let hei = ref(0)
 watchEffect(() => {
@@ -78,7 +74,6 @@ function tempCh() {
 function heiCh() {
     hei.value += 2
 }</pre>
-            </figure>
         </dd>
         <dt>停止侦听</dt>
         <dd>在大多数情况下，你无需关心怎么停止一个侦听器</dd>

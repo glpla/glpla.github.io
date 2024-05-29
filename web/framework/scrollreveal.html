@@ -12,26 +12,54 @@
 
 <body>
   <header>
-    <h1>&commat;ScrollReveal</h1>
+    <h1>滚动显示</h1>
+    <span>&commat;ScrollReveal</span>
   </header>
   <dl>
     <dd>. 随着屏幕的滚动，逐渐显示指定内容</dd>
     <dd>. 可以指定类型丰富的显示效果</dd>
+    <div>. 进入 <a href="https://scrollrevealjs.org/">官网 - scrollrevealjs</a>，使用提供的在线资源或者使用老师提供的本地资源 <a
+        href="/utils/lib/scrollreveal.min.js" title="单击下载">单击下载 scrollreveal.min.js</a>；还可以在 <a
+        href="https://cdnjs.com/">cdnjs</a>中 ，查找ScrollReveal 并使用</div>
     <dt>步骤</dt>
-    <dd>1. 打开 <a href="https://cdnjs.com/">cdnjs</a>
-      ，查找ScrollReveal，使用提供的在线资源</dd>
-    <dd>2. 选择版本，复制js对应的标签链接到项目中；如果本地展示，请复制其中的链接，在浏览器中打开，右键选择"另存为"，保存js文件</dd>
-    <dd>3. 进入 <a href="https://scrollrevealjs.org/">scrollrevealjs</a> 官网，参照引导Guide和API，创建自己的效果</dd>
-    <dd>4. 实例化ScrollReveal，并指定要显示的元素，通常使用类名；多个类以逗号,区分</dd>
-    <dd>
+    <dd class="sn">
+      <div>引入</div>
+      <pre>&lt;script src="../lib/scrollreveal.min.js"&gt;&lt;/script&gt;</pre>
+      <div>实例化 ScrollReveal - 以JSON值对的形式，为实例和元素指定选项，设置丰富的显示效果；涉及到的时间单位是毫秒ms</div>
       <pre>
-const sr = ScrollReveal();
-sr.reveal('.class1, .class2');</pre>
+const sr = ScrollReveal({
+    distance: '40px',
+    duration: 2000,
+    delay: 400,
+    reset: true
+})
+</pre>
+      <div>应用到不同的元素 - 可以指定/追加新属性</div>
+      <pre>
+sr.reveal('.banner-item', {
+    interval: 100
+})
+
+sr.reveal('.i0', {
+    origin: 'top'
+})
+</pre>
+      <p>也可以应用到多个类；多个类以逗号,区分</p>
+      <pre>
+sr.reveal('.i4, .breath-item, .info-item', {
+    origin: 'bottom',
+    interval: 100
+})</pre>
+      <div>在浏览器中预览效果</div>
     </dd>
-    <dd>5. 以JSON值对的形式，为实例和元素指定选项，设置丰富的显示效果；涉及到的时间单位是毫秒ms</dd>
+    <dt>选项和属性</dt>
     <dd>
       <table>
         <caption>实例选项</caption>
+        <tr>
+          <th>属性</th>
+          <th>说明</th>
+        </tr>
         <tr>
           <td>distance</td>
           <td>距离</td>
@@ -53,10 +81,12 @@ sr.reveal('.class1, .class2');</pre>
           <td>每次触发都显示效果</td>
         </tr>
       </table>
-    </dd>
-    <dd>
       <table>
         <caption>元素选项</caption>
+        <tr>
+          <th>属性</th>
+          <th>说明</th>
+        </tr>
         <tr>
           <td>interval</td>
           <td>作用于多个元素时，显示的间隔</td>
@@ -67,26 +97,54 @@ sr.reveal('.class1, .class2');</pre>
         </tr>
       </table>
     </dd>
+    <dd class="example-sn">显示指定元素</dd>
+    <dd>
+      <p>先写配置再应用到实例 - 通过展开并追加属性可以为不同的元素应用不同的时间间隔</p>
+      <pre>
+const revealOption = {
+  delay: 300,
+  distance: "50px",
+  duration: 500,
+  easing: "ease-in-out",
+  origin: "bottom",
+};
+ScrollReveal().reveal(".swiper-info", { ...revealOption, interval: 350 });</pre>
+    </dd>
+    <dd class="example-sn">显示完毕后执行数字动画 - <a href="../demo/companies.html">个人网站</a></dd>
+    <dd>同时使用 <a href="./anime.html">Anime.js库</a></dd>
     <dd>
       <pre>
-const sr = ScrollReveal({
-    distance: '40px',
-    duration: 2000,
-    delay: 400,
-    reset: true
-})
-sr.reveal('.banner-item', {
-    interval: 100
-})
-sr.reveal('.i0', {
-    origin: 'top'
-})
-sr.reveal('.i4, .breath-item, .info-item', {
-    origin: 'bottom',
-    interval: 100
-})</pre>
+&lt;div class="data-item"&gt;
+  &lt;input type="text" class="num" value="234" data-val="234"&gt;
+&lt;/div&gt;
+&lt;div class="data-item"&gt;
+  &lt;input type="text" class="num" value="168" data-val="168"&gt;
+&lt;/div&gt;</pre>
+      <pre>
+ScrollReveal().reveal(".data-item", {
+  afterReveal: (el) => {
+    let ipt = el.querySelector('.num');
+    console.log('ipt', ipt);
+    anime({
+      targets: ipt,
+      value: [0, ipt.value],
+      duration: 2000,
+      round: 1,
+      easing: 'easeInExpo',
+    })
+  }
+});      </pre>
     </dd>
-    <dd>6. 更多使用信息，请参考官网文档</dd>
+    <dd class="tips">
+      <div>是通过transform实现，如果还需要使用 :hover触发transform，应使用 !important 提权</div>
+    </dd>
+    <dd>
+      <pre>
+.team-item:hover {
+  transform: translateY(-10px) scale(1.02) !important;
+  //
+}</pre>
+    </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="../lib/scrollreveal.min.js"></script>
