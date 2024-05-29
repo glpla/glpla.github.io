@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>项目 Project</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
@@ -78,15 +75,14 @@
                     <div>● wxml - 当前页面的结构</div>
                     <div>. 由各种组件构成：系统组件和自定义组件</div>
                     <div>. 避免使用HTML标签</div>
-                    <div>. 更多组件，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/"
-                            class="link">component</a>
+                    <div>. 更多组件，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/">component</a>
                     </div>
                     <div>● json - 当前页面的配置</div>
                     <div>. 很多配置项同app.json；应严格按照JSON语法使用双引号"，不能使用单引号'</div>
                     <div>. 导航标题、背景；多页面时通常设置为不同的样式；如果未设置，则和全局设置的保持一致</div>
                     <div>. 是否使用组件</div>
                     <div>. 也可以使用API，根据传递的参数完成导航标题设置</div>
-                    <pre class="code">
+                    <pre>
 onLoad(option: any) {
     wx.setNavigationBarTitle({
         title:option.name
@@ -102,7 +98,7 @@ onLoad(option: any) {
                 <details class="inner">
                     <summary>app.js - 全局逻辑；全局数据；本地存储</summary>
                     <dl>
-                        <dd class="code">
+                        <dd>
                             <pre>
 App({
     onLaunch() {
@@ -124,7 +120,7 @@ App({
 })</pre>
                         </dd>
                         <dd>页面使用时，通过getApp()实现</dd>
-                        <dd class="code">
+                        <dd>
                             <pre> const app = getApp()</pre>
                         </dd>
                     </dl>
@@ -133,19 +129,19 @@ App({
                     <summary>app.json - 小程序的全局配置文件</summary>
                     <dl>
                         <dd>常用配置如下；完整配置项目，请查看 <a
-                                href="https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/app.html"
-                                class="link">官方文档</a></dd>
+                                href="https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/app.html">官方文档</a>
+                        </dd>
                         <dt>entryPagePath</dt>
                         <dd>小程序的默认启动路径（首页）- 页面太多时，想专注某个页面的开发</dd>
                         <dd>不支持|不能携带页面路径参数</dd>
                         <dd>如果不指定，将默认为 pages 列表的第一项</dd>
-                        <dd class="code">
+                        <dd>
                             <pre>"entryPagePath": "pages/test/test"</pre>
                         </dd>
                         <dt>pages</dt>
                         <dd>以数组的形式提供小程序用到的各个页面</dd>
                         <dd>默认第一项是小程序起始页面</dd>
-                        <pre class="code">
+                        <pre>
 "pages": [
     "pages/index/index",
     "pages/photo/photo",
@@ -163,7 +159,7 @@ App({
                         <dd>触底加载距离 onReachBottomDistance：默认是50；单位是px；通常在 <span class="warn">特定页面</span> 中配置该项</dd>
                         <dd>自定义导航标题栏 navigationStyle：通常在 <span class="warn">特定页面</span> 中配置该项</dd>
                         <dd>
-                            <pre class="code">
+                            <pre>
 "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "Our Wedding",
@@ -186,10 +182,9 @@ App({
                         <dd>- iconPath：未选中时的图标</dd>
                         <dd>- selectedIconPath：选中时的图标</dd>
                         <dd>也可以自定义tabBar组件，具体操作请访问 <a
-                                href="https://developers.weixin.qq.com/miniprogram/dev/framework/ability/custom-tabbar.html"
-                                class="link">官方文档</a>
+                                href="https://developers.weixin.qq.com/miniprogram/dev/framework/ability/custom-tabbar.html">官方文档</a>
                         </dd>
-                        <pre class="code">
+                        <pre>
 "tabBar": {
     "color": "#000000", //未选中颜色
     "selectedColor": "#ff5d73", //选中颜色
@@ -218,24 +213,23 @@ App({
 }</pre>
                         <dt>style</dt>
                         <dd>组件样式；目前是第2版样式</dd>
-                        <pre class="code">"style": "v2"</pre>
+                        <pre>"style": "v2"</pre>
                         <dt>networkTimeout</dt>
                         <dd>各类网络请求的超时时间，单位均为毫秒</dd>
                         <dt>subpackages</dt>
                         <dd>分包；加快加载；减少耦合；更多细节，请访问 <a
-                                href="https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages/independent.html"
-                                class="link">subpackages</a>
+                                href="https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages/independent.html">subpackages</a>
                         </dd>
                         <dt>lazyCodeLoading</dt>
                         <dd>懒加载模块</dd>
-                        <dd class="code">
+                        <dd>
                             <pre>"lazyCodeLoading": "requiredComponents"</pre>
                         </dd>
                     </dl>
                 </details>
                 <details class="inner">
                     <summary>app.wxss - 初始化样式；全局样式</summary>
-                    <pre class="code">
+                    <pre>
 @import '/utils/css/reset.wxss';
 @import '../../utils/transfonter.org-20240229-142749/stylesheet.wxss';
 
@@ -264,13 +258,13 @@ button {
             </details>
         </dd>
         <dt>项目提交</dt>
-        <dd class="number">
+        <dd class="sn">
             <div>上传</div>
             <div>审核：比较烦。比较烦。。比较烦。。。</div>
             <div>发布</div>
         </dd>
         <dt>项目版本</dt>
-        <dd class="number">
+        <dd class="sn">
             <div>开发版本</div>
             <div>审核版本</div>
             <div>发布版本</div>
@@ -281,6 +275,7 @@ button {
         <dd>统计小程序的使用情况</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

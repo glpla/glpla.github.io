@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>页面导航 Navigator</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
@@ -30,10 +27,10 @@
     <dl>
         <dd>使用导航组件&lt;navigator&gt;导航，类似HTML的 &lt;a&gt;</dd>
         <dd>导航组件的使用都有对应的API</dd>
-        <dd>更多属性，请访问官方文档 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html"
-                class="link">navigator</a></dd>
+        <dd>更多属性，请访问官方文档 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html">navigator</a></dd>
         <dd>
-            <table class="tbl-sn">
+            <table>
                 <caption>导航组件</caption>
                 <tr>
                     <th>属性</th>
@@ -71,26 +68,18 @@
         </dd>
         <dt>无参导航</dt>
         <dd>
-            <figure class="code">
-                <figcaption>跳转到普通页面 - 全部默认</figcaption>
-                <pre>
+            <p>跳转到普通页面 - 全部默认</p>
+            <pre>
 &lt;navigator url="../test/test"&gt;To Page Test&lt;/navigator&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>跳转到外部小程序 - 指定app-id和target</figcaption>
-                <pre>
+            <p>跳转到外部小程序 - 指定app-id和target</p>
+            <pre>
 &lt;navigator app-id="wx91d27dbf599dff74" target="miniProgram"&gt;To JD&lt;/navigator&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>跳转到标签页 - 指定open-type</figcaption>
-                <pre>
+            <p>跳转到标签页 - 指定open-type</p>
+            <pre>
 &lt;navigator url="../photo/photo" open-type="switchTab"&gt;To Tab Photo &lt;/navigator&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>后退1页 - 省略delta</figcaption>
-                <pre>
+            <p>后退1页 - 省略delta</p>
+            <pre>
 &lt;navigator open-type="navigate"&gt;Back&lt;/navigator&gt;</pre>
-            </figure>
         </dd>
         <dt>带参导航</dt>
         <dd>在路径url后面以值对key-value的形式拼接参数</dd>
@@ -98,23 +87,17 @@
         <dd>多个参数以&分隔</dd>
         <dd>传递的参数在目标页的生命周期函数onLoad中通过形参option获取</dd>
         <dd>
-            <figure class="code">
-                <figcaption>拼接参数 - url?name=value&...</figcaption>
-                <pre>
+            <p>拼接参数 - url?name=value&...</p>
+            <pre>
 &lt;navigator url="../test/test?name=gl"&gt;To Page Test&lt;/navigator&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>拼接参数 - 使用数据绑定</figcaption>
-                <pre>
+            <p>拼接参数 - 使用数据绑定</p>
+            <pre>
 &lt;navigator url="../test/test?name={{uname}}"&gt;To Page Test&lt;/navigator&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>目标页获取参数</figcaption>
-                <pre>
+            <p>目标页获取参数</p>
+            <pre>
 onLoad(option) {
     console.log(option);
 }</pre>
-            </figure>
         </dd>
         <dd class="tips">
             <div>请尽量使用调试器的"预览"体验完整功能</div>
@@ -134,23 +117,20 @@ onLoad(option) {
         <dt>wx.switchTab(Object object)</dt>
         <dd>跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面</dd>
         <dd>
-            <figure class="code">
-                <figcaption>跳转到标签页 - 路径支持不是很好</figcaption>
-                <pre>
+            <p>跳转到标签页 - 路径支持不是很好</p>
+            <pre>
 gotoCart(){
     wx.switchTab({
         url:'/pages/photo/photo'
         //url:'../photo/photo'
     })
 }</pre>
-            </figure>
         </dd>
         <dt>wx.navigateTo(Object object)</dt>
         <dd>保留当前页面，跳转到应用内的某个普通页面。不能跳到 tabbar 页面</dd>
         <dd>
-            <figure class="code">
-                <figcaption>跳转到普通页 - 路径支持不是很好</figcaption>
-                <pre>
+            <p>跳转到普通页 - 路径支持不是很好</p>
+            <pre>
 gotoTest(){
     wx.navigateTo({
         url:'../test/test',
@@ -165,37 +145,31 @@ gotoTest(){
         }
     })
 }</pre>
-            </figure>
         </dd>
         <dt>wx.navigateBack(Object object)</dt>
         <dd>关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages 获取当前的页面栈，决定需要返回几层</dd>
         <dd>需要指定返回的页面数delta；如果 delta 大于现有页面数，则返回到首页</dd>
         <dd>
-            <figure class="code">
-                <figcaption>返回上一页</figcaption>
-                <pre>
+            <p>返回上一页</p>
+            <pre>
 backToHome(){
     wx.navigateBack({
         delta:1
     })
 }</pre>
-            </figure>
         </dd>
         <dt>带参导航</dt>
         <dd>同声明式导航一样，在url后面拼接参数传递，并在目标页的onLoad中获取</dd>
         <dd>
-            <figure class="code">
-                <figcaption>拼接参数</figcaption>
-                <pre>
+            <p>拼接参数</p>
+            <pre>
 gotoTest(){
     wx.navigateTo({
         url:'../test/test?name=gl&age=18'
     })
 }</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>目标页获取参数</figcaption>
-                <pre>
+            <p>目标页获取参数</p>
+            <pre>
 onLoad(option: any) {
     console.log(option);
 }</pre>
@@ -207,25 +181,20 @@ onLoad(option: any) {
         <dt>内容</dt>
         <dd>分别使用声明式导航和编程式导航，完成个人中心页到各个模块的导航</dd>
         <dd>相关API，请访问 <a
-                href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarTitle.html"
-                class="link">setNavigationBarTitle()</a>、<a
-                href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarColor.html"
-                class="link">wx.setNavigationBarColor()</a>
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarTitle.html">setNavigationBarTitle()</a>、<a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarColor.html">wx.setNavigationBarColor()</a>
         </dd>
         <dd>1. 声明式导航</dd>
         <dd>使用&lt;navigator&gt;，修改个人中心静态页面，采用列表渲染定制导航；根据不同的导航项，动态设置目标页的导航标题 </dd>
         <dd>该案例也适合客户、产品详情页，如：使用一个页面展示不同的商品内容</dd>
         <dd>
-            <figure class="code">
-                <figcaption>个人中心页 wxml - 导航节点示例，其它略</figcaption>
-                <pre>
+            <p>个人中心页 wxml - 导航节点示例，其它略</p>
+            <pre>
 &lt;navigator url="../target/target?title=favorite&bgc=#889900" class="item"&gt;
     &lt;text class="iconfont icon-like icon"&gt;&lt;/text&gt;
 &lt;/navigator&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>目标页 js - 获取参数，设置标题和背景颜色</figcaption>
-                <pre>
+            <p>目标页 js - 获取参数，设置标题和背景颜色</p>
+            <pre>
 Page({
     onLoad(options){
         wx.setNavigationBarTitle({
@@ -237,36 +206,30 @@ Page({
         })
     }
 })</pre>
-            </figure>
         </dd>
         <dd>2. 编程式导航</dd>
         <dd>使用普通组件，绑定单击事件，在事件处理函数中使用导航API</dd>
         <dd>
-            <figure class="code">
-                <figcaption>个人中心页 wxml - 绑定事件</figcaption>
-                <pre>
+            <p>个人中心页 wxml - 绑定事件</p>
+            <pre>
 &lt;view bind:tap="toTarget" data-bgc="#908" data-title="message" class="item"&gt;
     &lt;text class="iconfont icon-clipboard icon"&gt;&lt;/text&gt;
 &lt;/view&gt;
                 </pre>
-            </figure>
-            <figure class="code">
-                <figcaption>个人中心页 js- 事件处理函数</figcaption>
-                <pre>
+            <p>个人中心页 js- 事件处理函数</p>
+            <pre>
 toTarget(e){
     let para=e.currentTarget.dataset
     wx.navigateTo({
         url: '../target/target?title='+para.title+'&bgc='+para.bgc,
     })
 }</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>目标页 js- 同上</figcaption>
-                <pre>...</pre>
-            </figure>
+            <p>目标页 js- 同上</p>
+            <pre>...</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

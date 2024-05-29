@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>页面事件 PageEvent</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
@@ -24,11 +21,11 @@
         <dd>部分逻辑初始化</dd>
         <dd>真机下不能自动返回，需要显式的调用wx.stopPullDownRefresh(Object object)</dd>
         <dd>需要在配置文件中开启</dd>
-        <dd class="code">
+        <dd>
             <pre>"enablePullDownRefresh": true</pre>
         </dd>
         <dd>在Page顶级top-level中使用</dd>
-        <dd class="code">
+        <dd>
             <pre>
 onPullDownRefresh() {
     //
@@ -39,10 +36,9 @@ onPullDownRefresh() {
         <dd>每次触底都会触发 - 节流、懒加载</dd>
         <dd>每次拉取的新数据，都叠加到之前的数据上</dd>
         <dd>拉取完毕后，应停止</dd>
-        <dd>更多信息，请查看 <a href="../web/js/lazyLoad.html" class="link">lazyLoad</a>、<a href="../web/js/scroll.html"
-                class="link">scroll滚动加载</a></dd>
+        <dd>更多信息，请查看 <a href="../web/js/lazyLoad.html">lazyLoad</a>、<a href="../web/js/scroll.html">scroll滚动加载</a></dd>
         <dd>在Page顶级top-level中使用</dd>
-        <dd class="code">
+        <dd>
             <pre>
 onReachBottom() {
     //
@@ -50,7 +46,7 @@ onReachBottom() {
         </dd>
         <dt>分享|转发 onShareAppMessage</dt>
         <dd>在Page顶级top-level中使用</dd>
-        <dd class="code">
+        <dd>
             <pre>
 onShareAppMessage() {
     //
@@ -63,7 +59,7 @@ onShareAppMessage() {
         <dd>触底加载和下拉刷新都涉及到数据拉取；但是：下拉刷新需要手动停止刷新，而触底加载不需要</dd>
         <dt>方案1 Solution</dt>
         <dd>使用标记flag：true为下拉刷新；false为触底加载；在下拉刷新中，传入true；在触底加载中，传入false；如果是下拉刷新，就执行停止下拉刷新效果</dd>
-        <dd class="code">
+        <dd>
             <pre>
 _load(flag) {
     wx.request({
@@ -92,25 +88,19 @@ _load(flag) {
         <dd>使用函数作为参数决定是否要显式停止刷新；传入函数，则执行；否则不执行</dd>
         <dd>本质上，和方案1并没有区别</dd>
         <dd>
-            <figure class="code">
-                <figcaption>函数声明 - 根据cb的有无决定是否执行特定操作</figcaption>
-                <pre>
+            <p>函数声明 - 根据cb的有无决定是否执行特定操作</p>
+            <pre>
 _load(cb) {
     //其他逻辑
     cb&cb()
 }</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>函数执行 - 无形参cb，正常执行</figcaption>
-                <pre>this._load()</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>函数执行 - 有形参cb，执行特定操作</figcaption>
-                <pre>
+            <p>函数执行 - 无形参cb，正常执行</p>
+            <pre>this._load()</pre>
+            <p>函数执行 - 有形参cb，执行特定操作</p>
+            <pre>
 this._load(()=>{
     wx.stopPullDownRefresh()  
 })</pre>
-            </figure>
         </dd>
         <dt>焦点2 Focus</dt>
         <dd>不管是下拉刷新还是触底加载，在当前加载没有完成之前，不应该再次触发</dd>
@@ -119,7 +109,7 @@ this._load(()=>{
         <dd>加载完毕时设置节流阀为false</dd>
         <dd>每次加载时，先判断节流阀是否为false；为false则加载；否则返回</dd>
         <dd>修改加载函数 - 增加静态数据isLoading；在下拉刷新和触底加载中，判断是否为真；为真返回；为假才加载</dd>
-        <dd class="code">
+        <dd>
             <pre>
 _load(flag) {
     //开始加载时，为真
@@ -150,6 +140,7 @@ _load(flag) {
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

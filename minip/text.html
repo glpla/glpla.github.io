@@ -6,10 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>文本组件 text</title>
-    <link rel="stylesheet" href="../css/reset2024.css">
-    <link rel="stylesheet" href="../css/common2024.css">
-    <link rel="stylesheet" href="../css/code.css">
-    <link rel="stylesheet" href="../css/sn.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
@@ -23,12 +20,11 @@
         <dd>展示文字；相当于&lt;span&gt;</dd>
         <dd>只能嵌套使用 text 组件</dd>
         <dd>不支持文本缩进、变换等</dd>
-        <dd>小程序支持的14种 <a href="https://blog.csdn.net/include_IT_dog/article/details/98382276" class="link">字体</a></dd>
-        <dd>更多信息，请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/component/text.html"
-                class="link">微信官方文档</a>
+        <dd>小程序支持的14种 <a href="https://blog.csdn.net/include_IT_dog/article/details/98382276">字体</a></dd>
+        <dd>更多信息，请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/component/text.html">微信官方文档</a>
         </dd>
         <dd>
-            <table class="tbl-sn">
+            <table>
                 <caption>通用属性</caption>
                 <tr>
                     <th>属性</th>
@@ -39,7 +35,7 @@
                     <td>布尔；默认false；文本是否可选；<br>长按复制；仅限文本组件</td>
                 </tr>
             </table>
-            <table class="tbl-sn">
+            <table>
                 <caption>Skyline 特有属性</caption>
                 <tr>
                     <th>属性</th>
@@ -54,7 +50,7 @@
                     <td>数字；限制文本最大行数</td>
                 </tr>
             </table>
-            <table class="tbl-sn">
+            <table>
                 <caption>WebView 特有属性</caption>
                 <tr>
                     <th>属性</th>
@@ -72,10 +68,10 @@
             </table>
         </dd>
         <dd class="example-sn">实体的使用 - 版权信息 - WebView模式</dd>
-        <dd class="code">&lt;text&gt;all copyright reserved © 2024&lt;/text&gt;</dd>
+        <dd>&lt;text&gt;all copyright reserved © 2024&lt;/text&gt;</dd>
         <dd class="example-sn">单行文字打点 - WebView模式</dd>
         <dd>除了传统的三件套外，直接父级容器也要设置溢出隐藏</dd>
-        <dd class="code">
+        <dd>
             <pre>
 .wrap{
     overflow: hidden;
@@ -89,62 +85,52 @@
         <dd>
             <figure class="img-sn">
                 <img src="./imgs/text0.png" alt="">
-                <figcaption>单行文字打点</figcaption>
+                <p>单行文字打点</p>
             </figure>
         </dd>
         <dd class="example-sn">多行文字打点 - Skyline模式</dd>
-        <dd class="code">&lt;text overflow='ellipsis' max-lines='5'&gt;lorem100...&lt;/text&gt;</dd>
+        <dd>&lt;text overflow='ellipsis' max-lines='5'&gt;lorem100...&lt;/text&gt;</dd>
         <dd class="example-sn">版权信息 - Skyline模式</dd>
-        <dd class="code">&lt;text&gt;all copyright reserved &amp;commat; 2024&lt;/text&gt;</dd>
+        <dd>&lt;text&gt;all copyright reserved &amp;commat; 2024&lt;/text&gt;</dd>
     </dl>
     <div class="chap">富文本 rich-text</div>
     <dl>
         <dd>原生标签仅支持少量HTML5属性</dd>
-        <dd>更多支持，请使用第三方插件WxParse；基本使用请参照 <a href="https://juejin.cn/post/6844903913431253005"
-                class="link">微信小程序之富文本解析</a></dd>
+        <dd>更多支持，请使用第三方插件WxParse；基本使用请参照 <a href="https://juejin.cn/post/6844903913431253005">微信小程序之富文本解析</a></dd>
         <dt>基本步骤</dt>
-        <dd>下载 <a href="https://gitcode.com/icindy/wxparse/overview" class="link">WxParse</a></dd>
+        <dd>下载 <a href="https://gitcode.com/icindy/wxparse/overview">WxParse</a></dd>
         <dd>拷贝WxParse文件夹至小程序项目中并引入；为了减少提交，可以删除其中的emojis表情文件夹</dd>
         <dd>
-            <figure class="code">
-                <figcaption>wxml</figcaption>
-                <pre>
+            <pre>
 &lt;import src="../../utils/wxParse/wxParse.wxml"/&gt;
 &lt;template is="wxParse" data="{{wxParseData:article.nodes}}"/&gt;</pre>
-            </figure>
-            <figure class="code">
-                <figcaption>wxss</figcaption>
-                <pre>
+            <pre>
 @import "../../utils/wxParse/wxParse.wxss";
                 </pre>
-            </figure>
         </dd>
         <dd>
-            <figure class="code">
-                <figcaption>语法1 - 局部使用</figcaption>
-                <pre>
+            <p>语法1 - 局部使用</p>
+            <pre>
 onLoad(option) {
     let WxParse = require('../../utils/wxParse/wxParse.js')
     let article = '&lt;div&gt;我是HTML代码&lt;/div&gt;'
     let that = this;
     WxParse.wxParse('article', 'html', article, that, 5);
 }</pre>
-            </figure>
         </dd>
         <dd>
-            <figure class="code">
-                <figcaption>语法2 - 全局使用</figcaption>
-                <pre>
+            <p>语法2 - 全局使用</p>
+            <pre>
 WxParse : require('../../utils/wxParse/wxParse.js'),
 article : '&lt;div&gt;我是HTML代码&lt;/div&gt;',
 onLoad(option) {
     let that = this;
     this.WxParse.wxParse('article', 'html', this.article, that, 5);
 }</pre>
-            </figure>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

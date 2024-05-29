@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>事件 Evetns</title>
-  <link rel="stylesheet" href="../css/reset2024.css">
-  <link rel="stylesheet" href="../css/common2024.css">
-  <link rel="stylesheet" href="../css/code.css">
-  <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
 </head>
 
@@ -24,11 +21,11 @@
     <dd>事件绑定在组件上；当达到触发事件，就会执行逻辑层中对应的事件处理函数</dd>
     <dd>绑定事件使用 bind: 语法</dd>
     <dd>- 在结构中为节点元素绑定事件并指定事件处理函数</dd>
-    <dd class="code">
+    <dd>
       <pre>&lt;view class="title" bind:tap="test"&gt;best wishes&lt;/view&gt;</pre>
     </dd>
     <dd>- 在页面逻辑顶层|data同级，声明事件处理函数；可以不使用关键字function；统一风格即可；建议和小程序示例代码保持一致</dd>
-    <dd class="code">
+    <dd>
       <pre>
 test(e){
   console.log(e);
@@ -45,7 +42,7 @@ test: (e)=>{
     <dd>常见事件有：单击事件tap和触摸事件touch</dd>
     <dd>此外，每个组件还有自己的独有的事件，如表单的提交事件submit和重置事件reset、滑动组件的scroll等等，详情请查阅官方文档</dd>
     <dd>
-      <table class="tbl-sn">
+      <table>
         <caption>常用事件</caption>
         <tr>
           <th>分类</th>
@@ -77,8 +74,7 @@ test: (e)=>{
     <dd>target：事件对象目标；<span class="warn">绑定</span> 事件的组件</dd>
     <dd>currentTarget：当前事件对象目标，<span class="warn">响应</span>事件的组件</dd>
     <dd>touches：一个数组，每个元素为一个 Touch 对象，表示当前停留在屏幕上的触摸点</dd>
-    <dd>更多事件对象，请访问<a href="../vue/events.html" class="link">Vue-events</a>、<a href="../web/js/event.html"
-        class="link">html-event</a></dd>
+    <dd>更多事件对象，请访问<a href="../vue/events.html">Vue-events</a>、<a href="../web/js/event.html">html-event</a></dd>
     <dd class="tips">
       默认情况下，事件是冒泡机制。当节点元素触发一个事件后，该事件会逐步冒泡至它的父级及父级的父级直至顶级；所以一个事件可以由不同的节点元素响应，这就是currentTarget；而最开始触发事件的是target</dd>
     <dt>事件传参</dt>
@@ -87,14 +83,14 @@ test: (e)=>{
     <dd>多数据可以使用解构赋值 - 要求使用同名变量</dd>
     <dd class="example-sn">利用自定义数据传参，查看事件对象目标</dd>
     <dd>结构 - 一个大矩形包含一个小矩形；分别绑定事件、指定事件处理函数并自定义数据；样式略</dd>
-    <dd class="code">
+    <dd>
       <pre>
 &lt;view class="outer" bind:tap="outerTap" data-ind="outer"&gt;
   &lt;view class="inner" bind:tap="innerTap" data-ind="inner"&gt;&lt;/view&gt;
 &lt;/view&gt;</pre>
     </dd>
     <dd>逻辑 - 分别显示事件对象目标和当前事件对象目标</dd>
-    <dd class="code">
+    <dd>
       <pre>
 outerTap(e) {
   console.log('outer');
@@ -124,13 +120,8 @@ innerTap(e) {
     <dd class="example-sn">点击随机更改背景颜色</dd>
     <dd>思路：使用内联样式绑定数据color；获取3个随机数并使用模板语法更新颜色</dd>
     <dd>
-      <figure class="code">
-        <figcaption>wxml</figcaption>
-        <pre>&lt;view style="background-color: {{color}};" bind:tap="randColor"&gt;random color&lt;/view&gt;</pre>
-      </figure>
-      <figure class="code">
-        <figcaption>js</figcaption>
-        <pre>
+      <pre>&lt;view style="background-color: {{color}};" bind:tap="randColor"&gt;random color&lt;/view&gt;</pre>
+      <pre>
 data: {
   color: '#f40'
 },
@@ -142,7 +133,6 @@ randColor(){
     color:`rgb(${rand0},${rand1},${rand2})`
   })
 }</pre>
-      </figure>
     </dd>
     <dd class="question">
       <div>拓展：如何获取随机透明色的颜色</div>
@@ -150,6 +140,7 @@ randColor(){
     </dd>
   </dl>
   <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

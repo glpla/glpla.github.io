@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>样式 WXSS</title>
-  <link rel="stylesheet" href="../css/reset2024.css">
-  <link rel="stylesheet" href="../css/common2024.css">
-  <link rel="stylesheet" href="../css/code.css">
-  <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
 </head>
 
@@ -23,8 +20,8 @@
     <dd>区分全局样式和局部|页面样式</dd>
     <dd>- app.wxss定义的样式是全局样式，作用于所有页面</dd>
     <dd>- 每个页面的.wxss定义的样式是局部|页面样式，只作用于当前页面</dd>
-    <dd>微信小程序默认使用弹性盒子flex布局，也可以使用网格grid布局；更多布局请访问 <a href="../web/flex.html" class="link">Flex</a>、<a
-        href="../web/grid.html" class="link">Grid</a>
+    <dd>微信小程序默认使用弹性盒子flex布局，也可以使用网格grid布局；更多布局请访问 <a href="../web/flex.html">Flex</a>、<a
+        href="../web/grid.html">Grid</a>
     </dd>
     <dd>支持：</dd>
     <dd>- 支持内联样式 style</dd>
@@ -42,9 +39,9 @@
       including tag name selectors,
       ID
       selectors, and attribute selectors. <span class="warn">WHY???</span></dd>
-    <dd>常用选择器如下表；更多CSS选择器使用，请查看 <a href="../web/selector.html" class="link">selector</a></dd>
+    <dd>常用选择器如下表；更多CSS选择器使用，请查看 <a href="../web/selector.html">selector</a></dd>
     <dd>
-      <table class="tbl-sn">
+      <table>
         <caption>选择器</caption>
         <tr>
           <th>分类</th>
@@ -88,13 +85,11 @@
     <dt>内联样式</dt>
     <dd>除了使用静态内联样式，还可以和数据绑定，采用动态内联样式</dd>
     <dd>样式的属性值和数据绑定 - 想绑哪个属性就绑哪个属性</dd>
-    <dd class="code">
+    <dd>
       <pre>
 &lt;text style="color: {{color}};"&gt;hi,there.&lt;/text&gt;
 &lt;text style="background-color: {{color}};"&gt;hi,there.&lt;/text&gt;
 &lt;text style="backgroundColor: {{color}};"&gt;hi,there.&lt;/text&gt;//居然不识别。。。</pre>
-    </dd>
-    <dd class="code">
       <pre>
 data: {
   color:'#f40'
@@ -111,13 +106,13 @@ data: {
     <dd>除了使用静态类，还可以和数据绑定，采用动态类</dd>
     <dd>动态类，使用三元表达式；真，使用bold样式；否则不使用或者指定其它样式</dd>
     <dd>类和内联样式可以共同使用；bold和normal是说声明好的样式类</dd>
-    <dd class="code">
+    <dd>
       <pre>
 &lt;view class="{{isActive?'bold':''}}"&gt;hi, there.&lt;/view&gt;
 &lt;view class="title {{isActive?'bold':'normal'}}"&gt;hi, there.&lt;/view&gt;
 &lt;view class="box" style="background-image: url({{src}});"&gt;hi, there.&lt;/view&gt;</pre>
     </dd>
-    <dd class="code">
+    <dd>
       <pre>
 data: {
   src:'../../images/avatar.png',
@@ -128,16 +123,16 @@ data: {
     <dd>便于样式复用；如初始化样式库、模块样式库等等</dd>
     <dd>仅支持相对路径；以;结束</dd>
     <dd class="example-sn">导入初始化样式表</dd>
-    <dd class="number">
+    <dd class="sn">
       <div>在样式目录下新建一个样式文件，命名为reset.wxss</div>
       <div>初始化常用元素，如边框、轮廓、颜色、字体大小等；可以通过变量定制主题色--themeColor；使用主题颜色：var(--themeColor)</div>
       <div>在app.wxss中引入，全局使用</div>
-      <pre class="code">
+      <pre>
 @import './utils/css/reset.wxss';</pre>
       </figure>
     </dd>
     <dd class="tips">有些元素的初始化样式仍然会被用户代理覆盖，请使用类的方式初始化，甚至使用!important提权</dd>
-    <dd class="code">
+    <dd>
       <pre>
 page{
   --themeColor:#eb4450;
@@ -154,9 +149,9 @@ button{
   border-radius: 0;
 }</pre>
     </dd>
-    <dd class="example-sn" id="iconfont">使用 <a href="../web/framework/iconfont.html" class="link">阿里字体图标</a></dd>
+    <dd class="example-sn" id="iconfont">使用 <a href="../web/framework/iconfont.html">阿里字体图标</a></dd>
     <dd>可以根据需要修改iconfont.wxss的样式，如字体大小、单位、颜色等等</dd>
-    <dd>为避免频繁使用基类iconfont，可封装为全局组件；详情请参考 <a href="./components.html" class="link">自定义组件</a></dd>
+    <dd>为避免频繁使用基类iconfont，可封装为全局组件；详情请参考 <a href="./components.html">自定义组件</a></dd>
     <dt>单位</dt>
     <dd>1. rpx</dd>
     <dd>物理像素 - 实际的像素点</dd>
@@ -177,6 +172,7 @@ button{
     <dd>使用16进制颜色，如#ff4400；支持简写，如#f40；支持透明色，如#f406；建议使用rgba()</dd>
   </dl>
   <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

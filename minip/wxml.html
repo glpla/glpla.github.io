@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>结构 WXML</title>
-  <link rel="stylesheet" href="../css/reset2024.css">
-  <link rel="stylesheet" href="../css/common2024.css">
-  <link rel="stylesheet" href="../css/code.css">
-  <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
 </head>
 
@@ -23,10 +20,10 @@
     <dt>常用组件</dt>
     <dd>小程序的结构页面由各种组件构成：系统组件和自定义组件</dd>
     <dd>避免使用HTML标签</dd>
-    <dd>更多组件，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/" class="link">component</a>
+    <dd>更多组件，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/">component</a>
     </dd>
     <dd>
-      <table class="tbl-sn">
+      <table>
         <caption>微信小程序常用组件</caption>
         <tr>
           <th>分类</th>
@@ -67,18 +64,14 @@
     <dd>在wxml中使用{{}}和js中的数据绑定起来；也叫插值表达式</dd>
     <dd>可以进行基本的逻辑运算，如三元表达式、算术运算</dd>
     <dd>
-      <figure class="code">
-        <figcaption>js</figcaption>
-        <pre>
+      <pre>
 data: {
   msg: 'hi, there.'
   src:'../../imgs/demo.jpg',
   age: 18
 }</pre>
-      </figure>
-      <figure class="code">
-        <figcaption>wxml - 绑定内容；绑定属性</figcaption>
-        <pre>
+      <p>wxml - 绑定内容；绑定属性</p>
+      <pre>
 &lt;view&gt; {{msg}} &lt;/view&gt;
 &lt;image src="{{src}}" mode=""/&gt;
 &lt;view&gt; {{age + 2}} &lt;/view&gt;
@@ -91,33 +84,25 @@ data: {
     <dd>语法2：wx:if wx:else</dd>
     <dd>语法3：wx:if wx:elif wx:else</dd>
     <dd>
-      <figure class="code">
-        <figcaption>js</figcaption>
-        <pre>
+      <pre>
 data: {
   age: 18,
   isShow: true
 }</pre>
-      </figure>
-      <figure class="code">
-        <figcaption>单分支判断</figcaption>
-        <pre>&lt;view wx:if = '{{ age >= 18 }}'&gt; Welcome &lt;/view&gt;</pre>
+      <p>单分支判断</p>
+      <pre>&lt;view wx:if = '{{ age >= 18 }}'&gt; Welcome &lt;/view&gt;</pre>
       </figure>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>多分支判断</figcaption>
-        <pre>
+      <p>多分支判断</p>
+      <pre>
 &lt;view wx:if = '{{ age >= 18 }}'&gt; Welcome &lt;/view&gt;
 &lt;view wx:else&gt; Bye &lt;/view&gt;
 </pre>
-      </figure>
-      <figure class="code">
-        <figcaption>单分支判断还可以使用hidden属性实现条件渲染；为true时，隐藏；为false时，显示</figcaption>
-        <pre>
+      <p>单分支判断还可以使用hidden属性实现条件渲染；为true时，隐藏；为false时，显示</p>
+      <pre>
 &lt;view hidden="{{age >= 18}}"&gt;88&lt;/view&gt;
 &lt;view hidden="{{isShow}}"&gt;88&lt;/view&gt;</pre>
-      </figure>
     </dd>
     <dd class="tips">
       <div>凡是用到布尔变量的地方，都可以使用比较表达式</div>
@@ -135,16 +120,12 @@ data: {
     <dd>普通列表没有id，可以使用 index 作为key；或者为数据创建时间戳作为id - now()</dd>
     <dd>1. 静态数组 - 指定数字</dd>
     <dd>
-      <figure class="code">
-        <figcaption>循环次数：从0到9-1，8次</figcaption>
-        <pre>&lt;view wx:for="{{9}}" wx:key="index"&gt; {{item}} &lt;/view&gt;</pre>
-      </figure>
+      <p>循环次数：从0到9-1，8次</p>
+      <pre>&lt;view wx:for="{{9}}" wx:key="index"&gt; {{item}} &lt;/view&gt;</pre>
     </dd>
     <dd>2. 动态数组 - 根据数组实际长度|个数循环</dd>
     <dd>
-      <figure class="code">
-        <figcaption>js</figcaption>
-        <pre>
+      <pre>
 data: {
   arr: [1, 2, 3, 4, 5],
   obj:[
@@ -153,36 +134,29 @@ data: {
     {id:2, name:'nj', year:2008}
   ]
 }</pre>
-      </figure>
-      <figure class="code">
-        <figcaption>普通数组 - 循环5次</figcaption>
-        <pre>&lt;view wx:for="{{arr}}" wx:key="item"&gt; {{item}} &lt;/view&gt;</pre>
-      </figure>
-      <figure class="code">
-        <figcaption>对象数组 - 循环3次</figcaption>
-        <pre>&lt;view wx:for="{{obj}}" wx:key="id"&gt; {{item.name}}- {{item.year}} &lt;/view&gt;</pre>
-      </figure>
+      <p>普通数组 - 循环5次</p>
+      <pre>&lt;view wx:for="{{arr}}" wx:key="item"&gt; {{item}} &lt;/view&gt;</pre>
+      <p>对象数组 - 循环3次</p>
+      <pre>&lt;view wx:for="{{obj}}" wx:key="id"&gt; {{item.name}}- {{item.year}} &lt;/view&gt;</pre>
     </dd>
     <dd class="example-sn">多重循环 - 9*9乘法表</dd>
     <dd>为了更加直观的观察效果，配置页面为横板；样式自定</dd>
-    <dd class="code">
+    <dd>
       "pageOrientation": "landscape"
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>多重循环 - 9*9乘法表</figcaption>
-        <pre>
+      <p>多重循环 - 9*9乘法表</p>
+      <pre>
 &lt;view  class="item" wx:for="{{arr}}" wx:key="index" wx:for-item='i'&gt;
   &lt;text wx:for="{{i+1}}" wx:key="index" wx:for-item='j'&gt;
     &lt;text class="item" wx:if="{{j&gt;0}}"&gt;{{j}} * {{i}} = {{i*j}} &lt;/text&gt;
   &lt;/text&gt;
 &lt;/view&gt;</pre>
-      </figure>
     </dd>
     <dd>
       <figure class="img-sn">
         <img src="./imgs/99.png" alt="">
-        <figcaption>9*9乘法表</figcaption>
+        <p>9*9乘法表</p>
       </figure>
     </dd>
     <dt>模板</dt>
@@ -192,21 +166,16 @@ data: {
     <dd>index相当于key；item相当于value</dd>
     <dd>也可以自定义为key-value形式</dd>
     <dd>
-      <figure class="code">
-        <figcaption>js</figcaption>
-        <pre>obj:{id:100,name:'glpla',gender:'male'}</pre>
-      </figure>
-      <figure class="code">
-        <figcaption>wxml</figcaption>
-        <pre>
+      <pre>obj:{id:100,name:'glpla',gender:'male'}</pre>
+      <pre>
 &lt;block wx:for="{{obj}}" wx:key="index"&gt;
   &lt;view&gt;{{index}}&lt;/view&gt;
   &lt;view&gt;{{item}}&lt;/view&gt;
 &lt;/block&gt;</pre>
-      </figure>
     </dd>
   </dl>
   <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>
