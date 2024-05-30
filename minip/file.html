@@ -23,7 +23,7 @@
         <dt>wx.chooseMedia(Object object)</dt>
         <dd>拍摄或从手机相册中选择图片或视频</dd>
         <dd>可以指定图片的个数count、类型mediaType、来源sourceType、压缩sizeType等；一般保持默认即可</dd>
-        <dd>详细信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/media/video/wx.chooseMedia.html">官方
+        <dd>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/media/video/wx.chooseMedia.html">官方文档
                 - chooseMedia</a>
         </dd>
         <dd class="example-sn">定制头像</dd>
@@ -39,16 +39,16 @@ wx.chooseMedia({
             img:res.tempFiles[0].tempFilePath
         })
     },
-    fail: err => {
-        console.log(err);
-    },
-    complete: () => console.log('choose done loggin')
+    fail: err => console.log(err),
+    complete: () => console.log('choose media done')
 })</pre>
         </dd>
         <dt>wx.uploadFile(Object object)</dt>
         <dd>文件上传 - 将本地资源上传到服务器</dd>
         <dd>客户端发起一个 POST 请求，请求头 header 要指定 content-type 为 multipart/form-data</dd>
-        <dd>详细信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/network/upload/wx.uploadFile.html">官方
+        <dd> filePath就是要上传的图片路径，可以从 wx.chooseMedia() 中获取</dd>
+        <dd>更多信息，请访问 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/network/upload/wx.uploadFile.html">官方文档
                 - uploadFile</a></dd>
         <dd>
             <pre>
@@ -72,17 +72,17 @@ wx.uploadFile({
         </dd>
         <dt>wx.downloadFile(Object object)</dt>
         <dd>文件下载 - 下载文件资源到本地</dd>
-        <dd>返回一个临时地址，并不直接下载到本地，而是由用户通过预览的方式，确认进一步操作</dd>
+        <dd>返回一个临时地址，并<span class="warn">不是</span>直接下载到本地，而是由用户通过预览的方式，确认进一步操作</dd>
         <dd>客户端直接发起一个 HTTPS GET 请求，返回文件的本地临时路径 (本地路径)，单次下载允许的最大文件为 200MB</dd>
-        <dd>详细信息，请访问 <a
-                href="https://developers.weixin.qq.com/miniprogram/dev/api/network/download/wx.downloadFile.html">官方 -
+        <dd>更多信息，请访问 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/network/download/wx.downloadFile.html">官方文档 -
                 downloadFile</a></dd>
 
         <dt>wx.previewImage(Object object)</dt>
         <dd>在新页面中全屏预览图片</dd>
         <dd>预览的过程中用户可以进行保存图片、发送给朋友等操作</dd>
         <dd>以数组的形式，给出需要预览图片的地址列表</dd>
-        <dd>详细信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.previewImage.html">官方
+        <dd>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/media/image/wx.previewImage.html">官方
                 - previewImage</a></dd>
         <dd>
             <pre>
@@ -90,7 +90,6 @@ wx.previewImage({
     urls: []
 })</pre>
         </dd>
-        <dd class="example-sn">保存头像 - <a href="./case5.html">文件上传和下载</a></dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
     <script src="/utils/custom/star.js"></script>

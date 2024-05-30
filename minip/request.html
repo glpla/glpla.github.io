@@ -13,22 +13,9 @@
 <body>
     <header>
         <h1>网络请求</h1>
-        <span>Request</span>
+        <span>&commat;Request</span>
     </header>
     <dl>
-        <dd>微信小程序使用 wx.request 发起网络请求；还可以使用 <a href="https://www.axios-http.cn/docs/intro">Axios</a>
-        </dd>
-        <dd>请求方式很多，默认是 GET；使用较多的还有 POST；更多信息，请查看官方文档 <a
-                href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html">官方 -
-                wx.request</a></dd>
-        <dd>微信小程序支持 回调函数callback 和 <a
-                href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>
-            两种方式</dd>
-        <dd>受小程序体量限制，数据需要搭建本地资源服务器保存或使用云存储</dd>
-        <dd>本地资源服务器使用，请访问 <a href="../web/framework/node.html">Node.js</a>、<a
-                href="https://www.expressjs.com.cn/">Express</a>、<a href="https://koajs.com/#">Koa</a>、<a
-                href="../node/jsonserver.html">JSON
-                Server</a></dd>
         <dt>开发要求</dt>
         <dd>- 仅支持https请求</dd>
         <dd>- 必须将接口域名（不是IP地址）添加到信任列表|白名单</dd>
@@ -53,9 +40,21 @@
                 <figcaption>查看合法域名</figcaption>
             </figure>
         </dd>
-        <dt>API配置项</dt>
+    </dl>
+    <div class="chap">wx.request</div>
+    <dl>
+        <dd>微信小程序使用 wx.request 发起网络请求；还可以使用 <a href="https://www.axios-http.cn/docs/intro">Axios</a>
+        </dd>
+        <dd>请求方式很多，默认是 GET；使用较多的还有 POST；更多信息，请查看官方文档 <a
+                href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html">官方文档 -
+                wx.request</a></dd>
+        <dd>微信小程序支持 回调函数 callback 和 <a
+                href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>
+            两种方式</dd>
+        <dd>受小程序体量限制，数据需要搭建本地资源服务器保存或使用云存储</dd>
+        <dd>本地资源服务器使用，请访问 <a href="../node/index.html">Node.js</a></dd>
         <dd>
-            <table class="tbl-sn">
+            <table>
                 <caption>常见配置项</caption>
                 <tr>
                     <th>选项</th>
@@ -91,8 +90,9 @@
                 </tr>
             </table>
         </dd>
-        <dd class="example-sn">GET - 获取 <a href="https://glpla.github.io">大树小站</a> 积分榜数据</dd>
-        <dd>
+        <dt>GET</dt>
+        <dd class="sn">
+            <div>获取 <a href="https://glpla.github.io">大树小站</a> 积分榜数据</div>
             <pre>
 wx.request({
     url: 'https://glpla.github.io/utils/data/data2024/rank202402.json',
@@ -106,9 +106,7 @@ wx.request({
         console.log('log done');
     }
 })</pre>
-        </dd>
-        <dd class="example-sn">GET - 获取 <a href="https://glpla.github.io">大树小站</a> 美食列表数据</dd>
-        <dd>
+            <div>获取 <a href="https://glpla.github.io">大树小站</a> 美食列表数据</div>
             <pre>
 wx.request({
     url: 'https://glpla.github.io/utils/data/food.json',
@@ -122,10 +120,8 @@ wx.request({
         console.log('log done');
     }
 })</pre>
-        </dd>
-        <dd class="example-sn">GET - 分页获取数据，数据来自node.js服务器或JSON-Server服务器</dd>
-        <dd>. 使用?和&直接拼接分页参数</dd>
-        <dd>
+            <div>分页获取数据，数据来自node.js服务器或JSON-Server服务器</div>
+            <p>. 使用?和&直接拼接分页参数</p>
             <pre>
 wx.request({
     url: this.data.baseUrl + '/good/page?page=' + this.page + '&pageSize=' + this.pageSize,
@@ -139,9 +135,7 @@ wx.request({
         console.log('get done logging')
     }
 })</pre>
-        </dd>
-        <dd>. 使用data配置项指定分页参数</dd>
-        <dd>
+            <p>. 使用data配置项指定分页参数</p>
             <pre>
 wx.request({
     url: this.data.baseUrl + '/good/page',
@@ -160,7 +154,8 @@ wx.request({
     }
 })</pre>
         </dd>
-        <dd class="example-sn">POST - 数据提交到JSON-Server服务器；应显式的指定方式method和数据data</dd>
+        <dt>POST</dt>
+        <dd>数据提交到服务器；应显式的指定方式method和数据data</dd>
         <dd>案例：留言、问卷、注册</dd>
         <dd>
             <pre>
@@ -189,12 +184,10 @@ wx.request({
     }
 })</pre>
         </dd>
-        <dd>更多网络请求，请查看 <a href="../node/jsonserver.html">JSON-Server</a></dd>
         <dd class="tips">
             <div>如果不确定数据的结构，可以在调试器控制台使用log输出res，一层一层剥离数据，直到拿到需要的数据</div>
             <div>请随时关注并确认网络API接口的变化</div>
             <div>跨域问题只存在于使用浏览器的WEB开发中。小程序的宿主环境是微信客户端，不是浏览器，不存在跨域的问题</div>
-            <div>Ajax的核心是依赖于浏览器的XMLHttpRequest对象；发起Ajax请求只针对于浏览器；小程序中叫发起网络请求</div>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

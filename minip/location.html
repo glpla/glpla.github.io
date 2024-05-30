@@ -13,11 +13,21 @@
 <body>
     <header>
         <h1>位置</h1>
-        <span>Location</span>
+        <span>&commat;Location</span>
+        <span class="iconfont icon-menu ham"></span>
+        <nav class="nav">
+            <a href="" style="--delay:3" class="nav-item">&lt;map&gt;</a>
+            <a href="" style="--delay:2" class="nav-item">getLocation</a>
+            <a href="" style="--delay:1" class="nav-item">openLocation</a>
+            <a href="" style="--delay:0" class="nav-item">chooseLocation</a>
+            <a href="" style="--delay:1" class="nav-item">choosePoi</a>
+            <a href="" style="--delay:2" class="nav-item">chooseAddress</a>
+            <a href="" style="--delay:3" class="nav-item">createMapContext</a>
+        </nav>
     </header>
     <dl>
         <dd class="tips">调试的时候，应结合预览和真机调试共同使用</dd>
-        <dt>&lt;map&gt;</dt>
+        <dt class="nav-cont">&lt;map&gt;</dt>
         <dd>渲染地图</dd>
         <dd>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/map.html">官方文档 - map</a></dd>
         <dd>
@@ -150,7 +160,7 @@
                 </tr>
             </table>
         </dd>
-        <dt>wx.getLocation(Object object)</dt>
+        <dt class="nav-cont">wx.getLocation(Object object)</dt>
         <dd>
             <p>分类：位置接口</p>
             <p>获取当前的地理位置、速度</p>
@@ -171,7 +181,7 @@ wx.getLocation({
     fail: err => console.log('getLocation fail', err)
 })</pre>
         </dd>
-        <dt>wx.openLocation(Object object)</dt>
+        <dt class="nav-cont">wx.openLocation(Object object)</dt>
         <dd>
             <p>分类：位置接口</p>
             <p>使用微信内置地图查看位置，并将指定的地点居中显示；通常用于在用户需要查看某个特定位置的详细地图和周边情况</p>
@@ -181,7 +191,7 @@ wx.getLocation({
                     href="https://developers.weixin.qq.com/miniprogram/dev/api/location/wx.openLocation.html">官方文档 -
                     openLocation</a></p>
         </dd>
-        <dt>wx.chooseLocation(Object object)</dt>
+        <dt class="nav-cont">wx.chooseLocation(Object object)</dt>
         <dd>
             <p>分类：位置接口</p>
             <p>打开地图选择位置</p>
@@ -198,7 +208,7 @@ chooseLoc() {
     })
 }</pre>
         </dd>
-        <dt>wx.choosePoi(Object object)</dt>
+        <dt class="nav-cont">wx.choosePoi(Object object)</dt>
         <dd>
             <p>分类：位置接口</p>
             <p>打开POI列表选择位置</p>
@@ -216,7 +226,7 @@ choosePoi() {
 }</pre>
             <p class="tips">choosePoi:fail 开发者工具暂时不支持此 API 调试，请使用真机进行开发</p>
         </dd>
-        <dt>wx.chooseAddress(Object object)</dt>
+        <dt class="nav-cont">wx.chooseAddress(Object object)</dt>
         <dd>
             <p>分类：开放接口</p>
             <p>获取用户收货地址。调起用户编辑收货地址原生界面，并在编辑完成后返回用户选择的地址</p>
@@ -231,7 +241,7 @@ chooseAddr() {
     })
 }</pre>
         </dd>
-        <dt>wx.createMapContext(string mapId, Object this)</dt>
+        <dt class="nav-cont">wx.createMapContext(string mapId, Object this)</dt>
         <dd>深入控制地图：根据地图组件map的mapId创建其上下文 MapContext 对象，与地图交互</dd>
         <dd>MapContext 通过 <span class="warn">id</span> 跟一个 map 组件绑定，操作对应的 map 组件；常用方法有：</dd>
         <dd class="sn">
@@ -406,6 +416,7 @@ getCallout(e) {
         <dd><a href="https://api.map.baidu.com/mapCard/">百度地图开放平台</a></dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <script src="/utils/custom/ham2024.js"></script>
     <script src="/utils/custom/star.js"></script>
 </body>
 

@@ -27,8 +27,8 @@
     <dl>
         <dd>使用导航组件&lt;navigator&gt;导航，类似HTML的 &lt;a&gt;</dd>
         <dd>导航组件的使用都有对应的API</dd>
-        <dd>更多属性，请访问官方文档 <a
-                href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html">navigator</a></dd>
+        <dd>更多属性，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html">官方文档 -
+                navigator</a></dd>
         <dd>
             <table>
                 <caption>导航组件</caption>
@@ -115,9 +115,8 @@ onLoad(option) {
         <dd>- 失败 fail</dd>
         <dd>- 完成 complete：无论是成功还是失败都会执行这个回调函数</dd>
         <dt>wx.switchTab(Object object)</dt>
-        <dd>跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面</dd>
         <dd>
-            <p>跳转到标签页 - 路径支持不是很好</p>
+            <p>跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面</p>
             <pre>
 gotoCart(){
     wx.switchTab({
@@ -127,9 +126,8 @@ gotoCart(){
 }</pre>
         </dd>
         <dt>wx.navigateTo(Object object)</dt>
-        <dd>保留当前页面，跳转到应用内的某个普通页面。不能跳到 tabbar 页面</dd>
         <dd>
-            <p>跳转到普通页 - 路径支持不是很好</p>
+            <p>保留当前页面，跳转到应用内的某个普通页面；<span class="warn">不能</span>跳到 tabbar 页面</p>
             <pre>
 gotoTest(){
     wx.navigateTo({
@@ -173,21 +171,17 @@ gotoTest(){
 onLoad(option: any) {
     console.log(option);
 }</pre>
-            </figure>
         </dd>
     </dl>
-    <div class="chap">综合案例</div>
     <dl>
-        <dt>内容</dt>
-        <dd>分别使用声明式导航和编程式导航，完成个人中心页到各个模块的导航</dd>
-        <dd>相关API，请访问 <a
+        <dd class="example-sn">综合案例：分别使用声明式导航和编程式导航，完成个人中心页到各个模块的导航；相关API，请访问 <a
                 href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarTitle.html">setNavigationBarTitle()</a>、<a
                 href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarColor.html">wx.setNavigationBarColor()</a>
         </dd>
-        <dd>1. 声明式导航</dd>
-        <dd>使用&lt;navigator&gt;，修改个人中心静态页面，采用列表渲染定制导航；根据不同的导航项，动态设置目标页的导航标题 </dd>
-        <dd>该案例也适合客户、产品详情页，如：使用一个页面展示不同的商品内容</dd>
-        <dd>
+        <dd class="sn">
+            <div>声明式导航</div>
+            <p>使用&lt;navigator&gt;，修改个人中心静态页面，采用列表渲染定制导航；根据不同的导航项，动态设置目标页的导航标题 </p>
+            <p>该案例也适合客户、产品详情页，如：使用一个页面展示不同的商品内容</p>
             <p>个人中心页 wxml - 导航节点示例，其它略</p>
             <pre>
 &lt;navigator url="../target/target?title=favorite&bgc=#889900" class="item"&gt;
@@ -206,10 +200,7 @@ Page({
         })
     }
 })</pre>
-        </dd>
-        <dd>2. 编程式导航</dd>
-        <dd>使用普通组件，绑定单击事件，在事件处理函数中使用导航API</dd>
-        <dd>
+            <div>编程式导航 - 使用普通组件，绑定单击事件，在事件处理函数中使用导航API</div>
             <p>个人中心页 wxml - 绑定事件</p>
             <pre>
 &lt;view bind:tap="toTarget" data-bgc="#908" data-title="message" class="item"&gt;

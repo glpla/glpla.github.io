@@ -13,7 +13,7 @@
 <body>
     <header>
         <h1>双向绑定</h1>
-        <span>model</span>
+        <span>&commat;model</span>
     </header>
     <dl>
         <dd>Two-way binding</dd>
@@ -21,13 +21,16 @@
         <dd>逻辑层也可以影响到视图层</dd>
         <dt class="txt-center">视图层 <i class="iconfont icon-moduanzuoyouzhankai_o"></i> 逻辑层</dt>
         <dd>多用于表单元素</dd>
-        <dd>为 <span class="warn">value</span> 添加model修饰符即可实现双向数据绑定</dd>
+        <dd>为 <span class="warn">value</span> 添加 model 修饰符即可实现双向数据绑定</dd>
         <dd>可以绑定的熟悉有：value、checked、selected等</dd>
         <dd>省略了触发事件，如bindchange或bindinput</dd>
         <dd>只能简单属性绑定 - 单一字段</dd>
         <dd>借助调试器的AppData查看绑定情况</dd>
-        <dt>&lt;input&gt;|text - value</dt>
-        <dd>参考数据</dd>
+    </dl>
+    <div class="chap">值绑定</div>
+    <dl>
+        <dd>绑定的是元素的值 value</dd>
+        <dt>&lt;input&gt;</dt>
         <dd>
             <pre>
 data: {
@@ -37,14 +40,10 @@ data: {
         name:'hi,there.'
     }
 }</pre>
-        </dd>
-        <dd>普通方式实现双向绑定单一属性 msg - 利用事件bindinput修改数据</dd>
-        <dd>
+            <p>普通方式实现双向绑定单一属性 msg - 利用事件bindinput修改数据</p>
             <pre>
-{{msg}}
+&lt;view>{{msg}}&lt;/view&gt;
 &lt;input type="text" value='{{msg}}' bindinput="ipt"/&gt;</pre>
-        </dd>
-        <dd>
             <pre>
 ipt(e) {
     console.log(e.detail.value);
@@ -52,22 +51,14 @@ ipt(e) {
         msg:e.detail.value
     })
 }</pre>
-        </dd>
-        <dd>model方式实现双向绑定 - 简单粗暴；省略了bindinput事件</dd>
-        <dd>
+            <p>model方式实现双向绑定 - 简单粗暴；省略了bindinput事件</p>
             <pre>&lt;input type="text" model:value='{{msg}}' /&gt;</pre>
-        </dd>
-        <dd>双向绑定复合数据 obj.name</dd>
-        <dd>
+            <p>双向绑定复合数据 obj.name</p>
             <pre>&lt;input type="text" model:value='{{obj.name}}' /&gt;</pre>
-        </dd>
-        <dd>失败：仅实现逻辑层到视图层的绑定</dd>
-        <dd>Two-way binding does not support complex data paths currently. This two-way binding is ignored.</dd>
-        <dd>调整：还原为普通事件流bindchange</dd>
-        <dd>
+            <p>失败：仅实现逻辑层到视图层的绑定；Two-way binding does not support complex data paths currently. This two-way binding is
+                ignored.</p>
+            <p>调整：还原为普通事件流bindchange</p>
             <pre>&lt;input type="text" value='{{obj.name}}' bindinput="getName"/&gt;</pre>
-        </dd>
-        <dd>
             <pre>
 getName(e) {
     this.setData({
@@ -75,35 +66,14 @@ getName(e) {
     })
 }</pre>
         </dd>
-        <dt>&lt;textarea&gt; - value</dt>
-        <dd>绑定的是值 value</dd>
-        <pre>&lt;textarea name="udesc" model:value="{{userInfo.udesc}}" /&gt;</pre>
-        <dt>&lt;slider&gt; - value</dt>
-        <dd>绑定的是值 value</dd>
+        <dt>&lt;textarea&gt;</dt>
+        <dt>&lt;picker&gt;</dt>
+        <dt>&lt;slider&gt;</dt>
+        <dt>&lt;swiper&gt;</dt>
         <dd>
-            <pre>&lt;slider min="18" max="24" step="1" show-value model:value="{{age}}"/&gt;</pre>
-        </dd>
-        <dt>&lt;radio&gt;</dt>
-        <dd>绑定的是选中状态 checked</dd>
-        <dd>
-            <pre>
-&lt;radio-group name="ugender"&gt;
-    &lt;radio value="male" color="#ff4400" model:checked="{{user.ugender=='male'}}" /&gt;male
-    &lt;radio value="female" color="#ff4400" model:checked="{{user.ugender=='female'}}"/&gt;female
-&lt;/radio-group&gt;            </pre>
-        </dd>
-        <dt>&lt;switch&gt;</dt>
-        <dd>绑定的是选中状态 checked</dd>
-        <dd>
-            <pre>&lt;switch model:checked="{{isRem}}" color="#a4552e" /&gt;remember me</pre>
-        </dd>
-        <dt>&lt;swiper&gt; - current</dt>
-        <dd>绑定的是当前swiper-item - current</dd>
-        <dd>拖动或设置为自动播放，查看绑定情况</dd>
-        <dd>
+            <p>绑定的是当前swiper-item - current</p>
+            <p>拖动或设置为自动播放，查看绑定情况</p>
             <pre>cur:1</pre>
-        </dd>
-        <dd>
             <pre>
 &lt;view>{{cur}}&lt;/view&gt;
 &lt;swiper model:current="{{cur}}"&gt;
@@ -117,8 +87,6 @@ getName(e) {
         <dd>滚动视图scroll-view和轮播swiper配合使用</dd>
         <dd>
             <pre>cur: 1</pre>
-        </dd>
-        <dd>
             <pre>
 &lt;scroll-view class="wrap" scroll-x scroll-with-animation model:scroll-into-view="id{{cur}}"&gt;
     &lt;view class="item" wx:for="{{10}}" wx:key="index" id="id{{index}}"&gt;{{item}}&lt;/view&gt;
@@ -130,6 +98,20 @@ getName(e) {
     &lt;/swiper-item&gt;
 &lt;/swiper&gt;</pre>
         </dd>
+    </dl>
+    <div class="chap">选择绑定</div>
+    <dl>
+        <dd>绑定的是选中状态 checked</dd>
+        <dt>&lt;radio&gt;</dt>
+        <dd>
+            <pre>
+&lt;radio-group name="ugender"&gt;
+    &lt;radio value="male" color="#ff4400" model:checked="{{user.ugender=='male'}}" /&gt;male
+    &lt;radio value="female" color="#ff4400" model:checked="{{user.ugender=='female'}}"/&gt;female
+&lt;/radio-group&gt;            </pre>
+        </dd>
+        <dt>&lt;checkbox&gt;</dt>
+        <dt>&lt;switch&gt;</dt>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
     <script src="/utils/custom/star.js"></script>
