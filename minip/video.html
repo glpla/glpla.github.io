@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>视频组件 video</title>
+    <title>视频 video</title>
     <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
     <style>
@@ -27,18 +27,23 @@
 
 <body>
     <header>
-        <h1>视频组件</h1>
+        <h1>视频</h1>
         <span>&lt;video&gt;</span>
     </header>
     <dl>
         <dt>说明</dt>
-        <dd>展示视频的容器；默认宽度 300px、高度 225px，可通过 wxss 设置宽高</dd>
+        <dd>行内块元素 inline-block，可以设置大小；展示视频的容器</dd>
+        <dd>默认宽度 300px、高度 225px，可通过 wxss 设置宽高</dd>
         <dd>支持的格式：mp4、mov、m4v、avi、webm等</dd>
         <dd>除了常规属性外，还可以指定画中画、广告等特有属性</dd>
         <dd>请使用在线资源或自建服务器资源；不要使用本地资源</dd>
         <dd>视频现在多是16/9的比例；可惜小程序不支持aspect-ratio属性；不过可以根据宽度推算高度</dd>
+        <dd>更多信息，请查看 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/video.html">官方文档 - video</a>
         <dd>
             <table>
+                <colgroup>
+                    <col style="width: 200px;">
+                </colgroup>
                 <caption>常见比例</caption>
                 <tr>
                     <th>分辨率</th>
@@ -53,11 +58,10 @@
                     <td>1280*960 <br>960*720 <br>300*225</td>
                 </tr>
             </table>
-        </dd>
-        <dd>更多信息，请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/component/video.html">官方文档</a>
-        </dd>
-        <dd>
             <table>
+                <colgroup>
+                    <col style="width: 200px;">
+                </colgroup>
                 <caption>一般属性</caption>
                 <tr>
                     <th>属性</th>
@@ -85,13 +89,10 @@
                 </tr>
                 <tr>
                     <td>object-fit</td>
-                    <td>
-                        <details>
-                            <summary>当视频大小与 video 容器大小不一致时，视频的表现形式</summary>
-                            <div>contain：容器完全包含视频；视频按照比例缩放；默认；容器有留白</div>
-                            <div>fill：填充；视频拉伸至填满容器</div>
-                            <div>cover：覆盖；视频按比例裁剪至填满容器</div>
-                        </details>
+                    <td>当视频大小与 video 容器大小不一致时，视频的表现形式
+                        <br>contain：容器完全包含视频；视频按照比例缩放；默认；容器有留白
+                        <br>fill：填充；视频拉伸至填满容器
+                        <br>cover：覆盖；视频按比例裁剪至填满容器
                     </td>
                 </tr>
                 <tr>
@@ -137,8 +138,6 @@ video {
         </dd>
         <dd>
             <pre>&lt;video src="" object-fit="cover"/&gt;</pre>
-        </dd>
-        <dd>
             <pre>
 video{
     width: xxx;
@@ -146,32 +145,33 @@ video{
     //aspect-ratio： 16/9
 }</pre>
         </dd>
-        <dd class="example-sn">在线视频的使用</dd>
+        <dt>在线视频的使用</dt>
         <dd>受小程序大小2M的限制，大多数多媒体资源，如图片、视频、音频等不能本地使用，只能在线获取</dd>
-        <dd>方案1：外网在线资源；容易死链；如：<a href="https://shipin520.com/">潮点视频</a>，见下例</dd>
-        <dd>方案2：自建资源服务器，详情请参考 <a href="../node/static.html">静态资源服务器</a></dd>
+        <dd>方案1：自建资源服务器，详情请参考 <a href="../node/static.html">静态资源服务器</a></dd>
+        <dd>方案2：外网在线资源；容易死链；如：<a href="https://shipin520.com/">潮点视频</a>，见下例</dd>
         <dd>方案3：利用 - <a href="../utils/index.html">大树小站</a> - 提供的在线视频；更多视频持续更新中。。。</dd>
         <dd class="example-sn">通过资源服务器获取在线链接</dd>
-        <dd>搭建资源服务器，将本地视频放在指定目录，开启服务，具体操作请参考 <a href="./case0.html">资源服务器</a></dd>
+        <dd>搭建资源服务器，将本地视频放在指定目录，开启服务</dd>
         <dd>
             <pre>src="http://127.0.0.1:3000/video/sea.mp4"</pre>
         </dd>
         <dd class="example-sn">获取潮点视频</dd>
         <dd class="sn">
-            <div>点击上方链接打开网站，或使用谷歌浏览器，在上方地址栏输入地址https://shipin520.com，打开网站</div>
+            <div>点击上方链接打开网站，或使用谷歌浏览器，在上方地址栏输入地址 https://shipin520.com，打开网站</div>
             <div>在视频库中预览喜欢的视频</div>
             <div>按F12打开开发者工具，拾取元素拾取工具单击视频</div>
             <div>在结构面板中，看到视频对应的各种信息</div>
-            <div>找到src属性，双击并复制视频路径到小程序中，记得加上网络协议https，如</div>
+            <div>找到src属性，双击并复制视频路径到小程序中，记得加上网络协议 https，如</div>
             <pre>src="https://video.shipin520.com/videos/77/08/15/a_6PPqEeFnxHvK1586770815.mp4"</pre>
-            <div>预览小程序，查看视频加载情况</div>
         </dd>
         <dt>焦点</dt>
         <dd>自动播放 autoplay</dd>
         <dd>HTML中，大多数浏览器，特别是谷歌浏览器，不允许没有用户任何行为的情况下自动播放视频：必须是用户显式的操作视频进行播放</dd>
-        <dd>为了解决这个冲突，满足用户需求，将声音禁掉，设为静音muted，采用自动播放autoplay是可以的</dd>
+        <dd>为了解决这个冲突，满足用户需求，将声音禁掉，设为静音muted，采用自动播放autoplay</dd>
         <dd>但是在小程序中，如果不设置为自动播放就会告警。当然这个告警并不影响执行</dd>
-        <dd>[渲染层网络层错误] Failed to load media &lt;URL&gt;</dd>
+        <dd>
+            <pre>[渲染层网络层错误] Failed to load media &lt;URL&gt;</pre>
+        </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
     <script src="/utils/custom/star.js"></script>

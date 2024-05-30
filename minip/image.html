@@ -5,26 +5,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图像组件 image</title>
+    <title>图像 image</title>
     <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
 <body>
     <header>
-        <h1>图像组件</h1>
+        <h1>图像</h1>
         <span>&lt;image&gt;</span>
     </header>
     <dl>
         <dt>说明</dt>
-        <dd>展示图片的容器</dd>
-        <dd>默认宽度320px、高度240px</dd>
-        <dd>指定src的同时，还要指定显式模式mode</dd>
+        <dd>行内块元素 inline-block，可以设置大小；展示图片的容器</dd>
         <dd>支持 JPG、PNG、SVG、WEBP、GIF等格式</dd>
+        <dd>默认宽度320px、高度240px</dd>
+        <dd>指定 src 的同时，还要指定显式模式 mode</dd>
         <dd>通常需要一个容器包裹图像组件；图像比例尽量和容器保持一致</dd>
-        <dd>更多信息，请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/component/image.html">官方文档</a>
+        <dd>更多信息，请查看 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/image.html">官方文档 - image</a>
         <dd>
-            <table class="tbl-sn">
+            <table>
+                <colgroup>
+                    <col style="width: 200px;">
+                </colgroup>
                 <caption>通用属性</caption>
                 <tr>
                     <th>属性</th>
@@ -37,14 +40,12 @@
                 <tr>
                     <td>mode</td>
                     <td>
-                        <details>
-                            <summary>图片裁剪、缩放的模式</summary>
-                            <div>saleToFill：不保持纵横比；缩放至填满；图片会变形；默认模式</div>
-                            <div>apectFit：保持纵横比；缩放至完全显示；同contain；可能有留白</div>
-                            <div>apectFill：保持纵横比；缩放至完全填充；同cover；图片会被裁剪*</div>
-                            <div>wdthFix：宽度不变，高度自动变化</div>
-                            <div>hightFix：高度不变，宽度自动变化</div>
-                        </details>
+                        图片裁剪、缩放的模式
+                        <br>saleToFill：不保持纵横比；缩放至填满；图片会变形；默认模式
+                        <br>apectFit：保持纵横比；缩放至完全显示；同contain；可能有留白
+                        <br>apectFill：保持纵横比；缩放至完全填充；同cover；图片会被裁剪*
+                        <br>wdthFix：宽度不变，高度自动变化
+                        <br>hightFix：高度不变，宽度自动变化
                     </td>
                 </tr>
                 <tr>
@@ -60,18 +61,10 @@
                     <td>图片载入错误发生时触发</td>
                 </tr>
             </table>
-            <table class="tbl-sn">
-                <caption>Skyline 特有属性</caption>
-                <tr>
-                    <th>属性</th>
-                    <th>说明</th>
-                </tr>
-                <tr>
-                    <td>fade-in</td>
-                    <td>布尔；默认false；是否渐显</td>
-                </tr>
-            </table>
-            <table class="tbl-sn">
+            <table>
+                <colgroup>
+                    <col style="width: 200px;">
+                </colgroup>
                 <caption>WebView 特有属性</caption>
                 <tr>
                     <th>属性</th>
@@ -80,6 +73,20 @@
                 <tr>
                     <td>lazy-load</td>
                     <td>布尔；默认false；图片懒加载，在即将进入一定范围（上下三屏）时才开始加载</td>
+                </tr>
+            </table>
+            <table>
+                <colgroup>
+                    <col style="width: 200px;">
+                </colgroup>
+                <caption>Skyline 特有属性</caption>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>fade-in</td>
+                    <td>布尔；默认false；是否渐显</td>
                 </tr>
             </table>
         </dd>
@@ -92,9 +99,9 @@
         <dd>方案1：外网在线资源；容易死链</dd>
         <dd>方案2：自建资源服务器，详情请参考 <a href="../node/static.html">静态资源服务器</a></dd>
         <dd>方案3：利用 - <a href="../utils/index.html">大树小站</a> - 提供的在线图片；更多图片持续更新中。。。</dd>
-        <dd class="example-sn">背景图片的使用</dd>
+        <dd class="example-sn"><a href="../web/background.html">背景图片</a> 的使用</dd>
         <dd>使用背景图片可以省掉部分组件元素</dd>
-        <dd>但是：默认情况下不支持background-image</dd>
+        <dd>但是：默认情况下不支持background-image: url()属性，但是支持 <a href="../web/background3.html">背景渐变</a></dd>
         <dd>解决方案1. 使用定位 - <span class="warn">推荐</span></dd>
         <dd>容器采用相对定位，提供参考</dd>
         <dd>图片正常文档流使用作为背景</dd>
@@ -114,6 +121,14 @@
             <pre>
 background-size: cover;
 background-image: url(data:image/jpeg;base64....)</pre>
+        </dd>
+        <dd class="example-sn">使用渐变背景</dd>
+        <dd>
+            <pre>
+page {
+    height: 100vh;
+    background-image: linear-gradient(#0093E9, #80D0C7);
+}            </pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

@@ -6,32 +6,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>表格 Table</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="./css/table.css">
-  <link rel="stylesheet" href="../css/sn.css">
-  <link rel="stylesheet" href="../css/code.css">
   <base target="_blank">
 </head>
 
 <body>
   <header>
-    <h1>&commat;&lt;table&gt;</h1>
+    <h1>表格</h1>
+    <span>&commat;&lt;table&gt;</span>
     <span class="ham iconfont icon-menu"></span>
-    <ul class="nav">
-      <li class="nav-item">概述</li>
-      <li class="nav-item">样式</li>
-      <li class="nav-item">基本使用</li>
-      <li class="nav-item">进阶使用</li>
-    </ul>
+    <nav class="nav">
+      <a href="" style="--delay:0" class="nav-item">概述</a>
+      <a href="" style="--delay:1" class="nav-item">样式</a>
+      <a href="" style="--delay:2" class="nav-item">基本使用</a>
+      <a href="" style="--delay:3" class="nav-item">进阶使用</a>
+    </nav>
   </header>
   <dl>
     <dt class="nav-cont">概述</dt>
-    <dd>. 功能1：展示数据</dd>
-    <dd>. 功能2：布局，如表单的使用，多使用表格布局；其它布局多使用div+CSS实现</dd>
+    <dd>功能1：展示数据</dd>
+    <dd>功能2：布局，如表单的使用，多使用表格布局；其它布局多使用div+CSS实现</dd>
+    <dd>更多信息，请访问 <a href="//css-tricks.com/complete-guide-table-element/">complete guide table element</a></dd>
     <dd>
-      <figure class="code">
-        <figcaption>完整结构</figcaption>
-        <pre>
+      <pre>
 &lt;table&gt;
     &lt;caption&gt;title&lt;/caption&gt;
     &lt;thead&gt;
@@ -50,16 +48,13 @@
         &lt;/tr&gt;
     &lt;/tfooter&gt; 
 &lt;table&gt;</pre>
-      </figure>
     </dd>
-    <dd>. &lt;tabel&gt;：display类型为tabel，inline-block元素</dd>
-    <dd>. &lt;caption&gt;：表格标题</dd>
-    <dd>. &lt;tr&gt;：display类型是table-row，它的子元素只能是&lt;td&gt;或&lt;th&gt;；&lt;tr&gt;至少有一个单元格&lt;td&gt;有数据；否则空行会被压缩</dd>
-    <dd>. &lt;td&gt; &lt;th&gt;：display类型是table-cell；&lt;th&gt;是标题行单元格，通常出现在首行，也可以出现在任何位置</dd>
+    <dd>&lt;tabel&gt;：display类型为tabel，inline-block元素</dd>
+    <dd>&lt;caption&gt;：表格标题</dd>
+    <dd>&lt;tr&gt;：display类型是table-row，它的子元素只能是&lt;td&gt;或&lt;th&gt;；&lt;tr&gt;至少有一个单元格&lt;td&gt;有数据；否则空行会被压缩</dd>
+    <dd>&lt;td&gt; &lt;th&gt;：display类型是table-cell；&lt;th&gt;是标题行单元格，通常出现在首行，也可以出现在任何位置</dd>
     <dd class="tips">
-      <div>Tips</div>
-      <div>. 系统会默认添加表头&lt;thead&gt;、表体&lt;tbody&gt;、表尾&lt;tfoot&gt;；通常只关注行和单元格，他们会自动放在&lt;tbody&gt;中</div>
-      <div>. 更多信息，请访问 <a href="//css-tricks.com/complete-guide-table-element/">complete guide table element</a></div>
+      <div>系统会默认添加表头&lt;thead&gt;、表体&lt;tbody&gt;、表尾&lt;tfoot&gt;；通常只关注行和单元格，他们会自动放在&lt;tbody&gt;中</div>
     </dd>
   </dl>
   <div class="chap">样式 Style</div>
@@ -120,10 +115,20 @@
     <dd>border-spacing：单元格间距；边框重叠时，无效</dd>
     <dd>table-layout: 单元格内容显示方式，默认是 auto，自动适应内容；fixed 固定宽度;</dd>
     <dd>empty-cells：空单元格显示与否/不在空单元格周围绘制边框。默认显示/绘制；仅仅使用于边框不重叠的情况</dd>
+    <dt>colgroup</dt>
+    <dd>指定每列的宽度；也可以单独指定某个 &lt;td&gt;的宽度，见下例</dd>
+    <dd>
+      <pre>
+&lt;colgroup&gt;
+  &lt;col style="width: 100px;"&gt;
+  &lt;col style="width: 200px;"&gt;
+&lt;/colgroup&gt;</pre>
+    </dd>
     <dd class="tips">
       <div>除了直接在表格上应用合并单元格属性 colspan 和 rowspan外，其它样式建议由CSS完成</div>
       <div>表格的样式设计应聚焦在&lt;td&gt;</div>
       <div>&lt;th&gt;的样式如背景优先级略高，部分动态样式无法覆盖</div>
+      <div>同一页面内的表格，各列宽度应该保持一致</div>
     </dd>
   </dl>
   <div class="chap">基本使用 Usage</div>
@@ -258,9 +263,7 @@ table td:nth-child(2) {
       </table>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>HTML</figcaption>
-        <pre>
+      <pre>
 &lt;table&gt;
     &lt;tr&gt;
         &lt;td&gt;bold&lt;/td&gt;
@@ -276,12 +279,7 @@ table td:nth-child(2) {
         &lt;td&gt;bold&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>CSS</figcaption>
-        <pre>
+      <pre>
 table {
     width: 100%;
     border-collapse: collapse;
@@ -291,7 +289,6 @@ table {
 table th, table td {
     border: 1px solid #888;
 }  </pre>
-      </figure>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 圆角表格</dd>
     <dd>方案1：在不设置边框重叠的情况，给&lt;table&gt;指定border-radius</dd>
@@ -324,9 +321,7 @@ table th, table td {
       </table>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>参考代码</figcaption>
-        <pre>
+      <pre>
 .radius-tbl {
   border-collapse: separate;
   border-radius: 8px;
@@ -339,7 +334,6 @@ table th, table td {
 .radius-tbl tr:last-child td {
   border: none;
 }</pre>
-      </figure>
     </dd>
     <dd>方案2：边框重叠的情况下，单独给第一行左右2个和最后一行左右2个单独设置对应方向的border-radius</dd>
     <dd>. 为体现效果，以红色显示</dd>
@@ -372,9 +366,7 @@ table th, table td {
       </table>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>参考代码</figcaption>
-        <pre>
+      <pre>
 .radius-tbl-self tbody tr:first-child td:first-child {
   border-top-left-radius: 8px;
   background-color: #f40;
@@ -384,7 +376,6 @@ table th, table td {
   border-top-right-radius: 8px;
   background-color: #f40;
 }</pre>
-      </figure>
     </dd>
   </dl>
   <div class="chap">进阶使用 Advanced</div>
@@ -483,9 +474,7 @@ table th, table td {
       </div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>CSS</figcaption>
-        <pre>
+      <pre>
 .wrap-tbl {
   height: 30vh;
   overflow-y: auto;
@@ -495,7 +484,6 @@ table th, table td {
   position: sticky;
   top: 0;
 }      </pre>
-      </figure>
     </dd>
     <dt>自适应表格</dt>
     <dd>[前置知识点] <a href="./responsive.html">媒体查询</a></dd>
@@ -540,9 +528,7 @@ table th, table td {
       <div>其它布局应根据实际情况具体分析</div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>CSS</figcaption>
-        <pre>
+      <pre>
 thead tr {
     display: none;
 }
@@ -580,7 +566,6 @@ td:nth-child(3)::before {
 td:nth-child(4)::before {
     content: 'gender';
 }</pre>
-      </figure>
     </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
@@ -594,7 +579,7 @@ td:nth-child(4)::before {
     <dd>. 使用三线表格和歌单完善个人网站</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="./lib/ham.js"></script>
+  <script src="./lib/ham2024.js"></script>
 </body>
 
 </html>

@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>滚动视图组件 scroll-view</title>
+    <title>滚动视图 scroll-view</title>
     <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
 </head>
 
 <body>
     <header>
-        <h1>滚动视图组件</h1>
+        <h1>滚动视图</h1>
         <span>&lt;scroll-view&gt;</span>
     </header>
     <dl>
@@ -26,6 +26,9 @@
                 scroll-view</a></dd>
         <dd>
             <table>
+                <colgroup>
+                    <col style="width: 200px;">
+                </colgroup>
                 <caption>通用属性</caption>
                 <tr>
                     <th>属性</th>
@@ -57,6 +60,9 @@
                 </tr>
             </table>
             <table>
+                <colgroup>
+                    <col style="width: 200px;">
+                </colgroup>
                 <caption>WebView 特有属性</caption>
                 <tr>
                     <th>属性</th>
@@ -72,6 +78,9 @@
                 </tr>
             </table>
             <table>
+                <colgroup>
+                    <col style="width: 200px;">
+                </colgroup>
                 <caption>Skyline 特有属性</caption>
                 <tr>
                     <th>属性</th>
@@ -93,17 +102,15 @@
             </table>
         </dd>
         <dd class="example-sn">水平滚动 - 导航/推荐/活动</dd>
-        <dd>方案1：容器不换行 nowrap；子项项调整为 inline-block</dd>
         <dd>
+            <p>方案1：容器不换行 nowrap；子项项调整为 inline-block</p>
             <pre>
 &lt;scroll-view scroll-x class="wrap"&gt;
     &lt;view class="item"&gt;item1&lt;/view&gt;
     ...
     &lt;view class="item"&gt;item10&lt;/view&gt;
 &lt;/scroll-view&gt;</pre>
-        </dd>
-        <dd>wxss - 如设置了每个子项的左右margin，通常最后和第一个需要特别处理，消除margin</dd>
-        <dd>
+            <p>wxss - 如设置了每个子项的左右margin，通常最后和第一个需要特别处理，消除margin</p>
             <pre>
 .wrap{
     white-space: nowrap;
@@ -120,10 +127,8 @@
 .wrap .item:first-child{
     margin-left: 0;
 }</pre>
-        </dd>
-        <dd>方案2：在容器和子项之间增加一个view作为间接容器，view使用弹性盒子flex布局</dd>
-        <dd>默认情况下，flex会压缩子项；为了撑开，子项设置不缩放：flex-shrink: 0;</dd>
-        <dd>
+            <p>方案2：在容器和子项之间增加一个view作为间接容器，view使用弹性盒子flex布局</p>
+            <p>默认情况下，flex会压缩子项；为了撑开，子项设置不缩放：flex-shrink: 0;</p>
             <pre>
 &lt;scroll-view scroll-x class="wrap"&gt;
     &lt;view class="inner-wrap"&gt;
@@ -141,9 +146,9 @@
 .item{
     flex-shrink: 0;
 }</pre>
+            <p>方案3：小程序默认方案：为容器增加enable-flex属性启用并使用弹性盒子flex布局</p>
+            <p>仍然需要单独设置各项的间隔；样式过于分散，不推荐</p>
         </dd>
-        <dd>方案3：小程序默认方案：为容器增加enable-flex属性启用并使用弹性盒子flex布局</dd>
-        <dd>仍然需要单独设置各项的间隔；样式过于分散，不推荐</dd>
         <dd class="example-sn">垂直滚动 - 查看城市信息/商品列表</dd>
         <dd>必须显式的指定高度 - px、rpx、%</dd>
         <dd>页面结构</dd>
@@ -157,12 +162,12 @@
         <div>- 滑动视图高度由 calc 计算得出；且标题粘性定位在滑动视图顶端</div>
         <dd class="tips">如果不限高，不使用 scroll-view 也可以</dd>
         <dd class="example-sn">联动导航 -水平</dd>
-        <dd>滚动视图scroll-view和轮播swiper配合使用</dd>
-        <dd>单击滚动导航项，轮播跳转到指定项</dd>
-        <dd>拖动改变轮播时，滚动导航项也相应改变；且当前导航项样式高亮</dd>
-        <dd>滚动导航项使用自定义属性data-获取各项的索引</dd>
-        <dd>轮播使用改变时间获取当前current</dd>
         <dd>
+            <p>滚动视图scroll-view和轮播swiper配合使用</p>
+            <p>单击滚动导航项，轮播跳转到指定项</p>
+            <p>拖动改变轮播时，滚动导航项也相应改变；且当前导航项样式高亮</p>
+            <p>滚动导航项使用自定义属性data-获取各项的索引</p>
+            <p>轮播使用改变时间获取当前current</p>
             <pre>
 &lt;scroll-view scroll-x scroll-into-view="{{curIndex}}"&gt;
     &lt;view class="nav"&gt;
@@ -187,10 +192,8 @@ changeItem(e:any){
         curIndex: e.detail.current
     })
 }</pre>
+            <p>改进方案：使用双向绑定实现 - 简直不要太爽，详情请参考 <a href="./model.html">双向绑定</a></p>
         </dd>
-        <dd>改进方案：使用双向绑定实现 - 简直不要太爽，详情请参考 <a href="./model.html">双向绑定</a></dd>
-        <dd class="example-sn">联动导航 -垂直</dd>
-        <dd>...</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
     <script src="/utils/custom/star.js"></script>

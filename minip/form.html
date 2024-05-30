@@ -14,51 +14,155 @@
     <header>
         <h1>表单</h1>
         <span>&lt;form&gt;</span>
+        <span class="iconfont icon-menu ham"></span>
+        <nav class="nav">
+            <a href="" style="--delay:5" class="nav-item">overview</a>
+            <a href="" style="--delay:4" class="nav-item">form</a>
+            <a href="" style="--delay:3" class="nav-item">button</a>
+            <a href="" style="--delay:2" class="nav-item">label</a>
+            <a href="" style="--delay:1" class="nav-item">input</a>
+            <a href="" style="--delay:0" class="nav-item">radio</a>
+            <a href="" style="--delay:1" class="nav-item">checkbox</a>
+            <a href="" style="--delay:2" class="nav-item">textarea</a>
+            <a href="" style="--delay:3" class="nav-item">picker</a>
+            <a href="" style="--delay:3" class="nav-item">slider</a>
+            <a href="" style="--delay:4" class="nav-item">switch</a>
+        </nav>
     </header>
-    <dl>
+    <dl class="nav-cont">
         <dd>&lt;form&gt;和其中的大多数表单元素，基本同HTML5保持一致；具体效果视系统而定</dd>
-        <dd>表单数据提交时，必须指定name；value可以由事件获取</dd>
+        <dd>表单数据提交时，请确保每个表单元素都指定属性name；value可以由事件获取</dd>
+        <dd>全局初始化样式，如主题颜色和其它属性；部分需要单独设置</dd>
+        <dd>设置页面变量，便于同时控制元素的属性，如margin、padding、background-color和border等</dd>
+        <dd>请为每个表单元素都指定样式类class</dd>
+        <dd>学会使用调试器检查样式样式</dd>
         <dd class="tips">
-            <div>全局初始化样式，如主题颜色和其它属性；部分需要单独设置</div>
-            <div>设置页面变量，便于同时控制元素的属性，如margin、padding、background-color和border等</div>
-            <div>设置样式时，请为每个表单元素都指定样式class</div>
-            <div>数据提交服务器时，请确保每个表单元素都指定属性name</div>
-            <div>学会使用调试器检查样式样式</div>
             <div>一定要预览。。。一定要预览。。。一定要预览。。。</div>
         </dd>
-        <dt>常用组件</dt>
-        <dd>表单组件繁多，常见的分类如下表</dd>
-        <dd class="sn">
-            <div>&lt;form&gt;</div>
-            <p>表单容器</p>
+        <dt class="nav-cont">&lt;form&gt;</dt>
+        <dd>
+            <p>表单容器；行内元素 inline</p>
             <p>通常显式的设置宽度，其中表单元素会自动充满，无须单独设置每个宽度</p>
-            <pre>
-.form {
-    width: 90%;
-    background-color: #f3f4f5;
-}</pre>
-            <p>提交时，可以在事件对象e.detail中获取表格各元素的值</p>
+            <p>提交时，可以在事件对象 e.detail 中获取表格各元素的值</p>
             <table>
                 <tr>
+                    <th>事件</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
                     <td>bindsubmit</td>
-                    <td>携带数据提交；默认</td>
+                    <td>数据提交；默认</td>
                 </tr>
                 <tr>
                     <td>bindreset</td>
                     <td>表单重置时会触发 reset 事件</td>
                 </tr>
             </table>
-            <div>&lt;label&gt;</div>
-            <p>用for改进指定了id的表单组件的可用性；扩展了用户的点击，提升用户体验</p>
+            <p class="example-sn">表单数据提交</p>
+            <pre>
+&lt;form bindsubmit="submit"&gt;
+    // 其它表单元素
+    //按钮指定表单类型，可以触发表单的默认提交行为
+    &lt;button form-type="submit"&gt;submit&lt;/button&gt;
+&lt;/form&gt;</pre>
+            <pre>
+submit(e) {
+    console.log(e.detail);
+}</pre>
+            <pre>
+.form {
+    width: 90%;
+    background-color: #f3f4f5;
+}</pre>
+        </dd>
+        <dt class="nav-cont">&lt;button&gt;</dt>
+        <dd>
+            <p>功能强大的按钮；有特定的类型属性和事件属性；块元素 block</p>
+            <p>如果设置了高度后，记得设置同样大小的行高，以确保文字垂直方向居中</p>
+            <p>除了默认的tap事件外，按钮其它事件大多和相应的开发能力关联</p>
+            <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/button.html">官方文档 -
+                    button</a></p>
+            <table>
+                <tr>
+                    <th>属性</th>
+                    <th>说明</th>
+                </tr>
+                <tr>
+                    <td>loading</td>
+                    <td>是否带 loading 图标；然并卵</td>
+                </tr>
+                <tr>
+                    <td>form-type</td>
+                    <td>按钮类型；点击触发 form 的submit/reset 事件
+                        <br>submit：提交表单
+                        <br>reset：重置表单
+                    </td>
+                </tr>
+                <tr>
+                    <td>open-type</td>
+                    <td>微信开放能力
+                        <br>chooseAvatar：获取用户头像
+                        <br>contact：客服
+                        <br>getPhoneNumber：获取用户手机(企业号)
+                        <br>getUserInfo：获取用户信息(接口被收回)
+                    </td>
+                </tr>
+                <tr>
+                    <td>bindchooseavatar</td>
+                    <td>获取用户头像回调，返回头像临时地址；配合 open-type 使用</td>
+                </tr>
+                <tr>
+                    <td>bindcontact</td>
+                    <td>客服消息回调；配合 open-type 使用</td>
+                </tr>
+            </table>
+            <p class="tips">开发能力 open-type 的使用，要随时关注官方接口的更新变化</p>
+            <p class="example-sn">在调试器中，查看按钮的代理样式，体会样式初始化的重要性</p>
+            <pre>
+button{
+    width: 100%!important;
+    background-color: var(--themeColor);
+    color: #fff;    
+}            </pre>
+            <p>部分样式需要在特定页面的类中设置</p>
+            <pre>
+.btn{
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+    border-radius: 0;
+}</pre>
+            <p class="example-sn">打开客服对话框 - 用户点击后会打开客服对话框</p>
+            <pre>&lt;button open-type="contact" bindcontact='getContact'&gt;getContact&lt;/button&gt;</pre>
+            <pre>
+getContact(e){
+    console.log(e);
+}</pre>
+            <p class="example-sn">选择用户头像 - 用户点击后会打开头像选择对话框</p>
+            <pre>&lt;button open-type="chooseAvatar" bindchooseavatar='getAvatar'&gt;getAvatar&lt;/button&gt;</pre>
+            <pre>
+getAvatar(e){
+    console.log(e.detail);//http://tmp/bi86Wd1sI41s8ea8eb984c16d03bff787972d38e3ce6.jpg
+}</pre>
+        </dd>
+        </dd>
+        <dt class="nav-cont">&lt;label&gt;</dt>
+        <dd>
+            <p>行内元素 inline，用以改善用户体验</p>
+            <p>用属性 for，配合指定了 id 的表单元素，如&lt;input&gt;、&lt;radio&gt;、&lt;checkbox&gt;，可以改进表单组件的可用性：扩展用户点击，提升用户体验</p>
             <pre>&lt;checkbox value="撸码" id="code" /&gt;&lt;label for="code"&gt;撸码&lt;/label&gt;</pre>
-            <p>使用lable包裹表单元素时，应略去for属性</p>
+            <p>使用 &lt;label&gt; 包裹表单元素时，应略去for属性</p>
             <pre>
 &lt;label&gt;
     &lt;checkbox color="#3498db" value="撸码" /&gt;撸码
-&lt;/label&gt;            </pre>
-            <div>&lt;input&gt;</div>
-            <p>输入框</p>
-            <p>input 组件是一个原生组件，字体是系统字体，所以<span class="warn">无法设置</span> font-family</p>
+&lt;/label&gt;</pre>
+        </dd>
+        <dt class="nav-cont">&lt;input&gt;</dt>
+        <dd>
+            <p>单行文本输入框；块元素 block</p>
+            <p>原生组件，字体是系统字体，<span class="warn">无法设置</span> font-family</p>
+            <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/input.html">官方文档 - input</a>
+            </p>
             <table>
                 <tr>
                     <th>属性</th>
@@ -70,14 +174,11 @@
                 </tr>
                 <tr>
                     <td>type</td>
-                    <td>
-                        <details>
-                            <summary>输入框类型</summary>
-                            <div>text：文本键盘；默认</div>
-                            <div>number：数字键盘</div>
-                            <div>digit：带小数点的数字键盘</div>
-                            <div>idcard：身份证键盘</div>
-                        </details>
+                    <td>输入框类型
+                        <br>text：文本键盘；默认
+                        <br>number：数字键盘
+                        <br>digit：带小数点的数字键盘
+                        <br>idcard：身份证键盘
                     </td>
                 </tr>
                 <tr>
@@ -106,15 +207,12 @@
                 </tr>
                 <tr>
                     <td>confirm-type</td>
-                    <td>
-                        <details>
-                            <summary>设置键盘右下角按钮的文字，仅适用text类型</summary>
-                            <div>send：发送</div>
-                            <div>search：搜索</div>
-                            <div>next：下一个</div>
-                            <div>go：前往</div>
-                            <div>done：完成；默认</div>
-                        </details>
+                    <td>设置键盘右下角按钮的文字，仅适用text类型
+                        <br>send：发送
+                        <br>search：搜索
+                        <br>next：下一个
+                        <br>go：前往
+                        <br>done：完成；默认
                     </td>
                 </tr>
                 <tr>
@@ -134,8 +232,13 @@
                     <td>点击完成按钮时触发</td>
                 </tr>
             </table>
-            <div>&lt;radio&gt; &lt;radio-group&gt;</div>
+        </dd>
+        <dt class="nav-cont">&lt;radio&gt; &lt;radio-group&gt;</dt>
+        <dd>
+            <p>行内块元素 inline-block</p>
             <p>单选按钮；单选按钮组</p>
+            <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/radio.html">官方文档 - radio</a>
+            </p>
             <table>
                 <tr>
                     <th>属性</th>
@@ -164,8 +267,13 @@
     &lt;radio value="男" checked="{{userInfo.ugender=='男'}}" color="#3498db" /&gt;男
     &lt;radio value="女" checked="{{userInfo.ugender=='女'}}" color="#3498db" /&gt;女
 &lt;/radio-group&gt;</pre>
-            <div>&lt;checkbox&gt; &lt;checkbox-group&gt;</div>
+        </dd>
+        <dt class="nav-cont">&lt;checkbox&gt; &lt;checkbox-group&gt;</dt>
+        <dd>
+            <p>行内块元素 inline-block</p>
             <p>多选按钮；多选按钮组</p>
+            <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/checkbox.html">官方文档 -
+                    checkbox</a></p>
             <table>
                 <tr>
                     <th>属性</th>
@@ -173,7 +281,7 @@
                 </tr>
                 <tr>
                     <td>value</td>
-                    <td>多选按钮的值</td>
+                    <td>多选按钮的值；数组</td>
                 </tr>
                 <tr>
                     <td>checked</td>
@@ -188,15 +296,13 @@
                     <td>选中项发生改变时触发；从事件对象e.detail获取当前选中的值</td>
                 </tr>
             </table>
-            <div>&lt;textarea&gt;</div>
-            <p>多行输入；默认大小300*150；block</p>
+        </dd>
+        <dt class="nav-cont">&lt;textarea&gt;</dt>
+        <dd>
+            <p>多行输入；默认大小300*150；块元素 block</p>
             <p>建议：显式的设置宽度和容器保持一样大小；同时设置内边距padding以使得文字内收一定距离</p>
-            <pre>
-textarea{
-    width: 100%;
-    padding: 20rpx;
-    word-break: break-all;
-}</pre>
+            <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/textarea.html">官方文档 -
+                    textarea</a></p>
             <table>
                 <tr>
                     <th>属性</th>
@@ -220,15 +326,12 @@ textarea{
                 </tr>
                 <tr>
                     <td>confirm-type</td>
-                    <td>
-                        <details>
-                            <summary>设置键盘右下角按钮的文字，仅适用text类型</summary>
-                            <div>send：发送</div>
-                            <div>search：搜索</div>
-                            <div>next：下一个</div>
-                            <div>go：前往</div>
-                            <div>done：完成；默认</div>
-                        </details>
+                    <td>设置键盘右下角按钮的文字，仅适用text类型
+                        <br>send：发送
+                        <br>search：搜索
+                        <br>next：下一个
+                        <br>go：前往
+                        <br>done：完成；默认
                     </td>
                 </tr>
                 <tr>
@@ -252,58 +355,16 @@ textarea{
                     <td>输入框行数变化时调用</td>
                 </tr>
             </table>
-            <div>&lt;button&gt;</div>
-            <p>功能强大的按钮</p>
-            <p>如果设置了高度后，记得设置同样大小的行高，以确保文字垂直方向居中</p>
-            <p>除了默认的tap事件外，按钮其它事件大多和相应的开发能力关联</p>
-            <table>
-                <tr>
-                    <th>属性</th>
-                    <th>说明</th>
-                </tr>
-                <tr>
-                    <td>loading</td>
-                    <td>是否带 loading 图标；然并卵</td>
-                </tr>
-                <tr>
-                    <td>form-type</td>
-                    <td>
-                        <details>
-                            <summary>按钮类型；点击触发 form 的submit/reset 事件</summary>
-                            <div>submit：提交表单</div>
-                            <div>reset：重置表单</div>
-                        </details>
-                    </td>
-                </tr>
-                <tr>
-                    <td>open-type</td>
-                    <td>
-                        <details>
-                            <summary>微信开放能力</summary>
-                            <div>chooseAvatar：获取用户头像；从bindchooseavatar回调函数的detail中返回头像临时地址</div>
-                            <div>contact：客服；需要绑定客服事件bindcontact</div>
-                            <div>getPhoneNumber：获取用户手机(企业号)</div>
-                            <div>getUserInfo：获取用户信息(接口被收回)</div>
-                        </details>
-                    </td>
-                </tr>
-            </table>
-            <p class="example-sn">在调试器中，查看按钮的代理样式，体会样式初始化的重要性</p>
             <pre>
-button{
-    width: 100%!important;
-    background-color: var(--themeColor);
-    color: #fff;    
-}            </pre>
-            <p>部分样式需要在特定页面的类中设置</p>
-            <pre>
-.btn{
-    padding: 0;
-    margin: 0;
-    font-weight: normal;
-    border-radius: 0;
+textarea{
+    width: 100%;
+    padding: 20rpx;
+    word-break: break-all;
 }</pre>
-            <div>&lt;picker&gt;</div>
+        </dd>
+        <dt class="nav-cont">&lt;picker&gt;</dt>
+        <dd>
+            <p>块元素 block</p>
             <p>从底部弹起的滚动选择器，如：时间选择器、日期选择器、地区选择器</p>
             <p>除了下述通用的属性外，不同的mode，picker拥有不同的属性；如时间类的都有开始start、结束end等</p>
             <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/picker.html">官方文档 -
@@ -315,15 +376,12 @@ button{
                 </tr>
                 <tr>
                     <td>mode</td>
-                    <td>
-                        <details>
-                            <summary>模式</summary>
-                            <div>selector：普通选择器</div>
-                            <div>multiSelector：多列选择器</div>
-                            <div>time：时间选择器</div>
-                            <div>date：日期选择器</div>
-                            <div>region：省市区选择器</div>
-                        </details>
+                    <td>模式
+                        <br>selector：普通选择器
+                        <br>multiSelector：多列选择器
+                        <br>time：时间选择器；hh:mm
+                        <br>date：日期选择器；YYYY-MM-DD
+                        <br>region：省市区选择器
                     </td>
                 </tr>
                 <tr>
@@ -334,17 +392,76 @@ button{
                     <td>bindcancel</td>
                     <td>取消选择时触发</td>
                 </tr>
+                <tr>
+                    <td>bindchange</td>
+                    <td>选择时触发</td>
+                </tr>
             </table>
             <p class="example-sn">弹出菜单 - ind和list是data中的数据</p>
             <pre>
-&lt;picker mode="selector" value="{{ind}}" range="{{list}}" bindchange="pick"&gt;{{list[ind]}}&lt;/picker&gt;</pre>
+&lt;picker 
+    mode="selector" 
+    value="{{ind}}" 
+    range="{{list}}" 
+    bindchange="pick"
+&gt;
+    {{list[ind]}}
+&lt;/picker&gt;</pre>
             <pre>
 pick(e){
+    console.log(e.detail.value)
+}</pre>
+            <p class="example-sn">时间选择 - time；可以指定起始 start和结束 end</p>
+            <pre>
+&lt;picker 
+    mode="time" 
+    value="{{time}}" 
+    bindchange="selTime"
+&gt;
+    {{time]}}
+&lt;/picker&gt;</pre>
+            <pre>
+selTime(e){
     this.setData({
-        ind:e.detail.value
+        time: e.detail.value
     })
 }</pre>
-            <div>&lt;slider&gt;</div>
+            <p class="example-sn">日期选择 - date；通常应指定起始 start和结束 end</p>
+            <pre>
+&lt;picker 
+    mode="date" 
+    value="{{date}}" 
+    start="2000-07-01"
+    end="2026-12-31"
+    bindchange="selDate"
+&gt;
+    {{date}}
+&lt;/picker&gt;</pre>
+            <pre>
+selDate(e){
+    this.setData({
+        date: e.detail.value
+    })
+}</pre>
+            <p class="example-sn">地区选择 - region；e.detail.value返回一个数组：省、市、区；可以不使用地图实现选择</p>
+            <pre>
+&lt;picker 
+    mode="region" 
+    value="{{region}}" 
+    bindchange="selRegion"
+&gt;
+    {{region}}
+&lt;/picker&gt;</pre>
+            <pre>
+selRegion(e){
+    this.setData({
+        region: e.detail.value
+    })
+}</pre>
+        </dd>
+        <dt class="nav-cont">&lt;slider&gt;</dt>
+        <dd>
+            <p>块元素 block</p>
             <p>滑动选择器</p>
             <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/slider.html">官方文档 -
                     slider</a></p>
@@ -396,14 +513,26 @@ pick(e){
             </table>
             <p class="example-sn">年龄选择</p>
             <pre>
-&lt;slider activeColor="#3498db" backgroundColor="#ccc" block-size="24" block-color="#3498db" bindchange="selAge" min="18" max="24" name="uage" value="{{uage}}" show-value /&gt;</pre>
+&lt;slider 
+    activeColor="#3498db" 
+    backgroundColor="#ccc" 
+    block-size="24" 
+    block-color="#3498db" 
+    bindchange="selAge" 
+    min="18" 
+    max="24" 
+    name="uage" 
+    value="{{uage}}" 
+    show-value 
+/&gt;</pre>
             <pre>
 selAge(e){
-    this.setData({
-        uage:e.detail.value
-    })
+    console.log(e.detail.value)
 }</pre>
-            <div>&lt;switch&gt;</div>
+        </dd>
+        <dt class="nav-cont">&lt;switch&gt;</dt>
+        <dd>
+            <p>行内块元素 inline-block</p>
             <p>开关选择器</p>
             <p>也可以使用checkbox实现功能</p>
             <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/switch.html">官方文档 -
@@ -532,38 +661,9 @@ submit(e){
     console.log(e.detail.value);
 }</pre>
         </dd>
-        <dd class="example-sn">打开客服对话框</dd>
-        <dd>用户点击后会打开客服对话框</dd>
-        <dd>
-            <figure>
-                <figcaption>wxml</figcaption>
-                <pre>&lt;button open-type="contact" bindcontact='getContact'&gt;getContact&lt;/button&gt;</pre>
-            </figure>
-            <figure>
-                <figcaption>js</figcaption>
-                <pre>
-getContact(e){
-    console.log(e);
-}</pre>
-            </figure>
-        </dd>
-        <dd class="example-sn">选择用户头像</dd>
-        <dd>用户点击后会打开头像选择对话框</dd>
-        <dd>
-            <figure>
-                <figcaption>wxml</figcaption>
-                <pre>&lt;button open-type="chooseAvatar" bindchooseavatar='getAvatar'&gt;getAvatar&lt;/button&gt;</pre>
-            </figure>
-            <figure>
-                <figcaption>js</figcaption>
-                <pre>
-getAvatar(e){
-    console.log(e.detail);//http://tmp/bi86Wd1sI41s8ea8eb984c16d03bff787972d38e3ce6.jpg
-}</pre>
-            </figure>
-        </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <script src="/utils/custom/ham2024.js"></script>
     <script src="/utils/custom/star.js"></script>
 </body>
 
