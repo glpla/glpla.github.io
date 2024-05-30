@@ -17,7 +17,7 @@
     </header>
     <dl>
         <dd>组件自身的一些函数：在特殊的时间点或遇到一些特殊的框架事件时被自动触发</dd>
-        <dd>最重要的生命周期是 created attached detached ，包含一个组件实例生命流程的最主要时间点</dd>
+        <dd>最重要的生命周期是 created、attached、detached ，包含一个组件实例生命流程的最主要的时间节点</dd>
         <dd>created：组件实例刚刚被创建好时</dd>
         <dd>attached：在组件完全初始化完毕、进入页面节点树</dd>
         <dd>detached：在组件离开页面节点树后</dd>
@@ -45,11 +45,13 @@ lifetimes: {
             <pre>
 let mapCtx;
 Component({})</pre>
-            <div>地图组件逻辑的生命周期函数 - 获取当前位置、实例化地图组件上下文</div>
+            <div>地图组件逻辑的生命周期函数</div>
             <pre>
 lifetimes: {
     attached: function () {
+        // 实例化地图组件上下文
         mapCtx = wx.createMapContext('my-map', this)
+        // 获取当前位置
         wx.getLocation({
         type: 'gcj02',
         success: res => {
