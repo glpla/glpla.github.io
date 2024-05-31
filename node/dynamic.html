@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>动态资源服务器 Node.js</title>
-  <link rel="stylesheet" href="../../css/reset2024.css">
-  <link rel="stylesheet" href="../../css/common2024.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
+  <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
 </head>
 
@@ -20,16 +17,16 @@
   </header>
   <dl>
     <dd>监听对JSON数据的请求，如：GET、POST、PATCH、DELETE等</dd>
-    <dd>依托express框架创建；更多信息，请访问 <a href="https://www.expressjs.com.cn/" class="link">Express.js</a></dd>
+    <dd>依托express框架创建；更多信息，请访问 <a href="https://www.expressjs.com.cn/">Express.js</a></dd>
     <dt>基本步骤</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>准备数据</div>
       <div>创建服务</div>
       <div>处理请求</div>
       <div>开启服务 - 监听</div>
     </dd>
     <dt>开放接口</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>JSON数据 - 脚本中使用</div>
       <p>数据：url+/data/文件名</p>
       <div>GET /good/all</div>
@@ -47,11 +44,9 @@
     </dd>
     <dt>具体过程</dt>
     <dd>good.json数据为例</dd>
-    <dd>在静态资源服务器的基础上，增加监听路由</dd>
+    <dd>在 <a href="./static.html">静态资源服务器</a> 的基础上，增加监听路由</dd>
     <dd>
-      <figure class="code">
-        <figcaption>参考代码</figcaption>
-        <pre>
+      <pre>
 let fs = require('fs');
 let express = require('express')
 
@@ -84,11 +79,10 @@ app.get('/good/page', (req, res) => {
 app.listen(3000, () => {
   console.log('服务器启动成功，地址为：http://127.0.0.1:3000');
 });</pre>
-      </figure>
     </dd>
   </dl>
-  </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

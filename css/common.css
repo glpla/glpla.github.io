@@ -122,6 +122,7 @@ header::after {
 .nav-item {
   color: #fff;
   text-decoration: none;
+  padding:0 10px;
 }
 
 .nav-item:hover {
@@ -175,6 +176,7 @@ figure img {
   border-radius: 50%;
   /* background-color: #f40; */
   transform: translate(0px, -20px);
+  z-index: 99;
 }
 
 .dot span {
@@ -479,9 +481,7 @@ iframe {
 }
 
 @media screen and (max-width:768px) {
-  body.lock {
-    overflow: hidden;
-  }
+
 
   header {
     top: 0;
@@ -518,13 +518,14 @@ iframe {
     right: -45vw;
     flex-direction: column;
     width: 45vw;
-    height: 90vh;
+    height: 88vh;
     padding: 10px;
     background-color: #f1f1f1;
-    transition: right .4s;
+    transition: right 0.4s;
   }
 
   .nav-item {
+    line-height: 2;
     color: var(--main-color);
     border-bottom: 1px solid #ccc;
     transform: translateX(20vh);
@@ -539,4 +540,7 @@ iframe {
     transform: translateX(0);
   }
 
+  body.lock {
+    overflow-y: hidden;
+  }
 }

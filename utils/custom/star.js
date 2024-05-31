@@ -1,5 +1,6 @@
 let body = document.querySelector('body')
 body.addEventListener('click', function (e) {
+  console.log(e.target.tagName);
   let dot = document.createElement('div');
   var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
@@ -22,4 +23,4 @@ body.addEventListener('click', function (e) {
   setTimeout(function () {
     dot.remove()
   }, 1000)
-})
+},)

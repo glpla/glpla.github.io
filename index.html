@@ -12,31 +12,6 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3834292_hul6qge3el5.css">
   <link rel="stylesheet" href="./css/index.css">
-  <style>
-    .dot {
-      position: absolute;
-      border-radius: 50%;
-      background-color: #fff;
-      pointer-events: none;
-    }
-
-    .dot:nth-child(even) {
-      background-color: transparent;
-      border: 1px solid rgba(255, 255, 255, 1);
-    }
-
-    @keyframes dot-move {
-      form {
-        opacity: 1;
-        transform: translate(0, 0);
-      }
-
-      to {
-        opacity: 0;
-        transform: translate(var(--x), var(--y));
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -166,42 +141,17 @@
 
     import { dot } from '../utils/custom/dot.js'
     let avatar = document.querySelector('.avatar');
-    let audio = new Audio('./utils/music/吴奇隆 - 祝你一路顺风 (Single Version).ogg');
+    // let audio = new Audio('./utils/music/吴奇隆 - 祝你一路顺风 (Single Version).ogg');
+    let audio = new Audio('./utils/music/4.mp3');
+    audio.addEventListener('ended', function () {
+      console.log('音频播放已结束');
+      avatar.classList.toggle('play')
+    });
     avatar.addEventListener('click', (e) => {
       e.preventDefault();
       audio.paused ? audio.play() : audio.pause();
       avatar.classList.toggle('play')
       dot(e)
-      // for (let i = 0; i < 100; i++) {
-      //   let dot = document.createElement('i');
-      //   dot.classList.add('dot');
-
-      //   let size = Math.random() * 8 + 2;
-      //   dot.style.width = size + 'px';
-      //   dot.style.height = size + 'px';
-
-      //   let posx = (Math.random() - 0.5) * window.innerWidth;
-      //   let posy = (Math.random() - 0.5) * window.innerHeight;
-      //   dot.style.setProperty('--x', posx + 'px')
-      //   dot.style.setProperty('--y', posy + 'px')
-
-      //   let fx = e.clientX - avatar.offsetLeft;
-      //   let fy = e.clientY - avatar.offsetTop;
-      //   dot.style.left = fx + 'px'
-      //   dot.style.top = fy + 'px'
-
-      //   let duration = Math.random() * 2 + 0.5
-      //   dot.style.animation = `dot-move ${duration}s linear forwards `
-
-      //   // let hue = Math.random() * 360;
-      //   // dot.style.filter = `hue-rotate(${hue}deg)`
-
-      //   avatar.appendChild(dot);
-
-      //   setTimeout(() => {
-      //     dot.remove()
-      //   }, 2000)
-      // }
     })
     const revealOption = {
       delay: 300,
