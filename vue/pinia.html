@@ -127,12 +127,8 @@ export const useCounterStore  = defineStore('counter', ()=>{
         <dd>直接解构使用store中的数据(方法)会丢失响应：当仓库状态变化时，count不变，相当于是获取了仓库的一次性数据</dd>
         <dd>
             <pre>let { count, increment } = counterStore;</pre>
-        </dd>
-        <dd>
             <pre>&lt;div&gt;仓库数据 - {{ store.count }} - {{ count }}&lt;/div&gt;</pre>
-        </dd>
-        <dd>使用storeToRefs包保持响应式 - 不建议；<span class="warn">命名冲突。。。可读性不好。。。运维困难。。。</span></dd>
-        <dd>
+            <div>使用storeToRefs包保持响应式 - 不建议；<span class="warn">命名冲突。。。可读性不好。。。运维困难。。。</span></div>
             <pre>
 import { storeToRefs } from 'pinia';
 let { count, increment } = storeToRefs(counterStore);</pre>
@@ -171,10 +167,24 @@ onMounted(() => {
 &lt;div v-else&gt;
     //
 &lt;/div&gt;</pre>
-            <p class="tips">在开发者视图中，使用慢速网络查看状态变化</p>
         </dd>
+        <dd class="tips">在开发者视图中，使用慢速网络查看状态变化</dd>
         <dd class="example-sn"><a href="./drill_cart_pinia.html">实操 - 购物车优化</a></dd>
         <dd>使用仓库并更新仓库</dd>
+        <dd class="example-sn">侦听仓库变化显示提示信息</dd>
+        <dd>
+            <div>商品仓库和购物车仓库都有数据加载。可以通过侦听仓库的isLoading给前端相应的提示</div>
+            <div>msg可以提供给模态框使用。更多信息，请访问 <a href="./drill_modal.html">实训 - 模态框</a></div>
+            <pre>
+watch(() => goodStore.isLoading, (newVal, oldVal) => {
+    if (newVal) {
+        msg.value = '正在加载中...'
+    } else {
+        msg.value = '加载完成'
+    }
+    show.value = true;
+})</pre>
+        </dd>
         <dd class="example-sn">定义导航菜单仓库，详情请查看 <a href="./drill_menu.html">实操 - 汉堡菜单</a></dd>
         <dd>项目从桌面端切换到移动端时，菜单折叠，由汉堡按钮控制折叠和展开；单击菜单项时，折叠菜单</dd>
         <dd>1. 创建仓库 - 仓库参考代码 menu.js</dd>

@@ -113,7 +113,7 @@ watch(user, (newv, oldv) => {
 }, { deep: true })</pre>
         </dd>
         <dt>深度侦听- 侦听复合 ref 某个指定属性</dt>
-        <dd>利用函数获取侦听属性 - getter函数</dd>
+        <dd>利用 <span class="warn">函数</span> 获取侦听属性 - getter函数</dd>
         <dd>仅仅当该属性变化时才触发回调</dd>
         <dd>age变化时，触发侦听；code变化时，不触发</dd>
         <dd class="tips">
@@ -154,7 +154,7 @@ const incAge = () => {
 }</pre>
         </dd>
         <dt>侦听 reactive - 捕获属性前后变化</dt>
-        <dd>利用函数获取侦听的属性 - 简单属性</dd>
+        <dd>利用 <span class="warn">函数</span> 获取侦听的属性 - 简单属性</dd>
         <dd>
             <pre>
 watch(() => user.age, (newv, oldv) => {
@@ -162,7 +162,7 @@ watch(() => user.age, (newv, oldv) => {
 })
 </pre>
         </dd>
-        <dd>利用函数获取侦听的属性 - 复合属性</dd>
+        <dd>利用 <span class="warn">函数</span> 获取侦听的属性 - 复合属性</dd>
         <dd>
             <pre>
 watch(() => user.addr.code, (n, o) => {
@@ -193,10 +193,10 @@ stop()</pre>
     </dl>
     <dl>
         <dd class="example-sn">侦听模态框的变化</dd>
-        <dd>用户信息采集过程中，非法、无效等数据校验，前端可以使用弹出窗口给出提示；一定时间后弹出窗口消失</dd>
-        <dd>需要在每个逻辑的校验中，弹出窗口、消失窗口</dd>
-        <dd>可以侦听弹窗的变化，当出现|条件为真时，开始倒计时，然后停止倒计时，关闭弹窗</dd>
         <dd>
+            <div>用户信息采集过程中，非法、无效等数据校验，前端可以使用弹出窗口给出提示；一定时间后弹出窗口消失</div>
+            <div>需要在每个逻辑的校验中，弹出窗口、消失窗口</div>
+            <div>可以侦听弹窗的变化，当出现|条件为真时，开始倒计时，然后停止倒计时，关闭弹窗</div>
             <pre>
 watch(isModalOpen, (newval, oldval) => {
     if (newval) {
@@ -214,8 +214,11 @@ watch(msg, (newv, oldv) => {
 })</pre>
         </dd>
         <dd class="example-sn">购物车</dd>
-        <dd>侦听购物车商品的总价</dd>
-        <dd>侦听购物车商品的全选</dd>
+        <dd>总价：侦听购物车商品数量发生变化时，重新统计总价</dd>
+        <dd>全选：侦听购物车商品的全选状态；选中，为全选；否则取消全选</dd>
+        <dd class="example-sn">侦听仓库：仓库状态发生变化时，给出相应的提示</dd>
+        <dd>更多信息，请访问 <a href="./pinia.html">仓库 - Pinia</a></dd>
+        <dd class="tips">实际开发中，更多是使用函数Getter来侦听数据的变化</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

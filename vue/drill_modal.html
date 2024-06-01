@@ -141,6 +141,7 @@ const showTips = (msg) => {
   }, 3000);
 }</pre>
         <pre>&lt;Tips :flag="isOpenModal" :tips="tips"&gt;&lt;/Tips&gt;</pre>
+      </dd>
       <dd>第三阶段 过渡模态框</dd>
       <dd>
         <div>使用过渡组件包裹模态框 <span class="warn">根元素</span> 并指定 name 为 modal-fade，添加淡入淡出过渡效果</div>
@@ -198,6 +199,22 @@ const closeModal = () => {
         </div>
         <div>未按要求在规定时间内提交视为无效，不得分</div>
         <div>格式规范，请参考 <a href="../course/paper.html">论文规范要点</a></div>
+      </dd>
+      <dt>拓展与思考</dt>
+      <dd>
+        <div>手动关闭模态框</div>
+        <div>多次互不冲突的触发模态框依次显示</div>
+        <div>侦听仓库的加载</div>
+        <!-- <pre>
+watch(() => goodStore.isLoading, (newVal, oldVal) => {
+  console.log(newVal);
+  if (newVal) {
+    msg.value = '正在加载中...'
+  } else {
+    msg.value = '加载完成'
+  }
+  show.value = true;
+})</pre> -->
       </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
