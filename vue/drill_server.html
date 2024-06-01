@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>实操 综合服务器</title>
+  <title>实训 静态资源服务器</title>
   <link rel="stylesheet" href="../css/exp.css">
 </head>
 
@@ -13,7 +13,7 @@
   <header>
   </header>
   <div class="container">
-    <h1>综合服务器</h1>
+    <h1>静态资源服务器</h1>
     <h4>Server</h4>
     <dl class="number-mul-sn">
       <dt>实验目的</dt>
@@ -22,45 +22,22 @@
         <div>熟悉数据接口API的定制和使用</div>
         <div>掌握Express.js框架的基本使用</div>
         <div>掌握Node.js服务的基本搭建</div>
-        <div>掌握Axios的基本使用</div>
       </dd>
       <dt>实验内容</dt>
       <dd>
         <div>资源准备：图片和数据</div>
         <div>Express.js安装和基本使用</div>
         <div>Node.js服务的搭建</div>
-        <div>网络请求模拟：Postman的安装和基本使用</div>
-        <div>Axios安装和基本使用</div>
       </dd>
       <dt>开发环境</dt>
       <dd>
         <div>操作系统 Window 10+</div>
         <div>文本编辑器 Vs Code</div>
         <div>谷歌浏览器 Chrome</div>
-        <div>Node.js</div>
+        <div>服务器端 Node.js</div>
       </dd>
       <dt>实验步骤</dt>
-      <dd>
-        <div>准备数据</div>
-        <p>选择或创建一个文件夹如www作为各种资源的主目录；利用各种子文件夹存放不同的资源数据</p>
-        <p>. json数据</p>
-        <p>. 图片数据</p>
-        <p>. 其它资源，如视频、音频等</p>
-        <div>Node.js 服务器 - 详细操作，请查看 <a href="../node/static.html" class="link">资源服务器</a></div>
-        <div>使用Postman模拟数据请求</div>
-        <p>安装浏览器插件FeHelper前端助手或下载更加专业的Postman（最近官网一直打不开）</p>
-        <img src="./imgs/server0.png" alt="">
-        <p>3.1 获取数据 - GET</p>
-        <p>获取所有数据</p>
-        <pre>http://127.0.0.1:3000/cont</pre>
-        <p>根据id获取接口某个数据</p>
-        <pre>http://127.0.0.1:3000/cont/1001</pre>
-        <p>3.2 增加数据 - POST</p>
-        <p>3.3 修改数据 - PUT</p>
-        <p>3.4 根据id删除某个数据 - DELETE</p>
-        <pre>http://127.0.0.1:3000/cont/1001</pre>
-        <div>axios 数据请求 - 根据项目需求发起网络请求，详细使用，请查看 <a href="../node/axios.html" class="link">Axios</a></div>
-      </dd>
+      <dd>详细操作，请查看 <a href="../node/static.html" class="link">静态资源服务器</a></dd>
       <dt>服务器参考代码</dt>
       <dd>
         <pre>
@@ -68,21 +45,11 @@
 const express = require('express')
 const fs = require('fs')
 
-//处理数据文件
-const file = fs.readFileSync('./public/data/food.json')
-const jsonFile = JSON.parse(file)
-
 // 创建Web服务器
 const app = express();
 
 // 静态资源
 app.use(express.static('./public'))
-
-//定制路由
-app.get('/food', (req, res) => {
-  // res.send(jsonFile)
-  res.json(jsonFile)
-})
 
 //监听
 app.listen(3000, () => {
@@ -105,7 +72,11 @@ app.listen(3000, () => {
         <div>格式规范，请参考 <a href="../course/paper.html">论文规范要点</a></div>
       </dd>
       <dt>拓展</dt>
-      <dd>增加分页拉取</dd>
+      <dd>创建服务器主页</dd>
+      <dd>定制服务器主机和端口</dd>
+      <dd>安装并使用nodemon依赖动态检测并更新服务器</dd>
+      <dd>网络请求模拟：Postman的安装和基本使用</dd>
+
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   </div>
