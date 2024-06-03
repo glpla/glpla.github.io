@@ -17,14 +17,32 @@
     </header>
     <dl>
         <dd>内置组件 - 无需注册即可在任意别的组件中使用</dd>
+        <dd>为列表中的 <span class="warn">多个</span> 元素或组件提供过渡效果</dd>
         <dd>一个 v-for 列表中的元素或组件被插入，移动|顺序改变，或移除时应用动画</dd>
         <dd>不需要使用条件来决定渲染过渡</dd>
-        <dd>和 &lt;Transition&gt; 的使用 - 基本一致；部分应用需要特别注意</dd>
-        <dd>.mode</dd>
-        <dd>.key</dd>
+        <dd>默认情况下，它不会渲染一个容器元素。但你可以通过传入 tag prop 来指定一个元素作为容器元素来渲染</dd>
+        <dd>列表中的每个元素都必须有一个独一无二的 key attribute</dd>
+        <dd>和 &lt;Transition&gt; 的使用方法- 基本一致</dd>
         <dd>多用于应用管理场景：用户管理、留言管理、商品管理、代办事项等等</dd>
         <dd>更多信息，请访问 <a href="https://cn.vuejs.org/guide/built-ins/transition-group.html">官方文档 - transition-group</a>
+            、<a href="https://cn.vuejs.org/api/built-in-components.html#transitiongroup">官方文档 - API</a> </dd>
+        <dt>属性 Props</dt>
+        <dd>拥有和&lt;Transition&gt;除了 mode以外的相同的属性，还具有特有属性</dd>
+        <dd class="sn">
+            <div>tag?: string</div>
+            <p>如果未定义，则渲染为片段 (fragment)</p>
+            <p>建议使用，可以节省一个DOM节点，如声明为 tag="ul"</p>
+            <div>moveClass?: string</div>
+            <p>用于自定义过渡期间被应用的 CSS class；用于覆盖默认的.v-move类，从而实现自定义的移动过渡效果</p>
+            <p>在模板中使用 kebab-case，例如 move-class="xxx"</p>
         </dd>
+        <dt>新内置类</dt>
+        <dd>
+            <div>v-move</div>
+            <p>对移动中的元素应用的过渡</p>
+            <p>当列表中的元素因为重新排序而需要改变位置时，这个类会被应用到正在移动的元素上</p>
+        </dd>
+        <dd class="tips">如果使用了位移 transform，可能导致出现水平滚动条，请为容器指定overflow-x: hidden</dd>
         <dd class="example-sn">代办事项</dd>
         <dd>列表渲染事项数据</dd>
         <dd>每条数据可以在完成时删除</dd>
@@ -50,18 +68,37 @@
                 &lt;p&gt;待办事项&lt;/p&gt;
                 &lt;p&gt;操作&lt;/p&gt;
             &lt;/div&gt;
-            &lt;TransitionGroup name="list"&gt;
-                &lt;div class="item" v-for="(item, ind) in arr" :key="item" :data-ind="ind"&gt;
+            &lt;TransitionGroup name="list" tag="ul"&gt;
+                &lt;li class="item" v-for="(item, ind) in arr" :key="item.id" :style="`--delay: ${ind}`"&gt;
                     &lt;p&gt;{{ ind }}&lt;/p&gt;
                     &lt;p&gt;{{ item }}&lt;/p&gt;
                     &lt;button class="del-btn" @click="deleteItem(ind)"&gt;删除&lt;/button&gt;
-                &lt;/div&gt;
+                &lt;/li&gt;
             &lt;/TransitionGroup&gt;
         &lt;/template&gt;
         &lt;template v-else&gt;暂无记录&lt;/template&gt;
     &lt;/div&gt;
 &lt;/template&gt;</pre>
-            <div>样式略</div>
+            <div>样式</div>
+            <p>内联变量 --delay：依次延时触发</p>
+            <p>v-move：对移动中的元素应用的过渡，<span class="warn">专用</span> 于&lt;TransitionGroup&gt;</p>
+            <p>v-leave-active：声明为绝对定位，保证删除不会跳跃</p>
+            <pre>
+.v-move,
+.v-enter-active,
+.v-leave-active {
+    transition: 0.4s ease-in-out calc(var(--delay)*0.1s);
+}
+
+.v-leave-active {
+    position: absolute;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
+}</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
