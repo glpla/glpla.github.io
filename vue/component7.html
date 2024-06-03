@@ -20,6 +20,7 @@
         <dd>过渡组件 - 为一个进入和离开 DOM树的元素或组件添加动画效果</dd>
         <dd>实现原理 - 将进入和离开动画应用到通过默认插槽 slot 传递给它的元素或组件 - 将动画应用到它包裹的元素</dd>
         <dd>内置组件 - 无需注册即可在任意别的组件中使用</dd>
+        <dd>更多信息，请访问 <a href="https://cn.vuejs.org/guide/built-ins/transition.html">官方文档 - transition</a></dd>
         <dt>适用场景</dt>
         <dd>.由 v-if 所触发的切换</dd>
         <dd>.由 v-show 所触发的切换</dd>
@@ -214,6 +215,12 @@ const onAfterLeave = () => {
         </dd>
         <dt>动态过渡</dt>
         <dd>可以为每个过渡指定name属性加以区分；指定了name属性的过渡，其内置类将不再以v开始，而是以name名开始</dd>
+        <dd>
+            <pre>
+&lt;Transition name="scale" appear&gt;
+    &lt;slot&gt;&lt;/slot&gt;
+&lt;/Transition&gt;</pre>
+        </dd>
         <dd>可以绑定name属性，当状态变化时，动态地应用不同类型的过渡</dd>
         <dd>
             <pre>
