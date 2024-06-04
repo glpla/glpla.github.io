@@ -6,67 +6,67 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>渐变背景 Gradient Background</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="./css/bg3.css">
-  <link rel="stylesheet" href="../css/code.css">
 </head>
 
 <body>
   <header>
-    <h1>&commat;Gradient Background</h1>
+    <h1>渐变背景</h1>
+    <span>&commat;Gradient Background</span>
     <span class="ham iconfont icon-menu"></span>
-    <ul class="nav">
-      <li class="nav-item">Linear-gradient</li>
-      <li class="nav-item">Radial-gradient</li>
-      <li class="nav-item">Conic-gradient</li>
-    </ul>
+    <nav class="nav">
+      <a href="" style="--delay:0" class="nav-item">Linear-gradient</a>
+      <a href="" style="--delay:1" class="nav-item">Radial-gradient</a>
+      <a href="" style="--delay:2" class="nav-item">Conic-gradient</a>
+      <a href="" style="--delay:3" class="nav-item">Blend mode</a>
+    </nav>
   </header>
   <dl>
-    <dt>复合属性</dt>
+    <dd>利用不同的颜色以图片的形式渲染背景</dd>
+    <dd>可以多次渲染；先出现的在上面，后出现的在后面</dd>
     <dd>
+      <div>复合属性 - 可读性差</div>
       <pre>background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;</pre>
+      <div>独立属性 - 可读性好</div>
     </dd>
   </dl>
   <div class="chap">线性渐变 Linear-gradient</div>
   <dl class="nav-cont">
-    <dt>说明</dt>
-    <dd>. 线性渐变Linear Gradients - 向下/向上/向左/向右/对角方向</dd>
-    <dd>. 创建一个线性渐变，至少定义两个色块</dd>
-    <dd>. 可以指定色块的大小/范围和方向</dd>
-    <dd>. 不特别指明都是从0开始，到100%结束；这俩个位置可以省略</dd>
-    <dt>语法</dt>
     <dd>
+      <div>线性渐变Linear Gradients - 向下/向上/向左/向右/对角方向</div>
+      <div>创建一个线性渐变，至少定义两个色块</div>
+      <div>可以指定色块的大小/范围和方向</div>
+      <div>不特别指明都是从0开始，到100%结束；这俩个位置可以省略</div>
       <pre>background-image: linear-gradient(direction, color-stop1, color-stop2, ...);</pre>
     </dd>
     <dt>普通渐变</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 默认渐变：从上到下[180deg]</dd>
-    <dd class="basic default-bg"></dd>
-    <dd>
+    <dd class="sn">
+      <div>默认渐变|180deg：从上到下</div>
+      <p class="basic default-bg"></p>
       <pre>background-image: linear-gradient(#f40, #ff0);</pre>
-    </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 0deg渐变：从下到上，可以看出，它的0deg并不是向右的，而是朝上↑</dd>
-    <dd class="basic deg0-bg"></dd>
-    <dd>
+      <div>0deg渐变：从下到上，可以看出，它的0deg并不是向右的，而是朝上↑</div>
+      <p class="basic deg0-bg"></p>
       <pre>background-image: linear-gradient(0deg, #f40, #ff0);</pre>
-    </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 45deg渐变：左下到右上</dd>
-    <dd class="basic deg45-bg"></dd>
-    <dd>
+      <div>45deg渐变：左下到右上</div>
+      <p class="basic deg45-bg"></p>
       <pre>background-image: linear-gradient(0deg, #f40, #ff0);</pre>
     </dd>
     <dt>断点渐变</dt>
-    <dd>. 断点处使用相同的色块大小；使用0表示和前面色块的范围相同</dd>
-    <dd>. 利用角度实现切角的效果</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 切割色块</dd>
-    <dd class="price-bg"></dd>
-    <dd>
+    <dd class="sn">
+      <p>. 断点处使用相同的色块大小；使用0表示和前面色块的范围相同</p>
+      <p>. 利用角度实现切角的效果</p>
+      <div>切割色块</div>
+      <p class="price-bg"></p>
       <pre>
 background-image: linear-gradient(135deg, 
     #f40 50%, transparent 0);</pre>
-    </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 斑马渐变</dd>
-    <dd class="zebra-bg"></dd>
-    <dd>
+      <p>使用背景叠加的方式 - 一个50%的红色，不重复，一个100%的白色</p>
+      <pre>
+background: linear-gradient(135deg, #f40, #f40) no-repeat, #fff;
+background-size: 50% 100%;      </pre>
+      <div>斑马渐变；也可以使用重复线性渐变实现</div>
+      <p class="zebra-bg"></p>
       <pre>
 background-image: linear-gradient(90deg, 
     #f40 10%, 
@@ -81,37 +81,29 @@ background-image: linear-gradient(90deg,
     transparent 0, transparent 80%, 
     #f40, 0,  #f40 90%, 
     transparent 0, transparent 100%)</pre>
-    </dd>
-    <dt>单切角渐变</dt>
-    <dd>. 断点渐变中，将其中一个色块设置为透明</dd>
-    <dd>. 可以是某个颜色到透明的渐变；也可以是透明到某个色块的渐变</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 右上切角</dd>
-    <dd class="rt-bg"></dd>
-    <dd>
+      <div>单个切角渐变</div>
+      <p>. 断点渐变中，将其中一个色块设置为透明</p>
+      <p>. 可以是某个颜色到透明的渐变；也可以是透明到某个色块的渐变</p>
+      <p class="rt-bg"></p>
       <pre>linear-gradient(225deg, transparent 10px, #f40, 0, #f40 100%);</pre>
-    </dd>
-    <dt>多切角渐变</dt>
-    <dd>. 多个背景图片叠加而成</dd>
-    <dd>. 每个背景图片以,分隔</dd>
-    <dd>. 先出现的在上面，后出现的在后面</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 左上右上切角</dd>
-    <dd>. 两块：宽50%；高100%；一左一右放置</dd>
-    <dd>. 多个背景叠加，需要使用复合属性 background</dd>
-    <dd>. 不重复</dd>
-    <dd class="ltrt-bg"></dd>
-    <dd>
+      <div>两个切角渐变</div>
+      <p>. 两个背景图片叠加而成</p>
+      <p>. 每个背景图片以,分隔</p>
+      <p>. 先出现的在上面，后出现的在后面</p>
+      <p>. 两块：宽50%；高100%；一左一右放置</p>
+      <p>. 多个背景叠加，需要使用复合属性 background</p>
+      <p>. 不重复</p>
+      <p class="ltrt-bg"></p>
       <pre>
 background: 
     linear-gradient(135deg, transparent 10px, #f40, 0, #f40 100%),
     linear-gradient(225deg, transparent 10px, #f40, 0, #f40 100%) right;
 background-size: 50% 100%;
 background-repeat: no-repeat;</pre>
-    </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 四角切角</dd>
-    <dd>. 4块；宽高各为50%；分别放置4个角</dd>
-    <dd>. 不重复</dd>
-    <dd class="basic all-bg"></dd>
-    <dd>
+      <div>四个角渐变</div>
+      <p>. 4块；宽高各为50%；分别放置4个角</p>
+      <p>. 不重复</p>
+      <p class="basic all-bg"></p>
       <pre>
 background: 
     linear-gradient(45deg, transparent 10px, #f40, 0, #f40 100%) bottom left, 
@@ -122,32 +114,26 @@ background-size: 50% 50%;
 background-repeat: no-repeat;
 //background-size: 50% 50%, 50% 50%, 50% 50%, 50% 50%;
 //background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;</pre>
-    </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 遮罩背景-利用透明的渐变背景和图片背景实现</dd>
-    <dd>. 图片位于底层；透明的渐变位于上层，所以渐变要写在前面</dd>
-    <dd class="mask-bg"></dd>
-    <dd>
+      <div>其它 - 遮罩背景；利用透明的渐变背景和图片背景实现</div>
+      <p>. 图片位于底层；透明的渐变位于上层，所以渐变要写在前面</p>
+      <p class="mask-bg"></p>
       <pre>
 .mask-bg {
   height: 300px;
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.1)), url(../imgs/1.jpg) center/cover;
 }</pre>
     </dd>
-
-    <dd class="quote">
-      <div><span class="iconfont icon-bell"></span></div>
-      <div>. 0deg是从下到上↑，顺时针方向增加；默认是180deg，从上到下↓</div>
-      <div>. 如果使用多个渐变，请使用复合属性background；可以单独指定不重复</div>
-      <div>. 实际运用时，先画个草图，大概确定下背景图片的组成、大小和位置，再使用样式实现</div>
-      <div>. 除此外，还有重复线性渐变：repeating-linear-gradient()</div>
+    <dd class="tips">
+      <div>0deg是从下到上↑，顺时针方向增加；默认是180deg，从上到下↓</div>
+      <div>如果使用多个渐变，请使用复合属性background；可以单独指定不重复</div>
+      <div>实际运用时，先画个草图，大概确定下背景图片的组成、大小和位置，再使用样式实现</div>
+      <div>除此外，还有重复线性渐变：repeating-linear-gradient()</div>
     </dd>
   </dl>
   <div class="chap">径向渐变 Radial-gradient</div>
   <dl class="nav-cont">
-    <dt>说明</dt>
     <dd>. 径向渐变Radial Gradients - 由它们的中心和到容器边或角的大小决定</dd>
     <dd>. 同线性渐变一样：创建一个径向渐变，至少定义两个色块；可以定义每个色块的渐变范围；可以指定大小；可以定义多重径向渐变等等</dd>
-    <dt>语法</dt>
     <dd>
       <pre>background-image: radial-gradient([shape] [size] at position, start-color, ..., last-color);</pre>
     </dd>
@@ -208,10 +194,8 @@ background-size: 50% 50%;</pre>
   </dl>
   <div class="chap">锥向渐变 Conic-gradient</div>
   <dl class="nav-cont">
-    <dt>说明</dt>
     <dd>. 角度渐变</dd>
     <dd>. 适合做圆锥图/饼状图</dd>
-    <dt>语法</dt>
     <dd>
       <pre>conic-gradient([from angle] [at position,] color degree, color degree, ...);</pre>
     </dd>
@@ -244,10 +228,11 @@ background-size: 50% 50%;</pre>
 }</pre>
     </dd>
   </dl>
-  <div class="chap" id="bgi">图像混和 Background-blend-mode</div>
-  <dl>
-    <dt>说明</dt>
+  <div class="chap" id="bgi">混和模式 Blend mode</div>
+  <dl class="nav-cont">
+    <dt>图像混和 Background-blend-mode</dt>
     <dd>
+      <div>指定上下层图像的混合模式</div>
       <table>
         <tr>
           <th>类别</th>
@@ -287,10 +272,8 @@ background-size: 50% 50%;</pre>
         </tr>
       </table>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 图像融合</dd>
     <dd>. 原始图片、遮罩图片和合成图片</dd>
     <dd>. 遮罩图片请使用高对比度素材</dd>
-    <dd>. </dd>
     <dd class="grid3">
       <img src="./imgs/bg.jpg" alt="">
       <img src="./imgs/mask0.jpg" alt="">
@@ -308,20 +291,42 @@ background-size: 50% 50%;</pre>
     background-blend-mode: screen;
 }</pre>
     </dd>
+    <dt>mix-blend-mode</dt>
+    <dd>普通元素和背景图片的混合模式</dd>
+    <dd class="mbm">
+      <!-- <img src="../imgs/lg.jpg" alt=""> -->
+      <div>mix-blend-mode</div>
+    </dd>
+    <dd>
+      <pre>
+.mbm {
+  background-image: url(../../imgs/lg.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.mbm>div {
+  text-align: center;
+  font-size: 60px;
+  background-color: #fff;
+  mix-blend-mode: screen;
+}      </pre>
+    </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
     <dt>总结</dt>
     <dd>. 渐变背景的使用</dd>
     <dt>作业</dt>
-    <dd>. 参照下图的设计，应用到个人网站，如信息介绍、导航背景等等</dd>
+    <dd>1.为图片或代码打上水印</dd>
+    <dd>2. 参照下图的设计，应用到个人网站，如信息介绍、导航背景等等</dd>
     <dd class="home-flex">
       <img src="./imgs/card0.png" alt="">
       <img src="./imgs/card1.png" alt="">
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="./lib/ham.js"></script>
+  <script src="/utils/custom/ham2024.js"></script>
 </body>
 
 </html>
