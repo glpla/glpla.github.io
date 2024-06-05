@@ -7,8 +7,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iconfont</title>
   <link rel="stylesheet" href="../../css/common.css">
-  <link rel="stylesheet" href="../../css/sn.css">
+  <script src="//at.alicdn.com/t/c/font_3859342_gpyhrzeh5u.js"></script>
   <base target="_blank">
+  <style>
+    .symbol {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 4rem;
+    }
+
+    .symbol .icon {
+      width: 40px;
+      height: 40px;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
+    }
+  </style>
 </head>
 
 <body>
@@ -59,11 +75,11 @@
       <pre>&lt;i class="iconfont icon12"&gt;&lt;/i&gt;</pre>
     </dd>
     <dt>在线使用symbol</dt>
+    <dd>支持多色图标</dd>
     <dd class="sn">
-      <div>拷贝项目下面生成的symbol代码：</div>
-      <pre>
-  //at.alicdn.com/t/font_8d5l8fzk5b87iudi.js</pre>
-      <div>加入通用CSS代码（引入一次就行），并根据需要调整大小</div>
+      <div>拷贝项目下面生成的symbol代码链接到脚本 &lt;script&gt;</div>
+      <pre>&lt;script src="//at.alicdn.com/t/c/font_3859342_gpyhrzeh5u.js"&gt;&lt;/script&gt;</pre>
+      <div>加入通用CSS代码（引入一次就行），并根据需要调整大小；这里是图标的样式，也可以自己定制，非必须</div>
       <pre>
 &lt;style type="text/css"&gt;
   .icon {
@@ -73,11 +89,28 @@
       overflow: hidden;
   }
 &lt;/style&gt;</pre>
-      <div>挑选相应图标并获取类名，应用于页面</div>
+      <div>挑选相应图标并获取类名，应用于页面；保留 #</div>
       <pre>
 &lt;svg class="icon" aria-hidden="true"&gt;
     &lt;use xlink:href="#icon-xxx"&gt;&lt;/use&gt;
 &lt;/svg&gt;</pre>
+      <p class="symbol">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-bench"></use>
+        </svg>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-bed"></use>
+        </svg>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-home_bar"></use>
+        </svg>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-television_cabinet"></use>
+        </svg>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-writing_desk"></use>
+        </svg>
+      </p>
     </dd>
     <dt>在线使用 Unicode</dt>
     <dd class="sn">
@@ -109,13 +142,12 @@ src: url('//at.alicdn.com/t/font_2357817_dhel13phics.woff2?t=1632974998048') for
     <dd>基本操作同前</dd>
     <dt>在线使用</dt>
     <dd>使用url地址请求</dd>
-    <dd>在任何位置导入，如论是否勾选scoped都是全局使用</dd>
+    <dd>在任何位置导入，无论是否勾选scoped都是全局使用</dd>
     <dd class="code">
       <pre>@import url(//at.alicdn.com/t/c/font_4235521_vw0a33le7e.css);</pre>
     </dd>
     <dt>本地使用</dt>
     <dd>直接导入本地的css文件，需要完整的字体文件夹</dd>
-    <dd>导入位置</dd>
     <dd class="sn">
       <div>在assets目录中导入 - base.css 或main.css；全局使用</div>
       <pre>@import './download/font_4235521_r6opgv9sz3/iconfont.css';</pre>
@@ -129,6 +161,11 @@ src: url('//at.alicdn.com/t/font_2357817_dhel13phics.woff2?t=1632974998048') for
 &lt;style&gt;
 @import url(//at.alicdn.com/t/c/font_4235521_vw0a33le7e.css);
 &lt;/style&gt;</pre>
+    </dd>
+    <dt>使用symbol</dt>
+    <dd>
+      <div>在组件逻辑中导入并使用</div>
+      <pre>import '//at.alicdn.com/t/c/font_3859342_gpyhrzeh5u.js'</pre>
     </dd>
   </dl>
   <div class="chap" id="mp">微信小程序</div>

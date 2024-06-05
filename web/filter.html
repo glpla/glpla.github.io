@@ -6,9 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>滤镜 Filter</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="./css/filter.css">
-  <link rel="stylesheet" href="../css/code.css">
 </head>
 
 <body>
@@ -16,36 +15,34 @@
     <h1>&commat;Filter</h1>
     <span class="ham iconfont icon-menu"></span>
     <nav class="nav">
-      <a href="" class="nav-item">blur</a>
-      <a href="" class="nav-item">drop-shadow</a>
-      <a href="" class="nav-item">grayscale</a>
-      <a href="" class="nav-item">hue-rotate</a>
-      <a href="" class="nav-item">brightness</a>
-      <a href="" class="nav-item">backdrop-filter</a>
+      <a href="" style="--delay:0" class="nav-item">blur</a>
+      <a href="" style="--delay:1" class="nav-item">drop-shadow</a>
+      <a href="" style="--delay:2" class="nav-item">grayscale</a>
+      <a href="" style="--delay:3" class="nav-item">hue-rotate</a>
+      <a href="" style="--delay:4" class="nav-item">brightness</a>
+      <a href="" style="--delay:5" class="nav-item">contrast</a>
+      <a href="" style="--delay:6" class="nav-item">backdrop-filter</a>
     </nav>
   </header>
   <dl>
     <dd>.为元素添加滤镜效果</dd>
     <dd>.多个滤镜，请用空格分隔</dd>
     <dd>.多尝试，找到合适的效果</dd>
-    <dd class="mt2">原图如下；效果以动画形式呈现</dd>
+    <dd>原图如下</dd>
     <dd class="basic">
       <img class="blur0" src="../utils/view/view0.jpg" alt="">
     </dd>
     <dt class="nav-cont">1. blur()</dt>
-    <dd>.模糊滤镜；模糊导致元素的发散会影响到周边其他元素；但是实际尺寸没有变化</dd>
     <dd>
-      <figure class="code">
-        <figcaption>语法</figcaption>
-        <pre>filter:blur(px)</pre>
-      </figure>
+      <div>.模糊滤镜；模糊导致元素的发散会影响到周边其他元素；但是实际尺寸没有变化</div>
+      <pre>filter:blur(px)</pre>
     </dd>
     <dd>
     </dd>
     <dd class="basic">
       <img class="blur" src="../utils/view/view0.jpg" alt="">
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 发光效果</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 发光效果</dd>
     <dd class="light-wrap">
       <div style="--color:#48fc8b"></div>
       <div style="--color:#DE2910"></div>
@@ -61,23 +58,16 @@
     <dd class="basic">
       <img class="shadow" src="../utils/view/view0.jpg" alt="">
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 比较</dd>
-    <dd>box-shadow</dd>
-    <dd class="basic bs">早安中国</dd>
-    <dd>drop-shadow</dd>
-    <dd class="basic ds">早安中国</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 比较 box-shadow 和 drop-shadow</dd>
     <dd>
+      <div class="basic bs">早安中国</div>
       <pre>
-.bs, .ds {
-    text-align: center;
-    line-height: 180px;
-    padding: 10px;
-}
-
 .bs {
     box-shadow: 0 0 1px #000;
 }
-
+</pre>
+      <div class="basic ds">早安中国</div>
+      <pre>
 .ds {
     filter: drop-shadow(0 0 1px #000);
 }</pre>
@@ -88,10 +78,7 @@
     <dd>.将图像转换为灰阶：0%为原图；100%为全灰</dd>
     <dd>.特殊时期，各大门户网站使用灰度表达敬意</dd>
     <dd>
-      <figure class="code">
-        <figcaption>语法</figcaption>
-        <pre>filter:grayscale(%)</pre>
-      </figure>
+      <pre>filter:grayscale(%)</pre>
     </dd>
     <dd>
     </dd>
@@ -101,20 +88,15 @@
     <dt class="nav-cont">4. hue-rotate()</dt>
     <dd>.在图像上应用色相旋转。该值定义色环的度数deg，也可以使用turn。默认值为0deg，代表原始图像</dd>
     <dd>
-      <figure class="code">
-        <figcaption>语法</figcaption>
-        <pre>filter: hue-rotate(deg)</pre>
-      </figure>
+      <pre>filter: hue-rotate(deg)</pre>
     </dd>
-    <dd class="mt2" id="hue">[<span class="iconfont icon-keyboard"></span>] 霓虹灯</dd>
-    <dd>.多重文本阴影text-shadow叠加</dd>
+    <dd id="hue">[<span class="iconfont icon-keyboard"></span>] 霓虹灯</dd>
+    <dd>.多重文本阴影 text-shadow 叠加</dd>
     <dd class="hue-wrap">
       <div class="hue">早安中国</div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>霓虹灯</figcaption>
-        <pre>
+      <pre>
 .hue {
   color: #fff;
   font-size: 60px;
@@ -135,17 +117,14 @@
     filter: hue-rotate(360deg);
   }
 }        </pre>
-      </figure>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 类重用</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 类重用</dd>
     <dd>.先定义好一个button，然后利用hue-rotate创造出其他同款的button</dd>
     <dd class="hue-btn"><button class="primary">primary</button><button class="primary hue1">hue1</button><button
         class="primary hue2">hue2</button><button class="primary hue3">hue3</button><button
         class="primary hue4">hue4</button><button class="primary hue5">hue5</button></dd>
     <dd>
-      <figure class="code">
-        <figcaption>类重用</figcaption>
-        <pre>
+      <pre>
 .primary {
     border: none;
     outline: none;
@@ -175,18 +154,23 @@
 .hue5 {
     filter: hue-rotate(0.9turn);
 }</pre>
-      </figure>
     </dd>
     <dt class="nav-cont">5. brightness(%)</dt>
     <dd>.如果没有设定值，默认是1</dd>
     <dd>.如果值是0%，图像会全黑</dd>
     <dd>.值是100%，则图像无变化</dd>
     <dd>.超过100%，图像会比原来更亮</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 模拟白天、黑夜</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 模拟白天、黑夜</dd>
+    <dt class="nav-cont">6. contrast</dt>
+    <dd>对比度</dd>
+    <dd>调整图像的亮度；如果为0，则为灰度，rgb都是128</dd>
+    <dd class="basic">
+      <img class="contrast" src="../utils/view/view0.jpg" alt="">
+    </dd>
   </dl>
   <div class="chap">案例 Cases</div>
   <dl>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 查看原图-img</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 查看原图-img</dd>
     <dd>.利用img元素分别放置相同的图片；底层放灰图；上层放彩图</dd>
     <dd>.使用定位使2层图片重叠</dd>
     <dd>.通过input拖动使上层图片的裁剪变化，显示出下面的灰片，实现黑白到彩色的渐变</dd>
@@ -195,59 +179,36 @@
       <img class="slider-down" src="../utils/view/view0.jpg" alt="">
       <img id="tar" class="slider-up" src="../utils/view/view0.jpg" style="--slider:50" alt="">
     </dd>
-    <dd></dd>
     <dd>
-      <figure class="code">
-        <figcaption>[HTML]：使用了自定义属性--slider接受input的变化，来反映input的拖动</figcaption>
-        <pre>
+      <div>[HTML]：使用了自定义属性--slider接受input的变化，来反映input的拖动</div>
+      <pre>
 &lt;div class="slider"&gt;
     &lt;input id='slider' class="range" type="range"&gt;
     &lt;img class="slider-down" src="../utils/view/view0.jpg" alt=""&gt;
     &lt;img id="tar" class="slider-up" src="../utils/view/view0.jpg" style="--slider:50" alt=""&gt;
 &lt;/div&gt;</pre>
-      </figure>
-    </dd>
-    <dd></dd>
-    <dd>
-      <figure class="code">
-        <figcaption>[核心CSS]</figcaption>
-        <pre>
+      <pre>
 .slider-down {
     filter: grayscale(100%);
 }
 .slider-up {
     clip-path: inset(0 0 0 calc(var(--slider)*1%));
 }</pre>
-      </figure>
-    </dd>
-    <dd></dd>
-    <dd>
-      <figure class="code">
-        <figcaption>[JavaScript]</figcaption>
-        <pre>
+      <pre>
 let slider = document.querySelector('#slider')
 let tar = document.querySelector('#tar')
 slider.addEventListener('input', function () {
     tar.style.setProperty('--slider', this.value)
 })</pre>
-      </figure>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 查看原图-伪元素</dd>
-    <dd>.利用伪元素实现</dd>
-    <dd>.hover触发</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 查看原图-伪元素</dd>
     <dd>
+      <div>.利用伪元素实现</div>
+      <div>.hover触发</div>
       <div class="basic slider-pre"></div>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>[HTML]：显然伪元素的结构更为精简</figcaption>
-        <pre>&lt;div class="slider slider-pre"&gt;&lt;/div&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>[CSS]</figcaption>
-        <pre>
+      <div>[HTML]：显然伪元素的结构更为精简</div>
+      <pre>&lt;div class="slider slider-pre"&gt;&lt;/div&gt;</pre>
+      <pre>
 .slider-pre {
     position: relative;
     width: 320px;
@@ -277,7 +238,16 @@ slider.addEventListener('input', function () {
 .slider-pre:hover::after {
     clip-path: inset(0 0 0 0);
 }</pre>
-      </figure>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 水滴筹</dd>
+    <dd><a href="https://9elements.github.io/fancy-border-radius/">fancy-border-radius</a></dd>
+    <dd><a href="./animation.html">animation</a></dd>
+    <dd class="water">
+      <div class="drop" style="--delay:0"></div>
+      <div class="drop" style="--delay:1"></div>
+      <div class="drop" style="--delay:2"></div>
+      <div class="drop" style="--delay:3"></div>
+      <div class="drop" style="--delay:4"></div>
     </dd>
   </dl>
   <div class="chap nav-cont">背景过滤 backdrop-filter</div>
@@ -287,14 +257,12 @@ slider.addEventListener('input', function () {
     <dd>.适用于元素背后所有元素</dd>
     <dd>.为了看到效果，前面元素应<span class="warn">无</span>背景或背景<span class="warn">透明</span>；如果是实心背景，就看不到下面背景的毛玻璃效果</dd>
     <dd>.应用：苹果UI、广告等毛玻璃效果、登录表单背景</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 毛玻璃</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 毛玻璃</dd>
     <dd class="basic glass-box">
       <div class="glass"></div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>[CSS]</figcaption>
-        <pre>
+      <pre>
 .glass-box {
     background-image: url(./imgs/1.png);
     background-size: cover;
@@ -306,11 +274,10 @@ slider.addEventListener('input', function () {
     background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
     backdrop-filter: blur(1rem);
 }</pre>
-      </figure>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="./lib/ham.js"></script>
+  <script src="/utils/custom/ham2024.js"></script>
   <script>
     window.onload = function () {
       let slider = document.querySelector('#slider')

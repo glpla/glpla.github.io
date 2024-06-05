@@ -5,13 +5,7 @@
 }
 
 .blur {
-  animation: blur 2s linear alternate infinite;
-}
-
-@keyframes blur {
-  to {
-    filter: blur(.2rem);
-  }
+  filter: blur(.2rem);
 }
 
 .light-wrap {
@@ -47,13 +41,7 @@
 }
 
 .shadow {
-  animation: shadow 2s linear alternate infinite;
-}
-
-@keyframes shadow {
-  to {
-    filter: drop-shadow(0 .2rem 1rem #000);
-  }
+  filter: drop-shadow(0 .2rem 1rem #000);
 }
 
 .bs,
@@ -64,11 +52,11 @@
 }
 
 .bs {
-  box-shadow: 0 0 1px #000;
+  box-shadow: 2px 2px 4px #000;
 }
 
 .ds {
-  filter: drop-shadow(0 0 1px #000);
+  filter: drop-shadow(2px 2px 4px #000);
 }
 
 .bubble {
@@ -93,13 +81,7 @@
 }
 
 .gray {
-  animation: gray 2s linear alternate infinite;
-}
-
-@keyframes gray {
-  to {
-    filter: grayscale(100%)
-  }
+  filter: grayscale(100%)
 }
 
 .hue-wrap {
@@ -203,7 +185,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  background-image: url(../imgs/1.jpg);
+  background-image: url(/utils/view/view0.jpg);
 }
 
 .slider-pre::before {
@@ -220,7 +202,7 @@
 }
 
 .glass-box {
-  background-image: url(../imgs/1.jpg);
+  background-image: url(/utils/view/view0.jpg);
   background-size: cover;
 }
 
@@ -229,4 +211,64 @@
   height: 100%;
   background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
   backdrop-filter: blur(1rem);
+}
+
+.contrast {
+  filter: contrast(0);
+}
+
+.water {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 40vh;
+  background-color: #000;
+  filter: contrast(30);
+}
+
+.water::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #fff;
+  filter: blur(10px);
+  animation: waterroll 2s linear infinite;
+}
+
+.drop {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  filter: blur(10px);
+  animation: drop 2.5s ease-in-out calc(0.5s*var(--delay)) infinite;
+}
+
+@keyframes drop {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(-300px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1) translateY(0px);
+  }
+
+
+  100% {
+    opacity: 0;
+    transform: scale(0) translateY(300px);
+  }
+
+}
+
+@keyframes waterroll {
+  100% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    transform: rotate(360deg);
+  }
 }
