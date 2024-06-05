@@ -24,7 +24,10 @@
         <dd>复合CSS属性可以使用小驼峰camelCase，也支持短划线 kebab-cased；推荐使用小驼峰camelCase，因为静态使用和动态绑定写法一致</dd>
         <dd>注意双引号和单引号的配套使用</dd>
         <dd>使用vue devtool调试</dd>
-        <dd class="tips">类的绑定使用能满足大多场景，不要纠结于内联样式的使用</dd>
+        <dd class="tips">
+            <div>类的绑定使用能满足大多场景，不要纠结于内联样式的使用</div>
+            <div>如果使用了数据绑定，需要使用 {}；否则不需要，如静态样式或模板字符串</div>
+        </dd>
         <dt>常见静态样式</dt>
         <dd>简单属性和复合属性</dd>
         <dd>
@@ -36,20 +39,27 @@
 &lt;div style="backgroundColor: #f40;"&gt;hi,there&lt;/div&gt;</pre>
         </dd>
         <dt>常见绑定样式</dt>
-        <dd>采用对象方式：值对key-value</dd>
         <dd>为了和绑定的数据|样式值区分，建议：样式属性key使用引号括起来</dd>
-        <dd class="tips">标准JSON格式，key用引号；各值对使用逗号分隔</dd>
         <dd class="sn">
             <div>直接指定样式值 - 复合CSS属性</div>
             <pre>
 &lt;div :style="{ 'color': txtColor }"&gt;hi,there&lt;/div&gt;
 &lt;div :style="{ 'background-color': color }"&gt;content&lt;/div&gt;
 &lt;div :style="{ 'backgroundColor': color }"&gt;content&lt;/div&gt;</pre>
-            <div>拼接样式值 - 数值和单位</div>
+            <div>拼接样式值 - 数值和单位；使用 {}</div>
             <pre>
 &lt;div :style="{ 'fontSize': small + 'px' }"&gt;hi,there&lt;/div&gt;
 &lt;div :style="{ 'lineHeight': h + 'px' }"&gt;content&lt;/div&gt;
-&lt;div :style="{ 'backgroundImage': 'url(' + imgUrl + ')' }"&gt;content&lt;/div&gt;</pre>
+</pre>
+            <pre>
+&lt;div :style="{ 'backgroundImage': 'url(' + imgUrl + ')' }"&gt;content&lt;/div&gt;
+&lt;div :style="{ 'background-image': 'url(' + imgUrl + ')' } "&gt;content&lt;/div&gt;
+</pre>
+            <div>模板字符串 - 不使用 {}</div>
+            <pre>
+&lt;div :style="`background-image:url(${imgUrl})`"&gt;content&lt;/div&gt;</pre>
+            <p>模板字符串不支持小驼峰写法</p>
+            <pre>&lt;div :style="`backgroundImage:url(${imgUrl})`"&gt;content&lt;/div&gt;</pre>
             <div>多样式使用逗号,分隔，渲染时变为分号;</div>
             <pre>&lt;div :style="{ 'backgroundColor': color, 'lineHeight': h + 'px' }"&gt;content&lt;/div&gt;</pre>
             <div>使用计算属性；请查看 <a href="./computed.html">计算属性 - computed</a></div>
