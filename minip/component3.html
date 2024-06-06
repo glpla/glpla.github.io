@@ -39,37 +39,54 @@ properties: {
         </dd>
         <dd class="example-sn">封装图片轮播组件my-swiper</dd>
         <dd>不同的轮播组件在不同的页面显示的图片列表和高度不一样；通过传递图片列表参数imgs和高度参数h，采用内联样式设置轮播组件高度</dd>
-        <dd>
-            <p>组件 - 结构wxml；内联样式style不需要使用{}</p>
-            <pre>
-&lt;swiper style="height: {{h}}rpx;"&gt;
-    &lt;swiper-item wx:for='{{imgs}}' wx:key='index'&gt;
-        &lt;image src="{{item}}" mode="aspectFill"&gt;&lt;/image&gt;
-    &lt;/swiper-item&gt;
-&lt;/swiper&gt;</pre>
-            <p>组件 - 逻辑js声明2个参数，高度默认400，图片列表为空</p>
+        <dd class="sn">
+            <div>创建组件 my-swiper</div>
+            <div>组件逻辑js - 声明2个参数，高度默认20，图片列表为空</div>
             <pre>
 Component({
     properties: {
         h:{
-        type:Number,
-        value:400
+            type:Number,
+            value: 20
         },
         imgs: {
-        type: Array,
-        value: []
+            type: Array,
+            value: []
         }
     }
 })</pre>
-            <p>父组件 - 配置json引入</p>
+            <div>组件结构wxml - 内联样式style不需要使用{}</div>
+            <pre>
+&lt;swiper class="swiper" style="height: {{h}}vh;"  indicator-dots indicator-color="#fff" indicator-active-color="#f40" autoplay circular&gt;
+    &lt;swiper-item wx:for='{{imgs}}' wx:key='id'&gt;
+        &lt;image class="img" src="{{item.url}}" mode="aspectFill"&gt;&lt;/image&gt;
+    &lt;/swiper-item&gt;
+&lt;/swiper&gt;</pre>
+            <div>组件样式wxss - 轮播图高度由内联样式style指定；这里仅需指定图片大小</div>
+            <pre>
+.img{
+    width: 100%;
+}</pre>
+            <div>父组件配置json - 引入</div>
             <pre>
 {
     "usingComponents": {
         "my-swiper": "../../components/my-swiper/my-swiper"
     }
 }</pre>
-            <p>父组件 - 结构wxml使用 - 传递高度h；绑定图片列表</p>
-            <pre>&lt;my-swiper h='{{200}}' imgs='{{imgs}}'&gt;&lt;/m-swiper&gt;</pre>
+            <div>父组件结构wxml - 使用；传递高度h；绑定图片列表imgs</div>
+            <pre>&lt;my-swiper h='{{25}}' imgs='{{imgs}}'&gt;&lt;/m-swiper&gt;</pre>
+            <div>父组件逻辑js - 在页面的 onLoad() 中从 <a href="/utils/index.html">大树小站</a> 请求图片，或自行准备；imgs是data中的定义的数据</div>
+            <pre>
+wx.request({
+    url: 'https://glpla.github.io/utils/data/swiper.json',
+    success: res => {
+        console.log('res', res);
+        this.setData({
+            imgs: res.data.cont
+        })
+    }
+})</pre>
         </dd>
         <dd class="example-sn">封装阿里字体图标组件my-iconfont</dd>
         <dd>父组件仅仅传递图标类，控制组件显示相应的字体图标</dd>

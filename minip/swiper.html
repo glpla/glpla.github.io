@@ -80,6 +80,41 @@
                 </tr>
             </table>
         </dd>
+        <dd class="example-sn">自动、循环轮播图</dd>
+        <dd class="sn">
+            <div>在页面的 onLoad() 中从 <a href="/utils/index.html">大树小站</a> 请求图片，或自行准备；imgs是data中的定义的数据</div>
+            <pre>
+wx.request({
+    url: 'https://glpla.github.io/utils/data/swiper.json',
+    success: res => {
+        console.log('res', res);
+        this.setData({
+            imgs: res.data.cont
+        })
+    }
+})</pre>
+            <div>使用列表渲染结构；指定循环、自动播放以及指示器的样式</div>
+            <pre>
+&lt;swiper class="swiper" indicator-dots indicator-color="#fff" indicator-active-color="#f40" autoplay circular&gt;
+    &lt;swiper-item class="swiper-item" wx:for="{{imgs}}" wx:key="id"&gt;
+        &lt;image class="img" src="{{item.url}}" mode="aspectFill" /&gt;
+    &lt;/swiper-item&gt;
+&lt;/swiper&gt;</pre>
+            <div>指定样式</div>
+            <pre>
+.swiper{
+    height: 30vh;
+}
+.img{
+    width: 100%;
+}</pre>
+            <img src="./imgs/swiper0.png" alt="">
+            <img src="./imgs/swiper1.png" alt="">
+            <img src="./imgs/swiper2.png" alt="">
+            <img src="./imgs/swiper3.png" alt="">
+            <img src="./imgs/swiper4.png" alt="">
+            <img src="./imgs/swiper5.png" alt="">
+        </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
     <script src="/utils/custom/star.js"></script>
