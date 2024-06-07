@@ -123,7 +123,7 @@ data: {
     </dd>
     <dt>样式表导入 @import</dt>
     <dd>便于样式复用；如初始化样式库、模块样式库等等</dd>
-    <dd>仅支持相对路径；以;结束</dd>
+    <dd>支持相对路径和绝对路径；以 <span class="warn">分号 ;</span> 结束</dd>
     <dd class="example-sn">导入初始化样式表</dd>
     <dd class="sn">
       <div>在样式目录下新建一个样式文件，命名为reset.wxss</div>
@@ -138,6 +138,8 @@ data: {
       <pre>
 page{
   --themeColor:#eb4450;
+  --main-color: #f40;
+  --border-color: var(--main-color);
   min-height: 100vh;
   font-size: 28rpx;
   box-sizing: border-box;
@@ -153,8 +155,9 @@ button{
     </dd>
     <dd class="example-sn" id="iconfont">使用 <a href="../web/framework/iconfont.html">阿里字体图标</a></dd>
     <dd>可以根据需要修改iconfont.wxss的样式，如字体大小、单位、颜色等等</dd>
-    <dd>为避免频繁使用基类iconfont，可封装为全局组件；详情请参考 <a href="./components.html">自定义组件</a></dd>
+    <dd>为避免频繁使用基类iconfont，可封装为全局组件；详情请参考 <a href="./component3.html">自定义组件</a></dd>
     <dt>单位</dt>
+    <dd>不推荐使用绝对单位px；推荐使用以下相对单位</dd>
     <dd>1. rpx</dd>
     <dd>物理像素 - 实际的像素点</dd>
     <dd>逻辑像素 - CSS的像素单位</dd>
@@ -171,7 +174,8 @@ button{
     <dd>3. %</dd>
     <dd>百分比</dd>
     <dt>颜色</dt>
-    <dd>使用16进制颜色，如#ff4400；支持简写，如#f40；支持透明色，如#f406；建议使用rgba()</dd>
+    <dd>使用16进制颜色，如#ff4400；支持简写，如#f40；支持透明色，如#f406</dd>
+    <dd>建议使用rgba()</dd>
   </dl>
   <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="/utils/custom/star.js"></script>

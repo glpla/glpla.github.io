@@ -20,58 +20,67 @@
     <dd>包含：数据、<a href="./events.html">事件处理函数</a> 、<a href="./lifetime.html">生命周期函数</a>
       和其他函数，如<a href="./page_event.html">页面特定事件</a></dd>
     <dt>数据 Data</dt>
-    <dd>数据类型同JavaScript数据类型：Number、String，Array，Object等等</dd>
+    <dd>数据类型同 JavaScript 数据类型：Number、String，Array，Object等等</dd>
     <dd>按照用途可以分为两种：响应式数据和静态数据；如无特别说明，都是指响应式数据</dd>
-    <dd>响应式数据用于渲染页面，在data中定义</dd>
-    <dd>静态数据在page顶级说明，和data同级，且不需要指定数据类型</dd>
+    <dd>响应式数据用于渲染页面，在 data 中定义</dd>
+    <dd>静态数据在 page 顶级说明，和 data 同级，且不需要指定数据类型</dd>
     <dd>
       <pre>
 data: {
+  age: 18,
   msg: 'hi,there',
-  url: '/images/cal0.png',
+  url: 'glpla.github.io',
   tempFilePath: null,
   userInfo:{
-    uage:18,
-    ugender:'女',
-    uname:'glpla',
+    uage: 18,
+    ugender: '男',
+    uname: 'glpla',
     usn:20221001
-  }
+  },
+  goods: []
 },
 uploadFileUrl: null</pre>
     </dd>
-    <dt>数据绑定</dt>
-    <dd>结构中使用：插值表达式{{}}</dd>
+    <dt>数据使用</dt>
+    <dd>1. 逻辑 js</dd>
+    <dd>逻辑 js中使用：this.data.varible_name</dd>
+    <dd>逻辑 js中修改：this.setData()</dd>
+    <dd>逻辑 js中使用函数类似</dd>
+    <dd>
+      <div>. 修改简单数据</div>
+      <pre>
+this.setData({
+  msg: 'welcome back'
+})</pre>
+      <div>. 修改复杂数据</div>
+      <pre>
+this.setData({
+  "userInfo.uage": 24
+})</pre>
+    </dd>
+    <dd>2. 结构 wxml</dd>
+    <dd>结构中使用插值表达式{{}}实现逻辑层数据和视图层结构的绑定；更多信息，请访问 <a
+        href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A">官方文档
+        -数据绑定</a>
+    </dd>
     <dd>可以绑定内容；也可以绑定属性，如样式class和内联样式</dd>
     <dd>可以使用三元表达式</dd>
     <dd>
       <pre>
 &lt;text&gt;{{msg}}&lt;/text&gt;
 &lt;image class="avatar" src="{{url}}" mode="widthFix" /&gt;
-&lt;input class="ipt {{iptName?'border-focus':''}}" type="text"/&gt;</pre>
-    </dd>
-    <dd>js中使用：this.data.varible_name</dd>
-    <dd>js中修改：this.setData()</dd>
-    <dd>js中使用函数类似</dd>
-    <dd>1. 修改简单数据</dd>
-    <dd>
-      <pre>
-this.setData({
-  msg: 'welcome back'
-})</pre>
-    </dd>
-    <dd>2. 修改复杂数据</dd>
-    <dd>
-      <pre>
-this.setData({
-  "userInfo.uage": 24
-})</pre>
+&lt;input class="ipt {{iptName?'border-focus':'border-none'}}" type="text"/&gt;</pre>
     </dd>
     <dd class="tips">配合调试器的AppData查看</dd>
     <dt>其它数据</dt>
     <dd>除了使用本页面定义的数据外，还可以使用其它页面的数据，如从app.js中获取数据、从服务器拉取数据</dd>
-    <dd>在page()外侧引入app.js的数据</dd>
+    <dd>在page()外部引入app.js的数据</dd>
     <dd>
-      <pre>const app = getApp()</pre>
+      <pre>
+const app = getApp()
+Page({
+  //
+})</pre>
     </dd>
   </dl>
   <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

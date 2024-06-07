@@ -19,8 +19,8 @@
     <dd>微信小程序结构文件的后缀名是 <span class="warn">.wxml</span></dd>
     <dt>常用组件</dt>
     <dd>小程序的结构页面由各种组件构成：系统组件和自定义组件</dd>
-    <dd>避免使用HTML标签</dd>
-    <dd>更多组件，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/">component</a>
+    <dd>不支持HTML标签</dd>
+    <dd>更多组件，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/">官方文档 - component</a>
     </dd>
     <dd>
       <table>
@@ -31,19 +31,19 @@
         </tr>
         <tr>
           <td>&lt;view&gt;</td>
-          <td>视图；块标签；类似&lt;div&gt;</td>
+          <td>视图；块标签；类似 &lt;div&gt;</td>
         </tr>
         <tr>
           <td>&lt;text&gt;</td>
-          <td>文本；行标签；只能嵌套文本标签；类似&lt;span&gt;</td>
+          <td>文本；行标签；只能嵌套文本标签；类似 &lt;span&gt;</td>
         </tr>
         <tr>
           <td>&lt;navigator&gt;</td>
-          <td>导航；类似&lt;a&gt;</td>
+          <td>导航；类似 &lt;a&gt;</td>
         </tr>
         <tr>
           <td>&lt;image&gt;</td>
-          <td>图像；默认300px*240px；类似&lt;img&gt;</td>
+          <td>图像；默认300px*240px；类似 &lt;img&gt;</td>
         </tr>
         <tr>
           <td>&lt;video&gt;</td>
@@ -51,12 +51,12 @@
         </tr>
         <tr>
           <td>&lt;audio&gt;</td>
-          <td>音频</td>
+          <td>音频；系统不建议使用</td>
         </tr>
       </table>
     </dd>
     <dd class="tips">
-      <div>由于小程序大小的限制，多媒体资源如图像、视频、音频等等，应通过在线方式获取；所以我们需要搭建本地资源服务器或者花钱使用云开发</div>
+      <div>由于小程序大小的限制，多媒体资源如图像、视频、音频等等，应通过在线方式获取；需搭建本地资源服务器或者花钱使用云开发</div>
     </dd>
     <dt>数据绑定</dt>
     <dd>WXML 中的动态数据均来自对应 Page 的 data。</dd>
@@ -78,93 +78,9 @@ data: {
 &lt;view&gt; {{age&gt;=18 ? 'Welcome' : 'Bye'}} &lt;/view&gt;</pre>
       </figure>
     </dd>
-    <dt>条件渲染</dt>
-    <dd>以绑定属性的方式使用wx:if判断条件是否成立，成立则渲染，否则不渲染或不处理</dd>
-    <dd>语法1：wx:if</dd>
-    <dd>语法2：wx:if wx:else</dd>
-    <dd>语法3：wx:if wx:elif wx:else</dd>
-    <dd>
-      <pre>
-data: {
-  age: 18,
-  isShow: true
-}</pre>
-      <p>单分支判断</p>
-      <pre>&lt;view wx:if = '{{ age >= 18 }}'&gt; Welcome &lt;/view&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <p>多分支判断</p>
-      <pre>
-&lt;view wx:if = '{{ age >= 18 }}'&gt; Welcome &lt;/view&gt;
-&lt;view wx:else&gt; Bye &lt;/view&gt;
-</pre>
-      <p>单分支判断还可以使用hidden属性实现条件渲染；为true时，隐藏；为false时，显示</p>
-      <pre>
-&lt;view hidden="{{age >= 18}}"&gt;88&lt;/view&gt;
-&lt;view hidden="{{isShow}}"&gt;88&lt;/view&gt;</pre>
-    </dd>
-    <dd class="tips">
-      <div>凡是用到布尔变量的地方，都可以使用比较表达式</div>
-      <div>wx:if是通过加载或移除组件的方式实现条件渲染；真，加载组件；假，移除组件；有没有的问题</div>
-      <div>hidden是通过display是否为none实现条件渲染；组件始终加载；显示不显示的问题</div>
-      <div>复杂的逻辑切换，使用wx:if；频繁切换状态，使用hidden</div>
-      <div>使用调试器的appData面板实时调试</div>
-    </dd>
-    <dt>列表渲染</dt>
-    <dd>以绑定属性的方式使用wx:for循环数组</dd>
-    <dd>默认情况下，使用 <span class="warn">item</span> 表示迭代的当前数据项，使用 <span class="warn">index</span> 表示当前数据项的索引</dd>
-    <dd>多重循环下，系统可以自动识别 index 和 item 的作用域；也可以使用 wx:for-index 和 wx:for-item 指定索引和当前项，但是不建议</dd>
-    <dd>为保证渲染效率和数据的唯一性，应总是使用 wx:key</dd>
-    <dd>对象数据列表通常需要提供唯一标识id字段，可以作为key；直接使用id即可</dd>
-    <dd>普通列表没有id，可以使用 index 作为key；或者为数据创建时间戳作为id - now()</dd>
-    <dd>1. 静态数组 - 指定数字</dd>
-    <dd>
-      <p>循环次数：从0到9-1，8次</p>
-      <pre>&lt;view wx:for="{{9}}" wx:key="index"&gt; {{item}} &lt;/view&gt;</pre>
-    </dd>
-    <dd>2. 动态数组 - 根据数组实际长度|个数循环</dd>
-    <dd>
-      <pre>
-data: {
-  arr: [1, 2, 3, 4, 5],
-  obj:[
-    {id:0, name:'gl', year:1995},
-    {id:1, name:'sh', year:2005},
-    {id:2, name:'nj', year:2008}
-  ]
-}</pre>
-      <p>普通数组 - 循环5次</p>
-      <pre>&lt;view wx:for="{{arr}}" wx:key="item"&gt; {{item}} &lt;/view&gt;</pre>
-      <p>对象数组 - 循环3次</p>
-      <pre>&lt;view wx:for="{{obj}}" wx:key="id"&gt; {{item.name}}- {{item.year}} &lt;/view&gt;</pre>
-    </dd>
-    <dd class="example-sn">多重循环 - 9*9乘法表</dd>
-    <dd>为了更加直观的观察效果，配置页面为横板；样式自定</dd>
-    <dd>
-      "pageOrientation": "landscape"
-    </dd>
-    <dd>
-      <p>多重循环 - 9*9乘法表</p>
-      <pre>
-&lt;view  class="item" wx:for="{{arr}}" wx:key="index" wx:for-item='i'&gt;
-  &lt;text wx:for="{{i+1}}" wx:key="index" wx:for-item='j'&gt;
-    &lt;text class="item" wx:if="{{j&gt;0}}"&gt;{{j}} * {{i}} = {{i*j}} &lt;/text&gt;
-  &lt;/text&gt;
-&lt;/view&gt;</pre>
-    </dd>
-    <dd>
-      <figure class="img-sn">
-        <img src="./imgs/99.png" alt="">
-        <p>9*9乘法表</p>
-      </figure>
-    </dd>
-    <dt>模板</dt>
-    <dt>&lt;block&gt;</dt>
+    <dt>模板 &lt;block&gt;</dt>
     <dd>无语义化；作为容器分隔多层逻辑或控制一组组件</dd>
-    <dd class="example-sn">遍历对象</dd>
-    <dd>index相当于key；item相当于value</dd>
-    <dd>也可以自定义为key-value形式</dd>
+    <dd class="example-sn">遍历对象 - index相当于key；item相当于value - 也可以自定义为key-value形式</dd>
     <dd>
       <pre>obj:{id:100,name:'glpla',gender:'male'}</pre>
       <pre>
