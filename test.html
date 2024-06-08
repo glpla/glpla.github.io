@@ -12,31 +12,81 @@
       box-sizing: border-box;
     }
 
-    @property --deg-r {
-      syntax: '<angle>';
-      initial-value: 0deg;
-      inherits: false;
+    body {
+      display: flex;
+      height: 100vh;
     }
 
     .wrap {
-      --deg-r: 0deg;
-      width: 100px;
-      height: 200px;
-      background-image: linear-gradient(var(--deg-r), #f0f, #0ff);
-      margin: 100px auto;
-      animation: flash 2s linear infinite;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 16/9;
+      margin: auto;
+      transition: .4s;
     }
 
-    @keyframes flash {
-      to {
-        --deg-r: 360deg;
-      }
+    .item {
+      background-color: #f4f;
+      background-image: url(https://picsum.photos/800/600?random=1);
+      background-size: 300% 300%;
+    }
+
+    .wrap .item:nth-child(1) {
+      background-position: left top;
+    }
+
+    .wrap .item:nth-child(2) {
+      background-position: center top;
+    }
+
+    .wrap .item:nth-child(3) {
+      background-position: right top;
+    }
+
+    .wrap .item:nth-child(4) {
+      background-position: left center;
+    }
+
+    .wrap .item:nth-child(5) {
+      background-position: center center;
+    }
+
+    .wrap .item:nth-child(6) {
+      background-position: right center;
+    }
+
+    .wrap .item:nth-child(7) {
+      background-position: left bottom;
+    }
+
+    .wrap .item:nth-child(8) {
+      background-position: center bottom;
+    }
+
+    .wrap .item:nth-child(9) {
+      background-position: right bottom;
+    }
+
+    .wrap:hover {
+      gap: 0;
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
   </div>
 </body>
 
