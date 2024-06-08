@@ -6,11 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>帧动画 Animation</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="./css/ani.css">
-  <link rel="stylesheet" href="../css/sn.css">
-  <link rel="stylesheet" href="../css/code.css">
-  <link rel="stylesheet" href="style.css">
   <base target="_blank">
   <style>
     :root {
@@ -21,13 +18,14 @@
 
 <body>
   <header>
-    <h1>&commat;Animation</h1>
+    <h1>帧动画</h1>
+    <span>&commat;Animation</span>
     <span class="ham iconfont icon-menu"></span>
     <nav class="nav">
-      <a href="" class="nav-item">Overview</a>
-      <a href="" class="nav-item">Cases</a>
-      <a href="" class="nav-item">steps</a>
-      <a href="" class="nav-item">Events</a>
+      <a href="" style="--delay:0" class="nav-item">Overview</a>
+      <a href="" style="--delay:1" class="nav-item">Cases</a>
+      <a href="" style="--delay:2" class="nav-item">Steps</a>
+      <a href="" style="--delay:3" class="nav-item">Events</a>
     </nav>
   </header>
   <dl>
@@ -41,11 +39,9 @@
     </dd>
     <dt>定义动画 Definition</dt>
     <dd>.利用关键字from和to；通常省略from，表示从当前状态开始</dd>
-    <dd>.关键字只能定义2个状态</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>关键字定义</figcaption>
-        <pre>
+    <dd class="sn">
+      <div>关键字只能定义2个状态</div>
+      <pre>
 @keyframes ani_name {
     from {
     }
@@ -53,13 +49,8 @@
     to {
     }
 }</pre>
-      </figure>
-    </dd>
-    <dd>.利用百分比：可以定义多个百分比节点/状态，动画效果更为灵活细腻</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>百分比定义</figcaption>
-        <pre>
+      <div>利用百分比：可以定义多个百分比节点/状态，动画效果更为灵活细腻</div>
+      <pre>
 @keyframes ani_name {
     0% {      
     }
@@ -70,20 +61,14 @@
     100% {      
     }
 }</pre>
-      </figure>
     </dd>
     <dt>使用动画 Usage</dt>
     <dd>.可以使用复合属性语法；也可以使用单独属性语法</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>复合属性语法</figcaption>
-        <pre>animation: name duration timing-function delay iteration-count direction fill-mode;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>单独属性语法</figcaption>
-        <pre>
+    <dd class="sn">
+      <div>复合属性语法</div>
+      <pre>animation: name duration timing-function delay iteration-count direction fill-mode;</pre>
+      <div>单独属性语法</div>
+      <pre>
 animation-name:
 animation-duration:
 animation-timing-function:
@@ -91,10 +76,9 @@ animation-delay:
 animation-iteration-count:
 animation-direction:
 animation-fill-mode:</pre>
-      </figure>
     </dd>
     <dd>
-      <table class="tbl-sn">
+      <table>
         <caption>动画属性</caption>
         <tr>
           <th style="width: 30%;">类别</th>
@@ -133,9 +117,7 @@ animation-fill-mode:</pre>
           <td>动画状态；paused | played</td>
         </tr>
       </table>
-    </dd>
-    <dd>
-      <table class="tbl-sn">
+      <table>
         <caption>动画方式 animation-timing-function</caption>
         <tr>
           <th style="width: 30%;">类别</th>
@@ -168,44 +150,30 @@ animation-fill-mode:</pre>
       </table>
     </dd>
     <dt>其他说明</dt>
-    <dd>.如果没有显式的指定结束状态为100%，则默认返回起始状态</dd>
     <dd>
-      <figure class="code">
-        <figcaption>默认返回</figcaption>
-        <pre>
+      <div>.如果没有显式的指定结束状态为100%，则默认返回起始状态</div>
+      <pre>
 @keyframes blink {
   50% {
     color: #000;
   }
 }</pre>
-      </figure>
-    </dd>
-    <dd>.多个动画使用,分隔，可以分别指定某个动画的属性</dd>
-    <dd>.先播放第一个动画roll，接着播放第二个动画zoom，然后一直循环播放第二个动画</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>多动画使用</figcaption>
-        <pre>
+      <div>.多个动画使用逗号,分隔，可以分别指定某个动画的属性</div>
+      <div>.先播放第一个动画roll，接着播放第二个动画zoom，然后一直循环播放第二个动画</div>
+      <pre>
 animation: 
     roll 2s ease,
     zoom 2s 2s ease infinite alternate;</pre>
-      </figure>
-    </dd>
-    <dd>.先播放第一个动画roll，接着播放第二个动画zoom，最后一直循环播放第一个动画</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>多动画使用</figcaption>
-        <pre>
+      <div>.先播放第一个动画roll，接着播放第二个动画zoom，最后一直循环播放第一个动画</div>
+      <pre>
 animation: 
     roll 2s ease infinite alternate,
     zoom 2s 2s ease;</pre>
-      </figure>
     </dd>
   </dl>
   <div class="chap">案例 Cases</div>
   <dl class="nav-cont">
-    <dd>[<span class="iconfont icon-keyboard"></span>] 骨架屏 - 扫光</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html#msg"><a
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html#msg"><a
           href="https://codepen.io/glpla/full/QWYoLPK">获取焦点focus时重复播放动画 - CodePen</a></a>
     </dd>
     <dd>.帧动画 keyframe</dd>
@@ -213,12 +181,12 @@ animation:
     <dd>.定位</dd>
     <dd>.获取焦点选择器 :focus</dd>
     <dd>.数据有效选择器 :focus</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/xxMBKdP">text
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/xxMBKdP">text
         - CodePen</a></dd>
     <dd>.帧动画 animation</dd>
     <dd>.内联变量 --val</dd>
     <dd>.取值函数 var()</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/MWLLNvM">wave
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/MWLLNvM">wave
         - CodePen</a></dd>
     <dd>.使用弹性盒子 flex或定位</dd>
     <dd>.帧动画 animation</dd>
@@ -226,30 +194,67 @@ animation:
     <dd>.取值函数 var()</dd>
     <dd>.变换 transform</dd>
     <dd>.滤镜 filter</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a
-        href="https://codepen.io/glpla/full/PoVVMda">loading - CodePen</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/PoVVMda">loading -
+        CodePen</a></dd>
     <dd>.通过旋转若干子元素，并设置子元素的某个伪元素达到圆周分布的效果</dd>
     <dd>.帧动画 animation</dd>
     <dd>.内联变量 --val</dd>
     <dd>.取值函数 var()</dd>
     <dd>.变换 transform</dd>
     <dd>.滤镜 filter</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNmOjzQ">科技环 -
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNmOjzQ">科技环 -
         CodePen</a></dd>
     <dd>.border</dd>
     <dd>.border-radius</dd>
     <dd>.transform</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./experiment/pro0.html">背景变换</a></dd>
-    <dd>.帧动画 animation</dd>
-    <dd>.滤镜 filter</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 输入非数字时，边框抖动提示用户输入非法</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill/drill_ide.html">背景变换</a></dd>
+    <dd class="sn">
+      <p>默认情况下，背景图片无法参与动画</p>
+      <div>使用滤镜 filter；背景可以是任何形式的内容</div>
+      <pre>
+header {
+  height: 300px;
+  background-image: url(../web/imgs/coolbg.png);
+  background-size: cover;
+  animation: glow 10s linear infinite alternate-reverse;
+}
+
+@keyframes glow {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}      </pre>
+      <div>使用@property控制渐变背景属性，如角度</div>
+      <pre>
+@property --deg-r {
+  syntax: '&lt;angle&gt;';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.wrap {
+  --deg-r: 0deg;
+  width: 100px;
+  height: 200px;
+  background-image: linear-gradient(var(--deg-r), #f0f, #0ff);
+  margin: 100px auto;
+  animation: flash 2s linear infinite;
+}
+
+@keyframes flash {
+  to {
+    --deg-r: 360deg;
+  }
+}    </pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 输入非数字时，边框抖动提示用户输入非法</dd>
     <dd>
       <input class="shaking-ipt" type="text" pattern="[0-9]*" placeholder="your age with number">
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption></figcaption>
-        <pre>
+      <pre>
 .shaking-ipt:invalid {
     color: #f40;
     animation: shaking .1s ease-in-out 3;
@@ -273,29 +278,23 @@ animation:
         margin-left: 0px;
     }
 }</pre>
-      </figure>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 进度条平滑缩放</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 进度条平滑缩放</dd>
     <dd class="basic">
       <div class="progress-scale"></div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption></figcaption>
-        <pre>
+      <pre>
 .progress-scale{
     animation: progress-ani 10s linear alternate infinite;
 }    </pre>
-      </figure>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 鼠标hover时触发动画；使用上例同一个动画样式</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 鼠标hover时触发动画；使用上例同一个动画样式</dd>
     <dd class="basic">
       <div class="progress-hover"></div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption></figcaption>
-        <pre>
+      <pre>
 .progress-hover {
     width: 0;
     height: 1rem;
@@ -312,9 +311,8 @@ animation:
 .basic:hover .progress-hover {
     animation-play-state: running;
 }</pre>
-      </figure>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 传送带</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 传送带</dd>
     <dd class="tx-box">
       <div class="tx">
         <div class="tx-shadow"></div>
@@ -328,20 +326,15 @@ animation:
     <dd>.由时间函数 steps()指定分段过渡效果</dd>
     <dd>.同过渡动画 transition</dd>
     <dd>
-      <figure class="code">
-        <figcaption>语法</figcaption>
-        <pre>steps(number_of_steps，direction)</pre>
-      </figure>
+      <pre>steps(number_of_steps，direction)</pre>
     </dd>
     <dd>number_of_steps：数字，过渡分几个阶段完成</dd>
     <dd>direction：start和end，默认是end，指每个阶段过渡结束后才渲染；start则是过渡开始前就渲染</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 进度条分段过渡；使用前例动画样式 loading-ani</dd>
-    <dd>1. steps(10)使用默认end</dd>
-    <div class="progress-step step-default"></div>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 进度条分段过渡；使用前例动画样式 loading-ani</dd>
     <dd>
-      <figure class="code">
-        <figcaption></figcaption>
-        <pre>
+      <div>1. steps(10)使用默认end</div>
+      <div class="progress-step step-default"></div>
+      <pre>
 .progress-step {
     width: 0;
     height: 1rem;
@@ -349,14 +342,9 @@ animation:
     background-color: #eb2f06;
     animation: progress-ani 10s steps(10) forwards;
 }</pre>
-      </figure>
-    </dd>
-    <dd>2. steps(10)使用start</dd>
-    <div class="progress-step step-start"></div>
-    <dd>
-      <figure class="code">
-        <figcaption></figcaption>
-        <pre>
+      <div>2. steps(10)使用start</div>
+      <div class="progress-step step-start"></div>
+      <pre>
 .progress-step {
     width: 0;
     height: 1rem;
@@ -364,10 +352,9 @@ animation:
     background-color: #eb2f06;
     animation: progress-ani 10s steps(10, start) forwards;
 }</pre>
-      </figure>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a
-        href="https://codepen.io/glpla/full/oNVjXLE">typing - CodePen</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNVjXLE">typing -
+        CodePen</a></dd>
     <dd>.字体等宽</dd>
     <dd>.步进动画steps()</dd>
     <dd>.多动画使用：移位动画和闪烁动画</dd>
@@ -377,20 +364,18 @@ animation:
       <div>动画infinite时，最后一个字符会被忽略</div>
       <div>动画forwards时，最后一个字符会显示</div>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 轮播图swiper</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 轮播图swiper</dd>
     <dd class="swiper-box">
       <div class="swiper">
-        <div class="swiper-item"></div>
-        <div class="swiper-item"></div>
-        <div class="swiper-item"></div>
-        <div class="swiper-item"></div>
-        <div class="swiper-item"></div>
+        <div class="swiper-item" style="--url:url(../imgs/banner.png)"></div>
+        <div class="swiper-item" style="--url:url(../imgs/bg1.jpg)"></div>
+        <div class="swiper-item" style="--url:url(../imgs/bg2.jpg)"></div>
+        <div class="swiper-item" style="--url:url(../imgs/bg3.jpg)"></div>
+        <div class="swiper-item" style="--url:url(../imgs/bg4.jpg)"></div>
       </div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>[HTML]</figcaption>
-        <pre>
+      <pre>
 &lt;div class="swiper-box"&gt;
     &lt;div class="swiper"&gt;
         &lt;div class="swiper-item"&gt;&lt;/div&gt;
@@ -400,12 +385,8 @@ animation:
         &lt;div class="swiper-item"&gt;&lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>[CSS] 采用步进steps逐步设置swiper的左侧位置</figcaption>
-        <pre>
+      <div>[CSS] 采用步进steps逐步设置swiper的左侧位置</div>
+      <pre>
 .swiper {
     position: absolute;
     left: 0;
@@ -422,14 +403,13 @@ animation:
         left: -500%;
     }
 }</pre>
-      </figure>
     </dd>
   </dl>
   <div class="chap">动画事件 Events</div>
   <dl class="nav-cont">
     <dd>.可以使用JS控制动画的每个属性</dd>
     <dd>
-      <table class="tbl-sn">
+      <table>
         <caption>动画事件</caption>
         <tr>
           <th>类别</th>
@@ -453,41 +433,30 @@ animation:
     <dd>.页面加载完毕跳转到主页面</dd>
     <dd>.先设计动画并应用到某元素，然后在js中监测元素的动画状态，结束时跳转到主页面</dd>
     <dd>
-      <figure class="code">
-        <figcaption>加载跳转</figcaption>
-        <pre>
+      <pre>
 let item = document.querySelector('.item')
 item.addEventListener('animationend', () => {
   location.href = './index.html'
 })        </pre>
-      </figure>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/miniplayer.html">MINI音乐播放器</a></dd>
     <dd>一开始动画暂停，监听播放状态。播放就执行动画；否则暂停</dd>
     <dd>
-      <figure class="code">
-        <figcaption>监听播放状态</figcaption>
-        <pre>
+      <pre>
 audio.addEventListener('play', () => {
   img.style.animationPlayState = `running`
 })
 audio.addEventListener('pause', () => {
   img.style.animationPlayState = `paused`
 })        </pre>
-      </figure>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/GRzeprJ">字节跳动</a> - C<i
         class="iconfont icon-codepen1"></i>depen</dd>
     <dd>.每次鼠标滑过都触发3次动画</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 单击后左移2次，结束后移除事件响应</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 单击后左移2次，结束后移除事件响应</dd>
     <dd>.事先应创建好动画样式</dd>
     <dd>
-      <button type="button" class="btn">click me</button>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>动画控制</figcaption>
-        <pre>
+      <pre>
 let btn = document.querySelector('.btn');
 btn.addEventListener('click', () => {
     btn.style.animation = 'moveOut 1s 2 forwards'
@@ -499,7 +468,6 @@ btn.addEventListener('animationiteration', logging)
 function logging() {
     console.log('animationiteration');
 }</pre>
-      </figure>
     </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
@@ -515,11 +483,8 @@ function logging() {
       <div>合理设计帧动画，完善个人网站</div>
     </dd>
   </dl>
-  <iframe src="../../common/Html.html" frameborder="0" scrolling="no" title="html" id="html"
-    onload="this.height=this.contentDocument.body.scrollHeight"></iframe>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="./lib/ham.js"></script>
-  <script src="./lib/ani.js"></script>
+  <script src="/utils/custom/ham2024.js"></script>
 </body>
 
 </html>

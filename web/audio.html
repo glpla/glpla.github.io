@@ -6,24 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>音频 Audio</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="./css/audio.css">
-  <link rel="stylesheet" href="../css/sn.css">
   <base target="_blank">
 </head>
 
 <body>
   <header>
     <h1>&commat;&lt;audio&gt;</h1>
-    <span class="switch">off</span>
     <span class="ham iconfont icon-menu"></span>
-    <ul class="nav">
-      <li class="nav-item">概述</li>
-      <li class="nav-item">H5属性</li>
-      <li class="nav-item">媒体属性</li>
-      <li class="nav-item">媒体事件</li>
-      <li class="nav-item">进阶使用</li>
-    </ul>
+    <nav class="nav">
+      <a href="" style="--delay:0" class="nav-item">概述</a>
+      <a href="" style="--delay:1" class="nav-item">H5属性</a>
+      <a href="" style="--delay:2" class="nav-item">媒体属性</a>
+      <a href="" style="--delay:3" class="nav-item">媒体事件</a>
+    </nav>
   </header>
   <dl>
     <dt>素材准备</dt>
@@ -32,25 +29,15 @@
     <dt class="nav-cont">概述</dt>
     <dd>. 行盒inline</dd>
     <dd>. 播放音频文件，如.mp3、.ogg、.wav</dd>
-    <dd>. 默认情况下，只有 src 属性，音频元素不可见，需要通过js控制</dd>
     <dd>
-      <figure class="code">
-        <figcaption>HTML</figcaption>
-        <pre>&lt;audio src=""&gt;&lt;/audio&gt;</pre>
-      </figure>
-    </dd>
-    </dd>
-    <dd>. 指定播放控制属性controls，则元素可视化控制</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>HTML</figcaption>
-        <pre>&lt;audio src="" controls&gt;&lt;/audio&gt;</pre>
-      </figure>
+      <div>. 默认情况下，只有 src 属性，音频元素不可见，需要通过js控制</div>
+      <pre>&lt;audio src=""&gt;&lt;/audio&gt;</pre>
+      <div>. 指定播放控制属性controls，则元素可视化控制</div>
+      <pre>&lt;audio src="" controls&gt;&lt;/audio&gt;</pre>
     </dd>
     <dt class="nav-cont">HTML属性</dt>
     <dd>
-      <table class="tbl-sn">
-        <caption>HTML属性</caption>
+      <table class="line">
         <tr>
           <th>类别</th>
           <th>说明</th>
@@ -90,18 +77,14 @@
     <dd>. 优点：简单直接</dd>
     <dd>. 缺点：用户体验差，参与度低，不方便个性化定制</dd>
     <dd>
-      <figure class="code">
-        <figcaption>HTML</figcaption>
-        <pre>
+      <pre>
 &lt;audio src="./mp3/Alizee-La Isla Bonita.mp3" autoplay loop hidden&gt;您的浏览器不支持audio标签&lt;/audio&gt;</pre>
-      </figure>
     </dd>
     <dt class="nav-cont">媒体属性</dt>
     <dd>. 用于js控制</dd>
     <dd>. 大多和HTML标签属性一一对应；此外还有</dd>
     <dd>
-      <table class="tbl-sn">
-        <caption>媒体属性</caption>
+      <table class="line">
         <tr>
           <th>类别</th>
           <th>说明</th>
@@ -143,7 +126,7 @@
     <dt class="nav-cont">媒体事件</dt>
     <dd>. 媒体在加载和使用中的各种事件；更多媒体事件，请查看底部链接</dd>
     <dd>
-      <table>
+      <table class="line">
         <tr>
           <th>类别</th>
           <th>说明</th>
@@ -190,8 +173,8 @@
         </tr>
       </table>
     </dd>
-    <dd>. &lt;audio&gt;的媒体事件触发顺序为</dd>
-    <dd class="number">
+    <dd>.&lt;audio&gt;的媒体事件触发顺序为</dd>
+    <dd class="sn">
       <div> loadstart </div>
       <div> durationchange</div>
       <div> loadedmetadata - 可以获取duration</div>
@@ -206,9 +189,7 @@
     <dt>辅助函数</dt>
     <dd>. 获取的时间通常要转化为一定的格式，如mm:ss，参考代码如下</dd>
     <dd>
-      <figure class="code">
-        <figcaption>JavaScript</figcaption>
-        <pre>
+      <pre>
 function time(secs) {
   let min = Math.floor(secs / 60);
   let sec = Math.floor(secs % 60);
@@ -216,52 +197,38 @@ function time(secs) {
   let minRes = min > 9 ? `${min}` : `0${min}`;
   return `${minRes}:${secRes}`;
 }</pre>
-      </figure>
     </dd>
-    <dt>[<span class="iconfont icon-keyboard"></span>] 可控背景音乐-用户可以停止或播放</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 可控背景音乐 - 用户可以停止或播放</dd>
     <dd>. 优点：用户可控</dd>
     <dd>. 缺点：音频 src 不可选择</dd>
-    <dd>1. H5结构：&lt;audio&gt;和播放控制</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>HTML</figcaption>
-        <pre>
+    <dd class="sn">
+      <div>H5结构：&lt;audio&gt;和播放控制</div>
+      <pre>
 &lt;button id="play"&gt;play&lt;/button&gt;
 &lt;button id="stop"&gt;stop&lt;/button&gt;
 &lt;audio src="Alizee.mp3"&gt;&lt;/audio&gt;</pre>
-      </figure>
-    </dd>
-    <dd>2. CSS：自行完成UI设计</dd>
-    <dd>3. JS控制：在&lt;body&gt;区末尾添加&lt;script&gt;并完成js逻辑：获取元素；点击播放或暂停</dd>
-    <dd>
-      <figure class="code">
-        <figcaption>JavaScript</figcaption>
-        <pre>
-&lt;script&gt;
-  window.onload = function () {
-    let playBtn = document.querySelector('#play-btn');
-    let stopBtn = document.querySelector('#stop-btn');
-    let audioBg = document.querySelector('#audio-bg');
-    playBtn.onclick = function () {
-      audioBg.play();
-    }
-    stopBtn.onclick = function () {
-      audioBg.pause();
-    }
+      <div>CSS：自行完成UI设计</div>
+      <div>JS控制：在&lt;body&gt;区末尾添加&lt;script&gt;并完成js逻辑：获取元素；点击播放或暂停</div>
+      <pre>
+window.onload = function () {
+  let playBtn = document.querySelector('#play-btn');
+  let stopBtn = document.querySelector('#stop-btn');
+  let audioBg = document.querySelector('#audio-bg');
+  playBtn.onclick = function () {
+    audioBg.play();
   }
-&lt;/script&gt;</pre>
-      </figure>
+  stopBtn.onclick = function () {
+    audioBg.pause();
+  }
+}</pre>
     </dd>
-    <dt class="nav-cont">[<span class="iconfont icon-keyboard"></span>]
-      进阶可控背景音乐-利用Audio构造函数生成音频实例，并动态指定src，增加更多控制，如音量[后续]</dd>
-    <dd>. 项目效果见顶部音乐开关</dd>
-    <dd>. H5仅仅控制部分；音频由Audio类构造函数new一个音频对象；CSS样式自定</dd>
-    <dd>. 除了根据音频属性paused状态判断是否暂停外，还可以根据元素文字判断，或者根据类判断[如果使用属性played判断。。。]</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>]进阶可控背景音乐</dd>
+    <dd>.利用Audio构造函数生成音频实例，并指定src</dd>
+    <dd>. H5仅仅控制播放；音频由Audio类构造函数new一个音频对象；CSS样式自定</dd>
+    <dd>. 除了根据音频属性paused状态判断是否暂停外，还可以根据元素文字判断，或者根据类判断[如果使用属性played判断。。。</dd>
     <dd>. 除了文字外，还可以使用图片或字体图标设计UI</dd>
     <dd>
-      <figure class="code">
-        <figcaption>JavaScript</figcaption>
-        <pre>
+      <pre>
 let switch = document.querySelector('.switch')
 let bg = new Audio();
 bg.src = '/music/Alizee-La Isla Bonita.mp3'
@@ -276,9 +243,8 @@ switch.addEventListener('click', () => {
     }
     switch.classList.toggle('active')
 })</pre>
-      </figure>
     </dd>
-    <dt>[<span class="iconfont icon-keyboard"></span>] MINI音乐播放器1</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] MINI音乐播放器1</dd>
     <dd class="custom-audio">
       <audio id='audio'>您的浏览器不支持audio标签</audio>
       <span>Alizee-La Isla Bonita</span>
@@ -286,8 +252,8 @@ switch.addEventListener('click', () => {
       <div id="ctrl" class="play"></div>
       <div class="dur">00:00</div>
     </dd>
-    <dd class="mt2">[思路]</dd>
-    <dd class="number">
+    <dd>[思路]</dd>
+    <dd class="sn">
       <div>使用&lt;audio&gt;元素构造函数创建音频对象并指定src</div>
       <div>根据设计创建播放列表样式，包括资源说明和控制按钮</div>
       <div>根据播放状态切换控制按钮为播放按钮或暂停按钮</div>
@@ -295,9 +261,7 @@ switch.addEventListener('click', () => {
       <div>根据当前播放时长currentTime和总时长duration，获取播放进度百分比，设置元素的内联变量--per属性，并由其伪元素使用，设置相应的百分比进度条</div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>HTML</figcaption>
-        <pre>
+      <pre>
 &lt;div class="custom-audio"&gt;
   &lt;audio id='audio'&gt;您的浏览器不支持audio标签&lt;/audio&gt;
   &lt;span&gt;Alizee-La Isla Bonita&lt;/span&gt;
@@ -305,12 +269,7 @@ switch.addEventListener('click', () => {
   &lt;div id="ctrl" class="play"&gt;&lt;/div&gt;
   &lt;div class="dur"&gt;00:00&lt;/div&gt;
 &lt;/div&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>CSS</figcaption>
-        <pre>
+      <pre>
 .custom-audio {
     --per: 0%;
     position: relative;
@@ -337,12 +296,8 @@ switch.addEventListener('click', () => {
 .pause {
     background-image: url(../imgs/Pause.png);
 }</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>JavaScript：这里利用控制按钮的类名[更改背景图片]判断播放状态，也可以通过定义bool变量判断</figcaption>
-        <pre>
+      <div>JavaScript：这里利用控制按钮的类名[更改背景图片]判断播放状态，也可以通过定义bool变量判断</div>
+      <pre>
 let audio = new Audio();
 audio.src = '/music/Alizee-La Isla Bonita.mp3';
 let tag = document.querySelector('.custom-audio');
@@ -370,7 +325,6 @@ ctrl.addEventListener('click', function () {
     ctrl.className = 'play'
   }
 })</pre>
-      </figure>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/miniplayer.html">MINI音乐播放器2</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/player.html">MINI音乐播放器3</a> - 无CSS</dd>
@@ -379,7 +333,7 @@ ctrl.addEventListener('click', function () {
   <dl>
     <dt>总结</dt>
     <dd>. 音频的使用和定制</dd>
-    <dd class="quote number">
+    <dd class="tips">
       <div>谨慎使用背景音乐</div>
       <div>为了首页加载速度，通常不直接在主页放置音频/视频；而是通过超链接的方式转到单独的页面播放</div>
       <div>如果坚持在首页展示，一般设置 mute（音频不可以设置mute）和 preload，同时禁止 autoplay</div>
@@ -388,7 +342,7 @@ ctrl.addEventListener('click', function () {
       </div>
     </dd>
     <dt>作业</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>分别使用可视化控制和js控制实现背景音乐的播放</div>
       <div>定制音乐开关按钮</div>
       <div>定制音乐播放列表</div>
@@ -396,23 +350,8 @@ ctrl.addEventListener('click', function () {
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="./lib/ham.js"></script>
+  <script src="/utils/custom/ham2024.js"></script>
   <script>
-    // bg
-    let onOff = document.querySelector('.switch')
-    let bg = new Audio();
-    bg.src = '../utils/music/Alizee-LaIslaBonita.mp3'
-    onOff.addEventListener('click', () => {
-      if (bg.paused) {
-        onOff.innerHTML = 'on'
-        bg.play();
-      } else {
-        onOff.innerHTML = 'off'
-        bg.pause();
-      }
-      onOff.classList.toggle('active')
-    })
-
     // player
     let audio = new Audio();
     audio.src = '../utils/music/Alizee-LaIslaBonita.mp3';
