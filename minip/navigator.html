@@ -25,7 +25,7 @@
     </dl>
     <div class="chap">声明式导航</div>
     <dl>
-        <dd>使用导航组件&lt;navigator&gt;导航，类似HTML的 &lt;a&gt;</dd>
+        <dd>使用导航组件 &lt;navigator&gt; 导航，类似HTML的 &lt;a&gt;</dd>
         <dd>导航组件的使用都有对应的API</dd>
         <dd>更多属性，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html">官方文档 -
                 navigator</a></dd>
@@ -68,7 +68,7 @@
         </dd>
         <dt>无参导航</dt>
         <dd>
-            <p>跳转到普通页面 - 全部默认</p>
+            <p>跳转到普通页面 - 仅指定 url</p>
             <pre>
 &lt;navigator url="../test/test"&gt;To Page Test&lt;/navigator&gt;</pre>
             <p>跳转到外部小程序 - 指定app-id和target</p>
@@ -82,18 +82,17 @@
 &lt;navigator open-type="navigate"&gt;Back&lt;/navigator&gt;</pre>
         </dd>
         <dt>带参导航</dt>
-        <dd>在路径url后面以值对key-value的形式拼接参数</dd>
-        <dd>参数和url之间使用?连接</dd>
-        <dd>多个参数以&分隔</dd>
-        <dd>传递的参数在目标页的生命周期函数onLoad中通过形参option获取</dd>
-        <dd>
-            <p>拼接参数 - url?name=value&...</p>
+        <dd class="sn">
+            <div>拼接参数 - 在路径 url 后面以值对 key-value 的形式拼接参数</div>
+            <p>参数和url之间使用 ? 连接</p>
+            <p>多个参数以 & 分隔</p>
+            <p>静态数据 - url?name=value&...</p>
             <pre>
 &lt;navigator url="../test/test?name=gl"&gt;To Page Test&lt;/navigator&gt;</pre>
-            <p>拼接参数 - 使用数据绑定</p>
+            <p>动态数据 - 使用数据绑定</p>
             <pre>
 &lt;navigator url="../test/test?name={{uname}}"&gt;To Page Test&lt;/navigator&gt;</pre>
-            <p>目标页获取参数</p>
+            <div>目标页获取参数 - 传递的参数在目标页的生命周期函数 onLoad 中通过形参 option 获取</div>
             <pre>
 onLoad(option) {
     console.log(option);
@@ -174,12 +173,12 @@ onLoad(option: any) {
         </dd>
     </dl>
     <dl>
-        <dd class="example-sn">综合案例：分别使用声明式导航和编程式导航，完成个人中心页到各个模块的导航；相关API，请访问 <a
+        <dd class="example-sn">综合案例：分别使用声明式导航和编程式导航，完成个人中心页到各个子模块/子页面的导航；相关API，请访问 <a
                 href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarTitle.html">setNavigationBarTitle()</a>、<a
                 href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarColor.html">wx.setNavigationBarColor()</a>
         </dd>
-        <dd class="sn">
-            <div>声明式导航</div>
+        <dd>
+            <div>实现1：声明式导航</div>
             <p>使用&lt;navigator&gt;，修改个人中心静态页面，采用列表渲染定制导航；根据不同的导航项，动态设置目标页的导航标题 </p>
             <p>该案例也适合客户、产品详情页，如：使用一个页面展示不同的商品内容</p>
             <p>个人中心页 wxml - 导航节点示例，其它略</p>
@@ -189,18 +188,17 @@ onLoad(option: any) {
 &lt;/navigator&gt;</pre>
             <p>目标页 js - 获取参数，设置标题和背景颜色</p>
             <pre>
-Page({
-    onLoad(options){
-        wx.setNavigationBarTitle({
-            title:options.title
-        })
-        wx.setNavigationBarColor({            
-            frontColor: '#ffffff',//MUST
-            backgroundColor:options.bgc
-        })
-    }
-})</pre>
-            <div>编程式导航 - 使用普通组件，绑定单击事件，在事件处理函数中使用导航API</div>
+onLoad(options){
+    wx.setNavigationBarTitle({
+        title:options.title
+    })
+    wx.setNavigationBarColor({            
+        frontColor: '#ffffff',//MUST
+        backgroundColor:options.bgc
+    })
+}</pre>
+            <div>实现2：编程式导航</div>
+            <p>使用普通组件，绑定单击事件，在事件处理函数中使用导航API</p>
             <p>个人中心页 wxml - 绑定事件</p>
             <pre>
 &lt;view bind:tap="toTarget" data-bgc="#908" data-title="message" class="item"&gt;

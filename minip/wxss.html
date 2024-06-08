@@ -83,6 +83,7 @@
       <div>尽量使用常规选择器；不要炫技</div>
       <div>全局变量在page中定义</div>
       <div>小程序提供了很多UI的样式，背离了结构 - 样式 - 逻辑分离的原则，不建议使用，主要是巨丑。。。</div>
+      <div>学会使用调试器检查元素样式</div>
     </dd>
     <dt>内联样式</dt>
     <dd>除了使用静态内联样式，还可以和数据绑定，采用动态内联样式</dd>
@@ -136,10 +137,14 @@ data: {
     <dd class="tips">有些元素的初始化样式仍然会被用户代理覆盖，请使用类的方式初始化，甚至使用!important提权</dd>
     <dd>
       <pre>
+//页面所有共享
 page{
   --themeColor:#eb4450;
   --main-color: #f40;
   --border-color: var(--main-color);
+  --padding: 10px;
+  --margin: 10px;
+  --gap: 10px;
   min-height: 100vh;
   font-size: 28rpx;
   box-sizing: border-box;
@@ -151,6 +156,12 @@ button{
   margin: 0;
   font-weight: normal;
   border-radius: 0;
+}
+
+//元素及其子元素共享
+.wrap {
+    --main-color: #a4552e;
+    padding: 0;
 }</pre>
     </dd>
     <dd class="example-sn" id="iconfont">使用 <a href="../web/framework/iconfont.html">阿里字体图标</a></dd>

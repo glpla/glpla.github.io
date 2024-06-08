@@ -29,21 +29,50 @@
             <a href="" style="--delay:4" class="nav-item">switch</a>
         </nav>
     </header>
-    <dl class="nav-cont">
-        <dd>&lt;form&gt;和其中的大多数表单元素，基本同HTML5保持一致；具体效果视系统而定</dd>
-        <dd>表单数据提交时，请确保每个表单元素都指定属性name；value可以由事件获取</dd>
-        <dd>全局初始化样式，如主题颜色和其它属性；部分需要单独设置</dd>
-        <dd>设置页面变量，便于同时控制元素的属性，如margin、padding、background-color和border等</dd>
-        <dd>请为每个表单元素都指定样式类class</dd>
-        <dd>学会使用调试器检查样式样式</dd>
+    <dl>
+        <dt class="nav-cont">说明</dt>
+        <dd>
+            <div>&lt;form&gt;和其中的大多数表单元素，基本同HTML5保持一致；具体效果视真机系统而定</div>
+            <div>表单数据提交时，请确保每个表单元素都指定属性 name；value可以由事件获取</div>
+            <div>请为每个表单元素都指定样式类 class</div>
+            <div>应初始化表单元素样式，如主题颜色和其它属性；部分需要配合类共同设置</div>
+            <div>组件还有一个共同属性：disabled</div>
+            <pre>
+radio,
+checkbox{
+    zoom:0.8;
+}            </pre>
+        </dd>
         <dd class="tips">
             <div>一定要预览。。。一定要预览。。。一定要预览。。。</div>
         </dd>
         <dt class="nav-cont">&lt;form&gt;</dt>
         <dd>
             <p>表单容器；行内元素 inline</p>
-            <p>通常显式的设置宽度，其中表单元素会自动充满，无须单独设置每个宽度</p>
-            <p>提交时，可以在事件对象 e.detail 中获取表格各元素的值</p>
+            <p>默认情况下，表单大小为0，即使添加了表单元素</p>
+            <p>生产环境下，通常是 <span class="warn">垂直方向</span> 分布各表单元素</p>
+            <p>为了 <span class="warn">优雅分隔</span> 各表单元素，通常增加一个内层元素&lt;view&gt;，由它布局，而仅仅将&lt;form&gt;当作一个 <span
+                    class="warn">功能元素</span></p>
+
+            <pre>
+&lt;form bindsubmit="submit"&gt;
+    &lt;view class="form-cont"&gt;
+        // 其它表单元素
+        //按钮指定表单类型，可以触发表单的默认提交行为
+        &lt;button form-type="submit"&gt;submit&lt;/button&gt;
+    &lt;/view&gt;
+&lt;/form&gt;</pre>
+            <pre>
+.form-cont {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    padding: 10px;
+    background-color: #f40;
+    margin: 0 auto;
+    }</pre>
+            <p>表单事件：提交和重置</p>
             <table>
                 <tr>
                     <th>事件</th>
@@ -58,28 +87,18 @@
                     <td>表单重置时会触发 reset 事件</td>
                 </tr>
             </table>
-            <p class="example-sn">表单数据提交</p>
-            <pre>
-&lt;form bindsubmit="submit"&gt;
-    // 其它表单元素
-    //按钮指定表单类型，可以触发表单的默认提交行为
-    &lt;button form-type="submit"&gt;submit&lt;/button&gt;
-&lt;/form&gt;</pre>
+            <p>提交时，可以在事件对象 e.detail 中获取表格各元素的值；需要配合指定了 form-type 为 submit 属性的按钮 &lt;button&gt; 一起使用，见上面示例的结构</p>
+            <p>多数情况下，抛弃表单元素 &lt;form&gt;，使用普通结构，通过 <a href="./model.html">数据双向绑定</a> 和自定义事件提交数据</p>
             <pre>
 submit(e) {
     console.log(e.detail);
-}</pre>
-            <pre>
-.form {
-    width: 90%;
-    background-color: #f3f4f5;
 }</pre>
         </dd>
         <dt class="nav-cont">&lt;button&gt;</dt>
         <dd>
             <p>功能强大的按钮；有特定的类型属性和事件属性；块元素 block</p>
             <p>如果设置了高度后，记得设置同样大小的行高，以确保文字垂直方向居中</p>
-            <p>除了默认的tap事件外，按钮其它事件大多和相应的开发能力关联</p>
+            <p>除了默认的 tap 事件外，按钮其它事件大多和相应的开发能力关联</p>
             <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/button.html">官方文档 -
                     button</a></p>
             <table>
@@ -94,8 +113,8 @@ submit(e) {
                 <tr>
                     <td>form-type</td>
                     <td>按钮类型；点击触发 form 的submit/reset 事件
-                        <br>submit：提交表单
-                        <br>reset：重置表单
+                        <br>submit：单击后，默认行为是提交表单
+                        <br>reset：单击后，默认行为是重置表单
                     </td>
                 </tr>
                 <tr>
@@ -117,7 +136,7 @@ submit(e) {
                 </tr>
             </table>
             <p class="tips">开发能力 open-type 的使用，要随时关注官方接口的更新变化</p>
-            <p class="example-sn">在调试器中，查看按钮的代理样式，体会样式初始化的重要性</p>
+            <p>在调试器中，查看按钮的代理样式，体会样式初始化的重要性</p>
             <pre>
 button{
     width: 100%!important;
@@ -132,13 +151,13 @@ button{
     font-weight: normal;
     border-radius: 0;
 }</pre>
-            <p class="example-sn">打开客服对话框 - 用户点击后会打开客服对话框</p>
+            <p class="example-sn">打开客服对话框 - 用户点击后，打开客服对话框</p>
             <pre>&lt;button open-type="contact" bindcontact='getContact'&gt;getContact&lt;/button&gt;</pre>
             <pre>
 getContact(e){
     console.log(e);
 }</pre>
-            <p class="example-sn">选择用户头像 - 用户点击后会打开头像选择对话框</p>
+            <p class="example-sn">选择用户头像 - 用户点击后，打开头像选择对话框</p>
             <pre>&lt;button open-type="chooseAvatar" bindchooseavatar='getAvatar'&gt;getAvatar&lt;/button&gt;</pre>
             <pre>
 getAvatar(e){
@@ -148,10 +167,10 @@ getAvatar(e){
         </dd>
         <dt class="nav-cont">&lt;label&gt;</dt>
         <dd>
-            <p>行内元素 inline，用以改善用户体验</p>
-            <p>用属性 for，配合指定了 id 的表单元素，如&lt;input&gt;、&lt;radio&gt;、&lt;checkbox&gt;，可以改进表单组件的可用性：扩展用户点击，提升用户体验</p>
+            <p>行内元素 inline，用以扩展用户点击、改善用户体验</p>
+            <p>使用属性 for，配合指定了 id 的表单元素，如&lt;input&gt;、&lt;radio&gt;、&lt;checkbox&gt;，可以改进表单组件的可用性</p>
             <pre>&lt;checkbox value="撸码" id="code" /&gt;&lt;label for="code"&gt;撸码&lt;/label&gt;</pre>
-            <p>使用 &lt;label&gt; 包裹表单元素时，应略去for属性</p>
+            <p>或：使用 &lt;label&gt; 包裹表单元素，此时应略去for属性</p>
             <pre>
 &lt;label&gt;
     &lt;checkbox color="#3498db" value="撸码" /&gt;撸码
@@ -179,6 +198,8 @@ getAvatar(e){
                         <br>number：数字键盘
                         <br>digit：带小数点的数字键盘
                         <br>idcard：身份证键盘
+                        <br>nickname：昵称键盘
+                        <br>safe-password：密码
                     </td>
                 </tr>
                 <tr>
@@ -232,11 +253,38 @@ getAvatar(e){
                     <td>点击完成按钮时触发</td>
                 </tr>
             </table>
+            <p>普通文本输入 - text</p>
+            <pre>
+&lt;view class="item"&gt;
+    &lt;text&gt;昵称&lt;/text&gt;
+    &lt;input class="ipt" type="text" name="uname" placeholder="您的昵称" maxlength="8" value="{{user.uname}}" /&gt;
+&lt;/view&gt;</pre>
+            <p>昵称输入 - nickname；会自动拉取你的微信昵称</p>
+            <pre>
+&lt;view class="item"&gt;
+    &lt;text&gt;昵称&lt;/text&gt;
+    &lt;input class="ipt" type="nickname" name="uname" placeholder="您的昵称" maxlength="8" value="{{user.uname}}" /&gt;
+&lt;/view&gt;</pre>
+            <p>密码输入 - safe-password；隐藏真实信息</p>
+            <pre>
+&lt;view class="item border-btm"&gt;
+    &lt;text&gt;密码&lt;/text&gt;
+    &lt;input class="ipt" type="safe-password" name="upass" placeholder="您的密码" maxlength="8" value="{{user.upass}}" /&gt;
+&lt;/view&gt;
+</pre>
+            <p>数值型输入 - digit；打开数字键盘，需要在手机端查看效果</p>
+            <pre>
+&lt;view class="item border-btm"&gt;
+    &lt;text&gt;学号&lt;/text&gt;
+    &lt;input class="ipt" type="digit" name="usn" placeholder="您的学号" maxlength="8" value="{{user.usn}}" /&gt;
+&lt;/view&gt;
+</pre>
         </dd>
         <dt class="nav-cont">&lt;radio&gt; &lt;radio-group&gt;</dt>
         <dd>
+            <p>多选一组件：单选按钮和单选按钮组</p>
             <p>行内块元素 inline-block</p>
-            <p>单选按钮；单选按钮组</p>
+            <p>HTML中，需要给每个 &lt;radio&gt; 指定 name 以确保是一组；微信小程序中，只需要给 &lt;radio-group&gt; 指定 name 即可</p>
             <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/radio.html">官方文档 - radio</a>
             </p>
             <table>
@@ -254,19 +302,28 @@ getAvatar(e){
                 </tr>
                 <tr>
                     <td>color</td>
-                    <td>单选按钮的颜色；同accent-color</td>
+                    <td>单选按钮选中时的颜色</td>
                 </tr>
                 <tr>
                     <td>bindchange</td>
                     <td>选中项发生改变时触发；从事件对象e.detail获取当前选中的值</td>
                 </tr>
             </table>
-            <p>实际应用中，利用给定的数据和当前值是否相等来决定哪个是选中状态</p>
             <pre>
 &lt;radio-group bindchange="getGender" name="ugender"&gt;
-    &lt;radio value="男" checked="{{userInfo.ugender=='男'}}" color="#3498db" /&gt;男
-    &lt;radio value="女" checked="{{userInfo.ugender=='女'}}" color="#3498db" /&gt;女
+    &lt;radio color="#3498db" value="男" checked /&gt;男
+    &lt;radio color="#3498db" value="女" /&gt;女
 &lt;/radio-group&gt;</pre>
+            <p>利用给定的数据和当前值是否相等来决定哪个是选中状态；使用 &lt;label&gt; 改写下例，提升用户体验</p>
+            <pre>
+&lt;radio-group bindchange="getGender" name="ugender"&gt;
+    &lt;radio color="#3498db" value="男" checked="{{user.ugender=='男'}}" /&gt;男
+    &lt;radio color="#3498db" value="女" checked="{{user.ugender=='女'}}" /&gt;女
+&lt;/radio-group&gt;</pre>
+            <pre>
+getGender(e){
+    console.log(e.detail.value);
+}</pre>
         </dd>
         <dt class="nav-cont">&lt;checkbox&gt; &lt;checkbox-group&gt;</dt>
         <dd>
@@ -289,18 +346,33 @@ getAvatar(e){
                 </tr>
                 <tr>
                     <td>color</td>
-                    <td>多选按钮的颜色；同accent-color</td>
+                    <td>多选按钮选中时的颜色</td>
                 </tr>
                 <tr>
                     <td>bindchange</td>
-                    <td>选中项发生改变时触发；从事件对象e.detail获取当前选中的值</td>
+                    <td>选中项发生改变时触发；从事件对象e.detail获取当前选中的值（ <span class="warn">数组</span> ）</td>
                 </tr>
             </table>
+            <p>使用 &lt;label&gt; 改写下例，提升用户体验</p>
+            <pre>
+&lt;checkbox-group bindchange="getLike" name='ulike'&gt;
+    &lt;checkbox color="#3498db" value="撸码" /&gt;撸码
+    &lt;checkbox color="#3498db" value="睡觉" checked/&gt;睡觉
+    &lt;checkbox color="#3498db" value="电玩" /&gt;电玩
+    &lt;checkbox color="#3498db" value="唱歌" checked/&gt;唱歌
+    &lt;checkbox color="#3498db" value="跳舞" /&gt;跳舞
+    &lt;checkbox color="#3498db" value="美食" checked/&gt;美食
+&lt;/checkbox-group&gt;</pre>
+            <pre>
+getLike(e){
+    console.log(e.detail.value);
+}</pre>
         </dd>
         <dt class="nav-cont">&lt;textarea&gt;</dt>
         <dd>
             <p>多行输入；默认大小300*150；块元素 block</p>
-            <p>建议：显式的设置宽度和容器保持一样大小；同时设置内边距padding以使得文字内收一定距离</p>
+            <p><span class="warn">显式</span> 的设置宽度和容器保持一样大小；同时设置内边距padding以使得文字内收一定距离</p>
+            <p>最大长度140个字符</p>
             <p>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/textarea.html">官方文档 -
                     textarea</a></p>
             <table>
@@ -356,10 +428,14 @@ getAvatar(e){
                 </tr>
             </table>
             <pre>
+&lt;view&gt;
+    &lt;text&gt;简介&lt;/text&gt;
+    &lt;textarea name="udesc" value="{{user.udesc}}" /&gt;
+&lt;/view&gt;</pre>
+            <pre>
 textarea{
     width: 100%;
     padding: 20rpx;
-    word-break: break-all;
 }</pre>
         </dd>
         <dt class="nav-cont">&lt;picker&gt;</dt>
@@ -430,12 +506,12 @@ selTime(e){
             <pre>
 &lt;picker 
     mode="date" 
-    value="{{date}}" 
+    value="{{user.ubirth}}" 
     start="2000-07-01"
     end="2026-12-31"
     bindchange="selDate"
 &gt;
-    {{date}}
+    {{user.ubirth}}
 &lt;/picker&gt;</pre>
             <pre>
 selDate(e){
@@ -522,13 +598,14 @@ selRegion(e){
     min="18" 
     max="24" 
     name="uage" 
-    value="{{uage}}" 
+    value="{{user.uage}}" 
     show-value 
 /&gt;</pre>
             <pre>
 selAge(e){
     console.log(e.detail.value)
 }</pre>
+            <p class="example-sn">播放进度调节</p>
         </dd>
         <dt class="nav-cont">&lt;switch&gt;</dt>
         <dd>
@@ -559,107 +636,6 @@ selAge(e){
                     <td>选择后触发</td>
                 </tr>
             </table>
-        </dd>
-        <dd class="tips">
-            <div>组件还有一个共同属性：disabled</div>
-            <div>各元素和整个表单的值都在事件对象中e.detail中获取</div>
-        </dd>
-        <dd class="example-sn">查看常见表单的值</dd>
-        <dd>以注册表单为例：为各元素指定name便于提交数据</dd>
-        <dd>
-            <pre>
-&lt;form class="form" bindsubmit="submit"&gt;
-    &lt;view class="item border-btm"&gt;
-        &lt;text&gt;学号&lt;/text&gt;
-        &lt;input class="ipt" type="digit" name="usn" placeholder="您的学号" maxlength="8" value="{{userInfo.usn}}" /&gt;
-    &lt;/view&gt;
-    &lt;view class="item border-btm"&gt;
-        &lt;text&gt;昵称&lt;/text&gt;
-        &lt;input class="ipt" type="text" name="uname" placeholder="您的昵称" maxlength="8" value="{{userInfo.uname}}" /&gt;
-    &lt;/view&gt;
-    &lt;view class="item border-btm"&gt;
-        &lt;text&gt;生日&lt;/text&gt;
-        &lt;picker mode="date" start="1975-08-01" end="2024-03-06" name="ubirth" value="{{userInfo.birth}}" bindchange="changeBirth"&gt;{{userInfo.ubirth}}&lt;/picker&gt;
-    &lt;/view&gt;
-    &lt;view class="item age"&gt;
-        &lt;text&gt;年龄&lt;/text&gt;
-        &lt;slider class="slider" activeColor="#3498db" backgroundColor="#ccc" block-size="24" block-color="#3498db" bindchange="" min="15" max="28" name="uage" value="{{userInfo.uage}}" show-value /&gt;
-    &lt;/view&gt;
-    &lt;view class="item"&gt;
-        &lt;text&gt;性别&lt;/text&gt;
-        &lt;radio-group bindchange="getGender" name="ugender"&gt;
-        &lt;radio value="男" checked="{{userInfo.ugender=='男'}}" color="#3498db" /&gt;男
-        &lt;radio value="女" checked="{{userInfo.ugender=='女'}}" color="#3498db" /&gt;女
-        &lt;/radio-group&gt;
-    &lt;/view&gt;    
-    &lt;view class="item"&gt;
-        &lt;text&gt;爱好&lt;/text&gt;
-        &lt;checkbox-group class="cb" bindchange="getLike" name='ulike'&gt;
-        &lt;label&gt;
-            &lt;checkbox color="#3498db" value="撸码" /&gt;撸码
-        &lt;/label&gt;
-        &lt;label&gt;
-            &lt;checkbox color="#3498db" value="睡觉" /&gt;睡觉
-        &lt;/label&gt;
-        &lt;label&gt;
-            &lt;checkbox color="#3498db" value="电玩" /&gt;电玩
-        &lt;/label&gt;
-        &lt;label&gt;
-            &lt;checkbox color="#3498db" value="唱歌" /&gt;唱歌
-        &lt;/label&gt;
-        &lt;label&gt;
-            &lt;checkbox color="#3498db" value="跳舞" /&gt;跳舞
-        &lt;/label&gt;
-        &lt;label&gt;
-            &lt;checkbox color="#3498db" value="美食" /&gt;美食
-        &lt;/label&gt;
-        &lt;label&gt;
-            &lt;checkbox color="#3498db" value="机车" /&gt;机车
-        &lt;/label&gt;
-        &lt;label&gt;
-            &lt;checkbox color="#3498db" value="旅游" /&gt;旅游
-        &lt;/label&gt;
-        &lt;/checkbox-group&gt;
-    &lt;/view&gt;
-    &lt;view class="item"&gt;
-        &lt;text&gt;简介&lt;/text&gt;
-        &lt;textarea class="ta" name="udesc" value="{{userInfo.udesc}}" /&gt;
-    &lt;/view&gt;
-    &lt;button form-type="submit" class="sub-btn"&gt;保存&lt;/button&gt;
-&lt;/form&gt;</pre>
-            <pre>
-data: {
-    userInfo:{
-        ubirth:'2020-08-01',
-        udesc:'hi,there.',
-        ulike:[],
-        uage:18,
-        ugender:'女',
-        uname:'glpla',
-        usn:20221001
-    }
-},
-getSn(e) {
-    console.log(e.detail.value);
-},
-getName(e) {
-    console.log(e.detail.value);
-},
-getGender(e){
-    console.log(e.detail.value);
-},
-getLike(e){
-    console.log(e.detail.value);
-},
-changeBirth(e){
-    console.log(e.detail);
-    this.setData({
-      "userInfo.ubirth":e.detail.value
-    })
-}
-submit(e){
-    console.log(e.detail.value);
-}</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
