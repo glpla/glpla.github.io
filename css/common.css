@@ -16,6 +16,7 @@
   --w-width: 1024px;
   --chap-h: 12vh;
   --padding: 1rem;
+  --small-size: 14px;
   accent-color: var(--main-color);
 }
 
@@ -36,6 +37,8 @@ td,
 tr,
 ul,
 li,
+img,
+picture,
 figure,
 figcaption,
 nav,
@@ -160,10 +163,16 @@ ul {
   list-style: none;
 }
 
-img {
+img,
+picture {
   display: block;
   max-width: 100%;
   margin: 0 auto;
+}
+
+img+.fig-sn {
+  text-align: center;
+  font-size: var(--small-size);
 }
 
 video {
@@ -384,7 +393,8 @@ table caption::before {
 }
 
 /* figure */
-figure {
+figure,
+img+.fig-sn {
   counter-increment: img-sn;
 }
 
@@ -394,7 +404,8 @@ figure figcaption {
   margin-top: 1rem;
 }
 
-figure figcaption::before {
+figure figcaption::before,
+img+.fig-sn::before {
   content: '图' counter(img-sn)' ';
 }
 

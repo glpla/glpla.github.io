@@ -93,15 +93,18 @@
   </dl>
   <div class="chap">基本使用 Usage</div>
   <dl class="nav-cont">
-    <dt>1. 直接使用图片</dt>
-    <dd>1.1 直接使用，按照图片原始大小显示，布局受影响</dd>
-    <dd>1.2 仅仅指定图片宽度，其高度自适应。图片高度太大，布局被撑开；图片高度太小，布局被压缩</dd>
-    <dd>1.3 同时指定宽度width、高度height；如果宽高比例和图片比例不一致，导致图片变形</dd>
-    <dd>1.4 同时指定宽度width、高度height、图片填充模式object-fit；布局不会打乱；元素指定了宽度和高度的情况下才有效</dd>
-    <dd>
-      <pre>object-fit: contain | cover;</pre>
+    <dt>直接使用图片</dt>
+    <dd class="sn">
+      <div>直接使用，按照图片原始大小显示，布局受影响</div>
+      <div>仅仅指定图片宽度，其高度自适应。图片高度太大，布局被撑开；图片高度太小，布局被压缩</div>
+      <div>同时指定宽度width、高度height；如果宽高比例和图片比例不一致，导致图片变形</div>
+      <div>同时指定宽度width、高度height、图片填充模式object-fit；布局不会打乱；元素指定了宽度和高度的情况下才有效</div>
+      <pre>
+object-fit: contain | cover;
+object-position: x-axis y-axis;      </pre>
       <p>. contain：图片会被缩放至被空间完全包含，定义的尺寸可间会有留白</p>
       <p>. cover：图片会被裁切，在定义的空间内最大范围的显示图片</p>
+      <p>. position：%、px、em、rem、left、top、right、bottom、center；默认居中</p>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 图片使用-指定背景色观察更直接</dd>
     <dd>
@@ -124,17 +127,17 @@
       <label for="cover">cover</label>
       <img class="img0" src="./imgs/alizee.jpg" alt="">
     </dd>
-    <dt>2. 使用容器包裹图片</dt>
-    <dd>. 容器指定宽高或比例、溢出隐藏</dd>
-    <dd>. 更多的时候，容器体现的是布局的职能</dd>
-    <dd>2.1 图片指定宽度100%，和容器保持一致，其<span class="warn">高度自适应</span>；为便于观察，为容器指定背景色</dd>
-    <dd>. 容器高度太大，留有空白</dd>
-    <dd>. 容器高度太小，图片展示不完全</dd>
-    <dd>2.2 图片宽、高100%同容器，图片填充模式选择cover填充[<span class="iconfont icon-iconfontshoucang"></span>]</dd>
-    <dd class="grid2">
-      <div class="basic">
+    <dt>使用容器包裹图片</dt>
+    <dd class="sn">
+      <p>. 容器指定宽高或比例、溢出隐藏</p>
+      <p>. 更多的时候，容器体现的是布局的职能</p>
+      <div>图片指定宽度100%，和容器保持一致，其<span class="warn">高度自适应</span>；为便于观察，为容器指定背景色</div>
+      <p>. 容器高度太大，留有空白</p>
+      <p>. 容器高度太小，图片展示不完全</p>
+      <p>图片宽、高100%同容器，图片填充模式选择cover填充[<span class="iconfont icon-iconfontshoucang"></span>]</p>
+      <p class="basic">
         <img class="img1" src="./imgs/alizee.jpg" alt="">
-      </div>
+      </p>
       <pre>
 .wrap {
   width: 320px;
@@ -150,12 +153,12 @@ img {
       <div>flex布局中，如果直接使用&lt;img&gt;和其它元素，借助flex属性等分布局，则&lt;img&gt;仍然会撑开，导致布局失效；所以必须使用容器包裹图片</div>
     </dd>
     <dt class="nav-cont">图片空白 Blank</dt>
-    <dd>. 使用容器包裹图片时，当容器加上边框时，不管图片是cover还是contain，容器底部都会有空白</dd>
-    <dd>. 这个情况只在特定场合会暴露问题：仅仅使用容器和图片，并非普遍存在</dd>
-    <dd>. 主要是图片的inline特性导致：彼此间有一定的缝隙</dd>
-    <dd>. 还有就是早期WEB的开发还没有规范可以遵循</dd>
-    <dd>. 不加边框虽然没有影响，但是问题始终在那里</dd>
     <dd>
+      <p>. 使用容器包裹图片时，当容器加上边框时，不管图片是cover还是contain，容器底部都会有空白</p>
+      <p>. 这个情况只在特定场合会暴露问题：仅仅使用容器和图片，并非普遍存在</p>
+      <p>. 主要是图片的inline特性导致：彼此间有一定的缝隙</p>
+      <p>. 还有就是早期WEB的开发还没有规范可以遵循</p>
+      <p>. 不加边框虽然没有影响，但是问题始终在那里</p>
       <div class="wrap">
         <img class="img3" src="./imgs/alizee.jpg" alt="">
       </div>
@@ -279,18 +282,11 @@ img {
     <dd>. 最稳妥的方式，请使用<a href="./js/lazyLoad.html">JS懒加载</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 懒加载 - 在浏览器监测视图中，选择网络，滚动页面，查看图片懒加载情况</dd>
     <dd>
-      <figure class="code">
-        <figcaption>[HTML]</figcaption>
-        <pre>
+      <pre>
 &lt;img src="./web/imgs/1.jpg" alt="" loading="lazy" decoding="async"&gt;
 ...
 &lt;img src="./web/imgs/100.jpg" alt="" loading="lazy" decoding="async"&gt;      </pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>[CSS]</figcaption>
-        <pre>
+      <pre>
 img {
 display: block;
 width: 300px;
@@ -298,7 +294,6 @@ height: 300px;
 content-visibility: visible;
 margin-bottom: 100vh;
 }      </pre>
-      </figure>
     </dd>
   </dl>
   <div class="chap">其它应用 Other</div>
