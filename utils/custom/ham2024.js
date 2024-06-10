@@ -22,26 +22,28 @@ navItems.forEach((item, ind) => {
   item.addEventListener('click', (e) => {
     e.preventDefault()
     e.stopPropagation()
-    document.body.classList.toggle('lock')
+
     navConts[ind].scrollIntoView()
 
     navItems.forEach(item => {
       item.classList.remove('active')
     })
 
-    item.classList.add('active');
-
+    item.classList.add('active')
+    document.body.classList.toggle('lock')
     nav.classList.toggle('active')
+    ham.classList.toggle('active')
 
-    hamToggle()
+    // hamToggle()
   })
 })
 
 ham.addEventListener('click', (e) => {
   e.stopPropagation()
+
   document.body.classList.toggle('lock')
-
   nav.classList.toggle('active')
+  ham.classList.toggle('active')
 
-  hamToggle();
+  // hamToggle();
 })

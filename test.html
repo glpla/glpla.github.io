@@ -12,29 +12,66 @@
       box-sizing: border-box;
     }
 
-    body {
-      display: flex;
-      height: 100vh;
+    body {}
+
+    header {
+      position: sticky;
+      top: -10vh;
+      height: 20vh;
+      background-color: #f40;
     }
 
-    .wrap {
+    nav {
+      position: sticky;
+      top: 10vh;
       display: flex;
       flex-direction: column;
     }
 
-    img {
-      width: 300px;
-      height: 500px;
-      object-fit: cover;
-      object-position: right bottom;
+    .ham {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .as {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      left: -100px;
+      transition: 0.4s;
+    }
+
+    .as.active {
+      left: 0;
+    }
+
+    .wrap {
+      height: 200vh;
     }
   </style>
 </head>
 
 <body>
+  <header>
+  </header>
+  <nav>
+    <div class="as">
+      <a href="">Lorem.</a><a href="">Vel.</a><a href="">Blanditiis!</a><a href="">Accusantium.</a><a
+        href="">Magnam.</a><a href="">Accusantium!</a><a href="">Corporis.</a><a href="">Nesciunt.</a><a
+        href="">Quidem.</a><a href="">Nostrum.</a>
+    </div>
+    <span class="ham">ham</span>
+  </nav>
   <div class="wrap">
   </div>
-  <img src="./imgs/avatar0.jpg" alt="">
+  <script>
+    let ham = document.querySelector('.ham')
+    let as = document.querySelector('.as')
+    ham.addEventListener('click', () => {
+      as.classList.toggle('active')
+    })
+  </script>
 </body>
 
 </html>
