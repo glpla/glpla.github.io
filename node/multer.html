@@ -81,15 +81,15 @@
       </table>
     </dd>
     <dt>完整流程</dt>
+    <dd>在 <a href="./static.html">静态资源服务器</a>的基础继续开发</dd>
     <dd class="sn">
-      <div>创建服务器目录 server</div>
-      <div>初始化</div>
-      <pre>npm init -y</pre>
       <div>安装依赖</div>
       <pre>npm install multer --save</pre>
-      <div>创建服务脚本index.js并引入multer</div>
+      <div>引入 multer、path；path 用以解析获取文件扩展名</div>
       <pre>const multer = require('multer')</pre>
-      <div>配置存储 storage：指定上传目录，如upload；上传目录要 <span class="warn">提前</span> 创建好；如果不指定，上传的内容将保留在内存中</div>
+      <pre>const path = require('path')</pre>
+      <div>在静态资源目录 public 中，创建上传目录 upload；上传目录要 <span class="warn">提前</span> 创建好；如果不指定，上传的内容将保留在内存中</div>
+      <div>配置存储 storage：指定上传目录，如 upload</div>
       <p>Multer accepts an options <span class="warn">object</span>, the most basic of which is the <span
           class="warn">dest</span> property, which
         tells Multer where
@@ -98,8 +98,7 @@
       <p>In an average web app, <span class="warn">only</span> dest might be required.</p>
       <p><span class="warn">more</span> control over your uploads, use the <span class="warn">storage</span> option
         instead of dest.</p>
-      <p>使用DiskStorage配置可以更好控制上传细节，如改名；有了DiskStorage，可以放弃dest配置</p>
-      <p>需要解析获取文件扩展名，引入path包</p>
+      <p>使用 diskStorage 配置可以更好控制上传细节，如改名；有了diskStorage，可以放弃 dest 配置</p>
       <p>使用时间戳为上传图片拼接名字</p>
       <p>文件的存储位置和命名方式，根据实际情况定制，如可以按照学号+姓名命名头像文件</p>
       <pre>
@@ -118,7 +117,7 @@ const upload = multer({
   storage: storage
 })        </pre>
       <div>响应路由 -
-        以上传单文件single(name)为例；name是网络请求中指定的name属性，即：只接收请求中name属性指定的文件；可以根据不同的name上传不同用途的图片，如name为img代表普通图片，为avatar代表头像图片等等
+        以上传单文件single(name)为例；name是网络请求中为图片指定的name属性，即：只接收请求中name属性指定的图片文件；可以根据不同的name上传不同用途的图片，如name为img代表普通图片，为avatar代表头像图片等等
       </div>
       <p>req.file可以获取到具体的文件信息</p>
       <pre>

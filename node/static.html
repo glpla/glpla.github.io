@@ -75,9 +75,12 @@ app.listen(port, () => {
       <p>自定义命令启动服务：修改package.json里script</p>
       <pre>
 "scripts": {
-  "start":"node index.js"
+  "start": "node index.js",
+  "wx": "node server.js",
 }</pre>
-      <pre>node start</pre>
+      <p>执行</p>
+      <pre>npm start</pre>
+      <pre>npm run wx</pre>
       <div>使用资源</div>
       <p>用户使用浏览器访问 http://127.0.0.1:3000/资源路径和名字获取资源；如图片的src属性</p>
       <p>用户在H5项目中使用，如&lt;img&gt;元素</p>
@@ -96,7 +99,7 @@ app.listen(port, () => {
     <dd>
       <pre>
 app.get('/', (req, res) => {
-  fs.readFile('www/index.html', (err, data) => {
+  fs.readFile('public/index.html', (err, data) => {
     if (err) throw err
     res.write(data)
     res.end()
@@ -107,7 +110,7 @@ app.get('/', (req, res) => {
     <dd>
       <pre>
 app.get('/', (req, res) => {
-  res.sendFile('./www/index.html')
+  res.sendFile('./public/index.html')
 })</pre>
     </dd>
     <dd>方案3：终极必杀技</dd>
