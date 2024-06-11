@@ -38,13 +38,13 @@
         </dd>
         <dd class="tips">相当于是路由的生命周期函数</dd>
         <dt>全局前置守卫 beforeEach(fn) </dt>
-        <dd>使用 router.beforeEach 注册一个全局前置守卫，执行函数 fn：接收3个参数：</dd>
-        <dd>to：进入的路由</dd>
-        <dd>from：离开的路由</dd>
-        <dd>next()：是一个函数，表示是否允许，实现路由控制，如：未登录不允许访问，并引导|重定向到指定页面</dd>
-        <dd>更多信息，请访问 <a href="https://router.vuejs.org/zh/api/interfaces/Router.html#Methods-beforeEach">官方文档 -
-                beforeEach</a></dd>
         <dd class="sn">
+            <p>使用 router.beforeEach 注册一个全局前置守卫，执行函数 fn：接收3个参数：</p>
+            <p>to：进入的路由</p>
+            <p>from：离开的路由</p>
+            <p>next()：是一个函数，表示是否允许，实现路由控制，如：未登录不允许访问，并引导|重定向到指定页面</p>
+            <p>更多信息，请访问 <a href="https://router.vuejs.org/zh/api/interfaces/Router.html#Methods-beforeEach">官方文档 -
+                    beforeEach</a></p>
             <div>正常访问；或不使用 next 形参</div>
             <pre>
 router.beforeEach((to, from, next) => {
@@ -63,8 +63,6 @@ router.beforeEach((to, from, next) => {
             <pre>
 router.beforeEach((to, from, next) => {
     if (to.path == '/order') {
-        //next('/home')
-        //next({ path: '/home' })
         next({ name: 'home' })
     } else {
         next()
@@ -77,30 +75,30 @@ router.beforeEach((to, from, next) => {
 })</pre>
         </dd>
         <dt>全局后置钩子 afterEach(fn)</dt>
-        <dd>使用 router.afterEach 注册一个全局后置守卫，执行函数 fn，接收2个参数：to、from</dd>
-        <dd>不接受 next 函数也不会改变导航本身，因为导航已结束</dd>
-        <dd>更多信息，请访问 <a href="https://router.vuejs.org/zh/api/interfaces/Router.html#Methods-afterEach">官方文档 -
-                afterEach</a></dd>
         <dd>
+            <p>使用 router.afterEach 注册一个全局后置守卫，执行函数 fn，接收2个参数：to、from</p>
+            <p>不接受 next 函数也不会改变导航本身，因为导航已结束</p>
+            <p>更多信息，请访问 <a href="https://router.vuejs.org/zh/api/interfaces/Router.html#Methods-afterEach">官方文档 -
+                    afterEach</a></p>
             <pre>
 router.afterEach((to, from) => {
     //
 })</pre>
         </dd>
-        <!-- <dt>全局解析守卫 beforeResolve(fn)</dt>
-        <dd>使用 router.beforeResolve 注册一个全局解析守卫</dd> -->
         <dt>路由独享的守卫</dt>
         <dd>局部路由使用守卫</dd>
         <dd>针对特定路由的控制； 只在 <span class="warn">进入</span> 路由时触发</dd>
         <dd>动态路由对应的多个路由间不会触发，因为他们对应路由配置中同一条路由</dd>
         <dd>更多信息，请访问 <a
-                href="https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E8%B7%AF%E7%94%B1%E7%8B%AC%E4%BA%AB%E7%9A%84%E5%AE%88%E5%8D%AB">路由独享的守卫</a>
+                href="https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E8%B7%AF%E7%94%B1%E7%8B%AC%E4%BA%AB%E7%9A%84%E5%AE%88%E5%8D%AB">官方文档
+                - 路由独享的守卫</a>
         </dd>
     </dl>
     <dl>
-        <dd class="example-sn">导航结束后，设置页面标题 title；需要为路由配置 meta 属性</dd>
-        <dd>如果不是每个路由都配置 meta 属性，需判断再使用；必要时，应该指定默认值</dd>
+        <dd class="example-sn">导航结束后，设置页面标题 title</dd>
         <dd>
+            <div>需要为路由配置 meta 属性来指定 title</div>
+            <div>如果不是每个路由都配置 meta 属性，需判断再使用；必要时，应该指定默认值</div>
             <pre>
 router.afterEach((to, from) => {
     if(to.meta.title){
@@ -108,8 +106,9 @@ router.afterEach((to, from) => {
     }
 })</pre>
         </dd>
-        <dd class="example-sn">添加页面 <a href="../node/dependency.html">NProgress - 进度条</a> 特效 - 导航前开始，导航后结束</dd>
+        <dd class="example-sn">添加页面 <a href="../node/dependency.html">NProgress - 进度条</a> 特效</dd>
         <dd>
+            <div>导航前开始，导航后结束</div>
             <pre>
 router.beforeEach((to, from, next) => {
     NProgress.start();
@@ -158,9 +157,9 @@ app.use(pinia)
                 store</a>
         </dd>
         <dd class="example-sn">路由守卫和状态管理；<a href="./drill_menu.html">实操 - 汉堡菜单</a></dd>
-        <dd>在路由文件中，引入仓库 menu.js</dd>
-        <dd>每次进入，创建菜单实例并设置菜单栏样式为隐藏</dd>
         <dd>
+            <div>在路由文件中，引入仓库 menu.js</div>
+            <div>每次进入，创建菜单实例并设置菜单栏样式为隐藏</div>
             <pre>
 import { useMenuStore } from '@/stores/menu'
 
@@ -182,6 +181,8 @@ router.afterEach((to, from) => {
 })</pre>
         </dd>
         <dd class="question">优化以上代码</dd>
+        <!-- <dd>常量的作用域</dd> -->
+        <!-- <dd>在外面声明变量，在守卫中赋值</dd> -->
         <dd class="tips">
             <div>更多路由控制，应由后端服务器实现，前端不可靠</div>
             <div>路由配置时，如果不是每个路由都指定 meta，使用时应先判断再使用</div>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查询路由 Query</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>查询路由</h1>
+        <span>&commat;Query</span>
+    </header>
+    <dl>
+        <dd>在URL后面使用 <span class="warn">?</span> 连接 <span class="warn">值对</span> 形式的查询字符串来传递参数；多个参数使用 <span
+                class="warn">&</span> 拼接 </dd>
+        <dd>查询路由参数由路由的 <span class="warn">query</span> 接收</dd>
+        <dd>多用于分享、查看详情等场合</dd>
+        <dd>
+            <pre>http://127.0.0.1:5500/vue/router.html?name=gl&age=18</pre>
+        </dd>
+        <dt>配置路由参数</dt>
+        <dd>不需要特别配置</dd>
+        <dd>查询路由可以使用或不使用，对路由配置没有影响；而动态路由一旦配置，必须按照要求使用</dd>
+        <dt>传递路由参数</dt>
+        <dd>
+            <div>可以静态使用；也可以动态绑定</div>
+            <div>可以使用 普通路由 path 和 命名路由 name 传递路由参数</div>
+            <div>同样可以使用模板字符串拼接 - 建议</div>
+            <pre>
+//使用1：静态使用
+&lt;router-link to="/team?id=100"&gt;team&lt;/router-link&gt;
+
+//使用2：动态绑定；path
+&lt;router-link :to="{ path: '/team', query: { id: 100 } }"&gt;team&lt;/router-link&gt;
+
+//使用3：动态绑定；name
+&lt;router-link :to="{ name: 'team', query: { id: 100 } }"&gt;team&lt;/router-link&gt;
+
+//使用4：动态绑定；模板字符串；id是定义的数据变量
+&lt;router-link :to="`/about?id=${id}`"&gt;team&lt;/router-link&gt;</pre>
+        </dd>
+        <dt>接收路由参数</dt>
+        <dd>
+            <div>在路由目标组件 - 使用 useRoute 实例，接收路由参数，可以在逻辑和结构中使用</div>
+            <div><span class="warn">useRoute()</span> 是一个全局注入的函数，用于在组件中获取当前激活的路由信息。它返回一个 RouteLocationNormalized
+                对象，包含了当前路由的所有属性，如
+                path、params、query 等</div>
+            <div>逻辑</div>
+            <pre>
+import { useRoute } from 'vue-router'
+let route = useRoute()
+console.log(route.query.id);</pre>
+            <div> 结构</div>
+            <pre>&lt;div&gt;{{ route.query.id }}&lt;/div&gt;</pre>
+            <div>如果 <span class="warn">仅仅</span> 在结构中使用，可以使用默认的全局变量 $route 解析并使用；不建议</div>
+            <pre>&lt;div&gt;{{ $route.query.id }}&lt;/div&gt;</pre>
+        </dd>
+        <dt>注意事项</dt>
+        <dd class="sn">
+            <div>异常处理</div>
+            <p>在可能使用查询路由参数的组件中，做兼容性处理；如：如果有查询参数，则显示当前商品；如果没有，则显示所有商品或指定推荐</p>
+            <p>默认情况下，如果路由参数没有传递，则默认为空对象或空字符串</p>
+            <div>解构参数</div>
+            <p>多个路由参数可以使用解构路由以简化语法，会丢失数据的响应式；不建议</p>
+            <p>为避免失去响应式，应该使用 toRefs</p>
+            <p>&lt;script&gt;接收路由参数</p>
+            <pre>
+import {toRefs} from 'vue'
+import {useRoute} from 'vue-router'
+let route = useRoute()
+let {query} = toRefs(route)</pre>
+            <p>&lt;template&gt;渲染路由参数 - 解构路由</p>
+            <pre>
+&lt;ul&gt;
+    &lt;li&gt;{{query.id}}&lt;/li&gt;
+    &lt;li&gt;{{query.title}}&lt;/li&gt;
+    &lt;li&gt;{{query.cont}}&lt;/li&gt;
+&lt;/ul&gt;</pre>
+            <p>&lt;template&gt;渲染路由参数 - 不解构路由</p>
+            <pre>
+&lt;ul&gt;
+    &lt;li&gt;{{route.query.id}}&lt;/li&gt;
+    &lt;li&gt;{{route.query.title}}&lt;/li&gt;
+    &lt;li&gt;{{route.query.cont}}&lt;/li&gt;
+&lt;/ul&gt;</pre>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <script src="/utils/custom/star.js"></script>
+</body>
+
+</html>
