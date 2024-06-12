@@ -6,72 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    .nav:hover+.box {
+      grid-template-rows: 1fr;
     }
 
-    body {}
-
-    header {
-      position: sticky;
-      top: -10vh;
-      height: 20vh;
-      background-color: #f40;
-    }
-
-    nav {
-      position: sticky;
-      top: 10vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .ham {
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .as {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      left: -100px;
+    .box {
+      display: grid;
+      grid-template-rows: 0fr;
       transition: 0.4s;
     }
 
-    .as.active {
-      left: 0;
-    }
-
-    .wrap {
-      height: 200vh;
+    ul {
+      overflow: hidden;
     }
   </style>
 </head>
 
 <body>
-  <header>
-  </header>
-  <nav>
-    <div class="as">
-      <a href="">Lorem.</a><a href="">Vel.</a><a href="">Blanditiis!</a><a href="">Accusantium.</a><a
-        href="">Magnam.</a><a href="">Accusantium!</a><a href="">Corporis.</a><a href="">Nesciunt.</a><a
-        href="">Quidem.</a><a href="">Nostrum.</a>
-    </div>
-    <span class="ham">ham</span>
-  </nav>
-  <div class="wrap">
+  <div class="nav">hover</div>
+  <div class="box">
+    <ul>
+      <li>Lorem.</li>
+      <li>Sapiente.</li>
+      <li>Placeat.</li>
+      <li>Rem.</li>
+      <li>Magnam.</li>
+    </ul>
   </div>
-  <script>
-    let ham = document.querySelector('.ham')
-    let as = document.querySelector('.as')
-    ham.addEventListener('click', () => {
-      as.classList.toggle('active')
-    })
-  </script>
 </body>
 
 </html>

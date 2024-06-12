@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>网格布局 Grid</title>
-  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/common_202406.css">
   <link rel="stylesheet" href="./css/grid.css">
   <base target="_blank">
   <style>
@@ -16,8 +16,11 @@
 
 <body>
   <header>
-    <h1>&commat;Grid</h1>
-    <span class="ham iconfont icon-menu"></span>
+  </header>
+  <div class="header">
+    <h1>网格布局</h1>
+    <span>&commat;Grid</span>
+    <span class="ham"></span>
     <nav class="nav">
       <a href="" class="nav-item">概述</a>
       <a href="" class="nav-item">容器</a>
@@ -25,7 +28,7 @@
       <a href="" class="nav-item">布局</a>
       <a href="" class="nav-item">对齐</a>
     </nav>
-  </header>
+  </div>
   <dl class="nav-cont">
     <dd>.更灵活：支持二维布局：对列和行进行布局</dd>
     <dd>.类似早期的table布局；table本来是做数据展示的，所以在布局上有明显的缺陷：非语义化、布局代码冗余，以及不好维护、渲染性能等问题，目前table布局已被抛弃</dd>
@@ -98,7 +101,7 @@
         或 auto-fit</span> 由系统自动确定划分多少列
     </dd>
     <dd>.auto-fill：当容器大于子项时，生成空轨道；剩余空间闲置</dd>
-    <dd>.auto-fit：与 auto-fill 行为一致，唯一不同的是当轨道内容为空时，将不会生成轨道，剩余空间被分配到各个子项中</dd>
+    <dd>.auto-fit：与 auto-fill 行为一致，唯一不同的是当轨道内容为空时，将 <span class="warn">不会生成</span> 轨道，剩余空间被分配到各个子项中</dd>
     <dd>.minmax(length, length)：格子最小和最大尺寸</dd>
     <dd>
       <figure class="img-sn">
@@ -270,16 +273,32 @@ body {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/acc_grid.html">手风琴</a></dd>
     <dd>
+      <div>结构上要求：网格容器，如 wrap 有唯一子元素，如 ul，且子元素溢出隐藏；子元素可以有多个子元素，如 li</div>
       <pre>
-.accordion .wrap {
+&lt;div class="wrap"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Lorem.&lt;/li&gt;
+    &lt;li&gt;Sapiente.&lt;/li&gt;
+    &lt;li&gt;Placeat.&lt;/li&gt;
+    &lt;li&gt;Rem.&lt;/li&gt;
+    &lt;li&gt;Magnam.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</pre>
+      <pre>
+.wrap {
   display: grid;
-  grid-template-rows: 0fr;
+  grid-template-rows: 0fr;//MUST be 0fr, NOT 0
   transition: .5s;
 }
 
-.accordion .wrap.is-open {
+.wrap.active {
   grid-template-rows: 1fr;
-}</pre>
+}
+
+.wrap ul {
+  overflow: hidden;
+}
+</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 异构布局，参考<a href="./demo/up2u.html">个人网站</a></dd>
     <dd class="random">
@@ -615,7 +634,7 @@ body {
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="./lib/ham2024.js"></script>
+  <script src="/utils/custom/ham2024.js"></script>
   <script>
     window.onload = function () {
       // case 1
