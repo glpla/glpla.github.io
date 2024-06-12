@@ -83,7 +83,7 @@ body::-webkit-scrollbar-thumb {
 
 header {
   position: relative;
-  height: 16rem;
+  height: 20vh;
   background-color: #fff;
 }
 
@@ -129,7 +129,7 @@ header {
 
 h1 {
   position: relative;
-  font-size: 2.4rem;
+  font-size: 2rem;
   font-weight: normal;
 }
 
@@ -168,7 +168,6 @@ h1::before {
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
-  font-size: 1.8rem;
 }
 
 .iconfont {
@@ -645,15 +644,21 @@ footer img {
 }
 
 @media screen and (max-width:768px) {
-  :root {
-    --main-nav-h: 8rem;
-  }
-
   body.active {
     overflow: hidden;
   }
 
   header {
+    height: 30vh;
+    padding: calc(var(--main-nav-h) + var(--border-r)) var(--border-r) var(--border-r);
+  }
+
+  header .swiper {
+    clip-path: unset;
+    border-radius: var(--border-r);
+  }
+
+  #time {
     display: none;
   }
 
@@ -662,10 +667,6 @@ footer img {
     padding: var(--p-m-g);
     background-color: #000;
     color: #fff;
-  }
-
-  h1 {
-    font-size: 2rem;
   }
 
   .ham {
@@ -731,10 +732,6 @@ footer img {
 
   .nav-item i {
     display: none;
-  }
-
-  .main {
-    padding-top: var(--main-nav-h);
   }
 
   .home {
