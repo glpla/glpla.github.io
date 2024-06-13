@@ -7,10 +7,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CSS变量 Variable</title>
   <link rel="stylesheet" href="../css/common.css">
+  <base target="_blank">
   <style>
     :root {
       --main-color: #01b4ff;
       --main-layout: repeat(3, 1fr);
+    }
+
+    :root[data-theme="blue"] {
+      --main-color: #01b4ff;
+    }
+
+    :root[data-theme="purple"] {
+      --main-color: #be01fe;
+    }
+
+    :root[data-theme="red"] {
+      --main-color: #ff0f5b;
     }
 
     header {
@@ -56,9 +69,9 @@
   <header>
     <h1>变量&commat;Variable</h1>
     <div class="mixer">
-      <span style="background-color: #ff0f5b;"></span>
-      <span style="background-color: #be01fe;"></span>
-      <span style="background-color: #01b4ff;"></span>
+      <span data-color="#ff0f5b" style="background-color: #ff0f5b;"></span>
+      <span data-color="#be01fe" style="background-color: #be01fe;"></span>
+      <span data-color="#01b4ff" style="background-color: #01b4ff;"></span>
     </div>
   </header>
   <dl>
@@ -137,11 +150,11 @@ el{
     <dt>与JS交互</dt>
     <dd>
       <div>. 动态调整</div>
-      <div>. 获取元素节点，修改其属性</div>
+      <div>. 获取元素节点，使用其特定属性，如颜色去修改变量的值，达到换肤的效果</div>
+      <div>. 也可以使用自定义属性绑定颜色值</div>
       <pre>
 let mixer = document.querySelectorAll('.mixer span');
 let root = document.querySelector(':root');
-console.log(root);
 mixer.forEach(item => {
     item.addEventListener('click', (e) => {
         console.log(e.target.style.backgroundColor);
@@ -154,11 +167,12 @@ mixer.forEach(item => {
   <script>
     let mixer = document.querySelectorAll('.mixer span');
     let root = document.querySelector(':root');
-    console.log(root);
     mixer.forEach(item => {
       item.addEventListener('click', (e) => {
-        console.log(e.target.style.backgroundColor);
-        root.style.setProperty('--main-color', e.target.style.backgroundColor)
+        // console.log(e.target.style.backgroundColor);
+        console.log(e.target);
+        console.log(e.target.getAttribute('data-color'));
+        // root.style.setProperty('--main-color', e.target.style.backgroundColor)
       })
     })
   </script>

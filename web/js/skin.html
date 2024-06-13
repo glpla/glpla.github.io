@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>换肤 Skin</title>
+  <link rel="stylesheet" href="../../css/common_202406.css">
+  <style></style>
+</head>
+
+<body>
+  <header>
+  </header>
+  <div class="header">
+    <h1>换肤</h1>
+    <span>&commat;Skin</span>
+  </div>
+  <dl>
+    <dt>CSS 样式</dt>
+    <dd>
+      <div>通过样式的切换达到换肤的效果</div>
+      <div>为根元素 html 设置自定义属性的值来应用不同的样式：白天和黑夜</div>
+      <pre>
+:root {
+  --txt-color: #303133;
+  --bg-color: #ffffff;
+}
+
+[data-theme="dark"] {
+  --txt-color: #e5eaf3;
+  --bg-color: #131313;
+}</pre>
+      <div>修改为暗夜模式</div>
+      <pre>document.documentElement.setAttribute('data-theme', 'dark');</pre>
+      <div>或：根据当前值切换；因为没有指定 light，所以属性为空，则应用默认的变量样式</div>
+      <pre>document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light');</pre>
+    </dd>
+    <dt>自定义属性 data-</dt>
+    <dd>
+      <div>将换肤数据绑定到data-上，获取后应用到其它元素；事件处理可以封装为函数</div>
+      <pre>
+&lt;div class="red" data-color="#f40"&gt;red&lt;/div&gt;
+&lt;div class="blue" data-color="#089"&gt;blue&lt;/div&gt;
+&lt;div class="yellow" data-color="#ff0"&gt;yellow&lt;/div&gt;</pre>
+      <pre>
+btnRed.addEventListener('click', (e) => {
+  body.style.backgroundColor = e.target.dataset.color;
+})
+btnBlue.addEventListener('click', (e) => {
+  body.style.backgroundColor = e.target.dataset.color;
+})
+btnYellow.addEventListener('click', (e) => {
+  body.style.backgroundColor = e.target.dataset.color;
+})</pre>
+      <!-- <pre>
+btnRed.addEventListener('click', fn);
+btnBlue.addEventListener('click', fn);
+btnYellow.addEventListener('click', fn);
+function fn(e) {
+  body.style.backgroundColor = e.target.dataset.color;
+}</pre> -->
+    </dd>
+    <dt>CSS 变量</dt>
+    <dd>
+      <div>.获取元素节点，使用其特定的样式属性，如颜色去修改变量的值，达到换肤的效果</div>
+      <pre>
+let mixer = document.querySelectorAll('.mixer span');
+let root = document.querySelector(':root');
+mixer.forEach(item => {
+    item.addEventListener('click', (e) => {
+        console.log(e.target.style.backgroundColor);
+        root.style.setProperty('--main-color', e.target.style.backgroundColor)
+    })
+})</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+
+  </script>
+</body>
+
+</html>

@@ -214,9 +214,9 @@ function fn(el) {
     <dd>使用querySelector</dd>
     <dd>使用getElement(s)Byxxxx系列</dd>
     <dt class="nav-cont">元素的样式类 class</dt>
-    <dd>className：元素应用的类；返回字符串；多个类名以空格分隔；对该属性赋值将会增加、删除类</dd>
-    <dd>classList：元素应用的类；返回类数组</dd>
     <dd>
+      <div>className：元素应用的类；返回字符串；多个类名以空格分隔；对该属性赋值将会增加、删除类</div>
+      <div>classList：元素应用的类；返回类数组</div>
       <table>
         <caption>元素的类方法</caption>
         <tr>
@@ -242,8 +242,8 @@ function fn(el) {
       </table>
     </dd>
     <dt class="nav-cont">元素的内联样式 style</dt>
-    <dd>.修改样式时，建议采用小驼峰；也可以使用连字符-，连字符需要使用数组写法</dd>
     <dd>
+      <div>.修改样式时，建议采用小驼峰；也可以使用连字符-，连字符需要使用数组写法</div>
       <table>
         <caption>元素样式 style</caption>
         <tr>
@@ -284,10 +284,10 @@ console.log(getComputedStyle(box).width);//320px
 console.log(getComputedStyle(box).background);//所有背景相关的样式</pre>
     </dd>
     <dt>样式的属性 Property</dt>
-    <dd>.Property指的是样式的属性，需要借助style操作</dd>
-    <dd>.修改元素样式：可以修改class定义的样式，也可以修改style定义的样式；如果使用到变量属性，请使用setProperty</dd>
-    <dd>.获取样式getPropertyValue，只能获取内联样式定义的属性；class中定义的获取不到</dd>
     <dd>
+      <div>.Property指的是样式的属性，需要借助style操作</div>
+      <div>.修改元素样式：可以修改class定义的样式，也可以修改style定义的样式；如果使用到变量属性，请使用setProperty</div>
+      <div>.获取样式getPropertyValue，只能获取内联样式定义的属性；class中定义的获取不到</div>
       <table>
         <caption>样式的属性 Property</caption>
         <tr>
@@ -309,10 +309,12 @@ console.log(getComputedStyle(box).background);//所有背景相关的样式</pre
       </table>
     </dd>
     <dt class="nav-cont">元素的内容 contents</dt>
-    <dd>用于更新|渲染页面</dd>
-    <dd>innerText：元素文本内容</dd>
-    <dd>innerHTML：元素HTML内容</dd>
-    <dd>textcontent：纯文本内容</dd>
+    <dd>
+      <div>用于更新|渲染页面</div>
+      <div>innerText：元素文本内容</div>
+      <div>innerHTML：元素HTML内容</div>
+      <div>textcontent：纯文本内容</div>
+    </dd>
     <dd class="example-sn">将文本内容替换为独立的span - 运用正则表达式</dd>
     <dd>
       <pre>
@@ -320,8 +322,9 @@ let data = document.querySelector('.data');
 data.innerHTML = data.textContent.replace(/\S/g, ' &lt;span&gt;$&&lt;/span&gt;')      </pre>
     </dd>
     <dt class="nav-cont">元素的属性 attribute</dt>
-    <dd>.元素的标签属性，如id、class、style、name、value、type、maxLength等；甚至可以是自定义属性data-</dd>
     <dd>
+      <div>.元素的标签属性，如id、class、style、name、value、type、maxLength等；甚至可以是自定义属性data-</div>
+      <div>应用：换肤 - 获取自定义属性，如颜色、图片等，改变全局的样式；见后续案例</div>
       <table>
         <caption>元素属性 Attribute</caption>
         <tr>
@@ -352,17 +355,44 @@ btn.addEventListener('click', () => {
 })</pre>
     </dd>
     <dt class="nav-cont">元素的自定义属性 data-</dt>
-    <dd>.data-写在元素标签上，为了保存和使用数据</dd>
-    <dd>.获取时推荐使用：el.dataset，不需要加上data</dd>
-    <dd>.事件处理函数写在当前元素上才能获取；事件代理的方式获取不到</dd>
-    <dd>.长属性应采用连字符法，如：data-ind、data-good-name</dd>
-    <dd>.实际使用时，注意单元素和多元素的区别；更多信息，请参考 <a href="../js/event.html">事件对象</a>一节</dd>
+    <dd>
+      <div>.data-写在元素标签上，为了保存和使用数据</div>
+      <div>.获取时推荐使用：el.dataset，不需要加上data</div>
+      <div>.事件处理函数写在当前元素上才能获取；事件代理的方式获取不到</div>
+      <div>.长属性应采用连字符法，如：data-ind、data-good-name</div>
+      <div>.实际使用时，注意单元素和多元素的区别；更多信息，请参考 <a href="../js/event.html">事件对象</a>一节</div>
+    </dd>
     <dd class="example-sn"> 创建节点并指定data-</dd>
     <dd>
       <pre>
 let div = document.createElement('div')
 div.dataset.id = 'hi'
 wrap.appendChild(div)</pre>
+    </dd>
+    <dd class="example-sn"> 换肤 - 将换肤数据绑定到data-上</dd>
+    <dd>
+      <pre>
+&lt;div class="red" data-color="#f40"&gt;red&lt;/div&gt;
+&lt;div class="blue" data-color="#089"&gt;blue&lt;/div&gt;
+&lt;div class="yellow" data-color="#ff0"&gt;yellow&lt;/div&gt;</pre>
+      <pre>
+btnRed.addEventListener('click', (e) => {
+  body.style.backgroundColor = e.target.dataset.color;
+})
+btnBlue.addEventListener('click', (e) => {
+  body.style.backgroundColor = e.target.dataset.color;
+})
+btnYellow.addEventListener('click', (e) => {
+  body.style.backgroundColor = e.target.dataset.color;
+})</pre>
+      <div>函数封装 - 逻辑优化</div>
+      <pre>
+btnRed.addEventListener('click', fn);
+btnBlue.addEventListener('click', fn);
+btnYellow.addEventListener('click', fn);
+function fn(e) {
+  body.style.backgroundColor = e.target.dataset.color;
+}</pre>
     </dd>
   </dl>
   <div class="chap">综合案例 Cases</div>
@@ -390,32 +420,7 @@ allBtn.addEventListener('click', () => {
     <dd>.本地存储 localStorage</dd>
     <dd>.数组:unshift、splice</dd>
     <dd>.JSON</dd>
-    <dd>[ <span class="iconfont icon-bomb"></span> ] 更换状态的类必须出现在当前动态类的后面</dd>
-    <dd class="example-sn"> 换肤 - 将换肤数据绑定到data-上</dd>
-    <dd>
-      <pre>
-&lt;div class="red" data-color="#f40"&gt;red&lt;/div&gt;
-&lt;div class="blue" data-color="#089"&gt;blue&lt;/div&gt;
-&lt;div class="yellow" data-color="#ff0"&gt;yellow&lt;/div&gt;</pre>
-      <pre>
-btnRed.addEventListener('click', (e) => {
-  body.style.backgroundColor = e.target.dataset.color;
-})
-btnBlue.addEventListener('click', (e) => {
-  body.style.backgroundColor = e.target.dataset.color;
-})
-btnYellow.addEventListener('click', (e) => {
-  body.style.backgroundColor = e.target.dataset.color;
-})</pre>
-      <div>函数封装 - 逻辑优化</div>
-      <pre>
-btnRed.addEventListener('click', fn);
-btnBlue.addEventListener('click', fn);
-btnYellow.addEventListener('click', fn);
-function fn(e) {
-  body.style.backgroundColor = e.target.dataset.color;
-}</pre>
-    </dd>
+    <dd class="tips">更换状态的类必须出现在当前动态类的后面</dd>
     <dd class="example-sn"> 换肤 - <a href="https://codepen.io/glpla/full/ZEPbbQv">选项卡 | 导航 - CodePen</a></dd>
     <dd>.更换元素的class或样式style</dd>
     <dd>.导航：首先遍历所有导航，移除active，然后为当前导航添加活动类active</dd>
