@@ -6,33 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    .nav:hover+.box {
-      grid-template-rows: 1fr;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #000;
+      color: #fff;
     }
 
     .box {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: 0.4s;
+      position: relative;
+      margin: auto;
+      font-size: 40px;
+      color: #333;
     }
 
-    ul {
-      overflow: hidden;
+    .box::before {
+      content: 'hi,there.';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      color: #fff;
+      clip-path: circle(30% at -50% 50%);
+      transition: 2s;
+      /* filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4)); */
+      filter: blur(2px);
+    }
+
+    .box:hover::before {
+      clip-path: circle(30% at 150% 50%);
     }
   </style>
 </head>
 
 <body>
-  <div class="nav">hover</div>
-  <div class="box">
-    <ul>
-      <li>Lorem.</li>
-      <li>Sapiente.</li>
-      <li>Placeat.</li>
-      <li>Rem.</li>
-      <li>Magnam.</li>
-    </ul>
-  </div>
+  <div class="box"> hi,there. </div>
 </body>
 
 </html>

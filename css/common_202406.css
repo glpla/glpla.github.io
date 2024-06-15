@@ -85,10 +85,23 @@ header {
   background-image: linear-gradient(var(--main-color), var(--warn-color));
   background-size: cover;
   background-position: center;
-  overflow: hidden;
 }
 
-header::after {
+.header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  height: 10vh;
+  color: #fff;
+  padding: 0 var(--padding);
+  overflow: hidden;
+  z-index: 99;
+}
+
+.header::after {
   content: '';
   position: absolute;
   left: 0;
@@ -103,19 +116,6 @@ header::after {
   to {
     transform: translateX(-50%);
   }
-}
-
-.header {
-  position: sticky;
-  top: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #000;
-  height: 10vh;
-  color: #fff;
-  padding: 0 var(--padding);
-  z-index: 99;
 }
 
 h1 {
@@ -135,6 +135,7 @@ h1 {
   color: #fff;
   text-decoration: none;
   padding: 0 var(--padding);
+  text-transform: capitalize;
 }
 
 .nav-item.active,
