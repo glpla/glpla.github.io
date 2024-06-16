@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>传统方法 - Browser Object Model</title>
+  <link rel="stylesheet" href="../../css/common_202406.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header></header>
+  <div class="header">
+    <h1>传统方法</h1>
+  </div>
+  <dl>
+    <dt>说明</dt>
+    <dd>
+      <div>.较少使用</div>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>open()</td>
+          <td>打开窗口；默认是_blank</td>
+        </tr>
+        <tr>
+          <td>close()</td>
+          <td>关闭窗口；只能关闭使用open()打开的窗口；兼容性差，基本不用</td>
+        </tr>
+        <tr>
+          <td>write()</td>
+          <td>输出；[Violation] Avoid using document.write().</td>
+        </tr>
+        <tr>
+          <td>alert()</td>
+          <td>警告对话框</td>
+        </tr>
+        <tr>
+          <td>prompt()</td>
+          <td>信息输入对话框；获得的都是字符串</td>
+        </tr>
+        <tr>
+          <td>confirm()</td>
+          <td>确认对话框</td>
+        </tr>
+        <tr>
+          <td>print()</td>
+          <td>打印</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 单击按钮打开 baidu</dd>
+    <dd>
+      <pre>
+let btn = document.querySelector('button');
+btn.addEventListener('click', () => {
+  open('http://www.baidu.com', '_blank');
+})</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 查看提示信息类型</dd>
+    <dd>
+      <pre>
+let age = window.prompt('your age');
+console.log(typeof (age));</pre>
+      <div>.转化数据类型</div>
+      <pre>
+let age = parseInt(window.prompt('your age'));
+console.log(typeof (age));</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 输入一个小于10的数字，求其阶层 n!</dd>
+    <dd>
+      <pre>
+function fn(n) {
+  // if (n == 0) {
+  //   return 1;
+  // } else {
+  //   return n * fn(n - 1);
+  // }
+  return n == 0 ? 1 : n * fn(n - 1);
+}
+let n = parseInt(window.prompt('请输入1个小于10的数字'))
+window.alert(fn(n));</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 支付确认-点击支付并确认后跳转到支付成功页面</dd>
+    <dd>[拓展]支付成功页面3秒后返回主页，也可以单击立即按钮返回主页</dd>
+    <dd>
+      <pre>
+btn.onclick = function () {
+  let res = window.confirm('确认要支付吗？');
+  console.log(res);
+  if (res) {
+    // window.alert('zhifu success');
+    //立即返回
+    //window.location.href = './result.html'
+    //延时返回
+    setTimeout(() => {
+      window.location.href = 'http://www.baidu.com';
+    }, 3000);
+  }
+}</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>DOM - Document Object Model</title>
+  <link rel="stylesheet" href="../../css/common_202406.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header></header>
+  <div class="header">
+    <h1>DOM</h1>
+    <span>&commat;node</span>
+  </div>
+  <dl>
+    <dt>说明</dt>
+    <dd>.一个HTML文档是由各种各样的节点/元素组成；通常使用元素表示具体的标签</dd>
+    <dd>.DOM：操作HTML/document</dd>
+    <dd>.BOM：操作浏览器/window</dd>
+    <dd>注意区分：属性或事件是DOM范畴还是BOM范畴</dd>
+  </dl>
+  <div class="chap">节点 Node</div>
+  <dl class="nav-cont">
+    <dt>节点属性</dt>
+    <dd>一个节点 Node的属性有：</dd>
+    <dd>1. 节点名称 nodeName：只读属性；如元素节点的名称是大写的标签名，如A</dd>
+    <dd>2. 节点类型 nodeType：以数字区分，如1表示元素节点</dd>
+    <dd>.元素节点/标签节点</dd>
+    <dd>.文本节点：标签之间由于格式化自动产生的的回车，空白和空格都是文本节点</dd>
+    <dd>.注释节点</dd>
+    <dd>3. 节点值 nodeValue</dd>
+    <dd>
+      <table>
+        <caption>节点分类</caption>
+        <tr>
+          <th>分类</th>
+          <th>nodeName</th>
+          <th>nodeType</th>
+          <th>nodeValue</th>
+        </tr>
+        <tr>
+          <td>元素节点</td>
+          <td>标签名；大写</td>
+          <td>1</td>
+          <td>null</td>
+        </tr>
+        <tr>
+          <td>文本节点 text</td>
+          <td>#text</td>
+          <td>3</td>
+          <td>文本节点的内容</td>
+        </tr>
+        <tr>
+          <td>注释节点 comment</td>
+          <td>#comment</td>
+          <td>8</td>
+          <td>注释的文本内容</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>节点间的关系</dt>
+    <dd>父子、兄弟、后代、祖先等</dd>
+    <dd>
+      <table>
+        <caption>节点间的关系</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>firstChild</td>
+          <td>第一个节点</td>
+        </tr>
+        <tr>
+          <td>lastChild</td>
+          <td>第一个节点</td>
+        </tr>
+        <tr>
+          <td>parentNode</td>
+          <td>父节点；无则返回null；只能有一个亲爸爸</td>
+        </tr>
+        <tr>
+          <td>offsetParent</td>
+          <td>参考的定位的父节点；如果没有就一直往上找，直到BODY</td>
+        </tr>
+        <tr>
+          <td>childNodes</td>
+          <td>子节点；通常是多个</td>
+        </tr>
+        <tr>
+          <td>nextSibling</td>
+          <td>下一个兄弟节点</td>
+        </tr>
+        <tr>
+          <td>previousSibling</td>
+          <td>上一个兄弟节点</td>
+        </tr>
+      </table>
+    </dd>
+    <dt>节点常用方法</dt>
+    <dd>操作节点的方法，如增加、删除、复制</dd>
+    <dd>
+      <table>
+        <caption>节点方法</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>appendChild(node)</td>
+          <td>尾插节点</td>
+        </tr>
+        <tr>
+          <td>prepend()</td>
+          <td>头插节点</td>
+        </tr>
+        <tr>
+          <td>insertBefore(node, node)</td>
+          <td>在某个节点前插入节点</td>
+        </tr>
+        <tr>
+          <td>removeChild(node)</td>
+          <td>删除节点</td>
+        </tr>
+        <tr>
+          <td>cloneNode(node,bool)</td>
+          <td>克隆节点</td>
+        </tr>
+      </table>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

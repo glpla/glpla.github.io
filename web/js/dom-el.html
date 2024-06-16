@@ -5,153 +5,37 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>DOM - Document Object Model</title>
-  <link rel="stylesheet" href="../../css/common.css">
+  <title>元素 Element</title>
+  <link rel="stylesheet" href="../../css/common_202406.css">
   <base target="_blank">
 </head>
 
 <body>
-  <header>
-    <h1 id="el">DOM</h1>
+  <header></header>
+  <div class="header">
+    <h1>元素</h1>
+    <span>&commat;Element</span>
     <span class="ham iconfont icon-menu"></span>
     <nav class="nav">
-      <a href="" style="--delay:0" class="nav-item">Node</a>
-      <a href="" style="--delay:1" class="nav-item">Element</a>
-      <a href="" style="--delay:2" class="nav-item">Class</a>
-      <a href="" style="--delay:3" class="nav-item">Style</a>
-      <a href="" style="--delay:4" class="nav-item">Contents</a>
-      <a href="" style="--delay:5" class="nav-item">Attribute</a>
-      <a href="" style="--delay:6" class="nav-item">Data-</a>
-      <a href="" style="--delay:7" class="nav-item">Cases</a>
+      <a href="" style="--delay:0" class="nav-item">获取</a>
+      <a href="" style="--delay:1" class="nav-item">内容</a>
+      <a href="" style="--delay:2" class="nav-item">属性</a>
+      <a href="" style="--delay:3" class="nav-item">类</a>
+      <a href="" style="--delay:4" class="nav-item">样式</a>
+      <a href="" style="--delay:5" class="nav-item">自定义属性</a>
+      <a href="" style="--delay:6" class="nav-item">案例</a>
     </nav>
-  </header>
+  </div>
   <dl>
-    <dt>说明</dt>
-    <dd>.一个HTML文档是由各种各样的节点/元素组成；通常使用元素表示具体的标签</dd>
-    <dd>.DOM：操作HTML/document</dd>
-    <dd>.BOM：操作浏览器/window</dd>
-    <dd>注意区分：属性或事件是DOM范畴还是BOM范畴</dd>
-  </dl>
-  <div class="chap">节点 Node</div>
-  <dl class="nav-cont">
-    <dt>节点属性</dt>
-    <dd>一个节点 Node的属性有：</dd>
-    <dd>1. 节点名称 nodeName：只读属性；如元素节点的名称是大写的标签名，如A</dd>
-    <dd>2. 节点类型 nodeType：以数字区分，如1表示元素节点</dd>
-    <dd>.元素节点/标签节点</dd>
-    <dd>.文本节点：标签之间由于格式化自动产生的的回车，空白和空格都是文本节点</dd>
-    <dd>.注释节点</dd>
-    <dd>3. 节点值 nodeValue</dd>
-    <dd>
-      <table>
-        <caption>节点分类</caption>
-        <tr>
-          <th>分类</th>
-          <th>nodeName</th>
-          <th>nodeType</th>
-          <th>nodeValue</th>
-        </tr>
-        <tr>
-          <td>元素节点</td>
-          <td>标签名；大写</td>
-          <td>1</td>
-          <td>null</td>
-        </tr>
-        <tr>
-          <td>文本节点 text</td>
-          <td>#text</td>
-          <td>3</td>
-          <td>文本节点的内容</td>
-        </tr>
-        <tr>
-          <td>注释节点 comment</td>
-          <td>#comment</td>
-          <td>8</td>
-          <td>注释的文本内容</td>
-        </tr>
-      </table>
-    </dd>
-    <dt>节点间的关系</dt>
-    <dd>父子、兄弟、后代、祖先等</dd>
-    <dd>
-      <table>
-        <caption>节点间的关系</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>firstChild</td>
-          <td>第一个节点</td>
-        </tr>
-        <tr>
-          <td>lastChild</td>
-          <td>第一个节点</td>
-        </tr>
-        <tr>
-          <td>parentNode</td>
-          <td>父节点；无则返回null；只能有一个亲爸爸</td>
-        </tr>
-        <tr>
-          <td>offsetParent</td>
-          <td>参考的定位的父节点；如果没有就一直往上找，直到BODY</td>
-        </tr>
-        <tr>
-          <td>childNodes</td>
-          <td>子节点；通常是多个</td>
-        </tr>
-        <tr>
-          <td>nextSibling</td>
-          <td>下一个兄弟节点</td>
-        </tr>
-        <tr>
-          <td>previousSibling</td>
-          <td>上一个兄弟节点</td>
-        </tr>
-      </table>
-    </dd>
-    <dt>节点常用方法</dt>
-    <dd>操作节点的方法，如增加、删除、复制</dd>
-    <dd>
-      <table>
-        <caption>节点方法</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>appendChild(node)</td>
-          <td>尾插节点</td>
-        </tr>
-        <tr>
-          <td>prepend()</td>
-          <td>头插节点</td>
-        </tr>
-        <tr>
-          <td>insertBefore(node, node)</td>
-          <td>在某个节点前插入节点</td>
-        </tr>
-        <tr>
-          <td>removeChild(node)</td>
-          <td>删除节点</td>
-        </tr>
-        <tr>
-          <td>cloneNode(node,bool)</td>
-          <td>克隆节点</td>
-        </tr>
-      </table>
-    </dd>
-  </dl>
-  <div class="chap">元素 Element</div>
-  <dl class="nav-cont">
+    <dt>概述 Overview</dt>
     <dd>元素是节点的一个子集：元素节点</dd>
-    <dt>获取元素 get</dt>
+    <dt class="nav-cont">获取 Get</dt>
     <dd>.可以获取&lt;HTML&gt;中任何元素；通常获取&lt;body&gt;中的元素</dd>
     <dd>.隐藏元素也可以获取</dd>
     <dd>.指定了id的元素在脚本中可以直接使用！！！</dd>
-    <dd>1.getElement(s)Byxxxx系列</dd>
-    <dd>.获取的是<span class="warn">动态</span>集合：选出的元素会随文档改变</dd>
-    <dd>
+    <dd class="sn">
+      <div>getElement(s)Byxxxx系列</div>
+      <p>.获取的是<span class="warn">动态</span>集合：选出的元素会随文档改变</p>
       <table>
         <caption>getElement(s)Byxxxx系列</caption>
         <tr>
@@ -175,11 +59,9 @@
           <td>一个元素</td>
         </tr>
       </table>
-    </dd>
-    <dd>2.querySelector系列</dd>
-    <dd>.获取的是<span class="warn">静态</span>集合：选出之后，文档DOM如有改变也不会更新</dd>
-    <dd>.返回单个元素节点或节点列表 NodeList()</dd>
-    <dd>
+      <div>querySelector系列</div>
+      <p>.获取的是<span class="warn">静态</span>集合：选出之后，文档DOM如有改变也不会更新</p>
+      <p>.返回单个元素节点或节点列表 NodeList()</p>
       <table>
         <caption>querySelector系列</caption>
         <tr>
@@ -195,25 +77,81 @@
           <td>选中一组元素</td>
         </tr>
       </table>
-    </dd>
-    <dd class="example-sn"> 函数封装 - 将元素获取方法封装为一个函数，简化操作</dd>
-    <dd>
+      <table>
+        <caption>特殊元素</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>document</td>
+          <td>获取文档对象；进而可以获取其中任何一个元素</td>
+        </tr>
+        <tr>
+          <td>html</td>
+          <td>获取html；document.documentElement()</td>
+        </tr>
+        <tr>
+          <td>body</td>
+          <td>document.body
+            <br>querySelector
+            <br>getElement(s)Byxxxx
+          </td>
+        </tr>
+      </table>
+      <p class="example-sn"> 函数封装 - 将元素获取方法封装为一个函数，简化操作</p>
       <pre>
 function fn(el) {
     return document.querySelector(el)
 }</pre>
     </dd>
-    <dd>3.document</dd>
-    <dd>获取文档对象；进而可以获取其中任何一个元素</dd>
-    <dd>4.html</dd>
-    <dd>获取html</dd>
-    <dd>document.documentElement</dd>
-    <dd>5.body</dd>
-    <dd>获取body</dd>
-    <dd>document.body</dd>
-    <dd>使用querySelector</dd>
-    <dd>使用getElement(s)Byxxxx系列</dd>
-    <dt class="nav-cont">元素的样式类 class</dt>
+    <dt class="nav-cont">内容 Contents</dt>
+    <dd>
+      <div>用于更新|渲染页面</div>
+      <div>innerText：元素文本内容</div>
+      <div>innerHTML：元素HTML内容</div>
+      <div>textcontent：纯文本内容</div>
+    </dd>
+    <dd class="example-sn">将文本内容替换为独立的span - 运用正则表达式</dd>
+    <dd>
+      <pre>
+let data = document.querySelector('.data');
+data.innerHTML = data.textContent.replace(/\S/g, ' &lt;span&gt;$&&lt;/span&gt;')      </pre>
+    </dd>
+    <dt class="nav-cont">属性 Attribute</dt>
+    <dd>
+      <div>.元素的标签属性，如id、class、style、name、value、type、maxLength等；甚至可以是自定义属性data-</div>
+      <div>应用：换肤 - 获取自定义属性，如颜色、图片等，改变全局的样式；见后续案例</div>
+      <table>
+        <caption>元素属性 Attribute</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>setAttribute(att, value)</td>
+          <td>设置属性</td>
+        </tr>
+        <tr>
+          <td>getAttribute(att)</td>
+          <td>获取所有属性</td>
+        </tr>
+        <tr>
+          <td>removeAttribute(att, value)</td>
+          <td>删除属性</td>
+        </tr>
+      </table>
+    </dd>
+    <dd class="example-sn"> 显示密码 - 修改input的属性type为text</dd>
+    <dd>
+      <pre>
+let pw = document.querySelector('#pw')
+let btn = document.querySelector('#btn')
+btn.addEventListener('click', () => {
+  pw.setAttribute('type', 'text')
+})</pre>
+    </dd>
+    <dt class="nav-cont">样式类 Class</dt>
     <dd>
       <div>className：元素应用的类；返回字符串；多个类名以空格分隔；对该属性赋值将会增加、删除类</div>
       <div>classList：元素应用的类；返回类数组</div>
@@ -241,7 +179,7 @@ function fn(el) {
         </tr>
       </table>
     </dd>
-    <dt class="nav-cont">元素的内联样式 style</dt>
+    <dt class="nav-cont">内联样式 Style</dt>
     <dd>
       <div>.修改样式时，建议采用小驼峰；也可以使用连字符-，连字符需要使用数组写法</div>
       <table>
@@ -308,53 +246,8 @@ console.log(getComputedStyle(box).background);//所有背景相关的样式</pre
         </tr>
       </table>
     </dd>
-    <dt class="nav-cont">元素的内容 contents</dt>
-    <dd>
-      <div>用于更新|渲染页面</div>
-      <div>innerText：元素文本内容</div>
-      <div>innerHTML：元素HTML内容</div>
-      <div>textcontent：纯文本内容</div>
-    </dd>
-    <dd class="example-sn">将文本内容替换为独立的span - 运用正则表达式</dd>
-    <dd>
-      <pre>
-let data = document.querySelector('.data');
-data.innerHTML = data.textContent.replace(/\S/g, ' &lt;span&gt;$&&lt;/span&gt;')      </pre>
-    </dd>
-    <dt class="nav-cont">元素的属性 attribute</dt>
-    <dd>
-      <div>.元素的标签属性，如id、class、style、name、value、type、maxLength等；甚至可以是自定义属性data-</div>
-      <div>应用：换肤 - 获取自定义属性，如颜色、图片等，改变全局的样式；见后续案例</div>
-      <table>
-        <caption>元素属性 Attribute</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>setAttribute(att, value)</td>
-          <td>设置属性</td>
-        </tr>
-        <tr>
-          <td>getAttribute(att)</td>
-          <td>获取所有属性</td>
-        </tr>
-        <tr>
-          <td>removeAttribute(att, value)</td>
-          <td>删除属性</td>
-        </tr>
-      </table>
-    </dd>
-    <dd class="example-sn"> 显示密码 - 修改input的属性type为text</dd>
-    <dd>
-      <pre>
-let pw = document.querySelector('#pw')
-let btn = document.querySelector('#btn')
-btn.addEventListener('click', () => {
-  pw.setAttribute('type', 'text')
-})</pre>
-    </dd>
-    <dt class="nav-cont">元素的自定义属性 data-</dt>
+
+    <dt class="nav-cont">自定义属性 Data-</dt>
     <dd>
       <div>.data-写在元素标签上，为了保存和使用数据</div>
       <div>.获取时推荐使用：el.dataset，不需要加上data</div>
@@ -395,7 +288,7 @@ function fn(e) {
 }</pre>
     </dd>
   </dl>
-  <div class="chap">综合案例 Cases</div>
+  <div class="chap">案例 Cases</div>
   <dl class="nav-cont">
     <dd class="example-sn"> 全选</dd>
     <dd>
@@ -468,7 +361,7 @@ btnRed.addEventListener('click', () => {
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="../lib/ham2024.js"></script>
+  <script src="/utils/custom/ham2024.js"></script>
 </body>
 
 </html>
