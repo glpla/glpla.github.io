@@ -205,6 +205,47 @@ export const useMenuStore = defineStore('menu', () => {
         <dd>2. 在使用仓库的组件结构中，引入仓库，通过汉堡按钮的单击，由标记 flag 控制动态类的应用，达到菜单的折叠和展开</dd>
         <dd>改进：单击菜单项，折叠菜单</dd>
         <dd>提示：在路由配置中，引入仓库，在导航前置守卫中实例化仓库并切换标记switchFlag；请查看 <a href="./router5.html">路由 - 导航守卫</a></dd>
+        <dd class="example-sn">暗黑模式</dd>
+        <dd class="sn">
+            <p>通过为html指定自定义属性实现CSS变量的更新达到切换效果</p>
+            <div>主题样式 - 这里仅给出需要变化的CSS变量，其它变量可以在额外的 :root单独定义</div>
+            <pre>
+:root {
+    --txt-color: #303133;
+    --bg-color: #f1f1f1;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --txt-color: #f1f1f1;
+    --bg-color: #131313;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+}</pre>
+            <div>主题仓库</div>
+            <pre>
+import { defineStore } from 'pinia'
+import { ref, onMounted } from 'vue'
+export const useThemeStore = defineStore('theme', () => {
+
+  const isDarkMode = ref(false);
+
+  const toggleDarkMode = () => {
+    isDarkMode.value = !isDarkMode.value;
+    document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light');
+  };
+
+  return { isDarkMode, toggleDarkMode }
+})</pre>
+            <div>在SFC中引入仓库，并使用相应的图标展示暗黑和白天，最后绑定主题切换事件</div>
+            <pre>
+import { useThemeStore } from '@/stores/theme';
+const themeStore = useThemeStore();</pre>
+            <pre>
+&lt;div class="theme-icon" @click="themeStore.toggleDarkMode"&gt;
+    &lt;span v-if="themeStore.isDarkMode" class="iconfont icon-night-mode-fill"&gt;&lt;/span&gt;
+    &lt;span v-else class="iconfont icon-daytime-mode-fill"&gt;&lt;/span&gt;
+&lt;/div&gt;</pre>
+        </dd>
     </dl>
     <div class="chap">更多仓库操作*</div>
     <dl>
