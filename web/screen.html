@@ -6,32 +6,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>屏风图 Screen</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="../css/common_202406.css">
   <link rel="stylesheet" href="./css/screen.css">
   <base target="_blank">
 </head>
 
 <body>
-  <header>
-    <h1>屏风图&commat;Screen</h1>
-  </header>
+  <header></header>
+  <div class="header">
+    <h1>屏风图</h1>
+    <span>&commat;Screen</span>
+  </div>
   <dl>
     <dd>. 将图片水平分隔为若干片，每个元素显示其中一片</dd>
     <dd>. 每个元素显示的图片位置为：(当前片数-1) /（总片数-1)：从0到100%分成若干段；第一段从0开始；最后一段在100%结束</dd>
     <dd>. 为了媒体自适应，每片的背景图片大小background-size应为总片数*100%</dd>
     <dd>. 为查看效果，以下各例采用hover触发特效，且采用公共类tile；任意调试尺寸均无异常</dd>
     <dd>
-      <figure class="code">
-        <figcaption></figcaption>
-
-        <pre>
+      <pre>
 .tile {
     width: 320px;
     height: 180px;
     margin: 2rem auto;
     display: flex;
 }</pre>
-      </figure>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 2片</dd>
     <dd>.2个点平分100%</dd>
@@ -41,19 +39,12 @@
       <div></div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>[HTML]</figcaption>
-        <pre>
+      <pre>
 &lt;div class="tile tile-2"&gt;
     &lt;div&gt;&lt;/div&gt;
     &lt;div&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>[CSS]</figcaption>
-        <pre>
+      <pre>
 .tile-2>div {
     flex: 1;//2等分
     background-image: url(../imgs/bg.jpg);
@@ -72,7 +63,6 @@
 .tile-2>div:hover {
     transform: translateY(1rem);
 }</pre>
-      </figure>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 3片</dd>
     <dd>.3个点平分100%</dd>
@@ -83,20 +73,13 @@
       <div></div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>[HTML]</figcaption>
-        <pre>
+      <pre>
 &lt;div class="tile tile-3"&gt;
     &lt;div&gt;&lt;/div&gt;
     &lt;div&gt;&lt;/div&gt;
     &lt;div&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>[CSS]</figcaption>
-        <pre>
+      <pre>
 .tile-3>div {
     flex: 1;
     background-image: url(../imgs/bg.jpg);
@@ -119,7 +102,6 @@
 .tile-3>div:hover {
     transform: translateY(1rem);
 }</pre>
-      </figure>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 4片</dd>
     <dd>.4个点平分100%</dd>
@@ -131,21 +113,14 @@
       <div></div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>[HTML]</figcaption>
-        <pre>
+      <pre>
 &lt;div class="tile tile-4"&gt;
     &lt;div&gt;&lt;/div&gt;
     &lt;div&gt;&lt;/div&gt;
     &lt;div&gt;&lt;/div&gt;
     &lt;div&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>[CSS]</figcaption>
-        <pre>
+      <pre>
 .tile-4>div {
     flex: 1;
     background-image: url(../imgs/bg.jpg);
@@ -172,7 +147,6 @@
 .tile-4>div:hover {
     transform: translateY(1rem);
 }</pre>
-      </figure>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 使用内联变量优化</dd>
     <dd class="tile tile-4 adv">
@@ -182,25 +156,17 @@
       <div style="--pos:3"></div>
     </dd>
     <dd>
-      <figure class="code">
-        <figcaption>[HTML]</figcaption>
-        <pre>
+      <pre>
 &lt;div class="tile tile-4 adv"&gt;
     &lt;div style='--pos:0'&gt;&lt;/div&gt;
     &lt;div style='--pos:1'&gt;&lt;/div&gt;
     &lt;div style='--pos:2'&gt;&lt;/div&gt;
     &lt;div style='--pos:3'&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>[CSS]</figcaption>
-        <pre>
+      <pre>
 .tile-4.adv div {
   background-position: calc(var(--pos)*100%/(4 - 1));
 }</pre>
-      </figure>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

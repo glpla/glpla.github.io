@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>定制下拉列表</title>
+  <style>
+    @font-face {
+      font-family: 'Quicksand';
+      src: url(https://glpla.github.io/utils/font/Quicksand/Quicksand-Regular.ttf);
+      font-weight: 400;
+      font-display: swap;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      height: 100vh;
+      font-size: 15px;
+      background-image: linear-gradient(#1b9fab, #4bc2ce);
+    }
+
+    .select {
+      position: relative;
+      width: 100%;
+      max-width: 350px;
+    }
+
+
+    .title {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 10px;
+      background-color: #eee;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .title::after {
+      content: '\003E';
+      transition: 0.4s;
+    }
+
+    .title.active::after {
+      transform: rotate(90deg);
+    }
+
+    .options {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      height: 0;
+      background-color: #f1f1f1;
+      margin-top: 10px;
+      overflow-y: auto;
+      transition: 0.4s;
+    }
+
+    .options.active {
+      height: 200px;
+    }
+
+    .options::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .options::-webkit-scrollbar-track {
+      /* background-color: #000; */
+    }
+
+    .options::-webkit-scrollbar-thumb {
+      /* background-image: linear-gradient(transparent, #f40); */
+      background-color: #ff7b00;
+    }
+
+    .option {
+      font-size: 14px;
+      cursor: pointer;
+      padding: 0 10px;
+    }
+
+    .option:hover,
+    .option.active {
+      color: #f40;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="select">
+    <div class="title">please selct</div>
+    <div class="options">
+      <div class="option">Lorem</div>
+      <div class="option">Ipsam</div>
+      <div class="option">Quis</div>
+      <div class="option">Aliquid</div>
+      <div class="option">Praesentium</div>
+      <div class="option">Architecto</div>
+      <div class="option">Quisquam</div>
+      <div class="option">Maxime</div>
+      <div class="option">Ad</div>
+      <div class="option">Nihil</div>
+    </div>
+  </div>
+  <script>
+    let title = document.querySelector('.title');
+    let options = document.querySelector('.options');
+    let optionsList = document.querySelectorAll('.option');
+    title.addEventListener('click', () => {
+      options.classList.toggle('active');
+      title.classList.toggle('active');
+    });
+    optionsList.forEach(option => {
+      option.addEventListener('click', () => {
+        title.innerHTML = option.innerHTML;
+        options.classList.remove('active');
+        title.classList.remove('active');
+        optionsList.forEach(option => {
+          option.classList.remove('active');
+        });
+        option.classList.add('active');
+      });
+    });
+  </script>
+</body>
+
+</html>

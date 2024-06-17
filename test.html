@@ -6,49 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    .cont {
+      max-height: 0;
+      overflow: hidden;
+      transition: .5s;
     }
 
-    body {
-      display: flex;
-      height: 100vh;
-      background-color: #000;
-      color: #fff;
-    }
-
-    .box {
-      position: relative;
-      margin: auto;
-      font-size: 40px;
-      color: #333;
-    }
-
-    .box::before {
-      content: 'hi,there.';
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      color: #fff;
-      clip-path: circle(30% at -50% 50%);
-      transition: 2s;
-      /* filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4)); */
-      filter: blur(2px);
-    }
-
-    .box:hover::before {
-      clip-path: circle(30% at 150% 50%);
+    input:checked+.cont {
+      max-height: 100px;
     }
   </style>
 </head>
 
 <body>
-  <div class="box"> hi,there. </div>
-  <span><svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24">
-      <path fill="currentColor" d="M4 21V9l8-6l8 6v12h-6v-7h-4v7z" />
-    </svg></span>
+  <label for="item1">title</label>
+  <input type="radio" name="bro" id="item1">
+  <div class="cont">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolores, quae odit temporibus
+    debitis, inventore nemo incidunt ut, repellendus eos error maxime quia impedit qui numquam ducimus provident ad
+    similique.</div>
+  <label for="item2">title</label>
+  <input type="radio" name="bro" id="item2">
+  <div class="cont">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dolores, quae odit temporibus
+    debitis, inventore nemo incidunt ut, repellendus eos error maxime quia impedit qui numquam ducimus provident ad
+    similique.</div>
 </body>
 
 </html>
