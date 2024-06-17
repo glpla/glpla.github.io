@@ -32,31 +32,28 @@
     <dd>. 还原窗口：CTRL+0</dd>
     <dt>开发者视图 Inspect</dt>
     <dd>. 要学会 <span class="warn">偷</span></dd>
-    <dd>. 在浏览器中，按 F12 打开浏览器的检查功能页，或鼠标右键单击 → 检查，用于调试 Debug页面</dd>
+    <dd>. 在浏览器中，按 F12 打开浏览器的开发者视图|检查功能页，或鼠标右键单击 → 检查，打开</dd>
     <dd>. 默认是上下布局：上面是元素结构和页面功能，下面是元素样式；也可以调整为左右布局</dd>
     <dt>基本菜单 Menu</dt>
     <dd class="sn">
       <div>选择元素：如果开发中预期的样式效果没有出现，可以拾取某个元素，在 <span class="warn">样式</span>
         选项卡中查看样式的具体信息，包括继承的样式、被覆盖的样式和计算|渲染出来的最终样式信息；在
-        <span class="warn">已计算</span> 选项卡中可以查看完整的样式；根据检查情况修改并完善项目
+        <span class="warn">已计算</span> 选项卡中可以查看完整的样式；根据检查情况修改并更新项目
       </div>
-      <div>切换设备：移动端和桌面端</div>
+      <div>切换设备：在移动端和桌面端切换，特别是响应式开发要切换到移动端</div>
     </dd>
     <dt>标签页 Tabcard</dt>
     <dd class="sn">
       <div>Element：检查文档/元素结构</div>
-      <div>Console：查看控制台输出：业务开发请多使用log调试</div>
+      <div>Console：查看控制台输出；开发过程中，逻辑相关的部分，请多使用 console.log() 调试</div>
       <div>Network：网络情况，各种资源图片、样式文件等加载情况</div>
       <div>Local Storage：本地存储</div>
       <div>Security：安全等信息</div>
-    </dd>
-    <dd>
       <figure class="img-sn">
         <img src="./imgs/F12.png" alt="">
         <figcaption>上下布局的检查功能页</figcaption>
       </figure>
-    </dd>
-    <dd>
+      <p class="example-sn">console.log()基本使用</p>
       <p>无须拼接</p>
       <pre>
 console.log('a', a, 'b', b, 'c', c );
@@ -70,14 +67,13 @@ for (let i = 0; i &lt; 1000; i++) {
 console.timeEnd('timer')</pre>
     </dd>
     <dt>真机调试 Debug</dt>
-    <dd>. 本着移动优先的原则，通常要查看项目在真机上的效果，所以真机调试的步骤必不可少[除非明确项目的定位就是桌面端]</dd>
-    <dd class="mt2">1. 环境需求</dd>
-    <dd>. 插件需求：Live Server</dd>
-    <dd>. 网络需求：开发电脑和手机链接同一个WiFi|同一个域</dd>
-    <dd class="mt2">2. 环境配置</dd>
-    <dd>2.1. 查看本机IP地址；按Win+R，打开命令运行窗口，输入cmd，打开控制台/小黑屋，输入ipconfig，查看本机IPv4地址；或者按Win+I，打开系统设置，在网络的本地连接中查看网络信息</dd>
     <dd>
-      <p>ipconfig</p>
+      <div>. 本着移动优先的原则，通常要查看项目在真机上的效果，所以真机调试的步骤必不可少[除非明确项目的定位就是桌面端]</div>
+      <div>1. 环境需求</div>
+      <div>. 插件需求：Live Server</div>
+      <div>. 网络需求：开发电脑和手机链接同一个WiFi|同一个域</div>
+      <div>2. 环境配置</div>
+      <div>2.1. 查看本机IP地址；按Win+R，打开命令运行窗口，输入cmd，打开控制台/小黑屋，输入ipconfig，查看本机IPv4地址；或者按Win+I，打开系统设置，在网络的本地连接中查看网络信息</div>
       <pre>
 C:\Users\cnplaman>ipconfig
 
@@ -108,15 +104,15 @@ Windows IP 配置
    //Bluetooth
 
 C:\Users\cnplaman></pre>
+      <div>2.2. 打开 Vs code，点击右下角管理按钮<span class="iconfont icon-sun"></span>，选择设置 setting，或者直接按 CTRL+,</div>
+      <div>2.3. 选择扩展 Extension 里的 Live Server Config，修改主机 host 为查询到的IPv4地址</div>
+      <div><img src="./imgs/host.png" alt=""></div>
+      <div>2.4. 重新启动 Vs code</div>
+      <div>3. 真机调试</div>
+      <div>. 使用 Open With Live Server 打开浏览器</div>
+      <div>. 在浏览器的页面中，右键单击 → 为此页面创建QR代码，打开一个二维码，使用手机扫码，即可在手机端预览页面效果</div>
+      <div>. 调整并真机预览</div>
     </dd>
-    <dd>2.2. 打开Vs code，点击右下角管理按钮<span class="iconfont icon-sun"></span>，选择设置setting，或者直接按CTRL+,</dd>
-    <dd>2.3. 选择扩展Extension里的Live Server Config，修改主机host为查询到的IPv4地址</dd>
-    <dd><img src="./imgs/host.png" alt=""></dd>
-    <dd>2.4. 重新启动Vs code</dd>
-    <dd class="mt2">3. 真机调试</dd>
-    <dd>. 使用 Open With Live Server打开浏览器</dd>
-    <dd>. 在浏览器的页面中，右键单击 → 为此页面创建QR代码，打开一个二维码，使用手机扫码，即可在手机端预览页面效果</dd>
-    <dd>. 调整并真机预览</dd>
     <dd class="tips">
       <div>真机查看效果时，不需要每次扫码，手机端页面不要关闭即可保持实时更新</div>
       <div>按 win+i 打开系统设置，在网络属性中查看IPv4地址</div>

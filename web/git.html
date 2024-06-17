@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Git</title>
-    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../css/common.css">
     <base target="_blank">
     <style>
         :root {
@@ -35,18 +35,18 @@
         <dt>下载和安装</dt>
         <dd>. 打开git官网 <a href="https://git-scm.com/" class="link">https://git-scm.com/</a>，选择对应的操作系统和版本，点击下载并安装</dd>
         <dt>查看Git版本</dt>
-        <dd>. 右键点击桌面空白处，选择Git Bash Here，打开终端窗口，输入以下命令</dd>
         <dd>
+            <div>. 右键点击桌面空白处，选择Git Bash Here，打开终端窗口，输入以下命令</div>
             <pre>
 $ git --version
 git version 2.34.1.windows.1</pre>
         </dd>
         <dd class="tips">Git Bash就是一个迷你型的Linux系统哦</dd>
         <dt>配置Git</dt>
-        <dd>. 使用户名和邮箱将Git和用户[自己的代码仓库，如Github]关联起来</dd>
-        <dd>. 用户名和邮箱仅仅作为签名，以区分提交的用户，和仓库账号没有关系</dd>
-        <dd>. 没有关联，无法提交commit</dd>
         <dd>
+            <div>. 使用户名和邮箱将Git和用户[自己的代码仓库，如Github]关联起来</div>
+            <div>. 用户名和邮箱仅仅作为签名，以区分提交的用户，和仓库账号没有关系</div>
+            <div>. 没有关联，无法提交commit</div>
             <pre>
 $ git config --global user.email 1942194789@qq.com
 $ git config --global user.name glpla</pre>
@@ -67,7 +67,7 @@ $ git config  user.email
     <dl class="nav-cont">
         <dd>
             <figure class="img-sn">
-                <img src="../imgs/git.jpg" alt="">
+                <img src="./imgs/git.jpg" alt="">
                 <figcaption>Git工作流</figcaption>
         </dd>
         <dt>工作区 workspace</dt>
@@ -86,28 +86,30 @@ $ git config  user.email
     <div class="chap">常见使用 usage</div>
     <dl class="nav-cont">
         <dt>初始化仓库 init</dt>
-        <dd>为当前工作目录生成一个隐藏文件夹.git，里面是git配置信息</dd>
-        <dd>初始化后，该目录将被git托管，可以追踪代码的任何变化</dd>
-        <dd>如果生成的.git被删除，有关的托管信息将丢失</dd>
-        <dd>具体的配置文件.gitconfig位于系统盘用户目录下：C:\Users\cnplaman</dd>
-        <dd>文件内容就是Git配置的用户邮箱等基本信息</dd>
-        <pre>git init</pre>
+        <dd>
+            <div>为当前工作目录生成一个隐藏文件夹.git，里面是git配置信息</div>
+            <div>初始化后，该目录将被git托管，可以追踪代码的任何变化</div>
+            <div>如果生成的.git被删除，有关的托管信息将丢失</div>
+            <div>具体的配置文件.gitconfig位于系统盘用户目录下：C:\Users\cnplaman</div>
+            <div>文件内容就是Git配置的用户邮箱等基本信息</div>
+            <pre>git init</pre>
         </dd>
         <dt>提交文件到暂存区 add</dt>
-        <dd>.表示所有文件；也可以指定需要提交的具体的文件</dd>
-        <dd>单个文件体积大小不要超过50MB</dd>
-        <pre>git add .</pre>
+        <dd>
+            <div>.表示所有文件；也可以指定需要提交的具体的文件</div>
+            <div>单个文件体积大小不要超过50MB</div>
+            <pre>git add .</pre>
         </dd>
         <dt>提交到本地仓库 commit</dt>
-        <dd>每次提交都有一个commitId记录</dd>
-        <pre>
+        <dd>
+            <div>每次提交都有一个commitId记录</div>
+            <pre>
 git commit -m ""</pre>
         </dd>
         <dt>查看文件状态 status</dt>
-        <pre>git status</pre>
-        </dd>
         <dd>
-            <table class="tbl-sn">
+            <pre>git status</pre>
+            <table>
                 <caption>Git文件状态</caption>
                 <tr>
                     <td>untracked</td>
@@ -128,14 +130,16 @@ git commit -m ""</pre>
             </table>
         </dd>
         <dt>撤销本地修改 checkout</dt>
-        <dd>丢弃工作区的修改</dd>
-        <dd>修改了文件，但是没有add到暂存区，使用该命令可以撤销对文件的修改，相当于在编辑环境中使用了CTRL + Z操作</dd>
-        <dd>修改了文件，已经add到暂存区，使用该命令，可以拉取暂存区的文件到工作区，覆盖当前文件，相当于放弃了对文件的修改，即和暂存区保持一致</dd>
-        <pre>git checkout -- file</pre>
+        <dd>
+            <div>丢弃工作区的修改</div>
+            <div>修改了文件，但是没有add到暂存区，使用该命令可以撤销对文件的修改，相当于在编辑环境中使用了CTRL + Z操作</div>
+            <div>修改了文件，已经add到暂存区，使用该命令，可以拉取暂存区的文件到工作区，覆盖当前文件，相当于放弃了对文件的修改，即和暂存区保持一致</div>
+            <pre>git checkout -- file</pre>
         </dd>
         <dt>查看本地仓库提交记录 log</dt>
-        <dd>按q退出</dd>
-        <pre>
+        <dd>
+            <div>按q退出</div>
+            <pre>
 $ git log
 commit cc355cbd2a03d61f0ef440706fee7c6257f9fee3 (HEAD -> main, origin/main, origin/HEAD)
 Author: glpla &lt;1942194789@qq.com>
@@ -150,11 +154,12 @@ Date:   Wed Jan 3 10:48:20 2024 +0800
     web</pre>
         </dd>
         <dt>查看远程仓库提交记录 reflog</dt>
-        <dd>按q退出</dd>
-        <dd>main总是指向最新的提交；而HEAD指向当前的活动分支；如果没有分支，就指向主分支main</dd>
-        <dd>HEAD前面的字符串序列是提交的版本号；利用这个可以实现版本穿梭</dd>
-        <dd>示例中没有分支，所以HEAD指向主分支main</dd>
-        <pre>
+        <dd>
+            <div>按q退出</div>
+            <div>main总是指向最新的提交；而HEAD指向当前的活动分支；如果没有分支，就指向主分支main</div>
+            <div>HEAD前面的字符串序列是提交的版本号；利用这个可以实现版本穿梭</div>
+            <div>示例中没有分支，所以HEAD指向主分支main</div>
+            <pre>
 $ git reflog
 cc355cb (HEAD -> main, origin/main, origin/HEAD) HEAD@{0}: commit: web
 32eefc9 HEAD@{1}: commit: web
@@ -163,19 +168,16 @@ aae5d51 HEAD@{2}: commit: web
         </dd>
         <dt>撤销本地/远程提交 reset</dt>
         <dd>
-            <figcaption>撤销远程提交 - 版本穿梭</figcaption>
+            <div>撤销远程提交 - 版本穿梭</div>
             <pre>
 git reset --hard 版本号
 
 Head is now at xxxxx</pre>
-        </dd>
-        <dd>
-            <figcaption>撤销本地提交</figcaption>
+            <div>撤销本地提交</div>
             <pre>git reset commitId</pre>
         </dd>
-        <dd class="example-sn">新项目第一次推送</dd>
+        <dd class="example-sn">新项目第一次推送 - 完整流程</dd>
         <dd>
-            <figcaption>完整流程</figcaption>
             <pre>
 git init
 git add .
@@ -185,14 +187,16 @@ git remote add origin url
 git push -u origin main</pre>
         </dd>
         <dt>查看关联的远程仓库</dt>
-        <pre>
+        <dd>
+            <pre>
 $ git remote -v
 origin  https://github.com/glpla/glpla.github.io.git (fetch)
 origin  https://github.com/glpla/glpla.github.io.git (push)</pre>
         </dd>
         <dt>删除关联的远程仓库</dt>
-        <dd>以便重新关联新仓库</dd>
-        <pre>
+        <dd>
+            <pre>
+            <div>以便重新关联新仓库</div>
 $ git remote remove origin</pre>
         </dd>
     </dl>
@@ -205,21 +209,21 @@ $ git remote remove origin</pre>
         <dd>只有提交commit过1次后才能查看分支</dd>
         <dd>
             <figure class="img-sn">
-                <img src="../imgs/branch2.jpg" alt="">
+                <img src="./imgs/branch2.jpg" alt="">
                 <figcaption>无分支时，HEAD指向主分支</figcaption>
             </figure>
             <figure class="img-sn">
-                <img src="../imgs/branch0.jpg" alt="">
+                <img src="./imgs/branch0.jpg" alt="">
                 <figcaption>分支单独工作，HEAD指向活动分支</figcaption>
             </figure>
             <figure class="img-sn">
-                <img src="../imgs/branch1.jpg" alt="">
+                <img src="./imgs/branch1.jpg" alt="">
                 <figcaption>分支合并到主分支</figcaption>
             </figure>
         </dd>
         <dt>查看分支</dt>
-        <dd>当前分支以*号表示，且颜色为绿色</dd>
         <dd>
+            <div>当前分支以*号表示，且颜色为绿色</div>
             <pre>
 //不带参数：查看本地分支
 $ git branch
@@ -244,17 +248,17 @@ $ git branch -r</pre>
             <pre>$ git branch branch_name</pre>
         </dd>
         <dt>切换分支 checkout</dt>
-        <dd>指定要切换的分支名</dd>
         <dd>
+            <div>指定要切换的分支名</div>
             <pre>
 $ git checkout dev
 Switched to branch 'dev'</pre>
         </dd>
         <dt>合并分支 merge</dt>
-        <dd>通常在主分支合并其它分支</dd>
-        <dd>将其它分支合并到主分支；主分支会前进一次forwards</dd>
-        <dd>原有分支仍然存在</dd>
         <dd>
+            <div>通常在主分支合并其它分支</div>
+            <div>将其它分支合并到主分支；主分支会前进一次forwards</div>
+            <div>原有分支仍然存在</div>
             <pre>
 $ git merge dev
 Updating 29aee33..c9f8938
@@ -264,9 +268,9 @@ Fast-forward
  create mode 100644 demo.txt</pre>
         </dd>
         <dt>删除分支</dt>
-        <dd>指定删除的分支名</dd>
-        <dd>只能在当前分支删除其它分支</dd>
         <dd>
+            <div>指定删除的分支名</div>
+            <div>只能在当前分支删除其它分支</div>
             <pre>
 $ git branch -d dev
 Deleted branch dev (was c9f8938).            </pre>
