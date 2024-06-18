@@ -6,17 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>样式表 CSS</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
-  <link rel="stylesheet" href="./css/font_3870259_fog2voarz7/iconfont.css">
+  <link rel="stylesheet" href="../css/common_202406.css">
   <link rel="stylesheet" href="./css/web.css">
-  <link rel="stylesheet" href="../css/code.css">
   <base target="_blank">
 </head>
 
 <body>
-  <header>
-    <h1>样式表&commat;CSS</h1>
-  </header>
+  <header></header>
+  <div class="header">
+    <h1>样式表</h1>
+    <span>&commat;CSS</span>
+  </div>
   <dl>
     <dt>简介 Overview</dt>
     <dd>. CSS - Cascading Style Sheets，层叠样式表</dd>
@@ -24,91 +24,75 @@
     <dd>. 可以同时控制多个网页的显示</dd>
     <dt>语法 Syntax</dt>
     <dd>. CSS由选择器 Selector和声明块Declaration组成</dd>
-    <dd>. 选择器：选择元素，以便应用样式；选择器可以是标签、类、id等单一选择器或其它复合选择器；更多细节，请参考<a href="./selector.html">选择器</a>一节</dd>
+    <dd>. 选择器：选择元素，以便应用样式；选择器可以是标签、类、id等单一选择器或其它复合选择器；更多细节，请参考<a href="./selector0.html">选择器 - selector</a>一节</dd>
     <dd>. 声明块：用 <span class="warn">花括号</span> 括起来，由一条或多条规则rule构成，为选出来的元素指定样式；多条规则使用 <span class="warn">分号</span>
       分隔</dd>
     <dd>. 规则：每个规则都包含一个 CSS 属性名name和一个值value，以 <span class="warn">冒号</span> 分隔</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 类名为warn的CSS样式，包含2条规则，指定了被选中的元素/应用该类样式的元素的颜色和字体重量/加粗
+    <dd>[<span class="iconfont icon-keyboard"></span>] 类名为warn的CSS样式，包含2条规则，指定了被选中的元素/应用该类样式的元素的颜色和字体重量/加粗
     </dd>
     <dd>
-      <figure class="code">
-        <pre>
+      <pre>
 .warn {
     color: #eb2f06;
     font-weight: 600;
 }</pre>
-      </figure>
     </dd>
     <dt>使用 Usage</dt>
-    <dd class="grid3 attr">
-      <div>
-        <div>5.1. 行内样式/内联样式</div>
-        <div>. 使用style 属性为元素定义样式</div>
-        <div>. 定义的样式仅适合于当前元素</div>
-        <div>. 通常配合JS来动态改变</div>
-        <div>. 行内样式不符合结构样式分离的开发原则</div>
-        <div>. 行内样式具有最高优先级，并且将覆盖外部和内部样式以及浏览器默认样式</div>
-        <div>. style还可以指定内联变量供当前元素的样式使用；内联样式和内联变量互不影响</div>
-      </div>
-      <div>
-        <div>5.2. 内部样式</div>
-        <div>. 在 HTML 页面 &lt;head&gt; 中使用 &lt;style&gt; 定义样式</div>
-        <div>. 适用当前HTML页面多个元素</div>
-        <div>. 不可跨页面使用</div>
-        <div>. 行内样式不符合结构样式分离的开发原则</div>
-      </div>
-      <div>
-        <div>5.3. 外部样式</div>
-        <div>. 在外部样式文件中定义，样式文件名后缀是 .css </div>
-        <div>. 在 HTML 页面 &lt;head&gt; 中使用 &lt;link&gt;引入</div>
-        <div>. 外部样式表以.css 扩展名保存；可以使用任何文本编辑器编写</div>
-        <div>. 外部 .css 文件不应包含任何 HTML 标签</div>
-        <div>. 适合多个HTML页面、多个元素</div>
-        <div>. 可以缓存到本地，加快页面访问速度</div>
-        <div>. 符合结构样式分离的开发原则</div>
+    <dd class="sn">
+      <div>行内样式/内联样式</div>
+      <p>使用style 属性为元素定义样式</p>
+      <p>定义的样式仅适合于当前元素</p>
+      <p>通常配合JS来动态改变</p>
+      <p>行内样式不符合结构样式分离的开发原则</p>
+      <p>行内样式具有最高优先级，并且将覆盖外部和内部样式以及浏览器默认样式</p>
+      <p>style还可以指定 <a href="./variable.html">内联变量</a> 供当前元素的样式使用；内联样式和内联变量互不影响</p>
+      <div>内部样式</div>
+      <p>在 HTML 页面 &lt;head&gt; 中使用 &lt;style&gt; 定义样式</p>
+      <p>适用当前HTML页面多个元素</p>
+      <p>不可跨页面使用</p>
+      <p>行内样式不符合结构样式分离的开发原则</p>
+      <div>外部样式</div>
+      <p>在外部文件中定义；后缀是 <span class="warn">.css</span>；可以使用任何文本编辑器编写</p>
+      <p>在 HTML 页面 &lt;head&gt; 中使用 &lt;link&gt;引入</p>
+      <p>外部 .css 文件不应包含任何 HTML 标签</p>
+      <p>适合多个HTML页面、多个元素</p>
+      <p>可以缓存到本地，加快页面访问速度</p>
+      <p>符合结构样式分离的开发原则</p>
       </div>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 样式说明</dd>
-    <dd>[HTML] index.html</dd>
     <dd>
-      <figure class="code">
-        <pre>
-<span>&lt;!DOCTYPE html&gt;</span>
-<span>&lt;html lang="en"&gt;</span>
-<span></span>
-<span>&lt;head&gt;</span>
-<span>    &lt;meta charset="UTF-8"&gt;</span>
-<span>    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;</span>
-<span>    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span>
-<span>    &lt;title&gt;Document&lt;/title&gt;</span>
-<span>    &lt;link rel="stylesheet" href="./css/style.css"&gt;</span>//外部样式
-<span>    &lt;style&gt;</span>//内部样式
-<span>        body {</span>
-<span>            margin: 0;</span>
-<span>            padding: 0;</span>
-<span>            box-sizing: border-box;</span>
-<span>        }</span>
-<span></span>
-<span>        .p-txt {</span>
-<span>            color: var(--txt-wran-color);//使用全局变量</span>
-<span>            opacity: var(--sn);//使用局部变量</span>
-<span>        }</span>
-<span>    &lt;/style&gt;</span>
-<span>&lt;/head&gt;</span>
-<span></span>
-<span>&lt;body&gt;</span>
-<span>  &lt;h1 style="color: #F40;"&gt;hello, world&lt;/h1&gt;</span>//内联样式
-<span>  &lt;p class=“p-txt” style="--sn: 0.1;"&gt;第1段&lt;/p&gt;</span>//内联变量
-<span>  &lt;p class=“p-txt” style="--sn: 0.3;"&gt;第2段&lt;/p&gt;</span>//内联变量
-<span>&lt;/body&gt;</span>
-<span></span>
-<span>&lt;/html&gt;</span></pre>
-      </figure>
-    </dd>
-    <dd>[CSS] style.css</dd>
-    <dd>
-      <figure class="code">
-        <pre>
+      <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;link rel="stylesheet" href="./css/style.css"&gt;//外部样式
+    &lt;style&gt;//内部样式
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .p-txt {
+            color: var(--txt-wran-color);//使用全局变量
+            opacity: var(--sn);//使用局部变量
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;h1 style="color: #F40;"&gt;hello, world&lt;/h1&gt;//内联样式
+  &lt;p class=“p-txt” style="--sn: 0.1;"&gt;第1段&lt;/p&gt;//内联变量
+  &lt;p class=“p-txt” style="--sn: 0.3;"&gt;第2段&lt;/p&gt;//内联变量
+&lt;/body&gt;
+
+&lt;/html&gt;</pre>
+      <pre>
 @charset "utf-8";
 @import "./style.css";
 
@@ -117,14 +101,14 @@
     --nav-bg-color: #9f103a;
     --w-width: 1000px;
 }</pre>
-      </figure>
     </dd>
-    <dd class="quote">
-      <div>1. 几种形式的使用可以并存；最后哪个样式生效，由其代表的优先级决定，请参考后续内容和<a href="./selector.html">选择器</a>一节内容</div>
+    <dd class="tips">
+      <div>1. 几种形式的使用可以并存；最后哪个样式生效，由其代表的优先级决定，请参考后续内容和 <a href="./selector0.html">选择器 - selector</a>一节内容</div>
       <div>2. 编码：可以指定CSS文件的编码，特别是有中文存在时，必须指定；通常不需要指定，因为不推荐使用中文；指定编码必须在CSS文件第一行</div>
-      <div>3. 变量：可以声明CSS全局变量，便于修改和调整：一处修改，多处更新；还可以在元素上以style的形式声明内联变量；更多变量内容，请参考<a href="./variable.html">CSS变量</a>一节内容
+      <div>3. 变量：可以声明CSS全局变量，便于修改和调整：一处修改，多处更新；还可以在元素上以style的形式声明内联变量；更多变量内容，请参考 <a href="./variable.html">CSS -
+          variable</a>一节内容
       </div>
-      <div>4. 导入：可以在CSS中使用@import引入其它CSS文件</div>
+      <div>4. 导入：可以在CSS中使用 @import 引入其它CSS文件</div>
     </dd>
     <dt>盒模型 Box Model</dt>
     <dd>. 每个HTML元素都可以看作是一个盒子</dd>
@@ -164,20 +148,19 @@
     </dd>
     <dd>[<span class="iconfont icon-a-ziyuan4"></span>] 过渡包装</dd>
     <dt>盒子尺寸计算模式 box-sizing</dt>
-    <dd>. 默认情况下，设置的宽度width和高度height是内容区的宽度和高度；所以：元素盒子的实际尺寸应该是在宽度width/高度height的基础上，再加上边框border和填充padding</dd>
+    <dd>默认情况下，设置的宽度width和高度height是内容区的宽度和高度；所以：元素盒子的实际尺寸应该是在宽度width/高度height的基础上，再加上边框border和填充padding</dd>
     <dd>
       <pre>
 元素的实际宽度 = width + padding-left + padding-right + border-left + border-right
 元素的实际高度 = height + padding-top + padding-bottom + border-top + border-bottom</pre>
     </dd>
-    <dd>. 因此，设置元素宽度和高度时，元素的实际尺寸比设置的<span class="warn">更大</span>；多数情况下，为了不破坏页面布局，希望设置的元素尺寸就是元素的实际尺寸；CSS属性 box-sizing
+    <dd>因此，设置元素宽度和高度时，元素的实际尺寸比设置的<span class="warn">更大</span>；多数情况下，为了不破坏页面布局，希望设置的元素尺寸就是元素的实际尺寸；CSS属性 box-sizing
       允许我们选择元素计算尺寸的模式</dd>
-    <dd>. content-box：默认模式，元素尺寸不包括padding和border</dd>
-    <dd>. border-box：元素尺寸包括padding和border；通常在CSS初始化样式表中指定</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] content-box和border-box的元素大小</dd>
+    <dd>content-box：默认模式，元素尺寸不包括padding和border</dd>
+    <dd>border-box：元素尺寸包括padding和border；通常在CSS初始化样式表中指定</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] content-box和border-box的元素大小</dd>
     <dd>
-      <figure class="code">
-        <pre>
+      <pre>
 .box {
   width: 400px;
   height: 300px;
@@ -185,12 +168,9 @@
   border: 5px solid #ddd;
   box-sizing: border-box;//content-box
 }      </pre>
-      </figure>
-    </dd>
-    <dd>
       <img src="./imgs/boxsizing.png" alt="">
     </dd>
-    <dd class="quote">
+    <dd class="tips">
       <div>. padding、border、margin这三个属性有4个方向的体现，所以样式值的多少分别对应着不同的方向</div>
       <div>1个值：4个方向都一样</div>
       <div>2个值：上下对应第一个值；左右对应第二个值</div>
@@ -200,27 +180,20 @@
       <div>垂直方向居中需要结合实际情况综合考虑，见后续内容</div>
     </dd>
     <dt>特性 Features</dt>
-    <dd class="grid3 attr">
-      <div>
-        <div>继承性</div>
-        <div>. 子元素会继承父元素的某些样式</div>
-        <div>. 不是所有的样式都可以被继承，特别是表单类元素和超链接&lt;a&gt;，很多样式不会继承父元素</div>
-      </div>
-      <div>
-        <div>叠加性</div>
-        <div>. CSS文件是按照从上到下的顺序执行；因此，同一个元素的样式，后面的样式会覆盖前面的样式</div>
-        <div>. 特别要注意：样式的叠加和元素上样式类的书写顺序无关，和CSS文件中的顺序有关</div>
-      </div>
-      <div>
-        <div>优先级</div>
-        <div>. 一般来说，多个样式同时作用于一个元素时，由优先级决定；优先级高的样式会覆盖优先级低的；同时还要结合不同选择器的权值来决定最终使用的是哪个样式</div>
-        <div>. 如果样式没有生效，请F12检查是否优先级不够</div>
-      </div>
+    <dd class="sn">
+      <div>继承性</div>
+      <p>. 子元素会继承父元素的某些样式</p>
+      <p>. 不是所有的样式都可以被继承，特别是表单类元素和超链接&lt;a&gt;，很多样式不会继承父元素</p>
+      <div>叠加性</div>
+      <p>. CSS文件是按照从上到下的顺序执行；因此，同一个元素的样式，后面的样式会覆盖前面的样式</p>
+      <p>. 特别要注意：样式的叠加和元素上样式类的书写顺序无关，和CSS文件中的顺序有关</p>
+      <div>优先级</div>
+      <p>. 一般来说，多个样式同时作用于一个元素时，由优先级决定；优先级高的样式会覆盖优先级低的；同时还要结合不同选择器的权值来决定最终使用的是哪个样式</p>
+      <p>. 如果样式没有生效，请F12检查是否优先级不够</p>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 样式顺序和书写顺序</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 样式顺序和书写顺序</dd>
     <dd>
-      <figure class="code">
-        <pre>
+      <pre>
 .active-color {
     color: #f40;
 }
@@ -234,9 +207,8 @@
 
 //颜色为黑色
 &lt;div class="color active-color"&gt;CSS的样式顺序&lt;/div&gt;</pre>
-      </figure>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 优先级-更多信息，请查看<a href="./selector.html">选择器</a>一节内容
+    <dd>[<span class="iconfont icon-keyboard"></span>] 优先级-更多信息，请查看<a href="./selector0.html">选择器 - selector</a>一节内容
     </dd>
     <dd class="warn" style="text-align: center;">行内样式 &gt; 内部样式 &gt; 外部样式 &gt; 浏览器默认样式</dd>
   </dl>
@@ -335,150 +307,6 @@
           <td>微软Edge</td>
         </tr>
       </table>
-    </dd>
-    <dt>CSS的单位 unit</dt>
-    <dd>. 绝对单位：px ch</dd>
-    <dd>. 相对单位：rem em % vw vh fr</dd>
-    <dd>. 更多信息，请访问<a href="https://css-tricks.com/the-lengths-of-css/">the lengths of css</a>、<a
-        href="https://www.sitepoint.com/power-em-units-css/">The Power of em Units in CSS</a></dd>
-    <dd class="grid3 attr">
-      <div>
-        <div>px</div>
-        <div>. 像素[点]</div>
-        <div>. 绝对单位</div>
-        <div>. 使用最频繁</div>
-      </div>
-      <div>
-        <div>ch</div>
-        <div>. 字符</div>
-        <div>. 绝对单位</div>
-        <div>. 可以用来实现打字效果</div>
-      </div>
-      <div>
-        <div>em</div>
-        <div>. 相对于父级元素字体大小</div>
-        <div>. 如果父级没有显示设置font-size，则继续往上查找，直到根元素HTML</div>
-        <div>. 参考过于凌乱，不建议使用。主要应用场合是设置段落的2个字符<span class="warn">首行缩进</span>和<span class="warn">段落间距</span></div>
-        <div>
-          <figure class="code">
-            <pre>
-p {
-    text-indent: 2em;
-    margin-bottom: 1em;
-}</pre>
-          </figure>
-        </div>
-      </div>
-      <div>
-        <div>rem - root em</div>
-        <div>. 相对于根元素html</div>
-        <div>. 参考唯一，比较容易调整</div>
-        <div>. 采用rem单位时，为了换算方便，通常设置HTML的font-size: 62.5%，即16*62.5%=10; </div>
-        <div>16px = 1.6rem</div>
-        <div>1rem = 10px;</div>
-      </div>
-      <div>
-        <div>%</div>
-        <div>. 宽度width、填充padding、空白margin使用百分比时，相对于<span class="warn">父级</span>的宽度</div>
-        <div>. 用于自适应布局</div>
-        <div>. 用于设置根字体</div>
-        <div>
-          <figure class="code">
-            <pre>
-html {
-    font-size: 62.5%;
-}</pre>
-          </figure>
-        </div>
-      </div>
-      <div>
-        <div>vw | vh</div>
-        <div>. 每个视口viewport水平垂直各分为100份</div>
-        <div>. 视口viewpoint宽度</div>
-        <div>. 视口viewpoint高度</div>
-      </div>
-      <div>
-        <div>fr</div>
-        <div>. fraction|份数</div>
-        <div>. 相对于容器的尺寸</div>
-        <div>. 多用于弹性盒子布局<a href="./flex.html">flex</a>和网格布局<a href="./grid.html">grid</a></div>
-        <div>. 前端UI框架中多采用12份、24份进行布局，如 <a href="https://github.com/twbs/bootstrap">Bootstrap</a>、<a
-            href="https://element.eleme.cn/#/en-US">element UI</a></div>
-      </div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 示例1：父级参考</dd>
-    <dd>[HTML]</dd>
-    <dd>
-      <figure class="code">
-        <pre>
-&lt;div&gt;
-    &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
-&lt;/div&gt;</pre>
-      </figure>
-    </dd>
-    <dd>[CSS]</dd>
-    <dd>
-      <figure class="code">
-        <pre>
-p {
-    font-size: 2em;
-}</pre>
-      </figure>
-    </dd>
-    <dd>. [解读]只设置&lt;p&gt;元素字体大小，因为父级&lt;div&gt;没有设置，最终参考的是&lt;html&gt;的大小16px。所以最后&lt;p&gt;元素字体大小为 2*16px = 32px
-    </dd>
-    <dd>. [解读]如果&lt;div&gt;显式的设置了字体大小为20px，则&lt;p&gt;字体大小为2*20px = 40px</dd>
-    <dd>
-      <figure class="code">
-        <pre>
-div {
-    font-size: 20px;
-}
-
-p {
-    font-size: 2em;
-}</pre>
-      </figure>
-    </dd>
-    <dt id="color">CSS的颜色 color</dt>
-    <dd class="grid3 attr">
-      <div>
-        <div>颜色值/颜色名称</div>
-        <div>. red、green、blue等</div>
-        <div>. 不建议</div>
-      </div>
-      <div>
-        <div> RGB 值 | RGBA 值</div>
-        <div>. rgb(red, green, blue)</div>
-        <div>. rgba(red, green, blue, alpha)</div>
-        <div>. 每个值范围：0-255</div>
-        <div>. rgba增加一个透明通道alpha：0-1之间某个浮点数；0完全透明；1完全不透明</div>
-        <div>. 如果使用透明色，请使用rgba()，特别是移动端</div>
-      </div>
-      <div>
-        <div>HEX 值</div>
-        <div>. 使用16进制表示；如#rrggbb</div>
-        <div>. 每个颜色的取值范围是00-ff</div>
-        <div>. 同一组颜色，如果相同，可以简写为3位#rgb，如：#ff4400，可以简写为#f40</div>
-        <div>. 也可以使用4位标识一个透明色，如#F405；最后1位表示透明度</div>
-      </div>
-      <div>
-        <div> HSL 值 | HSLA 值</div>
-        <div>使用色相、饱和度和明度表示</div>
-        <div>. hsla(hue, saturation, lightness)</div>
-        <div>. hsla(hue, saturation, lightness, alpha)</div>
-        <div>. 色相hue是色轮上从 0 到 360 的 度数。0 是红色，120 是绿色，240 是蓝色</div>
-        <div>. 饱和度saturation是一个 百分比值，0％ 表示灰色阴影，而 100％ 是全色</div>
-        <div>. 亮度lightness也是 百分比，0％ 是黑色，50％ 是既不明也不暗，100％是白色</div>
-        <div>. HSLA增加一个透明通道alpha：0-1之间某个浮点数；0完全透明；1完全不透明</div>
-      </div>
-      <div>
-        <div> 安全色</div>
-        <div>.使用00 33 66 99 CC FF组合的颜色</div>
-        <div>.最开始仅仅支持256种颜色</div>
-        <div>.其中有40种是保留色，还有216是WEB安全色</div>
-        <div>.使用6种红色、6种绿色和6种蓝色任意组合，即：6*6*6=216</div>
-      </div>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
