@@ -6,69 +6,77 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>事件 Event</title>
-  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/common_202406.css">
   <base target="_blank">
 </head>
 
 <body>
-  <header>
+  <header></header>
+  <div class="header">
     <h1>事件</h1>
     <span>&commat;Event</span>
-  </header>
+  </div>
   <dl>
-    <dd>.三元素：事件对象、事件类型、事件处理函数</dd>
-    <dt>事件对象</dt>
-    <dd>事件产生时，由系统自动创建</dd>
-    <dd>在事件处理函数中作为形式参数，名字任意，通常使用event、e、evt等语义化名字</dd>
-    <dd>
-      .事件对象详细节录了事件的类型[冒泡与否]、发生位置[screen、page]、大小[offset、client]、时间timestamp、响应事件的目标元素target等信息；如果有多个元素或多层嵌套，则响应事件的目标元素也不同
-    </dd>
-    <dd>.还可以利用事件对象e阻止冒泡和阻止默认事件，见后续案例</dd>
-    <dd>.如果元素使用了data-自定义数据，应该在目标target的dateset去获取</dd>
-    <dt>事件类型</dt>
-    <dd>.最常用的就是鼠标事件，如click；还有其它事件类型，如按键事件，见后续内容</dd>
-    <dt>事件处理函数 Handler</dt>
-    <dd>.处理事件的函数，也叫响应</dd>
-    <dd>.多以函数的形式写在脚本中，可以满足多个元素的使用</dd>
-    <dd class="mt2">形式1：<span class="warn">元素属性</span>的形式</dt>
-    <dd>.以onXXX的形式作为元素的一个属性写在元素上</dd>
-    <dd>.只能满足当前元素的需求</dd>
-    <dd>.只能处理冒泡阶段</dd>
+    <dt>传统事件 onXXX</dt>
+    <dd>.适合简单逻辑</dd>
     <dd>.不符合结构、样式、行为分离原则，较少使用</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>]完全耦合</dd>
     <dd>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>全局事件</td>
+          <td>onclick</td>
+        </tr>
+        <tr>
+          <td>窗口事件</td>
+          <td>onresize | onload</td>
+        </tr>
+        <tr>
+          <td>表单事件</td>
+          <td>oninput | onsubmit | onchange</td>
+        </tr>
+        <tr>
+          <td>键盘事件</td>
+          <td>onkeyup | onkeydown</td>
+        </tr>
+        <tr>
+          <td>鼠标事件</td>
+          <td>onmouseup | onmousedown | onmouseover | onmouseout | onmouseenter</td>
+        </tr>
+        <tr>
+          <td>多媒体事件</td>
+          <td>onplay</td>
+        </tr>
+      </table>
+      <div>1. 事件以onXXX的形式作为元素的一个属性写在 <span class="warn">结构</span> 元素上；事件处理逻辑可以写在结构中也可以写在脚本中</div>
+      <div>.可以携带参数</div>
+      <div>.只能满足当前元素的需求</div>
+      <div>.只能处理冒泡阶段</div>
+      <div>[<span class="iconfont icon-keyboard"></span>]完全耦合 - 全部写在结构中</div>
       <pre>&lt;div onclick="alert('hi,there.')"&gt;点击我&lt;/div&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>]部分耦合-结构逻辑分离</dd>
-    <dd>
+      <div>[<span class="iconfont icon-keyboard"></span>]部分耦合 - 结构逻辑分离</div>
       <pre>&lt;div onclick="fn()"&gt;点击我&lt;/div&gt;</pre>
-    </dd>
-    <dd>
       <pre>
 function fn() {
   alert('hi,there.')
 }</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>]部分耦合-携带形参</dd>
-    <dd>
+      <div>[<span class="iconfont icon-keyboard"></span>]部分耦合 - 携带形参；参数类型可以是简单数据类型，也可以是复杂数据类型</div>
       <pre>&lt;div onclick="fn_para({id:1,name:'glpla'})"&gt;点击我&lt;/div&gt;</pre>
-    </dd>
-    <dd>
       <pre>
 function fn_para(p) {
     console.log(this);
     console.log(p);
 }</pre>
-    </dd>
-    <dd class="mt2">形式2：<span class="warn">对象属性</span> 的形式</dt>
-    <dd>.先获取对象再以属性的形式分配事件onXXX</dd>
-    <dd>.兼容性非常好</dd>
-    <dd>.只能满足当前元素；且元素只能绑定一个事件</dd>
-    <dd>.需要等页面加载完成onload后才能获取元素</dd>
-    <dd>.事件函数可以接受参数；可以使用形参e获取事件对象；可以使用this获取执行事件函数的元素；也可以显式的指明参数</dd>
-    <dd>.不方便传递参数</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>]oXXX事件-默认形参this</dd>
-    <dd>
+      <div>2. 先获取对象再以属性的形式分配事件onXXX - 更多在 <span class="warn">脚本</span> 中处理</div>
+      <p>.兼容性非常好</p>
+      <p>.只能满足当前元素；且元素只能绑定一个事件</p>
+      <p>.需要等页面加载完成 onload 后才能获取元素</p>
+      <p>.事件函数可以接受参数；可以使用形参 e 获取事件对象；可以使用 this 获取执行事件函数的元素；也可以显式的指明参数</p>
+      <p>.不方便传递参数</p>
+      <p>[<span class="iconfont icon-keyboard"></span>]oXXX事件 - 默认形参this和事件对象e</p>
       <pre>
 window.onload = function () {
     let el = document.querySelector('div')
@@ -76,9 +84,6 @@ window.onload = function () {
         console.log(this);
     }
 }</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>]oXXX事件-事件对象</dd>
-    <dd>
       <pre>
 window.onload = function () {
     let el = document.querySelector('div')
@@ -88,59 +93,38 @@ window.onload = function () {
     }
 }</pre>
     </dd>
-    <dd class="mt2">形式3：<span class="warn">事件侦听addEventListener</span> 的形式-见后续内容</dt>
-    <dd class="mt2">其它：<span class="warn">事件绑定AttachEvent</span> ；IE专有；已停服</dt>
-    <dt>冒泡事件和捕获事件</dt>
-    <dd>.页面接受事件的顺序，即：事件发生时，在元素节点之间按照特定的顺序传播的过程</dd>
-    <dd>.三个阶段：捕获阶段 capture phrase → 当前目标阶段 target phrase → 冒泡阶段 bubbling phrase</dd>
-    <dd>.当点击页面的一个元素的时候，事件会从这个元素的祖先元素逐层传递下来 - 捕获；当事件传递到这个元素之后 - 目标，触发事件本身的程序内容；然后又会把事件逐层传递回去 - 冒泡，直到根元素为止</dd>
-    <dd>.先捕获事件才能处理；事件捕获：网景提出；事件冒泡：微软提出|IE提出</dd>
-    <dd>.JS代码只能执行冒泡或捕获中的一个阶段</dd>
-    <dd>.事件冒泡是默认行为。这意味着，如果你在一个子元素|组件上绑定了一个事件，当该事件被触发时，它会沿着DOM|组件树向上冒泡，直到到达根节点|根组件</dd>
-    <dd>.事件捕获是指当一个元素上的事件被触发时，它会从文档的根节点开始，向下传播，直到到达目标元素</dd>
-    <dd>.使用e.stopPropagation|e.cancelBubble可以取消冒泡</dd>
-    <dd class="quote">
-      <div>stopPropagation和cancelBubble都可以阻止浏览器默认的事件冒泡行为</div>
-      <div>cancelBubble方法不符合W3C标准，只支持IE浏览</div>
-      <div>stopPropagation符合W3C标准，适用于FireFox等浏览器，不支持IE</div>
+    <dd class="tips">
+      <div>如果使用箭头函数，则 this 指向为 window</div>
+      <div>事件对象为形参，可以使用任何合法标识符，通常使用 e 或 event</div>
     </dd>
-    <dt>target currentTarget</dt>
-    <dd>target在事件流的目标阶段</dd>
-    <dd>currentTarget在事件流的捕获，目标及冒泡阶段。只有当事件流处在目标阶段的时候，两个的指向才是一样的，
-      而当处于捕获和冒泡阶段的时候，target指向被单击的对象；currentTarget指向当前事件活动的对象（一般为父级）</dd>
-    <dd>.具体细节，请参考后续内容-鼠标事件-实例</dd>
   </dl>
   <div class="chap">事件侦听 addEventListener</div>
   <dl>
-    <dt>说明</dt>
-    <dd>.1个元素可以注册多个事件侦听，甚至可以为同一个事件类型指定不同的处理函数</dd>
-    <dd>.addEventListener有三个参数：事件类型、处理函数、事件处理方式</dd>
-    <dd>.事件处理函数不要采用匿名函数的方式，否则无法解除</dd>
-    <dd>.第三个参数事件处理方式默认是false，表示冒泡阶段；如果为true，则为捕获阶段如果上层元素无事件，则没有区别；实际开发中，更关注冒泡，很少使用捕获</dd>
-    <dd>.部分事件如：blur/focus/submit/change/reset/select/mouseleave/mouseenter是没有冒泡的</dd>
+    <dd>.向指定元素添加事件监听器的方法，允许你为DOM元素的某个事件类型注册多个事件处理函数，而不会覆盖之前的监听器</dd>
+    <dd>.支持事件捕获、冒泡阶段处理，并且可以更容易地管理事件</dd>
+    <dd>.符合开发分离的原则</dd>
     <dt>事件注册</dt>
     <dd>
+      <pre>el.addEventListener(事件类型, 处理函数, 事件处理方式)</pre>
+      <div>.事件注册需要提供三个参数：</div>
+      <div>1. 事件类型 - 不需要带on，上述表格中的事件类型去掉on就是事件侦听对应的事件类型</div>
+      <div>2. 处理函数 - 当事件发生时调用的函数，也叫响应；接收一个 Event 对象作为参数，可以访问事件的详细信息</div>
+      <div>3. 事件处理方式 - 影响事件处理的时机，默认是false，表示在冒泡阶段处理；如果为true，则在捕获阶段处理；实际开发中，更关注冒泡，很少使用捕获</div>
+      <div>.部分事件如：blur/focus/submit/change/reset/select/mouseleave/mouseenter没有冒泡</div>
+      <div>.事件处理函数尽量不要采用匿名函数的方式，否则无法清除</div>
       <pre>
-el.addEventListener(事件类型, 处理函数, 事件处理方式)</pre>
+el.addEventListener('click', ()=>{
+  console.log('该匿名函数无法清除');
+});</pre>
     </dd>
     <dt>事件清除</dt>
-    <dd>.匿名函数，无法解除</dd>
     <dd>
+      <div>移除之前注册的事件</div>
+      <div>为了有事件注册就应该有事件清除</div>
+      <div>正常起见，必须传入与注册中完全相同的函数引用</div>
+      <div>.匿名函数，无法清除</div>
       <pre>
 el.removeEventListener(事件类型, 处理函数, 事件处理方式)</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>]侦听多个事件处理函数</dd>
-    <dd>
-      <pre>
-let div = document.querySelector('div');
-div.addEventListener('click', fn0);
-div.addEventListener('click', fn1);
-function fn0() {
-  console.log('fn0');
-}
-function fn1() {
-  console.log('fn1');
-}</pre>
     </dd>
     <dt>事件传参</dt>
     <dd>.不能直接使用，否则会被立即执行</dd>
@@ -183,13 +167,37 @@ ta.addEventListener('blur', (e) => {
 });</pre>
     </dd>
   </dl>
-  <div class="chap">事件类型 type</div>
   <dl>
     <dt>事件对象</dt>
-    <dd>clientX和clientY属性是相对于视口的，而不是页面本身</dd>
+    <dd>事件产生时，由系统自动创建</dd>
+    <dd>在事件处理函数中作为形式参数，名字任意，通常使用event、e、evt等语义化名字</dd>
+    <dd>
+      .事件对象详细节录了事件的类型[冒泡与否]、发生位置[screen、page]、大小[offset、client]、时间timestamp、响应事件的目标元素target等信息；如果有多个元素或多层嵌套，则响应事件的目标元素也不同
+    </dd>
+    <dd>.还可以利用事件对象e阻止冒泡和阻止默认事件，见后续案例</dd>
+    <dd>.如果元素使用了data-自定义数据，应该在目标target的dateset去获取</dd>
+    <dt>冒泡事件和捕获事件</dt>
+    <dd>.页面接受事件的顺序，即：事件发生时，在元素节点之间按照特定的顺序传播的过程</dd>
+    <dd>.三个阶段：捕获阶段 capture phrase → 当前目标阶段 target phrase → 冒泡阶段 bubbling phrase</dd>
+    <dd>.当点击页面的一个元素的时候，事件会从这个元素的祖先元素逐层传递下来 - 捕获；当事件传递到这个元素之后 - 目标，触发事件本身的程序内容；然后又会把事件逐层传递回去 - 冒泡，直到根元素为止</dd>
+    <dd>.先捕获事件才能处理；事件捕获：网景提出；事件冒泡：微软提出|IE提出</dd>
+    <dd>.JS代码只能执行冒泡或捕获中的一个阶段</dd>
+    <dd>.事件冒泡是默认行为。这意味着，如果你在一个子元素|组件上绑定了一个事件，当该事件被触发时，它会沿着DOM|组件树向上冒泡，直到到达根节点|根组件</dd>
+    <dd>.事件捕获是指当一个元素上的事件被触发时，它会从文档的根节点开始，向下传播，直到到达目标元素</dd>
+    <dd>.使用e.stopPropagation|e.cancelBubble可以取消冒泡</dd>
+    <dd class="tips">
+      <div>stopPropagation和cancelBubble都可以阻止浏览器默认的事件冒泡行为</div>
+      <div>cancelBubble方法不符合W3C标准，只支持IE浏览</div>
+      <div>stopPropagation符合W3C标准，适用于FireFox等浏览器，不支持IE</div>
+    </dd>
+    <dt>target vs currentTarget</dt>
+    <dd>target - 在事件流的目标阶段</dd>
+    <dd>currentTarget - 在事件流的捕获，目标及冒泡阶段。只有当事件流处在目标阶段的时候，两个的指向才是一样的，
+      而当处于捕获和冒泡阶段的时候，target指向被单击的对象；currentTarget指向当前事件活动的对象（一般为父级）</dd>
   </dl>
   <div class="chap">默认事件 default</div>
   <dl>
+    <dd>常见的默认事件有</dd>
     <dd>1. 右键菜单</dd>
     <dd>2. &lt;form&gt;提交的默认</dd>
     <dd>3. &lt;a&gt;的跳转</dd>
@@ -199,9 +207,7 @@ ta.addEventListener('blur', (e) => {
 document.addEventListener('contextmenu', (e) => {
   e.preventDefault();
 })</pre>
-    </dd>
-    <dd>.或</dd>
-    <dd>
+      <div>.或</div>
       <pre>
 document.oncontextmenu = function () {
   return false;
