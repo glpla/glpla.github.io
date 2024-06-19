@@ -25,14 +25,38 @@ selector::pseudo-element {
 }</pre>
     </dd>
     <dt>::before ::after</dt>
-    <dd>. 创建一个inline元素作为第一个first子元素、最后一个last子元素</dd>
-    <dd>. 必须指定伪元素 content 属性，哪怕为空；可以使用普通字符、<a
-        href="https://developer.mozilla.org/en-US/docs/Glossary/Entity">CSS实体</a>；也可利用attr()获取元素属性；content拼接字符串不能使用+，直接在后面添加即可
+    <dd>
+      <div>. 创建一个inline元素作为第一个first子元素、最后一个last子元素</div>
+      <div>. 必须指定伪元素 content 属性，哪怕为空；可以使用普通字符、<a
+          href="https://developer.mozilla.org/en-US/docs/Glossary/Entity">CSS实体</a>；也可利用attr()获取元素属性；content拼接字符串不能使用+，直接在后面添加即可
+      </div>
+      <div>. content属性不支持变量使用var()，可以通过<a href="./counter.html">计数器</a> 迂回实现</div>
+      <div>. 可按照普通元素对其进行定位、布局、旋转等等操作；注意：旋转会撑开/破坏布局，请为父元素设置overflow溢出隐藏；同样需要注意的是：他们的box-sizing也要初始化为border-box</div>
+      <div>. 伪元素的样式受父级元素的影响；但是伪元素不是元素的直接孩子，无法使用直接后代选择器>选择</div>
+      <div>. 应用非常非常非常广泛</div>
+      <div class="example-sn">定制列表标记</div>
+      <div>使用普通字符</div>
+      <pre>
+li::before {
+    content: '>';
+}</pre>
+      <div>使用 <a href="https://www.w3school.com.cn/cssref/css_entities.asp">CSS 实体符号</a></div>
+      <pre>
+li::before {
+    content: '\21E8';
+}</pre>
+      <div>使用背景图片 - 可以配合弹性盒子 flex 实现特定布局</div>
+      <pre>
+li::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url(../imgs/logo1.png);
+    background-size: cover;
+    border-radius: 50%;
+}</pre>
     </dd>
-    <dd>. content属性不支持变量使用var()，可以通过<a href="./counter.html">计数器</a> 迂回实现</dd>
-    <dd>. 可按照普通元素对其进行定位、布局、旋转等等操作；注意：旋转会撑开/破坏布局，请为父元素设置overflow溢出隐藏；同样需要注意的是：他们的box-sizing也要初始化为border-box</dd>
-    <dd>. 伪元素的样式受父级元素的影响；但是伪元素不是元素的直接孩子，无法使用直接后代选择器>选择</dd>
-    <dd>. 应用非常非常非常广泛</dd>
     <dt>::first-letter ::first-line</dt>
     <dd>. <span class="warn">block块元素</span> 的首字母、首行</dd>
     <dd>. 设置的样式有限；常用于首字下沉</dd>
@@ -49,7 +73,9 @@ selector::pseudo-element {
     <dd>. 使用content属性指定内容</dd>
     <dd>. 设置的样式有限</dd>
     <dd>. 因为标记会破坏布局，基本很少使用</dd>
-    <dd>. 更多案例，请参考<a href="./list.html">列表 List</a> - 自定义编号示例</dd>
+    <dd>. 更多使用技巧，请访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::marker">MDN ::marker</a>、<a
+        href="https://css-tricks.com/everything-you-need-to-know-about-the-gap-after-the-list-marker/">list
+        marker</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 样式初始化</dd>
     <dd>
       <pre>

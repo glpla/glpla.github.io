@@ -139,7 +139,6 @@ input[type='radio']:checked+label {
       <p>. nth-child可以使用关键字；odd选中序号为奇数的孩子；even选中序号为偶数的孩子</p>
       <p>. nth-child可以使用表达式；n只能是数字，不能是字母；n必须是表达式的第一项</p>
       <p>. 以上选择器不区分元素类型</p>
-      <p>. 实例应用，请参考 <a href="./table.html#nth">table斑马纹</a></p>
       <pre>
 :nth-child(even)//选择序号为偶数的元素
 :nth-child(odd)//选择序号为奇数的元素
@@ -149,6 +148,18 @@ input[type='radio']:checked+label {
 :nth-child(3n+1)//选择序号为1、4、7、10等元素
 :nth-child(-n+3)//选择序号为3、2、1的元素，前3个；:nth-child(3-n)错误
 :nth-last-child(-n+3)//后3</pre>
+      <p class="example-sn"><a href="https://codepen.io/glpla/pen/OJrwxdb">斑马纹表格</a></p>
+      <pre>
+tr:nth-child(odd) {
+  background-color: #dcb0ff;
+}
+tr:nth-child(even) {
+  background-color: #faccff;
+}      </pre>
+      <p>. 选择奇数行或偶数行：采用结构伪类选择器:nth-child()，使用关键字odd|even或表达式2n+1|2n</p>
+      <p>. 也可以分别为奇数行和偶数行单独指定类；适合小规模表格</p>
+      <p>. :hover时候，当前行样式发生变化</p>
+      <p>. 标题行样式始终保持不变</p>
       <div>根据类型选择元素</div>
       <table>
         <tr>

@@ -24,10 +24,6 @@
 //   return json;
 // }
 
-// main-nav
-window.addEventListener('scroll', (e) => {
-  mainNav.classList.toggle('active', window.scrollY > 150)
-})
 
 // msg
 let msgBox = document.querySelector('.msg-box')

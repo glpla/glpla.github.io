@@ -117,11 +117,24 @@
     <dd>
       <pre>grid-template-rows: px | % | fr | auto | repeat() | minmax();</pre>
     </dd>
+    <dt>grid-auto-rows、grid-auto-columns</dt>
+    <dd>
+      <pre>grid-auto-rows: &lt;length&gt; | &lt;percentage&gt; | min-content | max-content | auto;</pre>
+      <pre>grid-auto-columns: &lt;length&gt; | &lt;percentage&gt; | min-content | max-content | auto;</pre>
+      <div>当Grid容器中没有明确指定行高或列宽时，自动决定容器的行度或列宽 - 显式的指定行的高度|列的宽度；默认是 auto</div>
+      <div>没有明确指定行高或列宽，就是没有使用grid-template-columns和grid-template-rows划分网格</div>
+    </dd>
     <dt>grid-auto-flow</dt>
-    <dd>.指定工作流的方向；默认是行</dd>
-    <dd>.通常是划分好格子后再指定方向</dd>
     <dd>
       <pre>grid-auto-flow: row | column | dense | row dense | column dense;</pre>
+      <div>网格项自动放置的顺序和方式 - 指定工作流的方向，默认是按行 row 的顺序填充|行优先，从上到下，然后再到下一行</div>
+      <div>dense表示密集填充还是宽松填充</div>
+      <div>特别适合处理 <span class="warn">动态内容，如数量或大小不一</span> 或未明确指定位置的网格项</div>
+      <div>通常是划分好格子后再指定方向；如容器划分3行3列，10个子项的排列方式</div>
+      <img src="./imgs/grid0.png" alt="">
+      <p class="fig-sn">默认row排列 - 行优先</p>
+      <img src="./imgs/grid1.png" alt="">
+      <p class="fig-sn">column排列 - 列优先</p>
     </dd>
     <dt>grid-template</dt>
     <dd>.复合属性；同时设置列column、行rows，多见于页面整体布局，见后续案例</dd>
@@ -142,11 +155,6 @@
         'footer footer footer';
     gap: 1rem;
 }</pre>
-    </dd>
-    <dt>grid-auto-rows、grid-auto-columns</dt>
-    <dd>.显式的指定行的高度|列的宽度</dd>
-    <dd>
-      <pre>grid-auto-columns: px | fr | auto | minmax();</pre>
     </dd>
     <dt>justify-items、align-items</dt>
     <dd>.子项在格子中的分布：上中下</dd>

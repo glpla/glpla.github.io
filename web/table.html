@@ -15,20 +15,13 @@
   <header>
     <h1>表格</h1>
     <span>&commat;&lt;table&gt;</span>
-    <span class="ham iconfont icon-menu"></span>
-    <nav class="nav">
-      <a href="" style="--delay:0" class="nav-item">概述</a>
-      <a href="" style="--delay:1" class="nav-item">样式</a>
-      <a href="" style="--delay:2" class="nav-item">基本使用</a>
-      <a href="" style="--delay:3" class="nav-item">进阶使用</a>
-    </nav>
   </header>
   <dl>
     <dt class="nav-cont">概述</dt>
-    <dd>功能1：展示数据</dd>
-    <dd>功能2：布局，如表单的使用，多使用表格布局；其它布局多使用div+CSS实现</dd>
-    <dd>更多信息，请访问 <a href="//css-tricks.com/complete-guide-table-element/">complete guide table element</a></dd>
     <dd>
+      <div>功能1：展示数据</div>
+      <div>功能2：布局，如表单的使用，多使用表格布局；其它布局多使用div+CSS实现</div>
+      <div>更多信息，请访问 <a href="//css-tricks.com/complete-guide-table-element/">complete guide table element</a></div>
       <pre>
 &lt;table&gt;
     &lt;caption&gt;title&lt;/caption&gt;
@@ -48,19 +41,19 @@
         &lt;/tr&gt;
     &lt;/tfooter&gt; 
 &lt;table&gt;</pre>
+      <div>&lt;tabel&gt;：display类型为tabel，inline-block元素</div>
+      <div>&lt;caption&gt;：表格标题</div>
+      <div>&lt;tr&gt;：display类型是table-row，它的子元素只能是&lt;td&gt;或&lt;th&gt;；&lt;tr&gt;至少有一个单元格&lt;td&gt;有数据；否则空行会被压缩</div>
+      <div>&lt;td&gt; &lt;th&gt;：display类型是table-cell；&lt;th&gt;是标题行单元格，通常出现在首行，也可以出现在任何位置</div>
     </dd>
-    <dd>&lt;tabel&gt;：display类型为tabel，inline-block元素</dd>
-    <dd>&lt;caption&gt;：表格标题</dd>
-    <dd>&lt;tr&gt;：display类型是table-row，它的子元素只能是&lt;td&gt;或&lt;th&gt;；&lt;tr&gt;至少有一个单元格&lt;td&gt;有数据；否则空行会被压缩</dd>
-    <dd>&lt;td&gt; &lt;th&gt;：display类型是table-cell；&lt;th&gt;是标题行单元格，通常出现在首行，也可以出现在任何位置</dd>
     <dd class="tips">
       <div>系统会默认添加表头&lt;thead&gt;、表体&lt;tbody&gt;、表尾&lt;tfoot&gt;；通常只关注行和单元格，他们会自动放在&lt;tbody&gt;中</div>
     </dd>
   </dl>
-  <div class="chap">样式 Style</div>
   <dl class="nav-cont">
     <dt>HTML属性样式</dt>
     <dd>
+      <div>以属性的形式写在元素上；除了最后2个属性外，其它样式建议使用 CSS 实现</div>
       <table>
         <colgroup>
           <col style="text-align: right;">
@@ -116,13 +109,19 @@
     <dd>table-layout: 单元格内容显示方式，默认是 auto，自动适应内容；fixed 固定宽度;</dd>
     <dd>empty-cells：空单元格显示与否/不在空单元格周围绘制边框。默认显示/绘制；仅仅使用于边框不重叠的情况</dd>
     <dt>colgroup</dt>
-    <dd>指定每列的宽度；也可以单独指定某个 &lt;td&gt;的宽度，见下例</dd>
     <dd>
+      <div>默认情况下各列宽度会自动分配，撑开至占满表格</div>
+      <div>指定每列的宽度 - 内联样式</div>
       <pre>
 &lt;colgroup&gt;
   &lt;col style="width: 100px;"&gt;
   &lt;col style="width: 200px;"&gt;
 &lt;/colgroup&gt;</pre>
+      <div>也可以单独指定某个 &lt;td&gt;的宽度</div>
+      <pre>
+table td:nth-child(2) {
+  width: 20%;
+}      </pre>
     </dd>
     <dd class="tips">
       <div>除了直接在表格上应用合并单元格属性 colspan 和 rowspan外，其它样式建议由CSS完成</div>
@@ -131,43 +130,26 @@
       <div>同一页面内的表格，各列宽度应该保持一致</div>
     </dd>
   </dl>
-  <div class="chap">基本使用 Usage</div>
   <dl class="nav-cont">
-    <dd>[<span class="iconfont icon-keyboard"></span>] 指定某列宽度 - 同一个页面内，多个表格的列宽应 <span class="warn">尽量</span> 保持一致</dd>
-    <dd>同时指定td无效；默认情况下各列宽度会自动分配，撑开至占满表格</dd>
-    <dd>
-      <pre>
-table td:nth-child(2) {
-  width: 20%;
-}      </pre>
-    </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a
+    <dt>常见表格类型</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a
         href="https://codepen.io/glpla/pen/KKJMqyb?editors=1100">三线表格</a>、<a href="./demo/up2u.html">个人网站</a></dd>
-    <dd>. 单独指定类实现；也可以使用:has()选择器实现</dd>
     <dd>
-      <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="KKJMqyb" data-user="glpla"
-        style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-        <span>See the Pen <a href="https://codepen.io/glpla/pen/KKJMqyb">
-            three-line-tbl</a> by cnplaman (<a href="https://codepen.io/glpla">@glpla</a>)
-          on <a href="https://codepen.io">CodePen</a>.</span>
-      </p>
-      <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+      <div>. 首行和末行有边框</div>
+      <div>. 单独指定类实现；也可以使用:has()选择器实现</div>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/pen/GRPBOyv">歌单</a>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./selector2.html">斑马纹表格 - 结构伪类选择器</a></dd>
+    <dd>. 奇数行、偶数行样式不同</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./sticky.html">固定表头表格 - 粘性定位</a>、<a
+        href="./demo/up2u.html">个人网站</a></dd>
+    <dd>. 内容多的情况下，表头始终显示 - 冻结首行；现在多使用 <a href="./demo/pager.html">分页器 - pager</a>设计</dd>
+    <dd>. &lt;tabel&gt;本身并不能实现滚动条，需在&lt;tabel&gt;外面增加一个容器；当&lt;tabel&gt;高度超过容器高度时，让容器出现滚动条</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/pen/GRPBOyv">歌单</a>
     </dd>
     <dd>. 标题行样式始终保持不变</dd>
     <dd>. 当鼠标:hover时，当前行颜色变化</dd>
-    <dd>
-      <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="GRPBOyv" data-user="glpla"
-        style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-        <span>See the Pen <a href="https://codepen.io/glpla/pen/GRPBOyv">
-            Untitled</a> by cnplaman (<a href="https://codepen.io/glpla">@glpla</a>)
-          on <a href="https://codepen.io">CodePen</a>.</span>
-      </p>
-      <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </dd>
-
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 单元格间距处理</dd>
+    <dt>表格其它处理</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 单元格间距处理</dd>
     <dd>
       <span>border-collapse: </span>
       <input type="radio" name="bc" id="sp" checked>
@@ -212,7 +194,7 @@ table td:nth-child(2) {
         </tr>
       </table>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 空单元处理</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 空单元处理</dd>
     <dd>. 边框不重叠</dd>
     <dd>. 空单元格不显示，营造一种流的感觉</dd>
     <dd class="tbl-box" style="text-indent: 2em;">
@@ -290,7 +272,7 @@ table th, table td {
     border: 1px solid #888;
 }  </pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 圆角表格</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 圆角表格</dd>
     <dd>方案1：在不设置边框重叠的情况，给&lt;table&gt;指定border-radius</dd>
     <dd>
       <table class="radius-tbl">
@@ -378,113 +360,7 @@ table th, table td {
 }</pre>
     </dd>
   </dl>
-  <div class="chap">进阶使用 Advanced</div>
   <dl class="nav-cont">
-    <dt id="nth">斑马纹表格</dt>
-    <dd>[前置知识点] <a href="./selector.html#nth">结构伪类选择器</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/pen/KKbByGJ">静态斑马纹表格</a></dd>
-    <dd>. 选择奇数行或偶数行：采用结构伪类选择器:nth-child()，使用关键字odd|even或表达式2n+1|2n</dd>
-    <dd>. 也可以分别为奇数行和偶数行单独指定类；适合小规模表格</dd>
-    <dd>
-      <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="KKbByGJ" data-user="glpla"
-        style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-        <span>See the Pen <a href="https://codepen.io/glpla/pen/KKbByGJ">
-            zebra-tbl</a> by cnplaman (<a href="https://codepen.io/glpla">@glpla</a>)
-          on <a href="https://codepen.io">CodePen</a>.</span>
-      </p>
-      <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </dd>
-    <dd class="mt2" id="nth">[<span class="iconfont icon-keyboard"></span>] <a
-        href="https://codepen.io/glpla/pen/OJrwxdb">动态斑马纹表格</a></dd>
-    <dd>. 标题行样式始终保持不变</dd>
-    <dd>. 奇数行、偶数行样式不同</dd>
-    <dd>. :hover时候，当前行样式发生变化</dd>
-    <dd>
-      <p class="codepen" data-height="300" data-default-tab="html,result" data-slug-hash="OJrwxdb" data-user="glpla"
-        style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-        <span>See the Pen <a href="https://codepen.io/glpla/pen/OJrwxdb">
-            zebra</a> by cnplaman (<a href="https://codepen.io/glpla">@glpla</a>)
-          on <a href="https://codepen.io">CodePen</a>.</span>
-      </p>
-      <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-    </dd>
-    <dt id="sticky">固定表头表格</dt>
-    <dd>[前置知识点] <a href="./sticky.html">粘性定位</a></dd>
-    <dd>. 内容多的情况下，表头始终显示-冻结首行；现在多使用分页器设计</dd>
-    <dd>. &lt;tabel&gt;本身并不能实现滚动条，需在&lt;tabel&gt;外面增加一个容器；当&lt;tabel&gt;高度超过容器高度时，让容器出现滚动条</dd>
-    <dd>
-      <div class="wrap-tbl">
-        <table>
-          <tr>
-            <th>sn</th>
-            <th>name</th>
-            <th>age</th>
-          </tr>
-          <tr>
-            <td>item1</td>
-            <td>item2</td>
-            <td>item3</td>
-          </tr>
-          <tr>
-            <td>item1</td>
-            <td>item2</td>
-            <td>item3</td>
-          </tr>
-          <tr>
-            <td>item1</td>
-            <td>item2</td>
-            <td>item3</td>
-          </tr>
-          <tr>
-            <td>item1</td>
-            <td>item2</td>
-            <td>item3</td>
-          </tr>
-          <tr>
-            <td>item1</td>
-            <td>item2</td>
-            <td>item3</td>
-          </tr>
-          <tr>
-            <td>item1</td>
-            <td>item2</td>
-            <td>item3</td>
-          </tr>
-          <tr>
-            <td>item1</td>
-            <td>item2</td>
-            <td>item3</td>
-          </tr>
-          <tr>
-            <td>item1</td>
-            <td>item2</td>
-            <td>item3</td>
-          </tr>
-          <tr>
-            <td>item1</td>
-            <td>item2</td>
-            <td>item3</td>
-          </tr>
-          <tr>
-            <td>item1</td>
-            <td>item2</td>
-            <td>item3</td>
-          </tr>
-        </table>
-      </div>
-    </dd>
-    <dd>
-      <pre>
-.wrap-tbl {
-  height: 30vh;
-  overflow-y: auto;
-}
-
-.wrap-tbl table tr:first-child {//:has()
-  position: sticky;
-  top: 0;
-}      </pre>
-    </dd>
     <dt>自适应表格</dt>
     <dd>[前置知识点] <a href="./responsive.html">媒体查询</a></dd>
     <dd>. 针对桌面端和移动端表格的展示，给出其中一种自适应表格的思路</dd>
@@ -570,16 +446,14 @@ td:nth-child(4)::before {
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
-    <dt>总结</dt>
+    <dt>总结 Summary</dt>
     <dd class="number">
       <div>&lt;table&gt;的使用和样式</div>
-      <div>结构伪类选择器 :nth-child()、:first-child</div>
     </dd>
-    <dt>作业</dt>
+    <dt>作业 Homework</dt>
     <dd>. 使用三线表格和歌单完善个人网站</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="/utils/custom/ham2024.js"></script>
   <script src="/utils/custom/star.js"></script>
 </body>
 
