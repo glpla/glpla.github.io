@@ -6,16 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>粘性定位 Sticky</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="../css/common_202406.css">
   <link rel="stylesheet" href="./css/sticky.css">
-  <link rel="stylesheet" href="../css/code.css">
   <base target="_blank">
 </head>
 
 <body>
-  <header>
-    <h1>&commat;Sticky</h1>
-  </header>
+  <header></header>
+  <div class="header">
+    <h1>粘性定位</h1>
+    <span>&commat;Sticky</span>
+  </div>
   <dl>
     <dt>内容</dt>
     <dd><span class="iconfont icon-layer-group"></span> 粘性定位概述</dd>
@@ -25,44 +26,37 @@
   <dl>
     <dt>说明</dt>
     <dd>.兼有固定定位和相对定位的特性</dd>
-    <dd>.不会脱离文档流；但是层级提升 - 比较普通元素高</dd>
-    <dd>.有参考：通常是父元素；如果没有特别指定容器，则相对于离自己最近的带有滚动条的祖先元素；如果都没有，则以&lt;body&gt;为参考</dd>
+    <dd>.不会脱离文档流；但是层级提升 - 比普通元素高</dd>
+    <dd>.有参考：通常是父元素；如果没有特别指定容器，则相对于离自己 <span class="warn">最近的</span> 带有滚动条的祖先元素；如果都没有，则以&lt;body&gt;为参考</dd>
     <dd>.有滚动：容器的内容，包括粘性元素，总高度要大于容器，这样才能滚动起来，容器才会出现滚动条；通常粘性元素通常是滚动容器的直接孩子</dd>
     <dd>.有距离：必须指定粘性元素到容器的位置：left、top、right、bottom之一；多使用top</dd>
     <dd>.其父元素不能设置overflow:hidden</dd>
-    <dd>.</dd>
-    <dd>.可以使用JS实现黏性效果，详情请访问 <a href="https://codepen.io/glpla/full/wvNZOrK">JS粘性定位</a></dd>
     <dd>.适合banner/swiper + 主导航 + 内容的网页。网页滚动时候，banner移出，导航保留/黏贴在顶端/吸顶，内容也逐步移出</dd>
     <dd class="tips">
-      <div>MDN</div>
       <div>Sticky elements are "sticky" relative to the nearest ancestor with a "scrolling mechanism", which is
         determined by its ancestors' position property.</div>
     </dd>
   </dl>
   <div class="chap">案例 cases</div>
   <dl>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 粘性头部 - 全局粘性定位</dd>
-    <dd>页面没有滚动时，<span class="warn">案例 Cases</span> 一栏停留在原来位置</dd>
-    <dd>当页面向下滚动时，<span class="warn">案例 Cases</span> 一栏驻留/黏住在顶部</dd>
-    <dd>当页面向上滚动时，<span class="warn">案例 Cases</span> 一栏返回其原来位置</dd>
+    <dd class="example-title">[<span class="iconfont icon-keyboard"></span>] 粘性头部 - 全局粘性定位</dd>
     <dd>
-      <figure class="code">
-        <figcaption></figcaption>
-        <pre>
-.chap {
+      <div>.页面没有滚动时，<span class="warn">案例标题</span> 一栏停留在原来位置</div>
+      <div>.当页面向下滚动时，<span class="warn">案例标题</span> 一栏驻留/黏住在顶部一定位置</div>
+      <div>.当页面向上滚动时，<span class="warn">案例标题</span> 一栏返回其原来位置</div>
+      <div>.示例中，使用CSS变量指定导航的高度为10vh</div>
+      <pre>
+.example-title {
     position: sticky;
-    top: 0;
+    top: var(--chap-h);
     z-index: 2;
 }</pre>
-      </figure>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 粘性标题 - 局部粘性定位</dd>
-    <dd>.以父级元素飞参考</dd>
-    <dd>.注意z-index的影响，应确保粘性元素位于上层</dd>
+    <dd class="example-title">[<span class="iconfont icon-keyboard"></span>] 粘性标题 - 局部粘性定位</dd>
     <dd>
-      <figure class="code">
-        <figcaption></figcaption>
-        <pre>
+      <div>.以父级元素飞参考</div>
+      <div>.注意z-index的影响，应确保粘性元素位于上层</div>
+      <pre>
 article {
     height: 200px;
     overflow-y: auto;
@@ -76,64 +70,87 @@ article .title {
     line-height: 40px;
     z-index: 1;
 }</pre>
-      </figure>
-    </dd>
-    <dd>
       <article>
-        <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium laboriosam quas, molestiae voluptatum
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium laboriosam quas, molestiae voluptatum
           deleniti asperiores cumque alias quidem autem odit molestias porro provident fuga vel suscipit pariatur minima
           voluptas. Architecto, eveniet maiores voluptatibus quasi cum unde laudantium! Asperiores officia explicabo vel
-          laboriosam excepturi, cupiditate animi accusantium, ullam nobis, natus delectus.</div>
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, quod beatae! Quaerat molestiae voluptatem
-          illum corporis dignissimos, quasi at a!</div>
-        <div class="title">sticky title</div>
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
+          laboriosam excepturi, cupiditate animi accusantium, ullam nobis, natus delectus.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, quod beatae! Quaerat molestiae voluptatem
+          illum corporis dignissimos, quasi at a!</p>
+        <div class="title">sticky title 1</div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
           tempora
           atque, accusantium soluta quisquam voluptatibus nulla, ad corporis aspernatur eveniet, veniam
           perspiciatis
-          rerum a quidem distinctio. Earum.</div>
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
+          rerum a quidem distinctio. Earum.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
           tempora
           atque, accusantium soluta quisquam voluptatibus nulla, ad corporis aspernatur eveniet, veniam
           perspiciatis
-          rerum a quidem distinctio. Earum.</div>
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
+          rerum a quidem distinctio. Earum.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
           tempora
           atque, accusantium soluta quisquam voluptatibus nulla, ad corporis aspernatur eveniet, veniam
           perspiciatis
-          rerum a quidem distinctio. Earum.</div>
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
+          rerum a quidem distinctio. Earum.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
           tempora
           atque, accusantium soluta quisquam voluptatibus nulla, ad corporis aspernatur eveniet, veniam
           perspiciatis
-          rerum a quidem distinctio. Earum.</div>
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
+          rerum a quidem distinctio. Earum.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
           tempora
           atque, accusantium soluta quisquam voluptatibus nulla, ad corporis aspernatur eveniet, veniam
           perspiciatis
-          rerum a quidem distinctio. Earum.</div>
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
+          rerum a quidem distinctio. Earum.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
           tempora
           atque, accusantium soluta quisquam voluptatibus nulla, ad corporis aspernatur eveniet, veniam
           perspiciatis
-          rerum a quidem distinctio. Earum.</div>
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
+          rerum a quidem distinctio. Earum.</p>
+        <div class="title">sticky title 2</div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
           tempora
           atque, accusantium soluta quisquam voluptatibus nulla, ad corporis aspernatur eveniet, veniam
           perspiciatis
-          rerum a quidem distinctio. Earum.</div>
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
+          rerum a quidem distinctio. Earum.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reprehenderit incidunt sed
           tempora
           atque, accusantium soluta quisquam voluptatibus nulla, ad corporis aspernatur eveniet, veniam
           perspiciatis
-          rerum a quidem distinctio. Earum.</div>
+          rerum a quidem distinctio. Earum.</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut assumenda non quisquam iure aliquam eos ullam
+          laboriosam quae. Saepe, quis!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis possimus vel placeat alias asperiores
+          obcaecati, doloribus nisi pariatur accusantium libero quidem, eaque fugit, qui explicabo ab mollitia rem. In,
+          voluptates.</p>
       </article>
+    </dd>
+    <dd class="example-title">[<span class="iconfont icon-keyboard"></span>] 粘性表格标题</dd>
+    <dd>
+      <div>.不能直接对表格使用粘性定位</div>
+      <div>.使用额外的容器包裹表格，当表格内容超出容器高度时，表格的表头粘性定位在容器顶部</div>
+      <pre>
+
+      </pre>
+    </dd>
+    <dd class="example-title">[<span class="iconfont icon-keyboard"></span>] <a
+        href="https://codepen.io/glpla/full/wvNZOrK">JS粘性定位</a></dd>
+    <dd>
+      <div>.滚动到一定距离后，添加粘性类</div>
+      <pre>
+let nav = document.querySelector("nav");
+window.addEventListener("scroll", () => {
+	if (window.scrollY >= nav.offsetTop) {
+		nav.classList.add("sticky");
+	}
+});</pre>
     </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
-    <dt>总结</dt>
-    <dd>.各种定位的使用</dd>
+    <dt>总结 Summary</dt>
+    <dd>.粘性定位的使用</dd>
     <dd>
       <table>
         <tr>
@@ -158,7 +175,7 @@ article .title {
         </tr>
       </table>
     </dd>
-    <dt>作业</dt>
+    <dt>作业 Homework</dt>
     <dd>.利用粘性定位属性，完善个人网站</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
