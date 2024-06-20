@@ -87,8 +87,8 @@ let n = parseInt(window.prompt('请输入1个小于10的数字'))
 window.alert(fn(n));</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 支付确认-点击支付并确认后跳转到支付成功页面</dd>
-    <dd>[拓展]支付成功页面3秒后返回主页，也可以单击立即按钮返回主页</dd>
     <dd>
+      <div>[拓展]支付成功页面3秒后返回主页，也可以单击立即按钮返回主页</div>
       <pre>
 btn.onclick = function () {
   let res = window.confirm('确认要支付吗？');
@@ -103,6 +103,18 @@ btn.onclick = function () {
     }, 3000);
   }
 }</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 打印指定内容</dd>
+    <dd>
+      <div>也可以使用 <a href="../media.html">媒体查询 - print</a></div>
+      <pre>
+  const dom = document.querySelector('.ham')
+const cont = document.querySelector('.cont')
+dom.addEventListener('click', () => {
+  console.log(dom, cont);
+  document.body.innerHTML = cont.innerHTML
+  window.print()
+})      </pre>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

@@ -128,6 +128,30 @@ const grade = computed(() => {
 &lt;div&gt;grade 90 - {{ grade(90) }}&lt;/div&gt;
 &lt;div&gt;grade 100 - {{ grade(100) }}&lt;/div&gt;</pre>
     </dd>
+    <!-- <dd class="example-sn">嵌套使用计算属性</dd>
+    <dd>
+      <div>统计考勤 clockin</div>
+      <div>统计作业 homework</div>
+      <div>统计表现 bonus</div>
+      <div>统计成绩 grade - 根据以上3项统计最终平时成绩</div>
+      <div>注意 <a href="../web/js/function2.html">箭头函数</a> 的几种写法</div>
+      <pre>
+const clockin = computed(() => {
+  return (items) => {
+    return 10
+  }
+})
+
+const homework = computed(() => (items) => {
+  return 3
+})
+
+const bonus = computed(() => items => 5 )
+
+const grade = computed(() => {
+  return clockin.value + homework.value + bonus.value
+})      </pre>
+    </dd> -->
     <dd class="tips">
       <div>除了数据计算外，不应该有其它操作，如数据请求，DOM修改等副作用，即：只做一件事情</div>
       <div>如果还需要执行其它操作，可以使用侦听函数 <a href="./watch.html">watch</a></div>

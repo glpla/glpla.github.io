@@ -3,8 +3,7 @@
 
 :root {
   --main-color: #FDC830;
-  --item-mb: 10px;
-  --item-gap: 10px;
+  --p-m-g: 10px;
   --item-bg: hsla(44, 98%, 59%, 5%);
   --scroll-bar-bg: rgb(241, 139, 95);
 }
@@ -16,11 +15,16 @@
   font-weight: normal;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
+  gap: var(--p-m-g);
+  font-size: 1.5rem;
   align-items: center;
   height: 100vh;
   color: #efefef;
@@ -31,11 +35,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: var(--item-gap);
+  gap: var(--p-m-g);
   align-items: center;
   width: 100%;
   max-width: 1000px;
-  padding: 1rem;
+  padding: var(--p-m-g);
 
 }
 
@@ -44,7 +48,7 @@ nav {
   align-self: start;
   display: flex;
   align-items: end;
-  gap: calc(2*var(--item-gap));
+  gap: var(--p-m-g);
   line-height: 20px;
 }
 
@@ -54,9 +58,9 @@ nav {
 }
 
 .tab-item {
-  font-size: 18px;
-  padding-top: .5rem;
-  padding-bottom: .5rem;
+  font-size: 1.6rem;
+  padding-top: var(--p-m-g);
+  padding-bottom: var(--p-m-g);
   cursor: pointer;
   border-bottom: 2px solid transparent;
 }
@@ -76,14 +80,13 @@ nav {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 8px;
+  border-radius: var(--p-m-g);
 }
 
 #main {
   display: flex;
   flex-direction: column;
-  gap: var(--item-gap);
-  padding: var(--item-gap) 0;
+  padding: var(--p-m-g) 0;
   overflow-y: auto;
 }
 
@@ -91,24 +94,17 @@ nav {
   width: 8px;
 }
 
-#main::-webkit-scrollbar-track {
-  border-radius: 8px;
-}
-
 #main::-webkit-scrollbar-thumb {
   background-image: linear-gradient(transparent, var(--main-color));
-  border-radius: 8px;
 }
 
 .item {
   display: grid;
   grid-template-columns: auto auto 60px 1fr;
   align-items: center;
-  gap: var(--item-gap);
-  padding: 0 var(--item-gap);
-  margin-right: var(--item-gap);
+  gap: var(--p-m-g);
+  padding: 0 var(--p-m-g);
   color: #fff;
-  background-color: var(--item-bg);
   line-height: 40px;
 }
 
@@ -128,7 +124,7 @@ footer {
 
 @media screen and (max-width:768px) {
   .logo .iconfont {
-    font-size: 60px;
+    font-size: 4rem;
   }
 
   .logo-title {
