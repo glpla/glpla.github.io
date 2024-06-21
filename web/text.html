@@ -24,9 +24,9 @@
     </nav>
   </header>
   <dl class="nav-cont">
-    <dt>基本使用 Basic</dt>
-    <dd>更多文字使用事项，请访问 <a href="http://www.webxq.com/webjc/51631.html">WEB中文字体应用指南</a></dd>
+    <dt>基本样式 CSSc</dt>
     <dd>
+      <div>更多文字使用事项，请访问 <a href="http://www.webxq.com/webjc/51631.html">WEB中文字体应用指南</a></div>
       <table class="line">
         <caption>基本CSS</caption>
         <tr>
@@ -43,7 +43,7 @@
         </tr>
         <tr>
           <td>font-weight</td>
-          <td>字体重量/加粗；关键字，如bold、light；推荐使用数字，如600</td>
+          <td>字体重量/加粗；关键字，如light 300、normal 400、bold 600；推荐使用数字 100 - 900</td>
         </tr>
         <tr>
           <td>font</td>
@@ -55,11 +55,15 @@
         </tr>
         <tr>
           <td>line-height</td>
-          <td>行高；通常指定1.5倍行高；PC端通常指定为字体大小+8px的行高；可用于单行文本的垂直方向居中</td>
+          <td>行高；通常指定1.5倍行高，易于阅读；PC端通常指定为字体大小+8px的行高；可用于单行文本的垂直方向居中</td>
         </tr>
         <tr>
           <td>letter-spacing</td>
-          <td>字符间距</td>
+          <td>字符间距；通常使用em单位；对中文有效</td>
+        </tr>
+        <tr>
+          <td>word-spacing</td>
+          <td>字间距；通常使用em单位；适用于英文，对中文影响较小</td>
         </tr>
         <tr>
           <td>hyphens</td>
@@ -79,7 +83,11 @@
         </tr>
         <tr>
           <td>text-transform</td>
-          <td>文字变化，首字大写capitalize | 大写uppercase | 小写lowercase；适用于英文</td>
+          <td>文字变化，首字大写 capitalize | 大写 uppercase | 小写 lowercase；适用于英文</td>
+        </tr>
+        <tr>
+          <td>text-decoration</td>
+          <td>线条修饰：下划线 underline、上划线 overline、删除线 line-through；&lt;del&gt;也可以实现删除效果</td>
         </tr>
         <tr>
           <td>text-overflow</td>
@@ -95,7 +103,7 @@
         </tr>
         <tr>
           <td>writing-mode</td>
-          <td>文字方向，如古文的从右到左vertical-rl</td>
+          <td>文字方向，如古文的从右到左 vertical-rl</td>
         </tr>
         <tr>
           <td>text-shadow</td>
@@ -118,6 +126,14 @@
       <pre>font-family: 'Quicksand', Helvetica, sans-serif;</pre>
       <pre>text-shadow: h-shadow v-shadow blur color;</pre>
       <pre>-webkit-text-stroke: length color;</pre>
+      <div>&lt;a&gt;和&lt;form&gt;相关元素无法自动继承父级字体属性，需要显式的设置或指定继承</div>
+      <pre>
+a,
+input,
+button {
+  color: inherit;
+  font: inherit;
+}      </pre>
     </dd>
     <dd id="flex" class="example-sn">入党誓词</dd>
     <dd class="sn">

@@ -18,9 +18,9 @@
     <div class="iconfont icon-menu ham"></div>
     <div class="nav-wrap">
       <a class='nav-btn' style="--deg:0">简介</a>
-      <a class='nav-btn' style="--deg:1">锚点跳转*</a>
-      <a class='nav-btn' style="--deg:2">页面跳转*</a>
-      <a class='nav-btn' style="--deg:3">样式初始化*</a>
+      <a class='nav-btn' style="--deg:1">锚点跳转</a>
+      <a class='nav-btn' style="--deg:2">页面跳转</a>
+      <a class='nav-btn' style="--deg:3">样式</a>
       <a class='nav-btn' style="--deg:4">其它应用</a>
       <a class='nav-btn' style="--deg:5">总结</a>
       <a class='nav-btn' style="--deg:6">作业</a>
@@ -237,9 +237,9 @@ html {
         </figure>
       </dd>
     </dl>
-    <div class="chap">样式初始化*</div>
+    <div class="chap">样式</div>
     <dl>
-      <dt>说明</dt>
+      <dt>样式初始化</dt>
       <dd>. 为保证风格统一，通常覆盖&lt;a&gt;的默认样式，重新设计</dd>
       <dd>. <a href="http://necolas.github.io/normalize.css/">normalize.css</a></dd>
       <dd>. <a href="https://meyerweb.com/eric/tools/css/reset/">reset.css</a></dd>
@@ -253,6 +253,34 @@ a {
     font: inherit;
 }</pre>
         </figure>
+      </dd>
+      <dt>样式伪类</dt>
+      <dd>
+        <div>系统提供了4个默认的 <a href="./selector2.html" target="_blank">伪类</a>；如果定义样式，需要按照一定的顺序声明</div>
+        <div>a → a:link → a:visted → a:hover → a:active</div>
+        <pre>
+a {
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+}
+
+a:link,
+a:visited {
+  border-bottom: 1px solid #ccc;
+}
+
+
+a:hover,
+a:focus {
+  border-color: #f40;
+  color: #f40;
+}
+
+a:active {
+  background-color: #f40;
+  color: #fff;
+}</pre>
       </dd>
     </dl>
     <div class="chap">其它应用</div>
@@ -347,6 +375,7 @@ a {
         <div>初始化CSS</div>
         <div>标签选择器</div>
         <div>目标选择器 :target</div>
+        <div>超链接伪类</div>
         <div>其它CSS样式属性</div>
       </dd>
       <dd class="quote number">
