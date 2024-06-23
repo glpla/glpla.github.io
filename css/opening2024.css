@@ -1,5 +1,16 @@
 @import url(//at.alicdn.com/t/c/font_3869861_lkv942px18r.css);
 
+header {
+  background-image: url(https://cdn.pixabay.com/photo/2023/03/13/15/21/iot-7850194_1280.jpg);
+}
+
+dt {
+  position: sticky;
+  top: 10vh;
+  background-color: #fff;
+  z-index: 1;
+}
+
 .grid-detail-item {
   display: flex;
   align-items: center;
@@ -49,18 +60,19 @@ th .iconfont {
 .value {
   width: 100%;
   max-width: 600px;
-  margin: 2rem auto;
+  margin: var(--p-m-g) auto;
 }
 
 .item {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--p-m-g);
   justify-content: center;
   height: 30px;
   border-radius: 30px;
-  margin: 1rem auto;
+  margin: var(--p-m-g) auto;
+  font-size: 1.4rem;
   color: var(--color);
   border: 1px solid var(--color);
   padding: 2px;
@@ -119,6 +131,11 @@ th .iconfont {
 }
 
 @media (max-width: 768px) {
+  dt::before {
+    content: '\2720  ';
+    color: var(--main-color);
+  }
+
   .agenda tr>*:first-child {
     text-align: left;
     width: 100%;
