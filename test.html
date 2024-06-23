@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Test</title>
   <style>
     * {
       margin: 0;
@@ -14,355 +14,90 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 10vh;
     }
 
-    body {
-      min-height: 100vh;
-      font-size: 14px;
-    }
-
-    .wrap {
-      width: 800px;
-      height: 200px;
-      margin: 0 auto;
-      overflow: auto;
-    }
-
-    .wrap::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .wrap::-webkit-scrollbar-thumb {
-      background-color: #f40;
-    }
-
-
-    table {
-      width: 100%;
-      line-height: 2;
-      border-collapse: collapse;
-      margin: 100px auto;
-      border: 2px solid #1abc9c;
-    }
-
-    tr th {
-      /* background-color: #1abc9c; */
-      text-align: left;
-      padding: 4px 10px;
-      /* color: #fff; */
-    }
-
-    /* table tr:nth-child(even) {
-      background-color: #efefef;
-      } */
-
-    tr th,
-    tr td {
-      padding: 4px 10px;
-      border: 1px dotted #1abc9c;
-    }
-
-    /* table th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background-color: #1abc9c;
-      color: #fff;
-      text-align: left;
-      padding: 4px 10px;
-      border-bottom: 4px solid #fff;
-    }
-
-    table td {
-      background-color: #97f392;
-      padding: 4px 10px;
-      outline: 2px solid #fff;
-    } */
-    .test {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .test::before {
-      content: attr(data-title);
-    }
-
-    .test::after {
-      content: attr(data-desc);
+    a {
+      font: inherit;
+      text-decoration: none;
+      color: inherit;
     }
 
     nav {
-      line-height: 10vh;
-      height: 10vh;
+      text-align: center;
+      line-height: 2;
       background-color: #f40;
+      color: #fff;
     }
 
-    nav a {
+    .nav {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
       margin: 0 10px;
       padding: 0 10px;
     }
 
-    div[id] {
-      height: 50vh;
+    .nav:hover {
+      background-color: #f1f1f1;
+      color: #f40;
     }
 
-    div:target {
-      background-color: #f40;
+    .sub-nav {
+      position: absolute;
+      left: 0;
+      max-height: 0;
+      overflow: hidden;
+      text-align: left;
+      background-color: #f1f1f1;
+      color: #333;
+      padding: 0 10px;
     }
 
-    ul {
-      display: inline-block;
-      vertical-align: top;
+    .nav:hover .sub-nav {
+      max-height: 100vh;
     }
 
-    ul li::marker {
-      content: '+ ';
-    }
-
-    dl {
-      display: inline-block;
-      width: 24%;
-    }
-
-    dt {
-      font-weight: 600;
-      line-height: 2;
+    .sub-nav-item:hover {
+      color: #f40;
     }
   </style>
 </head>
 
 <body>
   <nav>
-    <a href="#nav-item1">nav-item1</a><a href="#nav-item2">nav-item2</a><a href="#nav-item3">nav-item3</a>
+    <div class="nav">
+      <span>Lorem.</span>
+      <div class="sub-nav">
+        <a class="sub-nav-item" href="">Lorem.</a>
+        <a class="sub-nav-item" href="">Unde.</a>
+        <a class="sub-nav-item" href="">Dignissimos!</a>
+      </div>
+    </div>
+    <div class="nav">
+      <span>Sint.</span>
+      <div class="sub-nav">
+        <a class="sub-nav-item" href="">Lorem.</a>
+        <a class="sub-nav-item" href="">Unde.</a>
+        <a class="sub-nav-item" href="">Dignissimos!</a>
+      </div>
+    </div>
+    <div class="nav">
+      <span>Inventore.</span>
+      <div class="sub-nav">
+        <a class="sub-nav-item" href="">Lorem.</a>
+        <a class="sub-nav-item" href="">Unde.</a>
+        <a class="sub-nav-item" href="">Dignissimos!</a>
+      </div>
+    </div>
+    <div class="nav">
+      <span>Cum.</span>
+      <div class="sub-nav">
+        <a class="sub-nav-item" href="">Lorem.</a>
+        <a class="sub-nav-item" href="">Unde.</a>
+        <a class="sub-nav-item" href="">Dignissimos!</a>
+      </div>
+    </div>
   </nav>
-  <div id="nav-item1" class="test" data-title="2023" data-desc="hi,there">icon</div>
-  <div class="test" data-title="20231069" data-desc="there">icon</div>
-  <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente culpa odio saepe dolore magnam
-    sed iure
-    dignissimos consequatur officia repellendus? Repellat dolorum obcaecati repudiandae iste enim? Ullam asperiores
-    cupiditate nesciunt.</div>
-  <div class="test">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod, a. 你好，中国</div>
-  <table id="tbl">
-    <tr>
-      <th>Lorem</th>
-      <th>Officia</th>
-      <th>Nihil</th>
-      <th>Veritatis</th>
-    </tr>
-    <tr>
-      <td>Lorem</td>
-      <td>Nihil</td>
-      <td>Optio</td>
-      <td>Quae</td>
-    </tr>
-    <tr>
-      <td>Lorem</td>
-      <td>Veritatis</td>
-      <td>Quis</td>
-      <td>Atgo</td>
-    </tr>
-    <tr>
-      <td>Lorem</td>
-      <td>Veritatis</td>
-      <td>Odio</td>
-      <td>At</td>
-    </tr>
-    <tr>
-      <td>Lorem</td>
-      <td>Suscipit</td>
-      <td>Earum</td>
-      <td>Aliquid</td>
-    </tr>
-  </table>
-  <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ad earum quam vel laboriosam deserunt excepturi
-    accusantium, labore sequi molestias minima voluptatem similique tenetur esse cumque velit, amet autem dolorem.</div>
-  <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ad earum quam vel laboriosam deserunt excepturi
-    accusantium, labore sequi molestias minima voluptatem similique tenetur esse cumque velit, amet autem dolorem.</div>
-  <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod ad earum quam vel laboriosam deserunt excepturi
-    accusantium, labore sequi molestias minima voluptatem similique tenetur esse cumque velit, amet autem dolorem.</div>
-  <div id="cont">
-    <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora quaerat totam maxime veritatis quas, dolorem
-      saepe necessitatibus! Recusandae impedit deleniti, doloremque asperiores expedita laboriosam maxime nam, facilis
-      dignissimos ad aliquam?</div>
-    <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora quaerat totam maxime veritatis quas, dolorem
-      saepe necessitatibus! Recusandae impedit deleniti, doloremque asperiores expedita laboriosam maxime nam, facilis
-      dignissimos ad aliquam?</div>
-    <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora quaerat totam maxime veritatis quas, dolorem
-      saepe necessitatibus! Recusandae impedit deleniti, doloremque asperiores expedita laboriosam maxime nam, facilis
-      dignissimos ad aliquam?</div>
-    <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora quaerat totam maxime veritatis quas, dolorem
-      saepe necessitatibus! Recusandae impedit deleniti, doloremque asperiores expedita laboriosam maxime nam, facilis
-      dignissimos ad aliquam?</div>
-  </div>
-  <div id="nav-item2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, corporis hic! Ipsam facere eaque
-    et explicabo culpa! Quia velit doloribus, dolor debitis obcaecati architecto at illo quis neque in. Provident!</div>
-  <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum ut voluptates nam exercitationem aspernatur hic
-    obcaecati modi facere, maxime velit, aperiam error quae quisquam nobis ullam corrupti sint illo quidem!</div>
-  <div>Nobis corrupti veritatis in, necessitatibus dolor adipisci porro aperiam quibusdam laudantium id, quidem
-    distinctio ut et fuga, laboriosam earum. Harum aliquam assumenda asperiores ex blanditiis explicabo quisquam nobis
-    magni sit!</div>
-  <div>Esse ut, cupiditate aliquid voluptatem at soluta suscipit in excepturi fugit id est nihil delectus cumque
-    incidunt, neque corrupti? Tempora ducimus ullam ipsam molestias minus, voluptatum nesciunt aliquid dolores odit.
-  </div>
-  <div id="nav-item3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, corporis hic! Ipsam facere eaque
-    et explicabo culpa! Quia velit doloribus, dolor debitis obcaecati architecto at illo quis neque in. Provident!</div>
-  <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum ut voluptates nam exercitationem aspernatur hic
-    obcaecati modi facere, maxime velit, aperiam error quae quisquam nobis ullam corrupti sint illo quidem!</div>
-  <div>Nobis corrupti veritatis in, necessitatibus dolor adipisci porro aperiam quibusdam laudantium id, quidem
-    distinctio ut et fuga, laboriosam earum. Harum aliquam assumenda asperiores ex blanditiis explicabo quisquam nobis
-    magni sit!</div>
-  <div>Esse ut, cupiditate aliquid voluptatem at soluta suscipit in excepturi fugit id est nihil delectus cumque
-    incidunt, neque corrupti? Tempora ducimus ullam ipsam molestias minus, voluptatum nesciunt aliquid dolores odit.
-  </div>
-  <!-- <div class="wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>1</th>
-          <th>1</th>
-          <th>1</th>
-          <th>1</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>21234</td>
-          <td>2123</td>
-          <td>2wasf</td>
-          <td>2asf/td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-      </tbody>
-    </table>
-  </div> -->
-  <footer>
-    <dl>
-      <dt>lorem1</dt>
-      <dd>Lorem, ipsum dolor.</dd>
-      <dd>Aliquam, in ab!</dd>
-      <dd>Neque, quam maxime!</dd>
-      <dd>Quibusdam, laboriosam! Optio!</dd>
-      <dt>lorem1</dt>
-      <dd>Lorem, ipsum dolor.</dd>
-      <dd>Est, eos laudantium.</dd>
-      <dd>Ratione, cumque. Eveniet!</dd>
-      <dd>Doloribus, facere repellendus.</dd>
-      <dt>lorem1</dt>
-      <dd>Lorem, ipsum dolor.</dd>
-      <dd>Ut, natus cupiditate.</dd>
-      <dd>Odio, non harum!</dd>
-      <dd>Cupiditate, fuga enim.</dd>
-    </dl>
-    <dl>
-      <dt>lorem1</dt>
-      <dd>Lorem, ipsum dolor.</dd>
-      <dd>Aliquam, in ab!</dd>
-      <dd>Neque, quam maxime!</dd>
-      <dd>Quibusdam, laboriosam! Optio!</dd>
-      <dt>lorem1</dt>
-      <dd>Lorem, ipsum dolor.</dd>
-      <dd>Est, eos laudantium.</dd>
-      <dd>Ratione, cumque. Eveniet!</dd>
-      <dd>Doloribus, facere repellendus.</dd>
-      <dt>lorem1</dt>
-      <dd>Lorem, ipsum dolor.</dd>
-      <dd>Ut, natus cupiditate.</dd>
-      <dd>Odio, non harum!</dd>
-      <dd>Cupiditate, fuga enim.</dd>
-    </dl>
-    <dl>
-      <dt>lorem1</dt>
-      <dd>Lorem, ipsum dolor.</dd>
-      <dd>Aliquam, in ab!</dd>
-      <dd>Neque, quam maxime!</dd>
-      <dd>Quibusdam, laboriosam! Optio!</dd>
-      <dt>lorem1</dt>
-      <dd>Lorem, ipsum dolor.</dd>
-      <dd>Est, eos laudantium.</dd>
-      <dd>Ratione, cumque. Eveniet!</dd>
-      <dd>Doloribus, facere repellendus.</dd>
-      <dt>lorem1</dt>
-      <dd>Lorem, ipsum dolor.</dd>
-      <dd>Ut, natus cupiditate.</dd>
-      <dd>Odio, non harum!</dd>
-      <dd>Cupiditate, fuga enim.</dd>
-    </dl>
-    <ul>
-      <li>Lorem.</li>
-      <li>Ea, aperiam?</li>
-      <li>Eaque, fuga assumenda.</li>
-      <li>Repellendus fugiat consequuntur inventore.</li>
-      <li>Optio ratione quibusdam praesentium minus.</li>
-    </ul>
-  </footer>
 </body>
 
 </html>

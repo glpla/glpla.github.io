@@ -1,3 +1,64 @@
+.input-cb {
+  display: block;
+  position: relative;
+  width: 58px;
+  height: 38px;
+  margin: 10px auto;
+  border-radius: 30px;
+  padding: 4px;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.input-cb::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #999;
+  transition: 0.5s;
+}
+
+#input-cb:checked+.input-cb::before {
+  left: calc(4px + 50px - 30px);
+  background-color: #0aa;
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  height: 40px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.input-box input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  font: inherit;
+}
+
+.input-box span {
+  position: absolute;
+  top: 1rem;
+  left: calc(var(--delay)*1em + 10px);
+  transition: .1s calc(var(--delay)*0.05s);
+  pointer-events: none;
+}
+
+.input-box input:focus~div span,
+.input-box input:valid~div span {
+  top: -1rem;
+}
+
 .basic {
   width: 320px;
   height: 180px;

@@ -120,18 +120,89 @@ transition-delay:        </pre>
     <dd>
       <pre>transition: background-size 0.4s;</pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/QWYowWx">导航条 -
+    <dd>[<span class="iconfont icon-keyboard"></span>] 定制表单元素checkbox - 隐藏input，设计与之关联的label；更多案例，请访问 <a
+        href="https://codepen.io/glpla/full/JjwBLdg">表单元素自定义 - CodePen</a></dd>
+    <dd>
+      <div>.checkbox和label关联，并隐藏checkbox</div>
+      <div>.label使用伪元素设计滑块</div>
+      <div>.没有使用 border更加方便计算；宽度中包含边框大小</div>
+      <div>
+        <input type="checkbox" id="input-cb" hidden>
+        <label for="input-cb" class="input-cb"></label>
+      </div>
+      <pre>
+.input-cb {
+  display: block;
+  position: relative;
+  width: 58px;
+  height: 38px;
+  margin: 100px auto;
+  border-radius: 30px;
+  padding: 4px;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.input-cb::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #000;
+  transition: 0.5s;
+}
+
+#input-cb:checked+.input-cb::before {
+  left: calc(4px + 50px - 30px);
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 模拟placeholder - 输入input聚焦时，使得每个字符移动位置；更多案例，请访问 <a
+        href="./demo/up2u.html">个人网站 - 留言</a></dd>
+    <dd>
+      <div>.利用内联变量单独定位每个字符的位置和不同的过渡延迟transition-dalay</div>
+      <div>.尝试用 <a href="./transform.html">变换 - transform</a> 和定位实现，体会不同方案的差异</div>
+      <div class="input-box">
+        <input type="text" name="" id="" required>
+        <div>
+          <span style="--delay:0">u</span>
+          <span style="--delay:1">s</span>
+          <span style="--delay:2">e</span>
+          <span style="--delay:3">r</span>
+          <span style="--delay:4">n</span>
+          <span style="--delay:5">a</span>
+          <span style="--delay:6">m</span>
+          <span style="--delay:7">e</span>
+        </div>
+      </div>
+      <pre>
+.input-box span {
+  position: absolute;
+  top: 1rem;
+  left: calc(var(--delay)*1em + 10px);
+  transition: .1s calc(var(--delay)*0.05s);
+  pointer-events: none;
+}
+
+.input-box input:focus~div span,
+.input-box input:valid~div span {
+  top: -1rem;
+}        </pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/QWYowWx">导航条 -
         CodePen</a></dd>
     <dd>. 导航元素等宽</dd>
     <dd>. 导航容器宽度由导航元素撑开</dd>
     <dd>. 背景条父相子绝</dd>
     <dd>. 导航元素hover时，移动背景条一定数量的距离</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/WNPmNpj">导航条 -
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/WNPmNpj">导航条 -
         CodePen</a></dd>
     <dd>.鼠标悬停 :hover</dd>
     <dd>.过渡动画 transition</dd>
     <dd>.变换 transform</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html#msg"><a
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html#msg"><a
           href="https://codepen.io/glpla/full/QWYoLPK">获取焦点focus时重复播放动画 - CodePen</a>；更多案例，请访问<a
           href="./demo/login1.html">登陆Login</a>
     </dd>
@@ -140,24 +211,21 @@ transition-delay:        </pre>
     <dd>.定位</dd>
     <dd>.获取焦点选择器 :focus</dd>
     <dd>.数据有效选择器 :valid</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a
-        href="https://codepen.io/glpla/full/JjwBLdg">表单元素自定义 - CodePen</a>更多案例，请访问<a
-        href="./position.html#ipt">Form-checkbox</a></dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/KKJEwQE">侧边栏导航
+
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/KKJEwQE">侧边栏导航
         - CodePen</a></dd>
     <dd>.适合桌面端</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html">个人网站 - banner滑动</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html">个人网站 - banner滑动</a></dd>
     <dd>背景图片尺寸比容器大</dd>
     <dd>初始态背景图片位于左上</dd>
     <dd>鼠标悬停hover时，背景图标位于右上</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 主导航 - 见当前页面顶部</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 主导航 - 见当前页面顶部</dd>
     <dd>利用导航项的伪元素实现底部渐变</dd>
     <dd>初始态宽度为0</dd>
     <dd>鼠标悬停hover时，宽度为100%</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 圆角导航<a
-        href="./border.html#border-radius">border-radius</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 圆角导航<a href="./border.html#border-radius">border-radius</a></dd>
 
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 个人信息卡 - 慢进1s快退0.5s</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 个人信息卡 - 慢进1s快退0.5s</dd>
     <dd class="basic info-card">
       <img src="./imgs/bg.jpg" alt="">
       <div class="icons">
@@ -332,7 +400,7 @@ transition-delay:        </pre>
       <div class="step-title">steps(5,start)</div>
       <div class="step-demo-start"></div>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] loading进度条 - 从0到100%</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] loading进度条 - 从0到100%</dd>
     <dd>. 先加载再更新，所以应使用默认的end方向</dd>
     <dd>. 为了避免状态翻转，在结束态中指定过渡</dd>
     <dd>

@@ -1,5 +1,5 @@
 @import url(//at.alicdn.com/t/c/font_3859342_p81mmr5xq8.css);
-@import url(../css/fonts_Quicksand.css);
+@import url(../css/fonts_Roboto.css);
 
 :root {
   --main-color: #ff7b00;
@@ -11,6 +11,7 @@
   --bar-color: #4bc2ce;
   --bar-color-light: #1b9fab;
   --main-color-yellow: #f1c40f;
+  --yellow-color: #f1c40f;
   --tips-warn-color: rgba(255, 93, 115, 0.2);
   --tips-warn-bold-color: #ff5d73;
   --w-width: 1024px;
@@ -52,7 +53,7 @@ video {
   padding: 0;
   font-weight: normal;
   box-sizing: border-box;
-  font-family: Quicksand, "微软雅黑", "Microsoft YaHei", Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', 'Quicksand', "微软雅黑", "Microsoft YaHei", Arial, Helvetica, sans-serif;
 }
 
 html {
@@ -120,18 +121,20 @@ header::after {
 
 .nav {
   display: flex;
-  gap: 10px;
+  gap: var(--p-m-g);
   margin-left: auto;
 }
 
 .nav-item {
   color: #fff;
   text-decoration: none;
-  padding: 0 10px;
+  padding: 0 var(--p-m-g);
+  font-size: 1.6rem;
 }
 
+.nav-item.active,
 .nav-item:hover {
-  color: #ff0;
+  color: var(--yellow-color);
 }
 
 .ham {
@@ -237,7 +240,6 @@ figure img {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  font-family: 'Quicksand';
   font-size: 1.8rem;
   height: var(--chap-h);
   padding: var(--padding);
@@ -266,7 +268,6 @@ pre {
   color: #dcdcaa;
   padding: 1rem;
   font-size: 16px;
-  font-family: 'Quicksand', Helvetica, sans-serif;
   background-color: #000;
   border-radius: 6px;
   overflow: auto;
@@ -493,14 +494,49 @@ iframe {
 
   header {
     height: 10vh;
+    align-items: center;
     top: 0;
   }
 
+
   .ham {
     display: block;
-    color: #fff;
-    font-size: 2rem;
+    position: relative;
+    width: 30px;
+    height: 4px;
+    background-color: var(--yellow-color);
     margin-left: auto;
+  }
+
+  .ham::before,
+  .ham::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--yellow-color);
+    transform-origin: 50% center;
+    transition: 0.2s;
+  }
+
+  .ham::before {
+    transform: translateY(-8px);
+  }
+
+  .ham::after {
+    transform: translateY(8px);
+  }
+
+  .ham.active {
+    background-color: transparent;
+  }
+
+  .ham.active::before {
+    transform: translateY(0px) rotate(-45deg);
+  }
+
+  .ham.active::after {
+    transform: translateY(0px) rotate(45deg);
   }
 
   .nav {
