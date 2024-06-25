@@ -9,6 +9,11 @@
   <!-- <script src="/lib/snowstorm-min.js"></script> -->
   <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4061940_5dk751xqv4l.css">
   <style>
+    :root {
+      --main-color: #f40;
+      --p-m-g: 10px;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -20,99 +25,106 @@
     }
 
     a {
-      display: block;
       font: inherit;
       color: inherit;
       text-decoration: none;
     }
 
     body {
-      /* display: grid;
-      place-items: center;
-      height: 100vh; */
+      display: flex;
       background-color: #000;
+      color: #fff;
+      font-size: 15px;
+      height: 100vh;
     }
 
-    .nav-menu {
+    .nav-wrap {
+      display: flex;
+      gap: var(--p-m-g);
       width: 100%;
       max-width: 350px;
+      margin: auto;
+      line-height: 2;
     }
 
-    .nav-list {}
+    .nav {
+      position: relative;
+    }
 
-    .nav-link {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #131925;
-      padding: 1.25rem 1.5rem;
-      color: #fff;
-      transition: .4s;
+    .nav-item {
+      text-transform: capitalize;
       cursor: pointer;
     }
 
-    .nav-link:hover {
-      background-color: #191f2b;
-    }
-
-    .dropdown-menu {
-      max-height: 0;
+    .sub-nav {
+      position: absolute;
+      height: 0;
+      opacity: 0;
       overflow: hidden;
-      transition: .4s;
-    }
-
-    .down-arr {
-      transition: .4s;
-    }
-
-    .dropdown-link {
-      padding: 1.25rem 1.25rem 1.25rem 2.5rem;
-      color: #fff;
-      background-color: #191f2b;
       transition: 0.4s;
     }
 
-    .dropdown-link:hover {
-      background-color: #131925;
+    .sub-nav-item:hover {
+      color: #f40;
     }
 
-    .dropdown-item:hover .dropdown-menu {
-      max-height: 1000px;
+    .nav:hover .nav-item {
+      color: var(--main-color);
     }
 
-    .dropdown-item:hover .down-arr {
-      transform: rotate(180deg);
+    .nav:hover .sub-nav {
+      height: auto;
+      opacity: 1;
+    }
+
+    .nav-item:has(+.sub-nav)::after {
+      content: '\003E';
     }
   </style>
 </head>
 
 <body>
-  <div class="nav-menu">
-    <ul class="nav-list">
-      <li><a class="nav-link" href="">home</a> </li>
-      <li class="dropdown-item">
-        <div class="nav-link">work<span class="iconfont icon-downwards-arrow-key down-arr"></span></div>
-        <nav class="dropdown-menu">
-          <a class="dropdown-link" href="">Lorem.</a>
-          <a class="dropdown-link" href="">Excepturi.</a>
-          <a class="dropdown-link" href="">Repudiandae!</a>
-          <a class="dropdown-link" href="">Enim.</a>
-          <a class="dropdown-link" href="">Est!</a>
-        </nav>
-      </li>
-      <li class="dropdown-item">
-        <div class="nav-link">info<span class="iconfont icon-downwards-arrow-key down-arr"></span></div>
-        <nav class="dropdown-menu">
-          <a class="dropdown-link" href="">Lorem.</a>
-          <a class="dropdown-link" href="">Excepturi.</a>
-          <a class="dropdown-link" href="">Repudiandae!</a>
-          <a class="dropdown-link" href="">Enim.</a>
-          <a class="dropdown-link" href="">Est!</a>
-        </nav>
-      </li>
-      <li><a class="nav-link" href="">team</a> </li>
-      <li><a class="nav-link" href="">about</a> </li>
-    </ul>
+  <div class="nav-wrap">
+    <div class="nav">
+      <div class="nav-item">home</div>
+      <nav class="sub-nav">
+        <a class="sub-nav-item" href="">Lorem.</a>
+        <a class="sub-nav-item" href="">Sed.</a>
+        <a class="sub-nav-item" href="">Eligendi!</a>
+        <a class="sub-nav-item" href="">Cumque?</a>
+        <a class="sub-nav-item" href="">Eligendi?</a>
+        <a class="sub-nav-item" href="">Sed?</a>
+      </nav>
+    </div>
+    <div class="nav">
+      <div class="nav-item">team</div>
+      <nav class="sub-nav">
+        <a class="sub-nav-item" href="">Lorem.</a>
+        <a class="sub-nav-item" href="">Sed.</a>
+        <a class="sub-nav-item" href="">Eligendi!</a>
+        <a class="sub-nav-item" href="">Cumque?</a>
+      </nav>
+    </div>
+    <div class="nav">
+      <div class="nav-item">work</div>
+      <nav class="sub-nav">
+        <a class="sub-nav-item" href="">Lorem.</a>
+        <a class="sub-nav-item" href="">Sed.</a>
+        <a class="sub-nav-item" href="">Eligendi!</a>
+        <a class="sub-nav-item" href="">Cumque?</a>
+      </nav>
+    </div>
+    <div class="nav">
+      <div class="nav-item">info</div>
+      <nav class="sub-nav">
+        <a class="sub-nav-item" href="">Lorem.</a>
+        <a class="sub-nav-item" href="">Sed.</a>
+        <a class="sub-nav-item" href="">Eligendi!</a>
+      </nav>
+    </div>
+    <div class="nav">
+      <a class="nav-item" href="">about</a>
+    </div>
   </div>
 </body>
 

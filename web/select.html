@@ -17,17 +17,19 @@
     <span>&commat;&lt;select&gt;</span>
   </header>
   <dl>
-    <dd>. 配合 &lt;option&gt; 使用；其子元素只能是 &lt;option&gt;</dd>
-    <dd>. name-value比较特别。name写在 &lt;select&gt;；value 写在 &lt;option&gt;，也可以省略 value，系统会把 &lt;option&gt; 的值自动作为value</dd>
-    <dd>. &lt;select&gt;的宽度决定了&lt;option&gt;的宽度</dd>
-    <dd>. 可以单独设置 &lt;select&gt; 和 &lt;option&gt; 的字体颜色、大小，其它可以设置的属性比较少</dd>
-    <dd>. &lt;option&gt; 很难动态增加或减少</dd>
-    <dd>. 使用 &lt;optgroup&gt; 分组；分组标题不能选择，仅仅作为提示</dd>
-    <dd>. 默认样式极其丑陋；指定 appearance: none; 可以去掉默认的小箭头以便重新设计样式</dd>
-    <dd>. 如果需要动态增加或减少选项，需要从头定制。如利用无序列表实现选项；更多设计技巧，请访问 <a href="https://www.filamentgroup.com/lab/select-css.html">making
-        a better one</a>
-    </dd>
     <dd>
+      <div>. 配合 &lt;option&gt; 使用；其子元素只能是 &lt;option&gt;</div>
+      <div>. name-value比较特别。name写在 &lt;select&gt;；value 写在 &lt;option&gt;，也可以省略 value，系统会把 &lt;option&gt; 的值自动作为value
+      </div>
+      <div>. &lt;select&gt;的宽度决定了&lt;option&gt;的宽度</div>
+      <div>. 可以单独设置 &lt;select&gt; 和 &lt;option&gt; 的字体颜色、大小，其它可以设置的属性比较少</div>
+      <div>. &lt;option&gt; 很难动态增加或减少</div>
+      <div>. 使用 &lt;optgroup&gt; 分组；分组标题不能选择，仅仅作为提示</div>
+      <div>. 默认样式极其丑陋；指定 appearance: none; 可以去掉默认的小箭头以便重新设计样式</div>
+      <div>. 如果需要动态增加或减少选项，需要从头定制。如利用无序列表实现选项；更多设计技巧，请访问 <a
+          href="https://www.filamentgroup.com/lab/select-css.html">making
+          a better one</a>
+      </div>
       <table>
         <caption>属性</caption>
         <tr>
@@ -65,7 +67,8 @@
         <option value="foshan">佛山</option>
         <option value="haikou" selected>海口</option>
         <option value="foshan">东莞</option>
-      </select></dd>
+      </select>
+    </dd>
     <dd>
       <pre>
 &lt;select name="school" id="school-single"&gt;
@@ -78,6 +81,38 @@
 let single = document.querySelector("#school-single")
 single.addEventListener('change', function () {
     console.log(this.value);
+})</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 分组-&lt;optgroup&gt; <select name="school" id="school-mul">
+        <optgroup label="college">
+          <option value="guilin">guilin</option>
+          <option value="xiamen">xiamen</option>
+          <option value="foshan">foshan</option>
+          <option value="haikou" selected>haikou</option>
+        </optgroup>
+        <optgroup label="unit">
+          <option value="gl">gl</option>
+          <option value="sh">sh</option>
+        </optgroup>
+      </select></dd>
+    <dd>
+      <pre>
+&lt;select name="school" id="school-mul"&gt;
+  &lt;optgroup label="college"&gt;
+      &lt;option value="guilin"&gt;guilin&lt;/option&gt;
+      &lt;option value="xiamen"&gt;xiamen&lt;/option&gt;
+      &lt;option value="foshan"&gt;foshan&lt;/option&gt;
+      &lt;option value="haikou" selected&gt;haikou&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label="unit"&gt;
+      &lt;option value="gl"&gt;gl&lt;/option&gt;
+      &lt;option value="sh"&gt;sh&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;</pre>
+      <pre>
+let mul = document.querySelector("#school-mul")
+mul.addEventListener('change', function () {
+  console.log(this.value);
 })</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 元素遮罩法 - 只显示长的备选信息中的关键信息</dd>
@@ -114,40 +149,9 @@ single.addEventListener('change', function () {
       <div>增加JS；一开始获取&lt;select&gt;的值给遮罩元素mask</div>
       <div>为&lt;select&gt;增加change事件，每次改变时修改遮罩mask的文本</div>
       <div>增加其它设计，如:hover</div>
-      <div>更多设计细节，请参考<a href="https://login.taobao.com/">天猫登录页面</a>、<a href="./demo/login.html">淘宝高仿</a></div>
+      <div>更多设计细节，请参考<a href="https://login.taobao.com/">天猫登录页面</a>、<a href="./demo/login_taobao.html">淘宝高仿</a></div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 分组-&lt;optgroup&gt; <select name="school" id="school-mul">
-        <optgroup label="college">
-          <option value="guilin">guilin</option>
-          <option value="xiamen">xiamen</option>
-          <option value="foshan">foshan</option>
-          <option value="haikou" selected>haikou</option>
-        </optgroup>
-        <optgroup label="unit">
-          <option value="gl">gl</option>
-          <option value="sh">sh</option>
-        </optgroup>
-      </select></dd>
-    <dd>
-      <pre>
-&lt;select name="school" id="school-mul"&gt;
-    &lt;optgroup label="college"&gt;
-        &lt;option value="guilin"&gt;guilin&lt;/option&gt;
-        &lt;option value="xiamen"&gt;xiamen&lt;/option&gt;
-        &lt;option value="foshan"&gt;foshan&lt;/option&gt;
-        &lt;option value="haikou" selected&gt;haikou&lt;/option&gt;
-    &lt;/optgroup&gt;
-    &lt;optgroup label="unit"&gt;
-        &lt;option value="gl"&gt;gl&lt;/option&gt;
-        &lt;option value="sh"&gt;sh&lt;/option&gt;
-    &lt;/optgroup&gt;
-&lt;/select&gt;</pre>
-      <pre>
-let mul = document.querySelector("#school-mul")
-mul.addEventListener('change', function () {
-    console.log(this.value);
-})</pre>
-    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 定制 <a href="./demo/select.html">下拉列表</a></dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer"
     onload="this.height=this.contentDocument.body.scrollHeight"></iframe>
