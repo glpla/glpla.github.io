@@ -30,8 +30,8 @@
             <pre>import { ref } from 'vue'</pre>
         </dd>
         <dt>获取普通DOM</dt>
-        <dd>返回DOM节点</dd>
         <dd>
+            <div>返回DOM节点</div>
             <pre>
 &lt;script setup&gt;
     import { ref, onMounted } from 'vue'
@@ -58,11 +58,11 @@
 &lt;style scoped&gt;&lt;/style&gt;</pre>
         </dd>
         <dt>获取组件</dt>
-        <dd>返回组件实例</dd>
-        <dd>默认情况下，组件内部的属性和方法对外部不公开，所以获取到的ref仅仅是一个代理对象，看不到组件的内部细节</dd>
-        <dd>组件需要显示的暴露属性或方法defineExpose</dd>
-        <dd>defineExpose应该写在暴露的对象后面</dd>
         <dd>
+            <div>返回组件实例</div>
+            <div>默认情况下，组件内部的属性和方法对外部不公开，所以获取到的ref仅仅是一个代理对象，看不到组件的内部细节</div>
+            <div>组件需要显示的暴露属性或方法defineExpose</div>
+            <div>defineExpose应该写在暴露的对象后面</div>
             <pre>
 &lt;template&gt;
     &lt;div @click="getTitle"&gt;only for test - {{ title }}&lt;/div&gt;
@@ -86,6 +86,26 @@
             <div>尽量避免通过ref引用组件，请组件的通信机制实现 props和emit，详见后续组件内容</div>
             <div>Remember that accessing a child component's data directly using refs can make your components tightly
                 coupled. Consider using props and events for communication between components</div>
+        </dd>
+        <dd class="example-sn">页面滚动时，变换顶部导航样式，如添加阴影</dd>
+        <dd>
+            <div>为顶部元素指定ref，在页面加载时使用，并监听页面的滚动事件</div>
+            <div>页面卸载时，移除事件监听</div>
+            <pre>
+import { ref, onMounted, onUnmounted } from 'vue'
+const header = ref(null)
+onMounted(() => {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.value.classList.add('active')
+        } else {
+            header.value.classList.remove('active')
+        }
+    })
+})
+onUnmounted(() => {
+    window.removeEventListener('scroll', () => { })
+})</pre>
         </dd>
         <dd class="example-sn">自定义搜索组件，单击时，显示并自动获取焦点</dd>
         <dd>搜索组件参考设计如下</dd>

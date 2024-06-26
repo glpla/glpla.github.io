@@ -38,12 +38,12 @@
           <th>说明</th>
         </tr>
         <tr>
-          <td>scrollY</td>
-          <td>页面到window的顶部偏移；同DOM的scrollTop</td>
+          <td>pageYOffset</td>
+          <td>浏览器窗口在垂直方向上滚动的距离；W3C 标准</td>
         </tr>
         <tr>
-          <td>pageYOffset</td>
-          <td>window的页面顶部偏移</td>
+          <td>scrollY</td>
+          <td>浏览器窗口在垂直方向上滚动的距离；非标准，适合 WebKit/Safari、Blink/Chrome<br>作为pageYOffset 的替代方案，但是现在非常普遍且稳定</td>
         </tr>
         <tr>
           <td>innerHeight</td>
@@ -66,6 +66,33 @@
             "Netscape" 是 IE11、Chrome、Firefox 以及 Safari 的应用程序名称的统称。</td>
         </tr>
       </table>
+    </dd>
+    <dd class="tips">
+      <div>DOM的 scrollTop：元素内部滚动条的滚动位置，而不是视口的滚动位置。它是相对于元素内容滚动的距离</div>
+      <div>页面滚动检测使用 pageYOffset 或 scrollY</div>
+      <div>元素滚动检测使用 scrollTop</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 根据页面的滚动，添加特定效果；如显式菜单、转换菜单</dd>
+    <dd>
+      <pre>
+window.addEventListener("scroll",  () => {
+  let header = document.querySelector("header");
+  header.classList.toggle("active", window.scrollY > 200);
+})      </pre>
+      <pre>
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: 1280px;
+  background-color: #fff;
+  transition: .4s;
+  z-index: 99;
+}
+
+header.hover {
+  background-color: #111;
+}</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>]
       在开发者视图中查看当前页面location、history、Navigator信息，并使用history前进forward()和后退back()浏览页面</dd>
