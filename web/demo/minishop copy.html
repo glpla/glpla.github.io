@@ -51,7 +51,6 @@
         return this.choose > 0;
       }
     }
-
     // 界面数据类 UIData
     class UIData {
       constructor() {
@@ -63,7 +62,6 @@
         this.deliveryThreshold = 30;
         this.deliveryFee = 5;
       }
-
       getTotalPrice() {
         // let sum = this.UIGoods.reduce((acc, cur) => {
         //   return acc + cur.getTotalPrice;
@@ -74,7 +72,6 @@
         }
         return sum;
       }
-
       getTotalNumber() {
         // let sum = this.UIGoods.reduce((acc, cur) => {
         //   return acc + cur.choose;
@@ -85,24 +82,19 @@
         }
         return sum;
       }
-
       hasGoodsInCart() {
         return this.getTotalNumber() > 0;
       }
-
       isCrossThreshold() {
         return this.getTotalPrice() >= this.deliveryThreshold;
       }
-
       // 封装；避免直接使用子对象的方法
       isChoose(ind) {
         return this.UIGoods[ind].isChoose();
       }
-
       increase(ind) {
         this.UIGoods[ind].inc();
       }
-
       decrease(ind) {
         this.UIGoods[ind].dec();
       }
@@ -133,7 +125,6 @@
           y: target.top + target.height / 2
         }
       }
-
       // 各种监听器
       listener() {
         this.doms.cart.addEventListener('animationend', function () {
@@ -142,7 +133,6 @@
           this.doms.cart.classList.remove('cart-active')
         })
       }
-
       createListDOM() {
         this.doms.goodsList.innerHTML = this.uiDate.UIGoods.map((item, ind) => {
           // 输出不能回车
@@ -170,7 +160,6 @@
           `
         }).join('')
       }
-
       increaseUI(ind) {
         this.uiDate.increase(ind);
         this.updateUI(ind);
@@ -183,7 +172,6 @@
         this.updateUI(ind);
         this.updateFooter();
       }
-
       updateUI(ind) {
         let item = this.doms.goodsList.children[ind];
         if (this.uiDate.isChoose(ind)) {
@@ -194,7 +182,6 @@
         let itemNum = item.querySelector('span');
         itemNum.textContent = this.uiDate.UIGoods[ind].choose;
       }
-
       updateFooter() {
         let total = this.uiDate.getTotalPrice();
         this.doms.total.textContent = total;
@@ -208,11 +195,9 @@
           this.doms.diff.textContent = diff;
         }
       }
-
       animateCart() {
         this.doms.cart.classList.add('cart-active')
       }
-
       // 购物车特效
       jump(ind) {
         let target = this.doms.goodsList.children[ind].querySelector('.btn-inc').getBoundingClientRect()
@@ -222,9 +207,7 @@
         }
       }
     }
-
     let ui = new UI();
-
     ui.doms.goodsList.addEventListener('click', (e) => {
       if (e.target.classList.contains('btn-inc')) {
         ui.increaseUI(e.target.getAttribute('ind'));
