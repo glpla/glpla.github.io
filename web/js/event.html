@@ -181,19 +181,27 @@ ta.addEventListener('blur', (e) => {
     <dd>.三个阶段：捕获阶段 capture phrase → 当前目标阶段 target phrase → 冒泡阶段 bubbling phrase</dd>
     <dd>.当点击页面的一个元素的时候，事件会从这个元素的祖先元素逐层传递下来 - 捕获；当事件传递到这个元素之后 - 目标，触发事件本身的程序内容；然后又会把事件逐层传递回去 - 冒泡，直到根元素为止</dd>
     <dd>.先捕获事件才能处理；事件捕获：网景提出；事件冒泡：微软提出|IE提出</dd>
-    <dd>.JS代码只能执行冒泡或捕获中的一个阶段</dd>
-    <dd>.事件冒泡是默认行为。这意味着，如果你在一个子元素|组件上绑定了一个事件，当该事件被触发时，它会沿着DOM|组件树向上冒泡，直到到达根节点|根组件</dd>
+    <dd>.JS代码 <span class="warn">只能</span> 执行冒泡或捕获中的一个阶段</dd>
+    <dd>.事件默认行为 <span class="warn">冒泡</span>：如果在一个子元素|组件上绑定了一个事件，当该事件被触发时，它会沿着DOM|组件树向上冒泡，直到到达根节点|根组件</dd>
     <dd>.事件捕获是指当一个元素上的事件被触发时，它会从文档的根节点开始，向下传播，直到到达目标元素</dd>
-    <dd>.使用e.stopPropagation|e.cancelBubble可以取消冒泡</dd>
+    <dd>.使用e.stopPropagation | e.cancelBubble可以取消冒泡</dd>
     <dd class="tips">
-      <div>stopPropagation和cancelBubble都可以阻止浏览器默认的事件冒泡行为</div>
-      <div>cancelBubble方法不符合W3C标准，只支持IE浏览</div>
-      <div>stopPropagation符合W3C标准，适用于FireFox等浏览器，不支持IE</div>
+      <div>stopPropagation 和 cancelBubble 都可以阻止浏览器默认的事件冒泡行为</div>
+      <div>cancelBubble 方法不符合W3C标准，只支持IE浏览</div>
+      <div>stopPropagation 符合W3C标准，适用于FireFox等浏览器，不支持IE</div>
     </dd>
-    <dt>target vs currentTarget</dt>
-    <dd>target - 在事件流的目标阶段</dd>
-    <dd>currentTarget - 在事件流的捕获，目标及冒泡阶段。只有当事件流处在目标阶段的时候，两个的指向才是一样的，
-      而当处于捕获和冒泡阶段的时候，target指向被单击的对象；currentTarget指向当前事件活动的对象（一般为父级）</dd>
+    <dt>target</dt>
+    <dd>
+      <div>在事件流的目标阶段，即哪个元素直接触发了事件或谁响应了事件，再通俗点，你点的谁，谁就是target</div>
+      <div>事件最初发生的那个DOM元素，即实际接收事件的源头元素。无论事件是否经过了冒泡或捕获阶段，target始终指向最初触发事件的元素</div>
+    </dd>
+    <dt>currentTarget</dt>
+    <dd>
+      <div>在事件流的捕获，目标及冒泡阶段</div>
+      <div>当前正在处理事件的DOM元素</div>
+      <div>只有当事件流处在目标阶段的时候，两个的指向才是一样的</div>
+      <div>当处于捕获和冒泡阶段的时候，target指向被单击的对象；currentTarget指向当前事件活动的对象（一般为父级）</div>
+    </dd>
   </dl>
   <div class="chap">默认事件 default</div>
   <dl>

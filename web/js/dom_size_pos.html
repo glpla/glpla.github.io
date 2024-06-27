@@ -55,6 +55,33 @@ console.log(document.documentElement.clientHeight);//实际上是视口高度；
       <div>1. 为当前元素的父级[如果有]指定定位属性；如果没有，就额外增加1个容器</div>
       <div>2. 使用getBoundingClientRect()</div>
     </dd>
+    <dd class="example-sn"> <a href="https://codepen.io/glpla/full/gOEpdLo">联动导航</a></dd>
+    <dd>
+      <div>使用&lt;a&gt;导航</div>
+      <div>页面滚动时，可以触发对应的导航项</div>
+      <div>如果页面滚动的距离 scrollDown 大于目标元素的顶部距离 itemTop，并且同时小于等于目标元素的顶部距离加上其自身高度</div>
+      <div>多见于移动端</div>
+      <div>也可以使用第三方库实现</div>
+      <div>每次滚动都会触发循环检测，如何节流？</div>
+      <pre>
+const sections = document.querySelectorAll('section[id]');
+
+const scrollActive = () => {
+  const scrollDown = window.scrollY;
+  sections.forEach(item => {
+    const itemH = item.offsetHeight;
+    const itemTop = item.offsetTop - 60;
+    const itemId = item.getAttribute('id');
+    const itemClass = document.querySelector('nav a[href*=' + itemId + ']');
+    if (scrollDown > itemTop && scrollDown <= itemTop + itemH) {
+      itemClass.classList.add('active');
+    } else {
+      itemClass.classList.remove('active');
+    }
+  })
+}
+window.addEventListener('scroll', scrollActive);      </pre>
+    </dd>
     <dd class="example-sn"> <a href="https://codepen.io/glpla/full/gOEpdLo">波纹按钮</a></dd>
     <dd>.单击按钮，持续产生波纹，一定时间后消失</dd>
     <dd>.按钮使用相对定位relative，为后续新增加节点提供定位依据</dd>
