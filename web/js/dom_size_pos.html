@@ -32,7 +32,7 @@
     <dd>clientLeft：一个元素左边框的宽度；clientLeft = boder.left(左边框的宽度)</dd>
     <dd class="example-sn">获取页面|文档窗口大小 - 在开发者视图中刷新并查看</dd>
     <dd>
-      <figure class="code">
+      <figure>
         <figcaption>Client系列</figcaption>
         <pre>
 console.log(document.body.clientHeight);//body高度；如果在body样式中指定了高度，就是这个值
@@ -83,16 +83,18 @@ const scrollActive = () => {
 window.addEventListener('scroll', scrollActive);      </pre>
     </dd>
     <dd class="example-sn"> <a href="https://codepen.io/glpla/full/gOEpdLo">波纹按钮</a></dd>
-    <dd>.单击按钮，持续产生波纹，一定时间后消失</dd>
-    <dd>.按钮使用相对定位relative，为后续新增加节点提供定位依据</dd>
-    <dd>.为按钮添加鼠标点击事件</dd>
-    <dd>.利用clientX和clientY获取鼠标事件到视图view的偏移</dd>
-    <dd>.利用getBoundingClientRect()获取鼠标事件对象即元素到视图view的偏移</dd>
-    <dd>.根据两者之差得到鼠标点击点在元素上的位置</dd>
-    <dd>.创建元素节点，并指定样式：绝对定位、帧动画keyframe等等</dd>
-    <dd>.延时删除新增加的元素节点setTimeout；延时时间和动画时间保持一致</dd>
-    <dd>.其它设计： 取消按钮文件的选择；取消新增节点的事件响应</dd>
-    <dd>[ <span class="iconfont icon-bell"></span> ] 频繁创建元素节点对系统资源的消耗</dd>
+    <dd>
+      <div>.单击按钮，持续产生波纹，一定时间后消失</div>
+      <div>.按钮使用相对定位relative，为后续新增加节点提供定位依据</div>
+      <div>.为按钮添加鼠标点击事件</div>
+      <div>.利用clientX和clientY获取鼠标事件到视图view的偏移</div>
+      <div>.利用getBoundingClientRect()获取鼠标事件对象即元素到视图view的偏移</div>
+      <div>.根据两者之差得到鼠标点击点在元素上的位置</div>
+      <div>.创建元素节点，并指定样式：绝对定位、帧动画keyframe等等</div>
+      <div>.延时删除新增加的元素节点setTimeout；延时时间和动画时间保持一致</div>
+      <div>.其它设计： 取消按钮文件的选择；取消新增节点的事件响应</div>
+      <div>[ <span class="iconfont icon-bell"></span> ] 频繁创建元素节点对系统资源的消耗</div>
+    </dd>
     <dd class="example-sn"><a href="https://codepen.io/glpla/full/XWGbKwv">手电筒 - CodePen</a>、<a
         href="https://codepen.io/glpla/full/bGZdXEM">探照灯 - CodePen</a></dd>
     <dd>.鼠标移动事件</dd>
@@ -100,32 +102,40 @@ window.addEventListener('scroll', scrollActive);      </pre>
   <div class="chap">元素位置</div>
   <dl class="nav-cont">
     <dt>说明</dt>
-    <dd>鼠标事件MouseEvent相关的位置属性</dd>
-    <dd>页面 page：整个HTML5页面；不包括浏览器的收藏夹栏、地址栏、状态栏</dd>
-    <dd>视图 view：也称视口，页面可见区域；不包括浏览器的收藏夹栏、地址栏、状态栏等</dd>
-    <dd>屏幕 screen：你的显示器；包括浏览器的收藏夹栏、地址栏、状态栏</dd>
+    <dd>
+      <div>鼠标事件MouseEvent相关的位置属性</div>
+      <div>页面 page：整个HTML5页面；不包括浏览器的收藏夹栏、地址栏、状态栏</div>
+      <div>视图 view：也称视口，页面可见区域；不包括浏览器的收藏夹栏、地址栏、状态栏等</div>
+      <div>屏幕 screen：你的显示器；包括浏览器的收藏夹栏、地址栏、状态栏</div>
+    </dd>
     <dt>Page系列</dt>
-    <dd>只读属性</dd>
-    <dd>鼠标事件MouseEvent相关</dd>
-    <dd>MouseEvent.pageX、MouseEvent.pageY：返回触发事件的位置相对于整个 document 的 X、Y 坐标值</dd>
-    <dd>始终以页面为参考，即使页面出现滚动条</dd>
+    <dd>
+      <div>只读属性</div>
+      <div>鼠标事件MouseEvent相关</div>
+      <div>MouseEvent.pageX、MouseEvent.pageY：返回触发事件的位置相对于整个 document 的 X、Y 坐标值</div>
+      <div>始终以页面为参考，即使页面出现滚动条</div>
+    </dd>
     <dt>Screen系列</dt>
-    <dd>只读属性；和浏览器无关；和<span class="warn">硬件</span>有关</dd>
-    <dd>鼠标事件MouseEvent相关</dd>
-    <dd>MouseEvent.screenX、MouseEvent.screenY</dd>
-    <dd>元素在屏幕screen上的位置，以屏幕为参考</dd>
-    <dd>浏览器窗口化或移动时，都会导致数值发生变化</dd>
-    <dd>screenY通常取不到0，因为一般的窗口都有状态栏、菜单栏、工具栏等区域</dd>
+    <dd>
+      <div>只读属性；和浏览器无关；和<span class="warn">硬件</span>有关</div>
+      <div>鼠标事件MouseEvent相关</div>
+      <div>MouseEvent.screenX、MouseEvent.screenY</div>
+      <div>元素在屏幕screen上的位置，以屏幕为参考</div>
+      <div>浏览器窗口化或移动时，都会导致数值发生变化</div>
+      <div>screenY通常取不到0，因为一般的窗口都有状态栏、菜单栏、工具栏等区域</div>
+    </dd>
     <dt>scroll系列</dt>
     <dd>请查看<a href="./scroll.html" class="link">Scroll</a></dd>
     <dt>getBoundingClientRect()方法</dt>
-    <dd>.只读属性</dd>
-    <dd>.获取元素位置的高频操作；用了都说好</dd>
-    <dd>.返回一个 DOMRect 对象，其提供了元素的大小及其相对于 <span class="warn">视口</span> 的位置</dd>
-    <dd>.描述整个矩形的位置和大小：left、top、right、bottom、x、y、width 、height</dd>
+    <dd>
+      <div>.只读属性</div>
+      <div>.获取元素位置的高频操作；用了都说好</div>
+      <div>.返回一个 DOMRect 对象，其提供了元素的大小及其相对于 <span class="warn">视口</span> 的位置</div>
+      <div>.描述整个矩形的位置和大小：left、top、right、bottom、x、y、width 、height</div>
+    </dd>
     <dd class="example-sn"> 窗口滚动scroll时，查看红色矩形顶部到视口的距离</dd>
     <dd class="rect" style="width: 180px;height: 180px;background-color: #f40;margin: 2rem auto;"></dd>
-    <dd class="code">
+    <dd>
       <pre>
 let rect = document.querySelector('.rect')
 window.onscroll = () => {
@@ -148,19 +158,16 @@ window.onscroll = () => {
       error ad, doloribus quidem explicabo ex, consequuntur iure consequatur nobis deleniti. Laborum obcaecati
       exercitationem earum aut odio. Ex dolorum praesentium harum pariatur consequuntur dolore aspernatur ut quo autem
       necessitatibus! Nesciunt sunt, molestias explicabo quod quibusdam illo. Esse, deserunt tenetur?</dd>
-    <dd class="example-sn">懒加载<a href="./lazyLoad.html" class="link">LazyLoading</a></dd>
+    <dd class="example-sn"><a href="./lazyLoad.html" class="link">懒加载 - LazyLoading</a></dd>
     <dd>思路：判断元素的顶部是否进入指定位置，如元素快进入视口时|顶部比视口大一定的距离，则开始渲染，等元素进入视口时，正常展示</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="../lib/ham.js"></script>
   <script>
     let rect = document.querySelector('.rect')
-    console.log(rect);
     window.onscroll = () => {
       let obj = rect.getBoundingClientRect()
       console.log(obj.top);
-      console.log(rect.offsetTop);
-    }
+    }      
   </script>
 </body>
 

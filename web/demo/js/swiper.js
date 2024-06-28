@@ -30,6 +30,7 @@ function banner() {
     }, 500)
   }, 2000)
 }
+
 // 3D
 let oDot = document.getElementById('dot'),
   oPage = document.getElementById('page'),
@@ -38,7 +39,7 @@ let oDot = document.getElementById('dot'),
 for (let i = 0; i < oList.length; i++) {
   oList[i].onclick = function () {
     for (let j = 0; j < oSide.length; j++) {
-      oSide[j].style.transform = 'rotateX(-' + (i * 90) + 'deg)';
+      oSide[j].style.transform = 'rotateX(' + (i * 90) + 'deg)';
     }
     for (let j = 0; j < oList.length; j++) {
       oList[j].className = '';

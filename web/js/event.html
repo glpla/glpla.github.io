@@ -6,21 +6,29 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>事件 Event</title>
-  <link rel="stylesheet" href="../../css/common_202406.css">
+  <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
+  <style>
+    .btns {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+      height: 20vh;
+    }
+  </style>
 </head>
 
 <body>
-  <header></header>
-  <div class="header">
+  <header>
     <h1>事件</h1>
     <span>&commat;Event</span>
-  </div>
+  </header>
   <dl>
     <dt>传统事件 onXXX</dt>
-    <dd>.适合简单逻辑</dd>
-    <dd>.不符合结构、样式、行为分离原则，较少使用</dd>
     <dd>
+      <div>.适合简单逻辑</div>
+      <div>.不符合结构、样式、行为分离原则，较少使用</div>
       <table>
         <tr>
           <th>类别</th>
@@ -55,15 +63,15 @@
       <div>.可以携带参数</div>
       <div>.只能满足当前元素的需求</div>
       <div>.只能处理冒泡阶段</div>
-      <div>[<span class="iconfont icon-keyboard"></span>]完全耦合 - 全部写在结构中</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 完全耦合 - 全部写在结构中</div>
       <pre>&lt;div onclick="alert('hi,there.')"&gt;点击我&lt;/div&gt;</pre>
-      <div>[<span class="iconfont icon-keyboard"></span>]部分耦合 - 结构逻辑分离</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 部分耦合 - 结构逻辑分离</div>
       <pre>&lt;div onclick="fn()"&gt;点击我&lt;/div&gt;</pre>
       <pre>
 function fn() {
   alert('hi,there.')
 }</pre>
-      <div>[<span class="iconfont icon-keyboard"></span>]部分耦合 - 携带形参；参数类型可以是简单数据类型，也可以是复杂数据类型</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 部分耦合 - 携带形参；参数类型可以是简单数据类型，也可以是复杂数据类型</div>
       <pre>&lt;div onclick="fn_para({id:1,name:'glpla'})"&gt;点击我&lt;/div&gt;</pre>
       <pre>
 function fn_para(p) {
@@ -96,6 +104,35 @@ window.onload = function () {
     <dd class="tips">
       <div>如果使用箭头函数，则 this 指向为 window</div>
       <div>事件对象为形参，可以使用任何合法标识符，通常使用 e 或 event</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 换肤</dd>
+    <dd>
+      <div class="btns">
+        <div onclick="changeColor('#f40');changeBg('bg1.jpg')">#f40</div>
+        <div onclick="changeColor('#089');changeBg('bg2.jpg')">#089</div>
+        <div onclick="changeColor('#890');changeBg('bg3.jpg')">#089</div>
+      </div>
+      <div>同时指定多个带参事件</div>
+      <pre>
+&lt;div class="btns"&gt;
+  &lt;div onclick="changeColor('#f40');changeBg('bg1.jpg')"&gt;#f40&lt;/div&gt;
+  &lt;div onclick="changeColor('#089');changeBg('bg2.jpg')"&gt;#089&lt;/div&gt;
+  &lt;div onclick="changeColor('#890');changeBg('bg3.jpg')"&gt;#089&lt;/div&gt;
+&lt;/div&gt;      </pre>
+      <pre>
+  let btns = document.querySelector('.btns');
+  // function changeColor(color) {
+  //   btns.style.color = color;
+  // }
+  // function changeBg(bg) {
+  //   btns.style.backgroundImage = `URL(../imgs/${bg})`;
+  // }
+  const changeColor = (color) => {
+    btns.style.color = color;
+  }
+  const changeBg = (bg) => {
+    btns.style.backgroundImage = `URL(../imgs/${bg})`;
+  }</pre>
     </dd>
   </dl>
   <div class="chap">事件侦听 addEventListener</div>
@@ -248,6 +285,21 @@ a.addEventListener('click', (e) => {
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script>
+    let btns = document.querySelector('.btns');
+    // function changeColor(color) {
+    //   btns.style.color = color;
+    // }
+    // function changeBg(bg) {
+    //   btns.style.backgroundImage = `URL(../imgs/${bg})`;
+    // }
+    const changeColor = (color) => {
+      btns.style.color = color;
+    }
+    const changeBg = (bg) => {
+      btns.style.backgroundImage = `URL(../imgs/${bg})`;
+    }
+  </script>
 </body>
 
 </html>
