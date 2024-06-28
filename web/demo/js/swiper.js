@@ -32,9 +32,10 @@ function banner() {
 }
 
 // 3D
-let oDot = document.getElementById('dot'),
+let
   oPage = document.getElementById('page'),
-  oSide = oPage.getElementsByTagName('li'),
+  oSide = oPage.getElementsByClassName('seg-item'),
+  oDot = document.getElementById('dot'),
   oList = oDot.getElementsByTagName('li');
 for (let i = 0; i < oList.length; i++) {
   oList[i].onclick = function () {

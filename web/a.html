@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>&lt;a&gt; tag</title>
   <link rel="stylesheet" href="./css/styleNew.css">
-  <link rel="stylesheet" href="./css/sidebar.css">
   <link rel="stylesheet" href="./css/a.css">
+  <link rel="stylesheet" href="./css/sidebar.css">
   <link rel="stylesheet" href="../css/sn.css">
 </head>
 
@@ -30,41 +30,38 @@
     <div class="chap">简介</div>
     <dl class="item">
       <dt>说明</dt>
-      <dd>. 行盒inline</dd>
-      <dd>. 页面内部|锚点、页面之间的跳转</dd>
-      <dd>. 打开资源</dd>
-      <dd class="mt2">
+      <dd>
+        <div>. 行盒inline</div>
+        <div>. 页面内部|锚点、页面之间的跳转</div>
+        <div>. 打开资源</div>
         <figure class="img-sn">
           <img src="./imgs/anchor.png" alt="">
-          <figcaption>超链接&lt;a&gt;</figcaption>
+          <figcaption>超链接 &lt;a&gt;</figcaption>
         </figure>
-      </dd>
-      <dt>语法</dt>
-      <dd>
-        <figure class="code">
-          <pre>&lt;a href="" target="" title=""&gt; ... &lt;/a&gt;</pre>
-        </figure>
-      </dd>
-      <dd>href：链接的目标URL；注意相对路径和绝对路径的使用</dd>
-      <dd>target：打开目标URL的位置</dd>
-      <dd>title：鼠标移入后，给出提示，改善用户体验</dd>
-      <dd>
+        <pre>&lt;a href="" target="" title=""&gt; ... &lt;/a&gt;</pre>
+        <div>href：链接的目标URL；注意相对路径和绝对路径的使用</div>
+        <div>target：打开目标URL的位置</div>
+        <div>title：鼠标移入后，给出提示，改善用户体验</div>
         <table class="tbl-sn">
           <caption>href属性</caption>
           <tr>
-            <th>类别</th>
+            <th style="width: 30%;">类别</th>
             <th>说明</th>
           </tr>
           <tr>
-            <td>当前页面锚点</td>
-            <td>#id</td>
+            <td>内部页面</td>
+            <td>about.html</td>
           </tr>
           <tr>
-            <td>网站内部其它页面或页面的锚点</td>
-            <td>about.html、about.html#id</td>
+            <td>外部页面</td>
+            <td>www.baidu.com#about</td>
           </tr>
           <tr>
-            <td>网站外部页面</td>
+            <td>内部页面锚点</td>
+            <td>about.html#id</td>
+          </tr>
+          <tr>
+            <td>外部页面锚点</td>
             <td>www.baidu.com</td>
           </tr>
           <tr>
@@ -83,7 +80,7 @@
         <table class="tbl-sn">
           <caption>target属性</caption>
           <tr>
-            <th>类别</th>
+            <th style="width: 30%;">类别</th>
             <th>说明</th>
           </tr>
           <tr>
@@ -112,22 +109,18 @@
     <div class="chap">锚点跳转*</div>
     <dl class="item">
       <dt>说明</dt>
-      <dd>. 跳转到当前页面内部或其它页面内部某个元素位置</dd>
-      <dd>. 定义：在目标元素中，使用 <span class="warn">id</span> 属性定义一个锚点</dd>
-      <dd>. 使用：在&lt;a&gt;的href属性中，使用 <span class="warn">#</span> 识别锚点</dd>
-      <dd>. 页面返回时不能直接退出当前页面，需要逐级返回；后期多使用 js 实现跳转</dd>
       <dd>
+        <div>. 跳转到当前页面内部或其它页面内部某个元素位置</div>
+        <div>. 定义：在目标元素中，使用 <span class="warn">id</span> 属性定义一个锚点</div>
+        <div>. 使用：在 &lt;a&gt; 的 href 属性中，使用 <span class="warn">#</span> 识别锚点</div>
+        <div>. 页面返回时不能直接退出当前页面，需要逐级返回；后期多使用 js 实现跳转</div>
         <div>1. 定义锚点：给目标元素指定 id 属性充当锚点；W3C规范仅仅允许使用 id 标记锚点，不能使用类.</div>
-        <figure class="code">
-          <pre>&lt;div id='cont'&gt;我是目标元素&lt;/div&gt;</pre>
-        </figure>
+        <pre>&lt;div id='cont'&gt;我是目标元素&lt;/div&gt;</pre>
         <div>2. 为&lt;a&gt;的 href 属性指定目标为元素的id名字，配合#，表示是id属性</div>
-        <figure class="code">
-          <pre>&lt;a href="#cont"&gt; 去目标元素 &lt;/a&gt;</pre>
-        </figure>
+        <pre>&lt;a href="#cont"&gt; 去目标元素 &lt;/a&gt;</pre>
       </dd>
-      <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 个人网站</dd>
-      <dd>请使用但不局限于这些标签：块&lt;div&gt; 块&lt;html&gt; 超链接 &lt;a&gt; 导航 &lt;nav&gt; 段落&lt;p&gt; 块&lt;h1&gt;</dd>
+      <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 个人网站 - 请使用但不局限于这些标签：&lt;div&gt; &lt;html&gt;
+        &lt;a&gt; &lt;nav&gt; &lt;p&gt; &lt;h1&gt;</dd>
       <dd class="number">
         <div>创建文件夹Demo为H5项目，使用Vs Code打开</div>
         <div>创建主页文件index.html，按!快速生成H5架构</div>
@@ -147,31 +140,20 @@
       <dd>. 根据页面是否属于同一个网站，又可以分：站内跳转和站外跳转</dd>
       <dt>站内跳转</dt>
       <dd>
-        <figure class="code">
-          <figcaption>同一个网站内部页面之间的跳转，多使用<span class="warn">相对路径</span></figcaption>
-          <pre>&lt;a href="./greeting.html"&gt; 目标页面 &lt;/a&gt;</pre>
-        </figure>
-        <figure class="code">
-          <figcaption>也可以转跳转到站内其它页面的某个锚点</figcaption>
-          <pre>&lt;a href="./blog.html#cont"&gt; 目标页面某个元素 &lt;/a&gt;</pre>
-        </figure>
+        <div>同一个网站内部页面之间的跳转，多使用<span class="warn">相对路径</span></div>
+        <pre>&lt;a href="./greeting.html"&gt; 目标页面 &lt;/a&gt;</pre>
+        <div>也可以转跳转到站内其它页面的某个锚点</div>
+        <pre>&lt;a href="./blog.html#cont"&gt; 目标页面某个元素 &lt;/a&gt;</pre>
       </dd>
       <dt>站外跳转</dt>
       <dd>
-        <figure class="code">
-          <figcaption>跳转到其它网站页面或页面内某个锚点，多使用<span class="warn">绝对路径或完整路径</span></figcaption>
-          <pre>
+        <div>跳转到其它网站页面或页面内某个锚点，多使用<span class="warn">绝对路径或完整路径</span></div>
+        <div>建议使用完整网络协议。否则测试会告警</div>
+        <pre>
 &lt;a href="https://www.baidu.com"&gt; 百度 &lt;/a&gt;
 &lt;a href="https://www.baidu.com#baike"&gt; 百度百科 &lt;/a&gt;</pre>
-        </figure>
-      </dd>
-      <dd>
-        <figure class="code">
-          <figcaption>也可以不指定网络协议，由系统自行判断</figcaption>
-          <pre>&lt;a href="//www.baidu.com"&gt; www.baidu.com &lt;/a&gt;</pre>
-        </figure>
-      </dd>
-      <dd>
+        <div>也可以不指定网络协议，由系统自行判断；不建议</div>
+        <pre>&lt;a href="//www.baidu.com"&gt; www.baidu.com &lt;/a&gt;</pre>
         <table class="tbl-sn">
           <caption>几个特殊页面</caption>
           <tr>
@@ -202,40 +184,30 @@
       </dd>
       <dt>改善用户体验</dt>
       <dd>
-        <figure class="code">
-          <figcaption>1. 添加title属性，完善用户体验</figcaption>
-          <pre>&lt;a href="" title="" target="_blank"&gt;&lt;/a&gt;</pre>
-        </figure>
-        <figure class="code">
-          <figcaption>2. 使用CSS目标选择器高亮当前跳转到的锚点|目标</figcaption>
-          <pre>
+        <div>1. 添加title属性，完善用户体验</div>
+        <pre>&lt;a href="" title="" target="_blank"&gt;&lt;/a&gt;</pre>
+        <div>2. 使用CSS目标选择器高亮当前跳转到的锚点|目标</div>
+        <pre>
 el:target {
   color: #f40;
 }        </pre>
-        </figure>
-        <figure class="code">
-          <figcaption>3. 使用CSS为元素的滚动容器指定滚动行为scroll-behavior为丝滑滚动smooth</figcaption>
-          <pre>
+        <div>3. 使用CSS为元素的滚动容器指定滚动行为scroll-behavior为丝滑滚动smooth</div>
+        <pre>
 html {
   scroll-behavior: smooth;
 }        </pre>
-        </figure>
-        <figure class="code">
-          <figcaption>4. 使用CSS为元素的滚动容器指定滚动填充scroll-padding-top为导航区的高度</figcaption>
-          <pre>
+        <div>4. 使用CSS为元素的滚动容器指定滚动填充scroll-padding-top为导航区的高度</div>
+        <pre>
 html {
   scroll-padding-top: 100px;
 }        </pre>
-        </figure>
-        <figure class="code">
-          <figcaption>5. 滚动容器通常为html或者是某个具体的容器标签元素，该容器必须显式的指定高度且具备溢出隐藏的属性</figcaption>
-          <pre>
+        <div>5. 滚动容器通常为html或者是某个具体的容器标签元素，该容器必须显式的指定高度且具备溢出隐藏的属性</div>
+        <pre>
 .wrap {
   height: 100vh;
   scroll-behavior: smooth;
   overflow-y: auto;
 }        </pre>
-        </figure>
       </dd>
     </dl>
     <div class="chap">样式</div>
@@ -245,15 +217,13 @@ html {
       <dd>. <a href="http://necolas.github.io/normalize.css/">normalize.css</a></dd>
       <dd>. <a href="https://meyerweb.com/eric/tools/css/reset/">reset.css</a></dd>
       <dd>
-        <figure class="code">
-          <figcaption>以下各例均使用初始化样式</figcaption>
-          <pre>
+        <div>以下各例均使用初始化样式</div>
+        <pre>
 a {
     text-decoration: none;
     color: inherit;
     font: inherit;
 }</pre>
-        </figure>
       </dd>
       <dt>样式伪类</dt>
       <dd>
@@ -287,76 +257,49 @@ a:active {
     <div class="chap">其它应用</div>
     <dl class="item">
       <dt>内容预览</dt>
-      <dd>. 查看/预览资源|文件的内容；可以是普通文档txt、OA文档、多媒体资源，如图片、音频、视频</dd>
-      <dd>. 需要使用CSS特别处理&lt;a&gt;，如：修改display，隐藏文字、设置大小、添加背景</dd>
       <dd>
-        <a class="pre-img" href="./imgs/alizee.jpg" title="点击查看大图" target="_blank">图片预览</a>
-      </dd>
-      <dd>
-        <figure class="code">
-          <figcaption>内容预览 - 图片</figcaption>
-          <pre>
+        <div>. 查看/预览资源|文件的内容；可以是普通文档txt、OA文档、多媒体资源，如图片、音频、视频</div>
+        <div>. 需要使用CSS特别处理&lt;a&gt;，如：修改display，隐藏文字、设置大小、添加背景</div>
+        <div> <a class="pre-img" href="./imgs/alizee.jpg" title="点击查看大图" target="_blank">图片预览</a> </div>
+        <div>内容预览 - 图片</div>
+        <pre>
 &lt;a href="./alizee.jpg" title="点击查看大图" target="_blank"&gt;图片预览&lt;/a&gt;</pre>
-        </figure>
-      </dd>
-      <dd>
-        <a class="pre-img" href="/utils/music/Alizee-LaIslaBonita.mp3" title="点击播放音乐" target="_blank">音乐预览</a>
-      </dd>
-      <dd>
-        <figure class="code">
-          <figcaption>内容预览 - 音乐</figcaption>
-          <pre>
-&lt;a href="./Alizee-La Isla Bonita.mp3" title="点击播放音乐" target="_blank"&gt;音乐预览&lt;/a&gt;</pre>
-        </figure>
-      </dd>
-      <dd>
-        <a class="pre-img" href="/utils/video/alizee.mp4" title="点击播放视频" target="_blank">视频预览</a>
-      </dd>
-      <dd>
-        <figure class="code">
-          <figcaption>内容预览 - 视频</figcaption>
-          <pre>
-&lt;a href="../video/alizee.mp4" title="点击播放视频" target="_blank"&gt;视频预览&lt;/a&gt;</pre>
-        </figure>
-      </dd>
-      <dd>
-        <figure class="code">
-          <figcaption>内容预览 - 其它类型文件 <a href="/utils/data/data2022/course.json" target="_blank">课程表原始数据[json]</a>、<a
-              href="../css/base.css" target="_blank">样式文件[CSS]</a></figcaption>
-          <pre>
+        <div><a class="pre-img" href="/utils/music/Alizee-LaIslaBonita.mp3" title="点击播放音乐" target="_blank">音乐预览</a>
+        </div>
+        <div>内容预览 - 音乐</div>
+        <pre>&lt;a href="./Alizee-La Isla Bonita.mp3" title="点击播放音乐" target="_blank"&gt;音乐预览&lt;/a&gt;</pre>
+        <div><a class="pre-img" href="/utils/video/alizee.mp4" title="点击播放视频" target="_blank">视频预览</a> </div>
+        <div>内容预览 - 视频</div>
+        <pre>&lt;a href="../video/alizee.mp4" title="点击播放视频" target="_blank"&gt;视频预览&lt;/a&gt;</pre>
+        <div>内容预览 - 其它类型文件 <a href="/utils/data/data2022/course.json" target="_blank">课程表原始数据[json]</a>、<a
+            href="../css/base.css" target="_blank">样式文件[CSS]</a></div>
+        <pre>
 &lt;a href="./course.json" target="_blank"&gt;课程表原始数据[json]&lt;/a&gt;
 &lt;a href="./dom.css" target="_blank"&gt;样式文件[CSS]&lt;/a&gt;</pre>
-        </figure>
       </dd>
       <dt>下载文件</dt>
-      <dd>. 指定download属性</dd>
-      <dd>. 如果系统识别不了href提供的资源，就会触发下载</dd>
-      <dd>. 默认情况下，浏览器以预览的方式打开链接；如果仅仅提供下载链接，应显式的指定download属性</dd>
       <dd>
-        <figure class="code">
-          <figcaption>截图工具Snipaste<a href='/utils/lib/Snipaste-1.16.2-x64.rar' download title="单击下载"> 本地下载</a>、<a
-              href="https://zh.snipaste.com/">在线下载</a>
-          </figcaption>
-          <pre>&lt;a href='./Snipaste-1.16.2-x64.rar' title="单击下载" download&gt; 截图工具Snipaste &lt;/a&gt;</pre>
-        </figure>
+        <div>. 指定download属性</div>
+        <div>. 如果系统识别不了href提供的资源，就会触发下载</div>
+        <div>. 默认情况下，浏览器以预览的方式打开链接；如果仅仅提供下载链接，应显式的指定download属性</div>
+        <div>截图工具Snipaste<a href='/utils/lib/Snipaste-1.16.2-x64.rar' download title="单击下载"> 本地下载</a>、<a
+            href="https://zh.snipaste.com/">在线下载</a>
+        </div>
+        <pre>&lt;a href='./Snipaste-1.16.2-x64.rar' title="单击下载" download&gt; 截图工具Snipaste &lt;/a&gt;</pre>
       </dd>
       <dt>拨打电话</dt>
-      <dd>. 移动端使用比较方便</dd>
-      <dd>. 桌面端需要系统支持的设备；通过扫码或PIN完成配对后才可以使用</dd>
       <dd>
-        <figure class="code">
-          <figcaption><a href='tel:13707735481'>Make a call</a></figcaption>
-          <pre>&lt;a href='tel:13707735481'&gt; Make a call &lt;/a&gt;</pre>
-        </figure>
+        <div>. 移动端使用比较方便</div>
+        <div>. 桌面端需要系统支持的设备；通过扫码或PIN完成配对后才可以使用</div>
+        <div><a href='tel:13707735481'>Make a call</a></div>
+        <pre>&lt;a href='tel:13707735481'&gt; Make a call &lt;/a&gt;</pre>
       </dd>
       <dt>发送邮件</dt>
-      <dd>. 需要特定环境的支持，如需要安装outlook等邮件系统</dd>
-      <dd>. 多用于企业级</dd>
       <dd>
-        <figure class="code">
-          <figcaption><a href='mailTo:1942194789@qq.com'> Sending a mail </a></figcaption>
-          <pre>&lt;a href='mailTo:1942194789@qq.com'&gt; Sending a mail &lt;/a&gt;</pre>
-        </figure>
+        <div>. 需要特定环境的支持，如需要安装outlook等邮件系统</div>
+        <div>. 多用于企业级</div>
+        <div><a href='mailTo:1942194789@qq.com'> Sending a mail </a></div>
+        <pre>&lt;a href='mailTo:1942194789@qq.com'&gt; Sending a mail &lt;/a&gt;</pre>
       </dd>
     </dl>
     <div class="chap">总结</div>
@@ -393,7 +336,7 @@ a:active {
     <dl class="item">
       <dt>内容</dt>
       <dd class="number">
-        <div>合理使用&lt;a&gt;实现个人网站，分别完善页面的统一打开方式、平滑滚动、目标样式等措施</div>
+        <div>合理使用&lt;a&gt;实现个人网站，完善页面的统一打开方式、平滑滚动、目标样式等措施</div>
         <div>学完第一部分内容后再提交</div>
       </dd>
       <dt>要求</dt>
