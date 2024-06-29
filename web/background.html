@@ -6,30 +6,28 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>背景 Background</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="./css/bg.css">
-  <link rel="stylesheet" href="../css/sn.css">
-  <link rel="stylesheet" href="../css/code.css">
   <base target="_blank">
 </head>
 
 <body>
   <header>
-    <h1>背景&commat;Background</h1>
+    <h1>背景</h1>
+    <span>&commat;Background</span>
   </header>
   <dl>
-    <dd>. 为元素指定背景颜色，可以同时指定背景图片、大小、位置、铺贴方式等</dd>
-    <dd>. 背景background样式包含多个属性</dd>
-    <dd>. 通常使用独立属性；也可以使用复合属性，但是可读性不好，不建议</dd>
-    <dd class="code">
+    <dd>
+      <div>. 为元素指定背景颜色，可以同时指定背景图片、大小、位置、铺贴方式等</div>
+      <div>. 背景background样式包含多个属性</div>
+      <div>. 通常使用独立属性；也可以使用复合属性，但是可读性不好，不建议</div>
       <pre>background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;</pre>
     </dd>
     <dt>背景颜色 Background-color</dt>
-    <dd>. 为了后向兼容/容错 fallback options，指定背景图片的同时，也指定颜色；俩者互不冲突；通常结合在一起使用</dd>
-    <dd>. 指定背景颜色还可以提示用户体验，避免大图片加载时的页面空白</dd>
-    <dd>. 更多颜色使用，请查看 <a href="./css.html#color">颜色</a>、<a href="https://flatuicolors.com/">flatuicolors</a>、<a
-        href="https://mycolor.space/">colorSpace</a></dd>
-    <dd class="code">
+    <dd>
+      <div>. 为了后向兼容/容错 fallback options，指定背景图片的同时，建议也指定颜色；俩者互不冲突；通常结合在一起使用</div>
+      <div>. 指定背景颜色还可以提示用户体验，避免大图片加载时的页面空白</div>
+      <div>. 更多颜色使用，请查看 <a href="./css-color.html">颜色 - Color</a></div>
       <pre>
 background-color: tomato;
 background-color: #ff6347;
@@ -38,26 +36,30 @@ background-color: rgb(255, 99, 71, 1);
 background-color: hsl(9, 100%, 64%);</pre>
     </dd>
     <dt>背景图片 Background-image</dt>
-    <dd>. 可以使用传统的图片作为背景，也可以使用渐变背景创建图片[线性渐变、径向渐变、锥向渐变]；更多使用细节，参考后面专题</dd>
-    <dd>. 可以使用多个背景图片，使用逗号分隔；前面的图片会覆盖后面的图片</dd>
-    <dd>[<span class="iconfont icon-bangzhu2"></span>] 有了&lt;img&gt;，为什么还需要使用这个属性？</dd>
-    <dd>. 功能更强大、操作更丰富</dd>
-    <dd>.装饰型元素多使用Background-image</dd>
-    <dd>.功能性元素多使用&lt;img&gt;；或者说如果去掉图片仍能正常表达主题就使用Background-image，否则应使用&lt;img&gt;</dd>
-    <dd class="code">
+    <dd>
+      <div>. 可以使用传统的图片作为背景，也可以使用 <a href="./background3.html">渐变背景 - 线性渐变、径向渐变、锥向渐变</a> 创建背景图片</div>
+      <div>. 可以使用多个背景图片，使用逗号分隔；前面的图片会覆盖后面的图片；如使用透明色渐变添加蒙版、百叶窗等</div>
+      <div>[<span class="iconfont icon-bangzhu2"></span>] 有了 &lt;img&gt;，为什么还需要使用这个属性？</div>
+      <!-- <div>. 功能更强大、操作更丰富</div> -->
+      <div>. <span class="warn">装饰型元素</span> 多使用 Background-image</div>
+      <div>. <span class="warn">功能性元素</span> 多使用 &lt;img&gt;；或者说如果去掉图片仍能正常表达主题就使用 Background-image，否则应使用&lt;img&gt;
+      </div>
       <pre>
 background-img: url(./imgs/1.jpg);
 background-img: url(https://images.unsplash.com/...);
 background-img: linear-gradient();
 background-img: Radial-gradient();
-background-img: Conic-gradient();</pre>
+background-img: Conic-gradient();
+background-image: linear-gradient(transparent, #000), url(./imgs/2019middle.jpg);</pre>
     </dd>
     <dt>图像位置 Background-position</dt>
-    <dd>. 根据图片坐标/位置显示指定的内容；默认从左上角开始</dd>
-    <dd>. 可以使用关键字，如top、left、right、bottom</dd>
-    <dd>. 也可以使用具体数字或百分比</dd>
-    <dd>. 还可以关键字和数字、百分比组合使用</dd>
-    <dd class="code">
+    <dd>
+      <div>. 根据图片坐标/位置显示指定的内容；默认从左上角开始</div>
+      <div>. 可以使用关键字，如top、left、right、bottom</div>
+      <div>. 也可以使用具体数字或百分比</div>
+      <div>. 还可以关键字和数字、百分比组合使用</div>
+      <div>. 比较经典的应用是早期的 <a href="./demo/sprite.html">精灵图 - sprite</a>，也叫雪碧图，现在使用较少了</div>
+      <div>. 另外一个经典应用是 <a href="./demo/screen.html">屏风图 - screen</a></div>
       <pre>
 background-position: center;
 background-position: 50%;
@@ -67,94 +69,117 @@ background-position: top 10px right 10px;
 background-position: 25% 75%;</pre>
     </dd>
     <dt>图像大小 Background-size</dt>
-    <dd>. 默认情况下，背景图像按照图片原始大小显示；当元素尺寸和图片尺寸不一致时，就会出现图片重复铺贴或图片被裁剪的情况</dd>
-    <dd>. 元素尺寸&gt;背景图片的尺寸，则默认情况下，背景图片会在水平和垂直方向上重复贴铺</dd>
-    <dd>. 元素尺寸&lt;背景图片的尺寸，图片被裁剪/部分显示；实际上背景图片还是会在水平和垂直方向上重复铺贴，只不过受元素大小限制，没有呈现出来</dd>
-    <dd>. 终端尺寸变化时，易导致显示缺失；不能媒体自适应</dd>
-    <dd>. 使用复合属性时，应在background-position属性后面使用</dd>
-    <dd>. 可以指定2个参数：宽、高；通常只指定宽，高为auto，系统会按照图片比例，自动调整图片高度</dd>
-    <dd>. length：固定数值设置背景图片大小</dd>
-    <dd>. percentage：参考元素大小设置背景大小；200%就是2倍的元素大小；50%就是元素的一半</dd>
-    <dd>. contain：包含图片，即<span class="warn">完全</span> 显示图片；元素背景易出现留白</dd>
-    <dd>. cover：<span class="warn">等比例最大化</span> 显示图片；元素背景被占满、图片可能被裁剪</dd>
-    <dd class="code">
+    <dd>
+      <div>. 默认情况下，背景图像按照图片原始大小显示；当元素尺寸和图片尺寸不一致时，就会出现图片重复铺贴或图片被裁剪的情况</div>
+      <div>. 元素尺寸&gt;背景图片的尺寸，则默认情况下，背景图片会在水平和垂直方向上重复贴铺</div>
+      <div>. 元素尺寸&lt;背景图片的尺寸，图片被裁剪/部分显示；实际上背景图片还是会在水平和垂直方向上重复铺贴，只不过受元素大小限制，没有呈现出来</div>
+      <div>. 终端尺寸变化时，易导致显示缺失；不能媒体自适应</div>
+      <div>. 使用复合属性时，应在background-position属性后面使用</div>
+      <div>. 可以指定2个参数：宽、高；通常只指定宽，高为auto，系统会按照图片比例，自动调整图片高度</div>
+      <div>. length：固定数值设置背景图片大小</div>
+      <div>. percentage：参考元素大小设置背景大小；200%就是2倍的元素大小；50%就是元素的一半</div>
+      <div>. contain：包含图片，即<span class="warn">完全</span> 显示图片；元素背景易出现留白</div>
+      <div>. cover：<span class="warn">等比例最大化</span> 显示图片；元素背景被占满、图片可能被裁剪</div>
       <pre>
 background-size: 100px;
 background-size: 25%;
 background-size: contain;
 background-size: cover;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] length</dd>
-    <dd>. 按照指定像素大小显示背景图片</dd>
-    <dd>. 以下元素大小为320*180 示例图片大小为640*427</dd>
-    <dd>
-      <figure class="img-sn">
+    <dd>[<span class="iconfont icon-keyboard"></span>] 图像大小使用</dd>
+    <dd class="sn">
+      <p>. 以下元素大小为320*180 示例图片大小为640*427</p>
+      <div>length</div>
+      <p>. 按照指定像素大小显示背景图片</p>
+      <figure>
         <div class="size px"></div>
         <figcaption>background-size: 100px 100px;</ficaption>
       </figure>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] percentage</dd>
-    <dd>. 按照元素宽度百分比显示背景图片</dd>
-    <dd>
-      <figure class="img-sn">
+      <div>percentage</div>
+      <p>. 按照元素宽度百分比显示背景图片</p>
+      <figure>
         <div class="size per"></div>
         <figcaption>background-size: 20%</ficaption>
       </figure>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] contain</dd>
-    <dd>. 始终完整显示图片/包含图片</dd>
-    <dd>. 如果允许重复，则会显示多个图片背景；如果不允许，容器将呈现部分留白</dd>
-    <dd>
-      <figure class="img-sn">
+      <div>contain</div>
+      <p>. 始终完整显示图片/包含图片</p>
+      <p>. 如果允许重复，则会显示多个图片背景；如果不允许，容器将呈现部分留白</p>
+      <figure>
         <div class="size contain"></div>
         <figcaption>background-size: contain;</ficaption>
       </figure>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] cover</dd>
-    <dd>. 始终充满容器的显示图片；图片可能被裁剪</dd>
-    <dd>
-      <figure class="img-sn">
+      <div>cover</div>
+      <p>. 始终充满容器的显示图片；图片可能被裁剪</p>
+      <figure>
         <div class="size cover"></div>
         <figcaption>background-size: cover;</ficaption>
       </figure>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 改进方案</dd>
-    <dd>. 需要美工精心设计，保证图片的重点内容能够直观的表达出来，如<a href="//www.taobao.com">淘宝登录</a></dd>
-    <dd>
-      <figure class="img-sn">
+      <div>改进方案</div>
+      <p>. 需要美工精心设计，保证图片的重点内容能够直观的表达出来，如 <a href="//www.taobao.com">淘宝登录</a></p>
+      <figure>
         <div class="size cover-center"></div>
         <figcaption>指定cover，并调整其位置position居中center显示</ficaption>
       </figure>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 遮罩图</dd>
+    <dd>
+      <div>多背景全填充</div>
+      <pre>
+.img {
+  width: 800px;
+  height: 600px;
+  background-image: linear-gradient(transparent, #000), url(./imgs/2019middle.jpg);
+  background-size: cover;
+}        </pre>
+      <div class="size mask"></div>
+    </dd>
     <dt>图形重复 Background-repeat</dt>
-    <dd>. 背景图片重复铺贴</dd>
-    <dd>. auto：默认情况下，图片会水平和垂直方向上铺满整个容器</dd>
-    <dd>. no-repeat：不重复；如果指定图片的位置，必须取消重复</dd>
-    <dd>. repeat-x：x轴重复</dd>
-    <dd>. repeat-y：y轴重复</dd>
-    <dd>. 如果图片尺寸大于容器尺寸，看不出重复效果；实际上也是铺贴了的</dd>
-    <dd class="code">
+    <dd>
+      <div>. 背景图片重复铺贴</div>
+      <div>. auto：默认情况下，图片会水平和垂直方向上铺满整个容器</div>
+      <div>. no-repeat：不重复；如果指定图片的位置，必须取消重复</div>
+      <div>. repeat-x：x轴重复</div>
+      <div>. repeat-y：y轴重复</div>
+      <div>. 如果图片尺寸大于容器尺寸，看不出重复效果；实际上也是铺贴了的</div>
       <pre>
 background-repeat: no-repeat;
 background-repeat: repeat-x;
 background-repeat: repeat-y;</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 百叶窗</dd>
+    <dd>
+      <div>多背景自动重复</div>
+      <div>[<span class="iconfont icon-bangzhu2"></span>] 如果指定位置position和不重复no-repeat会怎么样？</div>
+      <pre>
+.img {
+  width: 800px;
+  height: 600px;
+  background-image: linear-gradient(transparent, #000), url(./imgs/2019middle.jpg);
+  background-size: 100% 6px, cover;
+}        </pre>
+      <div class="size blinds"></div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./index.html">模拟目录页</a></dd>
+    <dd>
+      <div>水平方向平铺</div>
+      <div>这里使用 <a href="./selector1.html">伪元素</a>实现；也可以使用普通元素</div>
+      <pre>
+.item::before {
+  content: '';
+  flex: 1;
+  height: 3px;
+  background-image: url(../imgs/dot.png);
+  background-repeat: repeat-x;
+  order: 1;
+}      </pre>
+    </dd>
   </dl>
   <div class="chap">案例 Cases</div>
   <dl>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./opening.html">LOGO设计</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html">banner滑动</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./index.html">目录页 - 水平平铺</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/acc_flex.html">抽屉相册</a></dd>
-    <dd>. 分别使用&lt;img&gt;和background-img实现</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./sprite.html">精灵图</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./screen.html">屏风图</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 多背景使用</dd>
-    <dd>. 背景图片分别定位于左上角和右下角</dd>
     <dd>
+      <div>. 背景图片分别定位于左上角和右下角</div>
       <div class="multi-img"></div>
-    </dd>
-    <dd class="code">
       <pre>
 //[独立属性] 图片属性要一一对应
 .multi-img {
@@ -170,17 +195,31 @@ background-repeat: repeat-y;</pre>
 background: url(../imgs/logo0.png) right bottom/50px no-repeat, url(../imgs/logo1.png) top left/50px no-repeat;
 background-color: #a8e073;</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html">Banner滑动</a></dd>
+    <dd>
+      <div>静态定位在left；hover时定在right</div>
+      <div>借助 <a href="./transition.html">过渡动画 - transition</a>丝滑实现</div>
+      <pre>
+  header {
+   // ...
+    background-position: left center;
+    transition: 0.4s;
+  }
+  
+  header:hover {
+    background-position: right center;
+  }
+</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/acc_flex.html">抽屉相册</a></dd>
+    <dd>. 分别使用&lt;img&gt;和background-img并借助:hover和 <a href="./flex.html">弹性盒子 - flex</a>实现</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 折角/狗耳朵[进阶]</dd>
     <dd>
-      <figure class="img-sn">
+      <figure style="text-align: center;">
         <div class="basic dog"></div>
         <figcaption>折角/狗耳朵</figcaption>
       </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>折角/狗耳朵</figcaption>
-        <pre>
+      <pre>
 .dog {
     position: relative;
     background-image: linear-gradient(210deg, transparent 3em, #ddd 0);
@@ -198,7 +237,6 @@ background-color: #a8e073;</pre>
     transform-origin: top right;
     transform: rotate(150deg) translate(5em, -3em);
 }</pre>
-      </figure>
     </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
