@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>按钮 Button</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <base target="_blank">
+  <style>
+    :root {
+      --color-blue: #089;
+      --color-red: #f40;
+      --color-dark: #333;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    button {
+      padding: 6px 30px;
+      color: #fff;
+      background-size: 200%;
+      border-radius: 6px;
+      text-transform: capitalize;
+      transition: 0.4s;
+    }
+
+    button:hover {
+      background-position: right center;
+    }
+
+    .more-btn {
+      background-image: linear-gradient(90deg, #26de81, #20bf6b);
+    }
+
+    .form-btn {
+      background-image: linear-gradient(90deg, #3498db, #2980b9);
+    }
+
+    .close-btn {
+      background-image: linear-gradient(90deg, #f39c12, #e74c3c);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>按钮</h1>
+    <span>&lt;button&gt;</span>
+  </header>
+  <dl>
+    <dt>概述 Overview</dt>
+    <dd>
+      <div>. 除了可以使用&lt;input&gt;的特定type实现按钮功能外，还可以直接使用&lt;button&gt;</div>
+      <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button">MDN - button</a></div>
+      <pre>&lt;button type=""&gt;button text&lt;/button&gt;</pre>
+      <table>
+        <caption>按钮类型</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>submit</td>
+          <td>提交表单数据form data到服务器server；默认行为</td>
+        </tr>
+        <tr>
+          <td>reset</td>
+          <td>清除表单数据；表单重置</td>
+        </tr>
+        <tr>
+          <td>button</td>
+          <td>无默认行为，仅仅是一个按钮；用于添加用户自定义事件</td>
+        </tr>
+      </table>
+      <div>使用&lt;button&gt;构建表单</div>
+      <pre>
+&lt;form action="" method="" name="" onsubmit='return false'&gt;
+  &lt;input type="text" name="uname" id=""&gt;
+  &lt;input type="text" name="upass" id=""&gt;
+  &lt;button type="submit"&gt;button text&lt;/button&gt;
+  &lt;button type="reset"&gt;button text&lt;/button&gt;
+&lt;/form&gt;</pre>
+    </dd>
+    <dt>样式 Style</dt>
+    <dd>
+      <div>默认情况下，按钮并没有显著的鼠标交互提示，需使用CSS指定cursor；通常 <span class="warn">初始化</span> 如下</div>
+      <pre>
+button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}</pre>
+      <div>一个作品内，按钮的样式应该统一；可以进一步指定 <span class="warn">公共</span> 样式；这里定义一个可以变化的渐变背景</div>
+      <pre>
+button {
+  padding: 6px 30px;
+  color: #fff;
+  background-size: 200%;
+  border-radius: 6px;
+  text-transform: capitalize;
+  transition: 0.4s;
+}
+
+button:hover {
+  background-position: right center;
+}      </pre>
+      <div>不同部分的按钮使用不同的背景即可；也可以通过 <a href="./filter.html">滤镜 - filter</a> 实现样式共享</div>
+      <pre>
+.more-btn {
+  background-image: linear-gradient(90deg, #26de81, #20bf6b);
+}
+
+.form-btn {
+  background-image: linear-gradient(90deg, #3498db, #2980b9);
+}
+
+.close-btn {
+  background-image: linear-gradient(90deg, #f39c12, #e74c3c);
+}</pre>
+      <div>
+        <button class="more-btn" type="button">red</button>
+        <button class="form-btn" type="button">blue</button>
+        <button class="close-btn" type="button">dark</button>
+      </div>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer"
+    onload="this.height=this.contentDocument.body.scrollHeight"></iframe>
+</body>
+
+</html>

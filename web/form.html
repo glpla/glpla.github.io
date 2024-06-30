@@ -18,13 +18,12 @@
   </header>
   <dl>
     <dt>概述</dt>
-    <dd>. 人机交互</dd>
-    <dd>. 通过种类多样的表单元素，以值对 name-value 的形式收集/采集数据，提交给后端服务器backend server处理</dd>
-    <dd>. 表单本身并不可见，除了承载脚本外，更多是作为一个容器</dd>
     <dd>
+      <div>. 人机交互</div>
+      <div>. 通过种类多样的表单元素，以值对 name-value 的形式收集/采集数据，提交给后端服务器backend server处理</div>
+      <div>. 表单本身并不可见，除了承载脚本外，更多是作为一个容器</div>
+      <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form">MDN - form</a></div>
       <pre>&lt;form action="" method="" target="" name=""&gt;&lt;/form&gt;</pre>
-    </dd>
-    <dd>
       <table>
         <caption>表单属性</caption>
         <tr>
@@ -51,7 +50,7 @@
         </tr>
       </table>
       <table>
-        <caption>表单事件类型</caption>
+        <caption>表单事件</caption>
         <tr>
           <th>类别</th>
           <th>说明</th>
@@ -65,8 +64,7 @@
           <td>清除各表单元素数据</td>
         </tr>
       </table>
-    </dd>
-    <dd>
+      <div>内联事件 - onsubmit取消默认提交</div>
       <pre>
 &lt;form action="" method="" name="" onsubmit='return false'&gt;
   &lt;input type="text" name="uname" id=""&gt;
@@ -74,7 +72,13 @@
   &lt;input type="submit" value="submit"&gt;
   &lt;input type="reset" value="reset"&gt;
 &lt;/form&gt;</pre>
-      <p>. 可以为表单指定打开目标位置属性 target='iframe-name'</p>
+      <div>侦听方式 - 获取表单，侦听提交事件并取消默认</div>
+      <pre>
+let form = document.querySelector('form')
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+})      </pre>
+      <div>. 可以为表单指定打开目标位置属性 target='iframe-name'</div>
       <pre>
 &lt;iframe name='iframe-name'&gt;  &lt;/iframe&gt;</pre>
     </dd>

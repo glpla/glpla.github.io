@@ -24,6 +24,7 @@
 //   return json;
 // }
 
+let swiper;
 
 // msg
 let msgBox = document.querySelector('.msg-box')
@@ -61,43 +62,6 @@ ticking()
 
 let inter = setInterval(ticking, 1000)
 
-// swiper
-const swiper = new Swiper('.swiper', {
-  // Optional parameters
-  // direction: 'vertical',
-  loop: true,
-  autoplay: true,
-  grabCursor: true,
-  speed: 1000,
-  slidesPerView: 5,
-  spaceBetween: 10,
-  // centeredSlides: true,
-  mousewheel: true,
-  // effect: 'coverflow',
-  // If we need pagination
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true
-  },
-
-  // Navigation arrows
-  // navigation: {
-  //   nextEl: '.swiper-button-next',
-  //   prevEl: '.swiper-button-prev',
-  // },
-
-  // And if we need scrollbar
-  // scrollbar: {
-  //   el: '.swiper-scrollbar',
-  // },
-  // on: {
-  //   click: (e) => {
-  //     console.log('hi', e.activeIndex, e.realIndex, e.autoplay);
-  //     e.autoplay = false
-  //   },
-  // },
-});
-
 // 定义媒体查询
 var mediaQuery = window.matchMedia("(max-width: 768px)");
 
@@ -112,14 +76,57 @@ function handleMediaChange(mediaQuery) {
     // 当屏幕宽度小于或等于768px时执行的代码
     console.log("屏幕宽度小于或等于768px，执行相应的JS代码...");
     // 这里可以调用特定的函数或者改变DOM等
-    const swiper = new Swiper('.swiper', {
-      slidesPerView: 1,
+    swiper = new Swiper('.swiper', {
+      loop: true,
+      autoplay: true,
+      grabCursor: true,
+      speed: 1000,
+      mousewheel: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
     })
     clearInterval(inter);
   } else {
     // 当屏幕宽度大于768px时执行的代码
     console.log("屏幕宽度大于768px，执行其他的JS代码...");
     // 执行其他逻辑
+    swiper = new Swiper('.swiper', {
+      // Optional parameters
+      // direction: 'vertical',
+      loop: true,
+      autoplay: true,
+      grabCursor: true,
+      speed: 1000,
+      slidesPerView: 5,
+      spaceBetween: 10,
+      // centeredSlides: true,
+      mousewheel: true,
+      // effect: 'coverflow',
+      // If we need pagination
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+
+      // Navigation arrows
+      // navigation: {
+      //   nextEl: '.swiper-button-next',
+      //   prevEl: '.swiper-button-prev',
+      // },
+
+      // And if we need scrollbar
+      // scrollbar: {
+      //   el: '.swiper-scrollbar',
+      // },
+      // on: {
+      //   click: (e) => {
+      //     console.log('hi', e.activeIndex, e.realIndex, e.autoplay);
+      //     e.autoplay = false
+      //   },
+      // },
+    });
   }
 }
 // const revealOption = {

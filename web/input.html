@@ -14,7 +14,7 @@
 <body>
   <header>
     <h1>单行输入</h1>
-    <span>&commat;&lt;input&gt;</span>
+    <span>&lt;input&gt;</span>
     <span class="ham iconfont icon-menu"></span>
     <nav class="nav">
       <a href="" style="--delay:0" class="nav-item">overview</a>
@@ -25,13 +25,12 @@
     </nav>
   </header>
   <dl class="nav-cont">
-    <dd>. 应用最广泛的表单元素</dd>
-    <dd>. 种类type很多，默认是text，单行文本输入</dd>
-    <dd>. 更多input类型和使用，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">MDN input</a></dd>
     <dd>
+      <div>. 应用最广泛的表单元素</div>
+      <div>. 种类type很多，默认是text，单行文本输入</div>
+      <div>. 更多input类型和使用，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">MDN input</a>
+      </div>
       <pre>&lt;input type = "text"&gt;</pre>
-    </dd>
-    <dd>
       <table>
         <caption>常用类型</caption>
         <tr>
@@ -124,8 +123,6 @@
           <td>日期</td>
         </tr>
       </table>
-    </dd>
-    <dd>
       <table>
         <caption>常用属性</caption>
         <tr>
@@ -178,23 +175,28 @@
         </tr>
         <tr>
           <td>pattern</td>
-          <td>利用正则表达式提供验证功能，如："\d{6}"；请参考<a href="./js/regExp.html">正则表达式</a></td>
+          <td>利用正则表达式提供验证功能，如："\d{6}"；请参考 <a href="./js/regExp.html">正则表达式</a></td>
         </tr>
       </table>
     </dd>
-    <dd>. 由于元素比较小，用户交互|点击没有那么方便，尤其是单选或多选</dd>
-    <dd>.
-      为了扩展交互热区，增强用户体验，input通常使用id属性，配合&lt;label&gt;的for属性，将&lt;label&gt;和&lt;input&gt;绑定|关联起来：点击了&lt;label&gt;就相当于选择了&lt;input&gt;
-      ；&lt;label&gt;不能嵌套&lt;div&gt;方便使用相邻选择器操作元素</dd>
+    <dt>&lt;label&gt;</dt>
     <dd>
+      <div>. 由于元素比较小，用户交互|点击没有那么方便，尤其是单选或多选</div>
+      <div>.
+        为了扩展交互热区，增强用户体验，将&lt;label&gt;和&lt;input&gt;绑定|关联起来：点击&lt;label&gt;就相当于单击&lt;input&gt;</div>
+      <div>. &lt;input&gt;指定 <span class="warn">id</span> 属性；&lt;label&gt;指定 <span class="warn">for</span> 属性</div>
+      <div>. &lt;label&gt;不能嵌套&lt;div&gt;</div>
+      <div>. 方便使用相邻选择器操作元素</div>
       <pre>
-&lt;input type='text' id=''&gt;
-&lt;label for=''&gt;text here&lt;/label&gt;
-//或：使用&lt;label&gt;包裹&lt;input&gt;，请移除for属性
+&lt;input type='text' id='uname'&gt;
+&lt;label for='uname'&gt;text here&lt;/label&gt;</pre>
+      <div>或：使用&lt;label&gt;包裹&lt;input&gt;；记得移除&lt;label&gt;的for属性</div>
+      <pre>
 &lt;label&gt;
     &lt;input type='text'&gt;text here
-&lt;/label&gt;
-//也可以使用&lt;span&gt;包裹文本信息，结构更加清晰
+&lt;/label&gt;</pre>
+      <div>也可以使用&lt;span&gt;包裹文本信息，结构更加清晰</div>
+      <pre>
 &lt;label&gt;
     &lt;input type='text'&gt;
     &lt;span&gt;text here&lt;/span&gt;
@@ -203,9 +205,9 @@
   </dl>
   <dl>
     <dt>选择器 Selector</dt>
-    <dd>. 表单元素在不同浏览器上的默认样式不尽相同，为了统一，通常需要覆盖默认样式，再重新自定义新的样式</dd>
-    <dd>. 以下各例，如无特殊说明，均进行初始化设计</dd>
-    <dd>. 部分样式需要使用浏览器前缀；请多参考底部的 can i use，避免样式使用异常</dd>
+    <dd>. 表单元素在不同浏览器上的默认样式不尽相同，为了统一，通常需要覆盖/初始化默认样式，再重新自定义新的样式</dd>
+    <dd>. 以下各例，如无特殊说明，均使用初始化设计</dd>
+    <dd>. 部分样式需要使用浏览器前缀；更多注意事项，请参考 <a href="https://caniuse.com/">Can I Use</a>，避免样式使用异常</dd>
     <dd class="sn">
       <div>初始化设置</div>
       <p>. 各表单元素为 border-box</p>
