@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>下拉列表 select</title>
   <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="./css/form.css">
+  <link rel="stylesheet" href="./css/select.css">
   <base target="_blank">
 </head>
 
@@ -23,15 +23,13 @@
       <div>. name-value比较特别。name写在 &lt;select&gt;；value 写在 &lt;option&gt;，也可以省略 value，系统会把 &lt;option&gt; 的值自动作为value
       </div>
       <div>. &lt;select&gt;的宽度决定了&lt;option&gt;的宽度</div>
-      <div>. 可以单独设置 &lt;select&gt; 和 &lt;option&gt; 的字体颜色、大小，其它可以设置的属性比较少</div>
       <div>. &lt;option&gt; 很难动态增加或减少</div>
       <div>. 使用 &lt;optgroup&gt; 分组；分组标题不能选择，仅仅作为提示</div>
-      <div>. 默认样式极其丑陋；指定 appearance: none; 可以去掉默认的小箭头以便重新设计样式</div>
       <div>. 如果需要动态增加或减少选项，需要从头定制。如利用无序列表实现选项；更多设计技巧，请访问 <a
           href="https://www.filamentgroup.com/lab/select-css.html">making
           a better one</a>
       </div>
-      <div>更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select">MDN - select</a></div>
+      <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select">MDN - select</a></div>
       <table>
         <caption>属性</caption>
         <tr>
@@ -119,11 +117,77 @@ mul.addEventListener('change', function () {
     </dd>
     <dt>样式 Style</dt>
     <dd>
-      <div>很少直接使用。都是重新设计样式</div>
+      <div>. 可以单独设置 &lt;select&gt; 和 &lt;option&gt; 的字体颜色、大小，其它可以设置的属性比较少</div>
+      <div>. 很少直接使用。都是指定 appearance: none;以便重新设计</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 元素遮罩法 - 只显示长的备选信息中的关键信息</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 初始化样式</dd>
+    <dd>
+      <div>去除边框、轮廓、背景</div>
+      <div>字体和颜色继承父级</div>
+      <div>默认加重；各选项不加重</div>
+      <pre>
+select {
+  outline: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  font-weight: 600;
+  padding: 0 10px;
+}
+
+select option {
+  font-weight: normal;
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 基本定制</dd>
+    <dd>
+      <div>不增加额外元素，使用多背景图片模拟小箭头</div>
+      <div>:hover :focus时的border变化</div>
+      <pre>
+.select {
+  display: block;
+  width: 100%;
+  appearance: none;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 4px 10px;
+  background-image: url(../imgs/down.png);
+  background-repeat: no-repeat;
+  background-position: right 10px top 10px;
+}
+
+.select:hover {
+  border-color: #888;
+}
+
+.select:focus {
+  border-color: var(--main-color-blue);
+  box-shadow: 0 0 4px rgba(0, 0, 0, .2);
+}      </pre>
+    </dd>
+    <dd>
+      <div class="select-wrap">
+        <select name="" id="" class="select">
+          <option value="桂林">广西壮族自治区桂林市</option>
+          <option value="厦门">福建省厦门市</option>
+          <option value="佛山">广东省佛山市</option>
+          <option value="海口">海南省海口市</option>
+          <option value="佛山">广东省东莞市</option>
+        </select>
+      </div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 高级定制</dd>
+    <dd>
+      <div>增加容器元素，提供小箭头的定位依据</div>
+      <div>增加元素模拟小箭头，<a href="./position.html">定位</a> 在右侧</div>
+      <div>增加元素接收选择结果，原有&lt;select&gt;被覆盖</div>
+      <div>值和显示的数据分别设计；只显示长的备选信息中的关键信息</div>
+      <div>增加事件，动态修改选择内容</div>
+    </dd>
     <dd class="custom-wrap">
-      <select name="schoolC" id="school-custom">
+      <select name="school" id="school-custom">
         <option value="桂林">广西壮族自治区桂林市</option>
         <option value="厦门">福建省厦门市</option>
         <option value="佛山">广东省佛山市</option>
@@ -136,7 +200,7 @@ mul.addEventListener('change', function () {
     <dd>
       <pre>
 &lt;div class="custom-wrap"&gt;
-    &lt;select name="schoolC" id="school-custom"&gt;
+    &lt;select name="school" id="school-custom"&gt;
         &lt;option value="桂林"&gt;广西壮族自治区桂林市&lt;/option&gt;
         &lt;option value="厦门"&gt;福建省厦门市&lt;/option&gt;
         &lt;option value="佛山"&gt;广东省佛山市&lt;/option&gt;
@@ -157,7 +221,9 @@ mul.addEventListener('change', function () {
       <div>增加其它设计，如:hover</div>
       <div>更多设计细节，请参考<a href="https://login.taobao.com/">天猫登录页面</a>、<a href="./demo/login_taobao.html">淘宝高仿</a></div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 定制 <a href="./demo/select.html">下拉列表</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 全新定制 <a href="./demo/select.html">下拉列表</a></dd>
+    <dd>完全抛弃表单元素，从0开始设计</dd>
+    <dd>无法响应表单事件</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer"
     onload="this.height=this.contentDocument.body.scrollHeight"></iframe>
