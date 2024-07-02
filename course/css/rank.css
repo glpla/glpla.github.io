@@ -49,16 +49,18 @@ nav {
   width: 100%;
   align-self: start;
   display: flex;
-  align-items: end;
+  align-items: center;
   gap: var(--p-m-g);
+  line-height: 5vh;
+  height: 5vh;
   font-size: 1.6rem;
+  border-bottom: 1px solid #ccc;
   z-index: 1;
 }
 
 .nav {
   position: relative;
   cursor: pointer;
-  line-height: 2;
 }
 
 .nav:hover .nav-item {
@@ -77,6 +79,7 @@ nav {
   max-height: 0;
   overflow: hidden;
   background-color: #000;
+  line-height: 2;
 }
 
 .sub-nav-item:hover {
@@ -99,7 +102,7 @@ nav {
 .main {
   position: relative;
   width: 100%;
-  height: 60vh;
+  height: 70vh;
 }
 
 .left {
@@ -109,12 +112,12 @@ nav {
   max-width: 512px;
   height: 100%;
   background-image: url(https://cdn.pixabay.com/photo/2024/06/06/07/24/man-8812061_640.png);
-  background-size: cover;
+  background-size: 320px;
   background-repeat: no-repeat;
   background-position: bottom center;
 }
 
-#main {
+.cont {
   position: absolute;
   right: 0;
   width: 100%;
@@ -123,11 +126,11 @@ nav {
   overflow-y: auto;
 }
 
-#main::-webkit-scrollbar {
+.cont::-webkit-scrollbar {
   width: 8px;
 }
 
-#main::-webkit-scrollbar-thumb {
+.cont::-webkit-scrollbar-thumb {
   background-image: linear-gradient(transparent, var(--main-color));
 }
 
@@ -137,7 +140,7 @@ nav {
   align-items: center;
   gap: var(--p-m-g);
   color: #fff;
-  line-height: 40px;
+  line-height: 2;
 }
 
 .item img {
@@ -152,6 +155,7 @@ nav {
 
 footer {
   color: #eee;
+  line-height: 4;
 }
 
 @media screen and (max-width:768px) {
@@ -163,14 +167,7 @@ footer {
     display: none;
   }
 
-  .main {
-    height: 460px;
-    padding-left: 0;
-    background-position: unset;
-  }
-
-  .item .icons {
-    grid-column: span 5;
-    text-align: center;
+  .cont {
+    backdrop-filter: blur(1px);
   }
 }

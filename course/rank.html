@@ -15,18 +15,24 @@
         <div class="nav-item">{{item.year}}</div>
         <div class="sub-nav">
           <div class="sub-nav-item" v-for="(item,ind) in item.major" :key="item.url" @click="getData(item.url)">
-            {{item.name}}</div>
+            {{item.name}}{{item.class}}班</div>
         </div>
       </div>
       <div class="logo">
         <span class='iconfont icon-line-medalxunzhang-02 logo-icon'></span>
-        <span class="logo-title">积分榜 <span class='iconfont icon-line-medalxunzhang-02'></span></span>
+        <span class="logo-title">积分榜<span class='iconfont icon-line-medalxunzhang-02'></span></span>
       </div>
     </nav>
     <div class="main">
       <div class="left"></div>
-      <div id="main">
+      <div class="cont">
+        <!-- <div class="title">{{rank.info}}</div> -->
         <div class="title">{{title}}</div>
+        <!-- <div class="title">
+          <span>{{rank.info.grade}}</span>
+          <span>{{rank.info.major}}</span>
+          <span>{{rank.info.course}}</span>
+        </div> -->
         <div class="item" v-for="(item,ind) in rank.cont" :key="item">
           <div>{{item.usn}}</div>
           <img class='img' :src="`/utils${item.uavatar}`" alt="avatar">
@@ -71,18 +77,35 @@
             major: [
               {
                 name: '22软工',
-                url: '202401.json'
+                url: '202401.json',
+                class: 1
               },
               {
                 name: '22数媒',
-                url: '202402.json'
-              }
+                url: '202402.json',
+                class: 1
+              },
+              {
+                name: '23软工',
+                url: '202403.json',
+                class: 1
+              },
+              {
+                name: '23软工',
+                url: '202404.json',
+                class: 2
+              },
+              {
+                name: '23软工',
+                url: '202405.json',
+                class: 3
+              },
             ]
           }
         ])
         const ind = ref(0)
         const isShow = ref(false)
-        const title = ref('请选择...')
+        const title = ref('');
         const rank = ref([]);
         const getData = (url) => {
           // isShow.value = true;
@@ -90,9 +113,9 @@
           fetch(`/utils/data/rank/${url}`)
             .then(res => res.json())
             .then(res => {
-              console.log(res);
+              console.log(res.info);
               rank.value = res;
-              title.value = `${res.info.grade} ${res.info.major} ${res.info.course}`
+              title.value = `${res.info.grade} ${res.info.major} ${res.info.class} ${res.info.course}`
               // isShow.value = false;
               // console.log(url, isShow.value);
             })
@@ -104,8 +127,8 @@
           ind,
           isShow,
           navs,
-          rank,
           title,
+          rank,
           getData
         }
       }
