@@ -6,6 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2024-01</title>
   <link rel="stylesheet" href="./css/rank2024.css">
+  <style>
+    .portable-tbl {
+      display: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      .portable-tbl {
+        display: block;
+      }
+
+      .normal-tbl {
+        display: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -29,15 +44,15 @@
           <div>开课单位：信息与智能工程学院</div>
         </div>
       </header>
-      <table>
+      <table class="normal-tbl">
         <tr>
           <th rowspan="2">序号</th>
           <th rowspan="2">学号</th>
           <th rowspan="2">姓名</th>
-          <th colspan="6">课堂考勤 30%</th>
-          <th colspan="7">课程作业 60%</th>
-          <th rowspan="2">平时表现 10%</th>
-          <th rowspan="2">平时成绩</th>
+          <th colspan="6">考勤 30%</th>
+          <th colspan="7">作业 60%</th>
+          <th rowspan="2">表现 10%</th>
+          <th rowspan="2">成绩</th>
         </tr>
         <tr>
           <td>出勤</td>
@@ -79,6 +94,37 @@
             <div>考勤说明：减分制；迟到-5；请假-10；缺勤-15；早退：-5</div>
           </td>
         </tr> -->
+      </table>
+      <table class="portable-tbl">
+        <tr>
+          <th>序号</th>
+          <th>学号</th>
+          <th>姓名</th>
+          <th>考勤 30%</th>
+          <th>作业 60%</th>
+          <th>表现 10%</th>
+          <th>成绩</th>
+        </tr>
+        <tr v-for="(student,ind) in students">
+          <td>{{ind+1}}</td>
+          <td>{{student.id}}</td>
+          <td>{{student.name}}</td>
+          <!-- <td>{{student.clockin.present}}</td>
+          <td>{{student.clockin.late}}</td>
+          <td>{{student.clockin.leave}}</td>
+          <td>{{student.clockin.absent}}</td>
+          <td>{{student.clockin.early}}</td> -->
+          <td>{{clockinFn(student.clockin)}}</td>
+          <!-- <td>{{student.homework.item0}}</td>
+          <td>{{student.homework.item1}}</td>
+          <td>{{student.homework.item2}}</td>
+          <td>{{student.homework.item3}}</td>
+          <td>{{student.homework.item4}}</td>
+          <td>{{student.homework.item5}}</td> -->
+          <td>{{homeworkFn(student.homerwork)}}</td>
+          <td>{{student.bonus}}</td>
+          <td>{{gradeFn(student)}}</td>
+        </tr>
       </table>
     </div>
   </div>
