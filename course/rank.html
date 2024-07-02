@@ -11,7 +11,7 @@
 <body>
   <div class="container" id="app">
     <nav>
-      <div class="nav" v-for="(item,ind) in navs" :key="item,url">
+      <div class="nav" :class="{active:isShow}" v-for="(item,ind) in navs" :key="item,url">
         <div class="nav-item">{{item.year}}</div>
         <div class="sub-nav">
           <div class="sub-nav-item" v-for="(item,ind) in item.major" :key="item.url" @click="getData(item.url)">
@@ -24,7 +24,16 @@
       </div>
     </nav>
     <div class="main">
-      <div id="main"></div>
+      <div class="left"></div>
+      <div id="main">
+        <div class="title">{{title}}</div>
+        <div class="item" v-for="(item,ind) in rank.cont" :key="item">
+          <div>{{item.usn}}</div>
+          <img class='img' :src="`/utils${item.uavatar}`" alt="avatar">
+          <span class='name'>{{item.uname}}</span>
+          <div><span class='iconfont icon-star' v-for="star in item.ucredit"></span></div>
+        </div>
+      </div>
     </div>
     <footer>
       <h5>All Rights Reserved &copy; By Cnplaman 2022-2024</h5>
@@ -72,21 +81,31 @@
           }
         ])
         const ind = ref(0)
+        const isShow = ref(false)
+        const title = ref('请选择...')
+        const rank = ref([]);
         const getData = (url) => {
-          console.log(url);
-          fetch(`https://glpla.github.io/utils/data/rank/${url}`)
+          // isShow.value = true;
+          // console.log(url, isShow.value);
+          fetch(`/utils/data/rank/${url}`)
             .then(res => res.json())
             .then(res => {
               console.log(res);
+              rank.value = res;
+              title.value = `${res.info.grade} ${res.info.major} ${res.info.course}`
+              // isShow.value = false;
+              // console.log(url, isShow.value);
             })
         }
         onMounted(() => {
           console.log('hi');
-          getData(ind)
         })
         return {
           ind,
+          isShow,
           navs,
+          rank,
+          title,
           getData
         }
       }

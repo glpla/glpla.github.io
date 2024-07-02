@@ -1,11 +1,10 @@
-@import url(//at.alicdn.com/t/c/font_4240947_1yqeamcumt2.css);
-@import url(../../css/fonts_yuwei.css);
+@import url(https://at.alicdn.com/t/c/font_4240947_1yqeamcumt2.css);
 
 :root {
   --main-color: #FDC830;
-  --p-m-g: 10px;
   --item-bg: hsla(44, 98%, 59%, 5%);
   --scroll-bar-bg: rgb(241, 139, 95);
+  --p-m-g: 10px;
 }
 
 * {
@@ -29,6 +28,7 @@ body {
   height: 100vh;
   color: #efefef;
   background-color: #000;
+  font-family: 'Roboto', 'Quicksand', "微软雅黑", "Microsoft YaHei", Arial, Helvetica, sans-serif;
 }
 
 .container {
@@ -38,18 +38,49 @@ body {
   gap: var(--p-m-g);
   align-items: center;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1024px;
+  min-height: 100vh;
   padding: var(--p-m-g);
 
 }
 
 nav {
+  position: relative;
   width: 100%;
   align-self: start;
   display: flex;
   align-items: end;
   gap: var(--p-m-g);
-  line-height: 20px;
+  font-size: 1.6rem;
+  z-index: 1;
+}
+
+.nav {
+  position: relative;
+  cursor: pointer;
+  line-height: 2;
+}
+
+.nav:hover .nav-item {
+  color: var(--main-color);
+}
+
+.nav.active .sub-nav,
+.nav:hover .sub-nav {
+  max-height: 100vh;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.sub-nav {
+  position: absolute;
+  width: 120px;
+  max-height: 0;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.sub-nav-item:hover {
+  color: var(--main-color);
 }
 
 .logo {
@@ -57,36 +88,38 @@ nav {
   color: var(--main-color);
 }
 
-.tab-item {
-  font-size: 1.6rem;
-  padding-top: var(--p-m-g);
-  padding-bottom: var(--p-m-g);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-}
-
-.tab-item.active {
-  border-color: var(--main-color);
+.title {
+  position: sticky;
+  top: 0;
+  background-color: #000;
+  font-size: 1.8rem;
+  line-height: 2;
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  position: relative;
   width: 100%;
   height: 60vh;
-  padding-left: 40%;
-  background-image: url(https://cdn.pixabay.com/photo/2020/09/12/05/07/thumbs-up-5564902_640.jpg);
+}
+
+.left {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  max-width: 512px;
+  height: 100%;
+  background-image: url(https://cdn.pixabay.com/photo/2024/06/06/07/24/man-8812061_640.png);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
-  border-radius: var(--p-m-g);
+  background-position: bottom center;
 }
 
 #main {
-  display: flex;
-  flex-direction: column;
-  padding: var(--p-m-g) 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  max-width: 512px;
+  height: 100%;
   overflow-y: auto;
 }
 
@@ -103,7 +136,6 @@ nav {
   grid-template-columns: auto auto 60px 1fr;
   align-items: center;
   gap: var(--p-m-g);
-  padding: 0 var(--p-m-g);
   color: #fff;
   line-height: 40px;
 }
@@ -135,10 +167,6 @@ footer {
     height: 460px;
     padding-left: 0;
     background-position: unset;
-  }
-
-  #main {
-    height: 400px;
   }
 
   .item .icons {
