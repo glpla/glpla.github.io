@@ -166,7 +166,7 @@ el.removeEventListener(事件类型, 处理函数, 事件处理方式)</pre>
     <dt>事件传参</dt>
     <dd>.不能直接使用，否则会被立即执行</dd>
     <dd>.需要使用匿名函数，在匿名函数里执行封装的带参函数</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 封装表单域的获取焦点和失去焦点函数</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 封装表单域的获取焦点和失去焦点函数</dd>
     <dd>
       <pre>
 function setBg(color) {
@@ -239,6 +239,21 @@ ta.addEventListener('blur', (e) => {
       <div>只有当事件流处在目标阶段的时候，两个的指向才是一样的</div>
       <div>当处于捕获和冒泡阶段的时候，target指向被单击的对象；currentTarget指向当前事件活动的对象（一般为父级）</div>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 模态框的关闭</dd>
+    <dd>
+      <div>除了显式的单击指定按钮关闭外，单击其它任意非特定响应区域/无效区域也应该关闭模态框</div>
+      <div>通过判定target是否是无效区域决定是否关闭模态框 - 对象、类名、ID、标签都可以作为判定的依据，但是必须能唯一确定</div>
+      <div>更多案例请访问 <a href="../demo/up2u.html">图册简介</a>、<a href="../demo/todo.html">代办事项</a></div>
+      <pre>
+modalBox.addEventListener('click', (e) => {
+  // if (e.target.id == 'modal-box') {
+  //   modalBox.classList.remove('active')
+  // }
+  if (e.target == modalBox) {
+    modalBox.classList.remove('active')
+  }
+})</pre>
+    </dd>
   </dl>
   <div class="chap">默认事件 default</div>
   <dl>
@@ -246,7 +261,7 @@ ta.addEventListener('blur', (e) => {
     <dd>1. 右键菜单</dd>
     <dd>2. &lt;form&gt;提交的默认</dd>
     <dd>3. &lt;a&gt;的跳转</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 阻止右键菜单</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 阻止右键菜单</dd>
     <dd>
       <pre>
 document.addEventListener('contextmenu', (e) => {
@@ -258,7 +273,7 @@ document.oncontextmenu = function () {
   return false;
 }</pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 阻止&lt;form&gt;提交的默认跳转</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 阻止&lt;form&gt;提交的默认跳转</dd>
     <dd>
       <pre>
 form.addEventListener('submit', (e) => {
@@ -272,7 +287,7 @@ form.addEventListener('submit', (e) => {
   return false;
 })</pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 阻止&lt;a&gt;默认跳转</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 阻止&lt;a&gt;默认跳转</dd>
     <dd>
       <pre>
 a.addEventListener('click', (e) => {
