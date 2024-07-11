@@ -28,14 +28,12 @@
   <dl>
     <dl class="nav-cont">
       <dt>视口 viewpoint</dt>
-      <dd>.约束&lt;html&gt;的大小</dd>
-      <dd>.显示内容，和浏览器窗口大小一致；不包括底部的状态栏和顶部的菜单栏和地址栏</dd>
-      <dd>.在&lt;head&gt;引入视口 viewport</dd>
-      <dd>.VS Code创建的html页面默认已提供；其它开发环境注意确认是否有</dd>
       <dd>
+        <div>.约束&lt;html&gt;的大小</div>
+        <div>.显示内容，和浏览器窗口大小一致；不包括底部的状态栏和顶部的菜单栏和地址栏</div>
+        <div>.在&lt;head&gt;引入视口 viewport</div>
+        <div>.VS Code创建的html页面默认已提供；其它开发环境注意确认是否有</div>
         <pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</pre>
-      </dd>
-      <dd>
         <table>
           <tr>
             <th>类别</th>
@@ -62,14 +60,12 @@
             <td>是否缩放yes[默认]|no</td>
           </tr>
         </table>
-      </dd>
-      <dd>.是苹果公司为了解决移动端浏览器的页面渲染而提出的方案，后来被其它移动设备公司采用，即：<span class="warn">浏览器的宽度=设备屏幕的宽度</span></dd>
-      <dd>.通常只使用前面两个属性</dd>
-      <dd>.用户缩放行为：微信扫码响应，QQ浏览器不响应；无论是否允许缩放，都能缩放[流氓浏览器]</dd>
-      <dd>.width指浏览器的屏幕宽度；通常认为和设备宽度保持一致，不做区分，特别是移动端[你在移动端对浏览器进行过最大最小化操作吗？]</dd>
-      <dd>.device-width指设备屏幕的宽度，对于特定的设备，宽度是固定的</dd>
-      <dd>.如果修改视口大小为300，则真机调试的结果也为300，所以默认情况下，设置浏览器的宽度等于设备屏幕的宽度</dd>
-      <dd>
+        <div>.是苹果公司为了解决移动端浏览器的页面渲染而提出的方案，后来被其它移动设备公司采用，即：<span class="warn">浏览器的宽度=设备屏幕的宽度</span></div>
+        <div>.通常只使用前面两个属性</div>
+        <div>.用户缩放行为：微信扫码响应，QQ浏览器不响应；无论是否允许缩放，都能缩放[流氓浏览器]</div>
+        <div>.width指浏览器的屏幕宽度；通常认为和设备宽度保持一致，不做区分，特别是移动端[你在移动端对浏览器进行过最大最小化操作吗？]</div>
+        <div>.device-width指设备屏幕的宽度，对于特定的设备，宽度是固定的</div>
+        <div>.如果修改视口大小为300，则真机调试的结果也为300，所以默认情况下，设置浏览器的宽度等于设备屏幕的宽度</div>
         <pre>&lt;meta name="viewport" content="width=300, initial-scale=1.0"&gt;</pre>
       </dd>
       <dd>[<span class="iconfont icon-keyboard"></span>]获取视口大小 - 缩放浏览器、最大化、最小化，结果相应变化</dd>
@@ -80,27 +76,25 @@ let h = document.documentElement.clientHeight;
 console.log(w, h);</pre>
       </dd>
       <dd>[<span class="iconfont icon-keyboard"></span>]真机调试-移动端视口</dd>
-      <dd>.开发环境中，切换为移动设备后，调试的视口大小和真机测试不一致</dd>
-      <dd>.使用上述代码，在华为某真机上，微信扫码显示为宽高为400*745；浏览器输入地址查看为360*597[真机调试需要手机和电脑处于同一个WIFI内]</dd>
       <dd>
-        .查看屏幕大小：真机上，微信扫码为400*867[宽度一致，高度不一致，是因为视口高度+上方的标题栏+下方的状态栏=屏幕宽度]；浏览器输入地址查看360*780[原理相同]；之所以微信扫码结果比浏览器宽度大，是因为浏览器有40px的滚动条；所以移动端开发，通常会指定最小宽度为320px
-      </dd>
-      <dd>
+        <div>.开发环境中，切换为移动设备后，调试的视口大小和真机测试不一致</div>
+        <div>.使用上述代码，在华为某真机上，微信扫码显示为宽高为400*745；浏览器输入地址查看为360*597[真机调试需要手机和电脑处于同一个WIFI内]</div>
+        <div>
+          .查看屏幕大小：真机上，微信扫码为400*867[宽度一致，高度不一致，是因为视口高度+上方的标题栏+下方的状态栏=屏幕宽度]；浏览器输入地址查看360*780[原理相同]；之所以微信扫码结果比浏览器宽度大，是因为浏览器有40px的滚动条；所以移动端开发，通常会指定最小宽度为320px
+        </div>
         <pre>
 let sw = window.screen.width;
 let sh = window.screen.height;</pre>
-      </dd>
-      <dd>移动端容器最小尺寸</dd>
-      <dd>
+        <div>移动端容器最小尺寸</div>
         <pre>min-width: 320px;</pre>
       </dd>
     </dl>
     <dl>
       <dt class="nav-cont">断点 breakpoint</dt>
-      <dd>利用断点 breakpoint划分尺寸</dd>
-      <dd>尺寸断点 breakpoint 应以实际内容为主，如根据导航条灵活指定</dd>
-      <dd>通常以Ipnone6（375*667）为标准进行设计图的设计</dd>
       <dd>
+        <div>利用断点 breakpoint划分尺寸</div>
+        <div>尺寸断点 breakpoint 应以实际内容为主，如根据导航条灵活指定</div>
+        <div>通常以Ipnone6（375*667）为标准进行设计图的设计</div>
         <table>
           <tr>
             <th>类别</th>
@@ -193,9 +187,9 @@ let sh = window.screen.height;</pre>
 }</pre>
       </dd>
       <dt class="nav-cont">桌面优先</dt>
-      <dd>优先满足桌面端，然后逐步减小尺寸</dd>
-      <dd>使用max-width，从默认的大尺寸向小尺寸过渡</dd>
       <dd>
+        <div>优先满足桌面端，然后逐步减小尺寸</div>
+        <div>使用max-width，从默认的大尺寸向小尺寸过渡</div>
         <pre>
 //默认是大尺寸 large... ...
 
@@ -212,9 +206,9 @@ let sh = window.screen.height;</pre>
 }</pre>
       </dd>
       <dt class="nav-cont">移动优先</dt>
-      <dd>优先满足移动端，逐步增加尺寸</dd>
-      <dd>使用min-width，从默认的小尺寸向大尺寸过渡</dd>
       <dd>
+        <div>优先满足移动端，逐步增加尺寸</div>
+        <div>使用min-width，从默认的小尺寸向大尺寸过渡</div>
         <pre>
 //默认是小尺寸 small... ...
 
@@ -235,7 +229,7 @@ let sh = window.screen.height;</pre>
 }
 </pre>
       </dd>
-      <dd>3. 其他使用</dd>
+      <dt>其他使用</dt>
       <dd>
         <pre>
 //使用关键字

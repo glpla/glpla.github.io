@@ -20,18 +20,27 @@
       gap: 10px;
       height: 100vh;
       color: #fff;
-      background: #000;
-      /* fallback for old browsers */
-      background: -webkit-linear-gradient(to bottom, #4286f4, #043556);
-      /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(to bottom, #4286f4, #043556);
-      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: #000 linear-gradient(to bottom, #4286f4, #043556);
+    }
 
+    .desc {
+      width: 360px;
+    }
+
+    .desc span {
+      text-transform: capitalize;
+    }
+
+    .img {
+      float: left;
+      width: 240px;
+      shape-outside: url(../../imgs/running.png);
+      filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
     }
 
     .wrap {
       width: 100%;
-      max-width: 350px;
+      max-width: 360px;
       height: 10px;
       background-color: #000;
       border-radius: 10px;
@@ -45,6 +54,10 @@
       animation: loading 5s steps(10) forwards;
     }
 
+    .tips {
+      color: #ff0;
+    }
+
     @keyframes loading {
       100% {
         width: 100%;
@@ -54,13 +67,42 @@
 </head>
 
 <body>
-  <span>Loading...</span>
+  <div class="desc">
+    <img class="img" src="../../imgs/running.png" alt="">
+    <span>action</span>
+    <span>brave</span>
+    <span>cherish</span>
+    <span>delight</span>
+    <span>energy</span>
+    <span>fight</span>
+    <span>grateful</span>
+    <span>h</span>
+    <span>i</span>
+    <span>join</span>
+    <span>k</span>
+    <span>love</span>
+    <span>motivated</span>
+    <span>n</span>
+    <span>operation</span>
+    <span>positive</span>
+    <span>question</span>
+    <span>read</span>
+    <span>stick</span>
+    <span>team</span>
+    <span>u</span>
+    <span>v</span>
+    <span>watch</span>
+    <span>x</span>
+    <span>y</span>
+    <span>zealous</span>
+  </div>
+  <span class="tips">Loading...</span>
   <dd class="wrap">
     <div class="item"></div>
   </dd>
   <script src="../../utils/lib/snow.js"></script>
   <script>
-    let item = document.querySelector('.item')
+    const item = document.querySelector('.item')
     item.addEventListener('animationend', () => {
       location.href = './notice.html'
     })
