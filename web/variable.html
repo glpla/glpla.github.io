@@ -76,15 +76,18 @@
   </header>
   <dl>
     <dt>说明</dt>
-    <dd>. 也称自定义属性</dd>
-    <dd>. 声明：使用两个短划线--开始的变量名表示</dd>
-    <dd>. 使用：在CSS中使用var()引用变量；可以指定备用值</dd>
-    <dd>. 一次定义、多次使用；适合一个属性值在多处被使用；相当于定义了一个当前CSS文件内的全局变量</dd>
-    <dd>. 优势：方便运维，特别适合全站换肤</dd>
-    <dd>. 变量的使用经常配合计算函数 calc() 使用</dd>
+    <dd>
+      <div>. 也称自定义属性</div>
+      <div>. 声明：使用两个短划线--开始的变量名表示</div>
+      <div>. 使用：在CSS中使用var()引用变量；建议同时指定 <span style="color: var(--main-color);">备用值</span></div>
+      <div>. 一次定义、多次使用；适合一个属性值在多处被使用；相当于定义了一个当前CSS文件内的全局变量</div>
+      <div>. 优势：方便运维，特别适合全站换肤</div>
+      <div>. 变量的使用经常配合计算函数 calc() 使用</div>
+    </dd>
     <dt>全局变量</dt>
     <dd>
       <div>. 在CSS中，使用根选择器:root声明，所有元素都可使用</div>
+      <div>:root是&lt;html&gt;的一个属性</div>
       <pre>
 :root {
     --main-color: #f40;
@@ -102,6 +105,8 @@
         --main-layout: 1fr;
     }
 }</pre>
+      <div>. 也可以用到元素的内联样式</div>
+      <pre>&lt;span style="color: var(--main-color);"&gt;Lorem.&lt;/span&gt;</div></pre>
     </dd>
     <dt>局部变量</dt>
     <dd>
@@ -117,10 +122,10 @@
       <pre>&lt;div style="--alpha:0"&gt;0&lt;/div&gt;</pre>
       <pre>
 el{
-  opacity: var(--alpha);
+  opacity: var(--alpha, 0.4);
 }      </pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./opening.html#evaluation">教学评价</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./opening.html#evaluation">教学评价</a></dd>
     <dd>
       <div>. 每个评价条目仅仅是百分比和提示信息不同</div>
       <div>. 使用伪元素分别显示百分比和提示信息</div>
@@ -134,7 +139,7 @@ el{
       <pre>
 .per::before {
   content: '';
-  width: var(--per);
+  width: var(--per, 100%);
   height: 100%;
   border-radius: 2rem;
   background-color: #f40;
@@ -147,14 +152,16 @@ el{
   margin-right: 1rem;
 }      </pre>
     </dd>
-    <dt>与JS交互</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 使用JS与:root交互</dd>
     <dd>
-      <div>. 动态调整</div>
+      <div>获取:root - 相当于整个&lt;html&gt;</div>
+      <pre>let root = document.documentElement;</pre>
+      <div>或直接获取:root节点</div>
+      <pre>let root = document.querySelector(':root');</pre>
       <div>. 获取元素节点，使用其特定属性，如颜色去修改变量的值，达到换肤的效果</div>
       <div>. 也可以使用自定义属性绑定颜色值</div>
       <pre>
 let mixer = document.querySelectorAll('.mixer span');
-let root = document.querySelector(':root');
 mixer.forEach(item => {
     item.addEventListener('click', (e) => {
         console.log(e.target.style.backgroundColor);
@@ -162,11 +169,17 @@ mixer.forEach(item => {
     })
 })</pre>
     </dd>
+    <dd class="tips">
+      <div>修改变量可以快速实现批量调整</div>
+      <div>为变量指定特定的值可以使用条件渲染，如1或0</div>
+    </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script>
     let mixer = document.querySelectorAll('.mixer span');
-    let root = document.querySelector(':root');
+    // let root = document.querySelector(':root');
+    let root = document.documentElement;
+    console.log(root);
     mixer.forEach(item => {
       item.addEventListener('click', (e) => {
         // console.log(e.target.style.backgroundColor);
