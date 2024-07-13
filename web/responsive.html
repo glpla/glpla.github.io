@@ -1,81 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>响应式开发 Responsive</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <base target="_blank" />
+    <style>
+      .max-w {
+        width: max-content;
+        margin: auto;
+      }
+    </style>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>响应式开发 Responsive</title>
-  <link rel="stylesheet" href="../css/common.css">
-  <base target="_blank">
-</head>
-
-<body>
-  <header>
-    <h1>响应式开发</h1>
-    <span>&commat;Responsive</span>
-  </header>
-  <dl>
-    <dd class="tips">
-      <div>通常综合运用不同的布局方式进行开发；代码有冗余，影响性能</div>
-      <div>通常是桌面端会调整大小；手机端在打开的时候，就已经决定了如何使用资源，不会也没有办法去调整屏幕大小</div>
-    </dd>
-    <dt>单位</dt>
-    <dd class="sn">
-      <div>em</div>
-      <p>相对父级字体大小 font-size 而定</p>
-      <div>rem</div>
-      <p>根布局，相对 &lt;html&gt; 设置的字体大小 font-size 而定，默认是16px</p>
-      <div>%</div>
-      <p>百分比布局；相对父级宽度 width 而定</p>
-      <p>主流的栅格化布局框架都是基于百分比 %</p>
-      <div>vmin</div>
-      <p>代表 viewport（视口）宽度和高度中的较小值的 1%。换句话说，1vmin 等于当前视口宽度和高度两者之间的最小值的 1%</p>
-    </dd>
-    <dt>样式</dt>
-    <dd class="sn">
-      <div>float</div>
-      <p>浮动布局；早期多使用，现在仅在特定场合才使用，如图文混排、首字下沉等</p>
-      <div>flex</div>
-      <p>弹性盒子布局；一维布局；应用非常广泛</p>
-      <div>grid</div>
-      <p>网格布局；二维布局；应用非常广泛</p>
-      <div>min() max() clamp()</div>
-      <div>min-width max-width</div>
-      <div>min-height max-height</div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 响应式版心</dd>
-    <dd>
-      <div>方案1：使用max-width</div>
-      <pre>
+  <body>
+    <header>
+      <h1>响应式开发</h1>
+      <span>&commat;Responsive</span>
+    </header>
+    <dl>
+      <dd class="tips">
+        <div>通常综合运用不同的布局方式进行开发；代码有冗余，影响性能</div>
+        <div>
+          通常是桌面端会调整大小；手机端在打开的时候，就已经决定了如何使用资源，不会也没有办法去调整屏幕大小
+        </div>
+      </dd>
+      <dt>单位</dt>
+      <dd class="sn">
+        <div>em</div>
+        <p>相对父级字体大小 font-size 而定</p>
+        <div>rem</div>
+        <p>
+          根布局，相对 &lt;html&gt; 设置的字体大小 font-size 而定，默认是16px
+        </p>
+        <div>%</div>
+        <p>百分比布局；相对父级宽度 width 而定</p>
+        <p>主流的栅格化布局框架都是基于百分比 %</p>
+        <div>vmin</div>
+        <p>
+          代表 viewport（视口）宽度和高度中的较小值的 1%。换句话说，1vmin
+          等于当前视口宽度和高度两者之间的最小值的 1%
+        </p>
+      </dd>
+      <dt>样式</dt>
+      <dd class="sn">
+        <div>float</div>
+        <p>
+          浮动布局；早期多使用，现在仅在特定场合才使用，如图文混排、首字下沉等
+        </p>
+        <div>flex</div>
+        <p>弹性盒子布局；一维布局；应用非常广泛</p>
+        <div>grid</div>
+        <p>网格布局；二维布局；应用非常广泛</p>
+        <div>min() max() clamp()</div>
+        <div>min-width max-width</div>
+        <div>min-height max-height</div>
+      </dd>
+      <dd>[<span class="iconfont icon-keyboard"></span>] 响应式版心</dd>
+      <dd>
+        <div>方案1：使用max-width</div>
+        <pre>
 main {
   width: calc(100% - 1rem);
   max-width: 800px;
   margin: 0 auto;
-}</pre>
-      <div>方案2：使用min()函数</div>
-      <pre>
+}</pre
+        >
+        <div>方案2：使用min()函数</div>
+        <pre>
 main {
   width: min(800px, 100% - 1rem);
   margin: 0 auto;
-}</pre>
-    </dd>
-    <dt>js</dt>
-    <dd>使用JavaScript响应</dd>
-    <dd>万能的js</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 设置字体大小</dd>
-    <dd>
-      <div>方案1：静态设置 - 为方便计算，通常设置html字体大小为62.5%：1rem=10px</div>
-      <pre>
+}</pre
+        >
+      </dd>
+      <dt>属性</dt>
+      <dd class="sn">
+        <div>max-content - 根据内容最大宽度自动调整自身宽度</div>
+        <p class="max-w">
+          [<span class="iconfont icon-keyboard"></span>] 内容居中 - 标题
+        </p>
+        <pre>
+h1{
+  width: max-content;
+  margin: auto;
+}      </pre
+        >
+      </dd>
+      <dt>js</dt>
+      <dd>使用JavaScript响应</dd>
+      <dd>万能的js</dd>
+      <dd>[<span class="iconfont icon-keyboard"></span>] 设置字体大小</dd>
+      <dd>
+        <div>
+          方案1：静态设置 - 为方便计算，通常设置html字体大小为62.5%：1rem=10px
+        </div>
+        <pre>
 html {
     //font-size: 10px;
     font-size: 62.5%;
     scroll-behavior: smooth;
-}</pre>
-      <div>方案2：动态设置 - 根据视口宽度设置字体大小</div>
-      <div>超过750，按750计算；小于320，按320计算</div>
-      <div>放在脚本放在&lt;header&gt;，优先处理</div>
-      <pre>
+}</pre
+        >
+        <div>方案2：动态设置 - 根据视口宽度设置字体大小</div>
+        <div>超过750，按750计算；小于320，按320计算</div>
+        <div>放在脚本放在&lt;header&gt;，优先处理</div>
+        <pre>
 function rem() {
   let dw = document.documentElement.clientWidth || window.innerWidth
   if (dw >= 750) {
@@ -91,11 +123,17 @@ function rem() {
 rem()
 window.onresize = function () {
   rem()
-}</pre>
-      <div>方案3：详情查看 <a href="./js/bom.html">BOM</a></div>
-    </dd>
-  </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-</body>
-
+}</pre
+        >
+        <div>方案3：详情查看 <a href="./js/bom.html">BOM</a></div>
+      </dd>
+    </dl>
+    <iframe
+      src="../../common/footer.html"
+      frameborder="0"
+      scrolling="no"
+      title="footer"
+      id="footer"
+    ></iframe>
+  </body>
 </html>
