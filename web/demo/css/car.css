@@ -53,7 +53,7 @@ a {
   align-items: center;
   height: var(--header-h);
   color: var(--white-color);
-  padding: calc(2 * var(--p-m-g)) calc(4 * var(--p-m-g));
+  padding: 0 calc(4 * var(--p-m-g));
 }
 
 .nav-close,
@@ -76,7 +76,7 @@ a {
   backdrop-filter: blur(10px);
   width: 50%;
   height: 100%;
-  padding: calc(2 * var(--p-m-g)) calc(4 * var(--p-m-g));
+  padding: var(--header-h) calc(4 * var(--p-m-g)) calc(2 * var(--p-m-g));
   transition: right 0.5s ease-in-out;
 }
 
@@ -92,8 +92,8 @@ a {
 
 .nav-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: var(--header-h);
+  right: calc(4 * var(--p-m-g));
 }
 /* main */
 .car-1 {
@@ -201,17 +201,15 @@ a {
 }
 
 .swiper-pagination-bullets.swiper-pagination-horizontal {
-  bottom: 20px;
+  top: 65%;
   display: flex;
   justify-content: center;
 }
 
 .swiper-pagination-bullets .swiper-pagination-bullet {
-  width: 20px;
-  padding: 4px 10px;
-  display: grid;
-  place-items: center;
-  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   background: none;
   opacity: 1;
   align-content: center;
@@ -251,4 +249,65 @@ a {
 }
 .link-item {
   color: var(--black-color);
+}
+@media screen and (min-width: 768px) {
+  .swiper-slide img {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+  .bar.bar-1 {
+    width: 40%;
+    height: 100%;
+  }
+  .bar.bar-2 {
+    width: 60%;
+    height: 100%;
+    left: initial;
+    right: 0;
+  }
+  .swiper-slide img {
+    width: 600px;
+    bottom: -24rem;
+  }
+  .swiper-info {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--p-m-g);
+    padding-right: 4rem;
+  }
+  .swiper-spec {
+    gap: 3rem;
+  }
+  .menu {
+    width: 30%;
+  }
+  .link-border {
+    height: 40vh;
+  }
+  .swiper-pagination-bullets.swiper-pagination-horizontal {
+    flex-direction: column;
+    left: initial;
+    right: var(--p-m-g);
+    top: 0;
+    bottom: 0;
+    width: initial;
+    height: max-content;
+    margin: auto 0;
+  }
+}
+@media screen and (min-width: 1150px) {
+  .menu {
+    width: 15%;
+  }
+  .swiper-slide img {
+    width: 800px;
+    bottom: -34rem;
+  }
+  .bar.bar-1,
+  .bar.bar-2 {
+    width: 50%;
+  }
 }

@@ -1,94 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>轮播图 Swiper</title>
+      <link rel="stylesheet" href="../../css/common.css" />
+      <link
+        rel="stylesheet"
+        href="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.css"
+      />
+      <base target="_blank" />
+      <style>
+        .swiper {
+          width: 100%;
+          max-width: 800px;
+          aspect-ratio: 4/3;
+        }
 
-<!DOCTYPE html>
-<html lang="en">
+        .swiper-slide {
+          position: relative;
+        }
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>轮播图 Swiper</title>
-  <link rel="stylesheet" href="../../css/common.css">
-  <link rel="stylesheet" href="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.css">
-  <base target="_blank">
-  <style>
-    .swiper {
-      width: 100%;
-      max-width: 800px;
-      aspect-ratio: 4/3;
-    }
+        .swiper-slide img {
+          position: absolute;
+          transform: translateX(50%);
+          width: 100%;
+          opacity: 0;
+          transition: 0.4s;
+        }
 
-    .swiper-slide {
-      position: relative;
-    }
+        .swiper-pagination-bullets.swiper-pagination-horizontal {
+          bottom: 20px;
+          display: flex;
+          justify-content: center;
+        }
 
-    .swiper-slide img {
-      position: absolute;
-      transform: translateX(50%);
-      width: 100%;
-      opacity: 0;
-      transition: 0.4s;
-    }
+        .swiper-pagination-bullets .swiper-pagination-bullet {
+          width: 20px;
+          padding: 4px 10px;
+          display: grid;
+          place-items: center;
+          border-radius: 10px;
+          background: none;
+          opacity: 1;
+          align-content: center;
+          font-size: 12px;
+          color: #000;
+          margin: 0;
+          border: 1px solid transparent;
+        }
 
-    .swiper-pagination-bullets.swiper-pagination-horizontal {
-      bottom: 20px;
-      display: flex;
-      justify-content: center;
-    }
+        .swiper-pagination-bullets .swiper-pagination-bullet-active {
+          border-color: #000;
+        }
 
-    .swiper-pagination-bullets .swiper-pagination-bullet {
-      width: 20px;
-      padding: 4px 10px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      background: none;
-      opacity: 1;
-      align-content: center;
-      font-size: 12px;
-      color: #000;
-      margin: 0;
-      border: 1px solid transparent;
-    }
+        .swiper-slide-active img {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        .p1 {
+          padding-left: var(--p-m-g);
+        }
+        .p2 {
+          padding-left: calc(2 * var(--p-m-g));
+        }
+      </style>
+    </head>
 
-    .swiper-pagination-bullets .swiper-pagination-bullet-active {
-      border-color: #000;
-    }
-
-    .swiper-slide-active img {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <h1>&commat;Swiper</h1>
-  </header>
-  <dl>
-    <dt>简介 Overview</dt>
-    <dd>.目前最新版为11；注意：不同的版本，使用方法略有不同。。。</dd>
-    <dd>.更多细节，请访问 <a href="https://www.swiper.com.cn">https://www.swiper.com.cn</a> 或 <a
-        href="https://swiperjs.com/">https://swiperjs.com/[推荐]</a>；请首先阅读Get Started和Demos两部分内容</dd>
-    <dd>. 其它工具：<a href="https://glidejs.com/">https://glidejs.com</a></dd>
-    <dt>核心文件 Core</dt>
-    <dd>
-      <div>.可以下载后本地使用，也可以使用在线CDN <a href="https://cdnjs.com/">https://cdnjs.com/</a></div>
-      <div>.引入样式库 swiper-bundle.min.css</div>
-      <pre>&lt;link rel="stylesheet" href="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.css"&gt;</pre>
-      <div>.引入逻辑库 swiper-bundle.min.js</div>
-      <pre>&lt;script src="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.js"&gt;&lt;/script&gt;</pre>
-    </dd>
-    <dt>基本结构 HTML</dt>
-    <dd>.主体Swiper</dd>
-    <dd>.分页器pagination[可选]</dd>
-    <dd>.导航按钮navigation buttons[可选]</dd>
-    <dd>.滚动条scrollbar[可选]</dd>
-    <dd>[<span class="iconfont icon-bell"></span>]可以使用任何标签实现结构，保持类名相同即可</dd>
-    <dd>
-      <pre>
+    <body>
+      <header>
+        <h1>&commat;Swiper</h1>
+      </header>
+      <dl>
+        <dt>简介 Overview</dt>
+        <dd>.目前最新版为11；注意：不同的版本，使用方法略有不同。。。</dd>
+        <dd>
+          .更多细节，请访问
+          <a href="https://www.swiper.com.cn">https://www.swiper.com.cn</a> 或
+          <a href="https://swiperjs.com/">https://swiperjs.com/[推荐]</a
+          >；请首先阅读Get Started和Demos两部分内容
+        </dd>
+        <dd>
+          . 其它工具：<a href="https://glidejs.com/">https://glidejs.com</a>
+        </dd>
+        <dt>核心文件 Core</dt>
+        <dd>
+          <div>
+            .可以下载后本地使用，也可以使用在线CDN
+            <a href="https://cdnjs.com/">https://cdnjs.com/</a>
+          </div>
+          <div>.引入样式库 swiper-bundle.min.css</div>
+          <pre>
+&lt;link rel="stylesheet" href="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.css"&gt;</pre
+          >
+          <div>.引入逻辑库 swiper-bundle.min.js</div>
+          <pre>
+&lt;script src="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.js"&gt;&lt;/script&gt;</pre
+          >
+        </dd>
+        <dt>基本结构 HTML</dt>
+        <dd>
+          <div>可以使用任何标签实现结构，保持类名相同即可</div>
+          <div>.swiper</div>
+          <div class="p1">.swiper-wrapper</div>
+          <div class="p2">.swiper-slide</div>
+          <div class="p2">... ...</div>
+          <div class="p2">.swiper-slide</div>
+          <div class="p1">.swiper-pagination [分页器，可选]</div>
+          <div class="p1">.swiper-button-prev [导航按钮；可选]</div>
+          <div class="p1">.swiper-button-next [导航按钮；可选]</div>
+          <div class="p1">.swiper-scrollbar [滚动条；可选]</div>
+          <pre>
 &lt;div class="swiper"&gt;
   &lt;div class="swiper-wrapper"&gt;
     &lt;div class="swiper-slide"&gt;Slide 1&lt;/div&gt;
@@ -103,32 +128,38 @@
   &lt;div class="swiper-button-next"&gt;&lt;/div&gt;
 
   &lt;div class="swiper-scrollbar"&gt;&lt;/div&gt;
-&lt;/div&gt;</pre>
-    </dd>
-    <dt>样式 CSS</dt>
-    <dd class="sn">
-      <div>容器.swiper - 指定内容大小[可选]；如图片的显示，可以指定宽高或宽高比</div>
-      <p>.不建议使用背景图片 - 渲染可能有异常</p>
-      <pre>
+&lt;/div&gt;</pre
+          >
+        </dd>
+        <dt>样式 CSS</dt>
+        <dd class="sn">
+          <div>
+            容器.swiper - 指定内容大小[可选]；如图片的显示，可以指定宽高或宽高比
+          </div>
+          <p>.不建议使用背景图片 - 渲染可能有异常</p>
+          <pre>
 .swiper {
   width: 100%;
   max-width: 800px;
-}</pre>
-      <div>导航按钮 - 使用全局变量指定导航按钮样式</div>
-      <pre>
+}</pre
+          >
+          <div>导航按钮 - 使用全局变量指定导航按钮样式</div>
+          <pre>
 --swiper-navigation-size: 36px;
---swiper-navigation-color: #fff;      </pre>
-      <div>分页器pagination - F12检查并修改对应的类</div>
-      <pre>
+--swiper-navigation-color: #fff;      </pre
+          >
+          <div>分页器pagination - F12检查并修改对应的类</div>
+          <pre>
 .swiper-pagination-bullet {
   background-color: #fff;
 }
 
 .swiper-pagination-bullet-active {
   background-color: #f40;
-}</pre>
-      <p>或</p>
-      <pre>
+}</pre
+          >
+          <p>或</p>
+          <pre>
 .swiper-pagination-bullet {
   background-color: transparent;
   width: 40px;
@@ -140,12 +171,13 @@
 
 .swiper-pagination-bullet-active {
   background-color: #f40;
-}</pre>
-    </dd>
-    <dt>脚本 JavaScript</dt>
-    <dd>
-      <div>.swiper的初始化和各种选项</div>
-      <pre>
+}</pre
+          >
+        </dd>
+        <dt>脚本 JavaScript</dt>
+        <dd>
+          <div>.swiper的初始化和各种选项</div>
+          <pre>
 const swiper = new Swiper('.swiper', {
   // Optional parameters
   direction: 'vertical',
@@ -167,114 +199,193 @@ const swiper = new Swiper('.swiper', {
   scrollbar: {
     el: '.swiper-scrollbar',
   },
-});</pre>
-    </dd>
-    <dt>常用选项 Option</dt>
-    <dd>
-      <div>.每个参数选项列表的第一项是默认设置</div>
-      <table>
-        <caption>选项</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>direction</td>
-          <td>轮播方向：水平 | vertical垂直</td>
-        </tr>
-        <tr>
-          <td>speed</td>
-          <td>切换速度</td>
-        </tr>
-        <tr>
-          <td>autoplay</td>
-          <td>自动播放：false | true</td>
-        </tr>
-        <tr>
-          <td>grabCursor</td>
-          <td>抓取|拖拽鼠标样式：false | true</td>
-        </tr>
-        <tr>
-          <td>loop</td>
-          <td>是否循环：true | false</td>
-        </tr>
-        <tr>
-          <td>spaceBetween</td>
-          <td>幻灯片间隔px；不要为幻灯片指定margin</td>
-        </tr>
-        <tr>
-          <td>mousewheel</td>
-          <td>鼠标滚轮触发：false | true</td>
-        </tr>
-        <tr>
-          <td>slides-per-view</td>
-          <td>轮播时可以查看幻灯片的个数；默认1张</td>
-        </tr>
-      </table>
-      <table>
-        <caption>属性</caption>
-        <tr>
-          <th>分类</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>activeIndex</td>
-          <td>当前活动幻灯片；循环模式下容易出现异常</td>
-        </tr>
-        <tr>
-          <td>realIndex</td>
-          <td>幻灯片实际索引；推荐使用</td>
-        </tr>
-        <tr>
-          <td>autoplay</td>
-          <td>自动播放；鼠标点击修改该属性，仍然会播放一次才停止</td>
-        </tr>
-      </table>
-      <table>
-        <caption>事件</caption>
-        <tr>
-          <th>分类</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>slideChange</td>
-          <td>当前活动幻灯切换完毕</td>
-        </tr>
-      </table>
-    </dd>
-    <dd class="example-sn"><a href="https://swiperjs.com/swiper-api#param-renderBullet">定制分页器</a></dd>
-    <dd>
-      <div class="swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="/utils/car/car0.png" alt="">
+});</pre
+          >
+        </dd>
+      </dl>
+      <div class="chap">常用选项 Option</div>
+      <dl>
+        <dt>通用配置 General</dt>
+        <dd>
+          <table>
+            <caption>
+              选项
+            </caption>
+            <tr>
+              <th>类别</th>
+              <th>说明</th>
+            </tr>
+            <tr>
+              <td>direction</td>
+              <td>轮播方向：水平 | vertical垂直</td>
+            </tr>
+            <tr>
+              <td>speed</td>
+              <td>切换速度</td>
+            </tr>
+            <tr>
+              <td>autoplay</td>
+              <td>自动播放：false | true</td>
+            </tr>
+            <tr>
+              <td>grabCursor</td>
+              <td>抓取|拖拽鼠标样式：false | true</td>
+            </tr>
+            <tr>
+              <td>loop</td>
+              <td>是否循环：true | false</td>
+            </tr>
+            <tr>
+              <td>spaceBetween</td>
+              <td>幻灯片间隔px；不要为幻灯片指定margin</td>
+            </tr>
+            <tr>
+              <td>mousewheel</td>
+              <td>鼠标滚轮触发：false | true</td>
+            </tr>
+            <tr>
+              <td>slides-per-view</td>
+              <td>轮播时可以查看幻灯片的个数；默认1张</td>
+            </tr>
+          </table>
+          <table>
+            <caption>
+              属性
+            </caption>
+            <tr>
+              <th>分类</th>
+              <th>说明</th>
+            </tr>
+            <tr>
+              <td>activeIndex</td>
+              <td>当前活动幻灯片；循环模式下容易出现异常</td>
+            </tr>
+            <tr>
+              <td>realIndex</td>
+              <td>幻灯片实际索引；推荐使用</td>
+            </tr>
+            <tr>
+              <td>autoplay</td>
+              <td>自动播放；鼠标点击修改该属性，仍然会播放一次才停止</td>
+            </tr>
+          </table>
+          <table>
+            <caption>
+              事件
+            </caption>
+            <tr>
+              <th>分类</th>
+              <th>说明</th>
+            </tr>
+            <tr>
+              <td>slideChange</td>
+              <td>当前活动幻灯切换完毕</td>
+            </tr>
+          </table>
+        </dd>
+        <dt>分页器 Pagination</dt>
+        <dd>
+          <table>
+            <caption>
+              分页器 pagination
+            </caption>
+            <tr>
+              <th>参数</th>
+              <th>说明</th>
+            </tr>
+            <tr>
+              <td>type</td>
+              <td>
+                类型；进度条 progressbar | 子弹 bullets，默认 | 分数 fraction |
+                自定义 custom
+                <br />每个类型都可进一步定制
+              </td>
+            </tr>
+            <tr>
+              <td>clickable</td>
+              <td>单击分页跳转到对应页面，默认为false</td>
+            </tr>
+            <tr>
+              <td>bulletClass</td>
+              <td>
+                和子弹类型分页器相关的默认类；swiper-pagination-bullet-custom
+              </td>
+            </tr>
+            <tr>
+              <td>renderBullet</td>
+              <td>
+                (index,className) => {}
+                <br />定制子弹类型分页器；返回定制的DOM结构
+              </td>
+            </tr>
+            <tr>
+              <td>currentClass</td>
+              <td>和分数类型分页器相关的默认类；swiper-pagination-current</td>
+            </tr>
+            <tr>
+              <td>totalClass</td>
+              <td>和分数类型分页器相关的默认类；swiper-pagination-total</td>
+            </tr>
+            <tr>
+              <td>renderFraction</td>
+              <td>
+                (currentClass, totalClass) => {}
+                <br />定制分数类型分页器；返回定制的DOM结构
+              </td>
+              <tr>
+                <td>renderCustom</td>
+                <td>定制和自定义类型custom相关的分页器；function(swiper, current, total)</td>
+              </tr>
+            </tr>
+          </table>
+          <div class="tips">
+            <div>
+              如果仅仅是定义样式，不修改数字格式，可以直接使用默认类定制
+            </div>
+            <div>如果需要定制分页器的结构，则需要使用专门的配置项定制</div>
           </div>
-          <div class="swiper-slide">
-            <img src="/utils/car/car1.png" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="/utils/car/car2.png" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="/utils/car/car3.png" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="/utils/car/car4.png" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="/utils/car/car5.png" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="/utils/car/car6.png" alt="">
-          </div>
-          <div class="swiper-slide">
-            <img src="/utils/car/car7.png" alt="">
-          </div>
-        </div>
+        </dd>
+        <dd class="example-sn">
+          <a href="https://swiperjs.com/swiper-api#param-renderBullet"
+            >定制子弹类型分页器</a
+          >；完整案例请访问 <a href="../demo/car.html">靓车荟 - Cars</a>
+        </dd>
+        <dd>
+          默认样式是1 2 3；定制样式为01 02
+          03，结构发生变化，需要使用renderBullet属性专门定制
+        </dd>
+        <dd>
+          <div class="swiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="/utils/car/car0.png" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <img src="/utils/car/car1.png" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <img src="/utils/car/car2.png" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <img src="/utils/car/car3.png" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <img src="/utils/car/car4.png" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <img src="/utils/car/car5.png" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <img src="/utils/car/car6.png" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <img src="/utils/car/car7.png" alt="" />
+              </div>
+            </div>
 
-        <div class="swiper-pagination"></div>
-      </div>
-      <pre>
+            <div class="swiper-pagination"></div>
+          </div>
+          <pre>
 const swiper = new Swiper('.swiper', {
   loop: true,
   autoplay: true,
@@ -288,7 +399,7 @@ const swiper = new Swiper('.swiper', {
     }
   }
 });</pre>
-      <pre>
+          <pre>
 .swiper {
   width: 100%;
   max-width: 800px;
@@ -335,12 +446,62 @@ const swiper = new Swiper('.swiper', {
 .swiper-slide-active img {
   transform: translateX(0);
   opacity: 1;
-}</pre>
-    </dd>
-    <dd class="example-sn">每次幻灯片切换时，为其中的内容 swiperInfo 添加 anime 动画 - <a href="../demo/companies.html">个人网站</a></dd>
-    <dd>
-      <div>同时使用 <a href="./anime.html">Anime.js库</a></div>
-      <pre>
+}</pre
+          >
+        </dd>
+        <dd class="example-sn">定制分数类型分页器</dd>
+        <dd>
+          <div>默认样式 1/8</div>
+          <div>定制样式01/08</div>
+          <div>
+            因为Swiper没有直接支持分数型且带补零的分页类型，所以我们使用自定义类型的分页器，并通过renderCustom回调来控制其显示内容
+          </div>
+          <div>参考源码</div>
+          <pre>
+function formatFraction(currentIndex, totalSlides) {
+  const formattedCurrent = String(currentIndex).padStart(2, "0");
+  const formattedTotal = String(totalSlides).padStart(2, "0");
+  return `&lt;span class="swiper-pagination-current">${formattedCurrent}&lt;/span>/&lt;span class="swiper-pagination-total">${formattedTotal}&lt;/span>`;
+}
+
+const swiper = new Swiper(".swiper", {
+  loop: true,
+  autoplay: true,
+  speed: 1200,
+  effect: "fade",
+  pagination: {
+    el: ".swiper-pagination",
+    type: "custom", // 使用自定义分页器类型
+    renderCustom: function (swiper, current, total) {
+      return formatFraction(current, total); // 直接引用formatFraction函数
+    },
+  },
+  on: {
+    init: function () {
+      // 初始化时更新分页器文本
+      this.pagination.renderedFraction = formatFraction(
+        this.activeIndex + 1,
+        this.slides.length
+      );
+    },
+    slideChange: function () {
+      // 每当幻灯片变化时更新分页器文本
+      this.pagination.renderedFraction = formatFraction(
+        this.activeIndex + 1,
+        this.slides.length
+      );
+    },
+  },
+});</pre
+          >
+        </dd>
+        <dd class="example-sn">
+          每次幻灯片切换时，为其中的内容 swiperInfo 添加 anime 动画 -
+          <a href="../demo/companies.html">个人网站</a>
+        </dd>
+        <dd>
+          <div>同时使用 <a href="./anime.html">Anime.js库</a></div>
+          <pre>
 const swiperInfo = document.querySelectorAll('.swiper-info')
 
 const swiper = new Swiper('.swiper', {
@@ -357,24 +518,39 @@ swiper.on('slideChange', function () {
     delay: anime.stagger(400, { start: 300 }),
     translateY: [anime.stagger(40, 10), 0],
   })
-});</pre>
-    </dd>
-  </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.js"></script>
-  <script>
-    const swiper = new Swiper('.swiper', {
-      loop: true,
-      autoplay: true,
-      speed: 1200,
-      effect: 'fade',
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-        renderBullet: function (index, className) {
-          return '<span class="' + className + '">' + String(index + 1).padStart(2, '0') + '</span>';
-        }
-      }
-    });
-  </script>
-</body>
+});</pre
+          >
+        </dd>
+      </dl>
+      <iframe
+        src="../../common/footer.html"
+        frameborder="0"
+        scrolling="no"
+        title="footer"
+        id="footer"
+      ></iframe>
+      <script src="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.js"></script>
+      <script>
+        const swiper = new Swiper(".swiper", {
+          loop: true,
+          autoplay: true,
+          speed: 1200,
+          effect: "fade",
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            renderBullet: function (index, className) {
+              return (
+                '<span class="' +
+                className +
+                '">' +
+                String(index + 1).padStart(2, "0") +
+                "</span>"
+              );
+            },
+          },
+        });
+      </script>
+    </body>
+  </html>
+</html>
