@@ -25,7 +25,9 @@
           </ul>
           <div class="nav-close" id="close">&times;</div>
         </div>
-        <div class="nav-ham" id="ham">&darr;</div>
+        <div class="nav-ham" id="ham">
+          <span class="iconfont icon-menu"></span>
+        </div>
       </nav>
     </header>
     <main>
@@ -193,14 +195,23 @@
       <div class="links">
         <div class="links-cont">
           <div class="link-border"></div>
-          <a href="" target="_blank" class="link-item">L</a>
-          <a href="" target="_blank" class="link-item">C</a>
-          <a href="" target="_blank" class="link-item">T</a>
-          <a href="" target="_blank" class="link-item">A</a>
+          <a href="" target="_blank" class="link-item"
+            ><span class="iconfont icon-qq0"></span
+          ></a>
+          <a href="" target="_blank" class="link-item"
+            ><span class="iconfont icon-twitter"></span
+          ></a>
+          <a href="" target="_blank" class="link-item"
+            ><span class="iconfont icon-weixin0"></span
+          ></a>
+          <a href="" target="_blank" class="link-item"
+            ><span class="iconfont icon-sina"></span
+          ></a>
         </div>
       </div>
     </main>
     <script src="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.js"></script>
+    <script src="/utils/lib/gsap-public/gsap-public/minified/gsap.min.js"></script>
     <script>
       const menu = document.querySelector("#menu");
       const navHam = document.querySelector("#ham");
@@ -244,6 +255,17 @@
             );
           },
         },
+      });
+    </script>
+    <script>
+      gsap.from(".bar-1", { opacity: 0, y: 1000, duration: 0.4 });
+      gsap.from(".bar-2", { opacity: 0, y: -1000, duration: 0.4 });
+      gsap.from(".title", { opacity: 0, y: 100, duration: 0.4, delay: 0.5 });
+      gsap.from(".sub-title", {
+        opacity: 0,
+        y: 100,
+        duration: 0.5,
+        delay: 0.8,
       });
     </script>
   </body>

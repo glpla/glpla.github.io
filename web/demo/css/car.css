@@ -1,3 +1,4 @@
+@import url(https://at.alicdn.com/t/c/font_3859342_cjn1jnma20c.css);
 :root {
   --main-color: #ffa500;
   --black-color: #000;
@@ -10,6 +11,7 @@
   --orange-color: #f86b16;
   --p-m-g: 10px;
   --header-h: 20vh;
+  --link-border-h: 20vh;
 }
 
 * {
@@ -35,6 +37,10 @@ a {
   text-decoration: none;
   color: inherit;
   font: inherit;
+}
+.iconfont {
+  color: var(--white-color);
+  font-size: 18px;
 }
 
 .header {
@@ -72,7 +78,7 @@ a {
   position: fixed;
   right: -100%;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
   width: 50%;
   height: 100%;
@@ -191,9 +197,9 @@ a {
 }
 .swiper-slide img {
   position: absolute;
-  left: 0;
+  left: 15%;
   bottom: -13rem;
-  width: 400px;
+  width: 300px;
   max-width: initial;
   opacity: 0;
   transform: translateX(50%);
@@ -238,19 +244,22 @@ a {
   top: var(--header-h);
   left: 2rem;
   display: grid;
-  align-items: center;
+  place-items: center;
   gap: var(--p-m-g);
   z-index: 10;
 }
 .link-border {
   width: 2px;
-  height: 40px;
+  height: var(--link-border-h);
   background-color: var(--white-color);
 }
 .link-item {
   color: var(--black-color);
 }
 @media screen and (min-width: 768px) {
+  :root {
+    --link-border-h: 40vh;
+  }
   .swiper-slide img {
     left: 0;
     right: 0;
@@ -284,9 +293,7 @@ a {
   .menu {
     width: 30%;
   }
-  .link-border {
-    height: 40vh;
-  }
+
   .swiper-pagination-bullets.swiper-pagination-horizontal {
     flex-direction: column;
     left: initial;
@@ -309,5 +316,8 @@ a {
   .bar.bar-1,
   .bar.bar-2 {
     width: 50%;
+  }
+  .titles .title {
+    font-size: 6rem;
   }
 }
