@@ -16,66 +16,6 @@
     <h1>&commat;Focus</h1>
   </header>
   <dl>
-    <dt>Margin 合并</dt>
-    <dd>.相邻元素同时存在某个方向上的margin时，会触发margin合并的情况，如兄弟元素一个设置了margin-bottom，一个设置了margin-top；合并结果取两者之中的<span
-        class="warn">大者</span>
-    </dd>
-    <dd>.实际体现：文章中，上下相邻段落的段间距是一样的</dd>
-    <dd>.只有标准流存在；浮动/固定/绝对定位的元素不存在塌陷</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 兄弟关系</dd>
-    <dd>.兄元素margin-bottom</dd>
-    <dd>.弟元素margin-top</dd>
-    <dt>Margin 塌陷</dt>
-    <dd>.相邻元素同时存在某个方向上的margin时，会触发margin塌陷，如父子元素都设置margin-top；塌陷结果取两者之中的
-      <span class="warn">大者</span>
-    </dd>
-    <dd>.只有标准流存在；浮动/固定/绝对定位的元素不存在塌陷</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 父子塌陷</dd>
-    <dd>.父元素margin-top</dd>
-    <dd>.子元素margin-top</dd>
-    <dd>解决方案</dd>
-    <dd>.破除相邻的关系即可</dd>
-    <dd>.创建BFC - Block Formatting Context</dd>
-    <dd>.[独立][渲染]的一块区域；不同的BFC互不干扰：即里面的元素不会影响外面的元素；创建BFC可以解决高度坍塌和清除浮动；</dd>
-    <dd>具体措施</dd>
-    <dd>.为父元素增加：border-top/padding-top/overfollow：hidden</dd>
-    <dd>.为子元素添加：浮动、定位</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 塌陷</dd>
-    <dd>.使用Snipaste测量：父级顶部实际margin不是10px，而是20px，同时子级margin塌陷为0</dd>
-    <dd>.点击不同选项，查看塌陷解决方案</dd>
-    <dd>
-      <input type="radio" name="margin" id="none" checked>
-      <label for="none">none</label>
-      <input type="radio" name="margin" id="border">
-      <label for="border">border-top</label>
-      <input type="radio" name="margin" id="padding">
-      <label for="padding">padding-top</label>
-      <input type="radio" name="margin" id="overflow">
-      <label for="overflow">overflow: hidden;</label>
-      <input type="radio" name="margin" id="float">
-      <label for="float">float: left;</label>
-      <input type="radio" name="margin" id="pos">
-      <label for="pos">position: absolute;</label>
-      <input type="radio" name="margin" id="dis">
-      <label for="dis">display: flow-root;</label>
-    </dd>
-    <dd class="ref"></dd>
-    <dd>
-      <div class="basic father" id="fa">
-        <div class="son" id="son"></div>
-      </div>
-    </dd>
-    <dd>[CSS]尺寸、背景颜色略</dd>
-    <dd>
-      <pre>
-.fa {
-    margin-top: 10px;
-}
-
-.son {
-    margin-top: 20px;
-}</pre>
-    </dd>
     <dt>垂直方向对齐 vertical-align</dt>
     <dd>.适用于 inline 元素和 inline-block 元素</dd>
     <dd>.一个容器中，有多个子元素要分别设置，如统一垂直居中middle</dd>
@@ -133,7 +73,6 @@ img,
       <span style="vertical-align: text-bottom">text-bottom</span>
       <span style="vertical-align: bottom">bottom</span>
     </dd>
-    <dd>[HTML]</dd>
     <dd>
       <pre>
 &lt;div class="ref-box"&gt;
@@ -145,9 +84,6 @@ img,
     &lt;span style="vertical-align: text-bottom"&gt;text-bottom&lt;/span&gt;
     &lt;span style="vertical-align: bottom"&gt;bottom&lt;/span&gt;
 &lt;/div&gt;</pre>
-    </dd>
-    <dd>[辅助CSS]</dd>
-    <dd>
       <pre>
 .ref-box {
     font-size: 32px;
@@ -209,91 +145,8 @@ body {
     </dd>
     <dt>取消/禁止页面翻译 lang</dt>
     <dd>.移除&lt;html lang="en"&gt;的lang属性</dd>
-    <dt>-inline</dt>
-    <dd>在水平方向指定属性，如左右填充padding、左右margin、左右border</dd>
-    <dd>简化代码</dd>
-    <dd>注意浏览器支持</dd>
-    <dd>传统代码</dd>
-    <dd>
-      <pre>
-margin-left: 1rem;
-margin-right: 1rem;</pre>
-    </dd>
-    <dd>简化代码</dd>
-    <dd>
-      <pre>
-margin-inline: 1rem;</pre>
-    </dd>
-    <dt>max-content</dt>
-    <dd>子项最大和容器保持一致</dd>
-    <dd>
-      <figure class="code">
-        <pre>
-.item {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: max-content;
-  height: max-content;
-}</pre>
-      </figure>
-    </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script>
-    window.onload = function () {
-      let fa = document.querySelector('#fa')
-      let son = document.querySelector('#son')
-      let none = document.querySelector('#none')
-      let border = document.querySelector('#border')
-      let padding = document.querySelector('#padding')
-      let overflow = document.querySelector('#overflow')
-      let float = document.querySelector('#float')
-      let pos = document.querySelector('#pos')
-      let dis = document.querySelector('#dis')
-      border.addEventListener('focus', (e) => {
-        fa.style.borderTop = '1px solid #000'
-      })
-      border.addEventListener('blur', (e) => {
-        fa.style.borderTop = 'unset'
-      })
-
-      padding.addEventListener('focus', (e) => {
-        fa.style.paddingTop = '10px'
-      })
-      padding.addEventListener('blur', (e) => {
-        fa.style.paddingTop = 'unset'
-      })
-
-      overflow.addEventListener('focus', (e) => {
-        fa.style.overflow = 'hidden'
-      })
-      overflow.addEventListener('blur', (e) => {
-        fa.style.overflow = 'unset'
-      })
-
-      float.addEventListener('focus', (e) => {
-        son.style.float = 'left'
-      })
-      float.addEventListener('blur', (e) => {
-        son.style.float = 'unset'
-      })
-
-      pos.addEventListener('focus', (e) => {
-        son.style.position = 'absolute'
-      })
-      pos.addEventListener('blur', (e) => {
-        son.style.position = 'unset'
-      })
-
-      dis.addEventListener('focus', (e) => {
-        son.style.display = 'flow-root'
-      })
-      dis.addEventListener('blur', (e) => {
-        son.style.display = 'unset'
-      })
-    }
-  </script>
 </body>
 
 </html>
