@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.css">
   <style>
     * {
       margin: 0;
@@ -12,17 +13,97 @@
       box-sizing: border-box;
     }
 
-    .box {
-      max-width: 1120px;
-      margin: 0 1.5rem;
-      height: 40vh;
+    body {
+      display: flex;
+      height: 100vh;
+    }
+
+    .swiper {
+      width: 800px;
+      aspect-ratio: 16/9;
+      margin: auto;
+      background-color: #f40;
+    }
+
+    .swiper-slide {
+      width: 60%;
+    }
+
+    .swiper-cont {
+      height: 100%;
+      background-image: url(/utils/view/view0.jpg);
+      background-size: cover;
+    }
+
+    .swiper-pagination-bullets.swiper-pagination-horizontal {
+      width: initial;
+      left: initial;
+      height: 100%;
+      right: 0;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* .swiper-pagination-bullets.swiper-pagination-horizontal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    } */
+
+    .swiper-pagination-bullet {
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
+      transition: height .4s;
+    }
+
+    .swiper-pagination-bullet-active {
+      height: 20px;
       background-color: #f40;
     }
   </style>
 </head>
 
 <body>
-  <div class="box"></div>
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="swiper-cont"></div>
+      </div>
+      <div class="swiper-slide">
+        <div class="swiper-cont"></div>
+      </div>
+      <div class="swiper-slide">
+        <div class="swiper-cont"></div>
+      </div>
+      <div class="swiper-slide">
+        <div class="swiper-cont"></div>
+      </div>
+      <div class="swiper-slide">
+        <div class="swiper-cont"></div>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <script src="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      // effect: 'coverflow',
+      grabCursor: true,
+      autoplay: true,
+      slidesPerView: 'auto',
+      spaceBetween: 10,
+      centeredSlides: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      }
+    })
+  </script>
 </body>
 
 </html>

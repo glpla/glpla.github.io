@@ -100,7 +100,7 @@
     </dd>
     <dt>基本结构 HTML</dt>
     <dd>
-      <div>可以使用任何标签实现结构，保持类名相同即可</div>
+      <div>可以使用任何标签实现结构，保持 <span class="warn">类名相同</span> 即可</div>
       <div>.swiper</div>
       <div class="p1">.swiper-wrapper</div>
       <div class="p2">.swiper-slide</div>
@@ -129,20 +129,21 @@
     </dd>
     <dt>样式 CSS</dt>
     <dd class="sn">
+      <p>.F12检查并修改对应的类重置样式</p>
       <div>
-        容器.swiper - 指定内容大小[可选]；如图片的显示，可以指定宽高或宽高比
+        容器.swiper
       </div>
+      <p>.相对定位；为分页器pagination提高定位依据</p>
+      <p>.指定内容大小[可选]；如图片的显示，可以指定宽高或宽高比</p>
       <p>.不建议使用背景图片 - 渲染可能有异常</p>
       <pre>
 .swiper {
   width: 100%;
   max-width: 800px;
 }</pre>
-      <div>导航按钮 - 使用全局变量指定导航按钮样式</div>
-      <pre>
---swiper-navigation-size: 36px;
---swiper-navigation-color: #fff;      </pre>
-      <div>分页器pagination - F12检查并修改对应的类</div>
+      <div>分页器pagination</div>
+      <p>.使用绝对定位；默认在底部居中，可以定位在任何地方</p>
+      <p>.使用全局变量指定导航按钮样式</p>
       <pre>
 .swiper-pagination-bullet {
   background-color: #fff;
@@ -165,6 +166,10 @@
 .swiper-pagination-bullet-active {
   background-color: #f40;
 }</pre>
+      <div>导航scrollbar</div>
+      <pre>
+--swiper-navigation-size: 36px;
+--swiper-navigation-color: #fff;      </pre>
     </dd>
     <dt>脚本 JavaScript</dt>
     <dd>
@@ -217,12 +222,16 @@ const swiper = new Swiper('.swiper', {
           <td>轮播方向：horizontal | vertical</td>
         </tr>
         <tr>
-          <td>speed</td>
-          <td>切换速度；单位ms；300</td>
-        </tr>
-        <tr>
           <td>autoplay</td>
           <td>自动播放：false | true</td>
+        </tr>
+        <tr>
+          <td>breakpoints</td>
+          <td>断点设置；仅支持部分属性，如 spaceBetween、slidesPerView等</td>
+        </tr>
+        <tr>
+          <td>centeredSlides</td>
+          <td>居中当前幻灯，适合多个幻灯的情况；false | true | auto*</td>
         </tr>
         <tr>
           <td>effect</td>
@@ -234,7 +243,7 @@ const swiper = new Swiper('.swiper', {
         </tr>
         <tr>
           <td>grabCursor</td>
-          <td>抓取|拖拽鼠标样式：false | true</td>
+          <td>抓取|拖拽鼠标样式，概述桌面端体验：false | true</td>
         </tr>
         <tr>
           <td>loop</td>
@@ -245,12 +254,16 @@ const swiper = new Swiper('.swiper', {
           <td>幻灯片间隔；单位px；不要为幻灯片指定margin</td>
         </tr>
         <tr>
+          <td>speed</td>
+          <td>幻灯过渡时间；单位ms；300</td>
+        </tr>
+        <tr>
           <td>mousewheel</td>
           <td>鼠标滚轮触发导航：false | true</td>
         </tr>
         <tr>
-          <td>slides-per-view</td>
-          <td>轮播时可以查看幻灯片的个数；默认1张</td>
+          <td>slidesPerView</td>
+          <td>轮播时可以查看幻灯片的个数；默认1张；auto时，</td>
         </tr>
         <tr>
           <td>on</td>
@@ -355,6 +368,13 @@ swiper.on('slideChange', function () {
     </dd>
     <dt>分页器 Pagination</dt>
     <dd>
+      <div>基类是swiper-pagination</div>
+      <div>不同的分页器类型有不同的类实现，如子弹类分页器是swiper-pagination-bullets；分数类型分页器是 swiper-pagination-fraction</div>
+      <div>辅助类swiper-pagination-horizontal</div>
+      <div>
+        如果仅仅是定义样式，不修改数字格式，可以直接使用默认类重新定制
+      </div>
+      <div>如果需要定制分页器的结构，则需要使用专门的配置项定制</div>
       <table>
         <caption>
           分页器 pagination
@@ -408,12 +428,40 @@ swiper.on('slideChange', function () {
         </tr>
         </tr>
       </table>
-      <div class="tips">
-        <div>
-          如果仅仅是定义样式，不修改数字格式，可以直接使用默认类定制
-        </div>
-        <div>如果需要定制分页器的结构，则需要使用专门的配置项定制</div>
-      </div>
+    </dd>
+    <dd class="example-sn">定制子弹类分页器</dd>
+    <dd class="sn">
+      <div> 当前样式 - 背景红色</div>
+      <pre>
+.swiper-pagination-bullet-active {
+  background-color: #f40;
+}      </pre>
+      <div>点到圆角矩形的变化</div>
+      <pre>
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  transition: width .4s;
+}
+
+.swiper-pagination-bullet-active {
+  width: 20px;
+  background-color: #f40;
+}      </pre>
+      <div>定位在右侧居中；注意初始化属性initial的使用</div>
+      <pre>
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  width: initial;
+  left: initial;
+  height: 100%;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}</pre>
     </dd>
     <dd class="example-sn">
       <a href="https://swiperjs.com/swiper-api#param-renderBullet">定制子弹类型分页器</a>；完整案例请访问 <a href="../demo/car.html">靓车荟
@@ -596,7 +644,6 @@ swiper.on('slideChange', function () {
       autoplay: true,
       speed: 1200,
       effect: "fade",
-      mousewheel: true,
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
