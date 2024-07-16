@@ -100,7 +100,7 @@
     </dd>
     <dt>基本结构 HTML</dt>
     <dd>
-      <div>可以使用任何标签实现结构，保持 <span class="warn">类名相同</span> 即可</div>
+      <div>可以使用任何标签实现结构，保持 <span class="warn">库类名相同</span> 即可</div>
       <div>.swiper</div>
       <div class="p1">.swiper-wrapper</div>
       <div class="p2">.swiper-slide</div>
@@ -110,12 +110,13 @@
       <div class="p1">.swiper-button-prev [导航按钮；可选]</div>
       <div class="p1">.swiper-button-next [导航按钮；可选]</div>
       <div class="p1">.swiper-scrollbar [滚动条；可选]</div>
+      <div>多个轮播图时，使用 <span class="warn">自定义类</span> 区分，如增加 team-swiper 和 team-card</div>
       <pre>
-&lt;div class="swiper"&gt;
+&lt;div class="team-swiper swiper"&gt;
   &lt;div class="swiper-wrapper"&gt;
-    &lt;div class="swiper-slide"&gt;Slide 1&lt;/div&gt;
-    &lt;div class="swiper-slide"&gt;Slide 2&lt;/div&gt;
-    &lt;div class="swiper-slide"&gt;Slide 3&lt;/div&gt;
+    &lt;div class="team-card swiper-slide"&gt;Slide 1&lt;/div&gt;
+    &lt;div class="team-card swiper-slide"&gt;Slide 2&lt;/div&gt;
+    &lt;div class="team-card swiper-slide"&gt;Slide 3&lt;/div&gt;
     ...
   &lt;/div&gt;
 
@@ -197,6 +198,9 @@ const swiper = new Swiper('.swiper', {
     el: '.swiper-scrollbar',
   },
 });</pre>
+      <div>多个轮播图时，应该采用不同的自定义类初始化实例</div>
+      <pre>const teamSwiper = new Swiper('.team-swiper', {}); 
+</pre>
     </dd>
   </dl>
   <div class="chap">常用选项 Option</div>
