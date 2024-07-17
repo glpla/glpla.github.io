@@ -8,83 +8,56 @@
   <link rel="stylesheet" href="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.css">
   <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3859342_cjn1jnma20c.css">
   <style>
+    /* init css */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    .grid {
-      display: grid;
+    /* light theme */
+    :root {
+      --txt-color: #303133;
+      --bg-color: #f1f1f1;
+      --shadow-color: rgba(0, 0, 0, 0.1);
     }
 
-    .container {
-      max-width: 1000px;
-      margin-inline: 3rem;
+    /* dark theme */
+    :root[data-theme="dark"] {
+      --txt-color: #f1f1f1;
+      --bg-color: #131313;
+      --shadow-color: rgba(255, 255, 255, 0.1);
     }
 
-    .service-container {
-      row-gap: 1rem;
+    body.dark-theme {
+      --txt-color: #f1f1f1;
+      --bg-color: #131313;
+      --shadow-color: rgba(255, 255, 255, 0.1);
     }
 
-    .service-card {
-      text-align: center;
+    html {
+      background-color: var(--bg-color);
+      color: var(--color-text);
     }
 
-    .service-card .iconfont {
-      font-size: 2rem;
+    html[data-theme="dark"] body::before {
+      clip-path: circle(100%);
     }
 
-    .test {
-      display: inline-flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
+
+    /* document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light'); */
   </style>
 </head>
 
 <body>
-  <div class="service-container container grid">
-    <article class="service-card">
-      <span class="iconfont icon-qq0"></span>
-      <h3 class="service-title">Lorem, ipsum.</h3>
-      <p class="service-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, quo?</p>
-    </article>
-    <article class="service-card">
-      <span class="iconfont icon-twitter"></span>
-      <h3 class="service-title">Lorem, ipsum.</h3>
-      <p class="service-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, quo?</p>
-    </article>
-    <article class="service-card">
-      <span class="iconfont icon-weixin0"></span>
-      <h3 class="service-title">Lorem, ipsum.</h3>
-      <p class="service-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, quo?</p>
-    </article>
-  </div>
-  <div class="test container">
-    <div>Lorem.</div>
-    <div>Atque.</div>
-    <div>Deleniti.</div>
-    <div>Cumque.</div>
-    <div>Cupiditate!</div>
-    <div>Rem?</div>
-    <div>Laudantium.</div>
-    <div>Labore?</div>
-    <div>Voluptate!</div>
-    <div>Repellat.</div>
-    <div>Atque.</div>
-    <div>Molestiae.</div>
-    <div>Maiores.</div>
-    <div>Non.</div>
-    <div>Ex.</div>
-    <div>Amet?</div>
-    <div>Quasi.</div>
-    <div>Mollitia?</div>
-    <div>Eum!</div>
-    <div>Error?</div>
-  </div>
+  <div class="btn-theme">dark</div>
   <script src="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.js"></script>
-
+  <script>
+    let btnTheme = document.querySelector('.btn-theme')
+    btnTheme.addEventListener('click', () => {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    })
+  </script>
 </body>
 
 </html>

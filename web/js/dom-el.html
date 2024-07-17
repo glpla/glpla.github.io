@@ -41,22 +41,18 @@
         <tr>
           <th>类别</th>
           <th>说明</th>
-          <th>返回</th>
         </tr>
         <tr>
           <td>getElementsByTagName()</td>
-          <td>根据标签名获取</td>
-          <td>一组元素：HTMLCollection</td>
+          <td>根据标签名获取；一组元素：HTMLCollection</td>
         </tr>
         <tr>
           <td>getElementsByClassName()</td>
-          <td>根据类名获取</td>
-          <td>一组元素：HTMLCollection</td>
+          <td>根据类名获取；一组元素：HTMLCollection</td>
         </tr>
         <tr>
           <td>getElementById()</td>
-          <td>根据ID名获取</td>
-          <td>一个元素</td>
+          <td>根据ID名获取；一个元素</td>
         </tr>
       </table>
       <div>querySelector系列</div>
@@ -77,29 +73,17 @@
           <td>选中一组元素</td>
         </tr>
       </table>
-      <table>
-        <caption>特殊元素</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>document</td>
-          <td>获取文档对象；进而可以获取其中任何一个元素</td>
-        </tr>
-        <tr>
-          <td>html</td>
-          <td>获取html；document.documentElement()</td>
-        </tr>
-        <tr>
-          <td>body</td>
-          <td>document.body
-            <br>querySelector
-            <br>getElement(s)Byxxxx
-          </td>
-        </tr>
-      </table>
-      <p class="example-sn"> 函数封装 - 将元素获取方法封装为一个函数，简化操作</p>
+      <div>特殊元素</div>
+      <p>3.1 document - 获取文档对象；进而可以获取其中任何一个元素</p>
+      <p>3.2 html</p>
+      <pre>let html = document.documentElement</pre>
+      <p>3.3 body</p>
+      <pre>let body = document.body</pre>
+      <pre>let body = document.querySelector('body')</pre>
+      <pre>let body = document.getElementsByTagName('body')</pre>
+    </dd>
+    <dd class="example-sn"> 函数封装 - 将元素获取方法封装为一个函数，简化操作</dd>
+    <dd>
       <pre>
 function fn(el) {
     return document.querySelector(el)
@@ -129,15 +113,19 @@ data.innerHTML = data.textContent.replace(/\S/g, ' &lt;span&gt;$&&lt;/span&gt;')
           <th>说明</th>
         </tr>
         <tr>
-          <td>setAttribute(att, value)</td>
+          <td>el.<a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute">setAttribute(att,
+              value)</a></td>
           <td>设置属性</td>
         </tr>
         <tr>
-          <td>getAttribute(att)</td>
-          <td>获取所有属性</td>
+          <td>el.<a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute">getAttribute(att)</a>
+          </td>
+          <td>获取指定属性</td>
         </tr>
         <tr>
-          <td>removeAttribute(att, value)</td>
+          <td>el.<a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/Element/removeAttribute">removeAttribute(att)</a>
+          </td>
           <td>删除属性</td>
         </tr>
       </table>
@@ -162,20 +150,21 @@ btn.addEventListener('click', () => {
           <th>说明</th>
         </tr>
         <tr>
+          <td>classList.<a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add">add()</a></td>
           <td>增加类</td>
-          <td>classList.add()</td>
         </tr>
         <tr>
+          <td>classList.<a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove">remove()</a></td>
           <td>删除类</td>
-          <td>classList.remove()</td>
         </tr>
         <tr>
+          <td>classList.<a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle">toggle()</a></td>
           <td>切换类</td>
-          <td>classList.toggle()</td>
         </tr>
         <tr>
+          <td>classList.<a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/contains">contains()</a>
           <td>包含类</td>
-          <td>classList.contains()</td>
+          </td>
         </tr>
       </table>
     </dd>
@@ -191,10 +180,6 @@ btn.addEventListener('click', () => {
         <tr>
           <td>el.style</td>
           <td>inline样式</td>
-        </tr>
-        <tr>
-          <td>getComputedStyle(el)</td>
-          <td>获取元素定义的所有样式声明 CSSStyleDeclaration ，甚至是复合样式</td>
         </tr>
         <tr>
           <td>currentStyle</td>
@@ -216,10 +201,7 @@ btn.addEventListener('click', () => {
 let box = document.querySelector('.box');
 console.log(box.style.padding);//10px
 console.log(box.style.width);//空，因为没有对应的行内样式
-console.log(getComputedStyle(box));//所有的样式声明
-console.log(getComputedStyle(box).padding);//10px
-console.log(getComputedStyle(box).width);//320px
-console.log(getComputedStyle(box).background);//所有背景相关的样式</pre>
+box.style.width = 800 + 'px'</pre>
     </dd>
     <dt>样式的属性 Property</dt>
     <dd>

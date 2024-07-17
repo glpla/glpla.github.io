@@ -44,8 +44,32 @@
   <header>
     <h1>页面事件</h1>
   </header>
-  <dl id="el">
-    <dd>window页面的相关事件</dd>
+  <dl>
+    <dd>
+      <table>
+        <caption>window页面的相关事件</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>onload/load</td>
+          <td>页面加载完毕，可以获取元素</td>
+        </tr>
+        <tr>
+          <td>onresize/resize</td>
+          <td>页面缩放</td>
+        </tr>
+        <tr>
+          <td>onscroll/scroll</td>
+          <td>页面滚动</td>
+        </tr>
+        <tr>
+          <td>matchMedia</td>
+          <td>媒体查询</td>
+        </tr>
+      </table>
+    </dd>
     <dt>加载完毕 onload</dt>
     <dd>
       <div>.为了保证JS执行时，相关的元素已经准备完毕，JS代码通常写在&lt;body&gt;最后面。如果使用 onload 就可以把代码放在任何地方</div>
@@ -123,6 +147,27 @@ ham.addEventListener('click', function () {
     document.body.classList.toggle('hidden')
 })</pre>
     </dd>
+    <dt>响应媒体查询 matchMedia</dt>
+    <dd>
+      <div>检测当前浏览器窗口是否匹配某个CSS媒体查询的函数</div>
+      <div>返回一个 MediaQueryList 对象；该对象包含一个 matches 属性，表示媒体查询是否与当前窗口大小匹配</div>
+      <div>可以通过监听 MediaQueryList 对象的 change 事件来响应窗口大小的变化，或者直接检查 matches 属性来获取当前状态</div>
+      <div>定义媒体查询</div>
+      <pre>let mediaQuery = window.matchMedia("(max-width: 768px)");</pre>
+      <div>监听媒体查询的变化</div>
+      <pre>mediaQuery.addListener(handleMediaChange);</pre>
+      <div>自定义处理函数</div>
+      <pre>
+function handleMediaChange(e){
+  if (e.matches) {
+    // less than or equal to 768px
+    // 媒体查询匹配
+  } else {
+    // wider than 768px
+    // 媒体查询不匹配
+  }
+}</pre>
+    </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script>
@@ -135,6 +180,18 @@ ham.addEventListener('click', function () {
       // console.log('pageYOffset', window.pageYOffset.toFixed(0));
       back2top.classList.toggle('active', scrollY > innerHeight)
     })
+    // mediaQuery
+    let mediaQuery = window.matchMedia("(max-width: 768px)");
+    mediaQuery.addListener(handleMediaChange);
+    function handleMediaChange(e) {
+      if (e.matches) {
+        // less than or equal to 768px
+        console.log('媒体查询匹配');
+      } else {
+        // wider than 768px
+        console.log('媒体查询不匹配');
+      }
+    }
   </script>
 </body>
 

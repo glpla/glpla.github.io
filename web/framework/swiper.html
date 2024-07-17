@@ -254,20 +254,20 @@ const swiper = new Swiper('.swiper', {
           <td>循环模式；false | true</td>
         </tr>
         <tr>
-          <td>spaceBetween</td>
-          <td>幻灯片间隔；单位px；不要为幻灯片指定margin</td>
-        </tr>
-        <tr>
-          <td>speed</td>
-          <td>幻灯过渡时间；单位ms；300</td>
-        </tr>
-        <tr>
           <td>mousewheel</td>
           <td>鼠标滚轮触发导航：false | true</td>
         </tr>
         <tr>
           <td>slidesPerView</td>
           <td>轮播时可以查看幻灯片的个数；默认1张；auto时，</td>
+        </tr>
+        <tr>
+          <td>spaceBetween</td>
+          <td>幻灯片间隔；单位px；不要为幻灯片指定margin</td>
+        </tr>
+        <tr>
+          <td>speed</td>
+          <td>幻灯过渡时间；单位ms；300</td>
         </tr>
         <tr>
           <td>on</td>
@@ -466,6 +466,28 @@ swiper.on('slideChange', function () {
   justify-content: center;
   gap: 10px;
 }</pre>
+    </dd>
+    <dd class="example-sn"><a href="../demo/up2u.html">顶部轮播图 - 响应式设置</a></dd>
+    <dd>
+      <div>默认显示1张幻灯，间隔10px</div>
+      <div>达到768时，显示2张，间隔增加到15px</div>
+      <div>达到1024时，显示3张，间隔增加到20px</div>
+      <pre>
+let swiper = new Swiper('.header-swiper', {
+  //... ...
+  slidesPerView: 1,
+  spaceBetween: 10,
+  breakpoints: {
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 15
+    },
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 20
+    },
+  }
+});      </pre>
     </dd>
     <dd class="example-sn">
       <a href="https://swiperjs.com/swiper-api#param-renderBullet">定制子弹类型分页器</a>；完整案例请访问 <a href="../demo/car.html">靓车荟

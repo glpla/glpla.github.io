@@ -17,7 +17,7 @@
       color: #333;
     }
 
-    
+
 
     @media screen and (max-width:768px) {
       .back2top {
@@ -59,31 +59,11 @@
   </dl>
   <div class="chap">页面事件</div>
   <dl class="nav-cont">
-    <dd>
-      <table>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>onload/load</td>
-          <td>页面加载完毕，可以获取元素</td>
-        </tr>
-        <tr>
-          <td>onscroll/scroll</td>
-          <td>页面滚动</td>
-        </tr>
-        <tr>
-          <td>onresize/resize</td>
-          <td>页面缩放</td>
-        </tr>
-      </table>
-    </dd>
     <dd>1. 加载完毕 onload</dd>
-    <dd>.为了保证JS执行时，相关的元素已经准备完毕，JS代码通常写在&lt;body&gt;最后面。如果使用onload就可以把代码放在任何地方</dd>
-    <dd>.如果加载内容过多，onload会占用更多时间，影响用户体验。可以采用DOMContentLoaded方法。只要DOM框架出来即可，不需要渲染CSS/FLASH/图片，且不影响交互</dd>
-    <dd>.如果两个事件都定义了，则先执行DOMContentLoaded再执行onload</dd>
     <dd>
+      <div>.为了保证JS执行时，相关的元素已经准备完毕，JS代码通常写在&lt;body&gt;最后面。如果使用onload就可以把代码放在任何地方</div>
+      <div>.如果加载内容过多，onload会占用更多时间，影响用户体验。可以采用DOMContentLoaded方法。只要DOM框架出来即可，不需要渲染CSS/FLASH/图片，且不影响交互</div>
+      <div>.如果两个事件都定义了，则先执行DOMContentLoaded再执行onload</div>
       <pre>
 window.onload = function () { 
     //... ...
@@ -96,9 +76,9 @@ window.addEventListener('DOMContentLoaded', () => {
 })</pre>
     </dd>
     <dd>2. 窗口缩放 onresize</dd>
-    <dd>.窗口尺寸/大小发生变化触发事件</dd>
-    <dd>.响应式布局经常用到</dd>
     <dd>
+      <div>.窗口尺寸/大小发生变化触发事件</div>
+      <div>.响应式布局经常用到</div>
       <pre>
 window.addEventListener('resize', () => {
     //... ...
@@ -124,6 +104,15 @@ window.addEventListener('resize', () => {
   window.addEventListener('load', setFontSize)
   window.addEventListener('resize', setFontSize)
 &lt;/script&gt;</pre>
+    </dd>
+    <dd>4. 响应媒体查询</dd>
+    <dd>
+      <div>定义媒体查询</div>
+      <pre>let mediaQuery = window.matchMedia("(max-width: 768px)");</pre>
+      <div>监听媒体查询的变化</div>
+      <pre>mediaQuery.addListener(handleMediaChange);</pre>
+      <div>初始化处理函数</div>
+      <pre>handleMediaChange(mediaQuery);      </pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 返回顶部按钮</dd>
     <dd>.分别利用DOM的scrollTop和window的scrollY查看页面滚动</dd>

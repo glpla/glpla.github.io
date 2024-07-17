@@ -5,18 +5,38 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>传统方法 - Browser Object Model</title>
+  <title>方法 - Browser Object Model</title>
   <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
 </head>
 
 <body>
   <header>
-    <h1>传统方法</h1>
-    <span>&commat;Method</span>
+    <h1>BOM</h1>
+    <span>&commat;Methods</span>
   </header>
   <dl>
-    <dt>说明</dt>
+    <dd>window更多属性和方法，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window">window</a></dd>
+    <dt>样式</dt>
+    <dd>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle">getComputedStyle(el)</a>
+      </div>
+      <div>获取元素定义的所有样式声明 CSSStyleDeclaration ，甚至是复合样式</div>
+      <pre>
+.box {
+  width: 320px;
+  height: 180px;
+  margin: 0 auto;
+  background-color: #f40;
+}</pre>
+      <pre>
+let box = document.querySelector('.box');
+console.log(getComputedStyle(box));//所有的样式声明
+console.log(getComputedStyle(box).padding);//10px
+console.log(getComputedStyle(box).width);//320px
+console.log(getComputedStyle(box).background);//所有背景相关的样式</pre>
+    </dd>
+    <dt>传统方法</dt>
     <dd>
       <div>.较少使用</div>
       <table>
