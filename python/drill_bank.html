@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>实训 文字综合运用</title>
+  <title>实训 迷你银行</title>
   <link rel="stylesheet" href="../../css/exp.css">
   <base target="_blank">
 </head>
@@ -14,26 +14,31 @@
   <header>
   </header>
   <div class="container">
-    <h1>文章排版</h1>
-    <h4>Paper</h4>
+    <h1>迷你银行</h1>
+    <h4>Bank</h4>
     <dl class="number-mul-sn">
       <dt>实验题目</dt>
-      <dd>文章排版</dd>
+      <dd>迷你银行</dd>
       <dt>实验目的</dt>
       <dd>
-        <div>熟悉文章排版的基本规范和标准</div>
-        <div>熟悉文章排版的基本方法和技能</div>
-        <div>掌握创建文章的常用标签</div>
-        <div>掌握文章排版的基本样式</div>
+        <div>搭建开发环境</div>
+        <div>掌握基本开发流程</div>
+        <div>掌握基本调试方法</div>
       </dd>
       <dt>实验内容</dt>
       <dd>
-        <div>标签：&lt;article&gt;、&lt;figure&gt; &lt;figcaption&gt;、&lt;table&gt;、&lt;footer&gt;</div>
-        <div>选择器：伪元素选择器::before ::first-letter ::selection、伪类选择器:nth-child、组合选择器 ~ +</div>
-        <div>样式：@font-face、columns、column-span、line-height、counter-reset
-          counter-increment、overflow、white-space、text-overflow、CSS变量</div>
-        <div>布局：浮动float</div>
-        <div>应用：图文混排、首字下沉、溢出打点</div>
+        <div>查询余额</div>
+        <div>存钱</div>
+        <div>取钱</div>
+        <div>退出</div>
+      </dd>
+      <dt>知识点</dt>
+      <dd>
+        <div>IO</div>
+        <div>f-string</div>
+        <div>while</div>
+        <div>if-else</div>
+        <div>function</div>
       </dd>
       <dt>开发环境</dt>
       <dd>
@@ -60,11 +65,65 @@
         <div>其它思考</div>
       </dd>
       <dt>参考效果和参考代码</dt>
-      <dd><a href="../demo/paper.html">文章排版</a></dd>
+      <dd>
+        <pre>
+user = None
+money = 10000
+user = input('please input your name->')
+
+def queryMoney(flag=False):
+  if flag:
+    print(f'Query Money')
+  print(f'{user}\'s money is ￥{money:,}')
+
+def saveMoney(mon):
+  print(f'Save Money')
+  global money
+  money += mon
+  print(f'{user} save money ￥{mon}')
+  queryMoney()
+
+def getMoney(mon):
+  print(f'Get Money')
+  global money
+  money -=mon
+  print(f'{user} get money ￥{mon}')
+  queryMoney()
+
+def main():
+  tips = 'main menu'
+  print(f'{tips:*^60}')
+  tips = f'welcome {user} to Python, please choose'
+  print(f'{tips:^60}')
+  print('*'*60)  
+  print(f'query\t[1]')
+  print(f'save\t[2]')
+  print(f'get\t[3]')
+  print(f'exit\t[4]')
+  return input('your choice->')
+      
+
+while True:
+  key = main()
+  if key == '1':
+    queryMoney(True)
+    continue
+  elif key == '2':
+    mon = input('money you want to save ->￥')
+    saveMoney(int(mon))
+    continue
+  elif key == '3':
+    mon = input('money you want to get ->￥')
+    getMoney(int(mon))
+    continue
+  else:
+    print(f'88, {user}')
+    break        </pre>
+      </dd>
       <dt>拓展与思考</dt>
       <dd>
-        <div>使用真实资料完成项目的开发和设计</div>
-        <div>查找网络博客文章，添加其它页面组成元素，如发布日期、点赞、分享等</div>
+        <div>如何复用结构和样式?</div>
+        <div>使用其它浏览器查看项目效果</div>
       </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
