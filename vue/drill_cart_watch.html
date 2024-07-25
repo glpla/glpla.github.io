@@ -16,7 +16,7 @@
   <div class="container">
     <h1>购物车2 Watch</h1>
     <h4>Cart Watch</h4>
-    <dl class="number-mul-sn">
+    <dl>
       <dt>实验目的</dt>
       <dd>
         <div>掌握侦听器 Watch 的基本使用</div>
@@ -37,14 +37,14 @@
       </dd>
       <dt>实验步骤</dt>
       <dd>以下操作在购物车页面</dd>
-      <dd>
+      <dd class="sn">
         <div>引入监听包 watch</div>
         <div>取消结构中的事件绑定</div>
         <div>注释之前的事件处理函数：全选 selAll 和部分选 selItem</div>
         <div>引入 flag 辅助判断；默认是真；初值也可以为假，后面的逻辑判断相应调整即可</div>
         <pre>let flag = true</pre>
         <div>侦听全选 selectedAll - 使用函数返回购物车数据 cartData 中的全选 selectedAll</div>
-        <p>只有 flag 为真的时候，才真正置空购物车数据；利用 flag 保留选中的部分数据</p>
+        <p>. 只有 flag 为真的时候，才真正置空购物车数据；利用 flag 保留选中的部分数据</p>
         <pre>
 watch(() => cartData.selectedAll, (newVal) => {
   if (newVal) {
@@ -54,7 +54,7 @@ watch(() => cartData.selectedAll, (newVal) => {
   }
 })</pre>
         <div>侦听商品选中列表 selectedLists - 使用函数返回</div>
-        <p>如果选中列表长度和商品列表长度相等，则全选为真，同时置 flag 为真；否则全为假</p>
+        <p>. 如果选中列表长度和商品列表长度相等，则全选为真，同时置 flag 为真；否则全为假</p>
         <pre>
 watch(() => cartData.selectedLists, (newVal) => {
   if (newVal.length == cartData.lists.length && cartData.lists.length) {
@@ -66,11 +66,11 @@ watch(() => cartData.selectedLists, (newVal) => {
   }
 })</pre>
         <div>侦听选择列表商品的数量的变化，更新总价</div>
-        <p>深度侦听：数量是对象的一个属性</p>
-        <p>立即侦听：页面渲染完毕也应该结算异常</p>
-        <p>重新声明一个 ref 数据 sum 为结算总价，替换结构中的计算属性 getTotal</p>
+        <p>. 深度侦听：数量是对象的一个属性</p>
+        <p>. 立即侦听：页面渲染完毕也应该结算异常</p>
+        <p>. 重新声明一个 ref 数据 sum 为结算总价，替换结构中的计算属性 getTotal</p>
         <pre>let sum = ref(0)</pre>
-        <p>改写商品选中列表的侦听如下</p>
+        <p>. 改写商品选中列表的侦听如下</p>
         <pre>
 watch(() => cartData.selectedLists, (newVal) => {
   if (newVal.length == cartData.lists.length && cartData.lists.length) {
@@ -84,15 +84,16 @@ watch(() => cartData.selectedLists, (newVal) => {
     return sum + item.quantity * item.price
   }, 0).toFixed(2)
 }, { deep: true, immediate: true })        </pre>
-        <!-- <div>使用<a href="../web/js/array2.html" class="link">数组 Array - 迭代函数</a>优化逻辑</div>
-        <p>使用 Array.reduce - 推荐</p>
+      </dd>
+      <!-- <div>使用<a href="../web/js/array2.html" class="link">数组 Array - 迭代函数</a>优化逻辑</div>
+        <p>. 使用 Array.reduce - 推荐</p>
         <pre>
 const getTotal = computed(() => {
   return cartData.selectedLists.reduce((sum, item) => {
     return sum + item.quantity * item.price
   }, 0).toFixed(2)
 })</pre>
-        <p>使用 Array.forEach</p>
+        <p>. 使用 Array.forEach</p>
         <pre>
 const getTotal = computed(() => {
   let sum = 0
@@ -110,15 +111,11 @@ const getTotal = computed(() => {
       </dd>
       <dt>实验要求</dt>
       <dd>
-        <div>规范开发；独立完成；突出个人设计特点和风格</div>
-        <div>实验报告：采用学院统一下发的 <a
-            href="../utils/file/软件相关实验报告模版（2023版）提交时需另存为PDF文件并重命名20231022.docx">实验模板</a>文件，以文字说明，配以必要的效果图片或核心代码，展示并说明数据来源、实施过程、各部分功能、具体内容和实现细节；最后导出为PDF，按照要求命名，提交个人学习通作业
-        </div>
-        <div>未按要求在规定时间内提交视为无效，不得分</div>
-        <div>格式规范，请参考 <a href="../course/paper.html">论文规范要点</a></div>
+        <iframe src="../common/drill.html" frameborder="0" scrolling="no" title="footer" id="drill"
+          onload="this.height=this.contentWindow.document.documentElement.scrollHeight;"></iframe>
       </dd>
       <dt>拓展</dt>
-      <dd>增加排序：价格、库存等字段的升序、降序</dd>
+      <dd>. 增加排序：价格、库存等字段的升序、降序</dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   </div>
