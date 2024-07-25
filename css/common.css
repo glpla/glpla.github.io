@@ -432,6 +432,23 @@ img+.fig-sn::before {
   content: '[例' counter(exam-sn)'] ';
 }
 
+.alpha {
+  counter-reset: alpha-sn;
+}
+
+.alpha>div {
+  counter-increment: alpha-sn;
+}
+
+.alpha>div::before {
+  content: counter(alpha-sn, upper-alpha) ': ';
+}
+
+.qa::before {
+  content: '[参考答案]';
+  color: var(--main-color);
+}
+
 /* sn end */
 
 iframe {
