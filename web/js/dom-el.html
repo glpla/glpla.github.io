@@ -19,11 +19,11 @@
     <nav class="nav">
       <a href="" style="--delay:0" class="nav-item">获取</a>
       <a href="" style="--delay:1" class="nav-item">内容</a>
-      <a href="" style="--delay:2" class="nav-item">属性</a>
-      <a href="" style="--delay:3" class="nav-item">类</a>
-      <a href="" style="--delay:4" class="nav-item">样式</a>
-      <a href="" style="--delay:5" class="nav-item">自定义属性</a>
-      <a href="" style="--delay:6" class="nav-item">案例</a>
+      <a href="" style="--delay:2" class="nav-item">属性 Attribute</a>
+      <a href="" style="--delay:3" class="nav-item">类 Class</a>
+      <a href="" style="--delay:4" class="nav-item">样式 Style</a>
+      <a href="" style="--delay:5" class="nav-item">自定义属性 data-</a>
+      <a href="" style="--delay:6" class="nav-item">案例 Cases</a>
     </nav>
   </div>
   <dl>
@@ -33,6 +33,10 @@
     <dd>.可以获取&lt;HTML&gt;中任何元素；通常获取&lt;body&gt;中的元素</dd>
     <dd>.隐藏元素 display: none; 也可以获取</dd>
     <dd>.指定了id的元素在脚本中可以直接使用！！！但是不建议</dd>
+    <div class="tips">
+      <div>1. 获取元素是操作元素的第一步 - 基础</div>
+      <div>2. 获取到元素后，可以访问元素的所有属性，如样式、内容等</div>
+    </div>
     <dd class="sn">
       <div>getElement(s)Byxxxx系列</div>
       <p>.获取的是<span class="warn">动态</span>集合：选出的元素会随文档改变</p>
@@ -141,8 +145,11 @@ btn.addEventListener('click', () => {
     </dd>
     <dt class="nav-cont">样式类 Class</dt>
     <dd>
-      <div>className：元素应用的类；返回字符串；多个类名以空格分隔；对该属性赋值将会增加、删除类</div>
-      <div>classList：元素应用的类；返回类数组</div>
+      <div>.开发的灵魂和重点</div>
+      <div>.通常结合静态类和动态类以及过渡动画等实现交互效果</div>
+      <div>.直接使用类名即可，不需要使用.</div>
+      <div>className：以字符串的形式返回元素应用的类；多个类名以空格分隔；对该属性赋值将会增加、删除类</div>
+      <div>classList：以数组的形式返回元素应用的类</div>
       <table>
         <caption>元素的类方法</caption>
         <tr>
@@ -150,26 +157,43 @@ btn.addEventListener('click', () => {
           <th>说明</th>
         </tr>
         <tr>
-          <td>classList.<a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add">add()</a></td>
+          <td>el.classList.<a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/add">add()</a></td>
           <td>增加类</td>
         </tr>
         <tr>
-          <td>classList.<a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove">remove()</a></td>
+          <td>el.classList.<a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/remove">remove()</a>
+          </td>
           <td>删除类</td>
         </tr>
         <tr>
-          <td>classList.<a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle">toggle()</a></td>
+          <td>el.classList.<a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/toggle">toggle()</a>
+          </td>
           <td>切换类</td>
         </tr>
         <tr>
-          <td>classList.<a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/contains">contains()</a>
+          <td>el.classList.<a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList/contains">contains()</a>
           <td>包含类</td>
           </td>
         </tr>
       </table>
+      <pre>
+.nav-item{
+  // ... ...
+}
+.nav-item.active{
+  // ... ...
+}      </pre>
+      <pre>el.classList.toggle('active')</pre>
     </dd>
     <dt class="nav-cont">内联样式 Style</dt>
     <dd>
+      <div>.样式 style 由属性 Property 和属性值 value 组成</div>
+      <div>.多用于元素的交互效果 - 动态样式</div>
+      <div>.访问属性，需要借助style操作；获取样式 getPropertyValue，只能获取内联样式定义的属性；class 中定义的获取不到</div>
+      <div>.直接访问 - 建议</div>
+      <div>.通过方法访问</div>
+      <div>.元素最终样式由外联样式、内部样式和内联样式按照权值综合计算确定，请查看 F12 → 已计算 computed</div>
       <div>.修改样式时，建议采用小驼峰；也可以使用连字符-，连字符需要使用数组写法</div>
       <table>
         <caption>元素样式 style</caption>
@@ -178,8 +202,20 @@ btn.addEventListener('click', () => {
           <th>说明</th>
         </tr>
         <tr>
-          <td>el.style</td>
-          <td>inline样式</td>
+          <td>获取样式</td>
+          <td>el.style.propertyName</td>
+        </tr>
+        <tr>
+          <td>修改样式</td>
+          <td>el.style.propertyName = value</td>
+        </tr>
+        <tr>
+          <td>获取样式</td>
+          <td>style.getPropertyValue(name)</td>
+        </tr>
+        <tr>
+          <td>修改样式</td>
+          <td>style.setProperty(name, value)</td>
         </tr>
         <tr>
           <td>currentStyle</td>
@@ -187,7 +223,7 @@ btn.addEventListener('click', () => {
         </tr>
       </table>
     </dd>
-    <dd class="example-sn">行内样式和最终样式</dd>
+    <dd class="example-sn">内部样式、行内样式和最终样式</dd>
     <dd>
       <pre>&lt;div class="box" style="padding: 10px;"&gt;Lorem, ipsum.&lt;/div&gt;</pre>
       <pre>
@@ -203,45 +239,13 @@ console.log(box.style.padding);//10px
 console.log(box.style.width);//空，因为没有对应的行内样式
 box.style.width = 800 + 'px'</pre>
     </dd>
-    <dt>样式的属性 Property</dt>
+    <dt class="nav-cont">自定义属性 data-</dt>
     <dd>
-      <div>.Property指的是样式的属性，需要借助style操作</div>
-      <div>.修改元素样式：可以修改class定义的样式，也可以修改style定义的样式；如果使用到变量属性，请使用setProperty</div>
-      <div>.获取样式getPropertyValue，只能获取内联样式定义的属性；class中定义的获取不到</div>
-      <table>
-        <caption>样式的属性 Property</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>修改样式的属性值</td>
-          <td>style.propertyName= value</td>
-        </tr>
-        <tr>
-          <td>修改样式的属性值</td>
-          <td>style.setProperty(name, value)</td>
-        </tr>
-        <tr>
-          <td>获取样式的属性值</td>
-          <td>style.getPropertyValue(name)</td>
-        </tr>
-      </table>
-    </dd>
-    <dt class="nav-cont">自定义属性 Data-</dt>
-    <dd>
-      <div>.data-写在元素标签上，为了保存和使用数据</div>
-      <div>.获取时推荐使用：el.dataset，不需要加上data</div>
+      <div>.data-写在元素标签上，用于临时保存数据</div>
+      <div>.获取时使用：el.dataset，不需要加上data</div>
       <div>.事件处理函数写在当前元素上才能获取；事件代理的方式获取不到</div>
       <div>.长属性应采用连字符法，如：data-ind、data-good-name</div>
-      <div>.实际使用时，注意单元素和多元素的区别；更多信息，请参考 <a href="../js/event.html">事件对象</a>一节</div>
-    </dd>
-    <dd class="example-sn"> 创建节点并指定data-</dd>
-    <dd>
-      <pre>
-let div = document.createElement('div')
-div.dataset.id = 'hi'
-wrap.appendChild(div)</pre>
+      <div>.实际使用时，注意单元素和多元素的区别；更多信息，请参考 <a href="../js/event.html">事件对象</a> 一节</div>
     </dd>
     <dd class="example-sn"> 换肤 - 将换肤数据绑定到data-上</dd>
     <dd>
@@ -267,6 +271,13 @@ btnYellow.addEventListener('click', fn);
 function fn(e) {
   body.style.backgroundColor = e.target.dataset.color;
 }</pre>
+    </dd>
+    <dd class="example-sn"> 创建节点并指定data-</dd>
+    <dd>
+      <pre>
+let div = document.createElement('div')
+div.dataset.id = 'hi'
+wrap.appendChild(div)</pre>
     </dd>
   </dl>
   <div class="chap">案例 Cases</div>

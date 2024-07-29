@@ -29,34 +29,81 @@
       --shadow-color: rgba(255, 255, 255, 0.1);
     }
 
-    body.dark-theme {
+    /* body.dark-theme {
       --txt-color: #f1f1f1;
       --bg-color: #131313;
       --shadow-color: rgba(255, 255, 255, 0.1);
-    }
+    } */
 
     html {
       background-color: var(--bg-color);
-      color: var(--color-text);
+      color: var(--txt-color);
     }
 
+    /* 
     html[data-theme="dark"] body::before {
       clip-path: circle(100%);
+    } */
+
+    body {
+      height: 100vh;
+      color: #333;
+      background-color: #fff;
     }
 
+    /* html.dark {
+      --txt-color: #f1f1f1;
+      --bg-color: #131313;
+      --shadow-color: rgba(255, 255, 255, 0.1);
+    } */
+
+    #color {
+      color: #fff;
+    }
 
     /* document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light'); */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --txt-color: #f1f1f1;
+        --bg-color: #131313;
+        --shadow-color: rgba(255, 255, 255, 0.1);
+      }
+
+      body {
+        color: #fff;
+        background-color: #333;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <div class="btn-theme">dark</div>
+  <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro facere cum, excepturi officia omnis iste suscipit
+    nostrum odit asperiores repellat ratione repudiandae explicabo ducimus officiis repellendus veritatis incidunt!
+    Molestiae, iusto.</div>
+  <div class="btn-theme" style="background-color: #f40;--color:#f40" id="color" data-color="#ff0f5b">dark</div>
   <script src="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.js"></script>
   <script>
-    let btnTheme = document.querySelector('.btn-theme')
-    btnTheme.addEventListener('click', () => {
-      document.documentElement.setAttribute('data-theme', 'dark');
-    })
+    console.log(window.matchMedia('(prefers-color-scheme: dark)').matches);
+    // let html = document.documentElement
+    // let btnTheme = document.querySelector('.btn-theme')
+    // let body = document.body
+    // let colorObj = document.querySelector('#color')
+    // btnTheme.addEventListener('click', () => {
+    // document.documentElement.style.setProperty('--txt-color', '#f1f1f1')
+    // document.documentElement.style.setProperty('--bg-color', '#303133')
+    // html.classList.toggle('dark')
+    // })
+
+    // btnTheme.addEventListener('click', (e) => {
+    //   console.log(html);
+    //   html.setAttribute('data-theme', 'dark')
+    // })
+
+    // colorObj.addEventListener('click', (e) => {
+    //   let color = e.target.dataset.color
+    //   body.style.backgroundColor = color
+    // })
   </script>
 </body>
 

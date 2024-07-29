@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>换肤 Skin</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <base target="_blank">
 </head>
 
 <body>
@@ -15,10 +16,71 @@
     <span>&commat;Skin</span>
   </header>
   <dl>
-    <dt>CSS 样式</dt>
+    <dd class="sn">
+      <p>获取关键数据修改目标元素样式达到换肤的效果；注意权值</p>
+      <p>关键数据可以来自：</p>
+      <div>元素属性，如：样式的类、内联样式、样式属性值或其它属性，如自定义属性</div>
+      <div>变量，如全局变量或局部变量</div>
+      <p>同样的，修改目标元素的样式，可以通过修改:</p>
+      <div>样式的类、内联样式、样式属性值或其它属性</div>
+      <div>变量，如全局变量或局部变量</div>
+    </dd>
+    <dt>内联样式 style</dt>
     <dd>
-      <div>通过样式的切换达到换肤的效果</div>
-      <div>为根元素 html 设置自定义属性的值来应用不同的样式：白天和黑夜</div>
+      <p>说明：本节案例，重在关键数据的获取</p>
+      <p>获取某个元素的内联样式，修改另外一个元素的内联样式</p>
+      <pre>&lt;div id="red" style="background-color: #ff0f5b; --color: #ff0f5b" data-color='#ff0f5b'&gt;red&lt;/div&gt;</pre>
+      <p>获取元素</p>
+      <pre>
+let body = document.body
+let colorObj = document.querySelector('#color')</pre>
+      <div>方案1：直接获取对象样式 backgroundColor</div>
+      <pre>
+colorObj.addEventListener('click', () => {
+  let color= colorObj.style.backgroundColor
+  body.style.backgroundColor = color
+})      </pre>
+      <div>方案2：获取事件对象 target</div>
+      <pre>
+colorObj.addEventListener('click', (e) => {
+  let color = e.target.style.getPropertyValue('background-color')
+  body.style.backgroundColor = color
+})</pre>
+      <div>方案3：获取内联变量 --color</div>
+      <pre>
+colorObj.addEventListener('click', (e) => {
+  let color = e.target.style.getPropertyValue('--color')
+  body.style.backgroundColor = color
+})</pre>
+      <div>方案4：获取自定义属性 data-color</div>
+      <pre>
+colorObj.addEventListener('click', (e) => {
+  let color = e.target.dataset.color
+  body.style.backgroundColor = color
+})</pre>
+    </dd>
+    <dt>类 class</dt>
+    <dd>
+      <p>指定不同的类而应用不同的样式</p>
+      <div>方案1：切换类 - 两套变量</div>
+      <pre>
+:root {
+  --txt-color: #303133;
+  --bg-color: #f1f1f1;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+html.dark {
+  --txt-color: #f1f1f1;
+  --bg-color: #131313;
+  --shadow-color: rgba(255, 255, 255, 0.1);
+}      </pre>
+      <p>单击时，切换主题类</p>
+      <pre>
+btnTheme.addEventListener('click', () => {
+  html.classList.toggle('dark')
+})      </pre>
+      <div>方案2：为根元素 html 设置白天和黑夜两套全局变量，使用属性选择器加以区分</div>
       <pre>
 :root {
   --txt-color: #303133;
@@ -29,55 +91,46 @@
   --txt-color: #e5eaf3;
   --bg-color: #131313;
 }</pre>
-      <div>修改为暗夜模式</div>
+      <p>默认是白天，单击/交互时，&lt;html&gt;添加主题属性，修改为暗夜模式</p>
       <pre>document.documentElement.setAttribute('data-theme', 'dark');</pre>
-      <div>或：根据当前值切换；因为没有指定 light，所以属性为空，则应用默认的变量样式</div>
+      <p>或：新增加一个变量，保存当前模式；根据当前模式切换主题；可以使用 <a href="../js/localStorage.html">本地存储 - localStorage</a>
+        或远端保存用户选择；还可以使用特定设计，如 <a href="../clip-path.html">路径剪切 clip-path</a>实现过渡效果</p>
       <pre>document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light');</pre>
     </dd>
-    <dt>自定义属性 data-</dt>
+    <dt>全局变量</dt>
     <dd>
-      <div>将换肤数据绑定到data-上，获取后应用到其它元素；事件处理可以封装为函数</div>
+      <p>比较优雅且现代 - 只需要提供一套变量定义；修改少量关键变量即可实现</p>
       <pre>
-&lt;div class="red" data-color="#f40"&gt;red&lt;/div&gt;
-&lt;div class="blue" data-color="#089"&gt;blue&lt;/div&gt;
-&lt;div class="yellow" data-color="#ff0"&gt;yellow&lt;/div&gt;</pre>
+:root {
+  --txt-color: #303133;
+  --bg-color: #f1f1f1;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}      </pre>
+      <div>单击时，修改变量的值；可以加入更多设计</div>
       <pre>
-btnRed.addEventListener('click', (e) => {
-  body.style.backgroundColor = e.target.dataset.color;
-})
-btnBlue.addEventListener('click', (e) => {
-  body.style.backgroundColor = e.target.dataset.color;
-})
-btnYellow.addEventListener('click', (e) => {
-  body.style.backgroundColor = e.target.dataset.color;
-})</pre>
-      <!-- <pre>
-btnRed.addEventListener('click', fn);
-btnBlue.addEventListener('click', fn);
-btnYellow.addEventListener('click', fn);
-function fn(e) {
-  body.style.backgroundColor = e.target.dataset.color;
-}</pre> -->
+btnTheme.addEventListener('click', () => {
+  document.documentElement.style.setProperty('--txt-color', '#f1f1f1')
+  document.documentElement.style.setProperty('--bg-color', '#303133')
+})      </pre>
     </dd>
-    <dt>CSS 变量</dt>
+    <dt>媒体查询 @media</dt>
     <dd>
-      <div>.获取元素节点，使用其特定的样式属性，如颜色去修改变量的值，达到换肤的效果</div>
+      <div>使用媒体查询来检测用户的系统偏好设置，由用户操作系统触发；建议配合js，由用户触发</div>
+      <div>Win + I → 个性化 → 颜色 → 选择模式 → 深色</div>
+      <div>不是：系统 → 屏幕 → 夜间模式</div>
+      <div>使用console.log()在JavaScript中输出window.matchMedia('(prefers-color-scheme: dark)').matches的结果，确认是否返回预期的布尔值</div>
       <pre>
-let mixer = document.querySelectorAll('.mixer span');
-let root = document.querySelector(':root');
-mixer.forEach(item => {
-    item.addEventListener('click', (e) => {
-        console.log(e.target.style.backgroundColor);
-        root.style.setProperty('--main-color', e.target.style.backgroundColor)
-    })
-})</pre>
-    </dd>
-    <dt>媒体查询 media</dt>
-    <dd>
-      <pre>
+:root {
+  --txt-color: #303133;
+  --bg-color: #f1f1f1;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-  //
+    --txt-color: #f1f1f1;
+    --bg-color: #131313;
+    --shadow-color: rgba(255, 255, 255, 0.1);
   }
 }</pre>
     </dd>
