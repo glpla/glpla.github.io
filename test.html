@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.css">
-  <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3859342_cjn1jnma20c.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3859342_yxk1peemmtq.css">
   <style>
     /* init css */
     * {
@@ -15,95 +15,73 @@
       box-sizing: border-box;
     }
 
-    /* light theme */
-    :root {
-      --txt-color: #303133;
-      --bg-color: #f1f1f1;
-      --shadow-color: rgba(0, 0, 0, 0.1);
-    }
-
-    /* dark theme */
-    :root[data-theme="dark"] {
-      --txt-color: #f1f1f1;
-      --bg-color: #131313;
-      --shadow-color: rgba(255, 255, 255, 0.1);
-    }
-
-    /* body.dark-theme {
-      --txt-color: #f1f1f1;
-      --bg-color: #131313;
-      --shadow-color: rgba(255, 255, 255, 0.1);
-    } */
-
-    html {
-      background-color: var(--bg-color);
-      color: var(--txt-color);
-    }
-
-    /* 
-    html[data-theme="dark"] body::before {
-      clip-path: circle(100%);
-    } */
-
-    body {
+    ul {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 10px;
       height: 100vh;
-      color: #333;
-      background-color: #fff;
+      overflow: hidden;
+      list-style: none;
     }
 
-    /* html.dark {
-      --txt-color: #f1f1f1;
-      --bg-color: #131313;
-      --shadow-color: rgba(255, 255, 255, 0.1);
-    } */
 
-    #color {
+    div {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 300px;
+      aspect-ratio: 1/1;
+      padding: 10px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      transform-style: preserve-3d;
+      transition: all 0.5s;
+      border-radius: 10px;
+    }
+
+    div:hover {
+      background-color: var(--color);
+    }
+
+    div .iconfont {
+      font-size: 5rem;
+      color: #000;
+      transform: translateZ(100px);
+      transition: 0.3s;
+    }
+
+    div:hover .iconfont {
       color: #fff;
-    }
-
-    /* document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light'); */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --txt-color: #f1f1f1;
-        --bg-color: #131313;
-        --shadow-color: rgba(255, 255, 255, 0.1);
-      }
-
-      body {
-        color: #fff;
-        background-color: #333;
-      }
     }
   </style>
 </head>
 
 <body>
-  <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro facere cum, excepturi officia omnis iste suscipit
-    nostrum odit asperiores repellat ratione repudiandae explicabo ducimus officiis repellendus veritatis incidunt!
-    Molestiae, iusto.</div>
-  <div class="btn-theme" style="background-color: #f40;--color:#f40" id="color" data-color="#ff0f5b">dark</div>
+  <ul>
+    <li style="--color:#f40">
+      <div><span class="iconfont icon-qq0"></span></div>
+    </li>
+    <li style="--color:#089">
+      <div><span class="iconfont icon-twitter"></span></div>
+    </li>
+    <li style="--color:#980">
+      <div><span class="iconfont icon-weixin0"></span>
+      </div>
+    </li>
+  </ul>
   <script src="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"
+    integrity="sha512-wC/cunGGDjXSl9OHUH0RuqSyW4YNLlsPwhcLxwWW1CR4OeC2E1xpcdZz2DeQkEmums41laI+eGMw95IJ15SS3g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
-    console.log(window.matchMedia('(prefers-color-scheme: dark)').matches);
-    // let html = document.documentElement
-    // let btnTheme = document.querySelector('.btn-theme')
-    // let body = document.body
-    // let colorObj = document.querySelector('#color')
-    // btnTheme.addEventListener('click', () => {
-    // document.documentElement.style.setProperty('--txt-color', '#f1f1f1')
-    // document.documentElement.style.setProperty('--bg-color', '#303133')
-    // html.classList.toggle('dark')
-    // })
+    VanillaTilt.init(document.querySelectorAll("div"), {
+      max: 30,
+      speed: 400,
+      // glare: true
+    });
 
-    // btnTheme.addEventListener('click', (e) => {
-    //   console.log(html);
-    //   html.setAttribute('data-theme', 'dark')
-    // })
-
-    // colorObj.addEventListener('click', (e) => {
-    //   let color = e.target.dataset.color
-    //   body.style.backgroundColor = color
-    // })
   </script>
 </body>
 

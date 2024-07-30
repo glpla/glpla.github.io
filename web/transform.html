@@ -405,12 +405,13 @@
 &lt;/div&gt;</pre>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] vanilla-tilt</dd>
-    <dd>.借助第三方库 <a href="./lib/vanilla-tilt.min.js" download title="点击下载">vanilla-tilt</a> 实现视觉差</dd>
-    <dd>.更多信息，请访问底部资源推荐</dd>
+    <dd>.借助第三方库 <a
+        href="https://micku7zu.github.io/vanilla-tilt.js/?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_library">vanilla-tilt</a>，或
+      <a href="./lib/vanilla-tilt.min.js" download title="点击下载">本地下载</a> 实现视觉差
+    </dd>
     <dd class="van-box">
       <img class="ob-img" data-src="./imgs/hj.png" alt="">
     </dd>
-    <dd>[JavaScript]</dd>
     <dd>
       <pre>
 VanillaTilt.init(document.querySelector(".van-box"), {
@@ -457,54 +458,53 @@ VanillaTilt.init(document.querySelector(".van-box"), {
   <script src="./lib/lazyload.js"></script>
   <script src="./lib/vanilla-tilt.min.js"></script>
   <script>
-    window.onload = function () {
-      let nav = document.querySelectorAll('.nav-item')
-      console.log(nav);
-      let navCont = document.querySelectorAll('.nav-cont')
-      nav.forEach((item, ind) => {
-        item.addEventListener('click', function (e) {
-          e.preventDefault();
-          setTimeout(function () {
-            navCont[ind].scrollIntoView();
-            reset();
-            item.classList.toggle('active');
-          }, 100)
-        })
+    let nav = document.querySelectorAll('.nav-item')
+    console.log(nav);
+    let navCont = document.querySelectorAll('.nav-cont')
+    nav.forEach((item, ind) => {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        setTimeout(function () {
+          navCont[ind].scrollIntoView();
+          reset();
+          item.classList.toggle('active');
+        }, 100)
       })
-      function reset() {
-        for (let i = 0; i < nav.length; i++) {
-          nav[i].classList.remove('active');
-        }
+    })
+    function reset() {
+      for (let i = 0; i < nav.length; i++) {
+        nav[i].classList.remove('active');
       }
-
-      document.body.addEventListener('touchstart', function () { });
-
-      // translate
-      let transImg = document.querySelector('#trans-img')
-      let ranger = document.querySelector('#ranger')
-      let px = document.querySelector('#trans-px')
-      ranger.addEventListener('input', function () {
-        transImg.style.transform = `translateZ(${this.value}px)`
-        px.innerHTML = this.value
-      })
-
-      // rotate
-      let rotImg = document.querySelector('#rot-img')
-      let rot = document.querySelector('#rot')
-      let deg = document.querySelector('#trans-deg')
-      // console.log(transImg, ranger);
-      rot.addEventListener('input', function () {
-        console.log(this.value);
-        rotImg.style.transform = `rotateY(${this.value}deg)`
-        deg.innerHTML = this.value
-      })
-
-      // van
-      VanillaTilt.init(document.querySelector(".van-box"), {
-        max: 50,
-        speed: 400
-      });
     }
+
+    document.body.addEventListener('touchstart', function () { });
+
+    // translate
+    let transImg = document.querySelector('#trans-img')
+    let ranger = document.querySelector('#ranger')
+    let px = document.querySelector('#trans-px')
+    ranger.addEventListener('input', function () {
+      transImg.style.transform = `translateZ(${this.value}px)`
+      px.innerHTML = this.value
+    })
+
+    // rotate
+    let rotImg = document.querySelector('#rot-img')
+    let rot = document.querySelector('#rot')
+    let deg = document.querySelector('#trans-deg')
+    // console.log(transImg, ranger);
+    rot.addEventListener('input', function () {
+      console.log(this.value);
+      rotImg.style.transform = `rotateY(${this.value}deg)`
+      deg.innerHTML = this.value
+    })
+
+    // van
+    VanillaTilt.init(document.querySelector(".van-box"), {
+      max: 50,
+      speed: 400,
+      glare: true,
+    });
   </script>
 </body>
 

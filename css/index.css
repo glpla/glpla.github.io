@@ -7,6 +7,7 @@
   /* --main-color: #63a4e5; */
   /* --main-dark-color: #2875c7; */
   --border-r: 1rem;
+  --p-m-g: 1rem;
 }
 
 body,
@@ -27,8 +28,6 @@ footer {
 html {
   font-size: 62.5%;
   scroll-padding-top: 160px;
-  background-color: #f24;
-  /* background-image: url(https://desk-fd.zol-img.com.cn/t_s960x600c5/g2/M00/0B/08/Cg-4WlUwdDWIZ7zKAAqGM6NxoXkAABuAQPwTs0ACoZL265.jpg); */
   background-image: url(https://cdn.pixabay.com/photo/2022/11/27/13/51/moon-7619831_1280.jpg);
   background-size: cover;
   background-position: top center;
@@ -176,7 +175,7 @@ header:hover {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  grid-auto-rows: minmax(max-content, 16vh);
+  /* grid-auto-rows: minmax(max-content, 16vh); */
   gap: 2rem;
   padding: 4rem 0;
 }
@@ -211,17 +210,32 @@ header:hover {
 .nav-item {
   display: grid;
   grid-template-columns: 1fr 3fr;
+  column-gap: var(--p-m-g);
   border-radius: var(--border-r);
-  border: 1px solid #fff;
+  border: 1px solid rgba(255, 255, 255, .4);
+  aspect-ratio: 16/9;
   color: #fff;
-  transition: .4s;
-  backdrop-filter: blur(4px);
+  /* backdrop-filter: blur(4px); */
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  transform-style: preserve-3d;
+  transition: 0.4s;
 }
 
 .nav-item .iconfont {
   grid-row: 1/3;
-  transition: 0.4s;
+  transform: translateZ(50px) translateX(20px);
+}
+
+
+.nav-item .title {
+  align-self: flex-end;
+  font-family: 'Michroma';
+  transform: translateZ(50px) translateX(20px);
+  letter-spacing: 2px;
+}
+
+.nav-item .desc {
+  transform: translateZ(50px) translateX(20px);
 }
 
 .nav-item:hover {
@@ -229,16 +243,11 @@ header:hover {
     0 0 10px var(--main-color),
     0 0 10px var(--main-color),
     0 0 10px var(--main-color);
+  /* backdrop-filter: initial; */
 }
 
 .nav-item:hover .iconfont {
-  transform: scale(1.1);
   color: #ff0;
-}
-
-.nav-item .title {
-  align-self: flex-end;
-  font-family: 'Michroma';
 }
 
 footer {
@@ -360,14 +369,26 @@ footer {
   .nav-item {
     grid-template-columns: 1fr 2fr 2fr;
     align-items: center;
+    border: none;
+    aspect-ratio: initial;
   }
 
   .nav-item .iconfont {
     font-size: 3rem;
     grid-row: unset;
+    transition: none;
   }
 
   .nav-item .title {
     align-self: unset;
+  }
+}
+
+@media (hover:none) {
+  html {}
+
+  .nav-item:hover {
+    box-shadow: none;
+    transition: none;
   }
 }
