@@ -40,6 +40,19 @@
     ul>li {
       list-style-type: my-style;
     }
+
+    h2 {
+      counter-increment: cont-sn;
+      font-size: 18px;
+    }
+
+    h2::before {
+      content: counter(cont-sn);
+      padding: 4px 10px;
+      background-color: #0fbcf9;
+      color: #fff;
+      margin-right: 10px;
+    }
   </style>
 </head>
 
@@ -49,11 +62,11 @@
     <span>&commat;Counter</span>
   </header>
   <dl>
-    <dd>. 根据元素个数自动计数</dd>
-    <dd>. 可以嵌套使用实现多级列表</dd>
-    <dd>. 理工科最爱：为代码编号</dd>
-    <dd>. 计数标识符可以使用连字符-，不需要使用引号包裹</dd>
     <dd>
+      <div>. 根据元素个数自动计数</div>
+      <div>. 可以嵌套使用实现多级列表</div>
+      <div>. 理工科最爱：为代码编号</div>
+      <div>. 计数标识符可以使用连字符-，不需要使用引号包裹</div>
       <table>
         <caption>属性</caption>
         <tr>
@@ -77,8 +90,6 @@
           <td>在伪元素的content属性中获取并显示</td>
         </tr>
       </table>
-    </dd>
-    <dd>
       <table>
         <caption>list-style-type常见类型</caption>
         <tr>
@@ -129,47 +140,69 @@
       <div>子元素使用/计数，其伪元素使用content显示计数</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>]初始化</dd>
-    <dd>. 默认从0开始</dd>
     <dd>
+      <div>. 默认从0开始计数</div>
       <pre>counter-reset: percent;</pre>
-    </dd>
-    <dd>. 从10开始</dd>
-    <dd>
+      <div>. 从10开始计数</div>
       <pre>counter-reset: percent 10;</pre>
-    </dd>
-    <dd>. 根据变量定义开始编号</dd>
-    <dd>
+      <div>. 根据变量开始计数</div>
       <pre>counter-reset: percent var(--per);</pre>
-    </dd>
-    <dd>. 使用连字符-定义复制标识符</dd>
-    <dd>
+      <div>. 使用连字符-定义复杂计数器</div>
       <pre>counter-reset: chapter-sn;</pre>
-    </dd>
-    <dd>. 同时声明多个计时器</dd>
-    <dd>
+      <div>. 同时声明多个计数器</div>
       <pre>counter-reset: tbl-sn img-sn exam-sn;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 为代码添加行号</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 内容编号</dd>
+    <dd class="cont-sn">
+      <h2>Lorem ipsum dolor sit.</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
+        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
+      </p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
+        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
+      </p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
+        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
+      </p>
+      <h2>Lorem ipsum dolor sit.</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
+        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
+      </p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
+        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
+      </p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
+        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
+      </p>
+      <h2>Lorem ipsum dolor sit.</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
+        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
+      </p>
+      <h2>Lorem ipsum dolor sit.</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
+        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
+      </p>
+      <pre>
+h2 {
+  counter-increment: cont-sn;
+  font-size: 18px;
+}
+
+h2::before {
+  content: counter(cont-sn);
+  padding: 10px;
+  background-color: var(--main-color);
+  color: #fff;
+  margin-right: 10px;
+}      </pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./web.html">为代码添加行号</a></dd>
     <dd>
       <pre>
-<span>&lt;!DOCTYPE html&gt;</span>
-<span>&lt;html lang="en"&gt;</span>
-<span></span>
-<span>&lt;head&gt;</span>
-<span>    &lt;meta charset="UTF-8"&gt;</span>
-<span>    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;</span>
-<span>    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span>
-<span>    &lt;title&gt;Document&lt;/title&gt;</span>
-<span>&lt;/head&gt;</span>
-<span></span>
-<span>&lt;body&gt;</span>
-<span>    hello, world.</span>
-<span>&lt;/body&gt;</span>
-<span></span>
-<span>&lt;/html&gt;</span></pre>
-      <pre>&lt;span&gt;hello, world.&lt;/span&gt;</pre>
-    </dd>
-    <pre>
+&lt;pre&gt;
+  &lt;span&gt;hello, world.&lt;/span&gt;
+&lt;/pre&gt;</pre>
+      <pre>
 pre {
   counter-reset: sn;
 }
@@ -181,6 +214,7 @@ pre span {
 pre span::before {
   content: counter(sn, decimal-leading-zero)' ';
 }</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 为表和图添加序号</dd>
     <dd>
       <pre>
@@ -216,7 +250,8 @@ figure figcaption::before {
   content: '图' counter(img-sn)' ';
 }      </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 为文章添加章节序号</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 为文章添加章节序号；更多实现，请参考 <a href="./demo/pager.html">文章排版 - paper</a>
+    </dd>
     <dd class="article">
       <h2>title1</h2>
       <h3>sub-title1</h3>

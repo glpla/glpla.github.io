@@ -55,33 +55,40 @@
       <p>弹性盒子布局；一维布局；应用非常广泛</p>
       <div>grid</div>
       <p>网格布局；二维布局；应用非常广泛</p>
+      <div>min-width</div>
+      <div>max-width</div>
+      <div>min-height</div>
+      <div>max-height</div>
+      <div>max-content</div>
+      <p>根据内容最大宽度自动调整自身宽度</p>
     </dd>
-    <dt>属性</dt>
+    <dt>函数</dt>
     <dd class="sn">
-      <div>min() max() clamp()</div>
-      <div>min-width max-width</div>
-      <div>min-height max-height</div>
-      <div>max-content - 根据内容最大宽度自动调整自身宽度</div>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/min">min()</a></div>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/max">max()</a></div>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clamp">clamp()</a></div>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/minmax">minmax()</a></div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 响应式版心 - 使用min()函数</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 响应式版心</dd>
     <dd>
+      <div>超过800px时，保持800px；小于800px，为父级的90%，即：宽度为父级90%，但不超过800px</div>
+      <div>方案1：使用min()函数</div>
       <pre>
-      main {
-        width: min(800px, 100% - 1rem);
-        margin: 0 auto;
-      }</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 响应式版心 - 使用max-width</dd>
-    <dd>
+main {
+  width: min(800px, 90%);
+  margin: 0 auto;
+}</pre>
+      <div>方案2：使用max-width</div>
       <pre>
-  main {
-    width: calc(100% - 1rem);
-    max-width: 800px;
-    margin: 0 auto;
-  }</pre>
+main {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+}</pre>
     </dd>
-    <dd class="max-w"> [<span class="iconfont icon-keyboard"></span>] 内容居中 - 标题 </dd>
+    <dd> [<span class="iconfont icon-keyboard"></span>] 内容居中</dd>
     <dd>
+      <h1 class="max-w">标题</h1>
       <pre>
 h1{
   width: max-content;
@@ -117,7 +124,9 @@ function rem() {
   // 1rem=100px
   document.documentElement.style.fontSize = (dw / 7.5) + 'px'
 }
+
 rem()
+
 window.onresize = function () {
   rem()
 }</pre>
