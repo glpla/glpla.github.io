@@ -16,10 +16,10 @@
     <h1>&commat;Flex</h1>
     <span class="ham iconfont icon-menu"></span>
     <nav class="nav">
-      <a href="" style="--delay:0" class="nav-item">容器</a>
-      <a href="" style="--delay:1" class="nav-item">子项</a>
-      <a href="" style="--delay:2" class="nav-item">布局</a>
-      <a href="" style="--delay:3" class="nav-item">案例</a>
+      <a href="" style="--delay:0" class="nav-item">容器 Container</a>
+      <a href="" style="--delay:1" class="nav-item">子项 Item</a>
+      <a href="" style="--delay:2" class="nav-item">布局 Layout</a>
+      <a href="" style="--delay:3" class="nav-item">案例 Cases</a>
     </nav>
   </header>
   <dl>
@@ -40,7 +40,7 @@
       <div class="fig-sn">图例</div>
     </dd>
   </dl>
-  <div class="chap">容器 container</div>
+  <div class="chap">容器 Container</div>
   <dl class="nav-cont">
     <dd>.弹性盒子/容器的属性</dd>
     <dt>flex-direction</dt>
@@ -77,7 +77,7 @@
       <div>.微信小程序的弹性盒子好像不支持</div>
     </dd>
   </dl>
-  <div class="chap">子项 item</div>
+  <div class="chap">子项 Item</div>
   <dl class="nav-cont">
     <dd>.弹性盒子的直接子元素</dd>
     <dt>flex-basis</dt>
@@ -93,7 +93,7 @@
     </dd>
     <dt>flex-shrink</dt>
     <dd>
-      <div>.容器空间不足时，是否压缩子项。默认为1，压缩[不压缩我放不下啊]</div>
+      <div>.容器空间不足时，是否压缩子项。默认为1，压缩[不压缩我放不下啊；但是：子项如果是&lt;img&gt;不压缩。。。]</div>
       <pre>flex-shrink: number;</pre>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 多余空间分配</dd>
@@ -170,8 +170,8 @@
   </dl>
   <div class="chap">布局 Layout</div>
   <dl class="nav-cont">
-    <dd id="layout">[<span class="iconfont icon-keyboard"></span>] 单个元素在容器内的水平垂直居中；<a
-        href="./grid.html#layout">网格布局</a>实现；更多案例请访问<a href="./demo/login_deer.html">一路有你</a></dd>
+    <dd id="layout">[<span class="iconfont icon-keyboard"></span>] 单个元素在容器内的水平垂直居中；<a href="./grid.html#layout">网格布局</a>
+      实现；更多案例请访问 <a href="./demo/login_deer.html">一路有你</a></dd>
     <dd>
       <div>方案1 - 只操作容器</div>
       <pre>
@@ -306,9 +306,9 @@ body {
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/acc_flex.html">手风琴 - flex</a>、 <a
         href="https://codepen.io/glpla/full/LYqaWMW">手风琴 - CodePen</a>
     </dd>
-    <dd>. 开始平分空间；:hover时，使用flex-basis重新分配</dd>
-    <dd>. 如何实现竖版的手风琴效果？</dd>
     <dd>
+      <div>. 开始平分空间；:hover时，使用flex-basis重新分配</div>
+      <div>. 如何实现竖版的手风琴效果？</div>
       <pre>
 .cor-wrap div {
   flex: 1;
@@ -320,9 +320,20 @@ body {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/RwvdpdQ">九宫格 - CodePen</a>
     </dd>
-    <dd>每个项目的宽度和gap相加不能超过100%</dd>
-    <dd>通常取项目的宽度为25%-30%，剩下的空间由auto自动分配，故而可以撑满到3个子项，实现9宫格</dd>
     <dd>
+      <div>每个项目的宽度和gap相加不能超过100%</div>
+      <div>通常取项目的宽度为25%-30%，剩下的空间由auto自动分配，故而可以撑满到3个子项，实现9宫格</div>
+      <div class="sudoku">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
       <pre>
 .sudoku {
   display: flex;
@@ -334,8 +345,8 @@ body {
 
 .sudoku .item {
   width: 30%;
-  flex: auto;
   aspect-ratio: 16/9;
+  flex: auto;
 }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 面包屑导航 - flex方式</dd>
