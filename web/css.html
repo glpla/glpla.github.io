@@ -16,11 +16,12 @@
     <span>&commat;CSS</span>
     <span class="ham iconfont icon-menu"></span>
     <nav class="nav">
-      <a href="" style="--delay:0" class="nav-item">概述</a>
-      <a href="" style="--delay:1" class="nav-item">使用</a>
-      <a href="" style="--delay:2" class="nav-item">盒模型</a>
-      <a href="" style="--delay:3" class="nav-item">特性</a>
-      <a href="" style="--delay:4" class="nav-item">属性</a>
+      <a href="" style="--delay:0" class="nav-item">概述 Overview</a>
+      <a href="" style="--delay:1" class="nav-item">使用 Usage</a>
+      <a href="" style="--delay:2" class="nav-item">盒模型 BoxModel</a>
+      <a href="" style="--delay:3" class="nav-item">特性 Features</a>
+      <a href="" style="--delay:5" class="nav-item">选择器 Selector</a>
+      <a href="" style="--delay:4" class="nav-item">属性 Attributes</a>
     </nav>
   </header>
   <dl class="nav-cont">
@@ -31,9 +32,9 @@
       <div>. 可以同时控制多个网页的显示</div>
       <div>. CSS由选择器 <a href="./selector0.html">选择器 - selector</a> 和声明块 Declaration 组成</div>
       <div>. 选择器：选择一个或多个元素，以便应用样式；选择器可以是标签、类、id等单一选择器或其它复合选择器</div>
-      <div>. 声明块：用 <span class="warn">花括号</span> 括起来，由一条或多条规则rule构成，为选出来的元素指定样式；多条规则使用 <span class="warn">分号</span>
+      <div>. 声明块：用 <span class="warn">花括号{}</span> 括起来，由一条或多条规则rule构成，为选出来的元素指定样式；多条规则使用 <span class="warn">分号;</span>
         分隔</div>
-      <div>. 规则：每个规则都包含一个 CSS 属性名name和一个值value，以 <span class="warn">冒号</span> 分隔</div>
+      <div>. 规则：每个规则都包含一个 CSS 属性名name和一个值value，以 <span class="warn">冒号:</span> 分隔</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 类名为warn的CSS样式，包含2条规则，指定了被选中的元素/应用该类样式的元素的颜色和字体重量/加粗
     </dd>
@@ -49,7 +50,7 @@
   <dl class="nav-cont">
     <dt>行内样式/内联样式</dt>
     <dd>
-      <div>使用style 属性为元素定义样式</div>
+      <div>使用 style 属性为元素定义样式</div>
       <div>定义的样式仅适合于当前元素</div>
       <div>通常配合JS来动态改变</div>
       <div>行内样式不符合结构样式分离的开发原则</div>
@@ -113,10 +114,10 @@
 }</pre>
     </dd>
     <dd class="tips">
-      <div>1. 几种形式的使用可以并存；最后哪个样式生效，由其代表的优先级决定，请参考后续内容和 <a href="./selector0.html">选择器 - selector</a>一节内容</div>
+      <div>1. 几种形式的使用可以并存；最后哪个样式生效，由其代表的优先级决定，请参考后续内容和 <a href="./selector0.html">选择器 - selector</a></div>
       <div>2. 编码：可以指定CSS文件的编码，特别是有中文存在时，必须指定；通常不需要指定，因为不推荐使用中文；指定编码必须在CSS文件第一行</div>
       <div>3. 变量：可以声明CSS全局变量，便于修改和调整：一处修改，多处更新；还可以在元素上以style的形式声明内联变量；更多变量内容，请参考 <a href="./variable.html">CSS -
-          variable</a>一节内容
+          variable</a>
       </div>
       <div>4. 导入：可以在CSS中使用 @import 引入其它CSS文件</div>
     </dd>
@@ -141,16 +142,22 @@
         </tr>
         <tr>
           <td>padding</td>
-          <td>元素填充，也称内边距、内填充；padding-top | padding-right | padding-bottom | padding-left</td>
-        </tr>
-        <tr>
-          <td>border</td>
-          <td>元素边框；border-top | border-right | border-bottom | border-left</td>
+          <td>元素填充，也称内边距、内填充
+            <br>可以单独设置元素4个方向的内边距：padding-top | padding-right | padding-bottom | padding-left
+          </td>
         </tr>
         <tr>
           <td>margin</td>
-          <td>元素到其它元素之间的距离，也称外边距、外填充；margin-top | margin-right | margin-bottom | margin-left；<span
-              class="warn">负边距</span>也有很惊艳的表现</td>
+          <td>元素到其它元素之间的距离，也称外边距、外填充、空白
+            <br>可以单独设置元素4个方向的外边距：margin-top | margin-right | margin-bottom | margin-left；<span
+              class="warn">负边距</span>也有很惊艳的表现
+          </td>
+        </tr>
+        <tr>
+          <td>border</td>
+          <td>元素边框
+            <br>可以单独设置元素4个方向的边框：border-top | border-right | border-bottom | border-left
+          </td>
         </tr>
       </table>
     </dd>
@@ -197,7 +204,7 @@
     <dt>继承性</dt>
     <dd>
       <div>. 子元素会继承父元素的某些样式</div>
-      <div>. 不是所有的样式都可以被继承，特别是表单类元素和超链接&lt;a&gt;，很多样式不会继承父元素</div>
+      <div>. 不是所有的样式都可以被继承，特别是表单类元素和超链接 &lt;a&gt;，很多样式不会继承父元素</div>
     </dd>
     <dt>叠加性</dt>
     <dd>
@@ -207,9 +214,9 @@
     </dd>
     <dt>优先级</dt>
     <dd>
-      <div>. 一般来说，多个样式同时作用于一个元素时，由优先级决定；优先级高的样式会覆盖优先级低的；同时还要结合不同<a href="./selector0.html">选择器 -
-          selector</a>共同判定</div>
-      <div>. 如果样式没有生效，请F12检查是否优先级不够</div>
+      <div>. 一般来说，多个样式同时作用于一个元素时，由优先级决定；优先级高的样式会覆盖优先级低的；同时还要结合不同 <a href="./selector0.html">选择器 -
+          selector</a> 共同决定</div>
+      <div>. 样式异常或无效，请使用浏览器的开发者工具视图检查：按F12打开并检查</div>
       <div class="warn" style="text-align: center;">行内样式 &gt; 内部样式 &gt; 外部样式 &gt; 浏览器默认样式</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 样式顺序和书写顺序对结果的影响</dd>
@@ -256,50 +263,69 @@
       <div>更多信息，请访问 <a href="./framework/swiper.html">轮播图 - Swiper</a></div>
     </dd>
   </dl>
-  <div class="chap">常见属性</div>
+  <div class="chap">选择器 Selector</div>
   <dl class="nav-cont">
-    <dt>自身属性</dt>
-    <dd>元素类型：display: inline | inline-block | block</dd>
-    <dd>元素尺寸计算模式：box-sizing: content-box | border-box</dd>
-    <dd>宽度/高度：width | height</dd>
-    <dd>填充：padding(top | right | bottom | left)</dd>
-    <dd>边距：margin(top | right | bottom | left)</dd>
-    <dd>边框：border(top | right | bottom | left)</dd>
-    <dd>背景：background</dd>
-    <dd>阴影：box-shadow</dd>
-    <dt>布局属性</dt>
-    <dd>弹性布局：display: flex</dd>
-    <dd>网格布局：display: grid</dd>
-    <dt>定位属性</dt>
-    <dd>相对定位：position: relative</dd>
-    <dd>绝对定位：position: absolute</dd>
-    <dd>固定定位：position: fixed</dd>
-    <dd>粘性定位：position: sticky</dd>
-    <dt>字体属性</dt>
-    <dd>字体：font、font-size | font-family | font-weight</dd>
-    <dd>颜色：color</dd>
-    <dd>格式：text-align | text-indent | text-shadow | text-decoration</dd>
-    <dd>其它：vertical-align | line-height | white-space | break-word</dd>
-    <dt>特效类</dt>
-    <dd>盒阴影：box-shadow</dd>
-    <dd>文字阴影：text-shadow</dd>
-    <dd>滤镜：filter</dd>
-    <dd>过渡动画：transition</dd>
-    <dd>帧动画：@keyframes</dd>
-    <dd>变换：transform</dd>
+    <dd>选择html元素，以便指定样式</dd>
+    <dd>可以选择1个元素；也可以选择多个元素</dd>
+    <dt>基本选择器</dt>
+    <dd>标签|类型选择器：div span h1 header table footer ...</dd>
+    <dd>类选择器 .</dd>
+    <dd>ID选择器 #</dd>
+    <dd>通配符选择器 *</dd>
+    <dt>属性选择器</dt>
     <dt>伪元素</dt>
     <dd>::before</dd>
     <dd>::after</dd>
     <dd>::first-letter</dd>
     <dd>::first-line</dd>
+    <dd>::marker</dd>
     <dd>::selection</dd>
     <dd>::placeholder</dd>
     <dt>伪类</dt>
     <dd>:hover</dd>
     <dd>:target</dd>
+    <dd>:first-child</dd>
+    <dd>:last-child</dd>
+    <dd>:nth-child(n)</dd>
+    <dd>:has()</dd>
+    <dd>:not()</dd>
+    <dd>:root</dd>
     <dd>:checked</dd>
+    <dd>:selected</dd>
     <dd>:valid | :invalid</dd>
     <dd>:focus | :focus-within</dd>
+    <dt>组合选择器</dt>
+    <dd>列表选择器</dd>
+    <dd>后代选择器、直接后代选择器</dd>
+    <dd>兄弟选择器 ~、相邻兄弟选择器 +</dd>
+    <dd>叠加选择器</dd>
+  </dl>
+  <div class="chap">属性 Attributes</div>
+  <dl class="nav-cont">
+    <dd>设置元素的CSS样式属性</dd>
+    <dt>自身属性</dt>
+    <dd>元素类型：display: inline | inline-block | block | flex | grid</dd>
+    <dd>元素尺寸计算模式：box-sizing: content-box | border-box</dd>
+    <dd>宽度/高度：width max-width height max-height</dd>
+    <dd>填充：padding(top | right | bottom | left)</dd>
+    <dd>边距：margin(top | right | bottom | left)</dd>
+    <dd>边框：border(top | right | bottom | left)</dd>
+    <dd>背景：background</dd>
+    <dd>阴影：box-shadow</dd>
+    <dt>定位属性</dt>
+    <dd>相对定位：position: relative | absolute | fixed | sticky</dd>
+    <dt>字体属性</dt>
+    <dd>字体：@font-face font font-size font-family font-weight</dd>
+    <dd>颜色：color</dd>
+    <dd>格式：text-align text-indent text-shadow text-decoration letter-spacing word-spacing</dd>
+    <dd>其它：vertical-align line-height white-space break-word writing-mode</dd>
+    <dt>特效类</dt>
+    <dd>盒阴影：box-shadow</dd>
+    <dd>文字阴影：text-shadow</dd>
+    <dd>滤镜：filter</dd>
+    <dd>过渡动画：transition</dd>
+    <dd>帧动画：animation @keyframes</dd>
+    <dd>变换：transform</dd>
     <dt>函数</dt>
     <dd>rgb()、rgba()、hsl()</dd>
     <dd>url()</dd>
@@ -308,14 +334,16 @@
     <dd>calc()</dd>
     <dd>linear-gradient()、radial-gradient()、Conic-gradient()</dd>
     <dd>clamp()</dd>
+    <dd>min()</dd>
+    <dd>max()</dd>
     <dd>minmax()</dd>
     <dd>repeat()</dd>
     <dt>浏览器厂商前缀</dt>
     <dd>. 代码健壮性</dd>
     <dd>. 更多信息，请查看 <a href="https://caniuse.com/">Can I Use</a></dd>
-    <dd>--webkit：谷歌Chrome、欧鹏Opera、苹果Safari</dd>
-    <dd>--moz：Firefox</dd>
-    <dd>--ms：微软Edge</dd>
+    <dd>--webkit：谷歌 Chrome、欧鹏 Opera、苹果 Safari</dd>
+    <dd>--moz：火狐 Firefox</dd>
+    <dd>--ms：微软 Edge</dd>
     <dd class="tips">CSS顺序：布局定位属性->自身属性->文本属性->其它属性</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
