@@ -115,6 +115,24 @@
     <dd>border-spacing：单元格间距；边框重叠时，无效</dd>
     <dd>table-layout: 单元格内容显示方式，默认是 auto，自动适应内容；fixed 固定宽度;</dd>
     <dd>empty-cells：空单元格显示与否/不在空单元格周围绘制边框。默认显示/绘制；仅仅使用于边框不重叠的情况</dd>
+    <dt>初始化样式</dt>
+    <div>默认情况下，&lt;th&gt;、&lt;td&gt;有1个像素的padding</div>
+    <dd>
+      <pre>
+table {
+  border-collapse: collapse;
+  width: 100%;
+  line-height: 30px;
+}
+
+table,
+td,
+th {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}      </pre>
+    </dd>
     <dt>colgroup</dt>
     <dd>
       <div>默认情况下各列宽度会自动分配，撑开至占满表格</div>
@@ -164,41 +182,17 @@ table tr:nth-child(even) {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./sticky.html">固定表头表格 - 粘性定位</a>、<a
         href="./demo/up2u.html">个人网站</a></dd>
-    <dd>. 内容多的情况下，表头始终显示 - 冻结首行；现在多使用 <a href="./demo/pager.html">分页器 - pager</a>设计</dd>
+    <dd>. 内容多的情况下，表头始终显示 - 冻结首行；现在多使用 <a href="./demo/pager.html">分页器 - pager</a> 设计</dd>
     <dd>. &lt;tabel&gt;本身并不能实现滚动条，需在&lt;tabel&gt;外面增加一个容器；当&lt;tabel&gt;高度超过容器高度时，让容器出现滚动条</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 表头连续、表体分离的背景表格</dd>
     <dd>
       <img src="./imgs/tbl2.png" alt="">
-      <!-- <pre>
-table {
-  width: 100%;
-  line-height: 2;
-  border-collapse: collapse;
-}
-
-
-table th {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background-color: #1abc9c;
-  color: #fff;
-  text-align: left;
-  padding: 4px 10px;
-  border-bottom: 4px solid #fff;
-}
-
-table td {
-  background-color: #97f392;
-  padding: 4px 10px;
-  outline: 2px solid #fff;
-}      </pre> -->
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/pen/GRPBOyv">歌单</a>
     </dd>
     <dd>. 标题行样式始终保持不变</dd>
     <dd>. 当鼠标:hover时，当前行颜色变化</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="../course/rank202401.html">平时成绩</a></dd>
+    <!-- <dd>[<span class="iconfont icon-keyboard"></span>] <a href="../course/rank242501.html">平时成绩</a></dd> -->
     <dt>表格其它处理</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 单元格间距处理</dd>
     <dd>
@@ -294,8 +288,6 @@ table td {
           <td></td>
         </tr>
       </table>
-    </dd>
-    <dd>
       <pre>
 &lt;table&gt;
     &lt;tr&gt;
@@ -352,8 +344,6 @@ table th, table td {
           <td>4</td>
         </tr>
       </table>
-    </dd>
-    <dd>
       <pre>
 .radius-tbl {
   border-collapse: separate;
@@ -369,8 +359,8 @@ table th, table td {
 }</pre>
     </dd>
     <dd>方案2：边框重叠的情况下，单独给第一行左右2个和最后一行左右2个单独设置对应方向的border-radius</dd>
-    <dd>. 为体现效果，以红色显示</dd>
     <dd>
+      <div>. 为体现效果，以红色显示</div>
       <table class="radius-tbl-self">
         <tr>
           <td>1</td>
@@ -397,8 +387,6 @@ table th, table td {
           <td>4</td>
         </tr>
       </table>
-    </dd>
-    <dd>
       <pre>
 .radius-tbl-self tbody tr:first-child td:first-child {
   border-top-left-radius: 8px;
@@ -413,13 +401,13 @@ table th, table td {
   </dl>
   <dl class="nav-cont">
     <dt>自适应表格</dt>
-    <dd>[前置知识点] <a href="./responsive.html">媒体查询</a></dd>
-    <dd>. 针对桌面端和移动端表格的展示，给出其中一种自适应表格的思路</dd>
-    <dd>. 按 F12 选择检查，查看表格效果[取消公有样式中，首个单元格width:20%的限定]</dd>
-    <dd>. 更多信息，请查看 <a href="https://css-tricks.com/responsive-data-tables/">Responsive Data
-        Tables</a>
-    </dd>
     <dd>
+      <div>[前置知识点] <a href="./responsive.html">媒体查询</a></div>
+      <div>. 针对桌面端和移动端表格的展示，给出其中一种自适应表格的思路</div>
+      <div>. 按 F12 选择检查，查看表格效果[取消公有样式中，首个单元格width:20%的限定]</div>
+      <div>. 更多信息，请查看 <a href="https://css-tricks.com/responsive-data-tables/">Responsive Data
+          Tables</a>
+      </div>
       <table class="pc">
         <thead>
           <tr>
@@ -445,7 +433,7 @@ table th, table td {
         </tbody>
       </table>
     </dd>
-    <dd class="number">
+    <dd class="sn">
       <div>隐藏表头&lt;thead&gt;。方法很多；最好不要none掉，而应使用定位将其移走</div>
       <div>将&lt;tr&gt;显示属性由table-row（类inline-block）调整为block，以便独占一行</div>
       <div>将&lt;td&gt;显示属性由table-cell（类inline-block）调整为block，从而将数据由一行展示改为多行展示</div>

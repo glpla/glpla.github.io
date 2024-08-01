@@ -20,14 +20,15 @@
     <span>&commat;Grid</span>
     <span class="ham"></span>
     <nav class="nav">
-      <a href="" class="nav-item">概述</a>
-      <a href="" class="nav-item">容器</a>
-      <a href="" class="nav-item">子项</a>
-      <a href="" class="nav-item">布局</a>
-      <a href="" class="nav-item">对齐</a>
+      <a href="" class="nav-item">概述 Overview</a>
+      <a href="" class="nav-item">容器 Container</a>
+      <a href="" class="nav-item">子项 Item</a>
+      <a href="" class="nav-item">布局 Layout</a>
+      <a href="" class="nav-item">对齐 Align</a>
     </nav>
   </header>
   <dl class="nav-cont">
+    <dt>概述 Overview</dt>
     <dd>.更灵活：支持二维布局：对列和行进行布局</dd>
     <dd>.类似早期的table布局；table本来是做数据展示的，所以在布局上有明显的缺陷：非语义化、布局代码冗余，以及不好维护、渲染性能等问题，目前table布局已被抛弃</dd>
     <dd>.更多细节，请参考 <a href="https://www.w3cschool.cn/doc_css/css-css_grid.html?lang=en" target="_blank">w3cschool -
@@ -86,7 +87,7 @@
 }</pre>
     </dd>
   </dl>
-  <div class="chap">Grid容器属性</div>
+  <div class="chap">容器 container</div>
   <dl class="nav-cont">
     <dt>grid-template-columns</dt>
     <dd>
@@ -172,7 +173,7 @@
     <dd>.column-gap:列间距</dd>
     <dd>.容器大小包含了gap的尺寸</dd>
   </dl>
-  <div class="chap">Grid子项属性</div>
+  <div class="chap">子项 Item</div>
   <dl class="nav-cont">
     <dd>.子项如果不显示的指定尺寸，就自动拉伸占满整个单元格</dd>
     <dt>grid-column: span number</dt>
@@ -404,13 +405,22 @@
   <div class="chap">对齐 Align</div>
   <dl class="nav-cont">
     <dt>说明</dt>
-    <dd>.对齐区分是子项 items 对齐还是内容 content 对齐</dd>
-    <dd>.默认情况下，每个子项自动拉伸 stretch <span class="warn">占满</span> 整个格子</dd>
-    <dd>.使用 justify-items 和 align-items 时，各子项根据实际尺寸，在水平方向和垂直方向上相应的排列</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 情况1：默认的对齐</dd>
-    <dd>.不指定容器高度：由子项撑开</dd>
-    <dd>.只需指定水平方向上的对齐；没有必要指定垂直方向的对齐</dd>
     <dd>
+      <div>.默认情况下</div>
+      <div>1. 容器会全部划分完，没有剩余空间</div>
+      <div>2. 仅仅指定列的划分，行的划分由子项换行决定</div>
+      <div>3. 不用显式设置子项大小，会自动水平和垂直拉伸 stretch <span class="warn">占满</span> 整个格子</div>
+      <div>如果存在以下情况，就需要解决：容器划分的格子和子项两者之间的对齐</div>
+      <div>1. 容器没有划分完</div>
+      <div>2. 子项的大小和划分的格子大小不匹配</div>
+      <div>.对齐区分是子项 items 对齐还是内容 content 对齐</div>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 情况1：默认的对齐</dd>
+    <dd>
+      <div>.不指定容器高度：由子项撑开</div>
+      <div>.宽度上，全部划分完，且等分各列</div>
+      <div>.只需指定水平方向上的对齐；没有必要指定垂直方向的对齐</div>
+      <div>.除stretch外，其它对齐方式相当于为每个item指定width为max-content，由其内容决定大小</div>
       <pre>
 .case0 {
     display: grid;
@@ -446,6 +456,8 @@
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 情况2：指定容器尺寸的对齐</dd>
     <dd>.指定容器高度；可以指定垂直方向上的对齐</dd>
+    <div>.容器高度由子项换行撑满</div>
+    <div>.没有显式指定子项高度</div>
     <dd>
       <figure>
         <pre>
@@ -618,8 +630,8 @@
     </dd>
     <dd class="tips">
       <div>place-content：网格区域在容器里的位置</div>
-      <div>place-items：统一指定单元格内容在单元格里的位置</div>
-      <div>place-self：单独设置某个单元格内容在单元格里的位置</div>
+      <div>place-items：统一指定子项在单元格里的位置</div>
+      <div>place-self：单独设置某个子项在单元格里的位置</div>
     </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>

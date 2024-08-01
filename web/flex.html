@@ -45,60 +45,78 @@
     <dd>.弹性盒子/容器的属性</dd>
     <dt>flex-direction</dt>
     <dd>
-      <div>.<span class="warn">主轴main axis</span>方向：默认是行 row</div>
+      <div>.<span class="warn">主轴 main axis</span>方向：默认是行 row</div>
       <pre>flex-direction: row | row-reverse | column | column-reverse;</pre>
     </dd>
-    <dt>justify-content</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content">justify-content</a></dt>
     <dd>
-      <div>.<span class="warn">主轴main axis</span>方向元素的分布，默认是flex-start</div>
+      <div>.<span class="warn">主轴 main axis</span>方向子项的分布，默认是flex-start</div>
       <div>.有时候通过指定子项的margin为auto，也可以实现两端分布</div>
       <div>.通常是<span class="warn">有剩余空间</span>才会涉及到分布</div>
       <pre>justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;</pre>
     </dd>
-    <dt>align-items</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items">align-items</a></dt>
     <dd>
-      <div>.<span class="warn">交叉轴cross
-          axis</span>方向元素的对齐，默认是stretch：所有元素的高度拉伸至和容器元素/最高的元素一致[为子项item添加背景可以直观的看出来]；其它选项则是根据自身的高度开始或结束对齐</div>
+      <div>.<span class="warn">交叉轴 cross
+          axis</span>方向子项的对齐，默认是stretch：所有元素的高度拉伸至和容器元素/最高的元素一致[为子项item添加背景可以直观的看出来]；其它选项则是根据自身的高度开始或结束对齐</div>
       <div>.如果指定了或者继承了行高和高度一致，则已经是垂直方向居中</div>
       <div>.通常是<span class="warn">有剩余空间</span>才会涉及到分布</div>
       <pre>align-items: stretch | center | flex-start | flex-end;</pre>
     </dd>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-content">align-content</a></dt>
+    <dd>
+      <div>.多行情况下，子项交叉轴 cross axis | 垂直方向的对齐</div>
+      <div>.容器实际区域比子项大</div>
+      <div>.容器通常由子项撑开，特别是允许换行，多行的情况下 - This property has no effect on single line flex containers</div>
+    </dd>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items">justify-items</a></dt>
+    <dd>弹性布局中，该属性被忽略 - In flexbox layouts, this property is ignored (more about alignment in flexbox)</dd>
+    <dd>网格布局grid中，该属性可以正常使用，所以更多的被当作是仅适用grid布局的属性</dd>
+    <dd class="tips">
+      <div>justify-content 和 justify-items / justify-self 的主要区别在于前者控制整个容器的对齐方式，而后者控制单个项目或所有项目的对齐方式</div>
+      <div>在Flexbox中，没有justify-items或justify-self属性，因为Flexbox通过justify-content和align-items来控制项目的对齐和分布</div>
+      <div>justify-self和justify-items只在Grid布局中有效</div>
+    </dd>
     <dt>flex-wrap</dt>
     <dd>
-      <div>.容器容纳不下元素时，是否换行</div>
+      <div>.容器容纳不下子项时，是否换行</div>
       <div>.默认不换行nowrap</div>
       <div>.响应式布局中，使用自动换行wrap往往比网格grid布局更灵活；见后续布局一节</div>
       <pre>flex-wrap: nowrap | wrap | wrap-reverse;</pre>
     </dd>
-    <dt>gap</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">gap</a></dt>
     <dd>
-      <div>.各子项的间隔</div>
+      <div>.各子项的间隔；也叫gutter</div>
       <div>.网格布局中也可以使用；非常爽</div>
       <div>.微信小程序的弹性盒子好像不支持</div>
+      <div>This property applies to multi-column, flex, and grid containers</div>
     </dd>
   </dl>
   <div class="chap">子项 Item</div>
   <dl class="nav-cont">
     <dd>.弹性盒子的直接子元素</dd>
-    <dt>flex-basis</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis">flex-basis</a></dt>
     <dd>
-      <div>.flex item在主轴上分配/ <span class="warn">预留</span> 的空间，相当于指定了width。默认为auto，根据元素内容分配</div>
+      <div>.flex item在主轴上分配|预留的 <span class="warn">初始 initial</span> 大小，相当于指定了width。默认为auto，根据元素内容分配</div>
       <div>.指定了该属性后，原有的宽度或高度就无效了</div>
-      <pre>flex-basis: number | auto;</pre>
+      <pre>flex-basis: auto | number;</pre>
     </dd>
     <dt>flex-grow</dt>
     <dd>
-      <div>.容器有剩余空间时，是否放大子项。默认为0，不放大</div>
+      <div>.容器有剩余空间时，是否放大子项</div>
+      <div>.默认为0，不放大；有多大，占多大</div>
       <pre>flex-grow: number;</pre>
     </dd>
     <dt>flex-shrink</dt>
     <dd>
-      <div>.容器空间不足时，是否压缩子项。默认为1，压缩[不压缩我放不下啊；但是：子项如果是&lt;img&gt;不压缩。。。]</div>
+      <div>.容器空间不足时，是否压缩子项</div>
+      <div>.默认为1，压缩；不压缩我放不下啊；但是：子项如果是&lt;img&gt;不压缩。。。</div>
       <pre>flex-shrink: number;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 多余空间分配</dd>
-    <dd>容器为500；各项目原始大小各为50；剩余500-50-50=400；去除100的间隔，可分配的空间为300；第一项放大因子为1，分到100；第2项放大因子为2，分到200；最后大小分别为150、250</dd>
     <dd>
+      <div>容器为500；各子项原始大小各为50；剩余500-50-50=400；去除100的间隔，可分配的空间为300</div>
+      <div>第一项放大因子为1，分到100；第2项放大因子为2，分到200；最后大小分别为150、250</div>
       <pre>
 .box {
   display: flex;
@@ -127,9 +145,11 @@
       <div>容器300，子项分别为400、200</div>
       <pre>400+200=600=300+300->400-200，200-100</pre>
     </dd>
-    <dt>复合属性</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex">flex</a></dt>
     <dd>
-      <div>flex: flex-grow flex-shrink flex-basis</div>
+      <div>复合属性</div>
+      <pre>flex: flex-grow flex-shrink flex-basis;</pre>
+      <div>单值、双值和三值的含义个不相同</div>
       <table>
         <tr>
           <th>类别</th>
@@ -141,31 +161,36 @@
         </tr>
         <tr>
           <td>flex: auto;</td>
-          <td>1 1 auto；自动分配；如果有，则放大；否则压缩；根据内容大小来分，不是平分</td>
+          <td>1 1 auto；自动分配；如果有，则放大；否则压缩；根据内容大小来分</td>
         </tr>
         <tr>
-          <td>flex: 1;</td>
-          <td>1 1 0%；用来平分空间</td>
+          <td>flex: num;</td>
+          <td>无单位数值，0 num 0%</td>
         </tr>
         <tr>
-          <td>flex: 0;</td>
-          <td>0 1 0；不知道这个有什么用</td>
+          <td>flex: num;</td>
+          <td>带单位数值，指的是flex-basis；其它为默认值，相当于1 0 num；不建议使用 </td>
         </tr>
         <tr>
           <td>flex: 1 1 num;</td>
-          <td>预留一定空间，多了则放大，不够则压缩<br>可以简写为flex: num;</td>
+          <td>可以放大或压缩，初始大小为num<br>可以简写为flex: num;</td>
+        </tr>
+        <tr>
+          <td>flex: 1 0 num</td>
+          <td>有剩余则放大，但是不能压缩，至少mum</td>
         </tr>
       </table>
     </dd>
     <dt>align-self</dt>
     <dd>.单独设置子项在辅轴上的对齐方式</dd>
     <dd>.容器需要有多余的空间</dd>
-    <dt>order</dt>
+    <dt><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/order">order</a></dt>
     <dd>
-      <div>子项的渲染顺序；小的在前，大的在后</div>
-      <div>默认都是0；可以设置以便调整顺序，如设为负数，可以提前渲染；大于1，可以滞后渲染</div>
-      <div>也可以手动调整结构实现</div>
-      <div>更多案例请访问 <a href="../minip/index.html">微信小程序 - mini App</a>、<a href="./agenda.html">日程安排 - Agenda</a></div>
+      <div>.子项的布局|排列顺序；小的在前，大的在后 - sorted by ascending order</div>
+      <div>.适用于flex和grid</div>
+      <div>.默认都是0；可以设置以便调整顺序，如设为负数，可以提前渲染；大于1，可以滞后渲染</div>
+      <div>.也可以手动调整结构实现</div>
+      <div>.更多案例请访问 <a href="../minip/index.html">微信小程序 - mini App</a>、<a href="./agenda.html">日程安排 - Agenda</a></div>
     </dd>
   </dl>
   <div class="chap">布局 Layout</div>
@@ -196,19 +221,35 @@ body {
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/abXMJjN">三列/圣杯布局/双飞燕 -
         CodePen</a>；左右固定；中间自适应</dd>
     <dd class="sn">
+      <p>不考虑优先渲染</p>
+      <pre>
+&lt;div class="wrap"&gt;
+  &lt;div class="left"&gt;&lt;/div&gt;
+  &lt;div class="main"&gt;&lt;/div&gt;
+  &lt;div class="right"&gt;&lt;/div&gt;
+&lt;/div&gt;      </pre>
       <div>flex布局 - flex需要单独设置每个子项属性</div>
       <pre>
 .wrap {
     display: flex;
 }
 
-.wrap .left, .wrap .right {
+.wrap .left,
+.wrap .right {
     flex-basis: 80px;
 }
 
 .wrap .main {
     flex: 1;
 }</pre>
+      <p>考虑优先渲染</p>
+      <pre>
+&lt;div class="wrap"&gt;
+  &lt;div class="main"&gt;&lt;/div&gt;
+  &lt;div class="left"&gt;&lt;/div&gt;
+  &lt;div class="right"&gt;&lt;/div&gt;
+&lt;/div&gt;      </pre>
+      <pre>// ... ...</pre>
       <div>grid布局 - 使用 <a href="./grid.html">grid</a> 布局更加简单</div>
       <pre>
 body {
