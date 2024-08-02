@@ -24,11 +24,11 @@
         href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements">MDN
         - Pseudo class</a></dd>
     <dt>超链接伪类</dt>
-    <dd>. 常见于超链接&lt;a&gt;桌面端应用</dd>
-    <dd>. &lt;a&gt;使用时，需按下述顺序定义：a:link→a:visted→a:hover→a:active</dd>
-    <dd>. 除了超链接&lt;a&gt;，部分伪类还可以作用于其它元素，如表单元素</dd>
-    <dd>. 无法直接高亮highlight当前元素；需要借助其它方法</dd>
     <dd>
+      <div>. 常见于超链接&lt;a&gt;桌面端应用</div>
+      <div>. &lt;a&gt;使用时，需按下述顺序定义：a:link→a:visted→a:hover→a:active</div>
+      <div>. 除了超链接&lt;a&gt;，部分伪类还可以作用于其它元素，如表单元素</div>
+      <div>. 无法直接高亮highlight当前元素；需要借助其它方法</div>
       <table>
         <tr>
           <th>类别</th>
@@ -74,21 +74,25 @@
       <pre>
 .wrap:focus-within {
   border-color: #ff0;
-}      </pre>
+}</pre>
     </dd>
     <dt id="checked">表单伪类</dt>
-    <dd>. 多用于表单元素</dd>
-    <dd>. 功能非常强大，很多纯CSS效果甚至可以媲美JavaScript</dd>
-    <dd>. 凡是鼠标点击的联动响应，都可以使用:checked，如标签页、轮播、导航；见后续案例</dd>
     <dd>
+      <div>. 多用于表单元素</div>
+      <div>. 功能非常强大，很多纯CSS效果甚至可以媲美JavaScript</div>
+      <div>. 凡是鼠标点击的联动响应，都可以使用:checked，如标签页、轮播、导航；见后续案例</div>
       <table>
         <tr>
           <th>类别</th>
           <th>说明</th>
         </tr>
         <tr>
-          <td>:checked</td>
-          <td>元素选中</td>
+          <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:checked">:checked</a></td>
+          <td>元素选中
+            <br>radio (&lt;input type="radio"&gt;)
+            <br>checkbox (&lt;input type="checkbox"&gt;)
+            <br>option (&lt;option&gt; in a &lt;select&gt;)
+          </td>
         </tr>
         <tr>
           <td>:valid</td>
@@ -107,8 +111,6 @@
           <td>超出指定范围</td>
         </tr>
       </table>
-    </dd>
-    <dd>
       <pre>
 input[type='text']:focus+label {
   color: #f40;
@@ -190,11 +192,11 @@ tr:nth-child(even) {
   <div class="chap">其它类选择器</div>
   <dl>
     <dt>:root 选择器</dt>
-    <dd>. 定义 <span class="warn">全局CSS变量</span>，供当前 CSS 文件所有元素使用</dd>
-    <dd>. 借助函数 var() 使用/获取定义的变量</dd>
-    <dd>. 方便统一调整</dd>
-    <dd>. 还可以在元素上使用style定义 <span class="warn">内联CSS变量</span>，供当前元素使用，详情请查看<a href="./variable.html">CSS变量</a>一节</dd>
     <dd>
+      <div>. 定义 <span class="warn">全局CSS变量</span>，供当前 CSS 文件所有元素使用</div>
+      <div>. 借助函数 var() 使用/获取定义的变量</div>
+      <div>. 方便统一调整</div>
+      <div>. 还可以在元素上使用style定义 <span class="warn">内联CSS变量</span>，供当前元素使用，详情请查看<a href="./variable.html">CSS变量</a>一节</div>
       <pre>
 //定义
 :root {
@@ -215,10 +217,10 @@ tr:nth-child(even) {
 }</pre>
     </dd>
     <dt>:empty 选择器</dt>
-    <dd>元素为空的样式</dd>
-    <dd>列表渲染时，如果数据为空，则给出特定样式，如不显示</dd>
-    <dd>也可以通过js实现</dd>
     <dd>
+      <div>元素为空的样式</div>
+      <div>列表渲染时，如果数据为空，则给出特定样式，如不显示</div>
+      <div>也可以通过js实现</div>
       <pre>
 li {
   //
@@ -361,6 +363,23 @@ body:has(#p0:checked) {
   display: flex;
   justify-content: center;
   align-items: center;
+}</pre>
+    </dd>
+    <dd>过滤器 - filter</dd>
+    <dd>
+      <div>使用&lt;select&gt;配合相应的选择器完成对商品的过滤/筛选</div>
+      <div>使用不同的类标识不同的商品</div>
+      <pre>
+select:has(option[value='blue']:checked)+.goods div:not(.blue) {
+  display: none;
+}
+
+select:has(option[value='red']:checked)+.goods div:not(.yellow) {
+  display: none;
+}
+
+select:has(option[value='yellow']:checked)+.goods div:not(.yellow) {
+  display: none;
 }</pre>
     </dd>
   </dl>
