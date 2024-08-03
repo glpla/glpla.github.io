@@ -62,7 +62,7 @@ colorObj.addEventListener('click', (e) => {
     <dt>类 class</dt>
     <dd>
       <p>指定不同的类而应用不同的样式</p>
-      <div>方案1：切换类 - 两套变量</div>
+      <div>方案1：切换类 - 两套变量；推荐</div>
       <pre>
 :root {
   --txt-color: #303133;
@@ -70,7 +70,7 @@ colorObj.addEventListener('click', (e) => {
   --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
-html.dark {
+body.dark {
   --txt-color: #f1f1f1;
   --bg-color: #131313;
   --shadow-color: rgba(255, 255, 255, 0.1);
@@ -78,9 +78,9 @@ html.dark {
       <p>单击时，切换主题类</p>
       <pre>
 btnTheme.addEventListener('click', () => {
-  html.classList.toggle('dark')
+  body.classList.toggle('dark')
 })      </pre>
-      <div>方案2：为根元素 html 设置白天和黑夜两套全局变量，使用属性选择器加以区分</div>
+      <div>方案2：为根元素 body 设置白天和黑夜两套全局变量，使用属性选择器加以区分</div>
       <pre>
 :root {
   --txt-color: #303133;
