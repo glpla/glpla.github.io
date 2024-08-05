@@ -9,12 +9,19 @@
 </head>
 
 <body>
-  <header>
-    <a href="" class="logo">Cnplaman</a>
+  <div class="top-banner w">
+    <img class="tree2" src="../imgs/tree2.png" alt="">
+    <h1>Rock You</h1>
+    <img class="tree0" src="../imgs/tree0.png" alt="">
+    <img class="tree3" src="../imgs/tree3.png" alt="">
+    <img class="tree1" src="../imgs/tree1.png" alt="">
+  </div>
+  <header class="w">
+    <a href="" class=" logo">Cnplaman</a>
     <ul class="nav">
       <li><a class="nav-item">home</a></li>
       <li><a class="nav-item">heroes</a></li>
-      <li><a class="nav-item">infor</a></li>
+      <li><a class="nav-item">docs</a></li>
       <li><a class="nav-item">focus</a></li>
       <li><a class="nav-item">contact</a></li>
       <li><a class="nav-item">message</a></li>
@@ -150,7 +157,7 @@
       <P>postman</P>
     </div>
     <div class="desc nav-cont" data-desc="focus">焦点</div>
-    <section class="breath">
+    <section class="grid breath">
       <div class="breath-item">
         <img class="ob-img" data-src="../imgs/blog1.jpg" alt="">
         <div class="breath-desc">
@@ -185,7 +192,7 @@
       </div>
     </section>
     <div class="desc nav-cont" data-desc="contact">联系</div>
-    <section class="info">
+    <section class="grid info">
       <div class="info-item">
         <i class="iconfont icon-shouye"></i>
         <p>room 2114</p>
@@ -236,9 +243,23 @@
   <script src="../lib/lazyload.js"></script>
   <script src="../lib/ham.js"></script>
   <script>
+    let h1 = document.querySelector('h1')
+    let tree0 = document.querySelector('.tree0')
+    let tree1 = document.querySelector('.tree1')
+    let tree2 = document.querySelector('.tree2')
+    let tree3 = document.querySelector('.tree3')
+
     window.addEventListener("scroll", () => {
       let hd = document.querySelector("header");
-      hd.classList.toggle("hover", window.scrollY > 200);
+      hd.classList.toggle("hover", window.scrollY > 300);
+
+      // Parallax
+      let val = window.scrollY;
+      tree0.style.left = -val * 0.25 + 'px';
+      tree1.style.left = -val * 0.5 + 'px';
+      tree2.style.right = -val * 0.25 + 'px';
+      tree3.style.marginLeft = -val * 0.5 + 'px';
+      h1.style.marginTop = val + 'px';
     })
   </script>
 </body>

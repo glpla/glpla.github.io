@@ -197,6 +197,7 @@ background-size: 50% 50%;</pre>
     <dd>
       <div>. 角度渐变</div>
       <div>. 适合做圆锥图/饼状图</div>
+      <div>. 默认从0/12点方向开始；可以使用from指定起始位置</div>
       <pre>conic-gradient([from angle] [at position,] color degree, color degree, ...);</pre>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 圆锥图</dd>
@@ -215,13 +216,55 @@ background-size: 50% 50%;</pre>
       <pre>
 .pie {
     background-image: conic-gradient(
-        hsl(188, 100%, 40%) 0deg, 
-        hsl(188, 100%, 40%) 40deg, 
-        hsl(188, 100%, 27%) 40deg, 
-        hsl(188, 100%, 27%) 120deg, 
-        hsl(188, 100%, 20%) 120deg, 
-        hsl(188, 100%, 20%) 360deg);
+        hsl(188, 100%, 40%) 0deg  40deg, 
+        hsl(188, 100%, 27%) 40deg 120deg, 
+        hsl(188, 100%, 20%) 120deg 360deg);
 }</pre>
+      <div>或</div>
+      <pre>
+.pie {
+    background-image: conic-gradient(
+      hsl(188, 100%, 40%)  40deg, 
+      hsl(188, 100%, 27%) 0 120deg, 
+      hsl(188, 100%, 20%) 120deg);
+}</pre>
+      <pre>
+.pie {
+    background-image: conic-gradient(
+      from 30deg,
+      hsl(188, 100%, 40%)  40deg, 
+      hsl(188, 100%, 27%) 0 120deg, 
+      hsl(188, 100%, 20%) 120deg);
+}</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 环图</dd>
+    <dd>
+      <div>叠加一个白色到透明的径向渐变和锥向渐变</div>
+      <div class="basic pie2"></div>
+      <pre>
+.pie2 {
+  border-radius: 50%;
+  background-image:
+    radial-gradient(#fff 40%, transparent 0),
+    conic-gradient(from 30deg,
+      #1393c7 40deg,
+      #5f60cf 0 120deg,
+      #e44545 0 280deg,
+      #fd871c 0);
+}</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 环图</dd>
+    <dd>
+      <div>使用伪元素展示图例legend</div>
+      <div class="ring-box">
+        <div class="ring"></div>
+        <div class="legend">
+          <span>Lorem 60%</span>
+          <span>Adipisci 140%</span>
+          <span>Iure 50%</span>
+          <span>Optio 110%</span>
+        </div>
+      </div>
     </dd>
   </dl>
   <div class="chap" id="bgi">混和模式 Blend mode</div>
