@@ -1,2 +1,5 @@
-for num in range(10):
-    print(num)
+chars = list("hi,there.")
+nums = list(range(10))
+print(nums[-1])
+print(chars[-2])
+print(nums + chars)
