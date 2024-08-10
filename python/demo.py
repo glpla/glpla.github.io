@@ -1,4 +1,4 @@
-stus = ["张三", "李明四", "王五"]
-# stus.sort(key=lambda x: len(x["name"]))
-stus.sort(key=len)
-print(stus)
+s = {0, 1, 2, 3, 4, 5, 6}
+t = {5, 6, 7, 8, 9}
+n = s.difference(t)
+print(n)
