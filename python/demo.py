@@ -1,4 +1,3 @@
-s = {0, 1, 2, 3, 4, 5, 6}
-t = {5, 6, 7, 8, 9}
-n = s.difference(t)
-print(n)
+d = dict([("name", "glpla"), ("age", 18), ("gender", True)])
+for key, value in d.items():
+    print(key, ":", value)

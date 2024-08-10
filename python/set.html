@@ -16,19 +16,6 @@
   </header>
   <dl>
     <dd>
-      <div class="q">
-        <div>
-          <div>hashable</div>
-          <div>subscriptable vs superscriptable</div>
-        </div>
-      </div>
-      <!-- <div>在 Python 中，“可哈希的”（hashable）是指一个对象具有以下特点：
-        哈希值不变：一个可哈希的对象在其生命周期中有一个固定的哈希值，这个值不会随着对象状态的变化而变化。
-        不可变性：可哈希的对象通常是不可变的，这意味着一旦创建后就不能改变其内容。
-        支持哈希方法：可哈希的对象必须定义了 __hash__() 方法，该方法返回对象的哈希值。
-        一致性：对于相同的对象，每次调用 __hash__() 方法都应该返回相同的哈希值。
-        可哈希的对象可以作为字典的键或集合的元素。这是因为字典和集合等数据结构内部依赖于哈希表来高效地查找和管理元素。如果对象是可哈希的，那么这些数据结构就能有效地工作。
-      </div> -->
       <div>集合的元素必须：无序 unordered、可哈希的/唯一 <a href="https://docs.python.org/3/glossary.html#term-hashable">hashable</a>
       </div>
       <div>更多信息，请访问 <a href="https://docs.python.org/3/library/stdtypes.html#set">Python - set</a></div>
@@ -41,15 +28,15 @@
     <dt>创建 Creation</dt>
     <dd class="sn">
       <div>花括号 {} 括起来的，以逗号分隔的列表 - comma-separated list of elements within braces</div>
-      <pre></pre>
+      <pre>s = {0, 2, 4}</pre>
       <div>集合推导式 - set comprehension；同列表 list</div>
       <p>数据位序唯一</p>
       <pre>
 # {0, 2, 4, 6, 8, 10, 12, 14, 16, 18}
-s = set(2 * c for c in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])      </pre>
+s = {2 * c for c in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}</pre>
       <pre>
 # {8, 9, 6, 7}
-s = set(c for c in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] if c > 5)
+s = {c for c in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] if c > 5}
       </pre>
       <div>类型构造器 - type constructor: set()</div>
       <p>数据位序不尽相同</p>
@@ -158,6 +145,19 @@ s.add(5)</pre>
     <dd>
       <div>清空集合</div>
     </dd>
+    <div class="q">
+      <div>
+        <div>hashable</div>
+        <div>subscriptable vs superscriptable</div>
+      </div>
+    </div>
+    <!-- <div>在 Python 中，“可哈希的”（hashable）是指一个对象具有以下特点：
+      哈希值不变：一个可哈希的对象在其生命周期中有一个固定的哈希值，这个值不会随着对象状态的变化而变化。
+      不可变性：可哈希的对象通常是不可变的，这意味着一旦创建后就不能改变其内容。
+      支持哈希方法：可哈希的对象必须定义了 __hash__() 方法，该方法返回对象的哈希值。
+      一致性：对于相同的对象，每次调用 __hash__() 方法都应该返回相同的哈希值。
+      可哈希的对象可以作为字典的键或集合的元素。这是因为字典和集合等数据结构内部依赖于哈希表来高效地查找和管理元素。如果对象是可哈希的，那么这些数据结构就能有效地工作。
+    </div> -->
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
