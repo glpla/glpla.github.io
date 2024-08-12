@@ -137,12 +137,23 @@ header span {
   /* padding-inline: var(--p-m-g); */
   /* color: #fff; */
   /* background-color: var(--main-color); */
+  width: max-content;
   text-transform: capitalize;
   line-height: 2;
   background-color: #fff;
+  background-image: linear-gradient(var(--green-color), var(--main-color));
+  background-size: 100% 0;
+  background-repeat: no-repeat;
   font-family: 'Michroma';
   border-bottom: 2px solid var(--main-color);
   margin-top: var(--p-m-g);
+  transition: background-size 0.4s, color 0.4s;
+  cursor: pointer;
+}
+
+.chap:hover {
+  background-size: 100% 40px;
+  color: #fff;
 }
 
 .item-wrap {
@@ -162,6 +173,7 @@ header span {
   content: attr(data-title);
   order: 2;
   font-family: 'Quicksand';
+  text-transform: capitalize;
 }
 
 .item::before {
@@ -176,7 +188,7 @@ header span {
 .help {
   --color: var(--main-color);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   gap: 10px;
   margin-top: 4rem;
   padding: 10px;
@@ -239,6 +251,18 @@ iframe {
   .chap {
     position: sticky;
     top: 0;
+    width: 100%;
+    text-align: center;
     z-index: 1;
+  }
+
+  .help {
+    text-align: center;
+  }
+
+  .title {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
   }
 }
