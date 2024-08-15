@@ -6,25 +6,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    body {
+      width: 800px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
     .my-element {
       width: 100px;
       aspect-ratio: 1;
-      /* background-color: #f40; */
+      background-color: #f40;
       color: #ffffff;
       font-size: 24px;
       padding: 20px;
       text-align: center;
-      margin: 0 auto;
+      margin: 0 auto 120vh;
+    }
+
+    .container {
+      width: 600px;
+      background-color: #f40;
+      margin: 10px auto;
+      padding: 10px;
+    }
+
+    .tmp {
+      height: 100vh;
     }
   </style>
 </head>
 
 <body>
   <div class="my-element">Hello World!</div>
+  <div class="container">
+    <div class="div">1</div>
+    <div class="div">2</div>
+    <div class="div">3</div>
+    <div class="div">4</div>
+    <div class="div">5</div>
+    <div class="div">6</div>
+    <div class="div">7</div>
+    <div class="div">8</div>
+    <div class="div">9</div>
+    <div class="div">10</div>
+  </div>
+  <div class="tmp">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut quos modi officia suscipit? Voluptatum
+    temporibus aut earum corrupti quod tempore nam facere, sunt minima modi unde nihil, molestias saepe ipsum.</div>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script>
-    // This tween will rotate an element with a class of .my-element
-    gsap.to('.my-element', { x: -300, backgroundColor: '#ff4400', yoyo: true, repeat: 2 })
+    gsap.registerPlugin(ScrollTrigger)
+    // gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: '.box',
+    //     pin: true,
+    //     start: 'top top',
+    //     x: 500
+    //   },
+    // })
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".container",
+        start: "461",
+      },
+    });
+    // const tl = gsap.timeline({
+    //   scrollTrigger: {
+    //     scrub: 1,
+    //     trigger: ".container",
+    //     start: "50% 50%",
+    //     end: "bottom 50%",
+    //   },
+    // });
+    tl.from('.div', {
+      color: '#f40',
+      opacity: 1,
+      stagger: 0.4,
+      onComplete: () => console.log('2 end')
+    })
+    window.addEventListener('scroll', () => {
+      console.log(window.scrollY)
+    })
+
   </script>
 </body>
 
