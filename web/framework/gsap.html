@@ -168,12 +168,12 @@ setTimeout(() => {
 }, 5000);</pre>
     </dd>
   </dl>
-  <div class="chap">触发器 ScrollTrigger</div>
+  <div class="chap">滚动触发 ScrollTrigger</div>
   <dl>
     <dt>概述 Overview</dt>
     <dd class="sn">
       <p>GSAP的插件 <a href="https://gsap.com/docs/v3/Plugins">Plugins</a>之一，增加额外功能 - adds extra capabilities</p>
-      <p>页面滚动时触发动画，效果酷炫吊炸天(jaw-dropping scroll-based animations)</p>
+      <p>页面滚动时，某个元素符合条件时，触发动画；效果酷炫吊炸天(jaw-dropping scroll-based animations)</p>
       <p>默认情况下，页面加载时会自动触发 - only plays when that element is in the viewport</p>
       <p>需要额外引入对应的库</p>
       <p>可以简写；也可以作为配置对象 Config Object 使用</p>
@@ -182,17 +182,33 @@ setTimeout(() => {
     </dd>
     <dt>概念 Concept</dt>
     <dd class="sn">
-      <div>滚动器 scroller：默认是视口 - viewport by default</div>
-      <div>触发器 trigger：</div>
+      <div>触发容器 scroller：默认是视口 - viewport by default</div>
+      <div>触发器 trigger：默认为动画目标元素自身</div>
     </dd>
     <dt>配置对象 Config Object</dt>
     <dd class="sn">
-      <div>start</div>
-      <p>starting position of the ScrollTrigger</p>
+      <p>定义触发动画的各种条件和行为</p>
+      <div>trigger：触发器，触发ScrollTrigger行为的元素，默认为<span class="warn">动画目标元素</span>自身；使用选择器指定；默认是开始触发器</div>
+      <div>endTrigger：结束触发器；如果不指定，则使用trigger</div>
+      <div>start：触发开始位置 - starting position of the ScrollTrigger</div>
       <p>String：表示trigger和scroller相遇mee的位置；使用水平方向的关键字 top、bottom或垂直方向的关键字left、right表示；top
-        top表示trigger的顶端和scroller的顶端相遇meet时，触发动画；可以使用百分比表示从scroller顶部开始的位置</p>
+        top表示trigger的顶端和scroller的顶端相遇meet时，触发动画；可以使用百分比表示从scroller顶部开始的位置；"top center"：触发元素的顶部达到视口的中心位置时开始</p>
       <p>Number：scroller的滚动距离/大小；如视口滚动了200；可以使用window的scroll事件调试</p>
-      <p>Function</p>
+      <p>Function：</p>
+      <div>end：触发结束位置 - the ending position of the ScrollTrigger；含义同start</div>
+      <p>String：如果指定了endTrigger，则使用endTrigger，否则使用trigger</p>
+      <p>Number：</p>
+      <p>Function：</p>
+      <div>markers: 是否显示标记，默认为 false；很直观的显示触发器和触发容器；可用于开发环境进行调试；可以定制标记样式</div>
+      <pre>markers: {startColor: "white", endColor: "white", fontSize: "18px", fontWeight: "bold", indent: 20}</pre>
+      <div>scrub：动画会根据滚动的速度实时改变，提供平滑的滚动同步效果，默认是true</div>
+      <div>pin: 大头针效果；是否将触发元素固定在视口的某个位置，默认为 false</div>
+      <!-- <div>toggleActions：定义在不同滚动方向上触发的动作</div> -->
+      <div>toggleClass：动画触发过程中，添加到触发器的类；开始之前和结束之后将移除；应小心设计触发容器范围，如果结束end时，还没有达到开始start，就不会触发</div>
+      <div>onEnter: 进入触发区域时执行的回调函数</div>
+      <div>onLeave: 离开触发区域时执行的回调函数</div>
+      <div>onEnterBack：反向进入</div>
+      <div>onLeaveBack：反向离开</div>
     </dd>
   </dl>
   <div class="chap">NPM</div>

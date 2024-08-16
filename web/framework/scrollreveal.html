@@ -15,8 +15,11 @@
     <h1>&commat;ScrollReveal</h1>
   </header>
   <dl>
-    <dd>. 随着屏幕的滚动，逐渐显示指定内容</dd>
-    <dd>. 可以指定类型丰富的显示效果</dd>
+    <dd>
+      <div>随着屏幕的滚动，逐渐显示指定内容</div>
+      <div>可以指定类型丰富的显示效果</div>
+      <div>无法操作伪元素</div>
+    </dd>
     <dt>获取库文件</dt>
     <dd class="sn">
       <div>进入 <a href="https://scrollrevealjs.org/">官网 - scrollrevealjs</a>，使用提供的在线资源</div>
@@ -28,11 +31,12 @@
           href="https://github.com/jlmakes/scrollreveal">Github - scrollreveal</a> → dist → scrollreveal.min.js → raw →
         另存为，然后在项目中引入</div>
     </dd>
-    <dt>配置 - 实例化</dt>
-    <dd>
-      <div>以JSON值对的形式，为实例和元素指定选项，设置丰富的显示效果；涉及到的时间单位是毫秒ms</div>
-      <div>区分实例配置和元素配置</div>
-      <div>可以为实例统一指定，再单独为特定元素增加或修改</div>
+    <dt>基本使用</dt>
+    <dd class="sn">
+      <div>配置 - 实例化</div>
+      <p>以JSON值对的形式，为实例和元素指定选项，设置丰富的显示效果；涉及到的时间单位是毫秒ms</p>
+      <p>区分实例配置和元素配置</p>
+      <p>可以为实例统一指定，再单独为特定元素增加或修改</p>
       <table>
         <caption>实例选项</caption>
         <tr>
@@ -86,10 +90,8 @@ const sr = ScrollReveal({
     delay: 400,
     reset: true
 })</pre>
-    </dd>
-    <dt>应用到元素</dt>
-    <dd>
-      <div>可以指定/追加新属性</div>
+      <div>应用到元素</div>
+      <p>可以指定/追加新属性</p>
       <pre>
 sr.reveal('.banner-item', {
     interval: 100
@@ -99,7 +101,7 @@ sr.reveal('.i0', {
     origin: 'top'
 })
 </pre>
-      <div>也可以应用到多个类；多个类以逗号,区分</div>
+      <p>也可以应用到多个类；多个类以逗号,区分</p>
       <pre>
 sr.reveal('.i4, .breath-item, .info-item', {
     origin: 'bottom',
@@ -108,6 +110,7 @@ sr.reveal('.i4, .breath-item, .info-item', {
     </dd>
     <dd class="example-sn">显示指定元素；先写配置再应用到实例 - 通过展开并追加属性可以为不同的元素应用不同的时间间隔</dd>
     <dd>
+      <div>这里使用先指定配置参数，再使用静态方法操作元素</div>
       <pre>
 const revealOption = {
   delay: 300,
@@ -116,6 +119,7 @@ const revealOption = {
   easing: "ease-in-out",
   origin: "bottom",
 };
+
 ScrollReveal().reveal(".swiper-info", { 
   ...revealOption,
    interval: 350
@@ -155,6 +159,17 @@ ScrollReveal().reveal(".data-item", {
   transform: translateY(-10px) scale(1.02) !important;
   //
 }</pre>
+    </dd>
+    <dd class="example-sn"><a href="../opening.html">教学评价</a> - 从缩放0.5和透明0逐一放到完全显示</dd>
+    <dd>
+      <div>ScrollReveal无法操作伪元素，所以使用了多个DOM元素</div>
+      <pre>
+ScrollReveal().reveal('.eva-bar', { 
+  scale: 0.5, 
+  opacity: 0, 
+  reset: true, 
+  interval: 200 
+});      </pre>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

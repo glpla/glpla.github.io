@@ -20,7 +20,7 @@
       font-size: 24px;
       padding: 20px;
       text-align: center;
-      margin: 0 auto 120vh;
+      margin: 0 auto;
     }
 
     .container {
@@ -33,12 +33,27 @@
     .tmp {
       height: 100vh;
     }
+
+    .active {
+      background-image: linear-gradient(#f40, #089);
+    }
   </style>
 </head>
 
 <body>
   <div class="my-element">Hello World!</div>
+  <div class="tmp"></div>
   <div class="container">
+    <div class="div">1</div>
+    <div class="div">2</div>
+    <div class="div">3</div>
+    <div class="div">4</div>
+    <div class="div">5</div>
+    <div class="div">6</div>
+    <div class="div">7</div>
+    <div class="div">8</div>
+    <div class="div">9</div>
+    <div class="div">10</div>
     <div class="div">1</div>
     <div class="div">2</div>
     <div class="div">3</div>
@@ -56,38 +71,25 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script>
     gsap.registerPlugin(ScrollTrigger)
-    // gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: '.box',
-    //     pin: true,
-    //     start: 'top top',
-    //     x: 500
-    //   },
-    // })
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".container",
-        start: "461",
+        start: "top 40%",
+        end: 'bottom 60%',
+        markers: true,
+        toggleClass: "active",
+        // pin: true,
+        onEnter: () => console.log('enter'),
+        onLeave: () => console.log('leave'),
+        onUpdate: (el) => console.log(el, 'update')
       },
     });
-    // const tl = gsap.timeline({
-    //   scrollTrigger: {
-    //     scrub: 1,
-    //     trigger: ".container",
-    //     start: "50% 50%",
-    //     end: "bottom 50%",
-    //   },
-    // });
     tl.from('.div', {
       color: '#f40',
       opacity: 1,
       stagger: 0.4,
       onComplete: () => console.log('2 end')
     })
-    window.addEventListener('scroll', () => {
-      console.log(window.scrollY)
-    })
-
   </script>
 </body>
 

@@ -9,6 +9,36 @@
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/opening2024.css">
     <base target="_blank">
+    <style>
+        .major-wrap {
+            display: flex;
+            justify-content: center;
+        }
+
+        .major-title {
+            font-weight: 600;
+            font-size: 15px;
+            padding: 4px 10px;
+            cursor: pointer;
+        }
+
+        .dm-cont,
+        .se-cont {
+            display: none;
+        }
+
+        input[type='radio']:checked+label {
+            background-image: linear-gradient(#f40 2px, transparent 0);
+        }
+
+        .major-wrap:has(#se:checked)~.se-cont {
+            display: block;
+        }
+
+        .major-wrap:has(#dm:checked)~.dm-cont {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,31 +48,63 @@
     </header>
     <dl>
         <dt>教学详情 Overview</dt>
-        <dd class="grid-detail-item"><span class="item-l">科目</span><i class="iconfont icon-shuji"></i><span
-                class="item-r">前端开发基础</span></dd>
-        <dd class="grid-detail-item"><span class="item-l">专业</span><i class="iconfont icon-appguanli"></i><span
-                class="item-r">23软工 23数媒</span></dd>
-        <dd class="grid-detail-item"><span class="item-l">班级</span><i class="iconfont icon-mubiao1"></i><span
-                class="item-r">1班、2班、3班</span></dd>
-        <dd class="grid-detail-item"><span class="item-l">人数</span><i class="iconfont icon-qunzu"></i><span
-                class="item-r">55 + 57 + 55</span></dd>
-        <dd class="grid-detail-item"><span class="item-l">学分</span><i class="iconfont icon-xuefen-2"></i><span
-                class="item-r">2</span></dd>
-        <dd class="grid-detail-item"><span class="item-l">教学周</span><i class="iconfont icon-calendar"></i><span
-                class="item-r">1-18</span></dd>
-        <dd class="grid-detail-item"><span class="item-l">总学时</span><i class="iconfont icon-gonggao"></i><span
-                class="item-r">36</span></dd>
-        <dd class="grid-detail-item"><span class="item-l">周学时</span><i class="iconfont icon-tiaoxiushenqing"></i><span
-                class="item-r">2</span></dd>
+        <dd>
+            <div class="major-wrap">
+                <input type="radio" name="major" id="se" hidden checked>
+                <label class="major-title" for="se">23软件工程</label>
+                <input type="radio" name="major" id="dm" hidden>
+                <label class="major-title" for="dm">23数字媒体</label>
+            </div>
+            <div class="se-cont">
+                <div class="grid-detail-item"><span class="item-l">课程</span><i class="iconfont icon-shuji"></i><span
+                        class="item-r">前端开发基础</span></div>
+                <div class="grid-detail-item"><span class="item-l">班级</span><i class="iconfont icon-mubiao1"></i><span
+                        class="item-r">1班、2班、3班</span></div>
+                <div class="grid-detail-item"><span class="item-l">人数</span><i class="iconfont icon-qunzu"></i><span
+                        class="item-r">55 + 57 + 55</span></div>
+                <div class="grid-detail-item"><span class="item-l">学分</span><i class="iconfont icon-xuefen-2"></i><span
+                        class="item-r">2</span></div>
+                <div class="grid-detail-item"><span class="item-l">教学周</span><i class="iconfont icon-calendar"></i><span
+                        class="item-r">1-18</span></div>
+                <div class="grid-detail-item"><span class="item-l">总学时</span><i class="iconfont icon-gonggao"></i><span
+                        class="item-r">36</span></div>
+                <div class="grid-detail-item"><span class="item-l">周学时</span><i
+                        class="iconfont icon-tiaoxiushenqing"></i><span class="item-r">2</span></div>
+            </div>
+            <div class="dm-cont">
+                <div class="grid-detail-item"><span class="item-l">课程</span><i class="iconfont icon-shuji"></i><span
+                        class="item-r">前端开发基础</span></div>
+                <div class="grid-detail-item"><span class="item-l">班级</span><i class="iconfont icon-mubiao1"></i><span
+                        class="item-r">1班、2班、3班</span></div>
+                <div class="grid-detail-item"><span class="item-l">人数</span><i class="iconfont icon-qunzu"></i><span
+                        class="item-r">55 + 57 + 55</span></div>
+                <div class="grid-detail-item"><span class="item-l">学分</span><i class="iconfont icon-xuefen-2"></i><span
+                        class="item-r">2</span></div>
+                <div class="grid-detail-item"><span class="item-l">教学周</span><i class="iconfont icon-calendar"></i><span
+                        class="item-r">1-18</span></div>
+                <div class="grid-detail-item"><span class="item-l">总学时</span><i class="iconfont icon-gonggao"></i><span
+                        class="item-r">50</span></div>
+                <div class="grid-detail-item"><span class="item-l">周学时</span><i
+                        class="iconfont icon-tiaoxiushenqing"></i><span class="item-r">3</span></div>
+            </div>
+        </dd>
         <dt>教学安排 Schedule</dt>
         <dd class="sn">
             <table class="line">
                 <tr>
+                    <th>专业 <i class="iconfont icon-appguanli"></i></th>
                     <th>时间 <i class="iconfont icon-benzhou"></i></th>
                     <th>节 <i class="iconfont icon-thlist"></i></th>
                     <th>地点 <i class="iconfont icon-home"></i></th>
                 </tr>
-                <tr>
+                <tr class="table-tr">
+                    <td>软件工程</td>
+                    <td>周1</td>
+                    <td>9-10-11</td>
+                    <td>格物1-C304</td>
+                </tr>
+                <tr class="table-tr">
+                    <td>数字媒体</td>
                     <td>周1</td>
                     <td>9-10-11</td>
                     <td>格物1-C304</td>
@@ -53,9 +115,24 @@
         <dd class="sn">
             <div>平时成绩 40%：作业、考勤和表现</div>
             <figure class="img-sn value">
-                <div class="item" style="--per:60;--color:#2d652e" data-val="60%">作业</div>
-                <div class="item" style="--per:30;--color:#689534" data-val="30%">考勤</div>
-                <div class="item" style="--per:10;--color:#a0b63d" data-val="10%">表现</div>
+                <div class="eva-item" style="--per:60;--color:#2d652e">
+                    <span>60%</span>
+                    <span class="eva-bar"></span>
+                    <span>作业</span>
+                </div>
+                <div class="eva-item" style="--per:30;--color:#689534">
+                    <span>30%</span>
+                    <span class="eva-bar"></span>
+                    <span>考勤</span>
+                </div>
+                <div class="eva-item" style="--per:10;--color:#a0b63d">
+                    <span>10%</span>
+                    <span class="eva-bar"></span>
+                    <span>表现</span>
+                </div>
+                <!-- <div class="item" style="--per:60;--color:#2d652e" data-val="60%">作业</div> -->
+                <!-- <div class="item" style="--per:30;--color:#689534" data-val="30%">考勤</div> -->
+                <!-- <div class="item" style="--per:10;--color:#a0b63d" data-val="10%">表现</div> -->
             </figure>
             <div>期末成绩 60%</div>
             <div>加成 5%：为了鼓励而额外增加的成绩奖励；包括：优秀作业、全勤</div>
@@ -370,25 +447,28 @@
         </dd>
         <dt>教学资源 Resource</dt>
         <dd class="sn">
-            <div><span class="iconfont icon-mdn"></span> <a href="https://developer.mozilla.org/en-US/" title="MDN">
+            <div class="share-link"><span class="iconfont icon-mdn"></span> <a
+                    href="https://developer.mozilla.org/en-US/" title="MDN">
                     MDN Web Docs
                 </a></div>
-            <div><span class="iconfont icon-code-workspace "></span> <a href="https://code.visualstudio.com/"
-                    title="编辑器">
+            <div class="share-link"><span class="iconfont icon-code-workspace "></span> <a
+                    href="https://code.visualstudio.com/" title="编辑器">
                     Vs Code
                 </a></div>
-            <div> <span class="iconfont icon-crdownload "></span> <a href="https://www.google.cn/chrome/index.html"
-                    title="谷歌浏览器">
+            <div class="share-link"><span class="iconfont icon-crdownload "></span> <a
+                    href="https://www.google.cn/chrome/index.html" title="谷歌浏览器">
                     Chrome
                 </a></div>
-            <div><span class="iconfont icon-chaoxing "></span> <a href="https://passport2.chaoxing.com" title="超星">
+            <div class="share-link"><span class="iconfont icon-chaoxing "></span> <a
+                    href="https://passport2.chaoxing.com" title="超星">
                     Chaoxing
                 </a></div>
-            <div><span class="iconfont icon-snipaste "></span> <a href="https://zh.snipaste.com/download.html"
-                    title="截图">
+            <div class="share-link"><span class="iconfont icon-snipaste "></span> <a
+                    href="https://zh.snipaste.com/download.html" title="截图">
                     Snipaste
                 </a></div>
-            <div><span class="iconfont icon-yuque "></span> <a href="https://www.yuque.com" title="笔记">
+            <div class="share-link"><span class="iconfont icon-yuque "></span> <a href="https://www.yuque.com"
+                    title="笔记">
                     Yuque
                 </a></div>
         </dd>
@@ -402,21 +482,29 @@
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
     <script src="/utils/lib/scrollreveal.min.js"></script>
     <script>
+        ScrollReveal().reveal('.eva-bar', { scale: 0.5, opacity: 0, reset: true, interval: 200 });
+
         const itemOption = {
             distance: "60px",
             easing: "ease-in-out",
+            opacity: 0,
             reset: true,
         }
-        ScrollReveal().reveal(".item-r", {
-            ...itemOption,
-            origin: "right",
-        });
+        // ScrollReveal().reveal(".item-r", {
+        //     ...itemOption,
+        //     origin: "right",
+        // });
 
-        ScrollReveal().reveal(".item-l", {
+        // ScrollReveal().reveal(".item-l", {
+        //     ...itemOption,
+        //     origin: "left",
+        // });
+        ScrollReveal().reveal(".table-tr td", {
             ...itemOption,
-            origin: "left",
+            origin: "bottom",
+            interval: 100,
+            distance: "10px",
         });
-
         ScrollReveal().reveal(".icon-box.lt", {
             ...itemOption,
             origin: "right",
@@ -444,6 +532,11 @@
             reset: true
         };
         ScrollReveal().reveal("tr td span", revealOption);
+        ScrollReveal().reveal(".share-link", {
+            ...itemOption,
+            origin: "right",
+            interval: 100,
+        });
     </script>
 </body>
 
