@@ -8,6 +8,25 @@
   <title>样式表 CSS</title>
   <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
+  <style>
+    .svg {
+      width: max-content;
+      margin: 2rem auto;
+    }
+
+    svg {
+      background-color: #f2f3f4;
+    }
+
+    rect {
+      height: 40px;
+    }
+
+    text {
+      font-size: 15px;
+      fill: #fff;
+    }
+  </style>
 </head>
 
 <body>
@@ -211,13 +230,36 @@
       <div>. CSS文件是按照从上到下的顺序执行；因此，同一个元素的样式，后面的样式会覆盖前面的样式</div>
       <div>. 特别要注意：样式的叠加和元素上样式类的书写顺序无关，和CSS文件中的顺序有关</div>
       <div>. 有利用实现类的复用</div>
+      <div>. 同类型多个功能按钮往往需要先指定公共样式，包括静态样式、动态样式，再根据功能指定专有样式</div>
+      <div class="svg">
+        <svg width="350" height="160">
+          <rect x="10" y="10" width="330" fill="#090"></rect>
+          <text x="175" y="30" text-anchor="middle" dominant-baseline="central">初始化样式</text>
+          <rect x="60" y="60" width="280" fill="#095"></rect>
+          <text x="200" y="80" text-anchor="middle" dominant-baseline="central">公共样式</text>
+          <rect x="110" y="110" width="230" fill="#098"></rect>
+          <text x="225" y="130" text-anchor="middle" dominant-baseline="central">专有样式</text>
+        </svg>
+      </div>
     </dd>
     <dt>优先级</dt>
     <dd>
-      <div>. 一般来说，多个样式同时作用于一个元素时，由优先级决定；优先级高的样式会覆盖优先级低的；同时还要结合不同 <a href="./selector0.html">选择器 -
+      <div>. 一般来说，多个样式同时作用于一个元素时，由优先级决定；</div>
+      <div>. 优先级高的样式会覆盖优先级低的；同时还要结合不同 <a href="./selector0.html">选择器 -
           selector</a> 共同决定</div>
       <div>. 样式异常或无效，请使用浏览器的开发者工具视图检查：按F12打开并检查</div>
-      <div class="warn" style="text-align: center;">行内样式 &gt; 内部样式 &gt; 外部样式 &gt; 浏览器默认样式</div>
+      <div class="svg">
+        <svg width="350" height="210">
+          <rect x="10" y="10" width="330" fill="#090"></rect>
+          <text x="175" y="30" text-anchor="middle" dominant-baseline="central">浏览器默认样式</text>
+          <rect x="60" y="60" width="280" fill="#095"></rect>
+          <text x="200" y="80" text-anchor="middle" dominant-baseline="central">外部样式</text>
+          <rect x="110" y="110" width="230" fill="#098"></rect>
+          <text x="225" y="130" text-anchor="middle" dominant-baseline="central">内部样式</text>
+          <rect x="160" y="160" width="180" fill="#09a"></rect>
+          <text x="250" y="180" text-anchor="middle" dominant-baseline="central">行内样式</text>
+        </svg>
+      </div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 样式顺序和书写顺序对结果的影响</dd>
     <dd>
@@ -268,37 +310,63 @@
     <dd>选择html元素，以便指定样式</dd>
     <dd>可以选择1个元素；也可以选择多个元素</dd>
     <dt>基本选择器</dt>
-    <dd>标签|类型选择器：div span h1 header table footer ...</dd>
-    <dd>类选择器 .</dd>
-    <dd>ID选择器 #</dd>
-    <dd>通配符选择器 *</dd>
-    <dt>属性选择器</dt>
-    <dt>伪元素</dt>
-    <dd>::before</dd>
-    <dd>::after</dd>
-    <dd>::first-letter</dd>
-    <dd>::first-line</dd>
-    <dd>::marker</dd>
-    <dd>::selection</dd>
-    <dd>::placeholder</dd>
-    <dt>伪类</dt>
-    <dd>:hover</dd>
-    <dd>:target</dd>
-    <dd>:first-child</dd>
-    <dd>:last-child</dd>
-    <dd>:nth-child(n)</dd>
-    <dd>:has()</dd>
-    <dd>:not()</dd>
-    <dd>:root</dd>
-    <dd>:checked</dd>
-    <dd>:selected</dd>
-    <dd>:valid | :invalid</dd>
-    <dd>:focus | :focus-within</dd>
-    <dt>组合选择器</dt>
-    <dd>列表选择器</dd>
-    <dd>后代选择器、直接后代选择器</dd>
-    <dd>兄弟选择器 ~、相邻兄弟选择器 +</dd>
-    <dd>叠加选择器</dd>
+    <dd>
+      <div>类型选择器 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Type_selectors">Type
+          selectors</a>：也叫标签选择器，如div
+        span
+        h1 header table footer ...</div>
+      <div>类选择器 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors">Class selectors</a>：以点 . 开始，如
+        .wrap</div>
+      <div>ID选择器 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors">ID selectors</a>： 以井号 # 开始，如
+        #user
+      </div>
+      <div>通配符选择器 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Universal_selectors">Universal
+          selectors</a>：以星号 * 表示，代表所有元素 </div>
+      <div>嵌套选择器 <a href="">& nesting selector</a>：以缩进的形式书写样式</div>
+    <dt>属性选择器 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors">Attribute selectors</a>
+    </dt>
+    </dd>
+    <dt>伪元素 Pseudo-elements</dt>
+    <dd>
+      <div>::before</div>
+      <div>::after</div>
+      <div>::first-letter</div>
+      <div>::first-line</div>
+      <div>::marker</div>
+      <div>::selection</div>
+      <div>::placeholder</div>
+    </dd>
+    <dt>伪类 Pseudo-classes</dt>
+    <dd>
+      <div>:hover</div>
+      <div>:target</div>
+      <div>:first-child</div>
+      <div>:last-child</div>
+      <div>:nth-child(n)</div>
+      <div>:has()</div>
+      <div>:not()</div>
+      <div>:root</div>
+      <div>:checked</div>
+      <div>:selected</div>
+      <div>:valid | :invalid</div>
+      <div>:focus | :focus-within</div>
+    </dd>
+    <dt>组合选择器 Combinators</dt>
+    <dd>
+      <div>列表选择器 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Selector_list">Selector
+          list</a>：也叫并列选择器，适合多个元素应用同样的样式</div>
+      <div>后代选择器 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Descendant_combinator">Descendant
+          combinator</a>：所有后代元素
+      </div>
+      <div>直接后代选择器 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Child_combinator">Child combinator</a>：子元素
+      </div>
+      <div>兄弟选择器 <a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/Subsequent-sibling_combinator">Subsequent-sibling
+          combinator</a>：以波浪线 ~ 表示，所有弟弟</div>
+      <div>相邻兄弟选择器 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Next-sibling_combinator">Next-sibling
+          combinator</a>：以加号 + 表示，相邻的弟弟</div>
+      <div>叠加选择器：为一个类再叠加一个样式，如.btn.goods、.wrap.active；多用于类的共享和动态类</div>
+    </dd>
   </dl>
   <div class="chap">属性 Attributes</div>
   <dl class="nav-cont">

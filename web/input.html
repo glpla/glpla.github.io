@@ -24,13 +24,12 @@
     <nav class="nav">
       <a href="" style="--delay:0" class="nav-item">overview</a>
       <a href="" style="--delay:1" class="nav-item">label</a>
-      <a href="" style="--delay:2" class=" nav-item">style</a>
-      <a href="" style="--delay:3" class=" nav-item">selector</a>
-      <a href="" style="--delay:4" class="nav-item">text</a>
-      <a href="" style="--delay:5" class="nav-item">radio</a>
-      <a href="" style="--delay:6" class="nav-item">checkbox</a>
-      <a href="" style="--delay:7" class="nav-item">range</a>
-      <a href="" style="--delay:8" class="nav-item">case</a>
+      <a href="" style="--delay:2" class=" nav-item">init</a>
+      <a href="" style="--delay:3" class="nav-item">text</a>
+      <a href="" style="--delay:4" class="nav-item">radio</a>
+      <a href="" style="--delay:5" class="nav-item">checkbox</a>
+      <a href="" style="--delay:6" class="nav-item">range</a>
+      <a href="" style="--delay:7" class="nav-item">case</a>
     </nav>
   </header>
   <dl>
@@ -233,101 +232,31 @@
     &lt;span&gt;text here&lt;/span&gt;
 &lt;/label&gt;</pre>
     </dd>
-  </dl>
-  <dl>
-    <dt class="nav-cont">样式 Style</dt>
-    <dd>. 表单元素在不同浏览器上的默认样式不尽相同，为了统一，通常需要覆盖/初始化默认样式，再重新自定义新的样式</dd>
-    <dd>. 以下各例，如无特殊说明，均使用初始化设计</dd>
-    <dd>. 部分样式需要使用浏览器前缀；更多注意事项，请参考 <a href="https://caniuse.com/">Can I Use</a>，避免样式使用异常</dd>
+    <dt class="nav-cont">初始化 Init</dt>
     <dd class="sn">
-      <div>初始化设置</div>
-      <p>. 各表单元素为 border-box</p>
-      <p>. 字体大小、类型、边框、背景、轮廓、默认的占位符样式和文本选择样式</p>
-      <p>. input初始化：通常根据type修改特定的表单元素</p>
+      <p>. 通常根据type修改特定的表单元素</p>
+      <p>. 更多样式，请参考后续内容</p>
       <pre>
-  input[type=text] {
-    width: 100%;
-    border: none;
-    outline: none;
-    font: inherit;
-    box-sizing: border-box;
-    background-color: transparent;
-  }
-    
-  input[type=text]::placeholder {
-    color: #089;
-  }
+input[type=text] {
+  width: 100%;
+  border: none;
+  outline: none;
+  font: inherit;
+  box-sizing: border-box;
+  background-color: transparent;
+}
   
-  input[type=text]::selection {
-    color: #F40;
-  }</pre>
-      <div>accent-color</div>
-      <p>. 利用 accent-color 简单粗暴的统一指定部分元素的强调色，如&lt;input&gt;的radio、checkbox、range和&lt;progress&gt;；抛弃原来丑到爆的样式</p>
-      <p>. 设置特定元素强调色，如 &lt;input&gt; </p>
-      <pre>
+input[type=text]::placeholder {
+  color: #089;
+}
+
+input[type=text]::selection {
+  color: #F40;
+}
+
 input[type='radio'] {
-accent-color: #f40;
+  accent-color: #f40;
 }</pre>
-      <p>. 为了保持一致，通常全局定义</p>
-      <pre>
-  :root{
-    accent-color: #ff1493;
-}</pre>
-      <div>appearance</div>
-      <p>. 部分元素可以设置 appearance为none，从头开始设计UI</p>
-    </dd>
-    <dt class="nav-cont">选择器 selector</dt>
-    <dd>
-      <table>
-        <caption>伪元素选择器</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>::placeholder</td>
-          <td>占位符样式</td>
-        </tr>
-        <tr>
-          <td>::selection</td>
-          <td>元素选中时的样式</td>
-        </tr>
-      </table>
-      <table>
-        <caption>伪类选择器</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>:focus</td>
-          <td>获取焦点时</td>
-        </tr>
-        <tr>
-          <td>:checked</td>
-          <td>元素选择中</td>
-        </tr>
-        <tr>
-          <td>:valid</td>
-          <td>有效时</td>
-        </tr>
-        <tr>
-          <td>:invalid</td>
-          <td>无效时</td>
-        </tr>
-        <tr>
-          <td>:in-range</td>
-          <td>在指定范围</td>
-        </tr>
-        <tr>
-          <td>:out-of-range</td>
-          <td>超出指定范围</td>
-        </tr>
-        <tr>
-          <td>:placeholder-shown</td>
-          <td>占位符显式[必须有占位符]</td>
-        </tr>
-      </table>
     </dd>
   </dl>
   <dl>

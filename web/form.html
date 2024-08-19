@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="./css/form.css">
   <base target="_blank">
+  <style>
+    table th:first-child {
+      width: 20%;
+    }
+  </style>
 </head>
 
 <body>
@@ -21,10 +26,13 @@
     <dd>
       <div>. 人机交互</div>
       <div>. 通过种类多样的表单元素，以值对 name-value 的形式收集/采集数据，提交给后端服务器backend server处理</div>
-      <div>. 表单本身并不可见，除了承载脚本外，更多是作为一个容器</div>
+      <div>. 表单本身并不可见，除了承载脚本外，更多是作为一个壳/容器</div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form">MDN - &lt;form&gt;</a>
       </div>
       <pre>&lt;form action="" method="" target="" name=""&gt;&lt;/form&gt;</pre>
+    </dd>
+    <dt>表单属性</dt>
+    <dd>
       <table>
         <caption>表单属性</caption>
         <tr>
@@ -50,22 +58,15 @@
           <td>区分页面中不同的表单</td>
         </tr>
       </table>
-      <table>
-        <caption>表单事件</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>提交 submit</td>
-          <td>提交数据；表单元素必须指定name属性；默认页面会跳转，有时需要阻止表单的默认提交事件</td>
-        </tr>
-        <tr>
-          <td>清除 reset</td>
-          <td>清除各表单元素数据</td>
-        </tr>
-      </table>
-      <div>内联事件 - onsubmit取消默认提交</div>
+    </dd>
+    <dt>表单事件</dt>
+    <dd class="sn">
+      <div>提交 submit</div>
+      <p>表单提交数据时，要求表单元素必须指定name属性，否则提交时无法获取数据</p>
+      <p>表单提交时，默认页面会跳转；有时需要阻止表单的默认提交事件</p>
+      <div>清除 reset</div>
+      <p>清除各表单元素数据，重新填写</p>
+      <p class="example-sn"> 内联事件 - onsubmit取消默认提交</p>
       <pre>
 &lt;form action="" method="" name="" onsubmit='return false'&gt;
   &lt;input type="text" name="uname" id=""&gt;
@@ -73,52 +74,134 @@
   &lt;input type="submit" value="submit"&gt;
   &lt;input type="reset" value="reset"&gt;
 &lt;/form&gt;</pre>
-      <div>侦听方式 - 获取表单，侦听提交事件并取消默认</div>
+      <p class="example-sn">侦听方式 - 获取表单，侦听提交事件 submit 并取消默认</p>
       <pre>
 let form = document.querySelector('form')
 form.addEventListener('submit', (e) => {
   e.preventDefault()
 })      </pre>
-      <div>. 可以为表单指定打开目标位置属性 target='iframe-name'</div>
-      <pre>
-&lt;iframe name='iframe-name'&gt;  &lt;/iframe&gt;</pre>
+      <p>. 可以为表单指定打开目标位置属性 target='iframe-name'</=>
+      <pre>&lt;iframe name='iframe-name'&gt;  &lt;/iframe&gt;</pre>
     </dd>
-    <dt>表单元素</dt>
-    <dd>. 表单元素类型很多，每个必须指定name，否则提交时无法获取数据；常见的表单元素如下表</dd>
-    <dd>. 由于表单元素默认的样式极其丑陋且不一致，需要初始化样式后再自定义样式</dd>
+    <dt>常见元素</dt>
     <dd>
+      <div>. 表单元素类型很多；常见的表单元素如下表</div>
       <table>
+        <caption>常见表单元素</caption>
         <tr>
           <th>类别</th>
           <th>说明</th>
         </tr>
         <tr>
-          <td>&lt;input&gt;</td>
+          <td><a href="./input.html">&lt;input&gt;</a></td>
           <td>供用户输入/选择，类型最为丰富，应用最多</td>
         </tr>
         <tr>
-          <td>&lt;select&gt;</td>
+          <td><a href="./select.html">&lt;select&gt;</a></td>
           <td>下拉列表</td>
         </tr>
         <tr>
-          <td>&lt;textarea&gt;</td>
+          <td><a href="./textarea.html">&lt;textarea&gt;</a></td>
           <td>多行输入</td>
         </tr>
         <tr>
-          <td>&lt;button&gt;</td>
-          <td>提交按钮；通过type可以指定为提交submit或清除reset；默认是submit；也可以通过&lt;input&gt;指定其type为button</td>
+          <td><a href="./input_button.html">&lt;button&gt;</a></td>
+          <td>提交按钮；通过type可以指定为提交submit或清除reset；默认是submit
+            <br>也可以通过&lt;input&gt;指定其type为button
+          </td>
         </tr>
         <tr>
-          <td>&lt;fieldset&gt;</td>
+          <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset">MDN - &lt;fieldset&gt;</a>
+          </td>
           <td>分组表单元素</td>
         </tr>
         <tr>
-          <td>&lt;legend&gt;</td>
+          <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend">MDN - &lt;legend&gt;</a></td>
           <td>分组的标题；分组的好处是操作整个分组，如使用disabled属性禁止整个分组</td>
         </tr>
         <tr>
-          <td>&lt;datalist&gt;</td>
-          <td>数据列表，为input等文本输入元素提供一个输入可选项；关联：输入元素使用list属性，数据列表使用id属性</td>
+          <td><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist">MDN - &lt;datalist&gt;</a>
+          </td>
+          <td>数据列表，为input等文本输入元素提供一个输入可选项
+            <br>permissible or recommended options available to choose
+          </td>
+        </tr>
+      </table>
+    </dd>
+    <dt>样式</dt>
+    <dd class="sn">
+      <p>. 表单元素在不同浏览器上的默认样式不尽相同，为了统一，通常需要覆盖/初始化默认样式，再重新自定义新的样式</p>
+      <p>. 后续案例，如无特殊说明，均使用初始化设计</p>
+      <p>. 部分样式需要使用浏览器前缀；更多注意事项，请参考 <a href="https://caniuse.com/">Can I Use</a>，避免样式使用异常</p>
+      <div>初始化设置</div>
+      <p>. 各表单元素为 border-box</p>
+      <p>. 字体大小、类型、边框、背景、轮廓、默认的占位符样式和文本选择样式</p>
+      <p>. 不同类型的元素需要单独初始化，如input初始化：通常根据type修改特定的表单元素，参考后续内容</p>
+      <div>accent-color</div>
+      <p>. 利用 accent-color 简单粗暴的统一指定部分元素的强调色，如&lt;input&gt;的radio、checkbox、range和&lt;progress&gt;；抛弃原来丑到爆的样式</p>
+      <p>. 设置特定元素强调色，如 &lt;input&gt; </p>
+      <pre>
+input[type='radio'] {
+  accent-color: #f40;
+}</pre>
+      <p>. 为了保持一致，通常全局定义</p>
+      <pre>
+:root{
+  accent-color: #ff1493;
+}</pre>
+      <div>appearance</div>
+      <p>. 部分元素可以设置 appearance为none，从头开始设计UI</p>
+    </dd>
+    <dt>选择器</dt>
+    <dd>
+      <table>
+        <caption>伪元素选择器</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>::placeholder</td>
+          <td>占位符样式</td>
+        </tr>
+        <tr>
+          <td>::selection</td>
+          <td>元素选中时的样式</td>
+        </tr>
+      </table>
+      <table>
+        <caption>伪类选择器</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>:focus</td>
+          <td>获取焦点时</td>
+        </tr>
+        <tr>
+          <td>:checked</td>
+          <td>元素选择中</td>
+        </tr>
+        <tr>
+          <td>:valid</td>
+          <td>有效时</td>
+        </tr>
+        <tr>
+          <td>:invalid</td>
+          <td>无效时</td>
+        </tr>
+        <tr>
+          <td>:in-range</td>
+          <td>在指定范围</td>
+        </tr>
+        <tr>
+          <td>:out-of-range</td>
+          <td>超出指定范围</td>
+        </tr>
+        <tr>
+          <td>:placeholder-shown</td>
+          <td>占位符显式[必须有占位符]</td>
         </tr>
       </table>
     </dd>
