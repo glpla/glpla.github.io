@@ -143,9 +143,22 @@
         voluptatibus unde eligendi culpa! Magnam quam dolores iusto consequuntur sed numquam reprehenderit eum vitae
         quia iste.</p>
     </div>
-    <button class="btn">I agree</button>
+    <button class="btn">I Agree</button>
   </div>
-  <script src="./js/notice.js"></script>
+  <script>
+    let tips = document.querySelector('.tips');
+    let btn = document.querySelector('.btn');
+    tips.addEventListener('scroll', () => {
+      let per = tips.scrollTop / (tips.scrollHeight - tips.offsetHeight);
+      if (per >= 0.9) {
+        btn.removeAttribute('disabled');
+        btn.classList.add('active');
+      }
+    })
+    btn.addEventListener('click', () => {
+      location.href = './up2u.html'
+    })
+  </script>
 </body>
 
 </html>
