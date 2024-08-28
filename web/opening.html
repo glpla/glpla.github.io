@@ -38,6 +38,20 @@
         .major-wrap:has(#dm:checked)~.dm-cont {
             display: block;
         }
+
+        .schedule-item {
+            width: 100%;
+            max-width: 600px;
+            margin: 1rem auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--p-m-g);
+        }
+
+        .schedule-title {
+            grid-row: span 2;
+            align-self: center;
+        }
     </style>
 </head>
 
@@ -89,27 +103,8 @@
             </div>
         </dd>
         <dt>教学安排 Schedule</dt>
-        <dd class="sn">
-            <table class="line">
-                <tr>
-                    <th>专业 <i class="iconfont icon-appguanli"></i></th>
-                    <th>时间 <i class="iconfont icon-benzhou"></i></th>
-                    <th>节 <i class="iconfont icon-thlist"></i></th>
-                    <th>地点 <i class="iconfont icon-home"></i></th>
-                </tr>
-                <tr class="table-tr">
-                    <td>软件工程</td>
-                    <td>周1</td>
-                    <td>9-10-11</td>
-                    <td>格物1-C304</td>
-                </tr>
-                <tr class="table-tr">
-                    <td>数字媒体</td>
-                    <td>周1</td>
-                    <td>9-10-11</td>
-                    <td>格物1-C304</td>
-                </tr>
-            </table>
+        <dd>
+            <img src="./imgs/242501.png" alt="">
         </dd>
         <dt>课程评价 Evaluation</dt>
         <dd class="sn">
@@ -215,7 +210,7 @@
                 <tr>
                     <td></td>
                     <td>专题：IDE
-                        <br><span>环境：Vs Code、Chrome、Threejs**、Blender**</span>
+                        <br><span>环境：Vs Code、Chrome</span>
                         <br><span>实操：环境部署和配置</span>
                         <br><span>关注：主流开发环境</span>
                         <br><span>拓展：Snipaste</span>
@@ -383,58 +378,37 @@
                 <tr>
                     <td></td>
                     <td>专题：JavaScript
-                        <br><span>变量：var、let</span>
-                        <br><span>常量：const</span>
-                        <br><span>数据类型：Number、String、Boolean、Null、Undefined、Object、Array、Function</span>
-                        <br><span>运算符：逻辑运算符、算术运算符、关系运算符、赋值运算符</span>
-                        <br><span>表达式：三元表达式</span>
-                        <br><span>语句：if-else、switch-case、for、forEach、while、do...while、break、continue、return</span>
-                        <br><span>函数：函数声明、函数参数、函数返回值、函数表达式、箭头函数</span>
-                        <br><span>事件：addEventListener、removeEventListener</span>
-                        <br><span>关注：</span>
+                        <br><span>JavaScript：var、let、const、data type、operator、statement ...</span>
+                        <br><span>DOM：getElementByXXX()、querySelector()、querySelectorAll() ...</span>
+                        <br><span>BOM：setTimeout()、setInterval()、clearTimeout()、clearInterval() ...</span>
+                        <br><span>API：date、fetch、localStorage ...</span>
+                        <br><span>实操：模态框、换肤、代办事项、轮播图、数字时钟</span>
+                        <br><span>关注：前后端交互</span>
+                        <br><span>拓展：Swiper、Axios、Json-Server</span>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>专题：DOM* Threejs**
-                        <br><span>获取元素：getElementById、getElementsByTagName、getElementsByClassName、querySelector、querySelectorAll</span>
-                        <br><span>自定义数据：data-</span>
-                        <br><span>内联样式style：setAttribute、removeAttribute、getAttribute、className、classList、innerHTML、textContent</span>
-                        <br><span>类class：classList.add、classList.remove、classList.toggle、classList.contains、classList.replace、自定义动态类active</span>
-                        <br><span>关注：</span>
-                        <br><span>实操：图册模态框、网站换肤、代办事项</span>
+                    <td>专题：Project
+                        <br><span>总结：课程总结</span>
+                        <br><span>开发：毕业项目开发</span>
+                        <br><span>关注：团队协作</span>
                     </td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td>专题：BOM* Blender**
-                        <br><span>页面属性：location、document.title、document.body、document.head、document.documentElement、scrollY、navigator、history
-                        </span>
-                        <br><span>页面事件：onload、onresize、onscroll</span>
-                        <br><span>定时器：setTimeout、setInterval、clearTimeout、clearInterval</span>
-                        <br><span>关注：</span>
-                        <br><span>实操：动态吸顶导航、返回顶部</span>
-                        <br><span>拓展：Swiper</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>专题*：API
-                        <br><span>API：date、fetch、localStorage</span>
-                        <br><span>样式：::-webkit-scrollbar</span>
-                        <br><span>关注：</span>
-                        <br><span>实操：代办事项、数字时钟</span>
-                        <br><span>拓展：Node.js、Axios、Json-Server</span>
+                    <td>专题：Project
+                        <br><span>答辩：小组答辩</span>
+                        <br><span>讲评：项目讲评</span>
+                        <br><span>关注：学无止境</span>
                     </td>
                 </tr>
             </table>
-            <div class="txt-right">*为拓展内容</div>
-            <div class="txt-right">**为数媒专业内容</div>
         </dd>
         <dt>期末验收 Final</dt>
         <dd class="sn">
             <div>考核内容</div>
-            <p>开发设计个人简历类网站；详情请查看 <a href="/utils/file/23软工-广州新华学院课程考核方案审批表（非试卷考核方案审批表）.pdf">考核方案</a></p>
+            <p>开发设计个人简历/个人网站；详情请查看 <a href="/utils/file/23软工-广州新华学院课程考核方案审批表（非试卷考核方案审批表）.pdf">考核方案</a></p>
             <p>建议使用真实资料和信息，后期会挂到网上，作为求职的电子简历</p>
             <div>考核方式</div>
             <p>小组作业</p>
