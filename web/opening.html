@@ -10,47 +10,48 @@
     <link rel="stylesheet" href="../css/opening2024.css">
     <base target="_blank">
     <style>
-        .major-wrap {
-            display: flex;
-            justify-content: center;
-        }
-
-        .major-title {
-            font-weight: 600;
-            font-size: 15px;
-            padding: 4px 10px;
-            cursor: pointer;
-        }
-
-        .dm-cont,
-        .se-cont {
-            display: none;
-        }
-
-        input[type='radio']:checked+label {
-            background-image: linear-gradient(#f40 2px, transparent 0);
-        }
-
-        .major-wrap:has(#se:checked)~.se-cont {
-            display: block;
-        }
-
-        .major-wrap:has(#dm:checked)~.dm-cont {
-            display: block;
-        }
-
-        .schedule-item {
+        .w {
             width: 100%;
             max-width: 600px;
             margin: 1rem auto;
+        }
+
+        .overview-item {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: 1fr 2fr 2fr;
+            gap: var(--p-m-g);
+            margin-bottom: var(--p-m-g);
+        }
+
+        .overview-item>span:first-child {
+            display: flex;
+            background-color: #689534;
+            color: #fff;
             gap: var(--p-m-g);
         }
 
-        .schedule-title {
-            grid-row: span 2;
-            align-self: center;
+        .overview-item>span:first-child span {
+            flex: 1;
+            text-align-last: justify;
+        }
+
+        .overview-item i {
+            color: #fff;
+        }
+
+        .overview-item>span {
+            background-color: #c6e0b4;
+            padding: 0 var(--p-m-g);
+        }
+
+        .leading {
+            font-weight: 600;
+            line-height: 2;
+        }
+
+        .leading span {
+            background-color: #689534;
+            color: #fff;
         }
     </style>
 </head>
@@ -62,44 +63,41 @@
     </header>
     <dl>
         <dt>教学详情 Overview</dt>
-        <dd>
-            <div class="major-wrap">
-                <input type="radio" name="major" id="se" hidden checked>
-                <label class="major-title" for="se">23软件工程</label>
-                <input type="radio" name="major" id="dm" hidden>
-                <label class="major-title" for="dm">23数字媒体</label>
+        <dd class="w overview">
+            <div class="overview-item leading">
+                <span>项目</span>
+                <span>23软件工程</span>
+                <span>23数字媒体</span>
             </div>
-            <div class="se-cont">
-                <div class="grid-detail-item"><span class="item-l">课程</span><i class="iconfont icon-shuji"></i><span
-                        class="item-r">前端开发基础</span></div>
-                <div class="grid-detail-item"><span class="item-l">班级</span><i class="iconfont icon-mubiao1"></i><span
-                        class="item-r">1班、2班、3班</span></div>
-                <div class="grid-detail-item"><span class="item-l">人数</span><i class="iconfont icon-qunzu"></i><span
-                        class="item-r">57 + 57 + 55</span></div>
-                <div class="grid-detail-item"><span class="item-l">学分</span><i class="iconfont icon-xuefen-2"></i><span
-                        class="item-r">2</span></div>
-                <div class="grid-detail-item"><span class="item-l">教学周</span><i class="iconfont icon-calendar"></i><span
-                        class="item-r">1 - 18</span></div>
-                <div class="grid-detail-item"><span class="item-l">总学时</span><i class="iconfont icon-gonggao"></i><span
-                        class="item-r">18 + 18</span></div>
-                <div class="grid-detail-item"><span class="item-l">周学时</span><i
-                        class="iconfont icon-tiaoxiushenqing"></i><span class="item-r">2</span></div>
+            <div class="overview-item">
+                <span><span>课程</span> <i class="iconfont icon-shuji"></i></span>
+                <span>前端开发基础</span>
+                <span>Web前端开发</span>
             </div>
-            <div class="dm-cont">
-                <div class="grid-detail-item"><span class="item-l">课程</span><i class="iconfont icon-shuji"></i><span
-                        class="item-r">Web前端开发</span></div>
-                <div class="grid-detail-item"><span class="item-l">班级</span><i class="iconfont icon-mubiao1"></i><span
-                        class="item-r">1班、2班、3班</span></div>
-                <div class="grid-detail-item"><span class="item-l">人数</span><i class="iconfont icon-qunzu"></i><span
-                        class="item-r">49 + 48 + 50</span></div>
-                <div class="grid-detail-item"><span class="item-l">学分</span><i class="iconfont icon-xuefen-2"></i><span
-                        class="item-r">3</span></div>
-                <div class="grid-detail-item"><span class="item-l">教学周</span><i class="iconfont icon-calendar"></i><span
-                        class="item-r">1 - 18</span></div>
-                <div class="grid-detail-item"><span class="item-l">总学时</span><i class="iconfont icon-gonggao"></i><span
-                        class="item-r">18 + 32</span></div>
-                <div class="grid-detail-item"><span class="item-l">周学时</span><i
-                        class="iconfont icon-tiaoxiushenqing"></i><span class="item-r">3</span></div>
+            <div class="overview-item">
+                <span><span>班级</span> <i class="iconfont icon-mubiao1"></i></span>
+                <span>1班、3班</span>
+                <span>1班、2班、3班</span>
+            </div>
+            <div class="overview-item">
+                <span><span>人数</span> <i class="iconfont icon-qunzu"></i></span>
+                <span>57 + 55</span>
+                <span>49 + 48 + 50</span>
+            </div>
+            <div class="overview-item">
+                <span><span>学分</span><i class="iconfont icon-xuefen-2"></i></span>
+                <span>2</span>
+                <span>2</span>
+            </div>
+            <div class="overview-item">
+                <span><span>教学周</span> <i class="iconfont icon-calendar"></i></span>
+                <span>1 - 18</span>
+                <span>1 - 18</span>
+            </div>
+            <div class="overview-item">
+                <span><span>周学时</span> <i class="iconfont icon-tiaoxiushenqing"></i></span>
+                <span>2</span>
+                <span>2-4</span>
             </div>
         </dd>
         <dt>教学安排 Schedule</dt>
@@ -145,9 +143,9 @@
             <div>作业应在规定的时间内，按照要求完成</div>
             <div>个人作业独立完成，禁止抄袭；小组作业合理分工，共同完成</div>
             <div>作业缺交、不及格、无效等累计达到或超过作业总数1/3，取消课程考试资格</div>
-            <div>第16教学周统计作业情况</div>
             <div>按照教学管理规定，作业缺交的，有1次补交机会</div>
             <div>存在抄袭情况的，双方当次作业记0分，取消补交机会</div>
+            <div>第16教学周统计作业情况</div>
             <div>优秀作业（综合评分90+）有加成奖励</div>
         </dd>
         <dt>请假 Leave</dt>
@@ -212,7 +210,7 @@
                     <td>专题：IDE
                         <br><span>环境：Vs Code、Chrome</span>
                         <br><span>实操：环境部署和配置</span>
-                        <br><span>关注：主流开发环境</span>
+                        <br><span>关注：长江后浪推前浪</span>
                         <br><span>拓展：Snipaste</span>
                     </td>
                 </tr>
@@ -245,7 +243,7 @@
                             &lt;dd&gt;、&lt;footer&gt;</span>
                         <br><span>选择器：*、::marker</span>
                         <br><span>样式：display、width、line-height</span>
-                        <br><span>关注：</span>
+                        <br><span>关注：没有规矩，不成方圆</span>
                         <br><span>实操：友情链接、版权信息</span>
                         <br><span>拓展：entities</span>
                     </td>
@@ -256,7 +254,7 @@
                         <br><span>结构：&lt;table&gt;、&lt;tr&gt;、&lt;th&gt;、&lt;td&gt;</span>
                         <br><span>选择器：:nth-child() :first-child()</span>
                         <br><span>样式：border-collapse、border、font-weight</span>
-                        <br><span>关注：响应式开发</span>
+                        <br><span>关注：与时俱进</span>
                         <br><span>实操：三线表格、斑马纹表格</span>
                     </td>
                 </tr>
@@ -317,8 +315,8 @@
                         <br><span>选择器：::first-line、::first-letter、::selection</span>
                         <br><span>样式：@font-face、overflow、white-space、text-overflow</span>
                         <br><span>布局：float、columns</span>
-                        <br><span>关注：</span>
-                        <br><span>实操：图文混排</span>
+                        <br><span>关注：文化自信</span>
+                        <br><span>实操：图文混排、古诗欣赏</span>
                         <br><span>拓展：Iconfont、GoogleFonts、counter</span>
                     </td>
                 </tr>
@@ -327,7 +325,7 @@
                     <td>专题：Layout - position
                         <br><span>选择器：::before、::after</span>
                         <br><span>样式：position、top、right、bottom、left、inset、z-index</span>
-                        <br><span>关注：</span>
+                        <br><span>关注：父相子绝</span>
                         <br><span>实操：购物车、返回顶部、吸顶导航、二级导航</span>
                         <br><span>拓展：float</span>
                     </td>
@@ -338,7 +336,7 @@
                         <br><span>选择器：</span>
                         <br><span>容器样式：flex、flex-direction、flex-wrap、justify-content、align-items、gap</span>
                         <br><span>子项样式：flex-grow、flex-shrink、flex-basis、flex、order</span>
-                        <br><span>关注：</span>
+                        <br><span>关注：响应式开发</span>
                         <br><span>实操：带logo主导航、面包屑导航、手风琴、版权信息</span>
                     </td>
                 </tr>
@@ -349,7 +347,7 @@
                         <br><span>容器样式：grid-template-columns、grid-template-rows、grid-template-areas、grid-area、grid-auto-rows、gap、place-items</span>
                         <br><span>子项样式：grid-column、grid-row、grid-area、justify-self、align-self</span>
                         <br><span>CSS函数：repeat()、minmax()</span>
-                        <br><span>关注：</span>
+                        <br><span>关注：响应式开发</span>
                         <br><span>实操：九宫格、万能自适应布局、全站布局、异构布局</span>
                         <br><span>拓展：Isotope</span>
                     </td>
@@ -359,8 +357,7 @@
                     <td>专题：Animation
                         <br><span>选择器：</span>
                         <br><span>样式：transition、animation</span>
-                        <br><span>CSS变量：</span>
-                        <br><span>关注：</span>
+                        <br><span>关注：站着巨人的肩膀上</span>
                         <br><span>实操：导航下划线动画、呼吸灯、表单输入、梦幻背景、加载动画</span>
                         <br><span>拓展：Animate.css、Anime、ScrollReveal、GSAP</span>
                     </td>
@@ -370,7 +367,7 @@
                     <td>专题：Transform
                         <br><span>样式：translate、rotate、scale、skew</span>
                         <br><span>实操：3D头像、3D按钮、3D魔方</span>
-                        <br><span>关注：</span>
+                        <br><span>关注：解放思想、创意无限</span>
                         <br><span>拓展：Vanilla、CSS Variable、CSS Function</span>
                         <br><span>其它：作业讲评</span>
                     </td>
