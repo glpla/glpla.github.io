@@ -15,7 +15,7 @@
         <div class="nav-item">{{item.year}}</div>
         <div class="sub-nav">
           <div class="sub-nav-item" v-for="(item,ind) in item.major" :key="item.url" @click="getData(item.url)">
-            {{item.name}}{{item.class}}班</div>
+            {{item.grade}} {{item.major}}{{item.class}}班</div>
         </div>
       </div>
       <div class="logo">
@@ -26,13 +26,7 @@
     <div class="main">
       <div class="left"></div>
       <div class="cont">
-        <!-- <div class="title">{{rank.info}}</div> -->
         <div class="title">{{title}}</div>
-        <!-- <div class="title">
-          <span>{{rank.info.grade}}</span>
-          <span>{{rank.info.major}}</span>
-          <span>{{rank.info.course}}</span>
-        </div> -->
         <div class="item" v-for="(item,ind) in rank.cont" :key="item">
           <div>{{item.usn}}</div>
           <img class='img' :src="`/utils${item.uavatar}`" alt="avatar">
@@ -50,78 +44,91 @@
     const { createApp, ref, computed, onMounted } = Vue
     createApp({
       setup() {
-        const navs = ref([
-          {
-            year: '2023',
-            major: [
-              {
-                name: '22软工',
-                url: '202301.json'
-              },
-              {
-                name: '23经济和语言',
-                url: '202302.json'
-              },
-              {
-                name: '23服装',
-                url: '202303.json'
-              },
-              {
-                name: '23播音网络',
-                url: '202304.json'
-              }
-            ]
-          },
-          {
-            year: '2024',
-            major: [
-              {
-                name: '22软工',
-                url: '202401.json',
-                class: 1
-              },
-              {
-                name: '22数媒',
-                url: '202402.json',
-                class: 1
-              },
-              {
-                name: '23软工',
-                url: '202403.json',
-                class: 1
-              },
-              {
-                name: '23软工',
-                url: '202404.json',
-                class: 2
-              },
-              {
-                name: '23软工',
-                url: '202405.json',
-                class: 3
-              },
-            ]
-          }
+        const navs = ref([{
+          year: '2024秋季',
+          major: [
+            {
+              name: '23软工',
+              grade: '2023', major: '软工', class: 1,
+              url: '20240201.json',
+            },
+            {
+              name: '23软工',
+              grade: '2023', major: '软工', class: 3,
+              url: '20240202.json',
+            },
+            {
+              name: '23数媒',
+              grade: '2023', major: '数媒', class: 1,
+              url: '20240203.json',
+            },
+            {
+              name: '23数媒',
+              grade: '2023', major: '数媒', class: 2,
+              url: '20240204.json',
+            },
+            {
+              name: '2023数媒',
+              grade: '2023', major: '数媒', class: 3,
+              url: '20240205.json',
+            },
+          ]
+        },
+        {
+          year: '2024春季',
+          major: [
+            {
+              name: '22软工',
+              grade: '2022', major: '软工', class: 1,
+              url: '202401.json',
+            },
+            {
+              name: '22数媒',
+              grade: '2022', major: '数媒', class: 1,
+              url: '202402.json',
+            },
+          ]
+        },
+        {
+          year: '2023秋季',
+          major: [
+            {
+              name: '22软工',
+              grade: '2022', major: '软工', class: 1,
+              url: '202301.json'
+            },
+            {
+              name: '23经济和语言',
+              grade: '2023', major: '经济和语言', class: 1,
+              url: '202302.json'
+            },
+            {
+              name: '23服装',
+              grade: '2023', major: '服装', class: 1,
+              url: '202303.json'
+            },
+            {
+              name: '23播音网络',
+              grade: '2023', major: '播音网络', class: 1,
+              url: '202304.json'
+            }
+          ]
+        }
         ])
         const ind = ref(0)
         const isShow = ref(false)
         const title = ref('');
         const rank = ref([]);
         const getData = (url) => {
-          // isShow.value = true;
-          // console.log(url, isShow.value);
           fetch(`/utils/data/rank/${url}`)
             .then(res => res.json())
             .then(res => {
-              console.log(res.info);
+              console.log(res);
               rank.value = res;
               title.value = `${res.info.grade} ${res.info.major} ${res.info.class} ${res.info.course}`
-              // isShow.value = false;
-              // console.log(url, isShow.value);
             })
         }
         onMounted(() => {
-          console.log('hi');
         })
         return {
           ind,
@@ -133,42 +140,6 @@
         }
       }
     }).mount('#app')</script>
-  <!-- <script>
-    let main = document.querySelector('#main');
-    let tab = document.querySelectorAll('.tab-item')
-    tab.forEach((item, ind) => {
-      item.addEventListener('click', () => {
-        loadData(`../utils/data/data2024/rank20240${ind + 1}.json`);
-        tab.forEach(item => {
-          item.classList.remove('active');
-        })
-        item.classList.toggle('active');
-      })
-    })
-    loadData('../utils/data/data2024/rank202401.json')
-    function loadData(url) {
-      let stu = [];
-      let str = '';
-      let iconStr = "<span class='iconfont icon-star'></span>"
-      fetch(url)
-        .then(res => res.json())
-        .then(res => {
-          stu = [...res.cont];
-          stu.sort((a, b) => { return b.ucredit - a.ucredit; })
-          let str = stu.map((item, ind) => {
-            return `<div class='item' style='--star:${item.ucredit}'>
-          <span class='sn'>${item.usn}</span>
-          <img class='img' src="../utils${item.uavatar}" alt="avatar">
-          <span class='name'>${item.uname}</span>
-          <div>${iconStr.repeat(item.ucredit)}</div>          
-         </div>
-          `
-          }).join('')
-          main.innerHTML = str;
-        })
-    }
-    console.log('hi'.repeat(2));
-  </script> -->
 </body>
 
 </html>
