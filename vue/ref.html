@@ -16,17 +16,17 @@
         <span>&commat;ref</span>
     </header>
     <dl>
-        <dd>HTML原生开发中，经常需要获取元素|节点，并进一步处理；更多信息，请访问<a href="../web/js/dom.html">HTML - DOM</a></dd>
-        <dd>早期流行的JQuery也是通过操作DOM实现</dd>
-        <dd>Vue中更多的是通过数据驱动的方式实现交互，但有时候避免不了仍然需要操作DOM</dd>
-        <dd>通过ref标识获取DOM节点或组件实例</dd>
-        <dd>直接获取会失败，应在组件 <span class="warn">挂载完毕onMounted</span> 再获取</dd>
-        <dd>使用时，应判断是否为空</dd>
-        <dd>该属性并不显示在结构中，F12检查元素时，不可见</dd>
-        <dd>更多使用，请访问 <a href="https://cn.vuejs.org/guide/essentials/template-refs.html">官方文档 - 模板引用</a></dd>
-        <dd>需引入包 ref</dd>
-        <!-- <dd>多组件情况下，普通的DOM获取容易产生冲突</dd> -->
         <dd>
+            <div>HTML原生开发中，经常需要获取元素|节点，并进一步处理；更多信息，请访问<a href="../web/js/dom.html">HTML - DOM</a></div>
+            <div>早期流行的JQuery也是通过操作DOM实现</div>
+            <div>Vue中更多的是通过数据驱动的方式实现交互，但有时候避免不了仍然需要操作DOM</div>
+            <div>通过ref标识获取DOM节点或组件实例</div>
+            <div>直接获取会失败，应在组件 <span class="warn">挂载完毕onMounted</span> 再获取</div>
+            <div>使用时，应判断是否为空</div>
+            <div>该属性并不显示在结构中，F12检查元素时，不可见</div>
+            <div>更多使用，请访问 <a href="https://cn.vuejs.org/guide/essentials/template-refs.html">官方文档 - 模板引用</a></div>
+            <div>需引入包 ref</div>
+            <!-- <div>多组件情况下，普通的DOM获取容易产生冲突</div> -->
             <pre>import { ref } from 'vue'</pre>
         </dd>
         <dt>获取普通DOM</dt>
@@ -108,8 +108,8 @@ onUnmounted(() => {
 })</pre>
         </dd>
         <dd class="example-sn">自定义搜索组件，单击时，显示并自动获取焦点</dd>
-        <dd>搜索组件参考设计如下</dd>
         <dd>
+            <div>搜索组件参考设计如下</div>
             <pre>
 &lt;script setup&gt;
     import { ref, onMounted } from 'vue';
@@ -122,9 +122,7 @@ onUnmounted(() => {
 &lt;template&gt;
     &lt;input type="text" ref="sql"&gt;
 &lt;/template&gt;</pre>
-        </dd>
-        <dd>父组件设计如下</dd>
-        <dd>
+            <div>父组件设计如下</div>
             <pre>
 &lt;script setup&gt;
     import { ref } from 'vue';
@@ -140,13 +138,35 @@ onUnmounted(() => {
     &lt;Search v-if="isShow"&gt;&lt;/Search&gt;
 &lt;/template&gt;</pre>
         </dd>
+        <dt>多ref</dt>
+        <dd>
+            <div>列表渲染中指定ref，将获取多个元素</div>
+            <div>必须声明为数组 [] 形式，否则无法遍历</div>
+            <pre>&lt;div v-for="(item,index) in 10" ref="navRef"&gt;{{item}}&lt;/div&gt;</pre>
+            <pre>
+const navRef = ref([])
+onMounted(() => {
+    navRef.value.forEach(item => {
+    console.log(item.innerHTML);
+    })
+})</pre>
+            <div>不建议每个子节点都标注ref属性</div>
+            <div>建议获取父节点，再根据节点关系获取子节点</div>
+        </dd>
         <dd class="example-sn">列表渲染</dd>
-        <dd>不建议每个子节点都标注ref属性</dd>
-        <dd>建议获取父节点，再根据节点关系获取子节点</dd>
         <dd>思路同事件代理</dd>
         <dd class="example-sn">单击打开弹窗；更多信息，请访问 <a href="./drill_modal.html">实操 - Modal</a></dd>
         <dd>父组件获取子组件|弹窗组件实例，执行弹窗的方法</dd>
         <dd>子组件|弹窗组件定义方法并暴露；方法利用bool将弹窗组件的隐藏状态变为显示</dd>
+    </dl>
+    <div class="chap">总结 Summary</div>
+    <dl>
+        <dd class="sn">
+            <div>用于获取元素</div>
+            <div>需引入ref</div>
+            <div>单个元素声明为null；多个元素声明为[]</div>
+            <div>使用时，应判定元素是否就绪</div>
+        </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

@@ -6,57 +6,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    nav {
-      position: relative;
-      display: flex;
-      border-bottom: 2px solid #f40;
-      gap: 10px;
-    }
-
-    .nav {
-      position: relative;
-    }
-
-    .sub-nav {
-      position: absolute;
-      max-height: 0;
-      overflow: hidden;
-    }
-
-    .nav:hover .sub-nav {
-      max-height: 50vh;
-      transition: max-height 0.5s;
+    .active {
+      color: #f40;
     }
   </style>
 </head>
 
 <body>
-  <nav>
-    <div class="nav">
-      <div class="nav-item">2025</div>
-      <div class="sub-nav">
-        <div class="sub-nav-item">Lorem.</div>
-        <div class="sub-nav-item">Vero? Lorem, ipsum.</div>
-        <div class="sub-nav-item">Est!</div>
-      </div>
-    </div>
-    <div class="nav">
-      <div class="nav-item">2024</div>
-      <div class="sub-nav">
-        <div class="sub-nav-item">Lorem.</div>
-        <div class="sub-nav-item">Vero?Lorem.</div>
-        <div class="sub-nav-item">Est! Lorem, ipsum.</div>
-      </div>
-    </div>
-    <div class="nav">
-      <div class="nav-item">2023</div>
-      <div class="sub-nav">
-        <div class="sub-nav-item">Lorem. Lorem.</div>
-        <div class="sub-nav-item">Vero?</div>
-        <div class="sub-nav-item">Est!</div>
-      </div>
-    </div>
-  </nav>
+  <div id="app">
+    <div v-for="(item,index) in 10" ref="navRef">{{item}}</div>
+  </div>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script>
+    const { createApp, ref, computed, onMounted } = Vue
+    createApp({
+      setup() {
+        const ind = ref(0)
+        const navs = ref([{ ind: 0 }, { ind: 1 }, { ind: 2 }, { ind: 3 }, { ind: 4 }])
+        const getData = (ind) => {
+          ind.value = ind
+          console.log(ind.value);
+
+        }
+        const navRef = ref([])
+        onMounted(() => {
+          navRef.value.forEach(item => {
+            console.log(item.innerHTML);
+          })
+        })
+        return {
+          ind,
+          navs, navRef,
+          getData
+        }
+      }
+    }).mount('#app')</script>
 </body>
 
 </html>

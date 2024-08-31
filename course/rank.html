@@ -11,28 +11,25 @@
 <body>
   <div class="container" id="app">
     <nav>
-      <div class="nav" :class="{active:isShow}" v-for="(item,ind) in navs" :key="item,url">
-        <div class="nav-item">{{item.year}}</div>
-        <div class="sub-nav">
-          <div class="sub-nav-item" v-for="(item,ind) in item.major" :key="item.url" @click="getData(item.url)">
-            {{item.grade}} {{item.major}}{{item.class}}班</div>
-        </div>
-      </div>
       <div class="logo">
         <span class='iconfont icon-line-medalxunzhang-02 logo-icon'></span>
         <span class="logo-title">积分榜<span class='iconfont icon-line-medalxunzhang-02'></span></span>
       </div>
+      <div class="nav" v-for="(item, index) in navs" :key="item,uear">
+        <div class="nav-item" :class="{'active':ind==item.ind}">{{item.title}}</div>
+        <div class="sub-nav">
+          <div class="sub-nav-item" :class="{'active':subind==subitem.subind && ind==item.ind}"
+            v-for="(subitem, subindex) in item.cont" :key="subitem.url" @click="getData(subitem.url, $event)"
+            :data-ind="item.ind" :data-subind="subindex"> {{subitem.desc}} </div>
+        </div>
+      </div>
     </nav>
     <div class="main">
-      <div class="left"></div>
-      <div class="cont">
-        <div class="title">{{title}}</div>
-        <div class="item" v-for="(item,ind) in rank.cont" :key="item">
-          <div>{{item.usn}}</div>
-          <img class='img' :src="`/utils${item.uavatar}`" alt="avatar">
-          <span class='name'>{{item.uname}}</span>
-          <div><span class='iconfont icon-star' v-for="star in item.ucredit"></span></div>
-        </div>
+      <div class="item" v-for="(item,ind) in rank.cont" :key="item">
+        <div>{{item.usn}}</div>
+        <img class='img' :src="`/utils${item.uavatar}`" alt="avatar">
+        <span class='name'>{{item.uname}}</span>
+        <div><span class='iconfont icon-star' v-for="star in item.ucredit"></span></div>
       </div>
     </div>
     <footer>
@@ -41,105 +38,118 @@
   </div>
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   <script>
-    const { createApp, ref, computed, onMounted } = Vue
+    const { createApp, ref, computed, onMounted, watch } = Vue
     createApp({
       setup() {
         const navs = ref([{
-          year: '2024秋季',
-          major: [
+          ind: 0,
+          title: '2024秋季',
+          cont: [
             {
-              name: '23软工',
-              grade: '2023', major: '软工', class: 1,
+              subind: 0,
+              desc: '2023软工1班',
               url: '20240201.json',
             },
             {
-              name: '23软工',
-              grade: '2023', major: '软工', class: 3,
+              subind: 1,
+              desc: '2023软工3班',
               url: '20240202.json',
             },
             {
-              name: '23数媒',
-              grade: '2023', major: '数媒', class: 1,
+              subind: 2,
+              desc: '2023数媒1班',
               url: '20240203.json',
             },
             {
-              name: '23数媒',
-              grade: '2023', major: '数媒', class: 2,
+              subind: 3,
+              desc: '2023数媒2班',
               url: '20240204.json',
             },
             {
-              name: '2023数媒',
-              grade: '2023', major: '数媒', class: 3,
+              subind: 4,
+              desc: '2023数媒3班',
               url: '20240205.json',
             },
           ]
         },
         {
-          year: '2024春季',
-          major: [
+          ind: 1,
+          title: '2024春季',
+          cont: [
             {
-              name: '22软工',
-              grade: '2022', major: '软工', class: 1,
+              subind: 0,
+              desc: '2022软工1班',
               url: '202401.json',
             },
             {
-              name: '22数媒',
-              grade: '2022', major: '数媒', class: 1,
+              desc: '2022数媒1班',
               url: '202402.json',
+              subind: 1,
             },
           ]
         },
         {
-          year: '2023秋季',
-          major: [
+          ind: 2,
+          title: '2023秋季',
+          cont: [
             {
-              name: '22软工',
-              grade: '2022', major: '软工', class: 1,
-              url: '202301.json'
+              subind: 0,
+              desc: '2022软工1班',
+              url: '202301.json',
             },
             {
-              name: '23经济和语言',
-              grade: '2023', major: '经济和语言', class: 1,
-              url: '202302.json'
+              subind: 1,
+              desc: '2023经济和语言1班',
+              url: '202302.json',
             },
             {
-              name: '23服装',
-              grade: '2023', major: '服装', class: 1,
-              url: '202303.json'
+              subind: 2,
+              desc: '2023服装1班',
+              url: '202303.json',
             },
             {
-              name: '23播音网络',
-              grade: '2023', major: '播音网络', class: 1,
-              url: '202304.json'
+              subind: 3,
+              desc: '2023播音网络1班',
+              url: '202304.json',
             }
           ]
         }
         ])
-        const ind = ref(0)
-        const isShow = ref(false)
-        const title = ref('');
+        const ind = ref(null)
+        const subind = ref(null)
         const rank = ref([]);
-        const getData = (url) => {
+        const subNav = ref([])
+        const getData = (url, $event) => {
           fetch(`/utils/data/rank/${url}`)
             .then(res => res.json())
             .then(res => {
-              console.log(res);
               rank.value = res;
-              title.value = `${res.info.grade} ${res.info.major} ${res.info.class} ${res.info.course}`
+              ind.value = $event.target.dataset.ind;
+              subind.value = $event.target.dataset.subind;
+              console.log(subNav.value);
+
+              subNav.value.forEach(item => {
+                console.log(item);
+                item.classList.remove('active');
+              });
             })
         }
+
         onMounted(() => {
+          console.log(ind.value, subind.value, subNav.value);
         })
+
         return {
-          ind,
-          isShow,
           navs,
-          title,
+          ind,
+          subind,
           rank,
-          getData
+          subNav,
+          getData,
         }
       }
-    }).mount('#app')</script>
+    }).mount('#app')
+  </script>
 </body>
 
 </html>

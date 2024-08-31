@@ -60,13 +60,14 @@ nav {
 
 .nav {
   cursor: pointer;
+  position: relative;
 }
 
-.nav:hover .nav-item {
+.nav:hover .nav-item,
+.nav-item.active {
   color: var(--main-color);
 }
 
-.nav.active .sub-nav,
 .nav:hover .sub-nav {
   max-height: 100vh;
   transition: max-height 0.5s ease-in-out;
@@ -74,17 +75,21 @@ nav {
 
 .sub-nav {
   position: absolute;
+  right: 0;
   max-height: 0;
+  width: max-content;
   overflow: hidden;
   line-height: 2;
+  text-align: right;
 }
 
-.sub-nav-item:hover {
+.sub-nav-item:hover,
+.sub-nav-item.active {
   color: var(--main-color);
 }
 
 .logo {
-  margin-left: auto;
+  margin-right: auto;
   color: var(--main-color);
 }
 
@@ -100,34 +105,18 @@ nav {
   position: relative;
   width: 100%;
   height: 70vh;
-}
-
-.left {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  max-width: 512px;
-  height: 100%;
   background-image: url(https://cdn.pixabay.com/photo/2024/06/06/07/24/man-8812061_640.png);
-  background-size: 50%;
+  background-size: 30%;
   background-repeat: no-repeat;
-  background-position: left bottom;
-}
-
-.cont {
-  position: absolute;
-  right: 0;
-  width: 100%;
-  max-width: 512px;
-  height: 100%;
+  background-position: right bottom;
   overflow-y: auto;
 }
 
-.cont::-webkit-scrollbar {
+.main::-webkit-scrollbar {
   width: 8px;
 }
 
-.cont::-webkit-scrollbar-thumb {
+.main::-webkit-scrollbar-thumb {
   background-image: linear-gradient(transparent, var(--main-color));
 }
 
