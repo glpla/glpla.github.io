@@ -89,6 +89,20 @@
         transform: rotatex(30deg) rotateY(60deg) rotateZ(360deg);
       }
     }
+
+    .svg {
+      width: max-content;
+      margin: 2rem auto;
+    }
+
+    svg {
+      background-color: #f2f3f4;
+    }
+
+    text {
+      font-size: 15px;
+      fill: #fff;
+    }
   </style>
 </head>
 
@@ -100,19 +114,45 @@
   <dl>
     <dt>概述 Overview</dt>
     <dd>
-      <div>. HTML - 超文本标记语言 HyperText Mark Language；这里的标记就是标签 Tag</div>
       <div>. 标签是组成HTML页面的基本元素；一般情况下，标签和元素不做严格区分，二者可以互用</div>
-      <div>. 标签由 &lt;&gt; 包裹关键字组成，分开始标签 <span class="warn">&lt;&gt;</span> 和结束标签 <span class="warn">&lt;/&gt;</span>
+      <div>. 标签由 <span class="warn">&lt;&gt;</span> 包裹关键字组成，分：开始标签 <span class="warn">&lt;&gt;</span> 和结束标签 <span
+          class="warn">&lt;/&gt;</span>
       </div>
       <div>. 大部分标签有开始标签和结束标签；少量标签是单标签，如&lt;img&gt;、&lt;input&gt;</div>
-      <div>少量标签是复合标签，需要搭配其它标签一起使用，如&lt;figure&gt;和&lt;figcaption&gt;</div>
-      <div>. 不同的标签具有不同的语义，不能随便使用，应按照实际用途和需求<span class="warn">按需</span>选择|添加标签使用</div>
+      <div>. 还有少量标签是复合标签，需要搭配其它标签一起使用，如&lt;figure&gt;和&lt;figcaption&gt;</div>
+      <div>. 不同的标签具有不同的 <span class="warn">语义</span>，不能随便使用，应按照实际用途和需求 <span class="warn">按需</span> 选择|添加使用</div>
       <div>. 标签对大小写不敏感；万维网联盟W3C推荐使用小写</div>
-      <div class="tips">无需背记标签的形式，基本的开发环境都会自动检测并完成，除非你使用记事本</div>
+      <div class="tips">
+        <div>&lt;head&gt;中的标签多为单标签；&lt;body&gt;中的标签多为双标签</div>
+        <div>无需背记标签的形式，基本的开发环境都会自动检测并完成，除非你使用记事本</div>
+      </div>
     </dd>
     <dt>常见标签 Tags</dt>
+    <dd>
+      <figure class="svg">
+        <svg width="350" height="480">
+          <rect x="10" y="10" width="330" height='40' fill="#090"></rect>
+          <text x="175" y="30" text-anchor="middle" dominant-baseline="central">&lt;head&gt;</text>
+          <rect x="10" y="60" width="330" height='430' fill="#095"></rect>
+          <text x="175" y="80" text-anchor="middle" dominant-baseline="central">&lt;body&gt;</text>
+          <rect x="20" y="110" width="310" height='40' fill="#098"></rect>
+          <text x="175" y="130" text-anchor="middle" dominant-baseline="central">&lt;nav&gt;</text>
+          <rect x="20" y="160" width="200" height='80' fill="#098"></rect>
+          <text x="70" y="180" text-anchor="middle" dominant-baseline="central">&lt;article&gt;</text>
+          <rect x="230" y="160" width="100" height='260' fill="#098"></rect>
+          <text x="280" y="180" text-anchor="middle" dominant-baseline="central">&lt;aside&gt;</text>
+          <rect x="20" y="250" width="200" height='80' fill="#098"></rect>
+          <text x="70" y="270" text-anchor="middle" dominant-baseline="central">&lt;article&gt;</text>
+          <rect x="20" y="340" width="200" height='80' fill="#098"></rect>
+          <text x="70" y="360" text-anchor="middle" dominant-baseline="central">&lt;article&gt;</text>
+          <rect x="20" y="430" width="310" height='40' fill="#098"></rect>
+          <text x="175" y="450" text-anchor="middle" dominant-baseline="central">&lt;footer&gt;</text>
+        </svg>
+        <figcaption>html标签结构</figcaption>
+      </figure>
+    </dd>
     <dd class="sn">
-      <div>页面结构标签</div>
+      <div>页面标签</div>
       <p>. 有了这些标签，文件才能称之为HTML页面</p>
       <table>
         <colgroup>
@@ -135,7 +175,8 @@
           <td>HTML页面主体元素；包括脚本标签&lt;script&gt;</td>
         </tr>
       </table>
-      <div>页面结构化元素标签</div>
+      <div>框架结构标签</div>
+      <p>. 对&lt;body&gt;区的划分 - <span class="warn">Layout 布局</span></p>
       <p>. 划分页面各区域时对应的标签，构建页面框架，更好的体现对应的功能，方便搜索引擎使用</p>
       <table>
         <colgroup>
@@ -186,7 +227,7 @@
           <td>paragraph；段落</td>
         </tr>
       </table>
-      <div>页面普通元素标签</div>
+      <div>普通元素标签</div>
       <p>. 页面的内容|细节呈现</p>
       <table>
         <colgroup>
@@ -202,7 +243,7 @@
         </tr>
         <tr>
           <td><a href="./img.html">&lt;img&gt;</a></td>
-          <td>image；图像；多使用&lt;picture&gt;或&lt;figure&gt;代替</td>
+          <td>image；图像；多使用&lt;figure&gt;或&lt;picture&gt;代替</td>
         </tr>
         <tr>
           <td><a href="./imgfigure.html">&lt;figure&gt;</a></td>
@@ -214,16 +255,27 @@
         </tr>
         <tr>
           <td><a href="./list.html">&lt;ul&gt;&lt;ol&gt;&lt;li&gt;&lt;dl&gt;&lt;dt&gt;&lt;dd&gt;</a></td>
-          <td>unordered list有序/ordered list无序列表；其子标签只能是列表项&lt;li&gt;<br>
-            defined list自定义列表；其子标签只能是：&lt;dt&gt;、t:title；&lt;dd&gt;、d:description</td>
+          <td>&lt;ul&gt;；unordered list 有序列表；其子标签只能是列表项&lt;li&gt;
+            <br>&lt;ol&gt;；ordered list 无序列表；其子标签只能是列表项&lt;li&gt;
+            <br>&lt;dl&gt;；defined list 自定义列表；其子标签只能是：&lt;dt&gt;、t:title；&lt;dd&gt;、d:description
+          </td>
         </tr>
         <tr>
           <td><a href="./table.html">&lt;table&gt;</a></td>
-          <td>表格，包括：行&lt;tr&gt;；标题行单元格&lt;th&gt;、普通单元格&lt;td&gt;</td>
+          <td>表格；由行列组成
+            <br>&lt;tr&gt;；行
+            <br>&lt;th&gt;；标题行单元格
+            <br>&lt;td&gt;；普通单元格
+          </td>
         </tr>
         <tr>
           <td><a href="./form.html">&lt;form&gt;</a></td>
-          <td>表单，包括：&lt;input&gt;单行文本输入框、单选、多选；&lt;textarea&gt;多行文输入本框；&lt;button&gt;按钮等</td>
+          <td>表单
+            <br>&lt;input&gt;；单行文本输入框、单选、多选
+            <br>&lt;textarea&gt;；多行文输入本框
+            <br>&lt;select&gt;；下拉列表
+            <br>&lt;button&gt;；按钮等
+          </td>
         </tr>
         <tr>
           <td><a href="./iframe.html">&lt;iframe&gt;</a></td>
@@ -287,14 +339,15 @@
     </dd>
     <dt>标签属性 Attribute</dt>
     <dd>
-      <div>. HTML 标签可以拥有属性。属性提供的更多的元素信息，如类、ID、名称、值、数据等等</div>
+      <div>. HTML 标签可以拥有属性。属性提供更多元素信息，如类、ID、名称、值、数据等等</div>
       <div>. 不同的标签所拥有的属性不完全相同，如&lt;a&gt;有专有的href属性；&lt;img&gt;有专有的alt属性；两者都有通用的title属性</div>
-      <div>. 属性总是以名称name/值value的形式出现，通常称为<span class="warn">值对</span>，如：class="warn"，其中class是名称，warn是值</div>
+      <div>. 属性总是以<span class="warn">值对</span>的形式出现：名称name/值value；如：class="warn"，其中class是名称，warn是值</div>
       <div>. 请始终为属性值添加引号：双引号或单引号，并保持引号类型一致，不能混用</div>
       <div>. 属性总是在开始标签中指定</div>
       <div>. 部分元素的属性可以省略属性值，多见于布尔类型，如disabled，有该属性，元素被禁止；没有则正常使用</div>
       <div>. 部分元素建议必须使用某些属性，如&lt;img&gt;，请始终使用 alt 属性，当图像无法显示时给出提示</div>
-      <div>. 以上提及的都是HTML元素的<span class="warn">原生</span>属性；实际开发过程中，多使用框架，如Vue，这些框架具有自己特定的属性，如@click、:class等等</div>
+      <div class="tips">以上为HTML元素的<span class="warn">原生</span>属性；实际开发过程中，多使用框架，如Vue，这些框架具有自己特定的属性，如@click、:class等等
+      </div>
       <table>
         <colgroup>
           <col style="width: 30%;">
@@ -304,12 +357,12 @@
           <th>说明</th>
         </tr>
         <tr>
-          <td>class</td>
-          <td>类样式属性；一个元素可以指定多个类，以空格分隔</td>
-        </tr>
-        <tr>
           <td>id</td>
           <td>ID属性，唯一标识元素</td>
+        </tr>
+        <tr>
+          <td>class</td>
+          <td>类样式属性；一个元素可以指定多个类，以空格分隔</td>
         </tr>
         <tr>
           <td>style</td>
@@ -343,62 +396,64 @@
           <td>hidden</td>
           <td>隐藏属性</td>
         </tr>
+        <tr>
+          <td>checked</td>
+          <td>选中属性</td>
+        </tr>
+        <tr>
+          <td>selected</td>
+          <td>选中属性</td>
+        </tr>
       </table>
     </dd>
-    <dt>标签分类 Classification</dt>
+  </dl>
+  <div class="chap">标签分类 Classification</div>
+  <dl>
     <dd>. 使用显示模式display区分标签种类</dd>
-    <dd>. 每个元素有自己默认的显示模式，不需要指定</dd>
-    <dd>. 根据设计需要，元素的显示模式可以<span class="warn">相互转换</span>；如&lt;a&gt;转换为块元素，通常转换成块级元素更方便、安全</dd>
-    <dd>1. 按占位/宽度</dd>
-    <dd>
-      <div>
-        <div>1.1 内联元素 inline</div>
-        <div>. 也称行内元素，<span class="warn">行盒</span></div>
-        <pre>display: inline;</pre>
-        <div>. 根据本身宽度占有空间，在文档流中从左到右依次显示</div>
-        <div>. 满行时候切换到下一行重新开始</div>
-        <div>. 不能设置宽度，不会独占一行</div>
-        <div>. 内联元素和文字一样，并不是紧紧挨着，而是有一定的间隙</div>
-        <div>. &lt;a&gt; &lt;img&gt; &lt;i&gt; &lt;span&gt; &lt;label&gt; &lt;small&gt;</div>
-      </div>
-      <div>
-        <div>1.2 行内块元素 inline-block</div>
-        <pre>display: inline-block;</pre>
-        <div>. 可以设置宽度的内联元素</div>
-        <div>. 在文档流中的排列方式同inline</div>
-        <div>. 数量很少</div>
-        <div>. &lt;input&gt; &lt;button&gt;</div>
-      </div>
-      <div>
-        <div>1.3 块级元素 block</div>
-        <pre>display: block;</pre>
-        <div>. 独占一行，也称<span class="warn">块盒</span></div>
-        <div>. 可以设置宽度</div>
-        <div>. 在文档流中从上到下依次排列</div>
-        <div>. 大部分标签都是块级元素；很多结构化的标签，如&lt;header&gt;本质上都是块元素</div>
-      </div>
-    </dd>
-    <dd>1.4 布局类元素</dd>
-    <dd>
-      <div><a href="./flex.html">弹性盒子 - flex</a></div>
+    <dd>. 每个元素有自己默认的显示模式</dd>
+    <dd>. 根据设计需要，元素的显示模式可以<span class="warn">相互转换</span>；如通常将&lt;a&gt;转换为块元素更方便、安全</dd>
+    <dt>按占位/宽度</dt>
+    <dd class="sn">
+      <div>内联元素 <span class="warn">inline</span></div>
+      <pre>display: inline;</pre>
+      <p>. 也称行内元素，<span class="warn">行盒</span></p>
+      <p>. 根据本身宽度占有空间，在文档流中从左到右依次显示</p>
+      <p>. 不能设置宽度，不会独占一行</p>
+      <p>. 满行时候切换到下一行重新开始</p>
+      <p>. 内联元素和文字一样，并不是紧紧挨着，而是有一定的间隙</p>
+      <p>. 常见的有：&lt;a&gt; &lt;img&gt; &lt;i&gt; &lt;span&gt; &lt;label&gt; &lt;small&gt;</p>
+      <div>行内块元素 <span class="warn">inline-block</span></div>
+      <pre>display: inline-block;</pre>
+      <p>. 可以设置宽度的内联元素</p>
+      <p>. 在文档流中的排列方式同inline</p>
+      <p>. 数量很少： &lt;input&gt; &lt;button&gt;</p>
+      <div>块级元素 <span class="warn">block</span></div>
+      <pre>display: block;</pre>
+      <p>. 也称<span class="warn">块盒</span></p>
+      <p>. 可以设置宽度</p>
+      <p>. 独占一行，在文档流中从上到下依次排列</p>
+      <p>. 大部分标签都是块级元素；很多结构化的标签，如&lt;header&gt;本质上都是块元素</p>
+      <div>布局类元素</div>
+      <p><a href="./flex.html">弹性盒子 - flex</a></p>
       <pre>display: flex;</pre>
-      <div> <a href="./grid.html">网格 - grid</a></div>
+      <p> <a href="./grid.html">网格 - grid</a></p>
       <pre>display: grid;</pre>
-    </dd>
-    <dd>1.5 表格类元素</dd>
-    <dd>
-      <div>. 特指table系列的元素，特性类似inline-block；特意区分的目的之一是为了更高效的渲染页面</div>
-      <div>. 修改表格元素的模式，可以实现特定的应用；更多信息，请访问 <a href="./table.html">表格 - table</a></div>
-      <div>&lt;tabel&gt;</div>
-      <pre>display: table;</pre>
-      <div>&lt;tr&gt;</div>
-      <pre>display: table-row;</pre>
-      <div>&lt;td&gt; &lt;th&gt; </div>
-      <pre>display: table-cell;</pre>
+      <div>表格类元素</div>
+      <p>. 特指table系列的元素，特性类似inline-block；特意区分的目的之一是为了更高效的渲染页面</p>
+      <p>. 修改表格元素的模式，可以实现特定的应用；更多信息，请访问 <a href="./table.html">表格 - table</a></p>
+      <pre>
+// &lt;tabel&gt;
+display: table;
+
+// &lt;tr&gt;
+display: table-row;
+
+// &lt;td&gt; &lt;th&gt; 
+display: table-cell;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 使用浏览器的检查功能，查看常见元素的默认display</dd>
-    <dd>2. 按语义</dd>
-    <dd>. 语义化标签：semantic，清晰地定义其内容，大部分标签都是，如&lt;form&gt;、&lt;table&gt;</dd>
+    <dt>按语义</dt>
+    <dd>. 语义化 semantic 标签：清晰地定义其内容；大部分标签都是，如&lt;form&gt;、&lt;table&gt;</dd>
     <dd>.
       非语义化标签：无法提供关于其内容的信息，仅仅作为容器/载体使用，如&lt;div&gt;、&lt;span&gt;、&lt;i&gt;；多用于布局和功能型拓展，如大部分字体图标都是依托&lt;span&gt;、&lt;i&gt;实现，已经失去了其标签本意
     </dd>
@@ -406,14 +461,9 @@
       <div>. 页面不单单是给人看的，更是给计算机看的；在给人看之前，首先要给计算机看</div>
       <div>. 规范的Web页面，可以让计算机和人更加高效的理解和处理文档</div>
       <div>. 在正确的地方使用正确的标签，创建有意义的Web页面</div>
-      <div>1. 结构化：见文知结构</div>
-      <div>2. 语义化：见文知用途</div>
+      <div>1. 结构化：见者知内容</div>
+      <div>2. 语义化：见者知用途</div>
     </dd>
-  </dl>
-  <div class="chap">作业与练习</div>
-  <dl>
-    <dt>思考</dt>
-    <dd>1. 合理使用标签规划并创建个人网站</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
