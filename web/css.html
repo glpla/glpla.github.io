@@ -14,6 +14,7 @@
       margin: 2rem auto;
     }
 
+    /* 内部样式 */
     svg {
       background-color: #f2f3f4;
     }
@@ -35,9 +36,8 @@
     <span>&commat;CSS</span>
     <span class="ham iconfont icon-menu"></span>
     <nav class="nav">
-      <a href="" style="--delay:0" class="nav-item">概述 Overview</a>
-      <a href="" style="--delay:1" class="nav-item">使用 Usage</a>
-      <a href="" style="--delay:2" class="nav-item">盒模型 BoxModel</a>
+      <a href="" style="--delay:1" class="nav-item">概述 Overview</a>
+      <a href="" style="--delay:2" class="nav-item">使用 Usage</a>
       <a href="" style="--delay:3" class="nav-item">特性 Features</a>
       <a href="" style="--delay:5" class="nav-item">选择器 Selector</a>
       <a href="" style="--delay:4" class="nav-item">属性 Attributes</a>
@@ -73,26 +73,27 @@
     <dd>
       <div>使用 style 属性为元素定义样式</div>
       <div>定义的样式仅适合于当前元素</div>
-      <div>通常配合JS来动态改变</div>
-      <div>行内样式不符合结构样式分离的开发原则</div>
       <div>行内样式具有最高优先级，并且将覆盖外部和内部样式以及浏览器默认样式</div>
       <div>style还可以指定 <a href="./variable.html">内联变量</a> 供当前元素的样式使用；内联样式和内联变量互不影响</div>
+      <div>通常配合JS来动态改变</div>
+      <div>不符合结构-样式-逻辑分离的开发原则</div>
     </dd>
     <dt>内部样式</dt>
     <dd>
-      <div>在 HTML 页面 &lt;head&gt; 中使用 &lt;style&gt; 定义样式</div>
+      <div>在 HTML 页面 &lt;head&gt; 区使用 &lt;style&gt; 定义样式</div>
       <div>适用当前HTML页面多个元素</div>
       <div>不可跨页面使用</div>
-      <div>行内样式不符合结构样式分离的开发原则</div>
+      <div>不符合结构-样式-逻辑分离的开发原则</div>
     </dd>
     <dt>外部样式</dt>
     <dd>
-      <div>在外部文件中定义；后缀是 <span class="warn">.css</span>；可以使用任何文本编辑器编写</div>
-      <div>在 HTML 页面 &lt;head&gt; 中使用 &lt;link&gt;引入</div>
-      <div>外部 .css 文件不应包含任何 HTML 标签</div>
+      <div>样式在外部文件中定义；后缀 <span class="warn">.css</span>；可以使用任何文本编辑器编写</div>
+      <div>在 HTML 页面 &lt;head&gt; 中使用 &lt;link&gt;引入样式文件</div>
+      <div>可以在样式文件中使用 @import 导入其它样式文件</div>
+      <div>样式文件不能包含任何 HTML 标签</div>
       <div>适合多个HTML页面、多个元素</div>
       <div>可以缓存到本地，加快页面访问速度</div>
-      <div>符合结构样式分离的开发原则</div>
+      <div>符合结构-样式-逻辑分离的开发原则</div>
       <pre>
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
@@ -101,9 +102,16 @@
     &lt;meta charset="UTF-8"&gt;
     &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;link rel="stylesheet" href="./css/style.css"&gt;//外部样式
-    &lt;style&gt;//内部样式
+    &lt;title&gt;CSS introduction&lt;/title&gt;
+
+    /* 外部样式 - link */
+    &lt;link rel="stylesheet" href="./css/style.css"&gt;
+
+    /* 内部样式 - style */
+    &lt;style&gt;
+      /* 引入其它样式文件 */
+      @import url(https://at.alicdn.com/t/c/font_3859342_yxk1peemmtq.css);
+
         body {
             margin: 0;
             padding: 0;
@@ -111,16 +119,20 @@
         }
 
         .p-txt {
-            color: var(--txt-wran-color);//使用全局变量
-            opacity: var(--sn);//使用局部变量
+            /* 全局变量 */
+            color: var(--txt-wran-color);
+            /* 局部变量 */
+            opacity: var(--sn);
         }
     &lt;/style&gt;
 &lt;/head&gt;
 
 &lt;body&gt;
-  &lt;h1 style="color: #F40;"&gt;hello, world&lt;/h1&gt;//内联样式
-  &lt;p class=“p-txt” style="--sn: 0.1;"&gt;第1段&lt;/p&gt;//内联变量
-  &lt;p class=“p-txt” style="--sn: 0.3;"&gt;第2段&lt;/p&gt;//内联变量
+  &lt;!-- 内联样式 --&gt;
+  &lt;h1 style="color: #F40;"&gt;hello, world&lt;/h1&gt;
+  &lt;!-- 内联变量 --&gt;
+  &lt;p class=“p-txt” style="--sn: 0.1;"&gt;第1段&lt;/p&gt;
+  &lt;p class=“p-txt” style="--sn: 0.3;"&gt;第2段&lt;/p&gt;
 &lt;/body&gt;
 
 &lt;/html&gt;</pre>
@@ -135,89 +147,11 @@
 }</pre>
     </dd>
     <dd class="tips">
-      <div>1. 几种形式的使用可以并存；最后哪个样式生效，由其代表的优先级决定，请参考后续内容和 <a href="./selector0.html">选择器 - selector</a></div>
+      <div>1. 几种形式的使用可以并存；最后哪个样式生效，由其代表的优先级决定，请参考后续内容和 <a href="./selector.html">选择器 - selector</a></div>
       <div>2. 编码：可以指定CSS文件的编码，特别是有中文存在时，必须指定；通常不需要指定，因为不推荐使用中文；指定编码必须在CSS文件第一行</div>
       <div>3. 变量：可以声明CSS全局变量，便于修改和调整：一处修改，多处更新；还可以在元素上以style的形式声明内联变量；更多变量内容，请参考 <a href="./variable.html">CSS -
           variable</a>
       </div>
-      <div>4. 导入：可以在CSS中使用 @import 引入其它CSS文件</div>
-    </dd>
-  </dl>
-  <div class="chap">盒模型 Box Model</div>
-  <dl class="nav-cont">
-    <dd>
-      <div>. 每个HTML元素都可以看作是一个盒子，由内容 content、填充 padding、边框 border和外边距 margin组成</div>
-      <div class="basic"><img src="./imgs/box.png" alt=""></div>
-      <table>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>width</td>
-          <td>元素内容区宽度</td>
-        </tr>
-        <tr>
-          <td>height</td>
-          <td>元素内容区高度</td>
-        </tr>
-        <tr>
-          <td>padding</td>
-          <td>元素填充，也称内边距、内填充
-            <br>可以单独设置元素4个方向的内边距：padding-top | padding-right | padding-bottom | padding-left
-          </td>
-        </tr>
-        <tr>
-          <td>border</td>
-          <td>元素边框
-            <br>可以单独设置元素4个方向的边框：border-top | border-right | border-bottom | border-left
-          </td>
-        </tr>
-        <tr>
-          <td>margin</td>
-          <td>元素到其它元素之间的距离，也称外边距、外填充、空白
-            <br>可以单独设置元素4个方向的外边距：margin-top | margin-right | margin-bottom | margin-left；<span
-              class="warn">负边距</span>也有很惊艳的表现
-          </td>
-        </tr>
-      </table>
-    </dd>
-    <dd>[<span class="iconfont icon-bell"></span>] 以鸡蛋为例，分别说明每一部分对应元素的哪个属性？</dd>
-    <dd class="basic">
-      <img src="./imgs/egg.jpg" alt="">
-    </dd>
-    <dd>[<span class="iconfont icon-a-ziyuan4"></span>] 过渡包装</dd>
-    <dt>盒子尺寸计算模式 box-sizing</dt>
-    <dd>
-      <div>默认情况下，设置的宽度width和高度height是内容区的宽度和高度；所以：元素盒子的实际尺寸应该是在宽度width/高度height的基础上，再加上边框border和填充padding</div>
-      <pre>
-元素的实际宽度 = width + padding-left + padding-right + border-left + border-right
-元素的实际高度 = height + padding-top + padding-bottom + border-top + border-bottom</pre>
-      <div>因此，设置元素宽度和高度时，元素的实际尺寸比设置的<span class="warn">更大</span>；多数情况下，为了不破坏页面布局，希望设置的元素尺寸就是元素的实际尺寸；CSS属性 box-sizing
-        允许我们选择元素计算尺寸的模式</div>
-      <div>content-box：默认模式，元素尺寸不包括padding和border</div>
-      <div>border-box：元素尺寸包括padding和border；通常在CSS初始化样式表中指定</div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] content-box和border-box的元素大小</dd>
-    <dd>
-      <pre>
-.box {
-  width: 400px;
-  height: 300px;
-  padding: 10px;
-  border: 5px solid #ddd;
-  box-sizing: border-box;//content-box
-}      </pre>
-      <img src="./imgs/boxsizing.png" alt="">
-    </dd>
-    <dd class="tips">
-      <div>. padding、border、margin这三个属性有4个方向的体现，所以样式值的多少分别对应着不同的方向</div>
-      <div>1个值：4个方向都一样</div>
-      <div>2个值：上下对应第一个值；左右对应第二个值</div>
-      <div>3个值：上对应第一个值；左右对应第二个值；下对应第三个值</div>
-      <div>4个值：分别对应上、右、下、左四个方向/顺时针</div>
-      <div>对指定了大小的块元素而言，margin: xxx auto;可以使其在父元素盒子内水平居中</div>
-      <div>垂直方向居中需要结合实际情况综合考虑，见后续内容</div>
     </dd>
   </dl>
   <div class="chap">特性 Features</div>
@@ -231,7 +165,7 @@
     <dd>
       <div>. CSS文件是按照从上到下的顺序执行；因此，同一个元素的样式，后面的样式会覆盖前面的样式</div>
       <div>. 特别要注意：样式的叠加和元素上样式类的书写顺序无关，和CSS文件中的顺序有关</div>
-      <div>. 有利用实现类的复用</div>
+      <div>. 有利于实现类的复用</div>
       <div>. 同类型多个功能按钮往往需要先指定公共样式，包括静态样式、动态样式，再根据功能指定专有样式</div>
       <div class="svg">
         <svg width="350" height="160">
@@ -249,7 +183,7 @@
       <div>. 一般来说，多个样式同时作用于一个元素时，由优先级决定；</div>
       <div>. 优先级高的样式会覆盖优先级低的；同时还要结合不同 <a href="./selector0.html">选择器 -
           selector</a> 共同决定</div>
-      <div>. 样式异常或无效，请使用浏览器的开发者工具视图检查：按F12打开并检查</div>
+      <div>. 样式异常或无效，请使用浏览器的开发者工具视图检查：按 <span class="warn">F12</span> 打开并检查</div>
       <div class="svg">
         <svg width="350" height="210">
           <rect x="10" y="10" width="330" fill="#090"></rect>
@@ -309,7 +243,7 @@
   </dl>
   <div class="chap">选择器 Selector</div>
   <dl class="nav-cont">
-    <dd>选择html元素，以便指定样式</dd>
+    <dd>选择HTML元素，以便指定/应用样式</dd>
     <dd>可以选择1个元素；也可以选择多个元素</dd>
     <dt>基本选择器</dt>
     <dd>

@@ -6,41 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    .active {
-      color: #f40;
+    img,
+    audio,
+    video {
+      width: 100px;
     }
   </style>
 </head>
 
 <body>
-  <div id="app">
-    <div v-for="(item,index) in 10" ref="navRef">{{item}}</div>
-  </div>
-  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-  <script>
-    const { createApp, ref, computed, onMounted } = Vue
-    createApp({
-      setup() {
-        const ind = ref(0)
-        const navs = ref([{ ind: 0 }, { ind: 1 }, { ind: 2 }, { ind: 3 }, { ind: 4 }])
-        const getData = (ind) => {
-          ind.value = ind
-          console.log(ind.value);
-
-        }
-        const navRef = ref([])
-        onMounted(() => {
-          navRef.value.forEach(item => {
-            console.log(item.innerHTML);
-          })
-        })
-        return {
-          ind,
-          navs, navRef,
-          getData
-        }
-      }
-    }).mount('#app')</script>
+  <a href="">123</a>
+  <span>Lorem.</span>
+  <i>Lorem, ipsum.</i>
+  <div>Lorem, ipsum dolor.</div>
+  <img src="./imgs/81.jpeg" alt="">
+  <input type="text" name="" id="" value="123">
+  <button>click</button>
+  <label for="">asdf</label>
+  <audio src="./utils/music/1.mp3" controls></audio>
+  <video src="./utils/video/alizee.mp4" controls></video>
 </body>
 
 </html>
