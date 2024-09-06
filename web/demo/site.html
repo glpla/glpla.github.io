@@ -17,7 +17,10 @@
     <div class="item header">header</div>
     <div class="item nav">
       <div class="logo"></div>
-      <nav>
+      <div class="ham" id="ham">
+        <span class="iconfont icon-menu"></span>
+      </div>
+      <nav id="nav">
         <div class="nav-item"><span class="iconfont icon-example"></span><span class="nav-title">Lorem.</span></div>
         <div class="nav-item"><span class="iconfont icon-timerauto"></span><span class="nav-title">Porro!</span></div>
         <div class="nav-item"><span class="iconfont icon-bangzhu2"></span><span class="nav-title">Corrupti!</span></div>
@@ -119,6 +122,13 @@
     <div class="item footer">All rights reserved © glpla 2022-2026</div>
   </div>
   <script src="/utils/lib/echarts.min.js"></script>
+  <script>
+    const nav = document.getElementById('nav');
+    const ham = document.getElementById('ham')
+    ham.addEventListener('click', () => {
+      nav.classList.toggle('active')
+    })
+  </script>
   <script>
     // 获取元素
     const stats = document.getElementById('stats')

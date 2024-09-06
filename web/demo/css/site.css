@@ -156,8 +156,13 @@ body {
   grid-area: update4;
 }
 
+.ham {
+  display: none;
+}
+
 .logo {
   width: 60%;
+  max-width: 120px;
   aspect-ratio: 1/1;
   margin: var(--p-m-g) auto calc(2*var(--p-m-g));
   border-radius: 50%;
@@ -209,4 +214,43 @@ body {
   overflow: hidden;
 }
 
-@media screen and (max-width:768px) {}
+@media screen and (max-width:768px) {
+
+  .page {
+    display: unset;
+  }
+
+  .item {
+    aspect-ratio: 16/9;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: -50%;
+    padding: 60px var(--p-m-g) var(--p-m-g);
+    transition: left 0.5s ease;
+    background-color: var(--item-bg);
+  }
+
+  .ham {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    z-index: 99;
+  }
+
+  .ham .iconfont {
+    color: #fff;
+    font-size: 2rem;
+    margin: auto;
+  }
+
+  nav.active {
+    left: 0;
+  }
+}
