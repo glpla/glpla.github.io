@@ -140,9 +140,10 @@
     <dt>grid-template</dt>
     <dd>.复合属性；同时设置列column、行rows，多见于页面整体布局，见后续案例</dd>
     <dt>grid-template-areas</dt>
-    <dd>.根据指定区域划分网格</dd>
+    <dd>.将容器划分区域</dd>
     <dd>.每个子项指定对应的区域</dd>
-    <dd>.通常配合grid-template-columns和grid-template-rows指定各区域大小，便于调整宽度和合并</dd>
+    <dd>.需配合grid-template-columns和grid-template-rows指定各区域大小，便于调整宽度和合并</dd>
+    <dd>.也可以由子项的跨行、跨列实现。见后续案例</dd>
     <dd>
       <pre>
 .page {
@@ -154,7 +155,12 @@
         'nav nav nav'
         'aside article article'
         'footer footer footer';
+    min-height: 100vh;
     gap: 1rem;
+}
+
+.nav {
+  grid-area: nav;
 }</pre>
     </dd>
     <dt>justify-items、align-items</dt>
@@ -245,6 +251,29 @@
   gap: 1rem;
   min-height: 100vh;
 }</pre>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 全站布局</dd>
+    <dd>.配合跨列使用</dd>
+    <dd class="page-adv">
+      <div class="header">header</div>
+      <div class="left">left</div>
+      <div class="main">main</div>
+      <div class="right">right</div>
+      <div class="footer">footer</div>
+    </dd>
+    <dd>
+      <pre>
+  .page-adv {
+    display: grid;
+    grid-template: auto 1fr auto/auto 1fr auto;
+    height: 50vh;
+    gap: 4px;
+  }
+  
+  .page-adv .header,
+  .page-adv .footer {
+    grid-column: 1/4;
+  }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 九宫格，参考<a href="./demo/up2u.html">个人网站</a>；可以不指定容器高度</dd>
     <dd>
@@ -374,29 +403,6 @@
     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     gap: 1rem;
 }</pre>
-    </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 全站布局</dd>
-    <dd>.配合跨列使用</dd>
-    <dd class="page-adv">
-      <div class="header">header</div>
-      <div class="left">left</div>
-      <div class="main">main</div>
-      <div class="right">right</div>
-      <div class="footer">footer</div>
-    </dd>
-    <dd>
-      <pre>
-  .page-adv {
-    display: grid;
-    grid-template: auto 1fr auto/auto 1fr auto;
-    height: 50vh;
-    gap: 4px;
-  }
-  
-  .page-adv .header,
-  .page-adv .footer {
-    grid-column: 1/4;
-  }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/QWobROj">全站导航 -
         CodePen</a></dd>
