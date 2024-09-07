@@ -19,22 +19,26 @@
     <ul class="nav">
       <a href="" style="--delay:0" class="nav-item">Overview</a>
       <a href="" style="--delay:1" class="nav-item">Usage</a>
-      <a href="" style="--delay:2" class="nav-item">Blank</a>
-      <a href="" style="--delay:3" class="nav-item">Initialization</a>
-      <a href="" style="--delay:4" class="nav-item">Cases</a>
-      <a href="" style="--delay:5" class="nav-item">Lazyload</a>
-      <a href="" style="--delay:6" class="nav-item">Other</a>
+      <a href="" style="--delay:2" class="nav-item">Cases</a>
+      <a href="" style="--delay:3" class="nav-item">Focus</a>
     </ul>
   </header>
+  <dl>
+    <dt>焦点</dt>
+    <dd>如何优雅的展示图片？</dd>
+  </dl>
   <div class="chap">概述 Overview</div>
   <dl class="nav-cont">
+    <dd>. The &lt;a&gt; HTML element embeds an image into the document. 它本身也是一个容器，这种特性称之为 <a
+        href="https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element">可替换元素 - replaced element</a>；可以设置大小
+    </dd>
     <dd>. 展示图片：功能性、修饰性</dd>
-    <dd>. 行盒inline，同别的inline 不同，它可以设置宽度</dd>
+    <dd>. 行盒 inline，同别的 inline 不同，它可以设置宽度；因为它是一个容器</dd>
     <dd>. 单标签；不同IDE的处理方式不尽相同</dd>
     <dd>. 常用图片格式：jpg、png、gif和<span class="warn">Webp</span>格式</dd>
-    <dd>. 和&lt;a&gt;一样，转换为块盒block更加方便处理</dd>
-    <dd>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img">MDN - &lt;img&gt;</a>、<a
-        href="https://mp.weixin.qq.com/s/j5LhV6vBhkN963Pq0l3GmQ">手把手教你实现图片懒加载</a></dd>
+    <dd>. 和 &lt;a&gt;一样，转换为块盒 block 更加方便处理</dd>
+    <dd>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img">MDN -
+        &lt;img&gt;</a></dd>
     <dd>
       <pre>&lt;img src="" alt="" title=""&gt;</pre>
       <table>
@@ -45,7 +49,7 @@
         </tr>
         <tr>
           <td>src</td>
-          <td>图片URL；可以使用本地图片；也可以使用在线图片；还可以是图片的base64编码</td>
+          <td>图片URL；可以使用本地图片；也可以使用在线图片；还可以是图片的 base64 编码</td>
         </tr>
         <tr>
           <td>alt</td>
@@ -53,15 +57,15 @@
         </tr>
         <tr>
           <td>title</td>
-          <td>说明信息，当鼠标移入时显示，很多标签都可以使用title属性增加用户体验；实用于桌面端</td>
+          <td>说明信息，当鼠标移入时显示，很多标签都可以使用 title 属性增加用户体验；实用于桌面端</td>
         </tr>
         <tr>
           <td>decoding</td>
-          <td>图片解析方式；auto | sync同步解析 | async异步解析</td>
+          <td>图片解析方式；auto | sync 同步解析 | async 异步解析</td>
         </tr>
         <tr>
           <td>loading</td>
-          <td>图片加载方式；eager默认，图像立即加载 | lazy延迟加载</td>
+          <td>图片加载方式；eager 立即加载 | lazy 延迟加载</td>
         </tr>
       </table>
       <table>
@@ -79,36 +83,86 @@
           <td>高度</td>
         </tr>
         <tr>
-          <td>object-fit</td>
-          <td>图片铺贴方式：contain | cover</td>
+          <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">object-fit</a></td>
+          <td>图片大小调整方式
+            <br>fill：填充整个容器，图片可能被拉伸；默认
+            <br>contain：图片会被缩放至被容器完全包含，容器可间会有留白
+            <br>cover：保持比例填满容器；图片可能被裁剪
+            <br>none：保持图片大小不变
+          </td>
+        </tr>
+        <tr>
+          <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-position">object-position</a></td>
+          <td>图片和容器的对齐方式
+            <br>center：图片居中；默认
+            <br>left
+            <br>right
+            <br>bottom
+            <br>top
+          </td>
         </tr>
         <tr>
           <td>vertical-align</td>
-          <td>对齐方式：top | middle | bottom | baseline</td>
+          <td>对齐方式：baseline | top | middle | bottom</td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td>content-visibility</td>
           <td>渲染方式：auto | hidden隐藏 | visible可见</td>
-        </tr>
+        </tr> -->
       </table>
     </dd>
   </dl>
   <div class="chap">基本使用 Usage</div>
   <dl class="nav-cont">
-    <dt>直接使用图片</dt>
+    <dd>抛弃 &lt;img&gt; 本身原有的容器特性</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 设置图片尺寸大于实际图像大小，取消默认的fill改为none，使用背景，查看图片的容器特性</dd>
+    <dd>
+      <pre>
+img {
+  width: 400px;
+  height: 500px;
+  object-fit: none;
+  background-color: #089;
+}      </pre>
+    </dd>
+    <dt>使用容器包裹图片</dt>
+    <dd class="sn">
+      <p>当容器和图片尺寸不匹配的时候，可以使用 object-fit 调整大小；使用 object-position 调整位置</p>
+      <div>容器大，图片小，容器留有空白</div>
+      <div>容器小，图片大，图片展示不完全</div>
+      <p><span class="warn">最佳实践</span>：图片宽、高同容器，图片填充模式选择cover填充</p>
+      <p class="basic">
+        <img class="img1" src="./imgs/alizee.jpg" alt="">
+      </p>
+      <pre>
+.wrap {
+  width: 320px;
+  height: 320px;
+}
+
+/* &lt;img&gt; 的初始化 */
+img {
+  display: block;//消除空白
+  width: 100%;//宽高同容器
+  height: 100%;//宽高同容器
+  max-width: 100%;//避免小图片被放大；和 width 两者2选一
+  object-fit: cover;//按比例填充满容器
+}</pre>
+    </dd>
+    <dd class="tips">
+      <div>布局元素只做布局的事，内容元素由各功能标签完成</div>
+      <div>容器更多的体现的是 <span class="warn">布局</span> 的职能</div>
+      <div>flex 布局中，如果直接使用 &lt;img&gt; 和其它元素，借助 flex 属性等分布局，则 &lt;img&gt; 仍然会撑开，导致布局失效；所以必须使用容器包裹图片</div>
+      <div>开发时，应尽量保证图片和容器保持一致</div>
+    </dd>
+    <dt>直接使用图片 - 不建议</dt>
     <dd class="sn">
       <div>直接使用，按照图片原始大小显示，布局受影响</div>
       <div>仅仅指定图片宽度，其高度自适应。图片高度太大，布局被撑开；图片高度太小，布局被压缩</div>
       <div>同时指定宽度width、高度height；如果宽高比例和图片比例不一致，导致图片变形</div>
       <div>同时指定宽度width、高度height、图片填充模式object-fit；布局不会打乱；元素指定了宽度和高度的情况下才有效</div>
-      <pre>
-object-fit: contain | cover;
-object-position: x-axis y-axis;      </pre>
-      <p>. contain：图片会被缩放至被空间完全包含，定义的尺寸可间会有留白</p>
-      <p>. cover：图片会被裁切，在定义的空间内最大范围的显示图片</p>
-      <p>. position：%、px、em、rem、left、top、right、bottom、center；默认居中</p>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 图片使用-指定背景色观察更直接</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 图片使用 - 指定背景色观察更直接</dd>
     <dd>
       <span>width:</span>
       <input type="radio" name="obj-w" id="unset-w" checked>
@@ -129,30 +183,79 @@ object-position: x-axis y-axis;      </pre>
       <label for="cover">cover</label>
       <img class="img0" src="./imgs/alizee.jpg" alt="">
     </dd>
-    <dt>使用容器包裹图片 - 推荐</dt>
-    <dd class="sn">
-      <p>. 容器指定宽高或比例、溢出隐藏</p>
-      <p>. 更多的时候，容器体现的是 <span class="warn">布局</span> 的职能</p>
-      <div>图片指定宽度100%，和容器保持一致，其<span class="warn">高度自适应</span>；为便于观察，为容器指定背景色</div>
-      <p>. 容器高度太大，留有空白</p>
-      <p>. 容器高度太小，图片展示不完全</p>
-      <p>图片宽、高100%同容器，图片填充模式选择cover填充[<span class="iconfont icon-iconfontshoucang"></span>]</p>
-      <p class="basic">
-        <img class="img1" src="./imgs/alizee.jpg" alt="">
-      </p>
-      <pre>
-.wrap {
-  width: 320px;
-  height: 320px;
-}
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}</pre>
+  </dl>
+  <div class="chap">案例 Cases</div>
+  <dl class="nav-cont">
+    <dt>个人头像</dt>
+    <dd>
+      <div>方案1. 使用容器</div>
+      <div>方案2. 不使用容器</div>
+      <div>提示：</div>
+      <div>. border-radius: 50%可以使元素边角圆角化</div>
+      <div>. padding对设计的影响；容器有padding时，需要同时设置容器和图片的圆角，但容器不需要溢出隐藏；容器无padding时，只需要设置容器的圆角和溢出隐藏</div>
+      <div class="avatar-img">
+        <img src="./imgs/alizee.jpg" alt="">
+      </div>
     </dd>
-    <dd class="tips">
-      <div>flex布局中，如果直接使用&lt;img&gt;和其它元素，借助flex属性等分布局，则&lt;img&gt;仍然会撑开，导致布局失效；所以必须使用容器包裹图片</div>
+    <dt>图片导航</dt>
+    <dd>方案1. 使用传统图片方式</dd>
+    <dd>方案2. 使用背景图片</dd>
+    <dd>方案3. 使用伪元素和背景图片</dd>
+    <dd>方案4. 使用字体图标</dd>
+    <dd>. 使用图片优化个人网站主导航：右键单击图片下载到本地使用，或自行准备素材，完成后检查页面各元素的网络加载情况</dd>
+    <dd>
+      <nav class="main-nav">
+        <a href="javascript:;">
+          <img class="ob-img" data-src="./imgs/nav0.png" alt="">
+          <span>个人主页</span>
+        </a>
+        <a href="javascript:;">
+          <img class="ob-img" data-src="./imgs/nav1.png" alt="">
+          <span>教育背景</span>
+        </a>
+        <a href="javascript:;">
+          <img class="ob-img" data-src="./imgs/nav2.png" alt="">
+          <span>培训经历</span>
+        </a>
+        <a href="javascript:;">
+          <img class="ob-img" data-src="./imgs/nav3.png" alt="">
+          <span>愿景规划</span>
+        </a>
+        <a href="javascript:;">
+          <img class="ob-img" data-src="./imgs/nav4.png" alt="">
+          <span>作品精选</span>
+        </a>
+      </nav>
+    </dd>
+  </dl>
+  <div class="chap">焦点 Focus</div>
+  <dl class="nav-cont">
+    <dt>懒加载 LazyLoad</dt>
+    <dd class="sn">
+      <p>图片的获取和加载特别耗费时间。修饰性图片可以转换为base64、或使用SVG、或使用精灵图、或使用字体图标，都能显著改善加载效果</p>
+      <div>加载：每个图片加载的时候都会发生一个服务请求</div>
+      <div>解析</div>
+      <div>渲染</div>
+      <p>. 图片多的情况或者图片大的情况下，需要采取懒加载措施，仅当图片进入到特定范围内时，才触发加载，可以有效避免因图片的加载影响用户体验</p>
+      <p>. 综合使用 &lt;img&gt; 属性和 CSS 样式，建议显示的为图片指定尺寸，避免布局变化以达到最佳实践 - Putting width and height on lazyloaded images fixes
+        this
+        issue and is a best practice</p>
+      <p>. 懒加载的处理，不同浏览器有差异；具体情况要看浏览器的发展支持</p>
+      <p>. 最稳妥的方式，请使用 <a href="./js/lazyLoad.html">JS懒加载</a>、<a
+          href="https://mp.weixin.qq.com/s/j5LhV6vBhkN963Pq0l3GmQ">手把手教你实现图片懒加载</a></p>
+      <p>[<span class="iconfont icon-keyboard"></span>] 懒加载 - 在浏览器监测视图中，选择网络，滚动页面，查看图片懒加载情况</p>
+      <pre>
+&lt;img src="./web/imgs/1.jpg" alt="" loading="lazy" decoding="async"&gt;
+...
+&lt;img src="./web/imgs/100.jpg" alt="" loading="lazy" decoding="async"&gt;      </pre>
+      <pre>
+img {
+display: block;
+width: 300px;
+height: 300px;
+content-visibility: visible;
+margin-bottom: 100vh;
+}      </pre>
     </dd>
     <dt class="nav-cont">图片空白 Blank</dt>
     <dd>
@@ -207,102 +310,6 @@ img {
         <img class="img3" src="./imgs/alizee.jpg" alt="">
       </div>
     </dd>
-    <dt class="nav-cont">初始化 Initialization</dt>
-    <dd>. 这两种方案本质上没有区别</dd>
-    <dd class="sn">
-      <div>使用容器/布局元素</div>
-      <pre>
-.img-wrap {
-  width: 160px;//设置宽度
-  height: 160px;//设置高度
-}
-img {
-  display: block;//消除空白
-  width: 100%;//宽高同容器
-  height: 100%;//宽高同容器
-  object-fit: cover;//按比例填充满容器
-}</pre>
-      <div>直接使用&lt;img&gt;</div>
-      <pre>
-img {
-  display: block;//消除空白
-  width: 160px;//设置宽度
-  height: 160px;//设置高度
-  object-fit: cover;//按比例填充满容器
-}</pre>
-    </dd>
-  </dl>
-  <div class="chap">案例 Cases</div>
-  <dl class="nav-cont">
-    <dt>个人头像</dt>
-    <dd>方案1. 使用容器</dd>
-    <dd>方案2. 不使用容器</dd>
-    <dd>. border-radius: 50%可以使元素边角圆角化</dd>
-    <dd>. padding对设计的影响；容器有padding时，需要同时设置容器和图片的圆角，但容器不需要溢出隐藏；容器无padding时，只需要设置容器的圆角和溢出隐藏</dd>
-    <dd class="avatar-img">
-      <img src="./imgs/alizee.jpg" alt="">
-    </dd>
-    <dt>图片导航</dt>
-    <dd>方案1.使用传统图片方式</dd>
-    <dd>方案2.使用背景图片</dd>
-    <dd>方案3.使用伪元素和背景图片</dd>
-    <dd>方案4.使用字体图标</dd>
-    <dd>. 使用图片优化个人网站主导航-右键单击图片下载到本地使用，或自行准备素材，完成后检查页面各元素的网络加载情况</dd>
-    <dd>
-      <nav class="main-nav">
-        <a href="javascript:;">
-          <img class="ob-img" data-src="./imgs/nav0.png" alt="">
-          <span>个人主页</span>
-        </a>
-        <a href="javascript:;">
-          <img class="ob-img" data-src="./imgs/nav1.png" alt="">
-          <span>教育背景</span>
-        </a>
-        <a href="javascript:;">
-          <img class="ob-img" data-src="./imgs/nav2.png" alt="">
-          <span>培训经历</span>
-        </a>
-        <a href="javascript:;">
-          <img class="ob-img" data-src="./imgs/nav3.png" alt="">
-          <span>愿景规划</span>
-        </a>
-        <a href="javascript:;">
-          <img class="ob-img" data-src="./imgs/nav4.png" alt="">
-          <span>作品精选</span>
-        </a>
-      </nav>
-    </dd>
-  </dl>
-  <div class="chap">懒加载 LazyLoad</div>
-  <dl class="nav-cont">
-    <dd class="sn">
-      <div>加载</div>
-      <div>解析</div>
-      <div>渲染</div>
-    </dd>
-    <dt>懒加载</dt>
-    <dd>. 综合使用&lt;img&gt;属性和C3样式</dd>
-    <dd>. 懒加载需要显示的为图片指定尺寸</dd>
-    <dd>. 懒加载的处理，不同浏览器有差异：Chrome 无论如何都在加载图像；而Firefox有效；具体情况要看浏览器的发展支持</dd>
-    <dd>. 最稳妥的方式，请使用 <a href="./js/lazyLoad.html">JS懒加载</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 懒加载 - 在浏览器监测视图中，选择网络，滚动页面，查看图片懒加载情况</dd>
-    <dd>
-      <pre>
-&lt;img src="./web/imgs/1.jpg" alt="" loading="lazy" decoding="async"&gt;
-...
-&lt;img src="./web/imgs/100.jpg" alt="" loading="lazy" decoding="async"&gt;      </pre>
-      <pre>
-img {
-display: block;
-width: 300px;
-height: 300px;
-content-visibility: visible;
-margin-bottom: 100vh;
-}      </pre>
-    </dd>
-  </dl>
-  <div class="chap">其它应用 Other</div>
-  <dl class="nav-cont">
     <dt>SVG</dt>
     <dd>. 将图片转换成&lt;svg&gt;使用；从<span class="warn">结构</span> 上优化页面；如字体图标网站 <a
         href="https://www.iconfont.cn/">iconfont</a>
@@ -310,9 +317,9 @@ margin-bottom: 100vh;
     <dd>. 适合少量、小体积、装饰性图片</dd>
     <dd>. 更多信息，请访问 <a href="./svg.html">SVG</a></dd>
     <dt>Base64</dt>
-    <dd>. 对图片编码，然后指定给src或背景图片；从<span class="warn">样式</span> 上优化页面</dd>
-    <dd>. 更多信息，请访问 <a href="https://c.runoob.com/front-end/59/">Base64</a></dd>
     <dd>
+      <div>. 对图片编码，然后指定给src或背景图片；从<span class="warn">样式</span> 上优化页面</div>
+      <div>. 更多信息，请访问 <a href="https://c.runoob.com/front-end/59/">Base64</a></div>
       <figure class="code">
         <pre>
 background-image: url(data:image/jpeg;base64...);</pre>
@@ -321,25 +328,17 @@ background-image: url(data:image/jpeg;base64...);</pre>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
-    <dt>总结</dt>
+    <dt>总结 Summary</dt>
     <dd class="sn">
       <div>图片 &lt;img&gt; 使用</div>
-      <div>显示比例 aspect-ratio</div>
-      <div>自学图像标签 &lt;image&gt;</div>
-      <div>其它：边框 border | 圆角边框 border-radius | 填充 padding</div>
+      <div>样式：对象大小 object-fit；对象对齐 object-position；边框 border；圆角边框 border-radius</div>
     </dd>
-    <dd class="quote number">
-      <div>布局元素只做布局的事，内容元素由各功能标签完成</div>
-      <div>开发时，应尽量保证图片和展示尺寸保持一致</div>
+    <dd class="tips">
       <div>功能型图片，使用&lt;img&gt;；修饰型图片，建议使用背景图片</div>
-      <div>图片的获取和加载特别耗费时间。修饰性图片可以转换为base64、或使用SVG、或使用精灵图、或使用字体图标，都能显著改善加载效果</div>
-      <div>object-fit: fill | cover | contain;</div>
-      <div>object-position: center center;</div>
-      <div>aspect-ratio</div>
       <div>过多图片使用技巧，请访问 <a href="https://css-tricks.com/a-fancy-hover-effect-for-your-avatar/">hover avatar</a>
       </div>
     </dd>
-    <dt>作业</dt>
+    <dt>作业 Homework</dt>
     <dd>. 使用图片完善个人网站，如导航、头像、相册等等</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

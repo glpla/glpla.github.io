@@ -20,8 +20,6 @@
       <a href="" style="--delay:1" class="nav-item">H5属性</a>
       <a href="" style="--delay:2" class="nav-item">媒体属性</a>
       <a href="" style="--delay:3" class="nav-item">媒体事件</a>
-      <a href="" style="--delay:4" class="nav-item">初始化</a>
-      <a href="" style="--delay:5" class="nav-item">案例</a>
     </nav>
   </header>
   <dl>
@@ -31,7 +29,8 @@
     </dd>
     <dt class="nav-cont">概述</dt>
     <dd>
-      <div>. 行盒inline，不是块盒block哦；同&lt;img&gt;一样，可以设置宽度</div>
+      <div>. 行盒inline；<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element">可替换元素 - replaced
+          element</a>；可以设置大小</div>
       <div>. 播放视频，常见格式有：MP4、avi等</div>
       <div>. 桌面端单击视频窗口可以触发播放或暂停；移动端不能，只能使用控制栏</div>
       <div>. 默认情况下，没有播放控件，需要通过js控制</div>
@@ -39,7 +38,7 @@
           &lt;video&gt;</a>、<a href="https://mp.weixin.qq.com/s/1mMEXKzXHTl2eHJEXi-8PA">HTML5 向网页嵌入视频和音频</a>
       </div>
       <pre>&lt;video src=""&gt;&lt;/video&gt;</pre>
-      <div>. 使用播放控件属性controls可视化控制</div>
+      <div>. 使用播放控件属性 controls 可视化控制</div>
       <pre>&lt;video src="" controls&gt;&lt;/video&gt;</pre>
     </dd>
     <dt class="nav-cont">HTML属性</dt>
@@ -71,7 +70,7 @@
         </tr>
         <tr>
           <td>preload</td>
-          <td>预加载；如果使用autoplay，则忽略该属性</td>
+          <td>预加载；如果使用 autoplay，则忽略该属性</td>
         </tr>
         <tr>
           <td>poster</td>
@@ -79,6 +78,31 @@
         </tr>
       </table>
     </dd>
+    <dt>初始化样式</dt>
+    <dd>
+      <div>. 默认情况下，视频采用16*9的比例，最小尺寸是640*360</div>
+      <div>. 调整视频时，应保证比例不变</div>
+      <div>. 指定封面时，应保证封面cover覆盖</div>
+      <div>. 以下各例均采用初始化样式</div>
+      <pre>
+video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 视频的可视化使用</dd>
+    <dd>
+      <div>. 添加controls属性方便可视化控制</div>
+      <div>. 添加preload属性可以预加载视频，避免卡顿</div>
+      <div>. 添加封面poster可以避免视频剪辑过程中头部的黑场/空白帧</div>
+      <video src="../utils/video/alizee.mp4" controls preload poster="./imgs/alizee.jpg">您的浏览器不支持video标签</video>
+      <pre>
+&lt;video src="../utils/video/alizee.mp4" controls preload poster="../imgs/alizee.jpg"&gt;您的浏览器不支持video标签&lt;/video&gt;</pre>
+    </dd>
+  </dl>
+  <div class="chap">进阶使用 Advanced</div>
+  <dl>
     <dt class="nav-cont">媒体属性</dt>
     <dd>
       <div>. 用于js控制</div>
@@ -201,30 +225,6 @@ vs.addEventListener('click', () => {
   }
 })</pre>
     </dd>
-    <dt class="nav-cont">初始化样式</dt>
-    <dd>
-      <div>. 默认情况下，视频采用16*9的比例，最小尺寸是640*360</div>
-      <div>. 调整视频时，应保证比例不变</div>
-      <div>. 指定封面时，应保证封面cover覆盖</div>
-      <div>. 以下各例均采用初始化样式</div>
-      <pre>
-video {
-    width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
-}</pre>
-    </dd>
-    <dt class="nav-cont">案例</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 视频的可视化使用[<span class="iconfont icon-iconfontshoucang"></span>]
-    </dd>
-    <dd>
-      <div>. 添加controls属性方便可视化控制</div>
-      <div>. 添加preload属性可以预加载视频，避免卡顿</div>
-      <div>. 添加封面poster可以避免视频剪辑过程中头部的黑场/空白帧</div>
-      <video src="../utils/video/alizee.mp4" controls preload poster="./imgs/alizee.jpg">您的浏览器不支持video标签</video>
-      <pre>
-&lt;video src="../utils/video/alizee.mp4" controls preload poster="../imgs/alizee.jpg"&gt;您的浏览器不支持video标签&lt;/video&gt;</pre>
-    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 视频预览和播放</dd>
     <dd>
       <div>. 鼠标移入mouseover循环播放视频，同时显示播放控件，方便用户进一步操作</div>
@@ -260,7 +260,7 @@ window.onload = function () {
     </dd>
     <dt>作业 Homework</dt>
     <dd class="sn">
-      <div>完成上述内容的练习</div>
+      <div>制作网站开场视频秀</div>
       <div>制作个人视频，扩充并完善到个人网站</div>
     </dd>
   </dl>
