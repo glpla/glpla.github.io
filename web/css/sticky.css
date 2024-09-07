@@ -1,6 +1,6 @@
 .example-title {
   position: sticky;
-  top: var(--chap-h);
+  top: 10vh;
   background-color: #fff;
   z-index: 2;
 }
@@ -23,6 +23,30 @@ article .title {
   text-align: center;
   line-height: 40px;
   z-index: 1;
+}
+
+.tbl-sticky {
+  height: 30vh;
+  overflow: auto;
+}
+
+.tbl-sticky table {
+  margin: 0;
+}
+
+.tbl-sticky tr:has(th) {
+  position: sticky;
+  top: 0;
+}
+
+article::-webkit-scrollbar,
+.tbl-sticky::-webkit-scrollbar {
+  width: 8px;
+}
+
+article::-webkit-scrollbar-thumb,
+.tbl-sticky::-webkit-scrollbar-thumb {
+  background-color: var(--tbl-color);
 }
 
 @media screen and (max-width:768px) {

@@ -17,9 +17,9 @@
     <span>&commat;List</span>
     <span class="ham iconfont icon-menu"></span>
     <nav class="nav">
-      <a href="" style="--delay:0" class="nav-item">Ordered list</a>
-      <a href="" style="--delay:1" class="nav-item">Unordered list</a>
-      <a href="" style="--delay:2" class="nav-item">Definition list</a>
+      <a href="" style="--delay:0" class="nav-item">有序列表 ol</a>
+      <a href="" style="--delay:1" class="nav-item">无序列表 ul</a>
+      <a href="" style="--delay:2" class="nav-item">自定义列表 dl</a>
     </nav>
   </header>
   <div class="chap">有序列表 Ordered list</div>
@@ -29,6 +29,7 @@
       <div>. 元素按照一定规则排列，如：从小到大</div>
       <div>. 应用较少；更多是通过定制编号实现，如 <a href="./counter.html">计数器</a></div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol">MDN - &lt;ol&gt;</a></div>
+      <p>[<span class="iconfont icon-bangzhu2"></span>] 办公文档的编号 numbering</p>
     </dd>
     <dt>结构</dt>
     <dd>
@@ -125,15 +126,71 @@
       </div>
       <div>. 现在导航多使用 &lt;nav&gt; → &lt;a&gt; 实现</div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul">MDN - &lt;ul&gt;</a></div>
+    </dd>
+    <dd class="sn">
+      <div>基本使用</div>
       <pre>
 &lt;ul type=""&gt;
     &lt;li&gt;&lt;/li&gt;
     //... ...
     &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;</pre>
+      <div>早期导航结构</div>
+      <pre>
+&lt;ul type=""&gt;
+    &lt;li&gt;
+      &lt;a href="" target="" title=""&gt; discernible text &lt;/a&gt;
+    &lt;/li&gt;
+    //... ...
+    &lt;li&gt;
+      &lt;a href="" target="" title=""&gt; discernible text &lt;/a&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;</pre>
+      <div>现在导航结构</div>
+      <pre>
+&lt;nav&gt;
+  &lt;a href="" target="" title=""&gt; discernible text &lt;/a&gt;
+  //... ...
+  &lt;a href="" target="" title=""&gt; discernible text &lt;/a&gt;
+&lt;/nav&gt;</pre>
+    </dd>
+    <dt>样式初始化</dt>
+    <dd>
+      <p>列表默认都有margin和padding，会破坏页面布局</p>
+      <p>需要初始化样式：取消其默认样式，再根据设计利用CSS重新指定样式</p>
+      <pre>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ol,
+ul {
+  list-style: none;
+}</pre>
+    </dd>
+    <dd class="example-sn">导航设计 - 使用内部样式完善个人网站的锚点跳转；更多导航，请欣赏<a href="https://www.jd.com/">京东</a></dd>
+    <dd>. 鼠标hover时，使用文字下划线提示，同时改变文字颜色</dd>
+    <dd>
+      <ul class="self-nav">
+        <li><a href="javascript:;">主页</a></li>
+        <li><a href="javascript:;">随笔</a></li>
+        <li><a href="javascript:;">作品</a></li>
+        <li><a href="javascript:;">美文</a></li>
+        <li><a href="javascript:;">推荐</a></li>
+      </ul>
+    </dd>
+    <dd class="sn">
+      <div>使用 &lt;ul&gt; → &lt;li&gt; → &lt;a&gt; 实现</div>
+      <div>初始化样式： ul a</div>
+      <div>修改li样式：inline-block；填充padding</div>
+      <div>其它样式设计 - 自由发挥</div>
+      <div>尝试使用 &lt;nav&gt; → &lt;a&gt; 实现导航</div>
     </dd>
     <dt>标记 Marker</dt>
     <dd>
+      <p>[<span class="iconfont icon-bangzhu2"></span>] 办公文档的项目符号 bullets</p>
       <div>1. 使用系统内置标记 - 使用属性 type 指定</div>
       <table>
         <caption>无序列表 type 属性</caption>
@@ -163,75 +220,34 @@
         <li>list5</li>
       </ul>
       <div>2. 定制标记</div>
-      <div>. 使用 <a href="./selector1.html">伪元素 - ::marker</a>；仍然会破坏页面布局</div>
+      <div>. 使用 <a href="./selector_ele.html">伪元素 - ::marker</a>；仍然会破坏页面布局</div>
       <pre>
 ul li::marker {
   content: '+ ';
 }      </pre>
-      <div>. 使用 <a href="./selector1.html">伪元素 - ::before</a>；通常先初始化再定制</div>
+      <div>. 使用 <a href="./selector_ele.html">伪元素 - ::before</a>；通常先初始化再定制</div>
       <div>. 使用 <a href="./counter.html">计数器</a>；通常先初始化再定制</div>
-    </dd>
-    <dt>样式初始化</dt>
-    <dd>
-      <p>&lt;ul&gt;、&lt;ol&gt;默认都有margin和padding，会破坏页面布局；通常初始化样式：取消其默认样式，再根据设计利用CSS重新指定样式</p>
-      <pre>
-ol,
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  box-sizing: border-box;
-}</pre>
-    </dd>
-    <dd class="example-sn">导航设计 - 使用内部样式完善个人网站的锚点跳转</dd>
-    <dd>. hover时，使用文字下划线提示</dd>
-    <dd>. 欣赏<a href="https://www.jd.com/">京东</a>导航</dd>
-    <dd>
-      <ul class="self-nav">
-        <li><a href="javascript:;">主页</a></li>
-        <li><a href="javascript:;">随笔</a></li>
-        <li><a href="javascript:;">作品</a></li>
-        <li><a href="javascript:;">美文</a></li>
-        <li><a href="javascript:;">推荐</a></li>
-      </ul>
-    </dd>
-    <dd class="sn">
-      <div>使用导航标准结构 ul->li->a 调整个人网站</div>
-      <div>初始化ul样式</div>
-      <div>初始化a样式</div>
-      <div>修改li样式：inline-block；填充padding</div>
-      <div>其它样式设计</div>
     </dd>
   </dl>
   <div class="chap">自定义列表 Definition list</div>
   <dl>
     <dt class="nav-cont">说明 Overview</dt>
-    <dd>. &lt;dl&gt;：自定义列表；块盒block</dd>
-    <dd>. &lt;dt&gt;：定义列表项标题definition title；块盒block</dd>
-    <dd>. &lt;dd&gt;：定义列表项描述definition description；块盒block</dd>
-    <dd>. 一个&lt;dl&gt;可以有多个&lt;dt&gt;、多个&lt;dd&gt;</dd>
-    <dd>. &lt;dt&gt;是对&lt;dd&gt;的总结或分类</dd>
+    <dd>. &lt;dl&gt;：自定义列表 Definition list；块盒 block；用于对数据总结或分类</dd>
+    <dd>. 一个 &lt;dl&gt; 可以有多个 &lt;dt&gt;、多个 &lt;dd&gt;</dd>
+    <dd>. &lt;dt&gt;：定义列表项标题 Definition Title；块盒 block</dd>
+    <dd>. &lt;dd&gt;：定义列表项描述 Definition Description；块盒 block</dd>
     <dd>. 应用非常广泛；各大门户网站底部的信息和版权等</dd>
-    <dd>. 也可以使用&lt;ul&gt;代替</dd>
+    <dd>. 也可以使用 &lt;ul&gt; 代替</dd>
     <dd>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl">MDN - &lt;dl&gt;</a></dd>
     <dd class="example-sn"> 企业网站 - <a href="./demo/companies.html#footer">关于</a>、小米 - <a
         href="https://www.mi.com/about">关于</a>
-    </dd>
-    <dd>. &lt;dd&gt;的子项&lt;span&gt;指定右边框</dd>
-    <dd>
-      <dl class="tbao">
-        <dt>您是不是想找:</dt>
-        <dd>
-          <span>口红</span><span>书包</span><span>新款外套</span><span>拖鞋</span><span>安踏</span><span>女裤</span><span>男手表</span><span>阿玛尼</span><span>男拖鞋</span><span>床</span>
-        </dd>
-      </dl>
     </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
     <dd>
-      <div>. &lt;ol&gt;、&lt;ul&gt;的子元素只能是&lt;li&gt;</div>
-      <div>. 实际开发中，多使用&lt;ul&gt;和&lt;dl&gt;</div>
+      <div>. &lt;ol&gt;、&lt;ul&gt; 的子元素只能是 &lt;li&gt;</div>
+      <div>. 实际开发中，多使用 &lt;ul&gt; 和 &lt;dl&gt;</div>
     </dd>
     <dt>总结 Summary</dt>
     <dd class="sn">
@@ -242,11 +258,10 @@ ul {
     </dd>
     <dt>作业 Homework</dt>
     <dd class="sn">
-      <div>完善个人网站导航：使用&lt;ul&gt; + &lt;li&gt; + &lt;a&gt;创建导航，体会和使用&lt;nav&gt; + &lt;a&gt;的区别</div>
-      <div>分布使用&lt;ul&gt;和&lt;dl&gt;创建页面底部&lt;footer&gt;信息区，必要时，使用 :marker；如果混用呢？</div>
-      <img src="./imgs/list0.png" alt="">
-      <div class="fig-sn">底部信息区</div>
       <div>筹备并完善自己的初始化样式表</div>
+      <div>完善个人网站导航：分别使用&lt;ul&gt; → &lt;li&gt; → &lt;a&gt; 和 &lt;nav&gt; → &lt;a&gt; 实现</div>
+      <div>分别使用 &lt;ul&gt; 和 &lt;dl&gt; 创建页面底部 &lt;footer&gt; 信息区；如下图；请加入自己的设计</div>
+      <img src="./imgs/list0.png" alt="">
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

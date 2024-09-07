@@ -34,7 +34,7 @@
       <dd>
         <div>. 锚点 anchor，用来记录位置；后来发展为超链接内容导航</div>
         <div>. 行盒 inline</div>
-        <div>. 可以包含其它标签，但不可以嵌套&lt;a&gt;</div>
+        <div>. 可以包含其它标签，但不可以嵌套 &lt;a&gt;</div>
         <div>. 必须有可识别的文字或其它内容，如图片，不能是空标签</div>
         <div>. 更多信息，请参考 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a">MDN - &lt;a&gt;</a></div>
         <figure class="img-sn">
@@ -124,6 +124,7 @@
       <dd>
         <div>. 在页面某个位置标记一个锚点，单击超链接时，跳转到该位置</div>
         <div>. 页面返回时不能直接退出当前页面，需要逐级返回；后期多使用 js 实现跳转</div>
+        <p>[<span class="iconfont icon-bangzhu2"></span>] 办公文档的锚点在哪里？</p>
       </dd>
       <dt>基本过程</dt>
       <dd>
@@ -135,11 +136,11 @@
       <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 个人网站 - 请使用但不局限于这些标签：&lt;div&gt; &lt;html&gt;
         &lt;a&gt; &lt;nav&gt; &lt;p&gt; &lt;h1&gt;</dd>
       <dd class="number">
-        <div>创建文件夹Demo为H5项目，使用Vs Code打开</div>
-        <div>创建主页文件index.html，按!快速生成H5架构</div>
+        <div>创建文件夹 Demo 为H5项目，使用 Vs Code打开</div>
+        <div>创建主页文件 index.html，按!快速生成 H5 架构</div>
         <div>在主页&lt;body&gt;区，使用普通方法或快速编辑 <span class="warn">a[href=#nav$]{item$}*5</span> 创建5个超链接</div>
-        <div>在超链接下面使用快速编辑 (p[id=nav$]>lorem100)*5 创建5个段落作为锚点|目标资源；注意id和href要保持对应</div>
-        <div>使用live server查看锚点跳转效果</div>
+        <div>在超链接下面使用快速编辑 (p[id=nav$]>lorem100)*5 创建5个段落作为锚点|目标资源；注意 id 和 href 要保持对应</div>
+        <div>使用 live server 查看锚点跳转效果</div>
         <p>[<span class="iconfont icon-bangzhu2"></span>] 如何实现返回顶部？</p>
         <p>[<span class="iconfont icon-bangzhu2"></span>] 如何高亮提示当前锚点？</p>
         <p>[<span class="iconfont icon-bangzhu2"></span>] 如何不遮盖导航区？</p>
@@ -160,11 +161,11 @@
       </dd>
       <dt>站外跳转</dt>
       <dd>
-        <div>跳转到其它网站页面或页面内某个锚点，建议使用完整网络协议。否则测试会告警</div>
+        <div>跳转到其它网站页面或页面内某个锚点，建议使用完整网络协议</div>
         <pre>
 &lt;a href="https://www.baidu.com"&gt; 百度 &lt;/a&gt;
 &lt;a href="https://www.baidu.com#bike"&gt; 百度百科 &lt;/a&gt;</pre>
-        <div>也可以不指定网络协议，由系统自行判断；不建议</div>
+        <div>也可以不指定网络协议，由系统自行判断；不建议，部分测试平台会告警</div>
         <pre>&lt;a href="//www.baidu.com"&gt; www.baidu.com &lt;/a&gt;</pre>
         <table class="tbl-sn">
           <caption>几个特殊页面</caption>
@@ -197,20 +198,21 @@
     </dl>
     <div class="chap">改善</div>
     <dl>
+      <dd>使用CSS完成；这里采用外部样式文件</dd>
       <dt>样式初始化</dt>
       <dd>
-        <div>. 为保证风格统一，通常覆盖&lt;a&gt;的默认样式，重新设计；请参考 <a
+        <div>. 为保证风格统一，通常覆盖 &lt;a&gt; 的默认样式，重新设计；请参考 <a
             href="http://necolas.github.io/normalize.css/">normalize.css</a>、<a
             href="https://meyerweb.com/eric/tools/css/reset/">reset.css</a> 两个专业网站</div>
         <div>. 系统提供了4个默认的样式伪类，必须按照一定的顺序定义和使用；详细信息，请参考 <a href="./selector_class.html">伪类</a></div>
-        <div>全局初始化</div>
+        <div>1. 全局初始化 - 简单粗暴型、偷懒性</div>
         <pre>
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }        </pre>
-        <div>特定元素初始化</div>
+        <div>2. 特定元素初始化 - 专一性</div>
         <pre>
 a {
     text-decoration: none;
@@ -227,20 +229,23 @@ a {
 el:target {
   color: #f40;
 }        </pre>
-        <div>3. 丝滑滚动：使用CSS为元素的滚动容器指定 <a href="./scroll.html">滚动行为 - scroll behavior</a> 为丝滑滚动smooth</div>
+        <div>3. 丝滑滚动：为 &lt;html&gt; [CSS为元素的滚动容器]指定 <a href="./scroll.html">滚动行为 - scroll behavior</a>
+          为丝滑滚动smooth，控制整个页面的滚动行为</div>
+        <p>[<span class="iconfont icon-bangzhu2"></span>] 为什么不是给 &lt;body&gt; 指定行为？</p>
+        <!-- <p>body作为可视区的容器，性质比较特殊；</p> -->
         <pre>
 html {
   scroll-behavior: smooth;
 }        </pre>
-        <div>4. 保留导航：使用CSS为元素的滚动容器指定滚动填充scroll-padding-top为导航区的高度</div>
+        <div>4. 保留导航：使用CSS为元素的滚动容器指定滚动填充scroll-padding-top为导航区的高度；并借助定位 position 使得导航留在屏幕上</div>
         <pre>
 html {
   scroll-padding-top: 100px;
 }        </pre>
-        <div>默认打开位置：在&lt;head&gt;区加上&lt;base target=""&gt;指定默认打开方式，适合大量&lt;a&gt;的情况</div>
+        <div>5. 默认打开位置：在&lt;head&gt;区加上&lt;base target=""&gt;指定默认打开方式，适合大量&lt;a&gt;的情况</div>
         <pre>&lt;base target="_blank"&gt;</pre>
       </dd>
-      <dd class="tips">更多改善，一般借助js实现</dd>
+      <dd class="tips">也借助js实现更多改善</dd>
     </dl>
     <div class="chap">其它应用</div>
     <dl class="item">
@@ -306,10 +311,10 @@ html {
       </dd>
       <dt>初识CSS</dt>
       <dd class="number">
-        <div>CSS文件的使用|引入</div>
+        <div>CSS文件的创建、引入/使用</div>
         <div>初始化CSS</div>
-        <div>标签选择器</div>
-        <div>目标选择器 :target</div>
+        <div>选择器：通配符选择器 *；标签选择器 p、a；目标选择器 :target；鼠标悬停选择器 :hover</div>
+        <div>样式： 字体 font；文本装饰 text-decoration；颜色 color；行高 line-height；滚动行为 scroll-behavior</div>
       </dd>
       <dd class="quote number">
         <div>指定滚动模式 scroll-behavior</div>
@@ -321,8 +326,10 @@ html {
     <dl class="item">
       <dt>内容</dt>
       <dd class="number">
-        <div>个人网站设计</div>
+        <div>总结所用到的标签、样式</div>
+        <div>个人网站框架构造</div>
         <div>思考：如何设计图片导航？</div>
+        <!-- <div>嵌套一个图像</div> -->
       </dd>
       <dt>要求</dt>
       <dd class="number">
