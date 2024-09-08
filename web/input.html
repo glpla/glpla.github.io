@@ -28,16 +28,14 @@
       <a href="" style="--delay:3" class="nav-item">text</a>
       <a href="" style="--delay:4" class="nav-item">radio</a>
       <a href="" style="--delay:5" class="nav-item">checkbox</a>
-      <a href="" style="--delay:6" class="nav-item">range</a>
-      <a href="" style="--delay:7" class="nav-item">case</a>
     </nav>
   </header>
   <dl>
     <dt class="nav-cont">概述 Overview</dt>
     <dd>
       <div>. 应用最广泛的表单元素 - the most powerful and complex</div>
-      <div>. 种类type很多，默认是text，单行文本输入</div>
-      <div>. 更多input类型和使用，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">MDN -
+      <div>. 种类 type 很多，默认是text，单行文本输入</div>
+      <div>. 更多 &lt;input&gt; 类型和使用，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">MDN -
           &lt;input&gt;</a>
       </div>
       <pre>&lt;input type = "text" name = "" id = ""&gt;</pre>
@@ -49,7 +47,7 @@
         </tr>
         <tr>
           <td>type</td>
-          <td>input类型，如：单选radio、多选checkbox等</td>
+          <td>input类型，如：单选 radio、多选 checkbox等</td>
         </tr>
         <tr>
           <td>name</td>
@@ -65,7 +63,7 @@
         </tr>
         <tr>
           <td>id</td>
-          <td>多用于js控制；或配合&lt;label&gt;使用，增强用户体验</td>
+          <td>多用于js控制；或配合 &lt;label&gt; 使用，增强用户体验</td>
         </tr>
         <tr>
           <td>placeholder</td>
@@ -73,7 +71,7 @@
         </tr>
         <tr>
           <td>checked</td>
-          <td>是否选中；selected表示select的默认选中</td>
+          <td>是否选中；selected 表示 select 的默认选中</td>
         </tr>
         <tr>
           <td>disabled</td>
@@ -81,7 +79,7 @@
         </tr>
         <tr>
           <td>autocomplete</td>
-          <td>提示历史输入，方便自动完成，一般配合datalist</td>
+          <td>提示历史输入，方便自动完成，一般配合 datalist</td>
         </tr>
         <tr>
           <td>autofocus</td>
@@ -112,11 +110,11 @@
         </tr>
         <tr>
           <td>radio</td>
-          <td>单选按钮；多个选一个；使用name属性分组</td>
+          <td>单选按钮；多个选一个；使用 name 属性分组</td>
         </tr>
         <tr>
           <td>checkbox</td>
-          <td>多选按钮；使用name属性分组</td>
+          <td>多选按钮；使用 name 属性分组</td>
         </tr>
         <tr>
           <td>submit</td>
@@ -128,6 +126,7 @@
         </tr>
       </table>
       <div class="tips">radio本意是只无线电，为什么用做单选？</div>
+      <!-- <div>收听广播时，一次只能选择一个频道</div> -->
       <table>
         <caption>常用类型 - 应用类</caption>
         <tr>
@@ -213,19 +212,19 @@
       <div>. 由于元素比较小，用户交互|点击没有那么方便，尤其是单选或多选</div>
       <div>.
         为了 <span class="warn">扩展</span>
-        交互热区，增强用户体验，将&lt;label&gt;和&lt;input&gt;绑定|关联起来：点击&lt;label&gt;就相当于单击&lt;input&gt;</div>
-      <div>. &lt;input&gt;指定 <span class="warn">id</span> 属性；&lt;label&gt;指定 <span class="warn">for</span> 属性</div>
-      <div>. &lt;label&gt;不能嵌套&lt;div&gt;</div>
-      <div>. 方便使用相邻选择器操作元素</div>
+        交互热区，增强用户体验，将 &lt;label&gt; 和 &lt;input&gt; 绑定|关联起来：点击 &lt;label&gt; 就相当于单击 &lt;input&gt;</div>
+      <div>. &lt;input&gt; 指定 <span class="warn">id</span> 属性；&lt;label&gt; 指定 <span class="warn">for</span> 属性</div>
+      <div>. &lt;label&gt; 不能嵌套 &lt;div&gt;</div>
+      <div>. &lt;label&gt;配合表单元素可以实现很多非常棒的设计，如定制表单元素、不使用js却能实现js的效果</div>
       <pre>
 &lt;input type='text' id='uname'&gt;
 &lt;label for='uname'&gt;text here&lt;/label&gt;</pre>
-      <div>或：使用&lt;label&gt;包裹&lt;input&gt;；记得移除&lt;label&gt;的for属性</div>
+      <div>或：使用 &lt;label&gt; 包裹 &lt;input&gt;；记得移除 &lt;label&gt; 的for属性</div>
       <pre>
 &lt;label&gt;
     &lt;input type='text'&gt;text here
 &lt;/label&gt;</pre>
-      <div>也可以使用&lt;span&gt;包裹文本信息，结构更加清晰</div>
+      <div>也可以使用 &lt;span&gt; 包裹文本信息，结构更加清晰</div>
       <pre>
 &lt;label&gt;
     &lt;input type='text'&gt;
@@ -234,9 +233,14 @@
     </dd>
     <dt class="nav-cont">初始化 Init</dt>
     <dd class="sn">
-      <p>. 通常根据type修改特定的表单元素</p>
+      <p>. 通常根据 type 修改特定的表单元素；若无特别说明，后续均做初始化处理</p>
       <p>. 更多样式，请参考后续内容</p>
       <pre>
+:root{
+  --main-color: #ff1493;
+  accent-color: var(--main-color);
+}
+
 input[type=text] {
   width: 100%;
   border: none;
@@ -251,11 +255,8 @@ input[type=text]::placeholder {
 }
 
 input[type=text]::selection {
-  color: #F40;
-}
-
-input[type='radio'] {
-  accent-color: #f40;
+  color: #fff;
+  background-color: var(--main-color);
 }</pre>
     </dd>
   </dl>
@@ -263,7 +264,8 @@ input[type='radio'] {
     <dt class="nav-cont">单行输入 text</dt>
     <dd class="example-sn"><a href="https://codepen.io/glpla/pen/WNLKzMK">自定义text样式 - CodePen</a></dd>
     <dd>
-      <p>初始化设计</p>
+      <img src="./imgs/input0.png" alt="" loading="lazy">
+      <img src="./imgs/input.png" alt="" loading="lazy">
       <p>:focus设计</p>
       <p>::selection设计</p>
       <p>::placeholder设计</p>
@@ -273,6 +275,7 @@ input[type='radio'] {
     <dd class="example-sn"><a href="https://codepen.io/glpla/pen/mdajpYo">自定义radio - CodePen</a></dd>
     <dd>
       <div>方案1：利用accent-color，简单粗暴</div>
+      <img src="./imgs/radio.png" alt="" loading="lazy">
       <div>方案2：利用伪元素 <a href="./selector_class.html">选中伪类选择器:checked</a>、<a href="./selector_com.html">相邻兄弟选择器 +</a>
       </div>
       <div>方案3：隐藏&lt;input&gt;，设计关联的&lt;label&gt;，如文字、图片、字体图标；详情请参考 <a href="./demo/personal.html">个人网站</a></div>
@@ -282,25 +285,35 @@ input[type='radio'] {
     </dd>
     <dd>
       <div>方案1：利用accent-color，简单粗暴</div>
+      <img src="./imgs/checkbox.png" alt="" loading="lazy">
       <p>方案2：利用伪元素 <a href="./selector_class.html">选中伪类选择器:checked</a>、<a href="./selector_com.html">兄弟选择器 ~</a>、<a
           href="./position.html">定位</a></p>
       <p>. 按钮一开始在左边，选中后，移动到右边</p>
       <p>. 需要精准计算元素的大小</p>
       <p>. 也可以只使用相对定位relative，让伪元素相对位置发生变化[作为子元素，它本来就在父元素的开始位置]</p>
     </dd>
-    <dt class="nav-cont">范围 range</dt>
+    <!-- <dt class="nav-cont">范围 range</dt>
     <dd class="example-sn">自定义 range</dd>
     <dd>
       <div class="ipt-range-wrap">
         <input class="ipt-range" type="range" max="100" min="1">
       </div>
-    </dd>
-    <dt class="nav-cont">案例 case</dt>
+    </dd> -->
     <dd id="tabcard" class="example-sn"><a href="https://codepen.io/glpla/pen/MWZBQev">标签页 - CodePen</a></dd>
-    <dd>利用伪元素 <a href="./selector_class.html">选中伪类选择器:checked</a>、<a href="./selector_com.html">兄弟选择器 ~、<a
-          href="./selector_com.html">相邻兄弟选择器 +</a></dd>
+    <dd>
+      <div>默认显示第一个标签页内容；其它隐藏</div>
+      <div>单击标签，对于的标签页内容显示，其它隐藏</div>
+      <div>高亮标签、定制滚动条</div>
+      <div>使用单选按钮radio，绑定label，结合 <a href="./selector_class.html">选中选择器:checked</a>、<a href="./selector_com.html">兄弟选择器
+          ~</a>、<a href="./selector_com.html">相邻兄弟选择器 + </a>、<a href="./selector_arr.html">属性选择器</a> 综合实现
+      </div>
+      <div>注意结构</div>
+    </dd>
+    <img src="./imgs/tab0.png" alt="" loading="lazy">
+    <img src="./imgs/tab1.png" alt="" loading="lazy">
+    <img src="./imgs/tab2.png" alt="" loading="lazy">
+    </dd>
     <dd class="tips">
-      <div>&lt;label&gt;配合表单元素可以实现很多非常棒的设计，如定制表单元素、不使用js却能实现js的效果</div>
       <div>部分系统要求表单元素不能单独使用，必须用在&lt;form&gt;中；还有某些元素如密码，必须指定 autocomplete属性，请注意查看控制台提示信息，如：</div>
       <p>xxx field is not contained in a form</p>
       <p>Input elements should have autocomplete attributes</p>
@@ -308,10 +321,12 @@ input[type='radio'] {
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
-    <dt>总结</dt>
-    <dd>. input的常见分类和基本使用</dd>
-    <dt>作业</dt>
-    <dd>. 使用&lt;input&gt;元素完成个人网站的留言板或信息采集表的设计</dd>
+    <dt>总结 Summary</dt>
+    <dd>. &lt;input&gt; 的常见分类和基本使用</dd>
+    <dd>. &lt;input&gt; 样式的设计</dd>
+    <dd>. 初步使用CSS函数和CSS变量</dd>
+    <dt>作业 Homework</dt>
+    <dd>. 使用 &lt;input&gt; 元素完成个人网站的留言板或信息采集表的设计</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer"
     onload="this.height=this.contentDocument.body.scrollHeight"></iframe>

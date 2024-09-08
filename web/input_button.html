@@ -59,7 +59,7 @@
   <dl>
     <dt>概述 Overview</dt>
     <dd>
-      <div>. 除了可以使用&lt;input&gt;的特定type实现按钮功能外，还可以直接使用&lt;button&gt;</div>
+      <div>. 除了可以使用 &lt;input&gt; 的特定 type 实现按钮功能外，还可以直接使用 &lt;button&gt;</div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button">MDN -
           &lt;button&gt;</a></div>
       <pre>&lt;button type=""&gt;button text&lt;/button&gt;</pre>
@@ -71,7 +71,7 @@
         </tr>
         <tr>
           <td>submit</td>
-          <td>提交表单数据form data到服务器server；默认行为</td>
+          <td>提交表单数据 form data 到服务器 server；默认类型</td>
         </tr>
         <tr>
           <td>reset</td>
@@ -104,7 +104,12 @@ button {
   color: inherit;
   cursor: pointer;
 }</pre>
-      <div>. 一个作品内，按钮的样式应该统一；通常先指定 <span class="warn">公共</span> 样式，再指定专有样式</div>
+    </dd>
+    <dt>应用 Usage</dt>
+    <dd class="sn">
+      <p>. 一个作品内，按钮的样式应该统一</p>
+      <p>. 通常先指定 <span class="warn">公共</span> 样式，再指定专有样式</p>
+      <div>公共样式</div>
       <pre>
 // 公共静态样式
 button {
@@ -120,9 +125,17 @@ button {
 button:hover {
   background-position: right center;
 }      </pre>
-      <div>. 不同部分的按钮使用不同的背景即可；也可以使用<a href="./variable.html">变量 - variable</a>或<a href="./filter.html">滤镜 - filter</a>
-      </div>
+      <div>. 专有样式：不同部分的按钮，分配不同的类，每个类使用不同的背景即可</div>
+      <p>[<span class="iconfont icon-keyboard"></span>]基本样式 - 使用背景颜色区分；简单颜色、渐变颜色、透明度等都是常见的设计手法</p>
       <pre>
+.normal-btn {
+  background-color: #ccc;
+}
+
+.warn-btn {
+  background-color: #F40;
+}
+
 .more-btn {
   background-image: linear-gradient(90deg, #26de81, #20bf6b);
 }
@@ -134,12 +147,23 @@ button:hover {
 .close-btn {
   background-image: linear-gradient(90deg, #f39c12, #e74c3c);
 }</pre>
-      <div>
+      <p>
         <button class="more-btn" type="button">red</button>
         <button class="form-btn" type="button">blue</button>
         <button class="close-btn" type="button">dark</button>
-      </div>
+      </p>
+      <p>[<span class="iconfont icon-keyboard"></span>]高级样式 - 使用<a href="./variable.html">变量 - variable</a>或<a
+          href="./filter.html">滤镜 - filter</a></p>
     </dd>
+  </dl>
+  <div class="chap">总结与作业 Summary & Homework</div>
+  <dl>
+    <dt>总结 Summary</dt>
+    <dd>. &lt;button&gt; 的使用</dd>
+    <dd>. &lt;button&gt; 样式的设计</dd>
+    <dd>. 初步使用渐变背景</dd>
+    <dt>作业 Homework</dt>
+    <dd>. 使用 &lt;button&gt; 元素完善个人网站的留言板或信息采集表的设计</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer"
     onload="this.height=this.contentDocument.body.scrollHeight"></iframe>
