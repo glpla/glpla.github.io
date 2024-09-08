@@ -129,9 +129,9 @@
       <dt>基本过程</dt>
       <dd>
         <div>1. 定义锚点：使用 <span class="warn">id</span> 属性为目标元素定义一个锚点；W3C规范仅仅允许使用 id 标记锚点，不能使用类</div>
-        <pre>&lt;div id='cont'&gt;我是目标元素&lt;/div&gt;</pre>
+        <pre>&lt;div id='cont'&gt; 我是目标元素 &lt;/div&gt;</pre>
         <div>2. 在 &lt;a&gt; 的 href 属性中，使用 <span class="warn">#</span> 识别锚点</div>
-        <pre>&lt;a href="#cont"&gt; 去目标元素 &lt;/a&gt;</pre>
+        <pre>&lt;a href="#cont"&gt; 跳转到目标元素 &lt;/a&gt;</pre>
       </dd>
       <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 个人网站 - 请使用但不局限于这些标签：&lt;div&gt; &lt;html&gt;
         &lt;a&gt; &lt;nav&gt; &lt;p&gt; &lt;h1&gt;</dd>
@@ -223,7 +223,7 @@ a {
       <dd>
         <div>1. 提示用户：添加title属性，鼠标移入后，给出提示，完善用户体验</div>
         <pre>&lt;a href="" target="" title="点击查看更多推荐"&gt;更多&lt;/a&gt;</pre>
-        <div>2. 高亮目标：使用CSS目标选择器高亮当前跳转到的锚点|目标</div>
+        <div>2. 高亮目标：使用CSS目标选择器 :target 高亮当前跳转到的锚点|目标</div>
         <pre>
 el:target {
   color: #f40;
@@ -253,28 +253,31 @@ html {
         <div>. 查看/预览资源|文件的内容；可以是普通文档txt、OA文档、多媒体资源，如图片、音频、视频</div>
         <div>. 需要使用CSS特别处理&lt;a&gt;，如：修改display，隐藏文字、设置大小、添加背景</div>
         <div> <a class="pre-img" href="./imgs/alizee.jpg" title="点击查看大图" target="_blank">图片预览</a> </div>
-        <div>内容预览 - 图片</div>
+        <div>1. 图片</div>
         <pre>
 &lt;a href="./alizee.jpg" title="点击查看大图" target="_blank"&gt;图片预览&lt;/a&gt;</pre>
         <div><a class="pre-img" href="/utils/music/Alizee-LaIslaBonita.mp3" title="点击播放音乐" target="_blank">音乐预览</a>
         </div>
-        <div>内容预览 - 音乐</div>
+        <div>2. 音乐</div>
         <pre>&lt;a href="./Alizee-La Isla Bonita.mp3" title="点击播放音乐" target="_blank"&gt;音乐预览&lt;/a&gt;</pre>
         <div><a class="pre-img" href="/utils/video/alizee.mp4" title="点击播放视频" target="_blank">视频预览</a> </div>
-        <div>内容预览 - 视频</div>
+        <div>3. 视频</div>
         <pre>&lt;a href="../video/alizee.mp4" title="点击播放视频" target="_blank"&gt;视频预览&lt;/a&gt;</pre>
-        <div>内容预览 - 其它类型文件 <a href="/utils/data/data2022/course.json" target="_blank">课程表原始数据[json]</a>、<a
-            href="../css/base.css" target="_blank">样式文件[CSS]</a></div>
-        <pre>
-&lt;a href="./course.json" target="_blank"&gt;课程表原始数据[json]&lt;/a&gt;
-&lt;a href="./dom.css" target="_blank"&gt;样式文件[CSS]&lt;/a&gt;</pre>
+        <div>4. 文件 </div>
+        <div><a href="/utils/file/广州新华学院进度表-2023-数字媒体-Web前端开发-张树彬.pdf" target="_blank">新华学院进度表-2023-数字媒体-Web前端开发</a>
+        </div>
+        <pre>&lt;a href="./进度表.pdf"&gt;进度表.pdf&lt;/a&gt;</pre>
+        <div><a href="/utils/data/data2022/course.json" target="_blank">广工商课程表.json</a></div>
+        <pre>&lt;a href="./course.json"&gt;课程表.json&lt;/a&gt;</pre>
+        <div><a href="../css/base.css" target="_blank">base.css</a></div>
+        <pre>&lt;a href="./dom.css"&gt;base.css&lt;/a&gt;</pre>
       </dd>
       <dt>下载文件</dt>
       <dd>
         <div>. 指定download属性</div>
         <div>. 如果系统识别不了href提供的资源，就会触发下载</div>
         <div>. 默认情况下，浏览器以预览的方式打开链接；如果仅仅提供下载链接，应显式的指定download属性</div>
-        <div>截图工具Snipaste<a href='/utils/lib/Snipaste-1.16.2-x64.rar' download title="单击下载"> 本地下载</a>、<a
+        <div>1. 截图工具Snipaste<a href='/utils/lib/Snipaste-1.16.2-x64.rar' download title="单击下载"> 本地下载</a>、<a
             href="https://zh.snipaste.com/">在线下载</a>
         </div>
         <pre>&lt;a href='./Snipaste-1.16.2-x64.rar' title="单击下载" download&gt; 截图工具Snipaste &lt;/a&gt;</pre>
@@ -317,8 +320,9 @@ html {
       </dd>
       <dd class="quote number">
         <div>指定滚动模式 scroll-behavior</div>
+        <div>使用选择器 :hover 高亮超链接</div>
+        <div>使用选择器 :target 设置锚点</div>
         <div>指定滚动填充 scroll-padding-top</div>
-        <div>使用选择器:target设置目标锚点样式</div>
       </dd>
     </dl>
     <div class="chap">作业</div>

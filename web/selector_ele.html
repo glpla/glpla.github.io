@@ -45,13 +45,15 @@ selector::pseudo-element {
     display: block;
     box-sizing: border-box;
 }</pre>
-      <div class="example-sn">定制列表标记</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 定制列表标记</dd>
+    <dd class="sn">
       <div>使用普通字符</div>
       <pre>
 li::before {
     content: '>';
 }</pre>
-      <div>使用 <a href="https://www.w3school.com.cn/cssref/css_entities.asp">CSS 实体符号</a></div>
+      <div>使用CSS 实体</div>
       <pre>
 li::before {
     content: '\21E8';
@@ -59,24 +61,24 @@ li::before {
       <div>使用计数器；可以拼接普通字符或CSS实体</div>
       <pre>
 li::before {
-content: counter(sn) '\21e8 ';
+  content: counter(sn) '\21e8 ';
 } </pre>
-      <div>获取标签属性；可以是自定义属性data-</div>
+      <div>使用元素属性；可以是自定义属性 data-</div>
       <pre>
 li::before {
-content: attr(data-ind);
+  content: attr(data-ind);
 }</pre>
-      <div>图片；大图片调整大小应转为行块盒并指定溢出隐藏</div>
+      <div>使用图片；大图片调整大小应转为行块盒并指定溢出隐藏</div>
       <pre>
 li::before {
-content: url(./imgs/avatar.jpg);
-display: inline-block;/* MUST */
-overflow: hidden;/* MUST */
+  content: url(./imgs/avatar.jpg);
+  display: inline-block;/* MUST */
+  overflow: hidden;/* MUST */
 } </pre>
-      <div>留空，做其他装饰性设计</div>
+      <div>留空：做其他装饰性设计</div>
       <pre>
 li::before {
-content: '';
+  content: '';
 }</pre>
       <div>使用背景图片 - 使用留空的方式，采用背景图片处理，可以配合弹性盒子 flex 实现特定布局</div>
       <pre>
@@ -93,20 +95,21 @@ li::before {
     <dt>::first-letter ::first-line</dt>
     <dd>
       <div>. <span class="warn">block块元素</span> 的首字母、首行</div>
-      <div>. 设置的样式有限；常用于首字下沉</div>
-      <div>. 是内联元素inline，无法转化为块元素block</div>
-      <div>. ::first-letter优先级高于::first-line</div>
+      <div>. 设置的样式有限；如首字下沉</div>
+      <div>. 是内联元素inline，无法转化为块元素 block</div>
+      <div>. ::first-letter 优先级高于 ::first-line</div>
     </dd>
     <dt>::selection</dt>
-    <dd>. 元素被选择的部分；默认是蓝底白字</dd>
+    <dd>. 元素被选择的部分</dd>
+    <dd>. 默认是蓝底白字</dd>
     <dt>::placeholder</dt>
-    <dd>. 占位符样式；多用于表单元素input</dd>
+    <dd>. 占位符样式；多用于表单元素 input</dd>
     <dd>. 设置的样式有限</dd>
     <dt>::marker</dt>
     <dd>
       <div>. 定义标记类型</div>
-      <div>. 适用于display为list-item的元素，如&lt;li&gt;、&lt;summary&gt;</div>
-      <div>. 使用content属性指定内容</div>
+      <div>. 适用于 display 为 list-item 的元素，如 &lt;li&gt;、&lt;summary&gt;</div>
+      <div>. 使用 content 属性指定内容</div>
       <div>. 设置的样式有限</div>
       <div>. 因为标记会破坏布局，基本很少使用</div>
       <div>. 更多使用技巧，请访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/::marker">MDN ::marker</a>、<a
@@ -118,6 +121,7 @@ li::marker {
   font-size: 1.2em;
 }</pre>
     </dd>
+    <dt>案例 Cases</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/RwvOPvE">环环相扣
         - CodePen</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./position.html#cart">JD购物车</a></dd>
@@ -126,17 +130,8 @@ li::marker {
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./opening.html#evaluation">教学评价</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html#home">技能条</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="../os/sql/quiz.html">定制答题模板</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/ring.html">环环相扣</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/clock.html">时钟</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/paper.html">首字高亮</a></dd>
-    <dd>
-      <pre>
-p::first-letter {
-  color: #fff;
-  background-color: #f40;
-  padding: 2px 4px;
-}</pre>
-    </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
