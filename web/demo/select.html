@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>定制下拉列表</title>
   <style>
+    :root {
+      --main-color: #ff1493;
+    }
+
     @font-face {
       font-family: 'Quicksand';
       src: url(https://glpla.github.io/utils/font/Quicksand/Quicksand-Regular.ttf);
@@ -31,7 +35,7 @@
     .select {
       position: relative;
       width: 100%;
-      max-width: 350px;
+      max-width: 300px;
     }
 
 
@@ -43,11 +47,13 @@
       background-color: #eee;
       cursor: pointer;
       font-weight: 600;
+      color: var(--main-color);
     }
 
     .title::after {
       content: '\003E';
       transition: 0.4s;
+      color: var(--main-color);
     }
 
     .title.active::after {
@@ -81,7 +87,7 @@
 
     .options::-webkit-scrollbar-thumb {
       /* background-image: linear-gradient(transparent, #f40); */
-      background-color: #ff7b00;
+      background-color: var(--main-color);
     }
 
     .option {
@@ -92,7 +98,7 @@
 
     .option:hover,
     .option.active {
-      color: #f40;
+      color: var(--main-color);
     }
   </style>
 </head>

@@ -63,7 +63,7 @@
         </tr>
       </table>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 单选并获取数据 <select name="school" id="school-single">
+    <dd>1. 单组下拉列表 <select name="school" id="school-single">
         <option value="guilin">桂林</option>
         <option value="xiamen">厦门</option>
         <option value="foshan">佛山</option>
@@ -86,7 +86,7 @@ single.addEventListener('change', function () {
     console.log(this.value);
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 分组-&lt;optgroup&gt; <select name="school" id="school-mul">
+    <dd>2. 分组下拉列表 - &lt;optgroup&gt; <select name="school" id="school-mul">
         <optgroup label="college">
           <option value="guilin">guilin</option>
           <option value="xiamen">xiamen</option>
@@ -122,8 +122,15 @@ mul.addEventListener('change', function () {
     </dd>
     <dt>样式 Style</dt>
     <dd>
-      <div>. 可以单独设置 &lt;select&gt; 和 &lt;option&gt; 的字体颜色、大小，其它可以设置的属性比较少</div>
-      <div>. 很少直接使用。都是指定 appearance: none;以便重新设计</div>
+      <div>. 可以设置 &lt;select&gt; 和 &lt;option&gt; 的字体颜色、大小、选项选中，其它可以设置的属性比较少</div>
+      <div>. 很少直接使用。都是指定 <a
+          href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Advanced_form_styling#appearance_controlling_os-level_styling">MDN
+          - appearance</a>
+        以便重新设计 - notoriously difficult to style productively with CSS</div>
+      <img src="./imgs/select0.png" alt="" loading="lazy">
+      <div class="fig-sn">默认样式</div>
+      <img src="./imgs/select1.png" alt="" loading="lazy">
+      <div class="fig-sn">定制样式</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 初始化样式</dd>
     <dd>
@@ -145,15 +152,24 @@ select option {
   font-weight: normal;
 }</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 基本定制</dd>
-    <dd>
-      <div>不增加额外元素，使用多背景图片模拟小箭头</div>
-      <div>:hover :focus时的border变化</div>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 定制样式1 - 不增加元素 </dd>
+    <dd class="sn">
+      <div>隐去默认样式</div>
+      <div>使用边框border</div>
+      <div>使用背景图片代替小三角</div>
+      <div>增加hover和focus设计</div>
+      <select name="" id="" class="select">
+        <option value="桂林">广西壮族自治区桂林市</option>
+        <option value="厦门">福建省厦门市</option>
+        <option value="佛山">广东省佛山市</option>
+        <option value="海口">海南省海口市</option>
+        <option value="佛山">广东省东莞市</option>
+      </select>
       <pre>
 .select {
   display: block;
-  width: 100%;
   appearance: none;
+  width: 100%;
   border: 1px solid #aaa;
   background-color: #fff;
   border-radius: 6px;
@@ -172,22 +188,11 @@ select option {
   box-shadow: 0 0 4px rgba(0, 0, 0, .2);
 }      </pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 定制样式2 - 额外增加1个容器、1个遮罩和1个标记</dd>
     <dd>
-      <div class="select-wrap">
-        <select name="" id="" class="select">
-          <option value="桂林">广西壮族自治区桂林市</option>
-          <option value="厦门">福建省厦门市</option>
-          <option value="佛山">广东省佛山市</option>
-          <option value="海口">海南省海口市</option>
-          <option value="佛山">广东省东莞市</option>
-        </select>
-      </div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 高级定制</dd>
-    <dd>
-      <div>增加容器元素，提供小箭头的定位依据</div>
-      <div>增加元素模拟小箭头，<a href="./position.html">定位</a> 在右侧</div>
-      <div>增加元素接收选择结果，原有&lt;select&gt;被覆盖</div>
+      <div>容器元素：提供小箭头的定位依据</div>
+      <div>标记元素：模拟小箭头，<a href="./position.html">定位</a> 在右侧</div>
+      <div>遮罩元素：接收选中的数据，增加更多控制；原有&lt;select&gt;被覆盖</div>
       <div>值和显示的数据分别设计；只显示长的备选信息中的关键信息</div>
       <div>增加事件，动态修改选择内容</div>
     </dd>
@@ -201,8 +206,6 @@ select option {
       </select>
       <div class="mask"></div>
       <span class="iconfont icon-unfoldmore"></span>
-    </dd>
-    <dd>
       <pre>
 &lt;div class="custom-wrap"&gt;
     &lt;select name="school" id="school-custom"&gt;
@@ -216,25 +219,31 @@ select option {
 &lt;/div&gt;</pre>
     </dd>
     <dd class="sn">
-      <div>增加一个父级容器包裹表单元素&lt;select&gt;；相对定位</div>
+      <div>增加一个容器包裹表单元素&lt;select&gt;；相对定位</div>
       <div>增加一个遮罩元素mask，显示选中的值/城市名；绝对定位到容器前部；取消事件响应</div>
-      <div>增加一个修饰元素，显示上下箭头，提示用户可以操作；绝对定位到容器后部；取消事件响应</div>
-      <div>设置&lt;select&gt;字体颜色透明/不显示</div>
-      <div>设置&lt;option&gt;颜色为黑色</div>
-      <div>增加JS；一开始获取&lt;select&gt;的值给遮罩元素mask</div>
-      <div>为&lt;select&gt;增加change事件，每次改变时修改遮罩mask的文本</div>
-      <div>增加其它设计，如:hover</div>
+      <div>增加一个标记元素，显示上下箭头，提示用户可以操作；绝对定位到容器后部；取消事件响应</div>
+      <div>设置 &lt;select&gt; 字体颜色透明/不显示</div>
+      <div>设置 &lt;option&gt; 颜色为黑色</div>
+      <div>增加JS；一开始获取 &lt;select&gt; 的值给遮罩元素mask</div>
+      <div>为 &lt;select&gt; 增加 change 事件，每次改变时修改遮罩 mask 的文本</div>
+      <div>增加其它设计，如 :hover</div>
       <div>更多设计细节，请参考<a href="https://login.taobao.com/">天猫登录页面</a>、<a href="./demo/login_taobao.html">淘宝高仿</a></div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 全新定制 <a href="./demo/select.html">下拉列表</a></dd>
-    <dd>完全抛弃表单元素，从0开始设计</dd>
-    <dd>无法响应表单事件</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 定制样式3 - 全新定制，自己写一个，详细情况，请访问 <a href="./demo/select.html">下拉列表</a>
+    </dd>
+    <dd>
+      <div>完全抛弃表单元素，从0开始设计</div>
+      <div>无法响应表单事件</div>
+      <img src="./imgs/select2.png" alt="" loading="lazy">
+    </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
     <dt>总结 Summary</dt>
     <dd>. &lt;select&gt; 的使用</dd>
     <dd>. &lt;select&gt; 样式的设计</dd>
+    <dd>. 选择器：伪类选择器 :hover、:checked</dd>
+    <dd>. appearance在样式设计中的作用</dd>
     <dt>作业 Homework</dt>
     <dd>. 使用 &lt;select&gt; 元素完善个人网站的留言板或信息采集表的设计</dd>
   </dl>
