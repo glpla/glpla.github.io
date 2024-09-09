@@ -4,53 +4,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Dropdown</title>
   <style>
-    :root {
-      --main-color: #ff1493;
-      accent-color: var(--main-color);
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    form {
-      width: 300px;
-      margin: 100px auto;
-      background-color: #eee;
-      padding: 10px;
+    a {
+      text-decoration: none;
+      font: inherit;
+      color: inherit;
     }
 
-    select {
-      appearance: none;
+    ul {
+      list-style: none;
+    }
+
+    .nav {
+      margin: 10px auto;
+    }
+
+    .nav-item,
+    .drop-btn {
+      padding: 4px 10px;
+    }
+
+    .nav-item:hover {
+      background-color: #f40;
+      color: #fff;
+      border-radius: 4px;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .drop-btn {
+      cursor: pointer;
+    }
+
+    .drop-btn::after {
+      content: '\25BE';
+    }
+
+    .sub-menu {
+      position: absolute;
+      display: none;
+    }
+
+    .sub-menu .nav-item {
       display: block;
-      width: 100%;
-      outline: none;
-      line-height: 30px;
-      padding: 0 10px;
-      background-color: transparent;
-      background-image: url(./imgs/down.png);
-      background-size: 30px;
-      background-position: right center;
-      background-repeat: no-repeat;
+      width: max-content;
+    }
+
+    .dropdown:hover .drop-btn {
+      color: #f40;
+    }
+
+    .dropdown:hover .sub-menu {
+      display: block;
+    }
+
+    @media screen and (max-width: 768px) {
+      .nav-item {
+        display: block;
+        width: max-content;
+      }
     }
   </style>
 </head>
 
 <body>
-  <form>
-    <!-- <select name="" id="">
-      <option value="guilin">桂林 GL</option>
-      <option value="chongqing">重庆 CQ</option>
-      <option value="shanghai">上海 SH</option>
-      <option value="nanjing">南京 NJ</option>
-      <option value="guangzhou">广州 GZ</option>
-    </select> -->
-    <select name="" id="" class="base">
-      <option value="guilin">桂林 GL</option>
-      <option value="chongqing">重庆 CQ</option>
-      <option value="shanghai">上海 SH</option>
-      <option value="nanjing">南京 NJ</option>
-      <option value="guangzhou">广州 GZ</option>
-    </select>
-  </form>
-
+  <nav class="nav">
+    <a class="nav-item" href="#">overview</a>
+    <a class="nav-item" href="#">label</a>
+    <a class="nav-item" href="#">init</a>
+    <div class="dropdown">
+      <div class="drop-btn">type</div>
+      <div class="sub-menu">
+        <a class="nav-item" href="#">text</a>
+        <a class="nav-item" href="#">radio</a>
+        <a class="nav-item" href="#">checkbox</a>
+      </div>
+    </div>
+  </nav>
+</body>
 
 </html>
