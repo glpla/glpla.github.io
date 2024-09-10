@@ -29,6 +29,8 @@
       <div>元素从一个状态过渡到另外一个状态，包括过渡的2个状态、过渡的时间、过渡的方式、是否延迟等属性</div>
       <div>状态过渡需要一个触发条件，通常是鼠标悬停hover；也可以通过添加类的方式实现</div>
       <div>只能定义2个状态：开始状态、结束状态；如果需要多个状态呈现变化过程，请使用帧动画</div>
+      <div>只适用于 <span class="warn">数值</span> 状态</div>
+      <div>状态可以是一个属性，也可以是多个属性；多个属性的过渡可以使用 <span class="warn">逗号,</span> 分隔单独设计</div>
       <div>只能作用于当前元素；如果多个元素使用，请使用帧动画</div>
       <div>桌面端使用较多；移动端使用少</div>
       <div>复合属性 shorthand</div>
@@ -39,7 +41,7 @@ transition-property:
 transition-duration:
 transition-timing-function:
 transition-delay:        </pre>
-      <table class="tbl-sn tbl-ale">
+      <table>
         <caption>过渡属性</caption>
         <tr>
           <th style="width: 30%;">类别</th>
@@ -47,7 +49,7 @@ transition-delay:        </pre>
         </tr>
         <tr>
           <td>property</td>
-          <td>元素参与过渡的属性，一般都是 <span class="warn">数值型</span> 属性
+          <td>元素参与过渡的属性，必须是 <span class="warn">数值型</span> 的属性
             <br>通常指定为all；<span class="warn">建议</span> 指定为特定属性
           </td>
         </tr>
@@ -68,7 +70,7 @@ transition-delay:        </pre>
           <td>过渡延迟时间，必须是第二个时间参数；第一个时间参数是过渡时间</td>
         </tr>
       </table>
-      <table class="tbl-sn tbl-ale">
+      <table>
         <caption>时间函数 timing-function</caption>
         <tr>
           <th style="width: 30%;">类别</th>
@@ -99,6 +101,68 @@ transition-delay:        </pre>
           <td>在cubic-bezier函数中定义自己的值</td>
         </tr>
       </table>
+      <div>1. 默认所有属性过渡</div>
+      <pre>
+  .demo {
+    /* ... */
+    background-color: #ccc;
+    transition: 1s;
+  }
+
+  .demo:hover {
+    background-color: #f40;
+  }      </pre>
+      <div>2. 指定属性过渡</div>
+      <pre>
+  .demo {
+    /* ... */
+    background-color: #ccc;
+    transition: background-color 1s;
+  }
+
+  .demo:hover {
+    background-color: #f40;
+  }      </pre>
+      <div>3. 分别指定不同阶段过渡</div>
+      <pre>
+  .demo {
+    /* ... */
+    background-color: #ccc;
+    transition: background-color 1s;
+  }
+
+  .demo:hover {
+    background-color: #f40;
+    transition: background-color 3s;
+  }      </pre>
+      <div>4. 多个属性分别过渡</div>
+      <pre>
+  .demo {
+    /* ... */
+    background-color: #ccc;
+    font-size: 16px;
+    transition: background-color 1s, font-size 1s;
+  }
+
+  .demo:hover {
+    background-color: #f40;
+    font-size: 20px;
+    transition: background-color 1s, font-size 1s;
+  }      </pre>
+      <div>4. 多个属性带延迟分别过渡</div>
+      <pre>
+  .demo {
+    /* ... */
+    background-color: #ccc;
+    font-size: 16px;
+    transition: background-color 1s, font-size 1s;
+  }
+
+  .demo:hover {
+    background-color: #f40;
+    font-size: 20px;
+    transition: background-color 1s, font-size 1s 1s;
+  }      </pre>
     </dd>
     <dd class="tips">
       <div>过渡大多数情况下写在开始状态，也可以写在结束状态，还可以在两个状态中分别指定过渡：配合不同的时间，实现特定的效果，如快进慢退</div>
