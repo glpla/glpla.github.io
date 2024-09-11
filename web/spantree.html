@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生长树 Span Tree</title>
+  <style>
+    @import url(//at.alicdn.com/t/c/font_3859342_mzereglfeys.css);
+
+    :root {
+      --main-color: #f40;
+      --tree-color: #ccc;
+      --node-h: 180px;
+      --p-m-g: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'poppins', Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      font-size: 62.5%;
+    }
+
+    body {
+      font-size: 1.5rem;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      width: 100%;
+      gap: calc(5*var(--p-m-g));
+      padding: 10rem var(--p-m-g);
+    }
+
+    .iconfont {
+      color: var(--main-color);
+      font-size: 2rem;
+    }
+
+    .tree {
+      min-width: 40%;
+      max-width: 50%;
+    }
+
+    .node {
+      position: relative;
+      height: var(--node-h);
+    }
+
+    .node::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background-color: var(--tree-color);
+    }
+
+    .node .title {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      display: grid;
+      place-items: center;
+      width: 36px;
+      aspect-ratio: 1;
+      font-weight: 600;
+      border-radius: 50%;
+      border: 1px solid var(--tree-color);
+      background-color: #fff;
+    }
+
+    .node .cont {
+      border-top: 1px solid var(--tree-color);
+      padding: var(--p-m-g);
+    }
+
+    .node .cont>div {
+      margin-bottom: var(--p-m-g);
+    }
+
+    footer {
+      width: 100%;
+      line-height: 10rem;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    .stu {
+      position: relative;
+      width: 24px;
+      height: calc(var(--h)*var(--node-h));
+      writing-mode: vertical-lr;
+      color: var(--color);
+      letter-spacing: 5px;
+      padding-top: var(--p-m-g);
+    }
+
+    .stu::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background-color: var(--color);
+      z-index: -1;
+    }
+
+    .stu::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 80px;
+      border-radius: 0 0 12px 12px;
+      border: 1px solid var(--color);
+      background-color: #fff;
+      z-index: -1;
+    }
+
+    @media screen and (max-width: 768px) {
+      .wrap {
+        gap: 3vw;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="tree">
+      <div class="node">
+        <div class="title"><span class="iconfont icon-mouse"></span></div>
+        <div class="cont">
+          <div>Project：个人网站</div>
+        </div>
+      </div>
+      <div class="node">
+        <div class="title">&lt;a&gt;</div>
+        <div class="cont">
+          <div>页面之间：URL</div>
+          <div>页面内部： id、#</div>
+        </div>
+      </div>
+      <div class="node">
+        <div class="title">CSS</div>
+        <div class="cont">
+          <div>外部样式 .css</div>
+          <div>内部样式 &lt;style&gt;</div>
+          <div>内联样式 style</div>
+        </div>
+      </div>
+      <div class="node">
+        <div class="title">IDE</div>
+        <div class="cont">
+          <div>Vs Code：live server、lorem</div>
+          <div>Chrome：默认浏览器、搜索引擎、F12</div>
+          <div>Snipaste：F1、F3</div>
+          <div>Project：Hello, world.</div>
+        </div>
+      </div>
+    </div>
+    <div class="stu" style="--h: 4; --color:#26de81">软工1班</div>
+    <div class="stu" style="--h: 2; --color:#45aaf2">软工3班</div>
+    <div class="stu" style="--h: 3; --color:#fa8231">数媒1班</div>
+    <div class="stu" style="--h: 3; --color:#fc5c65">数媒2班</div>
+    <div class="stu" style="--h: 2; --color:#a55eea">数媒3班</div>
+  </div>
+  <footer>All rights reserved © glpla 2022-2025</footer>
+</body>
+
+</html>
