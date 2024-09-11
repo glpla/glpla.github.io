@@ -46,27 +46,31 @@
   background-position: right top;
 }
 
-.size {
+.bgs {
   width: 320px;
   height: 180px;
   margin: var(--p-m-g) auto;
   background-image: url(../imgs/bg.jpg);
 }
 
-.px {
-  background-size: 100px 100px;
+.bgs-option:has(input[id="auto"]:checked)+.bgs {
+  background-size: auto;
 }
 
-.per {
-  background-size: 20%;
+.bgs-option:has(input[id="contain"]:checked)+.bgs {
+  background-size: contain;
 }
 
-.cover {
+.bgs-option:has(input[id="cover"]:checked)+.bgs {
   background-size: cover;
 }
 
-.contain {
-  background-size: contain;
+.bgs-option:has(input[id="px"]:checked)+.bgs {
+  background-size: 100px;
+}
+
+.bgs-option:has(input[id="per"]:checked)+.bgs {
+  background-size: 20%;
 }
 
 .mask {
@@ -77,12 +81,6 @@
 .blinds {
   background-image: linear-gradient(transparent, #000), url(../imgs/bg.jpg);
   background-size: 100% 6px, cover;
-}
-
-.cover-center {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .dog {

@@ -16,92 +16,107 @@
     <h1>&commat;Advanced Background</h1>
     <span class="ham iconfont icon-menu"></span>
     <ul class="nav">
-      <li class="nav-item">Origin</li>
-      <li class="nav-item">Clip</li>
-      <li class="nav-item">Attachment</li>
+      <li class="nav-item">BackgroundOrigin</li>
+      <li class="nav-item">BackgroundClip</li>
+      <li class="nav-item">BackgroundAttachment</li>
     </ul>
   </header>
-  <div class="chap">背景起点 Background-origin</div>
   <dl class="nav-cont">
-    <dt>说明</dt>
+    <dt class="nav-cont">背景起点 <a
+        href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin">Background-origin</a></dt>
     <dd>
-      <div>. 背景图片[<span class="warn">NOT</span>背景颜色]使用/渲染时的起点位置</div>
-      <div>. 用来控制background-position位置的属性</div>
-      <div>[提示]盒模型包括：边框区border、填充区padding和内容区content</div>
-      <pre>background-origin: padding-box|border-box|content-box;</pre>
-      <div>. padding-box：默认值；背景图片从padding区开始渲染，border区不会出现</div>
+      <div>背景图片 background-image[<span class="warn">NOT</span>背景颜色 background-color]使用/渲染时的起点位置/原点位置</div>
+      <!-- <div>用来控制background-position位置的属性</div> -->
+      <pre>background-origin: padding-box | border-box | content-box;</pre>
+      <div>. padding-box：默认值；背景图片从padding区开始渲染，border区不会出现；如果有背景色，则默认会在border区出现</div>
       <div>. border-box：背景图片从border区开始渲染；可创建透明边框效果</div>
       <div>. content-box：背景图片只会出现在内容区域，padding和border都不会出现</div>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] background-origin</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] background-origin</dd>
     <dd>
-      <div>background-origin: </div>
-      <input type="radio" name="origin" id="padding" checked>
-      <label for="padding">padding-box</label>
-      <input type="radio" name="origin" id="border">
-      <label for="border">border-box</label>
-      <input type="radio" name="origin" id="content">
-      <label for="content">content-box</label>
-      <div>background-size: </div>
-      <input type="radio" name="size" id="none" checked>
-      <label for="none">不使用</label>
-      <input type="radio" name="size" id="contain">
-      <label for="contain">contain</label>
-      <input type="radio" name="size" id="cover">
-      <label for="cover">cover</label>
-      <input type="radio" name="size" id="full">
-      <label for="full">100% 100%</label>
-    </dd>
-    <dd class="bg-origin" id="bgOrigin"></dd>
-    <dd>
-      <pre>
-.bg-origin {
-    border: 20px solid rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    background-color: #ff0;
-    background-image: url(../imgs/bg.jpg);
-    background-repeat: no-repeat;
-}</pre>
-    </dd>
-  </dl>
-  <div class="chap">背景裁剪 Background-clip</div>
-  <dl class="nav-cont">
-    <dt>说明</dt>
-    <dd>
-      <div>. 背景[背景颜色 <span class="warn">和</span> 背景图片]的裁剪区域</div>
-      <pre>background-clip: border-box | padding-box | content-box;</pre>
-      <div>.
-        border-box：背景从border区域向外裁剪，即超出border区的背景将被裁剪掉；如果有border，则border会覆盖背景；换句话说，背景填充到border区，只不过被border覆盖住了；设置一个dashed的border就可看到背景是在border的下方
+      <div class="bgo-option">
+        .bg-origin {
+        <br> width: 320px;
+        <br> height: 180px;
+        <br> border: 20px dashed rgba(255, 255, 255, 0.8);
+        <br> padding: 20px;
+        <br> background-color: #ff0;
+        <br> background-image: linear-gradient(45deg, #ff0, #f00);
+        <br> background-size: cover;
+        <br> background-clip:
+        <input type="radio" name="bgo" id="bgopadding" checked>
+        <label for="bgopadding">padding-box</label>
+        <input type="radio" name="bgo" id="bgoborder">
+        <label for="bgoborder">border-box</label>
+        <input type="radio" name="bgo" id="bgocontent">
+        <label for="bgocontent">content-box</label>;
+        <br> margin: 1rem auto;
+        <br> }
       </div>
-      <div>. padding-box： 背景从padding区域向外裁剪，超过padding区的背景将被裁剪掉</div>
-      <div>.
-        content-box：背景从content区域向外裁剪，超过context区的背景将被裁剪掉；如果有padding，但是只指定了background-image而没有指定background-color，则padding区为默认的白色；所以保险起见，通常要设置一个背景色，避免background-image无效
+      <div class="bg-origin"></div>
+    </dd>
+    <dt class="nav-cont">背景裁剪 <a
+        href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip">Background-clip</a></dt>
+    <dd>
+      <p>背景[背景颜色 <span class="warn">和</span> 背景图片]的延申什么位置 - extends underneath</p>
+      <pre>background-clip: border-box | padding-box | content-box | text;</pre>
+      <div>1. border-box</div>
+      <div>背景延伸至边框外沿（但是在边框下层）；默认属性</div>
+      <div>背景显示拓展到border区域下面；超出border区的背景将被裁剪掉</div>
+      <div>如果有border，则border会覆盖背景；换句话说，背景填充到border区，只不过被border覆盖住了</div>
+      <div>设置一个dashed的border就可看到背景是在border的下方</div>
+      <div>2. padding-box</div>
+      <div>背景延伸至内边距（padding）外沿。不会绘制到边框处</div>
+      <div>背景显示拓展到padding区域；超过padding区的背景将被裁剪掉</div>
+      <div>3. content-box</div>
+      <div>背景被裁剪至内容区（content box）外沿</div>
+      <div>背景显示在content区域下面；超过context区的背景将被裁剪掉</div>
+      <div>如果有padding，但是只指定了background-image而没有指定background-color，则padding区为默认的白色</div>
+      <div>所以保险起见，通常要设置一个背景色，避免background-image无效</div>
+      <div>4. text <span class="iconfont icon-lab"></span></div>
+      <div>背景被裁剪成文字的前景色</div>
+      <div>通常文字设置为透明色，创建带背景的文字效果</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] background-clip示例</dd>
+    <dd>
+      <div class="bgc-option">
+        .bg-clip {
+        <br> width: 320px;
+        <br> height: 180px;
+        <br> line-height: 100px;
+        <br> font-size: 40px;
+        <br> font-weight: 600;
+        <br> border: 20px dashed rgba(255, 255, 255, 0.8);
+        <br> padding: 20px;
+        <br> background-color: #ff0;
+        <br> background-image: linear-gradient(45deg, #ff0, #f00);
+        <br> background-size: cover;
+        <br> background-clip:
+        <input type="radio" name="bgc" id="bgcborder" checked>
+        <label for="bgcborder">border-box</label>
+        <input type="radio" name="bgc" id="bgcpadding">
+        <label for="bgcpadding">padding-box</label>
+        <input type="radio" name="bgc" id="bgccontent">
+        <label for="bgccontent">content-box</label>
+        <input type="radio" name="bgc" id="bgctext">
+        <label for="bgctext">text</label>;
+        <br> margin: 1rem auto;
+        <br> }
       </div>
+      <div class="bg-clip">hello, world.</div>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] background-clip</dd>
+    <dt class="nav-cont">背景铺贴 <a
+        href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment">Background-attachment</a>
+    </dt>
     <dd>
-      <div>. 设置了背景颜色和背景图片；其它样式不做设置</div>
-      <div class="bg-clip bg-clip-border"></div>
-      <pre>background-clip: border-box;</pre>
-      <div class="bg-clip bg-clip-padding"></div>
-      <pre>background-clip: padding-box;</pre>
-      <div class="bg-clip bg-clip-content"></div>
-      <pre>background-clip: content-box;</pre>
-    </dd>
-  </dl>
-  <div class="chap">背景铺贴 Background-attachment</div>
-  <dl class="nav-cont">
-    <dt>说明</dt>
-    <dd>
-      <div>. 背景图片显示方式/是否随窗口滚动</div>
-      <div>. 背景图片和内容的附着方式</div>
-      <div>. 多用于营造视觉差效果，更多实例，请访问 <a href="./demo/resume.html">简历</a>一节</div>
+      <div>. 背景图片是固定在视口viewpoint还是随窗口容器滚动；即背景图片和元素的附着方式</div>
+      <div>. 多用于营造视觉差效果</div>
       <pre>background-attachment: scroll | fixed | local; </pre>
       <div>. scroll：默认背景图片会随着窗口/页面滚动而滚动；背景图片和自己保持固定；自己滚动不影响，别人滚动会影响</div>
       <div>. fixed：背景图片不会随着窗口/页面滚动而滚动背景，即：背景图片固定不动/相对于视口固定</div>
       <div>. local：背景图片会随着元素内容的滚动而滚动</div>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 默认情况</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 默认情况</dd>
     <dd>. 背景图片不跟随内容滚动；但跟随窗口/视口滚动：整体滚动</dd>
     <dd class="basic bg-attach-default">
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis at nostrum fugiat ratione
@@ -118,7 +133,7 @@
     background-image: url(../imgs/bg.jpg);
 }</pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 固定</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 固定</dd>
     <dd>. 背景图片不跟随内容滚动，但是相对窗口/视口固定</dd>
     <dd>. 参考页面顶部</dd>
     <dd class="basic bg-attach-fixed">
@@ -137,7 +152,7 @@
     background-attachment: local;
 }</pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 本地</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 本地</dd>
     <dd>. 背景图片跟随内容滚动；跟随窗口/视口滚动</dd>
     <dd>. 背景图片通常需要重复</dd>
     <dd class="basic bg-attach-local">
@@ -168,44 +183,6 @@
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="./lib/ham.js"></script>
-  <script>
-    window.onload = function () {
-      let border = document.querySelector('#border')
-      let padding = document.querySelector('#padding')
-      let content = document.querySelector('#content')
-      let bgOrigin = document.querySelector('#bgOrigin')
-
-      let none = document.querySelector('#none')
-      let contain = document.querySelector('#contain')
-      let cover = document.querySelector('#cover')
-      let full = document.querySelector('#full')
-
-      border.addEventListener('change', (e) => {
-        bgOrigin.style.backgroundOrigin = 'border-box'
-      })
-      padding.addEventListener('change', (e) => {
-        bgOrigin.style.backgroundOrigin = 'padding-box'
-      })
-      content.addEventListener('change', (e) => {
-        bgOrigin.style.backgroundOrigin = 'content-box'
-      })
-
-
-      none.addEventListener('change', (e) => {
-        bgOrigin.style.backgroundSize = 'unset'
-      })
-      contain.addEventListener('change', (e) => {
-        bgOrigin.style.backgroundSize = 'contain'
-      })
-      cover.addEventListener('change', (e) => {
-        bgOrigin.style.backgroundSize = 'cover'
-      })
-      full.addEventListener('change', (e) => {
-        bgOrigin.style.backgroundSize = '100% 100%'
-      })
-
-    }
-  </script>
 </body>
 
 </html>
