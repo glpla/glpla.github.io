@@ -1,0 +1,158 @@
+@import url(//at.alicdn.com/t/c/font_3859342_mzereglfeys.css);
+
+:root {
+  --main-color: #f40;
+  --tree-color: #ccc;
+  --node-h: 180px;
+  --p-m-g: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'poppins', Arial, Helvetica, sans-serif;
+}
+
+li {
+  list-style: square;
+}
+
+li::marker {
+  color: #fa8231;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.5rem;
+  background-color: #f1f2f3;
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(#fc5c65, #fa8231, #26de81, #45aaf2, #a55eea);
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
+  max-width: 1190px;
+  margin: 0 auto;
+  padding: 10rem var(--p-m-g);
+  background-color: #fff;
+}
+
+.iconfont {
+  color: var(--main-color);
+  font-size: 2rem;
+}
+
+.tree {
+  max-width: 50%;
+}
+
+.node {
+  position: relative;
+  height: var(--node-h);
+}
+
+.node::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0.2rem;
+  height: 100%;
+  background-color: var(--tree-color);
+}
+
+.title {
+  position: absolute;
+  top: -1.8rem;
+  right: -1.8rem;
+  display: grid;
+  place-items: center;
+  width: 3.6rem;
+  aspect-ratio: 1;
+  font-weight: 600;
+  border-radius: 50%;
+  border: 1px solid var(--tree-color);
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.cont {
+  border-top: 1px solid var(--tree-color);
+  padding: var(--p-m-g);
+}
+
+.title:hover {
+  border-color: var(--main-color);
+  box-shadow: 0 0 1rem rgba(255, 68, 0, 0.4);
+}
+
+.title:hover+.cont {
+  display: block;
+}
+
+.cont>div {
+  margin-bottom: var(--p-m-g);
+}
+
+footer {
+  width: 100%;
+  line-height: 10rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.stu {
+  position: relative;
+  width: 2.4rem;
+  height: calc(var(--h)*var(--node-h));
+  writing-mode: vertical-lr;
+  color: var(--color);
+  letter-spacing: 0.5rem;
+  padding-top: var(--p-m-g);
+  color: #fff;
+  z-index: 1;
+}
+
+.stu::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 0.2rem;
+  height: 100%;
+  background-color: var(--color);
+  z-index: -1;
+}
+
+.stu::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 9rem;
+  border-radius: 0 0 1.2rem 1.2rem;
+  background-color: var(--color);
+  z-index: -1;
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 55%;
+  }
+}

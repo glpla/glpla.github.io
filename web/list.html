@@ -20,35 +20,27 @@
       <a href="" style="--delay:0" class="nav-item">有序列表 ol</a>
       <a href="" style="--delay:1" class="nav-item">无序列表 ul</a>
       <a href="" style="--delay:2" class="nav-item">自定义列表 dl</a>
+      <a href="" style="--delay:3" class="nav-item">列表初始化 init</a>
     </nav>
   </header>
-  <div class="chap">有序列表 Ordered list</div>
-  <dl class="nav-cont">
-    <dt>说明 Overview</dt>
+  <dl>
+    <dt class="nav-cont">有序列表 Ordered list</dt>
     <dd>
-      <div>. 元素按照一定规则排列，如：从小到大</div>
+      <div>. 元素按照一定规则排列，如：从小到大；类似办公文档的编号 numbering</div>
+      <div>. 使用属性 type 指定；默认按照数字升序排序</div>
+      <div>. &lt;ol&gt;：无序列表 ordered list；块盒 block</div>
+      <div>. &lt;li&gt;：列表项 list item；块盒 block；&lt;ol&gt; 的子元素只能是 &lt;li&gt;</div>
+      <div>. 可以嵌套使用</div>
       <div>. 应用较少；更多是通过定制编号实现，如 <a href="./counter.html">计数器</a></div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol">MDN - &lt;ol&gt;</a></div>
-      <p>[<span class="iconfont icon-bangzhu2"></span>] 办公文档的编号 numbering</p>
-    </dd>
-    <dt>结构</dt>
-    <dd>
-      <div>. 包括2个标签：</div>
-      <div>. &lt;ol&gt;：无序列表 ordered list；块盒 block</div>
-      <div>. &lt;li&gt;：列表项 list item；块盒 block</div>
-      <div>. 可以嵌套使用</div>
       <pre>
 &lt;ol type="" start="" reversed&gt;
     &lt;li&gt;&lt;/li&gt;
     //... ...
     &lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;</pre>
-    </dd>
-    <dt>编号类型 Type</dt>
-    <dd>
-      <div>. 使用属性 type 指定</div>
       <table>
-        <caption>有序列表属性</caption>
+        <caption>编号的类型type</caption>
         <tr>
           <th>类别</th>
           <th>说明</th>
@@ -113,28 +105,73 @@
   content: '0' counter(sn)' ';
 }      </pre> -->
     </dd>
-  </dl>
-  <div class="chap">无序列表 Unordered list</div>
-  <dl class="nav-cont">
-    <dt>说明 Overview</dt>
+    <dt class="nav-cont">无序列表 Unordered list</dt>
     <dd>
-      <div>. 元素彼此之间没有顺序</div>
+      <div>. 元素彼此之间没有顺序；取而代之的是标记 marker；类似于办公文档的项目符号 bullets</div>
       <div>. 可以嵌套使用</div>
       <div>. &lt;ul&gt;：无序列表 unordered list；块盒 block</div>
-      <div>. &lt;li&gt;：列表项 list item；块盒 block</div>
+      <div>. &lt;li&gt;：列表项 list item；块盒 block；&lt;ul&gt; 的子元素只能是 &lt;li&gt;</div>
       <div>. 早期广泛用于 <span class="warn">导航</span> ：&lt;ul&gt; → &lt;li&gt; → &lt;a&gt;；结构清晰；避免被SEO降权；为了减少层级而又不失去SEO增强
       </div>
       <div>. 现在导航多使用 &lt;nav&gt; → &lt;a&gt; 实现</div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul">MDN - &lt;ul&gt;</a></div>
-    </dd>
-    <dd class="sn">
-      <div>基本使用</div>
       <pre>
 &lt;ul type=""&gt;
     &lt;li&gt;&lt;/li&gt;
     //... ...
     &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;</pre>
+      <table>
+        <caption>标记的类型 type</caption>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>disc</td>
+          <td>点；默认标记</td>
+        </tr>
+        <tr>
+          <td>square</td>
+          <td>方块</td>
+        </tr>
+        <tr>
+          <td>circle</td>
+          <td>圆圈</td>
+        </tr>
+      </table>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>]标记的基本使用</dd>
+    <dd class="sn">
+      <div>使用type，指定为square；适合少量列表</div>
+      <pre>
+&lt;ul type="square"&gt;
+    &lt;li&gt;&lt;/li&gt;
+    //... ...
+    &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;</pre>
+      <div>使用CSS统一设置为方形 square、橙色；适合大量列表</div>
+      <pre>
+/* 也可以使用 li */ 
+ul {
+  list-style: square;
+}
+
+li::marker {
+  color: #fa8231;
+}</pre>
+      <div>定制标记；可以使用普通符号或使用CSS <a href="./entity.html">实体 Entity</a></div>
+      <pre>
+li::marker {
+  content: '+';
+}</pre>
+      <pre>
+li::marker {
+  content: '\2720';
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>]标记的应用 - 导航</dd>
+    <dd class="sn">
       <div>早期导航结构</div>
       <pre>
 &lt;ul type=""&gt;
@@ -154,10 +191,20 @@
   &lt;a href="" target="" title=""&gt; discernible text &lt;/a&gt;
 &lt;/nav&gt;</pre>
     </dd>
+    <dt class="nav-cont">自定义列表 Definition list</dt>
+    <dd>
+      <div>. &lt;dl&gt;：自定义列表 Definition list；块盒 block；用于对数据总结或分类</div>
+      <div>. 一个 &lt;dl&gt; 可以有多个 &lt;dt&gt;、多个 &lt;dd&gt;</div>
+      <div>. &lt;dt&gt;：定义列表项标题 Definition Title；块盒 block</div>
+      <div>. &lt;dd&gt;：定义列表项描述 Definition Description；块盒 block</div>
+      <div>. 应用非常广泛；各大门户网站底部的信息和版权等</div>
+      <div>. 也可以使用 &lt;ul&gt; 代替</div>
+      <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl">MDN - &lt;dl&gt;</a></div>
+    </dd>
     <dt>样式初始化</dt>
     <dd>
-      <p>列表默认都有margin和padding，会破坏页面布局</p>
-      <p>需要初始化样式：取消其默认样式，再根据设计利用CSS重新指定样式</p>
+      <div>列表默认都有margin和padding，会破坏页面布局</div>
+      <div>需要初始化样式：取消其默认样式，再根据设计利用CSS重新指定样式</div>
       <pre>
 * {
   margin: 0;
@@ -170,7 +217,9 @@ ul {
   list-style: none;
 }</pre>
     </dd>
-    <dd class="example-sn">导航设计 - 使用内部样式完善个人网站的锚点跳转；更多导航，请欣赏<a href="https://www.jd.com/">京东</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 导航设计 - 使用内部样式完善个人网站的锚点跳转；更多应用，请访问<a
+        href="./demo/companies.html#footer">关于</a>、<a href="https://www.jd.com/">京东</a>、<a
+        href="https://www.mi.com/about">小米</a></dd>
     <dd>. 鼠标hover时，使用文字下划线提示，同时改变文字颜色</dd>
     <dd>
       <ul class="self-nav">
@@ -188,59 +237,10 @@ ul {
       <div>其它样式设计 - 自由发挥</div>
       <div>尝试使用 &lt;nav&gt; → &lt;a&gt; 实现导航</div>
     </dd>
-    <dt>标记 Marker</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 标记的高级使用</dd>
     <dd>
-      <p>[<span class="iconfont icon-bangzhu2"></span>] 办公文档的项目符号 bullets</p>
-      <div>1. 使用系统内置标记 - 使用属性 type 指定</div>
-      <table>
-        <caption>无序列表 type 属性</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>disc</td>
-          <td>点；默认标记</td>
-        </tr>
-        <tr>
-          <td>square</td>
-          <td>方块</td>
-        </tr>
-        <tr>
-          <td>circle</td>
-          <td>圆圈</td>
-        </tr>
-      </table>
-      <div>默认使用：会破坏页面布局；为ul指定背景色，查看更直观</div>
-      <ul style="list-style: unset; background-color: #fdd;">
-        <li>list1</li>
-        <li>list2</li>
-        <li>list3</li>
-        <li>list4</li>
-        <li>list5</li>
-      </ul>
-      <div>2. 定制标记</div>
-      <div>. 使用 <a href="./selector_ele.html">伪元素 - ::marker</a>；仍然会破坏页面布局</div>
-      <pre>
-ul li::marker {
-  content: '+ ';
-}      </pre>
       <div>. 使用 <a href="./selector_ele.html">伪元素 - ::before</a>；通常先初始化再定制</div>
       <div>. 使用 <a href="./counter.html">计数器</a>；通常先初始化再定制</div>
-    </dd>
-  </dl>
-  <div class="chap">自定义列表 Definition list</div>
-  <dl>
-    <dt class="nav-cont">说明 Overview</dt>
-    <dd>. &lt;dl&gt;：自定义列表 Definition list；块盒 block；用于对数据总结或分类</dd>
-    <dd>. 一个 &lt;dl&gt; 可以有多个 &lt;dt&gt;、多个 &lt;dd&gt;</dd>
-    <dd>. &lt;dt&gt;：定义列表项标题 Definition Title；块盒 block</dd>
-    <dd>. &lt;dd&gt;：定义列表项描述 Definition Description；块盒 block</dd>
-    <dd>. 应用非常广泛；各大门户网站底部的信息和版权等</dd>
-    <dd>. 也可以使用 &lt;ul&gt; 代替</dd>
-    <dd>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl">MDN - &lt;dl&gt;</a></dd>
-    <dd class="example-sn"> 企业网站 - <a href="./demo/companies.html#footer">关于</a>、小米 - <a
-        href="https://www.mi.com/about">关于</a>
     </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
