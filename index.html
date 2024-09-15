@@ -13,6 +13,7 @@
 </head>
 
 <body>
+
   <script>
     AFRAME.registerComponent('click-listener', {
       init: function () {
@@ -27,30 +28,35 @@
       }
     });
   </script>
+
   <a-scene log="Hello, Scene!">
     <a-assets>
       <img id="avatar" src="./imgs/avatar.jpg" alt="">
-      <img id="skyTexture" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
       <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
     </a-assets>
+
     <a-box src="#avatar" position="0 4 -10" rotation="45 45 45" scale="1 1 1"
       animation__mouseenter="property: rotation; to: 45 405 45; dur: 5000; loop: true; easing:linear;"
       animation__mouseleave="property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true; "
       click-listener>
     </a-box>
-    <a-entity text="value: glpla.github.io; align:center; color: #ccc;" position="0 0.5 -2" scale="2 2 2"
-      geometry="primitive:plane;width:auto;height:auto;" material="color:white; transparent: true;opacity: 0"
-      click-listener></a-entity>
+
+    <a-entity
+      text="value: glpla.github.io\nAll rights reserved © glpla 2022-2025\n1942194789@qq.com\n广州新华学院\n东莞 · 中国; align:center; color: #FFF; font: ./utils/font/custom-msdf/custom-msdf.json; font-image: ./utils/font/custom-msdf/custom.png; negate:false"
+      position="0 0.5 -2" scale="2 2 2" geometry="primitive:plane;width:auto;height:auto;"
+      material="color:white; transparent: true;opacity: 0" click-listener></a-entity>
+
     <a-entity
       environment="preset: forest; groundTexture:walkernoise; groundColor:#643600;groundColor2:#3d2407; dressing:trees;dressingColor:#96c24e;"></a-entity>
 
-    <a-entity id="mouseCursor" cursor="rayOrigin: mouse"></a-entity>
     <a-entity>
       <a-camera position="0 1.5 1">
         <a-cursor></a-cursor>
       </a-camera>
     </a-entity>
+
   </a-scene>
+
 </body>
 
 </html>
