@@ -28,13 +28,8 @@
     <dt class="nav-cont">边框 border</dt>
     <dd>
       <div>. 为元素添加指定宽度、样式和颜色的边框</div>
-      <div>. 元素有4个边，默认是同时设置4个边：top、right、bottom、left-上右下左</div>
-      <div>. 可以单独设置每个边的宽度、样式和颜色</div>
-      <div>. 通常使用复合属性border: border-width border-style border-color</div>
-      <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/border">MDN - border</a></div>
       <pre>border: border-width border-style border-color</pre>
-    </dd>
-    <dd>
+      <div>. 元素有4个边，默认是同时设置4个边：top、right、bottom、left - 上右下左</div>
       <table>
         <tr>
           <th>类别</th>
@@ -53,6 +48,17 @@
           <td>线条颜色：默认和元素的文字颜色保持一致</td>
         </tr>
       </table>
+      <div>. 可以单独设置每个边的宽度、样式和颜色</div>
+      <pre>border-top: border-width border-style border-color</pre>
+      <div>. 还可以使用独立属性单独设置</div>
+      <pre>
+.box{
+  border-top-color: #f40;
+  border-top-width: 1px;
+  border-top-style: solid;
+}      </pre>
+      <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/border">MDN - border</a></div>
+
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 基本使用：同时设置4个边</dd>
     <dd class="grid2">
@@ -77,7 +83,7 @@
   }</pre>
       </div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 0元素边框-0尺寸大边框</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 0元素边框 - 0尺寸大边框</dd>
     <dd class="grid2">
       <div class="zero0"></div>
       <div>
@@ -85,10 +91,7 @@
 .zero0 {
     width: 0;
     height: 0;
-    margin: 1rem auto;
-    border-width: 20px;
-    border-style: solid;
-    border-top-color: #f08;
+    border: 20px solid  #f08;
     border-right-color: #089;
     border-bottom-color: #f40;
     border-left-color: #890;
@@ -104,7 +107,6 @@
   .zero1 {
       width: 0;
       height: 0;
-      margin: 1rem auto;
       border: 20px solid transparent;
       border-bottom-color: #f40;
   }</pre>
@@ -116,9 +118,8 @@
     <dd>. 上下三角形</dd>
     <dd>. 左右三角形</dd>
     <dd class="tips">
-      <div>Tips</div>
-      <div>WEB早期发展限制，多使用这种hack手段进行设计</div>
-      <div>随着字体图标和其它方式的流行，这种设计手段渐渐淡出视野</div>
+      <div>WEB早期发展限制，多使用这种 hack 手段进行设计</div>
+      <div>随着字体图标和其它方式的流行，这种设计手法渐渐淡出视野</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 透明边框 - 纯色背景[进阶]</dd>
     <dd class="grid2">
@@ -156,7 +157,7 @@
     <dd>. 边框的圆角半径</dd>
     <dd>. 更多应用，请点击 <a href="https://9elements.github.io/fancy-border-radius/">fancy-border-radius</a>
     </dd>
-    <dt>语法1[<span class="iconfont icon-iconfontshoucang"></span>]</dt>
+    <dt>语法1 [<span class="iconfont icon-iconfontshoucang"></span>]</dt>
     <dd>
       <pre>border-radius: length|%;</pre>
     </dd>
@@ -236,9 +237,9 @@
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/companies.html#service">公告信息栏</a></dd>
     <dd>. 左边框 border-left</dd>
     <dd>. 圆角 border-radius</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animRing.html">科技环</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNmOjzQ">科技环</a></dd>
     <dd>. 仅指定一个方向的边框，圆角化，然后旋转</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/ring.html">环环相扣</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/RwvOPvE">环环相扣</a></dd>
     <dd>. 左环使用伪元素创建同样大小的圆环；注意盒模型的尺寸计算</dd>
     <dd>. 设置伪元素上边框 border-top 颜色为相同的颜色；其他三个方向的边框颜色透明</dd>
     <dd>. 旋转伪元素 transform，使其覆盖在右侧环上方</dd>
@@ -323,21 +324,17 @@ a:hover {
   background-color: #f40;
 }      </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 水滴-第三方库 fancy-border-radius</dd>
-    <dd>. 盒阴影 box-shadow</dd>
-    <dd>. 过渡动画 transition</dd>
-    <dd>. :hover</dd>
-    <dd class="water-wrap">
+    <dd>[<span class="iconfont icon-keyboard"></span>] 水滴 - 第三方库 fancy-border-radius 实现</dd>
+    <dd>
+      <div>. 盒阴影 box-shadow</div>
+      <div>. 过渡动画 transition</div>
+      <div>. :hover</div>
       <input type="radio" name="wc" id="w" checked>
       <label for="w">白色 rgba(0, 0, 0, 0.05)</label>
       <input type="radio" name="wc" id="b">
       <label for="b">蓝色 rgba(5, 169, 243, 0.05)</label>
       <div class="water"></div>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>第三方库 fancy-border-radius</figcaption>
-        <pre>
+      <pre>
 .water {
   width: 180px;
   height: 180px;
@@ -354,7 +351,6 @@ a:hover {
 .water:hover {
   border-radius: 50%;
 }</pre>
-      </figure>
     </dd>
   </dl>
   <div class="chap">边框图像 border-image</div>
@@ -491,7 +487,7 @@ border-block-end</pre>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
     <dt>总结</dt>
-    <dd>. 边框 border的使用和样式</dd>
+    <dd>. 边框 border 的使用和样式</dd>
     <dt>作业</dt>
     <dd class="ol">
       <div>绘制透明椭圆头像框</div>

@@ -17,10 +17,11 @@
     <span>&commat;&lt;img&gt;</span>
     <span class="ham iconfont icon-menu"></span>
     <ul class="nav">
-      <a href="" style="--delay:0" class="nav-item">Overview</a>
-      <a href="" style="--delay:1" class="nav-item">Usage</a>
-      <a href="" style="--delay:2" class="nav-item">Cases</a>
-      <a href="" style="--delay:3" class="nav-item">Focus</a>
+      <a href="" style="--delay:0" class="nav-item"><img class="ob-img" src="./imgs/nav0.png" alt=""> Overview</a>
+      <a href="" style="--delay:1" class="nav-item"><img class="ob-img" src="./imgs/nav1.png" alt=""> Usage</a>
+      <a href="" style="--delay:2" class="nav-item"><img class="ob-img" src="./imgs/nav2.png" alt=""> Focus</a>
+      <a href="" style="--delay:4" class="nav-item"> <img class="ob-img" src="./imgs/nav3.png" alt=""> Summary</a>
+      <a href="" style="--delay:5" class="nav-item"><img class="ob-img" src="./imgs/nav4.png" alt=""> Homework</a>
     </ul>
   </header>
   <dl>
@@ -29,14 +30,14 @@
   </dl>
   <div class="chap">概述 Overview</div>
   <dl class="nav-cont">
-    <dd>. The &lt;a&gt; HTML element embeds an image into the document. 它本身也是一个容器，这种特性称之为 <a
+    <dd>. The &lt;a&gt; HTML element embeds an image into the document. 它本身也是一个 <span class="warn">容器</span>，这种特性称之为 <a
         href="https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element">可替换元素 - replaced element</a>；可以设置大小
     </dd>
     <dd>. 展示图片：功能性、修饰性</dd>
     <dd>. 行盒 inline，同别的 inline 不同，它可以设置宽度；因为它是一个容器</dd>
     <dd>. 单标签；不同IDE的处理方式不尽相同</dd>
     <dd>. 常用图片格式：jpg、png、gif和<span class="warn">Webp</span>格式</dd>
-    <dd>. 和 &lt;a&gt;一样，转换为块盒 block 更加方便处理</dd>
+    <dd>. 和 &lt;a&gt;一样，转换为块盒 block 更加方便处理 - 抛弃了行内元素的特性</dd>
     <dd>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img">MDN -
         &lt;img&gt;</a></dd>
     <dd>
@@ -85,7 +86,7 @@
         <tr>
           <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">object-fit</a></td>
           <td>图片大小调整方式
-            <br>fill：填充整个容器，图片可能被拉伸；默认
+            <br>fill：填充整个容器，图片可能被拉伸；<span class="warn">默认</span>
             <br>contain：图片会被缩放至被容器完全包含，容器可间会有留白
             <br>cover：保持比例填满容器；图片可能被裁剪
             <br>none：保持图片大小不变
@@ -111,37 +112,50 @@
         </tr> -->
       </table>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 图片的容器特性</dd>
+    <dd>
+      <div>图片大小200*87</div>
+      <div class="el-box">
+        .img-obj-fit {<br>
+        &nbsp;&nbsp;width: 350px;<br>
+        &nbsp;&nbsp;height: 350px;<br>
+        &nbsp;&nbsp;background-color: #f40;<br>
+        &nbsp;&nbsp;object-fit:
+        <input type="radio" name="img-obj-fit" id="fill" checked><label for="fill">fill</label>
+        <input type="radio" name="img-obj-fit" id="contain"><label for="contain">contain</label>
+        <input type="radio" name="img-obj-fit" id="cover"><label for="cover">cover</label>
+        <input type="radio" name="img-obj-fit" id="none"><label for="none">none</label>;<br>
+        }<br>
+        <img class="img-obj-fit" src="../imgs/HTML.jpg" alt="">
+      </div>
+    </dd>
   </dl>
   <div class="chap">基本使用 Usage</div>
   <dl class="nav-cont">
-    <dd>抛弃 &lt;img&gt; 本身原有的容器特性</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 设置图片尺寸大于实际图像大小，取消默认的fill改为none，使用背景，查看图片的容器特性</dd>
     <dd>
-      <pre>
-img {
-  width: 400px;
-  height: 500px;
-  object-fit: none;
-  background-color: #089;
-}      </pre>
+      <div>功能型图片，使用&lt;img&gt;</div>
+      <div>修饰型图片，建议使用 <a href="./background.html">背景图片</a></div>
+      <div>更多图片使用技巧，请访问 <a href="https://css-tricks.com/a-fancy-hover-effect-for-your-avatar/">hover avatar</a>
+      </div>
     </dd>
     <dt>使用容器包裹图片</dt>
     <dd class="sn">
-      <p>当容器和图片尺寸不匹配的时候，可以使用 object-fit 调整大小；使用 object-position 调整位置</p>
+      <p>这里的容器是指额外增加一个元素作为图片的容器；不是图片本身的容器特性</p>
+      <p>当容器和图片尺寸不匹配的时候：</p>
       <div>容器大，图片小，容器留有空白</div>
       <div>容器小，图片大，图片展示不完全</div>
-      <p><span class="warn">最佳实践</span>：图片宽、高同容器，图片填充模式选择cover填充</p>
+      <p><span class="warn">最佳实践</span>：图片宽、高同容器，图片填充模式 object-fit 选择 cover；并根据需要使用 object-position 调整位置</p>
       <p class="basic">
-        <img class="img1" src="./imgs/alizee.jpg" alt="">
+        <img class="img-with-wrap" src="./imgs/alizee.jpg" alt="">
       </p>
       <pre>
-.wrap {
-  width: 320px;
-  height: 320px;
+.basic {
+  width: 350px;
+  height: 350px;
 }
 
 /* &lt;img&gt; 的初始化 */
-img {
+.img-with-wrap {
   display: block;//消除空白
   width: 100%;//宽高同容器
   height: 100%;//宽高同容器
@@ -153,40 +167,24 @@ img {
       <div>布局元素只做布局的事，内容元素由各功能标签完成</div>
       <div>容器更多的体现的是 <span class="warn">布局</span> 的职能</div>
       <div>flex 布局中，如果直接使用 &lt;img&gt; 和其它元素，借助 flex 属性等分布局，则 &lt;img&gt; 仍然会撑开，导致布局失效；所以必须使用容器包裹图片</div>
-      <div>开发时，应尽量保证图片和容器保持一致</div>
+      <div>开发时，应尽量保证图片和容器大小保持一致或接近</div>
+      <div>响应式开发，需要准备多种尺寸图片备用</div>
     </dd>
     <dt>直接使用图片 - 不建议</dt>
     <dd class="sn">
-      <div>直接使用，按照图片原始大小显示，布局受影响</div>
+      <p>直接使用，按照图片原始大小显示，布局容易受到影响</p>
       <div>仅仅指定图片宽度，其高度自适应。图片高度太大，布局被撑开；图片高度太小，布局被压缩</div>
       <div>同时指定宽度width、高度height；如果宽高比例和图片比例不一致，导致图片变形</div>
       <div>同时指定宽度width、高度height、图片填充模式object-fit；布局不会打乱；元素指定了宽度和高度的情况下才有效</div>
+      <img class="img-alone" src="./imgs/alizee.jpg" alt="">
+      <pre>
+.img-alone {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+}      </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 图片使用 - 指定背景色观察更直接</dd>
-    <dd>
-      <span>width:</span>
-      <input type="radio" name="obj-w" id="unset-w" checked>
-      <label for="unset-w">不指定</label>
-      <input type="radio" name="obj-w" id="assign-w">
-      <label for="assign-w">320px</label><br>
-      <span>height:</span>
-      <input type="radio" name="obj-h" id="unset-h" checked>
-      <label for="unset-h">不指定</label>
-      <input type="radio" name="obj-h" id="assign-h">
-      <label for="assign-h">320px</label><br>
-      <span>object-fit:</span>
-      <input type="radio" name="obj-fit" id="unset-fit" checked>
-      <label for="unset-fit">不指定</label>
-      <input type="radio" name="obj-fit" id="contain">
-      <label for="contain">contain</label>
-      <input type="radio" name="obj-fit" id="cover">
-      <label for="cover">cover</label>
-      <img class="img0" src="./imgs/alizee.jpg" alt="">
-    </dd>
-  </dl>
-  <div class="chap">案例 Cases</div>
-  <dl class="nav-cont">
-    <dt>个人头像</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 个人头像</dd>
     <dd>
       <div>方案1. 使用容器</div>
       <div>方案2. 不使用容器</div>
@@ -197,36 +195,11 @@ img {
         <img src="./imgs/alizee.jpg" alt="">
       </div>
     </dd>
-    <dt>图片导航</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 图片导航/链接 - 见顶部导航</dd>
     <dd>方案1. 使用传统图片方式</dd>
     <dd>方案2. 使用背景图片</dd>
     <dd>方案3. 使用伪元素和背景图片</dd>
     <dd>方案4. 使用字体图标</dd>
-    <dd>. 使用图片优化个人网站主导航：右键单击图片下载到本地使用，或自行准备素材，完成后检查页面各元素的网络加载情况</dd>
-    <dd>
-      <nav class="main-nav">
-        <a href="javascript:;">
-          <img class="ob-img" data-src="./imgs/nav0.png" alt="">
-          <span>个人主页</span>
-        </a>
-        <a href="javascript:;">
-          <img class="ob-img" data-src="./imgs/nav1.png" alt="">
-          <span>教育背景</span>
-        </a>
-        <a href="javascript:;">
-          <img class="ob-img" data-src="./imgs/nav2.png" alt="">
-          <span>培训经历</span>
-        </a>
-        <a href="javascript:;">
-          <img class="ob-img" data-src="./imgs/nav3.png" alt="">
-          <span>愿景规划</span>
-        </a>
-        <a href="javascript:;">
-          <img class="ob-img" data-src="./imgs/nav4.png" alt="">
-          <span>作品精选</span>
-        </a>
-      </nav>
-    </dd>
   </dl>
   <div class="chap">焦点 Focus</div>
   <dl class="nav-cont">
@@ -257,7 +230,7 @@ content-visibility: visible;
 margin-bottom: 100vh;
 }      </pre>
     </dd>
-    <dt class="nav-cont">图片空白 Blank</dt>
+    <dt>图片空白 Blank</dt>
     <dd>
       <p>. 使用容器包裹图片时，当容器加上边框时，不管图片是cover还是contain，容器底部都会有空白</p>
       <p>. 图片的inline特性导致：彼此间有一定的缝隙</p>
@@ -326,23 +299,24 @@ background-image: url(data:image/jpeg;base64...);</pre>
       </figure>
     </dd>
   </dl>
-  <div class="chap">总结与作业 Summary & Homework</div>
-  <dl>
-    <dt>总结 Summary</dt>
+  <div class="chap">总结 Summary</div>
+  <dl class="nav-cont">
+    <dt>内容</dt>
     <dd class="sn">
       <div>图片 &lt;img&gt; 使用</div>
-      <div>样式：对象大小 object-fit；对象对齐 object-position；边框 border；圆角边框 border-radius</div>
+      <div>样式</div>
+      <p>. 对象大小 object-fit</p>
+      <p>. 对象对齐 object-position</p>
+      <p>. 圆角边框 border-radius</p>
+      <p>. 溢出 overflow</p>
     </dd>
-    <dd class="tips">
-      <div>功能型图片，使用&lt;img&gt;；修饰型图片，建议使用背景图片</div>
-      <div>过多图片使用技巧，请访问 <a href="https://css-tricks.com/a-fancy-hover-effect-for-your-avatar/">hover avatar</a>
-      </div>
-    </dd>
-    <dt>作业 Homework</dt>
-    <dd>. 使用图片完善个人网站，如导航、头像、相册等等</dd>
+  </dl>
+  <div class="chap">作业 Homework</div>
+  <dl class="nav-cont">
+    <dt>内容</dt>
+    <dd>1. 使用图片完善个人网站，如导航、头像、相册等等</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="./lib/lazyload.js"></script>
   <script src="/utils/custom/ham2024.js"></script>
 </body>
 
