@@ -6,17 +6,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    img {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      position: relative;
       width: 800px;
-      height: 600px;
+      height: 80px;
+      background-color: #f1f2f3;
+      padding-left: 60px;
+      font-size: 14px;
+    }
+
+    .bar {
+      position: absolute;
+      left: -10px;
+      top: -10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 80px;
+      overflow: hidden;
+      background-color: #f1f2f3;
+    }
+
+    .bar::before {
+      content: 'intro';
+      position: absolute;
+      width: 200%;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      color: #f1f2f3;
       background-color: #f40;
-      object-fit: none;
+      transform: rotate(-45deg) translateY(-15px);
+    }
+
+    .bar::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #000;
+      left: 0;
+      bottom: 0;
+      z-index: -1;
+      box-shadow: 70px -70px #000;
     }
   </style>
 </head>
 
 <body>
-  <img src="./imgs/wechat.jpg" alt="">
+  <div class="card">
+    <div class="bar"></div>
+  </div>
 </body>
 
 </html>

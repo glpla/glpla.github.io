@@ -5,6 +5,7 @@
   --main-warn-color: #f40;
   --main-bg-color: #eee;
   --p-m-g: 10px;
+  --b-r: 14px;
 }
 
 * {
@@ -42,25 +43,58 @@ body {
   height: 100vh;
   background-image: linear-gradient(rgb(11, 237, 222), rgb(22, 113, 193));
   font-family: 'Roboto', 'Quicksand', "微软雅黑", "Microsoft YaHei", Arial, Helvetica, sans-serif;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .msg-box {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--p-m-g);
   background-color: #fff;
-  width: 95%;
+  width: 85%;
   max-width: 800px;
-  padding: var(--p-m-g);
+  padding: 80px var(--p-m-g) 1rem;
   border-radius: var(--p-m-g);
   margin: var(--p-m-g);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
-  text-align: center;
-  font-size: 1.2rem;
-  line-height: 2;
+  position: absolute;
+  top: 20px;
+  left: -14px;
+  width: 100%;
+  font-size: 17px;
+  font-weight: normal;
+  background-color: var(--main-color);
+  color: #fff;
+  line-height: 40px;
+  padding-left: 40px;
+  border-radius: var(--b-r) 0 0 var(--b-r);
+}
+
+h1::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -30px;
+  width: 14px;
+  height: 30px;
+  background-color: #333;
+  border-top-left-radius: var(--b-r);
+  border-bottom-left-radius: var(--b-r);
+  z-index: 1;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 14px;
+  height: 30px;
+  background-color: var(--main-color);
 }
 
 .input-field {
