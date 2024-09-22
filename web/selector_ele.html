@@ -75,12 +75,7 @@ li::before {
   display: inline-block;/* MUST */
   overflow: hidden;/* MUST */
 } </pre>
-      <div>留空：做其他装饰性设计</div>
-      <pre>
-li::before {
-  content: '';
-}</pre>
-      <div>使用背景图片 - 使用留空的方式，采用背景图片处理，可以配合弹性盒子 flex 实现特定布局</div>
+      <div>留空：做其他装饰性设计；如使用背景图片，可以配合弹性盒子 flex 实现特定布局</div>
       <pre>
 li::before {
     content: '';
@@ -91,6 +86,17 @@ li::before {
     background-size: cover;
     border-radius: 50%;
 }</pre>
+      <div>使用 <a href="./framework/iconfont.html">阿里字体图标 - iconfont</a>；需要指定字体家族为iconfont</div>
+      <pre>
+li {
+  list-style: none;
+}
+
+li::before {
+  content: '\e6e0';
+  font-family: 'iconfont';
+  color: #f40;
+}      </pre>
     </dd>
     <dt>::first-letter ::first-line</dt>
     <dd>

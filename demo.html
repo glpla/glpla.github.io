@@ -18,105 +18,286 @@
       height: 100vh;
     }
 
-    .card {
-      width: 150px;
-      height: 150px;
-      background-image: url(./web/imgs/h5.png);
-      background-size: 150px;
-      animation: icon-leave 1s steps(23) forwards;
-    }
-
-    .card:hover {
-      animation: icon-enter 1s steps(23) forwards;
-    }
-
-    @keyframes icon-leave {
-      from {
-        background-position: 0 -3450px;
-      }
-
-      to {
-        background-position: 0 0;
-      }
-    }
-
-    @keyframes icon-enter {
-      from {
-        background-position: 0 0;
-      }
-
-      to {
-        background-position: 0 -3450px;
-      }
-    }
-
-    .wrap {
-      width: 32px;
-      height: 32px;
-      overflow: hidden;
-    }
-
-    .countdown {
-      display: flex;
-      width: 32px;
-      height: 32px;
-    }
-
-    .wrap:hover .countdown {
-      animation: trans 10s steps(10) infinite;
-    }
-
-    @keyframes trans {
-      to {
-        transform: translateX(calc(-32px*10));
-      }
+    .box {
+      width: 800px;
+      height: 200px;
+      overflow: auto;
+      margin: 0 auto;
     }
 
     table {
       width: 100%;
-      border: 1px solid #333;
       border-collapse: collapse;
-      overflow: hidden;
-      table-layout: fixed;
     }
 
-    caption {
-      caption-side: bottom;
-    }
-
-    td,
-    th {
+    td {
       border-bottom: 1px solid #333;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+    }
+
+    thead {
+      position: sticky;
+      top: 0;
+      background-color: #f1f2f3;
+    }
+
+    /* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+    @font-face {
+      font-family: 'iconfont';
+      /* Project id 4690841 */
+      src: url('//at.alicdn.com/t/c/font_4690841_1cc6mozyc6a.woff2?t=1726903992542') format('woff2'),
+        url('//at.alicdn.com/t/c/font_4690841_1cc6mozyc6a.woff?t=1726903992542') format('woff'),
+        url('//at.alicdn.com/t/c/font_4690841_1cc6mozyc6a.ttf?t=1726903992542') format('truetype');
+    }
+
+    li {
+      list-style: none;
+    }
+
+    li::before {
+      content: '\e6e0';
+      color: #f40;
+      font-family: 'iconfont';
     }
   </style>
 </head>
 
 <body>
-  <table>
-    <caption>hi,there.</caption>
-    <tr>
-      <td>asdf</td>
-      <td>asdf</td>
-      <td>asdf</td>
-      <td>asdf</td>
-    </tr>
-    <tr>
-      <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro repellendus minima hic, adipisci, inventore
-        quam perspiciatis facere non deleniti facilis blanditiis velit maiores neque quas libero enim tenetur mollitia
-        provident?</td>
-      <td>Assumenda cupiditate enim tempore dolore dolorem autem inventore consequuntur voluptas, eius voluptatem omnis
-        eligendi earum minima, debitis fugit quaerat delectus unde aspernatur, dolorum molestias vero. Ullam voluptate
-        pariatur totam sequi!</td>
-      <td>Quis fugit quasi repellendus labore maiores quos deleniti et nihil tenetur quo quas nobis consectetur error
-        atque, nesciunt iste magni minima commodi exercitationem amet dignissimos possimus aut officia alias? Cum?</td>
-      <td>Aut quod quis voluptates perferendis neque dolores nostrum id rerum aliquam veritatis minima, in, ab
-        voluptatem illo odit assumenda, possimus optio dicta amet nobis voluptas. Sint placeat repellendus
-        necessitatibus animi.</td>
-    </tr>
-  </table>
+  <ul>
+    <li>Lorem.</li>
+    <li>Quod.</li>
+    <li>Maxime.</li>
+    <li>Quia?</li>
+    <li>Debitis.</li>
+    <li>Pariatur.</li>
+    <li>Vel?</li>
+    <li>Tempora.</li>
+    <li>Officia.</li>
+    <li>Ut!</li>
+    <li>Dignissimos?</li>
+    <li>Deleniti!</li>
+  </ul>
+  <div class="box">
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2">name.</th>
+          <th colspan="3">gender.</th>
+          <th colspan="4">Lorem.</th>
+        </tr>
+        <tr>
+          <th>Lorem.</th>
+          <th>Lorem.</th>
+          <th>Lorem.</th>
+          <th>Lorem.</th>
+          <th>Lorem.</th>
+          <th>Lorem.</th>
+          <th>Lorem.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lorem.</td>
+          <td>Recusandae!</td>
+          <td>Quasi?</td>
+          <td>Itaque.</td>
+          <td>Tempora?</td>
+          <td>Explicabo.</td>
+          <td>Soluta.</td>
+          <td>Tenetur.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Laudantium!</td>
+          <td>Eligendi.</td>
+          <td>Suscipit.</td>
+          <td>Voluptas!</td>
+          <td>Incidunt?</td>
+          <td>Blanditiis?</td>
+          <td>Illum!</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Odio!</td>
+          <td>Dolor?</td>
+          <td>Officia.</td>
+          <td>Aliquid.</td>
+          <td>Dolores.</td>
+          <td>Possimus.</td>
+          <td>Alias!</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Harum.</td>
+          <td>Sint.</td>
+          <td>Harum?</td>
+          <td>Explicabo?</td>
+          <td>Sit.</td>
+          <td>Quaerat!</td>
+          <td>Ipsum.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Nihil!</td>
+          <td>Suscipit?</td>
+          <td>Unde.</td>
+          <td>Possimus.</td>
+          <td>Maiores!</td>
+          <td>Quo?</td>
+          <td>Saepe.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Ad?</td>
+          <td>Sit?</td>
+          <td>Cupiditate.</td>
+          <td>Quia!</td>
+          <td>Facilis?</td>
+          <td>Voluptates.</td>
+          <td>Cum.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Optio!</td>
+          <td>Quae.</td>
+          <td>Numquam.</td>
+          <td>Nulla.</td>
+          <td>A!</td>
+          <td>Provident.</td>
+          <td>Velit.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Eum?</td>
+          <td>Harum!</td>
+          <td>Suscipit!</td>
+          <td>Tenetur?</td>
+          <td>Ducimus.</td>
+          <td>Vel!</td>
+          <td>Perferendis.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Magni?</td>
+          <td>Alias?</td>
+          <td>Quis.</td>
+          <td>Voluptates.</td>
+          <td>Iste!</td>
+          <td>At!</td>
+          <td>Ipsum!</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Pariatur.</td>
+          <td>Debitis.</td>
+          <td>Totam?</td>
+          <td>Neque.</td>
+          <td>Esse.</td>
+          <td>Maxime?</td>
+          <td>Quaerat.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Voluptas.</td>
+          <td>Dolores?</td>
+          <td>Optio!</td>
+          <td>Deleniti!</td>
+          <td>Necessitatibus.</td>
+          <td>Accusantium!</td>
+          <td>Ab.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Dicta!</td>
+          <td>Enim?</td>
+          <td>Aliquid!</td>
+          <td>Dicta?</td>
+          <td>Doloribus!</td>
+          <td>Sit.</td>
+          <td>Veritatis.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Commodi.</td>
+          <td>Eveniet.</td>
+          <td>Adipisci!</td>
+          <td>Quae!</td>
+          <td>Iste.</td>
+          <td>Reprehenderit!</td>
+          <td>Quidem.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Officia?</td>
+          <td>Cupiditate?</td>
+          <td>Excepturi.</td>
+          <td>Ratione.</td>
+          <td>Odit?</td>
+          <td>Iste.</td>
+          <td>Aut?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Quod.</td>
+          <td>Esse!</td>
+          <td>Ut!</td>
+          <td>Expedita!</td>
+          <td>Distinctio!</td>
+          <td>Asperiores.</td>
+          <td>Aliquid?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Porro.</td>
+          <td>Qui.</td>
+          <td>Numquam.</td>
+          <td>Magni.</td>
+          <td>Et.</td>
+          <td>Nisi!</td>
+          <td>Quae?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Ratione!</td>
+          <td>Sed?</td>
+          <td>Eveniet?</td>
+          <td>Qui.</td>
+          <td>Voluptates.</td>
+          <td>In!</td>
+          <td>Nostrum.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Adipisci?</td>
+          <td>Repellendus?</td>
+          <td>Quae!</td>
+          <td>Officiis!</td>
+          <td>Odit.</td>
+          <td>Quasi.</td>
+          <td>Earum?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Quo!</td>
+          <td>Repellendus?</td>
+          <td>Consequatur!</td>
+          <td>Quis.</td>
+          <td>Temporibus.</td>
+          <td>Mollitia.</td>
+          <td>Libero.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Iste?</td>
+          <td>Nihil.</td>
+          <td>Illo.</td>
+          <td>Soluta!</td>
+          <td>Quis!</td>
+          <td>Nesciunt.</td>
+          <td>Doloremque!</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </body>
 
 </html>

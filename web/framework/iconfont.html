@@ -58,19 +58,17 @@
       <img src="../imgs/iconfont.png" alt="">
     </dd>
   </dl>
-  <div class="chap">原生HTML</div>
+  <div class="chap">Font Class</div>
   <dl>
-    <dt>在线使用Font Class(推荐)</dt>
-    <dd>1.复制项目下面生成的在线fontclass链接到H5项目的&lt;link&gt;中；通常忽略网络协议https或http，由系统决定</dd>
-    <dd>
+    <dt>在线使用</dt>
+    <dd class="sn">
+      <div>复制项目下面生成的在线fontclass链接到H5项目的&lt;link&gt;中；通常忽略网络协议https或http，由系统决定</div>
       <pre>&lt;link rel="stylesheet" href="//at.alicdn.com/t/c/font_3859342_55f4w9rdzau.css"&gt;</pre>
-    </dd>
-    <dd>2.在&lt;i&gt;使用基类iconfont和相应的字体图标类名</dd>
-    <dd>
+      <div>在&lt;i&gt;使用基类iconfont和相应的字体图标类名</div>
       <pre>
 &lt;i class="iconfont icon-xxx"&gt;&lt;/i&gt;</pre>
     </dd>
-    <dt>本地使用Font Class(推荐)</dt>
+    <dt>本地使用</dt>
     <dd class="sn">
       <div>在阿里字体图标项目处，选择：下载至本地，建议创建单独的文件夹保存</div>
       <div>在H5项目&lt;link&gt;中引入其中的CSS文件。注意文件路径</div>
@@ -78,10 +76,13 @@
       <div>在&lt;i&gt;使用基类iconfont和相应的字体图标类名</div>
       <pre>&lt;i class="iconfont icon12"&gt;&lt;/i&gt;</pre>
     </dd>
-    <dt>在线使用symbol</dt>
-    <dd>支持多色图标</dd>
+  </dl>
+  <div class="chap">Symbol</div>
+  <dl>
+    <dt>在线使用</dt>
     <dd class="sn">
-      <div>拷贝项目下面生成的symbol代码链接到脚本 &lt;script&gt;</div>
+      <div>支持多色图标</div>
+      <div>拷贝项目下面生成的 Symbol代码链接到脚本 &lt;script&gt;</div>
       <pre>&lt;script src="//at.alicdn.com/t/c/font_3859342_gpyhrzeh5u.js"&gt;&lt;/script&gt;</pre>
       <div>加入通用CSS代码（引入一次就行），并根据需要调整大小；这里是图标的样式，也可以自己定制，非必须</div>
       <pre>
@@ -116,7 +117,15 @@
         </svg>
       </p>
     </dd>
-    <dt>在线使用 Unicode</dt>
+  </dl>
+  <div class="chap">Unicode</div>
+  <dl>
+    <dd>
+      <div>兼容性最好，支持 IE6+，及所有现代浏览器</div>
+      <div>支持按字体的方式去动态调整图标大小，颜色等等</div>
+      <div>可以在线使用或本地使用</div>
+    </dd>
+    <dt>在线使用</dt>
     <dd class="sn">
       <div>拷贝项目下面生成的font-face字体代码到CSS中</div>
       <pre>
@@ -139,6 +148,22 @@ src: url('//at.alicdn.com/t/font_2357817_dhel13phics.woff2?t=1632974998048') for
       <div>挑选相应图标并获取字体编码，应用于页面</div>
       <pre>
 &lt;i class="iconfont"&gt;&amp;#x33;&lt;/i&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 定制列表标记</dd>
+    <dd>
+      <div>准备并引入 Unicode 格式的字体图标；如上</div>
+      <div>使用伪元素指定为 Unicode 编码</div>
+      <div>指定字体家族为iconfont</div>
+      <pre>
+li {
+  list-style: none;
+}
+
+li::before {
+  content: '\e6e0';
+  font-family: 'iconfont';
+  color: #f40;
+}      </pre>
     </dd>
   </dl>
   <div class="chap" id="vue">Vue</div>
