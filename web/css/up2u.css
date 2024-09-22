@@ -76,16 +76,17 @@ table caption {
 
 table thead {
   position: sticky;
-  top: 40px;
+  top: 30px;
   text-align: left;
   background-color: #fff;
-  border-bottom: 1 solid var(--color-blue);
   z-index: 1;
 }
 
-table tr th,
-table tr td {
+table {
   line-height: 30px;
+}
+
+.tbl-info td {
   border-bottom: 1px dotted #ccc;
 }
 
@@ -208,7 +209,6 @@ h1::before {
 .iconfont {
   transition: .2s;
   font-size: 22px;
-  vertical-align: middle;
 }
 
 .nav-item.active,
@@ -338,9 +338,8 @@ h2 {
 .home h3 {
   text-align: center;
   margin-bottom: 1rem;
-  font-weight: normal;
+  font-size: 1.7rem;
   /* border-bottom: 1px solid var(--color-blue); */
-  line-height: 40px;
   margin: 0;
 }
 
@@ -404,7 +403,31 @@ h2 {
 }
 
 .tbl-sticky {
+  max-height: 35vh;
   overflow: auto;
+}
+
+.tbl-sticky::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tbl-sticky::-webkit-scrollbar-thumb {
+  background-color: var(--color-blue);
+}
+
+.tbl-sticky table th {
+  background-color: var(--color-blue);
+  color: #fff;
+  font-weight: normal;
+}
+
+.tbl-sticky table tr:nth-child(even) td {
+  background-color: #f1f2f3;
+}
+
+.tbl-sticky h3 {
+  display: flex;
+  justify-content: center;
 }
 
 .skill {
@@ -913,6 +936,10 @@ footer img {
 
   .input-box.message {
     min-height: 20vh;
+  }
+
+  .tbl-sticky {
+    max-height: 50vh;
   }
 
   footer {

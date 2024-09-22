@@ -15,17 +15,28 @@
   <header>
     <h1>表格</h1>
     <span>&commat;&lt;table&gt;</span>
+    <span class="ham iconfont icon-menu"></span>
+    <nav class="nav">
+      <a href="" style="--delay:1" class="nav-item">概述 Overview</a>
+      <a href="" style="--delay:2" class="nav-item">设计 Design</a>
+      <a href="" style="--delay:3" class="nav-item">自适应 Responsive</a>
+    </nav>
   </header>
   <dl>
     <dt>知识储备 Prerequisite</dt>
     <dd><a href="./border.html">边框 - border</a></dd>
     <dd><a href="./selector_class.html">伪类选择器 - Pseudo class</a></dd>
-    <dt class="nav-cont">概述</dt>
+  </dl>
+  <div class="chap">概述 Overview</div>
+  <dl class="nav-cont">
     <dd>
-      <div>功能1：展示数据</div>
-      <div>功能2：布局，如表单的使用，多使用表格布局；其它布局多使用div+CSS实现</div>
-      <div>更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table">MDN - &lt;table&gt;</a>、<a
-          href="//css-tricks.com/complete-guide-table-element/">complete guide table element</a></div>
+      <p>1. 展示数据</p>
+      <p>2. 布局，如表单的使用，多使用表格布局；其它布局多使用 div + CSS 实现</p>
+      <p>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table">MDN - &lt;table&gt;</a>、<a
+          href="//css-tricks.com/complete-guide-table-element/">complete guide table element</a></p>
+    </dd>
+    <dt>结构 Structure</dt>
+    <dd class="sn">
       <pre>
 &lt;table&gt;
     &lt;caption&gt;title&lt;/caption&gt;
@@ -45,23 +56,37 @@
         &lt;/tr&gt;
     &lt;/tfooter&gt; 
 &lt;table&gt;</pre>
-      <div>&lt;table&gt;：display类型是 tabel，inline-block</div>
-      <div>&lt;caption&gt;：表格标题</div>
-      <div>&lt;tr&gt;：display类型是 table-row，它的子元素只能是 &lt;td&gt; 或 &lt;th&gt;；&lt;tr&gt; 至少有一个单元格 &lt;td&gt; 有数据；否则空行会被压缩
-      </div>
-      <div>&lt;td&gt; &lt;th&gt;：display类型是 table-cell；&lt;th&gt; 是标题行单元格，<span class="warn">通常</span> 出现在首行，也可以出现在任何位置
-      </div>
+      <div>&lt;table&gt;</div>
+      <p>. 表格容器</p>
+      <p>. display类型是 tabel，inline-block</p>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption">&lt;caption&gt;</a></div>
+      <p>. 表格的标题/题注/说明</p>
+      <p>. 如果指定，必须是表格第一个子元素</p>
+      <p>. 部分属性需要单独设置，如背景色</p>
+      <p>. 默认在上部 top</p>
+      <table>
+        <tr>
+          <th>类别</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>caption-side</td>
+          <td>top | bottom</td>
+        </tr>
+      </table>
+      <div>&lt;tr&gt;</div>
+      <p>. 表格的行</p>
+      <p>. display类型是 table-row，它的子元素只能是 &lt;td&gt; 或 &lt;th&gt;</p>
+      <p>. &lt;tr&gt; 至少有一个单元格 &lt;td&gt; 有数据；否则空行会被压缩</p>
+      <div>&lt;th&gt; &lt;td&gt;</div>
+      <p>. 表格的单元格</p>
+      <p>. display类型是 table-cell</p>
+      <p>. &lt;th&gt; 标题行单元格，<span class="warn">通常</span> 出现在首行，也可以出现在任何位置</p>
+      <p>. &lt;th&gt; 普通单元格</p>
     </dd>
-    <dd class="tips">
-      <div>系统会默认添加表体 &lt;tbody&gt;；表头 &lt;thead&gt;、表尾 &lt;tfoot&gt; 和 &lt;caption&gt; 需要手动添加</div>
-      <div>通常只关注行 &lt;tr&gt;、&lt;th&gt;和 &lt;td&gt;，他们会自动放在 &lt;tbody&gt;中</div>
-      <div>如果需要对表头特别处理，如固定表头，建议将 &lt;th&gt; 显式的放在 &lt;thead&gt; 中</div>
-    </dd>
-  </dl>
-  <dl class="nav-cont">
     <dt>HTML属性样式</dt>
     <dd>
-      <div>以属性的形式写在元素上；除了最后2个属性外，其它样式建议使用 CSS 实现</div>
+      <div>. 除了最后2个属性外，其它样式建议使用 CSS 实现</div>
       <table>
         <colgroup>
           <col style="text-align: right;">
@@ -109,7 +134,7 @@
         </tr>
       </table>
     </dd>
-    <dt>高频CSS样式</dt>
+    <dt>CSS高频样式</dt>
     <dd>
       <div>width：表格宽度</div>
       <div>border-collapse：边框是否重叠，默认不重叠；只有指定了重叠 collapse，才可以设置行 &lt;tr&gt; 的边框</div>
@@ -133,15 +158,31 @@ table {
   border-collapse: collapse;
 }</pre>
     </dd>
+    <dd class="tips">
+      <div>系统会默认添加表体 &lt;tbody&gt;；表头 &lt;thead&gt;、表尾 &lt;tfoot&gt; 和 &lt;caption&gt; 需要手动添加</div>
+      <div>通常只关注行 &lt;tr&gt;、&lt;th&gt;和 &lt;td&gt;，他们会自动放在 &lt;tbody&gt;中</div>
+      <div>如果需要对表头特别处理，如固定表头，建议将 &lt;th&gt; 显式的放在 &lt;thead&gt; 中</div>
+      <div>除了直接在表格上应用合并单元格属性 colspan 和 rowspan外，其它样式建议由CSS完成</div>
+      <div>表格的样式设计应聚焦在&lt;td&gt;</div>
+      <div>&lt;th&gt;的样式如背景优先级略高，部分动态样式无法覆盖</div>
+      <div>同一页面内的表格，关键列宽应该保持一致</div>
+    </dd>
     <dt>colgroup</dt>
     <dd>
+      <div>在表格内定义各列特性</div>
       <div>默认情况下各列宽度会自动分配，撑开至占满表格</div>
       <div>指定每列的宽度 - 内联样式</div>
+      <div>更多使用，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/colgroup">MDN -
+          &lt;colgroup&gt;</a></div>
       <pre>
-&lt;colgroup&gt;
-  &lt;col style="width: 100px;"&gt;
-  &lt;col style="width: 200px;"&gt;
-&lt;/colgroup&gt;</pre>
+&lt;table&gt;
+        
+  &lt;colgroup&gt;
+    &lt;col style="width: 100px;"&gt;
+    &lt;col style="width: 200px;"&gt;
+  &lt;/colgroup&gt;
+  
+&lt;table&gt;</pre>
       <div>也可以单独指定某个 &lt;td&gt;的宽度</div>
       <pre>
 table td:nth-child(2) {
@@ -153,15 +194,10 @@ table th:first-child {
   width: 30%;
 }</pre>
     </dd>
-    <dd class="tips">
-      <div>除了直接在表格上应用合并单元格属性 colspan 和 rowspan外，其它样式建议由CSS完成</div>
-      <div>表格的样式设计应聚焦在&lt;td&gt;</div>
-      <div>&lt;th&gt;的样式如背景优先级略高，部分动态样式无法覆盖</div>
-      <div>同一页面内的表格，关键列宽应该保持一致</div>
-    </dd>
   </dl>
+  <div class="chap">设计 Design</div>
   <dl class="nav-cont">
-    <dt>常见表格类型</dt>
+    <dt 常见表格类型</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 线框表格</dd>
     <dd>
       <div>外边框粗实线</div>
@@ -172,7 +208,7 @@ table th:first-child {
         - CodePen</a>、<a href="./demo/up2u.html">个人网站</a></dd>
     <dd>
       <div>. 首行和末行有边框</div>
-      <div>. 单独指定类实现；也可以使用:has()选择器实现</div>
+      <div>. 单独指定类实现；也可以使用 :has() 选择器实现</div>
       <img src="./imgs/tbl0.png" alt="">
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./selector_class.html">斑马纹表格 - 结构伪类选择器</a></dd>
@@ -190,8 +226,9 @@ table tr:nth-child(even) {
       <img src="./imgs/tbl2.png" alt="">
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./sticky.html">固定表头表格 - 粘性定位</a></dd>
-    <dd>. 内容多的情况下，表头始终显示 - 冻结首行；现在多使用 <a href="./demo/pager.html">分页器 - pager</a> 设计</dd>
+    <dd>. 内容多的情况下，表头始终显示 - 冻结首行</dd>
     <dd>. &lt;tabel&gt;本身并不能实现滚动条，需在&lt;tabel&gt;外面增加一个容器；当&lt;tabel&gt;高度超过容器高度时，让容器出现滚动条</dd>
+    <dd>. 现在多使用 <a href="./demo/pager.html">分页器 - pager</a> 设计</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/pen/GRPBOyv">歌单 - CodePen</a>
     </dd>
     <dd>. 标题行样式始终保持不变</dd>
@@ -403,6 +440,7 @@ table th, table td {
 }</pre>
     </dd>
   </dl>
+  <div class="chap">自适应 Responsive</div>
   <dl class="nav-cont">
     <dt>自适应表格</dt>
     <dd>
@@ -491,12 +529,19 @@ td:nth-child(4)::before {
   <dl>
     <dt>总结 Summary</dt>
     <dd class="number">
-      <div>. &lt;table&gt;的使用和常见样式</div>
+      <div>1. &lt;table&gt;的作用</div>
+      <div>2. &lt;table&gt;的样式设计</div>
     </dd>
     <dt>作业 Homework</dt>
-    <dd>. 使用不同的表格完善个人网站的介绍部分，如参加的赛事、项目、学习的课程、主要的社会实践活动等</dd>
+    <dd>1. 使用不同的表格完善个人网站的介绍部分，如参加的赛事、项目、学习的课程、主要的社会实践活动等</dd>
+    <dd>2. Word中如何定制表格？</dd>
+    <!-- <dd>定义样式</dd> -->
+    <dd>3. 单元格内容过多如何处理？</dd>
+    <!-- <dd>表格固定布局显示</dd> -->
+    <!-- <dd>单元格打点</dd> -->
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="/utils/custom/ham2024.js"></script>
   <script src="/utils/custom/star.js"></script>
 </body>
 
