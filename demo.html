@@ -19,56 +19,75 @@
     }
 
     .card {
-      position: relative;
-      width: 800px;
-      height: 80px;
-      background-color: #f1f2f3;
-      padding-left: 60px;
-      font-size: 14px;
+      width: 150px;
+      height: 150px;
+      background-image: url(./web/imgs/h5.png);
+      background-size: 150px;
+      animation: icon-leave 1s steps(23) forwards;
     }
 
-    .bar {
-      position: absolute;
-      left: -10px;
-      top: -10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 80px;
-      height: 80px;
+    .card:hover {
+      animation: icon-enter 1s steps(23) forwards;
+    }
+
+    @keyframes icon-leave {
+      from {
+        background-position: 0 -3450px;
+      }
+
+      to {
+        background-position: 0 0;
+      }
+    }
+
+    @keyframes icon-enter {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 0 -3450px;
+      }
+    }
+
+    .wrap {
+      width: 32px;
+      height: 32px;
       overflow: hidden;
-      background-color: #f1f2f3;
     }
 
-    .bar::before {
-      content: 'intro';
-      position: absolute;
-      width: 200%;
-      height: 30px;
-      text-align: center;
-      line-height: 30px;
-      color: #f1f2f3;
-      background-color: #f40;
-      transform: rotate(-45deg) translateY(-15px);
+    .countdown {
+      display: flex;
+      width: 32px;
+      height: 32px;
     }
 
-    .bar::after {
-      content: '';
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: #000;
-      left: 0;
-      bottom: 0;
-      z-index: -1;
-      box-shadow: 70px -70px #000;
+    .wrap:hover .countdown {
+      animation: trans 10s steps(10) infinite;
+    }
+
+    @keyframes trans {
+      to {
+        transform: translateX(calc(-32px*10));
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="card">
-    <div class="bar"></div>
+  <div class="wrap">
+    <div class="countdown">
+      <img src="/utils/number/number-0.png" alt="">
+      <img src="/utils/number/number-1.png" alt="">
+      <img src="/utils/number/number-2.png" alt="">
+      <img src="/utils/number/number-3.png" alt="">
+      <img src="/utils/number/number-4.png" alt="">
+      <img src="/utils/number/number-5.png" alt="">
+      <img src="/utils/number/number-6.png" alt="">
+      <img src="/utils/number/number-7.png" alt="">
+      <img src="/utils/number/number-8.png" alt="">
+      <img src="/utils/number/number-9.png" alt="">
+    </div>
   </div>
 </body>
 

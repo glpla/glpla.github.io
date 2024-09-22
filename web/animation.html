@@ -30,19 +30,20 @@
   </header>
   <dl>
     <dt class="nav-cont">概述 Overview</dt>
-    <dd>.使用关键字@keyframes定义诺干个关键帧来表示元素的状态；从一个关键帧到另外一个关键帧的过渡时，中间的状态由系统自动生成</dd>
-    <dd>.皮影戏和早期非常流行的flash动画也是采用关键帧实现</dd>
-    <dd>.帧动画可以作用于多个元素；过渡动画transition只能作用于当前元素</dd>
-    <dd>.可以平滑方式；也可以步进方式</dd>
-    <dd>.更多高级动画，请访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation">MDB - animation</a>、<a
-        href="./framework/animate.html">Animate使用</a>、<a href="https://animate.style/">animate.css</a>、<a
-        href="https://animejs.com/">animejs</a>、<a href="http://www.animate.net.cn/">Animate官方动画库</a>、<a
-        href="https://scrollrevealjs.org/">scrollrevealjs</a>
+    <dd>
+      <div>.使用关键字 @keyframes 定义诺干个关键帧来表示元素的状态；从一个关键帧到另外一个关键帧的过渡时，中间的状态由系统自动生成</div>
+      <div>.皮影戏和早期非常流行的 flash 动画也是采用关键帧实现</div>
+      <div>.帧动画可以作用于多个元素；过渡动画 transition 只能作用于当前元素</div>
+      <div>.可以平滑方式；也可以步进方式</div>
+      <div>.更多高级动画，请访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation">MDN - animation</a>、<a
+          href="./framework/animate.html">Animate使用</a>、<a href="https://animate.style/">animate.css</a>、<a
+          href="https://animejs.com/">animejs</a>、<a href="http://www.animate.net.cn/">Animate官方动画库</a>、<a
+          href="https://scrollrevealjs.org/">scrollrevealjs</a>
+      </div>
     </dd>
     <dt>定义动画 Definition</dt>
-    <dd>.利用关键字from和to；通常省略from，表示从当前状态开始</dd>
     <dd class="sn">
-      <div>关键字只能定义2个状态</div>
+      <div>利用关键字 from 和 to；通常省略 from，表示从当前状态开始；关键字只能定义2个状态</div>
       <pre>
 @keyframes ani_name {
     from {
@@ -93,7 +94,7 @@ animation-fill-mode:
         </tr>
         <tr>
           <td>duration</td>
-          <td>动画持续时间；单位秒s或毫秒ms</td>
+          <td>动画持续时间；单位秒 s 或毫秒 ms</td>
         </tr>
         <tr>
           <td>timing-function</td>
@@ -166,12 +167,12 @@ animation-fill-mode:
   }
 }</pre>
       <div>.多个动画使用逗号,分隔，可以分别指定某个动画的属性</div>
-      <div>.先播放第一个动画roll，接着播放第二个动画zoom，然后一直循环播放第二个动画</div>
+      <div>.先播放第一个动画 roll，接着播放第二个动画 zoom，然后一直循环播放第二个动画</div>
       <pre>
 animation: 
     roll 2s ease,
     zoom 2s 2s ease infinite alternate;</pre>
-      <div>.先播放第一个动画roll，接着播放第二个动画zoom，最后一直循环播放第一个动画</div>
+      <div>.先播放第一个动画 roll，接着播放第二个动画 zoom，最后一直循环播放第一个动画</div>
       <pre>
 animation: 
     roll 2s ease infinite alternate,
@@ -337,51 +338,97 @@ header {
     </dd>
     <dd>number_of_steps：数字，过渡分几个阶段完成</dd>
     <dd>direction：start和end，默认是end，指每个阶段过渡结束后才渲染；start则是过渡开始前就渲染</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 进度条分段过渡；使用前例动画样式 loading-ani</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 伪3D图标</dd>
     <dd>
-      <div>1. steps(10)使用默认end</div>
-      <div class="progress-step step-default"></div>
+      <div>使用背景图片，通过步进调整背景图片位置</div>
+      <div>分别定义静态动画和鼠标悬停 hover 动画</div>
+      <div>注意素材的设计和收集</div>
+      <div class="icon"></div>
       <pre>
-.progress-step {
-    width: 0;
-    height: 1rem;
-    border-radius: 1rem;
-    background-color: #eb2f06;
-    animation: progress-ani 10s steps(10) forwards;
-}</pre>
-      <div>2. steps(10)使用start</div>
-      <div class="progress-step step-start"></div>
-      <pre>
-.progress-step {
-    width: 0;
-    height: 1rem;
-    border-radius: 1rem;
-    background-color: #eb2f06;
-    animation: progress-ani 10s steps(10, start) forwards;
+.card {
+  width: 150px;
+  height: 150px;
+  background-image: url(./web/imgs/h5.png);
+  background-size: 150px;
+  animation: icon-leave 1s steps(23) forwards;
+}
+
+.card:hover {
+  animation: icon-enter 1s steps(23) forwards;
+}
+
+@keyframes icon-leave {
+  from {
+    background-position: 0 -3450px;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes icon-enter {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 -3450px;
+  }
 }</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNVjXLE">typing -
-        CodePen</a></dd>
-    <dd>.字体等宽</dd>
-    <dd>.步进动画steps()</dd>
-    <dd>.多动画使用：移位动画和闪烁动画</dd>
-    <dd>.重复动画infinite</dd>
-    <dd>.动画延迟animation-delay</dd>
-    <dd class="tips">
-      <div>动画infinite时，最后一个字符会被忽略</div>
-      <div>动画forwards时，最后一个字符会显示</div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 轮播图swiper</dd>
-    <dd class="swiper-box">
-      <div class="swiper">
-        <div class="swiper-item" style="--url:url(../imgs/banner.png)"></div>
-        <div class="swiper-item" style="--url:url(../imgs/bg1.jpg)"></div>
-        <div class="swiper-item" style="--url:url(../imgs/bg2.jpg)"></div>
-        <div class="swiper-item" style="--url:url(../imgs/bg3.jpg)"></div>
-        <div class="swiper-item" style="--url:url(../imgs/bg4.jpg)"></div>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 倒计时 countdown</dd>
+    <dd>
+      <div>从9依次减到0；实际只有9秒，分9段进行</div>
+      <div class="countdown-wrap">
+        <div class="countdown">
+          <img src="/utils/number/number-9.png" alt="" loading="lazy">
+          <img src="/utils/number/number-8.png" alt="" loading="lazy">
+          <img src="/utils/number/number-7.png" alt="" loading="lazy">
+          <img src="/utils/number/number-6.png" alt="" loading="lazy">
+          <img src="/utils/number/number-5.png" alt="" loading="lazy">
+          <img src="/utils/number/number-4.png" alt="" loading="lazy">
+          <img src="/utils/number/number-3.png" alt="" loading="lazy">
+          <img src="/utils/number/number-2.png" alt="" loading="lazy">
+          <img src="/utils/number/number-1.png" alt="" loading="lazy">
+          <img src="/utils/number/number-0.png" alt="" loading="lazy">
+        </div>
       </div>
+      <pre>
+.countdown-wrap {
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  margin: 2rem auto;
+}
+
+.countdown {
+  display: flex;
+  width: 32px;
+  height: 32px;
+}
+
+.countdown-wrap:hover .countdown {
+  animation: trans 9s steps(9) forwards;
+}
+
+@keyframes trans {
+  to {
+    transform: translateX(calc(-32px*9));
+  }
+}      </pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 轮播图 swiper</dd>
     <dd>
+      <div class="swiper-box">
+        <div class="swiper">
+          <div class="swiper-item" style="--url:url(../imgs/banner.png)"></div>
+          <div class="swiper-item" style="--url:url(../imgs/bg1.jpg)"></div>
+          <div class="swiper-item" style="--url:url(../imgs/bg2.jpg)"></div>
+          <div class="swiper-item" style="--url:url(../imgs/bg3.jpg)"></div>
+          <div class="swiper-item" style="--url:url(../imgs/bg4.jpg)"></div>
+        </div>
+      </div>
       <pre>
 &lt;div class="swiper-box"&gt;
     &lt;div class="swiper"&gt;
@@ -411,6 +458,41 @@ header {
     }
 }</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNVjXLE">打字 typing -
+        CodePen</a></dd>
+    <dd>
+      <div>.字体等宽</div>
+      <div>.多动画使用：移位动画和闪烁动画</div>
+      <div>.重复动画 infinite</div>
+      <div>.动画延迟 animation-delay</div>
+      <div class="tips">
+        <div>动画infinite时，最后一个字符会被忽略</div>
+        <div>动画forwards时，最后一个字符会显示</div>
+      </div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 进度条分段过渡；使用前例动画样式 loading-ani</dd>
+    <dd>
+      <div>1. steps(10)使用默认end</div>
+      <div class="progress-step step-default"></div>
+      <pre>
+.progress-step {
+    width: 0;
+    height: 1rem;
+    border-radius: 1rem;
+    background-color: #eb2f06;
+    animation: progress-ani 10s steps(10) forwards;
+}</pre>
+      <div>2. steps(10)使用start</div>
+      <div class="progress-step step-start"></div>
+      <pre>
+.progress-step {
+    width: 0;
+    height: 1rem;
+    border-radius: 1rem;
+    background-color: #eb2f06;
+    animation: progress-ani 10s steps(10, start) forwards;
+}</pre>
+    </dd>
   </dl>
   <div class="chap">动画事件 Events</div>
   <dl class="nav-cont">
@@ -437,9 +519,9 @@ header {
       </table>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/loading.html">个人网站加载</a></dd>
-    <dd>.页面加载完毕跳转到主页面</dd>
-    <dd>.先设计动画并应用到某元素，然后在js中监测元素的动画状态，结束时跳转到主页面</dd>
     <dd>
+      <div>.页面加载完毕跳转到主页面</div>
+      <div>.先设计动画并应用到某元素，然后在js中监测元素的动画状态，结束时跳转到主页面</div>
       <pre>
 let item = document.querySelector('.item')
 item.addEventListener('animationend', () => {
@@ -447,8 +529,8 @@ item.addEventListener('animationend', () => {
 })        </pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/miniplayer.html">MINI音乐播放器</a></dd>
-    <dd>一开始动画暂停，监听播放状态。播放就执行动画；否则暂停</dd>
     <dd>
+      <div>一开始动画暂停，监听播放状态。播放就执行动画；否则暂停</div>
       <pre>
 audio.addEventListener('play', () => {
   img.style.animationPlayState = `running`
@@ -461,8 +543,8 @@ audio.addEventListener('pause', () => {
         class="iconfont icon-codepen1"></i>depen</dd>
     <dd>.每次鼠标滑过都触发3次动画</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 单击后左移2次，结束后移除事件响应</dd>
-    <dd>.事先应创建好动画样式</dd>
     <dd>
+      <div>.事先应创建好动画样式</div>
       <pre>
 let btn = document.querySelector('.btn');
 btn.addEventListener('click', () => {
@@ -480,12 +562,12 @@ function logging() {
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
     <dt>总结</dt>
-    <dd class="ol">
+    <dd class="sn">
       <div>帧动画的静态使用</div>
       <div>帧动画的js使用</div>
     </dd>
     <dt>作业</dt>
-    <dd class="ol">
+    <dd class="sn">
       <div>独立完成上述案例</div>
       <div>合理设计帧动画，完善个人网站</div>
     </dd>
