@@ -78,15 +78,36 @@ body::-webkit-scrollbar-thumb {
   position: absolute;
   top: -1.8rem;
   right: -1.8rem;
-  display: grid;
-  place-items: center;
-  width: 3.6rem;
-  aspect-ratio: 1;
+  width: 5rem;
+  height: 2.5rem;
+  text-align: center;
   font-weight: 600;
   border-radius: 50%;
   border: 1px solid var(--tree-color);
   background-color: #fff;
   cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.title::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  transform: rotateZ(-45deg);
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  transform: rotateZ(45deg);
 }
 
 .cont {
@@ -96,7 +117,11 @@ body::-webkit-scrollbar-thumb {
 
 .title:hover {
   border-color: var(--main-color);
-  box-shadow: 0 0 1rem rgba(255, 68, 0, 0.4);
+}
+
+.title:hover::before,
+.title:hover::after {
+  border-color: var(--main-color);
 }
 
 .title:hover+.cont {
