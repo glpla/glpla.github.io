@@ -7,132 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>文章排版 Paper</title>
   <link rel="stylesheet" href="../../css/common.css">
-  <style>
-    header {
-      position: relative;
-      top: 0;
-    }
-
-    .article {
-      --line-h: 30px;
-      --main-color: #f40;
-      columns: 300px 2;
-      padding: 10px;
-      line-height: var(--line-h);
-      counter-reset: chap;
-    }
-
-    .article .header {
-      column-span: all;
-      text-align: center;
-      margin-top: var(--line-h);
-      margin-bottom: var(--line-h);
-    }
-
-    .article h1 {
-      font-size: 2rem;
-    }
-
-    .article h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      counter-reset: sec;
-      counter-increment: chap;
-    }
-
-    /* 
-    .article h2:not(:first-of-type),
-    .article h3:not(:first-of-type) {
-      margin-top: var(--line-h);
-    } */
-
-    .article h2::before {
-      content: '第' counter(chap)'章 ';
-    }
-
-    .article h3 {
-      font-size: 1.6rem;
-      font-weight: 600;
-
-      counter-reset: img;
-      counter-reset: tbl;
-      counter-increment: sec;
-    }
-
-    .article h3::before {
-      content: counter(chap)'.' counter(sec)'  ';
-    }
-
-    .article h3~figure figcaption {
-      counter-increment: img;
-    }
-
-    .article h3~figure figcaption::before {
-      content: '图' counter(chap)'-' counter(sec)'-' counter(img)' ';
-    }
-
-    .article h3~table caption {
-      counter-increment: tbl;
-    }
-
-    .article h3~table caption::before {
-      content: '表' counter(chap)'-' counter(sec)'-' counter(tbl)' ';
-    }
-
-    .article p {
-      text-indent: 2em;
-      text-align: justify;
-      margin-bottom: var(--line-h);
-    }
-
-    .article h3+p {
-      text-indent: 0;
-    }
-
-    .article h3+p::first-letter {
-      float: left;
-      font-size: 3.2rem;
-      font-weight: 600;
-      margin-right: var(--line-h);
-      line-height: calc(2*var(--line-h));
-      color: var(--main-color);
-    }
-
-    .abstract {
-      column-span: all;
-      text-align: justify;
-      margin-bottom: var(--line-h);
-    }
-
-    .abstract span {
-      font-weight: 600;
-    }
-
-    figure {
-      margin-bottom: var(--line-h);
-    }
-
-    figure img {
-      width: 100%;
-      height: calc(8*var(--line-h));
-      border: none;
-      border-radius: 8px;
-      object-fit: cover;
-      object-position: center;
-    }
-
-    figure figcaption {
-      margin: 0;
-      text-align: center;
-      line-height: var(--line-h);
-      color: #666;
-    }
-
-    table {
-      margin: 0 0 calc(2*var(--line-h)) 0;
-      line-height: var(--line-h);
-    }
-  </style>
+  <link rel="stylesheet" href="./css/paper.css">
 </head>
 
 <body>
@@ -164,26 +39,46 @@
       saepe, dolorem tempora delectus totam accusantium nulla quam.</p>
     <table>
       <caption>Lorem, ipsum dolor.</caption>
-      <tr>
-        <th>name</th>
-        <th>desc</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>5</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>desc</th>
+          <th>gender</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>Lorem.</td>
+          <td>Distinctio!</td>
+          <td>Nesciunt.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Delectus?</td>
+          <td>Veniam?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Nostrum?</td>
+          <td>Iste.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>At.</td>
+          <td>Culpa.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Repudiandae.</td>
+          <td>Error.</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Lorem ipsum dolor sit amet consectetur.</td>
+        </tr>
+      </tfoot>
     </table>
     <p>Obcaecati dolores adipisci amet ullam explicabo minima aut officia voluptates! Lorem ipsum dolor sit, amet
       consectetur adipisicing elit. Eum eligendi adipisci voluptatibus cumque! Doloribus delectus ad quia temporibus
@@ -240,30 +135,46 @@
       sapiente laborum officiis commodi aut eum blanditiis aperiam dolores voluptates eligendi! Accusantium, minima.</p>
     <table>
       <caption>Lorem, ipsum dolor.</caption>
-      <tr>
-        <th>name</th>
-        <th>desc</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>5</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>5</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>desc</th>
+          <th>gender</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>Lorem.</td>
+          <td>Distinctio!</td>
+          <td>Nesciunt.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Delectus?</td>
+          <td>Veniam?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Nostrum?</td>
+          <td>Iste.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>At.</td>
+          <td>Culpa.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Repudiandae.</td>
+          <td>Error.</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Lorem ipsum dolor sit amet consectetur.</td>
+        </tr>
+      </tfoot>
     </table>
     <p>Atque sapiente cum rem repellat quaerat, fugiat commodi distinctio earum veniam. Esse, natus tenetur? Error,
       deserunt quasi consequuntur excepturi repellat ipsam, doloribus reiciendis porro quae ad impedit consequatur.
@@ -309,26 +220,46 @@
     </p>
     <table>
       <caption>Lorem, ipsum dolor.</caption>
-      <tr>
-        <th>name</th>
-        <th>desc</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>5</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>desc</th>
+          <th>gender</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>Lorem.</td>
+          <td>Distinctio!</td>
+          <td>Nesciunt.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Delectus?</td>
+          <td>Veniam?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Nostrum?</td>
+          <td>Iste.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>At.</td>
+          <td>Culpa.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Repudiandae.</td>
+          <td>Error.</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Lorem ipsum dolor sit amet consectetur.</td>
+        </tr>
+      </tfoot>
     </table>
     <p>Veritatis aliquid quas harum dolorum, sunt minus quidem vel blanditiis doloribus porro, saepe voluptates
       sapiente itaque voluptatibus deleniti eligendi hic nulla?</p>
@@ -348,28 +279,48 @@
       quos nemo consequuntur accusantium eos.</p>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea in molestias libero eaque debitis impedit
       temporibus accusamus quidem vel ducimus?</p>
-    <table>
-      <caption>Lorem, ipsum dolor.</caption>
+    <table></table>
+    <caption>Lorem, ipsum dolor.</caption>
+    <thead>
       <tr>
         <th>name</th>
         <th>desc</th>
+        <th>gender</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td>Lorem.</td>
+        <td>Distinctio!</td>
+        <td>Nesciunt.</td>
       </tr>
       <tr>
-        <td>1</td>
-        <td>1</td>
+        <td>Lorem.</td>
+        <td>Delectus?</td>
+        <td>Veniam?</td>
       </tr>
       <tr>
-        <td>2</td>
-        <td>2</td>
+        <td>Lorem.</td>
+        <td>Nostrum?</td>
+        <td>Iste.</td>
       </tr>
       <tr>
-        <td>3</td>
-        <td>3</td>
+        <td>Lorem.</td>
+        <td>At.</td>
+        <td>Culpa.</td>
       </tr>
       <tr>
-        <td>4</td>
-        <td>5</td>
+        <td>Lorem.</td>
+        <td>Repudiandae.</td>
+        <td>Error.</td>
       </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">Lorem ipsum dolor sit amet consectetur.</td>
+      </tr>
+    </tfoot>
     </table>
     <p>Impedit aliquid optio libero aspernatur maxime repellat tempore labore non harum veritatis, tempora nemo
       repellendus, deserunt animi perspiciatis dolor provident.</p>
@@ -379,26 +330,46 @@
       beatae, magni magnam non illo, ullam doloribus.</p>
     <table>
       <caption>Lorem, ipsum dolor.</caption>
-      <tr>
-        <th>name</th>
-        <th>desc</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>5</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>desc</th>
+          <th>gender</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>Lorem.</td>
+          <td>Distinctio!</td>
+          <td>Nesciunt.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Delectus?</td>
+          <td>Veniam?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Nostrum?</td>
+          <td>Iste.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>At.</td>
+          <td>Culpa.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Repudiandae.</td>
+          <td>Error.</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Lorem ipsum dolor sit amet consectetur.</td>
+        </tr>
+      </tfoot>
     </table>
     <h3>sub-title2</h3>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ullam ratione fugiat sed maxime iste voluptatum
@@ -415,26 +386,46 @@
       reiciendis, optio alias qui consequuntur!</p>
     <table>
       <caption>Lorem, ipsum dolor.</caption>
-      <tr>
-        <th>name</th>
-        <th>desc</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>5</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>desc</th>
+          <th>gender</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>Lorem.</td>
+          <td>Distinctio!</td>
+          <td>Nesciunt.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Delectus?</td>
+          <td>Veniam?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Nostrum?</td>
+          <td>Iste.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>At.</td>
+          <td>Culpa.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Repudiandae.</td>
+          <td>Error.</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Lorem ipsum dolor sit amet consectetur.</td>
+        </tr>
+      </tfoot>
     </table>
     <p>Harum molestias earum tempore iure rerum explicabo iste vel nam commodi, ratione accusantium dolorem temporibus
       eum incidunt dolore?</p>
@@ -445,26 +436,46 @@
       explicabo sit facilis deserunt non quo.</p>
     <table>
       <caption>Lorem, ipsum dolor.</caption>
-      <tr>
-        <th>name</th>
-        <th>desc</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>3</td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>5</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>desc</th>
+          <th>gender</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td>Lorem.</td>
+          <td>Distinctio!</td>
+          <td>Nesciunt.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Delectus?</td>
+          <td>Veniam?</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Nostrum?</td>
+          <td>Iste.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>At.</td>
+          <td>Culpa.</td>
+        </tr>
+        <tr>
+          <td>Lorem.</td>
+          <td>Repudiandae.</td>
+          <td>Error.</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Lorem ipsum dolor sit amet consectetur.</td>
+        </tr>
+      </tfoot>
     </table>
     <p>Facere, neque facilis! Quam sint quod consequatur eaque fugiat! Vero vel eligendi doloremque hic, eveniet,
       cupiditate facilis, ratione quas voluptatem eum mollitia ab ipsum.</p>
