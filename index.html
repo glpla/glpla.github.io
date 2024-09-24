@@ -10,20 +10,23 @@
   <meta name="description"
     content="大树小站;WEB; HTML5; Vue3; Unity; Network; OA; Java; Linux; Ubuntu; Word; Excel; PPT; Office; only for personal use.">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_3834292_hul6qge3el5.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_3834292_zxqb2r9tra.css">
   <link rel="stylesheet" href="./css/index.css">
 </head>
 
 <body>
   <header>
-    <a class="avatar" href="avatar">glpla.github.io</a>
-    <h1>
-      <svg class="svg-txt">
-        <text class="title" x="75" y="30" text-anchor="middle" dominant-baseline="central">大树小站</text>
-      </svg>
-    </h1>
+    <div class="info">
+      <a class="avatar" href="avatar">glpla.github.io</a>
+      <h1>
+        <svg class="svg-txt">
+          <text class="title" x="75" y="30" text-anchor="middle" dominant-baseline="central">大树小站</text>
+        </svg>
+      </h1>
+    </div>
     <div class="stamp"></div>
   </header>
+  <div class="more"><span class="iconfont icon-angle-double-down"></span></div>
   <div class="grid">
     <div class="update">
       <div><a href="./utils/index.html">在线资源</a></div>
@@ -124,19 +127,19 @@
       <div class="desc">案例欣赏</div>
     </a>
   </div>
-  <div class="lotus">
-    <div class="lotus-item" style="--rad:-4"></div>
-    <div class="lotus-item" style="--rad:-3"></div>
-    <div class="lotus-item" style="--rad:-2"></div>
-    <div class="lotus-item" style="--rad:-1"></div>
-    <div class="lotus-item" style="--rad:0"></div>
-    <div class="lotus-item" style="--rad:1"></div>
-    <div class="lotus-item" style="--rad:2"></div>
-    <div class="lotus-item" style="--rad:3"></div>
-    <div class="lotus-item" style="--rad:4"></div>
-    <div class="lotus-title">Portal</div>
-  </div>
   <footer>
+    <div class="lotus">
+      <div class="lotus-item" style="--rad:-4"></div>
+      <div class="lotus-item" style="--rad:-3"></div>
+      <div class="lotus-item" style="--rad:-2"></div>
+      <div class="lotus-item" style="--rad:-1"></div>
+      <div class="lotus-item" style="--rad:0"></div>
+      <div class="lotus-item" style="--rad:1"></div>
+      <div class="lotus-item" style="--rad:2"></div>
+      <div class="lotus-item" style="--rad:3"></div>
+      <div class="lotus-item" style="--rad:4"></div>
+      <div class="lotus-title">Portal</div>
+    </div>
     <div>All rights reserved &copy; glpla 2022-2025</div>
     <div>1942194789@qq.com</div>
     <div>广州新华学院</div>
@@ -168,11 +171,16 @@
       origin: "bottom",
       interval: 100,
     };
-    ScrollReveal().reveal(".nav-item>*", revealOption);
 
     VanillaTilt.init(document.querySelectorAll(".nav-item"), {
       // glare: true
     });
+    const more = document.querySelector('.more');
+    const grid = document.querySelector('.grid');
+    more.addEventListener('click', () => {
+      grid.classList.toggle('active')
+      ScrollReveal().reveal(".nav-item>*", revealOption);
+    })
   </script>
 
 </body>
