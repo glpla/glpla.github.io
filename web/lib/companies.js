@@ -12,21 +12,21 @@ burger.addEventListener('click', () => {
   head.classList.toggle('open')
 })
 
-window.addEventListener("scroll", () => {
-  let h = head.getBoundingClientRect().height;
-  if (window.pageYOffset - h > 200) {
-    if (!head.classList.contains("sticky")) {
-      head.classList.add("sticky");
-    }
-  } else {
-    head.classList.remove("sticky");
-  }
-  if (window.pageYOffset > 1000) {
-    back.style.display = "block";
-  } else {
-    back.style.display = "none";
-  }
-});
+// window.addEventListener("scroll", () => {
+//   let h = head.getBoundingClientRect().height;
+//   if (window.pageYOffset - h > 200) {
+//     if (!head.classList.contains("sticky")) {
+//       head.classList.add("sticky");
+//     }
+//   } else {
+//     head.classList.remove("sticky");
+//   }
+//   if (window.pageYOffset > 1000) {
+//     back.style.display = "block";
+//   } else {
+//     back.style.display = "none";
+//   }
+// });
 
 // scrollReveal option
 const revealOption = {

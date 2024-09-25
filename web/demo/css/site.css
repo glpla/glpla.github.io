@@ -1,8 +1,11 @@
 @import url(//at.alicdn.com/t/c/font_3859342_z32ezk05sjq.css);
 
 :root {
+  --main-color: #00abf0;
+  --second-color: #112e42;
+  --txt-color: #ededed;
+  --body-bg: #0d2d43;
   --p-m-g: 10px;
-  --body-bg: #9aa6af;
   --item-bg: #283237;
   --title-color: #fff;
 }
@@ -27,7 +30,7 @@ body {
   font-size: 15px;
   font-family: 'poppins', Arial, Helvetica, sans-serif;
   background-color: #373f49;
-  color: var(--body-bg);
+  color: var(--txt-color);
 }
 
 ::-webkit-scrollbar {
@@ -35,7 +38,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--body-bg);
+  background-color: var(--second-color);
 }
 
 .page {
@@ -64,7 +67,7 @@ body {
 .title {
   color: var(--title-color);
   font-size: 16px;
-  margin-bottom: var(--p-m-g);
+  text-transform: capitalize;
 }
 
 .top {
@@ -83,13 +86,13 @@ body {
 .user {
   grid-area: user;
   background-color: #fe4c6d;
-  color: #fff;
+  color: var(--txt-color);
 }
 
 .device {
   grid-area: device;
   background-color: #28c6dc;
-  color: #fff;
+  color: var(--txt-color);
 }
 
 .news {
@@ -161,18 +164,37 @@ body {
 }
 
 .logo {
-  width: 60%;
+  position: relative;
+  width: 80%;
   max-width: 120px;
   aspect-ratio: 1/1;
-  padding: 10px;
   margin: var(--p-m-g) auto calc(2*var(--p-m-g));
   border-radius: 50%;
-  background-color: #fff;
-  background-image: url(../../../imgs/avatar.jpg);
-  background-size: cover;
-  border-top: 4px solid #fff;
-  border-bottom: 4px solid #fff;
-  background-clip: content-box;
+  display: grid;
+  place-items: center;
+}
+
+.logo img {
+  display: block;
+  width: 80%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
+.logo .spin {
+  position: absolute;
+  inset: 0;
+  border-left: 2px solid var(--main-color);
+  border-right: 2px solid var(--main-color);
+  border-top: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  border-radius: 50%;
+  transition: transform 0.4s;
+  cursor: pointer;
+}
+
+.logo:hover .spin {
+  transform: rotate(180deg);
 }
 
 .nav-item {
@@ -180,12 +202,17 @@ body {
   align-items: center;
   gap: var(--p-m-g);
   font-size: 16px;
-  color: #fff;
+  color: var(--txt-color);
   margin-bottom: var(--p-m-g);
+  cursor: pointer;
 }
 
 .nav-item .iconfont {
   font-size: 18px;
+}
+
+.nav-item:hover {
+  color: var(--main-color);
 }
 
 .news ul {
@@ -251,7 +278,7 @@ body {
   }
 
   .ham .iconfont {
-    color: #fff;
+    color: var(--txt-color);
     font-size: 2rem;
     margin: auto;
   }

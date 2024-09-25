@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>表单 Form</title>
+  <style>
+    :root {
+      --main-color: #00abf0;
+      --second-color: #112e42;
+      --txt-color: #ededed;
+      --body-bg: #0d2d43;
+      --p-m-g: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      height: 100%;
+      padding: var(--p-m-g);
+      background-color: transparent;
+      border: none;
+      outline: none;
+      font: inherit;
+      color: var(--txt-color);
+    }
+
+    button {
+      border: none;
+      outline: none;
+      font: inherit;
+      color: var(--txt-color);
+      cursor: pointer;
+      background-color: transparent;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--txt-color);
+    }
+
+    textarea {
+      resize: none;
+      aspect-ratio: 16/9;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 10rem 9% 2rem;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      height: 100vh;
+      background-color: var(--body-bg);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .form {
+      padding-bottom: 10rem;
+      min-height: auto;
+    }
+
+    h1 {
+      color: var(--txt-color);
+      text-transform: capitalize;
+      text-align: center;
+      margin-bottom: calc(4*var(--p-m-g));
+    }
+
+    h1 span {
+      color: var(--main-color);
+    }
+
+    form {
+      max-width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .ipt-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .ta-wrap {
+      margin: var(--p-m-g) 0 calc(2*var(--p-m-g));
+    }
+
+    .ipt-box {
+      width: 49%;
+      margin: var(--p-m-g) 0;
+    }
+
+    input,
+    textarea {
+      border: 2px solid var(--main-color);
+      border-radius: var(--p-m-g);
+    }
+
+    .btn {
+      padding: var(--p-m-g) calc(4*var(--p-m-g));
+      border: 2px solid var(--main-color);
+      background-color: var(--main-color);
+      border-radius: var(--p-m-g);
+      color: var(--txt-color);
+      text-transform: capitalize;
+    }
+
+    input:focus {
+      background-color: var(--second-color);
+    }
+  </style>
+</head>
+
+<body>
+  <section class="form">
+    <h1>contact <span>me!</span></h1>
+    <form action="">
+      <div class="ipt-wrap">
+        <div class="ipt-box">
+          <input type="text" placeholder="your name">
+        </div>
+        <div class="ipt-box">
+          <input type="text" placeholder="your email">
+        </div>
+      </div>
+      <div class="ipt-wrap">
+        <div class="ipt-box">
+          <input type="text" placeholder="your cellphone">
+        </div>
+        <div class="ipt-box">
+          <input type="text" placeholder="your subject">
+        </div>
+      </div>
+      <div class="ta-wrap">
+        <textarea name="" id="" placeholder="your message"></textarea>
+      </div>
+      <div class="btns">
+        <button type="submit" class="btn">submit</button>
+      </div>
+    </form>
+  </section>
+</body>
+
+</html>
