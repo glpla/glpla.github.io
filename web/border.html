@@ -6,23 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>边框 Border</title>
-  <link rel="stylesheet" href="./css/styleNew.css">
-  <link rel="stylesheet" href="../css/code.css">
-  <link rel="stylesheet" href="../css/sn.css">
+  <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="./css/border.css">
   <base target="_blank">
 </head>
 
 <body>
   <header>
-    <h1>边框&commat;Border</h1>
+    <h1>边框</h1>
+    <span>&commat;Border</span>
     <span class="ham iconfont icon-menu"></span>
-    <ul class="nav">
-      <li class="nav-item">border</li>
-      <li class="nav-item">border-radius</li>
-      <li class="nav-item">border-image</li>
-      <li class="nav-item">border-block</li>
-    </ul>
+    <nav class="nav">
+      <a href='' class="nav-item">border</a>
+      <a href='' class="nav-item">border-radius</a>
+      <a href='' class="nav-item">border-image</a>
+      <a href='' class="nav-item">border-block</a>
+    </nav>
   </header>
   <dl>
     <dt class="nav-cont">边框 border</dt>
@@ -153,25 +152,25 @@
   </dl>
   <div class="chap">边框圆角 border-radius</div>
   <dl class="nav-cont">
-    <dd class="mt2 txt-center"><img src="./imgs/border-radius.png" alt=""></dd>
+    <dd class="txt-center"><img src="./imgs/border-radius.png" alt=""></dd>
     <dd>. 边框的圆角半径</dd>
     <dd>. 更多应用，请点击 <a href="https://9elements.github.io/fancy-border-radius/">fancy-border-radius</a>
     </dd>
-    <dt>语法1 [<span class="iconfont icon-iconfontshoucang"></span>]</dt>
+    <dt>语法1</dt>
     <dd>
       <pre>border-radius: length|%;</pre>
+      <div>. 1个值：四个角</div>
+      <div>. 2个值：[左上、右下]、[右上、左下]</div>
+      <div>. 3个值：[左上]、[右上、左下]、[右下]</div>
+      <div>. 4个值：[左上角]、[右上角]、[右下角]、[左下角]</div>
+      <div>. 可单独设置每个角的变化</div>
     </dd>
-    <dd>. 1个值：四个角</dd>
-    <dd>. 2个值：[左上、右下]、[右上、左下]</dd>
-    <dd>. 3个值：[左上]、[右上、左下]、[右下]</dd>
-    <dd>. 4个值：[左上角]、[右上角]、[右下角]、[左下角]</dd>
-    <dd>. 可单独设置每个角的变化</dd>
     <dt>语法2</dt>
     <dd>
       <pre>border-radius:x x x x/y y y y</pre>
+      <div>. 单独设置x轴、y轴的圆角半径；/前面是4个角水平方向的半径；/后面是4个角垂直方向的半径</div>
     </dd>
-    <dd>. 单独设置x轴、y轴的圆角半径；/前面是4个角水平方向的半径；/后面是4个角垂直方向的半径</dd>
-    <div>[<span class="iconfont icon-keyboard"></span>] 正圆 - 四个角</div>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 正圆 - 四个角</dd>
     <dd class="grid2">
       <div class="basic radiu0"></div>
       <div>
@@ -234,6 +233,7 @@
         <pre>border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;</pre>
       </div>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/site.html">头像定制</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/companies.html#service">公告信息栏</a></dd>
     <dd>. 左边框 border-left</dd>
     <dd>. 圆角 border-radius</dd>
@@ -358,25 +358,27 @@ a:hover {
     <dd>. 除了背景可以使用背景图片外，边框也可以使用背景图片</dd>
     <dd>. 必须有边框</dd>
     <dt>独立属性</dt>
-    <dd>1. border-image-source</dd>
-    <dd>. 背景图片；可以是 <span class="warn">线性渐变</span> 或 <span class="warn">径向渐变</span></dd>
-    <dd>2. border-image-slice</dd>
-    <dd>. 到边框图像上、下、左、右的裁剪，将边框图像裁剪成9份-九宫格</dd>
-    <dd>. 可以是 数值 或 % 或 fill；不带单位，</dd>
-    <dd>. 数字：默认单位像素px；不能为负值</dd>
-    <dd>. %：默认100%；如果为50%，因为左右俩端已经各占了50%，中间区域没有内容；当&lt;50%时，中间端才会有内容；这部分的内容会根据铺贴的方式进行渲染</dd>
-    <dd>. fill：保留边框图像的中间部分；默认不保留</dd>
-    <dd>. 当border-image-slice小于图像的一半50%时，border-image-repeat的特性才会体现出来</dd>
-    <dd>3. border-image-width</dd>
-    <dd>. 边框占用图像的宽度；默认是100%，即背景图片全部覆盖容器；可以使用px</dd>
-    <dd>4. border-image-outset</dd>
-    <dd>. 图像向外扩展的区域；默认0；不可以是负数</dd>
-    <dd>5. border-image-repeat</dd>
-    <dd>. 图像重复的方式：stretch[默认]、repeat、round[衔接更顺滑]</dd>
+    <dd>
+      <div>1. border-image-source</div>
+      <div>. 背景图片；可以是 <span class="warn">线性渐变</span> 或 <span class="warn">径向渐变</span></div>
+      <div>2. border-image-slice</div>
+      <div>. 到边框图像上、下、左、右的裁剪，将边框图像裁剪成9份-九宫格</div>
+      <div>. 可以是 数值 或 % 或 fill；不带单位，</div>
+      <div>. 数字：默认单位像素px；不能为负值</div>
+      <div>. %：默认100%；如果为50%，因为左右俩端已经各占了50%，中间区域没有内容；当&lt;50%时，中间端才会有内容；这部分的内容会根据铺贴的方式进行渲染</div>
+      <div>. fill：保留边框图像的中间部分；默认不保留</div>
+      <div>. 当border-image-slice小于图像的一半50%时，border-image-repeat的特性才会体现出来</div>
+      <div>3. border-image-width</div>
+      <div>. 边框占用图像的宽度；默认是100%，即背景图片全部覆盖容器；可以使用px</div>
+      <div>4. border-image-outset</div>
+      <div>. 图像向外扩展的区域；默认0；不可以是负数</div>
+      <div>5. border-image-repeat</div>
+      <div>. 图像重复的方式：stretch[默认]、repeat、round[衔接更顺滑]</div>
+    </dd>
     <dt>复合属性</dt>
     <dd>. border-image</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 叠加蒙层 - 从上到下的渐变</dd>
     <dd>
+      <div>[<span class="iconfont icon-keyboard"></span>] 叠加蒙层 - 从上到下的渐变</div>
       <div class="border-img"></div>
       <pre>border-image: linear-gradient(#0003, #000) 0 fill;</pre>
     </dd>
@@ -446,9 +448,9 @@ border-image-repeat: round;</pre>
   <div class="chap">边框块 border-block</div>
   <dl class="nav-cont">
     <dt>说明</dt>
-    <dd>. 指定边框块的起始/顶部start和结束/底部end样式</dd>
-    <dd>. 浏览器支持不是很好，建议使用SVG实现</dd>
     <dd>
+      <div>. 指定边框块的起始/顶部start和结束/底部end样式</div>
+      <div>. 浏览器支持不是很好，建议使用SVG实现</div>
       <figure class="code">
         <pre>
 border-block-start
@@ -465,8 +467,7 @@ border-block-end</pre>
       <div class="border-blk"></div>
     </dd>
     <dd>
-      <figure class="code">
-        <pre>
+      <pre>
 .border-blk {
     width: 60px;
     height: 60px;
@@ -481,7 +482,6 @@ border-block-end</pre>
 .border-blk:hover {
     transform: rotate(360deg);
 }</pre>
-      </figure>
     </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
@@ -489,13 +489,13 @@ border-block-end</pre>
     <dt>总结</dt>
     <dd>. 边框 border 的使用和样式</dd>
     <dt>作业</dt>
-    <dd class="ol">
+    <dd class="sn">
       <div>绘制透明椭圆头像框</div>
       <div>优化个人网站，如导航按钮、信息介绍</div>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="./lib/ham.js"></script>
+  <script src="../utils/custom/ham2024.js"></script>
 </body>
 
 </html>

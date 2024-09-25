@@ -79,6 +79,28 @@ img {
   border-radius: 50%;
   font-size: 20px;
   cursor: pointer;
+  overflow: hidden;
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.nav-close::before,
+.nav-ham::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #f40;
+  z-index: -1;
+  transition: 0.4s;
+}
+
+.nav-close:hover::before,
+.nav-ham:hover::before {
+  width: 100%;
 }
 
 .menu {
@@ -91,6 +113,7 @@ img {
   height: 100%;
   padding: 7rem 3.5rem 3.5rem;
   transition: right 0.5s ease-in-out;
+  z-index: 99;
 }
 
 .menu.active {
@@ -101,12 +124,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: calc(2 * var(--p-m-g));
-}
-
-.nav-close {
-  position: absolute;
-  top: 0.8rem;
-  right: 1.5rem;
+  text-transform: capitalize;
 }
 
 /* main */
