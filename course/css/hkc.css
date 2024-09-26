@@ -1,10 +1,11 @@
 @import url(//at.alicdn.com/t/c/font_3869861_ygp62qsr9d.css);
 
 :root {
-  --main-width: 1000px;
+  --main-width: 1190px;
   --nav-color: #9f103a;
   --main-icon-color: #4bc2ce;
   --main-icon-dark-color: #089;
+  --p-m-g: 1rem;
 }
 
 html {
@@ -26,6 +27,16 @@ h2 {
 
 body {
   font-size: 1.6rem;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--nav-color);
 }
 
 ul {
@@ -64,12 +75,12 @@ header {
 }
 
 nav {
-  margin: 1rem auto;
   width: 100%;
   height: 6rem;
   background-color: #ddd;
   display: flex;
   justify-content: center;
+  border-top: 10px solid #fff;
 }
 
 .main-nav {
@@ -122,7 +133,7 @@ nav {
 .hot-spot {
   position: absolute;
   left: -0.5rem;
-  top: -55%;
+  top: -52%;
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
@@ -160,18 +171,6 @@ nav {
   height: 18px;
   background-image: radial-gradient(at 100% 100%, transparent 75%, #fff 0);
 }
-
-/* .border-bottom::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -1.6rem;
-    width: 2rem;
-    height: 2rem;
-    background-color: transparent;
-    border-top-left-radius: 2rem;
-    box-shadow: 0 -10px #fff;
-} */
 
 .border-top::before {
   content: '';
@@ -218,20 +217,57 @@ ul li:nth-child(6).active~.hot-spot {
 }
 
 .cont-wrap {
-  overflow: hidden;
-}
-
-.inner-box {
-  position: relative;
-  width: 600%;
+  width: 100%;
+  flex: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  scroll-behavior: smooth;
 }
 
 .inner-cont {
-  display: none;
-  float: left;
-  width: calc(100%/6);
-  min-height: calc(100vh - 26rem);
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
+}
+
+.inner-cont::-webkit-scrollbar {
+  width: 8px;
+}
+
+.inner-cont::-webkit-scrollbar-thumb {
+  background-color: var(--main-icon-color);
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+  gap: var(--p-m-g);
+  height: 100%;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  gap: var(--p-m-g);
+  text-indent: 2em;
+  height: 100%;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--p-m-g);
+  height: 100%;
+}
+
+.info-box {
+  width: 100%;
 }
 
 .inner-box .inner-cont:first-child {
@@ -276,21 +312,7 @@ ul li:nth-child(6).active~.hot-spot {
   text-align: right;
 }
 
-.grid2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
-  gap: 2rem;
-  padding: 1rem;
-}
 
-.chapter-wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-}
 
 .flex-h {
   display: flex;
@@ -532,8 +554,9 @@ ul li:nth-child(6).active~.hot-spot {
   column-gap: 2em;
   column-rule: 2px solid var(--main-icon-color);
   text-align: justify;
-  padding: 1rem;
 }
+
+
 
 .col2 h2 {
   line-height: 6rem;
@@ -558,13 +581,6 @@ ul li:nth-child(6).active~.hot-spot {
   font-size: 2rem;
   font-weight: 600;
   text-transform: capitalize;
-}
-
-.imp-wrap {
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  align-items: center;
-  gap: 2rem;
 }
 
 .imp-item {
@@ -603,32 +619,23 @@ ul li:nth-child(6).active~.hot-spot {
   animation: zoom 1s linear infinite;
 }
 
-.grid3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  line-height: 30px;
-  text-indent: 2em;
-}
-
 .agenda-item {
   position: relative;
   background-color: #fff;
-  margin: 1rem;
   padding-bottom: 1rem;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
   filter: drop-shadow(4px 4px rgba(0, 0, 0, 0.2));
-  overflow: hidden;
+  width: 35rem;
+  height: 15rem;
 }
 
 .sub-bar {
   display: flex;
   justify-content: space-around;
   color: #fff;
-  background-image: linear-gradient(45deg, #079992, #b8e994);
+  background-image: linear-gradient(45deg, var(--main-icon-color), var(--main-icon-dark-color));
   line-height: 40px;
-  animation: glow 5s linear infinite alternate-reverse;
   text-indent: initial;
 }
 
@@ -640,17 +647,6 @@ ul li:nth-child(6).active~.hot-spot {
   font-weight: 600;
   font-size: 3rem;
 }
-
-@keyframes glow {
-  0% {
-    filter: hue-rotate(50deg);
-  }
-
-  100% {
-    filter: hue-rotate(-50deg);
-  }
-}
-
 
 @keyframes zoom {
   from {
