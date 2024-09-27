@@ -8,6 +8,12 @@
   --p-m-g: 1rem;
 }
 
+a {
+  font: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -32,15 +38,11 @@ body {
 }
 
 body::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 body::-webkit-scrollbar-thumb {
   background-color: var(--nav-color);
-}
-
-ul {
-  list-style: none;
 }
 
 img {
@@ -192,27 +194,27 @@ nav {
   background-image: radial-gradient(at 100% 0%, transparent 75%, #fff 0);
 }
 
-ul li:nth-child(1).active~.hot-spot {
+.main-nav a:nth-child(1).active~.hot-spot {
   transform: translateX(calc(5rem * 0));
 }
 
-ul li:nth-child(2).active~.hot-spot {
+.main-nav a:nth-child(2).active~.hot-spot {
   transform: translateX(calc(5rem * 1));
 }
 
-ul li:nth-child(3).active~.hot-spot {
+.main-nav a:nth-child(3).active~.hot-spot {
   transform: translateX(calc(5rem * 2));
 }
 
-ul li:nth-child(4).active~.hot-spot {
+.main-nav a:nth-child(4).active~.hot-spot {
   transform: translateX(calc(5rem * 3));
 }
 
-ul li:nth-child(5).active~.hot-spot {
+.main-nav a:nth-child(5).active~.hot-spot {
   transform: translateX(calc(5rem * 4));
 }
 
-ul li:nth-child(6).active~.hot-spot {
+.main-nav a:nth-child(6).active~.hot-spot {
   transform: translateX(calc(5rem * 5));
 }
 
@@ -239,6 +241,10 @@ ul li:nth-child(6).active~.hot-spot {
 
 .inner-cont::-webkit-scrollbar-thumb {
   background-color: var(--main-icon-color);
+}
+
+.inner-cont>div {
+  padding: var(--p-m-g);
 }
 
 .grid2 {
@@ -268,6 +274,7 @@ ul li:nth-child(6).active~.hot-spot {
 
 .info-box {
   width: 100%;
+  height: 20rem;
 }
 
 .inner-box .inner-cont:first-child {
@@ -295,11 +302,12 @@ ul li:nth-child(6).active~.hot-spot {
 .avatar-img {
   width: 15rem;
   height: 20rem;
-  margin: 7rem 1rem;
   border-radius: 7.5rem/10rem;
   shape-outside: ellipse(50% 50% at center 50%);
   border: 4px solid #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 2rem 1rem;
+  vertical-align: middle;
 }
 
 .bold {
@@ -359,7 +367,7 @@ ul li:nth-child(6).active~.hot-spot {
 
 .arr-item:nth-child(odd) {
   justify-content: flex-start;
-  border-left: 1rem solid var(--main-icon-color);
+  border-left: 0.6rem solid var(--main-icon-color);
 }
 
 .arr-item:hover:nth-child(odd) {
@@ -368,7 +376,7 @@ ul li:nth-child(6).active~.hot-spot {
 
 .arr-item:nth-child(even) {
   justify-content: flex-end;
-  border-right: 1rem solid var(--main-icon-color);
+  border-right: 0.6rem solid var(--main-icon-color);
 }
 
 .arr-item:hover:nth-child(even) {
