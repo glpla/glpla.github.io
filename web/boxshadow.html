@@ -25,53 +25,69 @@
       <div class="tips">可以把阴影当作一个元素本身的孵化器</div>
       <pre>box-shadow: h-shadow v-shadow blur spread color inset;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 发光小球 - 1个阴影</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 发光按钮</dd>
     <dd>
-      <div class="glow single"></div>
+      <div>. 静态1个阴影；鼠标 hover 时，叠加多个阴影</div>
+      <div>. 使用同色阴影</div>
+      <div>. 使用CSS变量</div>
+      <div class="glow-wrap">
+        <div class="glow" style="--color: #a00">hover</div>
+        <div class="glow" style="--color: #426cdb">hover</div>
+        <div class="glow" style="--color: #c232ce">hover</div>
+      </div>
       <pre>
-.single {
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+.glow {
+  border-radius: 30px;
+  padding: 4px 30px;
+  border: 2px solid var(--color);
+  box-shadow: 0 0 10px var(--color);
+  color: var(--color);
 }</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 发光小球 - 叠加多个阴影</dd>
-    <dd>
-      <div class="glow mul"></div>
       <pre>
-.mul {
+.glow:hover {
+  color: #fff;
+  background-color: var(--color);
   box-shadow:
-    0 0 10px 4px rgba(255, 0, 0, 0.4),
-    0 0 20px 8px rgba(255, 0, 0, 0.4),
-    0 0 40px 16px rgba(255, 0, 0, 0.4);
+    0 0 10px var(--color),
+    0 0 20px var(--color),
+    0 0 40px var(--color);
 }</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 模拟多个元素；借助动画设计更多效果</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 模拟多个元素</dd>
     <dd>
-      <div class="glow more"></div>
+      <div>过渡动画</div>
+      <div class="glow-wrap">
+        <div class="more"></div>
+      </div>
       <pre>
-.more {
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4),
-    30px 30px rgba(255, 0, 0, 0.4),
-    -30px -30px rgba(255, 0, 0, 0.4),
-    -30px 30px rgba(255, 0, 0, 0.4),
-    30px -30px rgba(255, 0, 0, 0.4);
+.more:hover {
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.8),
+    30px 30px rgba(255, 0, 0, 0.8),
+    -30px -30px rgba(255, 0, 0, 0.8),
+    -30px 30px rgba(255, 0, 0, 0.8),
+    30px -30px rgba(255, 0, 0, 0.8);
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 光环 - 拓展 spread 一个同色透明的阴影实现|双边框</dd>
+    <dd>
+      <div class="glow-wrap">
+        <div class="spread"></div>
+      </div>
+      <pre>
+.spread {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(255, 0, 0, 0.8);
+  transition: 0.4s;
+}
+
+.spread:hover {
+  box-shadow: 0 0 0rem 20px rgba(255, 0, 0, 0.2);
 }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 伪元素和阴影配合使用，更多案例实现请访问 <a href="./demo/up2u.html">个人网站 -
         标题条</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 光环 - 拓展 spread 一个同色透明的阴影实现|双边框</dd>
-    <dd id="circle"></dd>
-    <dd>
-      <figure class="code">
-        <pre>
-#circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: rgb(56, 166, 255);
-    box-shadow: 0 0 0 1rem rgba(56, 166, 255, .2);
-    margin: 1rem auto;
-}</pre>
-    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 表单元素 - checkbox</dd>
     <dd>
       <div>. 边框 border</div>

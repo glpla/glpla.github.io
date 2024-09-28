@@ -30,6 +30,7 @@ navItems.forEach((item, ind) => {
     })
 
     item.classList.add('active')
+
     document.body.classList.toggle('lock')
     nav.classList.toggle('active')
     ham.classList.toggle('active')

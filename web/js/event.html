@@ -164,25 +164,21 @@ el.addEventListener('click', ()=>{
 el.removeEventListener(事件类型, 处理函数, 事件处理方式)</pre>
     </dd>
     <dt>事件传参</dt>
-    <dd>.不能直接使用，否则会被立即执行</dd>
-    <dd>.需要使用匿名函数，在匿名函数里执行封装的带参函数</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 封装表单域的获取焦点和失去焦点函数</dd>
     <dd>
+      <div>.不能直接使用，否则会被立即执行</div>
+      <div>.需要使用匿名函数，在匿名函数里执行封装的带参函数</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 封装表单域的获取焦点和失去焦点函数</div>
       <pre>
 function setBg(color) {
   console.log('hi');
   console.log(ta);
   ta.style.background = color;
 }</pre>
-    </dd>
-    <dd>.获取元素并侦听事件，发现函数被立即执行了其中的log，但是元素并没有按照设想改变颜色；继续交互同样不会执行</dd>
-    <dd>
+      <div>.获取元素并侦听事件，发现函数被立即执行了其中的log，但是元素并没有按照设想改变颜色；继续交互同样不会执行</div>
       <pre>
 ta.addEventListener('focus', setBg('#f40'));
 ta.addEventListener('blur', setBg('#ccc'));</pre>
-    </dd>
-    <dd>.将封装的带参函数，放在匿名函数中执行。问题解决</dd>
-    <dd>
+      <div>.将封装的带参函数，放在匿名函数中执行。问题解决</div>
       <pre>
 ta.addEventListener('focus', function () {
   setBg('#f40')
@@ -190,9 +186,7 @@ ta.addEventListener('focus', function () {
 ta.addEventListener('blur', function () {
   setBg('#ccc')
 });</pre>
-    </dd>
-    <dd>.也可以使用箭头函数，同时获取事件对象e</dd>
-    <dd>
+      <div>.也可以使用箭头函数，同时获取事件对象e</div>
       <pre>
 ta.addEventListener('focus', (e) => {
   console.log(e);
@@ -206,23 +200,27 @@ ta.addEventListener('blur', (e) => {
   </dl>
   <dl>
     <dt>事件对象</dt>
-    <dd>事件产生时，由系统自动创建</dd>
-    <dd>在事件处理函数中作为形式参数，名字任意，通常使用event、e、evt等语义化名字</dd>
     <dd>
-      .事件对象详细节录了事件的类型[冒泡与否]、发生位置[screen、page]、大小[offset、client]、时间timestamp、响应事件的目标元素target等信息；如果有多个元素或多层嵌套，则响应事件的目标元素也不同
+      <div>事件产生时，由系统自动创建</div>
+      <div>在事件处理函数中作为形式参数，名字任意，通常使用event、e、evt等语义化名字</div>
+      <div>
+        .事件对象详细节录了事件的类型[冒泡与否]、发生位置[screen、page]、大小[offset、client]、时间timestamp、响应事件的目标元素target等信息；如果有多个元素或多层嵌套，则响应事件的目标元素也不同
+      </div>
+      <div>.还可以利用事件对象e阻止冒泡和阻止默认事件，见后续案例</div>
+      <div>.如果元素使用了data-自定义数据，应该在目标target的dateset去获取</div>
     </dd>
-    <dd>.还可以利用事件对象e阻止冒泡和阻止默认事件，见后续案例</dd>
-    <dd>.如果元素使用了data-自定义数据，应该在目标target的dateset去获取</dd>
     <dt>冒泡事件和捕获事件</dt>
-    <dd>.页面接受事件的顺序，即：事件发生时，在元素节点之间按照特定的顺序传播的过程</dd>
-    <dd>.三个阶段：捕获阶段 capture phrase → 当前目标阶段 target phrase → 冒泡阶段 bubbling phrase</dd>
-    <dd>.当点击页面的一个元素的时候，事件会从这个元素的祖先元素逐层传递下来 - 捕获；当事件传递到这个元素之后 - 目标，触发事件本身的程序内容；然后又会把事件逐层传递回去 - 冒泡，直到根元素为止</dd>
-    <dd>.先捕获事件才能处理；事件捕获：网景提出；事件冒泡：微软提出|IE提出</dd>
-    <dd>.JS代码 <span class="warn">只能</span> 执行冒泡或捕获中的一个阶段</dd>
-    <dd>.事件默认行为 <span class="warn">冒泡</span>：如果在一个子元素|组件上绑定了一个事件，当该事件被触发时，它会沿着DOM|组件树向上冒泡，直到到达根节点|根组件</dd>
-    <dd>.事件捕获是指当一个元素上的事件被触发时，它会从文档的根节点开始，向下传播，直到到达目标元素</dd>
-    <dd>.使用e.stopPropagation | e.cancelBubble可以取消冒泡</dd>
-    <dd>.更多信息，请访问 <a href="https://mp.weixin.qq.com/s/WrvHOTnPVcVsNH_-5cm_bg">一个DOM元素绑定多个事件时，先执行冒泡还是捕获</a></dd>
+    <dd>
+      <div>.页面接受事件的顺序，即：事件发生时，在元素节点之间按照特定的顺序传播的过程</div>
+      <div>.三个阶段：捕获阶段 capture phrase → 当前目标阶段 target phrase → 冒泡阶段 bubbling phrase</div>
+      <div>.当点击页面的一个元素的时候，事件会从这个元素的祖先元素逐层传递下来 - 捕获；当事件传递到这个元素之后 - 目标，触发事件本身的程序内容；然后又会把事件逐层传递回去 - 冒泡，直到根元素为止</div>
+      <div>.先捕获事件才能处理；事件捕获：网景提出；事件冒泡：微软提出|IE提出</div>
+      <div>.JS代码 <span class="warn">只能</span> 执行冒泡或捕获中的一个阶段</div>
+      <div>.事件默认行为 <span class="warn">冒泡</span>：如果在一个子元素|组件上绑定了一个事件，当该事件被触发时，它会沿着DOM|组件树向上冒泡，直到到达根节点|根组件</div>
+      <div>.事件捕获是指当一个元素上的事件被触发时，它会从文档的根节点开始，向下传播，直到到达目标元素</div>
+      <div>.使用e.stopPropagation | e.cancelBubble可以取消冒泡</div>
+      <div>.更多信息，请访问 <a href="https://mp.weixin.qq.com/s/WrvHOTnPVcVsNH_-5cm_bg">一个DOM元素绑定多个事件时，先执行冒泡还是捕获</a></div>
+    </dd>
     <dd class="tips">
       <div>stopPropagation 和 cancelBubble 都可以阻止浏览器默认的事件冒泡行为</div>
       <div>cancelBubble 方法不符合W3C标准，只支持IE浏览</div>
@@ -255,15 +253,49 @@ modalBox.addEventListener('click', (e) => {
   }
 })</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 共用事件 - 汉堡菜单的展开和折叠</dd>
+    <dd>
+      <div>为菜单类或容器类增加或减少状态类实现</div>
+      <div>移花接木</div>
+      <pre>
+.nav {
+  left: -300px;
+  transition: 0.4s;
+}
+
+body.open .nav {
+  left: 0;
+}      </pre>
+      <pre>
+const navs = document.querySelectorALL('.nav');
+const openBtn = document.getElementById('open');
+const closeBtn = document.getElementById('close');
+
+openBtn.addEventListener('click', () => {
+  document.body.classList.toggle('open')
+})
+
+closeBtn.addEventListener('click', () => {
+  openBtn.click()
+})
+
+navs.forEach(nav=>{
+  nav.addEventListener('click', (e)=>{
+    openBtn.click()
+  })
+})    </pre>
+    </dd>
   </dl>
   <div class="chap">默认事件 default</div>
   <dl>
     <dd>常见的默认事件有</dd>
-    <dd>1. 右键菜单</dd>
-    <dd>2. &lt;form&gt;提交的默认</dd>
-    <dd>3. &lt;a&gt;的跳转</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 阻止右键菜单</dd>
     <dd>
+      <div>1. 右键菜单</div>
+      <div>2. &lt;form&gt;提交的默认</div>
+      <div>3. &lt;a&gt;的跳转</div>
+    </dd>
+    <dd>
+      <div>[<span class="iconfont icon-keyboard"></span>] 阻止右键菜单</div>
       <pre>
 document.addEventListener('contextmenu', (e) => {
   e.preventDefault();
@@ -273,30 +305,22 @@ document.addEventListener('contextmenu', (e) => {
 document.oncontextmenu = function () {
   return false;
 }</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 阻止&lt;form&gt;提交的默认跳转</dd>
-    <dd>
+      <div>[<span class="iconfont icon-keyboard"></span>] 阻止&lt;form&gt;提交的默认跳转</div>
       <pre>
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 })</pre>
-    </dd>
-    <dd>.或</dd>
-    <dd>
+      <div>.或</div>
       <pre>
 form.addEventListener('submit', (e) => {
   return false;
 })</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 阻止&lt;a&gt;默认跳转</dd>
-    <dd>
+      <div>[<span class="iconfont icon-keyboard"></span>] 阻止&lt;a&gt;默认跳转</div>
       <pre>
 a.addEventListener('click', (e) => {
   e.preventDefault();
 })</pre>
-    </dd>
-    <dd>.简单粗暴型的，直接在结构上拍死</dd>
-    <dd>
+      <div>.简单粗暴型的，直接在结构上拍死</div>
       <pre>&lt;a href="javascript:;"&gt;link&lt;/a&gt;</pre>
     </dd>
   </dl>
@@ -315,6 +339,7 @@ a.addEventListener('click', (e) => {
     const changeBg = (bg) => {
       btns.style.backgroundImage = `URL(../imgs/${bg})`;
     }
+
   </script>
 </body>
 

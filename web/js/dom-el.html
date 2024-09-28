@@ -98,13 +98,23 @@ function fn(el) {
       <div>用于更新|渲染页面</div>
       <div>innerText：元素文本内容</div>
       <div>innerHTML：元素HTML内容</div>
-      <div>textcontent：纯文本内容</div>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent">MDN - textcontent</a>：纯文本内容</div>
     </dd>
-    <dd class="example-sn">将文本内容替换为独立的span - 运用正则表达式</dd>
+    <dd class="example-sn">将文本内容替换为独立的 span</dd>
     <dd>
+      <div>方案1：运用正则表达式</div>
       <pre>
 let data = document.querySelector('.data');
 data.innerHTML = data.textContent.replace(/\S/g, ' &lt;span&gt;$&&lt;/span&gt;')      </pre>
+      <div>方案2：如果有空格，就生成 &amp;nbsp;而不是普通的空格/空标签</div>
+      <pre>
+let div = document.querySelector('div')
+let str = 'hello wolrd.'
+for (let char of str) {
+  let span = document.createElement('span')
+  span.textContent = char === ' ' ? '\u00a0' : char
+  div.appendChild(span)
+}      </pre>
     </dd>
     <dt class="nav-cont">属性 Attribute</dt>
     <dd>

@@ -74,18 +74,23 @@
   <header>
     <h1>轮播图</h1>
     <span>&commat;Swiper</span>
+    <span class="ham iconfont icon-menu"></span>
+    <nav class="nav">
+      <a href="" style="--delay:0" class="nav-item">概述 Overview</a>
+      <a href="" style="--delay:1" class="nav-item">选项 Option</a>
+      <a href="" style="--delay:2" class="nav-item">分页器 Option</a>
+      <a href="" style="--delay:3" class="nav-item">导航按钮 Option</a>
+      <a href="" style="--delay:4" class="nav-item">滚动条 Option</a>
+      <a href="" style="--delay:5" class="nav-item">案例 Cases</a>
+    </nav>
   </header>
-  <dl>
-    <dt>简介 Overview</dt>
+  <div class="chap">简介 Overview</div>
+  <dl class="nav-cont">
     <dd>.目前最新版为11；注意：不同的版本，使用方法略有不同。。。</dd>
-    <dd>
-      .更多细节，请访问
-      <a href="https://www.swiper.com.cn">https://www.swiper.com.cn</a> 或
+    <dd>.更多细节，请访问 <a href="https://www.swiper.com.cn">https://www.swiper.com.cn</a> 或
       <a href="https://swiperjs.com/">https://swiperjs.com/[推荐]</a>；请首先阅读 Get Started 和 Demos 两部分内容
     </dd>
-    <dd>
-      . 其它工具：<a href="https://glidejs.com/">https://glidejs.com</a>
-    </dd>
+    <dd>.其它工具：<a href="https://glidejs.com/">https://glidejs.com</a> </dd>
     <dt>核心文件 Core</dt>
     <dd>
       <div>
@@ -111,7 +116,7 @@
       <div class="p1">.swiper-button-prev [导航按钮；可选]</div>
       <div class="p1">.swiper-button-next [导航按钮；可选]</div>
       <div class="p1">.swiper-scrollbar [滚动条；可选]</div>
-      <div>多个轮播图时，使用 <span class="warn">自定义类</span> 区分，如增加 team-swiper 和 team-card</div>
+      <div>1. 默认结构 - &lt;div&gt;</div>
       <pre>
 &lt;div class="team-swiper swiper"&gt;
   &lt;div class="swiper-wrapper"&gt;
@@ -128,54 +133,41 @@
 
   &lt;div class="swiper-scrollbar"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
+      <div>2. 建议结构 - &lt;ul&gt; &lt;li&gt;</div>
+      <pre>
+&lt;div class="promotion-swiper swiper"&gt;
+  &lt;ul class="swiper-wrapper"&gt;
+    &lt;li class="promotion-card swiper-slide"&gt;Slide 1&lt;/li&gt;
+    &lt;li class="promotion-card swiper-slide"&gt;Slide 2&lt;/li&gt;
+    &lt;li class="promotion-card swiper-slide"&gt;Slide 3&lt;/li&gt;
+    ...
+  &lt;/ul&gt;
+
+  &lt;div class="swiper-pagination"&gt;&lt;/div&gt;
+
+  &lt;div class="swiper-button-prev"&gt;&lt;/div&gt;
+  &lt;div class="swiper-button-next"&gt;&lt;/div&gt;
+
+  &lt;div class="swiper-scrollbar"&gt;&lt;/div&gt;
+&lt;/div&gt;</pre>
     </dd>
     <dt>样式 CSS</dt>
-    <dd class="sn">
-      <p>.F12检查并修改对应的类重置样式</p>
-      <div>
-        容器.swiper
-      </div>
-      <p>.相对定位；为分页器pagination提高定位依据</p>
-      <p>.指定内容大小[可选]；如图片的显示，可以指定宽高或宽高比</p>
-      <p>.不建议使用背景图片 - 渲染可能有异常</p>
+    <dd>
+      <div>.容器 swiper</div>
+      <div>.相对定位；为分页器 pagination 提供定位依据</div>
+      <div>.指定内容大小[可选]；如图片的显示，可以指定宽高或宽高比</div>
+      <div>.不建议使用背景图片 - 渲染可能有异常</div>
+      <div>.F12检查并修改对应的类重置样式</div>
+      <div>.自定义样式通常需要提权</div>
       <pre>
 .swiper {
   width: 100%;
   max-width: 800px;
 }</pre>
-      <div>分页器pagination</div>
-      <p>.使用绝对定位；默认在底部居中，可以定位在任何地方</p>
-      <p>.使用全局变量指定导航按钮样式</p>
-      <pre>
-.swiper-pagination-bullet {
-  background-color: #fff;
-}
-
-.swiper-pagination-bullet-active {
-  background-color: #f40;
-}</pre>
-      <p>或</p>
-      <pre>
-.swiper-pagination-bullet {
-  background-color: transparent;
-  width: 40px;
-  height: 8px;
-  border: 1px solid #fff;
-  border-radius: 4px;
-  opacity: 1;
-}
-
-.swiper-pagination-bullet-active {
-  background-color: #f40;
-}</pre>
-      <div>导航scrollbar</div>
-      <pre>
---swiper-navigation-size: 36px;
---swiper-navigation-color: #fff;      </pre>
     </dd>
     <dt>脚本 JavaScript</dt>
     <dd>
-      <div>.swiper的初始化和各种选项</div>
+      <div>.指定 swiper 的初始化和各种选项</div>
       <pre>
 const swiper = new Swiper('.swiper', {
   // Optional parameters
@@ -199,25 +191,23 @@ const swiper = new Swiper('.swiper', {
     el: '.swiper-scrollbar',
   },
 });</pre>
-      <div>多个轮播图时，应该采用不同的自定义类初始化实例</div>
+      <div>.多个轮播图时，使用 <span class="warn">自定义类</span> 区分，如增加 team-swiper 和 team-card</div>
       <pre>const teamSwiper = new Swiper('.team-swiper', {}); 
 </pre>
     </dd>
   </dl>
-  <div class="chap">常用选项 Option</div>
-  <dl>
+  <div class="chap">选项 Option</div>
+  <dl class="nav-cont">
     <dt>参数 Parameters</dt>
     <dd>
-      <div>实例化的同时，配置轮播图基本参数；更多参数，请访问 <a href="https://swiperjs.com/swiper-api#parameters">轮播图 - Parameters</a></div>
-      <div>值对形式key-value</div>
+      <div>.实例化的同时，配置轮播图基本参数；更多参数，请访问 <a href="https://swiperjs.com/swiper-api#parameters">轮播图 - Parameters</a></div>
+      <div>.值对形式 key-value</div>
       <pre>
 const swiper = new Swiper('.swiper', {
   // 各配置项
 });      </pre>
       <table>
-        <caption>
-          参数
-        </caption>
+        <caption> 参数 </caption>
         <tr>
           <th>类别</th>
           <th>说明</th>
@@ -278,15 +268,11 @@ const swiper = new Swiper('.swiper', {
     </dd>
     <dt>属性 Properties</dt>
     <dd>
-      <div>轮播图实例化后，可以使用相应的属性和方法实现参数的功能；更多信息，请访问 <a href="https://swiperjs.com/swiper-api#methods--properties">轮播图 -
-          Methods
-          &
-          Properties</a></div>
+      <div>.轮播图实例化后，可以使用相应的属性和方法实现参数的功能；更多信息，请访问 <a href="https://swiperjs.com/swiper-api#methods--properties">轮播图 -
+          Methods & Properties</a></div>
       <pre>swiper.autoplay</pre>
       <table>
-        <caption>
-          属性
-        </caption>
+        <caption> 属性 </caption>
         <tr>
           <th>分类</th>
           <th>说明</th>
@@ -311,12 +297,10 @@ const swiper = new Swiper('.swiper', {
     </dd>
     <dt>方法 Methods</dt>
     <dd>
-      <div>更多信息，请访问 <a href="https://swiperjs.com/swiper-api#methods--properties">轮播图 - Methods & Properties</a></div>
+      <div>.更多信息，请访问 <a href="https://swiperjs.com/swiper-api#methods--properties">轮播图 - Methods & Properties</a></div>
       <pre>swiper.init()</pre>
       <table>
-        <caption>
-          方法
-        </caption>
+        <caption> 方法 </caption>
         <tr>
           <th>分类</th>
           <th>说明</th>
@@ -333,8 +317,8 @@ const swiper = new Swiper('.swiper', {
     </dd>
     <dt>事件 Events</dt>
     <dd class="sn">
-      <p>同轮播图的交互；支持两种形式；更多信息，请访问 <a href="https://swiperjs.com/swiper-api#events">轮播图 - Events</a></p>
-      <p>尽量不要使用箭头函数，避免this丢失</p>
+      <p>.同轮播图的交互；支持两种形式；更多信息，请访问 <a href="https://swiperjs.com/swiper-api#events">轮播图 - Events</a></p>
+      <p>.尽量不要使用箭头函数，避免 this 丢失</p>
       <div>配置形式</div>
       <pre>
 const swiper = new Swiper('.swiper', {
@@ -371,45 +355,42 @@ swiper.on('slideChange', function () {
         </tr>
       </table>
     </dd>
-    <dt>分页器 Pagination</dt>
+    <dt class="nav-cont">分页器 Pagination</dt>
     <dd>
-      <div>基类是swiper-pagination</div>
-      <div>不同的分页器类型有不同的类实现，如子弹类分页器是swiper-pagination-bullets；分数类型分页器是 swiper-pagination-fraction</div>
-      <div>辅助类swiper-pagination-horizontal</div>
-      <div>
-        如果仅仅是定义样式，不修改数字格式，可以直接使用默认类重新定制
-      </div>
-      <div>如果需要定制分页器的结构，则需要使用专门的配置项定制</div>
+      <div>.基类是 swiper-pagination</div>
+      <div>.不同的分页器类型有不同的类实现，如子弹类分页器是 swiper-pagination-bullets；分数类型分页器是 swiper-pagination-fraction</div>
+      <div>.辅助类 swiper-pagination-horizontal</div>
+      <div>.如果仅仅是定义样式，不修改数字格式，可以直接使用默认类重新定制 </div>
+      <div>.如果需要定制分页器的结构，则需要使用专门的配置项定制</div>
+      <div>.使用绝对定位；默认在底部居中，可以定位在任何地方</div>
+      <div>.可以使用全局变量指定导航按钮样式</div>
       <table>
-        <caption>
-          分页器 pagination
-        </caption>
+        <caption>分页器 pagination</caption>
         <tr>
           <th>参数</th>
           <th>说明</th>
         </tr>
         <tr>
           <td>type</td>
-          <td>
-            类型；进度条 progressbar | 子弹 bullets，默认 | 分数 fraction |
-            自定义 custom
+          <td>类型；进度条 progressbar | 子弹 bullets，默认 | 分数 fraction | 自定义 custom
             <br />每个类型都可进一步定制
           </td>
         </tr>
         <tr>
           <td>clickable</td>
-          <td>单击分页跳转到对应页面，默认为false</td>
+          <td>单击分页跳转到对应页面，默认为 false</td>
         </tr>
         <tr>
           <td>bulletClass</td>
-          <td>
-            和子弹类型分页器相关的默认类；swiper-pagination-bullet-custom
-          </td>
+          <td>和子弹类型分页器相关的默认类；swiper-pagination-bullet-custom </td>
+        </tr>
+        <tr>
+          <td>dynamicBullets</td>
+          <td>突出/动态展示少量页码；默认是 false</td>
         </tr>
         <tr>
           <td>renderBullet</td>
-          <td>
-            (index,className) => {}
+          <td>(index,className) => {}
             <br />定制子弹类型分页器；返回定制的DOM结构
           </td>
         </tr>
@@ -423,8 +404,7 @@ swiper.on('slideChange', function () {
         </tr>
         <tr>
           <td>renderFraction</td>
-          <td>
-            (currentClass, totalClass) => {}
+          <td>(currentClass, totalClass) => {}
             <br />定制分数类型分页器；返回定制的DOM结构
           </td>
         <tr>
@@ -433,41 +413,55 @@ swiper.on('slideChange', function () {
         </tr>
         </tr>
       </table>
-    </dd>
-    <dd class="example-sn">定制子弹类分页器</dd>
-    <dd class="sn">
-      <div> 当前样式 - 背景红色</div>
       <pre>
-.swiper-pagination-bullet-active {
+.swiper .swiper-pagination-bullet {
+  width: 14px;
+  height: 14px;
+  background-color: #fff;
+}
+
+.swiper .swiper-pagination-bullet-active {
   background-color: #f40;
-}      </pre>
-      <div>点到圆角矩形的变化</div>
+}</pre>
+      <p>或</p>
       <pre>
 .swiper-pagination-bullet {
-  width: 8px;
+  background-color: transparent;
+  width: 40px;
   height: 8px;
+  border: 1px solid #fff;
   border-radius: 4px;
-  transition: width .4s;
+  opacity: 1;
 }
 
 .swiper-pagination-bullet-active {
-  width: 20px;
   background-color: #f40;
-}      </pre>
-      <div>定位在右侧居中；注意初始化属性initial的使用</div>
-      <pre>
-.swiper-pagination-bullets.swiper-pagination-horizontal {
-  width: initial;
-  left: initial;
-  height: 100%;
-  right: 0;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
 }</pre>
     </dd>
+    <dt class="nav-cont">导航按钮 button</dt>
+    <dd>
+      <p>.添加自定义类，指定缩放、颜色、悬停、空白等等样式，甚至响应移动端时，将其隐藏</p>
+      <pre>
+.swiper .swiper-btn {
+  width: 16px;
+  height: 16px;
+  color: #fff;
+  transform: scale(0.6);
+}
+
+.swiper .swiper-btn:hover {
+  color: var(--pri-color);
+}      </pre>
+    </dd>
+    <dt class="nav-cont">滚动条 scrollbar</dt>
+    <dd>
+      <pre>
+--swiper-navigation-size: 36px;
+--swiper-navigation-color: #fff;      </pre>
+    </dd>
+  </dl>
+  <div class="chap">案例 Cases</div>
+  <dl class="nav-cont">
     <dd class="example-sn"><a href="../demo/up2u.html">顶部轮播图 - 响应式设置</a></dd>
     <dd>
       <div>默认显示1张幻灯，间隔10px</div>
@@ -490,14 +484,45 @@ let swiper = new Swiper('.header-swiper', {
   }
 });      </pre>
     </dd>
+    <dd class="example-sn">定制子弹类分页器</dd>
+    <dd class="sn">
+      <div> 当前样式 - 背景红色</div>
+      <pre>
+.swiper-pagination-bullet-active {
+  background-color: #f40;
+}      </pre>
+      <div>点到圆角矩形的变化</div>
+      <pre>
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  transition: width .4s;
+}
+
+.swiper-pagination-bullet-active {
+  width: 20px;
+  background-color: #f40;
+}      </pre>
+      <div>定位在右侧居中；注意初始化属性 initial 的使用</div>
+      <pre>
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  width: initial;
+  left: initial;
+  height: 100%;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}</pre>
+    </dd>
     <dd class="example-sn">
       <a href="https://swiperjs.com/swiper-api#param-renderBullet">定制子弹类型分页器</a>；完整案例请访问 <a href="../demo/car.html">靓车荟
         - Cars</a>
     </dd>
-    <dd>
-      默认样式是1 2 3；定制样式为01 02
-      03，结构发生变化，需要使用renderBullet属性专门定制
-    </dd>
+    <dd>默认样式是1 2 3；定制样式为01 02 03，结构发生变化，需要使用renderBullet属性专门定制</dd>
     <dd>
       <div class="swiper">
         <div class="swiper-wrapper">
@@ -665,6 +690,7 @@ swiper.on('slideChange', function () {
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.js"></script>
+  <script src="/utils/custom/ham2024.js"></script>
   <script>
     const swiper = new Swiper(".swiper", {
       loop: true,
