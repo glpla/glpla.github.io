@@ -13,27 +13,28 @@
 <body>
   <header>
     <h1>视频</h1>
-    <span>&commat;&lt;video&gt;</span>
+    <span>&lt;video&gt;</span>
     <span class="ham iconfont icon-menu"></span>
     <nav class="nav">
       <a href="" style="--delay:0" class="nav-item">概述</a>
       <a href="" style="--delay:1" class="nav-item">H5属性</a>
       <a href="" style="--delay:2" class="nav-item">媒体属性</a>
       <a href="" style="--delay:3" class="nav-item">媒体事件</a>
+      <a href="" style="--delay:4" class="nav-item">案例</a>
     </nav>
   </header>
   <dl>
     <dt>素材准备</dt>
-    <dd><span class="iconfont icon-layer-group"></span> 点击下载素材<a href="../utils/video/alizee.mp4"
-        download>Alizee.mp4</a>或自行准备
-    </dd>
+    <dd><span class="iconfont icon-layer-group"></span> 点击下载素材<a href="../utils/video/alizee.mp4" download>宽屏</a>、<a
+        href="../utils/video/v01.mp4">竖屏</a> 或自行准备 </dd>
+    <dd>视频素材推荐：<a href="https://shipin520.com/">潮点视频</a></dd>
     <dt class="nav-cont">概述</dt>
     <dd>
-      <div>. 行盒inline；<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element">可替换元素 - replaced
-          element</a>；可以设置大小</div>
-      <div>. 播放视频，常见格式有：MP4、avi等</div>
+      <div>. 行盒 inline；<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element">可替换元素 - replaced
+          element</a>，同 &lt;img&gt;；可以设置大小</div>
+      <div>. 播放视频，常见格式有：mp4、avi 等</div>
       <div>. 桌面端单击视频窗口可以触发播放或暂停；移动端不能，只能使用控制栏</div>
-      <div>. 默认情况下，没有播放控件，需要通过js控制</div>
+      <div>. 默认情况下，没有播放控件，需要通过 JavaScript 控制</div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video">MDN -
           &lt;video&gt;</a>、<a href="https://mp.weixin.qq.com/s/1mMEXKzXHTl2eHJEXi-8PA">HTML5 向网页嵌入视频和音频</a>
       </div>
@@ -50,7 +51,7 @@
         </tr>
         <tr>
           <td>src</td>
-          <td>视频的URL，推荐使用MP4格式</td>
+          <td>视频的URL，推荐使用 mp4 格式</td>
         </tr>
         <tr>
           <td>autoplay</td>
@@ -74,28 +75,56 @@
         </tr>
         <tr>
           <td>poster</td>
-          <td>视频封面图像；可以使用gif；大小应该和视频保持一致</td>
+          <td>视频封面图像；可以使用 gif；大小应该和视频保持一致</td>
         </tr>
       </table>
     </dd>
     <dt>初始化样式</dt>
     <dd>
-      <div>. 默认情况下，视频采用16*9的比例，最小尺寸是640*360</div>
-      <div>. 调整视频时，应保证比例不变</div>
-      <div>. 指定封面时，应保证封面cover覆盖</div>
+      <div>. &lt;video&gt; 的 object-fit 默认是 contain，所以通常情况下 <span class="warn">无须特别设计</span>；如果需要铺满，则应该设置为 cover</div>
+      <div>. 默认情况下，视频采用 16*9 的比例，最小尺寸是 640*360；其容器应该满足视频宽高比；调整容器时，应保证比例不变</div>
+      <div>. 指定封面时，应保证封面 cover 覆盖</div>
       <div>. 以下各例均采用初始化样式</div>
       <pre>
+.container{
+  width: xxx;
+  aspect-ratio: 16/9;
+}
+
 video {
+    display: block;
     width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
+    height: 100%;
 }</pre>
+      <div>早期容器样式 - 16:9 宽高比</div>
+      <pre>
+.container {
+  position: relative;
+  padding-bottom: 56.25%; 
+  height: 0;
+  overflow: hidden;
+}     
+ 
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}</pre>
+      <div class="tips">
+        <div>You can use the object-position property to adjust the positioning of the video within the
+          element's frame,
+          and the object-fit property to control how the video's size is adjusted to fit within the frame.</div>
+        <div>There are no special considerations for styling &lt;video&gt;; a common strategy is to give it a
+          display value of block to make it easier to position, size, etc., and then provide styling and layout
+          information as required.</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 视频的可视化使用</dd>
     <dd>
-      <div>. 添加controls属性方便可视化控制</div>
-      <div>. 添加preload属性可以预加载视频，避免卡顿</div>
-      <div>. 添加封面poster可以避免视频剪辑过程中头部的黑场/空白帧</div>
+      <div>. 添加 controls 属性方便可视化控制</div>
+      <div>. 添加 preload 属性可以预加载视频，避免卡顿</div>
+      <div>. 添加封面 poster 可以避免视频剪辑过程中头部的黑场/空白帧</div>
       <video src="../utils/video/alizee.mp4" controls preload poster="./imgs/alizee.jpg">您的浏览器不支持video标签</video>
       <pre>
 &lt;video src="../utils/video/alizee.mp4" controls preload poster="../imgs/alizee.jpg"&gt;您的浏览器不支持video标签&lt;/video&gt;</pre>
@@ -105,8 +134,8 @@ video {
   <dl>
     <dt class="nav-cont">媒体属性</dt>
     <dd>
-      <div>. 用于js控制</div>
-      <div>. 大多和HTML标签属性一一对应</div>
+      <div>. 用于 JavaScript 控制</div>
+      <div>. 大多和 HTML 标签属性一一对应</div>
       <table>
         <tr>
           <th>类别</th>
@@ -225,30 +254,46 @@ vs.addEventListener('click', () => {
   }
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 视频预览和播放</dd>
+  </dl>
+  <div class="chap">案例</div>
+  <dl class="nav-cont">
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/autoplay_dy.html">首页全屏背景视频</a></dd>
     <dd>
-      <div>. 鼠标移入mouseover循环播放视频，同时显示播放控件，方便用户进一步操作</div>
-      <div>. 鼠标移出mouseout暂停播放，取消播放控件</div>
-      <div>. 元素获取要在window.onload之后</div>
-      <video src="../utils/video/alizee.mp4" id="pre" preload poster="./imgs/alizee.jpg"></video>
+      <div>. 视频全覆盖 cover</div>
+      <div>. 其它元素通过定位 position，显示在视频上方</div>
       <pre>
-window.onload = function () {
-    let pre = document.querySelector("#pre");
-    pre.loop = true;
-    pre.addEventListener('mouseover', () => {
-        pre.controls = true;
-        pre.play();
-    })
-    pre.addEventListener('mouseout', () => {
-        pre.controls = false;
-        pre.pause();
-    })
+video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/hotline.html">微课</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/autoplay_dy.html">自动播放</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/autoplay_dy.html">视频播放</a></dd>
     <dd>方案1：引导用户互动打开播放</dd>
     <dd>方案2：先静音播放，再根据播放状态，如是否能自动播放，取消静音</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/hotline.html">微课</a></dd>
+    <dd>
+      <div>使用 &lt;figure&gt; 实现</div>
+      <div>可以定制更多信息</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 视频预览和播放</dd>
+    <dd>
+      <div>. 鼠标移入 mouseover 循环播放视频，同时显示播放控件，方便用户进一步操作</div>
+      <div>. 鼠标移出 mouseout 暂停播放，取消播放控件</div>
+      <video src="../utils/video/alizee.mp4" id="pre" preload poster="./imgs/alizee.jpg"></video>
+      <pre>
+let pre = document.querySelector("#pre");
+pre.loop = true;
+pre.addEventListener('mouseover', () => {
+    pre.controls = true;
+    pre.play();
+})
+pre.addEventListener('mouseout', () => {
+    pre.controls = false;
+    pre.pause();
+})</pre>
+    </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
@@ -257,11 +302,13 @@ window.onload = function () {
     <dd class="tips">
       <div>为了首页加载速度，通常不直接在主页放置视频；而是通过链接的方式转到单独的页面播放</div>
       <div>如果坚持在首页展示，一般设置 mute和 preload，同时禁止 autoplay</div>
+      <div>JavaScript 控制时，不允许未经任何交互直接播放：play() failed because the user didn't interact with the document first.</div>
     </dd>
     <dt>作业 Homework</dt>
     <dd class="sn">
       <div>制作网站开场视频秀</div>
-      <div>制作个人视频，扩充并完善到个人网站</div>
+      <div>制作个人视频素材库，扩充并完善到个人网站</div>
+      <div>如何使用字幕？</div>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
