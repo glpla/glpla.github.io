@@ -23,18 +23,17 @@
     <span class="ham iconfont icon-menu"></span>
     <nav class="nav">
       <a href="" style="--delay:0" class="nav-item">overview</a>
-      <a href="" style="--delay:1" class="nav-item">label</a>
-      <a href="" style="--delay:2" class=" nav-item">init</a>
-      <a href="" style="--delay:3" class="nav-item">text</a>
-      <a href="" style="--delay:4" class="nav-item">radio</a>
-      <a href="" style="--delay:5" class="nav-item">checkbox</a>
+      <a href="" style="--delay:1" class=" nav-item">init</a>
+      <a href="" style="--delay:2" class="nav-item">text</a>
+      <a href="" style="--delay:3" class="nav-item">radio</a>
+      <a href="" style="--delay:4" class="nav-item">checkbox</a>
     </nav>
   </header>
   <dl>
     <dt class="nav-cont">概述 Overview</dt>
     <dd>
       <div>. 应用最广泛的表单元素 - the most powerful and complex</div>
-      <div>. 种类 type 很多，默认是text，单行文本输入</div>
+      <div>. 种类 type 很多，默认是 text，单行文本输入</div>
       <div>. 更多 &lt;input&gt; 类型和使用，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">MDN -
           &lt;input&gt;</a>
       </div>
@@ -118,11 +117,11 @@
         </tr>
         <tr>
           <td>submit</td>
-          <td>数据提交按钮</td>
+          <td>数据提交按钮；建议使用专门的按钮标签 &lt;button&gt;</td>
         </tr>
         <tr>
           <td>reset</td>
-          <td>数据复位按钮</td>
+          <td>数据复位按钮；建议使用专门的按钮标签 &lt;button&gt;</td>
         </tr>
       </table>
       <div class="tips">radio本意是只无线电，为什么用做单选？</div>
@@ -139,7 +138,7 @@
         </tr>
         <tr>
           <td>hidden</td>
-          <td>隐藏域</td>
+          <td>隐藏域；辅助后端</td>
         </tr>
         <tr>
           <td>image</td>
@@ -207,38 +206,15 @@
     </dd>
   </dl>
   <dl>
-    <dt class="nav-cont">标签 &lt;label&gt;</dt>
-    <dd>
-      <div>. 由于元素比较小，用户交互|点击没有那么方便，尤其是单选或多选</div>
-      <div>.
-        为了 <span class="warn">扩展</span>
-        交互热区，增强用户体验，将 &lt;label&gt; 和 &lt;input&gt; 绑定|关联起来：点击 &lt;label&gt; 就相当于单击 &lt;input&gt;</div>
-      <div>. &lt;input&gt; 指定 <span class="warn">id</span> 属性；&lt;label&gt; 指定 <span class="warn">for</span> 属性</div>
-      <div>. &lt;label&gt; 不能嵌套 &lt;div&gt;</div>
-      <div>. &lt;label&gt;配合表单元素可以实现很多非常棒的设计，如定制表单元素、不使用js却能实现js的效果</div>
-      <pre>
-&lt;input type='text' id='uname'&gt;
-&lt;label for='uname'&gt;text here&lt;/label&gt;</pre>
-      <div>或：使用 &lt;label&gt; 包裹 &lt;input&gt;；记得移除 &lt;label&gt; 的for属性</div>
-      <pre>
-&lt;label&gt;
-    &lt;input type='text'&gt;text here
-&lt;/label&gt;</pre>
-      <div>也可以使用 &lt;span&gt; 包裹文本信息，结构更加清晰</div>
-      <pre>
-&lt;label&gt;
-    &lt;input type='text'&gt;
-    &lt;span&gt;text here&lt;/span&gt;
-&lt;/label&gt;</pre>
-    </dd>
     <dt class="nav-cont">初始化 Init</dt>
-    <dd class="sn">
+    <dd>
       <p>. 通常根据 type 修改特定的表单元素；若无特别说明，后续均做初始化处理</p>
       <p>. 更多样式，请参考后续内容</p>
+      <div>[<span class="iconfont icon-keyboard"></span>] 单行输入文本框的初始化 - 使用 <a href="./variable.html">CSS变量</a> 更加方便维护
+      </div>
       <pre>
 :root{
-  --main-color: #ff1493;
-  accent-color: var(--main-color);
+  accent-color: #ff1493;
 }
 
 input[type=text] {
@@ -256,7 +232,7 @@ input[type=text]::placeholder {
 
 input[type=text]::selection {
   color: #fff;
-  background-color: var(--main-color);
+  background-color: #ff1493;
 }</pre>
     </dd>
   </dl>
@@ -266,31 +242,31 @@ input[type=text]::selection {
     <dd>
       <img src="./imgs/input0.png" alt="" loading="lazy">
       <img src="./imgs/input.png" alt="" loading="lazy">
-      <p>:focus设计</p>
-      <p>::selection设计</p>
-      <p>::placeholder设计</p>
-      <p>后期利用定位把提示信息和占位符结合起来使用，请参考<a href="./demo/login_deer.html">一"鹿"有你</a></p>
+      <p>:focus</p>
+      <p>::selection</p>
+      <p>::placeholder</p>
+      <p>后期利用定位把提示信息和占位符结合起来使用，请参考 <a href="./demo/login_deer.html">一"鹿"有你</a></p>
     </dd>
     <dt class="nav-cont">单选 radio</dt>
-    <dd class="example-sn"><a href="https://codepen.io/glpla/pen/mdajpYo">自定义radio - CodePen</a></dd>
+    <dd class="example-sn"><a href="https://codepen.io/glpla/pen/mdajpYo">自定义 radio - CodePen</a></dd>
     <dd>
-      <div>方案1：利用accent-color，简单粗暴</div>
+      <div>方案1：利用 accent-color，简单粗暴</div>
       <img src="./imgs/radio.png" alt="" loading="lazy">
       <div>方案2：利用伪元素 <a href="./selector_class.html">选中伪类选择器:checked</a>、<a href="./selector_com.html">相邻兄弟选择器 +</a>
       </div>
-      <div>方案3：隐藏&lt;input&gt;，设计关联的&lt;label&gt;，如文字、图片、字体图标；详情请参考 <a href="./demo/personal.html">个人网站</a></div>
+      <div>方案3：隐藏 &lt;input&gt;，设计关联的 &lt;label&gt;，如文字、图片、字体图标；详情请参考 <a href="./demo/personal.html">个人网站</a></div>
     </dd>
     <dt class="nav-cont">多选 checkbox</dt>
-    <dd id="cb" class="example-sn"><a href="https://codepen.io/glpla/pen/GRPBxKj">自定义checkbox - CodePen</a>
+    <dd id="cb" class="example-sn"><a href="https://codepen.io/glpla/pen/GRPBxKj">自定义 checkbox - CodePen</a>
     </dd>
     <dd>
       <div>方案1：利用accent-color，简单粗暴</div>
       <img src="./imgs/checkbox.png" alt="" loading="lazy">
-      <p>方案2：利用伪元素 <a href="./selector_class.html">选中伪类选择器:checked</a>、<a href="./selector_com.html">兄弟选择器 ~</a>、<a
-          href="./position.html">定位</a></p>
+      <p>方案2：利用伪元素 <a href="./selector_class.html">选中伪类选择器 :checked</a>、<a href="./selector_com.html">兄弟选择器 ~</a>、<a
+          href="./position.html">定位 position</a></p>
       <p>. 按钮一开始在左边，选中后，移动到右边</p>
       <p>. 需要精准计算元素的大小</p>
-      <p>. 也可以只使用相对定位relative，让伪元素相对位置发生变化[作为子元素，它本来就在父元素的开始位置]</p>
+      <p>. 也可以只使用相对定位 relative，让伪元素相对位置发生变化[作为子元素，它本来就在父元素的开始位置]</p>
     </dd>
     <!-- <dt class="nav-cont">范围 range</dt>
     <dd class="example-sn">自定义 range</dd>
@@ -299,19 +275,25 @@ input[type=text]::selection {
         <input class="ipt-range" type="range" max="100" min="1">
       </div>
     </dd> -->
-    <dd id="tabcard" class="example-sn"><a href="https://codepen.io/glpla/pen/MWZBQev">标签页 - CodePen</a></dd>
+    <dd id="tabcard" class="example-sn"><a href="./demo/form0.html">留言板设计</a>、<a href="./demo/form1.html">留言板设计</a></dd>
     <dd>
-      <div>默认显示第一个标签页内容；其它隐藏</div>
-      <div>单击标签，对于的标签页内容显示，其它隐藏</div>
-      <div>高亮标签、定制滚动条</div>
-      <div>使用单选按钮radio，绑定label，结合 <a href="./selector_class.html">选中选择器:checked</a>、<a href="./selector_com.html">兄弟选择器
+      <img src="" alt="" loading="lazy">
+    </dd>
+    <dd id="tabcard" class="example-sn"><a href="https://codepen.io/glpla/pen/MWZBQev">标签页 - CodePen</a>；更多实现请访问 <a
+        href="https://codepen.io/glpla/full/ZEPbbQv">标签页 - CodePen - js</a>、<a href="./demo/tabcard.html">标签页 -
+        Tabcard</a> </dd>
+    <dd>
+      <div>. 默认显示第一个标签页内容；其它隐藏</div>
+      <div>. 单击标签，对于的标签页内容显示，其它隐藏</div>
+      <div>. 高亮标签、定制滚动条</div>
+      <div>. 使用单选按钮 radio，绑定 label，结合 <a href="./selector_class.html">选中选择器:checked</a>、<a
+          href="./selector_com.html">兄弟选择器
           ~</a>、<a href="./selector_com.html">相邻兄弟选择器 + </a>、<a href="./selector_arr.html">属性选择器</a> 综合实现
       </div>
-      <div>注意结构</div>
-    </dd>
-    <img src="./imgs/tab0.png" alt="" loading="lazy">
-    <img src="./imgs/tab1.png" alt="" loading="lazy">
-    <img src="./imgs/tab2.png" alt="" loading="lazy">
+      <div>. 注意选择器对结构的要求</div>
+      <img src="./imgs/tab0.png" alt="" loading="lazy">
+      <img src="./imgs/tab1.png" alt="" loading="lazy">
+      <img src="./imgs/tab2.png" alt="" loading="lazy">
     </dd>
     <dd class="tips">
       <div>部分系统要求表单元素不能单独使用，必须用在&lt;form&gt;中；还有某些元素如密码，必须指定 autocomplete属性，请注意查看控制台提示信息，如：</div>
@@ -324,9 +306,11 @@ input[type=text]::selection {
     <dt>总结 Summary</dt>
     <dd>. &lt;input&gt; 的常见分类和基本使用</dd>
     <dd>. &lt;input&gt; 样式的设计</dd>
+    <dd>. 初步使用组合选择器</dd>
     <dd>. 初步使用CSS函数和CSS变量</dd>
     <dt>作业 Homework</dt>
-    <dd>. 使用 &lt;input&gt; 元素完成个人网站的留言板或信息采集表的设计</dd>
+    <dd>. 留言板或信息采集表的设计</dd>
+    <div>. 标签页的设计</div>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer"
     onload="this.height=this.contentDocument.body.scrollHeight"></iframe>
