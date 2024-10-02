@@ -15,8 +15,8 @@
 
 <body>
   <header>
-    <h1>定位</h1>
-    <span>&commat;Position</span>
+    <h1>&commat;定位</h1>
+    <span>Position</span>
   </header>
   <dl>
     <dd>
@@ -27,28 +27,30 @@
     <dt>相对定位 relative</dt>
     <dd>
       <div>.不脱离文档流，仍然占据原来位置</div>
-      <div>.层级提高，发生偏移时，如top、left，可能会遮挡住后面标准流的元素</div>
+      <div>.层级提高，发生偏移时，如 top、left，可能会遮挡住后面标准流的元素</div>
       <div>.参考对象：自己[自恋型] - 灵魂出窍</div>
     </dd>
     <dt>绝对定位 absolute</dt>
     <dd>
       <div>.脱离文档流 - 原地起飞</div>
-      <div>.隐式的转换为块元素block</div>
+      <div>.隐式的转换为块元素 block</div>
       <div>.参考对象：显式的设置了 <span class="warn">定位</span> 属性(相对或绝对都可以)的元素，一般是父元素。如果父元素没有指定定位属性，则一级一级往上寻找，直至body</div>
-      <div>.通常显式的设置定位元素的偏移，可以使用数值或关键字top、right、bottom、left或负边距</div>
-      <div>.还可以使用 <span class="warn">inset</span> 定位元素；是top、right、bottom、left的简写，和 margin 和 padding
+      <div>.通常显式的设置定位元素的偏移，可以使用数值或关键字 top、right、bottom、left 或负边距</div>
+      <div>.还可以使用 <span class="warn">inset</span> 定位元素；是 top、right、bottom、left 的简写，和 margin 和 padding
         一样，依照"上右下左"的顺序指定；0为全覆盖
       </div>
       <div>.层级提高，会遮挡其他元素</div>
     </dd>
-    <dt>堆叠上下文 z-index</dt>
+    <dt>堆叠上下文 <a
+        href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_positioned_layout/Understanding_z-index/Stacking_context">MDN
+        - z-index</a></dt>
     <dd>
       <div>.控制Z轴方向上盒子堆叠时的前后次序/渲染排序，通常也称层级</div>
-      <div>.只有显式使用 <span class="warn">定位</span> 属性的元素才有z-index，标准文档流没有；但是后面的元素默认比前面的元素具有更高的层级</div>
-      <div>.如果没有显式指定z-index，则为auto，按照文档流中元素出现的顺序，后来居上</div>
-      <div>.z-index大的元素，位于上层/近；z-index小的元素位于下层/远；上层的元素会遮盖下层的元素</div>
-      <div>.z-index为正的元素，出现在没有指定z-index的元素的上面</div>
-      <div>.z-index为负的元素，出现在没有指定z-index的元素的下面</div>
+      <div>.只有显式使用 <span class="warn">定位</span> 属性的元素才有 z-index，标准文档流没有；但是后面的元素默认比前面的元素具有更高的层级</div>
+      <div>.如果没有显式指定 z-index，则为 auto，按照文档流中元素出现的顺序，后来居上</div>
+      <div>.z-index 大的元素，位于上层/近；z-index 小的元素位于下层/远；上层的元素会遮盖下层的元素</div>
+      <div>.z-index 为正的元素，出现在没有指定 z-index 的元素的上面</div>
+      <div>.z-index 为负的元素，出现在没有指定 z-index 的元素的下面</div>
       <div>.导航等需要始终引导用户的元素一般采用较大的层级，保证始终位于页面顶部</div>
     </dd>
     <dd class="tips">
@@ -58,8 +60,8 @@
   </dl>
   <div class="chap">常见应用 Cases</div>
   <dl>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 利用不同的z-index营造3D氛围，更多细节，请参看 <a href="./demo/parallax.html">视距差-
-        parallax</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 利用不同的 z-index 营造3D氛围，更多细节，请参看 顶部banner、<a
+        href="./demo/parallax.html">视距差 - parallax</a></dd>
     <dd class="environment">
       <img class="ob-img tree0" data-src="./imgs/tree0.png" alt="">
       <img class="ob-img tree2" data-src="./imgs/tree2.png" alt="">
@@ -76,10 +78,12 @@
       <div>. 初始化：button取消边框、轮廓、背景</div>
       <div>. 定位：父相子绝，使伪元素右上定位</div>
       <div>. 还可以使用负边距实现</div>
-      <div class="cart">
-        <span class="iconfont icon-gouwuche_o"></span>
-        <span class="badge keyword">8</span>
-        <span>我的购物车</span>
+      <div class="demo-wrap">
+        <div class="cart">
+          <span class="iconfont icon-gouwuche_o"></span>
+          <span class="badge keyword">8</span>
+          <span>我的购物车</span>
+        </div>
       </div>
       <pre>
 .cart::before {
@@ -89,10 +93,22 @@
   right: -10px;
 }</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 渐变背景边框</dd>
+    <dd>
+      <div>. 定位 position</div>
+      <div>. 伪元素 ::before</div>
+      <div>. 背景图片 background-image</div>
+      <div>. 线路渐变 linear-gradient</div>
+      <div>. 圆角边框 border-radius</div>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 伪元素 - 绘制米琪</dd>
     <dd>
       <div>.前后伪元素分别作为米琪的左右耳朵，利用定位放置于米琪头部两侧</div>
-      <div class="mickey"></div>
+      <div class="demo-wrap">
+        <div class="mickey-box">
+          <div class="mickey"></div>
+        </div>
+      </div>
       <pre>
 .mickey {
     position: relative;
@@ -132,44 +148,46 @@
       <div>.开始隐藏2级菜单，:hover时显示</div>
       <div>.适合桌面端；移动端通常使用汉堡菜单</div>
       <div>.注意：&lt;a&gt;不能嵌套使用&lt;a&gt;</div>
-      <ul class="menu">
-        <li class="menu-item">
-          <div>home</div>
-          <ul class="sub-menu">
-            <li>Lorem</li>
-            <li>Hic!</li>
-            <li>Reae?</li>
-          </ul>
-        </li>
-        <li class="menu-item">
-          <div>team</div>
-          <ul class="sub-menu">
-            <li>Lorem.</li>
-            <li>Culpa!</li>
-            <li>Culpa!</li>
-            <li>Eaque.</li>
-          </ul>
-        </li>
-        <li class="menu-item">
-          <div>blog</div>
-          <ul class="sub-menu">
-            <li>Lorem.</li>
-            <li>Maiors.</li>
-            <li>Cuate!</li>
-          </ul>
-        </li>
-        <li class="menu-item">
-          <div>info</div>
-          <ul class="sub-menu">
-            <li>Lorem.</li>
-            <li>Corpos?</li>
-            <li>Cor?</li>
-            <li>Corpo</li>
-            <li>Votes.</li>
-          </ul>
-        </li>
-        <li class="nav-flag"></li>
-      </ul>
+      <div class="demo-wrap">
+        <ul class="menu">
+          <li class="menu-item">
+            <div>home</div>
+            <ul class="sub-menu">
+              <li>Lorem</li>
+              <li>Hic!</li>
+              <li>Reae?</li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <div>team</div>
+            <ul class="sub-menu">
+              <li>Lorem.</li>
+              <li>Culpa!</li>
+              <li>Culpa!</li>
+              <li>Eaque.</li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <div>blog</div>
+            <ul class="sub-menu">
+              <li>Lorem.</li>
+              <li>Maiors.</li>
+              <li>Cuate!</li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <div>info</div>
+            <ul class="sub-menu">
+              <li>Lorem.</li>
+              <li>Corpos?</li>
+              <li>Cor?</li>
+              <li>Corpo</li>
+              <li>Votes.</li>
+            </ul>
+          </li>
+          <li class="nav-flag"></li>
+        </ul>
+      </div>
       <pre>
 &lt;li class="menu-item"&gt;
   &lt;div&gt;team&lt;/div&gt;
