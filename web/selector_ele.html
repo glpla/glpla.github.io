@@ -29,14 +29,16 @@ selector::pseudo-element {
     </dd>
     <dt>::before ::after</dt>
     <dd>
-      <div>. 创建一个inline元素作为第一个first子元素、最后一个last子元素</div>
+      <div>. 创建一个 inline 元素作为第一个 first 子元素、最后一个 last 子元素</div>
       <div>. 必须指定伪元素 content 属性，哪怕为空；可以使用普通字符、<a
-          href="https://developer.mozilla.org/en-US/docs/Glossary/Entity">CSS实体</a>；也可利用attr()获取元素属性；content拼接字符串不能使用+，直接在后面添加即可
+          href="https://developer.mozilla.org/en-US/docs/Glossary/Entity">CSS实体</a>；也可利用attr()获取元素属性；content
+        拼接字符串不能使用+，直接在后面添加即可
       </div>
-      <div>. content属性不支持变量使用var()，可以通过<a href="./counter.html">计数器</a> 迂回实现</div>
-      <div>. 可按照普通元素对其进行定位、布局、旋转等等操作；注意：旋转会撑开/破坏布局，请为父元素设置overflow溢出隐藏；同样需要注意的是：他们的box-sizing也要初始化为border-box</div>
-      <div>. 伪元素的样式受父级元素的影响；但是伪元素不是元素的直接孩子，无法使用直接后代选择器>选择</div>
+      <div>. content属性不支持变量使用 var()，可以通过<a href="./counter.html">计数器</a> 迂回实现</div>
+      <div>. 可按照普通元素对其进行定位、布局、旋转等等操作；注意：旋转会撑开/破坏布局，请为父元素设置 overflow 溢出隐藏；同样需要注意的是：他们的 box-sizing 也要初始化为 border-box</div>
+      <div>. 伪元素的样式受父级元素的影响；但是伪元素不是元素的直接孩子，无法使用直接后代选择器 > 选择</div>
       <div>. 应用非常非常非常广泛。。。可以使用任何形式的内容</div>
+      <div class="tips">&lt;input&gt;不可以使用伪元素</div>
       <div>[<span class="iconfont icon-keyboard"></span>] 样式初始化</div>
       <pre>
 *, 
@@ -53,12 +55,12 @@ selector::pseudo-element {
 li::before {
     content: '>';
 }</pre>
-      <div>使用CSS 实体</div>
+      <div>使用 CSS 实体</div>
       <pre>
 li::before {
     content: '\21E8';
 }</pre>
-      <div>使用计数器；可以拼接普通字符或CSS实体</div>
+      <div>使用计数器；可以拼接普通字符或 CSS 实体</div>
       <pre>
 li::before {
   content: counter(sn) '\21e8 ';
@@ -86,7 +88,7 @@ li::before {
     background-size: cover;
     border-radius: 50%;
 }</pre>
-      <div>使用 <a href="./framework/iconfont.html">阿里字体图标 - iconfont</a>；需要指定字体家族为iconfont</div>
+      <div>使用 <a href="./framework/iconfont.html">阿里字体图标 - iconfont</a>；需要指定字体家族为 iconfont</div>
       <pre>
 li {
   list-style: none;

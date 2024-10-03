@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单 登录</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        :root {
+            --bg-color: #171f2b;
+            --second-bg-color: #1f2733;
+            --nav-bg-color: rgba(255, 255, 255, .1);
+            --main-color: #5988b0;
+            --second-color: #de5096;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+            border: none;
+            outline: none;
+            color: inherit;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        input {
+            width: 100%;
+            height: 40px;
+            font: inherit;
+            background-color: transparent;
+        }
+
+        input::placeholder {
+            text-transform: capitalize;
+        }
+
+        button {
+            font: inherit;
+            background-color: transparent;
+            text-transform: capitalize;
+            cursor: pointer;
+        }
+
+        html {
+            font-size: 62.6%;
+        }
+
+        body {
+            display: flex;
+            font-size: 1.6rem;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: capitalize;
+            margin-bottom: 20px;
+            height: 60px;
+            line-height: 60px;
+            color: transparent;
+            background-image: linear-gradient(to right, var(--second-color), var(--main-color));
+            background-clip: text;
+            letter-spacing: 0.1em;
+        }
+
+        form {
+            margin: auto;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .ipt-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .ipt-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 4px;
+            background-image: linear-gradient(to right, var(--second-color), var(--main-color));
+        }
+
+        .ipt-box i {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .ipt-box input:valid+i,
+        .ipt-box input:focus+i {
+            color: var(--second-color);
+        }
+
+        .tips {
+            display: flex;
+            justify-content: space-between;
+            color: var(--main-color);
+            height: 40px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .tips a:hover {
+            color: var(--second-color);
+        }
+
+        button {
+            width: 100%;
+            height: 50px;
+            background-image: linear-gradient(to right, var(--second-color), var(--main-color));
+            color: #fff;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="https://www.baidu.com">
+        <h1>user login</h1>
+        <div class="ipt-box">
+            <input type="email" placeholder="your email here" name='email' required>
+            <i class='bx bxs-envelope bx-md'></i>
+        </div>
+        <div class="ipt-box">
+            <input type="password" placeholder="your password here" name="pass" required>
+            <i class='bx bxs-lock bx-md'></i>
+        </div>
+        <div class="tips">
+            <a href="">forget password</a>
+            <a href="">sing up</a>
+        </div>
+        <button>enter</button>
+    </form>
+</body>
+
+</html>
