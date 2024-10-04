@@ -5,186 +5,203 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>轮播 Swiper</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
-        :root {
-            --main-w: 640px;
-            --main-h: 360px;
-            --seg-w: calc(var(--main-h)/2);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        ul {
-            list-style: none;
-        }
-
         body {
-            background-color: #c0392b;
+            background-color: #ecedef;
         }
 
-        .wrap {
+        .carousel {
+            padding: 0 5vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .info-box {
+            position: absolute;
+            top: 50%;
+            width: 50%;
+            max-width: 300px;
+            height: 300px;
+            transform: translateY(-50%);
+            overflow: hidden;
+        }
+
+        .info-wrap {
+            height: 100%;
+            transition: 0.5s cubic-bezier(0.25, -0.55, 0.25, 1.55);
+        }
+
+        .info-item {
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            perspective: 1000px;
-            padding: 2rem 0;
-        }
-
-        .title {
-            text-align: center;
-            line-height: 2;
             color: #fff;
         }
 
-        .sliders {
+        .img-box {
+            height: 100%;
+            transition: 0.5s cubic-bezier(0.25, -0.55, 0.25, 1.55);
+        }
+
+        .img-item {
             position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .img-item img {
+            position: absolute;
+            right: 0;
+            width: 50%;
+            max-width: 100%;
+        }
+
+        /* btns */
+        .btns {
+            position: fixed;
+            bottom: 2rem;
             display: flex;
             justify-content: center;
-            transform-style: preserve-3d;
-            width: var(--main-w);
-            aspect-ratio: 16/9;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            color: #fff;
             cursor: pointer;
-            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
         }
 
-        .sliders li {
-            position: relative;
-            width: 25%;
-            height: 100%;
-            transition: all calc(1s*var(--delay)) ease-in-out;
-            transform-style: preserve-3d;
-        }
-
-
-        .sliders li div {
+        .bg-box .bg {
             position: absolute;
-            left: 0;
-            top: 0;
             width: 100%;
             height: 100%;
-            color: #fff;
-            background-size: cover;
-            background-position: var(--pos) center;
         }
 
-        .sliders li div:nth-child(1) {
-            background-image: url(/utils/military/military1.jpg);
-            transform: rotateX(0deg) translateZ(var(--seg-w));
+        .bg-box .bg:nth-child(1) {
+            background-image: linear-gradient(360deg, #1b73bb, #a5c2dd);
         }
 
-        .sliders li div:nth-child(2) {
-            background-image: url(/utils/military/military2.jpg);
-            transform: rotateX(90deg) translateZ(var(--seg-w));
+        .bg-box .bg:nth-child(2) {
+            background-image: linear-gradient(360deg, #14651c, #afcfb4);
         }
 
-        .sliders li div:nth-child(3) {
-            background-image: url(/utils/military/military3.jpg);
-            transform: rotateX(180deg) translateZ(var(--seg-w));
+        .bg-box .bg:nth-child(3) {
+            background-image: linear-gradient(360deg, #8f0231, #dda0b6);
         }
 
-        .sliders li div:nth-child(4) {
-            background-image: url(/utils/military/military4.jpg);
-            transform: rotateX(270deg) translateZ(var(--seg-w));
+        .bg-box .bg:nth-child(4) {
+            background-image: linear-gradient(360deg, #ccae14, #e3d064);
         }
 
-        .dot {
-            display: flex;
-            gap: 10px;
+        .bg-box .bg:nth-child(2),
+        .bg-box .bg:nth-child(3),
+        .bg-box .bg:nth-child(4) {
+            clip-path: circle(0% at 50% 50%);
+            transition: 0.5s cubic-bezier(0.25, -0.55, 0.25, 1.55);
         }
 
-        .dot li {
-            width: 2rem;
-            height: 2rem;
-            line-height: 2rem;
-            color: #fff;
-            background-color: #333;
-            text-align: center;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: .5s;
-        }
-
-        .dot li:hover {
-            box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
-        }
-
-        .dot li.active {
-            background-color: #ddd;
-            color: #333;
-        }
-
-        @media (max-width:768px) {
-            :root {
-                --main-w: 320px;
-                --main-h: 180px;
-            }
-
-            section {
-                padding: 6rem 0;
-            }
+        .bg-box .bg:nth-child(1).active,
+        .bg-box .bg:nth-child(2).active,
+        .bg-box .bg:nth-child(3).active,
+        .bg-box .bg:nth-child(4).active {
+            clip-path: circle(70% at 50% 50%);
         }
     </style>
 </head>
 
 <body>
-    <section class="wrap">
-        <h2 class="title">3D轮播</h2>
-        <ul class="sliders">
-            <li style="--pos:0%;--delay:1">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </li>
-            <li style="--pos:33.3%;--delay:1.3">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </li>
-            <li style="--pos:66.7%;--delay:1.6">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </li>
-            <li style="--pos:100%;--delay:2.2">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </li>
-        </ul>
-        <ul class='dot'>
-            <li class='active'>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-        </ul>
-    </section>
+    <div class="bg-box">
+        <div class="bg active"></div>
+        <div class="bg"></div>
+        <div class="bg"></div>
+        <div class="bg"></div>
+    </div>
+    <div class="carousel">
+        <div class="img-box">
+            <div class="img-item">
+                <img src="/utils/shoes/s_blue.png" alt="">
+            </div>
+            <div class="img-item">
+                <img src="/utils/shoes/s_green.png" alt="">
+            </div>
+            <div class="img-item">
+                <img src="/utils/shoes/s_rose.png" alt="">
+            </div>
+            <div class="img-item">
+                <img src="/utils/shoes/s_yellow.png" alt="">
+            </div>
+        </div>
+        <div class="info-box">
+            <div class="info-wrap">
+                <div class="info-item">
+                    <h2>blue</h2>
+                    <div>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi, eligendi?</div>
+                </div>
+                <div class="info-item">
+                    <h2>green</h2>
+                    <div>Itaque perspiciatis consequuntur iusto repellat aperiam nesciunt expedita dolorem
+                        veniam!</div>
+                </div>
+                <div class="info-item">
+                    <h2>rose</h2>
+                    <div>Rem dignissimos consequatur fugit fugiat et non aliquid sequi animi?</div>
+                </div>
+                <div class="info-item">
+                    <h2>yellow</h2>
+                    <div>Nulla minima nam perspiciatis magnam libero repellendus, dignissimos sit
+                        laudantium.</div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <div class="btn prev"><i class='bx bx-chevron-left'></i></div>
+            <div class="btn next"><i class='bx bx-chevron-right'></i></div>
+        </div>
+    </div>
     <script>
-        let
-            oSide = document.querySelectorAll('.sliders li'),
-            oDot = document.querySelector('.dot'),
-            oList = oDot.getElementsByTagName('li');
+        const btnPrev = document.querySelector('.prev');
+        const btnNext = document.querySelector('.next');
+        const infoWrap = document.querySelector('.info-wrap');
+        const imgBox = document.querySelector('.img-box');
+        const bgs = document.querySelectorAll('.bg');
+        let ind = 0
 
-        for (let i = 0; i < oList.length; i++) {
-            oList[i].onclick = function () {
-                for (let j = 0; j < oSide.length; j++) {
-                    oSide[j].style.transform = 'rotateX(' + (i * 90) + 'deg)';
-                }
-                for (let j = 0; j < oList.length; j++) {
-                    oList[j].className = '';
-                }
-                this.className = 'active';
+        btnNext.addEventListener('click', () => {
+            ind = (ind < 3) ? ind + 1 : 0
+            infoWrap.style.transform = `translateY(${-100 * ind}%)`
+            imgBox.style.transform = `translateY(${-100 * ind}%)`
+            bgs[ind].classList.toggle('active')
+        })
+
+        btnPrev.addEventListener('click', () => {
+            index = (ind > 0) ? ind : 0
+            ind--
+            if (ind < 0) {
+                ind = 3
             }
-        }
+            infoWrap.style.transform = `translateY(${-100 * ind}%)`
+            imgBox.style.transform = `translateY(${-100 * ind}%)`
+            bgs[index].classList.toggle('active')
+        })
+
+
     </script>
 </body>
 
