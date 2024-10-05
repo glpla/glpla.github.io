@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播 Swiper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+
+        body {
+            background-color: #f1f2f3;
+            overflow: hidden;
+        }
+
+        .wrap {
+            position: absolute;
+            width: 800px;
+            height: 450px;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translate(0, -50%);
+            width: 200px;
+            height: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            background-size: cover;
+            background-position: center;
+            transition: 0.5s;
+        }
+
+        .slider:nth-child(1),
+        .slider:nth-child(2) {
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            transform: translate(0);
+        }
+
+        .slider:nth-child(3) {
+            left: 50%;
+        }
+
+        .slider:nth-child(4) {
+            left: calc(50% + 220px);
+        }
+
+        .slider:nth-child(5) {
+            left: calc(50% + 440px);
+        }
+
+        .slider:nth-child(n+6) {
+            left: calc(50% + 660px);
+            opacity: 0;
+        }
+
+        .cont {
+            position: absolute;
+            left: 50px;
+            top: 50%;
+            width: 300px;
+            transform: translate(0, -50%);
+            color: #f1f2f3;
+            display: none;
+        }
+
+        .slider:nth-child(2) .cont {
+            display: block;
+        }
+
+        .title {
+            opacity: 0;
+            animation: mov 1s forwards;
+        }
+
+        .desc {
+            margin: 1rem 0;
+            opacity: 0;
+            animation: mov 1s 0.5s forwards;
+        }
+
+        .btn {
+            padding: 0.5rem 2rem;
+            border-radius: 0.5rem;
+            border: 1px solid #f1f2f3;
+            text-transform: uppercase;
+            background-color: transparent;
+            color: #f1f2f3;
+            opacity: 0;
+            animation: mov 1s 1s forwards;
+        }
+
+        .btn:hover {
+            background-color: #f1f2f3;
+            color: #333;
+        }
+
+        @keyframes mov {
+            form {
+                opacity: 0;
+                transform: translate(0, 100px);
+                filter: blur(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(0);
+                filter: blur(0);
+            }
+        }
+
+        .navs {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+        }
+
+        .navs button {
+            width: 40px;
+            height: 35px;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        .navs button:hover {
+            background-color: #333;
+            color: #f1f2f3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <ul class="sliders">
+            <li class="slider" style="background-image: url(/utils/wallpapers/blue.jpg);">
+                <div class="cont">
+                    <h2 class="title">Lorem.</h2>
+                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                        blanditiis
+                        doloribus!
+                    </p>
+                    <button class="btn">more</button>
+                </div>
+            </li>
+            <li class="slider" style="background-image: url(/utils/wallpapers/green.jpg);">
+                <div class="cont">
+                    <h2 class="title">Lorem.</h2>
+                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                        blanditiis
+                        doloribus!
+                    </p>
+                    <button class="btn">more</button>
+                </div>
+            </li>
+            <li class="slider" style="background-image: url(/utils/wallpapers/pink.jpg);">
+                <div class="cont">
+                    <h2 class="title">Lorem.</h2>
+                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                        blanditiis
+                        doloribus!
+                    </p>
+                    <button class="btn">more</button>
+                </div>
+            </li>
+            <li class="slider" style="background-image: url(/utils/wallpapers/purple.jpg);">
+                <div class="cont">
+                    <h2 class="title">Lorem.</h2>
+                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                        blanditiis
+                        doloribus!
+                    </p>
+                    <button class="btn">more</button>
+                </div>
+            </li>
+            <li class="slider" style="background-image: url(/utils/wallpapers/w0.jpg);">
+                <div class="cont">
+                    <h2 class="title">Lorem.</h2>
+                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                        blanditiis
+                        doloribus!
+                    </p>
+                    <button class="btn">more</button>
+                </div>
+            </li>
+            <li class="slider" style="background-image: url(/utils/wallpapers/w1.jpg);">
+                <div class="cont">
+                    <h2 class="title">Lorem.</h2>
+                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                        blanditiis
+                        doloribus!
+                    </p>
+                    <button class="btn">more</button>
+                </div>
+            </li>
+            <li class="slider" style="background-image: url(/utils/wallpapers/w2.jpg);">
+                <div class="cont">
+                    <h2 class="title">Lorem.</h2>
+                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                        blanditiis
+                        doloribus!
+                    </p>
+                    <button class="btn">more</button>
+                </div>
+            </li>
+            <li class="slider" style="background-image: url(/utils/wallpapers/w3.jpg);">
+                <div class="cont">
+                    <h2 class="title">Lorem.</h2>
+                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                        blanditiis
+                        doloribus!
+                    </p>
+                    <button class="btn">more</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="btns">
+        <div class="navs">
+            <button class="prev">&lt;</button>
+            <button class="next">&gt;</button>
+        </div>
+    </div>
+    <script>
+        const prev = document.querySelector('.prev');
+        const next = document.querySelector('.next');
+        next.onclick = function () {
+            let slider = document.querySelectorAll('.slider');
+            document.querySelector('.sliders').appendChild(slider[0]);
+        }
+        prev.onclick = function () {
+            let slider = document.querySelectorAll('.slider');
+            document.querySelector('.sliders').prepend(slider[slider.length - 1]);
+        }
+    </script>
+</body>
+
+</html>
