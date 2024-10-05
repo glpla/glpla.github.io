@@ -26,7 +26,6 @@
         .info-box {
             position: absolute;
             top: 50%;
-            width: 50%;
             max-width: 300px;
             height: 300px;
             transform: translateY(-50%);
@@ -61,7 +60,6 @@
         .img-item img {
             position: absolute;
             right: 0;
-            width: 50%;
             max-width: 100%;
         }
 
@@ -110,11 +108,12 @@
             background-image: linear-gradient(360deg, #ccae14, #e3d064);
         }
 
+        .bg-box .bg:nth-child(1),
         .bg-box .bg:nth-child(2),
         .bg-box .bg:nth-child(3),
         .bg-box .bg:nth-child(4) {
             clip-path: circle(0% at 50% 50%);
-            transition: 0.5s cubic-bezier(0.25, -0.55, 0.25, 1.55);
+            transition: clip-path 0.5s cubic-bezier(0.25, -0.55, 0.25, 1.55);
         }
 
         .bg-box .bg:nth-child(1).active,
@@ -122,6 +121,12 @@
         .bg-box .bg:nth-child(3).active,
         .bg-box .bg:nth-child(4).active {
             clip-path: circle(70% at 50% 50%);
+        }
+
+        @media (max-width: 768px) {
+            .info-box {
+                transform: unset;
+            }
         }
     </style>
 </head>
@@ -184,21 +189,34 @@
         let ind = 0
 
         btnNext.addEventListener('click', () => {
+
+            bgs.forEach(bg => {
+                bg.classList.remove('active')
+            })
+
             ind = (ind < 3) ? ind + 1 : 0
+
             infoWrap.style.transform = `translateY(${-100 * ind}%)`
             imgBox.style.transform = `translateY(${-100 * ind}%)`
-            bgs[ind].classList.toggle('active')
+
+            bgs[ind].classList.add('active')
         })
 
         btnPrev.addEventListener('click', () => {
-            index = (ind > 0) ? ind : 0
+
+            bgs.forEach(bg => {
+                bg.classList.remove('active')
+            })
+
             ind--
             if (ind < 0) {
                 ind = 3
             }
+
             infoWrap.style.transform = `translateY(${-100 * ind}%)`
             imgBox.style.transform = `translateY(${-100 * ind}%)`
-            bgs[index].classList.toggle('active')
+
+            bgs[ind].classList.add('active')
         })
 
 
