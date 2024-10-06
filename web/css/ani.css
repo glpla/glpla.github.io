@@ -377,3 +377,63 @@ input {
     transform: translateX(calc(-32px*9));
   }
 }
+
+/* timeline */
+.windmill {
+  height: 60vh;
+  background-color: #000;
+  overflow-y: auto;
+  scroll-timeline-name: --squareTimeline;
+}
+
+.windmill-img {
+  display: block;
+  max-width: 100%;
+  animation: --windmill 1s alternate;
+  animation-timeline: --squareTimeline;
+  margin: 0 auto;
+}
+
+@keyframes --windmill {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tmp {
+  height: 50vh;
+}
+
+.fade-in-wrap {
+  height: 40vh;
+  overflow-y: auto;
+  background-color: #000;
+  color: #fff;
+  line-height: 5;
+}
+
+.fade-in {
+  width: 100px;
+  height: 100px;
+  background-color: #f40;
+  margin: 0 auto;
+
+  animation: --fadein 1ms both;
+  animation-timeline: view();
+}
+
+@keyframes --fadein {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

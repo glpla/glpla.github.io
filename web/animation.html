@@ -22,10 +22,11 @@
     <span>&commat;Animation</span>
     <span class="ham iconfont icon-menu"></span>
     <nav class="nav">
-      <a href="" style="--delay:0" class="nav-item">Overview</a>
-      <a href="" style="--delay:1" class="nav-item">Cases</a>
-      <a href="" style="--delay:2" class="nav-item">Steps</a>
-      <a href="" style="--delay:3" class="nav-item">Events</a>
+      <a href="" style="--delay:0" class="nav-item">概述 Overview</a>
+      <a href="" style="--delay:1" class="nav-item">案例 Cases</a>
+      <a href="" style="--delay:2" class="nav-item">步进 Steps</a>
+      <a href="" style="--delay:3" class="nav-item">时间轴 View</a>
+      <a href="" style="--delay:4" class="nav-item">事件 Events</a>
     </nav>
     <img class="plane" src="./imgs/plane.webp" alt="">
   </header>
@@ -341,7 +342,7 @@ header {
       </div>
     </dd>
   </dl>
-  <div class="chap">步进帧动画 steps()</div>
+  <div class="chap">步进动画 steps()</div>
   <dl class="nav-cont">
     <dt>说明</dt>
     <dd>.动画方式还可以按照指定的阶段数steps逐步完成</dd>
@@ -506,6 +507,80 @@ header {
     background-color: #eb2f06;
     animation: progress-ani 10s steps(10, start) forwards;
 }</pre>
+    </dd>
+  </dl>
+  <div class="chap">时间轴动画 animation-timeline</div>
+  <dl class="nav-cont">
+    <dd>
+      <div>.容器应该有滚动条</div>
+      <div>.容器不可以是 &lt;body&gt;</div>
+      <div>animation-timeline 应在动画 animation 定义后面给出</div>
+      <div>更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline">animation-timeline</a>
+        <span class="iconfont icon-lab"></span>
+      </div>
+      <pre>animation-timeline: none | auto | scroll() | view();</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 随页面滚动的风火轮；容器须额外指定动画属性</dd>
+    <dd>
+      <div class="windmill">
+        <div class="tmp"></div>
+        <img class="windmill-img" src="./imgs/windmill.png" alt="">
+        <div class="tmp"></div>
+      </div>
+      <pre>
+.windmill {
+  height: 60vh;
+  background-color: #000;
+  overflow-y: auto;
+  scroll-timeline-name: --squareTimeline;
+}
+
+.windmill-img {
+  display: block;
+  max-width: 100%;
+  animation: --windmill 1s alternate;
+  
+  /* follewed by  */
+  animation-timeline: --squareTimeline;
+  margin: 0 auto;
+}      </pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 淡入 - 使用匿名视口进度条；容器无须额外指定动画属性</dd>
+    <dd>
+      <div class="fade-in-wrap">
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, laudantium?</div>
+        <div>Enim, porro placeat error id sapiente facere fugiat quos temporibus.</div>
+        <div>Voluptatibus nostrum ex optio provident minus repudiandae qui sunt unde.</div>
+        <div>Est earum fugiat natus architecto cumque provident expedita tempore aperiam!</div>
+        <div>Excepturi, ipsa repellat fugit maxime natus earum hic ea sunt.</div>
+        <div>Ipsum, vel repudiandae unde ex quod quis aut recusandae aperiam?</div>
+        <div>Eos neque at ullam modi rerum deserunt non, rem odit.</div>
+        <div>Provident rem nesciunt nihil cupiditate quas repudiandae excepturi consectetur facere?</div>
+        <div>Quaerat magnam mollitia possimus tenetur itaque eos nam eligendi corrupti?</div>
+        <div class="fade-in"></div>
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, impedit.</div>
+        <div>Eligendi ad numquam voluptates dolorem temporibus modi, cupiditate aliquam veritatis.</div>
+        <div>Nostrum adipisci, harum recusandae error neque dolorum minima itaque animi.</div>
+        <div>Sed odio suscipit similique blanditiis omnis, ratione eaque labore impedit.</div>
+        <div>Rem ullam voluptatibus rerum soluta nemo delectus, quam ex. Cum!</div>
+        <div>Odio, possimus id? Nostrum provident porro dolores odio eum. Doloremque.</div>
+        <div>Iure labore consectetur molestias. Ducimus cum necessitatibus quas maxime eaque.</div>
+        <div>Debitis minus facilis sed vitae, atque sint voluptatum non recusandae.</div>
+        <div>Dicta consequatur voluptatibus asperiores eligendi dolor eaque vero est natus.</div>
+        <div>Debitis eos, voluptatem quia suscipit deleniti obcaecati molestiae rerum itaque!</div>
+      </div>
+      <pre>
+.fade-in {
+  width: 100px;
+  height: 100px;
+  background-color: #f40;
+  margin: 0 auto;
+
+  animation: --fadein 1ms both;
+  
+  /* follewed by  */
+  animation-timeline: view();
+}      </pre>
     </dd>
   </dl>
   <div class="chap">动画事件 Events</div>

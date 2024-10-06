@@ -29,8 +29,9 @@
 
         .wrap {
             position: absolute;
-            width: 800px;
-            height: 450px;
+            width: 90%;
+            max-width: 800px;
+            aspect-ratio: 16/9;
             left: 50%;
             top: 50%;
             transform: translateX(-50%) translateY(-50%);
@@ -42,8 +43,8 @@
             left: 0;
             top: 50%;
             transform: translate(0, -50%);
-            width: 200px;
-            height: 300px;
+            width: 23%;
+            aspect-ratio: 9/16;
             border-radius: 10px;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
             background-size: cover;
@@ -61,19 +62,19 @@
         }
 
         .slider:nth-child(3) {
-            left: 50%;
+            left: 60%;
         }
 
         .slider:nth-child(4) {
-            left: calc(50% + 220px);
+            left: calc(60% + 25%);
         }
 
         .slider:nth-child(5) {
-            left: calc(50% + 440px);
+            left: calc(60% + 50%);
         }
 
         .slider:nth-child(n+6) {
-            left: calc(50% + 660px);
+            left: calc(60% + 75%);
             opacity: 0;
         }
 
@@ -250,7 +251,9 @@
         const next = document.querySelector('.next');
         next.onclick = function () {
             let slider = document.querySelectorAll('.slider');
+            console.log(slider.length);
             document.querySelector('.sliders').appendChild(slider[0]);
+            console.log(slider.length);
         }
         prev.onclick = function () {
             let slider = document.querySelectorAll('.slider');
