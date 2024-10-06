@@ -48,7 +48,7 @@
         </tr>
         <tr>
           <td>:focus</td>
-          <td>获取焦点时[使用tab查看获取焦点效果]</td>
+          <td>获取焦点时[使用 tab 查看获取焦点效果]</td>
         </tr>
         <tr>
           <td>:focus-within</td>
@@ -60,7 +60,7 @@
         </tr>
         <tr>
           <td>:target</td>
-          <td>当前锚点选中时；使用ID指定锚点</td>
+          <td>当前锚点选中时；使用 ID 指定锚点</td>
         </tr>
       </table>
       <pre>
@@ -102,7 +102,7 @@ a:active {
     <dt id="checked">表单伪类</dt>
     <dd>
       <div>. 多用于表单元素</div>
-      <div>. 功能非常强大，很多纯CSS效果甚至可以媲美JavaScript</div>
+      <div>. 功能非常强大，很多纯CSS效果甚至可以媲美 JavaScript</div>
       <div>. 凡是鼠标点击的联动响应，都可以使用 :checked，如标签页、轮播、导航；见后续案例</div>
       <table>
         <tr>
@@ -176,9 +176,9 @@ input[type='radio']:checked+label {
         </tr>
       </table>
       <p>. 根据文档结构来选择，通常配合父级元素一起使用</p>
-      <p>. nth-child可以使用关键字；odd选中序号为奇数的孩子；even选中序号为偶数的孩子</p>
-      <p>. nth-child可以使用 <a
-          href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child#anb">表达式</a>；n只能是数字，不能是字母；n必须是表达式的第一项</p>
+      <p>. nth-child 可以使用关键字；odd 选中序号为奇数的孩子；even 选中序号为偶数的孩子</p>
+      <p>. nth-child 可以使用 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child#anb">表达式</a>；n
+        只能是数字，不能是字母；n 必须是表达式的第一项</p>
       <p>. 以上选择器不区分元素类型 - according to their position</p>
       <pre>
 :nth-child(even)//选择序号为偶数的元素
@@ -197,9 +197,9 @@ tr:nth-child(odd) {
 tr:nth-child(even) {
   background-color: #faccff;
 }      </pre>
-      <p>. 选择奇数行或偶数行：采用结构伪类选择器:nth-child()，使用关键字odd|even或表达式2n+1|2n</p>
+      <p>. 选择奇数行或偶数行：采用结构伪类选择器 :nth-child()，使用关键字 odd | even 或表达式 2n+1 | 2n</p>
       <p>. 也可以分别为奇数行和偶数行单独指定类；适合小规模表格</p>
-      <p>. :hover时候，当前行样式发生变化</p>
+      <p>. :hover 时候，当前行样式发生变化</p>
       <p>. 标题行样式始终保持不变</p>
       <div>根据类型选择元素</div>
       <table>
@@ -231,7 +231,8 @@ tr:nth-child(even) {
       <div>. 定义 <span class="warn">全局CSS变量</span>，供当前 CSS 文件所有元素使用</div>
       <div>. 借助函数 var() 使用/获取定义的变量</div>
       <div>. 方便统一调整</div>
-      <div>. 还可以在元素上使用style定义 <span class="warn">内联CSS变量</span>，供当前元素使用，详情请查看<a href="./variable.html">CSS变量</a>一节</div>
+      <div>. 还可以在元素上使用style定义 <span class="warn">内联CSS变量</span>，供当前元素使用，详情请查看 <a href="./variable.html">CSS变量</a>一节
+      </div>
       <pre>
 //定义
 :root {
@@ -255,7 +256,7 @@ tr:nth-child(even) {
     <dd>
       <div>元素为空的样式</div>
       <div>列表渲染时，如果数据为空，则给出特定样式，如不显示</div>
-      <div>也可以通过js实现</div>
+      <div>也可以通过 JavaScript 实现</div>
       <pre>
 li {
   //
@@ -271,7 +272,7 @@ li:empty {
       <div>The :not() CSS pseudo-class represents elements that do not match a list of selectors. Since it prevents
         specific items from being selected, it is known as the negation pseudo-class.</div>
     </dd>
-    <dd>元素彼此之间等间隔排列 - 最后一个&lt;li&gt;不指定margin-right</dd>
+    <dd>元素彼此之间等间隔排列 - 最后一个 &lt;li&gt; 不指定 margin-right</dd>
     <dd>
       <pre>
 //传统方案
@@ -290,7 +291,7 @@ ul {
   gap: 10px;
 }</pre>
     </dd>
-    <dd>选中不属于&lt;header&gt;或&lt;section&gt;的&lt;h2&gt;；范围中的h2不能省略</dd>
+    <dd>选中不属于 &lt;header&gt; 或 &lt;section&gt; 的 &lt;h2&gt;；范围中的 h2 不能省略</dd>
     <dd>
       <pre>
 h2:not(header h2, section h2) {
@@ -299,7 +300,7 @@ h2:not(header h2, section h2) {
     </dd>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:is">:is()</a></dt>
     <dd>. 为选择器列表中指定的元素分配样式；共享样式</dd>
-    <dd>. 后代选择器的高级用法；简化代码；而且可以容错；独立写法中，如果有一个语法错误，则所有样式都不生效；:is则可以大胆使用</dd>
+    <dd>. 后代选择器的高级用法；简化代码；而且可以容错；独立写法中，如果有一个语法错误，则所有样式都不生效；:is 则可以大胆使用</dd>
     <dd class="tips">
       <div>. The :is() CSS pseudo-class function takes a selector list as its argument, and selects any element that can
         be
@@ -402,7 +403,7 @@ body:has(#p0:checked) {
     </dd>
     <dt>过滤器 - filter</dt>
     <dd>
-      <div>使用&lt;select&gt;配合相应的选择器完成对商品的过滤/筛选</div>
+      <div>使用 &lt;select&gt; 配合相应的选择器完成对商品的过滤/筛选</div>
       <div>使用不同的类标识不同的商品</div>
       <pre>
 select:has(option[value='blue']:checked)+.goods div:not(.blue) {

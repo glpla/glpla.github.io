@@ -10,7 +10,9 @@
         :root {
             --main-color: #5988b0;
             --second-color: #de5096;
-            --txt-color: #757575;
+            --txt-color: #fff;
+            --mb: 20px;
+            accent-color: var(--second-color)
         }
 
         * {
@@ -26,8 +28,6 @@
         }
 
         input {
-            width: 100%;
-            height: 40px;
             font: inherit;
             background-color: transparent;
         }
@@ -53,29 +53,37 @@
             font-size: 1.6rem;
             height: 100vh;
             overflow: hidden;
+            background-image: url(/utils/wallpapers/w4.jpg);
+            background-size: cover;
+            background-position: center;
         }
 
         h1 {
             text-align: center;
             text-transform: capitalize;
-            margin-bottom: 20px;
+            margin-bottom: var(--mb);
             height: 60px;
             line-height: 60px;
-            color: transparent;
-            background-image: linear-gradient(to right, var(--second-color), var(--main-color));
-            background-clip: text;
+            /* color: transparent; */
+            /* background-image: linear-gradient(to right, var(--second-color), var(--main-color)); */
+            /* background-clip: text; */
             letter-spacing: 0.1em;
         }
 
         form {
             margin: auto;
             width: 100%;
-            max-width: 350px;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            padding: 20px 40px;
+            color: #fff;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
         }
 
         .ipt-box {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: var(--mb);
         }
 
         .ipt-box::before {
@@ -86,6 +94,11 @@
             width: 100%;
             height: 4px;
             background-color: var(--txt-color);
+        }
+
+        .ipt-box input {
+            width: 100%;
+            height: 50px;
         }
 
         .ipt-box i {
@@ -107,14 +120,11 @@
         }
 
         .tips {
-            display: flex;
-            justify-content: space-between;
-            height: 40px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
+            text-transform: capitalize;
+            margin-bottom: var(--mb);
         }
 
-        .tips a:hover {
+        .link:hover {
             color: var(--second-color);
         }
 
@@ -124,6 +134,16 @@
             background-image: linear-gradient(to right, var(--second-color), var(--main-color));
             color: #fff;
             letter-spacing: 0.1em;
+            margin-bottom: var(--mb);
+        }
+
+        .sign-up {
+            text-align: center;
+            text-transform: capitalize;
+        }
+
+        .sign-up a {
+            font-weight: 600;
         }
     </style>
 </head>
@@ -140,10 +160,11 @@
             <i class='bx bxs-lock bx-md'></i>
         </div>
         <div class="tips">
-            <a href="">forget password</a>
-            <a href="">sing up</a>
+            <label><input type="checkbox" id="rem"> remmenber me?</label>
+            <a class="link" href="">forget password?</a>
         </div>
         <button>enter</button>
+        <div class="sign-up">Don't have an account? <a class="link" href="">sing up</a></div>
     </form>
 </body>
 
