@@ -58,9 +58,9 @@
             justify-content: space-between;
             align-items: center;
             gap: var(--p-m-g);
-            z-index: 99;
             color: var(--primary-color);
             background-color: transparent;
+            z-index: 99;
         }
 
         .logo {
@@ -87,8 +87,6 @@
 
         .nav {
             display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .nav a {
@@ -256,22 +254,24 @@
                 right: -100%;
                 flex-direction: column;
                 width: 35vw;
+                height: 100vh;
                 gap: var(--p-m-g);
-                padding: var(--header-h) var(--p-m-g) var(--p-m-g);
-                font-size: 16px;
+                padding: var(--header-h) var(--p-m-g);
+                font-size: 15px;
                 background-color: var(--second-color);
                 transition: 0.5s;
+                z-index: 1;
+            }
+
+            .nav .close {
+                position: absolute;
+                top: var(--p-m-g);
+                right: var(--p-m-g);
             }
 
             .nav.active {
                 right: 0;
             }
-
-            .nav a {
-                color: var(--primary-color);
-            }
-
-
         }
     </style>
 </head>
@@ -289,9 +289,10 @@
             <a href="#team" style="--delay:3">团队</a>
             <a href="#about" style="--delay:4">关于</a>
             <a href="#contact" style="--delay:5">联系</a>
+            <i class='bx bx-x close'></i>
         </nav>
-        <i class='bx bx-menu ham' style="--delay:6"></i>
-        <i class='bx bx-moon theme' style="--delay:7"></i>
+        <i class='bx bx-moon theme' style="--delay:6"></i>
+        <i class='bx bx-menu ham' style="--delay:7"></i>
     </header>
     <section class="section home" id="home">
         <div class="bg" style="--delay:0">
@@ -324,13 +325,21 @@
         const theme = document.querySelector('.theme');
         const nav = document.querySelector('.nav');
         const ham = document.querySelector('.ham');
+        const close = document.querySelector('.close');
         theme.addEventListener('click', function () {
             document.body.classList.toggle('mode');
             theme.classList.toggle('bx-sun');
         })
         ham.addEventListener('click', function () {
-            ham.classList.toggle('bx-x');
+            // ham.classList.toggle('bx-x');
             nav.classList.toggle('active');
+        })
+        close.addEventListener('click', function () {
+            // ham.classList.toggle('bx-x');
+            nav.classList.toggle('active');
+        })
+        window.addEventListener('scrollend', function () {
+            console.log('end');
         })
     </script>
 </body>
