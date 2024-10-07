@@ -33,15 +33,37 @@
   <dl>
     <dt class="nav-cont">概述 Overview</dt>
     <dd>
-      <div>.使用关键字 @keyframes 定义诺干个关键帧来表示元素的状态；从一个关键帧到另外一个关键帧的过渡时，中间的状态由系统自动生成</div>
-      <div>.皮影戏和早期非常流行的 flash 动画也是采用关键帧实现</div>
-      <div>.帧动画可以作用于多个元素；过渡动画 transition 只能作用于当前元素</div>
-      <div>.可以平滑方式；也可以步进方式</div>
+      <div>.使用关键字 @keyframes 定义诺干个关键帧来表示元素的状态</div>
+      <div>.动画结束后，默认回到起始状态</div>
+      <!-- <div>.皮影戏和早期非常流行的 flash 动画也是采用关键帧实现</div> -->
       <div>.更多高级动画，请访问<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation">MDN - animation</a>、<a
           href="./framework/animate.html">Animate使用</a>、<a href="https://animate.style/">animate.css</a>、<a
           href="https://animejs.com/">animejs</a>、<a href="http://www.animate.net.cn/">Animate官方动画库</a>、<a
           href="https://scrollrevealjs.org/">scrollrevealjs</a>
       </div>
+      <table>
+        <caption>animation vs transition</caption>
+        <tr>
+          <th>animation</th>
+          <th>transition</th>
+        </tr>
+        <tr>
+          <td>多个元素共享</td>
+          <td>当前元素</td>
+        </tr>
+        <tr>
+          <td>多个状态</td>
+          <td>两个状态</td>
+        </tr>
+        <tr>
+          <td>常规、步进、时间轴</td>
+          <td>常规、步进</td>
+        </tr>
+        <tr>
+          <td>关键字、百分比</td>
+          <td>属性</td>
+        </tr>
+      </table>
     </dd>
     <dt>定义动画 Definition</dt>
     <dd class="sn">
@@ -106,7 +128,10 @@ animation-fill-mode:
         </tr>
         <tr>
           <td>iteration-count</td>
-          <td>动画播放次数</td>
+          <td>动画播放次数
+            <br>数值：默认1
+            <br>infinite：无穷；重复播放
+          </td>
         </tr>
         <tr>
           <td>direction</td>
@@ -114,7 +139,12 @@ animation-fill-mode:
         </tr>
         <tr>
           <td>fill-mode</td>
-          <td>动画结束模式；forward表示100%</td>
+          <td>动画开始和结束时如何应用状态/样式
+            <br>none：不指定，从元素当前状态开始，结束后返回当前动态；默认值
+            <br> backwards：动画开始时，应用起始状态/0%，结束后返回当前动态
+            <br> forward：结束时，应用结束状态/100%；特别适合多个有延迟的动画
+            <br>both：从定义的开始状态开始，结束时应用结束状态，不会返回开始状态和元素当前状态
+          </td>
         </tr>
         <tr>
           <td>animation-play-state</td>

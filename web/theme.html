@@ -56,9 +56,9 @@
       <p>如果样式仅应用于页面可见区域，使用 &lt;body&gt; 可能更合适</p>
     </dd>
     <dt>实现</dt>
-    <dd class="sn">
-      <p>通常还借助 <a href="./js/storage.html">本地存储 - LocalStorage</a> 保存用户选择的主题</p>
-      <div>通过添加或移除类</div>
+    <dd>
+      <div>通常还借助 <a href="./js/storage.html">本地存储 - LocalStorage</a> 保存用户选择的主题</div>
+      <div>方案1：通过添加或移除类</div>
       <pre>
 html {
   --txt-color: #303133;
@@ -73,10 +73,13 @@ html.dark-theme {
 }      </pre>
       <pre>
   function toggleTheme() {
+    /* html*/
     document.documentElement.classList.toggle('dark-theme');
+    /* 或 body*/
+    document.body.classList.toggle('dark-theme');
   }
 </pre>
-      <div>通过添加或移除属性 - :root是&lt;html&gt;的一个属性</div>
+      <div>方案2：通过添加或移除属性 - :root是&lt;html&gt;的一个属性</div>
       <pre>
 /* light theme */
 :root {
@@ -92,8 +95,10 @@ html.dark-theme {
   --shadow-color: rgba(255, 255, 255, 0.1);
 }      </pre>
       <pre>document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light'); </pre>
-      <div>直接修改变量的值；详情请查看 <a href="./variable.html">CSS变量</a></div>
+      <div>方案3：直接修改变量的值；详情请查看 <a href="./variable.html">CSS变量</a></div>
+      <div>其它方案：。。。</div>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/site0.html">主题切换</a></dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script>
