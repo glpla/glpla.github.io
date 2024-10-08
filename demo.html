@@ -23,36 +23,59 @@
       box-sizing: border-box;
     }
 
-    table {
-      width: 80%;
-      margin: auto;
-      background-color: #f40;
-      border-collapse: collapse;
-      border-spacing: 0;
+    .mask {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      pointer-events: none;
+      opacity: 0;
     }
 
-    th,
-    td {
-      height: 30px;
-      border-bottom: 1px solid #ddd;
-      vertical-align: middle;
+    .fade-in {
+      animation: --fade 1s linear reverse forwards;
+    }
+
+    .fade-out {
+      animation: --fade 1s linear forwards;
+    }
+
+    @keyframes --fade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
   </style>
 </head>
 
 <body>
-  <table>
-    <tr>
-      <th>Lorem, ipsum.</th>
-      <th>Quaerat, deserunt.</th>
-      <th>Fugiat, sunt.</th>
-    </tr>
-    <tr>
-      <td>Lorem, ipsum.</td>
-      <td>Optio, aliquam!</td>
-      <td>Aliquid, delectus?</td>
-    </tr>
-  </table>
+  <a href="./tmp.html" class="link">tmp</a>
+  <div class="mask"></div>
+  <script>
+    const mask = document.querySelector(".mask")
+    window.addEventListener("load", function () {
+      mask.classList.add("fade-in")
+      mask.addEventListener("animationend", function () {
+        mask.classList.remove("fade-in")
+      })
+    })
+    const link = document.querySelector(".link")
+    link.addEventListener("click", function (e) {
+      e.preventDefault()
+      console.log(e.target.href);
+
+      mask.classList.add("fade-out")
+      mask.addEventListener("animationend", function () {
+        window.location.href = e.target.href
+      })
+    })
+  </script>
 </body>
 
 </html>
