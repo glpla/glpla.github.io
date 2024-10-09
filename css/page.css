@@ -142,7 +142,7 @@ header span {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: calc(2*var(--p-m-g));
-  margin-top: var(--p-m-g);
+  padding: calc(10*var(--p-m-g)) 0;
 }
 
 .chap {
@@ -150,7 +150,7 @@ header span {
   text-transform: capitalize;
   font-family: 'Michroma';
   background-color: #fff;
-  border-bottom: 2px solid var(--main-color);
+  border-bottom: 2px solid var(--color);
   cursor: pointer;
   transition: 0.2s;
   display: flex;
@@ -163,6 +163,7 @@ header span {
   content: '\e694';
   font-family: 'iconfont';
   transition: 0.2s;
+  color: var(--color);
 }
 
 .chap:hover {
@@ -171,6 +172,20 @@ header span {
 
 .chap:hover::after {
   transform: translateX(5px);
+}
+
+.ide {
+  position: relative;
+}
+
+.ide::after {
+  content: '';
+  position: absolute;
+  left: var(--p-m-g);
+  right: var(--p-m-g);
+  bottom: 0;
+  height: 4px;
+  background-image: linear-gradient(90deg, #4bc2ce, #2ecc71, #3498db, #d35400);
 }
 
 h3,
@@ -197,9 +212,10 @@ h3,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--main-color);
+  background-color: var(--color);
   text-transform: uppercase;
   color: #fff;
+  padding: calc(2*var(--p-m-g));
 }
 
 .item-wrap .web .iconfont {
@@ -217,7 +233,7 @@ h3,
 }
 
 .item:hover {
-  color: var(--main-color);
+  color: var(--color);
 }
 
 .item::after {
@@ -235,10 +251,6 @@ h3,
   order: 1;
 }
 
-.help {
-  --color: var(--main-color);
-}
-
 .help-item {
   padding: var(--p-m-g);
 }
@@ -248,7 +260,7 @@ h3,
   align-items: center;
   font-size: 18px;
   font-weight: 600;
-  color: var(--warn-color, #4bc2ce);
+  color: var(--color, #4bc2ce);
   line-height: 3;
 }
 
@@ -257,7 +269,7 @@ h3,
   content: '';
   height: 1px;
   flex: 1;
-  background-color: var(--warn-color, #4bc2ce);
+  background-color: var(--color, #4bc2ce);
 }
 
 .title~a {
@@ -269,7 +281,7 @@ h3,
 }
 
 .help a:hover {
-  color: var(--main-color);
+  color: var(--color);
 }
 
 iframe {
