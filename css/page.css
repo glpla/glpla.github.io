@@ -1,3 +1,4 @@
+@import url(//at.alicdn.com/t/c/font_3859342_2rfyhplh5pz.css);
 @import url(./fonts_Michroma.css);
 @import url(../css/fonts_Quicksand.css);
 
@@ -20,6 +21,8 @@ dt,
 dd,
 div,
 h1,
+h3,
+p,
 span {
   margin: 0;
   padding: 0;
@@ -138,35 +141,74 @@ header span {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--p-m-g);
+  gap: calc(2*var(--p-m-g));
   margin-top: var(--p-m-g);
 }
 
 .chap {
-  padding: 0 var(--p-m-g);
-  /* color: #fff; */
-  /* background-color: var(--main-color); */
   width: max-content;
   text-transform: capitalize;
-  line-height: 2;
   font-family: 'Michroma';
-  /* background-color: #fff;
-  background-image: linear-gradient(var(--green-color), var(--main-color));
-  background-size: 100% 0;
-  background-repeat: no-repeat; */
+  background-color: #fff;
   border-bottom: 2px solid var(--main-color);
-  margin-top: var(--p-m-g);
-  transition: background-size 0.4s, color 0.4s;
   cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: var(--p-m-g);
+  height: 36px;
 }
 
-/* .chap:hover {
-  background-size: 100% 40px;
-  color: #fff;
-} */
+.chap::after {
+  content: '\e694';
+  font-family: 'iconfont';
+  transition: 0.2s;
+}
+
+.chap:hover {
+  border-width: 5px;
+}
+
+.chap:hover::after {
+  transform: translateX(5px);
+}
+
+h3,
+.list-item {
+  margin-bottom: var(--p-m-g);
+  text-align: justify;
+}
+
+.list-item::before {
+  content: '\e8af';
+  margin-right: var(--p-m-g);
+  font-family: 'iconfont';
+  color: var(--main-color);
+}
 
 .item-wrap {
   padding: 0 var(--p-m-g);
+}
+
+.item-wrap .web {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-color);
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.item-wrap .web .iconfont {
+  font-size: 5rem;
+}
+
+.item-wrap .web span:last-child {
+  margin-top: var(--p-m-g);
+  font-size: 3rem;
 }
 
 .item {
