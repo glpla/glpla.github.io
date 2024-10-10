@@ -213,9 +213,13 @@ h3,
   padding: 0 var(--p-m-g);
 }
 
+.item-wrap:has(.web) {
+  display: flex;
+}
+
 .item-wrap .web {
-  width: 100%;
-  height: 100%;
+  width: 260px;
+  aspect-ratio: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -223,9 +227,16 @@ h3,
   background-color: var(--color);
   text-transform: uppercase;
   color: #fff;
-  padding: calc(2*var(--p-m-g));
   cursor: pointer;
   perspective: 800px;
+  border: 4px solid #fff;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  box-shadow:
+    inset 20px 20px 20px rgba(0, 0, 0, 0.15),
+    20px 20px 20px rgba(0, 0, 0, 0.15),
+    inset -20px -20px 20px rgba(255, 255, 255, 0.15);
+  transition: 0.5s;
+  margin: auto;
 }
 
 .item-wrap .web .iconfont {
@@ -240,6 +251,10 @@ h3,
   margin-top: var(--p-m-g);
   font-size: 2rem;
   gap: 6px;
+}
+
+.item-wrap .web:hover {
+  border-radius: 50%;
 }
 
 .item-wrap .web:hover .iconfont {
