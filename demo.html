@@ -58,93 +58,47 @@
       box-sizing: border-box;
     }
 
-    table {
-      border-collapse: collapse;
-
-    }
-
-    tr {
-      height: 30px;
-    }
-
-    th {
-      height: 30px;
-    }
-
-    td {
-      height: 30px;
-      border-bottom: 1px solid #000;
-    }
-
     .wrap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: masonry;
+      gap: 10px;
+    }
+
+    .wrap div {
+      width: 100%;
+      background-color: #f40;
+    }
+
+    .wrap div:nth-child(3n+2) {
       height: 100px;
-      width: 300px;
-      margin: 0 auto;
-    }
-
-    .test {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100px;
-      background-color: #ccc;
-      color: #fff;
-      transition: 0.5s;
-      text-align: center;
-    }
-
-    .test:hover {
-      border-bottom: 5px solid #f40;
-    }
-
-    li {
-      font-family: 'Font Awesome 6 Free';
-    }
-
-    li::after {
-      content: "\f061";
     }
   </style>
 </head>
 
 <body>
-  <ul>
-    <li>Lorem.</li>
-  </ul>
-  <table>
-    <tr>
-      <th>123</th>
-      <th>123</th>
-    </tr>
-    <tr>
-      <td>456</td>
-      <td>456</td>
-    </tr>
-  </table>
   <div class="wrap">
-    <div class="test">Lorem.</div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
   </div>
-  <a href="./tmp.html" class="link">tmp</a>
-  <div class="mask"></div>
-  <script>
-    const mask = document.querySelector(".mask")
-    window.addEventListener("load", function () {
-      mask.classList.add("fade-in")
-      mask.addEventListener("animationend", function () {
-        mask.classList.remove("fade-in")
-      })
-    })
-    const link = document.querySelector(".link")
-    link.addEventListener("click", function (e) {
-      e.preventDefault()
-      console.log(e.target.href);
-
-      mask.classList.add("fade-out")
-      mask.addEventListener("animationend", function () {
-        window.location.href = e.target.href
-      })
-    })
-  </script>
 </body>
 
 </html>
