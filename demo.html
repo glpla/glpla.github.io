@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4690841_1cc6mozyc6a.css">
   <style>
     :root {
       --bg-color: #171f2b;
@@ -23,25 +27,77 @@
       box-sizing: border-box;
     }
 
-    select {
-      display: block;
-      width: 800px;
-      height: 30px;
-      margin: 100px auto;
-      border-color: #f40;
-      outline: none;
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000;
+    }
+
+    .loader {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loader span {
+      position: absolute;
+      transform-origin: 150px;
+      transform: translateX(-150px) rotate(calc(var(--i)*30deg));
+      filter:
+        drop-shadow(0 0 5px #2aa3bb) drop-shadow(0 0 15px #2aa3bb) drop-shadow(0 0 30px #2aa3bb);
+    }
+
+    .loader span i {
+      position: relative;
+      color: #2aa3bb;
+      animation: roll 2.4s linear infinite;
+      animation-delay: calc(var(--i)*-2.4s/12);
+    }
+
+    @keyframes roll {
+      0% {
+        transform: rotate(0deg) scale(0);
+      }
+
+      50% {
+        transform: rotate(180deg) scale(3);
+      }
+
+      100% {
+        transform: rotate(360deg) scale(0);
+      }
+    }
+
+    .tmp::before {
+      content: '\e6e2';
+      font-family: iconfont;
+      color: #de5096;
     }
   </style>
 </head>
 
 <body>
-  <select name="hobby" id="" title="asdf">
-    <option value="code">code</option>
-    <option value="eat">eat</option>
-    <option value="sing">sing</option>
-    <option value="dance">dance</option>
-    <option value="gym">gym</option>
-  </select>
+  <div class="iconfont icon-bank"></div>
+  <div class="tmp">span</div>
+  <div class="loader">
+    <span style="--i:1"><i class="fa-solid fa-star"></i></span>
+    <span style="--i:2"><i class="fa-solid fa-star"></i></span>
+    <span style="--i:3"><i class="fa-solid fa-star"></i></span>
+    <span style="--i:4"><i class="fa-solid fa-star"></i></span>
+    <span style="--i:5"><i class="fa-solid fa-star"></i></span>
+    <span style="--i:6"><i class="fa-solid fa-star"></i></span>
+    <span style="--i:7"><i class="fa-solid fa-star"></i></span>
+    <span style="--i:8"><i class="fa-solid fa-star"></i></span>
+    <span style="--i:9"><i class="fa-solid fa-star"></i></span>
+    <span style="--i:10"><i class="fa-solid fa-star"></i></span>
+    <span style="--i:11"><i class="fa-solid fa-star"></i></span>
+    <span style="--i:12"><i class="fa-solid fa-star"></i></span>
+  </div>
 </body>
 
 </html>
