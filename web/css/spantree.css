@@ -3,7 +3,6 @@
 :root {
   --main-color: #f40;
   --tree-color: #ccc;
-  --node-h: 200px;
   --p-m-g: 10px;
 }
 
@@ -11,15 +10,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'poppins', Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 li {
-  list-style: square;
+  list-style: none;
+  margin-bottom: var(--p-m-g);
 }
 
-li::marker {
+li::before {
+  content: '\e7ff  ';
   color: #fa8231;
+  font-family: iconfont;
 }
 
 html {
@@ -39,14 +41,11 @@ body::-webkit-scrollbar-thumb {
   background-image: linear-gradient(#fc5c65, #fa8231, #26de81, #45aaf2, #a55eea);
 }
 
-.wrap {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
+.tree {
   width: 100%;
-  max-width: 1190px;
+  max-width: 1024px;
   margin: 0 auto;
-  padding: 10rem var(--p-m-g);
+  padding: 10rem 8rem 3rem 3rem;
   background-color: #fff;
 }
 
@@ -55,64 +54,52 @@ body::-webkit-scrollbar-thumb {
   font-size: 2rem;
 }
 
-.tree {
-  max-width: 50%;
-}
-
 .node {
   position: relative;
-  height: var(--node-h);
-}
-
-.node::before {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 0.2rem;
-  height: 100%;
-  background-color: var(--tree-color);
+  border-right: 1px solid var(--tree-color);
+  border-top: 1px solid var(--tree-color);
+  min-height: 20vh;
+  padding: var(--p-m-g);
+  margin-bottom: var(--p-m-g);
 }
 
 .title {
   position: absolute;
-  top: -1.8rem;
-  right: -3.5rem;
-  width: 7rem;
-  height: 2.5rem;
+  top: -1.5rem;
+  right: 0rem;
+  height: 3rem;
+  line-height: 3rem;
   text-align: center;
   font-weight: 600;
-  border-radius: 50%;
-  border: 1px solid var(--tree-color);
   background-color: #fff;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
+  padding: 0 var(--p-m-g);
 }
 
-.title::before {
+.classs {
+  position: absolute;
+  top: 0px;
+  right: -5rem;
+  width: 4rem;
+  text-align: center;
+}
+
+
+.classs-item {
+  position: relative;
+  background-color: var(--color);
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.classs-item::before {
   content: '';
   position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 1px solid #ccc;
-  transform: rotateZ(-45deg);
-}
-
-.title::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 1px solid #ccc;
-  transform: rotateZ(45deg);
-}
-
-.cont {
-  border-top: 1px solid var(--tree-color);
-  padding: var(--p-m-g);
+  top: 50%;
+  left: -6px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color);
+  transform: translateY(-50%) rotate(45deg);
 }
 
 .title:hover {
