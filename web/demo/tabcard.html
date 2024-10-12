@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>标签页 TabCard</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <base target="_blank">
 </head>
 
 <body>
@@ -22,30 +23,8 @@
       <div>配合 &lt;a&gt; 使用</div>
       <div>初态，各锚点隐藏</div>
       <div>锚点成为目标时，显示</div>
-      <div>加入更多结构和样式的设计</div>
-      <pre>
-&lt;nav&gt;
-  &lt;a href="#home"&gt;Home&lt;/a&gt;
-  &lt;a href="#info"&gt;Info&lt;/a&gt;
-  &lt;a href="#work"&gt;Work&lt;/a&gt;
-  &lt;a href="#team"&gt;Team&lt;/a&gt;
-  &lt;a href="#about"&gt;About!&lt;/a&gt;
-&lt;/nav&gt;
-&lt;div&gt;
-  &lt;div class="nav-target" id="home"&gt;Lorem ipsum dolor sit amet.&lt;/div&gt;
-  &lt;div class="nav-target" id="info"&gt;Minima maxime exercitationem cumque voluptates.&lt;/div&gt;
-  &lt;div class="nav-target" id="work"&gt;Facilis, voluptatem? Et, mollitia ratione.&lt;/div&gt;
-  &lt;div class="nav-target" id="team"&gt;Laborum fugiat doloribus tempora consectetur?&lt;/div&gt;
-  &lt;div class="nav-target" id="about"&gt;Sunt, earum? Eius, vitae corrupti!&lt;/div&gt;
-&lt;/div&gt;</pre>
-      <pre>
-.nav-target {
-  display: none;
-}
-
-.nav-target:target {
-  display: block;
-}</pre>
+      <div>考虑到超链接锚点的跳转，应在一个视口高度的页面内设计</div>
+      <div>案例实现，请访问 <a href="./tabcard0.html#home">标签页1</a> <a href="./acc_target.html">手风琴</a></div>
     </dd>
     <dt>:checked</dt>
     <dd>
@@ -55,59 +34,7 @@
       <div>单击某个单选按钮，使用特定的选择器显示对应的内容</div>
       <div>注意结构的设计</div>
       <div>需要更多样式加持，但是使用比较灵活；可以使用普通选择器、属性选择器或结构伪类选择器</div>
-      <pre>
-&lt;div&gt;
-  &lt;input type="radio" name="tabard" hidden id="home" checked&gt;
-  &lt;label for="home"&gt;Home&lt;/label&gt;
-  &lt;input type="radio" name="tabard" hidden id="info"&gt;
-  &lt;label for="info"&gt;info&lt;/label&gt;
-  &lt;input type="radio" name="tabard" hidden id="work"&gt;
-  &lt;label for="work"&gt;work&lt;/label&gt;
-  &lt;input type="radio" name="tabard" hidden id="team"&gt;
-  &lt;label for="team"&gt;team&lt;/label&gt;
-  &lt;input type="radio" name="tabard" hidden id="about"&gt;
-  &lt;label for="about"&gt;about&lt;/label&gt;
-  &lt;div class="cont"&gt;
-    &lt;div id="home"&gt;Lorem ipsum dolor sit amet.&lt;/div&gt;
-    &lt;div id="info"&gt;Minima maxime exercitationem cumque voluptates.&lt;/div&gt;
-    &lt;div id="work"&gt;Facilis, voluptatem? Et, mollitia ratione.&lt;/div&gt;
-    &lt;div id="team"&gt;Laborum fugiat doloribus tempora consectetur?&lt;/div&gt;
-    &lt;div id="about"&gt;Sunt, earum? Eius, vitae corrupti!&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-      </pre>
-      <pre>
-label {
-  cursor: pointer;
-}
-
-.cont div {
-  display: none;
-}
-
-input:checked+label {
-  color: #f40;
-}
-
-input[id='home']:checked~.cont #home {
-  display: block;
-}
-
-input[id='work']:checked~.cont #work {
-  display: block;
-}
-
-input[id='info']:checked~.cont #info {
-  display: block;
-}
-
-input[id='team']:checked~.cont #team {
-  display: block;
-}
-
-input[id='about']:checked~.cont #about {
-  display: block;
-}      </pre>
+      <div>案例实现，请访问 <a href="./tabcard1.html">标签页2</a></div>
     </dd>
     <dt>JavaScript</dt>
     <dd>
@@ -115,19 +42,12 @@ input[id='about']:checked~.cont #about {
       <div>通过更换元素的 class 或样式 style 实现</div>
       <div>初态时，各内容隐藏</div>
       <div>单击时，为目标叠加激活样式</div>
-      <div>因为操作DOM，所以结构可以任意</div>
-      <div>每次单击时，需要分别遍历标签页标题和内容；遍历所有标题，移除 active，然后为当前标题添加活动类 active；遍历所有内容，设置 display为 none，然后设置当前内容的 display为 block
-      </div>
-      <div>案例实现请访问 <a href="https://codepen.io/glpla/full/ZEPbbQv" target="_blank">Codepen - TabCard</a></div>
-      <pre>
-item.classList.toggle('active'')      </pre>
-      <pre>
-,item{
-  display: none;
-}
-.item.active{
-  display: block;
-}</pre>
+      <div>因为操作DOM，所以结构可以 <span class="warn">任意</span></div>
+      <div>每次单击时，需要分别：</div>
+      <div>. 遍历所有标题，移除 active，然后为当前标题添加活动类 active</div>
+      <div>. 遍历所有内容，移除 active，然后为当前内容添加活动类 active</div>
+      <div>案例实现，请访问 <a href="./tabcard2.html">标签页3</a>、<a href="https://codepen.io/glpla/full/ZEPbbQv">Codepen -
+          TabCard</a></div>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
