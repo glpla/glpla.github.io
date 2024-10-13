@@ -7,26 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>计数器 Counter</title>
   <link rel="stylesheet" href="../css/common.css">
+  <base target="_blank">
   <style>
-    .article {
-      counter-reset: chap;
+    .cont-sn ul li {
+      counter-increment: cont-sn;
     }
 
-    .article h2 {
-      counter-reset: sec;
-      counter-increment: chap;
-    }
-
-    .article h2::before {
-      content: '第' counter(chap)'章 ';
-    }
-
-    .article h3 {
-      counter-increment: sec;
-    }
-
-    .article h3::before {
-      content: counter(chap)'.' counter(sec)'节 ';
+    .cont-sn ul li::before {
+      content: counter(cont-sn);
+      padding: 2px 4px;
+      background-color: #0fbcf9;
+      color: #fff;
+      margin-right: 10px;
     }
 
     @counter-style my-style {
@@ -37,21 +29,12 @@
       /* speak-as: numeric; */
     }
 
-    ul>li {
+    .custom-ul {
+      margin-left: calc(4*var(--p-m-g));
+    }
+
+    .custom-ul>li {
       list-style-type: my-style;
-    }
-
-    h2 {
-      counter-increment: cont-sn;
-      font-size: 18px;
-    }
-
-    h2::before {
-      content: counter(cont-sn);
-      padding: 4px 10px;
-      background-color: #0fbcf9;
-      color: #fff;
-      margin-right: 10px;
     }
   </style>
 </head>
@@ -137,7 +120,7 @@
     <dt>步骤</dt>
     <dd class="sn">
       <div>为父元素创建/设置/初始化计数器</div>
-      <div>子元素使用/计数，其伪元素使用content显示计数</div>
+      <div>子元素使用/计数，其伪元素使用 content 显示计数</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>]初始化</dd>
     <dd>
@@ -152,45 +135,27 @@
       <div>. 同时声明多个计数器</div>
       <pre>counter-reset: tbl-sn img-sn exam-sn;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 内容编号</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 内容编号，如列表</dd>
     <dd class="cont-sn">
-      <h2>Lorem ipsum dolor sit.</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
-        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
-      </p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
-        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
-      </p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
-        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
-      </p>
-      <h2>Lorem ipsum dolor sit.</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
-        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
-      </p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
-        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
-      </p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
-        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
-      </p>
-      <h2>Lorem ipsum dolor sit.</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
-        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
-      </p>
-      <h2>Lorem ipsum dolor sit.</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia illo maxime rerum harum fugiat voluptatum modi
-        omnis dignissimos sapiente quam, laboriosam corrupti mollitia magnam. Quibusdam quo libero dolore. Sequi, ex?
-      </p>
+      <ul>
+        <li>Lorem, ipsum dolor.</li>
+        <li>Quas, rem temporibus.</li>
+        <li>Doloribus, illo veniam.</li>
+        <li>Vel, fuga facilis?</li>
+        <li>Enim, illo neque!</li>
+        <li>Quia, ratione soluta?</li>
+        <li>Aliquid, illo deleniti.</li>
+        <li>Adipisci, aut dolorum.</li>
+        <li>Rem, similique accusamus!</li>
+      </ul>
       <pre>
-h2 {
+ul li {
   counter-increment: cont-sn;
-  font-size: 18px;
 }
 
-h2::before {
+ul li::before {
   content: counter(cont-sn);
-  padding: 10px;
+  padding: 2px 4px;
   background-color: var(--main-color);
   color: #fff;
   margin-right: 10px;
@@ -250,77 +215,7 @@ figure figcaption::before {
   content: '图' counter(img-sn)' ';
 }      </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 为文章添加章节序号；更多实现，请参考 <a href="./demo/pager.html">文章排版 - paper</a>
-    </dd>
-    <dd class="article">
-      <h2>title1</h2>
-      <h3>sub-title1</h3>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae, inventore.</p>
-      <p>Explicabo voluptatibus quaerat nesciunt, voluptas sequi saepe ea qui repudiandae!</p>
-      <p>Eum, molestiae repudiandae corrupti eos sit fugit expedita in mollitia. Lorem ipsum dolor, sit amet
-        consectetur adipisicing elit. Ratione nesciunt qui nostrum. Sint corrupti eveniet laboriosam quibusdam
-        consequuntur dolores placeat.</p>
-      <h3>sub-title2</h3>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid, saepe?</p>
-      <p>Obcaecati dolores adipisci amet ullam explicabo minima aut officia voluptates! Lorem ipsum dolor sit, amet
-        consectetur adipisicing elit. Eum eligendi adipisci voluptatibus cumque! Doloribus delectus ad quia temporibus
-        libero. Doloribus atque repudiandae aliquid quasi dignissimos magni omnis deleniti sapiente nihil!</p>
-      <p>Assumenda sequi sed animi, totam alias similique aspernatur saepe blanditiis.</p>
-      <h3>sub-title3</h3>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Inventore, ex.</p>
-      <p>Necessitatibus ipsam, excepturi animi ea tempore ut minus. Amet, repellendus!</p>
-      <p>Odit fugit animi rerum, nulla error vitae illum. Voluptates, maxime. Lorem ipsum dolor, sit amet consectetur
-        adipisicing elit. Recusandae esse, aliquid voluptatibus pariatur illo quae voluptatum vitae nobis vero. Sit
-        quo culpa error perspiciatis, consectetur magnam molestias nemo totam assumenda?</p>
-      <h2>title2</h2>
-      <h3>sub-title1</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, optio.</p>
-      <p>Error quia laborum voluptatibus eos perferendis nemo assumenda sapiente eum.</p>
-      <p>Doloremque atque voluptate earum omnis reiciendis dignissimos quae, perferendis quia?</p>
-      <h3>sub-title2</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, sunt! Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Quos esse voluptatem facilis inventore quod a sint labore, maiores alias
-        explicabo incidunt aut illo tempora vel vero nisi rerum minima reprehenderit eligendi modi, repellat
-        voluptates dolore architecto. Voluptas enim error soluta.</p>
-      <p>Molestias, mollitia perspiciatis maiores illo cupiditate porro quibusdam modi saepe.</p>
-      <p>Doloribus iste ea inventore accusantium aliquam adipisci nulla esse ratione!</p>
-      <h3>sub-title3</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, saepe?</p>
-      <p>Quidem, ea libero! Numquam delectus, iusto dignissimos atque quidem repellendus.</p>
-      <p>Doloribus neque ad unde optio vero reiciendis dolore, voluptatibus doloremque.</p>
-      <h2>title3</h2>
-      <h3>sub-title1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, repellendus?</p>
-      <p>Autem culpa deserunt reprehenderit explicabo possimus natus rem, ea est. Lorem ipsum, dolor sit amet
-        consectetur adipisicing elit. Totam atque debitis obcaecati, incidunt esse exercitationem qui sint non libero
-        natus?</p>
-      <p>Veniam qui hic temporibus magnam enim corrupti sed laborum excepturi?</p>
-      <h3>sub-title2</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, labore!</p>
-      <p>Explicabo fugit hic perspiciatis et non quibusdam modi assumenda sed.</p>
-      <p>Iste non culpa, possimus cupiditate quis quos consequatur illum. Aspernatur? Lorem ipsum dolor, sit amet
-        consectetur adipisicing elit. Earum nam veniam ullam quaerat, voluptatem fugit ipsam animi ipsa ratione
-        cumque.</p>
-      <h3>sub-title3</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, ut.</p>
-      <p>Quo, ut vero. Consectetur suscipit dicta atque asperiores, vel sunt?</p>
-      <p>Eveniet, eos blanditiis error provident facere veritatis dicta aliquid a.</p>
-      <h2>title4</h2>
-      <h3>sub-title1</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, hic. Lorem ipsum dolor sit amet, consectetur
-        adipisicing elit. Ipsam ipsa commodi repellat explicabo? Eius at atque reiciendis ratione ut, dolore
-        voluptatibus, repellendus similique voluptas unde a fugit. Laboriosam similique quasi enim, sit est impedit ab
-        quos nemo consequuntur accusantium eos.</p>
-      <p>Doloremque iusto nobis at et soluta earum dignissimos rem facilis.</p>
-      <p>Eligendi nisi quia possimus itaque dicta! Commodi suscipit libero ipsa.</p>
-      <h3>sub-title2</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, assumenda!</p>
-      <p>Nisi consequuntur at, qui est unde quos harum labore veritatis.</p>
-      <p>Nobis quisquam labore quia id doloribus placeat harum dicta tempore.</p>
-      <h3>sub-title3</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, aperiam!</p>
-      <p>Voluptatum reiciendis nam voluptate, quae consectetur consequatur doloremque corporis deserunt.</p>
-      <p>Eligendi modi, adipisci quae numquam expedita deserunt accusantium! Voluptas, fuga.</p>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 为文章添加章节序号；更多实现，请参考 <a href="./demo/paper.html">文章排版 - paper</a>
     </dd>
     <dd>
       <pre>
@@ -348,7 +243,7 @@ figure figcaption::before {
   </dl>
   <div class="chap">@counter-style</div>
   <dl>
-    <dd>自定义计数样式</dd>
+    <dd>. 自定义计数样式</dd>
     <dd>
       <pre>
 @counter-style counter-style-name {
@@ -358,10 +253,14 @@ figure figcaption::before {
   range: 有效范围;
   fallback: 超出范围时使用的备用计数器，counter-style-name;
   speak-as: 控制语音合成器如何读出计数 speaking-rule;
+}
+
+.custom-ul>li {
+  list-style-type: my-style;
 }</pre>
     </dd>
     <dd>
-      <ul>
+      <ul class="custom-ul">
         <li>Lorem ipsum dolor sit amet.</li>
         <li>Consequuntur aliquam unde quam molestiae.</li>
         <li>Harum, delectus rerum. Sapiente, eveniet?</li>

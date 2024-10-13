@@ -62,13 +62,13 @@
   <div class="chap">属性函数 attr()</div>
   <dl class="nav-cont">
     <dt>说明</dt>
-    <dd>. 获取 <span class="warn">当前</span> 元素的属性值，在CSS样式中使用</dd>
+    <dd>. 获取 <span class="warn">当前</span> 元素的属性值，在 CSS 样式中使用</dd>
     <dd>. 也可以用在伪类元素里；在伪类元素里使用，它得到的是伪元素的原始元素的值</dd>
-    <dd>. attr()属性通常和自定义属性 data- 配合使用</dd>
-    <dd>. attr()函数可以和任何CSS属性一起使用；使用较多的是伪元素的 content 属性</dd>
-    <dd>. 还可以动态生成页面，实现部分js功能</dd>
+    <dd>. attr() 函数通常和自定义属性 data- 配合使用</dd>
+    <dd>. attr() 函数可以和任何 CSS 属性一起使用；使用较多的是伪元素的 content 属性</dd>
+    <dd>. 还可以动态生成页面，实现部分 JavaScript 功能</dd>
     <dd>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/attr">MDN - attr()</a></dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] attr()应用 - <a href="./opening.html">开课啦</a></dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] attr() 应用 - <a href="./opening.html">开课啦</a></dd>
     <dd>
       <pre>
 .title::after {
@@ -79,7 +79,7 @@
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./js/dom.html#skin">换肤</a></dd>
     <dd>. 获取元素</dd>
     <dd>. 修改元素属性</dd>
-    <dd>[<span class="iconfont icon-bell"></span>]如何使用纯CSS实现?</dd>
+    <dd>[<span class="iconfont icon-bell"></span>]如何使用纯 CSS 实现?</dd>
     <dd>
       <pre>
 &lt;div&gt;
@@ -113,15 +113,15 @@ btns.forEach(item =&gt; {
     <dt>说明</dt>
     <dd>
       <div>. 使用全局变量或内联变量</div>
-      <div>. 变量以双--号开始，如--main-color</div>
-      <div>. 通常配合calc()函数一起运算</div>
+      <div>. 变量以双 -- 号开始，如 --main-color</div>
+      <div>. 通常配合 calc() 函数一起运算</div>
       <pre>var(custom-property-name[, value])</pre>
       <div>. custom-property-name：必需。自定义属性的名称，必需以 -- 开头</div>
       <div>. value：可选。备用值，在属性不存在的时候使用</div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/var">MDN - var()</a></div>
     </dd>
     <dt>使用全局CSS变量</dt>
-    <dd>. 如果变量定义在根选择器:root，则所有元素都可以使用-全局变量</dd>
+    <dd>. 如果变量定义在根选择器 :root，则所有元素都可以使用-全局变量</dd>
     <dd>. 如果变量定义在某个选择器，则只有该选择器选中的元素和它的所有后代元素使用-局部变量</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 定义并使用告警颜色</dd>
     <dd>
@@ -138,7 +138,7 @@ btns.forEach(item =&gt; {
     color: var(--txt-wran-color);
 }</pre>
     </dd>
-    <dt>使用内联CSS变量</dt>
+    <dt>使用内联 CSS 变量</dt>
     <dd>. 利用 style 在元素上定义，仅供当前元素使用</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 渐变背景</dd>
     <dd class="fn-var-bg">
@@ -168,7 +168,7 @@ btns.forEach(item =&gt; {
 }</pre>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>]
-      自适应布局-没有--left就使用48px；当元素left处于hover状态时，定义--left变量为30%</dd>
+      自适应布局 - 没有 --left 就使用48px；当元素 left 处于 hover 状态时，定义 --left 变量为30%</dd>
     <dd>
       <pre>
 .grid {
@@ -182,7 +182,7 @@ btns.forEach(item =&gt; {
 }</pre>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 自定义图形</dd>
-    <dd>. 在HTML中利用style属性为元素指定不同的旋转角度，在CSS中使用</dd>
+    <dd>. 在 HTML 中利用 style 属性为元素指定不同的旋转角度，在 CSS 中使用</dd>
     <dd>. 每个元素旋转120deg</dd>
     <dd>. 可以制作加载，参考实例 <a href="./animation.html">animation</a></dd>
     <dd class="fn-var-rot">
@@ -214,11 +214,11 @@ btns.forEach(item =&gt; {
   <dl class="nav-cont">
     <dt>说明</dt>
     <dd>
-      <div>. 利用 + - * / 四则运算的结果作为元素的CSS属性</div>
+      <div>. 利用 + - * / 四则运算的结果作为元素的 CSS 属性</div>
       <div>. 可以<span class="warn">直接使用单位</span>运算：绝对单位/像素）与相对单位/百分比/视口单位</div>
-      <div>. 为了和负值区分开来，+和-这两个运算符两侧需要额外添加一个空格，否则会报错</div>
+      <div>. 为了和负值区分开来，+ 和 - 这两个运算符两侧需要额外添加一个空格，否则会报错</div>
       <div>. * 和 / 不需要空格，但考虑到统一性，推荐加上空格</div>
-      <div>. 计算函数，使得CSS更像一门编程语言</div>
+      <div>. 计算函数，使得 CSS 更像一门编程语言</div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/calc">MDN - calc()</a></div>
       <pre>calc(100% - 20px);</pre>
     </dd>
@@ -265,20 +265,20 @@ html {
     <dd>. 锥向渐变 Conic-gradient()</dd>
     <dd>. 更多信息，请参考 <a href="./background3.html">渐变背景</a></dd>
     <dt>最大最小函数</dt>
-    <dd>. 最小函数min()</dd>
-    <dd>. 最小函数minmax()</dd>
+    <dd>. 最小函数 min()</dd>
+    <dd>. 最小函数 minmax()</dd>
     <dt>选择器函数</dt>
     <dd>. :nth-child()</dd>
     <dd>. :nth-of-type()</dd>
     <dd>. :has()</dd>
     <dd>. :is()</dd>
     <dd>. :where()</dd>
-    <dd>. 更多信息，请参考 <a href="./selector.html">selector</a></dd>
+    <dd>. 更多信息，请参考 <a href="./selector.html">选择器 - selector</a></dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
     <dt>总结</dt>
-    <dd>. 常见CSS函数的使用</dd>
+    <dd>. 常见 CSS 函数的使用</dd>
     <dt>作业</dt>
     <dd>. 使用函数优化个人网站，如定义颜色变量、使用颜色函数，添加并使用自定义属性</dd>
   </dl>

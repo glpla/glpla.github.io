@@ -17,16 +17,16 @@
     <span>&commat;Text</span>
     <span class="ham iconfont icon-menu"></span>
     <nav class="nav">
-      <a href="" style="--delay:0" class="nav-item">基本使用</a>
+      <a href="" style="--delay:0" class="nav-item">常见属性</a>
       <a href="" style="--delay:1" class="nav-item">自定义字体</a>
       <a href="" style="--delay:2" class="nav-item">字体图标</a>
       <a href="" style="--delay:3" class="nav-item">分栏布局</a>
     </nav>
   </header>
   <dl class="nav-cont">
-    <dt>基本样式 CSS</dt>
+    <dt>常见属性 Properties</dt>
     <dd>
-      <div>更多文字使用事项，请访问 <a href="http://www.webxq.com/webjc/51631.html">WEB中文字体应用指南</a>、<a
+      <div>. 更多文字使用事项，请访问 <a href="http://www.webxq.com/webjc/51631.html">WEB中文字体应用指南</a>、<a
           href="https://inkbotdesign.com/fonts-for-logo-design/">The 10 Best Fonts for Logo Design</a>
       </div>
       <table>
@@ -117,33 +117,29 @@
         </tr>
       </table>
     </dd>
-    <dd class="tips">
-      <div>Arial：西文常见的无衬线字体</div>
-      <div>sans-serif：系统默认的无衬线字体</div>
-    </dd>
     <dd>
-      <div>确保首先使用最适合显示中文的字体，然后是英文或其他语言的字体</div>
+      <div>. 确保首先使用最适合显示中文的字体，然后是英文或其他语言的字体</div>
       <pre>font-family: "微软雅黑", "Microsoft YaHei", Quicksand, Arial, Helvetica, sans-serif;</pre>
-      <div>英文优先，如代码</div>
+      <div>. 英文优先，如代码</div>
       <pre>font-family: 'Quicksand', Helvetica, sans-serif;</pre>
       <pre>text-shadow: h-shadow v-shadow blur color;</pre>
       <pre>-webkit-text-stroke: length color;</pre>
-      <div>&lt;a&gt;和&lt;form&gt;相关元素无法自动继承父级字体属性，需要显式的设置或指定继承</div>
+      <div>. &lt;a&gt; 和 &lt;form&gt; 相关表单元素无法自动继承父级字体属性，需要显式的设置或指定继承</div>
       <pre>
 a,
 input,
 button {
-  color: inherit;
   font: inherit;
+  color: inherit;
 }      </pre>
     </dd>
-    <dd id="flex" class="example-sn"><a href="./demo/cover.html">论文封面</a></dd>
+    <dd id="flex">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/cover.html">论文封面</a></dd>
     <dd>
       <div>. 边框 border</div>
       <div>. 文本对齐 text-align</div>
       <div>. 变换 transform</div>
     </dd>
-    <dd id="flex" class="example-sn">入党誓词</dd>
+    <dd id="flex">[<span class="iconfont icon-keyboard"></span>] 入党誓词</dd>
     <dd class="sn">
       <div>左右|两列布局：浮动 float、定位 position、弹性盒子布局 flex、网格布局 grid</div>
       <div>图片的使用：&lt;img&gt;、background-image</div>
@@ -167,14 +163,14 @@ button {
         <p class="dot-text">《中国共产党章程》第一章第六条规定：预备党员必须面向党旗进行入党宣誓。</p>
       </div>
     </dd>
-    <dd class="example-sn"> <a href="./filter.html#hue">霓虹灯</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./filter.html#hue">霓虹灯</a></dd>
     <dd>.多重文本阴影 text-shadow</dd>
     <dd>.帧动画 animation</dd>
-    <dd class="example-sn"> <a href="./demo/acc_target.html#item1">古诗欣赏</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/acc_target.html#item1">古诗欣赏</a></dd>
     <dd>.文字方向</dd>
     <dd>.超链接 &lt;a&gt;</dd>
     <dd>.目标选择器 :target</dd>
-    <dd class="example-sn"> 文字阴影</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 文字阴影</dd>
     <dd>
       <div>.在浅色背景上使用深色文字时，在底部加上浅色投影通常效果最佳</div>
       <div>.在深色背景上使用浅色文字时，在底部加上深色投影通常效果最佳</div>
@@ -197,7 +193,7 @@ button {
     text-shadow: 0 2px 2px #fff2;
 }</pre>
     </dd>
-    <dd class="example-sn"> 描边</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 描边</dd>
     <dd>
       <div class="txt-stroke">遇见最好的自己</div>
       <pre>
@@ -215,6 +211,7 @@ button {
   </dl>
   <div class="chap">自定义字体 @fontface</div>
   <dl class="nav-cont">
+    <dt>本地字体</dt>
     <dd>
       <div>.使用 @font-face 定义字体</div>
       <div>.避免用户本地没有页面使用的特定字体</div>
@@ -222,8 +219,8 @@ button {
       <div>.多个字体效果应该分别定义，字体名字保持一致</div>
       <div>.仅在用户端浏览页面时临时下载使用；关闭浏览器后，字体被移除</div>
       <div>.中文字体通常比较大，字体下载时，需要时间，所以页面渲染不会立即完成，影响客户体验；请谨慎使用</div>
-      <div>.字体的定义通常放在单独的css文件，需要的时候引入；注意路径</div>
-      <div>1. 定义 - 还可以指定颜色 color、大小 font-size等属性</div>
+      <div>.字体的定义通常放在单独的 CSS 文件，需要的时候引入</div>
+      <div>1. 定义 - 还可以指定颜色 color、大小 font-size 等属性</div>
       <pre>
 @font-face {
     font-family: font_name;
@@ -233,15 +230,7 @@ button {
       <div>2. 引用 - 也可以引用时再指定其它属性</div>
       <pre>@import url('xxx.css');</pre>
     </dd>
-    <dt>常用字体格式</dt>
-    <dd class="sn">
-      <div>TrueTypeFont格式(.ttf)</div>
-      <div>OpenType格式(.otf)</div>
-      <div>Web Open Font格式(.woff)</div>
-      <div>Embedded Open Type格式(.eot)</div>
-      <div>SVG格式(.svg)</div>
-    </dd>
-    <dd class="example-sn">Poppins - 分轻型、普通和加粗字体，具体要看提供的字体文件有什么类型</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 定制西文字体 - Poppins；分轻型、普通和加粗字体，具体要看提供的字体文件有什么类型</dd>
     <dd>
       <pre>
 @font-face {
@@ -262,7 +251,7 @@ button {
   src: url(../fonts/Poppins/Poppins-Bold.ttf) format('ttf');
 }</pre>
     </dd>
-    <dd class="example-sn"> 定制中文字体 - 禹卫行书；4.8M的字体文件，用户浏览时，字体下载到本地花费了1.9分钟</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 定制中文字体 - 禹卫行书；4.8M的字体文件，用户浏览时，字体下载到本地花费了1.9分钟</dd>
     <dd>
       <div class="core">社会主义核心价值观</div>
       <figure>
@@ -291,22 +280,22 @@ button {
         4px 4px 8px #333;
 }</pre>
     </dd>
-    <dd class="example-sn"> <a href="./framework/googlefont.html">GoogleFonts字体</a></dd>
+    <dt>线上字体</dt>
+    <dd><a href="./framework/googlefont.html">字体 - GoogleFonts</a></dd>
   </dl>
   <div class="chap">字体图标 Icon</div>
   <dl class="nav-cont">
-    <dd class="sn">
-      <div><a href="./framework/iconfont.html">Iconfont 阿里字体图标</a></div>
-      <div><a href="./framework/fontawesome.html">FontAwesome 字体图标</a></div>
-      <div><a href="https://github.com/Remix-Design/RemixIcon">Remix Icon</a></div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/login_deer.html">登录表单</a></dd>
+    <dt><a href="./framework/iconfont.html">Iconfont 阿里字体图标</a></dt>
+    <dt><a href="./framework/fontawesome.html">FontAwesome 字体图标</a></dt>
+    <dt><a href="https://yesicon.app/">Yesicon</a></dt>
+    <dt><a href="https://boxicons.com/">Boxicons</a></dt>
+    <dt><a href="https://github.com/Remix-Design/RemixIcon">Remix Icon</a></dt>
   </dl>
   <div class="chap">分栏布局 Columns</div>
   <dl class="nav-cont">
-    <dd>.将大块文字分为若干栏，增加阅读性</dd>
-    <dd>.更多信息，请访问 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/columns">MDN - columns</a></dd>
     <dd>
+      <div>.将大块文字分为若干栏，增加阅读性</div>
+      <div>.更多信息，请访问 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/columns">MDN - columns</a></div>
       <table>
         <tr>
           <th>类别</th>
@@ -326,7 +315,7 @@ button {
         </tr>
         <tr>
           <td>column-span</td>
-          <td>分列元素的跨度，all通栏，如标题</td>
+          <td>分列元素的跨度，all 通栏，如标题</td>
         </tr>
         <tr>
           <td>column-gap</td>
@@ -334,11 +323,11 @@ button {
         </tr>
         <tr>
           <td>column-rule</td>
-          <td>分隔符样式，同border</td>
+          <td>分隔符样式，同 border</td>
         </tr>
         <tr>
           <td>column-fill</td>
-          <td>填充模式，默认是平均填充balance，也可以指定auto，逐列填充；通常需指定容器高度</td>
+          <td>填充模式，默认是平均填充 balance，也可以指定 auto，逐列填充；通常需指定容器高度</td>
         </tr>
       </table>
     </dd>
@@ -349,22 +338,34 @@ button {
       <div>. 分2栏，并指定最小宽度</div>
       <div>. 分栏后，应特别注意两侧的文字的对齐</div>
       <div>. 部分内容跨栏显示</div>
-      <pre>
-.col-block {
-  columns: 350px 2;
-}
-
-.col-block-heading {
-  column-span: all;
-  background-color: #e3f7ef;
-  margin-bottom: 1rem;
-}          </pre>
     </dd>
-    <dd class="example-sn"><a href="./demo/masonry.html">瀑布流 - Masonry</a>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./masonry.html">瀑布流 - Masonry</a>
     </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
+    <dt>字体</dt>
+    <dd class="sn">
+      <div>Arial：西文常见的无衬线字体</div>
+      <div>sans-serif：系统默认的无衬线字体</div>
+    </dd>
+    <dt>常用字体格式</dt>
+    <dd class="sn">
+      <div>TrueTypeFont格式(.ttf)</div>
+      <div>OpenType格式(.otf)</div>
+      <div>Web Open Font格式(.woff)</div>
+      <div>Embedded Open Type格式(.eot)</div>
+      <div>SVG格式(.svg)</div>
+    </dd>
+    <dt>常用英文字体</dt>
+    <dd class="sn">
+      <div>Michroma</div>
+      <div>Popins</div>
+      <div>monospace</div>
+      <div>Roboto</div>
+      <div>Lato</div>
+      <div>Fira</div>
+    </dd>
     <dt>总结</dt>
     <dd class="sn">
       <div>基本使用</div>
