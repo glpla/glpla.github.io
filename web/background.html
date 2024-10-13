@@ -40,7 +40,7 @@ background-color: hsla(9, 100%, 64%, .8);</pre>
     <dt>背景图片 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-image">Background-image</a></dt>
     <dd>
       <div>. 可以使用传统的图片作为背景，也可以使用 <a href="./background3.html">渐变背景 - 线性渐变、径向渐变、锥向渐变</a> 创建背景图片</div>
-      <div>. 可以使用多个背景图片，使用逗号;分隔；先指定的图片会在前面</div>
+      <div>. 可以使用多个背景图片，使用 <span class="warn">逗号;</span> 分隔；先指定的图片会在前面</div>
       <div>. 应用非常广泛。如使用透明色渐变添加蒙版、百叶窗等</div>
       <div>[<span class="iconfont icon-bangzhu2"></span>] 有了 &lt;img&gt;，为什么还需要使用这个属性？</div>
       <!-- <div>. 功能更强大、操作更丰富</div> -->
@@ -58,16 +58,19 @@ background-image: linear-gradient(transparent, #000), url(./imgs/2019middle.jpg)
     <dt>背景图片位置 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-position">Background-position</a>
     </dt>
     <dd>
-      <div>. 根据图片坐标/位置显示指定的内容；默认从左上角开始</div>
+      <div>. 根据图片坐标/位置显示指定的内容；默认从左上角开始 - relative to the edges of an element's box</div>
       <div>. 可以使用关键字，如 top、left、right、bottom</div>
       <div>. 也可以使用具体数字或百分比</div>
       <div>. 还可以关键字和数字、百分比组合使用</div>
+      <div>. 如果只指定了一个方向，另外一个方向默认是 center 或 50%</div>
+    </dd>
     <dt>背景图片大小 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-size">Background-size</a></dt>
     <dd>
       <div>. 背景图片的大小</div>
       <pre>background-size: contain | cover | auto | length | percentage</pre>
-      <div>. contain：包含图片，即<span class="warn">完全</span> 显示图片；元素背景易出现留白</div>
-      <div>. cover：<span class="warn">等比例最大化</span> 显示图片；元素背景被占满、图片可能被裁剪</div>
+      <div>. contain：包含图片，即 <span class="warn">完全</span> 显示图片；元素背景易出现留白 - Scales the image as large as possible within
+        its container without cropping or stretching the image</div>
+      <div>. cover：<span class="warn">等比例最大化</span> 显示图片；元素背景被占满、图片可能被裁剪 - leaving no empty space</div>
       <div>. percentage：参考元素大小设置背景图片大小；200%就是2倍的元素大小；50%就是元素的一半</div>
       <div>. length：固定数值设置背景图片大小</div>
       <div>. 默认情况下，背景图片按照图片原始大小显示；当元素尺寸和背景图片尺寸不一致时，就会出现背景图片重复铺贴或背景图片被裁剪的情况</div>
@@ -115,21 +118,14 @@ background-image: linear-gradient(transparent, #000), url(./imgs/2019middle.jpg)
   <dl>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/form3.html">带背景的登录表单</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/paper.html">带背景的表格</a></dd>
-    <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/sprite.html">精灵图 -
-        sprite</a>，也叫雪碧图；一个图整合多个图形元素，用于减少图片的网络请求；利用位置显示指定的部分；早期应用较多，现在基本不用了</div>
-    <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/screen.html">屏风图 - screen</a> -
-      利用位置显示不同的位置，最后拼接为完整的图片</div>
-    <pre>
-background-position: center;
-background-position: 50%;
-background-position: top right;
-background-position: top;
-background-position: top 10px right 10px;
-background-position: 25% 75%;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./index.html">模拟目录页</a> - 水平方向平铺</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./select.html">定制下拉菜单</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/sprite.html">精灵图 -
+        sprite</a> - 也叫雪碧图；一个图整合多个图形元素，用于减少图片的网络请求；利用位置显示指定的部分；早期应用较多。随着互联网的提速和字体图标的广泛应用，现在基本不用了</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/screen.html">屏风图 - screen</a> -
+      多个元素分别显示同一张图的不同部分，即利用位置显示不同的部分，最后拼接为完整的图片</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./index.html">模拟目录页</a> - 水平方向平铺；可以使用使用普通元素或 <a
+        href="./selector_ele.html">伪元素</a></dd>
     <dd>
-      <div>这里使用 <a href="./selector_ele.html">伪元素</a> 实现；也可以使用普通元素</div>
       <pre>
 .item::before {
   content: '';
@@ -140,7 +136,8 @@ background-position: 25% 75%;</pre>
   order: 1;
 }      </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 多背景 - 背景图片分别定位于左上角和右下角</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 多背景 - 背景图片分别定位于左上角和右下角；更多案例，请访问 <a href="./index.html">Web首页</a>
+    </dd>
     <dd>
       <div class="multi-img"></div>
       <div>1. 独立属性 - 图片属性要一一对应</div>
@@ -157,8 +154,17 @@ background-position: 25% 75%;</pre>
       <div>2. 复合属性 - background-color放在后面；可读性差</div>
       <pre>background: url(../imgs/logo0.png) right bottom/50px no-repeat, url(../imgs/logo1.png) top left/50px no-repeat;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 多背景 - 一部分在左边；一部分在右边；详情见 <a
-        href="./index.html">Web首页</a>；也可以使用3个盒子实现</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 多背景 - 遮罩图；在一个背景上叠加一个透明的背景，可以使用渐变背景</dd>
+    <dd>
+      <pre>
+.img {
+  width: 800px;
+  height: 600px;
+  background-image: linear-gradient(transparent, #000), url(./imgs/2019middle.jpg);
+  background-size: cover;
+}        </pre>
+      <div class="size mask"></div>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 多背景 - 百叶窗；自动重复</dd>
     <dd>
       <div>[<span class="iconfont icon-bangzhu2"></span>] 如果指定位置position和不重复no-repeat会怎么样？</div>
@@ -170,17 +176,6 @@ background-position: 25% 75%;</pre>
   background-size: 100% 6px, cover;
 }        </pre>
       <div class="size blinds"></div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 遮罩图 - 在一个背景上叠加一个透明的背景</dd>
-    <dd>
-      <pre>
-.img {
-  width: 800px;
-  height: 600px;
-  background-image: linear-gradient(transparent, #000), url(./imgs/2019middle.jpg);
-  background-size: cover;
-}        </pre>
-      <div class="size mask"></div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="/index.html">Banner滑动</a>、<a
         href="./demo/up2u.html">按钮背景变化</a></dd>
