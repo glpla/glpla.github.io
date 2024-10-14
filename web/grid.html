@@ -31,7 +31,8 @@
     <dt>概述 Overview</dt>
     <dd>.更灵活：支持二维布局：对列和行进行布局</dd>
     <dd>.类似早期的table布局；table本来是做数据展示的，所以在布局上有明显的缺陷：非语义化、布局代码冗余，以及不好维护、渲染性能等问题，目前table布局已被抛弃</dd>
-    <dd>.更多细节，请参考 <a href="https://www.w3cschool.cn/doc_css/css-css_grid.html?lang=en" target="_blank">w3cschool -
+    <dd>.更多细节，请参考 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid">MDN - grid</a>、<a
+        href="https://www.w3cschool.cn/doc_css/css-css_grid.html?lang=en" target="_blank">W3Cschool -
         grid</a>、<a href="https://mp.weixin.qq.com/s/3cxv1y14OLcPJjEN4f_OiA">如何用一行 CSS 实现 10 种现代布局</a>
     </dd>
     <dd>.更多网格布局实现，请访问 <a href="./framework/isotope.html">Isotope</a></dd>
@@ -129,22 +130,22 @@
     <dd>
       <pre>grid-auto-flow: row | column | dense | row dense | column dense;</pre>
       <div>网格项自动放置的顺序和方式 - 指定工作流的方向，默认是按行 row 的顺序填充|行优先，从上到下，然后再到下一行</div>
-      <div>dense表示密集填充还是宽松填充</div>
+      <div>dense 表示密集填充还是宽松填充</div>
       <div>特别适合处理 <span class="warn">动态内容，如数量或大小不一</span> 或未明确指定位置的网格项</div>
       <div>通常是划分好格子后再指定方向；如容器划分3行3列，10个子项的排列方式</div>
       <img src="./imgs/grid0.png" alt="">
-      <p class="fig-sn">默认row排列 - 行优先</p>
+      <p class="fig-sn">默认 row 排列 - 行优先</p>
       <img src="./imgs/grid1.png" alt="">
-      <p class="fig-sn">column排列 - 列优先</p>
+      <p class="fig-sn">column 排列 - 列优先/瀑布流</p>
     </dd>
     <dt>grid-template</dt>
     <dd>.复合属性；同时设置列column、行rows，多见于页面整体布局，见后续案例</dd>
     <dt>grid-template-areas</dt>
-    <dd>.将容器划分区域</dd>
-    <dd>.每个子项指定对应的区域</dd>
-    <dd>.需配合grid-template-columns和grid-template-rows指定各区域大小，便于调整宽度和合并</dd>
-    <dd>.也可以由子项的跨行、跨列实现。见后续案例</dd>
     <dd>
+      <div>.将容器划分区域</div>
+      <div>.每个子项指定对应的区域</div>
+      <div>.需配合 grid-template-columns 和 grid-template-rows 指定各区域大小，便于调整宽度和合并</div>
+      <div>.也可以由子项的跨行、跨列实现。见后续案例</div>
       <pre>
 .page {
     display: grid;
@@ -166,18 +167,24 @@
     <dt>justify-items、align-items</dt>
     <dd>.子项在格子中的分布：上中下</dd>
     <dt>place-items</dt>
-    <dd>.复合属性，同时指定justify-items和align-items</dd>
-    <dd>.如果项目大小 &lt; 划分的单元格，可以指定其位置，如水平垂直居中center</dd>
+    <dd>
+      <div>.复合属性，同时指定justify-items和align-items</div>
+      <div>.如果项目大小 &lt; 划分的单元格，可以指定其位置，如水平垂直居中center</div>
+    </dd>
     <dt>justify-content、align-content</dt>
-    <dd>.根据子项实际大小|content，在单元格内水平|垂直方向上的对齐</dd>
-    <dd>.子项大小一般应小于单元格尺寸</dd>
+    <dd>
+      <div>.根据子项实际大小|content，在单元格内水平|垂直方向上的对齐</div>
+      <div>.子项大小一般应小于单元格尺寸</div>
+    </dd>
     <dt>place-content</dt>
     <dd>.复合属性，同时指定justify-content和align-content</dd>
     <dt>gap</dt>
-    <dd>.单元格间距；非常好用</dd>
-    <dd>.row-gap:行间距</dd>
-    <dd>.column-gap:列间距</dd>
-    <dd>.容器大小包含了gap的尺寸</dd>
+    <dd>
+      <div>.单元格间距；非常好用</div>
+      <div>.row-gap:行间距</div>
+      <div>.column-gap:列间距</div>
+      <div>.容器大小包含了gap的尺寸</div>
+    </dd>
   </dl>
   <div class="chap">子项 Item</div>
   <dl class="nav-cont">
@@ -207,7 +214,7 @@
     grid-template-columns: 8rem 1fr;
     gap: 1rem;
 }</pre>
-      <p>配合minmax()函数动态调整侧边栏宽度</p>
+      <div>配合minmax()函数动态调整侧边栏宽度</div>
       <pre>
 .aside {
     display: grid;
@@ -252,17 +259,17 @@
   min-height: 100vh;
 }</pre>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 全站布局；更多案例请访问 <a href="./demo/site.html">全站布局</a></dd>
-    <dd>这里没有采用区域划分，而是配合跨列使用</dd>
-    <dd>.如果指定子项高度，当子项的内容超过子项大小时，默认情况仍然会撑开，并不能直接出现滚动条；解决的方案是为容器和子项都设置自动溢出</dd>
-    <dd class="page-adv">
-      <div class="header">header</div>
-      <div class="left">left</div>
-      <div class="main">main</div>
-      <div class="right">right</div>
-      <div class="footer">footer</div>
-    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 全站布局；更多案例请访问 <a href="./demo/site.html">全站布局</a></dd>
     <dd>
+      <div>这里没有采用区域划分，而是配合跨列使用</div>
+      <div>.如果指定子项高度，当子项的内容超过子项大小时，默认情况仍然会撑开，并不能直接出现滚动条；解决的方案是为容器和子项都设置自动溢出</div>
+      <div class="page-adv">
+        <div class="header">header</div>
+        <div class="left">left</div>
+        <div class="main">main</div>
+        <div class="right">right</div>
+        <div class="footer">footer</div>
+      </div>
       <pre>
   .page-adv {
     display: grid;
@@ -408,7 +415,6 @@
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/QWobROj">全站导航 -
         CodePen</a></dd>
     <dd>.高度固定；按列排列</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/form.html">表单设计</a></dd>
   </dl>
   <div class="chap">对齐 Align</div>
   <dl class="nav-cont">
@@ -423,7 +429,7 @@
       <div>2. 子项的大小和划分的格子大小不匹配</div>
       <div>.对齐区分是子项 items 对齐还是内容 content 对齐</div>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 情况1：默认的对齐</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 情况1：默认的对齐</dd>
     <dd>
       <div>.不指定容器高度：由子项撑开</div>
       <div>.宽度上，全部划分完，且等分各列</div>
@@ -463,10 +469,10 @@
       <div>海口经济学院</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 情况2：指定容器尺寸的对齐</dd>
-    <dd>.指定容器高度；可以指定垂直方向上的对齐</dd>
-    <div>.容器高度由子项换行撑满</div>
-    <div>.没有显式指定子项高度</div>
     <dd>
+      <div>.指定容器高度；可以指定垂直方向上的对齐</div>
+      <div>.容器高度由子项换行撑满</div>
+      <div>.没有显式指定子项高度</div>
       <figure>
         <pre>
 .case1 {

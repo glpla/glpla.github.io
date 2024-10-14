@@ -21,16 +21,16 @@
     <dd>
       <div>. 兼有固定定位和相对定位的特性</div>
       <div>. 不会脱离文档流；但是层级提升 - 比普通元素高</div>
-      <div>. 有参考：通常是父元素；如果没有特别指定容器，则相对于离自己 <span class="warn">最近的</span> 带有滚动条的祖先元素；如果都没有，则以&lt;body&gt;为参考</div>
+      <div>. 有参考：通常是父元素；如果没有特别指定容器，则相对于离自己 <span class="warn">最近的</span> 带有滚动条的祖先元素；如果都没有，则以 &lt;body&gt; 为参考</div>
       <div>. 有滚动：容器的内容，包括粘性元素，总高度要大于容器，这样才能滚动起来，容器才会出现滚动条；通常粘性元素通常是滚动容器的直接孩子</div>
-      <div>. 有距离：必须指定粘性元素到容器的位置：left、top、right、bottom之一；多使用top</div>
-      <div>. 其父元素不能设置overflow:hidden</div>
-      <div>. 适合banner/swiper + 主导航 + 内容的网页。网页滚动时候，banner移出，导航保留/黏贴在顶端/吸顶，内容也逐步移出</div>
+      <div>. 有距离：必须指定粘性元素到容器的位置：left、top、right、bottom之一；多使用 top</div>
+      <div>. 其父元素不能设置 overflow:hidden</div>
+      <div>. 适合 banner/swiper + 主导航 + 内容的网页。网页滚动时候，banner 移出，导航保留/黏贴在顶端/吸顶，内容也逐步移出</div>
       <div>. 注意 <span class="warn">z-index</span> 的影响，应确保粘性元素位于上层</div>
-    </dd>
-    <dd class="tips">
-      <div>Sticky elements are "sticky" relative to the nearest ancestor with a "scrolling mechanism", which is
-        determined by its ancestors' position property.</div>
+      <div class="tips">
+        <div>Sticky elements are "sticky" relative to the nearest ancestor with a "scrolling mechanism", which is
+          determined by its ancestors' position property.</div>
+      </div>
     </dd>
   </dl>
   <div class="chap">案例 cases</div>
@@ -40,7 +40,7 @@
       <div>. 页面没有滚动时，导航/标题停留在原来位置</div>
       <div>. 当页面向下滚动时，导航/标题驻留/黏住在顶部一定位置</div>
       <div>. 当页面向上滚动时，导航/标题返回其原来位置</div>
-      <div>. 示例中，使用CSS变量指定导航的高度为10vh</div>
+      <div>. 示例中，使用 CSS 变量指定导航的高度为10vh</div>
       <pre>
 header {
   position: sticky;
@@ -62,7 +62,7 @@ header {
     <dd>
       <div>. 不能直接对表格使用粘性定位</div>
       <div>. 使用额外的容器包裹表格，当表格内容超出容器高度时，表格的表头粘性定位在容器顶部</div>
-      <div>. 分别对&lt;caption&gt;和&lt;thead&gt;使用了粘性定位</div>
+      <div>. 分别对 &lt;caption&gt; 和 &lt;thead&gt; 使用粘性定位</div>
       <pre>
 table caption {
   position: sticky;
@@ -123,8 +123,8 @@ window.addEventListener("scroll", () => {
     <dd>1. 利用粘性定位属性，完善个人网站；</dd>
     <div>2. 表格首列固定如何实现？同时固定首行和首列呢？</div>
     <div>3. 办公文档 Excel 中，如何冻结表头？</div>
-    <pre>
-<!-- th {
+    <!-- <pre>
+th {
   position: sticky;
   top: 0;
   background-color: #f1f2f3;
