@@ -1,5 +1,12 @@
 :root {
-  --url: url(../../imgs/bg.jpg);
+  --url: url(../imgs/bg.jpg);
+}
+
+header {
+  position: relative;
+  top: initial;
+  height: 178px;
+  background: initial;
 }
 
 .tile {
@@ -85,4 +92,29 @@
 
 .tile-4.adv div {
   background-position: calc(var(--pos)*100%/(4 - 1));
+}
+
+.screen {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 4px;
+}
+
+.seg {
+  width: calc(var(--w-width)/6);
+  height: 100%;
+  background-image: url(../imgs/banner.jpg);
+  background-repeat: no-repeat;
+  background-size: 600% 100%;
+  /* n-1/6-1 */
+  background-position: calc(var(--pos)*100%/5);
+  transition: 0.5s;
+}
+
+.seg:hover {
+  transform: scale(1.06);
 }
