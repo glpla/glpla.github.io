@@ -162,20 +162,19 @@
   grid-area: nav;
 }</pre>
     </dd>
-    <dt>justify-items、align-items</dt>
-    <dd>.子项在格子中的分布：上中下</dd>
-    <dt>place-items</dt>
+    <dt>justify-items、align-items、place-items</dt>
     <dd>
+      <div>.子项在单元格的对齐：上中下</div>
       <div>.复合属性，同时指定justify-items和align-items</div>
-      <div>.如果项目大小 &lt; 划分的单元格，可以指定其位置，如水平垂直居中center</div>
+      <div>.如果子项大小 &lt; 划分的单元格，可以指定其位置，如水平垂直居中center</div>
     </dd>
-    <dt>justify-content、align-content</dt>
+    <dt>justify-content、align-content、place-content</dt>
     <dd>
-      <div>.根据子项实际大小|content，在单元格内水平|垂直方向上的对齐</div>
-      <div>.子项大小一般应小于单元格尺寸</div>
+      <div>.根据子项实际大小|content，在单元格内的水平|垂直方向上的对齐</div>
+      <div>.复合属性，同时指定 justify-content 和 align-content</div>
+      <div>.子项大小小于单元格尺寸时，可以考虑其分布</div>
+      <div>.也可以嵌套一个元素充当容器，由它完成内容的分布</div>
     </dd>
-    <dt>place-content</dt>
-    <dd>.复合属性，同时指定 justify-content 和 align-content</dd>
     <dt>gap</dt>
     <dd>
       <div>.单元格间距；非常好用</div>
@@ -432,7 +431,7 @@
       <div>.不指定容器高度：由子项撑开</div>
       <div>.宽度上，全部划分完，且等分各列</div>
       <div>.只需指定水平方向上的对齐；没有必要指定垂直方向的对齐</div>
-      <div>.除stretch外，其它对齐方式相当于为每个item指定width为max-content，由其内容决定大小</div>
+      <div>.除 stretch 外，其它对齐方式相当于为每个 item 指定 width 为 max-content，由其内容决定大小</div>
       <pre>
 .case0 {
     display: grid;
