@@ -211,7 +211,7 @@ button {
   </dl>
   <div class="chap">自定义字体 @fontface</div>
   <dl class="nav-cont">
-    <dt>本地字体</dt>
+    <dt>概述</dt>
     <dd>
       <div>.使用 @font-face 定义字体</div>
       <div>.避免用户本地没有页面使用的特定字体</div>
@@ -219,36 +219,52 @@ button {
       <div>.多个字体效果应该分别定义，字体名字保持一致</div>
       <div>.仅在用户端浏览页面时临时下载使用；关闭浏览器后，字体被移除</div>
       <div>.中文字体通常比较大，字体下载时，需要时间，所以页面渲染不会立即完成，影响客户体验；请谨慎使用</div>
-      <div>.字体的定义通常放在单独的 CSS 文件，需要的时候引入</div>
-      <div>1. 定义 - 还可以指定颜色 color、大小 font-size 等属性</div>
+      <div>.字体的定义通常放在单独的 CSS 文件，需要的时候引入；也可以直接定义并使用</div>
+      <div>.除了自定义字体外，还可以直接使用在线字体，如 <a href="./framework/googlefont.html">谷歌字体 - GoogleFonts</a></div>
+    </dd>
+    <dt>基本使用</dt>
+    <dd class="sn">
+      <div>定义字体样式文件 sample.css</div>
+      <p>.可以使用本地字体，也可以使用在线字体</p>
+      <p>.可以指定颜色 color、大小 font-size 等属性，也可以使用时再指定</p>
+      <p>.建议指定字体格式</p>
       <pre>
 @font-face {
     font-family: font_name;
-    font-weight: 300;
     src: url(font_url) format("TrueType")
+    font-weight: normal;
+    font-style: normal;
 }</pre>
-      <div>2. 引用 - 也可以引用时再指定其它属性</div>
-      <pre>@import url('xxx.css');</pre>
+      <div>引用；注意路径</div>
+      <p>.在 .css 中引入</p>
+      <pre>@import url('sample.css');</pre>
+      <p>.在 .html 中引入</p>
+      <pre>&lt;link rel="stylesheet" href="sample.css" /&gt;</pre>
+      <div>使用</div>
+      <pre>
+body {
+  font-family: font_name;
+}      </pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 定制西文字体 - Poppins；分轻型、普通和加粗字体，具体要看提供的字体文件有什么类型</dd>
     <dd>
       <pre>
 @font-face {
   font-family: 'Poppins';
+  src: url(../fonts/Poppins/Poppins-light.ttf) format('TrueType');
   font-weight: 300;
-  src: url(../fonts/Poppins/Poppins-light.ttf) format('ttf');
 }
 
 @font-face {
   font-family: 'Poppins';
+  src: url(../fonts/Poppins/Poppins-Regular.ttf) format('TrueType');
   font-weight: 400;
-  src: url(../fonts/Poppins/Poppins-Regular.ttf) format('ttf');
 }
 
 @font-face {
   font-family: 'Poppins';
+  src: url(../fonts/Poppins/Poppins-Bold.ttf) format('TrueType');
   font-weight: 600;
-  src: url(../fonts/Poppins/Poppins-Bold.ttf) format('ttf');
 }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 定制中文字体 - 禹卫行书；4.8M的字体文件，用户浏览时，字体下载到本地花费了1.9分钟</dd>
@@ -280,13 +296,11 @@ button {
         4px 4px 8px #333;
 }</pre>
     </dd>
-    <dt>线上字体</dt>
-    <dd><a href="./framework/googlefont.html">字体 - GoogleFonts</a></dd>
   </dl>
   <div class="chap">字体图标 Icon</div>
   <dl class="nav-cont">
-    <dt><a href="./framework/iconfont.html">Iconfont 阿里字体图标</a></dt>
-    <dt><a href="./framework/fontawesome.html">FontAwesome 字体图标</a></dt>
+    <dt><a href="./framework/iconfont.html">Iconfont</a></dt>
+    <dt><a href="./framework/fontawesome.html">FontAwesome</a></dt>
     <dt><a href="https://yesicon.app/">Yesicon</a></dt>
     <dt><a href="https://boxicons.com/">Boxicons</a></dt>
     <dt><a href="https://github.com/Remix-Design/RemixIcon">Remix Icon</a></dt>
@@ -351,11 +365,12 @@ button {
     </dd>
     <dt>常用字体格式</dt>
     <dd class="sn">
-      <div>TrueTypeFont格式(.ttf)</div>
-      <div>OpenType格式(.otf)</div>
-      <div>Web Open Font格式(.woff)</div>
-      <div>Embedded Open Type格式(.eot)</div>
-      <div>SVG格式(.svg)</div>
+      <div>Embedded Open Type - EOT；扩展名：.eot；主要用于 IE</div>
+      <div>TrueType - TTF；扩展名 .ttf；文件较大，压缩效果不如 WOFF 和 WOFF2；广泛支持，适合所有现代浏览器</div>
+      <div>Web Open Font Format - WOFF；扩展名 .woff；专门为 Web 设计</div>
+      <div>Web Open Font Format 2 - WOFF2；扩展名 .woff2；WOFF 的改进版；更小的体积、更好的性能、更快的加载速度</div>
+      <div>OpenType - OTF；扩展名：.otf；压缩效果不如 WOFF 和 WOFF2</div>
+      <div>SVG - 扩展名： .svg；支持透明度和渐变；文件体积大；现代浏览器已不再推荐使用</div>
     </dd>
     <dt>常用英文字体</dt>
     <dd class="sn">

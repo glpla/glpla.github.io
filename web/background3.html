@@ -36,9 +36,9 @@
     <dd>
       <div>. 线性渐变 Linear Gradients - 向下/向上/向左/向右/对角方向</div>
       <div>. 创建一个线性渐变，至少定义两个色块</div>
-      <div>. 可以指定色块的大小/范围和方向</div>
+      <div>. 可以指定色块的大小/范围和方向；可以使用 deg 或关键字，如 left、right、top、bottom</div>
       <div>. 0deg是从下到上↑，顺时针方向增加；默认是180deg，从上到下↓</div>
-      <div>. 不特别指明都是从0开始，到100%结束；这俩个位置的值可以省略</div>
+      <div>. 不特别指明都是从0开始，到100%结束；这俩个位置的值 <span class="warn">可以省略</span></div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient">MDN -
           linear-gradient</a></div>
       <pre>background-image: linear-gradient(direction, color-stop1, color-stop2, ...);</pre>
@@ -48,15 +48,21 @@
       <div class="basic default-bg"></div>
       <pre>
 // 默认渐变|180deg：从上到下
-background-image: linear-gradient(#f40, #ff0);</pre>
+background-image: linear-gradient(#f40, #ff0);
+//或
+background-image: linear-gradient(to bottom, #f40, #ff0);</pre>
       <div class="basic deg0-bg"></div>
       <pre>
 // 0deg渐变：从下到上；0deg并不是向右
-background-image: linear-gradient(0deg, #f40, #ff0);</pre>
+background-image: linear-gradient(0deg, #f40, #ff0);
+//或
+background-image: linear-gradient(to top, #f40, #ff0);</pre>
       <div class="basic deg45-bg"></div>
       <pre>
 // 45deg渐变：左下到右上
-background-image: linear-gradient(0deg, #f40, #ff0);</pre>
+background-image: linear-gradient(0deg, #f40, #ff0);
+//或
+background-image: linear-gradient(to top right, #f40, #ff0);</pre>
     </dd>
     <dt>断点渐变</dt>
     <dd>. 断点处使用相同的色块大小；使用0表示和前面色块的范围相同</dd>
@@ -118,7 +124,7 @@ background-repeat: no-repeat;
 }</pre>
     </dd>
     <dd class="tips">
-      <div>. 如果使用多个渐变，请使用复合属性background；可以单独指定不重复</div>
+      <div>. 如果使用多个渐变，请使用复合属性 background；可以单独指定不重复</div>
       <div>. 实际运用时，先画个草图，大概确定下背景图片的组成、大小和位置，再使用样式实现</div>
       <div>. 除此外，还有重复线性渐变：repeating-linear-gradient()</div>
     </dd>
