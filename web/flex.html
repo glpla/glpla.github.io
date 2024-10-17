@@ -25,16 +25,16 @@
   <dl>
     <dt>概念</dt>
     <dd>
-      <div>.具备块特性的弹性盒子</div>
       <div>.布局容器做布局的事</div>
+      <div>.将一个元素声明为弹性盒子后，该元素称为容器 container，其中的子元素为项目 item；内部直接子元素，如果是非块元素，将会变为块元素 block</div>
+      <div>.具备块特性的弹性盒子</div>
       <pre>display: flex;</pre>
       <div>.具备行内块特性的弹性盒子；特别适合处理图文混合这种大小不一致的结构，方便对齐</div>
       <pre>display: inline-flex;</pre>
-      <div>.将一个元素声明为弹性盒子后，该元素称为容器 container，其中的子元素为项目 item。容器元素可以：</div>
+      <div>.容器元素可以：</div>
       <div>.控制其直接子元素的排列方式 - 横排、竖排</div>
       <div>.控制其直接子元素的对齐方式 - 左、中、右还是上、中、下或者分散</div>
       <div>.控制其直接子元素渲染的先后顺序</div>
-      <div>.内部直接子元素，如果是非块元素，将会变为块元素 block</div>
       <div>.更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox">MDN -
           flexbox</a>、<a href="https://mp.weixin.qq.com/s/3cxv1y14OLcPJjEN4f_OiA">如何用一行 CSS 实现 10 种现代布局</a>
       </div>
@@ -47,50 +47,75 @@
     <dd>.弹性盒子/容器的属性</dd>
     <dt>flex-direction</dt>
     <dd>
-      <div>.<span class="warn">主轴 main axis</span>方向：默认是行 row</div>
-      <div>.反向可以应用到响应式开发中；如：桌面端 row 分布，左边是图，右边是表单；移动端时，可以调整为 column-reverse，优先展示表单</div>
       <pre>flex-direction: row | row-reverse | column | column-reverse;</pre>
+      <div>.<span class="warn">主轴 main axis</span> 方向：默认是行 row</div>
+      <div>.反向可以应用到响应式开发中；如：桌面端 row 分布，左边是图，右边是表单；移动端时，可以调整为 column-reverse，优先展示表单</div>
+      <img src="./imgs/flex1.png" alt="" loading="lazy">
+      <p class="fig-sn">flex-direction: row</p>
+      <img src="./imgs/flex2.png" alt="" loading="lazy">
+      <p class="fig-sn">flex-direction: column-reverse</p>
     </dd>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content">justify-content</a></dt>
     <dd>
-      <div>.<span class="warn">主轴 main axis</span>方向子项的分布，默认是flex-start</div>
-      <div>.有时候通过指定子项的margin为auto，也可以实现两端分布</div>
-      <div>.通常是<span class="warn">有剩余空间</span>才会涉及到分布</div>
       <pre>justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;</pre>
+      <div>.<span class="warn">主轴 main axis</span> 方向子项的分布，默认是 flex-start</div>
+      <div>.有时候通过指定子项的 margin 为 auto，也可以实现两端分布</div>
+      <div>.通常是<span class="warn">轴上有剩余空间</span>才会涉及到分布；如显示的指定了宽度，且小于容器宽度</div>
+      <img src="./imgs/flex3.png" alt="" loading="lazy">
+      <p class="fig-sn">justify-content: flex-start</p>
+      <img src="./imgs/flex4.png" alt="" loading="lazy">
+      <p class="fig-sn">justify-content: center</p>
+      <img src="./imgs/flex5.png" alt="" loading="lazy">
+      <p class="fig-sn">justify-content: space-between</p>
+      <img src="./imgs/flex7.png" alt="" loading="lazy">
+      <p class="fig-sn">justify-content: space-evenly</p>
+      <img src="./imgs/flex8.png" alt="" loading="lazy">
+      <p class="fig-sn">justify-content: space-around</p>
+      <img src="./imgs/flex6.png" alt="" loading="lazy">
+      <p class="fig-sn">justify-content: flex-end</p>
     </dd>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items">align-items</a></dt>
     <dd>
-      <div>.<span class="warn">交叉轴 cross
-          axis</span>方向子项的对齐，默认是stretch：所有元素的高度拉伸至和容器元素/最高的元素一致[为子项item添加背景可以直观的看出来]；其它选项则是根据自身的高度开始或结束对齐</div>
-      <div>.如果指定了或者继承了行高和高度一致，则已经是垂直方向居中</div>
-      <div>.通常是<span class="warn">有剩余空间</span>才会涉及到分布</div>
       <pre>align-items: stretch | center | flex-start | flex-end;</pre>
+      <div>.<span class="warn">交叉轴 cross
+          axis</span> 方向子项的对齐，默认是 stretch：所有元素的高度拉伸至和容器元素/最高的元素一致[为子项 item 添加背景可以直观的看出来]；其它选项则是根据自身的高度开始或结束对齐</div>
+      <div>.如果指定了或者继承了行高和高度一致，则已经是垂直方向居中</div>
+      <div>.通常是<span class="warn">轴上有剩余空间</span>才会涉及到分布；如显示的指定了高度，且小于容器高度</div>
+      <img src="./imgs/flex12.png" alt="" loading="lazy">
+      <p class="fig-sn">align-items: stretch</p>
+      <img src="./imgs/flex9.png" alt="" loading="lazy">
+      <p class="fig-sn">align-items: flex-start</p>
+      <img src="./imgs/flex10.png" alt="" loading="lazy">
+      <p class="fig-sn">align-items: center</p>
+      <img src="./imgs/flex11.png" alt="" loading="lazy">
+      <p class="fig-sn">align-items: flex-end</p>
     </dd>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-content">align-content</a></dt>
     <dd>
       <div>.多行情况下，子项交叉轴 cross axis | 垂直方向的对齐</div>
       <div>.容器实际区域比子项大</div>
-      <div>.容器通常由子项撑开，特别是允许换行，多行的情况下 - This property has no effect on single line flex containers</div>
+      <div>.容器通常由子项撑开，特别是 <span class="warn">允许换行</span>，多行的情况下 - This property has no effect on single line flex
+        containers</div>
     </dd>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items">justify-items</a></dt>
-    <dd>弹性布局中，该属性被忽略 - In flexbox layouts, this property is ignored (more about alignment in flexbox)</dd>
-    <dd>网格布局grid中，该属性可以正常使用，所以更多的被当作是仅适用grid布局的属性</dd>
+    <dd>Flex 中，该属性被忽略 - In flexbox layouts, this property is ignored (more about alignment in flexbox)</dd>
+    <dd>Grid 中，该属性可以正常使用，所以更多的被当作是仅适用 Grid 的属性</dd>
     <dd class="tips">
       <div>justify-content 和 justify-items / justify-self 的主要区别在于前者控制整个容器的对齐方式，而后者控制单个项目或所有项目的对齐方式</div>
-      <div>在Flexbox中，没有justify-items或justify-self属性，因为Flexbox通过justify-content和align-items来控制项目的对齐和分布</div>
-      <div>justify-self和justify-items只在Grid布局中有效</div>
+      <div>在 Flex 中，没有 justify-items 或 justify-self 属性，因为 Flex 通过 justify-content 和 align-items 来控制项目的对齐和分布</div>
+      <div>justify-self 和 justify-items 只在 Grid 中有效</div>
     </dd>
     <dt>flex-wrap</dt>
     <dd>
       <div>.容器容纳不下子项时，是否换行</div>
-      <div>.默认不换行nowrap</div>
-      <div>.响应式布局中，使用自动换行wrap往往比网格grid布局更灵活；见后续布局一节</div>
+      <div>.默认不换行 nowrap</div>
+      <div>.响应式布局中，使用自动换行 wrap 往往比 Grid 更灵活；见后续布局一节</div>
       <pre>flex-wrap: nowrap | wrap | wrap-reverse;</pre>
     </dd>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap">gap</a></dt>
     <dd>
-      <div>.各子项的间隔；也叫gutter</div>
-      <div>.网格布局中也可以使用；非常爽</div>
+      <div>.各子项的间隔；也叫 gutter</div>
+      <div>.Grid 也可以使用；非常爽</div>
       <div>.微信小程序的弹性盒子好像不支持</div>
       <div>This property applies to multi-column, flex, and grid containers</div>
     </dd>
@@ -99,11 +124,11 @@
   <dl class="nav-cont">
     <dd>.
       <div>弹性盒子的直接子元素</div>
-      <div>flex对使用绝对定位的子项仍然具有布局的能力</div>
+      <div>Flex 对使用绝对定位的子项仍然具有布局的能力</div>
     </dd>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis">flex-basis</a></dt>
     <dd>
-      <div>.flex item在主轴上分配|预留的 <span class="warn">初始 initial</span> 大小，相当于指定了width。默认为auto，根据元素内容分配</div>
+      <div>.item 在主轴上分配|预留的 <span class="warn">初始 initial</span> 大小，相当于指定了 width。默认为 auto，根据元素内容分配</div>
       <div>.指定了该属性后，原有的宽度或高度就无效了</div>
       <pre>flex-basis: auto | number;</pre>
     </dd>
@@ -116,7 +141,7 @@
     <dt>flex-shrink</dt>
     <dd>
       <div>.容器空间不足时，是否压缩子项</div>
-      <div>.默认为1，压缩；不压缩我放不下啊；但是：子项如果是&lt;img&gt;不压缩。。。</div>
+      <div>.默认为1，压缩；不压缩我放不下啊；但是：子项如果是 &lt;img&gt; 不压缩。。。</div>
       <pre>flex-shrink: number;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 多余空间分配</dd>
@@ -188,12 +213,20 @@
       </table>
     </dd>
     <dt>align-self</dt>
-    <dd>.单独设置子项在辅轴上的对齐方式</dd>
-    <dd>.容器需要有多余的空间</dd>
+    <dd>
+      <div>.单独设置 item 在辅轴上的对齐方式</div>
+      <div>.容器需要有多余的空间</div>
+      <img src="./imgs/flex13.png" alt="" loading="lazy">
+      <p class="fig-sn">align-items: stretch</p>
+      <pre>
+  .wrap div:nth-child(even) {
+    align-self: center;
+  }      </pre>
+    </dd>
     <dt><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/order">order</a></dt>
     <dd>
-      <div>.子项的布局|排列顺序；小的在前，大的在后 - sorted by ascending order</div>
-      <div>.适用于flex和grid</div>
+      <div>.item 的布局|排列顺序；小的在前，大的在后 - sorted by ascending order</div>
+      <div>.适用于 Flex 和 Grid</div>
       <div>.默认都是0；可以设置以便调整顺序，如设为负数，可以提前渲染；大于1，可以滞后渲染</div>
       <div>.也可以手动调整结构实现</div>
       <div>.更多案例请访问 <a href="../minip/index.html">微信小程序 - mini App</a>、<a href="./agenda.html">日程安排 - Agenda</a></div>
@@ -204,7 +237,8 @@
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/xxMBqzV">两列/左右导航布局 -
         CodePen</a></dd>
     <dd class="sn">
-      <div>flex布局 - 需要单独设置每个子项属性</div>
+      <img src="./imgs/flex17.png" alt="" loading="lazy">
+      <div>Flex - 需要单独设置每个 item 属性</div>
       <pre>
 .flex {
     display: flex;
@@ -217,7 +251,7 @@
 .flex .right {
     flex: 1;
 }</pre>
-      <div>grid布局 - 使用 <a href="./grid.html">grid</a> 布局更加简单</div>
+      <div>Grid - 使用 <a href="./grid.html">grid</a> 布局更加简单</div>
       <pre>
 body {
   display: grid;
@@ -227,14 +261,15 @@ body {
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/abXMJjN">三列/圣杯布局/双飞燕 -
         CodePen</a>；左右固定；中间自适应</dd>
     <dd class="sn">
-      <p>不考虑优先渲染</p>
+      <img src="./imgs/flex18.png" alt="" loading="lazy">
+      <p>.不考虑优先渲染</p>
       <pre>
 &lt;div class="wrap"&gt;
   &lt;div class="left"&gt;&lt;/div&gt;
   &lt;div class="main"&gt;&lt;/div&gt;
   &lt;div class="right"&gt;&lt;/div&gt;
 &lt;/div&gt;      </pre>
-      <div>flex布局 - flex需要单独设置每个子项属性</div>
+      <div>Flex - 需要单独设置每个 item 属性</div>
       <pre>
 .wrap {
     display: flex;
@@ -248,7 +283,7 @@ body {
 .wrap .main {
     flex: 1;
 }</pre>
-      <p>考虑优先渲染</p>
+      <p>.考虑优先渲染</p>
       <pre>
 &lt;div class="wrap"&gt;
   &lt;div class="main"&gt;&lt;/div&gt;
@@ -256,7 +291,7 @@ body {
   &lt;div class="right"&gt;&lt;/div&gt;
 &lt;/div&gt;      </pre>
       <pre>// ... ...</pre>
-      <div>grid布局 - 使用 <a href="./grid.html">grid</a> 布局更加简单</div>
+      <div>Grid - 使用 <a href="./grid.html">grid</a> 布局更加简单</div>
       <pre>
 body {
   display: grid;
@@ -265,11 +300,12 @@ body {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNmVZMZ">栈布局/煎饼布局 -
         CodePen</a></dd>
-    <dd>.上下高度固定；中间自适应</dd>
-    <dd>.为了容纳更多内容，中间指定overflow-y: auto</dd>
-    <dd>.多见于移动端</dd>
     <dd class="sn">
-      <div>flex布局 - flex需要单独设置每个子项属性</div>
+      <img src="./imgs/flex19.png" alt="" loading="lazy">
+      <p>.上下高度固定；中间自适应</p>
+      <p>.为了容纳更多内容，中间指定 overflow-y: auto</p>
+      <p>.多见于移动端</p>
+      <div>Flex - 需要单独设置每个 item 属性</div>
       <pre>
 .wrap {
     display: flex;
@@ -286,7 +322,7 @@ body {
     flex: 1;
     overflow-y: auto;
 }</pre>
-      <div>grid布局 - 使用 <a href="./grid.html">grid</a> 布局更加简单</div>
+      <div>Grid - 使用 <a href="./grid.html">grid</a> 布局更加简单</div>
       <pre>
 body {
   display: grid;
@@ -299,7 +335,7 @@ body {
     <dd>.分别占1份、1份、1份</dd>
     <dd>.很容易调整成不等分布局，如分别占1份、2份、3份、1份</dd>
     <dd class="sn">
-      <div>flex布局 - flex需要单独设置每个子项属性</div>
+      <div>Flex - 需要单独设置每个 item 属性</div>
       <pre>
 .wrap {
     display: flex;
@@ -308,7 +344,7 @@ body {
 .wrap .item {
     flex: 1;
 }</pre>
-      <div>grid布局 - 使用 <a href="./grid.html">grid</a> 布局更加简单</div>
+      <div>Grid - 使用 <a href="./grid.html">grid</a> 布局更加简单</div>
       <pre>
 .wrap {
   display: grid;
@@ -328,22 +364,22 @@ body {
         href="https://moodle.org/index.php?">moodle</a></dd>
     <dd>
       <div>. 指定高度 36px</div>
-      <div>. 使用 flex，使得空间可弹性变换</div>
+      <div>. 使用 Flex，使得空间可弹性变换</div>
       <div>. 静态底部边框为 2px；鼠标悬停时，为 5px</div>
       <div>. 使用过渡动画 transition</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 主导航，更多案例参考<a href="./demo/up2u.html">网站导航</a></dd>
-    <dd>. 使用2个felx盒子：两端分布</dd>
-    <dd>. 使用1个felx盒子：第一项右侧空白自动分配</dd>
+    <dd>. 使用2个 Flex：两端分布</dd>
+    <dd>. 使用1个 Flex：第一项右侧空白自动分配</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 主导航，更多案例参考<a href="./img.html">网站图文导航</a></dd>
     <dd>. 使用图片和文字构建</dd>
     <dd>. 方便起见，图片会初始化 block</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/form.html">表单设计</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/form2.html">表单设计 - 留言板</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/acc_flex.html">手风琴 - flex</a>、 <a
         href="https://codepen.io/glpla/full/LYqaWMW">手风琴 - CodePen</a>
     </dd>
     <dd>
-      <div>. 开始平分空间；:hover时，使用flex-basis重新分配</div>
+      <div>. 开始平分空间；:hover时，使用 flex-basis 重新分配</div>
       <div>. 如何实现竖版的手风琴效果？</div>
       <pre>
 .cor-wrap div {
@@ -357,19 +393,9 @@ body {
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/RwvdpdQ">九宫格 - CodePen</a>
     </dd>
     <dd>
-      <div>每个项目的宽度和gap相加不能超过100%</div>
-      <div>通常取项目的宽度为25%-30%，剩下的空间由auto自动分配，故而可以撑满到3个子项，实现9宫格</div>
-      <div class="sudoku">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <div>每个 item 的宽度和 gap 相加不能超过100%</div>
+      <div>通常取项目的宽度为25%-30%，剩下的空间由 auto 自动分配，故而可以撑满到3个子项，实现9宫格</div>
+      <img src="./imgs/flex14.png" alt="" loading="lazy">
       <pre>
 .sudoku {
   display: flex;
@@ -385,7 +411,7 @@ body {
   flex: auto;
 }</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 面包屑导航 - flex方式</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 面包屑导航</dd>
     <dd class="sn">
       <div>子项不做任何处理：边缘不齐[剩余空间没有利用起来]</div>
       <ul class="bread">
@@ -418,8 +444,8 @@ body {
     flex-wrap: wrap;
 }</pre>
       <div>改进方式</div>
-      <p>. 子项显式指定flex:auto；利用剩余空间</p>
-      <p>. 子项指定最大宽度max-width，避免最后一项铺满[是否需要铺满，看设计需求]</p>
+      <p>. 子项显式指定 flex:auto；利用剩余空间</p>
+      <p>. 子项指定最大宽度 max-width，避免最后一项铺满[是否需要铺满，看设计需求]</p>
       <ul class="bread adv">
         <li>html</li>
         <li>css</li>
@@ -451,9 +477,9 @@ body {
     //
 }</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/masonry.html">相册</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 相册</dd>
     <dd>
-      <div>. 负边距 margin- 拉进/重叠关系</div>
+      <div>. 负边距 margin - 拉进/重叠</div>
       <div>. 路径裁剪 <a href="./clip-path.html">clip-path</a></div>
       <div class="gal-box">
         <div class="card"><img src="../imgs/xh1.jpg" alt=""></div>
@@ -462,14 +488,14 @@ body {
         <div class="card"><img src="../imgs/xh4.jpg" alt=""></div>
       </div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/masonry.html">瀑布流</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./masonry.html">瀑布流</a></dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
     <dt>总结</dt>
-    <dd>1.弹性盒子布局的特性和使用</dd>
+    <dd>1.弹性盒子的特性和使用</dd>
     <dt>作业</dt>
-    <dd>1.利用弹性盒子布局，优化个人网站导航</dd>
+    <dd>1.利用弹性盒子，优化个人网站导航</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

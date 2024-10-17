@@ -29,12 +29,14 @@
   </header>
   <dl class="nav-cont">
     <dt>概述 Overview</dt>
-    <dd>.更灵活：支持二维布局：对列和行进行布局</dd>
-    <dd>.类似早期的 table 布局；table 本来是做数据展示的，所以在布局上有明显的缺陷：非语义化、布局代码冗余，以及不好维护、渲染性能等问题，目前 table 布局已被抛弃</dd>
-    <dd>.更多细节，请参考 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid">MDN - grid</a>、<a
-        href="https://mp.weixin.qq.com/s/3cxv1y14OLcPJjEN4f_OiA">如何用一行 CSS 实现 10 种现代布局</a>
+    <dd>
+      <div>.更灵活：支持二维布局：对列和行进行布局</div>
+      <div>.类似早期的 table 布局；table 本来是做数据展示的，所以在布局上有明显的缺陷：非语义化、布局代码冗余，以及不好维护、渲染性能等问题，目前 table 布局已被抛弃</div>
+      <div>.更多细节，请参考 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid">MDN - grid</a>、<a
+          href="https://mp.weixin.qq.com/s/3cxv1y14OLcPJjEN4f_OiA">如何用一行 CSS 实现 10 种现代布局</a>
+      </div>
+      <div>.更多网格布局实现，请访问 <a href="./framework/isotope.html">Isotope</a></div>
     </dd>
-    <dd>.更多网格布局实现，请访问 <a href="./framework/isotope.html">Isotope</a></dd>
     <dt>概念</dt>
     <dd class="sn">
       <div>容器 container</div>
@@ -89,6 +91,8 @@
   </dl>
   <div class="chap">容器 container</div>
   <dl class="nav-cont">
+    <dd>.如何划分行列？</dd>
+    <dd>.如何填充子项？</dd>
     <dt>grid-template-columns</dt>
     <dd>
       <pre>grid-template-columns: px | % | fr | auto | repeat() | minmax() | max-content | min-content;</pre>
@@ -104,11 +108,11 @@
       <div>.max-content：每一列的宽度为其中内容的最大宽度；让列尽可能宽以适应最长的内容，保证内容不会被截断</div>
       <div>.min-content：让列尽可能窄，仅适应最窄的内容，可能导致较多剩余空间；紧凑的列布局</div>
       <figure>
-        <img src="./imgs/grid-fill.png" alt="">
+        <img src="./imgs/grid-fill.png" alt="" loading="lazy">
         <figcaption>auto-fill</figcaption>
       </figure>
       <figure>
-        <img src="./imgs/grid-fit.png" alt="">
+        <img src="./imgs/grid-fit.png" alt="" loading="lazy">
         <figcaption>auto-fit</figcaption>
       </figure>
     </dd>
@@ -117,30 +121,38 @@
       <pre>grid-template-rows: px | % | fr | auto | repeat() | minmax();</pre>
       <div>.容器行的设置；含义同容器列的设置</div>
     </dd>
+    <dt>grid-template</dt>
+    <dd>.复合属性；同时设置列 column、行 rows，多见于页面整体布局，见后续案例</dd>
     <dt>grid-auto-rows、grid-auto-columns</dt>
     <dd>
       <pre>grid-auto-rows: &lt;length&gt; | &lt;percentage&gt; | min-content | max-content | auto;</pre>
       <pre>grid-auto-columns: &lt;length&gt; | &lt;percentage&gt; | min-content | max-content | auto;</pre>
-      <div>当容器中没有明确指定行高或列宽时，自动决定容器的行高或列宽 - 隐式的指定行的高度|列的宽度；默认是 auto</div>
-      <!-- <div>没有明确指定行高或列宽，就是没有使用 grid-template-columns 和 grid-template-rows 划分网格</div> -->
+      <div>.当容器中没有明确指定行列大小时，自动决定容器的行高或列宽 - 隐式的指定行的高度|列的宽度</div>
+      <img src="./imgs/grid2.png" alt="" loading="lazy">
+      <p class="fig-sn">默认auto；根据内容自动占满容器</p>
+      <img src="./imgs/grid3.png" alt="" loading="lazy">
+      <p class="fig-sn">指定行大小50px；多的内容会溢出</p>
+      <img src="./imgs/grid4.png" alt="" loading="lazy">
+      <p class="fig-sn">指定了min-content</p>
     </dd>
     <dt>grid-auto-flow</dt>
     <dd>
       <pre>grid-auto-flow: row | column | dense | row dense | column dense;</pre>
-      <div>网格项自动放置的顺序和方式 - 指定 <span class="warn">工作流</span> 的方向，默认是按行 row 的顺序填充|行优先，从上到下，然后再到下一行</div>
-      <div>dense 表示密集填充还是宽松填充</div>
-      <div>特别适合处理 <span class="warn">动态内容，如数量或大小不一</span> 或未明确指定位置的网格项</div>
-      <div>通常是划分好格子后再指定方向；如容器划分3行3列，10个子项的排列方式</div>
-      <img src="./imgs/grid0.png" alt="">
-      <p class="fig-sn">默认 row 排列 - 行优先</p>
-      <img src="./imgs/grid1.png" alt="">
-      <p class="fig-sn">column 排列 - 列优先</p>
+      <div>.子项自动放置的顺序和方式 - 指定 <span class="warn">工作流</span> 的方向</div>
+      <div>.默认是按行 row 的顺序填充|行优先；逐行填充来排列，在必要时增加新行</div>
+      <div>.dense 表示密集填充还是宽松填充</div>
+      <div>.特别适合处理 <span class="warn">动态内容</span>，如数量或大小不一或未明确指定位置的网格项，如 <a href="./masonry.html">瀑布流 - Grid</a></div>
+      <div>.通常是 <span class="warn">划分好格子</span> 后再指定方向；如容器划分3行3列，10个子项的排列方式</div>
+      <img src="./imgs/grid0.png" alt="" loading="lazy">
+      <p class="fig-sn">默认 row 排列 - 划分列的行优先</p>
+      <img src="./imgs/grid1.png" alt="" loading="lazy">
+      <p class="fig-sn">column 排列 - 未划分行的列优先</p>
+      <img src="./imgs/grid5.png" alt="" loading="lazy">
+      <p class="fig-sn">column 排列 - 划分行的列优先</p>
     </dd>
-    <dt>grid-template</dt>
-    <dd>.复合属性；同时设置列 column、行 rows，多见于页面整体布局，见后续案例</dd>
     <dt>grid-template-areas</dt>
     <dd>
-      <div>.将容器划分区域</div>
+      <div>.按区域划分容器</div>
       <div>.每个子项指定对应的区域</div>
       <div>.需配合 grid-template-columns 和 grid-template-rows 指定各区域大小，便于调整宽度和合并</div>
       <div>.也可以由子项的跨行、跨列实现。见后续案例</div>
@@ -158,22 +170,45 @@
     gap: 1rem;
 }
 
+.header {
+  grid-area: header;
+}
+
 .nav {
   grid-area: nav;
-}</pre>
+}
+
+...</pre>
     </dd>
     <dt>justify-items、align-items、place-items</dt>
     <dd>
       <div>.子项在单元格的对齐：上中下</div>
-      <div>.复合属性，同时指定justify-items和align-items</div>
-      <div>.如果子项大小 &lt; 划分的单元格，可以指定其位置，如水平垂直居中center</div>
+      <div>.默认水平垂直拉伸填满整个格子</div>
+      <div>.复合属性，同时指定 justify-items 和 align-items</div>
+      <img src="./imgs/grid0.png" alt="" loading="lazy">
+      <p class="fig-sn">默认拉伸填充</p>
+      <img src="./imgs/grid6.png" alt="" loading="lazy">
+      <p class="fig-sn">水平居中</p>
+      <img src="./imgs/grid7.png" alt="" loading="lazy">
+      <p class="fig-sn">垂直居中</p>
     </dd>
     <dt>justify-content、align-content、place-content</dt>
     <dd>
-      <div>.根据子项实际大小|content，在单元格内的水平|垂直方向上的对齐</div>
+      <div>.格子如果 <span class="warn">没有占满</span> 容器，有剩余空间，还需要考虑子项在容器内的分布</div>
       <div>.复合属性，同时指定 justify-content 和 align-content</div>
-      <div>.子项大小小于单元格尺寸时，可以考虑其分布</div>
-      <div>.也可以嵌套一个元素充当容器，由它完成内容的分布</div>
+      <div>.常用属性有：normal | start | end | flex-start |flex-end | center | space-between | space-around | space-evenly |
+        stretch</div>
+      <img src="./imgs/grid8.png" alt="" loading="lazy">
+      <p class="fig-sn">默认开始 normal/start/flex-start</p>
+      <img src="./imgs/grid9.png" alt="" loading="lazy">
+      <p class="fig-sn">水平居中 center</p>
+      <img src="./imgs/grid10.png" alt="" loading="lazy">
+      <p class="fig-sn">水平结束 end/flex-end</p>
+    </dd>
+    <dd class="tips">
+      <div>justify-items 和 align-items 控制的是每个子项在其所在单元格内的对齐方式</div>
+      <div>justify-content 和 align-content 控制的是整个容器内子项的整体对齐方式</div>
+      <div>如果容器不指定高度，由子项撑开/占满，则很多容器属性都可以不考虑</div>
     </dd>
     <dt>gap</dt>
     <dd>
@@ -187,16 +222,34 @@
   <dl class="nav-cont">
     <dd>.子项如果不显示的指定尺寸，就默认 <span class="warn">自动拉伸</span> 占满整个单元格</dd>
     <dt>grid-column: span number</dt>
-    <dd>.跨列，也可以根据轨道线简写为1/3，表示单元格跨度从track 1到track 3</dd>
+    <dd>
+      <div>.跨列，也可以根据轨道线简写为1/3，表示单元格跨度从track 1到track 3</div>
+      <pre>
+.wrap div:last-child {
+  grid-column: span 3;
+  /* 或 */
+  grid-column: 1/4;
+}      </pre>
+      <img src="./imgs/grid11.png" alt="" loading="lazy">
+      <p class="fig-sn">跨列</p>
+    </dd>
     <dt>grid-row: span number</dt>
-    <dd>.跨行；同样可以利用轨道线简写</dd>
+    <dd>
+      <div>.跨行；同样可以利用轨道线简写</div>
+      <pre>
+.wrap div:first-child {
+  grid-row: span 2;
+  /* 或 */
+  grid-row: 1/3;
+}      </pre>
+      <img src="./imgs/grid12.png" alt="" loading="lazy">
+      <p class="fig-sn">跨行</p>
+    </dd>
     <dt>grid-area</dt>
     <dd>.配合grid-template-areas一起使用，指定划分的某一个区域</dd>
-    <dt>justify-self align-self</dt>
-    <dd>.设置自己的水平|垂直对齐方式，适用于占不满格子的情况</dd>
-    <dt>place-self</dt>
-    <dd>.复合属性；同时设置 justify-self 和 align-self</dd>
-    <dd>.默认情况下，内容盒子被拉伸至填满整个格子；如果特别指定内容盒子大小，当内容盒子小于格子时，可以设置其在格子中的位置</dd>
+    <dt>justify-self align-self place-self</dt>
+    <dd>.设置自己的水平|垂直对齐方式</dd>
+    <dd>.place-self 复合属性；同时设置 justify-self 和 align-self</dd>
   </dl>
   <div class="chap">布局 Layout</div>
   <dl class="nav-cont">
@@ -651,7 +704,7 @@
     <dd>.网格布局的特性和使用</dd>
     <dt>作业</dt>
     <dd class="sn">
-      <div>尝试使用float、position、flex实现布局一节的内容，体会几种方式的区别</div>
+      <div>尝试使用 float、position、flex 实现布局一节的内容，体会几种方式的区别</div>
       <div>使用网格布局，优化个人网站，如：整体设计、导航设计等</div>
     </dd>
   </dl>
