@@ -28,41 +28,41 @@
       box-sizing: border-box;
     }
 
-
-    .wrap {
-      display: flex;
-      flex-direction: column;
-      width: 300px;
-      height: 200px;
-      margin: 50px auto 10px;
-      gap: 10px;
-      background-color: #f1f2f3;
-      padding: 10px;
+    .box {
+      width: 350px;
+      margin: 0 auto;
+      text-align: justify;
+      line-height: 2;
     }
 
-    .wrap div {
-      background-color: #fff;
+    .box .img {
+      width: 120px;
+      height: 120px;
+      float: left;
+      /* shape-outside: circle(50%); */
+      /* shape-outside: polygon(0 0, 100% 0, 50% 100%); */
+      /* shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%, 50% 0); */
+      shape-outside: url(./web/imgs/logo1.png);
     }
 
-    .wrap div:nth-child(1),
-    .wrap div:nth-child(3) {
-      flex-basis: 60px;
-      width: 100px;
-    }
 
-    .wrap div:nth-child(2) {
-      flex: 1;
-      background-image: linear-gradient(to right, #f40, #de5096);
-      border-radius: 6px;
+    .box p::first-letter {
+      float: left;
+      color: #f40;
+      font-size: 2em;
+      margin-left: 1em;
+      margin-right: 1em;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div>Lorem.</div>
-    <div></div>
-    <div></div>
+  <div class="box">
+    <!-- <img class="img" src="./web/imgs/logo1.png" alt=""> -->
+    <!-- <div class="img"></div> -->
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic laboriosam optio sunt ad asperiores. Natus
+      placeat voluptate sint itaque distinctio rem sed, quibusdam, doloremque accusamus inventore libero blanditiis modi
+      dolorem.</p>
   </div>
 </body>
 

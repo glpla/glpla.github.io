@@ -31,15 +31,15 @@
       <pre>float: left | right | both;</pre>
       <div>.浮动元素会脱离文档流，漂浮到容器的左侧或者右侧，原先位置丢失；<span class="warn">位置丢失会怎样？后面元素会补上来</span></div>
       <div>.横向无缝排列：left：先靠上再靠左；right：先靠上再靠右 - 先漂起来再靠边</div>
-      <div>.利用这个特性可以实现布局，特别是自适应布局；现在逐渐被弹性盒子 flex 或网格布局 grid 代替</div>
+      <div>.利用这个特性可以实现布局，特别是自适应布局；现在逐渐被弹性盒子 flex 或网格 grid 代替</div>
     </dd>
     <dt>特点 Features</dt>
     <dd>
       <div>.元素浮动后，如果是非 block 元素，将自动变为块元素 block</div>
       <div>.元素在文档中出现的顺序不一样，最后渲染的结果也不一样</div>
-      <div>.消除inline元素的缝隙，如图片的空白</div>
-      <div>.使得block元素不再独占一行</div>
-      <div>.float布局时，若有一个元素浮动，则所有元素都应该浮动</div>
+      <div>.消除 inline 元素的缝隙，如图片的空白</div>
+      <div>.使得 block 元素不再独占一行</div>
+      <div>.float 布局时，若有一个元素浮动，则所有元素都应该浮动</div>
       <div>.更多信息，请查看 <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Floats">MDN - floats</a>、<a
           href="https://css-tricks.com/almanac/properties/f/float/">float</a>、<a
           href="https://css-tricks.com/is-css-float-deprecated/">float何去何从</a></div>
@@ -59,24 +59,35 @@
     clear: both;
 }</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/indent.html">首字下沉</a></dd>
     <dd id="pt">[<span class="iconfont icon-keyboard"></span>] 图文混排</dd>
     <dd>.图片左右浮动</dd>
     <dd>.首字下沉/浮动</dd>
     <dd>.注意结构变化导致渲染效果不同</dd>
     <dd class="layout">
-      <img class="float-l float-img" style="margin-right: 1rem;" src="./imgs/logo0.png" alt="">
+      <img class="float-l float-img" style="margin-right: 1em;" src="./imgs/logo0.png" alt="">
       <p class="first-letter">
         中国人民解放军陆军特种作战学院是一所特种作战、情报侦察领域的高等教育院校，是全军侦察特战人才培养基地、全军高中级狙击手培训中心、全军军事体育人才培训中心、特种作战理论和战法训法研创中心。学院溯源于解放战争初期创建的冀热辽军政干部学校、解放战争末期创建的第二野战军军政大学第三分校和1978年开办的国际关系学院侦察与特种作战指挥专业，2017年7月，原特种作战学院和桂林综合训练基地合并组建成为陆军特种作战学院。截至2021年5月，学院横跨广西、广东和湖南，在桂林、广州、衡阳、株洲共设8个营区，有11个本科专业；有2个专业学位硕士授权点，2个重点学科建设方向；有教员500余人，其中高职教员143人，具有研究生以上学历的256人。
       </p>
-      <img class="float-r float-img" style="margin-left: 1rem;" src="./imgs/logo1.png" alt="">
+      <img class="float-r float-img" style="margin-left: 1em;" src="./imgs/logo1.png" alt="">
       <p class="first-letter">
         学院院徽全部要素包含3个模块、9个部分：通用元素和基本属性：五角红星与八一字样，是中国人民解放军军徽核心，代表性质和方向；长城，寓意守护国土安全的基本功能；陆军特种作战学院，是最基本的文字标识。特色元素和专业属性：红色闪电，寓意特战官兵“铁血忠诚”、“一招制胜”的信仰底色和职能使命；三支羽翼组成的翅膀，既指海陆空三栖作战的基本样式，也呈现学院转型重塑、换羽腾飞之势；双色利刃，紧扣《孙子兵法》中“以正合，以奇胜”的特种作战战术起源。辅助元素和精神属性：虚拟的网络地球，强调特战人才要立足国际视野、抢占科技前沿；两条折线，勾勒出狼眼睛的轮廓，使院徽整体神似战狼，彰显特战尖兵的战斗精神；书本底座，寓意学院人才培养托起特战力量发展的支撑作用。
       </p>
-      <p>1.更多信息，点击访问更多
-        <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/shape-outside">shape-outside</a> 和 <a
-          href="./clip-path.html">clip-path</a>
-      </p>
-      <p>2.具体开发案例，请访问 <a href="../course/course_hkc.html">海经</a> 个人信息标签页</p>
+    </dd>
+    <dd id="pt">[<span class="iconfont icon-keyboard"></span>] 图文混排 - 提升；使用 <a
+        href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/shape-outside">MDN - shape-outside</a> 和 <a
+        href="./clip-path.html">clip-path</a> 优化边缘轮廓；更多案例，请访问 <a href="../course/course_hkc.html">海经</a> 个人信息标签页</dd>
+    <dd>
+      <div class="shape-box">
+        <img src="./imgs/float2.png" alt="" loading="lazy">
+        <p class="fig-sn">shape-outside: url(./web/imgs/logo1.png);</p>
+      </div>
+      <div class="shape-box"> <img src="./imgs/float0.png" alt="" loading="lazy">
+        <p class="fig-sn">shape-outside: circle(50%);</p>
+      </div>
+      <div class="shape-box"> <img src="./imgs/float1.png" alt="" loading="lazy">
+        <p class="fig-sn">shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%, 50% 0);</p>
+      </div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 导航</dd>
     <dd>
