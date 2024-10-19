@@ -20,6 +20,7 @@
 
     body {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
@@ -96,11 +97,59 @@
     .nav:has(+.cont #about:target) .about {
       border-bottom: var(--border);
     }
+
+    /* header */
+    header {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 2rem;
+      font-size: 2.2rem;
+    }
+
+    header h1 {
+      color: var(--color);
+    }
+
+    header h1:nth-child(1) .z-layer:not(:first-child) {
+      color: #bf9105;
+    }
+
+    header h1:nth-child(2) .z-layer:not(:first-child) {
+      color: #689238;
+    }
+
+    header h1:nth-child(3) .z-layer:not(:first-child) {
+      color: #027fb7;
+    }
+
+    header h1:nth-child(4) .z-layer:not(:first-child) {
+      color: #b73229;
+    }
+
+    header h1:nth-child(5) .z-layer:not(:first-child) {
+      color: #2f3d88;
+    }
+
+    header h1:nth-child(6) .z-layer:not(:first-child) {
+      color: #007166;
+    }
+
+    header h1:nth-child(7) .z-layer:not(:first-child) {
+      color: #bf7200;
+    }
   </style>
 </head>
 
 <body>
-
+  <header>
+    <h1 data-z style="--color:#ffc107">T</h1>
+    <h1 data-z style="--color:#8bc34a">a</h1>
+    <h1 data-z style="--color:#03a9f4">b</h1>
+    <h1 data-z style="--color:#f44336">c</h1>
+    <h1 data-z style="--color:#3f51b5">a</h1>
+    <h1 data-z style="--color:#009688">r</h1>
+    <h1 data-z style="--color:#ff9800">d</h1>
+  </header>
   <div class="tabcard">
     <nav class="nav">
       <a class="nav-link home" href="#home">Home</a>
@@ -162,6 +211,17 @@
       </div>
     </div>
   </div>
+  <script src="/utils/lib/ztext.min.js"></script>
+  <script>
+    var ztxt = new Ztextify("h1 span", {
+      layers: 20,
+      fade: true,
+      direction: "forwards",
+      depth: '0.6em',
+      event: "pointer",
+      eventRotation: "40deg"
+    });
+  </script>
 </body>
 
 </html>
