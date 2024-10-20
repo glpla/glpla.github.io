@@ -37,8 +37,8 @@
       <div>. 线性渐变 Linear Gradients - 向下/向上/向左/向右/对角方向</div>
       <div>. 创建一个线性渐变，至少定义两个色块</div>
       <div>. 可以指定色块的大小/范围和方向；可以使用 deg 或关键字，如 left、right、top、bottom</div>
-      <div>. 0deg是从下到上↑，顺时针方向增加；默认是180deg，从上到下↓</div>
-      <div>. 不特别指明都是从0开始，到100%结束；这俩个位置的值 <span class="warn">可以省略</span></div>
+      <div>. 方向：0deg是从下到上↑，顺时针方向增加；默认是180deg，从上到下↓</div>
+      <div>. 位置：不特别指明都是从0开始，到100%结束；这俩个位置的值 <span class="warn">可以省略</span></div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient">MDN -
           linear-gradient</a></div>
       <pre>background-image: linear-gradient(direction, color-stop1, color-stop2, ...);</pre>
@@ -60,7 +60,7 @@ background-image: linear-gradient(to top, #f40, #ff0);</pre>
       <div class="basic deg45-bg"></div>
       <pre>
 // 45deg渐变：左下到右上
-background-image: linear-gradient(0deg, #f40, #ff0);
+background-image: linear-gradient(45deg, #f40, #ff0);
 //或
 background-image: linear-gradient(to top right, #f40, #ff0);</pre>
     </dd>
@@ -70,58 +70,57 @@ background-image: linear-gradient(to top right, #f40, #ff0);</pre>
     <dd class="grid">
       <div class="price-bg"></div>
       <pre>
-// 切割色块
-background-image: linear-gradient(135deg,  #f40 50%, transparent 0);
-// 使用背景叠加的方式 - 一个50%的红色，不重复，一个100%的白色
-background: linear-gradient(135deg, #f40, #f40) no-repeat, #fff;
-background-size: 50% 100%;      </pre>
-      <div class="zebra-bg"></div>
-      <pre>
-// 斑马渐变；也可以使用重复线性渐变实现
+// 切割色块 - 将其中一个色块设置为白色或透明
 background-image: linear-gradient(90deg, 
-    #f40 10%, 
-    transparent 0, transparent 20%, 
-    #f40, 0,  #f40 30%, 
-    transparent 0, transparent 40%, 
-    #f40, 0,  #f40 50%, 
-    transparent 0, transparent 40%, 
-    #f40, 0,  #f40 50%, 
-    transparent 0, transparent 60%, 
-    #f40, 0,  #f40 70%, 
-    transparent 0, transparent 80%, 
-    #f40, 0,  #f40 90%, 
-    transparent 0, transparent 100%)</pre>
+  #f40 50%, #fff 0);</pre>
+      <div class="price-bg-adv">
+        <span>&yen;99</span>
+        <del>&yen;199</del>
+      </div>
+      <pre>
+// 价格促销
+background-image: linear-gradient(90deg, 
+  #f40 50%, #fff 0);</pre>
       <div class="rt-bg"></div>
       <pre>
-// 单个切角渐变 - 将其中一个色块设置为透明
-linear-gradient(225deg, transparent 10px, #f40, 0, #f40 100%);</pre>
+// 增加有色部分的占比
+background-image: linear-gradient(45deg, 
+  #f40 95%, #fff 0);</pre>
+      <div class="zebra-bg"></div>
+      <pre>
+// 斑马渐变；也可以使用多个背景或重复线性渐变实现
+background-image: linear-gradient(90deg, 
+  #f40 20%, #fff 0, 
+  #fff 40%, #f40 0, 
+  #f40 60%, #fff 0, 
+  #fff 80%, #f40 0);</pre>
       <div class="ltrt-bg"></div>
       <pre>
-// 两个切角渐变 - 两个背景图片叠加而成；一左一右放置；不重复
-background: 
-    linear-gradient(135deg, transparent 10px, #f40, 0, #f40 100%),
-    linear-gradient(225deg, transparent 10px, #f40, 0, #f40 100%) right;
-background-size: 50% 100%;
+// 2个背景图片叠加而成；一左一右放置；不重复
+background-image: 
+  linear-gradient(45deg, #f40 95%, #fff 0), 
+  linear-gradient(135deg, #fff 5%, #f40 0);
+background-size: 50%;
+background-position: right, left;
 background-repeat: no-repeat;</pre>
       <div class="basic all-bg"></div>
       <pre>
-// 四个角渐变 - 4块；宽高各为50%；分别放置4个角；不重复
-background: 
-    linear-gradient(45deg, transparent 10px, #f40, 0, #f40 100%) bottom left, 
-    linear-gradient(135deg, transparent 10px, #f40, 0, #f40 100%) top left,
-    linear-gradient(225deg, transparent 10px, #f40, 0, #f40 100%) top right, 
-    linear-gradient(325deg, transparent 10px, #f40, 0, #f40 100%) bottom right;
+// 4个背景；宽高各为50%；分别放置4个角；不重复
+background-image:
+    linear-gradient(45deg, #f40 95%, #fff 0),
+    linear-gradient(135deg, #fff 5%, #f40 0),
+    linear-gradient(45deg, #fff 5%, #f40 0),
+    linear-gradient(135deg, #f40 95%, #fff 0);
 background-size: 50% 50%;
-background-repeat: no-repeat;
-//background-size: 50% 50%, 50% 50%, 50% 50%, 50% 50%;
-//background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;</pre>
-      <div class="mask-bg"></div>
+background-position: right top, left top, left bottom, right bottom;
+background-repeat: no-repeat;</pre>
+      <div class="basic mask-bg"></div>
       <pre>
 // 遮罩背景；利用透明的渐变背景和图片背景实现
-.mask-bg {
-  height: 150px;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.1)), url(../imgs/1.jpg) center/cover;
-}</pre>
+background-image:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.1)),
+    url(../imgs/cover.jpg);
+background-size: cover;</pre>
     </dd>
     <dd class="tips">
       <div>. 如果使用多个渐变，请使用复合属性 background；可以单独指定不重复</div>

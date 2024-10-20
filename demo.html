@@ -24,67 +24,32 @@
     }
 
     body {
-      perspective: 1000px;
-      overflow: hidden;
+      display: flex;
+      height: 100vh;
     }
 
     .box {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      transform-style: preserve-3d;
-      animation: roll 30s linear infinite;
+      width: 240px;
+      height: 80px;
+      margin: auto;
+      background-color: #f2f2f2;
+      border: 1px solid #f40;
+      /* background-image: linear-gradient(45deg, #f40 95%, #fff 0); */
+      /* background-image: linear-gradient(90deg, #f40 20%, #fff 0, #fff 40%, #f40 0, #f40 60%, #fff 0, #fff 80%, #f40 0); */
+      background-image:
+        linear-gradient(45deg, #f40 95%, #fff 0),
+        linear-gradient(135deg, #fff 5%, #f40 0),
+        linear-gradient(45deg, #fff 5%, #f40 0),
+        linear-gradient(135deg, #f40 95%, #fff 0);
+      background-size: 50% 50%, 50% 50%;
+      background-position: right top, left top, left bottom, right bottom;
+      background-repeat: no-repeat;
     }
-
-    @keyframes roll {
-      0% {
-        transform: rotateY(0deg);
-      }
-
-      100% {
-        transform: rotateY(-360deg);
-      }
-    }
-
-    .item {
-      position: absolute;
-      width: 320px;
-      height: 640px;
-      background-color: #f40;
-      left: 50%;
-      top: 50%;
-      margin-left: -160px;
-      margin-top: -320px;
-      transform: rotateY(calc(180deg + var(--pos)*36deg)) translateZ(1000px);
-      background-image: var(--url);
-      background-size: cover;
-      transition: 1s;
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, .2);
-    }
-
-    /* .box:has(.item:hover) {
-      animation-play-state: paused;
-    }
-
-    .item:hover {
-      transform: rotateY(calc(180deg + var(--pos)* 36deg)) translateZ(0px) scale(1.5);
-    } */
   </style>
 </head>
 
 <body>
-  <div class="box">
-    <div class="item" style="--pos:0;--url:url(/utils/screen/screen0.jpg)"></div>
-    <div class="item" style="--pos:1;--url:url(/utils/screen/screen1.jpg)"></div>
-    <div class="item" style="--pos:2;--url:url(/utils/screen/screen2.jpg)"></div>
-    <div class="item" style="--pos:3;--url:url(/utils/screen/screen3.jpg)"></div>
-    <div class="item" style="--pos:4;--url:url(/utils/screen/screen4.jpg)"></div>
-    <div class="item" style="--pos:5;--url:url(/utils/screen/screen5.jpg)"></div>
-    <div class="item" style="--pos:6;--url:url(/utils/screen/screen6.jpg)"></div>
-    <div class="item" style="--pos:7;--url:url(/utils/screen/screen7.jpg)"></div>
-    <div class="item" style="--pos:8;--url:url(/utils/screen/screen8.jpg)"></div>
-    <div class="item" style="--pos:9;--url:url(/utils/screen/screen9.jpg)"></div>
-  </div>
+  <div class="box"></div>
 </body>
 
 </html>
