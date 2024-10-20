@@ -23,33 +23,32 @@
         }
 
         body {
-            background-color: #f1f2f3;
+            width: 100vw;
+            height: 100vh;
             overflow: hidden;
         }
 
         .wrap {
-            position: absolute;
-            width: 90%;
-            max-width: 800px;
-            aspect-ratio: 16/9;
+            position: fixed;
+            width: 640px;
+            height: 360px;
             left: 50%;
             top: 50%;
             transform: translateX(-50%) translateY(-50%);
-            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .slider {
             position: absolute;
-            left: 0;
             top: 50%;
-            transform: translate(0, -50%);
-            width: 23%;
-            aspect-ratio: 9/16;
+            transform: translateY(-50%);
+            width: 20%;
+            aspect-ratio: 16/9;
             border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             background-size: cover;
             background-position: center;
             transition: 0.5s;
+            transform-origin: right center;
         }
 
         .slider:nth-child(1),
@@ -62,28 +61,23 @@
         }
 
         .slider:nth-child(3) {
-            left: 60%;
+            left: 85%;
         }
 
         .slider:nth-child(4) {
-            left: calc(60% + 25%);
+            left: calc(85% + 22%);
         }
 
-        .slider:nth-child(5) {
-            left: calc(60% + 50%);
-        }
-
-        .slider:nth-child(n+6) {
-            left: calc(60% + 75%);
+        .slider:nth-child(n+5) {
+            left: calc(85% + 44%);
             opacity: 0;
         }
 
         .cont {
             position: absolute;
-            left: 50px;
+            left: 1rem;
             top: 50%;
-            width: 300px;
-            transform: translate(0, -50%);
+            width: 50%;
             color: #f1f2f3;
             display: none;
         }
@@ -134,7 +128,7 @@
         }
 
         .navs {
-            position: absolute;
+            position: fixed;
             bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
@@ -152,170 +146,178 @@
             background-color: #333;
             color: #f1f2f3;
         }
+
+        @media screen and (max-width: 768px) {
+            .wrap {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            .slider {
+                aspect-ratio: 9/16;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="wrap">
-        <ul class="sliders">
-            <li class="slider" style="background-image: url(/utils/wallpaper/blue.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/green.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/pink.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/purple.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/w0.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/w1.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/w2.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/w3.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/w4.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/w5.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/w6.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/w7.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/w8.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-            <li class="slider" style="background-image: url(/utils/wallpaper/w9.jpg);">
-                <div class="cont">
-                    <h2 class="title">Lorem.</h2>
-                    <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
-                        blanditiis
-                        doloribus!
-                    </p>
-                    <button class="btn">more</button>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="btns">
-        <div class="navs">
-            <button class="prev">&lt;</button>
-            <button class="next">&gt;</button>
+        <div class="slider" style="background-image: url(/utils/wallpaper/blue.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
         </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/green.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/pink.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/purple.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/w0.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/w1.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/w2.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/w3.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/w4.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/w5.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/w6.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/w7.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/w8.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+        <div class="slider" style="background-image: url(/utils/wallpaper/w9.jpg);">
+            <div class="cont">
+                <h2 class="title">Lorem.</h2>
+                <p class="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus magnam
+                    blanditiis
+                    doloribus!
+                </p>
+                <button class="btn">more</button>
+            </div>
+        </div>
+    </div>
+    <div class="navs">
+        <button class="prev">&lt;</button>
+        <button class="next">&gt;</button>
     </div>
     <script>
         const prev = document.querySelector('.prev');
         const next = document.querySelector('.next');
         next.onclick = function () {
             let slider = document.querySelectorAll('.slider');
-            document.querySelector('.sliders').appendChild(slider[0]);
+            document.querySelector('.wrap').appendChild(slider[0]);
         }
         prev.onclick = function () {
             let slider = document.querySelectorAll('.slider');
-            document.querySelector('.sliders').prepend(slider[slider.length - 1]);
+            document.querySelector('.wrap').prepend(slider[slider.length - 1]);
         }
     </script>
 </body>
