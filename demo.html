@@ -21,6 +21,8 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
     }
 
     body {
@@ -28,28 +30,66 @@
       height: 100vh;
     }
 
-    .box {
-      width: 240px;
-      height: 80px;
+    .wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
       margin: auto;
-      background-color: #f2f2f2;
-      border: 1px solid #f40;
-      /* background-image: linear-gradient(45deg, #f40 95%, #fff 0); */
-      /* background-image: linear-gradient(90deg, #f40 20%, #fff 0, #fff 40%, #f40 0, #f40 60%, #fff 0, #fff 80%, #f40 0); */
-      background-image:
-        linear-gradient(45deg, #f40 95%, #fff 0),
-        linear-gradient(135deg, #fff 5%, #f40 0),
-        linear-gradient(45deg, #fff 5%, #f40 0),
-        linear-gradient(135deg, #f40 95%, #fff 0);
-      background-size: 50% 50%, 50% 50%;
-      background-position: right top, left top, left bottom, right bottom;
-      background-repeat: no-repeat;
+    }
+
+    .box {
+      width: 100%;
+      max-width: 800px;
+      text-align: justify;
+      padding: 10px;
+    }
+
+    .box .shield {
+      float: left;
+      shape-outside: url(./imgs/f-shield.png);
+    }
+
+    .box .cart {
+      float: right;
+      shape-outside: url(./imgs/f-cart.png);
+    }
+
+    .box .speak {
+      float: left;
+      shape-outside: url(./imgs/f-speak.png);
+    }
+
+    .box .pos {
+      float: right;
+      shape-outside: url(./imgs/f-pos.png);
     }
   </style>
 </head>
 
 <body>
-  <div class="box"></div>
+  <div class="wrap">
+    <div class="box"><img class="shield" src="./imgs/f-shield.png" alt="">Lorem ipsum dolor sit amet consectetur
+      adipisicing elit.
+      Dolorum
+      cum at fugit iusto dignissimos molestias nostrum, nobis commodi sequi quisquam iure eum delectus exercitationem
+      reiciendis facilis, dolores cumque labore. Perspiciatis?</div>
+    <div class="box"><img class="cart" src="./imgs/f-cart.png" alt="">Lorem ipsum dolor sit amet consectetur adipisicing
+      elit.
+      Dolorum
+      cum at fugit iusto dignissimos molestias nostrum, nobis commodi sequi quisquam iure eum delectus exercitationem
+      reiciendis facilis, dolores cumque labore. Perspiciatis?</div>
+    <div class="box"><img class="speak" src="./imgs/f-speak.png" alt="">Lorem ipsum dolor sit amet consectetur
+      adipisicing
+      elit.
+      Dolorum
+      cum at fugit iusto dignissimos molestias nostrum, nobis commodi sequi quisquam iure eum delectus exercitationem
+      reiciendis facilis, dolores cumque labore. Perspiciatis?</div>
+    <div class="box"><img class="pos" src="./imgs/f-pos.png" alt="">Lorem ipsum dolor sit amet consectetur adipisicing
+      elit.
+      Dolorum
+      cum at fugit iusto dignissimos molestias nostrum, nobis commodi sequi quisquam iure eum delectus exercitationem
+      reiciendis facilis, dolores cumque labore. Perspiciatis?</div>
+  </div>
 </body>
 
 </html>
