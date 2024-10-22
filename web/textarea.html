@@ -71,7 +71,7 @@
         </tr>
         <tr>
           <td>wrap</td>
-          <td>是否换行；默认on|换行。off|不换行。谁会不换行呢</td>
+          <td>是否换行；默认 on | 换行。off | 不换行。谁会不换行呢</td>
         </tr>
       </table>
       <table>
@@ -111,23 +111,32 @@ textarea {
   color: inherit;
   box-sizing: border-box;
 }</pre>
-      <div>内容较多时，还应该考虑 <a href="./focus.html">热点开发 - 滚动条</a> 的设计</div>
+    </dd>
+    <dd>
+      <div>[<span class="iconfont icon-keyboard"></span>] 获取焦点时，改变边框颜色</div>
+      <textarea name="" id="" class="ta" placeholder="获取焦点时，改变边框颜色"></textarea>
+      <pre>
+.ta {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.ta:focus {
+  border-color: #f40;
+}      </pre>
+      <div>[<span class="iconfont icon-keyboard"></span>] 内容较多时，还应该考虑 <a href="./scroll.html">滚动条</a> 的设计</div>
+      <textarea name="" id="" class="ta" placeholder="请输入多行文字查看滚动条效果"></textarea>
       <pre>
 textarea::-webkit-scrollbar {
   width: 8px;
 }
 
 textarea::-webkit-scrollbar-thumb {
-  background-color: var(--main-color);
+  background-color: #f40;
 }      </pre>
-      <textarea name="" id="" class="ta" placeholder="only for test"></textarea>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 使用事件动态改变背景</dd>
-    <dd>. 注意封装函数时，需要额外使用匿名函数或箭头函数，详情请查看 <a href="./js/event.html">事件 event</a>一节</dd>
-    <dd>
-      <textarea name="" id="ta-bg" title="msg" placeholder="your message"></textarea>
-    </dd>
-    <dd>
+      <div>[<span class="iconfont icon-keyboard"></span>] 使用事件动态改变背景</div>
+      <div>. 注意封装函数时，需要额外使用匿名函数或箭头函数，详情请查看 <a href="./js/event.html">事件 event</a>一节</div>
+      <textarea name="" id="ta-bg" class="ta" title="msg" placeholder="获取焦点时，改变边框颜色和背景颜色"></textarea>
       <pre>
 let ta = document.querySelector('#ta-bg');
 function setBg(color) {
