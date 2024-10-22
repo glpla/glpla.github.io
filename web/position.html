@@ -144,13 +144,14 @@
     border-radius: 50%;
 }</pre>
     </dd>
-    <dd id="mul-menu">[<span class="iconfont icon-keyboard"></span>]二级导航；更多案例请访问 <a href="./demo/dropdown.html">下拉菜单 -
+    <dd id="mul-menu">[<span class="iconfont icon-keyboard"></span>]二级导航；更多案例请访问 <a
+        href="./demo/nav-dropdown.html">导航菜单</a> <a href="./demo/dropdown.html">下拉菜单 -
         dropdown</a>、 <a href="https://codepen.io/glpla/full/gOEagWP">二级导航 - CodePen</a></dd>
     <dd>
-      <div>.嵌套&lt;ul&gt;使用</div>
-      <div>.开始隐藏2级菜单，:hover时显示</div>
+      <div>.嵌套 &lt;ul&gt; 使用</div>
+      <div>.开始隐藏2级菜单，:hover 时显示</div>
       <div>.适合桌面端；移动端通常使用汉堡菜单</div>
-      <div>.注意：&lt;a&gt;不能嵌套使用&lt;a&gt;</div>
+      <div>.注意：&lt;a&gt; 不能嵌套使用 &lt;a&gt;</div>
       <div class="demo-wrap">
         <ul class="menu">
           <li class="menu-item">
@@ -229,7 +230,8 @@
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 层级提升 - 对前后元素的影响</dd>
     <dd>
-      <div class="el-undone">层级未提升 - 默认情况下，后续元素的层级比前面的高；如果后续元素设置了背景颜色[当前设置为白色]，目标元素的部分CSS属性[阴影]会被后续元素覆盖</div>
+      <div class="el-undone" style="height: 50px;">层级未提升 - 默认情况下，后续元素的层级比前面的高</div>
+      <div>后续元素：设置了背景颜色[当前设置为白色]，会覆盖前面的阴影</div>
       <pre>
 .el-undone {
     height: 40px;
@@ -237,15 +239,18 @@
     background-color: #f40;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
 }</pre>
-      <div class="el-done">层级提升 - 通过指定目标元素为相对定位，并提升层级，使其位于后续元素的上层；可以指定目标元素的margin-bottom改善效果</div>
+      <div class="el-done" style="height: 50px;">层级提升 - 通过指定目标元素为相对定位，并提升层级，使其位于后续元素的上层</div>
+      <div>当前元素：默认层级，不会覆盖</div>
       <pre>
 .el-done {
+    // MUST
     position: relative;
     height: 40px;
     line-height: 40px;
     background-color: #f40;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
-    z-index: 1;
+    // 不指定层级，默认在最上层
+    // z-index: 1;
 }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 使用 inset 定位元素</dd>
