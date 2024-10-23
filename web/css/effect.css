@@ -104,7 +104,8 @@
   clip-path: inset(20px round 10px);
 }
 
-.cp-btn, .cp-btn-adv {
+.cp-btn,
+.cp-btn-adv {
   position: relative;
   width: 128px;
   height: 36px;
@@ -115,8 +116,10 @@
   background-color: #ccc;
 }
 
-.cp-btn::after, .cp-btn::before,
-.cp-btn-adv::after, .cp-btn-adv::before {
+.cp-btn::after,
+.cp-btn::before,
+.cp-btn-adv::after,
+.cp-btn-adv::before {
   content: '';
   position: absolute;
   left: 0;
@@ -150,7 +153,8 @@
 @keyframes cp {
 
   /* top */
-  0%, 100% {
+  0%,
+  100% {
     clip-path: inset(0 0 34px 0);
   }
 
@@ -240,7 +244,9 @@
 }
 
 @keyframes spot {
-  0%, 100% {
+
+  0%,
+  100% {
     clip-path: ellipse(30px 20px at 0 50%);
   }
 
@@ -320,8 +326,32 @@
   }
 }
 
+.cb-box {
+  --main-color: #f40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 3rem auto;
+}
+
+.cb[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  clip-path: circle(50%);
+  appearance: none;
+  accent-color: var(--main-color);
+  background-color: #f1f1f1;
+}
+
+.cb[type='checkbox']:checked {
+  appearance: auto;
+}
+
 @media screen and (max-width:768px) {
-  .cp-img5, .cp-img6 {
+
+  .cp-img5,
+  .cp-img6 {
     width: 80%;
   }
 }

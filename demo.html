@@ -22,73 +22,38 @@
       padding: 0;
       box-sizing: border-box;
       font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.5;
     }
 
-    /* body {
+    body {
       display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
-    } */
-
-    .wrap {
-      /* display: flex; */
-      width: 600px;
-      margin: auto;
-      border: 1px solid #f40;
     }
 
-
-    img {
-      width: 100px;
-      shape-outside: url(./imgs/ty.png);
+    @property --deg {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
     }
 
-    .wrap div:nth-of-type(odd) img {
-      float: right;
+    .box {
+      border: 4px solid #000;
+      --deg: 0deg;
+      width: 300px;
+      height: 300px;
+      background-image: conic-gradient(from var(--deg), var(--main-color), var(--second-color), var(--main-color));
+      transition: --deg 1s;
     }
 
-    .wrap div:nth-of-type(even) img {
-      float: left;
-    }
-
-    .wrap span {
-      width: 51%;
+    .box:hover {
+      --deg: 360deg;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div>
-      <img src="./imgs/ty.png" alt="">
-      <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio iste voluptatem eos illum sed
-        excepturi
-        libero harum optio, itaque neque non cum delectus eius quos, ad laborum id corrupti! Laborum.</span>
-
-    </div>
-    <div>
-      <img src="./imgs/ty.png" alt=""><span>Maxime
-        suscipit, laborum fuga quam quae aspernatur in tenetur necessitatibus sequi itaque vitae non ut iste ipsum!
-        Veritatis dolorem libero at aut qui, dolorum sed voluptate dignissimos aliquid, provident natus!</span>
-
-    </div>
-    <div>
-      <img src="./imgs/ty.png" alt=""><span>Illo
-        quo ex reprehenderit perferendis, saepe possimus vel. Veniam, beatae accusamus omnis possimus veritatis saepe
-        eos.
-        Laboriosam, ab incidunt delectus, rerum veritatis expedita eveniet illo quaerat aut minima enim
-        dolorem.</span>
-
-    </div>
-    <div>
-      <img src="./imgs/ty.png" alt="">
-      <span>Harum at itaque ratione dolorem nesciunt eum aliquam nisi reprehenderit soluta
-        aspernatur
-        debitis eligendi tempore eius blanditiis asperiores sint ea, corporis porro sit minus dolores repellat? Velit
-        quia
-        laboriosam perferendis?</span>
-    </div>
-  </div>
+  <div class="box"></div>
 </body>
 
 </html>

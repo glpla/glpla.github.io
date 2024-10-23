@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>线框表格 Table</title>
+    <title>渐变边框表格 Table</title>
     <style>
         /* init start */
         :root {
             --main-color: #1abc9c;
+            --second-color: #035c4a;
         }
 
         * {
@@ -27,9 +28,9 @@
         table {
             width: 94%;
             max-width: 800px;
-            border-collapse: collapse;
-            margin: auto;
             table-layout: fixed;
+            line-height: 2;
+            margin: auto;
         }
 
         /* init end */
@@ -38,21 +39,25 @@
             margin-top: auto;
         }
 
+
         table {
-            border: 2px solid var(--main-color);
-            line-height: 2;
+            border-width: 4px;
+            border-style: solid;
+            border-image-source: linear-gradient(-45deg, var(--main-color), var(--second-color));
+            border-image-slice: 4;
         }
 
-        td,
-        th {
-            border: 1px dotted var(--main-color);
+        th,
+        td {
+            text-align: left;
+            border: 1px solid var(--main-color);
             padding: 0 10px;
         }
     </style>
 </head>
 
 <body>
-    <h1>线框表格</h1>
+    <h1>渐变边框表格</h1>
     <table>
         <tr>
             <th>Lorem, ipsum.</th>

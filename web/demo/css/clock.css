@@ -1,12 +1,18 @@
-@font-face {
-  font-family: 'MR';
-  src:
-    url(../../../fonts/Michroma/Michroma.ttf)
-}
+@import url(../../../css/fonts_Michroma.css);
 
 :root {
   --main-color: #eb2c58;
+  --second-color: #22a6b3;
+  --thiird-color: #3498db;
+  --fourth-color: #ff0;
   --main-bg-color: #333;
+  --roll-deg: 0deg;
+}
+
+@property --roll-deg {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
 }
 
 body,
@@ -24,7 +30,7 @@ div {
 
 body {
   height: 100vh;
-  background-color: var(--main-color);
+  background-color: #000;
 }
 
 .clock {
@@ -33,8 +39,24 @@ body {
   height: 320px;
   border-radius: 50%;
   background-color: #fff;
-  border: 20px solid #fff;
   box-shadow: 0 0 20px var(--main-bg-color) inset;
+}
+
+.clock::before {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  background-image: conic-gradient(from var(--roll-deg), var(--main-color), var(--second-color), var(--fourth-color), var(--thiird-color), var(--main-color));
+  z-index: -1;
+  animation: --roll 5s linear infinite;
+  box-shadow: 0 0 16px rgba(255, 255, 0, 1);
+}
+
+@keyframes --roll {
+  to {
+    --roll-deg: 360deg;
+  }
 }
 
 .clock::after {
@@ -54,6 +76,7 @@ body {
   display: flex;
   justify-content: center;
   transform: rotateZ(calc(var(--track) * -6deg));
+  z-index: 1;
 }
 
 .track::after {

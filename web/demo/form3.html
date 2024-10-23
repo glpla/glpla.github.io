@@ -117,12 +117,35 @@
         }
 
         .tips {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             text-transform: capitalize;
             margin-bottom: var(--mb);
         }
 
         .link:hover {
             color: var(--second-color);
+        }
+
+        .tips label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .cb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            accent-color: var(--second-color);
+            clip-path: circle(50%);
+        }
+
+        .cb:checked {
+            appearance: auto;
         }
 
         button {
@@ -157,7 +180,7 @@
             <i class='bx bxs-lock bx-md'></i>
         </div>
         <div class="tips">
-            <label><input type="checkbox" id="rem"> remmenber me?</label>
+            <label><input class="cb" type="checkbox" id="rem"> remmenber me?</label>
             <a class="link" href="">forget password?</a>
         </div>
         <button>enter</button>

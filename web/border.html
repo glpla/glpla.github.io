@@ -244,13 +244,6 @@ border-radius: 0 50% 50%/0 50% 50%;</pre>
       <div>. 设置伪元素上边框 border-top 颜色为相同的颜色；其他三个方向的边框颜色透明</div>
       <div>. 旋转伪元素 transform，使其覆盖在右侧环上方</div>
     </dd>
-    <dd id="border-radius">[<span class="iconfont icon-keyboard"></span>] <a href="./position.html">渐变边框</a></dd>
-    <dd>
-      <div>定位 position</div>
-      <div>伪元素 ::before</div>
-      <div>背景图片 background-image</div>
-      <div>线路渐变 linear-gradient</div>
-    </dd>
     <dd id="border-radius">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/nav-radius.html">圆角导航</a></dd>
     <dd>
       <div>. 使用子元素撑开容器；否则要仔细计算元素尺寸</div>
@@ -283,87 +276,116 @@ border-radius: 0 50% 50%/0 50% 50%;</pre>
   </dl>
   <div class="chap">边框图像 border-image</div>
   <dl class="nav-cont">
-    <dd>. 除了背景可以使用背景图片外，边框也可以使用背景图片</dd>
-    <dd>. 必须有边框</dd>
-    <dt>独立属性</dt>
     <dd>
-      <div>1. border-image-source</div>
-      <div>. 背景图片；可以是 <span class="warn">线性渐变</span> 或 <span class="warn">径向渐变</span></div>
-      <div>2. border-image-slice</div>
-      <div>. 到边框图像上、下、左、右的裁剪，将边框图像裁剪成9份-九宫格</div>
-      <div>. 可以是 数值 或 % 或 fill；不带单位，</div>
-      <div>. 数字：默认单位像素px；不能为负值</div>
-      <div>. %：默认100%；如果为50%，因为左右俩端已经各占了50%，中间区域没有内容；当&lt;50%时，中间端才会有内容；这部分的内容会根据铺贴的方式进行渲染</div>
-      <div>. fill：保留边框图像的中间部分；默认不保留</div>
-      <div>. 当border-image-slice小于图像的一半50%时，border-image-repeat的特性才会体现出来</div>
-      <div>3. border-image-width</div>
-      <div>. 边框占用图像的宽度；默认是100%，即背景图片全部覆盖容器；可以使用px</div>
-      <div>4. border-image-outset</div>
-      <div>. 图像向外扩展的区域；默认0；不可以是负数</div>
-      <div>5. border-image-repeat</div>
-      <div>. 图像重复的方式：stretch[默认]、repeat、round[衔接更顺滑]</div>
+      <div>. 使用图片代替元素的边框 - draws an image around a given element, replaces the element's regular border.</div>
+      <div>. 可以使用url()引入普通背景图片，也可以使用渐变背景</div>
+      <div>. 通过切割背景图片，将切割的9份分别应用到元素的相应位置</div>
+      <div>. 应该指定边框宽度 border-width 和样式 border-style</div>
+      <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-image">MDN - border-image</a>
+      </div>
+      <img src="https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice/border-image-slice.png" alt=""
+        loading="lazy">
     </dd>
     <dt>复合属性</dt>
     <dd>. border-image</dd>
+    <dt>独立属性</dt>
     <dd>
-      <div>[<span class="iconfont icon-keyboard"></span>] 叠加蒙层 - 从上到下的渐变</div>
-      <div class="border-img"></div>
-      <pre>border-image: linear-gradient(#0003, #000) 0 fill;</pre>
+      <div>may be specified with anywhere from one to five of the values listed below</div>
+      <div>1. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-source">border-image-source</a>
+      </div>
+      <div>. 背景图片</div>
+      <div>. 对切片大小和最后的效果有很大的关系</div>
+      <div>2. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-slice">border-image-slice</a></div>
+      <div>. 将边框图像裁剪成9份 region - four <span class="warn">corners</span>, four <span class="warn">edges</span>, and a
+        <span class="warn">middle</span> region.
+      </div>
+      <div>. 各份会被拉伸或平铺以适应实际的边框宽度：四个角部区域会被直接放置在边框的四个角；四条边的中间部分会被拉伸或平铺以适应边框的宽度</div>
+      <div>. 如果切片大小正好匹配边框宽度，不会发生拉伸或平铺</div>
+      <div>. 同margin、padding一样，可以使用1-4个值指定方向的切割</div>
+      <div>. 可以是 数值 或 %，表示 <span class="warn">从图像边缘开始向内切割的大小</span>；如果为0，则只有中间部分</div>
+      <div>. 数字：默认单位像素px；不能为负值</div>
+      <div>. %：默认100%；如果为50%，因为左右俩端已经各占了50%，中间区域没有内容；当&lt;50%时，中间端才会有内容</div>
+      <div>. fill：填充中间部分；默认不填充 - discarded by default</div>
+      <div>3. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-width">border-image-width</a></div>
+      <div>. 边框图像的宽度；可以使用数值或百分比</div>
+      <div>. 如果比边框宽度 border-width大，则占用填充 padding</div>
+      <div>. 如果没有指定 auto，则使用边框宽度 border-width</div>
+      <div>4. <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border-image-repeat">border-image-repeat</a>
+      </div>
+      <div>. 指定边 edges 和中心 middle 的重复方式：stretch、repeat、round、space</div>
+      <div>. 可以使用1个值或2个值表示；不支持3个和4个值</div>
+      <div>. 1个值：4个方向</div>
+      <div>. 2个值：第1个值表示 top、center和bottom；第2个值表示 left、right</div>
+      <table>
+        <tr>
+          <th>item</th>
+          <th>desc</th>
+        </tr>
+        <tr>
+          <td>stretch</td>
+          <td>拉伸；默认</td>
+        </tr>
+        <tr>
+          <td>repeat</td>
+          <td>重复平铺；可能出现不完整的部分/被裁剪</td>
+        </tr>
+        <tr>
+          <td>round</td>
+          <td>通过拉伸重复平铺；比repeat衔接更顺滑；不会裁剪</td>
+        </tr>
+        <tr>
+          <td>space</td>
+          <td>重复平铺，使用空格填充多余的空间；不会拉伸；不会裁剪</td>
+        </tr>
+      </table>
+      <div>5. border-image-outset</div>
+      <div>. 图像向外扩展的区域；默认0；不可以是负数</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 相框类设计；示例中，原图大小为 81x81</dd>
     <dd><img class="b-img" src="./imgs/border-img.png" alt="" title="原图"></dd>
     <dd>
       <div>1. 边框背景</div>
-      <p class="basic b-img0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati maiores consequuntur
-        fugiat, praesentium voluptatibus, molestiae dignissimos cumque similique culpa dolores architecto
-        repellendus debitis vel est! Voluptatum quis.</p>
+      <p class="basic-img b-img0">Lorem ipsum dolor sit amet.</p>
       <pre>
 border: 27px solid #f40;
 border-image: url(../imgs/border-img.png);
 //等同于
 border-image-source: url(../imgs/border-img.png);</pre>
-      <div>2. 1/3裁剪背景图片为9份，并round铺满；如果默认，则2、4、6、8被拉伸</div>
-      <p class="basic b-img1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam commodi, sunt enim sed
-        labore sapiente ipsa libero hic incidunt necessitatibus sit consectetur. Ratione veritatis distinctio
-        perspiciatis, odio dignissimos aliquid totam!</p>
+      <div>2. 裁剪大小为27并round铺满；2、4、6、8默认被拉伸</div>
+      <p class="basic-img b-img1">Lorem ipsum dolor sit amet.</p>
       <pre>
 border: 27px solid #f40;
 border-image-source: url(../imgs/border-img.png);
 border-image-slice: 27;
 border-image-repeat: round;</pre>
-      <div>3. 1/2裁剪背景图片为4份；四个角各占1份，所以中间没有预留空间，是否拉伸不起作用</div>
+      <div>3. 裁剪大小为50%，只有4个角，没有中间部分，是否拉伸不起作用</div>
       <p>. 当&lt;50%时，中间区域才会有内容</p>
-      <p class="basic b-img2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas error iusto sapiente aut
-        repudiandae accusantium id tempora. Consequuntur culpa nulla officiis voluptatum fuga suscipit impedit,
-        distinctio deleniti dolor adipisci. Quibusdam!</p>
+      <p class="basic-img b-img2">Lorem ipsum dolor sit amet.</p>
       <pre>
 border: 27px solid #f40;
 border-image-source: url(../imgs/border-img.png);
 border-image-slice: 50%;
 border-image-repeat: round;</pre>
-      <div>4. 1/6裁剪背景图片为9份</div>
-      <p class="basic b-img3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, eaque quae! Harum
-        commodi amet porro eum nesciunt ut nemo, explicabo quibusdam a aspernatur consectetur! Nemo suscipit optio
-        corrupti eius magnam.</p>
+      <div>4. 裁剪大小1/3；边框宽度为1/2，所以容器被4个边角覆盖，中间没有预留空间；是否拉伸不起作用</div>
+      <div>.注意：如果不指定图像边框宽度，则和第2种情况相同</div>
+      <p class="basic-img b-img4">Lorem ipsum dolor sit amet.</p>
+      <pre>
+border: 27px solid #f40;
+border-image-source: url(../imgs/border-img.png);
+border-image-slice: calc(100%/3);
+border-image-repeat: round;
+border-image-width: 50%;</pre>
+      </p>
+      <div>5. 裁剪大小为1/6</div>
+      <p class="basic-img b-img3">Lorem ipsum dolor sit amet.</p>
       <pre>
 border: 27px solid #f40;
 border-image-source: url(../imgs/border-img.png);
 border-image-slice: calc(100%/6);
 border-image-repeat: round;</pre>
-      <div>5. 1/3裁剪；宽度为1/2，所以容器被4个边角覆盖，中间没有预留空间；是否拉伸不起作用</div>
-      <p class="basic b-img4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis maxime perspiciatis
-        quasi animi laudantium placeat? Numquam reiciendis ipsum natus, hic accusamus dicta aliquam. Temporibus
-        tenetur quidem nam aliquid eum dolorem.</p>
-      <pre>
-border: 27px solid #f40;
-border-image-source: url(../imgs/border-img.png);
-border-image-slice: calc(100%/3);
-border-image-width: 50%;</pre>
-      </p>
+
       <div>6. 1/6裁剪；宽度为1/20</div>
-      <p class="basic b-img5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo dicta, omnis numquam
-        totam veniam ea suscipit voluptates nemo optio placeat iusto ipsa? A nobis ea possimus amet sit nesciunt
-        quae!</p>
+      <p class="basic-img b-img5">Lorem ipsum dolor sit amet.</p>
       <pre>
 border: 27px solid #f40;
 border-image-source: url(../imgs/border-img.png);
@@ -371,6 +393,32 @@ border-image-slice: calc(100%/6);
 border-image-width: 5%;
 border-image-repeat: round;</pre>
       </p>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 渐变边框 - 如非必要，尽量使用渐变背景美化边框；更多实现，请访问 <a
+        href="./position.html">定位 - 渐变背景</a>、<a href="./demo/table3.html">渐变边框表格</a></dd>
+    <dd>
+      <div class="basic-img linear-border"></div>
+      <pre>
+border-width: 10px;
+border-style: solid;
+border-image-source: linear-gradient(#f40, #800);
+border-image-slice: 10;</pre>
+      <div class="basic-img linear-border-part"></div>
+      <pre>
+border-width: 10px 0;
+border-style: solid;
+border-image-source: linear-gradient(#f40, #800);
+border-image-slice: 10;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 叠加渐变蒙层 - 利用0裁剪；更多案例实现，请访问 <a href="./position.html">渐变背景</a>
+    </dd>
+    <dd>
+      <div class="basic-img border-img"></div>
+      <pre>
+border-image-source: linear-gradient(#0003, #000);
+border-image-slice: 0 fill;</pre>
+      <div>或</div>
+      <pre>border-image: linear-gradient(#0003, #000) 0 fill;</pre>
     </dd>
   </dl>
   <div class="chap">边框块 border-block</div>
@@ -420,6 +468,7 @@ border-block-end</pre>
     <dd class="sn">
       <div>绘制透明椭圆头像框</div>
       <div>优化个人网站，如导航按钮、信息介绍</div>
+      <div>如何利用边框图像实现单独某个边的渐变背景？</div>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
