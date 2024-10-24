@@ -45,9 +45,11 @@
       left: 0;
       top: 0;
       width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 2rem 8%;
       background-color: transparent;
-      text-align: center;
       transition: 0.5s;
       z-index: 99;
     }
@@ -59,6 +61,14 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
+    .logo {
+      font-weight: 600;
+    }
+
+    .ham {
+      display: none;
+    }
+
     section {
       min-height: 100vh;
       padding: 10rem 9% 2rem;
@@ -66,12 +76,37 @@
       justify-content: center;
       align-items: center;
     }
+
+    @media screen and (max-width: 768px) {
+      .ham {
+        display: block;
+      }
+
+      .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        padding-top: 8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        transition: right 0.5s;
+      }
+
+      .nav.active {
+        right: 0;
+      }
+    }
   </style>
 </head>
 
 <body>
   <header>
-    <nav>
+    <a class="logo" href="#">Logo</a>
+    <div class="ham">
+      <span>menu</span>
+    </div>
+    <nav class="nav">
       <a href="#nav1" class="active">Home</a>
       <a href="#nav2">Work</a>
       <a href="#nav3">Team</a>
@@ -95,6 +130,13 @@
     <div class="cont">About</div>
   </section>
   <script src="/utils/custom/scroll-nav.js"> </script>
+  <script>
+    const ham = document.querySelector('.ham');
+    const nav = document.querySelector('.nav');
+    ham.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    })
+  </script>
 </body>
 
 </html>
