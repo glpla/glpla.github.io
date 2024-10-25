@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Demo</title>
   <style>
     :root {
       --bg-color: #171f2b;
@@ -36,55 +36,54 @@
       height: 100vh;
     }
 
-    .box {
-      width: 300px;
+    .random {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(4, 1fr);
-      gap: 10px;
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: auto auto 1fr auto;
+      grid-template-areas:
+        'header header header'
+        'nav nav nav'
+        'aside article article'
+        'footer footer footer';
+      gap: 1rem;
+      width: 300px;
+      height: 200px;
+      gap: 0.4rem;
     }
 
     .item {
       background-color: #f1f2f3;
     }
 
-    /* 
-    .r23 {
-      grid-column: 1/-1;
-      background-color: #f40;
+    .h {
+      grid-area: header;
     }
 
-    .r24 {
-      grid-row: 2/-1;
-      background-color: #f40;
-    } */
-    .c9 {
-      grid-column: span 3;
+    .n {
+      grid-area: nav;
     }
 
-    .c0 {
-      grid-column: 1/-1;
+    .l {
+      grid-area: aside;
     }
 
-    .c3 {
-      grid-column: 3/-1;
-      grid-row: 2/-1;
+    .m {
+      grid-area: article;
+    }
+
+    .f {
+      grid-area: footer;
     }
   </style>
 </head>
 
 <body>
-  <div class="box">
-    <div class="item c0">0</div>
-    <div class="item r23">1</div>
-    <div class="item">2</div>
-    <div class="item c3">3</div>
-    <div class="item r24">4</div>
-    <div class="item">5</div>
-    <div class="item">6</div>
-    <div class="item">7</div>
-    <div class="item">8</div>
-    <div class="item">9</div>
+  <div class="random">
+    <div class="item h">header</div>
+    <div class="item n">nav</div>
+    <div class="item l">aside</div>
+    <div class="item m">main</div>
+    <div class="item f">footer</div>
   </div>
 </body>
 
