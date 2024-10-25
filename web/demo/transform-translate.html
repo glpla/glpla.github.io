@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>居中 - 单个子元素居中</title>
+    <style>
+        @import url(//at.alicdn.com/t/c/font_4061940_6dyoea80rpg.css);
+
+        :root {
+            --bg-color: #2c3e50;
+            --txt-color: #c8bc9d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            color: var(--txt-color);
+            cursor: pointer;
+        }
+
+        .box {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background-color: var(--bg-color);
+            margin: auto;
+        }
+
+        .icon {
+            font-size: 2rem;
+            padding: 10px;
+            border: 1px solid var(--txt-color);
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+
+        .txt {
+            transform: translate(-50%, -50%) scale(0);
+            transition: 0.2s;
+            opacity: 0;
+        }
+
+        .box:hover .icon {
+            transform: translate(-50%, -50%) scale(2);
+            opacity: 0;
+        }
+
+        .box:hover .txt {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <span class="iconfont icon-xinfeng icon center"></span>
+        <span class="txt center">1942194789@qq.com</span>
+    </div>
+</body>
+
+</html>
