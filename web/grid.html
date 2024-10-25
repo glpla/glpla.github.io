@@ -208,7 +208,7 @@
     <dd class="tips">
       <div>justify-items 和 align-items 控制的是每个子项在其所在单元格内的对齐方式</div>
       <div>justify-content 和 align-content 控制的是整个容器内子项的整体对齐方式</div>
-      <div>如果容器不指定高度，由子项撑开/占满，则很多容器属性都可以不考虑</div>
+      <div>如果容器不指定高度、不指定行的划分，由子项撑开/占满，则很多容器属性都可以不考虑</div>
     </dd>
     <dt>gap</dt>
     <dd>
@@ -220,30 +220,62 @@
   </dl>
   <div class="chap">子项 Item</div>
   <dl class="nav-cont">
-    <dd>.子项如果不显示的指定尺寸，就默认 <span class="warn">自动拉伸</span> 占满整个单元格</dd>
-    <dt>grid-column: span number</dt>
     <dd>
-      <div>.跨列，也可以根据轨道线简写为1/3，表示单元格跨度从track 1到track 3</div>
-      <pre>
-.wrap div:last-child {
-  grid-column: span 3;
-  /* 或 */
-  grid-column: 1/4;
-}      </pre>
-      <img src="./imgs/grid11.png" alt="" loading="lazy">
-      <p class="fig-sn">跨列</p>
+      <div>子项如果不显示的指定尺寸，默认 <span class="warn">自动拉伸</span> 占满整个单元格</div>
+      <div>子项的排列是一个一个，根据所占的空间进行排列</div>
+      <div>子项如果跨行或跨列，尽量明确指定行、列位置时，否则它会自动放置在下一个可用的单元格中，有可能跑到前面</div>
+      <div>使用-1表示结束行/列号</div>
+      <div>尽量明确指定行和列的划分</div>
     </dd>
-    <dt>grid-row: span number</dt>
+    <dt>grid-column: span number
+      <br>grid-column-start、grid-column-end
+    </dt>
     <dd>
-      <div>.跨行；同样可以利用轨道线简写</div>
+      <div>.跨列；列的起始和结束</div>
+      <div>.也可以根据轨道线简写为1/4，表示单元格跨度从track 1到track 4</div>
+      <img src="./imgs/grid11.png" alt="" loading="lazy">
+      <p class="fig-sn">最后1个子项跨列</p>
+      <pre>grid-column: span 3;</pre>
+      <pre>grid-column: 1/4;</pre>
       <pre>
-.wrap div:first-child {
-  grid-row: span 2;
-  /* 或 */
-  grid-row: 1/3;
-}      </pre>
+grid-column-start: 1;
+grid-column-end: 4;</pre>
+
+    </dd>
+    <dt>grid-row: span number
+      <br>grid-row-start、grid-row-end
+    </dt>
+    <dd>
+      <div>.跨行；行的起始和结束</div>
+      <div>.同样可以利用轨道线简写</div>
       <img src="./imgs/grid12.png" alt="" loading="lazy">
-      <p class="fig-sn">跨行</p>
+      <p class="fig-sn">第1个子项跨行</p>
+      <pre>grid-row: span 2;</pre>
+      <pre>grid-row: 1/3;</pre>
+      <pre>
+grid-row-start: 1;
+grid-row-end: 3;</pre>
+      <img src="./imgs/grid13.png" alt="" loading="lazy">
+      <p class="fig-sn">第1个子项跨列；第4个子项未指定行列位置跨行，会跑到前面</p>
+      <pre>
+.c0 {
+  grid-column: 1/-1;
+}
+
+.c3 {
+  grid-row: 2/-1;
+}      </pre>
+      <img src="./imgs/grid14.png" alt="" loading="lazy">
+      <p class="fig-sn">第1个子项跨列；第4个子项指定行列位置跨行</p>
+      <pre>
+.c0 {
+  grid-column: 1/-1;
+}
+
+.c3 {
+  grid-column: 3/-1;
+  grid-row: 2/-1;
+}      </pre>
     </dd>
     <dt>grid-area</dt>
     <dd>.配合grid-template-areas一起使用，指定划分的某一个区域</dd>
