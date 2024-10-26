@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技能条 Border</title>
+    <style>
+        :root {
+            --color: 100px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+        }
+
+        .skill {
+            width: 350px;
+            margin: auto;
+        }
+
+        .bar {
+            position: relative;
+            height: 20px;
+            border-radius: 10px;
+            border: 2px solid var(--color);
+            padding: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .bar::before {
+            content: attr(data-desc);
+            position: absolute;
+            left: 0;
+            top: -150%;
+            text-transform: capitalize;
+        }
+
+        .bar::after {
+            content: attr(data-per)'%';
+            position: absolute;
+            right: 0;
+            top: -150%;
+        }
+
+        .per {
+            width: calc(var(--per)*1%);
+            height: 100%;
+            background-color: var(--color);
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="skill">
+
+        <div class="bar" style="--per:85;--color:#089;" data-per="85" data-desc="web">
+            <div class="per"></div>
+        </div>
+        <div class="bar" style="--per:90;--color:#890;" data-per="90" data-desc="vue">
+            <div class="per"></div>
+        </div>
+        <div class="bar" style="--per:75;--color:#f40;" data-per="75" data-desc="node">
+            <div class="per"></div>
+        </div>
+        <div class="bar" style="--per:95;--color:#908;" data-per="95" data-desc="python">
+            <div class="per"></div>
+        </div>
+    </div>
+</body>
+
+</html>

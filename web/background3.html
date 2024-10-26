@@ -191,6 +191,8 @@ background-size: 50% 50%;</pre>
       <div>. 角度渐变</div>
       <div>. 适合做圆锥图/饼状图</div>
       <div>. 默认从0/12点方向开始；可以使用 from 指定起始位置</div>
+      <div>. 可以使用度 deg 或百分比 %</div>
+      <div>. 使用0表示从前面部分结束的位置开始</div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/conic-gradient">MDN -
           conic-gradient</a></div>
       <pre>conic-gradient([from angle] [at position,] color degree, color degree, ...);</pre>
@@ -199,60 +201,19 @@ background-size: 50% 50%;</pre>
     <dd class="grid">
       <div class="basic pie0"></div>
       <pre>
-// 1. 圆锥图 - 从0到360deg的渐变；默认
-.pie {
-    background-image: conic-gradient(#f3f3f3, #078);
-}</pre>
+// 从0到360deg的渐变；默认
+background-image: conic-gradient(#f3f3f3, #078);</pre>
       <div class="basic pie1"></div>
       <pre>
-// 2. 饼图 - 整个圆周划分3个区域：0-40deg、40-120deg、120-360deg
-.pie {
-    background-image: conic-gradient(
-        hsl(188, 100%, 40%) 0deg  40deg, 
-        hsl(188, 100%, 27%) 40deg 120deg, 
-        hsl(188, 100%, 20%) 120deg 360deg);
-}</pre>
-      <pre>
-// 或：使用0表示从前面值开始
-.pie {
-    background-image: conic-gradient(
-      hsl(188, 100%, 40%)  40deg, 
-      hsl(188, 100%, 27%) 0 120deg, 
-      hsl(188, 100%, 20%) 120deg);
-}</pre>
-      <pre>
-// 或：使用 from 指定开始角度
-.pie {
-    background-image: conic-gradient(
-      from 30deg,
-      hsl(188, 100%, 40%)  40deg, 
-      hsl(188, 100%, 27%) 0 120deg, 
-      hsl(188, 100%, 20%) 120deg);
-}</pre>
-      <div class="basic pie2"></div>
-      <pre>
-// 3. 环图 - 叠加一个白色到透明的径向渐变和锥向渐变
-.pie2 {
-  border-radius: 50%;
-  background-image:
-    radial-gradient(#fff 40%, transparent 0),
-    conic-gradient(from 30deg,
-      #1393c7 40deg,
-      #5f60cf 0 120deg,
-      #e44545 0 280deg,
-      #fd871c 0);
-}</pre>
-      <div class="ring-box">
-        <div class="ring"></div>
-        <div class="legend">
-          <span>Lorem 60%</span>
-          <span>Adipisci 140%</span>
-          <span>Iure 50%</span>
-          <span>Optio 110%</span>
-        </div>
-      </div>
-      <pre>// 4. 环图 - 使用伪元素展示图例legend</pre>
+// 划分3个区域：0-40deg、40-120deg、120-360deg
+background-image: conic-gradient(
+    hsl(188, 100%, 40%) 0deg  40deg, 
+    hsl(188, 100%, 27%) 40deg 120deg, 
+    hsl(188, 100%, 20%) 120deg 360deg);</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/pie-ring.html">环图</a> - 多背景或多元素；覆盖一个白色背景；可以使用伪元素
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/pie-adv.html">动态饼图</a></dd>
   </dl>
   <div class="chap" id="bgi">混和模式 Blend mode</div>
   <dl class="nav-cont">
