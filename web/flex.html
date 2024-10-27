@@ -35,6 +35,7 @@
       <div>.控制其直接子元素的排列方式 - 横排、竖排</div>
       <div>.控制其直接子元素的对齐方式 - 左、中、右还是上、中、下或者分散</div>
       <div>.控制其直接子元素渲染的先后顺序</div>
+      <div>Flex 对使用绝对定位的子项仍然具有布局的能力</div>
       <div>.更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox">MDN -
           flexbox</a>、<a href="https://mp.weixin.qq.com/s/3cxv1y14OLcPJjEN4f_OiA">如何用一行 CSS 实现 10 种现代布局</a>
       </div>
@@ -124,7 +125,6 @@
   <dl class="nav-cont">
     <dd>.
       <div>弹性盒子的直接子元素</div>
-      <div>Flex 对使用绝对定位的子项仍然具有布局的能力</div>
     </dd>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis">flex-basis</a></dt>
     <dd>
@@ -360,6 +360,44 @@ body {
   </dl>
   <div class="chap">案例 Cases</div>
   <dl class="nav-cont">
+    <dd>[<span class="iconfont icon-keyboard"></span>] 主导航，更多案例参考 <a href="./demo/nav-sample.html">常见导航</a></dd>
+    <dd>
+      <div>. 使用1个 Flex：两端分布；&lt;nav&gt; + &lt;a&gt;</div>
+      <div>. 使用2个 Flex：两端分布；&lt;ul&gt; + &lt;li&gt; + &lt;a&gt;</div>
+      <div>. 使用1个 Flex：第一项右侧空白自动分配</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 主导航；更多案例参考 <a href="./img.html">网站图文导航</a></dd>
+    <dd>
+      <div>. 使用图片和文字构建</div>
+    </dd>
+    <dd class="tips">
+      <div>注意：行内元素 inline 的影响</div>
+      <div>方便起见，图片会初始化 block 或 inline-block</div>
+    </dd>
+    <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/flex-timeline.html">时间轴</a> - 利用 nth-child 配合
+      order 实现；更多案例，请访问 <a href="./agenda.html">学习路线 - agenda</a></div>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/grid-sudoku.html">九宫格 - grid</a>、更多案例，请访问 <a
+        href="https://codepen.io/glpla/full/RwvdpdQ">九宫格 - CodePen</a> </dd>
+    <dd>
+      <div>. 每个 item 的宽度和 gap 相加不能超过100%</div>
+      <div>. 通常取项目的宽度为25%-30%，剩下的空间由 auto 自动分配，故而可以撑满到3个子项，实现九宫格</div>
+      <img src="./imgs/flex14.png" alt="" loading="lazy">
+      <pre>
+.sudoku {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 800px;
+}
+
+.sudoku .item {
+  width: 30%;
+  aspect-ratio: 16/9;
+  flex: auto;
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/form2.html">表单设计 - 留言板</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./index.html">首页小标题</a>；更多案例，请访问 <a
         href="https://moodle.org/index.php?">moodle</a></dd>
     <dd>
@@ -368,13 +406,6 @@ body {
       <div>. 静态底部边框为 2px；鼠标悬停时，为 5px</div>
       <div>. 使用过渡动画 transition</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 主导航，更多案例参考<a href="./demo/up2u.html">网站导航</a></dd>
-    <dd>. 使用2个 Flex：两端分布</dd>
-    <dd>. 使用1个 Flex：第一项右侧空白自动分配</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 主导航，更多案例参考<a href="./img.html">网站图文导航</a></dd>
-    <dd>. 使用图片和文字构建</dd>
-    <dd>. 方便起见，图片会初始化 block</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/form2.html">表单设计 - 留言板</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/acc_flex.html">手风琴 - flex</a>、 <a
         href="https://codepen.io/glpla/full/LYqaWMW">手风琴 - CodePen</a>
     </dd>
@@ -388,28 +419,6 @@ body {
 
 .cor-wrap div:hover {
   flex-basis: 200px;
-}</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/RwvdpdQ">九宫格 -
-        CodePen</a>、<a href="./grid.html">九宫格 - grid</a>
-    </dd>
-    <dd>
-      <div>每个 item 的宽度和 gap 相加不能超过100%</div>
-      <div>通常取项目的宽度为25%-30%，剩下的空间由 auto 自动分配，故而可以撑满到3个子项，实现9宫格</div>
-      <img src="./imgs/flex14.png" alt="" loading="lazy">
-      <pre>
-.sudoku {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  max-width: 800px;
-  width: 100%;
-}
-
-.sudoku .item {
-  width: 30%;
-  aspect-ratio: 16/9;
-  flex: auto;
 }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 面包屑导航</dd>
@@ -445,7 +454,7 @@ body {
     flex-wrap: wrap;
 }</pre>
       <div>改进方式</div>
-      <p>. 子项显式指定 flex:auto；利用剩余空间</p>
+      <p>. 子项显式指定 flex:auto；同九宫格一样，让其占用剩余空间</p>
       <p>. 子项指定最大宽度 max-width，避免最后一项铺满[是否需要铺满，看设计需求]</p>
       <ul class="bread adv">
         <li>html</li>

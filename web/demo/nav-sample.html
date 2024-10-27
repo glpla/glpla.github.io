@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nav Sample</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: Arial, Helvetica, sans-serif;
+            text-decoration: none;
+            color: inherit;
+            font: inherit;
+        }
+
+        .clear::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+        }
+
+        .w {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .nav-wrap {
+            background-color: #f40;
+            color: #fff;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .nav-item {
+            padding: 4px 10px;
+        }
+
+        .nav-item:hover {
+            border-bottom: 1px solid #fff;
+        }
+
+        .logo {
+            font-size: 20px;
+            padding: 4px 10px;
+        }
+
+        /* flaot */
+        .float .logo {
+            float: left;
+        }
+
+        .float .nav {
+            float: right;
+        }
+
+        .float .nav .nav-item {
+            display: inline-block;
+            margin-top: 2.5px;
+        }
+
+        /* float-lh */
+        .float-lh {
+            line-height: 34px;
+        }
+
+        .float-lh .logo {
+            float: left;
+        }
+
+        .float-lh .nav {
+            float: right;
+        }
+
+        .float-lh a {
+            padding: 0 10px;
+        }
+
+        /* float-ul */
+        .float-ul .logo {
+            float: left;
+        }
+
+        .float-ul .nav {
+            /* float: right; */
+            list-style: none;
+        }
+
+        .float-ul .nav .nav-item {
+            float: right;
+        }
+
+        /* flex */
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* grid */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w">
+        <div class="nav-wrap float clear">
+            <a href="#" class="logo">
+                <h1>Float</h1>
+            </a>
+            <nav class="nav">
+                <a class="nav-item" href="#">home</a>
+                <a class="nav-item" href="#">work</a>
+                <a class="nav-item" href="#">team</a>
+                <a class="nav-item" href="#">about</a>
+            </nav>
+        </div>
+        <p>nav+a float margin inline-block</p>
+        <div class="nav-wrap float-lh clear">
+            <a href="#" class="logo">
+                <h1>Float</h1>
+            </a>
+            <nav class="nav">
+                <a class="nav-item" href="#">home</a>
+                <a class="nav-item" href="#">work</a>
+                <a class="nav-item" href="#">team</a>
+                <a class="nav-item" href="#">about</a>
+            </nav>
+        </div>
+        <p>nav+a float line-height</p>
+        <div class="nav-wrap float-ul clear">
+            <a href="#" class="logo">
+                <h1>Float</h1>
+            </a>
+            <ul class="nav clear">
+                <li><a class="nav-item" href="#">home</a></li>
+                <li><a class="nav-item" href="#">work</a></li>
+                <li><a class="nav-item" href="#">team</a></li>
+                <li><a class="nav-item" href="#">about</a></li>
+            </ul>
+        </div>
+        <p>ul+li+a float</p>
+        <div class="nav-wrap flex">
+            <a href="#" class="logo">
+                <h1>Flex</h1>
+            </a>
+            <nav class="nav">
+                <a class="nav-item" href="#">home</a>
+                <a class="nav-item" href="#">work</a>
+                <a class="nav-item" href="#">team</a>
+                <a class="nav-item" href="#">about</a>
+            </nav>
+        </div>
+        <p>nav+a flex</p>
+        <div class="nav-wrap grid">
+            <a href="#" class="logo">
+                <h1>Grid</h1>
+            </a>
+            <nav class="nav">
+                <a class="nav-item" href="#">home</a>
+                <a class="nav-item" href="#">work</a>
+                <a class="nav-item" href="#">team</a>
+                <a class="nav-item" href="#">about</a>
+            </nav>
+        </div>
+        <p>nav+a grid</p>
+    </div>
+</body>
+
+</html>

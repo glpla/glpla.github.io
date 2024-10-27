@@ -21,12 +21,16 @@
     <dd>
       <div>. 兼有固定定位和相对定位的特性</div>
       <div>. 不会脱离文档流；但是层级提升 - 比普通元素高</div>
-      <div>. 有参考：通常是父元素；如果没有特别指定容器，则相对于离自己 <span class="warn">最近的</span> 带有滚动条的祖先元素；如果都没有，则以 &lt;body&gt; 为参考</div>
+      <div>. 有参考：通常是父元素；如果没有特别指定容器，则相对于离自己 <span class="warn">最近的</span> 带有滚动条的祖先元素 - nearest scrolling
+        ancestor；如果都没有，则以 &lt;body&gt; 为参考</div>
       <div>. 有滚动：容器的内容，包括粘性元素，总高度要大于容器，这样才能滚动起来，容器才会出现滚动条；通常粘性元素通常是滚动容器的直接孩子</div>
       <div>. 有距离：必须指定粘性元素到容器的位置：left、top、right、bottom之一；多使用 top</div>
       <div>. 其父元素不能设置 overflow:hidden</div>
       <div>. 适合 banner/swiper + 主导航 + 内容的网页。网页滚动时候，banner 移出，导航保留/黏贴在顶端/吸顶，内容也逐步移出</div>
       <div>. 注意 <span class="warn">z-index</span> 的影响，应确保粘性元素位于上层</div>
+      <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position" target="_blank">MDN -
+          position</a>
+      </div>
       <div class="tips">
         <div>Sticky elements are "sticky" relative to the nearest ancestor with a "scrolling mechanism", which is
           determined by its ancestors' position property.</div>
@@ -107,7 +111,7 @@ window.addEventListener("scroll", () => {
         </tr>
         <tr>
           <td>absolute</td>
-          <td>绝对定位；脱离文档流；不占位置；相对于带有定位属性的父级</td>
+          <td>绝对定位；脱离文档流；不占位置；相对于带有定位属性的祖先</td>
         </tr>
         <tr>
           <td>fixed</td>
@@ -115,7 +119,7 @@ window.addEventListener("scroll", () => {
         </tr>
         <tr>
           <td>sticky</td>
-          <td>黏性定位；未脱离文档流；占位置；相对于父级</td>
+          <td>黏性定位；未脱离文档流；占位置；相对于有滚动条的祖先</td>
         </tr>
       </table>
     </dd>

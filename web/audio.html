@@ -7,8 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>音频 &lt;audio&gt;</title>
   <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="./css/audio.css">
   <base target="_blank">
+  <style>
+    table tr th:first-child {
+      width: 30%;
+    }
+  </style>
 </head>
 
 <body>
@@ -274,56 +278,14 @@ switch.addEventListener('click', () => {
     switch.classList.toggle('active')
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] MINI音乐播放器1</dd>
-    <dd class="custom-audio">
-      <audio id='audio'>您的浏览器不支持 audio 标签</audio>
-      <span>Alizee-La Isla Bonita</span>
-      <div class="cur">00:00</div>
-      <div id="ctrl" class="play"></div>
-      <div class="dur">00:00</div>
-    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/player-simple.html">简单播放器</a></dd>
     <dd class="sn">
       <div>使用 &lt;audio&gt; 元素构造函数创建音频对象并指定 src</div>
       <div>根据设计创建播放列表样式，包括资源说明和控制按钮</div>
       <div>根据播放状态切换控制按钮为播放按钮或暂停按钮</div>
       <div>利用js事件控制 &lt;audio&gt; 的播放和暂停</div>
       <div>根据当前播放时长 currentTime 和总时长 duration，获取播放进度百分比，设置元素的内联变量 --per 属性，并由其伪元素使用，设置相应的百分比进度条</div>
-      <pre>
-&lt;div class="custom-audio"&gt;
-  &lt;audio id='audio'&gt;您的浏览器不支持audio标签&lt;/audio&gt;
-  &lt;span&gt;Alizee-La Isla Bonita&lt;/span&gt;
-  &lt;div class="cur"&gt;00:00&lt;/div&gt;
-  &lt;div id="ctrl" class="play"&gt;&lt;/div&gt;
-  &lt;div class="dur"&gt;00:00&lt;/div&gt;
-&lt;/div&gt;</pre>
-      <pre>
-.custom-audio {
-    --per: 0%;
-    position: relative;
-    //...
-}
-.custom-audio::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0px;
-  width: var(--per);
-  height: 2px;
-  background-color: var(--warn-color);
-}
-#ctrl {
-    width: 20px;
-    height: 20px;
-    background-size: cover;
-    cursor: pointer;
-}
-.play {
-    background-image: url(../imgs/Play.png);
-}
-.pause {
-    background-image: url(../imgs/Pause.png);
-}</pre>
-      <div>JavaScript：这里利用控制按钮的类名[更改背景图片]判断播放状态，也可以通过定义 bool 变量判断</div>
+      <div>利用控制按钮的类名[更改背景图片]判断播放状态，也可以通过定义 bool 变量判断</div>
       <pre>
 let audio = new Audio();
 audio.src = '/music/Alizee-La Isla Bonita.mp3';
@@ -357,8 +319,8 @@ ctrl.addEventListener('click', function () {
   }
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/miniplayer.html">MINI音乐播放器2</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/player.html">MINI音乐播放器3</a> - 无CSS</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/miniplayer.html">MINI音乐播放器</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/player.html">播放器</a> - 无CSS</dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
@@ -379,43 +341,6 @@ ctrl.addEventListener('click', function () {
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="/utils/custom/ham2024.js"></script>
-  <script>
-    // player
-    let audio = new Audio();
-    audio.src = '../utils/music/Alizee-LaIslaBonita.mp3';
-    let tag = document.querySelector('.custom-audio');
-    let ctrl = document.querySelector('#ctrl');
-    let cur = document.querySelector('.cur');
-    let dur = document.querySelector('.dur');
-    audio.addEventListener('loadedmetadata', () => {
-      dur.innerHTML = time(audio.duration);
-    })
-    audio.addEventListener('timeupdate', () => {
-      let secs = audio.currentTime;
-      cur.innerHTML = time(audio.currentTime);
-      let per = (audio.currentTime / audio.duration) * 100 + '%';
-      tag.style.setProperty('--per', per);
-    })
-    audio.addEventListener('click', function () {
-      ctrl.click()
-    })
-    ctrl.addEventListener('click', function () {
-      if (ctrl.className == 'play') {
-        audio.play()
-        ctrl.className = 'pause'
-      } else {
-        audio.pause()
-        ctrl.className = 'play'
-      }
-    })
-    function time(secs) {
-      let min = Math.floor(secs / 60);
-      let sec = Math.floor(secs % 60);
-      let secRes = sec > 9 ? `${sec}` : `0${sec}`;
-      let minRes = min > 9 ? `${min}` : `0${min}`;
-      return `${minRes}:${secRes}`;
-    }
-  </script>
 </body>
 
 </html>

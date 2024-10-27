@@ -10,16 +10,17 @@
 
 <body>
   <div class="wrap">
-    <video src="/utils/video/sea.mp4"></video>
-    <div class="mask"><button class="iconfont icon-volumeoff"></button></div>
+    <video src="/utils/video/sea.mp4" autoplay muted loop></video>
+    <div class="mask">
+      <button type="button" class="iconfont icon-volumeoff">
+    </div>
+    </button>
   </div>
   <script>
     const wrap = document.querySelector('.wrap')
     const video = document.querySelector('video')
     const mask = document.querySelector('.mask')
     const btn = document.querySelector('button')
-    video.muted = true
-    video.play()
     setTimeout(() => {
       mask.style.display = 'none'
     }, 3000)
@@ -48,6 +49,10 @@
     wrap.addEventListener('mouseenter', () => {
       mask.style.display = 'flex'
     })
+
+    // wrap.addEventListener('mousemove', () => {
+    //   mask.style.display = 'flex'
+    // })
 
     wrap.addEventListener('mouseleave', () => {
       mask.style.display = 'none'
