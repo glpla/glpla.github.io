@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下划线动画 Transition</title>
+    <style>
+        :root {
+            --main-color: #f40;
+            --p-m-g: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a {
+            color: inherit;
+            font: inherit;
+            text-decoration: none;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .header {
+            width: 94%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--main-color);
+            padding: 0 var(--p-m-g);
+            color: #fff;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .nav {
+            display: flex;
+            gap: 10px;
+            padding: var(--p-m-g) 0;
+        }
+
+        .nav-item {
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            text-transform: capitalize;
+            background-image: linear-gradient(to right, #fff, #fff);
+            background-position: right bottom;
+            background-repeat: no-repeat;
+            background-size: 0 2px;
+            transition: background-size .2s;
+        }
+
+        .nav-item:hover {
+            background-position: left bottom;
+            background-size: 100% 2px;
+            transition: background-size .5s;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <a href="#" class="logo">logo</a>
+        <nav class="nav">
+            <a class="nav-item" href="#">home</a>
+            <a class="nav-item" href="#">work</a>
+            <a class="nav-item" href="#">team</a>
+            <a class="nav-item" href="#">about</a>
+        </nav>
+    </header>
+</body>
+
+</html>
