@@ -14,131 +14,56 @@
     }
 
     body {
-      background-color: #000;
-      color: #fff;
-    }
-
-    input,
-    textarea {
-      border: 1px solid #00abf0;
-      background-color: transparent;
-      outline: none;
-      color: inherit;
-      padding: 0 10px;
-      border-radius: 4px;
-    }
-
-    input {
-      height: 40px;
-    }
-
-    textarea {
-      height: 100px;
-      resize: none;
-    }
-
-    button {
-      border: none;
-      outline: none;
-      background-color: #00abf0;
-      color: inherit;
-      padding: 10px 30px;
-      border-radius: 4px;
-    }
-
-    form {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      width: 100%;
-      max-width: 350px;
-      margin: 100px auto;
-      background-color: #f40;
+      height: 100vh;
     }
 
-    input {
-      width: 40%;
-      flex: auto;
-    }
-
-    textarea {
-      width: 100%;
-    }
-
-    button {
-      margin: 0 auto;
-    }
-
-    h1 {
-      width: 100%;
-      text-align: center;
-    }
-
-    .item {
-      width: 300px;
+    .cb {
+      margin: auto;
       display: flex;
+      align-items: center;
       gap: 10px;
-      margin-bottom: 10px;
     }
 
-    .title {
-      flex: 2;
+    .cb label {
+      position: relative;
+      width: 50px;
+      height: 30px;
+      border-radius: 30px;
+      border: 2px solid #ccc;
+      transition: 0.5s;
+    }
+
+    .cb label::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      height: 22px;
+      width: 22px;
+      border-radius: 50%;
+      background-color: #ccc;
+      transition: 0.5s;
+    }
+
+    input:checked~label::before {
       background-color: #f40;
-      height: 100px;
+      /* left: 22px; */
+      left: calc((100% - 2px - 2px) - 22px + 2px);
     }
 
-    p {
-      flex: 1;
-      background-color: #ff0;
-      height: 100px;
-    }
-
-    .info {
-      flex: 2;
-      background-color: #089;
-      height: 100px;
-    }
-
-    /* .item:nth-child(even) .title {
-      order: 1;
-    }
-
-    .item:nth-child(even) .info {
-      order: -1;
-    } */
-    .item:nth-child(even) {
-      flex-direction: row-reverse;
+    input:checked~span {
+      color: #f40;
     }
   </style>
 </head>
 
 <body>
-  <div class="box">
-    <div class="item">
-      <div class="title"></div>
-      <p></p>
-      <div class="info"></div>
-    </div>
-    <div class="item">
-      <div class="title"></div>
-      <p></p>
-      <div class="info"></div>
-    </div>
-    <div class="item">
-      <div class="title"></div>
-      <p></p>
-      <div class="info"></div>
-    </div>
-    <div class="item">
-      <div class="title"></div>
-      <p></p>
-      <div class="info"></div>
-    </div>
-    <div class="item">
-      <div class="title"></div>
-      <p></p>
-      <div class="info"></div>
-    </div>
+  <div class="cb">
+    <span>off</span>
+    <input type="checkbox" name="" id="cb" hidden>
+    <label for="cb"></label>
+    <span>on</span>
   </div>
 </body>
 

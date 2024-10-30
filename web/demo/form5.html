@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单 定制checkbox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+        }
+
+        .cb {
+            margin: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cb label {
+            position: relative;
+            width: 50px;
+            height: 30px;
+            border-radius: 30px;
+            border: 2px solid #ccc;
+            transition: 0.5s;
+        }
+
+        .cb label::before {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background-color: #ccc;
+            transition: 0.5s;
+        }
+
+        input:checked~label::before {
+            background-color: #f40;
+            /* left: 22px; */
+            left: calc((100% - 2px - 2px) - 22px + 2px);
+        }
+
+        input:checked~span {
+            color: #f40;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cb">
+        <span>off</span>
+        <input type="checkbox" name="" id="cb" hidden>
+        <label for="cb"></label>
+        <span>on</span>
+    </div>
+</body>
+
+</html>

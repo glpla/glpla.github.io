@@ -45,16 +45,28 @@
       background-color: transparent;
     }
 
-    input::placeholder,
-    textarea::placeholder {
-      color: var(--txt-color);
-    }
-
     textarea {
       resize: none;
       aspect-ratio: 16/9;
+      padding: 10px;
     }
 
+    ::placeholder {
+      color: var(--txt-color);
+      text-transform: capitalize;
+    }
+
+    input:focus,
+    textarea:focus {
+      box-shadow: 0 0 8px var(--main-color);
+    }
+
+    input:valid,
+    textarea:valid {
+      color: var(--main-color);
+    }
+
+    /* init end */
     body {
       display: grid;
       place-items: center;
@@ -67,6 +79,7 @@
       color: var(--txt-color);
       text-transform: capitalize;
       margin-bottom: calc(4*var(--p-m-g));
+      letter-spacing: 2px;
     }
 
     h1 span {
@@ -84,12 +97,19 @@
     }
 
     .btn {
-      padding: var(--p-m-g) calc(4*var(--p-m-g));
+      width: 120px;
+      height: 40px;
       border: 2px solid var(--main-color);
-      background-color: var(--main-color);
-      border-radius: var(--border-r);
-      color: var(--txt-color);
       text-transform: capitalize;
+      border-radius: var(--border-r);
+      letter-spacing: 2px;
+      transition: 0.5s;
+      color: var(--main-color);
+    }
+
+    .btn:hover {
+      color: var(--txt-color);
+      background-color: var(--main-color);
     }
 
     input:focus {
@@ -105,11 +125,11 @@
 <body>
   <form action="https://www.baidu.com">
     <h1>contact <span>me!</span></h1>
-    <input class="ipt" type="text" placeholder="your name" name="uname" required>
-    <input class="ipt ml" type="email" placeholder="your email" name="uemail" required>
-    <input class="ipt" type="tel" placeholder="your cellphone" name="ucell" required>
-    <input class="ipt ml" type="text" placeholder="your subject" name="usubject" required>
-    <textarea id="" placeholder="your message" name="umsg" required></textarea>
+    <input class="ipt" type="text" placeholder="your name" name="uname" required maxlength="12">
+    <input class="ipt ml" type="email" placeholder="your email" name="uemail" required maxlength="20">
+    <input class="ipt" type="tel" placeholder="your cellphone" name="ucell" required maxlength="11">
+    <input class="ipt ml" type="text" placeholder="your subject" name="usubject" required maxlength="12">
+    <textarea placeholder="your message" name="umsg" required maxlength="30"></textarea>
     <button type="submit" class="btn">submit</button>
     <button type="reset" class="btn">reset</button>
   </form>
