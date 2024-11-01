@@ -22,20 +22,18 @@
     </nav>
   </header>
   <dl class="nav-cont">
-    <dd>快速搭建HTTP服务；需要 <a href="./ide.html">Node.js</a> 环境支持</dd>
-    <dd>为应用提供JSON数据服务 - 仅仅是针对json文件的解析和应用</dd>
-    <dd>更多信息，请访问 <a href="https://www.npmjs.com/package/json-server">NPM
-        Json-Server</a>；更多使用，请访问 <a href="https://juejin.cn/post/7043424909472563208">从入门到膨胀</a>
-    </dd>
-    <dd class="tips">
-      <div>严格按照文档接口使用</div>
-    </dd>
     <dd>
+      <div>.快速搭建 HTTP 服务；需要 <a href="./ide.html">Node.js</a> 环境支持</div>
+      <div>.为应用提供 JSON 数据服务 - 仅仅是针对 json 文件的解析和应用</div>
+      <div>.更多信息，请访问 <a href="https://www.npmjs.com/package/json-server">NPM
+          Json-Server</a>；更多使用，请访问 <a href="https://juejin.cn/post/7043424909472563208">从入门到膨胀</a>
+      </div>
+      <div class="tips">严格按照文档接口使用</div>
       <table>
-        <caption>方法</caption>
+        <caption>Json-Server支持的请求方法</caption>
         <tr>
           <td>GET</td>
-          <td>数据获取|查询<br>配合id可以查询指定记录</td>
+          <td>数据获取|查询<br>配合 id 可以查询指定记录</td>
           <td>/posts <br>/posts/:id</td>
         </tr>
         <tr>
@@ -45,69 +43,72 @@
         </tr>
         <tr>
           <td>PUT</td>
-          <td>以覆盖|替换的方式修改数据；配合id使用</td>
+          <td>以覆盖|替换的方式修改数据；配合 id 使用</td>
           <td>/posts/:id</td>
         </tr>
         <tr>
           <td>PATCH</td>
-          <td>以更新|部分修改的方式修改数据，配合id使用</td>
+          <td>以更新|部分修改的方式修改数据，配合 id 使用</td>
           <td>/posts/:id</td>
         </tr>
         <tr>
           <td>DELETE</td>
-          <td>删除数据，配合id使用</td>
+          <td>删除数据，配合 id 使用</td>
           <td>/posts/:id</td>
         </tr>
       </table>
     </dd>
-    <dt>安装依赖</dt>
-    <dd>通常使用命令行参数 -g 全局安装 JSON-server：可以在任何位置监听 json数据 请求 - <span class="warn">指哪打哪</span></dd>
-    <dd>任意位置打开 CMD 命令行窗口执行以下命令 - 确保已经安装了 Node</dd>
+    <dt>安装依赖 Install</dt>
     <dd>
+      <div>.任意位置打开 CMD 命令行窗口执行以下命令；确保已经安装了 Node</div>
+      <div>.通常使用命令行参数 -g 全局安装 JSON-server：可以在任何位置监听 json数据请求 - <span class="warn">指哪打哪</span></div>
       <pre>npm install json-server -g</pre>
-    </dd>
-    <dd>如果 <span class="warn">临时</span> 使用，可以使用npx命令执行，不需要安装</dd>
-    <dd>
+      <div>.如果 <span class="warn">临时</span> 使用，可以使用npx命令执行，不需要安装</div>
       <pre>npx json-server --watch data/students.json --port 3000</pre>
     </dd>
-    <dt>基本使用</dt>
+    <dt>基本过程 Procedure</dt>
     <dd class="sn">
-      <div>创建数据文件夹 - 集中存放数据文件，如在D盘创建data文件夹</div>
-      <div>创建数据文件 - 后缀名为.json；早期数据交换多使用XML</div>
-      <p>应严格按照JSON文件的语法格式创建值对key-value；key必须用 <span class="warn">双引号</span> 包裹，value使用对应的数据类型即可；不允许有注释</p>
-      <p>
-        在数据文件夹内创建数据文件，如students.json；根节点包括2个子节点|值对：digital和software；每个子节点使用数组保存信息节点。每个信息节点又是一个值对，包括用户id，姓名和星数；初始数据为空，通过添加和修改逐步增加；具体数据根据需求添加和修改
-      </p>
+      <div>创建数据文件夹 - 集中存放数据文件，如在D盘创建 data 文件夹</div>
+      <div>创建数据文件 - 后缀名为.json；早期数据交换多使用 XML</div>
+      <p>.应严格按照 JSON 文件的语法格式创建值对 key-value；key 必须用 <span class="warn">双引号</span> 包裹，value 使用对应的数据类型即可；不允许有注释</p>
+      <p>. 在数据文件夹内创建数据文件，如 20240203.json；根节点包括2个子节点|值对：info 和 cont</p>
+      <p>.初始数据为空，通过添加和修改逐步增加；具体数据根据需求添加和修改</p>
       <pre>
 {
-  "digital": [
+  "info": {
+    "grade": 2023,
+    "major": "数媒",
+    "class": 1,
+    "course": "Web前端开发"
+  },
+  "cont": [
     {
-      "uid": 20220110,
-      "uname": "gl",
-      "rank": 0
-    }
-  ],
-  "software": [
+      "id": 2024020300,
+      "usn": "23054037",
+      "uavatar": "/avatar/avatar0.png",
+      "uname": "孔铠琳",
+      "ucredit": 1
+    },
     {
-      "uid": 20220210,
-      "uname": "gl",
-      "rank": 0
+      "id": 2024020302,
+      "usn": "23054016",
+      "uavatar": "/avatar/avatar2.png",
+      "uname": "陈燕君",
+      "ucredit": 9
     }
   ]
 }</pre>
-      <div>监听数据文件 - 在数据文件夹内，打开CMD控制台，监听文件，即开启数据服务</div>
-      <p>注意当前打开的CMD位置和监听数据文件的路径关系</p>
-      <p>系统自动检测并给出接口的地址；这个地址就是提供给项目使用的API接口</p>
-      <p>按住CTRL单击对应的地址，可以在浏览器中访问其中的内容；或直接在浏览器输入对应的地址</p>
-      <p>. 默认端口3000</p>
-      <pre>json-server students.json</pre>
-      <p>. 也可以指定端口</p>
-      <pre>json-server students.json --port=5173</pre>
+      <div>监听数据文件 - 在数据文件夹内，打开 CMD 控制台，输入以下命令，监听文件，即开启数据服务</div>
+      <pre>json-server 20240203.json</pre>
+      <p>.系统自动检测并给出接口的地址；这个地址就是提供给项目使用的 API 接口</p>
+      <p>.按住CTRL单击对应的地址，可以在浏览器中访问其中的内容；或直接在浏览器输入对应的地址</p>
+      <p>.默认端口3000；也可以指定端口</p>
+      <pre>json-server 20240203.json --port=5173</pre>
     </dd>
   </dl>
   <div class="chap">Html/fetch</div>
   <dl class="nav-cont">
-    <dt>GET</dt>
+    <dt>GET - 获取数据</dt>
     <dd>
       <pre>
 fetch(url + '/cont')
@@ -120,8 +121,8 @@ fetch(url + '/cont')
   })</pre>
     </dd>
 
-    <dt>POST</dt>
-    <dd>指定body和headers</dd>
+    <dt>POST - 提交数据</dt>
+    <dd>指定 body 和 headers</dd>
     <dd>
       <pre>
 fetch(url + '/cont', {
@@ -142,8 +143,7 @@ fetch(url + '/cont', {
     console.log(err);
   })</pre>
     </dd>
-    <dt>PATCH</dt>
-    <dd>根据id更新数据</dd>
+    <dt>PATCH - 根据id更新数据</dt>
     <dd>
       <pre>
 fetch(url + `/cont/${e.target.dataset.id}`, {
@@ -162,8 +162,7 @@ fetch(url + `/cont/${e.target.dataset.id}`, {
     console.log(err);
   })      </pre>
     </dd>
-    <dt>DELETE</dt>
-    <dd>根据id删除数据</dd>
+    <dt>DELETE - 根据id删除数据</dt>
     <dd>
       <pre>
 fetch(url + `/cont/${id}`, {

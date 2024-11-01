@@ -5,65 +5,90 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>网络请求Fetch</title>
+  <title>网络请求 Fetch</title>
   <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
 </head>
 
 <body>
   <header>
-    <h1>Fetch</h1>
-    <span>网络请求</span>
+    <h1>网络请求</h1>
+    <span>&commat;Fetch</span>
   </header>
   <dl>
-    <dd>.Fetch是w3c的一种请求标准，不是第三方库，与 Vue、JQuery无关</dd>
+    <dd>.Fetch 是 w3c 的一种请求标准，不是第三方库，与 Vue、JQuery无关</dd>
     <dd>.下一代 Ajax 技术，基于 <a href="./promise.html">Promise</a> 方式处理数据</dd>
     <dd>
       <pre>console.dir(fetch);</pre>
       <img src="" alt="">
     </dd>
-    <dd>.语法简介明了</dd>
+    <dd>.语法简介明了；除了IE，多数浏览器都兼容</dd>
     <dd>.既可以访问远程数据，也可以访问本地数据</dd>
-    <dd>.除了IE，多数浏览器都兼容</dd>
-    <dd>.需要拼接参数，通常需要二次封装</dd>
+    <dd>.需要拼接参数；需要二次封装</dd>
     <dd>
       <pre>fetch(url)</pre>
     </dd>
-    <dt>配置项</dt>
-    <dd>method（String）：HTTP请求方法，Get获取数据 | Post提交数据 | Delete删除数据 | Put更新数据；默认为GET</dd>
-    <dd>body（String）：HTTP请求的参数；POST时使用</dd>
-    <dd>headers（Object）：HTTP请求头，如content-type的常见值为application/json、application/x-www-form-urlencoded</dd>
-    <dd class="tips">
-      <div>json格式的数据POST时，可以省略header配置项；具体还要看服务器端的适配情况</div>
-    </dd>
+    <dt>语法 Syntax</dt>
     <dd>
       <pre>
-fetch(url, {
+fetch( url, {
   method: '',
   headers: {
     'Content-Type': 'application/json'
   },
   body: ''
-})
-  .then(res => res.json())
-  .then(res => {
-    console.log('success ', res)
-  })</pre>
+} )
+  .then( res => res.json() )
+  .then( res => {
+    console.log( 'success ', res )
+  } )</pre>
     </dd>
-    <dt>响应结果</dt>
-    <dd>.在响应的原型[[Prototype]] Response中，可以看到相关的函数，他们仍然是一个Promise对象，所以需要2次返回才能拿到结果</dd>
-    <dd>res.json()：得到JSON对象，同JSON.parse(responseText)一样；应用最广泛</dd>
+    <dt>配置项 Configuration</dt>
+    <dd>method（String）：HTTP 请求方法，Get 获取数据 | Post 提交数据 | Delete 删除数据 | Put 更新数据；默认为 GET</dd>
+    <dd>body（String）：HTTP 请求的参数；POST 时使用</dd>
+    <dd>headers（Object）：HTTP 请求头，如 content-type 的常见值为 application/json、application/x-www-form-urlencoded</dd>
+    <dd class="tips">
+      <div>json 格式的数据 POST 时，可以省略 header 配置项；具体还要看服务器端的适配情况</div>
+    </dd>
+    <dt>响应结果 Response</dt>
+    <dd>.在响应的原型[[Prototype]] Response中，可以看到相关的函数，他们仍然是一个 Promise 对象，所以需要 <span class="warn">2次</span> 返回才能拿到结果</dd>
+    <dd>res.json()：得到 JSON 对象，同 JSON.parse(responseText) 一样；应用最广泛</dd>
     <dd>res.text()：得到文字|字符串</dd>
-    <dd>res.formData()：得到FormData表单对象</dd>
+    <dd>res.formData()：得到 FormData 表单对象</dd>
     <dd>res.blob()：得到多媒体对象，如图片</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 获取本地 .json 数据 - 在开发者视图的控制台查看获取结果</dd>
+    <dd>
+      <pre>
+fetch('https://glpla.github.io/utils/data/rank/20240203.json')
+  .then(res => res.json())
+  .then(res => console.log(res))</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] text() - 请求本地文本文件 .txt</dd>
+    <dd>
+      <pre>
+fetch('./tmp.txt')
+  .then(res => res.text())
+  .then(res => console.log(res))</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] formData() - 请求表单</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] blob() - 请求图片</dd>
+    <dd>
+      <pre>
+fetch('./imgs/avatar0.jpg')
+  .then(res => res.blob())
+  .then(res => img.src = URL.createObjectURL(res))</pre>
+    </dd>
+    <dd class="tips">其它请求方式，需求服务器环境支持</dd>
   </dl>
+  <div class="chap">网络请求</div>
   <dl>
+    <dd>.以下网络请求，基于 <a href="./jsonserver.html">jsonserver 环境</a></dd>
     <dt>获取数据 GET</dt>
     <dd class="sn">
       <div>C端</div>
       <p>默认获取数据 - 一般是获取所有数据</p>
       <pre>
-fetch('https://glpla.github.io/utils/data/data2021/stu.json')
+fetch('https://glpla.github.io/utils/data/rank/20240203.json')
   .then(res => res.json())
   .then(res => console.log(res))</pre>
       <p>使用查询参数 query，直接在url后面使用?拼接查询值对，使用&拼接多个查询参数；如获取指定数据或分页获取数据</p>
@@ -96,21 +121,6 @@ router.get('/:id', (req, res) => {
     data: req.params.id
   })
 })</pre>
-    </dd>
-    <dd class="example-sn">text() - 请求本地文本</dd>
-    <dd>
-      <pre>
-fetch('./tmp.txt')
-  .then(res => res.text())
-  .then(res => console.log(res))</pre>
-    </dd>
-    <dd class="example-sn">formData() - 请求表单</dd>
-    <dd class="example-sn">blob() - 请求图片</dd>
-    <dd>
-      <pre>
-fetch('./imgs/avatar0.jpg')
-  .then(res => res.blob())
-  .then(res => img.src = URL.createObjectURL(res))</pre>
     </dd>
     <dt>增加数据 POST</dt>
     <dd>url</dd>
@@ -298,20 +308,24 @@ url: "http://localhost:3000/clerk/2002"</pre>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script>
-    // console.dir(fetch);
-    fetch('http://127.0.0.1:3000/test/123', {
-      method: 'put',
-      headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      // body: 'id=20240507'
-      body: JSON.stringify({
-        id: 20240507
-      })
-    })
+    fetch('https://glpla.github.io/utils/data/rank/20240203.json')
       .then(res => res.json())
       .then(res => console.log(res))
+
+    // // console.dir(fetch);
+    // fetch('http://127.0.0.1:3000/test/123', {
+    //   method: 'put',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //     // 'Content-Type': 'application/x-www-form-urlencoded'
+    //   },
+    //   // body: 'id=20240507'
+    //   body: JSON.stringify({
+    //     id: 20240507
+    //   })
+    // })
+    //   .then(res => res.json())
+    //   .then(res => console.log(res))
   </script>
 </body>
 
