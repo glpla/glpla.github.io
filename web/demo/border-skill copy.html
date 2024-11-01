@@ -24,44 +24,47 @@
         }
 
         .skill {
+            width: 350px;
             margin: auto;
         }
 
         .bar {
-            margin-bottom: 1rem;
+            position: relative;
+            height: 20px;
+            border-radius: 10px;
+            border: 2px solid var(--color);
+            padding: 2px;
+            margin-bottom: 3rem;
         }
 
         .bar::before {
             content: var(--info);
+            position: absolute;
+            left: 0;
+            top: -200%;
             font-family: 'iconfont';
             color: var(--color);
             font-size: 24px;
-            vertical-align: middle;
         }
 
         .bar::after {
             content: var(--num)'%';
-            vertical-align: middle;
+            position: absolute;
+            right: 0;
+            top: -150%;
         }
 
         .per {
-            display: inline-block;
-            width: 300px;
-            height: 30px;
-            border-radius: 15px;
-            border: 2px solid var(--color);
-            padding: 2px;
-            /* ! */
-            vertical-align: middle;
-        }
-
-        .per::before {
-            content: '';
-            display: inline-block;
             width: calc(var(--per)*1%);
             height: 100%;
+            /* background-color: var(--color); */
             background-image: linear-gradient(to right, var(--color), var(--color2));
             border-radius: 20px;
+        }
+
+        .demo::before {
+            content: var(--info);
+            font-family: 'iconfont';
         }
     </style>
 </head>

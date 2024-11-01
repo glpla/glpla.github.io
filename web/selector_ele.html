@@ -30,11 +30,11 @@ selector::pseudo-element {
     <dt>::before ::after</dt>
     <dd>
       <div>. 创建一个 inline 元素作为第一个 first 子元素、最后一个 last 子元素</div>
-      <div>. 必须指定伪元素 content 属性，哪怕为空；可以使用普通字符、<a
-          href="https://developer.mozilla.org/en-US/docs/Glossary/Entity">CSS实体</a>；也可利用attr()获取元素属性；content
-        拼接字符串不能使用+，直接在后面添加即可
+      <div>. 必须指定伪元素 content 属性，哪怕为空</div>
+      <div>. 可以使用普通字符、<a href="https://developer.mozilla.org/en-US/docs/Glossary/Entity">CSS实体</a>；也可利用attr()获取元素属性
       </div>
-      <div>. content属性不支持变量使用 var()，可以通过<a href="./counter.html">计数器</a> 迂回实现</div>
+      <div>. content 拼接字符串不能使用+，直接在后面添加即可</div>
+      <div>. content 属性不支持变量使用 var()，可以通过<a href="./counter.html">计数器</a> 迂回实现</div>
       <div>. 可按照普通元素对其进行定位、布局、旋转等等操作；注意：旋转会撑开/破坏布局，请为父元素设置 overflow 溢出隐藏；同样需要注意的是：他们的 box-sizing 也要初始化为 border-box</div>
       <div>. 伪元素的样式受父级元素的影响；但是伪元素不是元素的直接孩子，无法使用直接后代选择器 > 选择</div>
       <div>. 应用非常非常非常广泛。。。可以使用任何形式的内容</div>
@@ -42,7 +42,7 @@ selector::pseudo-element {
       <div>[<span class="iconfont icon-keyboard"></span>] 样式初始化</div>
       <pre>
 *, 
-*::before, 
+*::before,
 *::after {
     display: block;
     box-sizing: border-box;
@@ -60,11 +60,6 @@ li::before {
 li::before {
     content: '\21E8';
 }</pre>
-      <div>使用计数器；可以拼接普通字符或 CSS 实体</div>
-      <pre>
-li::before {
-  content: counter(sn) '\21e8 ';
-} </pre>
       <div>使用元素属性；可以是自定义属性 data-</div>
       <pre>
 li::before {
@@ -98,6 +93,22 @@ li::before {
   content: '\e6e0';
   font-family: 'iconfont';
   color: #f40;
+}      </pre>
+      <div>使用计数器；可以拼接普通字符或 CSS 实体</div>
+      <pre>
+li::before {
+content: counter(sn) '\21e8 ';
+} </pre>
+      <div>使用内联变量；需要显示的指定为字符串，无法直接使用；同样适用变量形式的字体图标</div>
+      <pre>&lt;div class="bar" style="--per:85;--num:'85';--info:'\e881'"&gt;&lt;/div&gt;</pre>
+      <pre>
+.bar::before {
+  content: var(--info);
+  font-family: 'iconfont';
+}
+
+.bar::after {
+  content: var(--num)'%';
 }      </pre>
     </dd>
     <dt>::first-letter ::first-line</dt>
