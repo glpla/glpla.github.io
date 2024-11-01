@@ -21,7 +21,7 @@
     <dd>
       <div>所有的数据处理在 JSON 文件中完成,需要文件系统 fs 库</div>
       <pre>const fs = require('fs')</pre>
-      <div>处理提交的JSON数据，需要json库</div>
+      <div>处理提交的 JSON 数据，需要 json 库</div>
       <pre>app.use(express.json());</pre>
     </dd>
     <dd class="tips">仅开放用户和商品接口，其它接口如留言、代办事项、问卷等请参照设计</dd>
@@ -39,7 +39,7 @@ let jsonStr = fs.readFileSync('./public/data/good.json', {
 
 let data = JSON.parse(jsonStr);
 </pre>
-      <div>全部拉取 - GET</div>
+      <div>1. 全部拉取 - GET</div>
       <pre>
 app.get('/goods', (req, res) => {
   res.json({
@@ -48,7 +48,7 @@ app.get('/goods', (req, res) => {
     "data": jsonFile.cont
   })
 })</pre>
-      <div>分页拉取 - GET</div>
+      <div>2. 分页拉取 - GET</div>
       <div>请求格式 /goods/page?page=x&pageSize=y</div>
       <pre>
 app.get('/goods/page', (req, res) => {

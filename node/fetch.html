@@ -8,6 +8,12 @@
   <title>网络请求 Fetch</title>
   <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
+  <style>
+    #img {
+      width: 120px;
+      height: 120px;
+    }
+  </style>
 </head>
 
 <body>
@@ -16,17 +22,17 @@
     <span>&commat;Fetch</span>
   </header>
   <dl>
-    <dd>.Fetch 是 w3c 的一种请求标准，不是第三方库，与 Vue、JQuery无关</dd>
-    <dd>.下一代 Ajax 技术，基于 <a href="./promise.html">Promise</a> 方式处理数据</dd>
     <dd>
-      <pre>console.dir(fetch);</pre>
-      <img src="" alt="">
-    </dd>
-    <dd>.语法简介明了；除了IE，多数浏览器都兼容</dd>
-    <dd>.既可以访问远程数据，也可以访问本地数据</dd>
-    <dd>.需要拼接参数；需要二次封装</dd>
-    <dd>
+      <div>.Fetch 是 W3C 的一种请求标准，是 Window 的方法，属于 BOM 范畴；不是第三方库，与 Vue、JQuery无关</div>
+      <div>.下一代 Ajax 技术，基于 <a href="./promise.html">Promise</a> 方式处理数据</div>
+      <div>.语法简介明了；除了IE，多数浏览器都兼容</div>
+      <div>.既可以访问远程数据，也可以访问本地数据</div>
+      <div>.需要拼接参数；需要二次封装</div>
+      <div>.更多信息，请访问 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch">Using_Fetch</a>、<a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch">MDN - fetch</a>、<a
+          href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API">Fetch_API</a></div>
       <pre>fetch(url)</pre>
+      <pre>console.dir(fetch);</pre>
     </dd>
     <dt>语法 Syntax</dt>
     <dd>
@@ -44,18 +50,20 @@ fetch( url, {
   } )</pre>
     </dd>
     <dt>配置项 Configuration</dt>
-    <dd>method（String）：HTTP 请求方法，Get 获取数据 | Post 提交数据 | Delete 删除数据 | Put 更新数据；默认为 GET</dd>
-    <dd>body（String）：HTTP 请求的参数；POST 时使用</dd>
-    <dd>headers（Object）：HTTP 请求头，如 content-type 的常见值为 application/json、application/x-www-form-urlencoded</dd>
-    <dd class="tips">
-      <div>json 格式的数据 POST 时，可以省略 header 配置项；具体还要看服务器端的适配情况</div>
+    <dd>
+      <div>method（String）：HTTP 请求方法，Get 获取数据 | Post 提交数据 | Delete 删除数据 | Put 更新数据；默认为 GET</div>
+      <div>body（String）：HTTP 请求的参数；POST 时使用</div>
+      <div>headers（Object）：HTTP 请求头，如 content-type 的常见值为 application/json、application/x-www-form-urlencoded</div>
+      <div class="tips">json 格式的数据 POST 时，可以省略 header 配置项；具体还要看服务器端的适配情况</div>
     </dd>
     <dt>响应结果 Response</dt>
-    <dd>.在响应的原型[[Prototype]] Response中，可以看到相关的函数，他们仍然是一个 Promise 对象，所以需要 <span class="warn">2次</span> 返回才能拿到结果</dd>
-    <dd>res.json()：得到 JSON 对象，同 JSON.parse(responseText) 一样；应用最广泛</dd>
-    <dd>res.text()：得到文字|字符串</dd>
-    <dd>res.formData()：得到 FormData 表单对象</dd>
-    <dd>res.blob()：得到多媒体对象，如图片</dd>
+    <dd class="sn">
+      <p>.在响应的原型[[Prototype]] Response中，可以看到相关的函数，他们仍然是一个 Promise 对象，所以需要 <span class="warn">2次</span> 返回才能拿到结果</p>
+      <div>res.json()：得到 JSON 对象，同 JSON.parse(responseText) 一样；应用最广泛</div>
+      <div>res.text()：得到文字|字符串</div>
+      <div>res.formData()：得到 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FormData">FormData</a> 表单对象</div>
+      <div>res.blob()：得到 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob">Blob对象</a>，如图片等多媒体对象</div>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 获取本地 .json 数据 - 在开发者视图的控制台查看获取结果</dd>
     <dd>
       <pre>
@@ -71,10 +79,11 @@ fetch('./tmp.txt')
   .then(res => console.log(res))</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] formData() - 请求表单</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] blob() - 请求图片</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] blob() - 请求图片并渲染</dd>
     <dd>
+      <img id="img" src="" alt="blob">
       <pre>
-fetch('./imgs/avatar0.jpg')
+fetch('https://glpla.github.io/utils/avatar/avatar0.png')
   .then(res => res.blob())
   .then(res => img.src = URL.createObjectURL(res))</pre>
     </dd>
@@ -82,7 +91,7 @@ fetch('./imgs/avatar0.jpg')
   </dl>
   <div class="chap">网络请求</div>
   <dl>
-    <dd>.以下网络请求，基于 <a href="./jsonserver.html">jsonserver 环境</a></dd>
+    <dd>.以下网络请求，基于 <a href="./express.html">express 环境</a>下的 <a href="./dynamic.html">动态资源服务器</a></dd>
     <dt>获取数据 GET</dt>
     <dd class="sn">
       <div>C端</div>
@@ -312,6 +321,10 @@ url: "http://localhost:3000/clerk/2002"</pre>
       .then(res => res.json())
       .then(res => console.log(res))
 
+    const img = document.querySelector('#img')
+    fetch('https://glpla.github.io/utils/avatar/avatar0.png')
+      .then(res => res.blob())
+      .then(res => img.src = URL.createObjectURL(res))
     // // console.dir(fetch);
     // fetch('http://127.0.0.1:3000/test/123', {
     //   method: 'put',
