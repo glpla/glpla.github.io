@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Node.js</title>
-  <link rel="stylesheet" href="../../css/reset2024.css">
-  <link rel="stylesheet" href="../../css/common2024.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
+  <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
 </head>
 
@@ -22,64 +19,61 @@
     <dd>基于JavaScript的开源、跨平台开发环境</dd>
     <dd>Node没有DOM BOM</dd>
     <dt>下载 Download</dt>
-    <dd>. 点击<a href="https://nodejs.org/en/" class="link">Node.js</a>下载</dd>
+    <dd>点击<a href="https://nodejs.org/en/" class="link">Node.js</a>下载</dd>
     <dt>安装 Installation</dt>
-    <dd>安装的同时，会安装包管理工具NPM - Node Package Management</dd>
-    <dd>也可以在NPM下安装 <a href="https://yarn.bootcss.com/" class="link">中文yarn</a> 或 <a href="https://yarnpkg.com/"
-        class="link">英文yarn</a>
-      作为包管理工具</dd>
-    <dt>Vs Code扩展</dt>
-    <dd>node-snippets</dd>
-    <dt>查看版本 Version</dt>
-    <dd>.Win + R，输入CMD，打开控制台查看 - 小黑屋</dd>
-    <dd class="code">
+    <dd>
+      <div>安装的同时，会安装包管理工具NPM - Node Package Management</div>
+      <div>也可以在NPM下安装 <a href="https://yarn.bootcss.com/" class="link">中文yarn</a> 或 <a href="https://yarnpkg.com/"
+          class="link">英文yarn</a>
+        作为包管理工具</div>
+      <div>查看版本 Version - 按 Win + R，输入CMD，打开控制台查看 - 小黑屋</div>
       <pre>
 > node -v
-v18.13.0
+v18.16.1
 
 > npm -v
-8.15.1</pre>
+9.5.1</pre>
     </dd>
     <dt>切换镜像源 Registry</dt>
-    <dd>为了加快包的下载和使用，改善使用体验，通常需要切换镜像源</dd>
-    <dd>1. 查看 get 安装镜像源，默认是</dd>
-    <dd class="code">
+    <dd>
+      <div>为了加快包的下载和使用，改善使用体验，通常需要切换镜像源</div>
+      <div>1. 查看 get - 安装镜像源，默认是</div>
       <pre>
 > npm config get registry
 https://registry.npmjs.org</pre>
-    </dd>
-    <dd>2. 设置 set 为淘宝最新镜像源 - 感谢22软工刘钰钿同学及时反馈</dd>
-    <dd class="code">
+      <div>2. 设置 set - 为淘宝最新镜像源 - 感谢22软工刘钰钿同学及时反馈</div>
       <pre>
 > npm config set registry https://registry.npmmirror.com</pre>
-    </dd>
-    <dd>3. 再次查看安装镜像源</dd>
-    <dd class="code">
+      <div>3. 再次查看安装镜像源</div>
       <pre>
 > npm config get registry
 https://registry.npmmirror.com</pre>
     </dd>
+    <dt>Vs Code扩展</dt>
+    <dd>node-snippets</dd>
   </dl>
   <div class="chap" id="dep">依赖 Dependencies</div>
   <dl>
     <dd>开发过程中，除了自己封装模块外，更多的是使用第三方|依赖</dd>
     <dd>Node自带的NPM就极大的方便了开发人员的使用 - 需要哪个就安装哪个；不需要了就卸载掉</dd>
     <dt>安装依赖 Install</dt>
-    <dd>install可以简写为i</dd>
-    <dd>默认是生产环境</dd>
-    <p>生产环境依赖 dependencies：项目上线后，所必须的依赖，如网络请求axios；使用--S/--save命令行参数</p>
-    <pre class="code">> npm install package_name --save</pre>
-    <pre class="code">> npm install package_name --S</pre>
-    <p>开发环境依赖 devDependencies：开发过程中需要的依赖，发布上线后，不再需要，如CSS预处理；使用--D/--save-dev命令行参数</p>
-    <pre class="code">> npm install package_name --save-dev</pre>
-    <pre class="code">> npm install package_name --D</pre>
+    <dd>
+      <div>install 可以简写为 i</div>
+      <div>默认是生产环境</div>
+      <div>1. 生产环境依赖 dependencies：项目上线后，所必须的依赖，如网络请求 axios；使用--S/--save命令行参数</div>
+      <pre>> npm install package_name --save</pre>
+      <pre>> npm install package_name --S</pre>
+      <div>2. 开发环境依赖 devDependencies：开发过程中需要的依赖，发布上线后，不再需要，如CSS预处理；使用--D/--save-dev命令行参数</div>
+      <pre>> npm install package_name --save-dev</pre>
+      <pre>> npm install package_name --D</pre>
+    </dd>
     <dt>移除依赖 uninstall</dt>
-    <dd class="code">
+    <dd>
       <pre>> npm uninstall package_name</pre>
     </dd>
     <dt>查看依赖 list</dt>
-    <dd>当前项目|目录安装的依赖</dd>
-    <dd class="code">
+    <dd>
+      <div>当前项目|目录安装的依赖</div>
       <pre>
 > npm list
 sfc@0.0.0 E:\WEB\sfc
@@ -89,9 +83,7 @@ sfc@0.0.0 E:\WEB\sfc
 +-- sass@1.72.0
 +-- vite@5.1.4
 `-- vue@3.4.19</pre>
-    </dd>
-    <dd>指定命令行参数-g，可以查看安装的全局依赖</dd>
-    <dd class="code">
+      <div>指定命令行参数-g，可以查看安装的全局依赖</div>
       <pre>
 > npm list -g
 C:\Users\cnplaman\AppData\Roaming\npm
@@ -100,30 +92,24 @@ C:\Users\cnplaman\AppData\Roaming\npm
 +-- json-server@1.0.0-alpha.23
 +-- nodemon@3.0.3
 +-- sass@1.69.5
-`-- typescript@5.3.2      </pre>
+`-- typescript@5.3.2</pre>
     </dd>
     <dt>查看依赖信息 info</dt>
-    <dd class="code">
+    <dd>
       <pre>> npm info axios</pre>
     </dd>
     <dt>查看依赖根目录 root</dt>
-    <dd>当前项目依赖根目录</dd>
-    <dd class="code">
+    <dd>
+      <div>当前项目依赖根目录</div>
       <pre>
 > npm root
 C:\Users\cnplaman\Desktop\server\node_modules</pre>
-    </dd>
-    <dd>指定命令行参数-g，可以查看全局依赖根目录</dd>
-    <dd class="code">
+      <div>指定命令行参数-g，可以查看全局依赖根目录</div>
       <pre>
 > npm root -g
 C:\Users\cnplaman\AppData\Roaming\npm\node_modules</pre>
-    </dd>
-    <dd>.我的电脑 → c → 用户user → 当前用户 → 应用数据appdata → roaming → npm</dd>
-    <dd class="code">
+      <div>.我的电脑 → c → 用户user → 当前用户 → 应用数据appdata → roaming → npm</div>
       <pre>C:\Users\cnplaman\AppData\Roaming\npm\node_modules</pre>
-    </dd>
-    <dd>
       <img src="../../vue/imgs/server1.png" alt="">
     </dd>
     <dd class="tips">
@@ -132,16 +118,14 @@ C:\Users\cnplaman\AppData\Roaming\npm\node_modules</pre>
       <div>*表示全部取最新</div>
     </dd>
     <dt>开放脚本执行权限</dt>
-    <dd>以管理员方式打开PowerShell</dd>
-    <dd>查看权限 - 默认是禁止：Restricted</dd>
-    <dd class="code">
+    <dd>
+      <div>以管理员方式打开PowerShell</div>
+      <div>查看权限 - 默认是禁止：Restricted</div>
       <pre>> get-executionpolicy</pre>
-    </dd>
-    <dd>修改权限为远程 remotesigned，按Y确认</dd>
-    <dd class="code">
+      <div>修改权限为远程 remotesigned，按Y确认</div>
       <pre>> set-executionpolicy remotesigned</pre>
+      <div>再次查看权限，确认修改成功</div>
     </dd>
-    <dd>再次查看权限，确认修改成功</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>模块化 Module</title>
-  <link rel="stylesheet" href="../../css/reset2024.css">
-  <link rel="stylesheet" href="../../css/common2024.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
+  <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
 </head>
 
@@ -19,19 +16,21 @@
     <span>&commat;Module </span>
   </header>
   <dl>
-    <dd>协作、共享、解耦</dd>
-    <dd>Node提供了很多模块module，使用哪个就require哪个</dd>
-    <dd>Node模块采用 CommonJS 模块规范</dd>
-    <dd>把公共的功能抽离成为一个单独的 js 文件作为一个模块；默认情况，外部没法访问这个模块里面的方法或者属性</dd>
-    <dd>导出：如果要让外部访问，必须在模块里面导出：使用 exports 单独导出或 module.exports 集中导出</dd>
-    <dd>引入：需要使用文件，使用 require 引入进来</dd>
-    <dd>区分：系统模块和自定义模块；常见的系统模块有：</dd>
-    <dd>. os：operate system</dd>
-    <dd>. fs：file system</dd>
-    <dd>系统模块直接引入；自定义模块使用相对路径指定</dd>
-    <dd>建议集中管理自定义模块，如统一存放在module文件夹</dd>
+    <dd>
+      <div>协作、共享、解耦</div>
+      <div>Node提供了很多模块module，使用哪个就require哪个</div>
+      <div>Node模块采用 CommonJS 模块规范</div>
+      <div>把公共的功能抽离成为一个单独的 js 文件作为一个模块；默认情况，外部没法访问这个模块里面的方法或者属性</div>
+      <div>导出：如果要让外部访问，必须在模块里面导出：使用 exports 单独导出或 module.exports 集中导出</div>
+      <div>引入：需要使用文件，使用 require 引入进来</div>
+      <div>区分：系统模块和自定义模块；常见的系统模块有：</div>
+      <div>. os：operate system</div>
+      <div>. fs：file system</div>
+      <div>系统模块直接引入；自定义模块使用相对路径指定</div>
+      <div>建议集中管理自定义模块，如统一存放在module文件夹</div>
+    </dd>
     <dt>基本步骤</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>创建模块文件</div>
       <div>定制业务逻辑</div>
       <div>导出模块</div>
@@ -39,8 +38,8 @@
       <div>用户使用模块</div>
     </dd>
     <dt>多个逻辑 - 单独导出</dt>
-    <dd>创建 oper.js</dd>
-    <dd class="code">
+    <dd>
+      <div>创建 oper.js</div>
       <pre>
 exports.add = () => {
   console.log('hi, add');
@@ -48,16 +47,14 @@ exports.add = () => {
 exports.dec = () => {
   console.log('hi, dec');
 }</pre>
-    </dd>
-    <dd>引入并使用</dd>
-    <dd class="code">
+      <div>引入并使用</div>
       <pre>
 const { add, dec } = require('./oper')
 console.log(add(), dec());      </pre>
     </dd>
     <dt>多个逻辑 - 集中导出</dt>
-    <dd>创建 oper.js</dd>
-    <dd class="code">
+    <dd>
+      <div>创建 oper.js</div>
       <pre>
 const add = () => {
   console.log('hi, add');
@@ -70,24 +67,20 @@ module.exports = {
   add,
   dec
 };</pre>
-    </dd>
-    <dd>引入并使用</dd>
-    <dd class="code">
+      <div>引入并使用</div>
       <pre>
 const oper = require('./module/oper')
 oper.add()
 oper.dec()</pre>
-    </dd>
-    <dd>多个逻辑通常解构引入并使用 - 更加灵活，需要哪个引入哪个</dd>
-    <dd>
-      <pre class="code">
+      <div>多个逻辑通常解构引入并使用 - 更加灵活，需要哪个引入哪个</div>
+      <pre>
 const { add,dec } = require('./module/oper')
 add()
 dec()</pre>
     </dd>
     <dt>单个逻辑</dt>
-    <dd>创建admin.js</dd>
-    <dd class="code">
+    <dd>
+      <div>创建admin.js</div>
       <pre>
 const admin = {
   name: 'glpla',
@@ -99,10 +92,8 @@ const admin = {
 }
 // 暴露1个
 module.exports = admin</pre>
-    </dd>
-    <dd>引入并使用</dd>
-    <dd>
-      <pre class="code">
+      <div>引入并使用</div>
+      <pre>
 const admin = require('./module/admin')
 console.log('admin:\t', admin);</pre>
     </dd>

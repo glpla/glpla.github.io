@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>路由 Router</title>
-  <link rel="stylesheet" href="../../css/reset2024.css">
-  <link rel="stylesheet" href="../../css/common2024.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
+  <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
 </head>
 
@@ -23,12 +20,11 @@
     <dd>如果指定了静态资源，且有主页文件index.html，即使没有显式的声明根路由/，服务器也会引导并显式主页</dd>
     <dd>如果主页文件不是index.html，需要显示主页时，必须显示的声明根路由/</dd>
     <dt>路由模块化</dt>
-    <dd>通过express.Router()和Module.exports将路由独立到不同的js中，然后在主js导入require()并通过中间件的方式使用use()</dd>
-    <dd>建议创建单独的文件夹如router，存放路由模块文件</dd>
     <dd>
-      <figure class="code">
-        <figcaption>模块文件 food.js - 处理json数据并返回；可以增加对food的增删改查等业务路由</figcaption>
-        <pre>
+      <div>通过express.Router()和Module.exports将路由独立到不同的js中，然后在主js导入require()并通过中间件的方式使用use()</div>
+      <div>建议创建单独的文件夹如router，存放路由模块文件</div>
+      <div>模块文件 food.js - 处理json数据并返回；可以增加对food的增删改查等业务路由</div>
+      <pre>
 const fs = require('fs');
 const express = require('express')
 //MUST
@@ -53,29 +49,22 @@ router.get('/food', (req, res) => {
 
 //MUST
 module.exports = router</pre>
-      </figure>
-    </dd>
-    <dd>
-      <figure class="code">
-        <figcaption>主入口文件 index.js</figcaption>
-        <pre>
+      <div>主入口文件 index.js</div>
+      <pre>
 //引入 - 注意路径
 const routerFood = require('./router/food')
 
 app.use(routerFood)</pre>
-      </figure>
     </dd>
     <dd>每个模块都可以有自己的根路由；为了更加精准，使用的时候，可以为不同的模块指定专有路由</dd>
     <dd>
-      <figure class="code">
-        <figcaption>主入口文件 index.js - 改进版</figcaption>
-        <pre>
+      <div>主入口文件 index.js - 改进版</div>
+      <pre>
 //引入 - 注意路径
 const routerFood = require('./router/food')
 
 app.use('/food', routerFood)
   .use('/order', routerOrder)</pre>
-      </figure>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

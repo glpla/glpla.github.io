@@ -6,10 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>表单数据 formData</title>
-  <link rel="stylesheet" href="../../css/reset2024.css">
-  <link rel="stylesheet" href="../../css/common2024.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
+  <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
 </head>
 
@@ -19,10 +16,10 @@
     <span>&commat;formData</span>
   </header>
   <dl>
-    <dd>构建表单数据；更多信息，请访问 <a href="../web/js/event.html#form" class="link">formData</a></dd>
+    <dd>构建表单数据；更多信息，请访问 <a href="../web/js/event_form.html" class="link">formData</a></dd>
     <dd class="example-sn">上传文件</dd>
     <dd>前端 - vue</dd>
-    <dd class="code">
+    <dd>
       <pre>
 &lt;script setup&gt;
   import axios from 'axios'
@@ -45,7 +42,7 @@
 &lt;/template&gt;</pre>
     </dd>
     <dd>后端 - API</dd>
-    <dd class="code">
+    <dd>
       <pre>
 router.post('/image', upload.single('image'), (req, res) => {
   console.log(req.file, req.body);
@@ -59,7 +56,7 @@ router.post('/image', upload.single('image'), (req, res) => {
     </dd>
     <dd>改进：增加上传进度指示</dd>
     <dd>在axios请求中，添加配置项，使用进度回调onUploadProgress；为了更直观的观察效果，将开发者工具中网络Network速度由无限制改为快速3G或慢速3G</dd>
-    <dd class="code">
+    <dd>
       <pre>
 axios.post('/upload/upload/image', formData, {
   onUploadProgress: (e) => {

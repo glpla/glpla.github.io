@@ -17,47 +17,42 @@
   </header>
   <dl class="nav-cont" data>
     <dt>表单默认事件</dt>
-    <dd>.默认情况下，表单提交时，数据需要提交给后端处理，页面会发生跳转</dd>
-    <dd>.前端要拿数据，需要阻止表单的默认行为；类似的还有&lt;a&gt;</dd>
-    <dd>.前端拿数据，可以通过元素逐一获取，很不方便；也可以使用form构造的FormData集中获取</dd>
     <dd>
+      <div>.默认情况下，表单提交时，数据需要提交给后端处理，页面会发生跳转</div>
+      <div>.前端要拿数据，需要阻止表单的默认行为；类似的还有 &lt;a&gt;</div>
       <pre>&lt;form action=""&gt;&lt;/form&gt;</pre>
-    </dd>
-    <dd>
       <pre>
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 })</pre>
-    </dd>
-    <dd>[或]</dd>
-    <dd>
+      <div>或</div>
       <pre>
 form.addEventListener('submit', () => {
   return false;
 })</pre>
-    </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 通过元素获取</dd>
-    <dd>
+      <div>1. 可以通过元素逐一获取，很不方便；</div>
       <pre>
 input.addEventListener('change', () => {
   console.log(input.value);
 })</pre>
+      <div>2. 也可以使用 form 构造的 FormData 集中获取</div>
     </dd>
     <dt>FormData</dt>
-    <dd>FormData(src)：构造函数；需要一个数据源参数，如表单</dd>
-    <dd>formdata.append(name, value)：添加</dd>
-    <dd>formdata.get(name)：获取属性第一个值</dd>
-    <dd>formdata.getAll(name)；获取所有值，返回的是一个数组</dd>
-    <dd>formdata.delete(name)：删除属性</dd>
-    <dd>[<span class="iconfont icon-bell"></span>]console.log(formdata) 打印出来的结果 始终为FormData {}
-      它有一个隐藏域：所有的操作对象的方法全部是在它的原型中</dd>
     <dd>
+      <div>FormData(src)：构造函数；需要一个数据源参数，如表单</div>
+      <div>formdata.append(name, value)：添加</div>
+      <div>formdata.get(name)：获取属性第一个值</div>
+      <div>formdata.getAll(name)；获取所有值，返回的是一个数组</div>
+      <div>formdata.delete(name)：删除属性</div>
+      <div>.更多信息，请访问<a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">FormData</a></div>
+      <div>[<span class="iconfont icon-bell"></span>]console.log(formdata) 打印出来的结果 始终为FormData {}
+        它有一个隐藏域：所有的操作对象的方法全部是在它的原型中</div>
       <img src="../imgs/formData.png" alt="">
     </dd>
     <dt>获取表单数据</dt>
-    <dd>1.提交时构造数据submit</dd>
-    <dd>2.数据构造完毕后，提取数据formdata；如果提交后，马上获取，有可能数据还未构造完毕，导致失败</dd>
     <dd>
+      <div>1. 提交时构造数据 submit</div>
+      <div>2. 数据构造完毕后，提取数据 formdata；如果提交后，马上获取，有可能数据还未构造完毕，导致失败</div>
       <form id="formdata">
         <label>
           <span>name</span>
@@ -136,7 +131,6 @@ function JSON2FormData(json) {
   return formdata;
 }</pre>
     </dd>
-    <dd>.更多信息，请访问<a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">FormData</a></dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script>
