@@ -8,7 +8,7 @@
   <title>数据类型 DataType</title>
   <link rel="stylesheet" href="../../css/common.css">
   <link rel="stylesheet" href="../css/navHam.css">
-  <link rel="stylesheet" href="../css//datatype.css">
+  <link rel="stylesheet" href="../css/datatype.css">
   <link rel="stylesheet" href="../../css/code.css">
   <link rel="stylesheet" href="../../css/sn.css">
   <base target="_blank">
@@ -40,24 +40,24 @@
   <div class="chap">基本数据类型 Basic</div>
   <dl class="nav-cont">
     <dt>1. Undefined</dt>
-    <dd>.未声明或声明了变量但未初始化；因为JS的弱类型特点，系统不知道你会保存什么类型的数据，且每个类型的数据默认值是不一样的，所以干脆给个未定义</dd>
-    <dd>.只有1个值undefined</dd>
-    <dd>.一般而言，不需要显式地把一个变量设置为 undefined</dd>
-    <dd>.为方便使用，应显式地初始化变量为某个特定的值</dd>
-    <dd class="code">
+    <dd>
+      <div>.未声明或声明了变量但未初始化；因为JS的弱类型特点，系统不知道你会保存什么类型的数据，且每个类型的数据默认值是不一样的，所以干脆给个未定义</div>
+      <div>.只有1个值undefined</div>
+      <div>.一般而言，不需要显式地把一个变量设置为 undefined</div>
+      <div>.为方便使用，应显式地初始化变量为某个特定的值</div>
       <pre>
 var a;
 console.log(typeof a);//undefined
 console.log(typeof b);//undefined</pre>
     </dd>
     <dt>2. Null</dt>
-    <dd>.这个数据类型只有1个值：null</dd>
-    <dd>.表示1个空对象指针；所以它是一个对象</dd>
-    <dd>.如果定义的变量准备在将来用于保存对象，那么最好将该变量初始化为 null 而不是其他值</dd>
-    <dd>.将变量的值设置为 null 可以清空变量</dd>
-    <dd>.可以看作是占了一个位置</dd>
-    <dd>.null 和 undefined 的相等操作符（==）总是返回 true,但它们的用途完全不同</dd>
-    <dd class="code">
+    <dd>
+      <div>.这个数据类型只有1个值：null</div>
+      <div>.表示1个空对象指针；所以它是一个对象</div>
+      <div>.如果定义的变量准备在将来用于保存对象，那么最好将该变量初始化为 null 而不是其他值</div>
+      <div>.将变量的值设置为 null 可以清空变量</div>
+      <div>.可以看作是占了一个位置</div>
+      <div>.null 和 undefined 的相等操作符（==）总是返回 true,但它们的用途完全不同</div>
       <pre>
 var obj = null;
 console.log(typeof obj);//object
@@ -72,20 +72,20 @@ console.log(null == undefined);//true</pre>
     <dd>.默认是十进制；前缀0表示八进制[0-7]；前缀0x表示十六进制[0-9,A-F]</dd>
     <dd>.永远不要比较两个浮点数的相等</dd>
     <dd>4.2. NaN</dd>
-    <dd>.为捕获异常，系统还有一个特别的值：非数值 NaN - Not a Number；这个数值用于表示一个本来要返回数值的操作数却未返回数值的情况，这样就不会抛出错误了</dd>
-    <dd>.NaN 与任何值都不相等，包括 NaN 本身</dd>
-    <dd>.isNaN()：在接收到一个值之后，会尝试将这个值转换为数值。某些不是数值的值会直接转换为数值，例如字符串"10"或 Boolean 值。而任何
-      不能被转换为数值的值都会导致这个函数返回 true</dd>
-    <dd class="code">
+    <dd>
+      <div>.为捕获异常，系统还有一个特别的值：非数值 NaN - Not a Number；这个数值用于表示一个本来要返回数值的操作数却未返回数值的情况，这样就不会抛出错误了</div>
+      <div>.NaN 与任何值都不相等，包括 NaN 本身</div>
+      <div>.isNaN()：在接收到一个值之后，会尝试将这个值转换为数值。某些不是数值的值会直接转换为数值，例如字符串"10"或 Boolean 值。而任何
+        不能被转换为数值的值都会导致这个函数返回 true</div>
       <pre>
 console.log(NaN == NaN);//false</pre>
     </dd>
     <dd>4.3. 数值转换</dd>
-    <dd>Number()：用于任何数据类型</dd>
-    <dd>parseInt()：专门用于把字符串转换成数值，更准确来说，是从以数字开头的字符串中<span
-        class="warn">提取</span>数字；处理整数时常用；不具有解析八进制值的能力，因此前导的零会被认为无效，需额外指定基数；建议无论在什么情况下都明确指定基数</dd>
-    <dd>parseFloat()：专门用于把字符串转换成数值；处理浮点数时常用</dd>
-    <dd class="code">
+    <dd>
+      <div>Number()：用于任何数据类型</div>
+      <div>parseInt()：专门用于把字符串转换成数值，更准确来说，是从以数字开头的字符串中<span
+          class="warn">提取</span>数字；处理整数时常用；不具有解析八进制值的能力，因此前导的零会被认为无效，需额外指定基数；建议无论在什么情况下都明确指定基数</div>
+      <div>parseFloat()：专门用于把字符串转换成数值；处理浮点数时常用</div>
       <pre>
 console.log(parseInt('070'));//70
 console.log(parseInt('hi70'));//NaN
@@ -95,19 +95,18 @@ console.log(parseInt('70', 16));
 console.log(parseInt('0x70', 16));//0x甚至可以省略</pre>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 计算器</dd>
-    <dd id="calc">
-      <div class="ipt-box">
-        <input type="text" name="" id="num0" required maxlength="3" title="num0">
+    <dd>
+      <div id="calc">
+        <div class="ipt-box">
+          <input type="text" name="" id="num0" required maxlength="3" title="num0">
+        </div>
+        <div class="ipt-box">
+          <input type="text" name="" id="num1" required maxlength="3" title="num1">
+        </div>
+        <div class="ipt-box">
+          <button id="btn">+</button>
+        </div>
       </div>
-      <div class="ipt-box">
-        <input type="text" name="" id="num1" required maxlength="3" title="num1">
-      </div>
-      <div class="ipt-box">
-        <button id="btn">+</button>
-      </div>
-    </dd>
-    <dd>[JS]</dd>
-    <dd class="code">
       <pre>
 let num0 = document.querySelector('#num0');
 let num1 = document.querySelector('#num1');
@@ -122,23 +121,21 @@ btn.addEventListener('click', () => {
 })</pre>
     </dd>
     <dt>5. String</dt>
-    <dd>.字符串可以由双引号（"）或单引号（'）表示，但是不能混用</dd>
-    <dd>.可以使用转义字符，如\t</dd>
-    <dd>.可以使用十六进制表示1个字符，如\xnn</dd>
-    <dd>.可以使用十六进制表示1个Unicode字符，如\unnnn</dd>
-    <dd>.把一个值转换为一个字符串，可以使用toString()或简单和1个空串拼接；toString()也可以指定基数</dd>
-    <dd>.表单和prompt输入框获取到的数据默认都是字符串类型</dd>
-    <dd>.字符串可以看作是一个特殊的数组，可以使用数组的相关函数，如数组解构</dd>
-    <dd>.加号 <span class="warn">+</span> 可以将字符串数字转换为数字</dd>
-    <dd>.字符串数字 <span class="warn">-</span> 可以转换为数字</dd>
-    <dd class="code">
+    <dd>
+      <div>.字符串可以由双引号（"）或单引号（'）表示，但是不能混用</div>
+      <div>.可以使用转义字符，如\t</div>
+      <div>.可以使用十六进制表示1个字符，如\xnn</div>
+      <div>.可以使用十六进制表示1个Unicode字符，如\unnnn</div>
+      <div>.把一个值转换为一个字符串，可以使用toString()或简单和1个空串拼接；toString()也可以指定基数</div>
+      <div>.表单和prompt输入框获取到的数据默认都是字符串类型</div>
+      <div>.字符串可以看作是一个特殊的数组，可以使用数组的相关函数，如数组解构</div>
+      <div>.加号 <span class="warn">+</span> 可以将字符串数字转换为数字</div>
+      <div>.字符串数字 <span class="warn">-</span> 可以转换为数字</div>
       <pre>console.log([...'hello']);//输出5个字符的数组</pre>
-    </dd>
-    <dd class="code">
       <pre>
 console.log('123');//黑色123
 console.log('123' - 0);//蓝色123
-console.log(+'123');//蓝色123      </pre>
+console.log(+'123');//蓝色123</pre>
     </dd>
   </dl>
   <div class="chap">引用数据类型 Reference</div>
@@ -156,7 +153,7 @@ console.log(+'123');//蓝色123      </pre>
     <dd>有序集合</dd>
     <dd>.以[]定义，每个数据可以是相同的数据类型，也可以是不同的数据类型；每个高级语言对数组数据项的要求不尽相同</dd>
     <dd>检查数据类型，归类于 Object</dd>
-    <dd class="code">
+    <dd>
       <pre>let arr = [1, { name: 'gx' }, false, 'hi']</pre>
     </dd>
     <dd>.更多信息，请访问 <a href="./array.html">Array</a></dd>
@@ -193,7 +190,7 @@ console.log(+'123');//蓝色123      </pre>
     <dd>.检测一个变量是基本数据类型还是引用数据类型</dd>
     <dd>.是一个操作符，不是函数</dd>
     <dd>.数组、对象和null都是object类型；object泛指所有的引用数据类型；如果想知道确切的数据类型，请使用instanceof</dd>
-    <dd class="code">
+    <dd>
       <pre>
 let fn = num => num * 2;
 console.log(typeof 12);//number
@@ -211,7 +208,7 @@ console.log(typeof [1, 2]);//object</pre>
     <dd>.所有引用类型的值都是 Object 的实例</dd>
     <dd>.不仅可以知道某个变量是不是对象，还可以知道它是什么类型的对象：Object、Array、RegExp</dd>
     <dd>.如果检测基本类型的变量，返回 false；因为基本类型不是对象</dd>
-    <dd class="code">
+    <dd>
       <pre>
 console.log(12 instanceof Number);//false
 console.log('hi' instanceof String);//false
