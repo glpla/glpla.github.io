@@ -8,6 +8,10 @@
     <style>
         @import url(//at.alicdn.com/t/c/font_4375346_fgaaclszyu.css);
 
+        :root {
+            --main-color: #0aa;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,7 +19,9 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        input {
+        input[type='text'],
+        input[type='email'],
+        input[type='password'] {
             outline: none;
             width: 100%;
             height: 40px;
@@ -30,21 +36,34 @@
             text-transform: capitalize;
         }
 
+        input:valid,
+        input:valid+span {
+            color: var(--main-color);
+        }
+
+        input[type='checkbox'] {
+            accent-color: var(--main-color);
+        }
+
         button {
             border: none;
             outline: none;
             color: #fff;
             font: inherit;
-            padding: 10px 30px;
-            background-color: #0aa;
+            height: 40px;
+            background-color: transparent;
             cursor: pointer;
             text-transform: uppercase;
         }
 
         h1 {
-            color: #0aa;
+            color: var(--main-color);
             text-transform: uppercase;
             margin-bottom: 10px;
+        }
+
+        h2 {
+            text-transform: capitalize;
         }
 
         .iconfont {
@@ -64,7 +83,7 @@
         .wrap {
             position: relative;
             width: 94%;
-            max-width: 800px;
+            max-width: 700px;
             height: 400px;
             background-color: #fff;
             overflow: hidden;
@@ -100,7 +119,7 @@
             flex-direction: column;
             gap: 10px;
             width: 100%;
-            padding: 20px;
+            padding: 40px;
         }
 
         .ipt-box {
@@ -109,10 +128,20 @@
             align-items: center;
         }
 
+        .btn {
+            background-color: var(--main-color);
+        }
+
+        .btn:hover {
+            transition: 0.5s;
+            letter-spacing: 2px;
+        }
+
         .icon-box {
             display: flex;
             justify-content: center;
             gap: 10px;
+            margin-top: 20px;
         }
 
         .icon-box .iconfont {
@@ -120,6 +149,13 @@
             padding: 10px;
             border-radius: 10px;
             border: 1px solid #ccc;
+            transition: .5s;
+            cursor: pointer;
+        }
+
+        .icon-box .iconfont:hover {
+            border-radius: 50%;
+            color: var(--main-color);
         }
 
         .ipt-box span {
@@ -139,7 +175,7 @@
             left: -250%;
             width: 300%;
             height: 100%;
-            background-color: #0aa;
+            background-color: var(--main-color);
             border-radius: 200px;
             transition: 0.5s 0.2s;
             z-index: 2;
@@ -153,11 +189,11 @@
             position: absolute;
             width: 50%;
             height: 100%;
+            padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             gap: 10px;
-            align-items: center;
             transition: 0.5s;
             color: #fff;
             z-index: 2;
@@ -165,6 +201,7 @@
 
         /* left */
         .mask .register-tips {
+            align-items: flex-start;
             left: 0;
         }
 
@@ -174,6 +211,7 @@
 
         /* right */
         .mask .login-tips {
+            align-items: flex-end;
             right: -50%;
         }
 
@@ -182,7 +220,24 @@
         }
 
         .mask button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             border: 1px solid #fff;
+            width: 150px;
+        }
+
+        .mask button span {
+            transition: 0.2s;
+        }
+
+        .btn-register:hover span {
+            transform: translateX(-10px);
+        }
+
+        .btn-login:hover span {
+            transform: translateX(10px);
         }
     </style>
 </head>
@@ -190,17 +245,20 @@
 <body>
     <div class="wrap">
         <div class="form-box login">
-            <form action="">
+            <form action="https://www.baidu.com">
                 <h1>login</h1>
                 <div class="ipt-box">
-                    <input type="email" placeholder="your email">
+                    <input type="email" name="uemail" placeholder="your email" required maxlength="18">
                     <span class="iconfont icon-mail"></span>
                 </div>
                 <div class="ipt-box">
-                    <input type="password" placeholder="your password">
+                    <input type="password" name="upass" placeholder="your password" required maxlength="12">
                     <span class="iconfont icon-shop"></span>
                 </div>
-                <button>login</button>
+                <div class="ipt-box">
+                    <input type="checkbox" id="rem">&nbsp;&nbsp;<label for="rem">remember me</label>
+                </div>
+                <button type="submit" class="btn">login</button>
                 <div class="icon-box">
                     <span class="iconfont icon-alipay1193369easyiconnet"></span>
                     <span class="iconfont icon-wechat1193418easyiconnet"></span>
@@ -211,33 +269,37 @@
             </form>
         </div>
         <div class="form-box register">
-            <form action="">
+            <form action="https://www.baidu.com">
                 <h1>register</h1>
                 <div class="ipt-box">
-                    <input type="text" placeholder="your name">
+                    <input type="text" name="uname" placeholder="your name" required maxlength="12">
                     <span class="iconfont icon-user"></span>
                 </div>
                 <div class="ipt-box">
-                    <input type="email" placeholder="your email">
+                    <input type="email" name="uemail" placeholder="your email" required maxlength="18">
                     <span class="iconfont icon-mail"></span>
                 </div>
                 <div class="ipt-box">
-                    <input type="password" placeholder="your password">
+                    <input type="password" name="upass" placeholder="your password" required maxlength="12">
                     <span class="iconfont icon-shop"></span>
                 </div>
-                <button>register</button>
+                <div class="ipt-box">
+                    <input type="checkbox" id="item">&nbsp;&nbsp;<label for="item">agree with the items</label>
+                </div>
+                <button type="submit" class="btn">register</button>
             </form>
         </div>
         <div class="mask">
             <div class="tips register-tips">
                 <h2>hello, there.</h2>
                 <p>don't have an account?</p>
-                <button class="btn-register"><span class="iconfont icon-arrow-left"></span> register</button>
+                <button type="button" class="btn-register"><span class="iconfont icon-arrow-left"></span>
+                    register</button>
             </div>
             <div class="tips login-tips">
                 <h2>welcom back.</h2>
                 <p>alread have an account?</p>
-                <button class="btn-login"><span class="iconfont icon-arrow-right"></span> login</button>
+                <button type="button" class="btn-login">login<span class="iconfont icon-arrow-right"></span></button>
             </div>
         </div>
     </div>
