@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Demo</title>
   <style>
-    @import url(//at.alicdn.com/t/c/font_3834292_zxqb2r9tra.css);
+    @import url(//at.alicdn.com/t/c/font_4375346_fgaaclszyu.css);
 
     * {
       margin: 0;
@@ -15,6 +15,41 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
+    input {
+      outline: none;
+      width: 100%;
+      height: 40px;
+      color: #333;
+      font: inherit;
+      border: 1px solid #eee;
+      padding: 0 10px;
+      background-color: #eee;
+    }
+
+    input::placeholder {
+      text-transform: capitalize;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      color: #fff;
+      font: inherit;
+      padding: 10px 30px;
+      background-color: #0aa;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      color: #0aa;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .iconfont {
+      font-size: 20px;
+    }
 
     body {
       display: flex;
@@ -23,22 +58,198 @@
       align-items: center;
       height: 100vh;
       background-image: radial-gradient(#00abf0, #000);
+    }
+
+    .wrap {
+      position: relative;
+      width: 94%;
+      max-width: 800px;
+      height: 400px;
+      background-color: #fff;
+      overflow: hidden;
+    }
+
+    .form-box {
+      position: absolute;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      transition: 0.5s;
+      z-index: 1;
+    }
+
+    .wrap.active .form-box {
+      right: 50%;
+    }
+
+    .register {
+      visibility: hidden;
+    }
+
+    .wrap.active .register {
+      visibility: visible;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .ipt-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .icon-box {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .icon-box .iconfont {
+      display: flex;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .ipt-box span {
+      position: absolute;
+      right: 10px;
+    }
+
+    .mask {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .mask::before {
+      content: '';
+      position: absolute;
+      left: -250%;
+      width: 300%;
+      height: 100%;
+      background-color: #0aa;
+      border-radius: 200px;
+      transition: 0.5s 0.2s;
+      z-index: 2;
+    }
+
+    .wrap.active .mask::before {
+      left: 50%;
+    }
+
+    .mask .tips {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+      transition: 0.5s;
       color: #fff;
+      z-index: 2;
     }
 
-    p {
-      z-index: 1;
+    /* left */
+    .mask .register-tips {
+      left: 0;
     }
 
-    p::before {
-      content: "*";
-      z-index: 1;
+    .wrap.active .mask .register-tips {
+      left: -50%;
+    }
+
+    /* right */
+    .mask .login-tips {
+      right: -50%;
+    }
+
+    .wrap.active .mask .login-tips {
+      right: 0;
+    }
+
+    .mask button {
+      border: 1px solid #fff;
     }
   </style>
 </head>
 
 <body>
-  <p>Lorem ipsum dolor sit amet.</p>
+  <div class="wrap">
+    <div class="form-box login">
+      <form action="">
+        <h1>login</h1>
+        <div class="ipt-box">
+          <input type="email" placeholder="your email">
+          <span class="iconfont icon-mail"></span>
+        </div>
+        <div class="ipt-box">
+          <input type="password" placeholder="your password">
+          <span class="iconfont icon-shop"></span>
+        </div>
+        <button>login</button>
+        <div class="icon-box">
+          <span class="iconfont icon-alipay1193369easyiconnet"></span>
+          <span class="iconfont icon-wechat1193418easyiconnet"></span>
+          <span class="iconfont icon-xiaomimi1193422easyiconnet"></span>
+          <span class="iconfont icon-weibo1193419easyiconnet"></span>
+          <span class="iconfont icon-taobao1193410easyiconnet"></span>
+        </div>
+      </form>
+    </div>
+    <div class="form-box register">
+      <form action="">
+        <h1>register</h1>
+        <div class="ipt-box">
+          <input type="text" placeholder="your name">
+          <span class="iconfont icon-user"></span>
+        </div>
+        <div class="ipt-box">
+          <input type="email" placeholder="your email">
+          <span class="iconfont icon-mail"></span>
+        </div>
+        <div class="ipt-box">
+          <input type="password" placeholder="your password">
+          <span class="iconfont icon-shop"></span>
+        </div>
+        <button>register</button>
+      </form>
+    </div>
+    <div class="mask">
+      <div class="tips register-tips">
+        <h2>hello, there.</h2>
+        <p>don't have an account?</p>
+        <button class="btn-register"><span class="iconfont icon-arrow-left"></span> register</button>
+      </div>
+      <div class="tips login-tips">
+        <h2>welcom back.</h2>
+        <p>alread have an account?</p>
+        <button class="btn-login"><span class="iconfont icon-arrow-right"></span> login</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const wrap = document.querySelector('.wrap')
+    const btnLogin = document.querySelector('.btn-login')
+    const btnRegister = document.querySelector('.btn-register')
+    btnLogin.onclick = function () {
+      wrap.classList.remove('active')
+    }
+    btnRegister.onclick = function () {
+      wrap.classList.add('active')
+    }
+  </script>
 </body>
 
 </html>
