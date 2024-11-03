@@ -60,7 +60,7 @@
       background-image: radial-gradient(#00abf0, #000);
     }
 
-    .wrap {
+    .container {
       position: relative;
       width: 94%;
       max-width: 800px;
@@ -74,64 +74,34 @@
       right: 0;
       width: 50%;
       height: 100%;
-      background-color: #fff;
       display: flex;
+      justify-content: center;
       align-items: center;
-      transition: 0.5s;
+      background-color: #fff;
       z-index: 1;
+      transition: 0.5s 1.2s, visibility 0s 1s;
     }
 
-    .wrap.active .form-box {
+    .container.active .form-box {
       right: 50%;
     }
 
-    .register {
+    .form-box.register {
       visibility: hidden;
     }
 
-    .wrap.active .register {
+    .container.active .form-box.register {
       visibility: visible;
     }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 100%;
-      padding: 20px;
-    }
-
-    .ipt-box {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .icon-box {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .icon-box .iconfont {
-      display: flex;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-    }
-
-    .ipt-box span {
-      position: absolute;
-      right: 10px;
-    }
-
-    .mask {
+    /* toggle */
+    .toggle-box {
       position: absolute;
       width: 100%;
       height: 100%;
     }
 
-    .mask::before {
+    .toggle-box::before {
       content: '';
       position: absolute;
       left: -250%;
@@ -139,115 +109,76 @@
       height: 100%;
       background-color: #0aa;
       border-radius: 200px;
-      transition: 0.5s 0.2s;
+      transition: 1.8s;
       z-index: 2;
     }
 
-    .wrap.active .mask::before {
+    .container.active .toggle-box::before {
       left: 50%;
     }
 
-    .mask .tips {
+    .toggle-panel {
       position: absolute;
       width: 50%;
       height: 100%;
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      gap: 10px;
       align-items: center;
-      transition: 0.5s;
+      transition: 0.6s;
       color: #fff;
       z-index: 2;
     }
 
     /* left */
-    .mask .register-tips {
+    .toggle-panel.toggle-left {
       left: 0;
+      transition-delay: 1.2s;
     }
 
-    .wrap.active .mask .register-tips {
+    .container.active .toggle-panel.toggle-left {
       left: -50%;
+      transition-delay: 0.6s;
     }
 
     /* right */
-    .mask .login-tips {
+    .toggle-panel.toggle-right {
       right: -50%;
+      transition-delay: 0.6s;
     }
 
-    .wrap.active .mask .login-tips {
+    .container.active .toggle-panel.toggle-right {
       right: 0;
+      transition-delay: 1.2s;
     }
 
-    .mask button {
+    .toggle-box button {
       border: 1px solid #fff;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="form-box login">
-      <form action="">
-        <h1>login</h1>
-        <div class="ipt-box">
-          <input type="email" placeholder="your email">
-          <span class="iconfont icon-mail"></span>
-        </div>
-        <div class="ipt-box">
-          <input type="password" placeholder="your password">
-          <span class="iconfont icon-shop"></span>
-        </div>
-        <button>login</button>
-        <div class="icon-box">
-          <span class="iconfont icon-alipay1193369easyiconnet"></span>
-          <span class="iconfont icon-wechat1193418easyiconnet"></span>
-          <span class="iconfont icon-xiaomimi1193422easyiconnet"></span>
-          <span class="iconfont icon-weibo1193419easyiconnet"></span>
-          <span class="iconfont icon-taobao1193410easyiconnet"></span>
-        </div>
-      </form>
-    </div>
-    <div class="form-box register">
-      <form action="">
-        <h1>register</h1>
-        <div class="ipt-box">
-          <input type="text" placeholder="your name">
-          <span class="iconfont icon-user"></span>
-        </div>
-        <div class="ipt-box">
-          <input type="email" placeholder="your email">
-          <span class="iconfont icon-mail"></span>
-        </div>
-        <div class="ipt-box">
-          <input type="password" placeholder="your password">
-          <span class="iconfont icon-shop"></span>
-        </div>
-        <button>register</button>
-      </form>
-    </div>
-    <div class="mask">
-      <div class="tips register-tips">
-        <h2>hello, there.</h2>
-        <p>don't have an account?</p>
-        <button class="btn-register"><span class="iconfont icon-arrow-left"></span> register</button>
+  <div class="container">
+    <div class="form-box login">login</div>
+    <div class="form-box register">rigister</div>
+    <div class="toggle-box">
+      <div class="toggle-panel toggle-left">
+        <button class="btn-register"><span class="iconfont icon-arrow-right"></span>register</button>
       </div>
-      <div class="tips login-tips">
-        <h2>welcom back.</h2>
-        <p>alread have an account?</p>
-        <button class="btn-login"><span class="iconfont icon-arrow-right"></span> login</button>
+      <div class="toggle-panel toggle-right">
+        <button class="btn-login">login<span class="iconfont icon-arrow-left"></span></button>
       </div>
     </div>
   </div>
   <script>
-    const wrap = document.querySelector('.wrap')
+    const container = document.querySelector('.container')
     const btnLogin = document.querySelector('.btn-login')
     const btnRegister = document.querySelector('.btn-register')
-    btnLogin.onclick = function () {
-      wrap.classList.remove('active')
-    }
     btnRegister.onclick = function () {
-      wrap.classList.add('active')
+      container.classList.add('active')
+    }
+    btnLogin.onclick = function () {
+      container.classList.remove('active')
     }
   </script>
 </body>
