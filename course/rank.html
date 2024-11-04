@@ -6,31 +6,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>积分榜 Rank</title>
   <link rel="stylesheet" href="./css/rank.css">
+  <script src="//at.alicdn.com/t/c/font_4240947_umh5d220s7n.js"></script>
 </head>
 
 <body>
   <div class="container" id="app">
-    <nav>
+    <header>
       <div class="logo">
-        <span class='iconfont icon-line-medalxunzhang-02 logo-icon'></span>
-        <span class="logo-title">积分榜<span class='iconfont icon-line-medalxunzhang-02'></span></span>
+        <svg class="icon icon-logo" aria-hidden="true">
+          <use xlink:href="#icon-icon-medal-1st"></use>
+        </svg>
+        <span class="logo-title">积分榜</span>
       </div>
-      <div class="nav" v-for="(item, index) in navs" :key="item,uear">
-        <div class="nav-item" :class="{'active':ind==item.ind}">{{item.title}}</div>
-        <div class="sub-nav">
-          <div class="sub-nav-item" :class="{'active':subind==subitem.subind && ind==item.ind}"
-            v-for="(subitem, subindex) in item.cont" :key="subitem.url" @click="getData(subitem.url, $event)"
-            :data-ind="item.ind" :data-subind="subindex"> {{subitem.desc}} </div>
-        </div>
+      <div class="ham" @click="toggleMenu">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-thlist"></use>
+        </svg>
       </div>
-    </nav>
+      <div class="nav-wrap" :class="{active:isShow}">
+        <nav class="nav" v-for="(item, index) in navs" :key="item.ind">
+          <div class="nav-item" :class="{'active':ind==item.ind}" @click="toggleSubMenu(index)">{{item.title}}</div>
+          <div class="sub-nav" :class="{active:isSubShow && index==ind}">
+            <div class="sub-nav-item" :class="{'active':subind==subitem.subind && ind==item.ind}"
+              v-for="(subitem, subindex) in item.cont" :key="subitem.url" @click="getData(subitem.url, $event)"
+              :data-ind="item.ind" :data-subind="subindex"> {{subitem.desc}} </div>
+          </div>
+        </nav>
+      </div>
+    </header>
     <div class="main">
       <div class="item" v-for="(item,ind) in rank.cont" :key="item">
-        <div>{{item.usn}}</div>
-        <img class='img' :src="`/utils${item.uavatar}`" alt="avatar">
+        <div class="sn">{{item.usn}}</div>
+        <svg class="icon icon-avatar" aria-hidden="true">
+          <use :xlink:href="`#icon-avatar${getInd(ind)}`"></use>
+        </svg>
+        <!-- <img class='img' :src="`/utils${item.uavatar}`" alt="avatar"> -->
         <span class='name'>{{item.uname}}</span>
-        <div><span class='iconfont icon-star' v-for="star in item.ucredit"></span></div>
+        <div>
+          <svg class="icon icon-star" aria-hidden="true" v-for="star in item.ucredit">
+            <use xlink:href="#icon-star"></use>
+          </svg>
+          <!-- <span class='iconfont icon-star' v-for="star in item.ucredit"></span> -->
+        </div>
       </div>
+      <svg class="icon icon-pos" aria-hidden="true">
+        <use xlink:href="#icon-a-guzhang"></use>
+      </svg>
     </div>
     <footer>
       <h5>All Rights Reserved &copy; By Cnplaman 2022-2025</h5>
@@ -120,6 +141,8 @@
         const subind = ref(null)
         const rank = ref([]);
         const subNav = ref([])
+        const isShow = ref(false)
+        const isSubShow = ref(false)
         const getData = (url, $event) => {
           fetch(`/utils/data/rank/${url}`)
             .then(res => res.json())
@@ -127,17 +150,37 @@
               rank.value = res;
               ind.value = $event.target.dataset.ind;
               subind.value = $event.target.dataset.subind;
-              console.log(subNav.value);
+              // console.log(subNav.value);
+              isSubShow.value = false;
+              isShow.value = false;
 
               subNav.value.forEach(item => {
-                console.log(item);
+                // console.log(item);
                 item.classList.remove('active');
               });
             })
         }
 
+        const getInd = (ind) => {
+          return ind % 10;
+        }
+
+        const toggleMenu = () => {
+          isShow.value = !isShow.value;
+        }
+        const toggleSubMenu = (index) => {
+          if (isSubShow.value && index == ind.value) {
+            isSubShow.value = false;
+            isShow.value = false;
+            return;
+          }
+          isSubShow.value = false;
+          ind.value = index;
+          isSubShow.value = true;
+        }
+
         onMounted(() => {
-          console.log(ind.value, subind.value, subNav.value);
+          // console.log(ind.value, subind.value, subNav.value);
         })
 
         return {
@@ -146,7 +189,12 @@
           subind,
           rank,
           subNav,
+          isShow,
+          isSubShow,
           getData,
+          getInd,
+          toggleMenu,
+          toggleSubMenu
         }
       }
     }).mount('#app')

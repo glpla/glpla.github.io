@@ -1,5 +1,3 @@
-@import url(https://at.alicdn.com/t/c/font_4240947_1yqeamcumt2.css);
-
 :root {
   --main-color: #FDC830;
   --item-bg: hsla(44, 98%, 59%, 5%);
@@ -14,6 +12,16 @@
   font-weight: normal;
 }
 
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  color: var(--main-color);
+}
+
 html {
   font-size: 62.5%;
 }
@@ -23,7 +31,7 @@ body {
   flex-direction: column;
   justify-content: center;
   gap: var(--p-m-g);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   align-items: center;
   height: 100vh;
   color: #efefef;
@@ -34,28 +42,31 @@ body {
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: var(--p-m-g);
-  align-items: center;
   width: 100%;
   max-width: 1024px;
   min-height: 100vh;
-  padding: var(--p-m-g);
-
 }
 
-nav {
+header {
   position: relative;
   width: 100%;
+  height: 10vh;
   align-self: start;
   display: flex;
   align-items: center;
   gap: var(--p-m-g);
-  line-height: 5vh;
-  height: 5vh;
-  font-size: 1.6rem;
-  border-bottom: 1px solid #ccc;
+  background-color: #232323;
+  padding: 0 var(--p-m-g);
   z-index: 1;
+}
+
+.ham {
+  display: none;
+}
+
+.nav-wrap {
+  display: flex;
 }
 
 .nav {
@@ -63,14 +74,14 @@ nav {
   position: relative;
 }
 
-.nav:hover .nav-item,
-.nav-item.active {
-  color: var(--main-color);
+.nav-item {
+  text-align: right;
+  padding: var(--p-m-g);
+  font-weight: 600;
 }
 
-.nav:hover .sub-nav {
-  max-height: 100vh;
-  transition: max-height 0.5s ease-in-out;
+.nav-item.active {
+  color: var(--main-color);
 }
 
 .sub-nav {
@@ -81,6 +92,18 @@ nav {
   overflow: hidden;
   line-height: 2;
   text-align: right;
+  font-size: 1.4rem;
+  background-color: #232323;
+}
+
+.sub-nav.active {
+  max-height: 100vh;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.sub-nav-item {
+  padding: var(--p-m-g);
+  border-top: 1px solid #484848;
 }
 
 .sub-nav-item:hover,
@@ -91,6 +114,7 @@ nav {
 .logo {
   margin-right: auto;
   color: var(--main-color);
+  font-size: 20px;
 }
 
 .title {
@@ -103,13 +127,13 @@ nav {
 
 .main {
   position: relative;
-  width: 100%;
-  height: 70vh;
-  background-image: url(https://cdn.pixabay.com/photo/2024/06/06/07/24/man-8812061_640.png);
-  background-size: 30%;
-  background-repeat: no-repeat;
-  background-position: right bottom;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
   overflow-y: auto;
+  /* padding: var(--p-m-g); */
+  /* columns: 2 300px; */
 }
 
 .main::-webkit-scrollbar {
@@ -120,13 +144,31 @@ nav {
   background-image: linear-gradient(transparent, var(--main-color));
 }
 
+.icon-avatar {
+  font-size: 3rem;
+}
+
+.icon-pos {
+  position: fixed;
+  bottom: 10rem;
+  right: 4rem;
+  font-size: 8rem;
+}
+
 .item {
-  display: grid;
-  grid-template-columns: auto auto 60px 1fr;
+  /* display: grid; */
+  /* grid-template-columns: auto auto 65px 1fr; */
+  width: 50%;
+  display: flex;
   align-items: center;
   gap: var(--p-m-g);
   color: #fff;
   line-height: 2;
+  margin-bottom: var(--p-m-g);
+}
+
+.item:nth-child(even) {
+  flex-direction: row-reverse;
 }
 
 .item img {
@@ -135,21 +177,77 @@ nav {
   border-radius: 50%;
 }
 
-.item .iconfont {
-  color: var(--main-color);
+.item .name {
+  width: 65px;
 }
 
 footer {
   color: #eee;
-  line-height: 4;
+  height: 5vh;
+  text-align: center;
 }
 
 @media screen and (max-width:768px) {
-  .logo .iconfont {
+  .ham {
+    display: block;
+    font-size: 3rem;
+    z-index: 3;
+  }
+
+  .logo {
+    z-index: 3;
+  }
+
+  .main {
+    display: block;
+    padding: var(--p-m-g);
+  }
+
+  .item {
+    width: 100%;
+  }
+
+  .item:nth-child(even) {
+    flex-direction: unset;
+  }
+
+  .nav-wrap {
+    position: fixed;
+    right: -100%;
+    top: 0vh;
+    padding-top: 10vh;
+    flex-direction: column;
+    transition: right 0.5s;
+    width: 100%;
+    height: 100vh;
+    background-color: #232323;
+    z-index: 2;
+  }
+
+  .nav-wrap.active {
+    right: 0;
+  }
+
+  .nav-item.active {
+    color: #000;
+    background-color: var(--main-color);
+  }
+
+  .sub-nav {
+    position: unset;
+    width: unset;
+    background-color: #393939;
+  }
+
+  .icon-logo {
     font-size: 4rem;
   }
 
   .logo-title {
+    display: none;
+  }
+
+  .sn {
     display: none;
   }
 }
