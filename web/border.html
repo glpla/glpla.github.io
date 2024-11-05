@@ -27,8 +27,9 @@
     <dt class="nav-cont">边框 border</dt>
     <dd>
       <div>. 为元素添加指定宽度、样式和颜色的边框</div>
-      <pre>border: border-width border-style border-color</pre>
       <div>. 元素有4个边，默认是同时设置4个边：top、right、bottom、left - 上右下左</div>
+      <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/border">MDN - border</a></div>
+      <pre>border: border-width border-style border-color</pre>
       <table>
         <tr>
           <th>类别</th>
@@ -40,7 +41,7 @@
         </tr>
         <tr>
           <td>border-style</td>
-          <td>线条样式：实线solid|默认、点线dotted、短划dashed、双线double</td>
+          <td>线条样式：实线 solid|默认、点线 dotted、短划 dashed、双线 double</td>
         </tr>
         <tr>
           <td>border-color</td>
@@ -51,51 +52,39 @@
       <pre>border-top: border-width border-style border-color</pre>
       <div>. 还可以使用独立属性单独设置</div>
       <pre>
-.box{
-  border-top-color: #f40;
-  border-top-width: 1px;
-  border-top-style: solid;
-}      </pre>
-      <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/border">MDN - border</a></div>
-
+border-top-color: #f40;
+border-top-width: 1px;
+border-top-style: solid;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 基本使用</dd>
     <dd class="grid">
       <div class="basic basic0"></div>
       <pre>
-  // 同时设置4个边
-  .basic0 {
-      border: 1px #f40 solid;
-  }</pre>
+// 同时设置4个边
+border: 1px #f40 solid;</pre>
       <div class="basic basic1"></div>
       <pre>
-  // 单独设置某个边
-  .basic1 {
-      border-top: 4px dotted #f08;
-      border-right: 4px dashed #089;
-      border-bottom: 4px solid #f40;
-      border-left: 4px double #890;
-  }</pre>
+// 单独设置某个边
+border-top: 4px dotted #f08;
+border-right: 4px dashed #089;
+border-bottom: 4px solid #f40;
+border-left: 4px double #890;</pre>
       <div class="zero0"></div>
       <pre>
 // 0元素边框 - 0尺寸大边框
-.zero0 {
-    width: 0;
-    height: 0;
-    border: 20px solid  #f08;
-    border-right-color: #089;
-    border-bottom-color: #f40;
-    border-left-color: #890;
-}</pre>
+width: 0;
+height: 0;
+border: 20px solid  #f08;
+border-right-color: #089;
+border-bottom-color: #f40;
+border-left-color: #890;</pre>
       <div class="zero1"></div>
       <pre>
-  // 将其中一个或几个边框颜色隐去transparent
-  .zero1 {
-      width: 0;
-      height: 0;
-      border: 20px solid transparent;
-      border-bottom-color: #f40;
-  }</pre>
+// 将其中一个或几个边框颜色隐去transparent
+width: 0;
+height: 0;
+border: 20px solid transparent;
+border-bottom-color: #f40;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/site0.html">页面设计</a> - 增加边框大小</dd>
     <dd class="tips">
@@ -107,22 +96,18 @@
       <div class="basic basic2"></div>
       <pre>
 // 指定边框透明色
-.basic2 {
-    border: 20px dashed rgba(255, 255, 255, 0.2);
-    background-color: #f40;
-}</pre>
+border: 20px dashed rgba(255, 255, 255, 0.2);
+background-color: #f40;</pre>
       <div class="basic basic3"></div>
       <pre>
 // 有背景图片的情况下，不能直接指定透明边框颜色
 // 必须指定背景图片起点为border区
-.basic3 {
-    padding: 1rem;
-    border: 20px dashed rgba(255, 255, 255, 0.4);
-    background-color: #f40;//容错
-    background-image: url(../imgs/bg.jpg);
-    background-size: cover;
-    background-origin: border-box;//MUST
-}</pre>
+padding: 1rem;
+border: 20px dashed rgba(255, 255, 255, 0.4);
+background-color: #f40;//容错
+background-image: url(../imgs/bg.jpg);
+background-size: cover;
+background-origin: border-box;//MUST</pre>
     </dd>
   </dl>
   <div class="chap">边框圆角 border-radius</div>
@@ -184,15 +169,17 @@ border-radius: 0 50% 50%/0 50% 50%;</pre>
       <pre>border-radius: 
         50% 50% 50% 50% / 60% 60% 40% 40%;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/companies.html#service">公告信息栏</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/companies.html#service">公告信息栏</a>、<a
+        href="https://codepen.io/glpla/full/oNmOjzQ">科技环</a></dd>
     <dd>
+      <div>. 仅指定一个方向的边框，然后圆角化</div>
       <div>. 左边框 border-left</div>
       <div>. 圆角 border-radius</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/border-skill.html">技能条</a></dd>
     <dd>
       <div>. 用 padding 将子元素隔开</div>
-      <div>. 可以使用 <span class="warn">伪元素</span>实现</div>
+      <div>. 可以使用 <span class="warn">伪元素</span> 实现</div>
       <div>. 可以使用CSS变量、CSS函数 var()，简化CSS代码、便于修改</div>
       <div>. 可以使用自定义属性 data- 展示更多信息</div>
     </dd>
@@ -203,10 +190,10 @@ border-radius: 0 50% 50%/0 50% 50%;</pre>
       <div>. 定位 position</div>
       <div>. 过渡动画 transition</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNmOjzQ">科技环</a></dd>
-    <dd>. 仅指定一个方向的边框，圆角化，然后旋转</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/RwvOPvE">环环相扣</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/border-ring.html">环环相扣</a>、<a
+        href="https://codepen.io/glpla/full/RwvOPvE">环环相扣 - Codepen</a></dd>
     <dd>
+      <div>. 使用负边距重叠，配合 <a href="./position.html">定位</a> 和 <a href="./selector_ele.html">伪元素</a> 实现</div>
       <div>. 左环使用伪元素创建同样大小的圆环；注意盒模型的尺寸计算</div>
       <div>. 设置伪元素上边框 border-top 颜色为相同的颜色；其他三个方向的边框颜色透明</div>
       <div>. 旋转伪元素 transform，使其覆盖在右侧环上方</div>

@@ -4,41 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>头像</title>
+    <title>头像 Avatar</title>
     <style>
+        @import url(../../css/fonts_GreatVibes.css);
+
+        :root {
+            --lh: 15px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         body {
             display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
             height: 100vh;
         }
 
         .avatar {
             position: relative;
-            width: 150px;
-            height: 150px;
+            width: calc(var(--lh)*10 - 10px);
+            height: calc(var(--lh)*10 - 10px);
             background-image: url(../imgs/wangfei.png);
             background-position: center;
             background-size: cover;
             border-radius: 50%;
-            margin: auto;
         }
 
         .avatar::before {
             content: '';
             position: absolute;
-            left: -10px;
-            top: -10px;
-            right: -10px;
-            bottom: -10px;
+            inset: -5px;
             background-image: linear-gradient(#b13c31, #d5a88b, #124c5c);
             border-radius: 50%;
             z-index: -1;
-            animation: roll 5s linear infinite;
+            /* animation: roll 5s linear infinite; */
+        }
+
+        div.title {
+            width: max-content;
+            background-image: linear-gradient(to right, #b13c31, #d5a88b, #124c5c);
+        }
+
+        p {
+            font-size: calc(var(--lh)*3);
+            line-height: calc(var(--lh)*3);
+            text-transform: capitalize;
+            font-family: 'greatvibes';
+            color: #b13c31;
+            font-weight: 600;
+            background-color: #fff;
+            mix-blend-mode: screen;
+            text-shadow: 0 0 4px #000;
         }
 
         @keyframes roll {
@@ -51,6 +75,9 @@
 
 <body>
     <div class="avatar"></div>
+    <div class="title">
+        <p>wang fei</p>
+    </div>
 </body>
 
 </html>
