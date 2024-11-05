@@ -56,30 +56,47 @@
       background-image: radial-gradient(#00abf0, #000);
     }
 
-    div {
+    .box {
       width: 300px;
       text-align-last: justify;
       color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .title::before {
+      content: attr(data-title);
+    }
+
+    .txt::before {
+      content: attr(data-txt);
     }
 
     .bar {
-      padding: 2px;
+      padding: 4px;
       border: 1px solid #fff;
     }
 
+
     .per {
-      width: 80%;
+      width: var(--per);
       height: 20px;
-      background-color: #fff;
+      background-color: var(--color);
     }
   </style>
 </head>
 
 <body>
 
-  <div>
-    <span>123</span>
-    <span>456</span>
+  <div class="box" style="--color:#f40;--per:80%">
+    <span class="title" data-title="html"></span>
+    <span class="txt" data-txt="80%"></span>
+    <div class="bar">
+      <div class="per"></div>
+    </div>
+  </div>
+  <div class="box" style="--color:#089;--per:90%">
+    <span class="title" data-title="css"></span>
+    <span class="txt" data-txt="90%"></span>
     <div class="bar">
       <div class="per"></div>
     </div>
