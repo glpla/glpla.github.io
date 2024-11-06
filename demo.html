@@ -56,50 +56,64 @@
       background-image: radial-gradient(#00abf0, #000);
     }
 
-    .box {
-      width: 300px;
-      text-align-last: justify;
-      color: #fff;
-      margin-bottom: 10px;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 600px;
+      aspect-ratio: 4/3;
+      background-color: #fff;
     }
 
-    .title::before {
-      content: attr(data-title);
+    .item {
+      background-image: url(./imgs/hj.jpg);
     }
 
-    .txt::before {
-      content: attr(data-txt);
+    .item:nth-child(1),
+    .item:nth-child(5) {
+      grid-column: span 2;
     }
 
-    .bar {
-      padding: 4px;
-      border: 1px solid #fff;
+    .item:nth-child(2),
+    .item:nth-child(3) {
+      grid-row: span 2;
     }
 
+    .item:nth-child(1) {
+      background-size: 150% 300%;
+      background-position: left top;
+    }
 
-    .per {
-      width: var(--per);
-      height: 20px;
-      background-color: var(--color);
+    .item:nth-child(2) {
+      background-size: 300% 150%;
+      background-position: right top;
+    }
+
+    .item:nth-child(3) {
+      background-size: 300% 150%;
+      background-position: left bottom;
+    }
+
+    .item:nth-child(4) {
+      background-size: 300% 300%;
+      background-position: center;
+    }
+
+    .item:nth-child(5) {
+      background-size: 150% 300%;
+      background-position: right bottom;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="box" style="--color:#f40;--per:80%">
-    <span class="title" data-title="html"></span>
-    <span class="txt" data-txt="80%"></span>
-    <div class="bar">
-      <div class="per"></div>
-    </div>
-  </div>
-  <div class="box" style="--color:#089;--per:90%">
-    <span class="title" data-title="css"></span>
-    <span class="txt" data-txt="90%"></span>
-    <div class="bar">
-      <div class="per"></div>
-    </div>
+  <div class="grid">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
   </div>
 </body>
 
