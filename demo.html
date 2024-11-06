@@ -6,45 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Demo</title>
   <style>
-    @import url(//at.alicdn.com/t/c/font_4375346_fgaaclszyu.css);
+    @import url(//at.alicdn.com/t/c/font_4690841_08vyhb7495oi.css);
+    @import url('https://fonts.font.im/css?family=Poppins');
+
+    :root {
+      --p-m-g: 10px;
+    }
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Poppins', Helvetica, sans-serif;
+      list-style: none;
+      line-height: 1.5rem;
     }
 
-    input {
-      outline: none;
-      width: 100%;
-      height: 40px;
-      color: #333;
-      font: inherit;
-      border: 1px solid #eee;
-      padding: 0 10px;
-      background-color: #eee;
-    }
-
-    input::placeholder {
-      text-transform: capitalize;
-    }
-
-    button {
-      border: none;
-      outline: none;
-      color: #fff;
-      font: inherit;
-      padding: 10px 30px;
-      background-color: #0aa;
-      cursor: pointer;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      color: #0aa;
-      text-transform: uppercase;
-      margin-bottom: 10px;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
     body {
@@ -56,64 +36,130 @@
       overflow: hidden;
     }
 
-    .wrap {
-      position: relative;
-      width: 600px;
-      aspect-ratio: 4/3;
-      background-color: #eee;
+    li a {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0.85rem;
+      border-radius: 0.6rem;
+    }
+
+    .drop-down {
+      display: flex;
+      align-items: center;
+      gap: var(--p-m-g);
+      padding: 0.85rem;
+      border-radius: 0.6rem;
+      cursor: pointer;
+    }
+
+    .drop-down .arrow {
+      margin-left: auto;
+      transition: 0.5s;
+    }
+
+    li a:hover,
+    .drop-down:hover {
+      background-color: #212530;
+    }
+
+    .drop-down.active .arrow {
+      transform: rotate(90deg);
+    }
+
+    .drop-down.active+.sub-nav {
+      grid-template-rows: 1fr;
+    }
+
+    .nav {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      padding: 1rem;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .sub-nav {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: 0.5s;
+    }
+
+    .sub-nav>div {
       overflow: hidden;
-    }
-
-    .wrap::before {
-      content: '';
-      position: absolute;
-      left: -650px;
-      top: -650px;
-      width: 1000px;
-      height: 1000px;
-      border-radius: 50%;
-      background-image: radial-gradient(#00abf0, #00abf0);
-      transition: 1s;
-    }
-
-    .wrap.active::before {
-      left: 300px;
-      top: 300px;
-    }
-
-    button {
-      position: relative;
-    }
-
-    .bg-txt {
-      color: transparent;
-      font-size: 40px;
-      font-weight: 600;
-      background-color: #f40;
-      background-image: linear-gradient(to right, #00abf0, #0aa);
-      background-clip: text;
-      -webkit-background-clip: text;
     }
   </style>
 </head>
 
 <body>
-  <div class="bg-txt">Lorem ipsum dolor sit amet.</div>
-  <div class="wrap">
-  </div>
-  <button class="register">register</button>
-  <button class="login">login</button>
+  <ul class="nav">
+    <li>
+      <div class="drop-down">
+        <span class="iconfont icon-home-fill"></span>
+        <span>Lorem.</span>
+        <span class="iconfont icon-right arrow"></span>
+      </div>
+      <nav class="sub-nav">
+        <div>
+          <a href="">Lorem.</a>
+          <a href="">Repellat?</a>
+          <a href="">Ut?</a>
+        </div>
+      </nav>
+    </li>
+    <li>
+      <div class="drop-down">
+        <span class="iconfont icon-calendar-fill"></span>
+        <span>Tenetur.</span>
+        <span class="iconfont icon-right arrow"></span>
+      </div>
+      <nav class="sub-nav">
+        <div>
+          <a href="">Lorem.</a>
+          <a href="">Dolor?</a>
+          <a href="">Explicabo.</a>
+        </div>
+      </nav>
+    </li>
+    <li>
+      <div class="drop-down">
+        <span class="iconfont icon-location-fill"></span>
+        <span>Maiores!</span>
+        <span class="iconfont icon-right arrow"></span>
+      </div>
+      <nav class="sub-nav">
+        <div>
+          <a href="">Lorem.</a>
+          <a href="">Pariatur.</a>
+          <a href="">Repellendus.</a>
+        </div>
+      </nav>
+    </li>
+    <li>
+      <div class="drop-down">
+        <span class="iconfont icon-setting-fill"></span>
+        <span>Maiores!</span>
+        <span class="iconfont icon-right arrow"></span>
+      </div>
+      <nav class="sub-nav">
+        <div>
+          <a href="">Lorem.</a>
+          <a href="">Pariatur.</a>
+          <a href="">Repellendus.</a>
+        </div>
+      </nav>
+    </li>
+  </ul>
   <script>
-    const btnLogin = document.querySelector('.login')
-    const btnRegister = document.querySelector('.register')
-    const wrap = document.querySelector('.wrap')
-
-    btnLogin.addEventListener('click', () => {
-      wrap.classList.remove('active')
-    })
-
-    btnRegister.addEventListener('click', () => {
-      wrap.classList.add('active')
+    const navItems = document.querySelectorAll('.drop-down')
+    navItems.forEach(navItem => {
+      // const subNav = navItem.querySelector('.sub-nav')
+      navItem.addEventListener('click', () => {
+        navItems.forEach(item => item.classList.remove('active'))
+        navItem.classList.toggle('active')
+      })
     })
   </script>
 </body>
