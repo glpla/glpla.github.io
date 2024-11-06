@@ -1,30 +1,29 @@
-.input-cb {
-  display: block;
+.demo-wrap {
+  overflow: hidden;
   position: relative;
-  width: 58px;
-  height: 38px;
-  margin: 10px auto;
-  border-radius: 30px;
-  padding: 4px;
-  background-color: #ddd;
-  cursor: pointer;
 }
 
-.input-cb::before {
+.demo-wrap::before {
   content: '';
   position: absolute;
-  left: 4px;
-  top: 4px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #999;
-  transition: 0.5s;
+  width: 0;
+  height: 0;
+  transform-origin: center;
+  background-color: #f40;
+  transition: all 0.5s;
 }
 
-#input-cb:checked+.input-cb::before {
-  left: calc(4px + 50px - 30px);
-  background-color: #0aa;
+.demo-wrap.active::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #f40;
+}
+
+.btn {
+  font-size: 24px;
+  cursor: pointer;
 }
 
 .input-box {

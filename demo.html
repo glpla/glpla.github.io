@@ -53,68 +53,69 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-image: radial-gradient(#00abf0, #000);
+      overflow: hidden;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+    .wrap {
+      position: relative;
       width: 600px;
       aspect-ratio: 4/3;
-      background-color: #fff;
+      background-color: #eee;
+      overflow: hidden;
     }
 
-    .item {
-      background-image: url(./imgs/hj.jpg);
+    .wrap::before {
+      content: '';
+      position: absolute;
+      left: -650px;
+      top: -650px;
+      width: 1000px;
+      height: 1000px;
+      border-radius: 50%;
+      background-image: radial-gradient(#00abf0, #00abf0);
+      transition: 1s;
     }
 
-    .item:nth-child(1),
-    .item:nth-child(5) {
-      grid-column: span 2;
+    .wrap.active::before {
+      left: 300px;
+      top: 300px;
     }
 
-    .item:nth-child(2),
-    .item:nth-child(3) {
-      grid-row: span 2;
+    button {
+      position: relative;
     }
 
-    .item:nth-child(1) {
-      background-size: 150% 300%;
-      background-position: left top;
-    }
-
-    .item:nth-child(2) {
-      background-size: 300% 150%;
-      background-position: right top;
-    }
-
-    .item:nth-child(3) {
-      background-size: 300% 150%;
-      background-position: left bottom;
-    }
-
-    .item:nth-child(4) {
-      background-size: 300% 300%;
-      background-position: center;
-    }
-
-    .item:nth-child(5) {
-      background-size: 150% 300%;
-      background-position: right bottom;
+    .bg-txt {
+      color: transparent;
+      font-size: 40px;
+      font-weight: 600;
+      background-color: #f40;
+      background-image: linear-gradient(to right, #00abf0, #0aa);
+      background-clip: text;
+      -webkit-background-clip: text;
     }
   </style>
 </head>
 
 <body>
-
-  <div class="grid">
-    <div class="item">1</div>
-    <div class="item">2</div>
-    <div class="item">3</div>
-    <div class="item">4</div>
-    <div class="item">5</div>
+  <div class="bg-txt">Lorem ipsum dolor sit amet.</div>
+  <div class="wrap">
   </div>
+  <button class="register">register</button>
+  <button class="login">login</button>
+  <script>
+    const btnLogin = document.querySelector('.login')
+    const btnRegister = document.querySelector('.register')
+    const wrap = document.querySelector('.wrap')
+
+    btnLogin.addEventListener('click', () => {
+      wrap.classList.remove('active')
+    })
+
+    btnRegister.addEventListener('click', () => {
+      wrap.classList.add('active')
+    })
+  </script>
 </body>
 
 </html>

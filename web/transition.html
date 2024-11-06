@@ -26,13 +26,16 @@
   <dl class="nav-cont">
     <dt>概述 Overview</dt>
     <dd>
-      <div>元素从一个状态过渡到另外一个状态，包括过渡的2个状态、过渡的时间、过渡的方式、是否延迟等属性</div>
+      <div>元素从一个状态过渡到另外一个状态 - define the transition between two states of an element，包括过渡的2个状态、过渡的时间、过渡的方式、是否延迟等属性</div>
       <div>状态过渡需要一个触发条件，通常是鼠标悬停hover；也可以通过添加类的方式实现</div>
       <div>只能定义2个状态：开始状态、结束状态；如果需要多个状态呈现变化过程，请使用帧动画</div>
       <div>只适用于 <span class="warn">数值</span> 状态</div>
-      <div>状态可以是一个属性，也可以是多个属性；多个属性的过渡可以使用 <span class="warn">逗号,</span> 分隔单独设计</div>
+      <div>状态可以是一个属性，也可以是多个属性；多个属性的过渡可以使用 <span class="warn">逗号,</span> 分隔 - separated by commas</div>
       <div>只能作用于当前元素；如果多个元素使用，请使用帧动画</div>
       <div>桌面端使用较多；移动端使用少</div>
+      <div>更多细节，请参考 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition">MDN - transition</a>、<a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions">Using_CSS_transitions</a>
+      </div>
       <div>1. 复合属性 shorthand</div>
       <pre>transition: property duration timing-function delay;</pre>
       <div>2. 单独属性 longhand</div>
@@ -401,22 +404,53 @@ top: -1rem;
   </dl>
   <div class="chap">事件 Events</div>
   <dl class="nav-cont">
-    <dd>. 侦听过渡动画的执行过程</dd>
-    <dt>动画结束</dt>
     <dd>
-      <pre>el.addEventListener("transitionend", (event) => {});</pre>
-    </dd>
-    <dt>动画开始</dt>
-    <dd>
+      <div>. 侦听过渡动画的执行过程</div>
+      <table>
+        <tr>
+          <th>item</th>
+          <th>desc</th>
+        </tr>
+        <tr>
+          <td>transitionstart</td>
+          <td>动画开始</td>
+        </tr>
+        <tr>
+          <td>transitionrun</td>
+          <td>动画运行</td>
+        </tr>
+        <tr>
+          <td>transitionend</td>
+          <td>动画结束</td>
+        </tr>
+        <tr>
+          <td>transitioncancel</td>
+          <td>动画取消</td>
+        </tr>
+      </table>
       <pre>el.addEventListener("transitionstart", (event) => {});</pre>
-    </dd>
-    <dt>动画运行</dt>
-    <dd>
       <pre>el.addEventListener("transitionrun", (event) => {});</pre>
-    </dd>
-    <dt>动画取消</dt>
-    <dd>
+      <pre>el.addEventListener("transitionend", (event) => {});</pre>
       <pre>el.addEventListener("transitioncancel", (event) => {});</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 动画结束后，切换页面；更多案例，请访问 <a href="./demo/form-transition.html">表单</a>
+    </dd>
+    <dd>
+      <div class="demo-wrap">
+        <span class="iconfont icon-home btn">返回主页</span>
+      </div>
+      <pre>
+const wrap = document.querySelector('.demo-wrap');
+const btn = document.querySelector('.btn');
+btn.addEventListener('click', () => {
+  wrap.classList.toggle('active');
+})
+wrap.addEventListener('transitionend', () => {
+  if (wrap.classList.contains('active')) {
+  }
+  window.location.href = './index.html';
+})      </pre>
+
     </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
@@ -431,6 +465,18 @@ top: -1rem;
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="/utils/custom/ham2024.js"></script>
+  <script>
+    const wrap = document.querySelector('.demo-wrap');
+    const btn = document.querySelector('.btn');
+    btn.addEventListener('click', () => {
+      wrap.classList.toggle('active');
+    })
+    wrap.addEventListener('transitionend', () => {
+      if (wrap.classList.contains('active')) {
+      }
+      window.location.href = './index.html';
+    })
+  </script>
 </body>
 
 </html>

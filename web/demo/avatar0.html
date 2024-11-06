@@ -42,28 +42,45 @@
             content: '';
             position: absolute;
             inset: -5px;
-            background-image: linear-gradient(#b13c31, #d5a88b, #124c5c);
+            background-image: linear-gradient(#a00, #d5a88b, #124c5c);
             border-radius: 50%;
             z-index: -1;
-            /* animation: roll 5s linear infinite; */
+            animation: roll 5s linear infinite;
         }
 
-        div.title {
+        .title {
             width: max-content;
-            background-image: linear-gradient(to right, #b13c31, #d5a88b, #124c5c);
+            padding: 0 10px;
+            font-size: calc(var(--lh)*3);
+            text-transform: capitalize;
+            color: transparent;
+            font-family: 'greatvibes';
+            font-weight: 600;
+            background-image: linear-gradient(to right, #a00, #d5a88b, #124c5c);
+            background-clip: text;
+            background-size: 200% auto;
+            background-position: 0 0;
+            transition: background-position 0.5s;
+            cursor: pointer;
+            /* text-shadow: 0 0 4px #000; */
+            /* filter: drop-shadow(0 0 10px rgba(0, 0, 0, .5)); */
         }
 
-        p {
+        .title:hover {
+            background-position: 100% 0;
+        }
+
+        /* p {
             font-size: calc(var(--lh)*3);
             line-height: calc(var(--lh)*3);
             text-transform: capitalize;
             font-family: 'greatvibes';
-            color: #b13c31;
+            color: #a00;
             font-weight: 600;
             background-color: #fff;
             mix-blend-mode: screen;
             text-shadow: 0 0 4px #000;
-        }
+        } */
 
         @keyframes roll {
             to {
@@ -75,9 +92,7 @@
 
 <body>
     <div class="avatar"></div>
-    <div class="title">
-        <p>wang fei</p>
-    </div>
+    <div class="title">wang fei</div>
 </body>
 
 </html>
