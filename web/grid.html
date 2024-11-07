@@ -17,14 +17,14 @@
     <span>&commat;Grid</span>
     <span class="ham"></span>
     <nav class="nav">
-      <a href="" class="nav-item">概述 Overview</a>
       <a href="" class="nav-item">容器 Container</a>
       <a href="" class="nav-item">子项 Item</a>
       <a href="" class="nav-item">布局 Layout</a>
+      <a href="" class="nav-item">案例 Cases</a>
       <a href="" class="nav-item">对齐 Align</a>
     </nav>
   </header>
-  <dl class="nav-cont">
+  <dl>
     <dt>概述 Overview</dt>
     <dd>
       <div>.更灵活：支持二维布局：对列和行进行布局</div>
@@ -334,6 +334,9 @@ grid-row-end: 3;</pre>
 
 ...</pre>
     </dd>
+  </dl>
+  <div class="chap">案例 Cases</div>
+  <dl class="nav-cont">
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/grid-sudoku.html">九宫格</a>、<a
         href="./demo/up2u.html">个人网站 - 相册</a></dd>
     <dd>
@@ -348,29 +351,44 @@ grid-row-end: 3;</pre>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/grid-hybrid.html">异构布局</a>、<a
         href="./demo/personal.html">个人网站 - 事迹</a></dd>
     <dd>
-      <div>.应显示指定、行列位置</div>
       <img src="./imgs/grid18.png" alt="" loading="lazy">
+      <div>.使用 span 更方便</div>
       <pre>
-.random>div:nth-child(1) {
+.item:nth-child(1),
+.item:nth-child(5) {
+  grid-column: span 2
+}
+
+.item:nth-child(2),
+.item:nth-child(3) {
+  grid-row: span 2;
+}      </pre>
+      <div>.使用轨道应显示指定、行列位置</div>
+      <pre>
+.item:nth-child(1) {
   grid-column: 1/3;
 }
 
-.random>div:nth-child(2) {
+.item:nth-child(2) {
   grid-column: 3/4;
   grid-row: 1/3;
 }
 
-.random>div:nth-child(3) {
+.item:nth-child(3) {
   grid-row: 2/4;
 }
 
-.random>div:nth-child(5) {
+.item:nth-child(5) {
   grid-column: 2/4;
 }</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/acc_grid.html">手风琴 - grid</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/accordion.html">手风琴</a>、<a
+        href="./demo/grid-nav.html">多级菜单</a></dd>
     <dd>
-      <div>结构上要求：网格容器，如 wrap 有唯一子元素，如 ul，且子元素溢出隐藏；子元素可以有多个子元素，如 li</div>
+      <div>使用 <a href="./transition.html">过渡动画</a> 展开和折叠</div>
+      <div>使用 <a href="./js/event_mouse.html">鼠标单击事件</a> 切换动态类</div>
+      <div>结构：网格容器，如 wrap 有唯一子元素，如 ul，且子元素溢出隐藏；子元素可以有多个子元素，如 li</div>
+      <div>样式：高度从0份到1份</div>
       <pre>
 &lt;div class="wrap"&gt;
   &lt;ul&gt;
@@ -397,7 +415,9 @@ grid-row-end: 3;</pre>
 }
 </pre>
     </dd>
-    <dd id="grid">[<span class="iconfont icon-keyboard"></span>] 万能自适应布局/响应式布局</dd>
+    <dd id="grid">[<span class="iconfont icon-keyboard"></span>] 万能自适应布局/响应式布局 -
+      根据容器宽度和子项最小宽度自动决定分成几列；如果可以放下，就放下；否则将各子项缩放至填满整个容器
+    </dd>
     <dd>
       <pre>
 .ale {
