@@ -38,11 +38,10 @@
       <div>.使用关键字 @keyframes 定义诺干个关键帧来表示元素的状态</div>
       <div>.动画结束后，默认回到起始状态</div>
       <!-- <div>.皮影戏和早期非常流行的 flash 动画也是采用关键帧实现</div> -->
-      <div>.更多高级动画，请访问 <a class="fade-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation">MDN -
-          animation</a>、<a class="fade-link" href="./framework/animate.html">Animate使用</a>、<a class="fade-link"
-          href="https://animate.style/">animate.css</a>、<a class="fade-link" href="https://animejs.com/">animejs</a>、<a
-          class="fade-link" href="http://www.animate.net.cn/">Animate官方动画库</a>、<a class="fade-link"
-          href="https://scrollrevealjs.org/">scrollrevealjs</a>
+      <div>.更多高级动画，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation">MDN -
+          animation</a>、<a href="./framework/animate.html">Animate使用</a>、<a
+          href="https://animate.style/">animate.css</a>、<a href="https://animejs.com/">animejs</a>、<a
+          href="http://www.animate.net.cn/">Animate官方动画库</a>、<a href="https://scrollrevealjs.org/">scrollrevealjs</a>
       </div>
       <table>
         <caption>animation vs transition</caption>
@@ -154,8 +153,7 @@ animation-fill-mode:
           <td>动画状态；paused | played</td>
         </tr>
         <tr>
-          <td><a class="fade-link"
-              href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline">animation-timeline</a></td>
+          <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline">animation-timeline</a></td>
           <td>动画时间线</td>
         </tr>
       </table>
@@ -217,8 +215,8 @@ animation:
   <dl class="nav-cont">
     <dd>[<span class="iconfont icon-keyboard"></span>] 走马灯 - 查看顶部 banner</dd>
     <dd>
-      <div>使用margin-right实现</div>
-      <div>请使用其它属性实现</div>
+      <div>.使用margin-right实现</div>
+      <div>.请使用其它属性实现</div>
       <pre>
 @keyframes mov {
   0% {
@@ -230,47 +228,89 @@ animation:
   }
 }      </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a class="fade-link"
-        href="https://codepen.io/glpla/full/QWYoLPK">获取焦点focus时重复播放动画 - CodePen</a> </dd>
-    <dd>.帧动画 keyframe</dd>
-    <dd>.过渡动画 transition</dd>
-    <dd>.定位</dd>
-    <dd>.获取焦点选择器 :focus</dd>
-    <dd>.数据有效选择器 :focus</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a class="fade-link"
-        href="https://codepen.io/glpla/full/xxMBKdP">text - CodePen</a></dd>
-    <dd>.帧动画 animation</dd>
-    <dd>.内联变量 --val</dd>
-    <dd>.取值函数 var()</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animWave.html">线条动画</a>、<a class="fade-link"
-        href="https://codepen.io/glpla/full/MWLLNvM">wave - CodePen</a></dd>
-    <dd>.使用弹性盒子 flex或定位</dd>
-    <dd>.帧动画 animation</dd>
-    <dd>.内联变量 --val</dd>
-    <dd>.取值函数 var()</dd>
-    <dd>.变换 transform</dd>
-    <dd>.滤镜 filter</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a class="fade-link"
-        href="https://codepen.io/glpla/full/PoVVMda">loading - CodePen</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/form2.html">边框动画</a></dd>
     <dd>
-      <div>.通过旋转若干子元素，并设置子元素的某个伪元素达到圆周分布的效果</div>
+      <div>.盒阴影 box-shadow</div>
+      <div>.获取焦点 :focus 时重复播放</div>
+      <pre>
+@keyframes --border {
+  from {
+    box-shadow: 0 0 0px var(--main-color);
+  }
+
+  to {
+    box-shadow: 0 0 8px var(--main-color);
+  }
+}      </pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/avatar0.html">头像背景动画</a></dd>
+    <dd>
+      <div>.渐变背景 linear-gradient()</div>
+      <div>.定位 Position</div>
+      <div>.变换 transform - rotate</div>
+      <pre>
+@keyframes roll {
+    to {
+        transform: rotate(360deg);
+    }
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 进度条</dd>
+    <dd>
+      <div>1. <a href="./demo/loading-line.html">平滑缩放</a></div>
+      <div>.宽度从0到100%</div>
+      <div>.可以使用伪元素节省元素</div>
+      <div>.可以使用变换缩放实现</div>
+      <pre>
+.per{
+    animation: --per 10s linear alternate infinite;
+}    </pre>
+      <pre>
+@keyframes --per {
+  to {
+      width: 100%;
+  }
+}</pre>
+      <div>2. 除了自动播放，也可以鼠标 :hover 时触发动画</div>
+      <pre>
+.per {
+  /* 暂停动画 */
+  animation-play-state: paused;
+}
+
+.loading:hover .per {
+    animation-play-state: running;
+}</pre>
+      <div>3. <a href="./demo/transform-loading-line.html">多彩进度条</a>、<a href="./demo/loading-ring.html">进度环</a></div>
+      <div>.内联变量 --val</div>
+      <div>.取值函数 var()</div>
+      <div>.变换 transform</div>
+      <div>.滤镜 filter</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/xxMBKdP">Text -
+        CodePen</a></dd>
+    <dd>
+      <div>.帧动画 animation</div>
+      <div>.内联变量 --val</div>
+      <div>.取值函数 var()</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animWave.html">线条动画</a>、<a
+        href="https://codepen.io/glpla/full/MWLLNvM">Wave - CodePen</a></dd>
+    <dd>
+      <div>.使用弹性盒子 flex或定位</div>
       <div>.帧动画 animation</div>
       <div>.内联变量 --val</div>
       <div>.取值函数 var()</div>
       <div>.变换 transform</div>
       <div>.滤镜 filter</div>
-      <div class="demo-wrap">
-        <img src="./imgs/anim0.png" alt="" loading="lazy">
-        <img src="./imgs/anim1.png" alt="" loading="lazy">
-      </div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a class="fade-link"
-        href="https://codepen.io/glpla/full/oNmOjzQ">科技环 - CodePen</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNmOjzQ">科技环 - CodePen</a>
+    </dd>
     <dd>.border</dd>
     <dd>.border-radius</dd>
     <dd>.transform</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a class="fade-link"
-        href="./drill/drill_ide.html">背景变换</a>；也可以使用角度渐变实现，案例实现请访问 <a href="./demo/clock.html">数字时钟</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill/drill_ide.html">背景变换</a>；也可以使用角度渐变实现，案例实现请访问 <a
+        href="./demo/clock.html">数字时钟</a></dd>
     <dd class="sn">
       <div>使用滤镜 filter；背景可以是任何形式的内容</div>
       <pre>
@@ -339,39 +379,6 @@ header {
     75% {
         margin-left: 0px;
     }
-}</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 进度条平滑缩放</dd>
-    <dd class="basic">
-      <div class="progress-scale"></div>
-    </dd>
-    <dd>
-      <pre>
-.progress-scale{
-    animation: progress-ani 10s linear alternate infinite;
-}    </pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 鼠标hover时触发动画；使用上例同一个动画样式</dd>
-    <dd class="basic">
-      <div class="progress-hover"></div>
-    </dd>
-    <dd>
-      <pre>
-.progress-hover {
-    width: 0;
-    height: 1rem;
-    border-radius: 1rem;
-    background-color: #eb2f06;
-    animation-name: progress-ani;
-    animation-duration: 10s;
-    animation-timing-function: linear;
-    animation-play-state: paused;
-    animation-direction: alternate;
-    animation-iteration-count: infinite;
-}
-
-.basic:hover .progress-hover {
-    animation-play-state: running;
 }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 传送带</dd>
@@ -512,8 +519,8 @@ header {
     }
 }</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a class="fade-link"
-        href="https://codepen.io/glpla/full/oNVjXLE">打字 typing - CodePen</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNVjXLE">打字 typing -
+        CodePen</a></dd>
     <dd>
       <div>.字体等宽</div>
       <div>.多动画使用：移位动画和闪烁动画</div>
@@ -554,8 +561,7 @@ header {
       <div>.容器应该有滚动条</div>
       <div>.容器不可以是 &lt;body&gt;</div>
       <div>animation-timeline 应在动画 animation 定义后面给出</div>
-      <div>更多信息，请访问 <a class="fade-link"
-          href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline">animation-timeline</a>
+      <div>更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline">animation-timeline</a>
         <span class="iconfont icon-lab"></span>
       </div>
       <pre>animation-timeline: none | auto | scroll() | view();</pre>
@@ -625,7 +631,7 @@ header {
   </dl>
   <div class="chap">动画事件 Events</div>
   <dl class="nav-cont">
-    <dd>.可以使用JS控制动画的每个属性</dd>
+    <dd>.可以使用 JavaScript 监测或控制动画的属性，如播放、暂停等</dd>
     <dd>
       <table>
         <caption>动画事件</caption>
@@ -647,18 +653,18 @@ header {
         </tr>
       </table>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a class="fade-link" href="./demo/loading.html">个人网站加载</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/loading.html">个人网站加载</a>、<a href="/">转场动画</a>
+    </dd>
     <dd>
       <div>.页面加载完毕跳转到主页面</div>
-      <div>.先设计动画并应用到某元素，然后在js中监测元素的动画状态，结束时跳转到主页面</div>
+      <div>.先设计动画并应用到某元素，然后在 JavaScript 中监测元素的动画状态，结束时跳转到主页面</div>
       <pre>
 let item = document.querySelector('.item')
 item.addEventListener('animationend', () => {
   location.href = './index.html'
 })        </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a class="fade-link" href="/">转场动画</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a class="fade-link" href="./demo/miniplayer.html">MINI音乐播放器</a>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/miniplayer.html">MINI音乐播放器</a>
     </dd>
     <dd>
       <div>一开始动画暂停，监听播放状态。播放就执行动画；否则暂停</div>
@@ -670,10 +676,21 @@ audio.addEventListener('pause', () => {
   img.style.animationPlayState = `paused`
 })        </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a class="fade-link" href="./index.html">字节跳动 -
-        鼠标悬停触发</a>；事件触发，请访问 <a class="fade-link" href="https://codepen.io/glpla/full/GRzeprJ">字节跳动</a> - C<i
-        class="iconfont icon-codepen1"></i>depen</dd>
-    <dd>.每次鼠标滑过都触发3次动画</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animHop.html">字节跳动</a></dd>
+    <dd>
+      <div>.变换 - 缩放动画</div>
+      <div>.每次鼠标滑过 mouseover 都触发3次动画 - 鼠标事件</div>
+      <pre>
+let spans = document.querySelectorAll("span");
+spans.forEach((span) => {
+    span.addEventListener("mouseover", () => {
+        span.classList.add("active");
+    });
+    span.addEventListener("animationend", () => {
+        span.classList.remove("active");
+    });
+});      </pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 单击后左移2次，结束后移除事件响应</dd>
     <dd>
       <div>.事先应创建好动画样式</div>
@@ -696,7 +713,7 @@ function logging() {
     <dt>总结</dt>
     <dd class="sn">
       <div>帧动画的静态使用</div>
-      <div>帧动画的js使用</div>
+      <div>帧动画的 JavaScript 使用</div>
     </dd>
     <dt>作业</dt>
     <dd class="sn">

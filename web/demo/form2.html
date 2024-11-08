@@ -58,7 +58,17 @@
 
     input:focus,
     textarea:focus {
-      box-shadow: 0 0 8px var(--main-color);
+      animation: --border 1s linear infinite alternate;
+    }
+
+    @keyframes --border {
+      from {
+        box-shadow: 0 0 0px var(--main-color);
+      }
+
+      to {
+        box-shadow: 0 0 8px var(--main-color);
+      }
     }
 
     input:valid,
@@ -111,10 +121,6 @@
     .btn:hover {
       color: var(--txt-color);
       background-color: var(--main-color);
-    }
-
-    input:focus {
-      background-color: var(--second-color);
     }
 
     .ml {
