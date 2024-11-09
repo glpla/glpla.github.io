@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒计时动画 countdown - Animation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .wrap {
+            width: 32px;
+            height: 32px;
+            overflow: hidden;
+        }
+
+        .countdown {
+            display: flex;
+            width: 32px;
+            height: 32px;
+            animation: trans 3s steps(3) forwards;
+        }
+
+        @keyframes trans {
+            to {
+                transform: translateX(calc(-32px*3));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="countdown">
+            <img src="/utils/number/number-3.png" alt="" loading="lazy">
+            <img src="/utils/number/number-2.png" alt="" loading="lazy">
+            <img src="/utils/number/number-1.png" alt="" loading="lazy">
+            <img src="/utils/number/number-0.png" alt="" loading="lazy">
+        </div>
+    </div>
+</body>
+
+</html>

@@ -8,11 +8,122 @@
   <title>帧动画 Animation</title>
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="./css/ani.css">
-  <link rel="stylesheet" href="../css/fade.css">
+  <!-- <link rel="stylesheet" href="../css/fade.css"> -->
   <base target="_blank">
   <style>
     :root {
       --ani: null;
+    }
+
+    .p50-10,
+    .p40-60,
+    .p60-40,
+    .p40-40,
+    .p10-50 {
+      position: relative;
+      height: 400px;
+      background-color: #eee;
+    }
+
+    .p50-10::before,
+    .p50-10::after,
+    .p40-60::before,
+    .p40-60::after,
+    .p60-40::before,
+    .p60-40::after,
+    .p40-40::before,
+    .p40-40::after,
+    .p10-50::before,
+    .p10-50::after {
+      position: absolute;
+      background-color: #abeccf;
+      font-size: 12px;
+      line-height: 12px;
+    }
+
+    .p50-10::before {
+      content: 'inset start 50%';
+      width: 100%;
+      height: 50%;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .p50-10::after {
+      content: 'inset end 10%';
+      bottom: 0;
+      width: 100%;
+      height: 10%;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .p10-50::before {
+      content: 'inset start 10%';
+      width: 100%;
+      height: 10%;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .p10-50::after {
+      content: 'inset end 50%';
+      bottom: 0;
+      width: 100%;
+      height: 50%;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .p40-60::before {
+      content: 'inset start 40%';
+      width: 100%;
+      height: 40%;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .p40-60::after {
+      content: 'inset end 60%';
+      bottom: 0;
+      width: 100%;
+      height: 60%;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .p60-40::before {
+      content: 'inset start 60%';
+      width: 100%;
+      height: 60%;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .p60-40::after {
+      content: 'inset end 40%';
+      bottom: 0;
+      width: 100%;
+      height: 40%;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .p40-40::before {
+      content: 'inset start 40%';
+      width: 100%;
+      height: 40%;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .p40-40::after {
+      content: 'inset end 40%';
+      bottom: 0;
+      width: 100%;
+      height: 40%;
+      display: flex;
+      align-items: flex-start;
     }
   </style>
 </head>
@@ -27,7 +138,7 @@
       <a href="" style="--delay:0" class="nav-item">概述 Overview</a>
       <a href="" style="--delay:1" class="nav-item">案例 Cases</a>
       <a href="" style="--delay:2" class="nav-item">步进 Steps</a>
-      <a href="" style="--delay:3" class="nav-item">时间轴 View</a>
+      <a href="" style="--delay:3" class="nav-item">时间轴 Timeline</a>
       <a href="" style="--delay:4" class="nav-item">事件 Events</a>
     </nav>
     <img class="plane" src="./imgs/plane.webp" alt="">
@@ -306,9 +417,11 @@ animation:
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNmOjzQ">科技环 - CodePen</a>
     </dd>
-    <dd>.border</dd>
-    <dd>.border-radius</dd>
-    <dd>.transform</dd>
+    <dd>
+      <div>.边框 border</div>
+      <div>.圆角边框 border-radius</div>
+      <div>.变换 transform</div>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill/drill_ide.html">背景变换</a>；也可以使用角度渐变实现，案例实现请访问 <a
         href="./demo/clock.html">数字时钟</a></dd>
     <dd class="sn">
@@ -391,96 +504,31 @@ header {
   <div class="chap">步进动画 steps()</div>
   <dl class="nav-cont">
     <dt>说明</dt>
-    <dd>.动画方式还可以按照指定的阶段数 steps 逐步完成</dd>
-    <dd>.由时间函数 steps() 指定分段过渡效果</dd>
-    <dd>.同过渡动画 transition</dd>
     <dd>
+      <div>.动画方式还可以按照指定的阶段数 steps 逐步完成</div>
+      <div>.由时间函数 steps() 指定分段过渡效果</div>
+      <div>.同过渡动画 transition</div>
       <pre>steps(number_of_steps，direction)</pre>
+      <div>number_of_steps：数字，过渡分几个阶段完成</div>
+      <div>direction：start 和 end，默认是 end，指每个阶段过渡结束后才渲染；start 则是过渡开始前就渲染</div>
     </dd>
-    <dd>number_of_steps：数字，过渡分几个阶段完成</dd>
-    <dd>direction：start 和 end，默认是 end，指每个阶段过渡结束后才渲染；start 则是过渡开始前就渲染</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 伪3D图标</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animIcon.html">图标动画 - 3D Icon</a></dd>
     <dd>
-      <div>使用背景图片，通过步进调整背景图片位置</div>
-      <div>分别定义静态动画和鼠标悬停 hover 动画</div>
-      <div>注意素材的设计和收集</div>
-      <div class="icon"></div>
-      <pre>
-.card {
-  width: 150px;
-  height: 150px;
-  background-image: url(./web/imgs/h5.png);
-  background-size: 150px;
-  animation: icon-leave 1s steps(23) forwards;
-}
-
-.card:hover {
-  animation: icon-enter 1s steps(23) forwards;
-}
-
-@keyframes icon-leave {
-  from {
-    background-position: 0 -3450px;
-  }
-
-  to {
-    background-position: 0 0;
-  }
-}
-
-@keyframes icon-enter {
-  from {
-    background-position: 0 0;
-  }
-
-  to {
-    background-position: 0 -3450px;
-  }
-}</pre>
+      <div>.使用精灵图作为背景，包括24个icon</div>
+      <div>.通过步进调整背景图片位置</div>
+      <div>.分别定义静态动画和鼠标悬停 hover 动画</div>
+      <div>.注意素材的设计和收集</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 倒计时 countdown</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animCountdown.html">倒计时 -
+        Countdown</a></dd>
     <dd>
-      <div>从9依次减到0；实际只有9秒，分9段进行</div>
-      <div class="countdown-wrap">
-        <div class="countdown">
-          <img src="/utils/number/number-9.png" alt="" loading="lazy">
-          <img src="/utils/number/number-8.png" alt="" loading="lazy">
-          <img src="/utils/number/number-7.png" alt="" loading="lazy">
-          <img src="/utils/number/number-6.png" alt="" loading="lazy">
-          <img src="/utils/number/number-5.png" alt="" loading="lazy">
-          <img src="/utils/number/number-4.png" alt="" loading="lazy">
-          <img src="/utils/number/number-3.png" alt="" loading="lazy">
-          <img src="/utils/number/number-2.png" alt="" loading="lazy">
-          <img src="/utils/number/number-1.png" alt="" loading="lazy">
-          <img src="/utils/number/number-0.png" alt="" loading="lazy">
-        </div>
-      </div>
-      <pre>
-.countdown-wrap {
-  width: 32px;
-  height: 32px;
-  overflow: hidden;
-  margin: 2rem auto;
-}
-
-.countdown {
-  display: flex;
-  width: 32px;
-  height: 32px;
-}
-
-.countdown-wrap:hover .countdown {
-  animation: trans 9s steps(9) forwards;
-}
-
-@keyframes trans {
-  to {
-    transform: translateX(calc(-32px*9));
-  }
-}      </pre>
+      <div>.使用4张背景图片</div>
+      <div>.从3依次减到0，分3段进行</div>
+      <div>.利用步进调整图片的水平位置</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 轮播图 swiper</dd>
     <dd>
+      <div>.采用步进steps逐步设置swiper的左侧位置</div>
       <div class="swiper-box">
         <div class="swiper">
           <div class="swiper-item" style="--url:url(../imgs/banner.png)"></div>
@@ -500,7 +548,6 @@ header {
         &lt;div class="swiper-item"&gt;&lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;</pre>
-      <div>[CSS] 采用步进steps逐步设置swiper的左侧位置</div>
       <pre>
 .swiper {
     position: absolute;
@@ -520,7 +567,7 @@ header {
 }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNVjXLE">打字 typing -
-        CodePen</a></dd>
+        CodePen</a>、<a href="./framework/typedjs.html">typed.js</a></dd>
     <dd>
       <div>.字体等宽</div>
       <div>.多动画使用：移位动画和闪烁动画</div>
@@ -531,102 +578,98 @@ header {
         <div>动画forwards时，最后一个字符会显示</div>
       </div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 进度条分段过渡；使用前例动画样式 loading-ani</dd>
-    <dd>
-      <div>1. steps(10)使用默认end</div>
-      <div class="progress-step step-default"></div>
-      <pre>
-.progress-step {
-    width: 0;
-    height: 1rem;
-    border-radius: 1rem;
-    background-color: #eb2f06;
-    animation: progress-ani 10s steps(10) forwards;
-}</pre>
-      <div>2. steps(10)使用start</div>
-      <div class="progress-step step-start"></div>
-      <pre>
-.progress-step {
-    width: 0;
-    height: 1rem;
-    border-radius: 1rem;
-    background-color: #eb2f06;
-    animation: progress-ani 10s steps(10, start) forwards;
-}</pre>
-    </dd>
   </dl>
   <div class="chap">时间轴动画 animation-timeline</div>
   <dl class="nav-cont">
     <dd>
-      <div>.容器应该有滚动条</div>
-      <div>.容器不可以是 &lt;body&gt;</div>
-      <div>animation-timeline 应在动画 animation 定义后面给出</div>
-      <div>更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline">animation-timeline</a>
-        <span class="iconfont icon-lab"></span>
-      </div>
+      <div>.元素的动画效果由容器的滚动或视口触发</div>
       <pre>animation-timeline: none | auto | scroll() | view();</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 随页面滚动的风火轮；容器须额外指定动画属性</dd>
-    <dd>
-      <div class="windmill">
-        <div class="tmp"></div>
-        <img class="windmill-img" src="./imgs/windmill.png" alt="">
-        <div class="tmp"></div>
+      <div>.animation-timeline 应在动画 animation 定义后面给出</div>
+      <div>.不用指定动画时间 animation-duration</div>
+      <div>.使用线性 linear、交互 alternate 和双向填充模式 both 能更好观察动画的变换过程</div>
+      <div>.更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline">MDN -
+          animation-timeline</a> <span class="iconfont icon-lab"></span>
       </div>
+    </dd>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline/scroll">scroll()</a></dt>
+    <dd>
+      <div>.当前元素的动画效果由最近 nearest 的容器或根容器 root 的滚动触发</div>
+      <div>.容器应该有滚动条</div>
+      <div>.默认是最近的容器 nearest</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animTimelineScroll.html">随页面滚动的风火轮</a></div>
+      <div>.使用的动画定义如下</div>
+      <pre>
+@keyframes --windmill {
+  from {
+      transform: rotate(0deg);
+  }
+
+  to {
+      transform: rotate(360deg);
+  }
+}      </pre>
+      <div>.使用默认容器 nearest</div>
       <pre>
 .windmill {
-  height: 60vh;
-  background-color: #000;
-  overflow-y: auto;
-  scroll-timeline-name: --squareTimeline;
-}
+    animation-name: --windmill;
+    animation-timing-function: linear;
 
-.windmill-img {
-  display: block;
-  max-width: 100%;
-  animation: --windmill 1s alternate;
-  
-  /* follewed by  */
-  animation-timeline: --squareTimeline;
-  margin: 0 auto;
-}      </pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 淡入 - 使用匿名视口进度条；容器无须额外指定动画属性</dd>
-    <dd>
-      <div class="fade-in-wrap">
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, laudantium?</div>
-        <div>Enim, porro placeat error id sapiente facere fugiat quos temporibus.</div>
-        <div>Voluptatibus nostrum ex optio provident minus repudiandae qui sunt unde.</div>
-        <div>Est earum fugiat natus architecto cumque provident expedita tempore aperiam!</div>
-        <div>Excepturi, ipsa repellat fugit maxime natus earum hic ea sunt.</div>
-        <div>Ipsum, vel repudiandae unde ex quod quis aut recusandae aperiam?</div>
-        <div>Eos neque at ullam modi rerum deserunt non, rem odit.</div>
-        <div>Provident rem nesciunt nihil cupiditate quas repudiandae excepturi consectetur facere?</div>
-        <div>Quaerat magnam mollitia possimus tenetur itaque eos nam eligendi corrupti?</div>
-        <div class="fade-in"></div>
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, impedit.</div>
-        <div>Eligendi ad numquam voluptates dolorem temporibus modi, cupiditate aliquam veritatis.</div>
-        <div>Nostrum adipisci, harum recusandae error neque dolorum minima itaque animi.</div>
-        <div>Sed odio suscipit similique blanditiis omnis, ratione eaque labore impedit.</div>
-        <div>Rem ullam voluptatibus rerum soluta nemo delectus, quam ex. Cum!</div>
-        <div>Odio, possimus id? Nostrum provident porro dolores odio eum. Doloremque.</div>
-        <div>Iure labore consectetur molestias. Ducimus cum necessitatibus quas maxime eaque.</div>
-        <div>Debitis minus facilis sed vitae, atque sint voluptatum non recusandae.</div>
-        <div>Dicta consequatur voluptatibus asperiores eligendi dolor eaque vero est natus.</div>
-        <div>Debitis eos, voluptatem quia suscipit deleniti obcaecati molestiae rerum itaque!</div>
-      </div>
+    animation-timeline: scroll();
+}</pre>
+      <div>.使用根容器 root</div>
       <pre>
-.fade-in {
-  width: 100px;
-  height: 100px;
-  background-color: #f40;
-  margin: 0 auto;
+.windmill {
+    animation-name: --windmill;
+    animation-timing-function: linear;
 
-  animation: --fadein 1ms both;
-  
-  /* follewed by  */
-  animation-timeline: view();
-}      </pre>
+    animation-timeline: scroll(root);
+}</pre>
+    </dd>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline/view">view()</a></dt>
+    <dd>
+      <div>.动画由原始视口或经过调整大小的视口 view 触发</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 使用 - 定义动画如下</dd>
+    <dd>
+      <pre>
+@keyframes grow {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}</pre>
+      <div>1. view() - by default, the timeline is at 0% when the subject is first visible at one edge of the scroller,
+        and 100% when it reaches the opposite edge.</div>
+      <pre>
+animation-name: grow;
+animation-timing-function: linear;
+animation-fill-mode: both;
+/* follewed by  */
+animation-timeline: view();</pre>
+      <div>2. view(start end) - 调整视口范围：使用 <span class="warn">正值内收</span> 视口范围或使用 <span class="warn">负值外扩</span> 视口范围
+      </div>
+      <div>start：Inward offset <span class="warn">from</span> beginning of the scrollport.</div>
+      <div>end：Inward offset <span class="warn">from</span> end of the scrollport.</div>
+      <div>内收的开始start 和结束end 顺序任意，系统会自动判定动画的时间轴区域 - The scroller and inset values can be specified in any order.
+      </div>
+      <pre>animation-timeline: view(50% 10%);</pre>
+      <div>.While scrolling down, start at 10% from the bottom and finish at 50% from the top</div>
+      <div>.Conversely, scrolling up, the animation proceeds in the reverse direction, starting at 50% from the
+        top, moving backward through the animation, and ending at 10% from the bottom</div>
+      <div>.更多视口调整，请访问 <a href="./demo/animTimelineView.html">Animation Timeline 时间轴动画</a></div>
+      <pre>animation-timeline: view(50% 10%);</pre>
+      <div class="p50-10"></div>
+      <pre>animation-timeline: view(10% 50%);</pre>
+      <div class="p10-50"></div>
+      <pre>animation-timeline: view(40% 60%);</pre>
+      <div class="p40-60"></div>
+      <pre>animation-timeline: view(60% 40%);</pre>
+      <div class="p60-40"></div>
+      <pre>animation-timeline: view(40% 40%);</pre>
+      <div class="p40-40"></div>
     </dd>
   </dl>
   <div class="chap">动画事件 Events</div>
