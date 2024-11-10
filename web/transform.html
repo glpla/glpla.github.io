@@ -366,62 +366,66 @@
   </dl>
   <div class="chap">三维变换</div>
   <dl class="nav-cont">
-    <dt><span class="warn">&lt;section1&gt;</span> 天空盒 sky box</dt>
-    <dd>1. axis-坐标轴；左手定则：大拇指指向轴的正方向，四指弯曲方向即为顺时针方向</dd>
-    <dd class="intro">Z轴</dd>
-    <dd class="basic intro-img"></dd>
-    <dd class="mt2">2. translate-位移</dd>
-    <dd class="intro">近大远小</dd>
-    <dd class="basic">
-      <img class="ob-img" id='trans-img' data-src="../utils/view/view0.jpg" alt="">
-    </dd>
+    <dt><span class="warn">&lt;section1&gt;</span> 天空盒 Sky Box</dt>
     <dd>
-      <input id="ranger" class="ranger" type="range" min=-1000 max=1000 value="0">
-      <div>拖动滑块查看Z轴位移 transform: translateZ( <span id='trans-px'>0</span>px ) [-1000px, +1000px]</div>
+      <div>1. axis-坐标轴；左手定则：大拇指指向轴的正方向，四指弯曲方向即为顺时针方向</div>
+      <div class="intro">Z轴</div>
+      <div class="basic intro-img"></div>
+      <div class="mt2">2. translate-位移</div>
+      <div class="intro">近大远小</div>
+      <div class="basic">
+        <img class="ob-img" id='trans-img' data-src="../utils/view/view0.jpg" alt="">
+      </div>
+      <div>
+        <input id="ranger" class="ranger" type="range" min=-1000 max=1000 value="0">
+        <div>拖动滑块查看Z轴位移 transform: translateZ( <span id='trans-px'>0</span>px ) [-1000px, +1000px]</div>
+      </div>
+      <div class="mt2">3. rotate-旋转</div>
+      <div class="intro">
+        <span>顺时针为正；逆时针为负</span>
+      </div>
+      <div class="basic">
+        <img class="ob-img" id='rot-img' data-src="../utils/view/view0.jpg" alt="">
+      </div>
+      <div>
+        <input id="rot" class="ranger" type="range" min=-90 max=90 value="0">
+        <div>. 拖动滑块查看Y轴旋转 transform: rotateY( <span id='trans-deg'>0</span>deg ) [-90deg, +90deg]</div>
+      </div>
     </dd>
-    <dd class="mt2">3. rotate-旋转</dd>
-    <dd class="intro">
-      <span>顺时针为正；逆时针为负</span>
-    </dd>
-    <dd class="basic">
-      <img class="ob-img" id='rot-img' data-src="../utils/view/view0.jpg" alt="">
-    </dd>
+    <dt><span class="warn">&lt;section2&gt;</span> 核心属性 Core Property</dt>
     <dd>
-      <input id="rot" class="ranger" type="range" min=-90 max=90 value="0">
-      <div>. 拖动滑块查看Y轴旋转 transform: rotateY( <span id='trans-deg'>0</span>deg ) [-90deg, +90deg]</div>
-    </dd>
-    <dt><span class="warn">&lt;section2&gt;</span> 核心属性 core attribute</dt>
-    <dd>.transform默认是2D变形；要呈现3D效果，必须为元素设置透视/景深及指定为3D变形模式；具体步骤为：</dd>
-    <dd>1. 为父元素指定景深perspective(创建一个天空盒sky box)，单位是px，通常取800px-1200px</dd>
-    <dd>
+      <div>.transform默认是2D变形；要呈现3D效果，必须为元素设置透视/景深及指定为3D变形模式；具体步骤为：</div>
+      <div>1. 为父元素指定景深perspective(创建一个天空盒sky box)，单位是px，通常取800px-1200px</div>
       <pre>
 .super {
     perspective: 1000px;
 }</pre>
-    </dd>
-    <dd>2. 为自己设置3D变形transform-style: preserve-3d(flat表示2D)</dd>
-    <dd>
+      <div>2. 为自己设置3D变形transform-style: preserve-3d(flat表示2D)</div>
       <pre>
 .self {
     transform-style: preserve-3d;
 }</pre>
     </dd>
-    <dt><span class="warn">&lt;section3&gt;</span> 实操 coding</dt>
+    <dt><span class="warn">&lt;section3&gt;</span> 实操 Coding</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-card.html">卡片翻转 - Card</a>、<a
         href="https://codepen.io/glpla/pen/gOqEPLG">card flip -
         CodePen</a>、<a href="https://mp.weixin.qq.com/s/DBAm16DaxSCcP02N5_sOZA">CSS3D图片翻转效果</a></dd>
-    <dd>.使用 ::before ::after 展示图片</dd>
-    <dd>.使用 backface-visibility 隐藏图片</dd>
-    <dd>.移动鼠标到图像上(桌面端)或单击图像(移动端)查看效果</dd>
+    <dd>
+      <div>.使用 ::before ::after 展示图片</div>
+      <div>.使用 backface-visibility 隐藏图片</div>
+      <div>.移动鼠标到图像上(桌面端)或单击图像(移动端)查看效果</div>
+    </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-cube.html">魔方 - Cube</a>、<a
         href="./demo/transform-lottery.html">乐透 - Lottery</a>、<a href="https://codepen.io/glpla/full/oNmVWXG">魔方cube
         - CodePen</a>、<a href="https://codepen.io/glpla/full/gOqEWRq">魔方旋转
         - CodePen</a></dd>
-    <dd>.移动鼠标到图像上(桌面端)或单击图像(移动端)查看效果</dd>
-    <dd>.相对定位 relative、绝对 absolute</dd>
-    <dd>.图片 &lt;img&gt;或背景图片 background-image</dd>
-    <dd>.帧动画 animation 或过渡动画 transition</dd>
-    <dd>.盒阴影 box-shadow</dd>
+    <dd>
+      <div>.移动鼠标到图像上(桌面端)或单击图像(移动端)查看效果</div>
+      <div>.相对定位 relative、绝对 absolute</div>
+      <div>.图片 &lt;img&gt;或背景图片 background-image</div>
+      <div>.帧动画 animation 或过渡动画 transition</div>
+      <div>.盒阴影 box-shadow</div>
+    </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-gallery.html">3D画廊</a> -
       移动鼠标到图像上(桌面端)或单击图像(移动端)查看效果；<a href="./demo/transform-gallery2.html">3D画廊</a></dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-page.html">翻书</a>、<a
@@ -444,12 +448,14 @@ VanillaTilt.init(document.querySelector(".van-box"), {
 });</pre>
     </dd>
     <dt><span class="warn">&lt;section4&gt;</span> 注意事项 tips</dt>
-    <dd>.父元素不能指定 overflow:hidden；否则就还原位2D模式</dd>
-    <dd>.如果为更高级的父元素指定景深 perspective，则其下面子元素都应指定3D变形模式，即：这些元素共享一个景深/天空盒(sky box)</dd>
-    <dd>.更多实例，请 <a href="./demo/deal.html" class="link">发牌</a>、<a href="https://codepen.io/glpla/full/oNmOjzQ">科技环 -
-        CodePen</a>
+    <dd>
+      <div>.父元素不能指定 overflow:hidden；否则就还原位2D模式</div>
+      <div>.如果为更高级的父元素指定景深 perspective，则其下面子元素都应指定3D变形模式，即：这些元素共享一个景深/天空盒(sky box)</div>
+      <div>.更多实例，请 <a href="./demo/deal.html" class="link">发牌</a>、<a href="https://codepen.io/glpla/full/oNmOjzQ">科技环 -
+          CodePen</a>
+      </div>
     </dd>
-    <dt><span class="warn">&lt;section5&gt;</span> 课后练习 homework</dt>
+    <dt><span class="warn">&lt;section5&gt;</span> 课后练习 Homework</dt>
     <dd class="number">
       <div>定制LOGO</div>
       <div>卡片翻转</div>
