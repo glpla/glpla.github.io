@@ -39,14 +39,34 @@
             margin-top: auto;
         }
 
-        th {
+        th,
+        td {
+            padding: 0 10px;
+        }
+
+        thead tr {
             background-color: var(--main-color);
             color: #fff;
             text-align: left;
         }
 
-        table tr:nth-child(even) td {
+        tbody tr {
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        tbody tr:nth-child(even) {
             background-color: #f1f2f3;
+        }
+
+        tbody:has(tr:hover) tr {
+            opacity: 0.1;
+            background-color: #f1f2f3;
+        }
+
+        table tbody tr:hover {
+            opacity: 1;
+            color: var(--main-color);
         }
     </style>
 </head>
@@ -54,36 +74,40 @@
 <body>
     <h1>斑马纹表格</h1>
     <table>
-        <tr>
-            <th>Lorem, ipsum.</th>
-            <th>Quo, ullam.</th>
-            <th>Itaque, placeat!</th>
-        </tr>
-        <tr>
-            <td>Lorem, ipsum dolor.</td>
-            <td>Eveniet, quisquam quae?</td>
-            <td>Quas, numquam quis.</td>
-        </tr>
-        <tr>
-            <td>Lorem, ipsum dolor.</td>
-            <td>Ipsam, eos vitae.</td>
-            <td>In, illo suscipit.</td>
-        </tr>
-        <tr>
-            <td>Lorem, ipsum dolor.</td>
-            <td>Excepturi, porro perferendis!</td>
-            <td>Distinctio, consectetur ipsa.</td>
-        </tr>
-        <tr>
-            <td>Lorem, ipsum dolor.</td>
-            <td>Culpa, nesciunt. Distinctio.</td>
-            <td>Nesciunt, ipsam amet?</td>
-        </tr>
-        <tr>
-            <td>Lorem, ipsum dolor.</td>
-            <td>Nesciunt, officia quisquam.</td>
-            <td>Hic, tempore repellat.</td>
-        </tr>
+        <thead>
+            <tr>
+                <th>Lorem, ipsum.</th>
+                <th>Quo, ullam.</th>
+                <th>Itaque, placeat!</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Lorem, ipsum dolor.</td>
+                <td>Eveniet, quisquam quae?</td>
+                <td>Quas, numquam quis.</td>
+            </tr>
+            <tr>
+                <td>Lorem, ipsum dolor.</td>
+                <td>Ipsam, eos vitae.</td>
+                <td>In, illo suscipit.</td>
+            </tr>
+            <tr>
+                <td>Lorem, ipsum dolor.</td>
+                <td>Excepturi, porro perferendis!</td>
+                <td>Distinctio, consectetur ipsa.</td>
+            </tr>
+            <tr>
+                <td>Lorem, ipsum dolor.</td>
+                <td>Culpa, nesciunt. Distinctio.</td>
+                <td>Nesciunt, ipsam amet?</td>
+            </tr>
+            <tr>
+                <td>Lorem, ipsum dolor.</td>
+                <td>Nesciunt, officia quisquam.</td>
+                <td>Hic, tempore repellat.</td>
+            </tr>
+        </tbody>
     </table>
 </body>
 
