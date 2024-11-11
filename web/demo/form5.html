@@ -24,6 +24,11 @@
             height: 100vh;
         }
 
+        .iconfont {
+            font-size: 24px;
+            color: #999;
+        }
+
         /* case 1 */
 
         .cb {
@@ -69,6 +74,20 @@
         }
 
         /* case 2 */
+        .cb-bg {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .cb-bg .iconfont {
+            color: #999;
+        }
+
+        .cb-bg .icon-male {
+            color: #1abc9c;
+        }
+
         .cb-bg label {
             display: block;
             position: relative;
@@ -87,14 +106,22 @@
             top: 3px;
             width: 24px;
             height: 24px;
-            background-color: #999;
+            background-color: #1abc9c;
             border-radius: 50%;
             transition: left 0.5s, background-color 0.5s;
         }
 
         .cb-bg input:checked+label::before {
             left: calc(50px - 24px - 4px);
-            background-color: #0aa;
+            background-color: #f39c12;
+        }
+
+        .cb-bg input:checked~.icon-female {
+            color: #f39c12;
+        }
+
+        .cb-bg:has(input:checked) .icon-male {
+            color: #999;
         }
 
         /* case 3 */
@@ -161,8 +188,10 @@
         <span>on</span>
     </div>
     <div class="cb-bg">
+        <span class="iconfont icon-male"></span>
         <input type="checkbox" id="cb-bg" hidden>
         <label for="cb-bg"></label>
+        <span class="iconfont icon-female"></span>
     </div>
     <div class="rb">
         <input type="radio" name="gender" id="male" hidden checked>

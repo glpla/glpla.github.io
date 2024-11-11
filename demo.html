@@ -18,61 +18,52 @@
     }
 
     body {
-      width: 94%;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .cont>div {
-      height: 60vh;
-      background-color: #eee;
-      /* use view() */
-      view-timeline-name: var(--s);
-      view-timeline-inset: 50%;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      right: 0;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    nav a {
-      text-decoration: none;
-      font: inherit;
-      color: inherit;
-      padding: 10px 30px;
-      border-left: 4px solid transparent;
-      animation-name: --nav;
-      animation-timeline: var(--s);
+    .box {
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 10px;
     }
 
-    @keyframes --nav {
+    .item {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #f40;
+      transition: .5s;
+      cursor: pointer;
+    }
 
-      0%,
-      100% {
-        border-left-color: #0a0;
-      }
+    .item:has(+.item:hover),
+    .item:hover+.item {
+      width: 75px;
+      height: 75px;
+    }
+
+    .item:hover {
+      width: 95px;
+      height: 95px;
     }
   </style>
 </head>
 
-<body style="timeline-scope: --n0,--n1,--n2,--n3,--n4;">
-  <nav>
-    <a style="--s:--n0" href="#homne">Lorem.</a>
-    <a style="--s:--n1" href="#work">Eius!</a>
-    <a style="--s:--n2" href="#info">Ex!</a>
-    <a style="--s:--n3" href="#team">Ducimus.</a>
-    <a style="--s:--n4" href="#about">Ratione!</a>
-  </nav>
-  <div class="cont">
-    <div style="--s:--n0" id="home">home</div>
-    <div style="--s:--n1" id="work">work</div>
-    <div style="--s:--n2" id="info">info</div>
-    <div style="--s:--n3" id="team">team</div>
-    <div style="--s:--n4" id="about">about</div>
+<body>
+  <div class="box">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
   </div>
 </body>
 
