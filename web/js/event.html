@@ -23,9 +23,20 @@
   <header>
     <h1>事件</h1>
     <span>&commat;Event</span>
+    <span class="ham iconfont icon-menu"></span>
+    <nav class="nav">
+      <a href="" style="--delay:0" class="nav-item">传统事件</a>
+      <a href="" style="--delay:1" class="nav-item">事件侦听</a>
+      <a href="" style="--delay:2" class="nav-item">事件对象</a>
+      <a href="" style="--delay:3" class="nav-item">事件代理</a>
+      <a href="" style="--delay:4" class="nav-item">默认事件</a>
+    </nav>
   </header>
   <dl>
-    <dt>传统事件 onXXX</dt>
+    <dt>概述 Overview</dt>
+  </dl>
+  <div class="chap">传统事件 onXXX</div>
+  <dl class="nav-cont">
     <dd>
       <div>.适合简单逻辑</div>
       <div>.不符合结构、样式、行为分离原则，较少使用</div>
@@ -136,7 +147,7 @@ window.onload = function () {
     </dd>
   </dl>
   <div class="chap">事件侦听 addEventListener</div>
-  <dl>
+  <dl class="nav-cont">
     <dd>.向指定元素添加事件监听器的方法，允许你为DOM元素的某个事件类型注册多个事件处理函数，而不会覆盖之前的监听器</dd>
     <dd>.支持事件捕获、冒泡阶段处理，并且可以更容易地管理事件</dd>
     <dd>.符合开发分离的原则</dd>
@@ -198,8 +209,8 @@ ta.addEventListener('blur', (e) => {
 });</pre>
     </dd>
   </dl>
-  <dl>
-    <dt>事件对象</dt>
+  <div class="chap">事件对象</div>
+  <dl class="nav-cont">
     <dd>
       <div>事件产生时，由系统自动创建</div>
       <div>在事件处理函数中作为形式参数，名字任意，通常使用event、e、evt等语义化名字</div>
@@ -215,7 +226,7 @@ ta.addEventListener('blur', (e) => {
       <div>.三个阶段：捕获阶段 capture phrase → 当前目标阶段 target phrase → 冒泡阶段 bubbling phrase</div>
       <div>.当点击页面的一个元素的时候，事件会从这个元素的祖先元素逐层传递下来 - 捕获；当事件传递到这个元素之后 - 目标，触发事件本身的程序内容；然后又会把事件逐层传递回去 - 冒泡，直到根元素为止</div>
       <div>.先捕获事件才能处理；事件捕获：网景提出；事件冒泡：微软提出|IE提出</div>
-      <div>.JS代码 <span class="warn">只能</span> 执行冒泡或捕获中的一个阶段</div>
+      <div>.JS代码 <span class=" warn">只能</span> 执行冒泡或捕获中的一个阶段</div>
       <div>.事件默认行为 <span class="warn">冒泡</span>：如果在一个子元素|组件上绑定了一个事件，当该事件被触发时，它会沿着DOM|组件树向上冒泡，直到到达根节点|根组件</div>
       <div>.事件捕获是指当一个元素上的事件被触发时，它会从文档的根节点开始，向下传播，直到到达目标元素</div>
       <div>.使用e.stopPropagation | e.cancelBubble可以取消冒泡</div>
@@ -225,6 +236,44 @@ ta.addEventListener('blur', (e) => {
       <div>stopPropagation 和 cancelBubble 都可以阻止浏览器默认的事件冒泡行为</div>
       <div>cancelBubble 方法不符合W3C标准，只支持IE浏览</div>
       <div>stopPropagation 符合W3C标准，适用于FireFox等浏览器，不支持IE</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 冒泡事件</dd>
+    <dd>
+      <div>.三个嵌套盒子的冒泡：利用log分别查看默认冒泡和取消冒泡的情况</div>
+      <pre>
+&lt;div class="box1"&gt;box1
+  &lt;div class="box2"&gt;box2
+    &lt;div class="box3"&gt;box3&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+      <div>单击里层的元素，事件会逐步冒泡到外层</div>
+      <pre>
+let box1 = document.querySelector('.box1')
+let box2 = document.querySelector('.box2')
+let box3 = document.querySelector('.box3')
+box1.addEventListener('click', () => {
+  console.log('box1 clicked');
+})
+box2.addEventListener('click', () => {
+  console.log('box2 clicked');
+})
+box3.addEventListener('click', () => {
+  console.log('box3 clicked');
+})</pre>
+      <div>借助事件对象e，取消事件冒泡，单击哪个元素，触发哪个元素的事件</div>
+      <pre>
+box1.addEventListener('click', (e) => {
+  e.stopPropagation();
+  console.log('box1 clicked');
+})
+box2.addEventListener('click', (e) => {
+  e.stopPropagation();
+  console.log('box2 clicked');
+})
+box3.addEventListener('click', (e) => {
+  e.stopPropagation();
+  console.log('box3 clicked');
+})</pre>
     </dd>
     <dt>target</dt>
     <dd>
@@ -286,8 +335,114 @@ navs.forEach(nav=>{
 })    </pre>
     </dd>
   </dl>
+  <div class="chap">事件代理</div>
+  <dl class="nav-cont">
+    <dd>
+      <div>.任何一个子元素都可以响应父元素的事件；利用这个特性可以让父元素作为各个子元素的代理</div>
+      <div>.单击outer，事件对象target是outer；没有冒泡，所以响应对象currentTarget也是outer</div>
+      <div>.单击&lt;p&gt;，事件对象target是&lt;p&gt;；然后冒泡到outer，所以响应对象currentTarget是outer</div>
+      <div>.同理，单击&lt;span&gt;，事件对象target是&lt;span&gt;；然后冒泡到outer，所以响应对象currentTarget是outer</div>
+      <div>.更多信息，请访问 <a href="https://stackoverflow.com/questions/1687296/what-is-dom-event-delegation">Event
+          Delegation</a></div>
+      <pre>
+&lt;div class="outer" @click="doOut"&gt;
+&lt;p class="inner"&gt;1111&lt;/p&gt;
+&lt;span class="inner"&gt;2222&lt;/span&gt;
+&lt;/div&gt;</pre>
+      <div>通过判断target来确定单击了哪个子元素；可以根据子元素的标签名（大写）或自定义数据data-判断</div>
+      <pre>
+const doOut = (e) => {
+console.log(e.target.tagName);
+console.log(e.target.dataset.id);
+console.log(e.target.innerHTML);
+}</pre>
+    </dd>
+    <dt>应用</dt>
+    <dd>
+      <div>.需求：单击标签页，显示对应的内容</div>
+      <pre>
+&lt;ul&gt;
+&lt;li&gt;Lorem.&lt;/li&gt;
+&lt;li&gt;Magni.&lt;/li&gt;
+&lt;li&gt;Nihil.&lt;/li&gt;
+&lt;li&gt;Id?&lt;/li&gt;
+&lt;li&gt;Ipsa!&lt;/li&gt;
+&lt;li&gt;Earum?&lt;/li&gt;
+&lt;li&gt;Laboriosam.&lt;/li&gt;
+&lt;li&gt;Voluptatum?&lt;/li&gt;
+&lt;li&gt;Veniam.&lt;/li&gt;
+&lt;li&gt;Aliquid.&lt;/li&gt;
+&lt;/ul&gt;
+    </pre>
+      <div>.默认方式 - 遍历所有子元素并绑定事件</div>
+      <pre>
+let ul = document.querySelector('ul');
+let lis = ul.querySelectorAll('li');
+lis.forEach(li => {
+li.addEventListener('click', () => {
+  console.log(li.innerHTML);
+})
+})</pre>
+      <div>.委托：不给直接给元素指定事件，而是给其共同的祖先元素指定事件，通过冒泡机制，根据事件对象target确定目标元素</div>
+      <div>.通常通过标签名tagName来判断事件对象；该属性并没有直接显示在事件对象e中</div>
+      <div>.为了唯一标识当前事件对象，可以在渲染的时候通过data-属性和对象绑定</div>
+      <div>.适合子元素多，且动态变化的情况</div>
+      <div>.事件委托方式-仅仅给父级元素指定事件</div>
+      <pre>
+let ul = document.querySelector('ul');
+ul.addEventListener('click', (e) => {
+console.log(e.target.tagName);
+if(e.target.tagName==='LI'){
+  //do
+}
+})</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 单元素自定义数据 data- 的获取</dd>
+    <dd>
+      <div>.事件对象e和事件目标target是同一个，可以使用属性获取，也可以使用事件目标target获取</div>
+      <div>.注意函数fn的封装</div>
+      <pre>&lt;div class="tmp" data-id="1001"&gt;单元素自定义数据的获取&lt;/div></pre>
+      <pre>
+let el = document.querySelector('.tmp');
+el.onclick = fn;
+el.addEventListener('click', fn)
+function fn(e) {
+  console.log(this.getAttribute('data-id'));
+  console.log(e.target.dataset.id);
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 父元素自定义数据 data- 的获取</dd>
+    <dd>
+      <div>.多个元素存在，data-数据在父级元素</div>
+      <div>.事件目标通常是子元素，如果使用dataset，就会导致自定义数据获取失败；只能使用this来获取属性</div>
+      <pre>
+&lt;div class="tmp" data-id="1001"&gt;
+  &lt;div&gt;child&lt;/div&gt;
+  &lt;div&gt;child&lt;/div&gt;
+&lt;/div&gt;</pre>
+    </dd>
+    <dd>.使用同样的js，则第2个log是undefined。因为事件目标是子元素，它没有对应的自定义数据</dd>
+    <dd>[ <span class="iconfont icon-bell"></span> ] 破解方案</dd>
+    <dd>
+      <div>方案1. 判断目标是否是当前标签[要采用大写形式]，如果不是，就查找其父元素；直到找到最外层的父级；也可以用根据当前目标是否有某个属性判断</div>
+      <pre>
+function fn(e) {
+  console.log(this.getAttribute('data-id'));
+  let tar = e.target
+  while (tar.nodeName != 'DIV') {
+      tar = tar.parentNode
+  }
+  console.log(tar.dataset.id);
+}</pre>
+      <div>方案2. 取消父级所有后代的事件响应，只保留父元素的事件行为，所以事件目标一定就是父元素；简单粗暴</div>
+      <pre>
+.tmp * {
+  pointer-events: none;
+}</pre>
+    </dd>
+  </dl>
   <div class="chap">默认事件 default</div>
-  <dl>
+  <dl class="nav-cont">
     <dd>常见的默认事件有</dd>
     <dd>
       <div>1. 右键菜单</div>
@@ -325,6 +480,7 @@ a.addEventListener('click', (e) => {
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <script src="/utils/custom/ham2024.js"></script>
   <script>
     let btns = document.querySelector('.btns');
     // function changeColor(color) {

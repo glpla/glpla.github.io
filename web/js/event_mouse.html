@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>鼠标事件 Document</title>
+  <title>鼠标事件 Mouse</title>
   <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
   <style>
@@ -30,26 +30,6 @@
       height: 10px;
       background-color: #f40;
       border-radius: 50%;
-    }
-
-    .rating {
-      display: flex;
-      justify-content: center;
-    }
-
-    .rating .iconfont {
-      font-size: 2rem;
-      color: #999;
-      cursor: pointer;
-    }
-
-    .rating .active {
-      color: #f40;
-    }
-
-    #txt {
-      text-align: center;
-      font-size: 2rem;
     }
 
     .move {
@@ -86,8 +66,8 @@
 
 <body>
   <header>
-    <h1>mouse</h1>
-    <span>&commat;Events</span>
+    <h1>鼠标事件</h1>
+    <span>&commat;Mouse</span>
   </header>
   <dl>
     <dd>
@@ -135,72 +115,19 @@
         </tr>
       </table>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 冒泡事件</dd>
-    <dd>
-      <div>.三个嵌套盒子的冒泡：利用log分别查看默认冒泡和取消冒泡的情况</div>
-      <pre>
-&lt;div class="box1"&gt;box1
-  &lt;div class="box2"&gt;box2
-    &lt;div class="box3"&gt;box3&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</pre>
-      <div>单击里层的元素，事件会逐步冒泡到外层</div>
-      <pre>
-let box1 = document.querySelector('.box1')
-let box2 = document.querySelector('.box2')
-let box3 = document.querySelector('.box3')
-box1.addEventListener('click', () => {
-  console.log('box1 clicked');
-})
-box2.addEventListener('click', () => {
-  console.log('box2 clicked');
-})
-box3.addEventListener('click', () => {
-  console.log('box3 clicked');
-})</pre>
-      <div>借助事件对象e，取消事件冒泡，单击哪个元素，触发哪个元素的事件</div>
-      <pre>
-box1.addEventListener('click', (e) => {
-  e.stopPropagation();
-  console.log('box1 clicked');
-})
-box2.addEventListener('click', (e) => {
-  e.stopPropagation();
-  console.log('box2 clicked');
-})
-box3.addEventListener('click', (e) => {
-  e.stopPropagation();
-  console.log('box3 clicked');
-})</pre>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 鼠标点击 click</dd>
+    <dd class="sn">
+      <div><a href="./demo/event-mouse-falling.html">坠落 falling</a></div>
+      <p>.帧动画 animation</p>
+      <p>.变换 transform</p>
+      <div><a href="./demo/event-mouse-rating.html">评分 rating</a></div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 鼠标单击事件 - 评分 rating</dd>
-    <dd class="rating">
-      <span class="iconfont icon-iconfontshoucang"></span>
-      <span class="iconfont icon-iconfontshoucang"></span>
-      <span class="iconfont icon-iconfontshoucang"></span>
-      <span class="iconfont icon-iconfontshoucang"></span>
-      <span class="iconfont icon-iconfontshoucang"></span>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 鼠标移动 mousemove</dd>
+    <dd class="sn">
+      <div><a href="../demo/follow.html">鼠标跟随</a></div>
+      <div><a href="">放大镜</a></div>
     </dd>
-    <dd id="txt">请打分</dd>
-    <dd>
-      <pre>
-let rate = ['很差', '差', '一般', '好', '很好'];
-let wrap = document.querySelector('.rating');
-let imgs = wrap.querySelectorAll('span');
-let txt = document.querySelector('#txt');
-imgs.forEach((img, ind) => {
-  img.addEventListener('click', () => {
-    imgs.forEach(img => {
-      img.classList.remove('active');
-    })
-    for (let i = 0; i <= ind; i++) {
-      imgs[i].classList.add('active');
-    }
-    txt.innerHTML = rate[ind];
-  })
-})</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 鼠标移动/跟随/定制鼠标；更多案例，请访问 <a href="../demo/follow.html">鼠标跟随</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 鼠标移动/跟随/定制鼠标</dd>
     <dd>.元素应脱离文档流 absolute</dd>
     <dd>.通常跟随鼠标在页面上的位置pageY、pageY</dd>
     <dd>.局部范围内可以使用offsetX、offsetY</dd>
@@ -252,7 +179,6 @@ function fn(e) {
 }</pre>
     </dd>
     <dd>案例3：使用全局变量实现</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 鼠标移动事件 - 放大镜</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 单元素自定义数据data-的获取</dd>
     <dd>
       <div>.事件对象e和事件目标target是同一个，可以使用属性获取，也可以使用事件目标target获取</div>
@@ -271,22 +197,7 @@ function fn(e) {
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="../js/mouse.js"></script>
   <script>
-    // rating
-    let rate = ['很差', '差', '一般', '好', '很好'];
-    let rating = document.querySelector('.rating');
-    let imgs = rating.querySelectorAll('span');
-    let txt = document.querySelector('#txt');
-    imgs.forEach((img, ind) => {
-      img.addEventListener('click', () => {
-        imgs.forEach(img => {
-          img.classList.remove('active');
-        })
-        for (let i = 0; i <= ind; i++) {
-          imgs[i].classList.add('active');
-        }
-        txt.innerHTML = rate[ind];
-      })
-    })
+
 
     // gloabal cursor
     let cursor = document.querySelector('#cursor');
