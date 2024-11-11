@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transition input</title>
     <style>
+        @import url(//at.alicdn.com/t/c/font_4061940_rc6rvlz53d.css);
+
         * {
             margin: 0;
             padding: 0;
@@ -33,9 +35,9 @@
         .ipt-box {
             position: relative;
             width: 300px;
-            height: 30px;
+            height: 40px;
             border: 1px solid #ccc;
-            margin: 50px 0;
+            margin: 40px 0;
         }
 
         input {
@@ -48,38 +50,80 @@
             position: absolute;
             left: 10px;
             top: 0;
-            line-height: 28px;
+            line-height: 38px;
             pointer-events: none;
             transition: 0.5s;
         }
 
-        input:focus+.single {
+
+        input:focus+.single,
+        input:valid+.single {
             top: -100%;
         }
+
+        /* case 2 bg */
+        .single.bg {
+            background-color: #fff;
+            padding: 0 6px;
+        }
+
+        input:focus+.single.bg,
+        input:valid+.single.bg {
+            top: -50%;
+        }
+
+        /* case 3 */
 
         .multiple span {
             position: absolute;
             top: 0;
             left: calc(var(--pos)*10px + 10px);
-            line-height: 28px;
+            line-height: 38px;
             pointer-events: none;
             transition: 0.5s calc(var(--pos)*0.05s);
         }
 
-        input:focus+.multiple span {
+        input:focus+.multiple span,
+        input:valid+.multiple span {
             top: -100%;
+        }
+
+        /* case 4 */
+        .icon-holder {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-holder input {
+            text-align: center;
+        }
+
+        .icon-holder .iconfont {
+            position: absolute;
+            margin-left: 50%;
+            transition: 0.5s;
+            pointer-events: none;
+        }
+
+        .icon-holder input:valid+.iconfont,
+        .icon-holder input:focus+.iconfont {
+            margin-left: 100%;
         }
     </style>
 </head>
 
 <body>
     <div class="ipt-box">
-        <input type="text">
-        <label class="single">your name</label>
+        <input type="text" required>
+        <div class="single">your name</div>
     </div>
     <div class="ipt-box">
-        <input type="text">
-        <label class="multiple">
+        <input type="text" required>
+        <div class="single bg">your name</div>
+    </div>
+    <div class="ipt-box">
+        <input type="text" required>
+        <div class="multiple">
             <span style="--pos:0">y</span>
             <span style="--pos:1">o</span>
             <span style="--pos:2">u</span>
@@ -89,7 +133,11 @@
             <span style="--pos:6">a</span>
             <span style="--pos:7">m</span>
             <span style="--pos:8">e</span>
-        </label>
+        </div>
+    </div>
+    <div class="ipt-box icon-holder">
+        <input type="text" required></input>
+        <span class="iconfont icon-customer"></span>
     </div>
 </body>
 

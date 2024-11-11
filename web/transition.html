@@ -29,7 +29,7 @@
       <div>元素从一个状态过渡到另外一个状态 - define the transition between two states of an element，包括过渡的2个状态、过渡的时间、过渡的方式、是否延迟等属性</div>
       <div>状态过渡需要一个触发条件，通常是鼠标悬停hover；也可以通过添加类的方式实现</div>
       <div>只能定义2个状态：开始状态、结束状态；如果需要多个状态呈现变化过程，请使用帧动画</div>
-      <div>只适用于 <span class="warn">数值</span> 状态</div>
+      <div>只适用于 <span class="warn">数值</span> 状态；如display:none和display:block之间无法实现过渡</div>
       <div>状态可以是一个属性，也可以是多个属性；多个属性的过渡可以使用 <span class="warn">逗号,</span> 分隔 - separated by commas</div>
       <div>只能作用于当前元素；如果多个元素使用，请使用帧动画</div>
       <div>桌面端使用较多；移动端使用少</div>
@@ -165,9 +165,9 @@ transition-delay:</pre>
     <dd class="tips">
       <div>过渡大多数情况下写在开始状态，也可以写在结束状态，还可以在两个状态中分别指定过渡：配合不同的时间，实现特定的效果，如快进慢退</div>
       <div>过渡自动双向执行：只要状态翻转，过渡就会执行；为了避免这种情况，在结束态指定过渡</div>
-      <div>多级元素使用过渡时，可能导致页面渲染延迟，调整过渡到结束状态即可</div>
       <div>使用单独属性语法可以指定多个过渡属性，必须是一一对应</div>
       <div>display:none和display:block之间不涉及到数字属性，所以过渡无效；可以使用透明度opacity从0到1的过渡</div>
+      <div>多级元素使用过渡时，可能导致页面渲染延迟，调整过渡到结束状态即可</div>
     </dd>
   </dl>
   <div class="chap">案例 Cases</div>
@@ -188,34 +188,9 @@ transition-delay:</pre>
     <dd>[<span class="iconfont icon-keyboard"></span>] 聚焦类 :focus - 多见于表单；获取焦点时，通过定位 position 或变换 transform
       移动元素</dd>
     <dd>
+      <div><a href="./demo/transition-input.html">单行输入</a></div>
       <div><a href="./demo/login_deer.html">一路有你</a></div>
       <div><a href="./demo/form4.html">注册和登录</a></div>
-      <div class="input-box">
-        <input type="text" required>
-        <div>
-          <span style="--delay:0">u</span>
-          <span style="--delay:1">s</span>
-          <span style="--delay:2">e</span>
-          <span style="--delay:3">r</span>
-          <span style="--delay:4">n</span>
-          <span style="--delay:5">a</span>
-          <span style="--delay:6">m</span>
-          <span style="--delay:7">e</span>
-        </div>
-      </div>
-      <pre>
-.input-box span {
-position: absolute;
-top: 1rem;
-left: calc(var(--delay)*1em + 10px);
-transition: .1s calc(var(--delay)*0.05s);
-pointer-events: none;
-}
-
-.input-box input:focus~div span,
-.input-box input:valid~div span {
-top: -1rem;
-}        </pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 选中类 :checked - 多见于表单的单选按钮或多选按钮的设计</dd>
     <dd>

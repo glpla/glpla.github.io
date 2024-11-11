@@ -211,9 +211,10 @@ button {
       <pre>
 @font-face {
     font-family: font_name;
-    src: url(font_url) format("TrueType")
+    src: url(font_url);
     font-weight: normal;
     font-style: normal;
+    font-display: swap;/*先默认字体显式，当字体加载完毕再切换*/
 }</pre>
       <div>引用；注意路径</div>
       <p>.在 .css 中引入</p>
@@ -231,20 +232,23 @@ body {
       <pre>
 @font-face {
   font-family: 'Poppins';
-  src: url(../fonts/Poppins/Poppins-light.ttf) format('TrueType');
+  src: url(../fonts/Poppins/Poppins-light.ttf);
   font-weight: 300;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Poppins';
-  src: url(../fonts/Poppins/Poppins-Regular.ttf) format('TrueType');
+  src: url(../fonts/Poppins/Poppins-Regular.ttf);
   font-weight: 400;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Poppins';
-  src: url(../fonts/Poppins/Poppins-Bold.ttf) format('TrueType');
+  src: url(../fonts/Poppins/Poppins-Bold.ttf);
   font-weight: 600;
+  font-display: swap;
 }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/font.html">定制中文字体</a> -
@@ -259,6 +263,7 @@ body {
 @font-face {
     font-family: "YuWei";
     src: url('../fonts/YuWei/YuWeiShuFaXingShuJianTi.ttf')
+    font-display: swap;
 }
 //使用
 .core {
@@ -297,11 +302,11 @@ body {
         </tr>
         <tr>
           <td>column-width</td>
-          <td>最小列宽，由浏览器决定分成多少列；不能使用%</td>
+          <td><span class="warn">最小</span>列宽，由浏览器决定分成多少列；不能使用%</td>
         </tr>
         <tr>
           <td>column-count</td>
-          <td>列数</td>
+          <td>列数/栏数</td>
         </tr>
         <tr>
           <td>columns</td>
@@ -321,11 +326,14 @@ body {
         </tr>
         <tr>
           <td>column-fill</td>
-          <td>填充模式，默认是平均填充 balance，也可以指定 auto，逐列填充；通常需指定容器高度</td>
+          <td>填充模式，默认是平均填充 balance，也可以指定 auto，逐列填充；通常需<span class="warn">指定容器高度</span></td>
         </tr>
       </table>
+      <div class="tips">
+        <div>如果同时设置了 column-width 和 column-count，则 columns 属性会优先考虑 column-count</div>
+        <div>如果使用最小列宽，放不下预设的列数，则减少列数</div>
+      </div>
     </dd>
-    <dd class="tips">如果同时设置了 column-width 和 column-count，则 columns 属性会优先考虑 column-count</dd>
     <dd> [<span class="iconfont icon-keyboard"></span>] 分栏排版，请参考 <a href="./demo/paper.html">文章排版</a>、<a
         href="./demo/personal.html">个人网站</a></dd>
     <dd>
@@ -367,7 +375,7 @@ body {
       <div>分列布局</div>
     </dd>
     <dt>作业</dt>
-    <dd>利用喜欢的字体、熟悉的字体图标和方式完善个人网站</dd>
+    <dd>.利用喜欢的字体、熟悉的字体图标和方式完善个人网站</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <script src="/utils/custom/ham2024.js"></script>
