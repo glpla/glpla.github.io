@@ -4,51 +4,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Temp</title>
     <style>
-        .container {
-            height: 100vh;
-            overflow: auto;
-            position: relative;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .element {
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        a {
+            text-decoration: none;
+            font: inherit;
+            color: inherit;
+        }
+
+        a {
+            position: relative;
+            padding: 10px 30px;
+            background-color: #333;
+            border-radius: 30px;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        a span {
+            position: relative;
+            z-index: 1;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            color: var(--color);
+        }
+
+        a:hover span {
+            text-shadow: 0 0 10px var(--color);
+        }
+
+        a::before {
+            content: '';
+            position: absolute;
+            left: -110%;
+            top: 0;
             width: 100%;
-            height: 100vh;
-            background-color: lightblue;
-            position: relative;
-            animation-duration: 2s;
-            animation-fill-mode: both;
-            opacity: 0;
+            height: 100%;
+            border-radius: 50%;
+            background-color: var(--color);
+            box-shadow: 0 0 10px var(--color), 0 0 20px var(--color), 0 0 40px var(--color);
+            transition: 0.5s;
         }
 
-        #element1 {
-            animation-timeline: view(50% 10%);
-            animation-name: fadeInOut;
+        a:hover::before {
+            left: 110%;
         }
 
-        #element2 {
-            animation-timeline: view(10% 50%);
-            animation-name: fadeInOut;
-        }
-
-        @keyframes fadeInOut {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
+        a::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background-color: #333;
+            border-radius: 30px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="element" id="element1">Element 1</div>
-        <div class="element" id="element2">Element 2</div>
-    </div>
+    <a href="" style="--color:#0a0"><span>Lorem</span></a>
 </body>
 
 </html>

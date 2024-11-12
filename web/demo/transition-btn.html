@@ -12,6 +12,12 @@
             box-sizing: border-box;
         }
 
+        a {
+            text-decoration: none;
+            font: inherit;
+            color: inherit;
+        }
+
         button {
             border: none;
             outline: none;
@@ -23,14 +29,16 @@
 
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 50px;
             height: 100vh;
+            background-color: #000;
         }
 
         .btn {
-            text-transform: uppercase;
+            text-transform: capitalize;
             width: 120px;
             height: 40px;
             color: #fff;
@@ -58,12 +66,63 @@
             background-position: 100%;
             letter-spacing: 2px;
         }
+
+        /* nav btn */
+
+        .nav-btn {
+            position: relative;
+            padding: 10px 30px;
+            background-color: #333;
+            border-radius: 30px;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .nav-btn span {
+            position: relative;
+            z-index: 1;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            color: var(--color);
+        }
+
+        .nav-btn:hover span {
+            text-shadow: 0 0 10px var(--color);
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            left: -110%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: var(--color);
+            box-shadow: 0 0 10px var(--color), 0 0 20px var(--color), 0 0 40px var(--color);
+            transition: 0.5s;
+        }
+
+        .nav-btn:hover::before {
+            left: 110%;
+        }
+
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background-color: #333;
+            border-radius: 30px;
+        }
     </style>
 </head>
 
 <body>
     <button class="btn bg-color">submit</button>
     <button class="btn bg-img">submit</button>
+    <a class="nav-btn" href="" style="--color:#0a0"><span>Lorem</span></a>
 </body>
 
 </html>
