@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transition Button </title>
     <style>
+        :root {
+            --main-color: #0a0;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -45,20 +49,44 @@
             border-radius: 6px;
         }
 
+        /* case 1 */
+
+        .cart {
+            background-image: linear-gradient(to right, var(--main-color), #050);
+        }
+
+        /* case 2 */
+
+        .price {
+            background-image: linear-gradient(35deg, var(--main-color) 50%, transparent 0);
+            text-align-last: justify;
+            border: 1px solid var(--main-color);
+            padding: 0 8px;
+        }
+
+        .price span:nth-child(2) {
+            text-decoration: line-through;
+            color: var(--main-color);
+        }
+
+        /* case 3*/
+
         .bg-color {
-            background-color: #f40;
+            background-color: var(--main-color);
             transition: 0.5s;
         }
 
+        /* case 4 */
+
         .bg-img {
-            background-image: linear-gradient(to right, #f40, #a00);
+            background-image: linear-gradient(to right, var(--main-color), #050);
             background-size: 200% 100%;
             background-position: 0;
             transition: background-position 0.5s, letter-spacing 0.5s 0.5s;
         }
 
         .bg-color:hover {
-            background-color: #900;
+            background-color: #050;
             letter-spacing: 2px;
         }
 
@@ -67,8 +95,7 @@
             letter-spacing: 2px;
         }
 
-        /* nav btn */
-
+        /* case 5 */
         .nav-btn {
             position: relative;
             padding: 10px 30px;
@@ -101,7 +128,7 @@
             height: 100%;
             border-radius: 50%;
             background-color: var(--color);
-            box-shadow: 0 0 10px var(--color), 0 0 20px var(--color), 0 0 40px var(--color);
+            /* box-shadow: 0 0 10px var(--color), 0 0 20px var(--color), 0 0 40px var(--color); */
             transition: 0.5s;
         }
 
@@ -116,13 +143,47 @@
             background-color: #333;
             border-radius: 30px;
         }
+
+        /* case 6 */
+        .transition {
+            position: relative;
+            border: 1px solid var(--main-color);
+            overflow: hidden;
+            transition: 0.4s;
+            color: var(--main-color);
+        }
+
+        .transition::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 150%;
+            height: 100%;
+            background-color: var(--main-color);
+            transform-origin: right bottom;
+            transform: translateX(-100%) skew(45deg);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .transition:hover {
+            color: #fff;
+        }
+
+        .transition:hover::before {
+            transform: translateX(0) skew(45deg);
+        }
     </style>
 </head>
 
 <body>
-    <button class="btn bg-color">submit</button>
-    <button class="btn bg-img">submit</button>
-    <a class="nav-btn" href="" style="--color:#0a0"><span>Lorem</span></a>
+    <button type="button" class="btn cart"><span class="iconfont icon-caigou"></span><span>cart</span></button>
+    <button type="button" class="btn price"><span>&yen;99</span> &nbsp;&nbsp; <span>&yen;199</span></button>
+    <button type="button" class="btn bg-color">submit</button>
+    <button type="button" class="btn bg-img">submit</button>
+    <button type="button" class="btn nav-btn" style="--color:#0a0"><span>submit</span></button>
+    <button type="button" class="btn transition">submit</button>
 </body>
 
 </html>
