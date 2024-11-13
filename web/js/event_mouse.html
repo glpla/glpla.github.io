@@ -10,14 +10,14 @@
   <base target="_blank">
   <style>
     .cursor {
-      position: absolute;
+      position: fixed;
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      border: 1px solid #f40;
+      border: 1px solid var(--yellow-color);
       pointer-events: none;
-      z-index: 99;
       pointer-events: none;
+      z-index: 999;
     }
 
     .cursor::after {
@@ -28,16 +28,8 @@
       transform: translate(-50%, -50%);
       width: 10px;
       height: 10px;
-      background-color: #f40;
+      background-color: var(--yellow-color);
       border-radius: 50%;
-    }
-
-    .move {
-      position: absolute;
-      width: 100px;
-      height: 60px;
-      background-color: #f40;
-      z-index: 100;
     }
 
     @media screen and (max-width:768px) {
@@ -45,21 +37,6 @@
       .cursor {
         display: none;
       }
-    }
-
-    .box {
-      position: relative;
-      height: 400px;
-      background-color: #f40;
-      overflow: hidden;
-    }
-
-    .img {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 2px solid #ff0;
     }
   </style>
 </head>
@@ -115,109 +92,46 @@
         </tr>
       </table>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 鼠标点击 click</dd>
+    <dt>鼠标点击 click</dt>
     <dd class="sn">
-      <div><a href="./demo/event-mouse-falling.html">坠落 falling</a></div>
+      <div><a href="./demo/mouse-falling.html">坠落 falling</a></div>
       <p>.帧动画 animation</p>
       <p>.变换 transform</p>
       <p>.DOM</p>
       <p>.BOM</p>
-      <div><a href="./demo/event-mouse-rating.html">评分 rating</a></div>
+      <div><a href="./demo/mouse-rating.html">评分 rating</a></div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 鼠标移动 mousemove</dd>
-    <dd class="sn">
-      <div><a href="../demo/follow.html">鼠标跟随</a></div>
-      <div><a href="">放大镜</a></div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 鼠标移动/跟随/定制鼠标</dd>
-    <dd>.元素应脱离文档流 absolute</dd>
-    <dd>.通常跟随鼠标在页面上的位置pageY、pageY</dd>
-    <dd>.局部范围内可以使用offsetX、offsetY</dd>
-    <dd>案例1：全局跟随</dd>
-    <dd class="cursor" id="cursor"></dd>
+    <dt>鼠标移动 mousemove</dt>
     <dd>
+      <div>1. 视口跟随 - <a href="./demo/mouse-follow.html">鼠标跟随</a></div>
+      <div>.通常跟随鼠标在视口内移动 clientY、clientY - 元素应脱离文档流 固定定位 fixed</div>
+      <div class="cursor" id="cursor"></div>
       <pre>
 document.addEventListener('mousemove', (e) => {
-  cursor.style.left = e.pageX + 'px'
-  cursor.style.top = e.pageY + 'px'
+  cursor.style.left = e.clientX -15 + 'px'
+  cursor.style.top = e.clientY -15 + 'px'
 })</pre>
-    </dd>
-    <dd>案例2：局部跟随</dd>
-    <div class="box">
-      <div class="img" id="inner-cursor"></div>
-    </div>
-    <dd>
+      <div>2. 元素跟随 - <a href="./demo/mouse-follow-inside.html">鼠标跟随</a>、<a href="./demo/mouse-zoom.html">放大镜</a></div>
+      <div>.鼠标仅仅在某个元素内部跟随</div>
+      <div>.脱离文档流 绝对定位 absolute</div>
+      <div>.局部范围内可以使用 pageX、pageY配合offsetX、offsetY</div>
       <pre>
-&lt;div class="box"&gt;
-  &lt;div class="img"&gt;&lt;/div&gt;
-&lt;/div&gt;</pre>
-      <pre>
-.box {
-  position: relative;
-  width: 800px;
-  height: 600px;
-  margin: 100px auto;
-  background-color: #f40;
-  overflow: hidden;
-}
-
-.img {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 2px solid #ff0;
-}</pre>
-      <pre>
-let box = document.querySelector('.box');
-let img = document.querySelector('.img');
 box.addEventListener('mousemove', fn);
 function fn(e) {
-  console.log(e.offsetX, e.offsetY);
-  let x = e.pageX - box.offsetLeft - 15;
-  let y = e.pageY - box.offsetTop - 15;
-  img.style.left = x + 'px';
-  img.style.top = y + 'px';
-}</pre>
-    </dd>
-    <dd>案例3：使用全局变量实现</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 单元素自定义数据data-的获取</dd>
-    <dd>
-      <div>.事件对象e和事件目标target是同一个，可以使用属性获取，也可以使用事件目标target获取</div>
-      <div>.注意函数fn的封装</div>
-      <pre>&lt;div class="tmp" data-id="1001"&gt;单元素自定义数据的获取&lt;/div></pre>
-      <pre>
-let el = document.querySelector('.tmp');
-el.onclick = fn;
-el.addEventListener('click', fn)
-function fn(e) {
-    console.log(this.getAttribute('data-id'));
-    console.log(e.target.dataset.id);
-}</pre>
+    let x = e.pageX - box.offsetLeft - 15;
+    let y = e.pageY - box.offsetTop - 15;
+    img.style.left = x + 'px';
+    img.style.top = y + 'px';
+}      </pre>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script src="../js/mouse.js"></script>
   <script>
-
-
-    // gloabal cursor
     let cursor = document.querySelector('#cursor');
-    document.addEventListener('mousemove', (ev) => {
-      cursor.style.left = ev.pageX - 15 + 'px';
-      cursor.style.top = ev.pageY - 30 + 'px';
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX - 15 + 'px';
+      cursor.style.top = e.clientY - 15 + 'px';
     })
-
-    // local cursor
-    let box = document.querySelector('.box');
-    let img = document.querySelector('.img');
-    box.addEventListener('mousemove', fn);
-    function fn(e) {
-      let x = e.pageX - box.offsetLeft - 15;
-      let y = e.pageY - box.offsetTop - 15;
-      img.style.left = x + 'px';
-      img.style.top = y + 'px';
-    }
   </script>
 </body>
 

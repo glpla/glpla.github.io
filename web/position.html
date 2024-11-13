@@ -20,8 +20,8 @@
   </header>
   <dl>
     <dd>
-      <div>.把元素定位在盒子任一位置，甚至盒子外面</div>
-      <div>.最后定位在哪里，需要一个参考对象</div>
+      <div>.把子元素定位在祖先元素盒子的任意位置，甚至盒子外面</div>
+      <div>.最后定位在哪里，需要一个参考对象 - <span class="warn">父相子绝</span></div>
       <div>.更多信息，请查看 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">MDN - position</a></div>
       <pre>position: static | relative | absolute | fixed | sticky;</pre>
     </dd>
@@ -30,15 +30,17 @@
       <div>.不脱离文档流，仍然占据原来位置</div>
       <div>.层级提高，发生偏移时，如 top、left，可能会遮挡住后面标准流的元素</div>
       <div>.参考对象：自己[自恋型] - 灵魂出窍</div>
+      <div>.相对定位很少单独使用，通常为子元素提供定位依据</div>
     </dd>
     <dt>绝对定位 absolute</dt>
     <dd>
       <div>.脱离文档流 - 原地起飞</div>
       <div>.隐式的转换为块元素 block</div>
-      <div>.参考对象：显式的设置了 <span class="warn">定位</span> 属性(相对或绝对都可以)的元素，一般是父元素。如果父元素没有指定定位属性，则一级一级往上寻找，直至 body</div>
-      <div>.通常显式的设置定位元素的偏移，可以使用数值或关键字 top、right、bottom、left 或负边距</div>
-      <div>.还可以使用 <span class="warn">inset</span> 定位元素；是 top、right、bottom、left 的简写，和 margin 和 padding
-        一样，依照"上右下左"的顺序指定；0为全覆盖
+      <div>.参考对象：显式的设置了 <span class="warn">定位</span> 属性(相对或绝对都可以)的元素都可以作为参考对象，一般是父元素。如果父元素没有指定定位属性，则一级一级往上寻找，直至
+        &lt;body&gt;
+      </div>
+      <div>.可以使用数值或关键字 top、right、bottom、left 或负边距设置定位元素的偏移；如果不显式的指定，则停留在原来的位置；实际开发中，有时候不用设置偏移也可以实现特定需求</div>
+      <div>.可以使用 <span class="warn">inset</span> 指定定位元素相对于参考对象的收缩位置：top、right、bottom、left；0为全覆盖
       </div>
       <div>.层级提高，会遮挡其他元素</div>
     </dd>
@@ -46,17 +48,13 @@
         href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_positioned_layout/Understanding_z-index/Stacking_context">MDN
         - z-index</a></dt>
     <dd>
-      <div>.控制Z轴方向上盒子堆叠时的前后次序/渲染排序，通常也称层级</div>
+      <div>.控制 Z轴 方向上盒子堆叠时的前后次序/渲染排序，通常也称层级</div>
       <div>.只有显式使用 <span class="warn">定位</span> 属性的元素才有 z-index，标准文档流没有；但是后面的元素默认比前面的元素具有更高的层级</div>
       <div>.如果没有显式指定 z-index，则为 auto，按照文档流中元素出现的顺序，后来居上</div>
       <div>.z-index 大的元素，位于上层/近；z-index 小的元素位于下层/远；上层的元素会遮盖下层的元素</div>
       <div>.z-index 为正的元素，出现在没有指定 z-index 的元素的上面</div>
       <div>.z-index 为负的元素，出现在没有指定 z-index 的元素的下面</div>
-      <div>.导航等需要始终引导用户的元素一般采用较大的层级，保证始终位于页面顶部</div>
-    </dd>
-    <dd class="tips">
-      <div>相对定位很少单独使用，通常为子元素提供定位依据：<span class="warn">父相子绝</span></div>
-      <div>绝对定位元素默认会待在<span class="warn">原来的位置</span>；实际开发中，有时候不用设置偏移也可以实现特定需求</div>
+      <div>.导航等需要始终引导用户的元素一般采用较大的层级，保证始终位于页面顶部，如汉堡菜单、弹出对话框等</div>
     </dd>
   </dl>
   <div class="chap">常见应用 Cases</div>
@@ -73,29 +71,14 @@
       <img class="ob-img tree4" data-src="./imgs/tree4.png" alt="">
       <img class="ob-img boy" data-src="./imgs/boy.png" alt="">
     </dd>
-    <dd id="cart">[<span class="iconfont icon-keyboard"></span>] 购物车 - 使用按钮和其中一个伪元素实现</dd>
+    <dd id="cart">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/btns.html">购物车</a>；更多案例请访问 <a
+        href="./demo/form5.html">定制多选按钮</a>、<a href="./demo/login_deer.html">一路有你 - 登录表单</a></dd>
     <dd>
-      <div>. 伪元素：使用::before显示商品数量[从后台获取数据]</div>
-      <div>. 初始化：button取消边框、轮廓、背景</div>
-      <div>. 定位：父相子绝，使伪元素右上定位</div>
-      <div>. 还可以使用负边距实现</div>
-      <div class="demo-wrap">
-        <div class="cart">
-          <span class="badge">8</span>
-          <span>我的购物车</span>
-        </div>
-      </div>
-      <pre>
-.cart::before {
-  content: '8';
-  position: absolute;
-  top: -10px;
-  right: -10px;
-}</pre>
+      <div>. 初始化：button 取消边框、轮廓、背景</div>
+      <div>. 数量定位在右上角</div>
+      <div>. 还可以使用、伪元素、负边距实现</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/form5.html">定制多选按钮</a>、<a
-        href="./demo/login_deer.html">一路有你 - 登录表单</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 渐变背景边框 - 见下例</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/avatar.html">头像设计 - 渐变背景边框</a></dd>
     <dd>
       <div>. 定位 position</div>
       <div>. 伪元素 ::before</div>
@@ -103,48 +86,7 @@
       <div>. 线路渐变 linear-gradient</div>
       <div>. 圆角边框 border-radius</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 伪元素 - 绘制米琪；更多案例，请访问 <a href="./demo/avatar0.html">头像设计</a></dd>
-    <dd>
-      <div>.前后伪元素分别作为米琪的左右耳朵，利用定位放置于米琪头部两侧</div>
-      <div class="demo-wrap">
-        <div class="mickey-box">
-          <div class="mickey"></div>
-          <div class="name">male</div>
-        </div>
-      </div>
-      <pre>
-.mickey {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin: 1rem auto;
-    background-color: #a8e073;
-}
-
-.mickey::after {
-    content: '';
-    position: absolute;
-    top: -1rem;
-    right: -1rem;
-    width: 40px;
-    height: 40px;
-    background-color: inherit;
-    border-radius: 50%;
-}
-
-.mickey::before {
-    content: '';
-    position: absolute;
-    top: -1rem;
-    left: -1rem;
-    width: 40px;
-    height: 40px;
-    background-color: inherit;
-    border-radius: 50%;
-}</pre>
-    </dd>
-    <dd id="mul-menu">[<span class="iconfont icon-keyboard"></span>]二级导航；更多案例请访问 <a
+    <dd id="mul-menu">[<span class="iconfont icon-keyboard"></span>] 二级导航；更多案例请访问 <a
         href="./demo/nav-dropdown.html">导航菜单</a> <a href="./demo/dropdown.html">下拉菜单 -
         dropdown</a>、 <a href="https://codepen.io/glpla/full/gOEagWP">二级导航 - CodePen</a></dd>
     <dd>
@@ -273,7 +215,23 @@
   background-color: var(--txt-warn-color);
 }      </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/center.html">元素居中</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-translate.html">居中</a>；更多居中请访问 <a
+        href="./demo/center.html">元素居中</a></dd>
+    <dd>
+      <div>.配合变换 transform 使用元素的垂直水平居中</div>
+      <pre>
+  .container{
+    position: relative;
+  }
+  
+  .item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // translate: -50% -50%;
+  }</pre>
+    </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>

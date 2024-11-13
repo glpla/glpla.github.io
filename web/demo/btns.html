@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transition Button </title>
     <style>
+        @import url(//at.alicdn.com/t/c/font_4235521_imop9zdge2.css);
+
         :root {
             --main-color: #0a0;
         }
@@ -43,7 +45,7 @@
 
         .btn {
             text-transform: capitalize;
-            width: 120px;
+            width: 150px;
             height: 40px;
             color: #fff;
             border-radius: 6px;
@@ -52,7 +54,19 @@
         /* case 1 */
 
         .cart {
+            position: relative;
             background-image: linear-gradient(to right, var(--main-color), #050);
+        }
+
+        .cart .number {
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            font-size: 14px;
+            padding: 3px 8px;
+            background-color: var(--main-color);
+            border-radius: 50%;
+            color: #fff;
         }
 
         /* case 2 */
@@ -98,7 +112,6 @@
         /* case 5 */
         .nav-btn {
             position: relative;
-            padding: 10px 30px;
             background-color: #333;
             border-radius: 30px;
             color: #fff;
@@ -178,7 +191,8 @@
 </head>
 
 <body>
-    <button type="button" class="btn cart"><span class="iconfont icon-caigou"></span><span>cart</span></button>
+    <button type="button" class="btn cart"><span class="iconfont icon-shoppingcart"></span> <span>cart</span><span
+            class="number">8</span></button>
     <button type="button" class="btn price"><span>&yen;99</span> &nbsp;&nbsp; <span>&yen;199</span></button>
     <button type="button" class="btn bg-color">submit</button>
     <button type="button" class="btn bg-img">submit</button>

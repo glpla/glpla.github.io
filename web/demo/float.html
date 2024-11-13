@@ -14,79 +14,109 @@
             line-height: 1.5;
         }
 
+        img {
+            width: 120px;
+        }
+
         body {
             display: flex;
             height: 100vh;
         }
 
         .wrap {
-            /* display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px; */
             width: 100%;
             max-width: 800px;
             columns: 2 300px;
             margin: auto;
+            padding: 10px;
         }
 
         .box {
             width: 100%;
             max-width: 800px;
             text-align: justify;
-            padding: 10px;
+            margin-bottom: 10px;
         }
 
-        .box .shield {
+        .box .xh {
             float: left;
-            shape-outside: url(../../imgs/f-shield.png);
+            filter: drop-shadow(0 0 1px #0a0) drop-shadow(0 0 1px #0a0);
         }
 
-        .box .cart {
-            float: right;
-            shape-outside: url(../../imgs/f-cart.png);
-        }
-
-        .box .speak {
+        .box .ty {
             float: left;
-            shape-outside: url(../../imgs/f-speak.png);
+            shape-outside: url(../../imgs/ty.png);
         }
 
-        .box .pos {
-            float: right;
-            shape-outside: url(../../imgs/f-pos.png);
+        .box .chrome {
+            float: left;
+            shape-outside: circle(50%);
+        }
+
+        .box .git {
+            float: left;
+            shape-outside: polygon(50% 0, 100% 50%, 50% 100%, 0 50%, 50% 0);
+        }
+
+        .indent {
+            column-span: all;
+        }
+
+        .indent::first-letter {
+            float: left;
+            color: #f40;
+            font-size: 3em;
+            margin-right: 20px;
+        }
+
+        p {
+            text-align: center;
+            background-color: #222;
+            color: #dcdcaa;
+            font-size: 14px;
         }
     </style>
 </head>
 
 <body>
     <div class="wrap">
-        <div class="box"><img class="shield" src="../../imgs/f-shield.png" alt="">Lorem ipsum dolor sit amet consectetur
+        <div class="box indent">Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, officia.
+            Dolorum cum at fugit iusto dignissimos molestias nostrum, nobis commodi sequi quisquam iure eum delectus
+            exercitationem reiciendis facilis, dolores cumque labore. Perspiciatis?
+            <p>::first-letter</p>
+        </div>
+        <div class="box">
+            <img class="xh" src="../../imgs/xh.png" alt="">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, perspiciatis libero tempora quam consequatur
+            sed quas cumque ipsam blanditiis vero, quasi eos doloribus reprehenderit exercitationem impedit consequuntur
+            iusto et minima.
+            <p>float: left;</p>
+        </div>
+        <div class="box"><img class="ty" src="../../imgs/ty.png" alt="">Lorem ipsum dolor sit amet consectetur
             adipisicing elit.
             Dolorum
             cum at fugit iusto dignissimos molestias nostrum, nobis commodi sequi quisquam iure eum delectus
             exercitationem
-            reiciendis facilis, dolores cumque labore. Perspiciatis? - columns</div>
-        <div class="box"><img class="cart" src="../../imgs/f-cart.png" alt="">Lorem ipsum dolor sit amet consectetur
+            reiciendis facilis, dolores cumque labore. Perspiciatis?
+            <p>shape-outside: url(../../imgs/ty.png);</p>
+        </div>
+        <div class="box"><img class="chrome" src="../../imgs/chrome.jpg" alt="">Lorem ipsum dolor sit amet consectetur
             adipisicing
             elit.
             Dolorum
             cum at fugit iusto dignissimos molestias nostrum, nobis commodi sequi quisquam iure eum delectus
             exercitationem
-            reiciendis facilis, dolores cumque labore. Perspiciatis? - grid</div>
-        <div class="box"><img class="speak" src="../../imgs/f-speak.png" alt="">Lorem ipsum dolor sit amet consectetur
-            adipisicing
-            elit.
-            Dolorum
-            cum at fugit iusto dignissimos molestias nostrum, nobis commodi sequi quisquam iure eum delectus
-            exercitationem
-            reiciendis facilis, dolores cumque labore. Perspiciatis?</div>
-        <div class="box"><img class="pos" src="../../imgs/f-pos.png" alt="">Lorem ipsum dolor sit amet consectetur
-            adipisicing
-            elit.
-            Dolorum
-            cum at fugit iusto dignissimos molestias nostrum, nobis commodi sequi quisquam iure eum delectus
-            exercitationem
-            reiciendis facilis, dolores cumque labore. Perspiciatis?</div>
+            reiciendis facilis, dolores cumque labore. Perspiciatis?
+            <p>shape-outside: circle(50%);</p>
+        </div>
+        <div class="box"><img class="git" src="../../imgs/git.jpg" alt="">Lorem ipsum dolor sit amet consectetur
+            adipisicing elit.
+            Dolorum cum at fugit iusto dignissimos molestias nostrum, nobis commodi sequi quisquam iure eum delectus
+            exercitationem Lorem ipsum dolor sit amet.
+            reiciendis facilis, dolores cumque labore. Perspiciatis?
+            <p>polygon(50% 0, 100% 50%, 50% 100%, 0 50%, 50% 0)</p>
+        </div>
     </div>
 </body>
 
