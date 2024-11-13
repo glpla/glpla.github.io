@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nav Sample</title>
     <style>
+        @import url(//at.alicdn.com/t/c/font_4235521_lhkl4vzbxy.css);
+
         * {
             margin: 0;
             padding: 0;
@@ -35,8 +37,10 @@
         }
 
         .nav-wrap {
-            background-color: #f40;
-            color: #fff;
+            background-color: #eee;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 10px;
         }
 
         p {
@@ -44,20 +48,73 @@
             margin-bottom: 1rem;
         }
 
-        .nav-item {
-            padding: 4px 10px;
+        ul {
+            list-style: none;
         }
 
-        .nav-item:hover {
-            border-bottom: 1px solid #fff;
+        a {
+            text-decoration: none;
+            color: inherit;
         }
 
         .logo {
-            font-size: 20px;
-            padding: 4px 10px;
+            font-weight: 600;
         }
 
-        /* flaot */
+        .menu {
+            margin-bottom: 20vh;
+        }
+
+        .menu li {
+            cursor: pointer;
+        }
+
+        .menu-item {
+            position: relative;
+            display: inline-block;
+            width: 80px;
+            text-align: center;
+        }
+
+        .sub-menu {
+            display: none;
+            position: absolute;
+            width: 100%;
+            background-color: #000;
+        }
+
+        .sub-menu a {
+            display: block;
+            color: #fff;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .menu-item:hover .sub-menu {
+            display: block;
+        }
+
+        .menu-item:hover>div {
+            background-color: #0a0;
+            color: #fff;
+        }
+
+        .sub-menu a:hover {
+            background-color: #222;
+            color: #fff;
+        }
+
+        /* case */
+        .nav-item {
+            display: inline-block;
+            padding: 0px 10px;
+        }
+
+        .nav-item:hover {
+            background-color: #0a0;
+            color: #fff;
+        }
+
+        /* float */
         .float .logo {
             float: left;
         }
@@ -66,26 +123,13 @@
             float: right;
         }
 
-        .float .nav .nav-item {
-            display: inline-block;
-            margin-top: 2.5px;
-        }
-
         /* float-lh */
-        .float-lh {
-            line-height: 34px;
-        }
-
         .float-lh .logo {
             float: left;
         }
 
         .float-lh .nav {
             float: right;
-        }
-
-        .float-lh a {
-            padding: 0 10px;
         }
 
         /* float-ul */
@@ -115,11 +159,83 @@
             grid-template-columns: 1fr auto;
             align-items: center;
         }
+
+        /* docker */
+        .docker {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        .docker .item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eee;
+            transition: .2s;
+            cursor: pointer;
+        }
+
+        .docker .item:has(+.item:hover),
+        .docker .item:hover+.item {
+            width: 50px;
+            height: 50px;
+        }
+
+        .docker .item:hover {
+            width: 60px;
+            height: 60px;
+            color: #0a0;
+        }
+
+        .docker .item:hover .iconfont {
+            font-size: 20px;
+        }
     </style>
 </head>
 
 <body>
     <div class="w">
+        <ul class="nav-wrap menu">
+            <li class="menu-item">
+                <div><span class="iconfont icon-home"></span> Home</div>
+                <nav class="sub-menu">
+                    <a href="#">Lorem</a>
+                    <a href="#">Hic!</a>
+                    <a href="#">Reae?</a>
+                </nav>
+            </li>
+            <li class="menu-item">
+                <div><span class="iconfont icon-account"></span> Team</div>
+                <nav class="sub-menu">
+                    <a href="#">Lorem.</a>
+                    <a href="#">Culpa!</a>
+                    <a href="#">Culpa!</a>
+                    <a href="#">Eaque.</a>
+                </nav>
+            </li>
+            <li class="menu-item">
+                <div><span class="iconfont icon-edit"></span> Blog</div>
+                <nav class="sub-menu">
+                    <a href="#">Lorem.</a>
+                    <a href="#">Maiors.</a>
+                    <a href="#">Cuate!</a>
+                </nav>
+            </li>
+            <li class="menu-item">
+                <div><span class="iconfont icon-settings1"></span> Setup</div>
+                <nav class="sub-menu">
+                    <a href="#1">Corpos?</a>
+                    <a href="#4">Votes.</a>
+                </nav>
+            </li>
+        </ul>
+        <p>ul + li + nav + a :hover inline-block line-height</p>
         <div class="nav-wrap float clear">
             <a href="#" class="logo">
                 <h1>Float</h1>
@@ -131,7 +247,7 @@
                 <a class="nav-item" href="#">about</a>
             </nav>
         </div>
-        <p>nav+a float margin inline-block</p>
+        <p>nav + a float margin inline-block</p>
         <div class="nav-wrap float-lh clear">
             <a href="#" class="logo">
                 <h1>Float</h1>
@@ -143,7 +259,7 @@
                 <a class="nav-item" href="#">about</a>
             </nav>
         </div>
-        <p>nav+a float line-height</p>
+        <p>nav + a float line-height</p>
         <div class="nav-wrap float-ul clear">
             <a href="#" class="logo">
                 <h1>Float</h1>
@@ -155,7 +271,7 @@
                 <li><a class="nav-item" href="#">about</a></li>
             </ul>
         </div>
-        <p>ul+li+a float</p>
+        <p>ul + li + a float</p>
         <div class="nav-wrap flex">
             <a href="#" class="logo">
                 <h1>Flex</h1>
@@ -167,7 +283,7 @@
                 <a class="nav-item" href="#">about</a>
             </nav>
         </div>
-        <p>nav+a flex</p>
+        <p>nav + a flex</p>
         <div class="nav-wrap grid">
             <a href="#" class="logo">
                 <h1>Grid</h1>
@@ -179,7 +295,18 @@
                 <a class="nav-item" href="#">about</a>
             </nav>
         </div>
-        <p>nav+a grid</p>
+        <p>nav + a grid</p>
+        <div class="docker">
+            <div class="item"><span class="iconfont icon-home"></span></div>
+            <div class="item"><span class="iconfont icon-account"></span></div>
+            <div class="item"><span class="iconfont icon-male"></span></div>
+            <div class="item"><span class="iconfont icon-female"></span></div>
+            <div class="item"><span class="iconfont icon-edit"></span></div>
+            <div class="item"><span class="iconfont icon-settings1"></span></div>
+            <div class="item"><span class="iconfont icon-statis"></span></div>
+            <div class="item"><span class="iconfont icon-settings1"></span></div>
+        </div>
+        <p>docker</p>
     </div>
 </body>
 
