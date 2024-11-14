@@ -20,46 +20,36 @@
             background-color: #000;
         }
 
-        .box {}
-
-        .left,
-        .right {
+        .tmp {
             position: relative;
-            display: inline-block;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 -40px;
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
         }
 
-        .left {
-            border: 10px solid #0a0;
-        }
-
-        .left::before {
+        .tmp::before {
             content: '';
             position: absolute;
-            box-sizing: border-box;
-            left: -10px;
-            top: -10px;
-            width: 120px;
-            height: 120px;
-            border: 10px solid transparent;
-            border-top-color: #fff;
-            border-radius: 50%;
-            z-index: 1;
+            z-index: 0;
+            width: 50px;
+            height: 50px;
+            background-color: #f40;
+
         }
 
-        .right {
-            border: 10px solid #a00;
+        .tmp .inner {
+            position: relative;
+            width: 20px;
+            aspect-ratio: 1;
+            background-color: #ff0;
+            z-index: 0;
         }
     </style>
 </head>
 
 <body>
-    <div class="box">
-        <div class="left"></div>
-        <div class="right"></div>
+    <div class="tmp">
+        <div class="inner"></div>
     </div>
 </body>
 
