@@ -27,11 +27,11 @@
     <dt>概述 Overview</dt>
     <dd>
       <div>元素从一个状态过渡到另外一个状态 - define the transition between two states of an element，包括过渡的2个状态、过渡的时间、过渡的方式、是否延迟等属性</div>
-      <div>状态过渡需要一个触发条件，通常是鼠标悬停hover；也可以通过添加类的方式实现</div>
-      <div>只能定义2个状态：开始状态、结束状态；如果需要多个状态呈现变化过程，请使用帧动画</div>
-      <div>只适用于 <span class="warn">数值</span> 状态；如display:none和display:block之间无法实现过渡</div>
-      <div>状态可以是一个属性，也可以是多个属性；多个属性的过渡可以使用 <span class="warn">逗号,</span> 分隔 - separated by commas</div>
-      <div>只能作用于当前元素；如果多个元素使用，请使用帧动画</div>
+      <div>状态过渡需要一个触发条件，通常是鼠标悬停 hover；也可以通过添加/移除类的方式实现</div>
+      <div>只能定义2个状态：开始状态、结束状态；如果需要多个状态呈现变化过程，请使用 <a href="./animation.html">帧动画</a></div>
+      <div>只适用于 <span class="warn">数值</span> 属性状态的变换；如 display:none; 和 display:block; 之间无法实现过渡</div>
+      <div>只能作用于当前元素的状态变换；如果多个元素使用，请使用帧动画</div>
+      <div>可以是一个属性的状态变换，也可以是多个属性的状态变换，如宽度和颜色都变换；多个属性使用 <span class="warn">逗号,</span> 分隔 - separated by commas</div>
       <div>桌面端使用较多；移动端使用少</div>
       <div>更多细节，请参考 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transition">MDN - transition</a>、<a
           href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions">Using_CSS_transitions</a>
@@ -103,6 +103,10 @@ transition-delay:</pre>
           <td>cubic-bezier(n,n,n,n)</td>
           <td>在 cubic-bezier 函数中定义自己的值</td>
         </tr>
+        <tr>
+          <td>steps()</td>
+          <td>步进方式变换，见后续内容</td>
+        </tr>
       </table>
       <div>1. 默认所有属性过渡</div>
       <pre>
@@ -166,7 +170,6 @@ transition-delay:</pre>
       <div>过渡大多数情况下写在开始状态，也可以写在结束状态，还可以在两个状态中分别指定过渡：配合不同的时间，实现特定的效果，如快进慢退</div>
       <div>过渡自动双向执行：只要状态翻转，过渡就会执行；为了避免这种情况，在结束态指定过渡</div>
       <div>使用单独属性语法可以指定多个过渡属性，必须是一一对应</div>
-      <div>display:none和display:block之间不涉及到数字属性，所以过渡无效；可以使用透明度opacity从0到1的过渡</div>
       <div>多级元素使用过渡时，可能导致页面渲染延迟，调整过渡到结束状态即可</div>
     </dd>
   </dl>
@@ -175,15 +178,9 @@ transition-delay:</pre>
     <dd>[<span class="iconfont icon-keyboard"></span>] 鼠标悬停类 :hover - 改变背景颜色、背景图片、背景大小等等</dd>
     <dd>
       <div><a href="./demo/table2.html">动态斑马纹表格</a></div>
-      <div><a href="./demo/dock.html">仿苹果停靠栏</a></div>
-      <div><a href="../index.html">网站 banner</a></div>
-      <div><a href="./demo/up2u.html">个人网站 - 按钮</a></div>
-      <div><a href="./demo/car.html">靓车荟 Cars - 汉堡菜单</a></div>
-      <div><a href="./demo/animLine.html">下划线动画</a></div>
-      <div><a href="./demo/animV.html">垂直滑动菜单</a></div>
-      <div><a href="./demo/animH.html">水平滑动菜单</a></div>
-      <div><a href="./demo/form-transition-bak.html">页面动画-简化版</a>、<a href="./demo/form-transition.html">页面动画</a>、<a
-          href="./demo/animPage.html">页面动画</a></div>
+      <div><a href="./demo/btns.html">按钮设计</a>、<a href="./demo/car.html">靓车荟 Cars - 汉堡菜单</a></div>
+      <div><a href="./demo/nav-sample.html">菜单/导航设计</a> - 下划线动画、水平滑动菜单、垂直滑动菜单、仿苹果停靠栏</div>
+      <div><a href="../index.html">网站 banner</a></div>      
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 聚焦类 :focus - 多见于表单；获取焦点时，通过定位 position 或变换 transform
       移动元素</dd>
@@ -195,7 +192,6 @@ transition-delay:</pre>
     <dd>[<span class="iconfont icon-keyboard"></span>] 选中类 :checked - 多见于表单的单选按钮或多选按钮的设计</dd>
     <dd>
       <div><a href="./demo/form5.html">表单元素定制 radio & checkbox</a></div>
-      <div><a href="https://codepen.io/glpla/full/JjwBLdg">表单元素自定义 - CodePen</a></div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 事件类 - 单击时，为元素添加动态类，进而改变样式</dd>
     <dd>

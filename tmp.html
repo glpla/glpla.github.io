@@ -20,31 +20,103 @@
             background-color: #000;
         }
 
-        .tmp {
-            width: 100px;
-            height: 100px;
+        .page {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #fff6;
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        nav {
+            position: absolute;
+            width: 100%;
+            height: 5%;
+            top: -5%;
             background-color: #fff;
         }
 
-        .tmp:hover {
-            animation: --color 1s backwards;
+        aside {
+            position: absolute;
+            left: -5%;
+            width: 5%;
+            height: 100%;
+            background-color: #fff;
         }
 
-        @keyframes --color {
-            from {
-                background-color: #f40;
-            }
+        main {
+            position: absolute;
+            right: -80%;
+            width: 80%;
+            height: 100%;
+            background-color: #fff;
+        }
 
+        footer {
+            position: absolute;
+            bottom: -5%;
+            width: 100%;
+            height: 5%;
+            background-color: #fff;
+        }
 
-            to {
-                background-color: #0a0;
-            }
+        .btn {
+            position: relative;
+            width: 120px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            background-color: #222;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            width: 40px;
+            height: 40px;
+            background-color: #0a0;
+            border-radius: 50%;
+            transition: left 0.5s;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background-color: #222;
+            border-radius: 40px;
+        }
+
+        .btn:hover::before {
+            left: 160px;
+        }
+
+        .btn:hover span {
+            color: #0a0;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
 
 <body>
-    <div class="tmp"></div>
+    <div class="btn">
+        <span>button</span>
+    </div>
+    <!-- <div class="page">
+        <nav>nav</nav>
+        <aside>aside</aside>
+        <main>main</main>
+        <footer>footer</footer>
+    </div> -->
 </body>
 
 </html>

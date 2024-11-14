@@ -8,6 +8,10 @@
     <style>
         @import url(//at.alicdn.com/t/c/font_4235521_lhkl4vzbxy.css);
 
+        :root {
+            --main-color: #0a0;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -94,7 +98,7 @@
         }
 
         .menu-item:hover>div {
-            background-color: #0a0;
+            background-color: var(--main-color);
             color: #fff;
         }
 
@@ -106,11 +110,13 @@
         /* case */
         .nav-item {
             display: inline-block;
-            padding: 0px 10px;
+            text-transform: capitalize;
+            width: 60px;
+            text-align: center;
         }
 
         .nav-item:hover {
-            background-color: #0a0;
+            background-color: var(--main-color);
             color: #fff;
         }
 
@@ -153,11 +159,93 @@
             align-items: center;
         }
 
+        .flex .nav-item {
+            position: relative;
+        }
+
+        .flex .nav-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 4px;
+            background-color: var(--main-color);
+            transition: 0.5s;
+        }
+
+        .flex .nav-item:hover {
+            background-color: unset;
+            color: unset;
+        }
+
+        .flex .nav-item:hover::before {
+            width: 100%;
+        }
+
+        /* flex element */
+        .flex-el {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .flex-el .nav {
+            display: flex;
+            position: relative;
+        }
+
+        .flex-el .line {
+            position: absolute;
+            left: 0%;
+            bottom: -2px;
+            width: 60px;
+            height: 4px;
+            background-color: var(--main-color);
+            transition: left 0.5s;
+        }
+
+        .flex-el .nav-item:hover {
+            background-color: unset;
+            color: unset;
+        }
+
+        .flex-el .nav-item:nth-child(1):hover~.line {
+            left: 0;
+        }
+
+        .flex-el .nav-item:nth-child(2):hover~.line {
+            left: 60px;
+        }
+
+        .flex-el .nav-item:nth-child(3):hover~.line {
+            left: 120px;
+        }
+
+        .flex-el .nav-item:nth-child(4):hover~.line {
+            left: 180px;
+        }
+
         /* grid */
         .grid {
             display: grid;
             grid-template-columns: 1fr auto;
             align-items: center;
+        }
+
+        .grid .nav-item {
+            background-image: linear-gradient(to right, var(--main-color), var(--main-color));
+            background-position: right bottom;
+            background-size: 0px 4px;
+            /* MUST background-size */
+            transition: background-size 0.5s;
+            background-repeat: no-repeat;
+        }
+
+        .grid .nav-item:hover {
+            background-color: unset;
+            color: unset;
+            background-position: left bottom;
+            background-size: 100% 4px;
         }
 
         /* docker */
@@ -190,11 +278,29 @@
         .docker .item:hover {
             width: 60px;
             height: 60px;
-            color: #0a0;
+            color: var(--main-color);
         }
 
         .docker .item:hover .iconfont {
             font-size: 20px;
+        }
+
+        /* icon verticle */
+        .icon-v {
+            display: flex;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        .icon-v .nav-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            transition: 0.5s;
+        }
+
+        .icon-v .nav-item:hover {
+            transform: translateY(-40px);
         }
     </style>
 </head>
@@ -259,7 +365,7 @@
                 <a class="nav-item" href="#">about</a>
             </nav>
         </div>
-        <p>nav + a float line-height</p>
+        <p>nav + a + float line-height</p>
         <div class="nav-wrap float-ul clear">
             <a href="#" class="logo">
                 <h1>Float</h1>
@@ -271,7 +377,7 @@
                 <li><a class="nav-item" href="#">about</a></li>
             </ul>
         </div>
-        <p>ul + li + a float</p>
+        <p>ul + li + a + float</p>
         <div class="nav-wrap flex">
             <a href="#" class="logo">
                 <h1>Flex</h1>
@@ -283,7 +389,20 @@
                 <a class="nav-item" href="#">about</a>
             </nav>
         </div>
-        <p>nav + a flex</p>
+        <p>nav + a + flex + bg-color</p>
+        <div class="nav-wrap flex-el">
+            <a href="#" class="logo">
+                <h1>Flex</h1>
+            </a>
+            <nav class="nav">
+                <a class="nav-item" style="--pos:0" href="#">home</a>
+                <a class="nav-item" style="--pos:1" href="#">work</a>
+                <a class="nav-item" style="--pos:2" href="#">team</a>
+                <a class="nav-item" style="--pos:3" href="#">about</a>
+                <div class="line"></div>
+            </nav>
+        </div>
+        <p>nav + a + flex + el/line</p>
         <div class="nav-wrap grid">
             <a href="#" class="logo">
                 <h1>Grid</h1>
@@ -295,7 +414,31 @@
                 <a class="nav-item" href="#">about</a>
             </nav>
         </div>
-        <p>nav + a grid</p>
+        <p>nav + a + grid + bg-img</p>
+        <div class="nav-wrap icon-v">
+            <a href="#" class="logo">
+                <h1>Icon</h1>
+            </a>
+            <nav class="nav">
+                <a class="nav-item" href="#">
+                    <span class="iconfont icon-home"></span>
+                    <span>home</span>
+                </a>
+                <a class="nav-item" href="#">
+                    <span class="iconfont icon-statis"></span>
+                    <span>work</span>
+                </a>
+                <a class="nav-item" href="#">
+                    <span class="iconfont icon-account"></span>
+                    <span>team</span>
+                </a>
+                <a class="nav-item" href="#">
+                    <span class="iconfont icon-settings1"></span>
+                    <span>about</span>
+                </a>
+            </nav>
+        </div>
+        <p>icon vertical</p>
         <div class="docker">
             <div class="item"><span class="iconfont icon-home"></span></div>
             <div class="item"><span class="iconfont icon-account"></span></div>
@@ -304,7 +447,6 @@
             <div class="item"><span class="iconfont icon-edit"></span></div>
             <div class="item"><span class="iconfont icon-settings1"></span></div>
             <div class="item"><span class="iconfont icon-statis"></span></div>
-            <div class="item"><span class="iconfont icon-settings1"></span></div>
         </div>
         <p>docker</p>
     </div>
