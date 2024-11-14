@@ -147,7 +147,6 @@
     <dt class="nav-cont">概述 Overview</dt>
     <dd>
       <div>.使用关键字 @keyframes 定义诺干个关键帧来表示元素的状态</div>
-      <div>.动画结束后，默认回到起始状态</div>
       <!-- <div>.皮影戏和早期非常流行的 flash 动画也是采用关键帧实现</div> -->
       <div>.更多高级动画，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation">MDN -
           animation</a>、<a href="./framework/animate.html">Animate使用</a>、<a
@@ -179,29 +178,39 @@
       </table>
     </dd>
     <dt>定义动画 Definition</dt>
-    <dd class="sn">
-      <div>利用关键字 from 和 to；通常省略 from，表示从当前状态开始；关键字只能定义2个状态</div>
-      <pre>
+    <dd>
+      <div>.初始状态：元素应用动画前的状态</div>
+      <div>.开始状态/第一个关键帧状态：如果不指定0%或from，则元素初始状态就是开始状态/第一个关键帧状态</div>
+      <div>.结束状态/最后一个关键帧状态：如果不指定100%或to，则元素初始状态就是结束状态/最后一个关键帧状态</div>
+      <div>.动画结束后，默认回到初始状态</div>
+      <div class="sn">
+        <div>利用关键字 from 和 to；通常省略 from，表示从初始状态开始；关键字只能定义2个状态</div>
+        <pre>
 @keyframes ani_name {
     from {
+      /* 开始状态/第一个关键帧 */
     }
 
     to {
+      /* 结束状态/最后一个关键帧 */
     }
 }</pre>
-      <div>利用百分比：可以定义多个百分比节点/状态，动画效果更为灵活细腻</div>
-      <pre>
+        <div>利用百分比：可以定义多个百分比节点/状态，动画效果更为灵活细腻</div>
+        <pre>
 @keyframes ani_name {
-    0% {      
+    0% {  
+      /* 开始状态/第一个关键帧 */    
     }
 
-    50% {      
+    50% {    
+      /* 中间状态/中间关键帧 */  
     }
 
-    100% {      
+    100% {  
+      /* 结束状态/最后一个关键帧 */    
     }
 }</pre>
-    </dd>
+      </div>
     <dt>使用动画 Usage</dt>
     <dd class="sn">
       <p>.可以使用复合属性语法；也可以使用单独属性语法</p>
@@ -217,6 +226,9 @@ animation-iteration-count:
 animation-direction:
 animation-fill-mode:
 </pre>
+    </dd>
+    <dt>动画属性</dt>
+    <dd>
       <table>
         <caption>动画属性</caption>
         <tr>
@@ -253,10 +265,10 @@ animation-fill-mode:
         <tr>
           <td>fill-mode</td>
           <td>动画开始和结束时如何应用状态/样式
-            <br>none：不指定，从元素当前状态开始，结束后返回当前动态；默认值
-            <br> backwards：动画开始时，应用起始状态/0%，结束后返回当前动态
-            <br> forward：结束时，应用结束状态/100%；特别适合多个有延迟的动画
-            <br>both：从定义的开始状态开始，结束时应用结束状态，不会返回开始状态和元素当前状态
+            <br>none：不指定，从元素初始状态开始，结束后返回初始状态；默认值
+            <br>backwards：动画开始时，应用第一个关键帧状态；结束时返回初始状态
+            <br>forwards：动画开始时，元素保持初始状态；结束时，保持在最后一个关键帧状态；特别适合多个有延迟的动画
+            <br>both：从第一个关键帧状态开始，结束时保持在最后一个关键帧状态；不会返回初始状态
           </td>
         </tr>
         <tr>
@@ -269,7 +281,7 @@ animation-fill-mode:
         </tr>
       </table>
       <table>
-        <caption>动画方式 animation-timing-function</caption>
+        <caption>动画方式 animation-timing-function</擦【>
         <tr>
           <th style="width: 30%;">类别</th>
           <th>说明</th>
@@ -298,17 +310,113 @@ animation-fill-mode:
           <td>cubic-bezier(n,n,n,n)</td>
           <td>使用 cubic-bezier 函数定义过程</td>
         </tr>
+        <tr>
+          <td>steps()</td>
+          <td>步进动画方式；见后续内容</td>
+        </tr>
       </table>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 动画分析</dd>
+    <dd class="sn">
+      <div>鼠标悬停时，动画从红色#f40开始，变换到绿色#0a0；动画结束后，返回白色#fff</div>
+      <pre>
+.tmp {
+    width: 100px;
+    height: 100px;
+    background-color: #fff;/* 初始状态 */
+}
+
+.tmp:hover {
+    animation: --color 1s;
+}
+
+@keyframes --color {
+    from {
+        background-color: #f40;/* 开始状态 */
+    }
+
+
+    to {
+        background-color: #0a0;/* 结束状态 */
+    }
+}</pre>
+      <div>鼠标悬停时，动画从红色#f40开始，变换到绿色#0a0；动画结束后，保持在绿色#0a0</div>
+      <pre>
+.tmp {
+    width: 100px;
+    height: 100px;
+    background-color: #fff;/* 初始状态 */
+}
+
+.tmp:hover {
+    animation: --color 1s forwards;/* forwards*/
+}
+
+@keyframes --color {
+    from {
+        background-color: #f40;/* 开始状态 */
+    }
+
+
+    to {
+        background-color: #0a0;/* 结束状态 */
+    }
+}</pre>
+      <div>鼠标悬停时，动画从白色#fff开始，变换到绿色#0a0；动画结束后，返回白色#fff</div>
+      <pre>
+.tmp {
+    width: 100px;
+    height: 100px;
+    background-color: #fff;/* 初始状态；也是开始状态 */
+}
+
+.tmp:hover {
+    animation: --color 1s;
+}
+
+@keyframes --color {
+
+    to {
+        background-color: #0a0;/* 结束状态 */
+    }
+}</pre>
+      <div>鼠标悬停时，动画从红色#f40开始，变换到白色#fff；动画结束后，返回白色#fff；不建议使用，应该显式的指定结束状态</div>
+      <pre>
+.tmp {
+    width: 100px;
+    height: 100px;
+    background-color: #fff;/* 初始状态；也是结束状态 */
+}
+
+.tmp:hover {
+    animation: --color 1s;
+}
+
+@keyframes --color {
+
+    from {
+        background-color: #f40;/* 开始状态 */
+    }
+}</pre>
+      <div>鼠标悬停时，动画从红色#f40开始，变换到绿色#0a0；动画结束后，返回白色#fff；不使用 backwards，不指定 from，相当于第3种情况</div>
+      <pre>
+.tmp:hover {
+    animation: --color 1s backwards;
+}
+
+@keyframes --color {
+    from {
+        background-color: #f40;
+    }
+
+
+    to {
+        background-color: #0a0;
+    }
+}</pre>
     </dd>
     <dt>其他说明</dt>
     <dd>
-      <div>.如果没有显式的指定结束状态为100%，则默认返回起始状态</div>
-      <pre>
-@keyframes blink {
-  50% {
-    color: #000;
-  }
-}</pre>
       <div>.多个动画使用逗号,分隔，可以分别指定某个动画的属性</div>
       <div>.先播放第一个动画 roll，接着播放第二个动画 zoom，然后一直循环播放第二个动画</div>
       <pre>
@@ -328,6 +436,7 @@ animation:
     <dd>
       <div>.使用margin-right实现</div>
       <div>.请使用其它属性实现</div>
+      <pre>animation: mov 10s linear infinite;</pre>
       <pre>
 @keyframes mov {
   0% {
@@ -341,14 +450,30 @@ animation:
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animBubble.html">气泡 bubble</a></dd>
     <dd>
-      <div>.内联变量 style</div>
+      <div>.内联变量 style；结构要随机错开顺序</div>
       <div>.滤镜 filter</div>
       <div>.盒阴影 box-shadow</div>
+      <pre>animation: floating calc(100s/var(--i)) linear infinite;</pre>
+      <pre>
+@keyframes floating {
+    from {
+        transform: translateY(100vh) scale(0);
+    }
+
+    to {
+        transform: translateY(-10vh) scale(1);
+    }
+}      </pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/form2.html">边框动画</a></dd>
     <dd>
       <div>.盒阴影 box-shadow</div>
       <div>.获取焦点 :focus 时重复播放</div>
+      <pre>
+input:focus,
+textarea:focus {
+  animation: --border 1s linear infinite alternate;
+}      </pre>
       <pre>
 @keyframes --border {
   from {
@@ -360,11 +485,12 @@ animation:
   }
 }      </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/avatar0.html">头像背景动画</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/avatar.html">头像背景动画</a></dd>
     <dd>
       <div>.渐变背景 linear-gradient()</div>
       <div>.定位 Position</div>
       <div>.变换 transform - rotate</div>
+      <pre>animation: roll 5s linear infinite;</pre>
       <pre>
 @keyframes roll {
     to {
@@ -375,18 +501,18 @@ animation:
     <dd>[<span class="iconfont icon-keyboard"></span>] 进度条</dd>
     <dd>
       <div>1. <a href="./demo/loading-line.html">平滑缩放</a></div>
-      <div>.宽度从0到100%</div>
+      <div>.宽度从0到100%，最后保持在100%</div>
       <div>.可以使用伪元素节省元素</div>
       <div>.可以使用变换缩放实现</div>
       <pre>
 .per{
-    animation: --per 10s linear alternate infinite;
+    animation: --per 10s linear forwards;
 }    </pre>
       <pre>
 @keyframes --per {
-  to {
-      width: 100%;
-  }
+    100% {
+        width: 100%;
+    }
 }</pre>
       <div>2. 除了自动播放，也可以鼠标 :hover 时触发动画</div>
       <pre>
@@ -399,6 +525,7 @@ animation:
     animation-play-state: running;
 }</pre>
       <div>3. <a href="./demo/transform-loading-line.html">多彩进度条</a>、<a href="./demo/loading-ring.html">进度环</a></div>
+      <div>.延迟时间等分</div>
       <div>.内联变量 --val</div>
       <div>.取值函数 var()</div>
       <div>.变换 transform</div>

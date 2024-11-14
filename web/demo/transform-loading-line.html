@@ -31,13 +31,19 @@
             height: 6px;
             border-radius: 50%;
             background-color: #f40;
-            /* box-shadow: 0 0 4px var(--bar-y-color); */
-            animation: scale 1s ease-in-out alternate infinite;
-            animation-delay: calc(var(--del) * 0.2s);
+            animation: scale 1s ease-in-out infinite backwards;
+            animation-delay: calc(var(--del) * 0.1s);
         }
 
         @keyframes scale {
-            to {
+
+            0%,
+            100% {
+                transform: scale(0);
+                filter: hue-rotate(0deg);
+            }
+
+            50% {
                 transform: scale(3);
                 filter: hue-rotate(360deg);
             }
