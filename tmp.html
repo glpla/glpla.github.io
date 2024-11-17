@@ -7,8 +7,6 @@
     <title>20230110大树</title>
     <link rel="stylesheet" href="./css/style.css">
     <style>
-        @import url('https://fonts.font.im/css?family=Roboto:300,400,500,700');
-
         /* 规则 rules */
         /* 选择器 selector */
         html {
@@ -17,11 +15,48 @@
             color: #333;
             font-family: 'Roboto', sans-serif;
         }
+
+        .box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 100px auto;
+        }
+
+        label {
+            position: relative;
+            width: 50px;
+            height: 30px;
+            background-color: #eee;
+            border-radius: 20px;
+        }
+
+        label::before {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #fff;
+            transition: all 0.5s;
+        }
+
+        .box input:checked+label::before {
+            left: calc(50px - 3px - 24px);
+            background-color: #f40;
+        }
     </style>
 </head>
 
 <body>
-    <div class="box" style="color: #f40;">你好世界</div>
+    <div class="box">
+        <span>male</span>
+        <input type="checkbox" id="gender" hidden>
+        <label for="gender"></label>
+        <span>female</span>
+    </div>
 </body>
 
 </html>

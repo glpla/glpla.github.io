@@ -191,7 +191,8 @@ transition-delay:</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 选中类 :checked - 多见于表单的单选按钮或多选按钮的设计</dd>
     <dd>
-      <div><a href="./demo/form-custom.html">表单元素定制 radio & checkbox</a></div>
+      <div><a href="./demo/form-custom.html">定制 radio</a></div>
+      <div><a href="./demo/form-custom.html">定制 checkbox</a></div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 事件类 - 单击时，为元素添加动态类，进而改变样式</dd>
     <dd>
@@ -356,20 +357,32 @@ transition-delay:</pre>
         <div class="step-demo-start"></div>
       </div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] loading进度条 - 从0到100%</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/border-skill.html">技能条/进度条</a> - 从0到100%</dd>
     <dd>
-      <div>. 先加载再更新，所以应使用默认的end方向</div>
-      <div>. 为了避免状态翻转，在结束态中指定过渡</div>
+      <div>. 这里使用 :hover 模拟加载情况</div>
+      <div>. 先加载再更新，所以应使用默认的 end 方向</div>
+      <div>. 静态和动态分别使用不同的过渡效果</div>
       <pre>
-.step-demo-loading {
-    width: 0px;
-    height: 50px;
-    background-color: #f40;
+.loading {
+    display: flex;
+    width: 300px;
+    height: 40px;
+    border: 1px solid #f40;
+    padding: 4px;
+    margin: 100px auto;
 }
 
-.step-demo-loading:hover {
+.loading::before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    background-color: #f40;
+    transition: width 1s linear;
+}
+
+.loading:hover::before {
+    transition: width 5s steps(5);
     width: 100%;
-    transition: 10s steps(10);
 }</pre>
     </dd>
   </dl>

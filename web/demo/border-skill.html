@@ -79,6 +79,29 @@
             height: 30px;
             background-color: #089;
         }
+
+        /* loading */
+        .loading {
+            display: flex;
+            width: 300px;
+            height: 40px;
+            border: 1px solid #f40;
+            padding: 4px;
+            margin: 100px auto;
+        }
+
+        .loading::before {
+            content: '';
+            width: 0%;
+            height: 100%;
+            background-color: #f40;
+            transition: width 1s linear;
+        }
+
+        .loading:hover::before {
+            transition: width 5s steps(5);
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -104,6 +127,7 @@
             <div class="per"></div>
         </div>
     </div>
+    <div class="loading"></div>
 </body>
 
 </html>
