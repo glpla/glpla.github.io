@@ -109,10 +109,35 @@
         .icon-holder input:focus+.iconfont {
             margin-left: 100%;
         }
+
+        .static {
+            display: flex;
+            align-items: center;
+            width: 300px;
+        }
+
+        .static input {
+            border-bottom: 1px solid #ccc;
+            height: 40px;
+        }
+
+        .static input::selection {
+            background-color: #f40;
+            color: #fff;
+        }
+
+        .static input:focus {
+            color: #f40;
+            border-color: #f40;
+        }
     </style>
 </head>
 
 <body>
+    <div class="static">
+        <label for="static">Name</label>
+        <input type="text" id="static" name="uname" placeholder="your name" maxlength="12" required>
+    </div>
     <div class="ipt-box">
         <input type="text" required>
         <div class="single">your name</div>
