@@ -5,33 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>20230110大树</title>
+    <link rel="stylesheet" href="./css/style.css">
     <style>
-        .box {
-            color: #f40;
-            font-size: 20px;
+        @import url('https://fonts.font.im/css?family=Roboto:300,400,500,700');
+
+        /* 规则 rules */
+        /* 选择器 selector */
+        html {
+            /* 值对 name : value pairs */
+            font-size: 16px;
+            color: #333;
+            font-family: 'Roboto', sans-serif;
         }
+
+    .page {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-areas:
+            'header header header'
+            'nav nav nav'
+            'aside article article'
+            'footer footer footer';
+        min-height: 100vh;
+        gap: 1rem;
+    }
+
+    header {
+        grid-area: header;
+    }
+
+    nav {
+        grid-area: nav;
+    }
+
+    aside {
+        grid-area: aside;
+    }
+
+    article {
+        grid-area: article;
+    }
+
+    footer {
+        grid-area: footer;
+    }
     </style>
 </head>
 
 <body>
-    <form action="" target="" method="">
-        <input type="text" name="" id="" maxlength="" placeholder="" required />">
-        <input type="checkbox" name="gender" id="male" value="male" checked>
-        <label for="male">male</label>
-        <input type="checkbox" name="gender" value="female" id="female">
-        <label for="female">female</label>
-
-        <input type="button" value="按钮">
-        <button type="button">提交</button>
-
-        <input type="submit" value="提交">
-        <button type="submit">提交</button>
-
-        <input type="reset" value="重置">
-        <button type="reset">提交</button>
-    <textarea name="" id="" placeholder="" maxlength="" required></textarea>
-    </form>
-    <div class="box">你好世界</div>
+    <div class="box" style="color: #f40;">你好世界</div>
 </body>
 
 </html>
