@@ -211,6 +211,7 @@
     }
 }</pre>
       </div>
+    </dd>
     <dt>使用动画 Usage</dt>
     <dd class="sn">
       <p>.可以使用复合属性语法；也可以使用单独属性语法</p>
@@ -362,7 +363,7 @@ animation-fill-mode:
         background-color: #0a0;/* 结束状态 */
     }
 }</pre>
-      <div>鼠标悬停时，动画从白色#fff开始，变换到绿色#0a0；动画结束后，返回白色#fff</div>
+      <div>未指定开始状态；鼠标悬停时，动画从白色#fff开始，变换到绿色#0a0；动画结束后，返回白色#fff</div>
       <pre>
 .tmp {
     width: 100px;
@@ -400,6 +401,12 @@ animation-fill-mode:
 }</pre>
       <div>鼠标悬停时，动画从红色#f40开始，变换到绿色#0a0；动画结束后，返回白色#fff；不使用 backwards，不指定 from，相当于第3种情况</div>
       <pre>
+.tmp {
+    width: 100px;
+    height: 100px;
+    background-color: #fff;/* 初始状态 */
+}
+  
 .tmp:hover {
     animation: --color 1s backwards;
 }
@@ -448,6 +455,42 @@ animation:
   }
 }      </pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 进度条</dd>
+    <dd>
+      <div>1. <a href="./demo/loading-line.html">平滑缩放</a></div>
+      <div>.宽度从0到100%，最后保持在100%</div>
+      <div>.可以使用伪元素节省元素</div>
+      <div>.可以使用变换缩放实现</div>
+      <pre>
+.per{
+    animation: --per 10s linear forwards;
+}    </pre>
+      <pre>
+@keyframes --per {
+    100% {
+        width: 100%;
+    }
+}</pre>
+      <div>2. 除了自动播放，也可以鼠标 :hover 时触发动画</div>
+      <pre>
+.per {
+  /* 暂停动画 */
+  animation-play-state: paused;
+}
+
+.loading:hover .per {
+    animation-play-state: running;
+}</pre>
+      <div>3. <a href="./demo/transform-loading-line.html">多彩进度条</a>、<a href="./demo/loading-ring.html">进度环</a></div>
+      <div>.延迟时间等分</div>
+      <div>.内联变量 --val</div>
+      <div>.取值函数 var()</div>
+      <div>.变换 transform</div>
+      <div>.滤镜 filter</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/anim-delay.html">延迟动画</a> - 多个元素依次/延迟移入视口；更多案例，请访问
+      <a href="./demo/form-transition-bak.html">页面动画-简化版</a>、<a href="./demo/form-transition.html">页面动画</a>、<a
+        href="./demo/animPage.html">页面动画</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animBubble.html">气泡 bubble</a></dd>
     <dd>
       <div>.内联变量 style；结构要随机错开顺序</div>
@@ -498,41 +541,6 @@ textarea:focus {
     }
 }</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 进度条</dd>
-    <dd>
-      <div>1. <a href="./demo/loading-line.html">平滑缩放</a></div>
-      <div>.宽度从0到100%，最后保持在100%</div>
-      <div>.可以使用伪元素节省元素</div>
-      <div>.可以使用变换缩放实现</div>
-      <pre>
-.per{
-    animation: --per 10s linear forwards;
-}    </pre>
-      <pre>
-@keyframes --per {
-    100% {
-        width: 100%;
-    }
-}</pre>
-      <div>2. 除了自动播放，也可以鼠标 :hover 时触发动画</div>
-      <pre>
-.per {
-  /* 暂停动画 */
-  animation-play-state: paused;
-}
-
-.loading:hover .per {
-    animation-play-state: running;
-}</pre>
-      <div>3. <a href="./demo/transform-loading-line.html">多彩进度条</a>、<a href="./demo/loading-ring.html">进度环</a></div>
-      <div>.延迟时间等分</div>
-      <div>.内联变量 --val</div>
-      <div>.取值函数 var()</div>
-      <div>.变换 transform</div>
-      <div>.滤镜 filter</div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/form-transition-bak.html">页面动画-简化版</a>、<a
-        href="./demo/form-transition.html">页面动画</a>、<a href="./demo/animPage.html">页面动画</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/xxMBKdP">Text -
         CodePen</a></dd>
     <dd>

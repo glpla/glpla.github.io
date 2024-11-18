@@ -7,6 +7,12 @@
     <title>20230110大树</title>
     <link rel="stylesheet" href="./css/style.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         /* 规则 rules */
         /* 选择器 selector */
         html {
@@ -16,47 +22,36 @@
             font-family: 'Roboto', sans-serif;
         }
 
-        .box {
+        body {
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 10px;
-            margin: 100px auto;
+            min-height: 100vh;
         }
 
-        label {
-            position: relative;
-            width: 50px;
-            height: 30px;
-            background-color: #eee;
-            border-radius: 20px;
+        .tmp {
+            width: 0px;
+            height: 40px;
+            background-image: linear-gradient(to right, #f40, #0a0);
+            animation: --color 1s backwards;
         }
 
-        label::before {
-            content: '';
-            position: absolute;
-            left: 3px;
-            top: 3px;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background-color: #fff;
-            transition: all 0.5s;
-        }
+        @keyframes --color {
+            from {
+                width: 0;
+            }
 
-        .box input:checked+label::before {
-            left: calc(50px - 3px - 24px);
-            background-color: #f40;
+
+            to {
+                width: 300px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="box">
-        <span>male</span>
-        <input type="checkbox" id="gender" hidden>
-        <label for="gender"></label>
-        <span>female</span>
-    </div>
+    <div class="tmp"></div>
 </body>
 
 </html>
