@@ -30,28 +30,29 @@
             min-height: 100vh;
         }
 
-        .tmp {
-            width: 0px;
-            height: 40px;
-            background-image: linear-gradient(to right, #f40, #0a0);
-            animation: --color 1s backwards;
+        .steps {
+            width: 50px;
+            height: 50px;
+            background-image: url(./web/imgs/steps.png);
+            animation: --bg-pos 9s steps(9);
         }
 
-        @keyframes --color {
-            from {
-                width: 0;
-            }
-
-
+        @keyframes --bg-pos {
             to {
-                width: 300px;
+                background-position: 0 -450px;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="tmp"></div>
+    <div class="steps"></div>
+    <script>
+        const steps = document.querySelector('.steps');
+        steps.addEventListener('animationend', function () {
+            alert('动画结束');
+        })
+    </script>
 </body>
 
 </html>

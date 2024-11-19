@@ -488,9 +488,11 @@ animation:
       <div>.变换 transform</div>
       <div>.滤镜 filter</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/anim-delay.html">延迟动画</a> - 多个元素依次/延迟移入视口；更多案例，请访问
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/anim-delay.html">延迟动画</a> -
+      多个元素依次/延迟移入视口；更多案例，请访问
       <a href="./demo/form-transition-bak.html">页面动画-简化版</a>、<a href="./demo/form-transition.html">页面动画</a>、<a
-        href="./demo/animPage.html">页面动画</a></dd>
+        href="./demo/animPage.html">页面动画</a>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animBubble.html">气泡 bubble</a></dd>
     <dd>
       <div>.内联变量 style；结构要随机错开顺序</div>
@@ -655,19 +657,65 @@ header {
       <div>number_of_steps：数字，过渡分几个阶段完成</div>
       <div>direction：start 和 end，默认是 end，指每个阶段过渡结束后才渲染；start 则是过渡开始前就渲染</div>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/loading-line.html">进度条 - 步进</a>、<a
+        href="./demo/loading.html">进度条 - 模拟加载页</a></dd>
+    <dd>
+      <div>.元素的宽度经过10次步进从0变换到100%</div>
+      <pre>
+.step {
+  width: 0;
+    background-image: linear-gradient(to right, #089, #0af);
+    box-shadow: 0 0 10px #08a, 0 0 20px #08a, 0 0 40px #08a;
+    animation: --per 5s steps(10) forwards;
+}
+
+@keyframes --per {
+    to {
+        width: 100%;
+    }
+}          </pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animIcon.html">图标动画 - 3D Icon</a></dd>
     <dd>
       <div>.使用精灵图作为背景，包括24个icon</div>
+      <div>.每个icon大小为150*150，精灵图大小为150*3600；24*150 = 3600</div>
+      <div>.最上边位置为0 0，最下边位置为 0 -（3600 - 150）</div>
       <div>.通过步进调整背景图片位置</div>
       <div>.分别定义静态动画和鼠标悬停 hover 动画</div>
       <div>.注意素材的设计和收集</div>
+      <div>.鼠标移出：从底部返回顶部</div>
+      <pre>
+@keyframes icon-leave {
+    from {
+        background-position: 0 -3450px;
+    }
+
+    to {
+        background-position: 0 0;
+    }
+}
+</pre>
+      <div>.鼠标移入：从顶部移动到底部</div>
+      <pre>
+@keyframes icon-enter {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 0 -3450px;
+    }
+}      </pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animCountdown.html">倒计时 -
         Countdown</a></dd>
     <dd>
-      <div>.使用4张背景图片</div>
+      <div>1. 使用4张背景图片</div>
       <div>.从3依次减到0，分3段进行</div>
       <div>.利用步进调整图片的水平位置</div>
+      <div>2. 使用精灵图</div>
+      <div>.精灵图大小50*500</div>
+      <div>.每个数字大小50*50</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 轮播图 swiper</dd>
     <dd>
