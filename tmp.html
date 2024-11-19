@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>20230110大树</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3859342_xaua6qnifpl.css">
     <style>
         * {
             margin: 0;
@@ -13,14 +13,13 @@
             box-sizing: border-box;
         }
 
-        /* 规则 rules */
-        /* 选择器 selector */
-        html {
-            /* 值对 name : value pairs */
-            font-size: 16px;
-            color: #333;
-            font-family: 'Roboto', sans-serif;
+        a {
+            font: inherit;
+            color: inherit;
+            text-decoration: none;
         }
+
+
 
         body {
             display: flex;
@@ -30,29 +29,34 @@
             min-height: 100vh;
         }
 
-        .steps {
-            width: 50px;
-            height: 50px;
-            background-image: url(./web/imgs/steps.png);
-            animation: --bg-pos 9s steps(9);
+
+        .logo {
+            position: relative;
+            display: block;
+            width: 60px;
+            height: 60px;
+            background-image: url(./imgs/avatar.jpg);
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
         }
 
-        @keyframes --bg-pos {
-            to {
-                background-position: 0 -450px;
-            }
+        .logo::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: -5px;
+            width: 70px;
+            height: 70px;
+            background-color: #fff;
+            background-image: linear-gradient(#f40, #089);
+            border-radius: 50%;
+            z-index: -1;
         }
     </style>
 </head>
 
 <body>
-    <div class="steps"></div>
-    <script>
-        const steps = document.querySelector('.steps');
-        steps.addEventListener('animationend', function () {
-            alert('动画结束');
-        })
-    </script>
 </body>
 
 </html>
