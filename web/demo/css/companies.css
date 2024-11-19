@@ -534,7 +534,6 @@ footer {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    display: block;
     width: 48px;
     height: 48px;
     line-height: 48px;
@@ -542,6 +541,20 @@ footer {
     border-radius: 50%;
     background-color: var(--pri-color);
     z-index: 200;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.back.fixed {
+    display: block;
+    animation: --back 1s linear forwards;
+}
+
+@keyframes --back {
+    to {
+        pointer-events: all;
+        opacity: 1;
+    }
 }
 
 .back i {

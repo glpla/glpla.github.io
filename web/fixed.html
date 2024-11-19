@@ -33,8 +33,8 @@
   </dl>
   <div class="chap">案例 cases</div>
   <dl>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 返回顶部 - 将返回顶部按钮始终定位在页面右下角；也可以先隐藏返回顶部，当页面滚动到一定位置时再出现，一般需要借助
-      JavaScript 实现；本例采用阿里字体图标实现；锚点置空，默认返回本页面</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 返回顶部 -
+      将返回顶部按钮始终定位在页面右下角；本例采用阿里字体图标实现；锚点置空，默认返回本页面</dd>
     <dd>
       <pre>
 .back-fixed {
@@ -43,6 +43,13 @@
     bottom: 2rem;
     cursor: pointer;
 }</pre>
+      <div>也可以先隐藏返回顶部，当页面滚动到一定位置时再出现，一般需要借助
+        JavaScript 实现；详情请访问 <a href="./demo/companies.html">网站 - 返回顶部</a></div>
+      <pre>
+const back = document.querySelector('.back')
+window.addEventListener('scroll', () => {
+    back.classList.toggle('fixed', window.scrollY > 500)
+})        </pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 顶部固定 - 导航菜单、用户注册与登录、网站更新通知等等</dd>
     <dd class="top-fixed">

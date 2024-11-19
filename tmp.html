@@ -19,8 +19,6 @@
             text-decoration: none;
         }
 
-
-
         body {
             display: flex;
             flex-direction: column;
@@ -29,34 +27,32 @@
             min-height: 100vh;
         }
 
-
-        .logo {
-            position: relative;
-            display: block;
-            width: 60px;
-            height: 60px;
-            background-image: url(./imgs/avatar.jpg);
-            background-size: cover;
-            background-position: center;
-            border-radius: 50%;
+        .back {
+            position: fixed;
+            right: 100px;
+            bottom: 100px;
+            display: none;
         }
 
-        .logo::before {
-            content: '';
-            position: absolute;
-            left: -5px;
-            top: -5px;
-            width: 70px;
-            height: 70px;
-            background-color: #fff;
-            background-image: linear-gradient(#f40, #089);
-            border-radius: 50%;
-            z-index: -1;
+        .back.fixed {
+            display: block;
+        }
+
+        .test {
+            height: 300vh;
         }
     </style>
 </head>
 
 <body>
+    <div class="back">back</div>
+    <div class="test"></div>
+    <script>
+    const back = document.querySelector('.back')
+    window.addEventListener('scroll', () => {
+        back.classList.toggle('fixed', window.scrollY > 500)
+    })
+    </script>
 </body>
 
 </html>

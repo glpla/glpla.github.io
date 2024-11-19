@@ -18,4 +18,6 @@ window.addEventListener('scroll', () => {
 
   const header = document.querySelector('header')
   header.classList.toggle('sticky', window.scrollY > 100)
+  const back = document.querySelector('.back')
+  back.classList.toggle('fixed', window.scrollY > 500)
 })
