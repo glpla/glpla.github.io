@@ -27,32 +27,27 @@
             min-height: 100vh;
         }
 
-        .back {
-            position: fixed;
-            right: 100px;
-            bottom: 100px;
-            display: none;
+        .box {
+            width: 800px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
         }
 
-        .back.fixed {
-            display: block;
-        }
-
-        .test {
-            height: 300vh;
+        img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
         }
     </style>
 </head>
 
 <body>
-    <div class="back">back</div>
-    <div class="test"></div>
-    <script>
-    const back = document.querySelector('.back')
-    window.addEventListener('scroll', () => {
-        back.classList.toggle('fixed', window.scrollY > 500)
-    })
-    </script>
+    <div class="box">
+        <img src="./imgs/demo.jpg" alt=""><img src="./imgs/demo.jpg" alt=""><img src="./imgs/demo.jpg" alt=""><img
+            src="./imgs/demo.jpg" alt=""><img src="./imgs/demo.jpg" alt=""><img src="./imgs/demo.jpg" alt=""><img
+            src="./imgs/demo.jpg" alt=""><img src="./imgs/demo.jpg" alt=""><img src="./imgs/demo.jpg" alt="">
+    </div>
 </body>
 
 </html>
