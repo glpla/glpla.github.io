@@ -180,8 +180,8 @@
     <dt>定义动画 Definition</dt>
     <dd>
       <div>.初始状态：元素应用动画前的状态</div>
-      <div>.开始状态/第一个关键帧状态：如果不指定0%或from，则元素初始状态就是开始状态/第一个关键帧状态</div>
-      <div>.结束状态/最后一个关键帧状态：如果不指定100%或to，则元素初始状态就是结束状态/最后一个关键帧状态</div>
+      <div>.start state/开始状态/第一个关键帧状态：如果不指定0%或from，则元素初始状态就是开始状态/第一个关键帧状态</div>
+      <div>.end state/结束状态/最后一个关键帧状态：如果不指定100%或to，则元素初始状态就是结束状态/最后一个关键帧状态</div>
       <div>.动画结束后，默认回到初始状态</div>
       <div class="sn">
         <div>利用关键字 from 和 to；通常省略 from，表示从初始状态开始；关键字只能定义2个状态</div>
@@ -242,7 +242,11 @@ animation-fill-mode:
         </tr>
         <tr>
           <td>duration</td>
-          <td>动画持续时间；单位秒 s 或毫秒 ms</td>
+          <td>动画持续时间 - length of time that an animation takes to complete one cycle
+            <br>单位秒 s 或毫秒 ms
+            <br>必须是正值或0 - must be positive or zero
+            <br>必须指定单位 - unit is required
+          </td>
         </tr>
         <tr>
           <td>timing-function</td>
@@ -250,7 +254,10 @@ animation-fill-mode:
         </tr>
         <tr>
           <td>delay</td>
-          <td>动画延迟时间，必须是第2个时间参数</td>
+          <td>动画延迟时间，必须是第2个时间参数
+            <br>正值 positive value：推迟
+            <br>负值 negative value：提前
+          </td>
         </tr>
         <tr>
           <td>iteration-count</td>
@@ -261,20 +268,29 @@ animation-fill-mode:
         </tr>
         <tr>
           <td>direction</td>
-          <td>动画方向；reverse | alternate-reverse</td>
+          <td>动画方向
+            <br>alternate：
+            <br>reverse：反向播放
+            <br>alternate-reverse：先反向播放，再正向播放
+          </td>
+          </td>
         </tr>
         <tr>
           <td>fill-mode</td>
-          <td>动画开始和结束时如何应用状态/样式
-            <br>none：不指定，从元素初始状态开始，结束后返回初始状态；默认值
-            <br>backwards：动画开始时，应用第一个关键帧状态；结束时返回初始状态
-            <br>forwards：动画开始时，元素保持初始状态；结束时，保持在最后一个关键帧状态；特别适合多个有延迟的动画
-            <br>both：从第一个关键帧状态开始，结束时保持在最后一个关键帧状态；不会返回初始状态
+          <td>动画开始和结束时如何应用状态/样式 - applies styles to its target before and after its execution
+            <br>none：不指定任何样式；从元素初始状态开始，结束后返回初始状态；默认值
+            <br>backwards：动画开始时，从第一个关键帧开始；如果有延迟，将始终保持在当前状态
+            <br>forwards：动画结束时，保持在最后一个关键帧 - retain the computed values set by the last keyframe；特别适合多个有延迟的动画
+            <br>both：从第一个关键帧开始，结束时保持在最后一个关键帧；不会返回初始状态
           </td>
         </tr>
         <tr>
           <td>animation-play-state</td>
-          <td>动画状态；paused | played</td>
+          <td>动画状态 - whether an animation is running or paused
+            <br> paused：暂停状态 - currently paused
+            <br>running：播放状态 - currently playing
+            <br>可以通过 :hover 或 JavaScript 来控制动画的播放状态
+          </td>
         </tr>
         <tr>
           <td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline">animation-timeline</a></td>
