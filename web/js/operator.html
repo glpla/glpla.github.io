@@ -20,32 +20,32 @@
   <div class="chap">算术运算符</div>
   <dl>
     <dd>.运算符两侧使用空格分隔</dd>
-    <dd>.赋值：自右向左；把=右边的值赋给左边的变量</dd>
+    <dd>.赋值：自右向左；把 = 右边的值赋给左边的变量</dd>
     <dd>.算术：自左向右；从左向右开始计算</dd>
     <dt>+</dt>
-    <dd>.数字的加法</dd>
-    <dd>.字符串的连接</dd>
     <dd>
+      <div>.数字的加法</div>
+      <div>.字符串的连接</div>
       <pre>
 console.log(12 + 30);//32
 console.log(12 + 'HK');//12HK
 console.log("CN" + 'HK');//CNHK</pre>
     </dd>
     <dt>-</dt>
-    <dd>.数字的减法</dd>
     <dd>
+      <div>.数字的减法</div>
       <pre>
 console.log(12 - 30);//-18</pre>
     </dd>
     <dt>*</dt>
-    <dd>.数字的乘法</dd>
     <dd>
+      <div>.数字的乘法</div>
       <pre>
 console.log(12 * 30);//360</pre>
     </dd>
     <dt>/</dt>
-    <dd>.数字的除法</dd>
     <dd>
+      <div>.数字的除法</div>
       <pre>
 console.log(12 / 30);//0.4
 console.log(0 / 0);//NaN
@@ -53,9 +53,9 @@ console.log(12 / 0);//Infinity
 console.log(-12 / 0);//-Infinity</pre>
     </dd>
     <dt>&percnt;</dt>
-    <dd>.数字取余/模</dd>
-    <dd>.运算符后面的数字是模</dd>
     <dd>
+      <div>.数字取余/模</div>
+      <div>.运算符后面的数字是模</div>
       <pre>
 console.log(12 % 30);//12
 console.log(-12 % 30);//-12</pre>
@@ -73,10 +73,10 @@ console.log(-12 % 30);//-12</pre>
     <dd>.数字可以比较</dd>
     <dd>.字符串也可以比较：依次比较对应的ASCII</dd>
     <dd>.不同的数据类型之间也可以比较</dd>
-    <dt>&lt;小于 &le;小于等于</dt>
-    <dt>&gt;大于 &ge;大于等于</dt>
-    <dt>==等于</dt>
-    <dt>!=不等于</dt>
+    <dt>&lt; &le;</dt>
+    <dt>&gt; &ge;</dt>
+    <dt>==</dt>
+    <dt>!=</dt>
     <dd>
       <pre>
 NaN == NaN//false
@@ -85,47 +85,47 @@ null == null//true</pre>
   </dl>
   <div class="chap">逻辑运算符</div>
   <dl>
-    <dt>&amp;&amp;与</dt>
-    <dd>.两个值的情况：先将运算符 左边的表达式 转化为Boolean，如果为真，就返回右边的值；如果为假就返回左边的值，又称短路，碰到假就停止</dd>
-    <dd>.多个值的情况：如果左边为真，就继续往后看；如果还为真，就再继续；如果为假，就停止</dd>
-    <dd>.undefined、null、NaN、""、''、0、false转化为Boolean后，都为false</dd>
-    <dd>.运算符两侧的表达式可以是任何类型，如：根据某个条件，指向相应的动作</dd>
+    <dt>&amp;&amp;</dt>
     <dd>
+      <div>.逻辑与：<span class="warn">求值</span>；用做判断时，根据值决定是真还是假</div>
+      <div>.两个值的情况：先将运算符左边的表达式转化为 Boolean，如果为真，就返回右边的值；如果为假就返回左边的值，又称短路，碰到假就停止</div>
+      <div>.多个值的情况：如果左边为真，就继续往后看；如果还为真，就再继续；如果为假，就停止</div>
+      <div>.undefined、null、NaN、""、''、0、false 转化为 Boolean后，都为 false</div>
+      <div>.运算符两侧的表达式可以是任何类型，如：根据某个条件，指向相应的动作</div>
       <pre>
 res = 1 && 2;//2
-res = 0 && 2;//0
-      </pre>
-    </dd>
-    <dd>
+res = 0 && 2;//0      </pre>
       <pre>
 res = 1 && 2 && 0 && 12 && 3;//0
-res = 0 && 2 && 12 && 23;//0
-      </pre>
-    </dd>
-    <dd>
-      <pre>1 && console.log('hi');//打印输出</pre>
-    </dd>
-    <dd>
+res = 0 && 2 && 12 && 23;//0</pre>
+      <div>.限制或指定某个操作</div>
+      <pre>1 && console.log('hi');//执行打印输出</pre>
       <pre>0 && fn();//不执行函数</pre>
     </dd>
-    <dt>||或</dt>
-    <dd>.执行过程和逻辑与相反。碰到真就返回；因为任何类型和真或都为真，也称断路</dd>
-    <dd>.事件对象的兼容处理。如果有e直接使用；否则使用后面的window.e[IE浏览器的事件对象。随着IE的停服，已经不需要做兼容处理了]</dd>
+    <dt>||</dt>
     <dd>
+      <div>.逻辑或：<span class="warn">求值</span>；判断时，根据值决定是真还是假</div>
+      <div>.执行过程和逻辑与相反。碰到真就返回；因为任何类型和真或都为真，也称断路</div>
+      <pre>
+res = 1 || 2;//1
+res = 0 || 2;//2</pre>
+      <pre>
+res = 1 || 2 || 0 || 12 || 3;//1
+res = 0 || 2 || 12 || 23;//2</pre>
+      <div>.事件对象的兼容处理。如果有e直接使用；否则使用后面的window.e[IE浏览器的事件对象。随着IE的停服，已经不需要做兼容处理了]</div>
       <pre>
 div.addEventListener('click', (e) => {
   let ev = e || window.e;
 })</pre>
     </dd>
-    <dt>!非</dt>
-    <dd>.取反</dd>
-    <dd>.结果是Boolean</dd>
+    <dt>!</dt>
     <dd>
+      <div>.取反</div>
+      <div>.结果是Boolean</div>
       <pre>
 !123//false
 !!123//true
-!!NaN//false
-      </pre>
+!!NaN//false      </pre>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

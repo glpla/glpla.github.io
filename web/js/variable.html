@@ -7,8 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>变量 Variable</title>
   <link rel="stylesheet" href="../../css/common.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
   <base target="_blank">
 </head>
 
@@ -18,10 +16,35 @@
     <span>&commat;Variable</span>
   </header>
   <dl>
+    <dd>
+      <div>. JavaScript 具有隐含的全局概念，意味着你不声明的任何变量都会成为一个全局对象属性</div>
+      <div>. JavaScript 拥有动态类型。这意味着相同的变量可用作不同的类型</div>
+    </dd>
+    <dt>变量声明</dt>
+    <dd class="sn">
+      <div>var</div>
+      <p>默认是全局变量</p>
+      <p>编译时，存在变量提升，并且被初始化为 undefined；意味着你可以在声明之前访问变量，但它的值会是 undefined</p>
+      <p>使用较少</p>
+      <pre>
+console.log(num);//undefined
+var num;</pre>
+      <div>let</div>
+      <p>具备块作用域；具备变量</p>
+      <p>编译时，存在变量提升，但是不会被初始化，因此在变量声明之前访问它会导致引用错误 - ReferenceError。这种情况称为暂时性死区 TDZ - Temporal Dead Zone</p>
+      <p>应：<span class="warn">先声明再使用</span></p>
+      <p>应用较多</p>
+      <pre>
+console.log(num);//Uncaught ReferenceError: Cannot access 'num' before initialization
+let num;</pre>
+    </dd>
     <dt>变量提升</dt>
-    <dd>代码执行前，变量声明和函数声明提升到当前作用域的顶部，即：先处理变量声明和函数声明，如果有重复声明，则后面的声明覆盖前面的声明；然后再处理其它逻辑，如赋值</dd>
-    <dd>赋值不会触发提升</dd>
-    <dd>更多信息，请访问<a href="./precompile.html">预编译 pre-compiler</a></dd>
+    <dd>
+      <div>代码执行前，变量声明和函数声明提升到当前作用域的顶部，即：先处理变量声明和函数声明</div>
+      <div>如果有重复声明，则后面的声明覆盖前面的声明；然后再处理其它逻辑，如赋值</div>
+      <div>赋值不会触发提升</div>
+      <div>更多信息，请访问 <a href="./precompile.html">预编译 pre-compiler</a></div>
+    </dd>
     <dd class="example-sn">变量提升 - msg</dd>
     <dd>原始代码</dd>
     <dd>

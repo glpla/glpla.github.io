@@ -7,8 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>对象 Object</title>
   <link rel="stylesheet" href="../../css/common.css">
-  <link rel="stylesheet" href="../../css/code.css">
-  <link rel="stylesheet" href="../../css/sn.css">
   <base target="_blank">
 </head>
 
@@ -22,14 +20,14 @@
     <dd>.对象其实就是一组数据和功能的集合</dd>
     <dd>.使用点语法或数组语法访问值对</dd>
     <dt>对象静态方法</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>entries()：返回对象入口|键值对组成的数组</div>
       <div>keys()：返回对象键key组成的数组</div>
       <div>values()：返回对象值value组成的数组</div>
       <div>assign(obj,obj1)：赋值；将obj1的内容给obj；要求各值对一一对应</div>
     </dd>
     <dt>对象实例方法</dt>
-    <dd class="number">
+    <dd class="sn">
       <div>增/改</div>
       <pre>
 let obj = { name: 'cnplaman', age: 18 }
@@ -48,7 +46,7 @@ console.log(obj);</pre>
 let sql = 'age' in obj
 console.log(sql);      </pre>
       <div>长度：无法直接获取</div>
-      <p>通过对象Object的静态方法：entries()、keys()或values()间接获取；这三个方法返回入口、键和值的数组</p>
+      <p>.通过对象Object的静态方法：entries()、keys()或values()间接获取；这三个方法返回入口、键和值的数组</p>
       <pre>
 console.log(Object.keys(obj).length);
 console.log(Object.values(obj).length);
@@ -96,19 +94,20 @@ setObj(stu);
 console.log(stu.name);</pre>
     </dd>
   </dl>
-
   <div class="chap">对象的解构 {}</div>
   <dl>
-    <dd>将数组中的值或对象的属性取出，赋值给其他变量</dd>
-    <dd>对象解构使用花括号{}；<a href="./array.html">数组</a> 解构使用[]；多个变量以逗号,分隔</dd>
-    <dd>解构赋值的时候：</dd>
-    <dd>.可以更改名字</dd>
-    <dd>.可以嵌套解构</dd>
-    <dd>.可以指定默认值</dd>
-    <dd>高频使用；更多信息，请访问<a
-        href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring
-        Assignment</a></dd>
-    <dd>框架中</dd>
+    <dd>
+      <div>.将数组中的值或对象的属性取出，赋值给其他变量</div>
+      <div>.对象解构使用花括号{}；<a href="./array.html">数组</a> 解构使用[]；多个变量以逗号,分隔</div>
+      <div>.解构赋值的时候：</div>
+      <div>.可以更改名字</div>
+      <div>.可以嵌套解构</div>
+      <div>.可以指定默认值</div>
+      <div>.高频使用；更多信息，请访问<a
+          href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Destructuring
+          Assignment</a></div>
+    </dd>
+    <dd class="example-sn">框架中按需结构包</dd>
     <dd>
       <pre>
 import { createApp } from 'vue'
@@ -118,25 +117,14 @@ const { add, dec } = require('./module/test')</pre>
     <dd class="example-sn">示例数据</dd>
     <dd>
       <pre>let obj = { name: 'cnplaman', age: 18, address: { city: 'gz', code: 541000 } }</pre>
-    </dd>
-    <dd>普通解构赋值 - 获取obj中的属性赋值给同名变量</dd>
-    <dd>
+      <div>普通解构赋值 - 获取obj中的属性赋值给同名变量</div>
       <pre>let { name, age } = obj</pre>
-    </dd>
-    <dd>
-    <dd>重命名赋值 - 使用冒号:指定新变量名</dd>
-    <dd>
+      <div>重命名赋值 - 使用冒号:指定新变量名</div>
       <pre>let { name: uname, age: uage } = obj</pre>
-    </dd>
-    <dd>默认赋值 - 解构时修改属性值或增加一个新属性</dd>
-    <dd>
+      <div>默认赋值 - 解构时修改属性值或增加一个新属性</div>
       <pre>let { name: uname, age: uage, gender = 'male' } = obj</pre>
-    </dd>
-    <dd>嵌套解构赋值</dd>
-    <dd>
+      <div>嵌套解构赋值</div>
       <pre>let { name, age, address: { city } } = obj</pre>
-    </dd>
-    <dd>
       <pre>let { name, age, address: { code: postcode } } = obj</pre>
     </dd>
   </dl>

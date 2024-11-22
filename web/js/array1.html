@@ -17,10 +17,10 @@
   </header>
   <dl>
     <dt>forEach()</dt>
-    <dd>返回：没有</dd>
-    <dd>对数组中的每一项执行给定函数。本质上与使用 for 循环迭代数组一样</dd>
-    <dd>原数组：不会被修改；仅仅使用数据</dd>
     <dd>
+      <div>返回：没有</div>
+      <div>对数组中的每一项执行给定函数。本质上与使用 for 循环迭代数组一样</div>
+      <div>原数组：不会被修改；仅仅使用数据</div>
       <pre>
 function foreach(arr, fn) {
   for (let i = 0; i &lt; arr.length; i++) {
@@ -33,11 +33,11 @@ foreach(arr, (item) => {
 })</pre>
     </dd>
     <dt>filter()</dt>
-    <dd>返回：符合条件的新数组</dd>
-    <dd>对数组中的每一项执行给定函数，返回执行结果为 true 的项组成的数组</dd>
-    <dd>calls the predicate function one time for each element in the array</dd>
-    <dd>原数组：不会被修改</dd>
     <dd>
+      <div>返回：符合条件的新数组</div>
+      <div>对数组中的每一项执行给定函数，返回执行结果为 true 的项组成的数组</div>
+      <div>calls the predicate function one time for each element in the array</div>
+      <div>原数组：不会被修改</div>
       <pre>
 function filter(arr, fn) {
   let res = []
@@ -48,31 +48,29 @@ function filter(arr, fn) {
   }
   return res;
 }</pre>
-    </dd>
-    <dd>
       <pre>
 let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 let res = arr.filter(item => item % 2 === 0;)
 console.log(res);</pre>
     </dd>
     <dt>map()</dt>
-    <dd>返回：新数组</dd>
-    <dd>创建一个新数组，这个新数组由原数组中的每个元素都调用一次提供的函数后的返回值组成：对数组中的每一项执行给定函数，返回每次函数调用的结果组成的数组</dd>
-    <dd>需要使用一个变量接收函数的执行结果</dd>
-    <dd>原数组：不会被修改</dd>
-    <dd>适合创建包含的项与另一个数组一一对应的数组 - 映射</dd>
-    <dd>对结果数组进行连接join可以转化为对字符串的使用，如作为HTML字符串更新或创建DOM</dd>
-    <dd>函数表达式</dd>
-    <dd>声明为 const 更安全，避免被修改</dd>
-    <dd>结果数组拼接字符串</dd>
     <dd>
+      <div>返回：新数组</div>
+      <div>创建一个新数组，这个新数组由原数组中的每个元素都调用一次提供的函数后的返回值组成：对数组中的每一项执行给定函数，返回每次函数调用的结果组成的数组</div>
+      <div>需要使用一个变量接收函数的执行结果</div>
+      <div>原数组：不会被修改</div>
+      <div>适合创建包含的项与另一个数组一一对应的数组 - 映射</div>
+      <div>对结果数组进行连接join可以转化为对字符串的使用，如作为HTML字符串更新或创建DOM</div>
+      <div>函数表达式</div>
+      <div>声明为 const 更安全，避免被修改</div>
+      <div>结果数组拼接字符串</div>
       <pre>let res = map((item, ind) => item.xx).join('');</pre>
     </dd>
     <dt>every()</dt>
-    <dd>返回：布尔值</dd>
-    <dd>对数组中的每一项执行给定函数；如果该函数对 <span class="warn">每一项</span> 都返回 true，则返回 true</dd>
-    <dd>函数实现原理如下</dd>
     <dd>
+      <div>返回：布尔值</div>
+      <div>对数组中的每一项执行给定函数；如果该函数对 <span class="warn">每一项</span> 都返回 true，则返回 true</div>
+      <div>函数实现原理如下</div>
       <pre>
 const every = (arr, fn) => {
   let res = true
@@ -89,10 +87,10 @@ res = every(arr, v => v > 10);
 console.log(res);</pre>
     </dd>
     <dt>some()</dt>
-    <dd>返回类型：布尔值</dd>
-    <dd>对数组中的每一项执行给定函数；如果该函数 <span class="warn">有一项</span> 返回 true，则返回 true</dd>
-    <dd>函数实现原理如下</dd>
     <dd>
+      <div>返回类型：布尔值</div>
+      <div>对数组中的每一项执行给定函数；如果该函数 <span class="warn">有一项</span> 返回 true，则返回 true</div>
+      <div>函数实现原理如下</div>
       <pre>
 const some = (arr, fn) => {
   let res = false
@@ -107,7 +105,7 @@ const some = (arr, fn) => {
 res = some(arr, v => v > 8);
 console.log(res);</pre>
     </dd>
-    <dd>应用：查找数据列表中是否有符合条件的数据项，避免重名</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 应用：查找数据列表中是否有符合条件的数据项，避免重名</dd>
     <dd>
       <pre>
 let arr = [0, 1, 2, 3, 4, 5]
@@ -119,9 +117,9 @@ let flag = obj.some(item => item.name == 'sz')
 console.log(flag); // true     </pre>
     </dd>
     <dt>find</dt>
-    <dd>返回：查找到的数据，无则返回 undefined</dd>
-    <dd>查找符合条件的 <span class="warn">第一个</span> 数据项</dd>
     <dd>
+      <div>返回：查找到的数据，无则返回 undefined</div>
+      <div>查找符合条件的 <span class="warn">第一个</span> 数据项</div>
       <pre>
 let arr = [0, 1, 2, 3, 4, 5]
 let res = arr.find(item => item > 3)

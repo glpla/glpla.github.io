@@ -31,46 +31,34 @@ console.log(arr0, arr1);</pre>
     <dd>数组长度</dd>
     <dd>可以任意赋值：少于实际个数，数据会丢失，但是数据仍然在内存中；多于实际个数，值为undefined</dd>
     <dt>赋值</dt>
-    <dd>1. 引用赋值 =</dd>
-    <dd>将变量指向新的引用/地址空间；多个变量引用|指向同一块内存；一个变量对内存数据的修改会影响到另外一个变量；一个变量重新赋值时，会丢失原来的内存</dd>
     <dd>
+      <div>1. 引用赋值 =</div>
+      <div>将变量指向新的引用/地址空间；多个变量引用|指向同一块内存；一个变量对内存数据的修改会影响到另外一个变量；一个变量重新赋值时，会丢失原来的内存</div>
       <pre>
 let arr0 = [1, 2];
 let arr1 = arr0;
 arr1.push(3)
 arr0 = [1, 3];//指向别的内存</pre>
-    </dd>
-    <dd>2. 解构赋值 [] </dd>
-    <dd>一次性把数组元素赋值给多个变量</dd>
-    <dd>
+      <div>2. 解构赋值 [] </div>
+      <div>一次性把数组元素赋值给多个变量</div>
       <pre>let [a, b] = [1, 3];</pre>
-    </dd>
-    <dd>指定位置赋值 - 获取最后一个</dd>
-    <dd>
+      <div>指定位置赋值 - 获取最后一个</div>
       <pre>
 let [, , , , a] = [1, 2, 3, 4, 5];
 //a=5</pre>
-    </dd>
-    <dd>交换赋值</dd>
-    <dd>
+      <div>交换赋值</div>
       <pre>[a, b] = [b, a];</pre>
-    </dd>
-    <dd>...剩余赋值 - 第1个给a，其它给rest；剩余属性必须是模式中的最后一个，并且不能有尾随逗号</dd>
-    <dd>
+      <div>...剩余赋值 - 第1个给a，其它给rest；剩余属性必须是模式中的最后一个，并且不能有尾随逗号</div>
       <pre>
 let [a, ...rest] = [1, 2, 3, 4, 5]
 //a=1
 //rest=[2,3,4,5]      </pre>
-    </dd>
-    <dd>默认赋值 - 位置要匹配</dd>
-    <dd>
+      <div>默认赋值 - 位置要匹配</div>
       <pre>
 let [name, age = 18, gender] = ['gl', , 'male']
 let [name, age = 18] = ['gl']</pre>
-    </dd>
-    <dd>3. 扩展运算符 ...</dd>
-    <dd>将数组各项展开，适合数组复制</dd>
-    <dd>
+      <div>3. 扩展运算符 ...</div>
+      <div>将数组各项展开，适合数组复制</div>
       <pre>
 let a = [1, 2, 3];
 let b = [...a];</pre>
@@ -97,8 +85,8 @@ let b = [...a];</pre>
     <dd>.返回一个新数组</dd>
     <dd>.不会修改原数组；不会去重</dd>
     <dt>join()</dt>
-    <dd>.数组元素按照指定的分隔符连接为字符串</dd>
     <dd>
+      <div>.数组元素按照指定的分隔符连接为字符串</div>
       <pre>
 let arr0 = [1, 2, 3];
 let arr1 = [3, 4, 5];
@@ -107,22 +95,22 @@ console.log(arr0);//1, 2, 3
 console.log(arr0.join('-'));//1-2-3</pre>
     </dd>
     <dt>isArray()</dt>
-    <dd>是否是一个数组</dd>
-    <dd>所有的数组都是对象，所以直接使用typeof返回的是object</dd>
     <dd>
+      <div>是否是一个数组</div>
+      <div>所有的数组都是对象，所以直接使用typeof返回的是object</div>
       <pre>
 console.log(typeof [1, 2]);//object
 console.log(Array.isArray([1, 2]));//true</pre>
     </dd>
     <dt>slice(start,end)</dt>
-    <dd>Returns a copy of a section of an array. </dd>
-    <dd>.取子串 - 选取串中位置|索引从start到end的部分；不包括end</dd>
-    <dd>.返回：一个新的数组/字符串</dd>
-    <dd>.原数组：不变</dd>
-    <dd>.start不指定，从0开始；end不指定，截取到末尾</dd>
-    <dd>.目标位置为负数时，反向截取；最后一位是-1；倒数第二位是-2，依次类推；可以用于获取后缀名；</dd>
-    <dd>.应用比较广泛</dd>
     <dd>
+      <div>Returns a copy of a section of an array. </div>
+      <div>.取子串 - 选取串中位置|索引从start到end的部分；不包括end</div>
+      <div>.返回：一个新的数组/字符串</div>
+      <div>.原数组：不变</div>
+      <div>.start不指定，从0开始；end不指定，截取到末尾</div>
+      <div>.目标位置为负数时，反向截取；最后一位是-1；倒数第二位是-2，依次类推；可以用于获取后缀名；</div>
+      <div>.应用比较广泛</div>
       <pre>
 let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 let res = arr.slice(2, 4);
@@ -130,13 +118,13 @@ console.log(res);//3,4
 console.log(arr);//不变</pre>
     </dd>
     <dt>splice(start,count[,el...])</dt>
-    <dd>Removes elements from an array and, if necessary, inserts new elements in their place, returning the deleted
-      elements.</dd>
-    <dd>.从原来数组中截取|删除指定长度的字符串</dd>
-    <dd>.返回：删除的数据项</dd>
-    <dd>.原数组：被修改</dd>
-    <dd>.在删除的基础上，还可以插入新的元素el；如果count为0，则不删除</dd>
     <dd>
+      <div>Removes elements from an array and, if necessary, inserts new elements in their place, returning the deleted
+        elements.</div>
+      <div>.从原来数组中截取|删除指定长度的字符串</div>
+      <div>.返回：删除的数据项</div>
+      <div>.原数组：被修改</div>
+      <div>.在删除的基础上，还可以插入新的元素el；如果count为0，则不删除</div>
       <pre>
 let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 let res = arr.splice(2, 2);
@@ -146,18 +134,18 @@ arr.splice(2, 1, 8, 8);
 console.log(arr);//[1,2,8,8,6,7,8,9]；5被删除，插入|增加了2个8</pre>
     </dd>
     <dt>from()</dt>
-    <dd>.将一个类数组对象或者可遍历对象转换成一个真正的数组</dd>
-    <dd>1. 类数组</dd>
-    <dd>.使用获取多个元素方法，如querySelectorAll()，得到的元素集合都是类数组对象，最基本的特点就是具有length属性的对象；如果没有长度属性，会被转化为一个空数组</dd>
-    <dd>2. set集合</dd>
-    <dd>.无重复数据的集合</dd>
-    <dd>3. 字符串</dd>
-    <dd>.将字符串拆分成单个字符的数组</dd>
-    <dd class="tips">要清楚每个函数有无返回？如果有的话，返回值是什么？原数组有没有破坏？</dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] 洗牌 Shuffle</dd>
-    <dd>根据串/数组的长度，随机取一个位置值，然后将该位置的数据删除，形成一个新串/数组；重复执行到串/数组为空</dd>
-    <dd>每次删除的数据放到一个新数组中，保存起来；这个数组就是洗牌的结果</dd>
     <dd>
+      <div>.将一个类数组对象或者可遍历对象转换成一个真正的数组</div>
+      <div>1. 类数组</div>
+      <div>.使用获取多个元素方法，如querySelectorAll()，得到的元素集合都是类数组对象，最基本的特点就是具有length属性的对象；如果没有长度属性，会被转化为一个空数组</div>
+      <div>2. set集合</div>
+      <div>.无重复数据的集合</div>
+      <div>3. 字符串</div>
+      <div>.将字符串拆分成单个字符的数组</div>
+      <div class="tips">要清楚每个函数有无返回？如果有的话，返回值是什么？原数组有没有破坏？</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 洗牌 Shuffle</div>
+      <div>根据串/数组的长度，随机取一个位置值，然后将该位置的数据删除，形成一个新串/数组；重复执行到串/数组为空</div>
+      <div>每次删除的数据放到一个新数组中，保存起来；这个数组就是洗牌的结果</div>
       <pre>
 function shuffle(arr) {
   let tmp = [];
@@ -171,10 +159,6 @@ function shuffle(arr) {
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script>
-    console.log(typeof [1, 2]);
-    console.log(Array.isArray([1, 2]));
-  </script>
 </body>
 
 </html>

@@ -19,8 +19,8 @@
     <dd>按照一定规则对数据项排序</dd>
     <dd>数组排序会修改原数组</dd>
     <dt>sort()</dt>
-    <dd>数组的sort()默认是根据数据项 <span class="warn">ASCII值</span> 大小比较</dd>
     <dd>
+      <div>数组的sort()默认是根据数据项 <span class="warn">ASCII值</span> 大小比较</div>
       <pre>
 arr = [1,45,6,2,4,5]
 //升序
@@ -29,32 +29,26 @@ arr.sort(); //[1, 2, 4, 45, 5, 6]
 arr.sort().reverse(); //[6, 5, 45, 4, 2, 1]</pre>
     </dd>
     <dt>sort(a, b)</dt>
-    <dd>带参数的sort()可以按照参数进行排序</dd>
-    <dd>简单数组</dd>
     <dd>
+      <div>带参数的sort()可以按照参数进行排序</div>
+      <div>1. 简单数组</div>
       <pre>
 arr = [1,45,6,2,4,5]
 //升序
 arr.sort((a, b) => a - b);  //[1, 2, 4, 5, 6, 45]
 //降序
 arr.sort((a, b) => b - a);  //[45, 6, 5, 4, 2, 1]</pre>
-    </dd>
-    <dd>
       <pre>
 let arr = ['banana', 'apple', 'cherry'];
 arr.sort();
 console.log(arr); // ['apple', 'banana', 'cherry']</pre>
-    </dd>
-    <dd>对象数组 - 按年纪age排序</dd>
-    <dd>
+      <div>2. 对象数组 - 按年纪age排序</div>
       <pre>
 //升序
 obj.sort((a, b) => a['age'] - b['age']);
 //降序
 obj.sort((a, b) => b['age'] - a['age']);</pre>
-    </dd>
-    <dd>封装函数使用 - 根据key排序</dd>
-    <dd>
+      <div>3. 封装函数使用 - 根据 key 排序</div>
       <pre>
 const sortUp = (key) => {
   arr.sort((a, b) => {
@@ -70,16 +64,14 @@ const sortDown = (key) => {
     <dd class="tips">为什么连续测试结果相等？</dd>
     <!-- <dd>数组的引用传值</dd> -->
     <dt>字符数组排序</dt>
-    <dd>以上都是根据数字字段排序；如果需要根据字符排序，需要使用比较函数 <span class="warn">localeCompare()</span></dd>
-    <dd>按字符升序排序</dd>
     <dd>
+      <div>以上都是根据数字字段排序；如果需要根据字符排序，需要使用比较函数 <span class="warn">localeCompare()</span></div>
+      <div>1. 按字符升序排序</div>
       <pre>
 obj.sort((a, b) => {
   return a.name.localeCompare(b.name)
 })    </pre>
-    </dd>
-    <dd>按字符降序排序</dd>
-    <dd>
+      <div>2. 按字符降序排序</div>
       <pre>
 obj.sort((a, b) => {
   return b.name.localeCompare(a.name)
