@@ -20,14 +20,14 @@
     <dd>
       <div>.封装需要重复执行的代码，有助于模块化开发 - 黑盒子</div>
       <div>.可以在任何地方、任何时候调用执行</div>
-      <div>.函数也是对象，且是一等公民First-class Function：可以存储在变量中；可以作为参数；可以作为返回值</div>
+      <div>.函数也是对象，且是一等公民 First-class Function：可以存储在变量中；可以作为参数；可以作为返回值</div>
     </dd>
     <dt>函数声明 Declaration</dt>
     <dd>
-      <p>.一个标准的函数声明，由关键字function 、函数名、形式参数和函数体组成</p>
-      <p>.使用关键字function配合函数名声明，也叫命名函数</p>
+      <p>.一个标准的函数声明，由关键字 function 、函数名、形式参数和函数体组成</p>
+      <p>.使用关键字 function 配合函数名声明，也叫命名函数</p>
       <p>.有名字的函数又叫具名函数</p>
-      <p>.可以放在任何地方</p>
+      <p>.可以放在任何地方 - <span class="warn">预处理 - 提升</span></p>
       <pre>
 function 函数名 (形参列表) { 
   //函数逻辑实现
@@ -37,7 +37,7 @@ function 函数名 (形参列表) {
       <p>.能体现函数功能的语义化标识符</p>
       <p>.通常使用动词+名词形式</p>
       <div>2. 形式参数</div>
-      <p>.函数复用时的定制/个性化特点；通过不同的参数实现类似的业务；此时的参数是形式参数-形参[占位符]</p>
+      <p>.函数复用时的定制/个性化特点；通过不同的参数实现类似的业务；此时的参数是形式参数 - 形参[占位符]</p>
       <p>.个数：根据函数功能，可以使用参数也可以不使用参数；也可以使用任意多的参数：以逗号,分隔</p>
       <p>.使用：函数逻辑实现过程中，通常直接使用形参，也可以使用 <span class="warn">arguments</span> 数组接受不定个数的形参，见后续内容</p>
       <p>.传值：所有参数传递的都是值，不可能通过引用传递参数；有不少开发人员在这一点上可能会感到困惑，因为访问变量有按值和按引用两种方式，而参数只能按值传递；可以指定参数默认值</p>
@@ -52,11 +52,11 @@ function 函数名 (形参列表) {
       <div>4. 返回值</div>
       <p>.函数的执行结果</p>
       <p>.可以有返回值；也可以没有返回值</p>
-      <p>.没有显示的指定返回值，函数的返回都是undefined</p>
-      <p>.使用return退出函数或返回结果</p>
+      <p>.没有显示的指定返回值，函数的返回都是 undefined</p>
+      <p>.可以使用 return 退出函数或返回结果</p>
       <p>.位于 return 语句之后的任何代码不会执行</p>
-      <p>.如果没有返回值，也可以省略return：所有逻辑执行完毕后，自动退出函数</p>
-      <p>.逻辑处理过程中，可以随时使用return退出函数，如数组遍历中，已经拿到了需要的数据，不需要继续执行后面的代码</p>
+      <p>.如果没有返回值，也可以省略 return：所有逻辑执行完毕后，自动退出函数</p>
+      <p>.逻辑处理过程中，可以随时使用 return退出函数，如数组遍历中，已经拿到了需要的数据，不需要继续执行后面的代码</p>
       <p>.推荐：让函数始终都返回一个值，便于调试</p>
     </dd>
     <dt>函数调用 Call</dt>
@@ -64,21 +64,23 @@ function 函数名 (形参列表) {
       <div>.函数要调用才能执行：函数名加上一对圆括号</div>
       <div>.调用函数时，根据函数声明，传递个数对应的参数[实际参数-实参]；多余的参数会被忽略</div>
       <div>.函数体可以调用其它函数</div>
-      <div>.函数调用可以在函数声明前调用；也可以在函数声明后调用；实际上，浏览器会预先 hoisting 处理变量声明和函数声明</div>
+      <div>.函数调用可以在函数声明前调用；也可以在函数声明后调用；实际上，浏览器会预先 hoisting 处理变量声明和函数声明 - <span class="warn">预处理 - 提升</span></div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 示例</dd>
+    <dd class="sn">
+      <div>不指定返回；执行完逻辑，自动结束</div>
       <pre>
-//执行完，自动结束
 function dis() {
   console.log('hi');
-  //return;//无返回值
 }
-console.log(dis());//undefined
-
-//默认参数
+console.log(dis());//undefined</pre>
+      <div>默认参数</div>
+      <pre>
 function dis(age = 18) {
   return age
-}
-
-//显式指定返回
+}</pre>
+      <div>显式指定返回</div>
+      <pre>
 function dis(num1, num2) {
   return num1 + num2;//有返回值
 }
@@ -92,14 +94,15 @@ console.log(dis(1, 2));//3</pre>
       <div>.每个函数都是 Function 类型的实例，而且都与其他引用类型一样具有属性和方法</div>
       <div>.由于函数是对象，因此函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定</div>
       <div>.将函数名想象为指针，也有助于理解为什么 ECMAScript 中没有函数重载的概念</div>
-      <div>.解析器会率先读取函数声明，并使其在执行任何代码之前可用（可以访问）；而函数表达式，则必须等到解析器执行到它所在的代码行，才会真正被解释执行</div>
     </dd>
     <dt>函数表达式 Function Expression</dt>
     <dd>
       <div>.函数没有名称，而且位于一条赋值语句右边，被赋给一个常量，又叫 <span class="warn">匿名函数</span></div>
       <div>.因为是赋值语句，所以最好末尾加上;</div>
-      <div>.通常作为回调函数callback在异步编程中使用</div>
+      <div>.通常作为回调函数 callback/cb 在异步编程中使用</div>
       <div>.<span class="warn">必须在先声明后使用</span>，否则告警：Cannot access 'xxx' before initialization</div>
+      <div>.解析器会率先读取函数声明/<span class="warn">预处理 - 提升</span>，并使其在执行任何代码之前可用（可以访问）；而函数表达式，则必须等到解析器执行到它所在的代码行，才会真正被解释执行
+      </div>
       <pre>
 const sum = function (形参列表) { 
   //函数逻辑实现
@@ -113,14 +116,16 @@ const sum = function (形参列表) {
       <div>.函数名本身就是变量，所以函数也可以作为值来使用。也就是说，不仅可以像传递参数一样把一个函数传递给另一个函数，而且可以将一个函数作为另一个函数的结果返回</div>
       <div>.返回的函数必须执行才能拿到最后的结果</div>
       <div>.更多信息，请参考 <a href="./closure.html">闭包</a></div>
-      <div>声明一个函数，使其执行另外一个函数</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 声明一个函数，使其执行另外一个函数</div>
       <pre>
 function cb(fn, para) {
     return fn(para);
 }
+
 function add(num) {
     return num + 10;
 }
+
 let res = cb(add, 10);
 console.log(res);</pre>
     </dd>
@@ -128,15 +133,17 @@ console.log(res);</pre>
   <div class="chap">内部属性和方法</div>
   <dl>
     <dt>arguments</dt>
-    <dd>它是一个类数组对象，包含着传入函数中的所有参数</dd>
+    <dd>.它是一个类数组对象，包含着传入函数中的所有参数</dd>
     <dt>length</dt>
     <dd>
-      <div>函数希望接收的命名参数的个数</div>
-      <div>使用arguments后，甚至不需要声明形参</div>
+      <div>.函数希望接收的命名参数的个数</div>
+      <div>.使用 arguments 后，甚至不需要声明形参</div>
+      <div>1. 显示指定参数</div>
       <pre>
 function sum(num0, num1) {
   return num0 + num1;
 }</pre>
+      <div>2. 不指定参数</div>
       <pre>
 function sum() {
   let res = 0;
@@ -145,28 +152,22 @@ function sum() {
   }
   return res;
 }
+
 sum(1, 2);
+
 sum(1, 2, 3);</pre>
-      <div>查看形参和实参</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 查看形参和实参</div>
       <pre>
 function fn(a, b) {
-  console.log(fn.length);//2
-  console.log(arguments.length)//4
+  console.log(fn.length);//2 - 形参个数为2
+  console.log(arguments.length)//4 - 实际传入4个参数
 }
+
 fn(1, 2, 3, 4)</pre>
-      <div>在控制台查看函数声明和属性</div>
-      <pre>
-&gt;fn
-&lt;ƒ fn(a, b) {
-  console.log(fn.length);
-  console.log(arguments.length)
-}
-&gt;fn.name
-&lt;'fn'</pre>
     </dd>
     <dt>this</dt>
-    <dd>this引用的是函数据以执行的环境对象——或者也可以说是 this 值（当在网页的全局作用域中调用函数时，
-      this 对象引用的就是 window）。</dd>
+    <dd>.this 引用的是函数据以执行的环境对象——或者也可以说是 this 值</dd>
+    <dd>.当在网页的全局作用域中调用函数时， this 对象引用的就是 window</dd>
     <dt>prototype</dt>
     <dd>在 ECMAScript 核心所定义的全部属性中，最耐人寻味的就要数 prototype 属性了。对于
       ECMAScript 中的引用类型而言，prototype 是保存它们所有实例方法的真正所在</dd>

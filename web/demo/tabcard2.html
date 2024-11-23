@@ -54,26 +54,26 @@
       border-bottom: 1px solid #0ac;
     }
 
-  .nav-target {
-    display: none;
-    height: 100%;
-    overflow-y: auto;
-    padding-right: 10px;
-  }
+    .nav-cont {
+      display: none;
+      height: 100%;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
 
-  .nav-target.active {
-    display: block;
-  }
+    .nav-cont.active {
+      display: block;
+    }
 
-    .nav-target::-webkit-scrollbar {
+    .nav-cont::-webkit-scrollbar {
       width: 6px;
     }
 
-    .nav-target::-webkit-scrollbar-thumb {
+    .nav-cont::-webkit-scrollbar-thumb {
       background-image: linear-gradient(#0af, #0ac);
     }
 
-    .nav-target p {
+    .nav-cont p {
       margin-bottom: 10px;
       text-align: justify;
     }
@@ -91,11 +91,11 @@
       <a class="nav-link" href="">About!</a>
     </nav>
     <div class="cont">
-      <div class="nav-target active">
+      <div class="nav-cont active">
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam error dolorum laborum quo voluptatum earum.
           Atque rerum eius quod quo quam sit nobis. Iure quos assumenda, eius mollitia consectetur adipisci.</p>
       </div>
-      <div class="nav-target">
+      <div class="nav-cont">
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae perspiciatis rerum eos a temporibus qui
           tempora, atque pariatur dicta, laudantium odio in alias inventore accusamus! Quam laudantium maiores aut est.
         </p>
@@ -106,7 +106,7 @@
           vitae, hic assumenda aliquam iusto voluptate soluta distinctio, ad non ipsum labore excepturi et blanditiis.
         </p>
       </div>
-      <div class="nav-target">
+      <div class="nav-cont">
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor laborum, ipsam voluptas quos aliquid
           perspiciatis dolorum excepturi expedita maxime in deleniti, illum accusamus distinctio magnam odio ipsa sit
           iusto iure.</p>
@@ -116,7 +116,7 @@
           porro optio aut reiciendis deserunt doloribus molestias, impedit sapiente consectetur voluptate beatae. Ut eum
           dolore laboriosam numquam.</p>
       </div>
-      <div class="nav-target">
+      <div class="nav-cont">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum nesciunt deserunt, dignissimos veniam officia
           quia repudiandae ullam temporibus? Quidem laudantium saepe, perferendis quasi officia similique eos
           reprehenderit voluptatum numquam sit?</p>
@@ -130,7 +130,7 @@
           voluptate accusantium fugiat libero, ea esse nisi voluptatum autem? Ab quaerat laboriosam voluptates obcaecati
           iusto.</p>
       </div>
-      <div class="nav-target">
+      <div class="nav-cont">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vero quam deleniti libero maxime unde
           explicabo aut consequatur, deserunt, minima neque ullam sed labore autem, hic repellendus! Officiis, nobis
           minima.</p>
@@ -144,17 +144,17 @@
     </div>
   </div>
   <script>
-  const links = document.querySelectorAll('.nav-link');
-  const targets = document.querySelectorAll('.nav-target');
-  links.forEach((link, ind) => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault()
-      links.forEach(item => item.classList.remove('active'));
-      targets.forEach(item => item.classList.remove('active'));
-      link.classList.add('active');
-      targets[ind].classList.add('active');
+    const links = document.querySelectorAll('.nav-link');
+    const conts = document.querySelectorAll('.nav-cont');
+    links.forEach((link, ind) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault()
+        links.forEach(link => link.classList.remove('active'));
+        conts.forEach(cont => cont.classList.remove('active'));
+        link.classList.add('active');
+        conts[ind].classList.add('active');
+      })
     })
-  })
 
   </script>
 </body>

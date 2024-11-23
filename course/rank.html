@@ -11,6 +11,7 @@
 
 <body>
   <div class="container" id="app">
+    <div :class="{loading:isLoading}"></div>
     <header>
       <div class="logo">
         <svg class="icon icon-logo" aria-hidden="true">
@@ -141,9 +142,11 @@
         const subind = ref(null)
         const rank = ref([]);
         const subNav = ref([])
+        const isLoading = ref(false)
         const isShow = ref(false)
         const isSubShow = ref(false)
         const getData = (url, $event) => {
+          isLoading.value = true;
           fetch(`/utils/data/rank/${url}`)
             .then(res => res.json())
             .then(res => {
@@ -158,7 +161,12 @@
                 // console.log(item);
                 item.classList.remove('active');
               });
+              console.log(isLoading.value);
             })
+            .finally(() => {
+              isLoading.value = false;
+              console.log(isLoading.value);
+            });
         }
 
         const getInd = (ind) => {
@@ -190,6 +198,7 @@
           rank,
           subNav,
           isShow,
+          isLoading,
           isSubShow,
           getData,
           getInd,

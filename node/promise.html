@@ -15,26 +15,70 @@
     <h1>Promise</h1>
   </header>
   <dl>
-    <dd>函数类型，实际上是一个对象</dd>
-    <dd>承诺在未来某个时刻可能完成并返回结果：成功或失败</dd>
-    <dd>异步操作，用来解决异步调用的问题 - 回调地狱</dd>
-    <dd>更多信息，请查看 <a href="https://mp.weixin.qq.com/s/kvMN1ckx0tEEVa0TaZcxMQ">8个Promise高级技巧，让你在前端开发中如虎添翼！</a></dd>
+    <dt>概述</dt>
     <dd>
+      <div>函数类型，实际上是一个对象</div>
+      <div>承诺在未来某个时刻可能完成并返回结果：成功或失败</div>
+      <div>异步操作，用来解决异步调用的问题 - 回调地狱</div>
+      <div>更多信息，请查看 <a href="https://mp.weixin.qq.com/s/kvMN1ckx0tEEVa0TaZcxMQ">8个Promise高级技巧，让你在前端开发中如虎添翼！</a></div>
       <pre>
 console.log(typeof (Promise)); //function
 //或
 console.dir(Promise);</pre>
       <img src="./imgs/promise.png" alt="">
+      <div class="tips">以 <a href="./fetch.html">fetch</a> 请求数据为例</div>
     </dd>
-    <dd>1. 参数</dd>
-    <dd>.使用 resolve() 函数表示 Promise 处理成功，给出结果</dd>
-    <dd>.使用 reject() 函数表示 Promise 处理失败，给出结果</dd>
-    <dd>2. 实例方法|原型函数|API</dd>
-    <dd>.使用 then() 函数获取处理的结果，包括：成功和失败；第一个参数是成功的函数，第二个参数是失败的函数</dd>
-    <dd>.使用 catch() 函数捕获异常</dd>
-    <dd>.使用 finally() 函数表示处理结束</dd>
-    <dd>3. 对象方法|静态函数，无须实例化</dd>
-    <dd>.使用 all() 处理多个Promise</dd>
+    <dt>then()</dt>
+    <dd>
+      <div>.所有Promise对象都有的方法</div>
+      <div>.两个参数处理结果，包括：成功和失败；第一个参数处理成功，第二个参数处理失败或异常</div>
+      <div>1.<span class="warn">履行处理器</span> fulfillment handle - 使用 resolve() 函数表示 Promise 处理成功，给出结果</div>
+      <div>2.<span class="warn">拒绝处理器</span> rejection handle - 使用 reject() 函数表示 Promise 处理失败，给出结果</div>
+      <div>.都是可选的；可以选择性的监听履行、拒绝或全部</div>
+      <div>.全部监听</div>
+      <pre>
+let promise = fetch(url)
+
+promise.then(resolve => {
+    //fulfillment handle
+}, reject => {
+    //rejection handle
+})  </pre>
+      <div>.只监听成功</div>
+      <pre>
+let promise = fetch(url)
+
+promise.then(resolve => {
+//fulfillment handle
+})  </pre>
+      <div>.只监听拒绝</div>
+      <pre>
+let promise = fetch(url)
+
+promise.then(null, reject => {
+    //rejection handle
+})  </pre>
+    </dd>
+    <dt>catch()</dt>
+    <dd>
+      <div>.使用 catch() 分配 <span class="warn">拒绝处理器</span> - 处理失败/捕获异常，专门处理失败的情况；相当于上面只监听拒绝的情况</div>
+      <pre>
+let promise = fetch(url)
+
+promise.catch(reject => {
+    //rejection handle
+})  </pre>
+    </dd>
+    <dt>finally()</dt>
+    <dd>
+      <div>.使用 finally() 分配 <span class="warn">解决处理器</span> - 表示处理结束，不管处理结果如何</div>
+      <div>.可以集中处理结束后的逻辑，而不用在成功和失败中分别处理；如进度条的处理，不管数据加载是否成功，最后都要隐藏进度条</div>
+    </dd>
+
+    <dd>
+      <div>3. 对象方法|静态函数，无须实例化</div>
+      <div>.使用 all() 处理多个Promise</div>
+    </dd>
     <dt>基本使用</dt>
     <dd class="sn">
       <div>链式写法</div>
