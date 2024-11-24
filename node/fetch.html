@@ -38,6 +38,12 @@
     </dd>
     <dt>语法 Syntax</dt>
     <dd>
+      <div>.拿到数据需要2次处理</div>
+      <div>.第一个 then() 返回的 Response 对象，包含了一些元数据和方法，但不直接包含请求返回的实际数据；要获取实际的 JSON 数据，需要调用 res.json() 方法将 Response 对象解析为
+        JSON
+        数据，并返回一个新的 Promise</div>
+      <div>.第二个 then() 处理解析后的 JSON 数据</div>
+      <div>.在响应的原型[[Prototype]] Response中，可以看到相关的函数，他们仍然是一个 Promise 对象，所以需要 <span class="warn">2次</span> 返回才能拿到结果</div>
       <pre>
 fetch( url, {
   method: '',
@@ -60,7 +66,6 @@ fetch( url, {
     </dd>
     <dt>响应结果 Response</dt>
     <dd class="sn">
-      <p>.在响应的原型[[Prototype]] Response中，可以看到相关的函数，他们仍然是一个 Promise 对象，所以需要 <span class="warn">2次</span> 返回才能拿到结果</p>
       <div>res.json()：得到 JSON 对象，同 JSON.parse(responseText) 一样；应用最广泛</div>
       <div>res.text()：得到文字|字符串</div>
       <div>res.formData()：得到 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FormData">FormData</a> 表单对象</div>

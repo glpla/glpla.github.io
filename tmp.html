@@ -13,17 +13,6 @@
             box-sizing: border-box;
         }
 
-        button {
-            border: none;
-            outline: none;
-            cursor: pointer;
-            background-color: transparent;
-        }
-
-        .iconfont {
-            font-size: 30px;
-        }
-
         body {
             display: flex;
             flex-direction: column;
@@ -33,36 +22,30 @@
             /* background-color: #000; */
             font-family: 'Poppins', sans-serif;
         }
-
-        body.loading::before {
-            content: 'Loading...';
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.6);
-            font-size: 20px;
-            color: #fff;
-        }
     </style>
 </head>
 
 <body>
     <script>
-        const body = document.querySelector('body');
-        var pro = fetch('./utils/data/rank/20240201.json')
-        body.classList.add('loading');
-        pro.finally(() => {
-            body.classList.remove('loading');
-        })
-        let promise = fetch(url)
+
+        let promise = fetch('./utils/data/rank/20240201.json')
 
         promise.then(res => {
-            //fulfillment handle
-        }, rej => {
-            //rejection handle
-        })      
+            // fulfillment handle
+            console.log('res 1', res);
+            return res.json()
+        }).then(res => {
+            console.log('res 2', res);
+        })
+            .catch(err => {
+                // rejection handle
+                console.log('err', err);
+
+            }).finally(log => {
+                // finally handle
+                console.log('done');
+
+            })
     </script>
 </body>
 

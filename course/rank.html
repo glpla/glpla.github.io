@@ -61,7 +61,7 @@
   <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script> -->
   <script src="/utils/lib/vue.global.prod.min.js"></script>
   <script>
-    const { createApp, ref, computed, onMounted, watch } = Vue
+    const { createApp, ref, computed, onMounted, onBeforeMount, watch } = Vue
     createApp({
       setup() {
         const navs = ref([{
@@ -187,8 +187,12 @@
           isSubShow.value = true;
         }
 
+        onBeforeMount(() => {
+          isLoading.value = true;
+        })
+
         onMounted(() => {
-          // console.log(ind.value, subind.value, subNav.value);
+          isLoading.value = false;
         })
 
         return {
