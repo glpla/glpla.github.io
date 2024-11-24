@@ -725,8 +725,7 @@ header {
     }
 }      </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animCountdown.html">倒计时 -
-        Countdown</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animCountdown.html">倒计时 - Countdown</a></dd>
     <dd>
       <div>1. 使用4张背景图片</div>
       <div>.从3依次减到0，分3段进行</div>
@@ -735,44 +734,30 @@ header {
       <div>.精灵图大小50*500</div>
       <div>.每个数字大小50*50</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 轮播图 swiper</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/anim-swiper.html">轮播图 - swiper</a></dd>
     <dd>
-      <div>.采用步进steps逐步设置swiper的左侧位置</div>
-      <div class="swiper-box">
-        <div class="swiper">
-          <div class="swiper-item" style="--url:url(../imgs/banner.png)"></div>
-          <div class="swiper-item" style="--url:url(../imgs/bg1.jpg)"></div>
-          <div class="swiper-item" style="--url:url(../imgs/bg2.jpg)"></div>
-          <div class="swiper-item" style="--url:url(../imgs/bg3.jpg)"></div>
-          <div class="swiper-item" style="--url:url(../imgs/bg4.jpg)"></div>
-        </div>
-      </div>
+      <div>.使用 flex；不换行</div>
+      <div>.初始定位在左侧 left 0</div>
+      <div>.采用步进 steps() 逐步设置swiper的左侧 left 位置</div>
+      <div>.循环</div>
       <pre>
-&lt;div class="swiper-box"&gt;
-    &lt;div class="swiper"&gt;
-        &lt;div class="swiper-item"&gt;&lt;/div&gt;
-        &lt;div class="swiper-item"&gt;&lt;/div&gt;
-        &lt;div class="swiper-item"&gt;&lt;/div&gt;
-        &lt;div class="swiper-item"&gt;&lt;/div&gt;
-        &lt;div class="swiper-item"&gt;&lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</pre>
+animation: swiper 5s steps(5) infinite;
+</pre>
       <pre>
-.swiper {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    animation: swiper 10s steps(5) infinite;
-}
-
 @keyframes swiper {
-    to {
-        left: -500%;
-    }
+  to {
+      left: -500%;
+  }
+}</pre>
+      <div>.不循环</div>
+      <pre>
+animation: swiper 4s steps(4) forwards;
+</pre>
+      <pre>
+@keyframes swiper {
+  to {
+      left: -400%;
+  }
 }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/oNVjXLE">打字 typing -
