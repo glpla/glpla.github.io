@@ -17,6 +17,7 @@
 
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -46,32 +47,61 @@
 
         .demo {
             width: 318px;
-            height: 216px;
             gap: 10px;
             display: flex;
             flex-wrap: wrap;
-            /* align-content: flex-start; */
             background-color: #f1f2f3;
             padding: 10px;
         }
 
         .demo div {
-            width: 50px;
-            height: 50px;
             background-color: #fff;
+            flex: auto;
+        }
+
+        .demo div:last-child {
+            flex: none;
+        }
+
+        .box {
+            display: flex;
+            width: 300px;
+            height: 100px;
+            background-color: #eee;
+        }
+
+        .box div {
+            width: 50px;
+            flex-basis: 50px;
+            transition: 0.5s;
+        }
+
+        .box div:hover {
+            flex: 1;
+            background-color: #f40;
         }
     </style>
 </head>
 
 <body>
+    <div class="box">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+    </div>
     <div class="demo">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div>Lorem.</div>
+        <div>Quasi!</div>
+        <div>Aperiam?</div>
+        <div>Exercitationem.</div>
+        <div>Culpa!</div>
+        <div>Velit.</div>
+        <div>Possimus.</div>
+        <div>Voluptate?</div>
+        <div>Tempora!</div>
+        <div>Illum?</div>
     </div>
 </body>
 
