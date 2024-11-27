@@ -1,42 +1,3 @@
-const head = document.querySelector("header");
-const back = document.querySelector(".back");
-const burger = document.querySelector('.burger')
-
-document.addEventListener('scrollStart', () => {
-  if (head.classList.contains('open')) {
-    head.classList.remove('open')
-  }
-})
-
-burger.addEventListener('click', () => {
-  head.classList.toggle('open')
-})
-
-// window.addEventListener("scroll", () => {
-//   let h = head.getBoundingClientRect().height;
-//   if (window.pageYOffset - h > 200) {
-//     if (!head.classList.contains("sticky")) {
-//       head.classList.add("sticky");
-//     }
-//   } else {
-//     head.classList.remove("sticky");
-//   }
-//   if (window.pageYOffset > 1000) {
-//     back.style.display = "block";
-//   } else {
-//     back.style.display = "none";
-//   }
-// });
-
-// scrollReveal option
-const revealOption = {
-  delay: 300,
-  distance: "50px",
-  duration: 500,
-  easing: "ease-in-out",
-  origin: "bottom",
-};
-
 // swiper
 const swiperInfo = document.querySelectorAll('.swiper-info')
 const swiper = new Swiper('.swiper', {
@@ -92,6 +53,14 @@ btns.addEventListener("click", (e) => {
 });
 
 // scrollReveal
+// scrollReveal option
+const revealOption = {
+  delay: 300,
+  distance: "50px",
+  duration: 500,
+  easing: "ease-in-out",
+  origin: "bottom",
+};
 ScrollReveal().reveal(".feature-item", { ...revealOption, interval: 350 });
 ScrollReveal().reveal(".service-item", { ...revealOption, interval: 350 });
 ScrollReveal().reveal(".team-item", { ...revealOption, interval: 350 });
@@ -109,6 +78,8 @@ ScrollReveal().reveal(".data-item", {
     })
   }
 });
+
+// anime
 const animeIpt = () => {
   anime: ({
     targets: '.data-item .num',
@@ -118,8 +89,3 @@ const animeIpt = () => {
     easing: 'easeInExpo'
   })
 }
-
-// const scroll = new SmoothScroll('nav a[href*="#"], .back a[href*="#"]', {
-//   header: 'header',
-//   offset: 80
-// })

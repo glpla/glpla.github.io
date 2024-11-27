@@ -54,20 +54,26 @@
           <th>说明</th>
         </tr>
         <tr>
-          <td>onload/load</td>
+          <td>load</td>
           <td>页面加载完毕，可以获取元素</td>
         </tr>
         <tr>
-          <td>onresize/resize</td>
+          <td>unload</td>
+          <td>页面卸载
+            <br>浏览器会忽略阻塞用户界面的方法，如 alert、prompt、confirm
+          </td>
+        </tr>
+        <tr>
+          <td>beforeunload</td>
+          <td>页面卸载前</td>
+        </tr>
+        <tr>
+          <td>resize</td>
           <td>页面缩放</td>
         </tr>
         <tr>
-          <td>onscroll/scroll</td>
+          <td>scroll</td>
           <td>页面滚动</td>
-        </tr>
-        <tr>
-          <td>onscrollend/scrollend</td>
-          <td>页面滚动结束</td>
         </tr>
         <tr>
           <td>matchMedia</td>
@@ -78,12 +84,18 @@
           <td>鼠标滚轮事件</td>
         </tr>
       </table>
+      <div class="tips">scrollstart / scrollend 不是标准的浏览器事件</div>
     </dd>
-    <dt>加载完毕 onload</dt>
+    <dt>加载完毕 oload</dt>
     <dd>
-      <div>.为了保证JS执行时，相关的元素已经准备完毕，JS代码通常写在&lt;body&gt;最后面。如果使用 onload 就可以把代码放在任何地方</div>
-      <div>.如果加载内容过多，onload 会占用更多时间，影响用户体验。可以采用 DOMContentLoaded方法。只要 DOM 框架出来即可，不需要渲染CSS/FLASH/图片，且不影响交互</div>
-      <div>.如果两个事件都定义了，则先执行 DOMContentLoaded 再执行 onload</div>
+      <div>.为了保证 JavaScript 执行时，相关的元素已经准备完毕， JavaScript 代码通常写在&lt;body&gt;最后面。如果使用 load 就可以把代码放在任何地方</div>
+      <div>.如果加载内容过多，load 会占用更多时间，影响用户体验。可以采用 DOMContentLoaded方法。只要 DOM 框架出来即可，不需要渲染CSS/FLASH/图片，且不影响交互</div>
+      <div>.如果两个事件都定义了，则先执行 DOMContentLoaded 再执行 load</div>
+      <div>.通常用作初始化</div>
+      <pre>
+window.addEventListener('load', () => {
+    console.log('load');
+})      </pre>
       <pre>
 window.onload = function () { 
     //... ...
@@ -93,7 +105,16 @@ window.addEventListener('DOMContentLoaded', () => {
     //... ...
 })</pre>
     </dd>
-    <dt>窗口缩放 onresize</dt>
+    <dt>卸载前 beforeunload</dt>
+    <dd>
+      <div>.设置返回值，这将触发浏览器的标准确认对话框，无法自定义UI</div>
+      <pre>
+window.addEventListener('beforeunload', (event) => {
+    event.returnValue = '您确定要离开此页面吗？';
+    console.log('beforeunload');
+});</pre>
+    </dd>
+    <dt>窗口缩放 resize</dt>
     <dd>
       <div>.窗口尺寸/大小发生变化触发事件</div>
       <div>.响应式布局经常用到</div>
@@ -110,15 +131,13 @@ window.addEventListener('resize', () => {
       <div>.如果使用16px、375px，检查元素并使用iPhone6/7/8，发现HTML字体大小被动态设置为16px</div>
       <div>.以下代码要放到 &lt;head&gt;，优先执行</div>
       <pre>
-&lt;script&gt;
-  let setFontSize = () => {
-    let w = document.documentElement.clientWidth;
-    let size = (20 * (w / 320) > 40 ? 40 + 'px' : (20 * (w / 320) + 'px'))
-    document.documentElement.style.fontSize = size;
-  }
-  window.addEventListener('load', setFontSize)
-  window.addEventListener('resize', setFontSize)
-&lt;/script&gt;</pre>
+let setFontSize = () => {
+  let w = document.documentElement.clientWidth;
+  let size = (20 * (w / 320) > 40 ? 40 + 'px' : (20 * (w / 320) + 'px'))
+  document.documentElement.style.fontSize = size;
+}
+window.addEventListener('load', setFontSize)
+window.addEventListener('resize', setFontSize)</pre>
     </dd>
     <dt>窗口滚动 onscroll</dt>
     <dd>.只有当出现滚动条时，scroll 事件才会触发</dd>

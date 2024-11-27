@@ -14,19 +14,15 @@
 <body>
   <header>
     <h1 class="logo">cnplaman</h1>
+    <div class="burger"></div>
     <nav>
-      <a href="#home">home</a>
-      <a href="#focus">focus</a>
-      <a href="#web">web</a>
-      <a href="#service">sevice</a>
-      <a href="#team">team</a>
-      <a href="#news">news</a>
+      <a class="nav-item" style="--delay:0" href="#home">home</a>
+      <a class="nav-item" style="--delay:1" href="#focus">focus</a>
+      <a class="nav-item" style="--delay:2" href="#web">web</a>
+      <a class="nav-item" style="--delay:3" href="#service">sevice</a>
+      <a class="nav-item" style="--delay:4" href="#team">team</a>
+      <a class="nav-item" style="--delay:5" href="#news">news</a>
     </nav>
-    <div class="burger">
-      <div class="burger-line"></div>
-      <div class="burger-line"></div>
-      <div class="burger-line"></div>
-    </div>
   </header>
   <section class="home" id='home'>
     <div class="swiper">
@@ -426,7 +422,46 @@
   <script src="/utils/lib/isotope/isotope.pkgd.min.js"></script>
   <script src="/utils/lib/swiper-11.0.5/package/swiper-bundle.min.js"></script>
   <script type="text/javascript" src="../lib/companies.js"></script>
-  <script src="/utils/custom/scroll-nav.js"> </script>
+  <script>
+    const header = document.querySelector('header')
+    const back = document.querySelector(".back");
+    const burger = document.querySelector('.burger')
+    const sections = document.querySelectorAll('section')
+    const links = header.querySelectorAll('.nav-item')
+
+    burger.addEventListener('click', () => {
+      header.classList.toggle('open')
+    })
+
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        header.classList.remove('open')
+      })
+    })
+
+    window.addEventListener('scroll', () => {
+
+      // nav
+      sections.forEach(section => {
+        const top = window.scrollY
+        const offset = section.offsetTop - 100
+        const height = section.offsetHeight
+        const id = section.getAttribute('id')
+
+        if (top >= offset && top < offset + height) {
+          links.forEach(link => {
+            link.classList.remove('active')
+            document.querySelector(`a[href*=${id}]`).classList.add('active')
+          })
+        }
+      })
+
+      // header
+      header.classList.toggle('sticky', window.scrollY > 100)
+      // back
+      back.classList.toggle('fixed', window.scrollY > 500)
+    })
+  </script>
 </body>
 
 </html>
