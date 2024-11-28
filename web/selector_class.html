@@ -177,17 +177,26 @@ input[type='radio']:checked+label {
       </table>
       <p>. 根据文档结构来选择，通常配合父级元素一起使用</p>
       <p>. nth-child 可以使用关键字；odd 选中序号为奇数的孩子；even 选中序号为偶数的孩子</p>
-      <p>. nth-child 可以使用 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child#anb">表达式</a>；n
-        只能是数字，不能是字母；n 必须是表达式的第一项</p>
+      <p>. nth-child 可以使用 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child#anb">表达式 An+B</a>；n
+        只能是非负数字，从0开始；n 必须是表达式的第一项 - n is all nonnegative integers, starting from 0</p>
       <p>. 以上选择器不区分元素类型 - according to their position</p>
       <pre>
 :nth-child(even)//选择序号为偶数的元素
 :nth-child(odd)//选择序号为奇数的元素
-:nth-child(2n)//选择序号为偶数的元素
-:nth-child(2n+1)//选择序号为奇数的元素
+</pre>
+
+      <pre>
+:nth-child(2n)//同even；选择序号为偶数的元素
+:nth-child(2n+1)//同odd：选择序号为奇数的元素
+</pre>
+
+      <pre>
 :nth-child(3n)//选择序号为3、6、9等元素
 :nth-child(3n+1)//选择序号为1、4、7、10等元素
-:nth-child(-n+3)//选择序号为3、2、1的元素，前3个；:nth-child(3-n)错误
+</pre>
+
+      <pre>
+:nth-child(-n+3)//前3 - 选择序号为3、2、1的元素；:nth-child(3-n)错误
 :nth-last-child(-n+3)//后3</pre>
       <p>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/table2.html"> 表格 - 斑马纹表格</a></p>
       <pre>
@@ -197,10 +206,6 @@ tr:nth-child(odd) {
 tr:nth-child(even) {
   background-color: #faccff;
 }      </pre>
-      <p>. 选择奇数行或偶数行：采用结构伪类选择器 :nth-child()，使用关键字 odd | even 或表达式 2n+1 | 2n</p>
-      <p>. 也可以分别为奇数行和偶数行单独指定类；适合小规模表格</p>
-      <p>. :hover 时候，当前行样式发生变化</p>
-      <p>. 标题行样式始终保持不变</p>
       <div>根据类型选择元素</div>
       <table>
         <tr>
