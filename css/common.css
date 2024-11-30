@@ -569,7 +569,6 @@ iframe {
     top: 0;
   }
 
-
   .ham {
     display: block;
     position: relative;
@@ -598,15 +597,15 @@ iframe {
     transform: translateY(8px);
   }
 
-  .ham.active {
+  header.active .ham {
     background-color: transparent;
   }
 
-  .ham.active::before {
+  header.active .ham::before {
     transform: translateY(0px) rotate(-45deg);
   }
 
-  .ham.active::after {
+  header.active .ham::after {
     transform: translateY(0px) rotate(45deg);
   }
 
@@ -628,15 +627,15 @@ iframe {
     transition: transform 0.4s ease-in-out calc(var(--delay)*40ms);
   }
 
-  .nav.active {
+  header.active .nav {
     right: 0;
   }
 
-  .nav.active .nav-item {
+  header.active .nav .nav-item {
     transform: translateX(0);
   }
 
-  body.lock {
+  body:has(header.active) {
     overflow-y: hidden;
   }
 }
