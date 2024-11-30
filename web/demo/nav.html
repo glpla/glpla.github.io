@@ -107,11 +107,11 @@
       <span>menu</span>
     </div>
     <nav class="nav">
-      <a href="#nav1" class="active">Home</a>
-      <a href="#nav2">Work</a>
-      <a href="#nav3">Team</a>
-      <a href="#nav4">Info</a>
-      <a href="#nav5">About</a>
+      <a class="nav-item" href="#nav1" class="active">Home</a>
+      <a class="nav-item" href="#nav2">Work</a>
+      <a class="nav-item" href="#nav3">Team</a>
+      <a class="nav-item" href="#nav4">Info</a>
+      <a class="nav-item" href="#nav5">About</a>
     </nav>
   </header>
   <section id="nav1">
@@ -129,12 +129,36 @@
   <section id="nav5">
     <div class="cont">About</div>
   </section>
-  <script src="/utils/custom/scroll-nav.js"> </script>
   <script>
+    const header = document.querySelector('header')
     const ham = document.querySelector('.ham');
     const nav = document.querySelector('.nav');
+    const sections = document.querySelectorAll('section')
+    const links = header.querySelectorAll('.nav-item')
     ham.addEventListener('click', () => {
       nav.classList.toggle('active');
+    })
+    window.addEventListener('scroll', () => {
+
+      // nav
+      const top = window.scrollY
+      sections.forEach(section => {
+
+        const offset = section.offsetTop - 100
+        const height = section.offsetHeight
+
+        const id = section.getAttribute('id')
+        const itemTarget = document.querySelector(`a[href*=${id}]`)
+
+        if (top >= offset && top < offset + height) {
+          itemTarget.classList.add('active')
+        } else {
+          itemTarget.classList.remove('active');
+        }
+      })
+
+      // header
+      header.classList.toggle('sticky', window.scrollY > 100)
     })
   </script>
 </body>

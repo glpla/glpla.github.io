@@ -1,12 +1,14 @@
 @import url(//at.alicdn.com/t/c/font_2743209_qvgf2slez3.css);
 
 :root {
-  --main-width: 100rem;
+  --main-width: 1024px;
   --main-color: #c8bc9d;
+  --p-m-g: 10px;
 }
 
 body,
 header,
+h1,
 ul,
 footer,
 div,
@@ -20,18 +22,18 @@ nav {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 10vh;
 }
 
 body {
   background-color: #111;
-  font-size: 1.8rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.6rem;
 }
 
 ul {
@@ -113,12 +115,12 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   place-items: center;
-  gap: 2rem;
+  gap: var(--p-m-g);
 }
 
 .top-banner {
   position: relative;
-  height: 300px;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,9 +129,7 @@ button {
 }
 
 .top-banner h1 {
-  position: absolute;
-  text-align: center;
-  font-size: 3rem;
+  font-size: 5rem;
 }
 
 .top-banner img {
@@ -137,34 +137,33 @@ button {
 }
 
 .top-banner .tree0 {
-  height: 80%;
-  left: 0;
-  bottom: 0;
+  height: 40%;
+  left: 0%;
+  bottom: 30%;
 }
 
 .top-banner .tree1 {
-  height: 60%;
+  height: 30%;
   left: 0%;
   bottom: 0;
 }
 
 .top-banner .tree2 {
-  height: 60%;
+  height: 40%;
   right: 0;
-  bottom: 0;
+  bottom: 10%;
 }
 
 .top-banner .tree3 {
   height: 40%;
-  left: 25%;
+  left: 10%;
   bottom: 0;
-  margin-left: 20%;
 }
 
 header {
   position: sticky;
   top: 0;
-  height: 80px;
+  height: 10vh;
   display: flex;
   align-items: center;
   background-color: #fff;
@@ -175,7 +174,6 @@ header {
 }
 
 header.hover {
-  /* background-color: #111; */
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -189,7 +187,7 @@ header.hover {
 
 .nav {
   display: flex;
-  gap: 10px;
+  gap: var(--p-m-g);
 }
 
 .nav.hover {
@@ -201,6 +199,7 @@ header.hover {
   color: var(--main-color);
   text-transform: capitalize;
   transition: .4s;
+  font-size: 1.8rem;
   cursor: pointer;
 }
 
@@ -232,7 +231,7 @@ header.hover {
   max-width: var(--main-width);
   margin: 0 auto;
   background-color: #fff;
-  padding: 0 1rem;
+  padding: 0 var(--p-m-g);
   overflow: hidden;
 }
 
@@ -243,7 +242,7 @@ section {
 .banner {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
+  gap: var(--p-m-g);
 }
 
 .banner .banner-item {
@@ -324,36 +323,35 @@ section {
 
 .i0 {
   grid-column: span 2;
-  /* background-image: url(../../utils/military/military5.jpg); */
 }
 
 .i1 {
   grid-row: span 2;
-  /* background-image: url(../../utils/military/military6.jpg); */
 }
 
 .i2 {
   grid-row: span 2;
-  /* background-image: url(../../utils/military/military7.jpg); */
-}
-
-.i3 {
-  /* background-image: url(../../utils/military/military8.jpg); */
 }
 
 .i4 {
   grid-column: span 2;
-  /* background-image: url(../../utils/military/military9.jpg); */
 }
 
 .cont {
-  text-align: justify;
-  columns: 2;
+  columns: 230px 2;
 }
 
 .cont p {
   margin-bottom: 1em;
-  text-indent: 2em;
+  text-align: justify;
+}
+
+.cont p::first-letter {
+  float: left;
+  margin-right: 1em;
+  background-color: var(--main-color);
+  padding: 0 1em;
+  line-height: 2em;
 }
 
 .comments {
@@ -364,14 +362,14 @@ section {
 
 .comments p {
   /* 利用auto保障俩端是对齐的 */
-  flex: 1 0 auto;
+  flex: auto;
   /* 避免最后一个自动扩展太多 */
   max-width: 8.8rem;
-  padding: 0.2rem 0.6rem;
+  padding: 0.4rem 0.8rem;
   margin: 0.4rem;
   background-color: var(--main-color);
   color: #fff;
-  font-size: 14px;
+  font-size: 1.4rem;
   border-radius: 0.6rem;
   text-align: center;
   text-transform: capitalize;
@@ -440,7 +438,7 @@ section {
   font-size: 2.8rem;
   padding: 1rem;
   opacity: 1;
-  transition: .4s;
+  transition: .4s 0.2s;
 }
 
 .info-item p {
@@ -456,10 +454,12 @@ section {
   color: var(--main-color);
   opacity: 0;
   transform: scale(2.4);
+  transition: .4s;
 }
 
 .info-item:hover p {
   transform: scale(1);
+  transition: .4s 0.2s;
 }
 
 .form-item {

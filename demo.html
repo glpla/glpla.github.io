@@ -20,98 +20,30 @@
 
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #000;
-            overflow: hidden;
         }
 
-        .wrap {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: var(--w);
-            aspect-ratio: 16/9;
-            perspective: var(--z);
-        }
-
-        .swiper {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            animation: --roll 120s linear infinite;
-            cursor: pointer;
-        }
-
-        @keyframes --roll {
-
-            100% {
-                transform: rotateY(360deg);
-            }
-        }
-
-        .item {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: #f40;
-            color: #fff;
-            transform: rotateY(calc(var(--deg)*36deg)) translateZ(calc(-1*var(--z)));
-            cursor: pointer;
-        }
-
-        .swiper:hover {
-            animation-play-state: paused;
+        span::first-letter {
+            color: #f40;
         }
     </style>
 </head>
 
 <body>
-    <div class="wrap">
-        <div class="swiper">
-            <div class="item" style="--deg:0">0</div>
-            <div class="item" style="--deg:1">1</div>
-            <div class="item" style="--deg:2">2</div>
-            <div class="item" style="--deg:3">3</div>
-            <div class="item" style="--deg:4">4</div>
-            <div class="item" style="--deg:5">5</div>
-            <div class="item" style="--deg:6">6</div>
-            <div class="item" style="--deg:7">7</div>
-            <div class="item" style="--deg:8">8</div>
-            <div class="item" style="--deg:9">9</div>
-            <div class="item" style="--deg:10">10</div>
-            <!-- <div class="item" style="--deg:11">11</div>
-            <div class="item" style="--deg:12">12</div>
-            <div class="item" style="--deg:13">13</div>
-            <div class="item" style="--deg:14">14</div>
-            <div class="item" style="--deg:15">15</div>
-            <div class="item" style="--deg:16">16</div>
-            <div class="item" style="--deg:17">17</div> -->
-            <!-- <div style="--deg:18">18</div>
-            <div style="--deg:19">19</div>
-            <div style="--deg:20">20</div>
-            <div style="--deg:21">21</div>
-            <div style="--deg:22">22</div>
-            <div style="--deg:23">23</div>
-            <div style="--deg:24">24</div>
-            <div style="--deg:25">25</div>
-            <div style="--deg:26">26</div>
-            <div style="--deg:27">27</div>
-            <div style="--deg:28">28</div>
-            <div style="--deg:29">29</div>
-            <div style="--deg:30">30</div>
-            <div style="--deg:31">31</div>
-            <div style="--deg:32">32</div>
-            <div style="--deg:33">33</div>
-            <div style="--deg:34">34</div>
-            <div style="--deg:35">35</div> -->
-        </div>
-    </div>
+    <span>Lorem.</span>
+    <script>
+        const links = document.querySelectorAll('nav span')
+        const conts = document.querySelectorAll('main p')
+        console.log(links);
+        links.forEach((link, ind) => {
+            link.addEventListener('click', () => {
+                conts[ind].scrollIntoView({ behavior: 'smooth', block: 'center' })
+            })
+        })
+    </script>
 </body>
 
 </html>

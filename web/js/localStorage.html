@@ -17,20 +17,20 @@
   </header>
   <dl>
     <dt>特点</dt>
-    <dd>.以值对name=value的形式存储在本地</dd>
-    <dd>.是window的全局函数</dd>
-    <dd>.持久化保存，除非用户主动清除</dd>
-    <dd>.读取方便</dd>
-    <dd>.存储容量大，约20MB</dd>
-    <dd>.不会出现在请求头中，可以节省带宽</dd>
-    <dd>.不会被网络爬虫抓取</dd>
-    <dd>.不同浏览器保存的数据不能共享</dd>
-    <dd>.存的数据都是<span class="warn">字符串String</span>！！！</dd>
-    <dt>查看</dt>
-    <dd>F12 → Application → Storage → Loacal Storage</dd>
-    <dd class="tips">浏览器调试时，console.log的文字的颜色：<span style="color: #000;font-weight :700;">黑色</span>为字符串；<span
-        style="color: #369;font-weight:700;">蓝色</span>为数字</dd>
     <dd>
+      <div>.以值对 key-value pairs 的形式存储在本地</div>
+      <div>.是 window 的全局函数</div>
+      <div>.持久化保存，除非用户主动清除</div>
+      <div>.读取方便</div>
+      <div>.存储容量大，约20MB</div>
+      <div>.不会出现在请求头中，可以节省带宽</div>
+      <div>.不会被网络爬虫抓取</div>
+      <div>.不同浏览器保存的数据不能共享</div>
+      <div>.存的数据都是<span class="warn">字符串 String</span>！！！</div>
+    </dd>
+    <dt>常用方法</dt>
+    <dd>
+      <div>.如下表所示</div>
       <table>
         <caption>常用方法</caption>
         <tr>
@@ -54,17 +54,25 @@
           <td>localStorage.clear()</td>
         </tr>
       </table>
+      <div class="tips">
+        <div>F12 → Application → Storage → Loacal Storage</div>
+        <div>浏览器调试时，console.log 的文字的颜色：<span style="color: #000;font-weight :700;">黑色</span>为字符串；<span
+            style="color: #369;font-weight:700;">蓝色</span>为数字</div>
+        <div>可以根据索引获取：localStorage.key(n)</div>
+      </div>
     </dd>
-    <dd class="tips">可以根据索引获取：localStorage.key(n)</dd>
   </dl>
   <div class="chap">基本应用 Usage</div>
   <dl>
+    <dd>.存的数据都是<span class="warn">字符串 String</span>！！！</dd>
     <dt>数值 Number</dt>
     <dd>
+      <div>设置</div>
       <pre>
-//设置
 localStorage.setItem('num', 2114)
-//获取
+</pre>
+      <div>获取</div>
+      <pre>
 let num = localStorage.getItem('num')
 //如果数据不存在，返回null；如果存在返回字符串[黑色]
 console.log(num);
@@ -73,27 +81,31 @@ console.log(Number(num));</pre>
     </dd>
     <dt>字符串 String</dt>
     <dd>
+      <div>设置</div>
       <pre>
-//设置
 localStorage.setItem('str', 'male')
-//获取
+</pre>
+      <div>获取</div>
+      <pre>
 let str = localStorage.getItem('str')
 //如果数据不存在，返回null
 console.log(str);</pre>
     </dd>
     <dt>布尔 Boolean</dt>
     <dd>
+      <div>设置</div>
       <pre>
-//设置
 localStorage.setItem('bool', true)
-//获取
+</pre>
+      <div>获取</div>
+      <pre>
 let bool = localStorage.getItem('bool')
 //如果数据不存在，返回null
 console.log(bool, Boolean(bool));</pre>
     </dd>
     <dt>数组 Array</dt>
-    <dd>.直接存储会被转化为字符串</dd>
     <dd>
+      <div>.直接存储会被转化为字符串</div>
       <pre>
 let arr = [1, 2, 3, 4, 5];
 let res;
@@ -101,23 +113,19 @@ console.log('before set: ', arr);
 localStorage.setItem('arr', arr)
 res = localStorage.getItem('arr')
 console.log('after get ', res);</pre>
-    </dd>
-    <dd>.存储时，使用JSON.stringify将数据序列化处理后再保存</dd>
-    <dd>.获取时，使用JSON.parse转换为原始数据类型；如果不解析仍然是字符串</dd>
-    <dd>
+      <div>.存储时，使用 JSON.stringify 将数据序列化处理后再保存，否则无法还原</div>
+      <div>.获取时，使用 JSON.parse 转换为原始数据类型；如果不解析仍然是字符串</div>
       <pre>
 localStorage.setItem('arr1', JSON.stringify(arr));
 res = JSON.parse(localStorage.getItem('arr1'));
 console.log('解析获取：res:', res);</pre>
-    </dd>
-    <dd>兼容写法：如果为null，则赋值为空数组</dd>
-    <dd>
+      <div>兼容写法：如果为 null，则赋值为空数组</div>
       <pre>res = JSON.parse(localStorage.getItem('arr1')) || [];</pre>
     </dd>
     <dt>对象 Object</dt>
-    <dd>.同数组一样，对象的保存和获取也要处理</dd>
-    <dd>.直接存储，查看时，显示为[object Object]</dd>
     <dd>
+      <div>.同数组一样，对象的保存和获取也要处理</div>
+      <div>.直接存储，查看时，显示为[object Object]</div>
       <pre>
 let obj = { name: 'glc' }
 //使用JSON.stringify转换
@@ -131,14 +139,14 @@ console.log(obj1);</pre>
     <dt><span class="iconfont icon-assignment"></span> 总结 Summary</dt>
     <dd class="sn">
       <div>数据的设置和获取默认都是为<span class="warn">字符串</span></div>
-      <div>如果存储的是数值型数据，获取时应类型转换，如使用Number()转换为数字</div>
+      <div>如果存储的是数值型数据，获取时应类型转换，如使用 Number() 转换为数字</div>
       <div>复合数据类型如数组和对象，保存时应使用 JSON.stringify() 序列化处理；获取时应使用 JSON.parse() 解析；两者要配合使用</div>
       <div>不管什么类型的数据，如果不存在，返回为<span class="warn">null</span></div>
     </dd>
     <dt><span class="iconfont icon-mouse"></span> 练习 Homework</dt>
     <dd class="sn">
       <div>完成以上操作，体会本地存储的特点</div>
-      <div>体会保存数组对象[{}]的基本操作，并思考和其它数据类型的异同</div>
+      <div>体会保存数组对象 [{}] 的基本操作，并思考和其它数据类型的异同</div>
       <div>创建一个登陆表单，实现保存用户名和密码的操作，以便于下次直接登陆</div>
     </dd>
   </dl>

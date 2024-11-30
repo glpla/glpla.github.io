@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/common.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>文档</h1>
+        <span>Document</span>
+    </header>
+    <dl>
+        <dt>概述 Overview</dt>
+        <dd>
+            <div>.<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document">Document</a> 是 <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/API">Web API</a> 之一</div>
+            <div>.示例结构如下</div>
+            <pre>&lt;div id="box" class="wrap container"&gt;hi,there.&lt;/div&gt;</pre>
+        </dd>
+    </dl>
+    <div class="chap">属性 Properties</div>
+    <dl>
+        <dt>Document.body</dt>
+        <dd>
+            <div>.很多属性都是只读 - Read only</div>
+            <div>.返回 &lt;body&gt;，不是 &lt;html&gt;</div>
+        </dd>
+        <dt>Document.fullscreenElement</dt>
+        <dd>.当前是否处于全屏模式；非空 null 就是在全屏模式</dd>
+    </dl>
+    <div class="chap">方法 Methods</div>
+    <dl>
+        <dt>Document.createElement()： 使用给定的标签创建新元素</dt>
+        <dt>Document.append()： 在文档末尾添加节点对象或字符串</dt>
+        <dd>
+            <pre>
+const body = document.body
+const div = document.createElement('div')
+div.textContent = 'hi,there.'
+body.append(div)
+body.append('from glpla')</pre>
+        </dd>
+        <dt>Document.getElementById()</dt>
+        <dd>
+            <div>.根据 id 获取一个元素 - returns an Element object</div>
+            <div>.id 应该唯一；否则只匹配会第一个元素</div>
+            <pre>const dom = document.getElementById('box');</pre>
+        </dd>
+        <dt>Document.getElementsByClassName()</dt>
+        <dd>
+            <div>.根据类名获取元素，返回类数组对象 - an array-like object / HTMLCollection</div>
+            <div>.多个类名以空格分开，表示 <span class="warn">同时</span> 具备这些类</div>
+            <div>.动态获取；当 DOM 发生变化时，结果相应的改变 - This is a <span class="warn">live</span> HTMLCollection. Changes in the DOM
+                will reflect in the array
+                as the changes occur</div>
+            <pre>
+const dom = document.getElementsByClassName('wrap');
+const dom = document.getElementsByClassName('wrap container');</pre>
+        </dd>
+        <dt>Document.getElementsByTagName()</dt>
+        <dd>
+            <div>.根据标签名获取元素 - an HTMLCollection of elements with the given tag name</div>
+            <pre>const dom = document.getElementsByTagName('div');</pre>
+        </dd>
+        <dt>Document.querySelector()</dt>
+        <dd>
+            <div>.the first Element node that matches</div>
+        </dd>
+        <dt>Document.querySelectorAll()</dt>
+        <dd>
+            <div>.a list of all the Element nodes that matche</div>
+            <div>.这2个方法返回 NodeList()</div>
+            <pre>const dom = document.querySelector('#box');</pre>
+            <pre>const dom = document.querySelectorAll('.wrap');</pre>
+        </dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 函数封装 - 将元素获取方法封装为一个函数，简化操作</dd>
+        <dd>
+            <pre>
+function fn(el) {
+    return document.querySelector(el)
+}</pre>
+        </dd>
+        <dt>Document.exitFullscreen()</dt>
+        <dd>
+            <div>.某个元素退出全屏模式</div>
+        </dd>
+    </dl>
+    <div class="chap">事件 Events</div>
+    <dl>
+        <dd>
+            <div>.建议以事件侦听器的方式使用</div>
+            <pre>
+document.addEventListener('eventName', () => {
+    console.log('xxx');
+})</pre>
+        </dd>
+        <dt>剪切板事件 Clipboard events</dt>
+        <dd class="sn">
+            <div>copy</div>
+            <div>cut</div>
+            <div>paste</div>
+        </dd>
+        <dt>全屏事件 Fullscreen events</dt>
+        <dd class="sn">
+            <div>fullscreenchange</div>
+            <p>.当一个元素进入或退出全屏模式时，会触发 fullscreenchange 事件 - F11全屏模式</p>
+            <p>.事件首先被发送给正在过渡到全屏模式或从全屏模式退出的元素</p>
+            <p>.然后冒泡事件到 document，所以 document 可以监听该事件</p>
+            <p>.单纯的切换全屏模式并不会触发该事件</p>
+            <pre>
+&lt;div class="wrap"&gt;
+    &lt;div class="switch-btn"&gt;Fullscreen&lt;/div&gt;
+&lt;/div&gt;</pre>
+            <pre>
+const fullScreenElement = document.querySelector('.wrap');
+const btn = document.querySelector('.switch-btn');
+
+btn.addEventListener('click', () => {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else {
+        fullScreenElement.requestFullscreen();
+    }
+})
+document.addEventListener('fullscreenchange', () => {
+    if (document.fullscreenElement) {
+        console.log("Entered fullscreen mode.");
+    } else {
+        console.log("Leaving fullscreen mode.");
+    }
+})            </pre>
+            <div>fullscreenerror</div>
+            <p>.全屏事件异常时触发</p>
+        </dd>
+        <dt>加载/卸载事件 Load & unload events</dt>
+        <dd class="sn">
+            <div>DOMContentLoaded</div>
+            <p>.页面加载完毕，包括DOM解析完毕和脚本文件下载完毕并执行，但是不会等样式文件、图片和其它资源都加载完毕</p>
+            <p>.window 的 load 事件则是完全加载 - 所有资源都加载完毕</p>
+            <p>.所以 DOMContentLoaded 事件比 load 事件更早触发</p>
+            <pre>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('document ready');
+})
+
+window.addEventListener('load', () => {
+    console.log('window loaded');
+})</pre>
+            <div></div>
+        </dd>
+        <dt>滚动事件 Scroll events</dt>
+        <dd>
+            <div>1 scroll</div>
+            <div>.页面滚动时触发</div>
+            <div>2 scrollend</div>
+            <div>.页面滚动结束触发</div>
+        </dd>
+    </dl>
+    <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

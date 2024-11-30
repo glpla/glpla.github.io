@@ -23,16 +23,18 @@
   </header>
   <dl>
     <dd>
-      <div>.Fetch 是 W3C 的一种请求标准，是 Window 的方法，属于 BOM 范畴；不是第三方库，与 Vue、JQuery无关</div>
+      <div>.Fetch 是 W3C 的一种请求标准，是 Window 的方法，属于 BOM 范畴；不是第三方库，与 Vue、JQuery 无关</div>
       <div>.下一代 Ajax 技术，基于 <a href="./promise.html">Promise</a> 方式处理数据</div>
       <div>.语法简介明了；除了IE，多数浏览器都兼容</div>
       <div>.既可以访问远程数据，也可以访问本地数据</div>
       <div>.需要拼接参数；需要二次封装</div>
-      <div>.更多信息，请访问 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch">Using_Fetch</a>、<a
-          href="https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch">MDN - fetch</a>、<a
-          href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API">Fetch_API</a>、<a
-          href="https://www.jianshu.com/p/8bb4d09182e5">接口调用 - fetch</a>、<a
-          href="https://www.cnblogs.com/zhongyehai/p/12363868.html?ivk_sa=1024320u">fetch - 请求数据</a></div>
+      <div>.更多信息，请访问
+        <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch">Using_Fetch</a>、
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch">MDN - fetch</a>、
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch_API</a>、
+        <a href="https://www.jianshu.com/p/8bb4d09182e5">接口调用 - fetch</a>、
+        <a href="https://www.cnblogs.com/zhongyehai/p/12363868.html?ivk_sa=1024320u">fetch - 请求数据</a>
+      </div>
       <pre>fetch(url)</pre>
       <pre>console.dir(fetch);</pre>
     </dd>
@@ -98,7 +100,10 @@ fetch('https://glpla.github.io/utils/avatar/avatar0.png')
   </dl>
   <div class="chap">网络请求</div>
   <dl>
-    <dd>.以下网络请求，基于 <a href="./express.html">express 环境</a>下的 <a href="./dynamic.html">动态资源服务器</a></dd>
+    <dd>.以下网络请求，基于 <span class="warn">自建</span> 数据服务器：<a href="./express.html">express 环境</a>下的 <a
+        href="./dynamic.html">动态资源服务器</a></dd>
+    <dd>.也可以直接使用 <span class="warn">线上</span> 数据服务器 <a href="https://jsonplaceholder.typicode.com/">jsonplaceholder</a>
+    </dd>
     <dt>获取数据 GET</dt>
     <dd class="sn">
       <div>C端</div>
@@ -107,7 +112,7 @@ fetch('https://glpla.github.io/utils/avatar/avatar0.png')
 fetch('https://glpla.github.io/utils/data/rank/20240203.json')
   .then(res => res.json())
   .then(res => console.log(res))</pre>
-      <p>使用查询参数 query，直接在url后面使用?拼接查询值对，使用&拼接多个查询参数；如获取指定数据或分页获取数据</p>
+      <p>使用查询参数 query，直接在 url 后面使用 ? 拼接查询值对，使用 & 拼接多个查询参数；如获取指定数据或分页获取数据</p>
       <pre>
 fetch('http://127.0.0.1:3000/test?id=20240507')
   .then(res => res.json())
@@ -141,9 +146,9 @@ router.get('/:id', (req, res) => {
     <dt>增加数据 POST</dt>
     <dd>url</dd>
     <dd>method：POST</dd>
-    <dd>headers：根据数据类型设置，如JSON数据</dd>
-    <dd>body：传递JSON数据，需要使用JSON.stringify(data)序列化数据；部分框架和部分服务器可以自动完成数据的序列化和解析</dd>
-    <dd>服务器使用 request.body 获取数据；Express早期需要使用额外的依赖 body-parser，现在可以直接使用内置中间件</dd>
+    <dd>headers：根据数据类型设置，如 JSON 数据，默认就是 JSON，所以使用 JSON 时，也可以省略 header 的配置</dd>
+    <dd>body：传递 JSON 数据，需要使用JSON.stringify(data) 序列化数据；部分框架和部分服务器可以自动完成数据的序列化和解析</dd>
+    <dd>服务器使用 request.body 获取数据；Express 早期需要使用额外的依赖 body-parser，现在可以 <span class="warn">直接使用</span> 内置中间件</dd>
     <dd class="sn">
       <div>C端</div>
       <p>传递JSON数据</p>
@@ -188,7 +193,7 @@ router.post('/', (req, res) => {
     </dd>
     <dt>删除数据 DELETE</dt>
     <dd>使用 <span class="warn">路径参数</span>，指定 method 为 DELETE</dd>
-    <dd>DELETE请求通常不需要请求体，但可能需要设置 Content-Type。如果API需要，确保它被正确设置，通常为 'Content-Type': 'application/json' 或 'Content-Type':
+    <dd>DELETE 请求通常不需要请求体，但可能需要设置 Content-Type。如果API需要，确保它被正确设置，通常为 'Content-Type': 'application/json' 或 'Content-Type':
       'text/plain'</dd>
     <dd>服务器端需要能够处理 DELETE 请求。有些API可能需要特定的路由或者需要在服务器端有相应的处理逻辑</dd>
     <dd>默认情况下，Node + Express 没有开启 DELETE 请求；需要设置请求头；更多信息，请查看 <a href="./proxy.html">代理 - Proxy</a></dd>

@@ -17,7 +17,6 @@
   <dl>
     <dd>单击标签，显示对应的内容；类似的应用还有 <a href="https://wow.techbrood.com/fiddle/11539">手风琴</a></dd>
     <dd>可以使用纯 CSS 实现，也可以使用 JavaScript 实现</dd>
-    <dd>适合少量数据的展示</dd>
     <dt>原理</dt>
     <dd class="sn">
       <p>一个元素的变化，触发关联元素的联动变化</p>
@@ -57,10 +56,9 @@
     </dd>
     <dt>JavaScript</dt>
     <dd>
-      <div>操作DOM</div>
-      <div>通过更换元素的 class 或样式 style 实现</div>
-      <div>初态时，各内容隐藏</div>
+      <div>初态时，各内容隐藏 display: none;</div>
       <div>单击时，为目标叠加激活样式</div>
+      <div>操作DOM：通过更换元素的 class 或样式 style 实现</div>
       <div>因为操作DOM，所以结构可以 <span class="warn">任意</span></div>
       <div>每次单击时，需要分别：</div>
       <div>. 遍历所有标题，移除 active，然后为当前标题添加活动类 active</div>
@@ -68,6 +66,17 @@
       <div>案例实现，请访问 <a href="./demo/tabcard2.html">标签页3</a>、<a href="./demo/acc_grid.html">accordion grid</a>、<a
           href="./demo/grid-nav.html">多级菜单</a>、<a href="https://codepen.io/glpla/full/ZEPbbQv">Codepen -
           TabCard</a></div>
+    </dd>
+    <dd class="tips">
+      <div>以上方法通过元素的隐藏和显示实现，频繁更新 DOM 树，适合少量数据的展示，不适合全页使用</div>
+    </dd>
+    <dt>JavaScript API</dt>
+    <dd>
+      <div>使用 <a href="./js/element.html">Element - scrollIntoView()</a> </div>
+      <div>结构可以 <span class="warn">任意</span></div>
+      <div>单击时，使得当前元素进入视图</div>
+      <div>要求容器具备滚动条</div>
+      <div>可以 <a href="./demo/tabcard3.html">局部导航</a> 使用，也可以 <a href="./demo/personal.html">全页导航</a> 使用</div>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
