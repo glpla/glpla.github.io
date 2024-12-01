@@ -33,16 +33,12 @@
 </head>
 
 <body>
-    <span>Lorem.</span>
+    <div id="footer"></div>
     <script>
-        const links = document.querySelectorAll('nav span')
-        const conts = document.querySelectorAll('main p')
-        console.log(links);
-        links.forEach((link, ind) => {
-            link.addEventListener('click', () => {
-                conts[ind].scrollIntoView({ behavior: 'smooth', block: 'center' })
-            })
-        })
+        const footer = document.querySelector('#footer');
+        fetch('./common/footer.html')
+            .then(res => res.text())
+            .then(html => footer.innerHTML = html)
     </script>
 </body>
 

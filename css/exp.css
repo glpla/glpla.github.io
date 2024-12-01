@@ -16,9 +16,6 @@ div,
 main,
 h1,
 h4,
-dl,
-dt,
-dd,
 figure,
 figcaption,
 p,
@@ -66,7 +63,7 @@ header {
   width: 100%;
   margin: -6rem auto 0;
   position: relative;
-  padding-top: 2rem;
+  padding: 2rem 1rem;
   background-color: #fff;
   border-top: 6px solid var(--warn-color);
   z-index: 1;
@@ -108,36 +105,37 @@ h4 {
   font-weight: normal;
 }
 
-dl {
-  padding: 2rem;
-  counter-reset: fig-sn;
-}
-
-dt {
+.title {
   line-height: 4;
   counter-reset: dd-sn;
   font-weight: 600;
 }
 
-dt::before {
+.title::before {
   content: '[ ';
 }
 
-dt::after {
+.title::after {
   content: ' ]';
 }
 
-
-dd.sn>div {
+.cont>div {
   counter-increment: dd-sn;
 }
 
-dd.sn>div::before {
+.cont>div::before {
   content: counter(dd-sn)'. ';
 }
 
 a {
   color: var(--warn-color);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  margin: 2rem auto;
+  border-radius: 8px;
 }
 
 figure {
@@ -155,13 +153,6 @@ figure figcaption::before {
 
 figure img {
   border: 1px solid #ddd;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-  margin: 2rem auto;
-  border-radius: 8px;
 }
 
 pre {
@@ -289,7 +280,7 @@ td {
 
 @media screen and (max-width:768px) {
   html {
-    font-size: 60%;
+    font-size: 55%;
   }
 
   pre {

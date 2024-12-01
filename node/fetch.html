@@ -80,12 +80,20 @@ fetch('https://glpla.github.io/utils/data/rank/20240203.json')
   .then(res => res.json())
   .then(res => console.log(res))</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] text() - 请求本地文本文件 .txt</dd>
-    <dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] text()</dd>
+    <dd class="sn">
+      <div>请求本地文本文件 .txt</div>
       <pre>
 fetch('./tmp.txt')
   .then(res => res.text())
   .then(res => console.log(res))</pre>
+      <div>请求本地html，实现模块化；不需要写完整的html结构，只写业务结构即可</div>
+      <pre>
+fetch('../../common/drill.html')
+.then(res => res.text())
+.then(res => {
+  document.getElementById('require').innerHTML = res;
+})</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] formData() - 请求表单</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] blob() - 请求图片并渲染</dd>
