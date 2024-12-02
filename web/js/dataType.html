@@ -24,7 +24,7 @@
     <ul class="nav-container">
       <li class="nav-item">基本数据类型</li>
       <li class="nav-item">引用数据类型</li>
-      <li class="nav-item">运算符</li>
+      <li class="nav-item">数据类型转换</li>
     </ul>
   </nav>
   <dl>
@@ -35,9 +35,16 @@
       <div>.基本数据类型：number / string / boolean / undefined / null；基本数据存放于栈 stack</div>
       <div>.复杂数据类型：object；引用数据存放于堆 heap</div>
       <div>.使用 typeof 检测数据类型。可根据字面量或控制台颜色判断数据类型</div>
+      <div>.更多信息，请访问 <a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#data_types">数据类型
+          data_types</a>、<a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof">类型检测 - typeof</a>、
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof">实例检测 -
+          instanceof</a>
+      </div>
     </dd>
   </dl>
-  <div class="chap">基本数据类型 Basic</div>
+  <div class="chap">基本数据类型 Primitives</div>
   <dl class="nav-cont">
     <dt>1. Undefined</dt>
     <dd>
@@ -83,49 +90,6 @@ console.log(null == undefined);//true</pre>
       <div>.isNaN()：在接收到一个值之后，会尝试将这个值转换为数值。某些不是数值的值会直接转换为数值，例如字符串"10"或 Boolean 值。不能被转换为数值的值都会导致这个函数返回 true</div>
       <pre>
 console.log(NaN == NaN);//false</pre>
-    </dd>
-    <dd>4.3. 数值转换</dd>
-    <dd>
-      <div>Number()：用于任何数据类型</div>
-      <div>parseInt()：专门用于把字符串转换成数值，更准确来说，是从以数字开头的字符串中<span
-          class="warn">提取</span>数字；处理整数时常用；不具有解析八进制值的能力，因此前导的零会被认为无效，需额外指定基数；建议无论在什么情况下都明确指定基数</div>
-      <div>parseFloat()：专门用于把字符串转换成数值；处理浮点数时常用</div>
-      <pre>
-console.log(parseInt('070'));//70
-console.log(parseInt('hi70'));//NaN
-console.log(parseInt('12.4px'));//12
-console.log(parseFloat('12.4px'));//12.4
-
-// 指定基数
-console.log(parseInt('070', 8));
-console.log(parseInt('70', 16));
-console.log(parseInt('0x70', 16));//0x甚至可以省略</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 计算器</dd>
-    <dd>
-      <div id="calc">
-        <div class="ipt-box">
-          <input type="text" name="" id="num0" required maxlength="3" title="num0">
-        </div>
-        <div class="ipt-box">
-          <input type="text" name="" id="num1" required maxlength="3" title="num1">
-        </div>
-        <div class="ipt-box">
-          <button id="btn">+</button>
-        </div>
-      </div>
-      <pre>
-let num0 = document.querySelector('#num0');
-let num1 = document.querySelector('#num1');
-let btn = document.querySelector('#btn');
-btn.addEventListener('click', () => {
-  let res = parseInt(num0.value) + parseInt(num1.value);
-  if (isNaN(res)) {
-    alert('输入错误，请重试！');
-  } else {
-    alert(res);
-  }
-})</pre>
     </dd>
     <dt>5. String</dt>
     <dd>
@@ -195,40 +159,52 @@ console.log('123'-);//Error</pre>
     <dt>8. date 日期类</dt>
     <dd>.更多信息，请访问 <a href="./date.html">RegDateExp</a></dd>
   </dl>
-  <div class="chap">运算符 Operator</div>
+  <div class="chap">数据类型转换 - Data type conversion</div>
   <dl class="nav-cont">
-    <dt>typeof</dt>
     <dd>
-      <div>.检测一个变量是基本数据类型还是引用数据类型</div>
-      <div>.是一个运算符 operator，不是函数</div>
-      <div>.数组 Array、对象 Object 和 null 都是object类型；Object 泛指所有的引用数据类型；如果想知道确切的数据类型，请使用运算符 instanceof</div>
+      <div>.更多信息，请访问 <a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#data_type_conversion">数据类型转换
+          - Data type conversion</a></div>
+      <div>Number()：用于任何数据类型</div>
+      <div>parseInt()：专门用于把字符串转换成数值，更准确来说，是从以数字开头的字符串中<span
+          class="warn">提取</span>数字；处理整数时常用；不具有解析八进制值的能力，因此前导的零会被认为无效，需额外指定基数；建议无论在什么情况下都明确指定基数</div>
+      <div>parseFloat()：专门用于把字符串转换成数值；处理浮点数时常用</div>
       <pre>
-let fn = num => num * 2;
-console.log(typeof 12);//number
-console.log(typeof 'hi');//string
-console.log(typeof true);//boolean
-console.log(typeof null);//object；空对象指针
-console.log(typeof undefined);//undefined
-console.log(typeof fn);//function
-console.log(typeof { name: 'hkc' });//object
-console.log(typeof [1, 2]);//object</pre>
+console.log(parseInt('070'));//70
+console.log(parseInt('hi70'));//NaN
+console.log(parseInt('12.4px'));//12
+console.log(parseFloat('12.4px'));//12.4
+
+// 指定基数
+console.log(parseInt('070', 8));
+console.log(parseInt('70', 16));
+console.log(parseInt('0x70', 16));//0x甚至可以省略</pre>
     </dd>
-    <dt>instanceof</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 计算器</dd>
     <dd>
-      <div>.是一个运算符 operator</div>
-      <div>.检查某个变量是否是 <span class="warn">对象</span> 的一个实例</div>
-      <div>.所有引用类型的值都是 Object 的实例</div>
-      <div>.不仅可以知道某个变量是不是对象，还可以知道它是什么类型的对象：Object、Array、RegExp</div>
-      <div>.如果检测基本类型的变量，返回 false；因为基本类型不是对象</div>
+      <div id="calc">
+        <div class="ipt-box">
+          <input type="text" name="" id="num0" required maxlength="3" title="num0">
+        </div>
+        <div class="ipt-box">
+          <input type="text" name="" id="num1" required maxlength="3" title="num1">
+        </div>
+        <div class="ipt-box">
+          <button id="btn">+</button>
+        </div>
+      </div>
       <pre>
-console.log(12 instanceof Number);//false
-console.log('hi' instanceof String);//false
-console.log(true instanceof Boolean);//false
-// console.log(null instanceof Null);//warning
-// console.log(undefined instanceof Undefined);//warning
-console.log(fn instanceof Function);//true
-console.log({ name: 'hkc' } instanceof Object);//true
-console.log([1, 2] instanceof Array);//true</pre>
+let num0 = document.querySelector('#num0');
+let num1 = document.querySelector('#num1');
+let btn = document.querySelector('#btn');
+btn.addEventListener('click', () => {
+let res = parseInt(num0.value) + parseInt(num1.value);
+if (isNaN(res)) {
+  alert('输入错误，请重试！');
+} else {
+  alert(res);
+}
+})</pre>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

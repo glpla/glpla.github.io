@@ -17,7 +17,10 @@
     <h1>运算符</h1>
     <span>&commat;Operator</span>
   </header>
-  <div class="chap">算术运算符</div>
+  <dl>
+    <dd>.更多运算符，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators">Operators</a>
+  </dl>
+  <div class="chap">算术运算符 Arithmetic</div>
   <dl>
     <dd>.运算符两侧使用空格分隔</dd>
     <dd>.赋值：自右向左；把 = 右边的值赋给左边的变量</dd>
@@ -62,35 +65,63 @@ console.log(-12 % 30);//-12</pre>
     </dd>
     <dt>++</dt>
     <dt>--</dt>
-    <dt>+=</dt>
-    <dt>-=</dt>
-    <dt>*=</dt>
-    <dt>/=</dt>
-    <dt>%=</dt>
   </dl>
-  <div class="chap">比较运算符</div>
+  <div class="chap">关系运算符 Relational</div>
   <dl>
     <dd>.数字可以比较</dd>
     <dd>.字符串也可以比较：依次比较对应的ASCII</dd>
     <dd>.不同的数据类型之间也可以比较</dd>
-    <dt>&lt; &le;</dt>
-    <dt>&gt; &ge;</dt>
+    <dt>&lt;</dt>
+    <dt>&le;</dt>
+    <dt>&gt;</dt>
+    <dt>&ge;</dt>
+    <dt>instanceof</dt>
+    <dd>
+      <div>.检查某个变量是否是 <span class="warn">对象</span> 的一个实例</div>
+      <div>.所有引用类型的值都是 Object 的实例</div>
+      <div>.不仅可以知道某个变量是不是对象，还可以知道它是什么类型的对象：Object、Array、RegExp</div>
+      <div>.如果检测基本类型的变量，返回 false；因为基本类型不是对象</div>
+      <pre>
+console.log(12 instanceof Number);//false
+console.log('hi' instanceof String);//false
+console.log(true instanceof Boolean);//false
+// console.log(null instanceof Null);//warning
+// console.log(undefined instanceof Undefined);//warning
+console.log(fn instanceof Function);//true
+console.log({ name: 'hkc' } instanceof Object);//true
+console.log([1, 2] instanceof Array);//true</pre>
+    </dd>
+    <dt>in</dt>
+  </dl>
+  <div class="chap">等于运算符 Equality</div>
+  <dl>
     <dt>==</dt>
     <dt>!=</dt>
     <dd>
       <pre>
 NaN == NaN//false
 null == null//true</pre>
+    <dt>===</dt>
+    <dt>!==</dt>
     </dd>
   </dl>
-  <div class="chap">逻辑运算符</div>
+  <div class="chap">赋值运算符 Assignment</div>
+  <dl>
+    <dt>=</dt>
+    <dt>+=</dt>
+    <dt>-=</dt>
+    <dt>*=</dt>
+    <dt>/=</dt>
+    <dt>%=</dt>
+  </dl>
+  <div class="chap">逻辑运算符 Logical</div>
   <dl>
     <dt>&amp;&amp;</dt>
     <dd>
-      <div>.逻辑与：<span class="warn">求值</span>；用做判断时，根据值决定是真还是假</div>
+      <div>.逻辑与 AND：<span class="warn">求值</span>；用做判断时，根据值决定是真还是假</div>
       <div>.两个值的情况：先将运算符左边的表达式转化为 Boolean，如果为真，就返回右边的值；如果为假就返回左边的值，又称短路，碰到假就停止</div>
       <div>.多个值的情况：如果左边为真，就继续往后看；如果还为真，就再继续；如果为假，就停止</div>
-      <div>.undefined、null、NaN、""、''、0、false 转化为 Boolean后，都为 false</div>
+      <div>.undefined、null、NaN、""、''、0、false 转化为 Boolean 后，都为 false</div>
       <div>.运算符两侧的表达式可以是任何类型，如：根据某个条件，指向相应的动作</div>
       <pre>
 res = 1 && 2;//2
@@ -104,7 +135,7 @@ res = 0 && 2 && 12 && 23;//0</pre>
     </dd>
     <dt>||</dt>
     <dd>
-      <div>.逻辑或：<span class="warn">求值</span>；判断时，根据值决定是真还是假</div>
+      <div>.逻辑或 OR：<span class="warn">求值</span>；判断时，根据值决定是真还是假</div>
       <div>.执行过程和逻辑与相反。碰到真就返回；因为任何类型和真或都为真，也称断路</div>
       <pre>
 res = 1 || 2;//1
@@ -121,11 +152,40 @@ div.addEventListener('click', (e) => {
     <dt>!</dt>
     <dd>
       <div>.取反</div>
-      <div>.结果是Boolean</div>
+      <div>.结果是 Boolean</div>
       <pre>
 !123//false
 !!123//true
 !!NaN//false      </pre>
+    </dd>
+  </dl>
+  <div class="chap">其它 Other</div>
+  <dl>
+    <dt>typeof</dt>
+    <dd>
+    <dd>
+      <div>.检测一个变量是基本数据类型还是引用数据类型</div>
+      <div>.是一个运算符 operator，不是函数</div>
+      <div>.数组 Array、对象 Object 和 null 都是object类型；Object 泛指所有的引用数据类型；如果想知道确切的数据类型，请使用运算符 instanceof</div>
+      <pre>
+let fn = num => num * 2;
+console.log(typeof 12);//number
+console.log(typeof 'hi');//string
+console.log(typeof true);//boolean
+console.log(typeof null);//object；空对象指针
+console.log(typeof undefined);//undefined
+console.log(typeof fn);//function
+console.log(typeof { name: 'hkc' });//object
+console.log(typeof [1, 2]);//object</pre>
+    </dd>
+    </dd>
+    <dt>条件运算符 ?:</dt>
+    <dd>
+      <div>.Conditional (ternary) operator</div>
+    </dd>
+    <dt>扩展运算符 ...</dt>
+    <dd>
+      <div>.Spread syntax</div>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

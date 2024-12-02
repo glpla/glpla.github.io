@@ -17,44 +17,54 @@
   </header>
   <dl>
     <dd>
-      <div>. JavaScript 具有隐含的全局概念，意味着你不声明的任何变量都会成为一个全局对象属性</div>
-      <div>. JavaScript 拥有动态类型。这意味着相同的变量可用作不同的类型</div>
+      <div>.变量声明 - Declaring variables</div>
+      <div>.JavaScript 具有隐含的全局概念，意味着你不声明的任何变量都会成为一个全局对象属性</div>
+      <div>.JavaScript 拥有动态类型。这意味着相同的变量可用作不同的类型</div>
+      <div>.更多语句，请访问 <a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements">Statements</a>
+      </div>
     </dd>
-    <dt>变量声明</dt>
-    <dd class="sn">
-      <div>var</div>
-      <p>默认是全局变量</p>
-      <p>编译时，存在变量提升，并且被初始化为 undefined；意味着你可以在声明之前访问变量，但它的值会是 undefined</p>
-      <p>使用较少</p>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var">var</a></dt>
+    <dd>
+      <div>.默认是全局变量</div>
+      <div>.编译时，存在变量提升，并且被初始化为 undefined；意味着你可以在声明之前访问变量，但它的值会是 undefined</div>
+      <div>.使用较少</div>
       <pre>
 console.log(num);//undefined
 var num;</pre>
-      <div>let</div>
-      <p>具备块作用域；具备变量</p>
-      <p>编译时，存在变量提升，但是不会被初始化，因此在变量声明之前访问它会导致引用错误 - ReferenceError。这种情况称为暂时性死区 TDZ - Temporal Dead Zone</p>
-      <p>应：<span class="warn">先声明再使用</span></p>
-      <p>应用较多</p>
+    </dd>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let">let</a></dt>
+    <dd>
+      <div>.块作用域 - Declares a block scope local variable</div>
+      <div>.编译时，存在变量提升，但是不会被初始化，因此在变量声明之前访问它会导致引用错误 - ReferenceError。这种情况称为暂时性死区 TDZ - Temporal Dead Zone</div>
+      <div>.应：<span class="warn">先声明再使用</span></div>
+      <div>.应用较多</div>
       <pre>
 console.log(num);//Uncaught ReferenceError: Cannot access 'num' before initialization
 let num;</pre>
     </dd>
-    <dt>变量提升</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const">const</a></dt>
     <dd>
-      <div>代码执行前，变量声明和函数声明提升到当前作用域的顶部，即：先处理变量声明和函数声明</div>
-      <div>如果有重复声明，则后面的声明覆盖前面的声明；然后再处理其它逻辑，如赋值</div>
-      <div>赋值不会触发提升</div>
-      <div>更多信息，请访问 <a href="./precompile.html">预编译 pre-compiler</a></div>
+      <div>.block-scoped local variables</div>
+      <div>.read-only</div>
+    </dd>
+    <dt>变量提升 Variable hoisting</dt>
+    <dd>
+      <div>.代码执行前，变量声明和函数声明提升到当前作用域的顶部，即：先处理变量声明和函数声明</div>
+      <div>.如果有重复声明，则后面的声明覆盖前面的声明；然后再处理其它逻辑，如赋值</div>
+      <div>.赋值不会触发提升</div>
+      <div>.更多信息，请访问 <a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#variable_hoisting">variable_hoisting</a>、<a
+          href="./precompile.html">预编译 pre-compiler</a></div>
     </dd>
     <dd class="example-sn">变量提升 - msg</dd>
-    <dd>原始代码</dd>
     <dd>
+      <div>.原始代码</div>
       <pre>
 console.log(msg);
 var msg = 'hi,there.'
 console.log(msg);</pre>
-    </dd>
-    <dd>JS编译后，代码逻辑为</dd>
-    <dd>
+      <div>.JavaScript 编译后，代码逻辑为</div>
       <pre>
 //提升
 var msg;
@@ -62,11 +72,11 @@ var msg;
 console.log(msg);
 msg = 'hi,there.'
 console.log(msg);</pre>
+      <div>.所以俩次log结果依次为：undefined、hi,there</div>
     </dd>
-    <dd>所以俩次log结果依次为：undefined、hi,there</dd>
-    <dd class="example-sn">变量a和函数foo提升</dd>
-    <dd>原始代码</dd>
+    <dd class="example-sn">变量 a 和函数 foo 提升</dd>
     <dd>
+      <div>.原始代码</div>
       <pre>
 var a = 1;
 function foo() {
@@ -75,10 +85,8 @@ function foo() {
   console.log('2', a);
 }
 console.log('3', a);
-foo()      </pre>
-    </dd>
-    <dd>JS编译后，代码逻辑为</dd>
-    <dd>
+foo()</pre>
+      <div>.JavaScript 编译后，代码逻辑为</div>
       <pre>
 //提升
 var a;
