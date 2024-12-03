@@ -191,11 +191,13 @@
       <div>使用 -1 表示结束行/列号</div>
     </dd>
     <dt>grid-column: span number (建议)
+      <br>grid-column: start/end
       <br>grid-column-start、grid-column-end
     </dt>
     <dd>
-      <div>.跨列；列的起始和结束</div>
-      <div>.也可以根据轨道线简写为1/4，表示单元格跨度从track 1到track 4</div>
+      <div>.跨列；列的起始和结束 - specifies a grid item's size and location within a grid column by contributing a line, a span
+      </div>
+      <div>.也可以根据轨道线简写为1/4，表示单元格跨度从 track 1到 track 4 - separated by /</div>
       <img src="./imgs/grid11.png" alt="" loading="lazy">
       <p class="fig-sn">最后1个子项跨列</p>
       <pre>grid-column: span 3;</pre>
@@ -203,9 +205,9 @@
       <pre>
 grid-column-start: 1;
 grid-column-end: 4;</pre>
-
     </dd>
     <dt>grid-row: span number (建议)
+      <br>grid-row: start/end
       <br>grid-row-start、grid-row-end
     </dt>
     <dd>
@@ -239,7 +241,12 @@ grid-row-end: 3;</pre>
   grid-column: 3/-1;
   grid-row: 2/-1;
 }      </pre>
-      <div class="tips">建议使用 grid-column/grid-row: span number实现跨行跨列；不会漂移</div>
+      <div class="tips">
+        <div>Grid 布局引擎会尝试将这些子项放置在下一个可用的网格单元格；如果当前行没有足够的空间，子项将被放置在下一行的第一个可用单元格中</div>
+        <div>建议使用 grid-column/grid-row: span number 明确实现跨行跨列；避免漂移</div>
+        <div>尽量指定容器大小</div>
+        <div>尽量指定行划分</div>
+      </div>
     </dd>
     <dt>grid-area</dt>
     <dd>.配合 grid-template-areas 一起使用，指定划分的某一个区域</dd>

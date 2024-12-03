@@ -20,8 +20,8 @@
             <div>beforeunload</div>
             <div>load</div>
             <div>resize</div>
-            <div>online</div>
-            <div>offline</div>
+            <div>online/offline</div>
+            <div>copy/cut/paste</div>
         </dd>
         <dd>.除了这些事件，还有很多事件可以从 <a href="./document.html">Document</a> 冒泡过来 - many events can bubble from the Document
             contained in the window object</dd>
@@ -85,20 +85,8 @@ window.addEventListener('resize', setFontSize)</pre>
         <dd>
             <div>.网络链接状态检测</div>
             <div>.状态变化时才会触发</div>
-            <table>
-                <tr>
-                    <th>类别</th>
-                    <th>说明</th>
-                </tr>
-                <tr>
-                    <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event">online</a></td>
-                    <td>网络链接</td>
-                </tr>
-                <tr>
-                    <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event">offline</a></td>
-                    <td>网络断开</td>
-                </tr>
-            </table>
+            <div>1. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/online_event">online</a></div>
+            <td>2. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/offline_event">offline</a></td>
             <pre>
 window.addEventListener('online', () => {
     console.log('online');
@@ -106,6 +94,12 @@ window.addEventListener('online', () => {
 window.addEventListener('offline', () => {
     console.log('offline');
 })</pre>
+        </dd>
+        <dt>剪切板事件 Clipboard events</dt>
+        <dd class="sn">
+            <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/copy_event">copy</a></div>
+            <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/cut_event">cut</a></div>
+            <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/paste_event">paste</a></div>
         </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

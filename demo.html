@@ -27,41 +27,44 @@
             min-height: 100vh;
         }
 
-        .container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            width: 800px;
-            background-color: #eee;
-        }
-
-        .item {
+        .box {
+            width: 10px;
+            height: 40px;
             background-color: #f40;
-            font-size: 30px;
-            color: #fff;
+            animation: scale 1s 3;
         }
 
-        .item:nth-child(1),
-        .item:nth-child(5) {
-            grid-column: span 2;
-        }
+        @keyframes scale {
 
-        .item:nth-child(2),
-        .item:nth-child(3) {
-            grid-row: span 2;
+            100% {
+                width: 100px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="item">1</div>
-        <div class="item">2</div>
-        <div class="item">3</div>
-        <div class="item">4</div>
-        <div class="item">5</div>
-    </div>
+    <div class="box"></div>
     <script>
+        const box = document.querySelector('.box');
+        box.addEventListener('animationstart', () => {
+            console.log('start');
+
+        })
+        box.addEventListener('animationend', () => {
+            console.log('end');
+
+        })
+        box.addEventListener('animationiteration', () => {
+            console.log('iteration');
+        })
+        document.onkeydown = function (e) {
+            if (e.key == 'F12') {
+                console.log('hi');
+
+                return false;
+            }
+        }
     </script>
 </body>
 
