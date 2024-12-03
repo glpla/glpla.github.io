@@ -7,6 +7,18 @@
     <title>Document</title>
     <link rel="stylesheet" href="../../css/common.css">
     <base target="_blank">
+    <style>
+        .back2top {
+            position: fixed;
+            right: 2rem;
+            bottom: -10rem;
+            transition: 0.5s;
+        }
+
+        .back2top.active {
+            bottom: 2rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,23 +47,37 @@
     </dl>
     <div class="chap">方法 Methods</div>
     <dl>
-        <dt>Document.createElement()： 使用给定的标签创建新元素</dt>
-        <dt>Document.append()： 在文档末尾添加节点对象或字符串</dt>
+        <dt><a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement">Document.createElement()</a>
+        </dt>
         <dd>
+            <div>使用给定的标签创建新元素</div>
+        </dd>
+        <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/append">Document.append()</a></dt>
+        <dd>
+            <div>尾插节点 - 在文档末尾添加节点对象或字符串</div>
+        </dd>
+        <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/prepend">Document.prepend()</a></dt>
+        <dd>
+            <div>头插节点</div>
             <pre>
 const body = document.body
 const div = document.createElement('div')
 div.textContent = 'hi,there.'
-body.append(div)
+body.prepend(div)
 body.append('from glpla')</pre>
         </dd>
-        <dt>Document.getElementById()</dt>
+        <dt><a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById">Document.getElementById()</a>
+        </dt>
         <dd>
             <div>.根据 id 获取一个元素 - returns an Element object</div>
             <div>.id 应该唯一；否则只匹配会第一个元素</div>
             <pre>const dom = document.getElementById('box');</pre>
         </dd>
-        <dt>Document.getElementsByClassName()</dt>
+        <dt><a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName">Document.getElementsByClassName()</a>
+        </dt>
         <dd>
             <div>.根据类名获取元素，返回类数组对象 - an array-like object / HTMLCollection</div>
             <div>.多个类名以空格分开，表示 <span class="warn">同时</span> 具备这些类</div>
@@ -62,16 +88,22 @@ body.append('from glpla')</pre>
 const dom = document.getElementsByClassName('wrap');
 const dom = document.getElementsByClassName('wrap container');</pre>
         </dd>
-        <dt>Document.getElementsByTagName()</dt>
+        <dt><a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName">Document.getElementsByTagName()</a>
+        </dt>
         <dd>
             <div>.根据标签名获取元素 - an HTMLCollection of elements with the given tag name</div>
             <pre>const dom = document.getElementsByTagName('div');</pre>
         </dd>
-        <dt>Document.querySelector()</dt>
+        <dt><a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">Document.querySelector()</a>
+        </dt>
         <dd>
             <div>.the first Element node that matches</div>
         </dd>
-        <dt>Document.querySelectorAll()</dt>
+        <dt><a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll">Document.querySelectorAll()</a>
+        </dt>
         <dd>
             <div>.a list of all the Element nodes that matche</div>
             <div>.这2个方法返回 NodeList()</div>
@@ -85,7 +117,9 @@ function fn(el) {
     return document.querySelector(el)
 }</pre>
         </dd>
-        <dt>Document.exitFullscreen()</dt>
+        <dt><a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Document/exitFullscreen">Document.exitFullscreen()</a>
+        </dt>
         <dd>
             <div>.某个元素退出全屏模式</div>
         </dd>
@@ -99,15 +133,76 @@ document.addEventListener('eventName', () => {
     console.log('xxx');
 })</pre>
         </dd>
+        <dt>加载/卸载事件 Load & unload events</dt>
+        <dd class="sn">
+            <div><a
+                    href="https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event">DOMContentLoaded</a>
+            </div>
+            <p>.页面加载完毕，包括DOM解析完毕和脚本文件下载完毕并执行，但是不会等样式文件、图片和其它资源都加载完毕</p>
+            <p>.window 的 load 事件则是完全加载 - 所有资源都加载完毕</p>
+            <p>.所以 DOMContentLoaded 事件比 load 事件更早触发</p>
+            <pre>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('document ready');
+})
+
+window.addEventListener('load', () => {
+    console.log('window loaded');
+})</pre>
+            <div></div>
+        </dd>
+        <dt>滚动事件 Scroll events</dt>
+        <dd>
+            <div>1. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll">scroll()</a></div>
+            <div>.页面滚动时触发 - 只有当出现滚动条时，scroll 事件才会触发</div>
+            <div>.利用 DOM 的 scrollTop 或 window 的 scrollY 进行特别的设计，如调整字体大小、延时出现返回顶部按钮、调整导航条样式等等</div>
+            <div>.更多信息，请访问 <a href="./scroll.html">滚动 - scroll</a></div>
+            <div>[<span class="iconfont icon-keyboard"></span>] 返回顶部按钮</div>
+            <a class="back2top" target="_self" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                    viewBox="0 0 32 32">
+                    <path fill="#ea580c"
+                        d="m7.715 10.44l7.57-8.13a.992.992 0 0 1 1.43-.01l7.57 8.13c.56.596.12 1.563-.71 1.563h-3.64c-.35 0-.64.284-.64.625v5.195c0 .645-.53 1.163-1.19 1.163h-4.22c-.65 0-1.19-.518-1.18-1.153v-5.195a.637.637 0 0 0-.64-.625h-3.64c-.83 0-1.27-.958-.71-1.564m4.725 10.379H6c-.55 0-1 .45-1 1s.45 1 1 1h2.22v6.17c0 .55.45 1 1 1s1-.45 1-1v-6.17h2.22c.55 0 1-.45 1-1c0-.56-.45-1-1-1m9.39.01h2.77c1.51 0 2.74 1.23 2.74 2.74c0 1.51-1.23 2.74-2.74 2.74h-1.77v2.69c0 .55-.45 1-1 1s-1-.45-1-1v-7.17c0-.55.45-1 1-1m1 3.48h1.77c.41 0 .74-.33.74-.74s-.33-.74-.74-.74h-1.77zm-9.39 2.55c0 1.73 1.41 3.14 3.15 3.14c1.73 0 3.15-1.41 3.15-3.14v-2.88c0-1.73-1.41-3.14-3.15-3.14s-3.15 1.41-3.15 3.14zm2-2.88a1.15 1.15 0 0 1 2.3 0v2.88c0 .64-.52 1.15-1.15 1.15c-.63 0-1.15-.52-1.15-1.15z" />
+                </svg></a>
+            <div>
+                <div>.分别利用DOM的 scrollTop 和 window 的 scrollY 查看页面滚动</div>
+                <div>.页面位于顶端时，返回按钮不出现，且取消事件响应</div>
+                <div>.当页面滚动到一定位置，如一个窗口内部高度时，返回按钮出现，可以响应事件，点击可以返回顶部</div>
+                <div>.添加动画，使返回按钮的出现更顺滑</div>
+                <div>.还可以使用 window的 pageYOffset、innerHeight 属性判断</div>
+                <pre>
+window.addEventListener('scroll', () => {    
+    back2top.classList.toggle('active', scrollY > innerHeight)
+})</pre>
+            </div>
+            <div>[<span class="iconfont icon-keyboard"></span>] 页面滚动禁止</div>
+            <div>
+                <div>.移动端弹出菜单时，通常应禁止页面继续滚动；如汉堡菜单#ham点击时，出现顶层菜单，下方的页面不应该再响应事件和滚动</div>
+                <div>再次单击，顶层菜单消失，下方页面恢复正常；通过汉堡菜单的单击，切换页面的隐藏类</div>
+                <pre>
+.hidden {
+    overflow: hidden;
+}</pre>
+                <pre>
+ham.addEventListener('click', function () {
+    //... ...
+    document.body.classList.toggle('hidden')
+})</pre>
+            </div>
+            <div>2. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/scrollend_event">scrollend</a>
+            </div>
+            <div>.页面滚动结束触发</div>
+        </dd>
         <dt>剪切板事件 Clipboard events</dt>
         <dd class="sn">
-            <div>copy</div>
-            <div>cut</div>
-            <div>paste</div>
+            <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/copy_event">copy</a></div>
+            <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/cut_event">cut</a></div>
+            <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/paste_event">paste</a></div>
         </dd>
         <dt>全屏事件 Fullscreen events</dt>
         <dd class="sn">
-            <div>fullscreenchange</div>
+            <div><a
+                    href="https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenchange_event">fullscreenchange</a>
+            </div>
             <p>.当一个元素进入或退出全屏模式时，会触发 fullscreenchange 事件 - F11全屏模式</p>
             <p>.事件首先被发送给正在过渡到全屏模式或从全屏模式退出的元素</p>
             <p>.然后冒泡事件到 document，所以 document 可以监听该事件</p>
@@ -134,34 +229,25 @@ document.addEventListener('fullscreenchange', () => {
         console.log("Leaving fullscreen mode.");
     }
 })            </pre>
-            <div>fullscreenerror</div>
+            <div><a
+                    href="https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenerror_event">fullscreenerror</a>
+            </div>
             <p>.全屏事件异常时触发</p>
         </dd>
-        <dt>加载/卸载事件 Load & unload events</dt>
-        <dd class="sn">
-            <div>DOMContentLoaded</div>
-            <p>.页面加载完毕，包括DOM解析完毕和脚本文件下载完毕并执行，但是不会等样式文件、图片和其它资源都加载完毕</p>
-            <p>.window 的 load 事件则是完全加载 - 所有资源都加载完毕</p>
-            <p>.所以 DOMContentLoaded 事件比 load 事件更早触发</p>
-            <pre>
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('document ready');
-})
 
-window.addEventListener('load', () => {
-    console.log('window loaded');
-})</pre>
-            <div></div>
-        </dd>
-        <dt>滚动事件 Scroll events</dt>
-        <dd>
-            <div>1 scroll</div>
-            <div>.页面滚动时触发</div>
-            <div>2 scrollend</div>
-            <div>.页面滚动结束触发</div>
-        </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <script>
+        // scroll
+        let back2top = document.querySelector('.back2top')
+        window.addEventListener('scroll', () => {
+            // let stop = document.documentElement.scrollTop || document.body.scrollTop;
+            // console.log('scrollTop', stop.toFixed(0));
+            // console.log('scrollY', window.scrollY.toFixed(0));
+            // console.log('pageYOffset', window.pageYOffset.toFixed(0));
+            back2top.classList.toggle('active', scrollY > innerHeight)
+        })
+    </script>
 </body>
 
 </html>

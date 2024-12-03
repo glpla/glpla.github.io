@@ -20,6 +20,7 @@
     <dd>
       <div>.<a href="https://developer.mozilla.org/en-US/docs/Web/API/Element">Element</a> 是 <a
           href="https://developer.mozilla.org/en-US/docs/Web/API">Web API</a> 之一</div>
+      <div>.最通用的的基类 - the most general base class</div>
       <div>.节点 Node 的一个子集：元素节点 ELEMENT_NODE；同样可以继承并使用节点的属性、方法和事件</div>
     </dd>
   </dl>
@@ -27,13 +28,15 @@
   <dl>
     <dt>基本属性</dt>
     <dd class="sn">
-      <div>Element.attributes</div>
-      <div>Element.children</div>
-      <div>Element.id</div>
-      <div>Element.innerHTML</div>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/attributes">Element.attributes</a></div>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/children">Element.children</a></div>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/id">Element.id</a></div>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML">Element.innerHTML</a></div>
+      <p>.带标记的内容 - the HTML or XML markup contained within the element</p>
     </dd>
+    <dd>.类似的属性还有：</dd>
     <dd>
-      <div>. <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText">HTMLElement.innerText</a>
+      <div>.<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText">HTMLElement.innerText</a>
       </div>
       <div>.返回已经渲染的节点和其后代的文本内容 - the rendered text content of a node and its descendants</div>
       <div>.使用内联样式 style 隐藏的元素不在获取范围 - 未被渲染；而样式文件中，隐藏的元素仍然可以被获取 - 因为它已经被渲染，但是被隐藏了</div>
@@ -59,10 +62,10 @@ console.log(dom.textContent);//包括所有文本内容
       <div>.开发的灵魂和重点</div>
       <div>.通常结合静态类和动态类以及过渡动画等实现交互效果</div>
       <div>.直接使用类名即可，不需要使用.</div>
-      <div>1. Element.className</div>
+      <div>1. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/className">Element.className</a></div>
       <div>.以字符串的形式返回元素应用的类；多个类名以空格分隔</div>
       <div>.对该属性赋值将会增加、删除类</div>
-      <div>2. Element.classList</div>
+      <div>2. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList">Element.classList</a></div>
       <div>.以数组的形式返回元素应用的类</div>
       <pre>&lt;div id="box" class="wrap container"&gt;hi,there.&lt;/div&gt;</pre>
       <pre>
@@ -71,18 +74,37 @@ console.log(box.classList);//DOMTokenList(2)
 console.log(box.className);//wrap container</pre>
     </dd>
     <dt>client 系列</dt>
-    <dd class="sn">
-      <div>Element.clientHeight</div>
-      <div>Element.clientWidth</div>
-      <div>Element.clientLeft</div>
-      <div>Element.clientTop</div>
+    <dd>
+      <div>1. <a href="">Element.clientWidth</a></div>
+      <div>如果没有指定样式设置大小或者是 inline 元素，则为 0</div>
+      <div>元素的样式高度，不包括隐藏部分、border、margin、滚动条 - the inner height of the element</div>
+      <div>includes padding but excludes borders, margins, and vertical scrollbars</div>
+      <div>2. <a href="">Element.clientHeight</a></div>
+      <div>the inner width of the element</div>
+      <div>3. <a href="">Element.clientLeft</a></div>
+      <div>the width of the left border of the element</div>
+      <div>4. <a href="">Element.clientTop</a></div>
+      <div>the width of the top border of the element</div>
     </dd>
     <dt>scroll 系列</dt>
-    <dd class="sn">
-      <div>Element.scrollWidth</div>
-      <div>Element.scrollHeight</div>
-      <div>Element.scrollLeft</div>
-      <div>Element.scrollTop</div>
+    <dd>
+      <div>1. <a href="">Element.scrollWidth</a></div>
+      <div>元素滚动视图的宽高；整数 - round the value to an integer</div>
+      <div>包括 padding、不可见的部分，不包括 border、滚动条</div>
+      <div>the scroll view width of the element</div>
+      <div>a measurement of the width of an element's content, including content not visible on the screen due to
+        overflow</div>
+      <div>includes the element's padding, but not its border, margin</div>
+      <div>2. <a href="">Element.scrollHeight</a></div>
+      <div>the scroll view height of the element</div>
+      <div>3. <a href="">Element.scrollLeft</a>、</div>
+      <div>the left scroll offset of the element</div>
+      <div>4. <a href="">Element.scrollTop</a></div>
+      <div>the top of the element is scrolled vertically</div>
+      <div class="tips">
+        <div>日常开发中，更多关注 scrollHeight 和 scrollTop</div>
+        <div>滚动更多应用，请访问 <a href="./scroll.html">滚动 - scroll</a></div>
+      </div>
     </dd>
     <!-- <dt>获取 Get</dt>
     <div>
