@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网站设计</title>
-    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4061940_rc6rvlz53d.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3859342_3uwkhw73sh3.css">
     <style>
         :root {
             --main-color: #207f4c;
@@ -42,9 +42,18 @@
             min-height: 100vh;
             background-color: var(--primary-color);
             color: var(--second-color);
+            overflow-x: hidden;
         }
 
-        .mode {
+        body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: var(--main-color);
+        }
+
+        body.mode {
             background-color: var(--second-color);
             color: var(--primary-color);
         }
@@ -61,6 +70,11 @@
             color: var(--primary-color);
             background-color: transparent;
             z-index: 99;
+            transition: 0.5s;
+        }
+
+        .header.active {
+            background-color: var(--main-color);
         }
 
         .logo {
@@ -71,6 +85,10 @@
         .logo a {
             color: var(--main-color);
             text-transform: capitalize;
+        }
+
+        .header.active .logo a {
+            color: #fff;
         }
 
         @keyframes --mov-left {
@@ -96,6 +114,10 @@
             opacity: 0;
             animation: --mov-right 1s ease-in-out forwards;
             animation-delay: calc(var(--delay)*0.05s);
+        }
+
+        .nav .close {
+            display: none;
         }
 
         .nav a:hover::after {
@@ -240,8 +262,16 @@
         }
 
         @media screen and (max-width: 768px) {
+            .header {
+                color: #000;
+            }
+
+            .header.active {
+                color: #fff;
+            }
+
             .logo a {
-                color: var(--primary-color);
+                color: #000;
             }
 
             .ham {
@@ -264,6 +294,7 @@
             }
 
             .nav .close {
+                display: block;
                 position: absolute;
                 top: var(--p-m-g);
                 right: var(--p-m-g);
@@ -271,6 +302,10 @@
 
             .nav.active {
                 right: 0;
+            }
+
+            .bg {
+                display: none;
             }
         }
     </style>
@@ -289,10 +324,10 @@
             <a href="#team" style="--delay:3">团队</a>
             <a href="#about" style="--delay:4">关于</a>
             <a href="#contact" style="--delay:5">联系</a>
-            <i class='bx bx-x close'></i>
+            <i class='iconfont icon-close close'></i>
         </nav>
-        <i class='bx bx-moon theme' style="--delay:6"></i>
-        <i class='bx bx-menu ham' style="--delay:7"></i>
+        <i class='iconfont icon-daytime-mode-fill theme' style="--delay:6"></i>
+        <i class='iconfont icon-menu ham' style="--delay:7"></i>
     </header>
     <section class="section home" id="home">
         <div class="bg" style="--delay:0">
@@ -310,9 +345,9 @@
                 praesentium nobis?</p>
             <div class="link">
                 <div class="icon" style="--delay:10"><i class='iconfont icon-twitter'></i></div>
-                <div class="icon" style="--delay:11"> <i class='iconfont icon-facebook'></i></div>
-                <div class="icon" style="--delay:12"> <i class='iconfont icon-qq'></i></div>
-                <div class="icon" style="--delay:13"><i class='iconfont icon-xinfeng'></i></div>
+                <div class="icon" style="--delay:11"> <i class='iconfont icon-weixin0'></i></div>
+                <div class="icon" style="--delay:12"> <i class='iconfont icon-qq0'></i></div>
+                <div class="icon" style="--delay:13"><i class='iconfont icon-mail'></i></div>
             </div>
             <button class="btn" style="--delay:14">more</button>
         </div>
@@ -322,24 +357,30 @@
     <section class="section about" id="about">about</section>
     <section class="section contact" id="contact">contact</section>
     <script>
+        const header = document.querySelector('.header');
         const theme = document.querySelector('.theme');
         const nav = document.querySelector('.nav');
         const ham = document.querySelector('.ham');
         const close = document.querySelector('.close');
         theme.addEventListener('click', function () {
             document.body.classList.toggle('mode');
-            theme.classList.toggle('bx-sun');
+            theme.classList.toggle('icon-night-mode-fill');
         })
         ham.addEventListener('click', function () {
             // ham.classList.toggle('bx-x');
             nav.classList.toggle('active');
         })
         close.addEventListener('click', function () {
-            // ham.classList.toggle('bx-x');
+            ham.classList.toggle('icon-close');
             nav.classList.toggle('active');
+        })
+        document.addEventListener('scroll', function () {
+            console.log('scroll');
+            header.classList.toggle('active', window.scrollY > 300);
         })
         window.addEventListener('scrollend', function () {
             console.log('end');
+            nav.classList.remove('active');
         })
     </script>
 </body>
