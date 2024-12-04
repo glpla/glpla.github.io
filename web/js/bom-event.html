@@ -97,12 +97,34 @@ window.addEventListener('offline', () => {
         </dd>
         <dt>剪切板事件 Clipboard events</dt>
         <dd class="sn">
+            <p>.针对窗口的操作，不限于文档内容外，还有其它内容，如复制 URL，涵盖面更广</p>
+            <p>.事件的原始目标是 <a href="./element.html">元素 Element</a>，可以在捕获或冒泡阶段响应并处理</p>
             <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/copy_event">copy</a></div>
             <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/cut_event">cut</a></div>
             <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/paste_event">paste</a></div>
         </dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 阻止页面复制和粘贴</dd>
+        <dd>
+            <pre>
+window.addEventListener('copy', (e) => {
+    e.preventDefault()
+})
+window.addEventListener('paste', (e) => {
+    e.preventDefault()
+})      </pre>
+        </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <script>
+        window.addEventListener('copy', (e) => {
+            e.preventDefault()
+            alert('禁止复制')
+        })
+        window.addEventListener('paste', (e) => {
+            e.preventDefault()
+            alert('禁止粘贴')
+        })
+    </script>
 </body>
 
 </html>

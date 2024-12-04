@@ -7,24 +7,18 @@
     <title>Document</title>
     <link rel="stylesheet" href="../../css/common.css">
     <base target="_blank">
-    <style>
-        .back2top {
-            position: fixed;
-            right: 2rem;
-            bottom: -10rem;
-            transition: 0.5s;
-        }
-
-        .back2top.active {
-            bottom: 2rem;
-        }
-    </style>
 </head>
 
 <body>
     <header>
         <h1>文档</h1>
-        <span>Document</span>
+        <span>&commat;Document</span>
+        <span class="ham"></span>
+        <nav class="nav">
+            <a href="" style="--delay:0" class="nav-item">属性 Properties</a>
+            <a href="" style="--delay:1" class="nav-item">方法 Methods</a>
+            <a href="" style="--delay:2" class="nav-item">事件 Events</a>
+        </nav>
     </header>
     <dl>
         <dt>概述 Overview</dt>
@@ -36,7 +30,7 @@
         </dd>
     </dl>
     <div class="chap">属性 Properties</div>
-    <dl>
+    <dl class="nav-cont">
         <dt>Document.body</dt>
         <dd>
             <div>.很多属性都是只读 - Read only</div>
@@ -46,7 +40,7 @@
         <dd>.当前是否处于全屏模式；非空 null 就是在全屏模式</dd>
     </dl>
     <div class="chap">方法 Methods</div>
-    <dl>
+    <dl class="nav-cont">
         <dt><a
                 href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement">Document.createElement()</a>
         </dt>
@@ -110,6 +104,7 @@ const dom = document.getElementsByClassName('wrap container');</pre>
             <pre>const dom = document.querySelector('#box');</pre>
             <pre>const dom = document.querySelectorAll('.wrap');</pre>
         </dd>
+        <dd class="tips">上述获取元素是在整个文档范围内检索 - the entire document；通常配合 <a href="./element.html">Element</a> 一起使用</dd>
         <dd>[<span class="iconfont icon-keyboard"></span>] 函数封装 - 将元素获取方法封装为一个函数，简化操作</dd>
         <dd>
             <pre>
@@ -125,7 +120,7 @@ function fn(el) {
         </dd>
     </dl>
     <div class="chap">事件 Events</div>
-    <dl>
+    <dl class="nav-cont">
         <dd>
             <div>.建议以事件侦听器的方式使用</div>
             <pre>
@@ -171,7 +166,7 @@ window.addEventListener('load', () => {
                 <div>.添加动画，使返回按钮的出现更顺滑</div>
                 <div>.还可以使用 window的 pageYOffset、innerHeight 属性判断</div>
                 <pre>
-window.addEventListener('scroll', () => {    
+document.addEventListener('scroll', () => {    
     back2top.classList.toggle('active', scrollY > innerHeight)
 })</pre>
             </div>
@@ -229,18 +224,36 @@ document.addEventListener('fullscreenchange', () => {
             </div>
             <p>.全屏事件异常时触发</p>
         </dd>
-
+        <dt>剪切板事件 Clipboard events</dt>
+        <dd class="sn">
+            <p>.针对文档内容的操作</p>
+            <p>.事件的原始目标是 <a href="./element.html">元素 Element</a>，可以在捕获或冒泡阶段响应并处理</p>
+            <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/copy_event">copy</a></div>
+            <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/cut_event">cut</a></div>
+            <div><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/paste_event">paste</a></div>
+        </dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 阻止页面复制和粘贴</dd>
+        <dd>
+            <pre>
+document.addEventListener('copy', (e) => {
+    e.preventDefault()
+})
+document.addEventListener('paste', (e) => {
+    e.preventDefault()
+})      </pre>
+        </dd>
     </dl>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <script src="/utils/custom/ham2024.js"></script>
+    <script src="/utils/custom/back2top.js"></script>
     <script>
-        // scroll
-        let back2top = document.querySelector('.back2top')
-        window.addEventListener('scroll', () => {
-            // let stop = document.documentElement.scrollTop || document.body.scrollTop;
-            // console.log('scrollTop', stop.toFixed(0));
-            // console.log('scrollY', window.scrollY.toFixed(0));
-            // console.log('pageYOffset', window.pageYOffset.toFixed(0));
-            back2top.classList.toggle('active', scrollY > innerHeight)
+        document.addEventListener('copy', (e) => {
+            e.preventDefault()
+            alert('禁止复制')
+        })
+        document.addEventListener('paste', (e) => {
+            e.preventDefault()
+            alert('禁止粘贴')
         })
     </script>
 </body>
