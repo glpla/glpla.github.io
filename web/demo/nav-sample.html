@@ -299,8 +299,40 @@
             transition: 0.5s;
         }
 
+        .icon-v .nav-item.active,
         .icon-v .nav-item:hover {
             transform: translateY(-40px);
+        }
+
+        /* transform skew */
+        .skew {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .skew .nav {
+            display: flex;
+            /* gap: 10px; */
+        }
+
+        .skew .nav a {
+            display: flex;
+            padding: 0 20px;
+            /* background-color: #fff; */
+            transform: skew(-30deg);
+            /* border-left: 1px solid var(--main-color); */
+            /* border-right: 1px solid var(--main-color); */
+            transition: 0.5s;
+        }
+
+        .skew .nav a span {
+            transform: skew(30deg);
+        }
+
+        .skew .nav a.active,
+        .skew .nav a:hover {
+            background-color: var(--main-color);
+            color: #fff;
         }
     </style>
 </head>
@@ -439,6 +471,21 @@
             </nav>
         </div>
         <p>icon vertical</p>
+
+        <div class="nav-wrap skew">
+            <a href="#" class="logo">
+                <h1>Icon</h1>
+            </a>
+            <nav class="nav">
+                <a href=""><span>Lorem</span></a>
+                <a href=""><span>Minus</span></a>
+                <a href=""><span>Ipsum</span></a>
+                <a href=""><span>Ut</span></a>
+                <a href=""><span>Doloremque</span></a>
+            </nav>
+        </div>
+        <p>transition skew</p>
+
         <div class="docker">
             <div class="item"><span class="iconfont icon-home"></span></div>
             <div class="item"><span class="iconfont icon-account"></span></div>
@@ -449,6 +496,7 @@
             <div class="item"><span class="iconfont icon-statis"></span></div>
         </div>
         <p>docker</p>
+
     </div>
 </body>
 

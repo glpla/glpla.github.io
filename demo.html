@@ -27,11 +27,46 @@
             min-height: 100vh;
         }
 
-        .bar {
-            width: 100px;
-            height: 40px;
+        .wrap {
+            width: 200px;
+            height: 300px;
+            background-color: #eee;
+            perspective: 1000px;
+        }
+
+        .wrap:hover .card {
+            transform: rotateY(180deg);
+        }
+
+        .card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: 3s;
+        }
+
+        .card::before,
+        .card::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
             background-color: #f40;
-            animation: scale 3s steps(5) forwards;
+            backface-visibility: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card::before {
+            background-image: url(./imgs/ggs.png);
+            transform: rotateY(180deg);
+        }
+
+        .card::after {
+            background-image: url(./imgs/xh.png);
         }
 
         @keyframes scale {
@@ -43,7 +78,9 @@
 </head>
 
 <body>
-    <div class="bar"></div>
+    <div class="wrap">
+        <div class="card"></div>
+    </div>
     <script>
     </script>
 </body>

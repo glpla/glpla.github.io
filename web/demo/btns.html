@@ -187,6 +187,45 @@
         .transition:hover::before {
             transform: translateX(0) skew(45deg);
         }
+
+        /* skew */
+        .skew {
+            position: relative;
+            border: 1px solid var(--main-color);
+        }
+
+        .skew div {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--main-color);
+            opacity: calc(1 - var(--pos)*0.1);
+            border-radius: 6px;
+            z-index: calc(10 - var(--pos));
+            transition: 0.5s;
+        }
+
+        .skew:hover div {
+            left: calc(var(--pos)*2px);
+            top: calc(var(--pos)*2px);
+        }
+
+        .skew span {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            border-radius: 6px;
+            color: #0a0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99;
+        }
     </style>
 </head>
 
@@ -197,7 +236,20 @@
     <button type="button" class="btn bg-color">submit</button>
     <button type="button" class="btn bg-img">submit</button>
     <button type="button" class="btn nav-btn" style="--color:#0a0"><span>submit</span></button>
-    <button type="button" class="btn transition">submit</button>
+    <button type="button" class="btn transition skew">submit</button>
+    <button type="button" class="btn skew">
+        <span>submit</span>
+        <div style="--pos:1"></div>
+        <div style="--pos:2"></div>
+        <div style="--pos:3"></div>
+        <div style="--pos:4"></div>
+        <div style="--pos:5"></div>
+        <div style="--pos:6"></div>
+        <div style="--pos:7"></div>
+        <div style="--pos:8"></div>
+        <div style="--pos:9"></div>
+        <div style="--pos:10"></div>
+    </button>
 </body>
 
 </html>
