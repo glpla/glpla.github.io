@@ -223,16 +223,27 @@
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-translate.html">标签
         Label</a></dd>
     <dd>
+      <div>.旋转 rotate</div>
+      <div>.位移 translate</div>
       <div>.定位 position</div>
-      <div>.过渡动画 transition</div>
-      <div>.鼠标悬停 :hover</div>
+      <div>.单行居中 line-height</div>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/site.html">网站 LOGO</a></dd>
     <dd>
       <div>.定位 position</div>
       <div>.边框 border</div>
+      <div>.边框圆角 border-radius</div>
       <div>.过渡动画 transition</div>
       <div>.鼠标悬停 :hover</div>
+    </dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/avatar.html">网站 LOGO</a> </dd>
+    <dd>
+      <div>.缩放 scale</div>
+      <div>.旋转 rotate</div>
+      <div>.定位 position</div>
+      <div>.边框圆角 border-radius</div>
+      <div>.伪元素 ::before ::after</div>
+      <div>.背景图片 background-image</div>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/clock_adv.html">时钟 - Clock</a>、<a
         href="./demo/clock_adv.html">时钟 - Clock</a></dd>
@@ -245,14 +256,13 @@
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-lotus.html">心似莲花 -
         Lotus</a></dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="https://codepen.io/glpla/full/GRzevom">网站
-        LOGO - CodePen</a></dd>
     <dd>
-      <div>.缩放 scale</div>
       <div>.旋转 rotate</div>
       <div>.定位 position</div>
+      <div>.边框 border</div>
+      <div>.边框圆角 border-radius</div>
+      <div>.过渡动画 transition</div>
       <div>.伪元素 ::before ::after</div>
-      <div>.背景图片 background-image</div>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/olympic.html">奥运五环 - Olympic
         Rings</a></dd>
@@ -358,10 +368,12 @@
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/nav-sample.html">导航设计 - Nav</a>、<a
         href="https://codepen.io/glpla/full/gOqEWoE">导航1 -
         CodePen</a>、<a href="https://codepen.io/glpla/full/KKEPwWg">导航2 - CodePen</a></dd>
-    <dd>.导航项目倾斜</dd>
-    <dd>.文字内容反向倾斜</dd>
-    <dd>.优化：溢出隐藏</dd>
-    <dd>.弹性盒子 flex 或 网格 grid</dd>
+    <dd>
+      <div>.导航项目倾斜</div>
+      <div>.文字内容反向倾斜</div>
+      <div>.优化：溢出隐藏</div>
+      <div>.弹性盒子 flex 或 网格 grid</div>
+    </dd>
     <dd class="tips">
       <div>其它方案</div>
       <div>.使用渐变背景</div>
@@ -377,6 +389,7 @@
       <div>.变换起点 transform-origin - 中间变换起点调整至顶部</div>
       <div>.盒阴影 box-shadow - 中间使用阴影，同时提升层级，覆盖在上面</div>
       <div>.帧动画 animation - 高度从0到100%</div>
+      <div>.为观测方便，整体动画都延迟了1秒</div>
     </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-logo.html">Logo制作</a>、<a
         href="https://codepen.io/glpla/full/oNVvWGN">Logo
@@ -425,7 +438,7 @@
     <dt><span class="warn">&lt;section2&gt;</span> 核心属性 Core Property</dt>
     <dd>
       <div>.transform 默认是2D变形；要呈现3D效果，必须设置透视/景深及指定为3D变形模式；具体步骤为：</div>
-      <div>1. 为祖先元素指定景深 perspective (创建一个天空盒 sky box)，单位是px，通常取800px-1200px</div>
+      <div>1. 为祖先元素指定景深 perspective (创建一个天空盒 sky box)，单位是px，通常取800px-1200px；景深和视口宽度相差不要太大</div>
       <pre>
 .super {
     perspective: 1000px;
@@ -458,8 +471,27 @@
       <div>.帧动画 animation 或过渡动画 transition</div>
       <div>.盒阴影 box-shadow</div>
     </dd>
-    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-gallery.html">3D画廊</a> -
-      移动鼠标到图像上(桌面端)或单击图像(移动端)查看效果；<a href="./demo/transform-gallery2.html">3D画廊</a></dd>
+    <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-gallery-txt.html">3D画廊 -
+        文字版</a>、<a href="./demo/transform-gallery2.html">3D画廊 - 图片版</a>、<a href="./demo/transform-gallery.html">3D画廊</a>
+    </dd>
+    <dd>
+      <div>.使用文字时，注意显示的方向 - 在反转 180deg 的基础上，再旋转一定角度，最后反向位移，成圆分布</div>
+      <pre>transform: rotateY(calc(180deg + var(--rot) * 60deg)) translateZ(calc(-1*var(--z)));</pre>
+      <div>.位移的长度同景深，故一部分在用户视线前方，一部分在用户视线后方</div>
+      <div>.CSS变量的使用</div>
+      <div>.匹配移动端</div>
+      <pre>
+:root {
+  --z: 1000px;
+  --ar: 16/9;
+}
+@media screen and (max-width: 768px) {
+  :root {
+    --z: 400px;
+    --ar: 9/16;
+  }
+}</pre>
+    </dd>
     <dd class="mt2">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-page.html">翻书</a>、<a
         href="./demo/resume0.html">简历</a></dd>
     <dd>
