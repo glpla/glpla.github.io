@@ -26,53 +26,28 @@
             background-color: #000;
             min-height: 100vh;
             overflow: hidden;
-        }
-
-        .wrap {
-            perspective: 1000px;
-        }
-
-        .gal {
-            position: relative;
-            width: 800px;
-            aspect-ratio: 16/9;
-            background-color: #eee6;
-            transform-style: preserve-3d;
-            animation: gal-rotate 10s linear infinite;
-        }
-
-        .gal div {
-            position: absolute;
-            inset: 0;
-            background-color: #f40;
-            transform: rotateY(calc(180deg + var(--rot) * 60deg)) translateZ(calc(-1*var(--z)));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 40px;
             color: #fff;
         }
 
-        @keyframes gal-rotate {
-            to {
-                transform: rotateY(360deg);
-            }
+        .light {
+            width: 100%;
+            height: 100vh;
+            background-image: url(./imgs/avatar_self.jpg);
+            clip-path: circle(100px at var(--x) var(--y));
         }
     </style>
 </head>
 
 <body>
-    <div class="wrap">
-        <div class="gal">
-            <div style="--rot:0">1</div>
-            <div style="--rot:1">2</div>
-            <div style="--rot:2">3</div>
-            <div style="--rot:3">4</div>
-            <div style="--rot:4">5</div>
-            <div style="--rot:5">6</div>
-        </div>
-    </div>
+    <div class="light"></div>
     <script>
+        const light = document.querySelector('.light')
+        document.addEventListener('mousemove', (e) => {
+            let posx = e.clientX
+            let posy = e.clientY
+            light.style.setProperty('--x', `${posx}px`)
+            light.style.setProperty('--y', `${posy}px`)
+        })
     </script>
 </body>
 
