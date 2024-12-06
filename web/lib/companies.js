@@ -57,7 +57,7 @@ btns.addEventListener("click", (e) => {
 const revealOption = {
   delay: 300,
   distance: "50px",
-  duration: 500,
+  duration: 300,
   easing: "ease-in-out",
   origin: "bottom",
 };
