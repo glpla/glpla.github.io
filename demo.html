@@ -29,17 +29,57 @@
             color: #fff;
         }
 
+
         .light {
             width: 100%;
             height: 100vh;
             background-image: url(./imgs/avatar_self.jpg);
             clip-path: circle(100px at var(--x) var(--y));
         }
+
+        input[type='text']:focus {
+            color: #f40;
+        }
+
+        input[type='text']:valid {
+            color: #089;
+        }
+
+        input[type='radio'],
+        input[type='checkbox'] {
+            accent-color: #f40;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .col2 {
+            column-count: 2;
+            column-width: 100px;
+        }
+
+        .wrap {
+            --el-color: #890;
+        }
+
+.el {
+    opacity: var(--alpha, 0.4);
+}
     </style>
 </head>
 
 <body>
-    <div class="light"></div>
+    <div style="--alpha:0">0</div>
+    <div class="ellipsis">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, quia.</div>
+    <input type="radio" name="gender" id="male" value="male">
+    <label for="male">male</label>
+    <input type="radio" name="gender" id="female" value="female">
+    <label for="female">female</label>
+    <a href="./common/index.html">index</a>
+    <a href="https://www.baidu.com">baidu</a>
+    <div id="home">Lorem.</div>
+    <!-- <div class="light"></div>
     <script>
         const light = document.querySelector('.light')
         document.addEventListener('mousemove', (e) => {
@@ -48,7 +88,7 @@
             light.style.setProperty('--x', `${posx}px`)
             light.style.setProperty('--y', `${posy}px`)
         })
-    </script>
+    </script> -->
 </body>
 
 </html>
