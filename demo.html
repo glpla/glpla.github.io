@@ -25,77 +25,46 @@
             align-items: center;
             background-color: #000;
             min-height: 100vh;
-            overflow: hidden;
             color: #fff;
         }
 
-
-        .light {
-            width: 100%;
-            height: 100vh;
-            background-image: url(./imgs/avatar_self.jpg);
-            clip-path: circle(100px at var(--x) var(--y));
+        ul {
+            width: 400px;
+            counter-reset: sn;
         }
 
-        input[type='text']:focus {
-            color: #f40;
+        ul li {
+            counter-increment: sn;
         }
 
-        input[type='text']:valid {
-            color: #089;
-        }
-
-        input[type='radio'],
-        input[type='checkbox'] {
-            accent-color: #f40;
-        }
-
-        textarea {
-            resize: none;
-        }
-
-        .col2 {
-            column-count: 2;
-            column-width: 100px;
-        }
-
-        .wrap {
-            --el-color: #890;
-        }
-
-        .el {
-            opacity: var(--alpha, 0.4);
+        li::before {
+            content: counter(sn);
         }
     </style>
 </head>
 
 <body>
-    <div style="--alpha:0">0</div>
-    <div class="ellipsis">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus, quia.</div>
-    <input type="radio" name="gender" id="male" value="male">
-    <label for="male">male</label>
-    <input type="radio" name="gender" id="female" value="female">
-    <label for="female">female</label>
-    <a href="./common/index.html">index</a>
-    <a href="https://www.baidu.com">baidu</a>
-    <div id="home">Lorem.</div>
-    <!-- <div class="light"></div>
-    <script>
-        const light = document.querySelector('.light')
-        document.addEventListener('mousemove', (e) => {
-            let posx = e.clientX
-            let posy = e.clientY
-            light.style.setProperty('--x', `${posx}px`)
-            light.style.setProperty('--y', `${posy}px`)
-        })
-    </script> -->
-    <script>
-        let arr = [1, 2, 3, 4, 5]
-        let arr2 = [...arr]
-        12 > 18 ? 'yes' : 'no'//no
-        12 < 18 ? 'yes' : 'no'//yes
-        forEach(callbackFn)
-    </script>
+    <ul>
+        <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo, saepe perspiciatis mollitia suscipit at
+            fugiat, nemo facere nisi aperiam voluptatem iure quaerat sed nostrum delectus cupiditate alias sint placeat
+            sunt.</li>
+        <li>Rerum illo totam laudantium fugit asperiores quidem, labore, voluptas rem doloremque ipsum neque similique
+            soluta alias et placeat. Ab aspernatur inventore accusamus deserunt autem sint officiis accusantium nihil
+            expedita omnis.</li>
+        <li>Architecto facere excepturi aliquam, praesentium et, laborum nam cupiditate totam explicabo provident
+            facilis voluptate dicta rerum fugiat. Excepturi, exercitationem aut commodi, voluptate ex doloribus laborum
+            quia unde natus quidem modi?</li>
+        <li>Maiores quo, placeat in vero quis nobis porro cum culpa dolorem sint perferendis, ex delectus! Temporibus a
+            ratione amet quasi sunt facilis eum suscipit voluptates aliquam quae, quo commodi vero.</li>
+    </ul>
+    <ul>
+        <li>Lorem, ipsum.</li>
+        <li>Delectus, itaque?</li>
+        <li>Est, sequi.</li>
+        <li>Suscipit, accusantium.</li>
+        <li>Incidunt, labore?</li>
+    </ul>
+
 </body>
 
 </html>

@@ -36,14 +36,14 @@
       </div>
     </header>
     <div class="main">
-      <div class="item" v-for="(item,ind) in rank.cont" :key="item">
+      <div class="item" v-for="(item,ind) in rank.cont" :key="item" :title="item.ucredit">
         <div class="sn">{{item.usn}}</div>
         <svg class="icon icon-avatar" aria-hidden="true">
           <use :xlink:href="`#icon-avatar${getInd(ind)}`"></use>
         </svg>
         <!-- <img class='img' :src="`/utils${item.uavatar}`" alt="avatar"> -->
         <span class='name'>{{item.uname}}</span>
-        <div>
+        <div class="star">
           <svg class="icon icon-star" aria-hidden="true" v-for="star in item.ucredit">
             <use xlink:href="#icon-star"></use>
           </svg>

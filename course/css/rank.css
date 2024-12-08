@@ -183,6 +183,10 @@ header {
   flex-direction: row-reverse;
 }
 
+.item:nth-child(even) .star {
+  text-align: right;
+}
+
 .item img {
   width: 30px;
   height: 30px;
@@ -190,7 +194,15 @@ header {
 }
 
 .item .name {
-  width: 65px;
+  flex-basis: 55px;
+  text-align-last: justify;
+}
+
+.item .star {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex: 1;
 }
 
 footer {
@@ -213,6 +225,10 @@ footer {
 
   .item:nth-child(even) {
     flex-direction: unset;
+  }
+
+  .item:nth-child(even) .star {
+    text-align: unset;
   }
 
   .nav-wrap {

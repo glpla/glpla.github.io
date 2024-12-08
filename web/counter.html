@@ -9,16 +9,8 @@
   <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
   <style>
-    .cont-sn ul li {
-      counter-increment: cont-sn;
-    }
-
-    .cont-sn ul li::before {
-      content: counter(cont-sn);
-      padding: 2px 4px;
-      background-color: #0fbcf9;
-      color: #fff;
-      margin-right: 10px;
+    tr th:first-child {
+      width: 25%;
     }
 
     @counter-style my-style {
@@ -50,27 +42,29 @@
       <div>. 可以嵌套使用实现多级列表</div>
       <div>. 理工科最爱：为代码编号</div>
       <div>. 计数标识符可以使用连字符-，不需要使用引号包裹</div>
+      <div>. 建议使用 &lt;ol&gt; 或 &lt;ul&gt; 或 &lt;dl&gt; 列表元素；也可以使用其它任意元素形式</div>
       <table>
-        <caption>属性</caption>
+        <caption>计算器属性</caption>
         <tr>
           <th>类别</th>
           <th>说明</th>
         </tr>
         <tr>
-          <td>创建</td>
-          <td>counter-reset；默认从0开始；初始化计数器，多个计数器使用空格分割；可以使用变量</td>
+          <td>counter-reset</td>
+          <td>创建；默认从0开始；初始化计数器
+            <br>多个计数器使用空格分割
+            <br>可以使用变量
+          </td>
         </tr>
         <tr>
-          <td>使用</td>
           <td>counter-increment</td>
+          <td>计数</td>
         </tr>
         <tr>
-          <td>定制样式</td>
-          <td>counter</td>
-        </tr>
-        <tr>
-          <td>显示</td>
-          <td>在伪元素的 content 属性中获取并显示</td>
+          <td>counter()</td>
+          <td>在伪元素的 content 属性中获取并显示
+            <br>设置计数器样式
+          </td>
         </tr>
       </table>
       <table>
@@ -120,9 +114,9 @@
     <dt>步骤</dt>
     <dd class="sn">
       <div>为父元素创建/设置/初始化计数器</div>
-      <div>子元素使用/计数，其伪元素使用 content 显示计数</div>
+      <div>子元素计数并使用伪元素 content 显示</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>]初始化</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 初始化</dd>
     <dd>
       <div>. 默认从0开始计数</div>
       <pre>counter-reset: percent;</pre>
@@ -135,34 +129,28 @@
       <div>. 同时声明多个计数器</div>
       <pre>counter-reset: tbl-sn img-sn exam-sn;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 列表编号</dd>
-    <dd class="cont-sn">
-      <ul>
-        <li>Lorem, ipsum dolor.</li>
-        <li>Quas, rem temporibus.</li>
-        <li>Doloribus, illo veniam.</li>
-        <li>Vel, fuga facilis?</li>
-        <li>Enim, illo neque!</li>
-        <li>Quia, ratione soluta?</li>
-        <li>Aliquid, illo deleniti.</li>
-        <li>Adipisci, aut dolorum.</li>
-        <li>Rem, similique accusamus!</li>
-      </ul>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/tabcard-scrollIntoView.html">列表编号</a></dd>
+    <dd>
       <pre>
-ul li {
-  counter-increment: cont-sn;
+ol {
+    counter-reset: li-sn;
 }
 
-ul li::before {
-  content: counter(cont-sn);
-  padding: 2px 4px;
-  background-color: var(--main-color);
-  color: #fff;
-  margin-right: 10px;
-}      </pre>
+ol li {
+    counter-increment: li-sn;
+}
+
+ol li::before {
+    content: counter(li-sn);
+    color: #fff;
+    margin-right: 1em;
+    padding: 0 4px;
+    background-color: var(--main-color);
+}</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./web.html">为代码添加行号</a></dd>
     <dd>
+      <div>. 注意结构要符合要求</div>
       <pre>
 &lt;pre&gt;
   &lt;span&gt;hello, world.&lt;/span&gt;
@@ -182,6 +170,7 @@ pre span::before {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 为表和图添加序号</dd>
     <dd>
+      <div>. 统一编号；也可以按章节编号</div>
       <pre>
 body {
   counter-reset: tbl-sn img-sn;
@@ -198,7 +187,6 @@ table caption::before {
 
 /* figure */
 figure {
-  margin: calc(4*var(--padding)) auto;
   counter-increment: img-sn;
 }
 
