@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Demo</title>
+    <title>Triangle Nav</title>
     <style>
         :root {
-            --w: 640px;
-            --z: 1000px;
-            --offset: calc(var(--w));
+            --w: 150px;
+            --h: 400px;
+            --perspective: 1200px;
+            --offset: 11px;
         }
 
         * {
@@ -23,48 +24,60 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: #000;
             min-height: 100vh;
-            color: #fff;
+            perspective: var(--perspective);
         }
 
-        ul {
-            width: 400px;
-            counter-reset: sn;
+        .wrap {
+            display: flex;
+            gap: 10px;
+            transform-style: preserve-3d;
         }
 
-        ul li {
-            counter-increment: sn;
+        .item {
+            position: relative;
+            width: var(--w);
+            height: var(--h);
+            /* background-color: #eee; */
+            transition: 1s linear;
+            cursor: pointer;
+            transform-style: preserve-3d;
         }
 
-        li::before {
-            content: counter(sn);
+        .wrap:hover .item {
+            transform: rotateY(180deg);
+        }
+
+        .item span {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .item span:nth-child(1) {
+            background-color: #f40;
+        }
+
+        .item span:nth-child(2) {
+            transform: rotateY(180deg);
+            background-color: #0a0;
+            backface-visibility: hidden;
         }
     </style>
 </head>
 
 <body>
-    <ul>
-        <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo, saepe perspiciatis mollitia suscipit at
-            fugiat, nemo facere nisi aperiam voluptatem iure quaerat sed nostrum delectus cupiditate alias sint placeat
-            sunt.</li>
-        <li>Rerum illo totam laudantium fugit asperiores quidem, labore, voluptas rem doloremque ipsum neque similique
-            soluta alias et placeat. Ab aspernatur inventore accusamus deserunt autem sint officiis accusantium nihil
-            expedita omnis.</li>
-        <li>Architecto facere excepturi aliquam, praesentium et, laborum nam cupiditate totam explicabo provident
-            facilis voluptate dicta rerum fugiat. Excepturi, exercitationem aut commodi, voluptate ex doloribus laborum
-            quia unde natus quidem modi?</li>
-        <li>Maiores quo, placeat in vero quis nobis porro cum culpa dolorem sint perferendis, ex delectus! Temporibus a
-            ratione amet quasi sunt facilis eum suscipit voluptates aliquam quae, quo commodi vero.</li>
-    </ul>
-    <ul>
-        <li>Lorem, ipsum.</li>
-        <li>Delectus, itaque?</li>
-        <li>Est, sequi.</li>
-        <li>Suscipit, accusantium.</li>
-        <li>Incidunt, labore?</li>
-    </ul>
-
+    <div class="wrap">
+        <div class="item">
+            <span>11111</span>
+            <span>2222</span>
+        </div>
+    </div>
 </body>
 
 </html>

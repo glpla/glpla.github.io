@@ -10,6 +10,10 @@
 
         :root {
             --main-color: #0a0;
+            --w: 150px;
+            --h: 40px;
+            --perspective: 1200px;
+            --offset: 11px;
         }
 
         * {
@@ -334,6 +338,56 @@
             background-color: var(--main-color);
             color: #fff;
         }
+
+        /* 3D nav */
+
+        .wrap-3d {
+            display: flex;
+            gap: 10px;
+            perspective: var(--perspective);
+            margin-top: 4rem;
+        }
+
+        .wrap-3d .item {
+            position: relative;
+            width: var(--w);
+            height: var(--h);
+            /* background-color: #eee; */
+            transform-style: preserve-3d;
+            transform: rotateX(0deg);
+            transition: 1s linear;
+            cursor: pointer;
+        }
+
+        .wrap-3d .item:hover {
+            transform: rotateX(240deg);
+        }
+
+        .wrap-3d .item span {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wrap-3d .item span:nth-child(1) {
+            transform: rotateX(-10deg) translateZ(var(--offset));
+            background-color: #f40;
+        }
+
+        .wrap-3d .item span:nth-child(2) {
+            transform: rotateX(-130deg) translateZ(var(--offset));
+            background-color: #0a0;
+        }
+
+        .wrap-3d .item span:nth-child(3) {
+            transform: rotateX(-250deg) translateZ(var(--offset));
+            background-color: #0aa;
+        }
     </style>
 </head>
 
@@ -480,11 +534,38 @@
                 <a href=""><span>Lorem</span></a>
                 <a href=""><span>Minus</span></a>
                 <a href=""><span>Ipsum</span></a>
-                <a href=""><span>Ut</span></a>
-                <a href=""><span>Doloremque</span></a>
             </nav>
         </div>
         <p>transition skew</p>
+
+        <div class="wrap-3d">
+            <div class="item">
+                <span>Lorem.</span>
+                <span>Saepe.</span>
+                <span>Sapiente.</span>
+            </div>
+            <div class="item">
+                <span>Lorem.</span>
+                <span>Saepe.</span>
+                <span>Sapiente.</span>
+            </div>
+            <div class="item">
+                <span>Lorem.</span>
+                <span>Saepe.</span>
+                <span>Sapiente.</span>
+            </div>
+            <div class="item">
+                <span>Lorem.</span>
+                <span>Saepe.</span>
+                <span>Sapiente.</span>
+            </div>
+            <div class="item">
+                <span>Lorem.</span>
+                <span>Saepe.</span>
+                <span>Sapiente.</span>
+            </div>
+        </div>
+        <p>3D nav</p>
 
         <div class="docker">
             <div class="item"><span class="iconfont icon-home"></span></div>
@@ -496,6 +577,7 @@
             <div class="item"><span class="iconfont icon-statis"></span></div>
         </div>
         <p>docker</p>
+
 
     </div>
 </body>

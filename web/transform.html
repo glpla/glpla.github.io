@@ -415,6 +415,7 @@
       <div class="intro">Z轴</div>
       <div class="basic intro-img"></div>
       <div class="mt2">2. translate - 位移</div>
+      <div>Each 3D element with z>0 becomes larger; each 3D-element with z&lt;0 becomes smaller</div>
       <div class="intro">近大远小</div>
       <div class="basic">
         <img class="ob-img" id='trans-img' data-src="../utils/view/view0.jpg" alt="">
@@ -438,12 +439,15 @@
     <dt><span class="warn">&lt;section2&gt;</span> 核心属性 Core Property</dt>
     <dd>
       <div>.transform 默认是2D变形；要呈现3D效果，必须设置透视/景深及指定为3D变形模式；具体步骤为：</div>
-      <div>1. 为祖先元素指定景深 perspective (创建一个天空盒 sky box)，单位是px，通常取800px-1200px；景深和视口宽度相差不要太大</div>
+      <div>1. 为祖先元素指定景深 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/perspective">perspective</a> (创建一个天空盒
+        sky box)，单位是px，通常取800px-1200px；景深和视口宽度相差不要太大 - start by configuring the 3D space by giving it a perspective
+      </div>
       <pre>
 .super {
     perspective: 1000px;
 }</pre>
-      <div>2. 为自己设置3D变形 transform-style: preserve-3d( flat 表示2D)</div>
+      <div>2. 为自己显式的设置3D变形 transform-style: preserve-3d( flat 表示2D) - then you have to configure how your 2D elements
+        will behave in that space</div>
       <pre>
 .self {
     transform-style: preserve-3d;
@@ -513,9 +517,13 @@ VanillaTilt.init(document.querySelector(".van-box"), {
     </dd>
     <dt><span class="warn">&lt;section4&gt;</span> 注意事项 tips</dt>
     <dd>
-      <div>.父元素不能指定 overflow:hidden；否则就还原位2D模式</div>
-      <div>.如果为更高级的父元素指定景深 perspective，则其下面子元素都应指定3D变形模式，即：这些元素共享一个景深/天空盒(sky box)</div>
-      <div>.更多实例，请 <a href="./demo/deal.html" class="link">发牌</a>、<a href="https://codepen.io/glpla/full/oNmOjzQ">科技环 -
+      <div>.父元素不能指定 overflow:hidden；否则就还原为2D模式</div>
+      <div>.如果为更高级的父元素指定景深 perspective，则其下面子元素都应指定3D变换模式，即：这些元素可以共享一个景深/天空盒(sky box)</div>
+      <div>.backface-visibility可以隐藏元素背面，和3D并没有直接关系</div>
+      <div>.更多信息，请访问 <a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transforms/Using_CSS_transforms#3d_specific_css_properties">MDN
+          - 3D specific CSS properties</a>、<a href="./demo/deal.html" class="link">发牌</a>、<a
+          href="https://codepen.io/glpla/full/oNmOjzQ">科技环 -
           CodePen</a>
       </div>
     </dd>
