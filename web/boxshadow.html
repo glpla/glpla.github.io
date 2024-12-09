@@ -19,18 +19,28 @@
   <dl>
     <dd>
       <div>. 为元素添加阴影 - adds shadow effects around an element's frame</div>
-      <div>. 阴影由 2-4 个长度值、可选的颜色值以及可选的 inset 关键词来规定。省略长度的值是 0</div>
       <div>. 多个阴影使用逗号,分隔 - separated by commas</div>
+      <div>. 阴影由 2-4 个长度值、可选的颜色值以及可选的 inset 关键词来规定。省略长度的值是 0</div>
+      <div>. 可以创建普通阴影、发光、分身、模拟边框都多种特效</div>
       <div>. 更多阴影使用，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow">MDN - box-shadow</a>、<a
           href="https://neumorphism.io">Neumorphism</a></div>
       <div class="tips">可以把阴影当作一个元素本身的孵化器</div>
       <pre>box-shadow: h-shadow v-shadow blur spread color inset;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 发光按钮</dd>
+    <dt>普通阴影</dt>
     <dd>
-      <div>. 静态1个阴影；鼠标 hover 时，叠加多个阴影</div>
-      <div>. 使用同色阴影</div>
-      <div>. 使用CSS变量</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./index.html">课程主页 3D图标</a></div>
+      <div>. 内阴影</div>
+      <div>. 外阴影</div>
+      <div>. 多重阴影</div>
+    </dd>
+    <dt>发光阴影</dt>
+    <dd>
+      <div>. 水平偏移和垂直偏移为0</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 按钮</div>
+      <div>. 静态时，使用1个发光阴影</div>
+      <div>. 鼠标 :hover 时，指定同色背景，并叠加多个同色阴影</div>
+      <div>. 过渡动画 transition</div>
       <div class="glow-wrap">
         <div class="glow" style="--color: #a00">hover</div>
         <div class="glow" style="--color: #426cdb">hover</div>
@@ -54,9 +64,16 @@
     0 0 40px var(--color);
 }</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 模拟多个元素</dd>
+    <dt>分身阴影</dt>
     <dd>
-      <div>1. 汉堡菜单 - 分别向上、向下投射一个阴影；也可以使用伪元素实现，见后例</div>
+      <div>. 不指定模糊和扩展</div>
+      <div>. 使用一个或多个阴影模拟多个元素</div>
+      <div>. 可以配合伪元素使用</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html">个人网站 - 标题条</a></div>
+      <div>. 伪元素和阴影配合使用</div>
+      <div>. 扩展分身 spread</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 汉堡菜单</div>
+      <div>. 分别向上、向下扩展/投射一个阴影；也可以使用伪元素实现，见后例</div>
       <div class="glow-wrap">
         <div class="ham-menu"></div>
       </div>
@@ -67,7 +84,9 @@
     background-color: #fff;
     box-shadow: 0 -10px #fff, 0 10px #fff;
 }      </pre>
-      <div>2. 分身 - 使用过渡动画，呈现4个方向的阴影</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 分身</div>
+      <div>. 4个方向的阴影</div>
+      <div>. 过渡动画</div>
       <div class="glow-wrap">
         <div class="more"></div>
       </div>
@@ -79,19 +98,18 @@
     -30px 30px rgba(255, 0, 0, 0.8),
     30px -30px rgba(255, 0, 0, 0.8);
 }</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./index.html">光环 - 集成开发环境</a>；伪元素和阴影配合使用；拓展 spread
-      一个同色透明的阴影实现|双边框</dd>
-    <dd>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./index.html">光环符号 - 集成开发环境</a></div>
+      <div>. 伪元素和阴影配合使用</div>
+      <div>. 拓展 spread 一个同色透明的阴影实现|双边框</div>
       <pre>
 .list-item:hover::before {
   box-shadow: 0 0 0 4px rgba(75, 194, 206, 0.4);
 }</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./index.html">课程主页 - 3D图标</a>；内阴影、外阴影、多重阴影</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html">个人网站 - 标题条</a>；伪元素和阴影配合使用</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 表单元素 - checkbox</dd>
+    <dt>模拟边框</dt>
     <dd>
+      <div>. 在扩展的基础上，使用一个阴影</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 表单元素 - checkbox</div>
       <div>. 边框 border</div>
       <div>. 变形 transform</div>
       <div>. 过渡动画 transition</div>
@@ -103,16 +121,12 @@
         <input type="checkbox" hidden>
         <span></span>
       </label>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 内阴影模拟边框</dd>
-    <dd>
+      <div>[<span class="iconfont icon-keyboard"></span>] 内阴影模拟边框</div>
       <div>. 利用z-index叠放在下面；不能设置父级容器背景颜色</div>
       <div class="img-box">
         <img src="./imgs/bg.jpg" alt="">
       </div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 透明边框特效</dd>
-    <dd>
+      <div>[<span class="iconfont icon-keyboard"></span>] 透明边框特效</div>
       <div>. 用白色遮盖</div>
       <img class="img-bs" src="./imgs/bg.jpg" alt="">
       <pre>
@@ -125,6 +139,7 @@
   margin: 6rem auto;
 }</pre>
     </dd>
+    <dt>更多案例</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 社交分享按钮</dd>
     <dd>
       <div>. 使用伪元素、阴影和过渡动画综合实现</div>

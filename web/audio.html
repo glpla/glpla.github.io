@@ -328,18 +328,6 @@ audio.addEventListener('ended', (e) => {
     console.log('ended');
 })    </pre>
     </dd>
-    <dt>辅助函数</dt>
-    <dd>
-      <div>. 获取的时间通常要转化为一定的格式，如 mm:ss，参考代码如下</div>
-      <pre>
-function time(secs) {
-  let min = Math.floor(secs / 60);
-  let sec = Math.floor(secs % 60);
-  let secRes = sec > 9 ? `${sec}` : `0${sec}`;
-  let minRes = min > 9 ? `${min}` : `0${min}`;
-  return `${minRes}:${secRes}`;
-}</pre>
-    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 进阶可控背景音乐</dd>
     <dd>
       <div>. 利用 Audio 构造函数生成音频实例，并指定 src</div>
@@ -378,7 +366,7 @@ let ctrl = document.querySelector('#ctrl');
 let cur = document.querySelector('.cur');
 let dur = document.querySelector('.dur');
 
-audio.addEventListener('loadedmetadata', () => {
+audio.addEventListener('durationchange', () => {
   dur.innerHTML = time(audio.duration);
 })
 
@@ -389,11 +377,11 @@ audio.addEventListener('timeupdate', () => {
   tag.style.setProperty('--per', per);
 })
 
-audio.addEventListener('click', function () {
+audio.addEventListener('click', () => {
   ctrl.click()
 })
 
-ctrl.addEventListener('click', function () {
+ctrl.addEventListener('click', () => {
   if (ctrl.className == 'play') {
     audio.play()
     ctrl.className = 'pause'
@@ -405,6 +393,18 @@ ctrl.addEventListener('click', function () {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/miniplayer.html">MINI音乐播放器</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/player.html">播放器</a> - 无CSS</dd>
+    <dt>辅助函数</dt>
+    <dd>
+      <div>. 获取的时间通常要转化为一定的格式，如 mm:ss，参考代码如下</div>
+      <pre>
+function time(secs) {
+  let min = Math.floor(secs / 60);
+  let sec = Math.floor(secs % 60);
+  let secRes = sec > 9 ? `${sec}` : `0${sec}`;
+  let minRes = min > 9 ? `${min}` : `0${min}`;
+  return `${minRes}:${secRes}`;
+}</pre>
+    </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>
