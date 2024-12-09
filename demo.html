@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Triangle Nav</title>
+    <title>Demo</title>
     <style>
         :root {
             --w: 150px;
@@ -29,55 +29,79 @@
         }
 
         .wrap {
-            display: flex;
-            gap: 10px;
-            transform-style: preserve-3d;
-        }
-
-        .item {
-            position: relative;
-            width: var(--w);
-            height: var(--h);
-            /* background-color: #eee; */
-            transition: 1s linear;
-            cursor: pointer;
-            transform-style: preserve-3d;
-        }
-
-        .wrap:hover .item {
-            transform: rotateY(180deg);
-        }
-
-        .item span {
-            position: absolute;
-            left: 0;
-            top: 0;
             width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .item span:nth-child(1) {
+            height: 50vh;
             background-color: #f40;
+            overflow-y: auto;
         }
 
-        .item span:nth-child(2) {
-            transform: rotateY(180deg);
-            background-color: #0a0;
-            backface-visibility: hidden;
+        .box {
+            height: 200vh;
+            background-color: #fff;
+        }
+
+        .tmp {
+            height: 200vh;
         }
     </style>
 </head>
 
 <body>
-    <div class="wrap">
-        <div class="item">
-            <span>11111</span>
-            <span>2222</span>
-        </div>
-    </div>
+    <button id="ctrl">play</button>
+    <audio src="./utils/music/4.mp3" hidden></audio>
+    <script>
+        const audio = document.getElementsByTagName('audio')[0];
+        const ctrlBtn = document.getElementById('ctrl');
+        console.log(audio);
+        audio.addEventListener('loadstart', (e) => {
+            console.log('loadstart');
+        })
+        audio.addEventListener('progress', (e) => {
+            console.log('progress');
+        })
+        audio.addEventListener('durationchange', (e) => {
+            console.log('durationchange', audio.duration);
+        })
+        audio.addEventListener('loadedmetadata', (e) => {
+            console.log('loadedmetadata');
+        })
+        audio.addEventListener('loadeddata', (e) => {
+            console.log('loadeddata');
+        })
+        audio.addEventListener('timeupdate', (e) => {
+            console.log(audio.currentTime);
+        })
+        audio.addEventListener('canplay', (e) => {
+            console.log('canplay');
+        })
+        audio.addEventListener('canplaythrough', (e) => {
+            console.log('canplaythrough');
+        })
+        audio.addEventListener('play', (e) => {
+            console.log('play');
+        })
+        audio.addEventListener('pause', (e) => {
+            console.log('pause');
+        })
+        audio.addEventListener('waiting', (e) => {
+            console.log('waiting');
+        })
+        audio.addEventListener('playing', (e) => {
+            console.log('playing');
+        })
+        audio.addEventListener('ended', (e) => {
+            console.log('ended');
+        })
+
+        ctrlBtn.addEventListener('click', () => {
+            // audio.paused ? audio.play() : audio.pause();
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        })
+    </script>
 </body>
 
 </html>
