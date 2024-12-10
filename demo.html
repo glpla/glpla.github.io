@@ -5,49 +5,127 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Demo</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4690841_08vyhb7495oi.css">
     <style>
-        :root {
-            --w: 150px;
-            --h: 400px;
-            --perspective: 1200px;
-            --offset: 11px;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        .iconfont {
+            font-size: 22px;
+        }
+
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            gap: 10px;
             height: 100vh;
         }
 
-        .box {
-            width: 300px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+        input[type='text'],
+        input[type='password'],
+        button {
+            border: none;
+            outline: none;
+            font: inherit;
+            color: inherit;
         }
 
-        .box div {
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 300px;
+        }
+
+        .ipt-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            height: 40px;
+        }
+
+        .ipt {
+            width: 100%;
+            height: 100%;
+            padding: 0 10px;
             background-color: #eee;
         }
 
-        .box div:nth-child(1) {
-            grid-column-start: 1;
-            grid-column-end: 3;
-            /* grid-column: 1/3; */
-            /* grid-column: span 2; */
+        .icon {
+            position: absolute;
+            left: 10px;
+            transition: 0.5s;
+            pointer-events: none;
+            color: #333;
+            text-transform: capitalize;
         }
 
-        .box div:nth-child(2) {
-            /* grid-row: 1/3; */
-            /* grid-column: 3/4; */
-            grid-row: span 2;
+        .ipt:valid+.icon,
+        .ipt:focus+.icon {
+            left: 270px;
+        }
+
+        button {
+            width: 120px;
+            height: 40px;
+            background-color: #f40;
+            color: #fff;
+            text-transform: uppercase;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #a00;
+        }
+
+        .gender {
+            position: relative;
+            width: 50px;
+            height: 30px;
+            background-color: #333;
+            border-radius: 15px;
+        }
+
+        .gender::before {
+            content: '';
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #eee;
+            transition: 0.5s;
+        }
+
+        .cb:checked+.gender::before {
+            left: 23px;
+            background-color: #f40;
+        }
+
+        .cb:checked~span {
+            color: #f40;
+        }
+
+        .btns {
+            justify-content: center;
+        }
+
+        .box {
+            display: grid;
+            /* grid-template-columns: repeat(3, 1fr); */
+            grid-template-rows: repeat(4, 1fr);
+            grid-auto-flow: column;
+            /* width: 300px; */
+            /* height: 300px; */
         }
     </style>
 </head>
@@ -59,7 +137,52 @@
         <div>3</div>
         <div>4</div>
         <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+        <div>7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
     </div>
+    <!-- <form action="">
+        <div class="ipt-box">
+            <input class="ipt" type="text" required maxlength="12" name="uname">
+            <span class="iconfont icon-location-fill icon"></span>
+        </div>
+        <div class="ipt-box">
+            <input class="ipt" type="password" required maxlength="12" name="upass">
+            <span class="iconfont icon-setting-fill icon"></span>
+        </div>
+        <div class="ipt-box">
+            <span class="iconfont icon-bank"></span>
+            <input class="cb" type="checkbox" name="ugender" id="gender" hidden>
+            <label for="gender" class="gender"></label>
+            <span class="iconfont icon-mail"></span>
+        </div>
+        <div class="ipt-box btns">
+            <button type="submit">submit</button>
+            <button type="reset">reset</button>
+        </div>
+    </form> -->
 </body>
 
 </html>
