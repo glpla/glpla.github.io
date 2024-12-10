@@ -30,19 +30,18 @@
     <dd>
       <div>.更灵活：支持二维布局：对列和行进行布局</div>
       <div>.类似早期的 table 布局；table 本来是做数据展示的，所以在布局上有明显的缺陷：非语义化、布局代码冗余，以及不好维护、渲染性能等问题，目前 table 布局已被抛弃</div>
-      <div>.更多细节，请参考 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid">MDN - grid</a>、<a
-          href="https://mp.weixin.qq.com/s/3cxv1y14OLcPJjEN4f_OiA">如何用一行 CSS 实现 10 种现代布局</a>
-      </div>
-      <div>.更多网格布局实现，请访问 <a href="./framework/isotope.html">Isotope</a></div>
+      <div>.更多网格布局实现，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid">MDN - grid</a>、<a
+          href="https://mp.weixin.qq.com/s/3cxv1y14OLcPJjEN4f_OiA">如何用一行 CSS 实现 10 种现代布局</a>、<a
+          href="./framework/isotope.html">Isotope</a>、<a href="https://getbootstrap.com/">Bootstrap</a></div>
     </dd>
-    <dt>概念</dt>
-    <dd class="sn">
-      <div>容器 container</div>
-      <div>子项 item</div>
-      <div>单元格 cell</div>
-      <div>轨道 track</div>
-    </dd>
+    <dt>概念 Concept</dt>
     <dd>
+      <div class="sn">
+        <div>容器 container</div>
+        <div>子项 item</div>
+        <div>单元格 cell</div>
+        <div>轨道 track</div>
+      </div>
       <pre>
 &lt;div class="wrapper"&gt;
     &lt;div&gt;Item One&lt;/div&gt;
@@ -67,44 +66,50 @@
       </div>
     </dd>
   </dl>
-  <div class="chap">容器 container</div>
+  <div class="chap">容器 Container</div>
   <dl class="nav-cont">
     <dd>.如何划分行列？</dd>
     <dd>.如何填充子项？</dd>
     <dt>grid-template-columns</dt>
     <dd class="sn">
-      <p>.容器列的划分；可以是绝对的或相对的；单位可以 <span class="warn">混合使用</span></p>
+      <p>.容器列的划分；单位可以是绝对的或相对的；可以<span class="warn">混合使用</span></p>
       <pre>grid-template-columns: px | % | fr | auto | repeat() | minmax() | max-content | min-content;</pre>
-      <div>px - 静态划分</div>
+      <div>px：静态划分</div>
       <pre>grid-template-columns: 100px 200px 300px;</pre>
-      <div>% - 根据容器大小划分</div>
+      <div>%：根据容器大小划分</div>
       <pre>grid-template-columns: 10% 70% 20%;</pre>
-      <div>fr：fraction，表示份数；容器整体被分隔成多少份，子项占的份数</div>
+      <div>fr：根据份数划分；fraction，表示份数；容器整体被分隔成多少份，子项占的份数</div>
       <pre>grid-template-columns: 1fr 2rem 1fr;</pre>
       <pre>grid-template-columns: 1fr 2fr 1fr;</pre>
       <div>auto：根据子项实际大小，占用空间，其它空间由划分的大小决定</div>
       <pre>grid-template-columns: auto 1fr auto;</pre>
       <pre>grid-template-columns: 1fr auto 1fr;</pre>
       <pre>grid-template-columns: 2rem auto 1fr;</pre>
-      <div>repeat(n, length length)：根据指定大小 length，重复应用n次；可以指定多个 length</div>
+      <div>repeat(n, length length)：根据指定大小 length，重复应用 n 次；可以指定多个 length</div>
       <pre>grid-template-columns: repeat(3, 1fr);</pre>
       <pre>grid-template-columns: repeat(12, 1fr);</pre>
       <pre>grid-template-columns: repeat(3, 100px 200px);</pre>
-      <p>.如果想 <span class="warn">自适应</span> 划分，可以使用：auto-fill、auto-fit；其中，minmax(length, length)：格子最小和最大尺寸</p>
-      <p>.auto-fill：当容器大于子项时，生成 <span class="warn">空轨道</span>，剩余空间 <span class="warn">闲置</span></p>
+      <p>.如果想 <span class="warn">自适应</span> 划分，可以使用：auto-fill、auto-fit；其中，<a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/minmax">minmax()</a>：格子最小和最大尺寸</p>
+      <p>.auto-fill：当容器有 <span class="warn">剩余闲置空间</span>，生成 <span class="warn">空轨道</span>；尽可能多地填充列，即使这些列是空的</p>
       <pre>grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));</pre>
       <img src="./imgs/grid16.png" alt="" loading="lazy">
       <p class="fig-sn">auto-fill</p>
-      <p>.auto-fit：与 auto-fill 行为一致，唯一不同的是当轨道内容为空时，将 <span class="warn">不会生成</span> 轨道，剩余空间被分配到各个子项中</p>
+      <p>.auto-fit：<span class="warn">不会生成</span> 轨道，剩余空间被分配到各个子项中；根据实际内容调整列的数量和宽度，收缩多余的列</p>
       <pre>grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));</pre>
       <img src="./imgs/grid17.png" alt="" loading="lazy">
       <p class="fig-sn">auto-fit</p>
-      <div>.max-content：每一列的宽度为其中内容的最大宽度；让列尽可能宽以适应最长的内容，保证内容不会被截断</div>
-      <div>.min-content：让列尽可能窄，仅适应最窄的内容，可能导致较多剩余空间；紧凑的列布局</div>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/max-content">max-content</a></div>
+      <p>.列宽由最大宽度子项绝对 - maximal content contribution will be defined by the size of the largest sentence</p>
+      <p>.让列尽可能宽以适应最长的内容，保证内容不会被截断</p>
+      <div><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/min-content">min-content</a></div>
+      <p>.列宽由子项中的某个最大单词宽度决定 - minimal content contribution will be defined by the size of the largest word</p>
+      <p>.让列尽可能窄，仅适应最窄的内容，可能导致较多剩余空间；紧凑的列布局</p>
     </dd>
     <dt>grid-template-rows</dt>
     <dd>
-      <div>.容器行的设置；含义同容器列的设置</div>
+      <div>.容器行的划分；含义同容器列的划分</div>
+      <div>.通常不需要单独指定，由内容撑开，按照子项</div>
       <pre>grid-template-rows: px | % | fr | auto | repeat() | minmax();</pre>
     </dd>
     <dt>grid-template</dt>
@@ -114,12 +119,6 @@
       <div>.当容器中没有明确指定行列大小时，自动决定容器的行高或列宽 - 隐式的指定行的高度|列的宽度</div>
       <pre>grid-auto-rows: &lt;length&gt; | &lt;percentage&gt; | min-content | max-content | auto;</pre>
       <pre>grid-auto-columns: &lt;length&gt; | &lt;percentage&gt; | min-content | max-content | auto;</pre>
-      <img src="./imgs/grid2.png" alt="" loading="lazy">
-      <p class="fig-sn">默认auto；根据内容自动占满容器</p>
-      <img src="./imgs/grid3.png" alt="" loading="lazy">
-      <p class="fig-sn">指定行大小50px；多的内容会溢出</p>
-      <img src="./imgs/grid4.png" alt="" loading="lazy">
-      <p class="fig-sn">指定了min-content</p>
     </dd>
     <dt>grid-auto-flow</dt>
     <dd>
@@ -131,15 +130,15 @@
       <div>.通常是 <span class="warn">划分好格子</span> 后再指定方向；如容器划分3行3列，10个子项的排列方式</div>
       <img src="./imgs/grid0.png" alt="" loading="lazy">
       <p class="fig-sn">默认 row 排列 - 划分列的行优先</p>
-      <img src="./imgs/grid1.png" alt="" loading="lazy">
-      <p class="fig-sn">column 排列 - 未划分行的列优先</p>
       <img src="./imgs/grid5.png" alt="" loading="lazy">
       <p class="fig-sn">column 排列 - 划分行的列优先</p>
+      <img src="./imgs/grid1.png" alt="" loading="lazy">
+      <p class="fig-sn">column 排列 - 未划分行的列优先</p>
     </dd>
     <dt>grid-template-areas</dt>
     <dd>
       <div>.按区域划分容器</div>
-      <div>.每个子项指定对应的区域</div>
+      <div>.每个子项指定对应的区域 grid-area</div>
       <div>.需配合 grid-template-columns 和 grid-template-rows 指定各区域大小，便于调整宽度和合并</div>
       <div>.也可以由子项的跨行、跨列实现。见后续案例</div>
     </dd>
@@ -199,13 +198,6 @@
       <div>.跨列；列的起始和结束 - specifies a grid item's size and location within a grid column by contributing a line, a span
       </div>
       <div>.也可以根据轨道线简写为1/4，表示单元格跨度从 track 1到 track 4 - separated by /</div>
-      <img src="./imgs/grid11.png" alt="" loading="lazy">
-      <p class="fig-sn">最后1个子项跨列</p>
-      <pre>grid-column: span 3;</pre>
-      <pre>grid-column: 1/4;</pre>
-      <pre>
-grid-column-start: 1;
-grid-column-end: 4;</pre>
     </dd>
     <dt>grid-row: span number (建议)
       <br>grid-row: start/end
@@ -214,40 +206,51 @@ grid-column-end: 4;</pre>
     <dd>
       <div>.跨行；行的起始和结束</div>
       <div>.同样可以利用轨道线简写</div>
+    </dd>
+    <dd class="tips">
+      <div>Grid 布局引擎会尝试将这些子项放置在下一个可用的网格单元格；如果当前行没有足够的空间，子项将被放置在下一行的第一个可用单元格中</div>
+      <div>建议使用 grid-column/grid-row: span number 明确实现跨行跨列；避免漂移</div>
+      <div>尽量指定容器大小</div>
+      <div>尽量指定行划分</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 跨行/跨列；完整实现请参考后续九宫格案例</dd>
+    <dd class="sn">
+      <div>九宫格</div>
+      <img src="./imgs/grid2.png" alt="" loading="lazy">
+      <div>原始结构 - 5个子项</div>
+      <img src="./imgs/grid3.png" alt="" loading="lazy">
+      <div>第1个子项跨列</div>
+      <img src="./imgs/grid4.png" alt="" loading="lazy">
+      <pre>
+.box div:nth-child(1) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}</pre>
+      <pre>
+.box div:nth-child(1) {
+    grid-column: 1/3;
+}</pre>
+      <pre>
+.box div:nth-child(1) {
+    grid-column: span 2;
+}</pre>
+      <div>第2个子项跨行 - 漂移</div>
+      <img src="./imgs/grid11.png" alt="" loading="lazy">
+      <pre>
+.box div:nth-child(2) {
+    grid-row: 1/3;
+}</pre>
+      <div>应该同时指定列位置或扩展行</div>
       <img src="./imgs/grid12.png" alt="" loading="lazy">
-      <p class="fig-sn">第1个子项跨行</p>
-      <pre>grid-row: span 2;</pre>
-      <pre>grid-row: 1/3;</pre>
       <pre>
-grid-row-start: 1;
-grid-row-end: 3;</pre>
-      <img src="./imgs/grid13.png" alt="" loading="lazy">
-      <p class="fig-sn">第1个子项跨列；第4个子项未指定行列位置跨行，会跑到前面</p>
+.box div:nth-child(2) {
+    grid-row: 1/3;
+    grid-column: 3/4;
+}</pre>
       <pre>
-.c0 {
-  grid-column: 1/-1;
-}
-
-.c3 {
-  grid-row: 2/-1;
-}      </pre>
-      <img src="./imgs/grid14.png" alt="" loading="lazy">
-      <p class="fig-sn">第1个子项跨列；第4个子项指定行列位置跨行</p>
-      <pre>
-.c0 {
-  grid-column: 1/-1;
-}
-
-.c3 {
-  grid-column: 3/-1;
-  grid-row: 2/-1;
-}      </pre>
-      <div class="tips">
-        <div>Grid 布局引擎会尝试将这些子项放置在下一个可用的网格单元格；如果当前行没有足够的空间，子项将被放置在下一行的第一个可用单元格中</div>
-        <div>建议使用 grid-column/grid-row: span number 明确实现跨行跨列；避免漂移</div>
-        <div>尽量指定容器大小</div>
-        <div>尽量指定行划分</div>
-      </div>
+.box div:nth-child(2) {
+    grid-row: span 2;
+}</pre>
     </dd>
     <dt>grid-area</dt>
     <dd>.配合 grid-template-areas 一起使用，指定划分的某一个区域</dd>
