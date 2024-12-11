@@ -1,4 +1,4 @@
-@import url(//at.alicdn.com/t/c/font_3859342_xaua6qnifpl.css);
+@import url(//at.alicdn.com/t/c/font_3859342_3uwkhw73sh3.css);
 @import url(/css/fonts_Inconsolata.css);
 
 :root {
@@ -17,10 +17,10 @@
   --w-width: 1024px;
   --header-h: 25vh;
   --chap-h: 12vh;
-  --padding: 1rem;
+  --padding: 10px;
   --small-size: 14px;
   --p-m-g: 10px;
-  accent-color: var(--main-color);
+  accent-color: var(--warn-color);
 }
 
 body,
@@ -555,11 +555,38 @@ iframe {
   position: fixed;
   right: 2rem;
   bottom: -10rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--warn-color);
+  border-radius: 50%;
   transition: 0.5s;
+  z-index: 99;
+}
+
+.back2top::before {
+  content: '';
+  position: absolute;
+  inset: 0px;
+  border: 1px solid var(--warn-color);
+  border-radius: 50%;
+}
+
+.back2top:hover::before {
+  animation: fade-out 0.8s ease-in-out infinite;
+}
+
+@keyframes fade-out {
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+  }
 }
 
 .back2top.active {
-  bottom: 2rem;
+  bottom: 4rem;
 }
 
 @media screen and (max-width:768px) {

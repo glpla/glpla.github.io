@@ -83,7 +83,7 @@ button {
     background-image: linear-gradient(to right, var(--pri-color), var(--sec-color));
     background-size: 200% 100%;
     border-radius: var(--border-radius);
-    text-transform: uppercase;
+    text-transform: capitalize;
     transition: .4s;
     cursor: pointer;
 }
@@ -232,12 +232,12 @@ header.sticky .nav-item.active {
     background-color: var(--pri-color);
 }
 
-.swiper .swiper-btn {
+/* .swiper .swiper-btn {
     width: 16px;
     height: 16px;
     color: #fff;
     transform: scale(0.6);
-}
+} */
 
 .swiper .swiper-btn:hover {
     color: var(--pri-color);
@@ -442,7 +442,6 @@ header.sticky .nav-item.active {
 }
 
 /* footer  */
-
 /* 多次使用grid实现单独的元素的居中，而没有使用margin：auto */
 
 footer {
@@ -494,6 +493,14 @@ footer {
     transition: 0.5s;
 }
 
+.back::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid var(--pri-color);
+}
+
 .back.fixed {
     pointer-events: all;
     opacity: 1;
@@ -509,6 +516,17 @@ footer {
 
 .back:hover i {
     transform: scale(1.2);
+}
+
+.back:hover::before {
+    animation: fade-out 0.8s ease-in-out infinite;
+}
+
+@keyframes fade-out {
+    to {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
 
 @media (max-width:768px) {
