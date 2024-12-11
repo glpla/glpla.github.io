@@ -2,7 +2,7 @@
 const swiperInfo = document.querySelectorAll('.swiper-info')
 const swiper = new Swiper('.swiper', {
   loop: true,
-  autoplay: true,
+  // autoplay: true,
   // grabCursor: true,
 
   pagination: {
