@@ -7,6 +7,11 @@
     <title>Demo</title>
     <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4690841_08vyhb7495oi.css">
     <style>
+        :root {
+            --b-r: 150px;
+            --p-m-g: 20px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -17,51 +22,215 @@
             font-size: 22px;
         }
 
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--p-m-g);
+            width: 100%;
+        }
+
+        input,
+        button {
+            border: none;
+            outline: none;
+            width: 100%;
+            height: 100%;
+            font: inherit;
+            color: inherit;
+            background-color: transparent;
+        }
+
+        button {
+            width: max-content;
+            height: 40px;
+            padding: 0 var(--p-m-g);
+            cursor: pointer;
+            text-transform: capitalize;
+        }
+
         body {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            height: 100vh;
+            gap: var(--p-m-g);
+            min-height: 100vh;
             perspective: 1000px;
+            background-color: #eee;
         }
 
-        .card {
+        .wrap {
             position: relative;
-            width: 300px;
-            height: 400px;
-            background-color: #eee;
-            transition: 0.5s;
-            transform-origin: bottom;
-            /* ！！！ */
-            transform-style: preserve-3d;
+            width: 800px;
+            height: 300px;
+            background-color: #fff;
+            overflow: hidden;
         }
 
-        .card:hover {
-            transform: rotateY(180deg);
-        }
-
-        .front,
-        .back {
+        .wrap>div {
             position: absolute;
-            background-color: #eee;
-            inset: 0;
         }
 
-        .back {
-            transform: rotateY(180deg);
-            background-color: #f40;
-            backface-visibility: hidden;
+        .form {
+            position: absolute;
+            top: 0;
+            display: flex;
+            align-items: center;
+            width: 50%;
+            height: 100%;
+            background-color: #fff;
+            transition: 1s 0.6s, visibility 0s 0.6s;
+            padding: var(--p-m-g);
+        }
+
+        .form-login {
+            left: 0;
+            transform: translateX(100%);
+            visibility: hidden;
+        }
+
+        .form-register {
+            right: 0;
+        }
+
+        .mask {
+            width: 150%;
+            height: 100%;
+            top: 0;
+            right: 50%;
+            background-color: #0a0;
+            border-radius: var(--b-r);
+            transition: 1.0s;
+        }
+
+        .register-tips,
+        .login-tips {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: var(--p-m-g);
+            width: 50%;
+            height: 100%;
+            padding: var(--p-m-g);
+            top: 0;
+        }
+
+        .login-tips {
+            left: 0;
+            /* background-color: #0896; */
+            transition: 1.0s 0.4s;
+        }
+
+        .register-tips {
+            align-items: flex-end;
+            right: 0;
+            /* background-color: #f406; */
+            transform: translateX(100%);
+            transition: 1.0s .2s;
+        }
+
+        /* dynamic */
+        .wrap.active .mask {
+            transform: translateX(100%);
+            transition: 1.0s;
+        }
+
+        .wrap.active .login-tips {
+            transform: translateX(-100%);
+            transition: 1.0s 0.2s;
+        }
+
+        .wrap.active .register-tips {
+            transform: translateX(0);
+            transition: 1.0s 0.4s;
+        }
+
+        .wrap.active .form-login {
+            transform: translateX(0%);
+            visibility: visible;
+        }
+
+        .wrap.active .form-register {
+            transform: translateX(-100%);
+            visibility: hidden;
+        }
+
+        .input-box {
+            width: 100%;
+            height: 40px;
+            background-color: #eee;
+        }
+
+        .input-box input {
+            padding-left: var(--p-m-g);
+        }
+
+        .input-box input:focus {
+            border: 1px solid #0a0;
+        }
+
+        form .form-btn {
+            background-color: #0a0;
+            color: #fff;
+        }
+
+        .btn {
+            color: #fff;
+            border: 1px solid #fff;
+            border-radius: 20px;
         }
     </style>
 </head>
 
 <body>
-    <div class="card">
-        <div class="front">asdfasdf</div>
-        <div class="back"></div>
+    <div class="wrap">
+        <div class="form form-login">
+            <form action="">
+                <h1>login</h1>
+                <div class="input-box">
+                    <input type="text">
+                </div>
+                <div class="input-box">
+                    <input type="password">
+                </div>
+                <button class="form-btn">login</button>
+            </form>
+        </div>
+        <div class="form form-register">
+            <form action="">
+                <h1>register</h1>
+                <div class="input-box">
+                    <input type="text">
+                </div>
+                <div class="input-box">
+                    <input type="password">
+                </div>
+                <button class="form-btn">register</button>
+            </form>
+        </div>
+        <div class="mask"></div>
+        <div class="login-tips">
+            <p>login tips</p>
+            <button class="btn btn-login">login</button>
+        </div>
+        <div class="register-tips">
+            <p>register tips</p>
+            <button class="btn btn-register">register</button>
+        </div>
     </div>
+    <footer>copyright@2024-2025</footer>
+    <script>
+        const wrap = document.querySelector('.wrap')
+        const btnLogin = wrap.querySelector('.btn-login')
+        const btnRegister = wrap.querySelector('.btn-register')
+        console.log(btnLogin, btnRegister);
+        btnLogin.addEventListener('click', toggle)
+        btnRegister.addEventListener('click', toggle)
+        function toggle() {
+            wrap.classList.toggle('active')
+        }
+    </script>
 </body>
 
 </html>

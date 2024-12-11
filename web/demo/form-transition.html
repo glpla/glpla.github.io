@@ -75,6 +75,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            gap: 20px;
             height: 100vh;
             /* background-image: radial-gradient(#00abf0, #000); */
             background-color: #f1f1f1;
@@ -103,7 +104,6 @@
             z-index: 1;
         }
 
-
         .wrap.active .form-box {
             right: 50%;
         }
@@ -128,6 +128,14 @@
             position: relative;
             display: flex;
             align-items: center;
+        }
+
+        .ipt-box input:focus {
+            border: 1px solid var(--main-color);
+        }
+
+        .ipt-box input:focus+span {
+            color: var(--main-color);
         }
 
         .btn {
@@ -205,7 +213,7 @@
         .mask .register-tips {
             align-items: flex-start;
             left: 0;
-            transition-delay: 0.5s;
+            transition-delay: 0.6s;
         }
 
         .wrap.active .mask .register-tips {
@@ -229,6 +237,7 @@
             justify-content: center;
             gap: 10px;
             border: 1px solid #fff;
+            border-radius: 20px;
             width: 150px;
         }
 
@@ -244,10 +253,18 @@
             transform: translateX(10px);
         }
 
+        footer {
+            font-size: 12px;
+            text-transform: capitalize;
+            padding: 1rem 0;
+            pointer-events: none;
+            transition: 0s 0.5s;
+        }
+
         @media screen and (max-width: 768px) {
             .wrap {
                 width: 100vw;
-                height: 100vh;
+                flex: 1;
             }
 
             .form-box {
@@ -298,6 +315,16 @@
             .wrap.active .mask .login-tips {
                 bottom: 0%;
             }
+
+            footer {
+                position: fixed;
+                bottom: 0;
+                z-index: 99;
+            }
+
+            .wrap.active+footer {
+                color: #fff;
+            }
         }
     </style>
 </head>
@@ -316,7 +343,7 @@
                     <span class="iconfont icon-shop"></span>
                 </div>
                 <div class="ipt-box">
-                    <input type="checkbox" id="rem">&nbsp;&nbsp;<label for="rem">remember me</label>
+                    <input type="checkbox" id="rem">&nbsp;&nbsp;<label for="rem">Remember me</label>
                 </div>
                 <button type="submit" class="btn">login</button>
                 <div class="icon-box">
@@ -344,7 +371,7 @@
                     <span class="iconfont icon-shop"></span>
                 </div>
                 <div class="ipt-box">
-                    <input type="checkbox" id="item">&nbsp;&nbsp;<label for="item">agree with the items</label>
+                    <input type="checkbox" id="item">&nbsp;&nbsp;<label for="item">Agree with the items</label>
                 </div>
                 <button type="submit" class="btn">register</button>
             </form>
@@ -352,17 +379,18 @@
         <div class="mask">
             <div class="tips register-tips">
                 <h2>hello, there.</h2>
-                <p>don't have an account?</p>
+                <p>Don't have an account?</p>
                 <button type="button" class="btn-register"><span class="iconfont icon-arrow-left"></span>
                     register</button>
             </div>
             <div class="tips login-tips">
                 <h2>welcom back.</h2>
-                <p>alread have an account?</p>
+                <p>Alread have an account?</p>
                 <button type="button" class="btn-login">login<span class="iconfont icon-arrow-right"></span></button>
             </div>
         </div>
     </div>
+    <footer>Copyright &commat; 2024-2026</footer>
     <script>
         const wrap = document.querySelector('.wrap')
         const btnLogin = document.querySelector('.btn-login')
