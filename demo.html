@@ -59,129 +59,6 @@
             background-color: #eee;
         }
 
-        .wrap {
-            position: relative;
-            width: 800px;
-            height: 300px;
-            background-color: #fff;
-            overflow: hidden;
-        }
-
-        .wrap>div {
-            position: absolute;
-        }
-
-        .form {
-            position: absolute;
-            top: 0;
-            display: flex;
-            align-items: center;
-            width: 50%;
-            height: 100%;
-            background-color: #fff;
-            transition: 1s 0.6s, visibility 0s 0.6s;
-            padding: var(--p-m-g);
-        }
-
-        .form-login {
-            left: 0;
-            transform: translateX(100%);
-            visibility: hidden;
-        }
-
-        .form-register {
-            right: 0;
-        }
-
-        .mask {
-            width: 150%;
-            height: 100%;
-            top: 0;
-            right: 50%;
-            background-color: #0a0;
-            border-radius: var(--b-r);
-            transition: 1.0s;
-        }
-
-        .register-tips,
-        .login-tips {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            gap: var(--p-m-g);
-            width: 50%;
-            height: 100%;
-            padding: var(--p-m-g);
-            top: 0;
-        }
-
-        .login-tips {
-            left: 0;
-            /* background-color: #0896; */
-            transition: 1.0s 0.4s;
-        }
-
-        .register-tips {
-            align-items: flex-end;
-            right: 0;
-            /* background-color: #f406; */
-            transform: translateX(100%);
-            transition: 1.0s .2s;
-        }
-
-        /* dynamic */
-        .wrap.active .mask {
-            transform: translateX(100%);
-            transition: 1.0s;
-        }
-
-        .wrap.active .login-tips {
-            transform: translateX(-100%);
-            transition: 1.0s 0.2s;
-        }
-
-        .wrap.active .register-tips {
-            transform: translateX(0);
-            transition: 1.0s 0.4s;
-        }
-
-        .wrap.active .form-login {
-            transform: translateX(0%);
-            visibility: visible;
-        }
-
-        .wrap.active .form-register {
-            transform: translateX(-100%);
-            visibility: hidden;
-        }
-
-        .input-box {
-            width: 100%;
-            height: 40px;
-            background-color: #eee;
-        }
-
-        .input-box input {
-            padding-left: var(--p-m-g);
-        }
-
-        .input-box input:focus {
-            border: 1px solid #0a0;
-        }
-
-        form .form-btn {
-            background-color: #0a0;
-            color: #fff;
-        }
-
-        .btn {
-            color: #fff;
-            border: 1px solid #fff;
-            border-radius: 20px;
-        }
-
-        /* nav */
         nav {
             position: fixed;
             left: 0;
@@ -191,6 +68,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background-color: #ffa040;
+            color: #fff;
+            padding: 0 10px;
         }
 
         .nav-menu {
@@ -210,7 +90,7 @@
                 left: 0;
                 width: 100%;
                 padding: 3rem 1rem;
-                background-color: #fbd9bf;
+                background-color: #ffa040;
                 transition: 0.5s;
             }
 
@@ -234,16 +114,10 @@
                 display: block;
             }
         }
-
-        .txt {
-            color: #f40;
-            text-shadow: 10px 10px;
-        }
     </style>
 </head>
 
 <body>
-    <div class="txt">lorem</div>
     <nav>
         <div class="logo">logo</div>
         <div class="nav-menu" id="nav-menu">
@@ -256,42 +130,6 @@
         </div>
         <div class="nav-toggle" id="nav-toggle">toggle</div>
     </nav>
-    <!-- <div class="wrap">
-        <div class="form form-login">
-            <form action="">
-                <h1>login</h1>
-                <div class="input-box">
-                    <input type="text">
-                </div>
-                <div class="input-box">
-                    <input type="password">
-                </div>
-                <button class="form-btn">login</button>
-            </form>
-        </div>
-        <div class="form form-register">
-            <form action="">
-                <h1>register</h1>
-                <div class="input-box">
-                    <input type="text">
-                </div>
-                <div class="input-box">
-                    <input type="password">
-                </div>
-                <button class="form-btn">register</button>
-            </form>
-        </div>
-        <div class="mask"></div>
-        <div class="login-tips">
-            <p>login tips</p>
-            <button class="btn btn-login">login</button>
-        </div>
-        <div class="register-tips">
-            <p>register tips</p>
-            <button class="btn btn-register">register</button>
-        </div>
-    </div> -->
-    <footer>copyright@2024-2025</footer>
     <script>
         const close = document.querySelector('#nav-close')
         const toggle = document.querySelector('#nav-toggle')
@@ -308,15 +146,6 @@
                 menu.classList.remove('active')
             })
         })
-        // const wrap = document.querySelector('.wrap')
-        // const btnLogin = wrap.querySelector('.btn-login')
-        // const btnRegister = wrap.querySelector('.btn-register')
-        // console.log(btnLogin, btnRegister);
-        // btnLogin.addEventListener('click', toggle)
-        // btnRegister.addEventListener('click', toggle)
-        // function toggle() {
-        //     wrap.classList.toggle('active')
-        // }
     </script>
 </body>
 
