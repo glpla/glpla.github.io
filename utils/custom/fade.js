@@ -1,18 +1,16 @@
-const mask = document.querySelector(".mask")
-// window.addEventListener("load", function () {
-//     mask.classList.add("fade-in")
-//     mask.addEventListener("animationend", function () {
-//         mask.classList.remove("fade-in")
-//     })
-// })
-const links = document.querySelectorAll(".fade-link")
+const mask = document.getElementsByClassName("mask")[0]
+const links = document.getElementsByClassName("fade-link")
+console.log(links);
+
 links.forEach(link => {
-    link.addEventListener("click", function (e) {
+    console.log('link');
+
+    link.addEventListener("click", (e) => {
         e.preventDefault()
         let target = e.currentTarget.href
 
         mask.classList.add("fade-out")
-        mask.addEventListener("animationend", function () {
+        mask.addEventListener("animationend", () => {
             window.location.href = target
         })
     })

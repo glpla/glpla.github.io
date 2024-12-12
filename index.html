@@ -43,7 +43,6 @@
     <div>广州新华学院</div>
     <div>东莞 · 中国</div>
   </footer>
-  <script src="/utils/custom/fade.js"></script>
   <script src="/utils/lib/vanilla-tilt.min.js"></script>
   <script src="/utils/lib/scrollreveal.min.js"></script>
   <script type="module">
@@ -100,9 +99,25 @@
           loading = false;
           isLoaded = true;
           more.classList.add('active')
+
           setTimeout(() => {
             body.classList.remove('active')
           }, 1000)
+
+          const mask = document.querySelector(".mask")
+          const links = document.querySelectorAll(".fade-link")
+          links.forEach(link => {
+
+            link.addEventListener("click", (e) => {
+              e.preventDefault()
+              let target = e.currentTarget.href
+
+              mask.classList.add("fade-out")
+              mask.addEventListener("animationend", () => {
+                window.location.href = target
+              })
+            })
+          })
         })
     })
   </script>
