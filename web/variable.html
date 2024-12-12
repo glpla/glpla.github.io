@@ -80,7 +80,7 @@
     <dd>
       <div>. 也称自定义属性</div>
       <div>. 声明：使用 <span class="warn">两个短划线 -- </span> 开始的变量名表示</div>
-      <div>. 使用：在 CSS 中使用 var() 引用变量；建议同时指定 <span style="color: var(--main-color);">备用值</span></div>
+      <div>. 使用：在 CSS 中使用 var() 引用变量；建议同时指定 <span style="color: var(--warn-color);">备用值</span></div>
       <div>. 一次定义、多次使用；适合一个属性值在多处被使用；相当于定义了一个当前CSS文件内的全局变量</div>
       <div>. 优势：方便运维，特别适合全站换肤</div>
       <div>. 变量的使用经常配合计算函数 calc() 使用</div>
@@ -88,7 +88,7 @@
     </dd>
     <dt>全局变量</dt>
     <dd>
-      <div>. 在CSS中，使用根选择器 :root 声明，所有元素都可使用；:root 是 &lt;html&gt; 的一个属性</div>
+      <div>. 在CSS中，使用根选择器 :root 声明，页面内所有元素都可使用；:root 是 &lt;html&gt; 的一个属性</div>
       <pre>
 :root {
     --main-color: #f40;
@@ -106,12 +106,12 @@
         --main-layout: 1fr;
     }
 }</pre>
-      <div>. 也可以用到元素的内联样式</div>
+      <div>. 也可以在元素的内联样式中使用</div>
       <pre>&lt;span style="color: var(--main-color);"&gt;Lorem.&lt;/span&gt;</div></pre>
     </dd>
     <dt>局部变量</dt>
     <dd>
-      <div>. 在 CSS 中，如果变量定义在某个选择器，则只有该选择器选中的元素和它的所有后代元素使用-局部变量</div>
+      <div>. 在 CSS 中，如果变量定义在某个选择器，则只有该选择器选中的元素和它的所有后代元素使用</div>
       <pre>
 .wrap{
     --el-color: #890;
@@ -119,7 +119,7 @@
     </dd>
     <dt>内联变量</dt>
     <dd>
-      <div>. 在 HTML 元素中，使用 style 定义内联CSS变量，供当前元素在 CSS 使用</div>
+      <div>. 在 HTML 元素中，使用内联样式 style 定义的变量，供当前元素在 CSS 使用</div>
       <pre>&lt;div style="--alpha:0"&gt;0&lt;/div&gt;</pre>
       <pre>
 el{
