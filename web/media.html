@@ -92,7 +92,7 @@ let sh = window.screen.height;</pre>
     <dl>
       <dt class="nav-cont">断点 breakpoint</dt>
       <dd>
-        <div>利用断点 breakpoint划分尺寸</div>
+        <div>利用断点 breakpoint 划分尺寸</div>
         <div>尺寸断点 breakpoint 应以实际内容为主，如根据导航条灵活指定</div>
         <div>通常以Ipnone6（375*667）为标准进行设计图的设计</div>
         <table>
@@ -155,7 +155,7 @@ let sh = window.screen.height;</pre>
 @media screen and (max-width: 1200px) {
   // CSS样式
 }      </pre>
-        <div>mediaType：all所有设备、screen屏幕、print打印、speech屏幕阅读器/发声设备等；默认是屏幕screen</div>
+        <div>mediaType：all 所有设备、screen 屏幕、print 打印、speech 屏幕阅读器/发声设备等；默认是屏幕 screen</div>
         <div>mediaFeature：适配当前媒体尺寸的样式；通常指定一个 <span class="warn">区间</span></div>
         <div>.max-width：尺寸小于或等于 <span class="warn">&lt;=</span> 当前值时，样式生效</div>
         <div>.min-width：尺寸大于或等于 <span class="warn">&gt;=</span> 当前值时，样式生效</div>
@@ -267,13 +267,13 @@ let sh = window.screen.height;</pre>
       <dd>.媒体查询的不同运用</dd>
       <dt>外部样式</dt>
       <dd>
-        <div>.link - 在HTML中根据媒体尺寸动态引入link对应的外部CSS文件</div>
+        <div>.link - 在 HTML 中根据媒体尺寸动态引入 link 对应的外部CSS文件</div>
         <pre>
 &lt;link rel="stylesheet" media="screen and (min-width:1201px)" href="./media_large.css"&gt;
 &lt;link rel="stylesheet" media="screen and (max-width:1200px)" href="./media_medium.css"&gt;
 &lt;link rel="stylesheet" media="screen and (max-width:992px)" href="./media_normal.css"&gt;
 &lt;link rel="stylesheet" media="screen and (max-width:768px)" href="./media_small.css"&gt;</pre>
-        <div>. @import - 在主样式文件app.css引入响应的CSS文件</div>
+        <div>. @import - 在主样式文件 app.css 引入响应的CSS文件</div>
         <pre>
 @import url(./css/media_large.css);
 @import url(./css/media_medium.css) only screen and (max-width:1200px);
@@ -282,7 +282,7 @@ let sh = window.screen.height;</pre>
       </dd>
       <dt>内部样式</dt>
       <dd>
-        <div>. <span class="warn">同一个</span> &lt;style&gt;直接编辑内部样式</div>
+        <div>. <span class="warn">同一个 </span> &lt;style&gt; 直接编辑内部样式</div>
         <pre>
 body {
   background-color: #f2f3f4;
@@ -305,7 +305,7 @@ body {
     background-color: #f40;
   }
 }</pre>
-        <div>. <span class="warn">不同</span> 的&lt;style&gt;编辑内部样式</div>
+        <div>. <span class="warn">不同 </span> 的&lt;style&gt; 编辑内部样式</div>
         <pre>
 &lt;style&gt;
   body {
@@ -357,7 +357,7 @@ body {
   &lt;img src="./imgs/5.jpg" alt=""&gt;
   &lt;img src="./imgs/6.jpg" alt=""&gt;
 &lt;/div&gt;</pre>
-        <p>方案1：使用grid实现 - 桌面优先</p>
+        <p>方案1：使用 grid 实现 - 桌面优先</p>
         <pre>
 .wrap {
   display: grid;
@@ -382,7 +382,7 @@ body {
     grid-template-columns: repeat(1, 1fr);
   }
 }</pre>
-        <p>方案 2：使用%实现 - 移动优先；采用了float，记得清楚浮动</p>
+        <p>方案 2：使用%实现 - 移动优先；采用了 float，记得清除浮动</p>
         <pre>
 .wrap img {
   float: left;
@@ -407,16 +407,16 @@ body {
     width: 25%;
   }
 }      </pre>
-        <div>其它方案：请参考grid万能的自适应布局<a href="./grid.html#grid">gird布局</a></div>
+        <div>其它方案：请参考grid万能的自适应布局<a href="./grid.html#grid"> gird布局</a></div>
       </dd>
       <dd>[<span class="iconfont icon-keyboard"></span>] 小尺寸时使用普通小图；大尺寸时，使用高清大图</dd>
-      <dd>体会&lt;picture&gt;、&lt;img&gt;和background-image的特点</dd>
-      <dd>[<span class="iconfont icon-keyboard"></span>] 汉堡菜单</dd>
-      <dd> 主导航nav、logo、和ham</dd>
-      <dd> 传统方式下：大尺寸下，只显示nav和logo，隐藏掉ham；小尺寸时，再显示ham</dd>
-      <dd>
-        改进：大尺寸下，ham的h5指定结构但是内容为空，小尺寸下才设计ham的具体内容，这样就不需要先隐藏再显示。适合开始弹性布局的flex-start和结束flex-end；如果使用space-between则0元素也会被分隔
-        [好大的坑！！！]</dd>
+      <dd>体会 &lt;picture&gt;、&lt;img&gt; 和 background-image 的特点</dd>
+      <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/ham0.html">汉堡菜单1</a>、<a
+          href="./demo/ham1.html">汉堡菜单2</a>、<a href="./demo/ham2.html">汉堡菜单3</a></dd>
+      <dd> 主导航nav、logo、和 ham</dd>
+      <dd> 传统方式下：大尺寸下，只显示 nav 和 logo，隐藏 ham；小尺寸时，再显示 ham</dd>
+      <dd> 改进：大尺寸下，ham的h5指定结构但是内容为空，小尺寸下才设计ham的具体内容，这样就不需要先隐藏再显示。适合开始弹性布局的flex-start和结束flex-end</dd>
+      <dd> 如果使用space-between则0元素也会被分隔 [好大的坑！！！]</dd>
       <dd>[<span class="iconfont icon-keyboard"></span>] 面向桌面端；移动端没有hover；且100vh默认是包含底部操作栏</dd>
       <dd>
         <pre>

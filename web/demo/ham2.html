@@ -134,6 +134,19 @@
       font-size: 2rem;
     }
 
+    .footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: var(--p-m-g);
+      font-size: 12px;
+      padding: 2rem 0;
+    }
+
+    .footer img {
+      width: 40px;
+    }
+
     @media screen and (max-width: 768px) {
       body.active {
         overflow: hidden;
@@ -203,6 +216,15 @@
       body.active .nav-links a {
         transform: translateX(0);
       }
+
+      .footer {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .footer img {
+        order: -1;
+      }
     }
   </style>
 </head>
@@ -233,12 +255,14 @@
   <a href="#" class="back2top" id="back2top">
     <span class="iconfont icon-rocket"></span>
   </a>
+  <footer class="w footer" id="footer"></footer>
   <script>
     const body = document.querySelector('body')
     const ham = document.querySelector('#ham')
     const links = document.querySelector('#nav-links')
     const items = document.querySelectorAll('.nav-links a')
     const back2top = document.querySelector('#back2top')
+
     ham.addEventListener('click', () => {
       body.classList.toggle('active')
     })
@@ -247,8 +271,17 @@
         body.classList.remove('active')
       })
     })
+
     window.addEventListener('scroll', () => {
       back2top.classList.toggle('show', window.scrollY > 300)
+    })
+
+    window.addEventListener('load', () => {
+      fetch('/common/footer-2024.html')
+        .then(res => res.text())
+        .then(res => {
+          document.querySelector('#footer').innerHTML = res
+        })
     })
   </script>
 </body>
