@@ -129,22 +129,81 @@
             }
         }
     </style> -->
+    <style>
+        .w {
+            width: 100%;
+            max-width: 1024px;
+            margin: 0 auto;
+        }
 
+        header {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            background-color: #eee;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f40;
+        }
+
+        .ham {
+            display: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            padding: 6px 20px;
+        }
+
+        section {
+            min-height: 100vh;
+        }
+
+        @media screen and (max-width:768px) {
+            .ham {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 100%;
+                flex-direction: column;
+                width: 100%;
+                background-color: #fff;
+                align-items: center;
+                transform: translateX(100%);
+                transition: 0.5s;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <header class="w">banner</header>
-    <nav class="w">
-        <div class="logo">logo</div>
-        <div class="ham" id="ham">ham</div>
-        <div class="nav-links" id="nav-links">
-            <a href="#home">Lorem.</a>
-            <a href="#info">Quaerat!</a>
-            <a href="#blog">Animi?</a>
-            <a href="#team">Laborum.</a>
-            <a href="#about">Assumenda.</a>
-        </div>
-    </nav>
+    <header>
+        <nav class="w">
+            <div class="logo">logo</div>
+            <div class="ham" id="ham">ham</div>
+            <div class="nav-links active" id="nav-links">
+                <a href="#home">Lorem.</a>
+                <a href="#info">Quaerat!</a>
+                <a href="#blog">Animi?</a>
+                <a href="#team">Laborum.</a>
+                <a href="#about">Assumenda.</a>
+            </div>
+        </nav>
+    </header>
     <section class="w" id="home">Lorem.</section>
     <section class="w" id="info">Lorem.</section>
     <section class="w" id="blog">Lorem.</section>
