@@ -16,10 +16,8 @@
         <span>&commat;Project</span>
     </header>
     <dl>
-        <dd>使用 Vue 官方的项目脚手架工具 Vite 创建项目，根据提示操作即可；详细情况，看查看 <a href="https://cn.vuejs.org/guide/quick-start.html">Vite
-                官方文档</a>
-        </dd>
-        <dt>基本过程</dt>
+        <dd>使用 Vue 官方的项目脚手架工具 <a href="https://cn.vuejs.org/guide/quick-start.html">Vite</a> 创建项目</dd>
+        <dt>Procedure</dt>
         <dd class="sn">
             <div>创建空白文件夹或选择你的项目开发<span class="warn">总</span>文件夹；不能出现中文符号；不要在桌面创建项目</div>
             <div>进入文件夹，打开命令行窗口 CMD，输入以下指令，创建项目并指定项目名；字母开头</div>
@@ -38,8 +36,8 @@
                 <img src="./imgs/pro4.jpg" alt="">
             </figure>
             <div>根据提示逐步执行：进入项目目录、安装依赖并运行项目</div>
-            <p class="question">注意：项目创建完毕后，后续操作请使用Vs Code完成</p>
-            <div>按住CTRL + 单击项目链接，即可打开Vue + Vite的欢迎界面</div>
+            <p class="tips">建议：项目创建完毕后，后续操作请使用 Vs Code 完成</p>
+            <div>按住 CTRL + 单击项目链接，即可打开 Vue + Vite 的欢迎界面</div>
             <figure class="img-sn">
                 <img src="./imgs/pro5.jpg" alt="">
             </figure>
@@ -49,9 +47,9 @@
             <pre>npm run build</pre>
             <p>发布后会生产目标文件夹 dist；使用 Vs Code 打开并预览效果</p>
             <p>如果预览失败</p>
-            <p>1.为vite.config.js增加基地址配置，指定为当前路径</p>
+            <p>.为 vite.config.js 增加基地址配置，指定为当前路径</p>
             <pre>base: './'</pre>
-            <p>2. 将路由模式由默认的web模式改为hash模式，需要引入 createWebHashHistory 包</p>
+            <p>. 将路由模式由默认的 web 模式改为 hash 模式，需要引入 createWebHashHistory 包</p>
             <pre>history: createWebHashHistory(import.meta.env.BASE_URL)</pre>
         </dd>
     </dl>
@@ -59,14 +57,14 @@
     <dl>
         <dt>node_modules</dt>
         <dd>依赖包</dd>
-        <dd>生产环境依赖 dependencies：项目上线后，所必须的依赖，如网络请求axios</dd>
-        <dd>开发环境依赖 devDependencies：开发过程中需要的依赖，发布上线后，不再需要，如CSS预处理</dd>
+        <dd>生产环境依赖 dependencies：项目上线后，所必须的依赖，如网络请求 Axios</dd>
+        <dd>开发环境依赖 devDependencies：开发过程中需要的依赖，发布上线后，不再需要，如 CSS 预处理</dd>
         <dt>dist</dt>
         <dd>项目发布后才有</dd>
         <dd>将其推送到服务器上，项目就进入生产环境的测试环节；经过一系列的调试、重新发布、再上线，项目进入运维环节</dd>
         <dt>public</dt>
         <dd>公共资源，可以直接被项目使用，如图片，不需要解析</dd>
-        <dd>项目发布后，这里的资源会 <span class="warn">原封不动</span> 的拷贝到发布文件夹dist</dd>
+        <dd>项目发布后，这里的资源会 <span class="warn">原封不动</span> 的拷贝到发布文件夹 dist</dd>
         <dt>src</dt>
         <dd>开发过程操作最多的目录，您大展身手的舞台</dd>
         <dd class="sn">
@@ -82,7 +80,7 @@ import { ref } from 'vue';
 import axios from 'axios';</pre>
             <p>.样式中可以引入其它样式</p>
             <pre>@import url(//at.alicdn.com/t/c/font_4090429_8xfmdtpelxu.css);</pre>
-            <div>main.js - 逻辑入口文件；引用并挂载App.vue</div>
+            <div>main.js - 逻辑入口文件；引用并挂载 App.vue</div>
             <p>可以引入样式库和第三方库等</p>
             <pre>
 import './assets/main.css'
@@ -99,7 +97,7 @@ import 'font-awesome/css/font-awesome.min.css'</pre>
         </dd>
         <dt>package.json</dt>
         <dd>依赖包管理文件；定制命令</dd>
-        <dd>区分生产环节依赖 dependencies和开发环境依赖 devDependencies；更多信息，请访问<a href="../node/ide.html#dep">Node</a>
+        <dd>区分生产环节依赖 dependencies 和开发环境依赖 devDependencies；更多信息，请访问 <a href="../node/ide.html#dep">Node</a>
         </dd>
         <dd>由于包的更新和大小等因素，项目分享或提交到代码仓库时，这部分会被忽略。用户拿到代码，第一件事情是安装依赖；否则项目不能运行</dd>
         <dd>
@@ -133,25 +131,25 @@ import 'font-awesome/css/font-awesome.min.css'</pre>
             <pre>"dev": "vite --host 0.0.0.0",</pre>
         </dd>
         <dt>vite.config.js</dt>
-        <dd>vite的配置，如server的配置：项目打开、端口、代理等等；默认没有，需手动添加</dd>
+        <dd>vite 的配置，如 server 的配置：项目打开、端口、代理等等；默认没有，需手动添加</dd>
         <dd>网络请求出现跨域时，必须要做<a href="../node/proxy.html">代理 Proxy</a></dd>
         <dd>更多配置，请访问<a href="https://cn.vitejs.dev/config/">官方文档 - 配置 Vite</a></dd>
         <dd>
             <pre>
 server: {
-    open: true,         //启动项目自动弹出浏览器；默认false，手动启动
-    host: '0.0.0.0',    //指定主机；默认是locahost
-    port: '5173',       //默认端口5173
+    open: true,         //启动项目自动弹出浏览器；默认 false，手动启动
+    host: '0.0.0.0',    //指定主机；默认是 locahost
+    port: '5173',       //默认端口 5173
     proxy: {
         '/api': {
         target: 'http://127.0.0.1:3000',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')   //不可以省略rewrite
+        rewrite: (path) => path.replace(/^\/api/, '')   //不可以省略 rewrite
         }
     }
 }</pre>
         </dd>
-        <dd>[<span class="iconfont icon-mouse"></span>]练习</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>]练习</dd>
         <dd>发布后都发生了什么???</dd>
         <dd>跨域是什么???</dd>
     </dl>
