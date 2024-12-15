@@ -18,14 +18,14 @@
   <dl>
     <dd>创建静态资源服务器，供应用程序使用，如在线图片、在线视频、在线音乐</dd>
     <dd>高效起见，没有使用原生 http 模块，而是依托 <a href="https://www.expressjs.com.cn/">Express.js</a> 框架创建</dd>
-    <dt>基本步骤</dt>
+    <dt>Steps</dt>
     <dd class="sn">
       <div>创建服务器目录</div>
-      <div>准备数据</div>
+      <div>准备资源/数据</div>
       <div>创建服务器脚本</div>
       <div>开启服务</div>
     </dd>
-    <dt>具体过程</dt>
+    <dt>Procedure</dt>
     <dd class="sn">
       <div>创建一个空白文件夹作为服务器目录，如 server</div>
       <div>在服务器目录创建资源文件夹，如 public</div>
@@ -51,7 +51,7 @@
 }        </pre>
       <div>继续操作 CMD 终端，安装 Express 依赖，服务器目录会增加一个存放各种依赖的 Module 目录</div>
       <pre>npm i express --save</pre>
-      <div>创建服务器脚本：在服务器目录下，新建一个js文件，命名为index.js，编辑如下</div>
+      <div>创建服务器脚本：在服务器目录下，新建一个 JavaScript 文件，命名为index.js，编辑如下</div>
       <pre>
 //引入express
 const express = require('express');
@@ -82,7 +82,7 @@ app.listen(port, () => {
       <pre>npm start</pre>
       <pre>npm run wx</pre>
       <div>使用资源</div>
-      <p>用户使用浏览器访问 http://127.0.0.1:3000/资源路径和名字获取资源；如图片的src属性</p>
+      <p>用户使用浏览器访问 http://127.0.0.1:3000/资源路径和名字获取对应的资源</p>
       <p>用户在H5项目中使用，如 &lt;img&gt; 元素</p>
       <pre>&lt;img src="http://127.0.0.1:3000/资源路径和名字" alt=""&gt;</pre>
       <p>用户在微信小程序项目中使用，如 &lt;image&gt; 组件</p>
@@ -92,9 +92,9 @@ app.listen(port, () => {
       <div>日常开发建议使用 <a href="../web/vscode.html">Vs Code</a> 完成</div>
       <div>更多数据交互，如读取文件并返回 JSON 数据，监听用户请求，需要进一步定制响应，完善服务器</div>
     </dd>
-    <dt>进阶</dt>
-    <dd>访问服务器根目录，渲染服务器特定页面，如主页，给出操作提示</dd>
-    <dd>思路：创建 html 页面，指定路由；读取并返回主页；需要 fs 的支持</dd>
+    <dt>Advanced</dt>
+    <dd>访问服务器时，渲染服务器特定页面，如主页，给出操作使用提示</dd>
+    <dd>思路：创建 html 页面，指定路由；读取并返回主页；需要文件系统模块 fs 的支持；文件位置和命名任意</dd>
     <dd>方案1：修改服务器文件，增加核心代码如下</dd>
     <dd>
       <pre>

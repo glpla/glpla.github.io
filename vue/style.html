@@ -64,6 +64,17 @@
             <pre>&lt;div :style="{ 'backgroundColor': color, 'lineHeight': h + 'px' }"&gt;content&lt;/div&gt;</pre>
             <div>使用 <a href="./computed.html">计算属性 - computed</a></div>
         </dd>
+        <dd> [<span class="iconfont icon-keyboard"></span>]背景图片的使用</dd>
+        <dd>
+            <div>静态使用 - 仅可以引用 public 中的资源</div>
+            <pre>&lt;div style="background-image: url('/imgs/lg.jpg');"&gt;hi,there&lt;/div&gt;</pre>
+            <div>动态绑定 - 引入为资源；图片可以放任意地方</div>
+            <pre>
+import url from '../assets/imgs/0.jpg'</pre>
+            <pre>
+&lt;div class="box" :style="{ backgroundImage: 'url(' + src + ')' }"&gt;hi,there&lt;/div&gt;
+&lt;div class="box" :style="{ backgroundImage: 'url(' + url + ')' }"&gt;hi,there&lt;/div&gt;</pre>
+        </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

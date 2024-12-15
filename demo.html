@@ -5,227 +5,132 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Demo</title>
-    <!-- <style>
-        :root {
-            --b-r: 150px;
-            --p-m-g: 20px;
-        }
-
+    <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        .iconfont {
-            font-size: 22px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: var(--p-m-g);
-            width: 100%;
-        }
-
-        input,
-        button {
-            border: none;
-            outline: none;
-            width: 100%;
-            height: 100%;
-            font: inherit;
-            color: inherit;
-            background-color: transparent;
-        }
-
-        button {
-            width: max-content;
-            height: 40px;
-            padding: 0 var(--p-m-g);
-            cursor: pointer;
-            text-transform: capitalize;
-        }
-
-        .w {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            background-color: #eee;
-        }
-
-        header {
-            height: 100px;
-            background-image: url(./imgs/banner.png);
-            background-size: cover;
-            background-position: center;
-        }
-
-        nav {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            height: 40px;
             display: flex;
+            justify-content: center;
             align-items: center;
-            justify-content: space-between;
-            background-color: #ffa040;
-            color: #fff;
-            padding: 0 10px;
+            height: 100vh;
+            background-color: #000;
         }
 
-        .nav-menu {
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-close,
-        .nav-toggle {
+        button {
             display: none;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            animation: rolling 1s linear infinite;
+            animation-play-state: paused;
         }
 
-        section {
-            min-height: 100vh;
-            background-color: #f40;
-            margin-bottom: 10px;
+        #ctrl.active {
+            animation-play-state: running;
         }
 
-        @media screen and (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                top: -120%;
-                left: 0;
-                width: 100%;
-                padding: 3rem 1rem;
-                background-color: #ffa040;
-                transition: 0.5s;
-            }
-
-            .nav-menu.active {
-                top: 0;
-            }
-
-            .nav-menu {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .nav-close {
-                display: block;
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-            }
-
-            .nav-toggle {
-                display: block;
+        @keyframes rolling {
+            to {
+                transform: rotateZ(360deg);
             }
         }
-    </style> -->
-    <style>
-        .w {
+
+        .loading {
             width: 100%;
-            max-width: 1024px;
-            margin: 0 auto;
+            max-width: 300px;
+            height: 20px;
+            /* background-color: rgb(255, 255, 255, 0.9); */
+            padding: 2px;
         }
 
-        header {
-            position: fixed;
-            left: 0;
-            width: 100%;
-            background-color: #eee;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
+        .loading-bar {
+            width: 0;
+            height: 100%;
+            border-radius: 20px;
             background-color: #f40;
+            animation: loading-ani 3s linear 2 forwards;
+            box-shadow: 0 0 10px #fff;
         }
 
-        .ham {
-            display: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-links a {
-            padding: 6px 20px;
-        }
-
-        section {
-            min-height: 100vh;
-        }
-
-        @media screen and (max-width:768px) {
-            .ham {
-                display: flex;
-            }
-
-            .nav-links {
-                position: absolute;
-                right: 0;
-                top: 100%;
-                flex-direction: column;
+        @keyframes loading-ani {
+            to {
                 width: 100%;
-                background-color: #fff;
-                align-items: center;
-                transform: translateX(100%);
-                transition: 0.5s;
-            }
-
-            .nav-links.active {
-                transform: translateX(0);
             }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <nav class="w">
-            <div class="logo">logo</div>
-            <div class="ham" id="ham">ham</div>
-            <div class="nav-links active" id="nav-links">
-                <a href="#home">Lorem.</a>
-                <a href="#info">Quaerat!</a>
-                <a href="#blog">Animi?</a>
-                <a href="#team">Laborum.</a>
-                <a href="#about">Assumenda.</a>
-            </div>
-        </nav>
-    </header>
-    <section class="w" id="home">Lorem.</section>
-    <section class="w" id="info">Lorem.</section>
-    <section class="w" id="blog">Lorem.</section>
-    <section class="w" id="team">Lorem.</section>
-    <section class="w" id="about">Lorem.</section>
-    <!-- <script>
-        const close = document.querySelector('#nav-close')
-        const toggle = document.querySelector('#nav-toggle')
-        const menu = document.querySelector('#nav-menu')
-        const navs = document.querySelectorAll('.nav-menu a')
-        close.addEventListener('click', () => {
-            menu.classList.remove('active')
+    <div class="loading">
+        <div class="loading-bar" id="loading-bar"></div>
+    </div>
+    <button id="ctrl">play/pause</button>
+    <audio src="/utils/music/Alizee-LaIslaBonita.mp3"></audio>
+    <script>
+        const audio = document.getElementsByTagName('audio')[0];
+        const ctrlBtn = document.getElementById('ctrl');
+        const loadingBar = document.querySelector('#loading-bar')
+        loadingBar.addEventListener('animationstart', () => {
+            console.log('start');
         })
-        toggle.addEventListener('click', () => {
-            menu.classList.add('active')
+        loadingBar.addEventListener('animationend', () => {
+            console.log('ending');
+            window.location.href = '/index.html'
         })
-        navs.forEach(nav => {
-            nav.addEventListener('click', () => {
-                menu.classList.remove('active')
-            })
+        loadingBar.addEventListener('animationiteration', () => {
+            console.log('animationiteration');
         })
-    </script> -->
+
+        ctrlBtn.addEventListener('click', () => {
+            audio.paused ? audio.play() : audio.pause();
+        })
+
+        audio.addEventListener('loadstart', (e) => {
+            console.log('loadstart');
+        })
+        audio.addEventListener('progress', (e) => {
+            console.log('progress');
+        })
+        audio.addEventListener('durationchange', (e) => {
+            console.log('durationchange', audio.duration);
+        })
+        audio.addEventListener('loadedmetadata', (e) => {
+            console.log('loadedmetadata');
+        })
+        audio.addEventListener('loadeddata', (e) => {
+            console.log('loadeddata');
+        })
+        audio.addEventListener('timeupdate', (e) => {
+            console.log(audio.currentTime);
+        })
+        audio.addEventListener('canplay', (e) => {
+            console.log('canplay');
+        })
+        audio.addEventListener('canplaythrough', (e) => {
+            console.log('canplaythrough');
+        })
+        audio.addEventListener('play', (e) => {
+            console.log('play');
+            ctrlBtn.classList.add('active')
+        })
+        audio.addEventListener('pause', (e) => {
+            console.log('pause');
+            ctrlBtn.classList.remove('active')
+        })
+        audio.addEventListener('waiting', (e) => {
+            console.log('waiting');
+        })
+        audio.addEventListener('playing', (e) => {
+            console.log('playing');
+        })
+        audio.addEventListener('ended', (e) => {
+            console.log('ended');
+            ctrlBtn.classList.remove('active')
+        }) 
+    </script>
 </body>
 
 </html>

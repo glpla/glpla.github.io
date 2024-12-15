@@ -16,16 +16,30 @@
         <span>&commat;Mustache</span>
     </header>
     <dl>
-        <dd>也称数据绑定</dd>
-        <dd>Vue 使用一种基于 HTML 的模板语法，使能够声明式地将其组件实例的数据绑定到呈现的 DOM 上，减少 DOM 操作</dd>
-        <dd>可以使用简单的 JavaScript 表达式实现数据的组合使用；复杂的逻辑请使用计算属性或方法获取</dd>
-        <dd>根据数据是否是响应式，数据绑定分：静态数据绑定和 <a href="./reactive.html">响应式数据</a> 绑定；本节使用静态数据绑定</dd>
-        <dd class="tips">
-            <div>目的：解决数据和元素节点的内容和属性的关联</div>
-            <div>可以使用模板字符串 ``，便于直接使用变量</div>
+        <dt>Review</dt>
+        <dd>
+            <div>DOM节点/元素组成</div>
+            <div>标签名：&lt;&gt;内部的内容</div>
+            <div>标签属性：值对 name - value pair，值 value 使用单引号或双引号</div>
+            <div>标签内容：开始标签和结束标签之间的纯文本部分，也可以是其它子元素</div>
+            <pre>
+&lt;div class="wrap" id="team" style="color: #f40;" data-ind="100" hidden&gt;
+    hi,there.
+&lt;/div&gt;</pre>
+        </dd>
+        <dt>Overview</dt>
+        <dd>
+            <div>基于 HTML 的模板语法，使能够声明式地将其组件实例的数据 <span class="warn">绑定</span> 到呈现的 DOM 上，也称数据绑定</div>
+            <div>可以使用简单的 JavaScript 表达式实现数据的组合使用，减少 DOM 操作</div>
+            <div>复杂的逻辑请使用 <a href="./computed.html">计算属性</a> 或方法获取</div>
+            <div>根据数据是否是响应式，数据绑定分：静态数据绑定和 <a href="./responsive.html">响应式数据</a> 绑定；本节使用静态数据绑定</div>
+            <div class="tips">
+                <div>目的：解决数据和元素节点的内容和属性的关联</div>
+                <div>可以使用模板字符串 ``，便于直接使用变量</div>
+            </div>
         </dd>
     </dl>
-    <div class="chap">内容绑定 {{}}</div>
+    <div class="chap">Text {{}}</div>
     <dl>
         <dd>
             <div>文本插值表达式</div>
@@ -49,28 +63,42 @@ let url = 'http://www.baidu.com'</pre>
 &lt;div&gt;id: {{ obj.id }} - name: {{ obj.name }}&lt;/div&gt;</pre>
         </dd>
     </dl>
-    <div class="chap">属性绑定 v-bind</div>
+    <div class="chap">Attribute v-bind</div>
     <dl>
-        <dd>使用 <span class="warn">v-bind</span> 指令绑定HTML的属性 Attribute，解决 <span class="warn">数据和元素属性</span> 的关联</dd>
-        <dd>可以简写为冒号 <span class="warn">:</span></dd>
-        <dd>常见的元素属性有：href、id、title、src、class、style以及布尔属性如 hidden、disabled、autoplay、loop、controls、checked、selected 等</dd>
-        <dd>类和样式的使用请参考 </dd>
-        <dt>一般属性</dt>
         <dd>
-            <pre>
-&lt;a :href="url" target="_blank"&gt;link&lt;/a&gt;
-&lt;div :id='uid'&gt;my id&lt;/div&gt;</pre>
+            <div>使用 <span class="warn">v-bind</span> 指令将数据和 HTML的属性 Attribute 绑定，解决 <span class="warn">数据和元素属性</span>
+                的关联
+            </div>
+            <pre>v-bind:attribute = value</pre>
+            <div>可以简写为 <span class="warn">冒号 :</span></div>
+            <pre>:attribute = value</pre>
         </dd>
-        <dt>布尔属性</dt>
+        <dt>Normal</dt>
         <dd>
-            <div>静态使用 - 指定的任何数据包括空串，都会渲染为真；可用简单的指定属性，不做任何赋值，实现假的操作</div>
+            <div>常见有：id、href、title、src、class、style</div>
             <pre>
-&lt;button disabled="true"&gt;submit&lt;/button&gt;
-&lt;button disabled="false"&gt;submit&lt;/button&gt;
-&lt;button disabled=" "&gt;submit&lt;/button&gt;
-&lt;button disabled="123"&gt;submit&lt;/button&gt;
-&lt;button disabled&gt;submit&lt;/button&gt;</pre>
-            <div>动态绑定使用 - 可用指定关键字 true 或 false、布尔变量或结果为布尔值的表达式</div>
+// 静态使用
+&lt;div id='20231001'&gt;my id&lt;/div&gt;
+//动态绑定
+&lt;div :id='uid'&gt;my id&lt;/div&gt;</pre>
+            <pre>
+// 静态使用
+&lt;a href="glpla.github.io" target="_blank"&gt;大树小站&lt;/a&gt;
+//动态绑定
+&lt;a :href="url" target="_blank"&gt;大树小站&lt;/a&gt;</pre>
+        </dd>
+        <dt>Boolean</dt>
+        <dd>
+            <div>常见有：hidden、checked、selected、disabled、autoplay、loop、controls</div>
+            <div>1. 静态使用 - 指定的任何数据包括空串，都会渲染为真；通常仅仅指定属性,表示功能启用；不指定该属性，则不启用</div>
+            <div>以下几种写法均表示按钮被禁止</div>
+            <pre>
+&lt;button disabled="true"&gt;submit&lt;/button&gt; //√
+&lt;button disabled="false"&gt;submit&lt;/button&gt; //√
+&lt;button disabled=" "&gt;submit&lt;/button&gt; //√
+&lt;button disabled="123"&gt;submit&lt;/button&gt; //√
+&lt;button disabled&gt;submit&lt;/button&gt; //√</pre>
+            <div>2. 动态绑定使用 - 可用指定常量关键字 true 或 false、布尔变量或表达式</div>
             <pre>
 &lt;button :disabled="true"&gt;submit&lt;/button&gt;
 &lt;button :disabled="false"&gt;submit&lt;/button&gt;
@@ -79,17 +107,9 @@ let url = 'http://www.baidu.com'</pre>
 
 &lt;button :disabled="age > 20"&gt;submit&lt;/button&gt;</pre>
         </dd>
-        <dt><a href="./img.html">图片</a>的绑定</dt>
-        <dd>
-            <div>静态使用 - 可以使用本地图片或在线图片，如 <a href="https://pixabay.com/">pixabay</a>、<a
-                    href="https://unsplash.com/">unsplash</a></div>
-            <pre>&lt;img src="../assets/imgs/0.jpg" alt=""&gt;</pre>
-            <div>不可以直接绑定图片url地址，vue会将其解析为一个字符串，而非地址</div>
-            <pre>let src = '../assets/imgs/0.jpg'</pre>
-            <pre>&lt;img :src="src" alt=""&gt;</pre>
-        </dd>
-        <dt><a href="./class.html">类</a>的绑定</dt>
-        <dt><a href="./style.html">样式</a>的绑定</dt>
+        <dt><a href="./img.html">src</a></dt>
+        <dt><a href="./class.html">class</a></dt>
+        <dt><a href="./style.html">style</a></dt>
         <dt>CSS函数属性绑定</dt>
         <dd>
             <div>background-image等使用了 url()、linear-gradient() 等等 CSS 函数的属性</div>

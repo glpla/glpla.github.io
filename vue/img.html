@@ -18,23 +18,29 @@
     <dl>
         <dt>静态使用</dt>
         <dd>
-            <div>可以使用本地图片或在线图片，如 <a href="https://pixabay.com/">pixabay</a>、<a href="https://unsplash.com/">unsplash</a>
+            <div>1. 使用本地图片</div>
+            <pre>&lt;img src="../assets/imgs/0.jpg" alt=""&gt;</pre>
+            <div>2. 使用在线图片；更多图片资源，请访问 <a href="https://pixabay.com/">pixabay</a>、<a
+                    href="https://unsplash.com/">unsplash</a>、<a href="../utils/index.html">大树小站- 在线资源</a>
             </div>
             <pre>
-&lt;img src="/src/assets/imgs/0.jpg" alt=""/&gt;
-&lt;img src="../assets/imgs/0.jpg" alt=""/&gt;
-&lt;img src="https://cdn.pixabay.com/photo/2023/04/01/21/11/tunnel-7893124_640.jpg" alt=""/&gt;</pre>
+&lt;img src="https://cdn.pixabay.com/photo/2023/04/01/21/11/tunnel-7893124_640.jpg" alt=""&gt;
+&lt;img src="https://glpla.github.io/utils/wallpaper/w0.jpg" alt=""&gt;</pre>
+            <div>3. 自己创建<a href="../node/static.html">资源服务器</a></div>
         </dd>
-        <dt>动态使用</dt>
+        <dt>动态绑定使用</dt>
         <dd>
+            <div>不可以直接绑定图片 url 地址，Vue 会将其解析为一个字符串，而非地址</div>
+            <pre>let src = '../assets/imgs/0.jpg'</pre>
+            <pre>&lt;img :src="src" alt=""&gt;</pre>
             <div>解决方案1</div>
             <div>将图片放到项目的 public 目录并直接引用；可以创建相应的文件夹 imgs 存放图片；vue-cli3 默认路径为 public，所以无需添加 public；public 即代表/</div>
-            <pre>&lt;img :src="src" alt=""/&gt;</pre>
             <pre>let src = '/imgs/10.jpg'</pre>
+            <pre>&lt;img :src="src" alt=""/&gt;</pre>
             <div>解决方案2</div>
             <div>将图片作为资源引入再使用 - 适合单个静态资源</div>
-            <pre>&lt;img :src="src" alt=""/&gt;</pre>
             <pre>import src from '../imgs/10.jpg'</pre>
+            <pre>&lt;img :src="src" alt=""/&gt;</pre>
             <div>采用 vite 的<a href="https://cn.vitejs.dev/guide/assets.html">静态资源处理</a>：import.meta.url
                 是一个ESM的原生功能，会暴露当前模块的 URL。将它与原生的 URL 构造器 组合使用，在一个 JavaScript 模块中，通过<span
                     class="warn">相对路径</span>我们就能得到一个被完整解析的静态资源 URL</div>
@@ -51,21 +57,6 @@ let src = '../imgs/10.jpg'
 const getImageUrl = (img) => {
     return new URL(`../imgs/${img}`, import.meta.url).href
 }</pre>
-            <div>解决方案3 - 推荐</div>
-            <div>创建静态资源服务器或综合服务器</div>
-            <div>解决方案4 - 推荐</div>
-            <div>利用 - <a href="../utils/index.html">大树小站</a> - 提供的在线图片</div>
-        </dd>
-        <dd> [<span class="iconfont icon-keyboard"></span>]背景图片的使用</dd>
-        <dd>
-            <div>静态使用 - 仅可以引用 public 中的资源</div>
-            <pre>&lt;div style="background-image: url('/imgs/lg.jpg');"&gt;hi,there&lt;/div&gt;</pre>
-            <div>动态绑定 - 引入为资源；图片可以放任意地方</div>
-            <pre>
-import url from '../assets/imgs/0.jpg'</pre>
-            <pre>
-&lt;div class="box" :style="{ backgroundImage: 'url(' + src + ')' }"&gt;hi,there&lt;/div&gt;
-&lt;div class="box" :style="{ backgroundImage: 'url(' + url + ')' }"&gt;hi,there&lt;/div&gt;</pre>
         </dd>
         <dd>[<span class="iconfont icon-keyboard"></span>] Vite 框架对图片的处理</dd>
         <dd class="sn">
