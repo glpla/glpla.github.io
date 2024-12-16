@@ -16,66 +16,65 @@
   <div class="container">
     <h1>事件综合运用</h1>
     <h4>Event</h4>
-    <dl>
-      <div class="title">实验题目</div>
-      <div class="cont">代办事项</div>
-      <div class="title">实验目的</div>
-      <div class="cont">
-        <div>掌握事件绑定和常用按键事件、事件修饰符</div>
-        <div>掌握网络请求的基本过程</div>
-        <div>掌握生命周期函数的使用</div>
-        <div>掌握样式类的基本使用</div>
-        <div>进一步熟悉条件渲染、列表渲染的使用</div>
-        <div>进一步熟悉响应式数据的使用</div>
-      </div>
-      <div class="title">实验内容</div>
-      <div class="cont">
-        <div>加载数据</div>
-        <p>. 从 <a href="/utils/index.html">大树小站</a> 获取</p>
-        <p>. 自建服务器</p>
-        <table class="tbl-sn">
-          <caption>参考接口</caption>
-          <tr>
-            <th>接口</th>
-            <th>说明</th>
-          </tr>
-          <tr>
-            <td>/todo</td>
-            <td>全部拉取</td>
-          </tr>
-        </table>
-        <div>自动轮播 - 可以采用第三方库</div>
-        <div>输入内容，按Alt+Enter提交</div>
-        <div>提交时，可以选择是否保存在本地或保存在自建服务器</div>
-        <div>内容较长时，应打点提示</div>
-        <div>可以删除单个列表项目；也可以全部删除</div>
-        <div>统计当前列表项总数</div>
-        <div>定制滚动条 scroll-bar</div>
-        <div>定制字体 @font-face</div>
-        <div>阿里字体图标 Iconfont</div>
-        <div>响应式开发 - 移动优先</div>
-      </div>
-      <div id="drill"></div>
-      <div class="title">参考效果和参考代码</div>
-      <div class="cont">
-        <div>响应式数据</div>
-        <pre>
+    <div class="title">实验题目</div>
+    <div class="cont">代办事项</div>
+    <div class="title">实验目的</div>
+    <div class="cont">
+      <div>掌握事件绑定和常用按键事件、事件修饰符</div>
+      <div>掌握网络请求的基本过程</div>
+      <div>掌握生命周期函数的使用</div>
+      <div>掌握样式类的基本使用</div>
+      <div>进一步熟悉条件渲染、列表渲染的使用</div>
+      <div>进一步熟悉响应式数据的使用</div>
+    </div>
+    <div class="title">实验内容</div>
+    <div class="cont">
+      <div>加载数据</div>
+      <p>. 从 <a href="/utils/index.html">大树小站</a> 获取</p>
+      <p>. 自建服务器</p>
+      <table class="tbl-sn">
+        <caption>参考接口</caption>
+        <tr>
+          <th>接口</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>/todo</td>
+          <td>全部拉取</td>
+        </tr>
+      </table>
+      <div>自动轮播 - 可以采用第三方库</div>
+      <div>输入内容，按Alt+Enter提交</div>
+      <div>提交时，可以选择是否保存在本地或保存在自建服务器</div>
+      <div>内容较长时，应打点提示</div>
+      <div>可以删除单个列表项目；也可以全部删除</div>
+      <div>统计当前列表项总数</div>
+      <div>定制滚动条 scroll-bar</div>
+      <div>定制字体 @font-face</div>
+      <div>阿里字体图标 Iconfont</div>
+      <div>响应式开发 - 移动优先</div>
+    </div>
+    <div id="drill"></div>
+    <div class="title">参考效果和参考代码</div>
+    <div class="cont">
+      <div>响应式数据</div>
+      <pre>
 let msgs = ref([])
 let msg = ref('')
 let isRem = ref(false)
 let isFocus = ref(false)
 let imgInd = ref(0)
 let imgs = []</pre>
-        <div>轮播结构设计</div>
-        <pre>
+      <div>轮播结构设计</div>
+      <pre>
 &lt;header class="header" :style="{ 'backgroundImage': 'url(' + imgs[imgInd] + ')' }"&gt;
   &lt;div class="dot-box"&gt;
     &lt;div :class="['dot', { 'active': ind == imgInd }]" v-for="(item, ind) in imgs.length " :key="item"&gt;{{ ind }}
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/header&gt;</pre>
-        <div>轮播逻辑 - 加载数据时，利用定时器循环背景图片并相应的调整指示器的样式</div>
-        <pre>
+      <div>轮播逻辑 - 加载数据时，利用定时器循环背景图片并相应的调整指示器的样式</div>
+      <pre>
 onMounted(() => {
   ind = setInterval(() => {
     updateImg()
@@ -85,8 +84,8 @@ onMounted(() => {
       msgs.value = res.data.cont
     })
 })</pre>
-        <div>输入框结构设计</div>
-        <pre>
+      <div>输入框结构设计</div>
+      <pre>
 &lt;div class="cont"&gt;
   &lt;input :class="['ipt', { 'border-color': isFocus }]" type="text" v-model.trim="msg"
     placeholder="message here. press ALT+Enter to submit" 
@@ -94,8 +93,8 @@ onMounted(() => {
     @focus="getFocus"
     @blur="loseFocus"&gt;
 &lt;/div&gt;</pre>
-        <div>输入框逻辑</div>
-        <pre>
+      <div>输入框逻辑</div>
+      <pre>
 const submitMsg = () => {
   if (msg.value) {
     msgs.value.unshift(msg.value)
@@ -103,21 +102,21 @@ const submitMsg = () => {
     isFocus.value = false
   }
 }        </pre>
-        <div>输入框动态样式 - 充分发挥你的想象</div>
-        <pre>
+      <div>输入框动态样式 - 充分发挥你的想象</div>
+      <pre>
 const getFocus = () => {
   isFocus.value = true
 }
 const loseFocus = () => {
   isFocus.value = false
 }</pre>
-        <pre>
+      <pre>
 .ipt.border-color {
   border-color: #942d00;
 }
 </pre>
-        <div>全删按钮结构和动态样式 - 充分发挥你的想象</div>
-        <pre>
+      <div>全删按钮结构和动态样式 - 充分发挥你的想象</div>
+      <pre>
 &lt;div class="subcount"&gt;
   &lt;div&gt;total {{ msgs.length }} messages&lt;/div&gt;
   &lt;button class="del-btn" @click="delAllMsg"&gt;
@@ -126,27 +125,26 @@ const loseFocus = () => {
   &lt;/button&gt;
 &lt;/div&gt;
         </pre>
-        <div>其它样式的提升和优化</div>
-        <figure class="img-sn">
-          <img src="./imgs/todo0.png" alt="">
-          <figcaption>静态效果</figcaption>
-        </figure>
-        <figure class="img-sn">
-          <img src="./imgs/todo1.png" alt="">
-          <figcaption>动态效果</figcaption>
-        </figure>
-        <figure class="img-sn">
-          <img src="./imgs/todo2.png" alt="">
-          <figcaption>动态效果</figcaption>
-        </figure>
-      </div>
-      <div class="title">拓展与思考</div>
-      <div class="cont">
-        <div>定义服务器接口，保存数据到服务器</div>
-        <div>了解本地存储 <a href="../web/js/storage.html">localStorage</a></div>
-        <div>了解随机ID生成器的使用 <a href="https://github.com/ai/nanoid/blob/main/README.zh-CN.md">Nano ID</a></div>
-      </div>
-    </dl>
+      <div>其它样式的提升和优化</div>
+      <figure class="img-sn">
+        <img src="./imgs/todo0.png" alt="">
+        <figcaption>静态效果</figcaption>
+      </figure>
+      <figure class="img-sn">
+        <img src="./imgs/todo1.png" alt="">
+        <figcaption>动态效果</figcaption>
+      </figure>
+      <figure class="img-sn">
+        <img src="./imgs/todo2.png" alt="">
+        <figcaption>动态效果</figcaption>
+      </figure>
+    </div>
+    <div class="title">拓展与思考</div>
+    <div class="cont">
+      <div>定义服务器接口，保存数据到服务器</div>
+      <div>了解本地存储 <a href="../web/js/storage.html">localStorage</a></div>
+      <div>了解随机ID生成器的使用 <a href="https://github.com/ai/nanoid/blob/main/README.zh-CN.md">Nano ID</a></div>
+    </div>
     <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
     <script src="/utils/custom/drill-vue.js"></script>
     <script src="/utils/custom/star.js"></script>

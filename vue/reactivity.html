@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>响应式数据 Reactivity</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>响应式数据</h1>
+        <span>&commat;Reactivity</span>
+    </header>
+    <dl>
+        <dd>调试方法</dd>
+        <dd>. 简单事件</dd>
+        <dd>. setTimeout() </dd>
+        <dd>. 开发工具 <a href="https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home?hl=zh-CN">vue
+                devtools</a></dd>
+        <dt>Why</dt>
+        <dd>Vue 会自动检测响应式数据的变化，进而更新 DOM - 数据驱动 Data Driven</dd>
+        <dd>更多响应式原理，请访问 <a href="https://vuejs.org/guide/essentials/reactivity-fundamentals.html">响应式基础 - Reactivity
+                Fundamentals</a>、<a href="https://cn.vuejs.org/guide/extras/reactivity-in-depth.html">深入响应式系统</a>
+        </dd>
+
+        <dt>ref()</dt>
+        <dd>
+            <div>创建<span class="warn">基本数据类型、复合数据类型</span>的响应式数据</div>
+            <div>ref() 将传入参数的值包装为一个带 .value 属性的 ref 对象</div>
+            <div>ref 的 .value 属性是响应式</div>
+            <div>1. 引入包 ref - 下述各例略</div>
+            <pre>import { ref } from 'vue'</pre>
+            <div>2. 声明响应式变量 - 执行函数、传入参数、变量接收</div>
+            <pre>const count = ref(0)</pre>
+            <div>3.1 结构中使用 - 直接使用，vue会自动获取其value</div>
+            <pre>&lt;div>{{count}}&lt;/div></pre>
+            <div>3.2 逻辑中使用 - 赋值时需额外指定value属性，其它情况直接使用，如监听；可以由开发环境的插件自动补齐value属性</div>
+            <pre>
+console.log(count)
+console.log(count.value)</pre>
+            <div class="tips">控制台输出，查看响应式变量的细节，如value属性在哪里</div>
+        </dd>
+        <dt>reactive()</dt>
+        <dd>
+            <div>只能创建<span class="warn">复合数据类型</span>的响应式数据，如对象、数组</div>
+            <div>不用指定value属性</div>
+            <div>1. 引入包 reactive - 下述各例略</div>
+            <pre>import { reactive } from 'vue'</pre>
+            <div>2. 声明响应式变量 - 执行函数、传入参数、变量接收</div>
+            <pre>
+const obj = reactive({
+    id: 10,
+    name: 'gz'
+})            </pre>
+            <div><span class="warn">不能</span>声明简单数据类型 - value cannot be made reactive: 10</div>
+            <pre>const count = reactive(10)</pre>
+            <div>3.1. 结构中使用</div>
+            <pre>&lt;div>{{obj.id}} - {{obj.name}}&lt;/div></pre>
+            <div>3.2. 逻辑中使用 - 只能单个属性赋值</div>
+            <pre>
+const done = () => {
+    obj.id = 20
+}
+console.log(obj)</pre>
+            <div class="tips">控制台输出，查看响应式变量的细节</div>
+            <div><span class="warn">不能</span>重新赋值|分配对象，否则就失去响应式</div>
+            <pre>
+const done = () => {
+    obj = {
+      id: 20,
+      name: 'gz'
+    }
+}</pre>
+            <div>解决方案1：可以使用对象的分配方法，更新数据</div>
+            <pre>
+const done = () => {
+    Object.assign(obj,{
+        id: 20,
+        name: 'gz'
+    })
+}</pre>
+            <div>解决方案2：可以使用对象的分配方法，更新数据</div>
+            <div class="tips">
+                <div>经过函数 ref()、reactive() 处理后，普通的数据或对象就变成了响应式</div>
+                <div>使用log查看一个变量是否具有响应式数据：如果带有 Proxy/refImpl，是响应式数据；否则就是普通变量</div>
+                <div>实际开发中，更多使用 ref()；因为可以直接改：管你是简单数据还是复合数据</div>
+                <div>. 简单数据，当然只能 ref()</div>
+                <div>. 如果需要简单的对象，ref()、reactive() 都可以</div>
+                <div>. 层级比较深的对象，请使用 reactive()</div>
+            </div>
+        </dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 练习</dd>
+        <dd>使用 ref() 声明复合数据类型并验证其响应式</dd>
+        <dd>使用 reactive() 声明嵌套复合数据类型并验证其响应式</dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

@@ -26,39 +26,39 @@
         <span>&commat; Pinia</span>
     </header>
     <dl>
-        <dt>仓库 Store</dt>
-        <dd>是一个保存全局状态 <span class="warn">state</span> 和业务逻辑的实体；可以在 <span class="warn">整个应用</span> 中访问的数据</dd>
-        <dd>不与组件树绑定，而承载着全局状态</dd>
-        <dd>仓库通常集中保存在项目的 stores 目录（应提前创建好），并按照功能创建 <span class="warn">单独</span> 的仓库文件</dd>
-        <dd>仓库在 onMounted 之前就已经准备好 - 兵马未动，粮草先行</dd>
-        <dd>利用仓库 store 集中式状态管理：抽取出组件间的共享状态，放在一个全局单例中来管理</dd>
-        <dd>状态管理出现之前，使用共享组件完成对共享数据的使用；共享数据的修改通过共享组件发送自定义事件完成。这就意味着：任何一个使用它的组件都可以修改，不太容易维护；注意：共享数据和全局数据不是一回事</dd>
-        <dd>Vue3采用 <a href="https://pinia.vuejs.org/zh/" class="link">Pinia</a>；Pinia 是 Vue
-            的专属状态管理库，使用大菠萝作为 logo</dd>
-        <dd>Vue2采用 vuex</dd>
-        <dt>核心概念 Concepts</dt>
+        <dt>Store</dt>
+        <dd>
+            <div>是一个保存全局状态 <span class="warn">state</span> 和业务逻辑的实体；可以在 <span class="warn">整个应用</span> 中访问的数据</div>
+            <div>不与组件树绑定，而承载着全局状态</div>
+            <div>仓库通常集中保存在项目的 stores 目录（应提前创建好），并按照功能创建 <span class="warn">单独</span> 的仓库文件</div>
+            <div>仓库在 onMounted 之前就已经准备好 - 兵马未动，粮草先行</div>
+            <div>利用仓库 store 集中式状态管理：抽取出组件间的共享状态，放在一个全局单例中来管理</div>
+            <div>状态管理出现之前，使用共享组件完成对共享数据的使用；共享数据的修改通过共享组件发送自定义事件完成。这就意味着：任何一个使用它的组件都可以修改，不太容易维护；注意：共享数据和全局数据不是一回事</div>
+            <div>Vue3 采用 <a href="https://pinia.vuejs.org/zh/" class="link">Pinia</a>；Pinia 是 Vue 的专属状态管理库，使用大菠萝作为 logo
+            </div>
+            <div>Vue2 采用 vuex</div>
+        </dd>
+        <dt>Concepts</dt>
         <dd class="sn">
             <div>State - 驱动整个应用的数据源；是 store 的核心。应先定义能代表应用或反映应用状态的 state；相当于组件中的 data</div>
             <div>Getter - 对状态的一种声明式映射；相当于组件中的 computed</div>
             <div>Action - 根据用户的交互对数据源的操作；相当于组件中的 method</div>
-        </dd>
-        <dd>
             <figure class="img-sn">
                 <img src="./imgs/pinia0.png" alt="">
                 <figcaption>关系</figcaption>
             </figure>
         </dd>
-        <dt>安装 Installation</dt>
-        <dd>可以在创建项目的时，选择状态管理；项目创建完毕后，可以直接使用 - 强烈建议</dd>
-        <dd>也可以单独安装，需要引入、配置等；不建议新手使用</dd>
+        <dt>Installation</dt>
         <dd>
+            <div>可以在创建项目的时，选择状态管理；项目创建完毕后，可以直接使用 - 强烈建议</div>
+            <div>也可以单独安装，需要引入、配置等；不建议新手使用</div>
             <pre>npm i pinia --save</pre>
         </dd>
         <dt>引入 Import</dt>
-        <dd>在入口文件 main.js 引入并创建使用</dd>
-        <dd>完成后，在开发者工具中可以看到大菠萝</dd>
-        <dd>在 main.js 中引入并使用</dd>
         <dd>
+            <div>在入口文件 main.js 引入并创建使用</div>
+            <div>完成后，在开发者工具中可以看到大菠萝</div>
+            <div>在 main.js 中引入并使用</div>
             <pre>
 import './assets/main.css'
 
@@ -124,8 +124,8 @@ export const useCounterStore  = defineStore('counter', ()=>{
     &lt;div @click="store.increment"&gt;store handle&lt;/div&gt;
 &lt;/template&gt;</pre>
         </dd>
-        <dd>直接解构使用store中的数据(方法)会丢失响应：当仓库状态变化时，count不变，相当于是获取了仓库的一次性数据</dd>
         <dd>
+            <div>直接解构使用store中的数据(方法)会丢失响应：当仓库状态变化时，count不变，相当于是获取了仓库的一次性数据</div>
             <pre>let { count, increment } = counterStore;</pre>
             <pre>&lt;div&gt;仓库数据 - {{ store.count }} - {{ count }}&lt;/div&gt;</pre>
             <div>使用storeToRefs包保持响应式 - 不建议；<span class="warn">命名冲突。。。可读性不好。。。运维困难。。。</span></div>
@@ -133,8 +133,8 @@ export const useCounterStore  = defineStore('counter', ()=>{
 import { storeToRefs } from 'pinia';
 let { count, increment } = storeToRefs(counterStore);</pre>
         </dd>
-        <dd class="example-sn">商品的仓库管理；更多实现，请参考 <a href="./drill_router1.html">路由2 - 综合运用</a> <a
-                href="./pro_lists.html">项目 - 商品列表</a></dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 商品的仓库管理；更多实现，请参考 <a href="./drill_router1.html">路由2 -
+                综合运用</a> <a href="./pro_lists.html">项目 - 商品列表</a></dd>
         <dd class="sn">
             <div>创建仓库 - 商品 goods、状态 isLoading、请求 fetchGoods</div>
             <div>请求商品数据 - 分别使用 fetch 和 axios</div>
@@ -169,9 +169,9 @@ onMounted(() => {
 &lt;/div&gt;</pre>
         </dd>
         <dd class="tips">在开发者视图中，使用慢速网络查看状态变化</dd>
-        <dd class="example-sn"><a href="./drill_cart_pinia.html">实操 - 购物车优化</a></dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_cart_pinia.html">实操 - 购物车优化</a></dd>
         <dd>使用仓库并更新仓库</dd>
-        <dd class="example-sn">侦听仓库变化显示提示信息</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 侦听仓库变化显示提示信息</dd>
         <dd>
             <div>商品仓库和购物车仓库都有数据加载。可以通过侦听仓库的isLoading给前端相应的提示</div>
             <div>msg可以提供给模态框使用。更多信息，请访问 <a href="./drill_modal.html">实训 - 模态框</a></div>
@@ -185,10 +185,10 @@ watch(() => goodStore.isLoading, (newVal, oldVal) => {
     show.value = true;
 })</pre>
         </dd>
-        <dd class="example-sn">定义导航菜单仓库，详情请查看 <a href="./drill_menu.html">实操 - 汉堡菜单</a></dd>
-        <dd>项目从桌面端切换到移动端时，菜单折叠，由汉堡按钮控制折叠和展开；单击菜单项时，折叠菜单</dd>
-        <dd>1. 创建仓库 - 仓库参考代码 menu.js</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 定义导航菜单仓库，详情请查看 <a href="./drill_menu.html">实操 - 汉堡菜单</a></dd>
         <dd>
+            <div>项目从桌面端切换到移动端时，菜单折叠，由汉堡按钮控制折叠和展开；单击菜单项时，折叠菜单</div>
+            <div>1. 创建仓库 - 仓库参考代码 menu.js</div>
             <pre>
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
@@ -201,11 +201,11 @@ export const useMenuStore = defineStore('menu', () => {
 
   return { flag, switchFlag }
 })</pre>
+            <div>2. 在使用仓库的组件结构中，引入仓库，通过汉堡按钮的单击，由标记 flag 控制动态类的应用，达到菜单的折叠和展开</div>
+            <div>改进：单击菜单项，折叠菜单</div>
+            <div>提示：在路由配置中，引入仓库，在导航前置守卫中实例化仓库并切换标记switchFlag；请查看 <a href="./router5.html">路由 - 导航守卫</a></div>
         </dd>
-        <dd>2. 在使用仓库的组件结构中，引入仓库，通过汉堡按钮的单击，由标记 flag 控制动态类的应用，达到菜单的折叠和展开</dd>
-        <dd>改进：单击菜单项，折叠菜单</dd>
-        <dd>提示：在路由配置中，引入仓库，在导航前置守卫中实例化仓库并切换标记switchFlag；请查看 <a href="./router5.html">路由 - 导航守卫</a></dd>
-        <dd class="example-sn">暗黑模式</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 暗黑模式</dd>
         <dd class="sn">
             <p>通过为html指定自定义属性实现CSS变量的更新达到切换效果</p>
             <div>主题样式 - 这里仅给出需要变化的CSS变量，其它变量可以在额外的 :root单独定义</div>
@@ -305,7 +305,6 @@ store.$patch((state) => {
         <dd class="tips">什么时候使用 Store?</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-    <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

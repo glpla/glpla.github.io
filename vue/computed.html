@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>计算属性 Computed</title>
+  <title>计算属性 Computed Properties</title>
   <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
 </head>
@@ -13,21 +13,25 @@
 <body>
   <header>
     <h1>计算属性</h1>
-    <span>&commat;Computed</span>
+    <span>&commat;Computed Properties</span>
   </header>
   <dl>
-    <dt>引入</dt>
-    <dd>数据绑定时，可以使用简单的表达式实现数据的2次处理；如根据age判断DOM的渲染</dd>
-    <dd>逻辑复杂时，应该使用计算属性实现</dd>
-    <dt>优点</dt>
-    <dd>需要引入 computed 包</dd>
-    <dd>计算属性是响应式；数据响应时，不会刷新页面</dd>
-    <dd>计算属性有返回值，且仅在其响应式依赖更新时才重新计算</dd>
-    <dd>而，方法可以没有返回，且每次执行方法都会导致页面渲染</dd>
-    <dd class="tips">计算属性是一个属性，不是方法，使用时不需要()</dd>
-    <dd class="example-sn">执行2次方法inc和执行2次计算属性dec</dd>
-    <dd>创建方法inc和计算属性dec</dd>
     <dd>
+      <div>数据绑定时，可以使用简单的表达式实现数据的2次处理；如根据age判断DOM的渲染</div>
+      <div>逻辑复杂时，应该使用计算属性实现</div>
+      <div>需要引入 computed 包</div>
+      <div>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/computed.html">计算属性 - Computed Properties</a></div>
+    </dd>
+    <dt>Feature</dt>
+    <dd>
+      <div>计算属性是响应式；数据响应时，不会刷新页面</div>
+      <div>计算属性有返回值，且仅在其响应式依赖更新时才重新计算</div>
+      <div>而，方法可以没有返回，且每次执行方法都会导致页面渲染</div>
+    </dd>
+    <dd class="tips">计算属性是一个属性，不是方法，使用时不需要()</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 执行2次方法 inc 和执行2次计算属性 dec</dd>
+    <dd>
+      <div>创建方法 inc 和计算属性 dec</div>
       <pre>
 import { computed } from 'vue';
 const inc = () => {
@@ -36,64 +40,54 @@ const inc = () => {
 const dec = computed(() => {
   console.log('do computed dec');
 })</pre>
-    </dd>
-    <dd>使用2次方法；2次计算属性</dd>
-    <dd>
+      <div>使用2次方法；2次计算属性</div>
       <pre>
 &lt;div&gt;第1次 inc - {{ inc() }}&lt;/div&gt;
 &lt;div&gt;第2次 inc - {{ inc() }}&lt;/div&gt;
 &lt;div&gt;第1次 dec - {{ dec }}&lt;/div&gt;
 &lt;div&gt;第2次 dec - {{ dec }}&lt;/div&gt;</pre>
-    </dd>
-    <dd class="bg">分析</dd>
-    <dd>数据变化时，2次方法都会执行</dd>
-    <dd>数据变化时，计算属性仅第1次执行；第2次没有检测到数据变化，就不会执行</dd>
-    <dd>
+      <div class="bg">分析</div>
+      <div>数据变化时，2次方法都会执行</div>
+      <div>数据变化时，计算属性仅第1次执行；第2次没有检测到数据变化，就不会执行</div>
       <pre>
 do function inc
 do function inc
 do function dec</pre>
-    </dd>
-    <dd>使用value指定属性值</dd>
-    <dd>
+      <div>使用 value 指定属性值</div>
       <pre>
 import { ref, computed } from 'vue';
 let age = ref(18)
 const res = computed(() => {
     return age.value >= 18 ? 'adault' : 'teenage'
 })</pre>
-    </dd>
-    <dd>
       <pre>
 &lt;div&gt; {{ res }} &lt;/div&gt;</pre>
     </dd>
-    <dd class="example-sn">参照B站规则处理关注、粉丝、点赞和播放数量</dd>
-    <dd class="example-sn">标签页内联样式 - 根据当前导航项动态移动指示器；ind是导航项的索引</dd>
-    <dd>结构中直接使用数据；逻辑应该加带使用.value</dd>
-    <dd>传统方案 - 直接拼接样式</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 参照B站规则处理关注、粉丝、点赞和播放数量</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页内联样式 - 根据当前导航项动态移动指示器；ind是导航项的索引</dd>
     <dd>
+      <div>结构中直接使用数据；逻辑应该加带使用.value</div>
+      <div>传统方案 - 直接拼接样式</div>
       <pre>&lt;div class="indicator" :style="{ transform: `translateX(${ind * 80}px)` }"&gt;&lt;/div&gt;</pre>
-    </dd>
-    <dd>使用计算属性 - 计算出当前导航项的偏移量 trans</dd>
-    <dd>
+      <div>使用计算属性 - 计算出当前导航项的偏移量 trans</div>
       <pre>&lt;div class="indicator" :style="{ transform: trans }"&gt;&lt;/div&gt;</pre>
-    </dd>
-    <dd>
       <pre>let trans = computed(() => `translateX(${ind.value * 80}px)`)</pre>
     </dd>
-    <dt>传递参数</dt>
-    <dd>计算属性是一个属性，不是方法，所以不能直接传递参数</dd>
-    <dd>通过闭包的形式间接传递参数</dd>
-    <dd class="example-sn">将资源服务器地址和图片路径拼接为一个完整的在线地址</dd>
+    <dt>Advance</dt>
+    <dd>
+      <div>计算属性是一个属性，不是方法，所以不能直接传递参数</div>
+      <div>通过 <a href="../web/js/closure.html">闭包 - closure</a> 的形式间接传递参数</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 将资源服务器地址和图片路径拼接为一个完整的在线地址</dd>
     <dd>
       <pre>
 const getUrl = computed(() => {
     return (url) => {
         return 'http://127.0.0.1:3000' + url
     }
-})            </pre>
+})</pre>
     </dd>
-    <dd class="example-sn">根据成绩求绩点</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 根据成绩求绩点</dd>
     <dd>
       <pre>
 let score = ref(80)
@@ -113,13 +107,9 @@ const grade = computed(() => {
     }
   }
 })</pre>
-    </dd>
-    <dd class="question">以上逻辑有什么需要改进的地方</dd>
-    <dd>
+      <div class="question">以上逻辑有什么需要改进的地方</div>
       <pre>&lt;div&gt;grade {{ score }} - {{ grade(score) }}&lt;/div&gt;</pre>
-    </dd>
-    <dd>使用静态数据</dd>
-    <dd>
+      <div>使用静态数据</div>
       <pre>
 &lt;div&gt;grade 55 - {{ grade(55) }}&lt;/div&gt;
 &lt;div&gt;grade 60 - {{ grade(60) }}&lt;/div&gt;
@@ -128,7 +118,7 @@ const grade = computed(() => {
 &lt;div&gt;grade 90 - {{ grade(90) }}&lt;/div&gt;
 &lt;div&gt;grade 100 - {{ grade(100) }}&lt;/div&gt;</pre>
     </dd>
-    <!-- <dd class="example-sn">嵌套使用计算属性</dd>
+    <!-- <dd >[<span class="iconfont icon-keyboard"></span>] 嵌套使用计算属性</dd>
     <dd>
       <div>统计考勤 clockin</div>
       <div>统计作业 homework</div>

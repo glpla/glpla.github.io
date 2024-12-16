@@ -53,18 +53,24 @@
             <pre>history: createWebHashHistory(import.meta.env.BASE_URL)</pre>
         </dd>
     </dl>
-    <div class="chap">项目解读</div>
+    <div class="chap">Architecture</div>
     <dl>
         <dt>node_modules</dt>
-        <dd>依赖包</dd>
-        <dd>生产环境依赖 dependencies：项目上线后，所必须的依赖，如网络请求 Axios</dd>
-        <dd>开发环境依赖 devDependencies：开发过程中需要的依赖，发布上线后，不再需要，如 CSS 预处理</dd>
+        <dd>
+            <div>依赖包</div>
+            <div>生产环境依赖 dependencies：项目上线后，所必须的依赖，如网络请求 Axios</div>
+            <div>开发环境依赖 devDependencies：开发过程中需要的依赖，发布上线后，不再需要，如 CSS 预处理</div>
+        </dd>
         <dt>dist</dt>
-        <dd>项目发布后才有</dd>
-        <dd>将其推送到服务器上，项目就进入生产环境的测试环节；经过一系列的调试、重新发布、再上线，项目进入运维环节</dd>
+        <dd>
+            <div>项目发布后才有</div>
+            <div>将其推送到服务器上，项目就进入生产环境的测试环节；经过一系列的调试、重新发布、再上线，项目进入运维环节</div>
+        </dd>
         <dt>public</dt>
-        <dd>公共资源，可以直接被项目使用，如图片，不需要解析</dd>
-        <dd>项目发布后，这里的资源会 <span class="warn">原封不动</span> 的拷贝到发布文件夹 dist</dd>
+        <dd>
+            <div>公共资源，可以直接被项目使用，如图片，不需要解析</div>
+            <div>项目发布后，这里的资源会 <span class="warn">原封不动</span> 的拷贝到发布文件夹 dist</div>
+        </dd>
         <dt>src</dt>
         <dd>开发过程操作最多的目录，您大展身手的舞台</dd>
         <dd class="sn">
@@ -87,20 +93,20 @@ import './assets/main.css'
 import 'font-awesome/css/font-awesome.min.css'</pre>
         </dd>
         <dt>index.html</dt>
-        <dd>项目的主页文件</dd>
-        <dd>引入样式文件</dd>
-        <dd>指定挂载点和挂载的组件</dd>
         <dd>
+            <div>项目的主页文件</div>
+            <div>引入样式文件</div>
+            <div>指定挂载点和挂载的组件</div>
             <pre>
 &lt;div id="app"&gt;&lt;/div&gt;
 &lt;script type="module" src="/src/main.js"&gt;&lt;/script&gt;</pre>
         </dd>
         <dt>package.json</dt>
-        <dd>依赖包管理文件；定制命令</dd>
-        <dd>区分生产环节依赖 dependencies 和开发环境依赖 devDependencies；更多信息，请访问 <a href="../node/ide.html#dep">Node</a>
-        </dd>
-        <dd>由于包的更新和大小等因素，项目分享或提交到代码仓库时，这部分会被忽略。用户拿到代码，第一件事情是安装依赖；否则项目不能运行</dd>
         <dd>
+            <div>依赖包管理文件；定制命令</div>
+            <div>区分生产环节依赖 dependencies 和开发环境依赖 devDependencies；更多信息，请访问 <a href="../node/ide.html#dep">Node</a>
+            </div>
+            <div>由于包的更新和大小等因素，项目分享或提交到代码仓库时，这部分会被忽略。用户拿到代码，第一件事情是安装依赖；否则项目不能运行</div>
             <pre>
 {
     "name": "sfc",
@@ -125,16 +131,14 @@ import 'font-awesome/css/font-awesome.min.css'</pre>
         "vite": "^5.0.11"
     }
 }</pre>
-        </dd>
-        <dd>可以指定主机地址，如0.0.0.0，表示局域网地址</dd>
-        <dd>
+            <div>可以指定主机地址，如0.0.0.0，表示局域网地址</div>
             <pre>"dev": "vite --host 0.0.0.0",</pre>
         </dd>
         <dt>vite.config.js</dt>
-        <dd>vite 的配置，如 server 的配置：项目打开、端口、代理等等；默认没有，需手动添加</dd>
-        <dd>网络请求出现跨域时，必须要做<a href="../node/proxy.html">代理 Proxy</a></dd>
-        <dd>更多配置，请访问<a href="https://cn.vitejs.dev/config/">官方文档 - 配置 Vite</a></dd>
         <dd>
+            <div>vite 的配置，如 server 的配置：项目打开、端口、代理等等；默认没有，需手动添加</div>
+            <div>网络请求出现跨域时，必须要做<a href="../node/proxy.html">代理 Proxy</a></div>
+            <div>更多配置，请访问<a href="https://cn.vitejs.dev/config/">官方文档 - 配置 Vite</a></div>
             <pre>
 server: {
     open: true,         //启动项目自动弹出浏览器；默认 false，手动启动

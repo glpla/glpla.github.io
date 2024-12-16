@@ -16,20 +16,20 @@
         <span>Events</span>
     </header>
     <dl>
-        <dd>更多信息，请访问<a href="https://cn.vuejs.org/guide/essentials/event-handling.html">官方文档</a>、<a
+        <dd>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/event-handling.html">事件处理 - Event Handling</a>、<a
                 href="../web/js/event.html">HTML5事件</a>、<a href="../web/js/event_agent.html">HTML5事件代理</a>、<a
                 href="../minip/events.html">微信小程序事件</a></dd>
-        <dt>事件监听 v-on</dt>
+        <dt>v-on</dt>
         <dd>使用 v-on 指令 (简写为<span class="warn">@</span>) 来监听 DOM 事件，并在事件触发时执行对应的 JavaScript|事件处理函数</dd>
         <dd>
             <pre>
 &lt;div v-on:click="doSomething"&gt; ... &lt;/div&gt;
 &lt;div @click="doSomething"&gt; ... &lt;/div&gt;</pre>
         </dd>
-        <dt>事件类型 Classification</dt>
-        <dd>包括：鼠标事件、键盘事件</dd>
+        <dt>Classification</dt>
         <dd>
-            <table class="tbl-sn">
+            <div>包括：鼠标事件、键盘事件</div>
+            <table>
                 <caption>常见事件类型</caption>
                 <tr>
                     <th>类型</th>
@@ -69,10 +69,10 @@
                 </tr>
             </table>
         </dd>
-        <dt>事件修饰符 Modifier</dt>
-        <dd>点击事件修饰符 - 限制事件特性</dd>
+        <dt>Modifier</dt>
         <dd>
-            <table class="tbl-sn">
+            <div>点击事件修饰符 - 限制事件特性</div>
+            <table>
                 <caption>常见事件修饰符</caption>
                 <tr>
                     <th>类型</th>
@@ -104,49 +104,43 @@
                 </tr>
             </table>
         </dd>
-        <dd class="example-sn">冒泡和捕获 - 决定事件执行的顺序</dd>
-        <dd>事件冒泡 Bubbling - <span class="warn">默认</span>行为；单击inner，目标inner先执行，然后冒泡到outer执行</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 冒泡和捕获 - 决定事件执行的顺序</dd>
         <dd>
+            <div>事件冒泡 Bubbling - <span class="warn">默认</span>行为；单击inner，目标inner先执行，然后冒泡到outer执行</div>
             <pre>
 &lt;div class="outer" @click="doOut"&gt;
     &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
-        </dd>
-        <dd>事件捕获 Capturing - 单击inner，先被outer捕获执行，再传播到目标inner执行</dd>
-        <dd>
+            <div>事件捕获 Capturing - 单击inner，先被outer捕获执行，再传播到目标inner执行</div>
             <pre>
 &lt;div class="outer" @click.capture="doOut"&gt;
     &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
         </dd>
-        <dd class="example-sn">target 和 currentTarget</dd>
-        <dd>target：触发事件的对象 - 点的谁</dd>
-        <dd>currentTarget：当前响应事件的对象；随着事件流的变化，当前对象也在变化</dd>
-        <dd>单击outer：点的是outer；向上没有父级或者说没有冒泡，响应事件的也是outer，所以target和currentTarget都是outer</dd>
-        <div>
-            单击inner：首先inner响应事件，所以target和currentTarget都是inner；然后事件冒泡到outer，outer响应的是inner绑定的事件，所以target是inner，currentTarget是outer
-        </div>
+        <dd>[<span class="iconfont icon-keyboard"></span>] target 和 currentTarget</dd>
         <dd>
+            <div>target：触发事件的对象 - 点的谁</div>
+            <div>currentTarget：当前响应事件的对象；随着事件流的变化，当前对象也在变化</div>
+            <div>单击outer：点的是outer；向上没有父级或者说没有冒泡，响应事件的也是outer，所以target和currentTarget都是outer</div>
+            <div>
+                单击inner：首先inner响应事件，所以target和currentTarget都是inner；然后事件冒泡到outer，outer响应的是inner绑定的事件，所以target是inner，currentTarget是outer
+            </div>
             <pre>
 &lt;div class="outer" @click="doOut"&gt;
     &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
-        </dd>
-        <dd>如果inner指定stop，事件不会冒泡到outer</dd>
-        <dd>
+            <div>如果inner指定stop，事件不会冒泡到outer</div>
             <pre>
 &lt;div class="outer" @click="doOut"&gt;
     &lt;div class="inner" @click.stop="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
-        </dd>
-        <dd>如果outer指定self，仅仅响应我自己绑定的事件 - 自嗨模式，不会响应inner冒泡的事件：target是我，事件处理器不来自子元素</dd>
-        <dd>
+            <div>如果outer指定self，仅仅响应我自己绑定的事件 - 自嗨模式，不会响应inner冒泡的事件：target是我，事件处理器不来自子元素</div>
             <pre>
 &lt;div class="outer" @click.self="doOut"&gt;
     &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
         </dd>
-        <dd class="example-sn">表单提交时不刷新页面</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 表单提交时不刷新页面</dd>
         <dd>
             <pre>
 &lt;form @submit.prevent="submit"&gt;
@@ -154,14 +148,14 @@
     &lt;button&gt;submit&lt;/button&gt;
 &lt;/form&gt;</pre>
         </dd>
-        <dt>按键修饰符</dt>
-        <dd>指定哪个键或哪些触发；多个按键根据先后顺序指定</dd>
-        <dd>如果不指定具体的键，任何一个键都可以触发</dd>
-        <dd>使用 <span class="warn">别名</span> 代替键，如enter代表回车键、space代表空格键、left代表左方向键</dd>
-        <dd>还可以使用 <span class="warn">系统按键</span> ，如ctrl、alt、shift等</dd>
-        <dd>多用于表单</dd>
+        <dt>Key Modifiers</dt>
         <dd>
-            <table class="tbl-sn">
+            <div>指定哪个键或哪些触发；多个按键根据先后顺序指定</div>
+            <div>如果不指定具体的键，任何一个键都可以触发</div>
+            <div>使用 <span class="warn">别名</span> 代替键，如enter代表回车键、space代表空格键、left代表左方向键</div>
+            <div>还可以使用 <span class="warn">系统按键</span> ，如ctrl、alt、shift等</div>
+            <div>多用于表单</div>
+            <table>
                 <caption>按键事件修饰符</caption>
                 <tr>
                     <th>类型</th>
@@ -186,74 +180,52 @@
             </table>
         </dd>
         <dt>事件应用</dt>
-        <dd>0. 内联事件</dd>
-        <dd>适合简单逻辑</dd>
         <dd>
+            <div>0. 内联事件</div>
+            <div>适合简单逻辑</div>
             <pre>
 &lt;div @click="console.log('hi')"&gt;console log&lt;/div&gt;</pre>
-        </dd>
-        <dd>单击，count加1；count要使用才可以响应；否则仅仅利用vue devTool数据无法响应</dd>
-        <dd>
+            <div>单击，count加1；count要使用才可以响应；否则仅仅利用vue devTool数据无法响应</div>
             <pre>
 &lt;div @click="count++"&gt;do something&lt;/div&gt;
 &lt;div&gt;使用数据{{count}}&lt;/div&gt;</pre>
-        </dd>
-        <dd>1. 普通事件 - 无参</dd>
-        <dd>
+            <div>1. 普通事件 - 无参</div>
             <pre>&lt;div @click="doClick"&gt;do something&lt;/div&gt;</pre>
-        </dd>
-        <dd>
             <pre>
 function doClick() {
     console.log('hello,world');
 }</pre>
-        </dd>
-        <dd>2. 携带参数</dd>
-        <dd>
+            <div>2. 携带参数</div>
             <pre>&lt;div @click="doClickPara('18')"&gt;do something with para&lt;/div&gt;</pre>
-        </dd>
-        <dd>
             <pre>
 function doClickPara(para) {
     console.log(para);
 }</pre>
-        </dd>
-        <dd>3. 使用事件对象对应的target获取自定义属性data-</dd>
-        <dd>
+            <div>3. 使用事件对象对应的target获取自定义属性data-</div>
             <pre>&lt;div @click="doClickData" data-id="101"&gt;do something with data-&lt;/div&gt;</pre>
-        </dd>
-        <dd>
             <pre>
 function doClickData(e) {
     console.log(e.target.dataset);
 }</pre>
-        </dd>
-        <dd>4. 使用参数且使用自定义属性</dd>
-        <dd>结构中需要使用特殊变量$event以便和普通参数区分开来</dd>
-        <dd>js中使用任意形参代替特殊变量$event</dd>
-        <dd>
+            <div>4. 使用参数且使用自定义属性</div>
+            <div>结构中需要使用特殊变量$event以便和普通参数区分开来</div>
+            <div>js中使用任意形参代替特殊变量$event</div>
             <pre>&lt;div @click="doClickParaData('18', $event)" data-id="101"&gt;do something with para and data-&lt;/div&gt;</pre>
-        </dd>
-        <dd>
             <pre>
 function doClickData(para,e) {
     console.logpara(para, e.target.dataset);
 }</pre>
         </dd>
-        <dd class="example-sn">手动轮播</dd>
-        <dd>单击时或定时切换图片</dd>
-        <dd>方案1：绑定属性，使用&lt;img&gt;配合在线资源</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 手动轮播</dd>
         <dd>
+            <div>单击时或定时切换图片</div>
+            <div>方案1：绑定属性，使用&lt;img&gt;配合在线资源</div>
             <pre>&lt;img :src=" 'https://glpla.github.io/utils/coffee/coffee' + imgInd + '.jpg' " alt="swiper-img"&gt;</pre>
-        </dd>
-        <dd>方案2：绑定样式，使用background-image配合在线资源</dd>
-        <dd>
+            <div>方案2：绑定样式，使用background-image配合在线资源</div>
             <pre>&lt;div&gt; :style="{ 'background-image': 'url(https://glpla.github.io/utils/coffee/coffee' + imgInd + '.jpg)' }" &lt;div/&gt;</pre>
-        </dd>
-        <dd>方案3：使用静态资源处理</dd>
-        <dd>额外增加一个元素，显示当前图片</dd>
-        <dd>图片采用静态资源处理；放在assets目录下的imgs中</dd>
-        <dd>
+            <div>方案3：使用静态资源处理</div>
+            <div>额外增加一个元素，显示当前图片</div>
+            <div>图片采用静态资源处理；放在assets目录下的imgs中</div>
             <pre>
 import { ref } from 'vue';
 let ind = ref(0)
@@ -264,23 +236,25 @@ const chg = () => {
 const getPic = (ind) => {
   return new URL(`./assets/imgs/${ind}.jpg`, import.meta.url).href
 }</pre>
-        </dd>
-        <dd>
             <pre>
 &lt;div&gt;{{ ind }}&lt;/div&gt;
 &lt;img :src='getPic(ind)' alt=""&gt;
 &lt;button @click="chg"&gt;change pic&lt;/button&gt;</pre>
         </dd>
-        <dd class="example-sn">标签页切换</dd>
-        <dd>使用&lt;nav&gt;和&lt;a&gt;实现</dd>
-        <dd>单击标签，对应的标签高亮显示</dd>
-        <dd>阻止&lt;a&gt;的默认事件</dd>
-        <dd>分别使用事件代理、不使用事件代理实现，并体会2者的区别</dd>
-        <dd class="example-sn">商品/购物车</dd>
-        <dd>商品数量的增加inc与减少dec</dd>
-        <dd>商品的删除del</dd>
-        <dd>商品的全选selAll</dd>
-        <dd>商品的结算totalPrice</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 标签页切换</dd>
+        <dd>
+            <div>使用&lt;nav&gt;和&lt;a&gt;实现</div>
+            <div>单击标签，对应的标签高亮显示</div>
+            <div>阻止&lt;a&gt;的默认事件</div>
+            <div>分别使用事件代理、不使用事件代理实现，并体会2者的区别</div>
+        </dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 商品/购物车</dd>
+        <dd>
+            <div>商品数量的增加inc与减少dec</div>
+            <div>商品的删除del</div>
+            <div>商品的全选selAll</div>
+            <div>商品的结算totalPrice</div>
+        </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
