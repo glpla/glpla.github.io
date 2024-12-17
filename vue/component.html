@@ -16,14 +16,14 @@
         <span>&commat;Component</span>
     </header>
     <dl>
-        <dd>SFC - Single File Component，单文件组件</dd>
-        <dd>vue中每个组件都是以SFC的形式存在，后缀名是.vue</dd>
-        <dd>包括：结构&lt;template&gt;、逻辑&lt;script&gt;和样式&lt;style&gt;，其中，结构&lt;template&gt;是必须的</dd>
-        <dd>每个组件可以被其它组件导入|引入并多次使用</dd>
-        <dd>适合模块化开发和团队协作</dd>
-        <dt>基本过程</dt>
+        <dd>
+            <div>Vue 中每个组件都是以 <a href="./sfc.html">单文件组件 - SFC</a> 的形式存在</div>
+            <div>每个组件可以被其它组件导入|引入并多次使用</div>
+            <div>适合模块化开发和团队协作</div>
+        </dd>
+        <dt>Procedure</dt>
         <dd class="sn">
-            <div>创建子组件，后缀名为.vue，如 Demo.vue</div>
+            <div><span class="warn">创建</span>：创建组件/子组件，后缀名为 .vue，如 Demo.vue</div>
             <pre>
 &lt;script setup&gt;
     //逻辑
@@ -36,24 +36,24 @@
 &lt;style&gt;
     //样式
 &lt;/style&gt;</pre>
-            <div>父组件在&lt;script&gt;引入子组件</div>
-            <p>注意<span class="warn">路径</span>关系；可以使用相对路径；也可以使用路径别名@从src开始引用</p>
-            <p>不能省略后缀名.vue</p>
+            <div><span class="warn">引入</span>：父组件在 &lt;script&gt; 引入子组件</div>
             <p>引入时，输入组件部分或全名，IDE会自动获取组件及补充相对路径；注意看代码提示</p>
+            <p>不能省略后缀名 .vue</p>
+            <p>注意<span class="warn">路径</span>关系；可以使用相对路径；也可以使用路径别名 @ 从 src 开始引用</p>
             <pre>
 &lt;script setup&gt;
     import Demo from './Demo.vue'
 &lt;/script&gt;</pre>
             <p>为了按需引入，减少加载时间，特别是首屏加载，通常采用 <a href="https://cn.vuejs.org/guide/components/async.html">异步组件</a>
-                的形式引入；<span class="iconfont icon-thumbup"></span></p>
-            <p>采用了异步组件，打包的时，会拆分成多个.js文件</p>
+                的形式引入</p>
+            <p>采用了异步组件，打包的时，会拆分成多个 .js 文件</p>
             <pre>
 import { defineAsyncComponent } from 'vue'
 
 const AsyncComp = defineAsyncComponent(() =>
   import('./components/MyComponent.vue')
 )</pre>
-            <div>父组件在结构&lt;template&gt;中使用子组件</div>
+            <div><span class="warn">使用</span>：父组件在结构 &lt;template&gt; 中使用组件/子组件</div>
             <p>可以使用单标签或双标签</p>
             <p>可以多次使用</p>
             <pre>
@@ -63,18 +63,21 @@ const AsyncComp = defineAsyncComponent(() =>
     &lt;Demo&gt;&lt;/Demo&gt;
 &lt;/template&gt;</pre>
         </dd>
-        <dt>全局组件</dt>
-        <dd>main.js中引入并声明</dd>
-        <dd>其它组件直接使用，无需引入</dd>
+        <dt>Global Registration</dt>
         <dd>
+            <div>使用 Vue 应用实例的 .component() 方法，让组件在当前 Vue 应用中全局可用</div>
+            <div>通常在 main.js 中引入/注册并声明</div>
+            <div>其它组件直接使用，<span class="warn">无需引入</span></div>
+            <div>更多信息，请访问 <a href="https://vuejs.org/guide/components/registration.html">组件注册 - Component
+                    Registration</a></div>
             <pre>
 import Com from './components/Com.vue';
 
 app.component('Com', Com)</pre>
         </dd>
-        <dd class="example-sn">封装版权组件</dd>
-        <dd class="example-sn">封装轮播组件</dd>
-        <dd class="example-sn">使用条件渲染，在开发者视图 → 网络Network中查看异步组件的加载情况，并观察项目发布后的打包情况</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 封装版权组件</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 封装轮播组件</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 使用条件渲染，在开发者视图 → 网络 Network 中查看异步组件的加载情况，并观察项目发布后的打包情况</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

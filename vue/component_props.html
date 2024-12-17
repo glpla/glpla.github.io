@@ -16,19 +16,23 @@
         <span>&commat;props</span>
     </header>
     <dl>
-        <dd>通过编译宏defineXXX的形式实现通信|参数传递|数据传递</dd>
-        <dd>遵循单向数据流的原则</dd>
+        <dd>
+            <div>通过编译宏 defineXXX() 的形式实现通信|参数传递|数据传递</div>
+            <div>遵循 <span class="warn">单向数据流 - One-Way Data Flow</span> 的原则</div>
+            <div>更多信息，请访问 <a href="https://vuejs.org/guide/components/props.html">Props</a></div>
+        </dd>
         <dt>基本过程</dt>
         <dd class="sn">
-            <div>子组件在 &lt;script setup&gt; 顶级作用域下，使用宏defineProps()定义属性来接收传递的参数并使用</div>
-            <div>父组件以属性的方式向子组件传递参数：可以是静态数据，也可以是响应式数据；可以是简单数据，也可以是复合数据</div>
+            <div>子组件在 &lt;script setup&gt; 顶级作用域下，使用宏 defineProps() 定义属性来接收传递的参数并使用</div>
+            <div>父组件以属性的方式向子组件传递参数：可以是静态数据 Static ，也可以是响应式数据 Dynamic ；可以是简单数据，也可以是复合数据</div>
         </dd>
         <dd class="tips">
-            <div>为了和普通变量区分，建议：传递的参数以prop开始，如propName</div>
+            <div>建议使用小驼峰命名方式 - camelCase </div>
+            <div>为了和普通变量区分，建议：传递的参数以 prop 开始，如propName</div>
             <div>只有数据的拥有者才可以修改数据：子组件不能直接修改父组件传递的属性参数；如果父组件把这个属性参数还分配了其它子组件。。。</div>
         </dd>
-        <dt>子组件定义属性</dt>
-        <dd>1. 子组件&lt;script&gt; - 使用 defineProps 定义接收的参数，并声明一个变量接收，便于在脚本中进一步处理</dd>
+        <dt>Props Declaration</dt>
+        <dd>1. 子组件 &lt;script&gt; - 使用 defineProps() 定义接收的参数，并声明一个变量接收，便于在脚本中进一步处理</dd>
         <dd>
             <div>方案1：使用 <span class="warn">数组</span> 声明 - 仅指定属性名</div>
             <pre>
@@ -72,6 +76,22 @@ let msg = ref('hi,there')</pre>
             <div>2. 父组件&lt;template&gt; - 使用子组件；以数据绑定的形式传递参数：1个静态数据 propId、1个响应式数据 propMsg</div>
             <pre>&lt;Test :propMsg="msg" propId="18"&gt;&lt;/Test&gt;</pre>
         </dd>
+        <dt>Value Types</dt>
+        <dd class="sn">
+            <div>Number</div>
+            <pre>&lt;Test :propId="18" /&gt;</pre>
+            <pre>&lt;Test :propId="item.id" /&gt;</pre>
+            <div>Boolean</div>
+            <pre>&lt;Test isDone /&gt;</pre>
+            <pre>&lt;Test :isDone="false" /&gt;</pre>
+            <pre>&lt;Test :isDone="item.flag" /&gt;</pre>
+            <div>Array</div>
+            <pre>&lt;Test :arr="[1,2,3,4,5]" /&gt;</pre>
+            <pre>&lt;Test :arr="item.list" /&gt;</pre>
+            <div>Object</div>
+            <pre>&lt;Test :obj="{id:1001, name:'glpla'}" /&gt;</pre>
+            <pre>&lt;Test :obj="item.author" /&gt;</pre>
+        </dd>
         <dd><span class="iconfont icon-biz-help"></span> 如何传递一个数值类型的数据?</dd>
         <!-- Vue -->
         <!-- <dd>&lt;Info :age="8" /&gt;</dd> -->
@@ -83,11 +103,11 @@ let msg = ref('hi,there')</pre>
         </dd>
     </dl>
     <dl>
-        <dd class="example-sn">改造产品列表组件，提供不同的产品数据展示不同的列表内容</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 改造产品列表组件，提供不同的产品数据展示不同的列表内容</dd>
         <dd>
             <pre>&lt;List :lists="propLists"/&gt;</pre>
         </dd>
-        <dd class="example-sn">封装第三方库 - 轮播组件，提供不同的图片列表数据和高度展示不同的轮播内容</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 封装第三方库 - 轮播组件，提供不同的图片列表数据和高度展示不同的轮播内容</dd>
         <dd>
             <pre>&lt;Swiper :imgUrl="propImgUrls" :swiperH="propSwiperH"/&gt;</pre>
         </dd>

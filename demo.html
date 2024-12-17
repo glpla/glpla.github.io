@@ -20,141 +20,68 @@
             background-color: #000;
         }
 
-        button {
-            display: none;
-            aspect-ratio: 1;
-            border-radius: 50%;
-            animation: rolling 1s linear infinite;
-            animation-play-state: paused;
+        /* .wrap {
+            perspective: 1000px;
+            border: 10px solid #fff;
         }
 
-        #ctrl.active {
-            animation-play-state: running;
+        .card {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            transform-style: preserve-3d;
+            transition: 0.5s;
         }
 
-        @keyframes rolling {
-            to {
-                transform: rotateZ(360deg);
-            }
+        .wrap:hover .card {
+            transform: rotateY(180deg);
         }
 
-        .loading {
-            width: 100%;
-            max-width: 300px;
-            height: 20px;
-            /* background-color: rgb(255, 255, 255, 0.9); */
-            padding: 2px;
+        .front,
+        .back {
+            position: absolute;
+            inset: 0;
+            background-color: #eee;
+            backface-visibility: hidden;
         }
 
-        .loading-bar {
-            width: 0;
-            height: 100%;
-            border-radius: 20px;
+        .back {
+            transform: rotateY(180deg);
+        } */
+        .wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+        }
+
+        .card {
+            /* left: 50%;
+            top: 50%; */
+            width: 100px;
+            height: 200px;
             background-color: #f40;
-            animation: loading-ani 3s linear;
-            box-shadow: 0 0 10px #fff;
+            /* transform: translate(-50%, -50%); */
+            transition: 0.5s;
         }
 
-        @keyframes loading-ani {
-            to {
-                width: 100%;
-            }
-        }
-
-        .box {
-            height: 50vh;
-            overflow-y: auto;
-        }
-
-        .inner {
-            height: 200vh;
+        .wrap:hover .card {
+            transform: scale(2);
         }
     </style>
 </head>
 
 <body>
-    <div class="loading">
-        <div class="loading-bar" id="loading-bar"></div>
+    <div class="wrap">
+        <!-- <div class="card">
+            <div class="front">front</div>
+            <div class="back">back</div>
+        </div> -->
+        <div class="card"></div>
     </div>
-    <button id="ctrl">play/pause</button>
-    <audio src="/utils/music/Alizee-LaIslaBonita.mp3"></audio>
-    <div class="box">
-        <div class="inner">13</div>
-    </div>
-    <script>
-        const audio = document.getElementsByTagName('audio')[0];
-        const ctrlBtn = document.getElementById('ctrl');
-        const loading = document.querySelector('.loading')
-        const loadingBar = document.querySelector('#loading-bar')
-        loadingBar.addEventListener('animationstart', () => {
-            console.log('start');
-        })
-        loadingBar.addEventListener('animationend', () => {
-            console.log('ending');
-            // window.location.href = '/index.html'
-            loading.style.display = 'none'
-            ctrlBtn.style.display = 'block'
-
-        })
-        loadingBar.addEventListener('animationiteration', () => {
-            console.log('animationiteration');
-        })
-
-        ctrlBtn.addEventListener('click', () => {
-            audio.paused ? audio.play() : audio.pause();
-        })
-
-        audio.addEventListener('loadstart', (e) => {
-            console.log('loadstart');
-        })
-        audio.addEventListener('progress', (e) => {
-            console.log('progress');
-        })
-        audio.addEventListener('durationchange', (e) => {
-            console.log('durationchange', audio.duration);
-        })
-        audio.addEventListener('loadedmetadata', (e) => {
-            console.log('loadedmetadata');
-        })
-        audio.addEventListener('loadeddata', (e) => {
-            console.log('loadeddata');
-        })
-        audio.addEventListener('timeupdate', (e) => {
-            console.log(audio.currentTime);
-        })
-        audio.addEventListener('canplay', (e) => {
-            console.log('canplay');
-        })
-        audio.addEventListener('canplaythrough', (e) => {
-            console.log('canplaythrough');
-        })
-        audio.addEventListener('play', (e) => {
-            console.log('play');
-            // ctrlBtn.classList.add('active')
-            ctrlBtn.style.animationPlayState = 'running'
-        })
-        audio.addEventListener('pause', (e) => {
-            console.log('pause');
-            // ctrlBtn.classList.remove('active')
-            ctrlBtn.style.animationPlayState = 'paused'
-        })
-        audio.addEventListener('waiting', (e) => {
-            console.log('waiting');
-        })
-        audio.addEventListener('playing', (e) => {
-            console.log('playing');
-        })
-        audio.addEventListener('ended', (e) => {
-            console.log('ended');
-            ctrlBtn.classList.remove('active')
-        })
-        document.addEventListener('scroll', () => {
-            console.log('document scroll');
-        })
-        window.addEventListener('scroll', () => {
-            console.log('window scroll');
-        })
-    </script>
 </body>
 
 </html>
