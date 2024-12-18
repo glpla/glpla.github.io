@@ -41,7 +41,7 @@
     <dd>
       <div>. 事件处理的业务逻辑在 &lt;script&gt; 中；建议使用外部 .js 文件</div>
       <div>. 没有失去焦点的伪类选择器；只能通过事件 onblur 检测</div>
-      <table class="tbl-sn">
+      <table>
         <caption>事件类型</caption>
         <tr>
           <th>类别</th>
@@ -75,9 +75,9 @@
     </dd>
     <dt>事件处理一般步骤</dt>
     <dd class="sn">
-      <div>获取input元素 querySelector；更多信息，请参考 <a href="./dom-el.html">DOM</a></div>
-      <div>添加事件侦听器 addEventListener；更多信息，请参考 <a href="./event.html">Event</a></div>
-      <p>. 为元素分配 id，可以直接使用，不需要获取元素</p>
+      <div>获取 input 元素；更多信息，请参考 <a href="./document.html">DOM - document</a></div>
+      <div>添加事件侦听器 addEventListener；更多信息，请参考 <a href="./event_addEventListener.html">Event</a></div>
+      <p class="tips">为元素分配 id，可以直接使用，不需要获取元素 - 不建议</p>
       <pre>
 &lt;input type="text" id="ipt"&gt;
 &lt;input type="text" id="ipt0"&gt;
@@ -90,12 +90,12 @@
   }
 &lt;/script&gt;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 输入长度提示 - 检测input值</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 输入长度提示 - 检测 input 的值</dd>
     <dd>
-      <div>. 获取input元素：querySelector</div>
-      <div>. 获取input元素的maxlength属性/最大长度：el.getAttribute()</div>
+      <div>. 获取 input 元素</div>
+      <div>. 获取 input 元素的 maxlength 属性/最大长度：el.getAttribute()</div>
       <div>. 获取当前输入的值的长度：el.value.length</div>
-      <div>. 将input事件分别修改为change事件、keyup事件、blur事件，体会他们之间的不同</div>
+      <div>. 将 input 事件分别修改为 change 事件、keyup 事件、blur 事件，体会他们之间的不同</div>
       <div class="ipt-wrap">
         <div id="len-val">还可以输入8</div>
         <input type="text" name="len" id="len-ipt" maxlength="8" placeholder="text here">
@@ -107,7 +107,7 @@ lenIpt.addEventListener('input', () => {
     lenVal.innerHTML = '还可以输入' + (lenIpt.getAttribute('maxlength') - lenIpt.value.length)
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 显示密码 - 修改input类型</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 显示密码 - 修改 input 类型</dd>
     <dd>
       <div>. 部分系统自带有显式密码功能</div>
       <div>. 部分系统要求密码框必须位于表单 form 中，且应该指定自动完成 autocomplete</div>
@@ -128,7 +128,7 @@ spBtn.addEventListener('click', () => {
     }
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 全选 - 修改input属性</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 全选 - 修改 input 属性</dd>
     <dd>
       <div>. 利用元素的 checked 属性判断当前选择状态；如果全选为真/选中，则所有选项都置为真/选中；否则取消全选/置为假</div>
       <div>. 统计选中的个数，如果等于选项个数，则全选；如果为0，则全不选</div>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>插槽 Slots</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>插槽</h1>
+        <span>&commat;Slots</span>
+    </header>
+    <dl>
+        <dd>
+            <div>定义的组件除了传递属性 Props 和 传递事件 Emits，还可以传递内容 content - 在基本功能的基础上，通过插槽 slot 插入内容，从而实现<span
+                    class="warn">拓展</span>功能 - more flexible and reusable</div>
+            <div>可以是任何有效的内容；静态数据，响应式数据，甚至其它组件； - can be any valid template content</div>
+            <div>可以指定插槽默认内容 - <span class="warn">默认插槽</span></div>
+            <div>可以声明多个插槽</div>
+            <div>为了区分，多个插槽应该指定 name 属性 - <span class="warn">具名插槽</span></div>
+            <div>更多信息，请访问 <a href="https://vuejs.org/guide/components/slots.html">Slots</a></div>
+        </dd>
+        <dt>Procedure</dt>
+        <dd>
+            <div>1. 子组件创建过程中，预留一个位置 slot，将其作为一个占位符，父组件传递进来的内容就会渲染在这里</div>
+            <div>仅预留位置</div>
+            <pre>
+&lt;template&gt;
+    &lt;div&gt;
+        //内容
+        &lt;slot /&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</pre>
+            <div>默认插槽 Default Slot - 只有一个插槽的情况；可以指定默认内容，避免插槽没有内容导致告警</div>
+            <pre>
+&lt;template&gt;
+    &lt;div&gt;
+        //内容
+        &lt;slot&gt;插槽默认内容&lt;/slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</pre>
+            <div>具名插槽 Named Slots - 多个插槽；使用属性 name 区分；没有指定 name 的，使用默认名字 default；同样可以指定默认内容</div>
+            <pre>
+&lt;template&gt;
+    &lt;div&gt;
+        //内容
+        &lt;slot&gt;&lt;/slot&gt;
+        &lt;slot name = 'header'&gt;&lt;/slot&gt;
+        &lt;slot name = 'footer'&gt;&lt;/slot&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</pre>
+            <div>条件插槽 Conditional Slots - 利用插槽的 $slots 属性判断；多用于具名插槽；只有当父组件提供了相应的插槽内容时，才会渲染对应的 DOM 结构；非条件插槽则必须使用</div>
+            <pre>
+&lt;template&gt;
+    &lt;div&gt;
+        //内容
+        &lt;slot&gt;&lt;/slot&gt;
+        &lt;slot name = 'header'&gt;&lt;/slot&gt;
+        &lt;div v-if="$slots.footer"&gt;
+            &lt;slot name = 'footer'&gt;&lt;/slot&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;</pre>
+            <div>2. 父组件</div>
+            <div>使用内容填充插槽；可以是普通文本，也可以是HTML节点</div>
+            <pre>
+&lt;template&gt;
+    &lt;AlertBox&gt; Something bad happened. &lt;/AlertBox&gt;
+&lt;/template&gt;</pre>
+            <div>使用默认插槽</div>
+            <pre>
+&lt;template&gt;
+    &lt;AlertBox&gt; &lt;/AlertBox&gt;
+&lt;/template&gt;</pre>
+            <div>使用具名插槽 - 使用 &lt;template&gt; 并指定对应的 v-slot 标识；可以简写为 <span class="warn">#</span></div>
+            <pre>
+&lt;template&gt;
+    &lt;AlertBox&gt;  
+        &lt;template v-slot:header&gt;
+            &lt;h1&gt;Here might be a page title&lt;/h1&gt;
+        &lt;/template&gt;
+        &lt;template #footer&gt;
+            &lt;h1&gt;Here might be a page title&lt;/h1&gt;
+        &lt;/template&gt;
+    &lt;/AlertBox&gt;
+&lt;/template&gt;</pre>
+            <div>使用条件插槽 - 不指定 footer</div>
+            <pre>
+&lt;template&gt;
+    &lt;AlertBox&gt;  
+        &lt;template v-slot:header&gt;
+            &lt;h1&gt;Here might be a page title&lt;/h1&gt;
+        &lt;/template&gt;
+    &lt;/AlertBox&gt;
+&lt;/template&gt;</pre>
+        </dd>
+        <dd class="tips">
+            <div>Slot content has access to the data scope of the parent component</div>
+            <div>Slot content does not have access to the child component's data</div>
+        </dd>
+        <dt>Style</dt>
+        <dd><a href="./component_style.html">组件样式</a></dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 封装版权组件，根据作者头像展示相应的版权信息；如果不指定头像，则使用大树哥的头像哦</dd>
+        <dd>提示：注意图片的使用</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 封装卡片组件，用户可以使用顶部标题和底部说明</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 封装代码组件，以便区分是结构、逻辑还是样式</dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>

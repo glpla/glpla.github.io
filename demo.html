@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Demo</title>
     <style>
+        :root {
+            --w: 300px;
+            --offset: calc(var(--w)/2);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,74 +19,98 @@
 
         body {
             display: flex;
+            flex-direction: column;
+            gap: 100px;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #000;
-        }
-
-        /* .wrap {
             perspective: 1000px;
-            border: 10px solid #fff;
         }
 
-        .card {
+        .wrap {
             position: relative;
-            width: 300px;
-            height: 400px;
+            width: var(--w);
+            height: var(--w);
+            background-color: #eee;
             transform-style: preserve-3d;
-            transition: 0.5s;
+            transform: rotateX(30deg) rotateY(40deg) rotateZ(20deg);
+            transition: 6s linear;
         }
 
-        .wrap:hover .card {
-            transform: rotateY(180deg);
+        .wrap:hover {
+            --offset: var(--w);
+            transform: rotateX(360deg) rotateY(540deg) rotateZ(720deg);
         }
 
-        .front,
-        .back {
+        .wrap * {
             position: absolute;
             inset: 0;
-            background-color: #eee;
-            backface-visibility: hidden;
+            background-color: var(--bg-color);
+            transition: .5s;
         }
 
-        .back {
-            transform: rotateY(180deg);
-        } */
-        .wrap {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            width: 300px;
-            height: 400px;
-            background-color: #fff;
+        .wrap div:nth-child(1) {
+            transform: translateZ(var(--offset));
         }
 
-        .card {
-            /* left: 50%;
-            top: 50%; */
+        .wrap div:nth-child(2) {
+            transform: rotateY(180deg) translateZ(var(--offset));
+        }
+
+        .wrap div:nth-child(3) {
+            transform: rotateY(-90deg) translateZ(var(--offset));
+        }
+
+        .wrap div:nth-child(4) {
+            transform: rotateY(90deg) translateZ(var(--offset));
+        }
+
+        .wrap div:nth-child(5) {
+            transform: rotateX(-90deg) translateZ(var(--offset));
+        }
+
+        .wrap div:nth-child(6) {
+            transform: rotateX(90deg) translateZ(var(--offset));
+        }
+
+        .outer {
             width: 100px;
-            height: 200px;
+            height: 100px;
             background-color: #f40;
-            /* transform: translate(-50%, -50%); */
-            transition: 0.5s;
         }
 
-        .wrap:hover .card {
-            transform: scale(2);
+        .inner {
+            width: 50px;
+            height: 50px;
+            background-color: #0a0;
         }
     </style>
 </head>
 
 <body>
-    <div class="wrap">
-        <!-- <div class="card">
-            <div class="front">front</div>
-            <div class="back">back</div>
-        </div> -->
-        <div class="card"></div>
+    <div class="outer" data-id="120">
+        <!-- <div class="inner" data-id="100"></div> -->
     </div>
+    <div class="wrap">
+        <div style="--bg-color:#f406"></div>
+        <div style="--bg-color:#0896"></div>
+        <div style="--bg-color:#8906"></div>
+        <div style="--bg-color:#0a06"></div>
+        <div style="--bg-color:#0aa6"></div>
+        <div style="--bg-color:#a0a6"></div>
+    </div>
+    <script>
+        const outer = document.querySelector('.outer');
+        // const inner = document.querySelector('.inner');
+        outer.addEventListener('click', (e) => {
+            console.log('outer', e, e.target, e.currentTarget);
+            console.log('data-id', e.target.dataset.id, e.currentTarget.dataset.id);
+        })
+        // inner.addEventListener('click', (e) => {
+        //     console.log('inner', e.target, e.currentTarget);
+        //     console.log('data-id', e.target.dataset.id, e.currentTarget.dataset.id);
+        // })
+    </script>
 </body>
 
 </html>

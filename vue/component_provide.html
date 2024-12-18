@@ -16,106 +16,103 @@
         <span>&commat;provide</span>
     </header>
     <dl>
+        <dt>焦点</dt>
         <dd>
+            <div>顶级组件 → 底层组件；中间可以经过多层组件</div>
+            <div>如果采用 defineProps()，即使中间组件不感兴趣，也要逐一向下传递 - props drilling</div>
             <figure>
                 <img src="./imgs/inject.png" alt="">
                 <figcaption>传统跨级通信</figcaption>
             </figure>
         </dd>
-        <dt>跨级传递 provide vs inject</dt>
-        <dd>顶级组件 → 底层组件；中间可以经过多层组件</dd>
-        <dd>采用发布 - 订阅|提供-插入的模式</dd>
-        <dd>仅允许上向下传递|流转，不允许底层组件向顶级组件传递|反向流转</dd>
-        <dd>顶层组件引入 provide 包、底层组件引入 inject 包</dd>
-        <dd>可以传递数据；还可以传递方法；可以使用多个 provide 和 inject；可以传递普通静态数据，也可以传递响应式数据；可以传递简单数据，也可以传递对象</dd>
-        <dd>响应式数据会保持响应式；传递的是响应式数据，不是响应式数据的值，不要加value</dd>
-        <dd>只可以在setup顶级作用域使用，不可以在某个事件处理函数中使用：provide() can only be used inside setup()</dd>
-        <dd>开发调试时，可以使用延时查看响应数据的变化</dd>
-        <dt>传递数据</dt>
-        <dd>1. 顶级组件使用 provide 提供数据；其中，响应式数据还采用了双向绑定</dd>
+        <dt>解决方案</dt>
         <dd>
+            <div>采用发布 provide - 插入 inject 的模式</div>
+            <div>以值对的形式提供数据 - injection key / provided value</div>
+            <div>可以是任何值；可以传递普通静态数据，也可以传递响应式数据；可以传递简单数据，也可以传递对象 - value can be of any type</div>
+            <div>可以传递数据；还可以传递方法</div>
+            <div>响应式数据会保持响应式；传递的是响应式数据，不是响应式数据的值，不要加 value </div>
+            <div>只可以在setup顶级作用域使用，不可以在某个事件处理函数中使用 - provide() can only be used inside setup()</div>
+            <div>仅允许上向下传递|流转，不允许底层组件向顶级组件传递|反向流转</div>
+            <div>开发调试时，可以使用延时查看响应数据的变化</div>
+            <div>更多信息，请访问 <a href="https://vuejs.org/guide/components/provide-inject.html">Provide / Inject</a></div>
+        </dd>
+        <dt>传递数据</dt>
+        <dd>
+            <div>1. 顶级组件：引入 provide 包；使用 provide 提供数据；可以使用只读 readonly() 限制|保护数据，使得子组件只能访问，不能修改 - cannot be
+                mutated；其中，响应式数据还采用了双向绑定</div>
             <pre>
 import {provide, ref} from 'vue'
 
 let name = 'glpla'
 let msg = ref('hello')
 
-provide('name', name)
+provide('name', readonly(name))
 provide('msg', msg)</pre>
-        </dd>
-        <dd>2. 底层组件使用 inject 接收数据</dd>
-        <dd>
+            <pre>provide('msg', readonly(msg))</pre>
+            <div>2. 底层组件：引入 inject 包；使用 inject 接收数据；如果数据不存在或其它异常，可以指定默认值；默认值也可以右特定函数产生</div>
             <pre>
 import {inject} from 'vue'
 
-let para = inject('name')
-let para = inject('msg')</pre>
-        </dd>
-        <dd>
+let paraName = inject('name', 'glpla')
+let paraMsg = inject('msg')</pre>
             <pre>&lt;input type="text" v-model="msg"&gt;</pre>
-        </dd>
-        <dt>只读 readonly</dt>
-        <dd>父组件可以限制|保护数据，使得子组件只能访问，不能修改</dd>
-        <dd>
-            <pre>provide('msg', readonly(msg))</pre>
-        </dd>
-        <dt>默认值</dt>
-        <dd>子组件注入数据时，如果数据不存在或其它异常，可以指定默认值</dd>
-        <dd>
-            <pre>const msg = inject('msg', 'hi, there.')</pre>
         </dd>
         <dt>名称冲突</dt>
         <dd>顶层组件和底层组件的 provide 方法名称相同，底层组件会覆盖顶层组件的 provide 方法 - 进水楼台先得月</dd>
         <dd>应优化设计，避免这种情况</dd>
         <dt>传递方法</dt>
-        <dd>底层组件可以使用顶层组件的方法修改顶层组件的数据；虽然有悖于数据流的单向原则，但是仍然遵循 <span class="warn">谁的数据谁修改</span> 的原则，即：用你提供的方法修改你的数据</dd>
-        <dd>1. 顶级组件使用 provide 提供已经定义好的方法doGreeting</dd>
         <dd>
+            <div>底层组件可以使用顶层组件的方法修改顶层组件的数据；虽然有悖于数据流的单向原则，但是仍然遵循 <span class="warn">谁的数据谁修改</span> 的原则，即：用你提供的方法修改你的数据
+            </div>
+            <div>1. 顶级组件使用 provide 提供已经定义好的方法 doGreeting</div>
             <pre>
 const doGreeting = () => {
     refDate.value++
 }
 provide('doGreetingFn', doGreeting)</pre>
-        </dd>
-        <dd>2. 底层组件使用 inject 接收传递的方法，并在事件处理函数fn中实现；fn是普通点击事件</dd>
-        <dd>doGreet接收传递来的方法，要执行，必须使用()</dd>
-        <dd>
+            <div>2. 底层组件使用 inject 接收传递的方法，并在事件处理函数 fn 中实现；fn 是普通点击事件</div>
+            <div>doGreet 接收传递来的方法，要执行，必须使用 ()</div>
             <pre>
 let doGreet = inject('doGreetingFn')
+
 //直接执行
 doGreet()
-//在其它方法中执行
+
+//在其它函数中执行
 function fn() {
   doGreet()
 }</pre>
-        </dd>
-        <dd>或直接在结构中使用传递的方法</dd>
-        <dd>
+            <div>或直接在结构中使用传递的方法</div>
             <pre>&lt;div @click="doGreet"&gt;直接使用&lt;/div&gt;</pre>
         </dd>
+    </dl>
+    <div class="chap">App-level Provide</div>
+    <dl>
         <dt>全局变量和方法</dt>
-        <dd>不在入口组件app.vue中定义</dd>
-        <dd>应在main.js中定义并提供；注意这里直接使用 provide 库，不需要引入</dd>
         <dd>
+            <div>在 main.js 中定义并提供；不在入口组件app.vue中定义</div>
+            <div>所有组件都可以使用 - available to all components</div>
+            <div>注意直接使用 provide 库，不需要引入</div>
             <pre>
 import axios from 'axios'
 
-app.provide('axios', axios)</pre>
-        </dd>
-        <dd>组件中使用；需要引入 inject 库</dd>
-        <dd>
+app.provide('axios', axios)
+app.provide('www', 'glpla.github.io')</pre>
+            <div>组件中使用同上，需要引入 inject 库</div>
             <pre>
 import { inject } from 'vue';
 
-const axios = inject('axios')</pre>
+const axios = inject('axios')
+const www = inject('www')</pre>
         </dd>
         <dt>兄弟组件之间的通信 - todo</dt>
-        <dd>互相定义函数实现 - todo</dd>
-        <dd>1. 父组件</dd>
-        <dd>定义接收函数来接收子组件传递的参数并以属性的形式绑定在子组件上</dd>
-        <dd>sendPara是自定义事件</dd>
-        <dd>父组件 - &lt;script&gt;</dd>
         <dd>
+            <div>互相定义函数实现 - todo</div>
+            <div>1. 父组件</div>
+            <div>定义接收函数来接收子组件传递的参数并以属性的形式绑定在子组件上</div>
+            <div>sendPara是自定义事件</div>
+            <div>父组件 - &lt;script&gt;</div>
             <pre>
 import Child from '@/components/Child.vue'
 import {msg} from 'vue'
@@ -123,26 +120,20 @@ let msg = ref('')
 function getPara(val){
     msg.value = val.value
 }</pre>
-        </dd>
-        <dd>父组件 - &lt;template&gt;</dd>
-        <dd>
+            <div>父组件 - &lt;template&gt;</div>
             <pre>
 &lt;div&gt;{{msg}}&lt;/div&gt;
 &lt;Child :sendPara='getPara'/&gt;</pre>
-        </dd>
-        <dd>2. 子组件</dd>
-        <dd>定义要发送的数据</dd>
-        <dd>在props定义发送数据的函数名</dd>
-        <dd>在事件中定义函数发送数据 - 这里采用点击按钮触发，也可以在生命周期函数中触发</dd>
-        <dd>子组件 - &lt;script&gt;</dd>
-        <dd>
+            <div>2. 子组件</div>
+            <div>定义要发送的数据</div>
+            <div>在props定义发送数据的函数名</div>
+            <div>在事件中定义函数发送数据 - 这里采用点击按钮触发，也可以在生命周期函数中触发</div>
+            <div>子组件 - &lt;script&gt;</div>
             <pre>
 import {ref} from 'vue'
 let para = ref('hi, there.')
 defineProps(['sendPara'])</pre>
-        </dd>
-        <dd>子组件 - &lt;template&gt;</dd>
-        <dd>
+            <div>子组件 - &lt;template&gt;</div>
             <pre>&lt;button @click='sendPara(para)'&gt;send para&lt;/button&gt;</pre>
         </dd>
     </dl>

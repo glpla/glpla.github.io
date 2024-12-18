@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件 Dynamic</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <base target="_blank">
+</head>
+
+<body>
+    <header>
+        <h1>动态组件</h1>
+        <span>&commat;Dynamic</span>
+    </header>
+    <dl>
+        <dt>Overview</dt>
+        <dd>
+            <div>使用 &lt;component&gt; 元素和特殊的 :is 属性 实现多组件选一：在两个或多个组件间来回切换，如标签页、导航页</div>
+            <div>被切换掉的组件会被卸载。通过 <a href="./component_keeplive.html">&lt;KeepAlive&gt;</a> 组件强制被切换掉的组件仍然保持“存活”的状态</div>
+            <div>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/component-basics.html#dynamic-components">Dynamic
+                    Components</a></div>
+        </dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 利用条件 v-if 渲染切换2个组件</dd>
+        <dd>
+            <pre>
+import Work from './components/Work.vue';
+import Team from './components/Team.vue';</pre>
+            <pre>
+&lt;component v-if="flag" :is="Work">&lt;/component&gt;
+&lt;component v-else :is="Team"&gt;&lt;/component&gt;</pre>
+            <div>改进 - 使用一个 &lt;component&gt;</div>
+            <div>为了避免性能上的消耗，使用浅响应 shallowRef 创建组件数组</div>
+            <div>浅响应 shallowRef 创建一个浅响应式对象，数据的深层改变不会触发视图更新，减少性能上的消耗；并不对其中的数据进行响应，仅仅对对象的名字响应</div>
+            <pre>
+let ind = ref(0)
+// let com = ref([Reco, Copyright])
+let com = shallowRef([Reco, Copyright])</pre>
+            <pre>
+&lt;component :is="com[ind]">&lt;/component&gt;</pre>
+        </dd>
+    </dl>
+    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+</body>
+
+</html>
