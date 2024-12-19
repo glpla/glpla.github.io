@@ -1,6 +1,7 @@
 :root {
   --main-w: 200px;
-  --w: calc(var(--main-w) / 2);
+  --inner-w: calc(var(--main-w) / 4);
+  --offset: calc(var(--main-w) / 2);
 }
 
 * {
@@ -22,12 +23,12 @@ body {
   position: relative;
   width: var(--main-w);
   height: var(--main-w);
-  transform-style: preserve-3d;
-  transform: rotatex(-30deg) rotatey(20deg);
   display: flex;
   justify-content: center;
   align-items: center;
   animation: cube-roll 20s linear infinite alternate;
+  transform-style: preserve-3d;
+  transform: rotatex(-30deg) rotatey(20deg);
   cursor: pointer;
 }
 
@@ -43,38 +44,33 @@ body {
   background-position: center;
   background-size: cover;
   opacity: 0.6;
-  transition: 0.5s;
   box-shadow: 0 0 40px 20px rgba(255, 255, 255, 0.2);
+  background-image: var(--bg-img);
+  transition: 0.5s;
 }
 
 .front {
-  transform: translatez(var(--w));
-  background-image: url(/utils/wallpaper/w0.jpg);
+  transform: translatez(var(--offset));
 }
 
 .back {
-  transform: rotatey(180deg) translatez(var(--w));
-  background-image: url(/utils/wallpaper/w1.jpg);
+  transform: rotatey(180deg) translatez(var(--offset));
 }
 
 .left {
-  transform: rotatey(90deg) translatez(var(--w));
-  background-image: url(/utils/wallpaper/w2.jpg);
+  transform: rotatey(90deg) translatez(var(--offset));
 }
 
 .right {
-  transform: rotatey(-90deg) translatez(var(--w));
-  background-image: url(/utils/wallpaper/w3.jpg);
+  transform: rotatey(-90deg) translatez(var(--offset));
 }
 
 .top {
-  transform: rotatex(90deg) translatez(var(--w));
-  background-image: url(/utils/wallpaper/w4.jpg);
+  transform: rotatex(90deg) translatez(var(--offset));
 }
 
 .btm {
-  transform: rotatex(-90deg) translatez(var(--w));
-  background-image: url(/utils/wallpaper/w5.jpg);
+  transform: rotatex(-90deg) translatez(var(--offset));
 }
 
 .inner {
@@ -87,56 +83,34 @@ body {
 }
 
 .inner-front {
-  transform: translatez(calc(var(--w) / 2));
+  transform: translatez(var(--inner-w));
 }
 
 .inner-back {
-  transform: rotatex(180deg) translatez(calc(var(--w) / 2));
+  transform: rotatex(180deg) translatez(var(--inner-w));
 }
 
 .inner-left {
-  transform: rotatey(90deg) translatez(calc(var(--w) / 2));
+  transform: rotatey(90deg) translatez(var(--inner-w));
 }
 
 .inner-right {
-  transform: rotatey(-90deg) translatez(calc(var(--w) / 2));
+  transform: rotatey(-90deg) translatez(var(--inner-w));
 }
 
 .inner-top {
-  transform: rotatex(90deg) translatez(calc(var(--w) / 2));
+  transform: rotatex(90deg) translatez(var(--inner-w));
 }
 
 .inner-btm {
-  transform: rotatex(-90deg) translatez(calc(var(--w) / 2));
+  transform: rotatex(-90deg) translatez(var(--inner-w));
 }
 
-.wrap:hover .front {
-  transform: translatez(calc(var(--w) * 2));
-  opacity: 1;
+.wrap:hover {
+  --offset: var(--main-w);
 }
 
-.wrap:hover .back {
-  transform: rotatey(180deg) translatez(calc(var(--w) * 2));
-  opacity: 1;
-}
-
-.wrap:hover .left {
-  transform: rotatey(90deg) translatez(calc(var(--w) * 2));
-  opacity: 1;
-}
-
-.wrap:hover .right {
-  transform: rotatey(-90deg) translatez(calc(var(--w) * 2));
-  opacity: 1;
-}
-
-.wrap:hover .top {
-  transform: rotatex(90deg) translatez(calc(var(--w) * 2));
-  opacity: 1;
-}
-
-.wrap:hover .btm {
-  transform: rotatex(-90deg) translatez(calc(var(--w) * 2));
+.wrap:hover .item {
   opacity: 1;
 }
 
