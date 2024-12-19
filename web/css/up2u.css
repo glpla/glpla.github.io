@@ -62,20 +62,20 @@ button:hover {
   background-position: right center;
 }
 
+h3 {
+  margin-bottom: calc(2*var(--p-m-g));
+  text-transform: capitalize;
+}
+
+.iconfont {
+  font-size: 2rem;
+}
+
 table {
   position: relative;
   width: 100%;
   border-collapse: collapse;
   line-height: 2;
-}
-
-
-table thead {
-  position: sticky;
-  top: 0px;
-  text-align: left;
-  background-color: #fff;
-  z-index: 1;
 }
 
 .tbl-info td {
@@ -202,9 +202,8 @@ h1::before {
   font-size: 18px;
 }
 
-.iconfont {
-  /* transition: .2s; */
-  font-size: 26px;
+.nav .iconfont {
+  font-size: 2.4rem;
 }
 
 .nav-item.active,
@@ -216,10 +215,6 @@ h1::before {
 /* .nav-item:hover i {
   transform: scale(1.4);
 } */
-
-.nav-cont {
-  padding: var(--p-m-g);
-}
 
 h2 {
   position: relative;
@@ -332,25 +327,6 @@ h2 {
   gap: 2rem;
 }
 
-.home h3 {
-  text-align: center;
-  margin-bottom: 1rem;
-  font-size: 1.7rem;
-  /* border-bottom: 1px solid var(--color-blue); */
-  margin: 0;
-}
-
-.home .iconfont {
-  color: #666;
-  font-size: 1.8rem;
-}
-
-.home h3 .iconfont {
-  color: var(--color-blue);
-  margin-right: 0.5rem;
-  font-size: 2.2rem;
-}
-
 .intro {
   grid-area: inrto;
   padding: 2rem 0;
@@ -399,17 +375,9 @@ h2 {
   background-image: url(https://picsum.photos/800/600?random=12);
 }
 
-.tbl-sticky {
-  max-height: 30vh;
-  overflow: auto;
-}
-
-.tbl-sticky::-webkit-scrollbar {
-  width: 8px;
-}
-
-.tbl-sticky::-webkit-scrollbar-thumb {
-  background-color: var(--color-blue);
+.tbl-wrap,
+.skill-wrap {
+  margin-top: 10vh;
 }
 
 .tbl-sticky table th {
@@ -422,34 +390,37 @@ h2 {
   background-color: #f1f2f3;
 }
 
-.tbl-sticky h3 {
-  display: flex;
-  justify-content: center;
-}
-
 .skill {
   display: flex;
   flex-direction: column;
   gap: var(--p-m-g);
 }
 
-.tbl-skill .info {
+.skill-wrap .info {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: var(--p-m-g);
   font-size: 1.4rem;
+  margin-bottom: var(--p-m-g);
 }
 
-.tbl-skill .bar {
-  position: relative;
+.skill-wrap .info span:first-child {
+  flex-basis: 8rem;
+}
+
+.skill-wrap .bar {
+  flex: 1;
   height: 1.2rem;
   border-radius: 1rem;
   border: 1px solid var(--color);
   padding: 2px;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.tbl-skill .bar::before {
+.skill-wrap .bar::before {
   content: '';
-  display: block;
   width: calc(var(--per)*1%);
   height: 100%;
   border-radius: 1rem;
@@ -461,9 +432,7 @@ h2 {
 .team {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  grid-auto-rows: minmax(40vh, max-content);
   place-items: center;
-  gap: var(--p-m-g);
 }
 
 .team-item {
@@ -471,13 +440,14 @@ h2 {
   flex-direction: column;
   align-items: center;
   gap: var(--p-m-g);
-  padding: var(--p-m-g);
+  padding: calc(4*var(--p-m-g)) var(--p-m-g);
   text-align: center;
+  border: 1px solid #eee;
 }
 
 .team-imgs {
-  width: 180px;
-  height: 180px;
+  width: 15rem;
+  height: 15rem;
   perspective: 1000px;
   cursor: pointer;
 }
@@ -518,12 +488,9 @@ h2 {
   backface-visibility: hidden;
 }
 
-.team-item h3 {
-  text-transform: capitalize;
-}
-
 .team-item .more {
   background-image: linear-gradient(90deg, var(--color-orange), #f40);
+  box-shadow: var(--p-m-g) var(--p-m-g) #333;
 }
 
 .team-imgs:hover .team-border {
@@ -604,7 +571,6 @@ h2 {
 
 .figure-modal h3 {
   text-align: center;
-  margin-bottom: 2rem;
 }
 
 .figure-modal .modal-cont {
@@ -844,7 +810,39 @@ footer img {
   margin: var(--p-m-g);
 }
 
+.tri {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--p-m-g);
+  width: 200px;
+  margin: 0 auto;
+}
+
+.tri div {
+  width: 100px;
+  height: 100px;
+  background-image: var(--url);
+  background-size: cover;
+  background-position: center;
+  margin: 0 -25px;
+}
+
+.tri div:nth-child(1),
+.tri div:nth-child(3),
+.tri div:nth-child(4) {
+  clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0%);
+}
+
+.tri div:nth-child(2) {
+  clip-path: polygon(50% 0, 100% 100%, 0% 100%, 50% 0%);
+}
+
 @media screen and (max-width:768px) {
+  html {
+    font-size: 55%;
+  }
+
   body.active {
     overflow: hidden;
   }
@@ -873,7 +871,7 @@ footer img {
   .ham {
     display: block;
     position: relative;
-    width: 30px;
+    width: 3rem;
     height: 4px;
     background-color: var(--color-yellow);
   }
@@ -937,11 +935,13 @@ footer img {
     transition-delay: calc(var(--delay)*0.05s);
   }
 
-  .nav-item.active {}
-
   .nav.active .nav-item {
     transform: translateX(0) translateY(0);
     opacity: 1;
+  }
+
+  .nav-cont {
+    padding: var(--p-m-g);
   }
 
   h2 {
@@ -950,10 +950,6 @@ footer img {
 
   .input-box.message {
     min-height: 20vh;
-  }
-
-  .tbl-sticky {
-    max-height: 50vh;
   }
 
   footer {
