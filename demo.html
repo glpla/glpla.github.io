@@ -28,89 +28,20 @@
         }
 
         .wrap {
-            position: relative;
-            width: var(--w);
-            height: var(--w);
-            background-color: #eee;
-            transform-style: preserve-3d;
-            transform: rotateX(30deg) rotateY(40deg) rotateZ(20deg);
-            transition: 6s linear;
-        }
-
-        .wrap:hover {
-            --offset: var(--w);
-            transform: rotateX(360deg) rotateY(540deg) rotateZ(720deg);
-        }
-
-        .wrap * {
-            position: absolute;
-            inset: 0;
-            background-color: var(--bg-color);
-            transition: .5s;
-        }
-
-        .wrap div:nth-child(1) {
-            transform: translateZ(var(--offset));
-        }
-
-        .wrap div:nth-child(2) {
-            transform: rotateY(180deg) translateZ(var(--offset));
-        }
-
-        .wrap div:nth-child(3) {
-            transform: rotateY(-90deg) translateZ(var(--offset));
-        }
-
-        .wrap div:nth-child(4) {
-            transform: rotateY(90deg) translateZ(var(--offset));
-        }
-
-        .wrap div:nth-child(5) {
-            transform: rotateX(-90deg) translateZ(var(--offset));
-        }
-
-        .wrap div:nth-child(6) {
-            transform: rotateX(90deg) translateZ(var(--offset));
-        }
-
-        .outer {
-            width: 100px;
-            height: 100px;
-            background-color: #f40;
-        }
-
-        .inner {
-            width: 50px;
-            height: 50px;
-            background-color: #0a0;
+            width: 800px;
+            height: 600px;
+            background-image: url(/utils/wallpaper/blue.jpg);
+            background-size: cover;
+            background-position: center;
+            mask-image: url(/web/imgs/mask0.png);
+            mask-size: cover;
+            mask-position: center;
         }
     </style>
 </head>
 
 <body>
-    <div class="outer" data-id="120">
-        <!-- <div class="inner" data-id="100"></div> -->
-    </div>
-    <div class="wrap">
-        <div style="--bg-color:#f406"></div>
-        <div style="--bg-color:#0896"></div>
-        <div style="--bg-color:#8906"></div>
-        <div style="--bg-color:#0a06"></div>
-        <div style="--bg-color:#0aa6"></div>
-        <div style="--bg-color:#a0a6"></div>
-    </div>
-    <script>
-        const outer = document.querySelector('.outer');
-        // const inner = document.querySelector('.inner');
-        outer.addEventListener('click', (e) => {
-            console.log('outer', e, e.target, e.currentTarget);
-            console.log('data-id', e.target.dataset.id, e.currentTarget.dataset.id);
-        })
-        // inner.addEventListener('click', (e) => {
-        //     console.log('inner', e.target, e.currentTarget);
-        //     console.log('data-id', e.target.dataset.id, e.currentTarget.dataset.id);
-        // })
-    </script>
+    <div class="wrap"></div>
 </body>
 
 </html>
