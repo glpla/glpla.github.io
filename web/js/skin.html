@@ -10,17 +10,18 @@
   <base target="_blank">
   <style>
     html {
-      --txt-color: #303133;
       --bg-color: #f1f1f1;
+      --txt-color: #303133;
       --code-color: #dcdcaa;
       --code-bg-color: #000;
       --shadow-color: rgba(0, 0, 0, 0.1);
       background-color: var(--bg-color);
+      transition: 0.5s;
     }
 
     html.dark-theme {
-      --txt-color: #f1f1f1;
       --bg-color: #131313;
+      --txt-color: #f1f1f1;
       --code-color: #000;
       --code-bg-color: #f1f1f1;
       --shadow-color: rgba(255, 255, 255, 0.1);
@@ -227,6 +228,12 @@ html.dark-theme {
   <script>
     let themeInd = 0
     const theme = document.querySelector('#theme');
+    const isDarkMode = window.localStorage.getItem('dark-mode') === 'true';
+    if (isDarkMode) {
+      theme.className = 'iconfont icon-night-mode-fill';
+    } else {
+      theme.className = 'iconfont icon-daytime-mode-fill';
+    }
     theme.addEventListener('click', toggleTheme);
     function toggleTheme() {
       themeInd = (themeInd + 1) % 2;

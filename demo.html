@@ -5,10 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Demo</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4090429_02chf9er55ue.css">
     <style>
         :root {
-            --w: 300px;
-            --offset: calc(var(--w)/2);
+            --bg-color: #fff;
+            --txt-color: #000;
         }
 
         * {
@@ -21,38 +22,61 @@
             display: flex;
             flex-direction: column;
             gap: 100px;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             perspective: 1000px;
+            background-color: var(--bg-color);
+            color: var(--txt-color);
+            transition: background-color 0.5s, color 0.5s 0.2s;
+            overflow-x: hidden;
         }
 
-        .wrap {
-            width: 300px;
-            height: 300px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        .dark-mode {
+            --bg-color: #333;
+            --txt-color: #fff;
         }
 
-        .wrap div {
-            width: 100%;
-            height: 100%;
-            border: 1px solid #eee;
+        p {
+            width: 600px;
+            margin-bottom: 10px;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            right: 1rem;
+            top: 1rem;
+            font-size: 24px;
+            border-radius: 50%;
+            color: var(--txt-color);
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
-    <div class="wrap">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
+    <span class="iconfont icon-Moon-Star toggle-btn" id="toggle-btn"></span>
     </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque consequatur accusamus similique est
+        laudantium nam aliquam dolor ipsum officiis, eligendi iste molestias perspiciatis doloribus ratione omnis
+        provident eum culpa sequi.</p>
+    <p>Mollitia voluptate fugit magnam laudantium. Exercitationem autem pariatur dignissimos minus. Eaque dicta, minima
+        sunt in pariatur tempora tenetur voluptates modi, itaque reprehenderit recusandae deserunt? Tempora assumenda
+        velit atque debitis delectus?</p>
+    <p>Laboriosam minima dicta reiciendis quidem. Aspernatur vel vero nihil nam, accusantium debitis similique sint
+        placeat, repellendus, culpa accusamus et autem sit laudantium. Perspiciatis, nihil libero! Dolorem sint nulla
+        sit quaerat!</p>
+    <p>Saepe, officiis similique? Consectetur fuga non eveniet qui nemo nihil doloremque sint dolores quam, eos
+        architecto quasi, similique consequuntur dolore laborum placeat excepturi quae modi tempora reprehenderit
+        provident deserunt dignissimos.</p>
+    <script>
+        const toggleBtn = document.getElementById('toggle-btn');
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            toggleBtn.classList.remove('icon-Moon-Star');
+            toggleBtn.classList.add('icon-Sun');
+        });
+
+    </script>
 </body>
 
 </html>
