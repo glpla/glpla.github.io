@@ -105,7 +105,7 @@
 }</pre>
       </dd>
       <dt>参考代码 - 一般实现</dt>
-      <dd>触底加载 - 更多细节，请访问 <a href="../web/js/scroll.html">HTML - scroll</a></dd>
+      <dd>触底加载 - 更多细节，请访问 <a href="../web/scroll.html">HTML - scroll</a></dd>
       <dd>
         <pre>
 import axios from 'axios';
@@ -117,6 +117,7 @@ const loadList = () => {
       list.value = [...list.value, ...res.data.cont]
     })
 }
+
 const doScroll = () => {
   let html = document.documentElement;
   let per = html.scrollTop / (html.scrollHeight - html.clientHeight);
@@ -126,10 +127,12 @@ const doScroll = () => {
     loadList()
   }
 }
+
 onMounted(() => {
   loadList()
   window.addEventListener('scroll', doScroll)
 })
+
 onUnmounted(() => {
   window.removeEventListener('scroll', doScroll)
 })      </pre>

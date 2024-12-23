@@ -133,8 +133,8 @@ export const useCounterStore  = defineStore('counter', ()=>{
 import { storeToRefs } from 'pinia';
 let { count, increment } = storeToRefs(counterStore);</pre>
         </dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 商品的仓库管理；更多实现，请参考 <a href="./drill_router1.html">路由2 -
-                综合运用</a> <a href="./pro_lists.html">项目 - 商品列表</a></dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 商品的仓库管理；更多实现，请参考 <a href="./drill_router.html">实操 -
+                路由综合运用 - 页面导航</a>、<a href="./pro_lists.html">项目 - 商品列表</a></dd>
         <dd class="sn">
             <div>创建仓库 - 商品 goods、状态 isLoading、请求 fetchGoods</div>
             <div>请求商品数据 - 分别使用 fetch 和 axios</div>
@@ -169,12 +169,12 @@ onMounted(() => {
 &lt;/div&gt;</pre>
         </dd>
         <dd class="tips">在开发者视图中，使用慢速网络查看状态变化</dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_cart_pinia.html">实操 - 购物车优化</a></dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_pinia.html">实操 - 状态综合运用 - 购物车</a></dd>
         <dd>使用仓库并更新仓库</dd>
         <dd>[<span class="iconfont icon-keyboard"></span>] 侦听仓库变化显示提示信息</dd>
         <dd>
             <div>商品仓库和购物车仓库都有数据加载。可以通过侦听仓库的isLoading给前端相应的提示</div>
-            <div>msg可以提供给模态框使用。更多信息，请访问 <a href="./drill_modal.html">实训 - 模态框</a></div>
+            <div>msg可以提供给模态框使用。更多信息，请访问 <a href="./drill_modal.html">实操 - 模态框</a></div>
             <pre>
 watch(() => goodStore.isLoading, (newVal, oldVal) => {
     if (newVal) {
@@ -185,7 +185,7 @@ watch(() => goodStore.isLoading, (newVal, oldVal) => {
     show.value = true;
 })</pre>
         </dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 定义导航菜单仓库，详情请查看 <a href="./drill_menu.html">实操 - 汉堡菜单</a></dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 定义导航菜单仓库，详情请查看 <a href="./drill_ham.html">实操 - 汉堡菜单</a></dd>
         <dd>
             <div>项目从桌面端切换到移动端时，菜单折叠，由汉堡按钮控制折叠和展开；单击菜单项时，折叠菜单</div>
             <div>1. 创建仓库 - 仓库参考代码 menu.js</div>
@@ -203,12 +203,12 @@ export const useMenuStore = defineStore('menu', () => {
 })</pre>
             <div>2. 在使用仓库的组件结构中，引入仓库，通过汉堡按钮的单击，由标记 flag 控制动态类的应用，达到菜单的折叠和展开</div>
             <div>改进：单击菜单项，折叠菜单</div>
-            <div>提示：在路由配置中，引入仓库，在导航前置守卫中实例化仓库并切换标记switchFlag；请查看 <a href="./router5.html">路由 - 导航守卫</a></div>
+            <div>提示：在路由配置中，引入仓库，在导航前置守卫中实例化仓库并切换标记switchFlag；请查看 <a href="./router_guard.html">路由 - 导航守卫</a></div>
         </dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 暗黑模式</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 主题切换/换肤 - 日夜模式</dd>
         <dd class="sn">
-            <p>通过为html指定自定义属性实现CSS变量的更新达到切换效果</p>
-            <div>主题样式 - 这里仅给出需要变化的CSS变量，其它变量可以在额外的 :root单独定义</div>
+            <p>通过为 html 指定自定义属性实现 CSS 变量的更新达到切换效果</p>
+            <div>主题样式 - 这里仅给出需要变化的 CSS 变量，其它变量可以在额外的 :root 单独定义</div>
             <pre>
 :root {
     --txt-color: #303133;
@@ -216,6 +216,14 @@ export const useMenuStore = defineStore('menu', () => {
     --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
+// 类形式
+.data-theme {
+    --txt-color: #f1f1f1;
+    --bg-color: #131313;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+}
+
+// 属性形式
 [data-theme="dark"] {
     --txt-color: #f1f1f1;
     --bg-color: #131313;

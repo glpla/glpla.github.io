@@ -62,10 +62,14 @@
   <script src="/utils/lib/vue.global.prod.min.js"></script>
   <script>
     const { createApp, ref, computed, onMounted, onBeforeMount, watch } = Vue
-    createApp({
+    const app = createApp({
       setup() {
         const navs = ref([{
           ind: 0,
+          title: "2025春季",
+          cont: []
+        }, {
+          ind: 1,
           title: '2024秋季',
           cont: [
             {
@@ -96,7 +100,7 @@
           ]
         },
         {
-          ind: 1,
+          ind: 2,
           title: '2024春季',
           cont: [
             {
@@ -112,7 +116,7 @@
           ]
         },
         {
-          ind: 2,
+          ind: 3,
           title: '2023秋季',
           cont: [
             {
@@ -210,7 +214,8 @@
           toggleSubMenu
         }
       }
-    }).mount('#app')
+    })
+    app.mount('#app')
   </script>
 </body>
 

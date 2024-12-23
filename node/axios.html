@@ -24,33 +24,31 @@
     <span>网络请求</span>
   </header>
   <dl>
-    <dt>简介 Overview</dt>
-    <dd>异步请求；基于 Promise 的 HTTP 库，可以用在浏览器和 Node.js 中</dd>
-    <dd>通用、主流的第三方库；用于获取本地和远程 JSON 数据</dd>
-    <dd>默认是 Promise 用法；支持 async/await 用法</dd>
-    <dd>自动转换 JSON 数据</dd>
-    <dd>更多信息，点击访问 <a href="https://www.axios-http.cn/">Axios 中文网</a></dd>
-    <dt>环境部署 Deplyment</dt>
-    <dd>1. 安装 - 在项目目录安装</dd>
+    <dt>Overview</dt>
     <dd>
-      <pre>>npm i axios --save</pre>
+      <div>异步请求；基于 <a href="../node/promise.html">Promise</a> 的 HTTP 库，广泛应用于浏览器和 Node.js</div>
+      <div>通用、主流的第三方库；用于获取本地和远程资源，如 JSON 数据、图片等</div>
+      <div>默认是 Promise 用法；支持 async/await 用法</div>
+      <div>自动转换 JSON 数据</div>
+      <div>更多信息，点击访问 <a href="https://www.axios-http.cn/">Axios 中文网</a></div>
     </dd>
-    <dd>2. 引入 - 在项目中引入，并 <span class="warn">根据需要</span>
-      全局配置|指定默认参数，如baseURL、params、method、header、timeout；baseURL应和数据服务器的地址保持一致</dd>
+    <dt>Deplyment</dt>
     <dd>
+      <div>1. 安装 - 在项目目录安装</div>
+      <pre>npm i axios --save</pre>
+      <div>2. 引入 - 在项目中引入，并<span class="warn">根据需要</span>全局配置|指定默认参数，如 baseURL、params、method、header、timeout；baseURL
+        应和数据服务器的地址保持一致</div>
       <pre>
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000'
 axios.defaults.timeout = 3000</pre>
-    </dd>
-    <dd>3. 使用 - 在组件的逻辑中请求数据，并应用到组件的结构中；<span class="warn">资源服务器应提前开启，并严格按照接口使用</span></dd>
-    <dd class="tips">也可以使用CDN方式 - 适合浏览器环境；建议将库下载到本地使用。。。CDN网络经常。。。</dd>
-    <dd>
+      <div>3. 使用 - 在组件的逻辑中请求数据，并应用到组件的结构中</div>
+      <div>资源服务器应<span class="warn">提前开启</span>，并严格按照接口使用</div>
+      <div>也可以使用CDN方式，如 <a href="https://cdnjs.com/">cdnjs</a>、<a href="https://www.bootcdn.cn/">bootcdn</a> -
+        适合浏览器环境；建议将库下载到本地使用。。。CDN网络经常。。。</div>
       <pre>
 &lt;script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"&gt;&lt;/script&gt;</pre>
     </dd>
-    <dd><a href="https://cdnjs.com/">cdnjs</a></dd>
-    <dd><a href="https://www.bootcdn.cn/">bootcdn</a></dd>
     <dt>请求方式</dt>
     <dd class="sn">
       <div>承诺 promise</div>
@@ -82,7 +80,7 @@ async function getUser() {
   <div class="chap">常用 API</div>
   <dl>
     <dt>获取 GET</dt>
-    <dd>可以传递参数；传递的参数在req.query中获取</dd>
+    <dd>可以传递参数；S端使用 req.query 获取</dd>
     <dd class="sn">
       <div>无参</div>
       <pre>
