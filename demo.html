@@ -75,27 +75,22 @@
         }
 
         .wrap {
-            position: relative;
-            width: 800px;
-            aspect-ratio: 16/9;
-            background-image: url(/utils/wallpaper/deer.jpg);
-            background-size: cover;
-            background-position: center;
-            mask-image: url(/utils/wallpaper/blue.jpg);
-            mask-size: cover;
-            mask-position: center;
+            width: 100%;
+            height: 100vh;
         }
 
         video {
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
     </style>
 </head>
 
 <body>
     <div class="wrap">
-        <!-- <video src="/utils/video/有我在.mp4" controls></video> -->
+        <video src="/utils/video/flag.mp4" loop></video>
     </div>
     <div class="toggle-btn" id="toggle-btn">
         <span class="iconfont icon-Moon-Star"></span>
@@ -114,6 +109,7 @@
         architecto quasi, similique consequuntur dolore laborum placeat excepturi quae modi tempora reprehenderit
         provident deserunt dignissimos.</p>
     <script>
+        const video = document.querySelector('video');
         const toggleBtn = document.getElementById('toggle-btn');
         toggleBtn.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
@@ -125,7 +121,9 @@
                 toggleBtn.children[0].classList.remove('icon-Sun');
             }
         });
-
+        video.addEventListener('click', () => {
+            video.paused ? video.play() : video.pause();
+        })
     </script>
 </body>
 
