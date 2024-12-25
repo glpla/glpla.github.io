@@ -55,6 +55,10 @@
       padding: 0 var(--p-m-g);
     }
 
+    table tr:nth-child(even) {
+      background-color: #eee;
+    }
+
     .loader {
       display: none;
       animation: rolling 1s linear infinite;
@@ -106,6 +110,40 @@
     .loading table,
     .loading .pagination {
       display: none;
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        justify-content: flex-start;
+      }
+
+      table,
+      thead,
+      tbody,
+      tr,
+      th,
+      td {
+        display: block;
+      }
+
+      thead tr {
+        display: none;
+      }
+
+      tbody td {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      tbody td::before {
+        content: attr(data-label);
+        text-transform: capitalize;
+      }
+
+      tbody td:not(:last-child) {
+        border-bottom: 1px solid #ddd;
+      }
+
     }
   </style>
 </head>
@@ -174,10 +212,10 @@
         row +=
           `
       <tr>
-        <td>${item.name.first} ${item.name.last}</td>
-        <td>${item.gender}</td>
-        <td>${item.location.city}</td>
-        <td>${item.email}</td>
+        <td data-label='name'>${item.name.first} ${item.name.last}</td>
+        <td data-label='gender'>${item.gender}</td>
+        <td data-label='city'>${item.location.city}</td>
+        <td data-label='email'>${item.email}</td>
       </tr>
         `
       })
