@@ -16,16 +16,18 @@
         <span>&commat;Params</span>
     </header>
     <dl>
-        <dd>在URL后面采用 <span class="warn">路径</span> 的方式传递参数，将给定匹配模式的路由映射到<span class="warn">同一个</span>组件，如/goods/1 和
-            /goods/2 这样的 URL 都会映射到同一个路由 /goods: 在同一个页面根据 id 显示不同的商品 </dd>
-        <dd>使用一个或多个动态字段来实现；? 表示该参数 <span class="warn">可选</span></dd>
-        <dd>动态路由参数由路由的 <span class="warn">params</span> 接收</dd>
-        <dd>动态属性绑定 to 时，<span class="warn">只能</span> 使用命名路由 name，不可以使用普通路由 path - 因为匹配不到</dd>
-        <dd class="warn">Path "/xxx" was passed with params but they will be ignored. Use a
-            named route alongside params instead.</dd>
+        <dd>
+            <div>在 URL 后面采用 <span class="warn">路径</span> 的方式传递参数，将给定匹配模式的路由映射到<span class="warn">同一个</span>组件，如 /goods/1
+                和 /goods/2 这样的 URL 都会映射到同一个路由 /goods: 在同一个页面根据 id 显示不同的商品 </div>
+            <div>使用一个或多个动态字段来实现； <span class="warn">?</span> 表示该参数可选</div>
+            <div>动态路由参数由路由的 <span class="warn">params</span> 接收</div>
+            <div>动态属性绑定 to 时，<span class="warn">只能使用命名路由 name</span>，不可以使用普通路由 path - 因为匹配不到</div>
+            <div class="warn">Path "/xxx" was passed with params but they will be ignored. Use a named route alongside
+                params instead.</div>
+        </dd>
         <dt>配置路由参数</dt>
         <dd>
-            <div>根据id展示对应的内容</div>
+            <div>根据 id 展示对应的内容</div>
             <pre>
 {
     path: '/html/:id',
@@ -55,14 +57,11 @@
         <dd>
             <div>在路由目标组件 - 使用 useRoute 实例，接收路由参数，可以在逻辑和结构中使用</div>
             <div><span class="warn">useRoute()</span> 是一个全局注入的函数，用于在组件中获取当前激活的路由信息。它返回一个 RouteLocationNormalized
-                对象，包含了当前路由的所有属性，如
-                path、params、query 等</div>
-            <div>逻辑</div>
+                对象，包含了当前路由的所有属性，如 path、params、query 等</div>
             <pre>
 import { useRoute } from 'vue-router'
 let route = useRoute()
 console.log(route.params.id);</pre>
-            <div>结构 </div>
             <pre>&lt;div&gt;{{ route.params.id }}&lt;/div&gt;</pre>
             <div>如果 <span class="warn">仅仅</span> 在结构中使用，可以使用默认的全局变量 $route 解析并使用；不建议</div>
             <pre>&lt;div&gt;{{ $route.params.id }}&lt;/div&gt;</pre>
@@ -97,7 +96,6 @@ console.log(route.params.id);</pre>
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-    <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

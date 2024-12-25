@@ -17,13 +17,13 @@
     </header>
     <dl>
         <dd>以下两个函数仅在 Vue 3 的 Composition API 环境下使用</dd>
-        <dt>useRoute()</dt>
+        <dt><a href="https://router.vuejs.org/zh/api/#Functions-useRoute">useRoute()</a></dt>
         <dd>
             <div>全局注入的函数，它返回一个 RouteLocationNormalized 对象，包含了当前路由的所有属性，如
                 path、params、query 等</div>
             <div>用于在组件中获取当前激活的 <span class="warn">路由信息</span></div>
             <div>需引入路由包 useRoute 并创建路由实例 route</div>
-            <div>更多信息，请访问 <a href="https://router.vuejs.org/api/interfaces/RouteLocationNormalizedLoaded.html">官方文档 -
+            <div>更多信息，请访问 <a href="https://router.vuejs.org/zh/api/interfaces/RouteLocationNormalizedLoaded.html">
                     RouteLocationNormalizedLoaded</a></div>
             <pre>
 import { useRoute } from 'vue-router'
@@ -56,14 +56,14 @@ const route = useRoute()</pre>
                 </tr>
             </table>
         </dd>
-        <dt>useRouter()</dt>
+        <dt><a href="https://router.vuejs.org/zh/api/#Functions-useRouter">useRouter()</a></dt>
         <dd>
             <div>全局注入的函数，用于获取路由器实例，以便 <span class="warn">操作路由</span> ，如 push、replace、go 等</div>
             <div>除了使用 &lt;router-link&gt; 创建路由|声明式路由，还可以借助 router 相关 API 实现编程路由；类似于 &lt;a&gt; 和 location.href 的关系</div>
             <div>需引入路由包 useRouter 并创建路由实例 router</div>
             <div>可以使用普通路由 path；也可以使用命名路由 name</div>
             <div>可以指定路由参数 params 或 query</div>
-            <div>更多信息，请访问 <a href="https://router.vuejs.org/zh/api/interfaces/Router.html">官方文档 - useRouter</a></div>
+            <div>更多信息，请访问 <a href="https://router.vuejs.org/zh/api/interfaces/Router.html">useRouter</a></div>
             <pre>
 import { useRouter } from 'vue-router'
 const router = useRouter()</pre>
@@ -75,7 +75,7 @@ const router = useRouter()</pre>
                 </tr>
                 <tr>
                     <td>push</td>
-                    <td>导航时向 history 添加新记录|压入路由，并跳转到目标；单击&lt;router-link&gt;时触发；可以逐级返回</td>
+                    <td>导航时向 history 添加新记录|压入路由，并跳转到目标；单击 &lt;router-link&gt; 时触发；可以逐级返回</td>
                 </tr>
                 <tr>
                     <td>replace</td>
@@ -112,7 +112,7 @@ router.push({ name: 'user', params: { username: 'eduardo' } })
 router.push({ path: '/user', query: { bread: 'user' }, replace: true })
 router.replace({ path: '/user', query: { bread: 'user' } })</pre>
         </dd>
-        <dd class="example-sn">加载完毕后跳转至首页 - 在生命周期函数中，使用延时 setTimeout 模拟实现</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 加载完毕后跳转至首页 - 在生命周期函数中，使用延时 setTimeout 模拟实现</dd>
         <dd>
             <pre>
 //引入
@@ -128,7 +128,7 @@ onMounted(()=>{
     }, 3000)
 })</pre>
         </dd>
-        <dd class="example-sn">分享页面 - 添加商品id作为查询路由参数</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 分享页面 - 添加商品 id 作为查询路由参数</dd>
         <dd class="sn">
             <div>分享 URL</div>
             <pre>
@@ -142,11 +142,10 @@ onMounted(() => {
     // axios.get(`/api/todo/${id}`).then(res => {})
 })</pre>
         </dd>
-        <dd class="example-sn">找人代付 - 添加用户订单信息作为查询路由参数</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 找人代付 - 添加用户订单信息作为查询路由参数</dd>
         <dd>略</dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-    <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

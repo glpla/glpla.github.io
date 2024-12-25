@@ -17,14 +17,14 @@
     </header>
     <dl>
         <dt>&lt;KeepAlive&gt;</dt>
-        <dd>内置组件</dd>
-        <dd>多个组件间动态切换时，默认情况下，组件被替换掉|unmount，再次回来时，状态被挂载onmount，并重新初始化，类似于 v-if 的执行</dd>
-        <dd>特定情况下，当组件恢复时，为了继续使用其状态 - <span class="warn">恢复现场</span>，需要缓存|保留被移除的组件实例；同：函数的执行、调试断点</dd>
-        <dd>使用 &lt;KeepAlive&gt; 内置组件缓存组件；默认会缓存内部的所有组件实例；可以使用属性 include 和 exclude属性定制缓存行为</dd>
-        <dd>还可以使用属性 max 指定最大缓存组件数</dd>
-        <dd>各管理平台的标签页应用</dd>
-        <dd>更多信息，请访问 <a href="https://cn.vuejs.org/guide/built-ins/keep-alive.html">官方文档 - KeepAlive</a></dd>
         <dd>
+            <div>内置组件</div>
+            <div>多个组件间动态切换时，默认情况下，组件被替换掉 | unmount，再次回来时，状态被挂载onmount，并重新初始化，类似于 v-if 的执行</div>
+            <div>特定情况下，当组件恢复时，为了继续使用其状态 - <span class="warn">恢复现场</span>，需要缓存 | 保留被移除的组件实例；同：函数的执行、调试断点</div>
+            <div>使用 &lt;KeepAlive&gt; 内置组件缓存组件；默认会缓存内部的所有组件实例；可以使用属性 include 和 exclude 属性定制缓存行为</div>
+            <div>还可以使用属性 max 指定最大缓存组件数</div>
+            <div>各管理平台的标签页应用</div>
+            <div>更多信息，请访问 <a href="https://cn.vuejs.org/guide/built-ins/keep-alive.html">官方文档 - KeepAlive</a></div>
             <table>
                 <caption>缓存组件属性</caption>
                 <tr>
@@ -44,8 +44,6 @@
                     <td>最大缓存组件数</td>
                 </tr>
             </table>
-        </dd>
-        <dd>
             <pre>
 &lt;template&gt;
     &lt;KeepAlive&gt;
@@ -54,14 +52,17 @@
 &lt;/template&gt;</pre>
         </dd>
         <dt>钩子函数</dt>
-        <dd>缓存实例的生命周期；更多生命周期函数，请查看 <a href="./lifetime.html">生命周期函数 - Lifetime</a></dd>
-        <dd>组件缓存后而仍作为组件树的一部分时，它将变为不活跃状态而不是被卸载</dd>
-        <dd>onActivated()</dd>
-        <dd>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件被插入到 DOM 中时调用</dd>
-        <dd>onDeactivated()</dd>
-        <dd>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件从 DOM 中被移除时调用</dd>
-        <dd class="example-sn">模拟用户个人中心的标签页，并查看各组件的生命周期函数；详情请参考 <a href="./drill_tabs.html">实操 - 标签页</a></dd>
-        <dd class="example-sn">路由缓存 - 不是简单的使用缓存组件包裹，而应该使用动态组件实现</dd>
+        <dd>
+            <div>缓存实例的生命周期；更多生命周期函数，请查看 <a href="./lifetime.html">生命周期函数 - Lifetime</a></div>
+            <div>组件缓存后而仍作为组件树的一部分时，它将变为不活跃状态而不是被卸载</div>
+            <div>1. onActivated()</div>
+            <div>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件被插入到 DOM 中时调用</div>
+            <div>2. onDeactivated()</div>
+            <div>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件从 DOM 中被移除时调用</div>
+        </dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 模拟用户个人中心的标签页，并查看各组件的生命周期函数；详情请参考 <a
+                href="./drill_component.html">实操 - 组件综合运用 - 标签页</a></dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 路由缓存 - 不是简单的使用缓存组件包裹，而应该使用动态组件实现</dd>
         <dd>
             <pre>
 &lt;RouterView v-slot="{ Component }"&gt;

@@ -16,19 +16,12 @@
         <span>&commat;Route</span>
     </header>
     <dl>
-        <dd>应指定路由工作模式 history 和路由信息 routes</dd>
-        <dd>所有的路由配置位于项目文件夹src → router中，通常是index.js；也可以按模块 module定义再引入</dd>
-        <dd>每一个组件都是一个单组件文件 SCF，后缀名是 .vue；引入组件时，可以省略后缀名</dd>
-        <dd>路由组件应该集中、分类存放，如pages文件夹、views文件夹等视图类文件夹；其它一般组件则存放于components文件夹</dd>
-        <dd>更多信息，请访问 <a href="https://router.vuejs.org/zh/" class="link">官方文档 - Vue Router</a></dd>
-        <dt>安装路由</dt>
         <dd>
-            <div>可以创建项目的时候指定使用路由，自动生成路由配置文件，推荐 <i class="iconfont icon-thumbup"></i></div>
+            <div>推荐创建项目的时候指定使用路由，自动生成路由配置文件 <i class="iconfont icon-thumbup"></i></div>
             <div>也可以单独安装路由依赖；需要单独配置并引入，比较麻烦，不推荐</div>
+            <div>1. 安装路由 - 为项目添加安装依赖</div>
             <pre>npm i vue-router -S</pre>
-        </dd>
-        <dt>引入路由</dt>
-        <dd>
+            <div>2. 引入路由</div>
             <div>在入口文件 main.js 中引入路由，作为中间件使用</div>
             <pre>
 //引入
@@ -37,14 +30,28 @@ import router from './router'
 //使用 - 链式
 app.use(router).mount('#app')</pre>
         </dd>
-        <dt>定义路由</dt>
+    </dl>
+    <div class="chap">创建路由 createRouter()</div>
+    <dl>
         <dd>
-            <div>按照值对形式 name-value 定义路由信息；其中，路径 path 和组件 component 是必填项</div>
+            <div>根据配置的路由、路由模式等信息创建路由实例</div>
+            <div>更多信息，请访问 <a href="https://router.vuejs.org/">Vue Router</a>、<a
+                    href="https://router.vuejs.org/api/interfaces/RouteRecordNormalized.html">
+                    RouteRecordNormalized</a></div>
+        </dd>
+        <dt>配置路由 routes</dt>
+        <dd>
+            <div>按照值对形式 name-value 配置路由，即把 URL 路径映射到组件；其中，路径 path 和组件 component 是必填项</div>
+            <div>所有的路由配置位于项目文件夹 src → router 中，通常是 index.js</div>
+            <div>1. 路径 path</div>
             <div>/ 代表根路由</div>
             <div>子路由的 path 可以省略父级路由，不用 /</div>
-            <div>404路由：使用自定义的路径参数|正则表达式匹配其它任意路径；通常是 <span class="warn">最后一个</span> 路由配置项</div>
-            <div>更多路由属性，请访问 <a href="https://router.vuejs.org/zh/api/interfaces/RouteRecordNormalized.html">官方文档 -
-                    RouteRecordNormalized</a></div>
+            <div>404 路由：使用自定义的路径参数|正则表达式匹配其它任意路径；通常是<span class="warn">最后一个</span>路由配置项</div>
+            <div>2. 组件 component</div>
+            <div>每一个组件都是一个视图 view</div>
+            <div>每一个组件都是一个单组件文件 SCF</div>
+            <div>组件后缀名是 .vue；引入组件时，可以省略后缀名</div>
+            <div>路由组件应该集中、分类存放，如 pages 文件夹、views 文件夹等视图类文件夹；其它一般组件则存放于 components 文件夹</div>
             <table>
                 <caption>路由配置属性</caption>
                 <tr>
@@ -80,24 +87,37 @@ app.use(router).mount('#app')</pre>
                     <td>是否启用路由参数；可以接收动态路由参数和查询路由参数</td>
                 </tr>
             </table>
+            <pre>
+const routes = [
+  { path: '/', component: HomeView },
+  { path: '/about', component: AboutView },
+]</pre>
             <div class="tips">
-                <div>可以使用模块定义路由信息再引入，便于管理和复用，如用于导航菜单</div>
                 <div>嵌套路由通常让父路由重定向到子路由；也可以在子路由中添加空路由实现，但是不建议</div>
+                <div>可以使用模块定义路由信息再引入，便于管理和复用，如用于导航菜单</div>
             </div>
         </dd>
-        <dd class="example-sn">路由文件 index.js 配置示例</dd>
+        <dt>创建路由实例 router</dt>
         <dd>
+            <div>应指定路由工作模式 history 和配置的路由信息 routes</div>
             <pre>
-//引入路由包
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+})</pre>
+            <div>为了使用路由，还要引入相应的包；完整路由创建如下</div>
+            <pre>
+// 引入路由包
 import {createRouter, createWebHistory} from 'vue-router'
 
-//引入路由组件Home；其它组件可以按需导入
+// 引入路由组件Home；其它组件可以按需导入
 import Home from '@/pages/Home'
 
-//创建|定义路由
+// 创建路由实例
 const router = createRouter({
-    //路由模式：history、hash；默认是 history；建议使用 hash
+    // 路由模式：history、hash；默认是 history；建议使用 hash
     history: createWebHistory(import.meta.env.BASE_URL),
+    // 配置路由
     routes : [
         {
             path: '/',
@@ -153,12 +173,16 @@ const router = createRouter({
 export default router
 </pre>
         </dd>
-        <dt>使用路由 &lt;router-link&gt;</dt>
+    </dl>
+    <div class="chap">使用路由 Usage</div>
+    <dl>
+        <dt>模板</dt>
         <dd>
+            <div>1. &lt;router-link&gt;</div>
             <div>借助自定义组件 &lt;router-link&gt; 来创建链接|路由；相当于 &lt;a&gt;；使用属性 to 代替了属性 href</div>
             <div>默认是 push 模式，浏览器可以回退；使用 replace 属性可以防止浏览器回退</div>
-            <div>更多信息，请访问 <a href="https://router.vuejs.org/zh/api/interfaces/RouterLinkProps.html">官方文档 -
-                    RouterLinkProps</a></div>
+            <div>更多信息，请访问 <a href="https://router.vuejs.org/api/interfaces/RouterLinkProps.html">RouterLinkProps</a>
+            </div>
             <pre>
 //&lt;router-link&gt; - 字符串方法
 &lt;router-link to = "/home" &gt;home&lt;/router-link&gt;
@@ -175,16 +199,14 @@ export default router
 &lt;router-link replace :to = "{name: 'home'}" &gt;home&lt;/router-link&gt;
 &lt;router-link :replace = {{true}} :to = "{name: 'home'}" &gt;home&lt;/router-link&gt;
 &lt;router-link :to = "{name: 'home', replace: true}" &gt;home&lt;/router-link&gt;</pre>
-        </dd>
-        <dt>渲染路由 &lt;router-view&gt;</dt>
-        <dd class="sn">
-            <p>路由目标占位符</p>
-            <p>借助系统组件&lt;router-view&gt;显示与 URL 对应的组件|路由出口</p>
-            <p>有&lt;router-link&gt;路由，则必须有&lt;router-view&gt;路由出口</p>
-            <p>还可以像缓存组件那样，缓存&lt;router-view&gt;，见后例</p>
-            <div>单&lt;router-view&gt; - 应用更为常见</div>
-            <div>多&lt;router-view&gt; - 允许你在同一个页面同时展示多个组件，每个组件对应不同的视图区域，提高了单页应用的复用性和可维护性</div>
-            <p>路由配置由 component 该为 components</p>
+            <div>2. &lt;router-view&gt;</div>
+            <div>路由目标占位符</div>
+            <div>借助系统组件 &lt;router-view&gt; 显示与 URL 对应的组件|路由出口</div>
+            <div>有 &lt;router-link&gt; 路由，则必须有 &lt;router-view&gt; 路由出口</div>
+            <div>还可以像缓存组件那样，缓存 &lt;router-view&gt;，见后例</div>
+            <div>单 &lt;router-view&gt; - 应用更为常见</div>
+            <div>多 &lt;router-view&gt; - 允许你在同一个页面同时展示多个组件，每个组件对应不同的视图区域，提高了单页应用的复用性和可维护性</div>
+            <div>路由配置由 component 该为 components</div>
             <pre>
 {
     path: '/',
@@ -196,19 +218,25 @@ export default router
         main: () => import('../components/Main.vue'),
     }
 }</pre>
-            <p>多个 &lt;router-view&gt; 使用 name 属性区分，避免嵌套路由</p>
+            <div>多个 &lt;router-view&gt; 使用 name 属性区分，避免嵌套路由</div>
             <pre>
 &lt;router-view name="aside"&gt;&lt;/router-view&gt;
 &lt;router-view name="header"&gt;&lt;/router-view&gt;
 &lt;router-view name="main"&gt;&lt;/router-view&gt;</pre>
         </dd>
-        <dd class="example-sn">定制单页路由，使用生命周期函数检查各路由组件的挂载和卸载情况；更多详情，请访问 <a href="./lifetime.html">生命周期函数 -
-                lifetime</a>、<a href="./drill_router0.html">定制路由</a></dd>
-        <dd class="example-sn">定制全站路由；更多详情，请访问<a href="./drill_router0.html">定制路由</a></dd>
-        <dd class="example-sn">使用多路由视图定制全站路由；更多详情，请访问<a href="./drill_router0.html">定制路由</a></dd>
+        <dt>逻辑</dt>
+        <dd>
+            <div>使用组合式函数访问路由实例和当前路由</div>
+            <div>更多信息，请查看后续路由内容</div>
+            <pre>
+import { useRoute, useRouter } from 'vue-router'
+const router = useRouter()
+const route = useRoute()</pre>
+        </dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_router0.html">单页路由</a></dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_router.html">全站路由</a></dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-    <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

@@ -17,11 +17,15 @@
     </header>
     <dl>
         <dt>路由组件传参 - props</dt>
-        <dd>按照组件传参的形式传递路由参数</dd>
-        <dd>使用更方便</dd>
-        <dd>默认是针对 动态路由|params 类型的路由参数；而 查询路由|query 需要特别处理</dd>
-        <dd>配置项 props 可以是：<span class="warn">布尔值</span>、<span class="warn">对象</span>或<span class="warn">函数</span></dd>
-        <dd>更多信息，请访问 <a href="https://router.vuejs.org/zh/guide/essentials/passing-props.html">官方文档 - Props</a></dd>
+        <dd>
+            <div>按照组件传参的形式传递路由参数</div>
+            <div>使用更方便</div>
+            <div>默认是针对 动态路由 | params 类型的路由参数；而 查询路由 | query 需要特别处理</div>
+            <div>配置项 props 可以是：<span class="warn">布尔值</span>、<span class="warn">对象</span>或<span class="warn">函数</span>
+            </div>
+            <div>更多信息，请访问 <a href="https://router.vuejs.org/guide/essentials/passing-props.html">Props</a>
+            </div>
+        </dd>
         <dt>props 为 布尔值</dt>
         <dd class="sn">
             <p>应用最多；动态路由参数将被当作同名属性参数在组件中使用</p>
@@ -33,7 +37,7 @@
     component: Home,
     props: true
 }</pre>
-            <div>传递路由参数 - 更多参数传递方式，请参考 <a href="./router1.html">动态路由</a></div>
+            <div>传递路由参数 - 更多参数传递方式，请参考 <a href="./router_params.html">动态路由</a></div>
             <pre>&lt;router-link to="/home/10/webjs/hi"&gt;html&lt;/router-link&gt;</pre>
             <div>接收路由参数 - 按组件传参时，普通属性的定义和使用</div>
             <p>&lt;script&gt; - 定义属性来接收路由参数</p>
@@ -44,10 +48,10 @@ const props = defineProps(['id', 'title', 'cont'])</pre>
 &lt;div&gt;{{id}} - {{title}} - {{cont}}&lt;/div&gt;</pre>
         </dd>
         <dt>props 为 函数</dt>
-        <dd>接收当前的 route 对象作为参数，包含路由的各种信息：name、params、path、query；返回一个 defineProps()的声明</dd>
+        <dd>接收当前的 route 对象作为参数，包含路由的各种信息：name、params、path、query；返回一个 defineProps() 的声明</dd>
         <dd>适用于需要 <span class="warn">特别处理</span>的情况，和路由类型及参数无关，可以用来处理查询路由</dd>
         <dd>除了使用路由信息外，还可以添加自定义的静态数据</dd>
-        <dd class="example-sn">使用查询路由</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 使用查询路由</dd>
         <dd class="sn">
             <div>配置路由参数 - 使用路由的 query 数据</div>
             <pre>
@@ -57,7 +61,7 @@ const props = defineProps(['id', 'title', 'cont'])</pre>
     component: Home,
     props: route => route.query
 }</pre>
-            <div>传递路由参数 - 更多参数传递方式，请参考 <a href="./router2.html">查询路由</a></div>
+            <div>传递路由参数 - 更多参数传递方式，请参考 <a href="./router_query.html">查询路由</a></div>
             <pre>
 &lt;router-link :to="{ path: '/home', query: { id: 100, title: 'leading', cont: 'hi' } }"&gt;home&lt;/router-link&gt;</pre>
             <div>接收路由参数</div>
@@ -68,7 +72,7 @@ const props = defineProps(['id', 'title', 'cont'])</pre>
             <pre>
 &lt;div&gt;{{id}} - {{title}} - {{cont}}&lt;/div&gt;</pre>
         </dd>
-        <dd class="example-sn">使用动态路由 - 注意类型转换</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 使用动态路由 - 注意类型转换</dd>
         <dd>
             <pre>
 {
@@ -85,10 +89,10 @@ const props = defineProps({
 </pre>
         </dd>
         <dt>props 为 对象</dt>
-        <dd>定义的对象直接作为属性在组件中使用；和路由类型及参数无关</dd>
-        <dd>适合传递 <span class="warn">静态数据</span>；应用不多</dd>
-        <dd class="sn">
-            <div>路由配置</div>
+        <dd>
+            <div>定义的对象直接作为属性在组件中使用；和路由类型及参数无关</div>
+            <div>适合传递 <span class="warn">静态数据</span>；应用不多</div>
+            <div>1. 路由配置</div>
             <pre>
 {
     path: '/about/:id',
@@ -98,7 +102,7 @@ const props = defineProps({
         msg: { title: 'About', flag: true },
     }
 }</pre>
-            <div>路由组件 - &lt;script&gt; 中声明对应的 props 属性并在 &lt;template&gt; 中使用</div>
+            <div>2. 路由组件 - &lt;script&gt; 中声明对应的 props 属性并在 &lt;template&gt; 中使用</div>
             <pre>
 const props = defineProps({
     msg: {
@@ -109,7 +113,6 @@ const props = defineProps({
         </dd>
     </dl>
     <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-    <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>
