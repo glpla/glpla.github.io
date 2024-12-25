@@ -64,16 +64,17 @@ fetch( url, {
       <div>method（String）：HTTP 请求方法，Get 获取数据 | Post 提交数据 | Delete 删除数据 | Put 更新数据；默认为 GET</div>
       <div>body（String）：HTTP 请求的参数；POST 时使用</div>
       <div>headers（Object）：HTTP 请求头，如 content-type 的常见值为 application/json、application/x-www-form-urlencoded</div>
-      <div class="tips">json 格式的数据 POST 时，可以省略 header 配置项；具体还要看服务器端的适配情况</div>
+      <div class="tips">如果数据是 json 格式，可以省略 header 配置项；具体还要看服务器端的适配情况</div>
     </dd>
     <dt>响应结果 Response</dt>
     <dd class="sn">
+      <p>根据请求的数据类型，返回的结果分别有：</p>
       <div>res.json()：得到 JSON 对象，同 JSON.parse(responseText) 一样；应用最广泛</div>
       <div>res.text()：得到文字|字符串</div>
       <div>res.formData()：得到 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/FormData">FormData</a> 表单对象</div>
       <div>res.blob()：得到 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Blob">Blob对象</a>，如图片等多媒体对象</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 获取本地 .json 数据 - 在开发者视图的控制台查看获取结果</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 获取本地/远程 .json 数据 - 在开发者视图的控制台查看获取结果</dd>
     <dd>
       <pre>
 fetch('https://glpla.github.io/utils/data/rank/20240203.json')
@@ -82,12 +83,12 @@ fetch('https://glpla.github.io/utils/data/rank/20240203.json')
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] text()</dd>
     <dd class="sn">
-      <div>请求本地文本文件 .txt</div>
+      <div>请求本地/远程文本文件 .txt</div>
       <pre>
 fetch('./tmp.txt')
   .then(res => res.text())
   .then(res => console.log(res))</pre>
-      <div>请求本地html，实现模块化；不需要写完整的html结构，只写业务结构即可</div>
+      <div>请求本地/远程 html，实现模块化；不需要写完整的html结构，只写业务结构即可</div>
       <pre>
 fetch('../../common/drill.html')
 .then(res => res.text())
@@ -110,7 +111,8 @@ fetch('https://glpla.github.io/utils/avatar/avatar0.png')
   <dl>
     <dd>.以下网络请求，基于 <span class="warn">自建</span> 数据服务器：<a href="./express.html">express 环境</a>下的 <a
         href="./dynamic.html">动态资源服务器</a></dd>
-    <dd>.也可以直接使用 <span class="warn">线上</span> 数据服务器 <a href="https://jsonplaceholder.typicode.com/">jsonplaceholder</a>
+    <dd>.也可以直接使用 <span class="warn">线上</span> 数据服务器 <a href="https://randomuser.me/">Random User</a>、<a
+        href="https://jsonplaceholder.typicode.com/">Json Placeholder</a>
     </dd>
     <dt>获取数据 GET</dt>
     <dd class="sn">
@@ -256,10 +258,11 @@ router.put('/:id', (req, res) => {
 })      </pre>
     </dd>
   </dl>
+  <div class="chap">异步等待 async-await</div>
   <dl>
-    <dt>其它</dt>
-    <dd>async-await方式</dd>
+    <dt>不处理异常</dt>
     <dd>
+      <div>更简洁</div>
       <pre>
 async function getData() {
   let res = await fetch('./data2021/stu.json');
@@ -269,7 +272,20 @@ async function getData() {
 }
 getData();</pre>
     </dd>
+    <dt>处理异常</dt>
     <dd>
+      <div>更健壮</div>
+      <pre>
+async function getData() {
+  try {
+    let res = await fetch('./data2021/stu.json');
+    console.log(res);
+    let json = await res.json();
+    console.log(json);
+  } catch (err) {
+    console.log(err);
+  }
+}</pre>
       <pre>
 async function addData() {
   try {
@@ -292,22 +308,21 @@ async function addData() {
     console.log(err);
   }
 }</pre>
-    </dd>
-    <dd>异常捕获处理</dd>
-    <dd>
+      <div>可以使用 finally 控制过程，如使用加载器</div>
       <pre>
 async function getData() {
+  container.classList.add('loading')
   try {
-    let res = await fetch('./data2021/stu.json');
-    console.log(res);
-    let json = await res.json();
-    console.log(json);
+
   } catch (err) {
-    console.log(err);
+
+  } finally{
+    container.classList.remove('loading')
   }
 }</pre>
     </dd>
-    <dd>fetch抓取数据时不会抛出错误,即使是404或500错误；可根据响应状态ok或状态码status判断结果</dd>
+    <dt>注意</dt>
+    <dd>fetch 请求不会抛出错误，即使是404或500错误；应根据响应状态 ok 或状态码 status 判断结果</dd>
     <dd>
       <pre>
 ok: true

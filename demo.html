@@ -89,41 +89,18 @@
 </head>
 
 <body>
-    <div class="wrap">
-        <video src="/utils/video/flag.mp4" loop></video>
-    </div>
-    <div class="toggle-btn" id="toggle-btn">
-        <span class="iconfont icon-Moon-Star"></span>
-    </div>
-    </div>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque consequatur accusamus similique est
-        laudantium nam aliquam dolor ipsum officiis, eligendi iste molestias perspiciatis doloribus ratione omnis
-        provident eum culpa sequi.</p>
-    <p>Mollitia voluptate fugit magnam laudantium. Exercitationem autem pariatur dignissimos minus. Eaque dicta, minima
-        sunt in pariatur tempora tenetur voluptates modi, itaque reprehenderit recusandae deserunt? Tempora assumenda
-        velit atque debitis delectus?</p>
-    <p>Laboriosam minima dicta reiciendis quidem. Aspernatur vel vero nihil nam, accusantium debitis similique sint
-        placeat, repellendus, culpa accusamus et autem sit laudantium. Perspiciatis, nihil libero! Dolorem sint nulla
-        sit quaerat!</p>
-    <p>Saepe, officiis similique? Consectetur fuga non eveniet qui nemo nihil doloremque sint dolores quam, eos
-        architecto quasi, similique consequuntur dolore laborum placeat excepturi quae modi tempora reprehenderit
-        provident deserunt dignissimos.</p>
     <script>
-        const video = document.querySelector('video');
-        const toggleBtn = document.getElementById('toggle-btn');
-        toggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            if (toggleBtn.children[0].classList.contains('icon-Moon-Star')) {
-                toggleBtn.children[0].classList.remove('icon-Moon-Star');
-                toggleBtn.children[0].classList.add('icon-Sun');
-            } else {
-                toggleBtn.children[0].classList.add('icon-Moon-Star');
-                toggleBtn.children[0].classList.remove('icon-Sun');
+        let users = []
+        async function getUser() {
+            try {
+                let res = await fetch('https://randomuser.me/api/?results=10')
+                let json = await res.json()
+                console.log(json.results);
+            } catch (error) {
+                console.log(error);
             }
-        });
-        video.addEventListener('click', () => {
-            video.paused ? video.play() : video.pause();
-        })
+        }
+        getUser()
     </script>
 </body>
 
