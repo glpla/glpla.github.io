@@ -106,41 +106,22 @@ label {
   background-color: #fff;
 }
 
-@media screen and (max-width:750px) {
+@media screen and (max-width:768px) {
   .pc thead tr {
     display: none;
   }
 
-  .pc tr {
+  .pc tbody tr {
     display: block;
   }
 
-  .pc td {
+  .pc tbody td {
     display: flex;
     align-items: center;
-    position: relative;
-    padding-left: 50%;
+    justify-content: space-between;
   }
 
-  .pc td::before {
-    position: absolute;
-    left: 0;
-    font-weight: 700;
-  }
-
-  .pc td:nth-child(1)::before {
-    content: 'sn';
-  }
-
-  .pc td:nth-child(2)::before {
-    content: 'name';
-  }
-
-  .pc td:nth-child(3)::before {
-    content: 'unit';
-  }
-
-  .pc td:nth-child(4)::before {
-    content: 'gender';
+  .pc tbody td::before {
+    content: attr(data-label);
   }
 }
