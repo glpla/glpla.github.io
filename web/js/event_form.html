@@ -69,12 +69,29 @@ form.addEventListener('submit', () => {
     <dd>
       <div>.数据提交后交给后端获取并处理</div>
       <div>.前端如果需要获取数据，需要特别处理</div>
-      <div>1. 通过元素逐一获取，很不方便</div>
+      <div>1. 单个元素</div>
       <pre>
 input.addEventListener('change', () => {
   console.log(input.value);
 })</pre>
-      <div>2. 使用 form 构造的 FormData 集中获取</div>
+      <div>2. 利用表单提交事件获取所有元素值</div>
+      <pre>
+&lt;form action="https://www.baidu.com" method="get" name="demo"&gt;
+  &lt;input type="text" name="uname" id="uname"&gt;
+  &lt;input type="password" name="upass" id="upass"&gt;
+  &lt;input type="submit" value="submit"&gt;
+  &lt;input type="reset" value="reset"&gt;
+&lt;/form&gt;</pre>
+      <div>.如果表单元素指定了 id，不获取元素也可以访问其值</div>
+      <pre>
+const form = document.querySelector('form')
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+  // ...
+  // 查看提交的数据
+  console.log(uname.value, upass.value);
+})</pre>
+      <p>.如果需要修改或者追加，需要使用 form 构造的 FormData 集中获取</p>
     </dd>
   </dl>
   <div class="chap">FormData</div>

@@ -91,18 +91,6 @@ let str = localStorage.getItem('str')
 //如果数据不存在，返回null
 console.log(str);</pre>
     </dd>
-    <dt>布尔 Boolean</dt>
-    <dd>
-      <div>设置</div>
-      <pre>
-localStorage.setItem('bool', true)
-</pre>
-      <div>获取</div>
-      <pre>
-let bool = localStorage.getItem('bool')
-//如果数据不存在，返回null
-console.log(bool, Boolean(bool));</pre>
-    </dd>
     <dt>数组 Array</dt>
     <dd>
       <div>.直接存储会被转化为字符串</div>
@@ -114,12 +102,15 @@ localStorage.setItem('arr', arr)
 res = localStorage.getItem('arr')
 console.log('after get ', res);</pre>
       <div>.存储时，使用 JSON.stringify 将数据序列化处理后再保存，否则无法还原</div>
+      <pre>
+//使用JSON.stringify转换
+localStorage.setItem('arr1', JSON.stringify(arr));</pre>
       <div>.获取时，使用 JSON.parse 转换为原始数据类型；如果不解析仍然是字符串</div>
       <pre>
-localStorage.setItem('arr1', JSON.stringify(arr));
+// 使用JSON.parse解析
 res = JSON.parse(localStorage.getItem('arr1'));
 console.log('解析获取：res:', res);</pre>
-      <div>兼容写法：如果为 null，则赋值为空数组</div>
+      <div><span class="warn">兼容写法</span>：如果为 null，则赋值为空数组</div>
       <pre>res = JSON.parse(localStorage.getItem('arr1')) || [];</pre>
     </dd>
     <dt>对象 Object</dt>
@@ -133,6 +124,20 @@ localStorage.setItem('obj', JSON.stringify(obj))
 // 使用JSON.parse解析
 let obj1 = JSON.parse(localStorage.getItem('obj'))
 console.log(obj1);</pre>
+      <div><span class="warn">兼容写法</span>：如果为 null，则赋值为空对象</div>
+      <pre>obj1 = JSON.parse(localStorage.getItem('obj')) || {};</pre>
+    </dd>
+    <dt>布尔 Boolean</dt>
+    <dd>
+      <div>设置</div>
+      <pre>
+localStorage.setItem('bool', true)
+</pre>
+      <div>获取</div>
+      <pre>
+let bool = localStorage.getItem('bool')
+//如果数据不存在，返回null
+console.log(bool, Boolean(bool));</pre>
     </dd>
   </dl>
   <dl>
