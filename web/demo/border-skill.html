@@ -9,7 +9,8 @@
         @import url(//at.alicdn.com/t/c/font_3834292_zxqb2r9tra.css);
 
         :root {
-            --color: 100px;
+            --h: 30px;
+            --p-m-g: 10px;
         }
 
         * {
@@ -27,17 +28,33 @@
             height: 100vh;
         }
 
-        /* skill */
-        .skill {
-            width: 94%;
-            max-width: 350px;
+        .w {
+            width: 96%;
+            max-width: 600px;
         }
 
+        .simple {
+            text-align-last: justify;
+        }
+
+        .simple .simple-bar {
+            height: var(--h);
+            padding: 2px;
+            border: 2px solid #089;
+        }
+
+        .simple .simple-bar .simple-per {
+            width: 86%;
+            height: 100%;
+            background-color: #089;
+        }
+
+        /* skill */
         .bar {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 1rem;
+            gap: var(--p-m-g);
+            margin-bottom: var(--p-m-g);
         }
 
         .bar::before {
@@ -55,7 +72,7 @@
 
         .per {
             flex: 1;
-            height: 30px;
+            height: var(--h);
             border-radius: 15px;
             border: 2px solid var(--color);
             padding: 2px;
@@ -67,30 +84,15 @@
             width: calc(var(--per)*1%);
             height: 100%;
             background-image: linear-gradient(to right, var(--color), var(--color2));
-            border-radius: 20px;
+            border-radius: 15px;
         }
 
-        .simple {
-            width: 300px;
-            text-align-last: justify;
-        }
 
-        .simple .simple-bar {
-            padding: 2px;
-            border: 2px solid #089;
-        }
-
-        .simple .simple-bar .simple-per {
-            width: 86%;
-            height: 30px;
-            background-color: #089;
-        }
 
         /* loading */
         .loading {
             display: flex;
-            width: 300px;
-            height: 40px;
+            height: var(--h);
             border: 1px solid #f40;
             padding: 4px;
             cursor: pointer;
@@ -112,14 +114,14 @@
 </head>
 
 <body>
-    <div class="simple">
+    <div class="w simple">
         <span>Html</span>
         <span>86%</span>
         <div class="simple-bar">
             <div class="simple-per"></div>
         </div>
     </div>
-    <div class="skill">
+    <div class="w skill">
         <div class="bar" style="--num:'85';--color:#089;--color2:#0896;--info:'\e881';--per:85">
             <div class="per"></div>
         </div>
@@ -133,7 +135,7 @@
             <div class="per"></div>
         </div>
     </div>
-    <div class="loading"></div>
+    <div class="w loading"></div>
 </body>
 
 </html>

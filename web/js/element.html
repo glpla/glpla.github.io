@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Element - Document Object Model</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/footer2025.css">
   <base target="_blank">
 </head>
 
@@ -241,7 +242,7 @@ links.forEach((link, ind) => {
   </dl>
   <div class="chap">事件 Events</div>
   <dl class="nav-cont">
-    <dt>Mouse events</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element#mouse_events">Mouse events</a></dt>
     <dd>
       <div>.更多鼠标事件信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent">MouseEvent</a></div>
       <div>.鼠标事件</div>
@@ -282,6 +283,10 @@ links.forEach((link, ind) => {
         <tr>
           <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseup_event">mouseup</a></td>
           <td>鼠标释放</td>
+        </tr>
+        <tr>
+          <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event">contextmenu</a></td>
+          <td>右键菜单</td>
         </tr>
       </table>
     </dd>
@@ -329,11 +334,19 @@ function fn(e) {
     img.style.top = y + 'px';
 }      </pre>
     </dd>
-    <dt>Keyboard events</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 禁止右键菜单</dd>
+    <dd>
+      <pre>
+document.addEventListener('contextmenu', (e) => {
+  e.preventDefault()
+})</pre>
+    </dd>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element#keyboard_events">Keyboard events</a></dt>
     <dd>
       <div>.按键事件</div>
+      <div>.返回按键对应的编码 - provide a code indicating which key is pressed</div>
       <div>.部分事件不能使用侦听，只能使用传统事件 onXXX</div>
-      <div class="tips">keypress 已废弃</div>
+      <div class="tips">keypress 已废弃；请使用 keydown 代替</div>
       <table>
         <tr>
           <th>item</th>
@@ -356,7 +369,7 @@ function fn(e) {
         </tr>
         <tr>
           <td>e.key</td>
-          <td>按键名如，f、F12</td>
+          <td>按键名；如，enter、f、F12</td>
         </tr>
         <tr>
           <td>e.keycode</td>
@@ -413,29 +426,70 @@ function fn(e) {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] JD搜索优化</dd>
     <dd>
-      <div>.页面任何位置按下s，激活搜索框</div>
+      <div>.页面任何位置按下 s，激活搜索框；为了避免在按下 s 键时，s 被当作值输入到输入框中，需要在触发 sqlBtn.focus() 后阻止默认行为</div>
       <pre>
-let ipt = document.querySelector('input');
+const sql = document.getElementById('sql');
+
+document.addEventListener('keydown', (e) => {
+  if (sqlBtn != document.activeElement && e.key === 's') {
+    e.preventDefault()
+    sqlBtn.focus()
+  }
+})
+</pre>
+      <div>.如果搜索框是聚焦状态，按下 Escape，搜索框失去焦点</div>
+      <pre>
 document.addEventListener('keyup', (e) => {
-    if (e.key == 83) {
-        ipt.focus()
-    }
+  console.log('keyup', e.key);
+  if (sql === document.activeElement && e.key === 'Escape') {
+    sql.blur()
+  }
 })</pre>
+      <div>.输入过程中，按 Ctrl + Enter，提交信息</div>
+      <div>.如果要使用组合键，则可以利用 event.ctrlKey，event.shiftKey，event.altKey 判断是否按下了 Ctrl 键、Shift 键以及 Alt 键</div>
+      <pre>
+  document.addEventListener('keydown', (e) => {
+    if (sql === document.activeElement && e.ctrlKey && e.key === 'Enter') {
+      console.log('hi');
+    }
+  })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] Ctrl + Enter，提交信息</dd>
-    <dd>如果要使用组合键，则可以利用 event.ctrlKey，event.shiftKey，event.altKey 判断是否按下了 Ctrl 键、Shift 键以及 Alt 键</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] JD快递单号查询</dd>
-    <dd>.为方便阅读，在原搜索框上方额外显示一个字体略大的提示框。失去焦点时，隐藏提示框；获取焦点时，如果内容不为空，则显示提示框</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 禁止F12键</dd>
+    <dd>
+      <div>.为方便阅读，在原搜索框上方额外显示一个字体略大的提示框</div>
+      <div>.获取焦点时，如果内容不为空，则显示提示框</div>
+      <div>.失去焦点时，隐藏提示框</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 禁止 F12 键</dd>
     <dd>
       <pre>
-document.onkeydown = function (e) {
-  if (e.key == 'F12') {
-    return false;
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'F12') {
+    e.preventDefault()
   }
-}</pre>
+})</pre>
     </dd>
-    <dt>Animation events</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element#focus_events">Focus events</a></dt>
+    <dd>
+      <div>.表单元素事件；更多表单运用，请访问 <a href="./event_form.html">表单事件</a></div>
+      <table>
+        <tr>
+          <th>item</th>
+          <th>desc</th>
+        </tr>
+        <tr>
+          <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/blur_event">blur</a>
+          </td>
+          <td>失去焦点</td>
+        </tr>
+        <tr>
+          <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event">focus</a>
+          </td>
+          <td>获取焦点</td>
+        </tr>
+      </table>
+    </dd>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element#animation_events">Animation events</a></dt>
     <dd>
       <div>.帧动画事件</div>
       <table>
@@ -482,7 +536,7 @@ box.addEventListener('animationiteration', () => {
 })    </pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="../demo/loading.html">页面跳转/加载页</a></dd>
-    <dt>Transition events</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element#transition_events">Transition events</a></dt>
     <dd>
       <div>.过渡动画事件</div>
       <table>
@@ -514,7 +568,7 @@ box.addEventListener('animationiteration', () => {
         </tr>
       </table>
     </dd>
-    <dt>Scroll events</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element#scroll_events">Scroll events</a></dt>
     <dd>
       <div>.元素的滚动事件</div>
       <div>.元素应出现滚动条</div>
@@ -544,7 +598,7 @@ wrap.addEventListener('scrollend', function () {
     console.log('end');
 })</pre>
     </dd>
-    <dt>剪切板事件 Clipboard events</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element#clipboard_events">Clipboard events</a></dt>
     <dd class="sn">
       <p>.针对特定元素的内容的操作</p>
       <p>.为了避免一个一个元素的操作，通常由 <a href="./document.html">Document</a>、<a href="./bom-event.html">Window</a>统一处理</p>
@@ -562,7 +616,7 @@ document.addEventListener('paste', (e) => {
   e.preventDefault()
 })      </pre>
     </dd>
-    <dt>Touch events</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element#touch_events">Touch events</a></dt>
     <dd>
       <div>.触摸事件；移动端</div>
       <table>
@@ -633,7 +687,8 @@ box.addEventListener('touchend', () => {
         fill="#ffffff" p-id="31527"></path>
     </svg>
   </a>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
   <script src="/utils/custom/ham2024.js"></script>
   <script src="/utils/custom/back2top.js"></script>
   <script>

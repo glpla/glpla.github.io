@@ -32,7 +32,7 @@
             <h2>Lorem ipsum dolor sit amet.</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, blanditiis.</p>
             <div class="search-box">
-              <input type="text" maxlength="12" name="sql" required>
+              <input type="text" maxlength="12" name="sql" id="sql-btn" required>
               <span class="iconfont iconsearch4"></span>
             </div>
           </div>
@@ -487,6 +487,7 @@
     const burger = document.querySelector('.burger')
     const sections = document.querySelectorAll('section')
     const links = header.querySelectorAll('.nav-item')
+    const sqlBtn = document.getElementById('sql-btn');
 
     burger.addEventListener('click', () => {
       header.classList.toggle('open')
@@ -519,6 +520,31 @@
       header.classList.toggle('sticky', window.scrollY > 100)
       // back
       back.classList.toggle('fixed', window.scrollY > 500)
+    })
+
+    // search box
+    // focus
+    document.addEventListener('keydown', (e) => {
+      if (sqlBtn != document.activeElement && e.key === 's') {
+        sqlBtn.focus()
+        e.preventDefault()
+      }
+    })
+
+    // blur
+    document.addEventListener('keyup', (e) => {
+      if (sqlBtn === document.activeElement && e.key === 'Escape') {
+        sqlBtn.blur()
+      }
+    })
+
+    // submit
+    document.addEventListener('keydown', (e) => {
+      if (sqlBtn === document.activeElement && e.key === 'Enter') {
+        console.log(sqlBtn.value);
+        alert(sqlBtn.value)
+        sqlBtn.blur()
+      }
     })
   </script>
 </body>

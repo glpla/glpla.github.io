@@ -63,6 +63,32 @@
             border: 5px solid #fff;
         }
 
+        .title::before {
+            content: 'wang fei';
+            position: absolute;
+            bottom: calc(var(--lh)*-4);
+            width: max-content;
+            padding: 0 10px;
+            font-size: calc(var(--lh)*2);
+            text-transform: capitalize;
+            color: var(--second-color);
+            font-family: 'greatvibes';
+            font-weight: 600;
+            mask-image: linear-gradient(to right, #0000, #000 50%, #000);
+            mask-size: 200% 100%;
+        }
+
+        .title:hover::before {
+            animation: scan 3s linear alternate infinite;
+        }
+
+        @keyframes scan {
+
+            100% {
+                mask-position: right;
+            }
+        }
+
         /* case 2 */
         .bg {
             width: calc(var(--w) - 10px);
@@ -215,7 +241,7 @@
 </head>
 
 <body>
-    <div class="wrap img">
+    <div class="wrap img title">
         <img src="../imgs/wangfei.png" alt="">
     </div>
     <div class="wrap bg">
