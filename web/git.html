@@ -26,32 +26,33 @@
             <a href="" style="--delay:0" class="nav-item">概述</a>
             <a href="" style="--delay:1" class="nav-item">工作流</a>
             <a href="" style="--delay:2" class="nav-item">基本使用</a>
-            <a href="" style="--delay:3" class="nav-item">分支</a>
+            <a href="" style="--delay:3" class="nav-item">仓库</a>
+            <a href="" style="--delay:4" class="nav-item">分支</a>
         </nav>
     </header>
     <dl class="nav-cont">
         <dd>. 代码仓库管理工具</dd>
         <dd>. 分布式版本控制系统</dd>
         <dt>下载和安装</dt>
-        <dd>. 打开git官网 <a href="https://git-scm.com/" class="link">https://git-scm.com/</a>，选择对应的操作系统和版本，点击下载并安装</dd>
-        <dt>查看Git版本</dt>
+        <dd>. 打开 Git 官网 <a href="https://git-scm.com/" class="link">https://git-scm.com/</a>，选择对应的操作系统和版本，点击下载并安装</dd>
+        <dt>查看 Git 版本</dt>
         <dd>
-            <div>. 右键点击桌面空白处，选择Git Bash Here，打开终端窗口，输入以下命令</div>
+            <div>. 右键点击桌面空白处，选择 Git Bash Here，打开终端窗口，输入以下命令</div>
             <pre>
 $ git --version
 git version 2.34.1.windows.1</pre>
         </dd>
-        <dd class="tips">Git Bash就是一个迷你型的Linux系统哦</dd>
-        <dt>配置Git</dt>
+        <dd class="tips">Git Bash 就是一个迷你型的 Linux 系统哦</dd>
+        <dt>配置 Git</dt>
         <dd>
-            <div>. 使用户名和邮箱将Git和用户[自己的代码仓库，如Github]关联起来</div>
+            <div>. 使用户名和邮箱将 Git 和用户[自己的代码仓库，如 Github ]关联起来</div>
             <div>. 用户名和邮箱仅仅作为签名，以区分提交的用户，和仓库账号没有关系</div>
-            <div>. 没有关联，无法提交commit</div>
+            <div>. 没有关联，无法提交 commit</div>
             <pre>
 $ git config --global user.email 1942194789@qq.com
 $ git config --global user.name glpla</pre>
         </dd>
-        <dt>查看Git配置</dt>
+        <dt>查看 Git 配置</dt>
         <dd>
             <pre>
 cnplaman@LAPTOP-QL08LD1S MINGW64 ~/Desktop
@@ -87,11 +88,11 @@ $ git config  user.email
     <dl class="nav-cont">
         <dt>初始化仓库 init</dt>
         <dd>
-            <div>为当前工作目录生成一个隐藏文件夹.git，里面是git配置信息</div>
-            <div>初始化后，该目录将被git托管，可以追踪代码的任何变化</div>
-            <div>如果生成的.git被删除，有关的托管信息将丢失</div>
-            <div>具体的配置文件.gitconfig位于系统盘用户目录下：C:\Users\cnplaman</div>
-            <div>文件内容就是Git配置的用户邮箱等基本信息</div>
+            <div>为当前工作目录生成一个隐藏文件夹 .git，里面是 Git 配置信息</div>
+            <div>初始化后，该目录将被 Git 托管，可以追踪代码的任何变化</div>
+            <div>如果生成的 .git 被删除，有关的托管信息将丢失</div>
+            <div>具体的配置文件 .gitconfig 位于系统盘用户目录下：C:\Users\cnplaman</div>
+            <div>文件内容就是 Git 配置的用户邮箱等基本信息</div>
             <pre>git init</pre>
         </dd>
         <dt>提交文件到暂存区 add</dt>
@@ -112,12 +113,16 @@ git commit -m ""</pre>
             <table>
                 <caption>Git文件状态</caption>
                 <tr>
+                    <th>item</th>
+                    <th>desc</th>
+                </tr>
+                <tr>
                     <td>untracked</td>
-                    <td>未记录的；VS code中使用标记U</td>
+                    <td>未记录的；VS code 中使用标记 U</td>
                 </tr>
                 <tr>
                     <td>modified</td>
-                    <td>修改过的；VS code中使用标记M</td>
+                    <td>修改过的；VS code 中使用标记 M</td>
                 </tr>
                 <tr>
                     <td>staged</td>
@@ -132,13 +137,13 @@ git commit -m ""</pre>
         <dt>撤销本地修改 checkout</dt>
         <dd>
             <div>丢弃工作区的修改</div>
-            <div>修改了文件，但是没有add到暂存区，使用该命令可以撤销对文件的修改，相当于在编辑环境中使用了CTRL + Z操作</div>
-            <div>修改了文件，已经add到暂存区，使用该命令，可以拉取暂存区的文件到工作区，覆盖当前文件，相当于放弃了对文件的修改，即和暂存区保持一致</div>
+            <div>修改了文件，但是没有 add 到暂存区，使用该命令可以撤销对文件的修改，相当于在编辑环境中使用了 CTRL + Z 操作</div>
+            <div>修改了文件，已经 add 到暂存区，使用该命令，可以拉取暂存区的文件到工作区，覆盖当前文件，相当于放弃了对文件的修改，即和暂存区保持一致</div>
             <pre>git checkout -- file</pre>
         </dd>
         <dt>查看本地仓库提交记录 log</dt>
         <dd>
-            <div>按q退出</div>
+            <div>按 Q/q 退出</div>
             <pre>
 $ git log
 commit cc355cbd2a03d61f0ef440706fee7c6257f9fee3 (HEAD -> main, origin/main, origin/HEAD)
@@ -155,10 +160,10 @@ Date:   Wed Jan 3 10:48:20 2024 +0800
         </dd>
         <dt>查看远程仓库提交记录 reflog</dt>
         <dd>
-            <div>按q退出</div>
-            <div>main总是指向最新的提交；而HEAD指向当前的活动分支；如果没有分支，就指向主分支main</div>
-            <div>HEAD前面的字符串序列是提交的版本号；利用这个可以实现版本穿梭</div>
-            <div>示例中没有分支，所以HEAD指向主分支main</div>
+            <div>按 Q/q 退出</div>
+            <div>main 总是指向最新的提交；而 HEAD 指向当前的活动分支；如果没有分支，就指向主分支 main</div>
+            <div>HEAD 前面的字符串序列是提交的版本号；利用这个可以实现版本穿梭</div>
+            <div>示例中没有分支，所以 HEAD 指向主分支 main</div>
             <pre>
 $ git reflog
 cc355cb (HEAD -> main, origin/main, origin/HEAD) HEAD@{0}: commit: web
@@ -176,7 +181,7 @@ Head is now at xxxxx</pre>
             <div>撤销本地提交</div>
             <pre>git reset commitId</pre>
         </dd>
-        <dd class="example-sn">新项目第一次推送 - 完整流程</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 新项目第一次推送 - 完整流程</dd>
         <dd>
             <pre>
 git init
@@ -186,18 +191,59 @@ git branch -M main
 git remote add origin url
 git push -u origin main</pre>
         </dd>
-        <dt>查看关联的远程仓库</dt>
+    </dl>
+    <div class="chap">仓库操作</div>
+    <dl class="nav-cont">
+        <dt>克隆仓库 clone</dt>
         <dd>
+            <div>将远程仓库复制到本地</div>
+            <div>通常是第一次使用别人的仓库；后续直接拉取 pull 就可以和仓库保持一致</div>
+            <pre>$ git clone url</pre>
+        </dd>
+        <dt>远程仓库管理 remote</dt>
+        <dd>
+            <div>git remote 命令用于管理和查看 Git 仓库中的远程仓库配置。它有多种用法，具体取决于你提供的参数</div>
+            <div>1. 查看关联的远程仓库 remote</div>
+            <pre>
+$ git remote
+origin</pre>
+            <div>使用 -v 参数查看关联仓库的详细信息</div>
             <pre>
 $ git remote -v
 origin  https://github.com/glpla/glpla.github.io.git (fetch)
 origin  https://github.com/glpla/glpla.github.io.git (push)</pre>
+            <div>2. 添加远程仓库 add</div>
+            <div>使用 add 添加/关联远程仓库并指定一个 <span class="warn">别名</span> - 因为仓库 url 太长</div>
+            <div>可以关联多个远程仓库，使用别名区分</div>
+            <pre>$ git remote add &lt;name&gt; &lt;url&gt;</pre>
+            <div>如：使用 origin 代替远程仓库的 url</div>
+            <pre>$ git remote add origin url</pre>
+            <div>3. 删除远程仓库 remove</div>
+            <pre>$ git remote remove &lt;name&gt;</pre>
+            <pre>$ git remote rm &lt;name&gt;</pre>
+            <div>4. 重命名远程仓库 rename</div>
+            <pre>$ git remote rename &lt;old-name&gt; &lt;new-name&gt;</pre>
+            <div>5. 修改远程仓库 set-url</div>
+            <pre>$ git remote set-url &lt;name&gt; &lt;new-url&gt;</pre>
         </dd>
-        <dt>删除关联的远程仓库</dt>
+        <dt>Git推送到仓库 push</dt>
         <dd>
-            <pre>
-            <div>以便重新关联新仓库</div>
-$ git remote remove origin</pre>
+            <div>将本地分支的提交推送到远程仓库对应的分支 - 不仅要指定推送的仓库/别名，还要指定推送到哪个分支</div>
+            <div>具体行为取决于当前分支是否已经设置了上游 upstream 分支</div>
+            <pre>$ git push &lt;name&gt; &lt;branch&gt;</pre>
+            <div>将本地的 branch 分支推送到远程仓库 name 的 branch 分支；不会设置任何追踪关系</div>
+            <div>后续如果要推送或拉取这个分支，<span class="warn">仍然</span>需要明确指定远程仓库和分支名称</div>
+            <div>方便起见，使用 -u/--set-upstream 设置一个追踪关系 upstream relationship / 自动关联</div>
+            <pre>$ git push -u &lt;name&gt; &lt;branch&gt;</pre>
+            <div>后续只需要使用 git push 即可推送</div>
+            <pre>$ git push</pre>
+        </dd>
+        <dt>拉取远程仓库 pull</dt>
+        <dd>
+            <div>在第一次克隆 clone 的基础上，通过拉取和原来仓库保持一致</div>
+            <div>如果之前提交使用 -u 设置了追踪，可以直接拉取</div>
+            <pre>git pull &lt;name&gt; &lt;branch&gt;</pre>
+            <pre>git pull</pre>
         </dd>
     </dl>
     <div class="chap">分支 Branch</div>
@@ -205,8 +251,8 @@ $ git remote remove origin</pre>
         <dd>通过分支实现项目的分工协作</dd>
         <dd>各分支的操作并不影响主分支；且分支的进度通常要领先于主分支</dd>
         <dd>当分支合并到主分支后，主分支的整个时间线才往前推进，进度才能和分支保持一致</dd>
-        <dd>main总是指向最新的提交；而HEAD指向当前的活动分支；如果没有分支，就指向主分支main</dd>
-        <dd>只有提交commit过1次后才能查看分支</dd>
+        <dd>main 总是指向最新的提交；而 HEAD 指向当前的活动分支；如果没有分支，就指向主分支 main</dd>
+        <dd>只有提交 commit 过1次后才能查看分支</dd>
         <dd>
             <figure class="img-sn">
                 <img src="./imgs/branch2.jpg" alt="">
@@ -223,7 +269,7 @@ $ git remote remove origin</pre>
         </dd>
         <dt>查看分支</dt>
         <dd>
-            <div>当前分支以*号表示，且颜色为绿色</div>
+            <div>当前分支以 * 号表示，且颜色为绿色</div>
             <pre>
 //不带参数：查看本地分支
 $ git branch
@@ -257,7 +303,7 @@ Switched to branch 'dev'</pre>
         <dt>合并分支 merge</dt>
         <dd>
             <div>通常在主分支合并其它分支</div>
-            <div>将其它分支合并到主分支；主分支会前进一次forwards</div>
+            <div>将其它分支合并到主分支；主分支会前进一次 forwards</div>
             <div>原有分支仍然存在</div>
             <pre>
 $ git merge dev
@@ -275,22 +321,22 @@ Fast-forward
 $ git branch -d dev
 Deleted branch dev (was c9f8938).            </pre>
         </dd>
-        <dd class="example-sn">分支操作</dd>
-        <dd>请使用shell完成以下操作</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 分支操作</dd>
+        <dd>请使用 shell 完成以下操作</dd>
         <dd class="sn">
-            <div>创建新文件夹Demo作为工作目录</div>
+            <div>创建新文件夹 Demo 作为工作目录</div>
             <div>初始化工作目录</div>
             <div>查看分支</div>
-            <div>创建测试文件test.txt并add、commit提交到本地仓库</div>
+            <div>创建测试文件 test.txt 并 add、commit 提交到本地仓库</div>
             <div>查看分支</div>
-            <div>创建分支dev</div>
-            <div>切换至分支dev</div>
+            <div>创建分支 dev</div>
+            <div>切换至分支 dev</div>
             <div>查看分支</div>
-            <div>创建测试文件demo.txt并add、commit提交到本地仓库</div>
-            <div>切换回master分支，查看工作目录中文件的变换情况</div>
-            <div>合并分支dev到主分支</div>
+            <div>创建测试文件 demo.txt 并 add、commit 提交到本地仓库</div>
+            <div>切换回 master 分支，查看工作目录中文件的变换情况</div>
+            <div>合并分支 dev 到主分支</div>
             <div>查看分支</div>
-            <div>删除分支dev</div>
+            <div>删除分支 dev</div>
             <div>查看分支</div>
         </dd>
         <dd class="tips">

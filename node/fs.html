@@ -107,9 +107,10 @@ fs.readFile('./data/demo.txt', (err, date) => {
 })</pre>
     </dd>
     <dd>2. fs.readFileSync(path[, options])</dd>
-    <dd>同步方式 - 适合小文件；否则会造成阻塞</dd>
-    <dd>以同步方式读取json文件，可以马上拿到结果，再根据后续的业务进行操作，如分页返回</dd>
     <dd>
+      <div>只能读取本地文件系统中的文件，不能直接读取网络 URL</div>
+      <div>同步方式 - 适合小文件；否则会造成阻塞</div>
+      <div>以同步方式读取json文件，可以马上拿到结果，再根据后续的业务进行操作，如分页返回</div>
       <pre>
 let file = fs.readFileSync('./public/data/')
 console.log(file)

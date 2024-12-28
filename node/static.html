@@ -72,7 +72,7 @@ app.listen(port, () => {
       <div>继续操作 CMD 终端，开启服务</div>
       <p>默认命令</p>
       <pre>node index.js</pre>
-      <p>自定义命令启动服务：修改 package.json 里 script</p>
+      <p>自定义命令启动服务：修改 package.json 里 script；下例重新定义了当前的服务器文件，并自定义了一个微信小程序的服务器文件；对应的服务器 js 文件应存在</p>
       <pre>
 "scripts": {
   "start": "node index.js",
@@ -93,10 +93,10 @@ app.listen(port, () => {
       <div>更多数据交互，如读取文件并返回 JSON 数据，监听用户请求，需要进一步定制响应，完善服务器，更多信息，请访问 <a href="./dynamic.html">动态资源服务器</a></div>
     </dd>
     <dt>Advanced</dt>
-    <dd>访问服务器时，渲染服务器特定页面，如主页，给出操作使用提示</dd>
-    <dd>思路：创建 html 页面，指定路由；读取并返回主页；需要文件系统模块 fs 的支持；文件位置和命名任意</dd>
-    <dd>方案1：修改服务器文件，增加核心代码如下</dd>
     <dd>
+      <div>访问服务器时，渲染服务器特定页面，如主页，给出操作使用提示</div>
+      <div>思路：创建 html 页面，指定路由；读取并返回主页；需要文件系统模块 fs 的支持；文件位置和命名任意</div>
+      <div>方案1：修改服务器文件，增加核心代码如下</div>
       <pre>
 app.get('/', (req, res) => {
   fs.readFile('public/index.html', (err, data) => {
@@ -105,16 +105,14 @@ app.get('/', (req, res) => {
     res.end()
   })
 })</pre>
-    </dd>
-    <dd>方案2：直接使用 res 的 sendFile()</dd>
-    <dd>
+      <div>方案2：直接使用 res 的 sendFile()</div>
       <pre>
 app.get('/', (req, res) => {
   res.sendFile('./public/index.html')
 })</pre>
+      <div>方案3：终极必杀技</div>
+      <div>指定静态资源，且有主页文件，且名字为 index.html，即使没有定义路由也可以访问。。。</div>
     </dd>
-    <dd>方案3：终极必杀技</dd>
-    <dd>指定静态资源，且有主页文件，且名字为 index.html，即使没有定义路由也可以访问。。。</dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>

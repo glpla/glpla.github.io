@@ -62,9 +62,12 @@ app.get('/books/:bookId', (req, res) => {
 })      </pre>
     </dd>
   </dl>
+  <div class="chap">请求 req</div>
   <dl>
-    <dt>请求 req</dt>
+    <dt>属性</dt>
     <dd class="number">
+      <div>req.protocol</div>
+      <p>请求的协议 http 或 https</p>
       <div>req.url</div>
       <p>请求url地址</p>
       <div>查询路由 query - 使用?拼接字符串；/detail?key=value&key=value&...</div>
@@ -78,9 +81,16 @@ server.get('/detail/:id', (req, res) => {
   res.send(req.params)
 })      </pre>
     </dd>
+    <dt>方法</dt>
+    <dd class="sn">
+      <div>get()</div>
+      <p>获取请求信息，如主机</p>
+      <pre>req.get('host')</pre>
+    </dd>
   </dl>
+  <div class="chap">响应 res</div>
   <dl>
-    <dt>响应 res</dt>
+    <dt>属性</dt>
     <dd class="sn">
       <div>write() - 写回流时，需要显式指定结束 end()</div>
       <p>argument: must be of type string or an instance of Buffer or Uint8Array</p>
@@ -109,14 +119,21 @@ res.json({
 res.render('home/index', {
   navIndex: 0
 })</pre>
-      <div>其它 - 定制响应，使用也较多</div>
-      <pre>res.status(200).json({ msg: 'cnplaman', success: true })</pre>
+      <div>res.status()</div>
+      <p>设置 HTTP 响应的状态码。状态码是服务器返回给客户端的一个数字，用于表示请求的处理结果</p>
+      <p>成功的响应</p>
+      <pre>res.status(200).json({ 'msg': 'ok' });</pre>
+      <pre>res.status(200).json({ 'code': 200, 'msg': 'Success', 'data': jsonData });</pre>
+      <p>400 错误，并附带一个错误消息</p>
+      <pre>res.status(400).json({ 'msg': 'Bad Request' });</pre>
+      <pre>res.status(400).json({ 'code': 400, 'msg': 'Invalid request parameters' });</pre>
     </dd>
+    <dt>方法</dt>
   </dl>
   <dl>
     <dt>404</dt>
-    <dd>以中间件use()的形式实现</dd>
-    <dd>所有路由都匹配失败，则匹配404；所以404中间件应该放在所有路由的 <span class="warn">后面</span></dd>
+    <dd>以中间件 use() 的形式实现</dd>
+    <dd>所有路由都匹配失败，则匹配 404；所以 404 中间件应该放在所有路由的 <span class="warn">后面</span></dd>
     <dd>注意路径的拼接</dd>
     <dd>
       <pre>
@@ -134,7 +151,7 @@ server.use((req, res) => {
   res.status(404).sendFile('lost.html', { root: __dirname + '/www/' })
 })</pre>
     </dd>
-    <dd class="tips">中间件在req和res之间执行；拿到res后就没有必要了</dd>
+    <dd class="tips">中间件在 req 和res 之间执行；拿到 res 后就没有必要了</dd>
   </dl>
   <div class="chap">中间件 Middleware</div>
   <dl>

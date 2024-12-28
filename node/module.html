@@ -5,41 +5,43 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>模块化 Module</title>
+  <title>模块 Module</title>
   <link rel="stylesheet" href="../../css/common.css">
   <base target="_blank">
 </head>
 
 <body>
   <header>
-    <h1>自定义模块</h1>
+    <h1>模块</h1>
     <span>&commat;Module </span>
   </header>
   <dl>
     <dd>
-      <div>协作、共享、解耦</div>
-      <div>Node提供了很多模块module，使用哪个就require哪个</div>
-      <div>Node模块采用 CommonJS 模块规范</div>
-      <div>把公共的功能抽离成为一个单独的 js 文件作为一个模块；默认情况，外部没法访问这个模块里面的方法或者属性</div>
-      <div>导出：如果要让外部访问，必须在模块里面导出：使用 exports 单独导出或 module.exports 集中导出</div>
-      <div>引入：需要使用文件，使用 require 引入进来</div>
+      <div>模块通常指的是一个单独的 JavaScript 文件，其中可以包含函数、对象、类或其他可重用的代码</div>
+      <div>每个模块都有自己的作用域 - 默认情况，外部没法访问这个模块里面的方法或者属性</div>
+      <div>Node 提供了很多模块 module，采用 CommonJS 模块规范</div>
+      <div>可以通过 require 或 import 语句来引入其他模块 - 使用哪个就 require 哪个</div>
+      <div>系统模块直接引入；自定义模块使用相对路径指定</div>
+      <div>便于：协作、共享、解耦</div>
+      <div>建议</div>
+      <div>.集中管理自定义模块，如统一存放在 module 文件夹</div>
+      <div>.把公共的功能抽离成为一个单独的 .js 文件作为一个模块</div>
       <div>区分：系统模块和自定义模块；常见的系统模块有：</div>
       <div>. os：operate system</div>
       <div>. fs：file system</div>
-      <div>系统模块直接引入；自定义模块使用相对路径指定</div>
-      <div>建议集中管理自定义模块，如统一存放在module文件夹</div>
+      <div>. path：目录/路径</div>
     </dd>
     <dt>基本步骤</dt>
     <dd class="sn">
       <div>创建模块文件</div>
       <div>定制业务逻辑</div>
-      <div>导出模块</div>
-      <div>用户引入模块</div>
-      <div>用户使用模块</div>
+      <div>导出模块：如果要让外部访问，必须在模块里面导出：使用 exports 单独导出或 module.exports 集中导出</div>
+      <div>引入模块：需要使用文件，使用 require 引入进来</div>
+      <div>使用模块</div>
     </dd>
     <dt>多个逻辑 - 单独导出</dt>
     <dd>
-      <div>创建 oper.js</div>
+      <div>模块 oper.js</div>
       <pre>
 exports.add = () => {
   console.log('hi, add');
@@ -54,7 +56,7 @@ console.log(add(), dec());      </pre>
     </dd>
     <dt>多个逻辑 - 集中导出</dt>
     <dd>
-      <div>创建 oper.js</div>
+      <div>模块 oper.js</div>
       <pre>
 const add = () => {
   console.log('hi, add');
@@ -80,7 +82,7 @@ dec()</pre>
     </dd>
     <dt>单个逻辑</dt>
     <dd>
-      <div>创建admin.js</div>
+      <div>模块 admin.js</div>
       <pre>
 const admin = {
   name: 'glpla',
@@ -98,10 +100,10 @@ const admin = require('./module/admin')
 console.log('admin:\t', admin);</pre>
     </dd>
     <dd class="tips">
-      <div>require引入</div>
-      <div>exports导出</div>
-      <div>module集中导出</div>
-      <div>exports==module.exports为true，说明是一个方法</div>
+      <div>require 引入</div>
+      <div>exports 导出</div>
+      <div>module 集中导出</div>
+      <div>exports==module.exports 为 true，说明是一个方法</div>
       <div>定制多个逻辑，解构化引入</div>
       <div>引入时，可以省略后缀名.js</div>
       <div>引入时，不带路径加载的是系统模块；带了路径则根据路径加载用户自定义模块</div>

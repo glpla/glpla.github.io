@@ -16,28 +16,30 @@
     <span>&commat;Proxy</span>
   </header>
   <dl>
-    <dd>从一个服务域请求另外一个服务器</dd>
-    <dd>为开发服务器配置自定义代理规则。期望接收一个 { key: options } 对象。任何请求路径以 key 值开头的请求将被代理到对应的目标</dd>
     <dd>
+      <div>从一个服务域请求另外一个服务器</div>
+      <div>为开发服务器配置自定义代理规则。期望接收一个 { key: options } 对象。任何请求路径以 key 值开头的请求将被代理到对应的目标</div>
       <pre>
 proxy: {
   "key": "options"
 }</pre>
     </dd>
-    <dd>同域：</dd>
-    <dd>.协议相同 - https和http属于不同域</dd>
-    <dd>.IP相同 - localhost和127.0.0.1属于不同域</dd>
-    <dd>.端口相同</dd>
-    <dd>可以由前端或后端解决</dd>
-    <dd>解决跨域的冲突；注意调整接口的使用</dd>
-    <dd>更多信息，请访问 <a href="https://cn.vitejs.dev/config/server-options.html">vite-server</a></dd>
-    <dd class="tips">
-      <div>localhost：本地服务器，不经过网卡传输的，它不受网络防火墙和网卡相关的限制</div>
-      <div>127.0.0.1：本机地址是域名访问，通过网卡传输的，依赖网卡，并受到网络防火墙和网卡相关的限制</div>
+    <dt>同域</dt>
+    <dd>
+      <div>协议相同 - https 和 http 属于不同域</div>
+      <div>IP 相同 - localhost 和 127.0.0.1 属于不同域</div>
+      <div>端口相同</div>
+      <div>可以由前端或后端解决</div>
+      <div>解决跨域的冲突；注意调整接口的使用</div>
+      <div>更多信息，请访问 <a href="https://cn.vitejs.dev/config/server-options.html">vite-server</a></div>
+      <div class="tips">
+        <div>localhost：本地服务器，不经过网卡传输的，它不受网络防火墙和网卡相关的限制</div>
+        <div>127.0.0.1：本机地址是域名访问，通过网卡传输的，依赖网卡，并受到网络防火墙和网卡相关的限制</div>
+      </div>
     </dd>
     <dt>前端处理</dt>
-    <dd>修改项目 vite.config.js 中的服务器server配置，增加对访问接口的代理 - 将所有以/store开头的请求，代理到http://127.0.0.1:3000</dd>
     <dd>
+      <div>修改项目 vite.config.js 中的服务器 server 配置，增加对访问接口的代理 - 将所有以 /store 开头的请求，代理到 http://127.0.0.1:3000</div>
       <pre>
 server: {
   // open: false,
@@ -51,66 +53,50 @@ server: {
     }
   }
 }</pre>
+      <div>开启重写 rewrite，请求时要 <span class="warn">额外</span> 指定请求路径前缀串，但是会被替换为空；主要起到 <span class="warn">分类</span> 的作用</div>
     </dd>
-    <dd>开启重写rewrite，请求时要 <span class="warn">额外</span> 指定请求路径前缀串，但是会被替换为空；主要起到 <span class="warn">分类</span> 的作用</dd>
     <dd class="tips">先拼接再替换；替换请求中的同名串</dd>
-    <dd>请求为：</dd>
     <dd>
+      <div>请求为：</div>
       <pre>/api</pre>
-    </dd>
-    <dd>拼接为</dd>
-    <dd>
+      <div>拼接为</div>
       <pre>http://127.0.0.1:3000/api/</pre>
-    </dd>
-    <dd>替换掉/api后，解析为</dd>
-    <dd>
+      <div>替换掉/api后，解析为</div>
       <pre>http://127.0.0.1:3000/</pre>
-    </dd>
-    <dd>请求为：</dd>
-    <dd>
+      <div>请求为：</div>
       <pre>/api/detail</pre>
-    </dd>
-    <dd>拼接为</dd>
-    <dd>
+      <div>拼接为</div>
       <pre>http://127.0.0.1:3000/api/detail</pre>
-    </dd>
-    <dd>替换掉/api后，解析为</dd>
-    <dd>
+      <div>替换掉/api后，解析为</div>
       <pre>http://127.0.0.1:3000/detail</pre>
     </dd>
-    <dd class="example-sn">王者荣耀英雄资料数据抓取代理</dd>
-    <dd>添加一个代理</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 王者荣耀英雄资料数据抓取代理</dd>
     <dd>
+      <div>添加一个代理</div>
       <pre>
 '/api': {
   target: 'https://pvp.qq.com',
   changeOrigin: true,
   rewrite: (path) => path.replace(/^\/api/, '')
 }</pre>
-    </dd>
-    <dd>网络请求</dd>
-    <dd>
+      <div>网络请求</div>
       <pre>
 axios.get('/api/web201605/js/herolist.json').then(res => {
   console.log(res);
 })</pre>
     </dd>
     <dt>后端处理</dt>
-    <dd>简单粗暴的设置响应头Access-Control-Allow-Origin为所有*</dd>
     <dd>
+      <div>简单粗暴的设置响应头 Access-Control-Allow-Origin为所有*</div>
       <pre>
 router.get('/all', (req, res) => {
   // console.log('hi', req);
   res.header('Access-Control-Allow-Origin', '*')
   res.send(food.cont)
 })</pre>
-    </dd>
-    <dd>或设置指定的地址</dd>
-    <dd>
+      <div>或设置指定的地址</div>
       <pre>res.header('Access-Control-Allow-Origin', 'localhost:3000')</pre>
-    </dd>
-    <dd>为了避免在每个请求中设置响应头，可以使用中间件，统一处理</dd>
-    <dd>
+      <div>为了避免在每个请求中设置响应头，可以使用中间件，统一处理</div>
       <pre>
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -118,6 +104,15 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
 })</pre>
+    </dd>
+    <dt>使用第三方库 cors</dt>
+    <dd>
+      <div>安装</div>
+      <pre>npm install cors</pre>
+      <div>引入</div>
+      <pre>const cors = require('cors')</pre>
+      <div>使用</div>
+      <pre>app.use(cors());</pre>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
