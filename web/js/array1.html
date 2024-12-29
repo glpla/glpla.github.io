@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>迭代函数 Array</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/footer2025.css">
   <base target="_blank">
 </head>
 
@@ -16,7 +17,12 @@
     <span>&commat;Array</span>
   </header>
   <dl>
-    <dt>forEach()</dt>
+    <dd class="tips">
+      <div>以下为数组的实例方法</div>
+    </dd>
+    <dt><a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">forEach()</a>
+    </dt>
     <dd>
       <div>返回：没有</div>
       <div>对数组中的每一项执行给定函数。本质上与使用 for 循环迭代数组一样</div>
@@ -32,11 +38,13 @@ foreach(arr, (item) => {
   console.log(item);
 })</pre>
     </dd>
-    <dt>filter()</dt>
+    <dt><a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter()</a>
+    </dt>
     <dd>
+      <div>对数组中的每一项执行给定函数，返回执行结果为 true 的项组成的数组 - calls the predicate function one time for each element in the array
+      </div>
       <div>返回：符合条件的新数组</div>
-      <div>对数组中的每一项执行给定函数，返回执行结果为 true 的项组成的数组</div>
-      <div>calls the predicate function one time for each element in the array</div>
       <div>原数组：不会被修改</div>
       <pre>
 function filter(arr, fn) {
@@ -48,25 +56,66 @@ function filter(arr, fn) {
   }
   return res;
 }</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 获取偶数</dd>
+    <dd>
       <pre>
 let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-let res = arr.filter(item => item % 2 === 0;)
-console.log(res);</pre>
+let res = arr.filter(item => item % 2 === 0)</pre>
     </dd>
-    <dt>map()</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 删除指定特征如 id 的数据项 - 购物车、歌单</dd>
     <dd>
-      <div>返回：新数组</div>
-      <div>创建一个新数组，这个新数组由原数组中的每个元素都调用一次提供的函数后的返回值组成：对数组中的每一项执行给定函数，返回每次函数调用的结果组成的数组</div>
-      <div>需要使用一个变量接收函数的执行结果</div>
-      <div>原数组：不会被修改</div>
-      <div>适合创建包含的项与另一个数组一一对应的数组 - 映射</div>
-      <div>对结果数组进行连接join可以转化为对字符串的使用，如作为HTML字符串更新或创建DOM</div>
-      <div>函数表达式</div>
-      <div>声明为 const 更安全，避免被修改</div>
-      <div>结果数组拼接字符串</div>
-      <pre>let res = map((item, ind) => item.xx).join('');</pre>
+      <pre>
+let data = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' }]
+let res = data.filter(item => item.id != 11)</pre>
+      <div>函数封装</div>
+      <pre>
+function delItem(dataItem) {
+  data = data.filter(item => item.id != dataItem.id)
+}</pre>
     </dd>
-    <dt>every()</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map()</a>
+    </dt>
+    <dd>
+      <div>对数组中的每一项执行给定函数，返回每次函数调用的结果组成的数组</div>
+      <div>适合创建包含的项与另一个数组一一对应的数组 - 映射</div>
+      <div>返回：新数组</div>
+      <div>原数组：不会被修改</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 提取特征数据</dd>
+    <dd>
+      <div>从API请求的数据中获取数据项的 name 展示；也可以在请求时指定需要的数据，具体情况看API的支持</div>
+      <pre>
+let data = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' }]
+let res = data.map(item => item.name)</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 修改数据</dd>
+    <dd>
+      <pre>let data = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' }]</pre>
+      <div>修改格式</div>
+      <pre>let res = data.map(item => ({ id: item.id, name: item.name.toUpperCase() }))</pre>
+      <div>添加属性</div>
+      <pre>let res = data.map(item => ({ ...item, pass: true }))</pre>
+      <div>简单数组生成索引数组</div>
+      <pre>
+let data = ['gl', 'cq', 'sz', 'sh', 'gz']
+let res = data.map((item, ind) => ({ id: ind, location: item }))</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 创建 DOM</dd>
+    <dd>
+      <div>使用 join() 将数组转化为字符串使用</div>
+      <pre>
+fetch('/utils/data/message.json')
+.then(res => res.json())
+.then(res => {
+  console.log(res);
+  let json = res.cont.map(item => `<li>${item.msg}</li>`).join('')
+  ul.innerHTML = json
+})</pre>
+    </dd>
+    <dt><a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every">every()</a>
+    </dt>
     <dd>
       <div>返回：布尔值</div>
       <div>对数组中的每一项执行给定函数；如果该函数对 <span class="warn">每一项</span> 都返回 true，则返回 true</div>
@@ -86,7 +135,8 @@ const every = (arr, fn) => {
 res = every(arr, v => v > 10);
 console.log(res);</pre>
     </dd>
-    <dt>some()</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some">some()</a>
+    </dt>
     <dd>
       <div>返回类型：布尔值</div>
       <div>对数组中的每一项执行给定函数；如果该函数 <span class="warn">有一项</span> 返回 true，则返回 true</div>
@@ -116,7 +166,8 @@ let obj = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' 
 let flag = obj.some(item => item.name == 'sz')
 console.log(flag); // true     </pre>
     </dd>
-    <dt>find</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">find()</a>
+    </dt>
     <dd>
       <div>返回：查找到的数据，无则返回 undefined</div>
       <div>查找符合条件的 <span class="warn">第一个</span> 数据项</div>
@@ -129,23 +180,9 @@ let obj = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' 
 let res = obj.find(item => item.id === 11)
 console.log(res); // { id: 11, name: 'cq' }</pre>
     </dd>
-    <dd class="tips">
-      <div>以上方法都不会修改数组中的包含的值</div>
-    </dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script>
-    let arr = [0, 1, 2, 3, 4, 5]
-    let obj = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' }]
-    // let flag = arr.some(item => item > 5)
-    // let flag = obj.some(item => item.name == 'sz')
-    // console.log(flag);
-
-    // let res = arr.find(item => item > 3)
-    // console.log(res);
-    let res2 = obj.find(item => item.id === 11)
-    console.log(res2);
-  </script>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>

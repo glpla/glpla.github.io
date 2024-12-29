@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>数组 Array</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/footer2025.css">
   <base target="_blank">
 </head>
 
@@ -16,6 +17,8 @@
     <span>&commat;Array</span>
   </header>
   <dl>
+    <dd>更多应用，请访问 <a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></dd>
     <dt>声明</dt>
     <dd>直接赋值创建或构造函数创建</dd>
     <dd>
@@ -67,24 +70,57 @@ let b = [...a];</pre>
     <!-- <dd>设置length为0</dd>
     <dd>使用splice删除数组元素：splice(0, len)</dd> -->
   </dl>
-  <div class="chap">基本函数</div>
+  <div class="chap">Static methods</div>
+  <dl>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from">from()</a>
+    </dt>
+    <dd>
+      <div>.将一个类数组对象或者可遍历对象转换成一个真正的数组</div>
+      <div>1. 类数组</div>
+      <div>.使用获取多个元素方法，如 querySelectorAll()，得到的元素集合都是类数组对象，最基本的特点就是具有length属性的对象；如果没有长度属性，会被转化为一个空数组</div>
+      <div>2. set集合</div>
+      <div>.无重复数据的集合</div>
+      <div>3. 字符串</div>
+      <div>.将字符串拆分成单个字符的数组</div>
+    </dd>
+    <dt><a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray">isArray()</a>
+    </dt>
+    <dd>
+      <div>是否是一个数组</div>
+      <div>所有的数组都是对象，所以直接使用 typeof 返回的是 object</div>
+      <pre>
+console.log(typeof [1, 2]);//object
+console.log(Array.isArray([1, 2]));//true</pre>
+    </dd>
+  </dl>
+  <div class="chap">Instance methods</div>
   <dl>
     <dd>.数组既有栈的行为函数也有队列的行为函数</dd>
     <dd>.栈行为：先进后出 FILO；尾端操作；push()、pop()</dd>
     <dd>.队列行为：先进先出 FIFO；头出尾进：push()、shift()；使用 unshift()和 pop() 方法，可以从相反的方向来模拟队列，即在数组的前端添加项，从数组末端移除项</dd>
-    <dt>push()</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push">push()</a>
+    </dt>
     <dd>.添加元素到数组末尾</dd>
-    <dt>unshift()</dt>
+    <dt><a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift">unshift()</a>
+    </dt>
     <dd>.添加元素到头部</dd>
-    <dt>pop()</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop">pop()</a>
+    </dt>
     <dd>.移除数组末尾元素并返回</dd>
-    <dt>shift()</dt>
+    <dt><a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift">shift()</a>
+    </dt>
     <dd>.移除数组头部元素并返回</dd>
-    <dt>concat()</dt>
+    <dt><a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat">concat()</a>
+    </dt>
     <dd>.数组连接</dd>
     <dd>.返回一个新数组</dd>
     <dd>.不会修改原数组；不会去重</dd>
-    <dt>join()</dt>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join">join()</a>
+    </dt>
     <dd>
       <div>.数组元素按照指定的分隔符连接为字符串</div>
       <pre>
@@ -94,15 +130,9 @@ console.log(arr0.concat(arr1));//1, 2, 3, 3, 4, 5
 console.log(arr0);//1, 2, 3
 console.log(arr0.join('-'));//1-2-3</pre>
     </dd>
-    <dt>isArray()</dt>
-    <dd>
-      <div>是否是一个数组</div>
-      <div>所有的数组都是对象，所以直接使用 typeof 返回的是 object</div>
-      <pre>
-console.log(typeof [1, 2]);//object
-console.log(Array.isArray([1, 2]));//true</pre>
-    </dd>
-    <dt>slice(start,end)</dt>
+    <dt><a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice">slice(start,end)</a>
+    </dt>
     <dd>
       <div>Returns a copy of a section of an array. </div>
       <div>.取子串 - 选取串中位置|索引从 start 到 end 的部分；不包括 end</div>
@@ -117,7 +147,9 @@ let res = arr.slice(2, 4);
 console.log(res);//3,4
 console.log(arr);//不变</pre>
     </dd>
-    <dt>splice(start,count[,el...])</dt>
+    <dt><a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice">splice(start,count[,el...])</a>
+    </dt>
     <dd>
       <div>Removes elements from an array and, if necessary, inserts new elements in their place, returning the deleted
         elements.</div>
@@ -133,17 +165,9 @@ console.log(arr);//[1,2,5,6,7,8,9]
 arr.splice(2, 1, 8, 8);
 console.log(arr);//[1,2,8,8,6,7,8,9]；5被删除，插入|增加了2个8</pre>
     </dd>
-    <dt>from()</dt>
+    <dd class="tips">要清楚每个函数有无返回？如果有的话，返回值是什么？原数组有没有破坏？</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 洗牌 Shuffle</dd>
     <dd>
-      <div>.将一个类数组对象或者可遍历对象转换成一个真正的数组</div>
-      <div>1. 类数组</div>
-      <div>.使用获取多个元素方法，如 querySelectorAll()，得到的元素集合都是类数组对象，最基本的特点就是具有length属性的对象；如果没有长度属性，会被转化为一个空数组</div>
-      <div>2. set集合</div>
-      <div>.无重复数据的集合</div>
-      <div>3. 字符串</div>
-      <div>.将字符串拆分成单个字符的数组</div>
-      <div class="tips">要清楚每个函数有无返回？如果有的话，返回值是什么？原数组有没有破坏？</div>
-      <div>[<span class="iconfont icon-keyboard"></span>] 洗牌 Shuffle</div>
       <div>根据串/数组的长度，随机取一个位置值，然后将该位置的数据删除，形成一个新串/数组；重复执行到串/数组为空</div>
       <div>每次删除的数据放到一个新数组中，保存起来；这个数组就是洗牌的结果</div>
       <pre>
@@ -158,7 +182,8 @@ function shuffle(arr) {
 }</pre>
     </dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>

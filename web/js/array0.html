@@ -7,7 +7,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>排序 Sort</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/footer2025.css">
   <base target="_blank">
+  <style>
+    thead tr {
+      background-color: var(--tbl-color);
+      color: #fff;
+    }
+
+    thead th {
+      cursor: pointer;
+      height: 50px;
+    }
+
+    thead th div {
+      display: inline-flex;
+      flex-direction: column;
+    }
+
+    thead .iconfont {
+      font-size: 24px;
+      margin: -20px 0;
+      color: #fff;
+    }
+  </style>
 </head>
 
 <body>
@@ -16,11 +39,17 @@
     <span>&commat;Sort</span>
   </header>
   <dl>
-    <dd>按照一定规则对数据项排序</dd>
-    <dd>数组排序会修改原数组</dd>
+    <dd>
+      <div>按照一定规则对数据项排序</div>
+      <div>数组排序会修改原数组</div>
+      <div>更多信息，请访问 <a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">sort()</a>
+      </div>
+    </dd>
     <dt>sort()</dt>
     <dd>
-      <div>数组的 sort() 默认是根据数据项 <span class="warn">ASCII 值</span> 大小比较</div>
+      <div>不指定比较函数</div>
+      <div>数组的 默认是根据数据项 <span class="warn">ASCII 值</span> 大小比较</div>
       <pre>
 arr = [1,45,6,2,4,5]
 //升序
@@ -28,9 +57,9 @@ arr.sort(); //[1, 2, 4, 45, 5, 6]
 //降序
 arr.sort().reverse(); //[6, 5, 45, 4, 2, 1]</pre>
     </dd>
-    <dt>sort(a, b)</dt>
+    <dt>sort(compareFn)</dt>
     <dd>
-      <div>带参数的 sort() 可以按照参数进行排序</div>
+      <div>指定比较函数 - 按照参数进行排序</div>
       <div>1. 简单数组</div>
       <pre>
 arr = [1,45,6,2,4,5]
@@ -79,10 +108,26 @@ obj.sort((a, b) => {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 表格数据排序</dd>
     <dd>
-      <div>函数的封装</div>
+      <table>
+        <thead>
+          <tr>
+            <th onclick="sortString('name')">name <div><span class="iconfont icon-arrowdropup"></span><span
+                  class="iconfont icon-arrowdropdown"></span></div>
+            </th>
+            <th onclick="sortDigt('price')">price<div><span class="iconfont icon-arrowdropup"></span><span
+                  class="iconfont icon-arrowdropdown"></span></th>
+            <th onclick="sortDigt('stock')">stock<div><span class="iconfont icon-arrowdropup"></span><span
+                  class="iconfont icon-arrowdropdown"></span></th>
+            <th onclick="sortDigt('discount')">discount<div><span class="iconfont icon-arrowdropup"></span><span
+                  class="iconfont icon-arrowdropdown"></span></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
     </dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
   <script>
     const sortUp = (key) => {
       obj.sort((a, b) => {
@@ -104,6 +149,51 @@ obj.sort((a, b) => {
       return b.name.localeCompare(a.name)
     })
     console.log(obj);
+
+    const tbody = document.querySelector('tbody')
+    let data = []
+    let isAscending = false
+    fetch('/utils/data/coffee.json')
+      .then(res => res.json())
+      .then(res => {
+        data = res.cont.map(item => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          stock: item.stock,
+          discount: item.discount
+        }))
+        createTable(data)
+      })
+
+    function createTable(data) {
+      let html = data.map(item => {
+        return `<tr>
+            <td>${item.name}</td>
+            <td>${item.price}</td>
+            <td>${item.stock}</td>
+            <td>${item.discount}</td>
+          </tr>`
+      }).join('')
+      tbody.innerHTML = html
+    }
+
+    function sortString(key) {
+      let sort = data.sort((a, b) => {
+        return isAscending ? a[key].localeCompare(b[key]) : b[key].localeCompare(a[key])
+      })
+      createTable(sort)
+      isAscending = !isAscending
+    }
+    function sortDigt(key) {
+      let sort = data.sort((a, b) => {
+        return isAscending ? a[key] - b[key] : b[key] - a[key]
+      })
+      createTable(sort)
+      isAscending = !isAscending
+    }
+
+
   </script>
 </body>
 
