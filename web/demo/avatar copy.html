@@ -15,46 +15,71 @@
             --main-color: #5988b0;
             --second-color: #de5096;
             --w: 150px;
-            --h: 150px;
+            --h: 200px;
             --lh: 15px;
-            --p-m-g: 10px;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+            border: none;
+            outline: none;
+            color: inherit;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         *::before,
         *::after {
-            box-sizing: border-box;
+            box-sizing: inherit;
         }
 
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            place-items: center;
+            gap: 50px;
+            height: 100vh;
             background-color: #000;
-            padding: 50px 10px;
         }
 
         .wrap {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            justify-items: center;
-            align-items: flex-end;
-            column-gap: var(--p-m-g);
-            row-gap: 50px;
-            width: 96%;
+            position: relative;
+            width: var(--w);
+            height: var(--w);
         }
 
-        .item {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: var(--p-m-g);
+        /* case 1 */
+        .img {
+            height: var(--w);
+        }
+
+        .img img {
+            width: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+        }
+
+        .title::before {
+            content: 'wang fei';
+            position: absolute;
+            bottom: calc(var(--lh)*-4);
+            width: max-content;
+            padding: 0 10px;
+            font-size: calc(var(--lh)*2);
+            text-transform: capitalize;
+            color: var(--second-color, #f39c12);
+            font-family: 'greatvibes';
+            font-weight: 600;
+            mask-image: linear-gradient(to right, #0000, #000 50%, #000);
+            mask-size: 200% 100%;
+        }
+
+        .title:hover::before {
+            animation: scan 3s linear alternate infinite;
         }
 
         @keyframes scan {
@@ -64,38 +89,20 @@
             }
         }
 
-        /* case 1 */
-        .static img {
-            width: var(--w);
-            height: var(--h);
-            border: 5px solid #fff;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .static-title {
-            font-size: calc(var(--lh)*2);
-            text-transform: capitalize;
-            color: var(--color, #f39c12);
-            font-family: 'greatvibes';
-            font-weight: 600;
-            mask-image: linear-gradient(to right, #0000, #000 50%, #000);
-            mask-size: 200% 100%;
-        }
-
-        .item:hover .static-title {
-            animation: scan 3s linear alternate infinite;
-        }
-
         /* case 2 */
-        .bg-avatar {
-            position: relative;
+        .bg {
             width: calc(var(--w) - 10px);
-            height: calc(var(--h) - 10px);
+            height: calc(var(--w) - 10px);
+        }
+
+        .bg-avatar {
+            width: 100%;
+            height: 100%;
             background-image: url(../imgs/wangfei.png);
             background-position: center;
             background-size: cover;
             border-radius: 50%;
+            cursor: pointer;
         }
 
         .bg-avatar::before {
@@ -108,7 +115,12 @@
             animation: roll 5s linear infinite;
         }
 
-        .bg-title {
+        .bg-avatar::after {
+            content: 'wang fei';
+            position: absolute;
+            bottom: calc(var(--lh)*-4);
+            width: max-content;
+            padding: 0 10px;
             font-size: calc(var(--lh)*2);
             text-transform: capitalize;
             color: transparent;
@@ -121,7 +133,7 @@
             transition: background-position 0.5s;
         }
 
-        .bg:hover .bg-title {
+        .bg-avatar:hover::after {
             background-position: 100% 0;
         }
 
@@ -131,55 +143,9 @@
             }
         }
 
-        /* rotate */
-        .scale-avatar {
-            position: relative;
-            width: var(--w);
-            height: var(--h);
-            border-radius: 50%;
-        }
-
-        .scale-avatar::before {
-            content: '';
-            position: absolute;
-            inset: 0px;
-            transition: .5s;
-            border-radius: 50%;
-            background-image: linear-gradient(#098 50%, #fff 0);
-        }
-
-        .scale-avatar:hover::before {
-            transform: rotate(180deg);
-        }
-
-        .scale-avatar div {
-            position: absolute;
-            inset: 5px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .scale-avatar div::after {
-            content: '';
-            position: absolute;
-            inset: 0px;
-            border-radius: 50%;
-            background-image: url(https://images.unsplash.com/photo-1699901853492-8bc942fc6a5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDIxMDczNTB8&ixlib=rb-4.0.3&q=80&w=400);
-            background-size: cover;
-            background-position: center;
-            transition: .5s;
-        }
-
-        .scale-avatar:hover div::after {
-            transform: scale(1.5);
-        }
-
         /* case 3 */
         .scale {
-            position: relative;
-            --h: 200px;
-            width: var(--w);
-            height: var(--h);
+            height: var(--w);
             border-bottom-left-radius: 120px;
             border-bottom-right-radius: 120px;
             /* background-color: #fff; */
@@ -215,6 +181,7 @@
         }
 
         .scale .mask {
+            --second-color: #f39c12;
             position: absolute;
             bottom: 0;
             width: var(--w);
@@ -229,32 +196,64 @@
         .scale:hover::after {
             background-size: 110%;
         }
+
+        /* rotate */
+        .rotate,
+        .scale-avatar {
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .scale-avatar {
+            position: absolute;
+            inset: 6px;
+        }
+
+        .rotate::before,
+        .scale-avatar::before {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            transition: .5s;
+        }
+
+        .scale-avatar::before {
+            content: '';
+            position: absolute;
+            inset: 0px;
+            background-image: url(https://images.unsplash.com/photo-1699901853492-8bc942fc6a5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDIxMDczNTB8&ixlib=rb-4.0.3&q=80&w=400);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .rotate::before {
+            inset: 0px;
+            background-image: linear-gradient(#098 50%, #fff 0)
+        }
+
+        .rotate:hover::before {
+            transform: rotate(180deg);
+        }
+
+        .rotate:hover .scale-avatar::before {
+            transform: scale(1.5);
+        }
     </style>
 </head>
 
 <body>
-    <div class="wrap">
-        <div class="item static">
-            <img src="../imgs/wangfei.png" alt="">
-            <div class="static-title">wang fei</div>
-        </div>
-        <div class="item bg">
-            <div class="bg-avatar"></div>
-            <div class="bg-title" style="--color:#de5096">wang fei</div>
-        </div>
-        <div class="item rotate">
-            <div class="scale-avatar">
-                <div></div>
-            </div>
-            <div class="static-title" style="--color:#098">wang fei</div>
-        </div>
-        <dd class="item ">
-            <div class="scale">
-                <div class="mask title"></div>
-            </div>
-            <div class="static-title" style="--color:#f39c12">wang fei</div>
-        </dd>
+    <div class="wrap img title">
+        <img src="../imgs/wangfei.png" alt="">
     </div>
+    <div class="wrap bg">
+        <div class="bg-avatar"></div>
+    </div>
+    <div class="wrap rotate">
+        <div class="scale-avatar"></div>
+    </div>
+    <dd class="wrap scale">
+        <div class="mask title"></div>
+    </dd>
 </body>
 
 </html>
