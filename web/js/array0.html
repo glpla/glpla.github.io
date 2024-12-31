@@ -18,6 +18,7 @@
     thead th {
       cursor: pointer;
       height: 50px;
+      user-select: none;
     }
 
     thead th div {
@@ -26,8 +27,6 @@
     }
 
     thead .iconfont {
-      font-size: 24px;
-      margin: -20px 0;
       color: #fff;
     }
   </style>
@@ -49,35 +48,35 @@
     <dt>sort()</dt>
     <dd>
       <div>不指定比较函数</div>
-      <div>数组的 默认是根据数据项 <span class="warn">ASCII 值</span> 大小比较</div>
+      <div>默认根据数据项 <span class="warn">UTF-16 编码</span>升序比较 - The default sort order is ascending</div>
       <pre>
-arr = [1,45,6,2,4,5]
+const arr = [1,45,6,2,4,5]
 //升序
 arr.sort(); //[1, 2, 4, 45, 5, 6]
 //降序
 arr.sort().reverse(); //[6, 5, 45, 4, 2, 1]</pre>
+      <pre>
+const arr = ['banana', 'apple', 'cherry'];
+arr.sort(); // ['apple', 'banana', 'cherry']</pre>
     </dd>
     <dt>sort(compareFn)</dt>
     <dd>
       <div>指定比较函数 - 按照参数进行排序</div>
-      <div>1. 简单数组</div>
+      <div>1. 数值型</div>
+      <div>. 简单数组</div>
       <pre>
 arr = [1,45,6,2,4,5]
 //升序
 arr.sort((a, b) => a - b);  //[1, 2, 4, 5, 6, 45]
 //降序
 arr.sort((a, b) => b - a);  //[45, 6, 5, 4, 2, 1]</pre>
-      <pre>
-let arr = ['banana', 'apple', 'cherry'];
-arr.sort();
-console.log(arr); // ['apple', 'banana', 'cherry']</pre>
-      <div>2. 对象数组 - 按年纪 age 排序</div>
+      <div>. 对象数组 - 按年纪 age 排序</div>
       <pre>
 //升序
 obj.sort((a, b) => a['age'] - b['age']);
 //降序
 obj.sort((a, b) => b['age'] - a['age']);</pre>
-      <div>3. 封装函数使用 - 根据 key 排序</div>
+      <div>. 封装函数使用 - 根据 key 排序</div>
       <pre>
 const sortUp = (key) => {
   arr.sort((a, b) => {
@@ -89,18 +88,16 @@ const sortDown = (key) => {
     return b[key] - a[key]
   })
 }</pre>
-    </dd>
-    <dd class="tips">为什么连续测试结果相等？</dd>
-    <!-- <dd>数组的引用传值</dd> -->
-    <dt>字符数组排序</dt>
-    <dd>
-      <div>以上都是根据数字字段排序；如果需要根据字符排序，需要使用比较函数 <span class="warn">localeCompare()</span></div>
-      <div>1. 按字符升序排序</div>
+      <div class="tips">为什么连续测试结果相等？</div>
+      <!-- <dd>数组的引用传值</dd> -->
+      <div>2. 字符数组排序</div>
+      <div>. 如果需要根据字符排序，需要使用比较函数 <span class="warn">localeCompare()</span></div>
+      <div>. 按字符升序排序</div>
       <pre>
 obj.sort((a, b) => {
   return a.name.localeCompare(b.name)
 })    </pre>
-      <div>2. 按字符降序排序</div>
+      <div>. 按字符降序排序</div>
       <pre>
 obj.sort((a, b) => {
   return b.name.localeCompare(a.name)
@@ -111,15 +108,11 @@ obj.sort((a, b) => {
       <table>
         <thead>
           <tr>
-            <th onclick="sortString('name')">name <div><span class="iconfont icon-arrowdropup"></span><span
-                  class="iconfont icon-arrowdropdown"></span></div>
+            <th onclick="sortTbl(0)">name <div><span class="iconfont icon-sort" id="icon-0"></span></div>
             </th>
-            <th onclick="sortDigt('price')">price<div><span class="iconfont icon-arrowdropup"></span><span
-                  class="iconfont icon-arrowdropdown"></span></th>
-            <th onclick="sortDigt('stock')">stock<div><span class="iconfont icon-arrowdropup"></span><span
-                  class="iconfont icon-arrowdropdown"></span></th>
-            <th onclick="sortDigt('discount')">discount<div><span class="iconfont icon-arrowdropup"></span><span
-                  class="iconfont icon-arrowdropdown"></span></th>
+            <th onclick="sortTbl(1)">price<div><span class="iconfont icon-sort" id="icon-1"></span></th>
+            <th onclick="sortTbl(2)">stock<div><span class="iconfont icon-sort" id="icon-2"></span></th>
+            <th onclick="sortTbl(3)">discount<div><span class="iconfont icon-sort" id="icon-3"></span></th>
           </tr>
         </thead>
         <tbody id="tbody"></tbody>
@@ -139,20 +132,12 @@ obj.sort((a, b) => {
         return b[key] - a[key]
       })
     }
-    obj = [
-      { id: 100, name: 'gx', age: 18 },
-      { id: 101, name: 'cq', age: 15 },
-      { id: 102, name: 'gd', age: 20 },
-      { id: 103, name: 'sh', age: 19 }]
-    // sortDown('name')
-    obj.sort((a, b) => {
-      return b.name.localeCompare(a.name)
-    })
-    console.log(obj);
 
     const tbody = document.querySelector('tbody')
     let data = []
-    let isAscending = false
+    let sortedData = []
+    let isAscending = true
+
     fetch('/utils/data/coffee.json')
       .then(res => res.json())
       .then(res => {
@@ -179,20 +164,62 @@ obj.sort((a, b) => {
     }
 
     function sortString(key) {
-      let sort = data.sort((a, b) => {
+      sortedData = data.sort((a, b) => {
         return isAscending ? a[key].localeCompare(b[key]) : b[key].localeCompare(a[key])
       })
-      createTable(sort)
-      isAscending = !isAscending
-    }
-    function sortDigt(key) {
-      let sort = data.sort((a, b) => {
-        return isAscending ? a[key] - b[key] : b[key] - a[key]
-      })
-      createTable(sort)
+      createTable(sortedData)
       isAscending = !isAscending
     }
 
+    function sortDigt(key) {
+      sortedData = data.sort((a, b) => {
+        return isAscending ? a[key] - b[key] : b[key] - a[key]
+      })
+      createTable(sortedData)
+      isAscending = !isAscending
+    }
+
+    function updateIcon(ind, flag) {
+      let icon = document.querySelector(`#icon-${ind}`)
+      icon.className = flag ? 'iconfont icon-sortup' : 'iconfont icon-sortdown'
+    }
+
+    function resetIcons() {
+      for (let i = 0; i < 4; i++) {
+        let icon = document.querySelector(`#icon-${i}`)
+        icon.className = 'iconfont icon-sort'
+      }
+    }
+
+    function sortTbl(ind) {
+      resetIcons()
+      sortedData = [...data].sort((a, b) => {
+        let aVal, bVal;
+        switch (ind) {
+          case 0:
+            aVal = a.name
+            bVal = b.name
+            return isAscending ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal)
+            break;
+          case 1:
+            aVal = a.price
+            bVal = b.price
+            break;
+          case 2:
+            aVal = a.stock
+            bVal = b.stock
+            break;
+          case 3:
+            aVal = a.discount
+            bVal = b.discount
+            break;
+        }
+        return isAscending ? aVal - bVal : bVal - aVal
+      })
+      updateIcon(ind, isAscending);
+      createTable(sortedData);
+      isAscending = !isAscending;
+    }
 
   </script>
 </body>

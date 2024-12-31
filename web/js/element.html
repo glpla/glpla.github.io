@@ -9,6 +9,45 @@
   <link rel="stylesheet" href="../../css/common.css">
   <link rel="stylesheet" href="../../css/footer2025.css">
   <base target="_blank">
+  <style>
+    .cards-wrap {
+      background-color: #000;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 96%;
+      max-width: 800px;
+      gap: var(--p-m-g);
+      margin: 0 auto;
+      padding: var(--p-m-g);
+    }
+
+    .cards .card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background-color: #000;
+      border-radius: var(--p-m-g);
+      overflow: hidden;
+    }
+
+    .cards .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(closest-side circle, #fff 0%, #0000 100%);
+      transform: translate(var(--x, -1000px), var(--y, -1000px));
+    }
+
+    .cards .item {
+      position: absolute;
+      inset: 2px;
+      border-radius: var(--p-m-g);
+      background-color: #333;
+    }
+  </style>
 </head>
 
 <body>
@@ -238,6 +277,41 @@ links.forEach((link, ind) => {
       <div>.返回一个 DOMRect 对象，其提供了元素的大小及其相对于 <span class="warn">视口</span> 的位置 - the size of an element and its position
         relative to the viewport</div>
       <div>.描述整个矩形的位置和大小：left、top、right、bottom、x、y、width 、height</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>]</dd>
+    <dd>
+      <div>CSS 变量</div>
+      <div class="cards-wrap">
+        <div class="cards">
+          <div class="card">
+            <div class="item"></div>
+          </div>
+          <div class="card">
+            <div class="item"></div>
+          </div>
+          <div class="card">
+            <div class="item"></div>
+          </div>
+          <div class="card">
+            <div class="item"></div>
+          </div>
+          <div class="card">
+            <div class="item"></div>
+          </div>
+          <div class="card">
+            <div class="item"></div>
+          </div>
+          <div class="card">
+            <div class="item"></div>
+          </div>
+          <div class="card">
+            <div class="item"></div>
+          </div>
+          <div class="card">
+            <div class="item"></div>
+          </div>
+        </div>
+      </div>
     </dd>
   </dl>
   <div class="chap">事件 Events</div>
@@ -699,6 +773,16 @@ box.addEventListener('touchend', () => {
     document.addEventListener('paste', (e) => {
       e.preventDefault()
       alert('禁止粘贴')
+    })
+    const cards = document.querySelectorAll('.card');
+    window.addEventListener('mousemove', (e) => {
+      for (const card of cards) {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        card.style.setProperty('--x', `${x}px`);
+        card.style.setProperty('--y', `${y}px`);
+      }
     })
   </script>
 </body>

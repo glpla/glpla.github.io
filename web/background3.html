@@ -28,7 +28,15 @@
       <div>. 利用不同的颜色以图片的形式渲染背景</div>
       <div>. 可以多次渲染；先出现的在上面，后出现的在后面</div>
       <div>. 复合属性 - 可读性差</div>
-      <pre>background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;</pre>
+      <pre>background:
+  bg-color 
+  bg-image 
+  position/bg-size 
+  bg-repeat 
+  bg-origin 
+  bg-clip 
+  bg-attachment 
+  initial|inherit;</pre>
       <div>. 独立属性 - 可读性好</div>
     </dd>
   </dl>
@@ -42,28 +50,29 @@
       <div>. 位置：不特别指明都是从0开始，到100%结束；这俩个位置的值 <span class="warn">可以省略</span></div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient">MDN -
           linear-gradient</a></div>
-      <pre>background-image: linear-gradient(direction, color-stop1, color-stop2, ...);</pre>
+      <pre>background-image: 
+  linear-gradient(direction, color-stop1, color-stop2, ...);</pre>
     </dd>
     <dt>基本渐变</dt>
     <dd class="grid">
       <div class="basic default-bg"></div>
       <pre>
-// 默认渐变|180deg：从上到下
-background-image: linear-gradient(#f40, #ff0);
-//或
-background-image: linear-gradient(to bottom, #f40, #ff0);</pre>
+background-image: 
+  linear-gradient(#f40, #ff0);
+background-image: 
+  linear-gradient(to bottom, #f40, #ff0);</pre>
       <div class="basic deg0-bg"></div>
       <pre>
-// 0deg渐变：从下到上；0deg并不是向右
-background-image: linear-gradient(0deg, #f40, #ff0);
-//或
-background-image: linear-gradient(to top, #f40, #ff0);</pre>
+background-image: 
+  linear-gradient(0deg, #f40, #ff0);
+background-image: 
+  linear-gradient(to top, #f40, #ff0);</pre>
       <div class="basic deg45-bg"></div>
       <pre>
-// 45deg渐变：左下到右上
-background-image: linear-gradient(45deg, #f40, #ff0);
-//或
-background-image: linear-gradient(to top right, #f40, #ff0);</pre>
+background-image: 
+  linear-gradient(45deg, #f40, #ff0);
+background-image: 
+  linear-gradient(to top right, #f40, #ff0);</pre>
     </dd>
     <dt>断点渐变</dt>
     <dd>. 断点处使用相同的色块大小；使用0表示和前面色块的范围相同</dd>
@@ -72,29 +81,30 @@ background-image: linear-gradient(to top right, #f40, #ff0);</pre>
       <div class="price-bg"></div>
       <pre>
 // 切割色块 - 将其中一个色块设置为白色或透明
-background-image: linear-gradient(90deg, 
-  #f40 50%, #fff 0);</pre>
+background-image: 
+linear-gradient(90deg, #f40 50%, #fff 0);</pre>
       <div class="price-bg-adv">
         <span>&yen;99</span>
         <del>&yen;199</del>
       </div>
       <pre>
 // 价格促销
-background-image: linear-gradient(90deg, 
-  #f40 50%, #fff 0);</pre>
+background-image: 
+linear-gradient(90deg, #f40 50%, #fff 0);</pre>
       <div class="rt-bg"></div>
       <pre>
 // 增加有色部分的占比
-background-image: linear-gradient(45deg, 
-  #f40 95%, #fff 0);</pre>
+background-image: 
+linear-gradient(45deg, #f40 95%, #fff 0);</pre>
       <div class="zebra-bg"></div>
       <pre>
 // 斑马渐变；也可以使用多个背景或重复线性渐变实现
-background-image: linear-gradient(90deg, 
-  #f40 20%, #fff 0, 
-  #fff 40%, #f40 0, 
-  #f40 60%, #fff 0, 
-  #fff 80%, #f40 0);</pre>
+background-image: 
+  linear-gradient(90deg, 
+    #f40 20%, #fff 0, 
+    #fff 40%, #f40 0, 
+    #f40 60%, #fff 0, 
+    #fff 80%, #f40 0);</pre>
       <div class="ltrt-bg"></div>
       <pre>
 // 2个背景图片叠加而成；一左一右放置；不重复
@@ -108,12 +118,16 @@ background-repeat: no-repeat;</pre>
       <pre>
 // 4个背景；宽高各为50%；分别放置4个角；不重复
 background-image:
-    linear-gradient(45deg, #f40 95%, #fff 0),
-    linear-gradient(135deg, #fff 5%, #f40 0),
-    linear-gradient(45deg, #fff 5%, #f40 0),
-    linear-gradient(135deg, #f40 95%, #fff 0);
+  linear-gradient(45deg, #f40 95%, #fff 0),
+  linear-gradient(135deg, #fff 5%, #f40 0),
+  linear-gradient(45deg, #fff 5%, #f40 0),
+  linear-gradient(135deg, #f40 95%, #fff 0);
 background-size: 50% 50%;
-background-position: right top, left top, left bottom, right bottom;
+background-position: 
+  right top, 
+  left top, 
+  left bottom, 
+  right bottom;
 background-repeat: no-repeat;</pre>
       <div class="basic mask-bg"></div>
       <pre>
@@ -138,35 +152,43 @@ background-size: cover;</pre>
       <div>. 同线性渐变一样：创建一个径向渐变，至少定义两个色块；可以定义每个色块的渐变范围；可以指定大小；可以定义多重径向渐变等等</div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/radial-gradient">MDN -
           radial-gradient</a></div>
-      <pre>background-image: radial-gradient([shape] [size] at position, start-color, ..., last-color);</pre>
+      <pre>background-image: 
+  radial-gradient([shape] [size] at position, start-color, ..., last-color);</pre>
     </dd>
     <dt>参数说明：</dt>
-    <dd>. shape： 椭圆eclipse[默认]，圆circle</dd>
-    <dd>. size：到容器的边或角的距离；closest-side、farthest-side、closest-corner、farthest-corner[默认]</dd>
-    <dd>. position：为中心；可以使用关键字指定位置；可以使用数字；可以百分比</dd>
-    <dd><img class="tips-bg" src="./imgs/bg0.png" alt=""></dd>
+    <dd>
+      <div>. shape： 椭圆eclipse[默认]，圆circle</div>
+      <div>. size：到容器的边或角的距离；closest-side、farthest-side、closest-corner、farthest-corner[默认]</div>
+      <div>. position：为中心；可以使用关键字指定位置；可以使用数字；可以百分比</div>
+      <img class="tips-bg" src="./imgs/bg0.png" alt="">
+    </dd>
     <dt>基本渐变</dt>
     <dd class="grid">
       <div class="basic default-radial"></div>
       <pre>
 // 默认渐变：从中心向外
-background-image: radial-gradient(#f40, #ff0);</pre>
+background-image: 
+  radial-gradient(#f40, #ff0);</pre>
       <div class="basic lt-radial"></div>
       <pre>
 // 圆形从左上向外渐变
-background-image: radial-gradient(circle at left top, #f40, #ff0);</pre>
+background-image: 
+  radial-gradient(circle at left top, #f40, #ff0);</pre>
       <div class="basic lt-clip-radial"></div>
       <pre>
 // 圆形从左上向外断点渐变
-background-image: radial-gradient(circle at top left, #f40 50%, #ff0 0);</pre>
+background-image: 
+  radial-gradient(circle at top left, #f40 50%, #ff0 0);</pre>
       <div class="basic rt-clip-radial"></div>
       <pre>
 // 放置于右上角的50px的圆形
-background-image: radial-gradient(circle at top left, #f40 50%, #ff0 0);</pre>
+background-image: 
+  radial-gradient(circle at top left, #f40 50%, #ff0 0);</pre>
       <div class="radial-basic single-radial"></div>
       <pre>
 // 弧度 - 单重渐变
-background-image: radial-gradient(at 0% 0%, transparent 71%, #f40 0);</pre>
+background-image: 
+  radial-gradient(at 0% 0%, transparent 71%, #f40 0);</pre>
       <div class="radial-basic ad-radial"></div>
       <pre>
 // 弧度 - 多重渐变
@@ -186,6 +208,36 @@ background:
 background-repeat: no-repeat;
 background-size: 50% 50%;</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 利用断点渐变体会参数 size</dd>
+    <dd>调整背景的位置，再观察结果</dd>
+    <dd class="grid size">
+      <div></div>
+      <pre>
+// 观察到哪个边最近
+background-image: 
+  radial-gradient(circle closest-side, 
+  #f40 50%, #089 0);</pre>
+      <div></div>
+      <pre>
+// 观察到哪个边最远
+background-image: 
+  radial-gradient(circle farthest-side, 
+  #f40 50%, #089 0);</pre>
+      <div></div>
+      <pre>
+// 观察到哪个角最近
+background-image: 
+  radial-gradient(circle closest-corner, 
+  #f40 50%, #089 0);
+      </pre>
+      <div></div>
+      <pre>
+// 观察到哪个角最远
+background-image: 
+  radial-gradient(circle farthest-corner, 
+  #f40 50%, #089 0);
+      </pre>
+    </dd>
     <dd class="tips">更多径向渐变背景，请访问重复径向渐变：repeating-radial-gradient()</dd>
   </dl>
   <div class="chap">锥向渐变 Conic-gradient</div>
@@ -198,18 +250,20 @@ background-size: 50% 50%;</pre>
       <div>. 使用0表示从前面部分结束的位置开始</div>
       <div>. 更多信息，请访问 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/conic-gradient">MDN -
           conic-gradient</a></div>
-      <pre>conic-gradient([from angle] [at position,] color degree, color degree, ...);</pre>
+      <pre>background-image:
+  conic-gradient([from angle] [at position,] color degree, color degree, ...);</pre>
     </dd>
     <dt>基本渐变</dt>
     <dd class="grid">
       <div class="basic pie0"></div>
       <pre>
-// 从0到360deg的渐变；默认
-background-image: conic-gradient(#f3f3f3, #078);</pre>
+background-image: 
+  conic-gradient(#f3f3f3, #078);</pre>
       <div class="basic pie1"></div>
       <pre>
 // 划分3个区域：0-40deg、40-120deg、120-360deg
-background-image: conic-gradient(
+background-image: 
+  conic-gradient(
     hsl(188, 100%, 40%) 0deg  40deg, 
     hsl(188, 100%, 27%) 40deg 120deg, 
     hsl(188, 100%, 20%) 120deg 360deg);</pre>
@@ -271,7 +325,9 @@ background-image: conic-gradient(
 .blend-img {
     width: 320px;
     height: 180px;
-    background: url(../imgs/bg.jpg), url(../imgs/mask.jpg);
+    background: 
+      url(../imgs/bg.jpg), 
+      url(../imgs/mask.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;

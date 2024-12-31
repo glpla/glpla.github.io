@@ -7,6 +7,7 @@
   <title>Demo</title>
   <style>
     :root {
+      --num: 18;
       --bg-color: #fff;
       --txt-color: #000;
     }
@@ -27,24 +28,109 @@
       transition: background-color 0.5s, color 0.5s 0.2s;
     }
 
-    h1 {
-      color: #f40;
-      font-size: 3rem;
-      mask-image: linear-gradient(to right, #0000, #000 50%, #0000);
+    .wrap {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      perspective: 1000px;
+    }
+
+    .ball {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 50%;
+      top: -10px;
+      margin-left: -10px;
+      transform-origin: center 150px;
+      transform-style: preserve-3d;
+      transform: rotateZ(calc(var(--deg)*360deg/var(--num)));
+      animation: rolling 3s linear calc(-3s/var(--num)*var(--deg)) infinite;
+    }
+
+    @keyframes rolling {
+      100% {
+        transform: rotateZ(calc(var(--deg)*360deg/var(--num))) rotateX(360deg);
+      }
+    }
+
+    .ball::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: -100%;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #f40;
+      transform: translateZ(10px);
+      /* animation: down 1s linear calc(-1s/var(--num)*var(--deg)) infinite; */
+    }
+
+    .ball::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #089;
+      transform: translateZ(-10px);
+      /* animation: up 1s linear calc(-1s/var(--num)*var(--deg)) infinite; */
+    }
+
+    @keyframes down {
+      25% {
+        transform: translateY(100%) translateZ(-10px);
+      }
+
+      50% {
+        transform: translateY(200%) translateZ(10px);
+      }
+
+      75% {
+        transform: translateY(100%) translateZ(-10px);
+      }
+    }
+
+    @keyframes up {
+      25% {
+        transform: translateY(-100%) translateZ(10px);
+      }
+
+      50% {
+        transform: translateY(-200%) translateZ(-10px);
+      }
+
+      75% {
+        transform: translateY(-100%) translateZ(10px);
+      }
     }
   </style>
 </head>
 
 <body>
-  <h1>Lorem ipsum dolor sit amet.</h1>
-  <script>
-    // let data = new Date().toLocaleString()
-    // let data = new Date().toLocaleDateString()
-    let data = new Date().toLocaleTimeString()
-    console.log(data);
-
-
-  </script>
+  <div class="wrap">
+    <div class="ball" style="--deg:0"></div>
+    <div class="ball" style="--deg:1"></div>
+    <div class="ball" style="--deg:2"></div>
+    <div class="ball" style="--deg:3"></div>
+    <div class="ball" style="--deg:4"></div>
+    <div class="ball" style="--deg:5"></div>
+    <div class="ball" style="--deg:6"></div>
+    <div class="ball" style="--deg:7"></div>
+    <div class="ball" style="--deg:8"></div>
+    <div class="ball" style="--deg:9"></div>
+    <div class="ball" style="--deg:10"></div>
+    <div class="ball" style="--deg:11"></div>
+    <div class="ball" style="--deg:12"></div>
+    <div class="ball" style="--deg:13"></div>
+    <div class="ball" style="--deg:14"></div>
+    <div class="ball" style="--deg:15"></div>
+    <div class="ball" style="--deg:16"></div>
+    <div class="ball" style="--deg:17"></div>
+  </div>
 </body>
 
 </html>
