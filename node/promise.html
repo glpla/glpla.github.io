@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Promise</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/footer2025.css">
   <base target="_blank">
 </head>
 
@@ -15,20 +16,20 @@
     <h1>Promise</h1>
   </header>
   <dl>
-    <dt>概述</dt>
+    <dt>Overview</dt>
     <dd>
+      <div>Promise 是 JavaScript 语言的核心特性，适用于所有支持 ES6 或更高版本的 JavaScript 环境，包括浏览器和 Node.js</div>
+      <div>异步编程模型：Promise 提供了一种更清晰、更可控的方式来处理异步操作的结果，相比传统的回调函数 callback，它可以更好地避免<span class="warn">回调地狱</span>问题</div>
       <div>函数类型，实际上是一个对象</div>
       <div>承诺在未来某个时刻可能完成并返回结果：成功或失败</div>
-      <div>异步操作，用来解决异步调用的问题 - 回调地狱</div>
       <div>更多信息，请查看 <a href="https://mp.weixin.qq.com/s/kvMN1ckx0tEEVa0TaZcxMQ">8个Promise高级技巧，让你在前端开发中如虎添翼！</a></div>
       <pre>
 console.log(typeof (Promise)); //function
 //或
 console.dir(Promise);</pre>
       <img src="./imgs/promise.png" alt="">
-      <div class="tips">以 <a href="./fetch.html">fetch</a> 请求数据为例</div>
     </dd>
-    <dt>生命周期/状态</dt>
+    <dt>Lifetime</dt>
     <dd class="sn">
       <div>待定状态 pending；还没有完成；未执行；状态不确定</div>
       <div>履行状态 fulfilled；完成且执行成功</div>
@@ -192,7 +193,7 @@ pa()
 })</pre>
     </dd>
   </dl>
-  <div class="chap">构造函数</div>
+  <div class="chap">Constructor</div>
   <dl>
     <dd>
       <div>.构造函数接收一个 <span>执行器 Executor</span> 函数作为参数</div>
@@ -291,7 +292,8 @@ let promise = new Promise((resolve, reject) => {
   })      </pre>
     </dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
   <script>
     let flag = false
     let promise = new Promise((resolve, reject) => {
