@@ -405,6 +405,23 @@ function time(secs) {
   return `${minRes}:${secRes}`;
 }</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 单击超链接/按钮时播放音效并跳转</dd>
+    <dd>
+      <pre>
+const links = document.querySelectorAll('.nav-item');
+const se = new Audio('/utils/sound/click0.mp3')
+se.volume = 0.5;
+links.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault()
+    se.currentTime = 0;
+    se.play()
+    se.addEventListener('ended', () => {
+      window.location.href = link.href;
+    })
+  })
+})      </pre>
+    </dd>
   </dl>
   <div class="chap">总结与作业 Summary & Homework</div>
   <dl>

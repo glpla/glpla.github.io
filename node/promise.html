@@ -128,7 +128,7 @@ promise.catch(reject => {
     <dt>finally()</dt>
     <dd>
       <div>.使用 finally() 分配 <span class="warn">解决处理器</span> - 表示处理结束，不管处理结果如何</div>
-      <div>.可以集中处理结束后的逻辑，而不用在成功和失败中分别处理；如进度条的处理，不管数据加载是否成功，最后都要隐藏进度条</div>
+      <div>.可以集中处理结束后的逻辑，而不用在成功和失败中分别处理；如进度条/加载指示器的处理，不管数据加载是否成功，最后都要隐藏进度条</div>
       <div>.解决处理器无法使用返回，return 将被忽略；所以如果后续继续使用 Promise，则得不到结果</div>
       <pre>
 let promise = fetch(url)
@@ -145,12 +145,35 @@ promise.finally(log => {
       <div>.全部成功：只有当所有的 Promise 都 resolve（成功）时，返回的 Promise 实例才会 resolve，并将每个输入 Promise 的 resolve 值组成一个数组 </div>
       <div>.任意失败则整体失败：如果传入的任何一个 Promise 变为 rejected（失败），或者传入的不是一个 Promise，则 Promise.all() 立即 reject，并将第一个错误原因作为其结果</div>
       <div>.处理相互独立的任务时能显著提高效率</div>
-      <div class="example-sn"> 彼此无需依赖关系，如同时请求A、B、C，可以并行请求；如首页加载：轮播图、用户信息、商品列表、活动信息等诸多内容</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 彼此无需依赖关系，如同时请求A、B、C，可以并行请求；如首页加载：轮播图、用户信息、商品列表、活动信息等诸多内容</div>
       <pre>
-Promise.all([pa(), pb(), pc()])
-.then(res => {
-  console.log(res);
-})</pre>
+let promises = Promise
+  .all([f0(), f1(), f2()])
+  .then(e => {
+    console.log('all ok')
+    console.dir(e)
+  })
+  .catch(err => {
+    console.log('err', err)
+  })
+  .finally(() => {
+    console.log('all done')
+  })
+
+function f0() {
+  return fetch('/utils/data/cart.json')
+    .then(res => res.json())
+}
+
+function f1() {
+  return fetch('/utils/data/form.json')
+    .then(res => res.json())
+}
+
+function f2() {
+  return fetch('/utils/data/coffee.json')
+    .then(res => res.json())
+}</pre>
     </dd>
     <dt>any()</dt>
     <dd>

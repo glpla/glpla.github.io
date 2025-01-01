@@ -197,6 +197,7 @@
     // bgm
     const avatar = body.querySelector('.avatar');
     const audio = new Audio('/utils/music/华语群星 - 当那一天来临.ogg');
+    audio.volume = 0.5;
     audio.addEventListener('ended', function () {
       console.log('音频播放已结束');
       avatar.classList.toggle('play')
@@ -220,7 +221,18 @@
 
     ScrollReveal().reveal(".nav-item>*", revealOption);
 
-
+    const links = document.querySelectorAll('.nav-item');
+    const se = new Audio('/utils/sound/click0.mp3')
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault()
+        se.currentTime = 0;
+        se.play()
+        se.addEventListener('ended', () => {
+          window.location.href = link.href;
+        })
+      })
+    })
   </script>
 </body>
 

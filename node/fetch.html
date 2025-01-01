@@ -27,10 +27,11 @@
     <dd>
       <div>.Fetch 是 W3C 的一种请求标准；不是第三方库，与 Vue、JQuery 无关</div>
       <div>.是原生的 JavaScript，是 Window 的方法，属于 BOM 范畴</div>
-      <div>.下一代 Ajax 技术，基于 <a href="./promise.html">Promise</a> 方式处理数据</div>
+      <div>.下一代 Ajax 技术，基于 <a href="./promise.html">Promise</a> 方式处理数据 - 返回结果是 Promise</div>
       <div>.语法简介明了；除了IE，多数浏览器都兼容</div>
       <div>.既可以访问远程数据，也可以访问本地数据</div>
       <div>.需要拼接参数；需要二次封装</div>
+      <div>.以下各案例使用回调函数 callback，简化代码可以使用 <a href="./asynawait.html">asyn-await</a></div>
       <div>.更多信息，请访问
         <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch">Using_Fetch</a>、
         <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch">MDN - fetch</a>、
@@ -110,7 +111,10 @@ fetch('https://glpla.github.io/utils/avatar/avatar0.png')
     </dd>
     <dt>注意</dt>
     <dd>
-      <div>fetch 请求不会抛出错误，即使是404或500错误；应根据响应状态 ok 或状态码 status 判断结果</div>
+      <div>以上请求没有响应异常</div>
+      <div>fetch 请求不会抛出错误，即使是 404 或 500 错误</div>
+      <div>应根据响应状态 ok 或状态码 status 判断结果</div>
+      <div>如果要处理异常，可以使用 catch()</div>
       <pre>
 ok: true
 redirected: false
@@ -125,70 +129,25 @@ status: 404
 statusText: "Not Found"
 type: "cors"
 url: "http://localhost:3000/clerk/2002"</pre>
-    </dd>
-  </dl>
-  <div class="chap">Async-Await</div>
-  <dl>
-    <dt>不处理异常</dt>
-    <dd>
-      <div>更简洁</div>
+      <div>下例中，第一个 then 中通过 throw new Error 抛出了一个错误；这个错误会被后续的 catch 块捕获。因此，从技术上讲，不需要在第一个 then 中再单独处理异常；但是，如果你希望在第一个 then
+        中更细致的处理异常，可以选择在这里添加额外的逻辑</div>
       <pre>
-async function getData() {
-  let res = await fetch('./data2021/stu.json');
-  console.log(res);
-  let json = await res.json();
-  console.log(json);
-}
-getData();</pre>
-    </dd>
-    <dt>处理异常</dt>
-    <dd>
-      <div>更健壮</div>
-      <pre>
-async function getData() {
-  try {
-    let res = await fetch('./data2021/stu.json');
-    console.log(res);
-    let json = await res.json();
-    console.log(json);
-  } catch (err) {
-    console.log(err);
+fetch('/utils/data/cart.json')
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Network response was not ok ' + response.statusText);
   }
-}</pre>
-      <pre>
-async function addData() {
-  try {
-    let obj = {
-      author: 'cnplaman',
-      bookname: 'web',
-      publisher: 'cn',
-    }
-    let res = await fetch('http://ajax-base-api-t.itheima.net/api/addbook', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(obj)
-    });
-    console.log(res);
-    let json = await res.json();
-    console.log(json);
-  } catch (err) {
-    console.log(err);
-  }
-}</pre>
-      <div>可以使用 finally 控制过程，如使用加载器</div>
-      <pre>
-async function getData() {
-  container.classList.add('loading')
-  try {
-
-  } catch (err) {
-
-  } finally{
-    container.classList.remove('loading')
-  }
-}</pre>
+  return response.json();
+})
+.then(data => {
+  console.log(data);
+})
+.catch(error => {
+  console.error('There was a problem with the fetch operation:', error);
+})
+.finally(() => {
+  console.log('Fetch operation completed.');
+});</pre>
     </dd>
   </dl>
   <div class="chap">Application</div>
