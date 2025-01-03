@@ -31,47 +31,70 @@
       color: var(--txt-color);
       transition: background-color 0.5s, color 0.5s 0.2s;
     }
+
+    .wrap {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      text-align: center;
+      perspective: 1000px;
+    }
+
+    .card {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 50%;
+      font-size: 40px;
+      font-weight: 600;
+      font-family: Arial, Helvetica, sans-serif;
+      transform-style: preserve-3d;
+      overflow: hidden;
+      backface-visibility: hidden;
+      transition: 0.5s;
+    }
+
+    .c0 {
+      line-height: 64px;
+      background-color: #f40;
+    }
+
+    .c1 {
+      top: 50%;
+      line-height: 0;
+      background-color: #089;
+      transform-origin: top;
+      transform: rotateX(180deg);
+    }
+
+    .wrap:hover .c1 {
+      transform: rotateX(0deg);
+    }
+
+    .c2 {
+      line-height: 64px;
+      background-color: #0aa;
+      transform-origin: bottom;
+      transform: rotateX(0deg);
+    }
+
+    .wrap:hover .c2 {
+      transform: rotateX(-180deg);
+    }
   </style>
 </head>
 
 <body>
-  <span class="" id="loading">loading</span>
-  <div class="container" id="content">content
+  <div class="wrap">
+    <div class="card c0">3</div>
+    <div class="card c1">3</div>
+    <div class="card c2">4</div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
-    const loading = document.getElementById('loading')
-    const content = document.getElementById('content')
-    async function loadData(url) {
-      loading.style.display = 'block'
-      content.style.display = 'none'
-      try {
-        let res = await fetch('https://glpla.github.io/utils/data/' + url)
-        let data = await res.json()
-        console.log(data);
-      } catch (error) {
-        console.log('err', error);
-      } finally {
-        loading.style.display = 'none'
-        content.style.display = 'block'
-      }
-    }
-    loadData('cart.json')
-    //   fetch('/utils/data/cart.json')
-    //     .then(response => {
-    //       if (!response.ok) {
-    //         throw new Error('Network response was not ok ' + response.statusText);
-    //       }
-    //       return response.json();
-    //     })
-    //     .then(data => {
-    //       console.log(data);
-    //     })
-    //     .catch(error => {
-    //       console.error('There was a problem with the fetch operation:', error);
-    //     })
-    //     .finally(() => {
-    //       console.log('Fetch operation completed.');
-    //     });
+    let req = axios.get('/utils/data/cart.json')
+    req.then(res => console.log(res))
   </script>
 </body>
 
