@@ -31,18 +31,39 @@
         <dd>
             <div>创建<span class="warn">基本数据类型、复合数据类型</span>的响应式数据</div>
             <div>ref() 将传入参数的值包装为一个带 .value 属性的 ref 对象</div>
-            <div>ref 的 .value 属性是响应式</div>
+            <div>ref() 的 .value 属性是响应式</div>
+            <div>ref() 还用于 <a href="ref.html">模板引用</a></div>
             <div>1. 引入包 ref - 下述各例略</div>
             <pre>import { ref } from 'vue'</pre>
             <div>2. 声明响应式变量 - 执行函数、传入参数、变量接收</div>
             <pre>const count = ref(0)</pre>
             <div>3.1 结构中使用 - 直接使用，vue会自动获取其value</div>
             <pre>&lt;div>{{count}}&lt;/div></pre>
-            <div>3.2 逻辑中使用 - 赋值时需额外指定value属性，其它情况直接使用，如监听；可以由开发环境的插件自动补齐value属性</div>
+            <div>3.2 逻辑中使用 - 赋值时需额外指定 value 属性；可以由开发环境的插件自动补齐 value 属性</div>
             <pre>
 console.log(count)
 console.log(count.value)</pre>
-            <div class="tips">控制台输出，查看响应式变量的细节，如value属性在哪里</div>
+            <div class="tips">
+                <div>控制台输出，查看响应式变量的细节，如 value 属性在哪里</div>
+                <div>数据监听时，直接使用，无须使用 value 属性</div>
+            </div>
+        </dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 换肤 - 利用 Boolean 切换主题</dd>
+        <dd>以 <a href="../web/framework/iconfont.html">阿里字体图标</a> 为例，仅展示图标的切换；具体主题样式由个人自定义</dd>
+        <dd class="sn">
+            <div>引入 - 略</div>
+            <div>结构 - 动态绑定样式并绑定点击事件</div>
+            <pre>&lt;span @click="changeTheme" :class="['iconfont', darkMode ? 'icon-Sun' : 'icon-Moon-Star']"&gt;&lt;/span&gt;</pre>
+            <div>逻辑</div>
+            <pre>
+import { ref } from 'vue'
+
+const darkMode = ref(false)
+
+const changeTheme = () => {
+  darkMode.value = !darkMode.value
+}</pre>
+            <div>样式 - 略</div>
         </dd>
         <dt>reactive()</dt>
         <dd>
@@ -88,7 +109,7 @@ const done = () => {
                 <div>经过函数 ref()、reactive() 处理后，普通的数据或对象就变成了响应式</div>
                 <div>使用log查看一个变量是否具有响应式数据：如果带有 Proxy/refImpl，是响应式数据；否则就是普通变量</div>
                 <div>实际开发中，更多使用 ref()；因为可以直接改：管你是简单数据还是复合数据</div>
-                <div>. 简单数据，当然只能 ref()</div>
+                <div>. 创建简单的响应式变量时，当然只能 ref()</div>
                 <div>. 如果需要简单的对象，ref()、reactive() 都可以</div>
                 <div>. 层级比较深的对象，请使用 reactive()</div>
             </div>
@@ -97,7 +118,8 @@ const done = () => {
         <dd>使用 ref() 声明复合数据类型并验证其响应式</dd>
         <dd>使用 reactive() 声明嵌套复合数据类型并验证其响应式</dd>
     </dl>
-    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <div id="footer"></div>
+    <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>

@@ -46,8 +46,11 @@ git version 2.34.1.windows.1</pre>
         <dt>配置 Git</dt>
         <dd>
             <div>. 使用户名和邮箱将 Git 和用户[自己的代码仓库，如 Github ]关联起来</div>
-            <div>. 用户名和邮箱仅仅作为签名，以区分提交的用户，和仓库账号没有关系</div>
+            <div>. 用户名和邮箱仅仅作为签名，以区分提交的用户，和仓库账号没有关系 - 仅用于提交记录，不涉及登录或权限</div>
             <div>. 没有关联，无法提交 commit</div>
+            <div>--system：系统级别的配置</div>
+            <div>--global：全局级别的配置；建议</div>
+            <div>--local：项目本地的配置；默认</div>
             <pre>
 $ git config --global user.email 1942194789@qq.com
 $ git config --global user.name glpla</pre>
@@ -72,15 +75,35 @@ $ git config  user.email
                 <figcaption>Git工作流</figcaption>
         </dd>
         <dt>工作区 workspace</dt>
-        <dd>存放项目文件的地方，通常就是你的项目工作目录</dd>
-        <dd>利用 add 可以将文件从工作区放到暂存区</dd>
+        <dd>
+            <div>存放项目文件的地方，通常就是你的项目工作目录</div>
+            <div>利用 add 可以将文件从工作区放到暂存区</div>
+            <div>点 . 表示所有文件；也可以指定需要提交的具体的文件；不包括被忽略的文件</div>
+            <div>单个文件体积大小不要超过50MB</div>
+            <pre>$ git add .</pre>
+        </dd>
         <dt>暂存区 stage</dt>
-        <dd>临时存放文件便于调整</dd>
-        <dd>利用 commit 可以将文件从暂存区放到本地仓库区/版本区</dd>
+        <dd>
+            <div>临时存放文件便于调整</div>
+            <div>利用 commit 可以将文件从暂存区放到本地仓库区/版本区</div>
+            <div>每次提交都有一个 commitId 记录</div>
+            <pre>$ git commit -m ""</pre>
+        </dd>
         <dt>本地仓库区 local repository</dt>
-        <dd>版本区</dd>
-        <dd>文件只有放到了版本区才可以进行真正意义上的管理</dd>
-        <dd>从版本区也可以切换回去工作区，使用 git reset --hard命令</dd>
+        <dd>
+            <div>版本区</div>
+            <div>文件只有放到了版本区才可以进行真正意义上的管理</div>
+            <div>将本地分支的提交推送到远程仓库对应的分支 - 不仅要指定推送的仓库/别名，还要指定推送到哪个分支</div>
+            <div>具体行为取决于当前分支是否已经设置了上游 upstream 分支</div>
+            <pre>$ git push &lt;name&gt; &lt;branch&gt;</pre>
+            <div>将本地的 branch 分支推送到远程仓库 name 的 branch 分支；不会设置任何追踪关系</div>
+            <div>后续如果要推送或拉取这个分支，<span class="warn">仍然</span>需要明确指定远程仓库和分支名称</div>
+            <div>方便起见，使用 -u/--set-upstream 设置一个追踪关系 upstream relationship / 自动关联</div>
+            <pre>$ git push -u &lt;name&gt; &lt;branch&gt;</pre>
+            <div>后续只需要使用 git push 即可推送</div>
+            <pre>$ git push</pre>
+            <div>从版本区也可以切换回去工作区，使用 git reset --hard命令</div>
+        </dd>
         <dt>远程仓库区 remote repository</dt>
         <dd>线上仓库，如GitHub、Gitee</dd>
     </dl>
@@ -93,23 +116,11 @@ $ git config  user.email
             <div>如果生成的 .git 被删除，有关的托管信息将丢失</div>
             <div>具体的配置文件 .gitconfig 位于系统盘用户目录下：C:\Users\cnplaman</div>
             <div>文件内容就是 Git 配置的用户邮箱等基本信息</div>
-            <pre>git init</pre>
-        </dd>
-        <dt>提交文件到暂存区 add</dt>
-        <dd>
-            <div>.表示所有文件；也可以指定需要提交的具体的文件</div>
-            <div>单个文件体积大小不要超过50MB</div>
-            <pre>git add .</pre>
-        </dd>
-        <dt>提交到本地仓库 commit</dt>
-        <dd>
-            <div>每次提交都有一个commitId记录</div>
-            <pre>
-git commit -m ""</pre>
+            <pre>$ git init</pre>
         </dd>
         <dt>查看文件状态 status</dt>
         <dd>
-            <pre>git status</pre>
+            <pre>$ git status</pre>
             <table>
                 <caption>Git文件状态</caption>
                 <tr>
@@ -133,13 +144,6 @@ git commit -m ""</pre>
                     <td>已提交的</td>
                 </tr>
             </table>
-        </dd>
-        <dt>撤销本地修改 checkout</dt>
-        <dd>
-            <div>丢弃工作区的修改</div>
-            <div>修改了文件，但是没有 add 到暂存区，使用该命令可以撤销对文件的修改，相当于在编辑环境中使用了 CTRL + Z 操作</div>
-            <div>修改了文件，已经 add 到暂存区，使用该命令，可以拉取暂存区的文件到工作区，覆盖当前文件，相当于放弃了对文件的修改，即和暂存区保持一致</div>
-            <pre>git checkout -- file</pre>
         </dd>
         <dt>查看本地仓库提交记录 log</dt>
         <dd>
@@ -171,28 +175,30 @@ cc355cb (HEAD -> main, origin/main, origin/HEAD) HEAD@{0}: commit: web
 aae5d51 HEAD@{2}: commit: web
 065c08e HEAD@{3}: commit: fn</pre>
         </dd>
+        <dt>撤销本地修改 checkout</dt>
+        <dd>
+            <div>丢弃工作区的修改</div>
+            <div>修改了文件，但是没有 add 到暂存区，使用该命令可以撤销对文件的修改，相当于在编辑环境中使用了 CTRL + Z 操作</div>
+            <div>修改了文件，已经 add 到暂存区，使用该命令，可以拉取暂存区的文件到工作区，覆盖当前文件，相当于放弃了对文件的修改，即和暂存区保持一致</div>
+            <pre>$ git checkout -- file</pre>
+        </dd>
         <dt>撤销本地/远程提交 reset</dt>
         <dd>
+            <div>--mixed：默认行为；撤销最近一次提交，并将更改回退到工作区 - 取消暂存</div>
+            <div>撤销本地提交</div>
+            <pre>$ git reset commitId</pre>
+            <div>--soft：撤销最近一次提交，但保留工作区和暂存区的更改，不希望丢失任何更改</div>
+            <pre>$ git reset --soft HEAD~1</pre>
             <div>撤销远程提交 - 版本穿梭</div>
+            <div>--hard：撤销最近一次提交，并完全丢弃更改，恢复到上一个提交的状态</div>
+            <pre>$ git reset --hard HEAD~1</pre>
             <pre>
 git reset --hard 版本号
 
 Head is now at xxxxx</pre>
-            <div>撤销本地提交</div>
-            <pre>git reset commitId</pre>
-        </dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 新项目第一次推送 - 完整流程</dd>
-        <dd>
-            <pre>
-git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin url
-git push -u origin main</pre>
         </dd>
     </dl>
-    <div class="chap">仓库操作</div>
+    <div class="chap">仓库</div>
     <dl class="nav-cont">
         <dt>克隆仓库 clone</dt>
         <dd>
@@ -200,24 +206,32 @@ git push -u origin main</pre>
             <div>通常是第一次使用别人的仓库；后续直接拉取 pull 就可以和仓库保持一致</div>
             <pre>$ git clone url</pre>
         </dd>
-        <dt>远程仓库管理 remote</dt>
+        <dt>拉取仓库 pull</dt>
+        <dd>
+            <div>在第一次克隆 clone 的基础上，通过拉取和原来仓库保持一致</div>
+            <div>如果之前提交使用 -u 设置了追踪，可以直接拉取</div>
+            <pre>$ git pull &lt;name&gt; &lt;branch&gt;</pre>
+            <pre>$ git pull</pre>
+        </dd>
+        <dt>仓库管理 remote</dt>
         <dd>
             <div>git remote 命令用于管理和查看 Git 仓库中的远程仓库配置。它有多种用法，具体取决于你提供的参数</div>
             <div>1. 查看关联的远程仓库 remote</div>
             <pre>
-$ git remote
+git remote
 origin</pre>
             <div>使用 -v 参数查看关联仓库的详细信息</div>
             <pre>
-$ git remote -v
+git remote -v
 origin  https://github.com/glpla/glpla.github.io.git (fetch)
 origin  https://github.com/glpla/glpla.github.io.git (push)</pre>
             <div>2. 添加远程仓库 add</div>
             <div>使用 add 添加/关联远程仓库并指定一个 <span class="warn">别名</span> - 因为仓库 url 太长</div>
             <div>可以关联多个远程仓库，使用别名区分</div>
             <pre>$ git remote add &lt;name&gt; &lt;url&gt;</pre>
-            <div>如：使用 origin 代替远程仓库的 url</div>
-            <pre>$ git remote add origin url</pre>
+            <div>分别为 Github 和 Gitee 指定别名</div>
+            <pre>$ git remote add origin https://github.com/glpla/glpla.github.io.git</pre>
+            <pre>$ git remote add gitee https://gitee.com/cnplaman_admin/case1-helloworld.git</pre>
             <div>3. 删除远程仓库 remove</div>
             <pre>$ git remote remove &lt;name&gt;</pre>
             <pre>$ git remote rm &lt;name&gt;</pre>
@@ -225,25 +239,6 @@ origin  https://github.com/glpla/glpla.github.io.git (push)</pre>
             <pre>$ git remote rename &lt;old-name&gt; &lt;new-name&gt;</pre>
             <div>5. 修改远程仓库 set-url</div>
             <pre>$ git remote set-url &lt;name&gt; &lt;new-url&gt;</pre>
-        </dd>
-        <dt>Git推送到仓库 push</dt>
-        <dd>
-            <div>将本地分支的提交推送到远程仓库对应的分支 - 不仅要指定推送的仓库/别名，还要指定推送到哪个分支</div>
-            <div>具体行为取决于当前分支是否已经设置了上游 upstream 分支</div>
-            <pre>$ git push &lt;name&gt; &lt;branch&gt;</pre>
-            <div>将本地的 branch 分支推送到远程仓库 name 的 branch 分支；不会设置任何追踪关系</div>
-            <div>后续如果要推送或拉取这个分支，<span class="warn">仍然</span>需要明确指定远程仓库和分支名称</div>
-            <div>方便起见，使用 -u/--set-upstream 设置一个追踪关系 upstream relationship / 自动关联</div>
-            <pre>$ git push -u &lt;name&gt; &lt;branch&gt;</pre>
-            <div>后续只需要使用 git push 即可推送</div>
-            <pre>$ git push</pre>
-        </dd>
-        <dt>拉取远程仓库 pull</dt>
-        <dd>
-            <div>在第一次克隆 clone 的基础上，通过拉取和原来仓库保持一致</div>
-            <div>如果之前提交使用 -u 设置了追踪，可以直接拉取</div>
-            <pre>git pull &lt;name&gt; &lt;branch&gt;</pre>
-            <pre>git pull</pre>
         </dd>
     </dl>
     <div class="chap">分支 Branch</div>
@@ -320,6 +315,16 @@ Fast-forward
             <pre>
 $ git branch -d dev
 Deleted branch dev (was c9f8938).            </pre>
+        </dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 新项目第一次推送 - 请使用自己的仓库地址</dd>
+        <dd>
+            <pre>
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin url
+git push -u origin main</pre>
         </dd>
         <dd>[<span class="iconfont icon-keyboard"></span>] 分支操作</dd>
         <dd>请使用 shell 完成以下操作</dd>
