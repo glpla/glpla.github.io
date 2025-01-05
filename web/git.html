@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>代码托管 Git</title>
     <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/footer2025.css">
     <base target="_blank">
     <style>
         :root {
@@ -28,35 +29,48 @@
             <a href="" style="--delay:2" class="nav-item">基本使用</a>
             <a href="" style="--delay:3" class="nav-item">仓库</a>
             <a href="" style="--delay:4" class="nav-item">分支</a>
+            <a href="" style="--delay:5" class="nav-item">标签</a>
+            <a href="" style="--delay:6" class="nav-item">复刻</a>
         </nav>
     </header>
     <dl class="nav-cont">
-        <dd>. 代码仓库管理工具</dd>
-        <dd>. 分布式版本控制系统</dd>
+        <dd>
+            <div>代码仓库管理工具</div>
+            <div>分布式版本控制系统</div>
+            <div class="tips">
+                <div>-x：简化命令参数</div>
+                <div>--x：完整命令参数</div>
+            </div>
+        </dd>
         <dt>下载和安装</dt>
         <dd>. 打开 Git 官网 <a href="https://git-scm.com/" class="link">https://git-scm.com/</a>，选择对应的操作系统和版本，点击下载并安装</dd>
         <dt>查看 Git 版本</dt>
         <dd>
-            <div>. 右键点击桌面空白处，选择 Git Bash Here，打开终端窗口，输入以下命令</div>
-            <pre>
-$ git --version
-git version 2.34.1.windows.1</pre>
+            <div>右键点击桌面空白处，选择 Git Bash Here，打开终端窗口，输入以下命令</div>
+            <pre>$ git -v</pre>
+            <div>或</div>
+            <pre>$ git --version</pre>
+            <div class="tips">Git Bash 就是一个迷你型的 Linux 系统哦</div>
         </dd>
-        <dd class="tips">Git Bash 就是一个迷你型的 Linux 系统哦</dd>
+        <dt>自助 Help</dt>
+        <dd>
+            <div>查看所有命令</div>
+            <pre>$ git -h</pre>
+            <div>查看特定命令，如 remote</div>
+            <pre>$ git remote -h</pre>
+        </dd>
         <dt>配置 Git</dt>
         <dd>
-            <div>. 使用户名和邮箱将 Git 和用户[自己的代码仓库，如 Github ]关联起来</div>
-            <div>. 用户名和邮箱仅仅作为签名，以区分提交的用户，和仓库账号没有关系 - 仅用于提交记录，不涉及登录或权限</div>
-            <div>. 没有关联，无法提交 commit</div>
+            <div>使用户名和邮箱将 Git 和用户[自己的代码仓库，如 Github ]关联起来</div>
+            <div>用户名和邮箱仅仅作为签名，以区分提交的用户，和仓库账号没有关系 - 仅用于提交记录，不涉及登录或权限</div>
+            <div>没有关联，无法提交 commit</div>
             <div>--system：系统级别的配置</div>
             <div>--global：全局级别的配置；建议</div>
             <div>--local：项目本地的配置；默认</div>
             <pre>
 $ git config --global user.email 1942194789@qq.com
 $ git config --global user.name glpla</pre>
-        </dd>
-        <dt>查看 Git 配置</dt>
-        <dd>
+            <div>查看 Git 配置</div>
             <pre>
 cnplaman@LAPTOP-QL08LD1S MINGW64 ~/Desktop
 $ git config  user.name
@@ -94,18 +108,20 @@ $ git config  user.email
             <div>版本区</div>
             <div>文件只有放到了版本区才可以进行真正意义上的管理</div>
             <div>将本地分支的提交推送到远程仓库对应的分支 - 不仅要指定推送的仓库/别名，还要指定推送到哪个分支</div>
-            <div>具体行为取决于当前分支是否已经设置了上游 upstream 分支</div>
-            <pre>$ git push &lt;name&gt; &lt;branch&gt;</pre>
-            <div>将本地的 branch 分支推送到远程仓库 name 的 branch 分支；不会设置任何追踪关系</div>
+            <pre>$ git push &lt;name&gt; &lt;branch_name&gt;</pre>
+            <div>将本地的 branch_name 分支推送到远程仓库 name 的 branch_name 分支；不会设置任何追踪关系</div>
             <div>后续如果要推送或拉取这个分支，<span class="warn">仍然</span>需要明确指定远程仓库和分支名称</div>
+            <div>使用 --all 表示推送所有分支</div>
+            <pre>$ git push &lt;name&gt; -all</pre>
             <div>方便起见，使用 -u/--set-upstream 设置一个追踪关系 upstream relationship / 自动关联</div>
-            <pre>$ git push -u &lt;name&gt; &lt;branch&gt;</pre>
+            <!-- <div>具体行为取决于当前分支是否已经设置了上游 upstream 分支</div> -->
+            <pre>$ git push -u &lt;name&gt; &lt;branch_name&gt;</pre>
             <div>后续只需要使用 git push 即可推送</div>
             <pre>$ git push</pre>
             <div>从版本区也可以切换回去工作区，使用 git reset --hard命令</div>
         </dd>
         <dt>远程仓库区 remote repository</dt>
-        <dd>线上仓库，如GitHub、Gitee</dd>
+        <dd>. 线上仓库，如GitHub、Gitee</dd>
     </dl>
     <div class="chap">常见使用 usage</div>
     <dl class="nav-cont">
@@ -118,14 +134,15 @@ $ git config  user.email
             <div>文件内容就是 Git 配置的用户邮箱等基本信息</div>
             <pre>$ git init</pre>
         </dd>
-        <dt>指定忽略文件 .gitignore</dt>
+        <dt>创建忽略文件 .gitignore</dt>
         <dd>
             <div>.gitignore 文件用于指定 Git 应该忽略的文件和目录，以避免将不需要的文件提交到版本控制系统中</div>
             <div>常见有：包依赖、测试文件等</div>
             <div>.gitignore 只对未被跟踪的文件生效</div>
             <div>如果文件被追踪过，即使后续指定了忽略，仍然会被追踪</div>
-            <div>可以删除、提交后再重新添加；也可以取消追踪后再提交</div>
-            <pre>git rm --cached /demo.html</pre>
+            <div>可以删除、提交后再重新添加；也可以取消追踪后再提交；文件名有空格应使用引号</div>
+            <pre>git rm --cached demo.html</pre>
+            <pre>git rm --cached 'demo copy.html'</pre>
         </dd>
         <dt>查看文件状态 status</dt>
         <dd>
@@ -170,6 +187,8 @@ Author: glpla &lt;1942194789@qq.com>
 Date:   Wed Jan 3 10:48:20 2024 +0800
 
     web</pre>
+            <div>将每条记录压缩成一行查看 --oneline</div>
+            <pre>$ git log --oneline</pre>
         </dd>
         <dt>查看远程仓库提交记录 reflog</dt>
         <dd>
@@ -274,43 +293,47 @@ origin  https://github.com/glpla/glpla.github.io.git (push)</pre>
         <dt>查看分支</dt>
         <dd>
             <div>当前分支以 * 号表示，且颜色为绿色</div>
+            <div>只有被追踪的分支才显示 - 提交过</div>
             <pre>
 //不带参数：查看本地分支
 $ git branch
   dev
 * master
 
-//查看所有分支
+//查看所有本地和远程跟踪的分支 all
 $ git branch -a
 dev
 * master
 
-//查看分支最近提交信息
+//查看分支最近一次提交信息
 $ git branch -v
   dev    29aee33 1st commit
 * master 29aee33 1st commit
 
-//查看远程分支
+//查看远程分支 remote
 $ git branch -r</pre>
         </dd>
         <dt>创建分支</dt>
         <dd>
+            <div>创建仓库的同时创建分支</div>
             <pre>$ git branch branch_name</pre>
+            <div>创建分支</div>
+            <pre>$ git init -b branch_name</pre>
+            <div>创建并切换分支</div>
+            <pre>$ git checkout -b branch_name</pre>
         </dd>
         <dt>切换分支 checkout</dt>
         <dd>
             <div>指定要切换的分支名</div>
-            <pre>
-$ git checkout dev
-Switched to branch 'dev'</pre>
+            <pre>$ git checkout branch_name</pre>
         </dd>
         <dt>合并分支 merge</dt>
         <dd>
             <div>通常在主分支合并其它分支</div>
             <div>将其它分支合并到主分支；主分支会前进一次 forwards</div>
             <div>原有分支仍然存在</div>
+            <pre>$ git merge branch_name</pre>
             <pre>
-$ git merge dev
 Updating 29aee33..c9f8938
 Fast-forward
  demo.txt | 0
@@ -321,19 +344,29 @@ Fast-forward
         <dd>
             <div>指定删除的分支名</div>
             <div>只能在当前分支删除其它分支</div>
-            <pre>
-$ git branch -d dev
-Deleted branch dev (was c9f8938).            </pre>
+            <div>-d：合并过才允许删除</div>
+            <div>-D：强制删除，无论是否合并过</div>
+            <pre>$ git branch -d branch_name</pre>
+            <div>删除远程分支</div>
+            <pre>$ git push &lt;name&gt; -d &lt;branch_name&gt;</pre>
+        </dd>
+        <dt>重命名分支</dt>
+        <dd>
+            <div>-m：如果有同名分支，则拒绝 - 建议</div>
+            <div>-M：强制命名，如果有同名分支，会被覆盖</div>
+            <pre>$ git branch -m branch_name_old branch_name_new</pre>
+            <div>将当前分支强制命名为main</div>
+            <pre>$ git branch -M main</pre>
         </dd>
         <dd>[<span class="iconfont icon-keyboard"></span>] 新项目第一次推送 - 请使用自己的仓库地址</dd>
         <dd>
             <pre>
-git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin url
-git push -u origin main</pre>
+$ git init
+$ git add .
+$ git commit -m "first commit"
+$ git branch -M main
+$ git remote add origin url
+$ git push -u origin main</pre>
         </dd>
         <dd>[<span class="iconfont icon-keyboard"></span>] 分支操作</dd>
         <dd>请使用 shell 完成以下操作</dd>
@@ -361,7 +394,66 @@ git push -u origin main</pre>
             <div>.日常工作应使用开发分支和团队分支、个人分支：个人分支合并到团队分支；团队分支合并到开发分支</div>
         </dd>
     </dl>
-    <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <div class="chap">标签 Tag</div>
+    <dl class="nav-cont">
+        <dt>Overview</dt>
+        <dd>
+            <div>版本控制</div>
+            <div>不能重复</div>
+        </dd>
+        <dt>查看标签</dt>
+        <dd>
+            <pre>$ git tag</pre>
+            <div>查看详细信息</div>
+            <pre>$ git show &lt;tag_name&gt;</pre>
+        </dd>
+        <dt>打标签</dt>
+        <dd>
+            <pre>$ git tag &lt;tag_name&gt;</pre>
+            <div>1. 给 HEAD 指向的提交打个标签</div>
+            <div>未打标签前查看</div>
+            <pre>
+$ git log --oneline
+90a2220 (HEAD -> master, origin/t0, origin/master, origin/HEAD, origin/20231002, t1) branch 20231002
+b638f0b modify readme
+e318093 init</pre>
+            <div>打标签</div>
+            <pre>$ git tag v1.0</pre>
+            <div>打完标签查看</div>
+            <pre>
+$ git log --oneline
+90a2220 (HEAD -> master, tag: v1.0, origin/t0, origin/master, origin/HEAD, origin/20231002, t1) branch 20231002
+b638f0b modify readme
+e318093 init</pre>
+            <div>2. 为指定 commitId 打 标签</div>
+            <pre>$ git tag v1.0 commitId</pre>
+        </dd>
+        <dt>推送标签</dt>
+        <dd>
+            <pre>$ git push &lt;name&gt; &lt;tag_name&gt;</pre>
+            <div>推送所有标签</div>
+            <pre>$ git push &lt;name&gt; --tags</pre>
+        </dd>
+        <dt>删除标签</dt>
+        <dd>
+            <div>删除本地标签</div>
+            <pre>$ git tag -d &lt;tag_name&gt;</pre>
+            <div>删除远程标签 - 同分支，利用推送的方式删除</div>
+            <pre>$ git push &lt;name&gt; -d &lt;tag_name&gt;</pre>
+        </dd>
+    </dl>
+    <div class="chap">复刻 Fork</div>
+    <dl class="nav-cont">
+        <dd>
+            <div>fork 是 GitHub 上的一个功能，用于复制一个仓库，从而创建一个同样的仓库 - identical</div>
+            <div>fork 的仓库与原仓库是各自独立的 - independent</div>
+            <div>修改后，通过 PR - Pull Request，去覆盖或更新原来仓库；当然需要确认，这就是开源共享</div>
+            <div>复刻出来的仓库不包括标签，其它都是一样的</div>
+            <div>复刻出来的内容经过修改后，可能和原来的仓库大相径庭，所以叫分叉</div>
+        </dd>
+    </dl>
+    <div id="footer"></div>
+    <script src="/utils/custom/footer2025.js"></script>
     <script src="/utils//custom/ham2024.js"></script>
 </body>
 
