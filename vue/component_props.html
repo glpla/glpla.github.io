@@ -2,45 +2,46 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>父传子 defineProps()</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/footer2025.css">
-    <base target="_blank">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>父传子 defineProps()</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
+  <base target="_blank">
 </head>
 
 <body>
-    <header>
-        <h1>父传子</h1>
-        <span>&commat;defineProps()</span>
-    </header>
-    <dl>
-        <dd>
-            <div>通过编译宏 defineProps() 的形式实现通信|参数传递|数据传递</div>
-            <div>遵循 <span class="warn">单向数据流 - One-Way Data Flow</span> 的原则</div>
-            <div>更多信息，请访问 <a href="https://vuejs.org/guide/components/props.html">Props</a></div>
-        </dd>
-        <dt>Procedure</dt>
-        <dd class="sn">
-            <div>子组件在 &lt;script setup&gt; 顶级作用域下，使用宏 defineProps() 定义属性来接收传递的参数并使用</div>
-            <div>父组件以属性的方式向子组件传递参数：可以是静态数据 Static ，也可以是响应式数据 Dynamic ；可以是简单数据，也可以是复合数据</div>
-        </dd>
-        <dd class="tips">
-            <div>建议使用小驼峰命名方式 - camelCase </div>
-            <div>为了和普通变量区分，建议：传递的参数以 prop 开始，如propName</div>
-            <div>只有数据的拥有者才可以修改数据：子组件不能直接修改父组件传递的属性参数；如果父组件把这个属性参数还分配了其它子组件。。。</div>
-        </dd>
-        <dt>Props Declaration</dt>
-        <dd>1. 子组件 &lt;script&gt; - 使用 defineProps() 定义接收的参数，并声明一个变量接收，便于在脚本中进一步处理</dd>
-        <dd>
-            <div>方案1：使用 <span class="warn">数组</span> 声明 - 仅指定属性名</div>
-            <pre>
+  <header>
+    <h1>父传子</h1>
+    <span>&commat;defineProps()</span>
+  </header>
+  <dl>
+    <dd>
+      <div>通过编译宏 defineProps() 的形式实现通信|参数传递|数据传递</div>
+      <div>遵循 <span class="warn">单向数据流 - One-Way Data Flow</span> 的原则</div>
+      <div>更多信息，请访问 <a href="https://vuejs.org/guide/components/props.html">Props</a></div>
+    </dd>
+    <dt>Procedure</dt>
+    <dd class="sn">
+      <div>子组件在 &lt;script setup&gt; 顶级作用域下，使用宏 defineProps() 定义属性来接收传递的参数并使用</div>
+      <div>父组件以属性的方式向子组件传递参数：可以是静态数据 Static ，也可以是响应式数据 Dynamic ；可以是简单数据，也可以是复合数据</div>
+    </dd>
+    <dd class="tips">
+      <div>建议使用小驼峰命名方式 - camelCase </div>
+      <div>为了和普通变量区分，建议：传递的参数以 prop 开始，如 propName</div>
+      <div>只有数据的拥有者才可以修改数据：子组件不能直接修改父组件传递的属性参数；如果父组件把这个属性参数还分配了其它子组件。。。</div>
+    </dd>
+    <dt>Props Declaration</dt>
+    <dd>1. 子组件 &lt;script&gt; - 使用 defineProps() 定义接收的参数，并声明一个变量接收，便于在脚本中进一步处理</dd>
+    <dd>
+      <div>方案1：使用 <span class="warn">数组</span> 声明 - 仅指定属性名</div>
+      <pre>
 const props = defineProps(['propMsg', 'propId'])
 </pre>
-            <div>方案2：使用 <span class="warn">对象</span> 声明 - 指定属性名、属性类型 type、默认值 default和是否必须 required</div>
-            <pre>
+      <div>方案2：使用 <span class="warn">对象</span> 声明 - 指定属性名、属性类型 type、默认值 default 和是否必须 required；同时存在时，required 无效
+      </div>
+      <pre>
 const props = defineProps({
     propMsg: String,
     propId: {
@@ -50,12 +51,12 @@ const props = defineProps({
     }
 })
 </pre>
-        </dd>
-        <dd>2. 子组件&lt;template&gt; - 使用传递来的参数|数据；可以直接使用；也可以使用属性变量获取</dd>
-        <dd>
-            <pre>&lt;div&gt;{{ propMsg }} - {{ props.propId }}&lt;/div&gt;</pre>
-            <div>如果要处理接收的参数，必须使用定义的变量 props 获取，否则提示数据未定义 - 下例利用计算属性将接收的参数转换为大写</div>
-            <pre>
+    </dd>
+    <dd>2. 子组件&lt;template&gt; - 使用传递来的参数|数据；可以直接使用；也可以使用属性变量获取</dd>
+    <dd>
+      <pre>&lt;div&gt;{{ propMsg }} - {{ props.propId }}&lt;/div&gt;</pre>
+      <div>如果要处理接收的参数，必须使用定义的变量 props 获取，否则提示数据未定义 - 下例利用计算属性将接收的参数转换为大写</div>
+      <pre>
 import { computed } from 'vue';
 const props = defineProps({
   msg: String
@@ -64,80 +65,80 @@ const comp = computed(() => {
     //return msg.toUpperCase()
     return props.msg.toUpperCase()
 })</pre>
-            <pre>&lt;div&gt;computed {{ comp }}&lt;/div&gt;</pre>
-        </dd>
-        <dd class="question">ReferenceError: msg is not defined</dd>
-        <dt>父组件传递参数</dt>
-        <dd>
-            <div>1. 父组件&lt;script&gt; - 引入子组件，准备数据</div>
-            <pre>
+      <pre>&lt;div&gt;computed {{ comp }}&lt;/div&gt;</pre>
+    </dd>
+    <dd class="question">ReferenceError: msg is not defined</dd>
+    <dt>父组件传递参数</dt>
+    <dd>
+      <div>1. 父组件&lt;script&gt; - 引入子组件，准备数据</div>
+      <pre>
 import { ref } from 'vue';
 import Test from './components/Test.vue';
 let msg = ref('hi,there')</pre>
-            <div>2. 父组件&lt;template&gt; - 使用子组件；以数据绑定的形式传递参数：1个静态数据 propId、1个响应式数据 propMsg</div>
-            <pre>&lt;Test :propMsg="msg" propId="18"&gt;&lt;/Test&gt;</pre>
-        </dd>
-        <dt>Value Types</dt>
-        <dd class="sn">
-            <div>Number</div>
-            <pre>&lt;Test :propId="18" /&gt;</pre>
-            <pre>&lt;Test :propId="item.id" /&gt;</pre>
-            <div>Boolean</div>
-            <pre>&lt;Test isDone /&gt;</pre>
-            <pre>&lt;Test :isDone="false" /&gt;</pre>
-            <pre>&lt;Test :isDone="item.flag" /&gt;</pre>
-            <div>Array</div>
-            <pre>&lt;Test :arr="[1,2,3,4,5]" /&gt;</pre>
-            <pre>&lt;Test :arr="item.list" /&gt;</pre>
-            <div>Object</div>
-            <pre>&lt;Test :obj="{id:1001, name:'glpla'}" /&gt;</pre>
-            <pre>&lt;Test :obj="item.author" /&gt;</pre>
-        </dd>
-        <!-- Vue -->
-        <!-- <dd>&lt;Info :age="8" /&gt;</dd> -->
-        <!-- 微信小程序 -->
-        <!-- <dd>&lt;Info :age="{{8}}" /&gt;</dd> -->
-        <dd class="tips">
-            <div>log时，数字是蓝色；字符串是黑色</div>
-            <div>props 应该是只读的，不推荐子组件直接修改 props：当父组件更新 props 时，子组件不应该反过来改变这个值</div>
-        </dd>
-    </dl>
-    <dl>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 改造产品列表组件，提供不同的产品数据展示不同的列表内容</dd>
-        <dd>
-            <pre>&lt;List :lists="propLists"/&gt;</pre>
-        </dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 封装第三方库 - 轮播组件，提供不同的图片列表数据和高度展示不同的轮播内容</dd>
-        <dd>
-            <pre>&lt;Swiper :imgUrl="propImgUrls" :swiperH="propSwiperH"/&gt;</pre>
-        </dd>
-    </dl>
-    <div class="chap">传递函数|方法</div>
-    <dl>
-        <dd>除了传递数据，还可以传递方法 - 子组件执行父组件的方法，如让父组件修改属性参数。。。</dd>
-        <dd class="sn">
-            <div>子组件</div>
-            <p>暴露参数，类型为函数；注意是Function，不是function</p>
-            <pre>
+      <div>2. 父组件&lt;template&gt; - 使用子组件；以数据绑定的形式传递参数：1个静态数据 propId、1个响应式数据 propMsg</div>
+      <pre>&lt;Test :propMsg="msg" propId="18"&gt;&lt;/Test&gt;</pre>
+    </dd>
+    <dt>Value Types</dt>
+    <dd class="sn">
+      <div>Number</div>
+      <pre>&lt;Test :propId="18" /&gt;</pre>
+      <pre>&lt;Test :propId="item.id" /&gt;</pre>
+      <div>Boolean</div>
+      <pre>&lt;Test isDone /&gt;</pre>
+      <pre>&lt;Test :isDone="false" /&gt;</pre>
+      <pre>&lt;Test :isDone="item.flag" /&gt;</pre>
+      <div>Array</div>
+      <pre>&lt;Test :arr="[1,2,3,4,5]" /&gt;</pre>
+      <pre>&lt;Test :arr="item.list" /&gt;</pre>
+      <div>Object</div>
+      <pre>&lt;Test :obj="{id:1001, name:'glpla'}" /&gt;</pre>
+      <pre>&lt;Test :obj="item.author" /&gt;</pre>
+    </dd>
+    <!-- Vue -->
+    <!-- <dd>&lt;Info :age="8" /&gt;</dd> -->
+    <!-- 微信小程序 -->
+    <!-- <dd>&lt;Info :age="{{8}}" /&gt;</dd> -->
+    <dd class="tips">
+      <div>log时，数字是蓝色；字符串是黑色</div>
+      <div>props 应该是只读的，不推荐子组件直接修改 props：当父组件更新 props 时，子组件不应该反过来改变这个值</div>
+    </dd>
+  </dl>
+  <dl>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 改造产品列表组件，提供不同的产品数据展示不同的列表内容</dd>
+    <dd>
+      <pre>&lt;List :lists="propLists"/&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 封装第三方库 - 轮播组件，提供不同的图片列表数据和高度展示不同的轮播内容</dd>
+    <dd>
+      <pre>&lt;Swiper :imgUrl="propImgUrls" :swiperH="propSwiperH"/&gt;</pre>
+    </dd>
+  </dl>
+  <div class="chap">传递函数|方法</div>
+  <dl>
+    <dd>除了传递数据，还可以传递方法 - 子组件执行父组件的方法，如让父组件修改属性参数。。。</dd>
+    <dd class="sn">
+      <div>子组件</div>
+      <p>暴露参数，类型为函数；注意是 Function，不是 function</p>
+      <pre>
 const props = defineProps({
     closeFn: Function,
     confirmFn: Function
 })</pre>
-            <p>使用方法</p>
-            <pre>
+      <p>使用方法</p>
+      <pre>
 &lt;button @click="closeFn"&gt;&times;&lt;/button&gt;
 &lt;button @click="confirmFn"&gt;confirm&lt;/button&gt;</pre>
-            <div>父组件</div>
-            <p>传递方法</p>
-            <pre>&lt;Msg :closeFn="closeFn" :confirmFn="confirmFn"&gt;&lt;/Msg&gt;</pre>
-            <p>定义事件处理函数</p>
-            <pre>
+      <div>父组件</div>
+      <p>传递方法</p>
+      <pre>&lt;Msg :closeFn="closeFn" :confirmFn="confirmFn"&gt;&lt;/Msg&gt;</pre>
+      <p>定义事件处理函数</p>
+      <pre>
 const closeFn = () => { }
 const confirmFn = () => { }</pre>
-        </dd>
-    </dl>
-    <div id="footer"></div>
-    <script src="/utils/custom/footer2025.js"></script>
+    </dd>
+  </dl>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>

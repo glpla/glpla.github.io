@@ -23,10 +23,11 @@
             <div>早期流行的 JQuery 也是通过操作 DOM 实现</div>
             <div>Vue 中更多的是通过数据驱动的方式实现交互，但有时候避免不了仍然需要操作 DOM</div>
             <div>通过 ref 标识获取/引用 DOM 节点或组件实例</div>
-            <div>更多使用，请访问 <a href="https://vuejs.org/guide/essentials/template-refs.html">模板引用 - Template Refs</a></div>
-            <div>需引入包 ref 再使用</div>
+            <div>更多使用，请访问 <a href="https://vuejs.org/guide/essentials/template-refs.html">模板引用 - Template Refs</a>、<a
+                    href="https://cn.vuejs.org/api/built-in-special-attributes.html#ref">API - ref</a></div>
+            <div>需引入包 useTemplateRef 再使用；早期版本使用 ref 包</div>
             <!-- <div>多组件情况下，普通的DOM获取容易产生冲突</div> -->
-            <pre>import { ref } from 'vue'</pre>
+            <pre>import { useTemplateRef } from 'vue'</pre>
         </dd>
         <dt>Application</dt>
         <dd>
@@ -46,8 +47,8 @@
             <div>拿到 DOM 节点，就拿到了该元素的所有信息</div>
             <pre>
 &lt;script setup&gt;
-    import { ref, onMounted } from 'vue'
-    let dom = ref('null')
+    import { useTemplateRef, onMounted } from 'vue'
+    let dom = useTemplateRef('null')
     onMounted(() =&gt; {
         console.log(dom);
         console.log(dom.value);
@@ -79,8 +80,8 @@
         <dd>
             <pre>
 &lt;script setup&gt;
-    import { ref, onMounted } from 'vue';
-    const ipt = ref(null)
+    import { useTemplateRef, onMounted } from 'vue';
+    const ipt = useTemplateRef(null)
     const focus = () =&gt; ipt.value.focus()
     onMounted(() => {
         ipt.value.focus()
@@ -100,9 +101,9 @@
             <div>页面卸载时，移除事件监听</div>
             <div>结构略</div>
             <pre>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, useTemplateRef } from 'vue'
 
-const header = ref(null)
+const header = useTemplateRef(null)
 
 const fn = () => {
   header.value.classList.toggle('fixed', window.scrollY > 100)
@@ -120,7 +121,8 @@ onUnmounted(() => {
         <dd>
             <div>返回组件实例</div>
             <div>默认情况下，组件内部的属性和方法对外部不公开，所以获取到的 ref 仅仅是一个代理对象，看不到组件的内部细节</div>
-            <div>组件需要显示的暴露属性或方法 defineExpose</div>
+            <div>组件需要显示的暴露属性或方法 <a href="https://cn.vuejs.org/api/sfc-script-setup.html#defineexpose">defineExpose</a>
+            </div>
             <div>defineExpose 应该写在暴露的对象后面</div>
             <pre>
 &lt;template&gt;
@@ -138,13 +140,13 @@ onUnmounted(() => {
         getTitle
     })
 &lt;/script&gt;</pre>
-        </dd>
-        <dd class="tips">
-            <div>refs can be useful in certain situations where direct access to a child component's internal state or
-                methods is necessary.</div>
-            <div>尽量避免通过ref引用组件，请组件的通信机制实现 props和emit，详见后续组件内容</div>
-            <div>Remember that accessing a child component's data directly using refs can make your components tightly
-                coupled. Consider using props and events for communication between components</div>
+            <div class="tips">
+                <div>refs can be useful in certain situations where direct access to a child component's internal state
+                    or methods is necessary.</div>
+                <div>尽量避免通过 ref 引用组件，请组件的通信机制实现 props 和emit，详见后续组件内容</div>
+                <div>Remember that accessing a child component's data directly using refs can make your components
+                    tightly coupled. Consider using props and events for communication between components</div>
+            </div>
         </dd>
         <dd>[<span class="iconfont icon-keyboard"></span>] 自定义搜索组件，单击时，显示并自动获取焦点</dd>
         <dd>
@@ -182,10 +184,10 @@ onUnmounted(() => {
         <dd>[<span class="iconfont icon-keyboard"></span>] 单击打开弹窗；更多信息，请访问 <a href="./drill_modal.html">实操 - Modal</a>
         </dd>
         <dd>父组件获取子组件|弹窗组件实例，执行弹窗的方法</dd>
-        <dd>子组件|弹窗组件定义方法并暴露；方法利用bool将弹窗组件的隐藏状态变为显示</dd>
+        <dd>子组件|弹窗组件定义方法并暴露；方法利用 bool 将弹窗组件的隐藏状态变为显示</dd>
         <dt>多ref</dt>
         <dd>
-            <div>列表渲染中指定ref，将获取多个元素</div>
+            <div>列表渲染中指定 ref，将获取多个元素</div>
             <div>必须声明为数组 [] 形式，否则无法遍历</div>
             <pre>&lt;div v-for="(item,index) in 10" ref="navRef"&gt;{{item}}&lt;/div&gt;</pre>
             <pre>
@@ -195,7 +197,7 @@ onMounted(() => {
     console.log(item.innerHTML);
     })
 })</pre>
-            <div>不建议每个子节点都标注ref属性</div>
+            <div>不建议每个子节点都标注 ref 属性</div>
             <div>建议获取父节点，再根据节点关系获取子节点</div>
         </dd>
     </dl>

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生命周期函数 Lifetime</title>
     <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/footer2025.css">
     <base target="_blank">
 </head>
 
@@ -17,22 +18,17 @@
     </header>
     <dl>
         <dt>说明</dt>
-        <dd>组件的一生：创建 → 挂载 → 更新 → 销毁；又细分为前、后两个阶段</dd>
-        <dd>开发者根据组件的状态在特定阶段执行特定的操作</dd>
-        <dd>基本使用：引入对应的包 → 执行函数 → 传入回调</dd>
         <dd>
+            <div>组件的一生：创建 → 挂载 → 更新 → 销毁；又细分为前、后两个阶段</div>
+            <div>开发者根据组件的状态在特定阶段执行特定的操作</div>
+            <div>基本使用：引入对应的包 → 执行函数 → 传入回调</div>
+            <div>更多 API，请访问 <a href="https://cn.vuejs.org/api/">API</a></div>
             <figure class="img-sn">
                 <img style="width: 80%;" src="./imgs/lifecycle.png" alt="">
                 <figcaption>Vue的生命周期函数</figcaption>
             </figure>
-        </dd>
-        <dd>
             <details open>
                 <summary style="font-weight: 600;">Lifetime</summary>
-                <details>
-                    <summary>setup</summary>
-                    <div>组合式API专有</div>
-                </details>
                 <details>
                     <summary>onBeforeMount()</summary>
                     <div>注册一个钩子，在组件被挂载之前被调用</div>
@@ -65,7 +61,7 @@ onMounted(() => {
                     </div>
                 </details>
                 <details>
-                    <summary>onBeforeUpdated()</summary>
+                    <summary>onBeforeUpdate()</summary>
                     <div>注册一个回调函数，在组件因为响应式状态变更而更新其 DOM 树之前调用</div>
                 </details>
                 <details>
@@ -81,21 +77,23 @@ onMounted(() => {
                     <div>是onBeforeUnmount，不是onBeforeUnmounted</div>
                 </details>
                 <details>
-                    <summary>onUnmounted</summary>
+                    <summary>onUnmounted()</summary>
                     <div>注册一个回调函数，在组件实例被卸载之后调用</div>
                     <div>vue2中是destroy</div>
                 </details>
                 <details>
-                    <summary>other</summary>
+                    <summary>onActivated()</summary>
                     <div>适用于缓存组件</div>
-                    <div>onActivated()</div>
                     <div>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件被插入到 DOM 中时调用</div>
-                    <div>onDeactivated()</div>
+                </details>
+                <details>
+                    <summary>onDeactivated()</summary>
+                    <div>适用于缓存组件</div>
                     <div>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件从 DOM 中被移除时调用</div>
                 </details>
             </details>
         </dd>
-        <dd class="example-sn">使用响应式数据、条件渲染、路由，利用事件或延时，查看子组件 About.vue 生命周期函数执行情况</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 使用响应式数据、条件渲染、路由，利用事件或延时，查看子组件 About.vue 生命周期函数执行情况</dd>
         <dd>
             <pre>
 &lt;template&gt;
@@ -138,16 +136,16 @@ onUnmounted(() =&gt; {
 &lt;/script&gt;
 
 &lt;style scoped&gt;&lt;/style&gt;</pre>
-        </dd>
-        <dd>
             <img src="./imgs/lifetime0.png" alt="">
+            <div class="tips">
+                <div>已安装 Vs Code 扩展 Vue Vscode Snippets 的，请注意编辑过程中的代码片段提示，不要一个一个字母编辑</div>
+            </div>
         </dd>
-        <dd class="tips">
-            <div>已安装Vs Code扩展Vue Vscode Snippets的，请注意编辑过程中的代码片段提示，不要一个一个字母编辑</div>
-        </dd>
-        <dd class="example-sn"><a href="./component5.html">标签页</a> - 使用动态组件切换时，查看各组件的生命周期函数执行情况</dd>
+        <dd>[<span class="iconfont icon-keyboard"></span>] 标签页 -
+            使用动态组件切换时，查看各组件的生命周期函数执行情况</dd>
     </dl>
-    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <div id="footer"></div>
+    <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>
