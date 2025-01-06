@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>组件 Component</title>
     <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/footer2025.css">
     <base target="_blank">
 </head>
 
@@ -24,7 +25,9 @@
         <dt>Procedure</dt>
         <dd class="sn">
             <div><span class="warn">创建</span></div>
-            <p>创建组件/子组件，后缀名为 .vue，如 Demo.vue</p>
+            <p>创建组件/子组件，后缀名为 .vue，如 HelloWorld.vue</p>
+            <p>位置：普通组件放在 components 目录，并根据需要进一步分类；视图类组件放在 views 目录</p>
+            <p>命名：普通组件根据功能命名；视图类组件采用前缀或后缀的形式加以区分</p>
             <pre>
 &lt;script setup&gt;
     //逻辑
@@ -41,10 +44,11 @@
             <p>父组件在 &lt;script&gt; 引入子组件</p>
             <p>引入时，输入组件部分或全名，IDE会自动获取组件及补充相对路径；注意看代码提示</p>
             <p>不能省略后缀名 .vue</p>
-            <p>注意<span class="warn">路径</span>关系；可以使用相对路径；也可以使用路径别名 @ 从 src 开始引用</p>
+            <p>可以使用相对路径</p>
+            <p>也可以使用路径别名 @ 从 src 开始引用 - 建议</p>
             <pre>
 &lt;script setup&gt;
-    import Demo from './Demo.vue'
+    import HelloWorld from '@/components/HelloWorld.vue'
 &lt;/script&gt;</pre>
             <p>为了按需引入，减少加载时间，特别是首屏加载，通常采用 <a href="https://cn.vuejs.org/guide/components/async.html">异步组件</a>
                 的形式引入</p>
@@ -52,21 +56,24 @@
             <pre>
 import { defineAsyncComponent } from 'vue'
 
-const AsyncComp = defineAsyncComponent(() =>
-  import('./components/MyComponent.vue')
+const HelloWorld = defineAsyncComponent(() =>
+  import('./components/HelloWorld.vue')
 )</pre>
             <div><span class="warn">使用</span></div>
             <p>父组件在结构 &lt;template&gt; 中使用组件/子组件</p>
+            <p>怎么引入就怎么使用</p>
             <p>可以使用单标签或双标签</p>
             <p>可以多次使用</p>
             <pre>
 &lt;template&gt;
     &lt;h1&gt;Here is a child component!&lt;/h1&gt;
-    &lt;Demo /&gt;
-    &lt;Demo&gt;&lt;/Demo&gt;
+    &lt;HelloWorld /&gt;
+    &lt;HelloWorld&gt;&lt;/HelloWorld&gt;
 &lt;/template&gt;</pre>
         </dd>
-        <dt>Global Registration</dt>
+    </dl>
+    <div class="chap">Global Registration</div>
+    <dl>
         <dd>
             <div>使用 Vue 应用实例的 .component() 方法，让组件在当前 Vue 应用中全局可用</div>
             <div>通常在 main.js 中引入/注册并声明</div>
@@ -74,15 +81,18 @@ const AsyncComp = defineAsyncComponent(() =>
             <div>更多信息，请访问 <a href="https://vuejs.org/guide/components/registration.html">组件注册 - Component
                     Registration</a></div>
             <pre>
-import Com from './components/Com.vue';
+import Footer from '@/components/Footer.vue';
 
-app.component('Com', Com)</pre>
+app.component('Footer', Footer)</pre>
         </dd>
+    </dl>
+    <div class="chap">Homework</div>
+    <dl>
         <dd>[<span class="iconfont icon-keyboard"></span>] 封装版权组件</dd>
         <dd>[<span class="iconfont icon-keyboard"></span>] 封装轮播组件</dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 使用条件渲染，在开发者视图 → 网络 Network 中查看异步组件的加载情况，并观察项目发布后的打包情况</dd>
     </dl>
-    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    <div id="footer"></div>
+    <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>

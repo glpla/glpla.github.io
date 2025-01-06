@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>计算属性 Computed Properties</title>
   <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
   <base target="_blank">
 </head>
 
@@ -17,18 +18,39 @@
   </header>
   <dl>
     <dd>
-      <div>数据绑定时，可以使用简单的表达式实现数据的2次处理；如根据age判断DOM的渲染</div>
+      <div>数据绑定时，可以使用简单的表达式实现数据的2次处理；如根据 num 判断奇偶</div>
+      <pre>&lt;div&gt;{{ num }} is {{ num % 2 ? 'odd' : 'even' }}&lt;/div&gt;</pre>
       <div>逻辑复杂时，应该使用计算属性实现</div>
       <div>需要引入 computed 包</div>
       <div>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/computed.html">计算属性 - Computed Properties</a></div>
     </dd>
     <dt>Feature</dt>
     <dd>
-      <div>计算属性是响应式；数据响应时，不会刷新页面</div>
-      <div>计算属性有返回值，且仅在其响应式依赖更新时才重新计算</div>
-      <div>而，方法可以没有返回，且每次执行方法都会导致页面渲染</div>
+      <div>计算属性是响应式数据，会触发页面更新</div>
+      <div>计算属性返回的值是派生状态，可以把它看作是一个“临时快照”；每当源状态发生变化时，就会创建一个新的快照</div>
+      <div>计算属性返回的值是只读的，且永远不应该被更改 - 应该更新它所依赖的源状态以触发新的计算</div>
     </dd>
-    <dd class="tips">计算属性是一个属性，不是方法，使用时不需要()</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 判断奇偶</dd>
+    <dd>
+      <pre>&lt;div&gt;{{ num }} is {{ res }}&lt;/div&gt;</pre>
+      <pre>
+import { ref, computed } from 'vue';
+const num = ref(0);
+const res = computed(() => num.value % 2 === 0 ? 'even' : 'odd')</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 判断性别</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 参照B站规则处理关注、粉丝、点赞和播放数量</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页内联样式 - 根据当前导航项动态移动指示器；ind 是导航项的索引</dd>
+    <dd>
+      <div>结构中直接使用数据；逻辑应该加带使用.value</div>
+      <div>传统方案 - 直接拼接样式</div>
+      <pre>&lt;div class="indicator" :style="{ transform: `translateX(${ind * 80}px)` }"&gt;&lt;/div&gt;</pre>
+      <div>使用计算属性 - 计算出当前导航项的偏移量 trans</div>
+      <pre>&lt;div class="indicator" :style="{ transform: trans }"&gt;&lt;/div&gt;</pre>
+      <pre>let trans = computed(() => `translateX(${ind.value * 80}px)`)</pre>
+    </dd>
+    <dt>Computed Caching vs. Methods</dt>
+    <div>方法可以没有返回，且每次执行方法都会导致页面渲染</div>
     <dd>[<span class="iconfont icon-keyboard"></span>] 执行2次方法 inc 和执行2次计算属性 dec</dd>
     <dd>
       <div>创建方法 inc 和计算属性 dec</div>
@@ -62,16 +84,6 @@ const res = computed(() => {
 })</pre>
       <pre>
 &lt;div&gt; {{ res }} &lt;/div&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 参照B站规则处理关注、粉丝、点赞和播放数量</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页内联样式 - 根据当前导航项动态移动指示器；ind是导航项的索引</dd>
-    <dd>
-      <div>结构中直接使用数据；逻辑应该加带使用.value</div>
-      <div>传统方案 - 直接拼接样式</div>
-      <pre>&lt;div class="indicator" :style="{ transform: `translateX(${ind * 80}px)` }"&gt;&lt;/div&gt;</pre>
-      <div>使用计算属性 - 计算出当前导航项的偏移量 trans</div>
-      <pre>&lt;div class="indicator" :style="{ transform: trans }"&gt;&lt;/div&gt;</pre>
-      <pre>let trans = computed(() => `translateX(${ind.value * 80}px)`)</pre>
     </dd>
     <dt>Advance</dt>
     <dd>
@@ -142,12 +154,17 @@ const grade = computed(() => {
   return clockin.value + homework.value + bonus.value
 })      </pre>
     </dd> -->
-    <dd class="tips">
+  </dl>
+  <div class="chap">Summary</div>
+  <dl>
+    <dd class="sn">
+      <div>计算属性是一个属性，不是方法，使用时不需要()</div>
       <div>除了数据计算外，不应该有其它操作，如数据请求，DOM修改等副作用，即：只做一件事情</div>
       <div>如果还需要执行其它操作，可以使用侦听函数 <a href="./watch.html">watch</a></div>
     </dd>
   </dl>
-  <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>
