@@ -14,13 +14,13 @@
     <header>
       <div :class="{loading:isLoading}"></div>
       <div class="logo">
-        <svg class="icon icon-logo" aria-hidden="true">
+        <svg class="icon icon-logo">
           <use xlink:href="#icon-icon-medal-1st"></use>
         </svg>
         <span class="logo-title">积分榜</span>
       </div>
       <div class="ham" @click="toggleMenu">
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon">
           <use xlink:href="#icon-thlist"></use>
         </svg>
       </div>
@@ -36,29 +36,30 @@
       </div>
     </header>
     <div class="main">
-      <div class="item" v-for="(item,ind) in rank.cont" :key="item" :title="item.ucredit">
-        <div class="sn">{{item.usn}}</div>
-        <svg class="icon icon-avatar" aria-hidden="true">
-          <use :xlink:href="`#icon-avatar${getInd(ind)}`"></use>
-        </svg>
-        <!-- <img class='img' :src="`/utils${item.uavatar}`" alt="avatar"> -->
-        <span class='name'>{{item.uname}}</span>
-        <div class="star">
-          <svg class="icon icon-star" aria-hidden="true" v-for="star in item.ucredit">
-            <use xlink:href="#icon-star"></use>
+      <div class="main-cont" v-if="rank.cont.length">
+        <h3 class="leading">{{rank.info.grade}} - {{rank.info.class}} - {{rank.info.course}}</h3>
+        <div class="item" v-for="(item,ind) in rank.cont" :key="item" :title="item.ucredit">
+          <div class="sn">{{item.usn}}</div>
+          <svg class="icon icon-avatar">
+            <use :xlink:href="`#icon-avatar${getInd(ind)}`"></use>
           </svg>
-          <!-- <span class='iconfont icon-star' v-for="star in item.ucredit"></span> -->
+          <span class='name'>{{item.uname}}</span>
+          <div class="star">
+            <svg class="icon icon-star" v-for="star in item.ucredit">
+              <use xlink:href="#icon-star"></use>
+            </svg>
+          </div>
         </div>
       </div>
-      <svg class="icon icon-pos" aria-hidden="true">
-        <use xlink:href="#icon-a-guzhang"></use>
-      </svg>
+      <div v-else>No Records</div>
     </div>
+    <svg class="icon icon-pos">
+      <use xlink:href="#icon-a-guzhang"></use>
+    </svg>
     <footer>
       <h5>All Rights Reserved &copy; By Cnplaman 2022-2025</h5>
     </footer>
   </div>
-  <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script> -->
   <script src="/utils/lib/vue.global.prod.min.js"></script>
   <script>
     const { createApp, ref, computed, onMounted, onBeforeMount, watch } = Vue
@@ -67,7 +68,16 @@
         const navs = ref([{
           ind: 0,
           title: "2025春季",
-          cont: []
+          cont: [{
+            subind: 0,
+            desc: '2023软工1班',
+            url: '20240201.json',
+          },
+          {
+            subind: 1,
+            desc: '2023软工3班',
+            url: '20240202.json',
+          }]
         }, {
           ind: 1,
           title: '2024秋季',
@@ -75,27 +85,27 @@
             {
               subind: 0,
               desc: '2023软工1班',
-              url: '20240201.json',
+              url: '20240101.json',
             },
             {
               subind: 1,
               desc: '2023软工3班',
-              url: '20240202.json',
+              url: '20240102.json',
             },
             {
               subind: 2,
               desc: '2023数媒1班',
-              url: '20240203.json',
+              url: '20240103.json',
             },
             {
               subind: 3,
               desc: '2023数媒2班',
-              url: '20240204.json',
+              url: '20240104.json',
             },
             {
               subind: 4,
               desc: '2023数媒3班',
-              url: '20240205.json',
+              url: '20240105.json',
             },
           ]
         },
@@ -144,7 +154,14 @@
         ])
         const ind = ref(null)
         const subind = ref(null)
-        const rank = ref([]);
+        const rank = ref({
+          info: {
+            grade: '',
+            class: '',
+            course: ''
+          },
+          cont: []
+        });
         const subNav = ref([])
         const isLoading = ref(false)
         const isShow = ref(false)
@@ -154,10 +171,10 @@
           fetch(`/utils/data/rank/${url}`)
             .then(res => res.json())
             .then(res => {
-              rank.value = res;
-              ind.value = $event.target.dataset.ind;
-              subind.value = $event.target.dataset.subind;
-              // console.log(subNav.value);
+              rank.value = { info: res.info || {}, cont: res.cont || [] };
+              ind.value = $event.target.dataset.ind || 0;
+              subind.value = $event.target.dataset.subind || 0;
+              console.log(rank.value);
               isSubShow.value = false;
               isShow.value = false;
 

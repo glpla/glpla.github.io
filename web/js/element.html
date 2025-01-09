@@ -251,11 +251,12 @@ const items = box.querySelectorAll('.item')</pre>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView">scrollIntoView()</a>
     </dt>
     <dd>
-      <div>.滚动进入视图 - 滚动容器，使当前元素可见</div>
+      <div>.滚动进入视图 - 滚动父级容器，使当前元素可见</div>
       <div>.默认和可滚动的祖先容器顶部对齐 - aligned to the top of the visible area of the scrollable ancestor</div>
       <div>.选项可以指定和容器的对齐方式：顶部 start、底部 bottom、中部 center对齐等</div>
       <div>.选项可以指定滚动行为 behavior；也可以有 CSS 实现</div>
       <div>.可以代替 &lt;a&gt;实现页面内部导航/锚点跳转</div>
+      <div>.适合用于导航、焦点定位等场景</div>
       <pre>
 const links = document.querySelectorAll('.nav-item')
 const conts = document.querySelectorAll('.nav-cont')
@@ -264,6 +265,23 @@ links.forEach((link, ind) => {
         conts[ind].scrollIntoView({ behavior: 'smooth' })
     })
 })</pre>
+    </dd>
+    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTo">scrollTo()</a></dt>
+    <dd>
+      <div>.滚动指定元素的内容，使其内部的滚动位置发生变化 - 平滑滚动到特定位置</div>
+      <div>.当你需要精确控制元素内部的滚动位置时使用</div>
+      <div>.适合用于实现自定义滚动效果或复杂布局</div>
+      <div>.可以使用选项式指定位置</div>
+      <div>.响应用户交互，如点击按钮滚动到特定内容 </div>
+      <div>.实现无限滚动和分页加载 </div>
+      <div>.固定头部或侧边栏等复杂布局需求</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 返回顶部</dd>
+    <dd>
+      <div>使用 window</div>
+      <pre>window.scrollTo(0, 0);</pre>
+      <div>不要使用 body</div>
+      <pre>document.body.scrollTo({ top: 0, left: 0, behavior: 'smooth' });</pre>
     </dd>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/requestFullscreen">requestFullscreen()</a>
     </dt>
@@ -278,7 +296,7 @@ links.forEach((link, ind) => {
         relative to the viewport</div>
       <div>.描述整个矩形的位置和大小：left、top、right、bottom、x、y、width 、height</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>]</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 背景跟随</dd>
     <dd>
       <div>CSS 变量</div>
       <div class="cards-wrap">

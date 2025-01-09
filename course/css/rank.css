@@ -45,7 +45,7 @@ body {
   gap: var(--p-m-g);
   width: 100%;
   max-width: 1024px;
-  min-height: 100vh;
+  height: 100%;
 }
 
 .loading::after {
@@ -142,11 +142,14 @@ header {
 
 .main {
   flex: 1;
+  padding: var(--p-m-g);
+  overflow: auto;
+}
+
+.main-cont {
   display: flex;
   align-content: flex-start;
   flex-wrap: wrap;
-  overflow-y: auto;
-  padding: var(--p-m-g);
 }
 
 .main::-webkit-scrollbar {
@@ -168,6 +171,12 @@ header {
   font-size: 8rem;
 }
 
+.leading {
+  width: 100%;
+  text-align: center;
+  line-height: 3;
+}
+
 .item {
   width: 50%;
   min-width: 350px;
@@ -179,11 +188,11 @@ header {
   margin-bottom: var(--p-m-g);
 }
 
-.item:nth-child(even) {
+.item:nth-of-type(even) {
   flex-direction: row-reverse;
 }
 
-.item:nth-child(even) .star {
+.item:nth-of-type(even) .star {
   text-align: right;
 }
 
@@ -223,11 +232,11 @@ footer {
     z-index: 3;
   }
 
-  .item:nth-child(even) {
+  .item:nth-of-type(even) {
     flex-direction: unset;
   }
 
-  .item:nth-child(even) .star {
+  .item:nth-of-type(even) .star {
     text-align: unset;
   }
 
