@@ -16,9 +16,9 @@
   </header>
   <div class="container">
     <h1>路由综合运用</h1>
-    <h4>Router & Route</h4>
+    <h4>Route & Router</h4>
     <div class="title">实验题目</div>
-    <div class="cont">页面导航</div>
+    <div class="cont">路由设计</div>
     <div class="title">实验目的</div>
     <div class="cont">
       <div>掌握普通路由、命名路由、重定向路由和嵌套路由的基本使用</div>
@@ -29,9 +29,8 @@
     </div>
     <div class="title">实验内容</div>
     <div class="cont">
-      <div>单页路由</div>
-      <div>全站路由</div>
-      <div>面包屑导航</div>
+      <div>路由设计</div>
+      <div>面包屑导航*</div>
     </div>
     <div id="drill"></div>
     <div class="title">参考效果和参考代码</div>
@@ -40,13 +39,13 @@
       <p>.创建项目</p>
       <p>.创建SFC</p>
       <p>.创建路由</p>
-      <div>单页路由</div>
+      <div>路由设计</div>
       <pre>
 routes: [
   {
     path: '/',
     name: 'home',
-    component: Home,
+    component: () => import('../views/Heam.vue'),
     meta: {title: "home"}
   },
   {
@@ -55,88 +54,61 @@ routes: [
     meta: {title: "home"}
   },
   {
+    path: '/index',
+    redirect: {name: "home"},
+    meta: {title: "home"}
+  },
+  {
     path: '/team',
     name: 'team',
-    component: () => import('../components/sub_view/Team.vue'),
+    component: () => import('../views/Team.vue'),
+    children: [
+      {
+        path: 'user1',
+        name: 'user1',
+        component: () => import('../sub-view/User1.vue')
+      },
+      // ...
+    ],
     meta: {title: "team"}
   },
   {
     path: '/work',
     name: 'work',
-    component: () => import('../components/sub_view/Work.vue'),
+    component: () => import('../views/Work.vue'),
+    children: [
+      {
+        path: 'html',
+        name: 'html',
+        component: () => import('../sub-view/Html.vue')
+      },
+      // ...
+    ],
     meta: {title: "work"}
   },
   {
     path: '/about',
     name: 'about',
-    component: () => import('../components/sub_view/About.vue'),
+    component: () => import('../views/About.vue'),
     meta: {title: "about"}
   },
   {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
-    component: () => import('../components/NotFound.vue'),
-    meta: {title: "404"}
-  }
-]</pre>
-      <div>全站路由</div>
-      <pre>
-routes: [
-  {
-    path: '/',
-    name: 'login',
-    component: Login,
-  },
-  {
     path: '/login',
-    redirect: '/'
+    name: 'login',
+    component:  () => import('../views/Login.vue'),
+    meta: {title: "login"}
   },
   {
-    path: '/home',
-    name: 'home',
-    component: () => import('../views/Home.vue'),
-    children: [
-      {
-        path: 'user',
-        name: 'user',
-        component: () => import('../views/User.vue')
-      },
-      {
-        path: 'good',
-        name: 'good',
-        component: () => import('../views/Good.vue')
-      },
-      {
-        path: 'cart',
-        name: 'cart',
-        component: () => import('../views/Cart.vue')
-      },
-      {
-        path: 'order',
-        name: 'order',
-        component: () => import('../views/Order.vue')
-      },
-      {
-        path: 'todo',
-        name: 'todo',
-        component: () => import('../views/Todo.vue')
-      },
-      {
-        path: 'setup',
-        name: 'setup',
-        component: () => import('../views/Setup.vue')
-      },
-      {
-        path: 'about',
-        name: 'about',
-        component: () => import('../views/About.vue')
-      }
-    ]
+    path: '/register',
+    name: 'register',
+    component:  () => import('../views/Register.vue'),
+    meta: {title: "register"}
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: () => import('../components/NotFound.vue')
+    component: () => import('../views/NotFound.vue'),
+    meta: {title: "404"}
   }
 ]</pre>
       <div>面包屑导航</div>

@@ -18,19 +18,27 @@
       background-image: url(./imgs/vue.jpg);
     }
 
-    .share {
-      padding: 0 var(--p-m-g);
-    }
-
+    .reading a,
     .share a {
       display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .reading a::before {
+      content: '\ecaa ';
+      color: var(--color);
+      font-family: 'iconfont';
     }
 
     .share a::before {
-      content: '🖱 ';
+      content: '\ecd3 ';
       color: var(--color);
+      font-family: 'iconfont';
     }
 
+    .reading a:hover,
     .share a:hover {
       color: var(--color);
     }
@@ -50,8 +58,7 @@
         <a class="item" data-title="opening" href="./opening202402.html">开课啦</a>
         <a class="item" data-title="ranking" href="../course/rank.html">积分榜</a>
         <a class="item" data-title="IDE" href="./ide.html">开发环境</a>
-        <a class="item" data-title="server" href="../node/static.html">静态资源服务器 <span
-            class="iconfont icon-mouse-alt"></span></a>
+        <a class="item" data-title="server" href="../node/static.html">静态资源服务器</a>
         <a class="item" data-title="fetch" href="../node/fetch.html">网络请求</a>
         <a class="item" data-title="axios" href="../node/axios.html">网络请求*</a>
         <a class="item" data-title="Git" href="../web/git.html">代码管理</a>
@@ -61,10 +68,9 @@
       <div class="item-wrap">
         <div class="chap">basic</div>
         <a class="item" data-title="API" href="https://cn.vuejs.org/api/">API</a>
-        <a class="item" data-title="project" href="./project.html">项目 <span class="iconfont icon-mouse-alt"></span></a>
+        <a class="item" data-title="project" href="./project.html">项目</a>
         <a class="item" data-title="SFC" href="./sfc.html">单文件组件</a>
         <a class="item" data-title="component" href="./component.html">组件</a>
-        <a class="item" data-title="route" href="./router.html">初识路由 <span class="iconfont icon-mouse-alt"></span></a>
         <a class="item" data-title="Template Syntax" href="./template_syntax.html">模板语法</a>
         <a class="item" data-title="image" href="./img.html">图片</a>
       </div>
@@ -74,6 +80,7 @@
         <a class="item" data-title="CSS" href="./css.html">样式表</a>
         <a class="item" data-title="class" href="./class.html">类</a>
         <a class="item" data-title="style" href="./style.html">样式</a>
+        <a class="item" data-title="favicon" href="../web/favicon.html">网站图标</a>
       </div>
 
       <div class="item-wrap">
@@ -99,7 +106,7 @@
         <a class="item" data-title="defineProps()" href="./component_props.html">父传子</a>
         <a class="item" data-title="defineEmits()" href="./component_emits.html">子传父</a>
         <a class="item" data-title="defineModel()" href="./component-model.html">双向绑定</a>
-        <a class="item" data-title="provide" href="./component_provide.html">跨级传</a>
+        <a class="item" data-title="provide & Inject" href="./component_provide.html">跨级传</a>
         <a class="item" data-title="slots" href="./component_slots.html">插槽</a>
         <a class="item" data-title="dynamic" href="./component_dynamic.html">动态组件</a>
         <a class="item" data-title="async" href="./component_async.html">异步组件</a>
@@ -107,17 +114,16 @@
       </div>
 
       <div class="item-wrap">
-        <div class="chap">router</div>
-        <a class="item" data-title="route" href="./router_page.html">页面路由 <span
-            class="iconfont icon-mouse-alt"></span></a>
-        <a class="item" data-title="params" href="./router_params.html">动态路由 <span
-            class="iconfont icon-mouse-alt"></span></a>
-        <a class="item" data-title="query" href="./router_query.html">查询路由</a>
-        <a class="item" data-title="props" href="./router_props.html">传参路由</a>
-        <a class="item" data-title="router" href="./router_use.html">编程路由</a>
-        <a class="item" data-title="style" href="./router_style.html">路由样式</a>
-        <a class="item" data-title="history" href="./router_history.html">路由模式</a>
-        <a class="item" data-title="guards" href="./router_guard.html">导航守卫</a>
+        <div class="chap">route & router</div>
+        <a class="item" data-title="route" href="./route.html">路由</a>
+        <a class="item" data-title="route" href="./route_adv.html">路由配置</a>
+        <a class="item" data-title="route params" href="./route_params.html">动态路由</a>
+        <a class="item" data-title="route query" href="./route_query.html">查询路由</a>
+        <a class="item" data-title="route props" href="./route_props.html">传参路由</a>
+        <a class="item" data-title="route style" href="./route_style.html">路由样式</a>
+        <a class="item" data-title="route history" href="./route_history.html">路由模式</a>
+        <a class="item" data-title="route guards" href="./route_guard.html">导航守卫</a>
+        <a class="item" data-title="router" href="./router.html">编程路由</a>
       </div>
 
       <div class="item-wrap">
@@ -189,6 +195,12 @@
     </div>
 
     <div class="grid">
+      <div class="reading">
+        <div class="chap">Reading</div>
+        <a href="https://www.fadocodecamp.com/posts/javascript-basics-tutorial">JavaScript Basics Tutorial</a>
+        <a href="https://www.fadocodecamp.com/posts/vue-3-cheat-sheet">Comprehensive Vue 3 Cheat Sheet: Mastering the
+          Composition API</a>
+      </div>
       <div class=" share">
         <div class="chap">Third party</div>
         <!-- <a  data-title="module" href="../web/js/module.html">Module</a> -->
@@ -197,7 +209,6 @@
         <!-- <a  data-title="Fontawesome" href="../web/framework/fontawesome.html">Fontawesome</a> -->
         <a href="../web/framework/iconfont.html">Iconfont</a>
         <a href="./swiper.html">Swiper</a>
-        <a href="https://randomuser.me/">Random User</a>
         <a href="./elementui.html">Element UI</a>
         <a href="./echarts.html">ECharts</a>
         <a href="./lbs.html">Tencent LBS</a>
@@ -209,10 +220,12 @@
         <a href="https://github.com/typicode/json-server">Json Server</a>
         <a href="https://jsonplaceholder.typicode.com/">Json Placeholder</a>
         <a href="https://randomuser.me/">Random User</a>
+        <a href="https://fakerjs.dev">Faker.js</a>
+        <a href="http://mockjs.com/">Mock.js</a>
       </div>
 
       <div class="share">
-        <div class="chap">tutorial</div>
+        <div class="chap">Vue School</div>
         <a href="https://vueschool.io/">Vue School</a>
         <a href="https://vueschool.io/courses/visual-studio-code-for-vue-js-developers">visual studio code</a>
         <a href="https://vueschool.io/courses/vue-3-single-file-components">single file components</a>
@@ -223,6 +236,8 @@
         <a href="https://vueschool.io/courses/vue-js-transitions-and-animations">transitions and animations</a>
         <a href="https://vueschool.io/courses/robust-vue-js-forms-with-formkit">formkit</a>
         <a href="https://vueschool.io/courses/charts-for-vue-js-3">charts</a>
+        <a href="https://vueschool.io/courses/enhanced-routing-with-unplugin-vue-router">unplugin vue router</a>
+        <a href="https://vueschool.io/courses/generating-fake-data-with-faker-js">faker.js</a>
       </div>
     </div>
 

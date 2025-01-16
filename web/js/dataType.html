@@ -50,7 +50,8 @@
     <dd>
       <div>.未声明或声明了变量但未初始化；因为 JavaScript 的弱类型特点，系统不知道你会保存什么类型的数据，且每个类型的数据默认值是不一样的，所以干脆给个未定义</div>
       <div>.只有1个值 undefined</div>
-      <div>.一般而言，不要显式地把一个变量设置为 undefined</div>
+      <div>.一般而言，不要显式地把一个变量设置为 undefined - You'd rarely see code setting a value of a variable as undefined explicity!
+      </div>
       <div>.为方便使用，应显式地初始化变量为某个特定的值</div>
       <pre>
 var a;
@@ -64,13 +65,13 @@ console.log(typeof b);//undefined</pre>
       <div>.如果定义的变量准备在将来用于保存对象，那么最好将该变量初始化为 null 而不是其他值</div>
       <div>.将变量的值设置为 null 可以清空变量</div>
       <div>.可以看作是占了一个位置</div>
-      <div>.null 和 undefined 的相等操作符（==）总是返回 true，但它们的用途完全不同；<a
-          href="https://www.cnblogs.com/thiaoqueen/p/6904398.html">判断空值 undefined 和 null</a></div>
+      <div>.null 和 undefined 的相等操作符（==）总是返回 true，但它们的用途完全不同</div>
+      <div>.更多信息，请访问 <a href="https://www.cnblogs.com/thiaoqueen/p/6904398.html">判断空值 undefined 和 null</a></div>
       <pre>
 var obj = null;
 console.log(typeof obj);//object
-console.log(null === undefined);//false
-console.log(null == undefined);//true</pre>
+console.log(null == undefined);//true
+console.log(null === undefined);//false；null and undefined are not identical</pre>
     </dd>
     <dd class="tips">
       <div>比较过程如下：如果两个值的类型相同，则直接比较它们的值； 如果两个值的类型不同，则进行类型转换后比较</div>
@@ -93,6 +94,7 @@ console.log(NaN == NaN);//false</pre>
     </dd>
     <dt>5. String</dt>
     <dd>
+      <div>.字符序列 - a sequence of characters</div>
       <div>.字符串可以由双引号（"）或单引号（'）表示，但是不能混用</div>
       <div>.可以使用转义字符，如 \t</div>
       <div>.可以使用十六进制表示1个字符，如 \xnn</div>
@@ -159,7 +161,7 @@ console.log('123'-);//Error</pre>
     <dt>8. date 日期类</dt>
     <dd>.更多信息，请访问 <a href="./date.html">RegDateExp</a></dd>
   </dl>
-  <div class="chap">数据类型转换 - Data type conversion</div>
+  <div class="chap">数据类型转换 - Data type conversion / type coercion</div>
   <dl class="nav-cont">
     <dd>
       <div>.更多信息，请访问 <a

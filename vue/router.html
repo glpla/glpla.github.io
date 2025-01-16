@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>初识路由 Route</title>
+  <title>编程路由 Router</title>
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/footer2025.css">
   <base target="_blank">
@@ -13,114 +13,98 @@
 
 <body>
   <header>
-    <h1>初识路由</h1>
-    <span>&commat;Route</span>
+    <h1>编程路由</h1>
+    <span>&commat;Router</span>
   </header>
   <dl>
-    <dt>&lt;a&gt;</dt>
     <dd>
-      <div>Html 原生标签</div>
-      <div>页面会重新加载/刷新</div>
-    </dd>
-    <dt>&lt;router-link&gt;</dt>
-    <dd>
-      <div>自定义组件 &lt;router-link&gt;；使用属性 to 代替了属性 href</div>
-      <div>不会刷新页面</div>
-    </dd>
-    <dt>&lt;router-view&gt;</dt>
-    <dd>
-      <div>路由目标占位符</div>
-      <div>借助系统组件 &lt;router-view&gt; 显示与 URL 对应的组件|路由出口</div>
-      <div>有 &lt;router-link&gt; 路由，则必须有 &lt;router-view&gt; 路由出口</div>
-      <div>还可以像缓存组件那样，缓存 &lt;router-view&gt;</div>
-    </dd>
-    <dt>Configuration</dt>
-    <dd>
-      <div>按照值对形式 name-value pair 配置路由，即把 URL 路径映射到组件；其中，路径 path 和组件 component 是必填项</div>
-      <div>所有的路由配置位于项目文件夹 src → router 中，通常是 index.js</div>
-      <div>更多信息，请访问 <a href="./router.html">路由使用</a></div>
-      <div>1. 路径 path</div>
-      <div>/ 代表根路由</div>
-      <div>2. 组件 component</div>
-      <div>引入组件时，可以省略后缀名 .vue</div>
-      <div>每一个组件都是一个视图 view</div>
-      <div>每一个组件都是一个单文件组件 SFC - Single File Component</div>
-      <div>单页面应用 SPA - Single Page Application</div>
+      <div>除了使用 &lt;router-link&gt; 创建路由|声明式路由，还可以借助 <a
+          href="https://router.vuejs.org/zh/api/#Functions-useRouter">useRouter()</a> 实现编程式路由</div>
+      <div>类似于 &lt;a&gt; 和 location.href 的关系</div>
+      <div>全局注入的函数，用于获取路由器实例，以便<span class="warn">操作路由</span> ，如 push、replace、go 等</div>
+      <div>需引入路由包 useRouter 并创建路由实例 router</div>
+      <div>可以使用普通路由 path；也可以使用命名路由 name</div>
+      <div>可以指定路由参数 params 或 query</div>
+      <pre>
+import { useRouter } from 'vue-router'
+const router = useRouter()</pre>
       <table>
-        <caption>路由配置属性</caption>
+        <caption>useRouter 常用方法</caption>
         <tr>
-          <th>属性</th>
+          <th>分类</th>
           <th>说明</th>
         </tr>
         <tr>
-          <td>path</td>
-          <td>路由；必填</td>
+          <td>push</td>
+          <td>导航时向 history 添加新记录|压入路由，并跳转到目标；单击 &lt;router-link&gt; 时触发；可以逐级返回</td>
         </tr>
         <tr>
-          <td>component</td>
-          <td>对应路由的组件；必填</td>
+          <td>replace</td>
+          <td>导航时不会向 history 添加新记录，替换|取代了当前的条目；不可返回</td>
         </tr>
         <tr>
-          <td>name</td>
-          <td>命名路由：通过名字来指定路由；不能重复；更直观、灵活，简化路由使用，如动态路由</td>
+          <td>go(n)</td>
+          <td>导航到历史记录中的特定位置；可以前进或后退；参数 n 是一个整数，相对于当前位置的偏移量</td>
         </tr>
         <tr>
-          <td>redirect</td>
-          <td>重定向路由：让指定的路由重新定位到另外一个路由</td>
+          <td>back()</td>
+          <td>后退一级；相当于 go(-1)</td>
         </tr>
         <tr>
-          <td>children</td>
-          <td>嵌套路由、子路由；嵌套路由通常需要使用重定向</td>
-        </tr>
-        <tr>
-          <td>meta</td>
-          <td>路由元信息：用于路由组件的额外配置</td>
-        </tr>
-        <tr>
-          <td>props</td>
-          <td>是否启用路由参数；可以接收动态路由参数和查询路由参数</td>
+          <td>forward()</td>
+          <td>前进一级；相当于 go(1)</td>
         </tr>
       </table>
-    </dd>
-    <dt>Normal import</dt>
-    <dd>
-      <div>系统就绪时，所有组件都已经导入</div>
       <pre>
-import HomeView from "@/views/HomeView.vue";
-import TeamView from "@/views/TeamView.vue";
+// 查询路由
+router.push('/user?id=100')
 
-const routes = [
-{ path: '/', component: HomeView },
-{ path: '/team', component: TeamView },
-]</pre>
+// 查询路由，结果是 /register?plan=private
+router.push({ path: '/register', query: { plan: 'private' } })
+
+// 动态路由 - 静态和动态
+router.push('/user/eduardo')
+router.push({ path: '/detail/' + ind })
+
+// 动态路由，并加上参数，让路由建立 url；只能使用命令路由name
+router.push({ name: 'user', params: { username: 'eduardo' } })
+
+//禁止返回路由
+router.push({ path: '/user', query: { bread: 'user' }, replace: true })
+router.replace({ path: '/user', query: { bread: 'user' } })</pre>
     </dd>
-    <dt>Dynamic import</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 加载完毕后跳转至首页 - 在生命周期函数中，使用延时 setTimeout 模拟实现</dd>
     <dd>
-      <div>动态导入 - Dynamic import；懒加载，需要的时候才加载</div>
       <pre>
-const routes = [
-{ path: '/', component: () => import("../views/TeamView.vue") },
-{ path: '/about', component: () => import("../views/HomeView.vue") },
-]</pre>
+//引入
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+//使用 
+const router = useRouter()
+onMounted(()=>{
+    setTimeout(()=>{
+        //router.push('/home')
+        router.replace('/home') //这里通常使用replace模式
+    }, 3000)
+})</pre>
     </dd>
-  </dl>
-  <div class="chap">Homework</div>
-  <dl>
-    <dd>[<span class="iconfont icon-keyboard"></span>] SPA</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 分享页面 - 添加商品 id 作为查询路由参数</dd>
     <dd class="sn">
-      <div>创建以学号命名的项目，使用路由</div>
-      <div>在 App.vue 中仅使用 &lt;router-view&gt; 展示路由出口，删除其他内容</div>
-      <div>增加一个 首页视图组件 HomeView.vue</div>
-      <div>增加一个 团队视图组件 TeamView.vue</div>
-      <div>配置路由 - 配置2条路由：/和/team</div>
-      <div>在 HomeView.vue 中使用 &lt;a&gt; 导航到 TeamView.vue</div>
-      <div>在 TeamView.vue 中使用 &lt;a&gt; 导航到 HomeView.vue</div>
-      <div>运行项目，在开发者视图 → 网络 Network 中查看页面的加载情况</div>
-      <div>修改 &lt;a&gt; 为 &lt;router-link&gt;，修改 href 为 to，再次查看页面的加载情况，体会 SPA 的特点</div>
-      <div>修改路由对应的组件为动态导入</div>
-      <div>再次查看页面变化时，路由的懒加载情况</div>
-      <div>代码仓库* - 将项目推送到自己的代码仓库</div>
+      <div>分享 URL</div>
+      <pre>
+const share = () => {
+    router.push({ query: { id: 100 } })
+}</pre>
+      <div>使用 - 如果没有，就强推 999 号商品</div>
+      <pre>
+onMounted(() => {
+    let id = route.query.id || 999
+    // axios.get(`/api/todo/${id}`).then(res => {})
+})</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 找人代付 - 添加用户订单信息作为查询路由参数</dd>
+    <dd>略</dd>
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>

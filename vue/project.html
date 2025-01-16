@@ -92,7 +92,7 @@
       <p>.每条路由都对应一个组件 - map each route to a specific component</p>
       <p>.定义的路由导出并在 main.js 中使用</p>
       <div>stores - 仓库目录</div>
-      <div>App.vue - 主入口组件、根组件</div>
+      <div>App.vue - 根组件 root component</div>
       <p>.特别的 <a href="./sfc.html">单文件组件 SFC</a>，包括逻辑、结构和样式</p>
       <p>.逻辑中可以引入其它组件、库和模块</p>
       <pre>
@@ -123,7 +123,7 @@ import 'font-awesome/css/font-awesome.min.css'</pre>
       <div>由于包的更新和大小等因素，项目分享或提交到代码仓库时，这部分会被忽略。用户拿到代码，第一件事情是安装依赖；否则项目不能运行</div>
       <pre>
 {
-    "name": "sfc",
+    "name": "helloworld",
     "version": "0.0.0",
     "private": true,
     "type": "module",
@@ -145,14 +145,19 @@ import 'font-awesome/css/font-awesome.min.css'</pre>
         "vite": "^5.0.11"
     }
 }</pre>
-      <div>可以指定主机地址，如0.0.0.0，表示局域网地址</div>
-      <pre>"dev": "vite --host 0.0.0.0",</pre>
+      <div>为 dev 指定 host 选项，Vite 会暴露一个外部网络可用的 URL。使用这个 URL 在其他设备上访问你的开发服务器</div>
+      <pre>"dev": "vite --host"</pre>
+      <div>甚至指定主机地址，如0.0.0.0，监听所有网络接口，适用于需要特别指定的情况</div>
+      <pre>"dev": "vite --host 0.0.0.0"</pre>
+      <div>指定端口 port</div>
+      <pre>"dev": "vite --host 0.0.0.0 --port 5173"</pre>
+      <div class="tips">在大多数情况下，使用 --host 即可满足需求。如果需要更明确的配置，可以使用 --host 0.0.0.0</div>
     </dd>
     <dt>vite.config.js</dt>
     <dd>
       <div>vite 的配置，如 server 的配置：项目打开、端口、代理等等；默认没有，需手动添加</div>
-      <div>网络请求出现跨域时，必须要做<a href="../node/proxy.html">代理 Proxy</a></div>
-      <div>更多配置，请访问<a href="https://cn.vitejs.dev/config/">官方文档 - 配置 Vite</a></div>
+      <div>网络请求出现跨域时，必须要做 <a href="../node/proxy.html">代理 Proxy</a></div>
+      <div>更多配置，请访问 <a href="https://cn.vitejs.dev/config/">官方文档 - 配置 Vite</a></div>
       <pre>
 server: {
     open: true,         //启动项目自动弹出浏览器；默认 false，手动启动
@@ -201,6 +206,7 @@ server: {
     <dd class="sn">
       <div>发布后都发生了什么???</div>
       <div>跨域是什么???</div>
+      <div>使用 <a href="https://tailwindcss.com/docs/guides/vite#vue">Tailwind.css</a>样式库创建项目</div>
     </dd>
   </dl>
   <div id="footer"></div>

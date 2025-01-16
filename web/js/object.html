@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>对象 Object</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/footer2025.css">
   <base target="_blank">
 </head>
 
@@ -16,15 +17,33 @@
     <span>&commat;Object</span>
   </header>
   <dl>
-    <dd>.在 {} 中以值对 key-value pair 的形式定义</dd>
-    <dd>.对象其实就是一组数据和功能的集合</dd>
-    <dd>.使用点语法或数组语法访问值对</dd>
+    <dt>Overview</dt>
+    <dd>
+      <div>.值对的集合 - collections of key-value pairs</div>
+      <div>.每个 key 都是唯一的 - each key is unique</div>
+      <div>.使用 {} 定义 - Define objects using curly braces</div>
+      <div>.使用点语法或数组语法访问值对 - using dot notation or square brackets</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 基本使用</dd>
+    <dd>
+      <div>key唯一；值可以是普通数据类型，也可以是函数</div>
+      <pre>
+let example = {
+  id: 1001,
+  date: '2025/1/12',
+  sayHello: function () {
+    console.log("Hello");
+  },
+};
+example.sayHello(); // Outputs: 'Hello'      </pre>
+    </dd>
     <dt>对象静态方法</dt>
     <dd class="sn">
-      <div>entries()：返回对象入口|键值对组成的数组</div>
-      <div>keys()：返回对象键 key 组成的数组</div>
-      <div>values()：返回对象值 value 组成的数组</div>
-      <div>assign(obj,obj1)：赋值；将 obj1 的内容给 obj；要求各值对一一对应</div>
+      <p>直接使用，无须实例化</p>
+      <div>Object.keys()：返回对象键 key 组成的数组</div>
+      <div>Object.values()：返回对象值 value 组成的数组</div>
+      <div>Object.entries()：返回对象入口|键值对组成的数组</div>
+      <div>Object.assign(obj,obj1)：赋值；将 obj1 的内容给 obj；要求各值对一一对应</div>
     </dd>
     <dt>对象实例方法</dt>
     <dd class="sn">
@@ -128,7 +147,8 @@ const { add, dec } = require('./module/test')</pre>
       <pre>let { name, age, address: { code: postcode } } = obj</pre>
     </dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
   <a class="back2top" target="_self" href="#">
     <svg t="1733899399303" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
       p-id="31526" width="32" height="32">
@@ -144,6 +164,14 @@ const { add, dec } = require('./module/test')</pre>
       test = '123';
       console.log(test);
     })();
+    let example = {
+      id: 1001,
+      date: '2025/1/12',
+      sayHello: function () {
+        console.log("Hello");
+      },
+    };
+    example.sayHello(); // Outputs: 'Hello'
   </script>
 </body>
 

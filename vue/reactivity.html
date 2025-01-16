@@ -37,10 +37,11 @@
   <dl>
     <dt>Overview</dt>
     <dd>
-      <div>创建<span class="warn">基本数据类型、复合数据类型</span>的响应式数据</div>
-      <div>ref() 将传入参数的值包装为一个带 .value 属性的 ref 对象</div>
-      <div>ref() 的 .value 属性是响应式</div>
-      <div>ref() 还用于 <a href="ref.html">模板引用</a></div>
+      <div>创建<span class="warn">基本数据类型、复合数据类型</span>的响应式数据 - creating reactive references to primitive values</div>
+      <div>ref() 将传入参数的值包装为一个带 .value 属性的 ref 对象 - wraps primitive values in a reactive object. Access the value using
+        .value</div>
+      <div>ref() 的 .value 属性是响应式 - Triggers re-renders when the value changes</div>
+      <div>ref() 还可用于 <a href="ref.html">模板引用</a>，用于获取 DOM 元素</div>
       <div>更多响应式原理，请访问 <a href="https://cn.vuejs.org/api/reactivity-core.html#ref">ref()</a></div>
     </dd>
     <dt>Usage</dt>
@@ -49,7 +50,7 @@
       <pre>import { ref } from 'vue'</pre>
       <div>2. 声明响应式变量 - 执行函数、传入参数、变量接收</div>
       <pre>const count = ref(0)</pre>
-      <div>3.1 结构中使用 - 直接使用，vue会自动获取其 value</div>
+      <div>3.1 结构中使用 - 直接使用；Vue 会自动拆包获取其 value - automatically unwrapped in templates</div>
       <pre>&lt;div>{{count}}&lt;/div></pre>
       <div>3.2 逻辑中使用 - 赋值时需额外指定 value 属性；可以由开发环境的插件自动补齐 value 属性</div>
       <pre>
@@ -82,9 +83,10 @@ const changeTheme = () => {
   <dl>
     <dt>Overview</dt>
     <dd>
-      <div>只能创建<span class="warn">复合数据类型</span>的响应式数据，如对象、数组</div>
-      <div>不用指定 value 属性</div>
-      <div>reactive() 将深层地转换对象：当访问嵌套对象时，它们也会被 reactive() 包装</div>
+      <div>只能创建<span class="warn">复合数据类型</span>的响应式数据，如对象、数组 - For more complex state</div>
+      <div>响应式的代理整个对象 - Creates a reactive proxy of the entire object</div>
+      <div>不用指定 value 属性 - Properties can be accessed directly without .value</div>
+      <div>reactive() 将深层地转换对象：当访问嵌套对象时，它们也会被 reactive() 包装 - Suitable for complex nested objects</div>
       <div>当 ref 的值是一个对象时，ref() 也会在内部调用它</div>
       <div>更多响应式原理，请访问 <a href="https://cn.vuejs.org/api/reactivity-core.html#reactive">reactive()</a></div>
     </dd>
@@ -110,10 +112,12 @@ console.log(obj)</pre>
     </dd>
     <dt>Limitations</dt>
     <dd>
-      <div>使用不当，会丢失数据的响应式</div>
+      <div>使用不当，会丢失数据的响应式 - Breaks Reactivity</div>
       <div>更多注意事项，请访问 <a
           href="https://cn.vuejs.org/guide/essentials/reactivity-fundamentals.html#limitations-of-reactive">limitations
-          of reactive</a>
+          of reactive</a>、<a
+          href="https://www.fadocodecamp.com/posts/maintaining-reactivity-in-vuejs-the-pitfall-of-destructuring-props">The
+          Pitfall of Destructuring Props</a>
       </div>
       <div>1. 不能声明简单数据类型 - value cannot be made reactive: 10</div>
       <pre>const count = reactive(10)</pre>
@@ -125,7 +129,7 @@ const done = () => {
       name: 'gl'
     }
 }</pre>
-      <div>3. 不能解构，因为它是一个整体</div>
+      <div>3. 不能解构 - destructuring props；因为它是一个整体</div>
       <pre>const { id, name } = obj</pre>
       <!-- <div>也可以使用对象的分配方法，更新数据</div>
       <pre>

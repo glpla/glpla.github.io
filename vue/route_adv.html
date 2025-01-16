@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>路由配置 Route</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>路由配置</h1>
+    <span>&commat;Route</span>
+  </header>
+  <dl>
+    <dt>Install</dt>
+    <dd>
+      <div>推荐创建项目的时候指定使用路由，自动生成路由配置文件 <i class="iconfont icon-thumbup"></i></div>
+      <div>也可以单独安装路由依赖；需要单独配置并引入，比较麻烦，不推荐</div>
+      <div>1. 安装路由 - 为项目添加安装依赖</div>
+      <pre>npm i vue-router -S</pre>
+      <div>2. 引入路由</div>
+      <div>在入口文件 main.js 中引入路由，作为中间件使用</div>
+      <pre>
+//引入
+import router from './router'
+
+//使用 - 链式
+app.use(router).mount('#app')</pre>
+    </dd>
+    <dt>命名路由 <a href="https://router.vuejs.org/zh/guide/essentials/named-routes.html">Named Routes</a></dt>
+    <dd>
+      <div>通过 name 属性指定路由名称，便于在模板中引用</div>
+      <div>所有路由的命名必须唯一</div>
+      <div>可读性：采用语义化的命名</div>
+      <div>可维护性：路由变化时，只改路由，命名可以保留</div>
+      <div>更<span class="warn">简洁</span> ：使用命名导航而不是路径；特别适合嵌套路由</div>
+      <div>方便重定向和别名</div>
+      <div>方便使用 <a href="./route_params.html">动态路由</a> 传递参数，无须拼接字符串</div>
+      <div>方便处理 <a href="./route_guard.html">路由守卫</a>；使用 name 而不是 path</div>
+      <div>...</div>
+      <pre>
+{
+  path: '/',
+  name: 'home',
+  component: Home
+}</pre>
+    </dd>
+    <dt>重定向路由 <a href="https://router.vuejs.org/zh/guide/essentials/redirect-and-alias.html">Redirect</a></dt>
+    <dd>
+      <div>将一个路径重定向到另一个路径，适用于 URL 标准化、旧路径迁移和默认路径设置</div>
+      <div>嵌套路由不需要指定 component，因为它会重定向到目标路由，由目标路由的配置指定</div>
+      <div>可以直接指定 path</div>
+      <div>可以使用命名路由 name - 推荐</div>
+      <div>也可以使用函数确定</div>
+      <pre>
+{
+  path: '/',
+  name: 'index',
+  component: IndexView
+},
+{
+  path: '/home',
+  name: 'home',
+  redirect: '/'
+  // redirect: { name: 'index' }
+}</pre>
+    </dd>
+    <dt>嵌套路由 <a href="https://router.vuejs.org/zh/guide/essentials/nested-routes.html">Nested Routes</a>
+    <dd>
+      <div>在路由配置中使用 children 定义子路由。适合构建复杂的 SPA，特别是多层嵌套视图</div>
+      <div>嵌套路由：将子路由配置到父路由中，父路由负责显示子路由，子路由负责显示内容</div>
+      <div>每个子路由都有自己的视图组件</div>
+      <div>为了渲染子路由对应的视图组件，父路由对应的组件应提供 &lt;router-view&gt;</div>
+      <div>子路由的 path 可以省略父级路由，不用 /；/代表根路由/根路径</div>
+      <div>可以使用模块定义路由信息再引入，便于管理和复用，如用于导航菜单</div>
+      <pre>
+{
+  path: "/work",
+  name: "work",
+  component: () => import("../views/Work.vue"),
+  children: [
+    {
+      path: "html", // 省略父级路由
+      name: "html",
+      component: () => import("../components/sub-view/Html.vue"),
+    },
+    {
+      path: "css", // 省略父级路由
+      name: "css",
+      component: () => import("../components/sub-view/Css.vue"),
+    },
+    {
+      path: "/work/js", // 可以使用完整路由；建议所有子路由配置保持一致
+      name: "js",
+      component: () => import("../components/sub-view/Js.vue"),
+    }
+  ]
+}</pre>
+      <div>通常情况下，父路由匹配时，除了渲染本身视图外，还会渲染某个子路由的视图；如果不特别处理，仅仅当子路由也匹配时，才会渲染</div>
+      <div>方案1：子路由使用空路由</div>
+      <pre>
+{
+  path: "/work",
+  name: "work",
+  component: () => import("../views/Work.vue"),
+  children: [
+    {
+      path: "", //空路由
+      name: "html",
+      component: () => import("../components/sub-view/Html.vue"),
+    },
+    // ...
+  ]
+}      </pre>
+      <div>方案2：父路由重定向到子路由 - 推荐</div>
+      <pre>
+{
+  path: '/work',
+  name: "work",
+  component: () => import('../views/Work.vue'),
+  redirect: { name: "html" }, // 使用命名路由
+  // redirect: '/work/html',  // 或使用完整路由
+  children:[
+    {
+      path: 'html',
+      name: "html",
+      component: () => import('../components/sub-view/Html.vue'),
+    },
+    // ...
+  ]
+}</pre>
+
+    </dd>
+    <dt>异常路由 <a href="https://router.vuejs.org/guide/essentials/history-mode.html">Caveat</a></dt>
+    <dd>
+      <div>处理路由目标异常的情况，如 404，页面丢失</div>
+      <div>404 路由：使用自定义的路径参数|正则表达式匹配其它任意路径；通常是<span class="warn">最后一个</span>路由配置项</div>
+      <div>404 路由也可以针对某个特定的路由</div>
+      <div>也可以使用内置函数生成 html，避免额外创建组件</div>
+      <div>如果针对根路由和特定路由的404处理都存在，特定路由应该在根路由之前，否则无法正常匹配</div>
+      <pre>
+import {h} from 'vue'
+
+//...
+
+{
+  path: '/goods:pathMatch(.*)*',
+  name: 'goods-not-found',
+  component: h('p', {style: 'color: red'}, 'goods 404 Not Found')
+},
+{
+  path: '/:pathMatch(.*)*',
+  name: 'not-found',
+  component: () => import('../views/NotFound.vue')
+}</pre>
+    </dd>
+  </dl>
+  <div class="chap">homework</div>
+  <dl>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 路由设计2</dd>
+    <dd class="sn">
+      <p>在前续项目的基础上</p>
+      <div>为每个路由命名</div>
+      <div>为团队 /team 增加嵌套路由，分别对应各个团队成员</div>
+      <div>增加异常路由处理</div>
+      <div>调试并发布；将发布的 dist 目录打包压缩，以学号命名，提交到学习通</div>
+      <div>代码仓库* - 将项目推送到自己的代码仓库</div>
+    </dd>
+  </dl>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
+</body>
+
+</html>
