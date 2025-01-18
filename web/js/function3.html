@@ -5,45 +5,36 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>立即函数 Function</title>
+  <title>立即函数 IIFE</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/footer2025.css">
   <base target="_blank">
 </head>
 
 <body>
   <header>
     <h1>立即函数</h1>
-    <span>&commat;Function</span>
+    <span>&commat;IIFE</span>
   </header>
   <dl>
-    <dt>Immediate Function</dt>
+    <dt>Overview</dt>
     <dd>
-      <div>.声明并执行</div>
-      <div>.多用于初始化</div>
-      <div>成组定义|封装 - 早期充当类使用</div>
+      <div>Immediately Invoked Function Expression</div>
+      <div>定义一个匿名函数并立即调用这个函数/执行</div>
+      <div>用于创建一个独立的作用域，避免变量污染全局命名空间</div>
+      <div>可用于状态初始化</div>
       <pre>
-let user = {
-  'name': null,
-  // 形式1 - this是当前对象
-  setName: function (str) {
-    this.name = str;
-  },
-  // 形式2 - this是当前对象
-  getName() {
-    return this.name;
-  },
-  // 形式3 - 箭头函数，this是当前window
-  sayName: () => {
-    console.log(this);
-    return user.name;
-  },
-}
-user.setName('cnplaman');
-console.log(user.getName());
-console.log(user.sayName());</pre>
-    </dd>
+(function() {
+  // 这里是函数体
+})();</pre>
+      <pre>
+(()=> {
+// 这里是函数体
+})();</pre>
+      <div>成组定义|封装 - 早期充当类使用</div>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
   <script>
 
   </script>
