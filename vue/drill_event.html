@@ -18,149 +18,69 @@
     <h1>事件综合运用</h1>
     <h4>Event</h4>
     <div class="title">实验题目</div>
-    <div class="cont">购物车</div>
+    <div class="cont">注册</div>
     <div class="title">实验目的</div>
     <div class="cont">
       <div>掌握事件绑定和使用的基本过程</div>
       <div>掌握常用的事件和事件修饰符的基本使用</div>
-      <div>掌握计算属性的基本使用</div>
+      <div>掌握双向绑定在表单中的应用</div>
+      <div>熟悉表单的基本使用</div>
       <div>熟悉生命周期函数的不同阶段和使用</div>
-      <div>进一步熟悉组件的基本作用和使用</div>
-      <div>进一步熟悉响应式数据的基本使用</div>
+      <div>进一步熟悉响应式数据的使用和注意事项</div>
+      <div>进一步熟悉事件以及事件修饰符的使用</div>
     </div>
     <div class="title">实验内容</div>
     <div class="cont">
-      <div>视图端</div>
-      <p>.根据请求的数据渲染页面</p>
-      <p>.数据变化时，更新页面</p>
-      <div>逻辑端</div>
-      <p>.使用普通事件处理业务</p>
-      <p>.商品数量的增加/减少；直至删除</p>
-      <p>.商品的全选/部分选择</p>
-      <p>.商品结算</p>
+      <div>注册</div>
+      <p>使用用户昵称、邮箱、密码、性别和爱好完成用户的注册设计</p>
+      <p>其它设计自行完成</p>
+      <p>数据提交时，给出提示</p>
+      <div>登录*</div>
+      <div>留言*</div>
+    </div>
+    <div class="title">知识点</div>
+    <div class="cont">
+      <div>Vue</div>
+      <p>v-model</p>
+      <p>v-if</p>
+      <p>@submit @click</p>
+      <p>ref()</p>
+      <div>Html</div>
+      <p>&lt;form&gt;</p>
+      <p>&lt;input&gt; &lt;label&gt; &lt;button&gt;</p>
+      <div>CSS</div>
+      <p>flex</p>
+      <p>transition</p>
+      <p>:hover :focus</p>
+      <p>:root</p>
+      <p>var()</p>
+      <div>JavaScript</div>
+      <p>function</p>
+      <div>Other</div>
+      <p>Iconfont</p>
+      <p>googleFonts</p>
     </div>
     <div id="drill"></div>
     <div class="title">参考效果和参考代码</div>
     <div class="cont">
-      <div>静态结构</div>
-      <p>.基本结构，无数据绑定、无事件事件</p>
-      <pre>
-&lt;div class="wrap"&gt;
-&lt;div class="item"&gt;
-  &lt;input type="checkbox"&gt;
-  &lt;div&gt;商品&lt;/div&gt;
-  &lt;div&gt;单价&lt;/div&gt;
-  &lt;div&gt;库存&lt;/div&gt;
-  &lt;div&gt;操作&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="item"&gt;
-  &lt;input type="checkbox"&gt;
-  &lt;div&gt;name&lt;/div&gt;
-  &lt;div&gt;price&lt;/div&gt;
-  &lt;div&gt;stock&lt;/div&gt;
-  &lt;div class="btns"&gt;
-    &lt;button class="btn"&gt;-&lt;/button&gt;
-    &lt;div &gt;1&lt;/div&gt;
-    &lt;button class="btn"&gt;+&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="total"&gt;总价100&lt;/div&gt;
-&lt;/div&gt;</pre>
       <figure>
-        <img src="./imgs/cart0.png" alt="">
-        <figcaption>静态页面</figcaption>
-      </figure>
-      <div>加载数据</div>
-      <p>.在挂载生命周期函数中从资源服务器拉取并赋值；可以自己准备数据</p>
-      <pre>
-const cartData = reactive({
-  selectedAll: false,
-  selectedLists: [],
-  lists: [{
-    "id": 77,
-    "name": "红烧牛肉面",
-    "price": 15,
-    "number": 1,
-    "stock": 6
-  }]
-})</pre>
-      <div>单个商品的增加和减少</div>
-      <p>.分别为增、减按钮绑定事件：增加数量 inc(item) 和减少数量 dec(item)，并使用当前商品为形参，修改其数量 number</p>
-      <p>.注意越界检测</p>
-      <pre>
-&lt;button class="btn" @click="dec(item)"&gt;-&lt;/button&gt;
-&lt;button class="btn" @click="inc(item)"&gt;+&lt;/button&gt;</pre>
-      <pre>
-const inc = (item) => {
-  if (item.number &lt; item.stock) {
-    item.number++
-  }
-}
-
-const dec = (item) => {
-  if (item.number > 1) {
-    item.number--
-  }
-}</pre>
-      <div>全选</div>
-      <p>.为全选按钮双向绑定选中数据 selectedAll，并增加改变 change 事件 selAll</p>
-      <p>.状态改变后，为真，则为全选，选中商品列表和商品列表一致；为假，则取消全选，选中商品列表为空</p>
-      <pre>&lt;input type="checkbox" v-model="cartData.selectedAll" @change="selAll"gt;</pre>
-      <pre>
-const selAll = () => {
-  if (cartData.selectedAll) {
-    cartData.selectedLists = cartData.lists
-  } else {
-    cartData.selectedLists = []
-  }
-}</pre>
-      <div>单个商品选择与取消</div>
-      <p>.为单个商品对应的 checkbox 绑定每一项数据，并增加改变 change 事件 selItem，处理全选的真与假</p>
-      <p>.单个商品取消选择时，全选为假</p>
-      <p>.商品列表和选中商品列表数量相等，为全选；否则取消全选；额外判断条件，如果商品列表为空，则也应该取消全选</p>
-      <pre>&lt;input type="checkbox" :value="item" v-model="cartData.selectedLists" @change="selItem"&gt;</pre>
-      <pre>
-const selItem = () => {
-  if (cartData.selectedLists.length == cartData.lists.length && cartData.lists.length) {
-    cartData.selectedAll = true
-  } else {
-    cartData.selectedAll = false
-  }
-}</pre>
-      <div>结算</div>
-      <p>.为总价绑定计算属性 getTotal</p>
-      <p>.遍历选中列表，依次将商品单价和商品数量相乘，并累加，得到总价</p>
-      <pre>&lt;div class="total"&gt;总价{{ getTotal }}&lt;/div&gt;</pre>
-      <pre>
-const getTotal = computed(() => {
-let sum = 0
-
-//for - 传统循环
-for(let i=0; i &lt;cartData.selectedLists.length; i++){
-  sum += cartData.selectedLists[i].number * cartData.selectedLists[i].price
-}
-
-return sum
-})</pre>
-      <div>更多效果</div>
-      <p>.其它设计自行完成</p>
-      <figure>
-        <img src="./imgs/cart1.png" alt="">
-        <figcaption>全选</figcaption>
+        <img src="./imgs/form01.png" alt="">
+        <figcaption>注册</figcaption>
       </figure>
       <figure>
-        <img src="./imgs/cart2.png" alt="">
-        <figcaption>部分选中</figcaption>
+        <img src="./imgs/form02.png" alt="">
+        <figcaption>登录</figcaption>
+      </figure>
+      <figure>
+        <img src="./imgs/form03.png" alt="">
+        <figcaption>留言</figcaption>
       </figure>
     </div>
     <div class="title">拓展与思考</div>
     <div class="cont">
-      <div>调整产品列表页项目，增加添加到购物车的功能</div>
-      <div>使用<a href="../web/js/array2.html" class="link">数组 Array - 迭代函数</a>优化结算逻辑</div>
-    </div>
-    <div class="title">说明</div>
-    <div class="cont">
-      <p>现场验收、课后提交实验报告</p>
+      <div>保存/推送项目到自己的代码仓库</div>
+      <div>使用 Element Plus实现</div>
+      <div>使用 Axios 处理数据的提交</div>
     </div>
     <div id="footer"></div>
   </div>
