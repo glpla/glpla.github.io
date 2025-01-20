@@ -32,11 +32,11 @@ function watchEffect(
       <div>onCleanup：回调函数的可选参数，是一个函数，用来注册清理回调；清理回调会在该副作用下一次执行前被调用</div>
       <div>options：可选的选项，可以用来调整副作用的刷新时机或调试副作用的依赖</div>
       <div>StopHandle：自动侦听器函数返回一个停止器函数，详见后续内容</div>
-      <div>更多信息，请访问<a href="https://cn.vuejs.org/api/reactivity-core.html#watcheffect">watchEffect()</a>
+      <div>更多信息，请访问 <a href="https://cn.vuejs.org/api/reactivity-core.html#watcheffect">watchEffect()</a>
       </div>
       <div class="tips">
         <div>watch 仅在侦听的数据源确实改变时才会触发回调；执行0-N次</div>
-        <div>watchEffect 会立即执行回调函数，也称自动侦听器，等同于使用了立即配置项immediate；执行1-N次</div>
+        <div>watchEffect 会立即执行回调函数，也称自动侦听器，等同于使用了立即配置项 immediate；执行1-N次</div>
         <div>watch 必须显式的指定某个侦听的数据源|变量</div>
         <div>watchEffect 会自动侦听数据源|变量</div>
         <div>watch 控制更为精细；旧值、新值、deep、immediate</div>
@@ -54,9 +54,9 @@ watchEffect((onCleanup) => {
     })
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 使用watchEffect自动侦听多个数据</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 使用 watchEffect 自动侦听多个数据</dd>
     <dd>
-      <div>ref对象 - 自动侦听name和age</div>
+      <div>ref 对象 - 自动侦听 name 和 age</div>
       <pre>
 let temp = ref(0)
 let hei = ref(0)
@@ -77,14 +77,13 @@ function heiCh() {
 }</pre>
     </dd>
     <dt>停止侦听</dt>
-    <dd>在大多数情况下，你无需关心怎么停止一个侦听器</dd>
-    <dd>要手动停止一个侦听器，请调用 watch 或 watchEffect 返回的函数</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 停止侦听</dd>
     <dd>
+      <div>在大多数情况下，你无需关心怎么停止一个侦听器</div>
+      <div>要手动停止一个侦听器，请调用 watchEffect 返回的函数</div>
       <pre>
-const stopWatch = watchEffect(num, (newv, oldv) => {})
+const stopWatchEffect = watchEffect(num, (newv, oldv) => {})
 
-stopWatch()
+stopWatchEffect()
 </pre>
     </dd>
   </dl>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生命周期函数 Lifecycle Hooks</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>生命周期函数</h1>
+    <span>&commat; Lifecycle Hooks</span>
+  </header>
+  <dl>
+    <dt>Overview</dt>
+    <dd>
+      <div>组件的一生：创建 → 挂载 → 更新 → 销毁；又细分为前、后两个阶段</div>
+      <div>开发者根据组件的状态在特定阶段执行特定的操作</div>
+      <div>基本使用：引入对应的包 → 执行函数 → 传入回调</div>
+      <div>更多 API，请访问 <a href="https://cn.vuejs.org/api/">API</a></div>
+      <figure class="img-sn">
+        <img style="width: 80%;" src="./imgs/lifecycle.png" alt="">
+        <figcaption>Vue的生命周期函数</figcaption>
+      </figure>
+      <details open>
+        <summary style="font-weight: 600;">Lifetime</summary>
+        <details>
+          <summary>onBeforeMount()</summary>
+          <div>注册一个钩子，在组件被挂载之前被调用</div>
+          <div>初始化；拉取/操作数据；但是 <span class="warn">DOM还未就绪</span></div>
+          <div>
+            <pre>
+import { onBeforeMount } from 'vue'
+
+onBeforeMount(() => {
+    console.log("onBeforeMount");
+})</pre>
+          </div>
+        </details>
+        <details>
+          <summary>onMounted()</summary>
+          <div>注册一个回调函数，在组件挂载完成后执行：<span class="warn">DOM已就绪</span></div>
+          <div>多用于项目初始化</div>
+          <div>可以执行多个，但是仅仅执行1次</div>
+          <div>运维通过 <span class="warn">追加</span> 的方式，定义新的逻辑</div>
+          <div>
+            <pre>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+    console.log("onMounted:Initialization before");
+})
+onMounted(() => {
+    console.log("onMounted:Initialization now");
+})</pre>
+          </div>
+        </details>
+        <details>
+          <summary>onBeforeUpdate()</summary>
+          <div>注册一个回调函数，在组件因为响应式状态变更而更新其 DOM 树之前调用</div>
+        </details>
+        <details>
+          <summary>onUpdated()</summary>
+          <div>更新完毕</div>
+          <div>注册一个回调函数，在组件因为响应式状态变更而更新其 DOM 树之后调用</div>
+          <div>捕获响应式数据的更新；静态数据更新不会响应</div>
+        </details>
+        <details>
+          <summary>onBeforeUnmount()</summary>
+          <div>卸载之前</div>
+          <div>注册一个回调函数，在组件实例被卸载之前调用</div>
+          <div>是onBeforeUnmount，不是onBeforeUnmounted</div>
+        </details>
+        <details>
+          <summary>onUnmounted()</summary>
+          <div>注册一个回调函数，在组件实例被卸载之后调用</div>
+          <div>vue2中是destroy</div>
+        </details>
+        <details>
+          <summary>onActivated()</summary>
+          <div>适用于缓存组件</div>
+          <div>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件被插入到 DOM 中时调用</div>
+        </details>
+        <details>
+          <summary>onDeactivated()</summary>
+          <div>适用于缓存组件</div>
+          <div>注册一个回调函数，若组件实例是 &lt;KeepAlive&gt; 缓存树的一部分，当组件从 DOM 中被移除时调用</div>
+        </details>
+      </details>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 使用响应式数据、条件渲染、路由，利用事件或延时，查看子组件 About.vue 生命周期函数执行情况</dd>
+    <dd>
+      <pre>
+&lt;template&gt;
+    &lt;div class="about"&gt;
+        &lt;div&gt;about&lt;/div&gt;
+        &lt;div&gt;{{ cd }}秒后返回/work&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+    
+&lt;script setup&gt;
+import { onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+    
+const router = useRouter();
+    
+let cd = ref(5)
+    
+setInterval(() =&gt; {
+    cd.value--;
+    if (cd.value == -1) {
+        router.replace('/work')
+    }
+}, 1000)
+    
+onMounted(() =&gt; {
+    console.log('onMounted');
+})
+onBeforeUpdate(() =&gt; {
+    console.log('onBeforeUpdate');
+})
+onUpdated(() =&gt; {
+    console.log('onUpdated');
+})
+onBeforeUnmount(() =&gt; {
+    console.log('onBeforeUnmount');
+})
+onUnmounted(() =&gt; {
+    console.log('onUnmounted');
+})
+&lt;/script&gt;
+
+&lt;style scoped&gt;&lt;/style&gt;</pre>
+      <img src="./imgs/lifetime0.png" alt="">
+      <div class="tips">
+        <div>已安装 Vs Code 扩展 Vue Vscode Snippets 的，请注意编辑过程中的代码片段提示，不要一个一个字母编辑</div>
+      </div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 自定义搜索组件，单击时，显示并自动获取焦点</dd>
+    <dd>
+      <div>搜索组件参考设计如下</div>
+      <pre>
+&lt;script setup&gt;
+    import { ref, onMounted } from 'vue';
+    let sql = ref(null)
+    onMounted(() =&gt; {
+        sql.value.focus()
+    })
+&lt;/script&gt;
+
+&lt;template&gt;
+    &lt;input type="text" ref="sql"&gt;
+&lt;/template&gt;</pre>
+      <div>父组件设计如下</div>
+      <pre>
+&lt;script setup&gt;
+    import { ref } from 'vue';
+    import Search from './components/Search.vue'
+    let isShow = ref(false)
+    const showBox = () =&gt; {
+        isShow.value = true
+    }
+&lt;/script&gt;
+
+&lt;template&gt;
+    &lt;button @click="showBox"&gt;click&lt;/button&gt;
+    &lt;Search v-if="isShow"&gt;&lt;/Search&gt;
+&lt;/template&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页 - 使用动态组件切换时，查看各组件的生命周期函数执行情况</dd>
+  </dl>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
+</body>
+
+</html>
