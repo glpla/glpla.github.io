@@ -22,9 +22,9 @@
     <dd>也可以通过 CDN 使用 Vue 进行传统/原生开发</dd>
     <dt>Procedure</dt>
     <dd>
-      <div>1. 创建空白文件夹或选择你的项目开发<span class="warn">总</span>文件夹；不要在桌面创建</div>
-      <div>2. 进入文件夹，打开命令行窗口 CMD，输入以下指令，创建项目并指定项目名；字母开头，不要大写</div>
-      <p>. 如果不知道命名规则，就看示例怎么提示，如 vite-project</p>
+      <div>1. 创建空白文件夹作为你的项目开发<span class="warn">总目录</span>；后续案例都在此创建</div>
+      <div>2. 进入项目总目录，在地址栏输入 cmd，打开命令行窗口 CMD，输入以下指令，参照<span class="warn">示例命名格式</span>创建项目</div>
+      <pre>npm create vite@latest</pre>
       <figure class="img-sn">
         <img src="./imgs/pro1.jpg" alt="">
       </figure>
@@ -39,30 +39,31 @@
       <figure class="img-sn">
         <img src="./imgs/pro4.jpg" alt="">
       </figure>
-      <div>5. 根据提示逐步执行：</div>
+      <div>5. 项目构建完成后，根据提示逐步执行：</div>
       <p>.进入项目目录</p>
       <pre>cd vite_demo</pre>
       <p>.安装依赖；每次复制或克隆别人项目都要先安装依赖；默认情况下，项目不提供依赖，仅仅在配置文件中说明需要哪些依赖</p>
       <pre>npm install</pre>
       <p>.运行项目</p>
       <pre>npm run dev</pre>
-      <div class="tips">
-        <div>不能出现中文符号；</div>
-        <div>项目创建完毕后，后续操作请使用 Vs Code 完成</div>
-        <div>CMD 中，如果安装的是 Vs Code，直接输入 code . 即可打开 Vs Code</div>
-      </div>
-      <div>6. 按住 CTRL + 单击项目链接，即可打开 Vue + Vite 的欢迎界面</div>
+      <div>6. 按住 CTRL + 单击项目链接，即可打开 Vue + Vite 的欢迎界面；恭喜，您已经打开了 Vue 开发的大门</div>
       <figure class="img-sn">
         <img src="./imgs/pro5.jpg" alt="">
       </figure>
-      <div>7. 恭喜，您已经打开了Vue开发的大门</div>
-      <div>8. 完善开发</div>
-      <div>9. 项目发布；发布后会生产目标文件夹 dist；使用 Vs Code 打开并预览效果</div>
+      <div>7. 完善开发</div>
+      <div>9. 项目发布；发布后会生产目标文件夹 dist；新开一个 Vs Code 打开 dist 并预览效果</div>
       <pre>npm run build</pre>
-      <p>如果预览失败，为 vite.config.js 增加基地址配置，指定为当前路径</p>
+      <!-- <p>. 将路由模式由默认的 web 模式改为 hash 模式，需要引入 createWebHashHistory 包</p> -->
+      <!-- <pre>history: createWebHashHistory(import.meta.env.BASE_URL)</pre> -->
+    </dd>
+    <dt>Warning</dt>
+    <dd class="sn">
+      <div>不要在桌面创建项目</div>
+      <div>项目名称以字母开头，不要大写、不要驼峰命名；如果不知道命名规则，就看示例怎么提示，如 vite-project</div>
+      <div>项目目录和文件名不要出现中文符号</div>
+      <div>项目创建完毕后，后续操作请使用 Vs Code 完成：CMD 中，切换到项目目录，输入 code . 即可使用 Vs Code打开项目</div>
+      <div>发布后，如果在当前项目中预览，需要为 vite.config.js 增加基地址配置，指定为相对路径</div>
       <pre>base: './'</pre>
-      <p>. 将路由模式由默认的 web 模式改为 hash 模式，需要引入 createWebHashHistory 包</p>
-      <pre>history: createWebHashHistory(import.meta.env.BASE_URL)</pre>
     </dd>
   </dl>
   <div class="chap">Architecture</div>
@@ -155,14 +156,32 @@ import 'font-awesome/css/font-awesome.min.css'</pre>
     </dd>
     <dt>vite.config.js</dt>
     <dd>
-      <div>vite 的配置，如 server 的配置：项目打开、端口、代理等等；默认没有，需手动添加</div>
+      <div><a href="https://cn.vitejs.dev/config/">配置 Vite</a>；默认配置仅包括插件 plugins 和解析规则 resolve；其它如 server、base
+        的配置，如项目打开、端口、代理等等，需手动添加</div>
+      <pre>
+import { fileURLToPath, URL } from "node:url";
+
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import vueDevTools from "vite-plugin-vue-devtools";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [vue(), vueDevTools()],
+  resolve: {
+    alias: {
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
+});</pre>
+      <div>在当前项目中预览发布的 dist，需要将默认的绝对路径调整为相对路径</div>
+      <pre>base: './'</pre>
       <div>网络请求出现跨域时，必须要做 <a href="../node/proxy.html">代理 Proxy</a></div>
-      <div>更多配置，请访问 <a href="https://cn.vitejs.dev/config/">官方文档 - 配置 Vite</a></div>
       <pre>
 server: {
-    open: true,         //启动项目自动弹出浏览器；默认 false，手动启动
-    host: '0.0.0.0',    //指定主机；默认是 locahost
-    port: '5173',       //默认端口 5173
+    open: false,        //启动项目自动弹出浏览器预览；默认 false，手动启动
+    host: '0.0.0.0',    //主机；默认 locahost
+    port: '5173',       //端口；默认 5173
     proxy: {
         '/api': {
         target: 'http://127.0.0.1:3000',
@@ -197,7 +216,7 @@ server: {
     <dd class="sn">
       <div>创建 - 使用学号创建项目目录</div>
       <div>调整 - 删除默认的组件、样式，只保留最基本的结构</div>
-      <div>开发 - 在根组件中使用一级标题，创建 hello world</div>
+      <div>开发 - 在根组件 App。vue 中使用一级标题 h1，创建 hello world</div>
       <div>调试 - 增加样式，如颜色、布局等或者其他内容并调试</div>
       <div>发布 - 将发布的 dist 目录打包压缩，以学号命名，提交到学习通</div>
       <div>代码仓库* - 将项目推送到自己的代码仓库</div>

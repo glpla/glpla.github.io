@@ -20,7 +20,7 @@
     <dt>静态使用</dt>
     <dd>
       <div>1. 使用本地图片</div>
-      <pre>&lt;img src="../assets/imgs/0.jpg" alt=""&gt;</pre>
+      <pre>&lt;img src="@/assets/imgs/0.jpg" alt=""&gt;</pre>
       <div>2. 使用在线图片；更多图片资源，请访问 <a href="https://pixabay.com/">pixabay</a>、<a
           href="https://unsplash.com/">unsplash</a>、<a href="../utils/index.html">大树小站- 在线资源</a>
       </div>
@@ -32,17 +32,20 @@
     <dt>动态绑定使用</dt>
     <dd>
       <div>不可以直接绑定图片 url 地址，Vue 会将其解析为一个字符串，而非地址</div>
-      <pre>let src = '../assets/imgs/0.jpg'</pre>
+      <pre>let src = '@/assets/imgs/0.jpg'</pre>
       <pre>&lt;img :src="src" alt=""&gt;</pre>
-      <div>解决方案1</div>
+      <div>解决方案1 - 使用 public 资源</div>
       <div>将图片放到项目的 public 目录并直接引用；可以创建相应的文件夹 imgs 存放图片</div>
       <div>vue-cli3 默认路径为 public，所以无需添加 public；public 即代表 /</div>
-      <pre>let src = '/imgs/10.jpg'</pre>
+      <pre>let src = '/imgs/logo.svg'</pre>
       <pre>&lt;img :src="src" alt=""/&gt;</pre>
-      <div>解决方案2</div>
+      <div>解决方案2 - 使用 import() 语句</div>
       <div>将图片作为资源引入再使用 - 适合单个静态资源</div>
-      <pre>import src from '../imgs/10.jpg'</pre>
+      <pre>import src from '@/assets/logo.svg'</pre>
       <pre>&lt;img :src="src" alt=""/&gt;</pre>
+      <div>import() 是一个异步函数，返回的是一个 Promise，而不是直接的 URL。因此，不能直接在模板中这样使用</div>
+      <pre>&lt;img :src="import('@/assets/logo.svg')" alt=""/&gt;</pre>
+      <div>解决方案3 - 使用 getImageUrl() 导入</div>
       <div>采用 vite 的<a href="https://cn.vitejs.dev/guide/assets.html">静态资源处理</a>：import.meta.url
         是一个ESM的原生功能，会暴露当前模块的 URL。将它与原生的 URL 构造器 组合使用，在一个 JavaScript 模块中，通过<span
           class="warn">相对路径</span>我们就能得到一个被完整解析的静态资源 URL</div>
@@ -60,6 +63,16 @@ const getImageUrl = (img) => {
     return new URL(`../imgs/${img}`, import.meta.url).href
 }</pre>
     </dd>
+  </dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd>
+      <div>网站图标icon、logo类的放在 public 目录</div>
+      <div>更新较少、使用不多的图片资源使用放在 assets 目录，使用 import 导入并使用</div>
+      <div>业务流图片资源使用在线地址；可以是完整地址；也可以是拼接地址</div>
+    </dd>
+    <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] Vite 框架对图片的处理</dd>
     <dd class="sn">
       <div>静态渲染：分别在 public、assets 和 assets 同级目录创建 imgs 文件夹，并放入一张大图和一张小图，在项目中引用，最后发布，查看框架对静态资源图片的处理情况</div>
@@ -74,6 +87,8 @@ const getImageUrl = (img) => {
       <div>动态渲染：使用单个数据或列表渲染，查看框架对图片的处理</div>
       <p>本质上是从根路径引用，所以也可以从 / 开始，引入任意地方的资源；但是打包的时候，会出现问题，因为打包后没有 src 目录</p>
       <pre>&lt;img v-for="img in imgs" :key="img.id" :src="`/src/assets/${img.src}`"/&gt;</pre>
+      <p>采用部分地址拼接服务器地址</p>
+      <pre>&lt;img v-for="img in imgs" :key="img.id" :src="`https://url/${img.src}`"/&gt;</pre>
     </dd>
   </dl>
   <div id="footer"></div>

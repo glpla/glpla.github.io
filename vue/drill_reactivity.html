@@ -21,8 +21,8 @@
     <div class="cont">产品列表页</div>
     <div class="title">实验目的</div>
     <div class="cont">
-      <div>初步熟悉组件的基本作用和使用</div>
       <div>掌握类 class 和样式 style 的基本使用</div>
+      <div>掌握计算属性 Computed 的基本使用</div>
       <div>掌握条件渲染 v-if 的基本使用</div>
       <div>掌握列表渲染 v-for 的基本使用</div>
       <div>掌握响应式数据 ref()、reactive() 的基本使用</div>
@@ -34,7 +34,7 @@
       <p>.可以使用自己熟悉的服务器环境</p>
       <p>.可以使用 <a href="https://glpla.github.io">大树小站</a> 提供的在线资源数据，也可以自己准备数据</p>
       <div>客户端：从资源服务器拉取数据并渲染</div>
-      <div>其它设计</div>
+      <div>其它设计*</div>
       <p>.定制滚动条 scrollbar</p>
       <p>.阿里字体图标 Iconfont</p>
       <p>.主题切换</p>
@@ -42,7 +42,101 @@
     <div id="drill"></div>
     <div class="title">参考效果和参考代码</div>
     <div class="cont">
-      <div>参考数据：<a href="/utils/data/coffee.json">https://glpla.github.io/utils/data/coffee.json</a></div>
+      <div>参考数据：<a
+          href="/utils/data/coffee.json">https://glpla.github.io/utils/data/coffee.json</a>，可根据需要筹备数据；其中一个节点信息如下；图片仅给出部分地址，实际使用时，要拼接上服务器地址
+      </div>
+      <pre>
+{
+  "id": 0,
+  "name": "桂院螺蛳粉",
+  "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+  "img": "/coffee/coffee0.jpg",
+  "priceOrignal": 15,
+  "price": 12,
+  "discount": 0.2,
+  "flavour": "辛辣",
+  "isFollow": false,
+  "stock": 100,
+  "cup": [
+    {
+      "tag": "中杯",
+      "sel": true
+    },
+    {
+      "tag": "大杯",
+      "sel": false
+    },
+    {
+      "tag": "超大杯",
+      "sel": false
+    }
+  ],
+  "ther": [
+    {
+      "tag": "热",
+      "sel": false
+    },
+    {
+      "tag": "冰",
+      "sel": true
+    }
+  ],
+  "sugar": [
+    {
+      "tag": "不另外加糖",
+      "sel": true
+    },
+    {
+      "tag": "半糖",
+      "sel": false
+    },
+    {
+      "tag": "标准糖",
+      "sel": false
+    }
+  ]
+}</pre>
+      <div>参考结构</div>
+      <pre>
+&lt;div class="goods"&gt;
+  &lt;template v-if="goods.length"&gt;
+    &lt;div class="item" v-for="(item, ind) in goods" :key="item.id"&gt;
+      &lt;img class="img" :src="'https://glpla.github.io/utils' + item.img" alt=""&gt;
+      &lt;div class="info"&gt;
+        &lt;div class="title"&gt;{{ item.name }} &lt;span class="flavour"&gt;{{ item.flavour }}&lt;/span&gt; &lt;/div&gt;
+        &lt;div class="desc"&gt;{{ item.desc.repeat(2) }}&lt;/div&gt;
+        &lt;div class="price"&gt;&yen;{{ item.price }} &lt;span class="price-inner"&gt;(市场价&lt;span&gt;&yen;{{ item.priceOrignal
+              }}&lt;/span&gt;)&lt;/span&gt; &lt;/div&gt;
+        &lt;div class="price-discount"&gt;预估到手 &lt;span&gt;&yen;{{ getDiscount(item) }}&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="btn" @click="addCart(item)"&gt;
+        &lt;span class="iconfont icon-gouwuche_o"&gt;&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+  &lt;div v-else&gt;lists empty&lt;/div&gt;
+&lt;/div&gt;</pre>
+      <div>参考逻辑</div>
+      <pre>
+import { computed, onMounted, ref } from 'vue';
+
+const goods = ref([])
+
+const getDiscount = computed(() => {
+  return item => {
+    return (item.price * (1 - item.discount)).toFixed(2)
+  }
+})
+
+onMounted(() => {
+  let json = fetch('https://glpla.github.io/utils/data/coffee.json')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.cont);
+      goods.value = data.cont
+    })
+})</pre>
+      <div>参考效果</div>
       <figure>
         <img src="./imgs/list0.png" alt="">
         <figcaption>产品列表页</figcaption>
@@ -50,16 +144,14 @@
     </div>
     <div class="title">拓展与思考</div>
     <div class="cont">
-      <div>数据分页时，如何调整结构 - 样式 - 逻辑？</div>
-      <div>如何触底加载？</div>
-      <div>如何复用结构和样式</div>
-      <div>使用内联样式和外部样式调整项目</div>
-      <div>使用其它浏览器查看项目效果</div>
+      <div>数据分页</div>
+      <div>触底加载</div>
+      <div>数据加载指示器以及动画</div>
+      <div>保存/推送项目到自己的代码仓库</div>
     </div>
     <div class="title">说明</div>
     <div class="cont">
       <p>现场验收、课后提交实验报告</p>
-      <div>在开发环境中获取数据并渲染</div>
     </div>
     <div id="footer"></div>
   </div>
