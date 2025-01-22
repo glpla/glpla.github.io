@@ -49,7 +49,7 @@
 {
   "id": 0,
   "name": "桂院螺蛳粉",
-  "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit.",
+  "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit",
   "img": "/coffee/coffee0.jpg",
   "priceOrignal": 15,
   "price": 12,
@@ -58,41 +58,63 @@
   "isFollow": false,
   "stock": 100,
   "cup": [
-    {
-      "tag": "中杯",
-      "sel": true
-    },
-    {
-      "tag": "大杯",
-      "sel": false
-    },
-    {
-      "tag": "超大杯",
-      "sel": false
-    }
+    { "id": 1, "tag": "中杯", "sel": true },
+    { "id": 2, "tag": "大杯", "sel": false },
+    { "id": 3, "tag": "超大杯", "sel": false }
   ],
   "ther": [
-    {
-      "tag": "热",
-      "sel": false
-    },
-    {
-      "tag": "冰",
-      "sel": true
-    }
+    { "id": 0, "tag": "热", "sel": false },
+    { "id": 1, "tag": "冰", "sel": true }
   ],
   "sugar": [
+    { "id": 0, "tag": "半糖", "sel": false },
+    { "id": 1, "tag": "标准糖", "sel": false },
+    { "id": 2, "tag": "不加糖", "sel": true }
+  ],
+  "dessert": [
     {
-      "tag": "不另外加糖",
-      "sel": true
+      "id": 1,
+      "img": "/dessert/dessert1.png",
+      "title": "adipisicing elit",
+      "priceOrignal": 5,
+      "discount": 0.3
     },
     {
-      "tag": "半糖",
-      "sel": false
+      "id": 2,
+      "img": "/dessert/dessert2.png",
+      "title": "consectetur elit",
+      "priceOrignal": 8,
+      "discount": 0.4
     },
     {
-      "tag": "标准糖",
-      "sel": false
+      "id": 3,
+      "img": "/dessert/dessert3.png",
+      "title": "sit amet elit",
+      "priceOrignal": 10,
+      "discount": 0.5
+    }
+  ],
+  "recommend": [
+    {
+      "id": 1,
+      "img": "/coffee/coffee1.jpg",
+      "title": "lorem ipsum dolor",
+      "desc": "lorem ipsum dolor sit amet consectetur elit",
+      "priceOrignal": 12
+    },
+    {
+      "id": 2,
+      "img": "/coffee/coffee2.jpg",
+      "title": "lorem ipsum dolor",
+      "desc": "lorem ipsum dolor sit amet consectetur adipisicing",
+      "priceOrignal": 15
+    },
+    {
+      "id": 3,
+      "img": "/coffee/coffee3.jpg",
+      "title": "lorem ipsum dolor",
+      "desc": "lorem ipsum dolor sit amet adipisicing elit",
+      "priceOrignal": 20
     }
   ]
 }</pre>
@@ -103,7 +125,7 @@
     &lt;div class="item" v-for="(item, ind) in goods" :key="item.id"&gt;
       &lt;img class="img" :src="'https://glpla.github.io/utils' + item.img" alt=""&gt;
       &lt;div class="info"&gt;
-        &lt;div class="title"&gt;{{ item.name }} &lt;span class="flavour"&gt;{{ item.flavour }}&lt;/span&gt; &lt;/div&gt;
+        &lt;h4 class="title"&gt;{{ item.name }} &lt;span class="flavour"&gt;{{ item.flavour }}&lt;/span&gt; &lt;/h4&gt;
         &lt;div class="desc"&gt;{{ item.desc.repeat(2) }}&lt;/div&gt;
         &lt;div class="price"&gt;&yen;{{ item.price }} &lt;span class="price-inner"&gt;(市场价&lt;span&gt;&yen;{{ item.priceOrignal
               }}&lt;/span&gt;)&lt;/span&gt; &lt;/div&gt;
