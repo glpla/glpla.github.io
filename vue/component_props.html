@@ -52,7 +52,7 @@ const props = defineProps({
 })
 </pre>
     </dd>
-    <dd>2. 子组件&lt;template&gt; - 使用传递来的参数|数据；可以直接使用；也可以使用属性变量获取</dd>
+    <dd>2. 子组件 &lt;template&gt; - 使用传递来的参数|数据；可以直接使用；也可以使用属性变量获取</dd>
     <dd>
       <pre>&lt;div&gt;{{ propMsg }} - {{ props.propId }}&lt;/div&gt;</pre>
       <div>如果要处理接收的参数，必须使用定义的变量 props 获取，否则提示数据未定义 - 下例利用计算属性将接收的参数转换为大写</div>
@@ -70,7 +70,7 @@ const comp = computed(() => {
     <dd class="question">ReferenceError: msg is not defined</dd>
     <dt>父组件传递参数</dt>
     <dd>
-      <div>1. 父组件&lt;script&gt; - 引入子组件，准备数据</div>
+      <div>1. 父组件 &lt;script&gt; - 引入子组件，准备数据</div>
       <pre>
 import { ref } from 'vue';
 import Test from './components/Test.vue';
@@ -104,13 +104,24 @@ let msg = ref('hi,there')</pre>
     </dd>
   </dl>
   <dl>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件 Copyright.vue</dd>
+    <dd>
+      <div>为团队页面不同的用户指定相应的信息，如学号和姓名</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 轮播组件 Swiper.vue</dd>
+    <dd>
+      <div>自定义或封装第三方库</div>
+      <div>为不同的应用场景提供不同的图片列表数据</div>
+      <pre>&lt;Swiper :imgUrl="propImgUrls" :swiperH="propSwiperH"/&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 爆品组件 Recommend.vue</dd>
+    <dd>
+      <div>每个产品推荐一定数量的相应的其它产品</div>
+      <pre>&lt;Recommend :reco="goods.recommend" /&gt;</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 改造产品列表组件，提供不同的产品数据展示不同的列表内容</dd>
     <dd>
       <pre>&lt;List :lists="propLists"/&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 封装第三方库 - 轮播组件，提供不同的图片列表数据和高度展示不同的轮播内容</dd>
-    <dd>
-      <pre>&lt;Swiper :imgUrl="propImgUrls" :swiperH="propSwiperH"/&gt;</pre>
     </dd>
   </dl>
   <div class="chap">传递函数|方法</div>

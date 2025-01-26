@@ -2,57 +2,58 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>组件样式 Style</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/footer2025.css">
-    <base target="_blank">
-    <style>
-        header {
-            /* background-image: url(https://p3-sdbk2-media.byteimg.com/tos-cn-i-xv4ileqgde/74f648633cc949118d501e78b72fe301~tplv-xv4ileqgde-resize-w:1440.awebp); */
-            background-image: url(./imgs/panda.png);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件样式 Style</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
+  <base target="_blank">
+  <style>
+    header {
+      /* background-image: url(https://p3-sdbk2-media.byteimg.com/tos-cn-i-xv4ileqgde/74f648633cc949118d501e78b72fe301~tplv-xv4ileqgde-resize-w:1440.awebp); */
+      background-image: url(./imgs/panda.png);
+    }
+  </style>
 </head>
 
 <body>
-    <header>
-        <h1>组件样式</h1>
-        <span>&commat;Style</span>
-    </header>
-    <dl>
-        <dt>Fallthrough Attributes</dt>
-        <dd>
-            <div>父组件中，为只有一个根节点的子组件指定样式类 class 时，这个 class 会直接 <span class="warn">叠加</span> 到子组件的根节点上</div>
-            <div>这个样式类，既不是子组件定义的属性 props，也不是子组件抛出的 emits 事件，但是仍然传递给了子组件，所以称为属性透传</div>
-            <div>同样特点的属性还有内联样式 style、id 以及事件 v-on 等</div>
-            <div>更多信息，请访问 <a href="https://vuejs.org/guide/components/attrs.html">Fallthrough Attributes</a></div>
-        </dd>
-        <dt>样式属性透传</dt>
-        <dd>
-            <div>样式合并 - class and style Merging</div>
-            <div>子组件 - 具有唯一根节点，且指定样式类 reco</div>
-            <pre>
+  <header>
+    <h1>组件样式</h1>
+    <span>&commat;Style</span>
+  </header>
+  <dl>
+    <dt>Fallthrough Attributes</dt>
+    <dd>
+      <div>父组件中，为只有一个根节点的子组件指定样式类 class 时，这个 class 会直接 <span class="warn">叠加</span> 到子组件的根节点上</div>
+      <div>这个样式类，既不是子组件定义的属性 props，也不是子组件抛出的 emits 事件，但是仍然传递给了子组件，所以称为属性透传</div>
+      <div>同样特点的属性还有内联样式 style、id 以及事件 v-on 等</div>
+      <div>更多信息，请访问 <a href="https://cn.vuejs.org/guide/components/attrs">Fallthrough Attributes</a>、<a
+          href="https://cn.vuejs.org/api/sfc-css-features.html">css features</a></div>
+    </dd>
+    <dt>样式属性透传</dt>
+    <dd>
+      <div>样式合并 - class and style Merging</div>
+      <div>子组件 - 具有唯一根节点，且指定样式类 reco</div>
+      <pre>
 &lt;template&gt;
     &lt;div class="reco"&gt;recommend&lt;/div&gt;
 &lt;/template&gt;</pre>
-            <div>父组件 - 引入并使用子组件，同时指定样式类 green</div>
-            <pre>
+      <div>父组件 - 引入并使用子组件，同时指定样式类 green</div>
+      <pre>
 &lt;template&gt;
     &lt;Reco class="green"&gt;&lt;/Reco&gt;
 &lt;/template&gt;</pre>
-            <div>最终渲染 - 同时带有样式类 reco 和 green；且 green 在 reco 后面 - merged with the class and style values that are
-                inherited from the parent</div>
-            <pre>&lt;div class="reco green"&gt;recommend&lt;/div&gt;</pre>
-        </dd>
-        <dt>事件属性透传</dt>
-        <dd>
-            <div>属性透传同样适用事件 - same rule applies to v-on</div>
-            <div>先触发子组件的事件处理函数，再触发父组件的事件处理函数</div>
-            <div>子组件</div>
-            <pre>
+      <div>最终渲染 - 同时带有样式类 reco 和 green；且 green 在 reco 后面 - merged with the class and style values that are
+        inherited from the parent</div>
+      <pre>&lt;div class="reco green"&gt;recommend&lt;/div&gt;</pre>
+    </dd>
+    <dt>事件属性透传</dt>
+    <dd>
+      <div>属性透传同样适用事件 - same rule applies to v-on</div>
+      <div>先触发子组件的事件处理函数，再触发父组件的事件处理函数</div>
+      <div>子组件</div>
+      <pre>
 &lt;script setup&gt;
     const say88 = () =&gt; {
         console.log('88')
@@ -62,8 +63,8 @@
 &lt;template&gt;
     &lt;div @click="say88" class="reco"&gt;recommend&lt;/div&gt;
 &lt;/template&gt;</pre>
-            <div>父组件</div>
-            <pre>
+      <div>父组件</div>
+      <pre>
 &lt;script setup&gt;
     import Reco from './components/Reco.vue';
     const sayHi = () =&gt; {
@@ -74,21 +75,21 @@
 &lt;template&gt;
     &lt;Reco @click="sayHi"&gt;&lt;/Reco&gt;
 &lt;/template&gt;</pre>
-        </dd>
-        <dt>scoped</dt>
-        <dd>
-            <div>为 &lt;style&gt; 指定 scoped 时，它的 CSS 只会影响当前组件的元素</div>
-            <div>父组件的样式将不会 <span class="warn">渗透</span>
-                到子组件中。不过，子组件的根节点会同时被父组件的作用域样式和子组件的作用域样式影响。便于：让父组件可以从布局的角度出发，调整其子组件根元素的样式</div>
-            <div>更多作用域详细信息，请参考 <a href="./class.html">类 class</a>、<a
-                    href="https://cn.vuejs.org/api/sfc-css-features.html">API - 单文件组件 CSS 功能</a></div>
-            <div class="tips">
-                <div>最佳体验：为组件的根节点指定与组件同名的样式类，很容易保证组件类的唯一性，且便于父组件布局</div>
-            </div>
-        </dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件结构</dd>
-        <dd>
-            <pre>
+    </dd>
+    <dt>scoped</dt>
+    <dd>
+      <div>为 &lt;style&gt; 指定 scoped 时，它的 CSS 只会影响当前组件的元素</div>
+      <div>父组件的样式将不会 <span class="warn">渗透</span>
+        到子组件中。不过，子组件的根节点会同时被父组件的作用域样式和子组件的作用域样式影响。便于：让父组件可以从布局的角度出发，调整其子组件根元素的样式</div>
+      <div>更多作用域详细信息，请参考 <a href="./class.html">类 class</a>、<a href="https://cn.vuejs.org/api/sfc-css-features.html">API
+          - 单文件组件 CSS 功能</a></div>
+      <div class="tips">
+        <div>最佳体验：为组件的根节点指定与组件同名的样式类，很容易保证组件类的唯一性，且便于父组件布局</div>
+      </div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件结构</dd>
+    <dd>
+      <pre>
 &lt;template&gt;
     &lt;div class="copyright"&gt;
         &lt;span class="txt"&gt;copyright &commat; 2024-2026&lt;/span&gt;
@@ -98,8 +99,8 @@
 &lt;/template&gt;
 &lt;style scoped&gt;
 &lt;/style&gt;</pre>
-            <div>父组件指定样式，如标签选择器 span 或类选择器 .txt 不会影响子组件内元素的样式 - 组件封装的特性</div>
-            <pre>
+      <div>父组件指定样式，如标签选择器 span 或类选择器 .txt 不会影响子组件内元素的样式 - 组件封装的特性</div>
+      <pre>
 span {
     font-weight: 600;
 }
@@ -107,26 +108,26 @@ span {
 .txt {
     color: #f40;
 }</pre>
-            <div>但是。但是。。但是。。。如果使用子组件根节点的类，则样式会生效</div>
-            <div>父组件设置子组件背景色；你可以这样理解：一般情况下，<span class="warn">父组件仅能影响到子组件根节点</span></div>
-            <pre>
+      <div>但是。但是。。但是。。。如果使用子组件根节点的类，则样式会生效</div>
+      <div>父组件设置子组件背景色；你可以这样理解：一般情况下，<span class="warn">父组件仅能影响到子组件根节点</span></div>
+      <pre>
 .copyright {
     background-color: #000;
 }</pre>
-        </dd>
-        <dt>插槽样式</dt>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件 - 默认插槽，这里以传递一个 &lt;img&gt; 为例</dd>
-        <dd>
-            <div>版权组件结构同上。版权组件仅仅是指定|预留了一个插槽</div>
-            <div>版权组件样式 - 无效；父组件使用这个插槽传递什么不确定；按F12在开发者视图中，检查元素页可以确定，没有样式</div>
-            <pre>
+    </dd>
+    <dt>插槽样式</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件 - 默认插槽，这里以传递一个 &lt;img&gt; 为例</dd>
+    <dd>
+      <div>版权组件结构同上。版权组件仅仅是指定|预留了一个插槽</div>
+      <div>版权组件样式 - 无效；父组件使用这个插槽传递什么不确定；按F12在开发者视图中，检查元素页可以确定，没有样式</div>
+      <pre>
 img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }</pre>
-            <div>为插槽指定样式 avatar，同样无效</div>
-            <pre>
+      <div>为插槽指定样式 avatar，同样无效</div>
+      <pre>
 &lt;template&gt;
     &lt;div class="copyright"&gt;
         &lt;span&gt;copyright &commat; 2024-2026&lt;/span&gt;
@@ -134,70 +135,70 @@ img {
         &lt;span&gt;glpla.github.io&lt;/span&gt;
     &lt;/div&gt;
 &lt;/template&gt;</pre>
-            <div>解决方案1 - 父组件指定样式，因为这个插槽是父组件提供的，对父组件是可见的；本质上还是父组件的，所以样式有效</div>
-            <div>父组件样式 - 有效</div>
-            <pre>
+      <div>解决方案1 - 父组件指定样式，因为这个插槽是父组件提供的，对父组件是可见的；本质上还是父组件的，所以样式有效</div>
+      <div>父组件样式 - 有效</div>
+      <pre>
 img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }</pre>
-            <div>解决方案2 - 父组件使用特殊 <span class="warn">伪类</span> 选择器；更多选择器，请查看 <a href="../web/selector.html">HTML5选择器 -
-                    selector</a></div>
-        </dd>
-    </dl>
-    <div class="chap">特殊选择器</div>
-    <dl>
-        <dt>深度选择器 :deep(selector)</dt>
-        <dd>
-            <div>父组件如果想深入调整子组件内部元素的样式|影响到子组件，包括子组件的插槽元素，应使用伪类:deep(selector)</div>
-            <div><span class="warn">父组件</span>使用深度选择器设置子组件内元素样式 - 父组件使用插槽，知道传递了什么元素，使用了什么选择器</div>
-            <pre>
+      <div>解决方案2 - 父组件使用特殊 <span class="warn">伪类</span> 选择器；更多选择器，请查看 <a href="../web/selector.html">HTML5选择器 -
+          selector</a></div>
+    </dd>
+  </dl>
+  <div class="chap">特殊选择器</div>
+  <dl>
+    <dt>深度选择器 :deep(selector)</dt>
+    <dd>
+      <div>父组件如果想深入调整子组件内部元素的样式|影响到子组件，包括子组件的插槽元素，应使用伪类:deep(selector)</div>
+      <div><span class="warn">父组件</span>使用深度选择器设置子组件内元素样式 - 父组件使用插槽，知道传递了什么元素，使用了什么选择器</div>
+      <pre>
 :deep(img) {
     width: 30px;
     height: 30px;
 }</pre>
-        </dd>
-        <dt>插槽选择器 :slotted(selector)</dt>
-        <dd>
-            <div>默认情况下，作用域样式不会影响到 &lt;slot/&gt; 渲染出来的内容，因为它们被认为是父组件所持有并传递进来的</div>
-            <div>使用 :slotted 伪类以明确地将插槽内容作为选择器的目标</div>
-            <div><span class="warn">子组件</span>使用插槽 标签 选择器 - Bad</div>
-            <pre>
+    </dd>
+    <dt>插槽选择器 :slotted(selector)</dt>
+    <dd>
+      <div>默认情况下，作用域样式不会影响到 &lt;slot/&gt; 渲染出来的内容，因为它们被认为是父组件所持有并传递进来的</div>
+      <div>使用 :slotted 伪类以明确地将插槽内容作为选择器的目标</div>
+      <div><span class="warn">子组件</span>使用插槽 标签 选择器 - Bad</div>
+      <pre>
 :slotted(img) {
     width: 30px;
     height: 30px;
 }</pre>
-            <div>子组件使用插槽 类 选择器 - Good</div>
-            <pre>
+      <div>子组件使用插槽 类 选择器 - Good</div>
+      <pre>
 :slotted(.avatar-img) {
     width: 30px;
     height: 30px;
 }</pre>
-            <div>但是。但是。。但是。。。子组件并不知道父组件到底使用插槽传递什么，你要预判所有的可能，写尽可能多的类样式</div>
-            <div class="tips">
-                <div>IDE可能会提示 ::slotted 而不是 :slotted。注意修正</div>
-                <div>开发规范的重要性</div>
-            </div>
-        </dd>
-        <dt>全局选择器 :global(selector)</dt>
-        <dd>
-            <div>如果想让其中一个样式规则应用到全局|扩大作用域，可以使用 :global(selector)</div>
-            <div>应 <span class="warn">避免</span> 这种情况出现。应该把全局类写到单独的样式文件中并全局引入 - 在哪里引入算是全局？？？</div>
-            <pre>
+      <div>但是。但是。。但是。。。子组件并不知道父组件到底使用插槽传递什么，你要预判所有的可能，写尽可能多的类样式</div>
+      <div class="tips">
+        <div>IDE可能会提示 ::slotted 而不是 :slotted。注意修正</div>
+        <div>开发规范的重要性</div>
+      </div>
+    </dd>
+    <dt>全局选择器 :global(selector)</dt>
+    <dd>
+      <div>如果想让其中一个样式规则应用到全局|扩大作用域，可以使用 :global(selector)</div>
+      <div>应 <span class="warn">避免</span> 这种情况出现。应该把全局类写到单独的样式文件中并全局引入 - 在哪里引入算是全局？？？</div>
+      <pre>
 :global(.warn) {
     color: red;
 }</pre>
-            <div class="tips">
-                <div>以上选择器请仅在必要时使用，否则应寻求其它方法</div>
-                <div>还有一个样式穿透 >>>；注意当前框架是否支持</div>
-            </div>
-        </dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro_home.html">项目 - 主页</a></dd>
-        <dd>提示：每一个子组件都使用根节点，且使用同组件名的类，便于父组件布局</dd>
-    </dl>
-    <div id="footer"></div>
-    <script src="/utils/custom/footer2025.js"></script>
+      <div class="tips">
+        <div>以上选择器请仅在必要时使用，否则应寻求其它方法</div>
+        <div>还有一个样式穿透 >>>；注意当前框架是否支持</div>
+      </div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro_home.html">项目 - 主页</a></dd>
+    <dd>提示：每一个子组件都使用根节点，且使用同组件名的类，便于父组件布局</dd>
+  </dl>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>
