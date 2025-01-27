@@ -2,48 +2,59 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>条件渲染 Conditional </title>
-    <link rel="stylesheet" href="../css/common.css">
-    <base target="_blank">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>条件渲染 Conditional </title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
+  <base target="_blank">
 </head>
 
 <body>
-    <header>
-        <h1>条件渲染</h1>
-        <span>&commat;Conditional Rendering</span>
-    </header>
-    <dl>
-        <dd>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/conditional.html">条件渲染 - Conditional Rendering</a></dd>
-        <dt>v-if</dt>
-        <dd>控制 <span class="warn">1个或多个DOM</span> 的条件渲染：只有指令的表达式为真/返回真值才渲染DOM</dd>
-        <dd>可以使用 v-else 或 v-else-if 实现多个元素的条件渲染</dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 如果isAdult为真，显示成年；否则显示未成年；检查元素，发现只渲染两者之一</dd>
-        <dd>
-            <pre>
+  <header>
+    <h1>条件渲染</h1>
+    <span>&commat;Conditional Rendering</span>
+  </header>
+  <dl>
+    <dd>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/conditional.html">条件渲染 - Conditional Rendering</a></dd>
+    <dt>v-if</dt>
+    <dd>
+      <div>控制 <span class="warn">1个或多个DOM</span> 的条件渲染：只有指令的表达式为真/返回真值才渲染DOM</div>
+      <div>检查元素，查看渲染情况</div>
+      <div>可以使用 v-else 或 v-else-if 实现多个元素的条件渲染</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 根据加载数据长度相应的渲染页面；如果为0，提示当前数据为0；否则渲染数据</dd>
+    <pre>
+&lt;div v-if="!list.length">列表为空&lt;/div&gt;
+&lt;div v-else&gt;
+  &lt;!-- 列表内容/渲染 --&gt;
+&lt;/div&gt;</pre>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 如果 isAdult 为真，显示成年；否则显示未成年</dd>
+    <dd>
+      <pre>
 &lt;div v-if="isAdult"&gt;18 year +&lt;/div&gt;
 &lt;div v-else&gt;under 18&lt;/div&gt;</pre>
-        </dd>
-        <dt>v-show</dt>
-        <dd>控制 <span class="warn">一个DOM</span> 的条件显示</dd>
-        <dd>和 v-if 的不同之处在于：v-show 会在 DOM 渲染中保留该元素；v-show 仅切换了该元素上名为 display 的 CSS 属性</dd>
-        <dd>v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要频繁切换，则使用 v-show 较好；如果在运行时绑定条件很少改变，则 v-if 会更合适</dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] isAdult为真，显示；为假，其display为none</dd>
-        <dd>
-            <pre>&lt;div v-show="isAdult"&gt;18 year +&lt;/div&gt;</pre>
-        </dd>
-        <dd class="tips">
-            <div>v-if：解决渲染不渲染|有没有的问题；控制单个或多个元素</div>
-            <div>v-show：解决显示不显示的问题；控制单个元素</div>
-            <div>任何使用布尔值的地方都可以使用表达式实现</div>
-        </dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 分析以下场景，使用 v-if 还是 v-show；并通过开发工具调试数据变化时，页面的渲染情况</dd>
-        <dd>场景1：根据年龄 age，显示成年和未成年；</dd>
-        <dd>场景2：根据积分 credit，显示会员等级</dd>
-    </dl>
-    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    </dd>
+    <dt>v-show</dt>
+    <dd>控制 <span class="warn">一个DOM</span> 的条件显示</dd>
+    <dd>和 v-if 的不同之处在于：v-show 会在 DOM 渲染中保留该元素；v-show 仅切换了该元素上名为 display 的 CSS 属性</dd>
+    <dd>v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要频繁切换，则使用 v-show 较好；如果在运行时绑定条件很少改变，则 v-if 会更合适</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] isAdult 为真，显示；为假，其 display 为 none</dd>
+    <dd>
+      <pre>&lt;div v-show="isAdult"&gt;18 year +&lt;/div&gt;</pre>
+    </dd>
+    <dd class="tips">
+      <div>v-if：解决渲染不渲染|有没有的问题；控制单个或多个元素</div>
+      <div>v-show：解决显示不显示的问题；控制单个元素</div>
+      <div>任何使用布尔值的地方都可以使用表达式实现</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 分析以下场景，使用 v-if 还是 v-show；并通过开发工具调试数据变化时，页面的渲染情况</dd>
+    <dd>场景1：根据年龄 age，显示成年和未成年；</dd>
+    <dd>场景2：根据积分 credit，显示会员等级</dd>
+  </dl>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>

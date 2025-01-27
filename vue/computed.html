@@ -18,11 +18,12 @@
   </header>
   <dl>
     <dd>
-      <div>数据绑定时，可以使用简单的表达式实现数据的2次处理；如根据 num 判断奇偶</div>
+      <div>数据绑定时，可以使用简单的表达式实现数据的2次处理；如根据 num 判断奇偶、根据折扣计算最终价格</div>
       <pre>&lt;div&gt;{{ num }} is {{ num % 2 ? 'odd' : 'even' }}&lt;/div&gt;</pre>
+      <pre>&lt;div&gt;{{ price * (1 - discount) }}&lt;/div&gt;</pre>
       <div>逻辑复杂时，应该使用计算属性实现</div>
       <div>需要引入 computed 包</div>
-      <div>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/computed.html">计算属性 - Computed Properties</a></div>
+      <div>更多信息，请访问 <a href="https://cn.vuejs.org/guide/essentials/computed">计算属性 - Computed Properties</a></div>
     </dd>
     <dt>Feature</dt>
     <dd>
@@ -37,6 +38,12 @@
 import { ref, computed } from 'vue';
 const num = ref(0);
 const res = computed(() => num.value % 2 === 0 ? 'even' : 'odd')</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 计算优惠价格</dd>
+    <dd>
+      <pre>&lt;div&gt;{{ priceWithDis }}&lt;/div&gt;</pre>
+      <pre>
+const priceWithDis = computed(() => price.value * (1 - discount.value))</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 判断性别</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 参照B站规则处理关注、粉丝、点赞和播放数量</dd>

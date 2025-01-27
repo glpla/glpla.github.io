@@ -23,10 +23,12 @@
       <div>早期流行的 JQuery 也是通过操作 DOM 实现</div>
       <div>Vue 中更多的是通过数据驱动的方式实现交互，但有时候避免不了仍然需要操作 DOM</div>
       <div>通过 ref 标识获取/引用 DOM 节点或组件实例</div>
-      <div>更多使用，请访问 <a href="https://vuejs.org/guide/essentials/template-refs.html">模板引用 - Template Refs</a>、<a
-          href="https://cn.vuejs.org/api/built-in-special-attributes.html#ref">API - ref</a></div>
-      <div>需引入包 useTemplateRef 再使用；早期版本使用 ref 包</div>
+      <div>需引入包 <a href="https://cn.vuejs.org/api/composition-api-helpers.html#usetemplateref">useTemplateRef</a>
+        创建浅层 ref；其值将与模板中的具有匹配 ref attribute 的元素或组件同步</div>
       <!-- <div>多组件情况下，普通的DOM获取容易产生冲突</div> -->
+      <div>早期版本使用 ref 包</div>
+      <div>更多使用，请访问 <a href="https://cn.vuejs.org/guide/essentials/template-refs">模板引用 - Template Refs</a>、<a
+          href="https://cn.vuejs.org/api/built-in-special-attributes.html#ref">API - ref</a></div>
       <pre>import { useTemplateRef } from 'vue'</pre>
     </dd>
     <dt>Application</dt>
@@ -46,8 +48,16 @@
     <dd>
       <div>拿到 DOM 节点，就拿到了该元素的所有信息</div>
       <pre>
+&lt;div ref="dom" 
+  class="base active"  
+  style="color: #f40;padding: 10px;"
+  data-ind="100" &gt;
+    hi,there 
+    &lt;span&gt;88&lt;/span&gt;
+&lt;/div&gt;</pre>
+      <pre>
 import { useTemplateRef, onMounted } from 'vue'
-let dom = useTemplateRef('null')
+let dom = useTemplateRef('dom')
 onMounted(() =&gt; {
   console.log(dom);
   console.log(dom.value);
@@ -61,31 +71,23 @@ onMounted(() =&gt; {
   console.log('getAttribute', dom.value.getAttribute('style'));
   console.log('getAttribute', dom.value.getAttribute('class'));
 })</pre>
-      <pre>
-&lt;div ref="dom" 
-  class="base active"  
-  style="color: #f40;padding: 10px;"
-  data-ind="100" &gt;
-    hi,there 
-    &lt;span&gt;88&lt;/span&gt;
-&lt;/div&gt;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 单击获取焦点、自动聚焦</dd>
     <dd>
-      <pre>
-import { useTemplateRef, onMounted } from 'vue';
-const ipt = useTemplateRef(null)
-const focus = () =&gt; ipt.value.focus()
-onMounted(() => {
-  ipt.value.focus()
-})</pre>
       <pre>
 &lt;div class="home"&gt;
   &lt;input type="text" ref="ipt"&gt;
   &lt;button @click="focus"&gt;click for focus&lt;/button&gt;
 &lt;/div&gt;</pre>
+      <pre>
+import { useTemplateRef, onMounted } from 'vue';
+const ipt = useTemplateRef('ipt')
+const focus = () =&gt; ipt.value.focus()
+onMounted(() => {
+  ipt.value.focus()
+})</pre>
+
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 页面/视图滚动到某个位置</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 页面滚动时，变换顶部导航样式，如添加阴影</dd>
     <dd>
       <div>为 &lt;header&gt; 指定 ref，在页面加载时使用，并监听页面的滚动事件</div>
@@ -94,7 +96,7 @@ onMounted(() => {
       <pre>
 import { onMounted, onUnmounted, useTemplateRef } from 'vue'
 
-const header = useTemplateRef(null)
+const header = useTemplateRef('header')
 
 const fn = () => {
   header.value.classList.toggle('fixed', window.scrollY > 100)
@@ -108,6 +110,7 @@ onUnmounted(() => {
   window.removeEventListener('scroll', fn)
 })</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 页面/视图滚动到某个位置</dd>
     <dt>获取组件</dt>
     <dd>
       <div>返回组件实例</div>
@@ -134,7 +137,7 @@ onUnmounted(() => {
       <div class="tips">
         <div>refs can be useful in certain situations where direct access to a child component's internal state
           or methods is necessary.</div>
-        <div>尽量避免通过 ref 引用组件，请组件的通信机制实现 props 和emit，详见后续组件内容</div>
+        <div>尽量避免通过 ref 引用组件，请使用组件的通信机制 props 和emit；详见后续组件内容</div>
         <div>Remember that accessing a child component's data directly using refs can make your components
           tightly coupled. Consider using props and events for communication between components</div>
       </div>
@@ -147,24 +150,23 @@ onUnmounted(() => {
     <dd>
       <div>列表渲染中指定 ref，将获取多个元素</div>
       <div>必须声明为数组 [] 形式，否则无法遍历</div>
+      <div>不建议每个子节点都标注 ref 属性</div>
+      <div>建议获取父节点，再根据节点关系获取子节点</div>
       <pre>&lt;div v-for="(item,index) in 10" ref="navRef"&gt;{{item}}&lt;/div&gt;</pre>
       <pre>
-const navRef = ref([])
+const navRef = useTemplateRef('navRef')
 onMounted(() => {
     navRef.value.forEach(item => {
     console.log(item.innerHTML);
     })
 })</pre>
-      <div>不建议每个子节点都标注 ref 属性</div>
-      <div>建议获取父节点，再根据节点关系获取子节点</div>
     </dd>
   </dl>
   <div class="chap">Summary</div>
   <dl>
     <dd class="sn">
       <div>用于获取 DOM 节点</div>
-      <div>需引入 ref</div>
-      <div>单个元素声明为 null；多个元素声明为 []</div>
+      <div>需引入 ref/useTemplateRef</div>
       <div>使用时，应判定元素是否就绪</div>
     </dd>
   </dl>

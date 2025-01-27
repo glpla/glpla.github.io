@@ -2,70 +2,70 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>类 class</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/footer2025.css">
-    <base target="_blank">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类 class</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
+  <base target="_blank">
 </head>
 
 <body>
-    <header>
-        <h1>类</h1>
-        <span>&commat;class</span>
-    </header>
-    <dl>
-        <dd>类 class 和内联样式 style 都是元素的属性 attribute，使用 v-bind 将它们和动态的 <span class="warn">字符串</span> 绑定</dd>
-        <dd>除了字符串外，表达式的值也可以是 <span class="warn">对象</span> 或 <span class="warn">数组</span></dd>
-        <dd>绑定类和静态添加的类不会冲突，最终会叠加在一起进行渲染</dd>
-        <dt>单个类</dt>
-        <dd>
-            <div>1.简单字符串：对应的类由字符串表示</div>
-            <pre>&lt;div :class="tips"&gt;hi,there&lt;/div&gt;</pre>
-            <div>2. 表达式：如三元表达式实现2选1；isActive为真，使用bold类；否则使用underline类</div>
-            <div class="warn">三元表达式的结果是一个字符串，所以直接写就可以，不需要{}</div>
-            <pre>&lt;div :class="isActive ? 'bold' : 'underline'"&gt;hi,there&lt;/div&gt;</pre>
-            <div>3. 对象：对应的类由字符串表示；开关类</div>
-            <div>用不用这个类？isActive为真，使用bold类；为假，不使用</div>
-            <pre>
+  <header>
+    <h1>类</h1>
+    <span>&commat;class</span>
+  </header>
+  <dl>
+    <dd>类 class 和内联样式 style 都是元素的属性 attribute，使用 v-bind 将它们和动态的 <span class="warn">字符串</span> 绑定</dd>
+    <dd>除了字符串外，表达式的值也可以是 <span class="warn">对象</span> 或 <span class="warn">数组</span></dd>
+    <dd>绑定类和静态添加的类不会冲突，最终会叠加在一起进行渲染</dd>
+    <dt>单个类</dt>
+    <dd>
+      <div>1.简单字符串：对应的类由字符串表示</div>
+      <pre>&lt;div :class="tips"&gt;hi,there&lt;/div&gt;</pre>
+      <div>2. 表达式：如三元表达式实现2选1；isActive 为真，使用 bold 类；否则使用 underline 类</div>
+      <div class="warn">三元表达式的结果是一个字符串，所以直接写就可以，不需要{}</div>
+      <pre>&lt;div :class="isActive ? 'bold' : 'underline'"&gt;hi,there&lt;/div&gt;</pre>
+      <div>3. 对象：对应的类由字符串表示；开关类</div>
+      <div>用不用这个类？isActive 为真，使用 bold 类；为假，不使用</div>
+      <pre>
 &lt;div :class="{ 'bold': isActive }"&gt;hi,there&lt;/div&gt;
 &lt;div :class="{ 'active': ind == 1 }"&gt;hi,there.&lt;/div&gt;</pre>
-            <div>[<span class="iconfont icon-keyboard"></span>] 综合运用</div>
-            <pre>&lt;div :class="isOn"&gt;hi,there.&lt;/div&gt;</pre>
-            <pre>
+      <div>4. 综合运用</div>
+      <pre>&lt;div :class="isOn"&gt;hi,there.&lt;/div&gt;</pre>
+      <pre>
 const isOn = reactive({
     active: false,
     done: true
 })</pre>
-        </dd>
-        <dt>多个类</dt>
-        <dd>
-            <div>同时使用静态类和动态类</div>
-            <div>1. <span class="warn">数组</span>方式</div>
-            <div>数组中可以使用字符串、对象和三元表达式指定类</div>
-            <pre>
+    </dd>
+    <dt>多个类</dt>
+    <dd>
+      <div>同时使用静态类和动态类</div>
+      <div>1. <span class="warn">数组</span>方式</div>
+      <div>数组中可以使用字符串、对象和三元表达式指定类</div>
+      <pre>
 &lt;div :class="[ 'item', isActive ? 'bold' : 'underline' ]"&gt;hi,there&lt;/div&gt;
 &lt;div :class="[ 'item', { 'active': isActive } ]"&gt;hi,there&lt;/div&gt;
 &lt;div :class="[ 'item', { 'active': isActive, 'done': isDone } ]"&gt;hi,there&lt;/div&gt;</pre>
-            <div>2. <span class="warn">分离</span>方式</div>
-            <pre>&lt;div class="item" :class=" flag == 0 ? 'active' : 'normal' "&gt;hi,there&lt;/div&gt;</pre>
-        </dd>
+      <div>2. <span class="warn">分离</span>方式</div>
+      <pre>&lt;div class="item" :class=" flag == 0 ? 'active' : 'normal' "&gt;hi,there&lt;/div&gt;</pre>
+    </dd>
 
-        <dd class="tips">
-            <div>类名需要使用引号包裹，否则会被当作绑定的变量</div>
-            <div>类一定是字符串，所以类应该用括号括起来，而变量不用</div>
-            <div>注意单引号和双引号的匹配</div>
-            <div>复合 CSS 属性使用小驼峰方式</div>
-            <div>使用 vue devtool 调试</div>
-        </dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 导航/标签页</dd>
-        <dd>效果：单击导航列表，对应的导航项高亮</dd>
-        <dd>要求：分别设计静态类和动态类，综合使用上述各种方式实现</dd>
-    </dl>
-    <div id="footer"></div>
-    <script src="/utils/custom/footer2025.js"></script>
+    <dd class="tips">
+      <div>类名需要使用引号包裹，否则会被当作绑定的变量</div>
+      <div>类一定是字符串，所以类应该用括号括起来，而变量不用</div>
+      <div>注意单引号和双引号的匹配</div>
+      <div>复合 CSS 属性使用小驼峰方式</div>
+      <div>使用 vue devtool 调试</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 导航/标签页</dd>
+    <dd>效果：单击导航列表，对应的导航项高亮</dd>
+    <dd>要求：分别设计静态类和动态类，综合使用上述各种方式实现</dd>
+  </dl>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>

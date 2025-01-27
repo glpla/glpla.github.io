@@ -27,6 +27,7 @@
       <div>返回：没有</div>
       <div>对数组中的每一项执行给定函数。本质上与使用 for 循环迭代数组一样</div>
       <div>原数组：不会被修改；仅仅使用数据</div>
+      <div>无法中断</div>
       <pre>
 function foreach(arr, fn) {
   for (let i = 0; i &lt; arr.length; i++) {
@@ -82,21 +83,19 @@ function delItem(dataItem) {
       <div>返回：新数组</div>
       <div>原数组：不会被修改</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 提取特征数据</dd>
-    <dd>
-      <div>从API请求的数据中获取数据项的 name 展示；也可以在请求时指定需要的数据，具体情况看API的支持</div>
-      <pre>
-let data = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' }]
-let res = data.map(item => item.name)</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 修改数据</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 示例</dd>
     <dd>
       <pre>let data = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' }]</pre>
+      <div>提取特征数据 - 从API请求的数据中获取数据项的 name 展示；也可以在请求时指定需要的数据，具体情况看API的支持</div>
+      <div>提取1个 - 只需要值 value</div>
+      <pre>let res = data.map(item => item.name)</pre>
+      <div>提取多个 - 显式指定值 value 的 key</div>
+      <pre>let res = data.map(item => ({name: item.name, desc:item.desc}))</pre>
       <div>修改格式</div>
       <pre>let res = data.map(item => ({ id: item.id, name: item.name.toUpperCase() }))</pre>
-      <div>添加属性</div>
-      <pre>let res = data.map(item => ({ ...item, pass: true }))</pre>
-      <div>简单数组生成索引数组</div>
+      <div>添加属性 - 为购物车每个商品增加一个数量，初始化为1</div>
+      <pre>let res = data.map(item => ({ ...item, num: 1 }))</pre>
+      <div>添加属性 -简单数组生成索引数组</div>
       <pre>
 let data = ['gl', 'cq', 'sz', 'sh', 'gz']
 let res = data.map((item, ind) => ({ id: ind, location: item }))</pre>

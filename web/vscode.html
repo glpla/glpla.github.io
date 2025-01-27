@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>编辑器 Vs Code</title>
   <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
   <base target="_blank">
   <style>
     :root {
@@ -45,38 +46,105 @@
     </dd>
     <dt>Installation</dt>
     <dd>建议安装在非C盘，其它选项保持默认</dd>
-    <dt>Extension</dt>
+  </dl>
+  <div class="chap">Extension</div>
+  <dl>
+    <dt>General</dt>
     <dd class="sn">
-      <div>常用</div>
-      <p>Live Server</p>
-      <p>Auto Rename Tag</p>
-      <p>Path Intellisense</p>
-      <p>Color Highlight</p>
-      <p>Prettier - Code formatter</p>
-      <p>Image Preview[Shows image preview in the gutter and on hover]</p>
+      <div>Live Server</div>
+      <div>Auto Rename Tag</div>
+      <div>Auto Close Tag</div>
+      <div>Path Intellisense</div>
+      <p>.项目创建后，在 VSCode 的 settings.json 文件中添加以下配置</p>
+      <pre>
+"path-intellisense.mappings": {
+    "@": "${workspaceFolder}/src"
+}</pre>
+      <div>Color Highlight</div>
+      <div>Prettier - Code formatter</div>
+      <p>.在 Vs Code 的设置 setting 中，设置 Editor: Default Formatter 为 Prettier - Code formatter</p>
+      <div>Image Preview[Shows image preview in the gutter and on hover]</div>
       <p>. reveal in the side bar/gutter.</p>
       <p>. open the container folder</p>
       <p>. follow the link</p>
-      <div><a href="https://vscodethemes.com/">主题 - vscodethemes</a></div>
-      <p>Dracula Official</p>
-      <p>Monokai Pro</p>
-      <p>One Dark Pro</p>
-      <p>Bearded Theme</p>
-      <p>SynthWave '84</p>
-      <p>Power mode</p>
+    </dd>
+    <dt>Vue.js</dt>
+    <dd class="sn">
+      <div>Vue Official</div>
+      <div>Vue VSCode Snippets</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 定制模板</dd>
+    <dd>
+      <div>Vs Code 的扩展 Vue VSCode Snippets 提供了很多内置的代码片段；在新组件中，输入 vb 或 v3 后，选择 vbase-3-setup
+        可以快速生成模板</div>
+      <div>默认采用带根节点的结构 &lt;template&gt;、逻辑 &lt;script&gt; 在结构 &lt;template&gt; 后面；样式 &lt;style&gt; 使用 CSS 预处理器 scss
+      </div>
+      <div>调整为：逻辑在最前面、去掉根节点、不带 CSS 预处理</div>
+      <div>
+        <div>1. 打开用户目录 → .vscode → 扩展 extension → vue-vscode-snippets → snippets → vue.json，定位到 vbase-3-setup
+        </div>
+        <div>2. 删除结构 &lt;template&gt; 中的根节点 &lt;div&gt;</div>
+        <div>3. 移动逻辑 &lt;script&gt; 到最上面</div>
+        <div>4. 保存并重启 Vs Code，扩展生效</div>
+        <pre>
+"Vue Single File Component Setup Composition API": {
+  "prefix": "vbase-3-setup",
+  "body": [
+    "&lt;script setup&gt;",
+    "",
+    "&lt;/script&gt;",
+    "",
+    "&lt;template&gt;",
+    "",
+    "&lt;/template&gt;",
+    "",
+    "&lt;style scoped&gt;",
+    "",
+    "&lt;/style&gt;"
+  ],
+  "description": "Base for Vue File Setup Composition API with SCSS"
+}</pre>
+        <pre>
+&lt;script setup&gt;
+  //逻辑
+&lt;/script&gt;
+                
+&lt;template&gt;
+  //结构
+&lt;/template&gt;
+
+&lt;style scoped&gt;
+  //样式
+&lt;/style&gt;</pre>
+      </div>
+    </dd>
+    <dt><a href="https://vscodethemes.com/">Vscodethemes</a></dt>
+    <dd class="sn">
+      <div>Dracula Official</div>
+      <div>Monokai Pro</div>
+      <div>One Dark Pro</div>
+      <div>Bearded Theme</div>
+      <div>SynthWave '84</div>
+      <div>Power mode</div>
       <pre>
 "powermode.enabled": true,
 "powermode.shake.enabled": false,
 "powermode.combo.counterEnabled": "hide",
 "powermode.combo.location": "off"</pre>
-      <div>其它</div>
-      <p>vscode-pets[Puts a small, bored cat, an enthusiastic dog, a feisty snake, a rubber duck, or Clippy 📎 in your
-        code editor to boost productivity.]</p>
-      <p>random everything[generates random ints, floats, strings, words, etc.]</p>
-      <p>Draw.io Integration[ 绘图工具 ]</p>
-      <p>Markdown Preview Enhanced[ 笔记工具 ]</p>
     </dd>
-    <!-- <dd>. Vue Volar extension Pack[ vue 必装 ]</dd> -->
+    <dt>Other</dt>
+    <dd class="sn">
+      <div>vscode-pets</div>
+      <p>.Puts a small, bored cat, an enthusiastic dog, a feisty snake, a rubber duck, or Clippy 📎 in your
+        code editor to boost productivity.</p>
+      <div>random everything</div>
+      <p>.generates random ints, floats, strings, words, etc.</p>
+      <div>Draw.io Integration</div>
+      <div>Markdown Preview Enhanced</div>
+    </dd>
+  </dl>
+  <div class="chap">Usage</div>
+  <dl>
     <dt>Setting</dt>
     <dd>
       <div>定制开发环境</div>
@@ -123,6 +191,7 @@
     </dd>
     <dt>Shortcut</dt>
     <dd>
+      <div>快捷键</div>
       <table>
         <tr>
           <th>Item</th>
@@ -180,6 +249,7 @@
     </dd>
     <dt>Panel</dt>
     <dd>
+      <div>命令面板</div>
       <div>Ctrl + Shift + P</div>
       <div>提升开发者效率</div>
       <div>通过搜索的方式快速访问 VSCode 的各种命令、设置、安装的扩展功能以及执行其他操作，而无需记住具体的快捷键或菜单路径</div>
@@ -188,6 +258,7 @@
     </dd>
     <dt>Emmet</dt>
     <dd>
+      <div>快速编辑语法</div>
       <div>所有字符都是英文符号</div>
       <div>按热键 + Tab 键完成</div>
       <div>如果不指定元素类型，默认是 &lt;div&gt;</div>
@@ -371,10 +442,7 @@ ul>li.news-item*5>(.news-title>lorem5)+.page{$}</pre>
       <div>结构 HTML5|H5、样式 CSS3|C3和行为 JavaScript|JS 三分离</div>
       <div>专业的事交给专业的人去做</div>
     </dd>
-  </dl>
-  <div class="chap">Helloworld</div>
-  <dl>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 原生开发项目</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] Helloworld - 原生开发项目</dd>
     <dd class="sn">
       <div>创建一个空白文件夹，拖动到 Vs Code 中打开；或直接在 Vs Code 中创建文件夹</div>
       <div>创建主页文件 index.html</div>
@@ -386,7 +454,9 @@ ul>li.news-item*5>(.news-title>lorem5)+.page{$}</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 框架开发项目，请查看 <a href="../vue/project.html">Vue - project</a></dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>

@@ -2,52 +2,52 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>列表渲染 v-for</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <base target="_blank">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>列表渲染 v-for</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
+  <base target="_blank">
 </head>
 
 <body>
-    <header>
-        <h1>列表渲染</h1>
-        <span>&commat;List Rendering</span>
-    </header>
-    <dl>
-        <dd>
-            <div>使用 for - in 渲染一个基于一个<span class="warn">数组</span>的列表 - render a list of items based on an array</div>
-            <div>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/list.html">列表渲染 - List Rendering</a></div>
-            <div>需显式的指定 :key 属性以区分并跟踪每个节点</div>
-            <div>要求数据项是唯一的，或具有独一无二的 id 属性</div>
-            <div>指定 :key 有助于提高渲染性能；<span class="warn">据说</span>数据变化时只会渲染更新的数据项，不会全部重新渲染</div>
-        </dd>
-        <dt>Array</dt>
-        <dd>
-            <div>1. 普通数组或对象数组</div>
-            <div>.1个参数：item是对数组元素的迭代变量，名字任意</div>
-            <pre>
+  <header>
+    <h1>列表渲染</h1>
+    <span>&commat;List Rendering</span>
+  </header>
+  <dl>
+    <dd>
+      <div>使用 for - in 渲染一个基于一个<span class="warn">数组</span>的列表 - render a list of items based on an array</div>
+      <div>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/list.html">列表渲染 - List Rendering</a></div>
+      <div>需显式的指定 <a href="https://cn.vuejs.org/api/built-in-special-attributes">特殊属性 - key</a> 以区分并跟踪每个节点</div>
+      <div>指定 key 有助于提高渲染性能；<span class="warn">据说</span>数据变化时只会渲染更新的数据项，不会全部重新渲染</div>
+    </dd>
+    <dt>Array</dt>
+    <dd>
+      <div>1. 普通数组或对象数组</div>
+      <div>.1个参数：item 是对数组元素的迭代变量，名字任意</div>
+      <pre>
 &lt;ul&gt;
     &lt;li v-for = "item in list" :key = "item.id" &gt; {{ item }} &lt;/li&gt;
 &lt;/ul&gt;</pre>
-            <div>.2个参数：除了item外，还可以使用数据元素对应的索引index，名字任意</div>
-            <pre>
+      <div>.2个参数：除了 item 外，还可以使用数据元素对应的索引 index，名字任意</div>
+      <pre>
 &lt;ul&gt;
     &lt;li v-for = "(item, index) in list" :key = "item.id" &gt; {{ item }} &lt;/li&gt;
 &lt;/ul&gt;</pre>
-            <div>2. 嵌套使用；每个迭代都使用独立的迭代变量</div>
-            <pre>
+      <div>2. 嵌套使用；每个迭代都使用独立的迭代变量</div>
+      <pre>
 &lt;ul&gt;
     &lt;li v-for = "(item, ind) in list" :key = "item.id" &gt;
         &lt;p v-for = "innerItem in item" :key = "innerItem.id" &gt; {{ innerItem }} &lt;/p&gt;
     &lt;/li&gt;
 &lt;/ul&gt;</pre>
-        </dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 渲染包含图片路径的列表</dd>
-        <dd>
-            <div>注意静态资源处理</div>
-            <pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 渲染包含图片路径的列表</dd>
+    <dd>
+      <div>注意静态资源处理</div>
+      <pre>
 const arr = [{
     id: 0,
     name: 'gl',
@@ -57,46 +57,47 @@ const arr = [{
 const getImageUrl = (src) => {
     return new URL(`../imgs/${src}`, import.meta.url).href
 }</pre>
-            <pre>
+      <pre>
 &lt;div class="item" v-for="item in arr" :key="item.id"&gt;
     &lt;img :src="getImageUrl(item.src)" alt="picture"&gt;
     &lt;p&gt;{{ item.id }}&lt;/p&gt;
     &lt;p&gt;{{ item.name }}&lt;/p&gt;
     &lt;p&gt;{{ item.age }}&lt;/p&gt;
 &lt;/div&gt;</pre>
-        </dd>
-        <dt>Object</dt>
-        <dd>
-            <div>遍历一个对象的所有属性；默认显示对象的属性值</div>
-            <div>遍历的顺序会基于对该对象调用 Object.keys() 的返回值来决定</div>
-            <pre>const obj = reactive({ id: 101, name: 'glpla', age: 18 })</pre>
-            <div>.1个参数：值 value</div>
-            <pre>&lt;div v-for = "value in obj" &gt; {{ value }} &lt;/div&gt;</pre>
-            <div>.2个参数：值 value，键 key</div>
-            <pre>&lt;div v-for = "(value, key) in obj" &gt; {{ key }}:{{ value }} &lt;/div&gt;</pre>
-            <div>.3个参数：值 value，键 key，索引 index</div>
-            <pre>&lt;div v-for = "(value, key, index) in obj" &gt; {{ index }}:{{ key }}:{{ value }} &lt;/div&gt;</pre>
-        </dd>
-        <dt>&lt;template&gt;</dt>
-        <dd>
-            <div>不推荐同时使用 v-if 和 v-for：二者优先级不明显</div>
-            <div>为区分结构，合理使用逻辑，特别是组合使用 v-for 和 v-if 时，可以使用 &lt;template&gt;；是一个不可见的包装器元素，最后渲染的结果并不会包含这个
-                &lt;template&gt; 元素
-            </div>
-            <pre>
+    </dd>
+    <dt>Object</dt>
+    <dd>
+      <div>遍历一个对象的所有属性；默认显示对象的属性值</div>
+      <div>遍历的顺序会基于对该对象调用 Object.keys() 的返回值来决定</div>
+      <pre>const obj = reactive({ id: 101, name: 'glpla', age: 18 })</pre>
+      <div>.1个参数：值 value</div>
+      <pre>&lt;div v-for = "value in obj" &gt; {{ value }} &lt;/div&gt;</pre>
+      <div>.2个参数：值 value，键 key</div>
+      <pre>&lt;div v-for = "(value, key) in obj" &gt; {{ key }}:{{ value }} &lt;/div&gt;</pre>
+      <div>.3个参数：值 value，键 key，索引 index</div>
+      <pre>&lt;div v-for = "(value, key, index) in obj" &gt; {{ index }}:{{ key }}:{{ value }} &lt;/div&gt;</pre>
+    </dd>
+    <dt>&lt;template&gt;</dt>
+    <dd>
+      <div>不推荐同时使用 v-if 和 v-for：二者优先级不明显</div>
+      <div>为区分结构，合理使用逻辑，特别是组合使用 v-for 和 v-if 时，可以使用 &lt;template&gt;；是一个不可见的包装器元素，最后渲染的结果并不会包含这个
+        &lt;template&gt; 元素
+      </div>
+      <pre>
 const list = ref(['home', 'product', 'about'])
 const isOn = ref(true)</pre>
-            <pre>
+      <pre>
 &lt;template v-if = "isOn" &gt;
     &lt;div v-for = "item in list" &gt; {{ item }} &lt;/div&gt;
 &lt;/template&gt;</pre>
-            <div class="tips">
-                <div>可以在 &lt;template&gt; 标签上使用 v-for 来渲染一个包含多个元素的块</div>
-                <div>可以直接在组件上使用 v-for，和在一般的元素上使用没有区别</div>
-            </div>
-        </dd>
-    </dl>
-    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+      <div class="tips">
+        <div>可以在 &lt;template&gt; 标签上使用 v-for 来渲染一个包含多个元素的块</div>
+        <div>可以直接在组件上使用 v-for，和在一般的元素上使用没有区别</div>
+      </div>
+    </dd>
+  </dl>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>
