@@ -21,14 +21,14 @@
     <dd class="sn">
       <p>可以导入本地样式表；也可以导入在线样式表</p>
       <p>可以全局引入；也可以组件引入</p>
-      <div>&lt;link&gt; - 结构中引入；在首页文件 index.html 中引入</div>
+      <div>&lt;link&gt; - 结构中引入；在首页文件 index.html 中引入，全局有效</div>
       <pre>&lt;link rel="stylesheet" href="//at.alicdn.com/t/c/font_3859342_gvcksnd8b65.css"&gt;</pre>
+      <div>import - 逻辑中引入；在主入口文件 main.js 中引入，全局有效；只能引入本地文件</div>
+      <pre>import "./assets/main.css";</pre>
       <div>@import - CSS 文件或组件的 &lt;style&gt; 中引入</div>
       <pre>
 @import './base.css';
 @import url(//at.alicdn.com/t/c/font_4235521_vw0a33le7e.css);</pre>
-      <div>import - 逻辑中引入；在主入口文件 main.js 中引入，全局有效；只能引入本地文件</div>
-      <pre>import "./assets/main.css";</pre>
       <div>src - 为组件的样式 &lt;style&gt;指定 src 属性</div>
       <pre>&lt;style src="app.css"&gt;&lt;/style&gt;</pre>
     </dd>
@@ -36,7 +36,8 @@
     <dd>
       <div>样式部分中，使用 scoped 属性指定样式仅仅作用于当前组件的元素。但是会增加额外的开销：渲染时，每个组件分配一个属性</div>
       <div>内部样式是通过组件的属性进行选择</div>
-      <div>推荐：为组件的根节点指定一个特有的类。如 .nav。推荐以组件名字命名这个类；因为组件的功能各不相同，所以很容易保证组件类的唯一性</div>
+      <div><span class="iconfont icon-dianzan"></span> 最佳体验</div>
+      <div>为组件的根节点指定一个特有的类。如 .nav。推荐以组件名字命名这个类；因为组件的功能各不相同，很容易保证组件类的唯一性</div>
       <div>更多信息，请访问 <a href="https://cn.vuejs.org/api/sfc-css-features.html">API - 单文件组件 CSS 功能</a></div>
       <figure class="img-sn">
         <img src="./imgs/class0.png" alt="">

@@ -27,26 +27,25 @@
     </div>
     <div class="title">实验内容</div>
     <div class="cont">
-      <p>改写前续产品列表页 Goods.vue 和 产品详情页 Details.vue，使用仓库完成数据的处理</p>
-      <div>商品仓库 goods.js</div>
-      <p>. 商品获取 getGoods()</p>
-      <p>. 其它业务</p>
-      <div>购物车仓库 cart.js</div>
-      <p>. 添加到购物车 addToCart()</p>
-      <p>. 从购物车中删除 removeFromCart()</p>
-      <p>. 其它业务</p>
-      <div>主题切换/换肤*</div>
-      <div>汉堡菜单*</div>
+      <div>购物车</div>
+      <p>.视图端：在购物车中，操作商品 - 全选、增加和减少，完成结算</p>
+      <p>.逻辑端：根据商品列表 lists 和选中商品列表 selectedLists 的变化，完成各种逻辑</p>
+      <p>.商品数据仓库的管理和使用</p>
+      <p>.购物车数据仓库的管理和使用</p>
+      <p>.侦听全选</p>
+      <p>.侦听部分选择</p>
+      <div>主题切换/换肤</div>
+      <div>汉堡菜单</div>
     </div>
     <div id="drill"></div>
     <div class="title">参考效果和参考代码</div>
     <div class="cont">
-      <div>改造 <a href="./drill_reactivity.html">实操 - 响应式综合运用 - 产品列表页</a>或新建项目</div>
-      <div>在仓库目录 stores 创建商品仓库 goods.js</div>
+      <div>改造 <a href="./drill_databinding.html">实操 - 绑定综合运用 - 产品列表页</a>或新建项目</div>
+      <p>. 增加路由 Router</p>
+      <p>. 增加状态管理 Pinia</p>
       <div>在仓库目录 stores 创建购物车仓库 cart.js</div>
       <p>. 定义并暴露属性：购物车 cart</p>
       <p>. 定义并暴露方法：添加到购物车 addToCart()；根据商品 id 判断是追加还是新加</p>
-      <p>. 定义并暴露方法：从购物车移除商品 removeFromCart()；根据商品 id 移除</p>
       <p>. 定义并暴露方法：加载仓库方法 fetchCart()</p>
       <pre>
 import { ref } from 'vue'
@@ -54,6 +53,7 @@ import { defineStore } from 'pinia'
 
 export const useCartStore = defineStore('cart', () => {
 
+  const isLoading = ref(false)
   const cart = ref([])
 
   const addToCart = (product) => {
@@ -70,14 +70,16 @@ export const useCartStore = defineStore('cart', () => {
   }
 
   const fetchCart = async () => {
+    isLoading.value = true
     let response = await fetch('https://glpla.github.io/utils/data/cart.json')
     let data = await response.json()
     cart.value = data
+    isLoading.value = false
   }
 
   return { cart, addToCart, removeFromCart, fetchCart }
 })</pre>
-      <div>商品详情页 Details.vue - 引入并使用购物车仓库</div>
+      <div>商品页 - 引入并使用购物车仓库</div>
       <pre>
 import { useCartStore } from '@/stores/cart';
 const cartStore = useCartStore()</pre>

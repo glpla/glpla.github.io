@@ -30,27 +30,22 @@
     </dd>
     <dt>Overview</dt>
     <dd>
-      <div>基于 HTML 的模板语法，使能够声明式地将其组件实例的数据 <span class="warn">绑定</span> 到呈现的 DOM 上，也称数据绑定 data binding</div>
+      <div>基于 HTML 的 <a href="https://cn.vuejs.org/guide/essentials/template-syntax">模板语法 - Template
+          Syntax</a>，使能够声明式地将其组件实例的数据 <span class="warn">绑定</span> 到呈现的 DOM - 数据绑定 data binding</div>
+      <div>解决数据和元素节点的内容或属性的关联</div>
       <div>减少 DOM 操作</div>
-      <div>可以使用简单的 JavaScript 表达式实现数据的2次处理和使用</div>
-      <div>复杂的逻辑请使用 <a href="./computed.html">计算属性</a> 或方法获取</div>
-      <div>根据数据是否是响应式，数据绑定分：静态数据绑定和 <a href="./responsive.html">响应式数据</a> 绑定</div>
-      <div>更多信息，请访问 <a href="https://cn.vuejs.org/guide/essentials/template-syntax">模板语法 - Template
-          Syntax</a></div>
-      <div class="tips">
-        <div>目的：解决数据和元素节点的内容和属性的关联</div>
-        <div>可以使用模板字符串 ``，便于直接使用变量</div>
-      </div>
+      <div>根据数据类型，区分：简单数据类型绑定和复杂数据类型绑定</div>
+      <div>根据数据响应式，区分：静态数据绑定和 <a href="./responsive.html">动态数据/响应式数据</a> 绑定</div>
+      <div>简单逻辑 - 使用 JavaScript 表达式实现数据的2次处理和使用</div>
+      <div>复杂逻辑 - 使用 <a href="./computed.html">计算属性</a> 完成</div>
     </dd>
   </dl>
   <div class="chap">Text Interpolation</div>
   <dl>
     <dd>
       <div>文本插值表达式</div>
-      <div>使用双大括号 <span class="warn">{{}}</span>，会将数据解释为 <span class="warn">纯文本</span> ，解决 <span
-          class="warn">数据和元素内容</span> 的关联</div>
-      <div>支持简单的数据处理；建议使用 <a href="./computed.html">计算属性</a> 完成</div>
-      <div>简单数据类型绑定和复杂数据类型绑定</div>
+      <div>解决 <span class="warn">数据和元素内容</span> 的关联</div>
+      <div>使用双大括号 <span class="warn">{{}}</span>，将数据解释为 <span class="warn">纯文本</span></div>
       <pre>
 let msg = 'hi,there'
 let age = 18
@@ -71,13 +66,15 @@ let obj = {
   <div class="chap">Attribute Bindings</div>
   <dl>
     <dd>
-      <div>使用 <span class="warn">v-bind</span> 指令将数据和 HTML的属性 Attribute 绑定，解决 <span class="warn">数据和元素属性</span>
-        的关联；可以简写为 <span class="warn">冒号 :</span></div>
-      <div>不需要使用 {{}}</div>
+      <div>解决 <span class="warn">数据和元素属性</span> 的关联</div>
+      <div>使用 <span class="warn">v-bind</span> 指令将数据和 HTML 属性 Attribute 绑定</div>
+      <div>可以简写为 <span class="warn">冒号 :</span></div>
+      <div>不能使用 {{}}</div>
+      <div>拼接时，可以使用模板字符串 ``，便于直接使用变量 - 建议</div>
       <pre>v-bind:attribute = value</pre>
       <pre>:attribute = value</pre>
     </dd>
-    <dt>Normal</dt>
+    <dt>General</dt>
     <dd>
       <div>常见有：id、href、src、class、style、title</div>
       <pre>
@@ -90,19 +87,28 @@ let url = 'https://glpla.github.io'</pre>
     <dt>Boolean</dt>
     <dd>
       <div>常见有：hidden、checked、selected、disabled、autoplay、loop、controls</div>
-      <div>1. 静态使用 - 指定的任何数据包括空串，都会渲染为真；通常仅仅指定属性，表示功能启用；不指定该属性，则不启用</div>
-      <div>以下几种写法均表示 button 被禁止</div>
+      <div>1. 静态数据使用</div>
+      <div>指定的任何数据包括空串，都会渲染为真</div>
+      <div>通常仅仅指定属性，表示功能启用；不指定该属性，则不启用</div>
+      <div>按钮 button - 以下几种写法均表示被禁止</div>
       <pre>
 &lt;button disabled="true"&gt;submit&lt;/button&gt;
 &lt;button disabled="false"&gt;submit&lt;/button&gt;
-&lt;button disabled=" "&gt;submit&lt;/button&gt;
+&lt;button disabled=""&gt;submit&lt;/button&gt;
 &lt;button disabled="123"&gt;submit&lt;/button&gt;
 &lt;button disabled&gt;submit&lt;/button&gt;</pre>
-      <div>单选按钮，male被选中</div>
+      <div>借助 <a href="../web/selector_class.html">伪类选择器</a> 查看效果</div>
+      <pre>
+button:disabled {
+  background-color: red;
+}</pre>
+      <div>单选按钮 radio - male 被选中；应该显式指定 value</div>
       <pre>
 &lt;input type="radio" name="gender" value="male" checked&gt;male
 &lt;input type="radio" name="gender" value="female"&gt;female</pre>
-      <div>2. 动态绑定使用 - 可用指定常量关键字 true 或 false、布尔变量或表达式</div>
+      <div>多选按钮 checkbox - 根据需要指定 value；其它使用同 radio</div>
+      <div>2. 动态数据使用</div>
+      <div>可使用 <span class="warn">常量关键字</span> true 或 false、布尔变量或表达式</div>
       <pre>
 &lt;button :disabled="true"&gt;submit&lt;/button&gt;
 &lt;button :disabled="false"&gt;submit&lt;/button&gt;
@@ -119,14 +125,7 @@ let url = 'https://glpla.github.io'</pre>
     <dt><a href="./class.html">class</a></dt>
     <dd>类的绑定</dd>
     <dt><a href="./style.html">style</a></dt>
-    <dd>内联样式的绑定</dd>
-    <dt>CSS函数属性绑定</dt>
-    <dd>
-      <div>background-image 等使用了 url()、linear-gradient() 等等 CSS 函数的属性</div>
-      <div>静态使用 - 仅可以引用 public 中的资源</div>
-      <pre>&lt;div style="background-image: url('/imgs/lg.jpg');"&gt;hi,there&lt;/div&gt;</pre>
-      <div>动态绑定使用 - 同 <a href="./img.html">图片</a> 的使用</div>
-    </dd>
+    <dd>内联样式的绑定</dd>   
     <dt>Other</dt>
     <dd>
       <div>v-text：渲染普通文本</div>

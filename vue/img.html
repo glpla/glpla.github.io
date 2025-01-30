@@ -21,13 +21,12 @@
     <dd>
       <div>1. 使用本地图片</div>
       <pre>&lt;img src="@/assets/imgs/0.jpg" alt=""&gt;</pre>
-      <div>2. 使用在线图片；更多图片资源，请访问 <a href="https://pixabay.com/">pixabay</a>、<a
-          href="https://unsplash.com/">unsplash</a>、<a href="../utils/index.html">大树小站- 在线资源</a>
+      <div>2. 使用 <a href="https://pixabay.com/">pixabay</a>、<a href="https://unsplash.com/">unsplash</a>、<a
+          href="../utils/index.html">大树小站- 在线资源</a> 等在线图片资源；或自己创建 <a href="../node/static.html">资源服务器</a>
       </div>
       <pre>
 &lt;img src="https://cdn.pixabay.com/photo/2023/04/01/21/11/tunnel-7893124_640.jpg" alt=""&gt;
 &lt;img src="https://glpla.github.io/utils/wallpaper/w0.jpg" alt=""&gt;</pre>
-      <div>3. 自己创建<a href="../node/static.html">资源服务器</a></div>
     </dd>
     <dt>动态绑定使用</dt>
     <dd>
@@ -46,17 +45,17 @@
       <div>import() 是一个异步函数，返回的是一个 Promise，而不是直接的 URL。因此，不能直接在模板中这样使用</div>
       <pre>&lt;img :src="import('@/assets/logo.svg')" alt=""/&gt;</pre>
       <div>解决方案3 - 使用 getImageUrl() 导入</div>
-      <div>采用 vite 的<a href="https://cn.vitejs.dev/guide/assets.html">静态资源处理</a>：import.meta.url
+      <div>采用 vite 的 <a href="https://cn.vitejs.dev/guide/assets.html">静态资源处理</a>：import.meta.url
         是一个ESM的原生功能，会暴露当前模块的 URL。将它与原生的 URL 构造器 组合使用，在一个 JavaScript 模块中，通过<span
           class="warn">相对路径</span>我们就能得到一个被完整解析的静态资源 URL</div>
-      <div>为静态资源创建新的URL - 尤其适合处理多个静态资源，如<a href="./vfor.html">列表渲染</a></div>
+      <div>为静态资源创建新的URL - 尤其适合处理多个静态资源，如 <a href="./vfor.html">列表渲染</a></div>
       <pre>&lt;img :src="getImageUrl(src)" alt=""/&gt;</pre>
       <pre>
 let src = '../imgs/10.jpg'
 const getImageUrl = (img) => {
     return new URL(img, import.meta.url).href
 }</pre>
-      <div>拼接路径；案例应用请查看<a href="./events.html">事件 - 手动轮播</a></div>
+      <div>拼接路径；案例应用请查看 <a href="./events.html">事件 - 手动轮播</a></div>
       <pre>
 let src = '../imgs/10.jpg'
 const getImageUrl = (img) => {
@@ -64,13 +63,36 @@ const getImageUrl = (img) => {
 }</pre>
     </dd>
   </dl>
+  <div class="chap">背景图片 BackgroundImage</div>
+  <dl>
+    <dt>静态使用</dt>
+    <dd>
+      <div>仅可以引用 public 中的资源</div>
+      <pre>
+&lt;div style="background-image: url('/imgs/lg.jpg');"&gt;hi,there&lt;/div&gt;
+&lt;div style="background-image: url(./todo/todo0.jpg)"&gt;hi,there&lt;/div&gt;// x</pre>
+    </dd>
+    <dt>动态使用</dt>
+    <dd>
+      <div>为了和绑定的变量区分，使用引号包裹样式属性</div>
+      <div>模板字符串不支持小驼峰写法！！！</div>
+      <pre>
+&lt;div :style="{ 'backgroundImage': 'url(' + url + ')' }"&gt;hi,there&lt;/div&gt;
+&lt;div :style="{ 'background-image': 'url(' + url + ')' }"&gt;hi,there&lt;/div&gt;
+&lt;div :style="`background-image:url(${url})`"&gt;hi,there&lt;/div&gt;
+&lt;div :style="`backgroundImage:url(${url})`"&gt;hi,there&lt;/div&gt; // x</pre>
+    </dd>
+  </dl>
   <div class="chap">Summary & Homework</div>
   <dl>
     <dt>Summary</dt>
     <dd>
-      <div>网站图标icon、logo类的放在 public 目录</div>
-      <div>更新较少、使用不多的图片资源使用放在 assets 目录，使用 import 导入并使用</div>
-      <div>业务流图片资源使用在线地址；可以是完整地址；也可以是拼接地址</div>
+      <div>1. 静态使用</div>
+      <div>. 网站图标icon、logo类的放在 public 目录</div>
+      <div>2. 动态使用</div>
+      <div>. 引入为资源，图片可以放在 src 目录任意地方</div>
+      <div>. 使用在线资源</div>
+      <div>. 自建资源服务器</div>
     </dd>
     <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] Vite 框架对图片的处理</dd>

@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>本地存储 LocalStorage</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/footer2025.css">
   <base target="_blank">
 </head>
 
@@ -16,10 +17,10 @@
     <span>&commat;LocalStorage</span>
   </header>
   <dl>
-    <dt>特点</dt>
+    <dt>Feature</dt>
     <dd>
+      <div>.window 的全局函数</div>
       <div>.以值对 key-value pairs 的形式存储在本地</div>
-      <div>.是 window 的全局函数</div>
       <div>.持久化保存，除非用户主动清除</div>
       <div>.读取方便</div>
       <div>.存储容量大，约20MB</div>
@@ -27,10 +28,10 @@
       <div>.不会被网络爬虫抓取</div>
       <div>.不同浏览器保存的数据不能共享</div>
       <div>.存的数据都是<span class="warn">字符串 String</span>！！！</div>
+      <div>.如果数据不存在，返回null；如果存在返回字符串[黑色] </div>
     </dd>
-    <dt>常用方法</dt>
+    <dt>Method</dt>
     <dd>
-      <div>.如下表所示</div>
       <table>
         <caption>常用方法</caption>
         <tr>
@@ -62,36 +63,29 @@
       </div>
     </dd>
   </dl>
-  <div class="chap">基本应用 Usage</div>
+  <div class="chap">Usage</div>
   <dl>
-    <dd>.存的数据都是<span class="warn">字符串 String</span>！！！</dd>
-    <dt>数值 Number</dt>
+    <dt>String</dt>
     <dd>
-      <div>设置</div>
+      <pre>
+localStorage.setItem('str', 'male')
+</pre>
+      <pre>
+let str = localStorage.getItem('str')
+console.log(str);</pre>
+    </dd>
+    <dt>Number</dt>
+    <dd>
       <pre>
 localStorage.setItem('num', 2114)
 </pre>
-      <div>获取</div>
       <pre>
 let num = localStorage.getItem('num')
-//如果数据不存在，返回null；如果存在返回字符串[黑色]
 console.log(num);
 //类型转换为数值型[蓝色]
 console.log(Number(num));</pre>
     </dd>
-    <dt>字符串 String</dt>
-    <dd>
-      <div>设置</div>
-      <pre>
-localStorage.setItem('str', 'male')
-</pre>
-      <div>获取</div>
-      <pre>
-let str = localStorage.getItem('str')
-//如果数据不存在，返回null
-console.log(str);</pre>
-    </dd>
-    <dt>数组 Array</dt>
+    <dt>Array</dt>
     <dd>
       <div>.直接存储会被转化为字符串</div>
       <pre>
@@ -102,18 +96,15 @@ localStorage.setItem('arr', arr)
 res = localStorage.getItem('arr')
 console.log('after get ', res);</pre>
       <div>.存储时，使用 JSON.stringify 将数据序列化处理后再保存，否则无法还原</div>
-      <pre>
-//使用JSON.stringify转换
-localStorage.setItem('arr1', JSON.stringify(arr));</pre>
+      <pre>localStorage.setItem('arr1', JSON.stringify(arr));</pre>
       <div>.获取时，使用 JSON.parse 转换为原始数据类型；如果不解析仍然是字符串</div>
       <pre>
-// 使用JSON.parse解析
 res = JSON.parse(localStorage.getItem('arr1'));
 console.log('解析获取：res:', res);</pre>
-      <div><span class="warn">兼容写法</span>：如果为 null，则赋值为空数组</div>
+      <div><span class="warn">最佳编码体验</span>：如果为 null，则赋值为对应的空值，如空数组</div>
       <pre>res = JSON.parse(localStorage.getItem('arr1')) || [];</pre>
     </dd>
-    <dt>对象 Object</dt>
+    <dt>Object</dt>
     <dd>
       <div>.同数组一样，对象的保存和获取也要处理</div>
       <div>.直接存储，查看时，显示为[object Object]</div>
@@ -124,38 +115,37 @@ localStorage.setItem('obj', JSON.stringify(obj))
 // 使用JSON.parse解析
 let obj1 = JSON.parse(localStorage.getItem('obj'))
 console.log(obj1);</pre>
-      <div><span class="warn">兼容写法</span>：如果为 null，则赋值为空对象</div>
+      <div><span class="warn">最佳编码体验</span>：如果为 null，则赋值为空对象</div>
       <pre>obj1 = JSON.parse(localStorage.getItem('obj')) || {};</pre>
     </dd>
-    <dt>布尔 Boolean</dt>
+    <!-- <dt>Boolean</dt>
     <dd>
-      <div>设置</div>
       <pre>
 localStorage.setItem('bool', true)
 </pre>
-      <div>获取</div>
       <pre>
 let bool = localStorage.getItem('bool')
-//如果数据不存在，返回null
 console.log(bool, Boolean(bool));</pre>
-    </dd>
+    </dd> -->
   </dl>
+  <div class="chap">Summary & Homework</div>
   <dl>
-    <dt><span class="iconfont icon-assignment"></span> 总结 Summary</dt>
+    <dt>Summary</dt>
     <dd class="sn">
-      <div>数据的设置和获取默认都是为<span class="warn">字符串</span></div>
+      <div>数据的设置和获取默认都是为 <span class="warn">字符串</span></div>
       <div>如果存储的是数值型数据，获取时应类型转换，如使用 Number() 转换为数字</div>
       <div>复合数据类型如数组和对象，保存时应使用 JSON.stringify() 序列化处理；获取时应使用 JSON.parse() 解析；两者要配合使用</div>
-      <div>不管什么类型的数据，如果不存在，返回为<span class="warn">null</span></div>
+      <div>不管什么类型的数据，如果不存在，返回为 <span class="warn">null</span></div>
     </dd>
-    <dt><span class="iconfont icon-mouse"></span> 练习 Homework</dt>
+    <dt>Homework</dt>
     <dd class="sn">
       <div>完成以上操作，体会本地存储的特点</div>
       <div>体会保存数组对象 [{}] 的基本操作，并思考和其它数据类型的异同</div>
       <div>创建一个登陆表单，实现保存用户名和密码的操作，以便于下次直接登陆</div>
     </dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>
