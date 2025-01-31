@@ -50,11 +50,13 @@
       <figure class="img-sn">
         <img src="./imgs/pro5.jpg" alt="">
       </figure>
-      <div>7. 完善开发</div>
-      <div>9. 项目发布；发布后会生产目标文件夹 dist；新开一个 Vs Code 打开 dist 并预览效果</div>
+      <div>7. 完善开发；使用 Vs Code 打开项目文件夹，完善逻辑和各项业务</div>
+      <div>9. 项目发布；发布后会生产目标文件夹 dist</div>
       <pre>npm run build</pre>
       <!-- <p>. 将路由模式由默认的 web 模式改为 hash 模式，需要引入 createWebHashHistory 包</p> -->
       <!-- <pre>history: createWebHashHistory(import.meta.env.BASE_URL)</pre> -->
+      <div>10. 项目预览</div>
+      <pre>npm run preview</pre>
     </dd>
     <dt>Warning</dt>
     <dd class="sn">
@@ -62,7 +64,9 @@
       <div>项目名称以字母开头，不要大写、不要驼峰命名；如果不知道命名规则，就看示例怎么提示，如 vite-project</div>
       <div>项目目录和文件名不要出现中文符号</div>
       <div>项目创建完毕后，后续操作请使用 Vs Code 完成：CMD 中，切换到项目目录，输入 code . 即可使用 Vs Code打开项目</div>
-      <div>发布后，如果在当前项目中预览，需要为 vite.config.js 增加基地址配置，指定为相对路径</div>
+      <div>对于单页面应用 SPA，直接用 Live Server 打开 HTML 文件可能不会正常工作，因为 Live Server 默认不支持 History 模式，绕过了 Vite 的构建过程和路由配置；可以调整路由模式由
+        createWebHistory 为 createWebHashHistory</div>
+      <div>发布后，如果在 <span class="warn">当前项目</span> 中预览，需要为 vite.config.js 增加基地址配置，指定为相对路径</div>
       <pre>base: './'</pre>
     </dd>
   </dl>
@@ -94,8 +98,8 @@
       <p>.定义的路由导出并在 main.js 中使用</p>
       <div>stores - 仓库目录</div>
       <div>App.vue - 根组件 root component</div>
-      <p>.特别的 <a href="./sfc.html">单文件组件 SFC</a>，包括逻辑、结构和样式</p>
-      <p>.逻辑中可以引入其它组件、库和模块</p>
+      <p>.特别的 <a href="./sfc.html">单文件组件 SFC</a>，包括逻辑 script、结构 template 和样式 style</p>
+      <p>.逻辑中可以引入其它组件、库、模块和本地样式</p>
       <pre>
 import { ref } from 'vue';
 import axios from 'axios';</pre>
@@ -121,7 +125,8 @@ import 'font-awesome/css/font-awesome.min.css'</pre>
       <div>依赖包管理文件；定制命令</div>
       <div>区分生产环节依赖 dependencies 和开发环境依赖 devDependencies；更多信息，请访问 <a href="../node/ide.html#dep">Node</a>
       </div>
-      <div>由于包的更新和大小等因素，项目分享或提交到代码仓库时，这部分会被忽略。用户拿到代码，第一件事情是安装依赖；否则项目不能运行</div>
+      <div>由于包的更新和大小等因素，项目分享或提交到代码仓库时，这部分会被忽略</div>
+      <div>用户拿到项目/代码，<span class="warn">第一件事情</span> 是安装依赖；否则项目不能运行</div>
       <pre>
 {
     "name": "helloworld",
@@ -152,12 +157,15 @@ import 'font-awesome/css/font-awesome.min.css'</pre>
       <pre>"dev": "vite --host 0.0.0.0"</pre>
       <div>指定端口 port</div>
       <pre>"dev": "vite --host 0.0.0.0 --port 5173"</pre>
-      <div class="tips">在大多数情况下，使用 --host 即可满足需求。如果需要更明确的配置，可以使用 --host 0.0.0.0</div>
+      <div class="tips">
+        <div>在大多数情况下，使用 --host 即可满足需求。如果需要更明确的配置，可以使用 --host 0.0.0.0</div>
+        <div>这里的配置是面向开发环境，不影响生产环境</div>
+      </div>
     </dd>
     <dt>vite.config.js</dt>
     <dd>
-      <div><a href="https://cn.vitejs.dev/config/">配置 Vite</a>；默认配置仅包括插件 plugins 和解析规则 resolve；其它如 server、base
-        的配置，如项目打开、端口、代理等等，需手动添加</div>
+      <div><a href="https://cn.vitejs.dev/config/">配置 Vite</a>；默认配置仅包括插件 plugins 和解析规则 resolve</div>
+      <div>其它如 项目打开、端口、server、base、<a href="../node/proxy.html">代理 Proxy</a> 等等，需手动添加</div>
       <pre>
 import { fileURLToPath, URL } from "node:url";
 
@@ -173,23 +181,25 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-});</pre>
-      <div>在当前项目中预览发布的 dist，需要将默认的绝对路径调整为相对路径</div>
-      <pre>base: './'</pre>
-      <div>网络请求出现跨域时，必须要做 <a href="../node/proxy.html">代理 Proxy</a></div>
-      <pre>
-server: {
+
+  // 以下为手动添加的配置
+  // 1. 在当前项目中预览发布的 dist，需要将默认的绝对路径调整为相对路径
+  base: './',
+
+  // 2. 网络请求出现跨域时，必须要代理
+  server: {
     open: false,        //启动项目自动弹出浏览器预览；默认 false，手动启动
     host: '0.0.0.0',    //主机；默认 locahost
     port: '5173',       //端口；默认 5173
     proxy: {
-        '/api': {
+      '/api': {
         target: 'http://127.0.0.1:3000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')   //不可以省略 rewrite
-        }
+      }
     }
-}</pre>
+  }
+});</pre>
     </dd>
   </dl>
   <div class="chap">工程化</div>
@@ -212,20 +222,12 @@ server: {
   </dl>
   <div class="chap">Homework</div>
   <dl>
-    <dd>[<span class="iconfont icon-keyboard"></span>] HelloWorld</dd>
-    <dd class="sn">
-      <div>创建 - 使用学号创建项目目录</div>
-      <div>调整 - 删除默认的组件、样式，只保留最基本的结构</div>
-      <div>开发 - 在根组件 App。vue 中使用一级标题 h1，创建 hello world</div>
-      <div>调试 - 增加样式，如颜色、布局等或者其他内容并调试</div>
-      <div>发布 - 将发布的 dist 目录打包压缩，以学号命名，提交到学习通</div>
-      <div>代码仓库* - 将项目推送到自己的代码仓库</div>
-    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_ide.html">HelloWorld</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 思考</dd>
     <dd class="sn">
       <div>发布后都发生了什么???</div>
       <div>跨域是什么???</div>
-      <div>使用 <a href="https://tailwindcss.com/docs/guides/vite#vue">Tailwind.css</a>样式库创建项目</div>
+      <div>使用 <a href="https://tailwindcss.com/docs/guides/vite#vue">Tailwind.css</a> 样式库创建项目</div>
     </dd>
   </dl>
   <div id="footer"></div>

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>路由 Route</title>
+  <title>路由概述 Route</title>
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/footer2025.css">
   <base target="_blank">
@@ -13,7 +13,7 @@
 
 <body>
   <header>
-    <h1>路由</h1>
+    <h1>路由概述</h1>
     <span>&commat;Route</span>
   </header>
   <dl>
@@ -31,9 +31,6 @@
           Router</a></div>
       <div>在属性 <a href="https://router.vuejs.org/api/type-aliases/RouteRecordRaw.html">routes/RouteRecordRaw</a> 配置路由
       </div>
-      <div>按照值对形式 name-value pair 配置路由，即把 URL 路径映射到组件；其中，路径 path 和组件 component 是必填项</div>
-      <div>所有的路由配置位于项目 src → router 文件夹中，通常是 index.js</div>
-      <div>更多路由配置，请访问 <a href="./route_adv.html">路由配置</a></div>
       <table>
         <caption>RouterOptions</caption>
         <tr>
@@ -52,14 +49,51 @@
           <td>路由列表；详细配置属性使用见下表</td>
         </tr>
         <tr>
-          <td>linkActiveClass</td>
-          <td>路由匹配样式；更多使用，请访问 <a href="./route_style.html">路由样式</a></td>
-        </tr>
-        <tr>
-          <td>linkExactActiveClass</td>
-          <td>严格路由匹配样式；更多使用，请访问 <a href="./route_style.html">路由样式</a></td>
+          <td>linkActiveClass
+            <br>linkExactActiveClass
+          </td>
+          <td>路由匹配样式
+            <br>严格路由匹配样式
+            <br>更多使用，请访问 <a href="./route_style.html">路由样式</a>
+          </td>
         </tr>
       </table>
+    </dd>
+    <dt><a href="https://router.vuejs.org/zh/guide/essentials/history-mode.html">History</a></dt>
+    <dd>
+      <div>Vue2 使用 mode 配置项，Vue3 使用 history 配置项</div>
+      <div>需要引入对应的包再使用</div>
+      <div>1. createWebHistory</div>
+      <div>HTML5 模式，URL 不带 #；传统网站模式</div>
+      <div>需要服务器端配合处理路径，否则容易出现 404；后端运维基本技能</div>
+      <pre>http://localhost:5173/</pre>
+      <pre>
+import { createRouter, createWebHistory } from 'vue-router'
+
+const router = createRouter({
+    history: createWebHistory(import.meta.env.BASE_URL),
+    // 
+})</pre>
+      <div>2. createWebHashHistory</div>
+      <div>hash 模式；<span class="warn">推荐模式</span></div>
+      <div>URL 带 #，看起来不够美观</div>
+      <div>SEO 优化性能略微不足</div>
+      <div>兼容性更好，不需要服务器端配合处理路径；前后端开发比较省心</div>
+      <div>优秀作品提交，请使用哈希模式</div>
+      <pre>http://localhost:5173/#/</pre>
+      <pre>
+import { createRouter, createWebHashHistory } from 'vue-router'
+
+const router = createRouter({
+    history: createWebHashHistory(import.meta.env.BASE_URL),
+    // 
+})</pre>
+    </dd>
+    <dt><a href="">Route</a></dt>
+    <dd>
+      <div>按照值对形式 name-value pair 配置路由，即把 URL 路径映射到组件；其中，路径 path 和组件 component 是 <span class="warn">必填项</span></div>
+      <div>所有的路由配置位于项目 src → router 文件夹中，通常是 index.js</div>
+      <div>更多路由配置，请访问 <a href="./route_adv.html">路由配置</a></div>
       <table>
         <caption>routes/RouteRecordRaw</caption>
         <tr>
@@ -95,19 +129,15 @@
           <td>是否启用路由参数；可以接收动态路由参数和查询路由参数</td>
         </tr>
       </table>
-    </dd>
-    <dt>路径 path</dt>
-    <dd>
+      <div>1. 路径 path</div>
       <div>/ 代表根路由</div>
-    </dd>
-    <dt>组件 component</dt>
-    <dd>
+      <div>2. 组件 component</div>
       <div>引入组件时，可以省略后缀名 .vue</div>
       <div>每一个组件都是一个视图 view</div>
       <div>每一个组件都是一个单文件组件 SFC - Single File Component</div>
       <div>单页面应用 SPA - Single Page Application</div>
-      <div>1. 默认导入 Normal import</div>
-      <div>系统就绪时，所有组件都已经导入</div>
+      <div>. 默认导入 Normal import</div>
+      <div>. 系统就绪时，所有组件都已经导入</div>
       <pre>
 import HomeView from "@/views/HomeView.vue";
 import TeamView from "@/views/TeamView.vue";
@@ -116,8 +146,8 @@ const routes = [
   { path: '/', component: HomeView },
   { path: '/team', component: TeamView },
 ]</pre>
-      <div>2. 动态导入 Dynamic import</div>
-      <div>动态导入，需要的时候才导入 - 懒加载</div>
+      <div>. 动态导入 Dynamic import</div>
+      <div>. 动态导入，需要的时候才导入 - 懒加载</div>
       <pre>
 const routes = [
   { path: '/', component: () => import("../views/TeamView.vue") },
