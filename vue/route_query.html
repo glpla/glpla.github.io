@@ -50,6 +50,7 @@
       <div><a href="https://router.vuejs.org/zh/api/#Functions-useRoute">useRoute()</a> 是 vue-router
         提供的组合式函数，返回一个 RouteLocationNormalized 对象，用于访问当前/激活路由的各种 <span class="warn">路由信息</span></div>
       <div>常见的路由信息有：fullPath、path、name、params、query、meta 等</div>
+      <div><span class="warn">如果仅仅在结构中使用，可以使用默认的全局变量 $route 解析并使用</span></div>
       <div>先引入再使用 - 引入路由包 useRoute 并创建路由实例 route</div>
       <div>动态路由参数由路由的 <span class="warn">query</span> 接收</div>
       <pre>
@@ -57,7 +58,7 @@ import { useRoute } from 'vue-router'
 let route = useRoute()
 console.log(route.query);</pre>
       <pre>&lt;div&gt;{{ route.query.id }}&lt;/div&gt;</pre>
-      <div>如果 <span class="warn">仅仅</span> 在结构中使用，可以使用默认的全局变量 $route 解析并使用；不建议</div>
+      <div><span class="warn">仅仅</span> 在结构中使用</div>
       <pre>&lt;div&gt;{{ $route.query.id }}&lt;/div&gt;</pre>
     </dd>
     <dt>注意事项</dt>

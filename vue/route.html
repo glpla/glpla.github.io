@@ -17,9 +17,26 @@
     <span>&commat;Route</span>
   </header>
   <dl>
-    <dd class="heading-title"><span>创建路由</span> <span>↓</span> <span>使用路由</span> <span>↓</span> <span>渲染路由</span></dd>
+    <dd class="heading-title"><span>部署路由环境</span> <span>↓</span> <span>创建路由</span> <span>↓</span> <span>使用路由</span>
+      <span>↓</span> <span>渲染路由</span>
+    </dd>
+    <dt>Deployment</dt>
+    <dd>
+      <div><span class="iconfont icon-thumbup"></span> 创建项目的时候指定使用路由，自动生成路由配置文件</div>
+      <div>也可以单独安装路由依赖；需要单独配置并引入，比较麻烦，不推荐</div>
+      <div>1. 安装路由 - 为项目添加安装依赖</div>
+      <pre>npm i vue-router -S</pre>
+      <div>2. 引入路由</div>
+      <div>在入口文件 main.js 中引入路由，作为中间件使用</div>
+      <pre>
+//引入
+import router from './router'
+
+//使用 - 链式
+app.use(router).mount('#app')</pre>
+    </dd>
   </dl>
-  <div class="chap">创建路由</div>
+  <div class="chap">CreateRouter</div>
   <dl>
     <dd>
       <div>使用路由功能，需要 <a href="https://router.vuejs.org/">vue-router</a> 的支持</div>
@@ -155,9 +172,12 @@ const routes = [
 ]</pre>
     </dd>
   </dl>
-  <div class="chap">使用路由</div>
+  <div class="chap">Usage</div>
   <dl>
-    <dd>结构中使用；逻辑中使用</dd>
+    <dd>
+      <div>结构中使用</div>
+      <div>逻辑中使用</div>
+    </dd>
     <dt>&lt;a&gt;</dt>
     <dd>
       <div>Html 原生标签</div>
@@ -268,7 +288,7 @@ console.log(route);</pre>
       </table>
     </dd>
   </dl>
-  <div class="chap">渲染路由</div>
+  <div class="chap">Rendering</div>
   <dl>
     <dt>&lt;router-view&gt;</dt>
     <dd>
@@ -340,6 +360,19 @@ console.log(route);</pre>
       <div>创建对应的组件 - 使用简单信息表示即可</div>
       <div>调试并发布；将发布的 dist 目录打包压缩，以学号命名，提交到学习通</div>
       <div>代码仓库* - 将项目推送到自己的代码仓库</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 登录引导组件 LoginGuide.vue - 隐藏主导航组件 AppNav.vue</dd>
+    <dd>
+      <div>默认情况下，不指定 meta，则为假；为了避免重复，减少工作量，利用真逻辑取反判断；也可以使用假逻辑</div>
+      <div>根据需求，完成其它路由的设计</div>
+      <pre>&lt;AppNav v-if="!$route.meta.showNav" class="w app-nav" /&gt;</pre>
+      <pre>
+{
+  path: "/login-guide",
+  name: "login-guide",
+  component: () => import("../views/LoginGuide.vue"),
+  meta: { showNav: true },
+}</pre>
     </dd>
   </dl>
   <div id="footer"></div>

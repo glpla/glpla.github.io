@@ -202,17 +202,14 @@ button:disabled {
 :nth-child(even)//选择序号为偶数的元素
 :nth-child(odd)//选择序号为奇数的元素
 </pre>
-
       <pre>
 :nth-child(2n)//同even；选择序号为偶数的元素
 :nth-child(2n+1)//同odd：选择序号为奇数的元素
 </pre>
-
       <pre>
 :nth-child(3n)//选择序号为3、6、9等元素
 :nth-child(3n+1)//选择序号为1、4、7、10等元素
 </pre>
-
       <pre>
 :nth-child(-n+3)//前3 - 选择序号为3、2、1的元素；:nth-child(3-n)错误
 :nth-last-child(-n+3)//后3</pre>
@@ -224,7 +221,12 @@ tr:nth-child(odd) {
 tr:nth-child(even) {
   background-color: #faccff;
 }      </pre>
-      <div>根据类型选择元素</div>
+      <div>根据<span class="warn">类型/标签</span>选择元素 <a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-of-type">:nth-of-type()</a></div>
+      <p>. 指定类型的元素按照序号 position 选择</p>
+      <p>. 根据类型选择符合条件的元素；适合多种元素类型并存的情况</p>
+      <p>. 同样可以使用关键字或表达式</p>
+      <p>. 不可以依据类名或其它选择器类型</p>
       <table>
         <tr>
           <th>类别</th>
@@ -243,8 +245,23 @@ tr:nth-child(even) {
           <td>选择指定类型第几个</td>
         </tr>
       </table>
-      <p>. 根据类型选择符合条件的元素；适合多种元素类型并存的情况</p>
-      <p>. 同样可以使用关键字或表达式</p>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 应用示例</dd>
+    <dd class="sn">
+      <pre>
+.item:nth-of-type(n+2) {
+  color: #f40;
+}      </pre>
+      <div>同样的标签应用不同的类名 - 从第2个 &lt;div&gt; 开始选中</div>
+      <img src="./imgs/select3.png" alt="">
+      <p class="fig-sn">都是&lt;div&gt;</p>
+      <div>不同的标签应用不同的类名 - 从第2个 &lt;p&gt; 开始选中；推荐 <span class="iconfont icon-dianzan"></span></div>
+      <img src="./imgs/select4.png" alt="">
+      <p class="fig-sn">&lt;div&gt;和&lt;p&gt;</p>
+      <p>[<span class="iconfont icon-keyboard"></span>] 同样的类名不同的标签</p>
+      <p>. 选中元素范围：分别从&lt;div&gt;的第2个开始和&lt;p&gt;的第2个开始</p>
+      <img src="./imgs/select5.png" alt="">
+      <p class="fig-sn">&lt;div&gt;和&lt;p&gt;</p>
     </dd>
   </dl>
   <div class="chap">其它伪类选择器</div>

@@ -19,24 +19,30 @@
   <dl>
     <dd>
       <div>使用 for - in 渲染一个基于一个<span class="warn">数组</span>的列表 - render a list of items based on an array</div>
-      <div>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/list.html">列表渲染 - List Rendering</a></div>
+      <div>更多信息，请访问 <a href="https://cn.vuejs.org/guide/essentials/list">列表渲染 - List Rendering</a></div>
       <div>需显式的指定 <a href="https://cn.vuejs.org/api/built-in-special-attributes">特殊属性 - key</a> 以区分并跟踪每个节点</div>
       <div>指定 key 有助于提高渲染性能；<span class="warn">据说</span>数据变化时只会渲染更新的数据项，不会全部重新渲染</div>
     </dd>
     <dt>Array</dt>
     <dd>
-      <div>1. 普通数组或对象数组</div>
-      <div>.1个参数：item 是对数组元素的迭代变量，名字任意</div>
+      <div>items 是源数据的数组</div>
+      <div>item 是迭代项/别名；可以是任意合法标识符</div>
+      <div>index 当前项的位置索引；可以是任意合法标识符；可选</div>
+      <pre>
+&lt;div v-for="(item, index) in items"&gt;
+  //
+&lt;/div&gt;</pre>
+      <div>用法1：仅使用迭代数据项别名 item</div>
       <pre>
 &lt;ul&gt;
     &lt;li v-for = "item in list" :key = "item.id" &gt; {{ item }} &lt;/li&gt;
 &lt;/ul&gt;</pre>
-      <div>.2个参数：除了 item 外，还可以使用数据元素对应的索引 index，名字任意</div>
+      <div>用法2：同时使用数据元素对应的索引 index；使用括号()</div>
       <pre>
 &lt;ul&gt;
     &lt;li v-for = "(item, index) in list" :key = "item.id" &gt; {{ item }} &lt;/li&gt;
 &lt;/ul&gt;</pre>
-      <div>2. 嵌套使用；每个迭代都使用独立的迭代变量</div>
+      <div>用法3：嵌套使用；每个循环都使用独立的迭代变量；因为块级作用域，可以重名；但是不建议</div>
       <pre>
 &lt;ul&gt;
     &lt;li v-for = "(item, ind) in list" :key = "item.id" &gt;
@@ -44,25 +50,27 @@
     &lt;/li&gt;
 &lt;/ul&gt;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 渲染包含图片路径的列表</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 商品列表页 GoodsView.vue - 渲染包含图片路径的列表</dd>
     <dd>
-      <div>注意静态资源处理</div>
+      <div>商品数据节点信息，参考如下</div>
+      <div>静态资源图片的处理 - 这里使用计算属性拼接地址；确定服务器的情况下也可直接拼接</div>
       <pre>
-const arr = [{
+const goods = ref([{
     id: 0,
-    name: 'gl',
-    age: 20,
-    src: '10.jpg'
-}]
+    title: 'gl',
+    price: 20,
+    src: 'coffee0.jpg'
+}])
 const getImageUrl = (src) => {
     return new URL(`../imgs/${src}`, import.meta.url).href
 }</pre>
       <pre>
-&lt;div class="item" v-for="item in arr" :key="item.id"&gt;
+&lt;div class="item" v-for="item in goods" :key="item.id"&gt;
     &lt;img :src="getImageUrl(item.src)" alt="picture"&gt;
+    &lt;img :src="`https://glpla.github.io/utils/coffee/${item.src}`" alt="picture"&gt;
     &lt;p&gt;{{ item.id }}&lt;/p&gt;
-    &lt;p&gt;{{ item.name }}&lt;/p&gt;
-    &lt;p&gt;{{ item.age }}&lt;/p&gt;
+    &lt;p&gt;{{ item.title }}&lt;/p&gt;
+    &lt;p&gt;{{ item.price }}&lt;/p&gt;
 &lt;/div&gt;</pre>
     </dd>
     <dt>Object</dt>
@@ -72,10 +80,28 @@ const getImageUrl = (src) => {
       <pre>const obj = reactive({ id: 101, name: 'glpla', age: 18 })</pre>
       <div>.1个参数：值 value</div>
       <pre>&lt;div v-for = "value in obj" &gt; {{ value }} &lt;/div&gt;</pre>
-      <div>.2个参数：值 value，键 key</div>
+      <div>.2个参数：值 value；键 key，可选</div>
       <pre>&lt;div v-for = "(value, key) in obj" &gt; {{ key }}:{{ value }} &lt;/div&gt;</pre>
-      <div>.3个参数：值 value，键 key，索引 index</div>
+      <div>.3个参数：值 value；键 key，可选；索引 index，可选</div>
       <pre>&lt;div v-for = "(value, key, index) in obj" &gt; {{ index }}:{{ key }}:{{ value }} &lt;/div&gt;</pre>
+      <div>每个位置的参数代表 <span class="warn">特定</span> 的属性，如果不相使用某个参数，可以使用非标准语法 _ 表示；多个可以使用数字区分</div>
+      <div>也可以考虑使用对象的静态方法 Object.keys 或 Object.entries 来遍历对象</div>
+      <div>可读性角度出发，不建议省略；你不用它就完事了呗</div>
+      <pre>&lt;div v-for = "(_, key) in obj" &gt; {{ key }} &lt;/div&gt;</pre>
+      <pre>&lt;div v-for = "(_1, _2, index) in obj" &gt; {{ index }} &lt;/div&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./component_async.html">异步组件 → 标签页</a> - 仅使用对象的 key</dd>
+    <dd>
+      <pre>
+&lt;button v-for="(_, tab) in tabs" @click="currentTab = tab" :key="tab"
+:class="['tab-button', { active: currentTab === tab }]"&gt;{{ tab }}&lt;/button&gt;
+
+&lt;component :is="tabs[currentTab]" class="tab"&gt;&lt;/component&gt;</pre>
+      <pre>
+const tabs = {
+  "随享瑞幸": AsyncGoods,
+  "颜值水杯": AsyncCup
+}      </pre>
     </dd>
     <dt>&lt;template&gt;</dt>
     <dd>
