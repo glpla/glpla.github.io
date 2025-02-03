@@ -17,6 +17,14 @@
     <span>&commat;image</span>
   </header>
   <dl>
+    <dd>
+      <div>展示图片内容可以使用</div>
+      <div>1. 结构 <a href="../web/img.html">&lt;img&gt;</a></div>
+      <div>2. 样式 <a href="../web/background.html">BackgroundImage</a></div>
+    </dd>
+  </dl>
+  <div class="chap">图片 &lt;img&gt;</div>
+  <dl>
     <dt>静态使用</dt>
     <dd>
       <div>1. 使用本地图片</div>
@@ -38,12 +46,12 @@
       <div>vue-cli3 默认路径为 public，所以无需添加 public；public 即代表 /</div>
       <pre>let src = '/imgs/logo.svg'</pre>
       <pre>&lt;img :src="src" alt=""/&gt;</pre>
-      <div>解决方案2 - 使用 import() 语句</div>
+      <div>解决方案2 - 使用 import 语句</div>
       <div>将图片作为资源引入再使用 - 适合单个静态资源</div>
       <pre>import src from '@/assets/logo.svg'</pre>
       <pre>&lt;img :src="src" alt=""/&gt;</pre>
-      <div>import() 是一个异步函数，返回的是一个 Promise，而不是直接的 URL。因此，不能直接在模板中这样使用</div>
-      <pre>&lt;img :src="import('@/assets/logo.svg')" alt=""/&gt;</pre>
+      <!-- <div>import() 是一个异步函数，返回的是一个 Promise，而不是直接的 URL。因此，不能直接在模板中这样使用</div> -->
+      <!-- <pre>&lt;img :src="import('@/assets/logo.svg')" alt=""/&gt;</pre> -->
       <div>解决方案3 - 使用 getImageUrl() 导入</div>
       <div>采用 vite 的 <a href="https://cn.vitejs.dev/guide/assets.html">静态资源处理</a>：import.meta.url
         是一个ESM的原生功能，会暴露当前模块的 URL。将它与原生的 URL 构造器 组合使用，在一个 JavaScript 模块中，通过<span
@@ -67,10 +75,16 @@ const getImageUrl = (img) => {
   <dl>
     <dt>静态使用</dt>
     <dd>
-      <div>仅可以引用 public 中的资源</div>
+      <div>1. 内联样式 style - 仅可以引用 public 中的资源</div>
       <pre>
-&lt;div style="background-image: url('/imgs/lg.jpg');"&gt;hi,there&lt;/div&gt;
-&lt;div style="background-image: url(./todo/todo0.jpg)"&gt;hi,there&lt;/div&gt;// x</pre>
+&lt;div style="background-image: url('/imgs/bg.jpg');"&gt;hi,there&lt;/div&gt;
+&lt;div style="background-image: url('@/assets/bg.png');"&gt;hi,there&lt;/div&gt;// x
+&lt;div style="background-image: url(./assets/bg.jpg)"&gt;hi,there&lt;/div&gt;// x</pre>
+      <div>2. 样式 class</div>
+      <pre>
+.bg-img {
+  background-image: url('@/assets/dec0.png');
+}</pre>
     </dd>
     <dt>动态使用</dt>
     <dd>
