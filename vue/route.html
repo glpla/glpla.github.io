@@ -175,8 +175,10 @@ const routes = [
   <div class="chap">Usage</div>
   <dl>
     <dd>
-      <div>结构中使用</div>
-      <div>逻辑中使用</div>
+      <div>1. 结构中使用</div>
+      <div>如果<span class="warn">仅仅</span>在结构中使用，可以使用默认的全局变量 $route 解析并使用</div>
+      <div>2. 逻辑中使用</div>
+      <div>使用useRoute()，既可以在结构中使用，也可以在逻辑中使用</div>
     </dd>
     <dt>&lt;a&gt;</dt>
     <dd>
@@ -214,7 +216,6 @@ const routes = [
           <tr>
             <td>activeClass</td>
             <td>链接在匹配当前路由时被应用到 class
-              <br>多用于嵌套路由中
             </td>
           </tr>
           <tr>
@@ -257,7 +258,7 @@ const route = useRoute()
 console.log(route);</pre>
       <pre>
 &lt;div&gt;route {{ route.fullPath }}&lt;/div&gt;
-// $route 是全局属性，可以直接使用；但是和路由版本有关系；不建议
+// $route 是全局属性，可以直接在结构中使用
 &lt;div&gt;route {{ $route.fullPath }}&lt;/div&gt;</pre>
       <table>
         <caption>useRoute 常用属性</caption>
@@ -361,20 +362,31 @@ console.log(route);</pre>
       <div>调试并发布；将发布的 dist 目录打包压缩，以学号命名，提交到学习通</div>
       <div>代码仓库* - 将项目推送到自己的代码仓库</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 登录引导组件 LoginGuide.vue - 隐藏主导航组件 AppNav.vue</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] meta应用</dd>
     <dd>
-      <div>默认情况下，不指定 meta，则为假；为了避免重复，减少工作量，利用真逻辑取反判断；也可以使用假逻辑</div>
-      <div>根据需求，完成其它路由的设计</div>
+      <div>showNav：主导航是否显示</div>
+      <div>指定页面标题 title - 用于<a href="./route_guard.html">路由守卫中更新页面标题</a></div>
+      <div>1. LoginGuide.vue - 隐藏主导航组件 AppNav.vue</div>
       <pre>&lt;AppNav v-if="!$route.meta.showNav" class="w app-nav" /&gt;</pre>
       <pre>
 {
   path: "/login-guide",
   name: "login-guide",
   component: () => import("../views/LoginGuide.vue"),
-  meta: { showNav: true },
+  meta: { showNav: true, title: "菜单" },
+}</pre>
+      <div>2. GoodsView.vue - 根据是否显示主导航指定购物车位置</div>
+      <pre>&lt;Cart class="w cart" v-if="cartStore.cart.length" :class="{ 'pos': $route.meta.showNav }" /&gt;</pre>
+      <pre>
+{
+  path: "/goods",
+  name: "goods",
+  component: () => import("../views/GoodsView.vue"),
+  meta: { showNav: true, title: "菜单" },
 }</pre>
     </dd>
   </dl>
+
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>
 </body>
