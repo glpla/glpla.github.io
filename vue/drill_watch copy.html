@@ -8,6 +8,7 @@
   <title>实训 侦听综合运用</title>
   <link rel="stylesheet" href="../css/exp.css">
   <link rel="stylesheet" href="../css/footer2025.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
   <base target="_blank">
 </head>
 
@@ -39,55 +40,116 @@
     <div id="drill"></div>
     <div class="title">参考效果和参考代码</div>
     <div class="cont">
-      <div>静态页面设计与开发</div>
-      <img src="./imgs/watch0.png" alt="">
+      <div>静态结构 - 无数据绑定、无事件事件</div>
+      <pre>
+&lt;div class="cart"&gt;
+  &lt;div class="item"&gt;
+    &lt;input type="checkbox"&gt;
+    &lt;div&gt;商品&lt;/div&gt;
+    &lt;div&gt;单价&lt;/div&gt;
+    &lt;div&gt;库存&lt;/div&gt;
+    &lt;div&gt;操作&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="item"&gt;
+    &lt;input type="checkbox"&gt;
+    &lt;div&gt;name&lt;/div&gt;
+    &lt;div&gt;price&lt;/div&gt;
+    &lt;div&gt;stock&lt;/div&gt;
+    &lt;div class="btns"&gt;
+      &lt;button class="btn"&gt;-&lt;/button&gt;
+      &lt;div &gt;1&lt;/div&gt;
+      &lt;button class="btn"&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="total"&gt;总价100&lt;/div&gt;
+&lt;/div&gt;</pre>
+      <figure>
+        <img src="./imgs/cart0.png" alt="">
+        <figcaption>静态页面</figcaption>
+      </figure>
       <div>准备数据</div>
-      <p>.仓库数据 cartStore，其中 cart 是购物车数据；数组</p>
-      <p>.选中数据 selectedGoods；数组</p>
-      <p>.是否全选 isSelectAll，布尔</p>
-      <p>.商品总数 total</p>
-      <div>加载仓库数据</div>
-      <p>.使用 fetch 或 axios</p>
+      <p>.引入 flag 辅助判断；默认是真；初值也可以为假，后面的逻辑判断相应调整即可</p>
+      <p>.加载数据 - 在挂载生命周期函数中从资源服务器拉取并赋值；可以自己准备数据</p>
+      <pre>
+import { watch } from 'vue'
+
+let flag = true
+let sum = ref(0)
+
+const cartData = reactive({
+  selectedAll: false,
+  selectedLists: [],
+  lists: [{
+    "id": 77,
+    "name": "红烧牛肉面",
+    "price": 15,
+    "number": 1,
+    "stock": 6
+  }]
+})
+
+onMounted(() => {
+  let json = fetch('https://glpla.github.io/utils/data/cart.json')
+    .then(response => response.json())
+    .then(data => {
+      cartData.lists = data
+    })
+})</pre>
       <div>单个商品的增加和减少</div>
       <p>.分别为增、减按钮绑定事件：增加数量 inc(item) 和减少数量 dec(item)，并使用当前商品为形参，修改其数量 number</p>
       <p>.注意越界检测</p>
-      <img src="./imgs/watch1.png" alt="">
-      <p>.可以使用内联事件方式</p>
-      <pre>&lt;button class="btn dec" @click="item.quantity--"&gt;-&lt;/button&gt;</pre>
-      <p>.使用函数方式 - 这里使用库存限制*</p>
       <pre>
 const inc = (item) => {
-  if (item.quantity &lt; item.stock) {
-    item.quantity++
+  if (item.number &lt; item.stock) {
+    item.number++
   }
 }
 
 const dec = (item) => {
-  if (item.quantity > 1) {
-    item.quantity--
+  if (item.number > 1) {
+    item.number--
   }
 }</pre>
-      <div>结算侦听</div>
-      <p>.选择列表商品的数量的变化，更新总价；使用函数返回方式</p>
-      <p>.深度侦听：数量是对象的一个属性</p>
-      <p>.立即侦听：页面渲染完毕也应该结算异常</p>
+      <!-- <div>全选</div>
+      <p>.为全选按钮双向绑定选中数据 selectedAll，并增加改变 change 事件 selAll</p>
+      <p>.状态改变后，为真，则为全选，选中商品列表和商品列表一致；为假，则取消全选，选中商品列表为空</p>
+      <pre>&lt;input type="checkbox" v-model="cartData.selectedAll" @change="selAll"gt;</pre>
       <pre>
-watch(selectedGoods, (newVal) => {
-  sum.value = selectedGoods.value.reduce((total, item) => total + item.price * item.quantity, 0)
-}, { deep: true, immediate: true })</pre>
-      <p>.当选中商品的种类数量等于待选商品种类的数量时，应为全选；修改上述逻辑</p>
-      <pre>
-watch(selectedGoods, () => {
-  // select all
-  if (selectedGoods.value.length === cartStore.cart.length) {
-    isSelectAll.value = true
+const selAll = () => {
+  if (cartData.selectedAll) {
+    cartData.selectedLists = cartData.lists
   } else {
-    isSelectAll.value = false
+    cartData.selectedLists = []
   }
-  // count sum
-  sum.value = selectedGoods.value.reduce((total, item) => total + item.price * item.quantity, 0)
-}, { deep: true, immediate: true })      </pre>
-      <p>.引入 flag 辅助判断；默认是真；初值也可以为假，后面的逻辑判断相应调整即可</p>
+}</pre> -->
+      <!-- <div>单个商品选择与取消</div>
+      <p>.为单个商品对应的 checkbox 绑定每一项数据，并增加改变 change 事件 selItem，处理全选的真与假</p>
+      <p>.单个商品取消选择时，全选为假</p>
+      <p>.商品列表和选中商品列表数量相等，为全选；否则取消全选；额外判断条件，如果商品列表为空，则也应该取消全选</p>
+      <pre>&lt;input type="checkbox" :value="item" v-model="cartData.selectedLists" @change="selItem"&gt;</pre>
+      <pre>
+const selItem = () => {
+  if (cartData.selectedLists.length == cartData.lists.length && cartData.lists.length) {
+    cartData.selectedAll = true
+  } else {
+    cartData.selectedAll = false
+  }
+}</pre> -->
+      <!-- <div>结算</div>
+      <p>.为总价绑定计算属性 getTotal</p>
+      <p>.遍历选中列表，依次将商品单价和商品数量相乘，并累加，得到总价</p>
+      <pre>&lt;div class="total"&gt;总价{{ getTotal }}&lt;/div&gt;</pre>
+      <pre>
+const getTotal = computed(() => {
+  let sum = 0
+
+  //for - 传统循环
+  for(let i=0; i &lt;cartData.selectedLists.length; i++){
+    sum += cartData.selectedLists[i].number * cartData.selectedLists[i].price
+  }
+
+  return sum
+})</pre> -->
       <div>全选侦听 - selectedAll</div>
       <p>.侦听购物车数据 cartData 中的全选 selectedAll；使用函数返回方式</p>
       <p>.只有 flag 为真时，才真正置空购物车数据；利用 flag 保留选中的部分数据</p>
@@ -139,6 +201,24 @@ watch(() => cartData.selectedLists, (newVal) => {
         <figcaption>部分选中</figcaption>
       </figure>
     </div>
+    <!-- <div>使用<a href="../web/js/array2.html" class="link">数组 Array - 迭代函数</a>优化逻辑</div>
+        <p>.使用 Array.reduce - 推荐</p>
+        <pre>
+const getTotal = computed(() => {
+  return cartData.selectedLists.reduce((sum, item) => {
+    return sum + item.quantity * item.price
+  }, 0).toFixed(2)
+})</pre>
+        <p>.使用 Array.forEach</p>
+        <pre>
+const getTotal = computed(() => {
+  let sum = 0
+  cartData.selectedLists.forEach(item => {
+    sum += item.quantity * item.price
+  })
+  return sum.toFixed(2)
+})</pre>
+      </dd> -->
     <div class="title">拓展与思考</div>
     <div class="cont">
       <div>使用普通方法实现全选、部分选择和结算</div>
