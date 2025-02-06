@@ -20,6 +20,7 @@
     <dd>
       <div><a href="https://swiperjs.com/">Swiper.js</a> 提供多种应用方式，如 Swiper Vue、Swiper React 和 Swiper Element</div>
       <div>Swiper Vue 后期可能被移除；建议使用 <a href="https://swiperjs.com/element">Swiper Element</a></div>
+      <div>更多使用请参考 <a href="../web/framework/swiper.html">Web - Swiper</a></div>
     </dd>
     <dt>安装 Installation </dt>
     <dd>
@@ -67,6 +68,10 @@ register();</pre>
           <td>鼠标滚轮控制正向|反向切换；单独指定mousewheel无效</td>
         </tr>
         <tr>
+          <td>grabCursor</td>
+          <td>显示小手鼠标</td>
+        </tr>
+        <tr>
           <td>keyboard-enabled="true"</td>
           <td>水平轮播使用左右方向键控制切换；垂直轮播使用上下方向键控制切换</td>
         </tr>
@@ -106,10 +111,55 @@ register();</pre>
     <dt>样式 Style</dt>
     <dd>
       <div>使用伪类选择器 :part 实现</div>
+      <div>仅适合 Swiper 元素和其子元素：container、button-prev、button-next、pagination、bullet、bullet-active、scrollbar</div>
       <pre>
 swiper-container::part(bullet-active) {
   background-color: #fff;
 }</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 轮播图 Swiper.vue</dd>
+    <dd>
+      <div>除了基本框架外，使用图片展示内容</div>
+      <div>为图片指定大小，撑开轮播图</div>
+      <div>通过调整定位 position，使分页器 pagination 定位到右侧</div>
+      <div>利用弹性盒子 flex，使指示器 bullet 水平垂直居中</div>
+      <div>进一步定制指示器 bullet 的静态样式和激活样式；初始化属性使用 initial</div>
+      <pre>
+img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+swiper-container::part(bullet) {
+  width: 6px;
+  height: 15px;
+  border-radius: var(--p-m-g);
+  background-color: #fff;
+  opacity: 0.4;
+  transition: 0.4s;
+}
+
+swiper-container::part(bullet-active) {
+  width: 6px;
+  height: 15px;
+  border-radius: var(--p-m-g);
+  background-color: #fff;
+}
+
+swiper-container::part(pagination) {
+  width: var(--p-m-g);
+  height: 100%;
+  top: 0;
+  right: var(--p-m-g);
+  left: initial;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--p-m-g);
+}</pre>
+      <img src="./imgs/swiper0.png" alt="">
     </dd>
     <dt>事件 Events</dt>
     <dd>
