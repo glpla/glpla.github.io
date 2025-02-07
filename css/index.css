@@ -3,8 +3,10 @@
 :root {
   --bg-color: #fff;
   --txt-color: #000;
-  --main-color: #619fd4;
+  /* --main-color: #619fd4; */
+  --main-color: #d10052;
   --active-color: #ff0;
+  --second-color: #ffccd2;
   --box-shadow: #619fd466;
   --border-r: 1rem;
   --p-m-g: 1rem;
@@ -74,19 +76,20 @@ img {
   width: 100%;
   max-width: 1190px;
   margin: 0 auto;
-  padding: var(--p-m-g);
 }
 
 header {
   position: relative;
-  height: 650px;
+  aspect-ratio: 16/9;
+  /* height: 650px; */
   /* background-image: url(../web/imgs/guilin.jpg); */
   /* background-image: url(https://cdn.pixabay.com/photo/2016/10/04/12/27/beijing-1714195_1280.jpg); */
   /* background-image: url(https://data.travelchinaguide.com/package/image/index/li-river_092559.jpg); */
   /* background-image: url(https://cdn.pixabay.com/photo/2022/04/26/07/38/sunset-7157645_1280.jpg); */
   /* background-image: url(https://5b0988e595225.cdn.sohucs.com/images/20171213/36b990c3ee534c81b0b4233904185ae8.jpeg); */
-  background-image: url(https://images.wallpaperscraft.com/image/single/trees_snow_spruces_1328349_1280x720.jpg),
-    linear-gradient(#fff, var(--main-color));
+  /* background-image: url(https://images.wallpaperscraft.com/image/single/trees_snow_spruces_1328349_1280x720.jpg),
+    linear-gradient(#fff, var(--main-color)); */
+  background-image: url(../imgs/spring.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -103,23 +106,23 @@ header {
 
 .svg-txt {
   display: block;
-  width: 140px;
+  width: 120px;
   height: 60px;
   margin: 0 auto;
 }
 
 .svg-txt .title {
   font-size: 2.8rem;
-  fill: none;
+  fill: var(--main-color);
   stroke: #fff;
   stroke-width: 1;
   text-shadow:
+    0 0 2px #fff,
     0 0 4px #fff,
-    0 0 8px #fff,
-    0 0 12px #fff;
+    0 0 10px #fff;
   stroke-dasharray: 10 1000;
   stroke-dashoffset: 10;
-  animation: draw 10s ease-in-out infinite;
+  /* animation: draw 10s ease-in-out infinite; */
 }
 
 @keyframes draw {
@@ -178,16 +181,18 @@ header {
   filter: drop-shadow(0 0 0.4rem #fff);
 }
 
+/* 
 .theme-icon {
   font-size: 2.6rem;
-  color: var(--active-color);
+  color: #fff;
   cursor: pointer;
-}
+} */
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: calc(2*var(--p-m-g));
+  padding: var(--p-m-g);
 }
 
 .update {
@@ -221,16 +226,17 @@ header {
   align-items: center;
   column-gap: var(--p-m-g);
   border-radius: var(--border-r);
-  border: 1px solid #eee;
+  border: 1px solid var(--second-color);
   aspect-ratio: 16/9;
   transition: 0.4s;
   letter-spacing: 2px;
   padding: calc(2*var(--p-m-g));
+  color: var(--second-color);
 }
 
 .nav-item:hover {
   color: var(--main-color);
-  background-image: url(../imgs/snow.gif);
+  /* background-image: url(../imgs/snow.gif); */
 }
 
 footer {
@@ -265,7 +271,7 @@ footer {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  background-color: var(--main-color);
+  background-color: var(--second-color);
   transform-origin: 50% 50% -20px;
   box-shadow: 0 0 1rem rgba(255, 255, 255, 0.4),
     0 0 2rem rgba(255, 255, 255, 0.5),
@@ -319,8 +325,9 @@ footer {
   }
 
   header {
-    height: 100vh;
-    background-image: url(https://images.wallpaperscraft.com/image/single/trees_snow_spruces_1328349_720x1280.jpg);
+    aspect-ratio: 9/16;
+    /* height: 100vh; */
+    /* background-image: url(https://images.wallpaperscraft.com/image/single/trees_snow_spruces_1328349_720x1280.jpg); */
   }
 
   .nav-item {
