@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iconfont</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/footer2025.css">
   <script src="//at.alicdn.com/t/c/font_3859342_gpyhrzeh5u.js"></script>
   <base target="_blank">
   <style>
@@ -167,6 +168,18 @@ li::before {
 }      </pre>
     </dd>
     <dd class="tips">如果已经引入了类的库文件，可以直接使用对应的 Unicode 编码</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 伪元素 & 自定义数据 - 定制列表标记</dd>
+    <dd>
+      <div>项目中引入字体的类文件</div>
+      <div>在结构中指定自定义数据 data-为 Unicode 中的编码；可以不带后面的分号;</div>
+      <pre>&lt;h4 data-icon="&amp;#xe60d;"&gt;Admin&lt;/h4&gt;</pre>
+      <div>在样式中使用</div>
+      <pre>
+h4::before {
+  content: attr(data-icon);
+  font-family: 'iconfont';
+}      </pre>
+    </dd>
   </dl>
   <div class="chap" id="vue">Vue</div>
   <dl>
@@ -217,7 +230,8 @@ li::before {
     </dd>
     <dd class="tips">建议直接复制在线链接的样式内容到样式文件 .wxss</dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>

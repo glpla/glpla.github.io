@@ -11,6 +11,69 @@
     content="大树小站; WEB; HTML5; Vue3; Unity; Network; OA; Java; Linux; Ubuntu; Word; Excel; PPT; Office; only for personal use.">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="./css/index.css">
+  <style>
+    .grid {
+      padding: calc(4*var(--p-m-g)) var(--p-m-g);
+    }
+
+    h4 {
+      color: var(--main-color);
+    }
+
+    h4::before {
+      content: attr(data-icon);
+      padding-right: 4px;
+      font-family: 'iconfont';
+      font-size: 2rem;
+      font-weight: normal;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+    }
+
+    .item:hover {
+      color: var(--main-color);
+    }
+
+    .item::after {
+      content: attr(data-title);
+      text-transform: capitalize;
+      order: 2;
+    }
+
+    .item::before {
+      content: '';
+      flex: 1;
+      height: 3px;
+      background-image: url(./imgs/dot.png);
+      order: 1;
+    }
+
+    .b-btm {
+      border-bottom: 1px solid var(--main-color);
+    }
+
+    .link {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+      padding: calc(4*var(--p-m-g)) var(--p-m-g);
+    }
+
+    nav h4 {
+      color: #000;
+    }
+
+    nav a {
+      display: block;
+    }
+
+    .link a::before {
+      content: '\ecaa';
+      font-family: 'iconfont';
+    }
+  </style>
 </head>
 
 <body>
@@ -30,130 +93,243 @@
       </div>
     </header>
   </div>
-  <div class="w grid">
-    <div class="update">
-      <div><a class="fade-link" target="_blank" href="./utils/index.html">在线资源</a>&nbsp;&nbsp;<a class="fade-link"
-          target="_blank" href="./course/paper.html">论文规范要点</a></div>
-      <div><a target="_blank" href="/utils/file/软件相关实验报告模版（2023版）提交时需另存为PDF文件并重命名20231022.docx" title="实验报告模板 docx"
-          download>实验报告模板</a>&nbsp;&nbsp;<a href="/utils/file/附件5：xx课程实验报告册（模版）.docx" title="实验报告册 docx"
-          download>实验报告册</a></div>
-      <div><a class="fade-link" target="_blank" href="./course/rank.html">积分榜</a>&nbsp;&nbsp;<a target="_blank"
-          href="/utils/file/23软工1班_20230901_张树彬_实验3_表单综合运用.pdf" title="前端基础作业范例 pdf" download>基础范例</a>&nbsp;&nbsp;<a
-          target="_blank" href="/utils/file/22软工1班_20230901_张树彬_实验1_标签页.pdf" title="前端框架作业范例 pdf" download>框架范例</a>
-      </div>
-      <div><a target="_blank" href="/utils/file/附件9-关于印发《广州新华学院本科教学运行管理规定》的通知.pdf"
-          title="单击预览">教学运行管理规定</a>&nbsp;&nbsp;<a target="_blank" href="/utils/file/16-广州新华学院全日制本科学生学籍管理办法.pdf"
-          title="单击预览">学籍管理办法</a>
-      </div>
-      <div><a href="./vue/opening202402.html">Vue</a>&nbsp;&nbsp;<a
-          href="./web/opening202401.html">Web</a>&nbsp;&nbsp;<a href="./minip/opening.html">Mini App</a></div>
-      <div><a class="fade-link" href="./index_cover.html" target="_blank">最美2024</a>&nbsp;&nbsp;<a class="fade-link"
-          href="./index3d.html" target="_blank">3D入口</a>&nbsp;&nbsp;<a class="fade-link" href="./indexold.html"
-          target="_blank">老版入口</a></div>
+  <div class="w grid b-btm">
+    <div>
+      <h4 data-icon="&#xe60d;">Admin</h4>
+      <a class="item" data-title="opening" href="./vue/opening202402.html">开课啦</a>
+      <a class="item" data-title="ranking" href="/course/rank.html">积分榜</a>
+      <a class="item" data-title="report" href="/utils/file/软件相关实验报告模版（2023版）提交时需另存为PDF文件并重命名20231022.docx">实验报告模板</a>
+      <a class="item" data-title="demo" href="/utils/file/22软工1班_20230901_张树彬_实验1_标签页.pdf">框架范例</a>
+      <a class="item" data-title="resource" href="/utils/index.html">在线资源</a>
+      <a class="item" data-title="regulation" href="/utils/file/16-广州新华学院全日制本科学生学籍管理办法.pdf">学籍管理办法</a>
+      <a class="item" data-title="scholar" href="/course/paper.html">论文规范要点</a>
+      <a class="item" data-title="cases" href="/common/index.html">案例欣赏</a>
     </div>
-    <!-- <a class="nav-item fade-link" href="./course/index.html">
-      <span class="iconfont icon-update"></span>
-      <div class="title">Course
-        <br>课程
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./web/index.html">
-      <span class="iconfont icon-HTML-5"></span>
-      <div class="title">Front-End
-        <br>前端
-      </div>
-    </a> -->
-    <a class="nav-item fade-link" href="./vue/index.html">
-      <span class="iconfont icon-vue"></span>
-      <div class="title">Vue.js
-        <br>前端框架
-      </div>
-    </a>
-    <!-- <a class="nav-item fade-link" href="./node/index.html">
-      <span class="iconfont icon-node-dot-js"></span>
-      <div class="title">Node.js
-        <br>前端服务器
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./python/index.html">
-      <span class="iconfont icon-python"></span>
-      <div class="title">Python
-        <br>编程语言
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./minip/index.html">
-      <span class="iconfont icon-weixinxiaochengxu2x"></span>
-      <div class="title">MP
-        <br>微信小程序
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./unity/index.html">
-      <span class="iconfont icon-unity"></span>
-      <div class="title">Unity
-        <br>虚拟现实开发
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./linux/index.html">
-      <span class="iconfont icon-ubuntu"></span>
-      <div class="title">Ubuntu
-        <br>操作系统
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./harmony/index.html">
-      <span class="iconfont icon-huawei"></span>
-      <div class="title">Harmony OS
-        <br>鸿蒙OS
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./pattern/index.html">
-      <span class="iconfont icon-slack"></span>
-      <div class="title">Pattern
-        <br>设计模式
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./network/index.html">
-      <span class="iconfont icon-framework"></span>
-      <div class="title">Network
-        <br>计算机网络
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./office/index.html">
-      <span class="iconfont icon-Office"></span>
-      <div class="title">Office
-        <br>大学计算机
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./dataStruct/index.html">
-      <span class="iconfont icon-applicationgroup"></span>
-      <div class="title">Data Structures
-        <br>数据结构
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./java/index.html">
-      <span class="iconfont icon-java"></span>
-      <div class="title">Java
-        <br>编程语言
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./os/index.html">
-      <span class="iconfont icon-os-icon-OScope"></span>
-      <div class="title">OS
-        <br>操作系统
-      </div>
-    </a> -->
-    <!-- <a class="nav-item fade-link" href="./wsn/index.html">
-      <span class="iconfont icon-ic"></span>
-      <div class="title">WSN
-        <br>无线传感网
-      </div>
-    </a> -->
-    <a class="nav-item fade-link" href="./common/index.html">
-      <span class="iconfont icon-chengguozhuanhuafuwu"></span>
-      <div class="title">Case
-        <br>案例欣赏
-      </div>
-    </a>
+
+    <div>
+      <h4 data-icon="&#xe60d;">Overview</h4>
+      <a class="item" data-title="API" href="https://cn.vuejs.org/api/">应用程序接口</a>
+      <a class="item" data-title="SFC" href="https://cn.vuejs.org/api/sfc-spec.html">单文件组件</a>
+      <a class="item" data-title="Router" href="https://router.vuejs.org/zh/">路由器</a>
+      <a class="item" data-title="Pinia" href="https://pinia.vuejs.org/zh/">状态管理</a>
+    </div>
+
+    <div>
+      <h4 data-icon="&#xe60d;">IDE</h4>
+      <a class="item" data-title="Vue.js" href="https://cn.vuejs.org/guide/introduction.html">Vue</a>
+      <a class="item" data-title="Vite" href="https://cn.vitejs.dev/">Vite</a>
+      <a class="item" data-title="Node.js" href="./node/index.html">Node</a>
+      <a class="item" data-title="Vs Code" href="./web/vscode.html">编辑器</a>
+      <a class="item" data-title="Chrome" href="./web/chrome.html">浏览器</a>
+      <a class="item" data-title="Git" href="./web/git.html">代码管理</a>
+      <a class="item" data-title="Github" href="./web/github.html">代码仓库</a>
+    </div>
+
+    <div>
+      <h4 data-icon="&#xe60d;">Request</h4>
+      <a class="item" data-title="server" href="./node/static.html">静态资源服务器</a>
+      <a class="item" data-title="fetch" href="./node/fetch.html">网络请求</a>
+      <a class="item" data-title="axios" href="./node/axios.html">网络请求</a>
+    </div>
+
+    <div>
+      <h4 data-icon="&#xe60d;">Basic</h4>
+      <a class="item" data-title="project" href="./vue/project.html">项目</a>
+      <a class="item" data-title="SFC" href="./vue/sfc.html">单文件组件</a>
+      <a class="item" data-title="component" href="./vue/component.html">组件</a>
+      <a class="item" data-title="Template Syntax" href="./vue/template_syntax.html">模板语法</a>
+      <a class="item" data-title="image" href="./vue/img.html">图片</a>
+      <a class="item" data-title="favicon" href="./web/favicon.html">网站图标</a>
+    </div>
+
+    <div>
+      <h4 data-icon="&#xe60d;">Style</h4>
+      <a class="item" data-title="CSS" href="./vue/css.html">样式表</a>
+      <a class="item" data-title="class" href="./vue/class.html">类</a>
+      <a class="item" data-title="style" href="./vue/style.html">样式</a>
+    </div>
+
+    <div>
+      <h4 data-icon="&#xe60d;">Essentials</h4>
+      <a class="item" data-title="Reactivity" href="./vue/reactivity.html">响应式数据</a>
+      <a class="item" data-title="ref" href="./vue/ref.html">模板引用</a>
+      <a class="item" data-title="computed" href="./vue/computed.html">计算属性</a>
+      <a class="item" data-title="v-if" href="./vue/vif.html">条件渲染</a>
+      <a class="item" data-title="v-for" href="./vue/vfor.html">列表渲染</a>
+    </div>
+
+    <div>
+      <h4 data-icon="&#xe60d;">Advance</h4>
+      <a class="item" data-title="events" href="./vue/events.html">事件</a>
+      <a class="item" data-title="v-model" href="./vue/vmodel.html">表单双向绑定</a>
+      <a class="item" data-title="lifecycle " href="./vue/lifecycle.html">生命周期函数</a>
+      <a class="item" data-title="watch" href="./vue/watch.html">侦听器</a>
+      <a class="item" data-title="watch effect" href="./vue/watch_effect.html">自动侦听器</a>
+    </div>
+
+    <div>
+      <h4 data-icon="&#xe60d;">Components</h4>
+      <a class="item" data-title="defineProps()" href="./vue/component_props.html">父传子</a>
+      <a class="item" data-title="defineEmits()" href="./vue/component_emits.html">子传父</a>
+      <a class="item" data-title="defineModel()" href="./vue/component_model.html">双向绑定</a>
+      <a class="item" data-title="provide & Inject" href="./vue/component_provide.html">跨级传</a>
+      <a class="item" data-title="slots" href="./vue/component_slots.html">插槽</a>
+      <a class="item" data-title="dynamic" href="./vue/component_dynamic.html">动态组件</a>
+      <a class="item" data-title="async" href="./vue/component_async.html">异步组件</a>
+      <a class="item" data-title="style" href="./vue/component_style.html">组件样式</a>
+    </div>
+
+    <div>
+      <h4 data-icon="&#xe60d;">Route & Router</h4>
+      <a class="item" data-title="overview" href="./vue/route.html">概述</a>
+      <a class="item" data-title="route classification" href="./vue/route_adv.html">路由分类</a>
+      <a class="item" data-title="route params" href="./vue/route_params.html">动态路由</a>
+      <a class="item" data-title="route query" href="./vue/route_query.html">查询路由</a>
+      <a class="item" data-title="route style" href="./vue/route_style.html">路由样式</a>
+      <a class="item" data-title="route guards" href="./vue/route_guard.html">导航守卫</a>
+      <a class="item" data-title="router" href="./vue/router.html">编程路由</a>
+    </div>
+
+    <div>
+      <h4 data-icon="&#xe60d;">State</h4>
+      <a class="item" data-title="pinia" href="./vue/pinia.html">基本应用</a>
+      <a class="item" data-title="pinia" href="./vue/pinia-oper.html">状态管理</a>
+      <a class="item" data-title="persistedstate" href="./vue/pinia-persist.html">持久化存储</a>
+    </div>
+
+    <div>
+      <h4 data-icon="&#xe60d;">Built-in Components</h4>
+      <a class="item" data-title="KeepAlive" href="./vue/component_keeplive.html">缓存组件</a>
+      <a class="item" data-title="Transition" href="./vue/component_transition.html">过渡组件</a>
+      <a class="item" data-title="TransitionGroup" href="./vue/component_transions.html">过渡组件组</a>
+    </div>
   </div>
+
+  <div class="w grid b-btm">
+    <!-- <div>
+      <h4>demo</h4>
+      <div>
+        <a title="Copyright global static" href="">版权组件</a>
+        <a title="Swiper global static" href="">轮播组件</a>
+      </div>
+      <div>
+        <a title="Details" href="">产品详情页</a>
+      </div>
+      <div>
+        <a title="Goods" href="">产品列表页</a>
+      </div>
+      <div>
+        <a title="Message" href="">留言板</a>
+        <a title="Register" href="">注册</a>
+        <a title="Notification" href="">使用须知</a>
+      </div>
+      <div>
+        <a title="Product props" href="">商品组件</a>
+        <a title="Recommend props model radio" href="">购物车组件</a>
+      </div>
+      <div>
+        <a title="Dessert props model checkbox" href="">甜点组件</a>
+        <a title="Recommend props model radio" href="">商品推荐组件</a>
+        <a title="Recommend props model radio" href="">权益组件</a>
+      </div>
+      <div>
+        <a title="Route" href="">路由设计</a>
+      </div>
+      <div>
+        <a title="goods" href="">商品仓库</a>
+        <a title="cart" href="">购物车仓库</a>
+        <a title="order" href="">订单仓库</a>
+      </div>
+    </div> -->
+
+    <div>
+      <h4 data-icon="&#xecd3;">Drill</h4>
+      <a class="item" data-title="IDE" href="./vue/drill_ide.html" title="IDE">集成开发环境</a>
+      <a class="item" data-title="reactivity" href="./vue/drill_reactivity.html" title="Reactivity Product">响应式综合运用</a>
+      <a class="item" data-title="event" href="./vue/drill_event.html" title="Event Message">事件综合运用</a>
+      <a class="item" data-title="Watch" href="./vue/drill_watch.html" title="Watch Cart">侦听综合运用</a>
+      <a class="item" data-title="Components" href="./vue/drill_component.html" title="Components Tabcard">组件综合运用</a>
+      <a class="item" data-title="router" href="./vue/drill_router.html" title="Router">路由综合运用</a>
+      <a class="item" data-title="Pinia" href="./vue/drill_pinia.html" title="Pinia Order">状态综合运用</a>
+      <a class="item" data-title="Hamburger" href="./vue/drill_ham.html" title="Hamburger">汉堡菜单*</a>
+      <a class="item" data-title="modal" href="./vue/drill_modal.html" title="Modal">模态框*</a>
+      <a class="item" data-title="json-server" href="./vue/drill_jsonserver.html" title="json-server">JSON服务器*</a>
+    </div>
+
+    <div>
+      <h4 data-icon="&#xecd3;">Quiz</h4>
+      <a class="item" data-title="Message" href="./vue/drill_middle.html">留言板</a>
+      <a class="item" data-title="Server" href="./vue/pro_server.html">服务器</a>
+      <a class="item" data-title="Lukin Coffee" href="./vue/pro/dist/index.html">2025</a>
+      <a class="item" data-title="Site" href="./vue/pro/distold/index.html">2024 adv</a>
+      <a class="item" data-title="Site" href="./vue/pro/dist2024/index.html">2024</a>
+    </div>
+  </div>
+
+  <div class="w link">
+    <nav>
+      <h4>Reading</h4>
+      <a class="ellipsis" href="https://www.fadocodecamp.com/posts/javascript-basics-tutorial">JavaScript Basics
+        Tutorial</a>
+      <a class="ellipsis" href="https://www.fadocodecamp.com/posts/vue-3-cheat-sheet">Mastering the Composition API</a>
+    </nav>
+    <nav>
+      <h4>Third party</h4>
+      <a href="./vue/scss.html">SCSS</a>
+      <a href="./web/framework/iconfont.html">Iconfont</a>
+      <a href="./vue/swiper.html">Swiper</a>
+      <a href="./vue/elementui.html">Element UI</a>
+      <a href="./vue/echarts.html">ECharts</a>
+      <a href="./vue/lbs.html">Tencent LBS</a>
+      <a href="https://github.com/ai/nanoid/tree/main">Nano ID</a>
+      <a href="https://www.npmjs.com/package/md5js">MD5</a>
+      <a href="https://www.wangeditor.com/">WangEditor</a>
+      <a href="https://github.com/Maronato/vue-toastification">Vue Toastification</a>
+    </nav>
+    <nav>
+      <h4>Data Server</h4>
+      <a href="https://github.com/typicode/json-server">Json Server</a>
+      <a href="https://jsonplaceholder.typicode.com/">Json Placeholder</a>
+      <a href="https://randomuser.me/">Random User</a>
+      <a href="https://fakerjs.dev">Faker.js</a>
+      <a href="http://mockjs.com/">Mock.js</a>
+    </nav>
+
+    <nav>
+      <h4>Vue School</h4>
+      <a href="https://vueschool.io/">Vue School</a>
+      <a href="https://vueschool.io/courses/visual-studio-code-for-vue-js-developers">Visual studio code</a>
+      <a href="https://vueschool.io/courses/vue-3-single-file-components">Single File Components</a>
+      <a href="https://vueschool.io/courses/vue-js-fundamentals-with-the-composition-api">Fundamentals</a>
+      <a href="https://vueschool.io/courses/vue-component-fundamentals-with-the-composition-api">Component</a>
+      <a href="https://vueschool.io/courses/vue-router-4-for-everyone">Router</a>
+      <a href="https://vueschool.io/courses/pinia-the-enjoyable-vue-store">Pinia</a>
+      <a class="ellipsis" href="https://vueschool.io/courses/vue-js-transitions-and-animations">Transitions and
+        animations</a>
+      <a href="https://vueschool.io/courses/robust-vue-js-forms-with-formkit">Formkit</a>
+      <a href="https://vueschool.io/courses/charts-for-vue-js-3">Charts</a>
+      <a href="https://vueschool.io/courses/enhanced-routing-with-unplugin-vue-router">Unplugin vue router</a>
+      <a href="https://vueschool.io/courses/generating-fake-data-with-faker-js">Faker.js</a>
+    </nav>
+
+    <nav>
+      <h4>Course</h4>
+      <a href="./web/index.html">Web</a>
+      <a href="./unity/index.html">Unity</a>
+      <a href="./dataStruct/index.html">DataStruct</a>
+      <a href="./wsn/index.html">WSN</a>
+      <a href="./harmony/index.html">Harmony</a>
+      <a href="./python/index.html">Python</a>
+      <a href="./minip/index.html">Mini Programe</a>
+      <a href="./java/index.html">Java</a>
+      <a href="./linux/index.html">Linux</a>
+      <a href="./network/index.html">Network</a>
+      <a href="./pattern/index.html">Pattern</a>
+      <a href="./office/index.html">Office</a>
+      <a href="./os/index.html">Operating System</a>
+    </nav>
+  </div>
+
   <footer>
     <div class="cube">
       <div class="side s0"></div>
@@ -170,31 +346,8 @@
   <script type="module">
 
     import { dot } from '../utils/custom/dot.js'
-    const body = document.body
-
-    // theme
-    // const themeBtn = document.querySelector('#theme-btn')
-    const html = document.documentElement
-    let isDarkMode = localStorage.getItem('dark-mode') === 'true'
-    if (isDarkMode) {
-      html.classList.add('dark-mode')
-      themeBtn.classList.remove('icon-moon_stars_fill')
-      themeBtn.classList.add('icon-sun_min_fill')
-    }
-    // themeBtn.addEventListener('click', (e) => {
-    //   html.classList.toggle('dark-mode')
-    //   if (themeBtn.classList.contains('icon-moon_stars_fill')) {
-    //     themeBtn.classList.remove('icon-moon_stars_fill')
-    //     themeBtn.classList.add('icon-sun_min_fill')
-    //     localStorage.setItem('dark-mode', 'true')
-    //   } else {
-    //     themeBtn.classList.remove('icon-sun_min_fill')
-    //     themeBtn.classList.add('icon-moon_stars_fill')
-    //     localStorage.setItem('dark-mode', 'false')
-    //   }
-    // })
-
     // bgm
+    const body = document.body
     const avatar = body.querySelector('.avatar');
     const audio = new Audio('/utils/music/华语群星 - 当那一天来临.ogg');
     audio.volume = 0.5;
