@@ -41,7 +41,7 @@ function watch&lt;T&gt;(
       <div>侦听数据类型 - 4种</div>
       <div>. 一个 ref 对象 (包括计算属性)</div>
       <div>. 一个 reactive 对象</div>
-      <div>. 一个 getter 函数：一个有返回的函数</div>
+      <div>. 一个 getter 函数：一个有返回的函数，特别适合侦听对象中的某个字段数据</div>
       <div>. 多个响应式数据源组成的数组</div>
     </dd>
     <dd class="tips">实际开发中，更多是使用函数 Getter 来侦听数据的变化</dd>
@@ -63,8 +63,8 @@ function watch&lt;T&gt;(
       <div>2 深度侦听 deep</div>
       <div>默认情况下，只侦听简单类型响应式对象，不能侦听对象的属性或子对象</div>
       <div>侦听复合对象内部属性时，需要开启深度侦听：设置 deep 为true</div>
+      <div>深度侦听需要遍历被侦听对象中的所有嵌套的属性；当用于大型数据结构时，开销很大，请只在必要时才使用它</div>
       <div>侦听 reactive 对象时，默认开启 deep，且无法关闭</div>
-      <div>深度侦听需要遍历被侦听对象中的所有嵌套的属性，当用于大型数据结构时，开销很大。因此请只在必要时才使用它，并且要留意性能</div>
     </dd>
     <dt>停止侦听</dt>
     <dd>
@@ -95,7 +95,7 @@ watch(num, (newv, oldv) => {
     </dd>
     <dt>多个简单数据</dt>
     <dd>
-      <div><span class="warn">任何</span>一个对象发生变化都会被监听到；是或的关系，不是与的关系</div>
+      <div><span class="warn">任何</span>一个数据发生变化都会被监听到；是或的关系，不是与的关系</div>
       <div>以数组的形式 <span class="warn">分别</span> 表示多个数据源：1个数据源变成多个数据源</div>
       <div>以数组的形式 <span class="warn">分别</span> 显示新值和旧值：1个新值变成多个新值；一个旧值变成多个旧值</div>
       <div>[<span class="iconfont icon-keyboard"></span>] 信用卡年费免除 - 消费达到一定金额(10000)或消费多少次(6)，免除当年年费</div>
@@ -114,9 +114,10 @@ watch([times, sum], ([new1, new2], [old1, old2]) => {
     </dd>
     <dt>复合数据</dt>
     <dd>
-      <div>侦听复合数据，需开启深度侦听：设置 deep为 true</div>
-      <div>任一属性变化都会被 Vue 捕获；但是变化前后都是同一个对象；所以 newv 和 oldv 是一样的，其内部的属性也是一样的</div>
-      <div>结论：仅仅知道数据属性发生变化，无法获知前后变化情况</div>
+      <div>直接侦听复合数据，某一属性变化并 <span class="warn">不会触发</span> 监听 - watch 只会监听 user 引用的变化，而不会监听 user 对象内部属性的变化</div>
+      <div>改进1：开启深度侦听：设置 deep为 true</div>
+      <!-- <div>但是变化前后都是同一个对象；所以 newv 和 oldv 是一样的，其内部的属性会变化</div> -->
+      <!-- <div>仅仅知道数据属性发生变化，无法获知前后变化情况</div> -->
       <pre>
 let user = ref({
     id: 100,
@@ -130,39 +131,34 @@ let user = ref({
 watch(user, (newv, oldv) => {
     console.log('user is watched', newv.age, oldv.age);
 }, { deep: true })</pre>
-      <div>更多的是侦听复合数据某个指定属性</div>
-      <div>利用 <span class="warn">函数</span> 获取侦听属性 - getter 函数</div>
-      <div>仅仅当该属性变化时才触发回调</div>
-      <div>age 变化时，触发侦听；code 变化时，不触发</div>
+      <div>改进2：利用 <span class="warn">函数</span> 获取侦听属性 - getter 函数，仅仅当该属性变化时才触发监听</div>
+      <div>id 变化时，触发侦听；其它属性变化时，不触发</div>
+      <div>不要遗漏 value</div>
       <pre>
-watch(() => user.value.age, (n, o) => {
-    console.log(o, n);
+watch(() => user.value.id, (newv, oldv) => {
+  console.log('user id is watched', newv, oldv);
 })</pre>
-    </dd>
-    <dd class="tips">
-      <div>官文没有使用 value！！！可以不使用</div>
-      <div>对于响应式数据，无须使用 return</div>
-      <div>无需开启 deep</div>
     </dd>
   </dl>
   <div class="chap">reactive</div>
   <dl>
-    <dt>属性变化</dt>
     <dd>
+      <div>侦听 reactive 对象时，默认开启 deep，且无法关闭</div>
       <div>侦听的是对象某个属性的变化；当某个属性变化时，会被 Vue 捕获</div>
       <div>新值旧值是 reactive 对象，变化前后都是同一个对象；所以 newv 和 oldv 是一样的，其内部的属性也是一样的</div>
       <div>体会对象的引用特性</div>
       <div>结论：可以捕获到数据属性变化，但是无法查看属性前后的变化</div>
       <pre>
 let user = reactive({
-    id: 100,
-    name: 'glpla',
-    age: 18,
-    addr: {
-        city: 'cq',
-        code: '541000'
-    }
-})    
+  id: 100,
+  name: 'glpla',
+  age: 18,
+  addr: {
+    city: 'cq',
+    code: '541000'
+  }
+})</pre>
+      <pre>
 watch(user, (newv, oldv) => {
     console.log('user is watched', newv, oldv);
     console.log('user is watched', newv.age, oldv.age);
@@ -171,14 +167,13 @@ const incAge = () => {
     user.age++
 }</pre>
     </dd>
-    <dt>捕获属性前后变化</dt>
+    <dt>单个属性变化</dt>
     <dd>
       <div>利用 <span class="warn">函数</span> 获取侦听的属性 - 简单属性</div>
       <pre>
-watch(() => user.age, (newv, oldv) => {
-    console.log(oldv, newv);
-})
-</pre>
+watch(() => user.id, (newv, oldv) => {
+  console.log('user id is watched', newv, oldv);
+})</pre>
       <div>利用 <span class="warn">函数</span> 获取侦听的属性 - 复合属性</div>
       <pre>
 watch(() => user.addr.code, (n, o) => {
@@ -199,7 +194,7 @@ watch([() => user.age, () => user.addr.code], ([n0, n1], [o0, o1]) => {
     <dd>
       <div>watch 常用于触发异步操作，比如根据用户输入去发起 API 请求获取数据</div>
       <div>可以侦听一个或多个响应式数据</div>
-      <div>可以使用 getter 函数侦听响应式数据的属性</div>
+      <div>可以使用 getter 函数侦听响应式数据的特定属性</div>
     </dd>
     <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 分析下面代码的功能</dd>

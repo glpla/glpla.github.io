@@ -40,18 +40,26 @@
     <div class="title">参考效果和参考代码</div>
     <div class="cont">
       <div>静态页面设计与开发</div>
-      <img src="./imgs/watch0.png" alt="">
       <div>准备数据</div>
       <p>.仓库数据 cartStore，其中 cart 是购物车数据；数组</p>
       <p>.选中数据 selectedGoods；数组</p>
-      <p>.是否全选 isSelectAll，布尔</p>
-      <p>.商品总数 total</p>
+      <p>.是否全选 isSelectAll，布尔；默认是真，全选</p>
+      <p>.商品价格总数 sum</p>
+      <p>.商品数量总数 count</p>
+      <pre>
+const cartStore = useCartStore()
+const selectedGoods = ref([...cartStore.cart])
+const isSelectAll = ref(true)
+const sum = ref(0)
+const count = ref(0)
+let flag = true</pre>
       <div>加载仓库数据</div>
       <p>.使用 fetch 或 axios</p>
+      <p>.非必要</p>
+      <div>渲染数据</div>
       <div>单个商品的增加和减少</div>
       <p>.分别为增、减按钮绑定事件：增加数量 inc(item) 和减少数量 dec(item)，并使用当前商品为形参，修改其数量 number</p>
       <p>.注意越界检测</p>
-      <img src="./imgs/watch1.png" alt="">
       <p>.可以使用内联事件方式</p>
       <pre>&lt;button class="btn dec" @click="item.quantity--"&gt;-&lt;/button&gt;</pre>
       <p>.使用函数方式 - 这里使用库存限制*</p>
@@ -112,31 +120,21 @@ watch(() => cartData.selectedLists, (newVal) => {
     flag = false
   }
 })</pre>
-      <div>结算侦听</div>
-      <p>.选择列表商品的数量的变化，更新总价；使用函数返回方式</p>
-      <p>.深度侦听：数量是对象的一个属性</p>
-      <p>.立即侦听：页面渲染完毕也应该结算异常</p>
-      <pre>
-watch(() => cartData.selectedLists, (newVal) => {
-  if (newVal.length == cartData.lists.length && cartData.lists.length) {
-    cartData.selectedAll = true
-    flag = true
-  } else {
-    cartData.selectedAll = false
-    flag = false
-  }
-  sum.value = cartData.selectedLists.reduce((sum, item) => {
-    return sum + item.quantity * item.price
-  }, 0).toFixed(2)
-}, { deep: true, immediate: true })</pre>
-      <div>更多效果 - 其它设计自行完成</div>
       <figure>
-        <img src="./imgs/cart1.png" alt="">
-        <figcaption>全选</figcaption>
+        <img src="./imgs/watch0.png" alt="">
+        <figcaption>购物车静态页面</figcaption>
       </figure>
       <figure>
-        <img src="./imgs/cart2.png" alt="">
-        <figcaption>部分选中</figcaption>
+        <img src="./imgs/watch1.png" alt="">
+        <figcaption>购物车侦听1 - 自动全选并结算</figcaption>
+      </figure>
+      <figure>
+        <img src="./imgs/watch2.png" alt="">
+        <figcaption>购物车侦听2 - 全选、增加商品数量</figcaption>
+      </figure>
+      <figure>
+        <img src="./imgs/watch3.png" alt="">
+        <figcaption>购物车侦听3 - 部分选择</figcaption>
       </figure>
     </div>
     <div class="title">拓展与思考</div>
