@@ -35,12 +35,12 @@ function watchEffect(
       <div>更多信息，请访问 <a href="https://cn.vuejs.org/api/reactivity-core.html#watcheffect">watchEffect()</a>
       </div>
       <div class="tips">
+        <div>watchEffect：会立即执行传入的函数，并自动追踪其中的所有响应式依赖。当这些依赖发生变化时，它会重新运行该函数</div>
+        <div>watch：需要显式指定要监听的响应式数据源（如 ref 或 reactive 对象），并且只在这些数据源变化时触发回调</div>
+        <div>watchEffect 也称自动侦听器，等同于使用了立即配置项 immediate；执行1-N次</div>
         <div>watch 仅在侦听的数据源确实改变时才会触发回调；执行0-N次</div>
-        <div>watchEffect 会立即执行回调函数，也称自动侦听器，等同于使用了立即配置项 immediate；执行1-N次</div>
-        <div>watch 必须显式的指定某个侦听的数据源|变量</div>
-        <div>watchEffect 会自动侦听数据源|变量</div>
+        <div>watchEffect 更有效，只跟踪回调中被使用到的属性，而不是递归地跟踪所有的属性；但是不能获取旧值</div>
         <div>watch 控制更为精细；旧值、新值、deep、immediate</div>
-        <div>watchEffect 更有效，只跟踪回调中被使用到的属性，而不是递归地跟踪所有的属性；但是不能获取旧值、</div>
       </div>
     </dd>
     <dd>
@@ -54,6 +54,29 @@ watchEffect((onCleanup) => {
     })
 })</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 下拉菜单 - 副作用管理</dd>
+    <dd>
+      <div>使用下拉列表的双向绑定触发自动加载数据</div>
+      <div>应用1：门店/地址切换</div>
+      <div>应用2：加载不同类别的商品</div>
+      <pre>
+&lt;select v-model="selectedCategory"&gt;
+  &lt;option value="electronics"&gt;电子产品&lt;/option&gt;
+  &lt;option value="clothing"&gt;服装&lt;/option&gt;
+  &lt;option value="books"&gt;书籍&lt;/option&gt;
+&lt;/select&gt;</pre>
+      <pre>
+watchEffect(async () => {
+  try {
+    const response = await axios.get(`/api/items?category=${selectedCategory.value}`)
+    items.value = response.data
+  } catch (error) {
+    console.error(error)
+  }
+})</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 使用自动侦听改写 <a href="../course/rank.html">积分榜</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 使用自动侦听改写 <a href="./component_dynamic.html">动态组件</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 使用 watchEffect 自动侦听多个数据</dd>
     <dd>
       <div>ref 对象 - 自动侦听 name 和 age</div>

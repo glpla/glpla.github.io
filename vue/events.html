@@ -128,19 +128,21 @@ function doClick() {
 function doClickPara(para) {
     console.log(para);
 }</pre>
-      <div>3. 使用事件对象对应的 target 获取自定义属性 data-</div>
+      <div>3. 仅使用事件对象；如使用事件对象对应的 target 获取自定义属性 data-</div>
+      <div>结构中无须指定</div>
+      <div>逻辑中可以可以使用任何形参代替事件对象；常用的有e、event等</div>
       <pre>&lt;div @click="doClickData" data-id="101"&gt;do something with data-&lt;/div&gt;</pre>
       <pre>
 function doClickData(e) {
     console.log(e.target.dataset);
 }</pre>
-      <div>4. 使用参数且使用自定义属性</div>
+      <div>4. 同时使用事件对象和参数</div>
       <div>结构中需要使用特殊变量 $event 以便和普通参数区分开来</div>
-      <div>JavaScript 中使用任意形参代替特殊变量 $event</div>
+      <div>逻辑中可以使用任意形参代替特殊变量 $event</div>
       <pre>&lt;div @click="doClickParaData('18', $event)" data-id="101"&gt;do something with para and data-&lt;/div&gt;</pre>
       <pre>
-function doClickData(para,e) {
-    console.logpara(para, e.target.dataset);
+function doClickParaData(para,e) {
+    console.log(para, e.target.dataset);
 }</pre>
     </dd>
   </dl>

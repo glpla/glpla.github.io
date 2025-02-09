@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>网络请求 Axios</title>
   <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
   <base target="_blank">
   <style>
     #dog {
@@ -51,7 +52,7 @@ axios.defaults.timeout = 3000</pre>
     </dd>
     <dt>请求方式</dt>
     <dd class="sn">
-      <div>承诺 promise</div>
+      <div>承诺 <a href="./promise.html">promise</a></div>
       <pre>
 axios.get('/user?ID=12345')
   .then((response) => {
@@ -65,7 +66,7 @@ axios.get('/user?ID=12345')
   .finally(() => {
     // 总是会执行
 })</pre>
-      <div>异步等待 async/await</div>
+      <div>异步等待 <a href="./asynawait.html">async/await</a></div>
       <pre>
 async function getUser() {
   try {
@@ -94,29 +95,30 @@ axios.get(baseURL + '/test')
   .finally(() => {
     console.log('done for log');
   })</pre>
-      <div>有参 - 使用 ? 拼接提交；S端使用 req.query 获取</div>
+      <div>有参</div>
+      <p>使用 ? 拼接提交；S端使用 req.query 获取</p>
       <pre>
 axios.get(baseURL + '/test?id=123')
 .then(res => {
   console.log(res.data)
 })</pre>
-    <dd>有参 - 使用路径参数 / 拼接提交；S端使用 req.params 获取</dd>
-    <pre>
+      <div>使用路径参数 / 拼接提交；S端使用 req.params 获取</div>
+      <pre>
 axios.get(baseURL + '/test/123')
 .then(res => {
   console.log(res.data)
 })    </pre>
-    <div>有参 - 使用 params 提交；S端 <span class="warn">仍然</span> 使用 req.query 获取</div>
-    <p>适合传递多个数据，避免拼接错误</p>
-    <pre>
+      <p>使用 params 提交；S端 <span class="warn">仍然</span> 使用 req.query 获取</p>
+      <p>适合传递多个数据，避免拼接错误</p>
+      <pre>
 axios.get(baseURL + '/test', {
   params: { id: 112233 }
 })
 .then(res => {
   console.log(res.data)
 })</pre>
-    <div>S端</div>
-    <pre>
+      <div>S端</div>
+      <pre>
 router.get('/', (req, res) => {
   console.log(req.query);
   res.json({
@@ -227,20 +229,20 @@ router.put('/:id', (req, res) => {
       </figure>
     </dd>
     <dt>请求拦截器</dt>
-    <dd>请求拦截器：在请求发送前，对 <span class="warn">请求参数</span> 进行拦截，修改参数；对 <span class="warn">请求头</span> 进行拦截，修改请求头；对 <span
-        class="warn">请求体</span> 进行拦截，修改请求体</dd>
-    <dd>发出去的请求是经过处理后的请求</dd>
-    <dd>配置请求，如请求头、指定Token用来验证身份</dd>
     <dd>
+      <div>请求拦截器：在请求发送前，对 <span class="warn">请求参数</span> 进行拦截，修改参数；对 <span class="warn">请求头</span> 进行拦截，修改请求头；对 <span
+          class="warn">请求体</span> 进行拦截，修改请求体</div>
+      <div>发出去的请求是经过处理后的请求</div>
+      <div>配置请求，如请求头、指定Token用来验证身份</div>
       <pre>
 axios.interceptors.request.use( (config) => config,  (error) => Promise.reject(error))</pre>
     </dd>
     <dt>响应拦截器</dt>
-    <dd>响应拦截器：在请求返回后，对 <span class="warn">响应数据</span> 进行拦截，修改响应数据；对 <span class="warn">响应头</span> 进行拦截，修改响应头；对 <span
-        class="warn">响应头</span> 进行拦截，修改响应体</dd>
-    <dd>接受到的响应是经过处理后的响应</dd>
-    <dd>过滤响应数据</dd>
     <dd>
+      <div>响应拦截器：在请求返回后，对 <span class="warn">响应数据</span> 进行拦截，修改响应数据；对 <span class="warn">响应头</span> 进行拦截，修改响应头；对 <span
+          class="warn">响应头</span> 进行拦截，修改响应体</div>
+      <div>接受到的响应是经过处理后的响应</div>
+      <div>过滤响应数据</div>
       <pre>
 axios.interceptors.response.use( (response) => {
   return response;
@@ -251,28 +253,28 @@ axios.interceptors.response.use( (response) => {
   </dl>
   <div class="chap">趣味应用 application</div>
   <dl>
-    <dd class="example-sn">获取远程数据 - <button id="getDog">点击获取小狗</button></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 获取远程数据 - <button id="getDog">点击获取小狗</button></dd>
     <dd id="dog">
       <img src="" alt="">
     </dd>
-    <dd class="example-sn">获取远程数据 - <button id='axios-re'>点击获取土味情话</button></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 获取远程数据 - <button id='axios-re'>点击获取土味情话</button></dd>
     <div id="axios-remote"></div>
-    <dd class="example-sn">获取本地数据 - <button id='axios'>点击获取WEB知识体系</button></dd>
-    <dd>1. 如何渲染获取到的数据？使用新节点？使用innerHtml？</dd>
-    <dd>2. 表格&lt;table&gt;的使用：使用默认表格还是特别指定表头&lt;thead&gt;和表体&lt;tbody&gt;？</dd>
-    <dd class="tbl-box">
-      <table class="tbl" cellpadding='6'>
-        <thead>
-          <tr>
-            <th>序号</th>
-            <th>内容</th>
-            <th>难度</th>
-          </tr>
-        </thead>
-        <tbody id="axios-local"></tbody>
-      </table>
-    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 获取本地数据 - <button id='axios'>点击获取WEB知识体系</button></dd>
     <dd>
+      <div>1. 如何渲染获取到的数据？使用新节点？使用innerHtml？</div>
+      <div>2. 表格&lt;table&gt;的使用：使用默认表格还是特别指定表头&lt;thead&gt;和表体&lt;tbody&gt;？</div>
+      <div class="tbl-box">
+        <table class="tbl" cellpadding='6'>
+          <thead>
+            <tr>
+              <th>序号</th>
+              <th>内容</th>
+              <th>难度</th>
+            </tr>
+          </thead>
+          <tbody id="axios-local"></tbody>
+        </table>
+      </div>
       <pre>
 //使用节点
 for (let i = 0; i &lt; res.data.length; i++) {
@@ -284,8 +286,6 @@ for (let item in res.data[i]) {
 }
 axiosLocal.appendChild(tr)
 }</pre>
-    </dd>
-    <dd>
       <pre>
 //使用innerHtml
 for (let i = 0; i &lt; res.data.length; i++) {
@@ -305,11 +305,8 @@ axiosLocal.innerHTML += tr
     <dd>/getbooks</dd>
     <dd>/addbook</dd>
   </dl>
-  <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
-    integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.5.0/axios.min.js"></script>
   <script>
     const baseURL = 'http://localhost:3000'

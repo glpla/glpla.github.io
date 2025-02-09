@@ -173,10 +173,22 @@ swiper-container::part(pagination) {
     ...
 &lt;/swiper-container&gt;</pre>
     </dd>
-    <dd class="tips">
-      Failed to resolve component: swiper-container
-      If this is a native custom element, make sure to exclude it from component resolution via
-      compilerOptions.isCustomElement.
+    <dt>注意 Tips</dt>
+    <dd>
+      <div>
+        Failed to resolve component: swiper-container
+        If this is a native custom element, make sure to exclude it from component resolution via
+        compilerOptions.isCustomElement.
+      </div>
+      <div>解决方法：在 vite.config.js 中配置 vue 节点</div>
+      <pre>
+vue({
+  template: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag.startsWith("swiper-"),
+    },
+  },
+})</pre>
     </dd>
   </dl>
   <div id="footer"></div>
