@@ -6,7 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>代理</title>
-  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
   <base target="_blank">
 </head>
 
@@ -17,29 +18,42 @@
   </header>
   <dl>
     <dd>
-      <div>从一个服务域请求另外一个服务器</div>
-      <div>为开发服务器配置自定义代理规则。期望接收一个 { key: options } 对象。任何请求路径以 key 值开头的请求将被代理到对应的目标</div>
-      <pre>
-proxy: {
-  "key": "options"
-}</pre>
+      <div>从一个服务域请求另外一个服务器域的资源</div>
     </dd>
     <dt>同域</dt>
     <dd>
-      <div>协议相同 - https 和 http 属于不同域</div>
-      <div>IP 相同 - localhost 和 127.0.0.1 属于不同域</div>
+      <div>协议相同</div>
+      <div>IP 相同</div>
       <div>端口相同</div>
+    </dd>
+    <dt>跨域</dt>
+    <dd>
+      <div>协议、IP和端口任一不相同，都为跨域</div>
+      <div>协议不同 - https 和 http 属于不同域</div>
+      <div>IP 不同 - localhost 和 127.0.0.1 属于不同域</div>
+      <div>端口不同 - 3000 和 5173</div>
+    </dd>
+    <dt>解决方案</dt>
+    <dd>
       <div>可以由前端或后端解决</div>
       <div>解决跨域的冲突；注意调整接口的使用</div>
       <div>更多信息，请访问 <a href="https://cn.vitejs.dev/config/server-options.html">vite-server</a></div>
       <div class="tips">
         <div>localhost：本地服务器，不经过网卡传输的，它不受网络防火墙和网卡相关的限制</div>
         <div>127.0.0.1：本机地址是域名访问，通过网卡传输的，依赖网卡，并受到网络防火墙和网卡相关的限制</div>
+        <div>静态文件托管服务（如 GitHub Pages）。这类服务通常已经正确配置 CORS，允许来自任何域的请求。因此，在大多数情况下，你不需要额外处理跨域问题</div>
       </div>
     </dd>
     <dt>前端处理</dt>
     <dd>
-      <div>修改项目 vite.config.js 中的服务器 server 配置，增加对访问接口的代理 - 将所有以 /store 开头的请求，代理到 http://127.0.0.1:3000</div>
+      <div>为开发服务器配置自定义代理规则。期望接收一个 { key: options } 对象。任何请求路径以 key 值开头的请求将被代理到对应的目标</div>
+      <pre>
+proxy: {
+  "key": "options"
+}</pre>
+      <div>修改项目 vite.config.js 中的服务器 server 配置，增加对访问接口的代理 - 将所有以 /api 开头的请求，代理到 http://127.0.0.1:3000</div>
+      <!-- <div>开启重写 rewrite，请求时要 <span class="warn">额外</span> 指定请求路径前缀串，但是会被替换为空；主要起到 <span class="warn">分类</span> 的作用</div> -->
+      <div>rewrite：将请求路径中的 /api 前缀去掉，然后再转发到目标服务器。</div>
       <pre>
 server: {
   // open: false,
@@ -53,9 +67,7 @@ server: {
     }
   }
 }</pre>
-      <div>开启重写 rewrite，请求时要 <span class="warn">额外</span> 指定请求路径前缀串，但是会被替换为空；主要起到 <span class="warn">分类</span> 的作用</div>
     </dd>
-    <dd class="tips">先拼接再替换；替换请求中的同名串</dd>
     <dd>
       <div>请求为：</div>
       <pre>/api</pre>
@@ -115,7 +127,8 @@ app.use((req, res, next) => {
       <pre>app.use(cors());</pre>
     </dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>

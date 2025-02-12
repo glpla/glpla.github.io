@@ -108,11 +108,25 @@ fetch('../../common/drill.html')
 fetch('https://glpla.github.io/utils/avatar/avatar0.png')
   .then(res => res.blob())
   .then(res => img.src = URL.createObjectURL(res))</pre>
-      <!-- <div>指定 accept 获取特别类型的图片，如去除水印</div>
-      <div>默认图片</div>
-      <pre></pre>
-      <div>去除水印图片 - 在开发者视图中，检查请求header的url</div>
-      <pre></pre> -->
+      <div>指定 accept 获取特别类型的图片，如去除水印、获取特定类型的图片 - 和浏览器和后端服务器有关</div>
+      <div>默认图片，url是png，另存为是avif</div>
+      <pre>https://png.pngtree.com/recommend-works/png-clipart/20250101/ourmid/pngtree-cartoon-deer-standing-png-image_14982249.png</pre>
+      <div>指定获取为png</div>
+      <pre>
+fetch('https://png.pngtree.com/recommend-works/png-clipart/20250101/ourmid/pngtree-cartoon-deer-standing-png-image_14982249.png', {
+  headers: {
+    'Accept': 'image/png'
+  }
+})
+  .then(response => response.blob())
+  .then(blob => {
+    const url = URL.createObjectURL(blob);
+    img.value = url;
+    console.log(img.value);
+
+  })
+  .catch(error => console.error('Error:', error));
+      </pre>
     </dd>
     <dt>注意</dt>
     <dd>

@@ -23,17 +23,17 @@
     </dd>
     <dt>绑定对象</dt>
     <dd>
-      <div>一个或多个类</div>
-      <div>用不用这个类？isActive 为真，使用 bold 类；为假，不使用 - 开关类</div>
-      <pre>
-&lt;div :class="{ 'bold': isActive }"&gt;hi,there&lt;/div&gt;
-&lt;div :class="{ 'active': ind == 1 }"&gt;hi,there.&lt;/div&gt;</pre>
+      <div>使用一个或多个值对 key-value pair 来应用一个或多个类 - 开关类</div>
+      <div>如果 isActive 为真，使用 bold 类；为假，不使用</div>
+      <pre>&lt;div :class="{ 'bold': isActive }"&gt;hi,there&lt;/div&gt;</pre>
+      <div>ind=1,使用 active 类</div>
+      <pre>&lt;div :class="{ 'active': ind == 1 }"&gt;hi,there.&lt;/div&gt;</pre>
       <div>使用三元表达式实现2选1；isActive 为真，使用 bold 类；否则使用 underline 类</div>
       <div>三元表达式的结果是一个字符串，所以直接写就可以，不需要 {}</div>
       <pre>&lt;div :class="isActive ? 'bold' : 'underline'"&gt;hi,there&lt;/div&gt;</pre>
       <div>多个值对</div>
       <pre>&lt;div :class="{ active: false, done: true;}"&gt;hi,there.&lt;/div&gt;</pre>
-      <div>使用变量</div>
+      <div>使用字符串变量应用对应的值对</div>
       <pre>&lt;div :class="isOn"&gt;hi,there.&lt;/div&gt;</pre>
       <pre>
 const isOn = reactive({
