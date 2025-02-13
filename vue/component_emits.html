@@ -2,95 +2,112 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>子传父 defineEmits()</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/footer2025.css">
-    <base target="_blank">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>子传父 defineEmits()</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
+  <base target="_blank">
 </head>
 
 <body>
-    <header>
-        <h1>子传父</h1>
-        <span>&commat;defineEmits()</span>
-    </header>
-    <dl>
-        <dd>通过编译宏 defineEmits() 的形式实现通信|参数传递|数据传递 - 自定义事件</dd>
-        <dd>更多信息，请访问 <a href="https://vuejs.org/guide/components/events.html#declaring-emitted-events">Declaring
-                Emitted Events</a></dd>
-        <dt>Procedure</dt>
-        <dd class="sn">
-            <div>在 &lt;script setup&gt; 的顶级作用域下，子组件使用 defineEmits() 宏，以 <span class="warn">数组</span>
-                的形式，定义向父组件传递的事件；通常使用变量接收定义的事件列表，以便进一步处理</div>
-            <div>父组件响应子组件传递的事件并处理</div>
-        </dd>
-        <dd class="tips">
-            <div>为了和普通事件区分，建议加上 emit 前缀</div>
-            <div>逻辑中推荐使用 camelCase，如：greetingMessage；结构中推荐使用 kebab-case，如：greeting-message</div>
-            <div>可以直接在子组件结构中，使用专有变量 $emit 发送事件 - 仅限 Vue 环境</div>
-        </dd>
-        <dt>子组件</dt>
-        <dd>
-            <div>定义传递事件列表，声明变量 emits 接收，并在自定义事件中传递事件；可以携带参数</div>
-            <div>子组件 &lt;script&gt;</div>
-            <pre>
+  <header>
+    <h1>子传父</h1>
+    <span>&commat;defineEmits()</span>
+  </header>
+  <dl>
+    <dd>通过编译宏 defineEmits() 的形式实现通信|参数传递|数据传递 - 自定义事件</dd>
+    <dd>更多信息，请访问 <a href="https://vuejs.org/guide/components/events.html#declaring-emitted-events">Declaring
+        Emitted Events</a></dd>
+    <dt>Procedure</dt>
+    <dd class="sn">
+      <div>在 &lt;script setup&gt; 的顶级作用域下，子组件使用 defineEmits() 宏，以 <span class="warn">数组</span>
+        的形式，定义向父组件传递的事件；通常使用变量接收定义的事件列表，以便进一步处理</div>
+      <div>父组件响应子组件传递的事件并处理</div>
+    </dd>
+    <dd class="tips">
+      <div>为了和普通事件区分，建议加上 emit 前缀</div>
+      <div>逻辑中推荐使用 camelCase，如：greetingMessage；结构中推荐使用 kebab-case，如：greeting-message</div>
+      <div>可以直接在子组件结构中，使用专有变量 $emit 发送事件 - 仅限 Vue 环境</div>
+    </dd>
+    <dt>子组件</dt>
+    <dd>
+      <div>单击触发自定义事件 handleSuper；无参</div>
+      <pre>&lt;button @click="handleSuper"&gt;click me&lt;/button&gt;</pre>
+      <div>定义传递事件列表，声明变量 emit 接收，并在自定义事件中传递事件；可以携带参数</div>
+      <pre>
 //自定义事件
-const emits = defineEmits(['emitSuper', 'emitHi'])
+const emit = defineEmits(['emitSuper', 'emitHi'])
 
 //上来就传递了一个自定义的事件
-emits('emitHi', 'hi,there.')
+emit('emitHi', 'hi,there.')
 
-//函数表达式中触发声明的事件
-const emitsHandle = () => {
-    emits('emitSuper', 'hi,there.')
+//函数表达式中触发声明的自定义事件
+const handleSuper = () => {
+    emit('emitSuper', 'hi,there.')
 }
 
-// 具名函数中触发声明的事件
-function emitsHandle() {
-    emit('emitSubmit')
+// 具名函数中触发声明的自定义事件
+function handleSuper() {
+    emit('emitSuper')
 }</pre>
-            <div>子组件 &lt;template&gt; - 单击触发自定义事件 someEvent；无参</div>
-            <pre>&lt;button @click="emitsHandle"&gt;click me&lt;/button&gt;</pre>
-        </dd>
-        <dt>父组件</dt>
-        <dd>
-            <div>监听事件 emitSuper，并在回调函数中接收并处理参数</div>
-            <div>父组件 &lt;template&gt;</div>
-            <pre>&lt;MyComponent @emit-super="callback" /&gt;</pre>
-            <div>父组件 &lt;script&gt;</div>
-            <pre>
+      <div>子组件也可以使用内置方法 $emit 传递事件 - built-in $emit method</div>
+      <pre>&lt;button @click="$emit('emitSuper')"&gt;click me, no param&lt;/button&gt;</pre>
+      <pre>&lt;button @click="$emit('emitSuper', 'hi,there.')"&gt;click me with param&lt;/button&gt;</pre>
+    </dd>
+    <dt>父组件</dt>
+    <dd>
+      <div>监听事件 emitSuper，并在回调函数中接收并处理参数</div>
+      <pre>&lt;MyComponent @emit-super="callback" /&gt;</pre>
+      <pre>
 const callback = (e) => {
     console.log('hihihi', e);
 }</pre>
-        </dd>
-    </dl>
-    <dl>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 改造封装的产品列表组件，单击某个产品，跳转到详情页</dd>
-        <dd>
-            <img src="./imgs/emit0.png" alt="">
-            <div>子组件 - 定义事件并传递产品 id；结构其它内容略</div>
-            <pre>&lt;button class="btn" @click="toDetail(item.id)"&gt;详情&lt;/button&gt;</pre>
-            <pre>
+    </dd>
+  </dl>
+  <dl>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 权益保护模态框 Guarantee.vue</dd>
+    <dd>
+      <div>封装组件；使用自定义事件 defineEmits()，单击显示对应的权益模态框</div>
+      <pre>&lt;button @click.stop="handleGuarantee"&gt;详情&lt;/button&gt;</pre>
+      <pre>
+const emits = defineEmits(['showGuarantee']);
+const handleGuarantee = () => {
+  emits('showGuarantee')
+};</pre>
+      <div>商品详情页 DetailsView.vue 引入并使用；这里使用内联事件处理</div>
+      <pre>&lt;Guarantee @show-guarantee="isShowModal = true" /&gt;</pre>
+      <div>单击模态框关闭按钮或其它区域，如背景，都可以关闭模态框；模态框是商品详情页 DetailsView.vue 的普通元素</div>
+      <pre>
+&lt;div class="modal" :class="{ 'show': isShowModal }" @click.self="isShowModal = false"&gt;
+  &lt;button class="btn modal-btn" @click.prevent="isShowModal = false"&gt;close&lt;/button&gt;
+&lt;/div&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 改造封装的产品列表组件，单击某个产品，跳转到详情页</dd>
+    <dd>
+      <img src="./imgs/emit0.png" alt="">
+      <div>子组件 - 定义事件并传递产品 id；结构其它内容略</div>
+      <pre>&lt;button class="btn" @click="toDetail(item.id)"&gt;详情&lt;/button&gt;</pre>
+      <pre>
 const emits = defineEmits(['emitToDetail'])
 
 const toDetail = (id) => {
   emits('emitToDetail', id)
 }</pre>
-            <div>父组件 - 接收并响应事件；数据略</div>
-            <pre>&lt;List :lists="lists" @emit-to-detail="doDetail"&gt;&lt;/List&gt;</pre>
-            <pre>
+      <div>父组件 - 接收并响应事件；数据略</div>
+      <pre>&lt;List :lists="lists" @emit-to-detail="doDetail"&gt;&lt;/List&gt;</pre>
+      <pre>
 const doDetail = (e) => {
     console.log('hi outer', e);
 }</pre>
-        </dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 点赞组件</dd>
-        <dd>
-            <div>封装点赞组件 → 接收父组件拉取的点赞数 → 单击时，点赞数量加1</div>
-            <img src="./imgs/emit1.png" alt="">
-            <div>子组件 - 定义并接收父组件传递的参数，+1后，通过事件回传给父组件</div>
-            <pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 点赞组件</dd>
+    <dd>
+      <div>封装点赞组件 → 接收父组件拉取的点赞数 → 单击时，点赞数量加1</div>
+      <img src="./imgs/emit1.png" alt="">
+      <div>子组件 - 定义并接收父组件传递的参数，+1后，通过事件回传给父组件</div>
+      <pre>
 const props = defineProps({
     propLike: Number
 })
@@ -98,10 +115,10 @@ const emits = defineEmits(['emitInc'])
 const incLike = () => {
     emits('emitInc', props.propLike + 1)
 }</pre>
-            <pre>&lt;div @click="incLike"&gt;&lt;span class="fa fa-heart"&gt;&lt;/span&gt; {{ propLike }}&lt;/div&gt;</pre>
-            <div>父组件 - 传递参数并响应事件</div>
-            <pre>&lt;Like :propLike="like" @emit-inc="incLike" /&gt;</pre>
-            <pre>
+      <pre>&lt;div @click="incLike"&gt;&lt;span class="fa fa-heart"&gt;&lt;/span&gt; {{ propLike }}&lt;/div&gt;</pre>
+      <div>父组件 - 传递参数并响应事件</div>
+      <pre>&lt;Like :propLike="like" @emit-inc="incLike" /&gt;</pre>
+      <pre>
 //传递给子组件的数据
 let like = ref(0)
 
@@ -110,39 +127,22 @@ const incLike = (e) => {
   console.log(e);
   like.value = e
 }</pre>
-        </dd>
-        <dd>[<span class="iconfont icon-keyboard"></span>] 搜索组件 - 表单</dd>
-        <dd>
-            <div>说明：采用内联事件；不推荐，仅作为知识补充</div>
-            <div>子组件 - Sql.vue</div>
-            <pre>const emits = defineEmits(['emitIpt'])</pre>
-            <pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 搜索组件 - 表单</dd>
+    <dd>
+      <div>子组件 - Sql.vue</div>
+      <pre>const emits = defineEmits(['emitIpt'])</pre>
+      <pre>
 &lt;input type="text" @input="$emit('emitIpt', $event.target.value)"&gt;
 &lt;input type="text" @input="(e) => $emit('emitIpt', e.target.value)"&gt;</pre>
-            <div>父组件</div>
-            <pre>
+      <div>父组件</div>
+      <pre>
 &lt;Sql @emit-inc="(e) => console.log(e)" /&gt;
 &lt;Sql @emit-inc="console.log($event)" /&gt;</pre>
-        </dd>
-    </dl>
-    <div class="chap">Emitting and Listening to Events</div>
-    <dl>
-        <dt>$emit</dt>
-        <dd>
-            <div>子组件也可以使用内置方法 $emit 传递事件 - built-in $emit method</div>
-            <pre>&lt;button @click="$emit('someEvent')"&gt;click me, no param&lt;/button&gt;</pre>
-            <pre>&lt;button @click="$emit('someEvent', 'hi,there.')"&gt;click me with param&lt;/button&gt;</pre>
-            <div>父组件监听传递的事件</div>
-            <pre>&lt;MyComponent @some-event="callback" /&gt;</pre>
-        </dd>
-        <dt>Feature</dt>
-        <dd class="sn">
-            <div>无法复用</div>
-            <div>适合简单逻辑</div>
-        </dd>
-    </dl>
-    <div id="footer"></div>
-    <script src="/utils/custom/footer2025.js"></script>
+    </dd>
+  </dl>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>

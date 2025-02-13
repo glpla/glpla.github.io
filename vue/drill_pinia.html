@@ -36,6 +36,8 @@
       <p>. 分页获取商品* getGoodsByPage()</p>
       <p>. 其它业务*</p>
       <div>购物车仓库 cart.js</div>
+      <p>. 购物车数据 cart</p>
+      <P>. 获取购物车数据 getCart()</P>
       <p>. 添加到购物车 addToCart()</p>
       <p>. 从购物车中删除 removeFromCart()</p>
       <p>. 清空购物车 clearCart()</p>
@@ -49,88 +51,79 @@
     <div class="cont">
       <div>改造 <a href="./drill_reactivity.html">实操 - 响应式综合运用 - 产品列表页</a>或新建项目</div>
       <div>在仓库目录 stores 创建商品仓库 goods.js</div>
-      <div>在仓库目录 stores 创建购物车仓库 cart.js</div>
-      <p>. 定义并暴露属性：购物车 cart</p>
-      <p>. 定义并暴露方法：添加到购物车 addToCart()；根据商品 id 判断是追加还是新加</p>
-      <p>. 定义并暴露方法：从购物车移除商品 removeFromCart()；根据商品 id 移除</p>
-      <p>. 定义并暴露方法：加载仓库方法 fetchCart()</p>
       <pre>
-import { ref } from 'vue'
-import { defineStore } from 'pinia'
+import { ref, computed } from "vue";
+import { defineStore } from "pinia";
 
-export const useCartStore = defineStore('cart', () => {
+export const useGoodsStore = defineStore("goods", () => {
+  const goods = ref([]);
+  const good = ref({});
+  const getGoods = async () => {
+  };
+  const getGoodById = async (id) => {
+  };
 
-  const cart = ref([])
+  return { goods, good, getGoods, getGoodById };
+});</pre>
+      <div>在仓库目录 stores 创建购物车仓库 cart.js</div>
+      <pre>
+import { ref } from "vue";
+import { defineStore } from "pinia";
+
+export const useCartStore = defineStore("cart", () => {
+  const cart = ref([]);
 
   const addToCart = (product) => {
-    const existingItem = cart.value.find(item => item.id === product.id)
-    if (existingItem) {
-      existingItem.quantity++
+    // 直接添加到购物车，增加数量字段，默认为1
+    // const existingItem = cart.value.find((item) => item.id === product.id);
+    // if (existingItem) {
+    //   existingItem.quantity++;
+    //   console.log("++");
+    // } else {
+    //   cart.value.push({ ...product, quantity: 1 });
+    //   console.log("1");
+    // }
+
+    // 从详情页添加到购物车，数据已经进行了预处理，数量默认为1
+    const res = cart.value.filter((item) => item.id === product.id)[0];
+    if (res) {
+      res.quantity += product.quantity;
     } else {
-      cart.value.push({ ...product, quantity: 1 })
+      cart.value.push({ ...product });
     }
-  }
+  };
 
-  const removeFromCart = (id) =>{
-    cart.value = cart.value.filter(item => item.id !== id)
-  }
+  const removeFromCart = (id) => {
+    cart.value = cart.value.filter((item) => item.id !== id);
+  };
 
-  const fetchCart = async () => {
-    let response = await fetch('https://glpla.github.io/utils/data/cart.json')
-    let data = await response.json()
-    cart.value = data
-  }
+  const getCart = async () => {
+    let response = await fetch("../data/cart.json");
+    let data = await response.json();
+    cart.value = data;
+  };
 
-  return { cart, addToCart, removeFromCart, fetchCart }
-})</pre>
-      <div>商品详情页 Details.vue - 引入并使用购物车仓库</div>
-      <pre>
-import { useCartStore } from '@/stores/cart';
-const cartStore = useCartStore()</pre>
-      <div>商品页 - 初始化购物车仓库</div>
-      <pre>
-onMounted(() => {
-  cartStore.fetchCart()
-})</pre>
-      <div>商品页 - 为添加到购物车按钮绑定事件 addCart() 并声明对应的事件处理函数</div>
-      <pre>
-const addCart = (item) => {
-  cartStore.addToCart(item)
-}</pre>
-      <div>购物车页 - 引入并使用购物车仓库</div>
-      <pre>
-import { useCartStore } from '@/stores/cart';
-const cartStore = useCartStore()</pre>
-      <div>购物车页 - 从仓库获取购物车数据，使用 <span class="warn">计算属性</span> 获取仓库购物车的数据并渲染；如果直接跳转到购物车页，则调用仓库方法获取远程数据</div>
-      <pre>
-onMounted(() => {
-  if (cartStore.cart.length > 0) {
-    cartData.lists = computed(() => cartStore.cart)
-  } else {
-    cartStore.fetchCart()
-  }
-})</pre>
-      <figure class="img-sn">
-        <img src="./imgs/cart8.png" alt="">
-        <figcaption>仓库初始为空</figcaption>
-      </figure>
-      <figure class="img-sn">
-        <img src="./imgs/cart9.png" alt="">
-        <figcaption>添加商品到购物，仓库更新</figcaption>
-      </figure>
-      </figure>
-      <figure class="img-sn">
-        <img src="./imgs/cart10.png" alt="">
-        <figcaption>更改商品数据，仓库更新</figcaption>
-      </figure>
-      <figure class="img-sn">
-        <img src="./imgs/cart11.png" alt="">
-        <figcaption>部分选中</figcaption>
-      </figure>
-      <figure class="img-sn">
-        <img src="./imgs/cart12.png" alt="">
-        <figcaption>全选</figcaption>
-      </figure>
+  const clearCart = () => {
+    cart.value = [];
+  };
+
+  return {
+    cart,
+    addToCart,
+    removeFromCart,
+    getCart,
+    clearCart,
+  };
+});</pre>
+      <div>菜单页 MenuView.vue</div>
+      <p>. 引入并使用购物车仓库，控制购物车的显示与隐藏</p>
+      <div>商品详情页 Goods.vue</div>
+      <p>. 引入并使用商品仓库 - 获取所有商品</p>
+      <div>商品详情页 DetailsView.vue</div>
+      <p>. 引入并使用商品仓库 - 根据 id 获取商品</p>
+      <p>. 引入并使用购物车仓库 - 添加到购物车</p>
+      <div>购物车页 Cart.vue</div>
+      <p>. 引入并使用购物车仓库 - 获取购物车数据</p>
     </div>
     <div class="title">拓展与思考</div>
     <div class="cont">
