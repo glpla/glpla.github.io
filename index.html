@@ -338,18 +338,20 @@
   </div>
 
   <footer>
-    <div class="cube">
-      <div class="side s0"></div>
-      <div class="side s1"></div>
-      <div class="side s2"></div>
-      <div class="side s3"></div>
-    </div>
+    <div id="lotus"></div>
     <div>All rights reserved &copy; glpla 2022-2025</div>
     <div>glpla@hotmail.com</div>
     <div>广州新华学院</div>
     <div>东莞 · 中国</div>
   </footer>
   <script src="/utils/lib/scrollreveal.min.js"></script>
+  <script>
+    fetch('./common/lotus.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('lotus').innerHTML = html
+      })
+  </script>
   <script type="module">
 
     import { dot } from '../utils/custom/dot.js'
