@@ -2,99 +2,97 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>腾讯地图服务 LBS</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.37.0/apexcharts.min.css" />
-    <base target="_blank">
-    <style>
-        .chart-box {
-            height: 320px;
-            margin: 1rem auto;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>腾讯地图服务 LBS</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <base target="_blank">
 </head>
 
 <body>
-    <header>
-        <h1>腾讯地图服务</h1>
-        <span>&commat;LBS</span>
-    </header>
-    <dl>
-        <dd>提供更为深度的地图应用场景支持</dd>
-        <dd>开发文档 → JavaScript：Javascript API GL是基于WebGL技术打造的3D版地图API，3D化的视野更为自由，交互更加流畅</dd>
-        <dd>更多使用信息，请参考 <a href="https://lbs.qq.com/">腾讯地图服务 LBS</a></dd>
-        <dt>准备</dt>
-        <dd class="sn">
-            <div>注册账号</div>
-            <div>创建应用</div>
-            <div>申请 KEY</div>
-        </dd>
-        <dd class="example-sn">获取当前位置并显示地图</dd>
-        <dd class="sn">
-            <div>获取当前坐标，并在成功回调函数 showPosition 中异步加载腾讯地图API；在Vue的挂载生命周期函数中调用</div>
-            <pre>navigator.geolocation.getCurrentPosition(showPosition, showError);</pre>
-            <pre>
-const showPosition = (position) => {
-    longitude.value = position.coords.longitude;
-    latitude.value = position.coords.latitude;
-    loadScript();
-}
+  <header>
+    <h1>腾讯地图服务</h1>
+    <span>&commat;LBS</span>
+  </header>
+  <dl>
+    <dd>提供更为深度的地图应用场景支持</dd>
+    <dd>开发文档 → JavaScript：Javascript API GL是基于WebGL技术打造的3D版地图API，3D化的视野更为自由，交互更加流畅</dd>
+    <dd>更多使用信息，请参考 <a href="https://lbs.qq.com/">腾讯地图服务 LBS</a>、<a
+        href="https://lbs.qq.com/webApi/javascriptGL/glGuide/glOverview">javascript GL</a></dd>
+    <dt>准备</dt>
+    <dd class="sn">
+      <div>注册账号</div>
+      <div>创建应用：控制台 → 应用管理 → 我的应用 → 创建应用</div>
+      <div>申请 KEY：普通 Web/Vue 应用不需要选择产品类别；Webservice API 借助 axios/fetch 采用接口请求的方式使用</div>
+    </dd>
+    <dt>使用</dt>
+    <dd>
+      <div>使用 <a href="https://lbs.qq.com/webApi/javascriptGL/glGuide/glComponents">tlbs-map地图组件库</a>；更多信息，请访问 <a
+          href="https://github.com/Tencent/tlbs-map-vue">tlbs-map-vue</a>、<a
+          href="https://mapapi.qq.com/web/tlbs-map-vue/guide/get-started.html">快速上手</a></div>
+      <div>1. 安装</div>
+      <pre>npm install --save tlbs-map-vue</pre>
+      <div>2. 引入 - 在 main.js 作为中间件使用</div>
+      <pre>
+import TlbsMap from "tlbs-map-vue";
 
-const showError = (error) => {
-    console.error(`Error code: ${error.code}. Message: ${error.message}`);
-}</pre>
-            <div>异步加载腾讯地图API - 创建 &lt;script&gt;，指定 src 并挂载到 &lt;body&gt;，最后使用回调函数 callback 初始化地图 </div>
-            <pre>
-const loadScript = () => {
-    let script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = "https://map.qq.com/api/gljs?v=1.exp&key=your key&callback=initMap";
-    document.body.appendChild(script);
-}</pre>
-            <div>初始化地图，函数需要挂载到 window 对象；地图初始化，指定中心点，添加标记 showMarker</div>
-            <pre>
-window.initMap = () => {
-    let center = new TMap.LatLng(latitude.value, longitude.value)
-    mapInstance.value = new TMap.Map(map.value, {
-        center: center,
-        zoom: 17.2,
-        viewMode: '2D',
-        showControl: false
-    });
-    showMarker(center);
-}</pre>
-            <div>添加标记</div>
-            <pre>
-const showMarker = (center) => {
-// center marker
-    let marker = new TMap.MultiMarker({
-        position: center,
-        map: mapInstance.value,
-        styles: {
-            marker: new TMap.MarkerStyle({
-                width: 20,
-                height: 30,
-                anchor: { x: 10, y: 30 },
-            })
-        },
-        geometries: [
-            {
-                position: center,
-                id: 'marker',
-            }
-        ]
-    });
-}</pre>
-            <figure>
-                <img src="./imgs/lbs.png" alt="">
-                <figcaption>获取当前位置并显示地图</figcaption>
-            </figure>
-        </dd>
-    </dl>
-    <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+app.use(TlbsMap);</pre>
+      <div>3. 使用 - 按照自定义组件的形式在组件内使用；修改示例，调整为 Vue3 的 setup 语法糖格式</div>
+    </dd>
+  </dl>
+  <div class="chap">定制</div>
+  <dl>
+    <dt>地图 Map</dt>
+    <dd>
+      <pre>
+&lt;tlbs-map ref="map" api-key="YI6BZ-MTZW4-HYFUC-F42DP-MK7MQ-3GBRU" :center="center" :zoom="zoom" :control="control"
+  @click="onClick"&gt;
+&lt;/tlbs-map&gt;</pre>
+      <div>1. 开发密钥 api-key</div>
+      <div>2. 中心点 center</div>
+      <div>3. 缩放 zoom</div>
+      <div>4. 控制 control</div>
+    </dd>
+    <dt>点标记 Marker</dt>
+    <dd>
+      <div>&lt;tlbs-map&gt; 的子元素</div>
+      <pre>&lt;tlbs-multi-marker :geometries="geometries" :styles="styles" :options="options" /&gt;</pre>
+      <div>1. 位置 <a href="https://lbs.qq.com/webApi/javascriptGL/glDoc/glDocMarker#7">Geometries</a></div>
+
+      <div>常见有： id、样式ID styleId、位置 position</div>
+      <div>以数组的形式，提供多个点标记；可以由 API 获取点数据</div>
+      <div>使用 styleId 可以为每个点标记设置不同的样式</div>
+      <div>如果不指定 styleId，则使用默认的样式 - 一个红色的地图标记</div>
+      <pre>
+const geometries = ref([
+  { styleId: 'marker', position: { lat: 39.91799, lng: 116.397027 } },
+])</pre>
+      <div>2. 样式 <a href="https://lbs.qq.com/webApi/javascriptGL/glDoc/glDocMarker#6">Styles</a></div>
+      <div>常见有：styleId及对应的 width、height 和 src；图片采用静态导入，根据大小，等比例设置大小</div>
+      <div>大小只能为正整数</div>
+      <div>styleId 和上面的 styleId 对应；如果位置中指定相同的 styleId，则所有的点标记应用同样的样式</div>
+      <pre>
+import src from '@/assets/logo-small.png';
+
+const styles = ref({
+  marker: {
+    width: 20,
+    height: 25,
+    anchor: { x: 10, y: 30 },
+    src,
+  },
+})</pre>
+      <div>3. 选项 <a href="https://lbs.qq.com/webApi/javascriptGL/glDoc/glDocMarker#2">Options</a></div>
+      <div>常见有：缩放比例</div>
+      <pre>
+const options = ref({
+  minZoom: 5,
+  maxZoom: 15,
+})</pre>
+    </dd>
+  </dl>
+  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
 </body>
 
 </html>
