@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>路由信息 useRoute()</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>路由信息</h1>
+    <span>&commat;useRoute()</span>
+  </header>
+  <dl>
+    <dt><a href="https://router.vuejs.org/zh/api/#Functions-useRoute">useRoute()</a></dt>
+    <dd>
+      <div>vue-router 提供的组合式函数，返回一个 <a
+          href="https://router.vuejs.org/zh/api/interfaces/RouteLocationNormalizedLoaded.html">RouteLocationNormalizedLoaded</a>
+        对象，用于访问当前/激活路由的各种 <span class="warn">路由信息</span></div>
+      <div>常见的路由信息有：fullPath、path、name、params、query、meta 等</div>
+      <div>先引入再使用 - 引入路由包 useRoute 并创建路由实例 route</div>
+      <div>适用 Vue 3 的 Composition API </div>
+      <pre>
+import { useRoute } from 'vue-router'
+const route = useRoute()</pre>
+      <pre>&lt;div&gt;route {{ route.fullPath }}&lt;/div&gt;</pre>
+      <table>
+        <caption>useRoute 常用属性</caption>
+        <thead>
+          <tr>
+            <th>分类</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>name</td>
+            <td>匹配的路由名称</td>
+          </tr>
+          <tr>
+            <td>path</td>
+            <td>经过百分号编码的 URL 中的 pathname 段</td>
+          </tr>
+          <tr>
+            <td>params</td>
+            <td>从 path 中提取出来并解码后的参数对象</td>
+          </tr>
+          <tr>
+            <td>query</td>
+            <td>代表当前地址的 search 属性的对象</td>
+          </tr>
+          <tr>
+            <td>matched</td>
+            <td>数组，只包含直接的组件 (任何已被加载并在 components 对象内被替换掉的懒加载组件)<br> 可以被直接用于展示路由。不包含重定向记录</td>
+          </tr>
+        </tbody>
+      </table>
+    </dd>
+    <dt>$route</dt>
+    <dd>
+      <div>直接在模板中使用</div>
+      <div>无须引入路由包 useRoute 并实例化</div>
+      <pre>&lt;div&gt;route {{ $route.fullPath }}&lt;/div&gt;</pre>
+    </dd>
+  </dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd class="sn">
+      <div>逻辑中使用 - 引入路由包 useRoute 并实例 route</div>
+      <div>结构中使用 - 全局路由变量 $route</div>
+    </dd>
+    <dt>Homework</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] meta应用 - 根据 showNav 决定页面视图是否显示主导航</dd>
+    <dd>
+      <div>1. LoginGuide.vue - 隐藏主导航组件 AppNav.vue</div>
+      <pre>
+{
+  path: "/login-guide",
+  name: "login-guide",
+  component: () => import("../views/LoginGuide.vue"),
+  meta: { showNav: true },
+}</pre>
+      <pre>&lt;AppNav v-if="!$route.meta.showNav" /&gt;</pre>
+      <div>2. ProductView.vue - 根据是否显示主导航指定购物车位置；后续还要判断是否有商品来决定是否显示购物车</div>
+      <pre>
+{
+  path: "/product",
+  name: "product",
+  component: () => import("../views/ProductView.vue"),
+  meta: { showNav: true },
+}</pre>
+      <pre>&lt;Cart :class="{ 'pos': $route.meta.showNav }" /&gt;</pre>
+    </dd>
+  </dl>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
+</body>
+
+</html>

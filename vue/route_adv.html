@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>路由分类 Route</title>
+  <title>路由定义和分类 Route</title>
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/footer2025.css">
   <base target="_blank">
@@ -13,13 +13,11 @@
 
 <body>
   <header>
-    <h1>路由分类</h1>
+    <h1>路由定义和分类</h1>
     <span>&commat;Route</span>
   </header>
   <dl>
-    <dd>更多路由参数配置，请访问 <a
-        href="https://router.vuejs.org/zh/api/interfaces/RouteRecordSingleView.html">RouteRecordSingleView</a>
-    </dd>
+    <dd>除了使用 path 和 component 定义路由外，还可以通过配置实现如下几种特性的路由</dd>
     <dt>命名路由 <a href="https://router.vuejs.org/zh/guide/essentials/named-routes.html">Name</a></dt>
     <dd>
       <div>通过 name 属性指定路由名称，便于在模板中引用</div>
@@ -44,18 +42,17 @@
       <div>嵌套路由不需要指定 component，因为它会重定向到目标路由，由目标路由的配置指定</div>
       <div>可以直接指定 path</div>
       <div>可以使用命名路由 name - 推荐</div>
-      <div>也可以使用函数确定</div>
+      <!-- <div>也可以使用函数确定</div> -->
       <pre>
 {
   path: '/',
-  component: IndexView,
-  name: 'index'
+  component: HomeView,
+  name: 'home'
 },
 {
   path: '/home',
-  redirect: '/',
-  // redirect: { name: 'index' },
-  name: 'home'
+  // redirect: '/',
+  redirect: { name: 'home' },
 }</pre>
     </dd>
     <dt>嵌套路由 <a href="https://router.vuejs.org/zh/guide/essentials/nested-routes.html">Children</a>
@@ -122,103 +119,6 @@
     // ...
   ]
 }</pre>
-
-    </dd>
-    <dt>传参路由 - <a href="https://router.vuejs.org/zh/guide/essentials/passing-props.html">Props</a></dt>
-    <dd>
-      <div>按照组件传参的形式传递路由参数</div>
-      <div>使用更方便</div>
-      <div>默认是针对 动态路由 | params 类型的路由参数；而 查询路由 | query 需要特别处理</div>
-      <div>配置项 props 可以是：<span class="warn">布尔值</span>、<span class="warn">对象</span>或<span class="warn">函数</span>
-      </div>
-    </dd>
-    <dd>1. props 为 布尔值</dd>
-    <dd>
-      <div>开启路由传参；默认为 false，不开启</div>
-      <div>适合动态路由；参数将被当作同名属性参数在组件中使用</div>
-      <div>应用最多</div>
-      <div>1. 配置动态路由并启用 props 属性</div>
-      <pre>
-{
-    path: '/home/:id/:title/:cont/:other?',
-    name: "home",
-    component: Home,
-    props: true
-}</pre>
-      <div>2. 传递路由参数 - 更多参数传递方式，请参考 <a href="./router_params.html">动态路由</a></div>
-      <pre>&lt;router-link to="/home/10/webjs/hi"&gt;html&lt;/router-link&gt;</pre>
-      <div>3. 接收路由参数 - 按组件传参时，普通属性的定义和使用</div>
-      <div>&lt;script&gt; - 定义属性来接收路由参数</div>
-      <pre>
-const props = defineProps(['id', 'title', 'cont'])</pre>
-      <div>&lt;template&gt; - 使用|渲染路由参数</div>
-      <pre>
-&lt;div&gt;{{id}} - {{title}} - {{cont}}&lt;/div&gt;</pre>
-    </dd>
-    <dd>2. props 为 函数</dd>
-    <dd>接收当前的 route 对象作为参数，包含路由的各种信息：name、params、path、query；返回一个 defineProps() 的声明</dd>
-    <dd>适用于需要<span class="warn">特别处理</span>的情况，和路由类型及参数无关，可以用来处理查询路由</dd>
-    <dd>除了使用路由信息外，还可以添加自定义的静态数据</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 使用查询路由</dd>
-    <dd class="sn">
-      <div>配置路由参数 - 使用路由的 query 数据</div>
-      <pre>
-{
-    path: '/home',
-    name: "home",
-    component: Home,
-    props: route => route.query
-}</pre>
-      <div>传递路由参数 - 更多参数传递方式，请参考 <a href="./router_query.html">查询路由</a></div>
-      <pre>
-&lt;router-link :to="{ path: '/home', query: { id: 100, title: 'leading', cont: 'hi' } }"&gt;home&lt;/router-link&gt;</pre>
-      <div>接收路由参数</div>
-      <p>&lt;script&gt; - 定义属性来接收路由参数；要十分清楚使用了几个查询参数</p>
-      <pre>
-const props = defineProps(['id', 'title', 'cont'])</pre>
-      <p>&lt;template&gt; - 使用|渲染路由参数</p>
-      <pre>
-&lt;div&gt;{{id}} - {{title}} - {{cont}}&lt;/div&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 使用动态路由 - 注意类型转换</dd>
-    <dd>
-      <pre>
-{
-    path: '/about/:id/:msg',
-    name: 'about',
-    component: () => import('../views/AboutView.vue'),
-    props: route => ({ id: Number(route.params.id), msg: route.params.msg })
-}</pre>
-      <pre>
-const props = defineProps({
-    id: Number,
-    msg: String
-})
-</pre>
-    </dd>
-    <dd>3. props 为 对象</dd>
-    <dd>
-      <div>定义的对象<span class="warn">直接</span>作为属性在组件中使用，和路由类型及参数无关</div>
-      <div>适合传递<span class="warn">静态数据</span></div>
-      <div>应用不多</div>
-      <div>1. 路由配置</div>
-      <pre>
-{
-    path: '/about/:id',
-    name: 'about',
-    component: () => import('../views/AboutView.vue'),
-    props: {
-        msg: { title: 'About', flag: true },
-    }
-}</pre>
-      <div>2. 路由组件 - &lt;script&gt; 中声明对应的 props 属性并在 &lt;template&gt; 中使用</div>
-      <pre>
-const props = defineProps({
-    msg: {
-        flag: Boolean,
-        title: String
-    }
-})</pre>
     </dd>
     <dt>异常路由 <a href="https://router.vuejs.org/guide/essentials/history-mode.html">Caveat</a></dt>
     <dd>
@@ -243,17 +143,45 @@ import {h} from 'vue'
   component: () => import('../views/NotFound.vue')
 }</pre>
     </dd>
+    <dt>动态路由</dt>
+    <dd>
+      <div>传递参数 - 路由传参</div>
+      <div>以路径的方式拼接路由</div>
+      <div>需要单独设计路由</div>
+      <div>更多详情，请查看 <a href="./route_params.html">动态路由 - params</a></div>
+      <pre>
+{
+  path: '/goods/:id',
+  name: 'goods',
+  component: () => import('../components/Goods.vue'),
+}</pre>
+    </dd>
+    <dt>查询路由</dt>
+    <dd>
+      <div>传递参数 - 路由传参</div>
+      <div>使用普通路由，不需要单独设计，以值对 name-value pair 的形式，通过 ? 拼接在路由后面</div>
+      <div>多个值对以 & 分割</div>
+      <div>更多详情，请查看 <a href="./route_query.html">查询路由 - query</a></div>
+    </dd>
+    <dt>传参路由</dt>
+    <dd>
+      <div>传递参数 - 组件传参</div>
+      <div>使用更方便</div>
+      <div>默认是针对 动态路由 | params 类型的路由参数；而 查询路由 | query 需要特别处理</div>
+      <div>配置项 props 可以是：<span class="warn">布尔值</span>、<span class="warn">对象</span>或<span class="warn">函数</span>
+      </div>
+      <div>使用参数的组件要定义同名属性才能使用</div>
+      <div>更多详情，请查看 <a href="./route_props.html">传参路由 Props</a></div>
+    </dd>
   </dl>
-  <div class="chap">homework</div>
+  <div class="chap">Summary</div>
   <dl>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 路由设计2</dd>
     <dd class="sn">
-      <p>在前续项目的基础上</p>
-      <div>为每个路由命名</div>
-      <div>为团队 /team 增加嵌套路由，分别对应各个团队成员</div>
-      <div>增加异常路由处理</div>
-      <div>调试并发布；将发布的 dist 目录打包压缩，以学号命名，提交到学习通</div>
-      <div>代码仓库* - 将项目推送到自己的代码仓库</div>
+      <div>name</div>
+      <div>children</div>
+      <div>redirect</div>
+      <div>404</div>
+      <div>props*</div>
     </dd>
   </dl>
   <div id="footer"></div>

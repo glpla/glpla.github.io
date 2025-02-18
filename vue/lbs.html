@@ -13,7 +13,7 @@
 <body>
   <header>
     <h1>腾讯地图服务</h1>
-    <span>&commat;LBS</span>
+    <span>&commat;LBS for Vue3</span>
   </header>
   <dl>
     <dd>提供更为深度的地图应用场景支持</dd>
@@ -23,14 +23,28 @@
     <dt>准备</dt>
     <dd class="sn">
       <div>注册账号</div>
-      <div>创建应用：控制台 → 应用管理 → 我的应用 → 创建应用</div>
-      <div>申请 KEY：普通 Web/Vue 应用不需要选择产品类别；Webservice API 借助 axios/fetch 采用接口请求的方式使用</div>
+      <div>创建应用</div>
+      <p>控制台 → 应用管理 → 我的应用 → 创建应用</p>
+      <div>申请 KEY</div>
+      <p>勾选产品 Webservice API，需要使用 <a
+          href="https://lbs.qq.com/service/webService/webServiceGuide/position/webServiceIp">定位服务 - IP定位</a>服务和 <a
+          href="https://lbs.qq.com/service/webService/webServiceGuide/search/webServiceSuggestion">搜索服务 - 关键字输入提示</a>
+      </p>
+      <p><a href="https://lbs.qq.com/service/webService/webServiceGuide/webServiceOverview">Webservice
+          API</a>：腾讯地图面向企业开发者提供的地图服务，是基于HTTPS/HTTP协议的数据接口。 开发者可以使用任何客户端、服务器和开发语言，按照腾讯地图WebService
+        API规范，按需构建HTTPS请求，并获取结果数据（目前支持JSON/JSONP方式返回）</p>
+      <p><a href="https://lbs.qq.com/webApi/javascriptGL/glGuide/glOverview">JavaScript API GL</a>：基于 WebGL 技术，主要面向 js
+        的使用</p>
+      <p>同一个账号所有的 key 共享免费额度</p>
+      <p>暂时不用的 key 不要分配额度；或者应先释放已经分配的额度</p>
+      <img src="./imgs/lbs0.png" alt="">
+      <p class="fig-sn">key 的配额分配</p>
     </dd>
     <dt>使用</dt>
     <dd>
       <div>使用 <a href="https://lbs.qq.com/webApi/javascriptGL/glGuide/glComponents">tlbs-map地图组件库</a>；更多信息，请访问 <a
           href="https://github.com/Tencent/tlbs-map-vue">tlbs-map-vue</a>、<a
-          href="https://mapapi.qq.com/web/tlbs-map-vue/guide/get-started.html">快速上手</a></div>
+          href="https://mapapi.qq.com/web/tlbs-map-vue/guide/get-started.html">腾讯位置服务地图组件库 - 快速上手</a></div>
       <div>1. 安装</div>
       <pre>npm install --save tlbs-map-vue</pre>
       <div>2. 引入 - 在 main.js 作为中间件使用</div>
@@ -50,9 +64,13 @@ app.use(TlbsMap);</pre>
   @click="onClick"&gt;
 &lt;/tlbs-map&gt;</pre>
       <div>1. 开发密钥 api-key</div>
+      <div>必填</div>
       <div>2. 中心点 center</div>
+      <div>构建地图时，通过 Webservice API 和获取</div>
       <div>3. 缩放 zoom</div>
+      <div>可以使用默认值</div>
       <div>4. 控制 control</div>
+      <div>可以使用默认值</div>
     </dd>
     <dt>点标记 Marker</dt>
     <dd>

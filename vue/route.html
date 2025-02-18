@@ -45,18 +45,15 @@ app.use(router).mount('#app')</pre>
           href="https://router.vuejs.org/api/interfaces/RouterOptions.html">路由选项 RouterOptions</a> 创建路由实例 <a
           href="https://router.vuejs.org/zh/api/interfaces/Router.html">
           Router</a></div>
-      <div>在属性 <a href="https://router.vuejs.org/api/type-aliases/RouteRecordRaw.html">routes/RouteRecordRaw</a> 配置路由
-      </div>
       <table>
-        <caption>RouterOptions</caption>
+        <caption>路由选项 RouterOptions</caption>
         <tr>
           <th>属性</th>
           <th>说明</th>
         </tr>
         <tr>
           <td>history</td>
-          <td><a href="https://router.vuejs.org/guide/essentials/history-mode.html">历史记录模式</a>
-            <br>createWebHistory：大多 WEB 应用使用的模式，SEO优化好；需要正确配置服务器
+          <td>createWebHistory：大多 WEB 应用使用的模式，SEO 优化好；需要正确配置服务器
             <br>createWebHashHistory：基于 <a href="">hash</a>；SEO 优化体现一般；无须额外配置服务器
           </td>
         </tr>
@@ -70,13 +67,13 @@ app.use(router).mount('#app')</pre>
           </td>
           <td>路由匹配样式
             <br>严格路由匹配样式
-            <br>更多使用，请访问 <a href="./route_style.html">路由样式</a>
           </td>
         </tr>
       </table>
     </dd>
     <dt><a href="https://router.vuejs.org/zh/guide/essentials/history-mode.html">History</a></dt>
     <dd>
+      <div>历史记录模式</div>
       <div>Vue2 使用 mode 配置项，Vue3 使用 history 配置项</div>
       <div>需要引入对应的包再使用</div>
       <div>1. createWebHistory</div>
@@ -105,11 +102,11 @@ const router = createRouter({
     // 
 })</pre>
     </dd>
-    <dt><a href="">Route</a></dt>
+    <dt><a href="https://router.vuejs.org/api/type-aliases/RouteRecordRaw.html">Routes - RouteRecordRaw</a></dt>
     <dd>
       <div>按照值对形式 name-value pair 配置路由，即把 URL 路径映射到组件；其中，路径 path 和组件 component 是 <span class="warn">必填项</span></div>
       <div>所有的路由配置位于项目 src → router 文件夹中，通常是 index.js</div>
-      <div>更多路由配置，请访问 <a href="./route_adv.html">路由配置</a></div>
+      <div>更多路由配置特性，请访问 <a href="./route_adv.html">路由定义和分类</a></div>
       <table>
         <caption>routes/RouteRecordRaw</caption>
         <tr>
@@ -137,12 +134,12 @@ const router = createRouter({
           <td>嵌套路由、子路由；嵌套路由通常需要使用重定向</td>
         </tr>
         <tr>
-          <td>meta</td>
-          <td>路由元信息：用于路由组件的额外配置</td>
-        </tr>
-        <tr>
           <td>props</td>
           <td>是否启用路由参数；可以接收动态路由参数和查询路由参数</td>
+        </tr>
+        <tr>
+          <td>meta</td>
+          <td>路由元信息：用于路由组件的额外配置；无法在编程式路由中定义或覆盖</td>
         </tr>
       </table>
       <div>1. 路径 path</div>
@@ -170,222 +167,18 @@ const routes = [
   { path: '/about', component: () => import("../views/HomeView.vue") },
 ]</pre>
     </dd>
+    <dt>linkActiveClass</dt>
+    <dd>请参考 <a href="./route_style.html">路由样式</a></dd>
+    <dt>linkExactActiveClass</dt>
+    <dd>请参考 <a href="./route_style.html">路由样式</a></dd>
   </dl>
-  <div class="chap">Usage</div>
+  <div class="chap">Summary</div>
   <dl>
-    <dd>
-      <div>1. 结构中使用</div>
-      <div>如果<span class="warn">仅仅</span>在结构中使用，可以使用默认的全局变量 $route 解析并使用</div>
-      <div>2. 逻辑中使用</div>
-      <div>使用useRoute()，既可以在结构中使用，也可以在逻辑中使用</div>
-    </dd>
-    <dt>&lt;a&gt;</dt>
-    <dd>
-      <div>Html 原生标签</div>
-      <div>页面会重新加载/刷新</div>
-    </dd>
-    <dt>&lt;router-link&gt;</dt>
-    <dd>
-      <div>全局组件；不需要在组件模板中导入</div>
-      <div>声明式导航</div>
-      <div>不会刷新页面 - doesn't need to be reloaded from the server</div>
-      <div>编程式导航，使用 vue-router 的组合函数 <a href="./router.html">useRouter()</a> 实现</div>
-      <div>更多属性，请访问 <a href="https://router.vuejs.org/api/interfaces/RouterLinkProps.html">RouterLinkProps</a></div>
-      <table>
-        <caption>RouterLinkProps</caption>
-        <thead>
-          <tr>
-            <th>item</th>
-            <th>desc</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>to</td>
-            <td>当点击该链接时应该进入的路由地址
-              <br>使用 to 属性代替 href 属性
-            </td>
-          </tr>
-          <tr>
-            <td>replace</td>
-            <td>默认是 push 模式，浏览器可以回退
-              <br>使用 replace 属性可以防止浏览器回退
-            </td>
-          </tr>
-          <tr>
-            <td>activeClass</td>
-            <td>链接在匹配当前路由时被应用到 class
-            </td>
-          </tr>
-          <tr>
-            <td>exactActiveClass</td>
-            <td>链接在严格匹配当前路由时被应用到 class
-              <br>多用于嵌套路由中
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <pre>
-//&lt;router-link&gt; - 字符串方法
-&lt;router-link to = "/home" &gt;home&lt;/router-link&gt;
-&lt;router-link to = "/team" &gt;team&lt;/router-link&gt;
-&lt;router-link to = "/about" replace &gt;about&lt;/router-link&gt;
-
-//访问嵌套路由 - 指定完整路由
-&lt;router-link to = "/work/html" &gt;html&lt;/router-link&gt;
-&lt;router-link to = "/work/css3" &gt;css3&lt;/router-link&gt;
-&lt;router-link to = "/work/js" &gt;js&lt;/router-link&gt;
-
-//使用命名路由 - 向 router-link 组件的 to 属性传递一个对象：属性绑定
-&lt;router-link :to = "{name: 'home'}" &gt;home&lt;/router-link&gt;
-&lt;router-link :to = "{name: 'home'}" replace &gt;home&lt;/router-link&gt;
-&lt;router-link :to = "{name: 'home'}" :replace = {{true}} &gt;home&lt;/router-link&gt;
-&lt;router-link :to = "{name: 'home', replace: true}" &gt;home&lt;/router-link&gt;</pre>
-    </dd>
-    <dt>useRoute()</dt>
-    <dd>
-      <div><a href="https://router.vuejs.org/zh/api/#Functions-useRoute">useRoute()</a> 是 vue-router
-        提供的组合式函数，返回一个 RouteLocationNormalized 对象，用于访问当前/激活路由的各种 <span class="warn">路由信息</span></div>
-      <div>常见的路由信息有：fullPath、path、name、params、query、meta 等</div>
-      <div>先引入再使用 - 引入路由包 useRoute 并创建路由实例 route</div>
-      <div>另一个使用较多的是 <a href="./router.html">useRouter()</a>，用于编程式导航</div>
-      <div>适用 Vue 3 的 Composition API </div>
-      <pre>
-import { useRoute, useRouter } from 'vue-router'
-const router = useRouter()
-const route = useRoute()
-console.log(route);</pre>
-      <pre>
-&lt;div&gt;route {{ route.fullPath }}&lt;/div&gt;
-// $route 是全局属性，可以直接在结构中使用
-&lt;div&gt;route {{ $route.fullPath }}&lt;/div&gt;</pre>
-      <table>
-        <caption>useRoute 常用属性</caption>
-        <tr>
-          <th>分类</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>name</td>
-          <td>匹配的路由名称</td>
-        </tr>
-        <tr>
-          <td>path</td>
-          <td>经过百分号编码的 URL 中的 pathname 段</td>
-        </tr>
-        <tr>
-          <td>params</td>
-          <td>从 path 中提取出来并解码后的参数对象</td>
-        </tr>
-        <tr>
-          <td>query</td>
-          <td>代表当前地址的 search 属性的对象</td>
-        </tr>
-        <tr>
-          <td>matched</td>
-          <td>数组，只包含直接的组件 (任何已被加载并在 components 对象内被替换掉的懒加载组件)<br> 可以被直接用于展示路由。不包含重定向记录</td>
-        </tr>
-      </table>
-    </dd>
-  </dl>
-  <div class="chap">Rendering</div>
-  <dl>
-    <dt>&lt;router-view&gt;</dt>
-    <dd>
-      <div>全局组件；不需要在组件模板中导入</div>
-      <div>路由目标占位符</div>
-      <div>借助系统组件 &lt;router-view&gt; 显示与 URL 对应的组件|路由出口 - where to render the current route component</div>
-      <div>有 &lt;router-link&gt; 路由，则必须有 &lt;router-view&gt; 路由出口</div>
-      <div>还可以像缓存组件那样，缓存 &lt;router-view&gt;，见后例</div>
-      <div>单 &lt;router-view&gt; - 应用更为常见</div>
-      <div>多 &lt;router-view&gt; - 允许你在同一个页面同时展示多个组件，每个组件对应不同的视图区域，提高了单页应用的复用性和可维护性</div>
-      <div>路由配置由 component 该为 components</div>
-      <pre>
-{
-    path: '/',
-    name: 'home',
-    components: {
-        default: () => import('../views/Home.vue'),
-        aside: () => import('../components/Aside.vue'),
-        header: () => import('../components/Header.vue'),
-        main: () => import('../components/Main.vue'),
-    }
-}</pre>
-      <div>多个 &lt;router-view&gt; 使用 name 属性区分，避免嵌套路由</div>
-      <pre>
-&lt;router-view name="aside"&gt;&lt;/router-view&gt;
-&lt;router-view name="header"&gt;&lt;/router-view&gt;
-&lt;router-view name="main"&gt;&lt;/router-view&gt;</pre>
-    </dd>
-  </dl>
-  <div class="chap">Summary & Homework</div>
-  <dl>
-    <dt>API</dt>
-    <dd>
-      <div>createRouter()</div>
-      <div>RouterOptions()</div>
-      <div>RouteRecordRaw()</div>
-      <div>useRouter()</div>
-      <div>useRoute()</div>
-    </dd>
-    <dt>Tag</dt>
-    <dd>
-      <div>&lt;router-link&gt;</div>
-      <div>&lt;router-view&gt;</div>
-    </dd>
-    <dt>Concept</dt>
-    <dd>
-      <div>router - 路由器；导航</div>
-      <div>route - 路由；路由的各种数据</div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 单页应用</dd>
     <dd class="sn">
-      <div>创建以学号命名的项目，使用路由</div>
-      <div>在 App.vue 中仅使用 &lt;router-view&gt; 展示路由出口，删除其他内容</div>
-      <div>增加一个 首页视图组件 HomeView.vue</div>
-      <div>增加一个 团队视图组件 TeamView.vue</div>
-      <div>配置路由 - 配置2条路由：/和/team</div>
-      <div>在 HomeView.vue 中使用 &lt;a&gt; 导航到 TeamView.vue</div>
-      <div>在 TeamView.vue 中使用 &lt;a&gt; 导航到 HomeView.vue</div>
-      <div>运行项目，在开发者视图 → 网络 Network 中查看页面的加载情况</div>
-      <div>修改 &lt;a&gt; 为 &lt;router-link&gt;，修改 href 为 to，再次查看页面的加载情况，体会 SPA 的特点</div>
-      <div>修改路由对应的组件为动态导入</div>
-      <div>再次查看页面变化时，路由的懒加载情况</div>
-      <div>代码仓库* - 将项目推送到自己的代码仓库</div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 路由设计1</dd>
-    <dd class="sn">
-      <div>创建以学号命名的项目，使用路由</div>
-      <div>创建路由，包括首页 /、团队 /team、商品 /goods、关于 /about、联系我们 /contact 以及其它路由</div>
-      <div>创建对应的组件 - 使用简单信息表示即可</div>
-      <div>调试并发布；将发布的 dist 目录打包压缩，以学号命名，提交到学习通</div>
-      <div>代码仓库* - 将项目推送到自己的代码仓库</div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] meta应用</dd>
-    <dd>
-      <div>showNav：主导航是否显示</div>
-      <div>指定页面标题 title - 用于<a href="./route_guard.html">路由守卫中更新页面标题</a></div>
-      <div>1. LoginGuide.vue - 隐藏主导航组件 AppNav.vue</div>
-      <pre>&lt;AppNav v-if="!$route.meta.showNav" class="w app-nav" /&gt;</pre>
-      <pre>
-{
-  path: "/login-guide",
-  name: "login-guide",
-  component: () => import("../views/LoginGuide.vue"),
-  meta: { showNav: true, title: "菜单" },
-}</pre>
-      <div>2. GoodsView.vue - 根据是否显示主导航指定购物车位置</div>
-      <pre>&lt;Cart class="w cart" v-if="cartStore.cart.length" :class="{ 'pos': $route.meta.showNav }" /&gt;</pre>
-      <pre>
-{
-  path: "/goods",
-  name: "goods",
-  component: () => import("../views/GoodsView.vue"),
-  meta: { showNav: true, title: "菜单" },
-}</pre>
+      <div>path</div>
+      <div>component</div>
     </dd>
   </dl>
-
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>
 </body>

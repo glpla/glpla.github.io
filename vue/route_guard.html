@@ -17,7 +17,7 @@
     <span>&commat;Guards</span>
   </header>
   <dl>
-    <dd>控制路由的访问权限，如：未登录，不可以下单、发帖、留言或领取优惠券，通常会引导用户到特定页面，如登录页面</dd>
+    <dd>控制路由的访问权限，如：未登录，不可以下单、发帖、留言或领取优惠券，通常会引导用户/重定向到特定页面，如登录页面</dd>
     <dd>完整路由属性和方法，请访问 <a href="https://router.vuejs.org/zh/api/interfaces/Router.html">Router</a></dd>
     <dt>导航解析流程</dt>
     <dd class="sn">
@@ -39,37 +39,39 @@
     </dd>
     <dt><a href="https://router.vuejs.org/zh/api/interfaces/Router.html#Methods-beforeEach">beforeEach</a></dt>
     <dd class="sn">
-      <p>使用 router.beforeEach 注册一个全局前置守卫，执行函数 fn：接收3个参数：</p>
+      <p>使用路由实例 router 注册一个全局前置守卫 beforeEach，执行函数 fn：接收3个参数：</p>
       <p>to：进入的路由</p>
       <p>from：离开的路由</p>
       <p>next()：是一个函数，表示是否允许，实现路由控制，如：未登录不允许访问，并引导|重定向到指定页面</p>
       <div>正常访问；或不使用 next 形参</div>
       <pre>
 router.beforeEach((to, from, next) => {
-    next()
+  // ...
+  next()
 })</pre>
       <pre>
 router.beforeEach((to, from,) => {
+  // ...
 })</pre>
-      <div>不允许访问 - 简单粗暴；不建议直接使用</div>
+      <div>不允许访问 - 简单粗暴，直接拒绝；不建议直接使用</div>
       <pre>
 router.beforeEach((to, from, next) => {
-    if(to.path=='/order')
-        next(false)
+  if(to.path=='/order')
+    next(false)
 })</pre>
-      <div>在next()中指定跳转的路由，引导到指定页面 - 建议</div>
+      <div>在 next() 中指定跳转的路由，引导到指定页面 - 最佳体验</div>
       <pre>
 router.beforeEach((to, from, next) => {
-    if (to.path == '/order') {
-        next({ name: 'home' })
-    } else {
-        next()
-    }
+  if (to.path == '/order') {
+    next({ name: 'home' })
+  } else {
+    next()
+  }
 })</pre>
       <div>如果使用了 next()，但是不执行，则路由 <span class="warn">不会跳转</span>，也就不会执行全局后置钩子 afterEach()</div>
       <pre>
 router.beforeEach((to, from, next) => {
-    console.log('hi');    
+    // ...   
 })</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 登录认证 - 借助登录 token 或本地存储的登录信息实现路由控制</dd>
@@ -87,38 +89,12 @@ router.beforeEach((to, from, next) => {
     </dd>
     <dt><a href="https://router.vuejs.org/zh/api/interfaces/Router.html#Methods-afterEach">afterEach</a></dt>
     <dd>
-      <div>使用 router.afterEach 注册一个全局后置守卫，执行函数 fn，接收2个参数：to、from</div>
+      <div>使用路由实例 router 注册一个全局后置守卫 afterEach，执行函数 fn，接收2个参数：to、from</div>
       <div>不接受 next 函数也不会改变导航本身，因为导航已结束</div>
       <pre>
 router.afterEach((to, from) => {
-    //
+  // ...
 })</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 每次导航结束后，设置页面标题 title</dd>
-    <dd>
-      <div>需要为路由配置 meta 属性来指定 title</div>
-      <div>如果不是每个路由都配置 meta 属性，需判断再使用；必要时，应该指定默认值</div>
-      <pre>
-router.afterEach((to, from) => {
-    if(to.meta.title){
-        document.title = to.meta.title
-    }
-})</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 添加页面 <a href="../node/dependency.html">NProgress - 进度条</a> 特效
-    </dd>
-    <dd>
-      <div>导航前开始，导航后结束</div>
-      <pre>
-router.beforeEach((to, from, next) => {
-    NProgress.start();
-    next()
-})
-    
-router.afterEach((to, from) => {
-    NProgress.done();
-})
-            </pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 统计访问量</dd>
     <dt><a href="https://router.vuejs.org/guide/advanced/navigation-guards.html#Per-Route-Guard">beforeEnter</a>
@@ -127,7 +103,7 @@ router.afterEach((to, from) => {
       <div>路由独享的守卫 - 局部路由使用守卫</div>
       <div>路由配置时指定</div>
       <div>针对特定路由的控制； 只在 <span class="warn">进入</span> 路由时触发</div>
-      <div>动态路由对应的多个路由间不会触发，因为他们对应路由配置中同一条路由</div>
+      <div>动态路由对应的多个路由之间不会触发，因为他们对应路由配置中同一条路由</div>
     </dd>
   </dl>
   <div class="chap">路由守卫和状态管理</div>
@@ -182,6 +158,49 @@ router.afterEach((to, from) => {
     <!-- <dd class="question">优化以上代码</dd> -->
     <!-- <dd>常量的作用域</dd> -->
     <!-- <dd>在外面声明变量，在守卫中赋值</dd> -->
+  </dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd class="sn">
+      <div>afterEach</div>
+      <div>beforeEach</div>
+      <div>beforeEnter</div>
+      <div>Pinia*</div>
+    </dd>
+    <dt>Homework</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 每次导航结束后，设置页面标题 title</dd>
+    <dd>
+      <div>为路由配置 meta 属性，指定 title</div>
+      <div>如果不是每个路由都配置 meta 属性，需判断再使用；必要时，应该指定默认值</div>
+      <pre>
+{
+  path: "/mine",
+  name: "mine",
+  component: () => import("../views/MineView.vue"),
+  meta: { showNav: true, title: "我的 - 个人中心" },
+},</pre>
+      <pre>
+router.afterEach((to, from) => {
+  if(to.meta.title){
+    document.title = to.meta.title
+  }
+})</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 添加页面 <a href="../node/dependency.html">NProgress - 进度条</a> 特效
+    </dd>
+    <dd>
+      <div>导航前开始，导航后结束</div>
+      <pre>
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  next()
+})
+    
+router.afterEach((to, from) => {
+  NProgress.done();
+})</pre>
+    </dd>
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>编程路由 Router</title>
+  <title>编程式导航 Router</title>
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/footer2025.css">
   <base target="_blank">
@@ -13,24 +13,25 @@
 
 <body>
   <header>
-    <h1>编程路由</h1>
-    <span>&commat;Router</span>
+    <h1>编程式导航</h1>
+    <span>&commat;useRouter()</span>
   </header>
   <dl>
+    <dt><a href="https://router.vuejs.org/zh/api/#Functions-useRouter">useRouter()</a></dt>
     <dd>
       <div>除了使用 &lt;router-link&gt; 创建路由|声明式路由，还可以借助 <a
-          href="https://router.vuejs.org/zh/api/#Functions-useRouter">useRouter()</a> 实现 <a
+          href="https://router.vuejs.org/zh/api/interfaces/Router.html">router</a> 实例方法实现 <a
           href="https://router.vuejs.org/zh/guide/essentials/navigation.html">编程式路由</a></div>
       <div>类似于 &lt;a&gt; 和 location.href 的关系</div>
       <div>全局注入的函数，用于获取路由器实例，以便<span class="warn">操作路由</span> ，如 push、replace、go 等</div>
       <div>需引入路由包 useRouter 并创建路由实例 router</div>
-      <div>可以使用普通路由 path；也可以使用命名路由 name</div>
-      <div>可以指定路由参数 params 或 query</div>
+      <div>可以使用普通路由 path；也可以使用查询路由 query 、动态路由 params</div>
+      <div>无法指定 meta；应在路由配置中指定 meta</div>
       <pre>
 import { useRouter } from 'vue-router'
 const router = useRouter()</pre>
       <table>
-        <caption>useRouter 常用方法</caption>
+        <caption>router 的常用实例方法</caption>
         <tr>
           <th>分类</th>
           <th>说明</th>
@@ -56,23 +57,29 @@ const router = useRouter()</pre>
           <td>前进一级；相当于 go(1)</td>
         </tr>
       </table>
+      <div>使用示例 - 在事件处理函数中实现。这里略</div>
       <pre>
-// 查询路由
+// 普通路由 
+router.push('/user')
+
+// 传参路由/查询路由 /register?plan=private
 router.push('/user?id=100')
+router.push({ path: '/user', query: { id: 100 } })
 
-// 查询路由，结果是 /register?plan=private
-router.push({ path: '/register', query: { plan: 'private' } })
+// 传参路由/动态路由
+// 直接拼接
+router.push('/user/100')
+// id = 100
+router.push('/user/' + id.value)
+// 使用模板字符串
+router.push(`/details/${id.value}`)
+// 使用对象 - 只能使用命令路由 name
+router.push({ name: 'details', params: { id: id.value } })
+router.push({ name: 'user', params: { id: 100 } })
 
-// 动态路由 - 静态和动态
-router.push('/user/eduardo')
-router.push({ path: '/detail/' + ind })
-
-// 动态路由，并加上参数，让路由建立 url；只能使用命令路由name
-router.push({ name: 'user', params: { username: 'eduardo' } })
-
-//禁止返回路由
-router.push({ path: '/user', query: { bread: 'user' }, replace: true })
-router.replace({ path: '/user', query: { bread: 'user' } })</pre>
+// 使用路由其它属性，如禁止返回路由
+router.push({ path: '/user', query: { id: 100 }, replace: true })
+router.replace({ path: '/user', query: { id: 100 } })</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 加载完毕后跳转至首页 - 在生命周期函数中，使用延时 setTimeout 模拟实现</dd>
     <dd>
@@ -106,6 +113,26 @@ onMounted(() => {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 找人代付 - 添加用户订单信息作为查询路由参数</dd>
     <dd>略</dd>
+    <dt>$router</dt>
+    <dd>
+      <div>以上是在逻辑中实现编程式导航</div>
+      <div>可以在模板/结构中直接使用全局路由变量 $router 实现</div>
+      <div>无须导入路由包 useRouter 并实例化，更加简洁</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 动态路由使用；查询路由同理</dd>
+    <dd>
+      <pre>&lt;button @click="$router.push('/details/1')"&gt;to demo&lt;/button&gt;</pre>
+      <pre>&lt;button @click="$router.push('/details/' + id)"&gt;to demo&lt;/button&gt;</pre>
+      <pre>&lt;button @click="$router.push({ name: 'details', params: { id: 1 } })"&gt;to demo&lt;/button&gt;</pre>
+      <pre>&lt;button @click="$router.push({ name: 'details', params: { id } })"&gt;to demo&lt;/button&gt;</pre>
+    </dd>
+  </dl>
+  <div class="chap">Summary</div>
+  <dl>
+    <dd class="sn">
+      <div>逻辑中使用 - 引入路由包 useRouter 并实例 router</div>
+      <div>结构中使用 - 全局路由变量 $router</div>
+    </dd>
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>

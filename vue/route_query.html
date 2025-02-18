@@ -17,8 +17,12 @@
     <span>&commat;Query</span>
   </header>
   <dl>
-    <dd>更多路由信息，请访问 <a
-        href="https://router.vuejs.org/zh/api/interfaces/RouteLocationNormalizedLoaded.html">RouteLocationNormalizedLoaded</a>
+    <dd>
+      <div>用来传递参数</div>
+      <div>多用于分享、查看详情等场合</div>
+      <div>更多路由信息，请访问 <a
+          href="https://router.vuejs.org/zh/api/interfaces/RouteLocationNormalizedLoaded.html">RouteLocationNormalizedLoaded</a>
+      </div>
     </dd>
     <dt>配置路由参数</dt>
     <dd>不需要特别配置</dd>
@@ -27,7 +31,6 @@
     <dd>
       <div>在 URL 后面使用 <span class="warn">?</span> 连接 <span class="warn">name - value pair 值对</span>
         形式的查询字符串来传递参数；多个参数使用 <span class="warn">&</span> 拼接 </div>
-      <div>多用于分享、查看详情等场合</div>
       <pre>http://127.0.0.1:5500/vue/router.html?name=gl&age=18</pre>
       <div>可以静态使用；也可以动态绑定</div>
       <div>可以使用 普通路由 path 和 命名路由 name 传递路由参数</div>
@@ -47,12 +50,7 @@
     </dd>
     <dt>接收路由参数</dt>
     <dd>
-      <div><a href="https://router.vuejs.org/zh/api/#Functions-useRoute">useRoute()</a> 是 vue-router
-        提供的组合式函数，返回一个 RouteLocationNormalized 对象，用于访问当前/激活路由的各种 <span class="warn">路由信息</span></div>
-      <div>常见的路由信息有：fullPath、path、name、params、query、meta 等</div>
-      <div><span class="warn">如果仅仅在结构中使用，可以使用默认的全局变量 $route 解析并使用</span></div>
-      <div>先引入再使用 - 引入路由包 useRoute 并创建路由实例 route</div>
-      <div>动态路由参数由路由的 <span class="warn">query</span> 接收</div>
+      <div>使用 <a href="./useroute.html">useRoute()</a> 的 <span class="warn">query</span> 接收</div>
       <pre>
 import { useRoute } from 'vue-router'
 let route = useRoute()
@@ -78,21 +76,28 @@ let {query} = toRefs(route)</pre>
       <p>&lt;template&gt; 渲染路由参数 - 解构路由</p>
       <pre>
 &lt;ul&gt;
-    &lt;li&gt;{{query.id}}&lt;/li&gt;
-    &lt;li&gt;{{query.title}}&lt;/li&gt;
-    &lt;li&gt;{{query.cont}}&lt;/li&gt;
+  &lt;li&gt;{{query.id}}&lt;/li&gt;
+  &lt;li&gt;{{query.title}}&lt;/li&gt;
+  &lt;li&gt;{{query.cont}}&lt;/li&gt;
 &lt;/ul&gt;</pre>
       <p>&lt;template&gt; 渲染路由参数 - 不解构路由</p>
       <pre>
 &lt;ul&gt;
-    &lt;li&gt;{{route.query.id}}&lt;/li&gt;
-    &lt;li&gt;{{route.query.title}}&lt;/li&gt;
-    &lt;li&gt;{{route.query.cont}}&lt;/li&gt;
+  &lt;li&gt;{{route.query.id}}&lt;/li&gt;
+  &lt;li&gt;{{route.query.title}}&lt;/li&gt;
+  &lt;li&gt;{{route.query.cont}}&lt;/li&gt;
 &lt;/ul&gt;</pre>
     </dd>
   </dl>
-  <div class="chap">summary & homework</div>
-  <dl></dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd class="sn">
+      <div>使用 ? 和 & 传递参数 - 值对形式</div>
+      <div>使用路由的 query 接收参数</div>
+    </dd>
+    <dt>Homework</dt>
+  </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>
 </body>
