@@ -70,7 +70,21 @@ app.use(TlbsMap);</pre>
       <div>3. 缩放 zoom</div>
       <div>可以使用默认值</div>
       <div>4. 控制 control</div>
-      <div>可以使用默认值</div>
+      <div>标尺、缩放和旋转等控件</div>
+      <div>默认显示</div>
+      <pre>
+interface Control {
+  scale: { position: string; className: string } | boolean;
+  zoom: { position: string; className: string,  numVisible: boolean} | boolean;
+  rotation: { position: string; className: string } | boolean;
+}</pre>
+      <div>项目中不显示，设置为 false</div>
+      <pre>
+const control = ref({
+  scale: false,
+  zoom: false,
+  rotation: false
+})</pre>
     </dd>
     <dt>点标记 Marker</dt>
     <dd>
@@ -108,6 +122,144 @@ const options = ref({
   minZoom: 5,
   maxZoom: 15,
 })</pre>
+    </dd>
+  </dl>
+  <div class="chap">事件</div>
+  <dl>
+    <dt>返回中心点</dt>
+    <dd>
+      <div>默认没有返回地图中心</div>
+      <div>结构 - 使用 Iconfont，添加事件、</div>
+      <pre>
+&lt;button class="pos" @click="setMapCenter"&gt;
+  &lt;span class="iconfont icon-location2"&gt;&lt;/span&gt;
+&lt;/button&gt;</pre>
+      <div>样式 - 绝对定位在左下角；地图渲染的图层层级为1000，为了不被覆盖，应该大于1000</div>
+      <pre>
+.pos {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  background-color: rgb(255, 255, 255, 1);
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  z-index: 1001;
+}</pre>
+    </dd>
+    <dt>移动地图</dt>
+  </dl>
+  <div class="chap">WebService API</div>
+  <dl>
+    <dd>
+      <div>项目中主要使用到了搜索服务和定位服务</div>
+      <div>更多信息，请访问 <a href="https://lbs.qq.com/service/webService/webServiceGuide/webServiceOverview">WebService
+          API</a></div>
+    </dd>
+    <dt>搜索服务 - <a href="https://lbs.qq.com/service/webService/webServiceGuide/search/webServiceSearch">地点搜索</a></dt>
+    <dd>
+      <div>结果包括：</div>
+      <pre>
+{
+  "id": "1902176000166755090",
+  "title": "瑞幸咖啡(桂林文化宫店)",
+  "address": "广西壮族自治区桂林市秀峰区依仁路38号文化宫名品街3号楼3-1-2号门面",
+  "tel": "",
+  "category": "娱乐休闲:咖啡厅",
+  "type": 0,
+  "location": {
+    "lat": 25.277125,
+    "lng": 110.296377
+  },
+  "_distance": 1928.57,
+  "ad_info": {
+    "adcode": 450302,
+    "province": "广西壮族自治区",
+    "city": "桂林市",
+    "district": "秀峰区"
+  }
+}</pre>
+      <div>页面中，还需要营业时间，需要对结果二次处理；默认营业时间为 08:30 - 21:30</div>
+      <pre>
+locs.value = res.data.data.map(item => ({
+  ...item,
+  open: '08:30 - 21:30'
+}))</pre>
+      <div>获取的信息，需要提供给点标记 geometries</div>
+      <pre>
+geometries.value = res.data.data.map(item => ({
+  styleId: 'marker',
+  position: item.location,
+  content: item.title
+}));</pre>
+    </dd>
+    <dt>定位服务 - <a href="https://lbs.qq.com/service/webService/webServiceGuide/position/webServiceIp">IP定位</a></dt>
+    <dd>
+      <div>结果包括：</div>
+      <pre>
+{
+  "status": 0,
+  "message": "Success",
+  "request_id": "9a7b4858d8de4ab381ce4ac4489d56f7",
+  "result": {
+    "ip": "117.183.223.153",
+    "location": {
+      "lat": 25.25235,
+      "lng": 110.31771
+    },
+    "ad_info": {
+      "nation": "中国",
+      "province": "广西壮族自治区",
+      "city": "桂林市",
+      "district": "七星区",
+      "adcode": 450305,
+      "nation_code": 156
+    }
+  }
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 业务流分析</dd>
+    <dd class="sn">
+      <div>配送方式 LocationView.view 中，使用地图 Map.vue</div>
+      <div>LocationView.view 加载时先利用 <span class="warn">定位服务</span> 获取中心点 center，再根据中心点使用 <span class="warn">搜索服务</span>
+        搜索附近的POI</div>
+      <div>对搜索结果分别处理</div>
+      <p>. 添加营业时间 open 给列表数据负责在页面视图底部渲染门店信息</p>
+      <p>. 构建点标记 geometries</p>
+      <div>将 中心点 center 和点标记geometries 传递给地图组件 Map.vue</div>
+      <pre>
+import { ref, onMounted, inject } from 'vue';
+import Map from '@/components/Map.vue';
+const axios = inject('axios');
+const apiKey = 'YI6BZ-MTZW4-xxxx-yyyy-zzzz-3GBRU'
+const keyword = '瑞幸咖啡';
+const radius = 1000
+const locs = ref([]);
+const center = ref({})
+const geometries = ref([])
+
+onMounted(() => {
+  axios.get(`/map-api/ws/location/v1/ip?ip=&key=${apiKey}`)
+    .then(res => {
+      center.value = res.data.result.location
+      axios.get(`/map-api/ws/place/v1/search?boundary=nearby(${center.value.lat},${center.value.lng},${radius})&keyword=${keyword}&page_size=10&page_index=1&key=${apiKey}`)
+        .then(res => {
+          locs.value = res.data.data.map(item => ({
+            ...item,
+            open: '08:30 - 21:30'
+          }))
+          geometries.value = res.data.data.map(item => ({
+            styleId: 'marker',
+            position: item.location,
+            content: item.title
+          }));
+        })
+    })
+})</pre>
+      <p class="tips">axios 使用依赖注入的方式使用，并进行了代理处理</p>
     </dd>
   </dl>
   <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>

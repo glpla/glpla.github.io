@@ -29,8 +29,8 @@
     </div>
     <div class="title">实验内容</div>
     <div class="cont">
-      <div>路由设计</div>
-      <div>产品列表页到产品详情页</div>
+      <div>主路由设计</div>
+      <div>其它路由设计，如产品列表页到产品详情页</div>
       <p>分享</p>
       <p>访问量</p>
       <div>切换标题</div>
@@ -40,82 +40,9 @@
     <div id="drill"></div>
     <div class="title">参考效果和参考代码</div>
     <div class="cont">
-      <div>基本步骤</div>
-      <p>.创建项目</p>
-      <p>.创建SFC</p>
-      <p>.创建路由</p>
-      <div>路由设计</div>
-      <pre>
-routes: [
-  {
-    path: '/',
-    name: 'home',
-    component: () => import('../views/Heam.vue'),
-    meta: {title: "home"}
-  },
-  {
-    path: '/home',
-    redirect: '/',
-    meta: {title: "home"}
-  },
-  {
-    path: '/index',
-    redirect: {name: "home"},
-    meta: {title: "home"}
-  },
-  {
-    path: '/team',
-    name: 'team',
-    component: () => import('../views/Team.vue'),
-    children: [
-      {
-        path: 'user1',
-        name: 'user1',
-        component: () => import('../sub-view/User1.vue')
-      },
-      // ...
-    ],
-    meta: {title: "team"}
-  },
-  {
-    path: '/work',
-    name: 'work',
-    component: () => import('../views/Work.vue'),
-    children: [
-      {
-        path: 'html',
-        name: 'html',
-        component: () => import('../sub-view/Html.vue')
-      },
-      // ...
-    ],
-    meta: {title: "work"}
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/About.vue'),
-    meta: {title: "about"}
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component:  () => import('../views/Login.vue'),
-    meta: {title: "login"}
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component:  () => import('../views/Register.vue'),
-    meta: {title: "register"}
-  },
-  {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
-    component: () => import('../views/NotFound.vue'),
-    meta: {title: "404"}
-  }
-]</pre>
+      <div>创建项目</div>
+      <div>创建路由</div>
+      <div>创建SFC</div>
       <div>面包屑导航</div>
       <p>.创建组件 Breadcrumb.vue</p>
       <p>.引入路由</p>
@@ -132,8 +59,6 @@ const route = useRoute();</pre>
 &lt;div class="bread"&gt;
 &lt;div v-for="(item, index) in route.matched" :key="index"&gt;{{ item.name }}&lt;/div&gt;
 &lt;/div&gt;</pre>
-      <p>.样式 - 略</p>
-      <p>.使用组件 - 在父组件中使用；略</p>
     </div>
     <div class="title">拓展与思考</div>
     <div class="cont">
