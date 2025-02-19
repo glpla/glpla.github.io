@@ -162,12 +162,32 @@ const grade = computed(() => {
 })      </pre>
     </dd> -->
   </dl>
-  <div class="chap">Summary</div>
+  <div class="chap">Summary & Homework</div>
   <dl>
+    <dt>Summary</dt>
     <dd class="sn">
       <div>计算属性是一个属性，不是方法，使用时不需要()</div>
       <div>除了数据计算外，不应该有其它操作，如数据请求，DOM修改等副作用，即：只做一件事情</div>
-      <div>如果还需要执行其它操作，可以使用侦听函数 <a href="./watch.html">watch</a></div>
+      <div>如果还需要执行其它操作，可以使用 <a href="./watch.html">侦听函数 - watch</a></div>
+    </dd>
+    <dt>Homework</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 分别使用普通方法和计算属性处理数据</dd>
+    <dd>
+      <img src="./imgs/computed0.png" alt="">
+      <p class="fig-sn">处理前</p>
+      <img src="./imgs/computed1.png" alt="">
+      <p class="fig-sn">处理后</p>
+      <!-- <pre>
+const msg = ref({
+  title: '瑞幸咖啡(桂林一中店)',
+  dis: 594.94
+})
+const com = computed(() => {
+  return {
+    title: msg.value.title.replace('瑞幸咖啡(', '').replace(/\)/, ''),
+    dis: msg.value.dis.toFixed(0)
+  }
+})</pre> -->
     </dd>
   </dl>
   <div id="footer"></div>
