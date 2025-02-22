@@ -18,9 +18,10 @@
   </header>
   <dl>
     <dd>
-      <div>定义 Defined </div>
+      <div>1. 定义 Defined </div>
       <div>使用方括号 - square brackets []</div>
-      <div>访问 Access </div>
+      <div>使用构造函数</div>
+      <div>2. 访问 Access </div>
       <div>使用索引，从0开始 - using an index (starts at 0)</div>
       <pre>
 let arr0 = [1, 2, 3];
@@ -31,15 +32,19 @@ console.log(arr0, arr1);</pre>
           href="https://www.fadocodecamp.com/posts/javascript-basics-tutorial">javascript basics tutorial</a></div>
     </dd>
     <dt>属性 Property</dt>
-    <dd>1. index</dd>
-    <dd>数组元素的位置，从0开始</dd>
-    <dd>2. length</dd>
-    <dd>数组长度</dd>
-    <dd>可以任意赋值：少于实际个数，数据会丢失，但是数据仍然在内存中；多于实际个数，值为undefined</dd>
+    <dd>
+      <div>1. index</div>
+      <div>数组元素的位置，从0开始</div>
+      <div>2. length</div>
+      <div>数组长度</div>
+      <div>可以任意赋值：少于实际个数，数据会丢失，但是数据仍然在内存中；多于实际个数，值为undefined</div>
+    </dd>
     <dt>赋值</dt>
     <dd>
       <div>1. 引用赋值 =</div>
-      <div>将变量指向新的引用/地址空间；多个变量引用|指向同一块内存；一个变量对内存数据的修改会影响到另外一个变量；一个变量重新赋值时，会丢失原来的内存</div>
+      <div>将变量指向新的引用/地址空间；多个变量引用|指向同一块内存</div>
+      <div>变量对内存数据的修改会影响到另外一个变量</div>
+      <div>变量重新赋值时，会丢失原来的内存 - 指向变了</div>
       <pre>
 let arr0 = [1, 2];
 let arr1 = arr0;
@@ -54,24 +59,25 @@ let [, , , , a] = [1, 2, 3, 4, 5];
 //a=5</pre>
       <div>交换赋值</div>
       <pre>[a, b] = [b, a];</pre>
-      <div>...剩余赋值 - 第1个给a，其它给rest；剩余属性必须是模式中的最后一个，并且不能有尾随逗号</div>
-      <pre>
-let [a, ...rest] = [1, 2, 3, 4, 5]
-//a=1
-//rest=[2,3,4,5]      </pre>
       <div>默认赋值 - 位置要匹配</div>
       <pre>
 let [name, age = 18, gender] = ['gl', , 'male']
 let [name, age = 18] = ['gl']</pre>
       <div>3. 扩展运算符 spread operator ...</div>
-      <div>将数组各项展开，适合数组复制</div>
+      <div>将数组各项展开，特别适合数组复制</div>
       <pre>
 let a = [1, 2, 3];
 let b = [...a];</pre>
+      <div>...剩余赋值 - 第1个给a，其它给rest；剩余属性必须是模式中的最后一个，并且不能有尾随逗号</div>
+      <pre>
+let [a, ...rest] = [1, 2, 3, 4, 5]
+//a=1
+//rest=[2,3,4,5]</pre>
     </dd>
     <dd class="tips">如何清空数组？</dd>
-    <!-- <dd>设置length为0</dd>
-    <dd>使用splice删除数组元素：splice(0, len)</dd> -->
+    <!-- <dd>设置长度为0：arr.length = 0</dd> -->
+    <!-- <dd>使用splice删除数组元素：arr.splice(0, len)</dd> -->
+    <!-- <dd>指向空数组：arr = []</dd> -->
   </dl>
   <div class="chap">Static methods</div>
   <dl>

@@ -87,13 +87,13 @@ function delItem(dataItem) {
     <dd>
       <pre>let data = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' }]</pre>
       <div>提取特征数据 - 从API请求的数据中获取数据项的 name 展示；也可以在请求时指定需要的数据，具体情况看API的支持</div>
-      <div>提取1个 - 只需要值 value</div>
+      <div>提取1个 - 返回每个数据项的 name 组成的数组</div>
       <pre>let res = data.map(item => item.name)</pre>
-      <div>提取多个 - 显式指定值 value 的 key</div>
+      <div>提取多个 - 返回每个数据项的 name、desc 组成的数组</div>
       <pre>let res = data.map(item => ({name: item.name, desc:item.desc}))</pre>
-      <div>修改格式</div>
+      <div>修改格式 - 修改每个数据项的 name 为大写</div>
       <pre>let res = data.map(item => ({ id: item.id, name: item.name.toUpperCase() }))</pre>
-      <div>添加属性 - 为购物车每个商品增加一个数量，初始化为1</div>
+      <div>添加属性 - 为每个数据项增加一个数量，初始化为1；如添加到购物车</div>
       <pre>let res = data.map(item => ({ ...item, num: 1 }))</pre>
       <div>添加属性 -简单数组生成索引数组</div>
       <pre>
@@ -116,8 +116,9 @@ fetch('/utils/data/message.json')
         href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every">every()</a>
     </dt>
     <dd>
-      <div>返回：布尔值</div>
       <div>对数组中的每一项执行给定函数；如果该函数对 <span class="warn">每一项</span> 都返回 true，则返回 true</div>
+      <div>返回：布尔值</div>
+      <div>原数组：不会被修改</div>
       <div>函数实现原理如下</div>
       <pre>
 const every = (arr, fn) => {
@@ -137,8 +138,9 @@ console.log(res);</pre>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some">some()</a>
     </dt>
     <dd>
-      <div>返回类型：布尔值</div>
       <div>对数组中的每一项执行给定函数；如果该函数 <span class="warn">有一项</span> 返回 true，则返回 true</div>
+      <div>返回类型：布尔值</div>
+      <div>原数组：不会被修改</div>
       <div>函数实现原理如下</div>
       <pre>
 const some = (arr, fn) => {
@@ -168,8 +170,9 @@ console.log(flag); // true     </pre>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">find()</a>
     </dt>
     <dd>
-      <div>返回：查找到的数据，无则返回 undefined</div>
       <div>查找符合条件的 <span class="warn">第一个</span> 数据项</div>
+      <div>返回：查找到的数据，无则返回 undefined</div>
+      <div>原数组：不会被修改</div>
       <pre>
 let arr = [0, 1, 2, 3, 4, 5]
 let res = arr.find(item => item > 3)

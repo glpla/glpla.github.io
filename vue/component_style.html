@@ -116,10 +116,14 @@ span {
 }</pre>
     </dd>
     <dt>插槽样式</dt>
+    <dd>
+      <div>插槽仅仅是指定|预留了一个占位符，父组件使用这个插槽传递什么不确定</div>
+      <div>即使预判到使用什么，也无法指定样式</div>
+      <div>更无法为插槽指定类或内联样式</div>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件 - 默认插槽，这里以传递一个 &lt;img&gt; 为例</dd>
     <dd>
-      <div>版权组件结构同上。版权组件仅仅是指定|预留了一个插槽</div>
-      <div>版权组件样式 - 无效；父组件使用这个插槽传递什么不确定；按F12在开发者视图中，检查元素页可以确定，没有样式</div>
+      <div>版权组件样式 - 设置图片的样式无效；；按F12在开发者视图中，检查元素页可以确定，没有样式</div>
       <pre>
 img {
     width: 30px;
@@ -135,10 +139,10 @@ img {
         &lt;span&gt;glpla.github.io&lt;/span&gt;
     &lt;/div&gt;
 &lt;/template&gt;</pre>
-      <div>解决方案1 - 父组件指定样式，因为这个插槽是父组件提供的，对父组件是可见的；本质上还是父组件的，所以样式有效</div>
-      <div>父组件样式 - 有效</div>
+      <div>解决方案1 - 由父组件指定样式，因为这个插槽是父组件提供的，对父组件是可见的；本质上还是父组件的，所以样式有效</div>
+      <div>使用组件类名作为范围限制</div>
       <pre>
-img {
+.copyright img {
     width: 30px;
     height: 30px;
     border-radius: 50%;

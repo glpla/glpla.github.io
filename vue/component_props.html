@@ -103,7 +103,38 @@ let msg = ref('hi,there')</pre>
       <div>props 应该是只读的，不推荐子组件直接修改 props：当父组件更新 props 时，子组件不应该反过来改变这个值</div>
     </dd>
   </dl>
+  <div class="chap">传递函数|方法</div>
   <dl>
+    <dd>除了传递数据，还可以传递方法 - 子组件执行父组件的方法，如让父组件修改属性参数。。。</dd>
+    <dd class="sn">
+      <div>子组件</div>
+      <p>暴露参数，类型为函数；注意是 Function，不是 function</p>
+      <pre>
+const props = defineProps({
+    closeFn: Function,
+    confirmFn: Function
+})</pre>
+      <p>使用方法</p>
+      <pre>
+&lt;button @click="closeFn"&gt;&times;&lt;/button&gt;
+&lt;button @click="confirmFn"&gt;confirm&lt;/button&gt;</pre>
+      <div>父组件</div>
+      <p>传递方法</p>
+      <pre>&lt;Msg :closeFn="closeFn" :confirmFn="confirmFn"&gt;&lt;/Msg&gt;</pre>
+      <p>定义事件处理函数</p>
+      <pre>
+const closeFn = () => { }
+const confirmFn = () => { }</pre>
+    </dd>
+  </dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd class="sn">
+      <div>子组件声明</div>
+      <div>父组件传递</div>
+    </dd>
+    <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件 Copyright.vue</dd>
     <dd>
       <div>为团队页面不同的用户指定相应的信息，如学号和姓名</div>
@@ -128,30 +159,12 @@ let msg = ref('hi,there')</pre>
     <dd>
       <pre>&lt;Map class="map" :center="center" :geometries="geometries"&gt;&lt;/Map&gt;</pre>
     </dd>
-  </dl>
-  <div class="chap">传递函数|方法</div>
-  <dl>
-    <dd>除了传递数据，还可以传递方法 - 子组件执行父组件的方法，如让父组件修改属性参数。。。</dd>
-    <dd class="sn">
-      <div>子组件</div>
-      <p>暴露参数，类型为函数；注意是 Function，不是 function</p>
-      <pre>
-const props = defineProps({
-    closeFn: Function,
-    confirmFn: Function
-})</pre>
-      <p>使用方法</p>
-      <pre>
-&lt;button @click="closeFn"&gt;&times;&lt;/button&gt;
-&lt;button @click="confirmFn"&gt;confirm&lt;/button&gt;</pre>
-      <div>父组件</div>
-      <p>传递方法</p>
-      <pre>&lt;Msg :closeFn="closeFn" :confirmFn="confirmFn"&gt;&lt;/Msg&gt;</pre>
-      <p>定义事件处理函数</p>
-      <pre>
-const closeFn = () => { }
-const confirmFn = () => { }</pre>
-    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 子组件如何修改/处理父组件传递的参数？</dd>
+    <!-- <dd>
+      <div>使用计算属性</div>
+      <div>使用自定义事件</div>
+      <div>使用仓库/状态管理</div>
+    </dd> -->
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>

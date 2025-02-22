@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>正则表达式 RegExp</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/footer2025.css">
   <base target="_blank">
 </head>
 
@@ -32,40 +33,43 @@ undefined
     <dt>replace</dt>
     <dd>替换匹配的串</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 隐藏手机中间4位</dd>
-    <dd>隐藏前：52188881314</dd>
-    <dd>隐藏后：<span class="cell0">52188881314</span></dd>
     <dd>
+      <div>隐藏前：52188881314</div>
+      <div>隐藏后：521****1314</div>
       <pre>
-let cell0 = document.querySelector('.cell0');
-let reg0 = /^(\d{3})\d{4}(\d{4})$/
-cell0.innerHTML = cell0.innerHTML.replace(reg0, '$1****$2')</pre>
+let cell = document.querySelector('.cell0');
+let reg = /^(\d{3})\d{4}(\d{4})$/
+let res = cell.replace(reg, '$1****$2')</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] DD打车只显示手机后4位</dd>
-    <dd>隐藏前：52188881314</dd>
-    <dd>隐藏后：<span class="cell1">52188881314</span></dd>
+    <dd>
+      <div>隐藏前：52188881314</div>
+      <div>隐藏后：*******1314</div>
+      <pre>
+let cell = '52188881314'
+let reg = /^\d{7}(\d{4})$/
+let res = cell.replace(reg, '*******$1')</pre>
+      <div>/^\d{7}(\d{4})$/：用于匹配以7位数字开头，后跟4位数字的字符串。整个字符串长度为11位。
+        <br>^ 表示字符串的开始。
+        <br>\d{7} 匹配7位数字。
+        <br>(\d{4}) 捕获组，匹配4位数字，并将其作为第一个捕获组 $1。
+        <br>$ 表示字符串的结束
+      </div>
+      <div>'*******$1'：****** 是直接替换的字符串，$1 是正则表达式中的第一个捕获组，即电话号码的后4位</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 编辑结构 - 将每个非空白字符都套上1个&lt;span&gt;</dd>
     <dd>
       <pre>
-let cell1 = document.querySelector('.cell1');
-let reg1 = /^\d{7}(\d{4})$/
-cell1.innerHTML = cell1.innerHTML.replace(reg1, '*******$1')</pre>
+let msg = 'hi,there.'
+let res = msg.replace(/\S/g, '&lt;span&gt;$&&lt;/span&gt;')</pre>
+      <div>\S：匹配任何非空白字符。空白字符包括空格、制表符、换行符等</div>
+      <div>g：全局标志，表示在整个字符串中进行匹配，而不是在找到第一个匹配项后停止</div>
+      <div>$&：一个特殊的替换模式，用于表示整个匹配的子字符串</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 编辑结构 - 将每个字符都套上1个&lt;span&gt;</dd>
-    <dd>. $&表示匹配到的字符</dd>
-    <dd>
-      <pre>
-let h1 = document.querySelector('h1')
-h1.innerHTML = h1.innerHTML.replace(/\S/g, '&lt;span&gt;$&&lt;/span&gt;')</pre>
-    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 编辑结构 - 瑞幸咖啡(高新万达店) 处理为 高新万达店</dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
-  <script>
-    let cell0 = document.querySelector('.cell0');
-    let reg0 = /^(\d{3})\d{4}(\d{4})$/
-    cell0.innerHTML = cell0.innerHTML.replace(reg0, '$1****$2')
-    let cell1 = document.querySelector('.cell1');
-    let reg1 = /^\d{7}(\d{4})$/
-    cell1.innerHTML = cell1.innerHTML.replace(reg1, '*******$1')
-  </script>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>
