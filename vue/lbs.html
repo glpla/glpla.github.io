@@ -55,20 +55,29 @@ app.use(TlbsMap);</pre>
       <div>3. 使用 - 按照自定义组件的形式在组件内使用；修改示例，调整为 Vue3 的 setup 语法糖格式</div>
     </dd>
   </dl>
-  <div class="chap">定制</div>
+  <div class="chap">地图 Map</div>
   <dl>
-    <dt>地图 Map</dt>
+    <dd>更多信息，请访问 <a href="https://lbs.qq.com/webApi/javascriptGL/glDoc/docIndexMap">Map</a></dd>
+    <dt>结构</dt>
     <dd>
       <pre>
-&lt;tlbs-map ref="map" api-key="YI6BZ-MTZW4-HYFUC-F42DP-MK7MQ-3GBRU" :center="center" :zoom="zoom" :control="control"
-  @click="onClick"&gt;
+&lt;tlbs-map ref="mapRef" api-key="YI6BZ-XXXX-YYYY-ZZZZ-MK7MQ-3GBRU" 
+  :center="center" 
+  :zoom="zoom" 
+  :control="control"
+  @click="onClick"
+  @map_inited="onMapInited"&gt;
 &lt;/tlbs-map&gt;</pre>
+    </dd>
+    <dt>属性</dt>
+    <dd>
       <div>1. 开发密钥 api-key</div>
-      <div>必填</div>
       <div>2. 中心点 center</div>
       <div>构建地图时，通过 Webservice API 和获取</div>
+      <pre>const center = ref({ lat: 39.91799, lng: 116.397027 });</pre>
       <div>3. 缩放 zoom</div>
-      <div>可以使用默认值</div>
+      <div>应显示指定；不指定可能影响点标记的显示</div>
+      <pre>const zoom = ref(10);</pre>
       <div>4. 控制 control</div>
       <div>标尺、缩放和旋转等控件</div>
       <div>默认显示</div>
@@ -78,7 +87,7 @@ interface Control {
   zoom: { position: string; className: string,  numVisible: boolean} | boolean;
   rotation: { position: string; className: string } | boolean;
 }</pre>
-      <div>项目中不显示，设置为 false</div>
+      <div>如果项目中不想显示，设置为 false</div>
       <pre>
 const control = ref({
   scale: false,
@@ -86,24 +95,60 @@ const control = ref({
   rotation: false
 })</pre>
     </dd>
-    <dt>点标记 Marker</dt>
+    <dt>事件</dt>
+    <dd>
+      <div>1. map_inited</div>
+      <div>地图实例初始化事件，可以在回调中获取地图实例</div>
+      <div>获取到地图实例就可以使用对应的 <a href="https://lbs.qq.com/webApi/javascriptGL/glDoc/docIndexMap">地图实例方法</a></div>
+      <pre>
+const onMapInited = () => {
+  // 地图加载完成后，可以获取地图实例，调用地图实例方法
+  console.log('map', mapRef.value);
+  console.log('map', mapRef.value.map);
+  console.log('map', mapRef.value.map.getCenter());
+};</pre>
+      <div>2. dragstart、drag、dragend</div>
+      <div>地图拖动时触发</div>
+      <div>移动地图结束后，更新中心点</div>
+      <pre>
+const onDragEnd = (e) => {
+  console.log('map dragend');
+  console.log(e);
+  const newCenter = mapRef.value.map.getCenter();
+  console.log('New center:', newCenter.lat, newCenter.lng);
+  center.value = { lat: newCenter.lat, lng: newCenter.lng };
+}</pre>
+    </dd>
+  </dl>
+  <div class="chap">点标记 Marker</div>
+  <dl>
+    <dd>更多信息，请访问 <a href="https://lbs.qq.com/webApi/javascriptGL/glDoc/glDocMarker">Marker</a></dd>
+    <dt>结构</dt>
     <dd>
       <div>&lt;tlbs-map&gt; 的子元素</div>
-      <pre>&lt;tlbs-multi-marker :geometries="geometries" :styles="styles" :options="options" /&gt;</pre>
+      <pre>
+&lt;tlbs-multi-marker
+  ref="markerRef"
+  :geometries="geometries"
+  :styles="styles"
+  :options="options" 
+  @click="onMarkerClick"/&gt;</pre>
+    </dd>
+    <dt>属性</dt>
+    <dd>
       <div>1. 位置 <a href="https://lbs.qq.com/webApi/javascriptGL/glDoc/glDocMarker#7">Geometries</a></div>
-
       <div>常见有： id、样式ID styleId、位置 position</div>
       <div>以数组的形式，提供多个点标记；可以由 API 获取点数据</div>
       <div>使用 styleId 可以为每个点标记设置不同的样式</div>
-      <div>如果不指定 styleId，则使用默认的样式 - 一个红色的地图标记</div>
       <pre>
 const geometries = ref([
   { styleId: 'marker', position: { lat: 39.91799, lng: 116.397027 } },
 ])</pre>
       <div>2. 样式 <a href="https://lbs.qq.com/webApi/javascriptGL/glDoc/glDocMarker#6">Styles</a></div>
-      <div>常见有：styleId及对应的 width、height 和 src；图片采用静态导入，根据大小，等比例设置大小</div>
+      <div>常见有：styleId 及对应的 width、height 和 src；图片采用静态导入，根据大小，等比例设置大小</div>
       <div>大小只能为正整数</div>
       <div>styleId 和上面的 styleId 对应；如果位置中指定相同的 styleId，则所有的点标记应用同样的样式</div>
+      <div>如果不指定 src，则使用默认的标记 - 一个红色的地图标记</div>
       <pre>
 import src from '@/assets/logo-small.png';
 
@@ -117,11 +162,17 @@ const styles = ref({
 })</pre>
       <div>3. 选项 <a href="https://lbs.qq.com/webApi/javascriptGL/glDoc/glDocMarker#2">Options</a></div>
       <div>常见有：缩放比例</div>
+      <div>可以使用默认值</div>
       <pre>
 const options = ref({
   minZoom: 5,
   maxZoom: 15,
 })</pre>
+    </dd>
+    <dt>事件</dt>
+    <dd>
+      <div>click</div>
+      <div>点击事件，可以获取到点击的点标记</div>
     </dd>
   </dl>
   <div class="chap">事件</div>

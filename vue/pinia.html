@@ -141,6 +141,23 @@ let { count, increment } = storeToRefs(counterStore);</pre>
   <div class="chap">Cases</div>
   <dl>
     <dd>一切皆仓库</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro_lists.html">商品仓库</a></dd>
+    <dd>
+      <div>使用商品 goods</div>
+      <div>单个商品 good</div>
+      <div>获取所有商品 getGoods()</div>
+      <div>根据 id 获取所有商品 getGoodById()</div>
+      <div>其它：分页获取商品。。。</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_pinia.html">购物车仓库</a></dd>
+    <dd>
+      <div>购物车 items</div>
+      <div>拉取/保存购物车 fetchCart()</div>
+      <div>添加到购物车 addToCart()</div>
+      <div>从购物车移除 deleteFromToCart()</div>
+      <div>清空购物车 clearCart()</div>
+      <div>总价 getTotalPrice/reduce() - 后期由 <a href="./watch.html">监听</a> 实现</div>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 点赞仓库 - 多组件共享</dd>
     <dd>
       <div>创建任意仓库，并创建一个状态 num</div>
@@ -182,14 +199,6 @@ onMounted(() => {
     //
 &lt;/div&gt;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro_lists.html">商品仓库</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_pinia.html">购物车仓库</a></dd>
-    <dd>
-      <div>购物车 items</div>
-      <div>总价 getTotalPrice/reduce</div>
-      <div>添加到购物车 addToCart()</div>
-      <div>从购物车移除 deleteFromToCart()</div>
-    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_modal.html">模态框仓库</a></dd>
     <dd>
       <div>侦听仓库变化显示提示信息</div>
@@ -223,9 +232,9 @@ export const useMenuStore = defineStore('menu', () => {
 })</pre>
       <div>2. 在使用仓库的组件结构中，引入仓库，通过汉堡按钮的单击，由标记 flag 控制动态类的应用，达到菜单的折叠和展开</div>
       <div>改进：单击菜单项，折叠菜单</div>
-      <div>提示：在路由配置中，引入仓库，在导航前置守卫中实例化仓库并切换标记switchFlag；请查看 <a href="./router_guard.html">路由 - 导航守卫</a></div>
+      <div>提示：在路由配置中，引入仓库，在导航前置守卫中实例化仓库并切换标记switchFlag；请查看 <a href="./route_guard.html">路由 - 导航守卫</a></div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="">主题切换仓库</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>]主题切换仓库</dd>
     <dd class="sn">
       <p>主题切换/换肤/日夜模式</p>
       <p>通过为 html 指定自定义属性实现 CSS 变量的更新达到切换效果</p>
@@ -275,11 +284,7 @@ const themeStore = useThemeStore();</pre>
     &lt;span v-else class="iconfont icon-daytime-mode-fill"&gt;&lt;/span&gt;
 &lt;/div&gt;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="">访问量统计仓库</a></dd>
-    <dt>
-      <div><a href="./pinia-persist.html">持久化存储</a></div>
-      <div><a href="./route_guard.html">导航守卫</a></div>
-    </dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>]访问量统计仓库</dd>
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>

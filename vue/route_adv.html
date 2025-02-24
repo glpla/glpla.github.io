@@ -63,26 +63,32 @@
       <div>为了渲染子路由对应的视图组件，父路由对应的组件应提供 &lt;router-view&gt;</div>
       <div>子路由的 path 可以省略父级路由，不用 /；/代表根路由/根路径</div>
       <div>可以使用模块定义路由信息再引入，便于管理和复用，如用于导航菜单</div>
+      <div>嵌套路由的样式，如果不是全局的作用，应该单独设计。具体实现请查看 <a href="./route_style.html">路由样式</a></div>
       <pre>
 {
-  path: "/work",
-  component: () => import("../views/Work.vue"),
-  name: "work",
+  path: "/menu",
+  component: () => import("@/views/Menu.vue"),
+  name: "menu",
   children: [
     {
-      path: "html", // 省略父级路由
-      component: () => import("../components/sub-view/Html.vue"),
-      name: "html"
+      path: "goods", // 省略父级路由
+      component: () => import("@/components/Goods.vue"),
+      name: "goods"
     },
     {
-      path: "css", // 省略父级路由
-      component: () => import("../components/sub-view/Css.vue"),
-      name: "css"
+      path: "vip", // 省略父级路由
+      component: () => import("@/components/Vip.vue"),
+      name: "vip"
     },
     {
-      path: "/work/js", // 可以使用完整路由；建议所有子路由配置保持一致
-      component: () => import("../components/sub-view/Js.vue"),
-      name: "js"
+      path: "/menu/rank", // 可以使用完整路由；建议所有子路由配置保持一致
+      component: () => import("@/components/Rank.vue"),
+      name: "rank"
+    },
+    {
+      path: "/menu/favorite",
+      component: () => import("@/components/Favorite.vue"),
+      name: "favorite"
     }
   ]
 }</pre>
@@ -90,14 +96,14 @@
       <div>方案1：子路由使用空路由</div>
       <pre>
 {
-  path: "/work",
-  component: () => import("../views/Work.vue"),
-  name: "work",
+  path: "/menu",
+  component: () => import("@/views/Menu.vue"),
+  name: "menu",
   children: [
     {
       path: "", //空路由
-      component: () => import("../components/sub-view/Html.vue"),
-      name: "html"
+      component: () => import("@/components/Goods.vue"),
+      name: "goods"
     },
     // ...
   ]
@@ -105,20 +111,21 @@
       <div>方案2：父路由重定向到子路由</div>
       <pre>
 {
-  path: '/work',
-  redirect: { name: "html" }, // 使用命名路由
-  // redirect: '/work/html',  // 或使用完整路由
-  component: () => import('../views/Work.vue'),
-  name: "work",
+  path: '/menu',
+  redirect: { name: "goods" }, // 使用命名路由
+  // redirect: '/menu/goods',  // 或使用完整路由
+  component: () => import('@/views/Menu.vue'),
+  name: "menu",
   children:[
     {
-      path: 'html',
-      component: () => import('../components/sub-view/Html.vue'),
-      name: "html"
+      path: 'goods',
+      component: () => import('@/components/Goods.vue'),
+      name: "goods"
     },
     // ...
   ]
 }</pre>
+      <div class="tips">开发中，应该保持一致</div>
     </dd>
     <dt>异常路由 <a href="https://router.vuejs.org/guide/essentials/history-mode.html">Caveat</a></dt>
     <dd>

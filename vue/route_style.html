@@ -79,6 +79,13 @@ router.options = {
       <pre>&lt;div :class = "{'active':route.path.includes('/home')}"&gt;Home&lt;/div&gt;</pre>
     </dd>
   </dl>
+  <div class="chap">编程式导航样式</div>
+  <dl>
+    <dd>
+      <div>以上是针对声明式导航</div>
+      <div>如果是编程式导航，按照元素的普通样式和激活样式区分设计即可</div>
+    </dd>
+  </dl>
   <div class="chap">Summary & Homework</div>
   <dl>
     <dt>Summary</dt>
@@ -90,7 +97,7 @@ router.options = {
       <div>单独设置路由样式</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 主导航 AppNav.vue</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 主路由/导航 AppNav.vue</dd>
     <dd>
       <div>分别使用上述方法实现主导航</div>
       <img src="./imgs/rs0.png" alt="">
@@ -102,6 +109,45 @@ router.options = {
       <img src="./imgs/rs3.png" alt="">
       <div class="fig-sn">当前活动路由</div>
       <img src="./imgs/rs4.png" alt="">
+      <div class="fig-sn">当前活动路由</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 嵌套路由/导航 Menu.vue</dd>
+    <dd>
+      <div>封装为组件，定义 Props 属性</div>
+      <pre>
+const tabs = [
+  { ind: 0, title: '经典菜单', path: '/menu', keyword: 'classic' },
+  { ind: 1, title: '会员卡', path: '/menu/vip', keyword: 'member' },
+  { ind: 2, title: '年度封神榜', path: '/menu/rank', keyword: 'rank' },
+  { ind: 3, title: '我的常点', path: '/menu/favorite', keyword: 'favor' },
+]</pre>
+      <pre>
+&lt;button v-for="(item, ind) in tabs" :key="ind" class="tab-item" @click.stop="navToItem(item)"
+:class="{ active: currentInd === ind }"&gt;
+  &lt;h3&gt;{{ item.title }}&lt;/h3&gt;
+&lt;/button&gt;</pre>
+      <pre>
+.tab-item {
+  position: relative;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background-color: var(--main-color);
+}</pre>
+      <img src="./imgs/rs5.png" alt="">
+      <div class="fig-sn">当前活动路由</div>
+      <img src="./imgs/rs6.png" alt="">
+      <div class="fig-sn">当前活动路由</div>
+      <img src="./imgs/rs7.png" alt="">
+      <div class="fig-sn">当前活动路由</div>
+      <img src="./imgs/rs8.png" alt="">
       <div class="fig-sn">当前活动路由</div>
     </dd>
   </dl>
