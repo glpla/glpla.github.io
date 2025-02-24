@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>腾讯地图服务 LBS</title>
   <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
   <base target="_blank">
 </head>
 
@@ -27,7 +28,7 @@
       <p>控制台 → 应用管理 → 我的应用 → 创建应用</p>
       <div>申请 KEY</div>
       <p>勾选产品 Webservice API，需要使用 <a
-          href="https://lbs.qq.com/service/webService/webServiceGuide/position/webServiceIp">定位服务 - IP定位</a>服务和 <a
+          href="https://lbs.qq.com/service/webService/webServiceGuide/position/webServiceIp">定位服务 - IP定位</a> 服务和 <a
           href="https://lbs.qq.com/service/webService/webServiceGuide/search/webServiceSuggestion">搜索服务 - 关键字输入提示</a>
       </p>
       <p><a href="https://lbs.qq.com/service/webService/webServiceGuide/webServiceOverview">Webservice
@@ -42,9 +43,11 @@
     </dd>
     <dt>使用</dt>
     <dd>
-      <div>使用 <a href="https://lbs.qq.com/webApi/javascriptGL/glGuide/glComponents">tlbs-map地图组件库</a>；更多信息，请访问 <a
-          href="https://github.com/Tencent/tlbs-map-vue">tlbs-map-vue</a>、<a
-          href="https://mapapi.qq.com/web/tlbs-map-vue/guide/get-started.html">腾讯位置服务地图组件库 - 快速上手</a></div>
+      <div>使用方法很多，常见的有 <a href="https://lbs.qq.com/service/webService/webServiceGuide/webServiceOverview">WebService API
+        </a> 和 <a href="https://lbs.qq.com/webApi/javascriptGL/glGuide/glOverview">JavaScript API </a></div>
+      <div>以下以 JavaScript
+        API 中面向 Vue 的 <a href="https://lbs.qq.com/webApi/javascriptGL/glGuide/glComponents">tlbs-map 地图组件库</a>为例介绍其基本使用
+      </div>
       <div>1. 安装</div>
       <pre>npm install --save tlbs-map-vue</pre>
       <div>2. 引入 - 在 main.js 作为中间件使用</div>
@@ -60,24 +63,27 @@ app.use(TlbsMap);</pre>
     <dd>更多信息，请访问 <a href="https://lbs.qq.com/webApi/javascriptGL/glDoc/docIndexMap">Map</a></dd>
     <dt>结构</dt>
     <dd>
+      <div>请使用自己的 api-key</div>
       <pre>
 &lt;tlbs-map ref="mapRef" api-key="YI6BZ-XXXX-YYYY-ZZZZ-MK7MQ-3GBRU" 
   :center="center" 
   :zoom="zoom" 
   :control="control"
   @click="onClick"
-  @map_inited="onMapInited"&gt;
+  @map_inited="onMapInited"
+  @dragend="onDragEnd"&gt;
 &lt;/tlbs-map&gt;</pre>
     </dd>
     <dt>属性</dt>
     <dd>
       <div>1. 开发密钥 api-key</div>
       <div>2. 中心点 center</div>
-      <div>构建地图时，通过 Webservice API 和获取</div>
-      <pre>const center = ref({ lat: 39.91799, lng: 116.397027 });</pre>
+      <div>构建地图时，通过 <a href="https://lbs.qq.com/service/webService/webServiceGuide/webServiceOverview">Webservice
+          API</a> 和获取；这里采用静态值</div>
+      <pre>const center = ref({ lat: 23.02067, lng: 113.75179 });</pre>
       <div>3. 缩放 zoom</div>
       <div>应显示指定；不指定可能影响点标记的显示</div>
-      <pre>const zoom = ref(10);</pre>
+      <pre>const zoom = ref(15);</pre>
       <div>4. 控制 control</div>
       <div>标尺、缩放和旋转等控件</div>
       <div>默认显示</div>
@@ -108,8 +114,7 @@ const onMapInited = () => {
   console.log('map', mapRef.value.map.getCenter());
 };</pre>
       <div>2. dragstart、drag、dragend</div>
-      <div>地图拖动时触发</div>
-      <div>移动地图结束后，更新中心点</div>
+      <div>地图拖动结束时获取中心点并设置/更新中心点</div>
       <pre>
 const onDragEnd = (e) => {
   console.log('map dragend');
@@ -117,6 +122,45 @@ const onDragEnd = (e) => {
   const newCenter = mapRef.value.map.getCenter();
   console.log('New center:', newCenter.lat, newCenter.lng);
   center.value = { lat: newCenter.lat, lng: newCenter.lng };
+}</pre>
+    </dd>
+    <dt>方法</dt>
+    <dd>
+      <div>通过引用拿到地图实例后 - mapRef.value.map，可以使用相关的方法</div>
+      <div>1. 获取中心点 getCenter()</div>
+      <pre>
+const getMapCenter = () => {
+  console.log(mapRef.value.center.lat, mapRef.value.center.lng);
+  console.log(mapRef.value.map.getCenter());
+}</pre>
+      <div>2. 返回中心点 setCenter()</div>
+      <div>默认没有返回地图中心</div>
+      <div>结构 - 使用 Iconfont，添加事件、</div>
+      <pre>
+&lt;button class="pos" @click="setMapCenter"&gt;
+  &lt;span class="iconfont icon-location2"&gt;&lt;/span&gt;
+&lt;/button&gt;</pre>
+      <div>还可以直接修改中心点</div>
+      <pre>
+  const setMapCenter = () => {
+    mapRef.value.map.setCenter({ lat: 30.91799, lng: 110.397027 });
+    // center.value = { lat: 23.02067, lng: 113.75179 }
+  }
+</pre>
+      <div>样式 - 绝对定位在左下角；地图渲染的图层层级为1000，为了不被覆盖，应该大于1000</div>
+      <pre>
+.pos {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  background-color: rgb(255, 255, 255, 1);
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  z-index: 1001;
 }</pre>
     </dd>
   </dl>
@@ -171,42 +215,15 @@ const options = ref({
     </dd>
     <dt>事件</dt>
     <dd>
-      <div>click</div>
+      <div>1. click</div>
       <div>点击事件，可以获取到点击的点标记</div>
     </dd>
-  </dl>
-  <div class="chap">事件</div>
-  <dl>
-    <dt>返回中心点</dt>
-    <dd>
-      <div>默认没有返回地图中心</div>
-      <div>结构 - 使用 Iconfont，添加事件、</div>
-      <pre>
-&lt;button class="pos" @click="setMapCenter"&gt;
-  &lt;span class="iconfont icon-location2"&gt;&lt;/span&gt;
-&lt;/button&gt;</pre>
-      <div>样式 - 绝对定位在左下角；地图渲染的图层层级为1000，为了不被覆盖，应该大于1000</div>
-      <pre>
-.pos {
-  position: absolute;
-  left: 2rem;
-  bottom: 2rem;
-  background-color: rgb(255, 255, 255, 1);
-  width: 4rem;
-  height: 4rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  z-index: 1001;
-}</pre>
-    </dd>
-    <dt>移动地图</dt>
   </dl>
   <div class="chap">WebService API</div>
   <dl>
     <dd>
       <div>项目中主要使用到了搜索服务和定位服务</div>
+      <div>需要使用代理</div>
       <div>更多信息，请访问 <a href="https://lbs.qq.com/service/webService/webServiceGuide/webServiceOverview">WebService
           API</a></div>
     </dd>
@@ -274,16 +291,13 @@ geometries.value = res.data.data.map(item => ({
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 业务流分析</dd>
     <dd class="sn">
-      <div>配送方式 LocationView.view 中，使用地图 Map.vue</div>
-      <div>LocationView.view 加载时先利用 <span class="warn">定位服务</span> 获取中心点 center，再根据中心点使用 <span class="warn">搜索服务</span>
+      <div>地图 Map.vue 加载时先利用 <span class="warn">定位服务</span> 获取中心点 center，再根据中心点使用 <span class="warn">搜索服务</span>
         搜索附近的POI</div>
       <div>对搜索结果分别处理</div>
       <p>. 添加营业时间 open 给列表数据负责在页面视图底部渲染门店信息</p>
       <p>. 构建点标记 geometries</p>
-      <div>将 中心点 center 和点标记geometries 传递给地图组件 Map.vue</div>
       <pre>
 import { ref, onMounted, inject } from 'vue';
-import Map from '@/components/Map.vue';
 const axios = inject('axios');
 const apiKey = 'YI6BZ-MTZW4-xxxx-yyyy-zzzz-3GBRU'
 const keyword = '瑞幸咖啡';
@@ -313,7 +327,8 @@ onMounted(() => {
       <p class="tips">axios 使用依赖注入的方式使用，并进行了代理处理</p>
     </dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>
