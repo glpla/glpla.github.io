@@ -66,7 +66,11 @@ console.log(count.value)</pre>
     <dd class="sn">
       <div>引入 - 略</div>
       <div>结构 - 动态绑定样式并绑定点击事件</div>
-      <pre>&lt;span @click="changeTheme" :class="['iconfont', darkMode ? 'icon-Sun' : 'icon-Moon-Star']"&gt;&lt;/span&gt;</pre>
+      <pre>
+&lt;span 
+  @click="changeTheme" 
+  :class="['iconfont', darkMode ? 'icon-Sun' : 'icon-Moon-Star']"&gt;
+&lt;/span&gt;</pre>
       <div>逻辑</div>
       <pre>
 import { ref } from 'vue'
@@ -80,7 +84,12 @@ const changeTheme = () => {
       <p>[<span class="iconfont icon-magicwand"></span>] 优化</p>
       <p>使用内联事件完成 - 省略事件处理函数 changeTheme 的定义</p>
       <p>使用三元表达式 - 更直观</p>
-      <pre>&lt;span @click="darkMode = !darkMode" class="iconfont" :class="darkMode ? 'icon-Sun' : 'icon-Moon-Star'"&gt;&lt;/span&gt;</pre>
+      <pre>
+&lt;span 
+  @click="darkMode = !darkMode" 
+  class="iconfont" 
+  :class="darkMode ? 'icon-Sun' : 'icon-Moon-Star'"&gt;
+&lt;/span&gt;</pre>
       <pre>
 import { ref } from 'vue'
 
@@ -130,6 +139,11 @@ console.log(obj)</pre>
       <pre>const count = reactive(10)</pre>
       <div>2. 不能重新赋值/不能轻易地“替换”响应式对象</div>
       <pre>
+let obj = reactive({
+    id: 10,
+    name: 'gz'
+})
+
 const done = () => {
     obj = {
       id: 20,
@@ -147,10 +161,10 @@ const done = () => {
     })
 }</pre> -->
     </dd>
-    <dt></dt>
   </dl>
-  <div class="chap">Summary</div>
+  <div class="chap">Summary & Homework</div>
   <dl>
+    <dt>Summary</dt>
     <dd class="sn">
       <div>经过函数 ref()、reactive() 处理后，普通的数据或对象就变成了响应式</div>
       <div>使用 console.log() 查看一个变量是否具有响应式数据：如果带有 Proxy/refImpl，是响应式数据；否则就是普通变量</div>
@@ -159,10 +173,47 @@ const done = () => {
       <p>. 如果需要简单的对象，ref()、reactive() 都可以</p>
       <p>. 层级比较深的对象，请使用 reactive()</p>
       <div>避免数据的响应式丢失</div>
+      <div>体会将数据声明为常量的优势</div>
       <div>ref()、reactive() 都是深层响应，即所有后代级别对象属性都会响应；如果仅仅限制根级对象属性，请使用 <a
           href="https://cn.vuejs.org/api/reactivity-advanced.html#shallowref">shallowref()</a>、<a
           href="https://cn.vuejs.org/api/reactivity-advanced.html#shallowreactive">shallowreactive()</a></div>
       <div>对 shallowref() 而言，它的根属性是 .value</div>
+    </dd>
+    <dt>Homework</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 单独使用和同时使用非响应式数据和响应式数据，查看视图的更新情况</dd>
+    <dd>
+      <pre>
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;div&gt;{{ num }}&lt;/div&gt;
+    &lt;div&gt;{{ age }}&lt;/div&gt;
+    &lt;button @click="inc"&gt;inc&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue'
+let num = 1
+const age = ref(12)
+const inc = () =&gt; {
+  num++
+  age.value++
+}
+&lt;/script&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 分别声明1个简单 ref、1个复杂的 ref 和一个复杂的 reactive，查看其数据结构</dd>
+    <dd>
+      <pre>
+const age = ref(12)
+const state = reactive({
+  id: 1,
+  name: 'xh'
+})
+const obj = ref({
+  id: 1,
+  name: 'xh'
+})
+console.log(age, state, obj);</pre>
     </dd>
   </dl>
   <div id="footer"></div>

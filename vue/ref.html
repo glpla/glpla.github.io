@@ -21,11 +21,11 @@
       <div>HTML 原生开发中，经常需要获取元素|节点，并进一步处理；更多信息，请访问 <a href="../web/js/dom.html">HTML - DOM</a></div>
       <div>早期流行的 JQuery 也是通过操作 DOM 实现</div>
       <div>Vue 中更多的是通过数据驱动的方式实现交互，但有时候避免不了仍然需要操作 DOM</div>
-      <div>通过 ref 标识获取/引用 DOM 节点或组件实例</div>
+      <div>通过 ref 标识获取/引用 DOM 节点或组件实例，如本地或第三方组件库</div>
       <div>需引入包 <a href="https://cn.vuejs.org/api/composition-api-helpers.html#usetemplateref">useTemplateRef</a>
         创建浅层 ref；其值将与模板中的具有匹配 ref attribute 的元素或组件同步</div>
       <!-- <div>多组件情况下，普通的DOM获取容易产生冲突</div> -->
-      <div>早期版本使用 ref 包</div>
+      <div>早期版本使用 ref 包；注意两者使用方式的区别</div>
       <div>更多使用，请访问 <a href="https://cn.vuejs.org/guide/essentials/template-refs">模板引用 - Template Refs</a>、<a
           href="https://cn.vuejs.org/api/built-in-special-attributes.html#ref">API - ref</a></div>
       <pre>import { useTemplateRef } from 'vue'</pre>
@@ -103,11 +103,11 @@ onMounted(() => {
   ipt.value.focus()
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 页面滚动 - 变换顶部导航样式，如添加阴影</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 页面滚动控制 - 变换顶部导航样式，如添加阴影</dd>
     <dd>
       <div>&lt;header&gt; 固定在顶部 fixed</div>
       <div>为 &lt;header&gt; 指定 ref，在页面加载时使用，并监听页面的滚动事件</div>
-      <div>页面卸载时，移除事件监听</div>
+      <div>页面卸载时，移除事件监听；更多生命周期函数的使用，请访问 <a href="./lifecycle.html">Lifecycle</a></div>
       <pre>&lt;header class="header" ref="header"&gt;header&lt;/header&gt;</pre>
       <pre>
 import { onMounted, onUnmounted, useTemplateRef } from 'vue'
@@ -126,7 +126,7 @@ onUnmounted(() => {
   window.removeEventListener('scroll', fn)
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 页面滚动 - 页面/视图滚动到某个位置首页；HomeView.vue</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 页面滚动控制 - 页面/视图滚动到某个位置首页；HomeView.vue → 子标题</dd>
     <dd>
       <div>标题页 tab-box 粘性定位在顶部 sticky</div>
       <div>利用 <a
@@ -213,12 +213,18 @@ onMounted(() => {
 })</pre>
     </dd>
   </dl>
-  <div class="chap">Summary</div>
+  <div class="chap">Summary & Homework</div>
   <dl>
+    <dt>Summary</dt>
     <dd class="sn">
-      <div>用于获取 DOM 节点 或 组件</div>
+      <div>用于获取 DOM 节点实例 或 组件实例</div>
       <div>需引入 ref/useTemplateRef</div>
       <div>使用时，应判定元素是否就绪</div>
+    </dd>
+    <dt>Homework</dt>
+    <dd class="sn">
+      <div>完成上述焦点管理案例</div>
+      <div>完成上述页码滚动控制案例</div>
     </dd>
   </dl>
   <div id="footer"></div>

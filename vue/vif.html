@@ -17,12 +17,13 @@
     <span>&commat;Conditional Rendering</span>
   </header>
   <dl>
+    <dd>根据条件渲染不同的内容</dd>
     <dd>更多信息，请访问 <a href="https://cn.vuejs.org/guide/essentials/conditional">条件渲染 - Conditional Rendering</a></dd>
     <dt>v-if</dt>
     <dd>
       <div>控制 <span class="warn">1个或多个DOM</span> 的条件渲染：只有指令的表达式为真/返回真值才渲染DOM</div>
       <div>检查元素，查看渲染情况</div>
-      <div>可以使用 v-else 或 v-else-if 实现多个元素的条件渲染</div>
+      <div>可以使用 v-else 或 v-else-if 实现多种条件的视图渲染</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 根据加载数据长度相应的渲染页面；如果为0，提示当前数据为0；否则渲染数据</dd>
     <dd>
@@ -37,6 +38,31 @@
       <div>如果购物车商品数量不为0，则显示购物车组件；否则不显示</div>
       <pre>&lt;Cart class="cart" v-if="cartStore.cart.length" /&gt;</pre>
     </dd>
+    <dt>v-show</dt>
+    <dd>控制 <span class="warn">一个DOM</span> 的条件显示</dd>
+    <dd>和 v-if 的不同之处在于：v-show 会在 DOM 渲染中保留该元素；v-show 仅切换了该元素上名为 display 的 CSS 属性</dd>
+    <dd>v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要频繁切换，则使用 v-show 较好；如果在运行时绑定条件很少改变，则 v-if 会更合适</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] isAdult 为真，显示；为假，其 display 为 none</dd>
+    <dd>
+      <pre>&lt;div v-show="isAdult"&gt;18 year +&lt;/div&gt;</pre>
+    </dd>
+    <dd class="tips">
+      <div>v-if：解决渲染不渲染|有没有的问题；控制单个或多个元素</div>
+      <div>v-show：解决显示不显示的问题；控制单个元素</div>
+      <div>任何使用布尔值的地方都可以使用表达式实现</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 分析以下场景，使用 v-if 还是 v-show；并通过开发工具调试数据变化时，页面的渲染情况</dd>
+    <dd>场景1：根据年龄 age，显示成年和未成年；</dd>
+    <dd>场景2：根据积分 credit，显示会员等级</dd>
+  </dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd class="sn">
+      <div>v-if</div>
+      <div>v-show</div>
+    </dd>
+    <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 商品列表页 GoodsView.vue → 购物车 Cart.vue → 商品内容 cont</dd>
     <dd>
       <div>始终显示底部 footer 购物车</div>
@@ -88,22 +114,6 @@
   height: auto;
 }</pre>
     </dd>
-    <dt>v-show</dt>
-    <dd>控制 <span class="warn">一个DOM</span> 的条件显示</dd>
-    <dd>和 v-if 的不同之处在于：v-show 会在 DOM 渲染中保留该元素；v-show 仅切换了该元素上名为 display 的 CSS 属性</dd>
-    <dd>v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要频繁切换，则使用 v-show 较好；如果在运行时绑定条件很少改变，则 v-if 会更合适</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] isAdult 为真，显示；为假，其 display 为 none</dd>
-    <dd>
-      <pre>&lt;div v-show="isAdult"&gt;18 year +&lt;/div&gt;</pre>
-    </dd>
-    <dd class="tips">
-      <div>v-if：解决渲染不渲染|有没有的问题；控制单个或多个元素</div>
-      <div>v-show：解决显示不显示的问题；控制单个元素</div>
-      <div>任何使用布尔值的地方都可以使用表达式实现</div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 分析以下场景，使用 v-if 还是 v-show；并通过开发工具调试数据变化时，页面的渲染情况</dd>
-    <dd>场景1：根据年龄 age，显示成年和未成年；</dd>
-    <dd>场景2：根据积分 credit，显示会员等级</dd>
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>
