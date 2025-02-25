@@ -28,11 +28,35 @@
       font-weight: normal;
     }
 
+    .update-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .update-item::before {
+      content: '';
+      flex: 1;
+      height: 3px;
+      background-image: url(./imgs/dot.png);
+      order: 2;
+    }
+
+    .update-item::after {
+      content: attr(data-title);
+      margin-left: auto;
+      text-transform: capitalize;
+      order: 3;
+    }
+
+
     .item {
       display: flex;
       align-items: center;
     }
 
+    .update-item a:hover,
+    .update-item:has(a:hover)::after,
     .item:hover {
       color: var(--main-color);
     }
@@ -100,17 +124,29 @@
   <div class="w grid b-btm">
     <div>
       <h4 data-icon="&#xe60d;">Admin</h4>
-      <a class="item" data-title="opening" href="./vue/opening202402.html">开课啦</a>
-      <a class="item" data-title="ranking" href="/course/rank.html">积分榜</a>
-      <a class="item" data-title="report" href="/utils/file/软件相关实验报告模版（2023版）提交时需另存为PDF文件并重命名20231022.docx"
-        title="docx">实验报告模板</a>
-      <a class="item" data-title="demo" href="/utils/file/22软工1班_20230901_张树彬_实验1_标签页.pdf" title="pdf">实验报告范例</a>
-      <a class="item" data-title="regulation" href="/utils/file/16-广州新华学院全日制本科学生学籍管理办法.pdf" title="pdf">学籍管理办法</a>
-      <a class="item" data-title="regulation" href="/utils/file/附件9-关于印发《广州新华学院本科教学运行管理规定》的通知.pdf"
-        title="pdf">教学管理规定</a>
-      <a class="item" data-title="resource" href="/utils/index.html">在线资源</a>
-      <a class="item" data-title="scholar" href="/course/paper.html">论文规范要点</a>
-      <a class="item" data-title="cases" href="/common/index.html">案例欣赏</a>
+      <div class="update-item" data-title="scholar">
+        <a href="/course/paper.html">论文规范要点</a>
+      </div>
+      <div class="update-item" data-title="resource">
+        <a href="/utils/index.html">在线资源</a>
+      </div>
+      <div class="update-item" data-title="opening">
+        <a href="./vue/opening202402.html">开课啦</a>
+      </div>
+      <div class="update-item" data-title="ranking">
+        <a href="/course/rank.html">积分榜</a>
+      </div>
+      <div class="update-item" data-title="report">
+        <a href="/utils/file/软件相关实验报告模版（2023版）提交时需另存为PDF文件并重命名20231022.docx" title="docx">实验报告模板</a>
+        <a href="/utils/file/22软工1班_20230901_张树彬_实验1_标签页.pdf" title="pdf">实验报告范例</a>
+      </div>
+      <div class="update-item" data-title="regulation">
+        <a href="/utils/file/16-广州新华学院全日制本科学生学籍管理办法.pdf" title="pdf">学籍管理办法</a>
+        <a href="/utils/file/附件9-关于印发《广州新华学院本科教学运行管理规定》的通知.pdf" title="pdf">教学管理规定</a>
+      </div>
+      <div class="update-item" data-title="cases">
+        <a href="/common/index.html">案例欣赏</a>
+      </div>
     </div>
 
     <div>
@@ -119,19 +155,22 @@
       <a class="item" data-title="SFC" href="https://cn.vuejs.org/api/sfc-spec.html">单文件组件</a>
       <a class="item" data-title="Router" href="https://router.vuejs.org/zh/">路由器</a>
       <a class="item" data-title="Pinia" href="https://pinia.vuejs.org/zh/">状态管理</a>
-      <a class="item" data-title="LBS"
-        href="https://lbs.qq.com/service/webService/webServiceGuide/webServiceOverview">腾讯位置服务</a>
+      <a class="item" data-title="Iconfont" href="https://www.iconfont.cn/">阿里字体图标</a>
+      <a class="item" data-title="Swiper" href="https://swiperjs.com/">轮播图</a>
+      <a class="item" data-title="LBS" href="https://lbs.qq.com/">腾讯位置服务</a>
     </div>
 
     <div>
       <h4 data-icon="&#xe60d;">IDE</h4>
+      <a class="item" data-title="Node" href="./node/index.html">Node</a>
       <a class="item" data-title="Vue" href="https://cn.vuejs.org/guide/introduction.html">Vue</a>
       <a class="item" data-title="Vite" href="https://cn.vitejs.dev/">Vite</a>
-      <a class="item" data-title="Node" href="./node/index.html">Node</a>
       <a class="item" data-title="Vs Code" href="./web/vscode.html">编辑器</a>
       <a class="item" data-title="Chrome" href="./web/chrome.html">浏览器</a>
-      <a class="item" data-title="Git" href="./web/git.html">代码管理</a>
-      <a class="item" data-title="Github" href="./web/github.html">代码仓库</a>
+      <div class="update-item" data-title="Git/Github">
+        <a href="./web/git.html">代码管理</a>
+        <a href="./web/github.html">代码仓库</a>
+      </div>
     </div>
 
     <div>
@@ -237,8 +276,10 @@
       <a class="item" data-title="Message" href="./vue/drill_middle.html">留言板</a>
       <a class="item" data-title="Server" href="./vue/pro_server.html">服务器</a>
       <a class="item" data-title="Luckin Coffee" href="./vue/pro/dist/index.html">2025</a>
-      <a class="item" data-title="Site" href="./vue/pro/distold/index.html">2024 adv</a>
-      <a class="item" data-title="Site" href="./vue/pro/dist2024/index.html">2024</a>
+      <div class="update-item" data-title="Site">
+        <a href="./vue/pro/dist2024/index.html">2024</a>
+        <a href="./vue/pro/distold/index.html">2024Adv</a>
+      </div>
     </div>
   </div>
 
