@@ -34,12 +34,12 @@
       <figure class="img-sn">
         <img src="./imgs/pro.jpg" alt="">
       </figure>
-      <div>5. 项目构建完成后，根据提示逐步执行；因为后期还需要对项目完善开发，请关闭 CMD，使用 Vs Code 打开项目文件夹</div>
-      <div>6. 安装依赖：按 Ctrl + ~ 打开 CMD，执行安装依赖命令；默认情况下，项目不提供依赖，仅仅在配置文件中说明需要哪些依赖；每次复制或克隆别人项目都要先安装依赖；<span
+      <div>5. 项目构建完成后，根据提示逐步执行；因为后期还需要对项目完善开发，请关闭命令行窗口 CMD，使用 Vs Code 打开项目文件夹</div>
+      <div>6. 安装依赖：按 Ctrl + ~ 打开命令行窗口 CMD，执行安装依赖命令；默认情况下，项目不提供依赖，仅仅在配置文件中说明需要哪些依赖；每次复制或克隆别人项目都要先安装依赖；<span
           class="warn">为什么项目不直接提供依赖？</span></div>
       <pre>npm install</pre>
       <div>7. 开发完善；如：定位到 src → App.vue → &lt;template&gt;，修改 &lt;HelloWorld&gt;中的 msg 为 'hello world' 并保存</div>
-      <div>8. 运行项目；在 CMD 中运行项目</div>
+      <div>8. 运行项目；在命令行窗口 CMD 中执行</div>
       <pre>npm run dev</pre>
       <div>9. 按住 CTRL + 单击项目链接，即可打开 Vue + Vite 的欢迎界面；恭喜，您已经打开了 Vue 开发的大门</div>
       <figure class="img-sn">
@@ -136,8 +136,10 @@ import axios from 'axios';</pre>
         "axios": "^1.6.7",
         "font-awesome": "^4.7.0",
         "nanoid": "^5.0.6",
+        "pinia": "^2.3.0",
         "swiper": "^11.0.7",
-        "vue": "^3.4.15"
+        "vue": "^3.4.15",
+        "vue-router": "^4.5.0"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^5.0.3",
@@ -159,7 +161,7 @@ import axios from 'axios';</pre>
     <dt>vite.config.js</dt>
     <dd>
       <div><a href="https://cn.vitejs.dev/config/">配置 Vite</a>；默认配置仅包括插件 plugins 和解析规则 resolve</div>
-      <div>其它如 项目打开、端口、server、base、<a href="../node/proxy.html">代理 Proxy</a> 等等，需手动添加</div>
+      <div>其它如基地址 base 和服务器 server 的相关配置，如项目打开 open、端口 port、<a href="../node/proxy.html">代理 Proxy</a> 等等，需手动添加</div>
       <pre>
 import { fileURLToPath, URL } from "node:url";
 
@@ -186,11 +188,18 @@ export default defineConfig({
     host: '0.0.0.0',    //主机；默认 locahost
     port: '5173',       //端口；默认 5173
     proxy: {
+      // 自建服务器代理
       '/api': {
         target: 'http://127.0.0.1:3000',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')   //不可以省略 rewrite
-      }
+        rewrite: (path) => path.replace(/^\/api/, '')
+      },
+      // 腾讯位置服务代理
+      "/map-api": {
+        target: "https://apis.map.qq.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/map-api/, ""),
+      },
     }
   }
 });</pre>

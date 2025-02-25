@@ -2,79 +2,70 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>单文件组件 SFC</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <base target="_blank">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单文件组件 SFC</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
+  <base target="_blank">
 </head>
 
 <body>
-    <header>
-        <h1>单文件组件</h1>
-        <span>&commat;SFC</span>
-    </header>
-    <dl>
-        <dd>
-            <div><span class="warn">SFC - Single File Component</span>，每个文件都是一个组件</div>
-            <div>文件名采用大驼峰，后缀名为 .vue；如 HomeView.vue</div>
-            <div>将一个 Vue 组件的模板、逻辑与样式封装在单个文件；遵循：结构 - 样式 - 逻辑 <span class="warn">"三分离"</span> 原则</div>
-            <div>基于 SFC 开发的应用程序，称为单页面应用 <span class="warn">SPA - Single Page Application</span>；所有的业务都在一个页面内完成</div>
-            <div>更多信息，请访问 <a href="https://vuejs.org/guide/scaling-up/sfc.html">Single-File Components</a></div>
-            <pre>
+  <header>
+    <h1>单文件组件</h1>
+    <span>&commat;SFC</span>
+  </header>
+  <dl>
+    <dt>单文件组件 SFC</dt>
+    <dd>
+      <div><a href="https://vuejs.org/guide/scaling-up/sfc.html">SFC</a>：Single-File Components，每个文件都是一个组件</div>
+      <div>文件名后缀名为 .vue；采用大驼峰命名格式，如 HomeView.vue</div>
+      <div>将一个 Vue 组件的模板、逻辑与样式封装在单个文件；遵循：结构 - 样式 - 逻辑 <span class="warn">"三分离"</span> 原则</div>
+      <div>基于 SFC 开发的应用程序，称为单页面应用 <span class="warn">SPA</span> - Single Page Application；所有的业务都在一个页面内完成</div>
+      <pre>
 &lt;template&gt;
-    //结构
+  //结构
 &lt;/template&gt;
 
 &lt;script&gt;
-    //逻辑
+  //逻辑
 &lt;/script&gt;
 
 &lt;style&gt;
-    //样式
+  //样式
 &lt;/style&gt;</pre>
-        </dd>
-    </dl>
-    <div class="chap">API</div>
-    <dl>
-        <dd>除了选项式 Options API，还提供了组合式 Composition API</dd>
-        <dd>更多信息，请访问 <a href="https://cn.vuejs.org/api/">API</a></dd>
-        <dt>Options API</dt>
-        <dd>
-            <pre>
+    </dd>
+    <dd>Vue3 提供两种 <a href="https://cn.vuejs.org/api/">API</a>：选项式 Options API 和 组合式 Composition API</dd>
+    <dt>选项式 Options API</dt>
+    <dd>
+      <pre>
 &lt;script&gt;
-    export default {
-        data() {
-            return {
-            }
-        },
-        methods: {
-        },
-        mounted() {
-        }
+  export default {
+    data() {
+      return {
+      }
+    },
+    methods: {
+    },
+    mounted() {
     }
+  }
 &lt;/script&gt;</pre>
-        </dd>
-        <dt>Composition API</dt>
-        <dd>
-            <div>按需导入，并采用 setup 语法糖；我们采用组合式 API</div>
-            <pre>
+    </dd>
+    <dt>组合式 Composition API</dt>
+    <dd>
+      <div>按需导入，并采用 setup 语法糖 - 推荐使用</div>
+      <pre>
 &lt;script setup&gt;
-    
+import { ref, reactive, computed, watch, onMounted } from 'vue'
+
 &lt;/script&gt;</pre>
-        </dd>
-        <dt>Package</dt>
-        <dd>
-            <div>以下是开发中，经常用到的系统模块/包</div>
-            <div>import { ref } from 'vue'</div>
-            <div>import { reactive } from 'vue'</div>
-            <div>import { computed } from 'vue'</div>
-            <div>import { watch } from 'vue'</div>
-            <div>import { onMounted } from 'vue'</div>
-        </dd>
-    </dl>
-    <iframe src="../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 创建组件文件，使用扩展支持的语法，快速生成基本的组件结构</dd>
+  </dl>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>
