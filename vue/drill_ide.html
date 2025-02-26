@@ -24,9 +24,9 @@
       <div>掌握集成开发环境的安装和部署</div>
       <div>掌握项目的创建、架构、开发和发布流程</div>
       <div>熟悉服务器的基本工作原理</div>
-      <div>熟悉数据请求 Fetch/Axios 的基本过程</div>
+      <div>熟悉数据请求 Fetch/Axios 的基本过程*</div>
       <div>熟悉使用 Node.js 和 Express.js 搭建静态资源服务器的基本过程*</div>
-      <div>了解代码仓库和代码托管的基本应用</div>
+      <div>了解代码仓库和代码托管的基本应用*</div>
     </div>
     <div class="title">实验内容</div>
     <div class="cont">
@@ -42,10 +42,16 @@
       <p>.预览 - 使用 preview 或修改路由模式查看项目效果</p>
       <p>.访问/获取数据并渲染*</p>
       <div>静态资源服务器的搭建*【可使用自己熟悉的服务器环境】</div>
+      <p>5.1 部署服务器</p>
       <p>.资源准备：数据和图片</p>
       <p>.安装依赖：Express.js</p>
       <p>.创建服务器脚本</p>
       <p>.开启服务</p>
+      <p>5.2 使用服务</p>
+      <p>.直接使用图片</p>
+      <p>.fetch直接请求数据</p>
+      <p>.fetch 接口请求数据</p>
+      <p>.axios 接口请求数据</p>
       <div>代码仓库和代码托管*</div>
       <p>.注册 Github 或 Gitee</p>
       <p>.创建仓库</p>
@@ -57,6 +63,31 @@
     <div class="title">参考效果和参考代码</div>
     <div class="cont">
       <div><a href="../node/static.html" class="link">静态资源服务器</a></div>
+      <p>.服务器代理</p>
+      <pre>
+server: {
+  proxy: {
+    "/api": {
+      target: "http://localhost:3000",
+      changeOrigin: true,
+      rewrite: (path) => path.replace(/^\/api/, ""),
+    },
+  },
+},</pre>
+      <p>.使用原生 fetch 请求</p>
+      <pre>
+fetch('/api/get')
+  .then(res => res.json())
+  .then(data => {
+    console.log(data)
+  }
+)</pre>
+      <p>.使用 axios 请求</p>
+      <pre>
+axios.get('/api/get')
+  .then(data => {
+    console.log(data)
+  })</pre>
       <div>代码托管 - 请使用自己的仓库地址</div>
       <pre>
 git init
