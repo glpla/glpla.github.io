@@ -1,35 +1,23 @@
 <script setup>
-import { ref, inject } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-const axios = inject('axios')
-// fetch('/api/coffee.json')
-//   .then(res => res.json())
-//   .then(data => console.log(data)
-//   )
-const loadCoffee = () => {
-  console.log('get');
 
-  fetch('/api/get')
+const loadData = () => {
+  console.log('loading data')
+  fetch('/api/data/coffee.json')
     .then(res => res.json())
     .then(data => {
-      console.log(data)
-    }
-    )
-  axios.get('/api/get')
-    .then(data => {
-      console.log(data)
+      console.log(data);
     })
 }
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="http://127.0.0.1:3000/helloworld.jpg" width="125" height="125" />
-    <video src="http://127.0.0.1:3000/helloworld.mp4" muted autoplay></video>
+    <img alt="Vue logo" class="logo" src="http://127.0.0.1:3000/imgs/coffee0.jpg" width="125" height="125" />
+    <button @click="loadData">loading data</button>
     <div class="wrapper">
       <HelloWorld msg="Hello world" />
-      <button @click="loadCoffee">load Coffee</button>
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
