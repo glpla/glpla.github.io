@@ -29,8 +29,8 @@
     <dd>
       <div>1. 使用本地图片</div>
       <pre>&lt;img src="@/assets/imgs/0.jpg" alt=""&gt;</pre>
-      <div>2. 使用 <a href="https://pixabay.com/">pixabay</a>、<a href="https://unsplash.com/">unsplash</a>、<a
-          href="../utils/index.html">大树小站- 在线资源</a> 等在线图片资源；或自己创建 <a href="../node/static.html">资源服务器</a>
+      <div>2. 使用在线图片；如 <a href="https://pixabay.com/">pixabay</a>、<a href="https://unsplash.com/">unsplash</a>、<a
+          href="../utils/index.html">大树小站- 在线资源</a> 等；或自己创建 <a href="../node/static.html">资源服务器</a>
       </div>
       <pre>
 &lt;img src="https://cdn.pixabay.com/photo/2023/04/01/21/11/tunnel-7893124_640.jpg" alt=""&gt;
@@ -38,7 +38,10 @@
     </dd>
     <dt>动态绑定使用</dt>
     <dd>
-      <div>不可以直接绑定图片 url 地址，Vue 会将其解析为一个字符串，而非地址</div>
+      <div>可以绑定在线图片 url 地址</div>
+      <pre>let src = 'https://glpla.github.io/utils/coffee/coffee0.jpg'</pre>
+      <pre>&lt;img :src="src" alt=""&gt;</pre>
+      <div>不可以绑定本地图片 url 地址，Vue 会将其解析为一个字符串，而非地址</div>
       <pre>let src = '@/assets/imgs/0.jpg'</pre>
       <pre>&lt;img :src="src" alt=""&gt;</pre>
       <div>解决方案1 - 使用 public 资源</div>

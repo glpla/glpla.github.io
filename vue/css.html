@@ -36,8 +36,7 @@
     <dd>
       <div>样式部分中，使用 scoped 属性指定样式仅仅作用于当前组件的元素。但是会增加额外的开销：渲染时，每个组件分配一个属性</div>
       <div>内部样式是通过组件的属性进行选择</div>
-      <div><span class="iconfont icon-dianzan"></span> 为组件的根节点指定一个特有的类。如 .nav。推荐以组件名字命名这个类；因为组件的功能各不相同，很容易保证组件类的唯一性
-      </div>
+      <div><span class="iconfont icon-dianzan"></span> 为组件的根节点指定一个特有的类。如 .nav。推荐以组件名字命名这个类 - 组件功能的唯一，可以保证组件类的唯一性</div>
       <div>更多信息，请访问 <a href="https://cn.vuejs.org/api/sfc-css-features.html">API - 单文件组件 CSS 功能</a></div>
       <figure class="img-sn">
         <img src="./imgs/class0.png" alt="">
@@ -52,11 +51,20 @@
         <figcaption>组件内部元素分配的组件属性</figcaption>
       </figure>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 换肤 - 利用局部变量覆盖全局变量实现主题切换</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 系统换肤 - 主题切换</dd>
+    <dd>
+      <div>参考源码 src → assets → base.css</div>
+      <div>Win + i → 个性化 → 颜色 color → 选择模式 → 浅色/深色/自定义</div>
+      <div>颜色模式切换后，查看页面效果；注释代码后再次查看页面效果</div>
+      <pre>
+@media (prefers-color-scheme: dark) {
+  // dark mode varible
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 自定义换肤 - 利用局部变量覆盖全局变量实现主题切换</dd>
     <dd>
       <div>&lt;body&gt; 在挂载点的外围，不在组件的作用域内</div>
-      <div>方案1：CSS 变量定义在全局样式中</div>
-      <div>方案2：取消组件样式的作用域限制 scoped</div>
+      <!-- <div>方案1：CSS 变量定义在全局样式中</div> -->
       <pre>
 :root {
   --bg-color: #fff;
@@ -74,9 +82,9 @@ body.dark-theme {
 }</pre>
       <pre>
 const changeTheme = () => {
-  darkMode.value = !darkMode.value
-  window.document.body.classList.toggle('dark-theme', darkMode.value)
+  document.body.classList.toggle('dark-theme')
 }</pre>
+      <!-- <div>方案2：取消组件样式的作用域限制 scoped</div> -->
     </dd>
     <dt>SCSS</dt>
     <dd>原生 CSS3 也支持嵌套写法</dd>

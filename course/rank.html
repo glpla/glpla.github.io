@@ -37,8 +37,7 @@
     </header>
     <div class="main">
       <div class="main-cont" v-if="rank.cont.length">
-        <h3 class="leading">{{rank.info.grade}}级 - {{rank.info.major}} - {{rank.info.class}}班 - {{rank.info.course}}
-        </h3>
+
         <div class="item" v-for="(item,ind) in rank.cont" :key="item" :title="item.ucredit">
           <div class="sn">{{item.usn}}</div>
           <svg class="icon icon-avatar">
@@ -57,7 +56,10 @@
     <svg class="icon icon-pos">
       <use xlink:href="#icon-a-guzhang"></use>
     </svg>
+
     <footer>
+      <h4 v-if="rank.cont.length">{{rank.info.grade}}级{{rank.info.major}}{{rank.info.class}}班</h4>
+      <h4 v-if="rank.cont.length">{{rank.info.course}}</h4>
       <h5>All Rights Reserved &copy; By Cnplaman 2022-2025</h5>
     </footer>
   </div>

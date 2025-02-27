@@ -61,6 +61,27 @@ console.log(count.value)</pre>
         <div>Vs Code 的 Vue Official 扩展默认勾选 Auto Insert: Dot Value；如果没有或使用其它扩展，请勾选</div>
       </div>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 单独使用和同时使用非响应式数据和响应式数据，查看视图的更新情况</dd>
+    <dd>
+      <pre>
+&lt;template&gt;
+  &lt;div&gt;
+    &lt;div&gt;{{ num }}&lt;/div&gt;
+    &lt;div&gt;{{ age }}&lt;/div&gt;
+    &lt;button @click="inc"&gt;inc&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue'
+let num = 1
+const age = ref(12)
+const inc = () =&gt; {
+  num++
+  age.value++
+}
+&lt;/script&gt;</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 换肤 - 以 <a href="../web/framework/iconfont.html">阿里字体图标</a>
       为例，仅展示图标的切换；具体主题样式由个人自定义</dd>
     <dd class="sn">
@@ -126,6 +147,20 @@ const done = () => {
 console.log(obj)</pre>
       <div class="tips">控制台输出，查看响应式变量的细节</div>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 分别声明1个简单 ref、1个复杂的 ref 和一个复杂的 reactive，查看其数据结构</dd>
+    <dd>
+      <pre>
+const age = ref(12)
+const state = reactive({
+  id: 1,
+  name: 'xh'
+})
+const obj = ref({
+  id: 1,
+  name: 'xh'
+})
+console.log(age, state, obj);</pre>
+    </dd>
     <dt>Limitations</dt>
     <dd>
       <div>使用不当，会丢失数据的响应式 - Breaks Reactivity</div>
@@ -180,40 +215,28 @@ const done = () => {
       <div>对 shallowref() 而言，它的根属性是 .value</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 单独使用和同时使用非响应式数据和响应式数据，查看视图的更新情况</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 Goods.vue →
+        goodsItem.vue</a></dd>
     <dd>
+      <div>数据节点参考如下或自行设计</div>
       <pre>
-&lt;template&gt;
-  &lt;div&gt;
-    &lt;div&gt;{{ num }}&lt;/div&gt;
-    &lt;div&gt;{{ age }}&lt;/div&gt;
-    &lt;button @click="inc"&gt;inc&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script setup&gt;
-import { ref } from 'vue'
-let num = 1
-const age = ref(12)
-const inc = () =&gt; {
-  num++
-  age.value++
-}
-&lt;/script&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 分别声明1个简单 ref、1个复杂的 ref 和一个复杂的 reactive，查看其数据结构</dd>
-    <dd>
-      <pre>
-const age = ref(12)
-const state = reactive({
-  id: 1,
-  name: 'xh'
-})
-const obj = ref({
-  id: 1,
-  name: 'xh'
-})
-console.log(age, state, obj);</pre>
+{
+  "id": 0,
+  "name": "桂院螺蛳粉",
+  "desc": "Lorem ipsum dolor sit, amet consectetur adipisicing elit",
+  "img": "/coffee/coffee0.jpg",
+  "priceOrignal": 15,
+  "price": 12,
+  "discount": 0.2,
+  "flavour": "辛辣",
+  "isFollow": false,
+  "stock": 100,
+  "cup": [],
+  "ther": [],
+  "sugar": [],
+  "dessert": [],
+  "recommend": []
+}</pre>
     </dd>
   </dl>
   <div id="footer"></div>

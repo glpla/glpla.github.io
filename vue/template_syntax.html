@@ -50,17 +50,17 @@
 let msg = 'hi,there'
 let age = 18
 let score = 78
+let arr = [1, 2, 3]
 let obj = {
     id: 100,
     name: 'gl'
 }</pre>
       <pre>
-&lt;div&gt;msg: {{ msg }}&lt;/div&gt;
-&lt;div&gt;handle with msg: {{ msg.substring(3) }}&lt;/div&gt;
-&lt;div&gt;age: {{ age }}&lt;/div&gt;
-&lt;div&gt;handle with age: {{ age + 2 }}&lt;/div&gt;
+&lt;div&gt;msg: {{ msg }} - {{ msg.substring(3) }}&lt;/div&gt;
+&lt;div&gt;age: {{ age }} - {{ age + 2 }}&lt;/div&gt;
 &lt;div&gt;score: {{ score >= 60 ? 'pass' : 'fail' }}&lt;/div&gt;
-&lt;div&gt;id: {{ obj.id }} - name: {{ obj.name }}&lt;/div&gt;</pre>
+&lt;div&gt;arr: {{ arr[0] }} - {{ arr[1] }}&lt;/div&gt;
+&lt;div&gt;id: {{ obj.id }} - name: {{ obj.name.toUpperCase() }}&lt;/div&gt;</pre>
     </dd>
   </dl>
   <div class="chap">Attribute Bindings</div>
@@ -70,7 +70,7 @@ let obj = {
       <div>使用 <span class="warn">v-bind</span> 指令将数据和 HTML 属性 Attribute 绑定</div>
       <div>可以简写为 <span class="warn">冒号 :</span></div>
       <div>不能使用 {{}}</div>
-      <div>拼接时，可以使用模板字符串 ``，便于直接使用变量 - 建议</div>
+      <div>拼接时，可以使用两个波浪线定义的模板字符串 ``，便于直接使用变量 - 建议</div>
       <pre>v-bind:attribute = value</pre>
       <pre>:attribute = value</pre>
     </dd>
@@ -79,10 +79,22 @@ let obj = {
       <div>常见有：id、href、src、class、style、title</div>
       <pre>
 let uid = '20250109'
-let url = 'https://glpla.github.io'</pre>
+let url = 'https://glpla.github.io'
+// 在线链接 - OK
+let src = 'https://glpla.github.io/utils/coffee/coffee0.jpg'
+let imgId = 0
+// src 无法使用本地链接 - Fail
+let img = './assets/logo.svg'</pre>
       <pre>
 &lt;div :id='uid'&gt;my id&lt;/div&gt;
-&lt;a :href="url" target="_blank"&gt;大树小站&lt;/a&gt;</pre>
+&lt;a :href="url" target="_blank"&gt;大树小站&lt;/a&gt;
+&lt;img :src="src" alt="img" title="bg"&gt;
+// 使用模板字符串 - 推荐
+&lt;img :src="`https://glpla.github.io/utils/coffee/coffee${imgId}.jpg`" alt="img" title="bg"&gt;
+// 使用嵌套引号 - 不建议
+&lt;img :src="'https://glpla.github.io/utils/coffee/coffee' + imgId + '.jpg'" alt="img" title="bg"&gt;
+// 无效；请检查元素；正确使用，请访问后续内容
+&lt;img :src="img" alt=""&gt;</pre>
     </dd>
     <dt>Boolean</dt>
     <dd>
@@ -107,7 +119,7 @@ button:disabled {
 &lt;input type="radio" name="gender" value="male" checked&gt;male
 &lt;input type="radio" name="gender" value="female"&gt;female</pre>
       <div>多选按钮 checkbox - 根据需要指定 value；其它使用同 radio</div>
-      <div>2. 动态数据使用</div>
+      <div>2. 绑定数据使用</div>
       <div>可使用 <span class="warn">常量关键字</span> true 或 false、布尔变量或表达式</div>
       <pre>
 &lt;button :disabled="true"&gt;submit&lt;/button&gt;

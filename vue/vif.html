@@ -63,7 +63,29 @@
       <div>v-show</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 商品列表页 GoodsView.vue → 购物车 Cart.vue → 商品内容 cont</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品详情页 DetailsView.vue → 价格说明
+        price</a></dd>
+    <dd>
+      <div>默认显示一部分价格说明内容</div>
+      <div>单击价格部分定位在右上侧的箭头，展开所有内容 - 高度发生变化</div>
+      <pre>
+&lt;div class="cont cont-price" :class="{ 'show-cont-all': isShow }"&gt;
+  &lt;ul&gt;
+    //
+  &lt;/ul&gt;
+&lt;/div&gt;</pre>
+      <pre>
+.cont-price ul {
+  height: 10rem;
+  overflow: hidden;
+}
+
+.cont-price.show-cont-all ul {
+  height: auto;
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">菜单 MenuView.vue → 购物车 Cart.vue →
+        商品内容 cont</a></dd>
     <dd>
       <div>始终显示底部 footer 购物车</div>
       <div>点击购物车，为购物车商品内容 cont 指定最大高度为 50vh，显示完整内容；否则 cont 最大高度为0，不显示</div>
@@ -92,26 +114,6 @@
   max-height: 50vh;//显示完整内容，超过 50vh，出现滚动条
   padding-bottom: calc(6rem + var(--p-m-g));
   overflow-y: auto;
-}</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 商品详情页 DetailsView.vue → 价格说明 price</dd>
-    <dd>
-      <div>默认显示一部分价格说明内容</div>
-      <div>单击价格部分定位在右上侧的箭头，展开所有内容</div>
-      <pre>
-&lt;div class="cont cont-price" :class="{ 'show-cont-all': isShow }"&gt;
-  &lt;ul&gt;
-    //
-  &lt;/ul&gt;
-&lt;/div&gt;</pre>
-      <pre>
-.cont-price ul {
-  height: 10rem;
-  overflow: hidden;
-}
-
-.cont-price.show-cont-all ul {
-  height: auto;
 }</pre>
     </dd>
   </dl>
