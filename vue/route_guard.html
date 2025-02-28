@@ -154,6 +154,7 @@ router.afterEach((to, from) => {
       <div>守卫中的两个 store 返回的是同一个 Pinia store 实例。虽然变量名相同，但是在不同的作用域中，引用的都是同一个对象实例，因此不会导致逻辑上的冲突</div>
       <div>更多路由控制，应由后端服务器实现，前端不可靠</div>
       <div>路由配置时，如果不是每个路由都指定 meta，使用时应先判断再使用</div>
+      <div>浏览器的返回和前进，不会触发守卫</div>
     </dd>
     <!-- <dd class="question">优化以上代码</dd> -->
     <!-- <dd>常量的作用域</dd> -->
@@ -169,7 +170,7 @@ router.afterEach((to, from) => {
       <div>Pinia*</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 每次导航结束后，设置页面标题 title</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 每次导航结束后，设置页面标题 title，并让页面滚动到顶部</dd>
     <dd>
       <div>为路由配置 meta 属性，指定 title</div>
       <div>如果不是每个路由都配置 meta 属性，需判断再使用；必要时，应该指定默认值</div>
@@ -182,6 +183,7 @@ router.afterEach((to, from) => {
 },</pre>
       <pre>
 router.afterEach((to, from) => {
+  window.scrollTo(0, 0);
   if(to.meta.title){
     document.title = to.meta.title
   }

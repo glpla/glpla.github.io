@@ -142,6 +142,21 @@ onUnmounted(() =&gt; {
         <div>已安装 Vs Code 扩展 Vue Vscode Snippets 的，请注意编辑过程中的代码片段提示，不要一个一个字母编辑</div>
       </div>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 页面加载完毕，在顶部呈现</dd>
+    <dd>
+      <div>页面跳转时，可能会保留之前的滚动位置</div>
+      <pre>
+onMounted(() => {
+  window.scrollTo(0, 0)
+  // ...
+})</pre>
+      <div>多个页面需要控制时，可以使用 <a href="./route_guard.html">路由守卫 Guard</a></div>
+      <pre>
+router.afterEach((to, from) => {
+  document.title = to.meta.title;
+  window.scrollTo(0, 0);
+});</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 自定义搜索组件，单击时，显示并自动获取焦点</dd>
     <dd>
       <div>搜索组件参考设计如下</div>

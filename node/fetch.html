@@ -31,7 +31,7 @@
       <div>.语法简介明了；除了IE，多数浏览器都兼容</div>
       <div>.既可以访问远程数据，也可以访问本地数据</div>
       <div>.需要拼接参数；需要二次封装</div>
-      <div>.以下各案例使用回调函数 callback，简化代码可以使用 <a href="./asynawait.html">asyn-await</a></div>
+      <div>.以下各案例使用回调函数 callback，简化代码可以使用 <a href="./asynawait.html">异步等待 asyn-await</a></div>
       <div>.更多信息，请访问
         <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch">Using_Fetch</a>、
         <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch">MDN - fetch</a>、
@@ -44,7 +44,7 @@
     </dd>
     <dt>Syntax</dt>
     <dd>
-      <div>.拿到数据需要2次处理</div>
+      <div>.拿到数据需要 <span class="warn">2次</span> 处理</div>
       <div>.第一个 then() 返回的 Response 对象，包含了一些元数据和方法，但不直接包含请求返回的实际数据；要获取实际的 JSON 数据，需要调用 res.json() 方法将 Response 对象解析为
         JSON
         数据，并返回一个新的 Promise</div>
@@ -341,7 +341,7 @@ router.put('/:id', (req, res) => {
       .then(res => console.log(res))
 
     const img = document.querySelector('#img')
-    fetch('https://glpla.github.io/utils/avatar/avatar0.png')
+    fetch('https://glpla.github.io/utils/avatar/avatar9.png')
       .then(res => res.blob())
       .then(res => img.src = URL.createObjectURL(res))
     // // console.dir(fetch);
