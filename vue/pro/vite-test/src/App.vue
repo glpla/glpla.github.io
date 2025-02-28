@@ -2,6 +2,11 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 
+
+
+
+import axios from 'axios'
+
 const loadData = () => {
   console.log('loading data')
   fetch('/api/data/coffee.json')
@@ -10,12 +15,21 @@ const loadData = () => {
       console.log(data);
     })
 }
+
+
+const loadDataWithAxios = () => {
+  axios.get('/api/data/coffee.json')
+    .then(res => {
+      console.log(res);
+    })
+}
 </script>
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="http://127.0.0.1:3000/imgs/coffee0.jpg" width="125" height="125" />
     <button @click="loadData">loading data</button>
+    <button @click="loadDataWithAxios">loading data with Axios</button>
     <div class="wrapper">
       <HelloWorld msg="Hello world" />
       <nav>

@@ -32,7 +32,8 @@
       <div>默认是 Promise 用法；支持 async/await 用法</div>
       <div>自动转换 JSON 数据</div>
       <div>资源服务器应<span class="warn">提前开启</span>，并严格按照接口使用</div>
-      <div>更多信息，点击访问 <a href="https://www.axios-http.cn/">Axios 中文网</a></div>
+      <div>更多信息，点击访问 <a href="https://www.axios-http.cn/">Axios 中文网</a>、<a
+          href="https://codilime.com/blog/axios-vs-fetch/">Axios vs Fetch</a></div>
     </dd>
     <dt>Installment</dt>
     <dd>
@@ -43,20 +44,52 @@
       <div>保留 crossorigin="anonymous" 避免浏览器提示</div>
       <pre>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js" crossorigin="anonymous"&gt;&lt;/script&gt;</pre>
     </dd>
-  </dl>
-  <div class="chap">Usage</div>
-  <dl>
+    <dt>import</dt>
     <dd>
       <div>先引入后使用</div>
-      <div>局部使用和全局使用</div>
+      <div>1. 局部使用 - 哪个组件需要就在哪个组件内操作</div>
+      <pre>import axios from 'axios'</pre>
+      <div>2. 全局使用</div>
+      <div>引入并配置；一次引入，多次使用</div>
+      <div>早期以 Vue 实例属性的形式使用；现在通过 <a href="../vue/component_provide.html">Provide & Inject</a> 实现</div>
+      <div>所有组件注入 inject 后直接使用</div>
+    </dd>
+    <dd class="tips">
       <div>需要通过 <a href="./proxy.html">代理</a> 解决跨域的问题</div>
       <div>静态网站托管平台通常已经做了跨域处理，可以直接使用</div>
-      <div>支持 <a href="./promise.html">Promise</a> 和 <a href="./asynawait.html">asyn - await</a> 方式</div>
     </dd>
-    <dt>局部使用</dt>
+    <dt>Usage</dt>
     <dd>
-      <div>哪个组件需要就在哪个组件内操作</div>
-      <div>在组件的逻辑中引入使用</div>
+      <div>1. <a href="./promise.html">承诺 Promise</a> 方式</div>
+      <div>通常封装为函数使用</div>
+      <pre>
+axios.get(url)
+  .then((response) => {
+    // 处理成功情况
+    console.log(response);
+  })
+  .catch((error) => {
+    // 处理错误情况
+    console.log(error);
+  })
+  .finally(() => {
+    // 总是会执行
+})</pre>
+      <div>2. <a href="./asynawait.html"> asyn - await</a> 方式</div>
+      <div>需要声明为异步函数或函数表达式再使用</div>
+      <pre>
+async function getUser() {
+  try {
+    const response = await axios.get(url);
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  }
+}</pre>
+      <pre>let getUser = async () => {}</pre>
+    </dd>
+    <dt>Configuration</dt>
+    <dd>
       <div><span class="warn">根据需要</span>配置|指定默认参数，如 baseURL、params、method、header、timeout；baseURL 应和数据服务器的地址保持一致</div>
       <div>企业级的开发，还需要指定不同的环境变量使用相应的URL；如开发环境变量文件 .env 中指定</div>
       <pre>VITE_BASE_URL=http://127.0.0.1:5173</pre>
@@ -84,45 +117,26 @@
         </tr>
       </table>
       <div class="tips">代码托管时，确保在 .gitignore 文件中添加 .env* 以避免敏感信息被提交暴露</div>
-      <div>1. 引入、配置</div>
       <pre>
-import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000'
 axios.defaults.timeout = 3000</pre>
       <div>如果配置了环境变量</div>
       <pre>axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;</pre>
-      <div>2. 承诺使用 - 根据需要封装为函数</div>
-      <pre>
-axios.get('/user?ID=12345')
-  .then((response) => {
-    // 处理成功情况
-    console.log(response);
-  })
-  .catch((error) => {
-    // 处理错误情况
-    console.log(error);
-  })
-  .finally(() => {
-    // 总是会执行
-})</pre>
-      <div>2. 异步等待使用 - 需要声明为异步函数或函数表达式再使用</div>
-      <pre>
-async function getUser() {
-  try {
-    const response = await axios.get('/user?ID=12345');
-    console.log(response);
-  } catch (error) {
-    console.error(error);
-  }
-}</pre>
-      <pre>let getUser = async () => {}</pre>
     </dd>
-    <dt>全局使用</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 请求 json 数据；详细操作请参考<span class="iconfont icon-video"></span> <a
+        href="https://www.bilibili.com/video/BV1xc93YnEok/?spm_id_from=333.1387.homepage.video_card.click&vd_source=fe13480e1099e18e9d5f4e25467df4df">Axios
+        with json</a>
+    </dd>
     <dd>
-      <div>引入并配置；一次引入，多次使用</div>
-      <div>早期以 Vue 实例属性的形式使用；现在通过 <a href="../vue/component_provide.html">Provide & Inject</a> 实现</div>
-      <div>所有组件直接使用</div>
+      <pre>
+axios.get('/api/data/coffee.json')
+.then(res => {
+  console.log(res);
+})</pre>
+
+
     </dd>
+
   </dl>
   <div class="chap">常用 API</div>
   <dl>

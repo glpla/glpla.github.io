@@ -59,9 +59,10 @@
     <dd class="sn">
       <div>与时俱进；根着官方走，不要死记硬背命令</div>
       <div>不要在桌面创建项目</div>
+      <div>请确保系统相关盘符没有限制读写控制！！！通常不会出现这个问题</div>
       <div>项目名称以字母开头，不要大写、不要驼峰命名；如果不知道命名规则，就看示例怎么提示，如 vite-project</div>
       <div>项目目录和文件名不要出现中文符号</div>
-      <div>项目创建完毕后，后续操作请使用 Vs Code 完成：CMD 中，切换到项目目录，输入 code . 即可使用 Vs Code打开项目</div>
+      <div>项目创建完毕后，后续操作请使用 Vs Code 完成：CMD 中，先切换到项目目录，再输入 code . 即可使用 Vs Code 打开项目</div>
       <div>对于单页面应用 SPA，直接用 Live Server 打开 HTML 文件可能不会正常工作，因为 Live Server 默认不支持 History 模式，绕过了 Vite 的构建过程和路由配置；可以调整路由模式由
         createWebHistory 为 createWebHashHistory</div>
       <div>发布后，如果在 <span class="warn">当前项目</span> 中预览，需要为 vite.config.js 增加基地址配置，指定为相对路径</div>
@@ -96,12 +97,14 @@
       <p>.定义的路由导出并在 main.js 中使用</p>
       <div>stores - 仓库目录</div>
       <div>App.vue - 根组件 root component</div>
-      <p>.特别的 <a href="./sfc.html">单文件组件 SFC</a>，包括逻辑 script、结构 template 和样式 style</p>
-      <p>.逻辑中可以引入其它组件、库、模块和本地样式</p>
+      <p>.特别的 <a href="./sfc.html">单文件组件 SFC</a>，包括结构 &lt;template&gt;、逻辑 &lt;script&gt;和样式 &lt;style&gt;</p>
+      <p>.结构 &lt;template&gt;：可以使用原生html标签、vue内置标签和组件标签；组件标签应先在逻辑中引入才能使用</p>
+      <p>.逻辑 &lt;script&gt;：可以引入其它组件、库、模块和本地样式</p>
       <pre>
 import { ref } from 'vue';
-import axios from 'axios';</pre>
-      <p>.样式中可以引入其它样式</p>
+import axios from 'axios';
+import HelloWorld from '@/components/HelloWorld.vue'</pre>
+      <p>.样式 &lt;style&gt;：定制样式、引入其它样式</p>
       <pre>@import url(//at.alicdn.com/t/c/font_4090429_8xfmdtpelxu.css);</pre>
       <div>main.js - 逻辑入口文件；引用并挂载 App.vue</div>
       <p>.可以引入样式库和第三方库等；只支持本地样式文件，不支持在线样式文件</p>
