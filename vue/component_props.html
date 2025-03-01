@@ -131,8 +131,11 @@ const confirmFn = () => { }</pre>
   <dl>
     <dt>Summary</dt>
     <dd class="sn">
+      <div>defineProps()</div>
       <div>子组件声明</div>
       <div>父组件传递</div>
+      <p>. 普通属性</p>
+      <p>. 函数/方法</p>
     </dd>
     <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件 Copyright.vue</dd>
@@ -144,6 +147,29 @@ const confirmFn = () => { }</pre>
       <div>自定义或封装第三方库</div>
       <div>为不同的应用场景提供不同的图片列表数据</div>
       <pre>&lt;Swiper :imgUrl="propImgUrls" :swiperH="propSwiperH"/&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 标题组件 Title.vue</dd>
+    <dd>
+      <div>首页视图 HomeView.vue 使用了两次标题组件，每个组件分配不同的标题内容和事件</div>
+      <pre>
+&lt;div class="title"&gt;
+  &lt;h3&gt;{{ title }}&lt;/h3&gt;
+  &lt;button @click="handle"&gt;
+    &lt;span&gt;查看全部&lt;/span&gt;
+    &lt;span class="iconfont icon-jiantou_liebiaoxiangyou_o"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</pre>
+      <pre>
+const props = defineProps({
+  title: {
+    type: String,
+    default: ''
+  },
+  handle: {
+    type: Function,
+    default: () => { }
+  }
+})</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 菜单视图 MenuView.vue</dd>
     <dd>

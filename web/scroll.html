@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>滚动 Scroll</title>
   <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/footer2025.css">
   <base target="_blank">
   <style>
     .slider {
@@ -178,9 +179,8 @@ body::-webkit-scrollbar {
     <dd>
       <div>方案1：利用DOM元素：滚动事件添加在元素上</div>
       <pre>
-let html = document.documentElement;
-document.addEventListener('scroll', () => {
-let per = html.scrollTop / (html.scrollHeight - html.clientHeight);
+el.addEventListener('scroll', () => {
+let per = el.scrollTop / (el.scrollHeight - el.clientHeight);
 console.log(per);})</pre>
       <div>方案2：利用BOM元素：滚动事件添加在window上</div>
       <pre>
@@ -251,7 +251,8 @@ tips.addEventListener('scroll', () => {
       <div>.当前思路对结构有要求</div>
     </dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer2025.js"></script>
 </body>
 
 </html>
