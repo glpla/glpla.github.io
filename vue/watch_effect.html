@@ -54,6 +54,34 @@ watchEffect((onCleanup) => {
     })
 })</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 换肤 - 更新自定义属性实现</dd>
+    <dd>
+      <div>1. 准备2套变量</div>
+      <pre>
+:root {
+  --bg-color: #fff;
+  --txt-color: #333;
+}
+
+html[data-theme='dark'] {
+  --bg-color: #333;
+  --txt-color: #fff;
+}</pre>
+      <div>2. 准备元素并添加事件，改变主题的值</div>
+      <pre>&lt;button @click="setMode"&gt;darkMode&lt;/button&gt;</pre>
+      <div>3. 准备数据并自动监听主题</div>
+      <pre>
+import { ref, watchEffect } from 'vue'
+let darkMode = ref('light')
+const setMode = () => {
+  darkMode.value = darkMode.value === 'light' ? 'dark' : 'light'
+}
+watchEffect(() => {
+  document.documentElement.setAttribute('data-theme', darkMode.value)
+  // or
+  document.documentElement.dataset.theme = darkMode.value
+})</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 下拉菜单 - 副作用管理</dd>
     <dd>
       <div>使用下拉列表的双向绑定触发自动加载数据</div>

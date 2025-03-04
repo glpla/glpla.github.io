@@ -47,11 +47,27 @@
     <dt>import</dt>
     <dd>
       <div>先引入后使用</div>
-      <div>1. 局部使用 - 哪个组件需要就在哪个组件内操作</div>
+      <div>1. 局部使用 - 组件内使用，哪个组件需要就在哪个组件内操作</div>
       <pre>import axios from 'axios'</pre>
-      <div>2. 全局使用</div>
+      <div>2. 全局使用 - main.js</div>
       <div>引入并配置；一次引入，多次使用</div>
-      <div>早期以 Vue 实例属性的形式使用；现在通过 <a href="../vue/component_provide.html">Provide & Inject</a> 实现</div>
+      <div>早期以 Vue 实例属性的形式使用</div>
+      <div>Vue2</div>
+      <pre>
+import axios from 'axios'
+Vue.protoType.axios = axios;</pre>
+      <div>使用</div>
+      <pre>this.axios()</pre>
+      <div>Vue3</div>
+      <pre>
+import axios from 'axios'
+app.config.globalProperties.axios = axios;</pre>
+
+      <div>使用 - Vue3 如果采用 setup 语法，丢失 this，需要通过获取实例方法，逐步拿到全局属性</div>
+      <pre>
+const instance = getCurrentInstance();
+const axios = instance.appContext.config.globalProperties.axios;</pre>
+      <div>现在通过 <a href="../vue/component_provide.html">Provide & Inject</a> 实现 -推荐</div>
       <div>所有组件注入 inject 后直接使用</div>
     </dd>
     <dd class="tips">
@@ -62,6 +78,24 @@
     <dd>
       <div>1. <a href="./promise.html">承诺 Promise</a> 方式</div>
       <div>通常封装为函数使用</div>
+      <div>通过配置使用，语法比较统一 - get 使用 data传递参数；post 使用 params传递参数</div>
+      <pre>
+axios({
+  method: 'get',
+  url: '',
+  params: {  }
+})
+.thern()
+.catch()</pre>
+      <pre>
+axios({
+  method: 'post',
+  url: '',
+  data: {  }
+})
+.thern()
+.catch()</pre>
+      <div>或根据特定的请求使用，如 get</div>
       <pre>
 axios.get(url)
   .then((response) => {

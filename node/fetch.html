@@ -135,8 +135,20 @@ fetch('https://png.pngtree.com/recommend-works/png-clipart/20250101/ourmid/pngtr
     <dt>注意</dt>
     <dd>
       <div>以上请求没有响应异常</div>
-      <div>fetch 请求不会抛出错误，即使是 404 或 500 错误</div>
+      <div>fetch 请求不会抛出错误，即使是 404 或 500 错误 - A Fetch API promise will be rejected only in case of network failure.</div>
       <div>应根据响应状态 ok 或状态码 status 判断结果</div>
+      <pre>
+fetch('https://codilime.com/')
+  .then(response => {
+    if (!response.ok) {
+      throw Error(`HTTP error: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(console.log)
+  .catch((err) => {
+    console.log(err.message)
+  });</pre>
       <div>如果要处理异常，可以使用 catch()</div>
       <pre>
 ok: true
