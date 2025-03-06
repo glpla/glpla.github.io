@@ -106,6 +106,7 @@ let msg = ref('hi,there')</pre>
   <div class="chap">传递函数|方法</div>
   <dl>
     <dd>除了传递数据，还可以传递方法 - 子组件执行父组件的方法，如让父组件修改属性参数。。。</dd>
+    <dd>适合同时使用多个组件，但是每个组件的逻辑不同</dd>
     <dd class="sn">
       <div>子组件</div>
       <p>暴露参数，类型为函数；注意是 Function，不是 function</p>
@@ -150,7 +151,7 @@ const confirmFn = () => { }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 标题组件 Title.vue</dd>
     <dd>
-      <div>首页视图 HomeView.vue 使用了两次标题组件，每个组件分配不同的标题内容和事件</div>
+      <div>1. 组件定义</div>
       <pre>
 &lt;div class="title"&gt;
   &lt;h3&gt;{{ title }}&lt;/h3&gt;
@@ -170,6 +171,19 @@ const props = defineProps({
     default: () => { }
   }
 })</pre>
+      <div>2. 组件使用：首页视图 HomeView.vue 使用了两次标题组件，每个组件分配不同的标题内容和事件</div>
+      <div>2.1 我的优惠专区</div>
+      <pre>&lt;Title title="我的优惠专区" :handle="toCoupon"&gt;&lt;/Title&gt;</pre>
+      <pre>
+const toCoupon = () => {
+  alert('to coupon')
+}</pre>
+      <div>2.2 福利中心</div>
+      <pre>&lt;Title title="福利中心" :handle="toWelfare"&gt;&lt;/Title&gt;</pre>
+      <pre>
+const toWelfare = () => {
+  alert('to welfare')
+}</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 菜单视图 MenuView.vue</dd>
     <dd>
