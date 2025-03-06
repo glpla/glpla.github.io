@@ -96,6 +96,24 @@ const isOn = ref(true)</pre>
       <div>使用 &lt;template&gt; 处理条件渲染和列表渲染</div>
     </dd>
     <dt>Homework</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 使用列表循环优化 <a href="./class.html">类 class</a> 中的导航/标签页 TabCard 案例
+    </dd>
+    <dd>
+      <div>&lt;template&gt;：使用列表循环、内容绑定、属性绑定</div>
+      <pre>
+&lt;div class="test"&gt;
+  &lt;div class="btn" :class="{ 'active': ind == index }" @click="ind = index" 
+    v-for="(item, index) in navs"
+    :key="index"&gt;{{ item }}
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+      <div>&lt;script&gt;：增加一个标题数组 navs 用于导航列表循环</div>
+      <pre>
+import { ref, watchEffect } from 'vue'
+const ind = ref(0)
+const navs = ref(['Lorem.', 'Labore!', 'Quos.', 'Doloremque.'])</pre>
+      <div>&lt;style&gt;：样式不变</div>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 Goods.vue</a></dd>
     <dd>
       <!-- <pre>

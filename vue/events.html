@@ -18,7 +18,7 @@
   </header>
   <dl>
     <dd>
-      <div>包括：鼠标事件、键盘事件</div>
+      <div>包括：鼠标事件、键盘事件等等</div>
       <div>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/event-handling.html">事件处理 - Event Handling</a>、<a
           href="../web/js/event.html">HTML5事件</a>、<a href="../web/js/event_agent.html">HTML5事件代理</a>、<a
           href="../minip/events.html">微信小程序事件</a></div>
@@ -60,10 +60,14 @@
           <td>mouseover</td>
           <td>鼠标悬停</td>
         </tr>
+        <tr>
+          <td>...</td>
+          <td>...</td>
+        </tr>
       </table>
     </dd>
     <dt>v-on</dt>
-    <dd>使用 v-on 指令来监听 DOM 事件，并在事件触发时执行对应的 JavaScript|事件处理函数</dd>
+    <dd>使用 v-on 指令来监听 DOM 事件，并在事件触发时执行对应的 JavaScript |事件处理函数 handle</dd>
     <dd>
       <pre>&lt;div v-on:click="doSomething"&gt; ... &lt;/div&gt;</pre>
       <div>可简写为 <span class="warn">@</span></div>
@@ -80,6 +84,15 @@
       <pre>
 &lt;div @click="count++"&gt;do something&lt;/div&gt;
 &lt;div&gt;使用数据{{count}}&lt;/div&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 主题切换</dd>
+    <dd>
+      <pre>
+&lt;span 
+  @click="darkMode = !darkMode" 
+  class="iconfont" 
+  :class="darkMode ? 'icon-Sun' : 'icon-Moon-Star'"&gt;
+&lt;/span&gt;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 商品列表页 GoodsView.vue → 购物车 Cart.vue</dd>
     <dd>
@@ -130,7 +143,11 @@ function doClickData(e) {
       <div>4. 同时使用事件对象和参数</div>
       <div>结构中需要使用特殊变量 $event 以便和普通参数区分开来</div>
       <div>逻辑中可以使用任意形参代替特殊变量 $event</div>
-      <pre>&lt;div @click="doClickParaData('18', $event)" data-id="101"&gt;do something with para and data-&lt;/div&gt;</pre>
+      <pre>
+&lt;div 
+  @click="doClickParaData('18', $event)" 
+  data-id="101"
+&gt;do something with para and data- &lt;/div&gt;</pre>
       <pre>
 function doClickParaData(para,e) {
     console.log(para, e.target.dataset);
@@ -266,6 +283,14 @@ function doClickParaData(para,e) {
       <div>Modifiers</div>
     </dd>
     <dt>Homework</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 导航/标签页 TabCard；<a href="./class.html">实现1</a>、<a
+        href="./vfor.html">实现2</a></dd>
+    <dd>
+      <div>使用 &lt;nav&gt; 和 &lt;a&gt; 实现</div>
+      <div>单击标签，对应的标签高亮显示</div>
+      <div>阻止 &lt;a&gt; 的默认事件</div>
+      <div>分别使用事件代理、不使用事件代理实现，并体会2者的区别</div>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 购物车 Cart.vue</dd>
     <dd>
       <div>使用 for 统计商品的价格 totalPrice 和数量 totalQuantity</div>
@@ -295,13 +320,6 @@ const getPic = (ind) => {
 &lt;div&gt;{{ ind }}&lt;/div&gt;
 &lt;img :src='getPic(ind)' alt=""&gt;
 &lt;button @click="chg"&gt;change pic&lt;/button&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页 Tabcard</dd>
-    <dd>
-      <div>使用 &lt;nav&gt; 和 &lt;a&gt; 实现</div>
-      <div>单击标签，对应的标签高亮显示</div>
-      <div>阻止 &lt;a&gt; 的默认事件</div>
-      <div>分别使用事件代理、不使用事件代理实现，并体会2者的区别</div>
     </dd>
   </dl>
   <div id="footer"></div>

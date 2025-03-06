@@ -57,30 +57,52 @@ const isOn = reactive({
       <!-- <div>1.简单字符串：对应的类由字符串表示</div> -->
       <!-- <pre>&lt;div :class="tips"&gt;hi,there&lt;/div&gt;</pre> -->
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 详情页 DetailsView.vue- 价格说明</dd>
-    <dd>
-      <div>默认 isShow 为假，显式部分信息；isShow 为真，显式全部信息</div>
-      <div>请使用三种方式实现，如</div>
-      <pre>
-&lt;div class="cont cont-price" :class="{ 'show-cont-all': isShow }"&gt;
-  //
-&lt;/div&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 导航/标签页</dd>
-    <dd>效果：单击导航列表，对应的导航项高亮</dd>
-    <dd>要求：分别设计静态类和动态类，综合使用上述各种方式实现</dd>
-  </dl>
-  <div class="chap">Summary</div>
-  <dl>
-    <dt>Keywords</dt>
-    <dd>对象</dd>
-    <dd>三元表达式</dd>
-    <dd>数组</dd>
-    <dd>集中和分散</dd>
     <dd class="tips">
       <div>类一定是字符串，所以类应该用括号括起来，否则会被当作绑定的变量；而变量不用</div>
       <div>注意单引号和双引号的匹配</div>
       <div>复合 CSS 属性使用小驼峰方式</div>
+    </dd>
+  </dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd class="sn">
+      <div>对象</div>
+      <div>三元表达式</div>
+      <div>数组</div>
+    </dd>
+    <dt>Homework</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 导航/标签页 TabCard</dd>
+    <dd>
+      <div>效果：单击导航列表，对应的导航项高亮</div>
+      <div>要求：分别设计静态类和动态类，综合使用上述各种方式实现</div>
+      <pre>
+&lt;div class="test"&gt;
+  &lt;div class="btn" :class="{ 'active': ind == 0 }" @click="ind = 0"&gt;Lorem.&lt;/div&gt;
+  &lt;div class="btn" :class="{ 'active': ind == 1 }" @click="ind = 1"&gt;Labore!&lt;/div&gt;
+  &lt;div class="btn" :class="{ 'active': ind == 2 }" @click="ind = 2"&gt;Quos.&lt;/div&gt;
+  &lt;div class="btn" :class="{ 'active': ind == 3 }" @click="ind = 3"&gt;Doloremque.&lt;/div&gt;
+&lt;/div&gt;</pre>
+      <pre>
+import { ref } from 'vue'
+const ind = ref(0)</pre>
+      <pre>
+.test {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 0 10px;
+  border-radius: 4px;
+}
+
+.active {
+  background-color: #f40;
+  color: #fff;
+}</pre>
     </dd>
   </dl>
   <div id="footer"></div>

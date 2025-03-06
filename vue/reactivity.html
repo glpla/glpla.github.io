@@ -82,40 +82,6 @@ const inc = () =&gt; {
 }
 &lt;/script&gt;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 换肤 - 以 <a href="../web/framework/iconfont.html">阿里字体图标</a>
-      为例，仅展示图标的切换；具体主题样式由个人自定义</dd>
-    <dd class="sn">
-      <div>引入 - 略</div>
-      <div>结构 - 动态绑定样式并绑定点击事件</div>
-      <pre>
-&lt;span 
-  @click="changeTheme" 
-  :class="['iconfont', darkMode ? 'icon-Sun' : 'icon-Moon-Star']"&gt;
-&lt;/span&gt;</pre>
-      <div>逻辑</div>
-      <pre>
-import { ref } from 'vue'
-
-const darkMode = ref(false)
-
-const changeTheme = () => {
-  darkMode.value = !darkMode.value
-}</pre>
-      <div>样式 - 略</div>
-      <p>[<span class="iconfont icon-magicwand"></span>] 优化</p>
-      <p>使用内联事件完成 - 省略事件处理函数 changeTheme 的定义</p>
-      <p>使用三元表达式 - 更直观</p>
-      <pre>
-&lt;span 
-  @click="darkMode = !darkMode" 
-  class="iconfont" 
-  :class="darkMode ? 'icon-Sun' : 'icon-Moon-Star'"&gt;
-&lt;/span&gt;</pre>
-      <pre>
-import { ref } from 'vue'
-
-const darkMode = ref(false)</pre>
-    </dd>
   </dl>
   <div class="chap">reactive()</div>
   <dl>
@@ -215,8 +181,42 @@ const done = () => {
       <div>对 shallowref() 而言，它的根属性是 .value</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 Goods.vue →
-        goodsItem.vue</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 主题切换/换肤 - 以 <a href="../web/framework/iconfont.html">阿里字体图标</a>
+      为例，仅展示图标的切换；具体主题样式由个人自定义</dd>
+    <dd class="sn">
+      <div>引入 - 请使用自己的账号选择图标并生成在线 CSS 链接</div>
+      <div>结构 - 动态绑定样式并绑定点击事件</div>
+      <pre>
+&lt;span 
+  @click="changeTheme" 
+  :class="['iconfont', darkMode ? 'icon-Sun' : 'icon-Moon-Star']"&gt;
+&lt;/span&gt;</pre>
+      <div>逻辑</div>
+      <pre>
+import { ref } from 'vue'
+
+const darkMode = ref(false)
+
+const changeTheme = () => {
+  darkMode.value = !darkMode.value
+}</pre>
+      <div>样式 - 略</div>
+      <p>[<span class="iconfont icon-magicwand"></span>] 优化</p>
+      <p>使用内联事件完成 - 省略事件处理函数 changeTheme 的定义</p>
+      <p>使用三元表达式 - 更直观</p>
+      <pre>
+&lt;span 
+  @click="darkMode = !darkMode" 
+  class="iconfont" 
+  :class="darkMode ? 'icon-Sun' : 'icon-Moon-Star'"&gt;
+&lt;/span&gt;</pre>
+      <pre>
+import { ref } from 'vue'
+
+const darkMode = ref(false)</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 Goods.vue</a> →
+      goodsItem.vue</dd>
     <dd>
       <div>数据节点参考如下或自行设计</div>
       <pre>
