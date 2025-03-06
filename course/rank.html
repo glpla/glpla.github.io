@@ -73,13 +73,13 @@
           title: "2025春季",
           cont: [
             {
-              subind: 1,
-              desc: '2023软工3班',
-              url: '20240203.json',
-            }, {
               subind: 0,
               desc: '2023软工4班',
               url: '20240204.json',
+            }, {
+              subind: 1,
+              desc: '2023软工3班',
+              url: '20240203.json',
             }]
         }, {
           ind: 1,
@@ -155,8 +155,8 @@
           ]
         }
         ])
-        const ind = ref(null)
-        const subind = ref(null)
+        const ind = ref(0)
+        const subind = ref(0)
         const rank = ref({
           info: {
             grade: '',
@@ -171,12 +171,13 @@
         const isSubShow = ref(false)
         const getData = (url, $event) => {
           isLoading.value = true;
+
           fetch(`/utils/data/rank/${url}`)
             .then(res => res.json())
             .then(res => {
               rank.value = { info: res.info || {}, cont: res.cont || [] };
-              ind.value = $event.target.dataset.ind || 0;
-              subind.value = $event.target.dataset.subind || 0;
+              ind.value = $event ? $event.target.dataset.ind : 0;
+              subind.value = $event ? $event.target.dataset.subind : 0;
               console.log(rank.value);
               isSubShow.value = false;
               isShow.value = false;
@@ -218,6 +219,7 @@
 
         onMounted(() => {
           isLoading.value = false;
+          getData(navs.value[ind.value].cont[subind.value].url, null)
         })
 
         return {

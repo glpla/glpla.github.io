@@ -43,6 +43,9 @@
       <div>可以绑定在线图片 url 地址</div>
       <pre>let src = 'https://glpla.github.io/utils/coffee/coffee0.jpg'</pre>
       <pre>&lt;img :src="src" alt=""&gt;</pre>
+      <div>或使用模板语法拼接域名和图片地址</div>
+      <pre>let :src="`https://glpla.github.io/utils${src}`"</pre>
+      <pre>let src = '/coffee/coffee0.jpg'</pre>
       <div>不可以绑定本地图片 url 地址，Vue 会将其解析为一个字符串，而非地址</div>
       <pre>let src = '@/assets/imgs/0.jpg'</pre>
       <pre>&lt;img :src="src" alt=""&gt;</pre>
@@ -57,7 +60,8 @@
       <pre>&lt;img :src="src" alt=""/&gt;</pre>
       <!-- <div>import() 是一个异步函数，返回的是一个 Promise，而不是直接的 URL。因此，不能直接在模板中这样使用</div> -->
       <!-- <pre>&lt;img :src="import('@/assets/logo.svg')" alt=""/&gt;</pre> -->
-      <div>解决方案3 - 采用 vite 的 <a href="https://cn.vitejs.dev/guide/assets.html">静态资源处理</a></div>
+      <div>解决方案3 - 采用 vite 的 <a href="https://cn.vitejs.dev/guide/assets.html">静态资源处理</a>；原生 Html 开发时，预览图片使用类似的
+        API实现，请参考 <a href="../web/input_file.html">输入类 input - 文件</a></div>
       <div>为静态资源创建新的URL - 尤其适合处理多个静态资源</div>
       <div>import.meta.url 是一个ESM的原生功能；会暴露当前模块的 URL。将它与原生的 URL 构造器 组合使用，在一个 JavaScript 模块中，通过<span
           class="warn">相对路径</span>得到一个被完整解析的静态资源 URL</div>
@@ -96,7 +100,7 @@ const getImageUrl = (img) => {
     <dt>动态使用</dt>
     <dd>
       <div>为了和绑定的变量区分，使用引号包裹样式属性</div>
-      <div>模板字符串不支持小驼峰写法！！！</div>
+      <div>模板字符串不支持小驼峰写法！！！- that depends</div>
       <pre>
 &lt;div :style="{ 'backgroundImage': 'url(' + url + ')' }"&gt;hi,there&lt;/div&gt;
 &lt;div :style="{ 'background-image': 'url(' + url + ')' }"&gt;hi,there&lt;/div&gt;
@@ -111,22 +115,27 @@ const getImageUrl = (img) => {
       <div>1. 静态使用</div>
       <div>. 网站图标icon、logo类的放在 public 目录</div>
       <div>2. 动态使用</div>
-      <div>. 引入为资源，图片可以放在 src 目录任意地方</div>
+      <div>. 引入为资源，图片可以放在 src 目录任意地方；建议在 assets 目录</div>
       <div>. 使用在线资源</div>
       <div>. 自建资源服务器</div>
     </dd>
     <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] Vite 框架对图片的处理</dd>
     <dd class="sn">
-      <div>静态渲染：分别在 public、assets 和 assets 同级目录创建 imgs 文件夹，并放入一张大图和一张小图，在项目中引用，最后发布，查看框架对静态资源图片的处理情况</div>
+      <div>静态渲染：分别在 public、assets 和 assets 同级目录创建 imgs 文件夹以及组件目录，并放入一张大图和一张小图，在项目中引用，最后发布，查看框架对静态资源图片的处理情况</div>
       <pre>
-&lt;div&gt;public&lt;/div&gt;
-&lt;img src="/imgs/banner.png" alt=""/&gt;
-&lt;div&gt;assets&lt;/div&gt;
-&lt;img src="./assets/imgs/banner.png" alt=""/&gt;
-&lt;div&gt;src -&gt; imgs&lt;/div&gt;
-&lt;img src="./imgs/banner.png" alt=""/&gt;</pre>
-      <pre>&lt;img src="../imgs/10.jpg" alt=""/&gt;</pre>
+&lt;div>public&lt;/div&gt;
+&lt;img src="/coffee1.jpg" alt="" /&gt;
+&lt;div&gt;public → imgs&lt;/div&gt;
+&lt;img src="/imgs/coffee3.jpg" alt="" /&gt;
+&lt;div&gt;src → assets&lt;/div&gt;
+&lt;img src="../assets/coffee0.jpg" alt="" /&gt;
+&lt;div&gt;src → assets → imgs&lt;/div&gt;
+&lt;img src="@/assets/imgs/coffee2.jpg" alt="" /&gt;
+&lt;div&gt;src → components&lt;/div&gt;
+&lt;img src="./coffee4.jpg" alt="" /&gt;
+&lt;div&gt;src → assets（icon）&lt;/div&gt;
+&lt;img src="@/assets/home_bar.png" alt="" /&gt;</pre>
       <div>动态渲染：使用单个数据或列表渲染，查看框架对图片的处理</div>
       <p>本质上是从根路径引用，所以也可以从 / 开始，引入任意地方的资源；但是打包的时候，会出现问题，因为打包后没有 src 目录</p>
       <pre>&lt;img v-for="img in imgs" :key="img.id" :src="`/src/assets/${img.src}`"/&gt;</pre>
