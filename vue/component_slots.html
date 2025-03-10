@@ -18,18 +18,17 @@
   </header>
   <dl>
     <dd>
-      <div>定义的组件除了传递属性 Props 和 传递事件 Emits，还可以传递内容 content - 在基本功能的基础上，通过插槽 slot / 预留位置插入内容，从而实现<span
-          class="warn">拓展</span>功能
-        - more flexible and reusable</div>
+      <div>定义的组件除了传递属性 Props 和 传递事件 Emits，还可以传递内容 content - 通过插槽 slot / 预留位置插入内容，从而拓展功能 - more flexible and reusable
+      </div>
       <div>可以是任何有效的内容；静态数据，响应式数据，甚至其它组件 - can be any valid template content</div>
-      <div>可以指定插槽默认内容 - <span class="warn">默认插槽</span></div>
+      <div>可以指定插槽默认内容</div>
       <div>可以声明多个插槽</div>
-      <div>为了区分，多个插槽应该指定 name 属性 - <span class="warn">具名插槽</span></div>
+      <div>为了区分，多个插槽应该指定 name 属性</div>
       <div>插槽内容可以访问到父组件的数据作用域</div>
       <div>更多信息，请访问 <a href="https://cn.vuejs.org/guide/components/slots">Slots</a>、<a
           href="./component_style.html">插槽样式 Style / 组件样式</a></div>
     </dd>
-    <dt><a href="https://cn.vuejs.org/guide/components/slots.html#fallback-content">默认插槽</a></dt>
+    <dt><a href="https://cn.vuejs.org/guide/components/slots.html#fallback-content">一个插槽</a></dt>
     <dd>
       <div>只预留一个位置</div>
       <div>1. 子组件 Test.vue 创建过程中，预留一个位置/一个占位符，父组件传递进来的内容就会渲染在这里</div>
@@ -53,10 +52,11 @@
       <pre>&lt;Test&gt; &lt;/Test&gt;</pre>
 
     </dd>
-    <dt><a href="https://cn.vuejs.org/guide/components/slots.html#named-slots">具名插槽</a></dt>
+    <dt><a href="https://cn.vuejs.org/guide/components/slots.html#named-slots">多个插槽</a></dt>
     <dd>
-      <div>预留多个位置</div>
-      <div>具名插槽 Named Slots - 多个插槽；使用属性 name 区分；没有指定 name 的，使用默认名字 default</div>
+      <div>预留多个位置/多个插槽</div>
+      <div>使用属性 name 区分 - 具名插槽 Named Slots</div>
+      <div>没有指定 name 的，使用默认名字 default</div>
       <div>同样可以指定默认内容</div>
       <pre>
 &lt;div&gt;
@@ -99,13 +99,13 @@
 &lt;/Test&gt;</pre>
 
     </dd>
+  </dl>
+  <div class="chap">scoped slots</div>
+  <dl>
     <dd class="tips">
       <div>Slot content has access to the data scope of the parent component</div>
       <div>Slot content does not have access to the child component's data</div>
     </dd>
-  </dl>
-  <div class="chap">scoped slots</div>
-  <dl>
     <dd>
       <div>插槽作用域 - 插槽数据的访问</div>
       <div>插槽可以使用父组件域内的数据</div>
@@ -174,11 +174,16 @@
       <div>v-slot</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件进阶版 - 使用插槽，如果不指定内容则显示学院名字或小组名字</dd>
     <dd>
-      <div>根据作者头像或者学号等信息展示相应的版权信息</div>
-      <div>如果不指定头像，则使用默认头像</div>
-      <div>如果不指定学号，则使用大树小站的域名 glpla.github.io</div>
+      <pre>
+&lt;template&gt;
+  &lt;div class="copyright"&gt;
+    &lt;img class="img" :src='src' alt=""&gt;
+    &lt;slot&gt;广州新华学院&lt;/slot&gt;
+    &lt;div class="desc"&gt;2024 - 2026 &copy; Copyright, powered by {{ id }}&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 封装卡片组件，用户可以使用顶部标题和底部说明</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 封装代码组件，以便区分是结构、逻辑还是样式</dd>

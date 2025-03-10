@@ -139,9 +139,44 @@ const confirmFn = () => { }</pre>
       <p>. 函数/方法</p>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件 Copyright.vue</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件</dd>
     <dd>
-      <div>为团队页面不同的用户指定相应的信息，如学号和姓名</div>
+      <div>根据作者头像或者学号等信息展示相应的版权信息</div>
+      <div>如果不指定头像，则使用默认头像</div>
+      <div>如果不指定学号，则使用大树小站的域名 glpla.github.io</div>
+      <pre>
+&lt;template&gt;
+  &lt;div class="copyright"&gt;
+    &lt;img class="img" :src='src' alt=""&gt;
+    &lt;div class="desc"&gt;2024 - 2026 &copy; Copyright, powered by {{ id }}&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script setup&gt;
+  const img = defineProps({
+    src: {
+      type: String,
+      default: 'https://glpla.github.io/imgs/avatar.jpg'
+    },
+    id: {
+      type: String,
+      default: 'glpla.github.io'
+    }
+  })
+&lt;/script&gt;
+
+&lt;style scoped&gt;
+.copyright {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img {
+  width: 60px;
+  border-radius: 50%;
+}
+&lt;/style&gt;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 轮播组件 Swiper.vue</dd>
     <dd>
