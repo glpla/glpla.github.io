@@ -22,7 +22,7 @@
           href="https://router.vuejs.org/zh/api/interfaces/RouteLocationNormalizedLoaded.html">RouteLocationNormalizedLoaded</a>
         对象，用于访问当前/激活路由的各种 <span class="warn">路由信息</span></div>
       <div>常见的路由信息有：fullPath、path、name、params、query、meta 等</div>
-      <div>先引入再使用 - 引入路由包 useRoute 并创建路由实例 route</div>
+      <div>先引入再使用 - 引入路由包 useRoute 并创建路由实例 route；模块化开发请参考 <a href="../web/js/module.html">Module</a></div>
       <div>适用 Vue 3 的 Composition API </div>
       <pre>
 import { useRoute } from 'vue-router'
@@ -55,7 +55,7 @@ const route = useRoute()</pre>
           </tr>
           <tr>
             <td>matched</td>
-            <td>数组，只包含直接的组件 (任何已被加载并在 components 对象内被替换掉的懒加载组件)<br> 可以被直接用于展示路由。不包含重定向记录</td>
+            <td>匹配路由；数组，只包含直接的组件 (任何已被加载并在 components 对象内被替换掉的懒加载组件)<br> 可以被直接用于展示路由。不包含重定向记录</td>
           </tr>
         </tbody>
       </table>
@@ -95,6 +95,13 @@ const route = useRoute()</pre>
   meta: { showNav: true },
 }</pre>
       <pre>&lt;Cart :class="{ 'pos': $route.meta.showNav }" /&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 利用匹配路由 matched 创建面包屑导航</dd>
+    <dd>
+      <pre>
+&lt;div class="bread"&gt;
+  &lt;div v-for="(item, index) in $route.matched" :key="index"&gt;{{ item.name }}/&lt;/div&gt;
+&lt;/div&gt;</pre>
     </dd>
   </dl>
   <div id="footer"></div>

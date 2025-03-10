@@ -22,6 +22,7 @@
       <div>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/event-handling.html">事件处理 - Event Handling</a>、<a
           href="../web/js/event.html">HTML5事件</a>、<a href="../web/js/event_agent.html">HTML5事件代理</a>、<a
           href="../minip/events.html">微信小程序事件</a></div>
+      <div>建议采用模块化开发，可以复用业务；详细信息，请参考 <a href="../web/js/module.html">Module</a></div>
       <table>
         <caption>常见事件类型</caption>
         <tr>
@@ -320,6 +321,23 @@ const getPic = (ind) => {
 &lt;div&gt;{{ ind }}&lt;/div&gt;
 &lt;img :src='getPic(ind)' alt=""&gt;
 &lt;button @click="chg"&gt;change pic&lt;/button&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 模块化封装商品数量的增加 inc() 和减少 dec()</dd>
+    <dd>
+      <div>oper.js - 默认导出一个函数，这个函数执行后又返回2个函数</div>
+      <pre>
+export default () => {
+  const inc = () => console.log("oper inc");
+  const dec = () => console.log("oper dec");
+  return { inc, dec };
+};</pre>
+      <div>引入 - 因为是默认导出，所以引入时，可以指定任意名字</div>
+      <div>使用 - 执行导出的函数，通过解构拿到其中一个函数 inc，可以用于任何场合</div>
+      <pre>
+import oper from '@/assets/utils/oper'
+console.log(oper);
+const { inc } = oper()</pre>
+      <pre>&lt;button @click="inc"&gt;inc&lt;/button&gt;</pre>
     </dd>
   </dl>
   <div id="footer"></div>
