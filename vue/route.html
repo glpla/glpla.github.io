@@ -25,7 +25,7 @@
       <div>单独安装路由依赖并引入，比较麻烦，不推荐</div>
       <div>1. 安装路由 - 为项目添加安装依赖</div>
       <pre>npm i vue-router -S</pre>
-      <div>2. 引入路由 - 在入口文件 main.js 中引入路由，作为中间件使用</div>
+      <div>2. 引入路由 - 在入口文件 main.js 中引入路由，作为中间件使用；这里引入后，路由将作为全局组件，其它组件可以直接使用</div>
       <pre>
 //引入
 import router from './router'
@@ -45,6 +45,7 @@ app.use(router).mount('#app')</pre>
           href="https://router.vuejs.org/api/interfaces/RouterOptions.html">路由选项 RouterOptions</a> 创建路由实例 <a
           href="https://router.vuejs.org/zh/api/interfaces/Router.html">
           Router</a></div>
+      <div>详细情况，请参考 <a href="https://mm.tt/app/map/3651175859?t=V1j8yoDGqH">路由配置思维导图</a></div>
       <table>
         <caption>路由选项 RouterOptions</caption>
         <tr>
@@ -76,7 +77,7 @@ app.use(router).mount('#app')</pre>
       <div>历史记录模式</div>
       <div>Vue2 使用 mode 配置项，Vue3 使用 history 配置项</div>
       <div>需要引入对应的包再使用</div>
-      <div>1. createWebHistory</div>
+      <div>1. createWebHistory()</div>
       <div>HTML5 模式，URL 不带 #；传统网站模式</div>
       <div>需要服务器端配合处理路径，否则容易出现 404；后端运维基本技能</div>
       <pre>http://localhost:5173/</pre>
@@ -87,7 +88,7 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     // 
 })</pre>
-      <div>2. createWebHashHistory</div>
+      <div>2. createWebHashHistory()</div>
       <div>hash 模式；<span class="warn">推荐模式</span></div>
       <div>URL 带 #，看起来不够美观</div>
       <div>SEO 优化性能略微不足</div>
@@ -107,6 +108,7 @@ const router = createRouter({
       <div>按照值对形式 name-value pair 配置路由，即把 URL 路径映射到组件；其中，路径 path 和组件 component 是 <span class="warn">必填项</span></div>
       <div>所有的路由配置位于项目 src → router 文件夹中，通常是 index.js</div>
       <div>更多路由配置特性，请访问 <a href="./route_adv.html">路由定义和分类</a></div>
+      <div class="tips">建议在系统默认的路由配置文件 router → index.js 中，根据项目需求，相应的增加并修改</div>
       <table>
         <caption>routes/RouteRecordRaw</caption>
         <tr>
@@ -140,6 +142,10 @@ const router = createRouter({
         <tr>
           <td>meta</td>
           <td>路由元信息：用于路由组件的额外配置；无法在编程式路由中定义或覆盖</td>
+        </tr>
+        <tr>
+          <td>beforeEnter</td>
+          <td>路由独享的守卫</td>
         </tr>
       </table>
       <div>1. 路径 path</div>
@@ -175,8 +181,12 @@ const routes = [
   <div class="chap">Summary</div>
   <dl>
     <dd class="sn">
-      <div>path</div>
-      <div>component</div>
+      <p>创建路由的关键字段</p>
+      <div>history</div>
+      <div>routes</div>
+      <p>.path</p>
+      <p>.component</p>
+      <div>linkActiveClass、linkExactActiveClass</div>
     </dd>
   </dl>
   <div id="footer"></div>

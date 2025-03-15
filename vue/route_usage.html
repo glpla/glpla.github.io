@@ -20,13 +20,14 @@
     <dt>导航分类</dt>
     <dd class="sn">
       <div>声明式导航：使用 &lt;router-link&gt; 通过指定 <a href="https://router.vuejs.org/api/interfaces/RouterLinkProps.html">路由属性
-          RouterLinkProps</a> 实现</div>
+          RouterLinkProps</a> 实现；详细信息，请参考 <a href="https://mm.tt/app/map/3651159035?t=juKpqZ53oY">路由使用思维导图</a></div>
       <div><a href="./userouter.html">编程式导航</a>：使用 vue-router 的组合函数 <a
           href="https://router.vuejs.org/zh/api/#Functions-useRoute">useRouter()</a> 实现</div>
     </dd>
     <dt>&lt;router-link&gt;</dt>
     <dd>
-      <div>全局组件；不需要在组件模板中导入</div>
+      <div>用来渲染一个链接的组件，该链接在被点击时会触发导航</div>
+      <div>全局组件；不需要在组件模板中导入；参见 main.js</div>
       <div>不会刷新页面 - doesn't need to be reloaded from the server</div>
       <div>&lt;a&gt;：Html 原生标签；页面会重新加载/刷新</div>
       <table>
@@ -79,12 +80,14 @@
     </dd>
     <dt>&lt;router-view&gt;</dt>
     <dd>
-      <div>全局组件；不需要在组件模板中导入</div>
+      <div>用于显示用户当前所处路由的组件</div>
+      <div>全局组件；不需要在组件模板中导入；参见 main.js</div>
       <div>路由目标占位符</div>
       <div>借助系统组件 &lt;router-view&gt; 显示与 URL 对应的组件|路由出口 - where to render the current route component</div>
       <div>有 &lt;router-link&gt; 路由，则必须有 &lt;router-view&gt; 路由出口</div>
       <div>还可以像缓存组件那样，缓存 &lt;router-view&gt;，见后例</div>
       <div>1. 单 &lt;router-view&gt;</div>
+      <div>对于单页应用 SPA，需要根据路由动态切换视图，必须有一个</div>
       <div>应用更为常见</div>
       <div>2. 多 &lt;router-view&gt;</div>
       <div>允许你在同一个页面同时展示多个组件，每个组件对应不同的视图区域，提高了单页应用的复用性和可维护性</div>
@@ -112,6 +115,10 @@
     <dt>Summary</dt>
     <dd class="sn">
       <div>&lt;router-link&gt;</div>
+      <p>.to</p>
+      <p>.replace</p>
+      <p>.activeClass</p>
+      <p>.exactActiveClass</p>
       <div>&lt;router-view&gt;</div>
     </dd>
     <dt>Homework</dt>
