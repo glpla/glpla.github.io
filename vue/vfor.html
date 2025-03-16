@@ -96,6 +96,40 @@ const isOn = ref(true)</pre>
       <div>使用 &lt;template&gt; 处理条件渲染和列表渲染</div>
     </dd>
     <dt>Homework</dt>
+    <dd id="swiper">[<span class="iconfont icon-keyboard"></span>] 自动轮播 Swiper.vue</dd>
+    <dd>
+      <div>使用列表渲染遍历本地图片数组，如果图片分配的 ind 和轮播活动图片索引 currentInd 一致，则显示当前图片，否则隐藏</div>
+      <div>使用数字指示器</div>
+      <div>样式略</div>
+      <pre>
+&lt;div class="swiper"&gt;
+  &lt;img :src="item" alt="" 
+    v-for="(item, ind) in imgsUrl" :key="ind" 
+    v-show="currentInd === ind"&gt;
+  &lt;div class="indictator"&gt;
+    &lt;span class="dot" :class="{ active: currentInd === ind }" 
+    v-for="(item, ind) in imgsUrl" :key="ind"&gt;{{ ind + 1 }}&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+      <pre>
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+const imgs = ref(['coffee0.jpg', 'coffee1.jpg', 'coffee2.jpg', 'coffee3.jpg', 'coffee4.jpg'])
+const currentInd = ref(0)
+let timer = null
+let duration = 3000
+const imgsUrl = computed(() => {
+  return imgs.value.map(img => new URL(`../assets/imgs/${img}`, import.meta.url).href)
+})
+onMounted(() => {
+  timer = setInterval(() => {
+    currentInd.value++
+    currentInd.value = currentInd.value % imgsUrl.value.length
+  }, duration)
+})
+onUnmounted(() => {
+  timer && clearInterval(timer)
+})</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 使用列表循环优化 <a href="./class.html">类 class</a> 中的导航/标签页 TabCard 案例
     </dd>
     <dd>

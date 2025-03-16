@@ -189,6 +189,15 @@ const com = computed(() => {
   }
 })</pre> -->
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 使用计算属性处理图片数组，得到图片的url</dd>
+    <dd>
+      <pre>
+import { ref, computed } from 'vue';
+const imgs = ref(['coffee0.jpg', 'coffee1.jpg', 'coffee2.jpg', 'coffee3.jpg', 'coffee4.jpg'])
+const imgsUrl = computed(() => {
+  return imgs.value.map(img => new URL(`/src/assets/imgs/${img}`, import.meta.url).href)
+})</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 Goods.vue</a> →
       goodsItem.vue</dd>
     <dd>
