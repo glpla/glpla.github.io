@@ -57,6 +57,33 @@
     </dd>
     <dt>绑定数组</dt>
     <dd>同类的数组绑定，应用较少</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页 - 绑定内联变量</dd>
+    <dd>
+      <pre>
+&lt;nav class="nav"&gt;
+  &lt;div class="item" @click="navInd = 0"&gt;Lorem.&lt;/div&gt;
+  &lt;div class="item" @click="navInd = 1"&gt;Neque?&lt;/div&gt;
+  &lt;div class="item" @click="navInd = 2"&gt;Incidunt.&lt;/div&gt;
+  &lt;div class="item" @click="navInd = 3"&gt;Quidem!&lt;/div&gt;
+  &lt;div class="line" :style="{ '--ind': navInd }"&gt;&lt;/div&gt;
+&lt;/nav&gt;</pre>
+      <pre>
+import { ref } from 'vue'
+const navInd = ref(0)</pre>
+      <pre>
+// 其它样式
+
+.line {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  height: 2px;
+  background: #f40;
+  transform: translateX(calc(80px * var(--ind)));
+  transition: 0.5s;
+}</pre>
+    </dd>
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>

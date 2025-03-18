@@ -22,14 +22,18 @@
       <pre>&lt;div&gt;{{ num }} is {{ num % 2 ? 'odd' : 'even' }}&lt;/div&gt;</pre>
       <pre>&lt;div&gt;{{ price * (1 - discount) }}&lt;/div&gt;</pre>
       <div>逻辑复杂时，应该使用计算属性实现</div>
-      <div>需要引入 computed 包</div>
-      <div>更多信息，请访问 <a href="https://cn.vuejs.org/guide/essentials/computed">计算属性 - Computed Properties</a></div>
     </dd>
     <dt>Feature</dt>
     <dd>
+      <div>需要引入 computed 包</div>
+      <pre>import { computed } from 'vue';</pre>
+      <div>计算属性是一个属性，不是方法，使用时不需要()</div>
       <div>计算属性是响应式数据，会触发页面更新</div>
-      <div>计算属性返回的值是派生状态，可以把它看作是一个“临时快照” - deriving values from your reactive state；每当源状态发生变化时，就会创建一个新的快照</div>
       <div>计算属性返回的值是只读的，且永远不应该被更改 - 应该更新它所依赖的源状态以触发新的计算</div>
+      <div>计算属性返回的值是派生状态，可以把它看作是一个“临时快照” - deriving values from your reactive state；每当源状态发生变化时，就会创建一个新的快照</div>
+      <div>除了数据计算外，不应该有其它操作，如数据请求，DOM修改等副作用，即：只做一件事情</div>
+      <div>如果还需要执行其它操作，可以使用 <a href="./watch.html">侦听函数 - watch</a></div>
+      <div>更多信息，请访问 <a href="https://cn.vuejs.org/guide/essentials/computed">计算属性 - Computed Properties</a></div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 判断奇偶</dd>
     <dd>
@@ -39,23 +43,8 @@ import { ref, computed } from 'vue';
 const num = ref(0);
 const res = computed(() => num.value % 2 === 0 ? 'even' : 'odd')</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 计算优惠价格</dd>
-    <dd>
-      <pre>&lt;div&gt;{{ priceWithDis }}&lt;/div&gt;</pre>
-      <pre>
-const priceWithDis = computed(() => price.value * (1 - discount.value))</pre>
-    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 判断性别</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 参照B站规则处理关注、粉丝、点赞和播放数量</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页内联样式 - 根据当前导航项动态移动指示器；ind 是导航项的索引</dd>
-    <dd>
-      <div>结构中直接使用数据；逻辑应该加带使用.value</div>
-      <div>传统方案 - 直接拼接样式</div>
-      <pre>&lt;div class="indicator" :style="{ transform: `translateX(${ind * 80}px)` }"&gt;&lt;/div&gt;</pre>
-      <div>使用计算属性 - 计算出当前导航项的偏移量 trans</div>
-      <pre>&lt;div class="indicator" :style="{ transform: trans }"&gt;&lt;/div&gt;</pre>
-      <pre>let trans = computed(() => `translateX(${ind.value * 80}px)`)</pre>
-    </dd>
     <dt>Computed Caching vs. Methods</dt>
     <div>方法可以没有返回，且每次执行方法都会导致页面渲染</div>
     <dd>[<span class="iconfont icon-keyboard"></span>] 执行2次方法 inc 和执行2次计算属性 dec</dd>
@@ -166,11 +155,26 @@ const grade = computed(() => {
   <dl>
     <dt>Summary</dt>
     <dd class="sn">
-      <div>计算属性是一个属性，不是方法，使用时不需要()</div>
-      <div>除了数据计算外，不应该有其它操作，如数据请求，DOM修改等副作用，即：只做一件事情</div>
-      <div>如果还需要执行其它操作，可以使用 <a href="./watch.html">侦听函数 - watch</a></div>
+      <div>计算属性的引入和使用</div>
+      <div>无参计算属性</div>
+      <div>带参计算属性</div>
     </dd>
     <dt>Homework</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 Goods.vue</a> →
+      goodsItem.vue</dd>
+    <dd>
+      <div>单个数据 - 直接处理</div>
+      <pre>&lt;div&gt;{{ priceWithDis }}&lt;/div&gt;</pre>
+      <pre>
+const priceWithDis = computed(() => price.value * (1 - discount.value))</pre>
+      <div>多个数据 - 使用参数；toFixed() 是系统数据处理函数，可以指定保留小数点位数</div>
+      <pre>
+const getDiscount = computed(() => {
+  return item => {
+    return (item.price * (1 - item.discount)).toFixed(2)
+  }
+})</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 分别使用普通方法和计算属性处理数据</dd>
     <dd>
       <img src="./imgs/computed0.png" alt="">
@@ -198,16 +202,18 @@ const imgsUrl = computed(() => {
   return imgs.value.map(img => new URL(`/src/assets/imgs/${img}`, import.meta.url).href)
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 Goods.vue</a> →
-      goodsItem.vue</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页内联样式 - 根据当前导航项动态移动指示器；ind 是导航项的索引</dd>
     <dd>
-      <div>使用计算属性处理商品打折</div>
-      <!-- <pre>
-const getDiscount = computed(() => {
-  return item => {
-    return (item.price * (1 - item.discount)).toFixed(2)
-  }
-})</pre> -->
+      <div>结构中直接使用数据；逻辑应该加带使用.value</div>
+      <div>方案1：传统方案 - 直接拼接样式</div>
+      <pre>&lt;div class="line" :style="{ transform: `translateX(${ind * 100}px)` }"&gt;&lt;/div&gt;</pre>
+      <div>方案2：使用计算属性 - 计算出当前导航项的偏移量 dis</div>
+      <pre>&lt;div class="line" :style="{ transform: trans }"&gt;&lt;/div&gt;</pre>
+      <pre>let dis = computed(() => `translateX(${ind.value * 100}px)`)</pre>
+      <div>方案3：使用模板字符串和计算属性</div>
+      <pre>const dis = computed(() => ind.value * 100)</pre>
+      <pre>&lt;div class="line" :style="`transform: translateX(${dis}px)`"&gt;&lt;/div&gt;</pre>
+      <div>方案4：使用 <a href="./style.html">CSS 内联变量</a>，可以直接在样式中应用 - 推荐</div>
     </dd>
   </dl>
   <div id="footer"></div>

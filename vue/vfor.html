@@ -96,6 +96,26 @@ const isOn = ref(true)</pre>
       <div>使用 &lt;template&gt; 处理条件渲染和列表渲染</div>
     </dd>
     <dt>Homework</dt>
+    <dd id="tabcard">[<span class="iconfont icon-keyboard"></span>] 使用列表循环优化 <a href="./class.html#tabcard">类 class</a>
+      中的导航/标签页
+      TabCard 案例
+    </dd>
+    <dd>
+      <div>&lt;template&gt;：使用列表循环、内容绑定、属性绑定</div>
+      <pre>
+&lt;div class="test"&gt;
+  &lt;div class="btn" :class="{ 'active': ind == index }" @click="ind = index" 
+    v-for="(item, index) in navs"
+    :key="index"&gt;{{ item }}
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+      <div>&lt;script&gt;：增加一个标题数组 navs 用于导航列表循环</div>
+      <pre>
+import { ref, watchEffect } from 'vue'
+const ind = ref(0)
+const navs = ref(['Lorem.', 'Labore!', 'Quos.', 'Doloremque.'])</pre>
+      <div>&lt;style&gt;：样式不变</div>
+    </dd>
     <dd id="swiper">[<span class="iconfont icon-keyboard"></span>] 自动轮播 Swiper.vue</dd>
     <dd>
       <div>使用列表渲染遍历本地图片数组，如果图片分配的 ind 和轮播活动图片索引 currentInd 一致，则显示当前图片，否则隐藏</div>
@@ -130,44 +150,26 @@ onUnmounted(() => {
   timer && clearInterval(timer)
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 使用列表循环优化 <a href="./class.html">类 class</a> 中的导航/标签页 TabCard 案例
-    </dd>
-    <dd>
-      <div>&lt;template&gt;：使用列表循环、内容绑定、属性绑定</div>
-      <pre>
-&lt;div class="test"&gt;
-  &lt;div class="btn" :class="{ 'active': ind == index }" @click="ind = index" 
-    v-for="(item, index) in navs"
-    :key="index"&gt;{{ item }}
-  &lt;/div&gt;
-&lt;/div&gt;</pre>
-      <div>&lt;script&gt;：增加一个标题数组 navs 用于导航列表循环</div>
-      <pre>
-import { ref, watchEffect } from 'vue'
-const ind = ref(0)
-const navs = ref(['Lorem.', 'Labore!', 'Quos.', 'Doloremque.'])</pre>
-      <div>&lt;style&gt;：样式不变</div>
-    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 Goods.vue</a></dd>
     <dd>
-      <!-- <pre>
-const goods = ref([{
-    id: 0,
-    title: 'gl',
-    price: 20,
-    src: 'coffee0.jpg'
-}])
-const getImageUrl = (src) => {
-    return new URL(`../imgs/${src}`, import.meta.url).href
-}</pre> -->
-      <!-- <pre>
+      <div>列表渲染获取的商品数据，渲染多个商品项 GoodsItem.vue</div>
+      <div>建议先使用静态节点实现</div>
+      <pre>
 &lt;div class="item" v-for="item in goods" :key="item.id"&gt;
     &lt;img :src="getImageUrl(item.src)" alt="picture"&gt;
     &lt;img :src="`https://glpla.github.io/utils/coffee/${item.src}`" alt="picture"&gt;
     &lt;p&gt;{{ item.id }}&lt;/p&gt;
     &lt;p&gt;{{ item.title }}&lt;/p&gt;
     &lt;p&gt;{{ item.price }}&lt;/p&gt;
-&lt;/div&gt;</pre> -->
+&lt;/div&gt;</pre>
+      <div>后续使用<a href="./component_props.html">组件属性传参 defineProps()</a></div>
+      <pre>
+&lt;template v-if="goods.length"&gt;
+  &lt;GoodsItem :product="item" v-for="(item, ind) in goods" :key="item.id" /&gt;
+  &lt;footer class="f-s-s"&gt;我是有底线的~&lt;/footer&gt;
+&lt;/template&gt;
+&lt;div v-else&gt;商品获取失败，请刷新页面&lt;/div&gt;</pre>
+
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商城视图 MallView.vue</a> - 动态处理图片资源
     </dd>
