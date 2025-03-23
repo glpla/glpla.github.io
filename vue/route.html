@@ -173,6 +173,43 @@ const routes = [
   { path: '/about', component: () => import("../views/HomeView.vue") },
 ]</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 路由的模块化开发</dd>
+    <dd>
+      <div>除了直接配置路由 routes 外，还可以采用模块化 - 先定义再导入</div>
+      <div>方案1：普通导出 - 导入和导出需要指定名字</div>
+      <div>路由文件 routes.js：需要指定类型和名字</div>
+      <pre>
+export const routes = [
+  {
+    path: "/",
+    name: "home",
+    component: () => import("@/views/HomeView.vue"),
+  },
+  // ...
+];</pre>
+      <div>router → index.js：导入时，需解构化并指定名字</div>
+      <pre>import { routes } from "../assets/routes";</pre>
+      <div>方案2：默认导出</div>
+      <div>路由文件 routes.js：默认导出，不需要指定类型和名字</div>
+      <pre>
+export default [
+  {
+    path: "/",
+    name: "home",
+    component: () => import("@/views/HomeView.vue"),
+  },
+  // ...
+];</pre>
+      <div>router → index.js：导入时必需指定名字</div>
+      <pre>import routes from "../assets/routes";</pre>
+    </dd>
+    <dd class="tips">
+      <div>当直接导出一个变量、函数或类时，不需要显式的 return</div>
+      <div>module.exports 是 CommonJS 模块系统的导出方式，通常用于 Node.js 环境</div>
+      <div>export 是 ES Module（ESM）的导出方式，是现代 JavaScript 标准的一部分，广泛用于浏览器和前端框架中</div>
+      <div>Vite 默认支持 ES Module（ESM），并且推荐使用 ESM 的语法（如 export 和 import）；使用 ESM 可以更好地与现代工具链集成，例如 TypeScript、Tree
+        Shaking（摇树优化）等</div>
+    </dd>
     <dt>linkActiveClass</dt>
     <dd>请参考 <a href="./route_style.html">路由样式</a></dd>
     <dt>linkExactActiveClass</dt>
