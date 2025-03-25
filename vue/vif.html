@@ -18,6 +18,7 @@
   </header>
   <dl>
     <dd>根据条件渲染不同的内容</dd>
+    <dd>也可以使用动态类/开关类实现</dd>
     <dd>更多信息，请访问 <a href="https://cn.vuejs.org/guide/essentials/conditional">条件渲染 - Conditional Rendering</a></dd>
     <dt>v-if</dt>
     <dd>
@@ -119,6 +120,53 @@
       <div>使用 <a href="./pinia.html">状态管理 - 仓库</a> 实现</div>
       <div>如果购物车商品数量不为0，则显示购物车组件；否则不显示</div>
       <pre>&lt;Cart class="cart" v-if="cartStore.cart.length" /&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">登录页 LoginView.vue</a> →
+      提示信息的显示与隐藏</dd>
+    <dd class="sn">
+      <div>方案1：使用 v-show</div>
+      <pre>
+&lt;div class="item"&gt;
+  &lt;input type="text" v-model.trim="user.name" required maxlength="11" 
+    @focus="isFocus = true"
+    @blur="isFocus = false"&gt;
+  &lt;span class="tips tips-name" v-show="isFocus && !user.name"&gt;请输入手机号&lt;/span&gt;
+&lt;/div&gt;</pre>
+      <pre>
+.tips {
+  position: absolute;
+  top: 0;
+  color: #666;
+  line-height: 40px;
+}
+
+.tips-name {
+  left: 20px;
+}</pre>
+      <div>方案1：使用动态类 - 一开始隐藏，激活时显示</div>
+      <pre>
+&lt;div class="item"&gt;
+  &lt;input type="text" v-model.trim="user.name" required maxlength="11" 
+    @focus="isFocus = true"
+    @blur="isFocus = false"&gt;
+  &lt;span class="tips tips-name" :class="{ 'active': isFocus && !user.name }"&gt;请输入手机号&lt;/span&gt;
+&lt;/div&gt;</pre>
+      <pre>
+.tips {
+  position: absolute;
+  top: 0;
+  color: #666;
+  line-height: 40px;
+}
+
+.tips-name {
+  left: 20px;
+  display: none;
+}
+
+.tips-name.active {
+  display: block;
+}</pre>
     </dd>
   </dl>
   <div id="footer"></div>

@@ -97,9 +97,10 @@
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 商品列表页 GoodsView.vue → 购物车 Cart.vue</dd>
     <dd>
-      <div>1. 显示或折叠购物车</div>
+      <div>1. 显示或折叠购物车 - 高度发生变化</div>
       <pre>
-&lt;button @click.stop="isShowCartDetail = !isShowCartDetail"&gt;
+&lt;button 
+  @click.stop="isShowCartDetail = !isShowCartDetail"&gt;
 &lt;/button&gt;</pre>
       <div>2. 商品数量增加或减少</div>
       <pre>
@@ -123,9 +124,15 @@
     <dd>
       <div>1. 无参</div>
       <pre>&lt;div @click="doClick"&gt;do something&lt;/div&gt;</pre>
+      <div>使用具名函数</div>
       <pre>
 function doClick() {
     console.log('hello,world');
+}</pre>
+      <div>使用匿名函数 - 函数表达式；必须先声明再使用</div>
+      <pre>
+const doClick = () => {
+  console.log('hello,world');
 }</pre>
       <div>2. 携带参数 - 注意单引号和双引号的配对使用</div>
       <pre>&lt;div @click="doClickPara('18')"&gt;do something with para&lt;/div&gt;</pre>
@@ -142,7 +149,7 @@ function doClickData(e) {
     console.log(e.target.dataset);
 }</pre>
       <div>4. 同时使用事件对象和参数</div>
-      <div>结构中需要使用特殊变量 $event 以便和普通参数区分开来</div>
+      <div>结构中需要使用 <span class="warn">特殊变量 $event</span> 以便和普通参数区分开来</div>
       <div>逻辑中可以使用任意形参代替特殊变量 $event</div>
       <pre>
 &lt;div 
@@ -187,12 +194,12 @@ function doClickParaData(para,e) {
             <br>从文档的根节点开始，向下传播，直到到达目标元素<br>多用于父元素
           </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td>.native</td>
           <td>使用原生事件；多用于组件<br>定义在组件上的事件默认都是自定义事件
             <br>系统认为是子组件 $emits 出来的事件；如需使用原生事件，应指定事件修饰符
           </td>
-        </tr>
+        </tr> -->
       </table>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 阻止<a href="../web/js/event_default.html">表单默认事件</a></dd>
@@ -284,8 +291,13 @@ function doClickParaData(para,e) {
       <div>Modifiers</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 导航/标签页 TabCard；<a href="./class.html">实现1</a>、<a
-        href="./vfor.html">实现2</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 商品详情页 → 商品数量增加 inc() 和减少 dec()</dd>
+    <dd>
+      <div>方案1：使用内联事件</div>
+      <div>方案2：使用函数：具名函数和匿名函数</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 导航/标签页 TabCard；<a href="./class.html#tabcard">实现1</a>、<a
+        href="./vfor.html#tabcard">实现2</a></dd>
     <dd>
       <div>使用 &lt;nav&gt; 和 &lt;a&gt; 实现</div>
       <div>单击标签，对应的标签高亮显示</div>
@@ -294,10 +306,10 @@ function doClickParaData(para,e) {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 购物车 Cart.vue</dd>
     <dd>
-      <div>使用 for 统计商品的价格 totalPrice 和数量 totalQuantity</div>
+      <div>使用 for 循环统计商品的价格 totalPrice 和数量 totalQuantity</div>
       <div>使用 reduce 统计商品的价格 totalPrice 和数量 totalQuantity</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 手动轮播 Swiper</dd>
+    <dd id="swiper">[<span class="iconfont icon-keyboard"></span>] 手动轮播 Swiper</dd>
     <dd>
       <div>单击时或定时切换图片</div>
       <div>方案1：绑定属性，使用 &lt;img&gt; 配合在线资源</div>
