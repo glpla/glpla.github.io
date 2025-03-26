@@ -251,31 +251,27 @@ function doClickParaData(para,e) {
     <dd>[<span class="iconfont icon-keyboard"></span>] 商品详情页 → 商品数量增加 inc() 和减少 dec()</dd>
     <dd>
       <div>方案1：使用内联事件</div>
-      <div>方案2：使用函数：具名函数和匿名函数</div>
+      <pre>&lt;div @click="num++"&gt;inc&lt;/div&gt;</pre>
+      <div>方案2：使用具名函数</div>
+      <pre>&lt;div @click="inc"&gt;inc&lt;/div&gt;</pre>
+      <pre>
+function inc() {
+  num.value++
+}</pre>
+      <div>方案3：使用匿名函数</div>
+      <pre>&lt;div @click="inc"&gt;inc&lt;/div&gt;</pre>
+      <pre>
+const inc = () => {
+  num.value++
+}</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 导航/标签页 TabCard；<a href="./class.html#tabcard">实现1</a>、<a
-        href="./vfor.html#tabcard">实现2</a></dd>
+    <dd id="swiper">[<span class="iconfont icon-keyboard"></span>] 手动轮播 Swiper - 单击时切换图片</dd>
     <dd>
-      <div>使用 &lt;nav&gt; 和 &lt;a&gt; 实现</div>
-      <div>单击标签，对应的标签高亮显示</div>
-      <div>阻止 &lt;a&gt; 的默认事件</div>
-      <div>分别使用事件代理、不使用事件代理实现，并体会2者的区别</div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 购物车 Cart.vue</dd>
-    <dd>
-      <div>使用 for 循环统计商品的价格 totalPrice 和数量 totalQuantity</div>
-      <div>使用 reduce 统计商品的价格 totalPrice 和数量 totalQuantity</div>
-    </dd>
-    <dd id="swiper">[<span class="iconfont icon-keyboard"></span>] 手动轮播 Swiper</dd>
-    <dd>
-      <div>单击时或定时切换图片</div>
       <div>方案1：绑定属性，使用 &lt;img&gt; 配合在线资源</div>
       <pre>&lt;img :src=" 'https://glpla.github.io/utils/coffee/coffee' + imgInd + '.jpg' " alt="swiper-img"&gt;</pre>
       <div>方案2：绑定样式，使用 background-image 配合在线资源</div>
       <pre>&lt;div&gt; :style="{ 'background-image': 'url(https://glpla.github.io/utils/coffee/coffee' + imgInd + '.jpg)' }" &lt;div/&gt;</pre>
-      <div>方案3：使用静态资源处理</div>
-      <div>额外增加一个元素，显示当前图片</div>
-      <div>图片采用静态资源处理；放在项目 assets 目录下的 imgs 文件夹中</div>
+      <div>方案3：使用静态资源处理 - 放在项目 assets 目录下的 imgs 文件夹中</div>
       <pre>
 import { ref } from 'vue';
 let ind = ref(0)
@@ -307,6 +303,19 @@ import oper from '@/assets/utils/oper'
 console.log(oper);
 const { inc } = oper()</pre>
       <pre>&lt;button @click="inc"&gt;inc&lt;/button&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 导航/标签页 TabCard；<a href="./class.html#tabcard">实现1</a>、<a
+        href="./vfor.html#tabcard">实现2</a></dd>
+    <dd>
+      <div>使用 &lt;nav&gt; 和 &lt;a&gt; 实现</div>
+      <div>单击标签，对应的标签高亮显示</div>
+      <div>阻止 &lt;a&gt; 的默认事件</div>
+      <div>分别使用事件代理、不使用事件代理实现，并体会2者的区别</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 购物车 Cart.vue</dd>
+    <dd>
+      <div>使用 for 循环统计商品的价格 totalPrice 和数量 totalQuantity</div>
+      <div>使用 reduce 统计商品的价格 totalPrice 和数量 totalQuantity</div>
     </dd>
   </dl>
   <div id="footer"></div>
