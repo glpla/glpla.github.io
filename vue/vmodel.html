@@ -256,13 +256,70 @@ let femaleVal = reactive({
       <div>数据应该是唯一的</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 注册</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 登录</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 留言板</dd>
+    <dd id="msg">[<span class="iconfont icon-keyboard"></span>] 留言板 - 按 Ctrl + Enter 提交留言；适合桌面端</dd>
     <dd>
-      <div>按 Ctrl + Enter 提交留言</div>
-      <div>适合桌面端</div>
+      <div>使用数据绑定；不需要指定 id</div>
+      <pre>&lt;input type="text" @keyup.ctrl.enter="keySubmit" placeholder="your text" v-model="msg"></pre>
+      <pre>
+import { ref } from 'vue'
+const msg = ref('')
+const keySubmit = (e) => {
+  console.log('ctrl enter submit')
+  console.log(e);
+  console.log(e.key);
+  console.log(e.keyCode);
+  console.log(msg.value);
+}</pre>
     </dd>
+    <dd id="login">[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">登录页 LoginView.vue</a>
+      →
+      提示信息的显示与隐藏</dd>
+    <dd class="sn">
+      <div>方案1：使用 v-show</div>
+      <pre>
+&lt;div class="item"&gt;
+  &lt;input type="text" v-model.trim="user.name" required maxlength="11" 
+    @focus="isFocus = true"
+    @blur="isFocus = false"&gt;
+  &lt;span class="tips tips-name" v-show="isFocus && !user.name"&gt;请输入手机号&lt;/span&gt;
+&lt;/div&gt;</pre>
+      <pre>
+.tips {
+  position: absolute;
+  top: 0;
+  color: #666;
+  line-height: 40px;
+}
+
+.tips-name {
+  left: 20px;
+}</pre>
+      <div>方案1：使用动态类 - 一开始隐藏，激活时显示</div>
+      <pre>
+&lt;div class="item"&gt;
+  &lt;input type="text" v-model.trim="user.name" required maxlength="11" 
+    @focus="isFocus = true"
+    @blur="isFocus = false"&gt;
+  &lt;span class="tips tips-name" :class="{ 'active': isFocus && !user.name }"&gt;请输入手机号&lt;/span&gt;
+&lt;/div&gt;</pre>
+      <pre>
+.tips {
+  position: absolute;
+  top: 0;
+  color: #666;
+  line-height: 40px;
+}
+
+.tips-name {
+  left: 20px;
+  display: none;
+}
+
+.tips-name.active {
+  display: block;
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 注册</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 代办事项</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品详情页 DetailsView.vue</a></dd>
     <dd class="sn">

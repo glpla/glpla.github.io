@@ -17,11 +17,11 @@
     <span>&commat;Events</span>
   </header>
   <dl>
+    <dt>事件类型 Classification</dt>
     <dd>
       <div>包括：鼠标事件、键盘事件等等</div>
-      <div>更多信息，请访问 <a href="https://vuejs.org/guide/essentials/event-handling.html">事件处理 - Event Handling</a>、<a
-          href="../web/js/event.html">HTML5事件</a>、<a href="../web/js/event_agent.html">HTML5事件代理</a>、<a
-          href="../minip/events.html">微信小程序事件</a></div>
+      <div>更多信息，请访问 <a href="https://cn.vuejs.org/guide/essentials/event-handling">事件处理 - Event Handling</a>、<a
+          href="../web/js/event.html">HTML5事件</a>、<a href="../minip/events.html">微信小程序事件</a></div>
       <div>建议采用模块化开发，可以复用业务；详细信息，请参考 <a href="../web/js/module.html">Module</a></div>
       <table>
         <caption>常见事件类型</caption>
@@ -66,7 +66,48 @@
           <td>...</td>
         </tr>
       </table>
+      <table>
+        <caption>表单常见事件类型</caption>
+        <tr>
+          <th>类型</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>submit</td>
+          <td>表单数据提交</td>
+        </tr>
+        <tr>
+          <td>reset</td>
+          <td>表单数据清除</td>
+        </tr>
+      </table>
+      <table>
+        <caption>表单输入元素常见事件类型</caption>
+        <tr>
+          <th>类型</th>
+          <th>说明</th>
+        </tr>
+        <tr>
+          <td>focus</td>
+          <td>获取焦点</td>
+        </tr>
+        <tr>
+          <td>blur</td>
+          <td>失去焦点</td>
+        </tr>
+        <tr>
+          <td>change</td>
+          <td>内容更改</td>
+        </tr>
+        <tr>
+          <td>input</td>
+          <td>内容输入</td>
+        </tr>
+      </table>
     </dd>
+  </dl>
+  <div class="chap">使用 Usage</div>
+  <dl>
     <dt>v-on</dt>
     <dd>使用 v-on 指令来监听 DOM 事件，并在事件触发时执行对应的 JavaScript |事件处理函数 handle</dd>
     <dd>
@@ -74,9 +115,6 @@
       <div>可简写为 <span class="warn">@</span></div>
       <pre>&lt;div @click="doSomething"&gt; ... &lt;/div&gt;</pre>
     </dd>
-  </dl>
-  <div class="chap">Usage</div>
-  <dl>
     <dt>内联事件</dt>
     <dd>
       <div>适合简单逻辑</div>
@@ -162,87 +200,6 @@ function doClickParaData(para,e) {
 }</pre>
     </dd>
   </dl>
-  <div class="chap">Modifiers</div>
-  <dl>
-    <dd>
-      <div>限制事件特性；如点击事件常见的修饰符有</div>
-      <table>
-        <caption>点击事件常见修饰符</caption>
-        <tr>
-          <th>类型</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>.prevent</td>
-          <td>阻止默认事件<br>&lt;form&gt; 的默认提交刷新；&lt;a&gt; 的默认跳转和刷新</td>
-        </tr>
-        <tr>
-          <td>.stop</td>
-          <td>停止事件的传播/冒泡 <br>多用于子元素</td>
-        </tr>
-        <tr>
-          <td>.self</td>
-          <td>事件对象 e.target 是自己才触发 <br>多用于父元素</td>
-        </tr>
-        <tr>
-          <td>.once</td>
-          <td>只触发一次</td>
-        </tr>
-        <tr>
-          <td>.capture</td>
-          <td><span class="warn">默认</span> 是冒泡事件；绑定一个事件捕获
-            <br>从文档的根节点开始，向下传播，直到到达目标元素<br>多用于父元素
-          </td>
-        </tr>
-        <!-- <tr>
-          <td>.native</td>
-          <td>使用原生事件；多用于组件<br>定义在组件上的事件默认都是自定义事件
-            <br>系统认为是子组件 $emits 出来的事件；如需使用原生事件，应指定事件修饰符
-          </td>
-        </tr> -->
-      </table>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 阻止<a href="../web/js/event_default.html">表单默认事件</a></dd>
-    <dd>
-      <div>提交时不刷新页面</div>
-      <pre>
-&lt;form @submit.prevent="submit"&gt;
-    &lt;input type="text" name="uname" placeholder="your name"&gt;
-    &lt;button&gt;submit&lt;/button&gt;
-&lt;/form&gt;</pre>
-    </dd>
-    <dt>Key Modifier</dt>
-    <dd>
-      <div>指定哪个键或哪些触发；多个按键根据先后顺序指定</div>
-      <div>如果不指定具体的键，任何一个键都可以触发</div>
-      <div>使用 <span class="warn">别名</span> 代替键，如 Enter 代表回车键、Space 代表空格键、Left 代表左方向键</div>
-      <div>还可以使用 <span class="warn">系统按键</span> ，如 Ctrl、Alt、Shift等</div>
-      <div>多用于表单</div>
-      <table>
-        <caption>按键事件修饰符</caption>
-        <tr>
-          <th>类型</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>keyup.enter</td>
-          <td>按下 Enter 键</td>
-        </tr>
-        <tr>
-          <td>keyup.alt.enter</td>
-          <td>按下 Alt 键 + Enter 键</td>
-        </tr>
-        <tr>
-          <td>keyup.ctrl.enter</td>
-          <td>配合 Ctrl 键 + Enter 键</td>
-        </tr>
-        <tr>
-          <td>keydown.tab</td>
-          <td>按下 Tab 键未释放</td>
-        </tr>
-      </table>
-    </dd>
-  </dl>
   <div class="chap">Other</div>
   <dl>
     <dt>Bubbling、Capturing</dt>
@@ -287,8 +244,8 @@ function doClickParaData(para,e) {
   <dl>
     <dt>Summary</dt>
     <dd class="sn">
-      <div>@</div>
-      <div>Modifiers</div>
+      <div>classification</div>
+      <div>v-on/@</div>
     </dd>
     <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 商品详情页 → 商品数量增加 inc() 和减少 dec()</dd>

@@ -168,6 +168,16 @@ const props = defineProps({
       <div>思考：为指示器增加更多属性控制，如位置 pos - 底部 bottom、右侧 right、顶部 top、类型 type - 数字 number、分数 fraction</div>
       <div>思考：如何封装第三方库</div>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 Goods.vue</a></dd>
+    <dd>
+      <div>封装商品项组件 GoodsItem.vue 并遍历</div>
+      <pre>
+&lt;template v-if="goods.length"&gt;
+  &lt;GoodsItem :product="item" v-for="(item, ind) in goods" :key="item.id" /&gt;
+  &lt;footer class="f-s-s"&gt;我是有底线的~&lt;/footer&gt;
+&lt;/template&gt;
+&lt;div v-else&gt;商品获取失败，请刷新页面&lt;/div&gt;</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件</dd>
     <dd>
       <div>根据作者头像或者学号等信息展示相应的版权信息</div>
@@ -252,10 +262,6 @@ const toWelfare = () => {
     <dd>
       <div>每个产品推荐一定数量的相应的其它产品</div>
       <pre>&lt;Recommend :reco="goods.recommend" /&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 改造产品列表组件，提供不同的产品数据展示不同的列表内容</dd>
-    <dd>
-      <pre>&lt;List :lists="propLists"/&gt;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 地图组件 Map.vue 接收 配送组件 LocationView.vue 传递的 中心点 center 和点标记
       geometries</dd>

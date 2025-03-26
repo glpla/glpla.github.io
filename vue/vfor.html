@@ -121,6 +121,7 @@ const navs = ref(['Lorem.', 'Labore!', 'Quos.', 'Doloremque.'])</pre>
       <div>使用列表渲染遍历本地图片数组，如果图片分配的 ind 和轮播活动图片索引 currentInd 一致，则显示当前图片，否则隐藏</div>
       <div>使用数字指示器</div>
       <div>样式略</div>
+      <div>请使用第三方 <a href="https://swiperjs.com/">swiper.js</a> 实现</div>
       <pre>
 &lt;div class="swiper"&gt;
   &lt;img :src="item" alt="" 
@@ -152,24 +153,17 @@ onUnmounted(() => {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 Goods.vue</a></dd>
     <dd>
-      <div>列表渲染获取的商品数据，渲染多个商品项 GoodsItem.vue</div>
-      <div>建议先使用静态节点实现</div>
+      <div>列表渲染获取的商品数据，渲染多个商品项</div>
+      <div>封装组件 GoodsItem.vue 实现</div>
       <pre>
-&lt;div class="item" v-for="item in goods" :key="item.id"&gt;
-    &lt;img :src="getImageUrl(item.src)" alt="picture"&gt;
-    &lt;img :src="`https://glpla.github.io/utils/coffee/${item.src}`" alt="picture"&gt;
-    &lt;p&gt;{{ item.id }}&lt;/p&gt;
-    &lt;p&gt;{{ item.title }}&lt;/p&gt;
-    &lt;p&gt;{{ item.price }}&lt;/p&gt;
+&lt;div class="goods"&gt;
+  &lt;template v-if="goodsStore.goods.length"&gt;
+    &lt;GoodsItem v-for="(item, ind) in goodsStore.goods" :key="item.id" :product="item" /&gt;
+    &lt;footer class="f-s-s"&gt;我是有底线的~&lt;/footer&gt;
+  &lt;/template&gt;
+  &lt;div v-else&gt;商品获取失败，请刷新页面&lt;/div&gt;
 &lt;/div&gt;</pre>
       <div>后续使用<a href="./component_props.html">组件属性传参 defineProps()</a></div>
-      <pre>
-&lt;template v-if="goods.length"&gt;
-  &lt;GoodsItem :product="item" v-for="(item, ind) in goods" :key="item.id" /&gt;
-  &lt;footer class="f-s-s"&gt;我是有底线的~&lt;/footer&gt;
-&lt;/template&gt;
-&lt;div v-else&gt;商品获取失败，请刷新页面&lt;/div&gt;</pre>
-
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商城视图 MallView.vue</a> - 动态处理图片资源
     </dd>
@@ -185,32 +179,31 @@ const links = ref([
   {
     id: 1,
     title: '冻干咖啡',
-    src: '../assets/m0.png'
-    // src: '@/assets/m0.png'  X
+    src: 'm0.png'
   },
   {
     id: 2,
     title: '挂耳咖啡',
-    src: '../assets/m1.png'
+    src: 'm1.png'
   }, {
     id: 3,
     title: '咖啡液',
-    src: '../assets/m2.png'
+    src: 'm2.png'
   }, {
     id: 4,
     title: '咖啡豆',
-    src: '../assets/m3.png'
+    src: 'm3.png'
   }, {
     id: 5,
     title: '胶囊咖啡',
-    src: '../assets/m4.png'
+    src: 'm4.png'
   }
 ])
 
 const linksUrl = computed(() => {
   return links.value.map(item => ({
     ...item,
-    src: new URL(item.src, import.meta.url).href
+    src: new URL(`../assets/${item.src}`, import.meta.url).href
   }))
 })</pre>
     </dd>

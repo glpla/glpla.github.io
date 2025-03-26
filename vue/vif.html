@@ -59,9 +59,49 @@
       <div>v-show</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./vfor.html#swiper">自动轮播 Swiper.vue</a></dd>
-    <dd>使用 <a href="./vfor.html">列表渲染</a> 遍历图片数组，如果图片分配的 ind 和轮播活动图片索引 imgInd 一致，则显示当前图片，否则隐藏的</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品详情页 DetailsView.vue</a> → 价格说明
+    <dd>[<span class="iconfont icon-keyboard"></span>] 自动轮播 Swiper.vue</dd>
+    <dd>
+      <div>使用静态数据渲染诺干图片</div>
+      <div>如果图片分配的 ind 和轮播活动图片索引 imgInd 一致，则显示当前图片，否则隐藏</div>
+      <div>使用开发者工具查看并调试数据</div>
+      <div>后期使用 <a href="./vfor.html#swiper">列表渲染</a> 遍历图片数组</div>
+      <div>样式略</div>
+      <pre>
+&lt;div class="swiper-static"&gt;
+  &lt;img src="@/assets/swiper/swiper0.jpg" alt="" v-show="ind == 0"&gt;
+  &lt;img src="@/assets/swiper/swiper1.jpg" alt="" v-show="ind == 1"&gt;
+  &lt;img src="@/assets/swiper/swiper2.jpg" alt="" v-show="ind == 2"&gt;
+  &lt;img src="@/assets/swiper/swiper3.jpg" alt="" v-show="ind == 3"&gt;
+  &lt;img src="@/assets/swiper/swiper4.jpg" alt="" v-show="ind == 4"&gt;
+  &lt;img src="@/assets/swiper/swiper5.jpg" alt="" v-show="ind == 5"&gt;
+  &lt;img src="@/assets/swiper/swiper6.jpg" alt="" v-show="ind == 6"&gt;
+&lt;/div&gt;</pre>
+      <pre>
+import { ref } from 'vue';
+const ind = ref(0);
+let timer = setInterval(() => {
+    ind.value = (ind.value + 1) % 7;
+  }, 3000);</pre>
+      <div>改进1：使用 <a href="./lifecycle.html">生命周期函数</a> 优化系统资源</div>
+      <pre>
+import { ref, onMounted, onUnmounted } from 'vue';
+onMounted(() => {
+  timer = setInterval(() => {
+    ind.value = (ind.value + 1) % 7;
+  }, 3000);
+})
+onUnmounted(() => {
+  timer && clearInterval(timer);
+})</pre>
+      <div>改进2：图片增加异常处理</div>
+      <pre>&lt;img src="@/assets/swiper/swiper0.jpg" alt="" v-show="ind == 0" @error="errImg"&gt;</pre>
+      <pre>
+const errImg = (event) => {
+  console.error('Image failed to load:', event.target.src);
+  event.target.src = '@/assets/logo.png';
+};</pre>
+    </dd>
+    <!-- <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品详情页 DetailsView.vue</a> → 价格说明
       price</dd>
     <dd>
       <div>默认显示一部分价格说明内容</div>
@@ -81,8 +121,8 @@
 .cont-price.show-cont-all ul {
   height: auto;
 }</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">菜单 MenuView.vue</a> → 购物车
+    </dd> -->
+    <!-- <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">菜单 MenuView.vue</a> → 购物车
       Cart.vue → 商品内容 cont</dd>
     <dd>
       <div>始终显示底部 footer 购物车</div>
@@ -113,61 +153,15 @@
   padding-bottom: calc(6rem + var(--p-m-g));
   overflow-y: auto;
 }</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 GoodsView.vue</a> → 购物车
-      Cart.vue</dd>
+    </dd> -->
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 Goods.vue</a></dd>
     <dd>
-      <div>使用 <a href="./pinia.html">状态管理 - 仓库</a> 实现</div>
-      <div>如果购物车商品数量不为0，则显示购物车组件；否则不显示</div>
+      <div>1. 商品数据不为 0 时，渲染商品项组件 GoodsItem.vue</div>
+      <div>2. 购物车 Cart.vue：使用 <a href="./pinia_case.html">状态管理 - 仓库</a> 实现；如果购物车商品数量不为0，则显示购物车组件；否则不显示</div>
       <pre>&lt;Cart class="cart" v-if="cartStore.cart.length" /&gt;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">登录页 LoginView.vue</a> →
-      提示信息的显示与隐藏</dd>
-    <dd class="sn">
-      <div>方案1：使用 v-show</div>
-      <pre>
-&lt;div class="item"&gt;
-  &lt;input type="text" v-model.trim="user.name" required maxlength="11" 
-    @focus="isFocus = true"
-    @blur="isFocus = false"&gt;
-  &lt;span class="tips tips-name" v-show="isFocus && !user.name"&gt;请输入手机号&lt;/span&gt;
-&lt;/div&gt;</pre>
-      <pre>
-.tips {
-  position: absolute;
-  top: 0;
-  color: #666;
-  line-height: 40px;
-}
-
-.tips-name {
-  left: 20px;
-}</pre>
-      <div>方案1：使用动态类 - 一开始隐藏，激活时显示</div>
-      <pre>
-&lt;div class="item"&gt;
-  &lt;input type="text" v-model.trim="user.name" required maxlength="11" 
-    @focus="isFocus = true"
-    @blur="isFocus = false"&gt;
-  &lt;span class="tips tips-name" :class="{ 'active': isFocus && !user.name }"&gt;请输入手机号&lt;/span&gt;
-&lt;/div&gt;</pre>
-      <pre>
-.tips {
-  position: absolute;
-  top: 0;
-  color: #666;
-  line-height: 40px;
-}
-
-.tips-name {
-  left: 20px;
-  display: none;
-}
-
-.tips-name.active {
-  display: block;
-}</pre>
-    </dd>
+      提示信息的显示与隐藏；实现请访问 <a href="./vmodel.html#login">表单双向绑定</a></dd>
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>
