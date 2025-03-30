@@ -24,12 +24,16 @@
       <div><a href="./userouter.html">编程式导航</a>：使用 vue-router 的组合函数 <a
           href="https://router.vuejs.org/zh/api/#Functions-useRoute">useRouter()</a> 实现</div>
     </dd>
+    <dt>&lt;a&gt;</dt>
+    <dd>
+      <div>&lt;a&gt;：Html 原生标签；页面会重新加载/刷新</div>
+      <div>观察页面加载情况：浏览器刷新按钮、浏览器开发者视图 → 网络</div>
+    </dd>
     <dt>&lt;router-link&gt;</dt>
     <dd>
       <div>用来渲染一个链接的组件，该链接在被点击时会触发导航</div>
       <div>全局组件；不需要在组件模板中导入；参见 main.js</div>
       <div>不会刷新页面 - doesn't need to be reloaded from the server</div>
-      <div>&lt;a&gt;：Html 原生标签；页面会重新加载/刷新</div>
       <table>
         <caption>RouterLinkProps</caption>
         <thead>
@@ -122,18 +126,23 @@
       <div>&lt;router-view&gt;</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_router.html">路由设计</a> - 1</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_router.html">路由设计</a></dd>
     <dd class="sn">
       <div>创建项目，使用路由</div>
       <div>参照下图或自行设计路由：/、/menu、/mall、/vip、/mine</div>
       <div>为每个路由命名</div>
       <div>创建对应的组件 HomeView.vue、MenuView.vue、MallView.vue、VipView.vue、MineView.vue</div>
+      <div>使用 &lt;a&gt; 创建导航，查看页面刷新情况和网络加载情况</div>
+      <pre>
+&lt;a href="/"&gt;home&lt;/a&gt;
+&lt;a href="/menu"&gt;menu&lt;/a&gt;
+&lt;a href="/mall&gtmall&lt;/a&gt;
+&lt;a href="/vip"&vipout&lt;/a&gt;
+&lt;a href="/mine"&mineout&lt;/a&gt;</pre>
+      <div>使用 &lt;router-link&gt;创建导航，分别使用静态导入和动态导入，查看页面刷新情况和网络加载情况</div>
       <div>为主页 HomeView.vue 指定路由 /home 重定向路由到 /</div>
-      <div>为菜单视图 MenuView.vue 的商品 product.vue 添加到详情页视图 DetailsView.vue的路由 /details/:id - 使用商品 id 创建动态路由映射每个商品</div>
       <div>增加异常路由处理</div>
-      <div>调试</div>
-      <div>发布*：将发布的 dist 目录打包压缩，以学号命名，提交到学习通</div>
-      <div>代码仓库*：将项目推送到自己的代码仓库</div>
+      <div>为菜单视图 MenuView.vue 的商品 product.vue 添加到详情页视图 DetailsView.vue的路由 /details/:id - 使用商品 id 创建动态路由映射每个商品</div>
       <img src="./imgs/rs0.png" alt="">
     </dd>
     <!-- <dd>[<span class="iconfont icon-keyboard"></span>] 单页应用</dd>

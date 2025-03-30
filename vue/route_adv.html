@@ -132,7 +132,7 @@
       <div>处理路由目标异常的情况，如 404，页面丢失</div>
       <div>404 路由：使用自定义的路径参数|正则表达式匹配其它任意路径；通常是<span class="warn">最后一个</span>路由配置项</div>
       <div>404 路由也可以针对某个特定的路由</div>
-      <div>也可以使用内置函数生成 html，避免额外创建组件</div>
+      <div>也可以使用 <span class="warn">内置函数 h</span> 生成 html，避免额外创建组件</div>
       <div>如果针对根路由和特定路由的404处理都存在，特定路由应该在根路由之前，否则无法正常匹配</div>
       <pre>
 import {h} from 'vue'
@@ -146,7 +146,7 @@ import {h} from 'vue'
 },
 {
   path: '/:pathMatch(.*)*',
-  name: 'not-found',
+  name: 'NotFound',
   component: () => import('../views/NotFound.vue')
 }</pre>
     </dd>
