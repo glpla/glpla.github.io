@@ -66,44 +66,6 @@
           <td>...</td>
         </tr>
       </table>
-      <table>
-        <caption>表单常见事件类型</caption>
-        <tr>
-          <th>类型</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>submit</td>
-          <td>表单数据提交</td>
-        </tr>
-        <tr>
-          <td>reset</td>
-          <td>表单数据清除</td>
-        </tr>
-      </table>
-      <table>
-        <caption>表单输入元素常见事件类型</caption>
-        <tr>
-          <th>类型</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>focus</td>
-          <td>获取焦点</td>
-        </tr>
-        <tr>
-          <td>blur</td>
-          <td>失去焦点</td>
-        </tr>
-        <tr>
-          <td>change</td>
-          <td>内容更改</td>
-        </tr>
-        <tr>
-          <td>input</td>
-          <td>内容输入</td>
-        </tr>
-      </table>
     </dd>
   </dl>
   <div class="chap">使用 Usage</div>
@@ -131,7 +93,7 @@
       <div>使用具名函数</div>
       <pre>
 function doClick() {
-    console.log('hello,world');
+  console.log('hello,world');
 }</pre>
       <div>使用匿名函数 - 函数表达式；必须先声明再使用</div>
       <pre>
@@ -142,7 +104,7 @@ const doClick = () => {
       <pre>&lt;div @click="doClickPara('18')"&gt;do something with para&lt;/div&gt;</pre>
       <pre>
 function doClickPara(para) {
-    console.log(para);
+  console.log(para);
 }</pre>
       <div>3. 仅使用事件对象；如使用事件对象对应的 target 获取自定义属性 data-</div>
       <div>结构中无须指定</div>
@@ -150,7 +112,7 @@ function doClickPara(para) {
       <pre>&lt;div @click="doClickData" data-id="101"&gt;do something with data-&lt;/div&gt;</pre>
       <pre>
 function doClickData(e) {
-    console.log(e.target.dataset);
+  console.log(e.target.dataset);
 }</pre>
       <div>4. 同时使用事件对象和参数</div>
       <div>结构中需要使用 <span class="warn">特殊变量 $event</span> 以便和普通参数区分开来</div>
@@ -162,7 +124,7 @@ function doClickData(e) {
 &gt;do something with para and data- &lt;/div&gt;</pre>
       <pre>
 function doClickParaData(para,e) {
-    console.log(para, e.target.dataset);
+  console.log(para, e.target.dataset);
 }</pre>
     </dd>
   </dl>
@@ -174,12 +136,12 @@ function doClickParaData(para,e) {
       <div>事件冒泡 Bubbling - <span class="warn">默认</span>行为；单击 inner，目标 inner 先执行，然后冒泡到 outer 执行</div>
       <pre>
 &lt;div class="outer" @click="doOut"&gt;
-    &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
+  &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
       <div>事件捕获 Capturing - 单击 inner，先被 outer 捕获执行，再传播到目标 inner执行</div>
       <pre>
 &lt;div class="outer" @click.capture="doOut"&gt;
-    &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
+  &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
     </dd>
     <dt>target、currentTarget</dt>
@@ -193,17 +155,17 @@ function doClickParaData(para,e) {
           href="../web/js/event_delegation.html">Delegation</a></div>
       <pre>
 &lt;div class="outer" @click="doOut"&gt;
-    &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
+  &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
       <div>如果 inner 指定 stop，事件不会冒泡到 outer</div>
       <pre>
 &lt;div class="outer" @click="doOut"&gt;
-    &lt;div class="inner" @click.stop="doInner"&gt;&lt;/div&gt;
+  &lt;div class="inner" @click.stop="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
       <div>如果 outer 指定 self，仅仅响应我自己绑定的事件 - 自嗨模式，不会响应 inner 冒泡的事件：target 是我，事件处理器不来自子元素</div>
       <pre>
 &lt;div class="outer" @click.self="doOut"&gt;
-    &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
+  &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
     </dd>
   </dl>
