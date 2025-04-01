@@ -142,6 +142,21 @@ onUnmounted(() =&gt; {
         <div>已安装 Vs Code 扩展 Vue Vscode Snippets 的，请注意编辑过程中的代码片段提示，不要一个一个字母编辑</div>
       </div>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 页面滚动事件</dd>
+    <dd>
+      <div>页面加载时，绑定事件处理器</div>
+      <div>页面卸载时，移除绑定的事件处理器</div>
+      <pre>
+const handle = () => {
+   isHide.value = window.scrollY > 100 ? true : false
+}
+onMounted(() => {
+  window.addEventListener('scroll', handle)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', handle)
+})</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 页面加载完毕，在顶部呈现</dd>
     <dd>
       <div>页面跳转时，可能会保留之前的滚动位置</div>

@@ -90,22 +90,7 @@
         </tr>
       </table>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 留言板 - 按 Ctrl + Enter 提交留言；适合桌面端</dd>
-    <dd>
-      <div>不需要 &lt;form&gt; 这个壳</div>
-      <div>使用 id 方便获取数据；后期使用 <a href="./vmodel.html#msg">数据绑定</a> 实现</div>
-      <div>查看并分析事件对象</div>
-      <pre>&lt;input type="text" @keyup.ctrl.enter="keySubmit" placeholder="your text" id="msg"></pre>
-      <pre>
-const keySubmit = (e) => {
-  console.log('ctrl enter submit')
-  console.log(e);
-  console.log(e.key);
-  console.log(e.keyCode);
-  console.log(msg.value);
-}</pre>
-    </dd>
-    <dt>鼠标按键修饰符</dt>
+    <dt>鼠标按键修饰符 Mouse Modifier</dt>
     <dd>
       <table>
         <caption>鼠标按键修饰符</caption>
@@ -126,6 +111,59 @@ const keySubmit = (e) => {
           <td>中键</td>
         </tr>
       </table>
+    </dd>
+  </dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd class="sn">
+      <div>事件修饰符</div>
+      <p>. prevent</p>
+      <p>. stop</p>
+      <p>. self</p>
+      <div>按键修饰符</div>
+      <p>. alt</p>
+      <p>. shift</p>
+      <p>. ctrl</p>
+    </dd>
+    <dt>Homework</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 模态框 - 商品详情页 DetailsView.vue → 交易保障</dd>
+    <dd>
+      <div>单击"更多"，打开模态框</div>
+      <div>单击"关闭"或其它任何地方关闭模态框</div>
+      <div>样式略</div>
+      <div>方案1. 使用动态类实现 - 效果可以更丰富细腻</div>
+      <pre>
+&lt;div class="modal" :class="{ 'show': isShow }" @click.self="isShow = false"&gt;
+  &lt;div class="cont"&gt;
+    &lt;span class="close" @click.stop="isShow = false"&gt;&times;&lt;/span&gt;
+    // ...
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+      <pre>
+.modal {
+  display: none;
+  // ...
+}
+
+.show {
+  display: flex;
+}</pre>
+      <div>方案2. 使用条件渲染实现 - 样式比较简单</div>
+      <pre>
+&lt;div class="modal" @click.self="isShow = false" v-show="isShow"&gt;
+  &lt;div class="cont"&gt;
+    &lt;span class="close" @click.stop="isShow = false"&gt;&times;&lt;/span&gt;
+    // ...
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+      <div>改进：封装组件；使用 <a href="./component_emits.html">自定义事件 defineEmits()</a>，单击显示对应的权益模态框</div>
+      <pre>&lt;Guarantee @show-guarantee="isShowModal = true" /&gt;</pre>
+      <!-- <div>单击模态框关闭按钮或其它区域，如背景，都可以关闭模态框</div>
+      <pre>
+&lt;div class="modal" :class="{ 'show': isShowModal }" @click.self="isShowModal = false"&gt;
+  &lt;button class="btn modal-btn" @click.prevent="isShowModal = false"&gt;close&lt;/button&gt;
+&lt;/div&gt;</pre> -->
     </dd>
   </dl>
   <div id="footer"></div>

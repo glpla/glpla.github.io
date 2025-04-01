@@ -117,46 +117,12 @@
     </dd>
     <dt>内联事件</dt>
     <dd>
-      <div>适合简单逻辑</div>
+      <div>直接操作数据；适合简单逻辑</div>
       <pre>&lt;div @click="console.log('hi')"&gt;console log&lt;/div&gt;</pre>
       <div>单击，count 加1；count 要使用才可以响应；否则仅仅利用 vue devTool 数据无法响应</div>
       <pre>
 &lt;div @click="count++"&gt;do something&lt;/div&gt;
 &lt;div&gt;使用数据{{count}}&lt;/div&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 主题切换</dd>
-    <dd>
-      <pre>
-&lt;span 
-  @click="darkMode = !darkMode" 
-  class="iconfont" 
-  :class="darkMode ? 'icon-Sun' : 'icon-Moon-Star'"&gt;
-&lt;/span&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 商品列表页 GoodsView.vue → 购物车 Cart.vue</dd>
-    <dd>
-      <div>1. 显示或折叠购物车 - 高度发生变化</div>
-      <pre>
-&lt;button 
-  @click.stop="isShowCartDetail = !isShowCartDetail"&gt;
-&lt;/button&gt;</pre>
-      <div>2. 商品数量增加或减少</div>
-      <pre>
-&lt;div&gt;
-  &lt;button @click="item.quantity--"&gt;-&lt;/button&gt;
-  &lt;span &gt;{{ item.quantity }}&lt;/span&gt;
-  &lt;button @click="item.quantity++"&gt;+&lt;/button&gt;
-&lt;/div&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 商品详情页 DetailsView.vue → 权益保护模态框 Guarantee.vue</dd>
-    <dd>
-      <div>封装组件；使用 <a href="./component_emits.html">自定义事件 defineEmits()</a>，单击显示对应的权益模态框</div>
-      <pre>&lt;Guarantee @show-guarantee="isShowModal = true" /&gt;</pre>
-      <div>单击模态框关闭按钮或其它区域，如背景，都可以关闭模态框</div>
-      <pre>
-&lt;div class="modal" :class="{ 'show': isShowModal }" @click.self="isShowModal = false"&gt;
-  &lt;button class="btn modal-btn" @click.prevent="isShowModal = false"&gt;close&lt;/button&gt;
-&lt;/div&gt;</pre>
     </dd>
     <dt>普通事件</dt>
     <dd>
@@ -223,7 +189,8 @@ function doClickParaData(para,e) {
       <div>单击 outer：点的是 outer；向上没有父级或者说没有冒泡，响应事件的也是 outer，所以 target 和 currentTarget 都是 outer</div>
       <div> 单击inner：首先 inner 响应事件，所以 target 和 currentTarget 都是 inner；然后事件冒泡到 outer，outer 响应的是 inner 绑定的事件，所以
         target 是 inner，currentTarget 是 outer</div>
-      <div>更多信息，请访问 <a href="../web/js/event_target.html">event - target</a></div>
+      <div>更多信息，请访问 <a href="../web/js/event_target.html">Event - target</a>、<a
+          href="../web/js/event_delegation.html">Delegation</a></div>
       <pre>
 &lt;div class="outer" @click="doOut"&gt;
     &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
@@ -248,24 +215,24 @@ function doClickParaData(para,e) {
       <div>v-on/@</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 商品详情页 → 商品数量增加 inc() 和减少 dec()</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 商品详情页 DetailsView.vue → 商品数量增加 inc() 和减少 dec()</dd>
     <dd>
       <div>方案1：使用内联事件</div>
-      <pre>&lt;div @click="num++"&gt;inc&lt;/div&gt;</pre>
+      <pre>&lt;div @click.stop="num++"&gt;inc&lt;/div&gt;</pre>
       <div>方案2：使用具名函数</div>
-      <pre>&lt;div @click="inc"&gt;inc&lt;/div&gt;</pre>
+      <pre>&lt;div @click.stop="inc"&gt;inc&lt;/div&gt;</pre>
       <pre>
 function inc() {
   num.value++
 }</pre>
       <div>方案3：使用匿名函数</div>
-      <pre>&lt;div @click="inc"&gt;inc&lt;/div&gt;</pre>
+      <pre>&lt;div @click.stop="inc"&gt;inc&lt;/div&gt;</pre>
       <pre>
 const inc = () => {
   num.value++
 }</pre>
     </dd>
-    <dd id="swiper">[<span class="iconfont icon-keyboard"></span>] 手动轮播 Swiper - 单击时切换图片</dd>
+    <!-- <dd id="swiper">[<span class="iconfont icon-keyboard"></span>] 手动轮播 Swiper - 单击时切换图片</dd>
     <dd>
       <div>方案1：绑定属性，使用 &lt;img&gt; 配合在线资源</div>
       <pre>&lt;img :src=" 'https://glpla.github.io/utils/coffee/coffee' + imgInd + '.jpg' " alt="swiper-img"&gt;</pre>
@@ -286,7 +253,7 @@ const getPic = (ind) => {
 &lt;div&gt;{{ ind }}&lt;/div&gt;
 &lt;img :src='getPic(ind)' alt=""&gt;
 &lt;button @click="chg"&gt;change pic&lt;/button&gt;</pre>
-    </dd>
+    </dd> -->
     <dd>[<span class="iconfont icon-keyboard"></span>] 模块化封装商品数量的增加 inc() 和减少 dec()</dd>
     <dd>
       <div>oper.js - 默认导出一个函数，这个函数执行后又返回2个函数</div>
@@ -298,25 +265,44 @@ export default () => {
 };</pre>
       <div>引入 - 因为是默认导出，所以引入时，可以指定任意名字</div>
       <div>使用 - 执行导出的函数，通过解构拿到其中一个函数 inc，可以用于任何场合</div>
+      <div>注意：如果导出的是响应式数据，解构会丢失数据的响应式</div>
       <pre>
 import oper from '@/assets/utils/oper'
 console.log(oper);
 const { inc } = oper()</pre>
       <pre>&lt;button @click="inc"&gt;inc&lt;/button&gt;</pre>
+      <div>最好不要解构</div>
+      <pre>
+import oper from '@/assets/utils/oper'
+console.log(oper);
+const useOper = oper()</pre>
+      <pre>&lt;button @click="useOper.inc"&gt;inc&lt;/button&gt;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 导航/标签页 TabCard；<a href="./class.html#tabcard">实现1</a>、<a
-        href="./vfor.html#tabcard">实现2</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 导航/标签页 TabCard；<a href="./class.html#tabcard">实现1 - 内联事件</a>、<a
+        href="./vfor.html#tabcard">实现2 - 内联事件；列表渲染</a></dd>
     <dd>
       <div>使用 &lt;nav&gt; 和 &lt;a&gt; 实现</div>
       <div>单击标签，对应的标签高亮显示</div>
       <div>阻止 &lt;a&gt; 的默认事件</div>
       <div>分别使用事件代理、不使用事件代理实现，并体会2者的区别</div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 购物车 Cart.vue</dd>
+    <!-- <dd>[<span class="iconfont icon-keyboard"></span>] 购物车 Cart.vue</dd>
     <dd>
-      <div>使用 for 循环统计商品的价格 totalPrice 和数量 totalQuantity</div>
-      <div>使用 reduce 统计商品的价格 totalPrice 和数量 totalQuantity</div>
-    </dd>
+      <div>1. 使用 for 循环统计商品的价格 totalPrice 和数量 totalQuantity</div>
+      <div>2. 使用 reduce 统计商品的价格 totalPrice 和数量 totalQuantity</div>
+      <div>2. 显示或折叠购物车 - 高度发生变化</div>
+      <pre>
+&lt;button 
+  @click.stop="isShowCartDetail = !isShowCartDetail"&gt;
+&lt;/button&gt;</pre>
+      <div>4. 商品数量增加或减少</div>
+      <pre>
+&lt;div&gt;
+  &lt;button @click="item.quantity--"&gt;-&lt;/button&gt;
+  &lt;span &gt;{{ item.quantity }}&lt;/span&gt;
+  &lt;button @click="item.quantity++"&gt;+&lt;/button&gt;
+&lt;/div&gt;</pre>
+    </dd> -->
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>
