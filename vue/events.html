@@ -20,9 +20,6 @@
     <dt>事件类型 Classification</dt>
     <dd>
       <div>包括：鼠标事件、键盘事件等等</div>
-      <div>更多信息，请访问 <a href="https://cn.vuejs.org/guide/essentials/event-handling">事件处理 - Event Handling</a>、<a
-          href="../web/js/event.html">HTML5事件</a>、<a href="../minip/events.html">微信小程序事件</a></div>
-      <div>建议采用模块化开发，可以复用业务；详细信息，请参考 <a href="../web/js/module.html">Module</a></div>
       <table>
         <caption>常见事件类型</caption>
         <tr>
@@ -67,9 +64,28 @@
         </tr>
       </table>
     </dd>
+    <dt>Html 原生使用</dt>
+    <dd>
+      <div>先 <a href="../web/js/element.html">获取 Element 元素</a> 再分配事件；更多信息，请访问HTML5事件 <a
+          href="../web/js/event.html">传统方式</a>、<a href="../web/js/event_addEventListener.html">事件侦听方式</a></div>
+      <div>1. 元素属性形式</div>
+      <pre>&lt;div onclick="alert('hi,there.')"&gt;点击我&lt;/div&gt;</pre>
+      <div>2. 对象属性形式</div>
+      <pre>
+let el = document.querySelector('div')
+el.onclick = function (e) {
+    console.log(e);
+    console.log(this);
+}</pre>
+      <div>3. 事件侦听方式 - 可以添加多个事件侦听；可以移除事件侦听</div>
+      <pre>el.addEventListener(event-type, event-handle, capture)</pre>
+      <pre>el.removeEventListener(event-type, event-handle, capture)</pre>
+    </dd>
   </dl>
-  <div class="chap">使用 Usage</div>
+  <div class="chap">Vue使用 Usage</div>
   <dl>
+    <dd>更多信息，请访问 <a href="https://cn.vuejs.org/guide/essentials/event-handling">事件处理 - Event Handling</a></dd>
+    <dd>建议采用模块化开发，可以复用业务；详细信息，请参考 <a href="../web/js/module.html">Module</a></dd>
     <dt>v-on</dt>
     <dd>使用 v-on 指令来监听 DOM 事件，并在事件触发时执行对应的 JavaScript |事件处理函数 handle</dd>
     <dd>
@@ -128,7 +144,7 @@ function doClickParaData(para,e) {
 }</pre>
     </dd>
   </dl>
-  <div class="chap">Other</div>
+  <div class="chap">其它 Other</div>
   <dl>
     <dt>Bubbling、Capturing</dt>
     <dd>
@@ -193,6 +209,71 @@ function inc() {
 const inc = () => {
   num.value++
 }</pre>
+      <div>参考结构</div>
+      <pre>
+&lt;footer&gt;
+  &lt;div class="price"&gt;
+    &lt;div class="total"&gt;&yen;100&lt;/div&gt;
+    &lt;div class="nums"&gt;
+      &lt;button&gt;-&lt;/button&gt;
+      &lt;span class="num"&gt;1&lt;/span&gt;
+      &lt;button class="inc"&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="btns"&gt;
+    &lt;button&gt;立即购买&lt;/button&gt;
+    &lt;button class="cart"&gt;加入购物车&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;</pre>
+      <div>参考样式</div>
+      <pre>
+footer {
+  line-height: 40px;
+}
+
+.price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nums {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nums button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #f40;
+}
+
+.nums .num {
+  width: 30px;
+  text-align: center;
+}
+
+.nums button.inc {
+  background-color: #f40;
+  color: #fff;
+}
+
+.btns {
+  display: flex;
+  gap: 10px;
+}
+
+.btns button {
+  flex: 1;
+  border-radius: 20px;
+  border: 1px solid #f40;
+}
+
+.btns button.cart {
+  background-color: #f40;
+  color: #fff;
+}</pre>
     </dd>
     <!-- <dd id="swiper">[<span class="iconfont icon-keyboard"></span>] 手动轮播 Swiper - 单击时切换图片</dd>
     <dd>
@@ -216,7 +297,7 @@ const getPic = (ind) => {
 &lt;img :src='getPic(ind)' alt=""&gt;
 &lt;button @click="chg"&gt;change pic&lt;/button&gt;</pre>
     </dd> -->
-    <dd>[<span class="iconfont icon-keyboard"></span>] 模块化封装商品数量的增加 inc() 和减少 dec()</dd>
+    <!-- <dd>[<span class="iconfont icon-keyboard"></span>] 模块化封装商品数量的增加 inc() 和减少 dec()</dd>
     <dd>
       <div>oper.js - 默认导出一个函数，这个函数执行后又返回2个函数</div>
       <pre>
@@ -239,7 +320,7 @@ import oper from '@/assets/utils/oper'
 console.log(oper);
 const useOper = oper()</pre>
       <pre>&lt;button @click="useOper.inc"&gt;inc&lt;/button&gt;</pre>
-    </dd>
+    </dd> -->
     <dd>[<span class="iconfont icon-keyboard"></span>] 导航/标签页 TabCard；<a href="./class.html#tabcard">实现1 - 内联事件</a>、<a
         href="./vfor.html#tabcard">实现2 - 内联事件；列表渲染</a></dd>
     <dd>
