@@ -142,6 +142,16 @@ function doClickData(e) {
 function doClickParaData(para,e) {
   console.log(para, e.target.dataset);
 }</pre>
+      <div>列表渲染商品数据，单击获取每个产品的 id - 在详情页利用 id 拉取对应的商品并渲染</div>
+      <pre>
+&lt;div v-for="item in goods" :key="item.id"&gt;
+  &lt;div&gt;{{ item.name }}&lt;/div&gt;
+  &lt;button @click="getItem(item.id, $event)"&gt;More&lt;/button&gt;
+&lt;/div&gt;</pre>
+      <pre>
+const getItem = (id, e) => {
+  console.log(id, e);
+}</pre>
     </dd>
   </dl>
   <div class="chap">其它 Other</div>
@@ -149,39 +159,39 @@ function doClickParaData(para,e) {
     <dt>Bubbling、Capturing</dt>
     <dd>
       <div>决定事件执行的顺序</div>
-      <div>事件冒泡 Bubbling - <span class="warn">默认</span>行为；单击 inner，目标 inner 先执行，然后冒泡到 outer 执行</div>
+      <div>事件冒泡 Bubbling - <span class="warn">默认</span>行为；单击 son，目标 son 先执行，然后冒泡到 fa 执行</div>
       <pre>
-&lt;div class="outer" @click="doOut"&gt;
-  &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
+&lt;div class="fa" @click="doFa"&gt;
+  &lt;div class="son" @click="doSon"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
-      <div>事件捕获 Capturing - 单击 inner，先被 outer 捕获执行，再传播到目标 inner执行</div>
+      <div>事件捕获 Capturing - 单击 son，先被 fa 捕获执行，再传播到目标 son执行</div>
       <pre>
-&lt;div class="outer" @click.capture="doOut"&gt;
-  &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
+&lt;div class="fa" @click.capture="doFa"&gt;
+  &lt;div class="son" @click="doSon"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
     </dd>
     <dt>target、currentTarget</dt>
     <dd>
       <div>target：触发事件的目标 - 点的谁</div>
       <div>currentTarget：当前响应事件的目标；随着事件流的变化，当前目标也在变化</div>
-      <div>单击 outer：点的是 outer；向上没有父级或者说没有冒泡，响应事件的也是 outer，所以 target 和 currentTarget 都是 outer</div>
-      <div> 单击inner：首先 inner 响应事件，所以 target 和 currentTarget 都是 inner；然后事件冒泡到 outer，outer 响应的是 inner 绑定的事件，所以
-        target 是 inner，currentTarget 是 outer</div>
+      <div>单击 fa：点的是 fa；向上没有父级或者说没有冒泡，响应事件的也是 fa，所以 target 和 currentTarget 都是 fa</div>
+      <div> 单击son：首先 son 响应事件，所以 target 和 currentTarget 都是 son；然后事件冒泡到 fa，fa 响应的是 son 绑定的事件，所以
+        target 是 son，currentTarget 是 fa</div>
       <div>更多信息，请访问 <a href="../web/js/event_target.html">Event - target</a>、<a
           href="../web/js/event_delegation.html">Delegation</a></div>
       <pre>
-&lt;div class="outer" @click="doOut"&gt;
-  &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
+&lt;div class="fa" @click="doFa"&gt;
+  &lt;div class="son" @click="doSon"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
-      <div>如果 inner 指定 stop，事件不会冒泡到 outer</div>
+      <div>如果 son 指定 stop，事件不会冒泡到 fa</div>
       <pre>
-&lt;div class="outer" @click="doOut"&gt;
-  &lt;div class="inner" @click.stop="doInner"&gt;&lt;/div&gt;
+&lt;div class="fa" @click="doFa"&gt;
+  &lt;div class="son" @click.stop="doSon"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
-      <div>如果 outer 指定 self，仅仅响应我自己绑定的事件 - 自嗨模式，不会响应 inner 冒泡的事件：target 是我，事件处理器不来自子元素</div>
+      <div>如果 fa 指定 self，仅仅响应我自己绑定的事件 - 自嗨模式，不会响应 son 冒泡的事件：target 是我，事件处理器不来自子元素</div>
       <pre>
-&lt;div class="outer" @click.self="doOut"&gt;
-  &lt;div class="inner" @click="doInner"&gt;&lt;/div&gt;
+&lt;div class="fa" @click.self="doFa"&gt;
+  &lt;div class="son" @click="doSon"&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
     </dd>
   </dl>
