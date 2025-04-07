@@ -187,27 +187,30 @@ const submit = () => {
     <dt>&lt;input&gt; - text</dt>
     <dd>
       <div>单行文本输入 - 可以省略 id 和 name</div>
+      <div>绑定的是 value 属性 并侦听 input 事件</div>
       <pre>let msg = ref('')</pre>
       <pre>
-&lt;input type="text" v-model="msg" required&gt;
+&lt;input type="text" v-model="msg" placeholder="your text here."&gt;
 &lt;div&gt;{{ msg }}&lt;/div&gt;</pre>
       <div>传统方式 - 通过 input 事件和属性绑定实现双向绑定；这里采用内联事件|行内事件</div>
       <pre>
-&lt;input type="text" @input="msg = $event.target.value" :value="msg" required&gt;
-&lt;input type="text" @input="(e) => { msg = e.target.value }" :value="msg" required&gt;
+&lt;input type="text" @input="msg = $event.target.value" :value="msg" placeholder="your text here."&gt;
+&lt;input type="text" @input="(e) => { msg = e.target.value }" :value="msg" placeholder="your text here."&gt;
 &lt;div&gt;{{ msg }}&lt;/div&gt;</pre>
     </dd>
     <dt>&lt;input&gt; - radio</dt>
     <dd>
-      <div>单选；多选一</div>
+      <div>单选；多选一；不能单独使用</div>
       <div>需要为每个 &lt;radio&gt; 指定值 value，并使用同一个名字 name 以确保它们是同一组</div>
-      <div>不指定 value 的话，只能获取单选框的选中状态 checked 是 true 还是 false，并不知道选择了谁</div>
+      <div>如果不指定 value，其默认值是 on - The default value for checkboxes and radio buttons is on</div>
+      <!-- <div>不指定 value 的话，只能获取单选框的选中状态 checked 是 true 还是 false，并不知道选择了谁</div> -->
+      <div>绑定的是 checked 属性 并侦听 change 事件</div>
+      <div>都绑定同一个值 value</div>
       <pre>let gender = ref('')</pre>
-      <div>双向绑定 - 选中都绑定 gender，同时指定值 value</div>
       <pre>
 &lt;input type="radio" name="gender" value="male" v-model="gender"&gt;male
 &lt;input type="radio" name="gender" value="female" v-model="gender"&gt;female
-&lt;div&gt;{{ gender }}&lt;/div&gt;</pre>
+&lt;div&gt;Picked {{ gender }}&lt;/div&gt;</pre>
       <div>传统方式 - 使用 change 事件获取</div>
       <pre>
 &lt;input type="radio" name="gender" value="male" @change="(e) => gender = e.target.value"&gt;male
@@ -217,16 +220,21 @@ const submit = () => {
     <dt>&lt;input&gt; - checkbox</dt>
     <dd>
       <div>多选</div>
+      <div>绑定的是 checked 属性 并侦听 change 事件</div>
       <div>需要为每个 &lt;input&gt; 指定值 value，并使用同一个名字 name 以确保它们是同一组</div>
-      <div>如果不指定 value，只能获取复选框的选中状态 checked 是 true 还是 false，并不知道选择了谁 - 可用于状态判断，如是否同意、是否阅读等用户须知场合</div>
+      <div>如果不指定 value，其默认值是 on - The default value for checkboxes and radio buttons is on</div>
+      <!-- <div>如果不指定 value，只能获取复选框的选中状态 checked 是 true 还是 false，并不知道选择了谁 - 可用于状态判断，如是否同意、是否阅读等用户须知场合</div> -->
+      <div>1. 单个：可以只使用一个多选按钮，绑定一个布尔值，用于确定选中与否的场合，如使用须知、用户协议等。这种情况下不需要指定具体的值</div>
+      <pre>&lt;input type="checkbox" v-model="isAgree"&gt; 用户须知</pre>
+      <pre>const isAgree = ref(false)</pre>
+      <div>2. 多个：为了区分选中的项目，必须指定值 value，且绑定同一个数组类型的值</div>
       <pre>let like = ref([])</pre>
-      <div>双向绑定 - 选项都绑定数据 like，同时指定值 value</div>
       <pre>
 &lt;input type="checkbox" name="like" value="code" v-model="like"&gt;code
 &lt;input type="checkbox" name="like" value="sing" v-model="like"&gt;sing
 &lt;input type="checkbox" name="like" value="game" v-model="like"&gt;game
 &lt;input type="checkbox" name="like" value="read" v-model="like"&gt;read
-&lt;div&gt;{{ like }}&lt;/div&gt;</pre>
+&lt;div&gt;Checked items {{ like }}&lt;/div&gt;</pre>
       <div>传统方式 - 使用 change 事件获取</div>
       <pre>
 &lt;input type="checkbox" name="like" value="code" @change="sel"&gt;code
@@ -239,17 +247,13 @@ const sel = (e) => {
     e.target.checked ? like.value.push(e.target.value) : like.value = like.value.filter(item => item !== e.target.value)
 }</pre>
     </dd>
-    <dd class="tips">
-      <div>&lt;input&gt;的 radio 类型和 checkbox 类型，绑定的是 checked 属性 并侦听 change 事件</div>
-      <div>如果不指定 value，其默认值是 on - The default value for checkboxes and radio buttons is on</div>
-    </dd>
     <dt>&lt;textarea&gt;</dt>
     <dd>
-      <div>多行输入；留言、评论</div>
+      <div>多行输入；如：简介、留言、评论</div>
+      <div>绑定的是 value 属性 并侦听 input 事件</div>
       <pre>let msg = ref('')</pre>
-      <div>双向绑定</div>
       <pre>
-&lt;textarea v-model="msg" required&gt;&lt;/textarea&gt;
+&lt;textarea v-model="msg" placeholder="edit your message"&gt;&lt;/textarea&gt;
 &lt;div&gt;{{msg}}&lt;/div&gt;
 </pre>
       <div>不可以使用内容绑定的插值表达式 {{}}</div>
@@ -260,10 +264,10 @@ const sel = (e) => {
 &lt;div&gt;{{msg}}&lt;/div&gt;
 </pre>
     </dd>
-    <dd class="tips">&lt;input&gt; 的 text 类型和 &lt;textarea&gt;，绑定的是 value 属性 并侦听 input 事件</dd>
     <dt>&lt;select&gt;</dt>
     <dd>
       <div>下拉列表；下拉框</div>
+      <div>绑定的是 value 属性 并侦听 change 事件</div>
       <!-- <select @change="(e) => like = e.target.value">
               <option value='1'>1</option>
               <option value='2'>2</option>
@@ -278,9 +282,8 @@ const sel = (e) => {
   &lt;option value='2'&gt;2&lt;/option&gt;
   &lt;option value='3'&gt;3&lt;/option&gt;
 &lt;/select&gt;
-&lt;div&gt;{{sel}}&lt;/div&gt;</pre>
+&lt;div&gt;selected {{sel}}&lt;/div&gt;</pre>
     </dd>
-    <dd class="tips">&lt;select&gt; 绑定的是 value 属性 并侦听 change 事件</dd>
   </dl>
   <div class="chap">值的绑定</div>
   <dl>
@@ -319,17 +322,25 @@ let femaleVal = reactive({
   <div class="chap">修饰符</div>
   <dl>
     <dt>.number</dt>
-    <dd>把 v-model 的值转换成数值类型</dd>
-    <dd>输入的第一个只能是数字或者小数点或者是正负号</dd>
-    <dd>如果输入的第一个字是字符串，那 number 这个修饰符就不会生效</dd>
-    <dd>既然需要转换为数字，那么就请输入数字吧</dd>
+    <dd>
+      <div>把 v-model 的值转换成数值类型</div>
+      <div>输入的第一个只能是数字或者小数点或者是正负号</div>
+      <div>如果输入的第一个字是字符串，那 number 这个修饰符就不会生效</div>
+      <div>既然需要转换为数字，那么就请输入数字吧</div>
+      <div>指定输入 input 或改变 change 事件，在控制台输出数据，查看值的颜色 - <span style="color: #0842a0;">蓝色</span>为数字；黑色为字符串</div>
+    </dd>
     <dt>.lazy</dt>
-    <dd>默认情况下，v-model 在 input 事件中同步输入框的值与数据，实时渲染</dd>
-    <dd>指定 lazy，会把 oninput 事件改成 onchange 事件 - 节流</dd>
-    <dd>当失去焦点或按下回车时才触发更新</dd>
+    <dd>
+      <div>默认情况下，v-model 在 input 事件中同步输入框的值与数据，实时渲染</div>
+      <div>指定 lazy，会把 oninput 事件改成 onchange 事件 - 节流</div>
+      <div>当失去焦点或按下回车时才触发更新</div>
+      <div>增加或移除 lazy 属性，请刷新页面再使用开发者视图检查其变化情况</div>
+    </dd>
     <dt>.trim</dt>
-    <dd>过滤用户输入时首尾的空格字符</dd>
-    <dd>更多数据过滤操作需要借助 JavaScript，甚至正则表达式实现</dd>
+    <dd>
+      <div>过滤用户输入时首尾的空格字符</div>
+      <div>更多数据过滤操作需要借助 JavaScript，甚至正则表达式实现</div>
+    </dd>
   </dl>
   <div class="chap">Summary & Homework</div>
   <dl>
@@ -341,6 +352,7 @@ let femaleVal = reactive({
       <div>&lt;input&gt; 的 checkbox 类型：绑定 checked 属性；侦听 change 事件</div>
       <div>&lt;select&gt;：绑定 value 属性；侦听 change 事件</div>
       <div>数据应该是唯一的</div>
+      <div>数据的调试和检查</div>
     </dd>
     <dd class="tips">
       <div>实现双向绑定后，可以忽略 &lt;form&gt; 这个壳，直接在 &lt;button&gt;的事件上提交数据</div>

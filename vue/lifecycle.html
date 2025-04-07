@@ -146,6 +146,7 @@ onUnmounted(() =&gt; {
     <dd>
       <div>页面加载时，绑定事件处理器</div>
       <div>页面卸载时，移除绑定的事件处理器</div>
+      <div>特别要注意页面卸载时，定时器的清除</div>
       <pre>
 const handle = () => {
    isHide.value = window.scrollY > 100 ? true : false
@@ -174,36 +175,25 @@ router.afterEach((to, from) => {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 自定义搜索组件，单击时，显示并自动获取焦点</dd>
     <dd>
-      <div>搜索组件参考设计如下</div>
+      <div>搜索组件 - 使用 <a href="./ref.html">模板引用</a> 获取元素</div>
       <pre>
-&lt;script setup&gt;
-    import { ref, onMounted } from 'vue';
-    let sql = ref(null)
-    onMounted(() =&gt; {
-        sql.value.focus()
-    })
-&lt;/script&gt;
-
-&lt;template&gt;
-    &lt;input type="text" ref="sql"&gt;
-&lt;/template&gt;</pre>
-      <div>父组件设计如下</div>
+import { ref, onMounted } from 'vue';
+let sql = ref(null)
+onMounted(() =&gt; {
+    sql.value.focus()
+})</pre>
+      <pre>&lt;input type="text" ref="sql"&gt;</pre>
+      <div>父组件 - 单击按钮显示搜索框</div>
       <pre>
-&lt;script setup&gt;
-    import { ref } from 'vue';
-    import Search from './components/Search.vue'
-    let isShow = ref(false)
-    const showBox = () =&gt; {
-        isShow.value = true
-    }
-&lt;/script&gt;
-
-&lt;template&gt;
-    &lt;button @click="showBox"&gt;click&lt;/button&gt;
-    &lt;Search v-if="isShow"&gt;&lt;/Search&gt;
-&lt;/template&gt;</pre>
+import { ref } from 'vue';
+import Search from './components/Search.vue'
+let isShow = ref(false)</pre>
+      <pre>
+&lt;button @click="isShow = true"&gt;click&lt;/button&gt;
+&lt;Search v-if="isShow"&gt;&lt;/Search&gt;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页 - 使用动态组件切换时，查看各组件的生命周期函数执行情况</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页 - 使用 <a href="./component_dynamic.html">动态组件</a>
+      切换时，查看各组件的生命周期函数执行情况</dd>
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer2025.js"></script>
