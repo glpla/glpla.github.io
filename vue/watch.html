@@ -93,6 +93,16 @@ watch(num, (newv, oldv) => {
       <div>如果侦听 num.value，则会提示</div>
       <pre>Invalid watch source:  0 A watch source can only be a getter/effect function, a ref, a reactive object, or an array of these types.at ... </pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 分析下面代码的功能</dd>
+    <dd>
+      <!-- <div>字符串倒序</div> -->
+      <pre>
+const msg = ref('')
+const str = ref('')
+watch(msg, (newv, oldv) => {
+    str.value = newv.split('').reverse().join('')
+})</pre>
+    </dd>
     <dt>多个简单数据</dt>
     <dd>
       <div><span class="warn">任何</span>一个数据发生变化都会被监听到；是或的关系，不是与的关系</div>
@@ -197,11 +207,35 @@ watch([() => user.age, () => user.addr.code], ([n0, n1], [o0, o1]) => {
       <div>可以使用 getter 函数侦听响应式数据的特定属性</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 分析下面代码的功能</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 详情页 - 数量变化引起总价变化</dd>
     <dd>
+      <div>1. 使用计算属性实现 - 根据产品数量计算</div>
+      <div>2. 使用侦听实现 - 侦听产品数量</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 登录页 - 发送验证码</dd>
+    <dd>
+      <div>发送验证码：初始状态禁止 disabled</div>
+      <div>侦听手机号码，如何符合要求，则激活发送验证码按钮</div>
+      <div>表单其它数据和功能略</div>
       <pre>
-watch(msg, (newv, oldv) => {
-    str.value = newv.split('').reverse().join('')
+&lt;div class="item"&gt;
+  &lt;input type="text" v-model.number="user.code" required maxlength="6"&gt;
+  &lt;button class="tips" :disabled="isCellActive" @click="getCode"&gt;获取验证码&lt;/button&gt;
+&lt;/div&gt;</pre>
+      <pre>
+const user = ref({
+  cell: '',
+  code: null,
+  isAgree: false,
+  code: null
+})
+const isCellActive = ref(true)
+watch(() => user.value.cell, (n, o) => {
+  if (/^1[3-9]\d{9}$/.test(n)) {
+    isCellActive.value = false
+  } else {
+    isCellActive.value = true
+  }
 })</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 购物车</dd>
