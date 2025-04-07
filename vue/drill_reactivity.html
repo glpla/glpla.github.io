@@ -18,10 +18,7 @@
     <h1>响应式综合运用</h1>
     <h4>Reactivity</h4>
     <div class="title">实验题目</div>
-    <div class="cont">
-      <div>产品列表页</div>
-      <div>产品详情页</div>
-    </div>
+    <div class="cont">产品渲染</div>
     <div class="title">实验目的</div>
     <div class="cont">
       <div>掌握类 class 和样式 style 的基本使用</div>
@@ -34,14 +31,27 @@
     </div>
     <div class="title">实验内容</div>
     <div class="cont">
-      <p>.使用静态数据完成组件的开发和设计</p>
-      <div>产品 GoodsItem.vue</div>
-      <div>产品列表页 Goods.vue</div>
-      <div>产品详情页 DetailsView.vue；其中甜品 dessert、推荐 recommend 可以先不组件化设计，后续内容学习完再优化为组件；其它部分可以根据情况组件化设计，如轮播图可以设计为组件</div>
+      <p>设计2个视图，分别展示产品列表和产品详情；具体设计可自由发挥。以下过程和具体内容仅仅作为参考</p>
+      <div>创建项目或在前续项目的基础上进行</div>
+      <div>准备数据：使用静态数据或服务器在线数据</div>
+      <div>创建并设计产品列表页 Goods.vue - 在主视图 HomeView.vue 引入并使用</div>
+      <p>.多产品渲染 - 条件渲染</p>
+      <p>.多产品渲染 - 列表渲染</p>
+      <p>.价格折扣 - 计算属性</p>
+      <div>创建并设计产品详情页 DetailsView.vue</div>
+      <p>.轮播图组件</p>
+      <p>.权益保障组件 - 条件渲染或动态样式</p>
+      <p>.价格说明 - 条件渲染或动态样式</p>
+      <p>.甜品 dessert、推荐 recommend 可以先不组件化设计，后续内容学习完再优化为组件</p>
+      <div>设计路由 - 在原路由基础上扩展</div>
+      <p>.主路由 /home 展示产品列表组件 Goods.vue</p>
+      <p>.详情页路由 /details 展示详情页组件 DetailView.vue</p>
+      <div>项目运行后，使用浏览器的地址栏分别输入 /home 和 /details 调试路由，查看页面视图</div>
       <div>其它设计*</div>
       <p>.定制滚动条 scrollbar</p>
       <p>.阿里字体图标 Iconfont</p>
       <p>.主题切换</p>
+      <p>.返回顶部</p>
       <div>后端*</div>
       <p>.搭建数据服务器；可以使用自己熟悉的服务器环境</p>
       <p>.准备 json 数据；可以使用 <a href="https://glpla.github.io">大树小站</a> 提供的在线资源数据，也可以自己设计数据</p>
@@ -127,7 +137,7 @@
     }
   ]
 }</pre>
-      <div>参考结构</div>
+      <div>参考结构 - Goods.vue</div>
       <pre>
 &lt;div class="goods"&gt;
   &lt;template v-if="goods.length"&gt;
@@ -147,7 +157,7 @@
   &lt;/template&gt;
   &lt;div v-else&gt;lists empty&lt;/div&gt;
 &lt;/div&gt;</pre>
-      <div>参考逻辑 - 数据获取需要服务器支撑或直接使用静态数据</div>
+      <div>参考逻辑 - Goods.vue；直接使用静态数据或使用服务器提高在线数据</div>
       <pre>
 import { computed, onMounted, ref } from 'vue';
 
@@ -159,6 +169,7 @@ const getDiscount = computed(() => {
   }
 })
 
+// 获取在线数据*
 onMounted(() => {
   let json = fetch('https://glpla.github.io/utils/data/coffee.json')
     .then(response => response.json())
@@ -167,6 +178,18 @@ onMounted(() => {
       goods.value = data.cont
     })
 })</pre>
+      <div>参考路由 - 在原路由基础上扩展</div>
+      <pre>
+{
+  path: "/home",
+  name: "home",
+  component: () => import("@/views/HomeView.vue")
+},
+{
+  path: "/details",
+  name: "details",
+  component: () => import("@/views/DetailsView.vue")
+}</pre>
       <div>参考效果</div>
       <figure>
         <img src="./imgs/list0.png" alt="">
