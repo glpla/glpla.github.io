@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CSS变量 Variable</title>
   <link rel="stylesheet" href="../css/common.css">
+
   <base target="_blank">
   <style>
     :root {
@@ -91,30 +92,32 @@
       <div>. 在CSS中，使用根选择器 :root 声明，页面内所有元素都可使用；:root 是 &lt;html&gt; 的一个属性</div>
       <pre>
 :root {
-    --main-color: #f40;
-    --main-layout: repeat(3, 1fr);
+  --base-layout: repeat(3, 1fr);
+  --base-color: 255, 68, 0;
+  --warn-color: rgba(var(--base-color), 1);
+  --warn-color-light: rgba(var(--base-color), 0.05);
 }
 
 .wrap {
-    display: grid;
-    grid-template-columns: var(--main-layout);
-    color: var(--main-color, #fff);
+  display: grid;
+  grid-template-columns: var(--base-layout);
+  color: var(--base-color, #fff);
 }
 
 @media screen and (max-width:768px) {
-    :root {
-        --main-layout: 1fr;
-    }
+  :root {
+    --base-layout: 1fr;
+  }
 }</pre>
       <div>. 也可以在元素的内联样式中使用</div>
-      <pre>&lt;span style="color: var(--main-color);"&gt;Lorem.&lt;/span&gt;</div></pre>
+      <pre>&lt;span style="color: var(--base-color);"&gt;Lorem.&lt;/span&gt;</div></pre>
     </dd>
     <dt>局部变量</dt>
     <dd>
       <div>. 在 CSS 中，如果变量定义在某个选择器，则只有该选择器选中的元素和它的所有后代元素使用</div>
       <pre>
 .wrap{
-    --el-color: #890;
+  --el-color: #890;
 }</pre>
     </dd>
     <dt>内联变量</dt>
@@ -176,7 +179,6 @@ mixer.forEach(item => {
       <div>为变量指定特定的值可以使用条件渲染，如1或0</div>
     </dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
   <a class="back2top" target="_self" href="#">
     <svg t="1733899399303" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
       p-id="31526" width="32" height="32">
@@ -185,6 +187,8 @@ mixer.forEach(item => {
         fill="#ffffff" p-id="31527"></path>
     </svg>
   </a>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer.js"></script>
   <script src="/utils/custom/back2top.js"></script>
   <script>
     let mixer = document.querySelectorAll('.mixer span');

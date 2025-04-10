@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/footer2025.css">
   <base target="_blank">
 </head>
 
@@ -33,42 +34,41 @@
   </dl>
   <div class="chap">属性 Properties</div>
   <dl class="nav-cont">
-    <dd>.很多属性都是只读 - Read only</dd>
+    <dd>. 很多属性都是只读 - Read only</dd>
     <dt>Document.activeElement</dt>
     <dd>
-      <div>返回当前获取焦点/处于聚焦状态的 <a href="./element.html">元素 Element</a></div>
-      <div>通常是单行输入框 &lt;input&gt;或多行文本输入 &lt;textarea&gt;</div>
+      <div>. 返回当前获取焦点/处于聚焦状态的 <a href="./element.html">元素 Element</a></div>
+      <div>. 通常是单行输入框 &lt;input&gt;或多行文本输入 &lt;textarea&gt;</div>
     </dd>
     <dt>Document.documentElement</dt>
     <dd>
-      <div>.返回文档的根元素，即 &lt;html&gt; - the root element of the document</div>
+      <div>. 返回文档的根元素，即 &lt;html&gt; - the root element of the document</div>
     </dd>
     <dt>Document.body</dt>
     <dd>
-      <div>.返回 &lt;body&gt;</div>
+      <div>. 返回 &lt;body&gt;</div>
     </dd>
     <dt>Document.title</dt>
     <dd>
-      <div>.页面的标题/网站名</div>
-      <div>.可以获取或修改</div>
+      <div>. 页面的标题/网站名</div>
+      <div>. 可以获取或修改</div>
     </dd>
     <dt>Document.fullscreenElement</dt>
     <dd>.当前是否处于全屏模式；非空 null 就是在全屏模式</dd>
   </dl>
   <div class="chap">方法 Methods</div>
   <dl class="nav-cont">
-    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement">Document.createElement()</a>
-    </dt>
+    <dt>创建</dt>
     <dd>
-      <div>使用给定的标签创建新元素</div>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement">Document.createElement()</a>
+      <div>. 使用给定的标签创建新元素</div>
     </dd>
-    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/append">Document.append()</a></dt>
+    <dt>添加</dt>
     <dd>
-      <div>尾插节点 - 在文档末尾添加节点对象或字符串</div>
-    </dd>
-    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/prepend">Document.prepend()</a></dt>
-    <dd>
-      <div>头插节点</div>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/append">Document.append()</a>
+      <div>. 尾插节点 - 在文档末尾添加节点对象或字符串</div>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/prepend">Document.prepend()</a>
+      <div>. 头插节点</div>
       <pre>
 const body = document.body
 const div = document.createElement('div')
@@ -76,48 +76,55 @@ div.textContent = 'hi,there.'
 body.prepend(div)
 body.append('from glpla')</pre>
     </dd>
-    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById">Document.getElementById()</a>
-    </dt>
+    <dt>获取</dt>
     <dd>
-      <div>.根据 id 获取一个元素 - returns an Element object</div>
-      <div>.id 应该唯一；否则只匹配会第一个元素</div>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById">Document.getElementById()</a>
+      <div>. 根据 id 获取一个元素 - returns an Element object</div>
+      <div>. id 应该唯一；否则只匹配会第一个元素</div>
       <pre>const dom = document.getElementById('box');</pre>
-    </dd>
-    <dt><a
+      <a
         href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName">Document.getElementsByClassName()</a>
-    </dt>
-    <dd>
-      <div>.根据类名获取元素，返回类数组对象 - an array-like object / HTMLCollection</div>
-      <div>.多个类名以空格分开，表示 <span class="warn">同时</span> 具备这些类</div>
-      <div>.动态获取；当 DOM 发生变化时，结果相应的改变 - This is a <span class="warn">live</span> HTMLCollection. Changes in the DOM
+      <div>. 根据类名获取元素，返回类数组对象 - an array-like object / HTMLCollection</div>
+      <div>. 多个类名以空格分开，表示 <span class="warn">同时</span> 具备这些类</div>
+      <div>. 动态获取；当 DOM 发生变化时，结果相应的改变 - This is a <span class="warn">live</span> HTMLCollection. Changes in the DOM
         will reflect in the array as the changes occur</div>
       <div class="warn">. 循环中，谨慎使用</div>
       <pre>
 const dom = document.getElementsByClassName('wrap');
 const dom = document.getElementsByClassName('wrap container');</pre>
-    </dd>
-    <dt><a
+      <a
         href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName">Document.getElementsByTagName()</a>
-    </dt>
-    <dd>
       <div>.根据标签名获取元素 - an HTMLCollection of elements with the given tag name</div>
       <pre>const dom = document.getElementsByTagName('div');</pre>
-    </dd>
-    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">Document.querySelector()</a>
-    </dt>
-    <dd>
-      <div>.the first Element node that matches</div>
-    </dd>
-    <dt><a
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">Document.querySelector()</a>
+      <div>. the first Element node that matches</div>
+      <a
         href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll">Document.querySelectorAll()</a>
-    </dt>
-    <dd>
-      <div>.a list of all the Element nodes that matche</div>
-      <div>.这2个方法返回 NodeList()</div>
+      <div>. a list of all the Element nodes that matche</div>
+      <div>. 这2个方法返回 NodeList()</div>
       <pre>const dom = document.querySelector('#box');</pre>
       <pre>const dom = document.querySelectorAll('.wrap');</pre>
     </dd>
     <dd class="tips">上述获取元素是在整个文档范围内检索 - the entire document；通常配合 <a href="./element.html">Element</a> 一起使用</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 获取元素</dd>
+    <dd>
+      <pre>
+&lt;div class="box"&gt;
+  &lt;div class="item"&gt;Lorem.&lt;/div&gt;
+  &lt;div class="item"&gt;Accusamus.&lt;/div&gt;
+  &lt;div class="item"&gt;Cupiditate.&lt;/div&gt;
+  &lt;div class="item"&gt;Ea.&lt;/div&gt;
+  &lt;div class="item"&gt;Iste.&lt;/div&gt;
+  &lt;div class="item"&gt;Rem?&lt;/div&gt;
+  &lt;div class="item"&gt;Doloremque?&lt;/div&gt;
+  &lt;div class="item"&gt;Aspernatur.&lt;/div&gt;
+  &lt;div class="item"&gt;Sit?&lt;/div&gt;
+  &lt;div class="item"&gt;Doloribus.&lt;/div&gt;
+&lt;/div&gt;</pre>
+      <pre>
+const box = document.querySelector('.box')
+const items = box.querySelectorAll('.item')</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 函数封装 - 将元素获取方法封装为一个函数，简化操作</dd>
     <dd>
       <pre>
@@ -125,9 +132,9 @@ function fn(el) {
     return document.querySelector(el)
 }</pre>
     </dd>
-    <dt><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/exitFullscreen">Document.exitFullscreen()</a>
-    </dt>
+    <dt>其它</dt>
     <dd>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/exitFullscreen">Document.exitFullscreen()</a>
       <div>.某个元素退出全屏模式</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="../demo/todo.html">代办事项</a></dd>
@@ -267,7 +274,8 @@ document.addEventListener('paste', (e) => {
 })      </pre>
     </dd>
   </dl>
-  <iframe src="../../common/footer.html" frameborder="0" scrolling="no" title="footer" id="footer"></iframe>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer.js"></script>
   <script src="/utils/custom/ham2024.js"></script>
   <script src="/utils/custom/back2top.js"></script>
   <!-- <script>
