@@ -66,18 +66,43 @@
     </dd>
     <dt>Html 原生使用</dt>
     <dd>
-      <div>先 <a href="../web/js/element.html">获取 Element 元素</a> 再分配事件；更多信息，请访问HTML5事件 <a
-          href="../web/js/event.html">传统方式</a>、<a href="../web/js/event_addEventListener.html">事件侦听方式</a></div>
-      <div>1. 元素属性形式</div>
+      <div>可以使用匿名函数或具名函数</div>
+      <div>可以使用参数或事件对象</div>
+      <div>更多信息，请访问HTML5事件 <a href="../web/js/event.html">传统方式</a>、<a
+          href="../web/js/event_addEventListener.html">事件侦听方式</a></div>
+      <div>1. 元素属性形式 - 以 onxxx 的形式指定事件处理</div>
+      <div>使用匿名函数</div>
       <pre>&lt;div onclick="alert('hi,there.')"&gt;点击我&lt;/div&gt;</pre>
+      <div>或使用具名函数</div>
+      <pre>&lt;div onclick="sayHi"&gt;点击我&lt;/div&gt;</pre>
+      <pre>
+function sayHi() {
+  alert('hi,there.')
+}</pre>
       <div>2. 对象属性形式</div>
+      <div>先获取 <a href="../web/js/document.html">文档 Document</a> 或 <a href="../web/js/element.html">元素 Element</a>，
+        再分配事件</div>
+      <div>使用匿名函数</div>
       <pre>
 let el = document.querySelector('div')
 el.onclick = function (e) {
     console.log(e);
     console.log(this);
 }</pre>
-      <div>3. 事件侦听方式 - 可以添加多个事件侦听；可以移除事件侦听</div>
+      <div>或使用具名函数</div>
+      <pre>
+el.onclick = sayHi
+function sayHi(e) {
+  console.log(e);
+  console.log(this);
+}</pre>
+      <div>3. 事件侦听方式</div>
+      <div>默认是冒泡类型</div>
+      <div>可以添加多个事件侦听；可以移除事件侦听</div>
+      <div>使用匿名函数</div>
+      <pre>el.addEventListener(event-type, function(){}, capture)</pre>
+      <pre>el.addEventListener(event-type, ()=>{}, capture)</pre>
+      <div>使用具名函数</div>
       <pre>el.addEventListener(event-type, event-handle, capture)</pre>
       <pre>el.removeEventListener(event-type, event-handle, capture)</pre>
     </dd>
@@ -206,15 +231,15 @@ const getItem = (id, e) => {
     <dd>[<span class="iconfont icon-keyboard"></span>] 商品详情页 DetailsView.vue → 商品数量增加 inc() 和减少 dec()</dd>
     <dd>
       <div>方案1：使用内联事件</div>
-      <pre>&lt;div @click.stop="num++"&gt;inc&lt;/div&gt;</pre>
+      <pre>&lt;div @click="num++"&gt;inc&lt;/div&gt;</pre>
       <div>方案2：使用具名函数</div>
-      <pre>&lt;div @click.stop="inc"&gt;inc&lt;/div&gt;</pre>
+      <pre>&lt;div @click="inc"&gt;inc&lt;/div&gt;</pre>
       <pre>
 function inc() {
   num.value++
 }</pre>
       <div>方案3：使用匿名函数</div>
-      <pre>&lt;div @click.stop="inc"&gt;inc&lt;/div&gt;</pre>
+      <pre>&lt;div @click="inc"&gt;inc&lt;/div&gt;</pre>
       <pre>
 const inc = () => {
   num.value++
