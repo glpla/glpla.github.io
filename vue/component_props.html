@@ -33,7 +33,7 @@
       <div>只有数据的拥有者才可以修改数据：子组件不能直接修改父组件传递的属性参数；如果父组件把这个属性参数还分配了其它子组件。。。</div>
     </dd>
     <dt>Props Declaration</dt>
-    <dd>1. 子组件 &lt;script&gt; - 使用 defineProps() 定义接收的参数，并声明一个变量接收，便于在脚本中进一步处理</dd>
+    <dd>1. 子组件 &lt;script&gt; - 使用 defineProps() 定义接收的参数，并声明一个变量接收，便于在脚本中进一步处理；可以使用解构，参考文末的总结和练习</dd>
     <dd>
       <div>方案1：使用 <span class="warn">数组</span> 声明 - 仅指定属性名</div>
       <pre>
@@ -132,13 +132,28 @@ const confirmFn = () => { }</pre>
   <dl>
     <dt>Summary</dt>
     <dd class="sn">
-      <div>defineProps()</div>
+      <div>defineProps() - 数组或对象</div>
       <div>子组件声明</div>
       <div>父组件传递</div>
       <p>. 普通属性</p>
       <p>. 函数/方法</p>
     </dd>
     <dt>Homework</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 比较并分析下面两种声明属性方法的特点</dd>
+    <dd class="sn">
+      <div>使用解构</div>
+      <!-- <p>需要频繁更改结构</p> -->
+      <!-- <p>数据容易丢失响应式，取决于 vue 版本</p> -->
+      <pre>
+const { msg } = defineProps({
+  msg: { type: String, default: 'Vue.js' }
+})</pre>
+      <div>不使用解构</div>
+      <pre>
+const props = defineProps({
+  msg: { type: String, default: 'Vue.js' }
+})</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 轮播组件 Swiper.vue</dd>
     <dd>
       <div>阶段1：在原轮播组件中，封装指示器组件 Indictator.vue</div>
