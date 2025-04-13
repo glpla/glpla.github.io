@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>路由信息 useRoute()</title>
   <link rel="stylesheet" href="../css/common.css">
-
   <base target="_blank">
 </head>
 
@@ -75,16 +74,27 @@ const route = useRoute()</pre>
       <div>结构中使用 - 全局路由变量 $route</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] meta应用 - 根据 showNav 决定页面视图是否显示主导航</dd>
+    <dd id="meta">[<span class="iconfont icon-keyboard"></span>] meta应用</dd>
     <dd>
-      <div>1. LoginGuide.vue - 隐藏主导航组件 AppNav.vue</div>
+      <div>路由元数据配置示例</div>
       <pre>
 {
   path: "/login-guide",
   name: "login-guide",
   component: () => import("../views/LoginGuide.vue"),
-  meta: { showNav: true },
+  meta: {
+    title:"登录", 
+    showNav: true,
+    requiresAuth: true,
+  },
 }</pre>
+      <div>应用1：显示标题 title - 代码是否健壮？如何验证 title的有效性？</div>
+      <pre>
+onMounted(() => {
+  document.title = route.meta.title
+})</pre>
+      <div>应用2：动态样式；根据 showNav 决定页面视图是否显示主导航</div>
+      <div>1. LoginGuide.vue - 隐藏主导航组件 AppNav.vue</div>
       <pre>&lt;AppNav v-if="!$route.meta.showNav" /&gt;</pre>
       <div>2. ProductView.vue - 根据是否显示主导航指定购物车位置；后续还要判断是否有商品来决定是否显示购物车</div>
       <pre>
@@ -95,6 +105,7 @@ const route = useRoute()</pre>
   meta: { showNav: true },
 }</pre>
       <pre>&lt;Cart :class="{ 'pos': $route.meta.showNav }" /&gt;</pre>
+      <div>应用3：身份验证；根据 requiresAuth 决定页面视图是否需要身份验证；详情请访问 <a href="./route_guard.html">路由导航守卫</a></div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 利用匹配路由 matched 创建面包屑导航</dd>
     <dd>

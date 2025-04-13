@@ -87,6 +87,95 @@ router.beforeEach((to, from, next) => {
     }
 })</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 登录认证 - Supabase 中，采用 会话 Session 验证身份</dd>
+    <dd class="sn">
+      <p>思路：每次页面跳转时，获取元数据；如果需要验证就验证用户会话是否存在</p>
+      <div>创建 Supabase 项目</div>
+      <div>创建 Vue 项目</div>
+      <div>主页面 - 实现注册 sinUp、登录 signIn、注销 logOut 等逻辑</div>
+      <div>创建若干测试页面</div>
+      <div>配置路由 - routes，其中一个路由需要验证</div>
+      <pre>
+{
+  path: "/about",
+  name: "about",
+  component: () => import("@/views/AboutView.vue"),
+  meta: {
+    requiresAuth: true,
+  },
+},</pre>
+      <div>注册用户到 Supabase - 使用用户元数据 metadata</div>
+      <pre>
+const signUp = async () => {
+  isLoading.value = true;
+  let { data, error } = await supabase.auth.signUp({
+    email: user.value.email,
+    password: user.value.password,
+    options: {
+      data: {
+        name: 'coffee',
+        avatar: '/coffee.jpg',
+      }
+    }
+  })
+
+  if (error) {
+    console.log(error);
+    isLoading.value = false;
+    return;
+  }
+  isLoading.value = false;
+  console.log(data);
+}</pre>
+      <div>用户登录</div>
+      <pre>
+const signIn = async () => {
+  isLoading.value = true;
+  let { data, error } = await supabase.auth.signInWithPassword({
+    email: user.value.email,
+    password: user.value.password
+  })
+  if (error) {
+    console.log(error);
+    isLoading.value = false;
+    return;
+  }
+  isLoading.value = false;
+  console.log(data);
+}</pre>
+      <div>配置路由守卫 - 判断会话是否有效；否则拒绝访问某些页面/视图；记得引入 supabase</div>
+      <pre>
+router.beforeEach(async (to, from, next) => {
+  if (to.meta.requiresAuth) {
+    console.log("page requiresAuth");
+    let { data, error } = await supabase.auth.getSession();
+    if (data.session) {
+      console.log("authenticated");
+      next();
+    } else {
+      next({ name: "login" });
+    }
+  } else {
+    next();
+  }
+});</pre>
+      <div>其它</div>
+      <pre>
+const logOut = async () => {
+  isLoading.value = true;
+  let { error } = await supabase.auth.signOut()
+
+  if (error) {
+    console.log(error);
+    isLoading.value = false;
+    return;
+  }
+  isLoading.value = false;
+  console.log('log out');
+}</pre>
+      <div>改进</div>
+      <p>封装获取用户会话</p>
+    </dd>
     <dt><a href="https://router.vuejs.org/zh/api/interfaces/Router.html#Methods-afterEach">afterEach</a></dt>
     <dd>
       <div>使用路由实例 router 注册一个全局后置守卫 afterEach，执行函数 fn，接收2个参数：to、from</div>

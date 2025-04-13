@@ -162,16 +162,35 @@ import HomeView from "@/views/HomeView.vue";
 import TeamView from "@/views/TeamView.vue";
 
 const routes = [
-  { path: '/', component: HomeView },
-  { path: '/team', component: TeamView },
+  { 
+    path: '/', 
+    component: HomeView,
+    meta: {
+      title: "首页",
+    },  
+  },
+  { 
+    path: '/team', 
+    component: TeamView,
+    meta: {
+      title: "团队",
+      requiresAuth: true,
+    }, 
+  },
 ]</pre>
       <div>. 动态导入 Dynamic import</div>
-      <div>. 动态导入，需要的时候才导入 - 懒加载</div>
+      <div>. 动态导入，需要的时候才导入 - 懒加载；这里略去了路由的元数据</div>
       <pre>
 const routes = [
-  { path: '/', component: () => import("../views/TeamView.vue") },
-  { path: '/about', component: () => import("../views/HomeView.vue") },
+  { path: '/', component: () => import("../views/HomeView.vue") },
+  { path: '/team', component: () => import("../views/TeamView.vue") },
 ]</pre>
+      <div>3. <a href="./route_adv.html">name</a></div>
+      <div>4. <a href="./route_adv.html">redirect</a></div>
+      <div>5. <a href="./route_adv.html">children</a></div>
+      <div>6. <a href="./route_props.html">props</a></div>
+      <div>7. <a href="./useroute.html#meta">meta</a></div>
+      <div>8. <a href="./route_guard.html">beforeEnter</a></div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 路由的模块化开发</dd>
     <dd>
