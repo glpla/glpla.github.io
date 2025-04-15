@@ -94,7 +94,7 @@ onMounted(() => {
         </details>
       </details>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 使用响应式数据、条件渲染、路由，利用事件或延时，查看子组件 About.vue 生命周期函数执行情况</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 使用响应式数据配合事件、延时或浏览器地址栏，查看视图的生命周期函数执行情况</dd>
     <dd>
       <pre>
 &lt;template&gt;
@@ -134,33 +134,114 @@ onBeforeUnmount(() =&gt; {
 onUnmounted(() =&gt; {
     console.log('onUnmounted');
 })
-&lt;/script&gt;
-
-&lt;style scoped&gt;&lt;/style&gt;</pre>
+&lt;/script&gt;</pre>
       <img src="./imgs/lifetime0.png" alt="">
       <div class="tips">
         <div>已安装 Vs Code 扩展 Vue Vscode Snippets 的，请注意编辑过程中的代码片段提示，不要一个一个字母编辑</div>
       </div>
     </dd>
+  </dl>
+  <div class="chap">Homework</div>
+  <dl>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 焦点管理：自定义搜索组件，单击时，显示并自动获取焦点</dd>
+    <dd>
+      <div>方案1：使用表单属性 autofocus</div>
+      <pre>&lt;input type="text" ref="ipt" placeholder="your name" autofocus&gt;</pre>
+      <div>方案2：使用 <a href="./useTemplateRef.html">模板引用</a> 获取元素</div>
+      <div>搜索组件 Search.vue</div>
+      <pre>
+import { useTemplateRef, onMounted } from 'vue';
+const sql = useTemplateRef('sql')
+onMounted(() =&gt; {
+    sql.value.focus()
+})</pre>
+      <pre>&lt;input type="text" ref="sql" placeholder="your keyword"&gt;</pre>
+      <div>父组件 - 单击按钮显示搜索框</div>
+      <pre>
+import { ref } from 'vue';
+import Search from './components/Search.vue'
+const isShow = ref(false)</pre>
+      <pre>
+&lt;button @click="isShow = !isShow"&gt;click&lt;/button&gt;
+&lt;Search v-if="isShow"&gt;&lt;/Search&gt;</pre>
+      <div><span class="iconfont icon-bangzhu2"></span> 可以使用 v-show 吗？</div>
+      <div><span class="iconfont icon-bangzhu2"></span> 模态框的显示隐藏和本案例有什么区别？</div>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 页面滚动事件</dd>
     <dd>
-      <div>页面加载时，绑定事件处理器</div>
-      <div>页面卸载时，移除绑定的事件处理器</div>
-      <div>特别要注意页面卸载时，定时器的清除</div>
+      <div class="application">1：固定定位的元素变换样式，如添加阴影</div>
+      <div>&lt;header&gt; 固定在顶部 fixed；当滚动超过一定距离后，为 &lt;header&gt; 指定阴影</div>
+      <div>页面加载时，绑定事件处理器 - 监听页面的滚动事件</div>
+      <div>页面卸载时，移除绑定的事件处理器；别要注意定时器的清除</div>
+      <div>方案1：使用 <a href="./useTemplateRef.html">模板引用</a> 实现</div>
+      <pre>&lt;header class="header" ref="header"&gt;header&lt;/header&gt;</pre>
       <pre>
-const handle = () => {
-   isHide.value = window.scrollY > 100 ? true : false
+import { onMounted, onUnmounted, useTemplateRef } from 'vue'
+
+const header = useTemplateRef('header')
+
+const fn = () => {
+  header.value.classList.toggle('fixed', window.scrollY > 1000)
 }
+
 onMounted(() => {
-  window.addEventListener('scroll', handle)
+  window.addEventListener('scroll', fn)
 })
+
 onUnmounted(() => {
-  window.removeEventListener('scroll', handle)
+  window.removeEventListener('scroll', fn)
+})</pre>
+      <div>方案2：使用动态类实现</div>
+      <pre>&lt;header class="header" :class="{ 'shadow': isShow }"&gt;header&lt;/header&gt;</pre>
+      <pre>
+const isShow = ref(false)
+
+onMounted(() => {
+  window.addEventListener('scroll', () => {
+    isShow.value = window.scrollY > 300
+  })
+})
+
+// ...</pre>
+      <div>样式略</div>
+      <div class="application">2：粘性定位的元素变换样式 - <a href="./pro/dist/index.html">HomeView.vue</a> 页面/视图滚动到某个位置时，粘性定位在顶部
+      </div>
+      <div>利用 <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect">getBoundingClientRect()</a>
+        获取元素相对视口的 top；当 top 为0时，表示粘性定位触发，应用特定样式</div>
+      <div>这里使用传统事件方式 - 建议使用事件侦听的方式</div>
+      <pre>&lt;div class="tab-box" ref="tab-box"&gt;&lt;/div&gt;</pre>
+      <pre>
+import { onMounted, onUnmounted, useTemplateRef } from 'vue'
+
+const tabBox = useTemplateRef('tab-box')
+
+onMounted(() => {
+  window.onscroll = function () {
+    const rect = tabBox.value.getBoundingClientRect()
+    if (rect.top &lt;= 0) {
+      tabBox.value.classList.add('sticky')
+    } else {
+      tabBox.value.classList.remove('sticky')
+    }
+  }
+})
+
+onUnmounted(() => {
+  window.onscroll = null
+})</pre>
+      <div>使用事件监听 addEventListener() 和 样式的 toggle() 优化，如使用具名函数便于清除事件侦听</div>
+      <pre>
+onMounted(() => {
+  window.addEventListener('scroll', () => {
+    let rect = tabBox.value.getBoundingClientRect()
+    tabBox.value.classList.toggle('sticky', rect.top &lt;= 0)
+  })
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 页面加载完毕，在顶部呈现</dd>
     <dd>
-      <div>页面跳转时，可能会保留之前的滚动位置</div>
+      <div class="application">3：定位页面</div>
+      <div>页面加载完毕，在顶部呈现；页面跳转时，可能会保留之前的滚动位置</div>
       <pre>
 onMounted(() => {
   window.scrollTo(0, 0)
@@ -172,25 +253,6 @@ router.afterEach((to, from) => {
   document.title = to.meta.title;
   window.scrollTo(0, 0);
 });</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 自定义搜索组件，单击时，显示并自动获取焦点</dd>
-    <dd>
-      <div>搜索组件 - 使用 <a href="./ref.html">模板引用</a> 获取元素</div>
-      <pre>
-import { ref, onMounted } from 'vue';
-let sql = ref(null)
-onMounted(() =&gt; {
-    sql.value.focus()
-})</pre>
-      <pre>&lt;input type="text" ref="sql"&gt;</pre>
-      <div>父组件 - 单击按钮显示搜索框</div>
-      <pre>
-import { ref } from 'vue';
-import Search from './components/Search.vue'
-let isShow = ref(false)</pre>
-      <pre>
-&lt;button @click="isShow = true"&gt;click&lt;/button&gt;
-&lt;Search v-if="isShow"&gt;&lt;/Search&gt;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 标签页 - 使用 <a href="./component_dynamic.html">动态组件</a>
       切换时，查看各组件的生命周期函数执行情况</dd>

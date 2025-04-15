@@ -71,38 +71,6 @@ onMounted(() =&gt; {
   console.log('getAttribute', dom.value.getAttribute('class'));
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 焦点管理 - 页面加载时自动聚焦；注册、登录的第一个表单域</dd>
-    <dd>
-      <div>方案1：使用表单属性 autofocus</div>
-      <pre>&lt;input type="text" ref="ipt" placeholder="your name" autofocus&gt;</pre>
-      <div>方案2：使用模板引用</div>
-      <pre>
-&lt;div class="home"&gt;
-  &lt;input type="text" ref="ipt" placeholder="your name"&gt;
-  // Other
-&lt;/div&gt;</pre>
-      <pre>
-import { useTemplateRef, onMounted } from 'vue';
-const ipt = useTemplateRef('ipt')
-onMounted(() => {
-  ipt.value.focus()
-})</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 焦点管理 - 单击搜索按钮打开搜索框并自动聚焦</dd>
-    <dd>
-      <pre>
-&lt;div class="home"&gt;
-  &lt;input type="text" ref="ipt"&gt;
-&lt;/div&gt;
-&lt;button @click="focus"&gt;click for focus&lt;/button&gt;</pre>
-      <pre>
-import { useTemplateRef, onMounted } from 'vue';
-const ipt = useTemplateRef('ipt')
-const focus = () =&gt; ipt.value.focus()
-onMounted(() => {
-  ipt.value.focus()
-})</pre>
-    </dd>
     <dt>获取组件</dt>
     <dd>
       <div>返回组件实例</div>
@@ -163,72 +131,14 @@ onMounted(() => {
       <div>使用时，应判定元素是否就绪</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 完成上述焦点管理案例并分析下述代码的特点</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./lifecycle.html">焦点管理</a></dd>
     <dd>
+      <div>页面加载时自动聚焦；注册、登录的第一个表单域</div>
+      <div>完成上述焦点管理案例并分析下述代码的特点</div>
       <!-- <p>如果 ipt.value 为 null 或 undefined，则不会调用 focus()，也不会报错</p> -->
       <pre>const focus = () => ipt.value?.focus()</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 页面滚动控制</dd>
-    <dd>
-      <div>变换子标题样式，如添加阴影</div>
-      <div>&lt;header&gt; 固定在顶部 fixed</div>
-      <div>为 &lt;header&gt; 指定 ref，在页面加载时使用，并监听页面的滚动事件</div>
-      <div>页面卸载时，移除事件监听；更多生命周期函数的使用，请访问 <a href="./lifecycle.html">Lifecycle</a></div>
-      <pre>&lt;header class="header" ref="header"&gt;header&lt;/header&gt;</pre>
-      <pre>
-import { onMounted, onUnmounted, useTemplateRef } from 'vue'
-
-const header = useTemplateRef('header')
-
-const fn = () => {
-  header.value.classList.toggle('fixed', window.scrollY > 1000)
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', fn)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', fn)
-})</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 页面滚动控制 - <a href="./pro/dist/index.html">HomeView.vue →
-        子标题</a></dd>
-    <dd>
-      <div>页面/视图滚动到某个位置首页 - 标题页 tab-box 粘性定位在顶部 sticky</div>
-      <div>利用 <a
-          href="https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect">getBoundingClientRect()</a>
-        获取元素相对视口的 top；当 top 为0时，表示粘性定位触发，应用特定样式</div>
-      <div>这里使用传统事件方式</div>
-      <pre>&lt;div class="tab-box" ref="tab-box"&gt;&lt;/div&gt;</pre>
-      <pre>
-import { onMounted, onUnmounted, useTemplateRef } from 'vue'
-
-const tabBox = useTemplateRef('tab-box')
-
-onMounted(() => {
-  window.onscroll = function () {
-    const rect = tabBox.value.getBoundingClientRect()
-    if (rect.top &lt;= 0) {
-      tabBox.value.classList.add('sticky')
-    } else {
-      tabBox.value.classList.remove('sticky')
-    }
-  }
-})
-
-onUnmounted(() => {
-  window.onscroll = null
-})</pre>
-      <p>[<span class="iconfont icon-magicwand"></span>] 使用事件监听 addEventListener() 和 样式的 toggle() 优化</p>
-      <pre>
-onMounted(() => {
-  window.addEventListener('scroll', () => {
-    let rect = tabBox.value.getBoundingClientRect()
-    tabBox.value.classList.toggle('sticky', rect.top &lt;= 0)
-  })
-})</pre>
-    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./lifecycle.html">页面滚动控制</a></dd>
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
