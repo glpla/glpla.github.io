@@ -169,11 +169,11 @@ const isShow = ref(false)</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 页面滚动事件</dd>
     <dd>
-      <div class="application">1：固定定位的元素变换样式，如添加阴影</div>
+      <div>方案1：固定定位的元素变换样式，如添加阴影</div>
       <div>&lt;header&gt; 固定在顶部 fixed；当滚动超过一定距离后，为 &lt;header&gt; 指定阴影</div>
       <div>页面加载时，绑定事件处理器 - 监听页面的滚动事件</div>
       <div>页面卸载时，移除绑定的事件处理器；别要注意定时器的清除</div>
-      <div>方案1：使用 <a href="./useTemplateRef.html">模板引用</a> 实现</div>
+      <div>1.1 使用 <a href="./useTemplateRef.html">模板引用</a> 实现</div>
       <pre>&lt;header class="header" ref="header"&gt;header&lt;/header&gt;</pre>
       <pre>
 import { onMounted, onUnmounted, useTemplateRef } from 'vue'
@@ -191,7 +191,7 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', fn)
 })</pre>
-      <div>方案2：使用动态类实现</div>
+      <div>1.2 使用动态类实现</div>
       <pre>&lt;header class="header" :class="{ 'shadow': isShow }"&gt;header&lt;/header&gt;</pre>
       <pre>
 const isShow = ref(false)
@@ -204,7 +204,7 @@ onMounted(() => {
 
 // ...</pre>
       <div>样式略</div>
-      <div class="application">2：粘性定位的元素变换样式 - <a href="./pro/dist/index.html">HomeView.vue</a> 页面/视图滚动到某个位置时，粘性定位在顶部
+      <div>方案2：粘性定位的元素变换样式 - <a href="./pro/dist/index.html">HomeView.vue</a> 页面/视图滚动到某个位置时，粘性定位在顶部
       </div>
       <div>利用 <a
           href="https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect">getBoundingClientRect()</a>
@@ -239,8 +239,8 @@ onMounted(() => {
   })
 })</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 定位页面</dd>
     <dd>
-      <div class="application">3：定位页面</div>
       <div>页面加载完毕，在顶部呈现；页面跳转时，可能会保留之前的滚动位置</div>
       <pre>
 onMounted(() => {

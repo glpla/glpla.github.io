@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>侦听器 Watcher</title>
-  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../css/common.css">
 
   <base target="_blank">
 </head>
@@ -81,7 +81,7 @@ stopWatch()</pre>
     <dd>
       <div>当单击执行增加函数 inc 时，Vue 可以检测到 num 的变化，从而做出反应；如商品数量增加或减少时，总价发生变化</div>
       <pre>
-let num = ref(0)
+const num = ref(0)
 const inc = () =>{
     num.value++
 }
@@ -108,8 +108,8 @@ watch(msg, (newv, oldv) => {
       <div>以数组的形式 <span class="warn">分别</span> 显示新值和旧值：1个新值变成多个新值；一个旧值变成多个旧值</div>
       <div>[<span class="iconfont icon-keyboard"></span>] 信用卡年费免除 - 首年免年费；当年消费达到一定金额(10000)或消费多少次(6)，免除次年年费</div>
       <pre>
-let times = ref(0)
-let sum = ref(0)
+const times = ref(0)
+const sum = ref(0)
 function incTimes() {
     times.value++
 }
@@ -124,7 +124,7 @@ watch([times, sum], ([new1, new2], [old1, old2]) => {
     <dd>
       <div>watch 只会监听对象的变化，而不会监听对象内部属性的变化</div>
       <pre>
-let user = ref({
+const user = ref({
   id: 100,
   name: 'glpla',
   age: 18,
@@ -161,7 +161,7 @@ watch(() => user.value.age, (newv, oldv) => {
       <div>侦听 reactive 对象时，默认开启 deep，且无法关闭；所以对象某个属性变化时，会触发侦听/被 Vue 捕获</div>
       <div>同样：新值旧值是 reactive 对象，变化前后都是同一个对象；所以 newv 和 oldv 是一样的，其内部的属性也是一样的；可以捕获到数据属性变化，但是无法查看属性前后的变化</div>
       <pre>
-let user = reactive({
+const user = reactive({
   id: 100,
   name: 'glpla',
   age: 18,
@@ -213,7 +213,7 @@ watch([() => user.age, () => user.addr.code], ([n0, n1], [o0, o1]) => {
     <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 详情页 - 数量变化引起总价变化</dd>
     <dd>
-      <div>1. 使用计算属性实现：1个响应式数据，1个派生数据；根据产品数量 num 派生总价 sum</div>
+      <div>方案1. 使用计算属性实现：1个响应式数据，1个派生数据；根据产品数量 num 派生总价 sum</div>
       <pre>
 import { ref, computed } from 'vue';
 const num = ref(1);
@@ -221,7 +221,7 @@ const price = 9.9
 const sum = computed(() => {
   return num.value * price;
 });</pre>
-      <div>2. 使用侦听实现：2个响应式数据；侦听产品数量 num，执行副作用 - 计算总价 sum</div>
+      <div>方案2. 使用侦听实现：2个响应式数据；侦听产品数量 num，执行副作用 - 计算总价 sum</div>
       <div>为什么要开启立即选项？</div>
       <pre>
 &lt;div>{{ sum }}&lt;/div&gt;
