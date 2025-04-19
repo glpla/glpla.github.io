@@ -102,7 +102,12 @@ let msg = ref('hi,there')</pre>
       <pre>&lt;Test :obj="item.author" /&gt;</pre>
       <div class="warn">5. 函数 Function</div>
       <div>除了传递普通数据外，还可以传递方法 - 子组件执行父组件的方法，如：让父组件修改属性参数。。。</div>
+      <div>优势：职责分离、增强灵活性、提高复用性</div>
       <div>还可以使用 <a href="./component_emits.html">自定义事件 - emits</a> 实现</div>
+      <div>应用：表单验证与提交 - 子组件展示表单，用户点击“提交”按钮时触发父组件的验证和提交逻辑</div>
+      <div>应用：动态切换内容 - 子组件展示多个选项卡，父组件通过传递回调函数控制当前显示的内容</div>
+      <div>应用：分页功能 - 子组件负责展示分页控件，父组件通过传递回调函数控制页面切换逻辑</div>
+      <div>应用：动态图表渲染 - 子组件负责展示图表，父组件通过传递回调函数动态更新图表数据</div>
       <!-- <div>适合同时使用多个组件，但是每个组件的逻辑不同</div> -->
       <div>
         <div>子组件：定义/声明并使用方法；类型为函数；注意是 Function，不是 function</div>
@@ -148,6 +153,28 @@ const props = defineProps({
   msg: { type: String, default: 'Vue.js' }
 })</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件</dd>
+    <dd>
+      <div>根据作者头像或者学号等信息展示相应的版权信息</div>
+      <div>如果不指定头像，则使用默认头像</div>
+      <div>如果不指定学号，则使用大树小站的域名 glpla.github.io</div>
+      <pre>
+&lt;div class="copyright"&gt;
+  &lt;img class="img" :src='src' alt=""&gt;
+  &lt;div class="desc"&gt;2024 - 2026 &copy; Copyright, powered by {{ id }}&lt;/div&gt;
+&lt;/div&gt;</pre>
+      <pre>
+const props = defineProps({
+  src: {
+    type: String,
+    default: 'https://glpla.github.io/imgs/avatar.jpg'
+  },
+  id: {
+    type: String,
+    default: 'glpla.github.io'
+  }
+})</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 轮播组件 Swiper.vue</dd>
     <dd>
       <div>阶段1：在原轮播组件中，封装指示器组件 Indictator.vue</div>
@@ -187,29 +214,40 @@ const props = defineProps({
 &lt;/template&gt;
 &lt;div v-else&gt;商品获取失败，请刷新页面&lt;/div&gt;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页组件 - <a href="./pro/dist/index.html">瑞幸咖啡</a>首页标签页 - 随享瑞幸、颜值水杯
+      -
+      的变化触发数据加载</dd>
     <dd>
-      <div>根据作者头像或者学号等信息展示相应的版权信息</div>
-      <div>如果不指定头像，则使用默认头像</div>
-      <div>如果不指定学号，则使用大树小站的域名 glpla.github.io</div>
+      <div>标签页组件 ComTab.vue - 专注于 UI 展示和事件触发；可设计为一个通用的、无状态的组件 Stateless Component</div>
       <pre>
-&lt;div class="copyright"&gt;
-  &lt;img class="img" :src='src' alt=""&gt;
-  &lt;div class="desc"&gt;2024 - 2026 &copy; Copyright, powered by {{ id }}&lt;/div&gt;
+&lt;div class="com-tab"&gt;
+  &lt;div v-for="(tab, index) in props.tabs" :key="index" @click="props.selTab(tab)"&gt;{{ tab }}&lt;/div&gt;
 &lt;/div&gt;</pre>
       <pre>
 const props = defineProps({
-  src: {
-    type: String,
-    default: 'https://glpla.github.io/imgs/avatar.jpg'
+  tabs: {
+    type: Array,
+    default: () => []
   },
-  id: {
-    type: String,
-    default: 'glpla.github.io'
+  selTab: {
+    type: Function,
+    default: () => { }
   }
 })</pre>
+      <div>父组件 - 负责处理业务逻辑</div>
+      <pre>
+&lt;ComTab :tabs :sel-tab="selTab">&lt;/ComTab&gt;
+&lt;div&gt;{{ currentTab }}&lt;/div&gt;</pre>
+      <pre>
+import { ref } from 'vue';
+import ComTab from './ComTab.vue';
+const tabs = ['首页', '设置', '帮助'];
+const currentTab = ref('首页');
+const selTab = (tab) => {
+  currentTab.value = tab;
+}</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 标题组件 Title.vue</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 标题组件 Title.vue - 思路同上</dd>
     <dd>
       <div>1. 组件定义</div>
       <pre>
@@ -232,18 +270,22 @@ const props = defineProps({
   }
 })</pre>
       <div>2. 组件使用：首页视图 HomeView.vue 使用了两次标题组件，每个组件分配不同的标题内容和事件</div>
-      <div>2.1 我的优惠专区</div>
-      <pre>&lt;Title title="我的优惠专区" :handle="toCoupon"&gt;&lt;/Title&gt;</pre>
+      <pre>
+&lt;Title title="我的优惠专区" :handle="toCoupon"&gt;&lt;/Title&gt;
+&lt;Title title="福利中心" :handle="toWelfare"&gt;&lt;/Title&gt;</pre>
       <pre>
 const toCoupon = () => {
-  alert('to coupon')
-}</pre>
-      <div>2.2 福利中心</div>
-      <pre>&lt;Title title="福利中心" :handle="toWelfare"&gt;&lt;/Title&gt;</pre>
-      <pre>
+  // alert('to coupon')
+}
 const toWelfare = () => {
-  alert('to welfare')
+  // alert('to welfare')
 }</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 弹出框 Popup.vue - 思路同上</dd>
+    <dd>
+      <div>弹出框 Popup.vue - 负责显示信息和触发事件</div>
+      <div>父组件传递信息和具体的业务逻辑</div>
+      <div>实现略</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 菜单视图 MenuView.vue</dd>
     <dd>
