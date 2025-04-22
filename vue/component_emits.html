@@ -17,38 +17,41 @@
     <span>&commat;defineEmits()</span>
   </header>
   <dl>
-    <dd>通过编译宏 defineEmits() 的形式实现通信|参数传递|数据传递 - 自定义事件</dd>
-    <dd>更多信息，请访问 <a href="https://cn.vuejs.org/guide/components/events">Declaring
-        Emitted Events</a></dd>
-    <dt>Procedure</dt>
+    <dd>
+      <div>子组件除了定义属性参数为方法和父组件通信外，还可以发布自定义事件给父组件</div>
+      <div>通过编译宏 <a href="https://cn.vuejs.org/guide/components/events">defineEmits()</a> 的形式发布自定义事件</div>
+    </dd>
+    <dt>过程</dt>
     <dd class="sn">
       <div>在 &lt;script setup&gt; 的顶级作用域下，子组件使用 defineEmits() 宏，以 <span class="warn">数组</span>
-        的形式，定义向父组件传递的事件；通常使用变量接收定义的事件列表，以便进一步处理</div>
-      <div>父组件响应子组件传递的事件并处理</div>
+        的形式，声明向父组件传递的自定义事件；通常使用变量接收，以便进一步处理</div>
+      <div>父组件响应子组件传递的自定义事件</div>
     </dd>
     <dd class="tips">
       <div>为了和普通事件区分，建议加上 emit 前缀</div>
       <div>逻辑中推荐使用 camelCase，如：greetingMessage；结构中推荐使用 kebab-case，如：greeting-message</div>
       <div>可以直接在子组件结构中，使用专有变量 $emit 发送事件 - 仅限 Vue 环境</div>
+      <div>自定义事件可以携带参数</div>
     </dd>
     <dt>子组件</dt>
     <dd>
-      <div>单击触发自定义事件 handleSuper；无参</div>
+      <div>声明自定义事件列表，使用变量 emit 接收</div>
+      <div>在传统的单击事件中触发自定义事件 handleSuper</div>
       <pre>&lt;button @click="handleSuper"&gt;click me&lt;/button&gt;</pre>
-      <div>定义传递事件列表，声明变量 emit 接收，并在自定义事件中传递事件；可以携带参数</div>
       <pre>
-//自定义事件
+// 声明自定义事件
 const emit = defineEmits(['emitSuper', 'emitHi'])
 
-//上来就传递了一个自定义的事件
+// 使用自定义事件
+// 使用1：上来就传递了一个自定义的事件
 emit('emitHi', 'hi,there.')
 
-//函数表达式中触发声明的自定义事件
+// 使用2：函数表达式中触发声明的自定义事件
 const handleSuper = () => {
     emit('emitSuper', 'hi,there.')
 }
 
-// 具名函数中触发声明的自定义事件
+// 使用3：具名函数中触发声明的自定义事件
 function handleSuper() {
     emit('emitSuper')
 }</pre>
@@ -66,7 +69,26 @@ const callback = (e) => {
 }</pre>
     </dd>
   </dl>
+  <div class="chap">Homework</div>
   <dl>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 改造封装的产品列表组件，单击某个产品，跳转到详情页</dd>
+    <dd>
+      <img src="./imgs/emit0.png" alt="">
+      <div>子组件 - 定义事件并传递产品 id；结构其它内容略</div>
+      <pre>&lt;button class="btn" @click="toDetail(item.id)"&gt;详情&lt;/button&gt;</pre>
+      <pre>
+const emits = defineEmits(['emitToDetail'])
+
+const toDetail = (id) => {
+  emits('emitToDetail', id)
+}</pre>
+      <div>父组件 - 接收并响应事件；数据略</div>
+      <pre>&lt;GoodsItem :lists="lists" @emit-to-detail="doDetail"&gt;&lt;/GoodsItem&gt;</pre>
+      <pre>
+const doDetail = (e) => {
+    console.log('hi outer', e);
+}</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 权益保护模态框 Guarantee.vue</dd>
     <dd>
       <div>封装组件；使用自定义事件 defineEmits()，单击显示对应的权益模态框</div>
@@ -83,24 +105,6 @@ const handleGuarantee = () => {
 &lt;div class="modal" :class="{ 'show': isShowModal }" @click.self="isShowModal = false"&gt;
   &lt;button class="btn modal-btn" @click.prevent="isShowModal = false"&gt;close&lt;/button&gt;
 &lt;/div&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 改造封装的产品列表组件，单击某个产品，跳转到详情页</dd>
-    <dd>
-      <img src="./imgs/emit0.png" alt="">
-      <div>子组件 - 定义事件并传递产品 id；结构其它内容略</div>
-      <pre>&lt;button class="btn" @click="toDetail(item.id)"&gt;详情&lt;/button&gt;</pre>
-      <pre>
-const emits = defineEmits(['emitToDetail'])
-
-const toDetail = (id) => {
-  emits('emitToDetail', id)
-}</pre>
-      <div>父组件 - 接收并响应事件；数据略</div>
-      <pre>&lt;List :lists="lists" @emit-to-detail="doDetail"&gt;&lt;/List&gt;</pre>
-      <pre>
-const doDetail = (e) => {
-    console.log('hi outer', e);
-}</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 点赞组件</dd>
     <dd>
