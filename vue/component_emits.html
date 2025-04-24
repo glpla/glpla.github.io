@@ -18,13 +18,13 @@
   </header>
   <dl>
     <dd>
-      <div>子组件除了定义属性参数为方法和父组件通信外，还可以发布自定义事件给父组件</div>
-      <div>通过编译宏 <a href="https://cn.vuejs.org/guide/components/events">defineEmits()</a> 的形式发布自定义事件</div>
+      <div>子组件除了定义属性参数为方法和父组件通信外，还可以通过编译宏 <a href="https://cn.vuejs.org/guide/components/events">defineEmits()</a>
+        发布自定义事件给父组件</div>
     </dd>
     <dt>过程</dt>
     <dd class="sn">
       <div>在 &lt;script setup&gt; 的顶级作用域下，子组件使用 defineEmits() 宏，以 <span class="warn">数组</span>
-        的形式，声明向父组件传递的自定义事件；通常使用变量接收，以便进一步处理</div>
+        的形式，声明向父组件传递的自定义事件；同样建议使用变量 emit 接收，以便进一步处理</div>
       <div>父组件响应子组件传递的自定义事件</div>
     </dd>
     <dd class="tips">
@@ -32,21 +32,24 @@
       <div>逻辑中推荐使用 camelCase，如：greetingMessage；结构中推荐使用 kebab-case，如：greeting-message</div>
       <div>可以直接在子组件结构中，使用专有变量 $emit 发送事件 - 仅限 Vue 环境</div>
       <div>自定义事件可以携带参数</div>
+      <div>也可以使用对象声明自定义事件，可以方便的指定参数的类型</div>
     </dd>
     <dt>子组件</dt>
     <dd>
-      <div>声明自定义事件列表，使用变量 emit 接收</div>
-      <div>在传统的单击事件中触发自定义事件 handleSuper</div>
+      <div>可以在传统的单击事件中触发；也可以在非事件中触发，如使用生命周期函数</div>
       <pre>&lt;button @click="handleSuper"&gt;click me&lt;/button&gt;</pre>
       <pre>
 // 声明自定义事件
 const emit = defineEmits(['emitSuper', 'emitHi'])
 
-// 使用自定义事件
-// 使用1：上来就传递了一个自定义的事件
+// 使用1：上来就传递自定义事件；或在onmounted() 中传递</div>
 emit('emitHi', 'hi,there.')
+onMounted(() => {
+  emit('emitHi', 'hi,there.')
+})
 
-// 使用2：函数表达式中触发声明的自定义事件
+// 使用2：在单击事件中传递自定义事件
+// 使用具名函数
 const handleSuper = () => {
     emit('emitSuper', 'hi,there.')
 }
@@ -67,6 +70,11 @@ function handleSuper() {
 const callback = (e) => {
     console.log('hihihi', e);
 }</pre>
+    </dd>
+    <dt>emits vs props</dt>
+    <dd>
+      <div>props：父组件向子组件的通信，子组件调用父组件声明的方法，并根据需要使用参数</div>
+      <div>emits：子组件向父组件的通信，使用自己的数据，由父组件定义的方法触发</div>
     </dd>
   </dl>
   <div class="chap">Homework</div>
