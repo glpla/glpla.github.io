@@ -22,14 +22,14 @@
       <div>嵌套路由下，路由链上的会匹配应用当前路由样式 active - 无论嵌套路径多么深，只要链接的目标路径是当前路径的一部分，就会添加</div>
       <div>而末端子路由应用严格匹配当前路由样式 exactActive - 仅当 to 属性精确匹配当前激活的路由时才会应用</div>
       <div>单级路由下，当前路由会<span class="warn">同时叠加</span>两种样式类</div>
-      <div>定制的样式类应写在全局 CSS 中</div>
+      <!-- <div>定制的样式类应写在全局 CSS 中</div> -->
     </dd>
     <dt>默认类</dt>
     <dd>
-      <div>默认会自动添加两个空白路由样式类：router-link-active 和 router-link-exact-active 以高亮当前路由</div>
-      <div>通过覆盖/修改其样式来定制路由样式</div>
-      <div>更多详情，请查看 <a href="https://router.vuejs.org/zh/guide/essentials/active-links.html">匹配当前路由的链接 active-links</a>
-      </div>
+      <div>项目执行过程中，&lt;RouterLink&gt;默认会为 <a
+          href="https://router.vuejs.org/zh/guide/essentials/active-links.html">匹配当前路由的链接</a> 自动添加两个空白的
+        的CSS样式类：router-link-active 和 router-link-exact-active；以高亮当前路由</div>
+      <div>通过覆盖/修改其样式可以定制路由样式</div>
       <pre>
 .router-link-active {
   color: #f40;
@@ -50,10 +50,18 @@
       <pre>
 &lt;router-link activeClass="btm" exactActiveClass="color" to="/home"&gt;home&lt;/router-link&gt;
 &lt;router-link active-class="btm" exact-active-class="color" to="/mine"&gt;mine&lt;/router-link&gt;</pre>
+      <pre>
+.btm {
+  color: #f40;
+}
+    
+.color {
+  border-bottom: 1px solid #f40;
+}</pre>
     </dd>
     <dt>路由属性类</dt>
     <dd>
-      <div>配置路由时指定，包括：linkActiveClass、linkExactActiveClass</div>
+      <div>配置路由时指定选项属性：linkActiveClass、linkExactActiveClass</div>
       <div>会<span class="warn">覆盖</span>默认的两个路由样式类</div>
       <div>两个样式类默认为空，通过定制实现个性化开发</div>
       <div>使用不同的样式类；样式内容可以一致</div>
@@ -94,12 +102,11 @@ router.options = {
     <dt>Summary</dt>
     <dd class="sn">
       <div>&lt;router-link&gt; 路由样式设置</div>
-      <p>. 指定样式 - .router-link-active .router-link-exact-active</p>
-      <p>. 指定标签属性类 - activeClass、exactActiveClass</p>
-      <p>. 指定路由属性类 - linkActiveClass、linkExactActiveClass</p>
+      <p>. 默认样式类 .router-link-active .router-link-exact-active</p>
+      <p>. 标签属性类 activeClass、exactActiveClass</p>
+      <p>. 路由属性类 linkActiveClass、linkExactActiveClass</p>
       <div>全局应用路由样式</div>
       <div>单独设置路由样式</div>
-      <div>注意：应使用不同的样式类；样式内容可以一致</div>
     </dd>
     <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 路由样式设计</dd>
@@ -198,7 +205,8 @@ const tabs = [
       <div>4.3 视图模板 &lt;template&gt; - 需要指定子路由出口 - 路由视图 &lt;RouterView /&gt;</div>
       <pre>
 &lt;div class="links"&gt;
-  &lt;RouterLink class="link" v-for="(item, ind) in tabs" :key="item.id" :to="item.path"&gt;{{ item.title }}
+  &lt;RouterLink class="link" v-for="(item, ind) in tabs" :key="item.id" :to="item.path"&gt;
+    {{ item.title }}
   &lt;/RouterLink&gt;
 &lt;/div&gt;
 &lt;div class="sub-view"&gt;

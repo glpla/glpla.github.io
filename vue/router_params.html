@@ -67,13 +67,13 @@
     </dd>
     <dt>接收路由参数</dt>
     <dd>
-      <div>使用 <a href="./useroute.html">useRoute()</a> 的 <span class="warn">params</span> 接收</div>
+      <div>使用 <a href="./useroute.html">useRoute()</a> 的 <span class="warn">params</span> 接收；先导入再使用</div>
       <pre>
 import { useRoute } from 'vue-router'
 let route = useRoute()
 console.log(route.params);</pre>
       <pre>&lt;div&gt;{{ route.params.id }}&lt;/div&gt;</pre>
-      <div><span class="warn">仅仅</span> 在结构中使用 - 使用全局路由变量 $route</div>
+      <div>如果<span class="warn">仅仅</span>在结构中使用，可以直接使用全局路由变量 $route而无须导入</div>
       <pre>&lt;div&gt;{{ $route.params.id }}&lt;/div&gt;</pre>
       <div>使用可选链操作符 <span class="warn">?.</span> 可以有效避免没有指定/传递路由参数引起的报警；如果 route.params 为 null 或
         undefined，则不会报错，而是返回 undefined - 最佳体验</div>
@@ -113,7 +113,7 @@ console.log(route.params);</pre>
     <dt>Summary</dt>
     <dd class="sn">
       <div>使用路径传递参数</div>
-      <div>使用路由的 params 接收参数</div>
+      <div>使用路由 useRoute() 的 params 属性接收参数</div>
       <div>静态路由 - 可以使用普通路由 path 和命名路由 name 传递路由参数</div>
       <div>动态路由 - 使用 : 定义；数据绑定时，只能使用命名路由</div>
     </dd>

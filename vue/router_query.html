@@ -50,13 +50,13 @@
     </dd>
     <dt>接收路由参数</dt>
     <dd>
-      <div>使用 <a href="./useroute.html">useRoute()</a> 的 <span class="warn">query</span> 接收</div>
+      <div>使用 <a href="./useroute.html">useRoute()</a> 的 <span class="warn">query</span> 接收；先导入再使用</div>
       <pre>
 import { useRoute } from 'vue-router'
 let route = useRoute()
 console.log(route.query);</pre>
       <pre>&lt;div&gt;{{ route.query.id }}&lt;/div&gt;</pre>
-      <div><span class="warn">仅仅</span> 在结构中使用 - 使用全局路由变量 $route</div>
+      <div>如果<span class="warn">仅仅</span>在结构中使用，可以直接使用全局路由变量 $route而无须导入</div>
       <pre>&lt;div&gt;{{ $route.query.id }}&lt;/div&gt;</pre>
     </dd>
     <dt>注意事项</dt>
@@ -65,7 +65,7 @@ console.log(route.query);</pre>
       <p>在可能使用查询路由参数的组件中，做兼容性处理；如：如果有查询参数，则显示当前商品；如果没有，则显示所有商品或指定推荐</p>
       <p>默认情况下，如果路由参数没有传递，则默认为空对象或空字符串</p>
       <div>解构参数</div>
-      <p>多个路由参数可以使用解构路由以简化语法，会丢失数据的响应式；不建议</p>
+      <p>多个路由参数可以使用解构路由以简化语法，但是会丢失数据的响应式；不建议</p>
       <p>为避免失去响应式，应该使用 toRefs</p>
       <p>&lt;script&gt; 接收路由参数</p>
       <pre>
@@ -93,7 +93,7 @@ let {query} = toRefs(route)</pre>
   <dl>
     <dd class="sn">
       <div>使用 ? 和 & 传递参数 - 值对形式</div>
-      <div>使用路由的 query 接收参数</div>
+      <div>使用路由 useRoute() 的 query 属性接收参数</div>
     </dd>
   </dl>
   <div id="footer"></div>
