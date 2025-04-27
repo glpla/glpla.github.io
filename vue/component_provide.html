@@ -14,7 +14,7 @@
 <body>
   <header>
     <h1>跨级传</h1>
-    <span>&commat;provide</span>
+    <span>&commat;provide/inject</span>
   </header>
   <dl>
     <dt>焦点</dt>
@@ -28,16 +28,16 @@
     </dd>
     <dt>解决方案</dt>
     <dd>
-      <div>采用发布 provide - 插入 inject 的模式，避免属性透传 - For passing data deeply through component trees without prop drilling
+      <div>采用 <a href="https://cn.vuejs.org/guide/components/provide-inject">发布Provide - 插入Inject</a> 的模式，避免属性透传 - For
+        passing data deeply through component trees without prop drilling
       </div>
       <div>以值对的形式提供数据 - injection key / provided value</div>
       <div>可以是任何值；可以传递普通静态数据，也可以传递响应式数据；可以传递简单数据，也可以传递对象 - value can be of any type</div>
       <div>可以传递数据；还可以传递方法</div>
-      <div>响应式数据会保持响应式；传递的是响应式数据，不是响应式数据的值，不要加 value </div>
+      <div>响应式数据会 <span class="warn">保持</span> 响应式；传递的是响应式数据，不是响应式数据的值，不要加 value </div>
       <div>只可以在 setup 顶级作用域使用，不可以在某个事件处理函数中使用 - provide() can only be used inside setup()</div>
       <div>仅允许上向下传递|流转，不允许底层组件向顶级组件传递|反向流转</div>
       <div>开发调试时，可以使用延时查看响应数据的变化</div>
-      <div>更多信息，请访问 <a href="https://cn.vuejs.org/guide/components/provide-inject">Provide / Inject</a></div>
     </dd>
     <dt>传递数据</dt>
     <dd>
@@ -49,17 +49,18 @@ import {provide, ref} from 'vue'
 let name = 'glpla'
 let msg = ref('hello')
 
-provide('name', readonly(name))
-provide('msg', msg)</pre>
-      <pre>provide('msg', readonly(msg))</pre>
+provide('name', name)
+provide('msg', readonly(msg))</pre>
       <div>2. 底层组件：引入 inject 包；使用 inject 接收数据</div>
       <div>如果数据不存在或其它异常，可以指定默认值；默认值也可以由特定函数产生</div>
       <pre>
 import {inject} from 'vue'
 
-let paraName = inject('name', 'glpla')
+// 如果 name 不存在，就初始为 glpla.github.io
+let paraName = inject('name', 'glpla.github.io')
+
 let paraMsg = inject('msg')</pre>
-      <pre>&lt;input type="text" v-model="msg"&gt;</pre>
+      <!-- <pre>&lt;input type="text" v-model="paraMsg"&gt;</pre> -->
     </dd>
     <dt>传递方法</dt>
     <dd>
@@ -94,9 +95,8 @@ function fn() {
   <dl>
     <dt>全局变量和方法</dt>
     <dd>
-      <div>在 main.js 中引入 import 并提供 provide</div>
-      <div>组件注入 inject 并使用 - available to all components</div>
-      <div>注意直接使用 provide 库，不需要引入</div>
+      <div>在 main.js 中，可以直接使用 provide 库，不需要引入</div>
+      <div>底层组件应注入 inject 并使用 - available to all components</div>
       <div>[<span class="iconfont icon-keyboard"></span>] 全局使用 axios - 安装依赖后，全局使用</div>
       <pre>
 import axios from 'axios'
