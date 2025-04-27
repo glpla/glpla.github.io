@@ -17,6 +17,11 @@
     <span>&commat;Route</span>
   </header>
   <dl>
+    <dt>&lt;a&gt;</dt>
+    <dd>
+      <div>&lt;a&gt;：Html 原生标签；页面会重新加载/刷新</div>
+      <div>观察页面加载情况：浏览器刷新按钮、浏览器开发者视图 F12 → 网络 Network</div>
+    </dd>
     <dt>导航分类</dt>
     <dd class="sn">
       <div>声明式导航：使用 &lt;router-link&gt; 通过指定 <a href="https://router.vuejs.org/api/interfaces/RouterLinkProps.html">路由属性
@@ -24,15 +29,10 @@
       <div><a href="./userouter.html">编程式导航</a>：使用 vue-router 的组合函数 <a
           href="https://router.vuejs.org/zh/api/#Functions-useRoute">useRouter()</a> 实现</div>
     </dd>
-    <dt>&lt;a&gt;</dt>
-    <dd>
-      <div>&lt;a&gt;：Html 原生标签；页面会重新加载/刷新</div>
-      <div>观察页面加载情况：浏览器刷新按钮、浏览器开发者视图 → 网络</div>
-    </dd>
     <dt>&lt;router-link&gt;</dt>
     <dd>
       <div>用来渲染一个链接的组件，该链接在被点击时会触发导航</div>
-      <div>全局组件；不需要在组件模板中导入；参见 main.js</div>
+      <div>全局组件；不需要在组件模板中导入</div>
       <div>不会刷新页面 - doesn't need to be reloaded from the server</div>
       <table>
         <caption>RouterLinkProps</caption>
@@ -79,22 +79,22 @@
 &lt;router-link to = "/work/css3" &gt;css3&lt;/router-link&gt;
 &lt;router-link to = "/work/js" &gt;js&lt;/router-link&gt;
 </pre>
-      <div>3. 使用 <a href="./route_params.html">动态路由</a></div>
-      <div>4. 使用 <a href="./route_query.html">查询路由</a></div>
+      <div>3. 使用 <a href="./router_params.html">动态路由</a></div>
+      <div>4. 使用 <a href="./router_query.html">查询路由</a></div>
     </dd>
     <dt>&lt;router-view&gt;</dt>
     <dd>
       <div>用于显示用户当前所处路由的组件</div>
-      <div>全局组件；不需要在组件模板中导入；参见 main.js</div>
+      <div>全局组件；不需要在组件模板中导入</div>
       <div>路由目标占位符</div>
       <div>借助系统组件 &lt;router-view&gt; 显示与 URL 对应的组件|路由出口 - where to render the current route component</div>
       <div>有 &lt;router-link&gt; 路由，则必须有 &lt;router-view&gt; 路由出口</div>
       <div>还可以像缓存组件那样，缓存 &lt;router-view&gt;，见后例</div>
       <div>1. 单 &lt;router-view&gt;</div>
-      <div>对于单页应用 SPA，需要根据路由动态切换视图，必须有一个</div>
-      <div>应用更为常见</div>
+      <div>根据路由动态切换视图；必须有一个</div>
+      <div>应用更为常见，如单页应用 SPA</div>
       <div>2. 多 &lt;router-view&gt;</div>
-      <div>允许你在同一个页面同时展示多个组件，每个组件对应不同的视图区域，提高了单页应用的复用性和可维护性</div>
+      <div>允许在同一个视图同时展示多个组件，每个组件对应不同的视图区域，提高了单页应用的复用性和可维护性</div>
       <div>路由配置由 component 该为 components</div>
       <pre>
 {

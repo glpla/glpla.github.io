@@ -81,6 +81,21 @@ router.push({ name: 'user', params: { id: 100 } })
 router.push({ path: '/user', query: { id: 100 }, replace: true })
 router.replace({ path: '/user', query: { id: 100 } })</pre>
     </dd>
+    <dt>$router</dt>
+    <dd>
+      <div>全局路由变量</div>
+      <div>可以在模板/结构中直接使用</div>
+      <div>无须导入路由包 useRouter 并实例化，更加简洁</div>
+    </dd>
+  </dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd class="sn">
+      <div>逻辑中使用 - 引入路由包 useRouter 并实例 router</div>
+      <div>结构中使用 - 全局路由变量 $router</div>
+    </dd>
+    <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 加载完毕后跳转至首页 - 在生命周期函数中，使用延时 setTimeout 模拟实现</dd>
     <dd>
       <pre>
@@ -113,25 +128,12 @@ onMounted(() => {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 找人代付 - 添加用户订单信息作为查询路由参数</dd>
     <dd>略</dd>
-    <dt>$router</dt>
-    <dd>
-      <div>以上是在逻辑中实现编程式导航</div>
-      <div>可以在模板/结构中直接使用全局路由变量 $router 实现</div>
-      <div>无须导入路由包 useRouter 并实例化，更加简洁</div>
-    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 动态路由使用；查询路由同理</dd>
     <dd>
       <pre>&lt;button @click="$router.push('/details/1')"&gt;to demo&lt;/button&gt;</pre>
       <pre>&lt;button @click="$router.push('/details/' + id)"&gt;to demo&lt;/button&gt;</pre>
       <pre>&lt;button @click="$router.push({ name: 'details', params: { id: 1 } })"&gt;to demo&lt;/button&gt;</pre>
       <pre>&lt;button @click="$router.push({ name: 'details', params: { id } })"&gt;to demo&lt;/button&gt;</pre>
-    </dd>
-  </dl>
-  <div class="chap">Summary</div>
-  <dl>
-    <dd class="sn">
-      <div>逻辑中使用 - 引入路由包 useRouter 并实例 router</div>
-      <div>结构中使用 - 全局路由变量 $router</div>
     </dd>
   </dl>
   <div id="footer"></div>

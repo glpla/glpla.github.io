@@ -20,14 +20,14 @@
     <dd>除了使用 path 和 component 定义路由外，还可以通过配置实现如下几种特性的路由</dd>
     <dt>命名路由 <a href="https://router.vuejs.org/zh/guide/essentials/named-routes.html">Name</a></dt>
     <dd>
-      <div>通过 name 属性指定路由名称，便于在模板中引用</div>
+      <div>通过 name 属性指定路由名称，便于引用，特别是长路由或多级嵌套路由</div>
       <div>所有路由的命名必须唯一</div>
       <div>可读性：采用语义化的命名</div>
       <div>可维护性：路由变化时，只改路由，命名可以保留</div>
       <div>更<span class="warn">简洁</span> ：使用命名导航而不是路径；特别适合嵌套路由</div>
       <div>方便重定向和别名</div>
-      <div>方便使用 <a href="./route_params.html">动态路由</a> 传递参数，无须拼接字符串</div>
-      <div>方便处理 <a href="./route_guard.html">路由守卫</a>；使用 name 而不是 path</div>
+      <div>方便使用 <a href="./router_params.html">动态路由</a> 传递参数，无须拼接字符串</div>
+      <div>方便处理 <a href="./router_guard.html">路由守卫</a>；使用 name 而不是 path</div>
       <div>...</div>
       <pre>
 {
@@ -40,8 +40,7 @@
     <dd>
       <div>将一个路径重定向到另一个路径，适用于 URL 标准化、旧路径迁移和默认路径设置</div>
       <div>嵌套路由不需要指定 component，因为它会重定向到目标路由，由目标路由的配置指定</div>
-      <div>可以直接指定 path</div>
-      <div>可以使用命名路由 name - 推荐</div>
+      <div>可以直接使用 path；也可以使用命名路由 name - 推荐</div>
       <!-- <div>也可以使用函数确定</div> -->
       <pre>
 {
@@ -63,7 +62,7 @@
       <div>为了渲染子路由对应的视图组件，父路由对应的组件应提供 &lt;router-view&gt;</div>
       <div>子路由的 path 可以省略父级路由，不用 /；/代表根路由/根路径</div>
       <div>可以使用模块定义路由信息再引入，便于管理和复用，如用于导航菜单</div>
-      <div>嵌套路由的样式，如果不是全局的作用，应该单独设计。具体实现请查看 <a href="./route_style.html">路由样式</a></div>
+      <div>嵌套路由的样式，如果不是全局的作用，应该单独设计。具体实现请查看 <a href="./router_style.html">路由样式</a></div>
       <pre>
 {
   path: "/menu",
@@ -155,7 +154,7 @@ import {h} from 'vue'
       <div>传递参数 - 路由传参</div>
       <div>以路径的方式拼接路由</div>
       <div>需要单独设计路由</div>
-      <div>更多详情，请查看 <a href="./route_params.html">动态路由 - params</a></div>
+      <div>更多详情，请查看 <a href="./router_params.html">动态路由 - params</a></div>
       <pre>
 {
   path: '/goods/:id',
@@ -168,7 +167,7 @@ import {h} from 'vue'
       <div>传递参数 - 路由传参</div>
       <div>使用普通路由，不需要单独设计，以值对 name-value pair 的形式，通过 ? 拼接在路由后面</div>
       <div>多个值对以 & 分割</div>
-      <div>更多详情，请查看 <a href="./route_query.html">查询路由 - query</a></div>
+      <div>更多详情，请查看 <a href="./router_query.html">查询路由 - query</a></div>
     </dd>
     <dt>传参路由</dt>
     <dd>
@@ -178,7 +177,7 @@ import {h} from 'vue'
       <div>配置项 props 可以是：<span class="warn">布尔值</span>、<span class="warn">对象</span>或<span class="warn">函数</span>
       </div>
       <div>使用参数的组件要定义同名属性才能使用</div>
-      <div>更多详情，请查看 <a href="./route_props.html">传参路由 Props</a></div>
+      <div>更多详情，请查看 <a href="./router_props.html">传参路由 Props</a></div>
     </dd>
   </dl>
   <div class="chap">Summary</div>
