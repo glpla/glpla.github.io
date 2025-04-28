@@ -83,12 +83,6 @@
       border-bottom: 1px solid var(--main-color);
     }
 
-    .link {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
-      padding: calc(4*var(--p-m-g)) var(--p-m-g);
-    }
-
     nav h4 {
       color: #000;
     }
@@ -112,7 +106,7 @@
   <div class="w">
     <header>
       <div class="info">
-        <a class="avatar" href="avatar">glpla.github.io</a>
+        <a class="avatar" href="./course/online_xh.html" target="_blank">glpla.github.io</a>
         <h1>
           <svg class="svg-txt">
             <text class="title" x="60" y="30" text-anchor="middle" dominant-baseline="central">大树小站</text>
@@ -125,6 +119,7 @@
       </div>
     </header>
   </div>
+
   <div class="w grid b-btm">
     <div>
       <h4 data-icon="&#xe60d;">Admin</h4>
@@ -312,7 +307,7 @@
     </div>
   </div>
 
-  <div class="w link">
+  <div class="w grid" style="--grid-cont-w:160px">
     <nav>
       <h4>Reading</h4>
       <a class="ellipsis" href="https://www.fadocodecamp.com/posts/javascript-basics-tutorial">JavaScript Basics
@@ -364,7 +359,7 @@
       <a href="https://vueschool.io/courses/generating-fake-data-with-faker-js">Faker.js</a>
     </nav>
 
-    <nav class="course">
+    <nav>
       <h4>Course</h4>
       <a data-icon="&#xe881" href="./web/index.html">Web</a>
       <a data-icon="&#xecf6" href="./unity/index.html">Unity</a>
@@ -385,7 +380,7 @@
       <h4>Other</h4>
       <a href="./course/index.html" title="历史课表">History</a>
       <a href="https://language.chinadaily.com.cn/news_bilingual/" title="双语新闻">Bilingual</a>
-      <a href="https://npmmirror.com/" title="npm镜像">npmmirror</a>
+      <a href="https://npmmirror.com/" title="npm镜像">Npmmirror</a>
       <a href="https://www.tiobe.com/tiobe-index/" title="TIOBE指数">TIOBE</a>
       <a href="https://www.notion.com/zh-cn" title="电子笔记">Notion</a>
       <a href="https://passport2.chaoxing.com" title="超星">Chaoxing</a>
@@ -399,59 +394,13 @@
     <div>广州新华学院</div>
     <div>东莞 · 中国</div>
   </footer>
-  <script src="/utils/lib/scrollreveal.min.js"></script>
+
   <script>
     fetch('./common/lotus.html')
       .then(res => res.text())
       .then(html => {
         document.getElementById('lotus').innerHTML = html
       })
-  </script>
-  <script type="module">
-
-    import { dot } from '../utils/custom/dot.js'
-    // bgm
-    const body = document.body
-    const avatar = body.querySelector('.avatar');
-    const audio = new Audio('/utils/music/华语群星 - 当那一天来临.ogg');
-    audio.volume = 0.5;
-    audio.addEventListener('ended', function () {
-      console.log('音频播放已结束');
-      avatar.classList.toggle('play')
-    });
-    avatar.addEventListener('click', (e) => {
-      e.preventDefault();
-      // audio.paused ? audio.play() : audio.pause();
-      // avatar.classList.toggle('play')
-      // dot(e)
-      // window.location.href = './course/online_xh.html';
-      window.open('./course/online_xh.html', '_blank');
-    })
-
-    // reveal
-    const revealOption = {
-      delay: 100,
-      distance: "50px",
-      duration: 150,
-      easing: "ease-in-out",
-      origin: "bottom",
-      interval: 100,
-    };
-
-    ScrollReveal().reveal(".nav-item>*", revealOption);
-
-    const links = document.querySelectorAll('.nav-item');
-    const se = new Audio('/utils/sound/click0.mp3')
-    links.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault()
-        se.currentTime = 0;
-        se.play()
-        se.addEventListener('ended', () => {
-          window.location.href = link.href;
-        })
-      })
-    })
   </script>
 </body>
 
