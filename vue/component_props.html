@@ -31,6 +31,7 @@
       <div>建议使用小驼峰命名方式 - camelCase </div>
       <div>为了和普通变量区分，建议：传递的参数以 prop 开始，如 propName</div>
       <div>只有数据的拥有者才可以修改数据：子组件不能直接修改父组件传递的属性参数；如果父组件把这个属性参数还分配了其它子组件。。。</div>
+      <div>子组件应该专注于 UI 展示和事件触发，通用、无状态；对应的逻辑由父组件决定</div>
     </dd>
     <dt>子组件</dt>
     <dd>
@@ -156,7 +157,7 @@ const props = defineProps({
   msg: { type: String, default: 'Vue.js' }
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件 - 传递普通数据</dd>
     <dd>
       <div>根据作者头像或者学号等信息展示相应的版权信息</div>
       <div>如果不指定头像，则使用默认头像</div>
@@ -177,6 +178,35 @@ const props = defineProps({
     default: 'glpla.github.io'
   }
 })</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 商品详情页 DetailsView.vue 中模态框的设计 - 传递方法</dd>
+    <dd>
+      <div>单击"详情"，执行父组件的业务逻辑，显示模态框</div>
+      <div>这里模态框采用普通元素；后期封装为组件</div>
+      <div>1. 权益保护组件 Guarantee.vue</div>
+      <pre>
+&lt;div class="guarantee"&gt;
+  // ...
+  &lt;button @click.stop="props.showGuarantee"&gt;详情&lt;/button&gt;
+&lt;/div&gt;</pre>
+      <pre>
+const props = defineProps({
+  showGuarantee: {
+    type: Function,
+    default: () => { }
+  }
+})</pre>
+      <div>3. 父组件 HomeView.vue</div>
+      <pre>
+&lt;Guarantee :show-guarantee="switchModal"&gt;&lt;/Guarantee&gt;
+&lt;div class="modal" v-show="isShowModal"&gt;&lt;/div&gt;</pre>
+      <pre>
+import { ref } from 'vue';
+import Guarantee from '@/components/Guarantee.vue';
+const isShowModal = ref(false);
+const switchModal = () => {
+  isShowModal.value = !isShowModal.value
+}</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 轮播组件 Swiper.vue</dd>
     <dd>
@@ -221,7 +251,7 @@ const props = defineProps({
       -
       的变化触发数据加载</dd>
     <dd>
-      <div>标签页组件 ComTab.vue - 专注于 UI 展示和事件触发；可设计为一个通用的、无状态的组件 Stateless Component</div>
+      <div>标签页组件 ComTab.vue</div>
       <pre>
 &lt;div class="com-tab"&gt;
   &lt;div v-for="(tab, index) in props.tabs" :key="index" @click="props.selTab(tab)"&gt;{{ tab }}&lt;/div&gt;
@@ -283,12 +313,6 @@ const toCoupon = () => {
 const toWelfare = () => {
   // alert('to welfare')
 }</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 弹出框 Popup.vue - 思路同上</dd>
-    <dd>
-      <div>弹出框 Popup.vue - 负责显示信息和触发事件</div>
-      <div>父组件传递信息和具体的业务逻辑</div>
-      <div>实现略</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 菜单视图 MenuView.vue</dd>
     <dd>

@@ -109,6 +109,14 @@ import { inject } from 'vue';
 
 const axios = inject('axios')
 const www = inject('www')</pre>
+      <div>使用 <a href="../web/js/function3.html">立即执行函数</a> 加载数据；忽略使用组件的生命周期函数</div>
+      <pre>
+;(() => {
+  axios.get('https://glpla.github.io/utils/data/coffee.json')
+    .then(res => {
+      console.log(res);
+    })
+})()</pre>
     </dd>
     <!-- <dt>兄弟组件之间的通信 - todo</dt>
     <dd>

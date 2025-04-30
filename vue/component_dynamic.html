@@ -20,16 +20,18 @@
     <dt>Overview</dt>
     <dd>
       <div><a href="https://cn.vuejs.org/guide/essentials/component-basics#dynamic-components">Dynamic
-          Components</a>：使用 &lt;component&gt; 元素和特殊的 :is 属性 实现多组件选一：在两个或多个组件间来回切换 - dynamically switch between
-        components</div>
+          Components</a>：使用特殊元素 <a
+          href="https://cn.vuejs.org/api/built-in-special-elements.html#component">&lt;component&gt;</a> 和配合 :is
+        属性实现多组件选一/两个或多个组件间来回切换 - dynamically switch between components</div>
       <div>is 可以是：</div>
-      <div>.被注册的组件名</div>
-      <div>.导入的组件对象</div>
+      <div>.HTML 标签名、注册/导入的组件名</div>
+      <div>.直接绑定到组件的定义</div>
       <div>被切换掉的组件会被卸载。通过 <a href="./component_keeplive.html">&lt;KeepAlive&gt;</a> 组件强制被切换掉的组件仍然保持“存活”的状态</div>
       <div>应用：标签页、导航页</div>
     </dd>
-    <dt>使用条件判断并切换组件</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 基本使用 - 使用注册的组件名</dd>
     <dd>
+      <div>根据条件判断并切换组件</div>
       <pre>
 import Work from './components/Work.vue';
 import Team from './components/Team.vue';</pre>
@@ -37,46 +39,46 @@ import Team from './components/Team.vue';</pre>
 &lt;component v-if="flag" :is="Work">&lt;/component&gt;
 &lt;component v-else :is="Team"&gt;&lt;/component&gt;</pre>
     </dd>
-    <dt>使用对象</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页组件 Tabcard.vue - 动态组件版</dd>
     <dd>
-      <div>根据 key 访问组件</div>
-      <pre>
-import { ref } from 'vue'
-import AsyncGoods from '@/components/TabGoods.vue'
-import AsyncCup from '@/components/TabCup.vue'
-
-const currentTab = ref('随享瑞幸')
-const tabs = {
-  "随享瑞幸": AsyncGoods,
-  "颜值水杯": AsyncCup
-}</pre>
-      <div>遍历对象，使用 key，不用 value，可以使用_表示省略</div>
-      <pre>
-&lt;span v-for="(val, item) in tabs" @click="currentTab = item"&gt;{{ item }}&lt;/span&gt;
-&lt;component :is="tabs[currentTab]"&gt;&lt;/component&gt;</pre>
-    </dd>
-    <dt>使用数组</dt>
-    <dd>
-      <div>根据索引 index 访问组件</div>
-      <div>为了避免性能上的消耗，使用浅响应 shallowRef 创建组件对象数组</div>
+      <div>方案1：定义为数组；根据索引 index 访问组件</div>
+      <div>为了避免性能上的消耗，使用 <a href="https://cn.vuejs.org/api/reactivity-advanced.html#shallowref">浅响应 shallowRef</a>
+        创建组件对象数组</div>
       <div>浅响应 shallowRef 创建一个浅响应式对象，数据的深层改变不会触发视图更新，减少性能上的消耗；并不对其中的数据进行响应，仅仅对对象的名字响应</div>
-      <div>需要使用标签和组件封装数组</div>
       <pre>
 import { ref, shallowRef } from 'vue'
-import AsyncGoods from '@/components/TabGoods.vue'
-import AsyncCup from '@/components/TabCup.vue'
+import TabGoods from '@/components/TabGoods.vue'
+import TabCup from '@/components/TabCup.vue'
 
 let index = ref(0)
 let com = shallowRef([{
   tag: '随享瑞幸',
-  component: AsyncGoods
+  component: TabGoods
 }, {
   tag: '颜值水杯',
-  component: AsyncCup
+  component: TabCup
 }])</pre>
       <pre>
 &lt;span v-for="(item, ind) in com" @click="index = ind"&gt;{{ item.tag }}&lt;/span&gt;
 &lt;component :is="com[index].component"&gt;&lt;/component&gt;</pre>
+      <div>方案2：定义为对象；<a href="./vfor.html">遍历对象</a>，根据 key 访问组件；相对简洁</div>
+      <pre>
+import TabGoods from '@/components/TabGoods.vue'
+import TabCup from '@/components/TabCup.vue'
+
+const currentTab = ref('随享瑞幸')
+const tabs = {
+  "随享瑞幸": TabGoods,
+  "颜值水杯": TabCup
+}</pre>
+      <pre>
+&lt;span v-for="(value, key) in tabs" @click="currentTab = key"&gt;{{ key }}&lt;/span&gt;
+&lt;component :is="tabs[currentTab]"&gt;&lt;/component&gt;</pre>
+    </dd>
+    <div>不用 value；也可以使用_表示省略；非标准语法</div>
+    <pre>
+&lt;span v-for="(_, key) in tabs" @click="currentTab = key"&gt;{{ key }}&lt;/span&gt;
+&lt;component :is="tabs[currentTab]"&gt;&lt;/component&gt;</pre>
     </dd>
   </dl>
   <div id="footer"></div>

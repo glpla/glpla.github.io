@@ -79,9 +79,56 @@ const callback = (e) => {
   </dl>
   <div class="chap">Homework</div>
   <dl>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 改造封装的产品列表组件，单击某个产品，跳转到详情页</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 模态框的设计</dd>
+    <dd>
+      <div>商品详情页 DetailsView.vue</div>
+      <div>权益保护组件 Guarantee.vue</div>
+      <div>模态框组件 Modal.vue</div>
+      <div>围绕一个数据 isShowModal 展开</div>
+      <div>1. 权益保护组件 Guarantee.vue</div>
+      <div>单击"详情"显示对应的权益模态框</div>
+      <div>这里使用内联事件触发自定义事件showGuarantee；也可以显示的使用 defineEmits()</div>
+      <pre>
+&lt;div class="guarantee"&gt;
+  &lt;h3 class="em"&gt;小程序交易保障&lt;/h3&gt;
+  &lt;span class="ellipsis"&gt;先行赔付 · 消费者权益保护&lt;/span&gt;
+  &lt;button class="btn" @click.stop="$emit('showGuarantee')"&gt;详情&lt;/button&gt;
+&lt;/div&gt;</pre>
+      <div>2. 父组件 DetailsView.vue</div>
+      <div>引入并使用 权益保护组件 Guarantee.vue</div>
+      <div>指定响应自定义事件</div>
+      <pre>&lt;Guarantee @show-guarantee="switchModal" /></pre>
+      <pre>
+const switchModal = () => {
+  isShowModal.value = !isShowModal.value
+}</pre>
+      <div>3. 模态框组件 Modal.vue</div>
+      <div>定义函数属性；同样可以使用自定义事件</div>
+      <div>单击关闭按钮和背景都应该触发事件 switchModal</div>
+      <pre>
+&lt;div class="modal" @click.self="props.closeGuarantee"&gt;
+  &lt;button class="btn" @click.stop="props.closeGuarantee"&gt;详情&lt;/button&gt;
+  // ...
+&lt;/div&gt;</pre>
+      <pre>
+const props = defineProps({
+  closeGuarantee: {
+    type: Function,
+    default: () => { }
+  }
+})</pre>
+      <div>4. 父组件 DetailsView.vue</div>
+      <div>引入并使用 模态框组件 Modal.vue</div>
+      <div>分配方法/函数属性</div>
+      <div>指定条件渲染</div>
+      <pre>&lt;Modal :close-guarantee="switchModal" v-show="isShowModal" /></pre>
+      <img src="./imgs/emit2.png" alt="">
+      <div class="fig-sn">数据流</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 改造封装的产品列表组件 GoodsItem.vue，单击某个产品，跳转到详情页</dd>
     <dd>
       <img src="./imgs/emit0.png" alt="">
+      <div class="fig-sn">数据流</div>
       <div>子组件 - 定义事件并传递产品 id；结构其它内容略</div>
       <pre>&lt;button class="btn" @click="toDetail(item.id)"&gt;详情&lt;/button&gt;</pre>
       <pre>
@@ -96,23 +143,6 @@ const toDetail = (id) => {
 const doDetail = (e) => {
     console.log('hi outer', e);
 }</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 权益保护模态框 Guarantee.vue</dd>
-    <dd>
-      <div>封装组件；使用自定义事件 defineEmits()，单击显示对应的权益模态框</div>
-      <pre>&lt;button @click.stop="handleGuarantee"&gt;详情&lt;/button&gt;</pre>
-      <pre>
-const emits = defineEmits(['showGuarantee']);
-const handleGuarantee = () => {
-  emits('showGuarantee')
-};</pre>
-      <div>商品详情页 DetailsView.vue 引入并使用；这里使用内联事件处理</div>
-      <pre>&lt;Guarantee @show-guarantee="isShowModal = true" /&gt;</pre>
-      <div>单击模态框关闭按钮或其它区域，如背景，都可以关闭模态框；模态框是商品详情页 DetailsView.vue 的普通元素</div>
-      <pre>
-&lt;div class="modal" :class="{ 'show': isShowModal }" @click.self="isShowModal = false"&gt;
-  &lt;button class="btn modal-btn" @click.prevent="isShowModal = false"&gt;close&lt;/button&gt;
-&lt;/div&gt;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 点赞组件</dd>
     <dd>

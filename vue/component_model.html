@@ -19,7 +19,7 @@
   <dl>
     <dd>
       <div>组件的双向绑定：父组件的数据变化会影响到子组件；子组件的数据变化会影响到父组件</div>
-      <div>子组件使用宏 <a href="https://cn.vuejs.org/api/sfc-script-setup.html#definemodel">defineModel()</a> 声明一个双向绑定 prop
+      <div>子组件使用宏 <a href="https://cn.vuejs.org/api/sfc-script-setup.html#definemodel">defineModel()</a> 声明一个双向绑定属性 prop
       </div>
       <div>父组件使用 v-model 关联绑定</div>
       <div>可以双向绑定一个或多个数据</div>
@@ -28,7 +28,7 @@
     <dt>基本过程 Procedure</dt>
     <dd>
       <div>1. 子组件</div>
-      <div>使用 defineModel() 声明一个双向绑定数据，同样建议使用变量接收，默认是 model</div>
+      <div>使用 defineModel() 声明一个双向绑定属性 props，同样建议使用变量接收，默认是 model</div>
       <pre>const model = defineModel()</pre>
       <div>可以指定类型</div>
       <pre>const model = defineModel({type: Number, default: 0 })</pre>
@@ -116,6 +116,33 @@ const emits = defineEmits(['update:msg', 'update:tips'])</pre>
       <div>父组件：v-model</div>
     </dd>
     <dt>Homework</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 模态框的设计 - 使用双向绑定实现</dd>
+    <dd>
+      <div>围绕一个数据 isShowModal 展开</div>
+      <div>1. 权益组件 Guarantee.vue</div>
+      <pre>
+&lt;div class="guarantee"&gt;
+  &lt;div&gt;guarantee&lt;/div&gt;
+  &lt;button @click="model = true"&gt;show&lt;/button&gt;
+&lt;/div&gt;</pre>
+      <pre>const model = defineModel()</pre>
+      <div>2. 模态框组件 Modal.vue</div>
+      <pre>
+&lt;div class="modal"&gt;
+  &lt;div&gt;modal&lt;/div&gt;
+  &lt;button @click="model = false"&gt;close&lt;/button&gt;
+&lt;/div&gt;</pre>
+      <pre>const model = defineModel()</pre>
+      <div>3. 父组件 HomeView.vue</div>
+      <pre>
+&lt;Guarantee v-model="isShowModal"&gt;&lt;/Guarantee&gt;
+&lt;Modal v-model="isShowModal" v-show="isShowModal"&gt;&lt;/Modal&gt;</pre>
+      <pre>
+import { ref } from 'vue';
+import Guarantee from '@/components/Guarantee.vue';
+import Modal from '@/components/Modal.vue';
+const isShowModal = ref(false);</pre>
+    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 甜点组件 - 使用 checkbox 实现</dd>
     <dd>
       <div>1. 子组件 RecoDessert.vue</div>
