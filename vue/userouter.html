@@ -125,6 +125,18 @@ onMounted(()=>{
     }, 3000)
 })</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 产品组件 GoodsItem.vue 到产品详情页 DetailView.vue 的动态路由设计</dd>
+    <dd>
+      <pre>
+{
+  path: '/details/:id',
+  component: () => import('@/views/DetailsView.vue'),
+}</pre>
+      <pre>
+&lt;div class="goods-item" @click.stop="$router.push('/details/' + product.id)"&gt;
+  // ...
+&lt;/div&gt;</pre>
+    </dd>
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
