@@ -45,7 +45,6 @@ app.use(router).mount('#app')</pre>
           href="https://router.vuejs.org/api/interfaces/RouterOptions.html">路由选项 RouterOptions</a> 创建路由实例 <a
           href="https://router.vuejs.org/zh/api/interfaces/Router.html">
           Router</a></div>
-      <div>详细情况，请参考 <a href="https://mm.tt/map/3651312085?t=mFzo9boa1B">路由思维导图</a></div>
       <table>
         <caption>路由选项 RouterOptions</caption>
         <tr>
@@ -157,12 +156,15 @@ const router = createRouter({
   path: '/menu',
   component: () => import('@/views/MenuView.vue'),
 }</pre>
-        <div>1.2 <a href="./router_query.html">查询路由</a> - 路由传参的方式之一；以值对 name-value pair 的形式，通过 ? 拼接在路由后面；多个值对以 & 分割
+        <div>1.2 查询路由 - 路由传参的方式之一；以值对 name-value pair 的形式，通过 ? 拼接在路由后面；多个值对以 & 分割
         </div>
         <div>使用/访问时传递参数，如用户分享</div>
         <pre>https://localhost:5173/menu?user=glpla.github.io</pre>
-        <div>1.3 <a href="./router_params.html">动态路由</a> - 路由传参的方式之一；以路径的方式拼接路由</div>
-        <div>根据 id 在详情页加载对应的商品</div>
+        <div>1.3 动态路由 - 路由传参的方式之一；以路径的方式拼接路由</div>
+        <div>便于实现视图共享 - 将给定匹配模式的路由映射到<span class="warn">同一个</span>组件，如 /goods/1
+          和 /goods/2 这样的 URL 都会映射到同一个路由 /goods: 在同一个页面根据 id 显示不同的商品 </div>
+        <div>使用通配符 <span class="warn">:</span> - wild card 定义对应当前路由的动态路由</div>
+        <div>可以定义一个或多个；<span class="warn">?</span> 表示该参数可选</div>
         <pre>
 {
   path: '/details/:id',

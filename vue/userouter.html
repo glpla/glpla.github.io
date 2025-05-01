@@ -19,15 +19,12 @@
   <dl>
     <dt><a href="https://router.vuejs.org/zh/api/#Functions-useRouter">useRouter()</a></dt>
     <dd>
-      <div>除了使用 &lt;router-link&gt; 创建路由|声明式路由，还可以借助 <a
-          href="https://router.vuejs.org/zh/api/interfaces/Router.html">router</a> 实例方法实现<a
-          href="https://router.vuejs.org/zh/guide/essentials/navigation.html">编程式路由</a></div>
-      <div>类似于 &lt;a&gt; 和 location.href 的关系；详细情况，请参考 <a href="https://mm.tt/map/3651312085?t=mFzo9boa1B">路由思维导图</a>
-      </div>
-      <div>全局注入的函数，用于获取路由器实例，以便<span class="warn">操作路由</span> ，如 push、replace、go 等</div>
+      <div>除了使用 &lt;RouterLink&gt; 创建路由|声明式路由，还可以借助 <a href="https://router.vuejs.org/zh/api/interfaces/Router.html">路由器
+          router</a> 实例方法实现 <a href="https://router.vuejs.org/zh/guide/essentials/navigation.html">编程式路由</a></div>
+      <div>useRouter() 是全局注入的函数，用于获取路由器实例，以便<span class="warn">操作路由</span> ，如 push、replace、go 等</div>
       <div>需引入路由包 useRouter 并创建路由实例 router；模块化开发请参考 <a href="../web/js/module.html">Module</a></div>
-      <div>可以使用普通路由 path；也可以使用查询路由 query 、动态路由 params</div>
-      <div>无法指定 meta；应在路由配置中指定 meta</div>
+      <!-- <div>可以使用普通路由 path、查询路由 query 、动态路由 params</div> -->
+      <!-- <div>无法指定 meta；应在路由配置中指定 meta</div> -->
       <pre>
 import { useRouter } from 'vue-router'
 const router = useRouter()</pre>
@@ -39,7 +36,7 @@ const router = useRouter()</pre>
         </tr>
         <tr>
           <td>push</td>
-          <td>导航时向 history 添加新记录|压入路由，并跳转到目标；单击 &lt;router-link&gt; 时触发；可以逐级返回</td>
+          <td>导航时向 history 添加新记录|压入路由，并跳转到目标；单击 &lt;RouterLink&gt; 时触发；可以逐级返回</td>
         </tr>
         <tr>
           <td>replace</td>
@@ -58,27 +55,33 @@ const router = useRouter()</pre>
           <td>前进一级；相当于 go(1)</td>
         </tr>
       </table>
-      <div>使用示例 - 在事件处理函数中实现。这里略</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 单击跳转到首页</dd>
+    <dd>
       <pre>
 // 普通路由 
-router.push('/user')
-
-// 传参路由/查询路由 /register?plan=private
+const toHome = () => {
+  router.push('/home')
+}
+</pre>
+      <div>其它应用 - 同声明式导航</div>
+      <pre>
+// 查询路由 /register?plan=private
 router.push('/user?id=100')
 router.push({ path: '/user', query: { id: 100 } })
 
-// 传参路由/动态路由
+// 动态路由
 // 直接拼接
 router.push('/user/100')
 // id = 100
 router.push('/user/' + id.value)
 // 使用模板字符串
 router.push(`/details/${id.value}`)
-// 使用对象 - 只能使用命令路由 name
+// 使用对象 - 只能使用命名路由 name
 router.push({ name: 'details', params: { id: id.value } })
 router.push({ name: 'user', params: { id: 100 } })
 
-// 使用路由其它属性，如禁止返回路由
+// 使用路由其它属性，如 replace 禁止返回路由
 router.push({ path: '/user', query: { id: 100 }, replace: true })
 router.replace({ path: '/user', query: { id: 100 } })</pre>
     </dd>
@@ -86,7 +89,16 @@ router.replace({ path: '/user', query: { id: 100 } })</pre>
     <dd>
       <div>全局路由变量</div>
       <div>可以在模板/结构中直接使用</div>
-      <div>无须导入路由包 useRouter 并实例化，更加简洁</div>
+      <div>无须导入路由包 useRouter 并实例化，更简洁</div>
+      <pre>&lt;button @click="$router.push('/home')"&gt;返回首页&lt;/button&gt;</pre>
+      <div>更多路由使用</div>
+      <pre>&lt;button @click="$router.push('/details/1')"&gt;to details&lt;/button&gt;</pre>
+      <pre>&lt;button @click="$router.push('/details/' + id)"&gt;to details&lt;/button&gt;</pre>
+      <pre>&lt;button @click="$router.push({ name: 'details', params: { id: 1 } })"&gt;to details&lt;/button&gt;</pre>
+      <pre>&lt;button @click="$router.push({ name: 'details', params: { id } })"&gt;to details&lt;/button&gt;</pre>
+      <pre>&lt;button @click="$router.push('/menu/goods?id=100')"&gt;to goods&lt;/button&gt;</pre>
+      <pre>&lt;button @click="$router.push({ name: 'goods', query: { id: 100 } })"&gt;to goods&lt;/button&gt;</pre>
+      <pre>&lt;button @click="$router.push({ name: 'goods', query: { id } })"&gt;to goods&lt;/button&gt;</pre>
     </dd>
   </dl>
   <div class="chap">Summary & Homework</div>
@@ -94,10 +106,10 @@ router.replace({ path: '/user', query: { id: 100 } })</pre>
     <dt>Summary</dt>
     <dd class="sn">
       <div>逻辑中使用 - 引入路由包 useRouter 并实例 router</div>
-      <div>结构中使用 - 全局路由变量 $router</div>
+      <div>结构中使用 - 使用实例 router 的各种方法；或直接使用全局路由变量 $router</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 加载完毕后跳转至首页 - 在生命周期函数中，使用延时 setTimeout 模拟实现</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 数据加载完毕后跳转至首页 - 在生命周期函数中，使用延时 setTimeout 模拟实现</dd>
     <dd>
       <pre>
 //引入
@@ -112,28 +124,6 @@ onMounted(()=>{
         router.replace('/home') //这里通常使用replace模式
     }, 3000)
 })</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 分享页面 - 添加商品 id 作为查询路由参数</dd>
-    <dd class="sn">
-      <div>分享 URL</div>
-      <pre>
-const share = () => {
-    router.push({ query: { id: 100 } })
-}</pre>
-      <div>使用 - 如果没有，就强推 999 号商品</div>
-      <pre>
-onMounted(() => {
-    let id = route.query.id || 999
-    // axios.get(`/api/todo/${id}`).then(res => {})
-})</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 找人代付 - 添加用户订单信息作为查询路由参数</dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 动态路由使用；查询路由同理</dd>
-    <dd>
-      <pre>&lt;button @click="$router.push('/details/1')"&gt;to demo&lt;/button&gt;</pre>
-      <pre>&lt;button @click="$router.push('/details/' + id)"&gt;to demo&lt;/button&gt;</pre>
-      <pre>&lt;button @click="$router.push({ name: 'details', params: { id: 1 } })"&gt;to demo&lt;/button&gt;</pre>
-      <pre>&lt;button @click="$router.push({ name: 'details', params: { id } })"&gt;to demo&lt;/button&gt;</pre>
     </dd>
   </dl>
   <div id="footer"></div>

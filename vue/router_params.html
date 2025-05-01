@@ -48,22 +48,22 @@
       <div>推荐使用命名路由和模板字符串</div>
       <div>方便起见，请直接在浏览器的地址栏输入不同的 id，调试动态路由的使用情况</div>
       <!-- <pre>
-&lt;router-link :to = "{name: 'details'}" &gt;details&lt;/router-link&gt;
-&lt;router-link :to = "{name: 'details'}" replace &gt;details&lt;/router-link&gt;
-&lt;router-link :to = "{name: 'details'}" :replace = {{true}} &gt;details&lt;/router-link&gt;
-&lt;router-link :to = "{name: 'details', replace: true}" &gt;details&lt;/router-link&gt;</pre> -->
+&lt;RouterLink :to = "{name: 'details'}" &gt;details&lt;/RouterLink&gt;
+&lt;RouterLink :to = "{name: 'details'}" replace &gt;details&lt;/RouterLink&gt;
+&lt;RouterLink :to = "{name: 'details'}" :replace = {{true}} &gt;details&lt;/RouterLink&gt;
+&lt;RouterLink :to = "{name: 'details', replace: true}" &gt;details&lt;/RouterLink&gt;</pre> -->
       <pre>
 //使用1：静态路由 - 传递的 id 为 100
-&lt;router-link to="/details/1"&gt;details - 1&lt;/router-link&gt;
+&lt;RouterLink to="/details/1"&gt;details - 1&lt;/RouterLink&gt;
 
 //使用2：动态路由 - 普通拼接，变量 id 为 2
-&lt;router-link :to="'/details/' + id"&gt;details - id/2&lt;/router-link&gt;
+&lt;RouterLink :to="'/details/' + id"&gt;details - id/2&lt;/RouterLink&gt;
 
 //使用3：动态路由 - 模板字符串，变量 id 为 3
-&lt;router-link :to="`/details/${id}`"&gt;details - id/3&lt;/router-link&gt;
+&lt;RouterLink :to="`/details/${id}`"&gt;details - id/3&lt;/RouterLink&gt;
 
 //使用4：动态路由 - 使用 name，不能使用 path
-&lt;router-link :to="{ name: 'details', params: { id: 4 } }"&gt;details - id&lt;/router-link&gt;</pre>
+&lt;RouterLink :to="{ name: 'details', params: { id: 4 } }"&gt;details - id&lt;/RouterLink&gt;</pre>
     </dd>
     <dt>接收路由参数</dt>
     <dd>
@@ -95,17 +95,17 @@ console.log(route.params);</pre>
     component: Home
 }</pre>
       <p>不直观；可读性不好</p>
-      <pre>&lt;router-link to = "/home/10/leading/conteng"&gt;home&lt;/router-link&gt;</pre>
+      <pre>&lt;RouterLink to = "/home/10/leading/conteng"&gt;home&lt;/RouterLink&gt;</pre>
       <p>使用命名路由</p>
       <pre>
-&lt;router-link :to = "{
+&lt;RouterLink :to = "{
     name: 'home',
     params: {
         id: 10,
         title: 'leading',
         cont: 'content'
     }
-}"&gt;home&lt;/router-link&gt;</pre>
+}"&gt;home&lt;/RouterLink&gt;</pre>
     </dd>
   </dl>
   <div class="chap">Summary & Homework</div>

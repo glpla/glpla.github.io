@@ -19,17 +19,19 @@
   <dl>
     <dt>&lt;a&gt;</dt>
     <dd>
-      <div>&lt;a&gt;：Html 原生标签；页面会重新加载/刷新</div>
+      <div>Html 原生标签；页面会重新加载/刷新</div>
       <div>观察页面加载情况：浏览器刷新按钮、浏览器开发者视图 F12 → 网络 Network</div>
     </dd>
     <dt>导航分类</dt>
     <dd class="sn">
       <div>声明式导航：使用 &lt;RouterLink&gt; 通过指定 <a href="https://router.vuejs.org/api/interfaces/RouterLinkProps.html">路由属性
-          RouterLinkProps</a> 实现；详细信息，请参考 <a href="https://mm.tt/map/3651312085?t=mFzo9boa1B">路由思维导图</a></div>
+          RouterLinkProps</a> 实现</div>
       <div><a href="./userouter.html">编程式导航</a>：使用 vue-router 的组合函数 <a
           href="https://router.vuejs.org/zh/api/#Functions-useRoute">useRouter()</a> 实现</div>
     </dd>
-    <dt>&lt;RouterLink&gt;</dt>
+  </dl>
+  <div class="chap">&lt;RouterLink&gt;</div>
+  <dl>
     <dd>
       <div>用来渲染一个链接的组件，该链接在被点击时会触发导航</div>
       <div>全局组件；不需要在组件模板中导入</div>
@@ -68,21 +70,53 @@
           </tr>
         </tbody>
       </table>
-      <div>1. 使用普通路由 - 字符串方法</div>
-      <pre>
-&lt;RouterLink to = "/home" &gt;home&lt;/RouterLink&gt;
-&lt;RouterLink to = "/team" &gt;team&lt;/RouterLink&gt;
-&lt;RouterLink to = "/about" replace &gt;about&lt;/RouterLink&gt;</pre>
-      <div>2. 使用嵌套路由 - 指定完整路由</div>
-      <pre>
-&lt;RouterLink to = "/work/html" &gt;html&lt;/RouterLink&gt;
-&lt;RouterLink to = "/work/css3" &gt;css3&lt;/RouterLink&gt;
-&lt;RouterLink to = "/work/js" &gt;js&lt;/RouterLink&gt;
-</pre>
-      <div>3. 使用 <a href="./router_params.html">动态路由</a></div>
-      <div>4. 使用 <a href="./router_query.html">查询路由</a></div>
     </dd>
-    <dt>&lt;RouterView&gt;</dt>
+    <dt>1. 普通路由</dt>
+    <dd>
+      <pre>
+&lt;RouterLink to = "/home" &gt;Home&lt;/RouterLink&gt;
+&lt;RouterLink to = "/about" replace &gt;About&lt;/RouterLink&gt;</pre>
+      <div>使用命名路由 - 更简洁</div>
+      <pre>&lt;RouterLink :to = "{name:'home'}" &gt;Home&lt;/RouterLink&gt;</pre>
+    </dd>
+    <dt>2. 嵌套路由</dt>
+    <dd>
+      <div>指定完整路由</div>
+      <pre>
+&lt;RouterLink to = "/menu/goods" &gt;Goods&lt;/RouterLink&gt;
+&lt;RouterLink to = "/menu/vip" &gt;Vip&lt;/RouterLink&gt;</pre>
+      <div>使用命名路由 - 更简洁</div>
+      <pre>&lt;RouterLink :to = "{name:'goods'}" &gt;Goods&lt;/RouterLink&gt;</pre>
+    </dd>
+    <dt>3. 查询路由</dt>
+    <dd>
+      <div>静态数据</div>
+      <pre>&lt;RouterLink to="/team?id=100"&gt;Team&lt;/RouterLink&gt;</pre>
+      <div>动态绑定 - 拼接</div>
+      <pre>&lt;RouterLink  :to="'/menu/vip?id=' + id"&gt;Team&lt;/RouterLink&gt;</pre>
+      <div>动态绑定 - 模板字符串</div>
+      <pre>&lt;RouterLink :to="`/menu/vip?id=${id}`"&gt;Team&lt;/RouterLink&gt;</pre>
+      <div>动态绑定 - path</div>
+      <pre>&lt;RouterLink :to="{ name: 'vip', query: { id: 100 } }"&gt;Team&lt;/RouterLink&gt;</pre>
+      <div>动态绑定 - name</div>
+      <pre>&lt;RouterLink :to="{ path: '/menu/vip', query: { id: 100 } }"&gt;Team&lt;/RouterLink&gt;</pre>
+    </dd>
+    <dt>4. 动态路由</dt>
+    <dd>
+      <div>静态数据</div>
+      <pre>&lt;RouterLink to="/details/100"&gt;Details - 100&lt;/RouterLink&gt;</pre>
+      <div>动态绑定 - 拼接</div>
+      <pre>&lt;RouterLink :to="'/details/' + id"&gt;details - id=100&lt;/RouterLink&gt;</pre>
+      <div>动态绑定 - 模板字符串</div>
+      <pre>&lt;RouterLink :to="`/details/${id}`"&gt;details - id=100&lt;/RouterLink&gt;</pre>
+      <div>动态绑定 - 使用 name，不能使用 path，因为匹配不到</div>
+      <div class="warn">Path "/xxx" was passed with params but they will be ignored. Use a named route alongside
+        params instead.</div>
+      <pre>&lt;RouterLink :to="{ name: 'details', params: { id: 100 } }"&gt;details - id&lt;/RouterLink&gt;</pre>
+    </dd>
+  </dl>
+  <div class="chap">&lt;RouterView&gt;</div>
+  <dl>
     <dd>
       <div>用于显示用户当前所处路由的组件</div>
       <div>全局组件；不需要在组件模板中导入</div>
