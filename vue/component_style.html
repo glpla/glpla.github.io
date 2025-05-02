@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>组件样式 Style</title>
   <link rel="stylesheet" href="../css/common.css">
-
   <base target="_blank">
   <style>
     header {
@@ -124,7 +123,7 @@ span {
   <dl>
     <dt>深度选择器 :deep(selector)</dt>
     <dd>
-      <div>父组件如果想深入调整子组件内部元素的样式|影响到子组件，包括子组件的插槽元素，应使用伪类:deep(selector)</div>
+      <div>父组件如果想深入调整子组件内部元素的样式|影响到子组件，包括子组件的插槽元素，应使用伪类 :deep(selector)</div>
       <div><span class="warn">父组件</span>使用深度选择器设置子组件内元素样式 - 父组件使用插槽，知道传递了什么元素，使用了什么选择器</div>
       <pre>
 :deep(img) {
@@ -134,8 +133,9 @@ span {
     </dd>
     <dt>全局选择器 :global(selector)</dt>
     <dd>
-      <div>如果想让其中一个样式规则应用到全局|扩大作用域，可以使用 :global(selector)</div>
-      <div>应 <span class="warn">避免</span> 这种情况出现。应该把全局类写到单独的样式文件中并全局引入 - 在哪里引入算是全局？？？</div>
+      <div>使用 :global(selector) 将样式提权到全局|扩大作用域</div>
+      <div>理论上可以在父组件或子组件中指定；但是应尽量 <span class="warn">避免</span></div>
+      <div>建议 - 全局类写到单独的样式文件中并全局引入</div>
       <pre>
 :global(.warn) {
     color: red;
@@ -145,6 +145,21 @@ span {
         <div>还有一个样式穿透 >>>；注意当前框架是否支持</div>
       </div>
     </dd>
+  </dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd class="sn">
+      <div>组件样式透传</div>
+      <p>. 全局样式选择器 :global()</p>
+      <p>. 深度样式选择器 :deep()</p>
+      <div>组件事件透传</div>
+    </dd>
+    <dt>Homework</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 标题组件 Title.vue 的粘性定位</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 主导航 AppNav.vue 的固定定位</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 返回顶部 BackToTop.vue 的固定定位</dd>
+
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>

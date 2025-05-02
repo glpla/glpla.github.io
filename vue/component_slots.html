@@ -106,21 +106,22 @@
   <div class="chap">插槽样式 Style</div>
   <dl>
     <dd>
-      <div>插槽仅仅是指定|预留了一个占位符，父组件使用这个插槽传递什么不确定</div>
-      <div>即使预判到使用什么，也无法指定样式</div>
-      <div>更无法为插槽指定类或内联样式</div>
+      <div>插槽仅仅是指定|预留了一个占位符；子组件：</div>
+      <div>. 无法预料/不确定父组件使用这个插槽传递什么</div>
+      <div>. 无法为插槽指定类或内联样式</div>
+      <div>. 即使预判到使用什么，也无法指定样式</div>
       <div>更多样式细节，请访问 <a href="https://cn.vuejs.org/api/sfc-css-features.html">单文件组件 CSS 功能</a></div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 版权组件 - 默认插槽，这里以传递一个 &lt;img&gt; 为例</dd>
     <dd>
-      <div>版权组件样式 - 设置图片的样式无效；；按F12在开发者视图中，检查元素页可以确定，没有样式</div>
+      <div>子组件 - 设置图片的样式无效；；按F12在开发者视图中，检查元素页可以确定，没有样式</div>
       <pre>
 img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }</pre>
-      <div>为插槽指定样式 avatar，同样无效</div>
+      <div>子组件 - 为插槽指定样式 avatar，同样无效</div>
       <pre>
 &lt;template&gt;
     &lt;div class="copyright"&gt;
@@ -130,18 +131,16 @@ img {
     &lt;/div&gt;
 &lt;/template&gt;</pre>
       <div>解决方案1 - <span class="warn">父组件</span>指定样式，因为这个插槽是父组件提供的，对父组件是可见的</div>
-      <div>使用插槽组件的同名类名作为范围限制</div>
+      <div>可以直接指定样式；建议使用插槽组件的同名类名作为范围限制</div>
       <pre>
 .copyright img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }</pre>
-      <div>解决方案2 - <span class="warn">子组件</span>使用特殊的 Vue <span class="warn">插槽选择器 :slotted(selector)</span>；更多选择器，请查看
-        <a href="../web/selector.html">HTML5选择器 - selector</a>
-      </div>
-      <div>默认情况下，子组件作用域内的样式不会影响到 &lt;slot/&gt; 渲染出来的内容 - 是父组件所持有并传递进来的</div>
-      <div>使用 :slotted 伪类以明确地将插槽内容作为选择器的目标</div>
+      <div>解决方案2 - <span class="warn">子组件</span>使用 <a href="../web/selector_class.html">伪类选择器</a>
+        :slotted(selector)，明确地将插槽内容作为选择器的目标</div>
+      <div>默认情况下，子组件作用域内的样式不会影响到 &lt;slot&gt; 渲染出来的内容 - 是父组件所持有并传递进来的</div>
       <div>子组件使用插槽标签选择器 - Bad</div>
       <pre>
 :slotted(img) {
@@ -157,7 +156,6 @@ img {
       <div>但是。但是。。但是。。。子组件并不知道父组件到底使用插槽传递什么，你要预判所有的可能，写尽可能多的类样式</div>
       <div class="tips">
         <div>IDE可能会提示 ::slotted 而不是 :slotted。注意修正</div>
-        <div>开发规范的重要性</div>
       </div>
     </dd>
   </dl>
@@ -221,7 +219,7 @@ img {
     <dd class="sn">
       <div>&lt;slot&gt;：默认插槽、具名插槽</div>
       <div>v-slot</div>
-      <div>插槽样式</div>
+      <div>插槽样式 - 建议由父组件指定</div>
       <div>插槽作用域</div>
     </dd>
     <dt>Homework</dt>
