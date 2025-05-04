@@ -20,9 +20,16 @@
     <dd>
       <div>区分当前路由样式 active 和严格匹配当前路由样式 exactActive</div>
       <div>嵌套路由下，路由链上的会匹配应用当前路由样式 active - 无论嵌套路径多么深，只要链接的目标路径是当前路径的一部分，就会添加</div>
-      <div>而末端子路由应用严格匹配当前路由样式 exactActive - 仅当 to 属性精确匹配当前激活的路由时才会应用</div>
+      <div>而末端子路由应用严格匹配当前路由样式 exactActive - 仅当 to 属性<span class="warn">精确匹配</span>当前激活的路由时才会应用；<span
+          class="warn">重定向路由</span>不在考虑之内</div>
       <div>单级路由下，当前路由会<span class="warn">同时叠加</span>两种样式类</div>
-      <!-- <div>定制的样式类应写在全局 CSS 中</div> -->
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 匹配和严格匹配</dd>
+    <dd>
+      <div>路由a；重定向到路由b</div>
+      <div>路由b；</div>
+      <div>访问路由a时，to=a，但是重定向到了b，无法激活匹配路由和严格匹配路由</div>
+      <div>访问路由b时，to=b，可以激活匹配路由和严格匹配路由</div>
     </dd>
     <dt>默认类</dt>
     <dd>

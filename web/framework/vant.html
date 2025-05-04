@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vant</title>
   <link rel="stylesheet" href="../../css/common.css">
-  <link rel="stylesheet" href="../../css/code.css">
   <base target="_blank">
   <style>
     :root {
@@ -24,9 +23,9 @@
   </header>
   <dl>
     <dt>1. 安装</dt>
-    <dd>更多vant安装方式，请参考 <a href="https://vant-contrib.gitee.io/vant/#/en-US">vant官网</a></dd>
+    <dd>更多 Vant 安装方式，请参考 <a href="https://vant-ui.github.io/vant/#/zh-CN">Vant 官网</a></dd>
     <dd>
-      <pre>yarn add vant</pre>
+      <pre>npm i vant</pre>
     </dd>
     <dd>在项目的配置文 package.json 件中可以看到依赖</dd>
     <dd>
@@ -36,18 +35,59 @@
     "vue": "^3.2.45"
 }</pre>
     </dd>
-    <dt>2. 引入</dt>
+    <dt>2. 引入 - 全局注册；更多注册方法，请访问 <a href="https://vant-ui.github.io/vant/#/zh-CN/advanced-usage#zu-jian-zhu-ce">组件注册</a>
+    </dt>
     <dd>
+      <div>使用某给组件</div>
       <pre>
 // 1. Import the components you need
 import { Button } from 'vant';
+
 // 2. Import the components style
 import 'vant/lib/index.css';
+
+// 3. Use the components
 createApp(App).use(Button).mount('#app')</pre>
     </dd>
+    <div>使用所有组件 - 不要忘记引入样式（系统文档说的比较糙）</div>
+    <pre>
+import Vant from 'vant';
+import 'vant/lib/index.css';
+app.use(Vant);</pre>
     <dt>3. 使用</dt>
     <dd>
       <pre>&lt;van-button type="primary"&gt;Primary&lt;/van-button&gt;</pre>
+    </dd>
+  </dl>
+  <div class="chap">适配</div>
+  <dl>
+    <dt>amfe-flexible</dt>
+    <dd>
+      <div>自动设置 Rem 基准值 - HTML 的 font-size 字体大小</div>
+      <div>install</div>
+      <pre>npm i amfe-flexible</pre>
+      <div>import - main.js</div>
+      <pre>import "amfe-flexible";</pre>
+    </dd>
+    <dt>postcss-pxtorem</dt>
+    <dd>
+      <div>将单位 px 转化为 rem - 行内样式单位无效</div>
+      <div>install</div>
+      <pre>npm install postcss postcss-pxtorem --save-dev</pre>
+      <div>根目录创建文件 postcss.config.js</div>
+      <pre>
+// postcss.config.js
+export default {
+  plugins: {
+    "postcss-pxtorem": {
+      // 设计稿宽度；默认是350px
+      rootValue: 37.5,
+      // 需要转化的 CSS 属性
+      propList: ["*"],
+    },
+  },
+};</pre>
+      <div>重新启动项目</div>
     </dd>
   </dl>
   <div class="chap">tabbar</div>

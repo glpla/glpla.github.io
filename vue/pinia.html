@@ -27,22 +27,15 @@
     <span>&commat; Pinia</span>
   </header>
   <dl>
-    <dd>
-      <div>Vue3 采用 <a href="https://pinia.vuejs.org/zh/">Pinia</a>；Pinia 是 Vue 的专属状态管理库，使用大菠萝作为 logo
-      </div>
-      <div>Vue2 采用 vuex</div>
-      <div>状态管理出现之前，使用共享组件完成对共享数据的使用；共享数据的修改通过共享组件发送自定义事件完成 - 任何一个使用它的组件都可以修改，不太容易维护</div>
-      <div>共享数据和全局数据不是一回事</div>
-    </dd>
     <dt>Overview</dt>
     <dd>
-      <div>仓库 store 是一个保存全局状态 <span class="warn">state</span> 和业务逻辑的实体；可以在 <span class="warn">整个应用</span> 中访问的数据</div>
-      <div>利用仓库 store 集中式状态管理：抽取出组件间的共享状态，放在一个全局单例中来管理</div>
+      <div>Vue3 采用 <a href="https://pinia.vuejs.org/zh/">Pinia</a> 管理状态</div>
+      <div>Pinia 是 Vue 专属的集中式状态管理库，使用大菠萝作为 logo</div>
+      <div>仓库 <a href="https://pinia.vuejs.org/zh/core-concepts/#setup-stores">stores</a> 是一个保存全局状态 <span
+          class="warn">state</span> 和业务逻辑的实体；可以在 <span class="warn">整个应用</span> 中访问的数据</div>
       <div>不与组件树绑定，而承载着全局状态</div>
-      <div>仓库通常集中保存在项目的 stores 目录（应提前创建好），并按照功能创建 <span class="warn">单独</span> 的仓库文件</div>
-      <div>仓库在 onMounted 之前就已经准备好 - 兵马未动，粮草先行</div>
-      <div>更多信息，请访问 <a href="https://pinia.vuejs.org/zh/core-concepts/#setup-stores">Pinia -
-          setup-stores</a></div>
+      <div>状态管理出现之前，使用共享组件完成对数据的共享使用；共享数据的修改通过共享组件发送自定义事件完成 - 任何一个使用它的组件都可以修改，不太容易维护</div>
+      <div>Vue2 采用 vuex</div>
     </dd>
     <dt>Concepts</dt>
     <dd class="sn">
@@ -56,10 +49,13 @@
     </dd>
     <dt>Deployment</dt>
     <dd>
+      <div>强烈建议在创建项目时，选择状态管理；项目创建完毕后，可以直接使用；不建议新手手动安装部署使用</div>
+      <div>仓库通常集中保存在项目的 stores 目录（应提前创建好），并按照功能创建 <span class="warn">单独</span> 的仓库文件</div>
+      <div>仓库在 onMounted 之前就已经准备好 - 兵马未动，粮草先行</div>
       <div>1. Installation</div>
-      <pre>npm i pinia --save</pre>
+      <pre>npm i pinia</pre>
       <div>2. Import</div>
-      <div>在入口文件 main.js 引入并创建使用</div>
+      <div>在入口文件 main.js 引入并创建使用 - 先创建应用 app 再使用状态 pinia</div>
       <div>完成后，在开发者工具中可以看到大菠萝</div>
       <pre>
 import './assets/main.css'
@@ -112,22 +108,28 @@ const store = useCounterStore();
 console.log('store', store);</pre>
       <p>结构 - 渲染仓库数据；这里采用内联事件</p>
       <pre>
-&lt;div&gt;{{ store.count }}&lt;/div&gt;
-&lt;div&gt;{{ store.doubleCount }}&lt;/div&gt;
-&lt;div @click="store.increment"&gt;store handle&lt;/div&gt;</pre>
+        &lt;div&gt;{{ store.count }}&lt;/div&gt;
+        &lt;div&gt;{{ store.doubleCount }}&lt;/div&gt;
+        &lt;div @click="store.increment"&gt;store handle&lt;/div&gt;</pre>
+      <p class="tips">仓库中的状态应指定初始值，否则其中的方法只有执行后才能拿到值</p>
     </dd>
     <dt>Warning</dt>
     <dd>
-      <div>直接 <a href="../web/js/object.html">解构</a> 使用 store 中的数据(方法)会丢失响应：当仓库状态变化时，count 不变，相当于是获取了仓库的一次性数据</div>
-      <pre>let { count, increment } = counterStore;</pre>
-      <pre>&lt;div&gt;仓库数据 - {{ store.count }} - {{ count }}&lt;/div&gt;</pre>
-      <div>使用 storeToRefs 包保持响应式 - 不建议；<span class="warn">命名冲突。。。可读性不好。。。运维困难。。。</span></div>
+      <div><a href="../web/js/object.html">解构</a> 使得 store 中的数据会丢失响应，方法不会</div>
       <pre>
+import { useCounterStore } from '@/stores/counter';
+const store = useCounterStore();
+const { count, increment } = store;</pre>
+      <pre>&lt;div @click="increment"&gt;仓库数据 - {{ count }}&lt;/div&gt;</pre>
+      <div>使用 storeToRefs 包保持数据响应式 - 不建议；<span class="warn">命名冲突。。。可读性不好。。。运维困难。。。</span></div>
+      <div>storeToRefs 面向的是数据，不是方法；所以不需要对方法进行特别处理</div>
+      <pre>
+import { useCounterStore } from '@/stores/counter';
 import { storeToRefs } from 'pinia';
-let { count, increment } = storeToRefs(counterStore);</pre>
+const store = useCounterStore();
+const { count } = storeToRefs(store);</pre>
     </dd>
     <div class="tips">
-      <div>强烈建议在创建项目时，选择状态管理；项目创建完毕后，可以直接使用；不建议新手手动安装部署使用</div>
       <div>强烈建议通过复制计时器仓库 counter.js 并修改的方式创建新的仓库管理</div>
     </div>
 
