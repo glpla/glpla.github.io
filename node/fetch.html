@@ -185,7 +185,7 @@ fetch('/utils/data/cart.json')
 });</pre>
     </dd>
   </dl>
-  <div class="chap">Application</div>
+  <!-- <div class="chap">Application</div>
   <dl>
     <dd>.以下网络请求，基于 <span class="warn">自建</span> 数据服务器：<a href="./express.html">express</a> 环境下的 <a
         href="./dynamic.html">动态资源服务器</a></dd>
@@ -263,7 +263,7 @@ fetch('http://127.0.0.1:3000/test', {
   body: 'id=20240507'
 })
   .then(res => res.json())
-  .then(res => console.log(res))  </pre>
+  .then(res => console.log(res))</pre>
       <div>S端</div>
       <pre>
 router
@@ -278,7 +278,7 @@ router.post('/', (req, res) => {
     type: 'post',
     data: req.body.id
   })
-})  </pre>
+})</pre>
     </dd>
     <dt>删除数据 DELETE</dt>
     <dd>使用 <span class="warn">路径参数</span>，指定 method 为 DELETE</dd>
@@ -306,7 +306,7 @@ router.delete('/:id', (req, res) => {
     type: 'delete',
     data: req.params.id
   })
-})      </pre>
+})</pre>
     </dd>
     <dt>更新数据 PUT</dt>
     <dd>同POST；除了指定要修改的数据外，还要以<span class="warn">路径参数</span>的形式指定修改谁的数据</dd>
@@ -334,42 +334,16 @@ router.put('/:id', (req, res) => {
     type: 'delete',
     data: req.params.id
   })
-})      </pre>
+})</pre>
     </dd>
-    <dt>推荐资源</dt>
-    <dd>1. <a href="https://dog.ceo/api/breed/pembroke/images/random">随机小狗 dog ceo</a></dd>
-    <dd>2. <a href="https://picsum.photos/">随机图片 picsum photos</a></dd>
-    <dd>3. <a href="https://api.uomg.com/api/rand.qinghua?format=json">土味情话</a></dd>
-    <dd>4. http://ajax-base-api-t.itheima.net/api</dd>
-    <dd>/getbooks</dd>
-    <dd>/addbook</dd>
-    <button class="btn-sub">post</button>
-  </dl>
+  </dl> -->
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
   <script>
-    fetch('https://glpla.github.io/utils/data/rank/20240105.json')
-      .then(res => res.json())
-      .then(res => console.log(res))
-
     const img = document.querySelector('#img')
     fetch('https://glpla.github.io/utils/avatar/avatar9.png')
       .then(res => res.blob())
       .then(res => img.src = URL.createObjectURL(res))
-    // // console.dir(fetch);
-    // fetch('http://127.0.0.1:3000/test/123', {
-    //   method: 'put',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //     // 'Content-Type': 'application/x-www-form-urlencoded'
-    //   },
-    //   // body: 'id=20240507'
-    //   body: JSON.stringify({
-    //     id: 20240507
-    //   })
-    // })
-    //   .then(res => res.json())
-    //   .then(res => console.log(res))
   </script>
 </body>
 

@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>网络请求 Axios</title>
   <link rel="stylesheet" href="../css/common.css">
-
   <base target="_blank">
   <style>
     #dog {
@@ -25,7 +24,7 @@
     <span>网络请求</span>
   </header>
   <dl>
-    <dt>Overview</dt>
+    <dt>概述 Overview</dt>
     <dd>
       <div>异步请求；基于 <a href="../node/promise.html">Promise</a> 的 HTTP 库，广泛应用于浏览器和 Node.js</div>
       <div>通用、主流的第三方库；用于获取本地和远程资源，如 JSON 数据、图片等</div>
@@ -35,20 +34,101 @@
       <div>更多信息，点击访问 <a href="https://www.axios-http.cn/">Axios 中文网</a>、<a
           href="https://codilime.com/blog/axios-vs-fetch/">Axios vs Fetch</a></div>
     </dd>
-    <dt>Installment</dt>
+    <dt>安装 Installment</dt>
     <dd>
       <div>在项目目录安装</div>
-      <pre>npm i axios --save</pre>
+      <pre>npm i axios</pre>
       <div>也可以使用CDN方式，如 <a href="https://cdnjs.com/">cdnjs</a>、<a href="https://www.bootcdn.cn/">bootcdn</a> -
         适合浏览器环境；建议将库下载到本地使用。。。CDN网络经常。。。</div>
       <div>保留 crossorigin="anonymous" 避免浏览器提示</div>
       <pre>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js" crossorigin="anonymous"&gt;&lt;/script&gt;</pre>
     </dd>
-    <dt>import</dt>
+  </dl>
+  <div class="chap">基本使用 Usage</div>
+  <dl>
     <dd>
-      <div>先引入后使用</div>
-      <div>1. 局部使用 - 组件内使用，哪个组件需要就在哪个组件内操作</div>
+      <div>先引入后使用 - 哪个组件需要就在哪个组件内操作</div>
       <pre>import axios from 'axios'</pre>
+    </dd>
+    <dt>承诺方式 <a href="./promise.html">Promise</a></dt>
+    <dd>
+      <div>链式调用：axios().then().catch().finally()</div>
+      <div>通过配置使用，语法比较统一 - get 使用 data 传递参数；post 使用 params 传递参数</div>
+      <pre>
+axios({
+  method: 'get',
+  url: '',
+  params: {  }
+})
+// 履行处理器 fulfillment handle：处理成功情况
+.then(res=>{
+  console.log(res);
+})
+// 拒绝处理器 rejection handle：处理错误情况
+.catch(err=>{
+  console.log(err);
+})
+// 解决处理器：无论成功失败都执行
+.finally(()=>{
+  console.log('finally');
+})</pre>
+      <pre>
+axios({
+  method: 'post',
+  url: '',
+  data: {  }
+})
+.then(res)
+.catch(err)
+.finally()</pre>
+      <div>或根据已经封装好的请求使用，如 get</div>
+      <pre>
+axios.get(url)
+  .then((res) => {    
+    console.log(res);
+  })
+  .catch((err) => {    
+    console.log(error);
+  })
+  .finally(() => {
+    console.log('finally');
+})</pre>
+    </dd>
+    <dt>异步等待方式 <a href="./asynawait.html"> async - await</a>；可以有效避免回调地狱</dt>
+    <dd>
+      <div>需要声明为异步函数</div>
+      <div>1. 不捕获异常</div>
+      <pre>
+async function getUser() {
+    const response = await axios.get(url);
+    console.log(response);
+}</pre>
+      <div>2. 捕获异常：try{}catch(){}finally{}</div>
+      <pre>
+async function getUser() {
+  try {
+    const response = await axios.get(url);
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  } finally {    
+    console.log('finally');
+  }
+}</pre>
+      <div>或：函数表达式</div>
+      <pre>
+let getUser = async () =>{
+  try {
+    const response = await axios.get(url);
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  } finally {    
+    console.log('finally');
+  }
+}</pre>
+    </dd>
+    <!-- <dd>
       <div>2. 全局使用 - main.js</div>
       <div>引入并配置；一次引入，多次使用</div>
       <div>早期以 Vue 实例属性的形式使用</div>
@@ -62,67 +142,20 @@ Vue.protoType.axios = axios;</pre>
       <pre>
 import axios from 'axios'
 app.config.globalProperties.axios = axios;</pre>
-
       <div>使用 - Vue3 如果采用 setup 语法，丢失 this，需要通过获取实例方法，逐步拿到全局属性</div>
       <pre>
 const instance = getCurrentInstance();
 const axios = instance.appContext.config.globalProperties.axios;</pre>
-      <div>现在通过 <a href="../vue/component_provide.html">Provide & Inject</a> 实现 -推荐</div>
+      <div>现在通过 <a href="../vue/component_provide.html">Provide & Inject</a> 实现 - 推荐</div>
       <div>所有组件注入 inject 后直接使用</div>
-    </dd>
+    </dd> -->
     <dd class="tips">
       <div>需要通过 <a href="./proxy.html">代理</a> 解决跨域的问题</div>
       <div>静态网站托管平台通常已经做了跨域处理，可以直接使用</div>
     </dd>
-    <dt>Usage</dt>
-    <dd>
-      <div>1. <a href="./promise.html">承诺 Promise</a> 方式</div>
-      <div>通常封装为函数使用</div>
-      <div>通过配置使用，语法比较统一 - get 使用 data传递参数；post 使用 params传递参数</div>
-      <pre>
-axios({
-  method: 'get',
-  url: '',
-  params: {  }
-})
-.thern()
-.catch()</pre>
-      <pre>
-axios({
-  method: 'post',
-  url: '',
-  data: {  }
-})
-.thern()
-.catch()</pre>
-      <div>或根据特定的请求使用，如 get</div>
-      <pre>
-axios.get(url)
-  .then((response) => {
-    // 处理成功情况
-    console.log(response);
-  })
-  .catch((error) => {
-    // 处理错误情况
-    console.log(error);
-  })
-  .finally(() => {
-    // 总是会执行
-})</pre>
-      <div>2. <a href="./asynawait.html"> asyn - await</a> 方式</div>
-      <div>需要声明为异步函数或函数表达式再使用</div>
-      <pre>
-async function getUser() {
-  try {
-    const response = await axios.get(url);
-    console.log(response);
-  } catch (error) {
-    console.error(error);
-  }
-}</pre>
-      <pre>let getUser = async () => {}</pre>
-    </dd>
-    <dt>Configuration</dt>
+  </dl>
+  <!-- <div class="chap">配置 Configuration</div>
+  <dl>
     <dd>
       <div><span class="warn">根据需要</span>配置|指定默认参数，如 baseURL、params、method、header、timeout；baseURL 应和数据服务器的地址保持一致</div>
       <div>企业级的开发，还需要指定不同的环境变量使用相应的URL；如开发环境变量文件 .env 中指定</div>
@@ -170,9 +203,8 @@ axios.get('/api/data/coffee.json')
 
 
     </dd>
-
-  </dl>
-  <div class="chap">常用 API</div>
+  </dl> -->
+  <!-- <div class="chap">常用 API</div>
   <dl>
     <dt>获取 GET</dt>
     <dd>可以传递参数；S端使用 req.query 获取</dd>
@@ -313,6 +345,87 @@ router.put('/:id', (req, res) => {
   })
 })  </pre>
     </dd>
+  </dl> -->
+  <div class="chap">封装 Encapsulation / Modulation</div>
+  <dl>
+    <!-- <dd>
+      以上配置存在问题：<br>
+      修改的是全局默认配置，可能会影响其他使用 Axios 的模块 <br>
+      没有使用拦截器进行请求/响应统一处理 <br>
+      缺乏错误处理和接口抽象
+    </dd> -->
+    <dt>1. 配置</dt>
+    <dd>
+      <div>创建文件 request.js：指定请求URL、响应时间、拦截器等</div>
+      <pre>
+import axios from "axios";
+
+const request = axios.create({
+  baseURL: "https://glpla.github.io/utils/data/", // 设置基础 URL
+  timeout: 5000, // 请求超时时间
+});
+
+// interceptors 拦截器，见后续内容
+
+export default request;</pre>
+    </dd>
+    <dt>2. 封装</dt>
+    <dd>
+      <div>封装请求方法，仅仅是请求，响应放在使用中处理</div>
+      <div>创建文件 goods.js：引入配置文件、处理商品数据的加载等事件</div>
+      <pre>
+import requset from "./request";
+
+export const getGoods = () => requset.get("coffee.json");
+// 示例
+export const getGoodByid = (id) => requset.get();
+</pre>
+      <div>用户类的封装 user.js</div>
+      <pre>
+import requset from "./request";
+
+// 示例
+export const login = (data) => requset.post();
+export const register = (data) => requset.post();
+export const update = (data) => requset.patch();</pre>
+    </dd>
+    <dt>3. 使用</dt>
+    <dd>
+      <div>引入商品封装文件，使用其中的方法发起请求并处理结果</div>
+      <div>如在某个组件的生命周期函数中，请求数据 - 这里使用异步等待方式，也可以使用回调方式</div>
+      <pre>
+import { getGoods } from '../assets/api/goods.js';
+
+onMounted(async () => {
+  const res = await getGoods()
+  console.log(res);
+})</pre>
+      <div>改进1：加入错误控制</div>
+      <pre>
+onMounted(async () => {
+  try {
+    const res = await getGoods()
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  }
+})</pre>
+      <div>改进2：加入进度指示器</div>
+      <pre>
+onMounted(async () => {
+  console.log('loading start');
+
+  try {
+    const res = await getGoods()
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    console.log('laoding done');
+  }
+})</pre>
+    </dd>
+    <dd class="tips">在 src 下创建 api 文件夹管理相关文件</dd>
   </dl>
   <div class="chap">拦截器 interceptor</div>
   <dl>
@@ -322,37 +435,55 @@ router.put('/:id', (req, res) => {
         <figcaption>拦截器</figcaption>
       </figure>
     </dd>
-    <dt>请求拦截器</dt>
+    <dt>请求拦截器 request</dt>
     <dd>
-      <div>请求拦截器：在请求发送前，对 <span class="warn">请求参数</span> 进行拦截，修改参数；对 <span class="warn">请求头</span> 进行拦截，修改请求头；对 <span
-          class="warn">请求体</span> 进行拦截，修改请求体</div>
-      <div>发出去的请求是经过处理后的请求</div>
-      <div>配置请求，如请求头、指定Token用来验证身份</div>
+      <div>目的：限制访问；发出去的请求是经过处理后的请求；如配置请求，如请求头、指定 Token 用来验证身份</div>
+      <div>在请求发送前：</div>
+      <div>. 对 <span class="warn">请求参数</span> 进行拦截，修改参数</div>
+      <div>. 对 <span class="warn">请求头</span> 进行拦截，修改请求头</div>
+      <div>. 对 <span class="warn">请求体</span> 进行拦截，修改请求体</div>
       <pre>
-axios.interceptors.request.use( (config) => config,  (error) => Promise.reject(error))</pre>
+axios.interceptors.request.use( 
+  (config) => {
+    // ...
+    // config.headers.Authorization = 'Bearer ' + token;
+    return config;
+  },
+  (error) => {
+    // ...
+    return Promise.reject(error)
+  }
+)</pre>
     </dd>
-    <dt>响应拦截器</dt>
+    <dt>响应拦截器 response</dt>
     <dd>
-      <div>响应拦截器：在请求返回后，对 <span class="warn">响应数据</span> 进行拦截，修改响应数据；对 <span class="warn">响应头</span> 进行拦截，修改响应头；对 <span
-          class="warn">响应头</span> 进行拦截，修改响应体</div>
-      <div>接受到的响应是经过处理后的响应</div>
-      <div>过滤响应数据</div>
+      <div>目的：过滤响应数据；接受到的响应是经过处理后的响应</div>
+      <div>在请求返回后：</div>
+      <div>. 对 <span class="warn">响应数据</span> 进行拦截，修改响应数据</div>
+      <div>. 对 <span class="warn">响应头</span> 进行拦截，修改响应头</div>
+      <div>. 对 <span class="warn">响应头</span> 进行拦截，修改响应体</div>
       <pre>
-axios.interceptors.response.use( (response) => {
-  return response;
-},  (error) => {
-  return Promise.reject(error);
-});      </pre>
+axios.interceptors.response.use( 
+  (response) => {
+    // ...
+    return response;
+  },  
+  (error) => {
+    // ...
+    return Promise.reject(error);
+  }
+)</pre>
     </dd>
   </dl>
   <div class="chap">趣味应用 application</div>
   <dl>
     <dd>[<span class="iconfont icon-keyboard"></span>] 获取远程数据 - <button id="getDog">点击获取小狗</button></dd>
-    <dd id="dog">
-      <img src="" alt="">
+    <dd>
+      <div>https://dog.ceo/api/breed/pembroke/images/random</div>
+      <div id="dog">
+        <img src="" alt="">
+      </div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 获取远程数据 - <button id='axios-re'>点击获取土味情话</button></dd>
-    <div id="axios-remote"></div>
     <dd>[<span class="iconfont icon-keyboard"></span>] 获取本地数据 - <button id='axios'>点击获取WEB知识体系</button></dd>
     <dd>
       <div>1. 如何渲染获取到的数据？使用新节点？使用innerHtml？</div>
@@ -391,23 +522,16 @@ tr += '</tr>'
 axiosLocal.innerHTML += tr
 }</pre>
     </dd>
-    <dt>推荐资源 links</dt>
-    <dd>1. <a href="https://dog.ceo/api/breed/pembroke/images/random">随机小狗</a></dd>
-    <dd>2. <a href="https://picsum.photos/">随机图片</a></dd>
-    <dd>3. <a href="https://api.uomg.com/api/rand.qinghua?format=json">土味情话</a></dd>
-    <dd>4. http://ajax-base-api-t.itheima.net/api</dd>
+    <!-- <dt>推荐资源 links</dt>
+    <dd>1. <a href="https://picsum.photos/">随机图片</a></dd>
+    <dd>2. http://ajax-base-api-t.itheima.net/api</dd>
     <dd>/getbooks</dd>
-    <dd>/addbook</dd>
+    <dd>/addbook</dd> -->
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.5.0/axios.min.js"></script>
   <script>
-    const baseURL = 'http://localhost:3000'
-    axios.put(baseURL + '/test/2147', {
-      id: 123
-    })
-      .then(res => console.log(res))
     // remote - dog
     let getDog = document.querySelector('#getDog')
     let dog = document.querySelector('#dog img')
@@ -417,27 +541,14 @@ axiosLocal.innerHTML += tr
       dog.src = res.data.message
     }
     getDogFn()
-    // remote - 土味情话
-    let axiosR = document.querySelector('#axios-re')
-    let axiosRe = document.querySelector('#axios-remote')
-    axiosR.addEventListener('click', getQinghua)
-    function getQinghua() {
-      axiosRe.innerHTML = ''
-      axios
-        // .get('https://api.apiopen.top/getJoke?page=1&count=10&type=text')
-        .get('https://api.uomg.com/api/rand.qinghua?format=json')
-        .then(res => {
-          axiosRe.innerHTML = res.data.content
-        })
-    }
-    getQinghua()
+
     // local
     let axiosL = document.querySelector('#axios')
     let axiosLocal = document.querySelector('#axios-local')
     axiosL.addEventListener('click', () => {
       axiosLocal.innerHTML = ''
       axios
-        .get('../../data/data2021/stu.json')
+        .get('/utils/data/data2021/stu.json')
         .then(res => {
           for (let i = 0; i < res.data.length; i++) {
             let tr = document.createElement('tr')

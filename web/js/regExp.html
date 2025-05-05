@@ -68,6 +68,35 @@ let res = msg.replace(/\S/g, '&lt;span&gt;$&&lt;/span&gt;')</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 编辑结构 - 瑞幸咖啡(高新万达店) 处理为 高新万达店</dd>
   </dl>
+  <div class="chap">Form</div>
+  <dl>
+    <dd>
+      <div>&lt;form&gt;自带校验属性 pattern；比事件处理中的校验优先级高；如果同时存在，事件处理的校验无效</div>
+      <pre>
+&lt;form @submit.prevent="submit"&gt;
+  &lt;input type="text" v-model="user.name" placeholder="6位数字" :pattern="reg" title="请输入6位数字"&gt;
+  &lt;p v-if="errorMsg" style="color: red;"&gt;{{ errorMsg }}&lt;/p&gt;
+  &lt;button&gt;submit&lt;/button&gt;
+&lt;/form&gt;</pre>
+      <pre>
+const reg = /^\d{6}$/;
+const errorMsg = ref('');
+const user = ref({
+  name: ''
+})
+const submit = () => {
+  const value = user.value.name;
+
+  if (!reg.test(value)) {
+    errorMsg.value = '请输入正确的6位数字';
+    return;
+  }
+
+  errorMsg.value = '';
+  console.log('提交成功:', value);
+};</pre>
+    </dd>
+  </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
 </body>
