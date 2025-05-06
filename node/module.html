@@ -44,9 +44,12 @@
       <div>引入模块：需要使用文件，使用 require 引入进来</div>
       <div>使用模块</div>
     </dd>
+  </dl>
+  <div class="chap" id="node">Node.js</div>
+  <dl>
+    <dd>模块 oper.js</dd>
     <dt>多个逻辑 - 单独导出</dt>
     <dd>
-      <div>模块 oper.js</div>
       <pre>
 exports.add = () => {
   console.log('hi, add');
@@ -54,14 +57,23 @@ exports.add = () => {
 exports.dec = () => {
   console.log('hi, dec');
 }</pre>
+      <div>等同于</div>
+      <pre>
+module.exports = {
+  add: () => {
+    console.log('hi, add');
+  },
+  dec: () => {
+    console.log('hi, dec');
+  }
+};</pre>
       <div>引入并使用</div>
       <pre>
 const { add, dec } = require('./oper')
-console.log(add(), dec());      </pre>
+console.log(add(), dec());</pre>
     </dd>
     <dt>多个逻辑 - 集中导出</dt>
     <dd>
-      <div>模块 oper.js</div>
       <pre>
 const add = () => {
   console.log('hi, add');
@@ -112,6 +124,55 @@ console.log('admin:\t', admin);</pre>
       <div>定制多个逻辑，解构化引入</div>
       <div>引入时，可以省略后缀名.js</div>
       <div>引入时，不带路径加载的是系统模块；带了路径则根据路径加载用户自定义模块</div>
+    </dd>
+  </dl>
+  <div class="chap" id="vue">Vue.js</div>
+  <dl>
+    <dt>一般导出</dt>
+    <dd>以 oper.js 为例</dd>
+    <dd>一个文件可以有一个或多个逻辑</dd>
+    <dd>
+      <div>1. 导出</div>
+      <div>1.1 单独导出；在每个变量、函数或类的定义前加上 export 关键字</div>
+      <pre>
+export const inc = () => {
+  console.log('hi, inc');
+};
+
+export const dec = () => {
+  console.log('hi, dec');
+};</pre>
+    </dd>
+    <div>1.2 集中导出；先逐一声明，在末尾统一导出</div>
+    <dd>
+      <pre>
+const inc = () => {
+  console.log('hi, inc');
+};
+
+const dec = () => {
+  console.log('hi, dec');
+};
+
+export { inc, dec };</pre>
+      <div>2. 引用</div>
+      <pre>import { inc, dec } from '@/assets/utils/test';</pre>
+      <div>按需引用</div>
+      <pre>import { inc } from '@/assets/utils/test';</pre>
+    </dd>
+    <dt>默认导出</dt>
+    <dd>
+      <div>以 inc.js 为例</div>
+      <div>一个文件只能有一个逻辑</div>
+      <div>1. 导出 - 不需要指定类型和名字</div>
+      <pre>
+export default () => {
+  console.log("hi, inc");
+};</pre>
+      <div>2. 引入 - 必须指定模块名</div>
+      <pre>import inc from '@/assets/utils/inc';</pre>
+      <div>甚至可以修改模块名 - 不建议</div>
+      <pre>import add from '@/assets/utils/inc';</pre>
     </dd>
   </dl>
   <div id="footer"></div>

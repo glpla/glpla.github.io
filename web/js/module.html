@@ -25,6 +25,7 @@
       <div>一个模块通常只写一个逻辑</div>
       <div>多个逻辑可以分别导出；一个逻辑可以默认导出</div>
       <div>导出时，可以改名；导入时，也可以改名</div>
+      <div>&lt;script&gt; 需要指定 module</div>
     </dd>
     <dd class="tips">模块化的本质是将暴露的变量和方法与其对应的值关联起来；如果只有变量或方法，但是没有对应的值就是报错</dd>
     <dt>分别导出，按需导入</dt>
@@ -46,7 +47,7 @@ export { config, greeting }</pre>
       <div>使用文件 app.js - 仅导入 config 使用</div>
       <pre>
 &lt;script type="module"&gt;
-  import {config} './test.js' 
+  import {config} from './test.js'
   console.log(config.author)
 &lt;/script&gt;</pre>
       <div>多个导出还可以使用对象接受 - 使用 <span class="warn">as</span> 将导出的变量和方法统一到一个对象 obj</div>

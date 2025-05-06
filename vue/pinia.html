@@ -83,7 +83,7 @@ app.mount('#app')</pre>
       <div>使用 defineStore 创建仓库实例，其中：</div>
       <p>. 第一个参数 counter 是你的应用中 Store 的唯一 ID，Pinia 将用它来连接 store 和 devtools</p>
       <p>. 第二个参数接收 option 对象或 setup 函数；setup 函数和组合式 API 类似，且功能更灵活</p>
-      <div>导出仓库示例，以 use 开头且以 Store 结尾命名，如 useCounterStore</div>
+      <div>导出仓库示例(函数；需执行后才可以得到仓库实例)，以 use 开头且以 Store 结尾命名，如 useCounterStore</div>
       <pre>
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
@@ -108,9 +108,9 @@ const store = useCounterStore();
 console.log('store', store);</pre>
       <p>结构 - 渲染仓库数据；这里采用内联事件</p>
       <pre>
-        &lt;div&gt;{{ store.count }}&lt;/div&gt;
-        &lt;div&gt;{{ store.doubleCount }}&lt;/div&gt;
-        &lt;div @click="store.increment"&gt;store handle&lt;/div&gt;</pre>
+&lt;div&gt;{{ store.count }}&lt;/div&gt;
+&lt;div&gt;{{ store.doubleCount }}&lt;/div&gt;
+&lt;div @click="store.increment"&gt;store handle&lt;/div&gt;</pre>
       <p class="tips">仓库中的状态应指定初始值，否则其中的方法只有执行后才能拿到值</p>
     </dd>
     <dt>Warning</dt>
@@ -132,7 +132,6 @@ const { count } = storeToRefs(store);</pre>
     <div class="tips">
       <div>强烈建议通过复制计时器仓库 counter.js 并修改的方式创建新的仓库管理</div>
     </div>
-
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
