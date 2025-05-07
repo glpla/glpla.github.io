@@ -39,47 +39,6 @@ foreach(arr, (item) => {
   console.log(item);
 })</pre>
     </dd>
-    <dt><a
-        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter()</a>
-    </dt>
-    <dd>
-      <div>对数组中的每一项执行给定函数，返回执行结果为 true 的项组成的数组 - calls the predicate function one time for each element in the array
-      </div>
-      <div>返回：符合条件的新数组</div>
-      <div>原数组：不会被修改</div>
-      <pre>
-function filter(arr, fn) {
-  let res = []
-  for (let i = 0; i &lt; arr.length; i++) {
-    if (fn(arr[i])) {
-      res.push(arr[i])
-    }
-  }
-  return res;
-}</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 模糊查询</dd>
-    <dd>
-      <div>根据名字是否包含指定的关键字过滤结果</div>
-      <pre>goods.filter(item => item.name.includes(keyword))</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 获取偶数</dd>
-    <dd>
-      <pre>
-let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-let res = arr.filter(item => item % 2 === 0)</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 删除指定特征如 id 的数据项 - 购物车、歌单</dd>
-    <dd>
-      <pre>
-let data = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' }]
-let res = data.filter(item => item.id != 11)</pre>
-      <div>函数封装</div>
-      <pre>
-function delItem(dataItem) {
-  data = data.filter(item => item.id != dataItem.id)
-}</pre>
-    </dd>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map()</a>
     </dt>
     <dd>
@@ -179,12 +138,54 @@ let obj = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' 
 let flag = obj.some(item => item.name == 'sz')
 console.log(flag); // true     </pre>
     </dd>
+    <dt><a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">filter()</a>
+    </dt>
+    <dd>
+      <div>对数组中的每一项执行给定函数，返回执行结果为 true 的项组成的数组 - calls the predicate function one time for each element in the array
+      </div>
+      <div>返回：符合条件的新数组</div>
+      <div>原数组：不会被修改</div>
+      <pre>
+function filter(arr, fn) {
+  let res = []
+  for (let i = 0; i &lt; arr.length; i++) {
+    if (fn(arr[i])) {
+      res.push(arr[i])
+    }
+  }
+  return res;
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 模糊查询</dd>
+    <dd>
+      <div>根据名字是否包含指定的关键字过滤结果</div>
+      <pre>goods.filter(item => item.name.includes(keyword))</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 获取偶数</dd>
+    <dd>
+      <pre>
+let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+let res = arr.filter(item => item % 2 === 0)</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 删除指定特征如 id 的数据项 - 购物车、歌单</dd>
+    <dd>
+      <pre>
+let data = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' }]
+let res = data.filter(item => item.id != 11)</pre>
+      <div>函数封装</div>
+      <pre>
+function delItem(dataItem) {
+  data = data.filter(item => item.id != dataItem.id)
+}</pre>
+    </dd>
     <dt><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">find()</a>
     </dt>
     <dd>
-      <div>查找符合条件的 <span class="warn">第一个</span> 数据项</div>
-      <div>返回：查找到的数据，无则返回 undefined</div>
+      <div>查找满足提供的测试函数的 <span class="warn">第一个</span> 数据项</div>
+      <div>返回：查找到的数据项；若没有则返回 undefined</div>
       <div>原数组：不会被修改</div>
+      <div>如果有，则立即返回；不会再继续测试后面的数据项</div>
       <pre>
 let arr = [0, 1, 2, 3, 4, 5]
 let res = arr.find(item => item > 3)
@@ -207,6 +208,18 @@ if (existingItem) {
 } else {
   cart.push({ ...product, quantity: 1 })
 }</pre>
+    </dd>
+    <dt><a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex">findIndex()</a>
+    </dt>
+    <dd>
+      <div>返回数组中满足提供的测试函数的 <span class="warn">第一个</span> 元素的索引</div>
+      <div>返回：查找到的数据项的索引；若没有找到对应元素则返回 -1</div>
+      <div>原数组：不会被修改</div>
+      <div>如果有，则立即返回；不会再继续测试后面的数据项</div>
+    </dd>
+    <dd class="tips">
+      <div>filter 会遍历整个数组并返回所有匹配项；find 和 findIndex 在找到第一个匹配项后就会停止遍历，性能更优</div>
     </dd>
   </dl>
   <div id="footer"></div>
