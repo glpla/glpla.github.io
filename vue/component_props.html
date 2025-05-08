@@ -207,9 +207,9 @@ const isShowModal = ref(false);
 const switchModal = () => {
   isShowModal.value = !isShowModal.value
 }</pre>
-      <div>可以使用内联事件实现，避免额外声明事件处理函数</div>
+      <div>可以使用内联事件实现，避免额外声明事件处理函数；注意 <span class="warn">自定义事件内联事件</span> 的语法要求</div>
       <pre>
-&lt;Guarantee :show-guarantee="isShowModal = true"&gt;&lt;/Guarantee&gt;
+&lt;Guarantee :show-guarantee="() => isShowModal = true"&gt;&lt;/Guarantee&gt;
 &lt;div class="modal" v-show="isShowModal"&gt;&lt;/div&gt;</pre>
       <img src="./imgs/props.png" alt="">
       <div class="fig-sn">数据流</div>
