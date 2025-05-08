@@ -96,12 +96,14 @@ const callback = (e) => {
 &lt;/div&gt;</pre>
       <div>2. 父组件 DetailsView.vue</div>
       <div>引入并使用 权益保护组件 Guarantee.vue</div>
-      <div>指定响应自定义事件</div>
+      <div>指定响应自定义事件，设置 isShowModal 为真，显示模态框</div>
       <pre>&lt;Guarantee @show-guarantee="switchModal" /></pre>
       <pre>
 const switchModal = () => {
-  isShowModal.value = !isShowModal.value
+  isShowModal.value = true
 }</pre>
+      <div>简单逻辑，可以使用内联事件，直接赋值</div>
+      <pre>&lt;Guarantee @show-guarantee="isShowModal = true" /></pre>
       <div>3. 模态框组件 Modal.vue</div>
       <div>定义函数属性；同样可以使用自定义事件</div>
       <div>单击关闭按钮和背景都应该触发事件 switchModal</div>
@@ -118,10 +120,12 @@ const props = defineProps({
   }
 })</pre>
       <div>4. 父组件 DetailsView.vue</div>
-      <div>引入并使用 模态框组件 Modal.vue</div>
+      <div>引入并使用模态框组件 Modal.vue</div>
       <div>分配方法/函数属性</div>
       <div>指定条件渲染</div>
       <pre>&lt;Modal :close-guarantee="switchModal" v-show="isShowModal" /></pre>
+      <div>同样可以使用内联事件</div>
+      <pre>&lt;Modal :close-guarantee="isShowModal = false" v-show="isShowModal" /></pre>
       <img src="./imgs/emit.png" alt="">
       <div class="fig-sn">数据流</div>
     </dd>

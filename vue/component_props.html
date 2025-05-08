@@ -181,7 +181,7 @@ const props = defineProps({
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 商品详情页 DetailsView.vue 中模态框的设计 - 传递方法</dd>
     <dd>
-      <div>单击"详情"，执行父组件的业务逻辑，显示模态框</div>
+      <div>单击权益保护组件 Guarantee.vue 的"详情"按钮，执行父组件的业务逻辑，显示模态框</div>
       <div>这里模态框采用普通元素；后期封装为组件</div>
       <div>1. 权益保护组件 Guarantee.vue</div>
       <pre>
@@ -207,6 +207,10 @@ const isShowModal = ref(false);
 const switchModal = () => {
   isShowModal.value = !isShowModal.value
 }</pre>
+      <div>可以使用内联事件实现，避免额外声明事件处理函数</div>
+      <pre>
+&lt;Guarantee :show-guarantee="isShowModal = true"&gt;&lt;/Guarantee&gt;
+&lt;div class="modal" v-show="isShowModal"&gt;&lt;/div&gt;</pre>
       <img src="./imgs/props.png" alt="">
       <div class="fig-sn">数据流</div>
     </dd>
