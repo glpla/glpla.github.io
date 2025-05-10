@@ -21,7 +21,7 @@
     <div class="cont">购物车</div>
     <div class="title">实验目的</div>
     <div class="cont">
-      <div>掌握侦听器 Watch 的基本使用</div>
+      <div>掌握侦听器 Watch 和自动侦听器 watchEffect 的基本使用</div>
       <div>熟悉生命周期函数 Lifecycle 的不同阶段和使用</div>
       <div>进一步理解 Vue 的响应式数据</div>
       <div>进一步熟悉事件 Event 和事件修饰符 Modifier 的使用</div>
@@ -31,95 +31,66 @@
       <div>数据的加载和渲染</div>
       <div>商品数量的增加和减少</div>
       <div>使用侦听处理业务</div>
-      <p>.全选</p>
-      <p>.部分选择</p>
-      <p>.结算</p>
-      <div>排序*：商品名称、价格、库存等字段的升序、降序</div>
+      <p>. 全选</p>
+      <p>. 部分选择</p>
+      <p>. 结算</p>
     </div>
     <div id="drill"></div>
     <div class="title">参考效果和参考代码</div>
     <div class="cont">
-      <div>静态页面设计与开发</div>
-      <div>准备数据</div>
-      <p>.仓库数据 cartStore，其中 cart 是购物车数据；数组</p>
-      <p>.选中数据 selectedGoods；数组</p>
-      <p>.是否全选 isSelectAll，布尔；默认是真，全选</p>
-      <p>.商品价格总数 sum</p>
-      <p>.商品数量总数 count</p>
+      <div>静态页面设计与实现</div>
+      <div>数据设计</div>
+      <p>. 待选商品 goods：数组；本地数据或使用 fetch 或 axios加载远程数据</p>
+      <p>. 选中商品 selectedGoods；数组</p>
+      <p>. 是否全选 isAll，布尔；默认是真，全选</p>
+      <p>. 商品价格总数 sum；数值</p>
+      <p>. 商品数量总数 count；数值</p>
       <pre>
-const cartStore = useCartStore()
-const selectedGoods = ref([...cartStore.cart])
-const isSelectAll = ref(true)
+const goods = ref([])
+const selectedGoods = ref([...goods])
+const isAll = ref(true)
 const sum = ref(0)
-const count = ref(0)
-let flag = true</pre>
-      <div>加载仓库数据</div>
-      <p>.使用 fetch 或 axios</p>
-      <p>.非必要</p>
+const count = ref(0)</pre>
       <div>渲染数据</div>
-      <div>单个商品的增加和减少</div>
-      <p>.分别为增、减按钮绑定事件：增加数量 inc(item) 和减少数量 dec(item)，并使用当前商品为形参，修改其数量 number</p>
-      <p>.注意越界检测</p>
-      <p>.可以使用内联事件方式</p>
-      <pre>&lt;button class="btn dec" @click="item.quantity--"&gt;-&lt;/button&gt;</pre>
-      <p>.使用函数方式 - 这里使用库存限制*</p>
+      <p>. 列表渲染多个商品项</p>
+      <div>商品的选择侦听</div>
+      <p>. 每个商品项的选择和 selectedGoods 使用双向绑定</p>
+      <p>. 侦听 selectedGoods：如果选中列表长度和商品列表长度相等，则全选为真；否则全选为假</p>
       <pre>
-const inc = (item) => {
-  if (item.quantity &lt; item.stock) {
-    item.quantity++
-  }
-}
-
-const dec = (item) => {
-  if (item.quantity > 1) {
-    item.quantity--
-  }
-}</pre>
-      <div>结算侦听</div>
-      <p>.选择列表商品的数量的变化，更新总价；使用函数返回方式</p>
-      <p>.深度侦听：数量是对象的一个属性</p>
-      <p>.立即侦听：页面渲染完毕也应该结算异常</p>
+&lt;div v-for="(item, ind) in goods">
+  &lt;input type="checkbox" name="cart" v-model="selectedGoods" :value="item"&gt;
+&lt;/div></pre>
       <pre>
 watch(selectedGoods, (newVal) => {
-  sum.value = selectedGoods.value.reduce((total, item) => total + item.price * item.quantity, 0)
-}, { deep: true, immediate: true })</pre>
-      <p>.当选中商品的种类数量等于待选商品种类的数量时，应为全选；修改上述逻辑</p>
-      <pre>
-watch(selectedGoods, () => {
-  // select all
-  if (selectedGoods.value.length === cartStore.cart.length) {
-    isSelectAll.value = true
-  } else {
-    isSelectAll.value = false
-  }
-  // count sum
-  sum.value = selectedGoods.value.reduce((total, item) => total + item.price * item.quantity, 0)
-}, { deep: true, immediate: true })      </pre>
-      <p>.引入 flag 辅助判断；默认是真；初值也可以为假，后面的逻辑判断相应调整即可</p>
-      <div>全选侦听 - selectedAll</div>
-      <p>.侦听购物车数据 cartData 中的全选 selectedAll；使用函数返回方式</p>
-      <p>.只有 flag 为真时，才真正置空购物车数据；利用 flag 保留选中的部分数据</p>
-      <pre>
-watch(() => cartData.selectedAll, (newVal) => {
-  if (newVal) {
-    cartData.selectedLists = [...cartData.lists]
-  } else {
-    if (flag) cartData.selectedLists = []
-  }
+  isAll.value = newVal.length == goods.length
+  
+  // 总价结算 sum
+  
+  // 数量结算 count
 })</pre>
-      <div>单选侦听</div>
-      <p>.侦听购物车数据 cartData 商品选中列表 selectedLists；使用函数返回方式</p>
-      <p>.如果选中列表长度和商品列表长度相等，则全选为真，同时置 flag 为真；否则全为假</p>
+      <div>商品的数量</div>
+      <p>. 单击商品项的增加和减少按钮相应的调整其数量；并根据库存进行越界检测</p>
+      <p>. 这里使用内联事件方式；也可以使用函数方式</p>
+      <pre>&lt;button class="btn" @click="item.quantity--" :disabled="cart.quantity == 1"&gt;-&lt;/button&gt;</pre>
+      <pre>&lt;button class="btn" @click="item.quantity++" :disabled="cart.quantity >= cart.stock"&gt;+&lt;/button&gt;</pre>
+      <div>全选侦听</div>
+      <p>. 双向绑定 isAll</p>
+      <p>. 使用改变事件，判断是全选还是全不选</p>
+      <pre>&lt;input type="checkbox" name="all" v-model="isAll" @change="setAll"/&gt;all</pre>
       <pre>
-watch(() => cartData.selectedLists, (newVal) => {
-  if (newVal.length == cartData.lists.length && cartData.lists.length) {
-    cartData.selectedAll = true
-    flag = true
+const setAll = () => {
+  if (isAll.value) {
+    selectedGoods.value = [...goods]
   } else {
-    cartData.selectedAll = false
-    flag = false
+    selectedGoods.value = []
   }
-})</pre>
+}</pre>
+      <div>总价结算</div>
+      <p>. 修改侦听为深度侦听和立即侦听：便于页面渲染完毕时立即更新数据</p>
+      <p>. 或使用自动侦听 watchEffect</p>
+      <pre>sum.value = selectedGoods.value.reduce((total, item) => total + item.quantity * item.price * (1 - item.discount), 0)</pre>
+      <div>数量结算</div>
+      <pre>count.value = selectedGoods.value.reduce((total, item) => total + item.quantity, 0)</pre>
       <figure>
         <img src="./imgs/watch0.png" alt="">
         <figcaption>购物车静态页面</figcaption>
@@ -139,10 +110,9 @@ watch(() => cartData.selectedLists, (newVal) => {
     </div>
     <div class="title">拓展与思考</div>
     <div class="cont">
-      <div>使用普通方法实现全选、部分选择和结算</div>
-      <div>为项目增加删除功能；删除时，不仅要删除商品列表 lists 的数据；还要删除选中商品列表 selectedLists 的数据；另外，如果商品列表为空，还要注意全选标记是否正常</div>
-      <div>体会 watch 和表单的 change 事件有何异同</div>
-      <div>使用 Axios 处理数据*</div>
+      <div>封装商品项为组件</div>
+      <div>使用 Axios 处理数据</div>
+      <div>增加排序：商品名称、价格、库存等字段的升序、降序</div>
       <div>保存/推送项目到自己的代码仓库*</div>
     </div>
     <div id="footer"></div>
