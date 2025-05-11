@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>数组 Array</title>
   <link rel="stylesheet" href="../../css/common.css">
-
   <base target="_blank">
 </head>
 
@@ -78,6 +77,31 @@ let [a, ...rest] = [1, 2, 3, 4, 5]
     <!-- <dd>设置长度为0：arr.length = 0</dd> -->
     <!-- <dd>使用splice删除数组元素：arr.splice(0, len)</dd> -->
     <!-- <dd>指向空数组：arr = []</dd> -->
+    <dd>[<span class="iconfont icon-keyboard"></span>] 直接赋值和解构赋值对数据的影响</dd>
+    <dd>
+      <div>1. 基本数据类型</div>
+      <pre>
+let a0 = [1, 2, 3]
+// 直接赋值；会彼此影响
+let a1 = a0
+a0.push(4)
+// 解构赋值：相当于重新赋值；不会彼此影响
+let a2 = [...a0]
+a2.push(5)
+console.log(a0, a1, a2);</pre>
+      <div>2. 引用数据类型</div>
+      <div>结论同上</div>
+      <pre>
+let obj0 = [{ id: 1, name: '张三' }, { id: 2, name: '李四' }, { id: 3, name: '王五' }]
+console.log(obj0);
+let obj1 = obj0
+obj0.push({ id: 4, name: '赵六' })
+let obj2 = [...obj0]
+obj0.push({ id: 5, name: '老郭' })
+obj2.push({ id: 5, name: '孙七' })
+console.log(obj0, obj1, obj2);
+      </pre>
+    </dd>
   </dl>
   <div class="chap">Static methods</div>
   <dl>
@@ -193,6 +217,17 @@ function shuffle(arr) {
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
+  <script>
+    let obj0 = [{ id: 1, name: '张三' }, { id: 2, name: '李四' }, { id: 3, name: '王五' }]
+    console.log(obj0);
+    let obj1 = obj0
+    obj0.push({ id: 4, name: '赵六' })
+    let obj2 = [...obj0]
+    obj0.push({ id: 5, name: '老郭' })
+    obj2.push({ id: 5, name: '孙七' })
+    console.log(obj0, obj1, obj2);
+
+  </script>
 </body>
 
 </html>

@@ -36,11 +36,11 @@
       <p>. 分页获取商品* getGoodsByPage()</p>
       <p>. 其它业务*</p>
       <div>购物车仓库 cart.js</div>
-      <p>. 购物车数据 cart</p>
-      <P>. 获取购物车数据 getCart()</P>
-      <p>. 添加到购物车 addToCart()</p>
-      <p>. 从购物车中删除 removeFromCart()</p>
-      <p>. 清空购物车 clearCart()</p>
+      <p>. 购物车数据 carts</p>
+      <P>. 获取购物车数据 getCarts()</P>
+      <p>. 添加到购物车 addToCarts()</p>
+      <p>. 清空购物车 clearCarts()</p>
+      <p>. 从购物车中删除* removeFromCart()</p>
       <p>. 其它业务*</p>
       <div>主题切换/换肤* theme.js</div>
       <div>汉堡菜单* ham.js</div>
@@ -49,95 +49,7 @@
     </div>
     <div id="drill"></div>
     <div class="title">参考效果和参考代码</div>
-    <div class="cont">
-      <div>商品仓库 goods.js</div>
-      <p>. 在仓库目录 stores 创建商品仓库 goods.js</p>
-      <pre>
-import { ref, computed } from "vue";
-import { defineStore } from "pinia";
-
-export const useGoodsStore = defineStore("goods", () => {
-  const goods = ref([]);
-  const good = ref({});
-
-  const getGoods = async () => {
-    // 获取商品数据；方法来源可自定；这里以大树小站数据
-    let res = await fetch("https://glpla.github.io/utils/data/coffee.json")
-    let json = await res.json()
-    // 更新状态
-    goods.value = json.cont;
-    // 显式返回结果，便于组件使用
-    return json.cont;
-  };
-
-  const getGoodById = async (id) => {
-    // 如果第一次使用仓库，则先获取商品数据
-    if (goods.value.length === 0) {
-      await getGoods();
-    }
-    // 注意 === 的限制；如果定义的id是普通数值0，则可能匹配失败，因为所有的参数都是字符串类型；'0' === 0，为假
-    let res = goods.value.find((good) => good.id == id);
-    // 更新状态
-    good.value = res;
-    // 显式返回结果，便于组件使用
-    return res;
-  };
-
-  return { goods, good, getGoods, getGoodById };
-});</pre>
-      <div>购物车仓库 cart.js</div>
-      <p>. 在仓库目录 stores 创建购物车仓库 cart.js</p>
-      <!-- <pre>
-import { ref } from "vue";
-import { defineStore } from "pinia";
-
-export const useCartStore = defineStore("cart", () => {
-  const cart = ref([]);
-
-  const addToCart = (product) => {
-    // 直接添加到购物车，增加数量字段，默认为1
-    // const existingItem = cart.value.find((item) => item.id === product.id);
-    // if (existingItem) {
-    //   existingItem.quantity++;
-    //   console.log("++");
-    // } else {
-    //   cart.value.push({ ...product, quantity: 1 });
-    //   console.log("1");
-    // }
-
-    // 从详情页添加到购物车，数据已经进行了预处理，数量默认为1
-    const res = cart.value.filter((item) => item.id === product.id)[0];
-    if (res) {
-      res.quantity += product.quantity;
-    } else {
-      cart.value.push({ ...product });
-    }
-  };
-
-  const removeFromCart = (id) => {
-    cart.value = cart.value.filter((item) => item.id !== id);
-  };
-
-  const getCart = async () => {
-    let response = await fetch("../data/cart.json");
-    let data = await response.json();
-    cart.value = data;
-  };
-
-  const clearCart = () => {
-    cart.value = [];
-  };
-
-  return {
-    cart,
-    addToCart,
-    removeFromCart,
-    getCart,
-    clearCart,
-  };
-});</pre> -->
-      <div>其它仓库</div>
-    </div>
+    <div class="cont">略</div>
     <div class="title">拓展与思考</div>
     <div class="cont">
       <div>库存调整：商品数量变化的同时，相应的调整库存</div>
