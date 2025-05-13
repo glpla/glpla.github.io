@@ -114,6 +114,26 @@ const clearCarts = () => {
       <div>5. 从购物车移除* deleteFromToCarts(product)</div>
     </dd>
     <dt>订单仓库 order.js</dt>
+    <dd>
+      <div>单击结算时，创建订单</div>
+      <div>1. 订单商品 orders</div>
+      <div>2. 订单总价 sum</div>
+      <pre>
+const sum = computed(() => {
+  return orders.value.reduce(
+    (total, item) => total + item.quantity * item.price * (1 - item.discount),
+    0
+  );
+});</pre>
+      <div>3. 订单折扣 discount</div>
+      <pre>
+const discount = computed(() => {
+  return orders.value.reduce(
+    (total, item) => total + item.quantity * item.price * item.discount,
+    0
+  );
+});</pre>
+    </dd>
     <dt>其它仓库</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 点赞仓库</dd>
     <dd>
