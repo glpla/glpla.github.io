@@ -25,7 +25,7 @@
       <div>单独安装路由依赖并引入，比较麻烦，不推荐</div>
       <div>1. 安装路由 - 为项目添加安装依赖</div>
       <pre>npm i vue-router -S</pre>
-      <div>2. 引入路由 - 在入口文件 main.js 中引入路由，作为中间件使用；这里引入后，路由将作为全局组件，其它组件可以直接使用</div>
+      <div>2. 引入路由 - 在入口文件 main.js 中引入路由，作为中间件使用；这里引入后，路由将作为 <a href="./component.html#global">全局组件</a>，其它组件可以直接使用</div>
       <pre>
 //引入
 import router from './router'
@@ -171,7 +171,8 @@ const router = createRouter({
   component: () => import('@/views/DetailsView.vue'),
 }</pre>
         <pre>https://localhost:5173/details?id=1001</pre>
-        <div>1.4 异常路由 <a href="https://router.vuejs.org/guide/essentials/history-mode.html">Caveat</a> - 处理路由目标异常的情况，如
+        <div>1.4 异常路由 <a href="https://router.vuejs.org/guide/essentials/history-mode.html#Caveat">Caveat</a> -
+          处理路由目标异常的情况，如
           404，页面丢失</div>
         <div>404 路由：使用自定义的路径参数|正则表达式匹配其它任意路径；通常是<span class="warn">最后一个</span>路由配置项</div>
         <pre>
