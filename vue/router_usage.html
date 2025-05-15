@@ -24,8 +24,8 @@
     </dd>
     <dt>导航分类</dt>
     <dd class="sn">
-      <div>声明式导航：使用 &lt;RouterLink&gt; 通过指定 <a href="https://router.vuejs.org/api/interfaces/RouterLinkProps.html">路由属性
-          RouterLinkProps</a> 实现</div>
+      <div>声明式导航：使用内置组件 &lt;RouterLink&gt;，通过配置 <a href="https://router.vuejs.org/api/">Router API</a> 的 <a
+          href="https://router.vuejs.org/api/interfaces/RouterLinkProps.html">路由属性 RouterLinkProps</a> 实现</div>
       <div><a href="./userouter.html">编程式导航</a>：使用 vue-router 的组合函数 <a
           href="https://router.vuejs.org/zh/api/#Functions-useRoute">useRouter()</a> 实现</div>
     </dd>
@@ -52,24 +52,25 @@
             </td>
           </tr>
           <tr>
-            <td>replace</td>
+            <td>replace?</td>
             <td>默认是 push 模式，浏览器可以回退
               <br>使用 replace 属性可以防止浏览器回退
             </td>
           </tr>
           <tr>
-            <td>activeClass</td>
+            <td>activeClass?</td>
             <td>链接在匹配当前路由时被应用到 class
             </td>
           </tr>
           <tr>
-            <td>exactActiveClass</td>
+            <td>exactActiveClass?</td>
             <td>链接在严格匹配当前路由时被应用到 class
               <br>多用于嵌套路由中
             </td>
           </tr>
         </tbody>
       </table>
+      <div class="tips">? 表示可选属性；下同</div>
     </dd>
     <dt>1. 普通路由</dt>
     <dd>
@@ -121,7 +122,8 @@
       <div>用于显示用户当前所处路由的组件</div>
       <div>全局组件；不需要在组件模板中导入</div>
       <div>路由目标占位符</div>
-      <div>借助系统组件 &lt;RouterView&gt; 显示与 URL 对应的组件|路由出口 - where to render the current route component</div>
+      <div>借助系统组件 <a href="https://router.vuejs.org/zh/api/#Variables-RouterView">&lt;RouterView&gt;</a> 显示与 URL
+        对应的组件|路由出口 - where to render the current route component</div>
       <div>有 &lt;RouterLink&gt; 路由，则必须有 &lt;RouterView&gt; 路由出口</div>
       <div>还可以像缓存组件那样，缓存 &lt;RouterView&gt;，见后例</div>
       <div>1. 单 &lt;RouterView&gt;</div>

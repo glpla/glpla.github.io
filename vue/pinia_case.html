@@ -96,6 +96,7 @@ const addToCarts = () => {
       <div>3.2 仓库端</div>
       <div>. 仓库 - 如果商品不存在，则为当前商品添加新的 id 作为对应的购物车数据项的 id，该 id 会覆盖商品的 id；如果商品数据项已经存在，则数量相应的增加</div>
       <div>. 其它业务：库存调整，需要使用商品仓库 goods.js - 也可以放在订单中处理，库存才真正变化</div>
+      <div>. 这里使用第三方库 <a href="https://www.npmjs.com/package/nanoid">NPM - Nanoid</a> 生成随机 id</div>
       <pre>
 const addToCarts = (product) => {
   const existingItem = carts.value.find((item) => item.productId === product.productId);
@@ -103,7 +104,11 @@ const addToCarts = (product) => {
     existingItem.quantity += product.quantity;
   } else {
     // replace id with nanoid
-    carts.value.push({ ...product, id: nanoid() });
+    carts.value.push({ 
+      ...product, 
+      id: nanoid(), 
+      create_time: Date.now()
+    });
   }
 };</pre>
       <div>4. 清空购物车 clearCarts()</div>
@@ -115,9 +120,10 @@ const clearCarts = () => {
     </dd>
     <dt>订单仓库 order.js</dt>
     <dd>
-      <div>单击结算时，创建订单</div>
-      <div>1. 订单商品 orders</div>
-      <div>2. 订单总价 sum</div>
+      <div>单击结算时，创建临时订单；订单支付成功，创建订单</div>
+      <div>1. 订单 orders</div>
+      <div>2. 临时订单 tempOrders</div>
+      <div>3. 订单总价 sum</div>
       <pre>
 const sum = computed(() => {
   return orders.value.reduce(
@@ -125,7 +131,7 @@ const sum = computed(() => {
     0
   );
 });</pre>
-      <div>3. 订单折扣 discount</div>
+      <div>4. 订单折扣 discount</div>
       <pre>
 const discount = computed(() => {
   return orders.value.reduce(
