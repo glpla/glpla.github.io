@@ -47,12 +47,14 @@ const props = defineProps(['propMsg', 'propId'])
       </div>
       <pre>
 const props = defineProps({
-    propMsg: String,
-    propId: {
-      type: Number,
-      required: false,
-      default: 18
-    }
+  // 简洁声明
+  propMsg: String,
+  // 详细声明
+  propId: {
+    type: Number,
+    required: false,
+    default: 18
+  }
 })
 </pre>
       <div>2. 使用传递来的参数|数据</div>
@@ -114,8 +116,13 @@ let msg = ref('hi,there')</pre>
         <div>子组件：定义/声明以便使用夫组件的方法</div>
         <pre>
 const props = defineProps({
+  // 简洁声明
   closeFn: Function,
-  confirmFn: Function
+  // 详细声明
+  confirmFn: {
+    type: Function,
+    default: () => {}
+  }
 })</pre>
         <pre>
 &lt;button @click="closeFn"&gt;&times;&lt;/button&gt;
@@ -179,9 +186,10 @@ const props = defineProps({
   }
 })</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 商品详情页 DetailsView.vue 中模态框的设计 - 传递方法</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 详情页 DetailsView.vue → 权益保护模态框组件 Modal.vue；使用自定义属性 defineProps()
+      实现</dd>
     <dd>
-      <div>单击权益保护组件 Guarantee.vue 的"详情"按钮，执行父组件的业务逻辑，显示模态框</div>
+      <div>单击权益保护组件 Guarantee.vue 的"详情"按钮，执行父组件的业务逻辑方法，显示模态框</div>
       <div>这里模态框采用普通元素；后期封装为组件</div>
       <div>1. 权益保护组件 Guarantee.vue</div>
       <pre>

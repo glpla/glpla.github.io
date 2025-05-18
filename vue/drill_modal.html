@@ -45,17 +45,11 @@
     <div class="title">参考效果和参考代码</div>
     <div>第一阶段 静态模态框</div>
     <div class="cont">
-      <div>模态框组件 - 创建模态框组件 Tips.vue - 在视口右上角展示一条静态数据；利用属性 flag 控制模态框的显示和隐藏</div>
+      <div>模态框组件 - 创建模态框组件 Tips.vue</div>
+      <p>. 在视口右上角展示一条静态数据</p>
+      <!-- <pre>const props = defineProps({ tips: String })</pre>
+      <pre>&lt;div class="tips" v-if="flag"&gt;hi, there.&lt;/div&gt;</pre>
       <pre>
-&lt;script setup&gt;
-const props = defineProps({ tips: String })
-&lt;/script&gt;
-
-&lt;template&gt;
-  &lt;div class="tips" v-if="flag"&gt;hi, there.&lt;/div&gt;
-&lt;/template&gt;
-
-&lt;style scoped&gt;
 .tips {
   position: fixed;
   top: 20px;
@@ -67,38 +61,34 @@ const props = defineProps({ tips: String })
   border-radius: 8px;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 99;
-}
-&lt;/style&gt;</pre>
-      <div>父组件 - 引入模态框组件</div>
-      <pre>import Tips from './components/Tips.vue';</pre>
-      <p>. 使用响应式数据 isOpenModal 控制其显示和隐藏：真，则显示，否则关闭</p>
-      <pre>let isOpenModal = ref(false)</pre>
-      <p>. 使用侦听</p>
-      <pre>
+}</pre> -->
+      <div>父组件</div>
+      <p>. 引入模态框组件并条件渲染</p>
+      <p>. 使用响应式数据 isOpenModal 控制其显示和隐藏：真，则显示，否则隐藏/关闭</p>
+      <p>. 使用延时隐藏模态框组件；如何节流?</p>
+      <!-- <pre>
+import Tips from './components/Tips.vue';
+const isOpenModal = ref(false)
+        
 watch(isModalOpen, (newval, oldval) => {
-    if (newval) {
-        setTimeout(() => {
-        isModalOpen.value = false
-        }, 3000);
-    }
-})</pre>
-      <p>. 使用延时</p>
-      <pre>
+  if (newval) {
+    setTimeout(() => {
+      isModalOpen.value = false
+    }, 3000);
+  }
+})
+
 const OpenModal = () => {
   isOpenModal.value = true
   setTimeout(() => {
     isOpenModal.value = false;
   }, 3000);
-}
-</pre>
-      <p>. 使用鼠标单击事件 - 略</p>
-      <p>. 结构使用</p>
-      <pre>
-&lt;template&gt;
+}</pre> -->
+      <!-- <p>. 使用鼠标单击事件</p> -->
+      <!-- <pre>
   &lt;Tips :flag="isOpenModal"&gt;&lt;/Tips&gt;
-  &lt;button @click="OpenModal"&gt;click to open modal&lt;/button&gt;
-&lt;/template&gt;</pre>
-      <figure class="img-sn">
+  &lt;button @click="OpenModal"&gt;click to open modal&lt;/button&gt;</pre> -->
+      <!-- <figure class="img-sn">
         <img src="./imgs/modal1.png" alt="">
         <figcaption>默认隐藏模态框</figcaption>
       </figure>
@@ -109,20 +99,20 @@ const OpenModal = () => {
       <figure class="img-sn">
         <img src="./imgs/modal1.png" alt="">
         <figcaption>3秒后自动隐藏模态框</figcaption>
-      </figure>
+      </figure> -->
     </div>
     <div>第二阶段 传递参数</div>
     <div>根据不同的情况传递不同的提示信息</div>
     <div class="cont">
-      <div>模态框组件 - 增加一个属性 tips，取代静态文本；也可以增加一个普通属性，通过暴露接口 defineExpose 暴露出去给父组件使用</div>
-      <pre>const props = defineProps({ tips: String, flag: Boolean })</pre>
+      <div>模态框组件 - 定义一个属性 tips，取代静态文本</div>
+      <!-- <pre>const props = defineProps({ tips: String, flag: Boolean })</pre> -->
       <!-- <pre>
 import { ref } from 'vue';
 let tips = ref('')
 defineExpose({ tips })</pre> -->
-      <pre>&lt;div class="tips" v-if="flag"&gt;{{ tips }}&lt;/div&gt;</pre>
-      <div>父组件 - 声明数据并传递；同时在打开方法中传递；方便起见，封装为函数 showTips</div>
-      <pre>
+      <!-- <pre>&lt;div class="tips" v-if="flag"&gt;{{ tips }}&lt;/div&gt;</pre> -->
+      <div>父组件 - 声明数据并传递；同时在打开方法中传递数据给模态框组件属性 msg</div>
+      <!-- <pre>
 let tips = ref('')
 const OpenModal = () => {
   showTips('msg here')
@@ -134,14 +124,13 @@ const showTips = (msg) => {
   setTimeout(() => {
     isOpenModal.value = false;
   }, 3000);
-}</pre>
-      <pre>&lt;Tips :flag="isOpenModal" :tips="tips"&gt;&lt;/Tips&gt;</pre>
+}</pre> -->
+      <!-- <pre>&lt;Tips :flag="isOpenModal" :tips="tips"&gt;&lt;/Tips&gt;</pre> -->
     </div>
     <div>第三阶段 过渡模态框</div>
     <div class="cont">
-      <div>使用过渡组件包裹模态框 <span class="warn">根元素</span> 并指定 name 为 modal-fade，添加淡入淡出过渡效果</div>
-      <p>过渡、延时等既可以在父组件中使用过，也可以在模态框组件使用；在哪里使用要结合每个组件的具体情况；如果其中一个组件也用到了类似的设计，那么就应该在该组件中使用，避免重复设计</p>
-      <pre>
+      <p>. 使用过渡组件包裹模态框 <span class="warn">根元素</span> 并指定 name 为 modal-fade，设计对应的 CSS 样式，实现淡入淡出过渡效果</p>
+      <!-- <pre>
   &lt;transition name="modal-fade"&gt;
     //
   &lt;/transition&gt;</pre>
@@ -154,37 +143,40 @@ const showTips = (msg) => {
 .modal-fade-enter-from,
 .modal-fade-leave-to {
   opacity: 0;
-}</pre>
+}</pre> -->
     </div>
-    <div>第四阶段 改进模态框</div>
+    <!-- <div>第四阶段 改进模态框</div>
     <div class="cont">
       <div>使用特定的字体图标，增加用户体验，如感叹号、警告等</div>
-      <div>手动关闭 - 增加关闭按钮，单击时，关闭模态框；关闭按钮定位在模态框右上角；通过 defineEmits 触发自定义事件实现</div>
-      <!-- <p>子组件暴露自定义事件</p>
-        <pre>
+      <div>手动关闭 - 增加关闭按钮，单击时，关闭模态框；关闭按钮定位在模态框右上角</div>
+      <p>子组件暴露自定义事件</p>
+      <pre>
 const emits = defineEmits(['emitClose'])
 const closeModal = () => {
   emits('emitClose')
 }</pre>
-        <p>父组件 - 响应模态框的自定义事件</p>
-        <pre>&lt;Tips v-if="isOpenModal" @emit-close="closeModal"&gt;&lt;/Tips&gt;</pre>
-        <pre>
+      <p>父组件 - 响应模态框的自定义事件</p>
+      <pre>&lt;Tips v-if="isOpenModal" @emit-close="closeModal"&gt;&lt;/Tips&gt;</pre>
+      <pre>
 const closeModal = () => {
   isOpenModal.value = false
 }        </pre>
-        <figure class="img-sn">
-          <img src="./imgs/modal2.png" alt="">
-          <figcaption>带关闭按钮的模态框</figcaption>
-        </figure> -->
+      <figure class="img-sn">
+        <img src="./imgs/modal2.png" alt="">
+        <figcaption>带关闭按钮的模态框</figcaption>
+      </figure>
       <div>增加动态标题 title，如针对密码修改、图片上传等场景的提示</div>
-      <div>指定位置 position：水平垂直居中、左上角、右上角、底部居中、顶部居中等 - 略</div>
+      <div>指定位置 position：水平垂直居中、左上角、右上角、底部居中、顶部居中等等</div>
       <div>其它设计</div>
-    </div>
+    </div> -->
     <div class="title">拓展与思考</div>
     <div class="cont">
-      <div>手动关闭模态框</div>
-      <div>多次互不冲突的触发模态框依次显示</div>
+      <div>使用特定的字体图标，增加用户体验，如感叹号、警告等</div>
+      <div>手动关闭 - 增加关闭按钮，单击时，关闭模态框；关闭按钮定位在模态框右上角</div>
+      <div>增加动态标题 title，如针对密码修改、图片上传等场景的提示</div>
+      <div>指定位置 position：水平垂直居中、左上角、右上角、底部居中、顶部居中等等</div>
       <div>侦听仓库的加载</div>
+      <div>其它设计</div>
       <!-- <pre>
 watch(() => goodStore.isLoading, (newVal, oldVal) => {
   console.log(newVal);
