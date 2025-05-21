@@ -64,9 +64,43 @@
   </dl>
   <div class="chap">Homework</div>
   <dl>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 缓存组件，避免重复加载数据</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./component_dynamic.html#tabcard">标签页组件</a> - 动态组件缓存版
+    </dd>
     <dd>
-      <div>方案1：使用前先判断</div>
+      <div>修改第一种方案的结构为</div>
+      <pre>
+&lt;span v-for="(item, ind) in com" @click="index = ind"&gt;{{ item.tag }}&lt;/span&gt;
+&lt;KeepAlive&gt;
+  &lt;component :is="com[index].component"&gt;&lt;/component&gt;
+&lt;/KeepAlive&gt;</pre>
+      <div>增加3个钩子，当标签页切换时，查看组件的加载和激活状态；如</div>
+      <pre>
+onMounted(() => {
+  console.log('coffee onMounted');
+
+})
+onActivated(() => {
+  console.log('coffee onActivated');
+
+})
+onDeactivated(() => {
+  console.log('coffee onDeactivated');
+
+})</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 路由缓存 - 不是简单的使用缓存组件包裹，而应该使用动态组件实现</dd>
+    <dd>
+      <div>v-slot="{ Component }" 是 Vue 3 中用于接收 <a href="./component_slots.html#vslot">作用域插槽 scoped slot</a> 传递数据的语法：从
+        &lt;RouterView&gt; 接收当前激活的路由组件</div>
+      <pre>
+&lt;RouterView v-slot="{ Component }"&gt;
+  &lt;Transition&gt;
+    &lt;KeepAlive&gt;
+      &lt;component :is="Component" /&gt;
+    &lt;/KeepAlive&gt;
+  &lt;/Transition&gt;
+&lt;/RouterView&gt;</pre>
+      <div>其它方案：使用前先判断</div>
       <div>父组件</div>
       <pre>
 &lt;div class="father"&gt;
@@ -83,20 +117,6 @@ onMounted(async () => {
     goods.value = goodsStore.goods;
   }
 })</pre>
-      <div>方案2：</div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 模拟用户个人中心的标签页，并查看各组件的生命周期函数；详情请参考 <a
-        href="./drill_component.html">实操 - 组件综合运用 - 标签页</a></dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 路由缓存 - 不是简单的使用缓存组件包裹，而应该使用动态组件实现</dd>
-    <dd>
-      <pre>
-&lt;RouterView v-slot="{ Component }"&gt;
-  &lt;Transition&gt;
-    &lt;KeepAlive&gt;
-      &lt;component :is="Component" /&gt;
-    &lt;/KeepAlive&gt;
-  &lt;/Transition&gt;
-&lt;/RouterView&gt;</pre>
     </dd>
   </dl>
   <div id="footer"></div>

@@ -39,9 +39,22 @@ import Team from './components/Team.vue';</pre>
 &lt;component v-if="flag" :is="Work">&lt;/component&gt;
 &lt;component v-else :is="Team"&gt;&lt;/component&gt;</pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 标签页组件 Tabcard.vue - 动态组件版</dd>
+    <dd id="tabcard">[<span class="iconfont icon-keyboard"></span>] 标签页组件 Tabcard.vue - 动态组件版</dd>
     <dd>
-      <div>方案1：定义为数组；根据索引 index 访问组件</div>
+      <div>方案1：定义为静态数组；根据索引 index 访问组件</div>
+      <pre>
+const index = ref(0)
+const com = [{
+  tag: '随享瑞幸',
+  component: TabGoods
+}, {
+  tag: '颜值水杯',
+  component: TabCup
+}]</pre>
+      <pre>
+&lt;span v-for="(item, ind) in com" @click="index = ind"&gt;{{ item.tag }}&lt;/span&gt;
+&lt;component :is="com[index].component"&gt;&lt;/component&gt;</pre>
+      <div>方案2：定义为响应式数组；根据索引 index 访问组件</div>
       <div>为了避免性能上的消耗，使用 <a href="https://cn.vuejs.org/api/reactivity-advanced.html#shallowref">浅响应 shallowRef</a>
         创建组件对象数组</div>
       <div>浅响应 shallowRef 创建一个浅响应式对象，数据的深层改变不会触发视图更新，减少性能上的消耗；并不对其中的数据进行响应，仅仅对对象的名字响应</div>
@@ -50,8 +63,8 @@ import { ref, shallowRef } from 'vue'
 import TabGoods from '@/components/TabGoods.vue'
 import TabCup from '@/components/TabCup.vue'
 
-let index = ref(0)
-let com = shallowRef([{
+const index = ref(0)
+const com = shallowRef([{
   tag: '随享瑞幸',
   component: TabGoods
 }, {
@@ -61,7 +74,7 @@ let com = shallowRef([{
       <pre>
 &lt;span v-for="(item, ind) in com" @click="index = ind"&gt;{{ item.tag }}&lt;/span&gt;
 &lt;component :is="com[index].component"&gt;&lt;/component&gt;</pre>
-      <div>方案2：定义为对象；<a href="./vfor.html">遍历对象</a>，根据 key 访问组件；相对简洁</div>
+      <div>方案3：定义为静态对象；<a href="./vfor.html">遍历对象</a>，根据 key 访问组件；相对简洁</div>
       <pre>
 import TabGoods from '@/components/TabGoods.vue'
 import TabCup from '@/components/TabCup.vue'

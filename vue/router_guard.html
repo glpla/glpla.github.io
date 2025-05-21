@@ -42,7 +42,7 @@
       <p>使用路由实例 router 注册一个全局前置守卫 beforeEach，执行函数 fn：接收3个参数：</p>
       <p>to：进入的路由</p>
       <p>from：离开的路由</p>
-      <p>next()：是一个函数，表示是否允许，实现路由控制，如：未登录不允许访问，并引导|重定向到指定页面</p>
+      <p>next()*：是一个函数，表示是否允许，实现路由控制，如：未登录不允许访问，并引导|重定向到指定页面</p>
       <div>正常访问；或不使用 next 形参</div>
       <pre>
 router.beforeEach((to, from, next) => {
@@ -178,7 +178,9 @@ const logOut = async () => {
     </dd>
     <dt><a href="https://router.vuejs.org/zh/api/interfaces/Router.html#Methods-afterEach">afterEach</a></dt>
     <dd>
-      <div>使用路由实例 router 注册一个全局后置守卫 afterEach，执行函数 fn，接收2个参数：to、from</div>
+      <div>使用路由实例 router 注册一个全局后置守卫 afterEach，执行函数 fn，接收2个参数：</div>
+      <div>to：进入的路由</div>
+      <div>from：离开的路由</div>
       <div>不接受 next 函数，也不会改变导航本身，因为导航已结束</div>
       <pre>
 router.afterEach((to, from) => {
@@ -193,6 +195,16 @@ router.afterEach((to, from) => {
       <div>路由配置时指定</div>
       <div>针对特定路由的控制； 只在 <span class="warn">进入</span> 路由时触发</div>
       <div>动态路由对应的多个路由之间不会触发，因为他们对应路由配置中同一条路由</div>
+      <pre>
+{
+  path: "/mall",
+  name: "mall",
+  component: () => import("@/views/MallView.vue"),
+  beforeEnter: (to, from, next) => {
+    console.log({ to, from, next });
+    next();
+  },
+}</pre>
     </dd>
   </dl>
   <div class="chap">路由守卫和状态管理</div>

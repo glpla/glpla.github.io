@@ -44,6 +44,28 @@
   border-bottom: 1px solid #f40;
 }</pre>
     </dd>
+    <dt>路由属性类 <a href="https://router.vuejs.org/api/interfaces/RouterOptions.html">RouterOptions</a></dt>
+    <dd>
+      <div>配置路由时指定选项属性：linkActiveClass、linkExactActiveClass</div>
+      <div>会<span class="warn">覆盖</span>上述默认的路由样式类</div>
+      <div>两个样式类默认为空，通过定制实现个性化开发</div>
+      <div>使用不同的样式类；样式内容可以一致</div>
+      <pre>
+const router = createRouter({
+  // ...
+  linkActiveClass : "nav-color";
+  linkExactActiveClass : "exact-nav-color";
+})</pre>
+      <div>或使用 options 属性更加明确的指定</div>
+      <pre>
+router.options = {
+  linkActiveClass: "nav-color",
+  linkExactActiveClass: "exact-nav-color",
+};</pre>
+      <div>或</div>
+      <pre>router.options.linkActiveClass = "nav-color"</pre>
+      <pre>router.options.linkExactActiveClass = "exact-nav-color"</pre>
+    </dd>
     <dt>标签属性类 <a href="https://router.vuejs.org/api/interfaces/RouterLinkProps.html">
         RouterLinkProps</a></dt>
     <dd>
@@ -63,28 +85,6 @@
 .color {
   border-bottom: 1px solid #f40;
 }</pre>
-    </dd>
-    <dt>路由属性类 <a href="https://router.vuejs.org/api/interfaces/RouterOptions.html">RouterOptions</a></dt>
-    <dd>
-      <div>配置路由时指定选项属性：linkActiveClass、linkExactActiveClass</div>
-      <div>会<span class="warn">覆盖</span>默认的两个路由样式类</div>
-      <div>两个样式类默认为空，通过定制实现个性化开发</div>
-      <div>使用不同的样式类；样式内容可以一致</div>
-      <pre>
-const router = createRouter({
-  // ...
-  linkActiveClass : "nav-color";
-  linkExactActiveClass : "exact-nav-color";
-})</pre>
-      <div>或使用 options 属性更加明确的指定</div>
-      <pre>
-router.options = {
-  linkActiveClass: "nav-color",
-  linkExactActiveClass: "exact-nav-color",
-};</pre>
-      <div>或</div>
-      <pre>router.options.linkActiveClass = "nav-color"</pre>
-      <pre>router.options.linkExactActiveClass = "exact-nav-color"</pre>
     </dd>
     <!-- <dt>匹配路由</dt>
     <dd>
@@ -106,15 +106,16 @@ router.options = {
     <dd class="sn">
       <div>&lt;RouterLink&gt; 路由样式设置</div>
       <p>. 默认样式类 .router-link-active .router-link-exact-active</p>
-      <p>. 标签属性类 activeClass、exactActiveClass</p>
       <p>. 路由属性类 linkActiveClass、linkExactActiveClass</p>
+      <p>. 标签属性类 activeClass、exactActiveClass</p>
       <div>全局应用路由样式</div>
       <div>单独设置路由样式</div>
     </dd>
     <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 路由样式设计</dd>
     <dd>
-      <div>思路：可以分别设计路由样式；也可以先设置全局路由样式，再单独指定某个或某些路由样式，覆盖全局路由样式</div>
+      <div>思路1：三种方式的优先级</div>
+      <div>思路2：可以分别设计路由样式；也可以先设置全局路由样式，再单独指定某个或某些路由样式，覆盖全局路由样式</div>
       <div>方法：可以使用默认样式类、标签属性类和路由属性类实现</div>
       <div>本例采用路由属性类，通过全局、单独定制的方式实现</div>
       <div>1. 配置路由时，指定路由样式类</div>
