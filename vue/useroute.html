@@ -15,18 +15,34 @@
     <span>&commat;useRoute()</span>
   </header>
   <dl>
+    <dt>Introduction</dt>
+    <dd>
+      <div>. 应用开发中，需要获取路由携带的数据，如查询路由或动态路由</div>
+      <div>. 可以使用全局路由变量 $route 或者<a
+          href="https://router.vuejs.org/api/interfaces/RouteLocationNormalizedLoadedGeneric.html">useRoute()</a> 获取
+      </div>
+      <img src="./imgs/router2.png" alt="">
+      <p class="fig-sn">路由信息</p>
+    </dd>
+    <dt>$route</dt>
+    <dd>
+      <div>. 全局路由变量</div>
+      <div>. 可以在模板/结构中直接使用 - 更方便、更简洁</div>
+      <pre>&lt;div&gt;route {{ $route.fullPath }}&lt;/div&gt;</pre>
+    </dd>
     <dt><a href="https://router.vuejs.org/api/#Functions">useRoute()</a></dt>
     <dd>
-      <div>返回一个 <a
+      <div>. Vue-router 提供的组合式函数；适用 Vue 3 的 Composition API </div>
+      <div>. 返回一个 <a
           href="https://router.vuejs.org/api/interfaces/RouteLocationNormalizedLoadedGeneric.html">RouteLocationNormalizedLoaded</a>
         对象，用于访问当前/激活路由的各种 <span class="warn">路由信息</span></div>
-      <div>先引入再使用 - 引入路由包 useRoute 并创建路由实例 route</div>
-      <div>Vue-router 提供的组合式函数；适用 Vue 3 的 Composition API </div>
+      <div>. 先引入再使用 - 引入路由包 useRoute 并创建路由实例 route</div>
       <pre>
 import { useRoute } from 'vue-router'
 const route = useRoute()</pre>
-      <div>常见的路由信息有：fullPath、path、name、params、query、meta 等；以实例属性的形式给出</div>
-      <div>可以用在结构或逻辑中</div>
+      <div>. 常见的路由信息有：fullPath、path、name、params、query、meta 等</div>
+      <div>. 以实例属性的形式给出</div>
+      <div>. 可以用在结构或逻辑中</div>
       <pre>&lt;div&gt;route {{ route.fullPath }}&lt;/div&gt;</pre>
       <pre>console.log(route)</pre>
       <table>
@@ -69,20 +85,13 @@ const route = useRoute()</pre>
         </tbody>
       </table>
     </dd>
-    <dt>$route</dt>
-    <dd>
-      <div>全局路由变量</div>
-      <div>可以在模板/结构中直接使用</div>
-      <div>无须引入路由包 useRoute 并实例化，更简洁</div>
-      <pre>&lt;div&gt;route {{ $route.fullPath }}&lt;/div&gt;</pre>
-    </dd>
   </dl>
   <div class="chap">Summary & Homework</div>
   <dl>
     <dt>Summary</dt>
     <dd class="sn">
+      <div>结构中使用 - 直接使用全局路由变量 $route</div>
       <div>逻辑中使用 - 引入路由包 useRoute 并实例 route</div>
-      <div>结构中使用 - 使用实例 route 的各种属性；或直接全局路由变量 $route</div>
     </dd>
     <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 详情页 DetailView.vue - 根据 id 加载对应的商品</dd>

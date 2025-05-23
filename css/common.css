@@ -15,11 +15,11 @@
   --tips-warn-color: rgba(255, 93, 115, 0.2);
   --tips-warn-bold-color: #ff5d73;
   --w-width: 1024px;
-  --header-h: 25vh;
-  --chap-h: 12vh;
-  --padding: 10px;
-  --small-size: 14px;
+  --header-h: 250px;
+  --chap-h: 120px;
+  --dt-h: 60px;
   --p-m-g: 10px;
+  --footer-h: 150px;
   accent-color: var(--warn-color);
 }
 
@@ -104,13 +104,13 @@ body::-webkit-scrollbar-thumb {
 
 header {
   position: sticky;
-  top: -15vh;
+  top: -130px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   height: var(--header-h);
   color: #fff;
-  padding: var(--padding);
+  padding: var(--p-m-g);
   background-color: var(--main-color);
   background-image: linear-gradient(var(--main-color), var(--warn-color));
   /* background-image: linear-gradient(315deg, var(--main-color) 25%, var(--warn-color)); */
@@ -161,7 +161,7 @@ header::after {
 }
 
 details {
-  padding: var(--padding);
+  padding: var(--p-m-g);
   line-height: 2;
 }
 
@@ -271,7 +271,7 @@ figure img {
   align-items: flex-end;
   font-size: 1.8rem;
   height: var(--chap-h);
-  padding: var(--padding);
+  padding: var(--p-m-g);
   color: #fff;
   background-image: linear-gradient(var(--bar-color), var(--bar-color-light));
   text-transform: capitalize;
@@ -284,14 +284,14 @@ dl {
 
 dt {
   font-weight: 600;
-  line-height: 3;
-  margin-top: 3rem;
+  line-height: var(--dt-h);
 }
 
 dt:has(.iconfont) {
   border-bottom: 1px solid var(--main-color);
   margin-bottom: 1rem;
 }
+
 
 pre {
   color: #dcdcaa;
@@ -340,7 +340,7 @@ pre span::before {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: calc(4*var(--padding)) auto;
+  margin: calc(4*var(--p-m-g)) auto;
 }
 
 thead {
@@ -351,6 +351,7 @@ th {
   text-align: left;
   font-weight: 600;
   text-transform: capitalize;
+  background-color: var(--tbl-color);
 }
 
 th,
@@ -393,14 +394,14 @@ table.line3 tr:has(th) {
 .grid4 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: var(--padding);
+  gap: var(--p-m-g);
   margin: 2rem auto;
 }
 
 .tips {
   position: relative;
   background-color: var(--tips-color);
-  padding: var(--padding);
+  padding: var(--p-m-g);
   border-left: 4px solid var(--tips-bold-color);
   margin: 2rem auto;
 }
@@ -408,7 +409,7 @@ table.line3 tr:has(th) {
 .question {
   position: relative;
   background-color: var(--tips-warn-color);
-  padding: var(--padding);
+  padding: var(--p-m-g);
   border-left: 4px solid var(--tips-warn-bold-color);
   margin: 2rem auto;
 }
