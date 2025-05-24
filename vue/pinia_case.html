@@ -34,7 +34,9 @@
     <dt>商品仓库 goods.js</dt>
     <dd>
       <div>1. 所有商品 goods</div>
+      <pre>const goods = ref([])</pre>
       <div>2. 单个商品 good</div>
+      <pre>const good = ref({})</pre>
       <div>3. 获取所有商品 getGoods()</div>
       <div>. 获取商品数据；方法、来源可自定；这里以大树小站数据为例</div>
       <pre>
@@ -66,9 +68,27 @@ const getGoodById = async (id) => {
     <dt>购物车仓库 cart.js</dt>
     <dd>
       <div>1. 购物车 carts</div>
-      <div>2. 拉取/保存购物车 getCarts()</div>
-      <div>3. 添加到购物车 addToCarts(product)</div>
-      <div>3.1 视图端</div>
+      <pre>const carts = ref([])</pre>
+      <!-- <div>2. 拉取/保存购物车 getCarts()</div> -->
+      <div>2. 添加到购物车 addToCarts(product)</div>
+      <div>. 如果商品不存在，则为当前商品添加新的 id 作为对应的购物车数据项的 id，该 id 会覆盖商品的 id；如果商品数据项已经存在，则数量相应的增加</div>
+      <div>. 其它业务：库存调整，需要使用商品仓库 goods.js - 也可以放在订单中处理，库存才真正变化</div>
+      <div>. 这里使用第三方库 <a href="https://www.npmjs.com/package/nanoid">NPM - Nanoid</a> 生成随机 id</div>
+      <pre>
+const addToCarts = (product) => {
+  const existingItem = carts.value.find((item) => item.productId === product.productId);
+  if (existingItem) {
+    existingItem.quantity += product.quantity;
+  } else {
+    // replace id with nanoid
+    carts.value.push({ 
+      ...product, 
+      id: nanoid(), 
+      create_time: Date.now()
+    });
+  }
+};</pre>
+      <div>附：视图端的处理</div>
       <div>. 数据清洗 - 详情页加载商品数据后，规格转化为具体的参数；后面的同名字段会覆盖前面的；默认数量为1</div>
       <div>. 这里没有处理甜点 dessert 和推荐商品 recommend</div>
       <pre>
@@ -93,24 +113,11 @@ const addToCarts = () => {
   cartStore.addToCarts(cartItem)
   router.replace('/menu')
 }</pre>
-      <div>3.2 仓库端</div>
-      <div>. 仓库 - 如果商品不存在，则为当前商品添加新的 id 作为对应的购物车数据项的 id，该 id 会覆盖商品的 id；如果商品数据项已经存在，则数量相应的增加</div>
-      <div>. 其它业务：库存调整，需要使用商品仓库 goods.js - 也可以放在订单中处理，库存才真正变化</div>
-      <div>. 这里使用第三方库 <a href="https://www.npmjs.com/package/nanoid">NPM - Nanoid</a> 生成随机 id</div>
+      <div>3. 从购物车中移除 removeFromCart(id) </div>
       <pre>
-const addToCarts = (product) => {
-  const existingItem = carts.value.find((item) => item.productId === product.productId);
-  if (existingItem) {
-    existingItem.quantity += product.quantity;
-  } else {
-    // replace id with nanoid
-    carts.value.push({ 
-      ...product, 
-      id: nanoid(), 
-      create_time: Date.now()
-    });
-  }
-};</pre>
+const removeFromCart = (id) =>{
+  cart.value = cart.value.filter(item => item.id !== id)
+}</pre>
       <div>4. 清空购物车 clearCarts()</div>
       <pre>
 const clearCarts = () => {
@@ -143,10 +150,10 @@ const discount = computed(() => {
     <dt>其它仓库</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 点赞仓库</dd>
     <dd>
-      <div>创建任意仓库，并创建一个状态 num</div>
-      <div>组件A中引入并使用；采用简单模板语法 {{num}}</div>
-      <div>组件B中引入并使用；采用双向绑定 v-mode</div>
-      <div>入口组件中引入并使用组件A、组件B，查看双向绑定时状态的共享变化</div>
+      <div>. 创建任意仓库，并创建一个状态 num</div>
+      <div>. 组件A中引入并使用；采用简单模板语法 {{num}}</div>
+      <div>. 组件B中引入并使用；采用双向绑定 v-mode</div>
+      <div>. 入口组件中引入并使用组件A、组件B，查看双向绑定时状态的共享变化</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>]用户状态</dd>
     <dd>[<span class="iconfont icon-keyboard"></span>]访问量统计仓库</dd>
@@ -154,14 +161,14 @@ const discount = computed(() => {
   </dl>
   <div class="chap">本地应用</div>
   <dl>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_pinia.html">标签页仓库</a></dd>
-    <dd>
+    <!-- <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_tabbar.html">标签页仓库</a></dd> -->
+    <!-- <dd>
       <div>导航时，添加标签页；便于快速打开历史页面/视图</div>
       <div>多见于后台管理系统</div>
       <div>思路同购物车：如果没有，则添加；否则激活</div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_router.html">页面导航仓库</a></dd>
-    <dd class="sn">
+    </dd> -->
+    <!-- <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_router.html">页面导航仓库</a></dd> -->
+    <!-- <dd class="sn">
       <div>创建仓库 - 商品 goods、状态 isLoading、请求 fetchGoods</div>
       <div>请求商品数据 - 分别使用 fetch 和 axios</div>
       <div>请求中，给出提示；请求结束，渲染数据</div>
@@ -193,9 +200,9 @@ onMounted(() => {
 &lt;div v-else&gt;
     //
 &lt;/div&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_modal.html">模态框仓库</a></dd>
-    <dd>
+    </dd> -->
+    <!-- <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_modal.html">模态框仓库</a></dd> -->
+    <!-- <dd>
       <div>侦听仓库变化显示提示信息</div>
       <div>商品仓库和购物车仓库都有数据加载。可以通过侦听仓库的 isLoading 给前端相应的提示</div>
       <div>msg 可以提供给模态框使用</div>
@@ -208,31 +215,11 @@ watch(() => goodStore.isLoading, (newVal, oldVal) => {
     }
     show.value = true;
 })</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_ham.html">汉堡菜单仓库</a></dd>
-    <dd>
-      <div>项目从桌面端切换到移动端时，菜单折叠，由汉堡按钮控制折叠和展开；单击菜单项时，折叠菜单</div>
-      <div>1. 创建仓库 - 仓库参考代码 menu.js</div>
-      <pre>
-import { ref } from 'vue'
-import { defineStore } from 'pinia'
-
-export const useMenuStore = defineStore('menu', () => {
-  const flag = ref(false)
-  const switchFlag = () => {
-    flag.value ? flag.value = false : flag.value = true
-  }
-
-  return { flag, switchFlag }
-})</pre>
-      <div>2. 在使用仓库的组件结构中，引入仓库，通过汉堡按钮的单击，由标记 flag 控制动态类的应用，达到菜单的折叠和展开</div>
-      <div>改进：单击菜单项，折叠菜单</div>
-      <div>提示：在路由配置中，引入仓库，在导航前置守卫中实例化仓库并切换标记switchFlag；请查看 <a href="./route_guard.html">路由 - 导航守卫</a></div>
-    </dd>
+    </dd> -->
     <dd>[<span class="iconfont icon-keyboard"></span>]主题切换仓库</dd>
     <dd class="sn">
-      <p>主题切换/换肤/日夜模式</p>
-      <p>通过为 html 指定自定义属性实现 CSS 变量的更新达到切换效果</p>
+      <p>. 主题切换/换肤/日夜模式</p>
+      <p>. 通过为 html 指定自定义属性实现 CSS 变量的更新达到切换效果</p>
       <div>主题样式 - 这里仅给出需要变化的 CSS 变量，其它变量可以在额外的 :root 单独定义</div>
       <pre>
 :root {
@@ -278,6 +265,54 @@ const themeStore = useThemeStore();</pre>
     &lt;span v-if="themeStore.isDarkMode" class="iconfont icon-night-mode-fill"&gt;&lt;/span&gt;
     &lt;span v-else class="iconfont icon-daytime-mode-fill"&gt;&lt;/span&gt;
 &lt;/div&gt;</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_ham.html">汉堡菜单仓库</a></dd>
+    <dd>
+      <div>项目从桌面端切换到移动端时，菜单折叠，由汉堡按钮控制折叠和展开；单击菜单项时，折叠菜单</div>
+      <div>1. 创建仓库 - 仓库参考代码 menu.js</div>
+      <pre>
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+
+export const useMenuStore = defineStore('menu', () => {
+  const flag = ref(false)
+  const switchFlag = () => {
+    flag.value ? flag.value = false : flag.value = true
+  }
+
+  return { flag, switchFlag }
+})</pre>
+      <div>2. 在使用仓库的组件结构中，引入仓库，通过汉堡按钮的单击，由标记 flag 控制动态类的应用，达到菜单的折叠和展开</div>
+      <div>改进：单击菜单项，折叠菜单</div>
+      <div>提示：在路由配置中，引入仓库，在导航前置守卫中实例化仓库并切换标记 switchFlag</div>
+      <div>在路由文件中，引入仓库 menu.js</div>
+      <div>每次进入，创建菜单实例并设置菜单栏样式为隐藏</div>
+      <pre>
+import { useMenuStore } from '@/stores/menu'
+
+router.beforeEach((to, from, next) => {
+    // 其它逻辑
+
+    // MUST
+    const store = useMenuStore();
+    store.flag = false;
+    next();
+})
+
+router.afterEach((to, from) => {
+    // 其它逻辑
+
+    if (to.path === from.path) {
+        const store = useMenuStore()
+        store.flag = false
+    }
+})</pre>
+    </dd>
+    <dd class="tips">
+      <div>守卫中的两个 store 返回的是同一个 Pinia store 实例。虽然变量名相同，但是在不同的作用域中，引用的都是同一个对象实例，因此不会导致逻辑上的冲突</div>
+      <div>更多路由控制，应由后端服务器实现，前端不可靠</div>
+      <div>路由配置时，如果不是每个路由都指定 meta，使用时应先判断再使用</div>
+      <div>浏览器的返回和前进，不会触发守卫</div>
     </dd>
   </dl>
   <div id="footer"></div>
