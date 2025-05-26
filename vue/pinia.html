@@ -9,16 +9,6 @@
   <link rel="stylesheet" href="../css/common.css">
   <base target="_blank">
   <style>
-    /* html {
-      scroll-snap-type: y mandatory;
-      scroll-padding-top: calc(120px + 60px);
-    }
-
-    dt+dd {
-      min-height: calc(100vh - 120px - 60px);
-      scroll-snap-align: start;
-    } */
-
     header {
       background-image:
         url(./imgs/pinia.svg),
@@ -36,15 +26,15 @@
     <span>&commat; Pinia</span>
   </header>
   <dl>
-    <dt>Overview</dt>
+    <dt>Introduction</dt>
     <dd>
-      <div>Vue3 采用 <a href="https://pinia.vuejs.org/zh/">Pinia</a> 管理状态</div>
-      <div>Pinia 是 Vue 专属的集中式状态管理库，使用大菠萝作为 logo</div>
-      <div>仓库 <a href="https://pinia.vuejs.org/zh/core-concepts/#setup-stores">stores</a> 是一个保存全局状态 <span
+      <div>. Vue3 采用 <a href="https://pinia.vuejs.org/zh/">Pinia</a> 管理状态</div>
+      <div>. Pinia 是 Vue 专属的集中式状态管理库，使用大菠萝作为 logo</div>
+      <div>. 仓库 <a href="https://pinia.vuejs.org/zh/core-concepts/#setup-stores">stores</a> 是一个保存全局状态 <span
           class="warn">state</span> 和业务逻辑的实体；可以在 <span class="warn">整个应用</span> 中访问的数据</div>
-      <div>不与组件树绑定，而承载着全局状态</div>
-      <div>状态管理出现之前，使用共享组件完成对数据的共享使用；共享数据的修改通过共享组件发送自定义事件完成 - 任何一个使用它的组件都可以修改，不太容易维护</div>
-      <div>Vue2 采用 vuex</div>
+      <div>. 不与组件树绑定，而承载着全局状态</div>
+      <div>. 状态管理出现之前，使用共享组件完成对数据的共享使用；共享数据的修改通过共享组件发送自定义事件完成 - 任何一个使用它的组件都可以修改，不太容易维护</div>
+      <div>. Vue2 采用 vuex</div>
     </dd>
     <dt>Concepts</dt>
     <dd class="sn">
@@ -58,14 +48,14 @@
     </dd>
     <dt>Deployment</dt>
     <dd>
-      <div>强烈建议在创建项目时，选择状态管理；项目创建完毕后，可以直接使用；不建议新手手动安装部署使用</div>
-      <div>仓库通常集中保存在项目的 stores 目录（应提前创建好），并按照功能创建 <span class="warn">单独</span> 的仓库文件</div>
-      <div>强烈建议通过复制计时器仓库 counter.js 并修改的方式创建新的仓库</div>
-      <div>仓库在 onMounted 之前就已经准备好 - 兵马未动，粮草先行</div>
+      <div>. 强烈建议在创建项目时，选择状态管理；项目创建完毕后，可以直接使用；不建议新手手动安装部署使用</div>
+      <div>. 仓库通常集中保存在项目的 stores 目录（应提前创建好），并按照功能创建 <span class="warn">单独</span> 的仓库文件</div>
+      <div>. 强烈建议通过复制计时器仓库 counter.js 并修改的方式创建新的仓库</div>
+      <div>. 仓库在 onMounted 之前就已经准备好 - 兵马未动，粮草先行</div>
       <div>1. Installation</div>
       <pre>npm i pinia</pre>
       <div>2. Import</div>
-      <div>在入口文件 main.js 引入并创建使用</div>
+      <div>. 在入口文件 main.js 引入并创建使用</div>
       <pre>
 import './assets/main.css'
 
@@ -109,18 +99,19 @@ export const useCounterStore  = defineStore('counter', ()=>{
 
   return { count, msg, doubleCount, increment }
 })</pre>
-      <div>目标组件使用 Store</div>
-      <p>逻辑 - 引入仓库、创建仓库实例、使用仓库数据；<span class="warn">创建仓库实例前无法使用</span></p>
+      <div>组件使用 Store</div>
+      <p>. 逻辑 - 引入仓库、创建仓库实例、使用仓库数据</p>
+      <p>. 创建仓库实例前无法使用</p>
+      <p>. 仓库中的状态应指定初始值，否则其中的方法只有执行后才能拿到值</p>
       <pre>
 import { useCounterStore } from '@/stores/counter';
 const store = useCounterStore();
 console.log('store', store);</pre>
-      <p>结构 - 渲染仓库数据；这里采用内联事件</p>
+      <p>. 结构 - 渲染仓库数据；这里采用内联事件</p>
       <pre>
 &lt;div&gt;{{ store.count }}&lt;/div&gt;
 &lt;div&gt;{{ store.doubleCount }}&lt;/div&gt;
 &lt;div @click="store.increment"&gt;store handle&lt;/div&gt;</pre>
-      <p class="tips">仓库中的状态应指定初始值，否则其中的方法只有执行后才能拿到值</p>
     </dd>
     <dt>Warning</dt>
     <dd>

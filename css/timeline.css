@@ -1,0 +1,141 @@
+@import url(//at.alicdn.com/t/c/font_3859342_v44md8u4v8.css);
+@import url(../css/fonts_Inconsolata.css);
+
+:root {
+  --main-color: #0a0;
+  --warn-color: #C91F37;
+  --main-w: 1024px;
+  --p-m-g: 10px;
+  --bg-color: #fff;
+  --txt-color: #000;
+  --pre-bg-color: #000;
+  --pre-txt-color: #cdcd85;
+  --header-h: 100px;
+  --section-title-h: 60px;
+  --footer-h: 150px;
+}
+
+.dark-mode {
+  --bg-color: #000;
+  --txt-color: #fff;
+  --pre-bg-color: #242424;
+  --pre-txt-color: #D4AF37;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Alibaba PuHuiTi", "Source Han Serif", "Source Han Sans", "PingFang SC", "Microsoft YaHei", "微软雅黑", Arial, Helvetica, sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: 1.6rem;
+  timeline-scope: --n0, --n1, --n2, --n3, --n4, --n5, --n6, --n7, --n8, --n9, --n10;
+}
+
+a {
+  text-decoration: none;
+  font: inherit;
+  color: inherit;
+}
+
+pre {
+  width: 96%;
+  color: var(--pre-txt-color);
+  padding: var(--p-m-g);
+  font-family: 'Inconsolata', Arial, Helvetica, sans-serif;
+  background-color: var(--pre-bg-color);
+  border-radius: 6px;
+  margin: var(--p-m-g) auto;
+  overflow-x: auto;
+}
+
+header,
+.section {
+  width: 100%;
+  max-width: var(--main-w);
+  margin: 0 auto;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  height: var(--header-h);
+  background-color: var(--bg-color);
+  z-index: 1;
+}
+
+.section {
+  line-height: 2;
+}
+
+.nav-wrap {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: var(--p-m-g);
+  z-index: 99;
+  background-color: var(--bg-color);
+}
+
+.nav-wrap .logo {
+  width: 8rem;
+  height: 8rem;
+  background-image: url(/utils/logo/xh.png);
+  background-size: cover;
+  border-radius: 50%;
+  margin: 0 auto var(--p-m-g);
+}
+
+.nav-wrap .nav {
+  display: flex;
+  flex-direction: column;
+  line-height: 2;
+}
+
+.nav-item {
+  padding: 0 var(--p-m-g);
+  border-left: 4px solid transparent;
+  animation-name: --nav;
+  animation-timeline: var(--s);
+  font-size: 1.8rem;
+  text-transform: capitalize;
+}
+
+@keyframes --nav {
+
+  0%,
+  100% {
+    border-left-color: var(--main-color);
+    color: var(--main-color);
+  }
+}
+
+.section {
+  /* use view() */
+  view-timeline-name: var(--s);
+  view-timeline-inset: 50%;
+  /* min-height: 50vh; */
+  margin-bottom: calc(4*var(--p-m-g));
+}
+
+.section-title {
+  position: sticky;
+  top: var(--header-h);
+  height: var(--section-title-h);
+  line-height: var(--section-title-h);
+  background-color: var(--bg-color);
+  font-size: 1.8rem;
+}
+
+.warn,
+.edu,
+.iconfont {
+  color: var(--warn-color);
+}

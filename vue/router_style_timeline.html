@@ -6,18 +6,32 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>路由样式 Style</title>
-  <link rel="stylesheet" href="../css/common.css">
-
+  <!-- <link rel="stylesheet" href="../css/common.css"> -->
+  <link rel="stylesheet" href="../css/timeline.css">
   <base target="_blank">
+  <style>
+
+  </style>
 </head>
 
 <body>
   <header>
     <h1>路由样式</h1>
     <span>&commat;Style</span>
+    <div class="nav-wrap">
+      <div class="logo"></div>
+      <nav class="nav">
+        <a class="nav-item" style="--s:--n0" href="#introduction">introduction</a>
+        <a class="nav-item" style="--s:--n1" href="#default">default</a>
+        <a class="nav-item" style="--s:--n2" href="#router">RouterOptions</a>
+        <a class="nav-item" style="--s:--n3" href="#routerlink">RouterLinkProps</a>
+        <a class="nav-item" style="--s:--n4" href="#summary">summary</a>
+        <a class="nav-item" style="--s:--n5" href="#homework">homework</a>
+      </nav>
+    </div>
   </header>
-  <dl>
-    <dt>Introduction</dt>
+  <dl class="section" style="--s:--n0" id="introduction">
+    <dt class="section-title">引言 Introduction</dt>
     <dd>
       <div>. 除了可以自定义样式外，还可以使用 Vue 提供的内置样式类</div>
       <div>. 区分当前路由样式 active 和严格匹配当前路由样式 exactActive</div>
@@ -29,7 +43,9 @@
       <div>路由a：重定向到路由b，最后匹配的是路由b，路由a无法激活匹配路由和严格匹配路由</div>
       <div>路由b：最后匹配的也是路由b，可以激活匹配路由和严格匹配路由</div>
     </dd>
-    <dt>默认类</dt>
+  </dl>
+  <dl class="section" style="--s:--n1" id="default">
+    <dt class="section-title">默认类 Default</dt>
     <dd>
       <div>. 默认情况下，Vue会为 &lt;RouterLink&gt; <a
           href="https://router.vuejs.org/zh/guide/essentials/active-links.html">匹配当前路由的链接</a> 自动添加两个空白
@@ -44,7 +60,10 @@
   border-bottom: 1px solid #f40;
 }</pre>
     </dd>
-    <dt>路由属性类 <a href="https://router.vuejs.org/api/interfaces/RouterOptions.html">RouterOptions</a></dt>
+  </dl>
+  <dl class="section" style="--s:--n2" id="router">
+    <dt class="section-title">路由属性类 <a
+        href="https://router.vuejs.org/api/interfaces/RouterOptions.html">RouterOptions</a></dt>
     <dd>
       <div>. 配置路由时指定选项属性：linkActiveClass、linkExactActiveClass</div>
       <div>. 会<span class="warn">覆盖</span>上述默认的路由样式类</div>
@@ -66,7 +85,9 @@ router.options = {
       <pre>router.options.linkActiveClass = "nav-color"</pre>
       <pre>router.options.linkExactActiveClass = "exact-nav-color"</pre>
     </dd>
-    <dt>标签属性类 <a href="https://router.vuejs.org/api/interfaces/RouterLinkProps.html">
+  </dl>
+  <dl class="section" style="--s:--n3" id="routerlink">
+    <dt class="section-title">标签属性类 <a href="https://router.vuejs.org/api/interfaces/RouterLinkProps.html">
         RouterLinkProps</a></dt>
     <dd>
       <div>. &lt;RouterLink&gt; 标签属性 ：activeClass、exactActiveClass</div>
@@ -86,7 +107,7 @@ router.options = {
   border-bottom: 1px solid #f40;
 }</pre>
     </dd>
-    <!-- <dt>匹配路由</dt>
+    <!-- <dt class="section-title">匹配路由</dt>
     <dd>
       <div>以上是全局路由样式，对所有路由生效</div>
       <div>自定义路由样式 - 适合某个特定路由</div>
@@ -100,9 +121,8 @@ router.options = {
       <div>路由属性类适合全局定制，也可以在相应的组件中，通过覆盖的方式单独定制</div>
     </dd>
   </dl>
-  <div class="chap">Summary & Homework</div>
-  <dl>
-    <dt>Summary</dt>
+  <dl class="section" style="--s:--n4" id="summary">
+    <dt class="section-title">小结 Summary</dt>
     <dd class="sn">
       <div>&lt;RouterLink&gt; 路由样式设置</div>
       <p>. 默认样式类： .router-link-active .router-link-exact-active</p>
@@ -111,7 +131,9 @@ router.options = {
       <div>全局应用路由样式</div>
       <div>单独设置路由样式</div>
     </dd>
-    <dt>Homework</dt>
+  </dl>
+  <dl class="section" style="--s:--n5" id="homework">
+    <dt class="section-title">作业 Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 路由样式设计</dd>
     <dd>
       <div>思路1：三种方式的优先级</div>
