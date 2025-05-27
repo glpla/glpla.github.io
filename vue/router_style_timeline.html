@@ -16,8 +16,10 @@
 
 <body>
   <header>
-    <h1>路由样式</h1>
-    <span>&commat;Style</span>
+    <h1 class="title">路由样式
+      <br>&commat;Style
+    </h1>
+    <span class="iconfont icon-menu ham" id="ham"></span>
     <div class="nav-wrap">
       <div class="logo"></div>
       <nav class="nav">
@@ -115,10 +117,10 @@ router.options = {
       <pre>&lt;div :class = "{'active':route.path.includes('/home')}"&gt;Home&lt;/div&gt;</pre>
     </dd> -->
     <dd class="tips">
-      <div>以上是 <span class="warn">针对</span> 使用了 &lt;router-link&gt; 的声明式导航</div>
-      <div>如果是编程式导航，按照元素的普通样式和激活样式区分设计即可</div>
-      <div>标签属性类适合单独定制</div>
-      <div>路由属性类适合全局定制，也可以在相应的组件中，通过覆盖的方式单独定制</div>
+      <div>. 以上是 <span class="warn">针对</span> 使用了 &lt;router-link&gt; 的声明式导航</div>
+      <div>. 如果是编程式导航，按照元素的普通样式和激活样式区分设计即可</div>
+      <div>. 标签属性类适合单独定制</div>
+      <div>. 路由属性类适合全局定制，也可以在相应的组件中，通过覆盖的方式单独定制</div>
     </dd>
   </dl>
   <dl class="section" style="--s:--n4" id="summary">
@@ -264,6 +266,27 @@ const tabs = [
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
+  <script>
+    let ham = document.getElementById("ham");
+    let navs = document.querySelectorAll(".nav-item");
+    ham.addEventListener("click", () => {
+      ham.classList.toggle("active");
+      if (ham.classList.contains("icon-menu")) {
+        ham.classList.remove("icon-menu");
+        ham.classList.add("icon-close");
+      } else {
+        ham.classList.remove("icon-close");
+        ham.classList.add("icon-menu");
+      }
+    });
+    navs.forEach((nav) => {
+      nav.addEventListener("click", () => {
+        ham.classList.remove("active");
+        ham.classList.remove("icon-close");
+        ham.classList.add("icon-menu");
+      });
+    });
+  </script>
 </body>
 
 </html>
