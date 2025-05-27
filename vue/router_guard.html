@@ -113,6 +113,8 @@ router.afterEach((to, from) => {
       <div>. 只在 <span class="warn">进入</span> 路由时触发</div>
       <div>. 路由配置时指定</div>
       <div>. 动态路由对应的多个路由之间不会触发，因为他们对应路由配置中同一条路由</div>
+      <div>. 建议和其它属性使用语法保持一致</div>
+      <div>1. 使用箭头函数表达式定义的函数，并将其作为属性值赋给 beforeEnter</div>
       <pre>
 {
   path: "/mall",
@@ -121,7 +123,18 @@ router.afterEach((to, from) => {
   beforeEnter: (to, from, next) => {
     console.log({ to, from, next });
     next();
-  },
+  }
+}</pre>
+      <div>2. 使用具名函数；传统的函数定义</div>
+      <pre>
+{
+  path: "/mall",
+  name: "mall",
+  component: () => import("@/views/MallView.vue"),
+  beforeEnter(to, from, next) {
+    console.log({ to, from, next });
+    next();
+  }
 }</pre>
     </dd>
     <dt>注意 Warning</dt>
