@@ -1,9 +1,10 @@
-@import url(//at.alicdn.com/t/c/font_3859342_qe1ea0cgv5.css);
+@import url(//at.alicdn.com/t/c/font_3859342_ozav4x2kf3.css);
 @import url(/css/fonts_Inconsolata.css);
 
 :root {
-  --main-color: #ff7b00;
-  --warn-color: #f25e44;
+  --main-color: #4bc2ce;
+  --second-color: #1b9fab;
+  --warn-color: #C91F37;
   --tbl-color: #fabfb4;
   --tbl-color-light: #feefec;
   --tips-color: #edf8db;
@@ -89,7 +90,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(#fff, var(--main-color));
+  background-image: linear-gradient(var(--main-color), #fff);
   border-radius: 4px;
   cursor: pointer;
 }
@@ -112,7 +113,7 @@ header {
   color: #fff;
   padding: var(--p-m-g);
   background-color: var(--main-color);
-  background-image: linear-gradient(var(--main-color), var(--warn-color));
+  background-image: linear-gradient(var(--main-color), var(--second-color));
   /* background-image: linear-gradient(315deg, var(--main-color) 25%, var(--warn-color)); */
   background-size: cover;
   background-position: center;
@@ -287,11 +288,14 @@ dt {
   line-height: var(--dt-h);
 }
 
+dt:not(:first-child) {
+  margin-top: calc(4*var(--p-m-g));
+}
+
 dt:has(.iconfont) {
   border-bottom: 1px solid var(--main-color);
   margin-bottom: 1rem;
 }
-
 
 pre {
   color: #dcdcaa;
@@ -424,6 +428,22 @@ table.line3 tr:has(th) {
   color: var(--warn-color);
 }
 
+.xmind {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.xmind iframe {
+  width: 100%;
+  height: 600px;
+  border: none;
+}
+
+.mt4 {
+  margin-top: calc(4*var(--p-m-g));
+}
+
 .q {
   display: flex;
   align-items: center;
@@ -524,7 +544,6 @@ img+.fig-sn::before {
 iframe {
   display: block;
   width: 100%;
-  margin-top: 2rem;
 }
 
 .quote {
