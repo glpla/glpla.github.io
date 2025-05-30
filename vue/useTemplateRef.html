@@ -103,10 +103,6 @@ onMounted(() =&gt; {
           tightly coupled. Consider using props and events for communication between components</div>
       </div>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 单击打开弹窗；更多信息，请访问 <a href="./drill_modal.html">实操 - Modal</a>
-    </dd>
-    <dd>父组件获取子组件|弹窗组件实例，执行弹窗的方法</dd>
-    <dd>子组件|弹窗组件定义方法并暴露；方法利用 bool 将弹窗组件的隐藏状态变为显示</dd>
     <dt>多ref</dt>
     <dd>
       <div>列表渲染中指定 ref，将获取多个元素</div>
@@ -123,21 +119,45 @@ onMounted(() => {
 })</pre>
     </dd>
   </dl>
-  <div class="chap">Summary & Homework</div>
+  <div class="chap">Drill</div>
   <dl>
-    <dt>Summary</dt>
-    <dd class="sn">
-      <div>用于获取 DOM 节点实例 或 组件实例</div>
-      <div>需引入 ref/useTemplateRef</div>
-      <div>使用时，应判定元素是否就绪</div>
-    </dd>
-    <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./lifecycle.html">焦点管理</a></dd>
     <dd>
       <div>页面加载时自动聚焦；注册、登录的第一个表单域</div>
       <div>完成上述焦点管理案例并分析下述代码的特点</div>
       <!-- <p>如果 ipt.value 为 null 或 undefined，则不会调用 focus()，也不会报错</p> -->
       <pre>const focus = () => ipt.value?.focus()</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 视频播放</dd>
+    <dd>
+      <pre>
+&lt;video src="@/assets/v0.mp4" ref="videoRef"&gt;&lt;/video&gt;
+&lt;button @click="play"&gt;play&lt;/button&gt;</pre>
+      <pre>
+import { useTemplateRef } from 'vue';
+const videoRef = useTemplateRef('videoRef');
+const play = () => {
+  console.log(videoRef.value);
+  videoRef.value?.play();
+};</pre>
+    </dd>
+  </dl>
+  <div class="chap">Summary</div>
+  <dl>
+    <dt></dt>
+    <dd class="sn">
+      <div>用于获取 DOM 节点实例 或 组件实例</div>
+      <div>需引入 ref/useTemplateRef</div>
+      <div>使用时，应判定元素是否就绪</div>
+    </dd>
+  </dl>
+  <div class="chap">Homework</div>
+  <dl>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 单击打开弹窗；更多信息，请访问 <a href="./drill_modal.html">实操 - Modal</a>
+    </dd>
+    <dd>
+      <div>父组件获取子组件|弹窗组件实例，执行弹窗的方法</div>
+      <div>子组件|弹窗组件定义方法并暴露；方法利用 bool 将弹窗组件的隐藏状态变为显示</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./lifecycle.html">页面滚动控制</a></dd>
   </dl>

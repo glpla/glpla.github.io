@@ -63,7 +63,7 @@ const getGoodById = async (id) => {
       <div>5. 分页获取*</div>
       <div>6. 加载指示*</div>
     </dd>
-    <dt>购物车仓库 cart.js</dt>
+    <dt id="cart">购物车仓库 cart.js</dt>
     <dd>
       <div>1. 购物车 carts</div>
       <pre>const carts = ref([])</pre>
@@ -86,31 +86,6 @@ const addToCarts = (product) => {
     });
   }
 };</pre>
-      <div>附：视图端的处理</div>
-      <div>. 数据清洗 - 详情页加载商品数据后，规格转化为具体的参数；后面的同名字段会覆盖前面的；默认数量为1</div>
-      <div>. 这里没有处理甜点 dessert 和推荐商品 recommend</div>
-      <pre>
-goodsSelected.value = {
-  ...res,
-  quantity: 1,
-  cup: res.cup.options.find(item => item.sel)?.tag || '中杯',
-  ther: res.ther.options.find(item => item.sel)?.tag || '冷',
-  sugar: res.sugar.options.find(item => item.sel)?.tag || '标准糖',
-  dessert: [],
-  recommend: []
-}</pre>
-      <div>. 添加到购物车 - 创建购物车数据项；创建新字段 productId，保存商品 id；商品原 id 字段可以保留，也可以移除</div>
-      <div>. 其它字段根据需求处理调整</div>
-      <div>. 跳转到菜单视图</div>
-      <pre>
-const addToCarts = () => {
-  const cartItem = {
-    ...goodsSelected.value,
-    productId: goodsSelected.value.id,
-  };
-  cartStore.addToCarts(cartItem)
-  router.replace('/menu')
-}</pre>
       <div>3. 从购物车中移除 removeFromCart(id) </div>
       <pre>
 const removeFromCart = (id) =>{

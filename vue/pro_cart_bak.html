@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>项目 购物车</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/sn.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>购物车</h1>
+      <span>&commat;Cart</span>
+    </header>
+    <dl class="number-mul-sn">
+      <dt>实验内容</dt>
+      <dd>同时使用普通事件和监听实现</dd>
+      <dd>
+        <div>商品的增加、减少和删除</div>
+        <div>选择：全选、单选、部分选择</div>
+        <div>排序</div>
+        <div>结算</div>
+        <div>下单</div>
+        <div>地址选择</div>
+      </dd>
+      <dt>前置知识</dt>
+      <dd>
+        <div>事件</div>
+        <div>网络请求 Axios - GET</div>
+        <div>计算属性</div>
+        <div>侦听器</div>
+      </dd>
+      <dt>开发环境</dt>
+      <dd>
+        <div>操作系统 Window 10+</div>
+        <div>文本编辑器 Vs Code</div>
+        <div>谷歌浏览器 Chrome</div>
+        <div>Node.js</div>
+      </dd>
+      <dt>参考代码</dt>
+      <dd>这里给出购物车优化后的逻辑；其它逻辑请参考 <a href="./drill_cart.html" class="link">练习 - 购物车</a></dd>
+      <dd>
+        <div>购物车数据管理 - 使用状态管理 cart.js；返回购物车数据 cart 和添加到购物车事件 addToCart</div>
+        <p>如果商品id存在，则数量+1；否则添加一个新的商品购物记录</p>
+        <pre>
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+
+export const useCartStore = defineStore('cart', () => {
+  const cart = ref([])
+  const addToCart = (product) => {
+    const existingItem = cart.value.find(item => item.id === product.id)
+    if (existingItem) {
+      existingItem.quantity++
+    } else {
+      cart.value.push({ ...product, quantity: 1 })
+    }
+  }
+
+  return { cart, addToCart }
+})
+</pre>
+        <div>全选 - 侦听全选标记 selectedAll</div>
+        <p>标记flag辅助判断全选和单选</p>
+        <pre>
+watch(() => data.selectedAll, (n, o) => {
+  console.log(n);
+  if (n) {
+    data.selectedLists = data.lists
+  } else {
+    if (flag)
+      data.selectedLists = []
+  }
+}, { immediate: true })</pre>
+        <div>单选 - 侦听已选列表 selectedLists</div>
+        <pre>
+watch(() => data.selectedLists, (n, o) => {
+  console.log(n.length);
+  if (n.length == data.lists.length && data.lists.length) {
+    data.selectedAll = true
+    flag = true
+  } else {
+    data.selectedAll = false
+    flag = false
+  }
+}, { immediate: true })</pre>
+        <div>商品的增加、减少</div>
+        <pre>
+const inc = (item) => {
+  if (item.quantity &lt; item.stock) {
+    item.quantity++
+  }
+}
+
+const dec = (item) => {
+  if (item.quantity > 1) {
+    item.quantity--
+  }
+}</pre>
+        <div>购物车结算</div>
+        <pre>
+const getTotal = computed(() => {
+  let sum = 0
+
+  //forEach - 进阶遍历
+  data.selectedLists.forEach(item => {
+    sum += item.number * item.price
+  })
+
+  //reduce - 数组归并函数
+  sum = data.selectedLists.reduce((pre, cur, index, arr) => pre + cur.number * cur.price, 0)
+
+  return sum
+})</pre>
+        <div>按数量排序</div>
+        <pre>
+const sortUp = (key) => {
+  cartData.lists.sort((a, b) => {
+    return a[key] - b[key]
+  })
+}
+const sortDown = (key) => {
+  cartData.lists.sort((a, b) => {
+    return b[key] - a[key]
+  })
+}</pre>
+        <div>按字母排序</div>
+        <pre>
+const sortStrUp = (key) => {
+  cartData.lists.sort((a, b) => {
+    return a[key].localeCompare(b[key])
+  })
+}
+const sortStrDown = (key) => {
+  cartData.lists.sort((a, b) => {
+    return b[key].localeCompare(a[key])
+  })
+}</pre>
+        <figure>
+          <img src="./imgs/cart3.png" alt="">
+          <figcaption>默认显示</figcaption>
+        </figure>
+        <figure>
+          <img src="./imgs/cart4.png" alt="">
+          <figcaption>字母排序 - 降序</figcaption>
+        </figure>
+        <figure>
+          <img src="./imgs/cart5.png" alt="">
+          <figcaption>字母排序 - 升序</figcaption>
+        </figure>
+        <figure>
+          <img src="./imgs/cart6.png" alt="">
+          <figcaption>数字排序 - 降序</figcaption>
+        </figure>
+        <figure>
+          <img src="./imgs/cart7.png" alt="">
+          <figcaption>数字排序 - 升序</figcaption>
+        </figure>
+      </dd>
+    </dl>
+    <div id="footer"></div>
+    <script src="/utils/custom/footer.js"></script>
+  </div>
+</body>
+
+</html>

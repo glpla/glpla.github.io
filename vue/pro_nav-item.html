@@ -29,7 +29,7 @@
           Principle</a>
         <a class="nav-item" style="--s:--n5" href="#procedure"><span class="iconfont icon-codepen1"></span>
           Procedure</a>
-        <a class="nav-item" style="--s:--n6" href="#Prerequisite"><span class="iconfont icon-subject"></span>
+        <a class="nav-item" style="--s:--n6" href="#prerequisite"><span class="iconfont icon-assistantphoto"></span>
           Prerequisite</a>
         <a class="nav-item" style="--s:--n7" href="#drill"><span class="iconfont icon-mouse2"></span> Drill</a>
         <a class="nav-item" style="--s:--n8" href="#summary"><span class="iconfont icon-hangzhengguanli"></span>
@@ -40,7 +40,7 @@
     </div>
   </header>
   <section class="section" style="--s:--n0" id="objective">
-    <div class="chap">目标 Objective</div>
+    <h2>目标 Objective</h2>
     <ul>
       <li>熟悉模块化开发的基本原则</li>
       <li>掌握模块化开发的基本方法和流程</li>
@@ -51,7 +51,7 @@
     </ul>
   </section>
   <section class="section" style="--s:--n1" id="content">
-    <div class="chap">内容 Content</div>
+    <h2>内容 Content</h2>
     <ul>
       <li>模块化开发的基本原则</li>
       <li>模块化开发的基本方法和流程</li>
@@ -59,13 +59,13 @@
     </ul>
   </section>
   <section class="section" style="--s:--n2" id="review">
-    <div class="chap">回顾 Review</div>
+    <h2>回顾 Review</h2>
   </section>
   <section class="section" style="--s:--n3" id="intro">
-    <div class="chap">引言 Introduction</div>
+    <h2>引言 Introduction</h2>
   </section>
   <section class="section" style="--s:--n4" id="principle">
-    <div class="chap">原则 Principle</div>
+    <h2>原则 Principle</h2>
     <ul>
       <li>职责单一原则 Single Responsibility Principle</li>
       <p>. 一个组件只做一件事，保持组件功能的清晰和完整</p>
@@ -99,7 +99,7 @@
     </ul>
   </section>
   <section class="section" style="--s:--n5" id="procedure">
-    <div class="chap">过程 Procedure</div>
+    <h2>过程 Procedure</h2>
     <ol class="workflow">
       <li>需求分析 Requirement Analysis</li>
       <p>. 明确组件的功能、输入输出，确定组件的使用场景</p>
@@ -127,12 +127,13 @@
       <p>. 提供组件的使用说明、API 文档以及示例代码</p>
     </ol>
   </section>
-  <section class="section" style="--s:--n6" id="Prerequisite">
-    <div class="chap">前置 Prerequisite</div>
+  <section class="section" style="--s:--n6" id="prerequisite">
+    <h2>前置 Prerequisite</h2>
     <p class="edu"><span class="iconfont icon-a-ziyuan4"></span> 温故而知新</p>
     <p class="edu"><span class="iconfont icon-a-ziyuan4"></span> 学以致用</p>
-    <ul>
-      <li><span class="sub-title">v-for</span>
+    <ol>
+      <li>列表渲染 v-for</li>
+      <div>
         <p>. 基于一个数组或对象来渲染一个列表</p>
         <p>. 以数组为例；titles 是数据源；title 是迭代变量，表示数据项，可以是任何有效标识符；index 是数据项索引/位置序号</p>
         <p>. 更多信息，请访问 <a class="link" target="_blank" href="./vfor.html">列表渲染 v-for</a></p>
@@ -148,11 +149,12 @@ const  titles = ref([
   // 其它内容
   &lt;div&gt;{{ title.title }}&lt;/div&gt;
 &lt;/div&gt;</pre>
-      </li>
-      <li><span class="sub-title">defineProps()</span>
+      </div>
+      <li>自定义属性 defineProps()</li>
+      <div>
         <p>. 父组件 → 子组件传递参数/通信</p>
         <p>. 更多信息，请访问 <a class="link" target="_blank" href="./component_props.html"> 父传子 defineProps()</a></p>
-        <ol>
+        <ul>
           <li>子组件 Child.vue</li>
           <p>. 定义属性参数，暴露接口；这里暴露了一个字符串类型的属性 msg，默认为空；使用变量 props 接受</p>
           <pre>
@@ -172,12 +174,13 @@ import Child from './components/Child.vue';
 const  msg = ref('hi, there.')</pre>
           <p>. 在结构中使用子组件并传递属性参数</p>
           <pre>&lt;Child :msg = 'msg'&gt;&lt;/Child&gt;</pre>
-        </ol>
-      </li>
-      <li><span class="sub-title">&lt;slot&gt;</span>
+        </ul>
+      </div>
+      <li>插槽 &lt;slot&gt;</li>
+      <div>
         <p>. 从结构上扩展组件功能；以默认插槽为例</p>
         <p>. 更多信息，请访问 <a class="link" target="_blank" href="./component_slots.html">插槽 Slot</a></p>
-        <ol>
+        <ul>
           <li>子组件 Child.vue</li>
           <p>. 定义插槽</p>
           <pre>
@@ -195,12 +198,13 @@ const  msg = ref('hi, there.')</pre>
     // 插槽内容
   &lt;/div&gt;
 &lt;/Child&gt;</pre>
-        </ol>
-      </li>
-      <li><span class="sub-title">iconfont</span>
+        </ul>
+      </div>
+      <li>阿里字体图标 iconfont</li>
+      <div>
         <p>. 基于矢量图形的字体文件；轻量、兼容性好、易于使用、可定制</p>
         <p>. 更多信息，请访问 <a class="link" target="_blank" href="../web/framework/iconfont.html">阿里字体图标 Iconfont</a></p>
-        <ol>
+        <ul>
           <li>创建项目</li>
           <li>查找图标；添加到购物车</li>
           <li>选择使用方式：类 class</li>
@@ -209,13 +213,14 @@ const  msg = ref('hi, there.')</pre>
           <pre>@import url(//at.alicdn.com/t/c/font_3859342_qe1ea0cgv5.css);</pre>
           <li>使用图标：基类和图标类</li>
           <pre>&lt;span class="iconfont icon-home"&gt;&lt;/span&gt;</pre>
-        </ol>
-      </li>
-      <li><span class="sub-title">position</span>
+        </ul>
+      </div>
+      <li>定位 position</li>
+      <div>
         <p>. 最好显式的指定较高的层级 z-index，确保位于其它元素上层</p>
         <p>. 更多信息，请访问 <a class="link" target="_blank" href="../web/fixed.html">固定定位 Fixed</a>、<a class="link"
             target="_blank" href="../web/sticky.html">粘性定位 Sticky</a></p>
-        <ol>
+        <ul>
           <li>主导航固定定位在视图底部</li>
           <pre>
 .main-nav {
@@ -230,12 +235,12 @@ const  msg = ref('hi, there.')</pre>
   top: 0;
   z-index: 99;
 }</pre>
-        </ol>
-      </li>
-    </ul>
+        </ul>
+      </div>
+    </ol>
   </section>
   <section class="section" style="--s:--n7" id="drill">
-    <div class="chap">实操 Drill</div>
+    <h2>实操 Drill</h2>
     <p class="edu"><span class="iconfont icon-a-ziyuan4"></span> 熟能生巧</p>
     <p class="edu"><span class="iconfont icon-a-ziyuan4"></span> 没有规矩不成方圆</p>
     <ol>
@@ -361,14 +366,14 @@ const items = [
     </ol>
   </section>
   <section class="section" style="--s:--n8" id="summary">
-    <div class="chap">小结 Summary</div>
+    <h2>小结 Summary</h2>
     <ol>
       <li>模块化开发的基本原则</li>
       <li>模块化开发的基本方法和流程</li>
     </ol>
   </section>
   <section class="section" style="--s:--n9" id="homework">
-    <div class="chap">作业 Homework</div>
+    <h2>作业 Homework</h2>
     <ol>
       <li>实操：完成导航组件 NavItem.vue 的设计与开发；</li>
       <li>思考：是否可以全部采用插槽的方式封装导航组件？</li>
@@ -376,7 +381,7 @@ const items = [
     </ol>
   </section>
   <section class="section" style="--s:--n10" id="reference">
-    <div class="chap">参考 Reference</div>
+    <h2>参考 Reference</h2>
     <ol class="reference">
       <li><a target="_blank" href="./component.html">组件 Component</a></li>
       <li><a target="_blank" href="./vfor.html">列表渲染 v-for</a></li>
@@ -393,34 +398,7 @@ const items = [
   </section>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
-  <script>
-    let theme = document.getElementById("theme");
-    let themeIcon = document.getElementById("theme-icon");
-    let ham = document.getElementById("ham");
-    let navs = document.querySelectorAll(".nav-item");
-
-    theme.onclick = function () {
-      document.body.classList.toggle("dark-mode");
-      theme.classList.toggle("active");
-    };
-    ham.addEventListener("click", () => {
-      ham.classList.toggle("active");
-      if (ham.classList.contains("icon-menu")) {
-        ham.classList.remove("icon-menu");
-        ham.classList.add("icon-close");
-      } else {
-        ham.classList.remove("icon-close");
-        ham.classList.add("icon-menu");
-      }
-    });
-    navs.forEach((nav) => {
-      nav.addEventListener("click", () => {
-        ham.classList.remove("active");
-        ham.classList.remove("icon-close");
-        ham.classList.add("icon-menu");
-      });
-    });
-  </script>
+  <script src="/utils/custom/mix.js"></script>
 </body>
 
 </html>
