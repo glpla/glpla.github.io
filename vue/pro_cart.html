@@ -68,6 +68,7 @@
   </section>
   <section class="section" style="--s:--n7" id="details">
     <h2>详情页 DetailsView.vue</h2>
+    <div>内容：加载商品数据并清洗 → 渲染 → 生成购物车数据</div>
     <ol>
       <li>购物车静态效果</li>
       <p>. 购物车固定定位在详情页底部；没有封装</p>
@@ -84,13 +85,12 @@
   &lt;/div&gt;
   &lt;button class="btn btn-cart"&gt;加入购物车&lt;/button&gt;
   &lt;button class="btn btn-buy"&gt;立即购买&lt;/button&gt;
-&lt;/div&gt;
-      </pre>
+&lt;/div&gt;</pre>
       <figure>
         <img src="./imgs/carts0.png" alt="">
         <figcaption>购物车静态效果</figcaption>
       </figure>
-      <li>准备数据</li>
+      <li>准备数据及清洗</li>
       <p>. 在 onMounted 中已经获取到了商品数据；需要准备添加到购物车的数据；除了保持基本信息外，要增加一个数量字段 quantity，默认是1</p>
       <p>. 利用解构处理数据；这里没有处理规格 specification、甜点 dessert 和推荐商品 recommend</p>
       <pre>const good = ref({})</pre>
@@ -104,7 +104,7 @@ onMounted(async () => {
     recommend: [] 
   }
 })</pre>
-      <p>. 准备数据进阶版 - 处理规格 specification</p>
+      <p>. 准备数据及清洗进阶版 - 处理规格 specification</p>
       <pre>
 onMounted(async () => {
   let res = await goodsStore.getById(route.params.id)
