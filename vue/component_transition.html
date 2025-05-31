@@ -19,6 +19,11 @@
   <dl>
     <dd>除了类 class，内联样式 style 和状态 state 实现元素或组件的过渡和动画外，还可以使用 <a
         href="https://cn.vuejs.org/guide/built-ins/transition.html">&lt;Transition&gt;</a> 制作基于状态变化的过渡和动画</dd>
+    <dt>MindMap</dt>
+    <dd>
+      <iframe src="https://xmind.ai/embed/LcNbTpCQ?sheet-id=a34d7a6d-c43e-4e19-ac74-b42e8dadaa63" width="900px"
+        height="540px" frameborder="0" scrolling="no" allow="fullscreen"></iframe>
+    </dd>
     <dt>Introduction</dt>
     <dd>
       <div>内置组件 - 无需引用/注册即可在任意别的组件中使用</div>
@@ -37,7 +42,7 @@
       <div>. 改变特殊的 key 属性</div>
       <div>. 弥补了传统 CSS 的过渡动画 transition 不能响应 display 的显示和隐藏状态[???]</div>
       <pre>
-&lt;Transition&gt;
+&lt;Transition name="your_name" appear&gt;
     &lt;div v-if="flag"&gt;true&lt;/div&gt;
     &lt;div v-else&gt;false&lt;/div&gt;
 &lt;/Transition&gt;</pre>
@@ -133,7 +138,7 @@ function onLeaveCancelled(el) {}</pre>
     <dt>Advanced</dt>
     <dd>
       <div>1. 动态过渡效果</div>
-      <div>为每个过渡指定 name 属性加以区分；指定了 name 属性的过渡，其内置类将不再以v开始，而是以 name 名开始</div>
+      <div>为每个过渡指定 name 属性加以区分；指定了 name 属性的过渡，其内置类将不再以 v- 开始，而是以 name- 名开始</div>
       <pre>
 &lt;Transition name="scale" appear&gt;
   &lt;slot&gt;&lt;/slot&gt;
@@ -177,9 +182,9 @@ function onLeaveCancelled(el) {}</pre>
 .v-enter-active,
 .v-leave-active {
   // 指定过渡属性
-  transition: bottom 0.5s ease;
+  transition: bottom 0.5s ease-in-out;
   // 不指定过渡属性；默认所有属性都参与过渡
-  transition: 0.5s ease;
+  transition: 0.5s ease-in-out;
 }</pre>
     </dd>
   </dl>
@@ -199,12 +204,12 @@ function onLeaveCancelled(el) {}</pre>
       <div>单击时，模态框元素在视图右上角淡入</div>
       <!-- <div>注意：事件元素应放在过渡组件前面，否则。。。</div> -->
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 单击按钮，提示文字缩小消失后，进入百度主页 - 基于CSS的animation</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 单击按钮，提示文字缩小消失后，进入百度主页 - 基于 CSS 的animation</dd>
     <dd>
       <div>拓展1：请根据实例中的核心代码完成过渡类的设计</div>
       <div>拓展2：增加其它监听事件，查看过渡效果</div>
       <div>思考1：如果不增加按钮 button，直接把单击事件加到过渡组件或提示文本上???</div>
-      <div>思考2：如果监听CSS的 animation事件???</div>
+      <div>思考2：如果监听CSS的 animation 事件???</div>
       <pre>
 &lt;button @click="toBaidu"&gt;enter&lt;/button&gt;
 
