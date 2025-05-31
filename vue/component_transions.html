@@ -55,6 +55,18 @@
       <div>. 可以使用属性 moveClass 定制</div>
     </dd>
     <dd class="tips">如果使用了位移 transform，可能导致出现水平滚动条，请为容器指定 overflow-x: hidden</dd>
+    <dt>封装 Encapsulation</dt>
+    <dd>
+      <div>. 同一个项目中，过渡效果应尽量保持一致，不要太多</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 封装过渡组件 FadeTransition.vue</div>
+      <div>. 指定过渡样式；无法在组件内直接指定，应在 <span class="warn">全局样式</span> 中指定；为什么？</div>
+      <pre>
+&lt;div class="fade-transition"&gt;
+  &lt;TransitionGroup tag="ul" name="fade-list"&gt;
+    &lt;slot&gt;&lt;/slot&gt;
+  &lt;/TransitionGroup&gt;
+&lt;/div&gt;</pre>
+    </dd>
   </dl>
   <div class="chap">Drill</div>
   <dl>
@@ -126,6 +138,7 @@ onMounted(() => {
   position: absolute;
 }</pre>
     </dd>
+    <dd class="quest">封装为组件，再次实现案例</dd>
   </dl>
   <div class="chap">Summary</div>
   <dl>
