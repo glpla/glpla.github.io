@@ -111,14 +111,8 @@ const emits = defineEmits(['update:msg', 'update:tips'])</pre>
 &lt;input type="text" :value="tips" @input="$emit('update:tips', $event.target.value)"&gt;</pre>
     </dd>
   </dl>
-  <div class="chap">Summary & Homework</div>
+  <div class="chap">Drill</div>
   <dl>
-    <dt>Summary</dt>
-    <dd>
-      <div>子组件：defineModel()</div>
-      <div>父组件：v-model</div>
-    </dd>
-    <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 详情页 DetailsView.vue → 权益保护模态框组件 Modal.vue；使用双向绑定 defineModel() 实现
     </dd>
     <dd>
@@ -148,6 +142,53 @@ import Modal from '@/components/Modal.vue';
 const isShowModal = ref(false);</pre>
       <img src="./imgs/model.png" alt="">
       <div class="fig-sn">数据流</div>
+    </dd>
+  </dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd>
+      <div>子组件：defineModel()</div>
+      <div>父组件：v-model</div>
+    </dd>
+    <dt>Homework</dt>
+    <dd id="specification">[<span class="iconfont icon-keyboard"></span>] 产品规格 - 使用 radio 实现</dd>
+    <dd>
+      <div>. 数据结构不同，实现的方法略有不同</div>
+      <div>1. 杯型：中杯、大杯、霸王杯</div>
+      <div>2. 冷热：少冰、正常冰、多冰</div>
+      <div>3. 糖度：三分糖、五分糖、七分糖</div>
+      <div>子组件 Specification.vue：每个规格都是一组单选</div>
+      <pre>
+&lt;div class="specification"&gt;
+  &lt;span&gt;{{ item.label }}&lt;/span&gt;
+  &lt;label class="specification-item" v-for="option in item.options" :key="option.id"&gt;
+    &lt;input type="radio" :name="item.name" :value="option.label" v-model="model" hidden&gt;
+    &lt;span&gt;{{ option.label }}&lt;/span&gt;
+  &lt;/label&gt;
+&lt;/div&gt;</pre>
+      <pre>
+const model = defineModel()
+const props = defineProps({
+  item: {
+    type: Object,
+    default: {}
+  }
+})</pre>
+      <div>参考数据节点</div>
+      <pre>
+{
+  "id": 101,
+  "label": "杯型",
+  "name": "cup",
+  "options": [
+    { "id": 1, "label": "中杯", "value": "中杯", "sel": true },
+    { "id": 2, "label": "大杯", "value": "大杯", "sel": false },
+    { "id": 3, "label": "超大杯", "value": "超大杯", "sel": false }
+  ]
+}</pre>
+      <img src="./imgs/specification.png" alt="">
+      <p class="fig-sn">详情页规格组件效果</p>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 甜点组件 - 使用 checkbox 实现</dd>
     <dd>
@@ -183,59 +224,6 @@ const goodsSelected = ref({
       <pre>&lt;RecoDessert :dessert="goods.dessert" v-model:dessertSelected="goodsSelected.dessert" /&gt;</pre>
       <img src="./imgs/dessert.png" alt="">
       <p class="fig-sn">详情页甜点组件效果</p>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 产品规格 - 使用 radio 实现</dd>
-    <dd>
-      <div>1. 杯型：中杯、大杯、霸王杯</div>
-      <div>2. 冷热：少冰、正常冰、多冰</div>
-      <div>3. 糖度：三分糖、五分糖、七分糖</div>
-      <div>子组件 Specification.vue：每个规格都是一组单选</div>
-      <pre>
-&lt;div class="specification"&gt;
-  &lt;span&gt;{{ items.title }}&lt;/span&gt;
-  &lt;label class="specification-item" v-for="item in items.options" :key="item.id"&gt;
-    &lt;input type="radio" :name="items.name" :value="item.tag" v-model="model" hidden&gt;
-    &lt;span&gt;{{ item.tag }}&lt;/span&gt;
-  &lt;/label&gt;
-&lt;/div&gt;</pre>
-      <pre>
-const model = defineModel()
-const props = defineProps({
-  items: {
-    type: Object,
-    default: {}
-  }
-})</pre>
-      <div>父组件</div>
-      <pre>
-&lt;Specification :items="goodsStore.good.cup" v-model="goodsSelected.cup" /&gt;
-&lt;Specification :items="goodsStore.good.ther" v-model="goodsSelected.ther" /&gt;
-&lt;Specification :items="goodsStore.good.sugar" v-model="goodsSelected.sugar" /&gt;</pre>
-      <div>参考数据节点</div>
-      <pre>
-{
-  "name":"sugar",
-  "title":"糖度",
-  "options":[
-    {
-      "id": 0,
-      "sel": false,
-      "tag": "半糖"
-    },
-    {
-      "id": 1,
-      "sel": true,
-      "tag": "标准糖"
-    },
-    {
-      "id": 2,
-      "sel": false,
-      "tag": "不加糖"
-    }
-  ]
-}</pre>
-      <img src="./imgs/specification.png" alt="">
-      <p class="fig-sn">详情页规格组件效果</p>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 性别设置/个人中心 - 使用 radio 实现</dd>
     <dd>

@@ -66,7 +66,7 @@ const getGoodById = async (id) => {
     <dt id="cart">购物车仓库 cart.js</dt>
     <dd>
       <div>1. 购物车 carts</div>
-      <pre>const carts = ref([])</pre>
+      <pre>const lists = ref([])</pre>
       <!-- <div>2. 拉取/保存购物车 getCarts()</div> -->
       <div>2. 添加到购物车 addToCarts(product)</div>
       <div>. 如果商品不存在，则为当前商品添加新的 id 作为对应的购物车数据项的 id，该 id 会覆盖商品的 id；如果商品数据项已经存在，则数量相应的增加</div>
@@ -74,12 +74,12 @@ const getGoodById = async (id) => {
       <div>. 这里使用第三方库 <a href="https://www.npmjs.com/package/nanoid">NPM - Nanoid</a> 生成随机 id</div>
       <pre>
 const addToCarts = (product) => {
-  const existingItem = carts.value.find((item) => item.productId === product.productId);
+  const existingItem = lists.value.find((item) => item.productId === product.productId);
   if (existingItem) {
     existingItem.quantity += product.quantity;
   } else {
     // replace id with nanoid
-    carts.value.push({ 
+    lists.value.push({ 
       ...product, 
       id: nanoid(), 
       create_time: Date.now()
@@ -89,12 +89,12 @@ const addToCarts = (product) => {
       <div>3. 从购物车中移除 removeFromCart(id) </div>
       <pre>
 const removeFromCart = (id) =>{
-  cart.value = cart.value.filter(item => item.id !== id)
+  lists.value = lists.value.filter(item => item.id !== id)
 }</pre>
       <div>4. 清空购物车 clearCarts()</div>
       <pre>
 const clearCarts = () => {
-  carts.value = [];
+  lists.value = [];
 };</pre>
       <div>5. 从购物车移除* deleteFromToCarts(product)</div>
     </dd>

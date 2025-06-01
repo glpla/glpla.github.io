@@ -30,17 +30,19 @@
           Procedure</a>
         <a class="nav-item" style="--s:--n5" href="#prerequisite"><span class="iconfont icon-assistantphoto"></span>
           Prerequisite</a>
-        <a class="nav-item" style="--s:--n6" href="#cartjs"><span class="iconfont icon-shoppingcart"></span>
+        <a class="nav-item" style="--s:--n6" href="#cartjs"><span class="iconfont icon-storage"></span>
           cart.js</a>
-        <a class="nav-item" style="--s:--n7" href="#details"><span class="iconfont icon-details"></span>
+        <a class="nav-item" style="--s:--n7" href="#cartvue"><span class="iconfont icon-shoppingcart"></span>
+          Cart.vue</a>
+        <a class="nav-item" style="--s:--n8" href="#details"><span class="iconfont icon-details"></span>
           DetailsView.vue</a>
-        <a class="nav-item" style="--s:--n8" href="#menu"><span class="iconfont icon-menu1"></span>
+        <a class="nav-item" style="--s:--n9" href="#menu"><span class="iconfont icon-menu1"></span>
           MenuView.vue</a>
-        <a class="nav-item" style="--s:--n9" href="#summary"><span class="iconfont icon-hangzhengguanli"></span>
+        <a class="nav-item" style="--s:--n10" href="#summary"><span class="iconfont icon-hangzhengguanli"></span>
           Summary</a>
-        <a class="nav-item" style="--s:--n10" href="#homework"><span class="iconfont icon-appguanli"></span>
+        <a class="nav-item" style="--s:--n11" href="#homework"><span class="iconfont icon-appguanli"></span>
           Homework</a>
-        <a class="nav-item" style="--s:--n11" href="#reference"><span class="iconfont icon-clip"></span> Reference</a>
+        <a class="nav-item" style="--s:--n12" href="#reference"><span class="iconfont icon-clip"></span> Reference</a>
       </nav>
     </div>
   </header>
@@ -66,7 +68,54 @@
     <h2>购物车仓库 cart.js</h2>
     <p>. 详情请查看 <a class="link" target="_blank" href="./pinia_case.html#cart">购物车</a></p>
   </section>
-  <section class="section" style="--s:--n7" id="details">
+  <section class="section" style="--s:--n7" id="cartjs">
+    <h2>购物车组件 Cart.vue</h2>
+    <div>内容：操作购物车数据：全选、数量调整、结算、下单等</div>
+    <p>. 详情请查看 <a class="link" target="_blank" href="./drill_watch.html">侦听综合运用 - 购物车</a></p>
+    <ol>
+      <li>购物车UI设计</li>
+      <div>
+        <p>. 封装为一个组件</p>
+        <p>. 固定定位在菜单视图底部；弹性盒子方向调整为垂直；折叠时，由 footer 撑开；展开时，背景设为透明黑</p>
+        <p>. header 和 main 折叠时不显示 - 条件渲染</p>
+        <p>. header 设置外边距上为自动，撑开购物车</p>
+        <p>. main 指定最大高度；信息区可以设置单点溢出...</p>
+        <p>. footer 折叠时，背景为空；展开时设置白色</p>
+        <pre>
+&lt;div class="cart" :class="{ 'show-cart': isShow }"&gt;
+  &lt;header v-show="isShow"&gt;
+    // ...
+  &lt;/header&gt;
+  &lt;main v-show="isShow"&gt;
+    &lt;div class="cart-item" v-for="item in 4"&gt;
+      // ...
+    &lt;/div&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;
+    &lt;div class="cont"&gt;
+      // ...
+    &lt;/div&gt;
+  &lt;/footer&gt;
+&lt;/div&gt;</pre>
+        <figure>
+          <img src="./imgs/carts1.png" alt="">
+          <figcaption>购物车静态折叠效果</figcaption>
+        </figure>
+        <figure>
+          <img src="./imgs/carts2.png" alt="">
+          <figcaption>购物车静态展开效果</figcaption>
+        </figure>
+      </div>
+      <li>数据准备</li>
+      <li>全选和单选</li>
+      <li>数量增加/减少</li>
+      <li>总价统计</li>
+      <li>优惠总价统计</li>
+      <li>总量统计</li>
+      <li>去结算</li>
+    </ol>
+  </section>
+  <section class="section" style="--s:--n8" id="details">
     <h2>详情页 DetailsView.vue</h2>
     <div>内容：加载商品数据并清洗 → 渲染 → 生成购物车数据</div>
     <ol>
@@ -91,31 +140,32 @@
         <figcaption>购物车静态效果</figcaption>
       </figure>
       <li>准备数据及清洗</li>
-      <p>. 在 onMounted 中已经获取到了商品数据；需要准备添加到购物车的数据；除了保持基本信息外，要增加一个数量字段 quantity，默认是1</p>
-      <p>. 利用解构处理数据；这里没有处理规格 specification、甜点 dessert 和推荐商品 recommend</p>
-      <pre>const good = ref({})</pre>
+      <p>. 在 onMounted 中已经获取到了商品数据；需要准备添加到购物车的数据；</p>
+      <p>. 利用解构处理/清洗数据，格式同原始数据保持一致；同名字段，后面的会覆盖前面的</p>
+      <p>. 增加一个数量字段 quantity，默认是1</p>
+      <p>. 处理规格 specification；规格组件的封装，请参考 <a class="link" target="_blank"
+          href="./component_model.html#specification">组件双向绑定 defineModel - 规格组件
+          specification</a></p>
+      <p>. 这里没有处理甜点 dessert 和推荐商品 recommend</p>
+      <pre>
+// 商品仓库 goods.js 中读取的数据
+const good = ref({})
+// 清洗后的数据，加入到购物车仓库 cart.js 中
+const goodSelected = ref({})</pre>
       <pre>
 onMounted(async () => {
   let res = await goodsStore.getById(route.params.id)
-  good.value = { 
-    ...res, 
-    quantity: 1,
-    dessert: [],  
-    recommend: [] 
-  }
-})</pre>
-      <p>. 准备数据及清洗进阶版 - 处理规格 specification</p>
-      <pre>
-onMounted(async () => {
-  let res = await goodsStore.getById(route.params.id)
-  good.value = {
+  good.value = res
+
+  goodSelected.value = {
     ...res,
     quantity: 1,
-    cup: res.specification[0].options.find(item => item.sel == true).label,
-    ther: res.specification[1].options.find(item => item.sel == true).label,
-    sugar: res.specification[2].options.find(item => item.sel == true).label,
-    dessert: [],  
-    recommend: [] 
+    specification: [
+      { name: 'cup', value: res.specification[0].options.find(item => item.sel == true).label },
+      { name: 'ther', value: res.specification[1].options.find(item => item.sel == true).label },
+      { name: 'sugar', value: res.specification[2].options.find(item => item.sel == true).label, }],
+    dessert: [],
+    recommend: []
   }
 })</pre>
       <li>增加/减少数量</li>
@@ -124,15 +174,15 @@ onMounted(async () => {
       <p>. 这里使用内联事件实现</p>
       <pre>
 &lt;div class="opers"&gt;
-  &lt;button class="oper dec" @click="good.quantity--" :disabled="good.quantity &lt;= 1"&gt;-&lt;/button&gt;
-  &lt;div class="quantity"&gt;{{ good.quantity }}&lt;/div&gt;
-  &lt;button class="oper inc" @click="good.quantity++"&gt;+&lt;/button&gt;
+  &lt;button class="oper dec" @click="goodSelected.quantity--" :disabled="goodSelected.quantity &lt;= 1"&gt;-&lt;/button&gt;
+  &lt;div class="quantity"&gt;{{ goodSelected.quantity }}&lt;/div&gt;
+  &lt;button class="oper inc" @click="goodSelected.quantity++"&gt;+&lt;/button&gt;
 &lt;/div&gt;</pre>
       <li>处理总价</li>
-      <p>. 利用计算 computed() 或监听 watch()</p>
+      <p>. 使用计算 computed()处理；也可以使用监听 watch()</p>
       <pre>
 const total = computed(() => {
-  return (good.value.price * (1 - good.value.discount) * good.value.quantity).toFixed(2)
+  return (goodSelected.value.price * (1 - goodSelected.value.discount) * goodSelected.value.quantity).toFixed(2)
 })</pre>
       <li>添加到购物车</li>
       <p>. 为加入购物车指定事件 addToCarts</p>
@@ -142,33 +192,55 @@ const total = computed(() => {
       <pre>
 const addToCarts = () => {
   const cartItem = {
-    ...good.value,
-    productId: good.value.id,
+    ...goodSelected.value,
+    productId: goodSelected.value.id,
   };
   cartStore.addToCarts(cartItem)
   router.replace('/menu')
+  alert('Added to carts')
 }</pre>
       <li>立即购买</li>
       <p>. 略</p>
       <li>更新视图</li>
       <p>. 使用响应式数据替换掉上述静态结构中的数据</p>
+      <p>. 完善详情页中其它部分</p>
       <p>. 更多效果自行完成</p>
     </ol>
   </section>
-  <section class="section" style="--s:--n8" id="menu">
+  <section class="section" style="--s:--n9" id="menu">
     <h2>菜单页 MenuView.vue</h2>
+    <div>
+      <p>. 假设购物车历史数据为空；用户浏览详情页时，通过"添加到购物车"而产生数据</p>
+      <p>. 购物车组件加载时，获取购物车仓库数据，如果为空，则不显示</p>
+      <pre>
+import Cart from '@/components/Cart.vue';
+import { useCartStore } from '@/stores/cart';
+const cartStore = useCartStore();</pre>
+      <pre>&lt;Cart v-if="cartStore.lists.length"&gt;&lt;/Cart&gt;</pre>
+    </div>
   </section>
-  <section class="section" style="--s:--n9" id="summary">
+  <section class="section" style="--s:--n10" id="summary">
     <h2>小结 Summary</h2>
     <ol></ol>
   </section>
-  <section class="section" style="--s:--n10" id="homework">
+  <section class="section" style="--s:--n11" id="homework">
     <h2>作业 Homework</h2>
     <ol></ol>
   </section>
-  <section class="section" style="--s:--n11" id="reference">
+  <section class="section" style="--s:--n12" id="reference">
     <h2>参考 Reference</h2>
-    <ol class="reference"></ol>
+    <ol class="reference">
+      <li><a target="_blank" href="./template_syntax.html">模板语法 Template Syntax</a></li>
+      <li><a target="_blank" href="./reactivity.html">响应式数据 Reactivity</a></li>
+      <li><a target="_blank" href="./events.html">事件 Events</a></li>
+      <li><a target="_blank" href="./events_m.html">事件修饰符 Events Modifiers</a></li>
+      <li><a target="_blank" href="./lifecycle.html">生命周期函数 Lifecycle Hooks</a></li>
+      <li><a target="_blank" href="./component_props.html">父传子 defineProps()</a></li>
+      <li><a target="_blank" href="./component_model.html">组件双向绑定 defineModel</a></li>
+      <li><a target="_blank" href="./pinia.html">状态管理 Pinia</a></li>
+      <li><a target="_blank" href="../web/flex.html">弹性盒子布局 Flex</a></li>
+      <li><a target="_blank" href="../web/grid.html">网格布局 Flex</a></li>
+    </ol>
   </section>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>

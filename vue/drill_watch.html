@@ -40,29 +40,37 @@
     <div class="cont">
       <div>静态页面设计与实现</div>
       <div>数据设计</div>
-      <p>. 待选商品 goods：数组；本地数据或使用 fetch 或 axios加载远程数据</p>
-      <p>. 选中商品 selectedGoods；数组</p>
+      <p>. 待选商品 lists：数组；本地数据或使用 fetch 或 axios加载远程数据</p>
+      <p>. 选中商品 selectedLists；数组</p>
       <p>. 是否全选 isAll，布尔；默认是真，全选</p>
       <p>. 商品价格总数 sum；数值</p>
       <p>. 商品数量总数 count；数值</p>
       <pre>
-const goods = ref([])
-const selectedGoods = ref([...goods])
+import { useCartStore } from '@/stores/cart';
+const cartStore = useCartStore();
+const lists = ref([])
+const selectedLists = ref([])
 const isAll = ref(true)
 const sum = ref(0)
-const count = ref(0)</pre>
+const count = ref(0)
+
+onMounted(() => {
+  lists.value = cartStore.lists;
+  selectedLists.value = [...lists.value]
+})</pre>
       <div>渲染数据</div>
       <p>. 列表渲染多个商品项</p>
       <div>商品的选择侦听</div>
-      <p>. 每个商品项的选择和 selectedGoods 使用双向绑定</p>
-      <p>. 侦听 selectedGoods：如果选中列表长度和商品列表长度相等，则全选为真；否则全选为假</p>
+      <p>. 每个商品项的选择和 selectedLists 使用双向绑定</p>
+      <p>. 侦听 selectedLists：如果选中列表长度和商品列表长度相等，则全选为真；否则全选为假</p>
       <pre>
-&lt;div v-for="(item, ind) in goods">
-  &lt;input type="checkbox" name="cart" v-model="selectedGoods" :value="item"&gt;
+&lt;div v-for="(item, ind) in lists">
+  &lt;input type="checkbox" name="cart" v-model="selectedLists" :value="item"&gt;
+  // .商品信息，可以封装为组件
 &lt;/div></pre>
       <pre>
-watch(selectedGoods, (newVal) => {
-  isAll.value = newVal.length == goods.length
+watch(selectedLists, (newVal) => {
+  isAll.value = newVal.length == lists.value.length
   
   // 总价结算 sum
   
@@ -71,8 +79,8 @@ watch(selectedGoods, (newVal) => {
       <div>商品的数量</div>
       <p>. 单击商品项的增加和减少按钮相应的调整其数量；并根据库存进行越界检测</p>
       <p>. 这里使用内联事件方式；也可以使用函数方式</p>
-      <pre>&lt;button class="btn" @click="item.quantity--" :disabled="cart.quantity == 1"&gt;-&lt;/button&gt;</pre>
-      <pre>&lt;button class="btn" @click="item.quantity++" :disabled="cart.quantity >= cart.stock"&gt;+&lt;/button&gt;</pre>
+      <pre>&lt;button class="btn" @click="item.quantity--" :disabled="item.quantity &lt;= 1"&gt;-&lt;/button&gt;</pre>
+      <pre>&lt;button class="btn" @click="item.quantity++" :disabled="item.quantity >= item.stock"&gt;+&lt;/button&gt;</pre>
       <div>全选侦听</div>
       <p>. 双向绑定 isAll</p>
       <p>. 使用改变事件，判断是全选还是全不选</p>
@@ -80,17 +88,17 @@ watch(selectedGoods, (newVal) => {
       <pre>
 const setAll = () => {
   if (isAll.value) {
-    selectedGoods.value = [...goods]
+    selectedLists.value = [...lists.value]
   } else {
-    selectedGoods.value = []
+    selectedLists.value = []
   }
 }</pre>
       <div>总价结算</div>
       <p>. 修改侦听为深度侦听和立即侦听：便于页面渲染完毕时立即更新数据</p>
       <p>. 或使用自动侦听 watchEffect</p>
-      <pre>sum.value = selectedGoods.value.reduce((total, item) => total + item.quantity * item.price * (1 - item.discount), 0)</pre>
+      <pre>sum.value = selectedLists.value.reduce((total, item) => total + item.quantity * item.price * (1 - item.discount), 0)</pre>
       <div>数量结算</div>
-      <pre>count.value = selectedGoods.value.reduce((total, item) => total + item.quantity, 0)</pre>
+      <pre>count.value = selectedLists.value.reduce((total, item) => total + item.quantity, 0)</pre>
       <figure>
         <img src="./imgs/watch0.png" alt="">
         <figcaption>购物车静态页面</figcaption>
