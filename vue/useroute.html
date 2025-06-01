@@ -86,6 +86,21 @@ const route = useRoute()</pre>
       </table>
     </dd>
   </dl>
+  <div class="chap">Drill</div>
+  <dl>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 详情页 DetailView.vue - 根据 id 加载对应的商品</dd>
+    <dd>
+      <div>方案1：直接在结构中获取并使用</div>
+      <pre>&lt;div&gt;params: {{ $route.params.id }}&lt;/div&gt;</pre>
+      <div>方案2：在逻辑中获取并使用</div>
+      <pre>
+onMounted(() => {
+  console.log(route.params.id)
+  // fetch()
+  // axios()
+})</pre>
+    </dd>
+  </dl>
   <div class="chap">Summary & Homework</div>
   <dl>
     <dt>Summary</dt>
@@ -94,15 +109,6 @@ const route = useRoute()</pre>
       <div>逻辑中使用 - 引入路由包 useRoute 并实例 route</div>
     </dd>
     <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 详情页 DetailView.vue - 根据 id 加载对应的商品</dd>
-    <dd>
-      <pre>
-onMounted(() => {
-  console.log(route.params.id)
-  // fetch()
-  // axios()
-})</pre>
-    </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 分享页面 - 添加商品 id 作为查询路由参数</dd>
     <dd class="sn">
       <div>分享 URL - 增加特定的信息</div>

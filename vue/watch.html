@@ -199,29 +199,11 @@ watch([() => user.age, () => user.addr.code], ([n0, n1], [o0, o1]) => {
 })</pre>
     </dd>
   </dl>
-  <div class="chap">Summary & Homework</div>
+  <div class="chap">Drill</div>
   <dl>
-    <dt>Summary</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 总价计算 - 监听版</dd>
     <dd>
-      <div>侦听 ref()</div>
-      <div>侦听 reactive()</div>
-      <div>侦听 watch 常用于触发异步操作等副作用，比如根据用户输入去发起 API 请求获取数据</div>
-      <div>计算属性 computed 多用于数据的2次处理</div>
-      <div>可以侦听一个或多个响应式数据</div>
-      <div>可以使用 getter 函数侦听响应式数据的特定属性</div>
-    </dd>
-    <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 详情页 - 数量变化引起总价变化</dd>
-    <dd>
-      <div>方案1. 使用计算属性实现：1个响应式数据，1个派生数据；根据产品数量 num 派生总价 sum</div>
-      <pre>
-import { ref, computed } from 'vue';
-const num = ref(1);
-const price = 9.9
-const sum = computed(() => {
-  return num.value * price;
-});</pre>
-      <div>方案2. 使用侦听实现：2个响应式数据；侦听产品数量 num，执行副作用 - 计算总价 sum</div>
+      <div>使用侦听实现：2个响应式数据；侦听产品数量 num，执行副作用 - 计算总价 sum</div>
       <div>为什么要开启立即选项？</div>
       <pre>
 &lt;div>{{ sum }}&lt;/div&gt;
@@ -237,6 +219,47 @@ watch(num, (newv, oldv) => {
   console.log('user is watched', newv, oldv);
   sum.value = newv * price;
 }, { immediate: true })</pre>
+    </dd>
+  </dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd>
+      <div>侦听 ref()</div>
+      <div>侦听 reactive()</div>
+      <div>侦听 watch 常用于触发异步操作等副作用，比如根据用户输入去发起 API 请求获取数据</div>
+      <div>计算属性 computed 多用于数据的2次处理</div>
+      <div>可以侦听一个或多个响应式数据</div>
+      <div>可以使用 getter 函数侦听响应式数据的特定属性</div>
+    </dd>
+    <dt>Homework</dt>
+    <dd id="tabcard">[<span class="iconfont icon-keyboard"></span>] 类标签页</dd>
+    <dd>
+      <div>案例1. <a href="../course/rank.html">积分榜</a> - 菜单的变化触发数据加载</div>
+      <div>请完善样式 - 静态样式和选中样式</div>
+      <pre>&lt;div v-for="tab in tabs" :key="tab.id" @click="word = tab.data"&gt;{{ tab.label }}&lt;/div&gt;</pre>
+      <pre>
+import { ref, watch } from 'vue';
+const tabs = ref([{
+  id: 1,
+  label: '软工3班',
+  data: '20240203.json',
+}, {
+  id: 2,
+  label: '软工4班',
+  data: '20240204.json',
+}])
+const word = ref(tabs.value[0].data)
+watch(word, (newValue, oldValue) => {
+  console.log(newValue);
+  fetch(`https://glpla.github.io/utils/data/rank/${newValue}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+    })
+}, { immediate: true })</pre>
+      <div>案例2. 下拉菜单 &lt;select&gt; 的变化触发数据加载</div>
+      <div>案例3. <a href="./pro/dist/index.html">瑞幸咖啡</a>首页标签页 - 随享瑞幸、颜值水杯 - 的变化触发数据加载</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 登录页 - 发送验证码</dd>
     <dd>
@@ -291,34 +314,6 @@ watch(isModalOpen, (newval, oldval) => {
     }, 3000);
   }
 })</pre>
-    </dd>
-    <dd id="tabcard">[<span class="iconfont icon-keyboard"></span>] 类标签页</dd>
-    <dd>
-      <div>案例1. <a href="../course/rank.html">积分榜</a> - 菜单的变化触发数据加载</div>
-      <div>请完善样式 - 静态样式和选中样式</div>
-      <pre>&lt;div v-for="tab in tabs" :key="tab.id" @click="word = tab.data"&gt;{{ tab.label }}&lt;/div&gt;</pre>
-      <pre>
-import { ref, watch } from 'vue';
-const tabs = ref([{
-  id: 1,
-  label: '软工3班',
-  data: '20240203.json',
-}, {
-  id: 2,
-  label: '软工4班',
-  data: '20240204.json',
-}])
-const word = ref(tabs.value[0].data)
-watch(word, (newValue, oldValue) => {
-  console.log(newValue);
-  fetch(`https://glpla.github.io/utils/data/rank/${newValue}`)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-    })
-}, { immediate: true })</pre>
-      <div>案例2. 下拉菜单 &lt;select&gt; 的变化触发数据加载</div>
-      <div>案例3. <a href="./pro/dist/index.html">瑞幸咖啡</a>首页标签页 - 随享瑞幸、颜值水杯 - 的变化触发数据加载</div>
     </dd>
   </dl>
   <div id="footer"></div>

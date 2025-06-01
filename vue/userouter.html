@@ -126,6 +126,34 @@ router.push({ path: '/user', query: { id: 100 }, replace: true })
 router.replace({ path: '/user', query: { id: 100 } })</pre>
     </dd>
   </dl>
+  <div class="chap">Drill</div>
+  <dl>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 产品组件 GoodsItem.vue导航到产品详情页 DetailView.vue - 编程式导航版</dd>
+    <dd>
+      <div>路由设计</div>
+      <pre>
+{
+  path: '/details/:id',
+  component: () => import('@/views/DetailsView.vue'),
+}</pre>
+      <div>方案1：直接在结构中导航</div>
+      <pre>
+&lt;div class="goods-item" @click.stop="$router.push('/details/' + product.id)"&gt;
+  // ...
+&lt;/div&gt;</pre>
+      <div>方案2：在逻辑中导航</div>
+      <pre>
+&lt;div class="goods-item" @click.stop="toDetails(product.id)"&gt;
+  // ...
+&lt;/div&gt;</pre>
+      <pre>
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const toDetails = (id) => {
+  router.push('/details/' + id)
+}</pre>
+    </dd>
+  </dl>
   <div class="chap">Summary & Homework</div>
   <dl>
     <dt>Summary</dt>
@@ -151,18 +179,6 @@ onMounted(()=>{
 })</pre>
       <div class="hint">如何优化代码？</div>
       <!-- <div>清除定时器</div> -->
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 产品组件 GoodsItem.vue 到产品详情页 DetailView.vue 的动态路由设计</dd>
-    <dd>
-      <pre>
-{
-  path: '/details/:id',
-  component: () => import('@/views/DetailsView.vue'),
-}</pre>
-      <pre>
-&lt;div class="goods-item" @click.stop="$router.push('/details/' + product.id)"&gt;
-  // ...
-&lt;/div&gt;</pre>
     </dd>
   </dl>
   <div id="footer"></div>

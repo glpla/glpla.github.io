@@ -152,20 +152,12 @@ const grade = computed(() => {
 })      </pre>
     </dd> -->
   </dl>
-  <div class="chap">Summary & Homework</div>
+  <div class="chap">Drill</div>
   <dl>
-    <dt>Summary</dt>
-    <dd class="sn">
-      <div>计算属性的引入和使用</div>
-      <div>无参计算属性</div>
-      <div>带参计算属性</div>
-    </dd>
-    <dt>Homework</dt>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./pro/dist/index.html">商品列表页 Goods.vue</a> →
-      goodsItem.vue 折扣处理</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 折扣处理 - <a href="./pro/dist/index.html">商品列表页 Goods.vue</a></dd>
     <dd>
       <div>单个数据 - 直接处理</div>
-      <pre>&lt;div&gt;{{ priceWithDis }}&lt;/div&gt;</pre>
+      <pre>&lt;div&gt;折后 {{ priceWithDis }}&lt;/div&gt;</pre>
       <pre>
 const priceWithDis = computed(() => price.value * (1 - discount.value))</pre>
       <div>多个数据 - 使用参数；toFixed() 是系统数据处理函数，可以指定保留小数点位数</div>
@@ -176,6 +168,28 @@ const getDiscount = computed(() => {
   }
 })</pre>
     </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 总价计算 - 计算属性版</dd>
+    <dd>
+      <div>使用计算属性实现：1个响应式数据，1个派生数据；根据产品数量 num 派生总价 sum</div>
+      <pre>&lt;div&gt;总价 {{ sum }}&lt;/div&gt;</pre>
+      <pre>
+import { ref, computed } from 'vue';
+const num = ref(1);
+const price = 9.9
+const sum = computed(() => {
+  return num.value * price;
+});</pre>
+    </dd>
+  </dl>
+  <div class="chap">Summary & Homework</div>
+  <dl>
+    <dt>Summary</dt>
+    <dd class="sn">
+      <div>计算属性的引入和使用</div>
+      <div>无参计算属性</div>
+      <div>带参计算属性</div>
+    </dd>
+    <dt>Homework</dt>
     <dd>[<span class="iconfont icon-keyboard"></span>] 分别使用普通方法和计算属性处理数据</dd>
     <dd>
       <img src="./imgs/computed0.png" alt="">
