@@ -68,10 +68,41 @@
   </dl>
   <div class="chap">Drill</div>
   <dl>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./component_dynamic.html#tabcard">标签页组件</a> - 动态组件缓存版
+    </dd>
+    <dd class="sn">
+      <div>为每个组件增加 2 个 <a href="./lifecycle.html">生命周期函数/钩子</a>，当标签页切换时，查看组件的加载和激活状态；如</div>
+      <pre>
+onActivated(() => {
+  console.log('TabGoods onActivated');
+})
+onDeactivated(() => {
+  console.log('TabGoods onDeactivated');
+})</pre>
+      <div>使用缓存组件包裹动态组件，修改结构如下</div>
+      <pre>
+&lt;span v-for="(item, ind) in com" @click="index = ind"&gt;{{ item.tag }}&lt;/span&gt;
+&lt;KeepAlive&gt;
+  &lt;component :is="com[index].component"&gt;&lt;/component&gt;
+&lt;/KeepAlive&gt;</pre>
+      <div>查看组件切换时，控制台的输出</div>
+    </dd>
+  </dl>
+  <div class="chap">Summary</div>
+  <dl>
+    <dd class="sn">
+      <div>&lt;KeepAlive&gt;的属性</div>
+      <div>&lt;KeepAlive&gt;的生命周期</div>
+      <div>&lt;KeepAlive&gt;的事件</div>
+      <div>&lt;KeepAlive&gt;的应用</div>
+    </dd>
+  </dl>
+  <div class="chap">Homework</div>
+  <dl>
     <dd>[<span class="iconfont icon-keyboard"></span>] 路由视图缓存</dd>
     <dd>
-      <div>. 避免重复加载</div>
-      <div>. 不是简单的使用缓存组件包裹，而应该使用动态组件实现</div>
+      <div>. 避免初始化逻辑重复执行，如数据加载</div>
+      <div>. 不是简单的使用缓存组件包裹，而应该使用动态组件实现；<span class="warn">注意查看浏览器的提示信息</span></div>
       <div>. v-slot="{ Component }" 是 Vue 3 中用于接收 <a href="./component_slots.html#vslot">作用域插槽 scoped slot</a> 传递数据的语法：从
         &lt;RouterView&gt; 接收当前激活的路由组件</div>
       <pre>
@@ -96,42 +127,6 @@ onMounted(async () => {
   } else {
     goods.value = goodsStore.goods;
   }
-})</pre>
-    </dd>
-  </dl>
-  <div class="chap">Summary</div>
-  <dl>
-    <dd class="sn">
-      <div>&lt;KeepAlive&gt;的属性</div>
-      <div>&lt;KeepAlive&gt;的生命周期</div>
-      <div>&lt;KeepAlive&gt;的事件</div>
-      <div>&lt;KeepAlive&gt;的应用</div>
-    </dd>
-  </dl>
-  <div class="chap">Homework</div>
-  <dl>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./component_dynamic.html#tabcard">标签页组件</a></dd>
-    <dd>
-      <div>. 动态组件缓存版</div>
-      <div>. 修改第一种方案的结构为</div>
-      <pre>
-&lt;span v-for="(item, ind) in com" @click="index = ind"&gt;{{ item.tag }}&lt;/span&gt;
-&lt;KeepAlive&gt;
-  &lt;component :is="com[index].component"&gt;&lt;/component&gt;
-&lt;/KeepAlive&gt;</pre>
-      <div>. 增加3个钩子，当标签页切换时，查看组件的加载和激活状态；如</div>
-      <pre>
-onMounted(() => {
-  console.log('coffee onMounted');
-
-})
-onActivated(() => {
-  console.log('coffee onActivated');
-
-})
-onDeactivated(() => {
-  console.log('coffee onDeactivated');
-
 })</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 缓存项目中其它业务部分</dd>
