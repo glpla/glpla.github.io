@@ -60,8 +60,17 @@ const getGoodById = async (id) => {
   // 显式返回结果，便于组件使用
   return res;
 };</pre>
-      <div>5. 分页获取*</div>
-      <div>6. 加载指示*</div>
+      <div>5. 根据关键字获取 - 查找 title</div>
+      <pre>
+const getByQuery = async (query) => {
+  if (!goods.value.length) {
+    await getAll();
+  }
+  let res = goods.value.filter((item) => item.title.includes(query));
+  return res;
+};</pre>
+      <div>6. 分页获取*</div>
+      <div>7. 加载指示*</div>
     </dd>
     <dt id="cart">购物车仓库 cart.js</dt>
     <dd>
@@ -189,7 +198,7 @@ watch(() => goodStore.isLoading, (newVal, oldVal) => {
     show.value = true;
 })</pre>
     </dd> -->
-    <dd>[<span class="iconfont icon-keyboard"></span>]主题切换仓库</dd>
+    <dd id="theme">[<span class="iconfont icon-keyboard"></span>]主题切换仓库</dd>
     <dd class="sn">
       <p>. 主题切换/换肤/日夜模式</p>
       <p>. 通过为 html 指定自定义属性实现 CSS 变量的更新达到切换效果</p>
@@ -198,45 +207,45 @@ watch(() => goodStore.isLoading, (newVal, oldVal) => {
 :root {
     --txt-color: #303133;
     --bg-color: #f1f1f1;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    // 其它变量...
 }
 
 // 类形式
-.data-theme {
+.dark-theme {
     --txt-color: #f1f1f1;
     --bg-color: #131313;
-    --shadow-color: rgba(255, 255, 255, 0.1);
 }
 
-// 属性形式
+// 自定义属性形式
 [data-theme="dark"] {
     --txt-color: #f1f1f1;
     --bg-color: #131313;
-    --shadow-color: rgba(255, 255, 255, 0.1);
 }</pre>
-      <div>主题仓库</div>
+      <div>主题仓库：两种方案都可以；保留一种即可</div>
       <pre>
 import { defineStore } from 'pinia'
 import { ref, onMounted } from 'vue'
 export const useThemeStore = defineStore('theme', () => {
 
-  const isDarkMode = ref(false);
+  const isDarkTheme = ref(false);
 
-  const toggleDarkMode = () => {
-    isDarkMode.value = !isDarkMode.value;
-    document.documentElement.setAttribute('data-theme', isDarkMode.value ? 'dark' : 'light');
+  const toggleDarkTheme = () => {
+    isDarkTheme.value = !isDarkTheme.value;
+    //  方案1：设置针自定义属性
+    document.documentElement.setAttribute('data-theme', isDarkTheme.value ? 'dark' : 'light');
+    // 方案2：设置类
+    // document.documentElement.classList.toggle("dark-theme");
   };
 
-  return { isDarkMode, toggleDarkMode }
+  return { isDarkTheme, toggleDarkTheme }
 })</pre>
       <div>在SFC中引入仓库，并使用相应的图标展示暗黑和白天，最后绑定主题切换事件</div>
       <pre>
 import { useThemeStore } from '@/stores/theme';
 const themeStore = useThemeStore();</pre>
       <pre>
-&lt;div class="theme-icon" @click="themeStore.toggleDarkMode"&gt;
-    &lt;span v-if="themeStore.isDarkMode" class="iconfont icon-night-mode-fill"&gt;&lt;/span&gt;
-    &lt;span v-else class="iconfont icon-daytime-mode-fill"&gt;&lt;/span&gt;
+&lt;div class="theme-icon" @click="themeStore.toggleDarkTheme"&gt;
+    &lt;span class="iconfont" :class="themeStore.isDarkTheme ? 'icon-Moon-Star' : 'icon-Sun'"&gt;&lt;/span&gt;
 &lt;/div&gt;</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./drill_ham.html">汉堡菜单仓库</a></dd>
