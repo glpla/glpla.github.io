@@ -26,26 +26,31 @@
   </header>
   <dl>
     <dt>说明</dt>
-    <dd>. 按照指定方式裁剪图像，如扫光、暗夜模式切换</dd>
-    <dd>. 阴影、边框等会被切掉</dd>
-    <dd>. 裁剪方式：圆circle、椭圆eclipse、多边形polygon等等</dd>
-    <dd>. 更多裁剪方式，请访问 <a href="https://tools.jb51.net/code/css3path"> clip-path maker</a></dd>
-    <dt>属性</dt>
-    <dd>. clip-source = url</dd>
-    <dd>. basic-shape = inset | circle | ellipse | polygon</dd>
-    <dd>. geometry-box = shape-box | fill-box | stroke-box | view-box</dd>
-    <dt class="nav-cont">矩形 inset 裁剪</dt>
-    <dd>. 5个参数：上右下左和圆角大小</dd>
-    <dd class="basic"><img class="cp-img0" src="../utils/view/view0.jpg" alt=""></dd>
     <dd>
+      <div>. 按照指定方式裁剪背景色/背景图像，如扫光、暗夜模式切换</div>
+      <div>. 阴影、边框等会被切掉</div>
+      <div>. 裁剪方式：圆 circle、椭圆 eclipse、多边形 polygon 等等</div>
+      <div>. 不要直接用到 &lt;html&gt; 或 &lt;body&gt;</div>
+      <div>. 更多裁剪方式，请访问 <a href="https://tools.jb51.net/code/css3path"> clip-path maker</a></div>
+    </dd>
+    <dt>属性</dt>
+    <dd>
+      <div>. clip-source = url</div>
+      <div>. basic-shape = inset | circle | ellipse | polygon</div>
+      <div>. geometry-box = shape-box | fill-box | stroke-box | view-box</div>
+    </dd>
+    <dt class="nav-cont">矩形 inset 裁剪</dt>
+    <dd>
+      <div>. 5个参数：上右下左和圆角大小</div>
+      <div class="basic"><img class="cp-img0" src="../utils/view/view0.jpg" alt=""></div>
       <pre>
 .cp-img0 {
     clip-path: inset(20px round 10px);
 }</pre>
     </dd>
     <dt class="nav-cont">圆形 circle 裁剪</dt>
-    <dd>. 2个参数：圆的半径；圆的位置，默认是图像中心</dd>
     <dd>
+      <div>. 2个参数：圆的半径；圆的位置，默认是图像中心</div>
       <div class="basic"><img class="cp-img10" src="../utils/view/view0.jpg" alt=""></div>
       <pre>
 .cp-img10 {
@@ -56,57 +61,72 @@
 .cp-img10 {
     clip-path: circle(50% at 0 50%);
 }</pre>
-      <div>[<span class="iconfont icon-keyboard"></span>] 定制多选框</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 定制单选/多选按钮</div>
       <div class="cb-box">
         <input class="cb" type="checkbox" id="code" name="cb" title="cb"><label for="code">code</label>
         <input class="cb" type="checkbox" id="read" name="cb" title="cb"><label for="read">read</label>
         <input class="cb" type="checkbox" id="sing" name="cb" title="cb"><label for="sing">sing</label>
       </div>
+      <pre>
+.cb[type='checkbox'] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #f1f1f1;
+  clip-path: circle(50%);
+  accent-color: var(--main-color);
+}
+
+.cb[type='checkbox']:checked {
+  appearance: auto;
+}</pre>
+      <div>或者选中时，使用伪元素模拟符号；这里使用 <a href="./framework/iconfont.html">阿里字体图标</a></div>
+      <pre>
+.cb[type=checkbox]:checked::before {
+  content: '\e6aa';
+  font-family: 'iconfont';
+  color: #f40;
+  font-size: 18px;
+}</pre>
+      <div>[<span class="iconfont icon-keyboard"></span>] 暗夜模式切换背景</div>
+      <div></div>
     </dd>
     <dt class="nav-cont">椭圆 eclipse 裁剪</dt>
-    <dd>. 3个参数：椭圆的x轴、椭圆的y轴和椭圆中心，默认是图形中心</dd>
-    <dd class="basic"><img class="cp-img20" src="../utils/view/view0.jpg" alt=""></dd>
     <dd>
+      <div>. 3个参数：椭圆的x轴、椭圆的y轴和椭圆中心，默认是图形中心</div>
+      <div class="basic"><img class="cp-img20" src="../utils/view/view0.jpg" alt=""></div>
       <pre>
 .cp-img20 {
     clip-path: ellipse(50% 50%);
 }</pre>
-    </dd>
-    <dd class="basic"><img class="cp-img21" src="../utils/view/view0.jpg" alt=""></dd>
-    <dd>
+      <div class="basic"><img class="cp-img21" src="../utils/view/view0.jpg" alt=""></div>
       <pre>
 .cp-img21 {
     clip-path: ellipse(50% 50% at 0 50%);
 }</pre>
     </dd>
     <dt class="nav-cont">多边形 polygon 裁剪</dt>
-    <dd>. 裁剪的顶点顺序不做要求，按照一定的方向即可</dd>
-    <dd>1. 菱形</dd>
-    <dd class="basic"><img class="cp-img3" src="../utils/view/view0.jpg" alt=""></dd>
     <dd>
+      <div>. 裁剪的顶点顺序不做要求，按照一定的方向即可</div>
+      <div>1. 菱形</div>
+      <div class="basic"><img class="cp-img3" src="../utils/view/view0.jpg" alt=""></div>
       <pre>
 .cp-img3 {
     clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
 }</pre>
-    </dd>
-    <dd>2. 三角形</dd>
-    <dd>. 还可以使用0大小粗边框元素创建三角形，见 <a href="./border.html"> 边框</a>一节</dd>
-    <dd class="basic"><img class="cp-img4" src="../utils/view/view0.jpg" alt=""></dd>
-    <dd>
+      <div>2. 三角形</div>
+      <div>. 还可以使用0大小粗边框元素创建三角形，见 <a href="./border.html"> 边框</a>一节</div>
+      <div class="basic"><img class="cp-img4" src="../utils/view/view0.jpg" alt=""></div>
       <pre>
 .cp-img4 {
     clip-path: polygon(50% 0, 0 100%, 100% 100%);
 }</pre>
-    </dd>
-    <dd>或</dd>
-    <dd>
+      <div>或</div>
       <pre>
 .cp-img4 {
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
 }</pre>
-    </dd>
-    <dd>或</dd>
-    <dd>
+      <div>或</div>
       <pre>
 .cp-img4 {
     clip-path: polygon(0 100%, 50% 0%, 100% 100%);
@@ -116,9 +136,9 @@
   <div class="chap">案例 Cases</div>
   <dl class="nav-cont">
     <dd>[<span class="iconfont icon-keyboard"></span>] 图文混排</dd>
-    <dd>. float</dd>
-    <dd>. shape-outside</dd>
     <dd>
+      <div>. float</div>
+      <div>. shape-outside</div>
       <img class="cp-img5" src="../utils/view/view0.jpg" alt="">
       <img class="cp-img6" src="../utils/view/view0.jpg" alt="">
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi unde laudantium dicta ullam ab minus
@@ -146,20 +166,20 @@
 }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 聚光灯</dd>
-    <dd>. 裁剪圆或椭圆剪切，并改变剪切位置</dd>
-    <dd>. 文字叠加</dd>
-    <dd>. 分布体会上下文字使用路径剪切的效果</dd>
-    <dd>. 尝试增加模糊滤镜</dd>
-    <dd class="spot-light">
-      <h2>you are the world.</h2>
+    <dd>
+      <div>. 裁剪圆或椭圆剪切，并改变剪切位置</div>
+      <div>. 文字叠加</div>
+      <div>. 分布体会上下文字使用路径剪切的效果</div>
+      <div>. 尝试增加模糊滤镜</div>
+      <div class="spot-light">
+        <h2>you are the world.</h2>
+      </div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 扫光按钮</dd>
-    <dd>. 静态效果</dd>
-    <dd>. 伪元素：分别切俩个对角出来</dd>
     <dd>
+      <div>1. 静态效果</div>
+      <div>. 伪元素：分别切俩个对角出来</div>
       <div class="cp-btn">Hover Me</div>
-    </dd>
-    <dd>
       <pre>
 .cp-btn::before {
     clip-path: inset(0 98px 10px 0);
@@ -168,14 +188,10 @@
 .cp-btn::after {
     clip-path: inset(10px 0 0 98px);
 }</pre>
-    </dd>
-    <dd>. 动态效果</dd>
-    <dd>. 伪元素：分别切4个边出来；box-sizing</dd>
-    <dd>. 增加帧动画</dd>
-    <dd>
+      <div>2. 动态效果</div>
+      <div>. 伪元素：分别切4个边出来；box-sizing</div>
+      <div>. 增加帧动画</div>
       <div class="cp-btn-adv">Hover Me</div>
-    </dd>
-    <dd>
       <pre>
 @keyframes cp {
 
@@ -201,17 +217,15 @@
 }</pre>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 扫光按钮</dd>
-    <dd>.适合正方形</dd>
-    <dd>.检查元素，取消溢出隐藏，体会其原理</dd>
     <dd>
+      <div>.适合正方形</div>
+      <div>.检查元素，取消溢出隐藏，体会其原理</div>
       <div class="border">
         <div style="--deg:0"></div>
         <div style="--deg:1"></div>
         <div style="--deg:2"></div>
         <div style="--deg:3"></div>
       </div>
-    </dd>
-    <dd>
       <pre>
 &lt;div class="border"&gt;
   &lt;div style="--deg:0"&gt;&lt;/div&gt;

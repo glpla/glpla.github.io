@@ -20,15 +20,16 @@
     <div class="cont">主题仓库的设计与开发</div>
     <div class="title">实验目的</div>
     <div class="cont">
-      <p>综合运用 Vue 框架知识点，设计并开发主题仓库</p>
+      <p>. 综合运用 Vue 框架知识点，设计并开发主题仓库</p>
     </div>
     <div class="title">实验内容</div>
     <div class="cont">
       <div>介绍</div>
-      <p>主题切换是指在 Web 应用中动态更改界面外观或样式的一种功能</p>
-      <p>通常用于实现暗黑模式、皮肤切换等场景</p>
+      <p>. 主题切换是指在 Web 应用中动态更改界面外观或样式的一种功能</p>
+      <p>. 通常用于实现暗黑模式、皮肤切换等场景</p>
       <div>特点</div>
-      <p>改善用户体验</p>
+      <p>. 改善用户体验</p>
+      <p>. 要精心、显式的指定主题色</p>
       <div>方法</div>
       <p>. 修改类名</p>
       <p>. 修改属性</p>
@@ -49,8 +50,8 @@
   --txt-color: #fff;
 }
 
-// 自定义属性形式
-[dark-theme="dark"] {
+// 自定义属性形式 data-
+[data-theme="dark"] {
   --bg-color: #000;
   --txt-color: #fff;
 }
@@ -92,9 +93,26 @@ body {
       <p>. 通过精心设计 .active 丰富 UI 效果</p>
       <pre>
 theme.onclick = function () {
-  document.body.classList.toggle("dark-mode");
+  // 触发主题元素特效
   theme.classList.toggle("active");
+  // 触发背景伪元素特效
+  document.body.classList.toggle("dark-mode");
 };</pre>
+      <p>. 背景过渡动画 - 不要显式指定过渡属性 <a href="../web/clip-path.html">clip-path</a>，使用默认的 All</p>
+      <pre>
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg-color);
+  z-index: -1;
+  clip-path: circle(0% at 100% 0%);
+  transition: 0.5s ease-in-out;
+}
+
+body.dark-theme::before {
+  clip-path: circle(100%);
+}</pre>
       <div>实现2 纯 CSS：利用多选按钮 checkbox 的选择属性 checked 配合特定的选择器模拟事件</div>
       <p>. 对结构有要求</p>
       <p>. 隐藏 &lt;input&gt;；选中时，.theme-icon从左侧移动到右侧</p>
@@ -123,6 +141,8 @@ body:has(.theme:checked) {
       <div><a href="../web/selector_class.html">伪类选择器</a></div>
       <div><a href="../web/selector_com.html">组合选择器</a></div>
       <div><a href="../web/selector_ele.html">伪元素选择器</a></div>
+      <div><a href="../web/transition.html">过渡动画</a></div>
+      <div><a href="../web/clip-path.html">背景路径裁剪</a></div>
       <div><a
           href="https://www.vecteezy.com/vector-art/12911433-day-night-mode-icon-vector-light-and-dark-switch-button-interface">vecteezy</a>
       </div>
@@ -131,6 +151,7 @@ body:has(.theme:checked) {
     <div class="title">拓展与思考</div>
     <div class="cont">
       <div>使用其它方法实现并分析每个方法的特点</div>
+      <div>加入过渡动画</div>
     </div>
     <div id="footer"></div>
     <script src="/utils/custom/footer.js"></script>

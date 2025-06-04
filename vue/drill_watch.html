@@ -124,27 +124,19 @@ const selectAllChange = () => {
       <div>更多功能及效果</div>
       <p>. 按数量排序</p>
       <pre>
-const sortUp = (key) => {
-  cartData.lists.sort((a, b) => {
-    return a[key] - b[key]
-  })
-}
-const sortDown = (key) => {
-  cartData.lists.sort((a, b) => {
-    return b[key] - a[key]
-  })
+const isAscending = ref(true)
+
+const sortQuantity = () => {
+  isAscending.value = !isAscending.value
+  return lists.value.sort((a, b) => isAscending.value ? a.price - b.price : b.price - a.price)
 }</pre>
       <p>. 按字母排序</p>
       <pre>
-const sortStrUp = (key) => {
-  cartData.lists.sort((a, b) => {
-    return a[key].localeCompare(b[key])
-  })
-}
-const sortStrDown = (key) => {
-  cartData.lists.sort((a, b) => {
-    return b[key].localeCompare(a[key])
-  })
+const islocaleCompare = ref(true)
+
+const sortTitle = () => {
+  islocaleCompare.value = !islocaleCompare.value
+  return lists.value.sort((a, b) => islocaleCompare.value ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title))
 }</pre>
       <figure>
         <img src="./imgs/cart3.png" alt="">

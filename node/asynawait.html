@@ -18,17 +18,17 @@
   <dl>
     <dt>特点</dt>
     <dd>
-      <div>async/await: 基于 Promise 的语法糖，用于简化 Promise 的使用，使异步代码看起来更像同步代码，从而更容易阅读和维护</div>
-      <div>顶级作用域 - await is only valid in async functions and the top level bodies of modules</div>
-      <div>配对出现</div>
-      <div>.使用 async 关键字定义的函数会自动返回一个 Promise</div>
-      <div>.只能在 async 函数内部使用，用于等待一个 Promise 的解析</div>
-      <div>使用 try...catch 块来处理错误</div>
-      <div>.多用于封装 Promise/fetch 请求</div>
+      <div>. async/await: 基于 Promise 的语法糖，用于简化 Promise 的使用，使异步代码看起来更像同步代码，从而更容易阅读和维护</div>
+      <div>. 顶级作用域 - await is only valid in async functions and the top level bodies of modules</div>
+      <div>. 配对出现</div>
+      <div>. 使用 async 关键字定义的函数会自动返回一个 Promise</div>
+      <div>. 只能在 async 函数内部使用，用于等待一个 Promise 的解析</div>
+      <div>. 使用 try...catch 块来处理错误</div>
+      <div>. 多用于封装 Promise/fetch 请求</div>
     </dd>
-    <dt>不处理异常</dt>
+    <dt>使用</dt>
     <dd>
-      <div>更简洁</div>
+      <div>1. 不处理异常；更简洁</div>
       <pre>
 async function loadData(url) {
   let res = await fetch('./data2021/'+url);
@@ -37,10 +37,7 @@ async function loadData(url) {
 }
 
 loadData('stu.json');</pre>
-    </dd>
-    <dt>处理异常</dt>
-    <dd>
-      <div>更健壮</div>
+      <div>2. 处理异常；更健壮</div>
       <pre>
 async function getData() {
   try {
@@ -74,7 +71,7 @@ async function addData() {
     console.log(err);
   }
 }</pre>
-      <div>可以使用 finally{} 控制过程，如执行清理操作，如关闭文件、释放资源或记录日志；或者使用加载器；注意和 Promise 的 finally() 区别开来，虽然作用一致</div>
+      <div>. 可以使用 finally{} 控制过程，如执行清理操作，如关闭文件、释放资源或记录日志；或者使用加载器；注意和 Promise 的 finally() 区别开来，虽然作用一致</div>
       <pre>
 async function getData() {
   container.classList.add('loading')
