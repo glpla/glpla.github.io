@@ -103,125 +103,14 @@ obj.sort((a, b) => {
   return b.name.localeCompare(a.name)
 })    </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 表格数据排序</dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="../demo/table.html">排序表格</a></dd>
     <dd>
-      <table>
-        <thead>
-          <tr>
-            <th onclick="sortTbl(0)">name <div><span class="iconfont icon-sort" id="icon-0"></span></div>
-            </th>
-            <th onclick="sortTbl(1)">price<div><span class="iconfont icon-sort" id="icon-1"></span></th>
-            <th onclick="sortTbl(2)">stock<div><span class="iconfont icon-sort" id="icon-2"></span></th>
-            <th onclick="sortTbl(3)">discount<div><span class="iconfont icon-sort" id="icon-3"></span></th>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
+
     </dd>
   </dl>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
-  <script>
-    const sortUp = (key) => {
-      obj.sort((a, b) => {
-        return a[key] - b[key]
-      })
-    }
-    const sortDown = (key) => {
-      obj.sort((a, b) => {
-        return b[key] - a[key]
-      })
-    }
 
-    const tbody = document.querySelector('tbody')
-    let data = []
-    let sortedData = []
-    let isAscending = true
-
-    fetch('/utils/data/coffee.json')
-      .then(res => res.json())
-      .then(res => {
-        data = res.cont.map(item => ({
-          id: item.id,
-          name: item.name,
-          price: item.price,
-          stock: item.stock,
-          discount: item.discount
-        }))
-        createTable(data)
-      })
-
-    function createTable(data) {
-      let html = data.map(item => {
-        return `<tr>
-            <td>${item.name}</td>
-            <td>${item.price}</td>
-            <td>${item.stock}</td>
-            <td>${item.discount}</td>
-          </tr>`
-      }).join('')
-      tbody.innerHTML = html
-    }
-
-    function sortString(key) {
-      sortedData = data.sort((a, b) => {
-        return isAscending ? a[key].localeCompare(b[key]) : b[key].localeCompare(a[key])
-      })
-      createTable(sortedData)
-      isAscending = !isAscending
-    }
-
-    function sortDigt(key) {
-      sortedData = data.sort((a, b) => {
-        return isAscending ? a[key] - b[key] : b[key] - a[key]
-      })
-      createTable(sortedData)
-      isAscending = !isAscending
-    }
-
-    function updateIcon(ind, flag) {
-      let icon = document.querySelector(`#icon-${ind}`)
-      icon.className = flag ? 'iconfont icon-sortup' : 'iconfont icon-sortdown'
-    }
-
-    function resetIcons() {
-      for (let i = 0; i < 4; i++) {
-        let icon = document.querySelector(`#icon-${i}`)
-        icon.className = 'iconfont icon-sort'
-      }
-    }
-
-    function sortTbl(ind) {
-      resetIcons()
-      sortedData = [...data].sort((a, b) => {
-        let aVal, bVal;
-        switch (ind) {
-          case 0:
-            aVal = a.name
-            bVal = b.name
-            return isAscending ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal)
-            break;
-          case 1:
-            aVal = a.price
-            bVal = b.price
-            break;
-          case 2:
-            aVal = a.stock
-            bVal = b.stock
-            break;
-          case 3:
-            aVal = a.discount
-            bVal = b.discount
-            break;
-        }
-        return isAscending ? aVal - bVal : bVal - aVal
-      })
-      updateIcon(ind, isAscending);
-      createTable(sortedData);
-      isAscending = !isAscending;
-    }
-
-  </script>
 </body>
 
 </html>
