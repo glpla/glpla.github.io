@@ -17,13 +17,13 @@
     <span>&lt;select&gt;</span>
   </header>
   <dl>
-    <dt>概述 Overview</dt>
+    <dt>Introduction</dt>
     <dd>
-      <div>. inline-block</div>
+      <div>. 行内盒 inline-block</div>
       <div>. 配合 &lt;option&gt; 使用；其子元素只能是 &lt;option&gt; block</div>
-      <div>. name-value比较特别。name写在 &lt;select&gt;；value 写在 &lt;option&gt;，也可以省略 value，系统会把 &lt;option&gt; 的值自动作为value
+      <div>. name-value 比较特别。name写在 &lt;select&gt;；value 写在 &lt;option&gt;，也可以省略 value，系统会把 &lt;option&gt; 的值自动作为 value
       </div>
-      <div>. &lt;select&gt;的宽度决定了&lt;option&gt;的宽度</div>
+      <div>. &lt;select&gt; 的宽度决定了 &lt;option&gt; 的宽度</div>
       <div>. &lt;option&gt; 很难动态增加或减少</div>
       <div>. 使用 &lt;optgroup&gt; 分组；分组标题不能选择，仅仅作为提示</div>
       <div>. 如果需要动态增加或减少选项，需要从头定制。如利用无序列表实现选项；更多设计技巧，请访问 <a
@@ -34,33 +34,41 @@
           &lt;select&gt;</a></div>
       <table>
         <caption>属性</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>size</td>
-          <td>显示几个option；通常不指定，以免影响页面布局</td>
-        </tr>
-        <tr>
-          <td>selected</td>
-          <td>默认选中当前&lt;option&gt;</td>
-        </tr>
-        <tr>
-          <td>multiple</td>
-          <td>多选；使用较少</td>
-        </tr>
+        <thead>
+          <tr>
+            <th>类别</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>size</td>
+            <td>显示几个 option；通常不指定，以免影响页面布局</td>
+          </tr>
+          <tr>
+            <td>selected</td>
+            <td>默认选中当前 &lt;option&gt;</td>
+          </tr>
+          <tr>
+            <td>multiple</td>
+            <td>多选；使用较少</td>
+          </tr>
+        </tbody>
       </table>
       <table>
         <caption>事件</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>change</td>
-          <td>选择改变时</td>
-        </tr>
+        <thead>
+          <tr>
+            <th>类别</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>change</td>
+            <td>选择改变时</td>
+          </tr>
+        </tbody>
       </table>
     </dd>
     <dd>1. 单组下拉列表 <select name="school" id="school-single">
@@ -120,24 +128,11 @@ mul.addEventListener('change', function () {
   console.log(this.value);
 })</pre>
     </dd>
-    <dt>样式 Style</dt>
+    <dt>Initialization</dt>
     <dd>
-      <div>. 可以设置 &lt;select&gt; 和 &lt;option&gt; 的字体颜色、大小、选项选中，其它可以设置的属性比较少</div>
-      <div>. 很少直接使用。都是指定 <a
-          href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Advanced_form_styling#appearance_controlling_os-level_styling">MDN
-          - appearance</a>
-        以便重新设计 - notoriously difficult to style productively with CSS</div>
-      <div class="tips">它是一个替换元素（replaced element），其内部结构是由浏览器控制的，不允许通过这些伪元素进行自定义</div>
-      <img src="./imgs/select0.png" alt="" loading="lazy">
-      <div class="fig-sn">默认样式</div>
-      <img src="./imgs/select1.png" alt="" loading="lazy">
-      <div class="fig-sn">定制样式</div>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 初始化样式</dd>
-    <dd>
-      <div>去除边框、轮廓、背景</div>
-      <div>字体和颜色继承父级</div>
-      <div>默认加重；各选项不加重</div>
+      <div>. 去除边框、轮廓、背景</div>
+      <div>. 字体和颜色继承父级</div>
+      <div>. 默认加重；各选项不加重</div>
       <pre>
 select {
   outline: none;
@@ -152,6 +147,21 @@ select {
 select option {
   font-weight: normal;
 }</pre>
+    </dd>
+  </dl>
+  <div class="chap">Usage</div>
+  <dl>
+    <dd>
+      <div>. 可以设置 &lt;select&gt; 和 &lt;option&gt; 的字体颜色、大小、选项选中，其它可以设置的属性比较少</div>
+      <div>. 很少直接使用。都是指定 <a
+          href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Advanced_form_styling#appearance_controlling_os-level_styling">MDN
+          - appearance</a>
+        以便重新设计 - notoriously difficult to style productively with CSS</div>
+      <div class="tips">它是一个替换元素（replaced element），其内部结构是由浏览器控制的，不允许通过这些伪元素进行自定义</div>
+      <img src="./imgs/select0.png" alt="" loading="lazy">
+      <div class="fig-sn">默认样式</div>
+      <img src="./imgs/select1.png" alt="" loading="lazy">
+      <div class="fig-sn">定制样式</div>
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 定制样式1 - 不增加元素 </dd>
     <dd class="sn">
@@ -191,11 +201,11 @@ select option {
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 定制样式2 - 额外增加1个容器、1个遮罩和1个标记</dd>
     <dd>
-      <div>容器元素：提供小箭头的定位依据</div>
-      <div>标记元素：模拟小箭头，<a href="./position.html">定位</a> 在右侧</div>
-      <div>遮罩元素：接收选中的数据，增加更多控制；原有&lt;select&gt;被覆盖</div>
-      <div>值和显示的数据分别设计；只显示长的备选信息中的关键信息</div>
-      <div>增加事件，动态修改选择内容</div>
+      <div>. 容器元素：提供小箭头的定位依据</div>
+      <div>. 标记元素：模拟小箭头，<a href="./position.html">定位</a> 在右侧</div>
+      <div>. 遮罩元素：接收选中的数据，增加更多控制；原有&lt;select&gt;被覆盖</div>
+      <div>. 值和显示的数据分别设计；只显示长的备选信息中的关键信息</div>
+      <div>. 增加事件，动态修改选择内容</div>
     </dd>
     <dd class="custom-wrap">
       <select name="school" id="school-custom">
@@ -233,19 +243,19 @@ select option {
     <dd>[<span class="iconfont icon-keyboard"></span>] 定制样式3 - 全新定制，自己写一个，详细情况，请访问 <a href="./demo/select.html">下拉列表</a>
     </dd>
     <dd>
-      <div>完全抛弃表单元素，从0开始设计</div>
-      <div>无法响应表单事件</div>
+      <div>. 完全抛弃表单元素，从0开始设计</div>
+      <div>. 无法响应表单事件</div>
       <img src="./imgs/select2.png" alt="" loading="lazy">
     </dd>
   </dl>
-  <div class="chap">总结与作业 Summary & Homework</div>
+  <div class="chap">Summary & Homework</div>
   <dl>
-    <dt>总结 Summary</dt>
+    <dt>Summary</dt>
     <dd>. &lt;select&gt; 的使用</dd>
     <dd>. &lt;select&gt; 样式的设计</dd>
     <dd>. 选择器：伪类选择器 :hover、:checked</dd>
     <dd>. appearance 在样式设计中的作用</dd>
-    <dt>作业 Homework</dt>
+    <dt>Homework</dt>
     <dd>. 使用 &lt;select&gt; 元素完善个人网站的留言板或信息采集表的设计</dd>
   </dl>
   <a class="back2top" target="_self" href="#">
