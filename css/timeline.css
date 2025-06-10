@@ -1,8 +1,9 @@
-@import url(//at.alicdn.com/t/c/font_3859342_ozav4x2kf3.css);
-@import url(../css/fonts_Inconsolata.css);
+@import url(//at.alicdn.com/t/c/font_3859342_u1d9rpqywd8.css);
+@import url(/css/fonts_Inconsolata.css);
+@import url(/css/fonts_GreatVibes.css);
 
 :root {
-  --main-color: #0a0;
+  --main-color: #2ed573;
   --warn-color: #C91F37;
   --main-w: 1024px;
   --p-m-g: 10px;
@@ -10,6 +11,8 @@
   --txt-color: #000;
   --pre-bg-color: #000;
   --pre-txt-color: #cdcd85;
+  --tips-color: #edf8db;
+  --tips-bold-color: var(--main-color);
   --header-h: 100px;
   --section-title-h: 60px;
   --footer-h: 150px;
@@ -40,9 +43,10 @@ body {
   max-width: var(--main-w);
   margin: 0 auto;
   font-size: 1.6rem;
-  timeline-scope: --n0, --n1, --n2, --n3, --n4, --n5, --n6, --n7, --n8, --n9, --n10;
+  timeline-scope: --n0, --n1, --n2, --n3, --n4, --n5, --n6, --n7, --n8, --n9, --n10, --n11, --n12, --n13, --n14;
   background-color: var(--bg-color);
   color: var(--txt-color);
+  counter-reset: fig-sn tbl-sn;
 }
 
 body::-webkit-scrollbar {
@@ -61,6 +65,34 @@ a {
   color: inherit;
 }
 
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.6rem;
+  margin-top: var(--p-m-g);
+}
+
+figure {
+  max-width: 100%;
+  margin: 5rem auto;
+}
+
+figcaption {
+  text-align: center;
+  font-size: 1.4rem;
+  counter-increment: fig-sn;
+}
+
+figcaption::before {
+  content: '图' counter(fig-sn)' ';
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -77,8 +109,44 @@ img+.fig-sn::before {
   content: '图' counter(img-sn)' ';
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #000;
+  margin: 5rem auto;
+}
+
+table caption {
+  text-align: center;
+  font-size: 1.4rem;
+  counter-increment: tbl-sn;
+  color: var(--txt-color);
+}
+
+table caption::before {
+  content: '表' counter(tbl-sn) ' ';
+}
+
+thead tr th {
+  background-color: var(--main-color);
+  color: #fff;
+  text-transform: capitalize;
+}
+
+tbody td {
+  text-align: center;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f5f5f5;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fff;
+}
+
 pre {
-  width: 96%;
+  width: 100%;
   color: var(--pre-txt-color);
   padding: var(--p-m-g);
   font-family: 'Inconsolata', Arial, Helvetica, sans-serif;
@@ -86,6 +154,63 @@ pre {
   border-radius: 6px;
   margin: var(--p-m-g) auto;
   overflow-x: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+ul>li::before {
+  content: '. ';
+}
+
+ul.objective>li::before {
+  content: '\eba5' ' ';
+  font-family: 'iconfont';
+}
+
+ul.review>li::before {
+  content: '\e7e2' ' ';
+  font-family: 'iconfont';
+}
+
+ol {
+  list-style: none;
+  counter-reset: list-sn;
+}
+
+ol>li {
+  counter-increment: list-sn;
+}
+
+ol>li::before {
+  content: counter(list-sn)'. ';
+}
+
+ol.reference>li::before {
+  content: '[' counter(list-sn)'] ';
+}
+
+.reference a:hover {
+  color: var(--main-color);
+}
+
+.iconfont {
+  color: var(--main-color);
+  font-size: 2rem;
+}
+
+.link {
+  color: var(--main-color);
+  text-decoration: underline;
+}
+
+.tips {
+  position: relative;
+  background-color: var(--tips-color);
+  padding: var(--p-m-g);
+  border-left: 4px solid var(--tips-bold-color);
+  margin: 2rem auto;
 }
 
 header {
@@ -101,15 +226,24 @@ header {
 }
 
 .title {
-  font-size: 2.4rem;
   margin-right: auto;
+}
+
+.title span {
+  font-family: 'GreatVibes';
+  letter-spacing: 4px;
+  font-size: 2rem;
 }
 
 .ham {
   display: none;
   cursor: pointer;
   font-size: 2.4rem;
-  margin-left: auto;
+}
+
+.theme {
+  cursor: pointer;
+  font-size: 2rem;
 }
 
 .nav-wrap {
@@ -133,7 +267,7 @@ header {
 .nav-wrap .nav {
   display: flex;
   flex-direction: column;
-  line-height: 2;
+  line-height: 1.8;
 }
 
 .nav-item {
@@ -142,7 +276,10 @@ header {
   animation-name: --nav;
   animation-timeline: var(--s);
   font-size: 1.8rem;
-  text-transform: capitalize;
+}
+
+.nav-item .iconfont {
+  color: inherit;
 }
 
 @keyframes --nav {
@@ -174,8 +311,7 @@ header {
 }
 
 .warn,
-.edu,
-.iconfont {
+.edu {
   color: var(--warn-color);
 }
 
@@ -197,7 +333,7 @@ header {
     overflow: hidden;
   }
 
-  .ham.active+.nav-wrap {
+  .nav-wrap.active {
     height: calc(100vh - var(--header-h));
     opacity: 1;
   }

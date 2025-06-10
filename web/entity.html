@@ -17,124 +17,91 @@
   </header>
   <dl>
     <dd>
+      <div>. 实体是一段以连字号 & 开头、以分号 ; 结尾的文本/字符串</div>
+      <div>. 常用于显示保留字符和不可见的字符、或其他难以用标准键盘键入的字符</div>
+      <div>. 可以应用在结构或样式中</div>
       <div>. 更多实体，请访问 <a href="https://developer.mozilla.org/en-US/docs/Glossary/Entity">MDN - Entity</a>、<a
-          href="https://www.w3school.com.cn/cssref/css_entities.asp">CSS - entities</a></div>
+          href="https://www.w3school.com.cn/cssref/css_entities.asp">CSS - entities</a>、<a href="https://symbl.cc/">WHEN
+          TEXT IS NOT ENOUGH</a></div>
     </dd>
     <dt>Usage</dt>
-    <dd class="sn">
-      <p>. 以版权符号为例</p>
-      <div>直接写符号</div>
-      <pre>©</pre>
-      <div>兼容实体引用 - XHTML 1.1 和 XML</div>
+    <dd>
+      <div>. 以 &commat; 符号为例，Unicode 编码为 U+000A9</div>
+      <div>1. 结构中使用</div>
+      <div>. 直接写符号；依赖输入法的支持</div>
+      <pre>@</pre>
+      <div>. 实体引用</div>
       <pre>&amp;commat;</pre>
-      <div>十进制实体引用</div>
-      <pre>&amp;#64;</pre>
-      <div>十六进制实体引用</div>
+      <div>. 十六进制 HEX 编码 - 推荐</div>
       <pre>&amp;#x40;</pre>
+      <div>. 十进制 HEX 编码</div>
+      <pre>&amp;#64;</pre>
+      <div>2. 伪元素中使用</div>
+      <div>. 只能使用十六进制；不区分大小写；建议使用实际编码大写</div>
+      <pre>
+ul li::marker {
+  content: "\00A9";
+}</pre>
+    </dd>
+    <dd>
       <table>
         <caption>常见实体符号</caption>
         <thead>
           <tr>
-            <th>实体</th>
-            <th>符号</th>
-            <th>引用</th>
+            <th>Character</th>
+            <th>Reference</th>
+            <th>Unicode</th>
+            <th>Description</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>小于</td>
             <td>&lt;</td>
             <td>&amp;lt;</td>
+            <td>U+0003C</td>
+            <td>小于</td>
           </tr>
           <tr>
-            <td>小于等于</td>
-            <td>&le;</td>
-            <td>&amp;le;</td>
-          </tr>
-          <tr>
-            <td>大于</td>
             <td>&gt;</td>
             <td>&amp;gt;</td>
+            <td>U+0003E</td>
+            <td>大于</td>
           </tr>
           <tr>
-            <td>大于等于</td>
-            <td>&ge;</td>
-            <td>&amp;ge;</td>
-          </tr>
-          <tr>
-            <td>无穷大</td>
-            <td>&infin;</td>
-            <td>&amp;infin;</td>
-          </tr>
-          <tr>
-            <td>省略号</td>
-            <td>&hellip;</td>
-            <td>&amp;hellip;</td>
-          </tr>
-          <tr>
-            <td>原点</td>
-            <td>&bull;</td>
-            <td>&amp;bull;</td>
-          </tr>
-          <tr>
-            <td>右箭头</td>
-            <td>&rarr;</td>
-            <td>&amp;rarr;</td>
-          </tr>
-          <tr>
-            <td>左箭头</td>
-            <td>&larr;</td>
-            <td>&amp;larr;</td>
-          </tr>
-          <tr>
-            <td>上箭头</td>
-            <td>&uarr;</td>
-            <td>&amp;uarr;</td>
-          </tr>
-          <tr>
-            <td>下箭头</td>
-            <td>&darr;</td>
-            <td>&amp;darr;</td>
-          </tr>
-          <tr>
-            <td>双右尖括号</td>
-            <td>&raquo;</td>
-            <td>&amp;raquo;</td>
-          </tr>
-          <tr>
-            <td>双左尖括号</td>
-            <td>&laquo;</td>
-            <td>&amp;laquo;</td>
-          </tr>
-          <tr>
-            <td>引号</td>
             <td>&quot;</td>
             <td>&amp;quot;</td>
+            <td>U+00022</td>
+            <td>双引号</td>
           </tr>
           <tr>
-            <td>版权</td>
             <td>&copy;</td>
             <td>&amp;copy;</td>
+            <td>U+000A9</td>
+            <td>版权</td>
           </tr>
           <tr>
-            <td>注册</td>
             <td>&reg;</td>
             <td>&amp;reg;</td>
+            <td>U+000AE</td>
+            <td>注册</td>
           </tr>
           <tr>
-            <td>商标</td>
             <td>&trade;</td>
             <td>&amp;trade;</td>
+            <td>U+02122</td>
+            <td>商标</td>
           </tr>
           <tr>
-            <td>乘</td>
-            <td>&times;</td>
-            <td>&amp;times;</td>
+            <td>&#x2610;</td>
+            <td></td>
+            <td>U+02610</td>
+            <td>没有选中</td>
           </tr>
           <tr>
-            <td>除</td>
-            <td>&divide;</td>
-            <td>&amp;divide;</td>
+            <td>&#x2611;</td>
+            <td></td>
+            <td>U+02611</td>
+            <td>选中</td>
           </tr>
         </tbody>
       </table>
