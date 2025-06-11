@@ -109,7 +109,7 @@ model.id = nanoid()</pre>
     <h2>过程 Procedure</h2>
     <ul>
       <li>遵循先静态后动态的开发原则</li>
-      <li>没有绝对的先后顺序；可以需求灵活调整</li>
+      <li>没有绝对的先后顺序；可以根据需求灵活调整</li>
       <li>开发过程中，记得随手保存 Ctrl + S</li>
       <li>始终保持浏览器的开发者视图处于打开状态，并关注控制台 console 有无警告或告警信息</li>
       <li>业务逻辑处理中，循序渐进，多使用 console.log()，确保当前进度正常再往前推进</li>
@@ -214,13 +214,14 @@ const addToCarts = () => {
     <ol>
       <li>购物车 lists</li>
       <pre>const lists = ref([])</pre>
-      <p>. 为避免重复操作添加数据，可以预先准备一些核心测试数据，如下</p>
+      <p>. 为避免重复操作添加数据，可以预先准备一些核心测试数据</p>
+      <p>. 注意 id 和实际数据要区分开来</p>
       <pre>
 const lists = ref([
-  { id: 0, title: "coffee", price: 9, discount: 0.2, stock: 10, quantity: 1 },
-  { id: 1, title: "cup", price: 5, discount: 0.4, stock: 10, quantity: 1 },
-  { id: 2, title: "code", price: 16, discount: 0.1, stock: 10, quantity: 1 },
-  { id: 3, title: "cookie", price: 8, discount: 0.5, stock: 10, quantity: 1 },
+  { id: 100, title: "coffee", price: 9, discount: 0.2, stock: 10, quantity: 1 },
+  { id: 101, title: "cup", price: 5, discount: 0.4, stock: 10, quantity: 1 },
+  { id: 102, title: "code", price: 16, discount: 0.1, stock: 10, quantity: 1 },
+  { id: 103, title: "cookie", price: 8, discount: 0.5, stock: 10, quantity: 1 },
 ]);</pre>
       <li>拉取/保存购物车 getLists()</li>
       <p>. 远程加载数据；这里返回测试数据</p>
@@ -264,7 +265,7 @@ const clearCarts = () => {
     <h2>购物车组件视图 CartView.vue</h2>
     <p>. 操作购物车数据：数据加载、全选、数量调整、结算、下单等</p>
     <ol>
-      <li>购物车UI设计 <a class="link" target="_blank" href="./template/CartViewTemplate.zip" download>单击下载</a></li>
+      <li>购物车静态UI设计 <a class="link" target="_blank" href="./template/CartViewTemplate.zip" download>单击下载</a></li>
       <div>
         <p>. 封装为一个组件</p>
         <p>. 固定定位在菜单视图底部；弹性盒子方向调整为垂直；折叠时，由 footer 撑开；展开时，背景设为透明黑</p>
@@ -298,7 +299,7 @@ const clearCarts = () => {
         </figure>
       </div>
       <li>数据准备</li>
-      <p>. 待选商品 lists：数组；本地数据或使用 fetch 或 axios加载远程数据</p>
+      <p>. 待选商品 lists：数组；本地数据或使用 fetch 或 axios 加载远程数据</p>
       <p>. 选中商品 selectedLists；数组</p>
       <p>. 是否全选 isAll，布尔；默认是真，全选</p>
       <p>. 商品数量总数 count；数值</p>
@@ -315,6 +316,7 @@ const discountPrice = ref(0)
 const count = ref(0)
 
 onMounted(() => {
+  // 待选商品 lists 和 选中商品 selectedLists 相同，默认全选
   lists.value = cartStore.lists;
   selectedLists.value = [...lists.value]
 })</pre>
@@ -336,10 +338,11 @@ const selectAllChange = () => {
       <p>. 使用三元表达式</p>
       <pre>
 const selectAllChange = () => {
-  listsSelected.value = isAll.value ? lists.value : []
+  listsSelected.value = isAll.value ? [...lists.value] : []
 }</pre>
       <li>侦听选中商品 selectedLists</li>
       <p>. 如果新长度和待选商品相等，则说明是全选</p>
+      <p>. 立即侦听</p>
       <pre>
 watch(listsSelected, (newval) => {
   isAll.value = newval.length == lists.value.length
