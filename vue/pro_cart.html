@@ -92,7 +92,11 @@ model.id = nanoid()</pre>
   </section>
   <section class="section" style="--s:--n3" id="review">
     <h2>回顾 Review</h2>
-    <div>. 略</div>
+    <ul>
+      <li>项目当前进度</li>
+      <li>详情视图 DetailsView.vue 刷新时，如何处理商品仓库的数据未就绪?</li>
+      <li>其它</li>
+    </ul>
   </section>
   <section class="section" style="--s:--n4" id="introduction">
     <h2>引言 Introduction</h2>
@@ -314,6 +318,9 @@ onMounted(() => {
   lists.value = cartStore.lists;
   selectedLists.value = [...lists.value]
 })</pre>
+      <li>渲染数据</li>
+      <p>. 列表渲染遍历的是待选商品 lists</p>
+      <p>. 单个选择 checkbox 双向绑定的是选中商品 selectedLists；不要忘记指定 value 和 name</p>
       <li>全选</li>
       <p>. 双向绑定 isAll</p>
       <p>. 使用改变事件，判断是全选还是全不选</p>
@@ -326,6 +333,17 @@ const selectAllChange = () => {
     selectedLists.value = []
   }
 }</pre>
+      <p>. 使用三元表达式</p>
+      <pre>
+const selectAllChange = () => {
+  listsSelected.value = isAll.value ? lists.value : []
+}</pre>
+      <li>侦听选中商品 selectedLists</li>
+      <p>. 如果新长度和待选商品相等，则说明是全选</p>
+      <pre>
+watch(listsSelected, (newval) => {
+  isAll.value = newval.length == lists.value.length
+}, { deep: true, immediate: true })</pre>
       <li>数量增加/减少</li>
       <p>. 单击商品项的增加和减少按钮相应的调整其数量；并根据库存进行越界检测</p>
       <p>. 这里使用内联事件方式；也可以使用函数方式</p>
