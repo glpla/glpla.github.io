@@ -87,12 +87,22 @@
       <img src="./imgs/xmind-list.png" alt="">
       <figcaption>列表思维导图</figcaption>
     </figure>
+    <figure>
+      <img src="./imgs/xmind-list-customize.png" alt="">
+      <figcaption>定制列表</figcaption>
+    </figure>
   </section>
   <section class="section" style="--s:--n4" id="ol">
     <h2>有序列表 Ordered List</h2>
+    <ul>
+      <li>元素按照一定规则排列，如：从小到大；类似办公文档的<span class="warn">编号 numbering</span></li>
+      <li>直接应用较少；更多通过定制编号实现，如使用 <a class="link" href="./selector_ele.html">伪元素 - ::before</a>、<a class="link"
+          href="./counter.html">计数器</a>
+      </li>
+    </ul>
     <h3>结构 HTML</h3>
     <ol>
-      <li>&lt;ol&gt;</li>
+      <li>&lt;ol&gt; - 列表容器</li>
       <table>
         <caption>Attributes</caption>
         <thead>
@@ -116,16 +126,21 @@
           </tr>
         </tbody>
       </table>
-      <li>&lt;li&gt;</li>
+      <li>&lt;li&gt; - 列表项</li>
     </ol>
     <h3>样式 CSS</h3>
   </section>
   <section class="section" style="--s:--n5" id="ul">
     <h2>无序列表 Unordered List</h2>
+    <ul>
+      <li>元素彼此之间没有顺序；取而代之的是标记 marker；类似于办公文档的<span class="warn">项目符号 bullets</span></li>
+      <li>早期广泛用于<span class="warn">导航</span>结构：&lt;ul&gt; → &lt;li&gt; → &lt;a&gt;；结构清晰；避免被 SEO 降权</li>
+      <li>现在多使用 &lt;nav&gt; → &lt;a&gt; 实现；结构层级减少而又不失去 SEO 增强</li>
+    </ul>
     <h3>结构 HTML</h3>
     <ol>
-      <li>&lt;ul&gt;</li>
-      <li>&lt;li&gt;</li>
+      <li>&lt;ul&gt; - 列表容器</li>
+      <li>&lt;li&gt; - 列表项</li>
     </ol>
     <h3>样式 CSS</h3>
     <ol>
@@ -134,11 +149,15 @@
   </section>
   <section class="section" style="--s:--n6" id="dl">
     <h2>自定义列表 Definition list</h2>
+    <ul>
+      <li>描述列表/自定义列表 Description List / Definition list；用于对数据总结或分类</li>
+      <li>应用非常广泛：各大门户网站底部的信息和版权等</li>
+    </ul>
     <h3>结构 HTML</h3>
     <ol>
-      <li>&lt;dl&gt;</li>
-      <li>&lt;dt&gt;</li>
-      <li>&lt;dd&gt;</li>
+      <li>&lt;dl&gt; - 列表容器</li>
+      <li>&lt;dt&gt; - 列表项</li>
+      <li>&lt;dd&gt; - 列表项</li>
     </ol>
     <h3>样式 CSS</h3>
   </section>
@@ -170,6 +189,31 @@ ul {
   </section>
   <section class="section" style="--s:--n8" id="before">
     <h2>伪元素 ::before</h2>
+    <ul>
+      <li>创建一个 inline 元素作为当前元素的第一个 first 子元素；使用 ::after 创建最后一个 last 子元素</li>
+      <li>必须指定伪元素 content 属性，哪怕为空</li>
+      <li>可以使用普通字符、<a class="link" href="https://developer.mozilla.org/en-US/docs/Glossary/Entity">CSS实体</a>；也可利用 attr()
+        获取元素属性</li>
+      <li>content 拼接字符串不能使用 +；直接在后面添加即可</li>
+      <li>content 属性不支持变量使用 var()；可以通过 <a class="link" href="./counter.html">计数器</a> 迂回实现</li>
+      <li>应用非常非常非常广泛</li>
+      <li>更多信息，请访问 <a class="link" href="./selector_ele.html">伪元素</a></li>
+    </ul>
+    <div>[ <span class="iconfont icon-keyboard"></span> ] 定制无序列表项目符号</div>
+    <p>. 使用普通字符</p>
+    <pre>
+li::before {
+    content: '>';
+}</pre>
+    <P>. 使用 CSS 实体</P>
+    <pre>
+li::before {
+    content: '\21E8';
+}</pre>
+    <div class="tips">
+      <p>可按照普通元素对其进行定位、布局、旋转等等操作；注意：旋转会撑开/破坏布局，请为父元素设置 overflow 溢出隐藏；同样需要注意的是：他们的 box-sizing 也要初始化为 border-box</p>
+      <p>伪元素的样式受父级元素的影响；但是伪元素不是元素的直接孩子，无法使用直接后代选择器 > 选择</p>
+    </div>
   </section>
   <section class="section" style="--s:--n9" id="entity">
     <h2>实体 Entity</h2>
@@ -235,6 +279,7 @@ ul {
       <pre>&lt;div&gt;使用实体 &amp;copy;&lt;/div&gt;</pre>
       <pre>&lt;div&gt;使用编码 &amp;#xA9;&lt;/div&gt;</pre>
       <li>样式中使用 - 仅限于在伪元素中使用编码；利用这个特性，定制无序列表项目符号</li>
+      <div>[ <span class="iconfont icon-keyboard"></span> ] 定制无序列表项目符号</div>
       <pre>
 ul li::before {
   content: "\00A9";
@@ -279,7 +324,7 @@ ul li::before {
     <div class="tips">
       <div>上传图标至项目：将自己设计的 svg 格式的图标引入；适合设计能力比较强的小伙伴；需要审核</div>
     </div>
-    <div>[ <span class="iconfont icon-keyboard"></span> ] 使用 Iconfont 定制无序列表项目符号</div>
+    <div>[ <span class="iconfont icon-keyboard"></span> ] 定制无序列表项目符号</div>
     <p>. 在项目中引入字体类 Font class 链接，可以同时使用 Font class 和 Unicode</p>
     <ol>
       <li>项目创建 - 略</li>

@@ -74,10 +74,15 @@ const getByQuery = async (query) => {
     </dd>
     <dt id="cart">购物车仓库 cart.js</dt>
     <dd>
-      <div>1. 购物车 carts</div>
+      <div>1. 购物车 lists</div>
       <pre>const lists = ref([])</pre>
-      <!-- <div>2. 拉取/保存购物车 getCarts()</div> -->
-      <div>2. 添加到购物车 addToCarts(product)</div>
+      <div>2. 拉取/保存购物车 getLists()</div>
+      <pre>
+const getLists = () => {
+  // ...axios fetch
+  return lists.value;
+};</pre>
+      <div>3. 添加到购物车 addToCarts(product)</div>
       <div>. 如果商品不存在，则为当前商品添加新的 id 作为对应的购物车数据项的 id，该 id 会覆盖商品的 id；如果商品数据项已经存在，则数量相应的增加</div>
       <div>. 其它业务：库存调整，需要使用商品仓库 goods.js - 也可以放在订单中处理，库存才真正变化</div>
       <div>. 这里使用第三方库 <a href="https://www.npmjs.com/package/nanoid">NPM - Nanoid</a> 生成随机 id</div>
@@ -95,17 +100,16 @@ const addToCarts = (product) => {
     });
   }
 };</pre>
-      <div>3. 从购物车中移除 removeFromCart(id) </div>
+      <div>4. 从购物车中移除 removeFromCarts(id) </div>
       <pre>
-const removeFromCart = (id) =>{
+const removeFromCarts = (id) =>{
   lists.value = lists.value.filter(item => item.id !== id)
 }</pre>
-      <div>4. 清空购物车 clearCarts()</div>
+      <div>5. 清空购物车 clearCarts()</div>
       <pre>
 const clearCarts = () => {
   lists.value = [];
 };</pre>
-      <div>5. 从购物车移除* deleteFromToCarts(product)</div>
     </dd>
     <dt>订单仓库 order.js</dt>
     <dd>
