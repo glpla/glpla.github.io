@@ -64,9 +64,10 @@
   <section class="section" style="--s:--n1" id="content">
     <h2>内容 Content</h2>
     <ol>
+      <li>商品仓库 goods.js 完善</li>
+      <li>详情页 DetailsView.vue 购物业务逻辑完善</li>
       <li>购物车仓库设计 cart.js</li>
       <li>购物车视图组件设计 CartView.vue</li>
-      <li>购物车组件运用</li>
     </ol>
   </section>
   <section class="section" style="--s:--n2" id="prerequisite">
@@ -119,7 +120,7 @@ model.id = nanoid()</pre>
     <h2>详情页 DetailsView.vue</h2>
     <p>. 加载商品数据并清洗 → 渲染 → 生成购物车数据</p>
     <ol>
-      <li>购物车静态效果</li>
+      <li>购物车静态UI设计</li>
       <p>. 购物车固定定位在详情页底部；没有封装</p>
       <p>. 基本结构，无数据绑定、无事件</p>
       <p>. 高度同主导航；网格布局；平分空间；保持间隔；其它价格部分单独设置结束对齐</p>
@@ -179,7 +180,7 @@ onMounted(async () => {
   &lt;button class="oper inc" @click="goodSelected.quantity++"&gt;+&lt;/button&gt;
 &lt;/div&gt;</pre>
       <li>处理总价</li>
-      <p>. 使用计算 computed()处理；也可以使用监听 watch()</p>
+      <p>. 使用计算 computed() 处理；也可以使用监听 watch()</p>
       <pre>
 const total = computed(() => {
   return (goodSelected.value.price * (1 - goodSelected.value.discount) * goodSelected.value.quantity).toFixed(2)
@@ -265,7 +266,8 @@ const clearCarts = () => {
     <h2>购物车组件视图 CartView.vue</h2>
     <p>. 操作购物车数据：数据加载、全选、数量调整、结算、下单等</p>
     <ol>
-      <li>购物车静态UI设计 <a class="link" target="_blank" href="./template/CartViewTemplate.zip" download>单击下载</a></li>
+      <li>购物车静态UI设计；<a class="link" target="_blank" href="./template/CartViewTemplate.zip" download>单击下载</a>，解压并拷贝至项目
+      </li>
       <div>
         <p>. 封装为一个组件</p>
         <p>. 固定定位在菜单视图底部；弹性盒子方向调整为垂直；折叠时，由 footer 撑开；展开时，背景设为透明黑</p>
@@ -298,6 +300,7 @@ const clearCarts = () => {
           <figcaption>购物车静态展开效果</figcaption>
         </figure>
       </div>
+      <p class="tips">也可以额外创建一个视图组件展示并操作购物车；注意补充相应的路由配置</p>
       <li>数据准备</li>
       <p>. 待选商品 lists：数组；本地数据或使用 fetch 或 axios 加载远程数据</p>
       <p>. 选中商品 selectedLists；数组</p>
