@@ -291,6 +291,7 @@ const  msg = ref('hi, there.')</pre>
   &lt;span&gt;Home&lt;/span&gt;
 &lt;/RouterLink&gt;</pre>
         <p>. 动态设计：使用自定义的属性参数替换静态数据部分</p>
+        <p>. 这里直接使用 &lt;RouterLink&gt;；如果使用额外的容器作为根节点，后续的样式选择器要相应调整；必要时，需要使用深度选择器 :deep()</p>
         <pre>
 &lt;RouterLink class="nav-item" :to="item.to"&gt;
   &lt;slot&gt;&lt;/slot&gt;
@@ -344,6 +345,8 @@ const items = [
   padding: 0 var(--p-m-g);
 }</pre>
         <p>. 路由样式：当前导航颜色为蓝色</p>
+        <p class="edu"><span class="iconfont icon-help"></span> 组件样式的特点是什么？</p>
+        <p>. 默认情况下，父组件只能操作子组件根节点的样式，以便布局</p>
         <pre>
 .router-link-active,
 .router-link-exact-active{
