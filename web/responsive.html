@@ -31,8 +31,8 @@
         <a class="nav-item" style="--s:--n5" href="#property"><span class="iconfont icon-palette"></span> Property</a>
         <a class="nav-item" style="--s:--n6" href="#value"><span class="iconfont icon-nowwallpaper"></span> Value</a>
         <a class="nav-item" style="--s:--n7" href="#fn"><span class="iconfont icon-photo"></span> Function</a>
-        <a class="nav-item" style="--s:--n8" href="#js"><span class="iconfont icon-aspectratio"></span>JavaScript</a>
-        <a class="nav-item" style="--s:--n9" href="#media"><span class="iconfont icon-menu"></span> Media</a>
+        <a class="nav-item" style="--s:--n8" href="#media"><span class="iconfont icon-menu"></span> Media</a>
+        <a class="nav-item" style="--s:--n9" href="#js"><span class="iconfont icon-aspectratio"></span> JavaScript</a>
         <a class="nav-item" style="--s:--n10" href="#init"><span class="iconfont icon-menu"></span> Initialization</a>
         <a class="nav-item" style="--s:--n11" href="#drill"><span class="iconfont icon-audiotrack"></span> Drill</a>
         <a class="nav-item" style="--s:--n12" href="#summary"><span class="iconfont icon-hangzhengguanli"></span>
@@ -88,7 +88,7 @@
       <li>em</li>
       <p>. 相对父级字体大小 font-size 而定</p>
       <li>rem</li>
-      <p>. 根布局，相对 &lt;html&gt; 设置的字体大小 font-size 而定，默认是16px
+      <p>. 根布局，相对 &lt;html&gt; 设置的字体大小 font-size 而定；默认是16px
       </p>
       <li>%</li>
       <p>. 百分比布局；相对父级宽度 width 而定</p>
@@ -110,8 +110,16 @@
       <p>. 弹性盒子布局；一维布局；应用非常广泛</p>
       <li>grid</li>
       <p>. 网格布局；二维布局；应用非常广泛</p>
-      <li>min-width</li>
       <li>max-width</li>
+      <p>. 适配超大屏，如 4K 屏幕</p>
+      <pre>
+.container {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 1rem;
+}</pre>
+      <li>min-width</li>
       <li>min-height</li>
       <li>max-height</li>
       <li>max-content</li>
@@ -146,20 +154,54 @@
       <div>. 超过800px时，保持800px；小于800px，为父级的90%，即：宽度为父级90%，但不超过800px</div>
       <div>方案1：使用min()函数</div>
       <pre>
-main {
+.container {
   width: min(800px, 90%);
   margin: 0 auto;
 }</pre>
       <div>方案2：使用max-width</div>
       <pre>
-main {
+.container {
   width: 90%;
   max-width: 800px;
   margin: 0 auto;
 }</pre>
     </div>
   </section>
-  <section class="section" style="--s:--n8" id="js">
+  <section class="section" style="--s:--n8" id="media">
+    <h2>媒体查询 Media</h2>
+    <table>
+      <caption>断点 breakpoint</caption>
+      <thead>
+        <tr>
+          <th>item</th>
+          <th>desc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>sm</td>
+          <td>40rem(640px)</td>
+        </tr>
+        <tr>
+          <td>md</td>
+          <td>48rem(768px)</td>
+        </tr>
+        <tr>
+          <td>lg</td>
+          <td>64rem(1024px)</td>
+        </tr>
+        <tr>
+          <td>xl</td>
+          <td>80rem(1280px)</td>
+        </tr>
+        <tr>
+          <td>2xl</td>
+          <td>96rem(1536px)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="section" style="--s:--n9" id="js">
     <h2>脚本 JavaScript</h2>
     <div>. 使用万能的JavaScript</div>
     <div>[<span class="iconfont icon-keyboard"></span>] 设置字体大小</div>
@@ -197,9 +239,6 @@ window.onresize = function () {
 }</pre>
       <div>方案3：详情查看 <a href="./js/bom.html">BOM</a></div>
     </div>
-  </section>
-  <section class="section" style="--s:--n9" id="media">
-    <h2>媒体查询 Media</h2>
   </section>
   <section class="section" style="--s:--n10" id="init">
     <h2>初始化 Initialization</h2>

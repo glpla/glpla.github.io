@@ -24,22 +24,39 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 5rem;
+      align-items: center;
+      gap: 2rem;
       min-height: 100vh;
     }
 
-    table {
-      width: 94%;
+    .wrap {
+      display: flex;
+      width: 96%;
       max-width: 800px;
+      margin: 0 auto;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scroll-behavior: smooth;
+      scrollbar-color: #f40 #eee;
+    }
+
+    .wrap>div {
+      width: 100%;
+      flex-shrink: 0;
+      padding: 10px;
+      scroll-snap-align: start;
+    }
+
+    table {
+      width: 100%;
       border-collapse: collapse;
-      margin: auto;
       table-layout: fixed;
     }
 
     /* init end */
     h1 {
       text-align: center;
-      margin-top: auto;
     }
 
     table {
@@ -103,7 +120,6 @@
     .scroll {
       width: 94%;
       max-width: 800px;
-      margin: auto;
     }
 
     .scroll table {
@@ -136,205 +152,22 @@
     .bg-linear td {
       border: 1px solid #f1f2f3;
     }
+
+    table tbody td:first-child,
+    .ellipsis {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   </style>
 </head>
 
 <body>
   <h1>常见表格</h1>
-  <table class="line">
-    <caption>表1 线框表格</caption>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Quos</th>
-        <th>Dolore</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>A</td>
-        <td>Corrupti!</td>
-        <td>Cumque!</td>
-      </tr>
-      <tr>
-        <td>B</td>
-        <td>Porro!</td>
-        <td>Qui!</td>
-      </tr>
-      <tr>
-        <td>C</td>
-        <td>Doloremque!</td>
-        <td>Odit</td>
-      </tr>
-      <tr>
-        <td>D</td>
-        <td>Veniam</td>
-        <td>Voluptate?</td>
-      </tr>
-      <tr>
-        <td>E</td>
-        <td>Dolorem!</td>
-        <td>Eligendi</td>
-      </tr>
-
-    </tbody>
-  </table>
-  <table class="line-3">
-    <caption>表2 三线表格</caption>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Quos</th>
-        <th>Dolore</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>A</td>
-        <td>Corrupti!</td>
-        <td>Cumque!</td>
-      </tr>
-      <tr>
-        <td>B</td>
-        <td>Porro!</td>
-        <td>Qui!</td>
-      </tr>
-      <tr>
-        <td>C</td>
-        <td>Doloremque!</td>
-        <td>Odit</td>
-      </tr>
-      <tr>
-        <td>D</td>
-        <td>Veniam</td>
-        <td>Voluptate?</td>
-      </tr>
-      <tr>
-        <td>E</td>
-        <td>Dolorem!</td>
-        <td>Eligendi</td>
-      </tr>
-
-    </tbody>
-  </table>
-  <table class="bg">
-    <caption>表3 背景表格</caption>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Quos</th>
-        <th>Dolore</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>A</td>
-        <td>Corrupti!</td>
-        <td>Cumque!</td>
-      </tr>
-      <tr>
-        <td>B</td>
-        <td>Porro!</td>
-        <td>Qui!</td>
-      </tr>
-      <tr>
-        <td>C</td>
-        <td>Doloremque!</td>
-        <td>Odit</td>
-      </tr>
-      <tr>
-        <td>D</td>
-        <td>Veniam</td>
-        <td>Voluptate?</td>
-      </tr>
-      <tr>
-        <td>E</td>
-        <td>Dolorem!</td>
-        <td>Eligendi</td>
-      </tr>
-
-    </tbody>
-  </table>
-  <table class="zebra">
-    <caption>表4 斑马纹表格</caption>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Quos</th>
-        <th>Dolore</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>A</td>
-        <td>Corrupti!</td>
-        <td>Cumque!</td>
-      </tr>
-      <tr>
-        <td>B</td>
-        <td>Porro!</td>
-        <td>Qui!</td>
-      </tr>
-      <tr>
-        <td>C</td>
-        <td>Doloremque!</td>
-        <td>Odit</td>
-      </tr>
-      <tr>
-        <td>D</td>
-        <td>Veniam</td>
-        <td>Voluptate?</td>
-      </tr>
-      <tr>
-        <td>E</td>
-        <td>Dolorem!</td>
-        <td>Eligendi</td>
-      </tr>
-
-    </tbody>
-  </table>
-  <table class="zebra dynamic">
-    <caption>表5 动态斑马纹表格</caption>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Quos</th>
-        <th>Dolore</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>A</td>
-        <td>Corrupti!</td>
-        <td>Cumque!</td>
-      </tr>
-      <tr>
-        <td>B</td>
-        <td>Porro!</td>
-        <td>Qui!</td>
-      </tr>
-      <tr>
-        <td>C</td>
-        <td>Doloremque!</td>
-        <td>Odit</td>
-      </tr>
-      <tr>
-        <td>D</td>
-        <td>Veniam</td>
-        <td>Voluptate?</td>
-      </tr>
-      <tr>
-        <td>E</td>
-        <td>Dolorem!</td>
-        <td>Eligendi</td>
-      </tr>
-
-    </tbody>
-  </table>
-  <div class="scroll">
-    <div class="scroll-head">
-      <table>
-        <caption>表6 滚动表格</caption>
+  <div class="wrap">
+    <div>
+      <table class="line">
+        <caption>表1 线框表格</caption>
         <thead>
           <tr>
             <th>Type</th>
@@ -342,10 +175,6 @@
             <th>Dolore</th>
           </tr>
         </thead>
-      </table>
-    </div>
-    <div class="scroll-body">
-      <table class="zebra">
         <tbody>
           <tr>
             <td>A</td>
@@ -372,98 +201,310 @@
             <td>Dolorem!</td>
             <td>Eligendi</td>
           </tr>
-          <tr>
-            <td>F</td>
-            <td>Similique</td>
-            <td>Libero</td>
-          </tr>
-          <tr>
-            <td>G</td>
-            <td>Doloremque</td>
-            <td>Nemo?</td>
-          </tr>
-          <tr>
-            <td>H</td>
-            <td>Amet</td>
-            <td>Suscipit!</td>
-          </tr>
-          <tr>
-            <td>I</td>
-            <td>Facilis!</td>
-            <td>Est!</td>
-          </tr>
-          <tr>
-            <td>J</td>
-            <td>Minus?</td>
-            <td>Adipisci?</td>
-          </tr>
 
         </tbody>
       </table>
     </div>
-    <div class="scroll-head">
-      <table>
-        <tfoot>
+    <div>
+      <table class="line-3">
+        <caption>表2 三线表格</caption>
+        <thead>
           <tr>
             <th>Type</th>
             <th>Quos</th>
             <th>Dolore</th>
           </tr>
-        </tfoot>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A</td>
+            <td>Corrupti!</td>
+            <td>Cumque!</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>Porro!</td>
+            <td>Qui!</td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>Doloremque!</td>
+            <td>Odit</td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>Veniam</td>
+            <td>Voluptate?</td>
+          </tr>
+          <tr>
+            <td>E</td>
+            <td>Dolorem!</td>
+            <td>Eligendi</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table class="bg">
+        <caption>表3 背景表格</caption>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Quos</th>
+            <th>Dolore</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A</td>
+            <td>Corrupti!</td>
+            <td>Cumque!</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>Porro!</td>
+            <td>Qui!</td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>Doloremque!</td>
+            <td>Odit</td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>Veniam</td>
+            <td>Voluptate?</td>
+          </tr>
+          <tr>
+            <td>E</td>
+            <td>Dolorem!</td>
+            <td>Eligendi</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table class="zebra">
+        <caption>表4 斑马纹表格</caption>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Quos</th>
+            <th>Dolore</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A</td>
+            <td>Corrupti!</td>
+            <td>Cumque!</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>Porro!</td>
+            <td>Qui!</td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>Doloremque!</td>
+            <td>Odit</td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>Veniam</td>
+            <td>Voluptate?</td>
+          </tr>
+          <tr>
+            <td>E</td>
+            <td>Dolorem!</td>
+            <td>Eligendi</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table class="zebra dynamic">
+        <caption>表5 动态斑马纹表格</caption>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Quos</th>
+            <th>Dolore</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A</td>
+            <td>Corrupti!</td>
+            <td>Cumque!</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>Porro!</td>
+            <td>Qui!</td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>Doloremque!</td>
+            <td>Odit</td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>Veniam</td>
+            <td>Voluptate?</td>
+          </tr>
+          <tr>
+            <td>E</td>
+            <td>Dolorem!</td>
+            <td>Eligendi</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="scroll">
+        <div class="scroll-head">
+          <table>
+            <caption>表6 滚动表格</caption>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Quos</th>
+                <th>Dolore</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="scroll-body">
+          <table class="zebra">
+            <tbody>
+              <tr>
+                <td>A</td>
+                <td>Corrupti!</td>
+                <td>Cumque!</td>
+              </tr>
+              <tr>
+                <td>B</td>
+                <td>Porro!</td>
+                <td>Qui!</td>
+              </tr>
+              <tr>
+                <td>C</td>
+                <td>Doloremque!</td>
+                <td>Odit</td>
+              </tr>
+              <tr>
+                <td>D</td>
+                <td>Veniam</td>
+                <td>Voluptate?</td>
+              </tr>
+              <tr>
+                <td>E</td>
+                <td>Dolorem!</td>
+                <td>Eligendi</td>
+              </tr>
+              <tr>
+                <td>F</td>
+                <td>Similique</td>
+                <td>Libero</td>
+              </tr>
+              <tr>
+                <td>G</td>
+                <td>Doloremque</td>
+                <td>Nemo?</td>
+              </tr>
+              <tr>
+                <td>H</td>
+                <td>Amet</td>
+                <td>Suscipit!</td>
+              </tr>
+              <tr>
+                <td>I</td>
+                <td>Facilis!</td>
+                <td>Est!</td>
+              </tr>
+              <tr>
+                <td>J</td>
+                <td>Minus?</td>
+                <td>Adipisci?</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="scroll-head">
+          <table>
+            <tfoot>
+              <tr>
+                <th>Type</th>
+                <th>Quos</th>
+                <th>Dolore</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div>
+      <table class="bg-linear">
+        <caption>表7 渐变边框表格</caption>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Quos</th>
+            <th>Dolore</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A</td>
+            <td>Corrupti!</td>
+            <td>Cumque!</td>
+          </tr>
+          <tr>
+            <td>B</td>
+            <td>Porro!</td>
+            <td>Qui!</td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>Doloremque!</td>
+            <td>Odit</td>
+          </tr>
+          <tr>
+            <td>D</td>
+            <td>Veniam</td>
+            <td>Voluptate?</td>
+          </tr>
+          <tr>
+            <td>E</td>
+            <td>Dolorem!</td>
+            <td>Eligendi</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <table class="sort" id="sort">
+        <caption>表8 排序表格</caption>
+        <thead>
+          <tr>
+            <th onclick="sortTbl(0)">Name <label><span class="iconfont icon-sort" id="icon-0"></span></label>
+            </th>
+            <th onclick="sortTbl(1)">Price<label><span class="iconfont icon-sort" id="icon-1"></span></label></th>
+            <th onclick="sortTbl(2)">Stock<label><span class="iconfont icon-sort" id="icon-2"></span></label></th>
+            <th onclick="sortTbl(3)">Discount<label><span class="iconfont icon-sort" id="icon-3"></span></label></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
       </table>
     </div>
   </div>
-  <table class="bg-linear">
-    <caption>表7 渐变边框表格</caption>
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Quos</th>
-        <th>Dolore</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>A</td>
-        <td>Corrupti!</td>
-        <td>Cumque!</td>
-      </tr>
-      <tr>
-        <td>B</td>
-        <td>Porro!</td>
-        <td>Qui!</td>
-      </tr>
-      <tr>
-        <td>C</td>
-        <td>Doloremque!</td>
-        <td>Odit</td>
-      </tr>
-      <tr>
-        <td>D</td>
-        <td>Veniam</td>
-        <td>Voluptate?</td>
-      </tr>
-      <tr>
-        <td>E</td>
-        <td>Dolorem!</td>
-        <td>Eligendi</td>
-      </tr>
-
-    </tbody>
-  </table>
-  <table class="sort" id="sort">
-    <caption>表8 排序表格</caption>
-    <thead>
-      <tr>
-        <th onclick="sortTbl(0)">Name <label><span class="iconfont icon-sort" id="icon-0"></span></label>
-        </th>
-        <th onclick="sortTbl(1)">Price<label><span class="iconfont icon-sort" id="icon-1"></span></label></th>
-        <th onclick="sortTbl(2)">Stock<label><span class="iconfont icon-sort" id="icon-2"></span></label></th>
-        <th onclick="sortTbl(3)">Discount<label><span class="iconfont icon-sort" id="icon-3"></span></label></th>
-      </tr>
-    </thead>
-    <tbody id="tbody"></tbody>
-  </table>
   <script>
     const sortUp = (key) => {
       obj.sort((a, b) => {

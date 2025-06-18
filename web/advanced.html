@@ -29,15 +29,17 @@
           Introduction</a>
         <a class="nav-item" style="--s:--n4" href="#var"><span class="iconfont icon-collections"></span> Variable</a>
         <a class="nav-item" style="--s:--n5" href="#fn"><span class="iconfont icon-palette"></span> Function</a>
-        <a class="nav-item" style="--s:--n6" href="#filter"><span class="iconfont icon-nowwallpaper"></span> Filter</a>
-        <a class="nav-item" style="--s:--n7" href="#pathclip"><span class="iconfont icon-photo"></span> Path Clip</a>
-        <a class="nav-item" style="--s:--n8" href="#mask"><span class="iconfont icon-aspectratio"></span> Mask</a>
-        <a class="nav-item" style="--s:--n9" href="#init"><span class="iconfont icon-menu"></span> Initialization</a>
-        <a class="nav-item" style="--s:--n10" href="#drill"><span class="iconfont icon-audiotrack"></span> Drill</a>
-        <a class="nav-item" style="--s:--n11" href="#summary"><span class="iconfont icon-hangzhengguanli"></span>
+        <a class="nav-item" style="--s:--n6" href="#scrollbar"><span class="iconfont icon-palette"></span> Scrollbar</a>
+        <a class="nav-item" style="--s:--n7" href="#scroll"><span class="iconfont icon-palette"></span> Scroll</a>
+        <a class="nav-item" style="--s:--n8" href="#filter"><span class="iconfont icon-nowwallpaper"></span> Filter</a>
+        <a class="nav-item" style="--s:--n9" href="#pathclip"><span class="iconfont icon-photo"></span> Path Clip</a>
+        <a class="nav-item" style="--s:--n10" href="#mask"><span class="iconfont icon-aspectratio"></span> Mask</a>
+        <a class="nav-item" style="--s:--n11" href="#init"><span class="iconfont icon-menu"></span> Initialization</a>
+        <a class="nav-item" style="--s:--n12" href="#drill"><span class="iconfont icon-audiotrack"></span> Drill</a>
+        <a class="nav-item" style="--s:--n13" href="#summary"><span class="iconfont icon-hangzhengguanli"></span>
           Summary</a>
-        <a class="nav-item" style="--s:--n12" href="#homework"><span class="iconfont icon-pen"></span> Homework</a>
-        <a class="nav-item" style="--s:--n13" href="#reference"><span class="iconfont icon-clip"></span> Reference</a>
+        <a class="nav-item" style="--s:--n14" href="#homework"><span class="iconfont icon-pen"></span> Homework</a>
+        <a class="nav-item" style="--s:--n15" href="#reference"><span class="iconfont icon-clip"></span> Reference</a>
       </nav>
     </div>
   </header>
@@ -84,33 +86,135 @@
   </section>
   <section class="section" style="--s:--n5" id="fn">
     <h2>函数 Function</h2>
+    <ol>
+      <li>view()</li>
+    </ol>
   </section>
-  <section class="section" style="--s:--n6" id="filter">
+  <section class="section" style="--s:--n6" id="scrollbar">
+    <h2>滚动条 scrollbar</h2>
+    <ul>
+      <li>哪个容器出现的滚动条？</li>
+      <li>当内容超出一屏/100vh后，如果不显式的指定 &lt;body&gt; 的溢出特性，则滚动条由 &lt;html&gt;触发</li>
+    </ul>
+    <ol>
+      <li>由容器实现</li>
+      <table>
+        <caption>容器样式</caption>
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>desc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>scrollbar-width</td>
+            <td>auto | thin | none</td>
+          </tr>
+          <tr>
+            <td>scrollbar-color</td>
+            <td>thumb track</td>
+          </tr>
+        </tbody>
+      </table>
+      <li>由容器的伪元素实现 - 可以使用 :hover 增加特效；常见属性如下</li>
+      <table>
+        <caption>容器伪元素样式</caption>
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>desc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>::-webkit-scrollbar{}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>::-webkit-scrollbar-track{}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>::-webkit-scrollbar-thumb{}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </ol>
+    <div>[<span class="iconfont icon-keyboard"></span>] 定制页面滚动条</div>
+    <div>方案1：&lt;html&gt;实现</div>
+    <div>
+      <pre>
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #f40 #fff;
+}</pre>
+      <div>方案1：&lt;body&gt;实现</div>
+      <pre>
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #f40;
+}</pre>
+      <div>全局设置 - 建议</div>
+      <pre>
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f40;
+}</pre>
+    </div>
+  </section>
+  <section class="section" style="--s:--n7" id="scroll">
+    <h2>滚动 Scroll</h2>
+    <ul>
+      <li>容器出现滚动条时的吸附类型</li>
+      <pre>scroll-snap-type: none | x mandatory | y mandatory | ...</pre>
+      <li>滚动子项的吸附位置</li>
+      <pre>scroll-snap-align: none | start | end | center</pre>
+      <li>滚动效果 - 通常在 &lt;html&gt; 中指定</li>
+      <pre>scroll-behavior: auto | smooth</pre>
+    </ul>
+  </section>
+  <section class="section" style="--s:--n8" id="filter">
     <h2>滤镜 Filter</h2>
   </section>
-  <section class="section" style="--s:--n7" id="pathclip">
+  <section class="section" style="--s:--n9" id="pathclip">
     <h2>路径裁剪 Path Clip</h2>
   </section>
-  <section class="section" style="--s:--n8" id="mask">
+  <section class="section" style="--s:--n10" id="mask">
     <h2>遮罩 Mask</h2>
   </section>
-  <section class="section" style="--s:--n9" id="init">
+  <section class="section" style="--s:--n22" id="init">
     <h2>初始化 Initialization</h2>
   </section>
-  <section class="section" style="--s:--n10" id="drill">
+  <section class="section" style="--s:--n13" id="drill">
     <h2>练习 Drill</h2>
   </section>
-  <section class="section" style="--s:--n11" id="summary">
+  <section class="section" style="--s:--n13" id="summary">
     <h2>小结 Summary</h2>
     <ol>
     </ol>
   </section>
-  <section class="section" style="--s:--n12" id="homework">
+  <section class="section" style="--s:--n14" id="homework">
     <h2>作业 Homework</h2>
     <ol>
     </ol>
   </section>
-  <section class="section" style="--s:--n13" id="reference">
+  <section class="section" style="--s:--n15" id="reference">
     <h2>参考 Reference</h2>
     <ol class="reference">
       <li><a target="_blank" href="./variable.html">变量 Variable</a></li>
@@ -118,6 +222,12 @@
       <li><a target="_blank" href="./filter.html">滤镜 Filter</a></li>
       <li><a target="_blank" href="./clip-path.html">路径裁剪 Path Clip</a></li>
       <li><a target="_blank" href="./mask.html">遮罩 Mask</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline/view">view()</a></li>
+      <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-behavior">scroll-behavior</a></li>
+      <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-snap-type">scroll-snap-type</a></li>
+      <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-snap-align">scroll-snap-align</a></li>
+      <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/scrollbar-color">scrollbar-color</a></li>
+      <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/scrollbar-width">scrollbar-width</a></li>
     </ol>
   </section>
   <div id="footer"></div>

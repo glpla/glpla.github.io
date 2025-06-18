@@ -109,6 +109,52 @@
   </section>
   <section class="section" style="--s:--n10" id="video">
     <h2>视频 &lt;video&gt;</h2>
+    <h3>使用字幕</h3>
+    <ol>
+      <li>准备视频</li>
+      <pre>
+&lt;video src="/utils/video/flag.mp4" controls muted autoplay loop&gt;
+&lt;/video&gt;</pre>
+      <li>准备字幕 - 手动或下载
+        <ul>
+          <li>后缀名是.vtt，如 demo.vtt</li>
+          <li>必须以 WEBVTT 开始；建议全部大写</li>
+          <li>可以使用定位指令指定字幕出现的位置 line 和对齐 align；默认是底部、居中对齐</li>
+        </ul>
+        <pre>
+WEBVTT
+
+00:00:01.000 --&gt; 00:00:04.000
+这是第一段字幕
+
+00:00:05.000 --&gt; 00:00:08.000 line:100%
+这是第二段字幕
+
+00:00:09.000 --&gt; 00:00:12.000 line:90% align:left
+这是第三段字幕</pre>
+      </li>
+      <li>引入字幕 - 使用 <a target="_blank" class="link"
+          href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/track">&lt;track&gt;</a>，指定 src
+        等属性；default 默认开启字幕</li>
+      <pre>
+&lt;video src="/utils/video/flag.mp4" controls muted autoplay loop&gt;
+  &lt;track kind="captions" src="./demo.vtt" default /&gt;
+&lt;/video&gt;</pre>
+      <li>设置字幕样式 - 使用伪元素 <a target="_blank" class="link"
+          href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/::cue">::cue</a>；默认是白底黑字</li>
+      <pre>
+::cue {
+  background-color: transparent;
+  font-size: 20px;
+  color: #fff;
+}</pre>
+      <li>优化字幕 - 提高多语言支持；需要多个语言字幕</li>
+      <pre>
+&lt;video src="/utils/video/flag.mp4" controls muted autoplay loop&gt;
+  &lt;track kind="subtitles" src="./demo_en.vtt" default label="English" srclang="en" /&gt;
+  &lt;track kind="subtitles" src="./demo_zh.vtt" default label="Chinese" srclang="zh" /&gt;
+&lt;/video&gt;</pre>
+    </ol>
   </section>
   <section class="section" style="--s:--n11" id="init">
     <h2>初始化 Initialization</h2>
@@ -126,13 +172,16 @@
   <section class="section" style="--s:--n14" id="reference">
     <h2>参考 Reference</h2>
     <ol class="reference">
-      <li><a href="./img.html">图片 &lt;img&gt;</a></li>
-      <li><a href="./imgfigure.html">图形 &lt;figure&gt;</a></li>
-      <li><a href="./imgpicture.html">图像 &lt;picture&gt;</a></li>
-      <li><a href="./canvas.html">画布 &lt;canvas&gt;</a></li>
-      <li><a href="./svg.html">可缩放矢量图形 &lt;svg&gt;</a></li>
-      <li><a href="./audio.html">音频 &lt;audio&gt;</a></li>
-      <li><a href="./video.html">视频 &lt;video&gt;</a></li>
+      <li><a target="_blank" href="./img.html">图片 &lt;img&gt;</a></li>
+      <li><a target="_blank" href="./imgfigure.html">图形 &lt;figure&gt;</a></li>
+      <li><a target="_blank" href="./imgpicture.html">图像 &lt;picture&gt;</a></li>
+      <li><a target="_blank" href="./canvas.html">画布 &lt;canvas&gt;</a></li>
+      <li><a target="_blank" href="./svg.html">可缩放矢量图形 &lt;svg&gt;</a></li>
+      <li><a target="_blank" href="./audio.html">音频 &lt;audio&gt;</a></li>
+      <li><a target="_blank" href="./video.html">视频 &lt;video&gt;</a></li>
+      <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/track">轨道
+          &lt;track&gt;</a></li>
+      <li><a target="_blank" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/::cue">字幕 ::cue</a></li>
     </ol>
   </section>
   <div id="footer"></div>

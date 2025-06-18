@@ -5,15 +5,15 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>导航 Navigation</title>
+  <title>动画 Animations</title>
   <link rel="stylesheet" href="../css/timeline.css">
 </head>
 
 <body>
   <header id="header">
     <div class="title">
-      <h1>导航</h1>
-      <span>Navigation</span>
+      <h1>动画</h1>
+      <span>Animations</span>
     </div>
     <span class="iconfont icon-Sun theme" id="theme"></span>
     <!-- <span class="iconfont icon-Moon-Star"></span> -->
@@ -88,6 +88,93 @@
   </section>
   <section class="section" style="--s:--n5" id="animation">
     <h2>帧动画 Animation</h2>
+    <h3>动画定义 @keyframes</h3>
+    <ul>
+      <li>使用关键字</li>
+      <li>使用百分比</li>
+    </ul>
+    <h3>动画使用 animation</h3>
+    <h3>步进动画 Steps()</h3>
+    <h3>时间轴动画 Timeline</h3>
+    <ul>
+      <li>元素的动画效果由容器的滚动或视口触发</li>
+      <li>不用设置时长 duration，而是取决于用户滚动的速度</li>
+      <li>通常指定 animation-fill-mode 为 both</li>
+    </ul>
+    <table>
+      <caption>时间轴动画常用属性</caption>
+      <thead>
+        <tr>
+          <th>item</th>
+          <th>desc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>animation-timeline</td>
+          <td>none | auto | scroll() | view()</td>
+        </tr>
+        <tr>
+          <td>animation-range-start</td>
+          <td>动画开始范围；默认 0</td>
+        </tr>
+        <tr>
+          <td>animation-range-end</td>
+          <td>动画结束范围；默认 100%</td>
+        </tr>
+        <tr>
+          <td>animation-range</td>
+          <td>复合属性；动画范围；默认 0 100%</td>
+        </tr>
+      </tbody>
+    </table>
+    <ol>
+      <li>view(start,end)
+        <ul>
+          <li>元素在屏幕/视口可见时才触发 - animation happens only when the element is visible on the screen</li>
+          <li>元素进入视口，动画开始播放</li>
+          <li>元素到达视口顶部，动画结束播放</li>
+          <li>start: Inward offset from beginning of the scrollport. default 0</li>
+          <li>end: Inward offset from end of the scrollport. default 0 </li>
+          <li>通常取值 view(50% 10%)</li>
+        </ul>
+        <figure>
+          <img src="./imgs/timeline0.png" alt="">
+          <figcaption>定制动画视口大小</figcaption>
+        </figure>
+      </li>
+
+      <li>scroll()</li>
+    </ol>
+    <h3>自定义属性 @Property</h3>
+    <ol>
+      <li>定义某个 CSS 属性以便参与动画运算</li>
+      <pre>
+@property --deg {
+  syntax: "&lt;angle&gt;";
+  initial-value: 0deg;
+  inherits: false;
+}</pre>
+      <li>创建动画</li>
+      <pre>
+@keyframes scroll {
+  from {
+    --deg: 0deg
+  }
+
+  to {
+    --deg: 360deg
+  }
+}</pre>
+      <li>使用动画</li>
+      <pre>
+.box {
+  width: 300px;
+  height: 200px;
+  background-image: conic-gradient(from var(--deg), red, yellow, blue);
+  animation: scroll 1s linear infinite;
+}</pre>
+      </ul>
   </section>
   <section class="section" style="--s:--n6" id="sr">
     <h2>第三方库 ScrollReveal</h2>
@@ -113,6 +200,12 @@
     <ol class="reference">
       <li><a target="_blank" href="./transition.html">过渡动画 transition</a></li>
       <li><a target="_blank" href="./animation.html">帧动画 animation</a></li>
+      <li><a target="_blank"
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline">animation-timeline</a></li>
+      <li><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-range">animation-range</a>
+      </li>
+      <li><a target="_blank"
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline/view#examples">view()</a></li>
       <li><a target="_blank" href="https://scrollrevealjs.org/">Scroll Reveal</a></li>
       <li><a target="_blank" href="https://gsap.com/">GASP</a></li>
     </ol>
