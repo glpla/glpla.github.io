@@ -1,4 +1,4 @@
-@import url(//at.alicdn.com/t/c/font_3859342_6edyvdmtfj.css);
+@import url(//at.alicdn.com/t/c/font_4954629_87eaen6ypc.css);
 @import url(../css/fonts_Michroma.css);
 
 :root {
@@ -15,9 +15,7 @@
 
 body,
 header,
-dl,
-dt,
-dd,
+ul,
 div,
 h1,
 h3,
@@ -42,15 +40,18 @@ a {
   line-height: 2;
 }
 
-dl {
-  line-height: 2;
-  padding: var(--p-m-g);
+ul {
+  list-style: none;
 }
 
-dt {
-  font-weight: 600;
-  line-height: 3;
-  margin-top: 3rem;
+ul li::before {
+  content: '\e612';
+  font-family: 'iconfont';
+  color: var(--color);
+}
+
+ul li a:hover {
+  color: var(--color);
 }
 
 body {
@@ -77,7 +78,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(#fff, var(--main-color));
+  background-image: linear-gradient(var(--main-color), #fff);
   border-radius: 8px;
 }
 
@@ -97,7 +98,6 @@ header {
   text-shadow: 0 0 .5rem rgba(0, 0, 0, 0.8);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  font-family: "Michroma";
 }
 
 header::after {
@@ -127,15 +127,11 @@ header span {
 
 .container {
   position: relative;
-  max-width: var(--w-width);
   width: 100%;
+  max-width: var(--w-width);
   min-height: 100vh;
   margin: 0 auto;
   background-color: #fefefe;
-}
-
-.main {
-  padding: var(--p-m-g);
 }
 
 .grid {
@@ -166,7 +162,7 @@ header span {
 }
 
 .chap::after {
-  content: '\e694';
+  content: '\ea70';
   font-family: 'iconfont';
   transition: 0.2s;
   color: var(--color);
@@ -329,10 +325,6 @@ h3,
   order: 1;
 }
 
-.help-item {
-  padding: var(--p-m-g);
-}
-
 .title {
   display: flex;
   align-items: center;
@@ -348,21 +340,6 @@ h3,
   height: 1px;
   flex: 1;
   background-color: var(--color, #4bc2ce);
-}
-
-.title~a {
-  display: block;
-}
-
-.help a::before {
-  content: '\e8af';
-  font-family: 'iconfont';
-  color: var(--color);
-  font-size: 12px;
-}
-
-.help a:hover {
-  color: var(--color);
 }
 
 iframe {

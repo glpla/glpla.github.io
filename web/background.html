@@ -22,12 +22,17 @@
       <div>. 背景 background 样式包含多个属性</div>
       <div>. 通常使用独立属性；也可以使用复合属性，但是可读性不好，不建议</div>
       <pre>background:bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;</pre>
+      <figure>
+        <img src="./imgs/xmind-bg.png" alt="">
+        <figcaption>背景思维导图</figcaption>
+      </figure>
     </dd>
     <dt>背景色 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-color">Background-color</a></dt>
     <dd>
       <div>. 为元素设置背景 <a href="./css-color.html">颜色 - Color</a>；可以使用透明色 transparent</div>
       <div>. 为了后向兼容/容错 fallback options，指定背景图片的同时，建议也指定颜色；俩者互不冲突；通常结合在一起使用</div>
       <div>. 指定背景颜色还可以提升用户体验，避免大图片加载时的页面空白</div>
+      <div>[<span class="iconfont icon-keyboard"></span>] 背景颜色使用示例</div>
       <pre>
 background-color: tomato;
 background-color: #ff6347;
@@ -42,7 +47,7 @@ background-color: hsla(9, 100%, 64%, .8);</pre>
       <div>. 可以使用传统的图片作为背景，也可以使用 <a href="./background3.html">渐变背景 - 线性渐变、径向渐变、锥向渐变</a> 创建背景图片</div>
       <div>. 可以使用多个背景图片，使用 <span class="warn">逗号;</span> 分隔；先指定的图片会在前面</div>
       <div>. 应用非常广泛。如使用透明色渐变添加蒙版、百叶窗等</div>
-      <div>[<span class="iconfont icon-bangzhu2"></span>] 有了 &lt;img&gt;，为什么还需要使用这个属性？</div>
+      <div>[<span class="iconfont icon-help"></span>] 有了 &lt;img&gt;，为什么还需要使用这个属性？</div>
       <!-- <div>. 功能更强大、操作更丰富</div> -->
       <div>. <span class="warn">装饰型元素</span> 多使用 Background-image</div>
       <div>. <span class="warn">功能性元素</span> 多使用 &lt;img&gt;；或者说如果去掉图片仍能正常表达主题就使用 Background-image，否则应使用 &lt;img&gt;
@@ -60,7 +65,7 @@ background-image: linear-gradient(transparent, #000), url(./imgs/2019middle.jpg)
     <dd>
       <div>. 根据图片坐标/位置显示指定的内容；默认从左上角开始 - relative to the edges of an element's box</div>
       <div>. 可以使用关键字，如 top、left、right、bottom</div>
-      <div>. 也可以使用具体数字或百分比</div>
+      <div>. 也可以使用具体数字 length 或百分比 percentage</div>
       <div>. 还可以关键字和数字、百分比组合使用</div>
       <div>. 如果只指定了一个方向，另外一个方向默认是 center 或 50%</div>
     </dd>
@@ -112,6 +117,156 @@ background-image: linear-gradient(transparent, #000), url(./imgs/2019middle.jpg)
       <div>. no-repeat：不重复；如果指定图片的位置，必须取消重复</div>
       <div>. repeat-x：x轴重复</div>
       <div>. repeat-y：y轴重复</div>
+    </dd>
+    <dt class="nav-cont">背景起点 <a
+        href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-origin">Background-origin</a></dt>
+    <dd>
+      <div>背景图片 background-image[<span class="warn">NOT</span>背景颜色 background-color]使用/渲染时的起点位置/原点位置</div>
+      <!-- <div>用来控制background-position位置的属性</div> -->
+      <pre>background-origin: padding-box | border-box | content-box;</pre>
+      <div>. padding-box：默认值；背景图片从 padding 区开始渲染，border 区不会出现；如果有背景色，则默认会在 border 区出现</div>
+      <div>. border-box：背景图片从 border 区开始渲染；可创建透明边框效果</div>
+      <div>. content-box：背景图片只会出现在内容区域，padding 和 border 都不会出现</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] background-origin 示例</dd>
+    <dd>
+      <div class="bgo-option">
+        .bg-origin {
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;width: 320px;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;height: 180px;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;border: 20px dashed rgba(255, 255, 255, 0.8);
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;padding: 20px;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;background-image: linear-gradient(45deg, #ff0, #f00);
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;background-size: cover;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;background-origin:
+        <input type="radio" name="bgo" id="bgopadding" checked>
+        <label for="bgopadding">padding-box</label>
+        <input type="radio" name="bgo" id="bgoborder">
+        <label for="bgoborder">border-box</label>
+        <input type="radio" name="bgo" id="bgocontent">
+        <label for="bgocontent">content-box</label>;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;margin: 1rem auto;
+        <br> }
+      </div>
+      <div class="bg-origin"></div>
+    </dd>
+    <dt class="nav-cont">背景裁剪 <a
+        href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-clip">Background-clip</a></dt>
+    <dd>
+      <p>背景[背景颜色 <span class="warn">和</span> 背景图片]的延申什么位置 - extends underneath</p>
+      <pre>background-clip: border-box | padding-box | content-box | text;</pre>
+      <div>1. border-box</div>
+      <div>背景延伸至边框外沿（但是在边框下层）；默认属性</div>
+      <div>背景显示拓展到border区域下面；超出border区的背景将被裁剪掉</div>
+      <div>如果有border，则border会覆盖背景；换句话说，背景填充到border区，只不过被border覆盖住了</div>
+      <div>设置一个dashed的border就可看到背景是在border的下方</div>
+      <div>2. padding-box</div>
+      <div>背景延伸至内边距（padding）外沿。不会绘制到边框处</div>
+      <div>背景显示拓展到padding区域；超过padding区的背景将被裁剪掉</div>
+      <div>3. content-box</div>
+      <div>背景被裁剪至内容区（content box）外沿</div>
+      <div>背景显示在content区域下面；超过context区的背景将被裁剪掉</div>
+      <div>如果有padding，但是只指定了background-image而没有指定background-color，则padding区为默认的白色</div>
+      <div>所以保险起见，通常要设置一个背景色，避免background-image无效</div>
+      <div>4. text</div>
+      <div>背景被裁剪成文字的前景色</div>
+      <div>文字颜色设置为透明色，创建带背景的文字效果</div>
+      <div>尽量不要使用文字阴影 <a href="./text.html">text-shadow</a>，而应该使用滤镜 <a href="./filter.html">filter</a> 的 投影
+        drop-shadow() 添加层次效果</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] background-clip 示例</dd>
+    <dd>
+      <div class="bgc-option">
+        .bg-clip {
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;width: 320px;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;height: 180px;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;line-height: 100px;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;font-size: 40px;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;font-weight: 600;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;border: 20px dashed rgba(255, 255, 255, 0.8);
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;padding: 20px;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;background-color: #ff0;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;background-image: linear-gradient(45deg, #ff0, #f00);
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;background-size: cover;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;background-clip:
+        <input type="radio" name="bgc" id="bgcborder" checked>
+        <label for="bgcborder">border-box</label>
+        <input type="radio" name="bgc" id="bgcpadding">
+        <label for="bgcpadding">padding-box</label>
+        <input type="radio" name="bgc" id="bgccontent">
+        <label for="bgccontent">content-box</label>
+        <input type="radio" name="bgc" id="bgctext">
+        <label for="bgctext">text</label>;
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;margin: 1rem auto;
+        <br> }
+      </div>
+      <div class="bg-clip">hello, world.</div>
+    </dd>
+    <dt class="nav-cont">背景铺贴 <a
+        href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-attachment">Background-attachment</a>
+    </dt>
+    <dd>
+      <div>. 背景图片是固定在视口viewpoint还是随窗口容器滚动；即背景图片和元素的附着方式</div>
+      <div>. 多用于营造视觉差效果</div>
+      <pre>background-attachment: scroll | fixed | local; </pre>
+      <div>. scroll：默认背景图片会随着窗口/页面滚动而滚动；背景图片和自己保持固定；自己滚动不影响，别人滚动会影响</div>
+      <div>. fixed：背景图片不会随着窗口/页面滚动而滚动背景，即：背景图片固定不动/相对于视口固定</div>
+      <div>. local：背景图片会随着元素内容的滚动而滚动</div>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 默认情况</dd>
+    <dd>. 背景图片不跟随内容滚动；但跟随窗口/视口滚动：整体滚动</dd>
+    <dd class="basic bg-attach-default">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis at nostrum fugiat ratione
+        reprehenderit eius officia, tempore voluptatum incidunt nihil, iusto laborum? Cupiditate autem ipsam
+        illum totam excepturi aliquam sit.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, doloribus libero at nihil temporibus ipsa
+        quisquam, nulla sapiente voluptates fuga, porro sequi unde labore explicabo. Unde dolore omnis
+        distinctio molestias?</p>
+    </dd>
+    <dd>
+      <pre>
+.bg-attach-default {
+    overflow-y: auto;
+    background-image: url(../imgs/bg.jpg);
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 固定</dd>
+    <dd>. 背景图片不跟随内容滚动，但是相对窗口/视口固定</dd>
+    <dd>. 参考页面顶部</dd>
+    <dd class="basic bg-attach-fixed">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis at nostrum fugiat ratione
+        reprehenderit eius officia, tempore voluptatum incidunt nihil, iusto laborum? Cupiditate autem ipsam
+        illum totam excepturi aliquam sit.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, doloribus libero at nihil temporibus ipsa
+        quisquam, nulla sapiente voluptates fuga, porro sequi unde labore explicabo. Unde dolore omnis
+        distinctio molestias?</p>
+    </dd>
+    <dd>
+      <pre>
+.bg-attach-local {
+    overflow-y: auto;
+    background-image: url(../imgs/bg.jpg);
+    background-attachment: local;
+}</pre>
+    </dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 本地</dd>
+    <dd>. 背景图片跟随内容滚动；跟随窗口/视口滚动</dd>
+    <dd>. 背景图片通常需要重复</dd>
+    <dd class="basic bg-attach-local">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis at nostrum fugiat ratione
+        reprehenderit eius officia, tempore voluptatum incidunt nihil, iusto laborum? Cupiditate autem ipsam
+        illum totam excepturi aliquam sit.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, doloribus libero at nihil temporibus ipsa
+        quisquam, nulla sapiente voluptates fuga, porro sequi unde labore explicabo. Unde dolore omnis
+        distinctio molestias?</p>
+    </dd>
+    <dd>
+      <pre>
+.bg-attach-local {
+    overflow-y: auto;
+    background-image: url(../imgs/bg.jpg);
+    background-attachment: local;
+}</pre>
     </dd>
   </dl>
   <div class="chap">案例 Cases</div>
@@ -168,7 +323,7 @@ background-image: linear-gradient(transparent, #000), url(./imgs/2019middle.jpg)
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 多背景 - 百叶窗；自动重复</dd>
     <dd>
-      <div>[<span class="iconfont icon-bangzhu2"></span>] 如果指定位置 position 和不重复 no-repeat 会怎么样？</div>
+      <div>[<span class="iconfont icon-help"></span>] 如果指定位置 position 和不重复 no-repeat 会怎么样？</div>
       <pre>
 .img {
   width: 800px;
