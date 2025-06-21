@@ -12,12 +12,22 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="./css/index.css">
   <style>
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .grid {
       padding: calc(4*var(--p-m-g)) var(--p-m-g);
     }
 
     h4 {
-      color: var(--main-color);
+      color: transparent;
+      width: max-content;
+      background-image: linear-gradient(to left, var(--active-color), var(--warn-color));
+      background-clip: text;
+      font-size: 1.8rem;
     }
 
     h4::before {
@@ -112,6 +122,7 @@
 <body>
   <div class="w">
     <header>
+      <!-- <video src="/utils/festival/xz.mp4" muted autoplay loop></video> -->
       <div class="info">
         <a class="avatar" href="./course/online_xh.html" target="_blank">glpla.github.io</a>
         <h1>
@@ -388,20 +399,32 @@
   </div>
 
   <footer>
-    <!-- <div id="lotus"></div> -->
+    <div id="lotus"></div>
     <div>All rights reserved &copy; glpla 2022-2025</div>
     <div>glpla@hotmail.com</div>
     <div>广州新华学院</div>
     <div>东莞 · 中国</div>
   </footer>
 
-  <!-- <script>
+  <script>
     fetch('./common/lotus.html')
       .then(res => res.text())
       .then(html => {
         document.getElementById('lotus').innerHTML = html
       })
-  </script> -->
+  </script>
+  <script>
+    const audio = new Audio('/utils/sound/click0.mp3')
+    document.addEventListener('click', e => {
+      if (e.target.tagName == 'A') {
+        e.preventDefault()
+        audio.play()
+        audio.addEventListener('ended', () => {
+          window.location.href = e.target.href
+        })
+      }
+    })
+  </script>
 </body>
 
 </html>

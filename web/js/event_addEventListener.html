@@ -46,6 +46,9 @@
       <div>.移除之前注册的事件</div>
       <div>.性能考虑，有事件注册就应该有事件清除</div>
       <div>.正常起见，必须传入与注册中完全相同的函数引用；怎么注册就怎么清除</div>
+      <div>1. 避免调试干扰：如果你在开发阶段频繁刷新或测试页面跳转逻辑，保留未解绑的监听器可能会导致行为异常，例如旧监听器被意外触发</div>
+      <div>2. 防止某些特殊情况下的内存泄漏：在一些老旧浏览器或复杂 SPA 架构中，如果组件/模块没有正确销毁，监听器未解绑可能导致内存无法释放</div>
+      <div>3. 编码规范 & 可维护性：主动解除绑定是一种良好的编程习惯，有助于代码可读性和资源管理意识</div>
       <div>[<span class="iconfont icon-keyboard"></span>] 绑定多个事件侦听器</div>
       <pre>
 //具名函数
@@ -68,6 +71,9 @@ card.addEventListener('click', (e) => {
       <div class="tips">
         <div>.部分事件如：blur / focus / submit / change / reset / select / mouseleave / mouseenter 没有冒泡</div>
         <div>.事件处理函数尽量不要采用匿名函数的方式，否则无法清除</div>
+        <div>.适用于函数表达式</div>
+        <div>.使用开发者工具 → 事件侦听器，查看事件的添加和移除</div>
+        <div>.使用 beforeunload 比 unload 更合适；unload 的兼容性和执行稳定性较差（部分浏览器限制 JS 执行）</div>
       </div>
     </dd>
     <dt>事件传参</dt>

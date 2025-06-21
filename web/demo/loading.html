@@ -103,9 +103,14 @@
   <script src="../../utils/lib/snow.js"></script>
   <script>
     const item = document.querySelector('.item')
-    item.addEventListener('animationend', () => {
+    const nav = () => {
       location.href = './notice.html'
-    })
+    }
+    item.addEventListener('animationend', nav)
+
+    window.addEventListener('beforeunload', (event) => {
+      item.removeEventListener('animationend', nav)
+    });
   </script>
 </body>
 

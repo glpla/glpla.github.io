@@ -15,6 +15,7 @@
     body {
       display: flex;
       height: 100vh;
+      background-color: #000;
     }
 
     .custom-audio {
@@ -23,22 +24,22 @@
       max-width: 1024px;
       height: 40px;
       position: relative;
-      background-color: #dfe;
+      background-color: #fff;
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 0 1rem;
+      padding: 0 10px;
       margin: auto;
     }
 
-    .custom-audio::before {
+    .custom-audio::after {
       content: '';
       position: absolute;
       left: 0;
       bottom: 0px;
       width: var(--per);
-      height: 2px;
-      background-color: #0aa;
+      height: 4px;
+      background-color: #2ecc71;
     }
 
     #ctrl {
@@ -71,13 +72,13 @@
     <div id="dur" class="dur">00:00</div>
   </div>
   <script>
-    const audio = new Audio();
-    audio.src = '/utils/music/Alizee-LaIslaBonita.mp3';
+    // const audio = new Audio();
     const tag = document.querySelector('.custom-audio');
-    const ctrl = document.querySelector('#ctrl');
-    const cur = document.querySelector('#cur');
-    const dur = document.querySelector('#dur');
-
+    const audio = document.getElementById('audio');
+    const cur = document.getElementById('cur');
+    const ctrl = document.getElementById('ctrl');
+    const dur = document.getElementById('dur');
+    audio.src = '/utils/music/Alizee-LaIslaBonita.mp3';
     audio.addEventListener('durationchange', () => {
       dur.innerHTML = time(audio.duration);
     })
@@ -87,10 +88,6 @@
       cur.innerHTML = time(audio.currentTime);
       let per = (audio.currentTime / audio.duration) * 100 + '%';
       tag.style.setProperty('--per', per);
-    })
-
-    audio.addEventListener('click', function () {
-      ctrl.click()
     })
 
     ctrl.addEventListener('click', function () {
