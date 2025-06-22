@@ -1,4 +1,4 @@
-@import url(//at.alicdn.com/t/c/font_2964916_1hl9uejo95k.css);
+@import url(//at.alicdn.com/t/c/font_2964916_z611uz47wwk.css);
 
 :root {
   --color-blue: #4bc2ce;
@@ -23,7 +23,8 @@
   font-weight: normal;
 }
 
-ul {
+ul,
+ol {
   list-style: none;
 }
 
@@ -226,12 +227,12 @@ h2 {
   color: var(--color);
   font-size: 1.8rem;
   font-weight: normal;
-  margin: var(--main-nav-h) auto 3rem 2rem;
+  margin: var(--main-nav-h) auto 3rem 1rem;
 }
 
 h2 {
   animation: rotIcon both;
-  animation-timeline: view(50% 0%);
+  animation-timeline: view(40% 0%);
 }
 
 @keyframes rotIcon {
@@ -334,15 +335,33 @@ h2 .iconfont {
 }
 
 .txt {
-  padding: var(--p-m-g);
+  position: relative;
   columns: 200px 2;
   text-align: justify;
   margin-bottom: 1em;
 }
 
 .txt p {
-  text-indent: 2em;
   margin-bottom: 1em;
+}
+
+.txt a {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+}
+
+.txt a:hover {
+  color: var(--color);
+}
+
+.txt p::first-letter {
+  float: left;
+  font-size: 2em;
+  margin-right: 1em;
+  color: var(--color);
 }
 
 .intro {
@@ -425,7 +444,6 @@ table td {
   justify-content: space-between;
   align-items: center;
   gap: var(--p-m-g);
-  font-size: 1.4rem;
   margin-bottom: calc(2*var(--p-m-g));
 }
 
@@ -679,15 +697,40 @@ audio {
 }
 
 .lists {
-  display: flex;
-  flex-direction: column;
-  line-height: 2;
+  height: 32vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color) transparent;
 }
 
-.lists a {
+.lists li {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: var(--p-m-g);
+  counter-increment: list-sn;
+  line-height: 1.5;
+}
+
+.lists li::before {
+  content: counter(list-sn);
+  width: 3rem;
+  text-align: right;
+}
+
+.lists li a {
+  margin-right: auto;
+  transition: 0.4s;
+}
+
+.lists li a:hover {
+  letter-spacing: 2px;
+}
+
+.lists li:nth-child(-n+3)::before {
+  content: '\e647';
+  font-family: 'iconfont';
+  color: var(--color);
 }
 
 /* 
@@ -803,7 +846,7 @@ body:has(.music-modal.active) {
   content: '\e645' ' ';
   font-family: 'iconfont';
   color: var(--color);
-  font-size: 2em;
+  font-size: 2.2rem;
 }
 
 .msg .msg-box::-webkit-scrollbar {
@@ -929,7 +972,7 @@ body:has(.music-modal.active) {
   line-height: 2;
   border-top: 1px solid #333;
   border-bottom: 1px solid #333;
-  padding: var(--p-m-g);
+  padding: var(--p-m-g) 0;
 }
 
 .help dt {
@@ -1130,10 +1173,9 @@ footer img {
 
   .skill-wrap .info,
   .gal figure,
-  .work-item,
-  .lists a {
+  .work-item {
     animation: rotIcon both;
-    animation-timeline: view(50% 10%);
+    animation-timeline: view(40% 10%);
   }
 
   footer {
