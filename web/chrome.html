@@ -37,30 +37,41 @@
       <div>. 缩放窗口：CTRL + /-</div>
       <div>. 还原窗口：CTRL + 0</div>
     </dd>
-    <dt>Inspect</dt>
+  </dl>
+  <div class="chap">Inspect</div>
+  <dl>
     <dd>
       <div>. 要学会 <span class="warn">偷</span></div>
-      <div>. 在浏览器中，按 F12 打开浏览器的开发者视图|检查功能页，或鼠标右键单击 → 检查</div>
+      <div>. 在浏览器中，按 <span class="warn">F12</span> 打开浏览器的开发者工具视图|检查功能页，或鼠标右键单击 → 检查</div>
       <div>. 默认是上下布局：上面是元素结构和页面功能，下面是元素样式；也可以调整为左右布局</div>
       <figure>
         <img src="./imgs/F12.png" alt="">
-        <figcaption>上下布局的检查功能页</figcaption>
+        <figcaption>开发者工具视图</figcaption>
       </figure>
-      <div>1. Selector</div>
-      <div>. 如果开发中预期的样式效果没有出现，可以拾取某个元素，在 <span class="warn">样式 style</span>
-        选项卡中查看样式的具体信息，包括继承的样式、被覆盖的样式和计算|渲染出来的最终样式信息；在
-        <span class="warn">已计算 computed</span> 选项卡中可以查看完整的样式；根据检查情况修改并更新项目
-      </div>
-      <div>2. Toggle Device</div>
+    </dd>
+    <dt>Selector - 1</dt>
+    <dd>
+      <div>. 拾取某个元素，在底部的 <span class="warn">样式 style</span> 选项卡中查看元素的样式信息，包括继承的样式、被覆盖的样式</div>
+      <div>. 特别适合调试样式效果</div>
+      <div>. 页面元素较多的情况下，还需要在 <span class="warn">元素 Element</span> 中，慢慢的一层一层选择，直至定位到目标元素</div>
+    </dd>
+    <dt>Toggle Device -2</dt>
+    <dd>
       <div>. 切换设备，查看不同设备下的页面效果</div>
+      <div>. 可以添加或定制设备</div>
       <div>. 在移动端和桌面端切换，特别是响应式开发要切换到移动端</div>
-      <div>3. Element</div>
-      <div>. 检查\修改文档/元素结构</div>
-      <div>. 偷图片</div>
-      <div>. 偷视频</div>
-      <div>4. Console</div>
+    </dd>
+    <dt>Element - 3</dt>
+    <dd>
+      <div>. 检查/修改文档/元素结构</div>
+      <div>. 偷图片、偷视频、偷...</div>
+      <div>. 捕获节点屏幕截图 Capture node screenshot；特别适合超大截图，不需要滚屏哦</div>
+    </dd>
+    <dt>Console - 4</dt>
+    <dd>
       <div>. 查看控制台输出</div>
       <div>. 开发过程中，逻辑相关的部分，请多使用 console.log() 调试</div>
+      <div>. 右键记录，选择复制 console，即可复制，便于分享，无须拖拽复制</div>
       <div>. 无须拼接</div>
       <pre>
 console.log('a', a, 'b', b, 'c', c );
@@ -74,19 +85,45 @@ for (let i = 0; i &lt; 1000; i++) {
 console.timeEnd('timer')</pre>
       <div>. 清屏</div>
       <pre>console.clear()</pre>
-      <div>5. Network</div>
+    </dd>
+    <dt>Network - 5</dt>
+    <dd>
       <div>. 网络情况，各种资源图片、样式文件等加载情况</div>
       <div>. stop recording：停止网络追踪</div>
       <div>. clear network log：清空记录</div>
       <div>. preserve log：保留记录，适合页面跳转时查看</div>
       <div>. no Throttling：不限流；可以调整网络带宽以便查看数据加载情况，如 fast 3G、slow 3G、offline</div>
       <!-- <div>5. more：更多网络设置，如切换不同的浏览器以便查看UI效果</div> -->
-      <div>6. Application</div>
+    </dd>
+    <dt>Application -6</dt>
+    <dd>
       <div>. Local Storage</div>
       <div>. Session</div>
       <div>. Cookie</div>
     </dd>
-    <dt>Simulation</dt>
+    <dt>Style -7</dt>
+    <dd class="sn">
+      <p>. 从上到下，越靠上，样式的优先级越高</p>
+      <div>内联样式 -1： 写在元素标签上的样式，优先级最高</div>
+      <div>叠加样式 -2-3：如果有重复的样式，上面的会覆盖下面的；如果没有，则层层叠加 - 层叠样式表</div>
+      <div>浏览器代理样式 -4：不同的浏览器的渲染引擎有差异，建议使用现代主流浏览器开发</div>
+      <div>盒模型 -5：选择元素的盒模型</div>
+      <div>特定样式的编辑器 -9-10：专有样式检查工具，所见即所得：阴影 Box-shadow、弹性盒子 Flexbox、网格 Grid ...</div>
+    </dd>
+    <dt>Computed - 8</dt>
+    <dd>
+      <div>. 元素计算|渲染出来的最终样式信息</div>
+    </dd>
+    <dt>Other</dt>
+    <dd class="sn">
+      <div>Source：增加断点 breakpoint、记录点 logpoint</div>
+      <div>Coverage：参考使用录优化页面</div>
+      <div>CSS Overview：统计样式信息</div>
+    </dd>
+  </dl>
+  <div class="chap">Simulation</div>
+  <dl>
+    <dt>真机调试</dt>
     <dd>
       <div>. 开发应严格遵循设计稿；更多细节，请访问 <a
           href="https://www.bilibili.com/video/BV1we411f7Ds/?spm_id_from=333.999.0.0&vd_source=fe13480e1099e18e9d5f4e25467df4df"

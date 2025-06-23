@@ -46,67 +46,75 @@ transition-timing-function:
 transition-delay:</pre>
       <table>
         <caption>过渡属性</caption>
-        <tr>
-          <th style="width: 30%;">类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>property</td>
-          <td>元素参与过渡的属性，必须是 <span class="warn">数值型</span> 的属性
-            <br>通常指定为 all；<span class="warn">建议</span> 指定为特定属性
-          </td>
-        </tr>
-        <tr>
-          <td>duration</td>
-          <td>过渡持续时间，单位秒 s 或毫秒 ms，必选参数，且必须是第一个时间参数；第二个时间参数是延迟时间
-            <br>UI界面的过渡通常不超过 0.4s
-          </td>
-        </tr>
-        <tr>
-          <td>timing-function</td>
-          <td>时间函数，过渡的效果/方式
-            <br>默认是 ease
-          </td>
-        </tr>
-        <tr>
-          <td>delay</td>
-          <td>过渡延迟时间，必须是第二个时间参数；第一个时间参数是过渡时间</td>
-        </tr>
+        <thead>
+          <tr>
+            <th style="width: 30%;">item</th>
+            <th>desc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>property</td>
+            <td>元素参与过渡的属性，必须是 <span class="warn">数值型</span> 的属性
+              <br>通常指定为 all；<span class="warn">建议</span> 指定为特定属性
+            </td>
+          </tr>
+          <tr>
+            <td>duration</td>
+            <td>过渡持续时间，单位秒 s 或毫秒 ms，必选参数，且必须是第一个时间参数；第二个时间参数是延迟时间
+              <br>UI界面的过渡通常不超过 0.4s
+            </td>
+          </tr>
+          <tr>
+            <td>timing-function</td>
+            <td>时间函数，过渡的效果/方式
+              <br>默认是 ease
+            </td>
+          </tr>
+          <tr>
+            <td>delay</td>
+            <td>过渡延迟时间，必须是第二个时间参数；第一个时间参数是过渡时间</td>
+          </tr>
+        </tbody>
       </table>
       <table>
         <caption>时间函数 timing-function</caption>
-        <tr>
-          <th style="width: 30%;">类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>linear</td>
-          <td>以相同速度开始到结束（ cubic-bezier(0, 0, 1, 1) ）</td>
-        </tr>
-        <tr>
-          <td class="warn">ease</td>
-          <td>默认；开始慢，然后快，慢下来，结束时非常慢（ cubic-bezier(0.25, 0.1, 0.25, 1)）</td>
-        </tr>
-        <tr>
-          <td>ease-in</td>
-          <td>开始慢，结束快（ cubic-bezier(0.42,0,1,1)</td>
-        </tr>
-        <tr>
-          <td>ease-out</td>
-          <td>开始快，结束慢（ cubic-bezier(0,0,0.58,1)</td>
-        </tr>
-        <tr>
-          <td>ease-in-out</td>
-          <td>中间快，两边慢（ cubic-bezier(0.42,0,0.58,1)</td>
-        </tr>
-        <tr>
-          <td>cubic-bezier(n,n,n,n)</td>
-          <td>在 cubic-bezier 函数中定义自己的值</td>
-        </tr>
-        <tr>
-          <td>steps()</td>
-          <td>步进方式变换，见后续内容</td>
-        </tr>
+        <thead>
+          <tr>
+            <th style="width: 30%;">item</th>
+            <th>desc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>linear</td>
+            <td>以相同速度开始到结束（ cubic-bezier(0, 0, 1, 1) ）</td>
+          </tr>
+          <tr>
+            <td class="warn">ease</td>
+            <td>默认；开始慢，然后快，慢下来，结束时非常慢（ cubic-bezier(0.25, 0.1, 0.25, 1)）</td>
+          </tr>
+          <tr>
+            <td>ease-in</td>
+            <td>开始慢，结束快（ cubic-bezier(0.42,0,1,1)</td>
+          </tr>
+          <tr>
+            <td>ease-out</td>
+            <td>开始快，结束慢（ cubic-bezier(0,0,0.58,1)</td>
+          </tr>
+          <tr>
+            <td>ease-in-out</td>
+            <td>中间快，两边慢（ cubic-bezier(0.42,0,0.58,1)</td>
+          </tr>
+          <tr>
+            <td>cubic-bezier(n,n,n,n)</td>
+            <td>在 cubic-bezier 函数中定义自己的值</td>
+          </tr>
+          <tr>
+            <td>steps()</td>
+            <td>步进方式变换，见后续内容</td>
+          </tr>
+        </tbody>
       </table>
       <div>1. 默认所有属性过渡</div>
       <pre>
@@ -144,26 +152,34 @@ transition-delay:</pre>
 .demo {
   background-color: #ccc;
   font-size: 16px;
-  transition: background-color 1s, font-size 1s;
+  transition: 
+    background-color 1s, 
+    font-size 1s;
 }
 
 .demo:hover {
   background-color: #f40;
   font-size: 20px;
-  transition: background-color 1s, font-size 1s;
+  transition: 
+    background-color 1s, 
+    font-size 1s;
 }</pre>
       <div>5. 多个属性带延迟分别过渡</div>
       <pre>
 .demo {
   background-color: #ccc;
   font-size: 16px;
-  transition: background-color 1s, font-size 1s;
+  transition: 
+    background-color 1s, 
+    font-size 1s;
 }
 
 .demo:hover {
   background-color: #f40;
   font-size: 20px;
-  transition: background-color 1s, font-size 1s 1s;
+  transition: 
+    background-color 1s, 
+    font-size 1s 1s;
 }</pre>
     </dd>
     <dd class="tips">
@@ -391,26 +407,31 @@ transition-delay:</pre>
     <dd>
       <div>. 侦听过渡动画的执行过程</div>
       <table>
-        <tr>
-          <th>item</th>
-          <th>desc</th>
-        </tr>
-        <tr>
-          <td>transitionstart</td>
-          <td>动画开始</td>
-        </tr>
-        <tr>
-          <td>transitionrun</td>
-          <td>动画运行</td>
-        </tr>
-        <tr>
-          <td>transitionend</td>
-          <td>动画结束</td>
-        </tr>
-        <tr>
-          <td>transitioncancel</td>
-          <td>动画取消</td>
-        </tr>
+        <caption>事件 Events</caption>
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>desc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>transitionstart</td>
+            <td>动画开始</td>
+          </tr>
+          <tr>
+            <td>transitionrun</td>
+            <td>动画运行</td>
+          </tr>
+          <tr>
+            <td>transitionend</td>
+            <td>动画结束</td>
+          </tr>
+          <tr>
+            <td>transitioncancel</td>
+            <td>动画取消</td>
+          </tr>
+        </tbody>
       </table>
       <pre>el.addEventListener("transitionstart", (event) => {});</pre>
       <pre>el.addEventListener("transitionrun", (event) => {});</pre>
