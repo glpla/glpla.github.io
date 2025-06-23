@@ -742,12 +742,17 @@
         <span class="iconfont icon-customer-group-fill"></span>
         <span>团队</span>
       </h2>
-      <div class="team-wrap">
-        <div class="team-item"></div>
-        <div class="team-item"></div>
-        <div class="team-item"></div>
-        <div class="team-item"></div>
-        <div class="team-item"></div>
+      <div class="team-wrap" id="team-wrap">
+        <div class="team-item" style="--deg:0;--src:url('/utils/screen/screen0.jpg')"></div>
+        <div class="team-item" style="--deg:1;--src:url('/utils/screen/screen1.jpg')"></div>
+        <div class="team-item" style="--deg:2;--src:url('/utils/screen/screen2.jpg')"></div>
+        <div class="team-item" style="--deg:3;--src:url('/utils/screen/screen3.jpg')"></div>
+        <div class="team-item" style="--deg:4;--src:url('/utils/screen/screen4.jpg')"></div>
+        <div class="team-item" style="--deg:5;--src:url('/utils/screen/screen5.jpg')"></div>
+      </div>
+      <div class="team-btn">
+        <div class="btn" id="team-btn-prev"><span class="iconfont icon-chevron-left"></span></div>
+        <div class="btn" id="team-btn-next"><span class="iconfont icon-chevron-right"></span></div>
       </div>
     </div>
     <div id="msg" class="nav-cont" style="--color:#FC427B;--second-color:#FD7272;" title="msg">
@@ -968,6 +973,20 @@
           body.classList.remove('active')
         }
       })
+    })
+
+    // team
+    const teamWrap = document.querySelector('#team-wrap')
+    const teamBtnPrev = document.querySelector('#team-btn-prev')
+    const teamBtnNext = document.querySelector('#team-btn-next')
+    let deg = 0;
+    teamBtnNext.addEventListener('click', () => {
+      deg += 60
+      teamWrap.style.transform = `rotateY(${deg}deg)`
+    })
+    teamBtnPrev.addEventListener('click', () => {
+      deg -= 60
+      teamWrap.style.transform = `rotateY(${deg}deg)`
     })
 
     // countdown
