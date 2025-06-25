@@ -1,4 +1,4 @@
-@import url(//at.alicdn.com/t/c/font_2964916_becrcy6xndg.css);
+@import url(//at.alicdn.com/t/c/font_2964916_jucd5zvvdh.css);
 
 :root {
   --color-blue: #4bc2ce;
@@ -78,6 +78,12 @@ table {
   width: 100%;
   border-collapse: collapse;
   line-height: 2;
+}
+
+table th,
+table td {
+  padding: 0 var(--p-m-g);
+  font-family: 'Inconsolata', "微软雅黑", "Microsoft YaHei", Arial, Helvetica, sans-serif;
 }
 
 .tbl-info td {
@@ -424,11 +430,6 @@ h2 .iconfont {
   text-align: left;
 }
 
-table th,
-table td {
-  padding: 0 var(--p-m-g);
-}
-
 .tbl-sticky table tr:nth-child(even) td {
   background-color: #f1f2f3;
 }
@@ -566,8 +567,49 @@ table td {
 }
 
 /* work end */
+/* awards */
+.awards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 500px;
+  min-height: 50vh;
+  margin: 0 auto;
+}
 
-/* txt */
+.awards-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+}
+
+.awards-wrap .awards-item {
+  position: relative;
+  width: 200px;
+  aspect-ratio: 9/16;
+  background-image: var(--url);
+  background-size: cover;
+  background-position: center;
+  filter: drop-shadow(0 var(--p-m-g) var(--p-m-g) rgba(0, 0, 0, 0.5));
+  transition: 0.4s;
+}
+
+.awards-wrap:hover>.awards-item:not(:hover) {
+  margin: 0 -40px;
+  transform: rotateY(45deg) scale(0.8);
+}
+
+.awards-wrap .awards-item:hover~.awards-item {
+  transform: rotateY(-45deg) scale(0.8);
+}
+
+.awards-wrap .awards-item:hover {
+  transform: rotateY(0deg) scale(1.05);
+  z-index: 100;
+}
+
+/* gal */
 
 .gal {
   display: grid;
@@ -691,7 +733,7 @@ body:has(.figure-modal.active) {
 
 .team-wrap {
   position: relative;
-  width: 200px;
+  width: 150px;
   aspect-ratio: 9/16;
   display: flex;
   margin: 100px auto;
@@ -704,9 +746,10 @@ body:has(.figure-modal.active) {
   position: absolute;
   inset: 0;
   background-color: var(--color);
-  transform: rotateY(calc(var(--deg)*60deg)) translateZ(172px);
+  transform: rotateY(calc(var(--deg)*60deg)) translateZ(140px);
   background-image: var(--src);
   background-size: cover;
+  filter: drop-shadow(0 var(--p-m-g) var(--p-m-g) rgba(0, 0, 0, 0.5));
 }
 
 .team-btn {

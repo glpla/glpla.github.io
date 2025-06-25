@@ -1,8 +1,9 @@
 @import url(//at.alicdn.com/t/c/font_3869861_rz8j4xt3ab.css);
 
 :root {
-  --main-color: #ff7b00;
-  --warn-color: #ff5d73;
+  --main-color: #e15f41;
+  --second-color: #e77f67;
+  --warn-color: #C91F37;
   --tbl-color: #1b9fab;
   --tbl-bg-color: #f7f7f7;
   --tbl-border-color: #ddd;
@@ -129,7 +130,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-image: linear-gradient(#fff, var(--warn-color));
+  background-image: linear-gradient(var(--main-color), transparent);
   border-radius: 4px;
   cursor: pointer;
 }
@@ -191,7 +192,7 @@ dt {
 }
 
 .warn {
-  color: #ff5d73;
+  color: var(--warn-color);
 }
 
 .overview {
@@ -208,7 +209,7 @@ dt {
 }
 
 .overview td:first-child {
-  background-image: linear-gradient(var(--main-color), var(--warn-color));
+  background-image: linear-gradient(var(--second-color), var(--main-color));
   color: #fff;
   text-align-last: justify;
 }
@@ -216,7 +217,7 @@ dt {
 .quote {
   border-left: 4px solid var(--main-color);
   padding-left: 2em;
-  margin: 2em 0;
+  margin: 2em;
 }
 
 .quote div {
@@ -247,13 +248,13 @@ dt {
 .rec div::before {
   content: '\e6e7' ' ';
   font-family: 'iconfont';
-  color: var(--warn-color);
+  color: var(--main-color);
 }
 
 .tips div::before {
   content: '\e648' ' ';
   font-family: 'iconfont';
-  color: var(--warn-color);
+  color: var(--main-color);
 }
 
 .del {
@@ -271,6 +272,7 @@ dt {
 .sn>div::before {
   content: counter(list-sn)'. ';
 }
+
 
 .agenda tr:not(:has(th)) {
   counter-increment: week-sn;
@@ -297,16 +299,17 @@ dt {
   border-radius: 30px;
   margin: var(--p-m-g) auto;
   font-size: 1.4rem;
-  color: var(--color);
-  border: 1px solid var(--color);
+  color: var(--main-color);
+  border: 1px solid var(--main-color);
   padding: 2px;
 }
 
 .eva-bar {
   width: calc(var(--per)*1%);
   height: 100%;
-  background-color: var(--color);
+  background-color: var(--main-color);
   border-radius: 30px;
+  opacity: var(--alpha);
 }
 
 .item::before {
@@ -388,7 +391,7 @@ dt {
 
 .cell-icons span {
   font-size: 3rem;
-  color: var(--warn-color);
+  color: var(--main-color);
   transform: scale(1);
 }
 

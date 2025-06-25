@@ -139,7 +139,8 @@
       <a href="" style="--delay:1" class="nav-item">案例 Cases</a>
       <a href="" style="--delay:2" class="nav-item">步进 Steps</a>
       <a href="" style="--delay:3" class="nav-item">时间轴 Timeline</a>
-      <a href="" style="--delay:4" class="nav-item">事件 Events</a>
+      <a href="" style="--delay:4" class="nav-item">自定义属性 @Property</a>
+      <a href="" style="--delay:5" class="nav-item">事件 Events</a>
     </nav>
     <img class="plane" src="./imgs/plane.webp" alt="">
   </header>
@@ -180,9 +181,9 @@
     </dd>
     <dt>定义动画 Definition</dt>
     <dd>
-      <div>.初始状态：元素应用动画前的状态</div>
-      <div>.start state/开始状态/第一个关键帧状态：如果不指定0%或from，则元素初始状态就是开始状态/第一个关键帧状态</div>
-      <div>.end state/结束状态/最后一个关键帧状态：如果不指定100%或to，则元素初始状态就是结束状态/最后一个关键帧状态</div>
+      <div>.初始状态/initial：元素应用动画前的状态</div>
+      <div>.开始状态/start state/第一个关键帧状态：如果不指定0%或from，则元素初始状态就是开始状态/第一个关键帧状态</div>
+      <div>.结束状态/end state/最后一个关键帧状态：如果不指定100%或to，则元素初始状态就是结束状态/最后一个关键帧状态</div>
       <div>.动画结束后，默认回到初始状态</div>
       <div class="sn">
         <div>利用关键字 from 和 to；通常省略 from，表示从初始状态开始；关键字只能定义2个状态</div>
@@ -882,6 +883,35 @@ animation-timeline: view();</pre>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/animTimelineView.html">Animation Timeline view()
         时间轴动画</a></dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/nav-timeline.html">时间轴联动导航</a></dd>
+  </dl>
+  <div class="chap">自定义属性动画 @Property</div>
+  <dl class="nav-cont">
+    <dd>1. 定义某个 CSS 属性以便参与动画运算</dd>
+    <pre>
+@property --deg {
+  syntax: "&lt;angle&gt;";
+  initial-value: 0deg;
+  inherits: false;
+}</pre>
+    <dd>2. 创建动画</dd>
+    <pre>
+@keyframes scroll {
+  from {
+    --deg: 0deg
+  }
+
+  to {
+    --deg: 360deg
+  }
+}</pre>
+    <dd>3. 使用动画</dd>
+    <pre>
+.box {
+  width: 300px;
+  height: 200px;
+  background-image: conic-gradient(from var(--deg), red, yellow, blue);
+  animation: scroll 1s linear infinite;
+}</pre>
   </dl>
   <div class="chap">动画事件 Events</div>
   <dl class="nav-cont">
