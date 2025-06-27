@@ -43,7 +43,7 @@
           Function</a>
         <a class="nav-item" style="--s:--n10" href="#class"><span class="iconfont icon-aspectratio"></span> Class</a>
         <a class="nav-item" style="--s:--n11" href="#init"><span class="iconfont icon-menu"></span> Initialization</a>
-        <a class="nav-item" style="--s:--n12" href="#drill"><span class="iconfont icon-audiotrack"></span> Drill</a>
+        <a class="nav-item" style="--s:--n12" href="#drill"><span class="iconfont icon-mouse"></span> Drill</a>
         <a class="nav-item" style="--s:--n13" href="#summary"><span class="iconfont icon-hangzhengguanli"></span>
           Summary</a>
         <a class="nav-item" style="--s:--n14" href="#homework"><span class="iconfont icon-pen"></span> Homework</a>
@@ -91,15 +91,59 @@
   </section>
   <section class="section" style="--s:--n4" id="primitive">
     <h2>基本数据类型 Primitive</h2>
-    <ol>
-      <li>Number</li>
-      <li>String</li>
-      <li>Boolean</li>
-      <li>Null</li>
-      <li>Undefined</li>
-      <li>Bigint</li>
-      <li>Symbol</li>
-    </ol>
+    <h3>Number</h3>
+    <ul>
+      <li>JavaScript 只有一种数字类型 Number：不带小数点的是整型；带小数点的是浮点类型，浮点数值在某些语言中也被称为双精度类型</li>
+      <li>默认是十进制</li>
+      <li>前缀0b：二进制；数码范围 0-1</li>
+      <li>前缀0o：八进制；数码范围 0-7</li>
+      <li>前缀0x：十六进制；数码范围 0-9,A-F</li>
+      <li>永远不要比较两个浮点数的相等</li>
+      <li>控制台输出时，显式蓝色</li>
+    </ul>
+    <h3>String</h3>
+    <ul>
+      <li>字符序列 - a sequence of characters</li>
+      <li>每个字符有位序，从0开始</li>
+      <li>是特殊的数组</li>
+      <li>由双引号（"）或单引号（'）表示，但是不能混用</li>
+      <li>控制台输出时，显式黑色</li>
+    </ul>
+    <table>
+      <caption>实例属性 Instance properties</caption>
+      <thead>
+        <tr>
+          <th>item</th>
+          <th>desc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>length</td>
+          <td>字符串长度</td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <caption>实例方法 Instance methods</caption>
+      <thead>
+        <tr>
+          <th>item</th>
+          <th>desc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>split()</td>
+          <td>根据指定的分隔符，将字符串拆分成数组</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>Boolean</h3>
+    <h3>Null</h3>
+    <h3>Undefined</h3>
+    <h3>Bigint*</h3>
+    <h3>Symbol*</h3>
   </section>
   <section class="section" style="--s:--n5" id="conversion ">
     <h2>数据类型转换 Conversion </h2>
@@ -117,9 +161,56 @@
   </section>
   <section class="section" style="--s:--n8" id="array">
     <h2>数组 Array</h2>
-    <h3>实例属性 Instance properties</h3>
+    <ul>
+      <li>存储多个元素</li>
+      <li>每个元素有位序，从0开始</li>
+      <li>可调整大小的</li>
+      <li>可以包含不同的数据类型</li>
+    </ul>
+    <ol>
+      <li>定义 Defined
+        <ul>
+          <li>使用方括号 - square brackets []</li>
+          <li>使用构造函数</li>
+        </ul>
+        <pre>
+let arr0 = [1, 2, 3];
+let arr1 = new Array(1, 2, 3);</pre>
+      </li>
+      <li>访问 Access
+        <ul>
+          <li>使用索引，从0开始 - using an index (starts at 0)</li>
+        </ul>
+        <pre>console.log(arr0, arr1);</pre>
+      </li>
+      <li>赋值 Assignment
+        <ul>
+          <li>引用赋值 = ：将变量指向新的引用/地址空间；多个变量引用|指向同一块内存；变量对内存数据的修改会影响到另外一个变量；变量重新赋值时，会丢失原来的内存 - 指向变了
+            <pre>
+let arr0 = [1, 2];
+let arr1 = arr0;
+arr1.push(3)
+arr0 = [1, 3];//指向别的内存</pre>
+          </li>
+          <li>解构赋值 [] ：一次性把数组元素赋值给多个变量；可以指定位置；位置要一一对应
+            <pre>
+let [a, b] = [1, 3];
+let [, , , , a] = [1, 2, 3, 4, 5];//a=5</pre>
+          </li>
+        </ul>
+      </li>
+      <li>扩展运算符 spread operator ...：将数组各项展开，特别适合数组复制
+        <pre>
+let a = [1, 2, 3];
+let b = [...a];
+
+let [a, ...rest] = [1, 2, 3, 4, 5]
+//a=1
+//rest=[2,3,4,5];剩余变量必须是模式中的最后一个，并且不能有尾随逗号</pre>
+      </li>
+    </ol>
     <table>
-      <caption>实例属性</caption>
+      <caption>实例属性 Instance properties</caption>
       <thead>
         <tr>
           <th>item</th>
@@ -133,9 +224,8 @@
         </tr>
       </tbody>
     </table>
-    <h3>实例方法 Instance methods</h3>
     <table>
-      <caption>一般方法</caption>
+      <caption>实例方法 Instance methods</caption>
       <thead>
         <tr>
           <th>item</th>

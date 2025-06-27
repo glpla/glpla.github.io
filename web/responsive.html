@@ -27,14 +27,14 @@
         <a class="nav-item" style="--s:--n2" href="#review"><span class="iconfont icon-magicwand"></span> Review</a>
         <a class="nav-item" style="--s:--n3" href="#introduction"><span class="iconfont icon-arrowforward"></span>
           Introduction</a>
-        <a class="nav-item" style="--s:--n4" href="#unit"><span class="iconfont icon-collections"></span> Unit</a>
-        <a class="nav-item" style="--s:--n5" href="#property"><span class="iconfont icon-palette"></span> Property</a>
-        <a class="nav-item" style="--s:--n6" href="#value"><span class="iconfont icon-nowwallpaper"></span> Value</a>
+        <a class="nav-item" style="--s:--n4" href="#property"><span class="iconfont icon-palette"></span> Property</a>
+        <a class="nav-item" style="--s:--n5" href="#value"><span class="iconfont icon-nowwallpaper"></span> Value</a>
+        <a class="nav-item" style="--s:--n6" href="#unit"><span class="iconfont icon-collections"></span> Unit</a>
         <a class="nav-item" style="--s:--n7" href="#fn"><span class="iconfont icon-photo"></span> Function</a>
         <a class="nav-item" style="--s:--n8" href="#media"><span class="iconfont icon-menu"></span> @media</a>
         <a class="nav-item" style="--s:--n9" href="#js"><span class="iconfont icon-aspectratio"></span> JavaScript</a>
         <a class="nav-item" style="--s:--n10" href="#init"><span class="iconfont icon-menu"></span> Initialization</a>
-        <a class="nav-item" style="--s:--n11" href="#drill"><span class="iconfont icon-audiotrack"></span> Drill</a>
+        <a class="nav-item" style="--s:--n11" href="#drill"><span class="iconfont icon-mouse"></span> Drill</a>
         <a class="nav-item" style="--s:--n12" href="#summary"><span class="iconfont icon-hangzhengguanli"></span>
           Summary</a>
         <a class="nav-item" style="--s:--n13" href="#homework"><span class="iconfont icon-pen"></span> Homework</a>
@@ -78,87 +78,136 @@
     <div>. 通常综合运用不同的布局方式进行开发；代码有冗余，影响性能</div>
     <div>. 通常是桌面端会调整大小；手机端在打开的时候，就已经决定了如何使用资源，不会也没有办法去调整屏幕大小</div>
     <figure>
-      <img src="" alt="">
-      <figcaption>思维导图</figcaption>
+      <img src="./imgs/paired.png" alt="">
+      <figcaption>CSS样式</figcaption>
     </figure>
   </section>
-  <section class="section" style="--s:--n4" id="unit">
-    <h2>单位 Unit</h2>
+  <section class="section" style="--s:--n4" id="property">
+    <h2>属性 Property</h2>
     <ol>
-      <li>em</li>
-      <p>. 相对父级字体大小 font-size 而定</p>
-      <li>rem</li>
-      <p>. 根布局，相对 &lt;html&gt; 设置的字体大小 font-size 而定；默认是16px
-      </p>
-      <li>%</li>
-      <p>. 百分比布局；相对父级宽度 width 而定</p>
-      <p>. 主流的栅格化布局框架都是基于百分比 %</p>
-      <li>vmin</li>
-      <p>. 代表 viewport（视口）宽度和高度中的较小值的 1%。换句话说，1vmin 等于当前视口宽度和高度两者之间的最小值的 1%</p>
-      <li>vw</li>
-      <p>. 视口宽度；100份</p>
-      <li>vh</li>
-      <p>. 视口高度；100份</p>
-    </ol>
-  </section>
-  <section class="section" style="--s:--n5" id="property">
-    <h2>样式属性 Property</h2>
-    <ol>
-      <li>float</li>
-      <p>. 浮动布局；早期多使用，现在仅在特定场合才使用，如图文混排、首字下沉等</p>
-      <li>flex</li>
-      <p>. 弹性盒子布局；一维布局；应用非常广泛</p>
-      <li>grid</li>
-      <p>. 网格布局；二维布局；应用非常广泛</p>
-      <li>max-width</li>
-      <p>. 适配超大屏，如 4K 屏幕</p>
-      <pre>
+      <li>max-width
+        <ul>
+          <li>最大宽度</li>
+          <li>适配超大屏，如 4K 屏幕</li>
+        </ul>
+        <pre>
 .container {
   width: 100%;
   max-width: 1920px;
   margin: 0 auto;
   padding: 1rem;
 }</pre>
+      </li>
+      <li>max-content
+        <ul>
+          <li>块元素默认占满 - 100%</li>
+          <li>根据内容最大宽度自动调整自身宽度</li>
+        </ul>
+      </li>
       <li>min-width</li>
-      <li>min-height</li>
       <li>max-height</li>
-      <li>max-content</li>
-      <p>. 根据内容最大宽度自动调整自身宽度</p>
-    </ol>
-  </section>
-  <section class="section" style="--s:--n6" id="value">
-    <h2>值 Value</h2>
-    <ol>
-      <p>. 指定元素的宽或高</p>
-      <li>max-width</li>
-      <p>. 元素根据实际大小显示；如果是 block，不会铺满整行，但是仍然独占一行</p>
-      <p>. 方便块元素的水平居中</p>
+      <li>min-height</li>
       <li>min-width</li>
-      <p>. 内容在不被截断的情况下，最小可能的宽度；会自动换行，保障完整的显示每一个单词</p>
       <li>fit-width</li>
       <p>. 根据所在容器调整大小</p>
-      <!-- <p class="max-content">max-content: Lorem ipsum dolor sit amet.</p> -->
-      <!-- <p class="min-content">min-content: Lorem ipsum dolor sit amet.</p> -->
+      <p class="max-content">max-content: Lorem ipsum dolor sit amet.</p>
+      <p class="min-content">min-content: Lorem ipsum dolor sit amet.</p>
+      <li><a class="link" target="_blank" href="./float.html">float</a>
+        <ul>
+          <li>浮动布局</li>
+          <li>早期多使用，现在仅在特定场合才使用，如图文混排、首字下沉等</li>
+        </ul>
+        <pre>float: left;</pre>
+      </li>
+    </ol>
+  </section>
+  <section class="section" style="--s:--n5" id="value">
+    <h2>值 Value</h2>
+    <ol>
+      <li><a class="link" target="_blank" href="./flex.html">flex</a>
+        <ul>
+          <li>弹性盒子布局</li>
+          <li>一维布局</li>
+          <li>应用非常广泛</li>
+        </ul>
+        <pre>display: flex;</pre>
+      </li>
+      <li><a class="link" target="_blank" href="./grid.html">grid</a>
+        <ul>
+          <li>网格布局</li>
+          <li>二维布局</li>
+          <li>应用非常广泛</li>
+        </ul>
+        <pre>display: grid;</pre>
+      </li>
+    </ol>
+  </section>
+  <section class="section" style="--s:--n6" id="unit">
+    <h2>单位 Unit</h2>
+    <ol>
+      <li>相对单位 em
+        <ul>
+          <li>相对 <span class="warn">最近</span> 的字体大小 font-size 而定，即：如果你设置了字体大小，那么就参照你；否则参照父级；否则依次往上找</li>
+          <li>主要应用于首行缩进等特殊场合</li>
+        </ul>
+        <pre>text-indent: 2em;</pre>
+      </li>
+      <li>绝对单位 rem
+        <ul>
+          <li>相对根节点 <span class="warn">&lt;html&gt;</span> 设置的字体大小 font-size 而定</li>
+          <li>&lt;html&gt; 字体默认大小是 16px</li>
+          <li>换算方便起见，通常设置大小为62.5%；1rem = 10px</li>
+        </ul>
+        <pre>
+html{
+  font-size: 62.5%;
+}</pre>
+      </li>
+      <li>相对单位 %
+        <ul>
+          <li>百分比；相对 <span class="warn">父级</span> 宽度 width 而定</li>
+          <li>主流的栅格化布局框架都是基于百分比 %</li>
+        </ul>
+      </li>
+      <li>视口单位 viewport
+        <ul>
+          <li>vw：视口宽度 viewport width；100份</li>
+          <li>vh：视口高度 viewport height；100份</li>
+          <li>vmin*：视口宽度和高度中的较小值的 1%。换句话说，1vmin 等于当前视口宽度和高度两者之间的最小值的 1%</li>
+        </ul>
+      </li>
+      <li>fr
+        <ul>
+          <li>fraction | 份数</li>
+          <li>多用于网格布局 grid；子项相对于容器的份数</li>
+        </ul>
+      </li>
+      <li>flex
+        <ul>
+          <li>子项在容器中的比例；多用于弹性盒子布局 flex</li>
+          <li>前端UI框架中多采用12份、24份进行布局</li>
+        </ul>
+      </li>
     </ol>
   </section>
   <section class="section" style="--s:--n7" id="fn">
     <h2>函数 Function</h2>
-    <ol class="sn">
+    <ol>
       <li>min</li>
       <li>max</li>
-      <li>clamp</li>
       <li>minmax</li>
+      <li>clamp</li>
     </ol>
     <div>[<span class="iconfont icon-keyboard"></span>] 响应式版心</div>
     <div>
       <div>. 超过800px时，保持800px；小于800px，为父级的90%，即：宽度为父级90%，但不超过800px</div>
-      <div>方案1：使用min()函数</div>
+      <div>方案1：使用 min() 函数</div>
       <pre>
 .container {
   width: min(800px, 90%);
   margin: 0 auto;
 }</pre>
-      <div>方案2：使用max-width</div>
+      <div>方案2：使用 max-width</div>
       <pre>
 .container {
   width: 90%;
@@ -170,7 +219,7 @@
   <section class="section" style="--s:--n8" id="media">
     <h2>媒体查询 @media</h2>
     <table>
-      <caption>断点 breakpoint</caption>
+      <caption>断点参考 breakpoint</caption>
       <thead>
         <tr>
           <th>item</th>
@@ -200,6 +249,13 @@
         </tr>
       </tbody>
     </table>
+    <div>[<span class="iconfont icon-keyboard"></span>] 响应式rem</div>
+    <pre>
+@media screen and (max-width:768px) {
+  html {
+    font-size: 50%;
+  }
+}</pre>
   </section>
   <section class="section" style="--s:--n9" id="js">
     <h2>脚本 JavaScript</h2>
@@ -260,6 +316,10 @@ window.onresize = function () {
     <h2>参考 Reference</h2>
     <ol class="reference">
       <li><a target="_blank" href="./media.html">媒体查询 Media</a></li>
+      <li><a target="_blank" href="https://css-tricks.com/the-lengths-of-css/">the lengths of css</a></li>
+      <li><a target="_blank" href="https://www.sitepoint.com/power-em-units-css/">The Power of em Units in CSS</a></li>
+      <li><a target="_blank" href="https://github.com/twbs/bootstrap">Bootstrap</a></li>
+      <li><a target="_blank" href="https://element.eleme.cn/#/en-US">element UI</a></li>
     </ol>
   </section>
   <div id="footer"></div>
