@@ -1,10 +1,10 @@
 @import url(//at.alicdn.com/t/c/font_3834292_3fxohrtmiv5.css);
 
 :root {
-  --bg-color: #fff;
+  --bg-color: #f0f0f0;
   --txt-color: #000;
-  --main-color: #1e574e;
-  --second-color: #7dcbb1;
+  --main-color: #9c010a;
+  --second-color: #fb000b;
   --third-color: #f3c4be;
   --warn-color: #ee7585;
   --p-m-g: 1rem;
@@ -24,7 +24,7 @@ footer {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Alibaba PuHuiTi", "Source Han Serif", "Source Han Sans", "PingFang SC", "Microsoft YaHei", "微软雅黑", Arial, Helvetica, sans-serif;
+  font-family: 'Poppins', "Alibaba PuHuiTi", "Source Han Serif", "Source Han Sans", "PingFang SC", "Microsoft YaHei", "微软雅黑", Arial, Helvetica, sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -80,7 +80,7 @@ header {
   width: 100%;
   height: 600px;
   background-color: var(--main-color);
-  background-image: url(/utils/festival/lotus_bloom_leaves_125165_1280x720.jpg);
+  background-image: url(/imgs/71.webp);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -188,29 +188,104 @@ footer {
   font-size: 1.6rem;
 }
 
-.item a:hover,
-a.nav-item:hover {
+.item a:hover {
   color: var(--warn-color);
 }
 
 .nav {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  text-align: center;
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  justify-items: center;
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+  gap: 8rem;
+  transform: skewY(-4deg);
 }
 
-.nav-item {
+/* .nav-item {
   border: 1px solid #ddd;
   padding: var(--p-m-g);
   margin: -1px;
+} */
+.nav-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 260px;
+  transition: .4s;
+}
+
+.nav-item:hover {
+  transform: translateY(-20px);
+}
+
+.nav-item::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: var(--main-color);
+  transform-origin: left bottom;
+  transform: skewX(45deg);
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 0;
+  height: 100%;
+  width: 20px;
+  transform-origin: right top;
+  transform: skewY(45deg);
+  background-image: linear-gradient(var(--main-color) 50%, #d3d3d3 0);
+}
+
+.nav-item .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  background-color: var(--second-color);
+  color: #fff;
+}
+
+.nav-item .desc {
+  height: 200px;
+  background-color: #fefefe;
+  padding: var(--p-m-g);
+  text-align: justify;
+  font-size: 1.4rem;
+}
+
+.nav-item .desc::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 30%;
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+  transform-origin: left bottom;
+  transform: skewX(45deg);
+  z-index: -1;
+  transition: 0.4s;
+}
+
+.nav-item:hover .desc::before {
+  transform: translateY(20px) skewX(45deg);
+  filter: blur(5px);
+  opacity: 0.5;
 }
 
 @media screen and (max-width:768px) {
   header {
     height: 100vh;
-    background-image: url(/utils/festival/xz.png);
+    background-image: url(/imgs/71.jpg);
   }
 }
 
