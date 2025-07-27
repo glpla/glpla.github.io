@@ -9,6 +9,11 @@
   <link rel="stylesheet" href="/css/fonts_GreatVibes.css">
   <link rel="stylesheet" href="//at.alicdn.com/t/c/font_3922652_u0sk8uuep2s.css">
   <style>
+    :root {
+      --main-color: #a20000;
+      --txt-color: #fff;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -18,9 +23,26 @@
     body {
       position: relative;
       height: 100vh;
-      background-image: linear-gradient(#a20000, #cf0000);
-      color: #fff;
+      /* background-image: linear-gradient(#a20000, #cf0000); */
+      color: var(--txt-color);
       overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-conic-gradient(var(--txt-color) 0deg 10deg,
+          var(--main-color) 0deg 30deg);
+      transform: scale(3);
+      animation: ani-roll 30s linear infinite;
+    }
+
+    @keyframes ani-roll {
+      to {
+        rotate: 360deg;
+      }
+
     }
 
     h1 {
@@ -35,19 +57,19 @@
       width: 200px;
       height: 200px;
       transform: translateX(-50%);
-      background-color: #fff;
+      background-color: #ff0;
       border-radius: 50%;
     }
 
     .moon::before {
-      content: 'hanppy christmas';
+      content: 'happy christmas';
       position: absolute;
       left: 50%;
       width: max-content;
       font-size: 40px;
       font-family: 'GreatVibes';
       letter-spacing: 6px;
-      color: #fff;
+      color: var(--txt-color);
       transform: translateX(-50%);
       bottom: -50%;
     }
@@ -110,7 +132,7 @@
       position: relative;
       width: 5px;
       height: 5px;
-      background-color: #fff;
+      background-color: var(--txt-color);
       border-radius: 50%;
       animation: snowing 3s linear calc(var(--rad)*-0.2s) infinite;
       filter: blur(2px);
@@ -138,7 +160,7 @@
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      border: 1px solid #fff;
+      border: 1px solid var(--txt-color);
       display: flex;
       justify-content: center;
       align-items: center;
