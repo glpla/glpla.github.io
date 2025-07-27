@@ -21,7 +21,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--header-h);
+  scroll-padding-top: calc(var(--header-h)/2);
   font-size: 62.5%;
 }
 
@@ -56,6 +56,7 @@ img {
 }
 
 figcaption {
+  font-size: 1.4rem;
   text-align: center;
   margin: 2rem auto;
 }
@@ -218,7 +219,9 @@ header {
   color: #ff0;
 }
 
-.nav .ham {
+.nav .ham,
+.nav .close,
+.nav .nav-item .iconfont {
   display: none;
 }
 
@@ -238,13 +241,10 @@ header {
   right: -1rem;
 }
 
-.main {
+section {
   max-width: var(--w);
   margin: 0 auto;
   background-color: #fff;
-}
-
-section {
   padding: 1rem;
 }
 
@@ -615,13 +615,9 @@ iframe {
 
 .icon-box .iconfont {
   color: var(--main-green);
-  font-size: 2rem;
+  font-size: 3rem;
   transition: .5s;
   cursor: pointer;
-}
-
-.icon-box:hover .iconfont {
-  transform: scale(1.5);
 }
 
 .arrange {
@@ -760,28 +756,36 @@ iframe {
     font-size: 24px;
   }
 
-  .nav ul {
-    position: fixed;
-    top: var(--header-h);
-    right: -55%;
-    width: 50%;
-    height: calc(100vh - var(--header-h));
-    padding-top: 30px;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 1);
-    text-align: center;
-    transition: 0.5s;
+  .nav .close {
+    display: block;
   }
 
-  .nav ul::after {
+  .nav .close .iconfont {
+    color: #ff0;
+  }
+
+  .nav ul {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* width: 100%; */
+    height: 100vh;
+    padding: 3rem;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 1);
+    text-align: right;
+    transition: 0.4s;
+  }
+
+  .nav ul::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: -10px;
-    transform: translateY(-50%) rotate(45deg);
-    width: 30px;
-    height: 30px;
-    background-color: inherit;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: #0000;
+    z-index: -1;
   }
 
   .nav ul.nav-active {
@@ -789,7 +793,12 @@ iframe {
   }
 
   .nav .nav-item {
-    font-size: 18px;
+    font-size: 1.6rem;
+  }
+
+  .nav .nav-item .iconfont {
+    display: unset;
+    color: inherit;
   }
 
   .nav-item.nav-item-active::before,
