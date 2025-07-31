@@ -111,7 +111,7 @@
         <i class="iconfont icon-customer-group"></i>
         <span>团队</span>
       </a>
-      <a class="nav-item nav-link" style="--delay:6" href="#msg">
+      <a class="nav-item" style="--delay:6" href="./contact.html">
         <i class="iconfont icon-message-comments"></i>
         <span>留言</span>
       </a>
@@ -785,37 +785,6 @@
         <div class="btn" id="team-btn-next"><span class="iconfont icon-chevron-right"></span></div>
       </div>
     </div>
-    <div id="msg" class="nav-cont" style="--color:#FC427B;--second-color:#FD7272;" title="msg">
-      <h2>
-        <span class="title-bar" data-title="message"></span>
-        <span class="iconfont icon-message-comments"></span>
-        <span>留言</span>
-      </h2>
-      <div class="msg grid2">
-        <div class="msg-wrap">
-          <div class="msg-box"></div>
-        </div>
-        <form action="http://www.baidu.com" target="_blank">
-          <h3>动心就给我留言吧！</h3>
-          <div class="input-box">
-            <input class="ipt" type="text" required name="name" maxlength="8">
-            <label>昵称</label>
-          </div>
-          <div class="input-box">
-            <input class="ipt" type="email" required name="email">
-            <label>邮箱</label>
-          </div>
-          <div class="input-box message">
-            <textarea class="ipt" name="msg" required maxlength="30"></textarea>
-            <label>不超过30个字</label>
-          </div>
-          <div class="btns">
-            <button class="btn" type="submit">提交</button>
-            <button class="btn" type="reset">重填</button>
-          </div>
-        </form>
-      </div>
-    </div>
     <div class="help">
       <dl class="help-item">
         <dt>Projects</dt>
@@ -1037,21 +1006,7 @@
     // ticking()
     // let inter = setInterval(ticking, 1000)
 
-    // msg
-    let msgBox = document.querySelector('.msg-box')
-    let msgs = fetch('/utils/data/data2023/msg.json')
-      .then(res => res.json())
-      .then(res => {
-        msgBox.innerHTML = res.map((item, ind) =>
-          `
-      <div class="msg-item">
-        <div class="msg-title"><img src="https://glpla.github.io/utils/avatar/avatar${ind}.png" alt=""> ${item.name}</div>
-        <div class="msg-mail">${item.mail}</div>
-        <div class="msg-cont">${item.msg}</div>
-      </div>
-      `
-        ).join('')
-      })
+    
 
     // const revealOption = {
     //   delay: 300,

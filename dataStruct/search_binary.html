@@ -7,26 +7,25 @@
   <title>折半查找</title>
   <link rel="stylesheet" href="./css/sort.css">
   <link rel="stylesheet" href="../css/sn.css">
-  <link rel="stylesheet" href="../css/code.css">
   <base target="_blank">
 </head>
 
 <body>
   <header></header>
   <main>
-    <h1 class="txt-center">折半查找</h1>
-    <h5 class="txt-center">Binary Search</h5>
+    <h1>折半查找</h1>
+    <h5>Binary Search</h5>
     <dl>
       <dd>. 也叫二分查找</dd>
       <dt>过程 Procedure</dt>
-      <dd>. 将表看作一个查找区间，用low、high，<span class="warn">mid = (low + high)/2</span> 来标识查找区间的下界、上界和中间位置</dd>
-      <dd>. mid是整除的结果；如果给定值和mid对应的值相等，查找成功</dd>
-      <dd>. 如果给定值小于中间记录值，则在前半段继续查找，high = mid - 1，low不变</dd>
-      <dd>. 如果给定值大于中间记录值，则在后半段继续查找，low = mid + 1，high不变</dd>
-      <dd>. 如果比较到最后，<span class="warn">low > high</span> ，查找结束</dd>
-      <dd>. 查找范围每次都缩小一半，所以查找效率高</dd>
       <dd>
-        <table class="tbl-fixed tbl-sn">
+        <div>. 将表看作一个查找区间，用low、high，<span class="warn">mid = (low + high)/2</span> 来标识查找区间的下界、上界和中间位置</div>
+        <div>. mid是整除的结果；如果给定值和mid对应的值相等，查找成功</div>
+        <div>. 如果给定值小于中间记录值，则在前半段继续查找，high = mid - 1，low不变</div>
+        <div>. 如果给定值大于中间记录值，则在后半段继续查找，low = mid + 1，high不变</div>
+        <div>. 如果比较到最后，<span class="warn">low > high</span> ，查找结束</div>
+        <div>. 查找范围每次都缩小一半，所以查找效率高</div>
+        <table class="tbl-fixed">
           <caption>查找过程</caption>
           <tr>
             <td>0</td>
@@ -68,9 +67,8 @@
       </dd>
       <dt>伪代码 Pseudo Code</dt>
       <dd>
-        <figure class="code">
-          <figcaption>封装为函数：int binarySearch(int low,int high,int key)</figcaption>
-          <pre>
+        <div>. 封装为函数：int binarySearch(int low,int high,int key)</div>
+        <pre>
 #include &lt;stdio.h&gt;
 int main () {
     int a[] = {0, 5, 13, 19, 22, 41, 55, 68, 72, 81, 98};
@@ -97,20 +95,21 @@ int main () {
 
     return 0;
 }  </pre>
-        </figure>
       </dd>
       <dt>性能分析 Analysis</dt>
-      <dd>. 优点：查找效率高，特别适合大数据量</dd>
-      <dd>. 缺点：表必须是顺序存储的有序表</dd>
-      <dd>. 不适用于数据元素经常变化的表</dd>
-      <dd>. 时间复杂度 O(log<sub>2</sub>N)</dd>
-      <dd>. 更多信息，请查看 <a href="https://www.hackerearth.com/practice/algorithms/searching/binary-search/tutorial/"
-          class="warn">Binary Sort</a>、<a
-          href="https://www.bilibili.com/video/BV1PJ411h7D2/?spm_id_from=333.337.search-card.all.click&vd_source=fe13480e1099e18e9d5f4e25467df4df">懒猫老师</a>
+      <dd>
+        <div>. 优点：查找效率高，特别适合大数据量</div>
+        <div>. 缺点：表必须是顺序存储的有序表</div>
+        <div>. 不适用于数据元素经常变化的表</div>
+        <div>. 时间复杂度 O(log<sub>2</sub>N)</div>
+        <div>. 更多信息，请查看 <a href="https://www.hackerearth.com/practice/algorithms/searching/binary-search/tutorial/"
+            class="warn">Binary Sort</a>、<a
+            href="https://www.bilibili.com/video/BV1PJ411h7D2/?spm_id_from=333.337.search-card.all.click&vd_source=fe13480e1099e18e9d5f4e25467df4df">懒猫老师</a>
+        </div>
       </dd>
       <dd class="example-sn">查找21的过程</dd>
       <dd>
-        <table class="tbl-sn">
+        <table>
           <caption>二分查找</caption>
           <tr>
             <td>0</td>
@@ -139,19 +138,19 @@ int main () {
             <td> 92</td>
           </tr>
         </table>
-      </dd>
-      <dd class="qa">
-        <div>第一次查找：low = 0, high = 10, mid = (low + high)/2 = 5, 对应的数据为56 > 21, 说明21在前面一半</div>
-        <div>第二次查找：low = 0, high = 4, mid = (low + high)/2 = 2, 对应的数据为19 &lt; 21, 说明21在后面一半</div>
-        <div>第三次查找：low = 3, high = 4, mid = (low + high)/2 = 3, 对应的数据为21 = 21, 查找成功</div>
+        <div class="qa">
+          <div>第一次查找：low = 0, high = 10, mid = (low + high)/2 = 5, 对应的数据为56 > 21, 说明21在前面一半</div>
+          <div>第二次查找：low = 0, high = 4, mid = (low + high)/2 = 2, 对应的数据为19 &lt; 21, 说明21在后面一半</div>
+          <div>第三次查找：low = 3, high = 4, mid = (low + high)/2 = 3, 对应的数据为21 = 21, 查找成功</div>
+        </div>
       </dd>
       <dd class="example-sn">查找21的过程</dd>
-      <dd>第1次查找：</dd>
-      <dd>low = 0；high = 10</dd>
-      <dd>mid = (low + high)/2 = (0 + 10)/2 = 5</dd>
-      <dd>51 > 21，目标在前半段，&there4; low = 0，high = mid – 1 = 4</dd>
       <dd>
-        <table class="tbl-fixed tbl-sn">
+        <div>第1次查找：</div>
+        <div>low = 0；high = 10</div>
+        <div>mid = (low + high)/2 = (0 + 10)/2 = 5</div>
+        <div>51 > 21，目标在前半段，&there4; low = 0，high = mid – 1 = 4</div>
+        <table class="tbl-fixed">
           <caption>第1次查找</caption>
           <tr>
             <td>0</td>
@@ -193,13 +192,11 @@ int main () {
             <td>high</td>
           </tr>
         </table>
-      </dd>
-      <dd>第2次查找：</dd>
-      <dd>low = 0；high = 4</dd>
-      <dd>mid = (low + high)/2 = (0 + 4)/2 = 2</dd>
-      <dd>20&lt; 21，目标在后半段，&there4; low=mid + 1=3，high=4</dd>
-      <dd>
-        <table class="tbl-fixed tbl-sn">
+        <div>第2次查找：</div>
+        <div>low = 0；high = 4</div>
+        <div>mid = (low + high)/2 = (0 + 4)/2 = 2</div>
+        <div>20&lt; 21，目标在后半段，&there4; low=mid + 1=3，high=4</div>
+        <table class="tbl-fixed">
           <caption>第2次查找</caption>
           <tr>
             <td>0</td>
@@ -241,13 +238,11 @@ int main () {
             <td></td>
           </tr>
         </table>
-      </dd>
-      <dd>第3次查找：</dd>
-      <dd>low = 3；high = 4</dd>
-      <dd>mid = (low + high)/2 = (3 + 4)/2 = 3</dd>
-      <dd>21== 21，查找结束</dd>
-      <dd>
-        <table class="tbl-fixed tbl-sn">
+        <div>第3次查找：</div>
+        <div>low = 3；high = 4</div>
+        <div>mid = (low + high)/2 = (3 + 4)/2 = 3</div>
+        <div>21== 21，查找结束</div>
+        <table class="tbl-fixed">
           <caption>第3次查找</caption>
           <tr>
             <td>0</td>
@@ -297,23 +292,31 @@ int main () {
         <div>4</div>
         <div>5</div>
       </dd>
-      <dd class="qa">4次</dd>
-      <dd class="example-sn">从0，5，13，19，22，41，55，68，72，81，98中查找12的比较关键字分别是（ ）。 </dd>
-      <dd class="qa">41，13，0，5</dd>
-      <dd class="example-sn">采用折半查找法对长度为12的有序表进行查找，在等概率情况下查找成功所需的平均比较次数为（ ）。 </dd>
-      <dd class="alpha">
-        <div>35/12 </div>
-        <div>37/12 </div>
-        <div>39/12 </div>
-        <div>43/12</div>
+      <dd class="qa">
+        <div>4次</div>
       </dd>
-      <dd class="qa">37/12；[<i class="ri-heart-3-fill"></i>构建完全二叉树]</dd>
-      <dd>1次查找成功：5</dd>
-      <dd>2次查找成功：2、8</dd>
-      <dd>3次查找成功：0、3、6、10</dd>
-      <dd>3次查找成功：1、4、7、9、11</dd>
-      <dd>合计 = 1 + 2*2 + 3*4 + 4*5 = 37</dd>
-      <dd>平均 = 37/12</dd>
+      <dd class="example-sn">从0，5，13，19，22，41，55，68，72，81，98中查找12的比较关键字分别是（ ）。 </dd>
+      <dd class="qa">
+        <div>41，13，0，5</div>
+      </dd>
+      <dd class="example-sn">采用折半查找法对长度为12的有序表进行查找，在等概率情况下查找成功所需的平均比较次数为（ ）。 </dd>
+      <dd>
+        <div class="alpha">
+          <div>35/12 </div>
+          <div>37/12 </div>
+          <div>39/12 </div>
+          <div>43/12</div>
+        </div>
+        <div class="qa">
+          <div>37/12；[<i class="ri-heart-3-fill"></i>构建完全二叉树]</div>
+          <div>1次查找成功：5</div>
+          <div>2次查找成功：2、8</div>
+          <div>3次查找成功：0、3、6、10</div>
+          <div>3次查找成功：1、4、7、9、11</div>
+          <div>合计 = 1 + 2*2 + 3*4 + 4*5 = 37</div>
+          <div>平均 = 37/12</div>
+        </div>
+      </dd>
       <dd class="example-sn">给定折半查找有序表(4, 6, 10, 12, 20, 30, 50, 70, 88, 100, 120)。若查找表中元素58，则算法将依次与表中哪些元素比较大小才以失败结束？
       </dd>
       <dd>
@@ -345,13 +348,13 @@ int main () {
             <td>120</td>
           </tr>
         </table>
-      </dd>
-      <dd class="qa">
-        <div>第1次 low=0, high=10, mid=(low+high)/2=5, loc(5)=30&lt;58, 58应在后半段</div>
-        <div>第2次 low=6, high=10, mid=(low+high)/2=8, loc(8)=88>58, 58应在前半段</div>
-        <div>第3次 low=6, high=7, mid=(low+high)/2=6, loc(6)=50&lt;58, 58应在后半段</div>
-        <div>第4次 low=7, high=7, mid=(low+high)/2=7, loc(7)=70!=58, 58查找失败</div>
-        <div>结论：分别与：30、88、50、70比较</div>
+        <div class="qa">
+          <div>第1次 low=0, high=10, mid=(low+high)/2=5, loc(5)=30&lt;58, 58应在后半段</div>
+          <div>第2次 low=6, high=10, mid=(low+high)/2=8, loc(8)=88>58, 58应在前半段</div>
+          <div>第3次 low=6, high=7, mid=(low+high)/2=6, loc(6)=50&lt;58, 58应在后半段</div>
+          <div>第4次 low=7, high=7, mid=(low+high)/2=7, loc(7)=70!=58, 58查找失败</div>
+          <div>结论：分别与：30、88、50、70比较</div>
+        </div>
       </dd>
       <dd class="example-sn">给定折半查找有序表如下表。若查找表中元素83，能否查找成功？如果成功，查找几次？分别与哪些记录比较？如果失败，分别与哪些记录比较？
       </dd>
@@ -384,12 +387,12 @@ int main () {
             <td>94</td>
           </tr>
         </table>
-      </dd>
-      <dd class="qa">
-        <div>第1次 low=0, high=10, mid=(low+high)/2=5, loc(5)=51&lt;83, 83应在后半段</div>
-        <div>第2次 low=6, high=10, mid=(low+high)/2=8, loc(8)=82&lt;83, 83应在后半段</div>
-        <div>第3次 low=9, high=10, mid=(low+high)/2=9, loc(9)=88>83, 83应在前半段，应该比9小；但是现在low已经是9了，出现异常，查找83失败</div>
-        <div>结论：分别与：51、82、88比较</div>
+        <div class="qa">
+          <div>第1次 low=0, high=10, mid=(low+high)/2=5, loc(5)=51&lt;83, 83应在后半段</div>
+          <div>第2次 low=6, high=10, mid=(low+high)/2=8, loc(8)=82&lt;83, 83应在后半段</div>
+          <div>第3次 low=9, high=10, mid=(low+high)/2=9, loc(9)=88>83, 83应在前半段，应该比9小；但是现在low已经是9了，出现异常，查找83失败</div>
+          <div>结论：分别与：51、82、88比较</div>
+        </div>
       </dd>
     </dl>
     <div id="footer"></div>

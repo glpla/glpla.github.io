@@ -62,9 +62,49 @@
       <p>导航等需要始终引导用户的元素一般采用较大的层级，保证始终位于页面顶部，如汉堡菜单、弹出对话框等</p>
     </dd>
   </dl>
-  <div class="chap">常见应用 Cases</div>
+  <div class="chap">Cases</div>
   <dl>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 利用不同的 z-index 营造 3D 氛围，更多细节，请参看 顶部 banner、<a
+    <dt>应用1：定位</dt>
+    <dd id="cart">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/btns.html">购物车</a>、<a
+        href="./demo/radio-checkbox.html">定制多选按钮</a>、<a href="./demo/login_deer.html">一路有你 - 登录表单</a></dd>
+    <dd>
+      <p>初始化：button 取消边框、轮廓、背景</p>
+      <p>数量定位在右上角</p>
+      <p>还可以使用、伪元素、负边距实现</p>
+    </dd>
+    <dt>应用2：居中</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-translate.html">卡片</a></dd>
+    <dd>
+      <p>实现1：配合 margin 使元素的垂直水平居中</p>
+      <pre>
+.container{
+  position: relative;
+}
+
+.item {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}</pre>
+      <p>实现2：配合 <a href="./transform.html">变换 transform</a> 使元素的垂直水平居中</p>
+      <pre>
+.container{
+  position: relative;
+}
+
+.item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  // translate: -50% -50%;
+}</pre>
+    </dd>
+    <dt>应用3：层级提升</dt>
+    <dd>[<span class="iconfont icon-keyboard"></span>] 打造3D环境：利用不同的 z-index 营造 3D 氛围，更多细节，请参看 顶部 banner、<a
         href="./demo/parallax.html">视距差 - parallax</a></dd>
     <dd class="environment">
       <img class="ob-img tree0" data-src="./imgs/tree0.png" alt="">
@@ -76,34 +116,11 @@
       <img class="ob-img tree4" data-src="./imgs/tree4.png" alt="">
       <img class="ob-img boy" data-src="./imgs/boy.png" alt="">
     </dd>
-    <dd id="cart">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/btns.html">购物车</a>；更多案例请访问 <a
-        href="./demo/radio-checkbox.html">定制多选按钮</a>、<a href="./demo/login_deer.html">一路有你 - 登录表单</a></dd>
-    <dd>
-      <p>初始化：button 取消边框、轮廓、背景</p>
-      <p>数量定位在右上角</p>
-      <p>还可以使用、伪元素、负边距实现</p>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/avatar.html">头像设计 - 渐变背景边框</a></dd>
-    <dd>
-      <p>定位 position</p>
-      <p>伪元素 ::before</p>
-      <p>背景图片 background-image</p>
-      <p>线路渐变 linear-gradient</p>
-      <p>圆角边框 border-radius</p>
-    </dd>
-    <dd id="mul-menu">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/nav-sample.html">下拉菜单</a>、<a
-        href="./demo/dropdown.html">下拉菜单 - hover transition</a>、<a href="./demo/grid-nav.html">二级导航 - click
-        transition</a></dd>
-    <dd>
-      <p>开始隐藏2级菜单，:hover 时显示；后期使用 JavaScript 控制更灵活</p>
-      <p>适合桌面端；移动端通常使用汉堡菜单</p>
-      <p>注意：&lt;a&gt; 不能嵌套使用 &lt;a&gt;</p>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 层级提升 - 对前后元素的影响；更多案例实现，请访问 <a
-        href="./demo/border-ring.html">环环相扣</a>、<a href="./demo/olympic.html">奥运五环</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/border-ring.html">环环相扣</a>、<a
+        href="./demo/olympic.html">奥运五环</a> - 对前后元素的影响</dd>
     <dd>
       <div class="el-undone" style="height: 50px;">层级未提升 - 默认情况下，后续元素的层级比前面的高</div>
-      <p>后续元素：设置了背景颜色[当前设置为白色]，会覆盖前面的阴影</p>
+      <p style="background-color: #fff;">后续元素：设置了背景颜色[当前设置为白色]，会覆盖前面的阴影</p>
       <pre>
 .el-undone {
     height: 40px;
@@ -127,6 +144,7 @@
     </dd>
     <dd>[<span class="iconfont icon-keyboard"></span>] 使用 inset 定位元素</dd>
     <dd>
+      <p>. 使用 <a href="./selector_ele.html">伪元素</a> 实现</p>
       <div class="inset"></div>
       <pre>
 .inset {
@@ -144,31 +162,33 @@
   background-color: var(--txt-warn-color);
 }      </pre>
     </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/transform-translate.html">居中</a>；更多居中请访问 <a
-        href="./demo/center.html">元素居中</a></dd>
+    <dd>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/avatar.html">头像设计 - 渐变背景边框</a></dd>
     <dd>
-      <p>配合变换 transform 使用元素的垂直水平居中</p>
-      <pre>
-  .container{
-    position: relative;
-  }
-  
-  .item {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    // translate: -50% -50%;
-  }</pre>
+      <p>定位 position</p>
+      <p>伪元素 ::before</p>
+      <p>背景图片 background-image</p>
+      <p>线路渐变 linear-gradient</p>
+      <p>圆角边框 border-radius</p>
+    </dd>
+    <dd id="mul-menu">[<span class="iconfont icon-keyboard"></span>] <a href="./demo/nav-sample.html">下拉菜单</a>、<a
+        href="./demo/dropdown.html">下拉菜单 - hover transition</a>、<a href="./demo/grid-nav.html">二级导航 - click
+        transition</a></dd>
+    <dd>
+      <p>开始隐藏2级菜单，:hover 时显示；后期使用 JavaScript 控制更灵活</p>
+      <p>适合桌面端；移动端通常使用汉堡菜单</p>
+      <p>注意：&lt;a&gt; 不能嵌套使用 &lt;a&gt;</p>
     </dd>
   </dl>
-  <div class="chap">总结与作业 Summary & Homework</div>
+  <div class="chap">Summary & Homework</div>
   <dl>
-    <dt>总结 Summary</dt>
+    <dt>Summary</dt>
     <dd>
       <p>父相子绝</p>
+      <p>. 定位</p>
+      <p>. 居中</p>
+      <p>. 提升层级</p>
     </dd>
-    <dt>作业 Homework</dt>
+    <dt>Homework</dt>
     <dd class="sn">
       <div>定制个人LOGO</div>
       <div>添加2级菜单导航</div>
