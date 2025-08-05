@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>输入事件 Input - Event</title>
-  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/common2025.css">
   <base target="_blank">
   <style>
     .ipt-wrap {
@@ -37,48 +37,41 @@
     <h1>输入事件</h1>
     <span>&commat;Input</span>
   </header>
-  <dl>
-    <dd>
-      <div>. 事件处理的业务逻辑在 &lt;script&gt; 中；建议使用外部 .js 文件</div>
-      <div>. 没有失去焦点的伪类选择器；只能通过事件 onblur 检测</div>
-      <table>
-        <caption>事件类型</caption>
-        <tr>
-          <th>类别</th>
-          <th>说明</th>
-        </tr>
-        <tr>
-          <td>input</td>
-          <td>数据输入时；使用时要采用 <a href="./debounce.html">防抖</a> 措施</td>
-        </tr>
-        <tr>
-          <td>change</td>
-          <td>数据改变且失去焦点</td>
-        </tr>
-        <tr>
-          <td>keypress</td>
-          <td>按键按下并保持</td>
-        </tr>
-        <tr>
-          <td>keydown</td>
-          <td>按键按下</td>
-        </tr>
-        <tr>
-          <td>keyup</td>
-          <td>按键释放</td>
-        </tr>
-        <tr>
-          <td>blur</td>
-          <td>失去焦点</td>
-        </tr>
-      </table>
-    </dd>
-    <dt>事件处理一般步骤</dt>
-    <dd class="sn">
-      <div>获取 input 元素；更多信息，请参考 <a href="./document.html">DOM - document</a></div>
-      <div>添加事件侦听器 addEventListener；更多信息，请参考 <a href="./event_addEventListener.html">Event</a></div>
-      <p class="tips">为元素分配 id，可以直接使用，不需要获取元素 - 不建议</p>
-      <pre>
+  <section>
+    <ul>
+      <li>事件处理的业务逻辑在 &lt;script&gt; 中；建议使用外部 .js 文件</li>
+      <li>没有失去焦点的伪类选择器；只能通过事件 onblur 检测</li>
+    </ul>
+    <table>
+      <caption>事件类型</caption>
+      <tr>
+        <th>item</th>
+        <th>desc</th>
+      </tr>
+      <tr>
+        <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/input_event">input</a></td>
+        <td>单行文本、多行文本输入时触发；通常需要采用 <a href="./debounce.html">防抖节流</a> 措施</td>
+      </tr>
+      <tr>
+        <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event">change</a></td>
+        <td>&lt;input&gt;, &lt;select&gt;, &lt;textarea&gt;改变且失去焦点时触发</td>
+      </tr>
+      <tr>
+        <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus">focus</a></td>
+        <td>单行文本、多行文本获取焦点</td>
+      </tr>
+      <tr>
+        <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/blur">blur</a></td>
+        <td>单行文本、多行文本失去焦点</td>
+      </tr>
+    </table>
+    <h3>一般步骤 Steps</h3>
+    <ol>
+      <li>获取 input 元素；更多信息，请参考 <a href="./document.html">DOM - document</a></li>
+      <li>添加事件侦听器 addEventListener；更多信息，请参考 <a href="./event_addEventListener.html">Event</a></li>
+    </ol>
+    <div class="tips">为元素分配 id，可以直接使用，不需要获取元素 - 不建议</div>
+    <pre>
 &lt;input type="text" id="ipt"&gt;
 &lt;input type="text" id="ipt0"&gt;
 &lt;button id="btn"&gt;sub&lt;/button&gt;
@@ -89,33 +82,34 @@
     console.log(ipt0.value);
   }
 &lt;/script&gt;</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 输入长度提示 - 检测 input 的值</dd>
-    <dd>
-      <div>. 获取 input 元素</div>
-      <div>. 获取 input 元素的 maxlength 属性/最大长度：el.getAttribute()</div>
-      <div>. 获取当前输入的值的长度：el.value.length</div>
-      <div>. 将 input 事件分别修改为 change 事件、keyup 事件、blur 事件，体会他们之间的不同</div>
-      <div class="ipt-wrap">
-        <div id="len-val">还可以输入8</div>
-        <input type="text" name="len" id="len-ipt" maxlength="8" placeholder="text here">
-      </div>
-      <pre>
+    <h3>案例 Cases</h3>
+    <div>[<span class="iconfont icon-keyboard"></span>] 输入长度提示 - 检测 input 的值</div>
+    <ul>
+      <li>获取 input 元素</li>
+      <li>获取 input 元素的 maxlength 属性/最大长度：el.getAttribute()</li>
+      <li>获取当前输入的值的长度：el.value.length</li>
+      <li>将 input 事件分别修改为 change 事件、keyup 事件、blur 事件，体会他们之间的不同</li>
+    </ul>
+    <div class="ipt-wrap">
+      <div id="len-val">还可以输入8</div>
+      <input type="text" name="len" id="len-ipt" maxlength="8" placeholder="text here">
+    </div>
+    <pre>
 let lenIpt = document.querySelector('#len-ipt');
 let lenVal = document.querySelector('#len-val');
 lenIpt.addEventListener('input', () => {
     lenVal.innerHTML = '还可以输入' + (lenIpt.getAttribute('maxlength') - lenIpt.value.length)
 })</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 显示密码 - 修改 input 类型</dd>
-    <dd>
-      <div>. 部分系统自带有显式密码功能</div>
-      <div>. 部分系统要求密码框必须位于表单 form 中，且应该指定自动完成 autocomplete</div>
-      <div class="ipt-wrap">
-        <input type="password" id="sp-ipt" placeholder="your password" maxlength="8" autocomplete>
-        <input type="button" value="显示密码" id="sp-btn" class="btn">
-      </div>
-      <pre>
+    <div>[<span class="iconfont icon-keyboard"></span>] 显示密码 - 修改 input 类型</div>
+    <ul>
+      <li>部分系统自带有显式密码功能</li>
+      <li>部分系统要求密码框必须位于表单 form 中，且应该指定自动完成 autocomplete</li>
+    </ul>
+    <div class="ipt-wrap">
+      <input type="password" id="sp-ipt" placeholder="your password" maxlength="8" autocomplete>
+      <input type="button" value="显示密码" id="sp-btn" class="btn">
+    </div>
+    <pre>
 let spBtn = document.querySelector('#sp-btn');
 let spIpt = document.querySelector('#sp-ipt');
 spBtn.addEventListener('click', () => {
@@ -127,29 +121,29 @@ spBtn.addEventListener('click', () => {
         spBtn.value = '隐藏密码'
     }
 })</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 全选 - 修改 input 属性</dd>
-    <dd>
-      <div>. 利用元素的 checked 属性判断当前选择状态；如果全选为真/选中，则所有选项都置为真/选中；否则取消全选/置为假</div>
-      <div>. 统计选中的个数，如果等于选项个数，则全选；如果为0，则全不选</div>
-      <div class="ipt-wrap">
+    <div>[<span class="iconfont icon-keyboard"></span>] 全选 - 修改 input 属性</div>
+    <ul>
+      <li>利用元素的 checked 属性判断当前选择状态；如果全选为真/选中，则所有选项都置为真/选中；否则取消全选/置为假</li>
+      <li>统计选中的个数，如果等于选项个数，则全选；如果为0，则全不选</li>
+    </ul>
+    <div class="ipt-wrap">
+      <div>
+        <label>
+          <input type="radio" name="sel" id="all" value="yes">
+          <span>全选</span>
+        </label>
+        <label>
+          <input type="radio" name="sel" id="all-no" value="no">
+          <span>全不选</span>
+        </label>
         <div>
-          <label>
-            <input type="radio" name="sel" id="all" value="yes">
-            <span>全选</span>
-          </label>
-          <label>
-            <input type="radio" name="sel" id="all-no" value="no">
-            <span>全不选</span>
-          </label>
-          <div>
-            <label><input type="checkbox" name="web" value="HTML" id="h5">HTML</label>
-            <label><input type="checkbox" name="web" value="CSS" id="c3">CSS</label>
-            <label><input type="checkbox" name="web" value="JAVASCRIPT" id="js">JAVASCRIPT</label>
-          </div>
+          <label><input type="checkbox" name="web" value="HTML" id="h5">HTML</label>
+          <label><input type="checkbox" name="web" value="CSS" id="c3">CSS</label>
+          <label><input type="checkbox" name="web" value="JAVASCRIPT" id="js">JAVASCRIPT</label>
         </div>
       </div>
-      <pre>
+    </div>
+    <pre>
 let cbs = document.querySelectorAll('input[name="web"]');
 let all = document.querySelector('#all');
 let allNo = document.querySelector('#all-no');
@@ -190,18 +184,18 @@ cbs.forEach(item => {
     }
   })
 })</pre>
-    </dd>
-    <dd>[<span class="iconfont icon-keyboard"></span>] 播放器进度条</dd>
-    <dd>
-      <div>[H5] audio | button | input[range]</div>
-      <div>[C3] appearance</div>
-      <div>[JS] click | input | loadmetadata | timeupdate | querySelector</div>
-      <div id="player" class="ipt-wrap">
-        <audio src="../../utils/music/alizee.png"></audio>
-        <button class="btn">play</button>
-        <input type="range" name="" id="dur-slider" min="0" max="100" value="0" class="custom-range">
-      </div>
-      <pre>
+    <div>[<span class="iconfont icon-keyboard"></span>] 播放器进度条</div>
+    <ul>
+      <li>[H5] audio | button | input[range]</li>
+      <li>[C3] appearance</li>
+      <li>[JS] click | input | loadmetadata | timeupdate | querySelector</li>
+    </ul>
+    <div id="player" class="ipt-wrap">
+      <audio src="../../utils/music/alizee.png"></audio>
+      <button class="btn">play</button>
+      <input type="range" name="" id="dur-slider" min="0" max="100" value="0" class="custom-range">
+    </div>
+    <pre>
 #player button {
   width: 120px;
 }
@@ -232,7 +226,7 @@ cbs.forEach(item => {
 .custom-range::-webkit-slider-thumb:hover {
   background-color: #ff0;
 }</pre>
-      <pre>
+    <pre>
 let bool = false;
 let player = document.querySelector('#player');
 let audioIpt = player.querySelector('audio');
@@ -268,8 +262,7 @@ sliderIpt.addEventListener('input', () => {
   btnIpt.innerHTML = 'pause';
   bool = true;
 })</pre>
-    </dd>
-  </dl>
+  </section>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
   <script>
