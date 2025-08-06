@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>云函数 Cloud function</title>
+  <link rel="stylesheet" href="/css/common2025.css">
+</head>
+
+<body>
+  <header>
+    <h1>云函数</h1>
+    <span>&commat;Cloud Function</span>
+  </header>
+  <section>
+    <h3>简介 Introduction</h3>
+    <ul>
+      <li>部署在微信云端的函数服务</li>
+      <li>提供后端服务能力，如：数据库操作、文件存储、HTTP请求</li>
+      <li>需要 Node.js 环境</li>
+      <li>每个云函数都是一个 .js 文件</li>
+      <li>云函数文件名即为云函数名称</li>
+      <li>支持 async/await</li>
+      <li>可以引入和使用 NPM 包</li>
+    </ul>
+    <h3>特点 Feature</h3>
+    <ul>
+      <li>无需管理服务器：开发者只需关注业务逻辑代码，无需运维服务器</li>
+      <li>弹性伸缩：根据请求量自动扩缩容</li>
+      <li>按需付费：只在函数执行时计费</li>
+      <li>高可用性：由云服务商保证服务的稳定性和可靠性</li>
+    </ul>
+    <h3>场景 Application</h3>
+    <ul>
+      <li>业务逻辑处理：处理复杂的业务逻辑</li>
+      <li>数据库操作：访问云数据库进行增删改查</li>
+      <li>文件处理：操作云存储中的文件</li>
+      <li>第三方服务调用：调用外部API或服务</li>
+      <li>定时任务：执行定时或计划任务</li>
+    </ul>
+    <h3>云函数部署流程 Procedure</h3>
+    <ol>
+      <li>在微信开发者工具中创建云函数</li>
+      <li>编写云函数代码</li>
+      <li>右键云函数目录选择"上传并部署"</li>
+      <li>在客户端调用已部署的云函数</li>
+    </ol>
+    <h3>创建 Create</h3>
+    <ul>
+      <li>event: 包含调用时传入的参数</li>
+      <li>context: 包含调用上下文信息</li>
+    </ul>
+    <pre>
+// 1. 引入云开发SDK
+const cloud = require('wx-server-sdk')
+
+// 2. 初始化云环境
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
+
+// 3. 导出main函数（云函数入口）
+exports.main = async (event, context) => {
+  // 函数逻辑
+  return result
+}</pre>
+    <div>[<span class="iconfont icon-keyboard"></span>] 示例</div>
+    <pre>
+const cloud = require('wx-server-sdk')
+cloud.init()
+
+exports.main = async (event, context) => {
+  const { a, b } = event
+  const sum = a + b
+  
+  return {
+    sum: sum,
+    message: '计算完成'
+  }
+}</pre>
+    <h3>调用 Call</h3>
+    <div>
+      <p>应用1：客户端调用</p>
+      <pre>
+// 调用云函数
+wx.cloud.callFunction({
+  name: '函数名',
+  data: {
+    // 传递的参数
+    a: 1,
+    b: 2
+  },
+  success: res => {
+    console.log('调用成功', res)
+  },
+  fail: err => {
+    console.error('调用失败', err)
+  }
+})</pre>
+      <p>应用2：云函数间调用</p>
+      <pre>
+const cloud = require('wx-server-sdk')
+cloud.init()
+
+exports.main = async (event, context) => {
+  // 调用其他云函数
+  const result = await cloud.callFunction({
+    name: 'otherFunction',
+    data: { param: 'value' }
+  })
+  
+  return result
+}</pre>
+      <p>应用3：云数据库操作示例</p>
+      <pre>
+const cloud = require('wx-server-sdk')
+cloud.init()
+
+exports.main = async (event, context) => {
+  const db = cloud.database()
+  
+  try {
+    // 查询数据
+    const result = await db.collection('users').get()
+    return result
+  } catch (error) {
+    return { error }
+  }
+}</pre>
+    </div>
+  </section>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer.js"></script>
+</body>
+
+</html>

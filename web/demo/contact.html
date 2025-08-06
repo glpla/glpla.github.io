@@ -6,8 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>联系我们 Contact Us</title>
   <style>
+    @import url(//at.alicdn.com/t/c/font_4061940_19xdjyaz1if.css);
+
     :root {
       --p-m-g: 10px;
+      --w: 500px;
       --color: #FC427B;
       --second-color: #FD7272;
       --warn-color: #973443;
@@ -25,11 +28,16 @@
       text-align: center;
     }
 
+    h3 {
+      margin-bottom: 20px;
+    }
+
     form {
       width: 100%;
       display: flex;
       flex-direction: column;
       gap: calc(2*var(--p-m-g));
+      padding: var(--p-m-g);
     }
 
     input,
@@ -55,8 +63,12 @@
       resize: none;
     }
 
-    textarea:valid,
-    input:valid {
+    textarea {
+      padding: var(--p-m-g);
+    }
+
+    textarea:invalid,
+    input:invalid {
       color: var(--warn-color);
     }
 
@@ -67,8 +79,6 @@
       padding: 0 var(--p-m-g);
       font-size: 15px;
       pointer-events: none;
-      color: #666;
-      transition: .4s;
       background-color: #fff;
     }
 
@@ -88,21 +98,38 @@
       color: var(--color);
     }
 
-    .container {
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-image: linear-gradient(var(--color), transparent);
+    }
+
+    .iconfont {
+      font-size: 20px;
+    }
+
+    .form {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       width: 100%;
       max-width: 600px;
-      padding: var(--p-m-g);
-      margin: 0 auto;
+      background-color: #fff;
+      z-index: 1;
     }
 
     .msg {
-      margin-top: 40px;
+      position: relative;
+      width: 400px;
+      margin-left: auto;
     }
 
     .msg-wrap {
-      width: 100%;
-      aspect-ratio: 4/3;
-      border-radius: var(--border-r);
+      padding: var(--p-m-g);
     }
 
     .msg-box {
@@ -132,7 +159,6 @@
     .msg-title {
       display: flex;
       gap: var(--p-m-g);
-      font-weight: 600;
       line-height: 2;
       margin-bottom: var(--p-m-g);
     }
@@ -155,42 +181,66 @@
     .ipt:focus {
       border-color: var(--second-color);
     }
+
+    #footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    @media screen and (max-width: 768px) {
+
+      .form,
+      #footer {
+        position: unset;
+      }
+
+      .form {
+        position: sticky;
+        top: 0;
+        transform: unset;
+      }
+
+      .msg {
+        margin: 0 auto;
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <div class="container" title="msg">
-    <div class="form">
-      <form id="form">
-        <h3>&#9776; 心动就给我留言吧 &#9776;</h3>
-        <div class="input-box">
-          <input class="ipt" type="text" name="name" required maxlength="8" placeholder="your nickname">
-          <label>昵称</label>
-        </div>
-        <div class="input-box">
-          <input class="ipt" type="email" name="email" required placeholder="your email">
-          <label>邮箱</label>
-        </div>
-        <div class="input-box message">
-          <textarea class="ipt" name="message" required maxlength="60" placeholder="your message"></textarea>
-          <label>留言</label>
-        </div>
-        <div class="btns">
-          <button type="submit" id="btn">提交</button>
-          <button type="reset">重填</button>
-        </div>
-      </form>
-    </div>
-    <div class="msg">
-      <h3>&#9776; 精选留言 &#9776;</h3>
-      <div class="msg-wrap">
-        <div class="msg-box"></div>
+  <div class="form">
+    <form id="form">
+      <h3>任何建议，欢迎留言 <span class="iconfont icon-qianming"></span></h3>
+      <div class="input-box">
+        <input class="ipt" type="text" name="name" required maxlength="8" placeholder="your nickname">
+        <label><span class="iconfont icon-User"></span></label>
       </div>
-    </div>
+      <div class="input-box">
+        <input class="ipt" type="email" name="email" required placeholder="your email">
+        <label><span class="iconfont icon-xinfeng"></span></label>
+      </div>
+      <div class="input-box message">
+        <textarea class="ipt" name="message" required maxlength="60" placeholder="your message"></textarea>
+        <label><span class="iconfont icon-bianjiwenben"></span></label>
+      </div>
+      <div class="btns">
+        <button type="submit" id="btn">提交</button>
+        <button type="reset">重填</button>
+      </div>
+    </form>
   </div>
-  <div id="footer"></div>
+  <div class="msg">
+    <h3>&#9776; 精选留言 &#9776;</h3>
+    <div class="msg-wrap">
+      <div class="msg-box"></div>
+    </div>
+    <div id="footer"></div>
+  </div>
   <script src="/utils/custom/footer.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script> -->
+  <script src="/utils/lib/email.min.js"></script>
   <script>
     // msg
     let msgBox = document.querySelector('.msg-box')
@@ -228,6 +278,7 @@
         .then(() => {
           btn.innerHTML = '提交';
           alert('留言发送成功!');
+          form.reset();
         }, (err) => {
           btn.innerHTML = '提交';
           alert(JSON.stringify(err));
