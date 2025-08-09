@@ -2,184 +2,126 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图像 image</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <base target="_blank">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图像 &lt;image&gt;</title>
+  <link rel="stylesheet" href="../css/common2025.css">
+  <base target="_blank">
 </head>
 
 <body>
-    <header>
-        <h1>图像</h1>
-        <span>&lt;image&gt;</span>
-    </header>
-    <dl>
-        <dt>说明</dt>
-        <dd>图片的容器组件；行内块元素 inline-block，可设置宽度、高度</dd>
-        <dd>支持 JPG、PNG、SVG、WEBP、GIF等格式</dd>
-        <dd>默认宽度320px、高度240px</dd>
-        <dd>指定 src 的同时，还 <span class="warn">应</span> 指定显式模式 mode</dd>
-        <dd>通常需要一个容器包裹图像组件；图像比例尽量和容器保持一致</dd>
-        <dd>更多信息，请查看 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/image.html">官方文档 - image</a>
-        <dd>
-            <table>
-                <colgroup>
-                    <col style="width: 200px;">
-                </colgroup>
-                <caption>通用属性</caption>
-                <tr>
-                    <th>属性</th>
-                    <th>说明</th>
-                </tr>
-                <tr>
-                    <td>src</td>
-                    <td>图片资源地址<br>请使用在线资源或自建服务器资源，不要使用本地资源</td>
-                </tr>
-                <tr>
-                    <td>mode</td>
-                    <td>
-                        图片裁剪、缩放的模式
-                        <br>saleToFill：不保持纵横比；缩放至填满；图片会变形；默认模式
-                        <br>apectFit：保持纵横比；缩放至完全显示；同contain；可能有留白
-                        <br>apectFill：保持纵横比；缩放至完全填充；同cover；图片会被裁剪*
-                        <br>wdthFix：宽度不变，高度自动变化
-                        <br>hightFix：高度不变，宽度自动变化
-                    </td>
-                </tr>
-                <tr>
-                    <td>show-menu-by-longpress</td>
-                    <td>布尔；默认false；长按图片操作：转发、保存、收藏、识别等</td>
-                </tr>
-                <tr>
-                    <td>bindload</td>
-                    <td>图片载入完毕时触发</td>
-                </tr>
-                <tr>
-                    <td>binderror</td>
-                    <td>图片载入错误发生时触发</td>
-                </tr>
-            </table>
-            <table>
-                <colgroup>
-                    <col style="width: 200px;">
-                </colgroup>
-                <caption>WebView 特有属性</caption>
-                <tr>
-                    <th>属性</th>
-                    <th>说明</th>
-                </tr>
-                <tr>
-                    <td>lazy-load</td>
-                    <td>布尔；默认false；图片懒加载，在即将进入一定范围（上下三屏）时才开始加载</td>
-                </tr>
-            </table>
-            <table>
-                <colgroup>
-                    <col style="width: 200px;">
-                </colgroup>
-                <caption>Skyline 特有属性</caption>
-                <tr>
-                    <th>属性</th>
-                    <th>说明</th>
-                </tr>
-                <tr>
-                    <td>fade-in</td>
-                    <td>布尔；默认false；是否渐显</td>
-                </tr>
-            </table>
-        </dd>
-        <dd class="example-sn">长按图片转发</dd>
-        <dd>
-            <pre>&lt;image src="xxx.jpg"  show-menu-by-longpress mode="widthFix"/&gt;</pre>
-        </dd>
-        <dd class="example-sn">在线图片的使用</dd>
-        <dd>受小程序大小2M的限制，大多数多媒体资源，如图片、视频、音频等不能本地使用，只能在线获取</dd>
-        <dd>方案1：外网在线资源；容易出现死链</dd>
-        <dd>方案2：自建资源服务器，详情请参考 <a href="../node/static.html">静态资源服务器</a></dd>
-        <dd>方案3：利用 - <a href="../utils/index.html">大树小站</a> - 提供的在线图片；更多图片持续更新中。。。如果有喜欢的图片，也可以由老师代为更新</dd>
-    </dl>
-    <div class="chap">背景图片</div>
-    <dl>
-        <dd>使用背景图片可以省掉部分组件元素</dd>
-        <dd>但是：默认情况下不支持background-image: url()属性</dd>
-        <dd>更多背景样式，请访问 <a href="../web/background.html">背景图片</a>、<a href="../web/background2.html">背景图片</a>、<a
-                href="../web/background3.html">渐变背景</a></dd>
-        <dt>定位</dt>
-        <dd>使用定位，让图片在下面，模拟背景</dd>
-        <dd>容器采用相对定位，提供参考</dd>
-        <dd>实现1</dd>
-        <dd>
-            <div>结构中，图片在前，内容在后</div>
-            <div>图片正常文档流使用作为背景</div>
-            <div>内容采用绝对定位，脱离文档流后覆盖在图片上面</div>
-            <pre>
-&lt;view class="wrap"&gt;
-    &lt;image class="img"  src="" mode="" /&gt;
-    &lt;view class="cont"/&gt;&lt;/view&gt;
-&lt;/view&gt;</pre>
-            <pre>
-.wrap {
-    position: relative;
-}
-    
-.cont {
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-    
-.img {
-    width: 100vw;
-    height: 100vh;
-}</pre>
-        </dd>
-        <dd>实现2</dd>
-        <dd>
-            <div>结构中，内容在前，图片在后</div>
-            <div>内容正常文档流使用</div>
-            <div>图片采用绝对定位，脱离文档流后，降低层级 z-index 后定位在内容下面</div>
-            <pre>
-&lt;view class="wrap"&gt;
-    &lt;view class="cont"/&gt;&lt;/view&gt;
-    &lt;image class="img"  src="" mode="" /&gt;
-&lt;/view&gt;</pre>
-            <pre>
-.wrap {
-    position: relative;
-}
-    
-.img {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
-}</pre>
-        </dd>
-        <dt>使用base64</dt>
-        <dd>将本地图片转换为base64格式后再应用于背景图片属性</dd>
-        <dd>转换工具：<a href="https://www.jyshare.com/front-end/59/">图片转 BASE64 编码</a></dd>
-        <dd>
-            <pre>
-background-size: cover;
-background-image: url(data:image/jpeg;base64....)</pre>
-        </dd>
-        <dt>使用背景渐变</dt>
-        <dd>使用多个颜色模拟背景，强烈推荐</dd>
-        <dd>
-            <pre>
+  <header>
+    <h1>图像</h1>
+    <span>&lt;image&gt;</span>
+  </header>
+  <section>
+    <h3>简介 Introduction</h3>
+    <ul>
+      <li>图片的容器组件；行内块元素 inline-block，可设置宽度、高度</li>
+      <li>支持 JPG、PNG、SVG、WEBP、GIF等格式</li>
+      <li>默认宽度320px、高度240px</li>
+      <li>指定 src 的同时，还 <span class="warn">应</span> 指定显式模式 mode</li>
+      <li>通常需要一个容器包裹图像组件；图像比例尽量和容器保持一致</li>
+      <li>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/image.html">&lt;image&gt;</a>
+    </ul>
+    <table>
+      <caption>通用属性</caption>
+      <thead>
+        <tr>
+          <th>item</th>
+          <th>desc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>src</td>
+          <td>图片资源地址<br>请使用在线资源或自建服务器资源，不要使用本地资源</td>
+        </tr>
+        <tr>
+          <td>mode</td>
+          <td>
+            图片裁剪、缩放的模式
+            <br>saleToFill：不保持纵横比；缩放至填满；图片会变形；默认模式
+            <br>apectFit：保持纵横比；缩放至完全显示；同contain；可能有留白
+            <br>apectFill：保持纵横比；缩放至完全填充；同cover；图片会被裁剪*
+            <br>wdthFix：宽度不变，高度自动变化
+            <br>hightFix：高度不变，宽度自动变化
+          </td>
+        </tr>
+        <tr>
+          <td>show-menu-by-longpress</td>
+          <td>布尔；默认false；长按图片操作：转发、保存、收藏、识别等</td>
+        </tr>
+        <tr>
+          <td>bindload</td>
+          <td>图片载入完毕时触发</td>
+        </tr>
+        <tr>
+          <td>binderror</td>
+          <td>图片载入错误发生时触发</td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <caption>WebView 特有属性</caption>
+      <thead>
+        <tr>
+          <th>item</th>
+          <th>desc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>lazy-load</td>
+          <td>布尔；默认false；图片懒加载，在即将进入一定范围（上下三屏）时才开始加载</td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <caption>Skyline 特有属性</caption>
+      <thead>
+        <tr>
+          <th>item</th>
+          <th>desc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>fade-in</td>
+          <td>布尔；默认false；是否渐显</td>
+        </tr>
+      </tbody>
+    </table>
+    <div>[<span class="iconfont icon-keyboard"></span>] 长按图片转发</div>
+    <pre>&lt;image src="xxx.jpg"  show-menu-by-longpress mode="widthFix"/&gt;</pre>
+    <div>[<span class="iconfont icon-keyboard"></span>] 在线图片的使用</div>
+    <div>
+      <div>. 受小程序大小2M的限制，大多数多媒体资源，如图片、视频、音频等不能本地使用，只能在线获取</div>
+      <div>方案1：外网在线资源；容易出现死链</div>
+      <div>方案2：自建资源服务器，详情请参考 <a href="../node/static.html">静态资源服务器</a></div>
+      <div>方案3：利用 - <a href="../utils/index.html">大树小站</a> - 提供的在线图片；更多图片持续更新中。。。如果有喜欢的图片，也可以由老师代为更新</div>
+    </div>
+    <div>[<span class="iconfont icon-keyboard"></span>] <a href="../web/background.html">背景图片</a>的使用</div>
+    <div>
+      <div>. 使用背景图片可以省掉部分组件元素</div>
+      <div>. 但是：默认情况下不支持background-image: url()属性，但是支持渐变背景。。。</div>
+      <div>方案1：定位；让图片在下面，模拟背景；内容在上面；需要额外增加一个容器提供定位参考</div>
+      <div>方案2：使用背景渐变：使用多个颜色模拟背景</div>
+      <pre>
 page {
-    height: 100vh;
     background-image: linear-gradient(#0093E9, #80D0C7);
-}            </pre>
-        </dd>
-    </dl>
-    <div id="footer"></div>
-    <script src="/utils/custom/footer.js"></script>
-    <script src="/utils/custom/star.js"></script>
+}</pre>
+      <div>方案3：使用 base64 编码：将本地图片转换为 base64 格式后再应用于背景图片；转换工具：<a href="https://www.jyshare.com/front-end/59/">图片转 BASE64
+          编码</a>、<a href="https://base64.us/">base64</a></div>
+      <pre>
+page {
+    background-image: url(data:image/jpeg;base64....);
+}</pre>
+    </div>
+  </section>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer.js"></script>
 </body>
 
 </html>

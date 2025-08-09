@@ -141,6 +141,9 @@
       <li>选择带有特定属性的元素</li>
       <li>可以选择多个元素</li>
       <li>使用正则语法可以更加精准的选择元素</li>
+      <li>更多信息，请访问 <a class="link"
+          href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Attribute_selectors">Attribute
+          selectors</a></li>
     </ul>
     <table>
       <caption>属性选择器</caption>
@@ -335,8 +338,8 @@ button:disabled {
 }</pre>
       </li>
       <li>结构伪类
+        <div>3.1 根据文档结构/序号/位置选择</div>
         <ul>
-          <li>根据文档结构/序号/位置选择；还可以 <a class="link" target="_blank" href="./selector_class.html#nth">根据类型</a> 选择</li>
           <li>通常配合父级元素一起使用</li>
           <li>nth-child 可以使用关键字；odd 选中序号为奇数的孩子；even 选中序号为偶数的孩子</li>
           <li>nth-child 可以使用 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child#anb">表达式 An+B</a>；n
@@ -392,7 +395,39 @@ button:disabled {
         <pre>
 :nth-child(-n+3)//前3 - 选择序号为3、2、1的元素；:nth-child(3-n)错误
 :nth-last-child(-n+3)//后3</pre>
+        <div>3.2 根据 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-of-type">类型 :nth-of-type()</a>选择
+        </div>
+        <ul>
+          <li>指定类型的元素按照序号 position 选择</li>
+          <li>根据类型选择符合条件的元素；适合多种元素类型并存的情况</li>
+          <li>同样可以使用关键字或表达式</li>
+          <li>不可以依据类名或其它选择器类型</li>
+        </ul>
+        <table>
+          <caption>根据类型选择</caption>
+          <thead>
+            <tr>
+              <th>item</th>
+              <th>desc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>first-of-type()</td>
+              <td>选择指定类型第一个</td>
+            </tr>
+            <tr>
+              <td>last-of-type()</td>
+              <td>选择指定类型最后一个</td>
+            </tr>
+            <tr>
+              <td>nth-of-type()</td>
+              <td>选择指定类型第几个</td>
+            </tr>
+          </tbody>
+        </table>
       </li>
+
       <li>其它伪类选择器
         <table>
           <caption>其它伪类选择器</caption>
@@ -467,6 +502,20 @@ button:disabled {
           <li>占位符样式；多用于表单元素 input</li>
           <li>设置的样式有限</li>
         </ul>
+      </li>
+      <li><a class="link" target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/::marker">::marker</a>
+        <ul>
+          <li>定义标记类型</li>
+          <li>适用于 display 为 list-item 的元素，如 &lt;li&gt;、&lt;summary&gt;</li>
+          <li>使用 content 属性指定内容</li>
+          <li>设置的样式有限</li>
+          <li>因为标记会破坏布局，基本很少使用</li>
+        </ul>
+        <pre>
+li::marker {
+  content: '✝ ';
+  font-size: 1.2em;
+}</pre>
       </li>
     </ol>
   </section>
@@ -572,6 +621,19 @@ button:disabled {
   </section>
   <section class="section" style="--s:--n10" id="drill">
     <h2>练习 Drill</h2>
+    <div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/border-ring.html">环环相扣</a></div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/btns.html">购物车</a></div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/companies.html">分节标题设计</a></div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./list.html">模拟列表</a></div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./web.html#browser">浏览器市场占有率</a></div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./opening.html#evaluation">教学评价</a></div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/up2u.html#home">技能条</a></div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/todo.html">代办事项</a></div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="../os/sql/quiz.html">定制答题模板</a></div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/clock.html">时钟</a></div>
+      <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/paper.html">首字高亮</a></div>
+    </div>
   </section>
   <section class="section" style="--s:--n11" id="summary">
     <h2>小结 Summary</h2>

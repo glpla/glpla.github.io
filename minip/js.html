@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>逻辑 JS</title>
-  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/common2025.css">
   <base target="_blank">
 </head>
 
@@ -15,77 +15,70 @@
     <h1>逻辑</h1>
     <span>&commat;JS</span>
   </header>
-  <dl>
-    <dd>微信小程序逻辑文件的后缀名是 <span class="warn">.js</span></dd>
-    <dd>包含：数据、<a href="./events.html">事件处理函数</a> 、<a href="./lifetime.html">生命周期函数</a>
-      和其他函数，如<a href="./page_event.html">页面特定事件</a></dd>
-    <dt>数据 Data</dt>
-    <dd>数据类型同 JavaScript 数据类型：Number、String，Array，Object等等</dd>
-    <dd>按照用途可以分为两种：响应式数据和静态数据；如无特别说明，都是指响应式数据</dd>
-    <dd>响应式数据用于渲染页面，在 data 中定义</dd>
-    <dd>静态数据在 page 顶级说明，和 data 同级，且不需要指定数据类型</dd>
-    <dd>
+  <section>
+    <ul>
+      <li>微信小程序逻辑文件的后缀名是 <span class="warn">.js</span></li>
+      <li>包含：数据、<a href="./events.html">事件处理函数</a> 、<a href="./lifetime.html">生命周期函数</a>
+        和其他函数，如<a href="./page_event.html">页面特定事件</a></li>
+    </ul>
+    <h3>数据 Data</h3>
+    <ul>
+      <li>数据类型同 JavaScript 数据类型：Number、String，Array，Object等等</li>
+      <li>按照用途分为：响应式数据和静态数据；如无特别说明，都是指响应式数据</li>
+      <li>按照来源分为：外部数据和内部数据</li>
+      <li>响应式数据用于渲染页面，在属性数据 data 中定义</li>
+      <li>静态数据在 page 顶级说明，和 data 同级，且不需要指定数据类型</li>
+      <li>除了使用本页面定义的数据外，还可以使用其它页面的数据，如从 app.js 中获取数据、从服务器拉取数据</li>
       <pre>
-data: {
-  age: 18,
-  msg: 'hi,there',
-  url: 'glpla.github.io',
-  tempFilePath: null,
-  userInfo:{
-    uage: 18,
-    ugender: '男',
-    uname: 'glpla',
-    usn:20221001
+// 页面外部数据
+const app = getApp()
+Page({
+  // 页面静态数据
+  uploadFileUrl: null
+  // 页面响应式数据
+  data: {
+    age: 18,
+    msg: 'hi,there',
+    url: 'glpla.github.io',
+    tempFilePath: null,
+    userInfo:{
+      uage: 18,
+      ugender: '男',
+      uname: 'glpla',
+      usn:20221001
+    },
+    goods: []
   },
-  goods: []
-},
-uploadFileUrl: null</pre>
-    </dd>
-    <dt>数据使用</dt>
-    <dd>1. 逻辑 js</dd>
-    <dd>逻辑 js中使用：this.data.varible_name</dd>
-    <dd>逻辑 js中修改：this.setData()</dd>
-    <dd>逻辑 js中使用函数类似</dd>
-    <dd>
-      <div>. 修改简单数据</div>
+  // 自定义函数
+  getInfo(){
+    //...
+  }
+  // 生命周期函数
+  onLoad(options) {
+    // ...
+  },
+})        
+</pre>
+    </ul>
+    <h3>在逻辑 .js 使用数据</h3>
+    <ul>
+      <li>使用：this.data.varible_name</li>
+      <li>修改：this.setData()</li>
+      <li>逻辑中的数据变化会影响视图 / <a href="./wxml.html">结构 wxml</a> 中绑定数据部分的更新</li>
       <pre>
+// 修改简单数据
 this.setData({
   msg: 'welcome back'
-})</pre>
-      <div>. 修改复杂数据</div>
-      <pre>
+})
+
+//修改复杂数据
 this.setData({
   "userInfo.uage": 24
 })</pre>
-    </dd>
-    <dd>2. 结构 wxml</dd>
-    <dd>结构中使用插值表达式{{}}实现逻辑层数据和视图层结构的绑定；更多信息，请访问 <a
-        href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A">官方文档
-        -数据绑定</a>
-    </dd>
-    <dd>可以绑定内容；也可以绑定属性，如样式class和内联样式</dd>
-    <dd>可以使用三元表达式</dd>
-    <dd>
-      <pre>
-&lt;text&gt;{{msg}}&lt;/text&gt;
-&lt;image class="avatar" src="{{url}}" mode="widthFix" /&gt;
-&lt;input class="ipt {{iptName?'border-focus':'border-none'}}" type="text"/&gt;</pre>
-    </dd>
-    <dd class="tips">配合调试器的AppData查看</dd>
-    <dt>其它数据</dt>
-    <dd>除了使用本页面定义的数据外，还可以使用其它页面的数据，如从app.js中获取数据、从服务器拉取数据</dd>
-    <dd>在page()外部引入app.js的数据</dd>
-    <dd>
-      <pre>
-const app = getApp()
-Page({
-  //
-})</pre>
-    </dd>
-  </dl>
+    </ul>
+  </section>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
-  <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

@@ -2,224 +2,117 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>页面导航 Navigator</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <base target="_blank">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>声明式导导航 &lt;navigator&gt;</title>
+  <link rel="stylesheet" href="../css/common2025.css">
+  <base target="_blank">
 </head>
 
 <body>
-    <header>
-        <h1>页面导航</h1>
-        <span>Navigator</span>
-    </header>
-    <dl>
-        <dt>概述</dt>
-        <dd>跳转到普通页面</dd>
-        <dd>跳转到标签页</dd>
-        <dd>跳转到外部小程序</dd>
-        <dd>还可以指定返回的层级</dd>
-        <dd>可以使用文字；也可以使用图片等其他元素</dd>
-    </dl>
-    <div class="chap">声明式导航</div>
-    <dl>
-        <dd>使用导航组件 &lt;navigator&gt; 导航，类似HTML的 &lt;a&gt;</dd>
-        <dd>导航组件的使用都有对应的API</dd>
-        <dd>更多属性，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html">官方文档 -
-                navigator</a></dd>
-        <dd>
-            <table>
-                <caption>导航组件</caption>
-                <tr>
-                    <th>属性</th>
-                    <th>说明</th>
-                </tr>
-                <tr>
-                    <td>target</td>
-                    <td>打开位置 <br> self：当前小程序；默认 <br>miniProgram：外部小程序</td>
-                </tr>
-                <tr>
-                    <td>url</td>
-                    <td>跳转链接|地址；相对地址或绝对地址</td>
-                </tr>
-                <tr>
-                    <td>open-type</td>
-                    <td>跳转类型 <br> navigate：默认，也可以是外部小程序 <br>switchTab：到标签页</td>
-                </tr>
-                <tr>
-                    <td>delta</td>
-                    <td>数字，后退的层级；默认是1，可以省略</td>
-                </tr>
-                <tr>
-                    <td>app-id</td>
-                    <td>外部小程序的AppID；在更多资料中获取</td>
-                </tr>
-                <tr>
-                    <td>path</td>
-                    <td>外部小程序的页面</td>
-                </tr>
-                <tr>
-                    <td>extra-data</td>
-                    <td>传递给外部小程序的数据</td>
-                </tr>
-            </table>
-        </dd>
-        <dt>无参导航</dt>
-        <dd>
-            <p>跳转到普通页面 - 仅指定 url</p>
-            <pre>
-&lt;navigator url="../test/test"&gt;To Page Test&lt;/navigator&gt;</pre>
-            <p>跳转到外部小程序 - 指定app-id和target</p>
-            <pre>
-&lt;navigator app-id="wx91d27dbf599dff74" target="miniProgram"&gt;To JD&lt;/navigator&gt;</pre>
-            <p>跳转到标签页 - 指定open-type</p>
-            <pre>
-&lt;navigator url="../photo/photo" open-type="switchTab"&gt;To Tab Photo &lt;/navigator&gt;</pre>
-            <p>后退1页 - 省略delta</p>
-            <pre>
-&lt;navigator open-type="navigate"&gt;Back&lt;/navigator&gt;</pre>
-        </dd>
-        <dt>带参导航</dt>
-        <dd class="sn">
-            <div>拼接参数 - 在路径 url 后面以值对 key-value 的形式拼接参数</div>
-            <p>参数和url之间使用 ? 连接</p>
-            <p>多个参数以 & 分隔</p>
-            <p>静态数据 - url?name=value&...</p>
-            <pre>
+  <header>
+    <h1>声明式导导航</h1>
+    <span>&lt;navigator&gt;</span>
+  </header>
+  <section>
+    <h3>简介 Introduction</h3>
+    <ul>
+      <li>页面之间的导航/链接，类似HTML的 &lt;a&gt;</li>
+      <li>使用 &lt;navigator&gt; 实现的导航，称为声明式导航</li>
+      <li>跳转到普通页面</li>
+      <li>跳转到标签页</li>
+      <li>跳转到外部小程序</li>
+      <li>还可以指定返回的层级</li>
+      <li>可以使用文字；也可以使用图片等其他元素</li>
+      <li>除了声明式导航，还可以利用导航组件对应的 API，实现 <a href="./api-navigator.html">编程式导航</a></li>
+      <li>更多信息，请访问 <a
+          href="https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html">&lt;navigator&gt;</a></li>
+    </ul>
+    <table>
+      <caption>导航组件属性</caption>
+      <thead>
+        <tr>
+          <th>item</th>
+          <th>desc</th>
+        </tr>
+      </thead>
+      <tr>
+        <td>target</td>
+        <td>打开位置 <br> self：当前小程序；默认 <br>miniProgram：外部小程序</td>
+      </tr>
+      <tr>
+        <td>url</td>
+        <td>跳转链接|地址；相对地址或绝对地址</td>
+      </tr>
+      <tr>
+        <td>open-type</td>
+        <td>跳转类型 <br> navigate：默认，也可以是外部小程序 <br>switchTab：到标签页</td>
+      </tr>
+      <tr>
+        <td>delta</td>
+        <td>数字，后退的层级；默认是1，可以省略</td>
+      </tr>
+      <tr>
+        <td>app-id</td>
+        <td>外部小程序的AppID；在更多资料中获取</td>
+      </tr>
+      <tr>
+        <td>path</td>
+        <td>外部小程序的页面</td>
+      </tr>
+      <tr>
+        <td>extra-data</td>
+        <td>传递给外部小程序的数据</td>
+      </tr>
+    </table>
+    <h3>无参导航</h3>
+    <ul>
+      <li>跳转到普通页面 - 仅指定 url</li>
+      <pre>&lt;navigator url="../test/test"&gt;To Page Test&lt;/navigator&gt;</pre>
+      <li>跳转到外部小程序 - 指定app-id和target</li>
+      <pre>&lt;navigator app-id="wx91d27dbf599dff74" target="miniProgram"&gt;To JD&lt;/navigator&gt;</pre>
+      <li>跳转到标签页 - 指定open-type</li>
+      <pre>&lt;navigator url="../photo/photo" open-type="switchTab"&gt;To Tab Photo &lt;/navigator&gt;</pre>
+      <li>后退1页 - 省略delta</li>
+      <pre>&lt;navigator open-type="navigate"&gt;Back&lt;/navigator&gt;</pre>
+    </ul>
+    <h3>带参导航</h3>
+    <ol>
+      <li>拼接参数 - 在路径 url 后面以值对 key-value 的形式拼接参数</li>
+      <p>参数和url之间使用 ? 连接</p>
+      <p>多个参数以 & 分隔</p>
+      <p>静态数据 - url?name=value&...</p>
+      <pre>
 &lt;navigator url="../test/test?name=gl"&gt;To Page Test&lt;/navigator&gt;</pre>
-            <p>动态数据 - 使用数据绑定</p>
-            <pre>
+      <p>动态数据 - 使用数据绑定</p>
+      <pre>
 &lt;navigator url="../test/test?name={{uname}}"&gt;To Page Test&lt;/navigator&gt;</pre>
-            <div>目标页获取参数 - 传递的参数在目标页的生命周期函数 onLoad 中通过形参 option 获取</div>
-            <pre>
+      <li>目标页获取参数 - 传递的参数在目标页的生命周期函数 onLoad 中通过形参 option 获取</li>
+      <pre>
 onLoad(option) {
     console.log(option);
 }</pre>
-        </dd>
-        <dd class="tips">
-            <div>请尽量使用调试器的"预览"体验完整功能</div>
-            <div>模拟器底部状态栏，默认显示"页面路径"，也可以切换到"页面参数"观察页面之间的参数传递情况</div>
-        </dd>
-    </dl>
-    <div class="chap">编程式导航</div>
-    <dl>
-        <dd>使用小程序的API导航</dd>
-        <dd>采用自定义事件实现</dd>
-        <dd>需指定url属性</dd>
-        <dd>不需要指定后缀名</dd>
-        <dd>还可以指定跳转结果的回调函数</dd>
-        <dd>- 成功 success</dd>
-        <dd>- 失败 fail</dd>
-        <dd>- 完成 complete：无论是成功还是失败都会执行这个回调函数</dd>
-        <dt>wx.switchTab(Object object)</dt>
-        <dd>
-            <p>跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面</p>
-            <pre>
-gotoCart(){
-    wx.switchTab({
-        url:'/pages/photo/photo'
-        //url:'../photo/photo'
-    })
-}</pre>
-        </dd>
-        <dt>wx.navigateTo(Object object)</dt>
-        <dd>
-            <p>保留当前页面，跳转到应用内的某个普通页面；<span class="warn">不能</span>跳到 tabbar 页面</p>
-            <pre>
-gotoTest(){
-    wx.navigateTo({
-        url:'../test/test',
-        success:()=>{
-            console.log('success');
-        },
-        fail:()=>{
-            console.log('fail');
-        },
-        complete:()=>{
-            console.log('complete');
-        }
-    })
-}</pre>
-        </dd>
-        <dt>wx.navigateBack(Object object)</dt>
-        <dd>关闭当前页面，返回上一页面或多级页面。可通过 getCurrentPages 获取当前的页面栈，决定需要返回几层</dd>
-        <dd>需要指定返回的页面数delta；如果 delta 大于现有页面数，则返回到首页</dd>
-        <dd>
-            <p>返回上一页</p>
-            <pre>
-backToHome(){
-    wx.navigateBack({
-        delta:1
-    })
-}</pre>
-        </dd>
-        <dt>带参导航</dt>
-        <dd>同声明式导航一样，在url后面拼接参数传递，并在目标页的onLoad中获取</dd>
-        <dd>
-            <p>拼接参数</p>
-            <pre>
-gotoTest(){
-    wx.navigateTo({
-        url:'../test/test?name=gl&age=18'
-    })
-}</pre>
-            <p>目标页获取参数</p>
-            <pre>
-onLoad(option: any) {
-    console.log(option);
-}</pre>
-        </dd>
-    </dl>
-    <dl>
-        <dd class="example-sn">综合案例：分别使用声明式导航和编程式导航，完成个人中心页到各个子模块/子页面的导航；相关API，请访问 <a
-                href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarTitle.html">setNavigationBarTitle()</a>、<a
-                href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarColor.html">wx.setNavigationBarColor()</a>
-        </dd>
-        <dd>
-            <div>实现1：声明式导航</div>
-            <p>使用&lt;navigator&gt;，修改个人中心静态页面，采用列表渲染定制导航；根据不同的导航项，动态设置目标页的导航标题 </p>
-            <p>该案例也适合客户、产品详情页，如：使用一个页面展示不同的商品内容</p>
-            <p>个人中心页 wxml - 导航节点示例，其它略</p>
-            <pre>
-&lt;navigator url="../target/target?title=favorite&bgc=#889900" class="item"&gt;
+    </ol>
+    <div class="tips">
+      <div>请尽量使用调试器的"预览"体验完整功能</div>
+      <div>模拟器底部状态栏，默认显示"页面路径"，也可以切换到"页面参数"观察页面之间的参数传递情况</div>
+    </div>
+  </section>
+  <section>
+    <div>[<span class="iconfont icon-keyboard"></span>] 使用声明式导航，完成个人小程序各页面之间的导航</div>
+    <ul>
+      <li>使用&lt;navigator&gt;，修改个人中心静态页面，采用列表渲染定制导航；根据不同的导航项，动态设置目标页的导航标题 </li>
+      <li>该案例也适合客户、产品详情页，如：使用一个页面展示不同的商品内容</li>
+      <li>个人中心页 wxml - 某个导航节点示例，其它略</li>
+      <pre>
+&lt;navigator url="../team/team" class="item"&gt;
     &lt;text class="iconfont icon-like icon"&gt;&lt;/text&gt;
 &lt;/navigator&gt;</pre>
-            <p>目标页 js - 获取参数，设置标题和背景颜色</p>
-            <pre>
-onLoad(options){
-    wx.setNavigationBarTitle({
-        title:options.title
-    })
-    wx.setNavigationBarColor({            
-        frontColor: '#ffffff',//MUST
-        backgroundColor:options.bgc
-    })
-}</pre>
-            <div>实现2：编程式导航</div>
-            <p>使用普通组件，绑定单击事件，在事件处理函数中使用导航API</p>
-            <p>个人中心页 wxml - 绑定事件</p>
-            <pre>
-&lt;view bind:tap="toTarget" data-bgc="#908" data-title="message" class="item"&gt;
-    &lt;text class="iconfont icon-clipboard icon"&gt;&lt;/text&gt;
-&lt;/view&gt;
-                </pre>
-            <p>个人中心页 js- 事件处理函数</p>
-            <pre>
-toTarget(e){
-    let para=e.currentTarget.dataset
-    wx.navigateTo({
-        url: '../target/target?title='+para.title+'&bgc='+para.bgc,
-    })
-}</pre>
-            <p>目标页 js- 同上</p>
-            <pre>...</pre>
-        </dd>
-    </dl>
-    <div id="footer"></div>
-    <script src="/utils/custom/footer.js"></script>
-    <script src="/utils/custom/star.js"></script>
+    </ul>
+  </section>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer.js"></script>
 </body>
 
 </html>

@@ -2,35 +2,42 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>生命周期函数 Lifetime</title>
-    <link rel="stylesheet" href="../css/common.css">
-    <base target="_blank">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生命周期函数 Lifetime</title>
+  <link rel="stylesheet" href="../css/common2025.css">
+  <base target="_blank">
 </head>
 
 <body>
-    <header>
-        <h1>生命周期函数</h1>
-        <span>&commat;Lifetime</span>
-    </header>
-    <dl>
-        <dt>生命周期函数</dt>
-        <dd>也叫life circle</dd>
-        <dd>指的是一个对象从创建 → 运行 → 销毁的整个过程</dd>
-        <dd>每个过程对应一个阶段；每个阶段都可以使用特定的函数来处理 - 生命周期函数</dd>
-        <dd>反映了小程序和页面的不同阶段</dd>
-        <dd>- 小程序app的启动 → 运行 → 关闭</dd>
-        <dd>- 页面page的加载 → 渲染 → 卸载</dd>
-        <dd>小程序提供的生命周期函数按次序自动执行</dd>
-        <dt>app.js中</dt>
-        <dd>onLaunch()</dd>
-        <dd>onShow()</dd>
-        <dd>onHide()</dd>
-        <dd>onError()</dd>
-        <dd>
-            <pre>
+  <header>
+    <h1>生命周期函数</h1>
+    <span>&commat;Lifetime</span>
+  </header>
+  <section>
+    <h3>简介 Introduction</h3>
+    <ul>
+      <li>也叫 life circle</li>
+      <li>指的是一个对象从创建 → 运行 → 销毁的整个过程</li>
+      <li>每个过程对应一个阶段；每个阶段都可以使用特定的函数来处理 - 生命周期函数</li>
+      <li>小程序、页面和组件都有自己的生命周期函数</li>
+      <li>- 小程序 app 的启动 → 运行 → 关闭</li>
+      <li>- 页面 page 的加载 → 渲染 → 卸载</li>
+      <li>- 组件 component 的加载 → 渲染 → 卸载</li>
+      <li>小程序提供的生命周期函数按次序自动执行</li>
+    </ul>
+    <h3>小程序生命周期函数</h3>
+    <ul>
+      <li>注册小程序。接受一个 Object 参数，其指定小程序的生命周期回调等</li>
+      <li>App() 必须在 app.js 中调用，必须调用且只能调用一次。不然会出现无法预期的后果</li>
+      <li>在 app.js 中，包括：</li>
+      <li>onLaunch()</li>
+      <li>onShow()</li>
+      <li>onHide()</li>
+      <li>onError()</li>
+      <li>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html">App</a></li>
+      <pre>
 App({
     globalData: {
         //全局数据
@@ -52,20 +59,18 @@ App({
         console.error(msg)
     }
 })</pre>
-        </dd>
-        <dt>page</dt>
-        <dd>onLoad()</dd>
-        <dd>onShow()</dd>
-        <dd>onReady()</dd>
-        <dd>onHide()</dd>
-        <dd>onUnload()</dd>
-        <dd>
-            <pre>
-//在Page外面获取app实例
-const app = getApp()
+    </ul>
+    <h3>页面生命周期函数</h3>
+    <ul>
+      <li>在各页面的逻辑文件中，除了初始数据、事件处理函数，还包括如下生命周期函数：</li>
+      <li>onLoad()</li>
+      <li>onShow()</li>
+      <li>onReady()</li>
+      <li>onHide()</li>
+      <li>onUnload()</li>
+      <li>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/Page.html">Page</a></li>
+      <pre>
 Page({
-    data: {
-    },
     onLoad(option) {
         //1
         //页面加载时触发
@@ -89,12 +94,30 @@ Page({
         //触发1次
     }
 })</pre>
-        </dd>
-        <dd class="tips">老版本的微信开发工具中的工具栏有个"切后台"，用于调试前台和后台业务逻辑</dd>
-    </dl>
-    <div id="footer"></div>
-    <script src="/utils/custom/footer.js"></script>
-    <script src="/utils/custom/star.js"></script>
+    </ul>
+    <h3>组件生命周期函数</h3>
+    <ul>
+      <li>组件自身的一些函数：在特殊的时间点或遇到一些特殊的框架事件时被自动触发</li>
+      <li>在组件的逻辑文件中，主要包括</li>
+      <li>created()：组件实例刚刚被创建好时</li>
+      <li>attached()：在组件完全初始化完毕、进入页面节点树</li>
+      <li>detached()：在组件离开页面节点树后</li>
+      <li>更多信息，请访问 <a
+          href="https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/lifetimes.html">组件生命周期</a>
+      </li>
+      <pre>
+Component({
+  lifetimes: {
+      created: function () {},
+      attached: function () {},
+      detached: function() {}
+  }
+})</pre>
+    </ul>
+    <div class="tips">老版本的微信开发工具中的工具栏有个"切后台"，用于调试前台和后台业务逻辑</div>
+  </section>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer.js"></script>
 </body>
 
 </html>
