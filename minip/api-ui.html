@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户界面交互 UI</title>
+  <link rel="stylesheet" href="../css/common2025.css">
+  <base target="_blank">
+</head>
+
+<body>
+  <header>
+    <h1>用户界面交互</h1>
+    <span>&commat;UI</span>
+  </header>
+  <section>
+    <ul>
+      <li>更多 API，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/">官方文档 - API - 界面</a></li>
+    </ul>
+    <h3>wx.showToast(Object object)</h3>
+    <ul>
+      <li>显示消息提示框</li>
+      <li>title - 提示信息</li>
+      <li>icon - 提示图标；系统内置，数量教少</li>
+      <li>image - 自定义图片；使用后配置项 icon 无效</li>
+      <li>mask - 默认为 false；建议开启，增加透明遮罩层，避免事件穿透</li>
+    </ul>
+    <h3>wx.hideToast(Object object)</h3>
+    <div>. 隐藏消息提示框</div>
+    <h3>wx.showLoading(Object object)</h3>
+    <div>. 显示 loading 提示框</div>
+    <h3>wx.hideLoading(Object object)</h3>
+    <div>. 隐藏 loading 提示框</div>
+    <h3>wx.showModal(Object object)</h3>
+    <ul>
+      <li>显示模态对话框；通过判断 res.confirm 还是 res.cancel 确定下一步操作</li>
+      <li>title - 提示标题</li>
+      <li>content - 提示内容</li>
+      <li>editable - 可编辑；确认后在返回结果 res的 content 中获取</li>
+      <li>placeholderText - 占位符，显示输入框时的提示文本，此时 content 相当于值</li>
+    </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 使用编辑 editable 和占位 placeholderText 提供交互 - 修改个人信息</div>
+    <ul>
+      <li>优点：不用页面跳转；不用专门创建页面</li>
+      <pre>
+wx.showModal({
+    title: 'rename',
+    content: this.data.user.uname,
+    editable: true,
+    placeholderText: '8 chars',
+    complete: (res) => {
+        if (res.cancel) {
+            console.log('cancel', res);
+        }
+        if (res.confirm) {
+            console.log('confirm', res);
+            this.setData({
+                'user.uname': res.content
+            })
+        }
+    }
+})</pre>
+    </ul>
+    <h3>wx.showActionSheet(Object object)</h3>
+    <ul>
+      <li>可以看作是 radio / picker 的一种拓展</li>
+      <li>显示操作菜单；在事件对象 res 获取选中的列表 tapIndex</li>
+      <li>alertText - 提示文案</li>
+      <li>itemList - 待选列表项，长度最大为6 </li>
+    </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 选择性别</div>
+    <ul>
+      <pre>
+data: {
+    user: {
+        ugender: 'Male',
+    },
+    gender: ['Male', 'Female']
+}</pre>
+      <pre>
+setUgender(){
+    wx.showActionSheet({
+        alertText:'your gender',
+        itemList: this.data.gender,
+        success:res=>{
+        this.setData({
+            'user.ugender':this.data.gender[res.tapIndex]
+        })
+        },
+        fail:err=>console.log(err),
+        complete:()=>console.log('set gender done')
+    })
+}</pre>
+    </ul>
+  </section>
+  <h2>导航栏</h2>
+  <section>
+    <h3><a
+        href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarTitle.html">wx.setNavigationBarTitle(Object
+        object)</a></h3>
+    <div>. 设置当前页面的标题</div>
+    <h3><a
+        href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.setNavigationBarColor.html">wx.setNavigationBarColor(Object
+        object)</a></h3>
+    <div>. 设置页面导航条颜色</div>
+    <h3><a
+        href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.showNavigationBarLoading.html">wx.showNavigationBarLoading(Object
+        object)</a></h3>
+    <div>. 在当前页面显示导航条加载动画</div>
+    <h3><a
+        href="https://developers.weixin.qq.com/miniprogram/dev/api/ui/navigation-bar/wx.hideNavigationBarLoading.html">wx.hideNavigationBarLoading(Object
+        object)</a></h3>
+    <div>. 在当前页面隐藏导航条加载动画</div>
+  </section>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer.js"></script>
+</body>
+
+</html>
