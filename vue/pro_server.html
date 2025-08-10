@@ -148,13 +148,13 @@ const path = require('path')
 const router = express.Router()
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/upload')
+  destination: (req, file, callback) => {
+    callback(null, __dirname + "/public/upload");
   },
-  filename: (req, file, cb) => {
+  filename: (req, file, callback) => {
     console.log('file', file);
     let ext = path.extname(file.originalname)
-    cb(null, file.fieldname + Date.now() + ext)
+    callback(null, file.fieldname + Date.now() + ext)
   }
 })
 
@@ -162,7 +162,7 @@ const upload = multer({
   storage: storage
 })
 
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/', upload.single('avatar'), (req, res) => {
   console.log('req.file', req.file)
   res.json({
     "errno": 0,
