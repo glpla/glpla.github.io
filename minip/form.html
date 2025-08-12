@@ -120,10 +120,20 @@ submit(e) {
     <div class="tips">开发能力 open-type 的使用，要随时关注官方接口的更新变化</div>
     <div>[<span class="iconfont icon-keyboard"></span>] 样式</div>
     <ul>
+      <li>&lt;button&gt; 组件的默认样式确实具有较高的优先级，会覆盖自定义样式</li>
+      <li>可以通过提权或设计 &lt;view&gt;来模拟</li>
       <li>在调试器中，查看按钮的代理样式，体会样式初始化的重要性</li>
       <pre>
+// 方案1：使用 important 提权
 button{
     width: 100%!important;
+    background-color: var(--themeColor);
+    color: #fff;    
+}</pre>
+      <pre>
+// 方案2：使用选择器提权 - 叠加一个选择器作为所有按钮的基类
+button.btn{
+    width: 100%;
     background-color: var(--themeColor);
     color: #fff;    
 }</pre>

@@ -65,6 +65,10 @@
         <td>extra-data</td>
         <td>传递给外部小程序的数据</td>
       </tr>
+      <tr>
+        <td>hover-class</td>
+        <td>指定点击时的样式类；none 时，没有点击态效果；或修改默认的导航类样式 navigator-hover</td>
+      </tr>
     </table>
     <h3>无参导航</h3>
     <ul>
@@ -102,13 +106,27 @@ onLoad(option) {
   <section>
     <div>[<span class="iconfont icon-keyboard"></span>] 使用声明式导航，完成个人小程序各页面之间的导航</div>
     <ul>
-      <li>使用&lt;navigator&gt;，修改个人中心静态页面，采用列表渲染定制导航；根据不同的导航项，动态设置目标页的导航标题 </li>
+      <li>使用 &lt;navigator&gt;，修改个人中心静态页面，采用列表渲染定制导航；根据不同的导航项，动态设置目标页的导航标题 </li>
       <li>该案例也适合客户、产品详情页，如：使用一个页面展示不同的商品内容</li>
       <li>个人中心页 wxml - 某个导航节点示例，其它略</li>
       <pre>
 &lt;navigator url="../team/team" class="item"&gt;
     &lt;text class="iconfont icon-like icon"&gt;&lt;/text&gt;
+    &lt;text&gt;团队&lt;/text&gt;
 &lt;/navigator&gt;</pre>
+      <li>移除点击状态：为 &lt;navigator&gt; 指定 hover-class 为 none，无效，修改 <span class="warn">默认的导航类</span></li>
+      <li>默认样式：带背景色，降低透明度</li>
+      <pre>
+.navigator-hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0.7;
+}</pre>
+      <li>修改为：移除背景色；不改变透明度</li>
+      <pre>
+.navigator-hover {
+  background-color: rgba(0, 0, 0, 0.0);
+  opacity: 1;
+}</pre>
     </ul>
   </section>
   <div id="footer"></div>

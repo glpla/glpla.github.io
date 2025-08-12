@@ -225,9 +225,29 @@ wx.getLocation({
         object)</a></h3>
     <ul>
       <li>分类：位置接口</li>
-      <li>使用微信内置地图查看位置，并将指定的地点居中显示；通常用于在用户需要查看某个特定位置的详细地图和周边情况</li>
+      <li>使用微信<span class="warn">内置地图</span>查看位置，并将指定的地点居中显示；通常用于在用户需要查看某个特定位置的详细地图和周边情况</li>
       <li>如果不提供 latitude 和 longitude，地图将以用户当前位置为中心</li>
       <li>wx.openLocation() 通常与 wx.getLocation() 或 wx.chooseLocation() 结合使用，先获取位置信息，然后使用这些信息打开地图</li>
+      <li>会提供返回中心点、导航、打车、收藏等信息</li>
+      <li>需要在 app.json 中配置权限</li>
+      <pre>
+"permission": {
+  "scope.userLocation": {
+    "desc": "你的位置信息将用于小程序位置接口的效果展示"
+  }
+}</pre>
+      <div>[<span class="iconfont icon-keyboard"></span>] 打开桂林市体育中心；坐标可以事先查阅好</div>
+      <pre>
+wx.openLocation({
+    latitude: 25.26,
+    longitude: 110.32,
+    name: '桂林市体育中心',
+    address: '七星区穿山东路12号'
+})</pre>
+      <figure>
+        <img src="./imgs/openLocation.jpg" alt="">
+        <figcaption>打开位置</figcaption>
+      </figure>
     </ul>
     <h3><a
         href="https://developers.weixin.qq.com/miniprogram/dev/api/location/wx.chooseLocation.html">wx.chooseLocation(Object
