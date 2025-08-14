@@ -288,6 +288,22 @@ getAvatar(e){
       <li>行内块元素 inline-block</li>
       <li>HTML中，需要给每个 &lt;radio&gt; 指定 name 以确保是一组；微信小程序中，使用 &lt;radio-group&gt; 分组，且指定 name</li>
       <table>
+        <caption> &lt;radio-group&gt;</caption>
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>desc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>bindchange</td>
+            <td>选中项发生改变时触发；从事件对象 e.detail 获取当前选中的值（ <span class="warn">数组</span> ）</td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <caption>&lt;radio&gt;</caption>
         <thead>
           <tr>
             <th>item</th>
@@ -308,8 +324,8 @@ getAvatar(e){
             <td>单选按钮选中时的颜色</td>
           </tr>
           <tr>
-            <td>bindchange</td>
-            <td>选中项发生改变时触发；从事件对象e.detail获取当前选中的值</td>
+            <td>disabled</td>
+            <td>是否禁用</td>
           </tr>
         </tbody>
       </table>
@@ -335,12 +351,33 @@ getGender(e){
 &lt;/radio-group&gt;</pre>
       <li>使用 &lt;label&gt; 改写上例，提升用户体验</li>
     </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 样式</div>
+    <ul>
+      <li>隐藏 &lt;radio&gt;，重新设计</li>
+      <li>更多信息，请访问 <a href="../web/input.html">Html - &lt;input&gt;</a></li>
+    </ul>
     <h3><a href="https://developers.weixin.qq.com/miniprogram/dev/component/checkbox.html">&lt;checkbox&gt;
         &lt;checkbox-group&gt;</a></h3>
     <ul>
       <li>行内块元素 inline-block</li>
       <li>多选按钮；多选按钮组</li>
       <table>
+        <caption> &lt;checkbox-group&gt;</caption>
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>desc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>bindchange</td>
+            <td>选中项发生改变时触发；从事件对象 e.detail 获取当前选中的值（ <span class="warn">数组</span> ）</td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <caption>&lt;checkbox&gt;</caption>
         <thead>
           <tr>
             <th>item</th>
@@ -361,8 +398,8 @@ getGender(e){
             <td>多选按钮选中时的颜色</td>
           </tr>
           <tr>
-            <td>bindchange</td>
-            <td>选中项发生改变时触发；从事件对象e.detail获取当前选中的值（ <span class="warn">数组</span> ）</td>
+            <td>disabled</td>
+            <td>是否禁用</td>
           </tr>
         </tbody>
       </table>
@@ -386,6 +423,73 @@ getLike(e){
 }</pre>
       <li>使用 &lt;label&gt; 改写上例，提升用户体验</li>
     </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 样式</div>
+    <ul>
+      <li>多选按钮默认是方块</li>
+      <li>自定义方法同 &lt;radio&gt;</li>
+    </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 全选/全不选</div>
+    <ul>
+      <li>购物车中商品的操作</li>
+      <li>如果全选为真，则所有商品为选中状态</li>
+      <li>如果全选为假，则所有商品为取消状态</li>
+      <li>只有所有商品都是选中状态，全选才为真</li>
+      <li>只要有一个商品是取消状态，则全选为假</li>
+      <li>数据：每个商品数据有有一个字段 selected 用来标记是否为选中状态</li>
+      <pre>
+data:{
+  carts:[],
+  isAll: false
+}</pre>
+      <li>商品列表渲染：每个商品项和一个 &lt;checkbox&gt; 关联并绑定 tap 事件 toggleItemSelection；使用自定义数据携带 id，便于修改其选择状态；其它内容略</li>
+      <pre>
+&lt;view wx:for="{{carts}}" wx:key="item"&gt;
+  &lt;checkbox checked="{{item.selected}}" bind:tap="toggleItemSelection" data-id='{{item.id}}' /&gt;
+  // ...
+&lt;/view&gt;</pre>
+      <li>全选 &lt;checkbox&gt; 并绑定 tap 事件 toggleSelectAll</li>
+      <pre>
+&lt;label&gt;
+  &lt;checkbox checked="{{isAll}}" bind:tap="toggleSelectAll" /&gt;全选
+&lt;/label&gt;</pre>
+      <li>全选逻辑：获取商品数据 carts 和全选标记 isAll；如果 isAll 之前是假，单击后，将变为真；所以将 isAll 取反后给每一个商品更新状态；最后更新数据</li>
+      <pre>
+toggleSelectAll() {
+  const {
+    carts,
+    isAll
+  } = this.data
+  carts.map(cart => cart.selected = !isAll)
+  this.setData({
+    carts,
+    isAll: !isAll
+  })
+}</pre>
+      <li>单个商品的选择状态逻辑：获取所有商品数据及当前商品数据 id；取反当前商品数据的状态状态；然后根据当前所有商品数据的选择状态，决定 isAll 的真假；使用数组方法 every 实现 - 只要每一个商品数据都是选中状态，
+        isAll 才是真；否则为假；最后更新数据</li>
+      <pre>
+toggleItemSelection(e) {
+  console.log(e.currentTarget);
+  const {
+    carts
+  } = this.data
+  const id = e.currentTarget.dataset.id
+  const updatedCarts = carts.map(cart => {
+    if (cart.id == id) {
+      cart.selected = !cart.selected
+    }
+    return cart
+  })
+  const isAll = updatedCarts.every(cart => cart.selected)
+  this.setData({
+    carts: updatedCarts,
+    isAll
+  })
+}</pre>
+    </ul>
+    <div class="tips">
+      <div>数组函数的使用 map()、every()...</div>
+    </div>
     <h3><a href="https://developers.weixin.qq.com/miniprogram/dev/component/textarea.html">&lt;textarea&gt;</a></h3>
     <ul>
       <li>多行输入；默认大小300*150；块元素 block</li>
@@ -454,7 +558,7 @@ getLike(e){
     </ul>
     <div>[<span class="iconfont icon-keyboard"></span>] 样式</div>
     <ul>
-      <li><span class="warn">显式</span>的设置宽度和容器保持一样大小；同时设置内边距padding以使得文字内收一定距离</li>
+      <li><span class="warn">显式</span>的设置宽度和容器保持一样大小；同时设置内边距 padding 以使得文字内收一定距离</li>
       <pre>
 textarea{
     width: 100%;

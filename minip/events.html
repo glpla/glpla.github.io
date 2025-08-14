@@ -28,12 +28,12 @@
     <ul>
       <li>在结构中为节点元素绑定事件并指定事件处理函数</li>
       <pre>&lt;view class="title" bind:tap="test"&gt;best wishes&lt;/view&gt;</pre>
-      <li>在页面逻辑顶层 | data 同级，声明事件处理函数</li>
+      <li>在页面逻辑顶层 | data 同级，声明事件处理函数；e 是事件对象</li>
       <pre>
 test: function(e){
   console.log(e);
 }</pre>
-      <li>可以不使用关键字 function；统一风格即可；建议和小程序示例代码保持一致</li>
+      <li>可以不使用关键字 function</li>
       <pre>
 test(e){
   console.log(e);
@@ -44,6 +44,7 @@ test: (e)=>{
   console.log(e);
 }</pre>
     </ul>
+    <div class="tips">统一风格即可；建议和小程序示例代码保持一致</div>
     <h3>事件类型 Type</h3>
     <ul>
       <li>常见事件有：单击事件 tap 和触摸事件 touch</li>
@@ -78,7 +79,8 @@ test: (e)=>{
     </table>
     <h3>事件对象 Event</h3>
     <ul>
-      <li>事件发生时，会触发一个事件对象 event：包含事件发生时的很多额外信息，常见的有：
+      <li>事件发生时，会触发一个事件对象 event；通常简写为 e</li>
+      <li>包含事件发生时的很多额外信息，常见的有：</li>
       <li>type：事件类型</li>
       <li>dataset：自定义数据</li>
       <li>detail：具体信息，如表单元素的值</li>
@@ -88,14 +90,14 @@ test: (e)=>{
       </li>
     </ul>
     <div class="tips">
+      <div>使用console.log(e) 查看完整的事件对象</div>
       <div>当节点元素触发一个事件后，该事件会逐步冒泡至它的父级及父级的父级直至顶级；所以一个事件可以由不同的节点元素响应</div>
       <div>触发事件的是 target；响应事件的是 currentTarget</div>
     </div>
     <h3>事件传参 Parameter</h3>
     <ul>
-      <li>通过自定义数据 data- 的方式指定参数</li>
-      <li>利用事件对象目标的 dataset 获取并使用</li>
-      <li>多数据可以使用解构赋值 - 要求使用同名变量</li>
+      <li>无法像其它环境中直接传递参数，如 eventHandle(parameter)</li>
+      <li>通过 <span class="warn">自定义数据 data- </span> 的方式携带参数，保存在事件对象目标 target/currentTarget 的 dataset 属性中</li>
     </ul>
     <div>[<span class="iconfont icon-keyboard"></span>] 利用自定义数据传参，查看事件对象目标</div>
     <ul>
@@ -153,6 +155,60 @@ randColor(){
       <div>拓展：如何获取随机透明色的颜色</div>
       <div>方案：额外增加一个0-1的随机数表示透明度</div>
     </div>
+    <div>[<span class="iconfont icon-keyboard"></span>] 购物车商品数量调整</div>
+    <ul>
+      <li>商品数据 goods：数组，远程读取</li>
+      <pre>
+data: {
+  goods: [],
+}</pre>
+      <li>每个商品是一个对象，包括如下基本信息</li>
+      <pre>
+id: 1,
+name: '商品名称',
+desc: '商品描述',
+price: 10,
+quantity: 1,
+img: 'https://img.alicdn.com/tfs/TB1.XZ.XZJ1B2RjSZFXXX_o8VXa-200-200.png',</pre>
+      <li>在页面 onload 中列表渲染 wx:for，并为增加减少绑定事件，同时使用数据 index 作为自定义数据，便于修改其数量</li>
+      <pre>
+&lt;view wx:for="{{goods}}" wx:key="item"&gt;
+  &lt;view&gt;{{item.name}}&lt;/view&gt;
+  &lt;view&gt;{{item.desc}}&lt;/view&gt;
+  &lt;view&gt;{{item.price}}&lt;/view&gt;
+  &lt;view&gt;
+     &lt;button bind:tap="dec" data-ind="{{index}}"&gt;-&lt;/button&gt;
+     &lt;view&gt;{{item.quantity}}&lt;/view&gt;
+     &lt;button bind:tap="inc" data-ind="{{index}}"&gt;+&lt;/button&gt;
+  &lt;/view&gt; 
+&lt;/view&gt;</pre>
+      <li>数量增加/减少业务逻辑：分别获取所有商品数据和当前商品数据的 index；在边界条件的限制下，增加或减少当前商品数据的数量；最后更新数据</li>
+      <pre>
+dec(e) {
+  const ind = e.currentTarget.dataset.ind
+  const carts = this.data.carts
+  const item = carts[ind]
+  if (item.quantity > 1) {
+    item.quantity--
+  }
+  this.setData({
+    carts
+  })
+},
+
+inc(e) {
+  const ind = e.currentTarget.dataset.ind
+  const carts = this.data.carts
+  const item = carts[ind]
+  if (item.quantity &le; 9) {
+    item.quantity++
+  }
+  this.setData({
+    carts
+  })
+}</pre>
+    </ul>
+    <div class="tips">数据的处理：获取 → 处理 → 更新（回填）</div>
   </section>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
