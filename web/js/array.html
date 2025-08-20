@@ -361,19 +361,20 @@ function shuffle(arr) {
     <div>
       <pre>let data = [{ id: 10, name: 'gl' }, { id: 11, name: 'cq' }, { id: 12, name: 'sz' }]</pre>
       <div>提取特征数据 - 从API请求的数据中获取数据项的 name 展示；也可以在请求时指定需要的数据，具体情况看API的支持</div>
-      <div>提取1个 - 返回每个数据项的 name 组成的数组</div>
+      <div>提取1个 - 返回每个数据项的 name 组成的数组；需要使用变量接受新数组</div>
       <pre>let res = data.map(item => item.name)</pre>
-      <div>提取多个 - 返回每个数据项的 name、desc 组成的数组</div>
+      <div>提取多个 - 返回每个数据项的 name、desc 组成的数组；需要使用变量接受新数组</div>
       <pre>let res = data.map(item => ({name: item.name, desc:item.desc}))</pre>
-      <div>修改格式 - 修改每个数据项的 name 为大写</div>
-      <pre>let res = data.map(item => ({ id: item.id, name: item.name.toUpperCase() }))</pre>
-      <div>添加属性 - 为每个数据项增加一个数量，初始化为1；如添加到购物车</div>
-      <pre>let res = data.map(item => ({ ...item, num: 1 }))</pre>
-      <div>添加属性 -简单数组生成索引数组</div>
+      <div>修改格式 - 修改每个数据项的 name 为大写；无需使用变量接受</div>
+      <pre>data.map(item => item.name = item.name.toUpperCase())</pre>
+      <div>添加属性 - 为每个数据项增加一个数量，初始化为1；如添加到购物车；无需使用变量接受</div>
+      <pre>data.map(item => item.num = 1)</pre>
+      <div>添加属性 -简单数组生成索引数组；改变了数据结构，需要使用变量接受新数组</div>
       <pre>
 let data = ['gl', 'cq', 'sz', 'sh', 'gz']
 let res = data.map((item, ind) => ({ id: ind, location: item }))</pre>
     </div>
+    <div class="tips">如果仅仅是修改数据项的属性，无需使用变量接受</div>
     <div>[<span class="iconfont icon-keyboard"></span>] 创建 DOM</div>
     <div>
       <div>使用 join() 将数组转化为字符串使用</div>
@@ -573,6 +574,13 @@ obj.sort((a, b) => {
   </section>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
+  <script>
+    const arr = [{ id: 1, name: 'gl' }, { id: 2, name: 'cq' }, { id: 3, name: 'sz' }]
+    console.log(arr);
+    arr.map(item => item.num = 1)
+    console.log(arr);
+    arr.map(item => item.name = item.name.toUpperCase())
+  </script>
 </body>
 
 </html>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>包管理 NPM</title>
-  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/common2025.css">
   <base target="_blank">
 </head>
 
@@ -15,46 +15,46 @@
     <h1>包管理</h1>
     <span>&commat;NPM</span>
   </header>
-  <dl>
-    <dd>需要 <a href="../node/index.html">Node.js</a> 环境支持</dd>
-    <dt>基本步骤</dt>
-    <dd class="sn">
-      <div>安装依赖</div>
-      <div>构建NPM</div>
-      <div>引入包</div>
-      <div>使用包</div>
-    </dd>
-    <dd class="example-sn">使用时间格式化依赖 <a href="https://momentjs.com/">Moment.js</a></dd>
-    <dd class="sn">
-      <div>安装依赖</div>
-      <p>在小程序根目录，右键 → 打开内建终端|小黑屋</p>
-      <pre>npm install moment --save</pre>
-      <div>构建NPM</div>
-      <p>菜单栏 → 工具 → 构建 npm</p>
-      <div>引入包</div>
-      <p>在逻辑中引入</p>
-      <pre>const moment = require('moment')</pre>
-      <div>使用包</div>
-      <p>默认格式</p>
-      <pre>console.log(moment().format());</pre>
-      <p>指定格式 - 使用 <a href="https://momentjs.com/docs/#/durations/">durations</a></p>
+  <section>
+    <div>. 需要 <a href="../node/index.html">Node.js</a> 环境支持</div>
+    <h3>Steps</h3>
+    <ol>
+      <li>安装依赖</li>
+      <li>构建 NPM；构建完毕后，目录 miniprogram 变为 miniprogram_npm</li>
+      <li>引入包</li>
+      <li>使用包</li>
+    </ol>
+    <h3>手动构建 NPM</h3>
+    <ul>
+      <li>打开项目配置文件 project.config.json，修改相关字段如下</li>
+      <li>重新启动开发者工具</li>
+      <li>执行构建</li>
       <pre>
-changeTime(t) {
-    let time = moment.duration(t, 'seconds')
-    let h = time.hours()
-    let m = time.minutes()
-    let s = time.seconds()
-    return moment({
-        h,
-        m,
-        s
-    }).format('HH:mm:ss')
-}            </pre>
-    </dd>
-  </dl>
+"packNpmManually": true,
+"packNpmRelationList": [
+  {
+    "packageJsonPath": "./package.json",
+    "miniprogramNpmDistDir": "./miniprogram/"
+  }
+],</pre>
+    </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 时间格式化 <a href="https://day.js.org/en/">Day.js</a></div>
+    <ol>
+      <li>安装依赖</li>
+      <p>. 在小程序根目录，右键 → 打开内建终端|小黑屋</p>
+      <pre>npm install dayjs</pre>
+      <li>构建 NPM</li>
+      <p>. 菜单栏 → 工具 → 构建 npm</p>
+      <li>引入包</li>
+      <p>. 在逻辑中引入</p>
+      <pre>const dayjs = require('dayjs')</pre>
+      <li>使用包</li>
+      <p>. 默认格式</p>
+      <pre>console.log(dayjs().format());</pre>
+    </ol>
+  </section>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
-  <script src="/utils/custom/star.js"></script>
 </body>
 
 </html>

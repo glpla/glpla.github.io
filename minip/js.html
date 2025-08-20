@@ -21,14 +21,14 @@
       <li>包含：数据、<a href="./events.html">事件处理函数</a> 、<a href="./lifetime.html">生命周期函数</a>
         和其他函数，如<a href="./page_event.html">页面特定事件</a></li>
     </ul>
-    <h3>数据 Data</h3>
+    <h3>数据 data</h3>
     <ul>
       <li>数据类型同 JavaScript 数据类型：Number、String，Array，Object等等</li>
       <li>按照用途分为：响应式数据和静态数据；如无特别说明，都是指响应式数据</li>
       <li>按照来源分为：外部数据和内部数据</li>
       <li>响应式数据用于渲染页面，在属性数据 data 中定义</li>
       <li>静态数据在 page 顶级说明，和 data 同级，且不需要指定数据类型</li>
-      <li>除了使用本页面定义的数据外，还可以使用其它页面的数据，如从 app.js 中获取数据、从服务器拉取数据</li>
+      <li>除了使用本页面定义的数据外，还可以使用其它页面的数据，如从 app.js 中获取数据/全局状态、从服务器拉取数据</li>
       <pre>
 // 页面外部数据
 const app = getApp()
@@ -59,22 +59,32 @@ Page({
   },
 })        
 </pre>
+      <li>页面的数据可以在调试器的 AppData 中查看</li>
+      <li>app.globalData 的数据可以在 cconsole 标签页输入并查看</li>
+      <pre>&gt; getApp().globalData</pre>
     </ul>
-    <h3>在逻辑 .js 使用数据</h3>
+    <h3>使用数据 this.data</h3>
     <ul>
-      <li>使用：this.data.varible_name</li>
-      <li>修改：this.setData()</li>
+      <li>在逻辑 .js </li>
+      <pre>this.data.varible_name</pre>
+      <li>结构 .wxml</li>
+      <pre>&lt;view&gt;{{varible_name}}&lt;/view&gt;</pre>
+    </ul>
+    <h3>更新数据 setData()</h3>
+    <ul>
       <li>逻辑中的数据变化会影响视图 / <a href="./wxml.html">结构 wxml</a> 中绑定数据部分的更新</li>
+      <li>接受两个参数：要更新的数据对象和可选的回调函数（在数据更新完成并且页面渲染结束后执行）</li>
+      <li>如果回调函数中，需要渲染页面/更新，则应考虑数据合并后一次更新</li>
       <pre>
 // 修改简单数据
 this.setData({
   msg: 'welcome back'
 })
 
-//修改复杂数据
+//修改复杂数据；使用了回调函数 cb
 this.setData({
   "userInfo.uage": 24
-})</pre>
+}, cb)</pre>
     </ul>
   </section>
   <div id="footer"></div>

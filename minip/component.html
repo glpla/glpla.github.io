@@ -92,6 +92,25 @@ Component({
         <figcaption>组件样式配置</figcaption>
       </figure>
     </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 封装空购物车组件</div>
+    <ul>
+      <li>结构</li>
+      <pre>
+&lt;view class="empty-cart"&gt;
+  &lt;text class="iconfont icon-cart-empty txt-xxxl"&gt;&lt;/text&gt;
+  &lt;text&gt;购物车空空的，去逛逛吧&lt;/text&gt;
+&lt;/view&gt;</pre>
+      <li>样式：iconfont 样式文件已经在 app.wxss 中引入；为了在组件内部使用 iconfont，需要显式的引入样式文件</li>
+      <pre>
+@import '../../app.wxss';
+
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}</pre>
+    </ul>
   </section>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>

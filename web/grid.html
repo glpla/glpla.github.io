@@ -116,9 +116,14 @@
     <dd>.复合属性；同时设置列 grid-template-column、行 grid-template-rows，多见于页面整体布局，见后续案例</dd>
     <dt>grid-auto-rows、grid-auto-columns</dt>
     <dd>
-      <div>.当容器中没有明确指定行列大小时，自动决定容器的行高或列宽 - 隐式的指定行的高度|列的宽度</div>
+      <div>.轨道 track 的高度宽度，而不是子项的高度宽度</div>
+      <div>.当容器中没有明确指定行列大小时，由子项的尺寸决定容器的行高或列宽 - 隐式的指定行的高度|列的宽度</div>
       <pre>grid-auto-rows: &lt;length&gt; | &lt;percentage&gt; | min-content | max-content | auto;</pre>
       <pre>grid-auto-columns: &lt;length&gt; | &lt;percentage&gt; | min-content | max-content | auto;</pre>
+      <div>.指定大小后，默认情况下，子项会撑满，即：</div>
+      <pre>align-items: strench;</pre>
+      <div>.如果指定了其它属性，如 center，则根据子项高度，在轨道垂直方向上居中</div>
+      <pre>align-items: center;</pre>
     </dd>
     <dt>grid-auto-flow</dt>
     <dd>

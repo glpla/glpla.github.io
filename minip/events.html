@@ -22,6 +22,7 @@
       <li>事件绑定在组件上；当达到触发事件，就会执行逻辑层中对应的事件处理函数</li>
       <li>默认情况下，事件是冒泡机制</li>
       <li>绑定事件使用 bind: 语法</li>
+      <li>使用 catch: 语法可以阻止事件冒泡</li>
       <li>更多信息，请访问 <a href="../vue/events.html">Vue-events</a>、<a href="../web/js/event.html">html-event</a></li>
     </ul>
     <h3>事件处理函数 EventHandle</h3>
@@ -93,6 +94,7 @@ test: (e)=>{
       <div>使用console.log(e) 查看完整的事件对象</div>
       <div>当节点元素触发一个事件后，该事件会逐步冒泡至它的父级及父级的父级直至顶级；所以一个事件可以由不同的节点元素响应</div>
       <div>触发事件的是 target；响应事件的是 currentTarget</div>
+      <div>无法像 Html 那样通过判断 targe 或 currentTarget 来确定单击对象；见后续模态框的设计</div>
     </div>
     <h3>事件传参 Parameter</h3>
     <ul>
@@ -134,6 +136,27 @@ innerTap(e) {
       <div>父子组件多个事件并存时，注意区分 target 和 currentTarget</div>
       <div>大多数情况下，父元素由子元素撑开；事件绑定在父元素，点击的实际上是子元素，最后冒泡才由父元素响应，所以使用 currentTarget 最多</div>
     </div>
+    <div>[<span class="iconfont icon-keyboard"></span>] 自定义数据 data- 的特点</div>
+    <ul>
+      <li>根据自定义数据，决定业务方向</li>
+      <li>结构</li>
+      <pre>
+&lt;button bind:tap="confirmProduct" data-flag="0"&gt;加入购物车&lt;/button&gt;
+&lt;button bind:tap="confirmProduct" data-flag="1"&gt;立即购买&lt;/button&gt;</pre>
+      <li>逻辑</li>
+      <pre>
+confirmProduct(e) {
+    if (e.currentTarget.dataset.flag) {
+      // to order
+      console.log('order');
+    } else {
+      // add to cart
+      console.log('cart');     
+    }
+  }</pre>
+      <li>请分析代码执行情况</li>
+      <!-- <li>自定义的数据是字符串，无论获取是 '0' 还是 '1'，结果都是真</li> -->
+    </ul>
     <div>[<span class="iconfont icon-keyboard"></span>] 点击随机更改背景颜色</div>
     <ul>
       <div>思路：使用内联样式绑定数据 color；获取3个随机数并使用模板语法更新颜色</div>
@@ -155,6 +178,9 @@ randColor(){
       <div>拓展：如何获取随机透明色的颜色</div>
       <div>方案：额外增加一个0-1的随机数表示透明度</div>
     </div>
+  </section>
+  <h2>Homework</h2>
+  <section>
     <div>[<span class="iconfont icon-keyboard"></span>] 购物车商品数量调整</div>
     <ul>
       <li>商品数据 goods：数组，远程读取</li>
@@ -209,6 +235,35 @@ inc(e) {
 }</pre>
     </ul>
     <div class="tips">数据的处理：获取 → 处理 → 更新（回填）</div>
+    <div>[<span class="iconfont icon-keyboard"></span>] 模态框设计</div>
+    <ul>
+      <li>结构：三级，包括：modal → cont → close</li>
+      <li>需求：单击 modal 或者 单击 cont 中的 close，都可以关闭模态框；单击 cont 不应关闭；通常说，单击关闭或其它地方来关闭模态框</li>
+      <li>为了避免冒泡事件重复执行，为 close 采用阻止事件冒泡的绑定 catch:</li>
+      <li>
+        <pre>
+&lt;view class="modal" id="modal" bind:tap="closeModal"&gt;
+  &lt;view close="“cont"&gt;
+    &lt;view class="close" id="close" catch:tap="closeModal"&gt;x&lt;/view&gt;
+  &lt;/view&gt;
+&lt;/view&gt;</pre>
+      </li>
+      <li>借助 id 来判断，如果触发事件和响应事件相同，则关闭</li>
+      <pre>
+closeModal(e) {
+  if (e.target.id == e.currentTarget.id) {
+    this.setData({
+      isShowCart: false
+    })
+  }
+}</pre>
+      <li>优化：为了避免单击 cont 时，modal 响应，为 cont 绑定空事件并阻止冒泡</li>
+      <pre>
+&lt;view close="“cont" catch:tap="preventModalClose"&gt;
+  // ...
+&lt;/view&gt;</pre>
+      <pre>preventModalClose(e) {}</pre>
+    </ul>
   </section>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
