@@ -55,11 +55,11 @@
       </tr>
       <tr>
         <td>app-id</td>
-        <td>外部小程序的AppID；在更多资料中获取</td>
+        <td>外部小程序的 AppID；在"更多"或"设置"或公众号关联的小程序中获取</td>
       </tr>
       <tr>
         <td>path</td>
-        <td>外部小程序的页面</td>
+        <td>外部小程序的页面；默认是主页</td>
       </tr>
       <tr>
         <td>extra-data</td>
@@ -72,19 +72,19 @@
     </table>
     <h3>无参导航</h3>
     <ul>
-      <li>跳转到普通页面 - 仅指定 url</li>
+      <li>跳转到小程序内部普通页面 - 仅指定 url</li>
       <pre>&lt;navigator url="../test/test"&gt;To Page Test&lt;/navigator&gt;</pre>
-      <li>跳转到外部小程序 - 指定app-id和target</li>
+      <li>跳转到外部小程序 - 指定 app-id 和 target</li>
       <pre>&lt;navigator app-id="wx91d27dbf599dff74" target="miniProgram"&gt;To JD&lt;/navigator&gt;</pre>
-      <li>跳转到标签页 - 指定open-type</li>
+      <li>跳转到标签页 - 指定 open-type</li>
       <pre>&lt;navigator url="../photo/photo" open-type="switchTab"&gt;To Tab Photo &lt;/navigator&gt;</pre>
-      <li>后退1页 - 省略delta</li>
+      <li>后退1页 - 省略 delta</li>
       <pre>&lt;navigator open-type="navigate"&gt;Back&lt;/navigator&gt;</pre>
     </ul>
     <h3>带参导航</h3>
     <ol>
       <li>拼接参数 - 在路径 url 后面以值对 key-value 的形式拼接参数</li>
-      <p>参数和url之间使用 ? 连接</p>
+      <p>参数和 url 之间使用 ? 连接</p>
       <p>多个参数以 & 分隔</p>
       <p>静态数据 - url?name=value&...</p>
       <pre>
@@ -92,10 +92,10 @@
       <p>动态数据 - 使用数据绑定</p>
       <pre>
 &lt;navigator url="../test/test?name={{uname}}"&gt;To Page Test&lt;/navigator&gt;</pre>
-      <li>目标页获取参数 - 传递的参数在目标页的生命周期函数 onLoad 中通过形参 option 获取</li>
+      <li>目标页获取参数 - 传递的参数在目标页的生命周期函数 onLoad 中通过形参 options 获取</li>
       <pre>
-onLoad(option) {
-    console.log(option);
+onLoad(options) {
+    console.log(options);
 }</pre>
     </ol>
     <div class="tips">

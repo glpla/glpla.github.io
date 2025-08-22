@@ -17,8 +17,13 @@
   </header>
   <section>
     <h3>案例分析</h3>
-    <ul>
-      <li>app.js - 启动时 onLaunch 拉取本地缓存的日志记录</li>
+    <ol>
+      <li>app.js
+        <p>启动时 onLaunch 拉取本地缓存的日志记录</p>
+        <p>获取本地存储；如果不存在或为空则为空数组</p>
+        <p>在头部追加一条记录，以当前时间作为数据 - 时间戳</p>
+        <p>更新/设置本地存储</p>
+      </li>
       <pre>
 const logs = wx.getStorageSync('logs') || []
 logs.unshift(Date.now())
@@ -33,7 +38,7 @@ this.setData({
         }
     })
 })</pre>
-    </ul>
+    </ol>
     <div class="tips">早期版本的API，复合数据的保存和存储需要经过序列化 JSON.stringify 和解析 JSON.parse；现在可以直接使用</div>
     <h3>简介</h3>
     <ul>

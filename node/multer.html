@@ -126,11 +126,33 @@ const upload = multer({
       <p>. req.file 可以获取到具体的文件信息</p>
       <pre>
 app.post('/upload', upload.single('avatar'), (req, res) => {
-  res.send({
+  res.json({
     err: 0,
     url: 'http://127.0.0.1:3000/upload/' + req.file.filename
   })
 })</pre>
+      <p>. 加入容错处理</p>
+      <pre>
+router.post("/upload", upload.single("avatar"), (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        err: 1,
+        message: '文件上传失败'
+      });
+    }
+    
+    res.json({
+      err: 0,
+      url: "http://127.0.0.1:3000/upload/" + req.file.filename,
+    });
+  } catch (error) {
+    res.status(500).json({
+      err: 1,
+      message: '服务器内部错误'
+    });
+  }
+});</pre>
       <p>. 默认情况下，只是简单的将文件上传到指定目录；不会解析文件信息，如文件名或文件后缀</p>
       <pre>
 {
@@ -168,7 +190,7 @@ const PORT = 3000
 app.use(express.static('./public'));
 
 app.post('/upload', upload.single('avatar'), (req, res) => {
-  res.send({
+  res.json({
     err: 0,
     url: 'http://127.0.0.1:3000/upload/' + req.file.filename
   })
@@ -225,7 +247,7 @@ app.listen(port, () => {
       <li>server</li>
       <pre>
 router.post('/mix', upload.single('uimg'), (req, res) => {
-  res.send({ msg: 'ok' })
+  res.json({ msg: 'ok' })
 })</pre>
     </ul>
     <div>[<span class="iconfont icon-keyboard"></span>] 封装 multer 为 upload.js</div>
@@ -302,7 +324,7 @@ module.exports = upload</pre>
       <li>server</li>
       <pre>
 router.post('/text', upload.none(), (req, res) => {
-  res.send({ msg: 'ok' })
+  res.json({ msg: 'ok' })
 })</pre>
     </ul>
   </section>
@@ -314,7 +336,7 @@ router.post('/text', upload.none(), (req, res) => {
       <pre>&lt;input type="file" name="imgs" multiple&gt;</pre>
       <pre>
 router.post('/array', upload.array('imgs', 9), (req, res) => {
-  res.send({
+  res.json({
     err: 0,
     msg: 'ok',
     data: req.body,

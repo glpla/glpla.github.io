@@ -22,7 +22,33 @@
       <li>需要导出 exports 才能被使用</li>
       <li>需要引入 require 采能使用</li>
     </ul>
-    <div>[<span class="iconfont icon-keyboard"></span>] 封装购物车数据统计</div>
+    <div>[<span class="iconfont icon-keyboard"></span>] 时间格式化 formatTime.js</div>
+    <ul>
+      <li>创建模块文件 .js</li>
+      <li>业务逻辑</li>
+      <li>导出模块</li>
+      <pre>
+const formatTime = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+
+  return `${[year, month, day].map(formatNumber).join('/')} ${[hour, minute, second].map(formatNumber).join(':')}`
+}
+
+const formatNumber = n => {
+  n = n.toString()
+  return n[1] ? n : `0${n}`
+}
+
+module.exports = {
+  formatTime
+}</pre>
+    </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 封装购物车数据统计 calcCarts.js</div>
     <ul>
       <li>统计数量</li>
       <li>统计总价</li>
@@ -63,6 +89,23 @@ onLoad(){
   this.setData({
     carts: calcCarts(this.data.carts)
   })
+}</pre>
+    </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 公共库 common.js - 手动封装随机id</div>
+    <ul>
+      <li>根据需要添加其它业务</li>
+      <li>nanoid X</li>
+      <li>uuid X</li>
+      <li>生成 0-1 之间的随机小数 0.729483294823</li>
+      <li>转换为36进制字符串 0.q8x7n2k4m9</li>
+      <li>去掉了 0. 结果 q8x7n2k4m9</li>
+      <pre>
+const generateID = () => {
+  return new Date().getTime().toString(36) + Math.random().toString(36).substr(2)
+}
+
+module.exports = {
+  generateID
 }</pre>
     </ul>
   </section>

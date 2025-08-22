@@ -75,16 +75,22 @@ Page({
       <li>逻辑中的数据变化会影响视图 / <a href="./wxml.html">结构 wxml</a> 中绑定数据部分的更新</li>
       <li>接受两个参数：要更新的数据对象和可选的回调函数（在数据更新完成并且页面渲染结束后执行）</li>
       <li>如果回调函数中，需要渲染页面/更新，则应考虑数据合并后一次更新</li>
+      <li>修改简单数据</li>
       <pre>
-// 修改简单数据
 this.setData({
   msg: 'welcome back'
 })
-
-//修改复杂数据；使用了回调函数 cb
+</pre>
+      <li>修改复杂数据；增加或修改属性；通过扩展运算符，使用了回调函数 cb</li>
+      <pre>
+this.setData({
+  userInfo": {...userInfo, uage:24}
+}, cb)</pre>
+      <li>修改复杂数据；增加或修改属性；路径写法，更简洁 <span class="iconfont icon-dianzan"></span></li>
+      <pre>
 this.setData({
   "userInfo.uage": 24
-}, cb)</pre>
+})</pre>
     </ul>
   </section>
   <div id="footer"></div>

@@ -172,22 +172,27 @@
     <div class="tips">如果不限高，不使用 scroll-view 也可以</div>
     <div>[<span class="iconfont icon-keyboard"></span>] 联动导航 -水平</div>
     <ul>
-      <li>滚动视图scroll-view和轮播swiper配合使用</li>
+      <li>滚动视图 scroll-view 和轮播 swiper 配合使用</li>
       <li>单击滚动导航项，轮播跳转到指定项</li>
       <li>拖动改变轮播时，滚动导航项也相应改变；且当前导航项样式高亮</li>
-      <li>滚动导航项使用自定义属性data-获取各项的索引</li>
-      <li>轮播使用改变时间获取当前current</li>
+      <li>滚动导航项使用自定义属性 data- 获取各项的索引</li>
+      <li>轮播使用改变时间获取当前 current</li>
+      <li>navs 和 swipers 数据</li>
       <pre>
-&lt;scroll-view scroll-x scroll-into-view="{{curIndex}}"&gt;
-    &lt;view class="nav"&gt;
-        &lt;view class="item {{index==curIndex?'active':''}}" wx:for="{{nav}}" wx:key="index" data-ind="{{item}}" bind:tap="selectItem"&gt;
-        {{item}}
+&lt;scroll-view scroll-x scroll-with-animation scroll-into-view="nav{{curIndex}}"&gt;
+    &lt;view class="nav flex"&gt;
+        &lt;view class="item {{index==curIndex?'active':''}}" 
+          wx:for="{{navs}}" wx:key="index" 
+          data-ind="{{index}}" 
+          id="nav{{index}}" 
+          bind:tap="selectItem"&gt;
+          {{item.title}}
         &lt;/view&gt;
     &lt;/view&gt;
 &lt;/scroll-view&gt;
 &lt;swiper current="{{curIndex}}" bindchange="changeItem" circular&gt;
-    &lt;swiper-item class="swiper-item" wx:for="{{10}}" wx:key="index"&gt;
-    {{item}}
+    &lt;swiper-item class="swiper-item" wx:for="{{swipers}}" wx:key="index"&gt;
+      {{item}}
     &lt;/swiper-item&gt;
 &lt;/swiper&gt;</pre>
       <pre>
@@ -195,7 +200,7 @@ selectItem(e:any) {
     this.setData({
         curIndex: e.target.dataset.ind
     })
-  },
+},
 changeItem(e:any){
     this.setData({
         curIndex: e.detail.current

@@ -25,28 +25,27 @@
       <li>为 <span class="warn">value</span> 添加 model 修饰符即可实现双向数据绑定</li>
       <li>可以绑定的熟悉有：value、checked、selected 等</li>
       <li>省略了触发事件，如 bindchange 或 bindinput</li>
-      <li>只能简单属性绑定 - 单一字段</li>
+      <li>目前只支持绑定 <span class="warn">简单数据类型</span> （如字符串、数字、布尔值），不支持对象（Object）或数组（Array）等复杂数据结构</li>
       <li>借助调试器的 AppData 查看绑定情况</li>
+      <li>推荐这些元素使用：input 的 value 是字符串 string；checkbox 的 checked 是布尔值 boolean；slider 的 value 是数字 number</li>
     </ul>
     <div>[<span class="iconfont icon-keyboard"></span>] 数据提交 - 使用双向数据绑定和自定义事件实现；提交了绑定的数据，相当于提交了表单数据</div>
     <ul>
       <li>准备数据：通常以对象的形式出现，便于提交</li>
       <pre>
 data: {
-    user:{
-        uname:'gl'
-    }
+    uname:''
 }</pre>
       <li>调整结构：抛弃传统的表单结构，使用普通结构，按钮也不需要指定表单类型</li>
       <pre>
 &lt;view class="form"&gt;
-    &lt;input type="text" name='uname' model:value="{{user.uname}}" /&gt;
+    &lt;input type="text" model:value="{{uname}}" /&gt;
     &lt;button bind:tap="submitModel"&gt;submit&lt;/button&gt;
 &lt;/view&gt;</pre>
-      <li>自定义事件：提交时，将 data 中整个 user 对象提交给服务器端</li>
+      <li>自定义事件：提交时，将 data 中 uname 提交给服务器端</li>
       <pre>
 submitModel() {
-    console.log(this.data.user);
+    console.log(this.data.uname);
 }</pre>
     </ul>
   </section>
@@ -80,7 +79,7 @@ ipt(e) {
       <pre>&lt;input type="text" model:value='{{obj.name}}' /&gt;</pre>
       <li>失败：仅实现逻辑层到视图层的绑定；Two-way binding does not support complex data paths currently. This two-way binding is
         ignored.</li>
-      <li>调整：还原为普通事件流bindchange</li>
+      <li>调整：还原为普通事件流 bindchange</li>
       <pre>&lt;input type="text" value='{{obj.name}}' bindinput="getName"/&gt;</pre>
       <pre>
 getName(e) {
@@ -108,7 +107,7 @@ getName(e) {
     </ul>
     <div>[<span class="iconfont icon-keyboard"></span>] 联动导航 - 改进方案</div>
     <ul>
-      <li>滚动视图scroll-view和轮播swiper配合使用</li>
+      <li>滚动视图 scroll-view 和轮播 swiper 配合使用</li>
       <pre>cur: 1</pre>
       <pre>
 &lt;scroll-view class="wrap" scroll-x scroll-with-animation model:scroll-into-view="id{{cur}}"&gt;

@@ -570,6 +570,8 @@ textarea{
       <li>块元素 block</li>
       <li>从底部弹起的滚动选择器，如：时间选择器、日期选择器、地区选择器</li>
       <li>除了下述通用的属性外，不同的 mode，picker 拥有不同的属性；如时间类的都有开始 start、结束 end 等</li>
+      <li>内部结构和样式受到一定限制，不能像普通 view 组件那样直接使用弹性盒子 Flexbox来控制其内部元素的排列</li>
+      <li>在内部增加一个子容器，对该容器使用 Flex，见后续案例</li>
       <table>
         <thead>
           <tr>
@@ -666,6 +668,25 @@ selRegion(e){
         region: e.detail.value
     })
 }</pre>
+    </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 样式</div>
+    <ul>
+      <li>无效</li>
+      <pre>
+&lt;picker class='flex'&gt;
+    &lt;text&gt;cont&lt;/text&gt;
+    &lt;text&gt;cont&lt;/text&gt;
+    &lt;text&gt;cont&lt;/text&gt;
+&lt;/picker&gt;</pre>
+      <li>有效 - 增加容器元素；思路同 <a href="./scrollview.html">&lt;scroll-view&gt;</a></li>
+      <pre>
+&lt;picker &gt;
+  &lt;view class='flex'&gt;
+    &lt;text&gt;cont&lt;/text&gt;
+    &lt;text&gt;cont&lt;/text&gt;
+    &lt;text&gt;cont&lt;/text&gt;
+  &lt;/view&gt;
+&lt;/picker&gt;</pre>
     </ul>
     <h3><a href="https://developers.weixin.qq.com/miniprogram/dev/component/slider.html">&lt;slider&gt;</a></h3>
     <ul>
