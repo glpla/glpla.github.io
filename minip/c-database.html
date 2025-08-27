@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>云数据库 Database</title>
+  <link rel="stylesheet" href="/css/common2025.css">
+</head>
+
+<body>
+  <header>
+    <h1>云数据库</h1>
+    <span>&commat;Database</span>
+  </header>
+  <section>
+    <h3>Data</h3>
+    <ul>
+      <li>独立的数据对象</li>
+      <li>先创建集合 Collection，再创建记录 Record</li>
+      <li>根据需求配置权限；部分权限需要付费</li>
+      <li>可以一条记录一条记录的添加；也可以导入数据 - 推荐</li>
+      <li>导入 .json 文件时，需要移除数组符号和每个对象之间的逗号分隔符；.json 文件会报格式错误，可以忽悠；导入后再还原文件即可</li>
+      <li>更多信息，请访问 <a
+          href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/guide/database.html">云数据库</a>
+      </li>
+    </ul>
+    <h3>Process</h3>
+    <ol>
+      <li>获取数据库的引用；可以指定云环境ID</li>
+      <pre>const db = wx.cloud.database()</pre>
+      <pre>
+const db = wx.cloud.database({
+  env: 'test'
+})</pre>
+      <li>获取集合的引用</li>
+      <pre>const todos = db.collection('todos')</pre>
+      <li>操作集合：增删改查</li>
+    </ol>
+  </section>
+  <h2>Operation</h2>
+  <section>
+    <div>. 支持 Callback 和 Promise 俩种风格</div>
+    <h3>get()</h3>
+    <ul>
+      <li>获取单个记录或集合中多个记录</li>
+      <li>使用 doc() 指定 _id 用来获取单个记录</li>
+      <pre>db.collection('todos').doc('todo-id').get({})</pre>
+      <pre>db.collection('todos').doc('todo-id').get().then().finally()</pre>
+      <li>获取一个集合下的所有数据；默认情况下，最多返回20条记录</li>
+      <pre>db.collection('todos').get().then().finally()</pre>
+      <li>使用 where() 方法配合查询指令或逻辑指令指定查询条件；指令使用 _. 前缀</li>
+      <pre>db.collection('todos').where({price: _.gt(30)}).get().then().finally()</pre>
+      <pre>db.collection('todos').where({price: _.in[10, 20, 30]}).get().then().finally()</pre>
+      <li>使用 limit() 方法调整返回记录数；但小程序端不能超过 20 条，云函数端不能超过 100 条</li>
+      <pre>db.collection('todos').where().limit().get().then().finally()</pre>
+      <table>
+        <caption>查询指令</caption>
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>desc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ep</td>
+            <td>等于</td>
+          </tr>
+          <tr>
+            <td>neq</td>
+            <td>不等于</td>
+          </tr>
+          <tr>
+            <td>lt</td>
+            <td>小于</td>
+          </tr>
+          <tr>
+            <td>lte</td>
+            <td>小于或等于</td>
+          </tr>
+          <tr>
+            <td>gt</td>
+            <td>大于</td>
+          </tr>
+          <tr>
+            <td>gte</td>
+            <td>大于或等于</td>
+          </tr>
+          <tr>
+            <td>in</td>
+            <td>字段值在给定数组中</td>
+          </tr>
+          <tr>
+            <td>nin</td>
+            <td>字段值不在给定数组中</td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <caption>逻辑指令</caption>
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>desc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>add</td>
+            <td>与</td>
+          </tr>
+          <tr>
+            <td>or</td>
+            <td>或</td>
+          </tr>
+        </tbody>
+      </table>
+      <li>其它</li>
+      <li>分页查询；大量数据时使用</li>
+      <li>尽量使用 async-await，避免事件不同步造成数据异常，如为空</li>
+      <li>async/await 在 app.js 的 onLaunch 中不会阻塞页面的加载；请在使用数据的页面加载并更新 app.js 的数据</li>
+      <li>callback 方式</li>
+      <pre>
+const db = wx.cloud.database()
+db.collection('products').limit(100).get({
+  success: (res) => {
+    console.log(res.data);
+  },
+  fail: (err) => {
+    console.error(err)
+  },
+  complete: () => {
+    wx.hideLoading()
+  }
+})</pre>
+      <li>async-await 方式 - 先封装再调用</li>
+      <pre>
+onShow() {
+  this.loadProducts();
+},
+async loadProducts() {
+  try {
+    const db = wx.cloud.database()
+    const res = await db.collection('products').limit(100).get()
+    console.log(res.data);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    console.error('done');
+  }
+}</pre>
+    </ul>
+    <div class="tips">
+      onShow()不需要使用 async-await修饰
+      避免阻塞页面加载：让用户能更快看到界面 <br>
+      符合小程序最佳实践：数据加载与界面渲染分离 <br>
+      更好的用户体验：渐进式加载数据
+    </div>
+    <h3>add()</h3>
+    <ul>
+      <li>插入数据</li>
+      <li>成功后返回新记录的 _id</li>
+      <li>Callback</li>
+      <pre>
+db.collection('todos').add({
+  data: {
+    // _id: 由数据库自动分配
+    // String
+    description: "learn cloud database",
+    // Date
+    due: new Date("2018-09-01"),
+    // Array
+    tags: [
+      "cloud",
+      "database"
+    ],
+    // Geo
+    location: new db.Geo.Point(113, 23),
+    // Boolean
+    done: false
+  },
+  success: function(res) {
+    // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
+    console.log(res)
+  },
+  fail: function(err) {
+    console.error(err)
+  },
+  complete: function() {
+    console.log('done')
+  }
+})</pre>
+      <li>Promise</li>
+      <pre>
+db.collection('todos').add({
+  data: {
+    //
+  }
+})
+.then(res => {
+  console.log(res);
+})
+.finally(()=>{
+  console.log('done');
+})</pre>
+    </ul>
+    <h3>update()</h3>
+    <ul>
+      <li>局部更新一个或多个记录</li>
+      <li>使用 data() 指定要更新的字段和值</li>
+      <li>可以使用更新指令更新数据，如inc、push等</li>
+      <pre>
+db.collection('todos').doc('todo-id').update({
+  data: {
+    done: true
+  }
+})</pre>
+      <pre>
+db.collection('todos').doc('todo-id').update({
+  data: {
+    price: _inc(1)
+  }
+})</pre>
+      <pre>
+db.collection('todos').doc('todo-id').update({
+  data: {
+    price: _mul(0.8)
+  }
+})</pre>
+      <li>替换更新一个记录，请使用 set()</li>
+    </ul>
+  </section>
+  <div id="footer"></div>
+  <script src="/utils/custom/footer.js"></script>
+</body>
+
+</html>
