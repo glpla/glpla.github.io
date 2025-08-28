@@ -377,7 +377,7 @@
     <div class="mt2">1. 概述 Overview</div>
     <ul>
       <li>容器组件</li>
-      <li>可以容纳更多子项/内容</li>
+      <li>可以容纳更多子项/内容；子项可以是任意元素；但是不能嵌套使用 &lt;scroll-view&gt;</li>
       <li>当子项的尺寸总和超过容器时，只显示容器区域的子项</li>
       <li>容器边缘的子项会显示部分，以便提示用户操作这里还有更多；或者使用符号提示</li>
       <li>左右或上下滑动时，可以显示更多内容/超出容器的子项</li>
@@ -386,9 +386,6 @@
       <li>垂直方向，要显式的指定容器的高度</li>
       <li>移动端特有 <span class="iconfont icon-doubt" title="移动端和桌面端的特点或区别?"></span></li>
       <li>应用：图文内容展示、轮播、横向导航栏、商品、通信录和留言等长列表展示</li>
-      <li><a class="link" href="https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html"
-          target="_blank">Skyline</a>
-        模式支持更多属性，如滚动对齐</li>
     </ul>
     <div class="mt2">2. 常见应用 Application</div>
     <ul>
@@ -410,18 +407,25 @@
         <figcaption>个税</figcaption>
       </figure>
       <figure>
-        <img class="br" src="./imgs/sc4.png" alt="">
+        <img class="br" src="./imgs/demo4.png" alt="">
         <figcaption>商品列表</figcaption>
       </figure>
       <figure>
-        <img class="br" src="./imgs/sc5.png" alt="">
+        <img class="br" src="./imgs/demo5.png" alt="">
         <figcaption>商品列表</figcaption>
+      </figure>
+      <figure>
+        <img class="br" src="./imgs/demo6.jpg" alt="">
+        <figcaption>微信通信录</figcaption>
       </figure>
     </ul>
     <div class="mt2">3. 基本使用 Usage</div>
     <ul>
       <li>闭合标签</li>
       <li>配合属性，可以定制功能丰富的业务模块</li>
+      <li><a class="link" href="https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html"
+          target="_blank">Skyline</a>
+        模式支持更多属性，如滚动对齐</li>
       <pre>
 &lt;scroll-view&gt;
   // 子项内容
@@ -437,11 +441,11 @@
         <tbody>
           <tr>
             <td>scroll-x</td>
-            <td>允许横向滚动；最好也显式指定宽度；谨慎使用 % 宽度</td>
+            <td>允许横向滚动；布尔 <span class="iconfont icon-doubt" title="如何优雅地使用布尔属性?"></span>；最好也显式指定宽度；谨慎使用 % 宽度</td>
           </tr>
           <tr>
             <td>scroll-y</td>
-            <td>允许纵向滚动；应显式指定高度</td>
+            <td>允许纵向滚动；布尔；应显式指定高度</td>
           </tr>
           <tr>
             <td>scroll-into-view</td>
@@ -449,7 +453,7 @@
           </tr>
           <tr>
             <td>scroll-with-animation</td>
-            <td>使用动画过渡</td>
+            <td>使用动画过渡；布尔</td>
           </tr>
           <tr>
             <td>scroll-top</td>
