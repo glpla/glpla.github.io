@@ -20,10 +20,35 @@
       --top: -300px;
       background-image: linear-gradient(rgb(0, 0, 0, 0), rgb(0, 0, 0, 0.4)), url(https://www.nfu.edu.cn/images/24/08/23/1ydn5sp078/banner1.jpg);
     }
+
+    .br img {
+      border-radius: 30px;
+      border: 1px solid #eee;
+    }
   </style>
 </head>
 
-<body>
+<body class="lock">
+  <div class="modal" id="modal">
+    <div class="modal-cont">
+      <img src="https://www.nfu.edu.cn/images/logo.png" alt="">
+      <div class="modal-code mt2" id="modal-code">
+        <figure>
+          <img src="../imgs/qrcode_glpla.github.io.png" alt="">
+          <figcaption>试讲</figcaption>
+        </figure>
+        <figure>
+          <img src="../imgs/qrcode_glpla.github.io.png" alt="">
+          <figcaption>课程</figcaption>
+        </figure>
+        <div class="modal-close" id="modal-close">&times;</div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-aside">
+    <img src="../imgs/qrcode_glpla.github.io.png" alt="">
+    <img src="../imgs/qrcode_glpla.github.io.png" alt="">
+  </div>
   <header>
     <nav class="nav">
       <a class="logo" href="https://www.nfu.edu.cn" target="_blank">https://www.nfu.edu.cn</a>
@@ -225,7 +250,7 @@
       <div class="cont-wrap">
         <div class="cont">
           <h3 class="border">科目 Subject</h3>
-          <p>移动开发</p>
+          <p><a href="../minip/index.html" target="_blank">移动WEB开发 <span class="iconfont icon-share"></span></a></p>
         </div>
         <div class="icon-box">
           <span class="iconfont icon-book"></span>
@@ -243,7 +268,7 @@
       <div class="cont-wrap">
         <div class="cont">
           <h3 class="border">内容 Content</h3>
-          <p>滚动视图 &lt;scroll-view&gt;</p>
+          <p>滚动视图 &lt;scroll-view&gt; <span class="iconfont icon-share"></span></p>
         </div>
         <div class="icon-box">
           <span class="iconfont icon-bianjiwenben"></span>
@@ -336,7 +361,8 @@
     <h3 class="highlight">[ 课前准备 Preparation ]</h3>
     <ul>
       <li>课程资源 <a class="link" target="_blank" href="../minip/scrollview.html">滚动视图 &lt;scroll-view&gt;</a></li>
-      <li>开发环境 <a class="link" target="_blank" href="../web/vscode.html">Vs Code</a></li>
+      <li>开发环境 <a class="link" target="_blank"
+          href="https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html">微信开发者工具</a></li>
       <li>课堂管理 <a class="link" target="_blank"
           href="https://passport2.chaoxing.com/login?fid=&newversion=true&refer=https%3A%2F%2Fi.chaoxing.com">学习通</a>、<a
           class="link" target="_blank" href="https://www.ketangpai.com/#/login">课堂派</a></li>
@@ -348,47 +374,94 @@
       <li>&lt;swiper&gt;</li>
     </ul>
     <h2 class="highlight">[ 理论讲解 Lecture on Theory ]</h2>
+    <div class="mt2">1. 概述 Overview</div>
     <ul>
-      <li>容纳更多内容</li>
+      <li>容器组件</li>
+      <li>可以容纳更多子项/内容</li>
+      <li>当子项的尺寸总和超过容器时，只显示容器区域的子项</li>
+      <li>容器边缘的子项会显示部分，以便提示用户操作这里还有更多；或者使用符号提示</li>
+      <li>左右或上下滑动时，可以显示更多内容/超出容器的子项</li>
+      <li>可以设计为水平滚动或垂直滚动，不能兼得</li>
+      <li>水平方向，需要确保所有子项在一行 <span class="iconfont icon-doubt" title="如何让多个元素在一行显式?"></span></li>
+      <li>垂直方向，要显式的指定容器的高度</li>
+      <li>移动端特有 <span class="iconfont icon-doubt" title="移动端和桌面端的特点或区别?"></span></li>
+      <li>应用：图文内容展示、轮播、横向导航栏、商品、通信录和留言等长列表展示</li>
       <li><a class="link" href="https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html"
           target="_blank">Skyline</a>
         模式支持更多属性，如滚动对齐</li>
     </ul>
-    <table>
-      <caption>通用属性</caption>
-      <thead>
-        <tr>
-          <th style="width: 30%;">item</th>
-          <th>desc</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>scroll-x</td>
-          <td>允许横向滚动；最好也显式指定宽度；谨慎使用 % 宽度</td>
-        </tr>
-        <tr>
-          <td>scroll-y</td>
-          <td>允许纵向滚动；应显式指定高度</td>
-        </tr>
-        <tr>
-          <td>scroll-into-view</td>
-          <td>滚动到值为 id 的某子元素；id 不能以数字开头</td>
-        </tr>
-        <tr>
-          <td>scroll-with-animation</td>
-          <td>使用动画过渡</td>
-        </tr>
-        <tr>
-          <td>scroll-top</td>
-          <td>设置竖向滚动条位置</td>
-        </tr>
-        <tr>
-          <td>bindscroll</td>
-          <td>滚动时触发</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="mt2">2. 常见应用 Application</div>
+    <ul>
+      <li>常见APP的设计中，都有它的影子，如下面各图红色覆盖区域 <span class="iconfont icon-doubt" title="你还在哪些APP中见过?"></span></li>
+      <figure>
+        <img src="./imgs/demo0.png" alt="">
+        <figcaption>京东</figcaption>
+      </figure>
+      <figure>
+        <img src="./imgs/demo1.png" alt="">
+        <figcaption>淘宝</figcaption>
+      </figure>
+      <figure>
+        <img src="./imgs/demo2.png" alt="">
+        <figcaption>支付宝</figcaption>
+      </figure>
+      <figure>
+        <img src="./imgs/demo3.png" alt="">
+        <figcaption>个税</figcaption>
+      </figure>
+      <figure>
+        <img src="./imgs/sc4.png" alt="">
+        <figcaption>商品列表</figcaption>
+      </figure>
+      <figure>
+        <img src="./imgs/sc5.png" alt="">
+        <figcaption>商品列表</figcaption>
+      </figure>
+    </ul>
+    <div class="mt2">3. 基本使用 Usage</div>
+    <ul>
+      <li>闭合标签</li>
+      <li>配合属性，可以定制功能丰富的业务模块</li>
+      <pre>
+&lt;scroll-view&gt;
+  // 子项内容
+&lt;/scroll-view&gt;</pre>
+      <table>
+        <caption>通用属性</caption>
+        <thead>
+          <tr>
+            <th style="width: 30%;">item</th>
+            <th>desc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>scroll-x</td>
+            <td>允许横向滚动；最好也显式指定宽度；谨慎使用 % 宽度</td>
+          </tr>
+          <tr>
+            <td>scroll-y</td>
+            <td>允许纵向滚动；应显式指定高度</td>
+          </tr>
+          <tr>
+            <td>scroll-into-view</td>
+            <td>滚动到值为 id 的某子元素；id 不能以数字开头</td>
+          </tr>
+          <tr>
+            <td>scroll-with-animation</td>
+            <td>使用动画过渡</td>
+          </tr>
+          <tr>
+            <td>scroll-top</td>
+            <td>设置竖向滚动条位置</td>
+          </tr>
+          <tr>
+            <td>bindscroll</td>
+            <td>滚动时触发</td>
+          </tr>
+        </tbody>
+      </table>
+    </ul>
     <table>
       <caption>WebView 特有属性</caption>
       <thead>
@@ -409,23 +482,27 @@
       </tbody>
     </table>
     <h3 class="highlight">[ 案例实操 Drill ]</h3>
-    <div>[<span class="iconfont icon-black-keyboard-with-white-keys"></span>] 水平滚动</div>
-    <ol>
-      <li>效果参考</li>
-      <figure>
-        <img src="./imgs/sc0.png" alt="">
-        <figcaption>水平滚动左侧</figcaption>
-      </figure>
-      <figure>
-        <img src="./imgs/sc1.png" alt="">
-        <figcaption>水平滚动右侧</figcaption>
-      </figure>
-      <li>实现方案
-        <div>2.1 小程序方案</div>
-        <p>指定水平方向 scroll-x</p>
-        <p>启用弹性盒子 enable-flex 属性</p>
-        <p>直接添加子项 item</p>
-        <pre>
+    <figure>
+      <img src="../minip/imgs/scroll0.png" alt="">
+      <figcaption>案例实施导图</figcaption>
+    </figure>
+    <div class="mt2">[<span class="iconfont icon-black-keyboard-with-white-keys"></span>] 水平滚动</div>
+    <div class="mt2">1. 效果参考</div>
+    <figure>
+      <img src="./imgs/sc0.png" alt="">
+      <figcaption>水平滚动左侧</figcaption>
+    </figure>
+    <figure>
+      <img src="./imgs/sc1.png" alt="">
+      <figcaption>水平滚动右侧</figcaption>
+    </figure>
+    <div class="mt2">2. 实现方案</div>
+    <div>方案1 小程序方案</div>
+    <ul>
+      <li>指定水平方向 scroll-x</li>
+      <li>启用弹性盒子 enable-flex 属性</li>
+      <li>直接添加子项 item</li>
+      <pre>
 &lt;scroll-view class="scroll-view" scroll-x enable-flex&gt;
   &lt;view class="item"&gt;Lorem.&lt;/view&gt;
   &lt;view class="item"&gt;Iure?&lt;/view&gt;
@@ -433,9 +510,9 @@
   &lt;view class="item"&gt;Aspernatur!&lt;/view&gt;
   &lt;view class="item"&gt;Ipsam?&lt;/view&gt;
 &lt;/scroll-view&gt;</pre>
-        <p>并不是真正的弹性盒子</p>
-        <p>需要单独给每个子项 item 增加分隔</p>
-        <pre>
+      <li>并不是真正的弹性盒子</li>
+      <li>需要单独给每个子项 item 增加间隔 <span class="iconfont icon-doubt" title="如何去除最后一个子项的右边空白?"></span></li>
+      <pre>
 .scroll-view {
   display: flex;
   gap: 20rpx;// 无效
@@ -447,12 +524,13 @@
   color: #fff;
   aspect-ratio: 16/9;
   border-radius: 20rpx;
-  margin-right: 20rpx;// 额外指定
+  margin-right: 20rpx;// 额外指定间隔
 }</pre>
-        <div>[<span class="iconfont icon-doubt"></span>] 如何去除最后一个子项的右边空白?</div>
-        <div>2.2 推荐方案</div>
-        <p>结构：增加一个容器 wrap</p>
-        <pre>
+    </ul>
+    <div class="mt2">方案2 推荐方案</div>
+    <ul>
+      <li>结构：增加一个容器 wrap</li>
+      <pre>
 &lt;scroll-view class="scroll-view" scroll-x&gt;
   &lt;view class="wrap"&gt;
     &lt;view class="item"&gt;Lorem.&lt;/view&gt;
@@ -462,7 +540,7 @@
     &lt;view class="item"&gt;Ipsam?&lt;/view&gt;
   &lt;/view&gt;
 &lt;/scroll-view&gt;</pre>
-        <p>样式：更简单；其它UI请自行设计并完成</p>
+      <li>样式：更简单；其它UI请自行设计并完成</li>
       </li>
       <pre>
 .wrap {
@@ -476,22 +554,28 @@
   aspect-ratio: 16/9;
   border-radius: 20rpx;
 }</pre>
-    </ol>
-    <div>[<span class="iconfont icon-black-keyboard-with-white-keys"></span>] 垂直滚动</div>
+    </ul>
+    <div class="mt2">方案3 浮动 float 方案</div>
+    <div>. 自行体会完成</div>
+    <div class="mt2">方案4 行内 inline 方案</div>
+    <div>. 自行体会完成</div>
+    <div class="mt2">方案5 行内块 inline-block 方案</div>
+    <div>. 自行体会完成</div>
+    <div class="mt2">[<span class="iconfont icon-black-keyboard-with-white-keys"></span>] 垂直滚动</div>
+    <div class="mt2">1. 效果参考</div>
+    <figure>
+      <img src="./imgs/sc2.png" alt="">
+      <figcaption>垂直滚动顶部</figcaption>
+    </figure>
+    <figure>
+      <img src="./imgs/sc3.png" alt="">
+      <figcaption>垂直滚动底部</figcaption>
+    </figure>
+    <div class="mt2">2. 代码参考</div>
     <ul>
-      <li>效果参考</li>
-      <figure>
-        <img src="./imgs/sc2.png" alt="">
-        <figcaption>垂直滚动顶部</figcaption>
-      </figure>
-      <figure>
-        <img src="./imgs/sc3.png" alt="">
-        <figcaption>垂直滚动底部</figcaption>
-      </figure>
-      <li>代码参考
-        <p>指定垂直方向 scroll-y</p>
-        <p>可以直接使用子项 item</p>
-        <pre>
+      <li>指定垂直方向 scroll-y</li>
+      <li>可以直接使用子项 item</li>
+      <pre>
 &lt;scroll-view class="scroll-view" scroll-y&gt;
   &lt;view class="item"&gt;Lorem.&lt;/view&gt;
   &lt;view class="item"&gt;Iure?&lt;/view&gt;
@@ -499,19 +583,85 @@
   &lt;view class="item"&gt;Aspernatur!&lt;/view&gt;
   &lt;view class="item"&gt;Ipsam?&lt;/view&gt;
 &lt;/scroll-view&gt;</pre>
-        <p>必须显式的指定容器的高度</p>
-        <p>子项的高度可以由内容撑开</p>
-        <pre>
+      <li>必须显式的指定容器的高度</li>
+      <li>子项的高度可以由内容撑开</li>
+      <pre>
 .scroll-view {
   height: 500rpx;
 }
 
 .item {
-  height: 60%;  
+  height: 60%;
 }</pre>
-      </li>
     </ul>
-    <div>[<span class="iconfont icon-bell"></span>] 请升级版本库</div>
+    <div class="mt2">[<span class="iconfont icon-black-keyboard-with-white-keys"></span>] 商品导航</div>
+    <ul>
+      <li>结构：内容区和导航区</li>
+      <li>内容区：使用 &lt;scroll-view&gt;；每个子项分配一个 id；不能以数值开头，通常使用自定义前缀和子项序号拼接，如 id='item12' 或 id='nav2'</li>
+      <li>导航区：可以使用普通元素或者使用 &lt;scroll-view&gt;，为每个子项添加事件，单击时，修改索引变量，触发内容区跳转到对应id的子项</li>
+      <li>类似的应用还有：留言定位、通信录定位</li>
+      <li>更多信息，请访问 <a class="link" target="_blank" href="../minip/wxml.html">列表渲染 wx:for</a>、<a class="link"
+          target="_blank" href="../minip/events.html">事件 Events</a> 和 <a class="link" target="_blank"
+          href="../minip/model.html">绑定 Model</a></li>
+    </ul>
+    <div class="mt2">1. 效果参考</div>
+    <figure class="br">
+      <img src="./imgs/sc6.png" alt="">
+      <img class="mt2" src="./imgs/sc7.png" alt="">
+      <figcaption>商品分类导航</figcaption>
+    </figure>
+    <div class="mt2">2. 实现方案</div>
+    <div class="mt2">方案1：1个 &lt;scroll-view&gt;、1个普通元素实现</div>
+    <ul>
+      <li>适合导航分类少的场景</li>
+      <li>详细实现，请参考学习通资料区的示例</li>
+      <li>参考结构 - 内容区使用了嵌套列表渲染；导航区绑定事件，单击时，修改序号</li>
+      <pre>
+&lt;view class="wrap"&gt;
+  &lt;view class="nav"&gt;
+    &lt;view class="nav-item {{curInd==index?'active':''}}" wx:for='{{navs}}' wx:key="id" bind:tap="toView" data-ind="{{index}}"&gt;{{item.tag}}&lt;/view&gt;
+  &lt;view&gt;
+  &lt;scroll-view class="cont" scroll-y scroll-into-view="nav{{curInd}}" scroll-with-animation&gt;
+    &lt;view class="cont-item" wx:for="{{products}}" wx:key='id' id='nav{{index}}'&gt;
+      &lt;view class="cont-title"&gt;- {{item.title}} -&lt;/view&gt;
+      &lt;view class="cont-inner-item" wx:for="{{item.lists}}" wx:key="id"&gt;{{item.title}}&lt;/view&gt;
+    &lt;/view&gt;
+  &lt;/scroll-view&gt;
+&lt;/view&gt;</pre>
+      <li>参考数据：序号、导航数据（1个示例节点）、商品数据（1个示例节点）</li>
+      <pre>
+data: {
+  curInd:0,
+  navs: [{
+    id: 0,
+    tag: '匀浆',
+    icon: 'icon-bread'
+  }],
+  products: [{
+    id: 0,
+    title:'匀浆',
+    lists: [{
+      id: 0,
+      image: '',
+      title: '匀浆膳',
+      desc: '',
+      price: ''
+    }]
+  }]
+}</pre>
+      <li>参考事件：单击导航项，获取当前序号</li>
+      <pre>
+toView(e){
+  let curInd=e.target.dataset.ind;
+  this.setData({
+    curInd
+  })
+}</pre>
+    </ul>
+    <div class="mt2">方案1：2个 &lt;scroll-view&gt; 实现</div>
+    <ul>
+      <li>适合导航分类多的场景</li>
+    </ul>
   </section>
   <section id="summary" class="nav-cont">
     <div>
@@ -523,6 +673,7 @@
       <li>组件 &lt;scroll-view&gt; 属性</li>
       <li>组件 &lt;scroll-view&gt; 基本使用 - 水平滚动和垂直滚动</li>
       <li>组件 &lt;scroll-view&gt; 交互 - 事件响应</li>
+      <div>[<span class="iconfont icon-bell"></span>] 请升级版本库</div>
     </ul>
     <h3 class="highlight"><span class="iconfont icon-lightbulb"></span> 现场点评 Comment</h3>
     <ul>
@@ -538,7 +689,7 @@
     </ul>
     <h3 class="highlight"><span class="iconfont icon-record"></span> 课后预习 Preview</h3>
     <ul>
-      <li>项目 - 婚礼邀请函</li>
+      <li>项目 - <a class="link" target="_blank" href="../minip/case2.html">婚礼邀请函</a></li>
     </ul>
     <h3 class="highlight"><span class="iconfont icon-plug"></span> 知识拓展 Extension</h3>
     <ul>
@@ -559,6 +710,8 @@
     const sections = document.querySelectorAll('section')
     const ham = document.querySelector('#ham');
     const close = document.querySelector('#close');
+    const modal = document.querySelector('#modal');
+    const modalClose = document.querySelector('#modal-close');
     const ul = document.querySelector('.nav ul');
     const init = () => {
       document.body.classList.remove('lock');
@@ -603,6 +756,10 @@
           navs[ind].classList.remove('nav-item-active')
         }
       })
+    })
+    modalClose.addEventListener('click', () => {
+      modal.classList.add('active')
+      document.body.classList.remove('lock');
     })
   </script>
 </body>
