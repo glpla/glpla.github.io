@@ -19,10 +19,30 @@
   </style>
 </head>
 
-<body>
+<body class="lock">
+  <div class="modal" id="modal">
+    <div class="modal-cont">
+      <img src="https://www.hkc.edu.cn/Public/Home/images/logo.png" alt="">
+      <div class="modal-code mt2" id="modal-code">
+        <div>
+          <img src="./imgs/nf_glpla.github.io.png" alt="">
+          <p class="mt2">试讲</p>
+        </div>
+        <div>
+          <img src="../imgs/qrcode_glpla.github.io.png" alt="">
+          <p class="mt2">课程</p>
+        </div>
+      </div>
+      <div class="modal-close" id="modal-close">&times;</div>
+    </div>
+  </div>
+  <div class="modal-aside">
+    <img src="./imgs/nf_glpla.github.io.png" alt="">
+    <img src="../imgs/qrcode_glpla.github.io.png" alt="">
+  </div>
   <header>
     <nav class="nav">
-      <a class="logo" href="https://www.hkc.edu.cn/">https://www.hkc.edu.cn/</a>
+      <a class="logo" target="_blank" href="https://www.hkc.edu.cn/">https://www.hkc.edu.cn/</a>
       <span class="iconfont icon-view-list-button ham" id="ham"></span>
       <ul>
         <li id="close" class="close"><span class="iconfont icon-close-button"></span></li>
@@ -434,6 +454,8 @@
     const sections = document.querySelectorAll('section')
     const ham = document.querySelector('#ham');
     const close = document.querySelector('#close');
+    const modal = document.querySelector('#modal');
+    const modalClose = document.querySelector('#modal-close');
     const ul = document.querySelector('.nav ul');
     const init = () => {
       document.body.classList.remove('lock');
@@ -478,6 +500,10 @@
           navs[ind].classList.remove('nav-item-active')
         }
       })
+    })
+    modalClose.addEventListener('click', () => {
+      modal.classList.add('active')
+      document.body.classList.remove('lock');
     })
   </script>
 </body>

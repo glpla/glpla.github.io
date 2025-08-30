@@ -46,14 +46,16 @@ const db = wx.cloud.database({
       <li>获取单个记录或集合中多个记录</li>
       <li>使用 doc() 指定 _id 用来获取单个记录</li>
       <pre>db.collection('todos').doc('todo-id').get({})</pre>
-      <pre>db.collection('todos').doc('todo-id').get().then().finally()</pre>
+      <pre>db.collection('todos').doc('todo-id').get().then().catch().finally()</pre>
       <li>获取一个集合下的所有数据；默认情况下，最多返回20条记录</li>
-      <pre>db.collection('todos').get().then().finally()</pre>
+      <pre>db.collection('todos').get().then().catch().finally()</pre>
       <li>使用 where() 方法配合查询指令或逻辑指令指定查询条件；指令使用 _. 前缀</li>
-      <pre>db.collection('todos').where({price: _.gt(30)}).get().then().finally()</pre>
-      <pre>db.collection('todos').where({price: _.in[10, 20, 30]}).get().then().finally()</pre>
+      <pre>db.collection('todos').where({price: _.gt(30)}).get().then().catch().finally()</pre>
+      <pre>db.collection('todos').where({price: _.in[10, 20, 30]}).get().then().catch().finally()</pre>
+      <li>全部获取时，控制台可能提示需要使用空的限定指定指令 where({})</li>
+      <pre>db.collection('todos').where({}).get().then().catch().finally()</pre>
       <li>使用 limit() 方法调整返回记录数；但小程序端不能超过 20 条，云函数端不能超过 100 条</li>
-      <pre>db.collection('todos').where().limit().get().then().finally()</pre>
+      <pre>db.collection('todos').where().limit().get().then().catch().finally()</pre>
       <table>
         <caption>查询指令</caption>
         <thead>

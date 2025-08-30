@@ -40,18 +40,18 @@
       <li>定时任务：执行定时或计划任务</li>
     </ul>
     <h3>云函数部署流程 Procedure</h3>
-    <ol>
-      <li>在微信开发者工具中创建云函数</li>
-      <li>编写云函数代码</li>
-      <li>右键云函数目录选择"上传并部署"</li>
-      <li>在客户端调用已部署的云函数</li>
-    </ol>
-    <h3>创建 Create</h3>
     <ul>
+      <li>在微信开发者工具中创建云函数 - 右键 cloudfunctions，新建 Node.js 云函数；以文件夹的形式创建，包括：</li>
+      <pre>
+config.json
+index.js
+package.json
+node_modules
+      </pre>
+      <li>函数模板默认内容如下</li>
       <li>event: 包含调用时传入的参数</li>
       <li>context: 包含调用上下文信息</li>
-    </ul>
-    <pre>
+      <pre>
 // 1. 引入云开发SDK
 const cloud = require('wx-server-sdk')
 
@@ -62,26 +62,19 @@ cloud.init({
 
 // 3. 导出main函数（云函数入口）
 exports.main = async (event, context) => {
-  // 函数逻辑
-  return result
-}</pre>
-    <div>[<span class="iconfont icon-keyboard"></span>] 示例</div>
-    <pre>
-const cloud = require('wx-server-sdk')
-cloud.init()
+  const wxContext = cloud.getWXContext()
 
-exports.main = async (event, context) => {
-  const { a, b } = event
-  const sum = a + b
-  
+  // 函数逻辑
   return {
-    sum: sum,
-    message: '计算完成'
+    event,
+    openid: wxContext.OPENID,
+    appid: wxContext.APPID,
+    unionid: wxContext.UNIONID,
   }
 }</pre>
-    <h3>调用 Call</h3>
-    <div>
-      <p>应用1：客户端调用</p>
+      <li>编写云函数代码</li>
+      <li>右键云函数目录选择"上传并部署"</li>
+      <li>在客户端调用已部署的云函数</li>
       <pre>
 // 调用云函数
 wx.cloud.callFunction({
@@ -98,7 +91,24 @@ wx.cloud.callFunction({
     console.error('调用失败', err)
   }
 })</pre>
-      <p>应用2：云函数间调用</p>
+      <li>其它：访问云数据库</li>
+      <pre>
+const cloud = require('wx-server-sdk')
+cloud.init()
+
+exports.main = async (event, context) => {
+  // 这里不需要使用 wx.cloud
+  const db = cloud.database()
+  
+  try {
+    // 查询数据
+    const result = await db.collection('users').get()
+    return result
+  } catch (error) {
+    return { error }
+  }
+}</pre>
+      <li>其它：云函数间调用</li>
       <pre>
 const cloud = require('wx-server-sdk')
 cloud.init()
@@ -112,23 +122,58 @@ exports.main = async (event, context) => {
   
   return result
 }</pre>
-      <p>应用3：云数据库操作示例</p>
+    </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 加载数据</div>
+    <ul>
+      <li>可以加载商品 products 集合的数据；也可以加载订单 orders 集合的数据</li>
+      <li>使用参数 collection 传递集合名</li>
+      <li>创建云函数 loadData</li>
+      <pre>
+const cloud = require('wx-server-sdk')
+
+cloud.init({
+  env: cloud.DYNAMIC_CURRENT_ENV
+})
+
+exports.main = async (event, context) => {
+  const db = cloud.database()
+  console.log('event', event);
+  const res = await db.collection(event.collection).get()
+  return {
+    data: res.data,
+  }
+}</pre>
+      <li>调用云函数 - 传递参数，加载商品集合 products 的数据</li>
+      <pre>
+wx.cloud.callFunction({
+  name: 'loadData',
+  data: {
+    database: 'products'
+  },
+  success: res => {
+    console.log('load products', res.result);
+  },
+  fail: err => {
+    console.log(err);
+  }
+})</pre>
+    </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 示例</div>
+    <ul>
       <pre>
 const cloud = require('wx-server-sdk')
 cloud.init()
 
 exports.main = async (event, context) => {
-  const db = cloud.database()
+  const { a, b } = event
+  const sum = a + b
   
-  try {
-    // 查询数据
-    const result = await db.collection('users').get()
-    return result
-  } catch (error) {
-    return { error }
+  return {
+    sum: sum,
+    message: '计算完成'
   }
 }</pre>
-    </div>
+    </ul>
   </section>
   <div id="footer"></div>
   <script src="/utils/custom/footer.js"></script>
