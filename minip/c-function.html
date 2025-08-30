@@ -39,18 +39,18 @@
       <li>第三方服务调用：调用外部API或服务</li>
       <li>定时任务：执行定时或计划任务</li>
     </ul>
-    <h3>云函数部署流程 Procedure</h3>
+    <h3>部署流程 Procedure</h3>
     <ul>
-      <li>在微信开发者工具中创建云函数 - 右键 cloudfunctions，新建 Node.js 云函数；以文件夹的形式创建，包括：</li>
-      <pre>
-config.json
-index.js
-package.json
-node_modules
-      </pre>
-      <li>函数模板默认内容如下</li>
-      <li>event: 包含调用时传入的参数</li>
-      <li>context: 包含调用上下文信息</li>
+      <li>创建云函数 - 右键 cloudfunctions，新建 Node.js 云函数；以文件夹的形式创建，包括：
+        <p>config.json</p>
+        <p>index.js - 业务逻辑</p>
+        <p>package.json</p>
+        <p>node_modules - 安装依赖时才有</p>
+      </li>
+      <li>函数模板默认内容如下：
+        <p>event: 包含调用时传入的参数</p>
+        <p>context: 包含调用上下文信息，如 openid 和 appid，用于获取用户信息</p>
+      </li>
       <pre>
 // 1. 引入云开发SDK
 const cloud = require('wx-server-sdk')
@@ -60,7 +60,7 @@ cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
 })
 
-// 3. 导出main函数（云函数入口）
+// 3. 导出 main 函数（云函数入口）
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
 
@@ -73,8 +73,8 @@ exports.main = async (event, context) => {
   }
 }</pre>
       <li>编写云函数代码</li>
-      <li>右键云函数目录选择"上传并部署"</li>
-      <li>在客户端调用已部署的云函数</li>
+      <li>右键云函数目录选择"上传并部署"；如有依赖，通常选择忽略；但是使用时，如果换了环境，需要先安装依赖</li>
+      <li>在客户端调用已部署的云函数；使用 data 传递参数；可以是 callback 或 promise 方式</li>
       <pre>
 // 调用云函数
 wx.cloud.callFunction({
@@ -89,8 +89,19 @@ wx.cloud.callFunction({
   },
   fail: err => {
     console.error('调用失败', err)
+  },
+  complete: () => {
+    console.log('调用结束')
   }
 })</pre>
+      <pre>
+wx.cloud.callFunction({
+  name: '函数名',
+  data: {}
+})
+  .then(res => {})
+  .catch(err => {})
+  .finally(() => {})</pre>
       <li>其它：访问云数据库</li>
       <pre>
 const cloud = require('wx-server-sdk')
@@ -137,7 +148,6 @@ cloud.init({
 
 exports.main = async (event, context) => {
   const db = cloud.database()
-  console.log('event', event);
   const res = await db.collection(event.collection).get()
   return {
     data: res.data,
@@ -158,7 +168,8 @@ wx.cloud.callFunction({
   }
 })</pre>
     </ul>
-    <div>[<span class="iconfont icon-keyboard"></span>] 示例</div>
+    <div class="tips">使用云函数加载数据，最多可以获取100条</div>
+    <div>[<span class="iconfont icon-keyboard"></span>] 加法计算器</div>
     <ul>
       <pre>
 const cloud = require('wx-server-sdk')
@@ -169,8 +180,7 @@ exports.main = async (event, context) => {
   const sum = a + b
   
   return {
-    sum: sum,
-    message: '计算完成'
+    sum
   }
 }</pre>
     </ul>
