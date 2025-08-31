@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>云数据库 Database</title>
   <link rel="stylesheet" href="/css/common2025.css">
+  <base target="_blank">
 </head>
 
 <body>
@@ -22,12 +23,13 @@
       <li>可以一条记录一条记录的添加；也可以导入数据 - 推荐</li>
       <li>导入 .json 文件时，需要移除数组符号和每个对象之间的逗号分隔符；.json 文件会报格式错误，可以忽悠；导入后再还原文件即可</li>
       <li>更多信息，请访问 <a
-          href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/guide/database.html">云数据库</a>
+          href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/guide/database.html">云数据库</a>、<a
+          href="https://www.lddgo.net/string/excel-to-json">在线Excel转JSON</a>
       </li>
     </ul>
     <h3>Process</h3>
     <ol>
-      <li>获取数据库的引用；可以指定云环境ID</li>
+      <li>获取数据库的引用；可以临时指定其它云环境ID；app.js 中也有一个环境配置，那个是主环境配置</li>
       <pre>const db = wx.cloud.database()</pre>
       <pre>
 const db = wx.cloud.database({
@@ -47,7 +49,7 @@ const db = wx.cloud.database({
       <li>使用 doc() 指定 _id 用来获取单个记录</li>
       <pre>db.collection('todos').doc('todo-id').get({})</pre>
       <pre>db.collection('todos').doc('todo-id').get().then().catch().finally()</pre>
-      <li>获取一个集合下的所有数据；默认情况下，最多返回20条记录</li>
+      <li>获取一个集合下的所有数据；默认情况下，最多返回20条记录；使用 <a href="./c-function.html">云函数</a> 最多获取100条</li>
       <pre>db.collection('todos').get().then().catch().finally()</pre>
       <li>使用 where() 方法配合查询指令或逻辑指令指定查询条件；指令使用 _. 前缀</li>
       <pre>db.collection('todos').where({price: _.gt(30)}).get().then().catch().finally()</pre>
