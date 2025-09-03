@@ -24,6 +24,9 @@
       <li>云函数文件名即为云函数名称</li>
       <li>支持 async/await</li>
       <li>可以引入和使用 NPM 包</li>
+      <li>数据库直连，只能操作自己的数据；使用云函数，操作的权限得到提升</li>
+      <li>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/guide/">开发者指引 →
+          基础能力 → 云函数或开发者资源 → SDK → 云函数</a></li>
     </ul>
     <h3>特点 Feature</h3>
     <ul>
@@ -103,13 +106,18 @@ wx.cloud.callFunction({
   .then(res => {})
   .catch(err => {})
   .finally(() => {})</pre>
+      <li>云函数的执行是在云端，相关 log 调试需要开启本地调试</li>
       <li>其它：访问云数据库</li>
       <pre>
 const cloud = require('wx-server-sdk')
 cloud.init()
 
+// NOT
+// const db = cloud.database()
+
 exports.main = async (event, context) => {
   // 这里不需要使用 wx.cloud
+  // 不建议放在外面
   const db = cloud.database()
   
   try {
@@ -182,6 +190,38 @@ exports.main = async (event, context) => {
   
   return {
     sum
+  }
+}</pre>
+    </ul>
+    <h3>异常处理 try-catch</h3>
+    <ul>
+      <li>云函数默认情况下，没有提供错误处理</li>
+      <li>增加错误处理可以
+        <p>防止未捕获异常导致云函数崩溃</p>
+        <p>提供结构化的返回数据</p>
+        <p>记录服务器端错误日志</p>
+        <p>避免暴露敏感的系统错误信息</p>
+      </li>
+      <li>同时增加客户端处理，作为补充作用</li>
+    </ul>
+    <div>[<span class="iconfont icon-keyboard"></span>] 加载数据 - 最佳体验</div>
+    <ul>
+      <li>错误控制</li>
+      <li>格式化输出</li>
+      <li>核心代码完善如下</li>
+      <pre>
+try {
+  const res = await db.collection(event.collection).get()
+  return {
+    errCode: 200,
+    errMsg: "get ok",
+    data: res.data,
+  }
+} catch (error) {
+  console.log('error', error);
+  return {
+    errorCode: error.errCode || 'UNKNOWN_ERROR',
+    errMsg: error.message || '服务异常'
   }
 }</pre>
     </ul>

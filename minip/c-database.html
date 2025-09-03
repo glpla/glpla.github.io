@@ -22,47 +22,33 @@
       <li>根据需求配置权限；部分权限需要付费</li>
       <li>可以一条记录一条记录的添加；也可以导入数据 - 推荐</li>
       <li>导入 .json 文件时，需要移除数组符号和每个对象之间的逗号分隔符；.json 文件会报格式错误，可以忽悠；导入后再还原文件即可</li>
-      <li>更多信息，请访问 <a
-          href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/guide/database.html">云数据库</a>、<a
-          href="https://www.lddgo.net/string/excel-to-json">在线Excel转JSON</a>
+      <li>更多信息，请访问 <a href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/guide/">开发者指引 →
+          基础能力 → 数据库或开发者资源 → SDK → 数据库</a>、<a href="https://www.lddgo.net/string/excel-to-json">在线Excel转JSON</a>
       </li>
     </ul>
     <h3>Process</h3>
     <ol>
       <li>获取数据库的引用；可以临时指定其它云环境ID；app.js 中也有一个环境配置，那个是主环境配置</li>
       <pre>const db = wx.cloud.database()</pre>
+      <li>如果需要使用指令，还可以将指令集声明为一个变量便于使用，如 _</li>
+      <pre>const _ = db.command</pre>
       <pre>
 const db = wx.cloud.database({
   env: 'test'
 })</pre>
       <li>获取集合的引用</li>
       <pre>const todos = db.collection('todos')</pre>
-      <li>操作集合：增删改查</li>
-    </ol>
-  </section>
-  <h2>Operation</h2>
-  <section>
-    <div>. 支持 Callback 和 Promise 俩种风格</div>
-    <h3>get()</h3>
-    <ul>
-      <li>获取单个记录或集合中多个记录</li>
-      <li>使用 doc() 指定 _id 用来获取单个记录</li>
-      <pre>db.collection('todos').doc('todo-id').get({})</pre>
-      <pre>db.collection('todos').doc('todo-id').get().then().catch().finally()</pre>
-      <li>获取一个集合下的所有数据；默认情况下，最多返回20条记录；使用 <a href="./c-function.html">云函数</a> 最多获取100条</li>
-      <pre>db.collection('todos').get().then().catch().finally()</pre>
-      <li>使用 where() 方法配合查询指令或逻辑指令指定查询条件；指令使用 _. 前缀</li>
-      <pre>db.collection('todos').where({price: _.gt(30)}).get().then().catch().finally()</pre>
-      <pre>db.collection('todos').where({price: _.in[10, 20, 30]}).get().then().catch().finally()</pre>
-      <li>全部获取时，控制台可能提示需要使用空的限定指定指令 where({})</li>
-      <pre>db.collection('todos').where({}).get().then().catch().finally()</pre>
-      <li>使用 limit() 方法调整返回记录数；但小程序端不能超过 20 条，云函数端不能超过 100 条</li>
-      <pre>db.collection('todos').where().limit().get().then().catch().finally()</pre>
+      <li>操作集合：增删改查
+        <p>支持 callback 和 promise 两种方式</p>
+        <p>建议使用 <a href="../node/try-catch.html">try-catch</a> 统一捕获错误、处理业务</p>
+        <p>处理数据需要响应的权限</p>
+        <p>默认情况下，数据 "仅创建者可读写"；可以修改 "所有用户可读，仅创建者可以读写"</p>
+      </li>
       <table>
         <caption>查询指令</caption>
         <thead>
           <tr>
-            <th>item</th>
+            <th style="width: 30%;">item</th>
             <th>desc</th>
           </tr>
         </thead>
@@ -105,7 +91,7 @@ const db = wx.cloud.database({
         <caption>逻辑指令</caption>
         <thead>
           <tr>
-            <th>item</th>
+            <th style="width: 30%;">item</th>
             <th>desc</th>
           </tr>
         </thead>
@@ -120,29 +106,100 @@ const db = wx.cloud.database({
           </tr>
         </tbody>
       </table>
-      <li>其它</li>
-      <li>分页查询；大量数据时使用</li>
-      <li>尽量使用 async-await，避免事件不同步造成数据异常，如为空</li>
-      <li>async/await 在 app.js 的 onLaunch 中不会阻塞页面的加载；请在使用数据的页面加载并更新 app.js 的数据</li>
-      <li>callback 方式</li>
+    </ol>
+  </section>
+  <h2>Operation</h2>
+  <section>
+    <ul>
+      <li>以下操作已经获取到数据库的引用 db 并使用声明的指令变量 _.</li>
       <pre>
 const db = wx.cloud.database()
-db.collection('products').limit(100).get({
-  success: (res) => {
-    console.log(res.data);
-  },
-  fail: (err) => {
-    console.error(err)
-  },
-  complete: () => {
-    wx.hideLoading()
-  }
+const _ = db.command</pre>
+    </ul>
+    <h3><a
+        href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/collection/Collection.get.html">get()</a>
+    </h3>
+    <ul>
+      <li>获取单个记录或集合中多个记录</li>
+      <li>使用 doc() 指定 _id 用来获取单个记录</li>
+      <pre>
+db.collection('todos').doc('todo-id').get({
+  success: (res)=> { },
+  fail: (err)=> { },
+  complete: ()=> { }
 })</pre>
-      <li>async-await 方式 - 先封装再调用</li>
+      <pre>
+db.collection('todos').doc('todo-id').get()
+  .then()
+  .catch()
+  .finally()</pre>
+      <li>获取一个集合下的所有数据；默认情况下，最多返回20条记录；使用 <a href="./c-function.html">云函数</a> 最多获取100条</li>
+      <pre>db.collection('todos').get().then().catch().finally()</pre>
+      <li>通过构建查询条件获取指定记录</li>
+      <table>
+        <caption>构建查询条件</caption>
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>desc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a
+                href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/collection/Collection.where.html">where</a>
+            </td>
+            <td>查询条件</td>
+          </tr>
+          <tr>
+            <td><a
+                href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/collection/Collection.limit.html">limit</a>
+            </td>
+            <td>指定查询结果集数量上限</td>
+          </tr>
+          <tr>
+            <td><a
+                href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/collection/Collection.orderBy.html">orderBy</a>
+            </td>
+            <td>指定查询排序条件；可按多个字段排序</td>
+          </tr>
+          <tr>
+            <td><a
+                href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/collection/Collection.skip.html">skip</a>
+            </td>
+            <td>指定查询返回结果时从指定序列后的结果开始返回，常用于分页</td>
+          </tr>
+          <tr>
+            <td><a
+                href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/collection/Collection.field.html">field</a>
+            </td>
+            <td>指定返回结果中记录需返回的字段</td>
+          </tr>
+        </tbody>
+      </table>
+      <li>使用 where() 方法配合查询指令或逻辑指令指定查询条件</li>
+      <pre>db.collection('todos').where({price: _.gt(30)}).get().then().catch().finally()</pre>
+      <pre>db.collection('todos').where({price: _.in[10, 20, 30]}).get().then().catch().finally()</pre>
+      <li>全部获取时，控制台可能提示需要使用空的限定指定指令 where({})</li>
+      <pre>db.collection('todos').where({}).get().then().catch().finally()</pre>
+      <li>使用 limit() 方法调整返回记录数；但小程序端不能超过 20 条，云函数端不能超过 100 条</li>
+      <pre>db.collection('todos').limit().get().then().catch().finally()</pre>
+      <li>使用 orderBy() 排序；asc 升序；desc 降序</li>
+      <pre>db.collection('todos').limit().orderBy('age','asc').get().then().catch().finally()</pre>
+      <li>使用 skip() 忽略某些记录，如分页</li>
+      <pre>db.collection('todos').limit().skip(10).orderBy('age','asc').get().then().catch().finally()</pre>
+      <li>使用 field() 返回指定字段；不需要返回所有的字段</li>
+      <pre>db.collection('todos').field({'age':true}).get().then().catch().finally()</pre>
+      <li>最佳编码体验：async-await 方式
+        <p>先封装再调用</p>
+        <p>部分环境可以省略关键字 function</p>
+        <p>后续其它数据操作请自行封装</p>
+      </li>
       <pre>
 onShow() {
   this.loadProducts();
 },
+
 async loadProducts() {
   try {
     const db = wx.cloud.database()
@@ -151,20 +208,24 @@ async loadProducts() {
   } catch (err) {
     console.error(err);
   } finally {
-    console.error('done');
+    console.log('done');
   }
 }</pre>
     </ul>
     <div class="tips">
-      onShow()不需要使用 async-await修饰
-      避免阻塞页面加载：让用户能更快看到界面 <br>
-      符合小程序最佳实践：数据加载与界面渲染分离 <br>
-      更好的用户体验：渐进式加载数据
+      <div>async/await 在 app.js 的 onLaunch 中不会阻塞页面的加载；请在使用数据的页面加载并更新 app.js 的数据</div>
+      <div>onShow()不需要使用 async-await修饰</div>
+      <div>避免阻塞页面加载：让用户能更快看到界面</div>
+      <div>符合小程序最佳实践：数据加载与界面渲染分离</div>
+      <div>更好的用户体验：渐进式加载数据</div>
     </div>
-    <h3>add()</h3>
+    <h3><a
+        href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/collection/Collection.add.html">add()</a>
+    </h3>
     <ul>
       <li>插入数据</li>
-      <li>成功后返回新记录的 _id</li>
+      <li>成功后返回新记录的 _id；这是后续其它操作数据的依据，如查询、更新单条记录等</li>
+      <li>每条数据携带自己的 openid</li>
       <li>Callback</li>
       <pre>
 db.collection('todos').add({
@@ -184,16 +245,12 @@ db.collection('todos').add({
     // Boolean
     done: false
   },
-  success: function(res) {
+  success: (res) => {
     // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
     console.log(res)
   },
-  fail: function(err) {
-    console.error(err)
-  },
-  complete: function() {
-    console.log('done')
-  }
+  fail: (err) => console.error(err),
+  complete: () => console.log('done')
 })</pre>
       <li>Promise</li>
       <pre>
@@ -202,37 +259,85 @@ db.collection('todos').add({
     //
   }
 })
-.then(res => {
-  console.log(res);
-})
-.finally(()=>{
-  console.log('done');
-})</pre>
+  .then(res => console.log(res))
+  .finally(() => console.log('done'))</pre>
+      <li>try-catch：for you</li>
     </ul>
-    <h3>update()</h3>
+    <h3><a
+        href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/collection/Collection.update.html">update()</a>
+    </h3>
     <ul>
-      <li>局部更新一个或多个记录</li>
+      <li>局部更新一个或多个记录；替换更新一个记录，请使用 set()</li>
       <li>使用 data() 指定要更新的字段和值</li>
-      <li>可以使用更新指令更新数据，如inc、push等</li>
       <pre>
 db.collection('todos').doc('todo-id').update({
   data: {
     done: true
   }
 })</pre>
+      <li>成功后，会返回更新成功的数量</li>
+      <li>如果没有权限，会提示更新数量为0，并不会告警</li>
+      <li>可以重复更新/无效更新</li>
+      <pre>
+errMsg: "document.update:ok"
+stats:{
+  updated: 1
+}</pre>
+      <li>使用定义的指令操作数据，如 inc、mul、push 等</li>
       <pre>
 db.collection('todos').doc('todo-id').update({
   data: {
-    price: _inc(1)
+    price: _.mul(0.8)
   }
 })</pre>
+      <li>try-catch：for you</li>
+    </ul>
+    <h3><a
+        href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/collection/Collection.remove.html">remove()</a>
+    </h3>
+    <ul>
+      <li>删除单条记录，使用 _id 作为查询条件
+        <p>操作成功，会返回删除的数量</p>
+        <p>如果没有权限，会提示记录不存在</p>
+      </li>
+      <pre>db.collection('orders').doc('8e18386768b465a30098e00c34ac9820').remove()</pre>
       <pre>
-db.collection('todos').doc('todo-id').update({
-  data: {
-    price: _mul(0.8)
+errMsg: "document.remove:ok"
+stats:{
+  removed: 1
+}</pre>
+      <li>删除多条记录，使用 where()</li>
+      <li>try-catch：for you</li>
+    </ul>
+    <h3><a
+        href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/collection/Collection.count.html">count()</a>
+    </h3>
+    <ul>
+      <li>统计集合的记录数</li>
+      <li>可以用作分页</li>
+    </ul>
+    <h3><a
+        href="https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/collection/Collection.watch.html">watch()</a>
+    </h3>
+    <ul>
+      <li>监听数据的变化
+        <p>onChange</p>
+        <p>onError</p>
+      </li>
+      <li>可以监听一个记录的变化</li>
+      <pre>
+const watcher = db.collection('todos').doc('x').watch({
+  onChange: (snapshot) => {
+    console.log('snapshot', snapshot)
+  },
+  onError: (err) => {
+    console.error('the watch closed because of error', err)
   }
 })</pre>
-      <li>替换更新一个记录，请使用 set()</li>
+      <li>通过监听，可以知道
+        <p>哪些数据发送了变化</p>
+        <p>变化的类型，如增加还是删除等</p>
+      </li>
     </ul>
   </section>
   <div id="footer"></div>

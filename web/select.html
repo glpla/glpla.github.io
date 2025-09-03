@@ -99,8 +99,7 @@ select {
       <li>使用边框 border</li>
       <li>使用背景图片代替小三角，不能使用伪元素</li>
       <li>增加 hover 和 focus设计</li>
-    </ul>
-    <pre>
+      <pre>
 .school {
   border: 1px solid #eee;
   padding: 4px 10px;
@@ -112,36 +111,9 @@ select {
 .school:hover {
   border-color: #f40;
 }</pre>
-  </section>
-  <h2 id="js">JavaScript</h2>
-  <section>
-    <ol>
-      <li>获取元素</li>
-      <li>响应事件</li>
-    </ol>
-    <table>
-      <caption>事件</caption>
-      <thead>
-        <tr>
-          <th>item</th>
-          <th>desc</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>change</td>
-          <td>选择改变时</td>
-        </tr>
-      </tbody>
-    </table>
-    <pre>
-const school = document.getElementById("school")
-school.addEventListener('change',  ()=> {
-    console.log(school.value);
-    // ...
-})</pre>
+    </ul>
     <div>[<span class="iconfont icon-keyboard"></span>] 定制样式2 - 额外增加1个容器、1个遮罩和1个标记</div>
-    <ol>
+    <ul>
       <li>增加一个容器元素 wrap 包裹表单元素 &lt;select&gt;；wrap 为 <a href="./position.html">相对定位</a>，为 mask 和 marker 提供定位依据</li>
       <li>增加一个遮罩元素 mask，用于显示选中的值；mask 为绝对定位，覆盖 &lt;select&gt;；取消事件响应</li>
       <li>增加一个标记元素 marker，显示上下箭头，用于提示用户操作；marker 为绝对定位到容器右部；取消事件响应；可以是图片或字体图标</li>
@@ -150,31 +122,66 @@ school.addEventListener('change',  ()=> {
       <li>为 &lt;select&gt; 增加 change 事件，每次改变时修改遮罩元素 mask 的内容</li>
       <li>其它细节设计，如 高度、:hover、:focus等</li>
       <li>更多设计细节，请参考<a href="https://login.taobao.com/">天猫登录页面</a>、<a href="./demo/login_taobao.html">淘宝高仿</a></li>
-    </ol>
+    </ul>
     <div>[<span class="iconfont icon-keyboard"></span>] 定制样式3 - <a href="./demo/select.html">下拉列表</a>
       全新定制</div>
     <ul>
       <li>完全抛弃表单元素，从0开始设计</li>
       <li>无法响应表单事件</li>
     </ul>
+  </section>
+  <h2 id="js">JavaScript</h2>
+  <section>
+    <ul>
+      <li>获取元素</li>
+      <li>响应事件</li>
+      <table>
+        <caption>事件</caption>
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>desc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event">change</a></td>
+            <td>选择改变时</td>
+          </tr>
+        </tbody>
+      </table>
+      <pre>
+const school = document.getElementById("school")
+school.addEventListener('change',  ()=> {
+    console.log(school.value);
+    // ...
+})</pre>
+      <li>或者使用事件对象获取</li>
+      <pre>
+const school = document.getElementById("school")
+school.addEventListener('change',  (e)=> {
+    console.log(e.target.value);
+    // ...
+})</pre>
+    </ul>
     <div>[<span class="iconfont icon-keyboard"></span>] <a href="./demo/theme.html">主题切换 Theme</a></div>
     <ul>
       <li>使用自定义数据 data- 设置对应的背景色，用于提示用户</li>
       <li>单击时，选择颜色，修改页面背景</li>
       <li>其它设计：使用 <a href="./js/localStorage.html">本地保存 localStorage</a>保存主题色</li>
-    </ul>
-    <pre>&lt;option value="#f40" data-bg="#f40"&gt;红色&lt;/option&gt;</pre>
-    <pre>
+      <pre>&lt;option value="#f40" data-bg="#f40"&gt;红色&lt;/option&gt;</pre>
+      <pre>
 option[data-bg="#f40"] {
   background-color: #f40;
   color: #fff;
 }</pre>
-    <pre>
+      <pre>
 const body = document.body
 const theme = document.getElementById('theme')
 theme.addEventListener('change', () => {
   body.style.background = theme.value
 })</pre>
+    </ul>
   </section>
   <h2>Summary & Homework</h2>
   <section>

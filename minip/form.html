@@ -247,7 +247,7 @@ getAvatar(e){
           </tr>
           <tr>
             <td>bindconfirm</td>
-            <td>点击完成按钮时触发</td>
+            <td>点击完成按钮时触发；不必非要使用普通事件</td>
           </tr>
         </tbody>
       </table>
@@ -258,28 +258,47 @@ getAvatar(e){
       <pre>
 &lt;view class="item"&gt;
     &lt;text&gt;昵称&lt;/text&gt;
-    &lt;input class="ipt" type="text" name="uname" placeholder="您的昵称" maxlength="8" value="{{user.uname}}" /&gt;
+    &lt;input type="text" 
+      placeholder="您的昵称" 
+      maxlength="8" 
+      value="{{user.uname}}" /&gt;
 &lt;/view&gt;</pre>
       <li>昵称输入 - nickname；会自动拉取你的微信昵称</li>
       <pre>
 &lt;view class="item"&gt;
     &lt;text&gt;昵称&lt;/text&gt;
-    &lt;input class="ipt" type="nickname" name="uname" placeholder="您的昵称" maxlength="8" value="{{user.uname}}" /&gt;
+    &lt;input type="nickname" 
+      placeholder="您的昵称" 
+      maxlength="8" 
+      value="{{user.uname}}" /&gt;
 &lt;/view&gt;</pre>
       <li>密码输入 - safe-password；隐藏真实信息</li>
       <pre>
 &lt;view class="item border-btm"&gt;
     &lt;text&gt;密码&lt;/text&gt;
-    &lt;input class="ipt" type="safe-password" name="upass" placeholder="您的密码" maxlength="8" value="{{user.upass}}" /&gt;
+    &lt;input type="safe-password" 
+      placeholder="您的密码" 
+      maxlength="8" 
+      value="{{user.upass}}" /&gt;
 &lt;/view&gt;
 </pre>
       <li>数值型输入 - digit；打开数字键盘，需要在手机端查看效果</li>
       <pre>
 &lt;view class="item border-btm"&gt;
     &lt;text&gt;学号&lt;/text&gt;
-    &lt;input class="ipt" type="digit" name="usn" placeholder="您的学号" maxlength="8" value="{{user.usn}}" /&gt;
+    &lt;input type="digit" 
+      placeholder="您的学号" 
+      maxlength="8" 
+      value="{{user.usn}}" /&gt;
 &lt;/view&gt;
 </pre>
+      <li>输入完毕后，按回车键或真机环境中，按键盘右下角的输入/确认即可触发后续逻辑；需要绑定 bindconfirm 事件并指定类型</li>
+      <pre>
+&lt;input type="text" 
+  placeholder="请输入您要搜索的商品名称" 
+  model:value='{{keyword}}' 
+  bindconfirm="queryProducts" 
+  confirm-type="search" /&gt;</pre>
     </ul>
     <h3><a href="https://developers.weixin.qq.com/miniprogram/dev/component/radio.html">&lt;radio&gt;
         &lt;radio-group&gt;</a></h3>
